@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+    <includeSiteDirectory>false</includeSiteDirectory>
+
+    <files>
+        <file>
+            <source>README.txt</source>
+            <outputDirectory>/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+    </files>
+
+    <fileSets>
+        <fileSet>
+            <includes>
+                <include>CHANGELOG*</include>
+                <include>LICENSE*</include>
+                <include>NOTICE*</include>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>target</directory>
+            <outputDirectory></outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>src</directory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>target/site</directory>
+            <outputDirectory>docs</outputDirectory>
+            <includes>
+                <include>apidocs/**</include>
+                <include>css/**</include>
+                <include>images/**</include>
+                <include>*.html</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>samples</directory>
+            <outputDirectory>samples</outputDirectory>
+            <includes>
+                <include>rulesets/**</include>
+                <include>src/**</include>
+                <include>*.bat</include>
+                <include>*.groovy</include>
+                <include>*.xml</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+          <unpack>false</unpack>
+          <scope>runtime</scope>
+          <outputDirectory>lib</outputDirectory>
+          <includes>
+              <include>*:log4j</include>
+          </includes>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>

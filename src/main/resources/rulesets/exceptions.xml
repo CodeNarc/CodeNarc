@@ -1,0 +1,4 @@
+<!-- Exceptions ruleset -->
+<ruleset>
+    <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>
+</ruleset>

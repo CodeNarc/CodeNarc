@@ -1,0 +1,14 @@
+<!-- Basic ruleset -->
+<ruleset>
+    <rule class='org.codenarc.rule.basic.BooleanInstantiationRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyCatchBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyElseBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyForStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyIfStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyTryBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyWhileStatementRule'/>
+    <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.StringInstantiationRule'/>
+    <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
+</ruleset>

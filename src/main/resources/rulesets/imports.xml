@@ -1,0 +1,7 @@
+<!-- Imports ruleset -->
+<ruleset>
+    <rule class='org.codenarc.rule.imports.DuplicateImportRule'/>
+    <rule class='org.codenarc.rule.imports.ImportFromSamePackageRule'/>
+    <rule class='org.codenarc.rule.imports.UnnecessaryGroovyImportRule'/>
+    <rule class='org.codenarc.rule.imports.UnusedImportRule'/>
+</ruleset>

@@ -1,0 +1,50 @@
+		--------------------------------------------------
+					    CodeNarc Road Map
+		--------------------------------------------------
+
+CodeNarc - Road Map
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Suggestions or preferences? Create a Feature Request. [TBD]
+
+* Short-Term Goals (Imminent)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  * More rules
+
+  * Flexible RuleSet definition, including nested RuleSets.
+
+  * Flexible Rule configuration.
+
+  * Flexible customization and localization of rule descriptions and report text.
+
+  * Create XML Schema Definition (XSD) for XML RuleSet file.
+
+
+* Long-Term Goals
+~~~~~~~~~~~~~~~~~
+
+  * Even more rules, perhaps including framework-specific rules for Grails, Griffon, etc..
+
+  * Create XML report
+
+  * Analyze source code within jar files or zip files.
+
+  * Create Hudson plugin.
+
+  * Create Eclipse plugin.
+
+** Considering (Optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  * Create Grails plugin.
+
+  * Create IntelliJ plugin.
+
+  * Create Netbeans plugin.
+
+  * Create Maven plugin.
+
+
+
+

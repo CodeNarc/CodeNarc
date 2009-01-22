@@ -1,0 +1,67 @@
+<style type='text/css'>
+        .reportInfo {
+			font-size: 110%;
+		}
+		.allPackages {
+		    font-weight: bold;
+		}
+        .packageHeader {
+			background: lightblue;
+			font-size: 150%;
+		    font-weight: bold;
+		}
+        .fileHeader {
+			font-size: 120%;
+		    font-weight: bold;
+		}
+        .tableHeader {
+			background: lightblue;
+		    font-weight: bold;
+		}
+		.number {
+		    text-align: center;
+		}
+		.priority1 {
+		    color: red;
+		    font-weight: bold;
+		    text-align: center;
+		}
+		.priority2 {
+		    color: orange;
+		    font-weight: bold;
+		    text-align: center;
+		}
+		.priority3 {
+		    color: blue;
+		    font-weight: bold;
+		    text-align: center;
+		}
+		.ruleID {
+		    font-weight: bold;
+		}
+		.sourceCode {
+		    font-family: Arial, sans-serif;
+		    font-size: 85%;
+		}
+		.moreInfo {
+		    font-style: italic;
+		    color: teal;
+		}
+		.version {
+			font-size: 75%;
+		    color: blue;
+		}
+
+		table {
+		    border: 1px solid gray;
+		}
+		td, th {
+		    border: 1px solid gray;
+		    border-bottom: 1px solid aqua;
+		    border-right: 1px solid aqua;
+		}
+		em {
+		    font-weight: bold;
+		}
+
+</style>

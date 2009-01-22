@@ -1,0 +1,20 @@
+<project name="CodeNarcTest" >
+
+<taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
+
+<target name="runCodeNarc">
+
+    <mkdir dir="reports"/>
+
+    <codenarc ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml">
+		<report type="html" toFile="reports/CodeNarcAntReport.html"/>
+		<fileset dir="src">
+			<include name="**/*.groovy"/>
+		</fileset>
+	</codenarc>
+
+	<echo message="Done."/>
+
+</target>
+
+</project>

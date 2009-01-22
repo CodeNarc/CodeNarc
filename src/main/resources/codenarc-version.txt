@@ -1,0 +1,1 @@
+CodeNarc v1.0-beta1

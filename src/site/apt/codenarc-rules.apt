@@ -1,0 +1,54 @@
+		--------------------------------------------------
+					  CodeNarc - Rules
+		--------------------------------------------------
+
+CodeNarc - Rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <<CodeNarc>> includes rules within several rulesets, corresponding to categories. It is also possible
+  to create your own rules and rulesets. The predefined rulesets are listed below, along with the
+  rules contained within them.
+
+* Basic Rules  ("<rulesets/basic.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * <<BooleanInstantiation>> - Use <Boolean.valueOf()> or the <Boolean.TRUE> and <Boolean.FALSE> constants instead of calling the <Boolean()> constructor directly.
+
+ * <<EmptyCatchBlock>> - In most cases, exceptions should not be caught and ignored (swallowed).
+
+ * <<EmptyElseBlock>> - Empty <else> blocks are confusing and serve no purpose.
+
+ * <<EmptyFinallyBlock>> - Empty <finally> blocks are confusing and serve no purpose.
+
+ * <<EmptyForStatement>> - Empty <for> statements are confusing and serve no purpose.
+
+ * <<EmptyIfStatement>> - Empty <if> statements are confusing and serve no purpose.
+
+ * <<EmptyTryBlock>> - Empty <try> blocks are confusing and serve no purpose.
+
+ * <<EmptyWhileStatement>> - Empty <while> statements are confusing and serve no purpose.
+
+ * <<ReturnFromFinallyBlock>> - Returning from a <finally> block is confusing and can hide the original exception.
+
+ * <<StringInstantiation>> - Use a String literal (e.g., "...") instead of calling the corresponding String constructor (new String("..")) directly.
+
+ * <<ThrowExceptionFromFinallyBlock>> - Throwing an exception from a <finally> block is confusing and can hide the original exception.
+
+
+* Exception Rules  ("<rulesets/exceptions.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * <<CatchThrowable>> - Catching <Throwable> is dangerous; it can catch exceptions such as <ThreadDeath> and <OutOfMemoryError>.
+
+
+* Import Rules  ("<rulesets/imports.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * <<DuplicateImport>> - Duplicate import statements are unnecessary.
+
+ * <<ImportFromSamePackage>> - An import of a class that is within the same package is unnecessary.
+
+ * <<UnnecessaryGroovyImport>> - A Groovy file does not need to include an import for classes from <java.lang>, <java.util>, <java.io>, <java.net>, <groovy.lang> and <groovy.util>, as well as the classes <java.math.BigDecimal> and <java.math.BigInteger>.
+
+ * <<UnusedImport>> - Imports for a class that is never referenced within the source file is unnecessary.
+

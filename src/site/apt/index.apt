@@ -1,0 +1,30 @@
+		--------------------------------------------------
+							CodeNarc - Home
+		--------------------------------------------------
+
+CodeNarc
+~~~~
+
+  The <<CodeNarc>> project provides a static analysis tool and framework for analyzing Groovy source code.
+
+  See {{{codenarc-getting-started.html}CodeNarc - Getting Started}} for information on using
+  <<CodeNarc>>.
+
+  See {{{codenarc-rules.html}CodeNarc - Rules}} for a list of the rulesets and rules provided
+  out of the box by <<CodeNarc>>.
+
+  <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
+  and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well
+  as others.
+
+
+* Requirements
+~~~~~~~~~~~~~~
+
+  The <<CodeNarc>> project requires:
+
+  *  Groovy version 1.5.6 or later
+
+  * The {{{http://logging.apache.org/log4j/index.html}Log4J}} jar, version 1.2.13 or later,
+    accessible on the CLASSPATH.
+
