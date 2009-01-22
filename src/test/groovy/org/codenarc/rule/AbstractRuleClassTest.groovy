@@ -19,7 +19,7 @@ package org.codenarc.rule
  * Tests for the AbstractRule class
  *
  * @author Chris Mair
- * @version $Revision: 193 $ - $Date: 2009-01-13 21:04:52 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbstractRuleClassTest extends AbstractRuleTest {
     static final ID = 'Rule123'

@@ -30,7 +30,7 @@ import org.apache.log4j.Logger
  * Ant Task for running CodeNarc.
  *
  * @author Chris Mair
- * @version $Revision: 220 $ - $Date: 2009-01-20 19:32:50 -0500 (Tue, 20 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CodeNarcTask extends Task {
     static final LOG = Logger.getLogger(CodeNarcTask)

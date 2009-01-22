@@ -25,7 +25,7 @@ import org.apache.log4j.Logger
  * ReportWriter that generates an HTML report
  *
  * @author Chris Mair
- * @version $Revision: 213 $ - $Date: 2009-01-19 13:45:17 -0500 (Mon, 19 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class HtmlReportWriter implements ReportWriter {
 

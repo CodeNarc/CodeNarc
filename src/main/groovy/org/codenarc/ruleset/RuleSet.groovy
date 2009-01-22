@@ -19,7 +19,7 @@ package org.codenarc.ruleset
  * Represents a set of (configured) Rule objects that can be applied for static analysis.
  *
  * @author Chris Mair
- * @version $Revision: 190 $ - $Date: 2009-01-13 20:52:35 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 interface RuleSet {
 

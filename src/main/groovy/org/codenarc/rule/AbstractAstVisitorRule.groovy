@@ -25,7 +25,7 @@ import org.codenarc.source.SourceCode
  * to applied to the specified source code.
  *
  * @author Chris Mair
- * @version $Revision: 202 $ - $Date: 2009-01-16 21:27:36 -0500 (Fri, 16 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 abstract class AbstractAstVisitorRule extends AbstractRule {
 

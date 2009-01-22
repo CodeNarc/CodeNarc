@@ -25,7 +25,7 @@ import org.codenarc.source.SourceFile
  * SourceAnalyzer implementation that recursively processes files in the configured source directories.
  *
  * @author Chris Mair
- * @version $Revision: 214 $ - $Date: 2009-01-19 15:54:45 -0500 (Mon, 19 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class DirectorySourceAnalyzer implements SourceAnalyzer {
     static final SEP = '/'

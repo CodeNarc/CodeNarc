@@ -27,7 +27,7 @@ import org.codenarc.test.AbstractTest
  * Tests for DirectorySourceAnalyzer.
  *
  * @author Chris Mair
- * @version $Revision: 214 $ - $Date: 2009-01-19 15:54:45 -0500 (Mon, 19 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class DirectorySourceAnalyzerTest extends AbstractTest {
 

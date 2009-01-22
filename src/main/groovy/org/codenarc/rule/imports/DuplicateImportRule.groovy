@@ -22,7 +22,7 @@ import org.codenarc.source.SourceCode
  * Rule that checks for a duplicate import
  *
  * @author Chris Mair
- * @version $Revision: 190 $ - $Date: 2009-01-13 20:52:35 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class DuplicateImportRule extends AbstractRule {
     String id = 'DuplicateImport'

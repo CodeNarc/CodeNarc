@@ -21,7 +21,7 @@ import org.codenarc.source.SourceCode
  * Represents a source code analysis rule 
  *
  * @author Chris Mair
- * @version $Revision: 190 $ - $Date: 2009-01-13 20:52:35 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 interface Rule {
 

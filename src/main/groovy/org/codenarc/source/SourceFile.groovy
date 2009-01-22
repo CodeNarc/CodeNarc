@@ -19,7 +19,7 @@ package org.codenarc.source
  * The SourceCode implementation for a single file 
  *
  * @author Chris Mair
- * @version $Revision: 201 $ - $Date: 2009-01-16 18:42:48 -0500 (Fri, 16 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SourceFile extends AbstractSourceCode {
 

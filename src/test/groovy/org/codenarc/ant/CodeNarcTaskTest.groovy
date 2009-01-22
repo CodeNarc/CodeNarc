@@ -27,7 +27,7 @@ import org.codenarc.test.AbstractTest
  * Tests for the CodeNarc Ant Task
  *
  * @author Chris Mair
- * @version $Revision: 220 $ - $Date: 2009-01-20 19:32:50 -0500 (Tue, 20 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CodeNarcTaskTest extends AbstractTest {
     static final BASE_DIR = 'src/test/resources'

@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTest
  * Tests for SourceString
  *
  * @author Chris Mair
- * @version $Revision: 201 $ - $Date: 2009-01-16 18:42:48 -0500 (Fri, 16 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SourceStringTest extends AbstractTest {
 

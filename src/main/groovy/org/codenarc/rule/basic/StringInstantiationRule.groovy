@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * In almost all cases, this is unnecessary - use a String literal instead.
  *
  * @author Chris Mair
- * @version $Revision: 193 $ - $Date: 2009-01-13 21:04:52 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class StringInstantiationRule extends AbstractAstVisitorRule {
     String id = 'StringInstantiation'

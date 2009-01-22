@@ -22,7 +22,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * Abstract superclass for AST Visitor classes that deal with constructor calls
  *
  * @author Chris Mair
- * @version $Revision: 193 $ - $Date: 2009-01-13 21:04:52 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
     // If within class, the expression callback gets called twice, so keep track of visited expressions

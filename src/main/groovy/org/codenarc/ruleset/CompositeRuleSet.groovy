@@ -19,7 +19,7 @@ package org.codenarc.ruleset
  * A <code>RuleSet</code> implementation that aggregates a set of RuleSets.
  *
  * @author Chris Mair
- * @version $Revision: 193 $ - $Date: 2009-01-13 21:04:52 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CompositeRuleSet implements RuleSet {
     private rules = []

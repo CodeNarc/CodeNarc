@@ -26,7 +26,7 @@ import org.codehaus.groovy.ast.stmt.BlockStatement
  * Abstract superclass for Groovy AST Visitors used with Rules
  *
  * @author Chris Mair
- * @version $Revision: 211 $ - $Date: 2009-01-18 13:35:09 -0500 (Sun, 18 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
     static final MAX_SOURCE_LINE_LENGTH = 50

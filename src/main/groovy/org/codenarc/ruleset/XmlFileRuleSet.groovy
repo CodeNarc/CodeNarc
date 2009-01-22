@@ -21,7 +21,7 @@ package org.codenarc.ruleset
  * Note that this class attempts to read the file and parse the XML from within the constructor.
  *
  * @author Chris Mair
- * @version $Revision: 190 $ - $Date: 2009-01-13 20:52:35 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class XmlFileRuleSet implements RuleSet {
 

@@ -29,7 +29,7 @@ import org.apache.tools.ant.Project
  * SourceAnalyzer implementation that gets source files from an Ant FileSet.
  *
  * @author Chris Mair
- * @version $Revision: 218 $ - $Date: 2009-01-20 19:01:16 -0500 (Tue, 20 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     static final LOG = Logger.getLogger(AntFileSetSourceAnalyzer)

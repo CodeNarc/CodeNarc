@@ -19,7 +19,7 @@ package org.codenarc.test
  * Abstract superclass for tests 
  *
  * @author Chris Mair
- * @version $Revision: 199 $ - $Date: 2009-01-15 21:35:11 -0500 (Thu, 15 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 abstract class AbstractTest extends GroovyTestCase {
 

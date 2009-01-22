@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.stmt.EmptyStatement
  * Rule that checks for empty while statements
  *
  * @author Chris Mair
- * @version $Revision: 193 $ - $Date: 2009-01-13 21:04:52 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class EmptyWhileStatementRule extends AbstractAstVisitorRule {
     String id = 'EmptyWhileStatement'

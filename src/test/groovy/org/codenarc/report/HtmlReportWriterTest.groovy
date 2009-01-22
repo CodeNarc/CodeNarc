@@ -33,7 +33,7 @@ import org.codenarc.test.AbstractTest
  * Tests for HtmlReportWriter
  *
  * @author Chris Mair
- * @version $Revision: 213 $ - $Date: 2009-01-19 13:45:17 -0500 (Mon, 19 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class HtmlReportWriterTest extends AbstractTest {
 

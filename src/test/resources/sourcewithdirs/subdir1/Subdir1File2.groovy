@@ -19,7 +19,7 @@ package sourcewithdirs.subdir1
  * Source file for testing
  *
  * @author Chris Mair
- * @version $Revision: 166 $ - $Date: 2009-01-01 07:04:51 -0500 (Thu, 01 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class Subdir1File2 {
 

@@ -29,7 +29,7 @@ import org.apache.log4j.Logger
  * <code>reportWriter</code> properties must also be set.
  *
  * @author Chris Mair
- * @version $Revision: 196 $ - $Date: 2009-01-15 19:47:56 -0500 (Thu, 15 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class Narc {
     static final LOG = Logger.getLogger(Narc)

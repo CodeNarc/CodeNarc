@@ -23,7 +23,7 @@ import org.codenarc.test.AbstractTest
  * Tests for AbstractAstVisitorRule
  *
  * @author Chris Mair
- * @version $Revision: 202 $ - $Date: 2009-01-16 21:27:36 -0500 (Fri, 16 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorRuleClassTest extends AbstractTest {
 

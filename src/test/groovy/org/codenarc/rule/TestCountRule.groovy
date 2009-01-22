@@ -22,7 +22,7 @@ import org.codenarc.source.SourceCode
  * Test-specific Rule implementation that maintins count of how many times it has been applied.
  *
  * @author Chris Mair
- * @version $Revision: 190 $ - $Date: 2009-01-13 20:52:35 -0500 (Tue, 13 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class TestCountRule extends AbstractRule {
     String id ='TestCountRule'

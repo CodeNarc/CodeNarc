@@ -22,7 +22,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Rule that checks for a return from within a finally block
  *
  * @author Chris Mair
- * @version $Revision: 204 $ - $Date: 2009-01-16 21:45:13 -0500 (Fri, 16 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ReturnFromFinallyBlockRule extends AbstractAstVisitorRule {
     String id = 'ReturnFromFinallyBlock'

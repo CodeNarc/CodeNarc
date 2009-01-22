@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTest
  * Tests for SourceFile 
  *
  * @author Chris Mair
- * @version $Revision: 196 $ - $Date: 2009-01-15 19:47:56 -0500 (Thu, 15 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SourceFileTest extends AbstractTest {
 
