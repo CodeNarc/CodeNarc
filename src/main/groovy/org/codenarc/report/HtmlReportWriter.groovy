@@ -91,7 +91,8 @@ class HtmlReportWriter implements ReportWriter {
 
     private buildReportTimestamp() {
         return {
-            def timestamp = new SimpleDateFormat('MM/dd/yyyy hh:mmaa').format(new Date())
+            def dateFormat = java.text.DateFormat.getDateTimeInstance()
+            def timestamp = dateFormat.format(new Date())
             p("Report timestamp: $timestamp", class:'reportInfo')
         }
     }
