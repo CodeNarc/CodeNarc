@@ -78,7 +78,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Narc-Version>${pom.version}</Narc-Version>
+                            <CodeNarc-Version>${pom.version}</CodeNarc-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
