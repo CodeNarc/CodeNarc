@@ -20,6 +20,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
+import org.codenarc.source.SourceCodeUtil
 
 /**
  * SourceAnalyzer implementation that recursively processes files in the configured source directories.
@@ -42,6 +43,17 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
      *  from baseDirectory.
      */
     List sourceDirectories
+
+    /**
+     * Only analyze pathnames matching this regular expression. If null, match all pathnames.
+     * This defaults to matching all pathnames that end with '.groovy'.
+     */
+    String applyToFilesMatching = /.*\.groovy/
+
+    /**
+     * Do NOT analyze pathnames matching this regular expression. If null, then do not exclude any pathnames.
+     */
+    String doNotApplyToFilesMatching
 
     /**
      * Analyze the source with the configured directory tree(s) using the specified RuleSet and return the report results.
@@ -83,9 +95,9 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
 
     private def processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
         def file = new File((String)baseDirectory, filePath)
-        if (isGroovyFile(file)) {
+        def sourceFile = new SourceFile(file)
+        if (SourceCodeUtil.shouldApplyTo(sourceFile, applyToFilesMatching, doNotApplyToFilesMatching)) {
             dirResults.numberOfFilesInThisDirectory ++
-            def sourceFile = new SourceFile(file)
             def allViolations = []
             ruleSet.rules.each {rule ->
                 def violations = rule.applyTo(sourceFile)
@@ -97,10 +109,6 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
                 dirResults.addChild(fileResults)
             }
         }
-    }
-
-    private boolean isGroovyFile(File file) {
-        return file.name.endsWith('.groovy')
     }
 
 }

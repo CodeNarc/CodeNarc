@@ -58,6 +58,17 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                    <source>1.4</source>
+                    <target>1.4</target>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
             <!-- clean coverage data before collecting -->
             <plugin>
                 <artifactId>cobertura-maven-plugin</artifactId>

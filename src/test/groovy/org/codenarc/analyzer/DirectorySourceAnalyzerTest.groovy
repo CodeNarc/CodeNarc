@@ -30,7 +30,6 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class DirectorySourceAnalyzerTest extends AbstractTest {
-
     static final BASE_DIR = '/usr'
     def analyzer
     def ruleSet
@@ -164,6 +163,26 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         assert testCountRule.count == 5
         assert results.numberOfFilesWithViolations == 0
         assert results.totalNumberOfFiles == 5
+    }
+
+    void testAnalyze_BaseDirectory_ApplyToFilesMatching() {
+        final DIR = 'src/test/resources/sourcewithdirs'
+        analyzer.baseDirectory = DIR
+        analyzer.applyToFilesMatching = /.*ubdir.*\.groovy/
+        analyzer.doNotApplyToFilesMatching = /.*File2.*/
+        def results = analyzer.analyze(ruleSet)
+        log("results=$results")
+
+        def fullPaths = results.getViolationsWithPriority(1).collect { it.description }
+        assert fullPaths == [
+                'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
+        ]
+
+        assert testCountRule.count == 3
+        assert results.numberOfFilesWithViolations == 3
+        assert results.totalNumberOfFiles == 3
     }
 
     void setUp() {
