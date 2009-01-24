@@ -1,0 +1,47 @@
+		--------------------------------------------------
+					  CodeNarc - Custom RuleSet
+		--------------------------------------------------
+
+CodeNarc - Custom RuleSet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can use the predefined <RuleSets> distributed with <<CodeNarc>> or you can create your own
+  custom <RuleSet>. See {{{codenarc-rules.html}CodeNarc - Rules}} for a list of the <RuleSets> and
+  rules provided out of the box by <<CodeNarc>>.
+
+
+* Creating a Custom RuleSet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  \<\<\<  <<NOTE:>> <Additional features for RuleSet definition, including nested RuleSets, should be available soon.>  \>\>\>
+
+  Here is an example XML <RuleSet> file:
+
++----------------------------------------------------------------------------------------
+<ruleset>
+    <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'>
+        <property name='priority' value='1'/>
+    </rule>
+    <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
+
+    <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>
+
+    <rule class='org.codenarc.rule.imports.DuplicateImportRule'/>
+    <rule class='org.codenarc.rule.imports.ImportFromSamePackageRule'/>
+    <rule class='org.codenarc.rule.imports.UnnecessaryGroovyImportRule'/>
+    <rule class='org.codenarc.rule.imports.UnusedImportRule'/>
+</ruleset>
++----------------------------------------------------------------------------------------
+
+  Things to note:
+
+    * You must specify the fully-qualified class name for each <Rule>.
+
+    * The <Rule> class must be available on the classpath.
+
+    * You can optionally set arbitrary properties for each <Rule> instance. For the
+      <<ReturnFromFinallyBlockRule>> rule above, the <priority> property is set to 1.
+      Properties set this way can be of type <String>, <int>, <long> or <boolean>.
+
+    * The <RuleSet> file itself must be accessible on the classpath.
+

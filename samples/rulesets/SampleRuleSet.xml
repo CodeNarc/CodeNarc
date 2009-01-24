@@ -1,5 +1,7 @@
 <ruleset>
-    <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'>
+        <property name='priority' value='1'/>
+    </rule>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
 
     <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>

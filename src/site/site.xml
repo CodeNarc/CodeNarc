@@ -29,6 +29,7 @@
             <item name="Ant Task Usage" href="/codenarc-ant-task.html"/>
             <item name="CodeNarc Groovy Script" href="/codenarc-groovy-script.html"/>
             <item name="Rules" href="/codenarc-rules.html"/>
+            <item name="Custom RuleSet" href="/codenarc-custom-ruleset.html"/>
             <item name="Sample CodeNarc Report" href="/SampleCodeNarcReport.html"/>
             <item name="Road Map" href="/codenarc-roadmap.html"/>
             <!-- <item name="FAQs" href="/faq.html"/> -->
