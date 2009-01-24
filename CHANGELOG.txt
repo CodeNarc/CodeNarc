@@ -3,7 +3,7 @@ CodeNarc Change Log
 http://www.codenarc.org
 
 
-Changes in version 0.1 (?? Jan 2009)
+Changes in version 0.1 (24 Jan 2009)
 ------------------------------------
 - Initial release. Includes 16 Rules; HtmlReportWriter; CodeNarcAntTask, DirectorySourceAnalyzer; XML RuleSets, etc..
 
