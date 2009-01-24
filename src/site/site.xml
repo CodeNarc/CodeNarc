@@ -34,8 +34,8 @@
             <item name="Road Map" href="/codenarc-roadmap.html"/>
             <!-- <item name="FAQs" href="/faq.html"/> -->
             <item name="Javadocs" href="/apidocs/index.html"/>
-            <!-- <item name="Downloads" href="http://sourceforge.net/project/showfiles.php?group_id=208647"/> -->
-            <!-- <item name="SourceForge Project Page" href="http://sourceforge.net/projects/codenarc"/> -->
+            <item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=250145"/>
+            <item name="SourceForge Project Page" href="http://sourceforge.net/projects/codenarc"/>
         </menu>
 
         ${reports}
