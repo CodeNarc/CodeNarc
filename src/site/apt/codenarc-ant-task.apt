@@ -1,0 +1,72 @@
+		--------------------------------------------------
+					  CodeNarc Ant Task
+		--------------------------------------------------
+
+CodeNarc - Ant Task
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Description
+~~~~~~~~~~~~~
+
+  The <<CodeNarc>> Ant Task is implemented by the <<<org.codenarc.ant.CodeNarcTask>>> class.
+
+* Parameters
+~~~~~~~~~~~~
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Attribute>>       | <<Description>>                                                | <<Required>>           |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ruleSetFiles        | The path to the XML RuleSet definition files, relative to the  | YES                    |
+|                     | classpath. This can be a single file path, or multiple paths   |                        |
+|                     | separated by commas.                                           |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
+* Report Nested Element
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <<report>> nested element defines the format and output file for the analysis report.
+  Currently, HTML ("html") is the only supported format.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Attribute>>       | <<Description>>                                                | <<Required>>           |
+*---------------------+----------------------------------------------------------------+------------------------+
+| type                | The format of the output analysis report. The only valid       | Yes                    |
+|                     | value is "html"                                                |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| toFile              | The path and filename for the output report file.              | Yes                    |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
+* Fileset Nested Element
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <<fileset>> nested element is required, and is used to specify the source files that
+  <<CodeNarc>> should analyze. This is the standard Ant <FileSet>, and is quite powerful and flexible.
+  See the {{{http://ant.apache.org/manual/index.html}Apache Ant Manual}} for more information on <FileSets>.
+
+
+* Example
+~~~~~~~~~
+
+  Here is an example Ant XML build file.
+
++----------------------------------------------------------------------------------------
+<taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
+<target name="runCodeNarc">
+    <codenarc ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml">
+        <report type="html" toFile="reports/CodeNarcAntReport.html"/>
+        <fileset dir="src">
+            <include name="**/*.groovy"/>
+        </fileset>
+    </codenarc>
+</target>
++----------------------------------------------------------------------------------------
+
+  Things to note:
+
+    * Three <RuleSet> files are specified (<basic>, <exceptions> and <imports>).
+
+    * The <fileset> specifies that all ".groovy" files are analyzed.
+
+    * Remember that you need the <<log4j>> jar (and a "log4j.properties" file) on the classpath.
