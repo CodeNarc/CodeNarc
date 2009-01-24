@@ -21,7 +21,7 @@ package org.codenarc.source
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SourceCodeUtil {
 

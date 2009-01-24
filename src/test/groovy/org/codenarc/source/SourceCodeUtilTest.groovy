@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTest
  * Tests for SourceCodeUtil
  *
  * @author Chris Mair
- * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SourceCodeUtilTest extends AbstractTest {
     static final NAME = 'MyTest.groovy'
