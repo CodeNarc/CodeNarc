@@ -215,7 +215,9 @@ class HtmlReportWriter implements ReportWriter {
                     def priorityCssClass = "priority${violation.rule.priority}"
                     def moreInfo = violation.description ? "[${violation.description}]" : ""
                     tr {
-                        td(violation.rule.id, class:priorityCssClass)
+                        td(class:priorityCssClass) {
+                            a(violation.rule.id, href:"#${violation.rule.id}")
+                        }
                         td(violation.rule.priority, class:priorityCssClass)
                         td(violation.lineNumber, class:'number')
                         td {
@@ -244,6 +246,7 @@ class HtmlReportWriter implements ReportWriter {
 
                 sortedRuleIds.each { ruleId ->
                     tr {
+                        a(name:ruleId)
                         td(ruleId, class:'ruleID')
                         td { unescaped << getDescriptionForRuleId(bundle, ruleId) }
                     }
