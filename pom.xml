@@ -85,6 +85,7 @@
                     <execution>
                         <phase>package</phase>
                         <goals>
+                            <goal>clean</goal>
                             <goal>cobertura</goal>
                         </goals>
                     </execution>
