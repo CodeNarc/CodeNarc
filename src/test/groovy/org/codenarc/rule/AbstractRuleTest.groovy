@@ -70,6 +70,18 @@ abstract class AbstractRuleTest extends AbstractTest {
 
     /**
      * Apply the current Rule to the specified source (String) and assert that it results
+     * in a single violation and that the specified closure returns true.
+     * @param source - the full source code to which the rule is applied, as a String; defaults to null
+     * @param closure - the closure to apply to the violation; takes a single Violation parameter
+     */
+    protected void assertSingleViolation(String source, Closure closure) {
+        def violations = applyRuleTo(source)
+        assert violations.size() == 1
+        assert closure(violations[0]), "Closure failed for ${violations[0]}"
+    }
+
+    /**
+     * Apply the current Rule to the specified source (String) and assert that it results
      * in no violations.
      * @param source - the full source code to which the rule is applied, as a String
      */

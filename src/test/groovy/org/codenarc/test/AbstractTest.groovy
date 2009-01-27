@@ -38,12 +38,21 @@ abstract class AbstractTest extends GroovyTestCase {
     }
 
     /**
+     * Return true if the text contains each of the specified strings
+     * @param text - the text to search
+     * @param strings - the Strings to check for
+     */
+    protected boolean containsAll(String text, strings) {
+        strings.every { text.contains(it) }
+    }
+
+    /**
      * Assert that the text contains each of the specified strings
      * @param text - the text to search
      * @param strings - the Strings that must be present within text 
      */
     protected void assertContainsAll(String text, strings) {
-        strings.each { string -> assert text.contains(string), "text does not contain [$string]" }
+        assert containsAll(text, strings), "text does not contain [$string]"
     }
 
     /**
