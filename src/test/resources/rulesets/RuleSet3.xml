@@ -1,0 +1,3 @@
+<ruleset>
+    <rule class='org.codenarc.rule.StubRule'/>
+</ruleset>

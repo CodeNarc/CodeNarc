@@ -253,7 +253,7 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="trunkUrl" value="svn://localhost/dev/Narc" />
+              <option name="trunkUrl" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc" />
             </SvnBranchConfiguration>
           </value>
         </entry>

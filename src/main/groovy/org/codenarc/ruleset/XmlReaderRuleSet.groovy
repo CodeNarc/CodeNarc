@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.util.PropertyUtil
+import org.apache.log4j.Logger
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a
@@ -26,7 +27,7 @@ import org.codenarc.util.PropertyUtil
  * @version $Revision$ - $Date$
  */
 class XmlReaderRuleSet implements RuleSet {
-
+    static final LOG = Logger.getLogger(XmlReaderRuleSet)
     private List rules = []
 
     /**
@@ -47,7 +48,17 @@ class XmlReaderRuleSet implements RuleSet {
                 PropertyUtil.setPropertyFromString(rule, name, value)
             }
         }
+        ruleset.'ruleset-ref'.each { ruleSetRefNode ->
+            def ruleSetPath = ruleSetRefNode['@path']
+            LOG.debug("Loading ruleset from [$ruleSetPath]")
+            loadRuleSetFromFile(ruleSetPath)
+        }
         rules = rules.asImmutable()
+    }
+
+    private void loadRuleSetFromFile(String path) {
+        def ruleSet = new XmlFileRuleSet(path)
+        rules.addAll(ruleSet.rules)
     }
 
     /**

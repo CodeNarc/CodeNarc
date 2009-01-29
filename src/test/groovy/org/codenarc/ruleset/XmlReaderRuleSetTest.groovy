@@ -16,8 +16,12 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.StubRule
+import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
+import org.codenarc.rule.basic.EmptyIfStatementRule
+import org.codenarc.rule.TestPathRule
 import org.codenarc.test.AbstractTest
+import org.codenarc.rule.Rule
 
 /**
  * Tests for XmlReaderRuleSet
@@ -26,6 +30,7 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class XmlReaderRuleSetTest extends AbstractTest {
+    private List rules
 
     void testNullReader() {
         shouldFailWithMessageContaining('reader') { new XmlReaderRuleSet(null) }
@@ -38,9 +43,8 @@ class XmlReaderRuleSetTest extends AbstractTest {
 
     void testNoRules() {
         def XML = '<ruleset></ruleset>'
-        def reader = new StringReader(XML)
-        def ruleSet = new XmlReaderRuleSet(reader)
-        assert ruleSet.rules == []
+        parseXmlRuleSet(XML)
+        assert rules == []
     }
 
     void testOneRule() {
@@ -48,10 +52,8 @@ class XmlReaderRuleSetTest extends AbstractTest {
             <ruleset>
                 <rule class='org.codenarc.rule.StubRule'/>
             </ruleset>'''
-        def reader = new StringReader(XML)
-        def ruleSet = new XmlReaderRuleSet(reader)
-        def rules = ruleSet.rules
-        assert rules*.class == [StubRule]
+        parseXmlRuleSet(XML)
+        assertRuleClasses([StubRule])
     }
 
     void testTwoRules() {
@@ -60,11 +62,8 @@ class XmlReaderRuleSetTest extends AbstractTest {
                 <rule class='org.codenarc.rule.StubRule'/>
                 <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>
             </ruleset>'''
-        def reader = new StringReader(XML)
-        def ruleSet = new XmlReaderRuleSet(reader)
-        def rules = ruleSet.rules
-        log("rules=$rules")
-        assert rules*.class == [StubRule, CatchThrowableRule]
+        parseXmlRuleSet(XML)
+        assertRuleClasses([StubRule, CatchThrowableRule])
     }
 
     void testTwoRulesWithProperties() {
@@ -78,13 +77,39 @@ class XmlReaderRuleSetTest extends AbstractTest {
                     <property name='priority' value='1'/>
                 </rule>
             </ruleset>'''
-        def reader = new StringReader(XML)
-        def ruleSet = new XmlReaderRuleSet(reader)
-        def rules = ruleSet.rules
-        log("rules=$rules")
-        assert rules*.class == [StubRule, CatchThrowableRule]
+        parseXmlRuleSet(XML)
+        assertRuleClasses([StubRule, CatchThrowableRule])
         assert rules*.id == ['XXXX', 'YYYY']
         assert rules*.priority == [0, 1]
+    }
+
+    void testNestedRuleSet() {
+        def XML = '''
+            <ruleset>
+                <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
+                    <property name='priority' value='1'/>
+                </rule>
+                <ruleset-ref path='rulesets/RuleSet1.xml'/>
+            </ruleset>'''
+        parseXmlRuleSet(XML)
+        assertRuleClasses([CatchThrowableRule, TestPathRule])
+        assert rules[0].priority == 1
+    }
+
+    void testDeeplyNestedRuleSet() {
+        def XML = '''
+            <ruleset>
+                <ruleset-ref path='rulesets/RuleSet3.xml'/>
+                <rule class='org.codenarc.rule.imports.DuplicateImportRule'>
+                    <property name='priority' value='1'/>
+                </rule>
+                <ruleset-ref path='rulesets/NestedRuleSet1.xml'/>
+            </ruleset>'''
+        parseXmlRuleSet(XML)
+        assertRuleClasses([StubRule, DuplicateImportRule, CatchThrowableRule, TestPathRule, EmptyIfStatementRule])
+        assert findRule('DuplicateImport').priority == 1
+        assert findRule('EmptyIfStatement').priority == 1
+        assert findRule('CatchThrowable').priority == 1
     }
 
     void testRulesListIsImmutable() {
@@ -92,11 +117,28 @@ class XmlReaderRuleSetTest extends AbstractTest {
             <ruleset>
                 <rule class='org.codenarc.rule.StubRule'/>
             </ruleset>'''
-        def reader = new StringReader(XML)
-        def ruleSet = new XmlReaderRuleSet(reader)
-        def rules = ruleSet.rules
+        parseXmlRuleSet(XML)
 
         shouldFail(UnsupportedOperationException) { rules.clear() }
+    }
+
+    //--------------------------------------------------------------------------
+    // Internal Helper Methods
+    //--------------------------------------------------------------------------
+    
+    private void parseXmlRuleSet(String xml) {
+        def reader = new StringReader(xml)
+        def ruleSet = new XmlReaderRuleSet(reader)
+        rules = ruleSet.rules
+        log("rules=$rules")
+    }
+
+    private void assertRuleClasses(List classes) {
+        assertEqualSets(rules*.class, classes)
+    }
+
+    private Rule findRule(String id) {
+        return rules.find { it.id == id }
     }
 
 }
