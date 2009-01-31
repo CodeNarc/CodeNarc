@@ -24,9 +24,8 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class StubRule extends AbstractRule {
-
     int priority
-    String id
+    String name
 
     StubRule() {
     }

@@ -37,9 +37,9 @@ import org.codenarc.test.AbstractTest
  */
 class HtmlReportWriterTest extends AbstractTest {
 
-    static VIOLATION1 = new Violation(rule:new StubRule(id:'RULE1', priority:1), lineNumber:20, sourceLine:'if (file) {')
-    static VIOLATION2 = new Violation(rule:new StubRule(id:'RULE2', priority:2), lineNumber:33, description:'bad stuff')
-    static VIOLATION3 = new Violation(rule:new StubRule(id:'RULE3', priority:3), lineNumber:95, sourceLine:'throw new Exception()')
+    static VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:20, sourceLine:'if (file) {')
+    static VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:33, description:'bad stuff')
+    static VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:'throw new Exception()')
     static OUTPUT_DIR = "."
     static REPORT_FILENAME = "HtmlReport.html"
     static REPORT_CONTENTS = ['html', '/src/main', 'MyAction.groovy', 'MyAction2.groovy', 'MyActionTest.groovy']
@@ -52,12 +52,12 @@ class HtmlReportWriterTest extends AbstractTest {
     def ruleSet
 
     private void assertContainsRuleIds(String reportText) {
-        def ruleIds = ruleSet.rules.collect { it.id }
+        def ruleIds = ruleSet.rules.collect { it.name }
         assertContainsAllInOrder(reportText, ruleIds.sort())
     }
 
     void testWriteOutReport_NoDescriptionsForRuleIds() {
-        ruleSet = new ListRuleSet([new StubRule(id:'XX'), new StubRule(id:'YY')])
+        ruleSet = new ListRuleSet([new StubRule(name:'XX'), new StubRule(name:'YY')])
         analysisContext.ruleSet = ruleSet
         reportWriter.writeOutReport(analysisContext, results)
 

@@ -27,8 +27,7 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class UnnecessaryGroovyImportRule extends AbstractRule {
-
-    String id = 'UnnecessaryGroovyImport'
+    String name = 'UnnecessaryGroovyImport'
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {

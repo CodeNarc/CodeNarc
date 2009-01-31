@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @version $Revision$ - $Date$
  */
 class EmptyForStatementRule extends AbstractAstVisitorRule {
-    String id = 'EmptyForStatement'
+    String name = 'EmptyForStatement'
     int priority = 2
     Class astVisitorClass = EmptyForStatementAstVisitor
 }

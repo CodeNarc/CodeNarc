@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @version $Revision$ - $Date$
  */
 class CatchThrowableRule extends AbstractAstVisitorRule {
-    String id = 'CatchThrowable'
+    String name = 'CatchThrowable'
     int priority = 2
     Class astVisitorClass = CatchThrowableAstVisitor
 }

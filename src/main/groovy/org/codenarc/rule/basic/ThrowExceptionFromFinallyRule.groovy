@@ -25,7 +25,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @version $Revision$ - $Date$
  */
 class ThrowExceptionFromFinallyBlockRule extends AbstractAstVisitorRule {
-    String id = 'ThrowExceptionFromFinallyBlock'
+    String name = 'ThrowExceptionFromFinallyBlock'
     int priority = 2
     Class astVisitorClass = ThrowExceptionFromFinallyBlockAstVisitor
 }

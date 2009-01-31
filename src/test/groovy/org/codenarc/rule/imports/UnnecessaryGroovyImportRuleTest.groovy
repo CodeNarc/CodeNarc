@@ -27,7 +27,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.id == 'UnnecessaryGroovyImport'
+        assert rule.name == 'UnnecessaryGroovyImport'
     }
 
     void testApplyTo_ImportJavaMath() {

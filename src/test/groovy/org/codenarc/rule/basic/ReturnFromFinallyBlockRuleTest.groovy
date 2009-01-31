@@ -27,7 +27,7 @@ import org.codenarc.rule.Rule
 class ReturnFromFinallyBlockRuleTest extends AbstractRuleTest {
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'ReturnFromFinallyBlock'
+        assert rule.name == 'ReturnFromFinallyBlock'
     }
 
     void testApplyTo_Violation() {

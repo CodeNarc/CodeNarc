@@ -27,7 +27,7 @@ import org.codenarc.rule.Rule
 class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTest {
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'ThrowExceptionFromFinallyBlock'
+        assert rule.name == 'ThrowExceptionFromFinallyBlock'
     }
 
     void testApplyTo_Violation() {

@@ -49,7 +49,7 @@ abstract class AbstractRule implements Rule {
     /**
      * @return the unique id for this rule
      */
-    abstract String getId()
+    abstract String getName()
 
     /**
      * @return the priority of this rule, between 1 (highest priority) and 3 (lowest priority), inclusive.
@@ -80,7 +80,7 @@ abstract class AbstractRule implements Rule {
     }
 
     String toString() {
-        "${getClassNameNoPackage()}[id=${getId()}, priority=${getPriority()}]"
+        "${getClassNameNoPackage()}[name=${getName()}, priority=${getPriority()}]"
     }
 
     /**

@@ -28,7 +28,7 @@ class EmptyElseBlockRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'EmptyElseBlock'
+        assert rule.name == 'EmptyElseBlock'
     }
 
     void testApplyTo_Violation() {

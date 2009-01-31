@@ -28,7 +28,7 @@ class EmptyFinallyBlockRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'EmptyFinallyBlock'
+        assert rule.name == 'EmptyFinallyBlock'
     }
 
     void testApplyTo_Violation() {

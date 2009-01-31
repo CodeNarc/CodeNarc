@@ -25,8 +25,7 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class ImportFromSamePackageRule extends AbstractRule {
-
-    String id = 'ImportFromSamePackage'
+    String name = 'ImportFromSamePackage'
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {

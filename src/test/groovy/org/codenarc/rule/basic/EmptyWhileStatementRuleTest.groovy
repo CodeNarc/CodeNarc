@@ -28,7 +28,7 @@ class EmptyWhileStatementRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'EmptyWhileStatement'
+        assert rule.name == 'EmptyWhileStatement'
     }
 
     void testApplyTo_Violation() {

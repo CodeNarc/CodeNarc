@@ -27,7 +27,7 @@ class ImportFromSamePackageRuleTest extends AbstractImportRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.id == 'ImportFromSamePackage'
+        assert rule.name == 'ImportFromSamePackage'
     }
 
     void testApplyTo_Violations() {

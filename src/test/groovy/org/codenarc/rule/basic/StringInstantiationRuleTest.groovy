@@ -28,7 +28,7 @@ class StringInstantiationRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'StringInstantiation'
+        assert rule.name == 'StringInstantiation'
     }
 
     void testApplyTo_Violation() {

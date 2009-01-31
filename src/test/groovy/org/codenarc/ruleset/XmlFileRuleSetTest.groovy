@@ -53,7 +53,7 @@ class XmlFileRuleSetTest extends AbstractTest {
         def ruleSet = new XmlFileRuleSet(PATH)
         def rules = ruleSet.rules
         assert rules*.class == [StubRule, CatchThrowableRule]
-        assert rules*.id == ['XXXX', 'YYYY']
+        assert rules*.name == ['XXXX', 'YYYY']
         assert rules*.priority == [0, 1]
     }
 

@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @version $Revision$ - $Date$
  */
 class EmptyCatchBlockRule extends AbstractAstVisitorRule {
-    String id = 'EmptyCatchBlock'
+    String name = 'EmptyCatchBlock'
     int priority = 2
     Class astVisitorClass = EmptyCatchBlockAstVisitor
 }

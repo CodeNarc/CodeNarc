@@ -29,7 +29,7 @@ class CatchThrowableRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'CatchThrowable'
+        assert rule.name == 'CatchThrowable'
     }
 
     void testApplyTo_Violation() {

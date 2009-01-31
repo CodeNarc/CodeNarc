@@ -87,7 +87,7 @@ class AbstractAstVisitorRuleClassTest extends AbstractTest {
 
 // Test AbstractAstVisitorRule implementation class
 class TestAstVisitorRule extends AbstractAstVisitorRule {
-    String id = 'Test'
+    String name = 'Test'
     int priority = 3
     Class astVisitorClass = TestAstVisitor
 }

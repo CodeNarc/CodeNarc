@@ -30,7 +30,7 @@ class RequiredRegexRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.id == 'RequiredRegex'
+        assert rule.name == 'RequiredRegex'
     }
 
     void testRegexIsNull() {

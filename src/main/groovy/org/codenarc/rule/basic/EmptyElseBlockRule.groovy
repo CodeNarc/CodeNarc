@@ -27,7 +27,7 @@ import org.codehaus.groovy.ast.stmt.IfStatement
  * @version $Revision$ - $Date$
  */
 class EmptyElseBlockRule extends AbstractAstVisitorRule {
-    String id = 'EmptyElseBlock'
+    String name = 'EmptyElseBlock'
     int priority = 2
     Class astVisitorClass = EmptyElseBlockAstVisitor
 }

@@ -26,14 +26,13 @@ import org.codenarc.rule.Violation
  * cannot be null or empty.
  * <p/>
  * A RuleSet can contain any number of instances of this rule, but each should be configured
- * with a unique rule id, regex and (optionally) customized priority.
+ * with a unique rule name, regex and (optionally) customized priority.
  *
  * @author Chris Mair
  * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
  */
 class IllegalRegexRule extends AbstractRule {
-
-    String id = 'IllegalRegex'
+    String name = 'IllegalRegex'
     int priority = 3
     String regex
 

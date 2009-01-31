@@ -1,9 +1,9 @@
 <ruleset>
     <rule class='org.codenarc.rule.StubRule'>
-        <property name='id' value='XXXX'/>
+        <property name='name' value='XXXX'/>
     </rule>
     <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
-        <property name='id' value='YYYY'/>
+        <property name='name' value='YYYY'/>
         <property name='priority' value='1'/>
     </rule>
 </ruleset>

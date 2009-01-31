@@ -28,7 +28,7 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'EmptyCatchBlock'
+        assert rule.name == 'EmptyCatchBlock'
     }
 
     void testApplyTo_Violation() {

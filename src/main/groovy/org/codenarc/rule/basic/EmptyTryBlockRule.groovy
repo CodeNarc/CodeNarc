@@ -27,7 +27,7 @@ import org.codehaus.groovy.ast.stmt.TryCatchStatement
  * @version $Revision$ - $Date$
  */
 class EmptyTryBlockRule extends AbstractAstVisitorRule {
-    String id = 'EmptyTryBlock'
+    String name = 'EmptyTryBlock'
     int priority = 2
     Class astVisitorClass = EmptyTryBlockAstVisitor
 }

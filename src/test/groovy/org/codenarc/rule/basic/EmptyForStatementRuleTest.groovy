@@ -28,7 +28,7 @@ class EmptyForStatementRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'EmptyForStatement'
+        assert rule.name == 'EmptyForStatement'
     }
 
     void testApplyTo_Violation() {

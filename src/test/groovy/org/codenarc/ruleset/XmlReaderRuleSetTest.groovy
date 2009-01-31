@@ -70,16 +70,16 @@ class XmlReaderRuleSetTest extends AbstractTest {
         def XML = '''
             <ruleset>
                 <rule class='org.codenarc.rule.StubRule'>
-                    <property name='id' value='XXXX'/>
+                    <property name='name' value='XXXX'/>
                 </rule>
                 <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
-                    <property name='id' value='YYYY'/>
+                    <property name='name' value='YYYY'/>
                     <property name='priority' value='1'/>
                 </rule>
             </ruleset>'''
         parseXmlRuleSet(XML)
         assertRuleClasses([StubRule, CatchThrowableRule])
-        assert rules*.id == ['XXXX', 'YYYY']
+        assert rules*.name == ['XXXX', 'YYYY']
         assert rules*.priority == [0, 1]
     }
 
@@ -137,8 +137,8 @@ class XmlReaderRuleSetTest extends AbstractTest {
         assertEqualSets(rules*.class, classes)
     }
 
-    private Rule findRule(String id) {
-        return rules.find { it.id == id }
+    private Rule findRule(String name) {
+        return rules.find { it.name == name }
     }
 
 }

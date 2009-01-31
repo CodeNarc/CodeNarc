@@ -30,7 +30,7 @@ class IllegalRegexRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.id == 'IllegalRegex'
+        assert rule.name == 'IllegalRegex'
     }
 
     void testRegexIsNull() {

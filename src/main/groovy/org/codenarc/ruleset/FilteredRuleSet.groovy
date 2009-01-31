@@ -68,9 +68,9 @@ class FilteredRuleSet implements RuleSet {
     List getRules() {
         def filteredRules = []
         rules.each { rule ->
-            def matchesIncludes = includes.empty || includes.find { it == rule.id }
+            def matchesIncludes = includes.empty || includes.find { it == rule.name }
             if (matchesIncludes) {
-                def matchesExcludes = !excludes.empty && excludes.find { it == rule.id }
+                def matchesExcludes = !excludes.empty && excludes.find { it == rule.name }
                 if (!matchesExcludes) {
                     filteredRules << rule
                 }

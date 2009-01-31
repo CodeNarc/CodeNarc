@@ -22,14 +22,14 @@ package org.codenarc.rule
  * @version $Revision$ - $Date$
  */
 class AbstractRuleClassTest extends AbstractRuleTest {
-    static final ID = 'Rule123'
+    static final NAME = 'Rule123'
     static final PRIORITY = 2
     static final SOURCE = 'class MyClass { }'
     static final MATCH = /.*Test\.groovy/
     static final NO_MATCH = /.*Other\.groovy/
 
     void testToString() {
-        assertContainsAll(rule.toString(), ['TestPathRule', ID, PRIORITY.toString()])
+        assertContainsAll(rule.toString(), ['TestPathRule', NAME, PRIORITY.toString()])
     }
 
     void testEnabled() {
@@ -71,7 +71,7 @@ class AbstractRuleClassTest extends AbstractRuleTest {
     }
 
     protected Rule createRule() {
-        return new TestPathRule(id:ID, priority:PRIORITY)
+        return new TestPathRule(name:NAME, priority:PRIORITY)
     }
 
     void setUp() {

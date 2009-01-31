@@ -25,7 +25,7 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class DuplicateImportRule extends AbstractRule {
-    String id = 'DuplicateImport'
+    String name = 'DuplicateImport'
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {

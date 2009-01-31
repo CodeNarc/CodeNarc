@@ -27,7 +27,7 @@ import org.codehaus.groovy.ast.stmt.IfStatement
  * @version $Revision$ - $Date$
  */
 class EmptyIfStatementRule extends AbstractAstVisitorRule {
-    String id = 'EmptyIfStatement'
+    String name = 'EmptyIfStatement'
     int priority = 2
     Class astVisitorClass = EmptyIfStatementAstVisitor
 }

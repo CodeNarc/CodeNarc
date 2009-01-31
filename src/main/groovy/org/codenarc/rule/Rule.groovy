@@ -40,6 +40,6 @@ interface Rule {
     /**
      * @return the unique id for this rule
      */
-    String getId()
+    String getName()
 
 }

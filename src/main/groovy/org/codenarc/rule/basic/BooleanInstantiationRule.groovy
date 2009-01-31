@@ -25,7 +25,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @version $Revision$ - $Date$
  */
 class BooleanInstantiationRule extends AbstractAstVisitorRule {
-    String id = 'BooleanInstantiation'
+    String name = 'BooleanInstantiation'
     int priority = 2
     Class astVisitorClass = BooleanInstantiationAstVisitor
 }

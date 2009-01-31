@@ -27,7 +27,7 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class TestPathRule extends AbstractRule {
-    String id = 'TestPathRule'
+    String name = 'TestPathRule'
     int priority = 1
 
     /**

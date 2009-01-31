@@ -25,7 +25,7 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class TestCountRule extends AbstractRule {
-    String id ='TestCountRule'
+    String name ='TestCountRule'
     int priority = 2
     int count = 0
 

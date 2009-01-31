@@ -28,7 +28,7 @@ class BooleanInstantiationRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.id == 'BooleanInstantiation'
+        assert rule.name == 'BooleanInstantiation'
     }
 
     void testApplyTo_Violation() {

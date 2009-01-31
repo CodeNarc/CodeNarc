@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.stmt.EmptyStatement
  * @version $Revision$ - $Date$
  */
 class EmptyWhileStatementRule extends AbstractAstVisitorRule {
-    String id = 'EmptyWhileStatement'
+    String name = 'EmptyWhileStatement'
     int priority = 2
     Class astVisitorClass = EmptyWhileStatementAstVisitor
 }

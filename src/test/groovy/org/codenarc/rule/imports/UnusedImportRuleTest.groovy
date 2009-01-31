@@ -28,7 +28,7 @@ class UnusedImportRuleTest extends AbstractImportRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.id == 'UnusedImport'
+        assert rule.name == 'UnusedImport'
     }
 
     void testApplyTo_OneViolation() {

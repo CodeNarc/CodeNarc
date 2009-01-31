@@ -25,7 +25,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @version $Revision$ - $Date$
  */
 class ReturnFromFinallyBlockRule extends AbstractAstVisitorRule {
-    String id = 'ReturnFromFinallyBlock'
+    String name = 'ReturnFromFinallyBlock'
     int priority = 2
     Class astVisitorClass = ReturnFromFinallyBlockAstVisitor
 }

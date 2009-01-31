@@ -201,7 +201,7 @@ class HtmlReportWriter implements ReportWriter {
         return {
             table(border:'1') {
                 tr(class:'tableHeader') {
-                    th('Rule ID')
+                    th('Rule Name')
                     th('Priority')
                     th('Line #')
                     th('Source Line or [More Info]')
@@ -216,7 +216,7 @@ class HtmlReportWriter implements ReportWriter {
                     def moreInfo = violation.description ? "[${violation.description}]" : ""
                     tr {
                         td(class:priorityCssClass) {
-                            a(violation.rule.id, href:"#${violation.rule.id}")
+                            a(violation.rule.name, href:"#${violation.rule.name}")
                         }
                         td(violation.rule.priority, class:priorityCssClass)
                         td(violation.lineNumber, class:'number')
@@ -233,14 +233,14 @@ class HtmlReportWriter implements ReportWriter {
 
     private buildRuleDescriptions(AnalysisContext analysisContext) {
         def bundle = ResourceBundle.getBundle("html-report-messages");
-        def ruleIds = analysisContext.ruleSet.rules.collect { rule -> rule.id }
+        def ruleIds = analysisContext.ruleSet.rules.collect { rule -> rule.name }
         def sortedRuleIds = ruleIds.sort()
 
         return {
             h2("Rule Descriptions")
             table(border:'1') {
                 tr(class:'tableHeader') {
-                    th('Rule ID')
+                    th('Rule Name')
                     th('Description')
                 }
 
@@ -255,9 +255,9 @@ class HtmlReportWriter implements ReportWriter {
         }
     }
 
-    protected String getDescriptionForRuleId(bundle, String ruleId) {
-        def resourceKey = ruleId + '.description'
-        def description = "No description provided for rule id [$ruleId]"
+    protected String getDescriptionForRuleId(bundle, String ruleName) {
+        def resourceKey = ruleName + '.description'
+        def description = "No description provided for rule named [$ruleName]"
         try {
             description = bundle.getString(resourceKey)
         } catch (MissingResourceException e) {

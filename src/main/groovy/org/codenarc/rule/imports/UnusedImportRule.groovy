@@ -25,7 +25,7 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class UnusedImportRule extends AbstractRule {
-    String id = 'UnusedImport'
+    String name = 'UnusedImport'
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {

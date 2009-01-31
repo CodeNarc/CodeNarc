@@ -28,7 +28,7 @@ class DuplicateImportRuleTest extends AbstractImportRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.id == 'DuplicateImport'
+        assert rule.name == 'DuplicateImport'
     }
 
     void testApplyTo_Violation() {
