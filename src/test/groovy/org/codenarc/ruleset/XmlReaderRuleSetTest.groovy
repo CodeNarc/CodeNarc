@@ -117,8 +117,8 @@ class XmlReaderRuleSetTest extends AbstractTest {
             <ruleset>
                 <rule class='org.codenarc.rule.imports.DuplicateImportRule'/>
                 <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
-                    <exclude-rule name='TestPath'/>
-                    <exclude-rule name='EmptyIfStatement'/>
+                    <exclude name='TestPath'/>
+                    <exclude name='EmptyIfStatement'/>
                 </ruleset-ref>
             </ruleset>'''
         parseXmlRuleSet(XML)
@@ -129,14 +129,14 @@ class XmlReaderRuleSetTest extends AbstractTest {
         def XML = '''
             <ruleset>
                 <ruleset-ref path='rulesets/RuleSet3.xml'>
-                    <exclude-rule name='Stub'/>
+                    <exclude name='Stub'/>
                 </ruleset-ref>
                 <rule class='org.codenarc.rule.imports.DuplicateImportRule'>
                     <property name='priority' value='1'/>
                 </rule>
                 <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
-                    <include-rule name='TestPath'/>
-                    <include-rule name='EmptyIfStatement'/>
+                    <include name='TestPath'/>
+                    <include name='EmptyIfStatement'/>
                 </ruleset-ref>
             </ruleset>'''
         parseXmlRuleSet(XML)
@@ -147,7 +147,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
         def XML = '''
             <ruleset>
                 <ruleset-ref path='rulesets/RuleSet3.xml'>
-                    <include-rule name='Stub'/>
+                    <include name='Stub'/>
                 </ruleset-ref>
                 <rule class='org.codenarc.rule.imports.DuplicateImportRule'>
                     <property name='priority' value='1'/>
@@ -156,12 +156,52 @@ class XmlReaderRuleSetTest extends AbstractTest {
                     <rule-config name='CatchThrowable'>
                         <property name='priority' value='3'/>
                     </rule-config>
-                    <exclude-rule name='TestPath'/>
+                    <exclude name='TestPath'/>
                 </ruleset-ref>
             </ruleset>'''
         parseXmlRuleSet(XML)
         assertRuleClasses([StubRule, DuplicateImportRule, CatchThrowableRule, EmptyIfStatementRule])
         assert findRule('CatchThrowable').priority == 3
+    }
+
+    void testRuleClassNotFound() {
+        def XML = '''
+            <ruleset>
+                <rule class='org.codenarc.rule.DoesNotExist'/>
+            </ruleset>'''
+        shouldFail(ClassNotFoundException) { parseXmlRuleSet(XML) }
+    }
+
+    void testNestedRuleSet_RuleSetFileNotFound() {
+        def XML = '''
+            <ruleset>
+                <ruleset-ref path='rulesets/DoesNotExist.xml'/>
+            </ruleset>'''
+        shouldFailWithMessageContaining('DoesNotExist.xml') { parseXmlRuleSet(XML) }
+    }
+
+    void testNestedRuleSet_ConfigRuleDoesNotExist() {
+        def XML = '''
+            <ruleset>
+                <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
+                    <rule-config name='DoesNotExist'>
+                        <property name='priority' value='3'/>
+                    </rule-config>
+                </ruleset-ref>
+            </ruleset>'''
+        shouldFailWithMessageContaining('DoesNotExist') { parseXmlRuleSet(XML) }
+    }
+
+    void testNestedRuleSet_ConfigRulePropertyDoesNotExist() {
+        def XML = '''
+            <ruleset>
+                <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
+                    <rule-config name='CatchThrowable'>
+                        <property name='DoesNotExist' value='123456789'/>
+                    </rule-config>
+                </ruleset-ref>
+            </ruleset>'''
+        shouldFailWithMessageContaining('DoesNotExist') { parseXmlRuleSet(XML) }
     }
 
     void testRulesListIsImmutable() {

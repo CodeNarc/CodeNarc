@@ -54,20 +54,19 @@ class XmlReaderRuleSet implements RuleSet {
             def ruleSet = new XmlFileRuleSet(ruleSetPath)
             def allRules = ruleSet.rules
             def filteredRuleSet = new FilteredRuleSet(ruleSet)
-            ruleSetRefNode.'include-rule'.each { includeNode ->
+            ruleSetRefNode.'include'.each { includeNode ->
                 def includeRuleName = includeNode.attribute('name')
                 filteredRuleSet.addInclude(includeRuleName)
             }
-            ruleSetRefNode.'exclude-rule'.each { excludeNode ->
+            ruleSetRefNode.'exclude'.each { excludeNode ->
                 def excludeRuleName = excludeNode.attribute('name')
                 filteredRuleSet.addExclude(excludeRuleName)
             }
             // TODO Refactor
             ruleSetRefNode.'rule-config'.each { configNode ->
                 def configRuleName = configNode.attribute('name')
-                println "rule-config for $configRuleName"
                 def rule = allRules.find { it.name == configRuleName }
-                println "rule=$rule"
+                assert rule, "Rule named [$configRuleName] referenced within <rule-config> was not found"
                 configNode.property.each { p ->
                     def name = p.attribute('name')
                     def value = p.attribute('value')
