@@ -112,6 +112,58 @@ class XmlReaderRuleSetTest extends AbstractTest {
         assert findRule('CatchThrowable').priority == 1
     }
 
+    void testNestedRuleSet_Excludes() {
+        def XML = '''
+            <ruleset>
+                <rule class='org.codenarc.rule.imports.DuplicateImportRule'/>
+                <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
+                    <exclude-rule name='TestPath'/>
+                    <exclude-rule name='EmptyIfStatement'/>
+                </ruleset-ref>
+            </ruleset>'''
+        parseXmlRuleSet(XML)
+        assertRuleClasses([DuplicateImportRule, CatchThrowableRule])
+    }
+
+    void testNestedRuleSet_IncludesAndExcludes() {
+        def XML = '''
+            <ruleset>
+                <ruleset-ref path='rulesets/RuleSet3.xml'>
+                    <exclude-rule name='Stub'/>
+                </ruleset-ref>
+                <rule class='org.codenarc.rule.imports.DuplicateImportRule'>
+                    <property name='priority' value='1'/>
+                </rule>
+                <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
+                    <include-rule name='TestPath'/>
+                    <include-rule name='EmptyIfStatement'/>
+                </ruleset-ref>
+            </ruleset>'''
+        parseXmlRuleSet(XML)
+        assertRuleClasses([DuplicateImportRule, TestPathRule, EmptyIfStatementRule])
+    }
+
+    void testNestedRuleSet_IncludesExcludesAndConfig() {
+        def XML = '''
+            <ruleset>
+                <ruleset-ref path='rulesets/RuleSet3.xml'>
+                    <include-rule name='Stub'/>
+                </ruleset-ref>
+                <rule class='org.codenarc.rule.imports.DuplicateImportRule'>
+                    <property name='priority' value='1'/>
+                </rule>
+                <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
+                    <rule-config name='CatchThrowable'>
+                        <property name='priority' value='3'/>
+                    </rule-config>
+                    <exclude-rule name='TestPath'/>
+                </ruleset-ref>
+            </ruleset>'''
+        parseXmlRuleSet(XML)
+        assertRuleClasses([StubRule, DuplicateImportRule, CatchThrowableRule, EmptyIfStatementRule])
+        assert findRule('CatchThrowable').priority == 3
+    }
+
     void testRulesListIsImmutable() {
         def XML = '''
             <ruleset>

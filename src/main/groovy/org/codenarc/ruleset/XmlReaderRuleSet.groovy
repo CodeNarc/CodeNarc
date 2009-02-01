@@ -51,14 +51,32 @@ class XmlReaderRuleSet implements RuleSet {
         ruleset.'ruleset-ref'.each { ruleSetRefNode ->
             def ruleSetPath = ruleSetRefNode['@path']
             LOG.debug("Loading ruleset from [$ruleSetPath]")
-            loadRuleSetFromFile(ruleSetPath)
+            def ruleSet = new XmlFileRuleSet(ruleSetPath)
+            def allRules = ruleSet.rules
+            def filteredRuleSet = new FilteredRuleSet(ruleSet)
+            ruleSetRefNode.'include-rule'.each { includeNode ->
+                def includeRuleName = includeNode.attribute('name')
+                filteredRuleSet.addInclude(includeRuleName)
+            }
+            ruleSetRefNode.'exclude-rule'.each { excludeNode ->
+                def excludeRuleName = excludeNode.attribute('name')
+                filteredRuleSet.addExclude(excludeRuleName)
+            }
+            // TODO Refactor
+            ruleSetRefNode.'rule-config'.each { configNode ->
+                def configRuleName = configNode.attribute('name')
+                println "rule-config for $configRuleName"
+                def rule = allRules.find { it.name == configRuleName }
+                println "rule=$rule"
+                configNode.property.each { p ->
+                    def name = p.attribute('name')
+                    def value = p.attribute('value')
+                    PropertyUtil.setPropertyFromString(rule, name, value)
+                }
+            }
+            rules.addAll(filteredRuleSet.rules)
         }
         rules = rules.asImmutable()
-    }
-
-    private void loadRuleSetFromFile(String path) {
-        def ruleSet = new XmlFileRuleSet(path)
-        rules.addAll(ruleSet.rules)
     }
 
     /**

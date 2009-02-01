@@ -1,3 +1,5 @@
 <ruleset>
-    <rule class='org.codenarc.rule.StubRule'/>
+    <rule class='org.codenarc.rule.StubRule'>
+        <property name='name' value='Stub'/>
+    </rule>
 </ruleset>
