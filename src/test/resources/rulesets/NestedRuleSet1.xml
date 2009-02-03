@@ -1,9 +1,13 @@
-<ruleset>
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+    
+    <ruleset-ref path='rulesets/RuleSet1.xml'/>
+
     <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
         <property name='priority' value='1'/>
     </rule>
-
-    <ruleset-ref path='rulesets/RuleSet1.xml'/>
 
     <rule class='org.codenarc.rule.basic.EmptyIfStatementRule'>
         <property name='priority' value='1'/>

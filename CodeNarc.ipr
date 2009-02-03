@@ -24,6 +24,7 @@
     <wildcardResourcePatterns>
       <entry name="*.txt" />
       <entry name="*.css" />
+      <entry name="*.xsd" />
       <entry name="?*.properties" />
       <entry name="?*.xml" />
       <entry name="?*.gif" />

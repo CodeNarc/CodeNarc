@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xmlns="http://codenarc.org/ruleset/1.0"
+      targetNamespace="http://codenarc.org/ruleset/1.0"
+      elementFormDefault="qualified"
+      attributeFormDefault="unqualified"
+    >
+
+  <!-- Schema for a rule set for the CodeNarc tool. See http://codenarc.org. -->  
+
+  <xs:element name="ruleset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="ruleset-ref" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="rule" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="description" type="xs:string">
+  </xs:element>
+
+  <xs:element name="rule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="class" type="xs:NMTOKEN" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ruleset-ref">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="rule-config" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="include" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="exclude" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="path" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="rule-config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:NMTOKEN" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="property">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="value" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:NMTOKEN" use="required" />
+      <xs:attribute name="value" type="xs:string" use="optional" />
+      <xs:attribute name="description" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="value" type="xs:string">
+  </xs:element>
+
+  <xs:element name="include">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:NMTOKEN" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="exclude">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:NMTOKEN" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

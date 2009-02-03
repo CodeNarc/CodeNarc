@@ -30,7 +30,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTest {
         RULESET_FILES.each { ruleSetPath ->
             def ruleSet = new XmlFileRuleSet(ruleSetPath)
             def rules = ruleSet.rules
-            println "[$ruleSetPath] rules=$rules"
+            log("[$ruleSetPath] rules=$rules")
             assert rules
         }
     }

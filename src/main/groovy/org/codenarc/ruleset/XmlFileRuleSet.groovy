@@ -15,6 +15,8 @@
  */
 package org.codenarc.ruleset
 
+import org.apache.log4j.Logger
+
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a
  * file. The filename passed into the constructor is interpreted relative to the classpath.
@@ -24,6 +26,7 @@ package org.codenarc.ruleset
  * @version $Revision$ - $Date$
  */
 class XmlFileRuleSet implements RuleSet {
+    static final LOG = Logger.getLogger(XmlFileRuleSet)
 
     private List rules = []
 
@@ -33,6 +36,7 @@ class XmlFileRuleSet implements RuleSet {
      */
     XmlFileRuleSet(String path) {
         assert path
+        LOG.info("Loading ruleset from [$path]")
         def inputStream = getClass().classLoader.getResourceAsStream(path)
         assert inputStream, "File [$path] does not exist or is not accessible"
         inputStream.withReader { reader ->
