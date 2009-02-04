@@ -52,12 +52,12 @@ CodeNarc - Creating a RuleSet
         <exclude name='StringInstantiation'/>
     </ruleset-ref>
 
-    <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
-        <property name='priority' value='1'/>
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name="name" value="AuthorTagNotAllowed"/>
+        <property name='regex' value='\@author'/>
     </rule>
 
-</ruleset>
-+----------------------------------------------------------------------------------------
+</ruleset>+----------------------------------------------------------------------------------------
 
   Things to note:
 
@@ -85,9 +85,16 @@ CodeNarc - Creating a RuleSet
     * The <Rule> class must be available on the classpath.
 
     * You can optionally set arbitrary properties for individual rules by including a
-      \<property\> element within a \<rule\>. For the <<CatchThrowableRule>> rule above,
-      the <priority> property is set to 1. Properties set this way can be of type <String>,
+      \<property\> element within a \<rule\>. For the <<IllegalRegexRule>> rule above,
+      the <name> property is set to "AuthorTagNotAllowed" and the <regex> property is
+      set to "\@author". Properties set this way can be of type <String>,
       <int>, <long> or <boolean>.
+
+    * Because the <name> property is customized for the <<IllegalRegexRule>>,
+      the localized rule description will be retrieved from the custom messages resource
+      bundle file ("codenarc-messages.properties"), if that bundle file exists, otherwise
+      a default generic message will be used. The resource bundle message key will be based
+      on the customized name. In this case, the message key will be "AuthorTagNotAllowed.description".
 
 
 * Filtering Rules Within a RuleSet

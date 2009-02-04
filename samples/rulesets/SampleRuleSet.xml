@@ -15,8 +15,9 @@
         <exclude name='StringInstantiation'/>
     </ruleset-ref>
 
-    <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
-        <property name='priority' value='1'/>
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name="name" value="AuthorTagNotAllowed"/>
+        <property name='regex' value='\@author'/>
     </rule>
 
 </ruleset>

@@ -51,27 +51,34 @@ class HtmlReportWriterTest extends AbstractTest {
     def results
     def ruleSet
 
-    private void assertContainsRuleIds(String reportText) {
-        def ruleIds = ruleSet.rules.collect { it.name }
-        assertContainsAllInOrder(reportText, ruleIds.sort())
-    }
-
-    void testWriteOutReport_NoDescriptionsForRuleIds() {
-        ruleSet = new ListRuleSet([new StubRule(name:'XX'), new StubRule(name:'YY')])
-        analysisContext.ruleSet = ruleSet
-        reportWriter.writeOutReport(analysisContext, results)
-
-        def reportText = new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).text
-        assertContainsAllInOrder(reportText, REPORT_CONTENTS)
-        assertContainsAllInOrder(reportText, ['XX', 'No description', 'YY', 'No description'])
-    }
-
     void testWriteOutReport() {
         reportWriter.writeOutReport(analysisContext, results)
 
         def reportText = new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).text
         assertContainsAllInOrder(reportText, REPORT_CONTENTS)
         assertContainsRuleIds(reportText)
+    }
+
+    void testWriteOutReport_NoDescriptionsForRuleIds() {
+        ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY')])
+        reportWriter.customMessagesBundleName = 'DoesNotExist'
+        analysisContext.ruleSet = ruleSet
+        reportWriter.writeOutReport(analysisContext, results)
+
+        def reportText = new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).text
+        assertContainsAllInOrder(reportText, REPORT_CONTENTS)
+        assertContainsAllInOrder(reportText, ['MyRuleXX', 'No description', 'MyRuleYY', 'No description'])
+    }
+
+    void testWriteOutReport_RuleDescriptionsProvidedInCodeNarcMessagesFile() {
+        def biRule = new BooleanInstantiationRule()
+        ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
+        analysisContext.ruleSet = ruleSet
+        reportWriter.writeOutReport(analysisContext, results)
+
+        def reportText = new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).text
+        assertContainsAllInOrder(reportText, REPORT_CONTENTS)
+        assertContainsAllInOrder(reportText, [biRule.name, 'MyRuleXX', 'My Rule XX', 'MyRuleYY', 'My Rule YY'])
     }
 
     void testWriteOutReport_SetOutputFileAndTitle() {
@@ -163,6 +170,12 @@ class HtmlReportWriterTest extends AbstractTest {
         super.tearDown()
 //        new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).delete()
         new File(NEW_REPORT_FILE).delete()
+    }
+
+    private void assertContainsRuleIds(String reportText) {
+        def ruleIds = ruleSet.rules.collect { it.name }
+        assertContainsAllInOrder(reportText, ruleIds.sort())
+        assert !reportText.contains('No description')
     }
 
 }

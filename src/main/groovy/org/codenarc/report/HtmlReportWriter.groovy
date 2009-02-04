@@ -16,13 +16,18 @@
 package org.codenarc.report
 
 import groovy.xml.StreamingMarkupBuilder
-import java.text.SimpleDateFormat
+import org.apache.log4j.Logger
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
-import org.apache.log4j.Logger
 
 /**
- * ReportWriter that generates an HTML report
+ * ReportWriter that generates an HTML report.
+ * <p/>
+ * The default localized messages, including rule descriptions, are read from the "codenarc-base-messages"
+ * ResourceBundle. You can override these messages using the normal ResourceBundle mechanisms (i.e.
+ * creating a locale-specific resource bundle file on the classpath, such as "codenarc-base-messages_de").
+ * You can optionally add rule descriptions for custom rules by placing them within a "codenarc-messages.properties"
+ * file on the classpath, with entries of the form: {rule-name}.description=..."
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -30,11 +35,14 @@ import org.apache.log4j.Logger
 class HtmlReportWriter implements ReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
+    static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
+    static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
     static final ROOT_PACKAGE_NAME = '<Root>'
     static final LOG = Logger.getLogger(HtmlReportWriter)
 
     String title
     String outputFile = DEFAULT_OUTPUT_FILE
+    protected customMessagesBundleName = CUSTOM_MESSSAGES_BUNDLE
 
     /**
      * Write out a report for the specified analysis results
@@ -57,6 +65,10 @@ class HtmlReportWriter implements ReportWriter {
             writer << html
         }
     }
+
+    //--------------------------------------------------------------------------
+    // Internal Helper Methods
+    //--------------------------------------------------------------------------
 
     private buildCSS() {
         return {
@@ -231,10 +243,24 @@ class HtmlReportWriter implements ReportWriter {
         }
     }
 
+    protected ResourceBundle getMessagesBundle() {
+        def baseBundle = ResourceBundle.getBundle(BASE_MESSSAGES_BUNDLE);
+        def bundle = baseBundle
+        try {
+            bundle = ResourceBundle.getBundle(customMessagesBundleName);
+            LOG.info("Using custom message bundle [$customMessagesBundleName]")
+            bundle.setParent(baseBundle)
+        }
+        catch(MissingResourceException) {
+            LOG.info("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
+        }
+        return bundle
+    }
+
     private buildRuleDescriptions(AnalysisContext analysisContext) {
-        def bundle = ResourceBundle.getBundle("html-report-messages");
-        def ruleIds = analysisContext.ruleSet.rules.collect { rule -> rule.name }
-        def sortedRuleIds = ruleIds.sort()
+        def bundle = getMessagesBundle();
+        def ruleNames = analysisContext.ruleSet.rules.collect { rule -> rule.name }
+        def sortedRuleNames = ruleNames.sort()
 
         return {
             h2("Rule Descriptions")
@@ -244,18 +270,18 @@ class HtmlReportWriter implements ReportWriter {
                     th('Description')
                 }
 
-                sortedRuleIds.each { ruleId ->
+                sortedRuleNames.each { ruleName ->
                     tr {
-                        a(name:ruleId)
-                        td(ruleId, class:'ruleID')
-                        td { unescaped << getDescriptionForRuleId(bundle, ruleId) }
+                        a(name:ruleName)
+                        td(ruleName, class:'ruleName')
+                        td { unescaped << getDescriptionForRuleName(bundle, ruleName) }
                     }
                 }
             }
         }
     }
 
-    protected String getDescriptionForRuleId(bundle, String ruleName) {
+    protected String getDescriptionForRuleName(bundle, String ruleName) {
         def resourceKey = ruleName + '.description'
         def description = "No description provided for rule named [$ruleName]"
         try {

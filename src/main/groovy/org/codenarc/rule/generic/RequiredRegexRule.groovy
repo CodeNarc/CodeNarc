@@ -20,7 +20,7 @@ import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
 
 /**
- * Checks for a specified regular expression within the source code.
+ * Checks for a specified regular expression that must exist within the source code.
  * <p/>
  * The <code>regex</code> property specifies the regular expression to check for. It is required and 
  * cannot be null or empty.
@@ -39,7 +39,7 @@ class RequiredRegexRule extends AbstractRule {
     void applyTo(SourceCode sourceCode, List violations) {
         assert regex
         if (!(sourceCode.getText() =~ regex)) {
-            violations.add(new Violation(rule:this, description:"Required regex not present:[$regex]"))
+            violations.add(new Violation(rule:this, description:"Match for required regular expression not found:[$regex]"))
         }
     }
 

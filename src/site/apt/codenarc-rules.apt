@@ -41,6 +41,16 @@ CodeNarc - Rules
  * <<CatchThrowable>> - Catching <Throwable> is dangerous; it can catch exceptions such as <ThreadDeath> and <OutOfMemoryError>.
 
 
+* Generic Rules  ("<rulesets/generic.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * <<IllegalRegex>> - Checks for a specified illegal regular expression within the source code.
+   The <<regex>> property specifies the regular expression to check for. It is required and cannot be null or empty.
+
+ * <<RequiredRegex>> - Checks for a specified regular expression that must exist within the source code. 
+   The <<regex>> property specifies the regular expression to check for. It is required and cannot be null or empty.
+
+
 * Import Rules  ("<rulesets/imports.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

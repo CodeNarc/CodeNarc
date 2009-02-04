@@ -6,6 +6,7 @@ import org.codenarc.sample.processor.SampleProcessor
 
 /**
  * Sample service class that exhibits several CodeNarc violations
+ * @author John Doe
  */
 class SampleService {
     String name
