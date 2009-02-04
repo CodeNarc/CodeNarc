@@ -1,0 +1,21 @@
+<!-- Ant build file for CodeNarc with a custom ruleset -->
+<project name="CodeNarcTest" >
+
+<taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
+
+<target name="runCodeNarc">
+
+    <mkdir dir="reports"/>
+
+    <codenarc ruleSetFiles="rulesets/SampleRuleSet.xml">
+		<report type="html" toFile="reports/CodeNarcAntSampleRuleSetReport.html"/>
+		<fileset dir="src">
+			<include name="**/*.groovy"/>
+		</fileset>
+	</codenarc>
+
+	<echo message="Done."/>
+
+</target>
+
+</project>

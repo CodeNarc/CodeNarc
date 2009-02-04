@@ -1,8 +1,8 @@
 		--------------------------------------------------
-					  CodeNarc - Custom RuleSet
+					  CodeNarc - Creating a RuleSet
 		--------------------------------------------------
 
-CodeNarc - Custom RuleSet
+CodeNarc - Creating a RuleSet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   You can use the predefined <RuleSets> distributed with <<CodeNarc>> or you can create your own
@@ -10,38 +10,118 @@ CodeNarc - Custom RuleSet
   rules provided out of the box by <<CodeNarc>>.
 
 
-* Creating a Custom RuleSet
+* Custom RuleSet XML Schema
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  \<\<\<  <<NOTE:>> <Additional features for RuleSet definition, including nested RuleSets, should be available soon.>  \>\>\>
+  The XML schema for a <<CodeNarc>> <RuleSet> file is embodied in the "ruleset-schema.xsd" file which
+  is included within the <<CodeNarc>> jar. It contains three sections, all of which are optional, though
+  the sections must be in the order listed:
+
+*---------------------+--------------------------------------------------------------+--------------------------+
+| <<XML Tag>>         | <<Purpose>>                                                  | <<How many are allowed>> |
+*---------------------+--------------------------------------------------------------+--------------------------+
+| <<<\<description\>>>> | Describe the purpose of the <RuleSet>                        |  Zero or one             |
+*---------------------+--------------------------------------------------------------+--------------------------+
+| <<<\<ruleset-ref\>>>> | Include a nested <RuleSet>, optionally configuring and/or    |  Zero or more            |
+|                     | filtering the rules within it.                               |                          |
+*---------------------+--------------------------------------------------------------+--------------------------+
+| <<<\<rule\>>>>        | Include a single rule; specify its fully-qualified classname |  Zero or one             |
+*---------------------+--------------------------------------------------------------+--------------------------+
+
+
+* A Sample RuleSet
+~~~~~~~~~~~~~~~~~~~
 
   Here is an example XML <RuleSet> file:
 
 +----------------------------------------------------------------------------------------
-<ruleset>
-    <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'>
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>Sample rule set</description>
+
+    <ruleset-ref path='rulesets/imports.xml'>
+        <rule-config name='DuplicateImport'>
+            <property name='priority' value='1'/>
+        </rule-config>
+    </ruleset-ref>
+
+    <ruleset-ref path='rulesets/basic.xml'>
+        <exclude name='StringInstantiation'/>
+    </ruleset-ref>
+
+    <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
         <property name='priority' value='1'/>
     </rule>
-    <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
 
-    <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>
-
-    <rule class='org.codenarc.rule.imports.DuplicateImportRule'/>
-    <rule class='org.codenarc.rule.imports.ImportFromSamePackageRule'/>
-    <rule class='org.codenarc.rule.imports.UnnecessaryGroovyImportRule'/>
-    <rule class='org.codenarc.rule.imports.UnusedImportRule'/>
 </ruleset>
 +----------------------------------------------------------------------------------------
 
   Things to note:
 
+    * The <RuleSet> file itself must be accessible on the classpath.
+
+    * The top-level \<ruleset\> element must include the namespace declaration shown.
+
+  About the \<ruleset-ref\> elements:
+
+    * The <path> of the \<ruleset-ref\> is relative to the classpath.
+
+    * You can optionally set arbitrary properties for the rules within the <RuleSet> by
+    including one or more \<property\> elements within a \<rule-config\> element. In the example
+    above, the <<DuplicateImportRule>> <priority> property is set to 1. Properties set
+    this way can be of type <String>, <int>, <long> or <boolean>.
+
+    * Remember that the <name> for a \<rule-config\> specifies the rule <name>, not the class name.
+    (In most cases, the rule <name> is the class name without the "Rule" suffix.)
+
+
+  About the \<rule\> elements:
+
     * You must specify the fully-qualified class name for each <Rule>.
 
     * The <Rule> class must be available on the classpath.
 
-    * You can optionally set arbitrary properties for each <Rule> instance. For the
-      <<ReturnFromFinallyBlockRule>> rule above, the <priority> property is set to 1.
-      Properties set this way can be of type <String>, <int>, <long> or <boolean>.
+    * You can optionally set arbitrary properties for individual rules by including a
+      \<property\> element within a \<rule\>. For the <<CatchThrowableRule>> rule above,
+      the <priority> property is set to 1. Properties set this way can be of type <String>,
+      <int>, <long> or <boolean>.
 
-    * The <RuleSet> file itself must be accessible on the classpath.
 
+* Filtering Rules Within a RuleSet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can use the \<include\> and \<exclude\> elements within a \<ruleset-ref\> to filter a <RuleSet>
+  and include and/or the exclude individual rules. In the following <RuleSet> excerpt, the entire
+  "rulesets/basic.xml" <RuleSet> is included, except for the <<BooleanInstantiationRule>> and
+  <<StringInstantiationRule>>.
+
++----------------------------------------------------------------------------------------
+    <ruleset-ref path='rulesets/basic.xml'>
+        <exclude name='BooleanInstantiation'/>
+        <exclude name='StringInstantiation'/>
+    </ruleset-ref>
++----------------------------------------------------------------------------------------
+
+  Alternatively, you may wish to explicitly specify the rules that you want included from a <RuleSet>
+  rather than those that are excluded.  In the following <RuleSet> excerpt, ONLY the
+  <<ReturnFromFinallyBlockRule>> and <<StringInstantiationRule>> rules are included from the
+   "rulesets/basic.xml" <RuleSet>.
+
++----------------------------------------------------------------------------------------
+    <ruleset-ref path='rulesets/basic.xml'>
+        <include name='ReturnFromFinallyBlockRule'/>
+        <include name='StringInstantiation'/>
+    </ruleset-ref>
++----------------------------------------------------------------------------------------
+
+  <<Note>>: In all cases, the rule <name> is specified, not the class name. (In most cases, the rule <name> is
+  the class name without the "Rule" suffix.)
+
+  <<Note>>: If you specify at least one \<include\>, then ONLY rules matching an \<include\> will be included.
+
+  <<Note>>: If you specify an \<include\> and an \<exclude\> for a rule, then the \<exclude\> takes precedence.
+
+  \<\<\<  <<NOTE:>> <In the future, wildcards may be supported for includes and excludes>  \>\>\>
