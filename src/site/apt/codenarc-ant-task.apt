@@ -36,6 +36,8 @@ CodeNarc - Ant Task
 *---------------------+----------------------------------------------------------------+------------------------+
 | toFile              | The path and filename for the output report file.              | Yes                    |
 *---------------------+----------------------------------------------------------------+------------------------+
+| title               | The title for the output report.                               | No                     |
+*---------------------+----------------------------------------------------------------+------------------------+
 
 
 * Fileset Nested Element
@@ -55,7 +57,7 @@ CodeNarc - Ant Task
 <taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
 <target name="runCodeNarc">
     <codenarc ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml">
-        <report type="html" toFile="reports/CodeNarcAntReport.html"/>
+        <report type="html" toFile="reports/CodeNarcAntReport.html" title="My Sample Code"/>
         <fileset dir="src">
             <include name="**/*.groovy"/>
         </fileset>

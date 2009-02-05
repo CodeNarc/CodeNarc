@@ -8,7 +8,7 @@
     <mkdir dir="reports"/>
 
     <codenarc ruleSetFiles="rulesets/SampleRuleSet.xml">
-		<report type="html" toFile="reports/CodeNarcAntSampleRuleSetReport.html"/>
+		<report type="html" toFile="reports/CodeNarcAntSampleRuleSetReport.html" title="My Sample Code"/>
 		<fileset dir="src">
 			<include name="**/*.groovy"/>
 		</fileset>

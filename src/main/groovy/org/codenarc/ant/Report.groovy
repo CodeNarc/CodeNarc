@@ -16,14 +16,15 @@
 package org.codenarc.ant
 
 /**
- * JavaBean class holding the properties for a <report> element with the <narc> Ant Task.
+ * JavaBean class holding the properties for a <report> element with the CodeNarc Ant Task.
  *
- * @see NarcTask
+ * @see CodeNarcTask
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class Report {
     String type
+    String title
     String toFile
 }

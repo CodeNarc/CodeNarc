@@ -76,7 +76,7 @@ class CodeNarcTask extends Task {
         if (report.type != 'html') {
             throw new BuildException("Invalid type: [$report.type]")
         }
-        reportWriters << new HtmlReportWriter(outputFile:report.toFile)
+        reportWriters << new HtmlReportWriter(outputFile:report.toFile, title:report.title)
     }
 
     /**

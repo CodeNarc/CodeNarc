@@ -33,4 +33,16 @@ interface ReportWriter {
      */
     void writeOutReport(AnalysisContext analysisContext, Results results)
 
+    /**
+     * Set the title for the report
+     * @param title - the new value for the title
+     */
+    void setTitle(String title)
+
+    /**
+     * Set the path and filename of the report output file
+     * @param title - the new value for the output file path
+     */
+    void setOutputFile(String outputFile)
+
 }
