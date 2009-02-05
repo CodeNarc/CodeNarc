@@ -1,0 +1,72 @@
+		--------------------------------------------------
+			CodeNarc - Customizing Rule Descriptions
+		--------------------------------------------------
+
+CodeNarc - Customizing Rule Descriptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The descriptions for rules used in a <<CodeNarc>> report are shown at the bottom of the resulting
+  HTML report. Those rule descriptions are retrieved from a <ResourceBundle>. This <ResourceBundle>
+  consists of a base (parent) bundle, provided with the <<CodeNarc>> distribution, and an optional
+  custom (child) bundle, which may be provided by the user.
+
+  Because this is based on the standard Java <ResourceBundle> facility, you can customize (override) or
+  translate these descriptions by providing your own locale-specific message properties file on the
+  classpath. For example, a German one would be named "codenarc-messages_de.properties".
+
+  The rule description message key is of the form "<<\<rule-name\>.description>>". Examples include
+  "BooleanInstantiation.description" and "CatchThrowable.description".
+
+  See the javadoc for the <<<java.util.ResourceBundle>>> class for more information.
+
+
+* The Base Messages Resource Bundle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The base <ResourceBundle> provided with the <<CodeNarc>> distribution  has a basename of
+  "codenarc-base-messages". The {{{codenarc-rules.html}rules}} provided with <<CodeNarc>> all have
+  associated descriptions within the "codenarc-base-messages.properties" file.
+
+  You can provide a locale-specific variant of this file on the classpath if you wish, but
+  in most scenarios, the recommended approach for customizing rule descriptions is to provide a
+  custom messages bundle file, as described below.
+
+
+* The Custom Messages Resource Bundle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can optionally provide descriptions for new rules or override existing rule descriptions
+  by placing a "codenarc-messages.properties" file on the classpath. This is also a <ResourceBundle>
+  file, so it can have locale-specific variants, if needed. If this bundle (file) is present, it
+  is searched first. If the desired message key is not found, only then is the base message bundle
+  checked.
+
+  You can provide rule description entries within this file for custom rules that you create.
+  You can also include rule description entries for existing rules, in which case the descriptions in this
+  file override the default descriptions.
+
+
+* Customizing the Name and Description for an Existing Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You may wish to customize both the <name> and the description for an existing rule. For example,
+  you may want to have multiple instances of a generic rule, each configured differently. Or you
+  may just want to make the rule name more clearly denote its specific purpose.
+
+  For example, in the following excerpt from a <RuleSet> file, because the <name> property is
+  customized for the <<IllegalRegexRule>>, the new rule name "AuthorTagNotAllowed" will show up
+  at the bottom of the HTML report, instead of the default rule name "IllegalRegex".
+
++----------------------------------------------------------------------------------------
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name="name" value="AuthorTagNotAllowed"/>
+        <property name='regex' value='\@author'/>
+    </rule>
++----------------------------------------------------------------------------------------
+
+  The rule description must be added to the custom messages resource bundle file 
+  ("codenarc-messages.properties"). The message key will be "AuthorTagNotAllowed.description".
+
+
+
+

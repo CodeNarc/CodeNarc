@@ -6,8 +6,8 @@ CodeNarc - Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <<CodeNarc>> includes rules within several rulesets, corresponding to categories. It is also possible
-  to create your own rules and rulesets. The predefined rulesets are listed below, along with the
-  rules contained within them.
+  to {{{codenarc-custom-ruleset.html}create your own custom ruleset.}}  The predefined rulesets are
+  listed below, along with the rules contained within them.
 
 * Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

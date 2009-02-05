@@ -38,9 +38,10 @@
             <item name="CodeNarc Groovy Script" href="/codenarc-groovy-script.html"/>
         </menu>
 
-        <menu name="Customizing">
+        <menu name="Using">
             <item name="Rules and RuleSets" href="/codenarc-rules.html"/>
             <item name="Creating a RuleSet" href="/codenarc-custom-ruleset.html"/>
+            <item name="Custom Rule Descriptions" href="/codenarc-custom-rule-descriptions.html"/>
         </menu>
 
         ${reports}
