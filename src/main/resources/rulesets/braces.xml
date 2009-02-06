@@ -10,6 +10,7 @@
 
     <rule class='org.codenarc.rule.braces.IfStatementBracesRule'/>
     <rule class='org.codenarc.rule.braces.ElseBlockBracesRule'/>
+    <rule class='org.codenarc.rule.braces.ForStatementBracesRule'/>
     <rule class='org.codenarc.rule.braces.WhileStatementBracesRule'/>
 
 </ruleset>
