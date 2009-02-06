@@ -35,6 +35,18 @@ CodeNarc - Rules
  * <<ThrowExceptionFromFinallyBlock>> - Throwing an exception from a <finally> block is confusing and can hide the original exception.
 
 
+* Braces Rules  ("<rulesets/braces.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * <<ElseBlockBraces>> - Use braces for <else> blocks, even for a single statement. By default, braces are not required for an <else> if it is followed immediately by an <if>. Set the <bracesRequiredForElseIf> property to true to require braces is that situation as well.
+
+ * <<ForStatementBraces>> - Use braces for <for> statements, even for a single statement.
+
+ * <<IfStatementBraces>> - Use braces for <if> statements, even for a single statement.
+
+ * <<WhileStatementBraces>> - Use braces for <while> statements, even for a single statement.
+
+
 * Exception Rules  ("<rulesets/exceptions.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
