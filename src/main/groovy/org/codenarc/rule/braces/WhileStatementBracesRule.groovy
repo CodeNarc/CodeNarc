@@ -15,12 +15,9 @@
  */
 package org.codenarc.rule.braces
 
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.WhileStatement
-
 
 /**
  * Rule that checks that while statements use braces rather than a single statement.

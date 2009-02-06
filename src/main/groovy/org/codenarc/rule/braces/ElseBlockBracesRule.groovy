@@ -18,23 +18,33 @@ package org.codenarc.rule.braces
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.stmt.EmptyStatement
 
 /**
- * Rule that checks that if statements use braces rather than a single statement.
+ * Rule that checks that else blocks use braces rather than a single statement.
+ * <p>
+ * By default, braces are not required for an <code>else</code> if it is followed immediately
+ * by an <code>if</code>. Set the <code>bracesRequiredForElseIf<code> property to true to
+ * require braces is that situation as well. 
  *
  * @author Chris Mair
  * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
  */
-class IfStatementBracesRule extends AbstractAstVisitorRule {
-    String name = 'IfStatementBraces'
+class ElseBlockBracesRule extends AbstractAstVisitorRule {
+    String name = 'ElseBlockBraces'
     int priority = 2
-    Class astVisitorClass = IfStatementBracesAstVisitor
+    boolean bracesRequiredForElseIf = false
+    Class astVisitorClass = ElseBlockBracesAstVisitor
 }
 
-class IfStatementBracesAstVisitor extends AbstractAstVisitor  {
+class ElseBlockBracesAstVisitor extends AbstractAstVisitor  {
     void visitIfElse(IfStatement ifStatement) {
-        if (!isBlock(ifStatement.ifBlock)) {
-            addViolation(ifStatement)
+        if (!(ifStatement.elseBlock instanceof EmptyStatement) && 
+                !isBlock(ifStatement.elseBlock)) {
+
+            if (!(ifStatement.elseBlock instanceof IfStatement) || rule.bracesRequiredForElseIf) {
+                addViolation(ifStatement)
+            }
         }
         super.visitIfElse(ifStatement)
     }

@@ -6,7 +6,7 @@
 
     <mkdir dir="reports"/>
 
-    <codenarc ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml">
+    <codenarc ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml,rulesets/braces.xml">
 		<report type="html" toFile="reports/CodeNarcAntReport.html" title="My Sample Code"/>
 		<fileset dir="src">
 			<include name="**/*.groovy"/>
