@@ -1,0 +1,14 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Braces rule set.
+        These rules implement standards and best practices related to using braces.
+    </description>
+
+    <rule class='org.codenarc.rule.braces.IfStatementBracesRule'/>
+    <rule class='org.codenarc.rule.braces.WhileStatementBracesRule'/>
+
+</ruleset>

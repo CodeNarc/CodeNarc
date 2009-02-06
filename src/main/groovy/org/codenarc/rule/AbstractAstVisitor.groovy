@@ -90,13 +90,22 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * Return true if the Statement is a block and it is empty (contains no "meaningful" statements).
      * This implementation also addresses some "weirdness" around some statement types (specifically finally)
      * where the BlockStatement answered false to isEmpty() even if it was.
-     * @param blockStatement - the BlockStatement to check
+     * @param statement - the Statement to check
      * @return true if the BlockStatement is empty
      */
     protected boolean isEmptyBlock(Statement statement) {
         return statement instanceof BlockStatement &&
             (statement.empty ||
             (statement.statements.size() == 1 && statement.statements[0].empty))
+    }
+
+    /**
+     * Return true if the Statement is a block
+     * @param statement - the Statement to check
+     * @return true if the Statement is a block
+     */
+    protected boolean isBlock(Statement statement) {
+        return statement instanceof BlockStatement
     }
 
 }

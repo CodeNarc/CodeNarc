@@ -24,14 +24,31 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class LoadAllPredefinedRuleSetsTest extends AbstractTest {
+    static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
+    static final RULESET_FILES = [
+        'rulesets/basic.xml',
+        'rulesets/braces.xml',
+        'rulesets/exceptions.xml',
+        'rulesets/imports.xml'
+    ]
+    private messages
 
     void testLoadAllPredefinedRuleSets() {
-        def RULESET_FILES = ['rulesets/basic.xml', 'rulesets/exceptions.xml', 'rulesets/imports.xml']
         RULESET_FILES.each { ruleSetPath ->
             def ruleSet = new XmlFileRuleSet(ruleSetPath)
             def rules = ruleSet.rules
             log("[$ruleSetPath] rules=$rules")
             assert rules
+
+            rules.each { rule -> assertDescriptionInMessagesBundle(rule.name) }
         }
+    }
+
+    void setUp() {
+        messages = ResourceBundle.getBundle(BASE_MESSSAGES_BUNDLE);
+    }
+
+    private void assertDescriptionInMessagesBundle(String ruleName) {
+        assert messages.getString(ruleName + '.description')
     }
 }
