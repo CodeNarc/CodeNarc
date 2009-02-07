@@ -39,7 +39,7 @@ class RequiredRegexRule extends AbstractRule {
     void applyTo(SourceCode sourceCode, List violations) {
         assert regex
         if (!(sourceCode.getText() =~ regex)) {
-            violations.add(new Violation(rule:this, description:"Match for required regular expression not found:[$regex]"))
+            violations.add(new Violation(rule:this, description:"Match not found for required regular expression \"$regex\""))
         }
     }
 

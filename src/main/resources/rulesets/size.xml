@@ -1,0 +1,14 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Size rule set.
+        These rules check against thresholds for code size.
+    </description>
+
+    <rule class='org.codenarc.rule.size.ClassSizeRule'/>
+    <rule class='org.codenarc.rule.size.MethodSizeRule'/>
+
+</ruleset>

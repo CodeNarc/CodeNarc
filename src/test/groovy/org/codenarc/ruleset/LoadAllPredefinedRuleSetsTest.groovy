@@ -29,7 +29,8 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTest {
         'rulesets/basic.xml',
         'rulesets/braces.xml',
         'rulesets/exceptions.xml',
-        'rulesets/imports.xml'
+        'rulesets/imports.xml',
+        'rulesets/size.xml'
     ]
     private messages
 
