@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for WhileStatementBracesRule
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class WhileStatementBracesRuleTest extends AbstractRuleTest {
 

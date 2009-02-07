@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.stmt.EmptyStatement
  * require braces is that situation as well. 
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ElseBlockBracesRule extends AbstractAstVisitorRule {
     String name = 'ElseBlockBraces'

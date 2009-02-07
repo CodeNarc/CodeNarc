@@ -28,7 +28,7 @@ import org.codenarc.rule.Violation
  * <code>maxLines</code> property defaults to 100.   
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class MethodSizeRule extends AbstractAstVisitorRule {
     String name = 'MethodSize'

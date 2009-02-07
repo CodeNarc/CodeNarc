@@ -23,7 +23,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Rule that checks that for statements use braces rather than a single statement.
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ForStatementBracesRule extends AbstractAstVisitorRule {
     String name = 'ForStatementBraces'
