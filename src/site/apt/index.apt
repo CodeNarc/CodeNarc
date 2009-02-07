@@ -35,6 +35,8 @@ CodeNarc
   * The {{{http://logging.apache.org/log4j/index.html}Log4J}} jar, version 1.2.13 or later,
     accessible on the CLASSPATH.
 
+  * If you are using Java 1.4, then you will also need JAXP on the classpath.  
+
 
 * Compatibility Testing
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,6 +45,6 @@ CodeNarc
 
   * Groovy 1.5.6 and 1.5.7
 
-  * Java 1.5 and 1.6
+  * Java 1.4, 1.5 and 1.6
 
-  \[Note: Running <<CodeNarc>> from the Groovy script also worked with Java 1.4, but the Ant Task did not work (TBD)...\] 
+ 
