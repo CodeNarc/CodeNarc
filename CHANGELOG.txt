@@ -2,6 +2,32 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.2 (07 Feb 2009)
+------------------------------------
+- Create XML Schema Definition (XSD) for XML RuleSet file.
+    * NOTE: RuleSet files MUST declare this schema
+    * NOTE: RuleSet files are validated against this schema
+- More powerful and flexible RuleSet definition, including:
+    * Nested RuleSets
+    * Use <include> and <exclude> to filter rules from nested RuleSets
+    * Use <rule-config> to configure rules from nested RuleSets
+
+- Created new "generic", "braces", and "size" RuleSets
+- Created new Rules:
+   * IllegalRegexRule. (generic)
+   * RequiredRegexRule. (generic)
+   * ElseBlockBracesRule. (braces)
+   * ForStatementBracesRule. (braces)
+   * IfStatementBracesRule. (braces)
+   * WhileStatementBracesRule. (braces)
+   * MethodSizeRule. (size)
+   * ClassSizeRule. (size)
+
+- Rule: Rename "id" property to "name".
+    * NOTE: This is a potential breakage if you have defined custom Rules.
+- Flexible customization and localization of rule descriptions. ("codenarc-messages.properties")
+- HtmlReportWriter: Add setTitle(), setOutputFile() to ReportWriter interface.
+
 
 Changes in version 0.1 (24 Jan 2009)
 ------------------------------------

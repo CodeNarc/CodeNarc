@@ -13,13 +13,9 @@ CodeNarc - Road Map
 
   * More rules
 
-  * Flexible RuleSet definition, including nested RuleSets.
+  * Document creating custom Rules.
 
   * Flexible Rule configuration.
-
-  * Flexible customization and localization of rule descriptions and report text.
-
-  * Create XML Schema Definition (XSD) for XML RuleSet file.
 
 
 * Long-Term Goals
@@ -35,6 +31,7 @@ CodeNarc - Road Map
 
   * Create Eclipse plugin.
 
+
 ** Considering (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -45,6 +42,10 @@ CodeNarc - Road Map
   * Create Netbeans plugin.
 
   * Create Maven plugin.
+
+  * DSL for RuleSet definition.
+
+  * Localization of report text.
 
 
 
