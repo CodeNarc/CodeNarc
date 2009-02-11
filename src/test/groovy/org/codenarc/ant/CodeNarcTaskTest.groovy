@@ -33,11 +33,20 @@ class CodeNarcTaskTest extends AbstractTest {
     static final BASE_DIR = 'src/test/resources'
     static final RULESET_FILE = 'rulesets/RuleSet1.xml'
     static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
-    static final REPORT_FILE = 'NarcTaskHtmlReport.html'
+    static final REPORT_FILE = 'CodeNarcTaskHtmlReport.html'
 
     private codeNarcTask
     private fileSet
     private outputFile
+
+    void testExecute_CodeNarcProperties() {
+        def analysisContext = null
+        def reportWriter = [ writeOutReport: {ctx, results -> analysisContext = ctx} ]
+        codeNarcTask.reportWriters = [reportWriter]
+        codeNarcTask.addFileset(fileSet)
+        codeNarcTask.execute()
+        assert analysisContext.ruleSet.rules[0].priority == 3
+    }
 
     void testExecute_SingleRuleSetFile() {
         codeNarcTask.addFileset(fileSet)

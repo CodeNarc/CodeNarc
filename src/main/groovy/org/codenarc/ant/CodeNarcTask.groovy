@@ -25,6 +25,7 @@ import org.codenarc.ruleset.CompositeRuleSet
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.ruleset.XmlFileRuleSet
 import org.apache.log4j.Logger
+import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
 
 /**
  * Ant Task for running CodeNarc.
@@ -54,6 +55,7 @@ class CodeNarcTask extends Task {
 
         def sourceAnalyzer = createSourceAnalyzer()
         ruleSet = createRuleSet()
+        new PropertiesFileRuleSetConfigurer().configure(ruleSet)
         def results = sourceAnalyzer.analyze(ruleSet)
         LOG.debug("results=$results")
         def analysisContext = new AnalysisContext(ruleSet:ruleSet)

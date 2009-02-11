@@ -3,6 +3,7 @@ import org.codenarc.report.HtmlReportWriter
 import org.codenarc.ruleset.CompositeRuleSet
 import org.codenarc.ruleset.XmlFileRuleSet
 import org.codenarc.AnalysisContext
+import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
 
 println 'Run CodeNarc'
 
@@ -14,6 +15,7 @@ def sourceAnalyzer = new DirectorySourceAnalyzer(baseDirectory:BASE, sourceDirec
 def ruleSetFiles = ['rulesets/basic.xml','rulesets/exceptions.xml','rulesets/imports.xml']
 def ruleSet = new CompositeRuleSet()
 ruleSetFiles.each { ruleSetFile -> ruleSet.add(new XmlFileRuleSet(ruleSetFile)) }
+new PropertiesFileRuleSetConfigurer().configure(ruleSet)
 
 def results = sourceAnalyzer.analyze(ruleSet)
 def analysisContext = new AnalysisContext(ruleSet:ruleSet, sourceDirectories:SOURCE_DIRS)
