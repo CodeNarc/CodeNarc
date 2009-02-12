@@ -110,6 +110,7 @@ abstract class AbstractRuleTest extends AbstractTest {
             assert violation.sourceLine.contains(sourceLineText), "sourceLineText=[$sourceLineText]"
         }
         if (descriptionText) {
+            assert violation.description, "The violation description was null" 
             assert violation.description.contains(descriptionText), "descriptionText=[$descriptionText]"
         }
     }
