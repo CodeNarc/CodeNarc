@@ -39,14 +39,14 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * @param statement - the Groovy AST Statement
      */
     protected String sourceLine(ASTNode statement) {
-        def line = sourceCode.lines[statement.lineNumber-1]
+        def line = (statement.lineNumber >= 0) ? sourceCode.lines[statement.lineNumber-1] : null
 
         // If the whole line fits, then include the whole line (trimmed).
         // Otherwise, start at the beginning of the Statement of interest, and remove chars in the middle.
         // TODO Handle statements that cross multiple lines?
 
-        def source = line.trim()
-        if (source.size() > MAX_SOURCE_LINE_LENGTH) {
+        def source = line ? line.trim() : null
+        if (source && source.size() > MAX_SOURCE_LINE_LENGTH) {
             def lengthOfFirstSegment = MAX_SOURCE_LINE_LENGTH - 12
             def startIndexOfFirstSegment = statement.columnNumber-1
             def endIndexOfFirstSegment = startIndexOfFirstSegment + lengthOfFirstSegment
