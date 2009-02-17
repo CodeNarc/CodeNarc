@@ -59,7 +59,6 @@ class FieldNameRule extends AbstractAstVisitorRule {
 
 class FieldNameAstVisitor extends AbstractAstVisitor  {
     void visitField(FieldNode fieldNode) {
-        println "visitField: ${fieldNode.name} type=${fieldNode.type}  modifiers=${fieldNode.modifiers}  isStatic=${fieldNode.isStatic()}"
         assert rule.regex
 
         def re = rule.regex

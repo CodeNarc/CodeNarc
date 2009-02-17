@@ -134,6 +134,18 @@ class VariableNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 4, 'final int count')
     }
 
+    void testApplyTo_Final_FinalRegexIsEmpty() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    final int count = 23
+                }
+            }
+        '''
+        rule.finalRegex = ''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_Final_DoesNotMatchCustomFinalRegex() {
         final SOURCE = '''
           class MyClass {

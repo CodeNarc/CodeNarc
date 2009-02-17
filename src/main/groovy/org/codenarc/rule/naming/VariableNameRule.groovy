@@ -20,16 +20,17 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * Rule that verifies that the name of each method matches a regular expression. By default it checks that
+ * Rule that verifies that the name of each variable matches a regular expression. By default it checks that
  * non-<code>final</code> variable names start with a lowercase letter and contains only letters or numbers.
  * By default, <code>final</code> variable names start with an uppercase letter and contain only uppercase
  * letters, numbers and underscores.
  * <p/>
- * The <code>regex</code> property specifies the default regular expression to validate a field name.
+ * The <code>regex</code> property specifies the default regular expression to validate a variable name.
  * It is required and cannot be null or empty. It defaults to '[a-z][a-zA-Z0-9]*'.
  * <p/>
  * The <code>finalRegex</code> property specifies the regular expression to validate <code>final</code>
- * variable names. It is optional but defaults to '[A-Z][A-Z0-9_]*'.
+ * variable names. It is optional but defaults to '[A-Z][A-Z0-9_]*'. If not set, then <code>regex</code> is
+ * used to validate <code>final</code> variables.  
  *
  * @author Chris Mair
  * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
@@ -49,11 +50,11 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
         def variableExpression = declarationExpression.variableExpression
-        def re = isFinal(declarationExpression) ? rule.finalRegex : rule.regex
+        def re = rule.finalRegex && isFinal(declarationExpression) ? rule.finalRegex : rule.regex
 
         def alreadyVisited = visitedDeclarations.contains(declarationExpression)
         if (!alreadyVisited && !(variableExpression.name ==~ re)) {
-            addViolation(variableExpression)
+            addViolation(declarationExpression)
             visitedDeclarations << declarationExpression
         }
 
@@ -61,8 +62,9 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
     }
 
     /**
+     * NOTE: THIS IS A WORKAROUND.
      * There does not seem to be an easy way to determine whether the 'final' modifier has been
-     * specified for a variable declaration. Return true if the 'final' is present before the 
+     * specified for a variable declaration. Return true if the 'final' is present before the variable name.
      */
     private boolean isFinal(declarationExpression) {
         def variableName = declarationExpression.variableExpression.name
@@ -73,8 +75,9 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
     }
 
     private String expressionSource(node) {
+        // TODO Narrow this down a bit to just the declaration; but sometimes had issues with lastColumnNumber for that node
         def sourceLine = sourceCode.lines[node.lineNumber-1]
-        return sourceLine.substring(node.columnNumber-1, node.lastColumnNumber-1)
+        return sourceLine
     }
 
 }
