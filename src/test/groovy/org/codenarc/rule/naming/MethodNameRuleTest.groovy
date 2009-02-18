@@ -54,6 +54,18 @@ class MethodNameRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreConstructors() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass() { }
+                def myMethod_Underscores() { println 'bad' }
+                public MyClass() {
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_DoesNotMatchCustomRegex() {
         final SOURCE = '''
             class MyClass {

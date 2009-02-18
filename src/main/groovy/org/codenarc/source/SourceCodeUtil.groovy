@@ -50,5 +50,5 @@ class SourceCodeUtil {
     /**
      * Private constructor. All members are static.
      */
-    private SourceClassUtil() { }
+    private SourceCodeUtil() { }
 }
