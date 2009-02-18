@@ -25,25 +25,64 @@ package org.codenarc.source
  */
 class SourceCodeUtil {
 
+//    /**
+//     * Return true if the specified criteria apply to thw SourceCode
+//     * @param sourceCode - the SourceCode
+//     * @param applyToFilesMatching - only apply to source code (file) pathnames matching this regular expression.
+//     *      May be null, in which case all SourceCode instances match.
+//     * @param doNotApplyToFilesMatching - only apply to source code (file) pathnames that do NOT match this
+//     *      regular expression. May be null, in which case all SourceCode instances match.
+//     * @return true only if the criteria match to the SourceCode
+//     */
+//    public static boolean shouldApplyTo(
+//        SourceCode sourceCode,
+//        String applyToFilesMatching,
+//        String doNotApplyToFilesMatching) {
+//
+//        boolean apply = (applyToFilesMatching) ? sourceCode.path ==~ applyToFilesMatching : true
+//
+//        if (apply && doNotApplyToFilesMatching) {
+//            apply = !(sourceCode.path ==~ doNotApplyToFilesMatching)
+//        }
+//        return apply
+//    }
+
     /**
-     * Return true if the specified criteria apply to thw SourceCode
+     * Return true if all of the criteria specified in the provided Map apply to thw SourceCode.
      * @param sourceCode - the SourceCode
-     * @param applyToFilesMatching - only apply to source code (file) pathnames matching this regular expression.
-     *      May be null, in which case all SourceCode instances match.
-     * @param doNotApplyToFilesMatching - only apply to source code (file) pathnames that do NOT match this
-     *      regular expression. May be null, in which case all SourceCode instances match.
-     * @return true only if the criteria match to the SourceCode
+     * @param criteria - the Map containing the criteria for the source code (files).
+     *    The supported criteria keys include:
+     *    <ul>
+     *      <li>applyToFilesMatching - only apply to source code (file) pathnames matching this regular expression.
+     *          May be null, in which case all SourceCode instances match.</li>
+     *      <li>doNotApplyToFilesMatching - only apply to source code (file) pathnames that do NOT match this
+     *          regular expression. May be null, in which case all SourceCode instances match.</li>
+     *      <li>applyToFilenames - only apply to source code (file) names matching this name.
+     *          This value may optionally be a comma-separated list of names.
+     *          May be null, in which case all SourceCode instances match.</li>
+     *      <li>doNotApplyToFilenames - only apply to source code (file) names that do NOT match this name.
+     *          This value may optionally be a comma-separated list of names.
+     *          May be null, in which case all SourceCode instances match.</li> 
+     *    </ul>
+     * @return true only if all of the criteria match to the SourceCode
      */
-    public static boolean shouldApplyTo(
-        SourceCode sourceCode,
-        String applyToFilesMatching,
-        String doNotApplyToFilesMatching) {
+    public static boolean shouldApplyTo(SourceCode sourceCode, Map criteria) {
+        boolean apply = (criteria.applyToFilesMatching) ? sourceCode.path ==~ criteria.applyToFilesMatching : true
 
-        boolean apply = (applyToFilesMatching) ? sourceCode.path ==~ applyToFilesMatching : true
-
-        if (apply && doNotApplyToFilesMatching) {
-            apply = !(sourceCode.path ==~ doNotApplyToFilesMatching)
+        if (apply && criteria.doNotApplyToFilesMatching) {
+            apply = !(sourceCode.path ==~ criteria.doNotApplyToFilesMatching)
         }
+
+        if (apply && criteria.applyToFilenames) {
+            def names = criteria.applyToFilenames.tokenize(',')
+            apply = names.contains(sourceCode.name)
+        }
+
+        if (apply && criteria.doNotApplyToFilenames) {
+            def names = criteria.doNotApplyToFilenames.tokenize(',')
+            apply = !names.contains(sourceCode.name)
+        }
+
         return apply
     }
 

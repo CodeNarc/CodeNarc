@@ -185,6 +185,25 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         assert results.totalNumberOfFiles == 3
     }
 
+    void testAnalyze_BaseDirectory_ApplyToFilenames() {
+        final DIR = 'src/test/resources/sourcewithdirs'
+        analyzer.baseDirectory = DIR
+        analyzer.applyToFilenames = 'Subdir1File1.groovy,Subdir2aFile1.groovy,Subdir2File1.groovy'
+        analyzer.doNotApplyToFilenames = 'Subdir2aFile1.groovy'
+        def results = analyzer.analyze(ruleSet)
+        log("results=$results")
+
+        def fullPaths = results.getViolationsWithPriority(1).collect { it.description }
+        assert fullPaths == [
+                'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
+        ]
+
+        assert testCountRule.count == 2
+        assert results.numberOfFilesWithViolations == 2
+        assert results.totalNumberOfFiles == 2
+    }
+
     void setUp() {
         super.setUp()
         analyzer = new DirectorySourceAnalyzer()

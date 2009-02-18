@@ -28,22 +28,52 @@ class SourceCodeUtilTest extends AbstractTest {
     static final PATH = "src/$NAME"
     static final MATCH = /.*Test\.groovy/
     static final NO_MATCH = /.*Other\.groovy/
+    static final OTHER_NAME = 'OtherClass.groovy'
+    static final ANYTHING = 'abc'
     private sourceCode
 
     void testShouldApplyTo_NullPathAndName() {
-        assert SourceCodeUtil.shouldApplyTo(sourceCode, null, null)
-        assert SourceCodeUtil.shouldApplyTo(sourceCode, null, MATCH)
-        assert !SourceCodeUtil.shouldApplyTo(sourceCode, MATCH, null)
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [:])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilesMatching:ANYTHING])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilesMatching:ANYTHING])
     }
 
-    void testShouldApplyTo() {
+    void testShouldApplyTo_Path() {
         sourceCode.path = PATH
-        assert SourceCodeUtil.shouldApplyTo(sourceCode, null, null)
-        assert SourceCodeUtil.shouldApplyTo(sourceCode, MATCH, null)
-        assert SourceCodeUtil.shouldApplyTo(sourceCode, null, NO_MATCH)
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [:])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilesMatching:MATCH])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilesMatching:NO_MATCH])
 
-        assert !SourceCodeUtil.shouldApplyTo(sourceCode, NO_MATCH, null)
-        assert !SourceCodeUtil.shouldApplyTo(sourceCode, NO_MATCH, MATCH)
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilesMatching:NO_MATCH])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilesMatching:MATCH, doNotApplyToFilesMatching:MATCH])
+    }
+
+    void testShouldApplyTo_Name() {
+        sourceCode.name = NAME
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [:])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:NAME])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:OTHER_NAME])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:"$OTHER_NAME,$NAME"])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:"File2.groovy,$OTHER_NAME"])
+
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:OTHER_NAME])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:NAME])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:NAME, doNotApplyToFilenames:NAME])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:"$OTHER_NAME,$NAME"])
+    }
+
+    void testShouldApplyTo_NameAndPath() {
+        sourceCode.name = NAME
+        sourceCode.path = PATH
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [:])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:NAME, applyToFilesMatching:MATCH])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilesMatching:NO_MATCH, doNotApplyToFilenames:OTHER_NAME])
+
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:OTHER_NAME, applyToFilesMatching:NO_MATCH])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:NAME, applyToFilesMatching:MATCH])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilesMatching:MATCH, applyToFilenames:NAME, doNotApplyToFilenames:"Xyz.groovy,$NAME"])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:NAME, doNotApplyToFilesMatching:MATCH])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:NAME, doNotApplyToFilesMatching:MATCH])
     }
 
     void setUp() {

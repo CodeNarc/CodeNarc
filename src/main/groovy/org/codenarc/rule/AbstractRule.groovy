@@ -47,6 +47,18 @@ abstract class AbstractRule implements Rule {
     String doNotApplyToFilesMatching
 
     /**
+     * This rule is only applied to source code (file) names matching this value.
+     * The value may optionally be a comma-separated list of names, in which case one of the names must match.
+     */
+    String applyToFilenames
+
+    /**
+     * This rule is NOT applied to source code (file) names matching this value.
+     * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
+     */
+    String doNotApplyToFilenames
+
+    /**
      * @return the unique id for this rule
      */
     abstract String getName()
@@ -104,7 +116,9 @@ abstract class AbstractRule implements Rule {
     }
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {
-        return enabled && SourceCodeUtil.shouldApplyTo(sourceCode, applyToFilesMatching, doNotApplyToFilesMatching) 
+        return enabled && SourceCodeUtil.shouldApplyTo(sourceCode,
+            [applyToFilesMatching:applyToFilesMatching, doNotApplyToFilesMatching:doNotApplyToFilesMatching,
+             applyToFilenames:applyToFilenames, doNotApplyToFilenames:doNotApplyToFilenames])
     }
 
     private String getClassNameNoPackage() {

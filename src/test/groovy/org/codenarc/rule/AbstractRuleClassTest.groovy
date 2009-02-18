@@ -25,6 +25,7 @@ class AbstractRuleClassTest extends AbstractRuleTest {
     static final NAME = 'Rule123'
     static final PRIORITY = 2
     static final SOURCE = 'class MyClass { }'
+    static final FILENAME = 'MyTest.groovy'
     static final MATCH = /.*Test\.groovy/
     static final NO_MATCH = /.*Other\.groovy/
 
@@ -70,13 +71,66 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyToFilenames() {
+        rule.applyToFilenames = FILENAME
+        assertSingleViolation(SOURCE)
+        rule.applyToFilenames = "Xxx.groovy"
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToFilenames() {
+        rule.doNotApplyToFilenames = "Xxx.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFilenames = FILENAME
+        assertNoViolations(SOURCE)
+    }
+
+    void testBothApplyToFilenamesAndDoNotApplyToFilenames() {
+        rule.applyToFilenames = FILENAME             // apply = YES
+        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilenames = FILENAME             // apply = YES
+        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToFilenamesAndDoNotApplyToRegex() {
+        rule.applyToFilenames = FILENAME             // apply filename = YES
+        rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilenames = "Xxx.groovy"         // apply filename = NO
+        rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToRegexAndDoNotApplyToFilenames() {
+        rule.applyToFilesMatching = MATCH            // apply regex = YES
+        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply filename = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToFilesMatching = NO_MATCH         // apply regex = NO
+        rule.doNotApplyToFilenames = FILENAME        // doNotApply filename = YES
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         return new TestPathRule(name:NAME, priority:PRIORITY)
     }
 
     void setUp() {
         super.setUp()
-        sourceCodePath = 'MyTest.groovy'
+        sourceCodePath = FILENAME
+        sourceCodeName = FILENAME
     }
 
 }

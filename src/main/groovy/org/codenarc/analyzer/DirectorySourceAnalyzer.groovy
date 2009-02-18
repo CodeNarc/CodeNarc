@@ -56,6 +56,18 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
     String doNotApplyToFilesMatching
 
     /**
+     * Only analyze filenames matching this value.
+     * The value may optionally be a comma-separated list of names.
+     */
+    String applyToFilenames
+
+    /**
+     * Do NOT analyze filenames matching this value.
+     * The value may optionally be a comma-separated list of names.
+     */
+    String doNotApplyToFilenames
+
+    /**
      * Analyze the source with the configured directory tree(s) using the specified RuleSet and return the report results.
      * @param ruleset - the RuleSet to apply to each of the (applicable) files in the source directories
      * @return the results from applying the RuleSet to all of the files in the source directories
@@ -96,7 +108,9 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
     private def processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
         def file = new File((String)baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
-        if (SourceCodeUtil.shouldApplyTo(sourceFile, applyToFilesMatching, doNotApplyToFilesMatching)) {
+        if (SourceCodeUtil.shouldApplyTo(sourceFile, 
+                [applyToFilesMatching:applyToFilesMatching, doNotApplyToFilesMatching:doNotApplyToFilesMatching,
+                 applyToFilenames:applyToFilenames, doNotApplyToFilenames:doNotApplyToFilenames])) {
             dirResults.numberOfFilesInThisDirectory ++
             def allViolations = []
             ruleSet.rules.each {rule ->
