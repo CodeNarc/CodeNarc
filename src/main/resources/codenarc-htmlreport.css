@@ -41,11 +41,12 @@
 		}
 		.sourceCode {
 		    font-family: Arial, sans-serif;
-		    font-size: 85%;
+		    font-size: 80%;
+            color: teal;
 		}
 		.moreInfo {
 		    font-style: italic;
-		    color: teal;
+            color: black;
 		}
 		.version {
 			font-size: 75%;

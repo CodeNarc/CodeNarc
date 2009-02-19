@@ -35,6 +35,7 @@ import org.codenarc.results.Results
 class HtmlReportWriter implements ReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
+    static final CSS_FILE = 'codenarc-htmlreport.css'
     static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
     static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
     static final ROOT_PACKAGE_NAME = '<Root>'
@@ -72,7 +73,9 @@ class HtmlReportWriter implements ReportWriter {
 
     private buildCSS() {
         return {
-            def CSS = getClass().getClassLoader().getResourceAsStream('codenarc.css').text
+            def cssInputStream = getClass().getClassLoader().getResourceAsStream(CSS_FILE)
+            assert cssInputStream, "CSS File [$CSS_FILE] not found"
+            def CSS = cssInputStream.text
             unescaped << CSS
         }
     }
