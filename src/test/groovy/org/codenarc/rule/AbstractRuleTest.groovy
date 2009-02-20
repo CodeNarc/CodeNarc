@@ -61,12 +61,12 @@ abstract class AbstractRuleTest extends AbstractTest {
      * @param source - the full source code to which the rule is applied, as a String
      * @param lineNumber - the expected line number in the resulting violation; defaults to null
      * @param sourceLineText - the text expected within the sourceLine of the resulting violation; defaults to null
-     * @param descriptionText - the text expected within the description of the resulting violation; defaults to null
+     * @param messageText - the text expected within the message of the resulting violation; defaults to null
      */
-    protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, String descriptionText=null) {
+    protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, String messageText=null) {
         def violations = applyRuleTo(source)
         assert violations.size() == 1
-        assertViolation(violations[0], lineNumber, sourceLineText, descriptionText)
+        assertViolation(violations[0], lineNumber, sourceLineText, messageText)
     }
 
     /**
@@ -93,25 +93,25 @@ abstract class AbstractRuleTest extends AbstractTest {
 
     /**
      * Assert that the specified violation is for the current rule, and has expected line number
-     * and contains the specified source text and description text.
+     * and contains the specified source text and message text.
      * @param violation - the Violation
      * @param lineNumber - the expected line number in the resulting violation
      * @param sourceLineText - the text expected within the sourceLine of the resulting violation; may be null
-     * @param descriptionText - the text expected within the description of the resulting violation
+     * @param messageText - the text expected within the message of the resulting violation
      */
     protected void assertViolation(
                             Violation violation,
                             Integer lineNumber,
                             String sourceLineText,
-                            String descriptionText=null) {
+                            String messageText=null) {
         assert violation.rule == rule
         assert violation.lineNumber == lineNumber
         if (sourceLineText) {
             assert violation.sourceLine.contains(sourceLineText), "sourceLineText=[$sourceLineText]"
         }
-        if (descriptionText) {
-            assert violation.description, "The violation description was null" 
-            assert violation.description.contains(descriptionText), "descriptionText=[$descriptionText]"
+        if (messageText) {
+            assert violation.message, "The violation message was null"
+            assert violation.message.contains(messageText), "messageText=[$messageText]"
         }
     }
 

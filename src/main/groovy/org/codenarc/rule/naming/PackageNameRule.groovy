@@ -45,7 +45,7 @@ class PackageNameAstVisitor extends AbstractAstVisitor  {
     void visitClass(ClassNode classNode) {
         assert rule.regex
         if (!(classNode.packageName ==~ rule.regex)) {
-            violations.add(new Violation(rule:rule, description:"package=$classNode.packageName"))
+            violations.add(new Violation(rule:rule, message:"package=$classNode.packageName"))
         }
 
         if (rule.packageNameRequired && classNode.packageName == null) {

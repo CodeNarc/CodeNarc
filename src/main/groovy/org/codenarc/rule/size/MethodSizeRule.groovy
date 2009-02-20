@@ -43,7 +43,7 @@ class MethodSizeAstVisitor extends AbstractAstVisitor  {
             def numLines = methodNode.lastLineNumber - methodNode.lineNumber + 1
             if (numLines > rule.maxLines) {
                 def methodName = methodNode.name
-                violations.add(new Violation(rule:rule, lineNumber:methodNode.lineNumber, description:"""Method "$methodName" is $numLines lines"""))
+                violations.add(new Violation(rule:rule, lineNumber:methodNode.lineNumber, message:"""Method "$methodName" is $numLines lines"""))
             }
         }
         super.visitMethod(methodNode)

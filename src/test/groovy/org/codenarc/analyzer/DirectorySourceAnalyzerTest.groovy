@@ -61,7 +61,7 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         log("paths=$paths")
         assertEqualSets(paths, ["SourceFile1.groovy", "SourceFile2.groovy"])
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.description }
+        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
         assert fullPaths == [
                 'src/test/resources/source/SourceFile1.groovy',
                 'src/test/resources/source/SourceFile2.groovy'
@@ -76,7 +76,7 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.description }
+        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
         assert fullPaths == [
                 'src/test/resources/sourcewithdirs/SourceFile1.groovy',
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
@@ -103,7 +103,7 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         analyzer.sourceDirectories = [DIR1, DIR2]
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.description }
+        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
         log("fullPaths=$fullPaths")
         assert fullPaths == [
                 'src/test/resources/source/SourceFile1.groovy',
@@ -173,7 +173,7 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.description }
+        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
         assert fullPaths == [
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
@@ -193,7 +193,7 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.description }
+        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
         assert fullPaths == [
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'

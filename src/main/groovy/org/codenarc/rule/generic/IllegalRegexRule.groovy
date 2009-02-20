@@ -37,7 +37,7 @@ class IllegalRegexRule extends AbstractRule {
 
     void applyTo(SourceCode sourceCode, List violations) {
         if (regex && (sourceCode.getText() =~ regex)) {
-            violations.add(new Violation(rule:this, description:"Match found for illegal regular expression \"$regex\""))
+            violations.add(new Violation(rule:this, message:"Match found for illegal regular expression \"$regex\""))
         }
     }
 

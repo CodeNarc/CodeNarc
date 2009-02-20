@@ -58,12 +58,12 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     /**
      * Add a new Violation to the list of violations found by this visitor
      * @param node - the Groovy AST Node
-     * @param description - the description for the violation; defaults to null
+     * @param message - the message for the violation; defaults to null
      */
-    protected void addViolation(ASTNode node, description=null) {
+    protected void addViolation(ASTNode node, message=null) {
         def sourceLine = sourceLine(node)
         def lineNumber = node.lineNumber
-        addViolation(sourceLine, lineNumber, description)
+        addViolation(sourceLine, lineNumber, message)
     }
 
     /**
@@ -78,10 +78,10 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * Add a new Violation to the list of violations found by this visitor
      * @param sourceLine - the sourceLine for the violation
      * @param lineNumber - the line number of the violation
-     * @param description - the description for the violation; defaults to null
+     * @param message - the message for the violation; defaults to null
      */
-    protected void addViolation(String sourceLine, int lineNumber, String description=null) {
-        violations.add(new Violation(rule:rule, sourceLine:sourceLine, lineNumber:lineNumber, description:description))
+    protected void addViolation(String sourceLine, int lineNumber, String message=null) {
+        violations.add(new Violation(rule:rule, sourceLine:sourceLine, lineNumber:lineNumber, message:message))
     }
 
     protected SourceUnit getSourceUnit() {

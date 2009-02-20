@@ -25,9 +25,9 @@ class Violation {
     Rule rule
     Integer lineNumber
     String sourceLine
-    String description
+    String message
 
     String toString() {
-        "Violation[rule=$rule, lineNumber=$lineNumber, sourceLine=$sourceLine, description=$description]"
+        "Violation[rule=$rule, lineNumber=$lineNumber, sourceLine=$sourceLine, message=$message]"
     }
 }

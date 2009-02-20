@@ -53,7 +53,7 @@ class RequiredRegexRuleTest extends AbstractRuleTest {
             class MyClass {
             }
         '''
-        assertSingleViolation(SOURCE) { v -> containsAll(v.description, ['regular expression', REGEX]) }
+        assertSingleViolation(SOURCE) { v -> containsAll(v.message, ['regular expression', REGEX]) }
     }
 
     protected Rule createRule() {
