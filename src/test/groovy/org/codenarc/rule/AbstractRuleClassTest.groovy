@@ -123,6 +123,25 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_ViolationMessageIsNotSet() {
+        def violations = applyRuleTo(SOURCE)
+        assert violations[0].message == FILENAME
+    }
+
+    void testApplyTo_ViolationMessageIsSetToEmpty() {
+        rule.violationMessage = ''
+        def violations = applyRuleTo(SOURCE)
+        assert violations[0].message == FILENAME
+    }
+
+    void testApplyTo_ViolationMessageIsSet() {
+        rule.violationMessage = 'abc'
+        rule.numberOfViolations = 2
+        def violations = applyRuleTo(SOURCE)
+        assert violations[0].message == 'abc'
+        assert violations[1].message == 'abc'
+    }
+
     protected Rule createRule() {
         return new TestPathRule(name:NAME, priority:PRIORITY)
     }

@@ -61,9 +61,9 @@ abstract class AbstractRuleTest extends AbstractTest {
      * @param source - the full source code to which the rule is applied, as a String
      * @param lineNumber - the expected line number in the resulting violation; defaults to null
      * @param sourceLineText - the text expected within the sourceLine of the resulting violation; defaults to null
-     * @param messageText - the text expected within the message of the resulting violation; defaults to null
+     * @param messageText - the text expected within the message of the resulting violation; May be a String or List of Strings; Defaults to null;
      */
-    protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, String messageText=null) {
+    protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, messageText=null) {
         def violations = applyRuleTo(source)
         assert violations.size() == 1
         assertViolation(violations[0], lineNumber, sourceLineText, messageText)
@@ -97,13 +97,13 @@ abstract class AbstractRuleTest extends AbstractTest {
      * @param violation - the Violation
      * @param lineNumber - the expected line number in the resulting violation
      * @param sourceLineText - the text expected within the sourceLine of the resulting violation; may be null
-     * @param messageText - the text expected within the message of the resulting violation
+     * @param messageText - the text expected within the message of the resulting violation; May be a String or List of Strings; Defaults to null;
      */
     protected void assertViolation(
                             Violation violation,
                             Integer lineNumber,
                             String sourceLineText,
-                            String messageText=null) {
+                            messageText=null) {
         assert violation.rule == rule
         assert violation.lineNumber == lineNumber
         if (sourceLineText) {
@@ -111,7 +111,12 @@ abstract class AbstractRuleTest extends AbstractTest {
         }
         if (messageText) {
             assert violation.message, "The violation message was null"
-            assert violation.message.contains(messageText), "messageText=[$messageText]"
+            if (messageText instanceof Collection) {
+                assertContainsAll(violation.message, messageText)
+            }
+            else {
+                assert violation.message.contains(messageText), "messageText=[$messageText]"
+            }
         }
     }
 

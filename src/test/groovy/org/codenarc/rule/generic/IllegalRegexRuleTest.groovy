@@ -44,7 +44,7 @@ class IllegalRegexRuleTest extends AbstractRuleTest {
             class MyClass {
             }
         '''
-        assertSingleViolation(SOURCE) { v -> containsAll(v.message, ['regular expression', REGEX]) }
+        assertSingleViolation(SOURCE, null, null, ['regular expression', REGEX])
     }
 
     void testRegexIsNotPresent() {
@@ -54,6 +54,16 @@ class IllegalRegexRuleTest extends AbstractRuleTest {
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    void testOverrideViolationMessage() {
+        final SOURCE = '''
+            /** @author Joe */
+            class MyClass {
+            }
+        '''
+        rule.violationMessage = 'abc123'
+        assertSingleViolation(SOURCE, null, null, 'abc123')
     }
 
     protected Rule createRule() {

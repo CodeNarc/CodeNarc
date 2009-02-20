@@ -20,8 +20,8 @@ import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
- * Test-specific Rule implementation that always returns a single violation whose message is
- * equal to the source file path.
+ * Test-specific Rule implementation that always returns one or more violation whose messages are
+ * equal to the source file path. Set <code>numberOfViolations</code> to generate more than one violation.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -29,6 +29,7 @@ import org.codenarc.source.SourceCode
 class TestPathRule extends AbstractRule {
     String name = 'TestPath'
     int priority = 1
+    int numberOfViolations = 1
 
     /**
      * Always add a single violation whose message is equal to the source file path
@@ -36,7 +37,7 @@ class TestPathRule extends AbstractRule {
      */
     void applyTo(SourceCode sourceCode, List violations) {
         def message = sourceCode.path?.replaceAll('\\\\', '/')
-        violations << new Violation(rule:this, message:message)
+        numberOfViolations.times { violations << new Violation(rule:this, message:message) }
     }
 
 }

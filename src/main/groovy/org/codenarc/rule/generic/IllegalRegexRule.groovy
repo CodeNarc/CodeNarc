@@ -25,7 +25,7 @@ import org.codenarc.rule.Violation
  * The <code>regex</code> property specifies the regular expression to check for. If null or empty, do nothing.
  * <p/>
  * A RuleSet can contain any number of instances of this rule, but each should be configured
- * with a unique rule name, regex and (optionally) customized priority.
+ * with a unique rule name, regex, violationMessage and (optionally) customized priority.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
