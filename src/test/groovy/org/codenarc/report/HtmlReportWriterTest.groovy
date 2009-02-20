@@ -39,7 +39,7 @@ class HtmlReportWriterTest extends AbstractTest {
 
     static VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:20, sourceLine:'if (file) {')
     static VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:33, message:'bad stuff')
-    static VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:'throw new Exception()')
+    static VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:'throw new Exception()', message: 'Other info')
     static OUTPUT_DIR = "."
     static REPORT_FILENAME = "HtmlReport.html"
     static REPORT_CONTENTS = ['html', '/src/main', 'MyAction.groovy', 'MyAction2.groovy', 'MyActionTest.groovy']

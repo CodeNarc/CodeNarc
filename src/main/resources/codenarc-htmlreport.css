@@ -39,10 +39,19 @@
 		.ruleName {
 		    font-weight: bold;
 		}
+        .violationInfo {
+            margin-bottom: 2px;
+            margin-top: 2px;
+        }
+        .violationInfoPrefix {
+            font-size: 55%;
+            width: 30px;
+            color: darkgray;
+        }
 		.sourceCode {
 		    font-family: Arial, sans-serif;
-		    font-size: 80%;
-            color: teal;
+		    font-size: 85%;
+            color: mediumblue;
 		}
 		.moreInfo {
 		    font-style: italic;

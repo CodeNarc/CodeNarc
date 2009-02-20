@@ -219,7 +219,7 @@ class HtmlReportWriter implements ReportWriter {
                     th('Rule Name')
                     th('Priority')
                     th('Line #')
-                    th('Source Line or [More Info]')
+                    th('Source Line / Message')
                 }
 
                 def violations = results.getViolationsWithPriority(1) +
@@ -228,7 +228,7 @@ class HtmlReportWriter implements ReportWriter {
 
                 violations.each { violation ->
                     def priorityCssClass = "priority${violation.rule.priority}"
-                    def moreInfo = violation.message ? "[${violation.message}]" : ""
+                    def moreInfo = violation.message ? violation.message : ""
                     tr {
                         td(class:priorityCssClass) {
                             a(violation.rule.name, href:"#${violation.rule.name}")
@@ -236,8 +236,18 @@ class HtmlReportWriter implements ReportWriter {
                         td(violation.rule.priority, class:priorityCssClass)
                         td(violation.lineNumber, class:'number')
                         td {
-                            span(violation.sourceLine, class:'sourceCode')
-                            span(moreInfo, class:'moreInfo')
+                            if (violation.sourceLine) {
+                                p(class:'violationInfo') {
+                                    span('[SRC]', class:'violationInfoPrefix')
+                                    span(violation.sourceLine, class:'sourceCode')
+                                }
+                            }
+                            if (moreInfo) {
+                                p(class:'violationInfo') {
+                                    span('[MSG]', class:'violationInfoPrefix')
+                                    span(moreInfo, class:'moreInfo')
+                                }
+                            }
                         }
 
                     }
