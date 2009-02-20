@@ -22,8 +22,7 @@ import org.codenarc.rule.Violation
 /**
  * Checks for a specified illegal regular expression within the source code.
  * <p/>
- * The <code>regex</code> property specifies the regular expression to check for. It is required and 
- * cannot be null or empty.
+ * The <code>regex</code> property specifies the regular expression to check for. If null or empty, do nothing.
  * <p/>
  * A RuleSet can contain any number of instances of this rule, but each should be configured
  * with a unique rule name, regex and (optionally) customized priority.
@@ -37,8 +36,7 @@ class IllegalRegexRule extends AbstractRule {
     String regex
 
     void applyTo(SourceCode sourceCode, List violations) {
-        assert regex
-        if ((sourceCode.getText() =~ regex)) {
+        if (regex && (sourceCode.getText() =~ regex)) {
             violations.add(new Violation(rule:this, description:"Match found for illegal regular expression \"$regex\""))
         }
     }

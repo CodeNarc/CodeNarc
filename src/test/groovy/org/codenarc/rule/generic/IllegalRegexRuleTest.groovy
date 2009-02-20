@@ -27,15 +27,15 @@ import org.codenarc.rule.Rule
 class IllegalRegexRuleTest extends AbstractRuleTest {
     static final REGEX = /\@author Joe/
 
-
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'IllegalRegex'
     }
 
     void testRegexIsNull() {
+        final SOURCE = ' class MyClass { }'
         rule.regex = null
-        shouldFailWithMessageContaining('regex') { applyRuleTo('println 1') }
+        assertNoViolations(SOURCE)
     }
 
     void testRegexIsPresent() {
