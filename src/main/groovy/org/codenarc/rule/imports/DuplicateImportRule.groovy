@@ -31,7 +31,7 @@ class DuplicateImportRule extends AbstractRule {
     void applyTo(SourceCode sourceCode, List violations) {
         def importedClassNames = new HashSet()
 
-        sourceCode.ast.imports.each { importNode ->
+        sourceCode.ast?.imports.each { importNode ->
             if (importedClassNames.contains(importNode.className)) {
                 violations.add(createViolationForImport(importNode))
             }

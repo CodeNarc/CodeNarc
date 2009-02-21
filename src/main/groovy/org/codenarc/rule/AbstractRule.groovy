@@ -138,7 +138,7 @@ abstract class AbstractRule implements Rule {
      * If the violationMessage property of this rule has been set, then use it to set the
      * message within each violation, overriding the original message(s), if any.
      */
-    private def overrideViolationMessageIfNecessary(List violations) {
+    private void overrideViolationMessageIfNecessary(List violations) {
         if (violationMessage) {
             violations.each {violation -> violation.message = violationMessage }
         }

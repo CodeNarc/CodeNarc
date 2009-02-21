@@ -29,7 +29,7 @@ class ImportFromSamePackageRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast.imports && sourceCode.ast.packageName) {
+        if (sourceCode.ast?.imports && sourceCode.ast.packageName) {
             def rawPackage = sourceCode.ast.packageName
             def filePackageName = rawPackage.endsWith('.') ? rawPackage[0..-2] : rawPackage
             sourceCode.ast.imports.each { importNode ->

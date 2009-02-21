@@ -29,7 +29,7 @@ class UnusedImportRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast.imports) {
+        if (sourceCode.ast?.imports) {
             sourceCode.ast.imports.each { importNode ->
                 if (!findReference(sourceCode, importNode.alias)) {
                     violations.add(createViolationForImport(importNode))

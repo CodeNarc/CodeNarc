@@ -31,7 +31,7 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast.imports) {
+        if (sourceCode.ast?.imports) {
             sourceCode.ast.imports.each { importNode ->
                 def importClassName = importNode.className
                 def importPackageName = packageNameForImport(importNode)

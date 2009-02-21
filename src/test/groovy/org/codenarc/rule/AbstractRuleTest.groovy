@@ -31,6 +31,22 @@ abstract class AbstractRuleTest extends AbstractTest {
     protected String sourceCodeName
     protected String sourceCodePath
 
+    //--------------------------------------------------------------------------
+    // Common Tests - Run for all concrete subclasses
+    //--------------------------------------------------------------------------
+
+    void testApplyTo_CompilerError() {
+        final SOURCE = '''
+            @will not compile@ &^%$#
+        '''
+        // Verify no errors/exceptions
+        applyRuleTo(SOURCE)
+    }
+
+    //--------------------------------------------------------------------------
+    // Abstract Method Declarations - Must be implemented by concrete subclasses
+    //--------------------------------------------------------------------------
+
     /**
      * Create and return a new instance of the Rule class to be tested.
      * @return a new Rule instance
