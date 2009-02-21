@@ -15,7 +15,7 @@ CodeNarc
   You can run <<CodeNarc>> using the supplied {{{codenarc-ant-task.html}Ant Task}}
   or using a {{{codenarc-groovy-script.html}Groovy script}}.
 
-  See {{{codenarc-rules.html}CodeNarc - Rules}} for a list of the rulesets and rules provided
+  See the site navigation menu for a list of the rulesets and rules provided
   out of the box by <<CodeNarc>>. Or you can {{{codenarc-custom-ruleset.html}create your own custom ruleset}}
 
   Take a look at a {{{SampleCodeNarcReport.html}Sample CodeNarc Report}}.

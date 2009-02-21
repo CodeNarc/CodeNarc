@@ -6,7 +6,7 @@ CodeNarc - Creating a RuleSet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   You can use the predefined <RuleSets> distributed with <<CodeNarc>> or you can create your own
-  custom <RuleSet>. See {{{codenarc-rules.html}CodeNarc - Rules}} for a list of the <RuleSets> and
+  custom <RuleSet>. See the site navigation menu for a list of the <RuleSets> and
   rules provided out of the box by <<CodeNarc>>.
 
 

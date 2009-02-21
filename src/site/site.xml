@@ -39,9 +39,18 @@
         </menu>
 
         <menu name="Using">
-            <item name="Rules and RuleSets" href="/codenarc-rules.html"/>
             <item name="Creating a RuleSet" href="/codenarc-custom-ruleset.html"/>
             <item name="Custom Rule Descriptions" href="/codenarc-custom-rule-descriptions.html"/>
+        </menu>
+
+        <menu name="Rules">
+            <item name="Basic Rules" href="/codenarc-rules-basic.html"/>
+            <item name="Braces Rules" href="/codenarc-rules-braces.html"/>
+            <item name="Exceptions Rules" href="/codenarc-rules-exceptions.html"/>
+            <item name="Generic Rules" href="/codenarc-rules-generic.html"/>
+            <item name="Imports Rules" href="/codenarc-rules-imports.html"/>
+            <item name="Naming Rules" href="/codenarc-rules-naming.html"/>
+            <item name="Size Rules" href="/codenarc-rules-size.html"/>
         </menu>
 
         ${reports}

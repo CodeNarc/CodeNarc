@@ -1,0 +1,107 @@
+		--------------------------------------------------
+					  CodeNarc - Naming Rules
+		--------------------------------------------------
+
+Naming Rules  ("<rulesets/naming.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* ClassName Rule
+~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of a class mathes a regular expression. By default it checks that the
+  class name starts with an uppercase letter and is followed by zero or more word characters
+  (letters, numbers or underscores).
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the regular expression used to validate the class    | /[A-Z]\w*/             |
+|                     | name. It is required and cannot be null or empty.              |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
+* FieldName Rule
+~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of each field matches a regular expression. By default it checks that
+  non-<final> field names start with a lowercase letter and contains only letters or numbers.
+  By default, <final> field names start with an uppercase letter and contain only uppercase
+  letters, numbers and underscores. Implicit method names are ignored (i.e., 'main' and 'run' methods
+  automatically created for Groovy scripts).
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the default regular expression used to validate the  | /[a-z][a-zA-Z0-9]*/    |
+|                     | field name. It is required and cannot be null or empty.        |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| finalRegex          | Specifies the regular expression used to validate <<<final>>>  | /[A-Z][A-Z0-9_]*/      |
+|                     | field names. It is optional.        |                          |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| staticRegex         | Specifies the regular expression used to validate <<<static>>> | <<<null>>>             |
+|                     | field names. It is optional. If not set, then <<<static>>>     |                        |
+|                     | fields that are non-<<<final>>> are validated using <<regex>>. |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| staticFinalRegex    | Specifies the regular expression used to validate              | /[A-Z][A-Z0-9_]*/      |
+|                     | <<<static final>>> field names. It is optional. If not set,    |                        |
+|                     | then <<<static final>>> fields are validated using             |                        |
+|                     | <<finalRegex>>, <<staticRegex>> or <<regex>>.                  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+  The order of precedence for the regular expression properties is: <<staticFinalRegex>>,
+  <<finalRegex>>, <<staticRegex>> and finally <<regex>>. In other words, the first
+  regex in that list matching the modifiers for the field is the one that is applied for the field name validation.
+
+
+* PackageName Rule
+~~~~~~~~~~~~~~~~~~~
+
+  Verifies that the package name of a class matches a regular expression. By default it checks that the
+  package name consists of only lowercase letters, separated by periods.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the regular expression used to validate the package  | /[a-z]+(\.[a-z]+)*/    |
+|                     | name. It is required and cannot be null or empty.              |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| packageNameRequired | Indicates whether a package name declaration is required for   | <<<false>>>            |
+|                     | all classes.                                                   |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
+* MethodName Rule
+~~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of each method matches a regular expression. By default it checks that the
+  method name starts with a lowercase letter. Implicit method names are ignored (i.e., 'main' and 'run'
+  methods automatically created for Groovy scripts).
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the regular expression used to validate the method   | /[a-z]\w*/             |
+|                     | name. It is required and cannot be null or empty.              |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
+* VariableName Rule
+~~~~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of each variable matches a regular expression. By default it checks that
+  non-<<<final>>> variable names start with a lowercase letter and contains only letters or numbers.
+  By default, <<<final>>> variable names start with an uppercase letter and contain only uppercase
+  letters, numbers and underscores.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the default regular expression used to validate the  | /[a-z][a-zA-Z0-9]*/    |
+|                     | variable name. It is required and cannot be null or empty.     |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| finalRegex          | Specifies the regular expression used to validate <<<final>>>  | /[A-Z][A-Z0-9_]*/      |
+|                     | variable names. It is optional. If not set, then <<regex>> is  |                        |
+|                     | used to validate <<<final>>> variable names.                   |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+

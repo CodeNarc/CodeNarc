@@ -1,0 +1,77 @@
+		--------------------------------------------------
+					  CodeNarc - Basic Rules
+		--------------------------------------------------
+
+Basic Rules  ("<rulesets/basic.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* BooleanInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for direct call to a <<<Boolean>>> constructor. Use <<<Boolean.valueOf()>>> or the <<<Boolean.TRUE>>>
+  and <<<Boolean.FALSE>>> constants instead of calling the <<<Boolean()>>> constructor directly.
+
+
+* EmptyCatchBlock Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <catch> blocks. In most cases, exceptions should not be caught and ignored (swallowed).
+
+
+* EmptyElseBlock Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <else> blocks. Empty <else> blocks are confusing and serve no purpose.
+
+
+* EmptyFinallyBlock Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <finally> blocks. Empty <finally> blocks are confusing and serve no purpose.
+
+
+* EmptyForStatement Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <for> blocks. Empty <for> statements are confusing and serve no purpose.
+
+
+* EmptyIfStatement Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <if> statements. Empty <if> statements are confusing and serve no purpose.
+
+
+* EmptyTryBlock Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <try> blocks. Empty <try> blocks are confusing and serve no purpose.
+
+
+* EmptyWhileStatement Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <while> statements. Empty <while> statements are confusing and serve no purpose.
+
+
+* ReturnFromFinallyBlock Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for a return from within a <finally> block. Returning from a <finally> block is confusing and 
+  can hide the original exception.
+
+
+* StringInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for direct call to the <<<String>>> constructor that accepts a <<<String>>> literal.
+  In almost all cases, this is unnecessary. Use a <<<String>>> literal (e.g., "...") instead of calling the
+  corresponding <<<String>>> constructor (<<<new String("..")>>>) directly.
+
+
+* ThrowExceptionFromFinallyBlock
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for throwing an exception from within a <finally> block. Throwing an exception from a
+ <finally> block is confusing and can hide the original exception.
+
