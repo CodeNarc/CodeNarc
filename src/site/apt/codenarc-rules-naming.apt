@@ -57,12 +57,12 @@ Naming Rules  ("<rulesets/naming.xml>")
 ~~~~~~~~~~~~~~~~~~~
 
   Verifies that the package name of a class matches a regular expression. By default it checks that the
-  package name consists of only lowercase letters, separated by periods.
+  package name consists of only lowercase letters and numbers, separated by periods.
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the regular expression used to validate the package  | /[a-z]+(\.[a-z]+)*/    |
+| regex               | Specifies the regular expression used to validate the package  | /[a-z]+(\.[a-z0-9]+)*/ |
 |                     | name. It is required and cannot be null or empty.              |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 | packageNameRequired | Indicates whether a package name declaration is required for   | <<<false>>>            |

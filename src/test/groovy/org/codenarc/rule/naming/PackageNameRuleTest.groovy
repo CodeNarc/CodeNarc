@@ -44,9 +44,17 @@ class PackageNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, null, null, 'MyPackage.base')
     }
 
-    void testApplyTo_DoesMatchDefaultRegex() {
+    void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = """
             package mypackage.base.domain
+            class _MyClass { }
+        """
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_MatchesDefaultRegex_Numbers() {
+        final SOURCE = """
+            package mypackage.base.i18n
             class _MyClass { }
         """
         assertNoViolations(SOURCE)
@@ -68,7 +76,7 @@ class PackageNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, null, null, 'mypackage.base.domain')
     }
 
-    void testApplyTo_DoesMatchCustomRegex() {
+    void testApplyTo_MatchesCustomRegex() {
         final SOURCE = """
             package zpackage.base.domain
             class _MyClass { }
@@ -86,7 +94,7 @@ class PackageNameRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_PackageNameRequired_DoesMatchDefaultRegex() {
+    void testApplyTo_PackageNameRequired_MatchesDefaultRegex() {
         final SOURCE = """
             package mypackage.base.domain
             class _MyClass { }
