@@ -75,8 +75,8 @@ class HtmlReportWriter implements ReportWriter {
         return {
             def cssInputStream = getClass().getClassLoader().getResourceAsStream(CSS_FILE)
             assert cssInputStream, "CSS File [$CSS_FILE] not found"
-            def CSS = cssInputStream.text
-            unescaped << CSS
+            def css = cssInputStream.text
+            unescaped << css
         }
     }
 

@@ -16,7 +16,6 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
-import org.codenarc.rule.imports.UnusedImportRule
 
 /**
  * Tests for UnusedImportRule

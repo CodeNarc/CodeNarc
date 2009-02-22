@@ -26,9 +26,9 @@ import org.codenarc.rule.StubRule
  * @version $Revision$ - $Date$
  */
 class FilteredRuleSetTest extends AbstractTest {
-    static RULE1 = new StubRule(name:'Rule1')
-    static RULE2 = new StubRule(name:'Rule2')
-    static RULE3 = new StubRule(name:'Rule3')
+    static final RULE1 = new StubRule(name:'Rule1')
+    static final RULE2 = new StubRule(name:'Rule2')
+    static final RULE3 = new StubRule(name:'Rule3')
     private innerRuleSet
     private filteredRuleSet
 

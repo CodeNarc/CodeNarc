@@ -25,7 +25,7 @@ import org.codenarc.test.AbstractTest
  */
 class SourceFileTest extends AbstractTest {
 
-    static FILE = 'src/test/resources/SampleFile.groovy'
+    static final FILE = 'src/test/resources/SampleFile.groovy'
     private sourceFile
     private file
 

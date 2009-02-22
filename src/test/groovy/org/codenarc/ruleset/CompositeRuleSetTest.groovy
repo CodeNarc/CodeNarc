@@ -25,8 +25,8 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class CompositeRuleSetTest extends AbstractTest {
-    static RULE1 = [:] as Rule
-    static RULE2 = [:] as Rule
+    static final RULE1 = [:] as Rule
+    static final RULE2 = [:] as Rule
     private compositeRuleSet
 
     void testDefaultsToEmpyRuleSet() {

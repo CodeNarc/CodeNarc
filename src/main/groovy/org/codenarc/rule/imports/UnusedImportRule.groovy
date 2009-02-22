@@ -39,7 +39,7 @@ class UnusedImportRule extends AbstractRule {
     }
 
     private findReference(SourceCode sourceCode, String alias) {
-        def IMPORT_PATTERN = /import\s+.*/ + alias
+        final IMPORT_PATTERN = /import\s+.*/ + alias
         return sourceCode.lines.find { line ->
             line.contains(alias) && !(line =~ IMPORT_PATTERN)
         }

@@ -15,8 +15,6 @@
  */
 package org.codenarc.rule
 
-import org.codenarc.rule.AbstractRule
-import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**

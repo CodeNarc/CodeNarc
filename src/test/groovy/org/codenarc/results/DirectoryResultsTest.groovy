@@ -1,11 +1,3 @@
-package org.codenarc.results
-
-import org.codenarc.results.DirectoryResults
-import org.codenarc.results.FileResults
-import org.codenarc.rule.StubRule
-import org.codenarc.rule.Violation
-import org.codenarc.test.AbstractTest
-
 /*
 * Copyright 2008 the original author or authors.
 *
@@ -21,6 +13,11 @@ import org.codenarc.test.AbstractTest
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+package org.codenarc.results
+
+import org.codenarc.rule.StubRule
+import org.codenarc.rule.Violation
+import org.codenarc.test.AbstractTest
 
 /**
  * Tests for DirectoryResults 

@@ -48,13 +48,13 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNoRules() {
-        def XML = "<ruleset $NAMESPACE></ruleset>"
+        final XML = "<ruleset $NAMESPACE></ruleset>"
         parseXmlRuleSet(XML)
         assert rules == []
     }
 
     void testOneRule() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'/>
             </ruleset>"""
@@ -63,7 +63,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testTwoRules() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'/>
                 <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>
@@ -73,7 +73,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testTwoRulesWithProperties() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'>
                     <property name='name' value='XXXX'/>
@@ -90,7 +90,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNestedRuleSet() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <description>Sample rule set</description>
                 <ruleset-ref path='rulesets/RuleSet1.xml'/>
@@ -104,7 +104,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testDeeplyNestedRuleSet() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet3.xml'/>
                 <ruleset-ref path='rulesets/NestedRuleSet1.xml'/>
@@ -120,7 +120,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNestedRuleSet_Excludes() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
                     <exclude name='TestPath'/>
@@ -133,7 +133,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNestedRuleSet_IncludesAndExcludes() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet3.xml'>
                     <exclude name='Stub'/>
@@ -151,7 +151,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNestedRuleSet_IncludesExcludesAndConfig() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet3.xml'>
                     <include name='Stub'/>
@@ -172,7 +172,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testRuleClassNotFound() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.DoesNotExist'/>
             </ruleset>"""
@@ -180,7 +180,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNestedRuleSet_RuleSetFileNotFound() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/DoesNotExist.xml'/>
             </ruleset>"""
@@ -188,7 +188,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNestedRuleSet_ConfigRuleDoesNotExist() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
                     <rule-config name='DoesNotExist'>
@@ -200,7 +200,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testNestedRuleSet_ConfigRulePropertyDoesNotExist() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
                     <rule-config name='CatchThrowable'>
@@ -212,7 +212,7 @@ class XmlReaderRuleSetTest extends AbstractTest {
     }
 
     void testRulesListIsImmutable() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'/>
             </ruleset>"""

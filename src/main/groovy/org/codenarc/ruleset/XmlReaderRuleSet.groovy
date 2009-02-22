@@ -32,7 +32,7 @@ import groovy.xml.Namespace
  */
 class XmlReaderRuleSet implements RuleSet {
     static final LOG = Logger.getLogger(XmlReaderRuleSet)
-    static final r = new Namespace('http://codenarc.org/ruleset/1.0')
+    static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
     private List rules = []
 
     /**
@@ -62,24 +62,24 @@ class XmlReaderRuleSet implements RuleSet {
     //--------------------------------------------------------------------------
 
     private void loadRuleSetRefElements(ruleset) {
-        ruleset[r.'ruleset-ref'].each { ruleSetRefNode ->
+        ruleset[NS.'ruleset-ref'].each { ruleSetRefNode ->
             def ruleSetPath = ruleSetRefNode.attribute('path')
             def refRuleSet = new XmlFileRuleSet(ruleSetPath)
             def allRules = refRuleSet.rules
             def filteredRuleSet = new FilteredRuleSet(refRuleSet)
-            ruleSetRefNode[r.'include'].each { includeNode ->
+            ruleSetRefNode[NS.'include'].each { includeNode ->
                 def includeRuleName = includeNode.attribute('name')
                 filteredRuleSet.addInclude(includeRuleName)
             }
-            ruleSetRefNode[r.'exclude'].each { excludeNode ->
+            ruleSetRefNode[NS.'exclude'].each { excludeNode ->
                 def excludeRuleName = excludeNode.attribute('name')
                 filteredRuleSet.addExclude(excludeRuleName)
             }
-            ruleSetRefNode[r.'rule-config'].each { configNode ->
+            ruleSetRefNode[NS.'rule-config'].each { configNode ->
                 def configRuleName = configNode.attribute('name')
                 def rule = allRules.find { it.name == configRuleName }
                 assert rule, "Rule named [$configRuleName] referenced within <rule-config> was not found"
-                configNode[r.property].each { p ->
+                configNode[NS.property].each { p ->
                     def name = p.attribute('name')
                     def value = p.attribute('value')
                     PropertyUtil.setPropertyFromString(rule, name, value)
@@ -90,11 +90,11 @@ class XmlReaderRuleSet implements RuleSet {
     }
 
     private void loadRuleElements(ruleset) {
-        ruleset[r.rule].each { ruleNode ->
+        ruleset[NS.rule].each { ruleNode ->
             def ruleClassName = ruleNode.attribute('class')
             def rule = Class.forName(ruleClassName.toString()).newInstance()
             rules << rule
-            ruleNode[r.property].each { p ->
+            ruleNode[NS.property].each { p ->
                 def name = p.attribute('name')
                 def value = p.attribute('value')
                 PropertyUtil.setPropertyFromString(rule, name, value)

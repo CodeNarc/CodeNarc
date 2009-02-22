@@ -16,7 +16,6 @@
 package org.codenarc.report
 
 import org.codenarc.AnalysisContext
-import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.rule.StubRule
@@ -37,14 +36,14 @@ import org.codenarc.test.AbstractTest
  */
 class HtmlReportWriterTest extends AbstractTest {
 
-    static VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:20, sourceLine:'if (file) {')
-    static VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:33, message:'bad stuff')
-    static VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:'throw new Exception()', message: 'Other info')
-    static OUTPUT_DIR = "."
-    static REPORT_FILENAME = "HtmlReport.html"
-    static REPORT_CONTENTS = ['html', '/src/main', 'MyAction.groovy', 'MyAction2.groovy', 'MyActionTest.groovy']
-    static NEW_REPORT_FILE = 'NewReport.html'
-    static TITLE = 'My Cool Project'
+    static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:20, sourceLine:'if (file) {')
+    static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:33, message:'bad stuff')
+    static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:'throw new Exception()', message: 'Other info')
+    static final OUTPUT_DIR = "."
+    static final REPORT_FILENAME = "HtmlReport.html"
+    static final REPORT_CONTENTS = ['html', '/src/main', 'MyAction.groovy', 'MyAction2.groovy', 'MyActionTest.groovy']
+    static final NEW_REPORT_FILE = 'NewReport.html'
+    static final TITLE = 'My Cool Project'
 
     def reportWriter
     def analysisContext
@@ -82,7 +81,7 @@ class HtmlReportWriterTest extends AbstractTest {
     }
 
     void testWriteOutReport_SetOutputFileAndTitle() {
-        static OUTPUT_FILE = NEW_REPORT_FILE
+        final OUTPUT_FILE = NEW_REPORT_FILE
         reportWriter.outputFile = OUTPUT_FILE
         reportWriter.title = TITLE
         reportWriter.writeOutReport(analysisContext, results)
@@ -141,8 +140,8 @@ class HtmlReportWriterTest extends AbstractTest {
         def dirResultsMain = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
         def dirResultsCode = new DirectoryResults(path:'src/main/code', numberOfFilesInThisDirectory:2)
         def dirResultsTest = new DirectoryResults(path:'src/main/test', numberOfFilesInThisDirectory:3)
-        def dirResultsTest_SubdirNoViolations = new DirectoryResults(path:'src/main/test/noviolations', numberOfFilesInThisDirectory:4)
-        def dirResultsTest_SubdirEmpty = new DirectoryResults(path:'src/main/test/empty')
+        def dirResultsTestSubdirNoViolations = new DirectoryResults(path:'src/main/test/noviolations', numberOfFilesInThisDirectory:4)
+        def dirResultsTestSubdirEmpty = new DirectoryResults(path:'src/main/test/empty')
         def fileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResults2 = new FileResults('src/main/MyAction2.groovy', [VIOLATION3])
         def fileResults3 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION1, VIOLATION2])
@@ -151,8 +150,8 @@ class HtmlReportWriterTest extends AbstractTest {
         dirResultsMain.addChild(dirResultsTest)
         dirResultsCode.addChild(fileResults2)
         dirResultsTest.addChild(fileResults3)
-        dirResultsTest.addChild(dirResultsTest_SubdirNoViolations)
-        dirResultsTest.addChild(dirResultsTest_SubdirEmpty)
+        dirResultsTest.addChild(dirResultsTestSubdirNoViolations)
+        dirResultsTest.addChild(dirResultsTestSubdirEmpty)
         results = new DirectoryResults()
         results.addChild(dirResultsMain)
 

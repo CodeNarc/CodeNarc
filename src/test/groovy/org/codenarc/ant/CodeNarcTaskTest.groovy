@@ -18,8 +18,6 @@ package org.codenarc.ant
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
-import org.codenarc.ant.CodeNarcTask
-import org.codenarc.ant.Report
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.test.AbstractTest
 

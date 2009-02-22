@@ -16,7 +16,6 @@
 package org.codenarc.util
 
 import org.codenarc.test.AbstractTest
-import org.codenarc.util.PropertyUtil
 
 /**
  * Tests for PropertyUtil

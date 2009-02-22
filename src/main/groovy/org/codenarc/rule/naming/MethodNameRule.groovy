@@ -15,10 +15,8 @@
  */
 package org.codenarc.rule.naming
 
-import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.Violation
 import org.codehaus.groovy.ast.MethodNode
 
 /**

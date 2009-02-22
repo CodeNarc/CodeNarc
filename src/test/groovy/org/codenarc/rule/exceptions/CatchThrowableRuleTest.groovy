@@ -17,7 +17,6 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
-import org.codenarc.rule.exceptions.CatchThrowableRule
 
 /**
  * Tests for CatchThrowableRule

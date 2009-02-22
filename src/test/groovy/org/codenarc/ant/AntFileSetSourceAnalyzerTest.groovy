@@ -17,7 +17,6 @@ package org.codenarc.ant
 
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
-import org.codenarc.ant.AntFileSetSourceAnalyzer
 import org.codenarc.results.Results
 import org.codenarc.rule.TestCountRule
 import org.codenarc.rule.TestPathRule

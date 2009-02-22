@@ -17,7 +17,6 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
-import org.codenarc.rule.naming.VariableNameRule
 
 /**
  * Tests for VariableNameRule

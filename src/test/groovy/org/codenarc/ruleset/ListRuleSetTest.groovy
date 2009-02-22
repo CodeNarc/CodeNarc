@@ -26,7 +26,7 @@ import org.codenarc.test.AbstractTest
  */
 class ListRuleSetTest extends AbstractTest {
 
-    static RULE = [:] as Rule
+    static final RULE = [:] as Rule
 
     void testWithRules() {
         def ruleSet = new ListRuleSet([RULE])

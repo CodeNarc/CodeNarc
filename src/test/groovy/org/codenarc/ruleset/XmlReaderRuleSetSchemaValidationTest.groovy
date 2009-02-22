@@ -25,12 +25,12 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
         xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd" '''
 
     void testIllegalTopLevelElement() {
-        def XML = '<ruleset2></ruleset2>'
+        final XML = '<ruleset2></ruleset2>'
         assertSchemaValidationError(XML, 'ruleset2')
     }
 
     void testNoNamespaceDeclaration() {
-        def XML = """
+        final XML = """
             <ruleset>
                 <rule class='org.codenarc.rule.StubRule'/>
             </ruleset>"""
@@ -38,7 +38,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleSetChildElement() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'/>
                 <other stuff='12345'/>
@@ -47,7 +47,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleChildElement() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'>
                     <property name='name' value='YYYY'/>
@@ -58,7 +58,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleAttribute() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule' other='12345'/>
             </ruleset>"""
@@ -66,7 +66,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalPropertyAttribute() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'>
                     <property other='name' value='YYYY'/>
@@ -76,7 +76,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleSetRefChildElement() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet1.xml'>
                     <other name='12345'/>
@@ -86,7 +86,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleSetRefAttribute() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet1.xml' other='12345'/>
             </ruleset>"""
@@ -94,7 +94,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalIncludeAttribute() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet1.xml'>
                     <include other='12345'/>
@@ -104,7 +104,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalExcludeAttribute() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet1.xml'>
                     <exclude name='123' other='12345'/>
@@ -114,7 +114,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleConfigAttribute() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet1.xml'>
                     <rule-config name='123' other='12345'/>
@@ -124,7 +124,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleConfigChildElement() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet1.xml'>
                     <rule-config name='123'>
@@ -136,7 +136,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
     }
 
     void testIllegalRuleConfigPropertyAttribute() {
-        def XML = """
+        final XML = """
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/RuleSet1.xml'>
                     <rule-config name='123'>

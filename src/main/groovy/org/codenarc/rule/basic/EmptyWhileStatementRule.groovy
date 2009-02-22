@@ -18,8 +18,6 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.EmptyStatement
-
 
 /**
  * Rule that checks for empty while statements
