@@ -36,8 +36,13 @@ class IllegalRegexRule extends AbstractRule {
     String regex
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (regex && (sourceCode.getText() =~ regex)) {
-            violations.add(new Violation(rule:this, message:"Match found for illegal regular expression \"$regex\""))
+        if (regex) {
+            def matcher = sourceCode.getText() =~ regex
+            if (matcher.find()) {
+                println "matcher=$matcher  group=${matcher.group()}"
+                violations.add(new Violation(rule:this, sourceLine:matcher.group(), 
+                        message:"Match found for illegal regular expression \"$regex\""))
+            }
         }
     }
 

@@ -123,6 +123,7 @@ abstract class AbstractRuleTest extends AbstractTest {
         assert violation.rule == rule
         assert violation.lineNumber == lineNumber
         if (sourceLineText) {
+            assert violation.sourceLine 
             assert violation.sourceLine.contains(sourceLineText), "sourceLineText=[$sourceLineText]"
         }
         if (messageText) {
