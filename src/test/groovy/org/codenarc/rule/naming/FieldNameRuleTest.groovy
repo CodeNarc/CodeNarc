@@ -70,7 +70,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
     }
 
-    void testApplyTo_DoesMatchDefaultRegex() {
+    void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = '''
             class MyClass {
                 int count
@@ -98,7 +98,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'public int count')
     }
 
-    void testApplyTo_DoesMatchCustomRegex() {
+    void testApplyTo_MatchesCustomRegex() {
         final SOURCE = '''
             class MyClass {
               public zMethod() { println 'bad' }
@@ -113,7 +113,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_DoesMatchCustomRegex_NoClassDefined() {
+    void testApplyTo_MatchesCustomRegex_NoClassDefined() {
         final SOURCE = ' int zCount '
         rule.regex = /z.*/
         assertNoViolations(SOURCE)
@@ -211,6 +211,14 @@ class FieldNameRuleTest extends AbstractRuleTest {
         rule.finalRegex = null
         rule.staticRegex = null
         rule.regex = /C.*/
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_Script() {
+        final SOURCE = '''
+            BigDecimal deposit_amount       // not considered a field
+            int COUNT                       // not considered a field
+        '''
         assertNoViolations(SOURCE)
     }
 

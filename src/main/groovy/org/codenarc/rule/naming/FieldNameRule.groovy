@@ -74,7 +74,7 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
             re = rule.staticFinalRegex ?: re
         }
 
-        if (!(fieldNode.name ==~ re)) {
+        if (fieldNode.lineNumber >= 0 &&  !(fieldNode.name ==~ re)) {
             addViolation(fieldNode)
         }
         super.visitField(fieldNode)
