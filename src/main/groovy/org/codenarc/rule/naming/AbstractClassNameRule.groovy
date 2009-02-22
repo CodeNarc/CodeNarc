@@ -23,7 +23,7 @@ import org.codenarc.rule.Violation
 /**
  * Rule that verifies that the name of an abstract class mathes a regular expression. By default it 
  * checks that the class name starts with the 'Abstract' prefix, followed by an uppercase letter and
- * then zero or more word characters (letters, numbers or underscores).
+ * then zero or more word characters (letters, numbers or underscores). This rule ignores interfaces.
  * <p/>
  * The <code>regex</code> property specifies the regular expression to check the abstract class name against.
  * It is required and cannot be null or empty. It defaults to 'Abstract[A-Z]\w*'.
@@ -42,7 +42,8 @@ class AbstractClassNameAstVisitor extends AbstractAstVisitor  {
     void visitClass(ClassNode classNode) {
         assert rule.regex
         def isAbstract = classNode.modifiers & classNode.ACC_ABSTRACT
-        if (isAbstract && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
+        def isInterface = classNode.modifiers & classNode.ACC_INTERFACE
+        if (isAbstract && !isInterface && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
             addViolation(classNode)
         }
         super.visitClass(classNode)

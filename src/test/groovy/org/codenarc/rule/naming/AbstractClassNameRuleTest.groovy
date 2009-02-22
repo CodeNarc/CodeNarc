@@ -71,6 +71,11 @@ class AbstractClassNameRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_Interface() {
+        final SOURCE = " interface InterfaceClass { } "
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NoClassDefinition() {
         final SOURCE = '''
             if (isReady) {
