@@ -5,6 +5,21 @@
 Naming Rules  ("<rulesets/naming.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* AbstractClassName Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of an abstract class mathes a regular expression. By default it checks that the
+  class name starts with the 'Abstract' prefix, followed by an uppercase letter and then zero or more word
+  characters (letters, numbers or underscores).
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the regular expression used to validate the abstract | /Abstract[A-Z]\w*/     |
+|                     | class name. It is required and cannot be null or empty.        |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
 * ClassName Rule
 ~~~~~~~~~~~~~~~~~
 
@@ -53,6 +68,21 @@ Naming Rules  ("<rulesets/naming.xml>")
   regex in that list matching the modifiers for the field is the one that is applied for the field name validation.
 
 
+* MethodName Rule
+~~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of each method matches a regular expression. By default it checks that the
+  method name starts with a lowercase letter. Implicit method names are ignored (i.e., 'main' and 'run'
+  methods automatically created for Groovy scripts).
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the regular expression used to validate the method   | /[a-z]\w*/             |
+|                     | name. It is required and cannot be null or empty.              |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
 * PackageName Rule
 ~~~~~~~~~~~~~~~~~~~
 
@@ -67,21 +97,6 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | packageNameRequired | Indicates whether a package name declaration is required for   | <<<false>>>            |
 |                     | all classes.                                                   |                        |
-*---------------------+----------------------------------------------------------------+------------------------+
-
-
-* MethodName Rule
-~~~~~~~~~~~~~~~~~~
-
-  Verifies that the name of each method matches a regular expression. By default it checks that the
-  method name starts with a lowercase letter. Implicit method names are ignored (i.e., 'main' and 'run'
-  methods automatically created for Groovy scripts).
-
-*---------------------+----------------------------------------------------------------+------------------------+
-| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
-*---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the regular expression used to validate the method   | /[a-z]\w*/             |
-|                     | name. It is required and cannot be null or empty.              |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
 

@@ -8,6 +8,7 @@
         These rules validate names within the source code.
     </description>
 
+    <rule class='org.codenarc.rule.naming.AbstractClassNameRule'/>
     <rule class='org.codenarc.rule.naming.ClassNameRule'/>
     <rule class='org.codenarc.rule.naming.FieldNameRule'/>
     <rule class='org.codenarc.rule.naming.MethodNameRule'/>
