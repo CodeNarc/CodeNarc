@@ -41,12 +41,12 @@ class ClassNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 1, '_MyClass')
     }
 
-    void testApplyTo_DoesMatchDefaultRegex() {
+    void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = " class MyClass { } "
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_WithPackage_DoesMatchDefaultRegex() {
+    void testApplyTo_WithPackage_MatchesDefaultRegex() {
         final SOURCE = '''
             package org.codenarc.sample
             class MyClass { }
@@ -60,18 +60,19 @@ class ClassNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 1, 'MyClass')
     }
 
-    void testApplyTo_DoesMatchCustomRegex() {
+    void testApplyTo_MatchesCustomRegex() {
         rule.regex = /z.*/
         final SOURCE = " class zClass { } "
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_NoClassDefinition() {
+    void testApplyTo_NoClassDefinition_DoesNotMatchRegex() {
         final SOURCE = '''
             if (isReady) {
                 println 'ready'
             }
         '''
+        rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
 

@@ -21,9 +21,9 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 
 /**
- * Rule that verifies that the name of a class mathes a regular expression. By default it checks that the
+ * Rule that verifies that the name of a class matches a regular expression. By default it checks that the
  * class name starts with an uppercase letter and is followed by zero or more word characters
- * (letters, numbers or underscores).
+ * (letters, numbers or underscores). Implicit classes (i.e. Groovy scripts) are ignored.
  * <p/>
  * The <code>regex</code> property specifies the regular expression to check the class name against. It is
  * required and cannot be null or empty. It defaults to '[A-Z]\w*'.
@@ -41,7 +41,7 @@ class ClassNameRule extends AbstractAstVisitorRule {
 class ClassNameAstVisitor extends AbstractAstVisitor  {
     void visitClass(ClassNode classNode) {
         assert rule.regex
-        if (!(classNode.getNameWithoutPackage() ==~ rule.regex)) {
+        if (classNode.lineNumber >= 0 && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
             addViolation(classNode)
         }
         super.visitClass(classNode)
