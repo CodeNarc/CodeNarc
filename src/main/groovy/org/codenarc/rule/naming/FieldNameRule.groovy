@@ -37,7 +37,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * non-<code>final</code> will be validated using <code>regex</code>.
  * <p/>
  * The <code>staticFinalRegex</code> property specifies the regular expression to validate <code>static final</code>
- * field names. It is optional but defaults to '[A-Z][A-Z0-9_]*'.
+ * field names. It is optional and defaults to null, so that <code>finalRegex</code> is used by default.
  * <p/>
  * The order of precedence for the regular expression properties is: <code>staticFinalRegex</code>,
  * <code>finalRegex</code>, <code>staticRegex</code> and finally <code>regex</code>. In other words, the first
@@ -52,7 +52,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
     String regex = /[a-z][a-zA-Z0-9]*/
     String staticRegex
     String finalRegex = DEFAULT_CONST_NAME
-    String staticFinalRegex = DEFAULT_CONST_NAME
+    String staticFinalRegex
 
     Class astVisitorClass = FieldNameAstVisitor
 }
