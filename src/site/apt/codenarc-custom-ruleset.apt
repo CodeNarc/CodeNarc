@@ -17,16 +17,16 @@ CodeNarc - Creating a RuleSet
   is included within the <<CodeNarc>> jar. It contains three sections, all of which are optional, though
   the sections must be in the order listed:
 
-*---------------------+--------------------------------------------------------------+--------------------------+
-| <<XML Tag>>         | <<Purpose>>                                                  | <<How many are allowed>> |
-*---------------------+--------------------------------------------------------------+--------------------------+
+*-----------------------+--------------------------------------------------------------+--------------------------+
+| <<XML Tag>>           | <<Purpose>>                                                  | <<How many are allowed>> |
+*-----------------------+--------------------------------------------------------------+--------------------------+
 | <<<\<description\>>>> | Describe the purpose of the <RuleSet>                        |  Zero or one             |
-*---------------------+--------------------------------------------------------------+--------------------------+
+*-----------------------+--------------------------------------------------------------+--------------------------+
 | <<<\<ruleset-ref\>>>> | Include a nested <RuleSet>, optionally configuring and/or    |  Zero or more            |
-|                     | filtering the rules within it.                               |                          |
-*---------------------+--------------------------------------------------------------+--------------------------+
-| <<<\<rule\>>>>        | Include a single rule; specify its fully-qualified classname |  Zero or one             |
-*---------------------+--------------------------------------------------------------+--------------------------+
+|                       | filtering the rules within it.                               |                          |
+*-----------------------+--------------------------------------------------------------+--------------------------+
+| <<<\<rule\>>>>        | Include a single rule; specify its fully-qualified classname |  Zero or more            |
+*-----------------------+--------------------------------------------------------------+--------------------------+
 
 
 * A Sample RuleSet
@@ -133,3 +133,5 @@ CodeNarc - Creating a RuleSet
   <<Note>>: If you specify an \<include\> and an \<exclude\> for a rule, then the \<exclude\> takes precedence.
 
   \<\<\<  <<NOTE:>> <In the future, wildcards may be supported for includes and excludes>  \>\>\>
+
+

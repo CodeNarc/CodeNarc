@@ -40,7 +40,7 @@
 
         <menu name="Using">
             <item name="Creating a RuleSet" href="/codenarc-custom-ruleset.html"/>
-            <item name="Custom Rule Descriptions" href="/codenarc-custom-rule-descriptions.html"/>
+            <item name="Configuring Rules" href="/codenarc-configuring-rules.html"/>
         </menu>
 
         <menu name="Rules">

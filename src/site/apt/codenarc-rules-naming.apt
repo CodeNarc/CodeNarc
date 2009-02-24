@@ -8,7 +8,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 * AbstractClassName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Verifies that the name of an abstract class mathes a regular expression. By default it checks that the
+  Verifies that the name of an abstract class matches a regular expression. By default it checks that the
   class name starts with the 'Abstract' prefix, followed by an uppercase letter and then zero or more word
   characters (letters, numbers or underscores).
 
@@ -23,7 +23,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 * ClassName Rule
 ~~~~~~~~~~~~~~~~~
 
-  Verifies that the name of a class mathes a regular expression. By default it checks that the
+  Verifies that the name of a class matches a regular expression. By default it checks that the
   class name starts with an uppercase letter and is followed by zero or more word characters
   (letters, numbers or underscores).
 
@@ -57,7 +57,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     | field names. It is optional. If not set, then <<<static>>>     |                        |
 |                     | fields that are non-<<<final>>> are validated using <<regex>>. |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-| staticFinalRegex    | Specifies the regular expression used to validate              | /[A-Z][A-Z0-9_]*/      |
+| staticFinalRegex    | Specifies the regular expression used to validate              | <<<null>>>             |
 |                     | <<<static final>>> field names. It is optional. If not set,    |                        |
 |                     | then <<<static final>>> fields are validated using             |                        |
 |                     | <<finalRegex>>, <<staticRegex>> or <<regex>>.                  |                        |
