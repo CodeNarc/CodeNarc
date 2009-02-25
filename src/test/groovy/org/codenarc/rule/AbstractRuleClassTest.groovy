@@ -33,6 +33,16 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assertContainsAll(rule.toString(), ['TestPathRule', NAME, PRIORITY.toString()])
     }
 
+    void testName() {
+        rule.name = 'abc'
+        assert rule.getName() == 'abc'
+    }
+
+    void testPriority() {
+        rule.priority = 1
+        assert rule.getPriority() == 1
+    }
+
     void testEnabled() {
         assertSingleViolation(SOURCE)
         rule.enabled = false

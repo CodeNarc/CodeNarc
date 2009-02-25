@@ -5,6 +5,18 @@
 CodeNarc - Configuring Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+  <<Contents>>
+
+  * {{{Configuring_Rules_Within_a_RuleSet_File}Configuring Rules Within a RuleSet File}}
+
+  * {{{Configuring_Rules_Using_a_Properties_File}Configuring Rules Using a Properties File}}
+
+  * {{{Standard_Properties_for_Configuring_Rules}Standard Properties for Configuring Rules}}
+
+  * {{{Customizing_Rule_Descriptions_Shown_in_the_HTML_Report}Customizing Rule Descriptions Shown in the HTML Report}} 
+
+  []
+
   You can configure rules within the <RuleSet> file or within the "codenarc.properties" file.
   Both of these approaches are described in the sections below.
 
@@ -15,7 +27,7 @@ CodeNarc - Configuring Rules
   own <RuleSet> file and/or a "codenarc.properties" file, customizing the rules from the top-level file. 
 
 
-* Configuring Rules Within a RuleSet File
+* {Configuring Rules Within a RuleSet File}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   {{{codenarc-custom-ruleset.html}Creating a RuleSet}} describes how to create a new <RuleSet> and
@@ -43,8 +55,8 @@ CodeNarc - Configuring Rules
 +----------------------------------------------------------------------------------------
 
 
-* Configuring Rules Using a Properties File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* {Configuring Rules Using a Properties File}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <<CodeNarc>> reads the properties file named "codenarc.properties", if found on the classpath,
   and applies the property values to any matching <Rules>. If the properties file is not found on
@@ -80,8 +92,38 @@ FieldName.regex=_[a-z][a-zA-Z0-9]*
   (turn off) rules.
 
 
-* Customizing Rule Descriptions Shown in the HTML Report
+* {Standard Properties for Configuring Rules}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The rules included with <<CodeNarc>> (as well as any subclasses of <<<AbstractRule>>>) provide
+  several standard properties that can be used to configure how rules are applied to source files.
+
+  The <<<applyToFilesMatching>>> and <<<doNotApplyToFilesMatching>>> properties enable filtering
+  the files to which the rule is applied by matching a regular expression against the full pathname
+  of each source file. If <<<applyToFilesMatching>>> is not empty or null, then the rule is only
+  applied to source files with matching paths. Likewise, if <<<doNotApplyToFilesMatching>>> is not
+  empty or null, then the rule is NOT applied to source files with matching paths. Both properties
+  default to <<<null>>>.
+
+  The <<<applyToFilenames>>> and <<<doNotApplyToFilenames>>> properties enable filtering
+  the files to which the rule is applied by specifying a comma-separated list of filenames (no path)
+  of source files. If <<<applyToFilenames>>> is not empty or null, then the rule is only
+  applied to source files matching one of the specified filenames. Likewise, if
+  <<<doNotApplyToFilesMatching>>> is not empty or null, then the rule is NOT applied to source files
+  matching any of the specified filenames. Both properties default to <<<null>>>.
+
+  The <<<enabled>>> boolean property allows a rule to be completely turned off (by setting it to <<<false>>>).
+  It defaults to <<<true>>>.
+
+  The <<<violationMessage>>> property enables overriding the rule violation message. If not null or
+  empty, this is used as the message for all violations of this rule, overriding any message generated
+  by the rule itself. This property defaults to <<<null>>>.
+
+  You can also override the default <<<name>>> or <<<priority>>> properties for each rule.
+
+
+* {Customizing Rule Descriptions Shown in the HTML Report}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   The descriptions for rules used in a <<CodeNarc>> report are shown at the bottom of the resulting
   HTML report. Those rule descriptions are retrieved from a <ResourceBundle>. This <ResourceBundle>

@@ -65,14 +65,26 @@ abstract class AbstractRule implements Rule {
     String violationMessage
 
     /**
-     * @return the unique id for this rule
+     * @return the unique name for this rule
      */
     abstract String getName()
+
+    /**
+     * Set the unique name for this rule
+     * @param name - the name for this rule; this should be unique 
+     */
+    abstract void setName(String name)
 
     /**
      * @return the priority of this rule, between 1 (highest priority) and 3 (lowest priority), inclusive.
      */
     abstract int getPriority()
+
+    /**
+     * Set the priority for this rule
+     * @param priority - the priority of this rule, between 1 (highest priority) and 3 (lowest priority), inclusive.
+     */
+    abstract void setPriority(int priority)
 
     /**
      * Apply this rule to the specified source and return a list of violations (or an empty List)
