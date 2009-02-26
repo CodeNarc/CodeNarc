@@ -23,7 +23,7 @@ import org.codenarc.rule.AbstractAstVisitor
  * interfaces and abstract classes.
  *
  * @author Chris Mair
- * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
     void visitClass(ClassNode classNode) {

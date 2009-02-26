@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.MethodNode
  * required and cannot be null or empty. It defaults to '[a-z]\w*'.
  *
  * @author Chris Mair
- * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 class MethodNameRule extends AbstractAstVisitorRule {
     String name = 'MethodName'

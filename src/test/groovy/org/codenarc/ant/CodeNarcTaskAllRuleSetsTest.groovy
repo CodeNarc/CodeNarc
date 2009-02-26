@@ -23,7 +23,7 @@ import org.codenarc.test.AbstractTest
  * Run the CodeNarc Ant Task against CodeNarc source using all predefined RuleSets.
  *
  * @author Chris Mair
- * @version $Revision: 42 $ - $Date: 2009-02-10 21:53:58 -0500 (Tue, 10 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 class CodeNarcTaskAllRuleSetsTest extends AbstractTest {
     static final BASE_DIR = 'src'

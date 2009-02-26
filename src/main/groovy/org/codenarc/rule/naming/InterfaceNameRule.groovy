@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @see ClassNameRule
  *
  * @author Chris Mair
- * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 class InterfaceNameRule extends AbstractAstVisitorRule {
     String name = 'InterfaceName'
