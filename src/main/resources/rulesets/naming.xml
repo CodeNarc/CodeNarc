@@ -11,6 +11,7 @@
     <rule class='org.codenarc.rule.naming.AbstractClassNameRule'/>
     <rule class='org.codenarc.rule.naming.ClassNameRule'/>
     <rule class='org.codenarc.rule.naming.FieldNameRule'/>
+    <rule class='org.codenarc.rule.naming.InterfaceNameRule'/>
     <rule class='org.codenarc.rule.naming.MethodNameRule'/>
     <rule class='org.codenarc.rule.naming.PackageNameRule'/>
     <rule class='org.codenarc.rule.naming.VariableNameRule'/>

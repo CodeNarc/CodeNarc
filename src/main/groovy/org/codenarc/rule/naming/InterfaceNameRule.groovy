@@ -19,29 +19,28 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * Rule that verifies that the name of a class matches a regular expression. By default it checks that the
- * class name starts with an uppercase letter and is followed by zero or more word characters
- * (letters, numbers or underscores). Implicit classes (i.e. Groovy scripts) are ignored. This rule applies
- * to all classes, including abstract classes and interfaces.
- * <p/>
- * The <code>regex</code> property specifies the regular expression to check the class name against. It is
- * required and cannot be null or empty. It defaults to '[A-Z]\w*'.
+ * Rule that verifies that the name of an interface matches a regular expression specified in
+ * the <code>regex</code> property. If that property is null or empty, then this rule is not applied
+ * (i.e., it does nothing). It defaults to null, so this rule must be explicitly configured to be active.
  *
- * @see AbstractClassNameRule
- * @see InterfaceNameRule
+ * @see ClassNameRule
  *
  * @author Chris Mair
  * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
  */
-class ClassNameRule extends AbstractAstVisitorRule {
-    String name = 'ClassName'
+class InterfaceNameRule extends AbstractAstVisitorRule {
+    String name = 'InterfaceName'
     int priority = 2
-    Class astVisitorClass = ClassNameAstVisitor
-    String regex = /[A-Z]\w*/
+    Class astVisitorClass = InterfaceNameAstVisitor
+    String regex
+
+    boolean isReady() {
+        return regex
+    }
 }
 
-class ClassNameAstVisitor extends AbstractTypeNameAstVisitor  {
+class InterfaceNameAstVisitor extends AbstractTypeNameAstVisitor  {
     protected boolean shouldVisit(ClassNode classNode) {
-        return true
+        return classNode.modifiers & classNode.ACC_INTERFACE
     }
 }

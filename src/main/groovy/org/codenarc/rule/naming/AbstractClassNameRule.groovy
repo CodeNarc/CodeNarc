@@ -16,15 +16,16 @@
 package org.codenarc.rule.naming
 
 import org.codehaus.groovy.ast.ClassNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.Violation
 
 /**
  * Rule that verifies that the name of an abstract class matches a regular expression specified in
  * the <code>regex</code> property. If that property is null or empty, then this rule is not applied
  * (i.e., it does nothing). It defaults to null, so this rule must be explicitly configured to be active.
  * This rule ignores interfaces.
+ *
+ * @see ClassNameRule
+ * @see InterfaceNameRule
  *
  * @author Chris Mair
  * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
@@ -40,15 +41,10 @@ class AbstractClassNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class AbstractClassNameAstVisitor extends AbstractAstVisitor  {
-    void visitClass(ClassNode classNode) {
-        assert rule.regex
+class AbstractClassNameAstVisitor extends AbstractTypeNameAstVisitor  {
+    protected boolean shouldVisit(ClassNode classNode) {
         def isAbstract = classNode.modifiers & classNode.ACC_ABSTRACT
         def isInterface = classNode.modifiers & classNode.ACC_INTERFACE
-        if (isAbstract && !isInterface && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
-            addViolation(classNode)
-        }
-        super.visitClass(classNode)
+        return isAbstract && !isInterface
     }
-
 }

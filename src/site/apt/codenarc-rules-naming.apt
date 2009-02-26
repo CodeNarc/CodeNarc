@@ -69,6 +69,22 @@ Naming Rules  ("<rulesets/naming.xml>")
   regex in that list matching the modifiers for the field is the one that is applied for the field name validation.
 
 
+* InterfaceName Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of an interface matches the regular expression specified in the
+  <<regex>> property. If that property is null or empty, then this rule is not applied
+  (i.e., it does nothing). It defaults to null, so this rule must be explicitly configured to be
+  active.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the regular expression used to validate the name of  | <<<null>>>             |
+|                     | an interface. If null or empty, then this rule does nothing.   |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
 * MethodName Rule
 ~~~~~~~~~~~~~~~~~~
 

@@ -19,21 +19,21 @@ import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
 
 /**
- * Tests for AbstractClassNameRule
+ * Tests for InterfaceNameRule
  *
  * @author Chris Mair
  * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
  */
-class AbstractClassNameRuleTest extends AbstractRuleTest {
+class InterfaceNameRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'AbstractClassName'
+        assert rule.name == 'InterfaceName'
         assert rule.regex == null
     }
 
     void testRegexIsNull() {
-        final SOURCE = 'abstract class aaa$bbb{ }'
+        final SOURCE = 'interface aaa$bbb{ }'
         assert !rule.ready
         assertNoViolations(SOURCE)
     }
@@ -41,32 +41,32 @@ class AbstractClassNameRuleTest extends AbstractRuleTest {
     void testApplyTo_WithPackage_MatchesRegex() {
         final SOURCE = '''
             package org.codenarc.sample
-            abstract class AbstractClass { }
+            interface AbstractClass { }
         '''
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_DoesNotMatchRegex() {
-        final SOURCE = " abstract class AbstractClass { } "
+        final SOURCE = " interface MyInterface { } "
         rule.regex = /z.*/
-        assertSingleViolation(SOURCE, 1, 'AbstractClass')
+        assertSingleViolation(SOURCE, 1, 'interface MyInterface')
     }
 
     void testApplyTo_MatchesRegex() {
-        final SOURCE = " abstract class zClass { } "
+        final SOURCE = " interface zClass { } "
         rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_NonAbstractClass() {
-        final SOURCE = " class nonAbstract$Class { } "
+    void testApplyTo_NonInterfaceClass() {
+        final SOURCE = " class nonInterface$Class { } "
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_Interface() {
-        final SOURCE = " interface interface$Class { } "
+        final SOURCE = "abstract class abstract$Class { }"
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
@@ -82,7 +82,7 @@ class AbstractClassNameRuleTest extends AbstractRuleTest {
     }
 
     protected Rule createRule() {
-        return new AbstractClassNameRule()
+        return new InterfaceNameRule()
     }
 
 }
