@@ -35,6 +35,7 @@ class RequiredRegexRuleTest extends AbstractRuleTest {
     void testRegexIsNull() {
         final SOURCE = 'class MyClass { } '
         rule.regex = null
+        assert !rule.ready
         assertNoViolations(SOURCE)
     }
 

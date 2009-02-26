@@ -43,6 +43,16 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assert rule.getPriority() == 1
     }
 
+    void testIsReady_DefaultsToTrue() {
+        assert rule.ready == true
+    }
+
+    void testIsReady() {
+        rule = new NotReadyRule()
+        assert rule.isReady() == false
+        assertNoViolations(SOURCE)
+    }
+
     void testEnabled() {
         assertSingleViolation(SOURCE)
         rule.enabled = false
@@ -162,4 +172,10 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         sourceCodeName = FILENAME
     }
 
+}
+
+class NotReadyRule extends TestPathRule {
+    boolean isReady() {
+        return false
+    }
 }

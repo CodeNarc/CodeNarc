@@ -21,12 +21,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 
 /**
- * Rule that verifies that the name of an abstract class mathes a regular expression. By default it 
- * checks that the class name starts with the 'Abstract' prefix, followed by an uppercase letter and
- * then zero or more word characters (letters, numbers or underscores). This rule ignores interfaces.
- * <p/>
- * The <code>regex</code> property specifies the regular expression to check the abstract class name against.
- * It is required and cannot be null or empty. It defaults to 'Abstract[A-Z]\w*'.
+ * Rule that verifies that the name of an abstract class matches a regular expression specified in
+ * the <code>regex</code> property. If that property is null or empty, then this rule is not applied
+ * (i.e., it does nothing). It defaults to null, so this rule must be explicitly configured to be active.
+ * This rule ignores interfaces.
  *
  * @author Chris Mair
  * @version $Revision: 37 $ - $Date: 2009-02-06 21:31:05 -0500 (Fri, 06 Feb 2009) $
@@ -35,7 +33,11 @@ class AbstractClassNameRule extends AbstractAstVisitorRule {
     String name = 'AbstractClassName'
     int priority = 2
     Class astVisitorClass = AbstractClassNameAstVisitor
-    String regex = /Abstract[A-Z]\w*/
+    String regex
+
+    boolean isReady() {
+        return regex
+    }
 }
 
 class AbstractClassNameAstVisitor extends AbstractAstVisitor  {

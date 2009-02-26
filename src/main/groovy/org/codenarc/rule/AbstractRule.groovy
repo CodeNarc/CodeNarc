@@ -103,11 +103,21 @@ abstract class AbstractRule implements Rule {
      */
     List applyTo(SourceCode sourceCode) {
         def violations = []
-        if (shouldApplyThisRuleTo(sourceCode)) {
+        if (isReady() && shouldApplyThisRuleTo(sourceCode)) {
             applyTo(sourceCode, violations)
         }
         overrideViolationMessageIfNecessary(violations)
         return violations
+    }
+
+    /**
+     * Allows rules to check whether preconditions are satisfied and short-circuit execution
+     * (i.e., do nothing) if those preconditions are not satisfied. Return true by default.
+     * This method is provided as a placeholder so subclasses can optionally override. 
+     * @return true if all preconditions for this rule are satisfied
+     */
+    boolean isReady() {
+        return true
     }
 
     String toString() {

@@ -8,15 +8,16 @@ Naming Rules  ("<rulesets/naming.xml>")
 * AbstractClassName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Verifies that the name of an abstract class matches a regular expression. By default it checks that the
-  class name starts with the 'Abstract' prefix, followed by an uppercase letter and then zero or more word
-  characters (letters, numbers or underscores).
+  Verifies that the name of an abstract class matches the regular expression specified in the
+  <<regex>> property. If that property is null or empty, then this rule is not applied
+  (i.e., it does nothing). It defaults to null, so this rule must be explicitly configured to be
+  active. This rule ignores interfaces and is applied only to abstract classes.
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the regular expression used to validate the abstract | /Abstract[A-Z]\w*/     |
-|                     | class name. It is required and cannot be null or empty.        |                        |
+| regex               | Specifies the regular expression used to validate the abstract | <<<null>>>             |
+|                     | class name. If null or empty, then this rule does nothing.     |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
 

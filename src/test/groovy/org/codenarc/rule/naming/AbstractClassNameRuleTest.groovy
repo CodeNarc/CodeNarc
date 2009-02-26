@@ -29,54 +29,50 @@ class AbstractClassNameRuleTest extends AbstractRuleTest {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AbstractClassName'
+        assert rule.regex == null
     }
 
     void testRegexIsNull() {
-        rule.regex = null
-        shouldFailWithMessageContaining('regex') { applyRuleTo('println 1') }
-    }
-
-    void testApplyTo_DoesNotMatchDefaultRegex() {
-        final SOURCE = " abstract class MyClass { } "
-        assertSingleViolation(SOURCE, 1, 'MyClass')
-    }
-
-    void testApplyTo_MatchesDefaultRegex() {
-        final SOURCE = " abstract class AbstractMyClass { } "
+        final SOURCE = 'abstract class aaa$bbb{ }'
+        assert !rule.ready
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_WithPackage_MatchesDefaultRegex() {
+    void testApplyTo_WithPackage_MatchesRegex() {
         final SOURCE = '''
             package org.codenarc.sample
             abstract class AbstractClass { }
         '''
+        rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_DoesNotMatchCustomRegex() {
-        rule.regex = /z.*/
+    void testApplyTo_DoesNotMatchRegex() {
         final SOURCE = " abstract class AbstractClass { } "
+        rule.regex = /z.*/
         assertSingleViolation(SOURCE, 1, 'AbstractClass')
     }
 
-    void testApplyTo_MatchesCustomRegex() {
-        rule.regex = /z.*/
+    void testApplyTo_MatchesRegex() {
         final SOURCE = " abstract class zClass { } "
+        rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NonAbstractClass() {
-        final SOURCE = " class nonAbstractClass { } "
+        final SOURCE = " class nonAbstract$Class { } "
+        rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_Interface() {
-        final SOURCE = " interface InterfaceClass { } "
+        final SOURCE = " interface interface$Class { } "
+        rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NoClassDefinition() {
+        rule.regex = /[A-Z].*/
         final SOURCE = '''
             if (isReady) {
                 println 'ready'
@@ -91,6 +87,7 @@ class AbstractClassNameRuleTest extends AbstractRuleTest {
                 def c = { println 'ok' }
             }
         '''
+        rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 

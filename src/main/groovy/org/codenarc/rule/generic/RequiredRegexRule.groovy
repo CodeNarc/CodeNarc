@@ -35,8 +35,12 @@ class RequiredRegexRule extends AbstractRule {
     int priority = 3
     String regex
 
+    boolean isReady() {
+        return regex
+    }
+
     void applyTo(SourceCode sourceCode, List violations) {
-        if (regex && !(sourceCode.getText() =~ regex)) {
+        if (!(sourceCode.getText() =~ regex)) {
             violations.add(new Violation(rule:this, message:"Match not found for required regular expression \"$regex\""))
         }
     }
