@@ -45,17 +45,14 @@ class VariableNameRule extends AbstractAstVisitorRule {
 }
 
 class VariableNameAstVisitor extends AbstractAstVisitor  {
-    private visitedDeclarations = new HashSet()
-
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
         def variableExpression = declarationExpression.variableExpression
         def re = rule.finalRegex && isFinal(declarationExpression) ? rule.finalRegex : rule.regex
 
-        def alreadyVisited = visitedDeclarations.contains(declarationExpression)
-        if (declarationExpression.lineNumber >= 0 && !alreadyVisited && !(variableExpression.name ==~ re)) {
+        if (declarationExpression.lineNumber >= 0 && !isAlreadyVisited(declarationExpression) && !(variableExpression.name ==~ re)) {
             addViolation(declarationExpression)
-            visitedDeclarations << declarationExpression
+            registerAsVisited(declarationExpression)
         }
 
         super.visitDeclarationExpression(declarationExpression)

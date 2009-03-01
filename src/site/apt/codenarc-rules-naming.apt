@@ -117,6 +117,21 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
+* ParameterName Rule
+~~~~~~~~~~~~~~~~~~~~~
+
+  Verifies that the name of each parameter matches a regular expression. This rule applies to method parameters, 
+  constructor parameters and closure parameters. By default it checks that parameter names start with a
+  lowercase letter and contains only letters or numbers.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | Specifies the regular expression used to validate the parameter| /[a-z][a-zA-Z0-9]*/    |
+|                     | name. It is required and cannot be null or empty.              |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
 * VariableName Rule
 ~~~~~~~~~~~~~~~~~~~~
 

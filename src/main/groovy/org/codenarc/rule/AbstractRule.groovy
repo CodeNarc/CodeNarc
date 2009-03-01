@@ -96,14 +96,15 @@ abstract class AbstractRule implements Rule {
     /**
      * Apply this rule to the specified source and return a list of violations (or an empty List).
      * This implementation delegates to the abstract applyCode(SourceCode,List), provided by
-     * concrete subclasses. This simplifies subclass implementations and also enables common
-     * handling of enablement logic.
+     * concrete subclasses. This template method simplifies subclass implementations and also
+     * enables common handling of enablement logic.
      * @param source - the source to apply this rule to
      * @return the List of violations; may be empty
      */
     List applyTo(SourceCode sourceCode) {
+        validate()
         def violations = []
-        if (isReady() && shouldApplyThisRuleTo(sourceCode)) {
+        if (shouldApplyThisRuleTo(sourceCode)) {
             applyTo(sourceCode, violations)
         }
         overrideViolationMessageIfNecessary(violations)
@@ -118,6 +119,14 @@ abstract class AbstractRule implements Rule {
      */
     boolean isReady() {
         return true
+    }
+
+    /**
+     * Allows rules to perform validation. Do nothing by default.
+     * This method is provided as a placeholder so subclasses can optionally override.
+     * Subclasses will typically use <code>assert</code> calls to verify required preconditions.
+     */
+    void validate() {
     }
 
     String toString() {
@@ -145,7 +154,7 @@ abstract class AbstractRule implements Rule {
     }
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {
-        return enabled && SourceCodeUtil.shouldApplyTo(sourceCode,
+        return enabled && isReady() && SourceCodeUtil.shouldApplyTo(sourceCode,
             [applyToFilesMatching:applyToFilesMatching, doNotApplyToFilesMatching:doNotApplyToFilesMatching,
              applyToFilenames:applyToFilenames, doNotApplyToFilenames:doNotApplyToFilenames])
     }

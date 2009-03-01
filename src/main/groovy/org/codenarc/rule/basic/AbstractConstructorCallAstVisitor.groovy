@@ -25,18 +25,15 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * @version $Revision$ - $Date$
  */
 abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
-    // If within class, the expression callback gets called twice, so keep track of visited expressions
-    def visitedConstructorCalls = new HashSet()
-
     /**
      * Subclasses must implement to return true if the visited constructor call causes a rule violation
      */
     protected abstract isConstructorCallAViolation(ConstructorCallExpression constructorCall)
 
     void visitConstructorCallExpression(ConstructorCallExpression constructorCall) {
-        if (!visitedConstructorCalls.contains(constructorCall) && isConstructorCallAViolation(constructorCall)) {
+        if (!isAlreadyVisited(constructorCall) && isConstructorCallAViolation(constructorCall)) {
             addViolation(constructorCall)
-            visitedConstructorCalls << constructorCall
+            registerAsVisited(constructorCall)
         }
         super.visitConstructorCallExpression(constructorCall)
     }

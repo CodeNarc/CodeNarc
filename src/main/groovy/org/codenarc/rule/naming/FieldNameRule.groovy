@@ -53,14 +53,15 @@ class FieldNameRule extends AbstractAstVisitorRule {
     String staticRegex
     String finalRegex = DEFAULT_CONST_NAME
     String staticFinalRegex
-
     Class astVisitorClass = FieldNameAstVisitor
+
+    void validate() {
+        assert regex
+    }
 }
 
 class FieldNameAstVisitor extends AbstractAstVisitor  {
     void visitField(FieldNode fieldNode) {
-        assert rule.regex
-
         def re = rule.regex
         def mod = fieldNode.modifiers
 
