@@ -29,6 +29,25 @@ import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
 
 /**
  * Ant Task for running CodeNarc.
+ * <p/>
+ * The <code>ruleSetFiles</code> property specifies the path to the XML RuleSet definition files,
+ * relative to the classpath. This can be a single file path, or multiple paths separated by commas.
+ * It is required.
+ * <p/>
+ * The <code>maxPriority1Violations</code> property specifies the maximum number of priority 1
+ * violations allowed before failing the build (throwing a BuildException). Likewise,
+ * <code>maxPriority2Violations</code> and <code>maxPriority3Violations</code> specifiy the
+ * thresholds for violations of priority 2 and 3.
+ * <p/>
+ * The <code>fileset</code> nested element is required, and is used to specify the source files to be
+ * analyzed. This is the standard Ant <i>FileSet</i>, and is quite powerful and flexible.
+ * See the <i>Apache Ant Manual</i> for more information on <i>FileSets</i>. 
+ * <p/>
+ * The <ode>report</code> nested element defines the format and output file for the analysis report.
+ * Currently, HTML ("html") is the only supported format. It includes <code>type</code>,
+ * <code>toFile</code>, and <code>title</code> attributes.
+ *
+ * @see "http://ant.apache.org/manual/index.html"
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -41,6 +60,10 @@ class CodeNarcTask extends Task {
      * single file path, or multiple paths separated by commas.
      */
     String ruleSetFiles
+
+    int maxPriority1Violations = Integer.MAX_VALUE
+    int maxPriority2Violations = Integer.MAX_VALUE
+    int maxPriority3Violations = Integer.MAX_VALUE
 
     protected List reportWriters = []
     protected FileSet fileSet
@@ -57,7 +80,13 @@ class CodeNarcTask extends Task {
         ruleSet = createRuleSet()
         new PropertiesFileRuleSetConfigurer().configure(ruleSet)
         def results = sourceAnalyzer.analyze(ruleSet)
+        def p1 = results.getNumberOfViolationsWithPriority(1, true)
+        def p2 = results.getNumberOfViolationsWithPriority(2, true)
+        def p3 = results.getNumberOfViolationsWithPriority(3, true)
+        def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
+        LOG.info("Completed analyzing source: " + countsText)
         LOG.debug("results=$results")
+        checkMaxViolations(p1, p2, p3, countsText)
         def analysisContext = new AnalysisContext(ruleSet:ruleSet)
         reportWriters.each { reportWriter -> reportWriter.writeOutReport(analysisContext, results) }
     }
@@ -96,9 +125,21 @@ class CodeNarcTask extends Task {
      */
     protected RuleSet createRuleSet() {
         def paths = ruleSetFiles.tokenize(',')
-        def ruleSet = new CompositeRuleSet()
-        paths.each { path -> ruleSet.add(new XmlFileRuleSet(path)) }
-        return ruleSet
+        def newRuleSet = new CompositeRuleSet()
+        paths.each { path -> newRuleSet.add(new XmlFileRuleSet(path)) }
+        return newRuleSet
+    }
+
+    private void checkMaxViolations(int p1, int p2, int p3, String countsText) {
+        checkMaxViolationForPriority(1, p1, countsText)
+        checkMaxViolationForPriority(2, p2, countsText)
+        checkMaxViolationForPriority(3, p3, countsText)
+    }
+
+    private void checkMaxViolationForPriority(int priority, int count, String countsText) {
+        if (count > this."maxPriority${priority}Violations") {
+            throw new BuildException("Exceeded maximum number of priority ${priority} violations: " + countsText)
+        }
     }
 
 }

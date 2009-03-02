@@ -13,13 +13,22 @@ CodeNarc - Ant Task
 * Parameters
 ~~~~~~~~~~~~
 
-*---------------------+----------------------------------------------------------------+------------------------+
-| <<Attribute>>       | <<Description>>                                                | <<Required>>           |
-*---------------------+----------------------------------------------------------------+------------------------+
-| ruleSetFiles        | The path to the XML RuleSet definition files, relative to the  | YES                    |
-|                     | classpath. This can be a single file path, or multiple paths   |                        |
-|                     | separated by commas.                                           |                        |
-*---------------------+----------------------------------------------------------------+------------------------+
+*------------------------+----------------------------------------------------------------+------------------------+
+| <<Attribute>>          | <<Description>>                                                | <<Required>>           |
+*------------------------+----------------------------------------------------------------+------------------------+
+| ruleSetFiles           | The path to the XML RuleSet definition files, relative to the  | YES                    |
+|                        | classpath. This can be a single file path, or multiple paths   |                        |
+|                        | separated by commas.                                           |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
+| maxPriority1Violations | The maximum number of priority 1 violations allowed before     | NO                     |
+|                        | failing the build (throwing a <<<BuildException>>>).           |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
+| maxPriority2Violations | The maximum number of priority 2 violations allowed before     | NO                     |
+|                        | failing the build (throwing a <<<BuildException>>>).           |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
+| maxPriority3Violations | The maximum number of priority 3 violations allowed before     | NO                     |
+|                        | failing the build (throwing a <<<BuildException>>>).           |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
 
 
 * Report Nested Element
@@ -56,7 +65,9 @@ CodeNarc - Ant Task
 +----------------------------------------------------------------------------------------
 <taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
 <target name="runCodeNarc">
-    <codenarc ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml">
+    <codenarc
+            ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml"
+            maxPriority1Violations="0">
         <report type="html" toFile="reports/CodeNarcAntReport.html" title="My Sample Code"/>
         <fileset dir="src">
             <include name="**/*.groovy"/>

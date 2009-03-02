@@ -20,6 +20,9 @@ import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.test.AbstractTest
+import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.ruleset.RuleSet
+import org.codenarc.results.Results
 
 /**
  * Tests for the CodeNarc Ant Task
@@ -36,6 +39,39 @@ class CodeNarcTaskTest extends AbstractTest {
     private codeNarcTask
     private fileSet
     private outputFile
+    private project
+
+    void testMaxViolationsDefaultViolations() {
+        assert codeNarcTask.maxPriority1Violations == Integer.MAX_VALUE
+        assert codeNarcTask.maxPriority2Violations == Integer.MAX_VALUE
+        assert codeNarcTask.maxPriority3Violations == Integer.MAX_VALUE
+    }
+
+    void testExecute_MaxPriority1Violations() {
+        codeNarcTask.maxPriority1Violations = 10
+        testMaxViolations(1, 13)
+    }
+
+    void testExecute_MaxPriority2Violations() {
+        codeNarcTask.maxPriority2Violations = 10
+        testMaxViolations(2, 12)
+    }
+
+    void testExecute_MaxPriority3Violations() {
+        codeNarcTask.maxPriority3Violations = 10
+        testMaxViolations(3, 11)
+    }
+
+    private void testMaxViolations(int priority, int numViolations) {
+        codeNarcTask.addFileset(fileSet)
+        StubSourceAnalyzerCategory.reset()
+        StubSourceAnalyzerCategory.violationCounts[priority] = numViolations
+        use(StubSourceAnalyzerCategory) {
+            def errorMessage = shouldFail(BuildException) { codeNarcTask.execute() }
+            log("errorMessage=$errorMessage")
+            assert errorMessage.contains("p${priority}=${numViolations}")
+        }
+    }
 
     void testExecute_CodeNarcProperties() {
         def analysisContext = null
@@ -105,7 +141,7 @@ class CodeNarcTaskTest extends AbstractTest {
     void setUp() {
         super.setUp()
 
-        def project = new Project(basedir:'.')
+        project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR), project:project)
         fileSet.setIncludes('sourcewithdirs/**/*.groovy')
 
@@ -124,4 +160,15 @@ class CodeNarcTaskTest extends AbstractTest {
         assert outputFile.exists()
     }
 
+}
+
+class StubSourceAnalyzerCategory {
+    static violationCounts
+
+    static void reset() { violationCounts = [1:0, 2:0, 3:0] }
+    
+    static SourceAnalyzer createSourceAnalyzer(CodeNarcTask self) {
+        def results = [getNumberOfViolationsWithPriority:{ p, r -> return violationCounts[p]}] as Results
+        return [analyze:{RuleSet ruleSet -> return results}] as SourceAnalyzer
+    }
 }
