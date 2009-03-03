@@ -15,13 +15,13 @@ CodeNarc - Road Map
 
   * Document creating custom Rules.
 
-  * Flexible Rule configuration.
+  * Support for wildcards (*,?) in RuleSet <include> and <exclude>, and in <<<Rule.applyToFilenames>>>.
 
 
 * Long-Term Goals
 ~~~~~~~~~~~~~~~~~
 
-  * Even more rules, perhaps including framework-specific rules for Grails, Griffon, etc..
+  * Even more rules, perhaps including framework-specific rules for Grails, Griffon, Gradle, etc..
 
   * Create XML report
 

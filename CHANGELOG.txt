@@ -2,6 +2,37 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.3 (02 Mar 2009)
+------------------------------------
+INFRASTRUCTURE
+- Read rules configuration from optional "codenarc.properties" file. (PropertiesRuleSetConfigurer).
+- CodeNarcTask: Add support for maxPriority3Violations property, etc.
+- AbstractRule: Add applyToFilenames and doNotApplyToFilenames - available to all rules (subclasses).
+- HtmlReportWriter: Display sourceLine and message on separate lines with named bullets.
+RULES
+- Created new "naming" RuleSets and new Rules:
+   * AbstractClassNameRule. (naming)
+   * ClassNameRule. (naming)
+   * FieldNameRule. (naming)
+   * InterfaceNameRule. (naming)
+   * MethodNameRule. (naming)
+   * PackageNameRule. (naming)
+   * ParameterNameRule. (naming)
+   * VariableNameRule. (naming)
+MINOR FIXES/ENHANCEMENTS
+- Fix NullPointerException for compiler errors from import rules.
+- AbstractRule: Introduce violationMessage property. Overrides default message if set.
+- Rename Violation description property to message.
+- Rename HtmlReportWriter CSS file to 'codenarc-htmlreport.css'.
+- Change SourceCodeUtil.shouldApplyTo() to take a Map of criteria.
+- Add setName() and setPriority() to AbstractRule.
+DOCUMENTATION
+- Add info to online docs re: standard rule properties.
+- Reorganize docs – separate doc for each RuleSet; section for each rule; table for properties.
+- Update RuleSets doc with info about configuring using properties file.
+- Create “Configuring Rules” document (adapt existing “custom-rule-descriptions.apt”).
+
+
 Changes in version 0.2 (07 Feb 2009)
 ------------------------------------
 - Create XML Schema Definition (XSD) for XML RuleSet file.
