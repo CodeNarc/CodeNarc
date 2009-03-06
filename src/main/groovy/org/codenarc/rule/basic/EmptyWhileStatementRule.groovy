@@ -18,6 +18,7 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for empty while statements
@@ -33,7 +34,7 @@ class EmptyWhileStatementRule extends AbstractAstVisitorRule {
 
 class EmptyWhileStatementAstVisitor extends AbstractAstVisitor  {
     void visitWhileLoop(WhileStatement whileStatement) {
-        if (isEmptyBlock(whileStatement.loopBlock)) {
+        if (AstUtil.isEmptyBlock(whileStatement.loopBlock)) {
             addViolation(whileStatement)
         }
         super.visitWhileLoop(whileStatement)

@@ -72,14 +72,17 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     }
 
     /**
-     * Add a new Violation to the list of violations found by this visitor
+     * Add a new Violation to the list of violations found by this visitor.
+     * Only add the violation if the node lineNumber >= 0.
      * @param node - the Groovy AST Node
      * @param message - the message for the violation; defaults to null
      */
     protected void addViolation(ASTNode node, message=null) {
-        def sourceLine = sourceLine(node)
         def lineNumber = node.lineNumber
-        addViolation(sourceLine, lineNumber, message)
+        if (lineNumber >= 0) {
+            def sourceLine = sourceLine(node)
+            addViolation(sourceLine, lineNumber, message)
+        }
     }
 
     /**
@@ -113,28 +116,6 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
 
     protected SourceUnit getSourceUnit() {
         return source
-    }
-
-    /**
-     * Return true if the Statement is a block and it is empty (contains no "meaningful" statements).
-     * This implementation also addresses some "weirdness" around some statement types (specifically finally)
-     * where the BlockStatement answered false to isEmpty() even if it was.
-     * @param statement - the Statement to check
-     * @return true if the BlockStatement is empty
-     */
-    protected boolean isEmptyBlock(Statement statement) {
-        return statement instanceof BlockStatement &&
-            (statement.empty ||
-            (statement.statements.size() == 1 && statement.statements[0].empty))
-    }
-
-    /**
-     * Return true if the Statement is a block
-     * @param statement - the Statement to check
-     * @return true if the Statement is a block
-     */
-    protected boolean isBlock(Statement statement) {
-        return statement instanceof BlockStatement
     }
 
     /**

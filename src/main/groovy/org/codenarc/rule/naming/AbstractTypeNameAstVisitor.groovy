@@ -28,7 +28,7 @@ import org.codenarc.rule.AbstractAstVisitor
 abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
     void visitClass(ClassNode classNode) {
         assert rule.regex
-        if (shouldVisit(classNode) && classNode.lineNumber >= 0 && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
+        if (shouldVisit(classNode) && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
             addViolation(classNode)
         }
         super.visitClass(classNode)

@@ -18,6 +18,7 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for empty finally blocks
@@ -33,7 +34,7 @@ class EmptyFinallyBlockRule extends AbstractAstVisitorRule {
 
 class EmptyFinallyBlockAstVisitor extends AbstractAstVisitor  {
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
-        if (isEmptyBlock(tryCatchStatement.finallyStatement)) {
+        if (AstUtil.isEmptyBlock(tryCatchStatement.finallyStatement)) {
             addViolation(tryCatchStatement.finallyStatement)
         }
         super.visitTryCatchFinally(tryCatchStatement)

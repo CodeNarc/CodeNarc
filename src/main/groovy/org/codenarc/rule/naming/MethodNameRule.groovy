@@ -40,7 +40,7 @@ class MethodNameRule extends AbstractAstVisitorRule {
 class MethodNameAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
         assert rule.regex
-        if (methodNode.lineNumber >= 0 && !(methodNode.name ==~ rule.regex)) {
+        if (!(methodNode.name ==~ rule.regex)) {
             addViolation(methodNode)
         }
         super.visitMethod(methodNode)

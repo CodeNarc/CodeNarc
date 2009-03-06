@@ -18,6 +18,7 @@ package org.codenarc.rule.braces
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks that if statements use braces rather than a single statement.
@@ -33,7 +34,7 @@ class IfStatementBracesRule extends AbstractAstVisitorRule {
 
 class IfStatementBracesAstVisitor extends AbstractAstVisitor  {
     void visitIfElse(IfStatement ifStatement) {
-        if (!isBlock(ifStatement.ifBlock)) {
+        if (!AstUtil.isBlock(ifStatement.ifBlock)) {
             addViolation(ifStatement)
         }
         super.visitIfElse(ifStatement)

@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.stmt.CatchStatement
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for empty try blocks
@@ -34,7 +35,7 @@ class EmptyTryBlockRule extends AbstractAstVisitorRule {
 
 class EmptyTryBlockAstVisitor extends AbstractAstVisitor  {
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
-        if (isEmptyBlock(tryCatchStatement.tryStatement)) {
+        if (AstUtil.isEmptyBlock(tryCatchStatement.tryStatement)) {
             addViolation(tryCatchStatement)
         }
         super.visitTryCatchFinally(tryCatchStatement)

@@ -18,6 +18,7 @@ package org.codenarc.rule.basic
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for empty else blocks
@@ -33,7 +34,7 @@ class EmptyElseBlockRule extends AbstractAstVisitorRule {
 
 class EmptyElseBlockAstVisitor extends AbstractAstVisitor  {
     void visitIfElse(IfStatement ifStatement) {
-        if (isEmptyBlock(ifStatement.elseBlock)) {
+        if (AstUtil.isEmptyBlock(ifStatement.elseBlock)) {
             addViolation(ifStatement.elseBlock)
         }
         super.visitIfElse(ifStatement)

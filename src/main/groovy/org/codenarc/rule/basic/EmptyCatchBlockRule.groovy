@@ -18,6 +18,7 @@ package org.codenarc.rule.basic
 import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.stmt.CatchStatement
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for empty catch blocks
@@ -33,7 +34,7 @@ class EmptyCatchBlockRule extends AbstractAstVisitorRule {
 
 class EmptyCatchBlockAstVisitor extends AbstractAstVisitor  {
     void visitCatchStatement(CatchStatement catchStatement) {
-        if (isEmptyBlock(catchStatement.code)) {
+        if (AstUtil.isEmptyBlock(catchStatement.code)) {
             addViolation(catchStatement)
         }
         super.visitCatchStatement(catchStatement)

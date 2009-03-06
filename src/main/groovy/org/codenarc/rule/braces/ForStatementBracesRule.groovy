@@ -18,6 +18,7 @@ package org.codenarc.rule.braces
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks that for statements use braces rather than a single statement.
@@ -33,7 +34,7 @@ class ForStatementBracesRule extends AbstractAstVisitorRule {
 
 class ForStatementBracesAstVisitor extends AbstractAstVisitor  {
     void visitForLoop(ForStatement forStatement) {
-        if (!isBlock(forStatement.loopBlock)) {
+        if (!AstUtil.isBlock(forStatement.loopBlock)) {
             addViolation(forStatement)
         }
         super.visitForLoop(forStatement)

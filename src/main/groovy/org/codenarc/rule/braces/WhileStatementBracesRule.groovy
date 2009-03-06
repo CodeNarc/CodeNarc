@@ -18,6 +18,7 @@ package org.codenarc.rule.braces
 import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks that while statements use braces rather than a single statement.
@@ -33,7 +34,7 @@ class WhileStatementBracesRule extends AbstractAstVisitorRule {
 
 class WhileStatementBracesAstVisitor extends AbstractAstVisitor  {
     void visitWhileLoop(WhileStatement whileStatement) {
-        if (!isBlock(whileStatement.loopBlock)) {
+        if (!AstUtil.isBlock(whileStatement.loopBlock)) {
             addViolation(whileStatement)
         }
         super.visitWhileLoop(whileStatement)

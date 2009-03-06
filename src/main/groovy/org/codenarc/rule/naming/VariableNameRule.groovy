@@ -50,7 +50,7 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
         def variableExpression = declarationExpression.variableExpression
         def re = rule.finalRegex && isFinal(declarationExpression) ? rule.finalRegex : rule.regex
 
-        if (declarationExpression.lineNumber >= 0 && !isAlreadyVisited(declarationExpression) && !(variableExpression.name ==~ re)) {
+        if (!isAlreadyVisited(declarationExpression) && !(variableExpression.name ==~ re)) {
             addViolation(declarationExpression)
             registerAsVisited(declarationExpression)
         }

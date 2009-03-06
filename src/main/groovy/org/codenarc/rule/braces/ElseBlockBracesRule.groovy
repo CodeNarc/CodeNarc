@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.stmt.EmptyStatement
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks that else blocks use braces rather than a single statement.
@@ -40,7 +41,7 @@ class ElseBlockBracesRule extends AbstractAstVisitorRule {
 class ElseBlockBracesAstVisitor extends AbstractAstVisitor  {
     void visitIfElse(IfStatement ifStatement) {
         if (!(ifStatement.elseBlock instanceof EmptyStatement) && 
-                !isBlock(ifStatement.elseBlock)) {
+                !AstUtil.isBlock(ifStatement.elseBlock)) {
 
             if (!(ifStatement.elseBlock instanceof IfStatement) || rule.bracesRequiredForElseIf) {
                 addViolation(ifStatement)

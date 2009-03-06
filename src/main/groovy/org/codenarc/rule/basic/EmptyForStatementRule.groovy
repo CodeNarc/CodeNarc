@@ -18,6 +18,7 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for empty for statements
@@ -33,7 +34,7 @@ class EmptyForStatementRule extends AbstractAstVisitorRule {
 
 class EmptyForStatementAstVisitor extends AbstractAstVisitor  {
     void visitForLoop(ForStatement forStatement) {
-        if (isEmptyBlock(forStatement.loopBlock)) {
+        if (AstUtil.isEmptyBlock(forStatement.loopBlock)) {
             addViolation(forStatement)
         }
         super.visitForLoop(forStatement)
