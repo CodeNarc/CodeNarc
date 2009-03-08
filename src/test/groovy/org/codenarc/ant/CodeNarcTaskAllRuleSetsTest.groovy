@@ -27,7 +27,14 @@ import org.codenarc.test.AbstractTest
  */
 class CodeNarcTaskAllRuleSetsTest extends AbstractTest {
     static final BASE_DIR = 'src'
-    static final RULESET_FILES = 'rulesets/basic.xml,rulesets/braces.xml,rulesets/exceptions.xml,rulesets/imports.xml,rulesets/naming.xml,rulesets/size.xml'
+    static final RULESET_FILES = [
+            'rulesets/basic.xml',
+            'rulesets/braces.xml',
+            'rulesets/exceptions.xml',
+            'rulesets/imports.xml',
+            'rulesets/junit.xml',
+            'rulesets/naming.xml',
+            'rulesets/size.xml'].join(',')
     static final REPORT_FILE = 'CodeNarcTaskAllRuleSetsReport.html'
 
     private codeNarcTask

@@ -19,23 +19,23 @@ import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
 
 /**
- * Tests for SetupCallsSuperRule
+ * Tests for JUnitTearDownCallsSuperRule
  *
  * @author Chris Mair
  * @version $Revision: 69 $ - $Date: 2009-02-25 22:03:41 -0500 (Wed, 25 Feb 2009) $
  */
-class SetupCallsSuperRuleTest extends AbstractRuleTest {
+class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'SetupCallsSuper'
+        assert rule.name == 'JUnitTearDownCallsSuper'
     }
 
-    void testApplyTo_SetupCallsSuperSetup() {
+    void testApplyTo_TearDownCallsSuperTearDown() {
         final SOURCE = '''
           class MyClass extends TestCase {
-            void setUp() {
-                super.setUp()
+            void tearDown() {
+                super.tearDown()
                 println 'bad'
             }
           }
@@ -43,57 +43,79 @@ class SetupCallsSuperRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_SetupDoesNotCallSuperSetup() {
+    void testApplyTo_TearDownDoesNotCallSuperTearDown() {
         final SOURCE = '''
           class MyClass extends TestCase {
-            void setUp() {
+            void tearDown() {
                 println 'bad'
             }
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'void setUp() {')
+        assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
-    void testApplyTo_SetupDoesNotCallSuperSetup_CallsSuperSetupWithParameters() {
+    void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsSuperTearDownWithParameters() {
         final SOURCE = '''
           class MyClass extends TestCase {
-            void setUp() {
+            void tearDown() {
                 println 'bad'
-                super.setUp('But', 'has', 'parameters')
+                super.tearDown('But', 'has', 'parameters')
             }
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'void setUp() {')
+        sourceCodePath = 'src/MyTests.groovy'
+        assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
-    void testApplyTo_SetupDoesNotCallSuperSetup_CallsSuper() {
+    void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsSuper() {
         final SOURCE = '''
           class MyClass extends TestCase {
-            void setUp() {
+            void tearDown() {
                 println 'bad'
                 super.someOtherMethod()
             }
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'void setUp() {')
+        assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
-    void testApplyTo_SetupDoesNotCallSuperSetup_CallsSetup() {
+    void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsTearDown() {
         final SOURCE = '''
           class MyClass extends TestCase {
-            void setUp() {
+            void tearDown() {
                 println 'bad'
-                other.setUp()
+                other.tearDown()
             }
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'void setUp() {')
+        assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
-    void testApplyTo_NonSetupMethod() {
+    void testApplyTo_NonTestFile() {
+        final SOURCE = '''
+          class MyClass extends TestCase {
+            void tearDown() {
+            }
+          }
+        '''
+        sourceCodePath = 'src/MyController.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_NonTearDownMethod() {
         final SOURCE = '''
             class MyClass {
                 def otherMethod() {
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_TearDownMethodHasParameters() {
+        final SOURCE = '''
+            class MyClass {
+                void tearDown(int count, String name) {
                 }
             }
         '''
@@ -109,7 +131,12 @@ class SetupCallsSuperRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void setUp() {
+        super.setUp()
+        sourceCodePath = 'MyTest.groovy'
+    }
+
     protected Rule createRule() {
-        return new SetupCallsSuperRule()
+        return new JUnitTearDownCallsSuperRule()
     }
 }

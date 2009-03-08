@@ -15,38 +15,34 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.Statement
-import org.codehaus.groovy.ast.stmt.ExpressionStatement
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Rule that verifies that the name of each method matches a regular expression. By default it checks that the
- * method name starts with a lowercase letter. Implicit method names are ignored (i.e., 'main' and 'run'
- * methods automatically created for Groovy scripts).
+ * Rule that checks that if the JUnit <code>setUp()</code> method is defined, that it includes a call to
+ * <code>super.setUp()</code>.
  * <p/>
- * The <code>regex</code> property specifies the regular expression to check the method name against. It is
- * required and cannot be null or empty. It defaults to '[a-z]\w*'.
+ * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
+ * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
  * @version $Revision: 69 $ - $Date: 2009-02-25 22:03:41 -0500 (Wed, 25 Feb 2009) $
  */
-class SetupCallsSuperRule extends AbstractAstVisitorRule {
-    String name = 'SetupCallsSuper'
+class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
+    String name = 'JUnitSetUpCallsSuper'
     int priority = 2
-    Class astVisitorClass = SetupCallsSuperAstVisitor
+    Class astVisitorClass = JUnitSetUpCallsSuperAstVisitor
+    String applyToFilesMatching = DEFAULT_TEST_FILES
 }
 
-class SetupCallsSuperAstVisitor extends AbstractAstVisitor  {
+class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
-        println "visitMethod name=${methodNode.name}"
-        println "code=$methodNode.code"
-        if (methodNode.name == 'setUp' && methodNode.code instanceof BlockStatement) {
+        if (methodNode.name == 'setUp' &&
+                methodNode.parameters.size() == 0 &&
+                methodNode.code instanceof BlockStatement) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
                 return AstUtil.isMethodCall(stmt, 'super', 'setUp', 0)

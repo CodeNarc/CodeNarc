@@ -61,7 +61,6 @@ class AstUtil {
      * @return true only if the Statement is a method call matching the specified criteria
      */
     public static boolean isMethodCall(Statement stmt, String methodObject, String methodName, int numArguments) {
-        println "stmt=${stmt}"
         def match = false
         if (stmt instanceof ExpressionStatement) {
             def expressionStatement = stmt.expression

@@ -30,6 +30,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTest {
         'rulesets/braces.xml',
         'rulesets/exceptions.xml',
         'rulesets/imports.xml',
+        'rulesets/junit.xml',
         'rulesets/naming.xml',
         'rulesets/size.xml'
     ]
@@ -47,6 +48,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTest {
     }
 
     void setUp() {
+        super.setUp()
         messages = ResourceBundle.getBundle(BASE_MESSSAGES_BUNDLE);
     }
 

@@ -15,12 +15,10 @@
  */
 package org.codenarc.rule
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
-import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceCode
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.stmt.BlockStatement
 
 /**
  * Abstract superclass for Groovy AST Visitors used with Rules

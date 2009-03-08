@@ -155,8 +155,12 @@ abstract class AbstractRule implements Rule {
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {
         return enabled && isReady() && SourceCodeUtil.shouldApplyTo(sourceCode,
-            [applyToFilesMatching:applyToFilesMatching, doNotApplyToFilesMatching:doNotApplyToFilesMatching,
-             applyToFilenames:applyToFilenames, doNotApplyToFilenames:doNotApplyToFilenames])
+            [
+                applyToFilesMatching:getProperty('applyToFilesMatching'), 
+                doNotApplyToFilesMatching:getProperty('doNotApplyToFilesMatching'),
+                applyToFilenames:getProperty('applyToFilenames'),
+                doNotApplyToFilenames:getProperty('doNotApplyToFilenames')
+            ])
     }
 
     private String getClassNameNoPackage() {
