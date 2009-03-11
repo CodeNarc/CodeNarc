@@ -30,7 +30,7 @@ import org.codehaus.groovy.ast.stmt.IfStatement
  * Tests for AstUtil
  *
  * @author Chris Mair
- * @version $Revision: 60 $ - $Date: 2009-02-22 14:46:41 -0500 (Sun, 22 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 class AstUtilTest extends AbstractTest {
     static final SOURCE_METHOD_CALL = '''

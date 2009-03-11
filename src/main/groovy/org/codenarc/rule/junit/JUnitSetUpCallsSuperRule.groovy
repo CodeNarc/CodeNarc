@@ -29,7 +29,7 @@ import org.codenarc.util.AstUtil
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
- * @version $Revision: 69 $ - $Date: 2009-02-25 22:03:41 -0500 (Wed, 25 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
     String name = 'JUnitSetUpCallsSuper'
