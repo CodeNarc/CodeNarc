@@ -132,6 +132,23 @@ CodeNarc - Creating a RuleSet
 
   <<Note>>: If you specify an \<include\> and an \<exclude\> for a rule, then the \<exclude\> takes precedence.
 
-  \<\<\<  <<NOTE:>> <In the future, wildcards may be supported for includes and excludes>  \>\>\>
+
+** Using Wildcards Within \<include\> and \<exclude\> Names
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You may optionally include wildcard characters ('*' or '?') in the rule <name> for both
+  \<include\> and an \<exclude\> elements. The wildcard character '*' within the <name> matches a
+  sequence of zero or more characters in the rule name, while the wildcard character '?' within the
+  <name> matches exactly one character in the rule name.
+
+  In the following <RuleSet> excerpt, all rules matching '*Instantiation' are included from the
+  "rulesets/basic.xml" <RuleSet>. In this case, that will include the <<StringInstantiationRule>>
+  and <<BooleanInstantiationRule>> rules. 
+
++----------------------------------------------------------------------------------------
+    <ruleset-ref path='rulesets/basic.xml'>
+        <include name='*Instantiation'/>
+    </ruleset-ref>
++----------------------------------------------------------------------------------------
 
 

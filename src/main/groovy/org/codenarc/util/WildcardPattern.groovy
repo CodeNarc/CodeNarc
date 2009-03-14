@@ -16,19 +16,47 @@
 package org.codenarc.util
 
 /**
- * Contains static utility methods related to pattern-matching and regular expressions.
+ * Represents a string pattern that may optionally include wildcard characters ('*' or '?'), and
+ * provides an API to determine whether that pattern matches a specified input string.
+ * <p/>
+ * The wildcard character '*' within the pattern matches a sequence of zero or more characters in the input
+ * string. The wildcard character '?' within the pattern matches exactly one character in the input string.
+ * <p/>
+ * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 79 $ - $Date: 2009-03-10 20:57:01 -0400 (Tue, 10 Mar 2009) $
  */
-class PatternUtil {
+class WildcardPattern {
+    private String pattern
+    private String regex
+
+    /**
+     * Construct a new WildcardPattern instance.
+     * @param pattern - the pattern string, optionally including wildcard characters ('*' or '?'); must not be null
+     */
+    WildcardPattern(String pattern) {
+        assert pattern != null
+        this.pattern = pattern
+        this.regex = containsWildcards(pattern) ? convertStringWithWildcardsToRegex(pattern) : null
+
+    }
+
+    /**
+     * Return true if the specified String matches the pattern
+     * @param string - the String to check
+     * @return true if the String matches the pattern
+     */
+    boolean matches(String string) {
+        return regex ? string ==~ regex : string == pattern
+    }
 
     /**
      * Return true if the specified String contains one or more wildcard characters ('?' or '*')
      * @param string - the String to check
      * @return true if the String contains wildcards
      */
-    static boolean containsWildcards(String string) {
+    private static boolean containsWildcards(String string) {
         return string =~ /\*|\?/
     }
 
@@ -40,7 +68,7 @@ class PatternUtil {
      *
      * @throws AssertionError - if the stringWithWildcards is null
      */
-    static String convertStringWithWildcardsToRegex(String stringWithWildcards) {
+    private static String convertStringWithWildcardsToRegex(String stringWithWildcards) {
         assert stringWithWildcards != null
 
         def result = new StringBuffer()
@@ -58,8 +86,6 @@ class PatternUtil {
                 default: result << ch
             }
         }
-        println result
-
         return result
     }
 

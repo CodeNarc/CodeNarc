@@ -15,6 +15,8 @@
  */
 package org.codenarc.ruleset
 
+import org.codenarc.util.WildcardPattern
+
 /**
  * A <code>RuleSet</code> implementation that is a Decorator for another RuleSet, but provides
  * the ability to filter included and excluded rules within that RuleSet.
@@ -47,7 +49,7 @@ class FilteredRuleSet implements RuleSet {
      */
     void addInclude(String include) {
         assert include
-        includes << include
+        includes << new WildcardPattern(include)
     }
 
     /**
@@ -58,7 +60,7 @@ class FilteredRuleSet implements RuleSet {
      */
     void addExclude(String exclude) {
         assert exclude
-        excludes << exclude
+        excludes << new WildcardPattern(exclude)
     }
 
     /**
@@ -68,9 +70,11 @@ class FilteredRuleSet implements RuleSet {
     List getRules() {
         def filteredRules = []
         rules.each { rule ->
-            def matchesIncludes = includes.empty || includes.find { it == rule.name }
+            def matchesIncludes = includes.empty ||
+                includes.find { includePattern -> includePattern.matches(rule.name) }
             if (matchesIncludes) {
-                def matchesExcludes = !excludes.empty && excludes.find { it == rule.name }
+                def matchesExcludes = !excludes.empty &&
+                        excludes.find { excludePattern -> excludePattern.matches(rule.name) }
                 if (!matchesExcludes) {
                     filteredRules << rule
                 }

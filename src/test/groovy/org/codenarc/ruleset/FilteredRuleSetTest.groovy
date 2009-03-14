@@ -15,9 +15,10 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.rule.Rule
-import org.codenarc.test.AbstractTest
 import org.codenarc.rule.StubRule
+import org.codenarc.ruleset.FilteredRuleSet
+import org.codenarc.ruleset.ListRuleSet
+import org.codenarc.test.AbstractTest
 
 /**
  * Tests for FilteredRuleSet
@@ -67,6 +68,12 @@ class FilteredRuleSetTest extends AbstractTest {
         assert filteredRuleSet.getRules() == [RULE1, RULE3]
     }
 
+    void testIncludes_Wildcards() {
+        filteredRuleSet.addInclude('Ru?e1')
+        filteredRuleSet.addInclude('*3')
+        assert filteredRuleSet.getRules() == [RULE1, RULE3]
+    }
+
     void testOneExclude() {
         filteredRuleSet.addExclude('Rule2')
         assert filteredRuleSet.getRules() == [RULE1, RULE3]
@@ -78,11 +85,25 @@ class FilteredRuleSetTest extends AbstractTest {
         assert filteredRuleSet.getRules() == [RULE1]
     }
 
+    void testExcludes_Wildcards() {
+        filteredRuleSet.addExclude('*2')
+        filteredRuleSet.addExclude('R?l?3')
+        assert filteredRuleSet.getRules() == [RULE1]
+    }
+
     void testBothIncludesAndExcludes() {
         filteredRuleSet.addInclude('Rule1')
         filteredRuleSet.addInclude('Rule2')
         filteredRuleSet.addExclude('Rule2')     // Exclude takes precedence
         filteredRuleSet.addExclude('Rule3')
+        assert filteredRuleSet.getRules() == [RULE1]
+    }
+
+    void testBothIncludesAndExcludes_Wildcards() {
+        filteredRuleSet.addInclude('R?le1')
+        filteredRuleSet.addInclude('Rule2')
+        filteredRuleSet.addExclude('*2')     // Exclude takes precedence
+        filteredRuleSet.addExclude('??le3')
         assert filteredRuleSet.getRules() == [RULE1]
     }
 

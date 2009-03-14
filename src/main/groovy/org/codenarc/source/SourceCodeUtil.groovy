@@ -25,28 +25,6 @@ package org.codenarc.source
  */
 class SourceCodeUtil {
 
-//    /**
-//     * Return true if the specified criteria apply to thw SourceCode
-//     * @param sourceCode - the SourceCode
-//     * @param applyToFilesMatching - only apply to source code (file) pathnames matching this regular expression.
-//     *      May be null, in which case all SourceCode instances match.
-//     * @param doNotApplyToFilesMatching - only apply to source code (file) pathnames that do NOT match this
-//     *      regular expression. May be null, in which case all SourceCode instances match.
-//     * @return true only if the criteria match to the SourceCode
-//     */
-//    public static boolean shouldApplyTo(
-//        SourceCode sourceCode,
-//        String applyToFilesMatching,
-//        String doNotApplyToFilesMatching) {
-//
-//        boolean apply = (applyToFilesMatching) ? sourceCode.path ==~ applyToFilesMatching : true
-//
-//        if (apply && doNotApplyToFilesMatching) {
-//            apply = !(sourceCode.path ==~ doNotApplyToFilesMatching)
-//        }
-//        return apply
-//    }
-
     /**
      * Return true if all of the criteria specified in the provided Map apply to thw SourceCode.
      * @param sourceCode - the SourceCode
