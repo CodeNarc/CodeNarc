@@ -5,14 +5,35 @@
 JUnit Rules  ("<rulesets/junit.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* JUnitAssertAlwaysFails Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Rule that checks for JUnit <<<assert()>>> method calls with constant arguments such that the
+  assertion always fails. This includes: <<<assertTrue(false)>>>, <<<assertFalse(true)>>>
+  and <<<assertNull(CONSTANT)>>>.
+
+  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
+  paths ending in 'Test.groovy' or 'Tests.groovy'.
+
+
+* JUnitAssertAlwaysSucceeds Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Rule that checks for JUnit <<<assert()>>> method calls with constant arguments such that the
+  assertion always succeeds. This includes: <<<assertTrue(true)>>>, <<<assertFalse(false)>>>
+  and <<<assertNull(null)>>>.
+
+  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
+  paths ending in 'Test.groovy' or 'Tests.groovy'.
+
+
 * JUnitSetUpCallsSuper Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks that if the JUnit <<<setUp>>> method is defined, that it includes a call to
   <<<super.setUp()>>>.
 
- This rule sets the default value of the <applyToFilesMatching> property to only match source code file
- paths ending in 'Test.groovy' or 'Tests.groovy'.
+  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
+  paths ending in 'Test.groovy' or 'Tests.groovy'.
 
 
 * JUnitTearDownCallsSuper Rule
@@ -21,6 +42,6 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Rule that checks that if the JUnit <<<tearDown>>> method is defined, that it includes a call to
   <<<super.tearDown()>>>.
 
- This rule sets the default value of the <applyToFilesMatching> property to only match source code file
- paths ending in 'Test.groovy' or 'Tests.groovy'.
+  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
+  paths ending in 'Test.groovy' or 'Tests.groovy'.
 

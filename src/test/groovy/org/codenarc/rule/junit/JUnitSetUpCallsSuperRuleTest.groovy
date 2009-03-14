@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitSetUpCallsSuperRule
  *
  * @author Chris Mair
- * @version $Revision: 80 $ - $Date: 2009-03-10 21:04:28 -0400 (Tue, 10 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 

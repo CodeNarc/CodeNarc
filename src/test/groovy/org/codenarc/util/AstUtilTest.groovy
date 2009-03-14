@@ -48,24 +48,32 @@ class AstUtilTest extends AbstractTest {
         applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert AstUtil.isMethodCall(statement, 'object', 'print', 0)
+        assert AstUtil.isMethodCall(statement.expression, 'object', 'print', 0)
+        assert AstUtil.isMethodCall(statement.expression, 'object', 'print')
     }
 
     void testIsMethodCall_WrongMethodName() {
         applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print2', 0)
+        assert !AstUtil.isMethodCall(statement.expression, 'object', 'print2', 0)
+        assert !AstUtil.isMethodCall(statement.expression, 'object', 'print2')
     }
 
     void testIsMethodCall_WrongMethodObjectName() {
         applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object2', 'print', 0)
+        assert !AstUtil.isMethodCall(statement.expression, 'object2', 'print', 0)
+        assert !AstUtil.isMethodCall(statement.expression, 'object2', 'print')
     }
 
     void testIsMethodCall_WrongNumberOfArguments() {
         applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 1)
+        assert !AstUtil.isMethodCall(statement.expression, 'object', 'print', 1)
+        assert AstUtil.isMethodCall(statement.expression, 'object', 'print')
     }
 
     void testIsMethodCall_NotAMethodCall() {

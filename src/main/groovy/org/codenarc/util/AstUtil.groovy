@@ -63,22 +63,49 @@ class AstUtil {
     public static boolean isMethodCall(Statement stmt, String methodObject, String methodName, int numArguments) {
         def match = false
         if (stmt instanceof ExpressionStatement) {
-            def expressionStatement = stmt.expression
-            if (expressionStatement instanceof MethodCallExpression) {
-                def objectExpression = expressionStatement.objectExpression
-                if (objectExpression instanceof VariableExpression) {
-                    def objectName = objectExpression.name
-                    match = (objectName == methodObject)
-                }
-                def method = expressionStatement.method
-                def value = method.value
-                match = match && (value == methodName)
-
-                def argumentsExpression = expressionStatement.arguments
-                def arguments = argumentsExpression.expressions
-                match = match && arguments.size() == numArguments
+            def expression = stmt.expression
+            if (expression instanceof MethodCallExpression) {
+                match = isMethodCall(expression, methodObject, methodName, numArguments)
             }
         }
+        return match
+    }
+
+    /**
+     * Return true only if the MethodCallExpression represents a method call for the specified method object (receiver),
+     * method name, and with the specified number of arguments.
+     * @param methodCall - the AST MethodCallExpression
+     * @param methodObject - the name of the method object (receiver)
+     * @param methodName - the name of the method being called
+     * @param numArguments - the number of arguments passed into the method
+     * @return true only if the method call matches the specified criteria
+     */
+    public static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
+        def match = isMethodCall(methodCall, methodObject, methodName)
+        def argumentsExpression = methodCall.arguments
+        def arguments = argumentsExpression.expressions
+        match = match && arguments.size() == numArguments
+        return match
+    }
+
+    /**
+     * Return true only if the MethodCallExpression represents a method call for the specified method
+     * object (receiver) and method name.
+     * @param methodCall - the AST MethodCallExpression
+     * @param methodObject - the name of the method object (receiver)
+     * @param methodName - the name of the method being called
+     * @return true only if the method call matches the specified criteria
+     */
+    public static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName) {
+        def match = false
+        def objectExpression = methodCall.objectExpression
+        if (objectExpression instanceof VariableExpression) {
+            def objectName = objectExpression.name
+            match = (objectName == methodObject)
+        }
+        def method = methodCall.method
+        def value = method.value
+        match = match && (value == methodName)
         return match
     }
 
