@@ -76,6 +76,7 @@ class CodeNarcTask extends Task {
         assert ruleSetFiles
         assert fileSet
 
+        def startTime = System.currentTimeMillis()
         def sourceAnalyzer = createSourceAnalyzer()
         ruleSet = createRuleSet()
         new PropertiesFileRuleSetConfigurer().configure(ruleSet)
@@ -84,11 +85,12 @@ class CodeNarcTask extends Task {
         def p2 = results.getNumberOfViolationsWithPriority(2, true)
         def p3 = results.getNumberOfViolationsWithPriority(3, true)
         def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
-        LOG.info("Completed analyzing source: " + countsText)
+        def elapsedTime = System.currentTimeMillis() - startTime
         LOG.debug("results=$results")
-        checkMaxViolations(p1, p2, p3, countsText)
         def analysisContext = new AnalysisContext(ruleSet:ruleSet)
         reportWriters.each { reportWriter -> reportWriter.writeOutReport(analysisContext, results) }
+        LOG.info("CodeNarc completed: " + countsText + " ${elapsedTime}ms")
+        checkMaxViolations(p1, p2, p3, countsText)
     }
 
     void addFileset(FileSet fileSet) {

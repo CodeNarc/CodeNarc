@@ -64,6 +64,8 @@ class CodeNarcTaskTest extends AbstractTest {
 
     private void testMaxViolations(int priority, int numViolations) {
         codeNarcTask.addFileset(fileSet)
+        def reportWriter = [ writeOutReport: {ctx, results -> } ]
+        codeNarcTask.reportWriters = [reportWriter]
         StubSourceAnalyzerCategory.reset()
         StubSourceAnalyzerCategory.violationCounts[priority] = numViolations
         use(StubSourceAnalyzerCategory) {
