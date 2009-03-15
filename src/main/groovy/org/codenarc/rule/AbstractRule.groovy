@@ -17,7 +17,7 @@ package org.codenarc.rule
 
 import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.source.SourceCode
-import org.codenarc.source.SourceCodeUtil
+import org.codenarc.source.SourceCodeCriteria
 
 /**
  * Abstract superclass for Rules.
@@ -156,13 +156,13 @@ abstract class AbstractRule implements Rule {
     }
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {
-        return enabled && isReady() && SourceCodeUtil.shouldApplyTo(sourceCode,
-            [
-                applyToFilesMatching:getProperty('applyToFilesMatching'), 
+        // TODO Consider caching SourceCodeCriteria instance 
+        return enabled && isReady() &&
+            new SourceCodeCriteria(
+                applyToFilesMatching:getProperty('applyToFilesMatching'),
                 doNotApplyToFilesMatching:getProperty('doNotApplyToFilesMatching'),
                 applyToFilenames:getProperty('applyToFilenames'),
-                doNotApplyToFilenames:getProperty('doNotApplyToFilenames')
-            ])
+                doNotApplyToFilenames:getProperty('doNotApplyToFilenames')).matches(sourceCode)
     }
 
     private String getClassNameNoPackage() {

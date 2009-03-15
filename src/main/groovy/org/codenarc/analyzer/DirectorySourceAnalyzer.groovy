@@ -20,7 +20,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
-import org.codenarc.source.SourceCodeUtil
+import org.codenarc.source.SourceCodeCriteria
 
 /**
  * SourceAnalyzer implementation that recursively processes files in the configured source directories.
@@ -110,9 +110,11 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
     private def processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
         def file = new File((String)baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
-        if (SourceCodeUtil.shouldApplyTo(sourceFile, 
-                [applyToFilesMatching:applyToFilesMatching, doNotApplyToFilesMatching:doNotApplyToFilesMatching,
-                 applyToFilenames:applyToFilenames, doNotApplyToFilenames:doNotApplyToFilenames])) {
+        if (new SourceCodeCriteria(
+                applyToFilesMatching:applyToFilesMatching,
+                doNotApplyToFilesMatching:doNotApplyToFilesMatching,
+                applyToFilenames:applyToFilenames,
+                doNotApplyToFilenames:doNotApplyToFilenames).matches(sourceFile)) {
             dirResults.numberOfFilesInThisDirectory ++
             def allViolations = []
             ruleSet.rules.each {rule ->
