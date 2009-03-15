@@ -25,7 +25,7 @@ package org.codenarc.util
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision: 79 $ - $Date: 2009-03-10 20:57:01 -0400 (Tue, 10 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class WildcardPattern {
     private String pattern

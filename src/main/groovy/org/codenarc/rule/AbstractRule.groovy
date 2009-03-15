@@ -49,12 +49,14 @@ abstract class AbstractRule implements Rule {
     /**
      * This rule is only applied to source code (file) names matching this value.
      * The value may optionally be a comma-separated list of names, in which case one of the names must match.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
      */
     String applyToFilenames
 
     /**
      * This rule is NOT applied to source code (file) names matching this value.
      * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
      */
     String doNotApplyToFilenames
 

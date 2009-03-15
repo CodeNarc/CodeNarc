@@ -98,10 +98,24 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyToFilenames_Wildcards() {
+        rule.applyToFilenames = 'My*.groovy'
+        assertSingleViolation(SOURCE)
+        rule.applyToFilenames = "MyTest??.groovy"
+        assertNoViolations(SOURCE)
+    }
+
     void testDoNotApplyToFilenames() {
         rule.doNotApplyToFilenames = "Xxx.groovy"
         assertSingleViolation(SOURCE)
         rule.doNotApplyToFilenames = FILENAME
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToFilenames_Wildcards() {
+        rule.doNotApplyToFilenames = "MyTest??.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFilenames = 'My*.gr*'
         assertNoViolations(SOURCE)
     }
 

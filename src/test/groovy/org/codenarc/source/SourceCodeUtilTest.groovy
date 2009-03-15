@@ -62,6 +62,19 @@ class SourceCodeUtilTest extends AbstractTest {
         assert !SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:"$OTHER_NAME,$NAME"])
     }
 
+    void testShouldApplyTo_Name_Wildcards() {
+        sourceCode.name = NAME
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:'*.groovy'])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:'MyT?st.groovy'])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:'*.ruby'])
+        assert SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:"$OTHER_NAME,My*.groovy"])
+
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:'*View.groovy'])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:'My*.groovy'])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [applyToFilenames:'My*.groovy', doNotApplyToFilenames:'MyT?st.groovy'])
+        assert !SourceCodeUtil.shouldApplyTo(sourceCode, [doNotApplyToFilenames:"$OTHER_NAME,My*.groovy"])
+    }
+
     void testShouldApplyTo_NameAndPath() {
         sourceCode.name = NAME
         sourceCode.path = PATH

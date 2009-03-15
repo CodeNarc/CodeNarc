@@ -58,12 +58,14 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
     /**
      * Only analyze filenames matching this value.
      * The value may optionally be a comma-separated list of names.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
      */
     String applyToFilenames
 
     /**
      * Do NOT analyze filenames matching this value.
      * The value may optionally be a comma-separated list of names.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
      */
     String doNotApplyToFilenames
 

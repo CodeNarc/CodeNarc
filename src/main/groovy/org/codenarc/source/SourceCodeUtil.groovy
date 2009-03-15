@@ -15,6 +15,8 @@
  */
 package org.codenarc.source
 
+import org.codenarc.util.WildcardPattern
+
 /**
  * Contains SourceCode-related utility methods.
  * <p/>
@@ -37,10 +39,12 @@ class SourceCodeUtil {
      *          regular expression. May be null, in which case all SourceCode instances match.</li>
      *      <li>applyToFilenames - only apply to source code (file) names matching this name.
      *          This value may optionally be a comma-separated list of names.
+     *          The name(s) may optionally include wildcard characters ('*' or '?').
      *          May be null, in which case all SourceCode instances match.</li>
      *      <li>doNotApplyToFilenames - only apply to source code (file) names that do NOT match this name.
      *          This value may optionally be a comma-separated list of names.
-     *          May be null, in which case all SourceCode instances match.</li> 
+     *          The name(s) may optionally include wildcard characters ('*' or '?').
+     *          May be null, in which case all SourceCode instances match.</li>
      *    </ul>
      * @return true only if all of the criteria match to the SourceCode
      */
@@ -53,12 +57,12 @@ class SourceCodeUtil {
 
         if (apply && criteria.applyToFilenames) {
             def names = criteria.applyToFilenames.tokenize(',')
-            apply = names.contains(sourceCode.name)
+            apply = names.find { namePattern -> new WildcardPattern(namePattern).matches(sourceCode.name) }
         }
 
         if (apply && criteria.doNotApplyToFilenames) {
             def names = criteria.doNotApplyToFilenames.tokenize(',')
-            apply = !names.contains(sourceCode.name)
+            apply = !(names.find { namePattern -> new WildcardPattern(namePattern).matches(sourceCode.name) } )
         }
 
         return apply

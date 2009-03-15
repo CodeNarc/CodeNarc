@@ -110,7 +110,10 @@ FieldName.regex=_[a-z][a-zA-Z0-9]*
   of source files. If <<<applyToFilenames>>> is not empty or null, then the rule is only
   applied to source files matching one of the specified filenames. Likewise, if
   <<<doNotApplyToFilesMatching>>> is not empty or null, then the rule is NOT applied to source files
-  matching any of the specified filenames. Both properties default to <<<null>>>.
+  matching any of the specified filenames. Both properties may optionally contain wildcard
+  characters ('*' or '?'). The wildcard character '*' matches a sequence of zero or more characters
+  in the input string. The wildcard character '?' matches exactly one character in the input string.
+  Both properties default to <<<null>>>.
 
   The <<<enabled>>> boolean property allows a rule to be completely turned off (by setting it to <<<false>>>).
   It defaults to <<<true>>>.
