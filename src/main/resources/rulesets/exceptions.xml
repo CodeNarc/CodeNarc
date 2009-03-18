@@ -8,6 +8,10 @@
         These rules implement standards and best practices related to catching and throwing of exceptions.
     </description>
 
+    <rule class='org.codenarc.rule.exceptions.CatchErrorRule'/>
+    <rule class='org.codenarc.rule.exceptions.CatchExceptionRule'/>
+    <rule class='org.codenarc.rule.exceptions.CatchNullPointerExceptionRule'/>
+    <rule class='org.codenarc.rule.exceptions.CatchRuntimeExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>
 
 </ruleset>

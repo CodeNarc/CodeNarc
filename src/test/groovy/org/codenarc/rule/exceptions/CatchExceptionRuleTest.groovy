@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
 
 /**
- * Tests for CatchThrowableRule
+ * Tests for CatchExceptionRule
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CatchThrowableRuleTest extends AbstractRuleTest {
+class CatchExceptionRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'CatchThrowable'
+        assert rule.name == 'CatchException'
     }
 
     void testApplyTo_Violation() {
@@ -36,29 +36,29 @@ class CatchThrowableRuleTest extends AbstractRuleTest {
                 try {
                     doSomething()
                 }
-                catch(Throwable t) {
+                catch(Exception t) {
                 }
         '''
-        assertSingleViolation(SOURCE, 5, 'catch(Throwable t) {')
+        assertSingleViolation(SOURCE, 5, 'catch(Exception t) {')
     }
 
     void testApplyTo_Violation_FullPackageName() {
-        final SOURCE = 'try {  } catch(java.lang.Throwable t) { }'
-        assertSingleViolation(SOURCE, 1, 'catch(java.lang.Throwable t) {')
+        final SOURCE = 'try {  } catch(java.lang.Exception t) { }'
+        assertSingleViolation(SOURCE, 1, 'catch(java.lang.Exception t) {')
     }
 
     void testApplyTo_NoViolations() {
-        final SOURCE = '''class MyClass {
+        final SOURCE = '''
                 def myMethod() {
                     try {
-                    } catch(Exception t) { }
+                    } catch(Throwable t) { }
                 }
-            }'''
+            '''
         assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
-        return new CatchThrowableRule()
+        return new CatchExceptionRule()
     }
 
 }

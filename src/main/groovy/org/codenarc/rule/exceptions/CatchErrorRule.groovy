@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 
 /**
- * Rule that checks for catching a Throwable
+ * Rule that checks for catching a Error
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CatchThrowableRule extends AbstractAstVisitorRule {
-    String name = 'CatchThrowable'
+class CatchErrorRule extends AbstractAstVisitorRule {
+    String name = 'CatchError'
     int priority = 2
 
     AstVisitor getAstVisitor() {
-        return new CommonCatchAstVisitor('Throwable')
+        return new CommonCatchAstVisitor('Error')
     }
 }

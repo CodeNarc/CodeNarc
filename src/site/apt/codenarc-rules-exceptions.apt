@@ -1,9 +1,37 @@
 		--------------------------------------------------
-					  CodeNarc - Exception Rules
+				    CodeNarc - Exceptions Rules
 		--------------------------------------------------
 
-Basic Rules  ("<rulesets/exceptions.xml>")
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Exceptions Rules  ("<rulesets/exceptions.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* CatchError Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<Error>>>. In most cases that is much too broad, and is also dangerous
+  because it can catch exceptions such as <<<ThreadDeath>>> and <<<OutOfMemoryError>>>.
+
+
+* CatchException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<Exception>>>. In most cases that is too broad or general. It should usually
+  be restricted to framework or infrastructure code, rather than application code.
+
+
+* CatchNullPointerException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<NullPointerException>>>. Catching <<<NullPointerException>>> is never
+  appropriate. It should be avoided in the first place with proper null checking, and it can mask underlying errors.
+
+
+* CatchRuntimeException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<RuntimeException>>>. In most cases that is too broad or general. It should
+  usually be restricted to framework or infrastructure code, rather than application code.
+
 
 * CatchThrowable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

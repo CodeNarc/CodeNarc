@@ -27,7 +27,8 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
-    static final MAX_SOURCE_LINE_LENGTH = 50
+    public static final MAX_SOURCE_LINE_LENGTH = 60
+    public static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
     List violations = []
     Rule rule
     SourceCode sourceCode
@@ -120,16 +121,17 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * Format and trim the source line. If the whole line fits, then include the whole line (trimmed).
      * Otherwise, remove characters from the middle to truncate to the max length.
      * @param sourceLine - the source line to format
-     * @param startColumn - the starting column index; used to truncate the line if it's too long; defaults to 1
+     * @param startColumn - the starting column index; used to truncate the line if it's too long; defaults to 0
      * @return the formatted and trimmed source line
      */
-    private String formatSourceLine(String sourceLine, int startColumn=1) {
+    protected String formatSourceLine(String sourceLine, int startColumn=0) {
         def source = sourceLine ? sourceLine.trim() : null
         if (source && source.size() > MAX_SOURCE_LINE_LENGTH) {
-            def lengthOfFirstSegment = MAX_SOURCE_LINE_LENGTH - 12
-            def startIndexOfFirstSegment = startColumn
-            def endIndexOfFirstSegment = startIndexOfFirstSegment + lengthOfFirstSegment
-            source = sourceLine[startIndexOfFirstSegment..endIndexOfFirstSegment] + '..' + source[-10..-1]
+            source = startColumn ? sourceLine[startColumn..-1] : sourceLine.trim()
+            def lengthOfFirstSegment = MAX_SOURCE_LINE_LENGTH - SOURCE_LINE_LAST_SEGMENT_LENGTH - 2
+            def firstSegment = source[0..lengthOfFirstSegment-1]
+            def lastSegment = source[-SOURCE_LINE_LAST_SEGMENT_LENGTH..-1]
+            source = firstSegment + '..' + lastSegment
         }
         return source
     }

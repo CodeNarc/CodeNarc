@@ -56,7 +56,16 @@ class AbstractAstVisitorClassTest extends AbstractTest {
     void testSourceLine_ASTNode_LineTooLong() {
         def sourceLine = astVisitor.sourceLine(astVisitor.ifStatement)
         log("sourceLine=[$sourceLine]")
-        assert sourceLine == 'if (true) println "12345678901234567890..234567890"'
+        assert sourceLine == 'if (true) println "123456789012345678901234567..01234567890"'
+        assert sourceLine.size() == astVisitor.MAX_SOURCE_LINE_LENGTH
+    }
+
+    void testFormatSourceLine() {
+        assert astVisitor.formatSourceLine('') == null
+        assert astVisitor.formatSourceLine('abc') == 'abc'    
+        assert astVisitor.formatSourceLine('abcdef'*20) == 'abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
+        assert astVisitor.formatSourceLine('abc', 2) == 'abc'
+        assert astVisitor.formatSourceLine('abcdef'*20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef..abcdefabcdef'
     }
 
     void testAddViolation() {
