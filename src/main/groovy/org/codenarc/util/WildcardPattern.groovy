@@ -89,9 +89,4 @@ class WildcardPattern {
         return result
     }
 
-    /**
-     * Private constructor to prevent instantiation. All members are static.
-     */
-    private PatternUtil() {
-    }
 }
