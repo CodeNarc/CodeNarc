@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTest
 
 /**
  * Tests for DuplicateImportRule
@@ -23,7 +24,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class DuplicateImportRuleTest extends AbstractImportRuleTest {
+class DuplicateImportRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
@@ -36,7 +37,7 @@ class DuplicateImportRuleTest extends AbstractImportRuleTest {
             import java.io.OutputStream
             import java.io.InputStream
         '''
-        assertImportViolations(SOURCE, ['import java.io.InputStream'])
+        assertSingleViolation(SOURCE, 2, 'import java.io.InputStream')
     }
 
     void testApplyTo_NoViolations() {

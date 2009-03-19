@@ -140,8 +140,28 @@ abstract class AbstractRule implements Rule {
      * @param importNode - the ImportNode for the import triggering the violation
      * @return a new Violation object
      */
-    protected Violation createViolationForImport(ImportNode importNode) {
-        return new Violation(rule:this, sourceLine:importNode.text)
+    protected Violation createViolationForImport(SourceCode sourceCode, ImportNode importNode) {
+        def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
+        return new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
+    }
+
+    /**
+     * Return the source line and line number for the specified import
+     * @param sourceCode - the SourceCode being processed
+     * @param importNode - the ImportNode representing the import
+     * @return an object that has 'sourceLine' and 'lineNumber' fields
+     */
+    protected sourceLineAndNumberForImport(SourceCode sourceCode, ImportNode importNode) {
+        // NOTE: This won't properly handle the case of multiple imports for same class if not all are aliased
+        def index = sourceCode.lines.findIndexOf { line ->
+            line.contains('import') &&
+                line.contains(importNode.className) &&
+                line.contains(importNode.alias)
+        }
+        def lineNumber = index == -1 ? null : index + 1
+        def sourceLine = lineNumber == null ? importNode.text : sourceCode.lines[lineNumber-1].trim()
+        println "result=" + [sourceLine:sourceLine, lineNumber:lineNumber]
+        return [sourceLine:sourceLine, lineNumber:lineNumber]
     }
 
     /**

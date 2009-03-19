@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTest
 
 /**
  * Tests for ImportFromSamePackageRule
@@ -23,7 +24,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class ImportFromSamePackageRuleTest extends AbstractImportRuleTest {
+class ImportFromSamePackageRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
@@ -37,7 +38,7 @@ class ImportFromSamePackageRuleTest extends AbstractImportRuleTest {
             import java.text.SimpleDateFormat
             import org.xyz.MyService
         '''
-        assertImportViolations(SOURCE, ['org.xyz.MyController', 'org.xyz.MyService'])
+        assertTwoViolations(SOURCE, 3, 'org.xyz.MyController', 5, 'org.xyz.MyService')
     }
 
     void testApplyTo_NoViolations() {

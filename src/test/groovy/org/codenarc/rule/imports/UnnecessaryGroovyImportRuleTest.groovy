@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTest
 
 /**
  * Tests for UnnecessaryGroovyImportRule
@@ -23,7 +24,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
+class UnnecessaryGroovyImportRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
@@ -37,7 +38,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
             import java.math.RoundingMode
             import java.math.BigInteger
         '''
-        assertImportViolations(SOURCE, ['java.math.BigDecimal', 'java.math.BigInteger'])
+        assertTwoViolations(SOURCE, 2, 'java.math.BigDecimal', 5, 'java.math.BigInteger')
     }
 
     void testApplyTo_ImportGroovyLang() {
@@ -46,7 +47,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
             import com.xxx.MyClass
             import groovy.lang.GString
         '''
-        assertImportViolations(SOURCE, ['groovy.lang.MetaClass', 'groovy.lang.GString'])
+        assertTwoViolations(SOURCE, 2, 'groovy.lang.MetaClass', 4, 'groovy.lang.GString')
     }
 
     void testApplyTo_ImportGroovyUtil() {
@@ -55,7 +56,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
             import com.xxx.MyClass
             import groovy.util.Expando
         '''
-        assertImportViolations(SOURCE, ['groovy.util.Eval', 'groovy.util.Expando'])
+        assertTwoViolations(SOURCE, 2, 'groovy.util.Eval', 4, 'groovy.util.Expando')
     }
 
     void testApplyTo_ImportJavaLang() {
@@ -65,7 +66,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
             import java.lang.reflect.Field
             import java.lang.Integer
         '''
-        assertImportViolations(SOURCE, ['java.lang.String', 'java.lang.Integer'])
+        assertTwoViolations(SOURCE, 2, 'java.lang.String', 5, 'java.lang.Integer')
     }
 
     void testApplyTo_ImportJavaUtil() {
@@ -74,7 +75,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
             import com.xxx.MyClass
             import java.util.Map
         '''
-        assertImportViolations(SOURCE, ['java.util.List', 'java.util.Map'])
+        assertTwoViolations(SOURCE, 2, 'java.util.List', 4, 'java.util.Map')
     }
 
     void testApplyTo_ImportJavaIo() {
@@ -83,7 +84,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractImportRuleTest {
             import java.io.InputStream
             import java.io.OutputStream
         '''
-        assertImportViolations(SOURCE, ['java.io.InputStream', 'java.io.OutputStream'])
+        assertTwoViolations(SOURCE, 3, 'java.io.InputStream', 4, 'java.io.OutputStream')
     }
 
     void testApplyTo_NoViolations() {

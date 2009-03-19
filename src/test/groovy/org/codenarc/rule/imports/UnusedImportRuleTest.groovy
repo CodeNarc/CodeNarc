@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTest
 
 /**
  * Tests for UnusedImportRule
@@ -23,7 +24,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class UnusedImportRuleTest extends AbstractImportRuleTest {
+class UnusedImportRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 3
@@ -38,7 +39,7 @@ class UnusedImportRuleTest extends AbstractImportRuleTest {
                 InputStream input;
             }
         '''
-        assertImportViolations(SOURCE, ['import java.io.OutputStream'])
+        assertSingleViolation(SOURCE, 3, 'import java.io.OutputStream')
     }
 
     void testApplyTo_TwoViolations() {
@@ -50,7 +51,7 @@ class UnusedImportRuleTest extends AbstractImportRuleTest {
                 Map map;
             }
         '''
-        assertImportViolations(SOURCE, ['import java.io.InputStream', 'import java.io.OutputStream'])
+        assertTwoViolations(SOURCE, 2, 'import java.io.InputStream', 4, 'import java.io.OutputStream')
     }
 
     void testApplyTo_NoViolations() {

@@ -35,7 +35,7 @@ class ImportFromSamePackageRule extends AbstractRule {
             sourceCode.ast.imports.each { importNode ->
                 def importPackageName = packageNameForImport(importNode)
                 if (importPackageName == filePackageName) {
-                    violations.add(createViolationForImport(importNode))
+                    violations.add(createViolationForImport(sourceCode, importNode))
                 }
             }
         }

@@ -39,7 +39,7 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
                 def classes = ['java.math.BigDecimal', 'java.math.BigInteger']
 
                 if (importPackageName in packages || importClassName in classes) {
-                    violations.add(createViolationForImport(importNode))
+                    violations.add(createViolationForImport(sourceCode, importNode))
                 }
             }
         }

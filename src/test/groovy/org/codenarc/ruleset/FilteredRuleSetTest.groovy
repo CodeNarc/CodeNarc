@@ -16,8 +16,6 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.StubRule
-import org.codenarc.ruleset.FilteredRuleSet
-import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTest
 
 /**

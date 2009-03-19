@@ -32,7 +32,7 @@ class UnusedImportRule extends AbstractRule {
         if (sourceCode.ast?.imports) {
             sourceCode.ast.imports.each { importNode ->
                 if (!findReference(sourceCode, importNode.alias)) {
-                    violations.add(createViolationForImport(importNode))
+                    violations.add(createViolationForImport(sourceCode, importNode))
                 }
             }
         }

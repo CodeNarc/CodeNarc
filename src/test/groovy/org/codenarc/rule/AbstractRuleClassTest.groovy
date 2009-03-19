@@ -15,6 +15,8 @@
  */
 package org.codenarc.rule
 
+import org.codenarc.source.SourceString
+
 /**
  * Tests for the AbstractRule class
  *
@@ -174,6 +176,25 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         def violations = applyRuleTo(SOURCE)
         assert violations[0].message == 'abc'
         assert violations[1].message == 'abc'
+    }
+
+    void testSourceLineAndNumberForImport() {
+        final SOURCE = '''
+            import a.b.MyClass
+            import a.b.MyClass as Boo
+            // some comment
+            import a.pkg1.MyOtherClass as MOC
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def ast = sourceCode.ast
+        println ast.imports.collect { it.alias }
+        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass', lineNumber:2]
+        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[1]) == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
+        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[2]) == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]
+
+        // Not found
+        def otherSourceCode = new SourceString('def v = 1')
+        assert rule.sourceLineAndNumberForImport(otherSourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
     }
 
     protected Rule createRule() {

@@ -33,7 +33,7 @@ class DuplicateImportRule extends AbstractRule {
 
         sourceCode.ast?.imports.each { importNode ->
             if (importedClassNames.contains(importNode.className)) {
-                violations.add(createViolationForImport(importNode))
+                violations.add(createViolationForImport(sourceCode, importNode))
             }
             else {
                 importedClassNames.add(importNode.className)
