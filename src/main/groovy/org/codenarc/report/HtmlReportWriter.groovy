@@ -39,6 +39,8 @@ class HtmlReportWriter implements ReportWriter {
     static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
     static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
     static final ROOT_PACKAGE_NAME = '<Root>'
+    static final MAX_SOURCE_LINE_LENGTH = 70
+    static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
     static final LOG = Logger.getLogger(HtmlReportWriter)
 
     String title
@@ -237,9 +239,10 @@ class HtmlReportWriter implements ReportWriter {
                         td(violation.lineNumber, class:'number')
                         td {
                             if (violation.sourceLine) {
+                                def formattedSourceLine = formatSourceLine(violation.sourceLine)
                                 p(class:'violationInfo') {
                                     span('[SRC]', class:'violationInfoPrefix')
-                                    span(violation.sourceLine, class:'sourceCode')
+                                    span(formattedSourceLine, class:'sourceCode')
                                 }
                             }
                             if (moreInfo) {
@@ -303,6 +306,26 @@ class HtmlReportWriter implements ReportWriter {
             LOG.warn(description + " resourceKey=[$resourceKey]")
         }
         return description
+    }
+
+    
+    /**
+     * Format and trim the source line. If the whole line fits, then include the whole line (trimmed).
+     * Otherwise, remove characters from the middle to truncate to the max length.
+     * @param sourceLine - the source line to format
+     * @param startColumn - the starting column index; used to truncate the line if it's too long; defaults to 0
+     * @return the formatted and trimmed source line
+     */
+    protected String formatSourceLine(String sourceLine, int startColumn=0) {
+        def source = sourceLine ? sourceLine.trim() : null
+        if (source && source.size() > MAX_SOURCE_LINE_LENGTH) {
+            source = startColumn ? sourceLine[startColumn..-1] : sourceLine.trim()
+            def lengthOfFirstSegment = MAX_SOURCE_LINE_LENGTH - SOURCE_LINE_LAST_SEGMENT_LENGTH - 2
+            def firstSegment = source[0..lengthOfFirstSegment-1]
+            def lastSegment = source[-SOURCE_LINE_LAST_SEGMENT_LENGTH..-1]
+            source = firstSegment + '..' + lastSegment
+        }
+        return source
     }
 
     private buildVersionFooter() {

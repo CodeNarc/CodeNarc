@@ -35,13 +35,20 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class HtmlReportWriterTest extends AbstractTest {
-
+    static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
+    static final TRUNCATED_LONG_LINE = 'throw new Exception() // Some very long message 12345678..901234567890'
+    static final MESSAGE = 'bad stuff'
     static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:20, sourceLine:'if (file) {')
-    static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:33, message:'bad stuff')
-    static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:'throw new Exception()', message: 'Other info')
+    static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:33, message:MESSAGE)
+    static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:LONG_LINE, message: 'Other info')
     static final OUTPUT_DIR = "."
     static final REPORT_FILENAME = "HtmlReport.html"
-    static final REPORT_CONTENTS = ['html', '/src/main', 'MyAction.groovy', 'MyAction2.groovy', 'MyActionTest.groovy']
+    static final REPORT_CONTENTS = [
+            'html',
+            '/src/main',
+            'MyAction.groovy', MESSAGE, TRUNCATED_LONG_LINE, 
+            'MyAction2.groovy',
+            'MyActionTest.groovy']
     static final NEW_REPORT_FILE = 'NewReport.html'
     static final TITLE = 'My Cool Project'
 
@@ -131,6 +138,14 @@ class HtmlReportWriterTest extends AbstractTest {
 
         results.numberOfFilesInThisDirectory = 2
         assert reportWriter.isDirectoryContainingFiles(results)
+    }
+
+    void testFormatSourceLine() {
+        assert reportWriter.formatSourceLine('') == null
+        assert reportWriter.formatSourceLine('abc') == 'abc'
+        assert reportWriter.formatSourceLine('abcdef'*20) == 'abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefab..abcdefabcdef'
+        assert reportWriter.formatSourceLine('abc', 2) == 'abc'
+        assert reportWriter.formatSourceLine('abcdef'*20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
     }
 
     void setUp() {

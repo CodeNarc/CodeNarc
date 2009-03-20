@@ -57,8 +57,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      */
     protected String sourceLine(ASTNode statement) {
         // TODO Handle statements that cross multiple lines?
-        def line = (statement.lineNumber >= 0) ? sourceCode.lines[statement.lineNumber-1] : null
-        return formatSourceLine(line, statement.columnNumber-1)
+        return (statement.lineNumber >= 0) ? sourceLine(statement.lineNumber) : null
     }
 
     /**
@@ -66,8 +65,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * @param lineNumber - the line number (zero-based)
      */
     protected String sourceLine(int lineNumber) {
-        def line = (lineNumber >= 0) ? sourceCode.lines[lineNumber-1] : null
-        return formatSourceLine(line)
+        return (lineNumber >= 0) ? sourceCode.lines[lineNumber-1].trim() : null
     }
 
     /**
@@ -82,14 +80,6 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
             def sourceLine = sourceLine(node)
             addViolation(sourceLine, lineNumber, message)
         }
-    }
-
-    /**
-     * Add a new Violation for the expression to the list of violations found by this visitor
-     * @param node - the Groovy AST Node for the expression
-     */
-    protected void addViolationFromExpression(ASTNode node) {
-        addViolation(formatSourceLine(node.text), node.lineNumber)
     }
 
     /**
@@ -108,31 +98,10 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * @param message - the message for the violation; defaults to null
      */
     protected void addViolation(int lineNumber, String message=null) {
-        def sourceLine = sourceCode.lines[lineNumber-1]
-        def formattedSourceLine = formatSourceLine(sourceLine)
-        addViolation(formattedSourceLine, lineNumber, message)
+        addViolation(sourceLine(lineNumber), lineNumber, message)
     }
 
     protected SourceUnit getSourceUnit() {
-        return source
-    }
-
-    /**
-     * Format and trim the source line. If the whole line fits, then include the whole line (trimmed).
-     * Otherwise, remove characters from the middle to truncate to the max length.
-     * @param sourceLine - the source line to format
-     * @param startColumn - the starting column index; used to truncate the line if it's too long; defaults to 0
-     * @return the formatted and trimmed source line
-     */
-    protected String formatSourceLine(String sourceLine, int startColumn=0) {
-        def source = sourceLine ? sourceLine.trim() : null
-        if (source && source.size() > MAX_SOURCE_LINE_LENGTH) {
-            source = startColumn ? sourceLine[startColumn..-1] : sourceLine.trim()
-            def lengthOfFirstSegment = MAX_SOURCE_LINE_LENGTH - SOURCE_LINE_LAST_SEGMENT_LENGTH - 2
-            def firstSegment = source[0..lengthOfFirstSegment-1]
-            def lastSegment = source[-SOURCE_LINE_LAST_SEGMENT_LENGTH..-1]
-            source = firstSegment + '..' + lastSegment
-        }
         return source
     }
 

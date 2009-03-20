@@ -160,7 +160,6 @@ abstract class AbstractRule implements Rule {
         }
         def lineNumber = index == -1 ? null : index + 1
         def sourceLine = lineNumber == null ? importNode.text : sourceCode.lines[lineNumber-1].trim()
-        println "result=" + [sourceLine:sourceLine, lineNumber:lineNumber]
         return [sourceLine:sourceLine, lineNumber:lineNumber]
     }
 

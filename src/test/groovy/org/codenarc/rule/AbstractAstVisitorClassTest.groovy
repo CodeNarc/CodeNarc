@@ -27,16 +27,16 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorClassTest extends AbstractTest {
-
-    static final SOURCE = '''class ABC {
+    static LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'
+    static final SOURCE = """class ABC {
             def justReturn() {
                 println "about to return"; return "ABC"
             }
             def printVeryLongLine() {
-                println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"
+                $LONG_LINE
             }
         }
-    '''
+    """
     def astVisitor
     def sourceCode
     def rule
@@ -53,19 +53,10 @@ class AbstractAstVisitorClassTest extends AbstractTest {
         assert sourceLine == 'println "about to return"; return "ABC"'
     }
 
-    void testSourceLine_ASTNode_LineTooLong() {
+    void testSourceLine_ASTNode_LongLine() {
         def sourceLine = astVisitor.sourceLine(astVisitor.ifStatement)
         log("sourceLine=[$sourceLine]")
-        assert sourceLine == 'if (true) println "123456789012345678901234567..01234567890"'
-        assert sourceLine.size() == astVisitor.MAX_SOURCE_LINE_LENGTH
-    }
-
-    void testFormatSourceLine() {
-        assert astVisitor.formatSourceLine('') == null
-        assert astVisitor.formatSourceLine('abc') == 'abc'    
-        assert astVisitor.formatSourceLine('abcdef'*20) == 'abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
-        assert astVisitor.formatSourceLine('abc', 2) == 'abc'
-        assert astVisitor.formatSourceLine('abcdef'*20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef..abcdefabcdef'
+        assert sourceLine == LONG_LINE
     }
 
     void testAddViolation() {
