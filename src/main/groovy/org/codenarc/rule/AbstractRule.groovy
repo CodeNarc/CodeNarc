@@ -18,6 +18,7 @@ package org.codenarc.rule
 import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceCodeCriteria
+import org.apache.log4j.Logger
 
 /**
  * Abstract superclass for Rules.
@@ -29,6 +30,7 @@ import org.codenarc.source.SourceCodeCriteria
  * @version $Revision$ - $Date$
  */
 abstract class AbstractRule implements Rule {
+    static final LOG = Logger.getLogger(AbstractRule)
 
     /**
      * Flag indicating whether this rule should be enabled (applied). Defaults to true.
@@ -104,13 +106,19 @@ abstract class AbstractRule implements Rule {
      * @return the List of violations; may be empty
      */
     List applyTo(SourceCode sourceCode) {
-        validate()
-        def violations = []
-        if (shouldApplyThisRuleTo(sourceCode)) {
-            applyTo(sourceCode, violations)
+        try {
+            validate()
+            def violations = []
+            if (shouldApplyThisRuleTo(sourceCode)) {
+                applyTo(sourceCode, violations)
+            }
+            overrideViolationMessageIfNecessary(violations)
+            return violations
         }
-        overrideViolationMessageIfNecessary(violations)
-        return violations
+        catch(Throwable t) {
+            LOG.error("Error from [${getClass().name}] processing source file [$sourceCode.path]", t)
+            throw t
+        }
     }
 
     /**

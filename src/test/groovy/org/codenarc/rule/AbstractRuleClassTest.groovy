@@ -16,6 +16,7 @@
 package org.codenarc.rule
 
 import org.codenarc.source.SourceString
+import org.codenarc.source.SourceCode
 
 /**
  * Tests for the AbstractRule class
@@ -178,6 +179,11 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assert violations[1].message == 'abc'
     }
 
+    void testApplyTo_Error() {
+        rule = new ExceptionRule(new Exception('abc'))
+        shouldFailWithMessageContaining('abc') { applyRuleTo(SOURCE) }
+    }
+
     void testSourceLineAndNumberForImport() {
         final SOURCE = '''
             import a.b.MyClass
@@ -212,5 +218,19 @@ class AbstractRuleClassTest extends AbstractRuleTest {
 class NotReadyRule extends TestPathRule {
     boolean isReady() {
         return false
+    }
+}
+
+class ExceptionRule extends AbstractRule {
+    String name = 'Exception'
+    int priority = 1
+    Throwable throwable
+
+    ExceptionRule(Throwable throwable) {
+        this.throwable = throwable
+    }
+
+    void applyTo(SourceCode sourceCode, List violations) {
+        throw throwable
     }
 }
