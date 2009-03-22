@@ -39,6 +39,7 @@ class AstUtilTest extends AbstractTest {
                 object.print()
                 if (true) {
                 }
+                ant.delete(dir:appBase, failonerror:false)
             }
         }
     '''
@@ -74,6 +75,14 @@ class AstUtilTest extends AbstractTest {
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 1)
         assert !AstUtil.isMethodCall(statement.expression, 'object', 'print', 1)
         assert AstUtil.isMethodCall(statement.expression, 'object', 'print')
+    }
+
+    void testIsMethodCall_NamedArgumentList() {
+        applyVisitor(SOURCE_METHOD_CALL)
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'delete' }
+        assert AstUtil.isMethodCall(methodCall, 'ant', 'delete', 2)
+        assert !AstUtil.isMethodCall(methodCall, 'ant', 'delete', 1)
+        assert AstUtil.isMethodCall(methodCall, 'ant', 'delete')
     }
 
     void testIsMethodCall_NotAMethodCall() {

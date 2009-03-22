@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.expr.MapExpression
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -83,7 +84,8 @@ class AstUtil {
     public static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
         def match = isMethodCall(methodCall, methodObject, methodName)
         def argumentsExpression = methodCall.arguments
-        def arguments = argumentsExpression.expressions
+        def arguments = (argumentsExpression instanceof MapExpression) ?
+            argumentsExpression.mapEntryExpressions : argumentsExpression.expressions
         match = match && arguments.size() == numArguments
         return match
     }

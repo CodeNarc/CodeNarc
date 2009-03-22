@@ -91,6 +91,18 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'void setUp() {')
     }
 
+    void testApplyTo_SetUpIncludesCallWithNamedParameterList() {
+        final SOURCE = '''
+          class MyClass extends TestCase {
+            void setUp() {
+                super.setUp()
+        		ant.delete(dir:appBase, failonerror:false)
+            }
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NonTestFile() {
         final SOURCE = '''
           class MyClass extends TestCase {
