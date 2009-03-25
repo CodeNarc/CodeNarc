@@ -25,6 +25,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codehaus.groovy.ast.expr.GStringExpression
 
 /**
  * Tests for AstUtil
@@ -40,6 +41,9 @@ class AstUtilTest extends AbstractTest {
                 if (true) {
                 }
                 ant.delete(dir:appBase, failonerror:false)
+                "stringMethodName"(123)
+                gstringMethodName = 'anotherMethod'
+                "$gstringMethodName"(234)
             }
         }
     '''
@@ -83,6 +87,22 @@ class AstUtilTest extends AbstractTest {
         assert AstUtil.isMethodCall(methodCall, 'ant', 'delete', 2)
         assert !AstUtil.isMethodCall(methodCall, 'ant', 'delete', 1)
         assert AstUtil.isMethodCall(methodCall, 'ant', 'delete')
+    }
+
+    void testIsMethodCall_StringLiteralMethodName() {
+        applyVisitor(SOURCE_METHOD_CALL)
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'stringMethodName' }
+        assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 1)
+        assert !AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 2)
+        assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName')
+    }
+
+    void testIsMethodCall_GStringMethodName() {
+        applyVisitor(SOURCE_METHOD_CALL)
+        def methodCall = visitor.methodCallExpressions.find { mc -> println mc.method; mc.method instanceof GStringExpression }
+        assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 1)
+        assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 2)
+        assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod')
     }
 
     void testIsMethodCall_NotAMethodCall() {

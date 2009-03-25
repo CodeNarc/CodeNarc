@@ -106,7 +106,7 @@ class AstUtil {
             match = (objectName == methodObject)
         }
         def method = methodCall.method
-        def value = method.value
+        def value = method.properties['value']
         match = match && (value == methodName)
         return match
     }
