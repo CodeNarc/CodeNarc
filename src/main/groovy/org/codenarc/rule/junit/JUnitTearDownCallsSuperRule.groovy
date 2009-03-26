@@ -42,6 +42,7 @@ class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
         if (methodNode.name == 'tearDown' &&
                 methodNode.parameters.size() == 0 &&
+                !AstUtil.getAnnotation(methodNode, 'After') &&
                 methodNode.code instanceof BlockStatement) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->

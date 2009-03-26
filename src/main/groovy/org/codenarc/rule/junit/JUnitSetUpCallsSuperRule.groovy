@@ -42,7 +42,9 @@ class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
         if (methodNode.name == 'setUp' &&
                 methodNode.parameters.size() == 0 &&
+                !AstUtil.getAnnotation(methodNode, 'Before') &&
                 methodNode.code instanceof BlockStatement) {
+
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
                 return AstUtil.isMethodCall(stmt, 'super', 'setUp', 0)

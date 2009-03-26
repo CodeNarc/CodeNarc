@@ -103,6 +103,17 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_SetUpMethodHasBeforeAnnotation() {
+        final SOURCE = '''
+          class MyClass extends TestCase {
+            @Before void setUp() {
+                println 'bad'
+            }
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NonTestFile() {
         final SOURCE = '''
           class MyClass extends TestCase {

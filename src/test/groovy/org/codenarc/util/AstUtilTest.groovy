@@ -26,6 +26,8 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.expr.GStringExpression
+import org.codehaus.groovy.ast.AnnotatedNode
+import org.codehaus.groovy.ast.AnnotationNode
 
 /**
  * Tests for AstUtil
@@ -45,12 +47,12 @@ class AstUtilTest extends AbstractTest {
                 gstringMethodName = 'anotherMethod'
                 "$gstringMethodName"(234)
             }
+            @Before setUp() {  }
         }
     '''
     private visitor
 
     void testIsMethodCall_ExactMatch() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert AstUtil.isMethodCall(statement, 'object', 'print', 0)
         assert AstUtil.isMethodCall(statement.expression, 'object', 'print', 0)
@@ -58,7 +60,6 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_WrongMethodName() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print2', 0)
         assert !AstUtil.isMethodCall(statement.expression, 'object', 'print2', 0)
@@ -66,7 +67,6 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_WrongMethodObjectName() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object2', 'print', 0)
         assert !AstUtil.isMethodCall(statement.expression, 'object2', 'print', 0)
@@ -74,7 +74,6 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_WrongNumberOfArguments() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 1)
         assert !AstUtil.isMethodCall(statement.expression, 'object', 'print', 1)
@@ -82,7 +81,6 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_NamedArgumentList() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'delete' }
         assert AstUtil.isMethodCall(methodCall, 'ant', 'delete', 2)
         assert !AstUtil.isMethodCall(methodCall, 'ant', 'delete', 1)
@@ -90,7 +88,6 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_StringLiteralMethodName() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'stringMethodName' }
         assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 1)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 2)
@@ -98,7 +95,6 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_GStringMethodName() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def methodCall = visitor.methodCallExpressions.find { mc -> println mc.method; mc.method instanceof GStringExpression }
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 1)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 2)
@@ -106,7 +102,6 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_NotAMethodCall() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof BlockStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 0)
     }
@@ -118,32 +113,35 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsBlock_NotABlock() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isBlock(statement)
     }
 
     void testIsEmptyBlock_NonEmptyBlock() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof BlockStatement }
         assert !AstUtil.isEmptyBlock(statement)
     }
 
     void testIsEmptyBlock_EmptyBlock() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof IfStatement }
         assert AstUtil.isEmptyBlock(statement.ifBlock)
     }
 
     void testIsEmptyBlock_NotABlock() {
-        applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isEmptyBlock(statement)
+    }
+
+    void testGetAnnotation() {
+        assert AstUtil.getAnnotation(visitor.methodNodes['otherMethod'], 'doesNotExist') == null
+        assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'doesNotExist') == null
+        assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'Before') instanceof AnnotationNode
     }
 
     void setUp() {
         super.setUp()
         visitor = new AstUtilTestVisitor()
+        applyVisitor(SOURCE_METHOD_CALL)
     }
 
     private void applyVisitor(String source) {
@@ -154,13 +152,13 @@ class AstUtilTest extends AbstractTest {
 }
 
 class AstUtilTestVisitor extends ClassCodeVisitorSupport {
-    def methodNode
+    def methodNodes = [:]
     def methodCallExpressions = []
     def statements = []
 
     void visitMethod(MethodNode methodNode) {
         println("visitMethod name=${methodNode.name}")
-        this.methodNode = methodNode
+        methodNodes[methodNode.name] = methodNode
         super.visitMethod(methodNode)
     }
 

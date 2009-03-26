@@ -21,6 +21,8 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.expr.MapExpression
+import org.codehaus.groovy.ast.AnnotatedNode
+import org.codehaus.groovy.ast.AnnotationNode
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -109,6 +111,20 @@ class AstUtil {
         def value = method.properties['value']
         match = match && (value == methodName)
         return match
+    }
+
+    /**
+     * Return the AnnotationNode for the named annotation, or else null.
+     * Supports Groovy 1.5 and Groovy 1.6.
+     * @param node - the AnnotatedNode
+     * @param name - the name of the annotation
+     * @return the AnnotationNode or else null 
+     */
+    public static AnnotationNode getAnnotation(AnnotatedNode node, String name) {
+        def annotations = node.annotations
+        return annotations instanceof Map ?
+            annotations[name] :                                         // Groovy 1.5
+            annotations.find { annot -> annot.classNode.name == name }  // Groovy 1.6
     }
 
     /**

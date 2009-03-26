@@ -150,19 +150,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
-      <library name="org.codehaus.groovy:groovy-all-minimal:1.5.6">
-        <CLASSES>
-          <root url="jar://$M2_REPO$/org/codehaus/groovy/groovy-all-minimal/1.5.6/groovy-all-minimal-1.5.6.jar!/" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="jar://$M2_REPO$/org/codehaus/groovy/groovy-all-minimal/1.5.6/groovy-all-minimal-1.5.6-javadoc.jar!/" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="jar://$M2_REPO$/org/codehaus/groovy/groovy-all-minimal/1.5.6/groovy-all-minimal-1.5.6-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
       <library name="org.apache.ant:ant:1.7.1">
         <CLASSES>
           <root url="jar://$M2_REPO$/org/apache/ant/ant/1.7.1/ant-1.7.1.jar!/" />

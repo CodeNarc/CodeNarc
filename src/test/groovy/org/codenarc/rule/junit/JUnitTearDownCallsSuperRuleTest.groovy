@@ -102,6 +102,15 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_NonTestFile_TearDownMethodHasAfterAnnotation() {
+        final SOURCE = '''
+          class MyClass extends TestCase {
+            @After void tearDown() {  }
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NonTearDownMethod() {
         final SOURCE = '''
             class MyClass {
