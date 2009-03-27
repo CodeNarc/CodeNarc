@@ -18,7 +18,6 @@ package org.codenarc.rule.junit
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Rule that checks for JUnit <code>assert()</code> method calls with constant arguments

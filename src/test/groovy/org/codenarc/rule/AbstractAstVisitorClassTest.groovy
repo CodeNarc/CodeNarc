@@ -27,7 +27,7 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorClassTest extends AbstractTest {
-    static LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'
+    static final LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'
     static final SOURCE = """class ABC {
             def justReturn() {
                 println "about to return"; return "ABC"

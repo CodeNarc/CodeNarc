@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 
 /**
- * Rule that checks for throwing an instance of java.lang.Throwable
+ * Rule that checks for throwing an instance of java.lang.NullPointerException
  *
  * @author Chris Mair
  * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
  */
-class ThrowThrowableRule extends AbstractAstVisitorRule {
-    String name = 'ThrowThrowable'
+class ThrowNullPointerExceptionRule extends AbstractAstVisitorRule {
+    String name = 'ThrowNullPointerException'
     int priority = 2
 
     AstVisitor getAstVisitor() {
-        return new CommonThrowAstVisitor(['Throwable', 'java.lang.Throwable'])
+        return new CommonThrowAstVisitor(['NullPointerException', 'java.lang.NullPointerException'])
     }
 }

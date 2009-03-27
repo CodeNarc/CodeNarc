@@ -19,26 +19,26 @@ import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ThrowThrowableRule
+ * Tests for ThrowErrorRule
  *
  * @author Chris Mair
  * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
  */
-class ThrowThrowableRuleTest extends AbstractRuleTest {
+class ThrowErrorRuleTest extends AbstractRuleTest {
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'ThrowThrowable'
+        assert rule.name == 'ThrowError'
     }
 
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
                 void myMethod() {
-                    throw new Throwable()
+                    throw new Error()
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'throw new Throwable()')
+        assertSingleViolation(SOURCE, 4, 'throw new Error()')
     }
 
     void testApplyTo_Violation_FullPackageName() {
@@ -46,30 +46,30 @@ class ThrowThrowableRuleTest extends AbstractRuleTest {
             class MyClass {
                 void myMethod() {
                     if (error) {
-                        throw new java.lang.Throwable('something bad')
+                        throw new java.lang.Error('something bad')
                     }
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 5, "throw new java.lang.Throwable('something bad')")
+        assertSingleViolation(SOURCE, 5, "throw new java.lang.Error('something bad')")
     }
 
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {
                     try {
-                        throw new Exception()      // ok
+                        throw new MyException()      // ok
                     } finally {
                         println 'ok'
                     }
-                    throw new Exception()          // ok
+                    throw new OtherException()          // ok
                 }
             }'''
         assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
-        return new ThrowThrowableRule()
+        return new ThrowErrorRule()
     }
 
 }
