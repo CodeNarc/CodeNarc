@@ -47,14 +47,19 @@ class VariableNameRule extends AbstractAstVisitorRule {
 class VariableNameAstVisitor extends AbstractAstVisitor  {
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
-        def variableExpression = declarationExpression.variableExpression
-        def re = rule.finalRegex && isFinal(declarationExpression) ? rule.finalRegex : rule.regex
+        if (!isAlreadyVisited(declarationExpression)) {
+            def leftExpression = declarationExpression.leftExpression
+            def varExpressions = leftExpression.properties['expressions'] ?: [leftExpression]
+            def re = rule.finalRegex && isFinal(declarationExpression, varExpressions[0]) ? rule.finalRegex : rule.regex
 
-        if (!isAlreadyVisited(declarationExpression) && !(variableExpression.name ==~ re)) {
-            addViolation(declarationExpression)
-            registerAsVisited(declarationExpression)
+            varExpressions.each { varExpression ->
+                if (!(varExpression.name ==~ re)) {
+                    def msg = varExpressions.size() > 1 ? "Variable name: [$varExpression.name]" : null
+                    addViolation(declarationExpression, msg)
+                    registerAsVisited(declarationExpression)
+                }
+            }
         }
-
         super.visitDeclarationExpression(declarationExpression)
     }
 
@@ -63,18 +68,10 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
      * There does not seem to be an easy way to determine whether the 'final' modifier has been
      * specified for a variable declaration. Return true if the 'final' is present before the variable name.
      */
-    private boolean isFinal(declarationExpression) {
-        def variableName = declarationExpression.variableExpression.name
-        def expressionSource = expressionSource(declarationExpression)
-        // The 'final' modifier .. variable name .. either an '=' or end of string
-        def m = expressionSource =~ /final\s+.*/ + variableName + /\s*($|\=)/
-        return m.find()
-    }
-
-    private String expressionSource(node) {
-        // TODO Narrow this down a bit to just the declaration; but sometimes had issues with lastColumnNumber for that node
-        def sourceLine = sourceCode.lines[node.lineNumber-1]
-        return sourceLine
+    private boolean isFinal(declarationExpression, variableExpression) {
+        def sourceLine = sourceCode.lines[variableExpression.lineNumber-1]
+        def modifiers = sourceLine[declarationExpression.columnNumber-1..variableExpression.columnNumber-2]
+        return modifiers.contains('final')
     }
 
 }

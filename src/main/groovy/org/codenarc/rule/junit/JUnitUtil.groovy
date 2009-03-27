@@ -38,7 +38,7 @@ class JUnitUtil {
         def isMatch = false
         if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
             def args = methodCall.arguments.expressions
-            isMatch = args.size() in 1..2 && args[args.size()-1] == value
+            isMatch = args.size() in 1..2 && args[args.size()-1].properties['value'] == value
         }
         return isMatch
     }

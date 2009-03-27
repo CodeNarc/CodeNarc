@@ -45,9 +45,9 @@ class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         def isMatch =
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', ConstantExpression.TRUE) ||
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', ConstantExpression.FALSE) ||
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertNull', ConstantExpression.NULL)
+            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', Boolean.TRUE) ||
+            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.FALSE) ||
+            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertNull', null)
         if (isMatch) {
             addViolation(methodCall)
         }

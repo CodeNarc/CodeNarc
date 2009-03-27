@@ -46,8 +46,8 @@ class JUnitAssertAlwaysFailsAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         def isMatch =
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', ConstantExpression.FALSE) ||
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', ConstantExpression.TRUE) ||
+            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', Boolean.FALSE) ||
+            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.TRUE) ||
             isAssertConstantValueNotNullCall(methodCall, 'assertNull')
         if (isMatch) {
             addViolation(methodCall)
@@ -59,10 +59,9 @@ class JUnitAssertAlwaysFailsAstVisitor extends AbstractAstVisitor  {
         def isMatch = false
         if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
             def args = methodCall.arguments.expressions
-            def value = args[args.size()-1]
+            def valueExpression = args[args.size()-1]
             isMatch = args.size() in 1..2 &&
-                value instanceof ConstantExpression &&
-                value != ConstantExpression.NULL
+                valueExpression instanceof ConstantExpression && valueExpression.value != null
         }
         return isMatch
     }

@@ -195,8 +195,60 @@ class VariableNameRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 4, 'int Count = 23')
     }
 
+    void testApplyTo_MultipleVariableNames_MatchesDefaultRegex() {
+        final SOURCE = '''
+            def myMethod() {
+                def (pkg, name) = 123
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_MultipleVariableNames_OneDoesNotMatchDefaultRegex() {
+        final SOURCE = '''
+            def myMethod() {
+                def (pkg, Count) = 123
+            }
+        '''
+        // Not valid under Groovy 1.5.x
+        if (isNotGroovy15()) {
+            assertSingleViolation(SOURCE, 3, 'def (pkg, Count) = 123', 'Count')
+        }
+    }
+
+    void testApplyTo_MultipleVariableNames_Final_OneDoesNotMatchDefaultRegex() {
+        final SOURCE = '''
+            def myMethod() {
+                final def (OK, bad, OK2) = 123
+            }
+        '''
+        // Not valid under Groovy 1.5.x
+        if (isNotGroovy15()) {
+            assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'bad')
+        }
+    }
+
+    void testApplyTo_MultipleVariableNames_TwoDoNotMatchDefaultRegex() {
+        final SOURCE = '''
+            def myMethod() {
+                def (Count, pkg, _MYVAR) = 123
+            }
+        '''
+        // Not valid under Groovy 1.5.x
+        if (isNotGroovy15()) {
+            assertTwoViolations(SOURCE,
+                3, 'def (Count, pkg, _MYVAR) = 123', 'Count',
+                3, 'def (Count, pkg, _MYVAR) = 123', '_MYVAR')
+        }
+    }
+
     protected Rule createRule() {
         return new VariableNameRule()
+    }
+
+    private boolean isNotGroovy15() {
+        def version = new org.codehaus.groovy.runtime.InvokerHelper().version
+        return !version.startsWith('1.5')
     }
 
 }
