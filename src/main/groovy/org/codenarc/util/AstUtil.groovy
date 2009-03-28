@@ -54,6 +54,18 @@ class AstUtil {
             (statement.statements.size() == 1 && statement.statements[0].empty))
     }
 
+   /**
+    * Return the List of Arguments for the specified MethodCallExpression. The returned List contains
+    * either ConstantExpression or MapEntryExpression objects.
+    * @param methodCall - the AST MethodCallExpression
+    * @return the List of argument objects
+    */
+    public static List getMethodArguments(MethodCallExpression methodCall) {
+        def argumentsExpression = methodCall.arguments
+        return (argumentsExpression instanceof MapExpression) ?
+            argumentsExpression.mapEntryExpressions : argumentsExpression.expressions
+    }
+
     /**
      * Return true only if the Statement represents a method call for the specified method object (receiver),
      * method name, and with the specified number of arguments.
@@ -85,11 +97,7 @@ class AstUtil {
      */
     public static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
         def match = isMethodCall(methodCall, methodObject, methodName)
-        def argumentsExpression = methodCall.arguments
-        def arguments = (argumentsExpression instanceof MapExpression) ?
-            argumentsExpression.mapEntryExpressions : argumentsExpression.expressions
-        match = match && arguments.size() == numArguments
-        return match
+        return match && getMethodArguments(methodCall).size() == numArguments
     }
 
     /**

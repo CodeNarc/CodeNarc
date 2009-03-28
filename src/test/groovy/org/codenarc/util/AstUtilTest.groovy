@@ -51,6 +51,28 @@ class AstUtilTest extends AbstractTest {
     '''
     private visitor
 
+    void testGetMethodArguments_NoArgument() {
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'print' }
+        def args = AstUtil.getMethodArguments(methodCall)
+        assert args.size() == 0
+    }
+
+    void testGetMethodArguments_SingleArgument() {
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'stringMethodName' }
+        def args = AstUtil.getMethodArguments(methodCall)
+        assert args.size() == 1
+        assert args[0].value == 123
+    }
+
+    void testGetMethodArguments_NamedArguments() {
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'delete' }
+        def args = AstUtil.getMethodArguments(methodCall)
+        println "args=$args"
+        assert args.size() == 2
+        assert args[1].keyExpression.value == 'failonerror'
+        assert args[1].valueExpression.value == false
+    }
+
     void testIsMethodCall_ExactMatch() {
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert AstUtil.isMethodCall(statement, 'object', 'print', 0)

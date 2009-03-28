@@ -50,6 +50,7 @@
             <item name="Generic Rules" href="/codenarc-rules-generic.html"/>
             <item name="Imports Rules" href="/codenarc-rules-imports.html"/>
             <item name="JUnit Rules" href="/codenarc-rules-junit.html"/>
+            <item name="Logging Rules" href="/codenarc-rules-logging.html"/>
             <item name="Naming Rules" href="/codenarc-rules-naming.html"/>
             <item name="Size Rules" href="/codenarc-rules-size.html"/>
         </menu>

@@ -1,0 +1,13 @@
+		--------------------------------------------------
+				    CodeNarc - Logging Rules
+		--------------------------------------------------
+
+Exceptions Rules  ("<rulesets/logging.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* PrintStackTrace Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for calls to <<<printStackTrace()>>>. Consider using a standard logging facility instead.
+
+

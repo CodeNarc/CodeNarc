@@ -30,6 +30,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTest {
         'rulesets/braces.xml',
         'rulesets/exceptions.xml',
         'rulesets/imports.xml',
+        'rulesets/logging.xml',
         'rulesets/junit.xml',
         'rulesets/naming.xml',
         'rulesets/size.xml'
