@@ -2,11 +2,18 @@
 				    CodeNarc - Logging Rules
 		--------------------------------------------------
 
-Exceptions Rules  ("<rulesets/logging.xml>")
+Logging Rules  ("<rulesets/logging.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* Println Rule
+~~~~~~~~~~~~~~~
+
+  Checks for calls to <<<this.print()>>>, <<<this.println()>>> or <<<this.printf()>>>.. Consider using
+  a standard logging facility instead.
+
+
 * PrintStackTrace Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for calls to <<<printStackTrace()>>>. Consider using a standard logging facility instead.
 

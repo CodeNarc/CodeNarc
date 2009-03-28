@@ -8,6 +8,7 @@
         These rules implement standards and best practices related to logging and output.
     </description>
 
+    <rule class='org.codenarc.rule.logging.PrintlnRule'/>
     <rule class='org.codenarc.rule.logging.PrintStackTraceRule'/>
 
 </ruleset>
