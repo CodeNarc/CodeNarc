@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  * Rule that checks for calls to <code>printStackTrace()</code>.
  *
  * @author Chris Mair
- * @version $Revision: 98 $ - $Date: 2009-03-26 22:00:27 -0400 (Thu, 26 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class PrintStackTraceRule extends AbstractAstVisitorRule {
     String name = 'PrintStackTrace'

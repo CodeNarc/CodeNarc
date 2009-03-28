@@ -8,7 +8,7 @@ Logging Rules  ("<rulesets/logging.xml>")
 * Println Rule
 ~~~~~~~~~~~~~~~
 
-  Checks for calls to <<<this.print()>>>, <<<this.println()>>> or <<<this.printf()>>>.. Consider using
+  Checks for calls to <<<this.print()>>>, <<<this.println()>>> or <<<this.printf()>>>. Consider using
   a standard logging facility instead.
 
 
@@ -17,4 +17,17 @@ Logging Rules  ("<rulesets/logging.xml>")
 
   Checks for calls to <<<printStackTrace()>>>. Consider using a standard logging facility instead.
 
+
+* SystemErrPrint Rule
+~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for calls to <<<System.err.print()>>>, <<<System.err.println()>>> or <<<System.err.printf()>>>.
+  Consider using a standard logging facility instead.
+
+
+* SystemOutPrint Rule
+~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for calls to <<<System.out.print()>>>, <<<System.out.println()>>> or <<<System.out.printf()>>>.
+  Consider using a standard logging facility instead.
 

@@ -22,7 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for throwing an instance of java.lang.NullPointerException
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ThrowNullPointerExceptionRule extends AbstractAstVisitorRule {
     String name = 'ThrowNullPointerException'

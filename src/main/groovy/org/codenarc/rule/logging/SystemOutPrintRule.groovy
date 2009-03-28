@@ -20,30 +20,25 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.PropertyExpression
 
 /**
- * Rule that checks for calls to <code>this.print()</code>, <code>this.println()</code>
- * or <code>this.printf()</code>.
+ * Rule that checks for calls to <code>System.out.print()</code>, <code>System.out.println()</code>
+ * or <code>System.out.printf()</code>.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 98 $ - $Date: 2009-03-26 22:00:27 -0400 (Thu, 26 Mar 2009) $
  */
-class PrintlnRule extends AbstractAstVisitorRule {
-    String name = 'Println'
+class SystemOutPrintRule extends AbstractAstVisitorRule {
+    String name = 'SystemOutPrint'
     int priority = 2
-    Class astVisitorClass = PrintlnAstVisitor
+    Class astVisitorClass = SystemOutPrintAstVisitor
 }
 
-class PrintlnAstVisitor extends AbstractAstVisitor  {
+class SystemOutPrintAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        def isMatch =
-            AstUtil.isMethodCall(methodCall, 'this', 'println', 0) ||
-            AstUtil.isMethodCall(methodCall, 'this', 'println', 1) ||
-            AstUtil.isMethodCall(methodCall, 'this', 'print', 1) ||
-            (AstUtil.isMethodCall(methodCall, 'this', 'printf') && AstUtil.getMethodArguments(methodCall).size() > 1)
-
-        if (isMatch) {
+        if (methodCall.text.startsWith('System.out.print')) {
             addViolation(methodCall)
         }
         super.visitMethodCallExpression(methodCall)
