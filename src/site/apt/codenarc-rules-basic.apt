@@ -11,6 +11,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   Checks for direct call to a <<<Boolean>>> constructor. Use <<<Boolean.valueOf()>>> or the <<<Boolean.TRUE>>>
   and <<<Boolean.FALSE>>> constants instead of calling the <<<Boolean()>>> constructor directly.
 
+  Also checks for <<<Boolean.valueOf(true)>>> or <<<Boolean.valueOf(false)>>>. Use the <<<Boolean.TRUE>>>
+  or <<<Boolean.FALSE>>> constants instead.
+
 
 * EmptyCatchBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

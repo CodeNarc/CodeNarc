@@ -17,9 +17,14 @@ package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
- * Rule that checks for direct call to Boolean constructor. Use Boolean.valueOf() instead.
+ * Rule that checks for direct call to Boolean constructor - use Boolean.valueOf() instead.
+ * Also checks for Boolean.valueOf(true) or Boolean.valueOf(false) - use Boolean.TRUE or
+ * Boolean.FALSE instead.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -35,5 +40,15 @@ class BooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
 
     protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         return constructorCall.text =~ NEW_BOOLEAN
+    }
+
+    void visitMethodCallExpression(MethodCallExpression methodCall) {
+        def args = AstUtil.getMethodArguments(methodCall)
+        def isMatch = AstUtil.isMethodCall(methodCall, 'Boolean', 'valueOf', 1) &&
+            args[0] instanceof ConstantExpression && args[0].value in [true, false]
+        if (isMatch) {
+            addViolation(methodCall)
+        }
+        super.visitMethodCallExpression(methodCall)
     }
 }

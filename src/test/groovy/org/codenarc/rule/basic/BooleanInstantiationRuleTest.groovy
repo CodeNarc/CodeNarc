@@ -31,8 +31,7 @@ class BooleanInstantiationRuleTest extends AbstractRuleTest {
         assert rule.name == 'BooleanInstantiation'
     }
 
-    void testApplyTo_Violation() {
-        // If within class, the expression callback gets called twice!
+    void testApplyTo_NewBoolean() {
         final SOURCE = '''
             class MyClass {
                 def b1 = new Boolean(true)
@@ -43,7 +42,7 @@ class BooleanInstantiationRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 3, 'new Boolean(true)', 5, 'new java.lang.Boolean(false)')
     }
 
-    void testApplyTo_Violation_NotWithinClass() {
+    void testApplyTo_NewBoolean_NotWithinClass() {
         final SOURCE = '''
             def b1 = new java.lang.Boolean(true)
             def name2 = "abc"
@@ -56,10 +55,19 @@ class BooleanInstantiationRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 2, 'new java.lang.Boolean(true)', 6, 'new Boolean(true)')
     }
 
+    void testApplyTo_BooleanValueOf() {
+        final SOURCE = '''
+            def b1 = Boolean.valueOf(true)
+            def b2 = Boolean.valueOf(otherVariable)
+            def b3 = Boolean.valueOf(false)
+        '''
+        assertTwoViolations(SOURCE, 2, 'Boolean.valueOf(true)', 4, 'Boolean.valueOf(false)')
+    }
+
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {
-                    def b = Boolean.valueOf(true)
+                    def b = Boolean.valueOf(myVariable)
                 }
             }'''
         assertNoViolations(SOURCE)
