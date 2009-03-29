@@ -17,10 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
 
 /**
  * Rule that checks for calls to <code>System.err.print()</code>, <code>System.err.println()</code>

@@ -27,6 +27,7 @@ import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codehaus.groovy.ast.AnnotationNode
+import org.apache.log4j.Logger
 
 /**
  * Tests for AstUtil
@@ -67,7 +68,6 @@ class AstUtilTest extends AbstractTest {
     void testGetMethodArguments_NamedArguments() {
         def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'delete' }
         def args = AstUtil.getMethodArguments(methodCall)
-        println "args=$args"
         assert args.size() == 2
         assert args[1].keyExpression.value == 'failonerror'
         assert args[1].valueExpression.value == false
@@ -116,7 +116,7 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_GStringMethodName() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> println mc.method; mc.method instanceof GStringExpression }
+        def methodCall = visitor.methodCallExpressions.find { mc -> log(mc.method); mc.method instanceof GStringExpression }
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 1)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 2)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod')
@@ -173,24 +173,25 @@ class AstUtilTest extends AbstractTest {
 }
 
 class AstUtilTestVisitor extends ClassCodeVisitorSupport {
+    static final LOG = Logger.getLogger(AstUtilTestVisitor)
     def methodNodes = [:]
     def methodCallExpressions = []
     def statements = []
 
     void visitMethod(MethodNode methodNode) {
-        println("visitMethod name=${methodNode.name}")
+        LOG.info("visitMethod name=${methodNode.name}")
         methodNodes[methodNode.name] = methodNode
         super.visitMethod(methodNode)
     }
 
     void visitStatement(Statement statement) {
-        println("visitStatement text=${statement.text}")
+        LOG.info("visitStatement text=${statement.text}")
         this.statements << statement
         super.visitStatement(statement)
     }
 
     void visitMethodCallExpression(MethodCallExpression methodCallExpression) {
-        println("visitMethodCallExpression object=${methodCallExpression.objectExpression}")
+        LOG.info("visitMethodCallExpression object=${methodCallExpression.objectExpression}")
         this.methodCallExpressions << methodCallExpression
         super.visitMethodCallExpression(methodCallExpression)
     }
