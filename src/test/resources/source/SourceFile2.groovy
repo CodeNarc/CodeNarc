@@ -22,5 +22,9 @@ package source
  * @version $Revision$ - $Date$
  */
 class SourceFile2 {
+    static final METHOD_NAME = 'calculateValue'
+    static someVariable = "${METHOD_NAME}"()            // GString method name
+    static otherVariable = "calculateValue"()           // String method name
 
+    static String calculateValue() { 23 }
 }
