@@ -331,7 +331,9 @@ class HtmlReportWriter implements ReportWriter {
     private buildVersionFooter() {
         def versionText = getClass().getClassLoader().getResourceAsStream('codenarc-version.txt').text
         return {
-            p(versionText, class:'version')
+            p(class:'version') {
+                a(versionText, href:"http://www.codenarc.org")
+            }
         }
     }
 

@@ -60,6 +60,7 @@
 		.version {
 			font-size: 75%;
 		    color: blue;
+            margin-top: 10px;
 		}
 
 		table {

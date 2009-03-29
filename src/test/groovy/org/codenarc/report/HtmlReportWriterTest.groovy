@@ -48,7 +48,8 @@ class HtmlReportWriterTest extends AbstractTest {
             '/src/main',
             'MyAction.groovy', MESSAGE, TRUNCATED_LONG_LINE, 
             'MyAction2.groovy',
-            'MyActionTest.groovy']
+            'MyActionTest.groovy',
+            "<a href='http://www.codenarc.org'>CodeNarc"]
     static final NEW_REPORT_FILE = 'NewReport.html'
     static final TITLE = 'My Cool Project'
 
