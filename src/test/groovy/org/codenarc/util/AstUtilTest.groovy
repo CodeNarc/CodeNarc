@@ -127,6 +127,17 @@ class AstUtilTest extends AbstractTest {
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 0)
     }
 
+    void testIsMethodNamed() {
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'print' }
+        assert AstUtil.isMethodNamed(methodCall, 'print')
+        assert !AstUtil.isMethodNamed(methodCall, 'other')
+    }
+
+    void testIsMethodNamed_GStringMethodName() {
+        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method instanceof GStringExpression }
+        assert !AstUtil.isMethodNamed(methodCall, 'print')
+    }
+
     void testIsBlock_Block() {
         applyVisitor(SOURCE_METHOD_CALL)
         def statement = visitor.statements.find { st -> st instanceof BlockStatement }

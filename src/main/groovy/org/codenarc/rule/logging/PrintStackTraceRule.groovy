@@ -35,7 +35,9 @@ class PrintStackTraceRule extends AbstractAstVisitorRule {
 class PrintStackTraceAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        def isMatch = methodCall.method.value == 'printStackTrace' &&
+//        def isMatch = methodCall.method.value == 'printStackTrace' &&
+//                AstUtil.getMethodArguments(methodCall).empty
+        def isMatch = AstUtil.isMethodNamed(methodCall, 'printStackTrace') &&
                 AstUtil.getMethodArguments(methodCall).empty
         if (isMatch) {
             addViolation(methodCall)

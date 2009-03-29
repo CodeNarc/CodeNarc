@@ -60,6 +60,11 @@ class PrintStackTraceRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_GStringMethodName() {
+        final SOURCE = ' "$myMethodName"(1234) '
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         return new PrintStackTraceRule()
     }

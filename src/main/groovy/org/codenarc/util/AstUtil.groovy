@@ -26,6 +26,8 @@ import org.codehaus.groovy.ast.AnnotationNode
 
 /**
  * Contains static utility methods related to Groovy AST.
+ * <p/>
+ * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -115,10 +117,18 @@ class AstUtil {
             def objectName = objectExpression.name
             match = (objectName == methodObject)
         }
+        return match && isMethodNamed(methodCall, methodName)
+    }
+
+    /**
+     * Return true only if the MethodCallExpression represents a method call for the specified method name
+     * @param methodCall - the AST MethodCallExpression
+     * @param methodName - the expected name of the method being called
+     * @return true only if the method call name matches
+     */
+    public static boolean isMethodNamed(MethodCallExpression methodCall, String methodName) {
         def method = methodCall.method
-        def value = method.properties['value']
-        match = match && (value == methodName)
-        return match
+        return method.properties['value'] == methodName
     }
 
     /**
