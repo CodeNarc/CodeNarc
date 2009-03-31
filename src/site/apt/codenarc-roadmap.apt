@@ -13,9 +13,9 @@ CodeNarc - Road Map
 
   * More rules
 
-  * Document creating custom Rules.
+  * CodeNarc command-line runner.
 
-  * Support for wildcards (*,?) in RuleSet <include> and <exclude>, and in <<<Rule.applyToFilenames>>>.
+  * Document creating custom Rules.
 
 
 * Long-Term Goals

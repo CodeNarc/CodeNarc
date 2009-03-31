@@ -1,1 +1,1 @@
-CodeNarc v0.3
+CodeNarc v0.4

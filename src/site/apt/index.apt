@@ -18,7 +18,8 @@ CodeNarc
   See the site navigation menu for a list of the rulesets and rules provided
   out of the box by <<CodeNarc>>. Or you can {{{codenarc-custom-ruleset.html}create your own custom ruleset}}
 
-  Take a look at a {{{SampleCodeNarcReport.html}Sample CodeNarc Report}}.
+  Take a look at a {{{SampleCodeNarcReport.html}Sample CodeNarc Report}}, or example reports
+  from popular Groovy-based {{{codenarc-opensource-projects.html}open source projects}}.
 
   <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
   and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well

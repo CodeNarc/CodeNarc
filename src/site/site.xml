@@ -27,7 +27,6 @@
         <menu name="General">
             <item name="Home" href="/index.html"/>
             <item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=250145"/>
-            <item name="Sample CodeNarc Report" href="/SampleCodeNarcReport.html"/>
             <item name="Road Map" href="/codenarc-roadmap.html"/>
             <item name="Javadocs" href="/apidocs/index.html"/>
             <item name="SourceForge Project" href="http://sourceforge.net/projects/codenarc"/>
@@ -41,6 +40,11 @@
         <menu name="Using">
             <item name="Creating a RuleSet" href="/codenarc-custom-ruleset.html"/>
             <item name="Configuring Rules" href="/codenarc-configuring-rules.html"/>
+        </menu>
+
+        <menu name="Example Reports">
+            <item name="Sample CodeNarc Report" href="/SampleCodeNarcReport.html"/>
+            <item name="Open Source Projects" href="/codenarc-opensource-projects.html"/>
         </menu>
 
         <menu name="Rules">

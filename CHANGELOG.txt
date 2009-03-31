@@ -2,6 +2,43 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.4 (30 Mar 2009)
+------------------------------------
+INFRASTRUCTURE
+- Support for wildcards (*,?) in RuleSet <include> and <exclude>, and in Rule.applyToFilenames.
+- Add better logging, including stacktrace, when an error occurs during processing.
+- Format (and truncate) source line within the HtmlReportWriter.
+- Improve violation information for imports - line number and actual source line.
+- Make version at the bottom of the HTML report a link to the web site.
+- Refactor SourceCodeUtil to a SourceCodeCriteria class.
+- CodeNarcTask: Log elapsed time after analysis is complete.
+- CodeNarcTask: Don’t fail build until after reports are generated.
+- Create WildcardPattern class.
+- Create AstUtil. Move isBlock() and isEmptyBlock() from AbstractAstVisitor.
+RULES
+- Created new "junit" and "logging" RuleSets and a bunch of new Rules:
+   * JUnitAssertAlwaysSuccedsRule (junit)
+   * JUnitAssertAlwaysFailsRule (junit)
+   * JUnitTearDownCallsSuperRule (junit)
+   * JUnitSetUpCallsSuperRule (junit)
+   * SystemErrPrintRule. (logging)
+   * SystemOutPrintRule. (logging)
+   * PrintlnRule. (logging)
+   * PrintStackTraceRule. (logging)
+   * CatchNullPointerExceptionRule. (exceptions)
+   * CatchExceptionRule. (exceptions)
+   * CatchRuntimeExceptionRule. (exceptions)
+   * CatchErrorRule. (exceptions)
+   * ThrowThrowableRule (exceptions)
+   * ThrowExceptionRule (exceptions)
+   * ThrowNullPointerExceptionRule (exceptions)
+   * ThrowRuntimeExceptionRule (exceptions)
+   * ThrowErrorRule (exceptions)
+- BooleanInstantiationRule: Also check for Boolean.valueOf(true/false).
+DOCUMENTATION
+- Add example reports for open source Groovy projects: Grails, Griffon and Gradle.
+
+
 Changes in version 0.3 (02 Mar 2009)
 ------------------------------------
 INFRASTRUCTURE
