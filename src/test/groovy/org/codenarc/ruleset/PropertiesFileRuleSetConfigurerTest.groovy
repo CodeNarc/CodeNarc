@@ -26,19 +26,19 @@ import org.codenarc.rule.StubRule
  */
 class PropertiesFileRuleSetConfigurerTest extends AbstractTest {
     private ruleSet
-    private rule1 = new StubRule(name:'rule1', priority:1)
-    private rule2 = new StubRule(name:'rule2', priority:2)
+    private rule1 = new StubRule(name:'rule1', priority:1, violationMessage:'abc')
+    private rule2 = new StubRule(name:'rule2', priority:2, violationMessage:'def')
     private configurer
 
     void testConfigure() {
         configurer.configure(ruleSet)
-        assert ruleMap() == [rule1:3, rule99:2], ruleMap()
+        assert ruleMap() == [rule1:[3, 'abc'], rule99:[2, 'violation']], ruleMap()
     }
 
     void testConfigure_PropertiesFileDoesNotExist() {
         configurer.propertiesFilename = 'DoesNotExist.properties'
         configurer.configure(ruleSet)
-        assert ruleMap() == [rule1:1, rule2:2]
+        assert ruleMap() == [rule1:[1, 'abc'], rule2:[2, 'def']]
     }
 
     void testConfigure_EmptyRuleSet() {
@@ -59,7 +59,7 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTest {
 
     private ruleMap() {
         def map = [:]
-        ruleSet.rules.each { rule -> map[rule.name] = rule.priority }
+        ruleSet.rules.each { rule -> map[rule.name] = [rule.priority, rule.violationMessage] }
         return map
     }
 

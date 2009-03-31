@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,6 +50,11 @@ class PropertyUtilTest extends AbstractTest {
         assert !object.getBooleanField()
     }
 
+    void testSetPropertyFromString_intFromSuperclass() {
+        PropertyUtil.setPropertyFromString(object, 'superclassIntField', '23456')
+        assert object.getSuperclassIntField() == 23456
+    }
+
     void testSetPropertyFromString_NoSuchField() {
         shouldFail(NoSuchFieldException) { PropertyUtil.setPropertyFromString(object, 'XXX', '23456') }
     }
@@ -60,9 +65,13 @@ class PropertyUtilTest extends AbstractTest {
     }
 }
 
-class TestPropertyUtilClass {
+class TestPropertyUtilClass extends TestPropertyUtilSuperclass {
     String stringField
     int intField
     long longField
     boolean booleanField
+}
+
+class TestPropertyUtilSuperclass {
+    int superclassIntField
 }
