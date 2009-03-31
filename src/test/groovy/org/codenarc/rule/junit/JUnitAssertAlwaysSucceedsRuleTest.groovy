@@ -85,10 +85,19 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'assertFalse("This passed!", false)')
     }
 
-    void testApplyTo_AssertNull_NotNull() {
+    void testApplyTo_AssertNull_NotNullConstant() {
         final SOURCE = '''
             void testSomething() {
                 assertNull(123)
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_AssertNull_Variable() {
+        final SOURCE = '''
+            void testSomething() {
+                assertNull(myVariable)
             }
         '''
         assertNoViolations(SOURCE)

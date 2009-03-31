@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Utility methods for JUnit rule classes. This class is not intended for general use.
@@ -38,7 +39,9 @@ class JUnitUtil {
         def isMatch = false
         if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
             def args = methodCall.arguments.expressions
-            isMatch = args.size() in 1..2 && args[args.size()-1].properties['value'] == value
+            isMatch = args.size() in 1..2 &&
+                args[args.size()-1] instanceof ConstantExpression &&
+                args[args.size()-1].properties['value'] == value
         }
         return isMatch
     }
