@@ -33,18 +33,22 @@ class PropertyUtil {
      * @throws NoSuchFieldException - if the object does not contain the named field
      */
     public static void setPropertyFromString(Object object, String propertyName, String propertyValue) {
-        def field = object.class.getDeclaredField(propertyName)
+        def property = object.metaClass.getMetaProperty(propertyName)
+        if (property == null) {
+            throw new NoSuchFieldException(propertyName)
+        }
+
         Object newPropertyValue = propertyValue
 
-        if (field.type == int) {
+        if (property.type == int) {
             newPropertyValue = Integer.parseInt(propertyValue)
         }
 
-        if (field.type == long) {
+        if (property.type == long) {
             newPropertyValue = Long.parseLong(propertyValue)
         }
 
-        if (field.type == boolean) {
+        if (property.type == boolean) {
             newPropertyValue = Boolean.parseBoolean(propertyValue)
         }
 
