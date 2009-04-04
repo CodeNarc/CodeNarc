@@ -45,6 +45,12 @@ Basic Rules  ("<rulesets/basic.xml>")
   Checks for empty <if> statements. Empty <if> statements are confusing and serve no purpose.
 
 
+* EmptySwitchStatement Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for empty <switch> statements. Empty <switch> statements are confusing and serve no purpose.
+
+
 * EmptyTryBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

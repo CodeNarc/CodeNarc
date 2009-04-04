@@ -15,6 +15,7 @@
     <rule class='org.codenarc.rule.basic.EmptyFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyForStatementRule'/>
     <rule class='org.codenarc.rule.basic.EmptyIfStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptySwitchStatementRule'/>
     <rule class='org.codenarc.rule.basic.EmptyTryBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyWhileStatementRule'/>
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>

@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * the <code>int hashCode()</code> methods are overridden within a class, then both must be overridden.
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class EqualsAndHashCodeRule extends AbstractAstVisitorRule {
     String name = 'EqualsAndHashCode'
