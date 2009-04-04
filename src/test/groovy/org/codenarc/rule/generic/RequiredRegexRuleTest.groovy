@@ -26,6 +26,7 @@ import org.codenarc.rule.Rule
  */
 class RequiredRegexRuleTest extends AbstractRuleTest {
     static final REGEX = /\@author Joe/
+    def skipTestThatUnrelatedCodeHasNoViolations
 
     void testRuleProperties() {
         assert rule.priority == 3

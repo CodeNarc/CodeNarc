@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for EmptySwitchStatementRule
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class EmptySwitchStatementRuleTest extends AbstractRuleTest {
 
@@ -52,17 +52,6 @@ class EmptySwitchStatementRuleTest extends AbstractRuleTest {
                 default: println 'bad'
             }
         '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testApplyTo_NoSwitch() {
-        final SOURCE = '''class MyClass {
-                def myMethod() {
-                    while (isReady) {
-                        println "ready"
-                    }
-                }
-            }'''
         assertNoViolations(SOURCE)
     }
 

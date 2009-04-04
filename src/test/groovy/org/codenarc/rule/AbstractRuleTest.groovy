@@ -35,6 +35,17 @@ abstract class AbstractRuleTest extends AbstractTest {
     // Common Tests - Run for all concrete subclasses
     //--------------------------------------------------------------------------
 
+    /**
+     * Make sure that code unrelated to the rule under test causes no violations.
+     * Subclasses can skip this rule by defining a property named 'skipTestThatUnrelatedCodeHasNoViolations'.
+     */
+    void testThatUnrelatedCodeHasNoViolations() {
+        final SOURCE = 'class MyClass { }'
+        if (!getProperties().keySet().contains('skipTestThatUnrelatedCodeHasNoViolations')) {
+            assertNoViolations(SOURCE)
+        }
+    }
+
     void testApplyTo_CompilerError() {
         final SOURCE = '''
             @will not compile@ &^%$#

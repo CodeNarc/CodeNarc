@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.stmt.SwitchStatement
  * Rule that checks for empty switch statements
  *
  * @author Chris Mair
- * @version $Revision: 74 $ - $Date: 2009-03-05 22:12:08 -0500 (Thu, 05 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class EmptySwitchStatementRule extends AbstractAstVisitorRule {
     String name = 'EmptySwitchStatement'

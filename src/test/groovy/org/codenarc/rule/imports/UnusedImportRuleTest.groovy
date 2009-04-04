@@ -69,11 +69,6 @@ class UnusedImportRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_NoImports() {
-        final SOURCE = ' class ABC { }'
-        assertNoViolations(SOURCE)
-    }
-
     protected Rule createRule() {
         return new UnusedImportRule()
     }

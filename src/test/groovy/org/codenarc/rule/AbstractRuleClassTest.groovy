@@ -31,6 +31,7 @@ class AbstractRuleClassTest extends AbstractRuleTest {
     static final FILENAME = 'MyTest.groovy'
     static final MATCH = /.*Test\.groovy/
     static final NO_MATCH = /.*Other\.groovy/
+    def skipTestThatUnrelatedCodeHasNoViolations
 
     void testToString() {
         assertContainsAll(rule.toString(), ['TestPathRule', NAME, PRIORITY.toString()])
