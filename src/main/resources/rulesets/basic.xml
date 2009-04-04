@@ -9,6 +9,7 @@
     </description>
 
     <rule class='org.codenarc.rule.basic.BooleanInstantiationRule'/>
+    <rule class='org.codenarc.rule.basic.EqualsAndHashCodeRule'/>
     <rule class='org.codenarc.rule.basic.EmptyCatchBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyElseBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyFinallyBlockRule'/>

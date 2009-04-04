@@ -57,6 +57,13 @@ Basic Rules  ("<rulesets/basic.xml>")
   Checks for empty <while> statements. Empty <while> statements are confusing and serve no purpose.
 
 
+* EqualsAndHashCode Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks that if either the <<<boolean equals(Object)>>> or the <<<int hashCode()>>> methods
+  are overridden within a class, then both must be overridden.
+
+
 * ReturnFromFinallyBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
