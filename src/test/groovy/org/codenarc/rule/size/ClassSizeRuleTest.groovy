@@ -44,6 +44,7 @@ class ClassSizeRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetMaxLines() {
         final SOURCE = """
+            package some.pkg
             /** class description */
             class MyClass {
                 def myMethod() {
@@ -52,7 +53,7 @@ class ClassSizeRuleTest extends AbstractRuleTest {
             }
         """
         rule.maxLines = 4
-        assertSingleViolation(SOURCE, 3, null, 'MyClass')
+        assertSingleViolation(SOURCE, 4, null, '"MyClass"')
     }
 
     void testApplyTo_NoClassDefinition() {

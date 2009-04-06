@@ -43,7 +43,9 @@ class ClassSizeAstVisitor extends AbstractAstVisitor  {
             def numLines = classNode.lastLineNumber - classNode.lineNumber + 1
             if (numLines > rule.maxLines) {
                 def className = classNode.name
-                violations.add(new Violation(rule:rule, lineNumber:classNode.lineNumber, message:"""Class "$className" is $numLines lines"""))
+                def classNameNoPackage = className.substring(className.lastIndexOf('.') + 1)
+                violations.add(new Violation(rule:rule, lineNumber:classNode.lineNumber,
+                        message:"""Class "$classNameNoPackage" is $numLines lines"""))
             }
         }
         super.visitClass(classNode)
