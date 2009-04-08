@@ -14,6 +14,7 @@
         <xs:element ref="description" minOccurs="0" maxOccurs="1" />
         <xs:element ref="ruleset-ref" minOccurs="0" maxOccurs="unbounded" />
         <xs:element ref="rule" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="rule-script" minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -29,6 +30,15 @@
       <xs:attribute name="class" type="xs:NMTOKEN" use="required" />
     </xs:complexType>
   </xs:element>
+
+    <xs:element name="rule-script">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="path" type="xs:string" use="required" />
+      </xs:complexType>
+    </xs:element>
 
   <xs:element name="ruleset-ref">
     <xs:complexType>

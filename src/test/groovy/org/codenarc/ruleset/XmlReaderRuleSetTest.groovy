@@ -53,6 +53,46 @@ class XmlReaderRuleSetTest extends AbstractTest {
         assert rules == []
     }
 
+    void testOneRuleScript() {
+        // Load ".txt" file so that it gets copied as resource in Idea
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule-script path='rule/DoNothingRule.txt'/>
+            </ruleset>"""
+        parseXmlRuleSet(XML)
+        assertEqualSets(rules*.class.name, ['DoNothingRule'])
+    }
+
+    void testOneRuleScriptWithProperties() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule-script path='rule/DoNothingRule.txt'>
+                    <property name='name' value='YYYY'/>
+                    <property name='priority' value='1'/>
+                </rule-script>
+            </ruleset>"""
+        parseXmlRuleSet(XML)
+        assertEqualSets(rules*.class.name, ['DoNothingRule'])
+        assert rules*.name == ['YYYY']
+        assert rules*.priority == [1]
+    }
+
+    void testRuleScriptFileNotFound() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule-script path='rule/DoesNotExist.groovy'/>
+            </ruleset>"""
+        shouldFailWithMessageContaining('DoesNotExist.groovy') { parseXmlRuleSet(XML) }
+    }
+
+    void testRuleScriptNotARule() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule-script path='rule/NotARule.txt'/>
+            </ruleset>"""
+        shouldFailWithMessageContaining('NotARule') { parseXmlRuleSet(XML) }
+    }
+
     void testOneRule() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -97,9 +137,10 @@ class XmlReaderRuleSetTest extends AbstractTest {
                 <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
                     <property name='priority' value='1'/>
                 </rule>
+                <rule-script path='rule/DoNothingRule.txt'/>
             </ruleset>"""
         parseXmlRuleSet(XML)
-        assertRuleClasses([CatchThrowableRule, TestPathRule])
+        assertRuleNames(['CatchThrowable', 'TestPath', 'DoNothing'])
         assert rules[0].priority == 1
     }
 
@@ -179,6 +220,14 @@ class XmlReaderRuleSetTest extends AbstractTest {
         shouldFail(ClassNotFoundException) { parseXmlRuleSet(XML) }
     }
 
+    void testRuleClassNotARule() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule class='java.lang.Object'/>
+            </ruleset>"""
+        shouldFailWithMessageContaining('java.lang.Object') { parseXmlRuleSet(XML) }
+    }
+
     void testNestedRuleSet_RuleSetFileNotFound() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -234,6 +283,10 @@ class XmlReaderRuleSetTest extends AbstractTest {
 
     private void assertRuleClasses(List classes) {
         assertEqualSets(rules*.class, classes)
+    }
+
+    private void assertRuleNames(List ruleNames) {
+        assertEqualSets(rules*.name, ruleNames)
     }
 
     private Rule findRule(String name) {

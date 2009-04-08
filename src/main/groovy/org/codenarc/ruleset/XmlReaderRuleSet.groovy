@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import javax.xml.XMLConstants
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
 import groovy.xml.Namespace
+import org.codenarc.rule.Rule
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a
@@ -31,6 +32,7 @@ import groovy.xml.Namespace
  * @version $Revision$ - $Date$
  */
 class XmlReaderRuleSet implements RuleSet {
+
     static final LOG = Logger.getLogger(XmlReaderRuleSet)
     static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
     private List rules = []
@@ -47,6 +49,7 @@ class XmlReaderRuleSet implements RuleSet {
         def ruleset = new XmlParser().parseText(xml)
         loadRuleSetRefElements(ruleset)
         loadRuleElements(ruleset)
+        loadRuleScriptElements(ruleset)
         rules = rules.asImmutable()
     }
 
@@ -92,13 +95,36 @@ class XmlReaderRuleSet implements RuleSet {
     private void loadRuleElements(ruleset) {
         ruleset[NS.rule].each { ruleNode ->
             def ruleClassName = ruleNode.attribute('class')
-            def rule = Class.forName(ruleClassName.toString()).newInstance()
+            def ruleClass = Class.forName(ruleClassName.toString())
+            assertClassImplementsRuleInterface(ruleClass)
+            def rule = ruleClass.newInstance()
             rules << rule
-            ruleNode[NS.property].each { p ->
-                def name = p.attribute('name')
-                def value = p.attribute('value')
-                PropertyUtil.setPropertyFromString(rule, name, value)
+            setRuleProperties(ruleNode, rule)
+        }
+    }
+
+    private void loadRuleScriptElements(ruleset) {
+        ruleset[NS.'rule-script'].each { ruleScriptNode ->
+            def ruleScriptPath = ruleScriptNode.attribute('path')
+            def inputStream = getClass().classLoader.getResourceAsStream(ruleScriptPath)
+            assert inputStream, "File [$ruleScriptPath] does not exist or is not accessible"
+            Class ruleClass
+            inputStream.withStream { input ->
+                GroovyClassLoader gcl = new GroovyClassLoader()
+                ruleClass = gcl.parseClass(input)
             }
+            assertClassImplementsRuleInterface(ruleClass) 
+            def rule = ruleClass.newInstance()
+            rules << rule
+            setRuleProperties(ruleScriptNode, rule)
+        }
+    }
+
+    private def setRuleProperties(ruleNode, rule) {
+        ruleNode[NS.property].each {p ->
+            def name = p.attribute('name')
+            def value = p.attribute('value')
+            PropertyUtil.setPropertyFromString(rule, name, value)
         }
     }
 
@@ -111,5 +137,9 @@ class XmlReaderRuleSet implements RuleSet {
 
     private InputStream getSchemaXmlInputStream() {
         return getClass().classLoader.getResourceAsStream('ruleset-schema.xsd')
+    }
+
+    private void assertClassImplementsRuleInterface(Class ruleClass) {
+        assert Rule.isAssignableFrom(ruleClass), "The rule class [${ruleClass.name}] does not implement the Rule interface"
     }
 }

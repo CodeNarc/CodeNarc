@@ -1,0 +1,11 @@
+import org.codenarc.rule.AbstractRule
+import org.codenarc.source.SourceCode
+
+class DoNothingRule extends AbstractRule {
+    String name = 'DoNothing'
+    int priority = 2
+
+    void applyTo(SourceCode sourceCode, List violations) {
+        // Do nothing
+    }
+}

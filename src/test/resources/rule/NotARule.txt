@@ -1,0 +1,4 @@
+class NotARule {
+    String name = 'DoNothing'
+    int priority = 2
+}
