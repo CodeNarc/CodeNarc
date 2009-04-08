@@ -23,7 +23,7 @@ import org.apache.log4j.Logger
 /**
  * Abstract superclass for Rules.
  * <p/>
- * Each subclass must define an <code>id</code> property (String) and a <code>priority</code> property
+ * Each subclass must define an <code>name</code> property (String) and a <code>priority</code> property
  * (integer 1..3).
  *
  * @author Chris Mair

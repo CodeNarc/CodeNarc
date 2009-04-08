@@ -71,6 +71,25 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
         assertSchemaValidationError(XML, 'other')
     }
 
+    void testIllegalRuleScriptChildElement() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule-script path='rule/MyRule.groovy'>
+                    <property name='name' value='YYYY'/>
+                    <other name='priority' value='1'/>
+                </rule>
+            </ruleset>"""
+        assertSchemaValidationError(XML, 'other')
+    }
+
+    void testIllegalRuleScriptAttribute() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule-script path='rule/MyRule.groovy' other='12345'/>
+            </ruleset>"""
+        assertSchemaValidationError(XML, 'other')
+    }
+
     void testIllegalPropertyAttribute() {
         final XML = """
             <ruleset $NAMESPACE>

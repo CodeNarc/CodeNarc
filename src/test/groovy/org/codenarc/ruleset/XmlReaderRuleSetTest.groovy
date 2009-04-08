@@ -85,6 +85,14 @@ class XmlReaderRuleSetTest extends AbstractTest {
         shouldFailWithMessageContaining('DoesNotExist.groovy') { parseXmlRuleSet(XML) }
     }
 
+    void testRuleScriptCompileError() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <rule-script path='rule/DoesNotCompileRule.txt'/>
+            </ruleset>"""
+        shouldFailWithMessageContaining('CompilationError') { parseXmlRuleSet(XML) }
+    }
+
     void testRuleScriptNotARule() {
         final XML = """
             <ruleset $NAMESPACE>
