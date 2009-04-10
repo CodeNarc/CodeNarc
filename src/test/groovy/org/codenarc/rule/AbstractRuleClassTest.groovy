@@ -185,6 +185,20 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         shouldFailWithMessageContaining('abc') { applyRuleTo(SOURCE) }
     }
 
+    void testCreateViolation() {
+        def v = rule.createViolation(23, "src", "msg")
+        assert v.lineNumber == 23
+        assert v.sourceLine == 'src'
+        assert v.message == 'msg'
+    }
+
+    void testCreateViolation_Defaults() {
+        def v = rule.createViolation(99)
+        assert v.lineNumber == 99
+        assert v.sourceLine == null
+        assert v.message == null
+    }
+
     void testSourceLineAndNumberForImport() {
         final SOURCE = '''
             import a.b.MyClass

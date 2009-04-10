@@ -144,6 +144,17 @@ abstract class AbstractRule implements Rule {
     }
 
     /**
+     * Create and return a new Violation for this rule and the specified values
+     * @param lineNumber - the line number for the violation; may be null
+     * @param sourceLine - the source line for the violation; may be null
+     * @param message - the message for the violation; may be null
+     * @return a new Violation object
+     */
+    protected Violation createViolation(Integer lineNumber, String sourceLine=null, String message=null) {
+        return new Violation(rule:this, sourceLine:sourceLine, lineNumber:lineNumber, message:message)
+    }
+
+    /**
      * Create and return a new Violation for this rule and the specified import
      * @param importNode - the ImportNode for the import triggering the violation
      * @return a new Violation object
