@@ -38,7 +38,8 @@
         </menu>
 
         <menu name="Using">
-            <item name="Creating a RuleSet" href="/codenarc-custom-ruleset.html"/>
+            <item name="Creating a RuleSet" href="/codenarc-creating-ruleset.html"/>
+            <item name="Creating a Rule" href="/codenarc-creating-rule.html"/>
             <item name="Configuring Rules" href="/codenarc-configuring-rules.html"/>
         </menu>
 

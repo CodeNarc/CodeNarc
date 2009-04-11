@@ -27,6 +27,9 @@ CodeNarc - Creating a RuleSet
 *-----------------------+--------------------------------------------------------------+--------------------------+
 | <<<\<rule\>>>>        | Include a single rule; specify its fully-qualified classname |  Zero or more            |
 *-----------------------+--------------------------------------------------------------+--------------------------+
+| <<<\<rule-script\>>>> | Include a single rule implemented by a groovy script;        |  Zero or more            |
+|                       | specify the path of the script, relative to the classpath.   |                          |
+*-----------------------+--------------------------------------------------------------+--------------------------+
 
 
 * A Sample RuleSet
@@ -56,6 +59,8 @@ CodeNarc - Creating a RuleSet
         <property name="name" value="AuthorTagNotAllowed"/>
         <property name='regex' value='\@author'/>
     </rule>
+
+    <rule-script path='rules/MyStaticFieldRule.groovy'/>
 
 </ruleset>
 +----------------------------------------------------------------------------------------
@@ -97,6 +102,17 @@ CodeNarc - Creating a RuleSet
       a default generic message will be used. The resource bundle message key will be based
       on the customized name. In this case, the message key will be "AuthorTagNotAllowed.description".
 
+  About the \<rule-script\> elements:
+
+    * You must specify the <path> for the rule script Groovy file. This <path> is
+      relative to the classpath.<Rule>.
+
+    * The class defined within the rule script Groovy file must implement the
+      <<<org.codenarc.rule.Rule>>> interface.
+
+    * You can optionally set arbitrary properties for the rule by including a
+      \<property\> element within a \<rule-script\> the same way you can for
+      a \<rule\>. That is not shown here.
 
 * Filtering Rules Within a RuleSet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
