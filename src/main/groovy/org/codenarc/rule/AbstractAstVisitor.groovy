@@ -52,12 +52,12 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     }
 
     /**
-     * Return the source line corresponding to the specified Statement
-     * @param statement - the Groovy AST Statement
+     * Return the source line corresponding to the specified AST node
+     * @param node - the Groovy AST node
      */
-    protected String sourceLine(ASTNode statement) {
+    protected String sourceLine(ASTNode node) {
         // TODO Handle statements that cross multiple lines?
-        return sourceCode.line(statement.lineNumber-1)
+        return sourceCode.line(node.lineNumber-1)
     }
 
     /**
@@ -70,18 +70,8 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         def lineNumber = node.lineNumber
         if (lineNumber >= 0) {
             def sourceLine = sourceLine(node)
-            addViolation(sourceLine, lineNumber, message)
+            violations.add(new Violation(rule:rule, sourceLine:sourceLine, lineNumber:lineNumber, message:message))
         }
-    }
-
-    /**
-     * Add a new Violation to the list of violations found by this visitor
-     * @param sourceLine - the sourceLine for the violation
-     * @param lineNumber - the line number of the violation
-     * @param message - the message for the violation; defaults to null
-     */
-    protected void addViolation(String sourceLine, int lineNumber, String message=null) {
-        violations.add(new Violation(rule:rule, sourceLine:sourceLine, lineNumber:lineNumber, message:message))
     }
 
     protected SourceUnit getSourceUnit() {

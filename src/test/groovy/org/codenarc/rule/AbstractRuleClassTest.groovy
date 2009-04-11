@@ -199,6 +199,20 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assert v.message == null
     }
 
+    void testCreateViolation_ASTNode() {
+        final SOURCE = '''
+            class MyClass {
+                int count
+            }
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def classNode = sourceCode.ast.classes[0]
+        def v = rule.createViolation(sourceCode, classNode)
+        assert v.lineNumber == 2
+        assert v.sourceLine == 'class MyClass {'
+        assert v.message == null
+    }
+
     void testSourceLineAndNumberForImport() {
         final SOURCE = '''
             import a.b.MyClass

@@ -12,7 +12,7 @@ class MyStaticFieldRule extends AbstractRule {
         sourceCode.ast.classes.each { clazz ->
             clazz.fields.each { fieldNode ->
                 if (fieldNode.static) {
-                    violations << createViolation(fieldNode.lineNumber, 'FIELD')
+                    violations << createViolation(sourceCode, fieldNode)
                 }
             }
         }

@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceCodeCriteria
 import org.apache.log4j.Logger
+import org.codehaus.groovy.ast.ASTNode
 
 /**
  * Abstract superclass for Rules.
@@ -156,12 +157,24 @@ abstract class AbstractRule implements Rule {
 
     /**
      * Create and return a new Violation for this rule and the specified import
+     * @param sourceCode - the SourceCode
      * @param importNode - the ImportNode for the import triggering the violation
      * @return a new Violation object
      */
     protected Violation createViolationForImport(SourceCode sourceCode, ImportNode importNode) {
         def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
         return new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
+    }
+
+    /**
+     * Create a new Violation for the AST node.
+     * @param sourceCode - the SourceCode
+     * @param node - the Groovy AST Node
+     * @param message - the message for the violation; defaults to null
+     */
+    protected Violation createViolation(SourceCode sourceCode, ASTNode node, message=null) {
+        def sourceLine = sourceCode.line(node.lineNumber-1)
+        return createViolation(node.lineNumber, sourceLine, message)
     }
 
     /**
