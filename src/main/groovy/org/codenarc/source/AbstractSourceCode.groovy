@@ -44,6 +44,16 @@ abstract class AbstractSourceCode implements SourceCode {
         return lines
     }
 
+    /**
+     * Get the trimmed line at the specified index
+     * @param lineNumber - the line number; may be negative
+     * @return the trimmed line at the specified index, or null if lineNumber is not valid
+     */
+    String line(int lineNumber) {
+        def allLines = getLines()
+        return (lineNumber >= 0) && lineNumber < allLines.size() ? 
+            allLines[lineNumber].trim() : null
+    }
 
     /**
      * Return the Groovy AST (Abstract Syntax Tree) for this source file

@@ -57,15 +57,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      */
     protected String sourceLine(ASTNode statement) {
         // TODO Handle statements that cross multiple lines?
-        return (statement.lineNumber >= 0) ? sourceLine(statement.lineNumber) : null
-    }
-
-    /**
-     * Return the source line corresponding to the line number
-     * @param lineNumber - the line number (zero-based)
-     */
-    protected String sourceLine(int lineNumber) {
-        return (lineNumber >= 0) ? sourceCode.lines[lineNumber-1].trim() : null
+        return sourceCode.line(statement.lineNumber-1)
     }
 
     /**
@@ -90,15 +82,6 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      */
     protected void addViolation(String sourceLine, int lineNumber, String message=null) {
         violations.add(new Violation(rule:rule, sourceLine:sourceLine, lineNumber:lineNumber, message:message))
-    }
-
-    /**
-     * Add a new Violation to the list of violations found by this visitor. Include the full line of source code.
-     * @param lineNumber - the line number within the source code causing the violation
-     * @param message - the message for the violation; defaults to null
-     */
-    protected void addViolation(int lineNumber, String message=null) {
-        addViolation(sourceLine(lineNumber), lineNumber, message)
     }
 
     protected SourceUnit getSourceUnit() {

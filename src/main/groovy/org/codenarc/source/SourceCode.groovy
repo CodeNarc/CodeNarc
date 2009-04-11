@@ -50,6 +50,13 @@ interface SourceCode {
     List getLines()
 
     /**
+     * Get the trimmed line at the specified index
+     * @param lineNumber - the line number; may be negative
+     * @return the trimmed line at the specified index, or null if lineNumber is not valid
+     */
+    String line(int lineNumber)
+
+    /**
      * Return the Groovy AST (Abstract Syntax Tree) for this source file
      * @return the ModuleNode representing the AST for this source file
      */

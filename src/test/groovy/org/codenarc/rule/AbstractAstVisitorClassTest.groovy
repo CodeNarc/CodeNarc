@@ -41,12 +41,6 @@ class AbstractAstVisitorClassTest extends AbstractTest {
     def sourceCode
     def rule
 
-    void testSourceLine_Integer() {
-        def sourceLine = astVisitor.sourceLine(2)
-        log("sourceLine=[$sourceLine]")
-        assert sourceLine == 'def justReturn() {'
-    }
-
     void testSourceLine_ASTNode() {
         def sourceLine = astVisitor.sourceLine(astVisitor.returnStatement)
         log("sourceLine=[$sourceLine]")

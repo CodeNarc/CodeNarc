@@ -66,7 +66,7 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
     private void processParameters(parameters) {
         parameters.each { parameter ->
             if (parameter.lineNumber >= 0 && !(parameter.name ==~ rule.regex)) {
-                addViolation(parameter.lineNumber)
+                addViolation(parameter)
             }
         }
     }

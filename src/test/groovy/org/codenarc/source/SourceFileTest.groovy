@@ -61,6 +61,12 @@ class SourceFileTest extends AbstractTest {
         assert sourceFile.lines.is(lines)
     }
 
+    void testLine() {
+        assert sourceFile.line(0) ==  'class SampleFile {'
+        assert sourceFile.line(-1) ==  null
+        assert sourceFile.line(99) ==  null
+    }
+
     void testGetAst() {
         def ast = sourceFile.ast
         log("classes=${ast.classes}")

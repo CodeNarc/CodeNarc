@@ -25,7 +25,9 @@ import org.codenarc.test.AbstractTest
  */
 class SourceStringTest extends AbstractTest {
 
-    static final SOURCE = 'class SampleFile {\n\n }'
+    static final SOURCE = '''class SampleFile {
+            int count
+        }'''
     private sourceString
 
     void testConstructor_NullSource() {
@@ -57,10 +59,17 @@ class SourceStringTest extends AbstractTest {
 
     void testGetLines() {
         def lines = sourceString.lines
-        assert lines == ['class SampleFile {', '', ' }']
+        assert lines == ['class SampleFile {', '            int count', '        }']
 
         // Make sure instance is cached
         assert sourceString.lines.is(lines)
+    }
+
+    void testLine() {
+        assert sourceString.line(0) ==  'class SampleFile {'
+        assert sourceString.line(1) ==  'int count'
+        assert sourceString.line(-1) ==  null
+        assert sourceString.line(3) ==  null
     }
 
     void testGetAst() {
