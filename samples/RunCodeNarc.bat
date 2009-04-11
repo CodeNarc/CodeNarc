@@ -1,1 +1,1 @@
-groovy -classpath lib;lib/CodeNarc-0.4.jar;lib/log4j-1.2.14.jar RunCodeNarc
+groovy -classpath lib;lib/CodeNarc-0.5.jar;lib/log4j-1.2.14.jar RunCodeNarc

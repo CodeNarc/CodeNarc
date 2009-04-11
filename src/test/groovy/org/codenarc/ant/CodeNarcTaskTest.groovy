@@ -95,7 +95,7 @@ class CodeNarcTaskTest extends AbstractTest {
         codeNarcTask.ruleSetFiles = RULESET_FILES
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
-        assert codeNarcTask.ruleSet.rules.size() == 3
+        assert codeNarcTask.ruleSet.rules.size() == 4
         verifyReportFile()
     }
 

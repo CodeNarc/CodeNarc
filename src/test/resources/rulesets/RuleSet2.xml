@@ -10,4 +10,5 @@
         <property name='name' value='YYYY'/>
         <property name='priority' value='1'/>
     </rule>
+    <rule-script path='rule/DoNothingRule.txt'/>
 </ruleset>

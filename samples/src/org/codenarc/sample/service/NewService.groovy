@@ -4,6 +4,7 @@ package org.codenarc.sample.service
  * Sample service class that exhibits several CodeNarc violations
  */
 class NewService {
+    static final DEFAULT_ID = 999
     String name
     def values = []
 

@@ -20,4 +20,5 @@
         <property name='regex' value='\@author'/>
     </rule>
 
+    <rule-script path='rules/MyStaticFieldRule.groovy'/>
 </ruleset>

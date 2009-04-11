@@ -48,13 +48,15 @@ class XmlFileRuleSetTest extends AbstractTest {
         assert rules*.class == [TestPathRule]
     }
 
-    void testTwoRulesWithProperties() {
+    void testMultipleRulesWithProperties() {
         final PATH = 'rulesets/RuleSet2.xml'
         def ruleSet = new XmlFileRuleSet(PATH)
         def rules = ruleSet.rules
-        assert rules*.class == [StubRule, CatchThrowableRule]
-        assert rules*.name == ['XXXX', 'YYYY']
-        assert rules*.priority == [0, 1]
+        assert rules[0].class == StubRule
+        assert rules[1].class == CatchThrowableRule
+        assert rules[2].class.name == 'DoNothingRule'   // Rule script, so class is dynamic
+        assert rules*.name == ['XXXX', 'YYYY', 'DoNothing']
+        assert rules*.priority == [0, 1, 2]
     }
 
     void testRulesListIsImmutable() {
