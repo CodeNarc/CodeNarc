@@ -1,0 +1,13 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Design rule set.
+        These rules implement standards and best practices related to design issues.
+    </description>
+
+    <rule class='org.codenarc.rule.design.StatelessClassRule'/>
+
+</ruleset>

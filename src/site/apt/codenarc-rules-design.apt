@@ -1,0 +1,47 @@
+		--------------------------------------------------
+					  CodeNarc - Design Rules
+		--------------------------------------------------
+
+Design Rules  ("<rulesets/design.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* StatelessClass Rule
+~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for fields on a class. The intent of this rule is to check a configured set
+  of classes that should remain "stateless" and reentrant. One example might be Grails
+  service classes, which are, by default, a singleton, and so they should be reentrant.
+
+  You can configure this rule to ignore certain fields either by name or by type. This can be
+  useful to ignore fields that hold references to (static) dependencies (such as DAOs or
+  Service objects) or static configuration.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreFieldNames    | Specifies one or more (comma-separated) field names that       | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreFieldTypes    | Specifies one or more (comma-separated) field types that       | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+|                     |                                                                |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+**  Notes
+~~~~~~~~~~~~
+
+  [[1]]  Either the <<<applyToFilenames>>> or <<<applyToFilesMatching>>> must be set
+  (not empty or null), or else this rule does nothing.
+
+  [[2]]  The <<<ignoreFieldTypes>>> property matches the field type name as indicated
+  in the field declaration, only including a full package specification IF it is included in
+  the source code. For example, the field declaration <<<BigDecimal value>>> matches
+  an <<<ignoreFieldTypes>>> value of <<<BigDecimal>>>, but not
+  <<<java.lang.BigDecimal>>>.
+
+  [[3]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
+  with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
+
+
