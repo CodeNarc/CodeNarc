@@ -16,7 +16,8 @@
 package org.codenarc.source
 
 /**
- * SourceCode implementation that uses source from a pre-defined String
+ * SourceCode implementation that uses source from a pre-defined String.
+ * Note that the path is normalized: file separator chars are normalized to standard '/'.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -36,15 +37,19 @@ class SourceString extends AbstractSourceCode {
     SourceString(String source, String path=null, String name=null) {
         assert source
         this.source = source
-        this.path = path
+        setPath(path)
         this.name = name
     }
 
     /**
      * @return the full text of the source code
      */
-    public String getText() {
+    String getText() {
         return source
+    }
+
+    void setPath(String path) {
+        this.path = path ? normalizePath(path) : path
     }
 
     String toString() {

@@ -34,7 +34,7 @@ interface SourceCode {
 
     /**
      * Get the logical path for this source code. If this object is a file, then the name
-     * is the full path in the filesystem.
+     * is the full path in the filesystem. File separators are normalized to forward slash (/).
      * @return the name for this source; may be null
      */
     String getPath()

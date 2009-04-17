@@ -16,7 +16,8 @@
 package org.codenarc.source
 
 /**
- * The SourceCode implementation for a single file 
+ * The SourceCode implementation for a single file.
+ * Note that the path is normalized: file separator chars are normalized to standard '/'.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -25,6 +26,7 @@ class SourceFile extends AbstractSourceCode {
 
     private File file
     private String text
+    private path
 
     /**
      * Construct a new instance for the file at the specified path
@@ -33,6 +35,7 @@ class SourceFile extends AbstractSourceCode {
     SourceFile(File file) {
         assert file
         this.file = file
+        this.path = normalizePath(file.path)
     }
 
     /**
@@ -43,10 +46,10 @@ class SourceFile extends AbstractSourceCode {
     }
 
     /**
-     * @return the path for this source file, including filename
+     * @return the normalized path for this source file, including filename
      */
     String getPath() {
-        return file.path
+        return path
     }
 
     /**

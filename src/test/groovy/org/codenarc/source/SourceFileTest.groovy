@@ -42,7 +42,8 @@ class SourceFileTest extends AbstractTest {
     }
 
     void testGetPath() {
-        assert sourceFile.getPath() == file.path
+        log("path=${sourceFile.path}") 
+        assert sourceFile.getPath() == FILE
     }
 
     void testGetText() {

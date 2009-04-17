@@ -99,11 +99,18 @@ FieldName.regex=_[a-z][a-zA-Z0-9]*
   several standard properties that can be used to configure how rules are applied to source files.
 
   The <<<applyToFilesMatching>>> and <<<doNotApplyToFilesMatching>>> properties enable filtering
-  the files to which the rule is applied by matching a regular expression against the full pathname
+  the files to which the rule is applied by matching a regular expression against the <<full pathname>>
   of each source file. If <<<applyToFilesMatching>>> is not empty or null, then the rule is only
   applied to source files with matching paths. Likewise, if <<<doNotApplyToFilesMatching>>> is not
   empty or null, then the rule is NOT applied to source files with matching paths. Both properties
   default to <<<null>>>.
+
+  *  <<NOTE:>> File separator characters within pathnames are normalized to
+  forward slashes (/). On Windows, for instance, that means that the path "c:\dir\file.txt" is
+  normalized to "c:/dir/file.txt". If your regular expressions contain file separator characters,
+  be sure that they are all the standard '/', no matter what operating system. 
+
+  []
 
   The <<<applyToFilenames>>> and <<<doNotApplyToFilenames>>> properties enable filtering
   the files to which the rule is applied by specifying a comma-separated list of filenames (no path)

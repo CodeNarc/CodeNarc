@@ -49,6 +49,26 @@ class SourceStringTest extends AbstractTest {
         assert sourceString.getName() == 'Name'
     }
 
+    void testNormalizedPath() {
+        def originalFileSeparator = System.getProperty("file.separator")
+        try {
+            System.setProperty("file.separator", '\\')
+            sourceString.path = 'abc\\def\\ghi'
+            assert sourceString.path == 'abc/def/ghi'
+
+            assert new SourceString('src', '\\abc').path == '/abc'
+
+            System.setProperty("file.separator", '~')
+            assert new SourceString('src', '~abc~def').path == '/abc/def'
+
+            System.setProperty("file.separator", '/')
+            assert new SourceString('src', '/abc/def').path == '/abc/def'
+        }
+        finally {
+            System.setProperty("file.separator", originalFileSeparator)
+        }
+    }
+
     void testGetText() {
         def text = sourceString.text
         assert text == SOURCE
@@ -111,4 +131,5 @@ class SourceStringTest extends AbstractTest {
         super.setUp()
         sourceString = new SourceString(SOURCE)
     }
+
 }
