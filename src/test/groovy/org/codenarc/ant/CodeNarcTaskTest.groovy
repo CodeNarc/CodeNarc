@@ -127,6 +127,13 @@ class CodeNarcTaskTest extends AbstractTest {
         assert codeNarcTask.reportWriters[1].title == 'ABC'
     }
 
+    void testAddConfiguredReport_NullToFile() {
+        codeNarcTask.addConfiguredReport(new Report(type:'html', title:'ABC'))
+        assert codeNarcTask.reportWriters.size() == 2
+        assert codeNarcTask.reportWriters[1].title == 'ABC'
+        assert codeNarcTask.reportWriters[1].outputFile == HtmlReportWriter.DEFAULT_OUTPUT_FILE
+    }
+
     void testAddConfiguredReport_InvalidReportType() {
         shouldFail(BuildException) { codeNarcTask.addConfiguredReport(new Report(type:'XXX', toFile:REPORT_FILE)) }
     }

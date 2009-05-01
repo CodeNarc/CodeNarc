@@ -109,7 +109,12 @@ class CodeNarcTask extends Task {
         if (report.type != 'html') {
             throw new BuildException("Invalid type: [$report.type]")
         }
-        reportWriters << new HtmlReportWriter(outputFile:report.toFile, title:report.title)
+        def reportWriter = new HtmlReportWriter(title:report.title)
+        if (report.toFile) {
+            reportWriter.outputFile = report.toFile 
+        }
+        LOG.debug("Adding report: $reportWriter")
+        reportWriters << reportWriter
     }
 
     /**

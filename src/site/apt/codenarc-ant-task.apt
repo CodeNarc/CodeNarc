@@ -43,7 +43,7 @@ CodeNarc - Ant Task
 | type                | The format of the output analysis report. The only valid       | Yes                    |
 |                     | value is "html"                                                |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-| toFile              | The path and filename for the output report file.              | Yes                    |
+| toFile              | The path and filename for the output report file.              | No                     |
 *---------------------+----------------------------------------------------------------+------------------------+
 | title               | The title for the output report.                               | No                     |
 *---------------------+----------------------------------------------------------------+------------------------+

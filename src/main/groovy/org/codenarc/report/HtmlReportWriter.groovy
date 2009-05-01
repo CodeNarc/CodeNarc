@@ -69,6 +69,10 @@ class HtmlReportWriter implements ReportWriter {
         }
     }
 
+    String toString() {
+        "HtmlReportWriter[outputFile=$outputFile, title=$title]"
+    }
+
     //--------------------------------------------------------------------------
     // Internal Helper Methods
     //--------------------------------------------------------------------------

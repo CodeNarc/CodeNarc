@@ -27,6 +27,7 @@ import org.apache.tools.ant.Project
  * The supported command-line parameters are all of the form: "-OPTION=VALUE", where OPTION is one
  * of the options in the following list.
  * <ul>
+ *   <li>help - Display the command-line help; If present, this must be the only command-line parameter.</li>
  *   <li>basedir - The base directory for the source code to be analyzed. This is the root of the
  *          directory tree. Defaults to the current directory ('.').</li>
  *   <li>rulesetfiles - The path to the XML RuleSet definition files, relative to the classpath. This can be a
@@ -52,7 +53,7 @@ class CodeNarc {
     protected static final HELP = [
         'CodeNarc - static analysis for Groovy',
         'Usage: java org.codenarc.CodeNarc [OPTIONS]',
-        '  where OPTIONS are zero or more command-line options of the form "-NAME=VALUE":',
+        '  where OPTIONS are zero or more command-line options of the form "-NAME[=VALUE]":',
         '    -basedir=<DIR>',
         '        The base (root) directory for the source code to be analyzed.',
         '        Defaults to the current directory (".").',
@@ -75,8 +76,12 @@ class CodeNarc {
         '        omitted, the default filename is used ("CodeNarcReport.html"). If no',
         '        report option is specified, default to a single "html" report with the',
         '        default filename.',
-        '    Example command-line invocation:',
+        '    -help',
+        '        Display the command-line help. If present, this must be the only command-line parameter.',
+        '    Example command-line invocations:',
+        '      java org.codenarc.CodeNarc',
         '      java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"',
+        '      java org.codenarc.CodeNarc -help'
     ].join('\n')
 
     protected String ruleSetFiles
@@ -86,17 +91,32 @@ class CodeNarc {
     protected String title
     protected List reports = []
 
+    // Abstract Ant Task execution to allow substitution for unit tests
+    protected antTaskExecutor = { antTask -> antTask.execute() }
+
     public static void main(String[] args) {
         def codeNarc = new CodeNarc()
+
+        if (args == ['-help'] as String[]) {
+            println HELP
+            return
+        }
+
         try {
-            codeNarc.parseArgs(args)
-            def antTask = codeNarc.buildAntTask()
-            antTask.execute()
+            codeNarc.execute(args)
         }
         catch(Throwable t) {
             println "ERROR: ${t.message}"
+            t.printStackTrace()
             println HELP            
         }
+    }
+
+    protected void execute(String[] args) {
+        parseArgs(args)
+        setDefaultsIfNecessary()
+        def antTask = buildAntTask()
+        antTaskExecutor(antTask)
     }
 
     protected void setDefaultsIfNecessary() {
@@ -114,7 +134,7 @@ class CodeNarc {
         }
     }
 
-    protected Task buildAntTask() {
+    private Task buildAntTask() {
         def project = new Project(basedir:'.')
         def antTask = new CodeNarcTask(project:project)
         antTask.addFileset(createFileSet(project))
@@ -150,8 +170,6 @@ class CodeNarc {
                 default: assert false, "Invalid option: [$arg]"
             }
         }
-        // TODO verifyRequiredArgs() or verifyRequiredConfiguration() ?
-        // TODO setDefaultReportIfNoneConfigured()
     }
 
     private parseRuleSetFiles(String argValue) {
