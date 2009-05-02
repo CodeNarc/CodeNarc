@@ -70,13 +70,11 @@ class SourceCodeCriteria {
         }
 
         if (apply && applyToFilenames) {
-            def names = applyToFilenames.tokenize(',')
-            apply = names.find { namePattern -> new WildcardPattern(namePattern).matches(sourceCode.name) }
+            apply = new WildcardPattern(applyToFilenames).matches(sourceCode.name)
         }
 
         if (apply && doNotApplyToFilenames) {
-            def names = doNotApplyToFilenames.tokenize(',')
-            apply = !(names.find { namePattern -> new WildcardPattern(namePattern).matches(sourceCode.name) } )
+            apply = !new WildcardPattern(doNotApplyToFilenames).matches(sourceCode.name) 
         }
 
         return apply

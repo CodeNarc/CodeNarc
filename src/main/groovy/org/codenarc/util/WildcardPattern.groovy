@@ -37,17 +37,27 @@ package org.codenarc.util
  */
 class WildcardPattern {
     private String pattern
-    private String regex
+    private List regexes = []
+    private List strings = []
 
     /**
-     * Construct a new WildcardPattern instance.
-     * @param pattern - the pattern string, optionally including wildcard characters ('*' or '?'); must not be null
+     * Construct a new WildcardPattern instance on a single pattern or a comma-separated list of patterns.
+     * @param patternString - the pattern string, optionally including wildcard characters ('*' or '?');
+     *      may optionally contain more than one pattern, separated by commas; must not be null
      */
-    WildcardPattern(String pattern) {
-        assert pattern != null
-        this.pattern = pattern
-        this.regex = containsWildcards(pattern) ? convertStringWithWildcardsToRegex(pattern) : null
+    WildcardPattern(String patternString) {
+        assert patternString != null
+        this.pattern = patternString
 
+        def patterns = patternString.size() > 0 ? patternString.tokenize(',') : ['']
+        patterns.each { pattern -> 
+            if (containsWildcards(pattern)) {
+                regexes << convertStringWithWildcardsToRegex(pattern)
+            }
+            else {
+                strings << pattern
+            }
+        }
     }
 
     /**
@@ -56,7 +66,7 @@ class WildcardPattern {
      * @return true if the String matches the pattern
      */
     boolean matches(String string) {
-        return regex ? string ==~ regex : string == pattern
+        return regexes.find { regex -> string ==~ regex } || strings.contains(string)
     }
 
     /**

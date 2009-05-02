@@ -69,14 +69,11 @@ class StatelessClassAstVisitor extends AbstractAstVisitor  {
     void visitField(FieldNode fieldNode) {
         boolean ignore = false
         if (rule.ignoreFieldNames) {
-            def names = rule.ignoreFieldNames.tokenize(',')
-            ignore = names.find { namePattern -> new WildcardPattern(namePattern).matches(fieldNode.name) }
+            ignore = new WildcardPattern(rule.ignoreFieldNames).matches(fieldNode.name)
         }
 
         if (!ignore && rule.ignoreFieldTypes) {
-            String fieldType = fieldNode.type
-            def types = rule.ignoreFieldTypes.tokenize(',')
-            ignore = types.find { typePattern -> new WildcardPattern(typePattern).matches(fieldType) }
+            ignore = new WildcardPattern(rule.ignoreFieldTypes).matches(fieldNode.type.name)
         }
 
         if (!ignore) {
