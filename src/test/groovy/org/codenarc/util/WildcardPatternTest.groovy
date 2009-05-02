@@ -37,11 +37,19 @@ class WildcardPatternTest extends AbstractTest {
         assert new WildcardPattern('a*def').matches('abcdef')
         assert new WildcardPattern('a?cde?').matches('abcdef')
         assert new WildcardPattern('*?cd*').matches('abcdef')
+        assert new WildcardPattern('a/*/c*.groovy').matches('a/b/c.groovy')
+        assert new WildcardPattern('a/*/c*.groovy').matches('a/b/cdef.groovy')
+        assert new WildcardPattern('**/c*.groovy').matches('a/b/cdef.groovy')
+        assert new WildcardPattern('a**/c*.groovy').matches('a/b/cdef.groovy')
 
         assert !new WildcardPattern('').matches('b')
         assert !new WildcardPattern('a').matches('b')
         assert !new WildcardPattern('a??cdef').matches('abcdef')
+        assert !new WildcardPattern('a?cdef').matches('a/cdef')
         assert !new WildcardPattern('a*fg').matches('abcdef')
+        assert !new WildcardPattern('a*c*.groovy').matches('a/b/c.groovy')
+        assert !new WildcardPattern('a/*/c*.groovy').matches('a/b1/b2/cdef.groovy')
+        assert !new WildcardPattern('**/c*.groovy').matches('a/b/c/def.groovy')
     }
 
 }

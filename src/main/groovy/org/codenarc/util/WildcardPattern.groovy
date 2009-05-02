@@ -16,11 +16,19 @@
 package org.codenarc.util
 
 /**
- * Represents a string pattern that may optionally include wildcard characters ('*' or '?'), and
+ * Represents a string pattern that may optionally include wildcards ('*', '**' or '?'), and
  * provides an API to determine whether that pattern matches a specified input string.
  * <p/>
- * The wildcard character '*' within the pattern matches a sequence of zero or more characters in the input
- * string. The wildcard character '?' within the pattern matches exactly one character in the input string.
+ * The wildcard character '*' within the pattern matches a sequence of zero or more characters within a
+ * single file or directory name in the input string. It does not match a sequence of two or more
+ * dir/file names. For instance, 'a*b' matches 'a12345b' and 'ab', but does NOT match 'a/b' or 'a123/b'.
+ * <p/>
+ * The '**' wildcard matches any sequence of zero or more characters in the input string, including
+ * directory names and separators . It matches any part of the directory tree. For instance, 'a**b'
+ * matches 'a12345b', 'ab', 'a/b' and 'a1/a2/a3b'.
+ * <p/>
+ * The wildcard character '?' within the pattern matches exactly one character in the input string,
+ * excluding the normalized file separator character ('/').
  * <p/>
  * This is an internal class and its API is subject to change.
  *
@@ -72,13 +80,17 @@ class WildcardPattern {
         assert stringWithWildcards != null
 
         def result = new StringBuffer()
+        def prevCharWasStar = false
         stringWithWildcards.each {ch ->
             switch (ch) {
                 case '*':
-                    result << '.*'
+                    // Single '*' matches single dir/file; Double '*' matches sequence of zero or more dirs/files
+                    result << (prevCharWasStar ? /.*/ : /[^\/]*/) 
+                    prevCharWasStar = !prevCharWasStar
                     break;
                 case '?':
-                    result << '.'
+                    // Any character except the normalized file separator ('/')
+                    result << /[^\/]/
                     break;
                 case ['$', '|', '[', ']', '(', ')', '.', ':', '{', '}', '\\', '^']:
                     result << '\\' + ch
