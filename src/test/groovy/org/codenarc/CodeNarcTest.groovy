@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,9 +16,8 @@
 package org.codenarc
 
 import org.codenarc.test.AbstractTest
-import org.codenarc.ant.CodeNarcTaskAccessor
-import org.codenarc.ant.CodeNarcTask
 import org.codenarc.report.HtmlReportWriter
+import org.codenarc.results.FileResults
 
 /**
  * Tests for CodeNarc command-line runner
@@ -35,11 +34,10 @@ class CodeNarcTest extends AbstractTest {
     static final TITLE = 'My Title'
     static final REPORT_FILE = 'CodeNarcTest-Report.html'
     static final REPORT_STR = "html:$REPORT_FILE"
+    static final RESULTS = new FileResults('path', [])
 
     private codeNarc
     private outputFile
-
-    // TODO Clean up / simplify / remove test for buildAntTask. Make it private?
 
     void testParseArgs_InvalidOptionName() {
         shouldFailWithMessageContaining('unknown') { parseArgs('-unknown=abc') }
@@ -81,31 +79,36 @@ class CodeNarcTest extends AbstractTest {
     void testParseArgs_Report() {
         parseArgs("-report=$REPORT_STR")
         assert codeNarc.reports.size() == 1
-        assert codeNarc.reports[0].type == 'html'
-        assert codeNarc.reports[0].toFile == REPORT_FILE
+        assert codeNarc.reports[0].class == HtmlReportWriter
+        assert codeNarc.reports[0].outputFile == REPORT_FILE
     }
 
     void testParseArgs_TwoReports() {
-        parseArgs("-report=$REPORT_STR", '-report=xml')
+        parseArgs("-report=$REPORT_STR", '-report=html')
         assert codeNarc.reports.size() == 2
-        assert codeNarc.reports[0].type == 'html'
-        assert codeNarc.reports[0].toFile == REPORT_FILE
-        assert codeNarc.reports[1].type == 'xml'
-        assert codeNarc.reports[1].toFile == null
+        assert codeNarc.reports[0].class == HtmlReportWriter
+        assert codeNarc.reports[0].outputFile == REPORT_FILE
+        assert codeNarc.reports[1].class == HtmlReportWriter
+        assert codeNarc.reports[1].outputFile == HtmlReportWriter.DEFAULT_OUTPUT_FILE
+    }
+
+    void testParseArgs_InvalidReportType() {
+        shouldFailWithMessageContaining('pdf') { parseArgs('-report=pdf') }
+        shouldFailWithMessageContaining('pdf') { parseArgs('-report=pdf:MyReport.pdf') }
     }
 
     void testSetDefaultsIfNecessary_ValuesNotSet() {
         codeNarc.setDefaultsIfNecessary()
         assert codeNarc.includes == '**/*.groovy'
         assert codeNarc.ruleSetFiles == 'rulesets/basic.xml'
-        assertReport(codeNarc.reports[0], 'html', null, null)
+        assertReport(codeNarc.reports[0], HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, null)
         assert codeNarc.baseDir == '.'
     }
 
     void testSetDefaultsIfNecessary_TitleSet() {
         codeNarc.title = 'abc'
         codeNarc.setDefaultsIfNecessary()
-        assertReport(codeNarc.reports[0], 'html', null, 'abc')
+        assertReport(codeNarc.reports[0], HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, 'abc')
     }
 
     void testSetDefaultsIfNecessary_ValuesAlreadySet() {
@@ -116,7 +119,7 @@ class CodeNarcTest extends AbstractTest {
         codeNarc.setDefaultsIfNecessary()
         assert codeNarc.includes == 'aaa'
         assert codeNarc.ruleSetFiles == 'bbb'
-        assert codeNarc.reports == ['ccc'] 
+        assert codeNarc.reports == ['ccc']
         assert codeNarc.baseDir == 'ddd'
     }
 
@@ -124,42 +127,50 @@ class CodeNarcTest extends AbstractTest {
         final ARGS = [
                 "-report=$REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
-        def antTask
-        codeNarc.antTaskExecutor = { t -> antTask = new CodeNarcTaskAccessor(t) }
+
+        def sourceAnalyzer, ruleSet
+        codeNarc.applySourceAnalyzer = { sa, rs -> sourceAnalyzer = sa; ruleSet = rs; return RESULTS }
+
+        def reportWriter, analysisContext, results, reportCount = 0
+        codeNarc.writeReport = { rw, ac, res -> reportWriter = rw; analysisContext = ac; results = res; reportCount++ }
+
         codeNarc.execute(ARGS)
 
-        assertBaseDir(antTask, BASE_DIR)
+        assert codeNarc.ruleSetFiles == RULESET1
+        assert codeNarc.includes == INCLUDES
+        assert codeNarc.excludes == EXCLUDES
 
-        def includedFiles = getIncludedFiles(antTask)
-        assert includedFiles.contains(convertToLocalFileSeparators('sourcewithdirs/SourceFile1.groovy'))
-        assert !includedFiles.find { it.startsWith('rule') }
+        assert sourceAnalyzer.baseDirectory == BASE_DIR
+        assert ruleSet.rules*.class == [org.codenarc.rule.TestPathRule]
 
-        def excludedFiles = getExcludedFiles(antTask)
-        assert excludedFiles.contains(convertToLocalFileSeparators('sourcewithdirs/subdir1/Subdir1File2.groovy'))
-
-        assert antTask.ruleSetFiles == RULESET1
-
-        assert antTask.reportWriters.size() == 1
-        assertReportWriter(antTask.reportWriters[0], TITLE, REPORT_FILE)
+        assertReport(reportWriter, HtmlReportWriter, REPORT_FILE, TITLE)
+        assert analysisContext.ruleSet == ruleSet
+        assert results == RESULTS
+        assert reportCount == 1
     }
 
     void testExecute_NoArgs() {
         final ARGS = [] as String[]
-        def antTask
-        codeNarc.antTaskExecutor = { t -> antTask = new CodeNarcTaskAccessor(t) }
+
+        def sourceAnalyzer, ruleSet
+        codeNarc.applySourceAnalyzer = { sa, rs -> sourceAnalyzer = sa; ruleSet = rs; return RESULTS }
+
+        def reportWriter, analysisContext, results, reportCount = 0
+        codeNarc.writeReport = { rw, ac, res -> reportWriter = rw; analysisContext = ac; results = res; reportCount++ }
+
         codeNarc.execute(ARGS)
 
-        assertBaseDir(antTask, '.')
+        assert codeNarc.ruleSetFiles == 'rulesets/basic.xml'
+        assert codeNarc.includes == '**/*.groovy'
+        assert codeNarc.excludes == null
 
-        def includedFiles = getIncludedFiles(antTask)
-        assert includedFiles.every { it.endsWith('.groovy') }
+        assert sourceAnalyzer.baseDirectory == '.'
+        assert ruleSet.rules.size() >= 14
 
-        assert getExcludedFiles(antTask).empty
-
-        assert antTask.ruleSetFiles == 'rulesets/basic.xml'
-
-        assert antTask.reportWriters.size() == 1
-        assertReportWriter(antTask.reportWriters[0], null, HtmlReportWriter.DEFAULT_OUTPUT_FILE)
+        assertReport(reportWriter, HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, null)
+        assert analysisContext.ruleSet == ruleSet
+        assert results == RESULTS
+        assert reportCount == 1
     }
 
     void testMain() {
@@ -223,48 +234,10 @@ class CodeNarcTest extends AbstractTest {
         codeNarc.parseArgs(argsAsArray)
     }
 
-    private void assertReportWriter(reportWriter, String title, String outputFile) {
-        assert reportWriter instanceof HtmlReportWriter
-        assert reportWriter.title == title
-        assert reportWriter.outputFile == outputFile
-    }
-
-    private void assertReport(report, String type, String toFile, String title) {
-        assert report.type == type
-        assert report.toFile == toFile
+    private void assertReport(report, Class reportClass, String toFile, String title) {
+        assert report.class == reportClass
+        assert report.outputFile == toFile
         assert report.title == title
-    }
-
-    private String convertToLocalFileSeparators(String path) {
-        final SEP = '/' as char
-        char separatorChar = System.getProperty("file.separator").charAt(0)
-        return (separatorChar != SEP) ? path.replace(SEP, separatorChar) : path
-    }
-
-    private void assertBaseDir(antTask, String baseDir) {
-        def fileSet = antTask.fileSet
-        def project = fileSet.project
-        assert fileSet.getDir(project) == new File(baseDir)
-    }
-
-    private List getExcludedFiles(antTask) {
-        def fileSet = antTask.fileSet
-        def project = fileSet.project
-        def dirScanner = fileSet.getDirectoryScanner(project)
-
-        def excludedFiles = dirScanner.excludedFiles as List
-        log("excludedFiles=${excludedFiles}")
-        return excludedFiles
-    }
-
-    private List getIncludedFiles(antTask) {
-        def fileSet = antTask.fileSet
-        def project = fileSet.project
-        def dirScanner = fileSet.getDirectoryScanner(project)
-
-        def includedFiles = dirScanner.includedFiles as List
-        log("includedFiles=${includedFiles}")
-        return includedFiles
     }
 
     private String captureSystemOut(Closure closure) {

@@ -26,11 +26,12 @@ import org.codenarc.test.AbstractTest
 class WildcardPatternTest extends AbstractTest {
 
     void testConstructor_Null() {
-        shouldFailWithMessageContaining('pattern') { new WildcardPattern(null) } 
+        shouldFailWithMessageContaining('pattern') { new WildcardPattern(null) }
     }
 
     void testMatches() {
         assert new WildcardPattern('').matches('')
+        assert new WildcardPattern('').matches('abc')
         assert new WildcardPattern('a').matches('a')
         assert new WildcardPattern('a@b.c').matches('a@b.c')
         assert new WildcardPattern('!@#$%^&.()-_+=~`{}[]:;<>').matches('!@#$%^&.()-_+=~`{}[]:;<>')
@@ -42,7 +43,6 @@ class WildcardPatternTest extends AbstractTest {
         assert new WildcardPattern('**/c*.groovy').matches('a/b/cdef.groovy')
         assert new WildcardPattern('a**/c*.groovy').matches('a/b/cdef.groovy')
 
-        assert !new WildcardPattern('').matches('b')
         assert !new WildcardPattern('a').matches('b')
         assert !new WildcardPattern('a??cdef').matches('abcdef')
         assert !new WildcardPattern('a?cdef').matches('a/cdef')

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,14 +15,17 @@
  */
 package org.codenarc
 
-import org.codenarc.ant.CodeNarcTask
-import org.apache.tools.ant.Task
-import org.codenarc.ant.Report
-import org.apache.tools.ant.types.FileSet
-import org.apache.tools.ant.Project
+import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
+import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.ruleset.RuleSet
+import org.codenarc.ruleset.CompositeRuleSet
+import org.codenarc.ruleset.XmlFileRuleSet
+import org.apache.log4j.Logger
+import org.codenarc.report.HtmlReportWriter
+import org.codenarc.analyzer.FilesystemSourceAnalyzer
 
 /**
- * Command-line runner for CodeNarc. This is basically a wrapper around the {@link CodeNarcTask} Ant Task.
+ * Command-line runner for CodeNarc.
  * <p/>
  * The supported command-line parameters are all of the form: "-OPTION=VALUE", where OPTION is one
  * of the options in the following list.
@@ -44,12 +47,11 @@ import org.apache.tools.ant.Project
  *          </li>
  * </ul>
  *
- * @see CodeNarcTask
- *
  * @author Chris Mair
  * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
  */
 class CodeNarc {
+    static final LOG = Logger.getLogger(CodeNarc)
     protected static final HELP = [
         'CodeNarc - static analysis for Groovy',
         'Usage: java org.codenarc.CodeNarc [OPTIONS]',
@@ -58,10 +60,10 @@ class CodeNarc {
         '        The base (root) directory for the source code to be analyzed.',
         '        Defaults to the current directory (".").',
         '    -includes=<PATTERNS>',
-        '        The comma-separated list of Ant file patterns specifying files that must',
+        '        The comma-separated list of Ant-style file patterns specifying files that must',
         '        be included. Defaults to "**/*.groovy".',
         '    -excludes=<PATTERNS>',
-        '        The comma-separated list of Ant file patterns specifying files that must',
+        '        The comma-separated list of Ant-style file patterns specifying files that must',
         '        be excluded. No files are excluded when omitted.',
         '    -rulesetfiles=<FILENAMES>',
         '        The path to the XML RuleSet definition files, relative to the classpath.',
@@ -78,10 +80,10 @@ class CodeNarc {
         '        default filename.',
         '    -help',
         '        Display the command-line help. If present, this must be the only command-line parameter.',
-        '    Example command-line invocations:',
-        '      java org.codenarc.CodeNarc',
-        '      java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"',
-        '      java org.codenarc.CodeNarc -help'
+        '  Example command-line invocations:',
+        '    java org.codenarc.CodeNarc',
+        '    java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"',
+        '    java org.codenarc.CodeNarc -help'
     ].join('\n')
 
     protected String ruleSetFiles
@@ -91,9 +93,16 @@ class CodeNarc {
     protected String title
     protected List reports = []
 
-    // Abstract Ant Task execution to allow substitution for unit tests
-    protected antTaskExecutor = { antTask -> antTask.execute() }
+    // Abstract the call to the SourceAnalyzer to allow substitution for unit tests
+    protected applySourceAnalyzer = { sourceAnalyzer, ruleSet -> sourceAnalyzer.analyze(ruleSet) }
 
+    // Abstract report writing to allow substitution for unit tests
+    protected writeReport = { reportWriter, analysisContext, results -> reportWriter.writeOutReport(analysisContext, results) }
+
+    /**
+     * Main command-line entry-point. Run the CodeNarc application.
+     * @param args - the String[] of command-line arguments
+     */
     public static void main(String[] args) {
         def codeNarc = new CodeNarc()
 
@@ -108,15 +117,33 @@ class CodeNarc {
         catch(Throwable t) {
             println "ERROR: ${t.message}"
             t.printStackTrace()
-            println HELP            
+            println HELP
         }
     }
 
     protected void execute(String[] args) {
         parseArgs(args)
         setDefaultsIfNecessary()
-        def antTask = buildAntTask()
-        antTaskExecutor(antTask)
+
+        def startTime = System.currentTimeMillis()
+        def sourceAnalyzer = createSourceAnalyzer()
+        def ruleSet = createRuleSet()
+        new PropertiesFileRuleSetConfigurer().configure(ruleSet)
+        def results = applySourceAnalyzer(sourceAnalyzer, ruleSet)
+        def p1 = results.getNumberOfViolationsWithPriority(1, true)
+        def p2 = results.getNumberOfViolationsWithPriority(2, true)
+        def p3 = results.getNumberOfViolationsWithPriority(3, true)
+        def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
+        def elapsedTime = System.currentTimeMillis() - startTime
+        LOG.debug("results=$results")
+        def analysisContext = new AnalysisContext(ruleSet:ruleSet)
+
+        reports.each { reportWriter ->
+            reportWriter.title = title
+             writeReport(reportWriter, analysisContext, results)
+        }
+
+        LOG.info("CodeNarc completed: " + countsText + " ${elapsedTime}ms")
     }
 
     protected void setDefaultsIfNecessary() {
@@ -130,27 +157,31 @@ class CodeNarc {
             ruleSetFiles = 'rulesets/basic.xml'
         }
         if (reports.empty) {
-            reports << new Report(type:'html',title:title)
+            reports << new HtmlReportWriter(title:title)
         }
     }
 
-    private Task buildAntTask() {
-        def project = new Project(basedir:'.')
-        def antTask = new CodeNarcTask(project:project)
-        antTask.addFileset(createFileSet(project))
-        antTask.ruleSetFiles = ruleSetFiles
-        reports.each { report ->
-            report.title = title
-            antTask.addConfiguredReport(report) 
-        }
-        return antTask
+    /**
+     * Create and return the RuleSet that provides the source of Rules to be applied.
+     * The returned RuleSet may aggregate multiple underlying RuleSets.
+     * @return a single RuleSet
+     */
+    protected RuleSet createRuleSet() {
+        // TODO Make this a static method on CompositeRuleSet?
+        def paths = ruleSetFiles.tokenize(',')
+        def newRuleSet = new CompositeRuleSet()
+        paths.each { path -> newRuleSet.add(new XmlFileRuleSet(path)) }
+        return newRuleSet
     }
 
-    private FileSet createFileSet(Project project) {
-        def fileSet = new FileSet(dir:new File(baseDir), project:project)
-        fileSet.setIncludes(includes)
-        fileSet.setExcludes(excludes)
-        return fileSet
+    /**
+     * Create and return the SourceAnalyzer
+     * @return a configured SourceAnalyzer instance
+     */
+    protected SourceAnalyzer createSourceAnalyzer() {
+        def analyzer = new FilesystemSourceAnalyzer()
+        analyzer.baseDirectory = baseDir
+        return analyzer
     }
 
     protected void parseArgs(String[] args) {
@@ -193,15 +224,14 @@ class CodeNarc {
     }
 
     private parseReport(String argValue) {
-        def report = new Report()
+        assert argValue.startsWith('html'), "[$argValue] does not specify a supported report type"
+        def report = new HtmlReportWriter()
         if (argValue.contains(':')) {
             def parts = argValue.tokenize(':')
-            report.type = parts[0]
-            report.toFile = parts[1]
+            def type = parts[0]
+            report.outputFile = parts[1]
         }
-        else {
-            report.type = argValue
-        }
+        // else argValue is just the report type
         reports << report
     }
 

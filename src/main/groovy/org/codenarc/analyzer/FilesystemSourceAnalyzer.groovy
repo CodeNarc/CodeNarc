@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,55 +21,49 @@ import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
 import org.codenarc.source.SourceCodeCriteria
+import org.codenarc.source.SourceCode
+import org.codenarc.util.WildcardPattern
 
 /**
- * SourceAnalyzer implementation that recursively processes files in the configured source directories.
- *
- * @deprecated This is an internal class that will be removed in the future
+ * SourceAnalyzer implementation that recursively processes files from the file system.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 88 $ - $Date: 2009-03-15 18:58:35 -0400 (Sun, 15 Mar 2009) $
  */
-class DirectorySourceAnalyzer implements SourceAnalyzer {
+class FilesystemSourceAnalyzer implements SourceAnalyzer {
     static final SEP = '/'
+    static final DEFAULT_INCLUDES = '**/*.groovy'
 
     /**
-     * The base directory; the sourceDirectories are relative to this,
-     * if not null. If this value is null, then treat sourceDirectories as full paths.
+     * The base (root) directory. Must not be null or empty.
      */
     String baseDirectory
 
     /**
-     *  The list of source directories, relative to the baseDirectory
-     *  if it is not null. If sourceDirectories is null, then analyze files recursively
-     *  from baseDirectory.
+     * The ant-style pattern of files to include in the analysis. Defaults to match all
+     * files with names ending with '.groovy'. If null, match all
+     * files/directories. This pattern can optionally contain wildcards: '**', '*' and '?'.
+     * All file separators within paths are normalized to the standard '/' separator,
+     * so use the '/' separator within this pattern where necessary. Example:
+     * "&#42;&#42;/*.groovy". If both <code>includes</code> and <code>excludes</code>
+     * are specified, then only files/directories that match at least one of the
+     * <code>includes</code> and none of the <code>excludes</code> are analyzed.
      */
-    List sourceDirectories
+    String includes = DEFAULT_INCLUDES
 
     /**
-     * Only analyze pathnames matching this regular expression. If null, match all pathnames.
-     * This defaults to matching all pathnames that end with '.groovy'.
+     * The ant-style pattern of files to exclude from the analysis. If null, exclude no
+     * files/directories. This pattern can optionally contain wildcards: '**', '*' and '?'.
+     * All file separators within paths are normalized to the standard '/' separator,
+     * so use the '/' separator within this pattern where necessary. Example:
+     * "&#42;&#42;/*.groovy". If both <code>includes</code> and <code>excludes</code>
+     * are specified, then only files/directories that match at least one of the
+     * <code>includes</code> and none of the <code>excludes</code> are analyzed.
      */
-    String applyToFilesMatching = /.*\.groovy/
+    String excludes
 
-    /**
-     * Do NOT analyze pathnames matching this regular expression. If null, then do not exclude any pathnames.
-     */
-    String doNotApplyToFilesMatching
-
-    /**
-     * Only analyze filenames matching this value.
-     * The value may optionally be a comma-separated list of names.
-     * The name(s) may optionally include wildcard characters ('*' or '?').
-     */
-    String applyToFilenames
-
-    /**
-     * Do NOT analyze filenames matching this value.
-     * The value may optionally be a comma-separated list of names.
-     * The name(s) may optionally include wildcard characters ('*' or '?').
-     */
-    String doNotApplyToFilenames
+    private WildcardPattern includesPattern
+    private WildcardPattern excludesPattern
 
     /**
      * Analyze the source with the configured directory tree(s) using the specified RuleSet and return the report results.
@@ -77,15 +71,13 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
      * @return the results from applying the RuleSet to all of the files in the source directories
      */
     Results analyze(RuleSet ruleSet) {
-        assert baseDirectory || sourceDirectories
+        assert baseDirectory
         assert ruleSet
 
+        initializeWildcardPatterns()
         def reportResults = new DirectoryResults()
-        def srcDirs = sourceDirectories ?: ['']
-        srcDirs.each { srcDir ->
-            def dirResults = processDirectory(srcDir, ruleSet)
-            reportResults.addChild(dirResults)
-        }
+        def dirResults = processDirectory('', ruleSet)
+        reportResults.addChild(dirResults)
         return reportResults
     }
 
@@ -112,11 +104,7 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
     private def processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
         def file = new File((String)baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
-        if (new SourceCodeCriteria(
-                applyToFilesMatching:applyToFilesMatching,
-                doNotApplyToFilesMatching:doNotApplyToFilesMatching,
-                applyToFilenames:applyToFilenames,
-                doNotApplyToFilenames:doNotApplyToFilenames).matches(sourceFile)) {
+        if (matches(sourceFile)) {
             dirResults.numberOfFilesInThisDirectory ++
             def allViolations = []
             ruleSet.rules.each {rule ->
@@ -131,4 +119,13 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
         }
     }
 
+    protected boolean matches(SourceCode sourceFile) {
+        return (!includesPattern || includesPattern.matches(sourceFile.path)) &&
+            (!excludesPattern || !excludesPattern.matches(sourceFile.path))
+    }
+
+    protected void initializeWildcardPatterns() {
+        includesPattern = includes ? new WildcardPattern(includes) : null
+        excludesPattern = excludes ? new WildcardPattern(excludes) : null
+    }
 }
