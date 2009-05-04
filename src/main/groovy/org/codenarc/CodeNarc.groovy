@@ -192,35 +192,15 @@ class CodeNarc {
             def name = matcher[0][1]
             def value = matcher[0][2]
             switch(name) {
-                case 'rulesetfiles': parseRuleSetFiles(value); break
-                case 'basedir': parseBaseDir(value); break
-                case 'includes': parseIncludes(value); break
-                case 'excludes': parseExcludes(value); break
-                case 'title': parseTitle(value); break
+                case 'rulesetfiles': ruleSetFiles = value; break
+                case 'basedir': baseDir = value; break
+                case 'includes': includes = value; break
+                case 'excludes': excludes = value; break
+                case 'title': title = value; break
                 case 'report': parseReport(value); break
                 default: assert false, "Invalid option: [$arg]"
             }
         }
-    }
-
-    private parseRuleSetFiles(String argValue) {
-        ruleSetFiles = argValue
-    }
-
-    private parseBaseDir(String argValue) {
-        baseDir = argValue
-    }
-
-    private parseIncludes(String argValue) {
-        includes = argValue
-    }
-
-    private parseExcludes(String argValue) {
-        excludes = argValue
-    }
-
-    private parseTitle(String argValue) {
-        title = argValue
     }
 
     private parseReport(String argValue) {

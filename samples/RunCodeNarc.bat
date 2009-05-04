@@ -1,3 +1,11 @@
 @rem Run CodeNarc using the supplied command-line parameters 
 
-@ java -classpath "%GROOVY_HOME%/embeddable/groovy-all-1.5.6.jar";lib;lib/CodeNarc-0.5.jar;lib/log4j-1.2.14.jar org.codenarc.CodeNarc %*
+@rem Make sure you have the following in your CLASSPATH:
+@rem  (1) The Groovy jar
+@rem  (2) The CodeNarc jar
+@rem  (3) The Log4J jar
+@rem  (4) The directory containing CodeNarc config files such as "codenarc.properties" or ruleset files.
+
+@set GROOVY_JAR="%GROOVY_HOME%/embeddable/groovy-all-1.5.6.jar"
+
+@java -classpath %GROOVY_JAR%;lib/CodeNarc-0.5.jar;lib/log4j-1.2.14.jar;lib org.codenarc.CodeNarc %*

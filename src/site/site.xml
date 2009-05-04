@@ -34,7 +34,7 @@
 
         <menu name="Running">
             <item name="Ant Task Usage" href="/codenarc-ant-task.html"/>
-            <item name="CodeNarc Groovy Script" href="/codenarc-groovy-script.html"/>
+            <item name="Command-Line" href="/codenarc-command-line.html"/>
         </menu>
 
         <menu name="Using">
