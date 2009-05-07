@@ -88,14 +88,14 @@ abstract class AbstractRuleTest extends AbstractTest {
      * @param source - the full source code to which the rule is applied, as a String
      * @param lineNumber1 - the expected line number in the first violation
      * @param sourceLineText1 - the text expected within the sourceLine of the first violation
-     * @param msg1 - the text expected within the message of the first violation
+     * @param msg1 - the text expected within the message of the first violation; May be a String or List of Strings; Defaults to null;
      * @param lineNumber2 - the expected line number in the second violation
      * @param sourceLineText2 - the text expected within the sourceLine of the second violation
-     * @param msg2 - the text expected within the message of the second violation
+     * @param msg2 - the text expected within the message of the second violation; May be a String or List of Strings; Defaults to null;
      */
     protected void assertTwoViolations(String source,
-            Integer lineNumber1, String sourceLineText1, String msg1,
-            Integer lineNumber2, String sourceLineText2, String msg2) {
+            Integer lineNumber1, String sourceLineText1, msg1,
+            Integer lineNumber2, String sourceLineText2, msg2) {
         def violations = applyRuleTo(source)
         assert violations.size() == 2
         assertViolation(violations[0], lineNumber1, sourceLineText1, msg1)

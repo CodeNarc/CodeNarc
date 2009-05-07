@@ -48,6 +48,18 @@ class IllegalRegexRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, null, '@author Joe', ['regular expression', REGEX])
     }
 
+    void testTwoOccurrences() {
+        final SOURCE = '''
+            /** @author Joe */
+            class MyClass {
+            }
+            // Other @author Joe
+        '''
+        assertTwoViolations(SOURCE,
+                null, '@author Joe', ['regular expression', REGEX],
+                null, '@author Joe', ['regular expression', REGEX])
+    }
+
     void testRegexIsNotPresent() {
         final SOURCE = '''
             /** @author Mike */
