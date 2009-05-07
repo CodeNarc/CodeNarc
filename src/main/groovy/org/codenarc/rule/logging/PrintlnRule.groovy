@@ -36,15 +36,18 @@ class PrintlnRule extends AbstractAstVisitorRule {
 class PrintlnAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        def isMatch =
-            AstUtil.isMethodCall(methodCall, 'this', 'println', 0) ||
-            AstUtil.isMethodCall(methodCall, 'this', 'println', 1) ||
-            AstUtil.isMethodCall(methodCall, 'this', 'print', 1) ||
-            (AstUtil.isMethodCall(methodCall, 'this', 'printf') && AstUtil.getMethodArguments(methodCall).size() > 1)
+        if (!isAlreadyVisited(methodCall)) {
+            def isMatch =
+                AstUtil.isMethodCall(methodCall, 'this', 'println', 0) ||
+                AstUtil.isMethodCall(methodCall, 'this', 'println', 1) ||
+                AstUtil.isMethodCall(methodCall, 'this', 'print', 1) ||
+                (AstUtil.isMethodCall(methodCall, 'this', 'printf') && AstUtil.getMethodArguments(methodCall).size() > 1)
 
-        if (isMatch) {
-            addViolation(methodCall)
+            if (isMatch) {
+                addViolation(methodCall)
+            }
         }
+        registerAsVisited(methodCall)
         super.visitMethodCallExpression(methodCall)
     }
 }

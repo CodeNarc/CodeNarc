@@ -47,17 +47,21 @@ class EmptyFinallyBlockRuleTest extends AbstractRuleTest {
 
     void testApplyTo_Violation_FinallyBlockContainsComment() {
         final SOURCE = '''
-            try {
-                doSomething()
-            } catch(MyException e) {
-                e.printStackTrace()
-            }
-            finally
-            {
-                // TODO Should do something here
+            class MyClass {
+                def myMethod() {
+                    try {
+                        doSomething()
+                    } catch(MyException e) {
+                        e.printStackTrace()
+                    }
+                    finally
+                    {
+                        // TODO Should do something here
+                    }
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 7, 'finally')
+        assertSingleViolation(SOURCE, 9, 'finally')
     }
 
     void testApplyTo_NoViolations() {

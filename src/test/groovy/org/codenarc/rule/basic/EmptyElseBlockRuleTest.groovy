@@ -50,14 +50,18 @@ class EmptyElseBlockRuleTest extends AbstractRuleTest {
 
     void testApplyTo_Violation_ElseBlockContainsComment() {
         final SOURCE = '''
-            if (isReady) {
-                println 'ok'
-            }
-            else {
-                // TODO Should do something here
+            class MyClass {
+                def update = {
+                    if (isReady) {
+                        println 'ok'
+                    }
+                    else {
+                        // TODO Should do something here
+                    }
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 5, 'else {')
+        assertSingleViolation(SOURCE, 7, 'else {')
     }
 
     void testApplyTo_NoViolations() {

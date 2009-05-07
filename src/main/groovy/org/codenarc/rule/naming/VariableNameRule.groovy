@@ -56,9 +56,9 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
                 if (!(varExpression.name ==~ re)) {
                     def msg = varExpressions.size() > 1 ? "Variable name: [$varExpression.name]" : null
                     addViolation(declarationExpression, msg)
-                    registerAsVisited(declarationExpression)
                 }
             }
+            registerAsVisited(declarationExpression)
         }
         super.visitDeclarationExpression(declarationExpression)
     }

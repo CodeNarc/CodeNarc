@@ -38,6 +38,19 @@ class PrintlnRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 2, 'println')
     }
 
+    void testApplyTo_Println_NoArgs_WithinClosure() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    if (hasResult) {
+                        println "$result"
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 5, 'println')
+    }
+
     void testApplyTo_Println_OneArg() {
         final SOURCE = '''
             println "message"
