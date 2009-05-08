@@ -34,7 +34,7 @@ class EmptySwitchStatementRuleTest extends AbstractRuleTest {
     void testApplyTo_EmptySwitchStatement() {
         final SOURCE = '''
             class MyClass {
-                def myMethod() {
+                def myClosure = {
                     switch(myVariable) {
                         // empty
                     }

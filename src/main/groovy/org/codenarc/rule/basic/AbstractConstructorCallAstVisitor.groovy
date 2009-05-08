@@ -31,9 +31,8 @@ abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
     protected abstract isConstructorCallAViolation(ConstructorCallExpression constructorCall)
 
     void visitConstructorCallExpression(ConstructorCallExpression constructorCall) {
-        if (!isAlreadyVisited(constructorCall) && isConstructorCallAViolation(constructorCall)) {
+        if (isFirstVisit(constructorCall) && isConstructorCallAViolation(constructorCall)) {
             addViolation(constructorCall)
-            registerAsVisited(constructorCall)
         }
         super.visitConstructorCallExpression(constructorCall)
     }

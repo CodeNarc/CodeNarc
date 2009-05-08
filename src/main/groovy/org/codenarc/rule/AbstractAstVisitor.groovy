@@ -35,20 +35,19 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     private Set visited = new HashSet()
 
     /**
-     * Check if the AST expression has already been visited
+     * Return true if the AST expression has not already been visited. If it is
+     * the first visit, register the expression so that the next visit will return false.
      * @param expression - the AST expression to check
-     * @return true if the AST expression has already been visited
+     * @return true if the AST expression has NOT already been visited
      */
-    protected isAlreadyVisited(expression) {
-        return visited.contains(expression)
-    }
-
-    /**
-     * Register the AST expression as having been visited
-     * @param expression - the AST expression to register
-     */
-    protected registerAsVisited(expression) {
-        visited << expression
+    protected isFirstVisit(expression) {
+        if(visited.contains(expression)) {
+            return false
+        }
+        else {
+            visited << expression
+            return true
+        }
     }
 
     /**

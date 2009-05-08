@@ -46,12 +46,16 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTest {
 
     void testApplyTo_Violation_CatchBlockContainsComment() {
         final SOURCE = '''
-            try {
-            } catch(MyException e) {
-                // TODO Should do something here
+            class MyClass {
+                def myClosure = {
+                    try {
+                    } catch(MyException e) {
+                        // TODO Should do something here
+                    }
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'catch(MyException e)')
+        assertSingleViolation(SOURCE, 5, 'catch(MyException e)')
     }
 
     void testApplyTo_NoViolations() {

@@ -56,7 +56,7 @@ class ReturnFromFinallyBlockRuleTest extends AbstractRuleTest {
     void testApplyTo_NestedTryFinally() {
         final SOURCE = '''
             class MyClass {
-                int myMethod() {
+                int myClosure = {
                     try {
                         doSomething()
                         return 0                // ok

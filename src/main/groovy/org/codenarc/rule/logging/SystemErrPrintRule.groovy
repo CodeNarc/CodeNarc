@@ -35,7 +35,7 @@ class SystemErrPrintRule extends AbstractAstVisitorRule {
 class SystemErrPrintAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        if (methodCall.text.startsWith('System.err.print')) {
+        if (isFirstVisit(methodCall) && methodCall.text.startsWith('System.err.print')) {
             addViolation(methodCall)
         }
         super.visitMethodCallExpression(methodCall)

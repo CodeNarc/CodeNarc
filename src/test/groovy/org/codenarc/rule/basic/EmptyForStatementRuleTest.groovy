@@ -34,7 +34,7 @@ class EmptyForStatementRuleTest extends AbstractRuleTest {
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
-                def myMethod() {
+                def myClosure = {
                     for (int i=0; i < 23; i++) {
                     }
                     println 'ok'

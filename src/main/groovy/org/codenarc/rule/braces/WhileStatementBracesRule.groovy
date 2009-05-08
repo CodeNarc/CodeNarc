@@ -34,7 +34,7 @@ class WhileStatementBracesRule extends AbstractAstVisitorRule {
 
 class WhileStatementBracesAstVisitor extends AbstractAstVisitor  {
     void visitWhileLoop(WhileStatement whileStatement) {
-        if (!AstUtil.isBlock(whileStatement.loopBlock)) {
+        if (isFirstVisit(whileStatement) && !AstUtil.isBlock(whileStatement.loopBlock)) {
             addViolation(whileStatement)
         }
         super.visitWhileLoop(whileStatement)

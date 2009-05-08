@@ -35,7 +35,7 @@ class SystemOutPrintRule extends AbstractAstVisitorRule {
 class SystemOutPrintAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        if (methodCall.text.startsWith('System.out.print')) {
+        if (isFirstVisit(methodCall) && methodCall.text.startsWith('System.out.print')) {
             addViolation(methodCall)
         }
         super.visitMethodCallExpression(methodCall)

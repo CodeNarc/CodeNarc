@@ -67,6 +67,17 @@ class SystemOutPrintRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 2, 'System.out.printf("%d", 1234)', 3, 'System.out.printf("%d %d", 1234, -99)')
     }
 
+    void testApplyTo_SystemOutPrint_WithinClosure() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    System.out.print(1234)
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'System.out.print(1234)')
+    }
+
     void testApplyTo_PrintlnButNotSystemOut() {
         final SOURCE = '''
             void testSomething() {

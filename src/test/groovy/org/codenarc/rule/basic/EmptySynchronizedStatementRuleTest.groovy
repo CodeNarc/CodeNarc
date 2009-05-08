@@ -34,7 +34,7 @@ class EmptySynchronizedStatementRuleTest extends AbstractRuleTest {
     void testApplyTo_EmptySynchronized() {
         final SOURCE = '''
             class MyClass {
-                def myMethod() {
+                def myClosure = {
                     synchronized(lock) {
                     }
                 }

@@ -56,7 +56,7 @@ class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTest {
     void testApplyTo_NestedTryFinally() {
         final SOURCE = '''
             class MyClass {
-                int myMethod() {
+                def myClosure = {
                     try {
                         doSomething()
                         throw new Exception()           // ok

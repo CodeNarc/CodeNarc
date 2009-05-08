@@ -41,7 +41,8 @@ class CommonThrowAstVisitor extends AbstractAstVisitor  {
 
     void visitThrowStatement(ThrowStatement throwStatement) {
         def throwExpression = throwStatement.expression
-        if (throwExpression instanceof ConstructorCallExpression &&
+        if (isFirstVisit(throwStatement) &&
+                throwExpression instanceof ConstructorCallExpression &&
                 throwExpression.type.name in exceptionTypeNames) {
             addViolation(throwStatement)
         }

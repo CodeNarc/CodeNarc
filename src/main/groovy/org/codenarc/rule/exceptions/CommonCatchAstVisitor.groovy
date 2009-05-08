@@ -38,7 +38,7 @@ class CommonCatchAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitCatchStatement(CatchStatement catchStatement) {
-        if (catchStatement.exceptionType.nameWithoutPackage == exceptionClassNameWithoutPackage) {
+        if (isFirstVisit(catchStatement) && catchStatement.exceptionType.nameWithoutPackage == exceptionClassNameWithoutPackage) {
             addViolation(catchStatement)
         }
         super.visitCatchStatement(catchStatement)

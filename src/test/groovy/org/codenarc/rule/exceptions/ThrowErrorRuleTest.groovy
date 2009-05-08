@@ -44,7 +44,7 @@ class ThrowErrorRuleTest extends AbstractRuleTest {
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = '''
             class MyClass {
-                void myMethod() {
+                def myClosure = {
                     if (error) {
                         throw new java.lang.Error('something bad')
                     }

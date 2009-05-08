@@ -36,7 +36,7 @@ class PrintlnRule extends AbstractAstVisitorRule {
 class PrintlnAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        if (!isAlreadyVisited(methodCall)) {
+        if (isFirstVisit(methodCall)) {
             def isMatch =
                 AstUtil.isMethodCall(methodCall, 'this', 'println', 0) ||
                 AstUtil.isMethodCall(methodCall, 'this', 'println', 1) ||
@@ -47,7 +47,6 @@ class PrintlnAstVisitor extends AbstractAstVisitor  {
                 addViolation(methodCall)
             }
         }
-        registerAsVisited(methodCall)
         super.visitMethodCallExpression(methodCall)
     }
 }

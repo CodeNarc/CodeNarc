@@ -45,6 +45,17 @@ class StringInstantiationRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 5, "new String('abc')", 6, 'new java.lang.String("abc")')
     }
 
+    void testApplyTo_WithinClosure() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    def b2 = new String('abc')
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, "new String('abc')")
+    }
+
     void testApplyTo_Violation_NotWithinClass() {
         final SOURCE = '''
             def b1 = new java.lang.String('abc')

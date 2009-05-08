@@ -56,9 +56,8 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitClosureExpression(ClosureExpression closureExpression) {
-        if (!isAlreadyVisited(closureExpression)) {
+        if (isFirstVisit(closureExpression)) {
             processParameters(closureExpression.parameters)
-            registerAsVisited(closureExpression)            
         }
         super.visitClosureExpression(closureExpression)
     }

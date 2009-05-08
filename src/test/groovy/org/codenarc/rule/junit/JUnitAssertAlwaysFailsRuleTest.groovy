@@ -69,7 +69,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
 
     void testApplyTo_AssertTrue_FalseWithMessage() {
         final SOURCE = '''
-            void testSomething() {
+            def myClosure = {
                 assertTrue("This passed!", false)
             }
         '''

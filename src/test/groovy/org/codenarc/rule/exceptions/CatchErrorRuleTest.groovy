@@ -33,13 +33,17 @@ class CatchErrorRuleTest extends AbstractRuleTest {
 
     void testApplyTo_Violation() {
         final SOURCE = '''
-                try {
-                    doSomething()
+            class MyClass {
+                def myClosure = {
+                    try {
+                        doSomething()
+                    }
+                    catch(Error t) {
+                    }
                 }
-                catch(Error t) {
-                }
+            }
         '''
-        assertSingleViolation(SOURCE, 5, 'catch(Error t) {')
+        assertSingleViolation(SOURCE, 7, 'catch(Error t) {')
     }
 
     void testApplyTo_Violation_FullPackageName() {

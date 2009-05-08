@@ -43,11 +43,13 @@ class BooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
     }
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        def args = AstUtil.getMethodArguments(methodCall)
-        def isMatch = AstUtil.isMethodCall(methodCall, 'Boolean', 'valueOf', 1) &&
-            args[0] instanceof ConstantExpression && args[0].value in [true, false]
-        if (isMatch) {
-            addViolation(methodCall)
+        if (isFirstVisit(methodCall)) {
+            def args = AstUtil.getMethodArguments(methodCall)
+            def isMatch = AstUtil.isMethodCall(methodCall, 'Boolean', 'valueOf', 1) &&
+                args[0] instanceof ConstantExpression && args[0].value in [true, false]
+            if (isMatch) {
+                addViolation(methodCall)
+            }
         }
         super.visitMethodCallExpression(methodCall)
     }

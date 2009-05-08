@@ -34,7 +34,7 @@ class EmptyFinallyBlockRule extends AbstractAstVisitorRule {
 
 class EmptyFinallyBlockAstVisitor extends AbstractAstVisitor  {
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
-        if (AstUtil.isEmptyBlock(tryCatchStatement.finallyStatement)) {
+        if (isFirstVisit(tryCatchStatement) && AstUtil.isEmptyBlock(tryCatchStatement.finallyStatement)) {
             addViolation(tryCatchStatement.finallyStatement)
         }
         super.visitTryCatchFinally(tryCatchStatement)

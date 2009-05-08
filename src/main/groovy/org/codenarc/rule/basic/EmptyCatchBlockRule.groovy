@@ -34,7 +34,7 @@ class EmptyCatchBlockRule extends AbstractAstVisitorRule {
 
 class EmptyCatchBlockAstVisitor extends AbstractAstVisitor  {
     void visitCatchStatement(CatchStatement catchStatement) {
-        if (AstUtil.isEmptyBlock(catchStatement.code)) {
+        if (isFirstVisit(catchStatement) && AstUtil.isEmptyBlock(catchStatement.code)) {
             addViolation(catchStatement)
         }
         super.visitCatchStatement(catchStatement)

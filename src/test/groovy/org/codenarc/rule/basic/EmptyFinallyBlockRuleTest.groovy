@@ -48,7 +48,7 @@ class EmptyFinallyBlockRuleTest extends AbstractRuleTest {
     void testApplyTo_Violation_FinallyBlockContainsComment() {
         final SOURCE = '''
             class MyClass {
-                def myMethod() {
+                def myClosure = {
                     try {
                         doSomething()
                     } catch(MyException e) {

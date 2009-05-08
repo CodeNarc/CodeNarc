@@ -47,7 +47,7 @@ class VariableNameRule extends AbstractAstVisitorRule {
 class VariableNameAstVisitor extends AbstractAstVisitor  {
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
-        if (!isAlreadyVisited(declarationExpression)) {
+        if (isFirstVisit(declarationExpression)) {
             def leftExpression = declarationExpression.leftExpression
             def varExpressions = leftExpression.properties['expressions'] ?: [leftExpression]
             def re = rule.finalRegex && isFinal(declarationExpression, varExpressions[0]) ? rule.finalRegex : rule.regex
@@ -58,7 +58,6 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
                     addViolation(declarationExpression, msg)
                 }
             }
-            registerAsVisited(declarationExpression)
         }
         super.visitDeclarationExpression(declarationExpression)
     }

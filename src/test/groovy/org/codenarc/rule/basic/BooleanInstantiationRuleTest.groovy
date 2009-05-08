@@ -57,11 +57,15 @@ class BooleanInstantiationRuleTest extends AbstractRuleTest {
 
     void testApplyTo_BooleanValueOf() {
         final SOURCE = '''
-            def b1 = Boolean.valueOf(true)
-            def b2 = Boolean.valueOf(otherVariable)
-            def b3 = Boolean.valueOf(false)
+            class MyClass {
+                def myClosure = {
+                    def b1 = Boolean.valueOf(true)
+                    def b2 = Boolean.valueOf(otherVariable)
+                    def b3 = Boolean.valueOf(false)
+                }
+            }
         '''
-        assertTwoViolations(SOURCE, 2, 'Boolean.valueOf(true)', 4, 'Boolean.valueOf(false)')
+        assertTwoViolations(SOURCE, 4, 'Boolean.valueOf(true)', 6, 'Boolean.valueOf(false)')
     }
 
     void testApplyTo_NoViolation() {

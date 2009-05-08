@@ -34,7 +34,7 @@ class WhileStatementBracesRuleTest extends AbstractRuleTest {
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
-                def myMethod() {
+                def myClosure = {
                     while (x==23) println '23'
                     println 'ok'
                     while (alreadyInitialized())

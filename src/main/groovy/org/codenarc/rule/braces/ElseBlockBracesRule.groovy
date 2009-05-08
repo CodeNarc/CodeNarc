@@ -40,7 +40,7 @@ class ElseBlockBracesRule extends AbstractAstVisitorRule {
 
 class ElseBlockBracesAstVisitor extends AbstractAstVisitor  {
     void visitIfElse(IfStatement ifStatement) {
-        if (!(ifStatement.elseBlock instanceof EmptyStatement) && 
+        if (isFirstVisit(ifStatement) && !(ifStatement.elseBlock instanceof EmptyStatement) && 
                 !AstUtil.isBlock(ifStatement.elseBlock)) {
 
             if (!(ifStatement.elseBlock instanceof IfStatement) || rule.bracesRequiredForElseIf) {

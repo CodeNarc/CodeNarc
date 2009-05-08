@@ -34,7 +34,7 @@ class EmptyTryBlockRuleTest extends AbstractRuleTest {
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
-                def myMethod() {
+                def myClosure = {
                     try {
                     } catch(MyException e) {
                         e.printStackTrace()

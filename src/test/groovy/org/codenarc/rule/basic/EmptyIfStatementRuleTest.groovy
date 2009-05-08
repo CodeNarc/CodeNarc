@@ -34,7 +34,7 @@ class EmptyIfStatementRuleTest extends AbstractRuleTest {
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
-                def myMethod() {
+                def myClosure = {
                     if (x==23) {
                     }
                     println 'ok'

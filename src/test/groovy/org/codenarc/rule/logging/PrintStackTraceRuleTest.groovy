@@ -41,6 +41,20 @@ class PrintStackTraceRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 4, 'e.printStackTrace()')
     }
 
+    void testApplyTo_PrintStackTrace_WithinClosure() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    try {
+                    } catch(MyException e) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 6, 'e.printStackTrace()')
+    }
+
     void testApplyTo_PrintStackTrace_WithParameter() {
         final SOURCE = '''
             try {
