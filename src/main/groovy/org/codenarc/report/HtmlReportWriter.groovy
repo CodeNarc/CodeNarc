@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +100,6 @@ class HtmlReportWriter implements ReportWriter {
             body {
                 h1(buildTitle())
                 out << buildReportTimestamp()
-                out << buildSourceDirectories(analysisContext)
                 out << buildSummaryByPackage(results)
                 out << buildAllPackageSections(results)
                 out << buildRuleDescriptions(analysisContext)
@@ -115,19 +114,6 @@ class HtmlReportWriter implements ReportWriter {
             def dateFormat = java.text.DateFormat.getDateTimeInstance()
             def timestamp = dateFormat.format(new Date())
             p("Report timestamp: $timestamp", class:'reportInfo')
-        }
-    }
-
-    private buildSourceDirectories(AnalysisContext analysisContext) {
-        return {
-            if (analysisContext.sourceDirectories) {
-                p("Source Directories:", class:'reportInfo')
-                ul {
-                    analysisContext.sourceDirectories.each { sourceDir ->
-                        li(sourceDir)
-                    }
-                }
-            }
         }
     }
 
