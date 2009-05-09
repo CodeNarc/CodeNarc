@@ -49,24 +49,36 @@ class AstUtilTest extends AbstractTest {
             }
             @Before setUp() {  }
         }
+        enum MyEnum {
+            READ, WRITE
+            MyEnum() {
+                println methodCallWithinEnum(true, 'abc', 123)
+            }
+        }
     '''
     private visitor
 
+    void testGetMethodArguments_ConstructorWithinEnum() {
+        def methodCall = methodNamed('methodCallWithinEnum')
+        def args = AstUtil.getMethodArguments(methodCall)
+        assert args.size() == 3
+    }
+
     void testGetMethodArguments_NoArgument() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'print' }
+        def methodCall = methodNamed('print')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 0
     }
 
     void testGetMethodArguments_SingleArgument() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'stringMethodName' }
+        def methodCall = methodNamed('stringMethodName')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 1
         assert args[0].value == 123
     }
 
     void testGetMethodArguments_NamedArguments() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'delete' }
+        def methodCall = methodNamed('delete')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 2
         assert args[1].keyExpression.value == 'failonerror'
@@ -109,7 +121,7 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodCall_StringLiteralMethodName() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'stringMethodName' }
+        def methodCall = methodNamed('stringMethodName')
         assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 1)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 2)
         assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName')
@@ -128,7 +140,7 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsMethodNamed() {
-        def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'print' }
+        def methodCall = methodNamed('print')
         assert AstUtil.isMethodNamed(methodCall, 'print')
         assert !AstUtil.isMethodNamed(methodCall, 'other')
     }
@@ -181,6 +193,16 @@ class AstUtilTest extends AbstractTest {
         def ast = sourceCode.ast
         ast.classes.each { classNode -> visitor.visitClass(classNode) }
     }
+
+    private MethodCallExpression methodNamed(String name) {
+        def methodCall = visitor.methodCallExpressions.find { mc ->
+            if (mc.method instanceof GStringExpression) {
+                return mc.text.startsWith(name)
+            }
+            mc.method.value == name
+        }
+        return methodCall
+    }
 }
 
 class AstUtilTestVisitor extends ClassCodeVisitorSupport {
@@ -202,8 +224,9 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     }
 
     void visitMethodCallExpression(MethodCallExpression methodCallExpression) {
-        LOG.info("visitMethodCallExpression object=${methodCallExpression.objectExpression}")
         this.methodCallExpressions << methodCallExpression
+        def args = AstUtil.getMethodArguments(methodCallExpression)
+        LOG.info("visitMethodCallExpression object=${methodCallExpression.objectExpression} args=$args")
         super.visitMethodCallExpression(methodCallExpression)
     }
 

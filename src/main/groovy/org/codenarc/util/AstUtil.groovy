@@ -20,7 +20,6 @@ import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.AnnotationNode
 
@@ -64,8 +63,13 @@ class AstUtil {
     */
     public static List getMethodArguments(MethodCallExpression methodCall) {
         def argumentsExpression = methodCall.arguments
-        return (argumentsExpression instanceof MapExpression) ?
-            argumentsExpression.mapEntryExpressions : argumentsExpression.expressions
+        if (respondsTo(argumentsExpression, 'getExpressions')) {
+            return argumentsExpression.expressions
+        }
+        if (respondsTo(argumentsExpression, 'getMapEntryExpressions')) {
+            return argumentsExpression.mapEntryExpressions
+        }
+        return null
     }
 
     /**
@@ -143,6 +147,16 @@ class AstUtil {
         return annotations instanceof Map ?
             annotations[name] :                                         // Groovy 1.5
             annotations.find { annot -> annot.classNode.name == name }  // Groovy 1.6
+    }
+
+    /**
+     * Return true only if the specified object responds to the named method
+     * @param object - the object to check
+     * @param methodName - the name of the method
+     * @return true if the object responds to the named method
+     */
+    static boolean respondsTo(Object object, String methodName) {
+        return object.metaClass.respondsTo(object, methodName)
     }
 
     /**

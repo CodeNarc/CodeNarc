@@ -68,6 +68,15 @@ class BooleanInstantiationRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 4, 'Boolean.valueOf(true)', 6, 'Boolean.valueOf(false)')
     }
 
+    void testApplyTo_WithinEnum() {
+        final SOURCE = '''
+            enum MyEnum {
+                NONE, READ, WRITE
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {
