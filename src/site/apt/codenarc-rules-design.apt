@@ -8,9 +8,12 @@ Design Rules  ("<rulesets/design.xml>")
 * StatelessClass Rule
 ~~~~~~~~~~~~~~~~~~~~~~
 
-  Checks for fields on a class. The intent of this rule is to check a configured set
+  Checks for non-<<<final>>> fields on a class. The intent of this rule is to check a configured set
   of classes that should remain "stateless" and reentrant. One example might be Grails
-  service classes, which are, by default, a singleton, and so they should be reentrant.
+  service classes which are singletons, by default, and so they should be reentrant.
+
+  This rule ignores <<<final>>> fields (either instance or static). Fields that are
+  <<<static>>> and non-<<<final>>>, however, do cause a violation.
 
   You can configure this rule to ignore certain fields either by name or by type. This can be
   useful to ignore fields that hold references to (static) dependencies (such as DAOs or

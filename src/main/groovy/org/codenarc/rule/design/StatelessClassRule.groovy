@@ -22,9 +22,13 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.WildcardPattern
 
 /**
- * Rule that checks for fields on a class. The intent of this rule is to check a configured set
- * of classes that should remain "stateless" and reentrant. One example might be Grails
- * service classes, which are, by default, a singleton, and so they should be reentrant.
+ * Rule that checks for non-<code>final</code> fields on a class. The intent of this rule is
+ * to check a configured set of classes that should remain "stateless" and reentrant. One
+ * example might be Grails service classes, which are, by default, a singleton, and so they
+ * should be reentrant.
+ * <p/>
+ * This rule ignores <code>final</code> fields (either instance or static). Fields that are
+ * <code>static</code> and non-<code>final</code>, however, do cause a violation.
  * <p/>
  * You can configure this rule to ignore certain fields either by name or by type. This can be
  * useful to ignore fields that hold references to (static) dependencies (such as DAOs or
@@ -67,8 +71,10 @@ class StatelessClassRule extends AbstractAstVisitorRule {
 
 class StatelessClassAstVisitor extends AbstractAstVisitor  {
     void visitField(FieldNode fieldNode) {
-        boolean ignore = false
-        if (rule.ignoreFieldNames) {
+
+        boolean ignore = fieldNode.modifiers & FieldNode.ACC_FINAL
+        
+        if (!ignore && rule.ignoreFieldNames) {
             ignore = new WildcardPattern(rule.ignoreFieldNames).matches(fieldNode.name)
         }
 

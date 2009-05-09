@@ -48,6 +48,34 @@ class StatelessClassRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 3, 'BigDecimal depositAmount', 4, 'def other')
     }
 
+    void testApplyTo_FinalField() {
+        final SOURCE = '''
+          class MyClass {
+            final value = 5
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_StaticField() {
+        final SOURCE = '''
+          class MyClass {
+            static depositCount = 5
+            def other
+          }
+        '''
+        assertTwoViolations(SOURCE, 3, 'static depositCount = 5', 4, 'def other')
+    }
+
+    void testApplyTo_StaticFinalField() {
+        final SOURCE = '''
+          class MyClass {
+            static final DEFAULT_NAME = 'ABC'
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_IgnoreFieldNames_OneExactName() {
         final SOURCE = '''
           class MyClass {
