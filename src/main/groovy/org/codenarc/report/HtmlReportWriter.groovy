@@ -270,19 +270,17 @@ class HtmlReportWriter implements ReportWriter {
 
         return {
             h2("Rule Descriptions")
-            span(class:'ruleDescriptions') {
-                table(border:'1') {
-                    tr(class:'tableHeader') {
-                        th('Rule Name', class:'ruleDescriptions')
-                        th('Description', class:'ruleDescriptions')
-                    }
+            table(border:'1') {
+                tr(class:'tableHeader') {
+                    th('Rule Name', class:'ruleDescriptions')
+                    th('Description', class:'ruleDescriptions')
+                }
 
-                    sortedRuleNames.each { ruleName ->
-                        tr(class:'ruleDescriptions') {
-                            a(name:ruleName)
-                            td(ruleName, class:'ruleName')
-                            td { unescaped << getDescriptionForRuleName(bundle, ruleName) }
-                        }
+                sortedRuleNames.each { ruleName ->
+                    tr(class:'ruleDescriptions') {
+                        a(name:ruleName)
+                        td(ruleName, class:'ruleName')
+                        td { unescaped << getDescriptionForRuleName(bundle, ruleName) }
                     }
                 }
             }
