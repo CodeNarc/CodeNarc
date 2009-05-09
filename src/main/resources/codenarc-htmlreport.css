@@ -57,6 +57,9 @@
 		    font-style: italic;
             color: black;
 		}
+        .ruleDescriptions {
+            font-size: 85%;
+        }
 		.version {
 			font-size: 75%;
 		    color: blue;
