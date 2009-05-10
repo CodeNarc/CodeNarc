@@ -18,6 +18,7 @@
     <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
         <property name="name" value="AuthorTagNotAllowed"/>
         <property name='regex' value='\@author'/>
+        <property name='violationMessage' value=''/>    <!-- Hide the default message for this rule -->
     </rule>
 
     <rule-script path='rules/MyStaticFieldRule.groovy'/>

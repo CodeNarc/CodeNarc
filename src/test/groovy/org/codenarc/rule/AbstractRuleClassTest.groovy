@@ -169,7 +169,7 @@ class AbstractRuleClassTest extends AbstractRuleTest {
     void testApplyTo_ViolationMessageIsSetToEmpty() {
         rule.violationMessage = ''
         def violations = applyRuleTo(SOURCE)
-        assert violations[0].message == FILENAME
+        assert violations[0].message == ''
     }
 
     void testApplyTo_ViolationMessageIsSet() {
