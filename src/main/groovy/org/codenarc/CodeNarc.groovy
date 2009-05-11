@@ -15,11 +15,7 @@
  */
 package org.codenarc
 
-import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
 import org.codenarc.analyzer.SourceAnalyzer
-import org.codenarc.ruleset.RuleSet
-import org.codenarc.ruleset.CompositeRuleSet
-import org.codenarc.ruleset.XmlFileRuleSet
 import org.apache.log4j.Logger
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
@@ -93,11 +89,8 @@ class CodeNarc {
     protected String title
     protected List reports = []
 
-    // Abstract the call to the SourceAnalyzer to allow substitution for unit tests
-    protected applySourceAnalyzer = { sourceAnalyzer, ruleSet -> sourceAnalyzer.analyze(ruleSet) }
-
-    // Abstract report writing to allow substitution for unit tests
-    protected writeReport = { reportWriter, analysisContext, results -> reportWriter.writeOutReport(analysisContext, results) }
+    // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
+    protected createCodeNarcRunner = { return new CodeNarcRunner() }
 
     /**
      * Main command-line entry-point. Run the CodeNarc application.
@@ -124,26 +117,14 @@ class CodeNarc {
     protected void execute(String[] args) {
         parseArgs(args)
         setDefaultsIfNecessary()
-
-        def startTime = System.currentTimeMillis()
         def sourceAnalyzer = createSourceAnalyzer()
-        def ruleSet = createRuleSet()
-        new PropertiesFileRuleSetConfigurer().configure(ruleSet)
-        def results = applySourceAnalyzer(sourceAnalyzer, ruleSet)
-        def p1 = results.getNumberOfViolationsWithPriority(1, true)
-        def p2 = results.getNumberOfViolationsWithPriority(2, true)
-        def p3 = results.getNumberOfViolationsWithPriority(3, true)
-        def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
-        def elapsedTime = System.currentTimeMillis() - startTime
-        LOG.debug("results=$results")
-        def analysisContext = new AnalysisContext(ruleSet:ruleSet)
+        reports.each { reportWriter -> reportWriter.title = title }
 
-        reports.each { reportWriter ->
-            reportWriter.title = title
-             writeReport(reportWriter, analysisContext, results)
-        }
-
-        LOG.info("CodeNarc completed: " + countsText + " ${elapsedTime}ms")
+        def codeNarcRunner = createCodeNarcRunner()
+        codeNarcRunner.ruleSetFiles = ruleSetFiles
+        codeNarcRunner.reportWriters = reports
+        codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+        codeNarcRunner.execute()
     }
 
     protected void setDefaultsIfNecessary() {
@@ -159,19 +140,6 @@ class CodeNarc {
         if (reports.empty) {
             reports << new HtmlReportWriter(title:title)
         }
-    }
-
-    /**
-     * Create and return the RuleSet that provides the source of Rules to be applied.
-     * The returned RuleSet may aggregate multiple underlying RuleSets.
-     * @return a single RuleSet
-     */
-    protected RuleSet createRuleSet() {
-        // TODO Make this a static method on CompositeRuleSet?
-        def paths = ruleSetFiles.tokenize(',')
-        def newRuleSet = new CompositeRuleSet()
-        paths.each { path -> newRuleSet.add(new XmlFileRuleSet(path)) }
-        return newRuleSet
     }
 
     /**

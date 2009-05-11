@@ -18,6 +18,7 @@ package org.codenarc
 import org.codenarc.test.AbstractTest
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.FileResults
+import org.codenarc.analyzer.FilesystemSourceAnalyzer
 
 /**
  * Tests for CodeNarc command-line runner
@@ -27,6 +28,7 @@ import org.codenarc.results.FileResults
  */
 class CodeNarcTest extends AbstractTest {
     static final BASE_DIR = 'src/test/resources'
+    static final BASIC_RULESET = 'rulesets/basic.xml'
     static final RULESET1 = 'rulesets/RuleSet1.xml'
     static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
     static final INCLUDES = 'sourcewithdirs/**/*.groovy'
@@ -100,7 +102,7 @@ class CodeNarcTest extends AbstractTest {
     void testSetDefaultsIfNecessary_ValuesNotSet() {
         codeNarc.setDefaultsIfNecessary()
         assert codeNarc.includes == '**/*.groovy'
-        assert codeNarc.ruleSetFiles == 'rulesets/basic.xml'
+        assert codeNarc.ruleSetFiles == BASIC_RULESET
         assertReport(codeNarc.reports[0], HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, null)
         assert codeNarc.baseDir == '.'
     }
@@ -128,11 +130,8 @@ class CodeNarcTest extends AbstractTest {
                 "-report=$REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
 
-        def sourceAnalyzer, ruleSet
-        codeNarc.applySourceAnalyzer = { sa, rs -> sourceAnalyzer = sa; ruleSet = rs; return RESULTS }
-
-        def reportWriter, analysisContext, results, reportCount = 0
-        codeNarc.writeReport = { rw, ac, res -> reportWriter = rw; analysisContext = ac; results = res; reportCount++ }
+        def codeNarcRunner = [execute: { }]
+        codeNarc.createCodeNarcRunner = { return codeNarcRunner }
 
         codeNarc.execute(ARGS)
 
@@ -140,37 +139,34 @@ class CodeNarcTest extends AbstractTest {
         assert codeNarc.includes == INCLUDES
         assert codeNarc.excludes == EXCLUDES
 
-        assert sourceAnalyzer.baseDirectory == BASE_DIR
-        assert ruleSet.rules*.class == [org.codenarc.rule.TestPathRule]
+        assert codeNarcRunner.sourceAnalyzer.class == FilesystemSourceAnalyzer
+        assert codeNarcRunner.sourceAnalyzer.baseDirectory == BASE_DIR
+        assert codeNarcRunner.ruleSetFiles == RULESET1
 
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
         assertReport(reportWriter, HtmlReportWriter, REPORT_FILE, TITLE)
-        assert analysisContext.ruleSet == ruleSet
-        assert results == RESULTS
-        assert reportCount == 1
     }
 
     void testExecute_NoArgs() {
         final ARGS = [] as String[]
 
-        def sourceAnalyzer, ruleSet
-        codeNarc.applySourceAnalyzer = { sa, rs -> sourceAnalyzer = sa; ruleSet = rs; return RESULTS }
-
-        def reportWriter, analysisContext, results, reportCount = 0
-        codeNarc.writeReport = { rw, ac, res -> reportWriter = rw; analysisContext = ac; results = res; reportCount++ }
+        def codeNarcRunner = [execute: { }]
+        codeNarc.createCodeNarcRunner = { return codeNarcRunner }
 
         codeNarc.execute(ARGS)
 
-        assert codeNarc.ruleSetFiles == 'rulesets/basic.xml'
+        assert codeNarc.ruleSetFiles == BASIC_RULESET
         assert codeNarc.includes == '**/*.groovy'
         assert codeNarc.excludes == null
 
-        assert sourceAnalyzer.baseDirectory == '.'
-        assert ruleSet.rules.size() >= 14
+        assert codeNarcRunner.sourceAnalyzer.class == FilesystemSourceAnalyzer
+        assert codeNarcRunner.sourceAnalyzer.baseDirectory == '.'
+        assert codeNarcRunner.ruleSetFiles == BASIC_RULESET
 
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
         assertReport(reportWriter, HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, null)
-        assert analysisContext.ruleSet == ruleSet
-        assert results == RESULTS
-        assert reportCount == 1
     }
 
     void testMain() {
