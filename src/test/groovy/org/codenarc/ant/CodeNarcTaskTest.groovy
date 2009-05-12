@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import org.codenarc.test.AbstractTest
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.results.Results
+import org.codenarc.results.FileResults
 
 /**
  * Tests for the CodeNarc Ant Task
@@ -35,10 +36,10 @@ class CodeNarcTaskTest extends AbstractTest {
     static final RULESET_FILE = 'rulesets/RuleSet1.xml'
     static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
     static final REPORT_FILE = 'CodeNarcTaskHtmlReport.html'
+    static final RESULTS = new FileResults('path', [])
 
     private codeNarcTask
     private fileSet
-    private outputFile
     private project
 
     void testMaxViolationsDefaultViolations() {
@@ -85,18 +86,36 @@ class CodeNarcTaskTest extends AbstractTest {
     }
 
     void testExecute_SingleRuleSetFile() {
+        def codeNarcRunner = [execute: { return RESULTS }]
+        codeNarcTask.createCodeNarcRunner = { return codeNarcRunner }
+
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
-        assert codeNarcTask.ruleSet.rules.size() == 1
-        verifyReportFile()
+
+        assert codeNarcRunner.sourceAnalyzer.class == AntFileSetSourceAnalyzer
+        assert codeNarcRunner.ruleSetFiles == RULESET_FILE
+
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assert reportWriter.class == HtmlReportWriter
+        assert reportWriter.outputFile == REPORT_FILE
     }
 
     void testExecute_MultipleRuleSetFiles() {
+        def codeNarcRunner = [execute: { return RESULTS }]
+        codeNarcTask.createCodeNarcRunner = { return codeNarcRunner }
+
         codeNarcTask.ruleSetFiles = RULESET_FILES
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
-        assert codeNarcTask.ruleSet.rules.size() == 4
-        verifyReportFile()
+
+        assert codeNarcRunner.sourceAnalyzer.class == AntFileSetSourceAnalyzer
+        assert codeNarcRunner.ruleSetFiles == RULESET_FILES
+
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assert reportWriter.class == HtmlReportWriter
+        assert reportWriter.outputFile == REPORT_FILE
     }
 
     void testExecute_RuleSetFileDoesNotExist() {
@@ -157,18 +176,7 @@ class CodeNarcTaskTest extends AbstractTest {
         codeNarcTask = new CodeNarcTask(project:project)
         codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:REPORT_FILE))
         codeNarcTask.ruleSetFiles = RULESET_FILE
-        outputFile = new File(REPORT_FILE)
     }
-
-    void tearDown() {
-        super.tearDown()
-        outputFile.delete()
-    }
-
-    private void verifyReportFile() {
-        assert outputFile.exists()
-    }
-
 }
 
 class StubSourceAnalyzerCategory {

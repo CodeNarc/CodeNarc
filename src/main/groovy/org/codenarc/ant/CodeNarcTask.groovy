@@ -26,6 +26,8 @@ import org.codenarc.ruleset.RuleSet
 import org.codenarc.ruleset.XmlFileRuleSet
 import org.apache.log4j.Logger
 import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
+import org.codenarc.CodeNarcRunner
+import org.codenarc.results.Results
 
 /**
  * Ant Task for running CodeNarc.
@@ -69,6 +71,9 @@ class CodeNarcTask extends Task {
     protected FileSet fileSet
     protected ruleSet
 
+    // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
+    protected createCodeNarcRunner = { return new CodeNarcRunner() }
+
     /**
      * Execute this Ant Task
      */
@@ -76,21 +81,15 @@ class CodeNarcTask extends Task {
         assert ruleSetFiles
         assert fileSet
 
-        def startTime = System.currentTimeMillis()
         def sourceAnalyzer = createSourceAnalyzer()
-        ruleSet = createRuleSet()
-        new PropertiesFileRuleSetConfigurer().configure(ruleSet)
-        def results = sourceAnalyzer.analyze(ruleSet)
-        def p1 = results.getNumberOfViolationsWithPriority(1, true)
-        def p2 = results.getNumberOfViolationsWithPriority(2, true)
-        def p3 = results.getNumberOfViolationsWithPriority(3, true)
-        def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
-        def elapsedTime = System.currentTimeMillis() - startTime
-        LOG.debug("results=$results")
-        def analysisContext = new AnalysisContext(ruleSet:ruleSet)
-        reportWriters.each { reportWriter -> reportWriter.writeOutReport(analysisContext, results) }
-        LOG.info("CodeNarc completed: " + countsText + " ${elapsedTime}ms")
-        checkMaxViolations(p1, p2, p3, countsText)
+        def codeNarcRunner = createCodeNarcRunner()
+        codeNarcRunner.ruleSetFiles = ruleSetFiles
+        codeNarcRunner.reportWriters = reportWriters
+        codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+
+        def results = codeNarcRunner.execute()
+
+        checkMaxViolations(results) 
     }
 
     void addFileset(FileSet fileSet) {
@@ -125,19 +124,12 @@ class CodeNarcTask extends Task {
         return new AntFileSetSourceAnalyzer(getProject(), fileSet)
     }
 
-    /**
-     * Create and return the RuleSet that provides the source of Rules to be applied.
-     * The returned RuleSet may aggregate multiple underlying RuleSets.
-     * @return a single RuleSet
-     */
-    protected RuleSet createRuleSet() {
-        def paths = ruleSetFiles.tokenize(',')
-        def newRuleSet = new CompositeRuleSet()
-        paths.each { path -> newRuleSet.add(new XmlFileRuleSet(path)) }
-        return newRuleSet
-    }
+    private void checkMaxViolations(Results results) {
+        def p1 = results.getNumberOfViolationsWithPriority(1, true)
+        def p2 = results.getNumberOfViolationsWithPriority(2, true)
+        def p3 = results.getNumberOfViolationsWithPriority(3, true)
+        def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
 
-    private void checkMaxViolations(int p1, int p2, int p3, String countsText) {
         checkMaxViolationForPriority(1, p1, countsText)
         checkMaxViolationForPriority(2, p2, countsText)
         checkMaxViolationForPriority(3, p3, countsText)
