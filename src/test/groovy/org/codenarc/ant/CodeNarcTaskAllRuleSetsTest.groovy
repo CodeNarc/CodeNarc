@@ -32,6 +32,7 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTest {
             'rulesets/braces.xml',
             'rulesets/design.xml',
             'rulesets/exceptions.xml',
+            'rulesets/grails.xml',
             'rulesets/imports.xml',
             'rulesets/logging.xml',
             'rulesets/junit.xml',
