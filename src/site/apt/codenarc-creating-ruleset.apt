@@ -114,8 +114,8 @@ CodeNarc - Creating a RuleSet
       \<property\> element within a \<rule-script\> the same way you can for
       a \<rule\>. That is not shown here.
 
-* Filtering Rules Within a RuleSet
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* {Filtering Rules Within a RuleSet}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   You can use the \<include\> and \<exclude\> elements within a \<ruleset-ref\> to filter a <RuleSet>
   and include and/or the exclude individual rules. In the following <RuleSet> excerpt, the entire
