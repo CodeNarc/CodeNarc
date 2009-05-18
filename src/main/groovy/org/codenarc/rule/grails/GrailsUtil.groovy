@@ -19,7 +19,7 @@ package org.codenarc.rule.grails
  * Utility methods for Grails rule classes. This class is not intended for general use.
  *
  * @author Chris Mair
- * @version $Revision: 109 $ - $Date: 2009-03-30 21:33:32 -0400 (Mon, 30 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class GrailsUtil {
     protected static final CONTROLLERS_AND_TAGLIB_FILES = /.*grails-app\/(controllers|taglib)\/.*/

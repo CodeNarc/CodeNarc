@@ -25,7 +25,7 @@ import org.codenarc.report.ReportWriter
  * Tests for CodeNarcRunner
  *
  * @author Chris Mair
- * @version $Revision: 106 $ - $Date: 2009-03-28 22:36:10 -0400 (Sat, 28 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class CodeNarcRunnerTest extends AbstractTest {
     static final BASIC_RULESET = 'rulesets/basic.xml'

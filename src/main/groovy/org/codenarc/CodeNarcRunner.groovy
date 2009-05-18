@@ -38,7 +38,7 @@ import org.codenarc.results.Results
  * NOTE: This is an internal class. Its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CodeNarcRunner {
     static final LOG = Logger.getLogger(CodeNarcRunner)

@@ -24,7 +24,7 @@ import org.codenarc.analyzer.FilesystemSourceAnalyzer
  * Tests for CodeNarc command-line runner
  *
  * @author Chris Mair
- * @version $Revision: 106 $ - $Date: 2009-03-28 22:36:10 -0400 (Sat, 28 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class CodeNarcTest extends AbstractTest {
     static final BASE_DIR = 'src/test/resources'

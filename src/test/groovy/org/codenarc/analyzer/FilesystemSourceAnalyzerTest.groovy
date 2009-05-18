@@ -29,7 +29,7 @@ import org.codenarc.util.WildcardPattern
  * Tests for FilesystemSourceAnalyzer.
  *
  * @author Chris Mair
- * @version $Revision: 86 $ - $Date: 2009-03-14 22:30:14 -0400 (Sat, 14 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class FilesystemSourceAnalyzerTest extends AbstractTest {
     static final BASE_DIR = 'src/test/resources/sourcewithdirs'

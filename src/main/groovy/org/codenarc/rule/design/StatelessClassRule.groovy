@@ -55,7 +55,7 @@ import org.codenarc.util.WildcardPattern
  * (not empty or null), or else this rule does nothing.
  *
  * @author Chris Mair
- * @version $Revision: 74 $ - $Date: 2009-03-05 22:12:08 -0500 (Thu, 05 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class StatelessClassRule extends AbstractAstVisitorRule {
     String name = 'StatelessClass'
