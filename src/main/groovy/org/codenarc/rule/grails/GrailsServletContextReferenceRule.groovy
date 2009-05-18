@@ -20,16 +20,18 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.VariableExpression
 
 /**
- * Rule that checks for references to the session object from within Grails controller and
+ * Rule that checks for references to the servletContext object from within Grails controller and
  * taglib classes.
  * <p/>
  * This rule is intended as a "governance" rule to enable monitoring and controlling access to the
- * session from within application source code. Storing objects in the session may inhibit scalability
- * and/or performance and should be carefully considered.
+ * servletContext from within application source code. Storing objects in the servletContext may
+ * inhibit scalability and/or performance and should be carefully considered. Furthermore, access
+ * to the servletContext is not synchronized, so reading/writing objects from the servletConext must
+ * be manually synchronized, as described in <b>The Definitive Guide to Grails</b> (2nd edition).
  * <p/>
  * Enabling this rule may make most sense in a team environment where team members exhibit a broad
- * range of skill and experience levels. Appropriate session access can be configured as exceptions
- * to this rule by configuring either the <code>doNotApplyToFilenames</code> or
+ * range of skill and experience levels. Appropriate servletContext access can be configured as
+ * exceptions to this rule by configuring either the <code>doNotApplyToFilenames</code> or
  * <code>doNotApplyToFilesMatching</code> property of the rule.
  * <p/>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match files
@@ -39,16 +41,16 @@ import org.codehaus.groovy.ast.expr.VariableExpression
  * @author Chris Mair
  * @version $Revision: 74 $ - $Date: 2009-03-05 22:12:08 -0500 (Thu, 05 Mar 2009) $
  */
-class GrailsSessionReferenceRule extends AbstractAstVisitorRule {
-    String name = 'GrailsSessionReference'
+class GrailsServletContextReferenceRule extends AbstractAstVisitorRule {
+    String name = 'GrailsServletContextReference'
     int priority = 2
-    Class astVisitorClass = GrailsSessionReferenceAstVisitor
+    Class astVisitorClass = GrailsServletContextReferenceAstVisitor
     String applyToFilesMatching = GrailsUtil.CONTROLLERS_AND_TAGLIB_FILES
 }
 
-class GrailsSessionReferenceAstVisitor extends AbstractAstVisitor  {
+class GrailsServletContextReferenceAstVisitor extends AbstractAstVisitor  {
     void visitVariableExpression(VariableExpression expression) {
-        if (isFirstVisit(expression) && expression.variable == 'session') {
+        if (isFirstVisit(expression) && expression.variable == 'servletContext') {
             addViolation(expression)
         }
         super.visitVariableExpression(expression)
