@@ -69,7 +69,8 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
      */
     private boolean isFinal(declarationExpression, variableExpression) {
         def sourceLine = sourceCode.lines[variableExpression.lineNumber-1]
-        def modifiers = sourceLine[declarationExpression.columnNumber-1..variableExpression.columnNumber-2]
+        def modifiers = (declarationExpression.columnNumber >= 0 && variableExpression.columnNumber >= 0) ?
+            sourceLine[declarationExpression.columnNumber-1..variableExpression.columnNumber-2] : ''
         return modifiers.contains('final')
     }
 

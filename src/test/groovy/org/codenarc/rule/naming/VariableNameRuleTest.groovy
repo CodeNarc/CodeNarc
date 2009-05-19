@@ -242,6 +242,15 @@ class VariableNameRuleTest extends AbstractRuleTest {
         }
     }
 
+    void testApplyTo_Enums() {
+        final SOURCE = '''
+            public enum AuthorizationLevel { 
+                NONE, READ, WRITE
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         return new VariableNameRule()
     }
