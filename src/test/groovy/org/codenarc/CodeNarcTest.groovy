@@ -225,7 +225,7 @@ class CodeNarcTest extends AbstractTest {
         outputFile.delete()
     }
 
-    private void parseArgs(Object... args) {
+    private void parseArgs(Object[] args) {
         def argsAsArray = args as String[]
         codeNarc.parseArgs(argsAsArray)
     }
