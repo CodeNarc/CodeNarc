@@ -272,13 +272,15 @@ class HtmlReportWriter implements ReportWriter {
             h2("Rule Descriptions")
             table(border:'1') {
                 tr(class:'tableHeader') {
+                    th('#', class:'ruleDescriptions')
                     th('Rule Name', class:'ruleDescriptions')
                     th('Description', class:'ruleDescriptions')
                 }
 
-                sortedRuleNames.each { ruleName ->
+                sortedRuleNames.eachWithIndex { ruleName, index ->
                     tr(class:'ruleDescriptions') {
                         a(name:ruleName)
+                        td(index+1)
                         td(ruleName, class:'ruleName')
                         td { unescaped << getDescriptionForRuleName(bundle, ruleName) }
                     }
