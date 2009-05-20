@@ -10,5 +10,6 @@
 
     <rule class='org.codenarc.rule.generic.IllegalRegexRule'/>
     <rule class='org.codenarc.rule.generic.RequiredRegexRule'/>
+    <rule class='org.codenarc.rule.generic.StatelessClassRule'/>
 
 </ruleset>

@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.design
+package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
+import org.codenarc.rule.generic.StatelessClassRule
 
 /**
  * Tests for StatelessClassRule

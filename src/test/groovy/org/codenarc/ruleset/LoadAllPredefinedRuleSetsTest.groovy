@@ -28,7 +28,6 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTest {
     static final RULESET_FILES = [
         'rulesets/basic.xml',
         'rulesets/braces.xml',
-        'rulesets/design.xml',
         'rulesets/exceptions.xml',
         'rulesets/generic.xml',
         'rulesets/grails.xml',

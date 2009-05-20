@@ -8,6 +8,5 @@
         These rules implement standards and best practices related to design issues.
     </description>
 
-    <rule class='org.codenarc.rule.design.StatelessClassRule'/>
 
 </ruleset>
