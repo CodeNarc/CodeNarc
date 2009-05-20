@@ -5,6 +5,20 @@
 Grails Rules  ("<rulesets/grails.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* GrailsPublicControllerMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Rule that checks for public methods on Grails controller classes. Static methods are ignored.
+
+  Grails controller actions and interceptors are defined as properties on the controller class.
+  Public methods on a controller class are unnecessary. They break encapsulation and can
+  be confusing.
+
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files
+  under the 'grails-app/controllers' folder. You can override this with a different regular
+  expression value if appropriate.
+
+
 * GrailsServletContextReference Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -19,7 +33,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   {{{http://www.amazon.com/Definitive-Grails-Second-Experts-Development/dp/1590599950}
   The Definitive Guide to Grails (2nd edition)}}.
 
-  Note that this rule does not check for direct access to the <<<servletContext>> from within GSP 
+  Note that this rule does not check for direct access to the <<<servletContext>>> from within GSP 
   (Groovy Server Pages) files.
 
   Enabling this rule may make most sense in a team environment where team members exhibit a broad
@@ -44,7 +58,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   <<<session>>> from within application source code. Storing objects in the <<<session>>> may inhibit
   scalability and/or performance and should be carefully considered.
 
-  Note that this rule does not check for direct access to the <<<session>> from within GSP
+  Note that this rule does not check for direct access to the <<<session>>> from within GSP
   (Groovy Server Pages) files.
 
   Enabling this rule may make most sense in a team environment where team members exhibit a broad

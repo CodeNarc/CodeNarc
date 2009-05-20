@@ -16,12 +16,13 @@
 package org.codenarc.rule.grails
 
 /**
- * Utility methods for Grails rule classes. This class is not intended for general use.
+ * Utility methods and constants for Grails rule classes. This class is not intended for general use.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class GrailsUtil {
+    protected static final CONTROLLERS_FILES = /.*grails-app\/controllers\/.*/
     protected static final CONTROLLERS_AND_TAGLIB_FILES = /.*grails-app\/(controllers|taglib)\/.*/
 
     /**

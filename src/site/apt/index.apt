@@ -13,7 +13,7 @@ CodeNarc
   bad coding practices.
 
   You can run <<CodeNarc>> using the supplied {{{codenarc-ant-task.html}Ant Task}}
-  or using a {{{codenarc-groovy-script.html}Groovy script}}.
+  or from the {{{codenarc-command-line.html}command-line}}.
 
   See the site navigation menu for a list of the rulesets and rules provided
   out of the box by <<CodeNarc>>. Or you can {{{codenarc-creating-ruleset.html}create your own custom ruleset}}
