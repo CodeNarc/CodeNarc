@@ -67,6 +67,7 @@ class HtmlReportWriter implements ReportWriter {
             }
             writer << html
         }
+        LOG.info("Report file [$outputFile] created.")
     }
 
     String toString() {
