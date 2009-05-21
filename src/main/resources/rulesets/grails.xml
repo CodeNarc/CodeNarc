@@ -11,5 +11,6 @@
     <rule class='org.codenarc.rule.grails.GrailsPublicControllerMethodRule'/>
     <rule class='org.codenarc.rule.grails.GrailsSessionReferenceRule'/>
     <rule class='org.codenarc.rule.grails.GrailsServletContextReferenceRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsStatelessServiceRule'/>
 
 </ruleset>

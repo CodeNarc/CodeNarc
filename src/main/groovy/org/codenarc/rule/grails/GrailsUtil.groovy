@@ -22,6 +22,7 @@ package org.codenarc.rule.grails
  * @version $Revision$ - $Date$
  */
 class GrailsUtil {
+    protected static final SERVICE_FILES = /.*grails-app\/services\/.*/
     protected static final CONTROLLERS_FILES = /.*grails-app\/controllers\/.*/
     protected static final CONTROLLERS_AND_TAGLIB_FILES = /.*grails-app\/(controllers|taglib)\/.*/
 
