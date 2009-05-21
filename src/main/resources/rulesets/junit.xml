@@ -8,9 +8,10 @@
         These rules implement standards and best practices related to JUnit tests.
     </description>
 
-    <rule class='org.codenarc.rule.junit.JUnitSetUpCallsSuperRule'/>
-    <rule class='org.codenarc.rule.junit.JUnitTearDownCallsSuperRule'/>
     <rule class='org.codenarc.rule.junit.JUnitAssertAlwaysFailsRule'/>
     <rule class='org.codenarc.rule.junit.JUnitAssertAlwaysSucceedsRule'/>
-
+    <rule class='org.codenarc.rule.junit.JUnitPublicNonTestMethodRule'/>
+    <rule class='org.codenarc.rule.junit.JUnitSetUpCallsSuperRule'/>
+    <rule class='org.codenarc.rule.junit.JUnitTearDownCallsSuperRule'/>
+    
 </ruleset>
