@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitPublicNonTestMethodRule
  *
  * @author Chris Mair
- * @version $Revision: 97 $ - $Date: 2009-03-25 20:36:13 -0400 (Wed, 25 Mar 2009) $
+ * @version $Revision$ - $Date$
  */
 class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTest {
 

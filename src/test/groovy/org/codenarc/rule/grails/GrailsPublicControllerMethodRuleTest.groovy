@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for GrailsPublicControllerMethodRule
  *
  * @author Chris Mair
- * @version $Revision: 151 $ - $Date: 2009-05-17 22:37:02 -0400 (Sun, 17 May 2009) $
+ * @version $Revision$ - $Date$
  */
 class GrailsPublicControllerMethodRuleTest extends AbstractRuleTest {
     static final CONTROLLER_PATH = 'project\\MyProject\\grails-app\\controllers\\com\\xxx\\MyController.groovy'

@@ -31,7 +31,7 @@ import org.codehaus.groovy.ast.MethodNode
  * expression value if appropriate.
  *
  * @author Chris Mair
- * @version $Revision: 151 $ - $Date: 2009-05-17 22:37:02 -0400 (Sun, 17 May 2009) $
+ * @version $Revision$ - $Date$
  */
 class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
     String name = 'GrailsPublicControllerMethod'

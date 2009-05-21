@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for GrailsStatelessServiceRule
  *
  * @author Chris Mair
- * @version $Revision: 151 $ - $Date: 2009-05-17 22:37:02 -0400 (Sun, 17 May 2009) $
+ * @version $Revision$ - $Date$
  */
 class GrailsStatelessServiceRuleTest extends AbstractRuleTest {
     static final SERVICE_PATH = 'project\\MyProject\\grails-app\\services\\com\\xxx\\MyService.groovy'

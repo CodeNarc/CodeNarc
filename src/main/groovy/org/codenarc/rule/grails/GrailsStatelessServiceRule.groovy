@@ -58,7 +58,7 @@ import org.codenarc.rule.generic.StatelessClassRule
  * expression value if appropriate.
  *
  * @author Chris Mair
- * @version $Revision: 151 $ - $Date: 2009-05-17 22:37:02 -0400 (Sun, 17 May 2009) $
+ * @version $Revision$ - $Date$
  */
 class GrailsStatelessServiceRule extends StatelessClassRule {
     String name = 'GrailsStatelessService'
