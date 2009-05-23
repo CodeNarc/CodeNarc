@@ -116,9 +116,8 @@ FieldName.regex=_[a-z][a-zA-Z0-9]*
   matches a sequence of zero or more characters in the input string. The wildcard character '?'
   matches exactly one character in the input string.
 
-  If a name includes a period ('.'), then it is assumed to specify a fully-qualified class name,
-  including the package. In that case, the name (pattern) is matched against each fully-qualified
-  class name. Otherwise it is matched only against the class name without a package.
+  Each class name(s) can be either a fully-qualified class name (including the package) or else
+  a class name without a package.
 
   For instance, in the following example "codenarc.properties" excerpt, the <CatchThrowable> rule
   is NOT applied to classes named "BaseController" or "AbstractTest", no matter what package they
@@ -134,7 +133,7 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
   Both properties default to <<<null>>>.
 
   These properties are available only to subclasses of <<<AbstractAstVisitorRule>>>, but this
-  includes almost all of the rules provided with <<CodeNarc>> -- all of the rules that deal with
+  includes almost all of the rules provided with <<CodeNarc>> -- i.e., all of the rules that deal with
   the Groovy AST (Abstract Syntax Tree) of a source file. This includes any rule that processes
   source code elements such as a package, class, method, field, parameter, etc..
 

@@ -33,6 +33,7 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
     protected static final DEFAULT_CONST_NAME = /[A-Z][A-Z0-9_]*/
     protected static final DEFAULT_VAR_NAME = /[a-z][a-zA-Z0-9]*/
     protected static final DEFAULT_TEST_FILES = /.*Tests?\.groovy/
+    protected static final DEFAULT_TEST_CLASS_NAMES = '*Test,*Tests'
 
     /** Each concrete subclass must either set this property or define its own property with the same name */
     Class astVisitorClass
@@ -94,19 +95,23 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
      * @return true if this rule should be applied for the specified ClassNode
      */
     protected boolean shouldApplyThisRuleTo(classNode) {
-        boolean apply = true
+        // TODO Consider caching applyTo, doNotApplyTo and associated WildcardPatterns
+        boolean shouldApply = true
 
-        if (applyToClassNames) {
-            def target = applyToClassNames.contains('.') ? classNode.name : classNode.nameWithoutPackage
-            apply = new WildcardPattern(applyToClassNames).matches(target)
+        def applyTo = getProperty('applyToClassNames')
+        def doNotApplyTo = getProperty('doNotApplyToClassNames')
+
+        if (applyTo) {
+            def pattern = new WildcardPattern(applyTo)
+            shouldApply = pattern.matches(classNode.nameWithoutPackage) || pattern.matches(classNode.name)
         }
 
-        if (apply && doNotApplyToClassNames) {
-            def target = doNotApplyToClassNames.contains('.') ? classNode.name : classNode.nameWithoutPackage
-            apply = !new WildcardPattern(doNotApplyToClassNames).matches(target)
+        if (shouldApply && doNotApplyTo) {
+            def pattern = new WildcardPattern(doNotApplyTo)
+            shouldApply = !pattern.matches(classNode.nameWithoutPackage) && !pattern.matches(classNode.name)
         }
 
-        return apply
+        return shouldApply
     }
 
 }

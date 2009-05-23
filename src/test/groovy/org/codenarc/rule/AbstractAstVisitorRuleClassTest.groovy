@@ -70,12 +70,12 @@ class AbstractAstVisitorRuleClassTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyToClassNames_PatternMatchesSampePackage() {
+    void testApplyToClassNames_PatternMatchesSamePackage() {
         final SOURCE2 = '''
             package org.codenarc
             class MyClass { }
         '''
-        rule.applyToClassNames = 'org.codenarc.MyClass'
+        rule.applyToClassNames = 'org.codenarc.OtherClass,MyClass'
         assertSingleViolation(SOURCE2)
     }
 
@@ -115,7 +115,7 @@ class AbstractAstVisitorRuleClassTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE)
     }
 
-    void testDoNotApplyToClassNames_PatternMatchesSamePackage() {
+    void testDoNotApplyToClassNames_PatternMatchesClassNameWithPackage() {
         final SOURCE2 = '''
             package org.codenarc
             class MyClass { }
@@ -124,13 +124,31 @@ class AbstractAstVisitorRuleClassTest extends AbstractRuleTest {
         assertNoViolations(SOURCE2)
     }
 
-    void testDoNotApplyToClassNames_PatternMatchesDifferentPackage() {
+    void testDoNotApplyToClassNames_PatternMatchestClassNameWithoutPackage() {
+        final SOURCE2 = '''
+            package org.codenarc
+            class MyClass { }
+        '''
+        rule.doNotApplyToClassNames = 'Other*,MyClass'
+        assertNoViolations(SOURCE2)
+    }
+
+    void testDoNotApplyToClassNames_PatternDoesNotMatchPackage() {
         final SOURCE2 = '''
             package org.other.project
             class MyClass { }
         '''
         rule.doNotApplyToClassNames = 'Other*,MyTest,org.codenarc.MyCla?s'
         assertSingleViolation(SOURCE)
+    }
+
+    void testDoNotApplyToClassNames_PatternMatchesClassNameAndAlsoPackage() {
+        final SOURCE2 = '''
+            package org.codenarc
+            class MyClass { }
+        '''
+        rule.doNotApplyToClassNames = 'MyC*ss,MyTest,org.*.MyClass'
+        assertNoViolations(SOURCE2)
     }
 
     void testBothApplyToClassNamesAndDoNotApplyToClassNames() {
@@ -149,6 +167,13 @@ class AbstractAstVisitorRuleClassTest extends AbstractRuleTest {
         rule.applyToClassNames = "Xxx"             // apply = NO
         rule.doNotApplyToClassNames = "Xxx"        // doNotApply = NO
         assertNoViolations(SOURCE)
+    }
+
+    void testDefineNewApplyToClassNamesProperty() {
+        rule = new TestAstVisitorRuleDefinesNewApplyToClassNamesRule()
+        assertSingleViolation('class ApplyToClassName { }')
+        assertNoViolations('class DoNotApplyToClassName { }')
+        assertNoViolations('class OtherClass { }')
     }
 
     void testApplyTo_AstVisitorClassNull() {
@@ -179,5 +204,13 @@ class TestAstVisitor extends AbstractAstVisitor {
         violations.add(new Violation(rule:rule))
         super.visitClass(classNode)
     }
+}
 
+// Test AbstractAstVisitorRule implementation class that defines new 'applyToClassNames' and 'doNotApplyToClassNames' properties
+class TestAstVisitorRuleDefinesNewApplyToClassNamesRule extends AbstractAstVisitorRule {
+    String name = 'Test'
+    int priority = 3
+    Class astVisitorClass = TestAstVisitor
+    String applyToClassNames = 'ApplyToClassName'
+    String doNotApplyToClassNames = 'DoNotApplyToClassName'
 }
