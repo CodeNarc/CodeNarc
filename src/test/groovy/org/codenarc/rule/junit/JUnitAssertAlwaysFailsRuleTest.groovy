@@ -33,17 +33,21 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
 
     void testApplyTo_AssertTrue_False() {
         final SOURCE = '''
-            void testSomething() {
-                assertTrue(false)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertTrue(false)
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'assertTrue(false)')
+        assertSingleViolation(SOURCE, 4, 'assertTrue(false)')
     }
 
     void testApplyTo_AssertTrue_True() {
         final SOURCE = '''
-            void testSomething() {
-                assertTrue(true)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertTrue(true)
+                }
             }
         '''
         assertNoViolations(SOURCE)
@@ -51,8 +55,10 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
 
     void testApplyTo_AssertTrue_ConstantNumber() {
         final SOURCE = '''
-            void testSomething() {
-                assertTrue(1234)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertTrue(1234)
+                }
             }
         '''
         assertNoViolations(SOURCE)
@@ -60,8 +66,10 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
 
     void testApplyTo_AssertTrue_Variable() {
         final SOURCE = '''
-            void testSomething() {
-                assertTrue(myVariable)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertTrue(myVariable)
+                }
             }
         '''
         assertNoViolations(SOURCE)
@@ -69,26 +77,32 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
 
     void testApplyTo_AssertTrue_FalseWithMessage() {
         final SOURCE = '''
-            def myClosure = {
-                assertTrue("This passed!", false)
+            class MyTest extends TestCase {
+                def myClosure = {
+                    assertTrue("This passed!", false)
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'assertTrue("This passed!", false)')
+        assertSingleViolation(SOURCE, 4, 'assertTrue("This passed!", false)')
     }
 
     void testApplyTo_AssertFalse_True() {
         final SOURCE = '''
-            void testSomething() {
-                assertFalse(true)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertFalse(true)
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'assertFalse(true)')
+        assertSingleViolation(SOURCE, 4, 'assertFalse(true)')
     }
 
     void testApplyTo_AssertFalse_False() {
         final SOURCE = '''
-            void testSomething() {
-                assertFalse(false)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertFalse(false)
+                }
             }
         '''
         assertNoViolations(SOURCE)
@@ -96,44 +110,54 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
 
     void testApplyTo_AssertFalse_TrueWithMessage() {
         final SOURCE = '''
-            void testSomething() {
-                assertFalse("This passed!", true)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertFalse("This passed!", true)
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'assertFalse("This passed!", true)')
+        assertSingleViolation(SOURCE, 4, 'assertFalse("This passed!", true)')
     }
 
     void testApplyTo_AssertNull_ConstantNumber() {
         final SOURCE = '''
-            void testSomething() {
-                assertNull(123)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNull(123)
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'assertNull(123)')
+        assertSingleViolation(SOURCE, 4, 'assertNull(123)')
     }
 
     void testApplyTo_AssertNull_ConstantString() {
         final SOURCE = '''
-            void testSomething() {
-                assertNull('abc')
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNull('abc')
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, "assertNull('abc')")
+        assertSingleViolation(SOURCE, 4, "assertNull('abc')")
     }
 
     void testApplyTo_AssertNull_ConstantBoolean() {
         final SOURCE = '''
-            void testSomething() {
-                assertNull(false)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNull(false)
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, "assertNull(false)")
+        assertSingleViolation(SOURCE, 4, "assertNull(false)")
     }
 
     void testApplyTo_AssertNull_NonConstant() {
         final SOURCE = '''
-            void testSomething() {
-                assertNull(plugin)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNull(plugin)
+                }
             }
         '''
         assertNoViolations(SOURCE)
@@ -141,25 +165,29 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
 
     void testApplyTo_AssertNull_Null() {
         final SOURCE = '''
-            void testSomething() {
-                assertNull(null)
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNull(null)
+                }
             }
         '''
         assertNoViolations(SOURCE)
     }
 
-//    void testApplyTo_AssertNull_NullWithMessage() {
-//        final SOURCE = '''
-//            void testSomething() {
-//                assertNull("This passed!", null)
-//            }
-//        '''
-//        assertSingleViolation(SOURCE, 3, 'assertNull("This passed!", null)')
-//    }
+    void testApplyTo_AssertNull_NullWithMessage() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNull("What?", false)
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'assertNull("What?", false)')
+    }
 
     void testApplyTo_NonTestFile() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyClass {
             void testSomething() {
                 assertTrue(false)
             }
@@ -167,11 +195,6 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTest {
         '''
         sourceCodePath = 'src/MyController.groovy'
         assertNoViolations(SOURCE)
-    }
-
-    void setUp() {
-        super.setUp()
-        sourceCodePath = 'MyTest.groovy'
     }
 
     protected Rule createRule() {

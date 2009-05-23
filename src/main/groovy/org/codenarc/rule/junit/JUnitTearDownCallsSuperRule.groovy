@@ -35,7 +35,7 @@ class JUnitTearDownCallsSuperRule extends AbstractAstVisitorRule {
     String name = 'JUnitTearDownCallsSuper'
     int priority = 2
     Class astVisitorClass = JUnitTearDownCallsSuperAstVisitor
-    String applyToFilesMatching = DEFAULT_TEST_FILES
+    String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
 class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {

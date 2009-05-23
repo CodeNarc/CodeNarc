@@ -37,7 +37,7 @@ class JUnitAssertAlwaysSucceedsRule extends AbstractAstVisitorRule {
     String name = 'JUnitAssertAlwaysSucceeds'
     int priority = 2
     Class astVisitorClass = JUnitAssertAlwaysSucceedsAstVisitor
-    String applyToFilesMatching = DEFAULT_TEST_FILES
+    String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
 class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractAstVisitor  {

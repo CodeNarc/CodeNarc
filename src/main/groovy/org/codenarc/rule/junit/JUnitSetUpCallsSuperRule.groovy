@@ -35,7 +35,7 @@ class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
     String name = 'JUnitSetUpCallsSuper'
     int priority = 2
     Class astVisitorClass = JUnitSetUpCallsSuperAstVisitor
-    String applyToFilesMatching = DEFAULT_TEST_FILES
+    String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
 class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {

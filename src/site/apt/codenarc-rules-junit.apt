@@ -11,8 +11,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
   assertion always fails. This includes: <<<assertTrue(false)>>>, <<<assertFalse(true)>>>
   and <<<assertNull(CONSTANT)>>>.
 
-  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
-  paths ending in 'Test.groovy' or 'Tests.groovy'.
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test' or 'Tests'.
 
 
 * JUnitAssertAlwaysSucceeds Rule
@@ -22,8 +22,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
   assertion always succeeds. This includes: <<<assertTrue(true)>>>, <<<assertFalse(false)>>>
   and <<<assertNull(null)>>>.
 
-  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
-  paths ending in 'Test.groovy' or 'Tests.groovy'.
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test' or 'Tests'.
 
 
 * JUnitPublicNonTestMethod Rule
@@ -45,15 +45,15 @@ JUnit Rules  ("<rulesets/junit.xml>")
       * Methods annotated with <<<@BeforeClass>>> and <<<@AfterClass>>>
 
   Public, non-test methods on a test class violate conventional usage of test classes,
-  and can be confusing.
+  and they typically break encapsulation unnecessarily.
 
   Public, non-test methods may also hide unintentional <'Lost Tests'>. For instance, the test method
   declaration may (unintentionally) include methods parameters, and thus be ignored by JUnit. Or the
   method may (unintentionally) not follow the "test.." naming convention and not have the @Test annotation,
   and thus be ignored by JUnit.
 
-  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
-  paths ending in 'Test.groovy' or 'Tests.groovy'.
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test' or 'Tests'.
 
 
 * JUnitSetUpCallsSuper Rule
@@ -62,8 +62,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Rule that checks that if the JUnit <<<setUp>>> method is defined, that it includes a call to
   <<<super.setUp()>>>.
 
-  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
-  paths ending in 'Test.groovy' or 'Tests.groovy'.
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test' or 'Tests'.
 
 
 * JUnitTearDownCallsSuper Rule
@@ -72,6 +72,6 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Rule that checks that if the JUnit <<<tearDown>>> method is defined, that it includes a call to
   <<<super.tearDown()>>>.
 
-  This rule sets the default value of the <applyToFilesMatching> property to only match source code file
-  paths ending in 'Test.groovy' or 'Tests.groovy'.
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test' or 'Tests'.
 

@@ -47,7 +47,7 @@ class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
     String name = 'JUnitPublicNonTestMethod'
     int priority = 2
     Class astVisitorClass = JUnitPublicNonTestMethodAstVisitor
-    String applyToFilesMatching = DEFAULT_TEST_FILES
+    String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
 class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {

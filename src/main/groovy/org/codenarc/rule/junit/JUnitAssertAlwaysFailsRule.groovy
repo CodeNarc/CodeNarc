@@ -39,18 +39,20 @@ class JUnitAssertAlwaysFailsRule extends AbstractAstVisitorRule {
     String name = 'JUnitAssertAlwaysFails'
     int priority = 2
     Class astVisitorClass = JUnitAssertAlwaysFailsAstVisitor
-    String applyToFilesMatching = DEFAULT_TEST_FILES
+    String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
 class JUnitAssertAlwaysFailsAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        def isMatch =
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', Boolean.FALSE) ||
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.TRUE) ||
-            isAssertConstantValueNotNullCall(methodCall, 'assertNull')
-        if (isMatch) {
-            addViolation(methodCall)
+        if (isFirstVisit(methodCall)) {
+            def isMatch =
+                JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', Boolean.FALSE) ||
+                JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.TRUE) ||
+                isAssertConstantValueNotNullCall(methodCall, 'assertNull')
+            if (isMatch) {
+                addViolation(methodCall)
+            }
         }
         super.visitMethodCallExpression(methodCall)
     }

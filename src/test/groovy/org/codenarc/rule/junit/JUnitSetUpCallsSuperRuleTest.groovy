@@ -33,7 +33,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpCallsSuperSetUp() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void setUp() {
                 super.setUp()
                 println 'bad'
@@ -45,7 +45,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpDoesNotCallSuperSetUp() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void setUp() {
                 println 'bad'
             }
@@ -56,7 +56,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpDoesNotCallSuperSetUp_CallsSuperSetUpWithParameters() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void setUp() {
                 println 'bad'
                 super.setUp('But', 'has', 'parameters')
@@ -69,7 +69,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpDoesNotCallSuperSetUp_CallsSuper() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void setUp() {
                 println 'bad'
                 super.someOtherMethod()
@@ -81,7 +81,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpDoesNotCallSuperSetUp_CallsSetUp() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void setUp() {
                 println 'bad'
                 other.setUp()
@@ -93,7 +93,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpIncludesCallWithNamedParameterList() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void setUp() {
                 super.setUp()
         		ant.delete(dir:appBase, failonerror:false)
@@ -105,7 +105,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpMethodHasBeforeAnnotation() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             @Before void setUp() {
                 println 'bad'
             }
@@ -114,20 +114,9 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_NonTestFile() {
-        final SOURCE = '''
-          class MyClass extends TestCase {
-            void setUp() {
-            }
-          }
-        '''
-        sourceCodePath = 'src/MyController.groovy'
-        assertNoViolations(SOURCE)
-    }
-
     void testApplyTo_NonSetUpMethod() {
         final SOURCE = '''
-            class MyClass {
+            class MyTest extends TestCase {
                 def otherMethod() {
                 }
             }
@@ -137,7 +126,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_SetUpMethodHasParameters() {
         final SOURCE = '''
-            class MyClass {
+            class MyTest extends TestCase {
                 void setUp(int count, String name) {
                 }
             }
@@ -145,18 +134,13 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_NoMethodDefinition() {
+    void testApplyTo_NonTestClass() {
         final SOURCE = '''
             class MyClass {
               int count
             }
         '''
         assertNoViolations(SOURCE)
-    }
-
-    void setUp() {
-        super.setUp()
-        sourceCodePath = 'MyTest.groovy'
     }
 
     protected Rule createRule() {

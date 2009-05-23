@@ -33,7 +33,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_TearDownCallsSuperTearDown() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void tearDown() {
                 super.tearDown()
                 println 'bad'
@@ -45,7 +45,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_TearDownDoesNotCallSuperTearDown() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void tearDown() {
                 println 'bad'
             }
@@ -56,7 +56,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsSuperTearDownWithParameters() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void tearDown() {
                 println 'bad'
                 super.tearDown('But', 'has', 'parameters')
@@ -69,7 +69,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsSuper() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void tearDown() {
                 println 'bad'
                 super.someOtherMethod()
@@ -81,7 +81,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsTearDown() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             void tearDown() {
                 println 'bad'
                 other.tearDown()
@@ -91,20 +91,19 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
-    void testApplyTo_NonTestFile() {
+    void testApplyTo_NonTestClass() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyClass {
             void tearDown() {
             }
           }
         '''
-        sourceCodePath = 'src/MyController.groovy'
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NonTestFile_TearDownMethodHasAfterAnnotation() {
         final SOURCE = '''
-          class MyClass extends TestCase {
+          class MyTest extends TestCase {
             @After void tearDown() {  }
           }
         '''
@@ -113,7 +112,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_NonTearDownMethod() {
         final SOURCE = '''
-            class MyClass {
+            class MyTest extends TestCase {
                 def otherMethod() {
                 }
             }
@@ -123,7 +122,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_TearDownMethodHasParameters() {
         final SOURCE = '''
-            class MyClass {
+            class MyTest extends TestCase {
                 void tearDown(int count, String name) {
                 }
             }
@@ -133,16 +132,11 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTest {
 
     void testApplyTo_NoMethodDefinition() {
         final SOURCE = '''
-            class MyClass {
+            class MyTest extends TestCase {
               int count
             }
         '''
         assertNoViolations(SOURCE)
-    }
-
-    void setUp() {
-        super.setUp()
-        sourceCodePath = 'MyTest.groovy'
     }
 
     protected Rule createRule() {
