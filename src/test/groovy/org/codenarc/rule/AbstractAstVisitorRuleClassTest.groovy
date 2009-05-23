@@ -16,8 +16,6 @@
 package org.codenarc.rule
 
 import org.codehaus.groovy.ast.ClassNode
-import org.codenarc.source.SourceString
-import org.codenarc.test.AbstractTest
 
 /**
  * Tests for AbstractAstVisitorRule
@@ -25,35 +23,20 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbstractAstVisitorRuleClassTest extends AbstractTest {
-
-    static final SOURCE = 'ABC'
-    def rule
-    def sourceCode
-
+class AbstractAstVisitorRuleClassTest extends AbstractRuleTest {
+    static final SOURCE = '''
+        class MyClass {
+            int value
+        }
+    '''
+    def skipTestThatUnrelatedCodeHasNoViolations
+    
     void testApplyTo() {
-        def violations = rule.applyTo(sourceCode)
-        assert violations.size() == 1
-        assert violations[0].rule == rule
-        assert violations[0].sourceLine == SOURCE
-    }
-
-    void testApplyTo_CompilerErrorInSource() {
-        final NEW_SOURCE = '''
-            class MyClass {
-                try {
-                } catch(MyException e) {
-                    // TODO Should do something here
-                }
-            }
-        '''
-        sourceCode = new SourceString(NEW_SOURCE)
-        def violations = rule.applyTo(sourceCode)
-        assert violations.size() == 0
+        assertSingleViolation(SOURCE)
     }
 
     void testApplyTo_TwoClasses() {
-        final NEW_SOURCE = '''
+        final SOURCE2 = '''
             class MyClass1 {
                 int value
             }
@@ -61,27 +44,125 @@ class AbstractAstVisitorRuleClassTest extends AbstractTest {
                 String name
             }
         '''
-        sourceCode = new SourceString(NEW_SOURCE)
-        def violations = rule.applyTo(sourceCode)
-        assert violations.size() == 2
-        assert violations[0].rule == rule
-        assert violations[1].rule == rule
+        assertTwoViolations(SOURCE2, null, null, null, null)
+    }
+
+    void testApplyToClassNames() {
+        rule.applyToClassNames = 'MyClass'
+        assertSingleViolation(SOURCE)
+
+        rule.applyToClassNames = 'OtherClass,SomeTest,MyClass'
+        assertSingleViolation(SOURCE)
+
+        rule.applyToClassNames = "XXX"
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToClassNames_Wildcards() {
+        rule.applyToClassNames = 'My*'
+        assertSingleViolation(SOURCE)
+        rule.applyToClassNames = "MyTest??"
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToClassNames_PatternSpecifiesPackage_NoPackage() {
+        rule.applyToClassNames = 'org.codenarc.MyClass'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToClassNames_PatternMatchesSampePackage() {
+        final SOURCE2 = '''
+            package org.codenarc
+            class MyClass { }
+        '''
+        rule.applyToClassNames = 'org.codenarc.MyClass'
+        assertSingleViolation(SOURCE2)
+    }
+
+    void testApplyToClassNames_PatternMatchesDifferentPackage() {
+        final SOURCE2 = '''
+            package org.other.project
+            class MyClass { }
+        '''
+        rule.applyToClassNames = 'com.big.Other*,MyTest,org.codenarc.MyCla?s'
+        assertNoViolations(SOURCE2)
+    }
+
+    void testDoNotApplyToClassNames() {
+        rule.doNotApplyToClassNames = "OtherClass"
+        assertSingleViolation(SOURCE)
+
+        rule.doNotApplyToClassNames = 'OtherClass,MyClass,SomeTest'
+        assertNoViolations(SOURCE)
+
+        rule.doNotApplyToClassNames = 'MyClass'
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToClassNames_Wildcards() {
+        rule.doNotApplyToClassNames = "My??Test"
+        assertSingleViolation(SOURCE)
+
+        rule.doNotApplyToClassNames = "My??Test,OtherTest"
+        assertSingleViolation(SOURCE)
+
+        rule.doNotApplyToClassNames = 'M*Cl?ss'
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToClassNames_PatternSpecifiesPackage_NoPackage() {
+        rule.doNotApplyToClassNames = 'org.codenarc.MyClass'
+        assertSingleViolation(SOURCE)
+    }
+
+    void testDoNotApplyToClassNames_PatternMatchesSamePackage() {
+        final SOURCE2 = '''
+            package org.codenarc
+            class MyClass { }
+        '''
+        rule.doNotApplyToClassNames = 'Other*,MyTest,org.codenarc.MyCla?s'
+        assertNoViolations(SOURCE2)
+    }
+
+    void testDoNotApplyToClassNames_PatternMatchesDifferentPackage() {
+        final SOURCE2 = '''
+            package org.other.project
+            class MyClass { }
+        '''
+        rule.doNotApplyToClassNames = 'Other*,MyTest,org.codenarc.MyCla?s'
+        assertSingleViolation(SOURCE)
+    }
+
+    void testBothApplyToClassNamesAndDoNotApplyToClassNames() {
+        rule.applyToClassNames = 'MyClass'         // apply = YES
+        rule.doNotApplyToClassNames = 'MyClass'    // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToClassNames = "Xxx"             // apply = NO
+        rule.doNotApplyToClassNames = 'MyClass'    // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToClassNames = 'MyClass'         // apply = YES
+        rule.doNotApplyToClassNames = "Xxx"        // doNotApply = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToClassNames = "Xxx"             // apply = NO
+        rule.doNotApplyToClassNames = "Xxx"        // doNotApply = NO
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_AstVisitorClassNull() {
         rule.astVisitorClass = null
-        shouldFailWithMessageContaining('astVisitorClass') { rule.applyTo(sourceCode) }
+        shouldFailWithMessageContaining('astVisitorClass') { applyRuleTo('def x') }
     }
 
     void testApplyTo_AstVisitorClassNotAnAstVisitor() {
         rule.astVisitorClass = String
-        shouldFailWithMessageContaining('astVisitorClass') { rule.applyTo(sourceCode) }
+        shouldFailWithMessageContaining('astVisitorClass') { applyRuleTo('def x') }
     }
 
-    void setUp() {
-        super.setUp()
-        rule = new TestAstVisitorRule()
-        sourceCode = new SourceString(SOURCE)
+    protected Rule createRule() {
+        return new TestAstVisitorRule()
     }
 }
 
@@ -95,7 +176,7 @@ class TestAstVisitorRule extends AbstractAstVisitorRule {
 // Test AstVisitor implementation class
 class TestAstVisitor extends AbstractAstVisitor {
     void visitClass(ClassNode classNode) {
-        violations.add(new Violation(rule:rule, sourceLine:sourceCode.text))
+        violations.add(new Violation(rule:rule))
         super.visitClass(classNode)
     }
 

@@ -16,6 +16,7 @@
 package org.codenarc.rule
 
 import org.codenarc.source.SourceCode
+import org.codenarc.util.WildcardPattern
 
 /**
  * Abstract superclass for Rules that use a Groovy AST Visitor.
@@ -36,6 +37,32 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
     /** Each concrete subclass must either set this property or define its own property with the same name */
     Class astVisitorClass
 
+    /**
+     * This rule is only applied to classes with names matching this value.
+     *
+     * The value may optionally be a comma-separated list of names, in which case one of the names must match.
+     *
+     * If a name includes a period ('.'), then it is assumed to specify a full package name, so the name
+     * (pattern) is matched against each fully-qualified class name. Otherwise it is matched only against
+     * the class name without a package.
+     *
+     * The name(s) may optionally include wildcard characters ('*' or '?').
+     */
+    String applyToClassNames
+
+    /**
+     * This rule is NOT applied to classes with names matching this value.
+     *
+     * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
+     *
+     * If a name includes a period ('.'), then it is assumed to specify a full package name, so the name
+     * (pattern) is matched against each fully-qualified class name. Otherwise it is matched only against
+     * the class name without a package.
+     *
+     * The name(s) may optionally include wildcard characters ('*' or '?').
+     */
+    String doNotApplyToClassNames
+
     AstVisitor getAstVisitor() {
         def visitorClass = getAstVisitorClass()
         assert visitorClass, "The astVisitorClass property must not be null"
@@ -48,13 +75,38 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
         def ast = sourceCode.ast
         if (ast) {
             ast.classes.each { classNode ->
-                def visitor = getAstVisitor()
-                visitor.rule = this
-                visitor.sourceCode = sourceCode
-                visitor.visitClass(classNode)
-                violations.addAll(visitor.violations)
+
+                if (shouldApplyThisRuleTo(classNode)) {
+                    def visitor = getAstVisitor()
+                    visitor.rule = this
+                    visitor.sourceCode = sourceCode
+                    visitor.visitClass(classNode)
+                    violations.addAll(visitor.violations)
+                }
             }
         }
+    }
+
+    /**
+     * Return true if this rule should be applied for the specified ClassNode, based on the
+     * configuration of this rule.
+     * @param classNode - the ClassNode
+     * @return true if this rule should be applied for the specified ClassNode
+     */
+    protected boolean shouldApplyThisRuleTo(classNode) {
+        boolean apply = true
+
+        if (applyToClassNames) {
+            def target = applyToClassNames.contains('.') ? classNode.name : classNode.nameWithoutPackage
+            apply = new WildcardPattern(applyToClassNames).matches(target)
+        }
+
+        if (apply && doNotApplyToClassNames) {
+            def target = doNotApplyToClassNames.contains('.') ? classNode.name : classNode.nameWithoutPackage
+            apply = !new WildcardPattern(doNotApplyToClassNames).matches(target)
+        }
+
+        return apply
     }
 
 }

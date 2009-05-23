@@ -76,7 +76,7 @@ CodeNarc - Configuring Rules
 # Sample RuleSet configuration
 # Entries should be of the form:    [rule-name].[property-name]=[property-value]
 
-CatchThrowable.doNotApplyToFilenames=BaseController.groovy,AbstractTest.groovy
+CatchThrowable.doNotApplyToClassNames=BaseController,AbstractTest
 CatchThrowable.priority = 1
 
 ReturnFromFinallyBlock.priority = 1
@@ -100,6 +100,48 @@ FieldName.regex=_[a-z][a-zA-Z0-9]*
   The rules included with <<CodeNarc>> (as well as any subclasses of <<<AbstractRule>>>) provide
   several standard properties that can be used to configure how rules are applied to source files.
 
+** Applying Rules Based on Class Name and/or Package Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <<<applyToClassNames>>> and <<<doNotApplyToClassNames>>> properties enable filtering the
+  classes to which the rule is applied.
+
+  If <<<applyToClassNames>>> is not empty or null, then the rule is only
+  applied to classes matching one of the specified class names. Likewise, if
+  <<<doNotApplyToClassNames>>> is not empty or null, then the rule is NOT applied to classes
+  matching any of the specified class names.
+
+  Both of these properties can specify either a single class name or a comma-separated list of names.
+  The names may optionally contain wildcard characters ('*' or '?'). The wildcard character '*'
+  matches a sequence of zero or more characters in the input string. The wildcard character '?'
+  matches exactly one character in the input string.
+
+  If a name includes a period ('.'), then it is assumed to specify a fully-qualified class name,
+  including the package. In that case, the name (pattern) is matched against each fully-qualified
+  class name. Otherwise it is matched only against the class name without a package.
+
+  For instance, in the following example "codenarc.properties" excerpt, the <CatchThrowable> rule
+  is NOT applied to classes named "BaseController" or "AbstractTest", no matter what package they
+  are in (if any). The <FieldName> rule, on the other hand, is only applied to the
+  <<<org.codenarc.CodeNarc>>> class or any of the classes within <<<org.codenarc.extra>>> package.
+
++----------------------------------------------------------------------------------------
+CatchThrowable.doNotApplyToClassNames=BaseController,AbstractTest
+
+FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
++----------------------------------------------------------------------------------------
+
+  Both properties default to <<<null>>>.
+
+  These properties are available only to subclasses of <<<AbstractAstVisitorRule>>>, but this
+  includes almost all of the rules provided with <<CodeNarc>> -- all of the rules that deal with
+  the Groovy AST (Abstract Syntax Tree) of a source file. This includes any rule that processes
+  source code elements such as a package, class, method, field, parameter, etc..
+
+
+** Applying Rules Based on File Path or Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   The <<<applyToFilesMatching>>> and <<<doNotApplyToFilesMatching>>> properties enable filtering
   the files to which the rule is applied by matching a regular expression against the <<full pathname>>
   of each source file. If <<<applyToFilesMatching>>> is not empty or null, then the rule is only
@@ -110,7 +152,7 @@ FieldName.regex=_[a-z][a-zA-Z0-9]*
   *  <<NOTE:>> File separator characters within pathnames are normalized to
   forward slashes (/). On Windows, for instance, that means that the path "c:\dir\file.txt" is
   normalized to "c:/dir/file.txt". If your regular expressions contain file separator characters,
-  be sure that they are all the standard '/', no matter what operating system. 
+  be sure that they are all the standard '/', no matter what operating system.
 
   []
 
@@ -123,6 +165,10 @@ FieldName.regex=_[a-z][a-zA-Z0-9]*
   characters ('*' or '?'). The wildcard character '*' matches a sequence of zero or more characters
   in the input string. The wildcard character '?' matches exactly one character in the input string.
   Both properties default to <<<null>>>.
+
+
+** Other Standard Rule Properties
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   The <<<enabled>>> boolean property allows a rule to be completely turned off (by setting it to <<<false>>>).
   It defaults to <<<true>>>.
