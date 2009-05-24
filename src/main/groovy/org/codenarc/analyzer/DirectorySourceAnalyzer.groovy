@@ -62,14 +62,14 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
      * The value may optionally be a comma-separated list of names.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      */
-    String applyToFilenames
+    String applyToFileNames
 
     /**
      * Do NOT analyze filenames matching this value.
      * The value may optionally be a comma-separated list of names.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      */
-    String doNotApplyToFilenames
+    String doNotApplyToFileNames
 
     /**
      * Analyze the source with the configured directory tree(s) using the specified RuleSet and return the report results.
@@ -115,8 +115,8 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
         if (new SourceCodeCriteria(
                 applyToFilesMatching:applyToFilesMatching,
                 doNotApplyToFilesMatching:doNotApplyToFilesMatching,
-                applyToFilenames:applyToFilenames,
-                doNotApplyToFilenames:doNotApplyToFilenames).matches(sourceFile)) {
+                applyToFileNames:applyToFileNames,
+                doNotApplyToFileNames:doNotApplyToFileNames).matches(sourceFile)) {
             dirResults.numberOfFilesInThisDirectory ++
             def allViolations = []
             ruleSet.rules.each {rule ->

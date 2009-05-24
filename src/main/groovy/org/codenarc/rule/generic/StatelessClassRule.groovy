@@ -51,7 +51,7 @@ import org.codenarc.util.WildcardPattern
  * There is one exception for the <code>ignoreFieldTypes</code> property: if the field is declared
  * with a modifier/type of <code>def</code>, then the type resolves to <code>java.lang.Object</code>.
  * <p/>
- * Either the <code>applyToFilenames</code> or <code>applyToFilesMatching</code> must be set
+ * Either the <code>applyToFileNames</code> or <code>applyToFilesMatching</code> must be set
  * (not empty or null), or else this rule does nothing.
  *
  * @author Chris Mair
@@ -65,7 +65,7 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = StatelessClassAstVisitor
 
     boolean isReady() {
-        return applyToFilenames || applyToFilesMatching
+        return applyToFileNames || applyToFilesMatching
     }
 }
 

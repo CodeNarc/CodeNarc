@@ -67,7 +67,7 @@ Generic Rules  ("<rulesets/generic.xml>")
 **  Notes
 ~~~~~~~~~~~~
 
-  [[1]]  Either the <<<applyToFilenames>>> or <<<applyToFilesMatching>>> must be set
+  [[1]]  Either the <<<applyToFileNames>>> or <<<applyToFilesMatching>>> must be set
   (not empty or null), or else this rule does nothing.
 
   [[2]]  The <<<ignoreFieldTypes>>> property matches the field type name as indicated

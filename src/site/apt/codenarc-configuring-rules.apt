@@ -155,9 +155,9 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
 
   []
 
-  The <<<applyToFilenames>>> and <<<doNotApplyToFilenames>>> properties enable filtering
+  The <<<applyToFileNames>>> and <<<doNotApplyToFileNames>>> properties enable filtering
   the files to which the rule is applied by specifying a comma-separated list of filenames (no path)
-  of source files. If <<<applyToFilenames>>> is not empty or null, then the rule is only
+  of source files. If <<<applyToFileNames>>> is not empty or null, then the rule is only
   applied to source files matching one of the specified filenames. Likewise, if
   <<<doNotApplyToFilesMatching>>> is not empty or null, then the rule is NOT applied to source files
   matching any of the specified filenames. Both properties may optionally contain wildcard

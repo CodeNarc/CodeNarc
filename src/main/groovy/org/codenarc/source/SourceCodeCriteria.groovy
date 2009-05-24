@@ -46,7 +46,7 @@ class SourceCodeCriteria {
      * The name(s) may optionally include wildcard characters ('*' or '?').
      * If null, then all SourceCode instances match this part of the criteria (i.e., this property is ignored).
      */
-    String applyToFilenames
+    String applyToFileNames
 
     /**
      * Do NOT apply to source code (file) names matching this value.
@@ -54,7 +54,7 @@ class SourceCodeCriteria {
      * The name(s) may optionally include wildcard characters ('*' or '?').
      * If null, then all SourceCode instances match this part of the criteria (i.e., this property is ignored).
      */
-    String doNotApplyToFilenames
+    String doNotApplyToFileNames
 
 
     /**
@@ -69,12 +69,12 @@ class SourceCodeCriteria {
             apply = !(sourceCode.path ==~ doNotApplyToFilesMatching)
         }
 
-        if (apply && applyToFilenames) {
-            apply = new WildcardPattern(applyToFilenames).matches(sourceCode.name)
+        if (apply && applyToFileNames) {
+            apply = new WildcardPattern(applyToFileNames).matches(sourceCode.name)
         }
 
-        if (apply && doNotApplyToFilenames) {
-            apply = !new WildcardPattern(doNotApplyToFilenames).matches(sourceCode.name) 
+        if (apply && doNotApplyToFileNames) {
+            apply = !new WildcardPattern(doNotApplyToFileNames).matches(sourceCode.name) 
         }
 
         return apply

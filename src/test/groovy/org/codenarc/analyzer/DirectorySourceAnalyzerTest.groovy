@@ -185,11 +185,11 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
         assert results.totalNumberOfFiles == 3
     }
 
-    void testAnalyze_BaseDirectory_ApplyToFilenames() {
+    void testAnalyze_BaseDirectory_ApplyToFileNames() {
         final DIR = 'src/test/resources/sourcewithdirs'
         analyzer.baseDirectory = DIR
-        analyzer.applyToFilenames = 'Subdir1File1.groovy,Subdir2a*1.groovy,Sub?ir2File1.groovy'
-        analyzer.doNotApplyToFilenames = 'Subdir2aFile1.groovy'
+        analyzer.applyToFileNames = 'Subdir1File1.groovy,Subdir2a*1.groovy,Sub?ir2File1.groovy'
+        analyzer.doNotApplyToFileNames = 'Subdir2aFile1.groovy'
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 

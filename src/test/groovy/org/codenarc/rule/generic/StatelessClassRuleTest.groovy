@@ -34,7 +34,7 @@ class StatelessClassRuleTest extends AbstractRuleTest {
 
     void testNotReady() {
         final SOURCE = ' class MyClass { }'
-        rule.applyToFilenames = null
+        rule.applyToFileNames = null
         assert !rule.ready
         assertNoViolations(SOURCE)
     }
@@ -173,7 +173,7 @@ class StatelessClassRuleTest extends AbstractRuleTest {
     }
 
     protected Rule createRule() {
-        return new StatelessClassRule(applyToFilenames:'*.groovy')
+        return new StatelessClassRule(applyToFileNames:'*.groovy')
     }
 
 }

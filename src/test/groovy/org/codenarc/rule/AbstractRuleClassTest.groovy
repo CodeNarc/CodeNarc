@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,69 +95,70 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyToFilenames() {
-        rule.applyToFilenames = FILENAME
+//--------
+    void testApplyToFileNames() {
+        rule.applyToFileNames = FILENAME
         assertSingleViolation(SOURCE)
-        rule.applyToFilenames = "Xxx.groovy"
+        rule.applyToFileNames = "Xxx.groovy"
         assertNoViolations(SOURCE)
     }
 
-    void testApplyToFilenames_Wildcards() {
-        rule.applyToFilenames = 'My*.groovy'
+    void testApplyToFileNames_Wildcards() {
+        rule.applyToFileNames = 'My*.groovy'
         assertSingleViolation(SOURCE)
-        rule.applyToFilenames = "MyTest??.groovy"
+        rule.applyToFileNames = "MyTest??.groovy"
         assertNoViolations(SOURCE)
     }
 
-    void testDoNotApplyToFilenames() {
-        rule.doNotApplyToFilenames = "Xxx.groovy"
+    void testDoNotApplyToFileNames() {
+        rule.doNotApplyToFileNames = "Xxx.groovy"
         assertSingleViolation(SOURCE)
-        rule.doNotApplyToFilenames = FILENAME
+        rule.doNotApplyToFileNames = FILENAME
         assertNoViolations(SOURCE)
     }
 
-    void testDoNotApplyToFilenames_Wildcards() {
-        rule.doNotApplyToFilenames = "MyTest??.groovy"
+    void testDoNotApplyToFileNames_Wildcards() {
+        rule.doNotApplyToFileNames = "MyTest??.groovy"
         assertSingleViolation(SOURCE)
-        rule.doNotApplyToFilenames = 'My*.gr*'
+        rule.doNotApplyToFileNames = 'My*.gr*'
         assertNoViolations(SOURCE)
     }
 
-    void testBothApplyToFilenamesAndDoNotApplyToFilenames() {
-        rule.applyToFilenames = FILENAME             // apply = YES
-        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+    void testBothApplyToFileNamesAndDoNotApplyToFileNames() {
+        rule.applyToFileNames = FILENAME             // apply = YES
+        rule.doNotApplyToFileNames = FILENAME        // doNotApply = YES
         assertNoViolations(SOURCE)
 
-        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
-        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+        rule.applyToFileNames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFileNames = FILENAME        // doNotApply = YES
         assertNoViolations(SOURCE)
 
-        rule.applyToFilenames = FILENAME             // apply = YES
-        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        rule.applyToFileNames = FILENAME             // apply = YES
+        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply = NO
         assertSingleViolation(SOURCE)
 
-        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
-        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        rule.applyToFileNames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply = NO
         assertNoViolations(SOURCE)
     }
-
-    void testApplyToFilenamesAndDoNotApplyToRegex() {
-        rule.applyToFilenames = FILENAME             // apply filename = YES
+//--------
+    void testApplyToFileNamesAndDoNotApplyToRegex() {
+        rule.applyToFileNames = FILENAME             // apply filename = YES
         rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
         assertNoViolations(SOURCE)
 
-        rule.applyToFilenames = "Xxx.groovy"         // apply filename = NO
+        rule.applyToFileNames = "Xxx.groovy"         // apply filename = NO
         rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
         assertNoViolations(SOURCE)
     }
 
-    void testApplyToRegexAndDoNotApplyToFilenames() {
+    void testApplyToRegexAndDoNotApplyToFileNames() {
         rule.applyToFilesMatching = MATCH            // apply regex = YES
-        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply filename = NO
+        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply filename = NO
         assertSingleViolation(SOURCE)
 
         rule.applyToFilesMatching = NO_MATCH         // apply regex = NO
-        rule.doNotApplyToFilenames = FILENAME        // doNotApply filename = YES
+        rule.doNotApplyToFileNames = FILENAME        // doNotApply filename = YES
         assertNoViolations(SOURCE)
     }
 
@@ -231,14 +232,68 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assert rule.sourceLineAndNumberForImport(otherSourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
     }
 
-    protected Rule createRule() {
-        return new TestPathRule(name:NAME, priority:PRIORITY)
+    //--------------------------------------------------------------------------
+    // Tests for deprecated properties/methods
+    //--------------------------------------------------------------------------
+
+    void testApplyToFilenames() {
+        rule.applyToFilenames = FILENAME
+        assertSingleViolation(SOURCE)
+        rule.applyToFilenames = "Xxx.groovy"
+        assertNoViolations(SOURCE)
     }
+
+    void testApplyToFilenames_Wildcards() {
+        rule.applyToFilenames = 'My*.groovy'
+        assertSingleViolation(SOURCE)
+        rule.applyToFilenames = "MyTest??.groovy"
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToFilenames() {
+        rule.doNotApplyToFilenames = "Xxx.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFilenames = FILENAME
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToFilenames_Wildcards() {
+        rule.doNotApplyToFilenames = "MyTest??.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFilenames = 'My*.gr*'
+        assertNoViolations(SOURCE)
+    }
+
+    void testBothApplyToFilenamesAndDoNotApplyToFilenames() {
+        rule.applyToFilenames = FILENAME             // apply = YES
+        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilenames = FILENAME             // apply = YES
+        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        assertNoViolations(SOURCE)
+    }
+
+    //--------------------------------------------------------------------------
+    // Setup and helper methods
+    //--------------------------------------------------------------------------
 
     void setUp() {
         super.setUp()
         sourceCodePath = FILENAME
         sourceCodeName = FILENAME
+    }
+
+    protected Rule createRule() {
+        return new TestPathRule(name:NAME, priority:PRIORITY)
     }
 
 }

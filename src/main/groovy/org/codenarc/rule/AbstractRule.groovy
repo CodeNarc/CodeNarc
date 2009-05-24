@@ -54,14 +54,54 @@ abstract class AbstractRule implements Rule {
      * The value may optionally be a comma-separated list of names, in which case one of the names must match.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      */
-    String applyToFilenames
+    String applyToFileNames
 
     /**
      * This rule is NOT applied to source code (file) names matching this value.
      * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      */
-    String doNotApplyToFilenames
+    String doNotApplyToFileNames
+
+    /**
+     * This rule is only applied to source code (file) names matching this value.
+     * The value may optionally be a comma-separated list of names, in which case one of the names must match.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
+     * @deprecated Use getApplyToFileNames() instead
+     */
+    String getApplyToFilenames() {
+        return applyToFileNames
+    }
+
+    /**
+     * This rule is only applied to source code (file) names matching this value.
+     * The value may optionally be a comma-separated list of names, in which case one of the names must match.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
+     * @deprecated Use setApplyToFileNames(String) instead
+     */
+    void setApplyToFilenames(String applyTo) {
+        applyToFileNames = applyTo
+    }
+
+    /**
+     * This rule is NOT applied to source code (file) names matching this value.
+     * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
+     * @deprecated Use doNotApplyToFileNames instead
+     */
+    String getDoNotApplyToFilenames() {
+        return doNotApplyToFileNames
+    }
+
+    /**
+     * This rule is NOT applied to source code (file) names matching this value.
+     * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
+     * The name(s) may optionally include wildcard characters ('*' or '?').
+     * @deprecated Use setDoNotApplyToFileNames(String) instead
+     */
+    void setDoNotApplyToFilenames(String doNotApply) {
+        doNotApplyToFileNames = doNotApply
+    }
 
     /**
      * If not null, this is used as the message for all violations of this rule, overriding any
@@ -213,8 +253,8 @@ abstract class AbstractRule implements Rule {
             new SourceCodeCriteria(
                 applyToFilesMatching:getProperty('applyToFilesMatching'),
                 doNotApplyToFilesMatching:getProperty('doNotApplyToFilesMatching'),
-                applyToFilenames:getProperty('applyToFilenames'),
-                doNotApplyToFilenames:getProperty('doNotApplyToFilenames')).matches(sourceCode)
+                applyToFileNames:getProperty('applyToFileNames'),
+                doNotApplyToFileNames:getProperty('doNotApplyToFileNames')).matches(sourceCode)
     }
 
     private String getClassNameNoPackage() {

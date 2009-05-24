@@ -51,42 +51,42 @@ class SourceCodeCriteriaTest extends AbstractTest {
     void testMatches_Name() {
         sourceCode.name = NAME
         assert new SourceCodeCriteria().matches(sourceCode)
-        assert new SourceCodeCriteria(applyToFilenames:NAME).matches(sourceCode)
-        assert new SourceCodeCriteria(doNotApplyToFilenames:OTHER_NAME).matches(sourceCode)
-        assert new SourceCodeCriteria(applyToFilenames:"$OTHER_NAME,$NAME").matches(sourceCode)
-        assert new SourceCodeCriteria(doNotApplyToFilenames:"File2.groovy,$OTHER_NAME").matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:NAME).matches(sourceCode)
+        assert new SourceCodeCriteria(doNotApplyToFileNames:OTHER_NAME).matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:"$OTHER_NAME,$NAME").matches(sourceCode)
+        assert new SourceCodeCriteria(doNotApplyToFileNames:"File2.groovy,$OTHER_NAME").matches(sourceCode)
 
-        assert !new SourceCodeCriteria(applyToFilenames:OTHER_NAME).matches(sourceCode)
-        assert !new SourceCodeCriteria(doNotApplyToFilenames:NAME).matches(sourceCode)
-        assert !new SourceCodeCriteria(applyToFilenames:NAME, doNotApplyToFilenames:NAME).matches(sourceCode)
-        assert !new SourceCodeCriteria(doNotApplyToFilenames:"$OTHER_NAME,$NAME").matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:OTHER_NAME).matches(sourceCode)
+        assert !new SourceCodeCriteria(doNotApplyToFileNames:NAME).matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:NAME, doNotApplyToFileNames:NAME).matches(sourceCode)
+        assert !new SourceCodeCriteria(doNotApplyToFileNames:"$OTHER_NAME,$NAME").matches(sourceCode)
     }
 
     void testMatches_Name_Wildcards() {
         sourceCode.name = NAME
-        assert new SourceCodeCriteria(applyToFilenames:'*.groovy').matches(sourceCode)
-        assert new SourceCodeCriteria(applyToFilenames:'MyT?st.groovy').matches(sourceCode)
-        assert new SourceCodeCriteria(doNotApplyToFilenames:'*.ruby').matches(sourceCode)
-        assert new SourceCodeCriteria(applyToFilenames:"$OTHER_NAME,My*.groovy").matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:'*.groovy').matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:'MyT?st.groovy').matches(sourceCode)
+        assert new SourceCodeCriteria(doNotApplyToFileNames:'*.ruby').matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:"$OTHER_NAME,My*.groovy").matches(sourceCode)
 
-        assert !new SourceCodeCriteria(applyToFilenames:'*View.groovy').matches(sourceCode)
-        assert !new SourceCodeCriteria(doNotApplyToFilenames:'My*.groovy').matches(sourceCode)
-        assert !new SourceCodeCriteria(applyToFilenames:'My*.groovy', doNotApplyToFilenames:'MyT?st.groovy').matches(sourceCode)
-        assert !new SourceCodeCriteria(doNotApplyToFilenames:"$OTHER_NAME,My*.groovy").matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:'*View.groovy').matches(sourceCode)
+        assert !new SourceCodeCriteria(doNotApplyToFileNames:'My*.groovy').matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:'My*.groovy', doNotApplyToFileNames:'MyT?st.groovy').matches(sourceCode)
+        assert !new SourceCodeCriteria(doNotApplyToFileNames:"$OTHER_NAME,My*.groovy").matches(sourceCode)
     }
 
     void testMatches_NameAndPath() {
         sourceCode.name = NAME
         sourceCode.path = PATH
         assert new SourceCodeCriteria().matches(sourceCode)
-        assert new SourceCodeCriteria(applyToFilenames:NAME, applyToFilesMatching:MATCH).matches(sourceCode)
-        assert new SourceCodeCriteria(doNotApplyToFilesMatching:NO_MATCH, doNotApplyToFilenames:OTHER_NAME).matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:NAME, applyToFilesMatching:MATCH).matches(sourceCode)
+        assert new SourceCodeCriteria(doNotApplyToFilesMatching:NO_MATCH, doNotApplyToFileNames:OTHER_NAME).matches(sourceCode)
 
-        assert !new SourceCodeCriteria(applyToFilenames:OTHER_NAME, applyToFilesMatching:NO_MATCH).matches(sourceCode)
-        assert !new SourceCodeCriteria(doNotApplyToFilenames:NAME, applyToFilesMatching:MATCH).matches(sourceCode)
-        assert !new SourceCodeCriteria(applyToFilesMatching:MATCH, applyToFilenames:NAME, doNotApplyToFilenames:"Xyz.groovy,$NAME").matches(sourceCode)
-        assert !new SourceCodeCriteria(applyToFilenames:NAME, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
-        assert !new SourceCodeCriteria(applyToFilenames:NAME, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:OTHER_NAME, applyToFilesMatching:NO_MATCH).matches(sourceCode)
+        assert !new SourceCodeCriteria(doNotApplyToFileNames:NAME, applyToFilesMatching:MATCH).matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFilesMatching:MATCH, applyToFileNames:NAME, doNotApplyToFileNames:"Xyz.groovy,$NAME").matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:NAME, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:NAME, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
     }
 
     void setUp() {
