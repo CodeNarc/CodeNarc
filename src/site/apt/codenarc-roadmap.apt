@@ -13,19 +13,17 @@ CodeNarc - Road Map
 
   * More rules
 
-  * CodeNarc command-line runner.
-
-  * Document creating custom Rules.
-
 
 * Long-Term Goals
 ~~~~~~~~~~~~~~~~~
 
-  * Even more rules, perhaps including framework-specific rules for Grails, Griffon, Gradle, etc..
+  * Even more rules, perhaps including framework-specific rules for Grails (additional), Griffon, Gradle, etc..
 
   * Create XML report
 
   * Analyze source code within jar files or zip files.
+
+  * Create Grails plugin.
 
   * Create Hudson plugin.
 
@@ -34,8 +32,6 @@ CodeNarc - Road Map
 
 ** Considering (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  * Create Grails plugin.
 
   * Create IntelliJ plugin.
 
@@ -46,7 +42,3 @@ CodeNarc - Road Map
   * DSL for RuleSet definition.
 
   * Localization of report text.
-
-
-
-

@@ -2,6 +2,58 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.5 (24 May 2009)
+------------------------------------
+BUG FIXES
+- FIX: IllegalRegexRule: Don’t stop after first violation.
+- FIX: VariableNameRule processing enums: “ArrayIndexOutOfBoundsException: Negative array index [-3] too large for array size 1”.
+- FIX: BooleanInstantiationRule, VariableNameRule: Error parsing code with Enums.
+- FIX: Rules sometimes produce two violations for a single line. (e.g. EmptyElseBlockRule, PrintlnRule)
+POTENTIAL BREAKING CHANGES
+- Normalize all path separators (/,\) in SourceCode paths.
+- SourceCodeCriteria: Change applyToFilenames and doNotApplyToFilenames to applyToFileNames and doNotApplyToFileNames.
+- DirectorySourceAnalyzer: Change applyToFilenames and doNotApplyToFilenames to applyToFileNames and doNotApplyToFileNames.
+RULES
+- Created new "grails" RuleSet and nine new Rules:
+   * GrailsStatelessServiceRule (Specially-configured StatelessClassRule) (grails)
+   * GrailsPublicControllerMethodRule (grails)
+   * GrailsServletContextReferenceRule (grails)
+   * GrailsSessionReferenceRule (grails)
+   * StatelessClassRule (generic)
+   * EmptySynchronizedStatementRule (basic).
+   * EmptySwitchStatementRule (basic).
+   * EqualsAndHashCodeRule (basic)
+   * JUnitPublicNonTestMethodRule (junit).
+- Change JUnit rules to use applyToClassNames=*Test,*Tests.
+- ClassSizeRule: Don’t include package name in violation message.
+INFRASTRUCTURE
+- Support running CodeNarc as a command-line application (org.codenarc.CodeNarc).
+- Add support for Groovy rule scripts.
+- AbstractAstVisitorRule: Add applyToClassNames and doNotApplyToClassNames. Filter rules based on class and/or package.
+- AbstractRule. Add applyToFileNames and doNotApplyToFileNames (deprecate applyToFilenames and doNotApplyToFilenames).
+- Normalize all separators (/,\) in SourceCode paths to '/'.
+- AbstractRule: Enable setting violationMessage to empty string to turn it off.
+- HtmlReportWriter: Log output report filename.
+- Include number (index) of rule in Rule Descriptions section of HTML report.
+- Create CodeNarcRunner class; refactor CodeNarc and CodeNarcTask to use it.
+- HtmlReportWriter: Shrink font size of the rule descriptions at the end of the HTML report.
+- HtmlReportWriter: Remove “Source Directories” section.
+- Create FilesystemSourceAnalyzer.
+- Refactor WildcardPattern to (optionally) support comma-separated list of patterns.
+- Change WildcardPattern to support Ant-style ‘**’ wildcards.
+- Refactor AbstractRule and AbstractAstVisitor add/create Violation and source line helper methods.
+- Add createViolation(SourceCode, ASTNode) method to AbstractRule.
+- Add line(int) method to SourceCode to return trimmed source line.
+- Add createViolation() convenience method(s) to AbstractRule.
+- AbstractAstVisitor: Replace isAlreadyVisited() and registerAsVisited() with isFirstVisit().
+DEPRECATIONS
+- AbstractRule: Deprecated applyToFilenames and doNotApplyToFilenames (replace with applyToFileNames and doNotApplyToFileNames).
+- Deprecated DirectorySourceAnalyzer.
+DOCUMENTATION
+- Create “Create Rule” document.
+- Add section in “Configuring Rules” on Turning Off a Rule.
+
+
 Changes in version 0.4 (31 Mar 2009)
 ------------------------------------
 INFRASTRUCTURE
