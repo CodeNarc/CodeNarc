@@ -18,6 +18,10 @@ Grails Rules  ("<rulesets/grails.xml>")
   under the 'grails-app/controllers' folder. You can override this with a different regular
   expression value if appropriate.
 
+  This rule also sets the default value of <<<applyToClassNames>>> to only match class names
+  ending in 'Controller'. You can override this with a different class name pattern (String)
+  if appropriate.
+
 
 * GrailsServletContextReference Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

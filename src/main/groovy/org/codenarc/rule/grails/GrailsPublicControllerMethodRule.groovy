@@ -38,6 +38,7 @@ class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = GrailsPublicControllerMethodAstVisitor
     String applyToFilesMatching = GrailsUtil.CONTROLLERS_FILES
+    String applyToClassNames = GrailsUtil.CONTROLLERS_CLASSES
 }
 
 class GrailsPublicControllerMethodAstVisitor extends AbstractAstVisitor  {

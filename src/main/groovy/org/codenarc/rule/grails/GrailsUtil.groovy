@@ -25,6 +25,7 @@ class GrailsUtil {
     protected static final SERVICE_FILES = /.*grails-app\/services\/.*/
     protected static final CONTROLLERS_FILES = /.*grails-app\/controllers\/.*/
     protected static final CONTROLLERS_AND_TAGLIB_FILES = /.*grails-app\/(controllers|taglib)\/.*/
+    protected static final CONTROLLERS_CLASSES = '*Controller'
 
     /**
      * Private constructor. All members are static.

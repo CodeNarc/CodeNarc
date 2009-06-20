@@ -87,10 +87,20 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-
     void testApplyTo_PublicMethodsWithinNonControllerClass() {
         final SOURCE = '''
-            class MyClass {
+            class MyHelper {
+                int calculate() { 23 }
+                protected boolean isReady() { true }
+                public String getName() { 'abc' }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_PublicMethodsWithinNonControllerPath() {
+        final SOURCE = '''
+            class MyController {
                 int calculate() { 23 }
                 protected boolean isReady() { true }
                 public String getName() { 'abc' }
