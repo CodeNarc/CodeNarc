@@ -312,7 +312,82 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="trunkUrl" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc" />
+              <option name="branchMap">
+                <map>
+                  <entry key="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5">
+                    <value>
+                      <list>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1243218575478" />
+                          <option name="revision" value="166" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/src" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1243217340770" />
+                          <option name="revision" value="165" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/CHANGELOG.txt" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1243207532576" />
+                          <option name="revision" value="164" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/samples" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1242699528737" />
+                          <option name="revision" value="152" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/CodeNarc.ipr" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1239451637587" />
+                          <option name="revision" value="124" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/pom.xml" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1238027773828" />
+                          <option name="revision" value="97" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/CodeNarc.iml" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/.settings" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/.classpath" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/.project" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/LICENSE.txt" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/NOTICE.txt" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5/README.txt" />
+                        </SvnBranchItem>
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk" />
             </SvnBranchConfiguration>
           </value>
         </entry>
