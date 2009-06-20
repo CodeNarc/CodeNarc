@@ -23,6 +23,11 @@ import org.codenarc.util.PropertyUtil
  * the property values to matching Rules within a specified <code>RuleSet</code>. If the
  * properties file is not found on the classpath, then do nothing.
  * <p/>
+ * The default name of the properties file ("codenarc.properties") can be overridden by setting
+ * the "codenarc.properties.file" system property to the new filename. Note that the new filename
+ * is still relative to the classpath, and may optionally contain (relative) path components (e.g.
+ * "src/resources/my-codenarc.properties").
+ * <p/>
  * For each properties entry of the form <code>[rule-name].[property-name]=[property-value]</code>,
  * the named property for the rule within the RuleSet matching rule-name is set to the
  * specified propery-value. Properties entries not of this form or specifying rule
@@ -32,11 +37,17 @@ import org.codenarc.util.PropertyUtil
  * @version $Revision$ - $Date$
  */
 class PropertiesFileRuleSetConfigurer {
+
     static final LOG = Logger.getLogger(PropertiesFileRuleSetConfigurer)
-    protected propertiesFilename = 'codenarc.properties'
+    static final PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
+
+    protected defaultPropertiesFilename = 'codenarc.properties'
 
     /**
-     * Configure the rules within the RuleSet from the properties file.
+     * Configure the rules within the RuleSet from the properties file (relative to the classpath).
+     * The default properties filename is "codenarc.properties", but can be overridden by setting the 
+     * "codenarc.properties.filename" system property.
+     * <p/>
      * Each properties entry of the form <code>[rule-name].[property-name]=[property-value]</code>
      * is used to set the named property of the named rule. Other (non-matching)
      * property entries are ignored.
@@ -44,6 +55,9 @@ class PropertiesFileRuleSetConfigurer {
      */
     void configure(RuleSet ruleSet) {
         assert ruleSet
+
+        def propertiesFilename = System.getProperty(PROPERTIES_FILE_SYSPROP) ?: defaultPropertiesFilename
+
         def inputStream = getClass().classLoader.getResourceAsStream(propertiesFilename)
         if (inputStream) {
             LOG.info("Reading RuleSet configuration from properties file [$propertiesFilename].")

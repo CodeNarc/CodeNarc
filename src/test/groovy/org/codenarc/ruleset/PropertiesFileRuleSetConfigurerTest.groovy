@@ -25,6 +25,7 @@ import org.codenarc.rule.StubRule
  * @version $Revision$ - $Date$
  */
 class PropertiesFileRuleSetConfigurerTest extends AbstractTest {
+    static final SYS_PROP = 'codenarc.properties.file'
     private ruleSet
     private rule1 = new StubRule(name:'rule1', priority:1, violationMessage:'abc')
     private rule2 = new StubRule(name:'rule2', priority:2, violationMessage:'def')
@@ -35,8 +36,15 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTest {
         assert ruleMap() == [rule1:[3, 'abc'], rule99:[2, 'violation']], ruleMap()
     }
 
+    void testConfigure_OverridePropertiesFilenameThroughSystemProperty() {
+        System.setProperty(SYS_PROP, 'override-codenarc.properties')
+        configurer.configure(ruleSet)
+        assert ruleMap() == [rule1:[2, 'abc'], rule99:[2, 'override']], ruleMap()
+        System.setProperty(SYS_PROP, '')
+    }
+
     void testConfigure_PropertiesFileDoesNotExist() {
-        configurer.propertiesFilename = 'DoesNotExist.properties'
+        configurer.defaultPropertiesFilename = 'DoesNotExist.properties'
         configurer.configure(ruleSet)
         assert ruleMap() == [rule1:[1, 'abc'], rule2:[2, 'def']]
     }
