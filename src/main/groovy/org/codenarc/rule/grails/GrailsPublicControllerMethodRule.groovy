@@ -29,6 +29,10 @@ import org.codehaus.groovy.ast.MethodNode
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match files
  * under the 'grails-app/controllers' folder. You can override this with a different regular
  * expression value if appropriate.
+ * <p/>
+ * This rule also sets the default value of <code>applyToClassNames</code> to only match class
+ * names ending in 'Controller'. You can override this with a different class name pattern
+ * (String) if appropriate.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$

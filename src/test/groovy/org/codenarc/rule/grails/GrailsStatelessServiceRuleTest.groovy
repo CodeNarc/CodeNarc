@@ -158,7 +158,6 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-
     void testApplyTo_Script_HasField() {
         final SOURCE = '''
             BigDecimal depositAmount        // not considered a field
@@ -173,7 +172,16 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_ReferenceWithinNonControllerClass() {
+    void testApplyTo_FieldWithinNonServiceClass() {
+        final SOURCE = '''
+            class MyServiceHelper {
+                BigDecimal depositAmount
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_FieldWithinNonServiceDirectory() {
         final SOURCE = '''
             class MyService {
                 BigDecimal depositAmount

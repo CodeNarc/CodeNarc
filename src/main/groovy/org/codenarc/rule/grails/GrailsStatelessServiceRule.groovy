@@ -56,6 +56,10 @@ import org.codenarc.rule.generic.StatelessClassRule
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match files
  * under the 'grails-app/services' folder. You can override this with a different regular
  * expression value if appropriate.
+ * <p/>
+ * This rule also sets the default value of <code>applyToClassNames</code> to only match class
+ * names ending in 'Service'. You can override this with a different class name pattern
+ * (String) if appropriate.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -64,6 +68,7 @@ class GrailsStatelessServiceRule extends StatelessClassRule {
     String name = 'GrailsStatelessService'
     int priority = 2
     String applyToFilesMatching = GrailsUtil.SERVICE_FILES
+    String applyToClassNames = GrailsUtil.SERVICE_CLASSES
 
     GrailsStatelessServiceRule() {
         ignoreFieldNames = 'dataSource,scope,sessionFactory,transactional,*Service'
