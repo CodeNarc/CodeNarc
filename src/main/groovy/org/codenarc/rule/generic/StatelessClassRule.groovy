@@ -18,7 +18,6 @@ package org.codenarc.rule.generic
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.WildcardPattern
 
 /**
@@ -50,9 +49,6 @@ import org.codenarc.util.WildcardPattern
  * <p/>
  * There is one exception for the <code>ignoreFieldTypes</code> property: if the field is declared
  * with a modifier/type of <code>def</code>, then the type resolves to <code>java.lang.Object</code>.
- * <p/>
- * Either the <code>applyToFileNames</code> or <code>applyToFilesMatching</code> must be set
- * (not empty or null), or else this rule does nothing.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -63,10 +59,6 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     String ignoreFieldNames
     String ignoreFieldTypes
     Class astVisitorClass = StatelessClassAstVisitor
-
-    boolean isReady() {
-        return applyToFileNames || applyToFilesMatching
-    }
 }
 
 class StatelessClassAstVisitor extends AbstractAstVisitor  {
