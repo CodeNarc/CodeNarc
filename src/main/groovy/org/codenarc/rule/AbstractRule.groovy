@@ -237,14 +237,15 @@ abstract class AbstractRule implements Rule {
     }
 
     /**
-     * Return the package name for the specified import statement
+     * Return the package name for the specified import statement or else an empty String
      * @param importNode - the ImportNode for the import
      * @return the name package being imported (i.e., the import minus the class name/spec)
+     *      or an empty String if the import contains no package component
      */
     protected String packageNameForImport(ImportNode importNode) {
         def importClassName = importNode.className
         def index = importClassName.lastIndexOf('.')
-        return importClassName.substring(0, index)
+        return (index != -1) ? importClassName.substring(0, index) : ''
     }
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {

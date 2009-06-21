@@ -91,6 +91,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTest {
         final SOURCE = '''
             import java.text.SimpleDateFormat
             import com.xxx.MyClass
+            import MyClassFromSamePackage
         '''
         assertNoViolations(SOURCE)
     }
