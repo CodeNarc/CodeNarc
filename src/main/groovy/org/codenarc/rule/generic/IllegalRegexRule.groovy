@@ -42,7 +42,8 @@ class IllegalRegexRule extends AbstractRule {
     void applyTo(SourceCode sourceCode, List violations) {
         def matcher = sourceCode.getText() =~ regex
         while (matcher.find()) {
-            violations.add(new Violation(rule:this, sourceLine:matcher.group(),
+            def lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.start())
+            violations.add(new Violation(rule:this, lineNumber:lineNumber, sourceLine:matcher.group(),
                     message:"Match found for illegal regular expression \"$regex\""))
         }
     }
