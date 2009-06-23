@@ -77,6 +77,14 @@ class SourceFileTest extends AbstractTest {
         assert sourceFile.ast.is(ast)
     }
 
+    void testGetLineNumberForCharacterIndex() {
+        assert sourceFile.getLineNumberForCharacterIndex(0) == 0
+        assert sourceFile.getLineNumberForCharacterIndex(1) == 0
+        assert sourceFile.getLineNumberForCharacterIndex(21) == 1
+        assert sourceFile.getLineNumberForCharacterIndex(999) == -1
+        assert sourceFile.getLineNumberForCharacterIndex(-1) == -1
+    }
+    
     void setUp() {
         super.setUp()
         file = new File(FILE)

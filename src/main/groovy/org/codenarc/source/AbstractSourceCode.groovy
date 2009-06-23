@@ -78,6 +78,28 @@ abstract class AbstractSourceCode implements SourceCode {
     }
 
     /**
+     * Return the line index for the line containing the character at the specified index within the source code.
+     * @param charIndex - the index of the character within the source code (zero-based)
+     * @return the line number (one-based) containing the specified character; Return -1 if charIndex is not valid.
+     */
+    int getLineNumberForCharacterIndex(int charIndex) {
+        int lineCount = 0
+        def source = getText()
+        if (charIndex >= source.size() || charIndex < 0) {
+            return -1
+        }
+        if (charIndex > 0) {
+            (charIndex-1..0).each { index ->
+                def ch = source[index]
+                if (ch == '\n') {
+                    lineCount++
+                }
+            }
+        }
+        return lineCount
+    }
+
+    /**
      * Return the normalized value of the specified path. Convert file separator chars to standard '/'.
      * @param path - the path to normalize
      * @return the normalized value
