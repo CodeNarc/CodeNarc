@@ -39,10 +39,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     }
 
     void testFinalRegex_DefaultValue() {
-        assert 'ABC' ==~ rule.finalRegex
-        assert 'ABC_123_DEF' ==~ rule.finalRegex
-        assert !('abc_def' ==~ rule.finalRegex)
-        assert !('ABC123abc' ==~ rule.finalRegex)
+        assert rule.finalRegex == null
     }
 
     void testStaticRegex_DefaultValue() {
@@ -50,7 +47,10 @@ class FieldNameRuleTest extends AbstractRuleTest {
     }
 
     void testStaticFinalRegex_DefaultValue() {
-        assert rule.staticFinalRegex == null
+        assert 'ABC' ==~ rule.staticFinalRegex
+        assert 'ABC_123_DEF' ==~ rule.staticFinalRegex
+        assert !('abc_def' ==~ rule.staticFinalRegex)
+        assert !('ABC123abc' ==~ rule.staticFinalRegex)
     }
 
     void testRegexIsNull() {
@@ -119,10 +119,11 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_Final_DefaultFinalRegex() {
         final SOURCE = '''
           class MyClass {
-            final int count
+            final int Count
+            final int ok
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'final int count')
+        assertSingleViolation(SOURCE, 3, 'final int Count')
     }
 
     void testApplyTo_Final_FinalRegexSet() {
@@ -191,7 +192,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
             static final int Count
           }
         '''
-        rule.finalRegex = null
+        rule.staticFinalRegex = null
         rule.staticRegex = /C.*/
         assertNoViolations(SOURCE)
     }
@@ -202,7 +203,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
             static final int Count
           }
         '''
-        rule.finalRegex = null
+        rule.staticFinalRegex = null
         rule.staticRegex = null
         rule.regex = /C.*/
         assertNoViolations(SOURCE)

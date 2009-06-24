@@ -21,23 +21,24 @@ import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Rule that verifies that the name of each field matches a regular expression. By default it checks that
- * non-<code>final</code> field names start with a lowercase letter and contains only letters or numbers.
- * By default, <code>final</code> field names start with an uppercase letter and contain only uppercase
- * letters, numbers and underscores. Implicit method names are ignored (i.e., 'main' and 'run' methods 
- * automatically created for Groovy scripts).
+ * field names (other than <code>static final</code>) start with a lowercase letter and contains only letters
+ * or numbers. By default, <code>static final</code> field names start with an uppercase letter and contain
+ * only uppercase letters, numbers and underscores. Implicit method names are ignored (i.e., 'main' and 'run'
+ * methods automatically created for Groovy scripts).
  * <p/>
  * The <code>regex</code> property specifies the default regular expression to validate a field name.
  * It is required and cannot be null or empty. It defaults to '[a-z][a-zA-Z0-9]*'.
  * <p/>
  * The <code>finalRegex</code> property specifies the regular expression to validate <code>final</code>
- * field names. It is optional but defaults to '[A-Z][A-Z0-9_]*'.
+ * field names. It is optional and defaults to null, so that <code>final</code> fields that are
+ * non-<code>static</code> will be validated using <code>regex</code>.
  * <p/>
  * The <code>staticRegex</code> property specifies the regular expression to validate <code>static</code>
  * field names. It is optional and defaults to null, so that <code>static</code> fields that are
  * non-<code>final</code> will be validated using <code>regex</code>.
  * <p/>
  * The <code>staticFinalRegex</code> property specifies the regular expression to validate <code>static final</code>
- * field names. It is optional and defaults to null, so that <code>finalRegex</code> is used by default.
+ * field names. It is optional but defaults to '[A-Z][A-Z0-9_]*'.
  * <p/>
  * The order of precedence for the regular expression properties is: <code>staticFinalRegex</code>,
  * <code>finalRegex</code>, <code>staticRegex</code> and finally <code>regex</code>. In other words, the first
@@ -51,8 +52,8 @@ class FieldNameRule extends AbstractAstVisitorRule {
     int priority = 2
     String regex = /[a-z][a-zA-Z0-9]*/
     String staticRegex
-    String finalRegex = DEFAULT_CONST_NAME
-    String staticFinalRegex
+    String finalRegex
+    String staticFinalRegex = DEFAULT_CONST_NAME
     Class astVisitorClass = FieldNameAstVisitor
 
     void validate() {
