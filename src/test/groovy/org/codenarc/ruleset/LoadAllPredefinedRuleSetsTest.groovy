@@ -35,7 +35,8 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTest {
         'rulesets/logging.xml',
         'rulesets/junit.xml',
         'rulesets/naming.xml',
-        'rulesets/size.xml'
+        'rulesets/size.xml',
+        'rulesets/unused.xml'
     ]
     private messages
 

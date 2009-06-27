@@ -1,0 +1,13 @@
+		--------------------------------------------------
+					  CodeNarc - Unused Rules
+		--------------------------------------------------
+
+Naming Rules  ("<rulesets/unused.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* UnusedPrivateField Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for private fields that are not referenced within the same class.
+
+

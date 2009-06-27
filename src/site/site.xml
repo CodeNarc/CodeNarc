@@ -60,6 +60,7 @@
             <item name="Logging Rules" href="/codenarc-rules-logging.html"/>
             <item name="Naming Rules" href="/codenarc-rules-naming.html"/>
             <item name="Size Rules" href="/codenarc-rules-size.html"/>
+            <item name="Unused Rules" href="/codenarc-rules-unused.html"/>
         </menu>
 
         ${reports}
