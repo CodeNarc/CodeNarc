@@ -10,4 +10,30 @@ Naming Rules  ("<rulesets/unused.xml>")
 
   Checks for private fields that are not referenced within the same class.
 
+  Known limitations:
+
+  * Does not recognize field access when field name is a GString (e.g. <<<this."${fieldName}">>>)
+
+  * Does not recognize access of private field of another instance (i.e. other than <<<this>>>)
+
+
+
+* UnusedPrivateMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for private methods that are not referenced within the same class.
+
+  Known limitations:
+
+  * Does not recognize method reference through property access (e.g. <<<getName()>>> accessed as <<<x.name>>>)
+
+  * Does not recognize method invocations when method name is a GString (e.g. <<<this."${methodName}">>>)
+
+  * Does not recognize invoking private method of another instance (i.e. other than <<<this>>>)
+
+  * Does not differentiate between multiple private methods with the same name but different parameters (i.e., overloaded)
+
+  * Does not check constructors
+
+
 

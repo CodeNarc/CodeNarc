@@ -107,16 +107,6 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'private int count')
     }
 
-    void testApplyTo_GStringPropertyReference() {
-        final SOURCE = '''
-            class MyClass {
-                private int count
-                def other = this."${count}"
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
     void testApplyTo_StringPropertyReference() {
         final SOURCE = '''
             class MyClass {
@@ -125,6 +115,16 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTest {
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_GStringPropertyReference() {
+        final SOURCE = '''
+            class MyClass {
+                private int count
+                def other = this."${'count'}"
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'private int count')
     }
 
     void testApplyTo_DereferencedGStringPropertyReference() {
