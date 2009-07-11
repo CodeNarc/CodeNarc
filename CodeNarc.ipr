@@ -331,7 +331,7 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <UsedPathMacros>
-    <macro name="M2_REPO" />
+    <macro name="M2_REPO" description="Maven repository" />
   </UsedPathMacros>
 </project>
 

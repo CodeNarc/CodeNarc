@@ -35,13 +35,13 @@ import org.codenarc.results.Results
 class HtmlReportWriter implements ReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
-    static final CSS_FILE = 'codenarc-htmlreport.css'
-    static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
-    static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
-    static final ROOT_PACKAGE_NAME = '<Root>'
-    static final MAX_SOURCE_LINE_LENGTH = 70
-    static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
-    static final LOG = Logger.getLogger(HtmlReportWriter)
+    private static final CSS_FILE = 'codenarc-htmlreport.css'
+    private static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
+    private static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
+    private static final ROOT_PACKAGE_NAME = '<Root>'
+    private static final MAX_SOURCE_LINE_LENGTH = 70
+    private static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
+    private static final LOG = Logger.getLogger(HtmlReportWriter)
 
     String title
     String outputFile = DEFAULT_OUTPUT_FILE
@@ -106,7 +106,6 @@ class HtmlReportWriter implements ReportWriter {
                 out << buildRuleDescriptions(analysisContext)
                 out << buildVersionFooter()
             }
-
         }
     }
 
@@ -215,9 +214,11 @@ class HtmlReportWriter implements ReportWriter {
                     th('Source Line / Message')
                 }
 
-                def violations = results.getViolationsWithPriority(1) +
+                def violations =
+                    results.getViolationsWithPriority(1) +
                     results.getViolationsWithPriority(2) +
-                    results.getViolationsWithPriority(3)
+                    results.getViolationsWithPriority(3) +
+                    results.getViolationsWithPriority(4)
 
                 violations.each { violation ->
                     def priorityCssClass = "priority${violation.rule.priority}"

@@ -58,12 +58,13 @@ abstract class AbstractTest extends GroovyTestCase {
     /**
      * Assert that the text contains each of the specified strings, in order
      * @param text - the text to search
-     * @param strings - the Strings that must be present within text, and appear in the order specified
+     * @param strings - the Strings that must be present within text, and appear
+     *      in the order specified; toString() is applied to each.
      */
     protected void assertContainsAllInOrder(String text, strings) {
         def startIndex = 0
         strings.each { string ->
-            def index = text.indexOf(string, startIndex)
+            def index = text.indexOf(string.toString(), startIndex)
             assert index > -1, "text does not contain [$string]"
             startIndex = index + 1
         }
@@ -83,6 +84,14 @@ abstract class AbstractTest extends GroovyTestCase {
      */
     protected void log(message) {
         println "[${classNameNoPackage()}] ${message.toString()}"
+    }
+
+    /**
+     * @return true if the version of Groovy currently running/compiling is NOT 1.5.x.
+     */
+    protected boolean isNotGroovy15() {
+        def version = new org.codehaus.groovy.runtime.InvokerHelper().version
+        return !version.startsWith('1.5')
     }
 
     private String classNameNoPackage() {

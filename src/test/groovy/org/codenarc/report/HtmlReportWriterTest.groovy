@@ -35,33 +35,53 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class HtmlReportWriterTest extends AbstractTest {
-    static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
-    static final TRUNCATED_LONG_LINE = 'throw new Exception() // Some very long message 12345678..901234567890'
-    static final MESSAGE = 'bad stuff'
-    static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:20, sourceLine:'if (file) {')
-    static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:33, message:MESSAGE)
-    static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:95, sourceLine:LONG_LINE, message: 'Other info')
-    static final OUTPUT_DIR = "."
-    static final REPORT_FILENAME = "HtmlReport.html"
-    static final REPORT_CONTENTS = [
-            'html',
-            'MyAction.groovy', MESSAGE, TRUNCATED_LONG_LINE, 
+    private static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
+    private static final TRUNCATED_LONG_LINE = 'throw new Exception() // Some very long message 12345678..901234567890'
+    private static final MESSAGE = 'bad stuff'
+    private static final LINE1 = 111
+    private static final LINE2 = 222
+    private static final LINE3 = 333
+    private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:'if (file) {')
+    private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
+    private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
+    private static final OUTPUT_DIR = "."
+    private static final REPORT_FILENAME = "HtmlReport.html"
+    private static final HTML_TAG = 'html'
+    private static final BOTTOM_LINK = "<a href='http://www.codenarc.org'>CodeNarc"
+    private static final NEW_REPORT_FILE = 'NewReport.html'
+    private static final TITLE = 'My Cool Project'
+    private static final BASIC_CONTENTS = [
+            HTML_TAG,
+            'MyAction.groovy', MESSAGE, TRUNCATED_LONG_LINE,
             'MyAction2.groovy',
             'MyActionTest.groovy',
-            "<a href='http://www.codenarc.org'>CodeNarc"]
-    static final NEW_REPORT_FILE = 'NewReport.html'
-    static final TITLE = 'My Cool Project'
+            BOTTOM_LINK]
 
-    def reportWriter
-    def analysisContext
-    def results
-    def ruleSet
+    private reportWriter
+    private analysisContext
+    private results
+    private ruleSet
 
     void testWriteOutReport() {
+        final CONTENTS = [
+                HTML_TAG,
+                'MyAction.groovy', 'RULE1', LINE1, 'RULE1', LINE1, 'RULE2', LINE2, MESSAGE, 'RULE3', LINE3, TRUNCATED_LONG_LINE,
+                'MyAction2.groovy', 'RULE3', LINE3, TRUNCATED_LONG_LINE,
+                'MyActionTest.groovy', 'RULE1', LINE1, 'RULE2', LINE2, MESSAGE,
+                BOTTOM_LINK]
         reportWriter.writeOutReport(analysisContext, results)
+        def reportText = getReportText()
+        assertContainsAllInOrder(reportText, CONTENTS)
+        assertContainsRuleIds(reportText)
+    }
 
-        def reportText = new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).text
-        assertContainsAllInOrder(reportText, REPORT_CONTENTS)
+    void testWriteOutReport_Priority4() {
+        VIOLATION1.rule.name = 'RULE4'
+        VIOLATION1.rule.priority = 4
+        final CONTENTS = [HTML_TAG, 'MyActionTest.groovy', 'RULE2', 2, LINE2, MESSAGE, 'RULE4', 4, LINE1, BOTTOM_LINK]
+        reportWriter.writeOutReport(analysisContext, results)
+        def reportText = getReportText()
+        assertContainsAllInOrder(reportText, CONTENTS)
         assertContainsRuleIds(reportText)
     }
 
@@ -70,9 +90,8 @@ class HtmlReportWriterTest extends AbstractTest {
         reportWriter.customMessagesBundleName = 'DoesNotExist'
         analysisContext.ruleSet = ruleSet
         reportWriter.writeOutReport(analysisContext, results)
-
-        def reportText = new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).text
-        assertContainsAllInOrder(reportText, REPORT_CONTENTS)
+        def reportText = getReportText()
+        assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, ['MyRuleXX', 'No description', 'MyRuleYY', 'No description'])
     }
 
@@ -81,9 +100,8 @@ class HtmlReportWriterTest extends AbstractTest {
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
         analysisContext.ruleSet = ruleSet
         reportWriter.writeOutReport(analysisContext, results)
-
-        def reportText = new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).text
-        assertContainsAllInOrder(reportText, REPORT_CONTENTS)
+        def reportText = getReportText()
+        assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, [biRule.name, 'MyRuleXX', 'My Rule XX', 'MyRuleYY', 'My Rule YY'])
     }
 
@@ -92,9 +110,8 @@ class HtmlReportWriterTest extends AbstractTest {
         reportWriter.outputFile = OUTPUT_FILE
         reportWriter.title = TITLE
         reportWriter.writeOutReport(analysisContext, results)
-
-        def reportText = new File(OUTPUT_FILE).text
-        assertContainsAllInOrder(reportText, REPORT_CONTENTS)
+        def reportText = getReportText(OUTPUT_FILE)
+        assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, ['Narc Report:', TITLE])
         assertContainsRuleIds(reportText)
     }
@@ -190,6 +207,10 @@ class HtmlReportWriterTest extends AbstractTest {
         def ruleIds = ruleSet.rules.collect { it.name }
         assertContainsAllInOrder(reportText, ruleIds.sort())
         assert !reportText.contains('No description')
+    }
+
+    private String getReportText(String filename=HtmlReportWriter.DEFAULT_OUTPUT_FILE) {
+        return new File(filename).text
     }
 
 }

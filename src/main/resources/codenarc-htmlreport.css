@@ -36,6 +36,11 @@
 		    font-weight: bold;
 		    text-align: center;
 		}
+        .priority4 {
+            color: gray;
+            font-weight: bold;
+            text-align: center;
+        }
 		.ruleName {
 		    font-weight: bold;
 		}
