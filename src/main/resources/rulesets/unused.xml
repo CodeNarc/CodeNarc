@@ -10,5 +10,6 @@
 
     <rule class='org.codenarc.rule.unused.UnusedPrivateFieldRule'/>
     <rule class='org.codenarc.rule.unused.UnusedPrivateMethodRule'/>
+    <rule class='org.codenarc.rule.unused.UnusedVariableRule'/>
 
 </ruleset>

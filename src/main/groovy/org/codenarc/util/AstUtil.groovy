@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.AnnotationNode
+import org.codehaus.groovy.ast.expr.DeclarationExpression
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -61,7 +62,7 @@ class AstUtil {
     * @param methodCall - the AST MethodCallExpression
     * @return the List of argument objects
     */
-    public static List getMethodArguments(MethodCallExpression methodCall) {
+    static List getMethodArguments(MethodCallExpression methodCall) {
         def argumentsExpression = methodCall.arguments
         if (respondsTo(argumentsExpression, 'getExpressions')) {
             return argumentsExpression.expressions
@@ -81,7 +82,7 @@ class AstUtil {
      * @param numArguments - the number of arguments passed into the method
      * @return true only if the Statement is a method call matching the specified criteria
      */
-    public static boolean isMethodCall(Statement stmt, String methodObject, String methodName, int numArguments) {
+    static boolean isMethodCall(Statement stmt, String methodObject, String methodName, int numArguments) {
         def match = false
         if (stmt instanceof ExpressionStatement) {
             def expression = stmt.expression
@@ -101,7 +102,7 @@ class AstUtil {
      * @param numArguments - the number of arguments passed into the method
      * @return true only if the method call matches the specified criteria
      */
-    public static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
+    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
         def match = isMethodCall(methodCall, methodObject, methodName)
         return match && getMethodArguments(methodCall).size() == numArguments
     }
@@ -114,7 +115,7 @@ class AstUtil {
      * @param methodName - the name of the method being called
      * @return true only if the method call matches the specified criteria
      */
-    public static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName) {
+    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName) {
         def match = false
         def objectExpression = methodCall.objectExpression
         if (objectExpression instanceof VariableExpression) {
@@ -130,7 +131,7 @@ class AstUtil {
      * @param methodName - the expected name of the method being called
      * @return true only if the method call name matches
      */
-    public static boolean isMethodNamed(MethodCallExpression methodCall, String methodName) {
+    static boolean isMethodNamed(MethodCallExpression methodCall, String methodName) {
         def method = methodCall.method
         return method.properties['value'] == methodName
     }
@@ -142,11 +143,21 @@ class AstUtil {
      * @param name - the name of the annotation
      * @return the AnnotationNode or else null 
      */
-    public static AnnotationNode getAnnotation(AnnotatedNode node, String name) {
+    static AnnotationNode getAnnotation(AnnotatedNode node, String name) {
         def annotations = node.annotations
         return annotations instanceof Map ?
             annotations[name] :                                         // Groovy 1.5
             annotations.find { annot -> annot.classNode.name == name }  // Groovy 1.6
+    }
+
+    /**
+     * Return the List of VariableExpression objects referenced by the specified DeclarationExpression.
+     * @param declarationExpression - the DeclarationExpression
+     * @return the List of VariableExpression objects
+     */
+    static List getVariableExpressions(DeclarationExpression declarationExpression) {
+        def leftExpression = declarationExpression.leftExpression
+        return leftExpression.properties['expressions'] ?: [leftExpression]
     }
 
     /**
@@ -155,7 +166,7 @@ class AstUtil {
      * @param methodName - the name of the method
      * @return true if the object responds to the named method
      */
-    static boolean respondsTo(Object object, String methodName) {
+    private static boolean respondsTo(Object object, String methodName) {
         return object.metaClass.respondsTo(object, methodName)
     }
 

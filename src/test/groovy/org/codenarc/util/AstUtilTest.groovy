@@ -28,6 +28,7 @@ import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codehaus.groovy.ast.AnnotationNode
 import org.apache.log4j.Logger
+import org.codehaus.groovy.ast.expr.DeclarationExpression
 
 /**
  * Tests for AstUtil
@@ -36,7 +37,7 @@ import org.apache.log4j.Logger
  * @version $Revision$ - $Date$
  */
 class AstUtilTest extends AbstractTest {
-    static final SOURCE_METHOD_CALL = '''
+    static final SOURCE = '''
         class MyClass {
             def otherMethod() {
                 object.print()
@@ -46,6 +47,7 @@ class AstUtilTest extends AbstractTest {
                 "stringMethodName"(123)
                 gstringMethodName = 'anotherMethod'
                 "$gstringMethodName"(234)
+                int myVariable = 99
             }
             @Before setUp() {  }
         }
@@ -82,7 +84,7 @@ class AstUtilTest extends AbstractTest {
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 2
         assert args[1].keyExpression.value == 'failonerror'
-        assert args[1].valueExpression.value == false
+        assert !args[1].valueExpression.value
     }
 
     void testIsMethodCall_ExactMatch() {
@@ -151,7 +153,7 @@ class AstUtilTest extends AbstractTest {
     }
 
     void testIsBlock_Block() {
-        applyVisitor(SOURCE_METHOD_CALL)
+        applyVisitor(SOURCE)
         def statement = visitor.statements.find { st -> st instanceof BlockStatement }
         assert AstUtil.isBlock(statement)
     }
@@ -182,10 +184,34 @@ class AstUtilTest extends AbstractTest {
         assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'Before') instanceof AnnotationNode
     }
 
+    void testGetVariableExpressions_SingleDeclaration() {
+        log("declarationExpressions=${visitor.declarationExpressions}")
+        def variableExpressions = AstUtil.getVariableExpressions(visitor.declarationExpressions[0])
+        log("variableExpressions=$variableExpressions")
+        assert variableExpressions.size() == 1
+        assert variableExpressions.name == ['myVariable']
+    }
+
+    void testGetVariableExpressions_MultipleDeclarations() {
+        final NEW_SOURCE = '''
+            class MyClass {
+                def otherMethod() {
+                    String (name1, name2) = 'abc'
+                }
+            }
+        '''
+        // Not valid under Groovy 1.5.x
+        if (isNotGroovy15()) {
+            applyVisitor(NEW_SOURCE)
+            def variableExpressions = AstUtil.getVariableExpressions(visitor.declarationExpressions[1])
+            assert variableExpressions.name == ['name1', 'name2']
+        }
+    }
+
     void setUp() {
         super.setUp()
         visitor = new AstUtilTestVisitor()
-        applyVisitor(SOURCE_METHOD_CALL)
+        applyVisitor(SOURCE)
     }
 
     private void applyVisitor(String source) {
@@ -210,6 +236,7 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     def methodNodes = [:]
     def methodCallExpressions = []
     def statements = []
+    def declarationExpressions = []
 
     void visitMethod(MethodNode methodNode) {
         LOG.info("visitMethod name=${methodNode.name}")
@@ -228,6 +255,11 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
         def args = AstUtil.getMethodArguments(methodCallExpression)
         LOG.info("visitMethodCallExpression object=${methodCallExpression.objectExpression} args=$args")
         super.visitMethodCallExpression(methodCallExpression)
+    }
+
+    void visitDeclarationExpression(DeclarationExpression declarationExpression) {
+        declarationExpressions << declarationExpression
+        super.visitDeclarationExpression(declarationExpression)
     }
 
     protected SourceUnit getSourceUnit() {

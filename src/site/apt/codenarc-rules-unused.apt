@@ -36,4 +36,13 @@ Naming Rules  ("<rulesets/unused.xml>")
   * Does not check constructors
 
 
+* UnusedVariable Rule
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for variables that are never referenced.
+
+  Known limitations:
+
+  * Does not recognize variable references on the same line as the variable declaration.
+
 
