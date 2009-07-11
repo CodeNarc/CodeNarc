@@ -120,12 +120,12 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
     }
 
     protected boolean matches(SourceCode sourceFile) {
-        return (!includesPattern || includesPattern.matches(sourceFile.path)) &&
-            (!excludesPattern || !excludesPattern.matches(sourceFile.path))
+        return includesPattern.matches(sourceFile.path) &&
+            !excludesPattern.matches(sourceFile.path)
     }
 
     protected void initializeWildcardPatterns() {
-        includesPattern = includes ? new WildcardPattern(includes) : null
-        excludesPattern = excludes ? new WildcardPattern(excludes) : null
+        includesPattern = new WildcardPattern(includes)
+        excludesPattern = new WildcardPattern(excludes, false)  // do not match by default
     }
 }

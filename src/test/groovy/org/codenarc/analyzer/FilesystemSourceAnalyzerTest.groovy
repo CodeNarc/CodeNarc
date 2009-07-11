@@ -23,7 +23,6 @@ import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTest
 import org.codenarc.source.SourceString
-import org.codenarc.util.WildcardPattern
 
 /**
  * Tests for FilesystemSourceAnalyzer.
@@ -32,10 +31,10 @@ import org.codenarc.util.WildcardPattern
  * @version $Revision$ - $Date$
  */
 class FilesystemSourceAnalyzerTest extends AbstractTest {
-    static final BASE_DIR = 'src/test/resources/sourcewithdirs'
-    def analyzer
-    def ruleSet
-    def testCountRule
+    private static final BASE_DIR = 'src/test/resources/sourcewithdirs'
+    private analyzer
+    private ruleSet
+    private testCountRule
 
     void testAnalyze_NullRuleSet() {
         analyzer.baseDirectory = BASE_DIR
@@ -54,7 +53,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTest {
     void testAnalyze_FilesOnly() {
         final DIR = 'src/test/resources/source'
         analyzer.baseDirectory = DIR
-        def ruleSet = new ListRuleSet([new TestPathRule()])
+        ruleSet = new ListRuleSet([new TestPathRule()])     // override
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
