@@ -18,6 +18,7 @@ package org.codenarc.rule.naming
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that verifies that the name of each method matches a regular expression. By default it checks that the
@@ -26,6 +27,10 @@ import org.codehaus.groovy.ast.MethodNode
  * <p/>
  * The <code>regex</code> property specifies the regular expression to check the method name against. It is
  * required and cannot be null or empty. It defaults to '[a-z]\w*'.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more
+ * (comma-separated) method names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -35,13 +40,16 @@ class MethodNameRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = MethodNameAstVisitor
     String regex = /[a-z]\w*/
+    String ignoreMethodNames
 }
 
 class MethodNameAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
         assert rule.regex
-        if (!(methodNode.name ==~ rule.regex)) {
-            addViolation(methodNode)
+        if (!new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)) {
+            if (!(methodNode.name ==~ rule.regex)) {
+                addViolation(methodNode)
+            }
         }
         super.visitMethod(methodNode)
     }

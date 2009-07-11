@@ -38,14 +38,18 @@ package org.codenarc.util
 class WildcardPattern {
     private List regexes = []
     private List strings = []
+    private defaultMatches
 
     /**
      * Construct a new WildcardPattern instance on a single pattern or a comma-separated list of patterns.
      * @param patternString - the pattern string, optionally including wildcard characters ('*' or '?');
      *      may optionally contain more than one pattern, separated by commas; may be null or empty to always match
+     * @param defaultMatches - a boolean indicating whether <code>matches()</code> should
+     *      return true if the pattern string is either empty or null. This parameter is
+     *      optional and defaults to <code>true</code>.
      */
-    WildcardPattern(String patternString) {
-        assert patternString != null
+    WildcardPattern(String patternString, boolean defaultMatches=true) {
+        this.defaultMatches = defaultMatches
         def patterns = patternString ? patternString.tokenize(',') : []
         patterns.each { pattern -> 
             if (containsWildcards(pattern)) {
@@ -58,13 +62,17 @@ class WildcardPattern {
     }
 
     /**
-     * Return true if the specified String matches the pattern
+     * Return true if the specified String matches the pattern or if the original
+     * patternString (specified in the constructor) was null or empty and the
+     * value for defaultMatches (also specified in the constructor) was true.
      * @param string - the String to check
      * @return true if the String matches the pattern
      */
     boolean matches(String string) {
-        return (regexes.empty && strings.empty) ||
-            regexes.find { regex -> string ==~ regex } ||
+        if (regexes.empty && strings.empty) {
+            return defaultMatches
+        }
+        return regexes.find { regex -> string ==~ regex } ||
             strings.contains(string)
     }
 

@@ -138,6 +138,39 @@ class ParameterNameRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 4, 'int Count = 23', 3, 'BigDecimal deposit_amount')
     }
 
+    void testApplyTo_IgnoreParametersNames_MatchesSingleName() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod(BigDecimal deposit_amount) { }
+            }
+        '''
+        rule.ignoreParameterNames = 'deposit_amount'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreParameterNames_MatchesNoNames() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod(BigDecimal deposit_amount) { }
+            }
+        '''
+        rule.ignoreParameterNames = 'Other'
+        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
+    }
+
+    void testApplyTo_IgnoreParameterNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod(BigDecimal deposit_amount) { }
+                String m2(int GOOD) { }
+                def m4(int _amount) { 100.25 }
+                def m5(int OTHER_name) { }
+            }
+        '''
+        rule.ignoreParameterNames = 'OTHER?name,_*,GOOD'
+        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
+    }
+
     void testApplyTo_NoParameterDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

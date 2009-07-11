@@ -18,6 +18,8 @@ package org.codenarc.rule.naming
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that verifies that the name of each variable matches a regular expression. By default it checks that
@@ -31,6 +33,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * The <code>finalRegex</code> property specifies the regular expression to validate <code>final</code>
  * variable names. It is optional but defaults to '[A-Z][A-Z0-9_]*'. If not set, then <code>regex</code> is
  * used to validate <code>final</code> variables.  
+ * <p/>
+ * The <code>ignoreVariableNames</code> property optionally specifies one or more
+ * (comma-separated) variable names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -40,7 +46,7 @@ class VariableNameRule extends AbstractAstVisitorRule {
     int priority = 2
     String regex = DEFAULT_VAR_NAME
     String finalRegex = DEFAULT_CONST_NAME
-
+    String ignoreVariableNames
     Class astVisitorClass = VariableNameAstVisitor
 }
 
@@ -48,12 +54,13 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
         if (isFirstVisit(declarationExpression)) {
-            def leftExpression = declarationExpression.leftExpression
-            def varExpressions = leftExpression.properties['expressions'] ?: [leftExpression]
+            def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
             def re = rule.finalRegex && isFinal(declarationExpression, varExpressions[0]) ? rule.finalRegex : rule.regex
 
             varExpressions.each { varExpression ->
-                if (!(varExpression.name ==~ re)) {
+
+                if (!new WildcardPattern(rule.ignoreVariableNames, false).matches(varExpression.name) &&
+                        !(varExpression.name ==~ re)) {
                     def msg = varExpressions.size() > 1 ? "Variable name: [$varExpression.name]" : null
                     addViolation(declarationExpression, msg)
                 }

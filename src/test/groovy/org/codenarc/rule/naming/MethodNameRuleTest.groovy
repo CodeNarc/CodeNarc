@@ -98,6 +98,39 @@ class MethodNameRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
+        final SOURCE = '''
+          class MyClass {
+            def MyMethod() { println 'bad' }
+          }
+        '''
+        rule.ignoreMethodNames = 'MyMethod'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
+        final SOURCE = '''
+          class MyClass {
+            def MyMethod() { println 'bad' }
+          }
+        '''
+        rule.ignoreMethodNames = 'OtherMethod'
+        assertSingleViolation(SOURCE, 3, 'def MyMethod')
+    }
+
+    void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+          class MyClass {
+            def MyMethod() { println 'bad' }
+            String GOOD_NAME() { }
+            def _amount() { }
+            def OTHER_name() { }
+          }
+        '''
+        rule.ignoreMethodNames = 'OTHER?name,_*,GOOD_NAME' 
+        assertSingleViolation(SOURCE, 3, 'def MyMethod')
+    }
+
     void testApplyTo_NoMethodDefinition() {
         final SOURCE = '''
             class MyClass {

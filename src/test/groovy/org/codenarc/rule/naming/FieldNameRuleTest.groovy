@@ -209,6 +209,39 @@ class FieldNameRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreFieldNames_MatchesSingleName() {
+        final SOURCE = '''
+          class MyClass {
+            static int Count
+          }
+        '''
+        rule.ignoreFieldNames = 'Count'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreFieldNames_MatchesNoNames() {
+        final SOURCE = '''
+          class MyClass {
+            int Count
+          }
+        '''
+        rule.ignoreFieldNames = 'Other'
+        assertSingleViolation(SOURCE, 3, 'int Count')
+    }
+
+    void testApplyTo_IgnoreFieldNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+          class MyClass {
+            String GOOD_NAME = 'good'
+            static int Count
+            def _amount = 100.25
+            def OTHER_name
+          }
+        '''
+        rule.ignoreFieldNames = 'OTHER?name,_*,GOOD_NAME' 
+        assertSingleViolation(SOURCE, 4, 'static int Count')
+    }
+
     void testApplyTo_Script() {
         final SOURCE = '''
             BigDecimal deposit_amount       // not considered a field

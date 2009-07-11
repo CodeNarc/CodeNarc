@@ -242,6 +242,45 @@ class VariableNameRuleTest extends AbstractRuleTest {
         }
     }
 
+    void testApplyTo_IgnoreVariableNames_MatchesSingleName() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    BigDecimal deposit_amount
+                }
+            }
+        '''
+        rule.ignoreVariableNames = 'deposit_amount'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreVariableNames_MatchesNoNames() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    BigDecimal deposit_amount
+                }
+            }
+        '''
+        rule.ignoreVariableNames = 'Other'
+        assertSingleViolation(SOURCE, 4, 'BigDecimal deposit_amount')
+    }
+
+    void testApplyTo_IgnoreVariableNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    String GOOD_NAME = 'good'
+                    BigDecimal deposit_amount
+                    def _amount = 100.25
+                    def OTHER_name
+                }
+            }
+        '''
+        rule.ignoreVariableNames = 'OTHER?name,_*,GOOD_NAME'
+        assertSingleViolation(SOURCE, 5, 'BigDecimal deposit_amount')
+    }
+
     void testApplyTo_Enums() {
         final SOURCE = '''
             public enum AuthorizationLevel { 
@@ -253,11 +292,6 @@ class VariableNameRuleTest extends AbstractRuleTest {
 
     protected Rule createRule() {
         return new VariableNameRule()
-    }
-
-    private boolean isNotGroovy15() {
-        def version = new org.codehaus.groovy.runtime.InvokerHelper().version
-        return !version.startsWith('1.5')
     }
 
 }

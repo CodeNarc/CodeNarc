@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that verifies that the name of each parameter matches a regular expression. This rule applies
@@ -28,6 +29,10 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
  * <p/>
  * The <code>regex</code> property specifies the default regular expression used to validate the
  * parameter name. It is required and cannot be null or empty. It defaults to '[a-z][a-zA-Z0-9]*'.
+ * <p/>
+ * The <code>ignoreParameterNames</code> property optionally specifies one or more
+ * (comma-separated) parameter names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -36,6 +41,7 @@ class ParameterNameRule extends AbstractAstVisitorRule {
     String name = 'ParameterName'
     int priority = 2
     String regex = DEFAULT_VAR_NAME
+    String ignoreParameterNames
     Class astVisitorClass = ParameterNameAstVisitor
 
     void validate() {
@@ -64,8 +70,10 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
 
     private void processParameters(parameters) {
         parameters.each { parameter ->
-            if (parameter.lineNumber >= 0 && !(parameter.name ==~ rule.regex)) {
-                addViolation(parameter)
+            if (!new WildcardPattern(rule.ignoreParameterNames, false).matches(parameter.name)) {
+                if (parameter.lineNumber >= 0 && !(parameter.name ==~ rule.regex)) {
+                    addViolation(parameter)
+                }
             }
         }
     }

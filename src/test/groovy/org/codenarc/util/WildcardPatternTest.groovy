@@ -25,8 +25,24 @@ import org.codenarc.test.AbstractTest
  */
 class WildcardPatternTest extends AbstractTest {
 
-    void testConstructor_Null() {
-        shouldFailWithMessageContaining('pattern') { new WildcardPattern(null) }
+    void testMatches_DefaultMatches_True() {
+        assert new WildcardPattern(null, true).matches('')
+        assert new WildcardPattern(null, true).matches('abc')
+        assert new WildcardPattern('', true).matches('')
+        assert new WildcardPattern('', true).matches('abc')
+        assert new WildcardPattern('a', true).matches('a')
+
+        assert !new WildcardPattern('a', true).matches('b')
+    }
+
+    void testMatches_DefaultMatches_False() {
+        assert new WildcardPattern('a', false).matches('a')
+
+        assert !new WildcardPattern('a', false).matches('b')
+        assert !new WildcardPattern(null, false).matches('')
+        assert !new WildcardPattern(null, false).matches('abc')
+        assert !new WildcardPattern('', false).matches('')
+        assert !new WildcardPattern('', false).matches('abc')
     }
 
     void testMatches() {

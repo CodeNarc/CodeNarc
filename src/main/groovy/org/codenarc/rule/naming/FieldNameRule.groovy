@@ -18,6 +18,7 @@ package org.codenarc.rule.naming
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that verifies that the name of each field matches a regular expression. By default it checks that
@@ -43,6 +44,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * The order of precedence for the regular expression properties is: <code>staticFinalRegex</code>,
  * <code>finalRegex</code>, <code>staticRegex</code> and finally <code>regex</code>. In other words, the first
  * regex in that list matching the modifiers for the field is the one that is applied for the field name validation.
+ * <p/>
+ * The <code>ignoreFieldNames</code> property optionally specifies one or more
+ * (comma-separated) field names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -54,6 +59,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
     String staticRegex
     String finalRegex
     String staticFinalRegex = DEFAULT_CONST_NAME
+    String ignoreFieldNames
     Class astVisitorClass = FieldNameAstVisitor
 
     void validate() {
@@ -62,22 +68,25 @@ class FieldNameRule extends AbstractAstVisitorRule {
 }
 
 class FieldNameAstVisitor extends AbstractAstVisitor  {
+
     void visitField(FieldNode fieldNode) {
-        def re = rule.regex
-        def mod = fieldNode.modifiers
+        if (!new WildcardPattern(rule.ignoreFieldNames, false).matches(fieldNode.name)) {
+            def re = rule.regex
+            def mod = fieldNode.modifiers
 
-        if (mod & FieldNode.ACC_STATIC) {
-            re = rule.staticRegex ?: re
-        }
-        if (mod & FieldNode.ACC_FINAL) {
-            re = rule.finalRegex ?: re
-        }
-        if ((mod & FieldNode.ACC_FINAL) && (mod & FieldNode.ACC_STATIC)) {
-            re = rule.staticFinalRegex ?: re
-        }
+            if (mod & FieldNode.ACC_STATIC) {
+                re = rule.staticRegex ?: re
+            }
+            if (mod & FieldNode.ACC_FINAL) {
+                re = rule.finalRegex ?: re
+            }
+            if ((mod & FieldNode.ACC_FINAL) && (mod & FieldNode.ACC_STATIC)) {
+                re = rule.staticFinalRegex ?: re
+            }
 
-        if (!(fieldNode.name ==~ re)) {
-            addViolation(fieldNode)
+            if (!(fieldNode.name ==~ re)) {
+                addViolation(fieldNode)
+            }
         }
         super.visitField(fieldNode)
     }
