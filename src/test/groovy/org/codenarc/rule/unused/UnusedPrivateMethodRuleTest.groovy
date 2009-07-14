@@ -69,7 +69,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTest {
             class MyClass {
                 private String getName() { 'abc' }
                 def doStuff() {
-                    def newName = this.name     // access getName() method
+                    def newName = this.name     // known limitation: access getName() method
                 }
           }
         '''
@@ -81,7 +81,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTest {
             class MyClass {
                 private int countStuff() { return 99 }
                 int somePublicMethod() { }
-                def dateFormat = java.text.DateFormat.getDateTimeInstance()
+                def abc = 'abc'
                 private String getName() { 'abc' }
                 private getPrice() { 0.0 }
 

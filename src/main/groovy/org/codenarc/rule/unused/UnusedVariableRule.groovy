@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that checks for variables that are not referenced.
@@ -47,8 +48,8 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         super.visitDeclarationExpression(declarationExpression)
     }
 
-    void visitBlockStatement(BlockStatement block) {
-        super.visitBlockStatement(block)
+    void visitClass(ClassNode classNode) {
+        super.visitClass(classNode)
         unusedVariables.each { unusedVariableExpression ->
             addViolation(unusedVariableExpression)
         }

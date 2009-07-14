@@ -74,6 +74,20 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_ReferencedFromReturn() {
+        final SOURCE = '''
+            def defaultMethod = dc.metaClass.getMetaMethod(name, args)
+            if(x == 99) {
+                println "too much"
+                if (y > 5){
+                     println 'way too much'
+                 }
+             }
+             return defaultMethod.invoke(delegate, args)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_ReferencePropertyWithSameName() {
         final SOURCE = '''
             class MyClass {
