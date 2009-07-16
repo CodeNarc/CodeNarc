@@ -74,6 +74,22 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_VariableWithSameNameReferencedInAnotherBlock() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    int count = 23
+                }
+                def myOtherMethod() {
+                    println count
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+        // TODO: Should be:
+        //assertSingleViolation(SOURCE, 4, 'int count = 23')
+    }
+
     void testApplyTo_ReferencedFromReturn() {
         final SOURCE = '''
             def defaultMethod = dc.metaClass.getMetaMethod(name, args)
@@ -110,6 +126,46 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ReferenceClosureVariableByInvokingIt() {
+        final SOURCE = '''
+            class MyClass {
+                def doSomething() {
+                    def myClosure = { println 'ok' }
+                    myClosure()
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ReferenceNestedClosureVariablesByInvokingThem() {
+        final SOURCE = '''
+            class MyClass {
+                def doSomething() {
+                    def outerClosure = {
+                        def innerClosure = { count -> println 'ok' }
+                        innerClosure(99)
+                    }
+                    outerClosure()
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_MethodCallWithSameName() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    int count = 23
+                    this.count()
+                }
+                def count() { println 99 }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'int count = 23')
     }
 
     void testApplyTo_ReferencedOnSameLineAsDeclaration() {

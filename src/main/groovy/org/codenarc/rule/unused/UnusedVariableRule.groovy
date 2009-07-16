@@ -22,6 +22,9 @@ import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
 
 /**
  * Rule that checks for variables that are not referenced.
@@ -37,12 +40,18 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
 
 class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     private unusedVariables = []
+    private unusedClosureVariables = []
 
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
             varExpressions.each { varExpression ->
-                unusedVariables << varExpression
+                if (declarationExpression.rightExpression && declarationExpression.rightExpression instanceof ClosureExpression) {
+                    unusedClosureVariables << varExpression
+                }
+                else {
+                    unusedVariables << varExpression
+                }
             }
         }
         super.visitDeclarationExpression(declarationExpression)
@@ -64,5 +73,27 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         }
         
         super.visitVariableExpression(expression)
+    }
+
+    void visitMethodCallExpression(MethodCallExpression call) {
+        // If there happens to be a method call on a method with the same name as the variable.
+        // This handles the case of defining a closure and then executing it, e.g.:
+        //      def myClosure = { println 'ok' }
+        //      myClosure()
+        // But this could potentially "hide" some unused variables (i.e. false negatives).
+        if (call.objectExpression instanceof VariableExpression &&
+            call.objectExpression.name == 'this' &&
+            call.method instanceof ConstantExpression) {
+
+            removeUnusedClosureVariable(call.method.value)
+        }
+        super.visitMethodCallExpression(call)
+    }
+
+    private void removeUnusedClosureVariable(String name) {
+        def referencedVariable = unusedClosureVariables.find { it.name == name }
+        if (referencedVariable) {
+            unusedClosureVariables.remove(referencedVariable)
+        }
     }
 }
