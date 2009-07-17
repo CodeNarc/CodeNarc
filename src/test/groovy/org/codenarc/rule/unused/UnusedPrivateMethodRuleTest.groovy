@@ -140,6 +140,18 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'private static int countStuff() { }')
     }
 
+    void testApplyTo_PrivateStaticMethodAccessedThroughClassName() {
+        final SOURCE = '''
+            class MyClass {
+                static int getTotal() {
+                    println "total=${MyClass.countStuff()}"
+                }
+                private static int countStuff() { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_GStringMethodReference() {
         final SOURCE = '''
             class MyClass {

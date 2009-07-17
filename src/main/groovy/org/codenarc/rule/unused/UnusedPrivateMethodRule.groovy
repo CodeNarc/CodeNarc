@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.StaticMethodCallExpression
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.
@@ -46,8 +47,10 @@ class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
 
 class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
     private unusedPrivateMethods
+    private currentClassNode
 
     void visitClass(ClassNode classNode) {
+        this.currentClassNode = classNode
         this.unusedPrivateMethods = classNode.methods.findAll { methodNode ->
             methodNode.modifiers & FieldNode.ACC_PRIVATE
         }
@@ -56,20 +59,33 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
         unusedPrivateMethods.each { unusedPrivateMethod ->
             addViolation(unusedPrivateMethod)
         }
+        this.currentClassNode = null
     }
 
     void visitMethodCallExpression(MethodCallExpression expression) {
-        if (    expression.objectExpression instanceof VariableExpression &&
-                expression.objectExpression.name == 'this' &&
-                expression.method instanceof ConstantExpression) {
-
+        if (isMethodCall(expression, 'this')) {    
             removeUnusedPrivateMethods(expression.method.value)
         }
+
+        // Static invocation through current class name
+        if (isMethodCall(expression, currentClassNode.nameWithoutPackage)) {    
+            removeUnusedPrivateMethods(expression.method.value)
+        }
+
         super.visitMethodCallExpression(expression)
     }
-    
-    private void removeUnusedPrivateMethods(String name) {
-        def referencedMethods = unusedPrivateMethods.findAll { it.name == name }
+
+    private boolean isMethodCall(MethodCallExpression expression, String targetName) {
+        return expression.objectExpression instanceof VariableExpression &&
+               expression.objectExpression.name == targetName &&
+               expression.method instanceof ConstantExpression
+    }
+
+    private void removeUnusedPrivateMethods(String name, boolean staticOnly=false) {
+        def referencedMethods = unusedPrivateMethods.findAll { methodNode ->
+            methodNode.name == name &&
+            (!staticOnly || methodNode.modifiers & FieldNode.ACC_STATIC)
+        }
         referencedMethods.each { referencedMethod ->
             unusedPrivateMethods.remove(referencedMethod)
         }
