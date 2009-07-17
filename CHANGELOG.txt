@@ -2,6 +2,33 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.6 (17 Jul 2009)
+------------------------------------
+BUG FIXES
+- Fix BUG #2798845 : “StringIndexOutOfBoundsException” https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2798845&group_id=250145
+- Fix BUG #2799752: GrailsPublicControllerMethodRule - should only apply itself to methods within classes that have suffix "Controller". (see email from Jason Anderson, May 26, 2009) https://sourceforge.net/tracker/?func=detail&aid=2799752&group_id=250145&atid=1126573
+- Fix BUG #2796953: StatelessClassRule requires applyToFileNames or applyToFilesMatching.  https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2796953&group_id=250145
+- Fix BUG #2811213: “FieldNameRule: Names for final fields - not be all caps”. FieldNameRule: Field names for final instance fields should not default to be all caps like static final fields. For instance: final List sentEmails = []. Rather, “If a property is declared final the private field is created final and no setter is generated.” (http://groovy.codehaus.org/Groovy+Beans). So, they should be named with “normal” naming conventions. Re-purpose the finalRegex property to just apply to final instance fields and default to null so that final field names use same convention as non-final. https://sourceforge.net/tracker/?func=detail&aid=2811213&group_id=250145&atid=1126573.
+- Fix: GrailsStatelessServiceRule: Should only apply to *Service classes.
+RULES
+- Implement UnusedVariableRule. (unused)
+- Implement UnusedPrivateMethodRule. (unused)
+- Implement UnusedPrivateFieldRule. (unused).
+- MethodNameRule: Add support for ignoreMethodNames.
+- ParameterNameRule: Add support for ignoreParameterNames.
+- VariableNameRule: Add support for ignoreVariableNames.
+- FieldNameRule: Add support for ignoreFieldNames.
+- IllegalRegexRule: Include line numbers in rule violations.
+INFRASTRUCTURE
+- Allow setting custom name and path for “codenarc.properties” file using “codenarc.properties.file” system property.
+- WildcardPattern: Add optional defaultMatches constructor parameter to specify return value of matches() when the pattern string is null or empty.
+- HtmlReportWriter: Show rules with priority 4. This enables configuring rules to be included in the report but not fail the build.
+- SourceCode: Add int getLineNumberForCharacterIndex(int charIndex).
+- CodeNarcRunner: Don’t mandate that reportWriters is non-empty.
+OTHER
+- Publish CodeNarc to Maven repository.
+
+
 Changes in version 0.5 (24 May 2009)
 ------------------------------------
 BUG FIXES
