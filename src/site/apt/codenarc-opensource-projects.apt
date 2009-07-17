@@ -26,7 +26,7 @@ CodeNarc - Open Source Project Reports
 * Gradle
 ~~~~~~~~~
 
-  <<CodeNarc>> report for {{{CodeNarc-Gradle-Report.html}Gradle 0.6}}
+  <<CodeNarc>> report for {{{CodeNarc-Gradle-Report.html}Gradle 0.6.1}}
 
 
 * {Generic RuleSet}
@@ -38,23 +38,17 @@ CodeNarc - Open Source Project Reports
         xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
         xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
 
-    <description>Sample rule set</description>
+    <description>Sample generic rule set</description>
 
     <ruleset-ref path='rulesets/basic.xml'/>
-
-    <ruleset-ref path='rulesets/braces.xml'/>
-
-    <ruleset-ref path='rulesets/exceptions.xml'/>
 
     <ruleset-ref path='rulesets/imports.xml'/>
 
     <ruleset-ref path='rulesets/junit.xml'/>
 
-    <ruleset-ref path='rulesets/logging.xml'/>
-
-    <ruleset-ref path='rulesets/naming.xml'/>
-
     <ruleset-ref path='rulesets/size.xml'/>
+
+    <ruleset-ref path='rulesets/unused.xml'/>
 
  </ruleset>
 +----------------------------------------------------------------------------------------
