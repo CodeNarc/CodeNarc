@@ -63,14 +63,14 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
                 expression.objectExpression.name == 'this' &&
                 expression.method instanceof ConstantExpression) {
 
-            removeUnusedPrivateMethod(expression.method.value)
+            removeUnusedPrivateMethods(expression.method.value)
         }
         super.visitMethodCallExpression(expression)
     }
     
-    private void removeUnusedPrivateMethod(String name) {
-        def referencedMethod = unusedPrivateMethods.find { it.name == name }
-        if (referencedMethod) {
+    private void removeUnusedPrivateMethods(String name) {
+        def referencedMethods = unusedPrivateMethods.findAll { it.name == name }
+        referencedMethods.each { referencedMethod ->
             unusedPrivateMethods.remove(referencedMethod)
         }
     }

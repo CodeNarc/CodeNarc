@@ -107,6 +107,18 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_MultipleOverloadedMethods() {
+        final SOURCE = '''
+            class MyClass {
+                private int fireEvent(int index) { }
+                private int fireEvent(String name) { }
+                private int fireEvent(int index, String name) { }
+                def other = this.fireEvent(object)
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_ReferenceMethodOfAnotherObject() {
         final SOURCE = '''
             class MyClass {
