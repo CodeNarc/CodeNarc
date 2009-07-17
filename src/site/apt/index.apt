@@ -48,4 +48,14 @@ CodeNarc
 
   * Java 1.4, 1.5 and 1.6
 
- 
+
+* Getting CodeNarc from the Maven2 Central Repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  For projects built using {{{http://maven.apache.org/}Maven}}, <<CodeNarc>> is now available
+  from the <<Maven Central Repository>>.
+
+    * <<groupId>> = <<<org.codenarc>>>
+
+    * <<artifactId>> = <<<CodeNarc>>>
+  
