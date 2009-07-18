@@ -21,6 +21,9 @@ CodeNarc
   Take a look at a {{{SampleCodeNarcReport.html}Sample CodeNarc Report}}, or example reports
   from popular Groovy-based {{{codenarc-opensource-projects.html}open source projects}}.
 
+  <<CodeNarc>> plugins are available for {{{http://www.grails.org/plugin/codenarc/}Grails}}
+  and {{{http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/}Griffon}}. 
+
   <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
   and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well
   as others.
