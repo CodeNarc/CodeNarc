@@ -23,8 +23,6 @@ CodeNarc - Road Map
 
   * Analyze source code within jar files or zip files.
 
-  * Create Grails plugin.
-
   * Create Hudson plugin.
 
   * Create Eclipse plugin.
