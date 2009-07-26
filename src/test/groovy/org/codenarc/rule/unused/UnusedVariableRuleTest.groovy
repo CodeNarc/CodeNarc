@@ -79,15 +79,48 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
             class MyClass {
                 def myMethod() {
                     int count = 23
+                    def name = 'abc'
+                    println name
                 }
                 def myOtherMethod() {
                     println count
                 }
             }
         '''
+        assertSingleViolation(SOURCE, 4, 'int count = 23')
+    }
+
+    void testApplyTo_SameVariableInOtherBlocks() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod1() {
+                    int count = 23
+                }
+                def myOtherMethod() {
+                    println count
+                }
+                def myMethod2() {
+                    int count = 99
+                }
+            }
+        '''
+        assertTwoViolations(SOURCE, 4, 'int count = 23', 10, 'int count = 99')
+    }
+
+    void testApplyTo_NestedBlock() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    int count = 23
+                    if (ready) {
+                        def name = 'abc'
+                        println count
+                        println name
+                    }
+                }
+            }
+        '''
         assertNoViolations(SOURCE)
-        // TODO: Should be:
-        //assertSingleViolation(SOURCE, 4, 'int count = 23')
     }
 
     void testApplyTo_ReferencedFromReturn() {
@@ -133,7 +166,9 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
             class MyClass {
                 def doSomething() {
                     def myClosure = { println 'ok' }
-                    myClosure()
+                    if (ready) {
+                        myClosure()
+                    }
                 }
             }
         '''
@@ -153,6 +188,17 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_UnusedClosureVariable() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    def count = { println 'ok' }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, "def count = { println 'ok' }")
     }
 
     void testApplyTo_MethodCallWithSameName() {

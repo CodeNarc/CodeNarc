@@ -21,7 +21,6 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
@@ -39,39 +38,45 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
 }
 
 class UnusedVariableAstVisitor extends AbstractAstVisitor  {
-    private unusedVariables = []
-    private unusedClosureVariables = []
+    private static final VARIABLES = 'variables'
+    private static final CLOSURE_VARIABLES = 'closureVariables'
+    private allVariables = [] as Stack
+    private currentVariables
 
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
             varExpressions.each { varExpression ->
                 if (declarationExpression.rightExpression && declarationExpression.rightExpression instanceof ClosureExpression) {
-                    unusedClosureVariables << varExpression
+                    currentVariables[CLOSURE_VARIABLES][varExpression] = false
                 }
                 else {
-                    unusedVariables << varExpression
+                    currentVariables[VARIABLES][varExpression] = false
                 }
             }
         }
         super.visitDeclarationExpression(declarationExpression)
     }
 
-    void visitClass(ClassNode classNode) {
-        super.visitClass(classNode)
-        unusedVariables.each { unusedVariableExpression ->
-            addViolation(unusedVariableExpression)
-        }
-    }
+    void visitBlockStatement(BlockStatement block) {
+        currentVariables = [(VARIABLES):[:], (CLOSURE_VARIABLES):[:]]
+        allVariables.push(currentVariables)
 
+        super.visitBlockStatement(block)
+
+        def allCurrentVariables = currentVariables[VARIABLES] + currentVariables[CLOSURE_VARIABLES]
+        allCurrentVariables.each { varExpression, isUsed ->
+            if (!isUsed) {
+                addViolation(varExpression)
+            }
+        }
+
+        allVariables.pop()
+        currentVariables = allVariables.empty() ? null : allVariables.peek()
+    }
+    
     void visitVariableExpression(VariableExpression expression) {
-        def referencedVariable = unusedVariables.find { var ->
-            var.name == expression.name && var.lineNumber != expression.lineNumber
-        }
-        if (referencedVariable) {
-            unusedVariables.remove(referencedVariable)
-        }
-        
+        markVariableAsReferenced(VARIABLES, expression.name, expression.lineNumber)
         super.visitVariableExpression(expression)
     }
 
@@ -84,16 +89,19 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         if (call.objectExpression instanceof VariableExpression &&
             call.objectExpression.name == 'this' &&
             call.method instanceof ConstantExpression) {
-
-            removeUnusedClosureVariable(call.method.value)
+            markVariableAsReferenced(CLOSURE_VARIABLES, call.method.value, call.method.lineNumber)
         }
         super.visitMethodCallExpression(call)
     }
 
-    private void removeUnusedClosureVariable(String name) {
-        def referencedVariable = unusedClosureVariables.find { it.name == name }
-        if (referencedVariable) {
-            unusedClosureVariables.remove(referencedVariable)
+    private void markVariableAsReferenced(String varType, String varName, Integer lineNumber) {
+        for(blockVariables in allVariables) {
+            for(var in blockVariables[varType].keySet()) {
+                if (var.name == varName && var.lineNumber != lineNumber) {
+                    blockVariables[varType][var] = true
+                    return
+                }
+            }
         }
     }
 }
