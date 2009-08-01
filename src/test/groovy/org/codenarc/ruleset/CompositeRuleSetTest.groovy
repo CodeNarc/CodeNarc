@@ -33,21 +33,31 @@ class CompositeRuleSetTest extends AbstractTest {
         assert compositeRuleSet.getRules() == []
     }
 
-    void testAdd_Null() {
-        shouldFailWithMessageContaining('ruleSet') { compositeRuleSet.add(null) }
+    void testAddRuleSet_Null() {
+        shouldFailWithMessageContaining('ruleSet') { compositeRuleSet.addRuleSet((RuleSet)null) }
     }
 
-    void testAdd_OneRuleSet() {
+    void testAddRuleSet_OneRuleSet() {
         def ruleSet = new ListRuleSet([RULE1])
-        compositeRuleSet.add(ruleSet)
+        compositeRuleSet.addRuleSet(ruleSet)
         assert compositeRuleSet.getRules() == [RULE1]
     }
 
-    void testAdd_TwoRuleSets() {
+    void testAddRuleSet_TwoRuleSets() {
         def ruleSet1 = new ListRuleSet([RULE1])
         def ruleSet2 = new ListRuleSet([RULE2])
-        compositeRuleSet.add(ruleSet1)
-        compositeRuleSet.add(ruleSet2)
+        compositeRuleSet.addRuleSet(ruleSet1)
+        compositeRuleSet.addRuleSet(ruleSet2)
+        assert compositeRuleSet.getRules() == [RULE1, RULE2]
+    }
+
+    void testAddRule_Null() {
+        shouldFailWithMessageContaining('rule') { compositeRuleSet.addRule((Rule)null) }
+    }
+
+    void testAddRule() {
+        compositeRuleSet.addRule(RULE1)
+        compositeRuleSet.addRule(RULE2)
         assert compositeRuleSet.getRules() == [RULE1, RULE2]
     }
 

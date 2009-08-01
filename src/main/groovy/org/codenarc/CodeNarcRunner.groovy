@@ -91,7 +91,7 @@ class CodeNarcRunner {
     protected RuleSet createRuleSet() {
         def paths = ruleSetFiles.tokenize(',')
         def newRuleSet = new CompositeRuleSet()
-        paths.each { path -> newRuleSet.add(new XmlFileRuleSet(path)) }
+        paths.each { path -> newRuleSet.addRuleSet(new XmlFileRuleSet(path)) }
         return newRuleSet
     }
 

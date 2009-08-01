@@ -15,8 +15,10 @@
  */
 package org.codenarc.ruleset
 
+import org.codenarc.rule.Rule
+
 /**
- * A <code>RuleSet</code> implementation that aggregates a set of RuleSets.
+ * A <code>RuleSet</code> implementation that aggregates a set of RuleSets and Rules.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -24,7 +26,20 @@ package org.codenarc.ruleset
 class CompositeRuleSet implements RuleSet {
     private rules = []
 
-    void add(RuleSet ruleSet) {
+    /**
+     * Add a single Rule to this RuleSet
+     * @param rule - the Rule to add
+     */
+    void addRule(Rule rule) {
+        assert rule != null
+        rules << rule
+    }
+
+    /**
+     * Add all of the Rules within the specified RuleSet to this RuleSet
+     * @param ruleSet - the RuleSet whose Rules are to be included
+     */
+    void addRuleSet(RuleSet ruleSet) {
         assert ruleSet != null
         rules.addAll(ruleSet.getRules())
     }
