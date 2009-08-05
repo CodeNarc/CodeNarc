@@ -141,12 +141,13 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
                 'sourcewithdirs/subdir2/subdir2a',
                 'sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
                 'sourcewithdirs/subdir2/Subdir2File1.groovy',
-                'rulesets'
+                'rulesets',
+                'rulesets/GroovyRuleSet1.groovy'
         ]
-        assert testCountRule.count == 7
+        assert testCountRule.count == 8
         assert childResultsClasses(results) == [DirectoryResults, DirectoryResults, DirectoryResults]
-        assert results.totalNumberOfFiles == 7
-        assert results.numberOfFilesWithViolations == 7
+        assert results.totalNumberOfFiles == 8
+        assert results.numberOfFilesWithViolations == 8
     }
 
     void testAnalyze_BaseDirectory_NoViolations() {

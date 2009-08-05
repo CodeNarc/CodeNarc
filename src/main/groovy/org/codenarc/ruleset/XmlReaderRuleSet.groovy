@@ -96,7 +96,7 @@ class XmlReaderRuleSet implements RuleSet {
         ruleset[NS.rule].each { ruleNode ->
             def ruleClassName = ruleNode.attribute('class')
             def ruleClass = Class.forName(ruleClassName.toString())
-            assertClassImplementsRuleInterface(ruleClass)
+            RuleSetUtil.assertClassImplementsRuleInterface(ruleClass)
             def rule = ruleClass.newInstance()
             rules << rule
             setRuleProperties(ruleNode, rule)
@@ -113,7 +113,7 @@ class XmlReaderRuleSet implements RuleSet {
                 GroovyClassLoader gcl = new GroovyClassLoader()
                 ruleClass = gcl.parseClass(input)
             }
-            assertClassImplementsRuleInterface(ruleClass) 
+            RuleSetUtil.assertClassImplementsRuleInterface(ruleClass) 
             def rule = ruleClass.newInstance()
             rules << rule
             setRuleProperties(ruleScriptNode, rule)
@@ -137,9 +137,5 @@ class XmlReaderRuleSet implements RuleSet {
 
     private InputStream getSchemaXmlInputStream() {
         return getClass().classLoader.getResourceAsStream('ruleset-schema.xsd')
-    }
-
-    private void assertClassImplementsRuleInterface(Class ruleClass) {
-        assert Rule.isAssignableFrom(ruleClass), "The rule class [${ruleClass.name}] does not implement the Rule interface"
     }
 }
