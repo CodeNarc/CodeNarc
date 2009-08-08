@@ -38,13 +38,24 @@ class GroovyDslRuleSetTest extends AbstractTest {
         assertContainsAll(errorMessage, ['DoesNotExist.xml', 'does not exist'])
     }
 
-    void testLoadRuleSet() {
+    void testLoadGroovyRuleSet() {
         final PATH = 'rulesets/GroovyRuleSet1.txt'      // TODO Handle .groovy files
         def groovyDslRuleSet = new GroovyDslRuleSet(PATH)
         def rules = groovyDslRuleSet.rules
         log("rules=$rules")
         assert rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock']
         assert rules[0].priority == 1
+        assert !rules[0].enabled
+        assert rules[1].priority == 3
+    }
+
+    void testLoadNestedGroovyRuleSet() {
+        final PATH = 'rulesets/GroovyRuleSet2.txt'
+        def groovyDslRuleSet = new GroovyDslRuleSet(PATH)
+        def rules = groovyDslRuleSet.rules
+        log("rules=$rules")
+        assert rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock']
+        assert rules[0].priority == 3
         assert !rules[0].enabled
         assert rules[1].priority == 3
     }

@@ -32,5 +32,25 @@ public class RuleSetUtil {
         assert Rule.isAssignableFrom(ruleClass), "The rule class [${ruleClass.name}] does not implement the Rule interface"
     }
 
+    protected static RuleSet loadRuleSetFile(String path) {
+        return isXmlFile(path) ? new XmlFileRuleSet(path) : new GroovyDslRuleSet(path)
+    }
+
+    protected static Rule loadRuleScriptFile(String path) {
+        def inputStream = RuleSetUtil.classLoader.getResourceAsStream(path)
+        assert inputStream, "File [$path] does not exist or is not accessible"
+        Class ruleClass
+        inputStream.withStream { input ->
+            GroovyClassLoader gcl = new GroovyClassLoader()
+            ruleClass = gcl.parseClass(input)
+        }
+        assertClassImplementsRuleInterface(ruleClass)
+        return ruleClass.newInstance()
+    }
+
+    private static boolean isXmlFile(String path) {
+        return path && path.endsWith('.xml')
+    }
+
     private RuleSetUtil() { }
 }

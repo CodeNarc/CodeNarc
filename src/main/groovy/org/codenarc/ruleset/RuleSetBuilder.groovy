@@ -18,36 +18,36 @@ package org.codenarc.ruleset
 import org.codenarc.rule.Rule
 
 /**
- * A Builder for RuleSets.
+ * A Builder for RuleSets. Create a <code>RuleSet</code> by calling the <code></code>
  *
  * @author Chris Mair
  * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
  */
 class RuleSetBuilder {
-    String description
-    private topLevelConfigurer = new TopLevelConfigurer()
+
+    private topLevelDelegate = new TopLevelDelegate()
 
     void ruleset(Closure closure) {
-        closure.delegate = topLevelConfigurer
+        closure.delegate = topLevelDelegate
         closure.call()
     }
 
     RuleSet getRuleSet() {
-        topLevelConfigurer.ruleSet
+        topLevelDelegate.ruleSet
     }
 }
 
-class TopLevelConfigurer {
+class TopLevelDelegate {
     private allRuleSet = new CompositeRuleSet()
 
     void ruleset(String path) {
-        def ruleSet = new XmlFileRuleSet(path)
+        def ruleSet = RuleSetUtil.loadRuleSetFile(path)
         allRuleSet.addRuleSet(ruleSet)
     }
 
     void ruleset(String path, Closure closure) {
-        def xmlFileRuleSet = new XmlFileRuleSet(path)
-        def ruleSetConfigurer = new RuleSetConfigurer(xmlFileRuleSet)
+        def ruleSet = RuleSetUtil.loadRuleSetFile(path)
+        def ruleSetConfigurer = new RuleSetDelegate(ruleSet)
         closure.delegate = ruleSetConfigurer
         closure.call()
         allRuleSet.addRuleSet(ruleSetConfigurer.ruleSet)
@@ -68,16 +68,32 @@ class TopLevelConfigurer {
         allRuleSet.addRule(rule)
     }
 
+    void rule(String path) {
+        def rule = RuleSetUtil.loadRuleScriptFile(path)
+        allRuleSet.addRule(rule)
+    }
+
+    void rule(String path, Closure closure) {
+        def rule = RuleSetUtil.loadRuleScriptFile(path)
+        closure.delegate = rule
+        closure.resolveStrategy = Closure.DELEGATE_FIRST
+        closure.call()
+        allRuleSet.addRule(rule)
+    }
+
+    void description(String description) {
+        // Do nothing
+    }
+
     protected RuleSet getRuleSet() {
         return allRuleSet
     }
-
 }
 
-class RuleSetConfigurer {
+class RuleSetDelegate {
     RuleSet ruleSet
 
-    RuleSetConfigurer(RuleSet ruleSet) {
+    RuleSetDelegate(RuleSet ruleSet) {
         this.ruleSet = new FilteredRuleSet(ruleSet)
     }
 

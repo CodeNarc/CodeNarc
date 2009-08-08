@@ -28,12 +28,30 @@ class RuleSetBuilderTest extends AbstractTest {
 
     private static final RULESET_XML_FILE1 = 'rulesets/RuleSet1.xml'
     private static final RULESET_XML_FILE2 = 'rulesets/RuleSet4.xml'
+    private static final RULESET_GROOVY_FILE1 = 'rulesets/GroovyRuleSet1.txt'
+    private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'
     private ruleSetBuilder
 
     void testRuleset_NullFilename() {
         shouldFailWithMessageContaining('path') { 
             ruleSetBuilder.ruleset {
                 ruleset(null)
+            }
+        }
+    }
+
+    void testRuleset_XmlFile_RuleSetFileDoesNotExist() {
+        shouldFailWithMessageContaining('DoesNotExist.xml') {
+            ruleSetBuilder.ruleset {
+                ruleset('DoesNotExist.xml')
+            }
+        }
+    }
+
+    void testRuleset_XmlFile_GroovyRuleSetFileDoesNotExist() {
+        shouldFailWithMessageContaining('DoesNotExist.groovy') {
+            ruleSetBuilder.ruleset {
+                ruleset('DoesNotExist.groovy')
             }
         }
     }
@@ -112,6 +130,27 @@ class RuleSetBuilderTest extends AbstractTest {
         }
     }
 
+    void testRuleset_GroovyFile_NoClosure() {
+        ruleSetBuilder.ruleset {
+            ruleset(RULESET_GROOVY_FILE1)
+        }
+        assertRuleNames('CatchThrowable', 'ThrowExceptionFromFinallyBlock')
+    }
+
+    void testRuleset_GroovyFile_ConfigureRuleUsingClosure() {
+        ruleSetBuilder.ruleset {
+            ruleset(RULESET_GROOVY_FILE1) {
+                'CatchThrowable' {
+                    priority = 1
+                    enabled = false
+                }
+                include 'CatchThrowable'
+            }
+        }
+        assertRuleNames('CatchThrowable')
+        assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
+    }
+
     void testRule_Class_NoClosure() {
         ruleSetBuilder.ruleset {
             rule CatchThrowableRule
@@ -149,7 +188,7 @@ class RuleSetBuilderTest extends AbstractTest {
     void testRule_Class_Closure_NullRuleClass() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
-                rule(null) {
+                rule((Class)null) {
                     priority = 1
                 }
             }
@@ -166,9 +205,37 @@ class RuleSetBuilderTest extends AbstractTest {
         }
     }
 
-    void testSetDescription() {
-        ruleSetBuilder.setDescription('abc')
-        assert ruleSetBuilder.description == 'abc' 
+    void testRule_Script_NoClosure() {
+        ruleSetBuilder.ruleset {
+            rule RULE_SCRIPT_FILE
+        }
+        assertRuleNames('DoNothing')
+    }
+
+    void testRule_Script_NoClosure_ClassDoesNotImplementRuleInterface() {
+        shouldFailWithMessageContaining('ruleClass') {
+            ruleSetBuilder.ruleset {
+                rule('rule/NotARule.txt')
+            }
+        }
+    }
+
+    void testRule_Script_Closure() {
+        ruleSetBuilder.ruleset {
+            def scriptPath = RULE_SCRIPT_FILE
+            rule(scriptPath) {
+                priority = 1
+                enabled = false
+            }
+        }
+        assertRuleNames('DoNothing')
+        assertRuleProperties('DoNothing', [priority:1, enabled:false])
+    }
+
+    void testDescription() {
+        ruleSetBuilder.ruleset {
+            description 'abc'
+        }
     }
 
     void setUp() {

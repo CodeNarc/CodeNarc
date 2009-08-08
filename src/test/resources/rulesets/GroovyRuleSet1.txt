@@ -3,6 +3,8 @@
 import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
 
 ruleset {
+    description 'A sample Groovy RuleSet'
+
     ruleset('rulesets/RuleSet4.xml') {
         'CatchThrowable' {
             priority = 1

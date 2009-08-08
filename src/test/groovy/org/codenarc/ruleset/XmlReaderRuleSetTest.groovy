@@ -137,6 +137,15 @@ class XmlReaderRuleSetTest extends AbstractTest {
         assert rules*.priority == [0, 1]
     }
 
+    void testGroovyRuleSet() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <ruleset-ref path='rulesets/GroovyRuleSet1.txt'/>
+            </ruleset>"""
+        parseXmlRuleSet(XML)
+        assertRuleNames(['CatchThrowable', 'ThrowExceptionFromFinallyBlock'])
+    }
+
     void testNestedRuleSet() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -191,12 +200,15 @@ class XmlReaderRuleSetTest extends AbstractTest {
                     <include name='TestPath'/>
                     <include name='EmptyIfStatement'/>
                 </ruleset-ref>
+                <ruleset-ref path='rulesets/GroovyRuleSet1.txt'>
+                    <include name='CatchThrowable'/>
+                </ruleset-ref>
                 <rule class='org.codenarc.rule.imports.DuplicateImportRule'>
                     <property name='priority' value='1'/>
                 </rule>
             </ruleset>"""
         parseXmlRuleSet(XML)
-        assertRuleClasses([DuplicateImportRule, TestPathRule, EmptyIfStatementRule])
+        assertRuleClasses([DuplicateImportRule, TestPathRule, EmptyIfStatementRule, CatchThrowableRule])
     }
 
     void testNestedRuleSet_IncludesExcludesAndConfig() {

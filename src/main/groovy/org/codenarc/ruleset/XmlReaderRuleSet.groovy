@@ -21,7 +21,6 @@ import javax.xml.XMLConstants
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
 import groovy.xml.Namespace
-import org.codenarc.rule.Rule
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a
@@ -67,7 +66,7 @@ class XmlReaderRuleSet implements RuleSet {
     private void loadRuleSetRefElements(ruleset) {
         ruleset[NS.'ruleset-ref'].each { ruleSetRefNode ->
             def ruleSetPath = ruleSetRefNode.attribute('path')
-            def refRuleSet = new XmlFileRuleSet(ruleSetPath)
+            def refRuleSet = RuleSetUtil.loadRuleSetFile(ruleSetPath)
             def allRules = refRuleSet.rules
             def filteredRuleSet = new FilteredRuleSet(refRuleSet)
             ruleSetRefNode[NS.'include'].each { includeNode ->
@@ -106,15 +105,7 @@ class XmlReaderRuleSet implements RuleSet {
     private void loadRuleScriptElements(ruleset) {
         ruleset[NS.'rule-script'].each { ruleScriptNode ->
             def ruleScriptPath = ruleScriptNode.attribute('path')
-            def inputStream = getClass().classLoader.getResourceAsStream(ruleScriptPath)
-            assert inputStream, "File [$ruleScriptPath] does not exist or is not accessible"
-            Class ruleClass
-            inputStream.withStream { input ->
-                GroovyClassLoader gcl = new GroovyClassLoader()
-                ruleClass = gcl.parseClass(input)
-            }
-            RuleSetUtil.assertClassImplementsRuleInterface(ruleClass) 
-            def rule = ruleClass.newInstance()
+            def rule = RuleSetUtil.loadRuleScriptFile(ruleScriptPath)
             rules << rule
             setRuleProperties(ruleScriptNode, rule)
         }

@@ -17,6 +17,7 @@ package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTest
 import org.codenarc.rule.exceptions.CatchThrowableRule
+import org.codenarc.rule.Rule
 
 /**
  * Tests for RuleSetUtil
@@ -24,7 +25,10 @@ import org.codenarc.rule.exceptions.CatchThrowableRule
  * @author Chris Mair
  * @version $Revision: 27 $ - $Date: 2009-02-02 22:41:59 -0500 (Mon, 02 Feb 2009) $
  */
-public class RuleSetUtilTest extends AbstractTest {
+class RuleSetUtilTest extends AbstractTest {
+    private static final RULESET_XML_FILE = 'rulesets/RuleSet1.xml'
+    private static final RULESET_GROOVY_FILE = 'rulesets/GroovyRuleSet1.txt'
+    private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'
 
     void testAssertClassImplementsRuleInterface_RuleClass() {
         RuleSetUtil.assertClassImplementsRuleInterface(CatchThrowableRule)
@@ -40,5 +44,24 @@ public class RuleSetUtilTest extends AbstractTest {
         shouldFailWithMessageContaining('ruleClass') {
             RuleSetUtil.assertClassImplementsRuleInterface(null)
         }
+    }
+
+    void testLoadRuleSetFile() {
+        assert RuleSetUtil.loadRuleSetFile(RULESET_GROOVY_FILE).class == GroovyDslRuleSet
+        assert RuleSetUtil.loadRuleSetFile(RULESET_XML_FILE).class == XmlFileRuleSet
+    }
+
+    void testLoadRuleScriptFile() {
+        def rule = RuleSetUtil.loadRuleScriptFile(RULE_SCRIPT_FILE)
+        assert rule instanceof Rule
+        assert rule.name == 'DoNothing'
+    }
+
+    void testLoadRuleScriptFile_NotARule() {
+        shouldFailWithMessageContaining('Rule') { RuleSetUtil.loadRuleScriptFile('rule/NotARule.txt') }
+    }
+
+    void testLoadRuleScriptFile_FileNotFound() {
+        shouldFailWithMessageContaining('DoesNotExist.txt') { RuleSetUtil.loadRuleScriptFile('DoesNotExist.txt') }
     }
 }

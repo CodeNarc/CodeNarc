@@ -1,0 +1,12 @@
+// Example Groovy RuleSet for testing
+
+import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
+
+ruleset {
+
+    ruleset('rulesets/GroovyRuleSet1.txt') {
+        'CatchThrowable' {
+            priority = 3
+        }
+    }
+}
