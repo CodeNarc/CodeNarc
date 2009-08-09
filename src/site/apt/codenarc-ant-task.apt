@@ -16,9 +16,9 @@ CodeNarc - Ant Task
 *------------------------+----------------------------------------------------------------+------------------------+
 | <<Attribute>>          | <<Description>>                                                | <<Required>>           |
 *------------------------+----------------------------------------------------------------+------------------------+
-| ruleSetFiles           | The path to the XML RuleSet definition files, relative to the  | YES                    |
-|                        | classpath. This can be a single file path, or multiple paths   |                        |
-|                        | separated by commas.                                           |                        |
+| ruleSetFiles           | The paths to the Groovy or XML RuleSet definition files,       | YES                    |
+|                        | relative to the classpath. This can be a single file path, or  |                        |
+|                        | multiple paths separated by commas.                            |                        |
 *------------------------+----------------------------------------------------------------+------------------------+
 | maxPriority1Violations | The maximum number of priority 1 violations allowed before     | NO                     |
 |                        | failing the build (throwing a <<<BuildException>>>).           |                        |

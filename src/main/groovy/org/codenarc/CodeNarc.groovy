@@ -29,7 +29,7 @@ import org.codenarc.analyzer.FilesystemSourceAnalyzer
  *   <li>help - Display the command-line help; If present, this must be the only command-line parameter.</li>
  *   <li>basedir - The base directory for the source code to be analyzed. This is the root of the
  *          directory tree. Defaults to the current directory ('.').</li>
- *   <li>rulesetfiles - The path to the XML RuleSet definition files, relative to the classpath. This can be a
+ *   <li>rulesetfiles - The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
  *          single file path, or multiple paths separated by commas. Defaults to "rulesets/basic.xml".</li>
  *   <li>includes - The comma-separated list of Ant file patterns specifying files that must be included;
  *          all files are included when omitted.</li>
@@ -62,7 +62,7 @@ class CodeNarc {
         '        The comma-separated list of Ant-style file patterns specifying files that must',
         '        be excluded. No files are excluded when omitted.',
         '    -rulesetfiles=<FILENAMES>',
-        '        The path to the XML RuleSet definition files, relative to the classpath.',
+        '        The path to the Groovy or XML RuleSet definition files, relative to the classpath.',
         '        This can be a single file path, or multiple paths separated by commas.',
         '        Defaults to "rulesets/basic.xml"',
         '    -title=<REPORT TITLE>',

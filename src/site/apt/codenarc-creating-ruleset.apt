@@ -21,11 +21,11 @@ CodeNarc - Creating a RuleSet
 * {Creating a Groovy RuleSet File}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  <<CodeNarc>> provides a Groovy DSL (domain-specific language) for writing <RuleSets>.
+  <<CodeNarc>> provides a Groovy DSL (domain-specific language) for defining <RuleSets>.
 
 
-* A Sample Groovy RuleSet
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+** A Sample Groovy RuleSet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Here is an example of a Groovy <RuleSet> file:
 
@@ -133,8 +133,8 @@ ruleset {
 *-----------------------+--------------------------------------------------------------+--------------------------+
 
 
-* A Sample XML RuleSet
-~~~~~~~~~~~~~~~~~~~~~~~
+** A Sample XML RuleSet
+~~~~~~~~~~~~~~~~~~~~~~~~
 
   Here is an example XML <RuleSet> file:
 

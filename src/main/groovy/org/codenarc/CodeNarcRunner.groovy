@@ -22,13 +22,14 @@ import org.codenarc.ruleset.CompositeRuleSet
 import org.codenarc.ruleset.XmlFileRuleSet
 import org.apache.log4j.Logger
 import org.codenarc.results.Results
+import org.codenarc.ruleset.RuleSetUtil
 
 /**
  * Helper class to run CodeNarc.
  * <p/>
  * The following properties must be configured before invoking the <code>execute()</code> method:
  * <ul>
- *   <li><code>rulesetfiles</code> - The path to the XML RuleSet definition files, relative to the classpath. This can be a
+ *   <li><code>rulesetfiles</code> - The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
  *          single file path, or multiple paths separated by commas.</li>
  *   <li><code>sourceAnalyzer</code> - An instance of a <code>org.codenarc.analyzer.SourceAnalyzer</code> implementation.</li>
  *   <li><code>reportWriters</code> - The list of <code>ReportWriter</code> instances. A report is generated
@@ -91,7 +92,10 @@ class CodeNarcRunner {
     protected RuleSet createRuleSet() {
         def paths = ruleSetFiles.tokenize(',')
         def newRuleSet = new CompositeRuleSet()
-        paths.each { path -> newRuleSet.addRuleSet(new XmlFileRuleSet(path)) }
+        paths.each { path ->
+            def ruleSet = RuleSetUtil.loadRuleSetFile(path)
+            newRuleSet.addRuleSet(ruleSet) 
+        }
         return newRuleSet
     }
 

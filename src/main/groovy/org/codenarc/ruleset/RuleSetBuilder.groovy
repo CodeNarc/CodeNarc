@@ -18,7 +18,16 @@ package org.codenarc.ruleset
 import org.codenarc.rule.Rule
 
 /**
- * A Builder for RuleSets. Create a <code>RuleSet</code> by calling the <code></code>
+ * A Builder for RuleSets. Create a RuleSet by calling the <code>ruleset</code>
+ * method, passing in a <code>Closure</code> defining the contents of the RuleSet.
+ * The <code>Closure</code> can contain any combination of the following (as well as
+ * arbitrary Groovy code):
+ * <ul>
+ *   <li><code>ruleset</code> - to load a RuleSet file. The path specifies either a
+ *          Groovy file or an XML file.</li>
+ *   <li><code>rule</code> - to load a single Rule</li>
+ *   <li><code>description</code> - description of the RuleSet (optional)</li>
+ * </ul>
  *
  * @author Chris Mair
  * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $

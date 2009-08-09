@@ -32,9 +32,9 @@ import org.codenarc.results.Results
 /**
  * Ant Task for running CodeNarc.
  * <p/>
- * The <code>ruleSetFiles</code> property specifies the path to the XML RuleSet definition files,
- * relative to the classpath. This can be a single file path, or multiple paths separated by commas.
- * It is required.
+ * The <code>ruleSetFiles</code> property specifies the path to the Groovy or XML RuleSet
+ * definition files, relative to the classpath. This can be a single file path, or multiple
+ * paths separated by commas. It is required.
  * <p/>
  * The <code>maxPriority1Violations</code> property specifies the maximum number of priority 1
  * violations allowed before failing the build (throwing a BuildException). Likewise,
@@ -58,7 +58,7 @@ class CodeNarcTask extends Task {
     static final LOG = Logger.getLogger(CodeNarcTask)
 
     /**
-     * The path to the XML RuleSet definition files, relative to the classpath. This can be a
+     * The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
      * single file path, or multiple paths separated by commas.
      */
     String ruleSetFiles

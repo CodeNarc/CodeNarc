@@ -28,11 +28,12 @@ import org.codenarc.report.ReportWriter
  * @version $Revision$ - $Date$
  */
 class CodeNarcRunnerTest extends AbstractTest {
-    static final BASIC_RULESET = 'rulesets/basic.xml'
-    static final RULESET1 = 'rulesets/RuleSet1.xml'
-    static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
-    static final REPORT_FILE = 'CodeNarcTest-Report.html'
-    static final RESULTS = new FileResults('path', [])
+    private static final BASIC_RULESET = 'rulesets/basic.xml'
+    private static final XML_RULESET1 = 'rulesets/RuleSet1.xml'
+    private static final GROOVY_RULESET1 = 'rulesets/GroovyRuleSet1.txt'
+    private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'
+    private static final REPORT_FILE = 'CodeNarcTest-Report.html'
+    private static final RESULTS = new FileResults('path', [])
 
     private codeNarcRunner
 
@@ -41,12 +42,12 @@ class CodeNarcRunnerTest extends AbstractTest {
     }
 
     void testExecute_NoReportWriters() {
-        codeNarcRunner.ruleSetFiles = RULESET1
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
         shouldFailWithMessageContaining('reportWriters') { codeNarcRunner.execute() }
     }
 
     void testExecute_NoSourceAnalyzer() {
-        codeNarcRunner.ruleSetFiles = RULESET1
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
         codeNarcRunner.reportWriters << new HtmlReportWriter(outputFile:REPORT_FILE)
         shouldFailWithMessageContaining('sourceAnalyzer') { codeNarcRunner.execute() }
     }
@@ -60,7 +61,7 @@ class CodeNarcRunnerTest extends AbstractTest {
         def reportWriter = [writeOutReport: { ac, res -> analysisContext = ac; results = res }] as ReportWriter
         codeNarcRunner.reportWriters << reportWriter
 
-        codeNarcRunner.ruleSetFiles = RULESET1
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
 
         assert codeNarcRunner.execute() == RESULTS
 
@@ -70,16 +71,22 @@ class CodeNarcRunnerTest extends AbstractTest {
         assert results == RESULTS
     }
 
-    void testCreateRuleSet_OneRuleSet() {
-        codeNarcRunner.ruleSetFiles = RULESET1 
+    void testCreateRuleSet_OneXmlRuleSet() {
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
         def ruleSet = codeNarcRunner.createRuleSet()
-        assert ruleSet.rules*.class == [org.codenarc.rule.TestPathRule]
+        assert ruleSet.rules*.name == ['TestPath']
+    }
+
+    void testCreateRuleSet_OneGroovyRuleSet() {
+        codeNarcRunner.ruleSetFiles = GROOVY_RULESET1
+        def ruleSet = codeNarcRunner.createRuleSet()
+        assert ruleSet.rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock']
     }
 
     void testCreateRuleSet_MultipleRuleSets() {
         codeNarcRunner.ruleSetFiles = RULESET_FILES
         def ruleSet = codeNarcRunner.createRuleSet()
-        assert ruleSet.rules.size() >= 4
+        assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock']
     }
 
     //--------------------------------------------------------------------------

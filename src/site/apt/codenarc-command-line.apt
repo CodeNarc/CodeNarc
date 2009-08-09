@@ -17,36 +17,36 @@ CodeNarc - Run From Command-Line
   All command-line parameters are optional. If no parameters are supplied, <<CodeNarc>> runs from the
   current directory with reasonable defaults, as described below.
 
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| <<Parameter>>                   | <<Description>>                                                 | <<Example>>                          |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| -basedir=<DIR>                  | The base (root) directory for the source code to be analyzed.   | -basedir=src/main/groovy             |
-|                                 | Defaults to the current directory (".").                        |                                      |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| -includes=<PATTERNS>            | The comma-separated list of Ant-style file patterns specifying  | -includes=**/*.gr                    |
-|                                 | files that must be included. Defaults to "**/*.groovy".         |                                      |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| -excludes=<PATTERNS>            | The comma-separated list of Ant-style file patterns specifying  | -excludes=**/templates/**,\          |
-|                                 | files that must be excluded. No files are excluded when omitted.|    **/*Test.*                        |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| -rulesetfiles=<FILENAMES>       | The path to the XML RuleSet definition files, relative to the   | -rulesetfiles=rulesets/imports.xml,\ |
-|                                 | classpath. This can be a single file path, or multiple paths    |    rulesets/naming.xml               |
-|                                 | separated by commas. Defaults to "rulesets/basic.xml".          |                                      |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| -report=<REPORT-TYPE[:FILENAME]>| The definition of the report to produce. The option value is of | -report=html                         |
-|                                 | the form <<<TYPE[:FILENAME]>>>, where <<<TYPE>>> is "html" and  | -report=html:"MyProject.html"        |
-|                                 | <<<FILENAME>>> is the filename (with optional path) of the      |                                      |
-|                                 | output report filename. If the report filename is omitted, the  |                                      |
-|                                 | default filename is used ("CodeNarcReport.html"). If no report  |                                      |
-|                                 | option is specified, default to a single "html" report with the |                                      |
-|                                 | default filename.                                               |                                      |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| -title=<REPORT TITLE>           | The title description for this analysis; used in the output     | -title="My Project"                  |
-|                                 | report(s), if provided.                                         |                                      |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
-| -help                           | Display the command-line help. If present, this must be the     | -help                                |
-|                                 | only command-line parameter.                                    |                                      |
-*---------------------------------+-----------------------------------------------------------------+--------------------------------------+
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| <<Parameter>>                   | <<Description>>                                                      | <<Example>>                          |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -basedir=<DIR>                  | The base (root) directory for the source code to be analyzed.        | -basedir=src/main/groovy             |
+|                                 | Defaults to the current directory (".").                             |                                      |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -includes=<PATTERNS>            | The comma-separated list of Ant-style file patterns specifying       | -includes=**/*.gr                    |
+|                                 | files that must be included. Defaults to "**/*.groovy".              |                                      |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -excludes=<PATTERNS>            | The comma-separated list of Ant-style file patterns specifying       | -excludes=**/templates/**,\          |
+|                                 | files that must be excluded. No files are excluded when omitted.     |    **/*Test.*                        |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -rulesetfiles=<FILENAMES>       | The path to the Groovy or XML RuleSet definition files, relative     | -rulesetfiles=rulesets/imports.xml,\ |
+|                                 | to the classpath. This can be a single file path, or multiple paths  |    rulesets/naming.xml               |
+|                                 | separated by commas. Defaults to "rulesets/basic.xml".               |                                      |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -report=<REPORT-TYPE[:FILENAME]>| The definition of the report to produce. The option value is of      | -report=html                         |
+|                                 | the form <<<TYPE[:FILENAME]>>>, where <<<TYPE>>> is "html" and       | -report=html:"MyProject.html"        |
+|                                 | <<<FILENAME>>> is the filename (with optional path) of the           |                                      |
+|                                 | output report filename. If the report filename is omitted, the       |                                      |
+|                                 | default filename is used ("CodeNarcReport.html"). If no report       |                                      |
+|                                 | option is specified, default to a single "html" report with the      |                                      |
+|                                 | default filename.                                                    |                                      |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -title=<REPORT TITLE>           | The title description for this analysis; used in the output          | -title="My Project"                  |
+|                                 | report(s), if provided.                                              |                                      |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -help                           | Display the command-line help. If present, this must be the          | -help                                |
+|                                 | only command-line parameter.                                         |                                      |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
 
 
 * Executing CodeNarc from the Command-Line
