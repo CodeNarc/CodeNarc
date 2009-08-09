@@ -5,13 +5,113 @@
 CodeNarc - Creating a RuleSet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+  <<Contents>>
+
+  * {{{Creating_a_Groovy_RuleSet_File}Creating a Groovy RuleSet File}}
+
+  * {{{Creating_an_XML_RuleSet_File}Creating an XML RuleSet File}}
+
+  []
+
   You can use the predefined <RuleSets> distributed with <<CodeNarc>> or you can create your own
-  custom <RuleSet>. See the site navigation menu for a list of the <RuleSets> and
-  rules provided out of the box by <<CodeNarc>>.
+  custom {{{Creating_a_Groovy_RuleSet_File}Groovy}} or {{{Creating_an_XML_RuleSet_File}XML}}
+  <RuleSet>. See the site navigation menu for a list of the <RuleSets> and rules provided out of
+  the box by <<CodeNarc>>.
+
+* {Creating a Groovy RuleSet File}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <<CodeNarc>> provides a Groovy DSL (domain-specific language) for writing <RuleSets>.
 
 
-* Custom RuleSet XML Schema
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* A Sample Groovy RuleSet
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Here is an example of a Groovy <RuleSet> file:
+
++----------------------------------------------------------------------------------------
+import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
+
+ruleset {
+
+    description 'A sample Groovy RuleSet'
+
+    ruleset('rulesets/basic.xml') {
+        'CatchThrowable' {
+            priority = 1
+            enabled = false
+        }
+        'EqualsAndHashCode' priority:3
+        exclude 'Empty*'
+    }
+
+    rule(ThrowExceptionFromFinallyBlockRule) {
+        priority = 3
+    }
+
+    rule("rules/MyCustomRuleScript.groovy")
+
+    ruleset('MyGroovyRuleSet.groovy')
+}
++----------------------------------------------------------------------------------------
+
+  Things to note:
+
+    * The Groovy <RuleSet> file itself must be accessible on the classpath.
+
+    * The "outer" <<ruleset>> defines the contents of the <RuleSet> (within a <closure>).
+      It can include an optional <<description>> and any combination of <<ruleset>>
+      (other <RuleSets>) and <<rule>> statements (individual <Rules>).
+
+  About the "inner" <<ruleset>> statements:
+
+    * Each <<ruleset>> statement loads a <RuleSet> file. The path specifies either a
+      Groovy file or an XML file, and is relative to the classpath.
+
+    * The 'rulesets/basic.xml' <RuleSet> file is interpreted as an XML
+      file based on the '.xml' extension. Likewise, the 'MyGroovyRuleSet.groovy' file
+      is interpreted as a Groovy <RuleSet> file.
+
+    * The <RuleSet> can be customized by following the <RuleSet> path with an (optional)
+      <closure>, containing any combination of the following:
+
+      [[1]] <<Rule Configurations>> -- A <<ruleset>> statement can optionally provide configuration
+            of the properties for individual rules within the <RuleSet>. Specify the name of the rule
+            (as a <String>), followed by its configuration. (Remember to specify the rule <name>, not
+            the class name. In most cases, the rule <name> is the class name without the "Rule" suffix).
+            The name of the <Rule> can be followed by:
+
+              [[a]] A <Map> of property names and values. See 'EqualsAndHashCode' within the example.
+
+              [[b]] A <closure> containing property assignments statements. See 'CatchThrowable' within the example.
+
+              []
+
+            Properties set this way can be of type <String>, <int>, <long> or <boolean>.
+
+      [[2]] <<Rule Filtering (include or exclude statements)>> -- A <<ruleset>> statement can
+            optionally specify <<include>> and/or <<exclude>> pattern(s) of rule names to include or exclude
+            from the <RuleSet>. See {{{Filtering_Rules_Within_a_RuleSet}Filtering Rules Within a RuleSet}}.
+
+  About the <<rule>> statements:
+
+    * Each <<rule>> statements loads a single <Rule>.
+
+    * The <<rule>> statement must specify either:
+
+      [[a]] The class name for a <Rule>. See <<<ThrowExceptionFromFinallyBlockRule>>> within the example.
+            The <Rule> class must be available on the classpath.
+
+      [[b]] The path to a <Rule Script> file. See "MyGroovyRuleSet.groovy" within the example.
+
+    * A <<rule>> can optionally provide configuration of the <Rule> properties by specifying a <closure>
+      containing property assignment statements. See <<<ThrowExceptionFromFinallyBlockRule>>> within the
+      example. As within <<ruleset>> statements, properties set this way can be of type <String>, <int>,
+      <long> or <boolean>.
+
+
+* {Creating an XML RuleSet File}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   The XML schema for a <<CodeNarc>> <RuleSet> file is embodied in the "ruleset-schema.xsd" file which
   is included within the <<CodeNarc>> jar. It contains three sections, all of which are optional, though
@@ -23,7 +123,8 @@ CodeNarc - Creating a RuleSet
 | <<<\<description\>>>> | Describe the purpose of the <RuleSet>                        |  Zero or one             |
 *-----------------------+--------------------------------------------------------------+--------------------------+
 | <<<\<ruleset-ref\>>>> | Include a nested <RuleSet>, optionally configuring and/or    |  Zero or more            |
-|                       | filtering the rules within it.                               |                          |
+|                       | filtering the rules within it. The path to the <RuleSet>     |                          |
+|                       | can specify either an XML file or a Groovy <RuleSet> file.   |                          |
 *-----------------------+--------------------------------------------------------------+--------------------------+
 | <<<\<rule\>>>>        | Include a single rule; specify its fully-qualified classname |  Zero or more            |
 *-----------------------+--------------------------------------------------------------+--------------------------+
@@ -32,8 +133,8 @@ CodeNarc - Creating a RuleSet
 *-----------------------+--------------------------------------------------------------+--------------------------+
 
 
-* A Sample RuleSet
-~~~~~~~~~~~~~~~~~~~
+* A Sample XML RuleSet
+~~~~~~~~~~~~~~~~~~~~~~~
 
   Here is an example XML <RuleSet> file:
 
@@ -123,6 +224,15 @@ CodeNarc - Creating a RuleSet
   <<StringInstantiationRule>>.
 
 +----------------------------------------------------------------------------------------
+    ruleset('rulesets/basic.xml') {
+        exclude 'BooleanInstantiation'
+        exclude 'StringInstantiation'
+    }
++----------------------------------------------------------------------------------------
+
+  And here is the same example in XML <RuleSet> format:
+
++----------------------------------------------------------------------------------------
     <ruleset-ref path='rulesets/basic.xml'>
         <exclude name='BooleanInstantiation'/>
         <exclude name='StringInstantiation'/>
@@ -133,6 +243,15 @@ CodeNarc - Creating a RuleSet
   rather than those that are excluded.  In the following <RuleSet> excerpt, ONLY the
   <<ReturnFromFinallyBlockRule>> and <<StringInstantiationRule>> rules are included from the
    "rulesets/basic.xml" <RuleSet>.
+
++----------------------------------------------------------------------------------------
+    ruleset('rulesets/basic.xml') {
+        include 'ReturnFromFinallyBlockRule'
+        include 'StringInstantiation'
+    }
++----------------------------------------------------------------------------------------
+
+  And here is the same example in XML <RuleSet> format:
 
 +----------------------------------------------------------------------------------------
     <ruleset-ref path='rulesets/basic.xml'>
