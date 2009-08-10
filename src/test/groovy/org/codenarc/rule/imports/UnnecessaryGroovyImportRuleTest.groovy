@@ -69,6 +69,15 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 2, 'java.lang.String', 5, 'java.lang.Integer')
     }
 
+    void testApplyTo_ImportJavaNet() {
+        final SOURCE = '''
+            import java.net.URL
+            import com.xxx.MyClass
+            import java.net.Socket
+        '''
+        assertTwoViolations(SOURCE, 2, 'java.net.URL', 4, 'java.net.Socket')
+    }
+
     void testApplyTo_ImportJavaUtil() {
         final SOURCE = '''
             import java.util.List
