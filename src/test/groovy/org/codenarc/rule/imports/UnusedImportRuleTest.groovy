@@ -54,15 +54,51 @@ class UnusedImportRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 2, 'import java.io.InputStream', 4, 'import java.io.OutputStream')
     }
 
+    void testApplyTo_UnusedStaticImportConstant() {
+        final SOURCE = '''
+            import static Math.PI
+            class ABC {
+                def name
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'import static Math.PI')
+    }
+
+    void testApplyTo_UnusedImportWildcard() {
+        final SOURCE = '''
+            import org.codenarc.*
+            class ABC {
+                def name
+            }
+        '''
+        // Can't know whether any of the classes within org.codenarc package were ever referenced,
+        // since we don't know what they are
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_UnusedStaticImportWildcard() {
+        final SOURCE = '''
+            import static Math.*
+            class ABC {
+                def name
+            }
+        '''
+        // Can't know whether any of the static members of the Math class were ever referenced,
+        // since we don't know what they are
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             import java.io.InputStream
             import java.io.OutputStream
+            import static Math.PI
             class ABC {
                 def run() {
                     String fff
-                InputStream input;
-                OutputStream output
+                    InputStream input;
+                    OutputStream output
+                    def value = PI
                 }
             }
         '''

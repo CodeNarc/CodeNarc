@@ -29,11 +29,22 @@ class UnusedImportRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast?.imports) {
-            sourceCode.ast.imports.each { importNode ->
-                if (!findReference(sourceCode, importNode.alias)) {
-                    violations.add(createViolationForImport(sourceCode, importNode))
-                }
+        processImports(sourceCode, violations)
+        processStaticImports(sourceCode, violations)
+    }
+
+    private void processImports(SourceCode sourceCode, List violations) {
+        sourceCode.ast?.imports?.each {importNode ->
+            if (!findReference(sourceCode, importNode.alias)) {
+                violations.add(createViolationForImport(sourceCode, importNode))
+            }
+        }
+    }
+
+    private void processStaticImports(SourceCode sourceCode, List violations) {
+        sourceCode.ast?.staticImportAliases?.each {alias, classNode ->
+            if (!findReference(sourceCode, alias)) {
+                violations.add(createViolationForImport(sourceCode, classNode.name, alias))
             }
         }
     }

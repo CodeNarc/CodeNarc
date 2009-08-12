@@ -29,5 +29,10 @@ Imports Rules  ("<rulesets/imports.xml>")
 * UnusedImport Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Checks for <import> statements for classes that are never referenced within the source file.
+  Checks for <import> statements for classes that are never referenced within the source file. Also
+  checks static imports.
+
+  Known limitations:
+
+  * Does not check for unused imports containing wildcards (e.g. <<<import org.codenarc.*>>>)
 

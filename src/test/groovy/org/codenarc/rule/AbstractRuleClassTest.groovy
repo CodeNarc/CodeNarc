@@ -232,6 +232,24 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assert rule.sourceLineAndNumberForImport(otherSourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
     }
 
+    void testSourceLineAndNumberForImport_ClassNameAndAlias() {
+        final SOURCE = '''
+            import a.b.MyClass
+            import a.b.MyClass as Boo
+            // some comment
+            import a.pkg1.MyOtherClass as MOC
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def ast = sourceCode.ast
+        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass', lineNumber:2]
+        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'Boo') == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
+        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.pkg1.MyOtherClass', 'MOC') == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]
+
+        // Not found
+        def otherSourceCode = new SourceString('def v = 1')
+        assert rule.sourceLineAndNumberForImport(otherSourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
+    }
+
     //--------------------------------------------------------------------------
     // Tests for deprecated properties/methods
     //--------------------------------------------------------------------------
