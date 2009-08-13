@@ -25,6 +25,7 @@ import org.codenarc.source.SourceCode
  * @version $Revision$ - $Date$
  */
 class UnusedImportRule extends AbstractRule {
+
     String name = 'UnusedImport'
     int priority = 3
 
@@ -35,7 +36,7 @@ class UnusedImportRule extends AbstractRule {
 
     private void processImports(SourceCode sourceCode, List violations) {
         sourceCode.ast?.imports?.each {importNode ->
-            if (!findReference(sourceCode, importNode.alias)) {
+            if (!findReference(sourceCode, importNode.alias, importNode.className)) {
                 violations.add(createViolationForImport(sourceCode, importNode))
             }
         }
@@ -49,10 +50,19 @@ class UnusedImportRule extends AbstractRule {
         }
     }
 
-    private findReference(SourceCode sourceCode, String alias) {
-        final IMPORT_PATTERN = /import\s+.*/ + alias
+    private findReference(SourceCode sourceCode, String alias, String className = null) {
+        def aliasSameAsNonQualifiedClassName = className && className.endsWith(alias)
         return sourceCode.lines.find { line ->
-            line.contains(alias) && !(line =~ IMPORT_PATTERN)
+            if (!isImportStatementForAlias(line, alias)) {
+                def aliasCount = line.count(alias)
+                return aliasSameAsNonQualifiedClassName ?
+                    aliasCount && aliasCount > line.count(className) : aliasCount
+            }
         }
+    }
+
+    private isImportStatementForAlias(String line, String alias) {
+        final IMPORT_PATTERN = /import\s+.*/ + alias
+        return line =~ IMPORT_PATTERN
     }
 }

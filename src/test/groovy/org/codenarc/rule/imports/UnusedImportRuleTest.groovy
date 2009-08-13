@@ -54,6 +54,19 @@ class UnusedImportRuleTest extends AbstractRuleTest {
         assertTwoViolations(SOURCE, 2, 'import java.io.InputStream', 4, 'import java.io.OutputStream')
     }
 
+    void testApplyTo_OnlyFullyQualifiedClassNameReferenced() {
+        final SOURCE = '''
+            import a.b.SomeClass
+            import d.e.OtherClass as OC
+            import f.g.ThirdClass as TC
+            class ABC extends a.b.SomeClass {
+                def name = d.e.OtherClass.name
+                def info = f.g.ThirdClass.name + ":" + TC.metaClass.name
+            }
+        '''
+        assertTwoViolations(SOURCE, 2, 'import a.b.SomeClass', 3, 'import d.e.OtherClass as OC')
+    }
+
     void testApplyTo_UnusedStaticImportConstant() {
         final SOURCE = '''
             import static Math.PI
