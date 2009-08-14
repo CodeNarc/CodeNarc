@@ -36,3 +36,6 @@ Imports Rules  ("<rulesets/imports.xml>")
 
   * Does not check for unused imports containing wildcards (e.g. <<<import org.codenarc.*>>>)
 
+  * Misses unused imports if the class/alias name is contained within strings, comments or other (longer)
+    names (i.e., if that string shows up almost anywhere within the source code). 
+
