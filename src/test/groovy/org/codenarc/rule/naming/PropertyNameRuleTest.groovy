@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
 
 /**
- * Tests for FieldNameRule
+ * Tests for PropertyNameRule
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class FieldNameRuleTest extends AbstractRuleTest {
+class PropertyNameRuleTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'FieldName'
+        assert rule.name == 'PropertyName'
     }
 
     void testRegex_DefaultValue() {
@@ -39,10 +39,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     }
 
     void testFinalRegex_DefaultValue() {
-        assert 'ABC' ==~ rule.finalRegex
-        assert 'ABC_123_DEF' ==~ rule.finalRegex
-        assert !('abc_def' ==~ rule.finalRegex)
-        assert !('ABC123abc' ==~ rule.finalRegex)
+        assert rule.finalRegex == null
     }
 
     void testStaticRegex_DefaultValue() {
@@ -50,7 +47,10 @@ class FieldNameRuleTest extends AbstractRuleTest {
     }
 
     void testStaticFinalRegex_DefaultValue() {
-        assert rule.staticFinalRegex == null
+        assert 'ABC' ==~ rule.staticFinalRegex
+        assert 'ABC_123_DEF' ==~ rule.staticFinalRegex
+        assert !('abc_def' ==~ rule.staticFinalRegex)
+        assert !('ABC123abc' ==~ rule.staticFinalRegex)
     }
 
     void testRegexIsNull() {
@@ -88,17 +88,17 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_DoesNotMatchCustomRegex() {
         final SOURCE = '''
             class MyClass {
-                public int count
+                int count
             }
         '''
         rule.regex = /z.*/
-        assertSingleViolation(SOURCE, 3, 'public int count')
+        assertSingleViolation(SOURCE, 3, 'int count')
     }
 
     void testApplyTo_MatchesCustomRegex() {
         final SOURCE = '''
             class MyClass {
-              public zMethod() { println 'bad' }
+              int zCount = 23
             }
         '''
         rule.regex = /z.*/
@@ -119,10 +119,11 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_Final_DefaultFinalRegex() {
         final SOURCE = '''
           class MyClass {
-            final int count
+            final int Count
+            final int ok
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'final int count')
+        assertSingleViolation(SOURCE, 3, 'final int Count')
     }
 
     void testApplyTo_Final_FinalRegexSet() {
@@ -191,7 +192,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
             static final int Count
           }
         '''
-        rule.finalRegex = null
+        rule.staticFinalRegex = null
         rule.staticRegex = /C.*/
         assertNoViolations(SOURCE)
     }
@@ -202,33 +203,33 @@ class FieldNameRuleTest extends AbstractRuleTest {
             static final int Count
           }
         '''
-        rule.finalRegex = null
+        rule.staticFinalRegex = null
         rule.staticRegex = null
         rule.regex = /C.*/
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_IgnoreFieldNames_MatchesSingleName() {
+    void testApplyTo_ignorePropertyNames_MatchesSingleName() {
         final SOURCE = '''
           class MyClass {
             static int Count
           }
         '''
-        rule.ignoreFieldNames = 'Count'
+        rule.ignorePropertyNames = 'Count'
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_IgnoreFieldNames_MatchesNoNames() {
+    void testApplyTo_ignorePropertyNames_MatchesNoNames() {
         final SOURCE = '''
           class MyClass {
             int Count
           }
         '''
-        rule.ignoreFieldNames = 'Other'
+        rule.ignorePropertyNames = 'Other'
         assertSingleViolation(SOURCE, 3, 'int Count')
     }
 
-    void testApplyTo_IgnoreFieldNames_MultipleNamesWithWildcards() {
+    void testApplyTo_ignorePropertyNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
           class MyClass {
             String GOOD_NAME = 'good'
@@ -237,7 +238,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
             def OTHER_name
           }
         '''
-        rule.ignoreFieldNames = 'OTHER?name,_*,GOOD_NAME' 
+        rule.ignorePropertyNames = 'OTHER?name,_*,GOOD_NAME' 
         assertSingleViolation(SOURCE, 4, 'static int Count')
     }
 
@@ -249,13 +250,24 @@ class FieldNameRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_NoFieldDefinition() {
+    void testApplyTo_FieldDefinitions() {
+        final SOURCE = '''
+          class MyClass {
+             public BigDecimal Deposit_amount   // a field, not a property
+             protected int COUNT                // a field, not a property
+             private _someName = 'abc'          // a field, not a property
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_NoPropertyDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
-        return new FieldNameRule()
+        return new PropertyNameRule()
     }
 
 }
