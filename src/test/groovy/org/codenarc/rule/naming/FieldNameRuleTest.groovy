@@ -61,7 +61,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
           class MyClass {
-            BigDecimal deposit_amount
+            private BigDecimal deposit_amount
           }
         '''
         assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
@@ -70,7 +70,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = '''
             class MyClass {
-                int count
+                protected int count
             }
         '''
         assertNoViolations(SOURCE)
@@ -79,7 +79,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_Static_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
           class MyClass {
-            static int Count
+            protected static int Count
           }
         '''
         assertSingleViolation(SOURCE, 3, 'static int Count')
@@ -119,7 +119,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_Final_DefaultFinalRegex() {
         final SOURCE = '''
           class MyClass {
-            final int count
+            public final int count
           }
         '''
         assertSingleViolation(SOURCE, 3, 'final int count')
@@ -128,7 +128,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_Final_FinalRegexSet() {
         final SOURCE = '''
             class MyClass {
-                final int zCount
+                private final int zCount
             }
         '''
         rule.finalRegex = /z.*/
@@ -138,7 +138,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_Static_StaticRegexNotSet() {
         final SOURCE = '''
           class MyClass {
-            static int Count
+            protected static int Count
           }
         '''
         assertSingleViolation(SOURCE, 3, 'static int Count')
@@ -147,7 +147,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_Static_StaticRegexSet() {
         final SOURCE = '''
             class MyClass {
-                static int Count
+                public static int Count
             }
         '''
         rule.staticRegex = /C.*/
@@ -157,7 +157,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_StaticFinal_DefaultStaticFinalRegex() {
         final SOURCE = '''
           class MyClass {
-            static final int count
+            public static final int count
           }
         '''
         assertSingleViolation(SOURCE, 3, 'static final int count')
@@ -166,7 +166,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_StaticFinal_CustomStaticFinalRegex() {
         final SOURCE = '''
             class MyClass {
-                static final int Count
+                private static final int Count
             }
         '''
         rule.staticRegex = /Z.*/    // ignored
@@ -178,7 +178,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_StaticFinal_DefaultsToFinalRegex() {
         final SOURCE = '''
           class MyClass {
-            static final int Count
+            protected static final int Count
           }
         '''
         rule.staticRegex = /C.*/       // ignored
@@ -188,7 +188,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_StaticFinal_DefaultsToStaticRegex() {
         final SOURCE = '''
           class MyClass {
-            static final int Count
+            private static final int Count
           }
         '''
         rule.finalRegex = null
@@ -199,7 +199,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_StaticFinal_DefaultsToRegex() {
         final SOURCE = '''
           class MyClass {
-            static final int Count
+            public static final int Count
           }
         '''
         rule.finalRegex = null
@@ -211,7 +211,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_IgnoreFieldNames_MatchesSingleName() {
         final SOURCE = '''
           class MyClass {
-            static int Count
+            protected static int Count
           }
         '''
         rule.ignoreFieldNames = 'Count'
@@ -221,7 +221,7 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_IgnoreFieldNames_MatchesNoNames() {
         final SOURCE = '''
           class MyClass {
-            int Count
+            private int Count
           }
         '''
         rule.ignoreFieldNames = 'Other'
@@ -231,10 +231,10 @@ class FieldNameRuleTest extends AbstractRuleTest {
     void testApplyTo_IgnoreFieldNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
           class MyClass {
-            String GOOD_NAME = 'good'
-            static int Count
-            def _amount = 100.25
-            def OTHER_name
+            private String GOOD_NAME = 'good'
+            protected static int Count
+            private def _amount = 100.25
+            private def OTHER_name
           }
         '''
         rule.ignoreFieldNames = 'OTHER?name,_*,GOOD_NAME' 
@@ -243,8 +243,19 @@ class FieldNameRuleTest extends AbstractRuleTest {
 
     void testApplyTo_Script() {
         final SOURCE = '''
-            BigDecimal deposit_amount       // not considered a field
-            int COUNT                       // not considered a field
+            private BigDecimal deposit_amount       // not considered a field
+            private int COUNT                       // not considered a field
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_PropertyDefinitions() {
+        final SOURCE = '''
+          class MyClass {
+            BigDecimal deposit_amount
+            int COUNT = 99
+            def _NAME = 'abc'
+          }
         '''
         assertNoViolations(SOURCE)
     }

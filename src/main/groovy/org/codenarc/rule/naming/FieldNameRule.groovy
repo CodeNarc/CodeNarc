@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.PropertyNode
 
 /**
  * Rule that verifies that the name of each field matches a regular expression. By default it checks that
@@ -71,11 +72,12 @@ class FieldNameRule extends AbstractAstVisitorRule {
 }
 
 class FieldNameAstVisitor extends AbstractAstVisitor  {
+    private Set propertyNames = []
 
     void visitField(FieldNode fieldNode) {
-        if (!new WildcardPattern(rule.ignoreFieldNames, false).matches(fieldNode.name)) {
-            def re = rule.regex
+        if (!isProperty(fieldNode) && !isIgnoredPropertyName(fieldNode)) {
             def mod = fieldNode.modifiers
+            def re = rule.regex
 
             if (mod & FieldNode.ACC_STATIC) {
                 re = rule.staticRegex ?: re
@@ -94,4 +96,17 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
         super.visitField(fieldNode)
     }
 
+    void visitProperty(PropertyNode node) {
+        propertyNames << node.name
+        super.visitProperty(node)
+    }
+
+    private boolean isIgnoredPropertyName(FieldNode node) {
+        return new WildcardPattern(rule.ignoreFieldNames, false).matches(node.name)
+    }
+
+    private boolean isProperty(FieldNode node) {
+        // This assumes that the property node is visited before the (regular) field node
+        return propertyNames.contains(node.name)
+    }
 }
