@@ -1,0 +1,45 @@
+/*
+ * Copyright 2009 the original author or authors.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codenarc.util.io
+
+/**
+ * A Resource implementation based on java.io.File and java.io.FileInputStream.
+ * <p/>
+ * This is an internal class and its API is subject to change.
+ *
+ * @author Chris Mair
+ * @version $Revision: 181 $ - $Date: 2009-07-11 18:32:34 -0400 (Sat, 11 Jul 2009) $
+ */
+class FileResource implements Resource {
+    final String path
+
+    /**
+     * Construct a new FileResource
+     * @path - the filesystem path to the file. May be absolute or relative.
+     */
+    FileResource(String path) {
+        assert path
+        this.path = path
+    }
+
+    /**
+     * Open a FileInputStream on the file
+     * @throws IOException - if an error occurs opening the InputStream
+     */
+    InputStream getInputStream() throws IOException {
+        return new FileInputStream(path)
+    }
+}
