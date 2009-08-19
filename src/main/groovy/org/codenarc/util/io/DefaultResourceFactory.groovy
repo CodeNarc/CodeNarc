@@ -16,30 +16,33 @@
 package org.codenarc.util.io
 
 /**
- * A Resource implementation based on java.io.File and java.io.FileInputStream.
+ * Default implementation of ResourceFactory.
  * <p/>
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
  * @version $Revision: 181 $ - $Date: 2009-07-11 18:32:34 -0400 (Sat, 11 Jul 2009) $
  */
-class FileResource implements Resource {
-    final String path
+class DefaultResourceFactory {
 
     /**
-     * Construct a new FileResource
-     * @path - the filesystem path to the file. May be absolute or relative.
-     */
-    FileResource(String path) {
-        assert path
-        this.path = path
-    }
-
-    /**
-     * Open a FileInputStream on the file
+     * Return a Resource instance suitable for the specified path.
+     * @param path - the path to the resource. Must not be null or empty. This may be
+     *      optionally prefixed by "classpath:" or any of the valid java.net.URL prefixes
+     *      (e.g., "file:", "http:")
      * @throws IOException - if an error occurs opening the InputStream
      */
-    InputStream getInputStream() throws IOException {
-        return new FileInputStream(path)
+    Resource getResource(String path) throws IOException {
+        assert path
+        if (path.startsWith('classpath:')) {
+            return new ClassPathResource(path - 'classpath:')
+        }
+
+        return isUrl(path) ?
+            new UrlResource(path) : new ClassPathResource(path)  
+    }
+
+    private isUrl(String path) {
+        return path =~ /.*\:.*/
     }
 }

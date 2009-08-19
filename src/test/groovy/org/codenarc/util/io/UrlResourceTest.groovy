@@ -26,8 +26,8 @@ import org.codenarc.test.AbstractTest
 class UrlResourceTest extends AbstractTest {
 
     private static final TEXT_FILE = 'src/test/resources/resource/SampleResource.txt'
+    private static final RELATIVE_FILE_URL = 'file:' + TEXT_FILE
     private static final TEXT_FILE_CONTENTS = 'abcdef12345'
-    private urlName
 
     void testConstructor_NullOrEmpty() {
         shouldFailWithMessageContaining('path') { new UrlResource(null) }
@@ -39,8 +39,17 @@ class UrlResourceTest extends AbstractTest {
         assert resource.getPath() == TEXT_FILE
     }
 
-    void testGetInputStream_File() {
+    void testGetInputStream_File_AbsolutePath() {
+        def file = new File(TEXT_FILE)
+        def urlName = "file:/" + file.absolutePath
+        log("urlName=$urlName")
         def resource = new UrlResource(urlName)
+        def inputStream = resource.getInputStream()
+        assert inputStream.text == TEXT_FILE_CONTENTS
+    }
+
+    void testGetInputStream_File_RelativePath() {
+        def resource = new UrlResource(RELATIVE_FILE_URL)
         def inputStream = resource.getInputStream()
         assert inputStream.text == TEXT_FILE_CONTENTS
     }
@@ -63,17 +72,9 @@ class UrlResourceTest extends AbstractTest {
     }
 
     void testGetInputStream_TwiceOnTheSameResource() {
-        def resource = new UrlResource(urlName)
+        def resource = new UrlResource(RELATIVE_FILE_URL)
         def inputStream = resource.getInputStream()
         assert inputStream.text == TEXT_FILE_CONTENTS
         assert resource.getInputStream().text == TEXT_FILE_CONTENTS
-    }
-
-    void setUp() {
-        def file = new File(TEXT_FILE)
-        def absPath = file.absolutePath
-        urlName = "file:///" + absPath
-        log("urlName=$urlName")
-        super.setUp()
     }
 }
