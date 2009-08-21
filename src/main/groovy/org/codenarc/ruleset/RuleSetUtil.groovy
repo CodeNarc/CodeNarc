@@ -16,6 +16,8 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
+import org.codenarc.util.io.ResourceFactory
+import org.codenarc.util.io.DefaultResourceFactory
 
 /**
  * A private utility class for the <code>RuleSet</code> classes. All methods are static.
@@ -25,7 +27,8 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision: 27 $ - $Date: 2009-02-02 22:41:59 -0500 (Mon, 02 Feb 2009) $
  */
-public class RuleSetUtil {
+class RuleSetUtil {
+    private static ResourceFactory resourceFactory = new DefaultResourceFactory()
 
     protected static void assertClassImplementsRuleInterface(Class ruleClass) {
         assert ruleClass
@@ -37,8 +40,7 @@ public class RuleSetUtil {
     }
 
     protected static Rule loadRuleScriptFile(String path) {
-        def inputStream = RuleSetUtil.classLoader.getResourceAsStream(path)
-        assert inputStream, "File [$path] does not exist or is not accessible"
+        def inputStream = resourceFactory.getResource(path).inputStream
         Class ruleClass
         inputStream.withStream { input ->
             GroovyClassLoader gcl = new GroovyClassLoader()

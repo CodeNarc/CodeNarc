@@ -29,6 +29,7 @@ class RuleSetUtilTest extends AbstractTest {
     private static final RULESET_XML_FILE = 'rulesets/RuleSet1.xml'
     private static final RULESET_GROOVY_FILE = 'rulesets/GroovyRuleSet1.txt'
     private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'
+    private static final RULE_SCRIPT_FILE_URL = 'file:src/test/resources/rule/DoNothingRule.txt'
 
     void testAssertClassImplementsRuleInterface_RuleClass() {
         RuleSetUtil.assertClassImplementsRuleInterface(CatchThrowableRule)
@@ -53,6 +54,12 @@ class RuleSetUtilTest extends AbstractTest {
 
     void testLoadRuleScriptFile() {
         def rule = RuleSetUtil.loadRuleScriptFile(RULE_SCRIPT_FILE)
+        assert rule instanceof Rule
+        assert rule.name == 'DoNothing'
+    }
+
+    void testLoadRuleScriptFile_FileUrl() {
+        def rule = RuleSetUtil.loadRuleScriptFile(RULE_SCRIPT_FILE_URL)
         assert rule instanceof Rule
         assert rule.name == 'DoNothing'
     }

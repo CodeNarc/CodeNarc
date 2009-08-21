@@ -18,6 +18,8 @@ package org.codenarc.util.io
 /**
  * A Resource implementation for resources available on the classpath.
  * <p/>
+ * This class also provides a static <code>InputStream getInputStream(String path)</code> convenience method.
+ * <p/>
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
@@ -27,8 +29,23 @@ class ClassPathResource implements Resource {
     final String path
 
     /**
+     * Convenience method to open an InputStream on the specified resource path relative the classpath
+     * @path - the path to the resource (file). The path is relative to the classpath,
+     *      by default, but may be optionally prefixed by any of the valid java.net.URL prefixes, such
+     *      as "file:" (to load from a relative or absolute path on the filesystem), or "http:". The
+     *      path must not be empty or null.
+     * @throws IOException - if an error occurs opening the InputStream
+     */
+    static InputStream getInputStream(String path) throws IOException {
+        return new ClassPathResource(path).getInputStream()
+    }
+
+    /**
      * Construct a new ClassPathResource
-     * @path - the filesystem path to the file. May be absolute or relative.
+     * @path - the path to the resource (file). The path is relative to the classpath,
+     *      by default, but may be optionally prefixed by any of the valid java.net.URL prefixes, such
+     *      as "file:" (to load from a relative or absolute path on the filesystem), or "http:". The
+     *      path must not be empty or null.
      */
     ClassPathResource(String path) {
         assert path

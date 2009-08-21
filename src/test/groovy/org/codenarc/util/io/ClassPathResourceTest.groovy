@@ -56,4 +56,16 @@ class ClassPathResourceTest extends AbstractTest {
         assert resource.getInputStream().text == TEXT_FILE_CONTENTS
     }
 
+    void testGetInputStream_Static() {
+        assert ClassPathResource.getInputStream(TEXT_FILE).text == TEXT_FILE_CONTENTS
+    }
+
+    void testGetInputStream_Static_FileDoesNotExist() {
+        shouldFail(IOException) { ClassPathResource.getInputStream('DoesNotExist.txt') }
+    }
+
+    void testGetInputStream_Static_NullOrEmpty() {
+        shouldFailWithMessageContaining('path') { ClassPathResource.getInputStream(null) }
+        shouldFailWithMessageContaining('path') { ClassPathResource.getInputStream('') }
+    }
 }

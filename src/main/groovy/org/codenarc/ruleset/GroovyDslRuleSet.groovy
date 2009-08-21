@@ -16,6 +16,8 @@
 package org.codenarc.ruleset
 
 import org.apache.log4j.Logger
+import org.codenarc.util.io.ResourceFactory
+import org.codenarc.util.io.DefaultResourceFactory
 
 /**
  * A <code>RuleSet</code> implementation that parses a Groovy DSL of RuleSet definitions.
@@ -26,7 +28,8 @@ import org.apache.log4j.Logger
  * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
  */
 class GroovyDslRuleSet implements RuleSet {
-    static final LOG = Logger.getLogger(XmlFileRuleSet)
+    private static final LOG = Logger.getLogger(XmlFileRuleSet)
+    private ResourceFactory resourceFactory = new DefaultResourceFactory()
     private rules
 
     /**
@@ -36,8 +39,7 @@ class GroovyDslRuleSet implements RuleSet {
     GroovyDslRuleSet(String path) {
         assert path
         LOG.info("Loading ruleset from [$path]")
-        def inputStream = getClass().classLoader.getResourceAsStream(path)
-        assert inputStream, "File [$path] does not exist or is not accessible"
+        def inputStream = resourceFactory.getResource(path).inputStream 
 
         def ruleSetBuilder = new RuleSetBuilder()
 

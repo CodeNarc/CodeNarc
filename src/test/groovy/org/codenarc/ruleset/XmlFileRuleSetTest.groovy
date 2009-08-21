@@ -59,6 +59,13 @@ class XmlFileRuleSetTest extends AbstractTest {
         assert rules*.priority == [0, 1, 2]
     }
 
+    void testFileUrl() {
+        final PATH = 'file:src/test/resources/rulesets/RuleSet1.xml'
+        def ruleSet = new XmlFileRuleSet(PATH)
+        def rules = ruleSet.rules
+        assert rules*.class == [TestPathRule]
+    }
+
     void testRulesListIsImmutable() {
         final PATH = 'rulesets/RuleSet1.xml'
         def ruleSet = new XmlFileRuleSet(PATH)

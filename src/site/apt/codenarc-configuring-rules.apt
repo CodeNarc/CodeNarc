@@ -61,8 +61,11 @@ CodeNarc - Configuring Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <<CodeNarc>> reads the properties file named "codenarc.properties", if found on the classpath,
-  and applies the property values to any matching <Rules>. If the properties file is not found on
-  the classpath, then do nothing.
+  and applies the property values to any matching <Rules>. You can optionally override the location
+  of the properties file by setting the "codenarc.properties.file" system property to the path or
+  URL of the properties file. That can include a "file:" URL to load from a relative or absolute
+  path on the filesystem (e.g., "file:relative/path/override-codenarc.properties"). If the
+  properties file is not found, then do nothing.
 
   For each properties entry of the form <[rule-name].[property-name]=[property-value]>,
   the named property for the rule matching <rule-name> is set to the

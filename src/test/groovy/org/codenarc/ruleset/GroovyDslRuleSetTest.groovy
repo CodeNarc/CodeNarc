@@ -39,7 +39,18 @@ class GroovyDslRuleSetTest extends AbstractTest {
     }
 
     void testLoadGroovyRuleSet() {
-        final PATH = 'rulesets/GroovyRuleSet1.txt'      // TODO Handle .groovy files
+        final PATH = 'rulesets/GroovyRuleSet1.txt'  // groovy files are not on classpath; have to use *.txt
+        def groovyDslRuleSet = new GroovyDslRuleSet(PATH)
+        def rules = groovyDslRuleSet.rules
+        log("rules=$rules")
+        assert rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock']
+        assert rules[0].priority == 1
+        assert !rules[0].enabled
+        assert rules[1].priority == 3
+    }
+
+    void testLoadGroovyRuleSet_RelativeFileUrl() {
+        final PATH = 'file:src/test/resources/rulesets/GroovyRuleSet1.groovy'
         def groovyDslRuleSet = new GroovyDslRuleSet(PATH)
         def rules = groovyDslRuleSet.rules
         log("rules=$rules")

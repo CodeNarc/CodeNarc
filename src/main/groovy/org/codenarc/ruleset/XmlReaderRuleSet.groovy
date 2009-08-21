@@ -21,6 +21,7 @@ import javax.xml.XMLConstants
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
 import groovy.xml.Namespace
+import org.codenarc.util.io.ClassPathResource
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a
@@ -32,8 +33,9 @@ import groovy.xml.Namespace
  */
 class XmlReaderRuleSet implements RuleSet {
 
-    static final LOG = Logger.getLogger(XmlReaderRuleSet)
-    static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
+    private static final LOG = Logger.getLogger(XmlReaderRuleSet)
+    private static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
+    private static final RULESET_SCHEMA_FILE = 'ruleset-schema.xsd'
     private List rules = []
 
     /**
@@ -127,6 +129,6 @@ class XmlReaderRuleSet implements RuleSet {
     }
 
     private InputStream getSchemaXmlInputStream() {
-        return getClass().classLoader.getResourceAsStream('ruleset-schema.xsd')
+        return ClassPathResource.getInputStream(RULESET_SCHEMA_FILE)
     }
 }

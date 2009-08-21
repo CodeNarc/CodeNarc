@@ -17,6 +17,8 @@ package org.codenarc.ruleset
 
 import org.apache.log4j.Logger
 import org.codenarc.util.PropertyUtil
+import org.codenarc.util.io.ResourceFactory
+import org.codenarc.util.io.DefaultResourceFactory
 
 /**
  * Reads the properties file named "codenarc.properties", if found on the classpath, and applies
@@ -38,9 +40,10 @@ import org.codenarc.util.PropertyUtil
  */
 class PropertiesFileRuleSetConfigurer {
 
-    static final LOG = Logger.getLogger(PropertiesFileRuleSetConfigurer)
-    static final PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
+    private static final LOG = Logger.getLogger(PropertiesFileRuleSetConfigurer)
+    private static final PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
 
+    private ResourceFactory resourceFactory = new DefaultResourceFactory()
     protected defaultPropertiesFilename = 'codenarc.properties'
 
     /**
@@ -58,8 +61,8 @@ class PropertiesFileRuleSetConfigurer {
 
         def propertiesFilename = System.getProperty(PROPERTIES_FILE_SYSPROP) ?: defaultPropertiesFilename
 
-        def inputStream = getClass().classLoader.getResourceAsStream(propertiesFilename)
-        if (inputStream) {
+        try {
+            def inputStream = resourceFactory.getResource(propertiesFilename).inputStream
             LOG.info("Reading RuleSet configuration from properties file [$propertiesFilename].")
             inputStream.withStream { input ->
                 def properties = new Properties()
@@ -67,7 +70,7 @@ class PropertiesFileRuleSetConfigurer {
                 applyProperties(properties, ruleSet)
             }
         }
-        else {
+        catch(IOException e) {
             LOG.info("RuleSet configuration properties file [$propertiesFilename] not found.")
         }
     }

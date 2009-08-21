@@ -23,7 +23,7 @@ package org.codenarc.util.io
  * @author Chris Mair
  * @version $Revision: 181 $ - $Date: 2009-07-11 18:32:34 -0400 (Sat, 11 Jul 2009) $
  */
-class DefaultResourceFactory {
+class DefaultResourceFactory implements ResourceFactory {
 
     /**
      * Return a Resource instance suitable for the specified path.

@@ -16,29 +16,36 @@
 package org.codenarc.ruleset
 
 import org.apache.log4j.Logger
+import org.codenarc.util.io.ResourceFactory
+import org.codenarc.util.io.DefaultResourceFactory
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a
- * file. The filename passed into the constructor is interpreted relative to the classpath.
+ * file. The filename passed into the constructor is interpreted relative to the classpath, by
+ * default, but may be optionally prefixed by any of the valid java.net.URL prefixes, such as
+ * "file:" (to load from a relative or absolute path on the filesystem), or "http:".
+ * <p/>
  * Note that this class attempts to read the file and parse the XML from within the constructor.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class XmlFileRuleSet implements RuleSet {
-    static final LOG = Logger.getLogger(XmlFileRuleSet)
-
+    private static final LOG = Logger.getLogger(XmlFileRuleSet)
+    private ResourceFactory resourceFactory = new DefaultResourceFactory()
     private List rules = []
 
     /**
      * Construct a new instance on the specified RuleSet file path
-     * @param path - the path to the XML RuleSet definition file, relative to the classpath; must not be empty or null
+     * @param path - the path to the XML RuleSet definition file. The path is relative to the classpath,
+     *      by default, but may be optionally prefixed by any of the valid java.net.URL prefixes, such
+     *      as "file:" (to load from a relative or absolute path on the filesystem), or "http:". The
+     *      path must not be empty or null.
      */
     XmlFileRuleSet(String path) {
         assert path
         LOG.info("Loading ruleset from [$path]")
-        def inputStream = getClass().classLoader.getResourceAsStream(path)
-        assert inputStream, "File [$path] does not exist or is not accessible"
+        def inputStream = resourceFactory.getResource(path).inputStream
         inputStream.withReader { reader ->
             def xmlReaderRuleSet = new XmlReaderRuleSet(reader)
             this.rules = xmlReaderRuleSet.rules

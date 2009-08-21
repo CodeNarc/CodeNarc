@@ -19,6 +19,7 @@
     <orderEntry type="library" name="GROOVY" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="GROOVY" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="org.codehaus.groovy.maven.runtime:gmaven-runtime-default:1.0-rc-3">
         <CLASSES>

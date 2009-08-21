@@ -66,7 +66,9 @@ ruleset {
   About the "inner" <<ruleset>> statements:
 
     * Each <<ruleset>> statement loads a <RuleSet> file. The path specifies either a
-      Groovy file or an XML file, and is relative to the classpath.
+      Groovy file or an XML file. By default, the paths specified are relative to the classpath.
+      But these paths may be optionally prefixed by any of the valid java.net.URL prefixes, such as
+      "file:" (to load from a relative or absolute path on the filesystem), or "http:".
 
     * The 'rulesets/basic.xml' <RuleSet> file is interpreted as an XML
       file based on the '.xml' extension. Likewise, the 'MyGroovyRuleSet.groovy' file
@@ -103,6 +105,9 @@ ruleset {
             The <Rule> class must be available on the classpath.
 
       [[b]] The path to a <Rule Script> file. See "MyGroovyRuleSet.groovy" within the example.
+            By default, the paths specified are relative to the classpath. But these paths may be
+            optionally prefixed by any of the valid java.net.URL prefixes, such as
+            "file:" (to load from a relative or absolute path on the filesystem) or "http:".
 
     * A <<rule>> can optionally provide configuration of the <Rule> properties by specifying a <closure>
       containing property assignment statements. See <<<ThrowExceptionFromFinallyBlockRule>>> within the
@@ -117,20 +122,21 @@ ruleset {
   is included within the <<CodeNarc>> jar. It contains three sections, all of which are optional, though
   the sections must be in the order listed:
 
-*-----------------------+--------------------------------------------------------------+--------------------------+
-| <<XML Tag>>           | <<Purpose>>                                                  | <<How many are allowed>> |
-*-----------------------+--------------------------------------------------------------+--------------------------+
-| <<<\<description\>>>> | Describe the purpose of the <RuleSet>                        |  Zero or one             |
-*-----------------------+--------------------------------------------------------------+--------------------------+
-| <<<\<ruleset-ref\>>>> | Include a nested <RuleSet>, optionally configuring and/or    |  Zero or more            |
-|                       | filtering the rules within it. The path to the <RuleSet>     |                          |
-|                       | can specify either an XML file or a Groovy <RuleSet> file.   |                          |
-*-----------------------+--------------------------------------------------------------+--------------------------+
-| <<<\<rule\>>>>        | Include a single rule; specify its fully-qualified classname |  Zero or more            |
-*-----------------------+--------------------------------------------------------------+--------------------------+
-| <<<\<rule-script\>>>> | Include a single rule implemented by a groovy script;        |  Zero or more            |
-|                       | specify the path of the script, relative to the classpath.   |                          |
-*-----------------------+--------------------------------------------------------------+--------------------------+
+*-----------------------+---------------------------------------------------------------+--------------------------+
+| <<XML Tag>>           | <<Purpose>>                                                   | <<How many are allowed>> |
+*-----------------------+---------------------------------------------------------------+--------------------------+
+| <<<\<description\>>>> | Describe the purpose of the <RuleSet>                         |  Zero or one             |
+*-----------------------+---------------------------------------------------------------+--------------------------+
+| <<<\<ruleset-ref\>>>> | Include a nested <RuleSet>, optionally configuring and/or     |  Zero or more            |
+|                       | filtering the rules within it. The path to the <RuleSet>      |                          |
+|                       | can specify either an XML file or a Groovy <RuleSet> file.    |                          |
+*-----------------------+---------------------------------------------------------------+--------------------------+
+| <<<\<rule\>>>>        | Include a single rule; specify its fully-qualified classname  |  Zero or more            |
+*-----------------------+---------------------------------------------------------------+--------------------------+
+| <<<\<rule-script\>>>> | Include a single rule implemented by a groovy script;         |  Zero or more            |
+|                       | specify the path of the script. The path is relative to the   |                          |
+|                       | classpath by default, but can optionally specify a URL prefix.|                          |
+*-----------------------+---------------------------------------------------------------+--------------------------+
 
 
 ** A Sample XML RuleSet
@@ -174,7 +180,9 @@ ruleset {
 
   About the \<ruleset-ref\> elements:
 
-    * The <path> of the \<ruleset-ref\> is relative to the classpath.
+    * By default, The <path> of the \<ruleset-ref\> is relative to the classpath.
+      But these paths may be optionally prefixed by any of the valid java.net.URL prefixes, such as
+      "file:" (to load from a relative or absolute path on the filesystem) or "http:".
 
     * You can optionally set arbitrary properties for the rules within the <RuleSet> by
     including one or more \<property\> elements within a \<rule-config\> element. In the example
@@ -205,8 +213,10 @@ ruleset {
 
   About the \<rule-script\> elements:
 
-    * You must specify the <path> for the rule script Groovy file. This <path> is
-      relative to the classpath.<Rule>.
+    * You must specify the <path> for the rule script Groovy file. By default, this <path> is
+      relative to the classpath. But these paths may be optionally prefixed by any of the
+      valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute path
+      on the filesystem) or "http:".
 
     * The class defined within the rule script Groovy file must implement the
       <<<org.codenarc.rule.Rule>>> interface.

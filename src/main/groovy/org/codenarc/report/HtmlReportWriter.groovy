@@ -19,6 +19,7 @@ import groovy.xml.StreamingMarkupBuilder
 import org.apache.log4j.Logger
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
+import org.codenarc.util.io.ClassPathResource
 
 /**
  * ReportWriter that generates an HTML report.
@@ -37,6 +38,7 @@ class HtmlReportWriter implements ReportWriter {
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
     private static final CSS_FILE = 'codenarc-htmlreport.css'
     private static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
+    private static final VERSION_FILE = 'codenarc-version.txt'
     private static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
     private static final ROOT_PACKAGE_NAME = '<Root>'
     private static final MAX_SOURCE_LINE_LENGTH = 70
@@ -80,7 +82,7 @@ class HtmlReportWriter implements ReportWriter {
 
     private buildCSS() {
         return {
-            def cssInputStream = getClass().getClassLoader().getResourceAsStream(CSS_FILE)
+            def cssInputStream = ClassPathResource.getInputStream(CSS_FILE)
             assert cssInputStream, "CSS File [$CSS_FILE] not found"
             def css = cssInputStream.text
             unescaped << css
@@ -323,7 +325,7 @@ class HtmlReportWriter implements ReportWriter {
     }
 
     private buildVersionFooter() {
-        def versionText = getClass().getClassLoader().getResourceAsStream('codenarc-version.txt').text
+        def versionText = ClassPathResource.getInputStream(VERSION_FILE).text
         return {
             p(class:'version') {
                 a(versionText, href:"http://www.codenarc.org")
