@@ -226,8 +226,8 @@ class HtmlReportWriter implements ReportWriter {
                     def priorityCssClass = "priority${violation.rule.priority}"
                     def moreInfo = violation.message ? violation.message : ""
                     tr {
-                        td(class:priorityCssClass) {
-                            a(violation.rule.name, href:"#${violation.rule.name}")
+                        td {
+                            a(violation.rule.name, href:"#${violation.rule.name}", class:priorityCssClass)
                         }
                         td(violation.rule.priority, class:priorityCssClass)
                         td(violation.lineNumber, class:'number')
