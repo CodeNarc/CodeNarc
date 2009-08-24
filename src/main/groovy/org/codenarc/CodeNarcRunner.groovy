@@ -19,7 +19,6 @@ import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.ruleset.CompositeRuleSet
-import org.codenarc.ruleset.XmlFileRuleSet
 import org.apache.log4j.Logger
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSetUtil
@@ -42,7 +41,7 @@ import org.codenarc.ruleset.RuleSetUtil
  * @version $Revision$ - $Date$
  */
 class CodeNarcRunner {
-    static final LOG = Logger.getLogger(CodeNarcRunner)
+    private static final LOG = Logger.getLogger(CodeNarcRunner)
 
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer

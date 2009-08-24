@@ -26,17 +26,17 @@ import org.apache.log4j.Logger
 import org.apache.tools.ant.Project
 
 /**
- * SourceAnalyzer implementation that gets source files from an Ant FileSet.
+ * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class AntFileSetSourceAnalyzer implements SourceAnalyzer {
-    static final LOG = Logger.getLogger(AntFileSetSourceAnalyzer)
-    static final SEP = '/'
+    private static final LOG = Logger.getLogger(AntFileSetSourceAnalyzer)
+    private static final SEP = '/'
 
     private Project project
-    private FileSet fileSet
+    protected List fileSets = []
     private Map resultsMap = [:]
     private Map fileCountMap = [:]
 
@@ -44,14 +44,21 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
 
     /**
      * Construct a new instance on the specified Ant FileSet.
-     * @param project - the Ant Project
-     * @param fileSet - the Ant FileSet
+     * @param project - the Ant Project; must not be null
+     * @param fileSet - the Ant FileSet; must not be null
      */
     AntFileSetSourceAnalyzer(Project project, FileSet fileSet) {
-        assert project
         assert fileSet
-        this.project = project
-        this.fileSet = fileSet
+        initialize(project, [fileSet])
+    }
+
+    /**
+     * Construct a new instance on the specified List of Ant FileSets.
+     * @param project - the Ant Project
+     * @param fileSets - the List of Ant FileSet; my be empty; must not be null
+     */
+    AntFileSetSourceAnalyzer(Project project, List fileSets) {
+        initialize(project, fileSets)
     }
 
     /**
@@ -59,26 +66,42 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
      * @param ruleset - the RuleSet to apply to each source component; must not be null.
      * @return the results from applying the RuleSet to all of the source
      */
-    public Results analyze(RuleSet ruleSet) {
+    Results analyze(RuleSet ruleSet) {
         def reportResults = new DirectoryResults()
 
-        def dirScanner = fileSet.getDirectoryScanner(project)
-        def includedFiles = dirScanner.includedFiles
-
-        if (!includedFiles) {
-            LOG.info("No matching files found for FileSet with basedir [${fileSet.getDir(project)}]")
+        fileSets.each { fileSet ->
+            processFileSet(fileSet, ruleSet, reportResults)
         }
 
-        includedFiles.each { filePath ->
-            processFile(filePath, reportResults, ruleSet)
-        }
         addDirectoryResults(reportResults)
         return reportResults
     }
 
+
     //--------------------------------------------------------------------------
     // Internal Helper Methods
     //--------------------------------------------------------------------------
+
+    private initialize(Project project, List fileSets) {
+        assert project
+        assert fileSets != null
+        this.project = project
+        this.fileSets = fileSets
+    }
+
+    private void processFileSet(fileSet, ruleSet, reportResults) {
+        def dirScanner = fileSet.getDirectoryScanner(project)
+        def baseDir = fileSet.getDir(project)
+        def includedFiles = dirScanner.includedFiles
+
+        if (!includedFiles) {
+            LOG.info("No matching files found for FileSet with basedir [$baseDir]")
+        }
+
+        includedFiles.each {filePath ->
+            processFile(baseDir, filePath, reportResults, ruleSet)
+        }
+    }
 
     private String getParentPath(String filePath) {
         def normalizedPath = normalizePath(filePath)
@@ -134,8 +157,8 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         }
     }
 
-    private def processFile(String filePath, reportResults, RuleSet ruleSet) {
-        def file = new File(fileSet.getDir(project), filePath)
+    private void processFile(File baseDir, String filePath, reportResults, RuleSet ruleSet) {
+        def file = new File(baseDir, filePath)
         def sourceFile = new SourceFile(file)
         def allViolations = []
         ruleSet.rules.each {rule ->

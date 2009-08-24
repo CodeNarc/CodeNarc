@@ -15,18 +15,13 @@
  */
 package org.codenarc.ant
 
+import org.apache.log4j.Logger
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
-import org.codenarc.AnalysisContext
+import org.codenarc.CodeNarcRunner
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
-import org.codenarc.ruleset.CompositeRuleSet
-import org.codenarc.ruleset.RuleSet
-import org.codenarc.ruleset.XmlFileRuleSet
-import org.apache.log4j.Logger
-import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
-import org.codenarc.CodeNarcRunner
 import org.codenarc.results.Results
 
 /**
@@ -41,8 +36,8 @@ import org.codenarc.results.Results
  * <code>maxPriority2Violations</code> and <code>maxPriority3Violations</code> specifiy the
  * thresholds for violations of priority 2 and 3.
  * <p/>
- * The <code>fileset</code> nested element is required, and is used to specify the source files to be
- * analyzed. This is the standard Ant <i>FileSet</i>, and is quite powerful and flexible.
+ * At least one nested <code>fileset</code> element is required, and is used to specify the source files
+ * to be analyzed. This is the standard Ant <i>FileSet</i>, and is quite powerful and flexible.
  * See the <i>Apache Ant Manual</i> for more information on <i>FileSets</i>. 
  * <p/>
  * The <ode>report</code> nested element defines the format and output file for the analysis report.
@@ -55,7 +50,7 @@ import org.codenarc.results.Results
  * @version $Revision$ - $Date$
  */
 class CodeNarcTask extends Task {
-    static final LOG = Logger.getLogger(CodeNarcTask)
+    private static final LOG = Logger.getLogger(CodeNarcTask)
 
     /**
      * The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
@@ -68,7 +63,7 @@ class CodeNarcTask extends Task {
     int maxPriority3Violations = Integer.MAX_VALUE
 
     protected List reportWriters = []
-    protected FileSet fileSet
+    protected List fileSets = []
     protected ruleSet
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
@@ -79,7 +74,7 @@ class CodeNarcTask extends Task {
      */
     void execute() throws BuildException {
         assert ruleSetFiles
-        assert fileSet
+        assert fileSets
 
         def sourceAnalyzer = createSourceAnalyzer()
         def codeNarcRunner = createCodeNarcRunner()
@@ -94,10 +89,7 @@ class CodeNarcTask extends Task {
 
     void addFileset(FileSet fileSet) {
         assert fileSet
-        if (this.fileSet) {
-            throw new BuildException('The FileSet for this Task has already been set. Only a single FileSet is allowed.')
-        }
-        this.fileSet = fileSet
+        this.fileSets << fileSet
     }
 
     /**
@@ -121,7 +113,7 @@ class CodeNarcTask extends Task {
      * @return a configured SourceAnalyzer instance
      */
     protected SourceAnalyzer createSourceAnalyzer() {
-        return new AntFileSetSourceAnalyzer(getProject(), fileSet)
+        return new AntFileSetSourceAnalyzer(getProject(), fileSets)
     }
 
     private void checkMaxViolations(Results results) {

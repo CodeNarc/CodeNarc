@@ -30,13 +30,17 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class AntFileSetSourceAnalyzerTest extends AbstractTest {
-    static final BASE_DIR = 'src/test/resources'
+    private static final BASE_DIR = 'src/test/resources'
     private project
     private fileSet
     private ruleSet
 
     void testConstructor_NullFileSet() {
-        shouldFailWithMessageContaining('fileSet') { new AntFileSetSourceAnalyzer(project, null) }
+        shouldFailWithMessageContaining('fileSet') { new AntFileSetSourceAnalyzer(project, (FileSet)null) }
+    }
+
+    void testConstructor_NullListOfFileSets() {
+        shouldFailWithMessageContaining('fileSet') { new AntFileSetSourceAnalyzer(project, (List)null) }
     }
 
     void testConstructor_NullProject() {
@@ -102,6 +106,27 @@ class AntFileSetSourceAnalyzerTest extends AbstractTest {
         assertResultsCounts(results.findResultsForPath('sourcewithdirs/subdir1'), 2, 0)
         assertResultsCounts(results.findResultsForPath('sourcewithdirs/subdir2'), 2, 0)
         assertResultsCounts(results.findResultsForPath('sourcewithdirs/subdir2/subdir2a'), 1, 0)
+    }
+
+    void testAnalyze_MultipleFileSets() {
+        final DIR1 = 'src/test/resources/sourcewithdirs/subdir1'
+        final DIR2 = 'src/test/resources/sourcewithdirs/subdir2'
+        final GROOVY_FILES = '**/*.groovy'
+        def fileSet1 = new FileSet(dir:new File(DIR1), project:project, includes:GROOVY_FILES)
+        def fileSet2 = new FileSet(dir:new File(DIR2), project:project, includes:GROOVY_FILES)
+
+        def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet1, fileSet2])
+        def results = analyzer.analyze(ruleSet)
+        def sourceFilePaths = results.getViolationsWithPriority(1).collect { it.message }
+        log("sourceFilePaths=$sourceFilePaths")
+        final EXPECTED_PATHS = [
+                'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
+                'src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
+        ]
+        assertEqualSets(sourceFilePaths, EXPECTED_PATHS)
+        assertResultsCounts(results, 4, 4)
     }
 
     void testAnalyze_EmptyFileSet() {

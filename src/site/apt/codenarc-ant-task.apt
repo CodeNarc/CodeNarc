@@ -52,7 +52,7 @@ CodeNarc - Ant Task
 * Fileset Nested Element
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  The <<fileset>> nested element is required, and is used to specify the source files that
+  At least one <<fileset>> nested element is required, and is used to specify the source files that
   <<CodeNarc>> should analyze. This is the standard Ant <FileSet>, and is quite powerful and flexible.
   See the {{{http://ant.apache.org/manual/index.html}Apache Ant Manual}} for more information on <FileSets>.
 

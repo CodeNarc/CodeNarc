@@ -32,11 +32,12 @@ import org.codenarc.results.FileResults
  * @version $Revision$ - $Date$
  */
 class CodeNarcTaskTest extends AbstractTest {
-    static final BASE_DIR = 'src/test/resources'
-    static final RULESET_FILE = 'rulesets/RuleSet1.xml'
-    static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
-    static final REPORT_FILE = 'CodeNarcTaskHtmlReport.html'
-    static final RESULTS = new FileResults('path', [])
+
+    private static final BASE_DIR = 'src/test/resources'
+    private static final RULESET_FILE = 'rulesets/RuleSet1.xml'
+    private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
+    private static final REPORT_FILE = 'CodeNarcTaskHtmlReport.html'
+    private static final RESULTS = new FileResults('path', [])
 
     private codeNarcTask
     private fileSet
@@ -86,24 +87,18 @@ class CodeNarcTaskTest extends AbstractTest {
     }
 
     void testExecute_SingleRuleSetFile() {
-        def codeNarcRunner = [execute: { return RESULTS }]
-        codeNarcTask.createCodeNarcRunner = { return codeNarcRunner }
+        def codeNarcRunner = createAndUseFakeCodeNarcRunner()
 
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
 
         assert codeNarcRunner.sourceAnalyzer.class == AntFileSetSourceAnalyzer
         assert codeNarcRunner.ruleSetFiles == RULESET_FILE
-
-        assert codeNarcRunner.reportWriters.size == 1
-        def reportWriter = codeNarcRunner.reportWriters[0]
-        assert reportWriter.class == HtmlReportWriter
-        assert reportWriter.outputFile == REPORT_FILE
+        assertStandardHtmlReportWriter(codeNarcRunner)
     }
 
-    void testExecute_MultipleRuleSetFiles() {
-        def codeNarcRunner = [execute: { return RESULTS }]
-        codeNarcTask.createCodeNarcRunner = { return codeNarcRunner }
+    void testExecute_TwoRuleSetFiles() {
+        def codeNarcRunner = createAndUseFakeCodeNarcRunner()
 
         codeNarcTask.ruleSetFiles = RULESET_FILES
         codeNarcTask.addFileset(fileSet)
@@ -111,11 +106,21 @@ class CodeNarcTaskTest extends AbstractTest {
 
         assert codeNarcRunner.sourceAnalyzer.class == AntFileSetSourceAnalyzer
         assert codeNarcRunner.ruleSetFiles == RULESET_FILES
+        assertStandardHtmlReportWriter(codeNarcRunner)
+    }
 
-        assert codeNarcRunner.reportWriters.size == 1
-        def reportWriter = codeNarcRunner.reportWriters[0]
-        assert reportWriter.class == HtmlReportWriter
-        assert reportWriter.outputFile == REPORT_FILE
+    void testExecute_TwoFileSets() {
+        def codeNarcRunner = createAndUseFakeCodeNarcRunner()
+        def fileSet2 = new FileSet(dir:new File('/abc'), project:project)
+
+        codeNarcTask.addFileset(fileSet)
+        codeNarcTask.addFileset(fileSet2)
+        codeNarcTask.execute()
+
+        assert codeNarcRunner.sourceAnalyzer.class == AntFileSetSourceAnalyzer
+        assert codeNarcRunner.sourceAnalyzer.fileSets == [fileSet, fileSet2]
+        assert codeNarcRunner.ruleSetFiles == RULESET_FILE
+        assertStandardHtmlReportWriter(codeNarcRunner)
     }
 
     void testExecute_RuleSetFileDoesNotExist() {
@@ -161,11 +166,6 @@ class CodeNarcTaskTest extends AbstractTest {
         shouldFailWithMessageContaining('fileSet') { codeNarcTask.addFileset(null) }
     }
 
-    void testAddFileSet_Twice() {
-        codeNarcTask.addFileset(fileSet)
-        shouldFail(BuildException) { codeNarcTask.addFileset(fileSet) }
-    }
-
     void setUp() {
         super.setUp()
 
@@ -176,6 +176,19 @@ class CodeNarcTaskTest extends AbstractTest {
         codeNarcTask = new CodeNarcTask(project:project)
         codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:REPORT_FILE))
         codeNarcTask.ruleSetFiles = RULESET_FILE
+    }
+
+    private createAndUseFakeCodeNarcRunner() {
+        def codeNarcRunner = [execute: { return RESULTS }]
+        codeNarcTask.createCodeNarcRunner = { return codeNarcRunner }
+        return codeNarcRunner
+    }
+
+    private void assertStandardHtmlReportWriter(codeNarcRunner) {
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assert reportWriter.class == HtmlReportWriter
+        assert reportWriter.outputFile == REPORT_FILE
     }
 }
 
