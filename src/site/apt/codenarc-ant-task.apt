@@ -16,9 +16,12 @@ CodeNarc - Ant Task
 *------------------------+----------------------------------------------------------------+------------------------+
 | <<Attribute>>          | <<Description>>                                                | <<Required>>           |
 *------------------------+----------------------------------------------------------------+------------------------+
-| ruleSetFiles           | The paths to the Groovy or XML RuleSet definition files,       | YES                    |
-|                        | relative to the classpath. This can be a single file path, or  |                        |
-|                        | multiple paths separated by commas.                            |                        |
+| ruleSetFiles           | The paths to the Groovy or XML RuleSet definition files. This  | YES                    |
+|                        | can be a single file path, or  multiple paths separated by     |                        |
+|                        | commas. By default, the paths specified are relative to the    |                        |
+|                        | classpath. But each path may be optionally prefixed by any     |                        |
+|                        | of the valid java.net.URL prefixes, such as "file:" (to load   |                        |
+|                        | from a relative or absolute filesystem path), or "http:".      |                        |
 *------------------------+----------------------------------------------------------------+------------------------+
 | maxPriority1Violations | The maximum number of priority 1 violations allowed before     | NO                     |
 |                        | failing the build (throwing a <<<BuildException>>>).           |                        |
