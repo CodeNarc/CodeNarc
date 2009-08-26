@@ -25,7 +25,7 @@ import org.codenarc.util.io.DefaultResourceFactory
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision: 27 $ - $Date: 2009-02-02 22:41:59 -0500 (Mon, 02 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 class RuleSetUtil {
     private static ResourceFactory resourceFactory = new DefaultResourceFactory()

@@ -29,7 +29,7 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
  * Rule that checks for variables that are not referenced.
  *
  * @author Chris Mair
- * @version $Revision: 177 $ - $Date: 2009-06-27 08:05:52 -0400 (Sat, 27 Jun 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnusedVariableRule extends AbstractAstVisitorRule {
     String name = 'UnusedVariable'

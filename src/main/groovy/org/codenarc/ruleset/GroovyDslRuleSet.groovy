@@ -25,7 +25,7 @@ import org.codenarc.util.io.DefaultResourceFactory
  * Note that this class attempts to read the file and parse the Groovy from within the constructor.
  *
  * @author Chris Mair
- * @version $Revision: 7 $ - $Date: 2009-01-21 21:52:00 -0500 (Wed, 21 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class GroovyDslRuleSet implements RuleSet {
     private static final LOG = Logger.getLogger(XmlFileRuleSet)

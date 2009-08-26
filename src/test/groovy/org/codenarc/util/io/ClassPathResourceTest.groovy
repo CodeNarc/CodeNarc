@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTest
  * Tests for ClassPathResource
  *
  * @author Chris Mair
- * @version $Revision: 181 $ - $Date: 2009-07-11 18:32:34 -0400 (Sat, 11 Jul 2009) $
+ * @version $Revision$ - $Date$
  */
 class ClassPathResourceTest extends AbstractTest {
 

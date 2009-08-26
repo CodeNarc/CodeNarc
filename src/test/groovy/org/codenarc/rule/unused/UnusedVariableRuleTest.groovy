@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnusedVariableRule
  *
  * @author Chris Mair
- * @version $Revision: 178 $ - $Date: 2009-06-29 22:16:13 -0400 (Mon, 29 Jun 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnusedVariableRuleTest extends AbstractRuleTest {
 

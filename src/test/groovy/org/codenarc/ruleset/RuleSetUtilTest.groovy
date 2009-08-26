@@ -23,7 +23,7 @@ import org.codenarc.rule.Rule
  * Tests for RuleSetUtil
  *
  * @author Chris Mair
- * @version $Revision: 27 $ - $Date: 2009-02-02 22:41:59 -0500 (Mon, 02 Feb 2009) $
+ * @version $Revision$ - $Date$
  */
 class RuleSetUtilTest extends AbstractTest {
     private static final RULESET_XML_FILE = 'rulesets/RuleSet1.xml'
