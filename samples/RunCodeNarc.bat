@@ -8,4 +8,4 @@
 
 @set GROOVY_JAR="%GROOVY_HOME%/embeddable/groovy-all-1.5.6.jar"
 
-@java -classpath %GROOVY_JAR%;lib/CodeNarc-0.6.jar;lib/log4j-1.2.13.jar;lib org.codenarc.CodeNarc %*
+@java -classpath %GROOVY_JAR%;lib/CodeNarc-0.7.jar;lib/log4j-1.2.13.jar;lib org.codenarc.CodeNarc %*

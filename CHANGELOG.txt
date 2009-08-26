@@ -2,6 +2,26 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.7 (25 Aug 2009)
+------------------------------------
+BUG FIXES
+- Fix Bug #2825698: “UnusedVariableRule: stops after 1st unused variable per name”. https://sourceforge.net/tracker/?func=detail&aid=2825698&group_id=250145&atid=1126573.
+- Fix Bug #2828696: “UnusedImport rule with fully qualified class reference”   https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2828696&group_id=250145.
+- UnusedImportRule: Add support for static imports. Document known limitation: will not work on imports with wildcards.
+- UnnecessaryGroovyImportRule: Add java.net as another automatically included package.
+NEW FEATURES AND INFRASTRUCTURE
+- Groovy DSL for defining RuleSets. (GroovyDslRuleSet and RuleSetBuilder).
+- Enable optional prefix of “file:”, “http:” or any other standard URL prefix for resource files, including ruleset files, “codenarc.properties” and rule scripts.
+    * Addresses Tracker Issue #2828616: “Allow ruleset file to be specified as a file or url” https://sourceforge.net/tracker/?func=detail&atid=1126575&aid=2828616&group_id=250145.
+- CodeNarcTask and AntFileSetSourceAnalyzer: Allow more than one FileSet to be added.
+    * Addresses Tracker Issue #2831255: “Ant task should accept any ResourceCollection for source”  https://sourceforge.net/tracker/?func=detail&aid=2831255&group_id=250145&atid=1126575.
+- HtmlReportWriter: Show rule name in color according to priority.
+- CompositeRuleSet: Rename add(RuleSet) to addRuleSet(RuleSet). Add addRule(Rule).
+RULES
+- Create new PropertyNameRule. (naming)
+- FieldNameRule: Do not apply to property fields.
+
+
 Changes in version 0.6 (17 Jul 2009)
 ------------------------------------
 BUG FIXES
