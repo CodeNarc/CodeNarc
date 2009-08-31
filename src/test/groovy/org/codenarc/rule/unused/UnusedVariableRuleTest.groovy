@@ -190,6 +190,32 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_ClosureVariableReferencedButNotInvoked() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    final CLOSURE = {
+                        doSomething()
+                    }
+                    return CLOSURE
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_UntypedVariableInvokedAsAClosure() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod(someClosure) {
+                    def defaultClosure = someClosure
+                    defaultClosure()            
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_UnusedClosureVariable() {
         final SOURCE = '''
             class MyClass {
@@ -201,7 +227,7 @@ class UnusedVariableRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 4, "def count = { println 'ok' }")
     }
 
-    void testApplyTo_MethodCallWithSameName() {
+    void testApplyTo_ExplicitMethodCallOnThisWithSameMethodName() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
