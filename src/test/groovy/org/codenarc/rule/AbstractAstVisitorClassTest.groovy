@@ -27,8 +27,8 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorClassTest extends AbstractTest {
-    static final LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'
-    static final SOURCE = """class ABC {
+    private static final LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'
+    private static final SOURCE = """class ABC {
             def justReturn() {
                 println "about to return"; return "ABC"
             }
@@ -37,14 +37,18 @@ class AbstractAstVisitorClassTest extends AbstractTest {
             }
         }
     """
-    def astVisitor
-    def sourceCode
-    def rule
+    private astVisitor
+    private sourceCode
+    private rule
 
     void testIsFirstVisit() {
         assert astVisitor.isFirstVisit('abc')
         assert !astVisitor.isFirstVisit('abc')
         assert astVisitor.isFirstVisit('def')
+    }
+
+    void testIsFromGeneratedSourceCode() {
+        assert !astVisitor.isFromGeneratedSourceCode(astVisitor.returnStatement)
     }
 
     void testSourceLine_ASTNode() {
