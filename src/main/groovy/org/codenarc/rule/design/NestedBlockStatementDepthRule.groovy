@@ -19,9 +19,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
+import org.codehaus.groovy.ast.expr.ClosureExpression
 
 /**
- * Rule that checks for blocks nested more than a configured maximum number.
+ * Rule that checks for blocks or closures nested more than a configured maximum number.
  * Blocks include if, for, while, switch, try, catch, finally and synchronized
  * blocks/statements, as well as closures. 
  *
@@ -51,11 +52,32 @@ class NestedBlockStatementDepthAstVisitor extends AbstractAstVisitor  {
         }
     }
 
-    // finally blocks require special handling. The visitBlockStatement() callback will be invoked
+    // NOTE: finally blocks require special handling. The visitBlockStatement() callback will be invoked
     // twice for a finally block. We need to filter out one of them (the first one) to avoid duplicate violations.
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
         finallyBlocks << tryCatchStatement.finallyStatement
         super.visitTryCatchFinally(tryCatchStatement)
+    }
+
+    void visitClosureExpression(ClosureExpression expression) {
+        handleNestedClosureExpression(expression)
+    }
+
+    private void handleNestedBlockStatement(BlockStatement block) {
+        handleNestedNode(block) { super.visitBlockStatement(block) } 
+    }
+
+    private void handleNestedClosureExpression(expression) {
+        handleNestedNode(expression) { super.visitClosureExpression(expression) } 
+    }
+
+    private void handleNestedNode(node, Closure callVisitorMethod) {
+        nestedBlockDepth++
+        if (nestedBlockDepth > rule.maxNestedBlockStatementDepth) {
+            addViolation(node)
+        }
+        callVisitorMethod()
+        nestedBlockDepth--
     }
 
     // The "phantom" finally block contains the "real" finally block as its first statement
@@ -69,15 +91,6 @@ class NestedBlockStatementDepthAstVisitor extends AbstractAstVisitor  {
         else {
             return false
         }
-    }
-
-    private void handleNestedBlockStatement(BlockStatement block) {
-        nestedBlockDepth++
-        if (nestedBlockDepth > rule.maxNestedBlockStatementDepth) {
-            addViolation(block)
-        }
-        super.visitBlockStatement(block)
-        nestedBlockDepth--
     }
 
 }
