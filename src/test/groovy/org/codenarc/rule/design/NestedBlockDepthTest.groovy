@@ -19,17 +19,17 @@ import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractRuleTest
 
 /**
- * Tests for NestedBlockStatementDepthRule
+ * Tests for NestedBlockDepthRule
  *
  * @author Chris Mair
- * @version $Revision: 212 $ - $Date: 2009-08-25 21:20:16 -0400 (Tue, 25 Aug 2009) $
+ * @version $Revision$ - $Date$
  */
-class NestedBlockStatementDepthTest extends AbstractRuleTest {
+class NestedBlockDepthTest extends AbstractRuleTest {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'NestedBlockStatementDepth'
-        assert rule.maxNestedBlockStatementDepth == 2
+        assert rule.name == 'NestedBlockDepth'
+        assert rule.maxNestedBlockDepth == 3
     }
 
     void testNoNestedBlocks_CausesNoViolations() {
@@ -47,9 +47,9 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
-                    if (count > maxCount) {     // 1
-                        while(notReady()) {     // 2
-                            sleep(1000L)
+                    if (count > maxCount) {                 // 1
+                        while(notReady()) {                 // 2
+                            listeners.each { notify(it) }   // 3
                         }
                     }
                 }
@@ -62,18 +62,21 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
-                    if (count > maxCount) {     // 1
-                        myList.each {           // 2
+                    if (count > maxCount) {         // 1
+                        myList.each {               // 2
                             sleep(1000L)
-                            if (logging) {      // 3
-                                println "Still waiting..."
+                            listeners.each {
+                                notify(it)          // 3
+                                if (logging) {      // 4
+                                    println "Still waiting..."
+                                }
                             }
                         }
                     }
                 }
             }
             '''
-        assertSingleViolation(SOURCE, 7, 'if (logging) {')
+        assertSingleViolation(SOURCE, 9, 'if (logging) {')
     }
 
     void testNestingDepthExceededForFinally_CausesAViolation() {
@@ -95,7 +98,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertTwoViolations(SOURCE, 5, 'while (notReady()) {', 12, "if (ready) {")
     }
 
@@ -114,7 +117,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertTwoViolations(SOURCE, 5, 'try {', 8, "catch(Exception e) {")
     }
 
@@ -128,7 +131,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertSingleViolation(SOURCE, 5, 'while(hasChars()) {')
     }
 
@@ -142,7 +145,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertTwoViolations(SOURCE, 3, 'if (logging) {', 5, '} else {')
     }
 
@@ -155,7 +158,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertTwoViolations(SOURCE, 4, 'case 1: println "one"', 5, 'case 2: println "two"')
     }
 
@@ -168,7 +171,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertSingleViolation(SOURCE, 4, 'for(int i=0; i < 5; i++) {')
     }
 
@@ -183,7 +186,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertSingleViolation(SOURCE, 5, 'synchronized(this) {')
     }
 
@@ -193,7 +196,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 if (logging) println "ok"   // 2 - but does not count - no block
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertNoViolations(SOURCE)
     }
 
@@ -208,7 +211,7 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertSingleViolation(SOURCE, 5, 'def closure = {')
     }
 
@@ -223,11 +226,11 @@ class NestedBlockStatementDepthTest extends AbstractRuleTest {
                 }
             }
             '''
-        rule.maxNestedBlockStatementDepth = 1
+        rule.maxNestedBlockDepth = 1
         assertSingleViolation(SOURCE, 5, 'myList.each { element ->')
     }
 
     protected Rule createRule() {
-        return new NestedBlockStatementDepthRule()
+        return new NestedBlockDepthRule()
     }
 }

@@ -25,18 +25,22 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
  * Rule that checks for blocks or closures nested more than a configured maximum number.
  * Blocks include if, for, while, switch, try, catch, finally and synchronized
  * blocks/statements, as well as closures. 
+ * <p/>
+ * The <code>maxNestedBlockDepth</code> property holds the threshold value for the maximum number of
+ * nesting levels. A block or closures nested deeper than that numer of levels is considered a
+ * violation. The <code>maxNestedBlockDepth</code> property defaults to 3.
  *
  * @author Chris Mair
- * @version $Revision: 212 $ - $Date: 2009-08-25 21:20:16 -0400 (Tue, 25 Aug 2009) $
+ * @version $Revision$ - $Date$
  */
-class NestedBlockStatementDepthRule extends AbstractAstVisitorRule {
-    String name = 'NestedBlockStatementDepth'
+class NestedBlockDepthRule extends AbstractAstVisitorRule {
+    String name = 'NestedBlockDepth'
     int priority = 2
-    int maxNestedBlockStatementDepth = 2
-    Class astVisitorClass = NestedBlockStatementDepthAstVisitor
+    int maxNestedBlockDepth = 3
+    Class astVisitorClass = NestedBlockDepthAstVisitor
 }
 
-class NestedBlockStatementDepthAstVisitor extends AbstractAstVisitor  {
+class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
 
     private finallyBlocks = [] as Set
     private nestedBlockDepth = 0
@@ -73,7 +77,7 @@ class NestedBlockStatementDepthAstVisitor extends AbstractAstVisitor  {
 
     private void handleNestedNode(node, Closure callVisitorMethod) {
         nestedBlockDepth++
-        if (nestedBlockDepth > rule.maxNestedBlockStatementDepth) {
+        if (nestedBlockDepth > rule.maxNestedBlockDepth) {
             addViolation(node)
         }
         callVisitorMethod()
