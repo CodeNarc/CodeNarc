@@ -23,6 +23,8 @@ import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codenarc.source.SourceCode
+import org.codehaus.groovy.ast.ASTNode
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -158,6 +160,36 @@ class AstUtil {
     static List getVariableExpressions(DeclarationExpression declarationExpression) {
         def leftExpression = declarationExpression.leftExpression
         return leftExpression.properties['expressions'] ?: [leftExpression]
+    }
+
+    /**
+     * Return true if the DeclarationExpression represents a 'final' variable declaration.
+     *
+     * NOTE: THIS IS A WORKAROUND.
+     * 
+     * There does not seem to be an easy way to determine whether the 'final' modifier has been
+     * specified for a variable declaration. Return true if the 'final' is present before the variable name.
+     */
+    static boolean isFinalVariable(DeclarationExpression declarationExpression, SourceCode sourceCode) {
+        if (isFromGeneratedSourceCode(declarationExpression)) {
+            return false
+        }
+        def variableExpressions = AstUtil.getVariableExpressions(declarationExpression)
+        def variableExpression = variableExpressions[0]
+        def startOfDeclaration = declarationExpression.columnNumber
+        def startOfVariableName = variableExpression.columnNumber
+        def sourceLine = sourceCode.lines[declarationExpression.lineNumber-1]
+
+        def modifiers = (startOfDeclaration >= 0 && startOfVariableName >= 0) ?
+            sourceLine[startOfDeclaration-1..startOfVariableName-2] : ''
+        return modifiers.contains('final')
+    }
+
+    /**
+     * @return true if the ASTNode was generated (synthetic) rather than from the "real" input source code.
+     */
+    static boolean isFromGeneratedSourceCode(ASTNode node) {
+        return node.lineNumber < 0
     }
 
     /**

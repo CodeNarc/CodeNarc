@@ -51,13 +51,6 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     }
 
     /**
-     * @return true if the ASTNode was generated (synthetic) rather than from the "real" input source code.
-     */
-    protected boolean isFromGeneratedSourceCode(ASTNode node) {
-        return node.lineNumber < 0
-    }
-
-    /**
      * Return the source line corresponding to the specified AST node
      * @param node - the Groovy AST node
      */

@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for blocks or closures nested more than a configured maximum number.
@@ -47,7 +48,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
 
     void visitBlockStatement(BlockStatement block) {
         if (isFirstVisit(block)) {
-            if (isPhantomFinallyBlock(block) || isFromGeneratedSourceCode(block)) {
+            if (isPhantomFinallyBlock(block) || AstUtil.isFromGeneratedSourceCode(block)) {
                 super.visitBlockStatement(block)
             }
             else {

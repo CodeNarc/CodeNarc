@@ -47,10 +47,6 @@ class AbstractAstVisitorClassTest extends AbstractTest {
         assert astVisitor.isFirstVisit('def')
     }
 
-    void testIsFromGeneratedSourceCode() {
-        assert !astVisitor.isFromGeneratedSourceCode(astVisitor.returnStatement)
-    }
-
     void testSourceLine_ASTNode() {
         def sourceLine = astVisitor.sourceLine(astVisitor.returnStatement)
         log("sourceLine=[$sourceLine]")

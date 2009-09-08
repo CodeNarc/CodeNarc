@@ -60,6 +60,10 @@ class AstUtilTest extends AbstractTest {
     '''
     private visitor
 
+    void testIsFromGeneratedSourceCode() {
+        assert !AstUtil.isFromGeneratedSourceCode(methodNamed('print'))
+    }
+
     void testGetMethodArguments_ConstructorWithinEnum() {
         def methodCall = methodNamed('methodCallWithinEnum')
         def args = AstUtil.getMethodArguments(methodCall)

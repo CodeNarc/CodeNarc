@@ -51,11 +51,15 @@ class VariableNameRule extends AbstractAstVisitorRule {
 }
 
 class VariableNameAstVisitor extends AbstractAstVisitor  {
+
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
-            def re = rule.finalRegex && isFinal(declarationExpression, varExpressions[0]) ? rule.finalRegex : rule.regex
+//            def sourceLine = sourceCode.lines[declarationExpression.lineNumber-1]
+//            def sourceLine = sourceLine(declarationExpression)
+            def re = rule.finalRegex && AstUtil.isFinalVariable(declarationExpression, sourceCode) ?
+                rule.finalRegex : rule.regex
 
             varExpressions.each { varExpression ->
 
@@ -67,18 +71,6 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
             }
         }
         super.visitDeclarationExpression(declarationExpression)
-    }
-
-    /**
-     * NOTE: THIS IS A WORKAROUND.
-     * There does not seem to be an easy way to determine whether the 'final' modifier has been
-     * specified for a variable declaration. Return true if the 'final' is present before the variable name.
-     */
-    private boolean isFinal(declarationExpression, variableExpression) {
-        def sourceLine = sourceCode.lines[variableExpression.lineNumber-1]
-        def modifiers = (declarationExpression.columnNumber >= 0 && variableExpression.columnNumber >= 0) ?
-            sourceLine[declarationExpression.columnNumber-1..variableExpression.columnNumber-2] : ''
-        return modifiers.contains('final')
     }
 
 }
