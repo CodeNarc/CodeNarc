@@ -28,8 +28,6 @@ import org.codenarc.source.SourceCode
 class AbcComplexityCalculatorTest extends AbstractTest {
     private calculator
 
-    // TODO Tests for unary conditionals
-
     void testCalculate_CountsAssignmentsForVariableDeclarations() {
         final SOURCE = """
             class MyClass {
@@ -44,12 +42,10 @@ class AbcComplexityCalculatorTest extends AbstractTest {
 
     void testCalculate_IgnoresAssignmentsForConstantDeclarations() {
         final SOURCE = """
-            class MyClass {
-                def myMethod() {
-                    final CONST = 'abc'     // A=0
-                    String x = 'def'        // A=1
-                    final int C2 = 99       // A=0
-                }
+            def myMethod() {
+                final CONST = 'abc'     // A=0
+                String x = 'def'        // A=1
+                final int C2 = 99       // A=0
             }
         """
         assert calculateForMethod(SOURCE) == [1, 0, 0]
@@ -99,19 +95,20 @@ class AbcComplexityCalculatorTest extends AbstractTest {
     void testCalculate_CountsBranchesForMethodCalls() {
         final SOURCE = """
             def myMethod() {
-                println 'ok'                    // B = 1
-                someInstance.someMethod()       // B = 1
-                SomeClass.someStaticMethod(23)  // B = 1
+                println 'ok'                    // B=1
+                someInstance.someMethod()       // B=1
+                SomeClass.someStaticMethod(23)  // B=1
+                other.method().getSomething()   // B=2
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 3, 0]
+        assert calculateForMethod(SOURCE) == [0, 5, 0]
     }
 
     void testCalculate_CountsBranchesForConstructorCalls() {
         final SOURCE = """
             def myMethod() {
-                new SomeClass(99)               // B = 1
-                new SomeClass()                 // B = 1
+                new SomeClass(99)               // B=1
+                new SomeClass()                 // B=1
             }
         """
         assert calculateForMethod(SOURCE) == [0, 2, 0]
@@ -120,24 +117,37 @@ class AbcComplexityCalculatorTest extends AbstractTest {
     void testCalculate_CountsBranchesForPropertyAccess() {
         final SOURCE = """
             def myMethod() {
-                myObject.value                  // B = 1
+                myObject.value              // B=1
             }
         """
+        assert calculateForMethod(SOURCE) == [0, 1, 0]
+    }
+
+    void testCalculate_CountsBranchesForNullSafeDereference() {
+        final SOURCE = """
+            def myMethod() {
+                return x?.y                 // B=1                         
+            }
+        """
+        // NOTE: Should this be counted as a condition instead of, or in addition to, a branch?
         assert calculateForMethod(SOURCE) == [0, 1, 0]
     }
 
     void testCalculate_CountsConditionsForComparisonOperators() {
         final SOURCE = """
             def myMethod() {
-                x < 23              // C = 1
-                x <= 11             // C = 1
-                x > 99              // C = 1
-                x >= 22             // C = 1
-                x == 44             // C = 1
-                x != 1              // C = 1
+                x < 23              // C=1
+                x <= 11             // C=1
+                x > 99              // C=1
+                x >= 22             // C=1
+                x == 44             // C=1
+                x != 1              // C=1
+                x <=> y             // C=1
+                x =~ /abc/          // C=1
+                x ==~ /abc/         // C=1
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 6]
+        assert calculateForMethod(SOURCE) == [0, 0, 9]
     }
 
     void testCalculate_CountsConditionsForIfOnly() {
@@ -221,10 +231,22 @@ class AbcComplexityCalculatorTest extends AbstractTest {
     void testCalculate_CountsConditionsForElvisOperator() {
         final SOURCE = """
             def myMethod() {
-                return x ?: 1
+                return x ?: 1           // C=1 (for unary x) + 1 (for ?)
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 1]
+        assert calculateForMethod(SOURCE) == [0, 0, 2]
+    }
+
+    void testCalculate_CountsConditionsForUnaryConditionals() {
+        final SOURCE = """
+            def myMethod(x = 0) {
+                if (x || y || z) {
+                    23
+                }
+                if (y) { 99 }
+            }
+        """
+        assert calculateForMethod(SOURCE) == [0, 0, 4]
     }
 
     void testCalculate_CountsForMethodContainingAssignmentsBranchesAndComparisons() {
@@ -233,9 +255,14 @@ class AbcComplexityCalculatorTest extends AbstractTest {
                 def x = 1       // A=1
                 x++             // A=1
                 doSomething()   // B=1
+                if (x == 23) {  // C=1
+                    99
+                } else {        // C=1
+                    0
+                }
             }
         """
-        assert calculateForMethod(SOURCE) == [2, 1, 0]
+        assert calculateForMethod(SOURCE) == [2, 1, 2]
     }
 
     void setUp() {
@@ -247,9 +274,12 @@ class AbcComplexityCalculatorTest extends AbstractTest {
         def sourceCode = new SourceString(source)
         calculator.sourceCode = sourceCode
         def classNode = getClassNode(sourceCode)
-        println "methods=${classNode.methods}"
         def methodNode = classNode.methods.find { it.lineNumber >= 0 }
-        return calculator.calculate(methodNode)
+//        def methodNode = classNode.methods.find { it.name == 'run' }
+        assert methodNode
+        def result = calculator.calculate(methodNode)
+        log("result=$result")
+        return result
     }
 
     private getClassNode(SourceCode sourceCode) {

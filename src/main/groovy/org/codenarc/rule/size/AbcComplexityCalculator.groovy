@@ -18,6 +18,8 @@ import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.BooleanExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 
 /*
 * Copyright 2009 the original author or authors.
@@ -36,7 +38,27 @@ import org.codenarc.util.AstUtil
 */
 
 /**
- * ???????????
+ * Calculate the ABC Metric for a class/method.
+ *
+ * The ABC Counting Rules for Groovy:
+ * <pre>
+ *   1. Add one to the assignment count for each occurrence of an assignment operator, excluding constant declarations:
+ *      = *= /= %= += <<= >>= &= |= ^= >>>=
+ *   2. Add one to the assignment count for each occurrence of an increment or decrement operator (prefix or postfix):
+ *      ++ --
+ *   3. Add one to the branch count for each function call or class method call.
+ *   4. Add one to the branch count for each occurrence of the new operator.
+ *   5. Add one to the condition count for each use of a conditional operator:
+ *      == != <= >= < > <=> =~ ==~
+ *   6. Add one to the condition count for each use of the following keywords:
+ *      else case default try catch ?
+ *   7. Add one to the condition count for each unary conditional expression.
+ * </pre>
+ *
+ * Additional notes:
+ * <ul>
+ *   <li>A property access is treated like a method call (and thus increments the branch count)</li>
+ * </ul>
  *
  * See http://www.softwarerenovation.com/ABCMetric.pdf
  *
@@ -50,15 +72,16 @@ class AbcComplexityCalculator {
         def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
         visitor.visitMethod(methodNode)
         def result = [visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions]
-        println "result=$result"
         return result
     }
 }
 
 class AbcComplexityAstVisitor extends AbstractAstVisitor {
+
     private static final ASSIGNMENT_OPERATIONS =
         ['=', '++', '--', '+=', '-=', '/=', '*=', '%=', '<<=', '>>=', '>>>=', '&=', '|=', '^=']
-    private static final COMPARISON_OPERATIONS = ['<', '>', '>=', '<=', '==', '!=']
+    private static final COMPARISON_OPERATIONS = ['<', '>', '>=', '<=', '==', '!=', '<=>', '=~', '==~']
+    private static final BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
 
     int numberOfAssignments = 0
     int numberOfBranches = 0
@@ -121,6 +144,11 @@ class AbcComplexityAstVisitor extends AbstractAstVisitor {
         super.visitTernaryExpression(expression)
     }
 
+    void visitBooleanExpression(BooleanExpression booleanExpression) {
+        numberOfConditions += countUnaryConditionals(booleanExpression.expression)
+        super.visitBooleanExpression(booleanExpression)
+    }
+
     //--------------------------------------------------------------------------
     // Internal helper methods
     //--------------------------------------------------------------------------
@@ -133,6 +161,24 @@ class AbcComplexityAstVisitor extends AbstractAstVisitor {
         if (operationName in COMPARISON_OPERATIONS) {
             numberOfConditions ++
         }
+    }
+
+    // Use Groovy dynamic dispatch to achieve pseudo-polymorphism.
+    // Call appropriate countUnaryConditionals() logic based on type of expression
+
+    private int countUnaryConditionals(VariableExpression expression) {
+        return 1
+    }
+
+    private int countUnaryConditionals(BinaryExpression binaryExpression) {
+        def operationName = binaryExpression.operation.text
+        return operationName in BOOLEAN_LOGIC_OPERATIONS ?
+            countUnaryConditionals(binaryExpression.leftExpression) +
+                countUnaryConditionals(binaryExpression.rightExpression) : 0
+    }
+
+    private int countUnaryConditionals(Expression expression) {
+        return 0
     }
 
     private boolean isFinalVariableDeclaration(expression) {
