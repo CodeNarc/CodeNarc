@@ -1,26 +1,3 @@
-package org.codenarc.rule.size
-
-import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codehaus.groovy.ast.expr.DeclarationExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.PostfixExpression
-import org.codehaus.groovy.ast.expr.PrefixExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.TernaryExpression
-import org.codehaus.groovy.ast.stmt.EmptyStatement
-import org.codehaus.groovy.ast.stmt.IfStatement
-import org.codehaus.groovy.ast.stmt.Statement
-import org.codehaus.groovy.ast.stmt.SwitchStatement
-import org.codehaus.groovy.ast.stmt.TryCatchStatement
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.source.SourceCode
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
-
 /*
 * Copyright 2009 the original author or authors.
 *
@@ -36,9 +13,15 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+package org.codenarc.metric.abc
+
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.*
+import org.codehaus.groovy.ast.stmt.*
 
 /**
- * Calculate the ABC Metric for a class/method.
+ * AST Visitor for calculating the ABC Metric for a class/method.
  *
  * The ABC Counting Rules for Groovy:
  * <pre>
@@ -65,17 +48,6 @@ import org.codehaus.groovy.ast.expr.VariableExpression
  * @author Chris Mair
  * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
  */
-class AbcComplexityCalculator {
-    SourceCode sourceCode
-
-    def calculate(MethodNode methodNode) {
-        def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
-        visitor.visitMethod(methodNode)
-        def result = [visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions]
-        return result
-    }
-}
-
 class AbcComplexityAstVisitor extends AbstractAstVisitor {
 
     private static final ASSIGNMENT_OPERATIONS =
@@ -88,7 +60,7 @@ class AbcComplexityAstVisitor extends AbstractAstVisitor {
     int numberOfConditions = 0
 
     void visitBinaryExpression(BinaryExpression expression) {
-        handleExpressionContainingOperation(expression) 
+        handleExpressionContainingOperation(expression)
         super.visitBinaryExpression(expression)
     }
 

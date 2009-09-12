@@ -1,8 +1,3 @@
-package org.codenarc.rule.size
-
-import org.codenarc.test.AbstractTest
-import org.codenarc.source.SourceString
-import org.codenarc.source.SourceCode
 /*
  * Copyright 2009 the original author or authors.
  * 
@@ -18,14 +13,16 @@ import org.codenarc.source.SourceCode
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.codenarc.metric.abc
 
 /**
- * Tests for AbcComplexityCalculator
+ * Tests for AbcComplexityCalculator - calculate ABC complexity for methods
  *
  * @author Chris Mair
  * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
  */
-class AbcComplexityCalculatorTest extends AbstractTest {
+class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
+
     private calculator
 
     void testCalculate_CountsAssignmentsForVariableDeclarations() {
@@ -271,20 +268,13 @@ class AbcComplexityCalculatorTest extends AbstractTest {
     }
 
     private calculateForMethod(String source) {
-        def sourceCode = new SourceString(source)
-        calculator.sourceCode = sourceCode
-        def classNode = getClassNode(sourceCode)
+        def classNode = parseClass(source)
         def methodNode = classNode.methods.find { it.lineNumber >= 0 }
-//        def methodNode = classNode.methods.find { it.name == 'run' }
         assert methodNode
-        def result = calculator.calculate(methodNode)
-        log("result=$result")
-        return result
+        def results = calculator.calculate(methodNode)
+        log("results=$results")
+        def abcVector = results.value
+        assert results.name == methodNode.name
+        return [abcVector.assignments, abcVector.branches, abcVector.conditions]
     }
-
-    private getClassNode(SourceCode sourceCode) {
-        def ast = sourceCode.ast
-        return ast.classes[0]
-    }
-
 }
