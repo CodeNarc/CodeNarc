@@ -16,19 +16,16 @@
 package org.codenarc.metric.abc
 
 /**
- * Represents a set (group) of ABC Metric results.
+ * Represents the aggregate of zero or more ABC Metric results.
  *
  * @author Chris Mair
  * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
  */
-class AbcVectorSet {
+class AbcVectorAggregate {
     final numberOfAbcVectors = 0
     private assignmentSum = 0
     private branchSum = 0
     private conditionSum = 0
-
-    AbcVectorSet() {
-    }
 
     void add(AbcVector abcVector) {
         assignmentSum += abcVector.assignments
@@ -61,7 +58,7 @@ class AbcVectorSet {
     }
 
     String toString() {
-        "AbcVectorSet[numVectors=$numberOfAbcVectors, A=$assignmentSum, B=$branchSum, C=$conditionSum]"
+        "AbcVectorAggregate[numVectors=$numberOfAbcVectors, A=$assignmentSum, B=$branchSum, C=$conditionSum]"
     }
 
     private average(int sum, int count) {

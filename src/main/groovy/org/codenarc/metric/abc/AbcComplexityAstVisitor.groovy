@@ -117,8 +117,17 @@ class AbcComplexityAstVisitor extends AbstractAstVisitor {
     }
 
     void visitBooleanExpression(BooleanExpression booleanExpression) {
-        numberOfConditions += countUnaryConditionals(booleanExpression.expression)
+        if (isSingleVariable(booleanExpression.expression)) {
+            numberOfConditions++
+        }
         super.visitBooleanExpression(booleanExpression)
+    }
+
+    void visitNotExpression(NotExpression notExpression) {
+        if (isSingleVariable(notExpression.expression)) {
+            numberOfConditions++
+        }
+        super.visitNotExpression(notExpression)
     }
 
     //--------------------------------------------------------------------------
@@ -133,24 +142,34 @@ class AbcComplexityAstVisitor extends AbstractAstVisitor {
         if (operationName in COMPARISON_OPERATIONS) {
             numberOfConditions ++
         }
+        if (operationName in BOOLEAN_LOGIC_OPERATIONS) {
+            numberOfConditions += countUnaryConditionals(expression)
+        }
     }
 
     // Use Groovy dynamic dispatch to achieve pseudo-polymorphism.
     // Call appropriate countUnaryConditionals() logic based on type of expression
 
-    private int countUnaryConditionals(VariableExpression expression) {
-        return 1
-    }
-
     private int countUnaryConditionals(BinaryExpression binaryExpression) {
+        def count = 0
         def operationName = binaryExpression.operation.text
-        return operationName in BOOLEAN_LOGIC_OPERATIONS ?
-            countUnaryConditionals(binaryExpression.leftExpression) +
-                countUnaryConditionals(binaryExpression.rightExpression) : 0
+        if (operationName in BOOLEAN_LOGIC_OPERATIONS) {
+            if (isSingleVariable(binaryExpression.leftExpression)) {
+                count ++
+            }
+            if (isSingleVariable(binaryExpression.rightExpression)) {
+                count ++
+            }
+        }
+        return count
     }
 
-    private int countUnaryConditionals(Expression expression) {
+    private int countUnaryConditionals(Expression expression) {     // Not necessary?
         return 0
+    }
+
+    private boolean isSingleVariable(expression) {
+        return expression instanceof VariableExpression
     }
 
     private boolean isFinalVariableDeclaration(expression) {

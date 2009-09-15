@@ -23,10 +23,11 @@ package org.codenarc.metric
  */
 class ClassResults {
     String name
-    Object value
+    Object totalValue
+    Object averageValue
     List children
 
     String toString() {
-        "Class[name=$name, value=$value, children=$children]"
+        "Class[name=$name, total=$totalValue, average=$averageValue, children=$children]"
     }
 }

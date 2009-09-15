@@ -53,17 +53,19 @@ class AbcComplexityCalculator {
     SourceCode sourceCode
 
     def calculate(ClassNode classNode) {
-        def abcVector = new AbcVector(0, 0, 0)
-
+        def abcVectorAggregate = new AbcVectorAggregate()
         def children = []
         def realMethods = classNode.methods.findAll { it.lineNumber >= 0 }
         realMethods.each { methodNode ->
-            println "processing method: $methodNode.name"
             def methodResults = calculate(methodNode)
             children << methodResults
+            abcVectorAggregate.add(methodResults.value)
         }
 
-        return new ClassResults(name:classNode.name, value:abcVector, children: children)
+        def totalAbcVector = abcVectorAggregate.getSumAbcVector()
+        def averageAbcVector = abcVectorAggregate.getAverageAbcVector()
+
+        return new ClassResults(name:classNode.name, totalValue:totalAbcVector, averageValue:averageAbcVector, children: children)
     }
 
     def calculate(MethodNode methodNode) {

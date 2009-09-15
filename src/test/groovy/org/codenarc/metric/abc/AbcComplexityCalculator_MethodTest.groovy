@@ -23,6 +23,9 @@ package org.codenarc.metric.abc
  */
 class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
 
+    // TODO Tests for constructors
+    // TODO Tests for closure fields
+
     private calculator
 
     void testCalculate_CountsAssignmentsForVariableDeclarations() {
@@ -219,7 +222,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
     void testCalculate_CountsConditionsForTernaryOperator() {
         final SOURCE = """
             def myMethod() {
-                return (x < 23) ? 0 : 1
+                return !(x < 23) ? 0 : 1
             }
         """
         assert calculateForMethod(SOURCE) == [0, 0, 2]
@@ -237,10 +240,19 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
     void testCalculate_CountsConditionsForUnaryConditionals() {
         final SOURCE = """
             def myMethod(x = 0) {
-                if (x || y || z) {
+                if (x || !y || z) {
                     23
                 }
                 if (y) { 99 }
+            }
+        """
+        assert calculateForMethod(SOURCE) == [0, 0, 4]
+    }
+
+    void testCalculate_CountsConditionsForMultipleBooleanConditionals() {
+        final SOURCE = """
+            def myMethod(x = 0) {
+                return x && x > 0 && x < 100 && !ready      // C=4
             }
         """
         assert calculateForMethod(SOURCE) == [0, 0, 4]

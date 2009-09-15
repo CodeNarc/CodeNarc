@@ -27,7 +27,6 @@ import org.codenarc.test.AbstractTest
 abstract class AbstractAbcTest extends AbstractTest {
 
     protected void assertEquals(AbcVector abcVector, List expectedValues) {
-        log(abcVector)
         def actualValues = [abcVector.assignments, abcVector.branches, abcVector.conditions]
         assert actualValues == expectedValues
     }

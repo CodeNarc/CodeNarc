@@ -16,53 +16,54 @@
 package org.codenarc.metric.abc
 
 /**
- * Tests for AbcVectorSet
+ * Tests for AbcVectorAggregate
  *
  * @author Chris Mair
  * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
  */
-class AbcVectorSetTest extends AbstractAbcTest {
-    private abcVectorSet
+class AbcVectorAggregateTest extends AbstractAbcTest {
+
+    private abcVectorAggregate
 
     void testAverageForEmptyVectorSetIsZeroVector() {
-        assertEquals(abcVectorSet.averageAbcVector, [0, 0, 0])
+        assertEquals(abcVectorAggregate.averageAbcVector, [0, 0, 0])
     }
 
     void testSumForEmptyVectorSetIsZeroVector() {
-        assertEquals(abcVectorSet.sumAbcVector, [0, 0, 0]) 
+        assertEquals(abcVectorAggregate.sumAbcVector, [0, 0, 0])
     }
 
     void testNumberOfAbcVectorsForEmptyVectorSetIsZero() {
-        assert abcVectorSet.numberOfAbcVectors == 0
+        assert abcVectorAggregate.numberOfAbcVectors == 0
     }
 
     void testAverageForSingleVectorIsThatVector() {
-        abcVectorSet.add(new AbcVector(7, 9, 21))
-        assertEquals(abcVectorSet.averageAbcVector, [7, 9, 21])
+        abcVectorAggregate.add(new AbcVector(7, 9, 21))
+        assertEquals(abcVectorAggregate.averageAbcVector, [7, 9, 21])
     }
 
     void testSumForSingleVectorIsThatVector() {
-        abcVectorSet.add(new AbcVector(7, 9, 21))
-        assertEquals(abcVectorSet.sumAbcVector, [7, 9, 21])
+        abcVectorAggregate.add(new AbcVector(7, 9, 21))
+        assertEquals(abcVectorAggregate.sumAbcVector, [7, 9, 21])
     }
 
     void testCorrectRoundedAverageForSeveralVectors() {
-        abcVectorSet.add(new AbcVector(7, 9, 21))
-        abcVectorSet.add(new AbcVector(12, 1, 21))
-        abcVectorSet.add(new AbcVector(10, 2, 25))
-        assertEquals(abcVectorSet.averageAbcVector, [9, 4, 22])     // A and C are rounded down
+        abcVectorAggregate.add(new AbcVector(7, 9, 21))
+        abcVectorAggregate.add(new AbcVector(12, 1, 21))
+        abcVectorAggregate.add(new AbcVector(10, 2, 25))
+        assertEquals(abcVectorAggregate.averageAbcVector, [9, 4, 22])     // A and C are rounded down
     }
 
     void testCorrectSumForSeveralVectors() {
-        abcVectorSet.add(new AbcVector(7, 9, 21))
-        abcVectorSet.add(new AbcVector(11, 1, 21))
-        abcVectorSet.add(new AbcVector(9, 2, 24))
-        assertEquals(abcVectorSet.sumAbcVector, [27, 12, 66])
-        assert abcVectorSet.numberOfAbcVectors == 3
+        abcVectorAggregate.add(new AbcVector(7, 9, 21))
+        abcVectorAggregate.add(new AbcVector(11, 1, 21))
+        abcVectorAggregate.add(new AbcVector(9, 2, 24))
+        assertEquals(abcVectorAggregate.sumAbcVector, [27, 12, 66])
+        assert abcVectorAggregate.numberOfAbcVectors == 3
     }
 
     void setUp() {
         super.setUp()
-        abcVectorSet = new AbcVectorSet()
+        abcVectorAggregate = new AbcVectorAggregate()
     }
 }
