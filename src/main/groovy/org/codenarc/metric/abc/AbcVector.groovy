@@ -33,6 +33,6 @@ class AbcVector {
     }
 
     String toString() {
-        "AbcVector[$assignments, $branches, $conditions]"
+        "<$assignments, $branches, $conditions>"
     }
 }

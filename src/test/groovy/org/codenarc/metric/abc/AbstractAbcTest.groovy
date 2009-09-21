@@ -25,10 +25,26 @@ import org.codenarc.test.AbstractTest
  * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
  */
 abstract class AbstractAbcTest extends AbstractTest {
+    protected static final ZERO_VECTOR = [0, 0, 0]
+
+    protected calculator
+
+    void setUp() {
+        super.setUp()
+        calculator = new AbcComplexityCalculator()
+    }
 
     protected void assertEquals(AbcVector abcVector, List expectedValues) {
         def actualValues = [abcVector.assignments, abcVector.branches, abcVector.conditions]
         assert actualValues == expectedValues
+    }
+
+    protected calculate(node) {
+        def results = calculator.calculate(node)
+        log("results=$results")
+        def abcVector = results.value
+        assert results.name == node.name
+        return [abcVector.assignments, abcVector.branches, abcVector.conditions]
     }
 
     protected parseClass(String source) {

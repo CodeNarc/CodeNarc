@@ -22,8 +22,6 @@ package org.codenarc.metric.abc
  * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
  */
 class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
-    private static final ZERO_VECTOR = [0, 0, 0]
-    private calculator
 
     void testCalculate_EmptyResultsForClassWithNoMethods() {
         final SOURCE = """
@@ -62,9 +60,17 @@ class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
         assertCalculateForClass(SOURCE, [3,3,6], [1,1,2], [a:[2,0,0], b:[1,3,0], c:[0,0,6]])
     }
 
-    void setUp() {
-        super.setUp()
-        calculator = new AbcComplexityCalculator()
+    void testCalculate_ResultsForClassWithOneClosureField() {
+        final SOURCE = """
+            class MyClass {
+                def myClosure = {
+                    def x = 1; x++                         // A=2
+                    doSomething()                          // B=1
+                    if (x == 23) return 99 else return 0   // C=2
+                }
+            }
+        """
+        assertCalculateForClass(SOURCE, [2,1,2], [2,1,2], [myClosure:[2,1,2]])
     }
 
     private void assertCalculateForClass(String source, List classTotalValues, List classAverageValues, Map methodValues) {

@@ -20,6 +20,9 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.source.SourceCode
 import org.codenarc.metric.ClassResults
 import org.codenarc.metric.MethodResults
+import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codenarc.util.AstUtil
 
 /**
  * Calculate the ABC Metric for a class/method.
@@ -55,13 +58,21 @@ class AbcComplexityCalculator {
     def calculate(ClassNode classNode) {
         def abcVectorAggregate = new AbcVectorAggregate()
         def children = []
-        def realMethods = classNode.methods.findAll { it.lineNumber >= 0 }
+        def realMethods = classNode.methods.findAll { methodNode -> !AstUtil.isFromGeneratedSourceCode(methodNode) }
         realMethods.each { methodNode ->
             def methodResults = calculate(methodNode)
             children << methodResults
             abcVectorAggregate.add(methodResults.value)
         }
 
+        def closureFields = classNode.fields.find { fieldNode -> !AstUtil.isFromGeneratedSourceCode(fieldNode) &&
+            fieldNode.initialExpression instanceof ClosureExpression }
+        closureFields.each { fieldNode ->
+            def fieldResults = calculate(fieldNode)
+            children << fieldResults
+            abcVectorAggregate.add(fieldResults.value)
+        }
+        
         def totalAbcVector = abcVectorAggregate.getSumAbcVector()
         def averageAbcVector = abcVectorAggregate.getAverageAbcVector()
 
@@ -74,4 +85,13 @@ class AbcComplexityCalculator {
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
         return new MethodResults(name:methodNode.name, value:abcVector)
     }
+
+    def calculate(FieldNode fieldNode) {
+        assert fieldNode.initialExpression instanceof ClosureExpression
+        def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
+        visitor.visitClosureExpression(fieldNode.initialExpression) 
+        def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
+        return new MethodResults(name:fieldNode.name, value:abcVector)
+    }
+
 }

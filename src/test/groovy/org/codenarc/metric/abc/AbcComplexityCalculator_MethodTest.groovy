@@ -23,10 +23,12 @@ package org.codenarc.metric.abc
  */
 class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
 
-    // TODO Tests for constructors
-    // TODO Tests for closure fields
-
-    private calculator
+    void testCalculate_ZeroResultForEmptyMethod() {
+        final SOURCE = """
+                def myMethod() { }
+        """
+        assert calculateForMethod(SOURCE) == ZERO_VECTOR
+    }
 
     void testCalculate_CountsAssignmentsForVariableDeclarations() {
         final SOURCE = """
@@ -258,35 +260,31 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
         assert calculateForMethod(SOURCE) == [0, 0, 4]
     }
 
-    void testCalculate_CountsForMethodContainingAssignmentsBranchesAndComparisons() {
+    void testCalculate_CountsForConstructor() {
         final SOURCE = """
-            def myMethod() {
-                def x = 1       // A=1
-                x++             // A=1
-                doSomething()   // B=1
-                if (x == 23) {  // C=1
-                    99
-                } else {        // C=1
-                    0
+            class MyClass {
+                MyClass() {
+                    def x = 1; x++                         // A=2
+                    doSomething()                          // B=1
+                    if (x == 23) return 99 else return 0   // C=2
                 }
             }
         """
-        assert calculateForMethod(SOURCE) == [2, 1, 2]
-    }
-
-    void setUp() {
-        super.setUp()
-        calculator = new AbcComplexityCalculator()
+        assert calculateForConstructor(SOURCE) == [2, 1, 2]
     }
 
     private calculateForMethod(String source) {
         def classNode = parseClass(source)
         def methodNode = classNode.methods.find { it.lineNumber >= 0 }
         assert methodNode
-        def results = calculator.calculate(methodNode)
-        log("results=$results")
-        def abcVector = results.value
-        assert results.name == methodNode.name
-        return [abcVector.assignments, abcVector.branches, abcVector.conditions]
+        return calculate(methodNode)
     }
+
+    private calculateForConstructor(String source) {
+        def classNode = parseClass(source)
+        def constructorNode = classNode.declaredConstructors[0]
+        assert constructorNode
+        return calculate(constructorNode)
+    }
+
 }
