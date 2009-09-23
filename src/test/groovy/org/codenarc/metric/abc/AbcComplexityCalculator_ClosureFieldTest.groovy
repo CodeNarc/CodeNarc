@@ -21,7 +21,7 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
  * Tests for AbcComplexityCalculator for fields initialized to a Closure
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbcComplexityCalculator_ClosureFieldTest extends AbstractAbcTest {
 
@@ -48,21 +48,11 @@ class AbcComplexityCalculator_ClosureFieldTest extends AbstractAbcTest {
         assert calculateForField(SOURCE) == [2, 1, 2]
     }
 
-    void testCalculate_ThrowsExceptionIfFieldInitialExpressionIsNotAClosure() {
-        final SOURCE = """
-            class MyClass {
-                def myField = 23
-            }
-        """
-        def fieldNode = findFirstField(SOURCE)
-        shouldFailWithMessageContaining('ClosureExpression') { calculator.calculate(fieldNode) } 
-    }
-
     private calculateForField(String source) {
         def fieldNode = findFirstField(source)
         assert fieldNode.initialExpression
         assert fieldNode.initialExpression instanceof ClosureExpression
-        return calculate(fieldNode)
+        return calculate(fieldNode.initialExpression)
     }
 
     private findFirstField(String source) {

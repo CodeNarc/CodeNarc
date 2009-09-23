@@ -16,16 +16,12 @@
 package org.codenarc.metric
 
 /**
- * The results for applying a metric to a single method.
+ * Represents a single result from applying a metric
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class MethodResults {
-    String name
-    Object value
+interface MetricResult {
 
-    String toString() {
-        "Method[name=$name, value=$value]"
-    }
+    Object getValue()
 }

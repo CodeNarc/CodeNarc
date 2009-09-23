@@ -22,7 +22,7 @@ import org.codenarc.test.AbstractTest
  * Tests for AbcComplexityCalculator
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
 abstract class AbstractAbcTest extends AbstractTest {
     protected static final ZERO_VECTOR = [0, 0, 0]
@@ -40,10 +40,10 @@ abstract class AbstractAbcTest extends AbstractTest {
     }
 
     protected calculate(node) {
-        def results = calculator.calculate(node)
-        log("results=$results")
-        def abcVector = results.value
-        assert results.name == node.name
+        def metricResult = calculator.calculate(node)
+        log("metricResult=$metricResult")
+        def abcVector = metricResult.abcVector
+//        assert metricResult.name == node.name
         return [abcVector.assignments, abcVector.branches, abcVector.conditions]
     }
 

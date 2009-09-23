@@ -46,7 +46,7 @@ import org.codehaus.groovy.ast.stmt.*
  * See http://www.softwarerenovation.com/ABCMetric.pdf
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbcComplexityAstVisitor extends AbstractAstVisitor {
 

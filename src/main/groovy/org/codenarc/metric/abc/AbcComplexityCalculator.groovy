@@ -18,8 +18,6 @@ package org.codenarc.metric.abc
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.source.SourceCode
-import org.codenarc.metric.ClassResults
-import org.codenarc.metric.MethodResults
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.util.AstUtil
@@ -44,54 +42,50 @@ import org.codenarc.util.AstUtil
  *
  * Additional notes:
  * <ul>
- *   <li>A property access is treated like a method call (and thus increments the branch count)</li>
+ *   <li>A property access is treated like a method call (and thus increments the branch count).</li>
+ *   <li>If a class field is initialized to a Closure (ClosureExpression), then that Closure is
+ *       analyzed just like a method.</li>
  * </ul>
  *
  * See http://www.softwarerenovation.com/ABCMetric.pdf
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbcComplexityCalculator {
     SourceCode sourceCode
 
     def calculate(ClassNode classNode) {
-        def abcVectorAggregate = new AbcVectorAggregate()
-        def children = []
+        def abcAggregateMetricResults = new AbcAggregateMetricResults()
+
         def realMethods = classNode.methods.findAll { methodNode -> !AstUtil.isFromGeneratedSourceCode(methodNode) }
         realMethods.each { methodNode ->
             def methodResults = calculate(methodNode)
-            children << methodResults
-            abcVectorAggregate.add(methodResults.value)
+            abcAggregateMetricResults.add(methodNode.name, methodResults)
         }
 
         def closureFields = classNode.fields.find { fieldNode -> !AstUtil.isFromGeneratedSourceCode(fieldNode) &&
             fieldNode.initialExpression instanceof ClosureExpression }
         closureFields.each { fieldNode ->
-            def fieldResults = calculate(fieldNode)
-            children << fieldResults
-            abcVectorAggregate.add(fieldResults.value)
+            def fieldResults = calculate(fieldNode.initialExpression)
+            abcAggregateMetricResults.add(fieldNode.name, fieldResults)
         }
-        
-        def totalAbcVector = abcVectorAggregate.getSumAbcVector()
-        def averageAbcVector = abcVectorAggregate.getAverageAbcVector()
 
-        return new ClassResults(name:classNode.name, totalValue:totalAbcVector, averageValue:averageAbcVector, children: children)
+        return abcAggregateMetricResults
     }
 
     def calculate(MethodNode methodNode) {
         def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
         visitor.visitMethod(methodNode)
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
-        return new MethodResults(name:methodNode.name, value:abcVector)
+        return new AbcMetricResult(abcVector:abcVector)
     }
 
-    def calculate(FieldNode fieldNode) {
-        assert fieldNode.initialExpression instanceof ClosureExpression
+    def calculate(ClosureExpression closureExpression) {
         def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
-        visitor.visitClosureExpression(fieldNode.initialExpression) 
+        visitor.visitClosureExpression(closureExpression) 
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
-        return new MethodResults(name:fieldNode.name, value:abcVector)
+        return new AbcMetricResult(abcVector:abcVector)
     }
 
 }

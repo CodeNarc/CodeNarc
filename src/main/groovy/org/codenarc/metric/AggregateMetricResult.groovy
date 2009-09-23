@@ -16,16 +16,15 @@
 package org.codenarc.metric
 
 /**
- * The results for applying a metric to a single method.
+ * Represents the aggregate results from applying a metric to multiple source units (e.g. methods, classes).
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class MethodResults {
-    String name
-    Object value
+interface AggregateMetricResults {
 
-    String toString() {
-        "Method[name=$name, value=$value]"
-    }
+    Object getTotalValue()
+    Object getAverageValue()
+    Map getChildren()
+
 }

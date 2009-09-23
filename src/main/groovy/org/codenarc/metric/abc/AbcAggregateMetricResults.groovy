@@ -15,36 +15,31 @@
  */
 package org.codenarc.metric.abc
 
+import org.codenarc.metric.AggregateMetricResults
+import org.codenarc.metric.MetricResult
+
 /**
- * Represents the aggregate of zero or more ABC Metric results.
+ * A AggregateMetricResults implementation specifically for the ABC Metric.
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
-class AbcVectorAggregate {
-    final numberOfAbcVectors = 0
+class AbcAggregateMetricResults implements AggregateMetricResults {
+    final Map children = [:]
     private assignmentSum = 0
     private branchSum = 0
     private conditionSum = 0
-
-    void add(AbcVector abcVector) {
+    
+    void add(String name, MetricResult metricResult) {
+        children[name] = metricResult
+        def abcVector = metricResult.abcVector
         assignmentSum += abcVector.assignments
         branchSum += abcVector.branches
         conditionSum += abcVector.conditions
-        numberOfAbcVectors++
     }
 
-    /**
-     * Return the average of this set of ABC vectors. Each component (A,B,C) of the result
-     * is calculated and averaged separately. The formula for each component is:
-     *      (A1 + A2 + .. AN) / N
-     * and likewise for B and C values. Each component of the result vector is rounded down to an integer.
-     */
-    AbcVector getAverageAbcVector() {
-        def a = average(assignmentSum, numberOfAbcVectors)
-        def b = average(branchSum, numberOfAbcVectors)
-        def c = average(conditionSum, numberOfAbcVectors)
-        return new AbcVector(a, b, c)
+    int getNumberOfChildren() {
+        return children.size()
     }
 
     /**
@@ -53,12 +48,35 @@ class AbcVectorAggregate {
      *      A1 + A2 + .. AN
      * and likewise for B and C values.
      */
-    AbcVector getSumAbcVector() {
+    Object getTotalAbcVector() {
         return new AbcVector(assignmentSum, branchSum, conditionSum)
     }
 
+    /**
+     * Return the average of this set of ABC vectors. Each component (A,B,C) of the result
+     * is calculated and averaged separately. The formula for each component is:
+     *      (A1 + A2 + .. AN) / N
+     * and likewise for B and C values. Each component of the result vector is rounded down to an integer.
+     */
+    Object getAverageAbcVector() {
+        def numberOfAbcVectors = getNumberOfChildren()
+        def a = average(assignmentSum, numberOfAbcVectors)
+        def b = average(branchSum, numberOfAbcVectors)
+        def c = average(conditionSum, numberOfAbcVectors)
+        return new AbcVector(a, b, c)
+    }
+
+    Object getTotalValue() {
+        return null
+    }
+
+    Object getAverageValue() {
+        return null
+    }
+
     String toString() {
-        "AbcVectorAggregate[numVectors=$numberOfAbcVectors, A=$assignmentSum, B=$branchSum, C=$conditionSum]"
+        "AbcAggregateMetricResults[numVectors=${getNumberOfChildren()}, " +
+            "A=$assignmentSum, B=$branchSum, C=$conditionSum, children=$children]"
     }
 
     private average(int sum, int count) {

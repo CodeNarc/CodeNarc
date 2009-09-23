@@ -19,7 +19,7 @@ package org.codenarc.metric.abc
  * Tests for AbcComplexityCalculator - calculate ABC complexity for methods
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
 

@@ -19,7 +19,7 @@ package org.codenarc.metric.abc
  * Represents a single ABC Metric result: a vector of the three A, B, C values.
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbcVector {
     final assignments

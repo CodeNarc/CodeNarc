@@ -16,10 +16,10 @@
 package org.codenarc.metric.abc
 
 /**
- * Tests for AbcComplexityCalculator
+ * Tests for AbcComplexityCalculator class metrics
  *
  * @author Chris Mair
- * @version $Revision: 120 $ - $Date: 2009-04-06 12:58:09 -0400 (Mon, 06 Apr 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
 
@@ -77,13 +77,13 @@ class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
         def classNode = parseClass(source)
         def results = calculator.calculate(classNode)
         log("results=$results")
-        assert results.name == classNode.name
-        assertEquals(results.averageValue, classAverageValues)
-        assertEquals(results.totalValue, classTotalValues)
+//        assert results.name == classNode.name
+        assertEquals(results.averageAbcVector, classAverageValues)
+        assertEquals(results.totalAbcVector, classTotalValues)
 
         def methodNames = methodValues?.keySet()
-        methodNames.eachWithIndex { methodName, index ->
-            def methodAbcVector = results.children[index].value
+        methodNames.each { methodName ->
+            def methodAbcVector = results.children[methodName].abcVector
             assertEquals(methodAbcVector, methodValues[methodName])
         }
     }

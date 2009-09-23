@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric
+package org.codenarc.metric.abc
+
+import org.codenarc.metric.MetricResult
 
 /**
- * The results for applying a metric to a single method.
+ * A MetricResult specifically for the ABC metric
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class MethodResults {
-    String name
-    Object value
+class AbcMetricResult implements MetricResult {
+    AbcVector abcVector
 
-    String toString() {
-        "Method[name=$name, value=$value]"
+    public Object getValue() {
+        return null
     }
+
 }
