@@ -22,17 +22,36 @@ package org.codenarc.metric.abc
  * @version $Revision$ - $Date$
  */
 class AbcVector {
-    final assignments
-    final branches
-    final conditions
+    final int assignments
+    final int branches
+    final int conditions
 
     AbcVector(int assignments, int branches, int conditions) {
+        assert assignments >= 0
+        assert branches >= 0
+        assert conditions >= 0
         this.assignments = assignments
         this.branches = branches
         this.conditions = conditions
     }
 
+    /**
+     * Return the magnitude of this ABC vector, specifically:
+     *         |ABC| = sqrt((A*A)+(B*B)+(C*C))
+     * @return the magnitude of the ABC vector as a BigDecimal with scale of 1
+     */
+    BigDecimal getMagnitude() {
+        def sumOfSquares = squared(assignments) + squared(branches) + squared(conditions)
+        def result = Math.sqrt(sumOfSquares)
+        return new BigDecimal(result).setScale(1, BigDecimal.ROUND_HALF_DOWN)
+    }
+
     String toString() {
         "<$assignments, $branches, $conditions>"
     }
+
+    private int squared(int val) {
+        return val * val
+    }
+
 }

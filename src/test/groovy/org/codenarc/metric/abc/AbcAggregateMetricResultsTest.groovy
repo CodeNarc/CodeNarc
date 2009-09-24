@@ -25,40 +25,58 @@ class AbcAggregateMetricResultsTest extends AbstractAbcTest {
 
     private abcAggregateMetricResults
 
-    void testAverageForEmptyVectorSetIsZeroVector() {
+    void testAverageAbcVectorForNoVectorsIsZeroVector() {
         assertEquals(abcAggregateMetricResults.averageAbcVector, [0, 0, 0])
     }
 
-    void testSumForEmptyVectorSetIsZeroVector() {
+    void testTotalAbcVectorForNoVectorsIsZeroVector() {
         assertEquals(abcAggregateMetricResults.totalAbcVector, [0, 0, 0])
     }
 
-    void testNumberOfAbcVectorsForEmptyVectorSetIsZero() {
+    void testAverageValueForNoVectorsIsZero() {
+        assert abcAggregateMetricResults.totalValue == 0
+    }
+
+    void testTotalValueForNoVectorsIsZero() {
+        assert abcAggregateMetricResults.totalValue == 0
+    }
+
+    void testNumberOfChildrenForNoVectorsIsZero() {
         assert abcAggregateMetricResults.numberOfChildren == 0
     }
 
-    void testAverageForSingleVectorIsThatVector() {
+    void testAverageAbcVectorForSingleVectorIsThatVector() {
         abcAggregateMetricResults.add('x', abcMetricResult(7, 9, 21))
         assertEquals(abcAggregateMetricResults.averageAbcVector, [7, 9, 21])
     }
 
-    void testSumForSingleVectorIsThatVector() {
+    void testTotalAbcVectorForSingleVectorIsThatVector() {
         abcAggregateMetricResults.add('x', abcMetricResult(7, 9, 21))
         assertEquals(abcAggregateMetricResults.totalAbcVector, [7, 9, 21])
     }
 
     void testCorrectRoundedAverageForSeveralVectors() {
-        abcAggregateMetricResults.add('x', abcMetricResult(7, 9, 21))
-        abcAggregateMetricResults.add('y', abcMetricResult(12, 1, 21))
-        abcAggregateMetricResults.add('z', abcMetricResult(10, 2, 25))
+        addThreeAbcMetricResults()
         assertEquals(abcAggregateMetricResults.averageAbcVector, [9, 4, 22])     // A and C are rounded down
     }
 
-    void testCorrectTotalForSeveralVectors() {
-        abcAggregateMetricResults.add('x', abcMetricResult(7, 9, 21))
-        abcAggregateMetricResults.add('y', abcMetricResult(11, 1, 21))
-        abcAggregateMetricResults.add('z', abcMetricResult(9, 2, 24))
+    void testCorrectTotalAbcVectorForSeveralVectors() {
+        addThreeAbcMetricResults()
         assertEquals(abcAggregateMetricResults.totalAbcVector, [27, 12, 66])
+    }
+
+    void testTotalValueForSeveralVectorsIsTheMagnitudeOfTheSumOfTheVectors() {
+        addThreeAbcMetricResults()
+        assert abcAggregateMetricResults.totalValue == new AbcVector(27, 12, 66).magnitude
+    }
+
+    void testAverageValueForSeveralVectorsIsTheMagnitudeOfTheAverageOfTheVectors() {
+        addThreeAbcMetricResults()
+        assert abcAggregateMetricResults.averageValue == new AbcVector(9, 4, 22).magnitude
+    }
+
+    void testCorrectNumberOfChildrenForSeveralVectors() {
+        addThreeAbcMetricResults()
         assert abcAggregateMetricResults.numberOfChildren == 3
     }
 
@@ -67,9 +85,9 @@ class AbcAggregateMetricResultsTest extends AbstractAbcTest {
         abcAggregateMetricResults = new AbcAggregateMetricResults()
     }
 
-    private AbcMetricResult abcMetricResult(int a, int b, int c) {
-        def abcVector = new AbcVector(a, b, c)
-        return new AbcMetricResult(abcVector:abcVector)
+    private void addThreeAbcMetricResults() {
+        abcAggregateMetricResults.add('x', abcMetricResult(7, 9, 21))
+        abcAggregateMetricResults.add('y', abcMetricResult(11, 1, 21))
+        abcAggregateMetricResults.add('z', abcMetricResult(9, 2, 24))
     }
-    
 }

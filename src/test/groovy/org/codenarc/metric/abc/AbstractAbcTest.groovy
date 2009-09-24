@@ -43,7 +43,6 @@ abstract class AbstractAbcTest extends AbstractTest {
         def metricResult = calculator.calculate(node)
         log("metricResult=$metricResult")
         def abcVector = metricResult.abcVector
-//        assert metricResult.name == node.name
         return [abcVector.assignments, abcVector.branches, abcVector.conditions]
     }
 
@@ -52,6 +51,11 @@ abstract class AbstractAbcTest extends AbstractTest {
         calculator.sourceCode = sourceCode
         def ast = sourceCode.ast
         return ast.classes[0]
+    }
+
+    protected AbcMetricResult abcMetricResult(int a, int b, int c) {
+        def abcVector = new AbcVector(a, b, c)
+        return new AbcMetricResult(abcVector)
     }
 
 }

@@ -66,12 +66,18 @@ class AbcAggregateMetricResults implements AggregateMetricResults {
         return new AbcVector(a, b, c)
     }
 
+    /**
+     * @return the magnitude of the sum of the set of ABC vectors; i.e., getTotalAbcVector().getMagnitude().
+     */
     Object getTotalValue() {
-        return null
+        return getTotalAbcVector().getMagnitude()
     }
 
+    /**
+     * @return the magnitude of the average of the set of ABC vectors; i.e., getAverageAbcVector().getMagnitude().
+     */
     Object getAverageValue() {
-        return null
+        return getAverageAbcVector().getMagnitude()
     }
 
     String toString() {

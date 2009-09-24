@@ -24,10 +24,23 @@ import org.codenarc.metric.MetricResult
  * @version $Revision$ - $Date$
  */
 class AbcMetricResult implements MetricResult {
-    AbcVector abcVector
+    final AbcVector abcVector
 
-    public Object getValue() {
-        return null
+    AbcMetricResult(AbcVector abcVector) {
+        assert abcVector
+        this.abcVector = abcVector
+    }
+
+    /**
+     * @return the magnitude of the ABC vector as a BigDecimal with scale of 1
+     * @see AbcVector#getMagnitude()
+     */
+    Object getValue() {
+        return abcVector.magnitude
+    }
+
+    String toString() {
+        "AbcMetricResult[$abcVector, value=${getValue()}]"
     }
 
 }

@@ -18,7 +18,6 @@ package org.codenarc.metric.abc
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.source.SourceCode
-import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.util.AstUtil
 
@@ -78,14 +77,14 @@ class AbcComplexityCalculator {
         def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
         visitor.visitMethod(methodNode)
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
-        return new AbcMetricResult(abcVector:abcVector)
+        return new AbcMetricResult(abcVector)
     }
 
     def calculate(ClosureExpression closureExpression) {
         def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
         visitor.visitClosureExpression(closureExpression) 
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
-        return new AbcMetricResult(abcVector:abcVector)
+        return new AbcMetricResult(abcVector)
     }
 
 }
