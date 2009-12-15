@@ -1,64 +1,30 @@
 		--------------------------------------------------
-							CodeNarc - Home
+							GMetrics - Home
 		--------------------------------------------------
 
-CodeNarc
-~~~~
+GMetrics
+~~~~~~~~
 
-  The <<CodeNarc>> project provides a static analysis tool and framework for analyzing Groovy source code.
+  The <<GMetrics>> project provides calculation and reporting of size and complexity metrics for
+  Groovy source code. <<GMetrics>> scans Groovy source code, applying a set of metrics, and
+  generates an HTML report of the results.
 
-  <<CodeNarc>> scans Groovy source code,
-  looking for violations of predefined or custom rules and generates an HTML report of the results.
-  These rules include checks for coding standards, or searching for unused code, possible bugs or
-  bad coding practices.
+  You can run <<GMetrics>> using the supplied {{{gmetrics-ant-task.html}Ant Task}}.
 
-  You can run <<CodeNarc>> using the supplied {{{codenarc-ant-task.html}Ant Task}}
-  or from the {{{codenarc-command-line.html}command-line}}.
+  See the site navigation menu for a list of the metrics provided
+  out of the box by <<GMetrics>>.
 
-  See the site navigation menu for a list of the rulesets and rules provided
-  out of the box by <<CodeNarc>>. Or you can {{{codenarc-creating-ruleset.html}create your own custom ruleset}}
-
-  Take a look at a {{{SampleCodeNarcReport.html}Sample CodeNarc Report}}, or example reports
-  from popular Groovy-based {{{codenarc-opensource-projects.html}open source projects}}.
-
-  <<CodeNarc>> plugins are available for {{{http://www.grails.org/plugin/codenarc/}Grails}}
-  and {{{http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/}Griffon}}. 
-
-  <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
-  and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well
-  as others.
-
+  Take a look at a {{{SampleGMetricsReport.html}Sample GMetrics Report}}.
 
 * Requirements
 ~~~~~~~~~~~~~~
 
-  The <<CodeNarc>> project requires:
+  The <<GMetrics>> project requires:
 
-  *  Groovy version 1.5.6 or later
+  * Groovy version 1.6 or later
+
+  * Java 1.5 or later
 
   * The {{{http://logging.apache.org/log4j/index.html}Log4J}} jar, version 1.2.13 or later,
     accessible on the classpath.
 
-  * If you are using Java 1.4, then you will also need JAXP on the classpath.  
-
-
-* Compatibility Testing
-~~~~~~~~~~~~~~~~~~~~~~~
-
-  <<CodeNarc>> has been tested with:
-
-  * Groovy 1.5.6, 1.5.7 and 1.6.0
-
-  * Java 1.4, 1.5 and 1.6
-
-
-* Getting CodeNarc from the Maven2 Central Repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  For projects built using {{{http://maven.apache.org/}Maven}}, <<CodeNarc>> is now available
-  from the <<Maven Central Repository>>.
-
-    * <<groupId>> = <<<org.codenarc>>>
-
-    * <<artifactId>> = <<<CodeNarc>>>
-  
