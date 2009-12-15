@@ -44,7 +44,8 @@
         </menu>
         -->
 
-        <menu name="Example Reports">
+        <menu name="Reports">
+            <item name="BasicHtmlReportWriter" href="/gmetrics-BasicHtmlReportWriter.html"/>
             <item name="Sample GMetrics Report" href="/SampleGMetricsReport.html"/>
             <!-- <item name="Open Source Projects" href="/gmetrics-opensource-projects.html"/> -->
         </menu>

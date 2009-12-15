@@ -10,7 +10,7 @@ ABC Metric
  and <<Conditions>> (C) and assigns a single numerical score calculated as:
 
 -------------------------------------------------------------------------------
- <<<|ABC| = sqrt((A*A)+(B*B)+(C*C))>>>.
+ |ABC| = sqrt((A*A)+(B*B)+(C*C))
 -------------------------------------------------------------------------------
 
  Implemented by the <<<org.gmetrics.metric.abc.AbcMetric>>> class.

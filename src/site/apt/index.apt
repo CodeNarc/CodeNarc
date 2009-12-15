@@ -11,7 +11,7 @@ GMetrics
 
   You can run <<GMetrics>> using the supplied {{{gmetrics-ant-task.html}Ant Task}}.
 
-  See the site navigation menu for a list of the metrics provided
+  See the site navigation menu for a list of the metrics and reports provided
   out of the box by <<GMetrics>>.
 
   Take a look at a {{{SampleGMetricsReport.html}Sample GMetrics Report}}.
