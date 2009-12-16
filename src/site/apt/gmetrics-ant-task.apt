@@ -10,14 +10,14 @@ GMetrics - Ant Task
 
   The <<GMetrics>> Ant Task is implemented by the <<<org.gmetrics.ant.GMetricsTask>>> class.
 
-  The <<gmetrics>> task contains no attributes, but does contain <<report>> and
-  <<fileset>> nested elements, as described below.
+  The <<gmetrics>> task contains no attributes, but does contain <<\<report\>>> and
+  <<\<fileset\>>> nested elements, as described below.
 
 * Report Nested Element
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  The <<report>> nested element defines the type and options for a report. It includes
-  a <<type>> attribute and contains optional nested <<option>> elements.
+  The <<\<report\>>> nested element defines the type and options for a report. It includes
+  a <<type>> attribute and contains optional nested <<\<option\>>> elements.
 
   NOTE: Currently, <<<org.gmetrics.report.BasicHtmlReportWriter>>> is the only report
   provided with <<GMetrics>>.
@@ -33,19 +33,8 @@ GMetrics - Ant Task
 ** Option Nested Element
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  The <<option>> element is a child of the <<report>> element and defines a report-specific option 
-  for a report.
-
-  The <<<org.gmetrics.report.BasicHtmlReportWriter>>>, for instance, supports the following options:
-
-*---------------------+----------------------------------------------------------------+------------------------+
-| <<Attribute>>       | <<Description>>                                                | <<Required>>           |
-*---------------------+----------------------------------------------------------------+------------------------+
-| outputFile          | The path and filename for the output report file.              | No                     |
-*---------------------+----------------------------------------------------------------+------------------------+
-| title               | The title for the output report.                               | No                     |
-*---------------------+----------------------------------------------------------------+------------------------+
-
+  The <<\<option\>>> element is a child of the <<\<report\>>> element and defines a
+  report-specific option for a report. See the {{{Example}Example}} below.
 
 * Fileset Nested Element
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -55,8 +44,8 @@ GMetrics - Ant Task
   See the {{{http://ant.apache.org/manual/index.html}Apache Ant Manual}} for more information on <FileSets>.
 
 
-* Example
-~~~~~~~~~
+* {Example}
+~~~~~~~~~~~
 
   Here is an example Ant XML build file.
 

@@ -13,6 +13,8 @@ BasicHtmlReportWriter
   method (or closure field) and one column for each metric value (function) being
   calculated.
 
+  See a {{{SampleGMetricsReport.html}Sample Report}}.
+
 * Option Nested Elements
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
