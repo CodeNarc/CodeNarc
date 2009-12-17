@@ -11,10 +11,33 @@ GMetrics
 
   You can run <<GMetrics>> using the supplied {{{gmetrics-ant-task.html}Ant Task}}.
 
+  This release includes total and average values for three metrics:
+
+  * ABC Size/Complexity. See the {{{http://c2.com/cgi/wiki?AbcMetric}C2 Wiki page}}. 
+
+  * Lines per method
+
+  * Lines per class
+
+  []
+
   See the site navigation menu for a list of the metrics and reports provided
   out of the box by <<GMetrics>>.
 
   Take a look at a {{{SampleGMetricsReport.html}Sample GMetrics Report}}.
+
+* Coming Soon
+~~~~~~~~~~~~~
+
+  Future releases will include
+
+    * Cyclomatic Complexity metric
+
+    * XML report
+
+    * Customize metrics included in the report(s)
+
+    * Making GMetrics available from the Maven central repository.
 
 * Requirements
 ~~~~~~~~~~~~~~

@@ -25,6 +25,8 @@ GMetrics - Road Map
 
   * More metrics
 
+  * Integrate with {{{http://codenarc.sourceforge.net/index.html}CodeNarc}}.
+
   * Analyze source code within jar files or zip files.
 
   * Create Grails plugin.
