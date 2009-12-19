@@ -1,0 +1,88 @@
+		--------------------------------------------------
+					  CodeNarc Ant Task
+		--------------------------------------------------
+
+CodeNarc - Ant Task
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Description
+~~~~~~~~~~~~~
+
+  The <<CodeNarc>> Ant Task is implemented by the <<<org.codenarc.ant.CodeNarcTask>>> class.
+
+* Parameters
+~~~~~~~~~~~~
+
+*------------------------+----------------------------------------------------------------+------------------------+
+| <<Attribute>>          | <<Description>>                                                | <<Required>>           |
+*------------------------+----------------------------------------------------------------+------------------------+
+| ruleSetFiles           | The paths to the Groovy or XML RuleSet definition files. This  | YES                    |
+|                        | can be a single file path, or  multiple paths separated by     |                        |
+|                        | commas. By default, the paths specified are relative to the    |                        |
+|                        | classpath. But each path may be optionally prefixed by any     |                        |
+|                        | of the valid java.net.URL prefixes, such as "file:" (to load   |                        |
+|                        | from a relative or absolute filesystem path), or "http:".      |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
+| maxPriority1Violations | The maximum number of priority 1 violations allowed before     | NO                     |
+|                        | failing the build (throwing a <<<BuildException>>>).           |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
+| maxPriority2Violations | The maximum number of priority 2 violations allowed before     | NO                     |
+|                        | failing the build (throwing a <<<BuildException>>>).           |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
+| maxPriority3Violations | The maximum number of priority 3 violations allowed before     | NO                     |
+|                        | failing the build (throwing a <<<BuildException>>>).           |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
+
+
+* Report Nested Element
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <<report>> nested element defines the format and output file for the analysis report.
+  Currently, HTML ("html") is the only supported format.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Attribute>>       | <<Description>>                                                | <<Required>>           |
+*---------------------+----------------------------------------------------------------+------------------------+
+| type                | The format of the output analysis report. The only valid       | Yes                    |
+|                     | value is "html"                                                |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| toFile              | The path and filename for the output report file.              | No                     |
+*---------------------+----------------------------------------------------------------+------------------------+
+| title               | The title for the output report.                               | No                     |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
+* Fileset Nested Element
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  At least one <<fileset>> nested element is required, and is used to specify the source files that
+  <<CodeNarc>> should analyze. This is the standard Ant <FileSet>, and is quite powerful and flexible.
+  See the {{{http://ant.apache.org/manual/index.html}Apache Ant Manual}} for more information on <FileSets>.
+
+
+* Example
+~~~~~~~~~
+
+  Here is an example Ant XML build file.
+
++----------------------------------------------------------------------------------------
+<taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
+<target name="runCodeNarc">
+    <codenarc
+            ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml"
+            maxPriority1Violations="0">
+        <report type="html" toFile="reports/CodeNarcAntReport.html" title="My Sample Code"/>
+        <fileset dir="src">
+            <include name="**/*.groovy"/>
+        </fileset>
+    </codenarc>
+</target>
++----------------------------------------------------------------------------------------
+
+  Things to note:
+
+    * Three <RuleSet> files are specified (<basic>, <exceptions> and <imports>).
+
+    * The <fileset> specifies that all ".groovy" files are analyzed.
+
+    * Remember that you need the <<log4j>> jar (and a "log4j.properties" file) on the classpath.

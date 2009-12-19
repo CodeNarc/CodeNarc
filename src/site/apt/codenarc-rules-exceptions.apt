@@ -1,0 +1,77 @@
+		--------------------------------------------------
+				    CodeNarc - Exceptions Rules
+		--------------------------------------------------
+
+Exceptions Rules  ("<rulesets/exceptions.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* CatchError Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<Error>>>. In most cases that is much too broad, and is also dangerous
+  because it can catch exceptions such as <<<ThreadDeath>>> and <<<OutOfMemoryError>>>.
+
+
+* CatchException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<Exception>>>. In most cases that is too broad or general. It should usually
+  be restricted to framework or infrastructure code, rather than application code.
+
+
+* CatchNullPointerException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<NullPointerException>>>. Catching <<<NullPointerException>>> is never
+  appropriate. It should be avoided in the first place with proper null checking, and it can mask underlying errors.
+
+
+* CatchRuntimeException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<RuntimeException>>>. In most cases that is too broad or general. It should
+  usually be restricted to framework or infrastructure code, rather than application code.
+
+
+* CatchThrowable Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for catching a <<<Throwable>>>. In most cases that is much too broad, and is also dangerous
+  because it can catch exceptions such as <<<ThreadDeath>>> and <<<OutOfMemoryError>>>.
+
+
+* ThrowError Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for throwing an instance of <<<java.lang.Error>>>. This is not appropriate within
+  normal application code. Throw an instance of a more specific exception subclass instead.
+
+
+* ThrowException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for throwing an instance of <<<java.lang.Exception>>>. Throw an instance of a more
+  specific exception subclass instead.
+
+
+* ThrowNullPointerException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for throwing an instance of <<<java.lang.NullPointerException>>>. Applications should never
+  throw a <<<NullPointerException>>>.
+
+
+* ThrowRuntimeException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for throwing an instance of <<<java.lang.RuntimeException>>>. Throw an instance of a more
+  specific exception subclass instead.
+
+
+* ThrowThrowable Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for throwing an instance of <<<java.lang.Throwable>>>. Throw an instance of a more
+  specific exception subclass instead.
+
+

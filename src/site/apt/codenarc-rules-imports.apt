@@ -1,0 +1,41 @@
+		--------------------------------------------------
+					  CodeNarc - Imports Rules
+		--------------------------------------------------
+
+Imports Rules  ("<rulesets/imports.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* DuplicateImport Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for a duplicate <import> statements.
+
+
+* ImportFromSamePackage Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for an <import> of a class that is within the same package as the importing class.
+
+
+* UnnecessaryGroovyImport Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for an <import> from any package that is already automatically imported for
+  Groovy files. A Groovy file does not need to include an import for classes from
+  <java.lang>, <java.util>, <java.io>, <java.net>, <groovy.lang> and <groovy.util>, as well as the
+  classes <java.math.BigDecimal> and <java.math.BigInteger>.
+
+
+* UnusedImport Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for <import> statements for classes that are never referenced within the source file. Also
+  checks static imports.
+
+  Known limitations:
+
+  * Does not check for unused imports containing wildcards (e.g. <<<import org.codenarc.*>>>)
+
+  * Misses unused imports if the class/alias name is contained within strings, comments or other (longer)
+    names (i.e., if that string shows up almost anywhere within the source code). 
+

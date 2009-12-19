@@ -1,0 +1,54 @@
+		--------------------------------------------------
+			   CodeNarc Open Source Project Reports
+		--------------------------------------------------
+
+CodeNarc - Open Source Project Reports
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <<Disclaimer:>> <These reports are generated using a "one-size-fits-all"
+  {{{Generic_RuleSet}Generic RuleSet}},   
+  that does not reflect the standards and best practices specific to the individual projects.
+  In general, a RuleSet should be customized to reflect the specific standards and practices
+  of a project or development organization, and to filter out "legitimate" violations.>
+
+* Grails
+~~~~~~~~~
+
+  <<CodeNarc>> report for {{{CodeNarc-Grails-Report.html}Grails 1.1.1}}
+
+
+* Griffon
+~~~~~~~~~~
+
+  <<CodeNarc>> report for {{{CodeNarc-Griffon-Report.html}Griffon 0.1.1}}
+
+
+* Gradle
+~~~~~~~~~
+
+  <<CodeNarc>> report for {{{CodeNarc-Gradle-Report.html}Gradle 0.6.1}}
+
+
+* {Generic RuleSet}
+~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------
+ <ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>Sample generic rule set</description>
+
+    <ruleset-ref path='rulesets/basic.xml'/>
+
+    <ruleset-ref path='rulesets/imports.xml'/>
+
+    <ruleset-ref path='rulesets/junit.xml'/>
+
+    <ruleset-ref path='rulesets/size.xml'/>
+
+    <ruleset-ref path='rulesets/unused.xml'/>
+
+ </ruleset>
++----------------------------------------------------------------------------------------

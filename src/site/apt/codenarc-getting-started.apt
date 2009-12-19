@@ -1,0 +1,22 @@
+		--------------------------------------------------
+					  CodeNarc Getting Started
+		--------------------------------------------------
+
+CodeNarc - Getting Started
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <<CodeNarc>> is a static analysis tool and framework for Groovy code. It scans Groovy source code,
+  looking for violations of predefined or custom rules and generates an HTML report of the results.
+  These rules include checks for coding standards, or searching for unused code, possible bugs or
+  bad coding practices.
+
+  You can run <<CodeNarc>> from an Ant Task or using a Groovy script. Both options are described below.
+
+
+
+
+* Running CodeNarc Using a Groovy Script
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+

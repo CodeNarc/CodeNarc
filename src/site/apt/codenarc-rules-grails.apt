@@ -1,0 +1,126 @@
+		--------------------------------------------------
+					  CodeNarc - Grails Rules
+		--------------------------------------------------
+
+Grails Rules  ("<rulesets/grails.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* GrailsPublicControllerMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Rule that checks for public methods on Grails controller classes. Static methods are ignored.
+
+  Grails controller actions and interceptors are defined as properties on the controller class.
+  Public methods on a controller class are unnecessary. They break encapsulation and can
+  be confusing.
+
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files
+  under the 'grails-app/controllers' folder. You can override this with a different regular
+  expression value if appropriate.
+
+  This rule also sets the default value of <<<applyToClassNames>>> to only match class names
+  ending in 'Controller'. You can override this with a different class name pattern
+  (String with wildcards) if appropriate.
+
+
+* GrailsServletContextReference Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Rule that checks for references to the <<<servletContext>>> object from within Grails controller and
+  taglib classes.
+
+  This rule is intended as a "governance" rule to enable monitoring and controlling access to the
+  <<<servletContext>>> from within application source code. Storing objects in the <<<servletContext>>>
+  may inhibit scalability and/or performance and should be carefully considered. Furthermore, access to
+  the <<<servletContext>>> is not synchronized, so reading/writing objects from the <<<servletConext>>>
+  must be manually synchronized, as described in
+  {{{http://www.amazon.com/Definitive-Grails-Second-Experts-Development/dp/1590599950}
+  The Definitive Guide to Grails (2nd edition)}}.
+
+  Note that this rule does not check for direct access to the <<<servletContext>>> from within GSP 
+  (Groovy Server Pages) files.
+
+  Enabling this rule may make most sense in a team environment where team members exhibit a broad
+  range of skill and experience levels. Appropriate <<<servletContext>>> access can be configured as exceptions
+  to this rule by configuring either the <<<doNotApplyToFilenames>>> or
+  <<<doNotApplyToFilesMatching>>> property of the rule. And, as always, it is easy to
+  just {{{codenarc-configuring-rules.html#Turning_Off_A_Rule}turn off the rule}} if it does not
+  make sense it your environment.
+
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files
+  under the 'grails-app/controllers' or 'grails-app/taglib' folders. You can override this
+  with a different regular expression value if appropriate.
+
+
+* GrailsSessionReference Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Rule that checks for references to the <<<session>>> object from within Grails controller and
+  taglib classes.
+
+  This rule is intended as a "governance" rule to enable monitoring and controlling access to the
+  <<<session>>> from within application source code. Storing objects in the <<<session>>> may inhibit
+  scalability and/or performance and should be carefully considered.
+
+  Note that this rule does not check for direct access to the <<<session>>> from within GSP
+  (Groovy Server Pages) files.
+
+  Enabling this rule may make most sense in a team environment where team members exhibit a broad
+  range of skill and experience levels. Appropriate <<<session>>> access can be configured as exceptions
+  to this rule by configuring either the <<<doNotApplyToFilenames>>> or
+  <<<doNotApplyToFilesMatching>>> property of the rule. And, as always, it is easy to
+  just {{{codenarc-configuring-rules.html#Turning_Off_A_Rule}turn off the rule}} if it does not
+  make sense it your environment.
+
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files
+  under the 'grails-app/controllers' or 'grails-app/taglib' folders. You can override this
+  with a different regular expression value if appropriate.
+
+
+* GrailsStatelessService Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for non-<<<final>>> fields on a Grails service class. Grails service classes are singletons by
+  default, and so they should be reentrant. In most cases, this implies (or at least encourages)
+  that they should be stateless.
+
+  This rule ignores <<<final>>> fields (either instance or static). Fields that are
+  <<<static>>> and non-<<<final>>>, however, do cause a violation.
+
+  The <<<ignoreFieldNames>>> property of this rule is preconfigured to ignore the standard Grails
+  service configuration field names ('scope', 'transactional') and the standard injected bean names
+  ('dataSource', 'sessionFactory'), as well as all other field names ending with 'Service'.
+
+*---------------------+----------------------------------------------------------------+---------------------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>                     |
+*---------------------+----------------------------------------------------------------+---------------------------------------+
+| ignoreFieldNames    | Specifies one or more (comma-separated) field names that       | <<<'dataSource,scope,sessionFactory,  |
+|                     | should be ignored (i.e., that should not cause a rule          | transactional,*Service'>>>            |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                                       |
+*---------------------+----------------------------------------------------------------+---------------------------------------+
+| ignoreFieldTypes    | Specifies one or more (comma-separated) field types that       | <<<null>>>                            |
+|                     | should be ignored (i.e., that should not cause a rule          |                                       |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                                       |
+|                     |                                                                |                                       |
+*---------------------+----------------------------------------------------------------+---------------------------------------+
+
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files under the
+  'grails-app/services' folder. You can override this with a different regular expression value if appropriate.
+
+  This rule also sets the default value of <<<applyToClassNames>>> to only match class names
+  ending in 'Service'. You can override this with a different class name pattern (String with wildcards)
+  if appropriate.
+
+
+**  Notes
+~~~~~~~~~~~~
+
+  [[1]]  The <<<ignoreFieldTypes>>> property matches the field type name as indicated
+  in the field declaration, only including a full package specification IF it is included in
+  the source code. For example, the field declaration <<<BigDecimal value>>> matches
+  an <<<ignoreFieldTypes>>> value of <<<BigDecimal>>>, but not
+  <<<java.lang.BigDecimal>>>.
+
+  [[2]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
+  with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
+

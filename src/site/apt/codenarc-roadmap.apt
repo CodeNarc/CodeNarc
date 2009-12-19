@@ -1,41 +1,31 @@
 		--------------------------------------------------
-					    GMetrics Road Map
+					    CodeNarc Road Map
 		--------------------------------------------------
 
-GMetrics - Road Map
+CodeNarc - Road Map
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Suggestions or preferences? Create a
-  {{{http://sourceforge.net/tracker/?atid=1220658&group_id=288180&func=browse}Feature Request}}.
+  {{{https://sourceforge.net/tracker2/?group_id=250145&atid=1126575}Feature Request}}.
 
 * Short-Term Goals (Imminent)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  * Cyclomatic Complexity metric
-
-  * XML report
-
-  * Customize metrics included in the report(s)
-
-  * Making GMetrics available from the Maven central repository.
+  * More rules
 
 
 * Long-Term Goals
 ~~~~~~~~~~~~~~~~~
 
-  * More metrics
+  * Even more rules, perhaps including framework-specific rules for Grails (additional), Griffon, Gradle, etc..
 
-  * Integrate with {{{http://codenarc.sourceforge.net/index.html}CodeNarc}}.
+  * Create XML report
 
   * Analyze source code within jar files or zip files.
-
-  * Create Grails plugin.
 
   * Create Hudson plugin.
 
   * Create Eclipse plugin.
-
-  * Create Maven plugin.
 
 
 ** Considering (Optional)
@@ -45,3 +35,8 @@ GMetrics - Road Map
 
   * Create Netbeans plugin.
 
+  * Create Maven plugin.
+
+  * DSL for RuleSet definition.
+
+  * Localization of report text.

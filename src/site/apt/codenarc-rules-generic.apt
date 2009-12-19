@@ -1,0 +1,81 @@
+		--------------------------------------------------
+					  CodeNarc - Generic Rules
+		--------------------------------------------------
+
+Generic Rules  ("<rulesets/generic.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* IllegalRegex Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for a specified illegal regular expression within the source code.
+
+  A RuleSet can contain any number of instances of this rule, but each should be configured
+  with a unique rule <name> and <regex>, and (optionally) customized <violationMessage> and <priority>.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | The regular expression to check for. If null or empty          | <<<null>>>             |
+|                     | then do nothing.                                               |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+
+* RequiredRegex Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for a specified regular expression that must exist within the source code.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| regex               | The regular expression to check for. If null or empty          | <<<null>>>             |
+|                     | then do nothing.                                               |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+  A RuleSet can contain any number of instances of this rule, but each should be configured
+  with a unique rule <name> and <regex>, and (optionally) customized <violationMessage> and <priority>.
+
+
+* StatelessClass Rule
+~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for non-<<<final>>> fields on a class. The intent of this rule is to check a configured set
+  of classes that should remain "stateless" and reentrant. One example might be Grails
+  service classes which are singletons, by default, and so they should be reentrant.
+
+  This rule ignores <<<final>>> fields (either instance or static). Fields that are
+  <<<static>>> and non-<<<final>>>, however, do cause a violation.
+
+  You can configure this rule to ignore certain fields either by name or by type. This can be
+  useful to ignore fields that hold references to (static) dependencies (such as DAOs or
+  Service objects) or static configuration.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreFieldNames    | Specifies one or more (comma-separated) field names that       | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreFieldTypes    | Specifies one or more (comma-separated) field types that       | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+|                     |                                                                |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+**  Notes
+~~~~~~~~~~~~
+
+  [[1]]  Either the <<<applyToFileNames>>> or <<<applyToFilesMatching>>> must be set
+  (not empty or null), or else this rule does nothing.
+
+  [[2]]  The <<<ignoreFieldTypes>>> property matches the field type name as indicated
+  in the field declaration, only including a full package specification IF it is included in
+  the source code. For example, the field declaration <<<BigDecimal value>>> matches
+  an <<<ignoreFieldTypes>>> value of <<<BigDecimal>>>, but not
+  <<<java.lang.BigDecimal>>>.
+
+  [[3]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
+  with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
+
