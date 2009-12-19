@@ -1,0 +1,68 @@
+<project name="CodeNarc">
+
+    <bannerLeft>
+        <name>CodeNarc</name>
+        <href>/</href>
+    </bannerLeft>
+
+    <publishDate format="dd MMM yyyy"/>
+
+    <poweredBy>
+        <logo
+                name="Hosted on SourceForge.net"
+                href="http://sourceforge.net"
+                img="http://sflogo.sourceforge.net/sflogo.php?group_id=208647&amp;type=2"/>
+        <logo
+                name="Build with Maven 2"
+                href="http://maven.apache.org"
+                img="images/logos/maven-feather.png"/>
+    </poweredBy>
+
+    <body>
+        <links>
+        </links>
+        <head>
+            <!-- <meta name="faq" content="codenarc"/> -->
+        </head>
+        <menu name="General">
+            <item name="Home" href="/index.html"/>
+            <item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=250145"/>
+            <item name="Road Map" href="/codenarc-roadmap.html"/>
+            <item name="Javadocs" href="/apidocs/index.html"/>
+            <item name="SourceForge Project" href="http://sourceforge.net/projects/codenarc"/>
+        </menu>
+
+        <menu name="Running">
+            <item name="Ant Task Usage" href="/codenarc-ant-task.html"/>
+            <item name="Command-Line" href="/codenarc-command-line.html"/>
+        </menu>
+
+        <menu name="Using">
+            <item name="Creating a RuleSet" href="/codenarc-creating-ruleset.html"/>
+            <item name="Creating a Rule" href="/codenarc-creating-rule.html"/>
+            <item name="Configuring Rules" href="/codenarc-configuring-rules.html"/>
+        </menu>
+
+        <menu name="Example Reports">
+            <item name="Sample CodeNarc Report" href="/SampleCodeNarcReport.html"/>
+            <item name="Open Source Projects" href="/codenarc-opensource-projects.html"/>
+        </menu>
+
+        <menu name="Rules">
+            <item name="Basic Rules" href="/codenarc-rules-basic.html"/>
+            <item name="Braces Rules" href="/codenarc-rules-braces.html"/>
+            <!-- <item name="Design Rules" href="/codenarc-rules-design.html"/> -->
+            <item name="Exceptions Rules" href="/codenarc-rules-exceptions.html"/>
+            <item name="Generic Rules" href="/codenarc-rules-generic.html"/>
+            <item name="Grails Rules" href="/codenarc-rules-grails.html"/>
+            <item name="Imports Rules" href="/codenarc-rules-imports.html"/>
+            <item name="JUnit Rules" href="/codenarc-rules-junit.html"/>
+            <item name="Logging Rules" href="/codenarc-rules-logging.html"/>
+            <item name="Naming Rules" href="/codenarc-rules-naming.html"/>
+            <item name="Size Rules" href="/codenarc-rules-size.html"/>
+            <item name="Unused Rules" href="/codenarc-rules-unused.html"/>
+        </menu>
+
+        ${reports}
+    </body>
+</project>
