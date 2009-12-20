@@ -1,9 +1,9 @@
 		--------------------------------------------------
-					  CodeNarc - Size Rules
+			    CodeNarc - Size and Complexity Rules
 		--------------------------------------------------
 
-Size Rules  ("<rulesets/size.xml>")
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Size and Complexity Rules  ("<rulesets/size.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * ClassSize Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,4 +27,19 @@ Size Rules  ("<rulesets/size.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | maxLines            | The maximum number of lines allowed in a method definition.    | 100                    |
 *---------------------+----------------------------------------------------------------+------------------------+
+
+
+* NestedBlockDepthRule Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for blocks or closures nested more deeply than a configured maximum number.
+  Blocks include <<<if>>>, <<<for>>>, <<<while>>>, <<<switch>>>, <<<try>>>, <<<catch>>>,
+  <<<finally>>> and <<<synchronized>>> blocks/statements, as well as closures.
+
+*---------------------+-----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                 | <<Default Value>>      |
+*---------------------+-----------------------------------------------------------------+------------------------+
+| maxNestedBlockDepth | The maximum number of nesting levels. A block or closure nested | 3                      |
+|                     | deeper than that number of levels is considered a violation.    |                        |
+*---------------------+-----------------------------------------------------------------+------------------------+
 

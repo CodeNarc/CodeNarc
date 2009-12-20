@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.design
+package org.codenarc.rule.size
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.size.NestedBlockDepthRule
 
 /**
  * Tests for NestedBlockDepthRule

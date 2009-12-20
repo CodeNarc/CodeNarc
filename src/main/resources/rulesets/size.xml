@@ -10,5 +10,6 @@
 
     <rule class='org.codenarc.rule.size.ClassSizeRule'/>
     <rule class='org.codenarc.rule.size.MethodSizeRule'/>
+    <rule class='org.codenarc.rule.size.NestedBlockDepthRule'/>
 
 </ruleset>

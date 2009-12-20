@@ -9,6 +9,4 @@
     </description>
 
 
-    <rule class='org.codenarc.rule.design.NestedBlockDepthRule'/>
-
 </ruleset>
