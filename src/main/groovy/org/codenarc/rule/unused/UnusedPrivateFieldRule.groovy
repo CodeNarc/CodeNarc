@@ -23,6 +23,9 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.PropertyNode
 import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.FieldExpression
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
@@ -70,6 +73,22 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         super.visitPropertyExpression(expression)
     }
 
+    void visitFieldExpression(FieldExpression expression) {
+        println "visitFieldExpression: expression=$expression"
+        super.visitFieldExpression(expression)
+    }
+
+    void visitMethod(MethodNode node) {
+        if (node.parameters) {
+            node.parameters.each { parameter ->
+                def initialExpression = parameter.initialExpression
+                if (initialExpression && AstUtil.respondsTo(initialExpression, 'getName')) {
+                    removeUnusedPrivateField(initialExpression.name)
+                }
+            }
+        }
+        super.visitMethod(node)
+    }
     private void removeUnusedPrivateField(String name) {
         def referencedField = unusedPrivateFields.find { it.name == name }
         if (referencedField) {

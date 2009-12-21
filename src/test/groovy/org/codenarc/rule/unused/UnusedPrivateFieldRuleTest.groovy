@@ -138,6 +138,21 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTest {
         assertSingleViolation(SOURCE, 3, 'private int count')
     }
 
+    void testApplyTo_OnlyReferenceIsAMethodDefaultValue() {
+        final SOURCE = '''
+            class MyClass {
+                private static final COUNT = 3
+                private defaultName = 'abc'
+                
+                private String doStuff(int repeat = COUNT) { }
+                private String doOtherStuff(int number, name = defaultName) { }
+                private otherMethod_NoParameters() { }
+                private otherMethod_ParameterDefaultValueIsALiteral(value=123) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_MoreThanOneClassInASourceFile() {
         final SOURCE = '''
             class MyClass {
