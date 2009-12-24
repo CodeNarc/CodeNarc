@@ -15,12 +15,11 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.util.PropertyUtil
-import org.apache.log4j.Logger
+import groovy.xml.Namespace
 import javax.xml.XMLConstants
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
-import groovy.xml.Namespace
+import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.ClassPathResource
 
 /**
@@ -33,7 +32,6 @@ import org.codenarc.util.io.ClassPathResource
  */
 class XmlReaderRuleSet implements RuleSet {
 
-    private static final LOG = Logger.getLogger(XmlReaderRuleSet)
     private static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
     private static final RULESET_SCHEMA_FILE = 'ruleset-schema.xsd'
     private List rules = []

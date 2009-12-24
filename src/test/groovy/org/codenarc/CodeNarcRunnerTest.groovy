@@ -28,7 +28,6 @@ import org.codenarc.report.ReportWriter
  * @version $Revision$ - $Date$
  */
 class CodeNarcRunnerTest extends AbstractTest {
-    private static final BASIC_RULESET = 'rulesets/basic.xml'
     private static final XML_RULESET1 = 'rulesets/RuleSet1.xml'
     private static final GROOVY_RULESET1 = 'rulesets/GroovyRuleSet1.txt'
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'

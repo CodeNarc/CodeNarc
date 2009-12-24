@@ -77,8 +77,4 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTest {
         ruleSet.rules.each { rule -> map[rule.name] = [rule.priority, rule.violationMessage] }
         return map
     }
-
-    private findRule(String name) {
-        ruleSet.rules.find { rule -> rule.name == name }
-    }
 }

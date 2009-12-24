@@ -223,8 +223,4 @@ class DirectorySourceAnalyzerTest extends AbstractTest {
     private List childResultsClasses(Results results) {
         return results.children.collect { it.getClass() }
     }
-
-    private String path(String path) {
-        return path.replaceAll('\\\\', '/')
-    }
 }

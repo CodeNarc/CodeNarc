@@ -15,10 +15,8 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.stmt.SwitchStatement
 
 /**

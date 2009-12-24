@@ -17,7 +17,6 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTest
 import org.codenarc.rule.Rule
-import org.codenarc.rule.generic.StatelessClassRule
 
 /**
  * Tests for StatelessClassRule

@@ -17,7 +17,6 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractRuleTest
-import org.codenarc.rule.size.NestedBlockDepthRule
 
 /**
  * Tests for NestedBlockDepthRule

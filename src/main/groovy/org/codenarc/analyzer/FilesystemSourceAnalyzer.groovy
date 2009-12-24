@@ -20,7 +20,6 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
-import org.codenarc.source.SourceCodeCriteria
 import org.codenarc.source.SourceCode
 import org.codenarc.util.WildcardPattern
 

@@ -15,9 +15,6 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.generic.StatelessClassRule
 
 /**

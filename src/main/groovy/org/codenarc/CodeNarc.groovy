@@ -176,7 +176,6 @@ class CodeNarc {
         def report = new HtmlReportWriter()
         if (argValue.contains(':')) {
             def parts = argValue.tokenize(':')
-            def type = parts[0]
             report.outputFile = parts[1]
         }
         // else argValue is just the report type

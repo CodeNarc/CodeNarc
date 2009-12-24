@@ -74,7 +74,6 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitFieldExpression(FieldExpression expression) {
-        println "visitFieldExpression: expression=$expression"
         super.visitFieldExpression(expression)
     }
 

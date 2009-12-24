@@ -246,7 +246,6 @@ class AbstractRuleClassTest extends AbstractRuleTest {
             import a.pkg1.MyOtherClass as MOC
         '''
         def sourceCode = new SourceString(SOURCE)
-        def ast = sourceCode.ast
         assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass', lineNumber:2]
         assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'Boo') == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
         assert rule.sourceLineAndNumberForImport(sourceCode, 'a.pkg1.MyOtherClass', 'MOC') == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]

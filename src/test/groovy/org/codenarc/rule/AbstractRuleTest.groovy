@@ -133,7 +133,7 @@ abstract class AbstractRuleTest extends AbstractTest {
      * in no violations.
      * @param source - the full source code to which the rule is applied, as a String
      */
-    void assertNoViolations(String source) {
+    protected void assertNoViolations(String source) {
         def violations = applyRuleTo(source)
         assert violations.empty, violations
     }

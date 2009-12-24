@@ -45,8 +45,6 @@ class HtmlReportWriterTest extends AbstractTest {
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:'if (file) {')
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
-    private static final OUTPUT_DIR = "."
-    private static final REPORT_FILENAME = "HtmlReport.html"
     private static final HTML_TAG = 'html'
     private static final BOTTOM_LINK = "<a href='http://www.codenarc.org'>CodeNarc"
     private static final NEW_REPORT_FILE = 'NewReport.html'

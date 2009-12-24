@@ -139,7 +139,7 @@ class AbstractAstVisitorRuleClassTest extends AbstractRuleTest {
             class MyClass { }
         '''
         rule.doNotApplyToClassNames = 'Other*,MyTest,org.codenarc.MyCla?s'
-        assertSingleViolation(SOURCE)
+        assertSingleViolation(SOURCE2)
     }
 
     void testDoNotApplyToClassNames_PatternMatchesClassNameAndAlsoPackage() {
