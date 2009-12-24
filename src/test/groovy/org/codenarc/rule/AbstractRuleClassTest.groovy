@@ -42,6 +42,12 @@ class AbstractRuleClassTest extends AbstractRuleTest {
         assert rule.getName() == 'abc'
     }
 
+    void testDescription() {
+        assert rule.description == null
+        rule.description = 'abc'
+        assert rule.getDescription() == 'abc'
+    }
+
     void testPriority() {
         rule.priority = 1
         assert rule.getPriority() == 1

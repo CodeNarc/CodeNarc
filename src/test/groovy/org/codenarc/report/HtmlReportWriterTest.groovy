@@ -27,6 +27,7 @@ import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTest
+import org.codenarc.rule.Rule
 
 /**
  * Tests for HtmlReportWriter
@@ -103,6 +104,23 @@ class HtmlReportWriterTest extends AbstractTest {
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, [biRule.name, 'MyRuleXX', 'My Rule XX', 'MyRuleYY', 'My Rule YY'])
+    }
+
+    void testWriteOutReport_RuleDescriptionsSetDirectlyOnTheRule() {
+        ruleSet = new ListRuleSet([
+                new StubRule(name:'MyRuleXX', description:'description77'),
+                new StubRule(name:'MyRuleYY', description:'description88')])
+        analysisContext.ruleSet = ruleSet
+        reportWriter.writeOutReport(analysisContext, results)
+        def reportText = getReportText()
+        assertContainsAllInOrder(reportText, BASIC_CONTENTS)
+        assertContainsAllInOrder(reportText, ['MyRuleXX', 'description77', 'MyRuleYY', 'description88'])
+    }
+
+    void testWriteOutReport_IncludesRuleThatDoesNotSupportGetDescription() {
+        analysisContext.ruleSet = new ListRuleSet([ [getName:{'RuleABC'}] as Rule])
+        reportWriter.writeOutReport(analysisContext, results)
+        assertContainsAllInOrder(getReportText(), ['RuleABC', 'No description'])
     }
 
     void testWriteOutReport_SetOutputFileAndTitle() {

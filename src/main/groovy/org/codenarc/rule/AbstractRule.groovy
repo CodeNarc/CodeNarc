@@ -111,6 +111,12 @@ abstract class AbstractRule implements Rule {
     String violationMessage
 
     /**
+     * If not null, this is used as the description text for this rule, overriding any
+     * description text found in the i18n resource bundles. Defaults to null.
+     */
+    String description
+
+    /**
      * @return the unique name for this rule
      */
     abstract String getName()

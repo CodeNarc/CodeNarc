@@ -20,6 +20,8 @@ import org.apache.log4j.Logger
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
 import org.codenarc.util.io.ClassPathResource
+import org.codenarc.rule.Rule
+import org.codenarc.util.AstUtil
 
 /**
  * ReportWriter that generates an HTML report.
@@ -269,8 +271,8 @@ class HtmlReportWriter implements ReportWriter {
 
     private buildRuleDescriptions(AnalysisContext analysisContext) {
         def bundle = getMessagesBundle();
-        def ruleNames = analysisContext.ruleSet.rules.collect { rule -> rule.name }
-        def sortedRuleNames = ruleNames.sort()
+        def rules = analysisContext.ruleSet.rules
+        def sortedRules = rules.toList().sort { rule -> rule.name }
 
         return {
             h2("Rule Descriptions")
@@ -281,21 +283,26 @@ class HtmlReportWriter implements ReportWriter {
                     th('Description', class:'ruleDescriptions')
                 }
 
-                sortedRuleNames.eachWithIndex { ruleName, index ->
+                sortedRules.eachWithIndex { rule, index ->
+                    def ruleName = rule.name
                     tr(class:'ruleDescriptions') {
                         a(name:ruleName)
                         td(index+1)
                         td(ruleName, class:'ruleName')
-                        td { unescaped << getDescriptionForRuleName(bundle, ruleName) }
+                        td { unescaped << getDescriptionForRuleName(bundle, rule) }
                     }
                 }
             }
         }
     }
 
-    protected String getDescriptionForRuleName(bundle, String ruleName) {
-        def resourceKey = ruleName + '.description'
-        def description = "No description provided for rule named [$ruleName]"
+    protected String getDescriptionForRuleName(bundle, Rule rule) {
+        if (AstUtil.respondsTo(rule, 'getDescription') && rule.description != null) {
+            return rule.description
+        }
+
+        def resourceKey = rule.name + '.description'
+        def description = "No description provided for rule named [$rule.name]"
         try {
             description = bundle.getString(resourceKey)
         } catch (MissingResourceException e) {
