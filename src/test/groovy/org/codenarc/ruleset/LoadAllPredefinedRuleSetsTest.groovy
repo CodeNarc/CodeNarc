@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Load all predefined RuleSet files using XmlFileRuleSet
@@ -23,7 +23,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class LoadAllPredefinedRuleSetsTest extends AbstractTest {
+class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
     static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
     static final RULESET_FILES = [
         'rulesets/basic.xml',

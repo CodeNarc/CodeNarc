@@ -16,7 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for UnusedImportRule
@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractRuleTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class UnusedImportRuleTest extends AbstractRuleTest {
+class UnusedImportRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3

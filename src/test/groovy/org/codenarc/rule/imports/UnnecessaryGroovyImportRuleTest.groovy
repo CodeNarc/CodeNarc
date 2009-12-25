@@ -16,7 +16,8 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for UnnecessaryGroovyImportRule
@@ -24,7 +25,7 @@ import org.codenarc.rule.AbstractRuleTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class UnnecessaryGroovyImportRuleTest extends AbstractRuleTest {
+class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3

@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
@@ -24,7 +24,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class GrailsPublicControllerMethodRuleTest extends AbstractRuleTest {
+class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     static final CONTROLLER_PATH = 'project\\MyProject\\grails-app\\controllers\\com\\xxx\\MyController.groovy'
     static final OTHER_PATH = 'project\\MyProject\\src\\groovy\\MyHelper.groovy'
 

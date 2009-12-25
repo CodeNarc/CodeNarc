@@ -15,8 +15,9 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for EqualsAndHashCodeRule
@@ -24,7 +25,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class EqualsAndHashCodeRuleTest extends AbstractRuleTest {
+class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2

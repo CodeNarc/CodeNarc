@@ -15,7 +15,8 @@
  */
 package org.codenarc.util
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for PropertyUtil
@@ -23,7 +24,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class PropertyUtilTest extends AbstractTest {
+class PropertyUtilTest extends AbstractTestCase {
 
     def object
 

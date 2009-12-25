@@ -15,8 +15,9 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.StubRule
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for PropertiesFileRuleSetConfigurer
@@ -24,7 +25,7 @@ import org.codenarc.rule.StubRule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class PropertiesFileRuleSetConfigurerTest extends AbstractTest {
+class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
     private static final SYS_PROP = 'codenarc.properties.file'
     private ruleSet
     private rule1 = new StubRule(name:'rule1', priority:1, violationMessage:'abc')

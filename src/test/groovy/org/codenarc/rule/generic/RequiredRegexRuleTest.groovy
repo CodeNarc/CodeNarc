@@ -15,8 +15,9 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for RequiredRegexRule
@@ -24,7 +25,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class RequiredRegexRuleTest extends AbstractRuleTest {
+class RequiredRegexRuleTest extends AbstractRuleTestCase {
     static final REGEX = /\@author Joe/
     def skipTestThatUnrelatedCodeHasNoViolations
 

@@ -15,8 +15,9 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ClassNameRule
@@ -24,7 +25,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class ClassNameRuleTest extends AbstractRuleTest {
+class ClassNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2

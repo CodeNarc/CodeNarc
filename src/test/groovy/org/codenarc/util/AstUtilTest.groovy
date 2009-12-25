@@ -15,7 +15,7 @@
  */
 package org.codenarc.util
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.ast.MethodNode
@@ -36,7 +36,7 @@ import org.codehaus.groovy.ast.expr.DeclarationExpression
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AstUtilTest extends AbstractTest {
+class AstUtilTest extends AbstractTestCase {
     static final SOURCE = '''
         class MyClass {
             def otherMethod() {

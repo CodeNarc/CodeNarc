@@ -15,7 +15,8 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for GroovyDslRuleSet
@@ -23,7 +24,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class GroovyDslRuleSetTest extends AbstractTest {
+class GroovyDslRuleSetTest extends AbstractTestCase {
 
     void testNullPath() {
         shouldFailWithMessageContaining('path') { new GroovyDslRuleSet(null) }

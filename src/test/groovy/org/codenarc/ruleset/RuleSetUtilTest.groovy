@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.Rule
 
@@ -25,7 +25,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class RuleSetUtilTest extends AbstractTest {
+class RuleSetUtilTest extends AbstractTestCase {
     private static final RULESET_XML_FILE = 'rulesets/RuleSet1.xml'
     private static final RULESET_GROOVY_FILE = 'rulesets/GroovyRuleSet1.txt'
     private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'

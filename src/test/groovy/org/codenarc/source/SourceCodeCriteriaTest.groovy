@@ -15,7 +15,8 @@
  */
 package org.codenarc.source
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for SourceCodeUtil
@@ -23,7 +24,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class SourceCodeCriteriaTest extends AbstractTest {
+class SourceCodeCriteriaTest extends AbstractTestCase {
     static final NAME = 'MyTest.groovy'
     static final PATH = "src/$NAME"
     static final MATCH = /.*Test\.groovy/

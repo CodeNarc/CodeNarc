@@ -16,7 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for CompositeRuleSet
@@ -24,7 +24,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CompositeRuleSetTest extends AbstractTest {
+class CompositeRuleSetTest extends AbstractTestCase {
     static final RULE1 = [:] as Rule
     static final RULE2 = [:] as Rule
     private compositeRuleSet

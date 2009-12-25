@@ -15,7 +15,7 @@
  */
 package org.codenarc.source
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for SourceString
@@ -23,7 +23,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class SourceStringTest extends AbstractTest {
+class SourceStringTest extends AbstractTestCase {
 
     static final SOURCE = '''class SampleFile {
             int count

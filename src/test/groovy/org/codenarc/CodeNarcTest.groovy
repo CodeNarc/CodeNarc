@@ -15,10 +15,11 @@
  */
 package org.codenarc
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for CodeNarc command-line runner
@@ -26,7 +27,7 @@ import org.codenarc.analyzer.FilesystemSourceAnalyzer
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CodeNarcTest extends AbstractTest {
+class CodeNarcTest extends AbstractTestCase {
     static final BASE_DIR = 'src/test/resources'
     static final BASIC_RULESET = 'rulesets/basic.xml'
     static final RULESET1 = 'rulesets/RuleSet1.xml'

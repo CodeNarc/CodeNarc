@@ -20,7 +20,7 @@ import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.basic.EmptyIfStatementRule
 import org.codenarc.rule.TestPathRule
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.Rule
 
 /**
@@ -29,7 +29,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class XmlReaderRuleSetTest extends AbstractTest {
+class XmlReaderRuleSetTest extends AbstractTestCase {
     static final NAMESPACE = '''
         xmlns="http://codenarc.org/ruleset/1.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

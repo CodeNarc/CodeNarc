@@ -15,8 +15,9 @@
  */
 package org.codenarc.rule.braces
 
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for IfStatementBracesRule
@@ -24,7 +25,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class IfStatementBracesRuleTest extends AbstractRuleTest {
+class IfStatementBracesRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2

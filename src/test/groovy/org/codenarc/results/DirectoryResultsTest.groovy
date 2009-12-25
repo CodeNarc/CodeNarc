@@ -17,7 +17,7 @@ package org.codenarc.results
 
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for DirectoryResults 
@@ -25,7 +25,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class DirectoryResultsTest extends AbstractTest {
+class DirectoryResultsTest extends AbstractTestCase {
 
     static final PATH = '/src/main'
     static final VIOLATION1 = new Violation(rule:new StubRule(1))

@@ -23,7 +23,7 @@ import org.codehaus.groovy.ast.ClassNode
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbstractAstVisitorRuleClassTest extends AbstractRuleTest {
+class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     static final SOURCE = '''
         class MyClass {
             int value

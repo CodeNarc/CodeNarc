@@ -17,7 +17,8 @@ package org.codenarc.ant
 
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Run the CodeNarc Ant Task against CodeNarc source using all predefined RuleSets.
@@ -25,7 +26,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CodeNarcTaskAllRuleSetsTest extends AbstractTest {
+class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
     static final BASE_DIR = 'src'
     static final RULESET_FILES = [
             'rulesets/basic.xml',

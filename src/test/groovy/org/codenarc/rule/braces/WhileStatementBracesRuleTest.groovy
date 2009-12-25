@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.braces
 
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
@@ -24,7 +24,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class WhileStatementBracesRuleTest extends AbstractRuleTest {
+class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2

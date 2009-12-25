@@ -15,7 +15,7 @@
  */
 package org.codenarc.util.io
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for UrlResource
@@ -23,7 +23,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class UrlResourceTest extends AbstractTest {
+class UrlResourceTest extends AbstractTestCase {
 
     private static final TEXT_FILE = 'src/test/resources/resource/SampleResource.txt'
     private static final RELATIVE_FILE_URL = 'file:' + TEXT_FILE

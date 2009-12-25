@@ -15,7 +15,8 @@
  */
 package org.codenarc.source
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for SourceFile 
@@ -23,7 +24,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class SourceFileTest extends AbstractTest {
+class SourceFileTest extends AbstractTestCase {
 
     static final FILE = 'src/test/resources/SampleFile.groovy'
     private sourceFile

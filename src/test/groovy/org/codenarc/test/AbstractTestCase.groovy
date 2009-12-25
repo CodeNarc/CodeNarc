@@ -21,7 +21,7 @@ package org.codenarc.test
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-abstract class AbstractTest extends GroovyTestCase {
+abstract class AbstractTestCase extends GroovyTestCase {
 
     /**
      * Assert that the specified closure should throw an exception whose message contains text

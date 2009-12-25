@@ -16,7 +16,8 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.StubRule
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for FilteredRuleSet
@@ -24,7 +25,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class FilteredRuleSetTest extends AbstractTest {
+class FilteredRuleSetTest extends AbstractTestCase {
     static final RULE1 = new StubRule(name:'Rule1')
     static final RULE2 = new StubRule(name:'Rule2')
     static final RULE3 = new StubRule(name:'Rule3')

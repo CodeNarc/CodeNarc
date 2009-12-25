@@ -18,7 +18,7 @@ package org.codenarc.rule
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.source.SourceString
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for AbstractAstVisitor
@@ -26,7 +26,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbstractAstVisitorClassTest extends AbstractTest {
+class AbstractAstVisitorTest extends AbstractTestCase {
     private static final LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'
     private static final SOURCE = """class ABC {
             def justReturn() {

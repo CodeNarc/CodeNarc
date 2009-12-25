@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.exceptions.CatchThrowableRule
 
 /**
@@ -24,7 +24,7 @@ import org.codenarc.rule.exceptions.CatchThrowableRule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class RuleSetBuilderTest extends AbstractTest {
+class RuleSetBuilderTest extends AbstractTestCase {
 
     private static final RULESET_XML_FILE1 = 'rulesets/RuleSet1.xml'
     private static final RULESET_XML_FILE2 = 'rulesets/RuleSet4.xml'

@@ -26,7 +26,7 @@ import org.codenarc.rule.basic.StringInstantiationRule
 import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.Rule
 
 /**
@@ -35,7 +35,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class HtmlReportWriterTest extends AbstractTest {
+class HtmlReportWriterTest extends AbstractTestCase {
     private static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
     private static final TRUNCATED_LONG_LINE = 'throw new Exception() // Some very long message 12345678..901234567890'
     private static final MESSAGE = 'bad stuff'

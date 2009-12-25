@@ -18,7 +18,8 @@ package org.codenarc.ruleset
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for XmlFileRuleSet
@@ -26,7 +27,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class XmlFileRuleSetTest extends AbstractTest {
+class XmlFileRuleSetTest extends AbstractTestCase {
 
     void testNullPath() {
         shouldFailWithMessageContaining('path') { new XmlFileRuleSet(null) }

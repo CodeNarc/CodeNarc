@@ -19,11 +19,12 @@ import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.report.HtmlReportWriter
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.results.Results
 import org.codenarc.results.FileResults
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for the CodeNarc Ant Task
@@ -31,7 +32,7 @@ import org.codenarc.results.FileResults
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CodeNarcTaskTest extends AbstractTest {
+class CodeNarcTaskTest extends AbstractTestCase {
 
     private static final BASE_DIR = 'src/test/resources'
     private static final RULESET_FILE = 'rulesets/RuleSet1.xml'

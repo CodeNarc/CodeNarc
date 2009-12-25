@@ -16,7 +16,7 @@
 package org.codenarc.rule.size
 
 import org.codenarc.rule.Rule
-import org.codenarc.rule.AbstractRuleTest
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for NestedBlockDepthRule
@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractRuleTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class NestedBlockDepthTest extends AbstractRuleTest {
+class NestedBlockDepthTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2

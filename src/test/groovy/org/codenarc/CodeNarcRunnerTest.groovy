@@ -15,7 +15,7 @@
  */
 package org.codenarc
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.analyzer.SourceAnalyzer
@@ -27,7 +27,7 @@ import org.codenarc.report.ReportWriter
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CodeNarcRunnerTest extends AbstractTest {
+class CodeNarcRunnerTest extends AbstractTestCase {
     private static final XML_RULESET1 = 'rulesets/RuleSet1.xml'
     private static final GROOVY_RULESET1 = 'rulesets/GroovyRuleSet1.txt'
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'

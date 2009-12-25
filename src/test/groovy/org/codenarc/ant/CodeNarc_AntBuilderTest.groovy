@@ -15,7 +15,7 @@
  */
 package org.codenarc.ant
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for CodeNarcTask that use the Groovy AntBuilder.
@@ -23,7 +23,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision: 30 $ - $Date: 2009-12-14 22:49:35 -0500 (Mon, 14 Dec 2009) $
  */
-class CodeNarc_AntBuilderTest extends AbstractTest {
+class CodeNarc_AntBuilderTest extends AbstractTestCase {
 
     private static final HTML = 'html'
     private static final REPORT_FILE = 'AntBuilderTestReport.html'

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,172 +16,327 @@
 package org.codenarc.rule
 
 import org.codenarc.source.SourceString
-import org.codenarc.test.AbstractTest
+import org.codenarc.source.SourceCode
 
 /**
- * Abstract superclass for tests of Rule classes
+ * Tests for the AbstractRule class
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-abstract class AbstractRuleTest extends AbstractTest {
-    protected Rule rule
+class AbstractRuleTest extends AbstractRuleTestCase {
+    static final NAME = 'Rule123'
+    static final PRIORITY = 2
+    static final SOURCE = 'class MyClass { }'
+    static final FILENAME = 'MyTest.groovy'
+    static final MATCH = /.*Test\.groovy/
+    static final NO_MATCH = /.*Other\.groovy/
+    def skipTestThatUnrelatedCodeHasNoViolations
 
-    // Subclasses can optionally set these to set the name or path of the SourceCode object created
-    protected String sourceCodeName
-    protected String sourceCodePath
-
-    //--------------------------------------------------------------------------
-    // Common Tests - Run for all concrete subclasses
-    //--------------------------------------------------------------------------
-
-    /**
-     * Make sure that code unrelated to the rule under test causes no violations.
-     * Subclasses can skip this rule by defining a property named 'skipTestThatUnrelatedCodeHasNoViolations'.
-     */
-    void testThatUnrelatedCodeHasNoViolations() {
-        final SOURCE = 'class MyClass { }'
-        if (!getProperties().keySet().contains('skipTestThatUnrelatedCodeHasNoViolations')) {
-            assertNoViolations(SOURCE)
-        }
+    void testToString() {
+        assertContainsAll(rule.toString(), ['TestPathRule', NAME, PRIORITY.toString()])
     }
 
-    void testApplyTo_CompilerError() {
+    void testName() {
+        rule.name = 'abc'
+        assert rule.getName() == 'abc'
+    }
+
+    void testDescription() {
+        assert rule.description == null
+        rule.description = 'abc'
+        assert rule.getDescription() == 'abc'
+    }
+
+    void testPriority() {
+        rule.priority = 1
+        assert rule.getPriority() == 1
+    }
+
+    void testIsReady_DefaultsToTrue() {
+        assert rule.ready == true
+    }
+
+    void testIsReady() {
+        rule = new NotReadyRule()
+        assert rule.isReady() == false
+        assertNoViolations(SOURCE)
+    }
+
+    void testEnabled() {
+        assertSingleViolation(SOURCE)
+        rule.enabled = false
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToFilesMatching() {
+        rule.applyToFilesMatching = MATCH
+        assertSingleViolation(SOURCE)
+        rule.applyToFilesMatching = NO_MATCH
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToFilesMatching() {
+        rule.doNotApplyToFilesMatching = NO_MATCH
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFilesMatching = MATCH
+        assertNoViolations(SOURCE)
+    }
+
+    void testBothApplyToFilesMatchingAndDoNotApplyToFilesMatching() {
+        rule.applyToFilesMatching = MATCH            // apply = YES
+        rule.doNotApplyToFilesMatching = MATCH       // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilesMatching = NO_MATCH         // apply = NO
+        rule.doNotApplyToFilesMatching = MATCH       // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilesMatching = MATCH            // apply = YES
+        rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToFilesMatching = NO_MATCH         // apply = NO
+        rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO
+        assertNoViolations(SOURCE)
+    }
+
+//--------
+    void testApplyToFileNames() {
+        rule.applyToFileNames = FILENAME
+        assertSingleViolation(SOURCE)
+        rule.applyToFileNames = "Xxx.groovy"
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToFileNames_Wildcards() {
+        rule.applyToFileNames = 'My*.groovy'
+        assertSingleViolation(SOURCE)
+        rule.applyToFileNames = "MyTest??.groovy"
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToFileNames() {
+        rule.doNotApplyToFileNames = "Xxx.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFileNames = FILENAME
+        assertNoViolations(SOURCE)
+    }
+
+    void testDoNotApplyToFileNames_Wildcards() {
+        rule.doNotApplyToFileNames = "MyTest??.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFileNames = 'My*.gr*'
+        assertNoViolations(SOURCE)
+    }
+
+    void testBothApplyToFileNamesAndDoNotApplyToFileNames() {
+        rule.applyToFileNames = FILENAME             // apply = YES
+        rule.doNotApplyToFileNames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFileNames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFileNames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFileNames = FILENAME             // apply = YES
+        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToFileNames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply = NO
+        assertNoViolations(SOURCE)
+    }
+//--------
+    void testApplyToFileNamesAndDoNotApplyToRegex() {
+        rule.applyToFileNames = FILENAME             // apply filename = YES
+        rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFileNames = "Xxx.groovy"         // apply filename = NO
+        rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyToRegexAndDoNotApplyToFileNames() {
+        rule.applyToFilesMatching = MATCH            // apply regex = YES
+        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply filename = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToFilesMatching = NO_MATCH         // apply regex = NO
+        rule.doNotApplyToFileNames = FILENAME        // doNotApply filename = YES
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ViolationMessageIsNotSet() {
+        def violations = applyRuleTo(SOURCE)
+        assert violations[0].message == FILENAME
+    }
+
+    void testApplyTo_ViolationMessageIsSetToEmpty() {
+        rule.violationMessage = ''
+        def violations = applyRuleTo(SOURCE)
+        assert violations[0].message == ''
+    }
+
+    void testApplyTo_ViolationMessageIsSet() {
+        rule.violationMessage = 'abc'
+        rule.numberOfViolations = 2
+        def violations = applyRuleTo(SOURCE)
+        assert violations[0].message == 'abc'
+        assert violations[1].message == 'abc'
+    }
+
+    void testApplyTo_Error() {
+        rule = new ExceptionRule(new Exception('abc'))
+        shouldFailWithMessageContaining('abc') { applyRuleTo(SOURCE) }
+    }
+
+    void testCreateViolation() {
+        def v = rule.createViolation(23, "src", "msg")
+        assert v.lineNumber == 23
+        assert v.sourceLine == 'src'
+        assert v.message == 'msg'
+    }
+
+    void testCreateViolation_Defaults() {
+        def v = rule.createViolation(99)
+        assert v.lineNumber == 99
+        assert v.sourceLine == null
+        assert v.message == null
+    }
+
+    void testCreateViolation_ASTNode() {
         final SOURCE = '''
-            @will not compile@ &^%$#
+            class MyClass {
+                int count
+            }
         '''
-        // Verify no errors/exceptions
-        applyRuleTo(SOURCE)
+        def sourceCode = new SourceString(SOURCE)
+        def classNode = sourceCode.ast.classes[0]
+        def v = rule.createViolation(sourceCode, classNode)
+        assert v.lineNumber == 2
+        assert v.sourceLine == 'class MyClass {'
+        assert v.message == null
+    }
+
+    void testSourceLineAndNumberForImport() {
+        final SOURCE = '''
+            import a.b.MyClass
+            import a.b.MyClass as Boo
+            // some comment
+            import a.pkg1.MyOtherClass as MOC
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def ast = sourceCode.ast
+        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass', lineNumber:2]
+        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[1]) == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
+        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[2]) == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]
+
+        // Not found
+        def otherSourceCode = new SourceString('def v = 1')
+        assert rule.sourceLineAndNumberForImport(otherSourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
+    }
+
+    void testSourceLineAndNumberForImport_ClassNameAndAlias() {
+        final SOURCE = '''
+            import a.b.MyClass
+            import a.b.MyClass as Boo
+            // some comment
+            import a.pkg1.MyOtherClass as MOC
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass', lineNumber:2]
+        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'Boo') == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
+        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.pkg1.MyOtherClass', 'MOC') == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]
+
+        // Not found
+        def otherSourceCode = new SourceString('def v = 1')
+        assert rule.sourceLineAndNumberForImport(otherSourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
     }
 
     //--------------------------------------------------------------------------
-    // Abstract Method Declarations - Must be implemented by concrete subclasses
+    // Tests for deprecated properties/methods
     //--------------------------------------------------------------------------
 
-    /**
-     * Create and return a new instance of the Rule class to be tested.
-     * @return a new Rule instance
-     */
-    protected abstract Rule createRule()
-
-    /**
-     * Apply the current Rule to the specified source (String) and assert that it results
-     * in two violations with the specified line numbers and containing the specified source text values.
-     * @param source - the full source code to which the rule is applied, as a String
-     * @param lineNumber1 - the expected line number in the first violation
-     * @param sourceLineText1 - the text expected within the sourceLine of the first violation
-     * @param lineNumber2 - the expected line number in the second violation
-     * @param sourceLineText2 - the text expected within the sourceLine of the second violation
-     */
-    protected void assertTwoViolations(String source,
-            Integer lineNumber1, String sourceLineText1,
-            Integer lineNumber2, String sourceLineText2) {
-        def violations = applyRuleTo(source)
-        assert violations.size() == 2
-        assertViolation(violations[0], lineNumber1, sourceLineText1)
-        assertViolation(violations[1], lineNumber2, sourceLineText2)
+    void testApplyToFilenames() {
+        rule.applyToFilenames = FILENAME
+        assertSingleViolation(SOURCE)
+        rule.applyToFilenames = "Xxx.groovy"
+        assertNoViolations(SOURCE)
     }
 
-    /**
-     * Apply the current Rule to the specified source (String) and assert that it results
-     * in two violations with the specified line numbers and containing the specified source text values.
-     * @param source - the full source code to which the rule is applied, as a String
-     * @param lineNumber1 - the expected line number in the first violation
-     * @param sourceLineText1 - the text expected within the sourceLine of the first violation
-     * @param msg1 - the text expected within the message of the first violation; May be a String or List of Strings; Defaults to null;
-     * @param lineNumber2 - the expected line number in the second violation
-     * @param sourceLineText2 - the text expected within the sourceLine of the second violation
-     * @param msg2 - the text expected within the message of the second violation; May be a String or List of Strings; Defaults to null;
-     */
-    protected void assertTwoViolations(String source,
-            Integer lineNumber1, String sourceLineText1, msg1,
-            Integer lineNumber2, String sourceLineText2, msg2) {
-        def violations = applyRuleTo(source)
-        assert violations.size() == 2
-        assertViolation(violations[0], lineNumber1, sourceLineText1, msg1)
-        assertViolation(violations[1], lineNumber2, sourceLineText2, msg2)
+    void testApplyToFilenames_Wildcards() {
+        rule.applyToFilenames = 'My*.groovy'
+        assertSingleViolation(SOURCE)
+        rule.applyToFilenames = "MyTest??.groovy"
+        assertNoViolations(SOURCE)
     }
 
-    /**
-     * Apply the current Rule to the specified source (String) and assert that it results
-     * in a single violation with the specified line number and containing the specified source text.
-     * @param source - the full source code to which the rule is applied, as a String
-     * @param lineNumber - the expected line number in the resulting violation; defaults to null
-     * @param sourceLineText - the text expected within the sourceLine of the resulting violation; defaults to null
-     * @param messageText - the text expected within the message of the resulting violation; May be a String or List of Strings; Defaults to null;
-     */
-    protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, messageText=null) {
-        def violations = applyRuleTo(source)
-        assert violations.size() == 1
-        assertViolation(violations[0], lineNumber, sourceLineText, messageText)
+    void testDoNotApplyToFilenames() {
+        rule.doNotApplyToFilenames = "Xxx.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFilenames = FILENAME
+        assertNoViolations(SOURCE)
     }
 
-    /**
-     * Apply the current Rule to the specified source (String) and assert that it results
-     * in a single violation and that the specified closure returns true.
-     * @param source - the full source code to which the rule is applied, as a String; defaults to null
-     * @param closure - the closure to apply to the violation; takes a single Violation parameter
-     */
-    protected void assertSingleViolation(String source, Closure closure) {
-        def violations = applyRuleTo(source)
-        assert violations.size() == 1
-        assert closure(violations[0]), "Closure failed for ${violations[0]}"
+    void testDoNotApplyToFilenames_Wildcards() {
+        rule.doNotApplyToFilenames = "MyTest??.groovy"
+        assertSingleViolation(SOURCE)
+        rule.doNotApplyToFilenames = 'My*.gr*'
+        assertNoViolations(SOURCE)
     }
 
-    /**
-     * Apply the current Rule to the specified source (String) and assert that it results
-     * in no violations.
-     * @param source - the full source code to which the rule is applied, as a String
-     */
-    protected void assertNoViolations(String source) {
-        def violations = applyRuleTo(source)
-        assert violations.empty, violations
+    void testBothApplyToFilenamesAndDoNotApplyToFilenames() {
+        rule.applyToFilenames = FILENAME             // apply = YES
+        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
+        assertNoViolations(SOURCE)
+
+        rule.applyToFilenames = FILENAME             // apply = YES
+        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        assertSingleViolation(SOURCE)
+
+        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
+        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
+        assertNoViolations(SOURCE)
     }
 
-    /**
-     * Assert that the specified violation is for the current rule, and has expected line number
-     * and contains the specified source text and message text.
-     * @param violation - the Violation
-     * @param lineNumber - the expected line number in the resulting violation
-     * @param sourceLineText - the text expected within the sourceLine of the resulting violation; may be null
-     * @param messageText - the text expected within the message of the resulting violation; May be a String or List of Strings; Defaults to null;
-     */
-    protected void assertViolation(
-                            Violation violation,
-                            Integer lineNumber,
-                            String sourceLineText,
-                            messageText=null) {
-        assert violation.rule == rule
-        assert violation.lineNumber == lineNumber
-        if (sourceLineText) {
-            assert violation.sourceLine 
-            assert violation.sourceLine.contains(sourceLineText), "sourceLineText=[$sourceLineText]"
-        }
-        if (messageText) {
-            assert violation.message, "The violation message was null"
-            if (messageText instanceof Collection) {
-                assertContainsAll(violation.message, messageText)
-            }
-            else {
-                assert violation.message.contains(messageText), "messageText=[$messageText]"
-            }
-        }
-    }
-
-    /**
-     * Apply the current Rule to the specified source (String) and return the resulting List of Violations.
-     * @param source - the full source code to which the rule is applied, as a String
-     */
-    protected List applyRuleTo(String source) {
-        def sourceCode = new SourceString(source, sourceCodePath, sourceCodeName)
-        def violations = rule.applyTo(sourceCode)
-        log("violations=$violations")
-        return violations
-    }
+    //--------------------------------------------------------------------------
+    // Setup and helper methods
+    //--------------------------------------------------------------------------
 
     void setUp() {
         super.setUp()
-        this.rule = createRule()
+        sourceCodePath = FILENAME
+        sourceCodeName = FILENAME
     }
 
+    protected Rule createRule() {
+        return new TestPathRule(name:NAME, priority:PRIORITY)
+    }
+
+}
+
+class NotReadyRule extends TestPathRule {
+    boolean isReady() {
+        return false
+    }
+}
+
+class ExceptionRule extends AbstractRule {
+    String name = 'Exception'
+    int priority = 1
+    Throwable throwable
+
+    ExceptionRule(Throwable throwable) {
+        this.throwable = throwable
+    }
+
+    void applyTo(SourceCode sourceCode, List violations) {
+        throw throwable
+    }
 }

@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * XML Schema validation tests for XmlReaderRuleSet class 
@@ -23,7 +23,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class XmlReaderRuleSetSchemaValidationTest extends AbstractTest {
+class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
     static final NAMESPACE = '''
         xmlns="http://codenarc.org/ruleset/1.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

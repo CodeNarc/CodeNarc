@@ -15,7 +15,8 @@
  */
 package org.codenarc.util
 
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for WildcardPattern
@@ -23,7 +24,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class WildcardPatternTest extends AbstractTest {
+class WildcardPatternTest extends AbstractTestCase {
 
     void testMatches_DefaultMatches_True() {
         assert new WildcardPattern(null, true).matches('')

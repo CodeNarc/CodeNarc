@@ -21,7 +21,7 @@ import org.codenarc.results.Results
 import org.codenarc.rule.TestCountRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for AntFileSetSourceAnalyzer
@@ -29,7 +29,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AntFileSetSourceAnalyzerTest extends AbstractTest {
+class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     private static final BASE_DIR = 'src/test/resources'
     private project
     private fileSet

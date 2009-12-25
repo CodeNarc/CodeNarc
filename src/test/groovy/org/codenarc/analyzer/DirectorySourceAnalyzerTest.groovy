@@ -21,7 +21,8 @@ import org.codenarc.results.Results
 import org.codenarc.rule.TestCountRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.test.AbstractTest
+import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for DirectorySourceAnalyzer.
@@ -29,7 +30,7 @@ import org.codenarc.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class DirectorySourceAnalyzerTest extends AbstractTest {
+class DirectorySourceAnalyzerTest extends AbstractTestCase {
     static final BASE_DIR = '/usr'
     def analyzer
     def ruleSet
