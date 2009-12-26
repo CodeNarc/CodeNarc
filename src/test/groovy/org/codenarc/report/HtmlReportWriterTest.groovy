@@ -51,6 +51,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private static final TITLE = 'My Cool Project'
     private static final BASIC_CONTENTS = [
             HTML_TAG,
+            'Report timestamp',
+            'Summary by Package', 'Package', 'Total Files', 'Files with Violations', 'Priority 1', 'Priority 2', 'Priority 3',
             'MyAction.groovy', MESSAGE, TRUNCATED_LONG_LINE,
             'MyAction2.groovy',
             'MyActionTest.groovy',

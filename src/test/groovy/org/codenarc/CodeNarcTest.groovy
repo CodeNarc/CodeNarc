@@ -92,7 +92,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports[0].class == HtmlReportWriter
         assert codeNarc.reports[0].outputFile == REPORT_FILE
         assert codeNarc.reports[1].class == HtmlReportWriter
-        assert codeNarc.reports[1].outputFile == HtmlReportWriter.DEFAULT_OUTPUT_FILE
+        assert codeNarc.reports[1].outputFile == null
     }
 
     void testParseArgs_InvalidReportType() {
@@ -104,14 +104,14 @@ class CodeNarcTest extends AbstractTestCase {
         codeNarc.setDefaultsIfNecessary()
         assert codeNarc.includes == '**/*.groovy'
         assert codeNarc.ruleSetFiles == BASIC_RULESET
-        assertReport(codeNarc.reports[0], HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, null)
+        assertReport(codeNarc.reports[0], HtmlReportWriter, null, null)
         assert codeNarc.baseDir == '.'
     }
 
     void testSetDefaultsIfNecessary_TitleSet() {
         codeNarc.title = 'abc'
         codeNarc.setDefaultsIfNecessary()
-        assertReport(codeNarc.reports[0], HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, 'abc')
+        assertReport(codeNarc.reports[0], HtmlReportWriter, null, 'abc')
     }
 
     void testSetDefaultsIfNecessary_ValuesAlreadySet() {
@@ -167,7 +167,7 @@ class CodeNarcTest extends AbstractTestCase {
 
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
-        assertReport(reportWriter, HtmlReportWriter, HtmlReportWriter.DEFAULT_OUTPUT_FILE, null)
+        assertReport(reportWriter, HtmlReportWriter, null, null)
     }
 
     void testMain() {

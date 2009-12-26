@@ -16,7 +16,6 @@
 package org.codenarc.report
 
 import groovy.xml.StreamingMarkupBuilder
-import org.apache.log4j.Logger
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
 import org.codenarc.util.io.ClassPathResource
@@ -35,41 +34,36 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class HtmlReportWriter implements ReportWriter {
+class HtmlReportWriter extends AbstractReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
     private static final CSS_FILE = 'codenarc-htmlreport.css'
-    private static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
-    private static final VERSION_FILE = 'codenarc-version.txt'
-    private static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
     private static final ROOT_PACKAGE_NAME = '<Root>'
     private static final MAX_SOURCE_LINE_LENGTH = 70
     private static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
-    private static final LOG = Logger.getLogger(HtmlReportWriter)
 
     String title
-    String outputFile = DEFAULT_OUTPUT_FILE
-    protected customMessagesBundleName = CUSTOM_MESSSAGES_BUNDLE
+    String defaultOutputFile = DEFAULT_OUTPUT_FILE
 
     /**
      * Write out a report for the specified analysis results
      * @param analysisContext - the AnalysisContext containing the analysis configuration information
      * @param results - the analysis results
      */
-    void writeOutReport(AnalysisContext analysisContext, Results results) {
+    void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         assert analysisContext
         assert results
 
+        initializeResourceBundle()
         def builder = new StreamingMarkupBuilder()
-        def reportFile = new File(outputFile)
-        reportFile.withWriter { writer ->
+        writer.withWriter { w ->
             def html = builder.bind() {
                 html {
                     out << buildHeaderSection()
                     out << buildBodySection(analysisContext, results)
                 }
             }
-            writer << html
+            w << html
         }
         LOG.info("Report file [$outputFile] created.")
     }
@@ -117,23 +111,22 @@ class HtmlReportWriter implements ReportWriter {
         return {
             def dateFormat = java.text.DateFormat.getDateTimeInstance()
             def timestamp = dateFormat.format(new Date())
-            p("Report timestamp: $timestamp", class:'reportInfo')
+            p(getResourceBundleString('htmlReport.reportTimestamp.label') + " $timestamp", class:'reportInfo')
         }
     }
 
     private buildSummaryByPackage(results) {
         return {
-            h2("Summary by Package")
+            h2(getResourceBundleString('htmlReport.summary.title'))
             table() {
                 tr(class:'tableHeader') {
-                    th('Package')
-                    th('Total Files')
-                    th('Files with Violations')
-                    th('Priority 1')
-                    th('Priority 2')
-                    th('Priority 3')
+                    th(getResourceBundleString('htmlReport.summary.packageHeading'))
+                    th(getResourceBundleString('htmlReport.summary.totalFilesHeading'))
+                    th(getResourceBundleString('htmlReport.summary.filesWithViolationsHeading'))
+                    th(getResourceBundleString('htmlReport.summary.priority1Heading'))
+                    th(getResourceBundleString('htmlReport.summary.priority2Heading'))
+                    th(getResourceBundleString('htmlReport.summary.priority3Heading'))
                 }
-
                 out << buildSummaryByPackageRow(results, true)
                 out << buildAllSummaryByPackageRowsRecursively(results)
             }
@@ -158,7 +151,7 @@ class HtmlReportWriter implements ReportWriter {
         return {
             tr {
                 if (allPackages) {
-                    td('All Packages', class:'allPackages')
+                    td(getResourceBundleString('htmlReport.summary.allPackages'), class:'allPackages')
                 }
                 else {
                     def pathName = results.path ?: ROOT_PACKAGE_NAME
@@ -212,10 +205,10 @@ class HtmlReportWriter implements ReportWriter {
         return {
             table(border:'1') {
                 tr(class:'tableHeader') {
-                    th('Rule Name')
-                    th('Priority')
-                    th('Line #')
-                    th('Source Line / Message')
+                    th(getResourceBundleString('htmlReport.violations.ruleName'))
+                    th(getResourceBundleString('htmlReport.violations.priority'))
+                    th(getResourceBundleString('htmlReport.violations.lineNumber'))
+                    th(getResourceBundleString('htmlReport.violations.sourceLine'))
                 }
 
                 def violations =
@@ -255,32 +248,17 @@ class HtmlReportWriter implements ReportWriter {
         }
     }
 
-    protected ResourceBundle getMessagesBundle() {
-        def baseBundle = ResourceBundle.getBundle(BASE_MESSSAGES_BUNDLE);
-        def bundle = baseBundle
-        try {
-            bundle = ResourceBundle.getBundle(customMessagesBundleName);
-            LOG.info("Using custom message bundle [$customMessagesBundleName]")
-            bundle.setParent(baseBundle)
-        }
-        catch(MissingResourceException) {
-            LOG.info("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
-        }
-        return bundle
-    }
-
     private buildRuleDescriptions(AnalysisContext analysisContext) {
-        def bundle = getMessagesBundle();
         def rules = analysisContext.ruleSet.rules
         def sortedRules = rules.toList().sort { rule -> rule.name }
 
         return {
-            h2("Rule Descriptions")
+            h2(getResourceBundleString('htmlReport.ruleDescriptions.title'))
             table(border:'1') {
                 tr(class:'tableHeader') {
                     th('#', class:'ruleDescriptions')
-                    th('Rule Name', class:'ruleDescriptions')
-                    th('Description', class:'ruleDescriptions')
+                    th(getResourceBundleString('htmlReport.ruleDescriptions.ruleNameHeading'), class:'ruleDescriptions')
+                    th(getResourceBundleString('htmlReport.ruleDescriptions.descriptionHeading'), class:'ruleDescriptions')
                 }
 
                 sortedRules.eachWithIndex { rule, index ->
@@ -289,26 +267,20 @@ class HtmlReportWriter implements ReportWriter {
                         a(name:ruleName)
                         td(index+1)
                         td(ruleName, class:'ruleName')
-                        td { unescaped << getDescriptionForRuleName(bundle, rule) }
+                        td { unescaped << getDescriptionForRuleName(rule) }
                     }
                 }
             }
         }
     }
 
-    protected String getDescriptionForRuleName(bundle, Rule rule) {
+    protected String getDescriptionForRuleName(Rule rule) {
         if (AstUtil.respondsTo(rule, 'getDescription') && rule.description != null) {
             return rule.description
         }
 
         def resourceKey = rule.name + '.description'
-        def description = "No description provided for rule named [$rule.name]"
-        try {
-            description = bundle.getString(resourceKey)
-        } catch (MissingResourceException e) {
-            LOG.warn(description + " resourceKey=[$resourceKey]")
-        }
-        return description
+        return getResourceBundleString(resourceKey, "No description provided for rule named [$rule.name]")
     }
 
     
@@ -332,10 +304,10 @@ class HtmlReportWriter implements ReportWriter {
     }
 
     private buildVersionFooter() {
-        def versionText = ClassPathResource.getInputStream(VERSION_FILE).text
+        def versionText = getCodeNarcVersion()
         return {
             p(class:'version') {
-                a(versionText, href:"http://www.codenarc.org")
+                a(versionText, href:CODENARC_URL)
             }
         }
     }
@@ -358,7 +330,7 @@ class HtmlReportWriter implements ReportWriter {
     }
 
     private String buildTitle() {
-        return "CodeNarc Report" + (title ? ": $title": '')
+        getResourceBundleString('htmlReport.titlePrefix')  + (title ? ": $title": '')
     }
 
 }

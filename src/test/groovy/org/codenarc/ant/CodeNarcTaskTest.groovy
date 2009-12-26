@@ -156,7 +156,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
         codeNarcTask.addConfiguredReport(new Report(type:'html', title:'ABC'))
         assert codeNarcTask.reportWriters.size() == 2
         assert codeNarcTask.reportWriters[1].title == 'ABC'
-        assert codeNarcTask.reportWriters[1].outputFile == HtmlReportWriter.DEFAULT_OUTPUT_FILE
+        assert codeNarcTask.reportWriters[1].outputFile == null
     }
 
     void testAddConfiguredReport_InvalidReportType() {
