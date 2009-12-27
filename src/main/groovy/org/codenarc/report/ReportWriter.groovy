@@ -31,7 +31,7 @@ interface ReportWriter {
      * @param analysisContext - the AnalysisContext containing the analysis configuration information
      * @param results - the analysis results
      */
-    void writeOutReport(AnalysisContext analysisContext, Results results)
+    void writeReport(AnalysisContext analysisContext, Results results)
 
     /**
      * Set the title for the report

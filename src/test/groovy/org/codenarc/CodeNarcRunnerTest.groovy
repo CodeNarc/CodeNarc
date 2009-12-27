@@ -57,7 +57,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
 
         def analysisContext, results
-        def reportWriter = [writeOutReport: { ac, res -> analysisContext = ac; results = res }] as ReportWriter
+        def reportWriter = [writeReport: { ac, res -> analysisContext = ac; results = res }] as ReportWriter
         codeNarcRunner.reportWriters << reportWriter
 
         codeNarcRunner.ruleSetFiles = XML_RULESET1

@@ -35,14 +35,14 @@ class AbstractReportWriterTest extends AbstractTestCase {
 
     void testWriteReport_WritesToDefaultOutputFile_IfOutputFileIsNull() {
         def defaultOutputFile = TestAbstractReportWriter.defaultOutputFile
-        reportWriter.writeOutReport(ANALYSIS_CONTEXT, RESULTS)
+        reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         assertOutputFile(defaultOutputFile)
     }
 
     void testWriteReport_WritesToOutputFile_IfOutputFileIsDefined() {
         final NAME = 'abc.txt'
         reportWriter.outputFile = NAME
-        reportWriter.writeOutReport(ANALYSIS_CONTEXT, RESULTS)
+        reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         assertOutputFile(NAME)
     }
 

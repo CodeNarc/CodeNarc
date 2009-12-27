@@ -76,7 +76,7 @@ class CodeNarcRunner {
         def analysisContext = new AnalysisContext(ruleSet:ruleSet)
 
         reportWriters.each { reportWriter ->
-            reportWriter.writeOutReport(analysisContext, results)
+            reportWriter.writeReport(analysisContext, results)
         }
 
         LOG.info("CodeNarc completed: " + countsText + " ${elapsedTime}ms")

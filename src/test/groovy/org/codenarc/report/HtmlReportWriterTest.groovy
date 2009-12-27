@@ -63,83 +63,83 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private results
     private ruleSet
 
-    void testWriteOutReport() {
+    void testWriteReport() {
         final CONTENTS = [
                 HTML_TAG,
                 'MyAction.groovy', 'RULE1', LINE1, 'RULE1', LINE1, 'RULE2', LINE2, MESSAGE, 'RULE3', LINE3, TRUNCATED_LONG_LINE,
                 'MyAction2.groovy', 'RULE3', LINE3, TRUNCATED_LONG_LINE,
                 'MyActionTest.groovy', 'RULE1', LINE1, 'RULE2', LINE2, MESSAGE,
                 BOTTOM_LINK]
-        reportWriter.writeOutReport(analysisContext, results)
+        reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, CONTENTS)
         assertContainsRuleIds(reportText)
     }
 
-    void testWriteOutReport_Priority4() {
+    void testWriteReport_Priority4() {
         VIOLATION1.rule.name = 'RULE4'
         VIOLATION1.rule.priority = 4
         final CONTENTS = [HTML_TAG, 'MyActionTest.groovy', 'RULE2', 2, LINE2, MESSAGE, 'RULE4', 4, LINE1, BOTTOM_LINK]
-        reportWriter.writeOutReport(analysisContext, results)
+        reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, CONTENTS)
         assertContainsRuleIds(reportText)
     }
 
-    void testWriteOutReport_NoDescriptionsForRuleIds() {
+    void testWriteReport_NoDescriptionsForRuleIds() {
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY')])
         reportWriter.customMessagesBundleName = 'DoesNotExist'
         analysisContext.ruleSet = ruleSet
-        reportWriter.writeOutReport(analysisContext, results)
+        reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, ['MyRuleXX', 'No description', 'MyRuleYY', 'No description'])
     }
 
-    void testWriteOutReport_RuleDescriptionsProvidedInCodeNarcMessagesFile() {
+    void testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile() {
         def biRule = new BooleanInstantiationRule()
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
         analysisContext.ruleSet = ruleSet
-        reportWriter.writeOutReport(analysisContext, results)
+        reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, [biRule.name, 'MyRuleXX', 'My Rule XX', 'MyRuleYY', 'My Rule YY'])
     }
 
-    void testWriteOutReport_RuleDescriptionsSetDirectlyOnTheRule() {
+    void testWriteReport_RuleDescriptionsSetDirectlyOnTheRule() {
         ruleSet = new ListRuleSet([
                 new StubRule(name:'MyRuleXX', description:'description77'),
                 new StubRule(name:'MyRuleYY', description:'description88')])
         analysisContext.ruleSet = ruleSet
-        reportWriter.writeOutReport(analysisContext, results)
+        reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, ['MyRuleXX', 'description77', 'MyRuleYY', 'description88'])
     }
 
-    void testWriteOutReport_IncludesRuleThatDoesNotSupportGetDescription() {
+    void testWriteReport_IncludesRuleThatDoesNotSupportGetDescription() {
         analysisContext.ruleSet = new ListRuleSet([ [getName:{'RuleABC'}] as Rule])
-        reportWriter.writeOutReport(analysisContext, results)
+        reportWriter.writeReport(analysisContext, results)
         assertContainsAllInOrder(getReportText(), ['RuleABC', 'No description'])
     }
 
-    void testWriteOutReport_SetOutputFileAndTitle() {
+    void testWriteReport_SetOutputFileAndTitle() {
         final OUTPUT_FILE = NEW_REPORT_FILE
         reportWriter.outputFile = OUTPUT_FILE
         reportWriter.title = TITLE
-        reportWriter.writeOutReport(analysisContext, results)
+        reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText(OUTPUT_FILE)
         assertContainsAllInOrder(reportText, BASIC_CONTENTS)
         assertContainsAllInOrder(reportText, ['Narc Report:', TITLE])
         assertContainsRuleIds(reportText)
     }
 
-    void testWriteOutReport_NullResults() {
-        shouldFailWithMessageContaining('results') { reportWriter.writeOutReport(analysisContext, null) }
+    void testWriteReport_NullResults() {
+        shouldFailWithMessageContaining('results') { reportWriter.writeReport(analysisContext, null) }
     }
 
-    void testWriteOutReport_NullAnalysisContext() {
-        shouldFailWithMessageContaining('analysisContext') { reportWriter.writeOutReport(null, results) }
+    void testWriteReport_NullAnalysisContext() {
+        shouldFailWithMessageContaining('analysisContext') { reportWriter.writeReport(null, results) }
     }
 
     void testIsDirectoryContainingFilesWithViolations() {
