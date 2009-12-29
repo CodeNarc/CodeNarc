@@ -65,7 +65,6 @@ class HtmlReportWriter extends AbstractReportWriter {
             }
             w << html
         }
-        LOG.info("Report file [$outputFile] created.")
     }
 
     String toString() {
