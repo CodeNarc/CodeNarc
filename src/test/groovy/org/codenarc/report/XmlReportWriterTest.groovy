@@ -20,9 +20,6 @@ import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.rule.basic.BooleanInstantiationRule
-import org.codenarc.rule.basic.ReturnFromFinallyBlockRule
-import org.codenarc.rule.basic.StringInstantiationRule
-import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.AnalysisContext
 import org.codenarc.rule.Violation
@@ -99,6 +96,15 @@ class XmlReportWriterTest extends AbstractTestCase {
 
         <Package path='src/test' totalFiles='3' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
         </Package>
+
+        <Rules>
+            <Rule name='BooleanInstantiation'>
+                <Description><![CDATA[Use <em>Boolean.valueOf()</em> for variable values or <em>Boolean.TRUE</em> and <em>Boolean.FALSE</em> for constant values instead of calling the <em>Boolean()</em> constructor directly or calling <em>Boolean.valueOf(true)</em> or <em>Boolean.valueOf(false)</em>.]]></Description>
+            </Rule>
+            <Rule name='DuplicateImport'>
+                <Description><![CDATA[Custom: Duplicate imports]]></Description>
+            </Rule>
+        </Rules>
     </CodeNarc>
     """
 
@@ -163,12 +169,9 @@ class XmlReportWriterTest extends AbstractTestCase {
         results.addChild(srcMainDirResults)
         results.addChild(srcTestDirResults)
 
-        ruleSet = new ListRuleSet([
-                new BooleanInstantiationRule(),
-                new ReturnFromFinallyBlockRule(),
-                new StringInstantiationRule(),
-                new ThrowExceptionFromFinallyBlockRule(),
-                new DuplicateImportRule()
+        ruleSet = new ListRuleSet([     // NOT in alphabetical order
+            new DuplicateImportRule(description:'Custom: Duplicate imports'),
+            new BooleanInstantiationRule()
         ])
         analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
         stringWriter = new StringWriter()

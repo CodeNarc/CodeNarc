@@ -38,6 +38,7 @@ class XmlReportWriter extends AbstractReportWriter {
         assert analysisContext
         assert results
 
+        initializeResourceBundle()
         def builder = new StreamingMarkupBuilder()
         writer.withWriter { w ->
             def xml = builder.bind {
@@ -45,6 +46,7 @@ class XmlReportWriter extends AbstractReportWriter {
                 CodeNarc(url:CODENARC_URL, version:getCodeNarcVersion()) {
                     out << buildProjectElement(analysisContext)
                     out << buildPackageElements(results)
+                    out << buildRulesElement(analysisContext)
                 }
             }
             w << xml
@@ -119,6 +121,21 @@ class XmlReportWriter extends AbstractReportWriter {
 
     private buildMessageElement(Violation violation) {
         return (violation.message) ? { Message(cdata(violation.message)) } : null
+    }
+
+    private buildRulesElement(AnalysisContext analysisContext) {
+        def rules = analysisContext.ruleSet.rules
+        def sortedRules = rules.toList().sort { rule -> rule.name }
+        return {
+            Rules() {
+                sortedRules.each { rule ->
+                    def description = this.getDescriptionForRule(rule)
+                    Rule(name:rule.name) {
+                        Description(cdata(description))
+                    }
+                }
+            }
+        }
     }
 
     private cdata(String text) {
