@@ -41,13 +41,12 @@ class XmlReportWriterTest extends AbstractTestCase {
     private static final LINE3 = 333
     private static final SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
     private static final SOURCE_LINE3 = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
-    private static final MESSAGE2 = 'bad stuff'
+    private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
     private static final MESSAGE3 = 'Other info'
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE2)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
-    private static final CODENARC_URL = "http://www.codenarc.org"
-    private static final NEW_REPORT_FILE = 'NewXmlReport.html'
+    private static final NEW_REPORT_FILE = 'NewXmlReport.xml'
     private static final TITLE = 'My Cool Project'
     private static final SRC_DIR1 = 'src/main/groovy'
     private static final SRC_DIR2 = 'src/test/groovy'
@@ -59,8 +58,11 @@ class XmlReportWriterTest extends AbstractTestCase {
             <SourceDirectory>src/main/groovy</SourceDirectory>
             <SourceDirectory>src/test/groovy</SourceDirectory>
         </Project>
-        <Package path='[ALL]' totalFiles='1' filesWithViolations='1' priority1='2' priority2='1' priority3='2'>
-        </Package><Package path='src/main' totalFiles='1' filesWithViolations='1' priority1='2' priority2='1' priority3='2'>
+
+        <Package path='[ALL]' totalFiles='6' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
+        </Package>
+
+        <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
             <File path='src/main/MyAction.groovy'>
                 <Violation ruleName='RULE1' priority='1' lineNumber='111'>
                     <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine>
@@ -68,15 +70,34 @@ class XmlReportWriterTest extends AbstractTestCase {
                 <Violation ruleName='RULE3' priority='3' lineNumber='333'>
                     <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
-                </Violation><Violation ruleName='RULE3' priority='3' lineNumber='333'>
+                </Violation>
+                <Violation ruleName='RULE3' priority='3' lineNumber='333'>
                     <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
-                </Violation><Violation ruleName='RULE1' priority='1' lineNumber='111'>
+                </Violation>
+                <Violation ruleName='RULE1' priority='1' lineNumber='111'>
                     <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine></Violation>
                 <Violation ruleName='RULE2' priority='2' lineNumber='222'>
-                    <Message><![CDATA[bad stuff]]></Message>
+                    <Message><![CDATA[bad stuff: !@#\$%^&*()_+<>]]></Message>
                 </Violation>
             </File>
+        </Package>
+
+        <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
+            <File path='src/main/dao/MyDao.groovy'>
+                <Violation ruleName='RULE3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info]]></Message>
+                </Violation>
+            </File>
+            <File path='src/main/dao/MyOtherDao.groovy'>
+                <Violation ruleName='RULE2' priority='2' lineNumber='222'>
+                    <Message><![CDATA[bad stuff: !@#\$%^&*()_+<>]]></Message>
+                </Violation>
+            </File>
+        </Package>
+
+        <Package path='src/test' totalFiles='3' filesWithViolations='0' priority1='0' priority2='0' priority3='0'>
         </Package>
     </CodeNarc>
     """
@@ -90,8 +111,24 @@ class XmlReportWriterTest extends AbstractTestCase {
     void testWriteReport_Writer() {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def xmlAsString = stringWriter.toString()
-        log(xmlAsString)
-        assertXml(xmlAsString) 
+        assertXml(xmlAsString)
+    }
+
+    void testWriteReport_WritesToDefaultReportFile() {
+        reportWriter.writeReport(analysisContext, results)
+        def reportFile = new File('CodeNarcXmlReport.xml')
+        def xmlAsString = reportFile.text
+        // reportFile.delete()      // keep report file around for easy inspection
+        assertXml(xmlAsString)
+    }
+
+    void testWriteReport_WritesToConfiguredReportFile() {
+        reportWriter.outputFile = NEW_REPORT_FILE
+        reportWriter.writeReport(analysisContext, results)
+        def reportFile = new File(NEW_REPORT_FILE)
+        def xmlAsString = reportFile.text
+        reportFile.delete()
+        assertXml(xmlAsString)
     }
 
     void testWriteReport_NullResults() {
@@ -110,24 +147,21 @@ class XmlReportWriterTest extends AbstractTestCase {
         super.setUp()
         reportWriter = new XmlReportWriter(title:TITLE)
 
-        def dirResultsMain = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
-//        def dirResultsCode = new DirectoryResults(path:'src/main/code', numberOfFilesInThisDirectory:2)
-//        def dirResultsTest = new DirectoryResults(path:'src/main/test', numberOfFilesInThisDirectory:3)
-//        def dirResultsTestSubdirNoViolations = new DirectoryResults(path:'src/main/test/noviolations', numberOfFilesInThisDirectory:4)
-//        def dirResultsTestSubdirEmpty = new DirectoryResults(path:'src/main/test/empty')
-        def fileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
-//        def fileResults2 = new FileResults('src/main/MyAction2.groovy', [VIOLATION3])
-//        def fileResults3 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION1, VIOLATION2])
-        dirResultsMain.addChild(fileResults1)
+        def srcMainDirResults = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
+        def srcMainDaoDirResults = new DirectoryResults(path:'src/main/dao', numberOfFilesInThisDirectory:2)
+        def srcTestDirResults = new DirectoryResults(path:'src/test', numberOfFilesInThisDirectory:3)
+        def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
+        def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
 
-//        dirResultsMain.addChild(dirResultsCode)
-//        dirResultsMain.addChild(dirResultsTest)
-//        dirResultsCode.addChild(fileResults2)
-//        dirResultsTest.addChild(fileResults3)
-//        dirResultsTest.addChild(dirResultsTestSubdirNoViolations)
-//        dirResultsTest.addChild(dirResultsTestSubdirEmpty)
+        srcMainDirResults.addChild(srcMainFileResults1)
+        srcMainDirResults.addChild(srcMainDaoDirResults)
+        srcMainDaoDirResults.addChild(fileResultsMainDao1)
+        srcMainDaoDirResults.addChild(fileResultsMainDao2)
+
         results = new DirectoryResults()
-        results.addChild(dirResultsMain)
+        results.addChild(srcMainDirResults)
+        results.addChild(srcTestDirResults)
 
         ruleSet = new ListRuleSet([
                 new BooleanInstantiationRule(),
@@ -141,6 +175,7 @@ class XmlReportWriterTest extends AbstractTestCase {
     }
 
     private void assertXml(String actualXml) {
+        log(actualXml)
         assertEquals(normalizeXml(REPORT_XML), normalizeXml(actualXml))
     }
 

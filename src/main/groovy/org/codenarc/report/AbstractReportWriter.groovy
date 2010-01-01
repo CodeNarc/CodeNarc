@@ -53,6 +53,8 @@ abstract class AbstractReportWriter implements ReportWriter {
      * @param results - the analysis results
      */
     void writeReport(AnalysisContext analysisContext, Results results) {
+        assert analysisContext
+        assert results
         def outputFilename = outputFile ?: getProperty('defaultOutputFile')
         def file = new File(outputFilename)
         file.withWriter { writer ->

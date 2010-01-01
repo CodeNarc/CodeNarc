@@ -21,6 +21,12 @@ import groovy.xml.StreamingMarkupBuilder
 import org.codenarc.results.FileResults
 import org.codenarc.rule.Violation
 
+/**
+ * ReportWriter that generates an XML report.
+ *
+ * @author Chris Mair
+ * @version $Revision: 260 $ - $Date: 2009-12-28 22:12:25 -0500 (Mon, 28 Dec 2009) $
+ */
 class XmlReportWriter extends AbstractReportWriter {
 
     private static final ROOT_PACKAGE_NAME = '[ALL]'
