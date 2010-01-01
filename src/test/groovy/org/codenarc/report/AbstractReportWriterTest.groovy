@@ -19,6 +19,7 @@ import org.codenarc.test.AbstractTestCase
 import org.codenarc.results.Results
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
+import org.codenarc.rule.StubRule
 
 /**
  * Tests for AbstractReportWriter
@@ -67,6 +68,24 @@ class AbstractReportWriterTest extends AbstractTestCase {
     void testGetResourceBundleString_ReturnsDefaultStringIfKeyNotFound() {
         reportWriter.initializeResourceBundle()
         assert reportWriter.getResourceBundleString('DoesNotExist') == DEFAULT_STRING
+    }
+
+    void testGetDescriptionForRule_RuleDescriptionFoundInMessagesFile() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name:'MyRuleXX')
+        assert reportWriter.getDescriptionForRule(rule) == 'My Rule XX'
+    }
+
+    void testGetDescriptionForRule_DescriptionPropertySetOnRuleObject() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name:'MyRuleXX', description:'xyz')
+        assert reportWriter.getDescriptionForRule(rule) == 'xyz'
+    }
+
+    void testGetDescriptionForRule_RuleDescriptionNotFoundInMessagesFile() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name:'Unknown')
+        assert reportWriter.getDescriptionForRule(rule).startsWith('No description provided')
     }
 
     void testGetCodeNarcVersion() {

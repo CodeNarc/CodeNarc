@@ -266,23 +266,13 @@ class HtmlReportWriter extends AbstractReportWriter {
                         a(name:ruleName)
                         td(index+1)
                         td(ruleName, class:'ruleName')
-                        td { unescaped << getDescriptionForRuleName(rule) }
+                        td { unescaped << getDescriptionForRule(rule) }
                     }
                 }
             }
         }
     }
 
-    protected String getDescriptionForRuleName(Rule rule) {
-        if (AstUtil.respondsTo(rule, 'getDescription') && rule.description != null) {
-            return rule.description
-        }
-
-        def resourceKey = rule.name + '.description'
-        return getResourceBundleString(resourceKey, "No description provided for rule named [$rule.name]")
-    }
-
-    
     /**
      * Format and trim the source line. If the whole line fits, then include the whole line (trimmed).
      * Otherwise, remove characters from the middle to truncate to the max length.

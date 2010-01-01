@@ -19,6 +19,8 @@ import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
 import org.apache.log4j.Logger
 import org.codenarc.util.io.ClassPathResource
+import org.codenarc.rule.Rule
+import org.codenarc.util.AstUtil
 
 /**
  * Abstract superclass for ReportWriter implementation classes.
@@ -74,6 +76,15 @@ abstract class AbstractReportWriter implements ReportWriter {
         catch(MissingResourceException) {
             LOG.info("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
         }
+    }
+
+    protected String getDescriptionForRule(Rule rule) {
+        if (AstUtil.respondsTo(rule, 'getDescription') && rule.description != null) {
+            return rule.description
+        }
+
+        def resourceKey = rule.name + '.description'
+        return getResourceBundleString(resourceKey, "No description provided for rule named [$rule.name]")
     }
 
     protected String getResourceBundleString(String resourceKey, String defaultString='?') {
