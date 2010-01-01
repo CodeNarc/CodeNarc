@@ -44,6 +44,7 @@ class XmlReportWriter extends AbstractReportWriter {
             def xml = builder.bind {
                 mkp.xmlDeclaration()
                 CodeNarc(url:CODENARC_URL, version:getCodeNarcVersion()) {
+                    out << buildReportElement()
                     out << buildProjectElement(analysisContext)
                     out << buildPackageElements(results)
                     out << buildRulesElement(analysisContext)
@@ -56,6 +57,12 @@ class XmlReportWriter extends AbstractReportWriter {
     //--------------------------------------------------------------------------
     // Internal Helper Methods
     //--------------------------------------------------------------------------
+
+    private buildReportElement() {
+        return {
+            Report(timestamp:getFormattedTimestamp())
+        }
+    }
 
     private buildProjectElement(AnalysisContext analysisContext) {
         return {

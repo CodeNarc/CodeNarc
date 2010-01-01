@@ -40,6 +40,7 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     String outputFile
     protected final LOG = Logger.getLogger(getClass())
+    protected getTimestamp = { new Date() }
     protected customMessagesBundleName = CUSTOM_MESSSAGES_BUNDLE
     protected resourceBundle
 
@@ -95,6 +96,11 @@ abstract class AbstractReportWriter implements ReportWriter {
             LOG.warn("No string found for resourceKey=[$resourceKey]")
         }
         return string
+    }
+
+    protected String getFormattedTimestamp() {
+        def dateFormat = java.text.DateFormat.getDateTimeInstance()
+        return dateFormat.format(getTimestamp())
     }
 
     protected String getCodeNarcVersion() {

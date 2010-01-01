@@ -108,8 +108,7 @@ class HtmlReportWriter extends AbstractReportWriter {
 
     private buildReportTimestamp() {
         return {
-            def dateFormat = java.text.DateFormat.getDateTimeInstance()
-            def timestamp = dateFormat.format(new Date())
+            def timestamp = getFormattedTimestamp()
             p(getResourceBundleString('htmlReport.reportTimestamp.label') + " $timestamp", class:'reportInfo')
         }
     }

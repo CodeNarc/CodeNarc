@@ -88,6 +88,11 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert reportWriter.getDescriptionForRule(rule).startsWith('No description provided')
     }
 
+    void testGetFormattedTimestamp() {
+        reportWriter.getTimestamp = { new Date(1262361072497) }
+        assert reportWriter.getFormattedTimestamp() == 'Jan 1, 2010 10:51:12 AM'
+    }
+
     void testGetCodeNarcVersion() {
         assert reportWriter.getCodeNarcVersion() == new File('src/main/resources/codenarc-version.txt').text
     }

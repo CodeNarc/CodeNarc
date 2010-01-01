@@ -24,6 +24,7 @@ import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.AnalysisContext
 import org.codenarc.rule.Violation
 import org.codenarc.rule.StubRule
+import java.text.DateFormat
 
 /**
  * Tests for XmlReportWriter
@@ -49,8 +50,12 @@ class XmlReportWriterTest extends AbstractTestCase {
     private static final SRC_DIR2 = 'src/test/groovy'
     private static final VERSION_FILE = 'src/main/resources/codenarc-version.txt'
     private static final VERSION = new File(VERSION_FILE).text
+    private static final TIMESTAMP_DATE = new Date(1262361072497)
+    private static final FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
     private static final REPORT_XML = """<?xml version="1.0"?>
     <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
+        <Report timestamp='${FORMATTED_TIMESTAMP}'/>
+
         <Project title='My Cool Project'>
             <SourceDirectory>src/main/groovy</SourceDirectory>
             <SourceDirectory>src/test/groovy</SourceDirectory>
@@ -152,6 +157,7 @@ class XmlReportWriterTest extends AbstractTestCase {
     void setUp() {
         super.setUp()
         reportWriter = new XmlReportWriter(title:TITLE)
+        reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
         def srcMainDirResults = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
         def srcMainDaoDirResults = new DirectoryResults(path:'src/main/dao', numberOfFilesInThisDirectory:2)
