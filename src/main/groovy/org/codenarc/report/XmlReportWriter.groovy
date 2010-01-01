@@ -18,6 +18,8 @@ package org.codenarc.report
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
 import groovy.xml.StreamingMarkupBuilder
+import org.codenarc.results.FileResults
+import org.codenarc.rule.Violation
 
 class XmlReportWriter extends AbstractReportWriter {
 
@@ -57,9 +59,6 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    // <Package name="org.codenarc.sample.domain" totalFiles="7" filesWithViolation="5" priority1="2" priority2="11" priority3="5">
-    // <Class className="org.codenarc.sample.service.NewService">
-
     private buildPackageElements(results) {
         return buildPackageElement(results)
     }
@@ -88,14 +87,36 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    private buildFileElement(results) {
+    private buildFileElement(FileResults results) {
         return {
             File(path: results.path) {
-//                priority1:results.getNumberOfViolationsWithPriority(1),
-//                priority2:results.getNumberOfViolationsWithPriority(2),
-//                priority3:results.getNumberOfViolationsWithPriority(3)) {
+                results.violations.each { violation ->
+                    out << buildViolationElement(violation)
+                }
             }
         }
+    }
+
+    private buildViolationElement(Violation violation) {
+        def rule = violation.rule
+        return {
+            Violation(ruleName:rule.name, priority:rule.priority, lineNumber:violation.lineNumber) {
+                out << buildSourceLineElement(violation)
+                out << buildMessageElement(violation)
+            }
+        }
+    }
+
+    private buildSourceLineElement(Violation violation) {
+        return (violation.sourceLine) ? { SourceLine(cdata(violation.sourceLine)) } : null
+    }
+
+    private buildMessageElement(Violation violation) {
+        return (violation.message) ? { Message(cdata(violation.message)) } : null
+    }
+
+    private cdata(String text) {
+        return { unescaped << "<![CDATA[" + text + "]]>" }
     }
 
 }

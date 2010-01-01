@@ -35,64 +35,63 @@ import org.codenarc.rule.StubRule
  * @version $Revision: 259 $ - $Date: 2009-12-26 22:10:00 -0500 (Sat, 26 Dec 2009) $
  */
 class XmlReportWriterTest extends AbstractTestCase {
-    private static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
-    private static final MESSAGE = 'bad stuff'
+
     private static final LINE1 = 111
     private static final LINE2 = 222
     private static final LINE3 = 333
-    private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:'if (file) {')
-    private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
-    private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
+    private static final SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
+    private static final SOURCE_LINE3 = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
+    private static final MESSAGE2 = 'bad stuff'
+    private static final MESSAGE3 = 'Other info'
+    private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
+    private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE2)
+    private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
     private static final CODENARC_URL = "http://www.codenarc.org"
     private static final NEW_REPORT_FILE = 'NewXmlReport.html'
     private static final TITLE = 'My Cool Project'
     private static final SRC_DIR1 = 'src/main/groovy'
     private static final SRC_DIR2 = 'src/test/groovy'
     private static final VERSION_FILE = 'src/main/resources/codenarc-version.txt'
-    private static final BASIC_CONTENTS = [
-            //HTML_TAG,
-            'Report timestamp',
-            'Summary by Package', 'Package', 'Total Files', 'Files with Violations', 'Priority 1', 'Priority 2', 'Priority 3',
-            'MyAction.groovy', MESSAGE, LONG_LINE,
-            'MyAction2.groovy',
-            'MyActionTest.groovy',
-            //BOTTOM_LINK
-        ]
+    private static final VERSION = new File(VERSION_FILE).text
+    private static final REPORT_XML = """<?xml version="1.0"?>
+    <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
+        <Project title='My Cool Project'>
+            <SourceDirectory>src/main/groovy</SourceDirectory>
+            <SourceDirectory>src/test/groovy</SourceDirectory>
+        </Project>
+        <Package path='[ALL]' totalFiles='1' filesWithViolations='1' priority1='2' priority2='1' priority3='2'>
+        </Package><Package path='src/main' totalFiles='1' filesWithViolations='1' priority1='2' priority2='1' priority3='2'>
+            <File path='src/main/MyAction.groovy'>
+                <Violation ruleName='RULE1' priority='1' lineNumber='111'>
+                    <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine>
+                </Violation>
+                <Violation ruleName='RULE3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info]]></Message>
+                </Violation><Violation ruleName='RULE3' priority='3' lineNumber='333'>
+                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <Message><![CDATA[Other info]]></Message>
+                </Violation><Violation ruleName='RULE1' priority='1' lineNumber='111'>
+                    <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine></Violation>
+                <Violation ruleName='RULE2' priority='2' lineNumber='222'>
+                    <Message><![CDATA[bad stuff]]></Message>
+                </Violation>
+            </File>
+        </Package>
+    </CodeNarc>
+    """
 
     private reportWriter
     private analysisContext
     private results
     private ruleSet
     private stringWriter
-    private xmlSlurper
-    private codeNarcVersion
 
     void testWriteReport_Writer() {
         reportWriter.writeReport(stringWriter, analysisContext, results)
-        log(stringWriter.toString())
-        def codeNarc = xmlSlurper.parseText(stringWriter.toString())
-        assert codeNarc.@url == CODENARC_URL
-        assert codeNarc.@version == codeNarcVersion
-
-        def project = codeNarc.Project
-        assert project.@title == TITLE
-        assert project.SourceDirectory.list() == [SRC_DIR1, SRC_DIR2]
-
-        // <Package name="org.codenarc.sample.domain" totalFiles="7" filesWithViolation="5" priority1="2" priority2="11" priority3="5">
-        // <Class className="org.codenarc.sample.service.NewService">
-        assert codeNarc.Package.size() == 2
-
-        def all = codeNarc.Package[0]
-        assertAttributes(all,
-            [path:'[ALL]', totalFiles:1, filesWithViolations:1, priority1:2, priority2:1, priority3:2])
-
-        def srcMain = codeNarc.Package[1]
-        assertAttributes(srcMain,
-            [path:'src/main', totalFiles:1, filesWithViolations:1, priority1:2, priority2:1, priority3:2])
-
-        assert srcMain.File.size() == 1
-        def file1 = srcMain.File[0]
-//        assertAttributes(file1, [file:''])
+        def xmlAsString = stringWriter.toString()
+        log(xmlAsString)
+        assertXml(xmlAsString) 
     }
 
     void testWriteReport_NullResults() {
@@ -139,13 +138,14 @@ class XmlReportWriterTest extends AbstractTestCase {
         ])
         analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
         stringWriter = new StringWriter()
-        xmlSlurper = new XmlSlurper()
-        codeNarcVersion = new File(VERSION_FILE).text
     }
 
-    private void assertAttributes(node, Map attributes) {
-        attributes.each { k, v ->
-            assert node.@"$k" == v, "Attribute [$k]: expected [$v] but was [${node.@"$k"}]"
-        }
+    private void assertXml(String actualXml) {
+        assertEquals(normalizeXml(REPORT_XML), normalizeXml(actualXml))
     }
+
+    private String normalizeXml(String xml) {
+        return xml.replaceAll(/\>\s*\</, '><').trim()
+    }
+
 }
