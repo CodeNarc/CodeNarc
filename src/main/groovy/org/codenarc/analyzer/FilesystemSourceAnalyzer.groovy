@@ -80,6 +80,10 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
         return reportResults
     }
 
+    List getSourceDirectories() {
+        return [baseDirectory]
+    }
+
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
         def dirResults = new DirectoryResults(dir)
         def dirFile = new File((String)baseDirectory, (String)dir)

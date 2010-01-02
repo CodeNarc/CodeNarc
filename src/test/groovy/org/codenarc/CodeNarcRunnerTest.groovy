@@ -33,6 +33,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'
     private static final REPORT_FILE = 'CodeNarcTest-Report.html'
     private static final RESULTS = new FileResults('path', [])
+    private static final SOURCE_DIRS = ['abc']
 
     private codeNarcRunner
 
@@ -53,7 +54,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     void testExecute() {
         def ruleSet
-        def sourceAnalyzer = [analyze: { rs -> ruleSet = rs; return RESULTS }] as SourceAnalyzer
+        def sourceAnalyzer = [analyze: { rs -> ruleSet = rs; return RESULTS }, getSourceDirectories:{SOURCE_DIRS}] as SourceAnalyzer
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
 
         def analysisContext, results
@@ -67,6 +68,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert ruleSet.rules*.class == [org.codenarc.rule.TestPathRule]
 
         assert analysisContext.ruleSet == ruleSet
+        assert analysisContext.sourceDirectories == SOURCE_DIRS
         assert results == RESULTS
     }
 

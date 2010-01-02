@@ -136,6 +136,23 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assertResultsCounts(results, 0, 0)
     }
 
+    void testGetSourceDirectories_ReturnsEmptyListForNoFileSets() {
+        def analyzer = new AntFileSetSourceAnalyzer(project, [])
+        assert analyzer.sourceDirectories == []
+    }
+
+    void testGetSourceDirectories_ReturnsSingleDirectoryForSingleFileSet() {
+        def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet])
+        assert analyzer.sourceDirectories == [normalizedPath(BASE_DIR)]
+    }
+
+    void testGetSourceDirectories_ReturnsDirectoryForEachFileSet() {
+        def fileSet1 = new FileSet(dir:new File('abc'), project:project)
+        def fileSet2 = new FileSet(dir:new File('def'), project:project)
+        def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet1, fileSet2])
+        assert analyzer.sourceDirectories == [normalizedPath('abc'), normalizedPath('def')]
+    }
+
     void setUp() {
         super.setUp()
         fileSet = new FileSet()
@@ -146,6 +163,10 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         fileSet.setProject(project)
 
         ruleSet = new ListRuleSet([new TestPathRule()])
+    }
+
+    private String normalizedPath(String path) {
+        return new File(path).path
     }
 
     private void assertResultsCounts(Results results, int totalFiles, int filesWithViolations) {

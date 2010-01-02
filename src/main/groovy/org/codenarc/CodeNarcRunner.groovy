@@ -73,7 +73,7 @@ class CodeNarcRunner {
         def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
         def elapsedTime = System.currentTimeMillis() - startTime
         LOG.debug("results=$results")
-        def analysisContext = new AnalysisContext(ruleSet:ruleSet)
+        def analysisContext = new AnalysisContext(ruleSet:ruleSet, sourceDirectories:sourceAnalyzer.sourceDirectories)
 
         reportWriters.each { reportWriter ->
             reportWriter.writeReport(analysisContext, results)

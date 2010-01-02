@@ -23,7 +23,6 @@ import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.source.SourceString
-import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for FilesystemSourceAnalyzer.
@@ -148,6 +147,11 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assert testCountRule.count == 2
         assert results.numberOfFilesWithViolations == 2
         assert results.totalNumberOfFiles == 2
+    }
+
+    void testGetSourceDirectories_ReturnsListWithBaseDirectory() {
+        analyzer.baseDirectory = BASE_DIR
+        assert analyzer.sourceDirectories == [BASE_DIR]
     }
 
     void testMatches() {

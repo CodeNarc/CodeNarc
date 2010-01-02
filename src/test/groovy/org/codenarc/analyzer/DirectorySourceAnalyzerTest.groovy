@@ -22,7 +22,6 @@ import org.codenarc.rule.TestCountRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for DirectorySourceAnalyzer.

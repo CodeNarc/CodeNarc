@@ -77,6 +77,9 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         return reportResults
     }
 
+    List getSourceDirectories() {
+        return fileSets.collect { fileSet -> fileSet.getDir(project).path }
+    }
 
     //--------------------------------------------------------------------------
     // Internal Helper Methods
