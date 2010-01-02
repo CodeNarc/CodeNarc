@@ -23,6 +23,7 @@ import org.codenarc.CodeNarcRunner
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.Results
+import org.codenarc.report.ReportWriterFactory
 
 /**
  * Ant Task for running CodeNarc.
@@ -97,16 +98,15 @@ class CodeNarcTask extends Task {
      * element within this task.
      */
     void addConfiguredReport(Report report) {
-        if (report.type != 'html') {
-            throw new BuildException("Invalid type: [$report.type]")
+
+        def reportWriter = new ReportWriterFactory().getReportWriter(report.type, report.options)
+        if (report.title) {
+            reportWriter.title = report.title
         }
-        def reportWriter = new HtmlReportWriter(title:report.title)
         if (report.toFile) {
             reportWriter.outputFile = report.toFile 
         }
 
-        report.options.each { name, value -> reportWriter[name] = value }
-        
         LOG.debug("Adding report: $reportWriter")
         reportWriters << reportWriter
     }

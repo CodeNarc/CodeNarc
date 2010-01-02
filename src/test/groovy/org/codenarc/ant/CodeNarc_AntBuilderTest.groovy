@@ -25,9 +25,11 @@ import org.codenarc.test.AbstractTestCase
  */
 class CodeNarc_AntBuilderTest extends AbstractTestCase {
 
+    private static final XML = 'xml'
     private static final HTML = 'html'
-    private static final REPORT_FILE = 'AntBuilderTestReport.html'
-    private static final TITLE = 'Sample'
+    private static final HTML_REPORT_FILE = 'AntBuilderTestHtmlReport.html'
+    private static final XML_REPORT_FILE = 'AntBuilderTestXmlReport.xml'
+    private static final TITLE = 'CodeNarc_AntBuilderTest'
     private static final RULESET_FILES = [
             'rulesets/basic.xml',
             'rulesets/braces.xml'].join(',')
@@ -41,17 +43,27 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
            fileset(dir:'src/main/groovy') {
                include(name:"**/*.groovy")
            }
-           report(type:HTML, title:TITLE, toFile:REPORT_FILE)
-//               option(name:'title', value:TITLE)
-//               option(name:'outputFile', value:REPORT_FILE)
-//           }
+           report(type:HTML) {
+               option(name:'title', value:TITLE)
+               option(name:'outputFile', value:HTML_REPORT_FILE)
+           }
+           report(type:XML) {
+               option(name:'title', value:TITLE)
+               option(name:'outputFile', value:XML_REPORT_FILE)
+           }
         }
-        verifyReportFile()
+        verifyHtmlReportFile()
     }
 
-    private void verifyReportFile() {
-        def file = new File(REPORT_FILE)
+    private void verifyHtmlReportFile() {
+        def file = new File(HTML_REPORT_FILE)
         assert file.exists()
         assertContainsAllInOrder(file.text, [TITLE, 'org/codenarc', 'Rule Descriptions'])
+    }
+
+    private void verifyXmlReportFile() {
+        def file = new File(XML_REPORT_FILE)
+        assert file.exists()
+        assertContainsAllInOrder(file.text, ['<?xml version', TITLE, 'org/codenarc', '<Rules>'])
     }
 }

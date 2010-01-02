@@ -20,6 +20,7 @@ import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.test.AbstractTestCase
+import org.codenarc.report.XmlReportWriter
 
 /**
  * Tests for CodeNarc command-line runner
@@ -35,8 +36,10 @@ class CodeNarcTest extends AbstractTestCase {
     static final INCLUDES = 'sourcewithdirs/**/*.groovy'
     static final EXCLUDES = '**/*File2.groovy'
     static final TITLE = 'My Title'
-    static final REPORT_FILE = 'CodeNarcTest-Report.html'
-    static final REPORT_STR = "html:$REPORT_FILE"
+    static final HTML_REPORT_FILE = 'CodeNarcTest-Report.html'
+    static final HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
+    static final XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
+    static final XML_REPORT_STR = "xml:$XML_REPORT_FILE"
     static final RESULTS = new FileResults('path', [])
 
     private codeNarc
@@ -79,20 +82,29 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.title == TITLE
     }
 
-    void testParseArgs_Report() {
-        parseArgs("-report=$REPORT_STR")
+    void testParseArgs_SingleHtmlReport() {
+        parseArgs("-report=$HTML_REPORT_STR")
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == HtmlReportWriter
-        assert codeNarc.reports[0].outputFile == REPORT_FILE
+        assert codeNarc.reports[0].outputFile == HTML_REPORT_FILE
     }
 
-    void testParseArgs_TwoReports() {
-        parseArgs("-report=$REPORT_STR", '-report=html')
-        assert codeNarc.reports.size() == 2
+    void testParseArgs_SingleXmlReport() {
+        parseArgs("-report=$XML_REPORT_STR")
+        assert codeNarc.reports.size() == 1
+        assert codeNarc.reports[0].class == XmlReportWriter
+        assert codeNarc.reports[0].outputFile == XML_REPORT_FILE
+    }
+
+    void testParseArgs_ThreeReports() {
+        parseArgs("-report=$HTML_REPORT_STR", '-report=html', "-report=$XML_REPORT_STR")
+        assert codeNarc.reports.size() == 3
         assert codeNarc.reports[0].class == HtmlReportWriter
-        assert codeNarc.reports[0].outputFile == REPORT_FILE
+        assert codeNarc.reports[0].outputFile == HTML_REPORT_FILE
         assert codeNarc.reports[1].class == HtmlReportWriter
         assert codeNarc.reports[1].outputFile == null
+        assert codeNarc.reports[2].class == XmlReportWriter
+        assert codeNarc.reports[2].outputFile == XML_REPORT_FILE
     }
 
     void testParseArgs_InvalidReportType() {
@@ -128,7 +140,7 @@ class CodeNarcTest extends AbstractTestCase {
 
     void testExecute() {
         final ARGS = [
-                "-report=$REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
+                "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
 
         def codeNarcRunner = [execute: { }]
@@ -146,7 +158,7 @@ class CodeNarcTest extends AbstractTestCase {
 
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
-        assertReport(reportWriter, HtmlReportWriter, REPORT_FILE, TITLE)
+        assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
     }
 
     void testExecute_NoArgs() {
@@ -172,7 +184,7 @@ class CodeNarcTest extends AbstractTestCase {
 
     void testMain() {
         final ARGS = [
-                "-report=$REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
+                "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
         CodeNarc.main(ARGS)
         assert outputFile.exists()
@@ -190,7 +202,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     void testMain_BadOptionFormat() {
-        final ARGS = ["-report=$REPORT_STR", '&^%#BAD%$#'] as String[]
+        final ARGS = ["-report=$HTML_REPORT_STR", '&^%#BAD%$#'] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)
         }
@@ -201,7 +213,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     void testMain_UnknownOption() {
-        final ARGS = ["-unknown=23", "-report=$REPORT_STR"] as String[]
+        final ARGS = ["-unknown=23", "-report=$HTML_REPORT_STR"] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)
         }
@@ -218,7 +230,7 @@ class CodeNarcTest extends AbstractTestCase {
     void setUp() {
         super.setUp()
         codeNarc = new CodeNarc()
-        outputFile = new File(REPORT_FILE)
+        outputFile = new File(HTML_REPORT_FILE)
     }
 
     void tearDown() {

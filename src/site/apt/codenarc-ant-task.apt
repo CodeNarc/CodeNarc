@@ -38,13 +38,13 @@ CodeNarc - Ant Task
 ~~~~~~~~~~~~~~~~~~~~~~~
 
   The <<report>> nested element defines the format and output file for the analysis report.
-  Currently, HTML ("html") is the only supported format.
+  Currently, HTML (type="html") and XML (type="xml") are the only supported formats.
 
 *----------------------+----------------------------------------------------------------+------------------------+
 | <<Attribute>>        | <<Description>>                                                | <<Required>>           |
 *----------------------+----------------------------------------------------------------+------------------------+
-| type                 | The format of the output analysis report. The only valid       | Yes                    |
-|                      | value is "html"                                                |                        |
+| type                 | The format of the output analysis report. Must be either       | Yes                    |
+|                      | "html" or "xml".                                               |                        |
 *----------------------+----------------------------------------------------------------+------------------------+
 | toFile <(Deprecated)>| The path and filename for the output report file.              | No                     |
 |                      | This is deprecated. Use the \<option\> nested element instead. |                        |
@@ -57,7 +57,8 @@ CodeNarc - Ant Task
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
   The <<\<option\>>> element is a child of the <<\<report\>>> element and defines a
-  report-specific option for a report. See the {{{Example}Example}} below.
+  report-specific option for a report. You specify the option <<name> and <<value>> as attributes
+  within the <<\<option\>>> element. See the {{{Example}Example}} below.
 
 
 * Fileset Nested Element

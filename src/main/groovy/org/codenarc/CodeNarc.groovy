@@ -19,6 +19,7 @@ import org.codenarc.analyzer.SourceAnalyzer
 import org.apache.log4j.Logger
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
+import org.codenarc.report.ReportWriterFactory
 
 /**
  * Command-line runner for CodeNarc.
@@ -69,9 +70,10 @@ class CodeNarc {
         '        The title descriptive for this analysis; used in the output report(s). Optional.',
         '    -report=<REPORT-TYPE[:FILENAME]>',
         '        The definition of the report to produce. The option value is of the form',
-        '        TYPE[:FILENAME], where TYPE is "html" and FILENAME is the filename (with ',
+        '        TYPE[:FILENAME], where TYPE is "html" or "xml" and FILENAME is the filename (with ',
         '        optional path) of the output report filename. If the report filename is ',
-        '        omitted, the default filename is used ("CodeNarcReport.html"). If no',
+        '        omitted, the default filename is used for the specified report type ',
+        '        ("CodeNarcReport.html" for "html" and "CodeNarcXmlReport.xml" for "xml"). If no',
         '        report option is specified, default to a single "html" report with the',
         '        default filename.',
         '    -help',
@@ -79,6 +81,7 @@ class CodeNarc {
         '  Example command-line invocations:',
         '    java org.codenarc.CodeNarc',
         '    java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"',
+        '    java org.codenarc.CodeNarc -report=xml:MyXmlReport.xml -report=html',
         '    java org.codenarc.CodeNarc -help'
     ].join('\n')
 
@@ -172,14 +175,14 @@ class CodeNarc {
     }
 
     private parseReport(String argValue) {
-        assert argValue.startsWith('html'), "[$argValue] does not specify a supported report type"
-        def report = new HtmlReportWriter()
-        if (argValue.contains(':')) {
-            def parts = argValue.tokenize(':')
-            report.outputFile = parts[1]
+        def parts = argValue.tokenize(':')
+        def type = parts[0]
+        def reportWriter = new ReportWriterFactory().getReportWriter(type)
+
+        if (parts[1]) {
+            reportWriter.outputFile = parts[1]
         }
-        // else argValue is just the report type
-        reports << report
+        reports << reportWriter
     }
 
 }

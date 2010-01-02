@@ -22,15 +22,15 @@ import org.codenarc.source.SourceCode
  * Tests for the AbstractRule class
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 257 $ - $Date: 2009-12-25 17:07:22 -0500 (Fri, 25 Dec 2009) $
  */
 class AbstractRuleTest extends AbstractRuleTestCase {
-    static final NAME = 'Rule123'
-    static final PRIORITY = 2
-    static final SOURCE = 'class MyClass { }'
-    static final FILENAME = 'MyTest.groovy'
-    static final MATCH = /.*Test\.groovy/
-    static final NO_MATCH = /.*Other\.groovy/
+    private static final NAME = 'Rule123'
+    private static final PRIORITY = 2
+    private static final SOURCE = 'class MyClass { }'
+    private static final FILENAME = 'MyTest.groovy'
+    private static final MATCH = /.*Test\.groovy/
+    private static final NO_MATCH = /.*Other\.groovy/
     def skipTestThatUnrelatedCodeHasNoViolations
 
     void testToString() {
