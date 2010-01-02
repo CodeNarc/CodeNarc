@@ -292,7 +292,7 @@ class HtmlReportWriter extends AbstractReportWriter {
     }
 
     private buildVersionFooter() {
-        def versionText = getCodeNarcVersion()
+        def versionText = 'CodeNarc v' + getCodeNarcVersion()
         return {
             p(class:'version') {
                 a(versionText, href:CODENARC_URL)
