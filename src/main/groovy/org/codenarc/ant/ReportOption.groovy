@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,15 @@
 package org.codenarc.ant
 
 /**
- * JavaBean class holding the properties for a <report> element with the CodeNarc Ant Task.
+ * JavaBean class holding the properties for a <option> element netsed within a <report> element
+ * for the CodeNarc Ant Task.
  *
  * @see CodeNarcTask
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 24 $ - $Date: 2009-12-10 21:17:05 -0500 (Thu, 10 Dec 2009) $
  */
-class Report {
-    String type
-
-    /** @deprecated Use option elements instead */
-    String title
-
-    /** @deprecated Use option elements instead */
-    String toFile
-
-    final Map options = [:]
-
-    void addConfiguredOption(ReportOption option) {
-        options[option.name] = option.value
-    }
+class ReportOption {
+    String name
+    String value
 }

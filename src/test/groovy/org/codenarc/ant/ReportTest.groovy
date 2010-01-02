@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,24 @@
  */
 package org.codenarc.ant
 
+import org.codenarc.test.AbstractTestCase
+
 /**
- * JavaBean class holding the properties for a <report> element with the CodeNarc Ant Task.
- *
- * @see CodeNarcTask
+ * Tests for Report
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 24 $ - $Date: 2009-12-10 21:17:05 -0500 (Thu, 10 Dec 2009) $
  */
-class Report {
-    String type
+class ReportTest extends AbstractTestCase {
+    private report = new Report()
 
-    /** @deprecated Use option elements instead */
-    String title
+    void testAddConfiguredOption_AddsToOptions() {
+        def option = new ReportOption(name:'a', value:'1')
+        report.addConfiguredOption(option)
+        assert report.options == [a:'1']
 
-    /** @deprecated Use option elements instead */
-    String toFile
-
-    final Map options = [:]
-
-    void addConfiguredOption(ReportOption option) {
-        options[option.name] = option.value
+        def option2 = new ReportOption(name:'b', value:'2')
+        report.addConfiguredOption(option2)
+        assert report.options == [a:'1', b:'2']
     }
 }

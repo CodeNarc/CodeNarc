@@ -104,6 +104,9 @@ class CodeNarcTask extends Task {
         if (report.toFile) {
             reportWriter.outputFile = report.toFile 
         }
+
+        report.options.each { name, value -> reportWriter[name] = value }
+        
         LOG.debug("Adding report: $reportWriter")
         reportWriters << reportWriter
     }
