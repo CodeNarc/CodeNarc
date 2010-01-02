@@ -22,7 +22,7 @@ import org.codenarc.source.SourceCode
  * Tests for the AbstractRule class
  *
  * @author Chris Mair
- * @version $Revision: 257 $ - $Date: 2009-12-25 17:07:22 -0500 (Fri, 25 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbstractRuleTest extends AbstractRuleTestCase {
     private static final NAME = 'Rule123'

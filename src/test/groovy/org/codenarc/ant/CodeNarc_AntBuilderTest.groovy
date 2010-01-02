@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for CodeNarcTask that use the Groovy AntBuilder.
  *
  * @author Chris Mair
- * @version $Revision: 30 $ - $Date: 2009-12-14 22:49:35 -0500 (Mon, 14 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class CodeNarc_AntBuilderTest extends AbstractTestCase {
 

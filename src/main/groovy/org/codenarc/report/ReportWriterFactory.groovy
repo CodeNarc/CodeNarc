@@ -21,7 +21,7 @@ package org.codenarc.report
  * The passed in <code>type</code> can be either "html" or "xml".
  *
  * @author Chris Mair
- * @version $Revision: 260 $ - $Date: 2009-12-28 22:12:25 -0500 (Mon, 28 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class ReportWriterFactory {
 

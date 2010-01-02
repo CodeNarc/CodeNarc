@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for Report
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-12-10 21:17:05 -0500 (Thu, 10 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class ReportTest extends AbstractTestCase {
     private report = new Report()

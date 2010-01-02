@@ -25,7 +25,7 @@ import org.codenarc.rule.StubRule
  * Tests for AbstractReportWriter
  *
  * @author Chris Mair
- * @version $Revision: 27 $ - $Date: 2009-12-10 21:26:04 -0500 (Thu, 10 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class AbstractReportWriterTest extends AbstractTestCase {
 

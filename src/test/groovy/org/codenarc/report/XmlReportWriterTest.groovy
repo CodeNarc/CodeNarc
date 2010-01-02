@@ -30,7 +30,7 @@ import java.text.DateFormat
  * Tests for XmlReportWriter
  *
  * @author Chris Mair
- * @version $Revision: 259 $ - $Date: 2009-12-26 22:10:00 -0500 (Sat, 26 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class XmlReportWriterTest extends AbstractTestCase {
 
