@@ -51,7 +51,7 @@ interface SourceCode {
 
     /**
      * Get the trimmed line at the specified index
-     * @param lineNumber - the line number; may be negative
+     * @param lineNumber - the zero-based line number; may be negative
      * @return the trimmed line at the specified index, or null if lineNumber is not valid
      */
     String line(int lineNumber)
