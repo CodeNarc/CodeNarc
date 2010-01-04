@@ -1,0 +1,55 @@
+		--------------------------------------------------
+					  CodeNarc XmlReportWriter
+		--------------------------------------------------
+
+XmlReportWriter
+~~~~~~~~~~~~~~~~
+
+* Description
+~~~~~~~~~~~~~
+
+  The <<<org.codenarc.report.XmlReportWriter>>> class (type="xml") produces an XML report of the
+  <<CodeNarc>> results.
+
+  See a {{{./SampleCodeNarcXmlReport.xml}Sample XML Report}}.
+
+* Option Nested Elements
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <<option>> element is a child of the <<report>> element and defines a report-specific option
+  for a report.
+
+  <<<org.codenarc.report.XmlReportWriter>>> supports the following options:
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Attribute>>       | <<Description>>                                                | <<Required>>           |
+*---------------------+----------------------------------------------------------------+------------------------+
+| outputFile          | The path and filename for the output report file.              | No                     |
+*---------------------+----------------------------------------------------------------+------------------------+
+| title               | The title for the output report.                               | No                     |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+* Example
+~~~~~~~~~
+
+  Here is an example Ant XML build file illustrating configuration of
+  <<<org.codenarc.report.XmlReportWriter>>>. Note that the report <<type>> is specified as <<"xml">>.
+
++----------------------------------------------------------------------------------------
+<taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
+<target name="runCodeNarc">
+    <codenarc
+            ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml"
+            maxPriority1Violations="0">
+
+        <report type="xml">
+            <option name="outputFile" value="reports/CodeNarcXmlReport.xml" />
+            <option name="title" value="My Sample Code" />
+        </report>
+
+        <fileset dir="src">
+            <include name="**/*.groovy"/>
+        </fileset>
+    </codenarc>
+</target>
++----------------------------------------------------------------------------------------

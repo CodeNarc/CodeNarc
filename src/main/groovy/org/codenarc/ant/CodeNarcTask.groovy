@@ -21,7 +21,6 @@ import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.CodeNarcRunner
 import org.codenarc.analyzer.SourceAnalyzer
-import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.Results
 import org.codenarc.report.ReportWriterFactory
 
@@ -42,8 +41,9 @@ import org.codenarc.report.ReportWriterFactory
  * See the <i>Apache Ant Manual</i> for more information on <i>FileSets</i>. 
  * <p/>
  * The <ode>report</code> nested element defines the format and output file for the analysis report.
- * Currently, HTML ("html") is the only supported format. It includes <code>type</code>,
- * <code>toFile</code>, and <code>title</code> attributes.
+ * Currently, HTML (type="html") and XML (type="xml") are the only supported formats. Each report
+ * is configured using nested <code>option</code> elements, with <code>name</code>, and
+ * <code>value</code> attributes.
  *
  * @see "http://ant.apache.org/manual/index.html"
  *

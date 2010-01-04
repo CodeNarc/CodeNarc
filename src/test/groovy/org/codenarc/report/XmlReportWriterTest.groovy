@@ -46,8 +46,8 @@ class XmlReportWriterTest extends AbstractTestCase {
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
     private static final NEW_REPORT_FILE = 'NewXmlReport.xml'
     private static final TITLE = 'My Cool Project'
-    private static final SRC_DIR1 = 'src/main/groovy'
-    private static final SRC_DIR2 = 'src/test/groovy'
+    private static final SRC_DIR1 = 'c:/MyProject/src/main/groovy'
+    private static final SRC_DIR2 = 'c:/MyProject/src/test/groovy'
     private static final VERSION_FILE = 'src/main/resources/codenarc-version.txt'
     private static final VERSION = new File(VERSION_FILE).text
     private static final TIMESTAMP_DATE = new Date(1262361072497)
@@ -57,8 +57,8 @@ class XmlReportWriterTest extends AbstractTestCase {
         <Report timestamp='${FORMATTED_TIMESTAMP}'/>
 
         <Project title='My Cool Project'>
-            <SourceDirectory>src/main/groovy</SourceDirectory>
-            <SourceDirectory>src/test/groovy</SourceDirectory>
+            <SourceDirectory>c:/MyProject/src/main/groovy</SourceDirectory>
+            <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
         </Project>
 
         <Package path='[ALL]' totalFiles='6' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>

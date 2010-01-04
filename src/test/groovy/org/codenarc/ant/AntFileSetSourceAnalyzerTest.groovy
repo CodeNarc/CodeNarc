@@ -150,6 +150,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         def fileSet1 = new FileSet(dir:new File('abc'), project:project)
         def fileSet2 = new FileSet(dir:new File('def'), project:project)
         def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet1, fileSet2])
+        log("sourceDirectories=${analyzer.sourceDirectories}")
         assert analyzer.sourceDirectories == [normalizedPath('abc'), normalizedPath('def')]
     }
 

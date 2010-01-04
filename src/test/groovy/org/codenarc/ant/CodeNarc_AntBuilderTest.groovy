@@ -29,10 +29,10 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
     private static final HTML = 'html'
     private static final HTML_REPORT_FILE = 'AntBuilderTestHtmlReport.html'
     private static final XML_REPORT_FILE = 'AntBuilderTestXmlReport.xml'
-    private static final TITLE = 'CodeNarc_AntBuilderTest'
+    private static final TITLE = 'Sample Project'
     private static final RULESET_FILES = [
             'rulesets/basic.xml',
-            'rulesets/braces.xml'].join(',')
+            'rulesets/imports.xml'].join(',')
 
     void testAntTask_Execute_UsingAntBuilder() {
         def ant = new AntBuilder()
@@ -40,9 +40,15 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
         ant.codenarc(ruleSetFiles:RULESET_FILES) {
-           fileset(dir:'src/main/groovy') {
-               include(name:"**/*.groovy")
-           }
+            fileset(dir:'samples/src') {
+                include(name:"**/*.groovy")
+            }
+//           fileset(dir:'src/main/groovy') {
+//               include(name:"**/*.groovy")
+//           }
+//           fileset(dir:'src/test/groovy') {
+//               include(name:"**/*.groovy")
+//           }
            report(type:HTML) {
                option(name:'title', value:TITLE)
                option(name:'outputFile', value:HTML_REPORT_FILE)
