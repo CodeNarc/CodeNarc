@@ -1,0 +1,86 @@
+<html><head><title>CodeNarc Report: Sample Project</title><style type='text/css'>
+        .reportInfo {
+			font-size: 110%;
+		}
+		.allPackages {
+		    font-weight: bold;
+		}
+        .packageHeader {
+			background: lightblue;
+			font-size: 150%;
+		    font-weight: bold;
+		}
+        .fileHeader {
+			font-size: 120%;
+		    font-weight: bold;
+		}
+        .tableHeader {
+			background: lightblue;
+		    font-weight: bold;
+		}
+		.number {
+		    text-align: center;
+		}
+		.priority1 {
+		    color: red;
+		    font-weight: bold;
+		    text-align: center;
+		}
+		.priority2 {
+		    color: orange;
+		    font-weight: bold;
+		    text-align: center;
+		}
+		.priority3 {
+		    color: blue;
+		    font-weight: bold;
+		    text-align: center;
+		}
+        .priority4 {
+            color: gray;
+            font-weight: bold;
+            text-align: center;
+        }
+		.ruleName {
+		    font-weight: bold;
+		}
+        .violationInfo {
+            margin-bottom: 2px;
+            margin-top: 2px;
+        }
+        .violationInfoPrefix {
+            font-size: 55%;
+            width: 30px;
+            color: darkgray;
+        }
+		.sourceCode {
+		    font-family: Arial, sans-serif;
+		    font-size: 80%;
+            color: mediumblue;
+		}
+		.moreInfo {
+		    font-style: italic;
+            color: black;
+		}
+        .ruleDescriptions {
+            font-size: 85%;
+        }
+		.version {
+			font-size: 75%;
+		    color: blue;
+            margin-top: 10px;
+		}
+
+		table {
+		    border: 1px solid gray;
+		}
+		td, th {
+		    border: 1px solid gray;
+		    border-bottom: 1px solid aqua;
+		    border-right: 1px solid aqua;
+		}
+		em {
+		    font-weight: bold;
+		}
+
+</style></head><body><h1>CodeNarc Report: Sample Project</h1><p class='reportInfo'>Report timestamp: Jan 4, 2010 10:06:28 PM</p><h2>Summary by Package</h2><table><tr class='tableHeader'><th>Package</th><th>Total Files</th><th>Files with Violations</th><th>Priority 1</th><th>Priority 2</th><th>Priority 3</th></tr><tr><td class='allPackages'>All Packages</td><td class='number'>7</td><td class='number'>4</td><td class='priority1'>0</td><td class='priority2'>11</td><td class='priority3'>5</td></tr><tr><td><a href='#org/codenarc/sample/domain'>org/codenarc/sample/domain</a></td><td class='number'>2</td><td class='number'>1</td><td class='priority1'>0</td><td class='priority2'>3</td><td class='priority3'>3</td></tr><tr><td>org/codenarc/sample/other</td><td class='number'>1</td><td class='number'>0</td><td class='priority1'>0</td><td class='priority2'>0</td><td class='priority3'>0</td></tr><tr><td><a href='#org/codenarc/sample/service'>org/codenarc/sample/service</a></td><td class='number'>4</td><td class='number'>3</td><td class='priority1'>0</td><td class='priority2'>8</td><td class='priority3'>2</td></tr></table><a name='org/codenarc/sample/domain'/><h2 class='packageHeader'>org/codenarc/sample/domain</h2><h3 class='fileHeader'>org/codenarc/sample/domain/SampleDomain.groovy</h3><table border='1'><tr class='tableHeader'><th>Rule Name</th><th>Priority</th><th>Line #</th><th>Source Line / Message</th></tr><tr><td><a href='#EmptyElseBlock' class='priority2'>EmptyElseBlock</a></td><td class='priority2'>2</td><td class='number'>24</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>else {</span></p></td></tr><tr><td><a href='#EmptyIfStatement' class='priority2'>EmptyIfStatement</a></td><td class='priority2'>2</td><td class='number'>21</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>if (name) {</span></p></td></tr><tr><td><a href='#StringInstantiation' class='priority2'>StringInstantiation</a></td><td class='priority2'>2</td><td class='number'>17</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>def title = new String('Sample Domain')</span></p></td></tr><tr><td><a href='#DuplicateImport' class='priority3'>DuplicateImport</a></td><td class='priority3'>3</td><td class='number'>5</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>import org.codenarc.sample.other.Other</span></p></td></tr><tr><td><a href='#ImportFromSamePackage' class='priority3'>ImportFromSamePackage</a></td><td class='priority3'>3</td><td class='number'>4</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>import org.codenarc.sample.domain.OtherDomain</span></p></td></tr><tr><td><a href='#UnnecessaryGroovyImport' class='priority3'>UnnecessaryGroovyImport</a></td><td class='priority3'>3</td><td class='number'>3</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>import java.util.Map</span></p></td></tr></table><a name='org/codenarc/sample/service'/><h2 class='packageHeader'>org/codenarc/sample/service</h2><h3 class='fileHeader'>org/codenarc/sample/service/NewService.groovy</h3><table border='1'><tr class='tableHeader'><th>Rule Name</th><th>Priority</th><th>Line #</th><th>Source Line / Message</th></tr><tr><td><a href='#EmptyForStatement' class='priority2'>EmptyForStatement</a></td><td class='priority2'>2</td><td class='number'>12</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>for(int i=0; i &lt; values.size(); i++) {</span></p></td></tr><tr><td><a href='#EmptyWhileStatement' class='priority2'>EmptyWhileStatement</a></td><td class='priority2'>2</td><td class='number'>18</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>while (!values.empty) {</span></p></td></tr></table><h3 class='fileHeader'>org/codenarc/sample/service/OtherService.groovy</h3><table border='1'><tr class='tableHeader'><th>Rule Name</th><th>Priority</th><th>Line #</th><th>Source Line / Message</th></tr><tr><td><a href='#EmptyFinallyBlock' class='priority2'>EmptyFinallyBlock</a></td><td class='priority2'>2</td><td class='number'>13</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>finally {</span></p></td></tr><tr><td><a href='#EmptyTryBlock' class='priority2'>EmptyTryBlock</a></td><td class='priority2'>2</td><td class='number'>10</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>try {</span></p></td></tr><tr><td><a href='#ReturnFromFinallyBlock' class='priority2'>ReturnFromFinallyBlock</a></td><td class='priority2'>2</td><td class='number'>24</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>return</span></p></td></tr></table><h3 class='fileHeader'>org/codenarc/sample/service/SampleService.groovy</h3><table border='1'><tr class='tableHeader'><th>Rule Name</th><th>Priority</th><th>Line #</th><th>Source Line / Message</th></tr><tr><td><a href='#BooleanInstantiation' class='priority2'>BooleanInstantiation</a></td><td class='priority2'>2</td><td class='number'>17</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>def shouldRun = new Boolean(true)</span></p></td></tr><tr><td><a href='#EmptyCatchBlock' class='priority2'>EmptyCatchBlock</a></td><td class='priority2'>2</td><td class='number'>20</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>} catch(Throwable t) {</span></p></td></tr><tr><td><a href='#ThrowExceptionFromFinallyBlock' class='priority2'>ThrowExceptionFromFinallyBlock</a></td><td class='priority2'>2</td><td class='number'>31</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>throw new Exception('bad stuff')</span></p></td></tr><tr><td><a href='#UnnecessaryGroovyImport' class='priority3'>UnnecessaryGroovyImport</a></td><td class='priority3'>3</td><td class='number'>3</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>import java.util.Map</span></p></td></tr><tr><td><a href='#UnusedImport' class='priority3'>UnusedImport</a></td><td class='priority3'>3</td><td class='number'>4</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>import org.codenarc.sample.domain.SampleDomain</span></p></td></tr></table><h2>Rule Descriptions</h2><table border='1'><tr class='tableHeader'><th class='ruleDescriptions'>#</th><th class='ruleDescriptions'>Rule Name</th><th class='ruleDescriptions'>Description</th></tr><tr class='ruleDescriptions'><a name='BooleanInstantiation'/><td>1</td><td class='ruleName'>BooleanInstantiation</td><td>Use <em>Boolean.valueOf()</em> for variable values or <em>Boolean.TRUE</em> and <em>Boolean.FALSE</em> for constant values instead of calling the <em>Boolean()</em> constructor directly or calling <em>Boolean.valueOf(true)</em> or <em>Boolean.valueOf(false)</em>.</td></tr><tr class='ruleDescriptions'><a name='DuplicateImport'/><td>2</td><td class='ruleName'>DuplicateImport</td><td>Duplicate import statements are unnecessary.</td></tr><tr class='ruleDescriptions'><a name='EmptyCatchBlock'/><td>3</td><td class='ruleName'>EmptyCatchBlock</td><td>In most cases, exceptions should not be caught and ignored (swallowed).</td></tr><tr class='ruleDescriptions'><a name='EmptyElseBlock'/><td>4</td><td class='ruleName'>EmptyElseBlock</td><td>Empty <em>else</em> blocks are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EmptyFinallyBlock'/><td>5</td><td class='ruleName'>EmptyFinallyBlock</td><td>Empty <em>finally</em> blocks are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EmptyForStatement'/><td>6</td><td class='ruleName'>EmptyForStatement</td><td>Empty <em>for</em> statements are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EmptyIfStatement'/><td>7</td><td class='ruleName'>EmptyIfStatement</td><td>Empty <em>if</em> statements are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EmptySwitchStatement'/><td>8</td><td class='ruleName'>EmptySwitchStatement</td><td>Empty <em>switch</em> statements are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EmptySynchronizedStatement'/><td>9</td><td class='ruleName'>EmptySynchronizedStatement</td><td>Empty <em>synchronized</em> statements are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EmptyTryBlock'/><td>10</td><td class='ruleName'>EmptyTryBlock</td><td>Empty <em>try</em> blocks are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EmptyWhileStatement'/><td>11</td><td class='ruleName'>EmptyWhileStatement</td><td>Empty <em>while</em> statements are confusing and serve no purpose.</td></tr><tr class='ruleDescriptions'><a name='EqualsAndHashCode'/><td>12</td><td class='ruleName'>EqualsAndHashCode</td><td>If either the <em>boolean equals(Object)</em> or the <em>int hashCode()</em> methods are overridden within a class, then both must be overridden.</td></tr><tr class='ruleDescriptions'><a name='ImportFromSamePackage'/><td>13</td><td class='ruleName'>ImportFromSamePackage</td><td>An import of a class that is within the same package is unnecessary.</td></tr><tr class='ruleDescriptions'><a name='ReturnFromFinallyBlock'/><td>14</td><td class='ruleName'>ReturnFromFinallyBlock</td><td>Returning from a <em>finally</em> block is confusing and can hide the original exception.</td></tr><tr class='ruleDescriptions'><a name='StringInstantiation'/><td>15</td><td class='ruleName'>StringInstantiation</td><td>Use a String literal (e.g., "...") instead of calling the corresponding String constructor (new String("..")) directly.</td></tr><tr class='ruleDescriptions'><a name='ThrowExceptionFromFinallyBlock'/><td>16</td><td class='ruleName'>ThrowExceptionFromFinallyBlock</td><td>Throwing an exception from a <em>finally</em> block is confusing and can hide the original exception.</td></tr><tr class='ruleDescriptions'><a name='UnnecessaryGroovyImport'/><td>17</td><td class='ruleName'>UnnecessaryGroovyImport</td><td>A Groovy file does not need to include an import for classes from <em>java.lang</em>, <em>java.util</em>, <em>java.io</em>, <em>java.net</em>, <em>groovy.lang</em> and <em>groovy.util</em>, as well as the classes <em>java.math.BigDecimal</em> and <em>java.math.BigInteger</em>.</td></tr><tr class='ruleDescriptions'><a name='UnusedImport'/><td>18</td><td class='ruleName'>UnusedImport</td><td>Imports for a class that is never referenced within the source file is unnecessary.</td></tr></table><p class='version'><a href='http://www.codenarc.org'>CodeNarc v0.7</a></p></body></html>

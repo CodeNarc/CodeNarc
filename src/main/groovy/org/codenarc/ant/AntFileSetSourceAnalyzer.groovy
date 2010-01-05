@@ -78,7 +78,11 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     }
 
     List getSourceDirectories() {
-        return fileSets.collect { fileSet -> fileSet.getDir(project).path }
+        def baseDir = project.baseDir.absolutePath
+        return fileSets.collect { fileSet ->
+            def path = fileSet.getDir(project).path
+            removeBaseDirectoryPrefix(baseDir, path)
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -181,4 +185,15 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         return path ? path.replaceAll('\\\\', SEP) : path
     }
 
+    private String removeBaseDirectoryPrefix(String baseDir, String path) {
+        if (path.startsWith(baseDir)) {
+            path = path - baseDir
+            return removeLeadingSlash(path)
+        }
+        return path
+    }
+
+    private String removeLeadingSlash(path) {
+        return (path.startsWith('\\') || path.startsWith('/')) ? path.substring(1) : path
+    }
 }

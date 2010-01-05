@@ -154,6 +154,16 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assert analyzer.sourceDirectories == [normalizedPath('abc'), normalizedPath('def')]
     }
 
+    void testGetSourceDirectories_ReturnsDirectoryRelativeToBaseDirectory() {
+        def currentDir = new File('').absolutePath
+        project = new Project(basedir:currentDir)
+        fileSet.setProject(project)
+        fileSet.dir = new File(currentDir + '/src/main/groovy')
+        def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet])
+        log("analyzer.sourceDirectories=${analyzer.sourceDirectories}")
+        assert analyzer.sourceDirectories == [normalizedPath('src/main/groovy')]
+    }
+
     void setUp() {
         super.setUp()
         fileSet = new FileSet()
