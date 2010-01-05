@@ -28,7 +28,7 @@ class UrlResource implements Resource {
 
     /**
      * Construct a new FileResource
-     * @path - the filesystem path to the file. May be absolute or relative.
+     * @param path - the filesystem path to the file. May be absolute or relative.
      */
     UrlResource(String path) {
         assert path

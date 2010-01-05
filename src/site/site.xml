@@ -43,10 +43,13 @@
             <item name="Configuring Rules" href="/codenarc-configuring-rules.html"/>
         </menu>
 
-        <menu name="Reports">
-            <item name="HtmlReportWriter" href="/codenarc-HtmlReportWriter.html"/>
-            <item name="XmlReportWriter" href="/codenarc-XmlReportWriter.html"/>
-            <item name="Sample CodeNarc Report" href="/SampleCodeNarcHtmlReport.html"/>
+        <menu name="Report Types">
+            <item name="HTML (HtmlReportWriter)" href="/codenarc-HtmlReportWriter.html"/>
+            <item name="XML (XmlReportWriter)" href="/codenarc-XmlReportWriter.html"/>
+        </menu>
+
+        <menu name="Sample Reports">
+            <item name="Sample HTML Report" href="/SampleCodeNarcHtmlReport.html"/>
             <!-- <item name="Sample CodeNarc XML Report" href="/SampleCodeNarcXmlReport.xml"/> -->
             <item name="Open Source Projects" href="/codenarc-opensource-projects.html"/>
         </menu>
