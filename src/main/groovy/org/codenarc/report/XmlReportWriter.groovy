@@ -20,6 +20,7 @@ import org.codenarc.results.Results
 import groovy.xml.StreamingMarkupBuilder
 import org.codenarc.results.FileResults
 import org.codenarc.rule.Violation
+import org.codenarc.util.PathUtil
 
 /**
  * ReportWriter that generates an XML report.
@@ -104,7 +105,8 @@ class XmlReportWriter extends AbstractReportWriter {
 
     private buildFileElement(FileResults results) {
         return {
-            File(path: results.path) {
+            def name = PathUtil.getName(results.path)
+            File(name: name) {
                 results.violations.each { violation ->
                     out << buildViolationElement(violation)
                 }

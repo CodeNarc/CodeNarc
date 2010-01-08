@@ -65,7 +65,7 @@ class XmlReportWriterTest extends AbstractTestCase {
         </Package>
 
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
-            <File path='src/main/MyAction.groovy'>
+            <File name='MyAction.groovy'>
                 <Violation ruleName='RULE1' priority='1' lineNumber='111'>
                     <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine>
                 </Violation>
@@ -86,13 +86,13 @@ class XmlReportWriterTest extends AbstractTestCase {
         </Package>
 
         <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
-            <File path='src/main/dao/MyDao.groovy'>
+            <File name='MyDao.groovy'>
                 <Violation ruleName='RULE3' priority='3' lineNumber='333'>
                     <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
                 </Violation>
             </File>
-            <File path='src/main/dao/MyOtherDao.groovy'>
+            <File name='MyOtherDao.groovy'>
                 <Violation ruleName='RULE2' priority='2' lineNumber='222'>
                     <Message><![CDATA[bad stuff: !@#\$%^&*()_+<>]]></Message>
                 </Violation>
