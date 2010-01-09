@@ -80,15 +80,9 @@ class XmlReportWriter extends AbstractReportWriter {
     }
 
     private buildPackageElement(results) {
+        def elementName = isRoot(results) ? 'PackageSummary' : 'Package'
         return {
-            Package(
-                path: results.path ?: ROOT_PACKAGE_NAME,
-                totalFiles: results.getTotalNumberOfFiles(),
-                filesWithViolations: results.getNumberOfFilesWithViolations(),
-                priority1:results.getNumberOfViolationsWithPriority(1),
-                priority2:results.getNumberOfViolationsWithPriority(2),
-                priority3:results.getNumberOfViolationsWithPriority(3)) {
-
+            "$elementName"(buildPackageAttributeMap(results)) {
                 results.children.each { child ->
                     if (child.isFile()) {
                         out << buildFileElement(child)
@@ -101,6 +95,24 @@ class XmlReportWriter extends AbstractReportWriter {
                 }
             }
         }
+    }
+
+    private Map buildPackageAttributeMap(results) {
+        def attributeMap = [
+            totalFiles: results.getTotalNumberOfFiles(),
+            filesWithViolations: results.getNumberOfFilesWithViolations(),
+            priority1:results.getNumberOfViolationsWithPriority(1),
+            priority2:results.getNumberOfViolationsWithPriority(2),
+            priority3:results.getNumberOfViolationsWithPriority(3)
+        ]
+        if (!isRoot(results)) {
+            attributeMap = [path:results.path] + attributeMap
+        }
+        return attributeMap
+    }
+
+    private boolean isRoot(results) {
+        results.path == null
     }
 
     private buildFileElement(FileResults results) {

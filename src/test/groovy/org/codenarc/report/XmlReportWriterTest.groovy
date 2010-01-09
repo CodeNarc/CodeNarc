@@ -61,8 +61,8 @@ class XmlReportWriterTest extends AbstractTestCase {
             <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
         </Project>
 
-        <Package path='[ALL]' totalFiles='6' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
-        </Package>
+        <PackageSummary totalFiles='6' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
+        </PackageSummary>
 
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
             <File name='MyAction.groovy'>
@@ -115,7 +115,7 @@ class XmlReportWriterTest extends AbstractTestCase {
 
     private reportWriter
     private analysisContext
-    private results
+    private results, srcMainDaoDirResults
     private ruleSet
     private stringWriter
 
@@ -123,6 +123,20 @@ class XmlReportWriterTest extends AbstractTestCase {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def xmlAsString = stringWriter.toString()
         assertXml(xmlAsString)
+    }
+
+    void testWriteReport_Writer_ProperPackageSummaryForPackageWithEmptyRelativePath() {
+        final XML = """
+            <PackageSummary totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
+            </PackageSummary>
+
+            <Package path='' totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
+        """
+        srcMainDaoDirResults.path = ''
+        def rootResults = new DirectoryResults()
+        rootResults.addChild(srcMainDaoDirResults)
+        reportWriter.writeReport(stringWriter, analysisContext, rootResults)
+        assertContainsXml(stringWriter.toString(), XML)
     }
 
     void testWriteReport_WritesToDefaultReportFile() {
@@ -160,7 +174,7 @@ class XmlReportWriterTest extends AbstractTestCase {
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
         def srcMainDirResults = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
-        def srcMainDaoDirResults = new DirectoryResults(path:'src/main/dao', numberOfFilesInThisDirectory:2)
+        srcMainDaoDirResults = new DirectoryResults(path:'src/main/dao', numberOfFilesInThisDirectory:2)
         def srcTestDirResults = new DirectoryResults(path:'src/test', numberOfFilesInThisDirectory:3)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
@@ -186,6 +200,11 @@ class XmlReportWriterTest extends AbstractTestCase {
     private void assertXml(String actualXml) {
         log(actualXml)
         assertEquals(normalizeXml(REPORT_XML), normalizeXml(actualXml))
+    }
+
+    private void assertContainsXml(String actualXml, String expectedPartialXml) {
+        log(actualXml)
+        assert normalizeXml(actualXml).contains(normalizeXml(expectedPartialXml))
     }
 
     private String normalizeXml(String xml) {
