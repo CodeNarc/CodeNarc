@@ -16,7 +16,6 @@
 package org.codenarc.source
 
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for SourceCodeUtil
@@ -88,6 +87,21 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
         assert !new SourceCodeCriteria(applyToFilesMatching:MATCH, applyToFileNames:NAME, doNotApplyToFileNames:"Xyz.groovy,$NAME").matches(sourceCode)
         assert !new SourceCodeCriteria(applyToFileNames:NAME, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
         assert !new SourceCodeCriteria(applyToFileNames:NAME, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
+    }
+
+    void testMatches_NameAndPath_ApplyToFileNamesSpecifiesPath() {
+        sourceCode.name = NAME
+        sourceCode.path = PATH
+        assert new SourceCodeCriteria(applyToFileNames:'**/*.groovy').matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:'src/MyT?st.groovy').matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:'*/MyT?st.groovy').matches(sourceCode)
+        assert new SourceCodeCriteria(doNotApplyToFileNames:'**/*.ruby').matches(sourceCode)
+        assert new SourceCodeCriteria(applyToFileNames:"$OTHER_NAME,**/My*.groovy").matches(sourceCode)
+
+        assert !new SourceCodeCriteria(applyToFileNames:'**/*View.groovy').matches(sourceCode)
+        assert !new SourceCodeCriteria(doNotApplyToFileNames:'**/My*.groovy').matches(sourceCode)
+        assert !new SourceCodeCriteria(applyToFileNames:'src/My*.groovy', doNotApplyToFileNames:'MyT?st.groovy').matches(sourceCode)
+        assert !new SourceCodeCriteria(doNotApplyToFileNames:"$OTHER_NAME,src/**My*.groovy").matches(sourceCode)
     }
 
     void setUp() {

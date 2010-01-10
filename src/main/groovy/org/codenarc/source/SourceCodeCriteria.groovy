@@ -41,7 +41,9 @@ class SourceCodeCriteria {
     String doNotApplyToFilesMatching
 
     /**
-     * Only apply to source code (file) names matching this value.
+     * Only apply to source code (file) names matching this value. The name may optionally contain a path.
+     * If a path is specified, then the source code path must match it. If no path is specified, then only
+     * the source code (file) name is compared (i.e., its path is ignored).
      * The value may optionally be a comma-separated list of names, in which case one of the names must match.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      * If null, then all SourceCode instances match this part of the criteria (i.e., this property is ignored).
@@ -49,7 +51,9 @@ class SourceCodeCriteria {
     String applyToFileNames
 
     /**
-     * Do NOT apply to source code (file) names matching this value.
+     * Do NOT apply to source code (file) names matching this value. The name may optionally contain a path.
+     * If a path is specified, then the source code path must match it. If no path is specified, then only
+     * the source code (file) name is compared (i.e., its path is ignored).
      * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      * If null, then all SourceCode instances match this part of the criteria (i.e., this property is ignored).
@@ -70,14 +74,20 @@ class SourceCodeCriteria {
         }
 
         if (apply && applyToFileNames) {
-            apply = new WildcardPattern(applyToFileNames).matches(sourceCode.name)
+            def target = includesPath(applyToFileNames) ? sourceCode.path : sourceCode.name
+            apply = new WildcardPattern(applyToFileNames).matches(target)
         }
 
         if (apply && doNotApplyToFileNames) {
-            apply = !new WildcardPattern(doNotApplyToFileNames).matches(sourceCode.name) 
+            def target = includesPath(doNotApplyToFileNames) ? sourceCode.path : sourceCode.name
+            apply = !new WildcardPattern(doNotApplyToFileNames).matches(target) 
         }
 
         return apply
+    }
+
+    private boolean includesPath(String value) {
+        value.contains('/')
     }
 
 }

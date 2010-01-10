@@ -144,6 +144,28 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
 ** Applying Rules Based on File Path or Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+*** Matching Either Filename or Pathname, With Optional Wildcards
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <<<applyToFileNames>>> and <<<doNotApplyToFileNames>>> properties enable filtering the
+  files to which the rule is applied by specifying a comma-separated list of filenames (with optional
+  path) of source files. If <<<applyToFileNames>>> is not empty or null, then the rule is only
+  applied to source files matching one of the specified filenames. Likewise, if
+  <<<doNotApplyToFilesMatching>>> is not empty or null, then the rule is NOT applied to source files
+  matching any of the specified filenames.
+
+  Both properties may optionally specify a path (i.e., if the value contains at least one '/' path
+  separator). In that case, the value is matched against the full pathname of each source file.
+  If no path is specified, then only the filename of each source file is compared (i.e., its path is ignored).
+
+  Both properties may optionally contain wildcard
+  characters ('*' or '?'). The wildcard character '*' matches a sequence of zero or more characters
+  in the input string. The wildcard character '?' matches exactly one character in the input string.
+  Both properties default to <<<null>>>.
+
+*** Matching File Pathnames Against a Regular Expression
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   The <<<applyToFilesMatching>>> and <<<doNotApplyToFilesMatching>>> properties enable filtering
   the files to which the rule is applied by matching a regular expression against the <<full pathname>>
   of each source file. If <<<applyToFilesMatching>>> is not empty or null, then the rule is only
@@ -157,17 +179,6 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
   be sure that they are all the standard '/', no matter what operating system.
 
   []
-
-  The <<<applyToFileNames>>> and <<<doNotApplyToFileNames>>> properties enable filtering
-  the files to which the rule is applied by specifying a comma-separated list of filenames (no path)
-  of source files. If <<<applyToFileNames>>> is not empty or null, then the rule is only
-  applied to source files matching one of the specified filenames. Likewise, if
-  <<<doNotApplyToFilesMatching>>> is not empty or null, then the rule is NOT applied to source files
-  matching any of the specified filenames. Both properties may optionally contain wildcard
-  characters ('*' or '?'). The wildcard character '*' matches a sequence of zero or more characters
-  in the input string. The wildcard character '?' matches exactly one character in the input string.
-  Both properties default to <<<null>>>.
-
 
 ** Other Standard Rule Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

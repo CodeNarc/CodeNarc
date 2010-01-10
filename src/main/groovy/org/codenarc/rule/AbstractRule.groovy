@@ -50,14 +50,18 @@ abstract class AbstractRule implements Rule {
     String doNotApplyToFilesMatching
 
     /**
-     * This rule is only applied to source code (file) names matching this value.
+     * This rule is only applied to source code (file) names matching this value. The name may optionally
+     * contain a path. If a path is specified, then the source code path must match it. If no path is
+     * specified, then only the source code (file) name is compared (i.e., its path is ignored).
      * The value may optionally be a comma-separated list of names, in which case one of the names must match.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      */
     String applyToFileNames
 
     /**
-     * This rule is NOT applied to source code (file) names matching this value.
+     * This rule is NOT applied to source code (file) names matching this value. The name may optionally
+     * contain a path. If a path is specified, then the source code path must match it. If no path is
+     * specified, then only the source code (file) name is compared (i.e., its path is ignored).
      * The value may optionally be a comma-separated list of names, in which case any one of the names can match.
      * The name(s) may optionally include wildcard characters ('*' or '?').
      */
