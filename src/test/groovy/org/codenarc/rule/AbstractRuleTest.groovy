@@ -297,50 +297,14 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     // Tests for deprecated properties/methods
     //--------------------------------------------------------------------------
 
-    void testApplyToFilenames() {
-        rule.applyToFilenames = FILENAME
-        assertSingleViolation(SOURCE)
-        rule.applyToFilenames = "Xxx.groovy"
-        assertNoViolations(SOURCE)
+    void testApplyToFilenames_ThrowsUnsupportedOperationException() {
+        shouldFail(UnsupportedOperationException) { rule.applyToFilenames = FILENAME }
+        shouldFail(UnsupportedOperationException) { println rule.applyToFilenames }
     }
 
-    void testApplyToFilenames_Wildcards() {
-        rule.applyToFilenames = 'My*.groovy'
-        assertSingleViolation(SOURCE)
-        rule.applyToFilenames = "MyTest??.groovy"
-        assertNoViolations(SOURCE)
-    }
-
-    void testDoNotApplyToFilenames() {
-        rule.doNotApplyToFilenames = "Xxx.groovy"
-        assertSingleViolation(SOURCE)
-        rule.doNotApplyToFilenames = FILENAME
-        assertNoViolations(SOURCE)
-    }
-
-    void testDoNotApplyToFilenames_Wildcards() {
-        rule.doNotApplyToFilenames = "MyTest??.groovy"
-        assertSingleViolation(SOURCE)
-        rule.doNotApplyToFilenames = 'My*.gr*'
-        assertNoViolations(SOURCE)
-    }
-
-    void testBothApplyToFilenamesAndDoNotApplyToFilenames() {
-        rule.applyToFilenames = FILENAME             // apply = YES
-        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
-        assertNoViolations(SOURCE)
-
-        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
-        rule.doNotApplyToFilenames = FILENAME        // doNotApply = YES
-        assertNoViolations(SOURCE)
-
-        rule.applyToFilenames = FILENAME             // apply = YES
-        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
-        assertSingleViolation(SOURCE)
-
-        rule.applyToFilenames = "Xxx.groovy"         // apply = NO
-        rule.doNotApplyToFilenames = "Xxx.groovy"    // doNotApply = NO
-        assertNoViolations(SOURCE)
+    void testDoNotApplyToFilenames_ThrowsUnsupportedOperationException() {
+        shouldFail(UnsupportedOperationException) { rule.doNotApplyToFilenames = FILENAME }
+        shouldFail(UnsupportedOperationException) { println rule.doNotApplyToFilenames }
     }
 
     //--------------------------------------------------------------------------
