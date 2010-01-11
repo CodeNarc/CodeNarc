@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,17 +32,5 @@ interface ReportWriter {
      * @param results - the analysis results
      */
     void writeReport(AnalysisContext analysisContext, Results results)
-
-    /**
-     * Set the title for the report
-     * @param title - the new value for the title
-     */
-    void setTitle(String title)
-
-    /**
-     * Set the path and filename of the report output file
-     * @param title - the new value for the output file path
-     */
-    void setOutputFile(String outputFile)
 
 }
