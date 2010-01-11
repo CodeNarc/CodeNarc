@@ -31,6 +31,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     private static final XML_RULESET1 = 'rulesets/RuleSet1.xml'
     private static final GROOVY_RULESET1 = 'rulesets/GroovyRuleSet1.txt'
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'
+    private static final RULESET_FILES_WITH_SPACES = 'rulesets/RuleSet1.xml , rulesets/GroovyRuleSet2.txt,  rulesets/RuleSet3.xml  '
     private static final REPORT_FILE = 'CodeNarcTest-Report.html'
     private static final RESULTS = new FileResults('path', [])
     private static final SOURCE_DIRS = ['abc']
@@ -88,6 +89,12 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         codeNarcRunner.ruleSetFiles = RULESET_FILES
         def ruleSet = codeNarcRunner.createRuleSet()
         assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock']
+    }
+
+    void testCreateRuleSet_MultipleRuleSets_WithSpaces() {
+        codeNarcRunner.ruleSetFiles = RULESET_FILES_WITH_SPACES
+        def ruleSet = codeNarcRunner.createRuleSet()
+        assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'Stub']
     }
 
     //--------------------------------------------------------------------------
