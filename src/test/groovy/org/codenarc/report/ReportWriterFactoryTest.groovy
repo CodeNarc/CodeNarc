@@ -37,8 +37,20 @@ class ReportWriterFactoryTest extends AbstractTestCase {
         assert reportWriterFactory.getReportWriter('xml').class == XmlReportWriter 
     }
 
+    void testGetReportWriter_SpecifyClassName() {
+        assert reportWriterFactory.getReportWriter('org.codenarc.report.HtmlReportWriter').class == HtmlReportWriter
+    }
+
+    void testGetReportWriter_ThrowsExceptionForClassThatIsNotAReportWriter() {
+        shouldFailWithMessageContaining('type') { reportWriterFactory.getReportWriter('org.codenarc.CodeNarcRunner') } 
+    }
+
     void testGetReportWriter_ThrowsExceptionForInvalidType() {
-        shouldFailWithMessageContaining('type') { reportWriterFactory.getReportWriter('xxx') } 
+        shouldFailWithMessageContaining('xxx') { reportWriterFactory.getReportWriter('xxx') } 
+    }
+
+    void testGetReportWriter_ThrowsExceptionForNullType() {
+        shouldFailWithMessageContaining('type') { reportWriterFactory.getReportWriter(null) } 
     }
 
     void testGetReportWriter_Html_WithOptions() {
@@ -54,7 +66,7 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     }
 
     void testGetReportWriter_WithOptions_ThrowsExceptionForInvalidType() {
-        shouldFailWithMessageContaining('type') { reportWriterFactory.getReportWriter('xxx', [title:TITLE]) } 
+        shouldFailWithMessageContaining('xxx') { reportWriterFactory.getReportWriter('xxx', [title:TITLE]) } 
     }
 
     void testGetReportWriter_WithOptions_ThrowsExceptionForInvalidOption() {

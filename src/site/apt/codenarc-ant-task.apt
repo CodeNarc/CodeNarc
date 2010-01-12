@@ -38,13 +38,14 @@ CodeNarc - Ant Task
 ~~~~~~~~~~~~~~~~~~~~~~~
 
   The <<report>> nested element defines the format and output file for the analysis report.
-  Currently, HTML (type="html") and XML (type="xml") are the only supported formats.
 
 *----------------------+----------------------------------------------------------------+------------------------+
 | <<Attribute>>        | <<Description>>                                                | <<Required>>           |
 *----------------------+----------------------------------------------------------------+------------------------+
-| type                 | The format of the output analysis report. Must be either       | Yes                    |
-|                      | "html" or "xml".                                               |                        |
+| type                 | The type of the output report. Must be either one of the predefined   | Yes             |
+|                      | type names: "html" or "xml", or else the fully-qualified class name   |                 |
+|                      | of a class (accessible on the classpath) that implements the          |                 |
+|                      | <<<org.codenarc.report.ReportWriter>>> interface.              |                        |
 *----------------------+----------------------------------------------------------------+------------------------+
 | toFile <(Deprecated)>| The path and filename for the output report file.              | No                     |
 |                      | This is deprecated. Use the \<option\> nested element instead. |                        |

@@ -163,6 +163,14 @@ class CodeNarcTaskTest extends AbstractTestCase {
         assert codeNarcTask.reportWriters[1].title == 'ABC'
     }
 
+    void testAddConfiguredReport_SpecifyReportWriterClassname() {
+        codeNarcTask.addConfiguredReport(new Report(type:'org.codenarc.report.HtmlReportWriter', toFile:HTML_REPORT_FILE))
+        assert codeNarcTask.reportWriters.size() == 1
+        assert codeNarcTask.reportWriters[0].class == HtmlReportWriter
+        assert codeNarcTask.reportWriters[0].outputFile == HTML_REPORT_FILE
+        assert codeNarcTask.reportWriters[0].title == null
+    }
+
     void testAddConfiguredReport_NullToFile() {
         codeNarcTask.addConfiguredReport(new Report(type:'html', title:'ABC'))
         assert codeNarcTask.reportWriters.size() == 1
@@ -171,7 +179,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     }
 
     void testAddConfiguredReport_InvalidReportType() {
-        shouldFailWithMessageContaining('type') { codeNarcTask.addConfiguredReport(new Report(type:'XXX', toFile:HTML_REPORT_FILE)) }
+        shouldFailWithMessageContaining('XXX') { codeNarcTask.addConfiguredReport(new Report(type:'XXX', toFile:HTML_REPORT_FILE)) }
     }
 
     void testAddConfiguredReport_ReportOptionsSetPropertiesOnReportWriter() {

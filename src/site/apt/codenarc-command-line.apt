@@ -34,10 +34,13 @@ CodeNarc - Run From Command-Line
 |                                 | separated by commas. Defaults to "rulesets/basic.xml".               |                                      |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
 | -report=<REPORT-TYPE[:FILENAME]>| The definition of the report to produce. The option value is of      | -report=html                         |
-|                                 | the form <<<TYPE[:FILENAME]>>>, where <<<TYPE>>> is "html" or "xml"  | -report=html:MyProject.html          |
-|                                 | and <<<FILENAME>>> is the filename (with optional path) of the output|                                      |
-|                                 | report filename. If the report filename is omitted, the default      | -report=xml                          |
-|                                 | filename for the report type is used ("CodeNarcReport.html" for      | -report=xml:MyXmlReport.xml          |
+|                                 | the form <<<TYPE[:FILENAME]>>>, where <<<TYPE>>> is one of the       | -report=html:MyProject.html    |
+|                                 | predefined type names: "html" or "xml", or else the fully-qualified  |                                      |
+|                                 | class name of a class (accessible on the classpath) that implements  | -report=xml                          |
+|                                 | the <<<org.codenarc.report.ReportWriter>>> interface. And            | -report=xml:MyXmlReport.xml          |
+|                                 | <<<FILENAME>>> is the filename (with optional path) of the output    |                                      |
+|                                 | report filename. If the report filename is omitted, the default      | -report=org.codenarc.report. HtmlReportWriter |
+|                                 | filename for the report type is used ("CodeNarcReport.html" for      |                                      |
 |                                 | "html" and "CodeNarcXmlReport.xml" for "xml"). If no report          |                                      |
 |                                 | option is specified, default to a single "html" report with the      |                                      |
 |                                 | default filename.                                                    |                                      |

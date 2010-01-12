@@ -19,7 +19,6 @@ import org.codenarc.test.AbstractTestCase
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.report.XmlReportWriter
 
 /**
@@ -94,6 +93,14 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == XmlReportWriter
         assert codeNarc.reports[0].outputFile == XML_REPORT_FILE
+    }
+
+    void testParseArgs_SingleReportSpecifyingFullReportWriterClassName() {
+        def reportString = "org.codenarc.report.HtmlReportWriter:$HTML_REPORT_FILE"
+        parseArgs("-report=$reportString")
+        assert codeNarc.reports.size() == 1
+        assert codeNarc.reports[0].class == HtmlReportWriter
+        assert codeNarc.reports[0].outputFile == HTML_REPORT_FILE
     }
 
     void testParseArgs_ThreeReports() {
