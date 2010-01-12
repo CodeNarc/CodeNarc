@@ -60,7 +60,6 @@ class CodeNarcRunner {
      */
     Results execute() {
         assert ruleSetFiles, "The ruleSetFiles property must be set"
-        assert reportWriters, "At least one ReportWriter must be configured"
         assert sourceAnalyzer, "The sourceAnalyzer property must be set to a valid SourceAnalayzer"
 
         def startTime = System.currentTimeMillis()

@@ -42,11 +42,6 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         shouldFailWithMessageContaining('ruleSetFiles') { codeNarcRunner.execute() }
     }
 
-    void testExecute_NoReportWriters() {
-        codeNarcRunner.ruleSetFiles = XML_RULESET1
-        shouldFailWithMessageContaining('reportWriters') { codeNarcRunner.execute() }
-    }
-
     void testExecute_NoSourceAnalyzer() {
         codeNarcRunner.ruleSetFiles = XML_RULESET1
         codeNarcRunner.reportWriters << new HtmlReportWriter(outputFile:REPORT_FILE)
@@ -71,6 +66,13 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert analysisContext.ruleSet == ruleSet
         assert analysisContext.sourceDirectories == SOURCE_DIRS
         assert results == RESULTS
+    }
+
+    void testExecute_NoReportWriters() {
+        def sourceAnalyzer = [analyze: { RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
+        codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+        assert codeNarcRunner.execute() == RESULTS
     }
 
     void testCreateRuleSet_OneXmlRuleSet() {
