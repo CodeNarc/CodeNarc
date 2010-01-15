@@ -37,6 +37,10 @@ class ReportWriterFactoryTest extends AbstractTestCase {
         assert reportWriterFactory.getReportWriter('xml').class == XmlReportWriter 
     }
 
+    void testGetReportWriter_Text() {
+        assert reportWriterFactory.getReportWriter('text').class == TextReportWriter
+    }
+
     void testGetReportWriter_SpecifyClassName() {
         assert reportWriterFactory.getReportWriter('org.codenarc.report.HtmlReportWriter').class == HtmlReportWriter
     }
@@ -62,6 +66,12 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     void testGetReportWriter_Xml_WithOptions() {
         def reportWriter = reportWriterFactory.getReportWriter('xml', [outputFile:OUTPUT_FILE])
         assert reportWriter.class == XmlReportWriter
+        assert reportWriter.outputFile == OUTPUT_FILE
+    }
+
+    void testGetReportWriter_Text_WithOptions() {
+        def reportWriter = reportWriterFactory.getReportWriter('text', [outputFile:OUTPUT_FILE])
+        assert reportWriter.class == TextReportWriter
         assert reportWriter.outputFile == OUTPUT_FILE
     }
 

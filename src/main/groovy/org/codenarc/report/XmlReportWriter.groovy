@@ -30,8 +30,6 @@ import org.codenarc.util.PathUtil
  */
 class XmlReportWriter extends AbstractReportWriter {
 
-    private static final ROOT_PACKAGE_NAME = '[ALL]'
-
     String title
     String defaultOutputFile = 'CodeNarcXmlReport.xml'
 

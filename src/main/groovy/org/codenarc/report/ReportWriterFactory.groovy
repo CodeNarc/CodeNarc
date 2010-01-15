@@ -32,6 +32,7 @@ class ReportWriterFactory {
         switch(type) {
             case 'html': return new HtmlReportWriter()
             case 'xml': return new XmlReportWriter()
+            case 'text': return new TextReportWriter()
         }
 
         def reportClass = Class.forName(type)
