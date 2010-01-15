@@ -27,8 +27,10 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
 
     private static final XML = 'xml'
     private static final HTML = 'html'
+    private static final TEXT = 'text'
     private static final HTML_REPORT_FILE = 'AntBuilderTestHtmlReport.html'
     private static final XML_REPORT_FILE = 'AntBuilderTestXmlReport.xml'
+    private static final TEXT_REPORT_FILE = 'AntBuilderTestTextReport.txt'
     private static final TITLE = 'Sample Project'
     private static final RULESET_FILES = [
             'rulesets/basic.xml',
@@ -57,8 +59,14 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
                option(name:'title', value:TITLE)
                option(name:'outputFile', value:XML_REPORT_FILE)
            }
+           report(type:TEXT) {
+               option(name:'title', value:TITLE)
+               option(name:'outputFile', value:TEXT_REPORT_FILE)
+           }
         }
         verifyHtmlReportFile()
+        verifyXmlReportFile()
+        verifyTextReportFile()
     }
 
     private void verifyHtmlReportFile() {
@@ -71,5 +79,11 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
         def file = new File(XML_REPORT_FILE)
         assert file.exists()
         assertContainsAllInOrder(file.text, ['<?xml version', TITLE, 'org/codenarc', '<Rules>'])
+    }
+
+    private void verifyTextReportFile() {
+        def file = new File(TEXT_REPORT_FILE)
+        assert file.exists()
+        assertContainsAllInOrder(file.text, ['CodeNarc Report', TITLE, 'www.codenarc.org'])
     }
 }

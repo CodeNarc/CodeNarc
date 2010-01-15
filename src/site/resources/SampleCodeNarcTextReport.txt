@@ -1,0 +1,29 @@
+CodeNarc Report: Sample Project - Jan 14, 2010 10:10:07 PM
+
+Summary: TotalFiles=7 FilesWithViolations=4 P1=0 P2=11 P3=5
+
+File: org/codenarc/sample/domain/SampleDomain.groovy
+    Violation: Rule=EmptyElseBlock P=2 Line=24 Src=[else {]
+    Violation: Rule=EmptyIfStatement P=2 Line=21 Src=[if (name) {]
+    Violation: Rule=StringInstantiation P=2 Line=17 Src=[def title = new String('Sample Domain')]
+    Violation: Rule=DuplicateImport P=3 Line=5 Src=[import org.codenarc.sample.other.Other]
+    Violation: Rule=ImportFromSamePackage P=3 Line=4 Src=[import org.codenarc.sample.domain.OtherDomain]
+    Violation: Rule=UnnecessaryGroovyImport P=3 Line=3 Src=[import java.util.Map]
+
+File: org/codenarc/sample/service/NewService.groovy
+    Violation: Rule=EmptyForStatement P=2 Line=12 Src=[for(int i=0; i < values.size(); i++) {]
+    Violation: Rule=EmptyWhileStatement P=2 Line=18 Src=[while (!values.empty) {]
+
+File: org/codenarc/sample/service/OtherService.groovy
+    Violation: Rule=EmptyFinallyBlock P=2 Line=13 Src=[finally {]
+    Violation: Rule=EmptyTryBlock P=2 Line=10 Src=[try {]
+    Violation: Rule=ReturnFromFinallyBlock P=2 Line=24 Src=[return]
+
+File: org/codenarc/sample/service/SampleService.groovy
+    Violation: Rule=BooleanInstantiation P=2 Line=17 Src=[def shouldRun = new Boolean(true)]
+    Violation: Rule=EmptyCatchBlock P=2 Line=20 Src=[} catch(Throwable t) {]
+    Violation: Rule=ThrowExceptionFromFinallyBlock P=2 Line=31 Src=[throw new Exception('bad stuff')]
+    Violation: Rule=UnnecessaryGroovyImport P=3 Line=3 Src=[import java.util.Map]
+    Violation: Rule=UnusedImport P=3 Line=4 Src=[import org.codenarc.sample.domain.SampleDomain]
+
+[CodeNarc (http://www.codenarc.org) v0.8-beta]

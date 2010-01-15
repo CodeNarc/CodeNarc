@@ -1,19 +1,17 @@
 		--------------------------------------------------
-					  CodeNarc HtmlReportWriter
+					  CodeNarc TextReportWriter
 		--------------------------------------------------
 
-HtmlReportWriter
-~~~~~~~~~~~~~~~~~
+TextReportWriter
+~~~~~~~~~~~~~~~~
 
 * Description
 ~~~~~~~~~~~~~
 
-  The <<<org.codenarc.report.HtmlReportWriter>>> class (type="html") produces an HTML report
-  containing a table with summary results by package and a separate section for
-  each package containing violations, and then a table of the rules applied, along
-  with their descriptions.
+  The <<<org.codenarc.report.TextReportWriter>>> class (type="text") produces a simple text report of the
+  <<CodeNarc>> results.
 
-  See a {{{SampleCodeNarcHtmlReport.html}Sample Report}}.
+  See a {{{./SampleCodeNarcTextReport.txt}Sample Report}}.
 
 * Option Nested Elements
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,7 +19,7 @@ HtmlReportWriter
   The <<option>> element is a child of the <<report>> element and defines a report-specific option
   for a report.
 
-  <<<org.codenarc.report.HtmlReportWriter>>> supports the following options:
+  <<<org.codenarc.report.TextReportWriter>>> supports the following options:
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Attribute>>       | <<Description>>                                                | <<Required>>           |
@@ -38,7 +36,7 @@ HtmlReportWriter
 ~~~~~~~~~
 
   Here is an example Ant XML build file illustrating configuration of
-  <<<org.codenarc.report.HtmlReportWriter>>>. Note that the report <<type>> is specified as <<"html">>.
+  <<<org.codenarc.report.TextReportWriter>>>. Note that the report <<type>> is specified as <<"text">>.
 
 +----------------------------------------------------------------------------------------
 <taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
@@ -47,8 +45,8 @@ HtmlReportWriter
             ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml"
             maxPriority1Violations="0">
 
-        <report type="html">
-            <option name="outputFile" value="reports/CodeNarcAntReport.html" />
+        <report type="text">
+            <option name="outputFile" value="reports/CodeNarcReport.txt" />
             <option name="title" value="My Sample Code" />
         </report>
 

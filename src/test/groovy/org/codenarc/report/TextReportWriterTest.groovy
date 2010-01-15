@@ -52,6 +52,8 @@ class TextReportWriterTest extends AbstractTestCase {
     private static final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${FORMATTED_TIMESTAMP}
 
+Summary: TotalFiles=6 FilesWithViolations=3 P1=3 P2=2 P3=3
+
 File: src/main/MyAction.groovy
     Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
     Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]

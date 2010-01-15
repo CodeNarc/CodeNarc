@@ -41,10 +41,10 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
            fileset(dir:'src/test/groovy') {
                include(name:GROOVY_FILES)
            }
-//           report(type:HTML) {
-//               option(name:'title', value:TITLE)
-//               option(name:'outputFile', value:HTML_REPORT_FILE)
-//           }
+
+           report(type:'text') {
+               option(name:'writeToStandardOut', value:true)
+           }
         }
     }
 

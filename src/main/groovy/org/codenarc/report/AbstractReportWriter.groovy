@@ -39,6 +39,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     protected static final CODENARC_URL = "http://www.codenarc.org"
 
     String outputFile
+    Object writeToStandardOut
     protected final LOG = Logger.getLogger(getClass())
     protected getTimestamp = { new Date() }
     protected customMessagesBundleName = CUSTOM_MESSSAGES_BUNDLE
@@ -59,11 +60,13 @@ abstract class AbstractReportWriter implements ReportWriter {
         assert analysisContext
         assert results
         def outputFilename = outputFile ?: getProperty('defaultOutputFile')
-        def file = new File(outputFilename)
-        file.withWriter { writer ->
+        def destination = isWriteToStandardOut() ? System.out : new File(outputFilename)
+        destination.withWriter { writer ->
             writeReport(writer, analysisContext, results)
         }
-        LOG.info("Report file [$outputFilename] created.")
+        if (!isWriteToStandardOut()) {
+            LOG.info("Report file [$outputFilename] created.")
+        }
     }
 
     protected void initializeDefaultResourceBundle() {
@@ -105,5 +108,9 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     protected String getCodeNarcVersion() {
         return ClassPathResource.getInputStream(VERSION_FILE).text
+    }
+
+    private boolean isWriteToStandardOut() {
+        writeToStandardOut == true || writeToStandardOut == 'true'
     }
 }

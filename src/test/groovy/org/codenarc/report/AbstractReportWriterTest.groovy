@@ -32,6 +32,8 @@ class AbstractReportWriterTest extends AbstractTestCase {
     private static final RESULTS = new DirectoryResults()
     private static final ANALYSIS_CONTEXT = new AnalysisContext()
     private static final DEFAULT_STRING = '?'
+    private static final CUSTOM_FILENAME = 'abc.txt'
+    private static final CONTENTS = 'abc'
     private reportWriter
 
     void testWriteReport_WritesToDefaultOutputFile_IfOutputFileIsNull() {
@@ -41,10 +43,36 @@ class AbstractReportWriterTest extends AbstractTestCase {
     }
 
     void testWriteReport_WritesToOutputFile_IfOutputFileIsDefined() {
-        final NAME = 'abc.txt'
-        reportWriter.outputFile = NAME
+        reportWriter.outputFile = CUSTOM_FILENAME
         reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
-        assertOutputFile(NAME)
+        assertOutputFile(CUSTOM_FILENAME)
+    }
+
+    void testWriteReport_WritesToStandardOut_IfWriteToStandardOutIsTrue_String() {
+        reportWriter.outputFile = CUSTOM_FILENAME
+        reportWriter.writeToStandardOut = "true"
+        def output = captureSystemOut {
+            reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
+        }
+        assertFileDoesNotExist(CUSTOM_FILENAME)
+        assert output == CONTENTS
+    }
+
+    void testWriteReport_WritesToStandardOut_IfWriteToStandardOutIsTrue() {
+        reportWriter.outputFile = CUSTOM_FILENAME
+        reportWriter.writeToStandardOut = true
+        def output = captureSystemOut {
+            reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
+        }
+        assertFileDoesNotExist(CUSTOM_FILENAME)
+        assert output == CONTENTS
+    }
+
+    void testWriteReport_WritesToOutputFile_IfWriteToStandardOutIsNotTrue() {
+        reportWriter.outputFile = CUSTOM_FILENAME
+        reportWriter.writeToStandardOut = "false"
+        reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
+        assertOutputFile(CUSTOM_FILENAME)
     }
 
     void testInitializeResourceBundle_CustomMessagesFileExists() {
@@ -107,9 +135,27 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert file.exists(), "The output file [$outputFile] does not exist"
         def contents = file.text
         file.delete()
-        assert contents == 'abc'
+        assert contents == CONTENTS
+    }
+
+    private void assertFileDoesNotExist(String filename) {
+        assert new File(filename).exists() == false
+    }
+
+    private String captureSystemOut(Closure closure) {
+        def originalSystemOut = System.out
+        def out = new ByteArrayOutputStream()
+        try {
+            System.out = new PrintStream(out)
+            closure()
+        }
+        finally {
+            System.out = originalSystemOut
+        }
+        return out.toString()
     }
 }
+
 /**
  * Concrete subclass of AbstractReportWriter for testing
  */

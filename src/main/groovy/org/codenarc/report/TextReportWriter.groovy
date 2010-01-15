@@ -35,6 +35,7 @@ class TextReportWriter extends AbstractReportWriter {
         initializeResourceBundle()
         new PrintWriter(writer).withWriter { w ->
             writeTitle(w)
+            writeSummary(w, results)
             writePackageViolations(w, results)
             writeFooter(w)
         }
@@ -43,6 +44,16 @@ class TextReportWriter extends AbstractReportWriter {
     private void writeTitle(Writer writer) {
         def titleString = "CodeNarc Report" + (title ? ": " + title : '') + " - " + getFormattedTimestamp()
         writer.println(titleString)
+    }
+
+    private void writeSummary(Writer writer, Results results) {
+        def summary = "Summary: TotalFiles=${results.totalNumberOfFiles} " +
+            "FilesWithViolations=${results.numberOfFilesWithViolations} " +
+            "P1=${results.getNumberOfViolationsWithPriority(1)} " +
+            "P2=${results.getNumberOfViolationsWithPriority(2)} " +
+            "P3=${results.getNumberOfViolationsWithPriority(3)}"
+        writer.println()
+        writer.println(summary)
     }
 
     private void writePackageViolations(Writer writer, Results results) {
