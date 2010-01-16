@@ -39,7 +39,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *---------------------+-----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                 | <<Default Value>>      |
 *---------------------+-----------------------------------------------------------------+------------------------+
-| maxNestedBlockDepth | The maximum number of nesting levels. A block or closure nested | 3                      |
+| maxNestedBlockDepth | The maximum number of nesting levels. A block or closure nested | 5                      |
 |                     | deeper than that number of levels is considered a violation.    |                        |
 *---------------------+-----------------------------------------------------------------+------------------------+
 

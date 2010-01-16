@@ -37,7 +37,7 @@ import org.codenarc.util.AstUtil
 class NestedBlockDepthRule extends AbstractAstVisitorRule {
     String name = 'NestedBlockDepth'
     int priority = 2
-    int maxNestedBlockDepth = 3
+    int maxNestedBlockDepth = 5
     Class astVisitorClass = NestedBlockDepthAstVisitor
 }
 
@@ -79,7 +79,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
     private void handleNestedNode(node, Closure callVisitorMethod) {
         nestedBlockDepth++
         if (nestedBlockDepth > rule.maxNestedBlockDepth) {
-            addViolation(node)
+            addViolation(node, "The nested block depth is $nestedBlockDepth")
         }
         callVisitorMethod()
         nestedBlockDepth--
