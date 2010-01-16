@@ -27,6 +27,10 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | maxLines            | The maximum number of lines allowed in a method definition.    | 100                    |
 *---------------------+----------------------------------------------------------------+------------------------+
+| ignoreMethodNames   | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
 
 
 * NestedBlockDepthRule Rule

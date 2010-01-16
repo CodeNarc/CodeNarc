@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks the size of a method.
@@ -35,13 +36,14 @@ class MethodSizeRule extends AbstractAstVisitorRule {
     int priority = 3
     Class astVisitorClass = MethodSizeAstVisitor
     int maxLines = 100
+    String ignoreMethodNames
 }
 
 class MethodSizeAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
         if (methodNode.lineNumber >= 0) {
             def numLines = methodNode.lastLineNumber - methodNode.lineNumber + 1
-            if (numLines > rule.maxLines) {
+            if (numLines > rule.maxLines && !isIgnoredMethodName(methodNode)) {
                 def methodName = methodNode.name
                 violations.add(new Violation(rule:rule, lineNumber:methodNode.lineNumber, message:"""Method "$methodName" is $numLines lines"""))
             }
@@ -49,4 +51,7 @@ class MethodSizeAstVisitor extends AbstractAstVisitor  {
         super.visitMethod(methodNode)
     }
 
+    private boolean isIgnoredMethodName(MethodNode node) {
+        return new WildcardPattern(rule.ignoreMethodNames, false).matches(node.name)
+    }
 }

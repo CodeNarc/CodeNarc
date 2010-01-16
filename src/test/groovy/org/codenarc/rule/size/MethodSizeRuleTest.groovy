@@ -74,6 +74,55 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
+        final SOURCE = '''
+          class MyClass {
+               def myMethod() {
+                   'println 23'
+               }
+          }
+        '''
+        rule.maxLines = 2
+        rule.ignoreMethodNames = 'myMethod'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
+        final SOURCE = '''
+          class MyClass {
+               def myMethod1() { 'println 23' }
+               String myMethod2() {
+                   return 'error: 23'
+               }
+          }
+        '''
+        rule.maxLines = 2
+        rule.ignoreMethodNames = 'otherMethod'
+        assertSingleViolation(SOURCE, 4, null, 'myMethod2')
+    }
+
+    void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+            class MyClass {
+                def names
+                private open(String destination) {
+                }
+                String initialize() {
+                    names = ['a', 'b']
+                }
+                void process() {
+                }
+                void doOtherStuff() {
+                }
+            }
+        '''
+        rule.maxLines = 1
+        rule.ignoreMethodNames = 'init*ze,doO??erSt*ff,other'
+        assertTwoViolations(SOURCE,
+            4, null, 'open',
+            9, null, 'process')
+    }
+
     protected Rule createRule() {
         return new MethodSizeRule()
     }
