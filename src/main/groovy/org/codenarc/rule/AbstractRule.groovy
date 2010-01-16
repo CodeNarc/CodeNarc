@@ -72,7 +72,7 @@ abstract class AbstractRule implements Rule {
      * @deprecated Use getApplyToFileNames() instead
      */
     String getApplyToFilenames() {
-        throw new UnsupportedOperationException('Use getApplyToFileNames() instead')
+        throw new UnsupportedOperationException("Use getApplyToFileNames() instead (Note the uppercase 'N').")
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class AbstractRule implements Rule {
      * @deprecated Use setApplyToFileNames(String) instead
      */
     void setApplyToFilenames(String applyTo) {
-        throw new UnsupportedOperationException('Use setApplyToFileNames(String) instead')
+        throw new UnsupportedOperationException("Unsupported call to setApplyToFilenames() with parameter [$applyTo]. Use setApplyToFileNames(String) instead (Note the uppercase 'N').")
     }
 
     /**
@@ -88,7 +88,7 @@ abstract class AbstractRule implements Rule {
      * @deprecated Use doNotApplyToFileNames instead
      */
     String getDoNotApplyToFilenames() {
-        throw new UnsupportedOperationException('Use doNotApplyToFileNames instead')
+        throw new UnsupportedOperationException("Use doNotApplyToFileNames instead (Note the uppercase 'N').")
     }
 
     /**
@@ -96,7 +96,7 @@ abstract class AbstractRule implements Rule {
      * @deprecated Use setDoNotApplyToFileNames(String) instead
      */
     void setDoNotApplyToFilenames(String doNotApply) {
-        throw new UnsupportedOperationException('Use setDoNotApplyToFileNames(String) instead')
+        throw new UnsupportedOperationException("Unsupported call to setDoNotApplyToFilenames() with parameter [$doNotApply]. Use setDoNotApplyToFileNames(String) instead (Note the uppercase 'N').")
     }
 
     /**
