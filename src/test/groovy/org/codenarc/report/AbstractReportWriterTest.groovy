@@ -68,6 +68,13 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert output == CONTENTS
     }
 
+    void testWriteReport_WritesToStandardOut_AndResetsSystemOut() {
+        def originalSystemOut = System.out
+        reportWriter.writeToStandardOut = true
+        reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
+        assert System.out == originalSystemOut
+    }
+
     void testWriteReport_WritesToOutputFile_IfWriteToStandardOutIsNotTrue() {
         reportWriter.outputFile = CUSTOM_FILENAME
         reportWriter.writeToStandardOut = "false"
@@ -142,18 +149,6 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert new File(filename).exists() == false
     }
 
-    private String captureSystemOut(Closure closure) {
-        def originalSystemOut = System.out
-        def out = new ByteArrayOutputStream()
-        try {
-            System.out = new PrintStream(out)
-            closure()
-        }
-        finally {
-            System.out = originalSystemOut
-        }
-        return out.toString()
-    }
 }
 
 /**
@@ -164,6 +159,7 @@ class TestAbstractReportWriter extends AbstractReportWriter {
     String title 
 
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
-        writer.withWriter { w -> w.write('abc') }
+        writer.write('abc')
+        writer.flush()
     }
 }

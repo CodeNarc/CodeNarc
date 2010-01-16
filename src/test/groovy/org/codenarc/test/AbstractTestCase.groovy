@@ -86,6 +86,19 @@ abstract class AbstractTestCase extends GroovyTestCase {
         println "[${classNameNoPackage()}] ${message.toString()}"
     }
 
+    protected String captureSystemOut(Closure closure) {
+        def originalSystemOut = System.out
+        def out = new ByteArrayOutputStream()
+        try {
+            System.out = new PrintStream(out)
+            closure()
+        }
+        finally {
+            System.out = originalSystemOut
+        }
+        return out.toString()
+    }
+
     /**
      * @return true if the version of Groovy currently running/compiling is NOT 1.5.x.
      */

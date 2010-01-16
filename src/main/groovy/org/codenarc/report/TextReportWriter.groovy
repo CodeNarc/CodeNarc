@@ -33,12 +33,12 @@ class TextReportWriter extends AbstractReportWriter {
 
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         initializeResourceBundle()
-        new PrintWriter(writer).withWriter { w ->
-            writeTitle(w)
-            writeSummary(w, results)
-            writePackageViolations(w, results)
-            writeFooter(w)
-        }
+        def printWriter = new PrintWriter(writer)
+        writeTitle(printWriter)
+        writeSummary(printWriter, results)
+        writePackageViolations(printWriter, results)
+        writeFooter(printWriter)
+        printWriter.flush()
     }
 
     private void writeTitle(Writer writer) {

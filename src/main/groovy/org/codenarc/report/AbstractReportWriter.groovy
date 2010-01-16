@@ -59,14 +59,26 @@ abstract class AbstractReportWriter implements ReportWriter {
     void writeReport(AnalysisContext analysisContext, Results results) {
         assert analysisContext
         assert results
+
+        if (isWriteToStandardOut()) {
+            writeReportToStandardOut(analysisContext, results)
+        }
+        else {
+            writeReportToFile(analysisContext, results)
+        }
+    }
+
+    private void writeReportToStandardOut(AnalysisContext analysisContext, Results results) {
+        def writer = new OutputStreamWriter(System.out)
+        writeReport(writer, analysisContext, results)
+    }
+
+    private void writeReportToFile(AnalysisContext analysisContext, Results results) {
         def outputFilename = outputFile ?: getProperty('defaultOutputFile')
-        def destination = isWriteToStandardOut() ? System.out : new File(outputFilename)
-        destination.withWriter { writer ->
+        new File(outputFilename).withWriter { writer ->
             writeReport(writer, analysisContext, results)
         }
-        if (!isWriteToStandardOut()) {
-            LOG.info("Report file [$outputFilename] created.")
-        }
+        LOG.info("Report file [$outputFilename] created.")
     }
 
     protected void initializeDefaultResourceBundle() {

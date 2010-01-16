@@ -46,7 +46,7 @@ class HtmlReportWriter extends AbstractReportWriter {
     String defaultOutputFile = DEFAULT_OUTPUT_FILE
 
     /**
-     * Write out a report for the specified analysis results
+     * Write out a report to the specified Writer for the analysis results
      * @param analysisContext - the AnalysisContext containing the analysis configuration information
      * @param results - the analysis results
      */
@@ -56,15 +56,13 @@ class HtmlReportWriter extends AbstractReportWriter {
 
         initializeResourceBundle()
         def builder = new StreamingMarkupBuilder()
-        writer.withWriter { w ->
-            def html = builder.bind() {
-                html {
-                    out << buildHeaderSection()
-                    out << buildBodySection(analysisContext, results)
-                }
+        def html = builder.bind() {
+            html {
+                out << buildHeaderSection()
+                out << buildBodySection(analysisContext, results)
             }
-            w << html
         }
+        writer << html
     }
 
     String toString() {

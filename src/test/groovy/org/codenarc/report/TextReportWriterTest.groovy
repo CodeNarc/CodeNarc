@@ -100,6 +100,14 @@ File: src/main/dao/MyOtherDao.groovy
         assertReportText(reportText)
     }
 
+    void testWriteReport_WritesToStandardOut() {
+        reportWriter.writeToStandardOut = true
+        def output = captureSystemOut {
+            reportWriter.writeReport(analysisContext, results)
+        }
+        assertReportText(output)
+    }
+
     void testWriteReport_NullResults() {
         shouldFailWithMessageContaining('results') { reportWriter.writeReport(analysisContext, null) }
     }

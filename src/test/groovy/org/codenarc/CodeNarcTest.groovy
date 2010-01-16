@@ -256,17 +256,4 @@ class CodeNarcTest extends AbstractTestCase {
         assert report.title == title
     }
 
-    private String captureSystemOut(Closure closure) {
-        def originalSystemOut = System.out
-        def byteOut = new ByteArrayOutputStream()
-        def newSystemOut = new PrintStream(byteOut)
-        try {
-            System.out = newSystemOut
-            closure.run()
-        }
-        finally {
-            System.out = originalSystemOut
-        }
-        return byteOut.toString()
-    }
 }

@@ -39,18 +39,16 @@ class XmlReportWriter extends AbstractReportWriter {
 
         initializeResourceBundle()
         def builder = new StreamingMarkupBuilder()
-        writer.withWriter { w ->
-            def xml = builder.bind {
-                mkp.xmlDeclaration()
-                CodeNarc(url:CODENARC_URL, version:getCodeNarcVersion()) {
-                    out << buildReportElement()
-                    out << buildProjectElement(analysisContext)
-                    out << buildPackageElements(results)
-                    out << buildRulesElement(analysisContext)
-                }
+        def xml = builder.bind {
+            mkp.xmlDeclaration()
+            CodeNarc(url:CODENARC_URL, version:getCodeNarcVersion()) {
+                out << buildReportElement()
+                out << buildProjectElement(analysisContext)
+                out << buildPackageElements(results)
+                out << buildRulesElement(analysisContext)
             }
-            w << xml
         }
+        writer << xml
     }
 
     //--------------------------------------------------------------------------
