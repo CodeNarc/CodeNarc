@@ -35,7 +35,7 @@ class ReportWriterFactory {
             case 'text': return new TextReportWriter()
         }
 
-        def reportClass = Class.forName(type)
+        def reportClass = getClass().classLoader.loadClass(type)
         return reportClass.newInstance()
     }
 

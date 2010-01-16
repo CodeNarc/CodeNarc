@@ -94,7 +94,7 @@ class XmlReaderRuleSet implements RuleSet {
     private void loadRuleElements(ruleset) {
         ruleset[NS.rule].each { ruleNode ->
             def ruleClassName = ruleNode.attribute('class')
-            def ruleClass = Class.forName(ruleClassName.toString())
+            def ruleClass = getClass().classLoader.loadClass(ruleClassName.toString())
             RuleSetUtil.assertClassImplementsRuleInterface(ruleClass)
             def rule = ruleClass.newInstance()
             rules << rule
