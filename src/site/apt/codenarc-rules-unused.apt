@@ -8,7 +8,9 @@ Naming Rules  ("<rulesets/unused.xml>")
 * UnusedPrivateField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Checks for private fields that are not referenced within the same class.
+  Checks for private fields that are not referenced within the same class. Note that the <<<private>>>
+  modifier is not currently "respected" by Groovy code (i.e., Groovy can access <<<private>>>
+  members within other classes).
 
   Known limitations:
 
@@ -21,7 +23,9 @@ Naming Rules  ("<rulesets/unused.xml>")
 * UnusedPrivateMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Checks for private methods that are not referenced within the same class.
+  Checks for private methods that are not referenced within the same class. Note that the <<<private>>>
+  modifier is not currently "respected" by Groovy code (i.e., Groovy can access <<<private>>>
+  members within other classes).
 
   Known limitations:
 
@@ -47,5 +51,3 @@ Naming Rules  ("<rulesets/unused.xml>")
 
   * Incorrectly considers a variable referenced if another variable with the same name is referenced
     elsewhere (in another scope/block).
-
-
