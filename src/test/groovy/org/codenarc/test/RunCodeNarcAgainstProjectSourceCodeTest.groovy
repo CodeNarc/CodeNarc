@@ -19,7 +19,7 @@ package org.codenarc.test
  * Test that runs CodeNarc against the project source code
  *
  * @author Chris Mair
- * @version $Revision: 257 $ - $Date: 2009-12-25 17:07:22 -0500 (Fri, 25 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
 

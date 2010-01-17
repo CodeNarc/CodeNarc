@@ -27,7 +27,7 @@ import org.codenarc.AnalysisContext
  * Tests for TestReportWriter
  *
  * @author Chris Mair
- * @version $Revision: 276 $ - $Date: 2010-01-08 19:30:35 -0500 (Fri, 08 Jan 2010) $
+ * @version $Revision$ - $Date$
  */
 class TextReportWriterTest extends AbstractTestCase {
 
