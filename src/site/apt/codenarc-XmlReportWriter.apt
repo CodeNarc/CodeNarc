@@ -11,6 +11,10 @@ XmlReportWriter
   The <<<org.codenarc.report.XmlReportWriter>>> class (type="xml") produces an XML report of the
   <<CodeNarc>> results.
 
+  <<Note:>> This XML format is still being refined and is subject to change.
+  {{{https://sourceforge.net/sendmessage.php?touser=1853503}Contact me}} if you have specific requirements or suggestions.
+
+
   See a {{{./SampleCodeNarcXmlReport.xml}Sample XML Report}}.
 
 * Option Nested Elements
