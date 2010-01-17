@@ -19,24 +19,20 @@ CodeNarc - Road Map
 
   * Even more rules, perhaps including framework-specific rules for Grails (additional), Griffon, Gradle, etc..
 
-  * Create XML report
-
   * Analyze source code within jar files or zip files.
 
   * Create Hudson plugin.
-
-  * Create Eclipse plugin.
 
 
 ** Considering (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  * Create IntelliJ plugin.
+  * Create Eclipse plugin.
+
+  * Create IntelliJ IDEA plugin.
 
   * Create Netbeans plugin.
 
   * Create Maven plugin.
-
-  * DSL for RuleSet definition.
 
   * Localization of report text.

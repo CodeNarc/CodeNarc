@@ -35,6 +35,7 @@
         <menu name="Running">
             <item name="Ant Task Usage" href="/codenarc-ant-task.html"/>
             <item name="Command-Line" href="/codenarc-command-line.html"/>
+            <item name="Run as a Test" href="/codenarc-run-as-a-test.html"/>
         </menu>
 
         <menu name="Using">

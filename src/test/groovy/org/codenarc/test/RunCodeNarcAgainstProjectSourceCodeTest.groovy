@@ -33,7 +33,7 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
 
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
-        ant.codenarc(ruleSetFiles:RULESET_FILES) {
+        ant.codenarc(ruleSetFiles:RULESET_FILES, maxPriority1Violations:0, maxPriority2Violations:0) {
 
            fileset(dir:'src/main/groovy') {
                include(name:GROOVY_FILES)

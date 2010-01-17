@@ -1,0 +1,65 @@
+		--------------------------------------------------
+					  CodeNarc - Run as a Test
+		--------------------------------------------------
+
+CodeNarc - Run as an Automated Test
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <<CodeNarc>> can be run as part of an automated test suite, for instance using <<JUnit>> or <<TestNG>>.
+  This approach uses the <<<org.codenarc.ant.CodeNarcTask>>> class and Groovy's built-in support for
+  <<Apache Ant>>.
+
+  <<NOTE:>> This approach may not play well with having <<CodeNarc>> also configured to run as part of
+  your "regular" Ant build, especially if you have a classpath defined for your Ant build which is
+  different that your runtime classpath for running your tests (which is likely).
+
+* Automated Test That Runs CodeNarc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This is an example <<JUnit>> test (JUnit 3.x) that runs <<CodeNarc>>.
+
++----------------------------------------------------------------------------------------
+    private static final GROOVY_FILES = '**/*.groovy'
+    private static final RULESET_FILES = [
+            'rulesets/basic.xml',
+            'rulesets/imports.xml'].join(',')
+
+    void testRunCodeNarc() {
+        def ant = new AntBuilder()
+
+        ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
+
+        ant.codenarc(ruleSetFiles:RULESET_FILES,
+           maxPriority1Violations:0, maxPriority2Violations:0) {
+
+           fileset(dir:'src/main/groovy') {
+               include(name:GROOVY_FILES)
+           }
+           fileset(dir:'src/test/groovy') {
+               include(name:GROOVY_FILES)
+           }
+
+           report(type:'text') {
+               option(name:'writeToStandardOut', value:true)
+           }
+        }
+    }
++----------------------------------------------------------------------------------------
+
+  Things to note:
+
+  * This approach uses the <<<AntBuilder>>> class provided with Groovy.
+
+  * The <<CodeNarc>> jar must be on the classpath. Any external resources that you reference must also
+    be on the classpath, including any custom <RuleSet> files.
+
+  * The <maxPriority1Violations> and <maxPriority2Violations> properties are configured to fail the test
+    if any priority 1 or 2 violations are found.
+
+  * A <text> report is configured to write (only) to <standard out>. This will show the total number
+    of violations (at each priority) and also list the violations by file.
+
+  []
+
+  See the {{{codenarc-ant-task.html}CodeNarc Ant Task}} for more information on configuring the Ant task.
+
