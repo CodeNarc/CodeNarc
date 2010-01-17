@@ -17,7 +17,6 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for EmptyForStatementRule

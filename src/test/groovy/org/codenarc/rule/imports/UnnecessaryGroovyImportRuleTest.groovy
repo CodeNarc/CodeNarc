@@ -17,7 +17,6 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for UnnecessaryGroovyImportRule

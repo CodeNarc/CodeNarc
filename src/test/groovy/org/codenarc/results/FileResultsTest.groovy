@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package org.codenarc.results
 
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.test.AbstractTestCase
 
 /**

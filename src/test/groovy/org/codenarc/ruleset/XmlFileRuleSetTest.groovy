@@ -19,7 +19,6 @@ import org.codenarc.rule.StubRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for XmlFileRuleSet

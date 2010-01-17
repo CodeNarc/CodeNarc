@@ -16,7 +16,6 @@
 package org.codenarc.util
 
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for WildcardPattern
