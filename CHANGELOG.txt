@@ -2,6 +2,40 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.8 (17 Jan 2010)
+------------------------------------
+BUG FIXES
+- Fix Bug #2930886: "Cannot load rules when groovy is in different classloader".  XmlReaderRuleSet, ReportWriterFactory: Replace calls to Class.forName() with getClass().classLoader.loadClass(). https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2930886&group_id=250145.
+- Fix Bug #2847520: "UnusedVariableRule: Closure variable must be invoked". UnusedVariableRule: Referencing an (explicit) Closure variable without invoking it is not recognized as a valid reference. e.g., final CLOSURE = { .. }; return CLOSURE. https://sourceforge.net/tracker/?func=detail&aid=2847520&group_id=250145&atid=1126573
+- Fix false positive: Local closures: If a closure is assigned to a local variable, then used later in the method, CodeNarc report the variable unused. [I think this has already been resolved, perhaps as part of Bug #2847520]. (reported by Donal Murtagh)
+- Fix false positive: Default arguments: If a constant is only used as the value of a default argument, CodeNarc reports this constant unused. (reported by Donal Murtagh)
+REPORTS
+- Create XmlReportWriter for wrting out an XML report ("xml"). (beta)
+- Create TextReportWriter. Writes out text report with violations by file and priority and summary counts.
+- Enable configuring all provided ReportWriters (HtmlReportWriter, XmlReportWriter, TextReportWriter) to write to the stdout (console).
+- Enable specifying the full class name of a custom ReportWriter class.
+- CodeNarcTask: Add support for <option> nested elements under the <report> element.
+- HtmlReportWriter: Externalize strings to resource bundle.
+- Remove setTitle() and setOutputFile() from ReportWriter interface.
+- ReportWriter: Rename writeOutReport() method to writeReport().
+- Create AbstractReportWriter.
+RULES
+- Create new NestedBlockDepthRule. Checks for nesting of all types of block statements (and closures), including for, if, while, try and switch statements. (design)
+- MethodSizeRule: Add support for "ignoreMethodNames" property to enable filtering.
+- AbstractRule: Enhance applyToFileNames to handle optional path (e.g. “abc/def/MyClass.groovy”).
+- AbstractRule: The (previously deprecated) applyToFilenames and doNotApplyToFilenames properties now throw an UnsupportedOperationException.
+- AbstractRule: Add optional description property; Use it in report if specified.
+OTHER CHANGES
+- Allow spaces within comma-separated list of ruleset files. Applies when specifying ruleset files for the CodeNarc Ant Task or the CodeNarc script.
+- CodeNarcRunner: Don’t require that reportWriters is non-empty.
+- AntFileSetSourceAnalyzer: Specify sourceDirectories relative to project base directory.
+- Reorganize web site. Add Reports section. Add pages for HTML, XML and and text reports.
+- Add support and documentation for running CodeNarc as part of an automated test suite (e.g. JUnit).
+- Add List getSourceDirectories() to SourceAnalyzer interface and implementation classes.
+- Change “codenarc-version.txt” to contain only the version number.
+- Rename AbstractTest to AbstractTestCase.
+
+
 Changes in version 0.7 (25 Aug 2009)
 ------------------------------------
 BUG FIXES

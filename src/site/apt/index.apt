@@ -12,8 +12,9 @@ CodeNarc
   These rules include checks for coding standards, or searching for unused code, possible bugs or
   bad coding practices.
 
-  You can run <<CodeNarc>> using the supplied {{{codenarc-ant-task.html}Ant Task}}
-  or from the {{{codenarc-command-line.html}command-line}}.
+  You can run <<CodeNarc>> using the supplied {{{codenarc-ant-task.html}Ant Task}},
+  or run it from the {{{codenarc-command-line.html}command-line}}, or
+  {{{codenarc-run-as-a-test.html}as part of your test suite}}
 
   See the site navigation menu for a list of the rulesets and rules provided
   out of the box by <<CodeNarc>>. Or you can {{{codenarc-creating-ruleset.html}create your own custom ruleset}}
@@ -22,7 +23,8 @@ CodeNarc
   from popular Groovy-based {{{codenarc-opensource-projects.html}open source projects}}.
 
   <<CodeNarc>> plugins are available for {{{http://www.grails.org/plugin/codenarc/}Grails}}
-  and {{{http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/}Griffon}}. 
+  and {{{http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/}Griffon}}. <<CodeNarc>>
+  is integrated into the {{{http://www.gradle.org/}Gradle}} build system as well.
 
   <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
   and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well
