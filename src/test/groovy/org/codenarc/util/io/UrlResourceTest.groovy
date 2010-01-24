@@ -41,7 +41,7 @@ class UrlResourceTest extends AbstractTestCase {
 
     void testGetInputStream_File_AbsolutePath() {
         def file = new File(TEXT_FILE)
-        def urlName = "file:/" + file.absolutePath
+        def urlName = "file:" + file.absolutePath
         log("urlName=$urlName")
         def resource = new UrlResource(urlName)
         def inputStream = resource.getInputStream()

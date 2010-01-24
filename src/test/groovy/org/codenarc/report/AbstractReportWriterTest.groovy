@@ -124,8 +124,10 @@ class AbstractReportWriterTest extends AbstractTestCase {
     }
 
     void testGetFormattedTimestamp() {
-        reportWriter.getTimestamp = { new Date(1262361072497) }
-        assert reportWriter.getFormattedTimestamp() == 'Jan 1, 2010 10:51:12 AM'
+        def timestamp = new Date(1262361072497)
+        reportWriter.getTimestamp = { timestamp }
+        def expected = java.text.DateFormat.getDateTimeInstance().format(timestamp)
+        assert reportWriter.getFormattedTimestamp() == expected
     }
 
     void testGetCodeNarcVersion() {
