@@ -25,9 +25,9 @@ import org.codenarc.rule.Rule
  * @version $Revision$ - $Date$
  */
 class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
-    static final CONTROLLER_PATH = 'project\\MyProject\\grails-app\\controllers\\com\\xxx\\MyController.groovy'
-    static final TAGLIB_PATH = 'project\\MyProject\\grails-app\\taglib\\MyTagLib.groovy'
-    static final OTHER_PATH = 'project\\MyProject\\src\\groovy\\MyHelper.groovy'
+    static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
+    static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'
+    static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
     void testRuleProperties() {
         assert rule.priority == 2

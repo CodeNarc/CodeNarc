@@ -25,8 +25,8 @@ import org.codenarc.rule.Rule
  * @version $Revision$ - $Date$
  */
 class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
-    static final SERVICE_PATH = 'project\\MyProject\\grails-app\\services\\com\\xxx\\MyService.groovy'
-    static final OTHER_PATH = 'project\\MyProject\\src\\groovy\\MyHelper.groovy'
+    static final SERVICE_PATH = 'project/MyProject/grails-app/services/com/xxx/MyService.groovy'
+    static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
     void testRuleProperties() {
         assert rule.priority == 2
