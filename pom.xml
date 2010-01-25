@@ -29,15 +29,9 @@
         </dependency>
 
         <dependency>
-            <groupId>ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.6.5</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.codehaus.groovy.maven.runtime</groupId>
-            <artifactId>gmaven-runtime-default</artifactId>
-            <version>1.0-rc-3</version>
+            <artifactId>gmaven-runtime-1.5</artifactId>
+            <version>1.0</version>
         </dependency>
         
         <dependency>
@@ -60,7 +54,7 @@
             <plugin>
                 <groupId>org.codehaus.groovy.maven</groupId>
                 <artifactId>gmaven-plugin</artifactId>
-                <version>1.0-rc-3</version>
+                <version>1.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -71,6 +65,10 @@
                         </goals>
                     </execution>
                 </executions>
+
+                <configuration>
+                    <providerSelection>1.5</providerSelection>
+                </configuration>
             </plugin>
 
             <plugin>

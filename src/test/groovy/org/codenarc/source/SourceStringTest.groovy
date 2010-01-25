@@ -129,7 +129,7 @@ class SourceStringTest extends AbstractTestCase {
 
     void testGetLineNumberForCharacterIndex() {
         final NEW_SOURCE = '\nclass MyClass { \r\n  try {\n} catch(MyException e) {\n// TODO \n }\n }\n'
-        NEW_SOURCE.eachWithIndex { ch, i -> print "$i=${ch as int} " }
+        NEW_SOURCE.eachWithIndex { ch, i -> print "$i=${(int)(ch as char)} " }
         sourceString = new SourceString(NEW_SOURCE)
         assert sourceString.getLineNumberForCharacterIndex(0) == 0
         assert sourceString.getLineNumberForCharacterIndex(1) == 1
