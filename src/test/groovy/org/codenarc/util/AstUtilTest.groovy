@@ -200,15 +200,18 @@ class AstUtilTest extends AbstractTestCase {
         final NEW_SOURCE = '''
             class MyClass {
                 def otherMethod() {
-                    String (name1, name2) = 'abc'
+                    String name1, name2 = 'abc'
                 }
             }
         '''
         // Not valid under Groovy 1.5.x
         if (isNotGroovy15()) {
             applyVisitor(NEW_SOURCE)
-            def variableExpressions = AstUtil.getVariableExpressions(visitor.declarationExpressions[1])
-            assert variableExpressions.name == ['name1', 'name2']
+            def names = []
+            visitor.declarationExpressions.collect { declarationExpression ->
+                names += AstUtil.getVariableExpressions(declarationExpression).name
+            }
+            assert names.contains('name1') && names.contains('name2')
         }
     }
 

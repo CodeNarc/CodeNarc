@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,13 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codehaus.groovy.ast.stmt.EmptyStatement
+import org.codehaus.groovy.ast.stmt.WhileStatement
+import org.codehaus.groovy.ast.stmt.CaseStatement
+import org.codehaus.groovy.ast.stmt.ForStatement
+import org.codehaus.groovy.ast.stmt.SynchronizedStatement
+import org.codehaus.groovy.ast.stmt.CatchStatement
 
 /**
  * Rule that checks for blocks or closures nested more than a configured maximum number.
@@ -42,38 +48,60 @@ class NestedBlockDepthRule extends AbstractAstVisitorRule {
 }
 
 class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
-
-    private finallyBlocks = [] as Set
+    private blocksToProcess = [] as Set
     private nestedBlockDepth = 0
 
     void visitBlockStatement(BlockStatement block) {
-        if (isFirstVisit(block)) {
-            if (isPhantomFinallyBlock(block) || AstUtil.isFromGeneratedSourceCode(block)) {
-                super.visitBlockStatement(block)
-            }
-            else {
-                handleNestedBlockStatement(block)
-            }
+        if (isFirstVisit(block) && block in blocksToProcess) {
+            handleNestedNode(block) { super.visitBlockStatement(block) }
+        }
+        else {
+            super.visitBlockStatement(block)
         }
     }
 
-    // NOTE: finally blocks require special handling. The visitBlockStatement() callback will be invoked
-    // twice for a finally block. We need to filter out one of them (the first one) to avoid duplicate violations.
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
-        finallyBlocks << tryCatchStatement.finallyStatement
+        addBlockIfNotEmpty(tryCatchStatement.tryStatement)
+        addBlockIfNotEmpty(tryCatchStatement.finallyStatement)
         super.visitTryCatchFinally(tryCatchStatement)
     }
 
+    void visitCatchStatement(CatchStatement statement) {
+        handleNestedNode(statement) { super.visitCatchStatement(statement) }
+    }
+
+    private void addBlockIfNotEmpty(block) {
+        if (!(block instanceof EmptyStatement)) {
+            blocksToProcess << block
+        }
+    }
+
+    void visitIfElse(IfStatement ifStatement) {
+        if (isFirstVisit(ifStatement)) {
+            addBlockIfNotEmpty(ifStatement.ifBlock)
+            addBlockIfNotEmpty(ifStatement.elseBlock)
+        }
+        super.visitIfElse(ifStatement)
+    }
+
+    void visitWhileLoop(WhileStatement whileStatement) {
+        handleNestedNode(whileStatement) { super.visitWhileLoop(whileStatement) }
+    }
+
+    void visitForLoop(ForStatement forStatement) {
+        handleNestedNode(forStatement) { super.visitForLoop(forStatement) }
+    }
+
+    void visitCaseStatement(CaseStatement statement) {
+        handleNestedNode(statement) { super.visitCaseStatement(statement) }
+    }
+
+    void visitSynchronizedStatement(SynchronizedStatement statement) {
+        handleNestedNode(statement) { super.visitSynchronizedStatement(statement) }
+    }
+
     void visitClosureExpression(ClosureExpression expression) {
-        handleNestedClosureExpression(expression)
-    }
-
-    private void handleNestedBlockStatement(BlockStatement block) {
-        handleNestedNode(block) { super.visitBlockStatement(block) } 
-    }
-
-    private void handleNestedClosureExpression(expression) {
-        handleNestedNode(expression) { super.visitClosureExpression(expression) } 
+        handleNestedNode(expression) { super.visitClosureExpression(expression) }
     }
 
     private void handleNestedNode(node, Closure callVisitorMethod) {
@@ -84,18 +112,4 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
         callVisitorMethod()
         nestedBlockDepth--
     }
-
-    // The "phantom" finally block contains the "real" finally block as its first statement
-    private boolean isPhantomFinallyBlock(BlockStatement block) {
-        if (block.statements) {
-            boolean found = finallyBlocks.find {
-                !it.empty && it.statements[0] == block.statements[0]
-            }
-            return found
-        }
-        else {
-            return false
-        }
-    }
-
 }

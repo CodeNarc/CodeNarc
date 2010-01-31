@@ -90,7 +90,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
             <ruleset $NAMESPACE>
                 <rule-script path='rule/DoesNotCompileRule.txt'/>
             </ruleset>"""
-        shouldFailWithMessageContaining('CompilationError') { parseXmlRuleSet(XML) }
+        shouldFail { parseXmlRuleSet(XML) }
     }
 
     void testRuleScriptNotARule() {

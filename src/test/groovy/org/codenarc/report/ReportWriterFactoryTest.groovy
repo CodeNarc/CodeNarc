@@ -46,7 +46,7 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     }
 
     void testGetReportWriter_ThrowsExceptionForClassThatIsNotAReportWriter() {
-        shouldFailWithMessageContaining('type') { reportWriterFactory.getReportWriter('org.codenarc.CodeNarcRunner') } 
+        shouldFailWithMessageContaining('org.codenarc.CodeNarcRunner') { reportWriterFactory.getReportWriter('org.codenarc.CodeNarcRunner') } 
     }
 
     void testGetReportWriter_ThrowsExceptionForInvalidType() {
