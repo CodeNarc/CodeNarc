@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.util.GroovyVersion
 
 /**
  * Tests for VariableNameRule
@@ -211,7 +212,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
             }
         '''
         // Not valid under Groovy 1.5.x
-        if (isNotGroovy15()) {
+        if (!GroovyVersion.isGroovy1_5()) {
             assertSingleViolation(SOURCE, 3, 'def (pkg, Count) = 123', 'Count')
         }
     }
@@ -223,7 +224,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
             }
         '''
         // Not valid under Groovy 1.5.x
-        if (isNotGroovy15()) {
+        if (!GroovyVersion.isGroovy1_5()) {
             assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'bad')
         }
     }
@@ -235,7 +236,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
             }
         '''
         // Not valid under Groovy 1.5.x
-        if (isNotGroovy15()) {
+        if (!GroovyVersion.isGroovy1_5()) {
             assertTwoViolations(SOURCE,
                 3, 'def (Count, pkg, _MYVAR) = 123', 'Count',
                 3, 'def (Count, pkg, _MYVAR) = 123', '_MYVAR')

@@ -32,7 +32,7 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
 
     void applyTo(SourceCode sourceCode, List violations) {
         if (sourceCode.ast?.imports) {
-            sourceCode.ast.imports.each { importNode ->
+            getImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importClassName = importNode.className
                 def importPackageName = packageNameForImport(importNode)
                 def packages = ['java.lang', 'java.io', 'java.net', 'java.util', 'groovy.lang', 'groovy.util']

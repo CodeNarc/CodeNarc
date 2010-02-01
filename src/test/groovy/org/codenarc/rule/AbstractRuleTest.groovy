@@ -267,13 +267,20 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         '''
         def sourceCode = new SourceString(SOURCE)
         def ast = sourceCode.ast
-        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass', lineNumber:2]
-        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[1]) == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
-        assert rule.sourceLineAndNumberForImport(sourceCode, ast.imports[2]) == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]
+
+        assertImport(sourceCode, ast, [sourceLine:'import a.b.MyClass', lineNumber:2])
+        assertImport(sourceCode, ast, [sourceLine:'import a.b.MyClass as Boo', lineNumber:3])
+        assertImport(sourceCode, ast, [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5])
 
         // Not found
         def otherSourceCode = new SourceString('def v = 1')
-        assert rule.sourceLineAndNumberForImport(otherSourceCode, ast.imports[0]) == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
+        assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null])
+    }
+
+    private void assertImport(sourceCode, ast, Map importInfo) {
+        assert ast.imports.find { imp ->
+            rule.sourceLineAndNumberForImport(sourceCode, imp) == importInfo
+        }
     }
 
     void testSourceLineAndNumberForImport_ClassNameAndAlias() {

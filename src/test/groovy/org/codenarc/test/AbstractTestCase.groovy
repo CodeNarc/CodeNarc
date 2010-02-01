@@ -99,14 +99,6 @@ abstract class AbstractTestCase extends GroovyTestCase {
         return out.toString()
     }
 
-    /**
-     * @return true if the version of Groovy currently running/compiling is NOT 1.5.x.
-     */
-    protected boolean isNotGroovy15() {
-        def version = new org.codehaus.groovy.runtime.InvokerHelper().version
-        return !version.startsWith('1.5')
-    }
-
     private String classNameNoPackage() {
         def className = getClass().name
         def index = className.lastIndexOf('.')

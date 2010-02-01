@@ -232,6 +232,13 @@ abstract class AbstractRule implements Rule {
         return createViolation(node.lineNumber, sourceLine, message)
     }
 
+    protected List getImportsSortedByLineNumber(sourceCode) {
+        return sourceCode.ast.imports.sort { importNode ->
+            def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
+            importInfo.lineNumber
+        }
+    }
+
     /**
      * Return the source line and line number for the specified import class name and alias
      * @param sourceCode - the SourceCode being processed

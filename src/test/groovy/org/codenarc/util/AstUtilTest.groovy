@@ -205,7 +205,7 @@ class AstUtilTest extends AbstractTestCase {
             }
         '''
         // Not valid under Groovy 1.5.x
-        if (isNotGroovy15()) {
+        if (!GroovyVersion.isGroovy1_5()) {
             applyVisitor(NEW_SOURCE)
             def names = []
             visitor.declarationExpressions.collect { declarationExpression ->

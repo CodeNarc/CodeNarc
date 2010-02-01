@@ -21,6 +21,12 @@ import org.codenarc.source.SourceCode
 /**
  * Rule that checks for a duplicate import
  *
+ * NOTE: Does not work under Groovy 1.7 (i.e., will not produce violations for duplicate
+ * import statements).
+ *
+ * NOTE: Does not distinguish between multiple duplicate imports of the same class.
+ * Thus, it may produce multiple violations with the same line number in that case.
+ *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
