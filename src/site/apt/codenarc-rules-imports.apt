@@ -10,10 +10,12 @@ Imports Rules  ("<rulesets/imports.xml>")
 
   Checks for a duplicate <import> statements.
 
-  <<NOTE:>> Does not work on <Groovy 1.7.x> (i.e., will not find violations).
+  Known limitations:
 
-  <<NOTE:>> Does not distinguish between multiple duplicate imports of the same class.
-  Thus, it may produce multiple violations with the same line number in that case. 
+  * Does not work on <Groovy 1.7.x> (i.e., will not find violations).
+
+  * Does not distinguish between multiple duplicate imports of the same class.
+    Thus, it may produce multiple violations with the same line number in that case. 
 
 
 * ImportFromSamePackage Rule

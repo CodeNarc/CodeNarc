@@ -2,6 +2,17 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.8.1 (2 Feb 2010)
+------------------------------------
+BUG FIXES
+- Fix Bug #2943025: “NestedBlockDepthRule: Produces erroneous results on Groovy 1.6.x.” https://sourceforge.net/tracker/?func=detail&aid=2943025&group_id=250145&atid=1126573
+- Fix Bug #2943028: “PackageNameRule may show incorrect violations for classes within the default package when running in Groovy 1.6.x.” https://sourceforge.net/tracker/?func=detail&aid=2943028&group_id=250145&atid=1126573
+- Fix Bug #2935587 "Building CodeNarc 0.8 fails." - Problem from Joern Huxhorn (Jan 18, 2010) – Unable to build from the downloaded CodeNarc-0.8-bin.tar.gz.  http://sourceforge.net/tracker/?func=detail&aid=2935587&group_id=250145&atid=1126573. See CodeNarc - Unable to Build From TarGZip.doc. Remove platform/locale dependencies: AbstractReportWriterTest, UrlResourceTest, GrailsSessionReferenceRuleTest, GrailsPublicControllerMethodRuleTest, GrailsServletContextReferenceRuleTest, GrailsStatelessServiceRuleTest. [Jan 24]
+- Fix StackOverflow in Groovy 1.7.0 for some rules: All rules that implement the visitVariableExpression(VariableExpression expression) visitor method: UnusedVariableRule, UnusedPrivateFieldRule, GrailsSessionReferenceRule, GrailsServletContextReferenceRule – Removed call to super.visitVariableExpression(expression) since that seems to cause problems (StackOverflow) in Groovy 1.7.0.
+- Fix tests broken when running in Groovy 1.6 or Groovy 1.7.
+- DuplicateImportRule: Document that this rule does not work when running under Groovy 1.7 (i.e., will not produce any violations), and does not distinguish between multiple duplicate imports for the same class.
+
+
 Changes in version 0.8 (17 Jan 2010)
 ------------------------------------
 BUG FIXES
