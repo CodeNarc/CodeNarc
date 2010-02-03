@@ -165,6 +165,25 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count')
     }
 
+    void testApplyTo_NoFields() {
+        final SOURCE = '''
+            class DataServiceException extends RuntimeException{
+                DataServiceException(){
+                }
+                DataServiceException(String message){
+                    super(message)
+                }
+                DataServiceException(String message, Throwable cause){
+                    super(message, cause)
+                }
+                DataServiceException(Throwable cause){
+                    super(cause)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_Script() {
         final SOURCE = '''
             private BigDecimal depositAmount       // not considered a field

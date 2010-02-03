@@ -53,6 +53,8 @@ class GrailsServletContextReferenceAstVisitor extends AbstractAstVisitor  {
         if (isFirstVisit(expression) && expression.variable == 'servletContext') {
             addViolation(expression)
         }
-        super.visitVariableExpression(expression)
+        
+        // This causes problems (StackOverflow) in Groovy 1.7.0
+        //super.visitVariableExpression(expression)
     }
 }

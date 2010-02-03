@@ -44,7 +44,9 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
 
     void visitClass(ClassNode classNode) {
         this.unusedPrivateFields = classNode.fields.findAll { fieldNode ->
-            fieldNode.modifiers & FieldNode.ACC_PRIVATE
+            def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
+            def isNotGenerated = fieldNode.lineNumber != -1
+            isPrivate && isNotGenerated
         }
         super.visitClass(classNode)
 
@@ -55,7 +57,9 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
 
     void visitVariableExpression(VariableExpression expression) {
         removeUnusedPrivateField(expression.name)
-        super.visitVariableExpression(expression)
+
+        // This causes problems (StackOverflow) in Groovy 1.7.0
+        //super.visitVariableExpression(expression)
     }
 
     void visitProperty(PropertyNode node) {

@@ -68,7 +68,9 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     
     void visitVariableExpression(VariableExpression expression) {
         markVariableAsReferenced(expression.name, expression.lineNumber)
-        super.visitVariableExpression(expression)
+
+        // This causes problems (StackOverflow) in Groovy 1.7.0
+        //super.visitVariableExpression(expression)
     }
 
     void visitMethodCallExpression(MethodCallExpression call) {
