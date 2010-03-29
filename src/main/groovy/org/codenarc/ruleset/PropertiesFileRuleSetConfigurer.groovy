@@ -32,7 +32,7 @@ import org.codenarc.util.io.DefaultResourceFactory
  * <p/>
  * For each properties entry of the form <code>[rule-name].[property-name]=[property-value]</code>,
  * the named property for the rule within the RuleSet matching rule-name is set to the
- * specified propery-value. Properties entries not of this form or specifying rule
+ * specified property-value. Properties entries not of this form or specifying rule
  * names not within the specified RuleSet are ignored.
  *
  * @author Chris Mair
@@ -85,6 +85,9 @@ class PropertiesFileRuleSetConfigurer {
                 def rule = findRule(ruleSet, ruleName)
                 if (rule) {
                     PropertyUtil.setPropertyFromString(rule, propertyName, v)
+                }
+                else {
+                    LOG.warn("No such rule [$ruleName] for property [$k]")
                 }
             }
         }
