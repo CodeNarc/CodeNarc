@@ -253,6 +253,7 @@
     <dictionary name="Chris">
       <words>
         <w>regex</w>
+        <w>timestamp</w>
       </words>
     </dictionary>
   </component>

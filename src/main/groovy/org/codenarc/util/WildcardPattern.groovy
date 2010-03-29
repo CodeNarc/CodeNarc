@@ -109,7 +109,7 @@ class WildcardPattern {
                     // Any character except the normalized file separator ('/')
                     result << /[^\/]/
                     break;
-                case ['$', '|', '[', ']', '(', ')', '.', ':', '{', '}', '\\', '^']:
+                case ['$', '|', '[', ']', '(', ')', '.', ':', '{', '}', '\\', '^', '+']:
                     result << '\\' + ch
                     break;
                 default: result << ch
