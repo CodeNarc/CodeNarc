@@ -53,10 +53,10 @@ class WildcardPattern {
         def patterns = patternString ? patternString.tokenize(',') : []
         patterns.each { pattern -> 
             if (containsWildcards(pattern)) {
-                regexes << convertStringWithWildcardsToRegex(pattern)
+                regexes << convertStringWithWildcardsToRegex(pattern.trim())
             }
             else {
-                strings << pattern
+                strings << pattern.trim()
             }
         }
     }
