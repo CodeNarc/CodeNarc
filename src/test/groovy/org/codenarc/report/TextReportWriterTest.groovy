@@ -74,7 +74,6 @@ File: src/main/dao/MyOtherDao.groovy
     private reportWriter
     private analysisContext
     private results, srcMainDaoDirResults
-    private ruleSet
     private stringWriter
 
     void testWriteReport_Writer() {

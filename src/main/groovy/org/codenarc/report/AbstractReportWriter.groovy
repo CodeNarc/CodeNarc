@@ -118,6 +118,15 @@ abstract class AbstractReportWriter implements ReportWriter {
         return dateFormat.format(getTimestamp())
     }
 
+    protected List getSortedRules(AnalysisContext analysisContext) {
+        def rules = analysisContext.ruleSet.rules.findAll { rule -> isEnabled(rule) }
+        return rules.toList().sort { rule -> rule.name }
+    }
+
+    protected boolean isEnabled(Rule rule) {
+        return (!AstUtil.respondsTo(rule, 'getEnabled') || rule.enabled)
+    }
+
     protected String getCodeNarcVersion() {
         return ClassPathResource.getInputStream(VERSION_FILE).text
     }

@@ -117,6 +117,18 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assertContainsAllInOrder(reportText, ['MyRuleXX', 'description77', 'MyRuleYY', 'description88'])
     }
 
+    void testWriteReport_DoesNotIncludeRuleDescriptionsForDisabledRules() {
+        ruleSet = new ListRuleSet([
+                new StubRule(name:'MyRuleXX', enabled:false),
+                new StubRule(name:'MyRuleYY'),
+                new StubRule(name:'MyRuleZZ', enabled:false)])
+        analysisContext.ruleSet = ruleSet
+        reportWriter.writeReport(analysisContext, results)
+        def reportText = getReportText()
+        assert !reportText.contains('MyRuleXX')
+        assert !reportText.contains('MyRuleZZ')
+    }
+
     void testWriteReport_IncludesRuleThatDoesNotSupportGetDescription() {
         analysisContext.ruleSet = new ListRuleSet([ [getName:{'RuleABC'}] as Rule])
         reportWriter.writeReport(analysisContext, results)

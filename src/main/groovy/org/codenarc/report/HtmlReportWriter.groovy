@@ -243,8 +243,7 @@ class HtmlReportWriter extends AbstractReportWriter {
     }
 
     private buildRuleDescriptions(AnalysisContext analysisContext) {
-        def rules = analysisContext.ruleSet.rules
-        def sortedRules = rules.toList().sort { rule -> rule.name }
+        def sortedRules = getSortedRules(analysisContext)
 
         return {
             h2(getResourceBundleString('htmlReport.ruleDescriptions.title'))

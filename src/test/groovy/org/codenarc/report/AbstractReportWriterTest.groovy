@@ -20,6 +20,7 @@ import org.codenarc.results.Results
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.rule.StubRule
+import org.codenarc.ruleset.ListRuleSet
 
 /**
  * Tests for AbstractReportWriter
@@ -128,6 +129,22 @@ class AbstractReportWriterTest extends AbstractTestCase {
         reportWriter.getTimestamp = { timestamp }
         def expected = java.text.DateFormat.getDateTimeInstance().format(timestamp)
         assert reportWriter.getFormattedTimestamp() == expected
+    }
+
+    void testGetSortedRules() {
+        def ruleSet = new ListRuleSet([new StubRule(name:'BB'), new StubRule(name:'AA'), new StubRule(name:'DD'), new StubRule(name:'CC')])
+        def analysisContext = new AnalysisContext(ruleSet:ruleSet)
+        def sorted = reportWriter.getSortedRules(analysisContext)
+        log(sorted)
+        assert sorted.name == ['AA', 'BB', 'CC', 'DD']
+    }
+
+    void testGetSortedRules_RemovesDisabledRules() {
+        def ruleSet = new ListRuleSet([new StubRule(name:'BB', enabled:false), new StubRule(name:'AA'), new StubRule(name:'DD'), new StubRule(name:'CC', enabled:false)])
+        def analysisContext = new AnalysisContext(ruleSet:ruleSet)
+        def sorted = reportWriter.getSortedRules(analysisContext)
+        log(sorted)
+        assert sorted.name == ['AA', 'DD']
     }
 
     void testGetCodeNarcVersion() {
