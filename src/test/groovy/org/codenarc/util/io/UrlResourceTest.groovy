@@ -55,11 +55,11 @@ class UrlResourceTest extends AbstractTestCase {
     }
 
     // Can't assume always-on internet access
-    void DISABLE_testGetInputStream_Http() {
-        def resource = new UrlResource('http://google.com')
-        def inputStream = resource.getInputStream()
-        assert inputStream.text.contains('Google')
-    }
+//    void testGetInputStream_Http() {
+//        def resource = new UrlResource('http://google.com')
+//        def inputStream = resource.getInputStream()
+//        assert inputStream.text.contains('Google')
+//    }
 
     void testGetInputStream_MalformedUrlName() {
         def resource = new UrlResource('DoesNotExist.txt')

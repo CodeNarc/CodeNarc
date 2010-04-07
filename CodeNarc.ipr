@@ -71,6 +71,7 @@
       <entry name="?*.html" />
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
+      <entry name="*.ruleset" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -253,6 +254,7 @@
     <dictionary name="Chris">
       <words>
         <w>regex</w>
+        <w>ruleset</w>
         <w>timestamp</w>
       </words>
     </dictionary>

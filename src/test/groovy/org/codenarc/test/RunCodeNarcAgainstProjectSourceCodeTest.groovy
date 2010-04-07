@@ -24,11 +24,10 @@ package org.codenarc.test
 class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
 
     private static final GROOVY_FILES = '**/*.groovy'
-    private static final RULESET_FILES = [
-            'rulesets/basic.xml',
-            'rulesets/imports.xml'].join(',')
+    private static final RULESET_FILES = 'RunCodeNarcAgainstProjectSourceCode.ruleset'
 
     void testRunCodeNarc() {
+        System.setProperty('codenarc.properties.file', 'RunCodeNarcAgainstProjectSourceCode.properties') // ignore
         def ant = new AntBuilder()
 
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
