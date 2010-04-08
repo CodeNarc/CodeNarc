@@ -20,6 +20,9 @@ Generic Rules  ("<rulesets/generic.xml>")
 |                     | then do nothing.                                               |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
+  <<NOTE:>> This rule applies to the text contents of an entire <file> rather than a specific <class>,
+  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+
 
 * RequiredRegex Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,6 +38,9 @@ Generic Rules  ("<rulesets/generic.xml>")
 
   A RuleSet can contain any number of instances of this rule, but each should be configured
   with a unique rule <name> and <regex>, and (optionally) customized <violationMessage> and <priority>.
+
+  <<NOTE:>> This rule applies to the text contents of an entire <file> rather than a specific <class>,
+  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
 
 
 * StatelessClass Rule
