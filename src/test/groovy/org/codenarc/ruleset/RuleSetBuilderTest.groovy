@@ -17,6 +17,7 @@ package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.exceptions.CatchThrowableRule
+import org.codenarc.rule.generic.IllegalRegexRule
 
 /**
  * Tests for RuleSetBuilder
@@ -183,6 +184,16 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
         assertRuleNames('CatchThrowable')
         assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
+    }
+
+    void testRule_Class_Closure_SetNonExistentProperty() {
+        shouldFailWithMessageContaining('doesNotExist') {
+            ruleSetBuilder.ruleset {
+                rule(IllegalRegexRule) {
+                    doesNotExist = 1
+                }
+            }
+        }
     }
 
     void testRule_Class_Closure_NullRuleClass() {
