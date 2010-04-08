@@ -22,13 +22,19 @@ CodeNarc
   Take a look at a {{{SampleCodeNarcHtmlReport.html}Sample CodeNarc Report}}, or example reports
   from popular Groovy-based {{{codenarc-opensource-projects.html}open source projects}}.
 
-  <<CodeNarc>> plugins are available for {{{http://www.grails.org/plugin/codenarc/}Grails}}
-  and {{{http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/}Griffon}}. <<CodeNarc>>
-  is integrated into the {{{http://www.gradle.org/}Gradle}} build system as well.
-
   <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
   and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well
   as others.
+
+* Integration with Other Tools and Frameworks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <<CodeNarc>> plugins are available for {{{http://www.grails.org/plugin/codenarc/}Grails}}
+  and {{{http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/}Griffon}}.
+
+
+  <<CodeNarc>> is integrated into the {{{http://www.gradle.org/}Gradle}} build system, and a
+  {{{http://mojo.codehaus.org/codenarc-maven-plugin/index.html}Maven}} plugin is also available.
 
 
 * Requirements

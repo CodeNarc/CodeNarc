@@ -1,0 +1,23 @@
+		--------------------------------------------------
+				CodeNarc - Other Tools / Frameworks
+		--------------------------------------------------
+
+CodeNarc - Integration with Other Tools / Frameworks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Application Frameworks
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  * {{{http://grails.org/}Grails}} - See the {{{http://www.grails.org/plugin/codenarc/}Grails CodeNarc Plugin}}.
+
+  * {{{http://griffon.codehaus.org/}Griffon}} - See the {{{http://docs.codehaus.org/display/GRIFFON/Codenarc+Plugin/}Griffon CodeNarc Plugin}}
+
+
+* Build Tools
+~~~~~~~~~~~~~~
+
+    * {{{http://www.gradle.org/}Gradle}} build system - See the
+      {{{http://www.gradle.org/code_quality_plugin.html}Gradle Code Quality Plugin}}.
+
+    * {{{http://maven.apache.org/}Maven}} - See the {{{http://mojo.codehaus.org/codenarc-maven-plugin/index.html}Maven CodeNarc Plugin}}
+
