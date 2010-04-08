@@ -40,7 +40,7 @@ class MethodSizeRule extends AbstractAstVisitorRule {
 }
 
 class MethodSizeAstVisitor extends AbstractAstVisitor  {
-    void visitMethod(MethodNode methodNode) {
+    void visitConstructorOrMethod(MethodNode methodNode, boolean isConstructor) {
         if (methodNode.lineNumber >= 0) {
             def numLines = methodNode.lastLineNumber - methodNode.lineNumber + 1
             if (numLines > rule.maxLines && !isIgnoredMethodName(methodNode)) {
@@ -48,7 +48,7 @@ class MethodSizeAstVisitor extends AbstractAstVisitor  {
                 violations.add(new Violation(rule:rule, lineNumber:methodNode.lineNumber, message:"""Method "$methodName" is $numLines lines"""))
             }
         }
-        super.visitMethod(methodNode)
+        super.visitConstructorOrMethod(methodNode, isConstructor)
     }
 
     private boolean isIgnoredMethodName(MethodNode node) {

@@ -25,6 +25,7 @@ import org.codenarc.test.AbstractTestCase
  * @version $Revision$ - $Date$
  */
 abstract class AbstractRuleTestCase extends AbstractTestCase {
+    protected static final CONSTRUCTOR_METHOD_NAME = '<init>'
     protected Rule rule
 
     // Subclasses can optionally set these to set the name or path of the SourceCode object created

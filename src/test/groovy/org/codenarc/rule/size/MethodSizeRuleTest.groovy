@@ -55,6 +55,18 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, null, 'myMethod')
     }
 
+    void testApplyTo_ConstructorExceedsMaxLines() {
+        final SOURCE = """
+            class MyClass {
+                MyClass() {
+                    'println 23'
+                }
+            }
+        """
+        rule.maxLines = 2
+        assertSingleViolation(SOURCE, 3, null, CONSTRUCTOR_METHOD_NAME)
+    }
+
     void testApplyTo_NoMethodDefinition() {
         final SOURCE = '''
             class MyClass {
