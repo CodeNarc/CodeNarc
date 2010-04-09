@@ -59,5 +59,6 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
 
     private void assertDescriptionInMessagesBundle(String ruleName) {
         assert messages.getString(ruleName + '.description')
+        assert messages.getString(ruleName + '.description.html')
     }
 }

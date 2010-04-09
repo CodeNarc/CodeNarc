@@ -104,7 +104,7 @@ class XmlReportWriterTest extends AbstractTestCase {
 
         <Rules>
             <Rule name='BooleanInstantiation'>
-                <Description><![CDATA[Use <em>Boolean.valueOf()</em> for variable values or <em>Boolean.TRUE</em> and <em>Boolean.FALSE</em> for constant values instead of calling the <em>Boolean()</em> constructor directly or calling <em>Boolean.valueOf(true)</em> or <em>Boolean.valueOf(false)</em>.]]></Description>
+                <Description><![CDATA[Use Boolean.valueOf() for variable values or Boolean.TRUE and Boolean.FALSE for constant values instead of calling the Boolean() constructor directly or calling Boolean.valueOf(true) or Boolean.valueOf(false).]]></Description>
             </Rule>
             <Rule name='DuplicateImport'>
                 <Description><![CDATA[Custom: Duplicate imports]]></Description>

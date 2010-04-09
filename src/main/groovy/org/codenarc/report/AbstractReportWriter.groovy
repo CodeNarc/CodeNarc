@@ -33,8 +33,8 @@ import org.codenarc.util.AstUtil
  */
 abstract class AbstractReportWriter implements ReportWriter {
 
-    protected static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
-    protected static final CUSTOM_MESSSAGES_BUNDLE = "codenarc-messages"
+    protected static final BASE_MESSAGES_BUNDLE = "codenarc-base-messages"
+    protected static final CUSTOM_MESSAGES_BUNDLE = "codenarc-messages"
     protected static final VERSION_FILE = 'codenarc-version.txt'
     protected static final CODENARC_URL = "http://www.codenarc.org"
 
@@ -42,7 +42,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     Object writeToStandardOut
     protected final LOG = Logger.getLogger(getClass())
     protected getTimestamp = { new Date() }
-    protected customMessagesBundleName = CUSTOM_MESSSAGES_BUNDLE
+    protected customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
     protected resourceBundle
 
     // Allow tests to override this
@@ -82,7 +82,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     }
 
     protected void initializeDefaultResourceBundle() {
-        def baseBundle = ResourceBundle.getBundle(BASE_MESSSAGES_BUNDLE)
+        def baseBundle = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE)
         resourceBundle = baseBundle
         try {
             resourceBundle = ResourceBundle.getBundle(customMessagesBundleName)
@@ -94,13 +94,26 @@ abstract class AbstractReportWriter implements ReportWriter {
         }
     }
 
-    protected String getDescriptionForRule(Rule rule) {
-        if (AstUtil.respondsTo(rule, 'getDescription') && rule.description != null) {
-            return rule.description
-        }
+    protected String getHtmlDescriptionForRule(Rule rule) {
+        return getDescriptionProperty(rule) ?: getHtmlRuleDescription(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+    }
 
+    protected String getDescriptionForRule(Rule rule) {
+        return getDescriptionProperty(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+    }
+
+    private String getHtmlRuleDescription(Rule rule) {
+        def resourceKey = rule.name + '.description.html'
+        return getResourceBundleString(resourceKey, null)
+    }
+
+    private String getRuleDescriptionOrDefaultMessage(Rule rule) {
         def resourceKey = rule.name + '.description'
         return getResourceBundleString(resourceKey, "No description provided for rule named [$rule.name]")
+    }
+
+    private String getDescriptionProperty(Rule rule) {
+        return AstUtil.respondsTo(rule, 'getDescription') ? rule.description : null
     }
 
     protected String getResourceBundleString(String resourceKey, String defaultString='?') {

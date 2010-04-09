@@ -124,6 +124,30 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert reportWriter.getDescriptionForRule(rule).startsWith('No description provided')
     }
 
+    void testGetHtmlDescriptionForRule_HtmlRuleDescriptionFoundInMessagesFile() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name:'MyRuleXX')
+        assert reportWriter.getHtmlDescriptionForRule(rule) == 'HTML Rule XX'
+    }
+
+    void testGetHtmlDescriptionForRule_OnlyRuleDescriptionFoundInMessagesFile() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name:'MyRuleYY')
+        assert reportWriter.getHtmlDescriptionForRule(rule) == 'My Rule YY'
+    }
+
+    void testGetHtmlDescriptionForRule_DescriptionPropertySetOnRuleObject() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name:'MyRuleXX', description:'xyz')
+        assert reportWriter.getHtmlDescriptionForRule(rule) == 'xyz'
+    }
+
+    void testGetHtmlDescriptionForRule_NoRuleDescriptionNotFoundInMessagesFile() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name:'Unknown')
+        assert reportWriter.getHtmlDescriptionForRule(rule).startsWith('No description provided')
+    }
+
     void testGetFormattedTimestamp() {
         def timestamp = new Date(1262361072497)
         reportWriter.getTimestamp = { timestamp }

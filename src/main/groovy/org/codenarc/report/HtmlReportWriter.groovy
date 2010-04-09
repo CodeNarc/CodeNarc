@@ -260,7 +260,7 @@ class HtmlReportWriter extends AbstractReportWriter {
                         a(name:ruleName)
                         td(index+1)
                         td(ruleName, class:'ruleName')
-                        td { unescaped << getDescriptionForRule(rule) }
+                        td { unescaped << getHtmlDescriptionForRule(rule) }
                     }
                 }
             }

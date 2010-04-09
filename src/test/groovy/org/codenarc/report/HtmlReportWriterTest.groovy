@@ -103,7 +103,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, BASIC_CONTENTS)
-        assertContainsAllInOrder(reportText, [biRule.name, 'MyRuleXX', 'My Rule XX', 'MyRuleYY', 'My Rule YY'])
+        assertContainsAllInOrder(reportText, [biRule.name, 'MyRuleXX', 'HTML Rule XX', 'MyRuleYY', 'My Rule YY'])
     }
 
     void testWriteReport_RuleDescriptionsSetDirectlyOnTheRule() {
