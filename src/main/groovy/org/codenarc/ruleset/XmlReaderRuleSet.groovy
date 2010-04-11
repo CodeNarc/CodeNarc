@@ -16,7 +16,6 @@
 package org.codenarc.ruleset
 
 import groovy.xml.Namespace
-import javax.xml.XMLConstants
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
 import org.codenarc.util.PropertyUtil
@@ -31,6 +30,9 @@ import org.codenarc.util.io.ClassPathResource
  * @version $Revision$ - $Date$
  */
 class XmlReaderRuleSet implements RuleSet {
+
+    // W3C_XML_SCHEMA_NS_URI constant is not defined in older versions of javax.xml.XMLConstants 
+    private static final XML_SCHEMA_URI = 'http://www.w3.org/2001/XMLSchema'
 
     private static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
     private static final RULESET_SCHEMA_FILE = 'ruleset-schema.xsd'
@@ -120,7 +122,7 @@ class XmlReaderRuleSet implements RuleSet {
     }
 
     private void validateXml(String xml) {
-        def factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+        def factory = SchemaFactory.newInstance(XML_SCHEMA_URI)
         def schema = factory.newSchema(new StreamSource(getSchemaXmlInputStream()))
         def validator = schema.newValidator()
         validator.validate(new StreamSource(new StringReader(xml)))
