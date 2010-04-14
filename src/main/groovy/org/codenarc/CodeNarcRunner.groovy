@@ -78,7 +78,9 @@ class CodeNarcRunner {
             reportWriter.writeReport(analysisContext, results)
         }
 
-        LOG.info("CodeNarc completed: " + countsText + " ${elapsedTime}ms")
+        def resultsMessage = "CodeNarc completed: " + countsText + " ${elapsedTime}ms"
+        LOG.info(resultsMessage)
+        println resultsMessage
         return results
     }
 
