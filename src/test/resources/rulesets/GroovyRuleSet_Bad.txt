@@ -1,0 +1,12 @@
+// Example Groovy RuleSet for testing
+
+import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
+
+ruleset {
+    description 'A sample Groovy RuleSet'
+
+    rule(ThrowExceptionFromFinallyBlockRule) {
+        priority = 3
+        noSuchProperty = 'abc'        
+    }
+}

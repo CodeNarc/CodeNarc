@@ -38,6 +38,10 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
         assertContainsAll(errorMessage, ['DoesNotExist.xml', 'does not exist'])
     }
 
+    void testLoadGroovyRuleSet_SetNonExistentRuleProperty() {
+        shouldFailWithMessageContaining('noSuchProperty') { new GroovyDslRuleSet('rulesets/GroovyRuleSet_Bad.txt') }
+    }
+
     void testLoadGroovyRuleSet() {
         final PATH = 'rulesets/GroovyRuleSet1.txt'  // groovy files are not on classpath; have to use *.txt
         def groovyDslRuleSet = new GroovyDslRuleSet(PATH)

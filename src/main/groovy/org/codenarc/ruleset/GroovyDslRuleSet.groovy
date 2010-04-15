@@ -43,7 +43,10 @@ class GroovyDslRuleSet implements RuleSet {
 
         def ruleSetBuilder = new RuleSetBuilder()
 
-        def callRuleSet = { closure -> ruleSetBuilder.ruleset(closure) }
+        def callRuleSet = { Closure closure -> 
+            closure.resolveStrategy = Closure.DELEGATE_ONLY    // fail if access non-existent properties
+            ruleSetBuilder.ruleset(closure)
+        }
         Binding binding = new Binding(ruleset:callRuleSet)
 
         GroovyShell shell = new GroovyShell(binding);
