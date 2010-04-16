@@ -35,6 +35,17 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
+                    int count
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'int count')
+    }
+
+    void testApplyTo_SingleUnusedVariable_WithInitialExpression() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
                     int count = 23
                 }
             }
@@ -245,11 +256,11 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 def doSomething() {
                     int count = 99; println 'abc'; println "count=$count"
+                    for(int i=0; i<10; i++) { println 'me' }
                 }
             }
         '''
-        // Known limitation: Does not recognize variable references on same line as declaration
-        assertSingleViolation(SOURCE, 4, 'int count = 99')
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_Script_UnusedVariable() {

@@ -67,7 +67,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     }
     
     void visitVariableExpression(VariableExpression expression) {
-        markVariableAsReferenced(expression.name, expression.lineNumber)
+        markVariableAsReferenced(expression.name, expression)
 
         // This causes problems (StackOverflow) in Groovy 1.7.0
         //super.visitVariableExpression(expression)
@@ -81,15 +81,15 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         // But this could potentially "hide" some unused variables (i.e. false negatives).
         if (call.isImplicitThis() &&
             call.method instanceof ConstantExpression) {
-            markVariableAsReferenced(call.method.value, call.method.lineNumber)
+            markVariableAsReferenced(call.method.value, null)
         }
         super.visitMethodCallExpression(call)
     }
 
-    private void markVariableAsReferenced(String varName, Integer lineNumber) {
+    private void markVariableAsReferenced(String varName, VariableExpression varExpression) {
         for(blockVariables in variablesByBlockScope) {
             for(var in blockVariables.keySet()) {
-                if (var.name == varName && var.lineNumber != lineNumber) {
+                if (var.name == varName && var != varExpression) {
                     blockVariables[var] = true
                     return
                 }

@@ -47,7 +47,5 @@ Naming Rules  ("<rulesets/unused.xml>")
 
   Known limitations:
 
-  * Does not recognize variable references on the same line as the variable declaration.
-
   * Incorrectly considers a variable referenced if another variable with the same name is referenced
     elsewhere (in another scope/block).
