@@ -27,6 +27,8 @@ import org.codehaus.groovy.ast.stmt.CaseStatement
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codehaus.groovy.ast.stmt.CatchStatement
+import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for blocks or closures nested more than a configured maximum number.
@@ -48,8 +50,24 @@ class NestedBlockDepthRule extends AbstractAstVisitorRule {
 }
 
 class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
-    private blocksToProcess = [] as Set
+    private Set blocksToProcess = []
+    private Set closureFieldExpressions
     private nestedBlockDepth = 0
+
+    void visitClass(ClassNode classNode) {
+        addClosureFields(classNode)
+        super.visitClass(classNode)
+    }
+
+    private void addClosureFields(ClassNode classNode) {
+        closureFieldExpressions = []
+        classNode.fields.each {fieldNode ->
+            if (!AstUtil.isFromGeneratedSourceCode(fieldNode) &&
+                    fieldNode.initialExpression instanceof ClosureExpression) {
+                closureFieldExpressions << fieldNode.initialExpression 
+            }
+        }
+    }
 
     void visitBlockStatement(BlockStatement block) {
         if (isFirstVisit(block) && block in blocksToProcess) {
@@ -101,7 +119,12 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitClosureExpression(ClosureExpression expression) {
-        handleNestedNode(expression) { super.visitClosureExpression(expression) }
+        if (!closureFieldExpressions.contains(expression)) {
+            handleNestedNode(expression) { super.visitClosureExpression(expression) }
+        }
+        else {
+            super.visitClosureExpression(expression)
+        }
     }
 
     private void handleNestedNode(node, Closure callVisitorMethod) {

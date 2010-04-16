@@ -83,6 +83,38 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'element.values.each {', '6')
     }
 
+    void testIgnoresOuterClosureForNestingDepthOfClosureField() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {                           // ignore
+                    if (count > maxCount) {                 // 1
+                        while(notReady()) {                 // 2
+                            println 'not ready'
+                        }
+                    }
+                }
+            }
+            '''
+        rule.maxNestedBlockDepth = 2
+        assertNoViolations(SOURCE)
+    }
+
+    void testClosureFieldThatExceedsConfiguredNesting_CausesAViolation() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {                           // ignore
+                    if (count > maxCount) {                 // 1
+                        while(notReady()) {                 // 2
+                            println 'not ready'
+                        }
+                    }
+                }
+            }
+            '''
+        rule.maxNestedBlockDepth = 1
+        assertSingleViolation(SOURCE, 5, 'while(notReady()) {', '2')
+    }
+
     void testNestingDepthExceededForFinally_CausesAViolation() {
         final SOURCE = '''
             class MyClass {
