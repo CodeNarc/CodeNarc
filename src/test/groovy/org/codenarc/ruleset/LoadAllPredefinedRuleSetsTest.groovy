@@ -24,7 +24,7 @@ import org.codenarc.test.AbstractTestCase
  * @version $Revision$ - $Date$
  */
 class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
-    static final BASE_MESSSAGES_BUNDLE = "codenarc-base-messages"
+    static final BASE_MESSAGES_BUNDLE = "codenarc-base-messages"
     static final RULESET_FILES = [
         'rulesets/basic.xml',
         'rulesets/braces.xml',
@@ -54,7 +54,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
 
     void setUp() {
         super.setUp()
-        messages = ResourceBundle.getBundle(BASE_MESSSAGES_BUNDLE);
+        messages = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE);
     }
 
     private void assertDescriptionInMessagesBundle(String ruleName) {
