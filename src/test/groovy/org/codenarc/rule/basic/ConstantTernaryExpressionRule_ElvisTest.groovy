@@ -24,7 +24,7 @@ import org.codenarc.rule.Rule
  * @see ConstantTernaryExpressionRuleTest
  *
  * @author Chris Mair
- * @version $Revision: 292 $ - $Date: 2010-01-16 22:09:23 -0500 (Sat, 16 Jan 2010) $
+ * @version $Revision$ - $Date$
  */
 class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
 

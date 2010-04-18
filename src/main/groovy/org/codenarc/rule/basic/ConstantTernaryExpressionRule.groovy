@@ -24,24 +24,24 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 /**
  * Rule that checks for ternary expressions with a constant value for the boolean expression, such as:
  * <ul>
- *   <li><code>true ? x : y</code></ul>
- *   <li><code>false ? x : y</code></ul>
- *   <li><code>Boolean.TRUE ? x : y</code></ul>
- *   <li><code>Boolean.FALSE ? x : y</code></ul>
- *   <li><code>null ? x : y</code></ul>
- *   <li><code>0 ? x : y</code></ul>
- *   <li><code>99.7 ? x : y</code></ul>
- *   <li><code>"" ? x : y</code></ul>
- *   <li><code>"abc" ? x : y</code></ul>
+ *   <li><code>true ? x : y</code></li>
+ *   <li><code>false ? x : y</code></li>
+ *   <li><code>Boolean.TRUE ? x : y</code></li>
+ *   <li><code>Boolean.FALSE ? x : y</code></li>
+ *   <li><code>null ? x : y</code></li>
+ *   <li><code>0 ? x : y</code></li>
+ *   <li><code>99.7 ? x : y</code></li>
+ *   <li><code>"" ? x : y</code></li>
+ *   <li><code>"abc" ? x : y</code></li>
  * </ul>
  *
  * Also checks for the same types of constant values for the boolean expressions within the "short"
  * ternary expressions, also known as the "Elvis" operator, e.g.:
  * <ul>
- *   <li><code>true ?: y</code></ul>
- *   <li><code>null ?: y</code></ul>
- *   <li><code>99.7 ?: y</code></ul>
- *   <li><code>"abc" ?: y</code></ul>
+ *   <li><code>true ?: y</code></li>
+ *   <li><code>null ?: y</code></li>
+ *   <li><code>99.7 ?: y</code></li>
+ *   <li><code>"abc" ?: y</code></li>
  * </ul>
  *
  * @author Chris Mair

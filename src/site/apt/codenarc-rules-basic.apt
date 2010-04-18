@@ -42,7 +42,7 @@ Basic Rules  ("<rulesets/basic.xml>")
     "abc" ? x : y
 -------------------------------------------------------------------------------
 
- Also checks for the same types of constant values for the boolean expressions within the "short"
+ The rule also checks for the same types of constant values for the boolean expressions within the "short"
  ternary expressions, also known as the "Elvis" operator, e.g.:
 
 -------------------------------------------------------------------------------
@@ -288,5 +288,28 @@ Basic Rules  ("<rulesets/basic.xml>")
             throw new Exception()   // violation
         }
     }
+-------------------------------------------------------------------------------
+
+
+* UnnecessaryTernaryExpression Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for ternary expressions where the <true> and <false> expressions are merely returning
+ <<<true>>> and <<<false>>> constants, and thus can be replaced by a simple boolean expression.
+ Examples of violations include:
+
+-------------------------------------------------------------------------------
+    boolean result = x ? true : false                   // can be replaced by boolean result = x
+    boolean result = x ? false : true                   // can be replaced by boolean result = !x
+    boolean result = x ? Boolean.TRUE : Boolean.FALSE   // can be replaced by boolean result = x
+    boolean result = x ? Boolean.FALSE : Boolean.TRUE   // can be replaced by boolean result = !x
+-------------------------------------------------------------------------------
+
+ The rule also checks for ternary expressions where the <true> and <false> expressions are
+ exactly the same. Examples include:
+
+-------------------------------------------------------------------------------
+    def result = x ? '123' : '123'                  // can be replaced by def result = '123'
+    def result = x ? increment(y) : increment(y)    // can be replaced by def result = increment(y)
 -------------------------------------------------------------------------------
 
