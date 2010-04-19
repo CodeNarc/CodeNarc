@@ -19,7 +19,6 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 import org.codehaus.groovy.ast.expr.TernaryExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Rule that checks for ternary expressions with a constant value for the boolean expression, such as:
@@ -54,15 +53,11 @@ class ConstantTernaryExpressionRule extends AbstractAstVisitorRule {
 }
 
 class ConstantTernaryExpressionAstVisitor extends AbstractAstVisitor  {
-    private static final BOOLEAN_CLASS = Boolean.name
-    private static final CONSTANTS = ['Boolean.TRUE', 'Boolean.FALSE', 'null']
 
     void visitTernaryExpression(TernaryExpression ternaryExpression) {
         if (isFirstVisit(ternaryExpression)) {
             def booleanExpression = ternaryExpression.booleanExpression
-            def expression = booleanExpression.expression
-            def type = expression.type
-            if (type.name == BOOLEAN_CLASS || expression instanceof ConstantExpression || booleanExpression.text in CONSTANTS) {
+            if (isConstantBooleanExpression(booleanExpression)) {
                 addViolation(ternaryExpression)
             }
         }

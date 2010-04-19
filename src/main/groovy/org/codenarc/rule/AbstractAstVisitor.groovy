@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceCode
+import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Abstract superclass for Groovy AST Visitors used with Rules
@@ -29,6 +30,8 @@ import org.codenarc.source.SourceCode
 abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
     public static final MAX_SOURCE_LINE_LENGTH = 60
     public static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
+    protected static final CONSTANT_EXPRESSION_VALUES = ['Boolean.TRUE', 'Boolean.FALSE', 'null']
+    protected static final BOOLEAN_CLASS = Boolean.name
     List violations = []
     Rule rule
     SourceCode sourceCode
@@ -48,6 +51,12 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
             visited << expression
             return true
         }
+    }
+
+    protected boolean isConstantBooleanExpression(booleanExpression) {
+        def expression = booleanExpression.expression
+        def type = expression.type
+        return type.name == BOOLEAN_CLASS || expression instanceof ConstantExpression || booleanExpression.text in CONSTANT_EXPRESSION_VALUES
     }
 
     /**
