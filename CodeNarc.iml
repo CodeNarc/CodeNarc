@@ -216,6 +216,17 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="GROOVY-1.6" level="application" />
+    <orderEntry type="module-library">
+      <library name="GMetrics-0.2">
+        <CLASSES>
+          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.2/GMetrics-0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.2/GMetrics-0.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
 

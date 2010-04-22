@@ -52,7 +52,7 @@ abstract class AbstractTestCase extends GroovyTestCase {
      * @param strings - the Strings that must be present within text 
      */
     protected void assertContainsAll(String text, strings) {
-        assert containsAll(text, strings), "text does not contain [$string]"
+        strings.each { assert text.contains(it), "text does not contain [$it]" }
     }
 
     /**

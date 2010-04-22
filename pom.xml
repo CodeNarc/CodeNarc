@@ -29,6 +29,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.gmetrics</groupId>
+            <artifactId>GMetrics</artifactId>
+            <version>0.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.codehaus.groovy.maven.runtime</groupId>
             <artifactId>gmaven-runtime-1.5</artifactId>
             <version>1.0</version>
