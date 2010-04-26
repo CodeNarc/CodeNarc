@@ -17,6 +17,70 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
+* CyclomaticComplexity Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Calculates the <Cyclomatic Complexity> for methods/classes and checks against configured threshold values.
+
+  The <<maxMethodComplexity>> property holds the threshold value for the cyclomatic complexity
+ value for each method. If this value is non-zero, a method with a cyclomatic complexity value greater than
+ this value is considered a violation.
+
+ The <<maxClassAverageMethodComplexity>> property holds the threshold value for the average cyclomatic
+ complexity value for each class. If this value is non-zero, a class with an average cyclomatic complexity
+ value greater than this value is considered a violation.
+
+ This rule treats "closure fields" as methods. If a class field is initialized to a Closure (ClosureExpression),
+ then that Closure is analyzed and checked just like a method.
+
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>                    | <<Description>>                                                | <<Default Value>>      |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| maxMethodComplexity             | The maximum <cyclomatic complexity> value allowed for a single | 20                     |
+|                                 | method (or "closure field"). If zero or <null>, then do not    |                        |
+|                                 | check method-level complexity.                                 |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| maxClassAverageMethodComplexity | The maximum <cyclomatic complexity> value allowed for a class, | 20                     |
+|                                 | calculated as the average complexity of its methods or         |                        |
+|                                 | "closure fields". If zero or <null>, then do not check         |                        |
+|                                 | class-level complexity.                                        |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+
+** Cyclomatic Complexity Metric Calculation Rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <cyclomatic complexity> value is calculated as follows:
+
+  <Start with a initial (default) value of one (1).
+  Add one (1) for each occurrence of each of the following:>
+
+     * <<<if>>> statement
+
+     * <<<while>>> statement
+
+     * <<<for>>> statement
+
+     * <<<case>>> statement
+
+     * <<<catch>>> statement
+
+     * <<<&&>>> and <<<||>>> boolean operations
+
+     * <<<?:>>> ternary operator and <<<?:>>> <Elvis> operator.
+
+     * <<<?.>>> null-check operator
+
+** Notes
+~~~~~~~~~
+
+  * See the {{{http://en.wikipedia.org/wiki/Cyclomatic_complexity}Cyclomatic Complexity Wikipedia entry}}
+
+  * See the {{{http://www.literateprogramming.com/mccabe.pdf}original paper describing Cyclomatic Complexity}}
+
+  * See the {{{http://gmetrics.sourceforge.net/gmetrics-CyclomaticComplexityMetric.html}GMetrics Cyclomatic Complexity metric}}.
+    This includes a discussion of guidelines for interpreting <cyclomatic complexity> values.
+
+
 * MethodSize Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

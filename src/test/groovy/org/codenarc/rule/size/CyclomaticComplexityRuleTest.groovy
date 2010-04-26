@@ -69,6 +69,16 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, ['myMethod', '6'])
     }
 
+    void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
+        final SOURCE = """
+            class MyClass {
+                def myClosure = { return a && b && c && d && e }
+            }
+        """
+        rule.maxMethodComplexity = 2
+        assertSingleViolation(SOURCE, null, null, ['myClosure', '5'])
+    }
+
     void testApplyTo_TwoMethodsExceedsMaxMethodComplexity() {
         final SOURCE = """
             class MyClass {
@@ -117,6 +127,24 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE,
                 null, null, ['myMethod3', '6'],
                 null, null, ['MyClass', '3.3'])
+    }
+
+    void testApplyTo_ClassAndMethods_AtThreshold() {
+        final SOURCE = """
+            class MyClass {
+                def myMethod1() {
+                    return a && b && c
+                }
+                def myClosure = { a ?: (b ?: c) }
+
+                def myMethod2() {
+                    return a || b || c
+                }
+            }
+        """
+        rule.maxMethodComplexity = 3
+        rule.maxClassAverageMethodComplexity = 3
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NoClassDefinition() {

@@ -23,7 +23,7 @@ import org.gmetrics.metric.cyclomatic.CyclomaticComplexityMetric
 import org.codenarc.util.AstUtil
 
 /**
- * Rule that calculates the Cyclomatic Complexity for methods/classes/packages and checks against
+ * Rule that calculates the Cyclomatic Complexity for methods/classes and checks against
  * configured threshold values.
  * <p/>
  * The <code>maxMethodComplexity</code> property holds the threshold value for the cyclomatic complexity
@@ -38,6 +38,8 @@ import org.codenarc.util.AstUtil
  * This rule treats "closure fields" as methods. If a class field is initialized to a Closure (ClosureExpression),
  * then that Closure is analyzed and checked just like a method.
  *
+ * @see <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity Wikipedia entry</a>.
+ * @see <a href="http://www.literateprogramming.com/mccabe.pdf">The original paper describing Cyclomatic Complexity</a>.
  * @see <a href="http://gmetrics.sourceforge.net/gmetrics-CyclomaticComplexityMetric.html">GMetrics Cyclomatic Complexity metric</a>.
  *
  * @author Chris Mair

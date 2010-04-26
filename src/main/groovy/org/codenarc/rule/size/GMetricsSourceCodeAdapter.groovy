@@ -1,8 +1,3 @@
-package org.codenarc.rule.size
-
-import org.gmetrics.source.SourceCode
-import org.codehaus.groovy.ast.ModuleNode
-
 /*
  * Copyright 2010 the original author or authors.
  * 
@@ -18,11 +13,23 @@ import org.codehaus.groovy.ast.ModuleNode
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.codenarc.rule.size
+
+import org.gmetrics.source.SourceCode
+import org.codehaus.groovy.ast.ModuleNode
+
+/**
+ * Adapter that adapts from a GMetrics SourceCode object to a CodeNarc SourceCode object.
+ *
+ * @author Chris Mair
+ * @version $Revision$ - $Date$
+ */
 class GMetricsSourceCodeAdapter implements SourceCode {
 
     private codeNarcSourceCode
 
     GMetricsSourceCodeAdapter(org.codenarc.source.SourceCode sourceCode) {
+        assert sourceCode
         codeNarcSourceCode = sourceCode
     }
 
