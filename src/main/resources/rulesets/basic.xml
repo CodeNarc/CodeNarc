@@ -25,5 +25,4 @@
     <rule class='org.codenarc.rule.basic.StringInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryTernaryExpressionRule'/>
-
 </ruleset>

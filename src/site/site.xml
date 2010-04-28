@@ -60,7 +60,7 @@
         <menu name="Rules">
             <item name="Basic Rules" href="/codenarc-rules-basic.html"/>
             <item name="Braces Rules" href="/codenarc-rules-braces.html"/>
-            <!-- <item name="Design Rules" href="/codenarc-rules-design.html"/> -->
+            <item name="Concurrency Rules" href="/codenarc-rules-concurrency.html"/>
             <item name="Exceptions Rules" href="/codenarc-rules-exceptions.html"/>
             <item name="Generic Rules" href="/codenarc-rules-generic.html"/>
             <item name="Grails Rules" href="/codenarc-rules-grails.html"/>

@@ -1,0 +1,14 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Concurrency rule set.
+        These rules check for unsafe or unrecommended practices related to concurrency.
+    </description>
+
+    <rule class='org.codenarc.rule.concurrency.SynchronizedMethodRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedOnThisRule'/>
+
+</ruleset>
