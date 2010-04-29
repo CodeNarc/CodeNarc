@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for SynchronizedOnThisRule.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 257 $ - $Date: 2009-12-25 23:07:22 +0100 (Fri, 25 Dec 2009) $
+ * @version $Revision$ - $Date$
  */
 class SynchronizedOnThisRuleTest extends AbstractRuleTestCase {
 

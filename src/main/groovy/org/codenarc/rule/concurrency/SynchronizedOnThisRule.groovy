@@ -27,7 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * of deadlock, it is better to synchronize on internal objects.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 139 $ - $Date: 2009-05-08 03:55:09 +0200 (Fri, 08 May 2009) $
+ * @version $Revision$ - $Date$
  */
 class SynchronizedOnThisRule extends AbstractAstVisitorRule {
 

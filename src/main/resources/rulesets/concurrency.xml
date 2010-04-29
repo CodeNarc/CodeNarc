@@ -10,5 +10,6 @@
 
     <rule class='org.codenarc.rule.concurrency.SynchronizedMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnThisRule'/>
+    <rule class='org.codenarc.rule.concurrency.SystemRunFinalizersOnExitRule'/>
 
 </ruleset>
