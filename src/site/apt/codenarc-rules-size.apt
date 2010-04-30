@@ -80,6 +80,10 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
   * See the {{{http://gmetrics.sourceforge.net/gmetrics-CyclomaticComplexityMetric.html}GMetrics Cyclomatic Complexity metric}}.
     This includes a discussion of guidelines for interpreting <cyclomatic complexity> values.
 
+  * This rule requires Groovy 1.6 (or later).
+
+  * This rule requires the GMetrics jar on the classpath. See {{{http://gmetrics.sourceforge.net/}GMetrics}}.
+
 
 * MethodSize Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
