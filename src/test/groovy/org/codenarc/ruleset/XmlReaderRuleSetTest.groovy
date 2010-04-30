@@ -182,7 +182,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
             <ruleset $NAMESPACE>
                 <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
                     <exclude name='TestPath'/>
-                    <exclude name='EmptyIfStatement'/>
+                    <exclude name='EmptyIf*'/>
                 </ruleset-ref>
                 <rule class='org.codenarc.rule.imports.DuplicateImportRule'/>
             </ruleset>"""
@@ -201,7 +201,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
                     <include name='EmptyIfStatement'/>
                 </ruleset-ref>
                 <ruleset-ref path='rulesets/GroovyRuleSet1.txt'>
-                    <include name='CatchThrowable'/>
+                    <include name='Cat*Throwable'/>
                 </ruleset-ref>
                 <rule class='org.codenarc.rule.imports.DuplicateImportRule'>
                     <property name='priority' value='1'/>
