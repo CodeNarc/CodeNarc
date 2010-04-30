@@ -104,7 +104,7 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     private String getHtmlRuleDescription(Rule rule) {
         def resourceKey = rule.name + '.description.html'
-        return getResourceBundleString(resourceKey, null)
+        return getResourceBundleString(resourceKey, null, false)
     }
 
     private String getRuleDescriptionOrDefaultMessage(Rule rule) {
@@ -116,12 +116,14 @@ abstract class AbstractReportWriter implements ReportWriter {
         return AstUtil.respondsTo(rule, 'getDescription') ? rule.description : null
     }
 
-    protected String getResourceBundleString(String resourceKey, String defaultString='?') {
+    protected String getResourceBundleString(String resourceKey, String defaultString='?', boolean logWarning=true) {
         def string = defaultString
         try {
             string = resourceBundle.getString(resourceKey)
         } catch (MissingResourceException e) {
-            LOG.warn("No string found for resourceKey=[$resourceKey]")
+            if (logWarning) {
+                LOG.warn("No string found for resourceKey=[$resourceKey]")
+            }
         }
         return string
     }
