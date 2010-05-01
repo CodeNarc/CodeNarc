@@ -62,10 +62,10 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assertEqualSets(paths, ["SourceFile1.groovy", "SourceFile2.groovy"])
 
         def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
-        assert fullPaths == [
+        assertEqualSets(fullPaths, [
                 'src/test/resources/source/SourceFile1.groovy',
                 'src/test/resources/source/SourceFile2.groovy'
-        ]
+        ])
         assert results.numberOfFilesWithViolations == 2
         assert results.totalNumberOfFiles == 2
     }
@@ -76,13 +76,13 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         log("results=$results")
 
         def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
-        assert fullPaths == [
+        assertEqualSets(fullPaths, [
                 'src/test/resources/sourcewithdirs/SourceFile1.groovy',
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
-        ]
+        ])
         assert testCountRule.count == 5
         assert results.numberOfFilesWithViolations == 5
         assert results.totalNumberOfFiles == 5
@@ -90,10 +90,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         // Verify that the directory structure is properly reflected within the results
         assert childResultsClasses(results) == [DirectoryResults]
         def top = results.children[0]
-        assert childResultsClasses(top) == [FileResults, DirectoryResults, DirectoryResults]
-        assert childResultsClasses(top.children[1]) == [FileResults, FileResults]
-        assert childResultsClasses(top.children[2]) == [DirectoryResults, FileResults]
-        assert childResultsClasses(top.children[2].children[0]) == [FileResults]
+        assertEqualSets(childResultsClasses(top), [FileResults, DirectoryResults, DirectoryResults])
     }
 
     void testAnalyze_NoViolations() {
@@ -119,11 +116,11 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         log("results=$results")
 
         def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
-        assert fullPaths == [
+        assertEqualSets(fullPaths, [
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
-        ]
+        ])
 
         assert testCountRule.count == 3
         assert results.numberOfFilesWithViolations == 3
