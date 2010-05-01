@@ -48,11 +48,6 @@ class SystemRunFinalizersOnExitAstVisitor extends AbstractAstVisitor  {
                 }
             }
         }
-        super.visitMethodCallExpression(call);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-
-    def void visitStaticMethodCallExpression(StaticMethodCallExpression call) {
-        super.visitStaticMethodCallExpression(call);    
+        super.visitMethodCallExpression(call);    
     }
 }
