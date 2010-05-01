@@ -26,7 +26,11 @@ import org.codenarc.util.WildcardPattern
  * <p/>
  * The <code>maxLines</code> property holds the threshold value for the maximum number of lines. A
  * method length (number of lines) greater than that value is considered a violation. The
- * <code>maxLines</code> property defaults to 100.   
+ * <code>maxLines</code> property defaults to 100.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more
+ * (comma-separated) method names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$

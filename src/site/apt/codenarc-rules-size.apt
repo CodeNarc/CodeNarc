@@ -45,6 +45,11 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 |                                 | "closure fields". If zero or <null>, then do not check         |                        |
 |                                 | class-level complexity.                                        |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
+| ignoreMethodNames               | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
+|                                 | that should not cause a rule violation. The names may          |                        |
+|                                 | optionally contain wildcards (*,?). Note that the ignored      |                        |
+|                                 | methods still contribute to the class complexity value.        |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
 
 ** Cyclomatic Complexity Metric Calculation Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

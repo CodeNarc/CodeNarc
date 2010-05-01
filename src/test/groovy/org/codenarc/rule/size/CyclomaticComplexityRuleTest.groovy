@@ -26,8 +26,6 @@ import org.codenarc.rule.Rule
  */
 class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
 
-    // TODO tests for closure fields
-
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CyclomaticComplexity'
@@ -145,6 +143,50 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         rule.maxMethodComplexity = 3
         rule.maxClassAverageMethodComplexity = 3
         assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
+        final SOURCE = """
+            class MyClass {
+                def myMethod() {
+                    return a && b && c && d && e && f
+                }
+            }
+        """
+        rule.ignoreMethodNames = 'myMethod'
+        rule.maxMethodComplexity = 1
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
+        final SOURCE = """
+            class MyClass {
+                def myMethod() {
+                    return a && b && c && d && e && f
+                }
+            }
+        """
+        rule.ignoreMethodNames = 'otherMethod'
+        rule.maxMethodComplexity = 1
+        assertSingleViolation(SOURCE, null, null, ['myMethod', '6'])
+    }
+
+    void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
+        final SOURCE = """
+            class MyClass {
+                def myMethod() {
+                    return a && b && c && d && e && f
+                }
+                def myClosure = { a ?: (b ?: c) }
+                def otherClosure = { a ?: (b ?: c) }
+                def myMethod2() {
+                    return a || b || c
+                }
+            }
+        """
+        rule.ignoreMethodNames = 'myM*d*,otherC??su*'
+        rule.maxMethodComplexity = 1
+        assertSingleViolation(SOURCE, null, null, ['myClosure', '3'])
     }
 
     void testApplyTo_NoClassDefinition() {

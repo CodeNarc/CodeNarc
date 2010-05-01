@@ -21,6 +21,8 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.gmetrics.metric.cyclomatic.CyclomaticComplexityMetric
 import org.codenarc.util.AstUtil
+import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Rule that calculates the Cyclomatic Complexity for methods/classes and checks against
@@ -34,6 +36,11 @@ import org.codenarc.util.AstUtil
  * complexity value for each class. If this value is non-zero, a class with an average cyclomatic complexity
  * value greater than this value is considered a violation. The <code>maxMethodComplexity</code> property
  * defaults to 20.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method
+ * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
+ * include wildcard characters ('*' or '?'). Note that the ignored methods still contribute to the class
+ * complexity value.
  * <p/>
  * This rule treats "closure fields" as methods. If a class field is initialized to a Closure (ClosureExpression),
  * then that Closure is analyzed and checked just like a method.
@@ -51,6 +58,7 @@ class CyclomaticComplexityRule extends AbstractAstVisitorRule {
     Class astVisitorClass = CyclomaticComplexityAstVisitor
     int maxMethodComplexity = 20
     int maxClassAverageMethodComplexity = 20
+    String ignoreMethodNames
 }
 
 class CyclomaticComplexityAstVisitor extends AbstractAstVisitor  {
@@ -75,7 +83,7 @@ class CyclomaticComplexityAstVisitor extends AbstractAstVisitor  {
     private void checkMethods(classMetricResult) {
         def methodResults = classMetricResult.methodMetricResults
         methodResults.each { methodName, results ->
-            if (results.total > rule.maxMethodComplexity) {
+            if (results.total > rule.maxMethodComplexity && !isIgnoredMethodName(methodName)) {
                 def message = "The cyclomatic complexity for method [$methodName] is [${results.total}]"
                 // TODO include line number and source line
                 violations.add(new Violation(rule:rule, message:message))
@@ -90,5 +98,9 @@ class CyclomaticComplexityAstVisitor extends AbstractAstVisitor  {
             // TODO include line number and source line
             violations.add(new Violation(rule:rule, message:message))
         }
+    }
+
+    private boolean isIgnoredMethodName(String methodName) {
+        return new WildcardPattern(rule.ignoreMethodNames, false).matches(methodName)
     }
 }
