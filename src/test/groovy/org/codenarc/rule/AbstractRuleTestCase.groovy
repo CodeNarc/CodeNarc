@@ -156,7 +156,10 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         assert violation.lineNumber == lineNumber
         if (sourceLineText) {
             assert violation.sourceLine 
-            assert violation.sourceLine.contains(sourceLineText), "sourceLineText=[$sourceLineText]"
+            assert violation.sourceLine.contains(sourceLineText), """
+expected to contain:  $sourceLineText
+actual:  $violation.sourceLine
+"""
         }
         if (messageText) {
             assert violation.message, "The violation message was null"
