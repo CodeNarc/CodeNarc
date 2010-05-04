@@ -8,6 +8,7 @@
         These rules check against thresholds for code size.
     </description>
 
+    <rule class='org.codenarc.rule.size.AbcComplexityRule'/>
     <rule class='org.codenarc.rule.size.ClassSizeRule'/>
     <rule class='org.codenarc.rule.size.CyclomaticComplexityRule'/>
     <rule class='org.codenarc.rule.size.MethodSizeRule'/>

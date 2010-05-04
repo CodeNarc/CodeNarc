@@ -5,6 +5,82 @@
 Size and Complexity Rules  ("<rulesets/size.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* AbcComplexity Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Calculates the <ABC> metric for methods/classes and checks against configured threshold values.
+
+  The <<maxMethodComplexity>> property holds the threshold value for the ABC complexity
+  value (score) for each method. If this value is non-zero, a method with a complexity value greater than
+  this value is considered a violation.
+
+  The <<maxClassAverageMethodComplexity>> property holds the threshold value for the average ABC
+  complexity value (score) for each class. If this value is non-zero, a class with an average complexity
+  value greater than this value is considered a violation.
+
+  This rule treats "closure fields" as methods. If a class field is initialized to a Closure (ClosureExpression),
+  then that Closure is analyzed and checked just like a method.
+
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>                    | <<Description>>                                                | <<Default Value>>      |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| maxMethodComplexity             | The maximum <ABC complexity> value (score) allowed for a single| 40                     |
+|                                 | method (or "closure field"). If zero or <null>, then do not    |                        |
+|                                 | check method-level complexity.                                 |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| maxClassAverageMethodComplexity | The maximum <ABC complexity> value (score) allowed for a class,| 40                     |
+|                                 | calculated as the average complexity of its methods or         |                        |
+|                                 | "closure fields". If zero or <null>, then do not check         |                        |
+|                                 | class-level complexity.                                        |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| ignoreMethodNames               | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
+|                                 | that should not cause a rule violation. The names may          |                        |
+|                                 | optionally contain wildcards (*,?). Note that the ignored      |                        |
+|                                 | methods still contribute to the class complexity value.        |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+
+** ABC Size/Complexity Metric Calculation Rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  The <ABC complexity> value (score) is calculated as follows:
+  The <ABC> metric measures size/complexity by counting the number of Assignments (A), Branches (B) and
+  Conditions (C) and assigns a single numerical score calculated as:
+
+  <<< |ABC| = sqrt((A*A)+(B*B)+(C*C)) >>>
+
+  The <ABC Metric> calculation rules for Groovy:
+
+  * Add one to the <assignment> count for each occurrence of an assignment operator, excluding constant
+    declarations: = *= /= %= += <<= >>= &= |= ^= >>>=
+
+  * Add one to the <assignment> count for each occurrence of an increment or decrement operator
+    (prefix or postfix): ++ --
+
+  * Add one to the <branch> count for each function call or class method call.
+
+  * Add one to the <branch> count for each occurrence of the new operator.
+
+  * Add one to the <condition> count for each use of a conditional operator: == != <= >= < > <=> =~ ==~
+
+  * Add one to the <condition> count for each use of the following keywords: else case default try catch ?
+
+  * Add one to the <condition> count for each unary conditional expression.
+
+** Notes
+~~~~~~~~~
+
+  * See the {{{http://www.softwarerenovation.com/ABCMetric.pdf}ABC Metric specification}}
+
+  * See the {{{http://jakescruggs.blogspot.com/2008/08/whats-good-flog-score.html}Blog post}} describing guidelines for interpreting an ABC score
+
+  * See the {{{http://gmetrics.sourceforge.net/gmetrics-AbcMetric.html}GMetrics ABC metric}}.
+    This includes a discussion of guidelines for interpreting <ABC> scores.
+
+  * This rule requires Groovy 1.6 (or later).
+
+  * This rule requires the GMetrics jar on the classpath. See {{{http://gmetrics.sourceforge.net/}GMetrics}}.
+
+
 * ClassSize Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

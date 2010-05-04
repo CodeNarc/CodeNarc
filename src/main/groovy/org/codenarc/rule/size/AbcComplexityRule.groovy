@@ -16,20 +16,22 @@
 package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.gmetrics.metric.cyclomatic.CyclomaticComplexityMetric
+import org.gmetrics.metric.abc.AbcMetric
 
 /**
- * Rule that calculates the Cyclomatic Complexity for methods/classes and checks against
+ * Rule that calculates the ABC Complexity for methods/classes and checks against
  * configured threshold values.
  * <p/>
- * The <code>maxMethodComplexity</code> property holds the threshold value for the cyclomatic complexity
- * value for each method. If this value is non-zero, a method with a cyclomatic complexity value greater than
- * this value is considered a violation. The <code>maxMethodComplexity</code> property defaults to 20.
+ * The <code>maxMethodComplexity</code> property holds the threshold value for the ABC complexity value
+ * (magnitude) for each method. If this value is non-zero, a method with a cyclomatic complexity value greater than
+ * this value is considered a violation. The value does not have to be an integer (i.e., 1.7 is allowed). The
+ * <code>maxMethodComplexity</code> property defaults to 40.
  * <p/>
- * The <code>maxClassAverageMethodComplexity</code> property holds the threshold value for the average cyclomatic
- * complexity value for each class. If this value is non-zero, a class with an average cyclomatic complexity
- * value greater than this value is considered a violation. The <code>maxMethodComplexity</code> property
- * defaults to 20.
+ * The <code>maxClassAverageMethodComplexity</code> property holds the threshold value for the average ABC
+ * complexity value for each class. If this value is non-zero, a class with an average ABC complexity
+ * value greater than this value is considered a violation. The value does not have to be an integer
+ * (i.e., 1.7 is allowed). The <code>maxMethodComplexity</code> property defaults to 40.The
+ * <code>maxMethodComplexity</code> property defaults to 40.
  * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method
  * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
@@ -39,30 +41,30 @@ import org.gmetrics.metric.cyclomatic.CyclomaticComplexityMetric
  * This rule treats "closure fields" as methods. If a class field is initialized to a Closure (ClosureExpression),
  * then that Closure is analyzed and checked just like a method.
  *
- * @see <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity Wikipedia entry</a>.
- * @see <a href="http://www.literateprogramming.com/mccabe.pdf">The original paper describing Cyclomatic Complexity</a>.
- * @see <a href="http://gmetrics.sourceforge.net/gmetrics-CyclomaticComplexityMetric.html">GMetrics Cyclomatic Complexity metric</a>.
+ * @see <a href="http://www.softwarerenovation.com/ABCMetric.pdf">ABC Metric specification</a>.
+ * @see <a href="http://jakescruggs.blogspot.com/2008/08/whats-good-flog-score.html">Blog post</a> describing guidelines for interpreting an ABC score.
+ * @see <a href="http://gmetrics.sourceforge.net/gmetrics-AbcMetric.html">GMetrics ABC metric</a>.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CyclomaticComplexityRule extends AbstractAstVisitorRule {
-    String name = 'CyclomaticComplexity'
+class AbcComplexityRule extends AbstractAstVisitorRule {
+    String name = 'AbcComplexity'
     int priority = 2
-    Class astVisitorClass = CyclomaticComplexityAstVisitor
-    int maxMethodComplexity = 20
-    int maxClassAverageMethodComplexity = 20
+    Class astVisitorClass = AbcComplexityAstVisitor
+    int maxMethodComplexity = 40
+    int maxClassAverageMethodComplexity = 40
     String ignoreMethodNames
 }
 
-class CyclomaticComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
+class AbcComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
 
     protected Object createMetric() {
-        return new CyclomaticComplexityMetric()
+        return new AbcMetric()
     }
 
     protected String getMetricShortDescription() {
-        return 'cyclomatic complexity'
+        return 'ABC size/complexity'
     }
 
     protected Object getMaxMethodMetricValue() {

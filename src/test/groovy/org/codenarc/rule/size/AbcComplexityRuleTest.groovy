@@ -19,18 +19,18 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for CyclomaticComplexityRule
+ * Tests for AbcComplexityRule
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
+class AbcComplexityRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'CyclomaticComplexity'
-        assert rule.maxMethodComplexity == 20
-        assert rule.maxClassAverageMethodComplexity == 20
+        assert rule.name == 'AbcComplexity'
+        assert rule.maxMethodComplexity == 40
+        assert rule.maxClassAverageMethodComplexity == 40
     }
 
     void testApplyTo_ClassWithNoMethods() {
@@ -42,15 +42,19 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_SingleMethod_EqualToMaxMethodComplexity() {
+    void testApplyTo_SingleMethod_EqualToClassAndMethodThreshold() {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e
+                    switch(x) {
+                        case 1: break
+                        case 3: break
+                    }
                 }
             }
         """
-        rule.maxMethodComplexity = 5
+        rule.maxMethodComplexity = 2
+        rule.maxClassAverageMethodComplexity = 2
         assertNoViolations(SOURCE)
     }
 
@@ -58,23 +62,23 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a = 1; b = 2; c = 3
                 }
             }
         """
-        rule.maxMethodComplexity = 5
+        rule.maxMethodComplexity = 2
         // TODO include line number and source line
-        assertSingleViolation(SOURCE, null, null, ['myMethod', '6'])
+        assertSingleViolation(SOURCE, null, null, ['myMethod', '3.0'])
     }
 
     void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
         final SOURCE = """
             class MyClass {
-                def myClosure = { return a && b && c && d && e }
+                def myClosure = { a.someMethod(); b.aProperty }
             }
         """
-        rule.maxMethodComplexity = 2
-        assertSingleViolation(SOURCE, null, null, ['myClosure', '5'])
+        rule.maxMethodComplexity = 1
+        assertSingleViolation(SOURCE, null, null, ['myClosure', '2.0'])
     }
 
     void testApplyTo_TwoMethodsExceedsMaxMethodComplexity() {
@@ -111,7 +115,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod1() {
-                    return a && b && c
+                    return a = 1; b = 2
                 }
                 def myMethod2(int someValue) { println 'ok' }
 
@@ -120,29 +124,11 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         """
-        rule.maxMethodComplexity = 5
-        rule.maxClassAverageMethodComplexity = 3
+        rule.maxMethodComplexity = 4.5
+        rule.maxClassAverageMethodComplexity = 1.9
         assertTwoViolations(SOURCE,
                 null, null, ['myMethod3', '6'],
-                null, null, ['MyClass', '3.3'])
-    }
-
-    void testApplyTo_ClassAndMethods_AtThreshold() {
-        final SOURCE = """
-            class MyClass {
-                def myMethod1() {
-                    return a && b && c
-                }
-                def myClosure = { a ?: (b ?: c) }
-
-                def myMethod2() {
-                    return a || b || c
-                }
-            }
-        """
-        rule.maxMethodComplexity = 3
-        rule.maxClassAverageMethodComplexity = 3
-        assertNoViolations(SOURCE)
+                null, null, ['MyClass', '2.2'])
     }
 
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
@@ -177,7 +163,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
                 def myMethod() {
                     return a && b && c && d && e && f
                 }
-                def myClosure = { a ?: (b ?: c) }
+                def myClosure = { a && b && c }
                 def otherClosure = { a ?: (b ?: c) }
                 def myMethod2() {
                     return a || b || c
@@ -212,7 +198,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new CyclomaticComplexityRule()
+        return new AbcComplexityRule()
     }
 
 }
