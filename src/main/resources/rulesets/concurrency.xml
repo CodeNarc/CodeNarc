@@ -8,6 +8,7 @@
         These rules check for unsafe or unrecommended practices related to concurrency.
     </description>
 
+    <rule class='org.codenarc.rule.concurrency.NestedSynchronizationRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnThisRule'/>
     <rule class='org.codenarc.rule.concurrency.SystemRunFinalizersOnExitRule'/>

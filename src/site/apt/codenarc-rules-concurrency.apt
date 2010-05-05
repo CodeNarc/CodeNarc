@@ -5,6 +5,34 @@
 Concurrency Rules  ("<rulesets/concurrency.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+* NestedSynchronization Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This rule reports occurrences of nested <<<synchronized>>> statements.
+
+  Nested <<<synchronized>>> statements should be avoided. Nested <<<synchronized>>> statements
+  are either useless (if the lock objects are identical) or prone to deadlock.
+
+  Note that a <closure> or an <anonymous inner class> carries its own context (scope).
+  A <<<synchronized>>> statement within a <closure> or an <anonymous inner class> defined
+  within an outer <<<synchronized>>> statement does not cause a violation (though nested
+  <<<synchronized>>> statements within either of those will). 
+
+  Here is an example of code that produces a violation:
+
+-------------------------------------------------------------------------------
+                def myMethod() {
+                    synchronized(this) {
+                        // do something ...
+                        synchronized(this) {
+                            // do something else ...
+                        }
+                    }
+                }
+-------------------------------------------------------------------------------
+
+
 * SynchronizedMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -58,7 +86,6 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-
 * ThreadLocalNotStaticFinal Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -77,9 +104,6 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
     protected ThreadLocal local3 = new ThreadLocal()
     ThreadLocal local4 = new ThreadLocal()
 -------------------------------------------------------------------------------
-
-
-
 
 
 * ThreadYield Rule

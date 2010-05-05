@@ -35,7 +35,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     List violations = []
     Rule rule
     SourceCode sourceCode
-    private Set visited = new HashSet()
+    Set visited = [] as Set
 
     /**
      * Return true if the AST expression has not already been visited. If it is
@@ -80,6 +80,14 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
             def sourceLine = sourceLine(node)
             violations.add(new Violation(rule:rule, sourceLine:sourceLine, lineNumber:lineNumber, message:message))
         }
+    }
+
+    /**
+     * Add a new Violation to the list of violations found by this visitor.
+     * @param violation - the violation to add
+     */
+    protected void addViolation(Violation violation) {
+        violations.add(violation)
     }
 
     protected SourceUnit getSourceUnit() {
