@@ -10,7 +10,7 @@ import org.codenarc.rule.Violation
  * Rule to detect nested synchronization blocks.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
+ * @version $Revision$ - $Date$
  */
 class NestedSynchronizationRule extends AbstractAstVisitorRule {
 

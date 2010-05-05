@@ -13,7 +13,7 @@ import java.lang.reflect.Modifier
  * bug which can cause memory leaks and possibly incorrect behavior.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 335 $ - $Date: 2010-05-01 02:09:20 +0200 (Sat, 01 May 2010) $
+ * @version $Revision$ - $Date$
  */
 class ThreadLocalNotStaticFinalRule extends AbstractAstVisitorRule {
 
