@@ -25,13 +25,12 @@ import org.gmetrics.metric.abc.AbcMetric
  * The <code>maxMethodComplexity</code> property holds the threshold value for the ABC complexity value
  * (magnitude) for each method. If this value is non-zero, a method with a cyclomatic complexity value greater than
  * this value is considered a violation. The value does not have to be an integer (i.e., 1.7 is allowed). The
- * <code>maxMethodComplexity</code> property defaults to 40.
+ * <code>maxMethodComplexity</code> property defaults to 60.
  * <p/>
  * The <code>maxClassAverageMethodComplexity</code> property holds the threshold value for the average ABC
  * complexity value for each class. If this value is non-zero, a class with an average ABC complexity
  * value greater than this value is considered a violation. The value does not have to be an integer
- * (i.e., 1.7 is allowed). The <code>maxMethodComplexity</code> property defaults to 40.The
- * <code>maxMethodComplexity</code> property defaults to 40.
+ * (i.e., 1.7 is allowed). The <code>maxClassAverageMethodComplexity</code> property defaults to 60.
  * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method
  * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
@@ -52,8 +51,8 @@ class AbcComplexityRule extends AbstractAstVisitorRule {
     String name = 'AbcComplexity'
     int priority = 2
     Class astVisitorClass = AbcComplexityAstVisitor
-    int maxMethodComplexity = 40
-    int maxClassAverageMethodComplexity = 40
+    int maxMethodComplexity = 60
+    int maxClassAverageMethodComplexity = 60
     String ignoreMethodNames
 }
 
@@ -64,7 +63,7 @@ class AbcComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
     }
 
     protected String getMetricShortDescription() {
-        return 'ABC size/complexity'
+        return 'ABC score'
     }
 
     protected Object getMaxMethodMetricValue() {

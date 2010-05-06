@@ -24,11 +24,11 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *---------------------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>                    | <<Description>>                                                | <<Default Value>>      |
 *---------------------------------+----------------------------------------------------------------+------------------------+
-| maxMethodComplexity             | The maximum <ABC complexity> value (score) allowed for a single| 40                     |
+| maxMethodComplexity             | The maximum <ABC complexity> value (score) allowed for a single| 60                     |
 |                                 | method (or "closure field"). If zero or <null>, then do not    |                        |
 |                                 | check method-level complexity.                                 |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
-| maxClassAverageMethodComplexity | The maximum <ABC complexity> value (score) allowed for a class,| 40                     |
+| maxClassAverageMethodComplexity | The maximum <ABC complexity> value (score) allowed for a class,| 60                     |
 |                                 | calculated as the average complexity of its methods or         |                        |
 |                                 | "closure fields". If zero or <null>, then do not check         |                        |
 |                                 | class-level complexity.                                        |                        |

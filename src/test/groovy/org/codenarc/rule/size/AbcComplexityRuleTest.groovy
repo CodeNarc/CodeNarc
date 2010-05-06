@@ -29,8 +29,8 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AbcComplexity'
-        assert rule.maxMethodComplexity == 40
-        assert rule.maxClassAverageMethodComplexity == 40
+        assert rule.maxMethodComplexity == 60
+        assert rule.maxClassAverageMethodComplexity == 60
     }
 
     void testApplyTo_ClassWithNoMethods() {
