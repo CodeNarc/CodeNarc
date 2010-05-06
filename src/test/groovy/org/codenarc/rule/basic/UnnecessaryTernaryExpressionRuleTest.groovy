@@ -55,12 +55,59 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = ready ? false : true', 3, 'def y = ready ? Boolean.FALSE : Boolean.TRUE')
     }
 
-    void testApplyTo_TrueAndFalseExpressionsAreTheSame_IsAViolation() {
+    void testApplyTo_TrueAndFalseExpressionsAreTheSameLiteral_IsAViolation() {
         final SOURCE = '''
             def x = ready ? 123 : 123
+            def y = ready ? "abc" : "abc"
+        '''
+        assertTwoViolations(SOURCE, 2, 'def x = ready ? 123 : 123', 3, 'def y = ready ? "abc" : "abc"')
+    }
+
+    void testApplyTo_TrueAndFalseExpressionsAreBothTrueOrBothFalse_IsAViolation() {
+        final SOURCE = '''
+            def x = ready ? true : true
+            def y = ready ? false : false
+        '''
+        assertTwoViolations(SOURCE, 2, 'def x = ready ? true : true', 3, 'def y = ready ? false : false')
+    }
+
+    void testApplyTo_TrueAndFalseExpressionsAreBothNull_IsAViolation() {
+        final SOURCE = '''
+            def x = ready ? null : null
+        '''
+        assertSingleViolation(SOURCE, 2, 'def x = ready ? null : null')
+    }
+
+    void testApplyTo_TrueAndFalseExpressionsAreBothEmptyString_IsAViolation() {
+        final SOURCE = '''
+            def x = ready ? '' : ""
+        '''
+        assertSingleViolation(SOURCE, 2, /def x = ready ? '' : ""/)
+    }
+
+    void testApplyTo_TrueAndFalseExpressionsAreTheSameVariable_IsAViolation() {
+        final SOURCE = '''
+            def x = ready ? MAX_VALUE : MAX_VALUE
+            def y = ready ? result : result
+        '''
+        assertTwoViolations(SOURCE, 2, 'def x = ready ? MAX_VALUE : MAX_VALUE', 3, 'def y = ready ? result : result')
+    }
+
+    void testApplyTo_TrueAndFalseExpressionsAreTheSameMethodCall_NotAViolation() {
+        final SOURCE = '''
+            def x = ready ? process('abc') : process('abc')
             def y = ready ? increment(x) : increment(x)
         '''
-        assertTwoViolations(SOURCE, 2, 'def x = ready ? 123 : 123', 3, 'def y = ready ? increment(x) : increment(x)')
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ComplexExpressions_NotAViolation() {
+        final SOURCE = '''
+            transactionTypes.equals('ALL') ?
+                myService.findAllWidgetsByPlan{ plan -> valueOne } :
+                myService.findAllWidgetsByPlan{ plan -> valueTwo }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NoViolations() {
@@ -72,6 +119,8 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
             x = ready ? Boolean.TRUE : x+1
             x = ready ? increment(y) : increment(z)
             x = ready ? 99 : 98+1
+            x = ready ? MIN_VALUE : MAX_VALUE
+            x = ready ? MAX_VALUE + 1 : MAX_VALUE
         '''
         assertNoViolations(SOURCE)
     }

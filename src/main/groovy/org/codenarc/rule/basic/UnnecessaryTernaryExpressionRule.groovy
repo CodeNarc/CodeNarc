@@ -20,6 +20,8 @@ import org.codenarc.rule.AbstractAstVisitorRule
 
 import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 
 /**
  * Rule that checks for ternary expressions where the true and false expressions are merely returning
@@ -32,11 +34,12 @@ import org.codehaus.groovy.ast.expr.Expression
  *   <li><code>boolean result = x ? Boolean.FALSE : Boolean.TRUE</code> - can be replaced by <code>boolean result = !x</code></li>
  * </ul>
  *
- * The rule also checks for ternary expressions where the true and false expressions are exactly the same.
- * Examples include:
+ * The rule also checks for ternary expressions where the true and false expressions are the same constant or
+ * variable expression. Examples include:
  * <ul>
  *   <li><code>def result = x ? '123' : '123'</code> - can be replaced by <code>def result = '123'</code></li>
- *   <li><code>def result = x ? increment(y) : increment(y)</code> - can be replaced by <code>def result = increment(y)</code></li>
+ *   <li><code>def result = x ? null : null</code> - can be replaced by <code>def result = null</code></li>
+ *   <li><code>def result = x ? MAX_VALUE : MAX_VALUE</code> - can be replaced by <code>def result = MAX_VALUE</code></li>
  * </ul>
  *
  * @author Chris Mair
@@ -62,7 +65,17 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean areBothTheSame(Expression trueExpression, Expression falseExpression) {
-        return trueExpression.text == falseExpression.text
+        if (trueExpression instanceof ConstantExpression && falseExpression instanceof ConstantExpression
+            && trueExpression.getValue() == falseExpression.getValue()) {
+            return true
+        }
+
+        if (trueExpression instanceof VariableExpression && falseExpression instanceof VariableExpression
+            && trueExpression.getName() == falseExpression.getName()) {
+            return true
+        }
+
+        return false
     }
 
     private boolean areTrueAndFalse(Expression trueExpression, Expression falseExpression) {

@@ -341,10 +341,11 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
  The rule also checks for ternary expressions where the <true> and <false> expressions are
- exactly the same. Examples include:
+ the same constant or variable. Examples include:
 
 -------------------------------------------------------------------------------
-    def result = x ? '123' : '123'                  // can be replaced by def result = '123'
-    def result = x ? increment(y) : increment(y)    // can be replaced by def result = increment(y)
+    def result = x ? '123' : '123'              // can be replaced by def result = '123'
+    def result = x ? null : null                // can be replaced by def result = null
+    def result = x ? MAX_VALUE : MAX_VALUE      // can be replaced by def result = MAX_VALUE
+    def result = ready ? minValue : minValue    // can be replaced by def result = minValue
 -------------------------------------------------------------------------------
-
