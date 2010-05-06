@@ -9,6 +9,7 @@
     </description>
 
     <rule class='org.codenarc.rule.basic.BooleanInstantiationRule'/>
+    <rule class='org.codenarc.rule.basic.CloneableWithoutCloneRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
     <rule class='org.codenarc.rule.basic.EqualsAndHashCodeRule'/>
