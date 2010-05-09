@@ -69,7 +69,7 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
         def groovyDslRuleSet = new GroovyDslRuleSet(PATH)
         def rules = groovyDslRuleSet.rules
         log("rules=$rules")
-        assert rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock']
+        assert rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'StatelessClass']
         assert rules[0].priority == 3
         assert !rules[0].enabled
         assert rules[1].priority == 3

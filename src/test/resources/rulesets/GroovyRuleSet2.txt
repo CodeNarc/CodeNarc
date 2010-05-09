@@ -9,4 +9,8 @@ ruleset {
             priority = 3
         }
     }
+
+    rule(org.codenarc.rule.generic.StatelessClassRule) {
+        addToIgnoreFieldNames = '*Test*'
+    }
 }

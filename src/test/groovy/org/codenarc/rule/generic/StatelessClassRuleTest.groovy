@@ -100,7 +100,8 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             long otherMax
           }
         '''
-        rule.ignoreFieldNames = 'oth*,deposit??ount'
+        rule.ignoreFieldNames = 'oth*,xxxx'
+        rule.addToIgnoreFieldNames = 'yyy,deposit??ount'
         assertSingleViolation(SOURCE, 5, 'int count')
     }
 
@@ -156,6 +157,23 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
+    }
+
+    void testSetAddToIgnoreFieldNames_IgnoreFieldNamesIsNull() {
+        rule.setAddToIgnoreFieldNames('abc')
+        assert rule.ignoreFieldNames == 'abc'
+    }
+
+    void testSetAddToIgnoreFieldNames_IgnoreFieldNamesAlreadySet() {
+        rule.ignoreFieldNames = 'abc'
+        rule.setAddToIgnoreFieldNames('def,ghi')
+        assert rule.ignoreFieldNames == 'abc,def,ghi'
+    }
+
+    void testSetAddToIgnoreFieldNames_MultipleCalls_AddToIgnoreFieldNames() {
+        rule.setAddToIgnoreFieldNames('abc,d*f')
+        rule.addToIgnoreFieldNames = 'gh?'
+        assert rule.ignoreFieldNames == 'abc,d*f,gh?'
     }
 
     void setUp() {

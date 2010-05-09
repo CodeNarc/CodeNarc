@@ -90,13 +90,13 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     void testCreateRuleSet_MultipleRuleSets() {
         codeNarcRunner.ruleSetFiles = RULESET_FILES
         def ruleSet = codeNarcRunner.createRuleSet()
-        assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock']
+        assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'StatelessClass']
     }
 
     void testCreateRuleSet_MultipleRuleSets_WithSpaces() {
         codeNarcRunner.ruleSetFiles = RULESET_FILES_WITH_SPACES
         def ruleSet = codeNarcRunner.createRuleSet()
-        assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'Stub']
+        assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'StatelessClass', 'Stub']
     }
 
     //--------------------------------------------------------------------------
