@@ -27,7 +27,7 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
     private static final RULESET_FILES = 'RunCodeNarcAgainstProjectSourceCode.ruleset'
 
     void testRunCodeNarc() {
-        System.setProperty('codenarc.properties.file', 'RunCodeNarcAgainstProjectSourceCode.properties') // ignore
+        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'RunCodeNarcAgainstProjectSourceCode.properties') // ignore
         def ant = new AntBuilder()
 
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
@@ -45,6 +45,11 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
                option(name:'writeToStandardOut', value:true)
            }
         }
+    }
+
+    void tearDown() {
+        super.tearDown()
+        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, '')
     }
 
 }

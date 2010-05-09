@@ -23,6 +23,8 @@ package org.codenarc.test
  */
 abstract class AbstractTestCase extends GroovyTestCase {
 
+    protected static final CODENARC_PROPERTIES_FILE_PROP = 'codenarc.properties.file'
+
     /**
      * Assert that the specified closure should throw an exception whose message contains text
      * @param text - the text expected within the message; may be a single String or a List of Strings

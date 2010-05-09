@@ -85,6 +85,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
         codeNarcTask.reportWriters = [reportWriter]
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
+        log("rules=${analysisContext.ruleSet.rules}")
         assert analysisContext.ruleSet.rules[0].priority == 3
     }
 
