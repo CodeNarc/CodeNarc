@@ -85,6 +85,21 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
 
     /**
      * Apply the current Rule to the specified source (String) and assert that it results
+     * in the violations specified in violationMaps.
+     * @param source - the full source code to which the rule is applied, as a String
+     * @param violationMaps - a list (array) of Maps, each describing a single violation.
+     *      Each element in the map can contain a lineNumber and sourceLineText entries.
+     */
+    protected void assertViolations(String source, Map[] violationMaps) {
+        def violations = applyRuleTo(source)
+        assert violations.size() == violationMaps.size(), "Expected ${violationMaps.size()} violations\nFound ${violations.size()}: $violations\n"
+        violationMaps.eachWithIndex { violationMap, index ->
+            assertViolation(violations[index], violationMap.lineNumber, violationMap.sourceLineText)
+        }
+    }
+
+    /**
+     * Apply the current Rule to the specified source (String) and assert that it results
      * in two violations with the specified line numbers and containing the specified source text values.
      * @param source - the full source code to which the rule is applied, as a String
      * @param lineNumber1 - the expected line number in the first violation
