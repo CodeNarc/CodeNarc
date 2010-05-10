@@ -29,6 +29,10 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
     static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'
     static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
+    void testDisabledByDefault() {
+        assert new GrailsSessionReferenceRule().enabled == false
+    }
+
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsSessionReference'
@@ -109,6 +113,6 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new GrailsSessionReferenceRule()
+        return new GrailsSessionReferenceRule(enabled:true)
     }
 }

@@ -52,8 +52,14 @@ Grails Rules  ("<rulesets/grails.xml>")
   with a different regular expression value if appropriate.
 
 
-* GrailsSessionReference Rule
+* GrailsSessionReference Rule (deprecated)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*-------------------------------------------------------------------------------------------------+
+| <<NOTE:>> This rule has been <<DEPRECATED>>, and disabled by default (i.e., by setting its
+| <enabled> property to <false>). Please email the {{{mailto:codenarc-user@lists.sourceforge.net}CodeNarc User Mailing List}}
+| if you have an opinion for/against deprecation and eventual removal of this rule.
+*-------------------------------------------------------------------------------------------------+
 
   Rule that checks for references to the <<<session>>> object from within Grails controller and
   taglib classes.

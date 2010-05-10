@@ -36,6 +36,8 @@ import org.codehaus.groovy.ast.expr.VariableExpression
  * under the 'grails-app/controllers' or 'grails-app/taglib' folders. You can override this
  * with a different regular expression value if appropriate.
  *
+ * @deprecated This rule is deprecated and disabled (enabled=false) by default
+ *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
@@ -44,6 +46,10 @@ class GrailsSessionReferenceRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = GrailsSessionReferenceAstVisitor
     String applyToFilesMatching = GrailsUtil.CONTROLLERS_AND_TAGLIB_FILES
+
+    GrailsSessionReferenceRule() {
+        this.enabled = false        // deprecated; disabled by default
+    }
 }
 
 class GrailsSessionReferenceAstVisitor extends AbstractAstVisitor  {

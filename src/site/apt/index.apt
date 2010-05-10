@@ -8,7 +8,7 @@ CodeNarc
   The <<CodeNarc>> project provides a static analysis tool and framework for analyzing Groovy source code.
 
   <<CodeNarc>> scans Groovy source code,
-  looking for violations of predefined or custom rules and generates an HTML report of the results.
+  looking for violations of predefined or custom rules and generates an HTML or XML report of the results.
   These rules include checks for coding standards, or searching for unused code, possible bugs or
   bad coding practices.
 
