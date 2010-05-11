@@ -255,6 +255,7 @@
       <words>
         <w>junit</w>
         <w>plugins</w>
+        <w>println</w>
         <w>regex</w>
         <w>ruleset</w>
         <w>timestamp</w>

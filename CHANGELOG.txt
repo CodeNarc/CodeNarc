@@ -2,6 +2,45 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.9 (10 May 2010)
+------------------------------------
+BUG FIXES
+- Fix bug #2985592: “MissingPropertyException: No such property: W3C_XML_SCHEMA_NS_URI”.
+- XML RuleSet: Allow wildcards (*) in <include> and <exclude>.
+- WildcardPattern: Escape plus sign ('+').
+- NestedBlockDepthRule: Ignore first level of closure for Closure Fields (since they are really equivalent to methods).
+NEW SIZE/COMPLEXITY RULES
+- AbcComplexityRule - Check ABC size/complexity score against threshold for method and class average (size)
+- CyclomaticComplexityRule - Check Cyclomatic Complexity against threshold for method and class average (size)
+NEW CONCURRENCY RULES
+- NestedSynchronizationRule (concurrency - Hamlet D’Arcy)
+- RunFinalizersOnExitRule (concurrency - Hamlet D’Arcy)
+- SynchronizedMethodRule (concurrency - Hamlet D’Arcy) 
+- SynchronizedOnThisRule (concurrency - Hamlet D’Arcy)
+- ThreadLocalNotStaticFinalRule (concurrency - Hamlet D’Arcy)
+- ThreadYieldRule: (concurrency - Hamlet D’Arcy)
+- VolatileLongOrDoubleFieldRule: (concurrency - Hamlet D’Arcy)
+NEW BASIC RULES
+- CloneableWithoutCloneRule (basic - Hamlet D'Arcy & René Gröschke)
+- ConstantIfExpressionRule: if(true) or if(false). Or literal constant. (basic)
+- ConstantTernaryExpressionRule: true ? x : y or false, null or literal.(basic)
+- UnnecessaryTernaryExpressionRule: x ? true : false. Or Boolean.TRUE. Or where both expressions are the same. (basic)
+OTHER CHANGES
+- Deprecate GrailsSessionReferenceRule. Default enabled to false. Note in online docs.
+- StatelessClassRule: Add setAddToIgnoreFieldNames() method (adds to ignoreFieldNames).
+- Add new <rule>.description.html property for each rule. Change the HtmlReportWriter to look for *.description.html first; if not defined, use *.description. Continue to use *.description in XML report. Potential BREAKAGE: If you have overridden the “<rule>.description” message for a predefined rule in a “codenarc-messages.properties” file, you will have to change those message keys to “<rule>.description.html”.
+- Do not include disabled rules in list of rules at bottom of HTML/XML report.
+- HtmlReportWriter: Don’t log warning if "codenarc-messages.properties" contains *.description but not *.description.html.
+- UnusedVariableRule: Fix limitation: Does not recognize variable references on the same line as the variable declaration.
+- GroovyDslRuleSet: Throw MissingPropertyException if a non-existent property is set within a Groovy RuleSet DSL.
+- CodeNarcRunner: Add System.out println of summary counts.
+- MethodSizeRule: Apply to constructors as well.
+- WildcardPattern: Trim pattern values. This includes property values such as common rule properties applyToFileNames/doNotApplyToFileNames, applyToClassNames/doNotApplyToClassNames. Or many rule-specific properties such as ignoreMethodNames for the MethodSizeRule.
+- PropertiesFileRuleSetConfigurer: Log warning if rule name not found.
+- TESTS: AbstractRuleTestCase: Add assertViolations(String source, Map[] violationMaps) helper method.
+- TESTS: Fix tests broken on Linux.
+
+
 Changes in version 0.8.1 (2 Feb 2010)
 ------------------------------------
 BUG FIXES
