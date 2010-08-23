@@ -3,7 +3,6 @@ package org.codenarc.rule.concurrency
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.ClassHelper
 import java.lang.reflect.Modifier
 
 /**

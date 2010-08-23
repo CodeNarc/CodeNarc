@@ -20,7 +20,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.SpreadExpression
 
 /**
  * Method calls to System.runFinalizersOnExit() should not be allowed. This method is inherently

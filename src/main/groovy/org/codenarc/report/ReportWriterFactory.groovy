@@ -33,6 +33,7 @@ class ReportWriterFactory {
             case 'html': return new HtmlReportWriter()
             case 'xml': return new XmlReportWriter()
             case 'text': return new TextReportWriter()
+            case 'inlinexml' : return new InlineXmlReportWriter()
         }
 
         def reportClass = getClass().classLoader.loadClass(type)

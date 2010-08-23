@@ -55,13 +55,13 @@ class XmlReportWriter extends AbstractReportWriter {
     // Internal Helper Methods
     //--------------------------------------------------------------------------
 
-    private buildReportElement() {
+    protected buildReportElement() {
         return {
             Report(timestamp:getFormattedTimestamp())
         }
     }
 
-    private buildProjectElement(AnalysisContext analysisContext) {
+    protected buildProjectElement(AnalysisContext analysisContext) {
         return {
             Project(title:title) {
                 analysisContext.sourceDirectories.each { sourceDirectory ->
@@ -71,11 +71,11 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    private buildPackageElements(results) {
+    protected buildPackageElements(results) {
         return buildPackageElement(results)
     }
 
-    private buildPackageElement(results) {
+    protected buildPackageElement(results) {
         def elementName = isRoot(results) ? 'PackageSummary' : 'Package'
         return {
             "$elementName"(buildPackageAttributeMap(results)) {
@@ -93,7 +93,7 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    private Map buildPackageAttributeMap(results) {
+    protected Map buildPackageAttributeMap(results) {
         def attributeMap = [
             totalFiles: results.getTotalNumberOfFiles(),
             filesWithViolations: results.getNumberOfFilesWithViolations(),
@@ -107,11 +107,11 @@ class XmlReportWriter extends AbstractReportWriter {
         return attributeMap
     }
 
-    private boolean isRoot(results) {
+    protected boolean isRoot(results) {
         results.path == null
     }
 
-    private buildFileElement(FileResults results) {
+    protected buildFileElement(FileResults results) {
         return {
             def name = PathUtil.getName(results.path)
             File(name: name) {
@@ -122,7 +122,7 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    private buildViolationElement(Violation violation) {
+    protected buildViolationElement(Violation violation) {
         def rule = violation.rule
         return {
             Violation(ruleName:rule.name, priority:rule.priority, lineNumber:violation.lineNumber) {
@@ -132,15 +132,15 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    private buildSourceLineElement(Violation violation) {
+    protected buildSourceLineElement(Violation violation) {
         return (violation.sourceLine) ? { SourceLine(cdata(violation.sourceLine)) } : null
     }
 
-    private buildMessageElement(Violation violation) {
+    protected buildMessageElement(Violation violation) {
         return (violation.message) ? { Message(cdata(violation.message)) } : null
     }
 
-    private buildRulesElement(AnalysisContext analysisContext) {
+    protected buildRulesElement(AnalysisContext analysisContext) {
         def sortedRules = getSortedRules(analysisContext)
         return {
             Rules() {
@@ -154,7 +154,7 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    private cdata(String text) {
+    protected cdata(String text) {
         return { unescaped << "<![CDATA[" + text + "]]>" }
     }
 
