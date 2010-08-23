@@ -23,6 +23,7 @@ import org.codenarc.rule.Violation
  * This makes it easy for Hudson to parse
  *
  * @author Robin Bramley
+ * @version $Revision$ - $Date$
  */
 class InlineXmlReportWriter extends XmlReportWriter {
 

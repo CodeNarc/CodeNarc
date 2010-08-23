@@ -29,6 +29,7 @@ import java.text.DateFormat
  * Tests for InlineXmlReportWriter.
  *
  * @author Robin Bramley
+ * @version $Revision$ - $Date$
  */
 class InlineXmlReportWriterTest extends AbstractTestCase {
 

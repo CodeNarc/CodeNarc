@@ -18,9 +18,9 @@ package org.codenarc.report
 /**
  * Factory for ReportWriter objects based on the report type (name).
  * <p>
- * The passed in <code>type</code> can either be one of the predefined type names: "html" or "xml", or
- * else it can specify the fully-qualified class name of a class (accessible on the classpath) that
- * implements the <code>org.codenarc.report.ReportWriter</code> interface.
+ * The passed in <code>type</code> can either be one of the predefined type names: "html", "xml",
+ * "inlineXml", or else it can specify the fully-qualified class name of a class (accessible on
+ * the classpath) that implements the <code>org.codenarc.report.ReportWriter</code> interface.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -33,7 +33,7 @@ class ReportWriterFactory {
             case 'html': return new HtmlReportWriter()
             case 'xml': return new XmlReportWriter()
             case 'text': return new TextReportWriter()
-            case 'inlinexml' : return new InlineXmlReportWriter()
+            case 'inlineXml' : return new InlineXmlReportWriter()
         }
 
         def reportClass = getClass().classLoader.loadClass(type)

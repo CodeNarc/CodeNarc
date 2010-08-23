@@ -37,6 +37,10 @@ class ReportWriterFactoryTest extends AbstractTestCase {
         assert reportWriterFactory.getReportWriter('xml').class == XmlReportWriter 
     }
 
+    void testGetReportWriter_InlineXml() {
+        assert reportWriterFactory.getReportWriter('inlineXml').class == InlineXmlReportWriter 
+    }
+
     void testGetReportWriter_Text() {
         assert reportWriterFactory.getReportWriter('text').class == TextReportWriter
     }
