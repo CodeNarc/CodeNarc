@@ -104,6 +104,12 @@ Grails Rules  ("<rulesets/grails.xml>")
 |                     | should be ignored (i.e., that should not cause a rule          | transactional,*Service'>>>            |
 |                     | violation). The names may optionally contain wildcards (*,?).  |                                       |
 *---------------------+----------------------------------------------------------------+---------------------------------------+
+| addToIgnoreFieldNames| Specifies one or more (comma-separated) field names to be     | <<<null>>>                            |
+|                     | added to the <<<ignoreFieldNames>>> property value. This is a  |                                       |
+|                     | special write-only property, and each call to                  |                                       |
+|                     | <<<setAddIgnoreFieldNames()>>> adds to (rather than overwrites)|                                       |
+|                     | the list of field names to be ignored.                         |                                       |
+*-----------------------+----------------------------------------------------------------+-------------------------------------+
 | ignoreFieldTypes    | Specifies one or more (comma-separated) field types that       | <<<null>>>                            |
 |                     | should be ignored (i.e., that should not cause a rule          |                                       |
 |                     | violation). The names may optionally contain wildcards (*,?).  |                                       |

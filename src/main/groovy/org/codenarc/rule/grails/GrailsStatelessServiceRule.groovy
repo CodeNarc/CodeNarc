@@ -31,7 +31,10 @@ import org.codenarc.rule.generic.StatelessClassRule
  * <p/>
  * The <code>ignoreFieldNames</code> property specifies one or more (comma-separated) field names
  * that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
- * include wildcard characters ('*' or '?').
+ * include wildcard characters ('*' or '?').  You can add to the field names to be ignored by setting
+ * the (write-only) <code>addIgnoreFieldNames</code> property. This is a "special" property -- each
+ * call to <code>setAddIgnoreFieldNames()</code> adds to the existing <code>ignoreFieldNames</code>
+ * property value.
  * <p/>
  * The <code>ignoreFieldTypes</code> property specifies one or more (comma-separated) field type names
  * that should be ignored (i.e., that should not cause a rule violation). The type name(s) may optionally
