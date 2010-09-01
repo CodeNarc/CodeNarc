@@ -116,9 +116,7 @@ class RuleSetDelegate {
 
     def methodMissing(String name, args) {
         def rule = findRule(name)
-        if (!rule) {
-            throw new RuntimeException("No such rule named [$name]")
-        }
+        assert rule, "No such rule named [$name]"
 
         def arg = args[0]
         if (arg instanceof Closure) {
