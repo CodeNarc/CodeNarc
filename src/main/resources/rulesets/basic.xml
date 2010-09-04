@@ -8,6 +8,7 @@
         These rules are intended to be broadly (if not universally) applicable.
     </description>
 
+    <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.BooleanInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.CloneableWithoutCloneRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>

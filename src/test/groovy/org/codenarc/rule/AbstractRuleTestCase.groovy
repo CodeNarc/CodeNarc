@@ -94,6 +94,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         def violations = applyRuleTo(source)
         assert violations.size() == violationMaps.size(), "Expected ${violationMaps.size()} violations\nFound ${violations.size()}: $violations\n"
         violationMaps.eachWithIndex { violationMap, index ->
+            assert violationMap.keySet().every { key -> key in ['lineNumber', 'sourceLineText'] },"violationMap keys must be 'lineNumber' and/or 'sourceLineText'"
             assertViolation(violations[index], violationMap.lineNumber, violationMap.sourceLineText)
         }
     }
