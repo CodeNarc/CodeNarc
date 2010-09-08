@@ -29,6 +29,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
         'rulesets/basic.xml',
         'rulesets/braces.xml',
         'rulesets/concurrency.xml',
+        'rulesets/design.xml',
         'rulesets/exceptions.xml',
         'rulesets/generic.xml',
         'rulesets/grails.xml',

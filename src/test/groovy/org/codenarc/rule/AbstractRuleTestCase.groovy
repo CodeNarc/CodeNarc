@@ -129,7 +129,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, messageText=null) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 1, "Expected 1 Violation\nFound: $violations\n"
+        assert violations.size() == 1, "Expected 1 Violation\nFound: $violations\n  for sourceLineText: [$sourceLineText]"
         assertViolation(violations[0], lineNumber, sourceLineText, messageText)
     }
 

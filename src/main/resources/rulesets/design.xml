@@ -8,5 +8,6 @@
         These rules implement standards and best practices related to design issues.
     </description>
 
+    <rule class='org.codenarc.rule.design.ImplementationAsTypeRule'/>
 
 </ruleset>
