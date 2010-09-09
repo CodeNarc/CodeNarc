@@ -79,15 +79,12 @@ Generic Rules  ("<rulesets/generic.xml>")
 **  Notes
 ~~~~~~~~~~~~
 
-  [[1]]  Either the <<<applyToFileNames>>> or <<<applyToFilesMatching>>> must be set
-  (not empty or null), or else this rule does nothing.
-
-  [[2]]  The <<<ignoreFieldTypes>>> property matches the field type name as indicated
+  [[1]]  The <<<ignoreFieldTypes>>> property matches the field type name as indicated
   in the field declaration, only including a full package specification IF it is included in
   the source code. For example, the field declaration <<<BigDecimal value>>> matches
   an <<<ignoreFieldTypes>>> value of <<<BigDecimal>>>, but not
   <<<java.lang.BigDecimal>>>.
 
-  [[3]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
+  [[2]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
   with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
 
