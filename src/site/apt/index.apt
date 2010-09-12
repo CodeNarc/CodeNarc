@@ -24,7 +24,8 @@ CodeNarc
 
   <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
   and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well
-  as others.
+  as the extensive Groovy static analysis checks performed by the
+  {{{http://www.jetbrains.com/idea/}IntelliJ IDEA}} IDE.
 
 * Integration with Other Tools and Frameworks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,28 +43,18 @@ CodeNarc
 
   The <<CodeNarc>> project requires:
 
-  *  Groovy version 1.5.6 or later
+  *  Groovy version 1.6 or later
+
+  * Java 1.5 or later.
 
   * The {{{http://logging.apache.org/log4j/index.html}Log4J}} jar, version 1.2.13 or later,
     accessible on the classpath.
-
-  * If you are using Java 1.4, then you will also need JAXP on the classpath.  
-
-
-* Compatibility Testing
-~~~~~~~~~~~~~~~~~~~~~~~
-
-  <<CodeNarc>> has been tested with:
-
-  * Groovy 1.5.6, 1.5.7 and 1.6.0
-
-  * Java 1.4, 1.5 and 1.6
 
 
 * Getting CodeNarc from the Maven2 Central Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  For projects built using {{{http://maven.apache.org/}Maven}}, <<CodeNarc>> is now available
+  For projects built using {{{http://maven.apache.org/}Maven}}, <<CodeNarc>> is available
   from the <<Maven Central Repository>>.
 
     * <<groupId>> = <<<org.codenarc>>>
