@@ -371,3 +371,30 @@ Basic Rules  ("<rulesets/basic.xml>")
     x ? MAX_VALUE : MAX_VALUE      // can be replaced by: MAX_VALUE
     ready ? minValue : minValue    // can be replaced by: minValue
 -------------------------------------------------------------------------------
+
+
+* UnnecessaryIfStatement Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for <<if>> statements where the <if> and <else> blocks are merely returning
+ <<<true>>> and <<<false>>> constants. These cases can be replaced by a simple return
+ statement. Examples of violations include:
+
+-------------------------------------------------------------------------------
+    if (someExpression)         // can be replaced by: return someExpression
+        return true
+    else
+        return false
+
+    if (someExpression) {       // can be replaced by: return someExpression
+        return true
+    } else {
+        return false
+    }
+
+    if (someExpression) {       // can be replaced by: return someExpression
+        return Boolean.TRUE
+    } else {
+        return Boolean.FALSE
+    }
+-------------------------------------------------------------------------------
