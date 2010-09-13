@@ -2,8 +2,22 @@
 					  CodeNarc - Unused Rules
 		--------------------------------------------------
 
-Naming Rules  ("<rulesets/unused.xml>")
+Unused Rules  ("<rulesets/unused.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* UnusedArray Rule
+~~~~~~~~~~~~~~~~~~~
+
+  Checks for array allocations that are not assigned or used (i.e., ignored). An
+  example of a violation is:
+
+-------------------------------------------------------------------------------
+    def myMethod() {
+        new String[3]               // unused
+        println "do stuff..."
+    }
+-------------------------------------------------------------------------------
+
 
 * UnusedPrivateField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
