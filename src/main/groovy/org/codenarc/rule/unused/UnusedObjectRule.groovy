@@ -15,28 +15,28 @@
  */
 package org.codenarc.rule.unused
 
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
-import org.codehaus.groovy.ast.expr.ArrayExpression
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * Checks for array allocations that are not assigned or used (i.e., it is ignored).
- * Ignores unassigned arrays if the construction is the last statement within a block,
+ * Checks for object constructions that are not assigned or used (i.e., ignored).
+ * Ignores unassigned objects if the construction is the last statement within a block,
  * because it may be the intentional return value.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class UnusedArrayRule extends AbstractAstVisitorRule {
-    String name = 'UnusedArray'
+class UnusedObjectRule extends AbstractAstVisitorRule {
+    String name = 'UnusedObject'
     int priority = 2
-    Class astVisitorClass = UnusedArrayAstVisitor
+    Class astVisitorClass = UnusedObjectAstVisitor
 }
 
-class UnusedArrayAstVisitor extends AbstractLastStatementInBlockAstVisitor {
+class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
 
     void visitExpressionStatement(ExpressionStatement statement) {
-        if (statement.expression instanceof ArrayExpression && !isLastStatementInBlock(statement)) {
+        if (statement.expression instanceof ConstructorCallExpression && !isLastStatementInBlock(statement)) {
             addViolation(statement)
         }
         super.visitExpressionStatement(statement)

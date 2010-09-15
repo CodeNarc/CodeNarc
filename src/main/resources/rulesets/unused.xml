@@ -8,9 +8,10 @@
         These rules check for unused definitions within the source code.
     </description>
 
+    <rule class='org.codenarc.rule.unused.UnusedArrayRule'/>
+    <rule class='org.codenarc.rule.unused.UnusedObjectRule'/>
     <rule class='org.codenarc.rule.unused.UnusedPrivateFieldRule'/>
     <rule class='org.codenarc.rule.unused.UnusedPrivateMethodRule'/>
     <rule class='org.codenarc.rule.unused.UnusedVariableRule'/>
 
-    <rule class='org.codenarc.rule.unused.UnusedArrayRule'/>
 </ruleset>

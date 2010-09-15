@@ -19,62 +19,65 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for UnusedArrayRule
+ * Tests for UnusedObjectRule
  *
  * @author Your Name Here
  * @version $Revision$ - $Date$
  */
-class UnusedArrayRuleTest extends AbstractRuleTestCase {
+class UnusedObjectRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnusedArray"
+        assert rule.name == "UnusedObject"
     }
 
-    void testApplyTo_ArrayAssigned_NoViolations() {
+    void testApplyTo_ObjectAssigned_NoViolations() {
         final SOURCE = '''
-        	def array1 = new String[3]
-            Object[] array2 = new Object[]
-            println new Integer[3]
+        	def v1 = new Object()
+            URL v2 = new URL("www.google.com")
+            println new BigDecimal("23.45")
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_ArrayNotAssigned_ButLastStatementWithinAMethod_NoViolations() {
+    void testApplyTo_ObjectNotAssigned_ButLastStatementWithinAMethod_NoViolations() {
         final SOURCE = '''
             println new BigDecimal("23.45")
-        	new String[3]
+        	new Object()
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_ArrayNotAssigned_ButLastStatementWithinAClosure_NoViolations() {
+    void testApplyTo_ObjectNotAssigned_ButLastStatementWithinAClosure_NoViolations() {
         final SOURCE = '''
-            def closure = { new String[3] }
+            def closure = { new Date() }
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_ArrayNotAssigned_Violations() {
+    void testApplyTo_ObjectNotAssigned_Violations() {
         final SOURCE = '''
-        	new String[3]
+        	new Object()
+            new URL("www.google.com")
             println "ok"
         '''
-        assertViolations(SOURCE, [lineNumber: 2, sourceLineText: 'new String[3]'])
+        assertViolations(SOURCE,
+                [lineNumber: 2, sourceLineText: 'new Object()'],
+                [lineNumber: 3, sourceLineText: 'new URL("www.google.com")'])
     }
 
-    void testApplyTo_ArrayNotAssigned_WithinClosure_Violations() {
+    void testApplyTo_ObjectNotAssigned_WithinClosure_Violations() {
         final SOURCE = '''
             def myClosure = { ->
-        	    new Object[2]
-                doStuff()
+            	new Object()
+                doSomething()
             }
         '''
-        assertViolations(SOURCE, [lineNumber: 3, sourceLineText: 'new Object[2]'])
+        assertViolations(SOURCE, [lineNumber: 3, sourceLineText: 'new Object()'])
     }
 
     protected Rule createRule() {
-        return new UnusedArrayRule()
+        return new UnusedObjectRule()
     }
 
 }
