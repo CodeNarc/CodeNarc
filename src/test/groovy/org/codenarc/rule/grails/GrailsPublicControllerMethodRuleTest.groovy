@@ -110,6 +110,40 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+
+    void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
+        final SOURCE = '''
+            class MyController {
+                void myMethod() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'myMethod'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
+        final SOURCE = '''
+            class MyController {
+                void myMethod() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'otherMethod'
+        assertViolations(SOURCE, [lineNumber:3, sourceLineText:'void myMethod()'])
+    }
+
+    void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+            class MyController {
+                boolean isReady() { }
+                def doOtherStuff() { }
+                void myMethod() { }
+            }
+        '''
+        rule.ignoreMethodNames = 'is*,doO??erSt*ff,other'
+        assertViolations(SOURCE, [lineNumber:5, sourceLineText:'void myMethod()'])
+    }
+
+
     void setUp() {
         super.setUp()
         sourceCodePath = CONTROLLER_PATH

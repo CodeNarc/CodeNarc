@@ -18,6 +18,7 @@ package org.codenarc.rule.grails
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks for public methods on Grails controller classes. Static methods are ignored.
@@ -25,6 +26,10 @@ import org.codehaus.groovy.ast.MethodNode
  * Grails controller actions and interceptors are defined as properties on the controller class.
  * Public methods on a controller class are unnecessary. They break encapsulation and can
  * be confusing.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more
+ * (comma-separated) method names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  * <p/>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match files
  * under the 'grails-app/controllers' folder. You can override this with a different regular
@@ -40,6 +45,7 @@ import org.codehaus.groovy.ast.MethodNode
 class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
     String name = 'GrailsPublicControllerMethod'
     int priority = 2
+    String ignoreMethodNames
     Class astVisitorClass = GrailsPublicControllerMethodAstVisitor
     String applyToFilesMatching = GrailsUtil.CONTROLLERS_FILES
     String applyToClassNames = GrailsUtil.CONTROLLERS_CLASSES
@@ -47,9 +53,15 @@ class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
 
 class GrailsPublicControllerMethodAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
-        if ( (methodNode.modifiers & MethodNode.ACC_PUBLIC) && !(methodNode.modifiers & MethodNode.ACC_STATIC))  {
+        if ( (methodNode.modifiers & MethodNode.ACC_PUBLIC)
+                && !(methodNode.modifiers & MethodNode.ACC_STATIC)
+                && !isIgnoredMethodName(methodNode))  {
             addViolation(methodNode)
         }
         super.visitMethod(methodNode)
+    }
+
+    private boolean isIgnoredMethodName(MethodNode node) {
+        return new WildcardPattern(rule.ignoreMethodNames, false).matches(node.name)
     }
 }

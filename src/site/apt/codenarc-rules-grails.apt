@@ -14,6 +14,14 @@ Grails Rules  ("<rulesets/grails.xml>")
   Public methods on a controller class are unnecessary. They break encapsulation and can
   be confusing.
 
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreMethodNames   | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
   This rule sets the default value of <<<applyToFilesMatching>>> to only match files
   under the 'grails-app/controllers' folder. You can override this with a different regular
   expression value if appropriate.
