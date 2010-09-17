@@ -81,6 +81,16 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoresConstructors() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                public MyTest() { }
+                public MyTest(int count) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_SetUpAndTearDown() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
