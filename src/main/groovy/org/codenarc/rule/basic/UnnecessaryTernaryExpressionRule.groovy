@@ -25,6 +25,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.expr.BooleanExpression
 import org.codehaus.groovy.ast.expr.NotExpression
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for ternary expressions where the conditional expression always evaluates to
@@ -114,15 +115,8 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean areTrueAndFalse(Expression trueExpression, Expression falseExpression) {
-        return (isTrue(trueExpression) && isFalse(falseExpression)) ||
-               (isFalse(trueExpression) && isTrue(falseExpression))
+        return (AstUtil.isTrue(trueExpression) && AstUtil.isFalse(falseExpression)) ||
+               (AstUtil.isFalse(trueExpression) && AstUtil.isTrue(falseExpression))
     }
 
-    private boolean isTrue(Expression expression) {
-        return expression.text == 'true' || expression.text == 'Boolean.TRUE'
-    }
-
-    private boolean isFalse(Expression expression) {
-        return expression.text == 'false' || expression.text == 'Boolean.FALSE'
-    }
 }

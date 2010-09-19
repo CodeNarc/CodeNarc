@@ -345,31 +345,45 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryTernaryExpression Rule
+* UnnecessaryBooleanExpression Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- Checks for ternary expressions where the conditional expression always evaluates to a boolean
- and the <true> and <false> expressions are merely returning <<<true>>> and <<<false>>> constants.
- These cases can be replaced by a simple boolean expression. Examples of violations include:
+ Checks for unnecessary boolean expressions, including ANDing (&&) or ORing (||) with
+ <<<true>>>, <<<false>>>, <<<null>>>, or a Map/List/String/Number literal.
+
+ This rule also checks for negation (!) of <<<true>>>, <<<false>>>,
+ <<<null>>>, or a Map/List/String/Number literal.
+
+ Examples of violations include:
 
 -------------------------------------------------------------------------------
-    x==99 ? true : false                    // can be replaced by: x==99
-    x && y ? true : false                   // can be replaced by: x && y
-    x||y ? false : true                     // can be replaced by: !(x||y)
-    x >= 1 ? true: false                    // can be replaced by: x >= 1
-    x < 99 ? Boolean.TRUE : Boolean.FALSE   // can be replaced by: x < 99
-    !x ? true : false                       // can be replaced by: !x
--------------------------------------------------------------------------------
 
- The rule also checks for ternary expressions where the <true> and <false> expressions are
- the same constant or variable. Examples include:
+    result = value && true              // AND or OR with boolean constants
+    if (false || value) { .. }
+    return value && Boolean.FALSE
 
--------------------------------------------------------------------------------
-    x ? '123' : '123'              // can be replaced by: '123'
-    x ? null : null                // can be replaced by: null
-    x ? 23 : 23                    // can be replaced by: 23
-    x ? MAX_VALUE : MAX_VALUE      // can be replaced by: MAX_VALUE
-    ready ? minValue : minValue    // can be replaced by: minValue
+    result = null && value              // AND or OR with null
+
+    result = value && "abc"             // AND or OR with String literal
+
+    result = value && 123               // AND or OR with Number literal
+    result = 678.123 || true
+
+    result = value && [x, y]            // AND or OR with List literal
+
+    result = [a:123] && value           // AND or OR with Map literal
+
+    result = !true                      // Negation of boolean constants
+    result = !false
+    result = !Boolean.TRUE
+
+    result = !null                      // Negation of null
+
+    result = !"abc"                     // Negation of String literal
+
+    result = ![a:123]                   // Negation of Map literal
+
+    result = ![a,b]                     // Negation of List literal
 -------------------------------------------------------------------------------
 
 
@@ -398,3 +412,33 @@ Basic Rules  ("<rulesets/basic.xml>")
         return Boolean.FALSE
     }
 -------------------------------------------------------------------------------
+
+
+* UnnecessaryTernaryExpression Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for ternary expressions where the conditional expression always evaluates to a boolean
+ and the <true> and <false> expressions are merely returning <<<true>>> and <<<false>>> constants.
+ These cases can be replaced by a simple boolean expression. Examples of violations include:
+
+-------------------------------------------------------------------------------
+    x==99 ? true : false                    // can be replaced by: x==99
+    x && y ? true : false                   // can be replaced by: x && y
+    x||y ? false : true                     // can be replaced by: !(x||y)
+    x >= 1 ? true: false                    // can be replaced by: x >= 1
+    x < 99 ? Boolean.TRUE : Boolean.FALSE   // can be replaced by: x < 99
+    !x ? true : false                       // can be replaced by: !x
+-------------------------------------------------------------------------------
+
+ The rule also checks for ternary expressions where the <true> and <false> expressions are
+ the same constant or variable. Examples include:
+
+-------------------------------------------------------------------------------
+    x ? '123' : '123'              // can be replaced by: '123'
+    x ? null : null                // can be replaced by: null
+    x ? 23 : 23                    // can be replaced by: 23
+    x ? MAX_VALUE : MAX_VALUE      // can be replaced by: MAX_VALUE
+    ready ? minValue : minValue    // can be replaced by: minValue
+-------------------------------------------------------------------------------
+
+

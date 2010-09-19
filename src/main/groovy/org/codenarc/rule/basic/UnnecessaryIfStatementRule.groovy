@@ -15,11 +15,10 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.expr.Expression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.stmt.*
-import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Rule that checks for if statements where the if and else blocks are merely returning
@@ -58,22 +57,12 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
     private boolean isReturnTrue(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        return statement instanceof ReturnStatement && isTrue(statement.expression)
+        return statement instanceof ReturnStatement && AstUtil.isTrue(statement.expression)
     }
 
     private boolean isReturnFalse(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        return statement instanceof ReturnStatement && isFalse(statement.expression)
-    }
-
-    private boolean isTrue(Expression expression) {
-        return ((expression instanceof ConstantExpression) && expression.isTrueExpression()) ||
-                expression.text == 'Boolean.TRUE'
-    }
-
-    private boolean isFalse(Expression expression) {
-        return ((expression instanceof ConstantExpression) && expression.isFalseExpression()) || 
-                expression.text == 'Boolean.FALSE'
+        return statement instanceof ReturnStatement && AstUtil.isFalse(statement.expression)
     }
 
     private boolean hasElseBlock(IfStatement ifStatement) {

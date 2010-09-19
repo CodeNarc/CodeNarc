@@ -26,6 +26,7 @@
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.StringInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.UnnecessaryBooleanExpressionRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryIfStatementRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryTernaryExpressionRule'/>
 </ruleset>

@@ -25,6 +25,8 @@ import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.ASTNode
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -190,6 +192,16 @@ class AstUtil {
      */
     static boolean isFromGeneratedSourceCode(ASTNode node) {
         return node.lineNumber < 0
+    }
+
+    static boolean isTrue(Expression expression) {
+        return ((expression instanceof ConstantExpression) && expression.isTrueExpression()) ||
+                expression.text == 'Boolean.TRUE'
+    }
+
+    static boolean isFalse(Expression expression) {
+        return ((expression instanceof ConstantExpression) && expression.isFalseExpression()) ||
+                expression.text == 'Boolean.FALSE'
     }
 
     /**
