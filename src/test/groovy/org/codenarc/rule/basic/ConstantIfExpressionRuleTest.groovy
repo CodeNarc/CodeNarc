@@ -31,7 +31,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'ConstantIfExpression'
     }
 
-    void testApplyTo_TrueBooleanExpression_IsAViolation() {
+    void testApplyTo_True_IsAViolation() {
         final SOURCE = '''
             if (true) { }
             if (Boolean.TRUE) { }
@@ -39,7 +39,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if (true) { }', 3, 'if (Boolean.TRUE) { }')
     }
 
-    void testApplyTo_FalseBooleanExpression_IsAViolation() {
+    void testApplyTo_False_IsAViolation() {
         final SOURCE = '''
             if (false) { }
             if (Boolean.FALSE) { }
@@ -47,14 +47,14 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if (false) { }', 3, 'if (Boolean.FALSE) { }')
     }
 
-    void testApplyTo_NullBooleanExpression_IsAViolation() {
+    void testApplyTo_Null_IsAViolation() {
         final SOURCE = '''
             if (null) { }
         '''
         assertSingleViolation(SOURCE, 2, 'if (null) { }')
     }
 
-    void testApplyTo_LiteralStringBooleanExpression_IsAViolation() {
+    void testApplyTo_StringLiteral_IsAViolation() {
         final SOURCE = '''
             if ("abc") { }
             if ("") { }
@@ -62,12 +62,28 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if ("abc") { }', 3, 'if ("") { }')
     }
 
-    void testApplyTo_LiteralNumberBooleanExpression_IsAViolation() {
+    void testApplyTo_NumberLiteral_IsAViolation() {
         final SOURCE = '''
             if (99.9) { }
             if (0) { }
         '''
         assertTwoViolations(SOURCE, 2, 'if (99.9) { }', 3, 'if (0) { }')
+    }
+
+    void testApplyTo_MapLiteral_IsAViolation() {
+        final SOURCE = '''
+            if ([:]) { }
+            if ([a:123, b:234]) { }
+        '''
+        assertTwoViolations(SOURCE, 2, 'if ([:])', 3, 'if ([a:123, b:234])')
+    }
+
+    void testApplyTo_ListLiteral_IsAViolation() {
+        final SOURCE = '''
+            if ([]) { }
+            if ([a, 123]) { }
+        '''
+        assertTwoViolations(SOURCE, 2, 'if ([])', 3, 'if ([a, 123])')
     }
 
     void testApplyTo_NoViolations() {

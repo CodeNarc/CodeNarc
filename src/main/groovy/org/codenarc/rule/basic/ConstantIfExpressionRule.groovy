@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for if statement with a constant value for the if expression, such as:
@@ -32,6 +33,8 @@ import org.codehaus.groovy.ast.stmt.IfStatement
  *   <li><code>if (99.7) { .. }</code></li>
  *   <li><code>if ("") { .. }</code></li>
  *   <li><code>if ("abc") { .. }</code></li>
+ *   <li><code>if ([a:123, b:456]) { .. }</code></li>
+ *   <li><code>if ([a, b]) { .. }</code></li>
  * </ul>
  *
  * @author Chris Mair
@@ -48,7 +51,7 @@ class ConstantIfExpressionAstVisitor extends AbstractAstVisitor  {
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement)) {
             def booleanExpression = ifStatement.booleanExpression
-            if (isConstantBooleanExpression(booleanExpression)) {
+            if (AstUtil.isConstantOrLiteral(booleanExpression.expression)) {
                 addViolation(ifStatement)
             }
         }

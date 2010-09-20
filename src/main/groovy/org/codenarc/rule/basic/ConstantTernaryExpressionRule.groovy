@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 import org.codehaus.groovy.ast.expr.TernaryExpression
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for ternary expressions with a constant value for the boolean expression, such as:
@@ -32,6 +33,9 @@ import org.codehaus.groovy.ast.expr.TernaryExpression
  *   <li><code>99.7 ? x : y</code></li>
  *   <li><code>"" ? x : y</code></li>
  *   <li><code>"abc" ? x : y</code></li>
+ *   <li><code>[:] ? x : y</code></li>
+ *   <li><code>[a:123, b:456] ? x : y</code></li>
+ *   <li><code>[a, b, c] ? x : y</code></li>
  * </ul>
  *
  * Also checks for the same types of constant values for the boolean expressions within the "short"
@@ -41,6 +45,7 @@ import org.codehaus.groovy.ast.expr.TernaryExpression
  *   <li><code>null ?: y</code></li>
  *   <li><code>99.7 ?: y</code></li>
  *   <li><code>"abc" ?: y</code></li>
+ *   <li><code>[a:123] ?: y</code></li>
  * </ul>
  *
  * @author Chris Mair
@@ -57,7 +62,7 @@ class ConstantTernaryExpressionAstVisitor extends AbstractAstVisitor  {
     void visitTernaryExpression(TernaryExpression ternaryExpression) {
         if (isFirstVisit(ternaryExpression)) {
             def booleanExpression = ternaryExpression.booleanExpression
-            if (isConstantBooleanExpression(booleanExpression)) {
+            if (AstUtil.isConstantOrLiteral(booleanExpression.expression)) {
                 addViolation(ternaryExpression)
             }
         }

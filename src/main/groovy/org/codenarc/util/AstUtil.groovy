@@ -27,6 +27,9 @@ import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.ListExpression
+import org.codehaus.groovy.ast.expr.MapExpression
+import org.codehaus.groovy.ast.expr.PropertyExpression
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -37,6 +40,25 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  * @version $Revision$ - $Date$
  */
 class AstUtil {
+    private static final PREDEFINED_CONSTANTS = ['Boolean':['FALSE', 'TRUE']]
+
+    static boolean isConstantOrLiteral(Expression expression) {
+        return expression.class in [ConstantExpression, ListExpression, MapExpression] ||
+                isPredefinedConstant(expression)
+    }
+
+    private static boolean isPredefinedConstant(Expression expression) {
+        if (expression instanceof PropertyExpression) {
+            def object = expression.objectExpression
+            def property = expression.property
+
+            if (object instanceof VariableExpression) {
+                def predefinedConstantNames = PREDEFINED_CONSTANTS[object.name]
+                return property.text in predefinedConstantNames
+            }
+        }
+        return false
+    }
 
     /**
      * Return true if the Statement is a block

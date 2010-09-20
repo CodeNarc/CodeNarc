@@ -18,6 +18,7 @@ package org.codenarc.rule.basic
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.*
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks unnecessary boolean expressions, including ANDing (&&) or ORing (||) with
@@ -58,40 +59,22 @@ class UnnecessaryBooleanExpressionRule extends AbstractAstVisitorRule {
 class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor  {
 
     private static final BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
-    private static final PREDEFINED_CONSTANTS = ['Boolean':['FALSE', 'TRUE']]
 
     void visitBinaryExpression(BinaryExpression expression) {
         def operationName = expression.operation.text
         if (operationName in BOOLEAN_LOGIC_OPERATIONS &&
-                (isConstantOrLiteral(expression.rightExpression) || isConstantOrLiteral(expression.leftExpression))) {
+                (AstUtil.isConstantOrLiteral(expression.rightExpression) ||
+                 AstUtil.isConstantOrLiteral(expression.leftExpression))) {
             addViolation(expression)
         }
         super.visitBinaryExpression(expression)
     }
 
     void visitNotExpression(NotExpression expression) {
-        if (isConstantOrLiteral(expression.expression)) {
+        if (AstUtil.isConstantOrLiteral(expression.expression)) {
             addViolation(expression)
         }
          super.visitNotExpression(expression)
-    }
-
-    private boolean isConstantOrLiteral(Expression expression) {
-        return expression.class in [ConstantExpression, ListExpression, MapExpression] ||
-                isPredefinedConstant(expression)
-    }
-
-    private boolean isPredefinedConstant(Expression expression) {
-        if (expression instanceof PropertyExpression) {
-            def object = expression.objectExpression
-            def property = expression.property
-
-            if (object instanceof VariableExpression) {
-                def predefinedConstantNames = PREDEFINED_CONSTANTS[object.name]
-                return property.text in predefinedConstantNames
-            }
-        }
-        return false
     }
 
 }

@@ -19,7 +19,6 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceCode
-import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Abstract superclass for Groovy AST Visitors used with Rules
@@ -51,12 +50,6 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
             visited << expression
             return true
         }
-    }
-
-    protected boolean isConstantBooleanExpression(booleanExpression) {
-        def expression = booleanExpression.expression
-        def type = expression.type
-        return type.name == BOOLEAN_CLASS || expression instanceof ConstantExpression || booleanExpression.text in CONSTANT_EXPRESSION_VALUES
     }
 
     /**

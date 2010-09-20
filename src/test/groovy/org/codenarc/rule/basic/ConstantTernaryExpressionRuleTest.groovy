@@ -33,7 +33,7 @@ class ConstantTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'ConstantTernaryExpression'
     }
 
-    void testApplyTo_TrueBooleanExpression_IsAViolation() {
+    void testApplyTo_True_IsAViolation() {
         final SOURCE = '''
             def x = true ? 1 : 0
             def y
@@ -42,7 +42,7 @@ class ConstantTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = true ? 1 : 0', 4, 'def z = Boolean.TRUE ? 1 : 0')
     }
 
-    void testApplyTo_FalseBooleanExpression_IsAViolation() {
+    void testApplyTo_False_IsAViolation() {
         final SOURCE = '''
             def x = false ? 1 : 0
             println 'ok'
@@ -51,14 +51,14 @@ class ConstantTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = false ? 1 : 0', 4, 'def y = Boolean.FALSE ? 1 : 0')
     }
 
-    void testApplyTo_NullBooleanExpression_IsAViolation() {
+    void testApplyTo_Null_IsAViolation() {
         final SOURCE = '''
             def x = null ? 1 : 0
         '''
         assertSingleViolation(SOURCE, 2, 'def x = null ? 1 : 0')
     }
 
-    void testApplyTo_LiteralStringBooleanExpression_IsAViolation() {
+    void testApplyTo_StringLiteral_IsAViolation() {
         final SOURCE = '''
             def x = "abc" ? 1 : 0
             def y = "" ? 1 : 0
@@ -66,12 +66,28 @@ class ConstantTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = "abc" ? 1 : 0', 3, 'def y = "" ? 1 : 0')
     }
 
-    void testApplyTo_LiteralNumberBooleanExpression_IsAViolation() {
+    void testApplyTo_NumberLiteral_IsAViolation() {
         final SOURCE = '''
             def x = 99.9 ? 1 : 0
             def y = 0 ? 1 : 0
         '''
         assertTwoViolations(SOURCE, 2, 'def x = 99.9 ? 1 : 0', 3, 'def y = 0 ? 1 : 0')
+    }
+
+    void testApplyTo_MapLiteral_IsAViolation() {
+        final SOURCE = '''
+            def x = [:] ? 1 : 0
+            def y = [a:123, b:456] ? 1 : 0
+        '''
+        assertTwoViolations(SOURCE, 2, 'def x = [:] ? 1 : 0', 3, 'def y = [a:123, b:456] ? 1 : 0')
+    }
+
+    void testApplyTo_ListLiteral_IsAViolation() {
+        final SOURCE = '''
+            def x = [] ? 1 : 0
+            def y = [a, 456] ? 1 : 0
+        '''
+        assertTwoViolations(SOURCE, 2, 'def x = [] ? 1 : 0', 3, 'def y = [a, 456] ? 1 : 0')
     }
 
     void testApplyTo_NoViolations() {

@@ -31,8 +31,6 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnnecessaryBooleanExpression'
     }
 
-    // TODO value && "abc";  value || 97; "" && value; 67.55 && value; value && null; value || []; [a:23] || value
-
     void testApplyTo_AndOr_WithTrueOrFalse_IsAViolation() {
         final SOURCE = '''
             def ready = value && true
@@ -83,6 +81,16 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'result = value && [:]'],
             [lineNumber:3, sourceLineText:'result = [a:123] || value'])
+    }
+
+    void testApplyTo_AndOr_WithListLiteral_IsAViolation() {
+        final SOURCE = '''
+            result = value && []
+            result = [x, y, z] || value
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'result = value && []'],
+            [lineNumber:3, sourceLineText:'result = [x, y, z] || value'])
     }
 
     void testApplyTo_AndOr_WithNumberLiteral_IsAViolation() {
