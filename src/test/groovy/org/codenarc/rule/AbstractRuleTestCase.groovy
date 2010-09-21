@@ -152,7 +152,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertNoViolations(String source) {
         def violations = applyRuleTo(source)
-        assert violations.empty, violations
+        assert violations.empty, "Expected no violations, but got: $violations"
     }
 
     /**

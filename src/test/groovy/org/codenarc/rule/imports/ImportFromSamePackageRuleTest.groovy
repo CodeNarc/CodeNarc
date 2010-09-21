@@ -51,6 +51,14 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreImportsWithExplicitAliasDeclarations() {
+        final SOURCE = '''
+            package org.xyz
+            import org.xyz.MyBigClass as MBC
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             package org.mypackage

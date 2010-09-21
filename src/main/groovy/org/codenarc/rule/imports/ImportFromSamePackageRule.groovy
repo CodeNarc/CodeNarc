@@ -34,11 +34,20 @@ class ImportFromSamePackageRule extends AbstractRule {
             def filePackageName = rawPackage.endsWith('.') ? rawPackage[0..-2] : rawPackage
             getImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importPackageName = packageNameForImport(importNode)
-                if (importPackageName == filePackageName) {
+                if (importPackageName == filePackageName && !hasAlias(importNode)) {
                     violations.add(createViolationForImport(sourceCode, importNode))
                 }
             }
         }
+    }
+
+    private boolean hasAlias(importNode) {
+        return importNode.alias != getClassNameNoPackage(importNode.className)
+    }
+
+    private String getClassNameNoPackage(String className) {
+        def indexOfLastPeriod = className.lastIndexOf('.')
+        return (indexOfLastPeriod == -1) ? className : className.substring(indexOfLastPeriod+1)
     }
 
 }
