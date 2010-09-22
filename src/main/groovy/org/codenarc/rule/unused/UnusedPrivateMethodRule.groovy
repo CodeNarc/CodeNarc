@@ -15,14 +15,12 @@
  */
 package org.codenarc.rule.unused
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.MethodPointerExpression
+import org.codehaus.groovy.ast.expr.*
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.
@@ -63,12 +61,12 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitMethodCallExpression(MethodCallExpression expression) {
-        if (isMethodCall(expression, 'this')) {    
+        if (isMethodCall(expression, 'this')) {
             removeUnusedPrivateMethods(expression.method.value)
         }
 
         // Static invocation through current class name
-        if (isMethodCall(expression, currentClassNode.nameWithoutPackage)) {    
+        if (isMethodCall(expression, currentClassNode.nameWithoutPackage)) {
             removeUnusedPrivateMethods(expression.method.value)
         }
 
@@ -86,8 +84,7 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean isMethodCall(MethodCallExpression expression, String targetName) {
-        return expression.objectExpression instanceof VariableExpression &&
-               expression.objectExpression.name == targetName &&
+        return AstUtil.isMethodCallOnObject(expression, targetName) &&    
                expression.method instanceof ConstantExpression
     }
 

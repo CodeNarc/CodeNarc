@@ -99,6 +99,11 @@ class AstUtil {
         return null
     }
 
+    static boolean isMethodCallOnObject(MethodCallExpression methodCallExpression, String methodObject) {
+        return (methodCallExpression.objectExpression instanceof VariableExpression &&
+               methodCallExpression.objectExpression.name == methodObject)
+    }
+
     /**
      * Return true only if the Statement represents a method call for the specified method object (receiver),
      * method name, and with the specified number of arguments.
@@ -142,13 +147,7 @@ class AstUtil {
      * @return true only if the method call matches the specified criteria
      */
     static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName) {
-        def match = false
-        def objectExpression = methodCall.objectExpression
-        if (objectExpression instanceof VariableExpression) {
-            def objectName = objectExpression.name
-            match = (objectName == methodObject)
-        }
-        return match && isMethodNamed(methodCall, methodName)
+        return isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName) 
     }
 
     /**

@@ -26,6 +26,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.FieldExpression
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
@@ -92,6 +93,20 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         }
         super.visitMethod(node)
     }
+
+    void visitMethodCallExpression(MethodCallExpression call) {
+        // If there happens to be a method call on a method with the same name as the field.
+        // This handles the case of defining a closure and then executing it, e.g.:
+        //      private myClosure = { println 'ok' }
+        //      ...
+        //      myClosure()
+        // But this could potentially "hide" some unused fields (i.e. false negatives).
+        if (AstUtil.isMethodCallOnObject(call, 'this') && call.method instanceof ConstantExpression) {
+            removeUnusedPrivateField(call.method.value)
+        }
+        super.visitMethodCallExpression(call)
+    }
+
     private void removeUnusedPrivateField(String name) {
         def referencedField = unusedPrivateFields.find { it.name == name }
         if (referencedField) {

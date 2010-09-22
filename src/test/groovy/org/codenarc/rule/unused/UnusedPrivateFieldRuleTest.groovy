@@ -164,6 +164,22 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 3, 'private int count')
     }
+                                              
+    void testApplyTo_ClosureField() {
+        final SOURCE = '''
+            class MyClass {
+                private myClosure1 = { println '1' }
+                private myClosure2 = { println '2' }
+                private otherClosure = { println '3' }
+                def getValue() {
+                    def value = myClosure1()
+                    def otherValue = someOtherObject.otherClosure()     // different object/method  
+                    return this.myClosure2(value, otherValue)
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 5, "private otherClosure = { println '3' }")
+    }
 
     void testApplyTo_NoFields() {
         final SOURCE = '''
