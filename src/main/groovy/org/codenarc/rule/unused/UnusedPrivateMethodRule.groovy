@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.MethodPointerExpression
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.
@@ -72,6 +73,16 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
         }
 
         super.visitMethodCallExpression(expression)
+    }
+
+    void visitMethodPointerExpression(MethodPointerExpression methodPointerExpression) {
+        if (methodPointerExpression.expression instanceof VariableExpression &&
+                methodPointerExpression.expression.name == 'this' &&
+                methodPointerExpression.methodName instanceof ConstantExpression) {
+
+            removeUnusedPrivateMethods(methodPointerExpression.methodName.value)
+        }
+         super.visitMethodPointerExpression(methodPointerExpression)
     }
 
     private boolean isMethodCall(MethodCallExpression expression, String targetName) {

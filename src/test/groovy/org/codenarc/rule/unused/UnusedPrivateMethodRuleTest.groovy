@@ -183,6 +183,17 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int countStuff() { }')
     }
 
+    void testApplyTo_MethodPointerReference() {
+        final SOURCE = '''
+            class MyClass {
+                private int myMethod() { }
+                private int otherMethod() { }
+                def getValue() { return this.&myMethod }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'private int otherMethod()')
+    }
+
     void testApplyTo_MoreThanOneClassInASourceFile() {
         final SOURCE = '''
             class MyClass {
