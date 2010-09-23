@@ -79,7 +79,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
 * JUnitUnnecessarySetUp Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Rule that checks checks for JUnit <<<setUp()>>> methods that contain only a call to <<<super.setUp()>>>.
+  Rule that checks checks for JUnit <<<setUp()>>> methods that contain only a call to
+  <<<super.setUp()>>>. The method is then unnecessary.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
   ending in 'Test' or 'Tests'.
@@ -90,6 +91,26 @@ JUnit Rules  ("<rulesets/junit.xml>")
     class MyTest extends TestCase {
         void setUp() {              // violation
             super.setUp()
+        }
+    }
+-------------------------------------------------------------------------------
+
+
+* JUnitUnnecessaryTearDown Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Rule that checks checks for JUnit <<<tearDown()>>> methods that contain only a call to
+  <<<super.tearDown()>>>. The method is then unnecessary.
+
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test' or 'Tests'.
+
+  Here is an example of a violation:
+
+-------------------------------------------------------------------------------
+    class MyTest extends TestCase {
+        void tearDown() {               // violation
+            super.tearDown()
         }
     }
 -------------------------------------------------------------------------------

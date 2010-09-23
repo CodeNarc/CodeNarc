@@ -14,5 +14,6 @@
     <rule class='org.codenarc.rule.junit.JUnitSetUpCallsSuperRule'/>
     <rule class='org.codenarc.rule.junit.JUnitTearDownCallsSuperRule'/>
     <rule class='org.codenarc.rule.junit.JUnitUnnecessarySetUpRule'/>
+    <rule class='org.codenarc.rule.junit.JUnitUnnecessaryTearDownRule'/>
 
 </ruleset>

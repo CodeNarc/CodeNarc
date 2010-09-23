@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Rule that checks that if the JUnit <code>tearDown()</code> method is defined, that it includes a call to
+ * Rule that checks for a JUnit <code>tearDown()</code> method that only contains a call to
  * <code>super.tearDown()</code>.
  * <p/>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
@@ -30,21 +31,18 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class JUnitTearDownCallsSuperRule extends AbstractAstVisitorRule {
-    String name = 'JUnitTearDownCallsSuper'
-    int priority = 2
-    Class astVisitorClass = JUnitTearDownCallsSuperAstVisitor
+class JUnitUnnecessaryTearDownRule extends AbstractAstVisitorRule {
+    String name = 'JUnitUnnecessaryTearDown'
+    int priority = 3
+    Class astVisitorClass = JUnitUnnecessaryTearDownAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
+class JUnitUnnecessaryTearDownAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
         if (JUnitUtil.isTearDownMethod(methodNode)) {
             def statements = methodNode.code.statements
-            def found = statements.find { stmt ->
-                return AstUtil.isMethodCall(stmt, 'super', 'tearDown', 0)
-            }
-            if (!found) {
+            if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'tearDown', 0)) {
                 addViolation(methodNode)
             }
         }

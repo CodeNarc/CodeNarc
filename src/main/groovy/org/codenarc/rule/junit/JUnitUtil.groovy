@@ -55,6 +55,13 @@ class JUnitUtil {
                 methodNode.code instanceof BlockStatement)
     }
 
+    protected static boolean isTearDownMethod(MethodNode methodNode) {
+        return (methodNode.name == 'tearDown' &&
+                methodNode.parameters.size() == 0 &&
+                !AstUtil.getAnnotation(methodNode, 'After') &&
+                methodNode.code instanceof BlockStatement)
+    }
+
     /**
      * Private constructor. All members are static.
      */
