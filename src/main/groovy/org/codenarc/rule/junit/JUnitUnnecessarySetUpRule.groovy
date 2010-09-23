@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Rule that checks that if the JUnit <code>setUp()</code> method is defined, that it includes a call to
+ * Rule that checks for a JUnit <code>setUp()</code> method that only contains a call to
  * <code>super.setUp()</code>.
  * <p/>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
@@ -31,21 +31,18 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
-    String name = 'JUnitSetUpCallsSuper'
-    int priority = 2
-    Class astVisitorClass = JUnitSetUpCallsSuperAstVisitor
+class JUnitUnnecessarySetUpRule extends AbstractAstVisitorRule {
+    String name = 'JUnitUnnecessarySetUp'
+    int priority = 3
+    Class astVisitorClass = JUnitUnnecessarySetUpAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
+class JUnitUnnecessarySetUpAstVisitor extends AbstractAstVisitor  {
     void visitMethod(MethodNode methodNode) {
         if (JUnitUtil.isSetUpMethod(methodNode)) {
             def statements = methodNode.code.statements
-            def found = statements.find { stmt ->
-                return AstUtil.isMethodCall(stmt, 'super', 'setUp', 0)
-            }
-            if (!found) {
+            if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'setUp', 0)) {
                 addViolation(methodNode)
             }
         }

@@ -13,5 +13,6 @@
     <rule class='org.codenarc.rule.junit.JUnitPublicNonTestMethodRule'/>
     <rule class='org.codenarc.rule.junit.JUnitSetUpCallsSuperRule'/>
     <rule class='org.codenarc.rule.junit.JUnitTearDownCallsSuperRule'/>
-    
+    <rule class='org.codenarc.rule.junit.JUnitUnnecessarySetUpRule'/>
+
 </ruleset>

@@ -18,6 +18,8 @@ package org.codenarc.rule.junit
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.stmt.BlockStatement
 
 /**
  * Utility methods for JUnit rule classes. This class is not intended for general use.
@@ -44,6 +46,13 @@ class JUnitUtil {
                 args[args.size()-1].properties['value'] == value
         }
         return isMatch
+    }
+
+    protected static boolean isSetUpMethod(MethodNode methodNode) {
+        return (methodNode.name == 'setUp' &&
+                methodNode.parameters.size() == 0 &&
+                !AstUtil.getAnnotation(methodNode, 'Before') &&
+                methodNode.code instanceof BlockStatement)
     }
 
     /**
