@@ -76,6 +76,38 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE, [lineNumber: 3, sourceLineText: 'new Object()'])
     }
 
+    void testApplyTo_SuperConstructorCall_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass() {
+                    super()
+                    doSomething()
+                }
+                MyClass(String name) {
+                    super(name)
+                    doSomething()
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ThisConstructorCall_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass() {
+                    this()
+                    doSomething()
+                }
+                MyClass(String name) {
+                    this(name)
+                    doSomething()
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         return new UnusedObjectRule()
     }

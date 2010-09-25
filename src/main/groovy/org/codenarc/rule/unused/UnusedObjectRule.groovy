@@ -36,7 +36,10 @@ class UnusedObjectRule extends AbstractAstVisitorRule {
 class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
 
     void visitExpressionStatement(ExpressionStatement statement) {
-        if (statement.expression instanceof ConstructorCallExpression && !isLastStatementInBlock(statement)) {
+        if (statement.expression instanceof ConstructorCallExpression &&
+                !statement.expression.isSuperCall() &&
+                !statement.expression.isThisCall() &&
+                !isLastStatementInBlock(statement)) {
             addViolation(statement)
         }
         super.visitExpressionStatement(statement)
