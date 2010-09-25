@@ -216,18 +216,20 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="GROOVY-1.6" level="application" />
+    <orderEntry type="library" name="groovy-1.6.8" level="application" />
     <orderEntry type="module-library">
-      <library name="GMetrics-0.2">
+      <library name="GMetrics-0.3">
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/gmetrics/GMetrics/0.2/GMetrics-0.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/gmetrics/GMetrics/0.3/GMetrics-0.3.jar!/" />
         </CLASSES>
-        <JAVADOC />
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-javadoc.jar!/" />
+        </JAVADOC>
         <SOURCES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/gmetrics/GMetrics/0.2/GMetrics-0.2-sources.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="groovy-1.6.8" level="application" />
   </component>
 </module>
 

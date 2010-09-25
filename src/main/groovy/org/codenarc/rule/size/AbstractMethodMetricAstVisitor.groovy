@@ -51,7 +51,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     
     void visitClass(ClassNode classNode) {
         def gmetricsSourceCode = new GMetricsSourceCodeAdapter(this.sourceCode)
-        def classMetricResult = metric.calculateForClass(classNode, gmetricsSourceCode)
+        def classMetricResult = metric.applyToClass(classNode, gmetricsSourceCode)
 
         if (classMetricResult == null) {    // no methods or closure fields
             return
@@ -69,8 +69,8 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     private void checkMethods(classMetricResult) {
         def methodResults = classMetricResult.methodMetricResults
         methodResults.each { methodName, results ->
-            if (results.total > getMaxMethodMetricValue() && !isIgnoredMethodName(methodName)) {
-                def message = "The ${getMetricShortDescription()} for method [$methodName] is [${results.total}]"
+            if (results['total'] > getMaxMethodMetricValue() && !isIgnoredMethodName(methodName)) {
+                def message = "The ${getMetricShortDescription()} for method [$methodName] is [${results['total']}]"
                 // TODO include line number and source line
                 violations.add(new Violation(rule:rule, message:message))
             }
@@ -79,8 +79,8 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 
     private void checkClass(classMetricResult, String className) {
         def methodResults = classMetricResult.classMetricResult
-        if (methodResults.average > getMaxClassMetricValue()) {
-            def message = "The ${getMetricShortDescription()} for class [$className] is [${methodResults.average}]"
+        if (methodResults['average'] > getMaxClassMetricValue()) {
+            def message = "The ${getMetricShortDescription()} for class [$className] is [${methodResults['average']}]"
             // TODO include line number and source line
             violations.add(new Violation(rule:rule, message:message))
         }
