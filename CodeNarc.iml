@@ -227,6 +227,7 @@
         </JAVADOC>
         <SOURCES>
           <root url="jar://$MAVEN_REPOSITORY$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-sources.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

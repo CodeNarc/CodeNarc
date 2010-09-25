@@ -71,8 +71,9 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         methodResults.each { methodName, results ->
             if (results['total'] > getMaxMethodMetricValue() && !isIgnoredMethodName(methodName)) {
                 def message = "The ${getMetricShortDescription()} for method [$methodName] is [${results['total']}]"
-                // TODO include line number and source line
-                violations.add(new Violation(rule:rule, message:message))
+                def lineNumber = getLineNumber(results)
+                def sourceLine = getSourceLine(lineNumber)
+                violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
             }
         }
     }
@@ -81,9 +82,19 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         def methodResults = classMetricResult.classMetricResult
         if (methodResults['average'] > getMaxClassMetricValue()) {
             def message = "The ${getMetricShortDescription()} for class [$className] is [${methodResults['average']}]"
-            // TODO include line number and source line
-            violations.add(new Violation(rule:rule, message:message))
+            def lineNumber = getLineNumber(methodResults)
+            def sourceLine = getSourceLine(lineNumber)
+            violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
         }
+    }
+
+    protected getLineNumber(methodResults) {
+        def lineNumber = AstUtil.respondsTo(methodResults, 'getLineNumber')? methodResults.getLineNumber() : null
+        return (lineNumber != -1) ? lineNumber : null
+    }
+
+    protected String getSourceLine(lineNumber) {
+        return lineNumber != null ? this.sourceCode.line(lineNumber-1) : null
     }
 
     protected boolean isIgnoredMethodName(String methodName) {
