@@ -45,7 +45,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_TearDownDoesNotCallSuperTearDown() {
         final SOURCE = '''
-          class MyTest extends TestCase {
+          class MyTestCase extends TestCase {
             void tearDown() {
                 println 'bad'
             }

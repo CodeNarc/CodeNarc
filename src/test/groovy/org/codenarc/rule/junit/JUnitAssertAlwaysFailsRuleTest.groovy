@@ -33,7 +33,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_AssertTrue_False() {
         final SOURCE = '''
-            class MyTest extends TestCase {
+            class MyTestCase extends TestCase {
                 void testSomething() {
                     assertTrue(false)
                 }

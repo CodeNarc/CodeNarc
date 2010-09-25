@@ -33,7 +33,7 @@ class JUnitUnnecessarySetUpRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_SetUpOnlyCallsSuperSetUp_Violation() {
         final SOURCE = '''
-          class MyTest extends TestCase {
+          class MyTestCase extends TestCase {
             void setUp() {
                 super.setUp()
             }

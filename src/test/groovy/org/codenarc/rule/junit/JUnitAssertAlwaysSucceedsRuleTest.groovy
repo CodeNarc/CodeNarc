@@ -33,7 +33,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_AssertTrue_False() {
         final SOURCE = '''
-            class MyTest extends TestCase {
+            class MyTestCase extends TestCase {
                 void testSomething() {
                     assertTrue(false)
                 }
@@ -44,7 +44,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_AssertTrue_True() {
         final SOURCE = '''
-            class MyTest extends TestCase {
+            class MyTestCase extends TestCase {
                 void testSomething() {
                     assertTrue(true)
                 }

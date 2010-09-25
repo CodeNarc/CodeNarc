@@ -45,7 +45,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_SetUpDoesNotCallSuperSetUp() {
         final SOURCE = '''
-          class MyTest extends TestCase {
+          class MyTestCase extends TestCase {
             void setUp() {
                 println 'bad'
             }

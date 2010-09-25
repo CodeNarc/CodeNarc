@@ -34,7 +34,7 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
     protected static final DEFAULT_FIELD_NAME = /[a-z][a-zA-Z0-9]*/
     protected static final DEFAULT_VAR_NAME = /[a-z][a-zA-Z0-9]*/
     protected static final DEFAULT_TEST_FILES = /.*Tests?\.groovy/
-    protected static final DEFAULT_TEST_CLASS_NAMES = '*Test,*Tests'
+    protected static final DEFAULT_TEST_CLASS_NAMES = '*Test,*Tests,*TestCase'
 
     /** Each concrete subclass must either set this property or define its own property with the same name */
     Class astVisitorClass

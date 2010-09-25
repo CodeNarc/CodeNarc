@@ -33,7 +33,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_PublicNonTestMethod() {
         final SOURCE = '''
-            class MyTest extends GroovyTestCase {
+            class MyTestCase extends GroovyTestCase {
                 void doSomething() {
                     // this does not need to be public
                 }

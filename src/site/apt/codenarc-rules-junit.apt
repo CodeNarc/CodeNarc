@@ -12,7 +12,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   and <<<assertNull(CONSTANT)>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test' or 'Tests'.
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 
 * JUnitAssertAlwaysSucceeds Rule
@@ -23,7 +23,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   and <<<assertNull(null)>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test' or 'Tests'.
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 
 * JUnitPublicNonTestMethod Rule
@@ -53,7 +53,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   and thus be ignored by JUnit.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test' or 'Tests'.
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 
 * JUnitSetUpCallsSuper Rule
@@ -63,7 +63,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<super.setUp()>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test' or 'Tests'.
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 
 * JUnitTearDownCallsSuper Rule
@@ -73,7 +73,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<super.tearDown()>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test' or 'Tests'.
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 
 * JUnitUnnecessarySetUp Rule
@@ -83,7 +83,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<super.setUp()>>>. The method is then unnecessary.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test' or 'Tests'.
+  ending in 'Test', 'Tests' or 'TestCase'.
 
   Here is an example of a violation:
 
@@ -103,7 +103,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<super.tearDown()>>>. The method is then unnecessary.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test' or 'Tests'.
+  ending in 'Test', 'Tests' or 'TestCase'.
 
   Here is an example of a violation:
 
@@ -114,5 +114,4 @@ JUnit Rules  ("<rulesets/junit.xml>")
         }
     }
 -------------------------------------------------------------------------------
-
 

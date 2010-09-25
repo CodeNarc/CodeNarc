@@ -33,7 +33,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_TearDownOnlyCallsSuperTearDown_Violation() {
         final SOURCE = '''
-          class MyTest extends TestCase {
+          class MyTestCase extends TestCase {
             void tearDown() {
                 super.tearDown()
             }
