@@ -78,7 +78,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
             Integer lineNumber1, String sourceLineText1,
             Integer lineNumber2, String sourceLineText2) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 2, "Expected 2 Violation2\nFound: $violations\n"
+        assert violations.size() == 2, "Expected 2 Violations\nFound: $violations\n"
         assertViolation(violations[0], lineNumber1, sourceLineText1)
         assertViolation(violations[1], lineNumber2, sourceLineText2)
     }
