@@ -108,6 +108,21 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_TestClasses_NoViolations() {
+        final SOURCE = '''
+            class MyTest {
+                def closure = { new Object(); println "ok" }
+            }
+            class MyTests {
+                def closure = { new Object(); println "ok" }
+            }
+            class MyTestCase {
+                def closure = { new Object(); println "ok" }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         return new UnusedObjectRule()
     }

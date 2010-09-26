@@ -31,12 +31,14 @@ class UnusedObjectRule extends AbstractAstVisitorRule {
     String name = 'UnusedObject'
     int priority = 2
     Class astVisitorClass = UnusedObjectAstVisitor
+    String doNotApplyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
 class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
 
     void visitExpressionStatement(ExpressionStatement statement) {
-        if (statement.expression instanceof ConstructorCallExpression &&
+        if (isFirstVisit(statement) &&
+                statement.expression instanceof ConstructorCallExpression &&
                 !statement.expression.isSuperCall() &&
                 !statement.expression.isThisCall() &&
                 !isLastStatementInBlock(statement)) {

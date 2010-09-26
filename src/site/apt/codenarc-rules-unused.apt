@@ -39,6 +39,10 @@ Unused Rules  ("<rulesets/unused.xml>")
   statement within a block (because it may be the intentional return value). Examples
   include:
 
+  This rule sets the default value of the <doNotApplyToClassNames> property to only match
+  class names that do not end in 'Test', 'Tests' or 'TestCase'. Invoking constructors
+  without using the result is a common pattern in tests.
+
 -------------------------------------------------------------------------------
     int myMethod() {
         new BigDecimal("23.45")     // unused
