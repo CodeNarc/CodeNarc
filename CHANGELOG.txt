@@ -2,10 +2,39 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.10 (26 September 2010)
+-------------------------------------------
+BUG FIXES
+- Fix Bug #3071531: "Unused rules don't recognized method closures". https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=3071531&group_id=250145. e.g. private def bar() { }  .. return this.&bar;
+- Fix: UnusedPrivateField: Don’t produce violation if field is a Closure field and is executed.
+- Fix: ImportFromSamePackage: Fix for (ignore) alias imports within same package.   package org.xyz;  import org.xyz.MyBigClass as MBC.
+NEW RULES
+- New UnnecessaryIfStatementRule (basic):  Checks for if statements where the if and else blocks are only returning true and false constants. if(x) { return true } else { return false }.
+- New UnnecessaryBooleanExpressionRule (basic): Check for unnecessary boolean expressions, including ANDing (&&) or ORing (||) with true, false, null, or Map/List/String/Number literal. Also checks for negation of true, false, null, or Map/List/String/Number literal.
+- New BigDecimalInstantiationRule (basic): Avoid creating BigDecimal with a decimal (float/double) literal. Use a String literal. From PMD. See http://pmd.sourceforge.net/rules/basic.html#AvoidDecimalLiteralsInBigDecimalConstructor. Note that println new BigDecimal(0.1) prints out 0.1000000000000000055511151231257827021181583404541015625.
+- UnusedObjectRule (unused): Checks for object allocations that are not assigned or used, unless it is the last statement within a block (because it may be the intentional return value).
+- New UnusedArrayRule (unused): This inspection reports any instances of Groovy array allocation where the array allocated is ignored. Such allocation expressions are legal Groovy, but are usually either inadvertent, or evidence of a very odd object initialization strategy. (IntelliJ). When an ExpressionStatement has as its expression an ArrayExpression.
+- Implement ImplementationAsTypeRule (design): Checks that particular classes are never used as types in variable declarations, return values or parameters. GregorianCalendar, HashMap, HashSet, Hashtable, LinkedList, LinkedHashMap, LinkedHashSet, TreeSet, TreeMap, Vector, ArrayList, CopyOnWriteArrayList, CopyOnWriteArraySet, ConcurrentHashMap, ArrayBlockingQueue, ConcurrentLinkedQueue, DelayQueue, LinkedBlockingQueue, PriorityBlockingQueue, PriorityQueue, SynchronousQueue (see Checkstyle). (design)
+- New JUnitUnnecessaryTearDownRule (junit). Checks for tearDown() methods that only call super.tearDown().
+- New JUnitUnnecessarySetUpRule (junit). Checks for setUp() methods that only call super.setUp().
+NEW REPORT WRITER
+- New InlineXmlReportWriter (from Robin Bramley) for improved integration with the Hudson Violations plugin. See http://wiki.hudson-ci.org/display/HUDSON/Violations.   
+OTHER CHANGES
+- CodeNarc now requires Groovy 1.6 to run. Keep in mind that it can still run against (analyze) older Groovy code.
+- Upgrade to GMetrics 0.3 for AbcComplexityRule and CyclomaticComplexityRule. Violations now include line number and source line.
+- All JUnit rules (JUnit*Rule): Also apply to classes with names ending in *TestCase.
+- Add codenarc create-rule script to create a new rule and associated classes/tests. https://sourceforge.net/tracker/?func=detail&aid=3005873&group_id=250145&atid=1126575. (Hamlet D'Arcy)
+- ConstantTernaryExpressionRule: Also flag constant Map and List expressions.
+- ConstantIfExpressionRule: Also flag constant Map and List expressions.
+- GrailsPublicControllerMethod: add ignoreMethodNames property.
+- Add reference to Sonar plugin. http://docs.codehaus.org/display/SONAR/Groovy+Plugin to web site.
+- Add reference to Hudson Violations Plugin. http://wiki.hudson-ci.org/display/HUDSON/Violations to web site.
+
+
 Changes in version 0.9 (10 May 2010)
 ------------------------------------
 BUG FIXES
-- Fix bug #2985592: “MissingPropertyException: No such property: W3C_XML_SCHEMA_NS_URI”.
+- Fix bug #2985592: "MissingPropertyException: No such property: W3C_XML_SCHEMA_NS_URI".
 - XML RuleSet: Allow wildcards (*) in <include> and <exclude>.
 - WildcardPattern: Escape plus sign ('+').
 - NestedBlockDepthRule: Ignore first level of closure for Closure Fields (since they are really equivalent to methods).
@@ -28,7 +57,7 @@ NEW BASIC RULES
 OTHER CHANGES
 - Deprecate GrailsSessionReferenceRule. Default enabled to false. Note in online docs.
 - StatelessClassRule: Add setAddToIgnoreFieldNames() method (adds to ignoreFieldNames).
-- Add new <rule>.description.html property for each rule. Change the HtmlReportWriter to look for *.description.html first; if not defined, use *.description. Continue to use *.description in XML report. Potential BREAKAGE: If you have overridden the “<rule>.description” message for a predefined rule in a “codenarc-messages.properties” file, you will have to change those message keys to “<rule>.description.html”.
+- Add new <rule>.description.html property for each rule. Change the HtmlReportWriter to look for *.description.html first; if not defined, use *.description. Continue to use *.description in XML report. Potential BREAKAGE: If you have overridden the "<rule>.description" message for a predefined rule in a "codenarc-messages.properties" file, you will have to change those message keys to "<rule>.description.html".
 - Do not include disabled rules in list of rules at bottom of HTML/XML report.
 - HtmlReportWriter: Don’t log warning if "codenarc-messages.properties" contains *.description but not *.description.html.
 - UnusedVariableRule: Fix limitation: Does not recognize variable references on the same line as the variable declaration.
@@ -44,8 +73,8 @@ OTHER CHANGES
 Changes in version 0.8.1 (2 Feb 2010)
 ------------------------------------
 BUG FIXES
-- Fix Bug #2943025: “NestedBlockDepthRule: Produces erroneous results on Groovy 1.6.x.” https://sourceforge.net/tracker/?func=detail&aid=2943025&group_id=250145&atid=1126573
-- Fix Bug #2943028: “PackageNameRule may show incorrect violations for classes within the default package when running in Groovy 1.6.x.” https://sourceforge.net/tracker/?func=detail&aid=2943028&group_id=250145&atid=1126573
+- Fix Bug #2943025: "NestedBlockDepthRule: Produces erroneous results on Groovy 1.6.x." https://sourceforge.net/tracker/?func=detail&aid=2943025&group_id=250145&atid=1126573
+- Fix Bug #2943028: "PackageNameRule may show incorrect violations for classes within the default package when running in Groovy 1.6.x." https://sourceforge.net/tracker/?func=detail&aid=2943028&group_id=250145&atid=1126573
 - Fix Bug #2935587 "Building CodeNarc 0.8 fails." - Problem from Joern Huxhorn (Jan 18, 2010) – Unable to build from the downloaded CodeNarc-0.8-bin.tar.gz.  http://sourceforge.net/tracker/?func=detail&aid=2935587&group_id=250145&atid=1126573. See CodeNarc - Unable to Build From TarGZip.doc. Remove platform/locale dependencies: AbstractReportWriterTest, UrlResourceTest, GrailsSessionReferenceRuleTest, GrailsPublicControllerMethodRuleTest, GrailsServletContextReferenceRuleTest, GrailsStatelessServiceRuleTest. [Jan 24]
 - Fix StackOverflow in Groovy 1.7.0 for some rules: All rules that implement the visitVariableExpression(VariableExpression expression) visitor method: UnusedVariableRule, UnusedPrivateFieldRule, GrailsSessionReferenceRule, GrailsServletContextReferenceRule – Removed call to super.visitVariableExpression(expression) since that seems to cause problems (StackOverflow) in Groovy 1.7.0.
 - Fix tests broken when running in Groovy 1.6 or Groovy 1.7.
@@ -72,7 +101,7 @@ REPORTS
 RULES
 - Create new NestedBlockDepthRule. Checks for nesting of all types of block statements (and closures), including for, if, while, try and switch statements. (design)
 - MethodSizeRule: Add support for "ignoreMethodNames" property to enable filtering.
-- AbstractRule: Enhance applyToFileNames to handle optional path (e.g. “abc/def/MyClass.groovy”).
+- AbstractRule: Enhance applyToFileNames to handle optional path (e.g. "abc/def/MyClass.groovy").
 - AbstractRule: The (previously deprecated) applyToFilenames and doNotApplyToFilenames properties now throw an UnsupportedOperationException.
 - AbstractRule: Add optional description property; Use it in report if specified.
 OTHER CHANGES
@@ -82,23 +111,23 @@ OTHER CHANGES
 - Reorganize web site. Add Reports section. Add pages for HTML, XML and and text reports.
 - Add support and documentation for running CodeNarc as part of an automated test suite (e.g. JUnit).
 - Add List getSourceDirectories() to SourceAnalyzer interface and implementation classes.
-- Change “codenarc-version.txt” to contain only the version number.
+- Change "codenarc-version.txt" to contain only the version number.
 - Rename AbstractTest to AbstractTestCase.
 
 
 Changes in version 0.7 (25 Aug 2009)
 ------------------------------------
 BUG FIXES
-- Fix Bug #2825698: “UnusedVariableRule: stops after 1st unused variable per name”. https://sourceforge.net/tracker/?func=detail&aid=2825698&group_id=250145&atid=1126573.
-- Fix Bug #2828696: “UnusedImport rule with fully qualified class reference”   https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2828696&group_id=250145.
+- Fix Bug #2825698: "UnusedVariableRule: stops after 1st unused variable per name". https://sourceforge.net/tracker/?func=detail&aid=2825698&group_id=250145&atid=1126573.
+- Fix Bug #2828696: "UnusedImport rule with fully qualified class reference"   https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2828696&group_id=250145.
 - UnusedImportRule: Add support for static imports. Document known limitation: will not work on imports with wildcards.
 - UnnecessaryGroovyImportRule: Add java.net as another automatically included package.
 NEW FEATURES AND INFRASTRUCTURE
 - Groovy DSL for defining RuleSets. (GroovyDslRuleSet and RuleSetBuilder).
-- Enable optional prefix of “file:”, “http:” or any other standard URL prefix for resource files, including ruleset files, “codenarc.properties” and rule scripts.
-    * Addresses Tracker Issue #2828616: “Allow ruleset file to be specified as a file or url” https://sourceforge.net/tracker/?func=detail&atid=1126575&aid=2828616&group_id=250145.
+- Enable optional prefix of "file:", "http:" or any other standard URL prefix for resource files, including ruleset files, "codenarc.properties" and rule scripts.
+    * Addresses Tracker Issue #2828616: "Allow ruleset file to be specified as a file or url" https://sourceforge.net/tracker/?func=detail&atid=1126575&aid=2828616&group_id=250145.
 - CodeNarcTask and AntFileSetSourceAnalyzer: Allow more than one FileSet to be added.
-    * Addresses Tracker Issue #2831255: “Ant task should accept any ResourceCollection for source”  https://sourceforge.net/tracker/?func=detail&aid=2831255&group_id=250145&atid=1126575.
+    * Addresses Tracker Issue #2831255: "Ant task should accept any ResourceCollection for source"  https://sourceforge.net/tracker/?func=detail&aid=2831255&group_id=250145&atid=1126575.
 - HtmlReportWriter: Show rule name in color according to priority.
 - CompositeRuleSet: Rename add(RuleSet) to addRuleSet(RuleSet). Add addRule(Rule).
 RULES
@@ -109,10 +138,10 @@ RULES
 Changes in version 0.6 (17 Jul 2009)
 ------------------------------------
 BUG FIXES
-- Fix BUG #2798845 : “StringIndexOutOfBoundsException” https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2798845&group_id=250145
+- Fix BUG #2798845 : "StringIndexOutOfBoundsException" https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2798845&group_id=250145
 - Fix BUG #2799752: GrailsPublicControllerMethodRule - should only apply itself to methods within classes that have suffix "Controller". (see email from Jason Anderson, May 26, 2009) https://sourceforge.net/tracker/?func=detail&aid=2799752&group_id=250145&atid=1126573
 - Fix BUG #2796953: StatelessClassRule requires applyToFileNames or applyToFilesMatching.  https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2796953&group_id=250145
-- Fix BUG #2811213: “FieldNameRule: Names for final fields - not be all caps”. FieldNameRule: Field names for final instance fields should not default to be all caps like static final fields. For instance: final List sentEmails = []. Rather, “If a property is declared final the private field is created final and no setter is generated.” (http://groovy.codehaus.org/Groovy+Beans). So, they should be named with “normal” naming conventions. Re-purpose the finalRegex property to just apply to final instance fields and default to null so that final field names use same convention as non-final. https://sourceforge.net/tracker/?func=detail&aid=2811213&group_id=250145&atid=1126573.
+- Fix BUG #2811213: "FieldNameRule: Names for final fields - not be all caps". FieldNameRule: Field names for final instance fields should not default to be all caps like static final fields. For instance: final List sentEmails = []. Rather, "If a property is declared final the private field is created final and no setter is generated." (http://groovy.codehaus.org/Groovy+Beans). So, they should be named with "normal" naming conventions. Re-purpose the finalRegex property to just apply to final instance fields and default to null so that final field names use same convention as non-final. https://sourceforge.net/tracker/?func=detail&aid=2811213&group_id=250145&atid=1126573.
 - Fix: GrailsStatelessServiceRule: Should only apply to *Service classes.
 RULES
 - Implement UnusedVariableRule. (unused)
@@ -124,7 +153,7 @@ RULES
 - FieldNameRule: Add support for ignoreFieldNames.
 - IllegalRegexRule: Include line numbers in rule violations.
 INFRASTRUCTURE
-- Allow setting custom name and path for “codenarc.properties” file using “codenarc.properties.file” system property.
+- Allow setting custom name and path for "codenarc.properties" file using "codenarc.properties.file" system property.
 - WildcardPattern: Add optional defaultMatches constructor parameter to specify return value of matches() when the pattern string is null or empty.
 - HtmlReportWriter: Show rules with priority 4. This enables configuring rules to be included in the report but not fail the build.
 - SourceCode: Add int getLineNumberForCharacterIndex(int charIndex).
@@ -137,7 +166,7 @@ Changes in version 0.5 (24 May 2009)
 ------------------------------------
 BUG FIXES
 - FIX: IllegalRegexRule: Don’t stop after first violation.
-- FIX: VariableNameRule processing enums: “ArrayIndexOutOfBoundsException: Negative array index [-3] too large for array size 1”.
+- FIX: VariableNameRule processing enums: "ArrayIndexOutOfBoundsException: Negative array index [-3] too large for array size 1".
 - FIX: BooleanInstantiationRule, VariableNameRule: Error parsing code with Enums.
 - FIX: Rules sometimes produce two violations for a single line. (e.g. EmptyElseBlockRule, PrintlnRule)
 POTENTIAL BREAKING CHANGES
@@ -168,7 +197,7 @@ INFRASTRUCTURE
 - Include number (index) of rule in Rule Descriptions section of HTML report.
 - Create CodeNarcRunner class; refactor CodeNarc and CodeNarcTask to use it.
 - HtmlReportWriter: Shrink font size of the rule descriptions at the end of the HTML report.
-- HtmlReportWriter: Remove “Source Directories” section.
+- HtmlReportWriter: Remove "Source Directories" section.
 - Create FilesystemSourceAnalyzer.
 - Refactor WildcardPattern to (optionally) support comma-separated list of patterns.
 - Change WildcardPattern to support Ant-style ‘**’ wildcards.
@@ -181,8 +210,8 @@ DEPRECATIONS
 - AbstractRule: Deprecated applyToFilenames and doNotApplyToFilenames (replace with applyToFileNames and doNotApplyToFileNames).
 - Deprecated DirectorySourceAnalyzer.
 DOCUMENTATION
-- Create “Create Rule” document.
-- Add section in “Configuring Rules” on Turning Off a Rule.
+- Create "Create Rule" document.
+- Add section in "Configuring Rules" on Turning Off a Rule.
 
 
 Changes in version 0.4 (31 Mar 2009)
@@ -251,7 +280,7 @@ DOCUMENTATION
 - Add info to online docs re: standard rule properties.
 - Reorganize docs – separate doc for each RuleSet; section for each rule; table for properties.
 - Update RuleSets doc with info about configuring using properties file.
-- Create “Configuring Rules” document (adapt existing “custom-rule-descriptions.apt”).
+- Create "Configuring Rules" document (adapt existing "custom-rule-descriptions.apt").
 
 
 Changes in version 0.2 (07 Feb 2009)

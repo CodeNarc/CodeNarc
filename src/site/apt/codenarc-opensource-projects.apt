@@ -14,13 +14,13 @@ CodeNarc - Open Source Project Reports
 * Grails
 ~~~~~~~~~
 
-  <<CodeNarc>> report for {{{CodeNarc-Grails-Report.html}Grails 1.2.0}}
+  <<CodeNarc>> report for {{{CodeNarc-Grails-Report.html}Grails 1.3.4}}
 
 
 * Griffon
 ~~~~~~~~~~
 
-  <<CodeNarc>> report for {{{CodeNarc-Griffon-Report.html}Griffon 0.3}}
+  <<CodeNarc>> report for {{{CodeNarc-Griffon-Report.html}Griffon 0.8}}
 
 
 * Gradle
