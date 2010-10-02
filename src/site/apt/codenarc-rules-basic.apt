@@ -332,6 +332,15 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* SerialVersionUID Rule
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+  A <<serialVersionUID>> is normally intended to be used with Serialization. It needs to be of type
+  <<<long>>>, <<<static>>>, and <<<final>>>. Also, it should have a <visibility modifier> such
+  as <<<public>>> or <<<private>>>. Providing no modifier creates a <Property> and Groovy generates
+  a <getter>, which is probably not intended.
+
+
 * ThrowExceptionFromFinallyBlock
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
