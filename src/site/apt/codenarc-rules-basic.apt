@@ -295,6 +295,18 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* GStringAsMapKey Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  A GString should not be used as a map key since its <hashcode> is not guaranteed to be stable.
+  Consider calling <<<key.toString()>>>.
+
+  Here is an example of code that produces a violation:
+
+-------------------------------------------------------------------------------
+    Map map = ["${someRef}" : 'invalid' ]       // violation
+-------------------------------------------------------------------------------
+
 
 * ReturnFromFinallyBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

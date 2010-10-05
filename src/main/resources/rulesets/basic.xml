@@ -23,6 +23,7 @@
     <rule class='org.codenarc.rule.basic.EmptySynchronizedStatementRule'/>
     <rule class='org.codenarc.rule.basic.EmptyTryBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyWhileStatementRule'/>
+    <rule class='org.codenarc.rule.basic.GStringAsMapKeyRule'/>
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.SerialVersionUIDRule'/>
     <rule class='org.codenarc.rule.basic.StringInstantiationRule'/>
