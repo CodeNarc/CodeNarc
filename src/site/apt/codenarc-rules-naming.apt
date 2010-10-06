@@ -113,6 +113,30 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
+* ObjectOverrideMisspelledMethodName Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Verifies that the names of the most commonly overridden methods of <<<Object>>>: <<<equals>>>,
+  <<<hashCode>>> and <<<toString>>>, are correct.
+
+  Here are some examples of code that produces violations:
+
+-------------------------------------------------------------------------------
+    boolean equal(Object o) {}                  // violation
+    boolean equal(int other) {}                 // ok; wrong param type
+    boolean equal(Object o, int other) {}       // ok; too many params
+
+    boolean equaLS(Object o) {}                 // violation
+
+    int hashcode() {}                           // violation
+    int hashCOde() {}                           // violation
+
+    String tostring() {}                        // violation
+    String toSTring() {}                        // violation
+    String tostring(int value) {}               // ok; not empty param
+-------------------------------------------------------------------------------
+
+
 * PackageName Rule
 ~~~~~~~~~~~~~~~~~~~
 

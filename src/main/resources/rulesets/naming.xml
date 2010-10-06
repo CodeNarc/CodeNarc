@@ -13,6 +13,7 @@
     <rule class='org.codenarc.rule.naming.FieldNameRule'/>
     <rule class='org.codenarc.rule.naming.InterfaceNameRule'/>
     <rule class='org.codenarc.rule.naming.MethodNameRule'/>
+    <rule class='org.codenarc.rule.naming.ObjectOverrideMisspelledMethodNameRule'/>
     <rule class='org.codenarc.rule.naming.PackageNameRule'/>
     <rule class='org.codenarc.rule.naming.ParameterNameRule'/>
     <rule class='org.codenarc.rule.naming.PropertyNameRule'/>
