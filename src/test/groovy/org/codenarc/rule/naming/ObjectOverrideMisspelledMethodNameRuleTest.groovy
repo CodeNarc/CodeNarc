@@ -32,8 +32,8 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_NoViolations() {
         final SOURCE = '''
+        	class MyClass { boolean equals(o){} }
         	boolean equals(Object o){}
-        	class MyClass() {boolean equals(o){}}
             int hashCode(){}
             String toString(){}
         '''
@@ -64,20 +64,19 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
     void testHashCode_WrongCase() {
         final SOURCE = '''
             int hashcode() {}
-            Object haSHcode(int value) {}      // Note that it does not enforce return type or empty params
-            int hashCOde() {}
+            int haSHcode(int value) {}      // ok; not empty params
+            Object hashCOde() {}            // Note that it does not enforce return type
         '''
         assertViolations(SOURCE,
                 [lineNumber:2, sourceLineText:'int hashcode() {}'],
-                [lineNumber:3, sourceLineText:'Object haSHcode(int value) {}'],
-                [lineNumber:4, sourceLineText:'int hashCOde() {}'],
+                [lineNumber:4, sourceLineText:'Object hashCOde() {}'],
         )
     }
 
     void testToString_WrongCase() {
         final SOURCE = '''
             String tostring() {}
-            String tostring(int value) {}   // ok; not empty param
+            String tostring(int value) {}   // ok; not empty params
             String toSTring() {}
         '''
         assertViolations(SOURCE,

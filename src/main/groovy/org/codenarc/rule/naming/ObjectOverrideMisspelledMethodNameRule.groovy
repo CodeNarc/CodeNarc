@@ -34,44 +34,26 @@ class ObjectOverrideMisspelledMethodNameRule extends AbstractAstVisitorRule {
 class ObjectOverrideMisspelledMethodNameAstVisitor extends AbstractAstVisitor {
 
     void visitMethod(MethodNode node) {
-        checkEqual(node)
-        checkEquals(node)
-        checkHashCode(node)
-        checkToString(node)
+        checkForExactMethodName(node, 'equal', ['Object'], 'equals')
+        checkForMethodNameWithIncorrectCase(node, 'equals', ['Object'])
+        checkForMethodNameWithIncorrectCase(node, 'hashCode', [])
+        checkForMethodNameWithIncorrectCase(node, 'toString', [])
     }
 
-    private void checkEqual(MethodNode node) {
-        def methodName = node?.name
-        if(methodName == 'equal'
-                && node?.parameters.size() == 1
-                && node?.parameters[0].type.name == 'Object') {
-            addViolation node, 'Trying to override the equals method using the name [$methodName]'
+    private void checkForMethodNameWithIncorrectCase(MethodNode node, String targetMethodName, List parameterTypes) {
+        def actualMethodName = node?.name
+        if (actualMethodName?.toLowerCase() == targetMethodName.toLowerCase()
+                && actualMethodName != targetMethodName
+                && node?.parameters*.type.name == parameterTypes) {
+            addViolation node, "Trying to override the $targetMethodName method using the name [$actualMethodName]"
         }
     }
 
-    private void checkEquals(MethodNode node) {
-        def methodName = node?.name
-        if(methodName?.toLowerCase() == 'equals'
-                && methodName != 'equals'
-                && node?.parameters.size() == 1
-                && node?.parameters[0].type.name == 'Object') {
-            addViolation node, 'Trying to override the equals method using the name [$methodName]'
+    private void checkForExactMethodName(MethodNode node, String targetMethodName, List parameterTypes, String overridingMethodName) {
+        def actualMethodName = node?.name
+        if (actualMethodName == targetMethodName && node?.parameters*.type.name == parameterTypes) {
+            addViolation node, "Trying to override the $overridingMethodName method using the name [$actualMethodName]"
         }
     }
 
-    private void checkHashCode(MethodNode node) {
-        def methodName = node?.name
-        if(methodName?.toLowerCase() == 'hashcode' && methodName != 'hashCode') {
-            addViolation node, 'Trying to override the hashCode method using the name [$methodName]'
-        }
-    }
-
-    private void checkToString(MethodNode node) {
-        def methodName = node?.name
-        if(methodName?.toLowerCase() == 'tostring'
-                && methodName != 'toString'
-                && node?.parameters.size() == 0) {
-            addViolation node, 'Trying to override the toString method using the name [$methodName]'
-        }
-    }
 }

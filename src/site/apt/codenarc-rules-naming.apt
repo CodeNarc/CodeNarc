@@ -130,10 +130,11 @@ Naming Rules  ("<rulesets/naming.xml>")
 
     int hashcode() {}                           // violation
     int hashCOde() {}                           // violation
+    int hashcode(int value) {}                  // ok; not empty params
 
     String tostring() {}                        // violation
     String toSTring() {}                        // violation
-    String tostring(int value) {}               // ok; not empty param
+    String tostring(int value) {}               // ok; not empty params
 -------------------------------------------------------------------------------
 
 
