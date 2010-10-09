@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.PropertyNode
  * Rule that checks that serialVersionUID field is static final and type long, and is not a property.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SerialVersionUIDRule extends AbstractAstVisitorRule {
     String name = 'SerialVersionUID'
