@@ -73,6 +73,11 @@
             <item name="Unused Rules" href="/codenarc-rules-unused.html"/>
         </menu>
 
+        <menu name="Developing">
+            <item name="The codenarc Script" href="/developer/codenarc-script.html"/>
+            <item name="New Rule Checklist" href="/developer/codenarc-new-rule-checklist.html"/>
+        </menu>
+
         ${reports}
     </body>
 </project>
