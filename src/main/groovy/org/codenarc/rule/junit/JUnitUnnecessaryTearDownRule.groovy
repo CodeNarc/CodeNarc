@@ -16,7 +16,6 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
