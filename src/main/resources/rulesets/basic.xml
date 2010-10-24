@@ -13,6 +13,7 @@
     <rule class='org.codenarc.rule.basic.CloneableWithoutCloneRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
+    <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateSwitchStatementRule'/>
     <rule class='org.codenarc.rule.basic.EqualsAndHashCodeRule'/>
     <rule class='org.codenarc.rule.basic.EmptyCatchBlockRule'/>

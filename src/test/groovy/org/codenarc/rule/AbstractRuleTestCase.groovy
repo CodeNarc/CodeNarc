@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,7 @@ import org.codenarc.test.AbstractTestCase
  * Abstract superclass for tests of Rule classes
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 abstract class AbstractRuleTestCase extends AbstractTestCase {
@@ -78,7 +79,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
             Integer lineNumber1, String sourceLineText1,
             Integer lineNumber2, String sourceLineText2) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 2, "Expected 2 Violations\nFound: $violations\n"
+        assert violations.size() == 2, "Expected 2 Violations\nFound: \n${violations.join('\n')}\n"
         assertViolation(violations[0], lineNumber1, sourceLineText1)
         assertViolation(violations[1], lineNumber2, sourceLineText2)
     }
@@ -114,7 +115,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
             Integer lineNumber1, String sourceLineText1, msg1,
             Integer lineNumber2, String sourceLineText2, msg2) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 2, "Expected 2 Violation2\nFound: $violations\n"
+        assert violations.size() == 2, "Expected 2 Violation2\nFound: \n${violations.join('\n')}\n"
         assertViolation(violations[0], lineNumber1, sourceLineText1, msg1)
         assertViolation(violations[1], lineNumber2, sourceLineText2, msg2)
     }
@@ -129,7 +130,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, messageText=null) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 1, "Expected 1 Violation\nFound: $violations\n  for sourceLineText: [$sourceLineText]"
+        assert violations.size() == 1, "Expected 1 Violation\nFound: \n${violations.join('\n')}\n  for sourceLineText: [$sourceLineText]"
         assertViolation(violations[0], lineNumber, sourceLineText, messageText)
     }
 
@@ -141,7 +142,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertSingleViolation(String source, Closure closure) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 1, "Expected 1 Violation\nFound: $violations\n"
+        assert violations.size() == 1, "Expected 1 Violation\nFound: \n${violations.join('\n')}\n"
         assert closure(violations[0]), "Closure failed for ${violations[0]}"
     }
 
@@ -152,7 +153,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertNoViolations(String source) {
         def violations = applyRuleTo(source)
-        assert violations.empty, "Expected no violations, but got: $violations"
+        assert violations.empty, "Expected no violations, but got: \n${violations.join('\n')}\n"
     }
 
     /**
@@ -171,7 +172,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         assert violation.rule == rule
         assert violation.lineNumber == lineNumber
         if (sourceLineText) {
-            assert violation.sourceLine 
+            assert violation.sourceLine
             assert violation.sourceLine.contains(sourceLineText), """
 expected to contain:  $sourceLineText
 actual:  $violation.sourceLine
