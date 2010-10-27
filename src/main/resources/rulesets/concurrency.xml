@@ -11,6 +11,7 @@
     <rule class='org.codenarc.rule.concurrency.NestedSynchronizationRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnThisRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedOnGetClassRule'/>
     <rule class='org.codenarc.rule.concurrency.SystemRunFinalizersOnExitRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadLocalNotStaticFinalRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadYieldRule'/>
