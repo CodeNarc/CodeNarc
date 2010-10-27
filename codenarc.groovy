@@ -10,13 +10,20 @@ if (!args) {
 
 if (args[0] == 'create-rule') {
 		
+    print "Enter your name:"
+    def authorName = getUserInput()
+
 	print "Enter the rule name:"
 	def ruleName = getUserInput()
 	def ruleCategory = getRuleCategory() 
 
-	makeRule(ruleName, ruleCategory) 
-	makeRuleTest(ruleName, ruleCategory) 
-	updatePropertiesFile(ruleName)
+    print "Enter the rule description:"
+    def ruleDescription = getUserInput()
+
+    def binding = ['ruleName':ruleName, 'ruleCategory':ruleCategory, 'authorName': authorName, 'ruleDescription': ruleDescription]
+	makeRule(binding)
+	makeRuleTest(binding) 
+	updatePropertiesFile(ruleName, ruleDescription)
 	updateRuleList(ruleName, ruleCategory) 
 	
 	println "\tFinished"
@@ -28,25 +35,25 @@ if (args[0] == 'create-rule') {
 /*
 * The rest of the code is here to support create-rule.
 */ 
-def makeRule(ruleName, ruleCategory) {
+def makeRule(binding) {
 
 	makeFromTemplate(
-		ruleName, ruleCategory, 'Rule.groovy', 
-		"./src/main/groovy/org/codenarc/rule/${ruleCategory}/${ruleName}Rule.groovy")
+		binding, 'Rule.groovy', 
+		"./src/main/groovy/org/codenarc/rule/${binding.ruleCategory}/${binding.ruleName}Rule.groovy")
 }
 
-def makeRuleTest(ruleName, ruleCategory) {
+def makeRuleTest(binding) {
 	makeFromTemplate(
-		ruleName, ruleCategory, 'Test.groovy', 
-		"./src/test/groovy/org/codenarc/rule/${ruleCategory}/${ruleName}RuleTest.groovy")
+		binding, 
+        'Test.groovy',
+		"./src/test/groovy/org/codenarc/rule/${binding.ruleCategory}/${binding.ruleName}RuleTest.groovy")
 }
 
-def makeFromTemplate(ruleName, ruleCategory, templateName, targetPath) {
+def makeFromTemplate(binding, templateName, targetPath) {
 	def file = new File(targetPath)
 	file.createNewFile()
 	def ruleTemplate = new File("./templates/$templateName").text
 	
-	def binding = ['ruleName':ruleName, 'ruleCategory':ruleCategory]
 	def engine = new SimpleTemplateEngine()
 	def rule = engine.createTemplate(ruleTemplate).make(binding)
 
@@ -64,13 +71,13 @@ def updateRuleList(ruleName, ruleCategory) {
 	println "\tUpdated $path"
 }
 
-def updatePropertiesFile(ruleName) {
+def updatePropertiesFile(ruleName, ruleDescription) {
 	def path = './src/main/resources/codenarc-base-messages.properties'
 	def file = new File(path)
 	file.text = """
 # todo: manually sort your messages into the correct location
-${ruleName}.description=add a text description of your rule
-${ruleName}.description.html=add an html description of your rule
+${ruleName}.description=$ruleDescription
+${ruleName}.description.html=$ruleDescription
 
 """ + file.text
 	println "\tUpdated $path"
@@ -111,4 +118,3 @@ Valid Options:
     create-rule - Creates a new CodeNarc rule
 """
 }
-
