@@ -35,18 +35,16 @@ class VacuousCollectionCallRule extends AbstractAstVisitorRule {
 
 class VacuousCollectionCallAstVisitor extends AbstractAstVisitor {
 
-    static USELESS_METHOD_NAMES = ['retainAll', 'containsAll']
+    private static final List USELESS_METHOD_NAMES = ['retainAll', 'containsAll']
 
     def void visitMethodCallExpression(MethodCallExpression call) {
 
         if (USELESS_METHOD_NAMES.contains(call.method.text)) {
             String variableName = call.objectExpression.text
-            if (call.arguments instanceof TupleExpression) {
-                if (call.arguments.expressions.size() == 1) {
-                    def argName = call.arguments.expressions[0].text
-                    if (argName == variableName) {
-                        addViolation call
-                    }
+            if (call.arguments instanceof TupleExpression && call.arguments.expressions.size() == 1) {
+                def argName = call.arguments.expressions[0].text
+                if (argName == variableName) {
+                    addViolation call
                 }
             }
         }

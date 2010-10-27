@@ -20,7 +20,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.ast.MethodNode
 
-import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 

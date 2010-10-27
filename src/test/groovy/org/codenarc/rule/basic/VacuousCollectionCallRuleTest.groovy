@@ -56,6 +56,7 @@ class VacuousCollectionCallRuleTest extends AbstractRuleTestCase {
                 4, 'x.retainAll(x)')
     }
 
+
     void testClassFailure() {
         final SOURCE = '''
             class MyClass {

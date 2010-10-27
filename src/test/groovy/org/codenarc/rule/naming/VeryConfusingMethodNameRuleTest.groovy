@@ -84,18 +84,18 @@ class VeryConfusingMethodNameRuleTest extends AbstractRuleTestCase {
 
     // TODO: this condition can only be found in the CLASS_GENERATION compile phase
     // for now the test is ignored
-    void ignore_test2ClosureViolationsInClass() {
-        final SOURCE = '''
-            class MyClass {
-            	def foo = {}
-                Closure FOo
-                def foO = {}
-            }
-        '''
-        assertTwoViolations(SOURCE, 
-                4, 'Closure FOo',
-                5, 'def foO = {}')
-    }
+//    void test2ClosureViolationsInClass() {
+//        final SOURCE = '''
+//            class MyClass {
+//            	def foo = {}
+//                Closure FOo
+//                def foO = {}
+//            }
+//        '''
+//        assertTwoViolations(SOURCE,
+//                4, 'Closure FOo',
+//                5, 'def foO = {}')
+//    }
 
     void test2ViolationsInClass() {
         final SOURCE = '''
@@ -124,45 +124,47 @@ class VeryConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 6, 'def foO(int x) {}')
     }
 
-    void test2ViolationsInNestedClasses() {
-        final SOURCE = '''
-            class MyClass {
-                def foo() {}
-                def foO() {}
+    // todo: uncomment when groovy 1.7 is supported
+//    void test2ViolationsInNestedClasses() {
+//        final SOURCE = '''
+//            class MyClass {
+//                def foo() {}
+//                def foO() {}
+//
+//                def x = new Object() {
+//                    def innerFoo() {}
+//                    def innerfoO = {} // this one is a closure!
+//                }
+//            }
+//        '''
+//        assertTwoViolations(SOURCE,
+//                4, 'def foO() {}',
+//                7, 'def innerFoo() {}') // this seems out of order but is correct
+//    }
 
-                def x = new Object() {
-                    def innerFoo() {}
-                    def innerfoO = {} // this one is a closure!
-                }
-            }
-        '''
-        assertTwoViolations(SOURCE,
-                4, 'def foO() {}',
-                7, 'def innerFoo() {}') // this seems out of order but is correct
-    }
-
-    void testDeepNesting() {
-        final SOURCE = '''
-        	def foo() {}
-        	def foo(int x) {}
-            class MyClass {
-                def foo() {}
-                def foo(int x) {}
-                def x = new Object() {
-                    def foo() {}
-                    def foo(int x) {}
-                    def y = new Object() {
-                        def foo = {}
-                        def FoO = {}
-                        def foO() {}
-                    }
-                }
-            }
-        '''
-        assertTwoViolations(SOURCE,
-                12, 'def FoO = {}',
-                13, 'def foO() {}')
-    }
+    // todo: uncomment when groovy 1.7 is supported
+//    void testDeepNesting() {
+//        final SOURCE = '''
+//        	def foo() {}
+//        	def foo(int x) {}
+//            class MyClass {
+//                def foo() {}
+//                def foo(int x) {}
+//                def x = new Object() {
+//                    def foo() {}
+//                    def foo(int x) {}
+//                    def y = new Object() {
+//                        def foo = {}
+//                        def FoO = {}
+//                        def foO() {}
+//                    }
+//                }
+//            }
+//        '''
+//        assertTwoViolations(SOURCE,
+//                12, 'def FoO = {}',
+//                13, 'def foO() {}')
+//    }
 
     protected Rule createRule() {
         return new VeryConfusingMethodNameRule()

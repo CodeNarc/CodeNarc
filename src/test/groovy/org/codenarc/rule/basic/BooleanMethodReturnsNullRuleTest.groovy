@@ -118,20 +118,21 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'return null')
     }
 
-    void testAnonymousClassMethodReturnsNull() {
-        final SOURCE = '''
-            def x = new Object() {
-                def scriptMethod() {
-                    if (foo()) {
-                        return true
-                    } else {
-                        return null
-                    }
-                }
-            }
-        '''
-        assertSingleViolation(SOURCE, 7, 'return null')
-    }
+    // todo: uncomment when Groovy 1.7 is supported
+//    void testAnonymousClassMethodReturnsNull() {
+//        final SOURCE = '''
+//            def x = new Object() {
+//                def scriptMethod() {
+//                    if (foo()) {
+//                        return true
+//                    } else {
+//                        return null
+//                    }
+//                }
+//            }
+//        '''
+//        assertSingleViolation(SOURCE, 7, 'return null')
+//    }
 
     void testDefMethodReturnsNullAndTRUE() {
         final SOURCE = '''

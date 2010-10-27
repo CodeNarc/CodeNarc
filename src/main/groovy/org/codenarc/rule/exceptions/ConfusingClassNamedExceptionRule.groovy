@@ -17,7 +17,6 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.ClosureListExpression
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.AstUtil
 

@@ -100,7 +100,7 @@ class AstUtil {
         if (respondsTo(argumentsExpression, 'getMapEntryExpressions')) {
             return argumentsExpression.mapEntryExpressions
         }
-        return null
+        return []
     }
 
     static boolean isMethodCallOnObject(MethodCallExpression methodCallExpression, String methodObject) {

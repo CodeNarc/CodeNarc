@@ -22,8 +22,6 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.ClassHelper
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression

@@ -24,8 +24,6 @@ import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.ast.expr.BooleanExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.ClassExpression
 
 /**
  * Method with Boolean return type returns explicit null. A method that returns either Boolean.TRUE, Boolean.FALSE or

@@ -59,15 +59,15 @@ class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 2, 'class MyException {}')
     }
-
-    void testExceptionInNestedClass() {
-        final SOURCE = '''
-        class MyClass {
-            class MyNestedException {}
-        }
-        '''
-        assertSingleViolation(SOURCE, 3, 'class MyNestedException {}')
-    }
+      // todo: uncomment when groovy 1.7 is supported
+//    void testExceptionInNestedClass() {
+//        final SOURCE = '''
+//        class MyClass {
+//            class MyNestedException {}
+//        }
+//        '''
+//        assertSingleViolation(SOURCE, 3, 'class MyNestedException {}')
+//    }
     protected Rule createRule() {
         return new ConfusingClassNamedExceptionRule()
     }
