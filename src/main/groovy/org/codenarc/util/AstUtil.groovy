@@ -266,6 +266,12 @@ class AstUtil {
         if (node.isDerivedFrom(targetNode)) {
             return true
         }
+        if (node.name == target.name) {
+            return true
+        }
+        if (node.name == target.simpleName) {
+            return true
+        }
         return false
     }
 
