@@ -21,7 +21,7 @@ import org.codenarc.rule.Rule
 /**
  * Tests for ${ruleName}Rule
  *
- * @author Your Name Here
+ * @author '${authorName}'
  * @version \$Revision: 329 \$ - \$Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) \$
  */
 class ${ruleName}RuleTest extends AbstractRuleTestCase {
@@ -31,14 +31,21 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
         assert rule.name == "$ruleName"
     }
 
-    void testApplyTo_NoViolations() {
+    void testSuccessScenario() {
         final SOURCE = '''
-        	"some source" // todo: replace with source for passing edge case
+        	// todo: replace with source for passing edge case
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_2_Violations() {
+    void testSingleViolation() {
+        final SOURCE = '''
+            // todo: replace with source that triggers a violation
+        '''
+        assertSingleViolation(SOURCE, 1, '...')
+    }
+
+    void testTwoViolations() {
         final SOURCE = '''
             // todo: replace with source that triggers 2 violations
         '''
@@ -50,5 +57,4 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
     protected Rule createRule() {
         return new ${ruleName}Rule()
     }
-
 }

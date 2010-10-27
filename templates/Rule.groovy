@@ -19,9 +19,9 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * Todo: Replace description
+ * ${ruleDescription}
  *
- * @author Your Name Here
+ * @author '${authorName}'
  * @version \$Revision: 24 \$ - \$Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) \$
  */
 class ${ruleName}Rule extends AbstractAstVisitorRule {
