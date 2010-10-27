@@ -15,6 +15,7 @@
     <rule class='org.codenarc.rule.concurrency.SystemRunFinalizersOnExitRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadLocalNotStaticFinalRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadYieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.UseOfNotifyMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.VolatileLongOrDoubleFieldRule'/>
 
 </ruleset>
