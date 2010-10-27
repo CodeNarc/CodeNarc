@@ -33,4 +33,5 @@
     <rule class='org.codenarc.rule.basic.UnnecessaryBooleanExpressionRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryIfStatementRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryTernaryExpressionRule'/>
+    <rule class='org.codenarc.rule.basic.VacuousCollectionCallRule'/>
 </ruleset>
