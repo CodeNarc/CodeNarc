@@ -13,12 +13,11 @@
     <rule class='org.codenarc.rule.exceptions.CatchNullPointerExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.CatchRuntimeExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'/>
-
+    <rule class='org.codenarc.rule.exceptions.ConfusingClassNamedExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.ThrowErrorRule'/>
     <rule class='org.codenarc.rule.exceptions.ThrowExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.ThrowNullPointerExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.ThrowRuntimeExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.ThrowThrowableRule'/>
-
     <rule class='org.codenarc.rule.exceptions.CatchingIllegalMonitorStateExceptionRule'/>
 </ruleset>
