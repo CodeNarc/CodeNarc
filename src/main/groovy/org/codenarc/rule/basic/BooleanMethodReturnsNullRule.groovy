@@ -76,7 +76,7 @@ class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
     }
 }
 
-private class BooleanReturnTracker extends AbstractAstVisitor {
+class BooleanReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
     def void visitReturnStatement(ReturnStatement statement) {
