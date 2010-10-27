@@ -170,7 +170,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
                             String sourceLineText,
                             messageText=null) {
         assert violation.rule == rule
-        assert violation.lineNumber == lineNumber
+        assert violation.lineNumber == lineNumber : "Wrong line number for violation: \n$violation"
         if (sourceLineText) {
             assert violation.sourceLine
             assert violation.sourceLine.contains(sourceLineText), """
