@@ -37,7 +37,7 @@ import org.codenarc.util.AstUtil
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class ReturnsNullInsteadOfEmptyCollectionRule extends AbstractAstVisitorRule {
-    String name = 'ReturnsNullInsteadOfEmptyCollectionRule'
+    String name = 'ReturnsNullInsteadOfEmptyCollection'
     int priority = 2
     Class astVisitorClass = ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor
 }
@@ -95,7 +95,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
     }
 }
 
-private class CollectionReturnTracker extends AbstractAstVisitor {
+class CollectionReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
     def void visitReturnStatement(ReturnStatement statement) {
