@@ -30,6 +30,10 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.PropertyExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.ClassHelper
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -216,11 +220,21 @@ class AstUtil {
     }
 
     static boolean isTrue(Expression expression) {
+        if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
+            if (expression.property instanceof ConstantExpression && expression.property.value == "TRUE") {
+                return true
+            }
+        }
         return ((expression instanceof ConstantExpression) && expression.isTrueExpression()) ||
                 expression.text == 'Boolean.TRUE'
     }
 
     static boolean isFalse(Expression expression) {
+        if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
+            if (expression.property instanceof ConstantExpression && expression.property.value == "FALSE") {
+                return true
+            }
+        }
         return ((expression instanceof ConstantExpression) && expression.isFalseExpression()) ||
                 expression.text == 'Boolean.FALSE'
     }
@@ -233,6 +247,52 @@ class AstUtil {
      */
     private static boolean respondsTo(Object object, String methodName) {
         return object.metaClass.respondsTo(object, methodName)
+    }
+
+    /**
+     * This method tells you if a ClassNode implements or extends a certain class.
+     * @param node
+     *      the node
+     * @param target
+     *      the class
+     * @return
+     *      true if the class node 'is a' target
+     */
+    public static boolean classNodeImplementsType(ClassNode node, Class target) {
+        ClassNode targetNode = ClassHelper.make(target)
+        if (node.implementsInterface(targetNode)) {
+            return true
+        }
+        if (node.isDerivedFrom(targetNode)) {
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Returns true if the ASTNode is a declaration of a closure, either as a declaration
+     * or a field.
+     * @param expression
+     *      the target expression
+     * @return
+     *      as described
+     */
+    public static boolean isClosureDeclaration(ASTNode expression) {
+        if (expression instanceof DeclarationExpression) {
+            if (expression.rightExpression instanceof ClosureExpression) {
+                return true
+            }
+        }
+        if (expression instanceof FieldNode) {
+            ClassNode type = expression.type
+            if (classNodeImplementsType(type, Closure)) {
+                return true
+            } else if (expression.initialValueExpression instanceof ClosureExpression) {
+                return true
+            }
+        }
+
+        return false
     }
 
     /**
