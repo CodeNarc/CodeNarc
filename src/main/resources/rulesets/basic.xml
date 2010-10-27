@@ -29,6 +29,7 @@
     <rule class='org.codenarc.rule.basic.GStringAsMapKeyRule'/>
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyArrayRule'/>
+    <rule class='org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyCollectionRule'/>
     <rule class='org.codenarc.rule.basic.SerialVersionUIDRule'/>
     <rule class='org.codenarc.rule.basic.StringInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
