@@ -34,6 +34,7 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.ClassHelper
+import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -245,7 +246,7 @@ class AstUtil {
      * @param methodName - the name of the method
      * @return true if the object responds to the named method
      */
-    private static boolean respondsTo(Object object, String methodName) {
+    public static boolean respondsTo(Object object, String methodName) {
         return object.metaClass.respondsTo(object, methodName)
     }
 
@@ -300,6 +301,36 @@ class AstUtil {
 
         return false
     }
+
+    /**
+     * Gets the parameter names of a method node.
+     * @param node
+     *      the node to search parameter names on
+     * @return
+     *      argument names, never null
+     */
+    static List<String> getParameterNames(MethodNode node) {
+        node.parameters?.collect { it.name }
+    }
+
+    /**
+     * Gets the argument names of a method call. If the arguments are not VariableExpressions then a null
+     * will be returned.
+     * @param methodCall
+     *      the method call to search
+     * @return
+     *      a list of strings, never null, but some elements may be null
+     */
+    static List<String> getArgumentNames(MethodCallExpression methodCall) {
+        methodCall.arguments?.expressions?.collect {
+            if (it instanceof VariableExpression) {
+                return it.name
+            } else {
+                return null
+            }
+        }
+    }
+
 
     /**
      * Private constructor. All methods are static.

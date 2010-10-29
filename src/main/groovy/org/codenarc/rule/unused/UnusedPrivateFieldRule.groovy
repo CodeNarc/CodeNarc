@@ -24,7 +24,6 @@ import org.codehaus.groovy.ast.PropertyNode
 import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.FieldExpression
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 
@@ -76,10 +75,6 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
             removeUnusedPrivateField(expression.property.value)
         }
         super.visitPropertyExpression(expression)
-    }
-
-    void visitFieldExpression(FieldExpression expression) {
-        super.visitFieldExpression(expression)
     }
 
     void visitMethod(MethodNode node) {
