@@ -35,6 +35,7 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.BinaryExpression
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -331,6 +332,23 @@ class AstUtil {
         }
     }
 
+    /**
+     * Returns true if the expression is a binary expression with the specified token.
+     * @param expression
+     *      expression
+     * @param token
+     *      token
+     * @return
+     *      as described
+     */
+    static boolean isBinaryExpressionType(Expression expression, String token) {
+        if (expression instanceof BinaryExpression) {
+            if (expression.operation.text == token) {
+                return true
+            }
+        }
+        return false
+    }
 
     /**
      * Private constructor. All methods are static.
