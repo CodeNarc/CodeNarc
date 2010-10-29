@@ -15,6 +15,9 @@
         <rule-config name='ClassSize'>
             <property name='maxLines' value='500'/>
         </rule-config>
+        <rule-config name='TooManyMethods'>
+             <property name='maxMethods' value='25'/>
+        </rule-config>
     </ruleset-ref>
 
     <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
