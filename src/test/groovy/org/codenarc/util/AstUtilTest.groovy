@@ -53,7 +53,7 @@ class AstUtilTest extends AbstractTestCase {
         }
         enum MyEnum {
             READ, WRITE
-            MyEnum() {
+            def doStuff() {
                 println methodCallWithinEnum(true, 'abc', 123)
             }
         }
@@ -86,9 +86,9 @@ class AstUtilTest extends AbstractTestCase {
     void testGetMethodArguments_NamedArguments() {
         def methodCall = methodNamed('delete')
         def args = AstUtil.getMethodArguments(methodCall)
-        assert args.size() == 2
-        assert args[1].keyExpression.value == 'failonerror'
-        assert !args[1].valueExpression.value
+        assert args.size() == 1
+        assert args[0].mapEntryExpressions[1].keyExpression.value == 'failonerror'
+        assert args[0].mapEntryExpressions[1].valueExpression.value == false
     }
 
     void testIsMethodCall_ExactMatch() {
@@ -121,8 +121,8 @@ class AstUtilTest extends AbstractTestCase {
 
     void testIsMethodCall_NamedArgumentList() {
         def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'delete' }
-        assert AstUtil.isMethodCall(methodCall, 'ant', 'delete', 2)
-        assert !AstUtil.isMethodCall(methodCall, 'ant', 'delete', 1)
+        assert AstUtil.isMethodCall(methodCall, 'ant', 'delete', 1)
+        assert !AstUtil.isMethodCall(methodCall, 'ant', 'delete', 2)
         assert AstUtil.isMethodCall(methodCall, 'ant', 'delete')
     }
 
