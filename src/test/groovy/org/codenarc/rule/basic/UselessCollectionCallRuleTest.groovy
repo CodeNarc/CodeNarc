@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for VacuousCollectionCallRule
+ * Tests for UselessCollectionCallRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class VacuousCollectionCallRuleTest extends AbstractRuleTestCase {
+class UselessCollectionCallRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "VacuousCollectionCall"
+        assert rule.name == "UselessCollectionCall"
     }
 
     void testNoViolations() {
@@ -74,7 +74,7 @@ class VacuousCollectionCallRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new VacuousCollectionCallRule()
+        return new UselessCollectionCallRule()
     }
 
 }

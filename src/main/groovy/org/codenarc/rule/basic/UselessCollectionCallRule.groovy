@@ -21,19 +21,19 @@ import org.codehaus.groovy.ast.expr.TupleExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
- * Vacuous call to collections. This call doesn't make sense. For any collection c, calling c.containsAll(c) should
+ * Useless call to collections. This call doesn't make sense. For any collection c, calling c.containsAll(c) should
  * always be true, and c.retainAll(c) should have no effect.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class VacuousCollectionCallRule extends AbstractAstVisitorRule {
-    String name = 'VacuousCollectionCall'
+class UselessCollectionCallRule extends AbstractAstVisitorRule {
+    String name = 'UselessCollectionCall'
     int priority = 2
-    Class astVisitorClass = VacuousCollectionCallAstVisitor
+    Class astVisitorClass = UselessCollectionCallAstVisitor
 }
 
-class VacuousCollectionCallAstVisitor extends AbstractAstVisitor {
+class UselessCollectionCallAstVisitor extends AbstractAstVisitor {
 
     private static final List USELESS_METHOD_NAMES = ['retainAll', 'containsAll']
 
