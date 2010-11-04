@@ -45,6 +45,7 @@ import org.codehaus.groovy.ast.expr.BinaryExpression
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('DuplicateLiteral')
 class AstUtil {
     private static final PREDEFINED_CONSTANTS = ['Boolean':['FALSE', 'TRUE']]
 

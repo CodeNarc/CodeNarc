@@ -6,27 +6,17 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 
 /**
- * Created by IntelliJ IDEA.
- * User: hdarcy
- * Date: Oct 24, 2010
- * Time: 5:38:47 PM
- * To change this template use File | Settings | File Templates.
+ * @author Hamlet D'Arcy
  */
-class NullReturnTracker extends AbstractAstVisitor { /**
- * Created by IntelliJ IDEA.
- * User: hdarcy
- * Date: Oct 24, 2010
- * Time: 5:38:47 PM
- * To change this template use File | Settings | File Templates.
- */
+class NullReturnTracker extends AbstractAstVisitor {
 
     def parent
-
+    static final ERROR_MSG = 'Returning null from a method.'
     def void visitReturnStatement(ReturnStatement statement) {
         if (statement.expression == ConstantExpression.NULL) {
-            parent.addViolation(statement, 'Returning null from a method that should return an array.')
+            parent.addViolation(statement, ERROR_MSG)
         } else if (statement.expression instanceof ConstantExpression && statement.expression.value == null) {
-            parent.addViolation(statement, 'Returning null from a method that should return an array.')
+            parent.addViolation(statement, ERROR_MSG)
         }
         super.visitReturnStatement(statement)
     }

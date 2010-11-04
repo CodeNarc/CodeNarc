@@ -93,6 +93,7 @@ class WildcardPattern {
      *
      * @throws AssertionError - if the stringWithWildcards is null
      */
+    @SuppressWarnings('DuplicateLiteral')
     private static String convertStringWithWildcardsToRegex(String stringWithWildcards) {
         assert stringWithWildcards != null
 

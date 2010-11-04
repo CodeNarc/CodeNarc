@@ -49,41 +49,39 @@ import org.codenarc.report.ReportWriterFactory
  */
 class CodeNarc {
     static final LOG = Logger.getLogger(CodeNarc)
-    protected static final HELP = [
-        'CodeNarc - static analysis for Groovy',
-        'Usage: java org.codenarc.CodeNarc [OPTIONS]',
-        '  where OPTIONS are zero or more command-line options of the form "-NAME[=VALUE]":',
-        '    -basedir=<DIR>',
-        '        The base (root) directory for the source code to be analyzed.',
-        '        Defaults to the current directory (".").',
-        '    -includes=<PATTERNS>',
-        '        The comma-separated list of Ant-style file patterns specifying files that must',
-        '        be included. Defaults to "**/*.groovy".',
-        '    -excludes=<PATTERNS>',
-        '        The comma-separated list of Ant-style file patterns specifying files that must',
-        '        be excluded. No files are excluded when omitted.',
-        '    -rulesetfiles=<FILENAMES>',
-        '        The path to the Groovy or XML RuleSet definition files, relative to the classpath.',
-        '        This can be a single file path, or multiple paths separated by commas.',
-        '        Defaults to "rulesets/basic.xml"',
-        '    -title=<REPORT TITLE>',
-        '        The title descriptive for this analysis; used in the output report(s). Optional.',
-        '    -report=<REPORT-TYPE[:FILENAME]>',
-        '        The definition of the report to produce. The option value is of the form',
-        '        TYPE[:FILENAME], where TYPE is "html" or "xml" and FILENAME is the filename (with ',
-        '        optional path) of the output report filename. If the report filename is ',
-        '        omitted, the default filename is used for the specified report type ',
-        '        ("CodeNarcReport.html" for "html" and "CodeNarcXmlReport.xml" for "xml"). If no',
-        '        report option is specified, default to a single "html" report with the',
-        '        default filename.',
-        '    -help',
-        '        Display the command-line help. If present, this must be the only command-line parameter.',
-        '  Example command-line invocations:',
-        '    java org.codenarc.CodeNarc',
-        '    java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"',
-        '    java org.codenarc.CodeNarc -report=xml:MyXmlReport.xml -report=html',
-        '    java org.codenarc.CodeNarc -help'
-    ].join('\n')
+    protected static final HELP = """CodeNarc - static analysis for Groovy',
+Usage: java org.codenarc.CodeNarc [OPTIONS]
+  where OPTIONS are zero or more command-line options of the form "-NAME[=VALUE]":
+    -basedir=<DIR>
+        The base (root) directory for the source code to be analyzed.
+        Defaults to the current directory (".").
+    -includes=<PATTERNS>
+        The comma-separated list of Ant-style file patterns specifying files that must
+        be included. Defaults to "**/*.groovy".
+    -excludes=<PATTERNS>
+        The comma-separated list of Ant-style file patterns specifying files that must
+        be excluded. No files are excluded when omitted.
+    -rulesetfiles=<FILENAMES>
+        The path to the Groovy or XML RuleSet definition files, relative to the classpath.
+        This can be a single file path, or multiple paths separated by commas.
+        Defaults to "rulesets/basic.xml"
+    -title=<REPORT TITLE>
+        The title descriptive for this analysis; used in the output report(s). Optional.
+    -report=<REPORT-TYPE[:FILENAME]>
+        The definition of the report to produce. The option value is of the form
+        TYPE[:FILENAME], where TYPE is "html" or "xml" and FILENAME is the filename (with
+        optional path) of the output report filename. If the report filename is
+        omitted, the default filename is used for the specified report type
+        ("CodeNarcReport.html" for "html" and "CodeNarcXmlReport.xml" for "xml"). If no
+        report option is specified, default to a single "html" report with the
+        default filename.
+    -help
+        Display the command-line help. If present, this must be the only command-line parameter.
+  Example command-line invocations:
+    java org.codenarc.CodeNarc
+    java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"
+    java org.codenarc.CodeNarc -report=xml:MyXmlReport.xml -report=html
+    java org.codenarc.CodeNarc -help'"""
 
     protected String ruleSetFiles
     protected String baseDir

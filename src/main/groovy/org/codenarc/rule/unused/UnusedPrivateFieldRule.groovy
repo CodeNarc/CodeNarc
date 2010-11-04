@@ -39,6 +39,7 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedPrivateFieldAstVisitor
 }
 
+@SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
     private unusedPrivateFields
 

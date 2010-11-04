@@ -194,6 +194,6 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     }
 
     private String removeLeadingSlash(path) {
-        return (path.startsWith('\\') || path.startsWith('/')) ? path.substring(1) : path
+        return (path.startsWith('\\') || path.startsWith(SEP)) ? path.substring(1) : path
     }
 }

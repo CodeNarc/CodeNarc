@@ -35,6 +35,7 @@ class PrintlnRule extends AbstractAstVisitorRule {
 
 class PrintlnAstVisitor extends AbstractAstVisitor  {
 
+    @SuppressWarnings('DuplicateLiteral')
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (isFirstVisit(methodCall)) {
             def isMatch =

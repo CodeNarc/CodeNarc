@@ -29,6 +29,7 @@ import org.codenarc.util.io.ClassPathResource
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('DuplicateLiteral')
 class XmlReaderRuleSet implements RuleSet {
 
     // W3C_XML_SCHEMA_NS_URI constant is not defined in older versions of javax.xml.XMLConstants 

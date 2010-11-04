@@ -36,6 +36,7 @@ import org.codenarc.util.WildcardPattern
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('DuplicateLiteral')
 abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 
     protected metric

@@ -32,6 +32,7 @@ import org.codenarc.util.io.ClassPathResource
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('DuplicateLiteral')
 class HtmlReportWriter extends AbstractReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'

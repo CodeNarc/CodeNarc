@@ -24,6 +24,7 @@ import org.codenarc.source.SourceCode
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('DuplicateLiteral')
 class ImportFromSamePackageRule extends AbstractRule {
     String name = 'ImportFromSamePackage'
     int priority = 3

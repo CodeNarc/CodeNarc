@@ -37,10 +37,11 @@ class UseAssertEqualsInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
 
 class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
 
+    @SuppressWarnings('DuplicateLiteral')
     def void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)
-        if (AstUtil.isMethodCall(call, "this", "assertTrue") || AstUtil.isMethodCall(call, "this", "assertFalse")) {
+        if (AstUtil.isMethodCall(call, 'this', 'assertTrue') || AstUtil.isMethodCall(call, 'this', 'assertFalse')) {
 
             if (args.size() < 3 && args.size() > 0) {
                 def arg = args[-1]

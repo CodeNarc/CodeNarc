@@ -43,6 +43,7 @@ class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedPrivateMethodAstVisitor
 }
 
+@SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
     private unusedPrivateMethods
     private currentClassNode

@@ -35,8 +35,9 @@ class SerialVersionUIDRule extends AbstractAstVisitorRule {
 
 class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
 
+    private final static SERIAL_ID = 'serialVersionUID'
     def void visitField(FieldNode node) {
-        if (node?.name == 'serialVersionUID') {
+        if (node?.name == SERIAL_ID) {
             if (!Modifier.isStatic(node?.modifiers)) {
                 addViolation node, 'serialVersionUID found that is not static. '
             }
@@ -50,7 +51,7 @@ class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
     }
 
     def void visitProperty(PropertyNode node) {
-        if (node?.name == 'serialVersionUID') {
+        if (node?.name == SERIAL_ID) {
             addViolation node, 'serialVersionUID found that is a property. '
         }
     }

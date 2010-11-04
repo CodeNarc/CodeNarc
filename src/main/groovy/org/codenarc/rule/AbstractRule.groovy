@@ -30,6 +30,7 @@ import org.codehaus.groovy.ast.ASTNode
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('DuplicateLiteral')
 abstract class AbstractRule implements Rule {
     static final LOG = Logger.getLogger(AbstractRule)
 

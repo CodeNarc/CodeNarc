@@ -30,7 +30,8 @@ import org.apache.log4j.Logger
  */
 abstract class AbstractSourceCode implements SourceCode {
     static final LOG = Logger.getLogger(AbstractSourceCode)
-    static final FILE_SEPARATOR = System.getProperty("file.separator")
+    static final SEPARATOR_PROP = 'file.separator'
+    static final FILE_SEPARATOR = System.getProperty(SEPARATOR_PROP)
     private ModuleNode ast
     private List lines
     private astParsed = false
@@ -106,7 +107,7 @@ abstract class AbstractSourceCode implements SourceCode {
      */
     protected String normalizePath(String path) {
         final SEP = '/' as char
-        char separatorChar = System.getProperty("file.separator").charAt(0)
+        char separatorChar = System.getProperty(SEPARATOR_PROP).charAt(0)
         return (separatorChar != SEP) ? path.replace(separatorChar, SEP) : path
     }
 

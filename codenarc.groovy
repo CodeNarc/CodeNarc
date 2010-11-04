@@ -21,11 +21,14 @@ if (args[0] == 'create-rule') {
     def ruleDescription = getUserInput()
 
     def binding = ['ruleName':ruleName, 'ruleCategory':ruleCategory, 'authorName': authorName, 'ruleDescription': ruleDescription]
-	makeRule(binding)
-	makeRuleTest(binding) 
+	def ruleFile = makeRule(binding)
+	def testFile = makeRuleTest(binding)
 	updatePropertiesFile(ruleName, ruleDescription)
-	updateRuleList(ruleName, ruleCategory) 
-	
+	updateRuleList(ruleName, ruleCategory)
+    print "\tadding to svn... "
+    print "svn add $ruleFile".execute().text
+    print "\tadding to svn... "
+    print "svn add $testFile".execute().text
 	println "\tFinished"
 } else {
 	println usage()
@@ -60,6 +63,7 @@ def makeFromTemplate(binding, templateName, targetPath) {
 	file.text = rule.toString()
 	
 	println "\tCreated $targetPath"
+    targetPath
 }
 
 def updateRuleList(ruleName, ruleCategory) {

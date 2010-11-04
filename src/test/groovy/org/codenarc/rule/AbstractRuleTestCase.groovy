@@ -25,6 +25,7 @@ import org.codenarc.test.AbstractTestCase
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('DuplicateLiteral')
 abstract class AbstractRuleTestCase extends AbstractTestCase {
     protected static final CONSTRUCTOR_METHOD_NAME = '<init>'
     protected Rule rule
