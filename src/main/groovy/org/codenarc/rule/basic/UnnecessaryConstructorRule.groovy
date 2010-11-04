@@ -24,7 +24,8 @@ import java.lang.reflect.Modifier
 /**
  * UnnecessaryConstructor
  *
- * @author 'Tomasz Bujok'
+ * @author Tomasz Bujok
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
@@ -35,11 +36,11 @@ class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
 
 class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
 
-  def void visitClass(ClassNode node) {
-    super.visitClass(node);
+  def void visitClassEx(ClassNode node) {
     if (node.constructors?.size() == 1) {
         analyzeConstructor node.constructors[0]
     }
+    super.visitClassEx(node);
   }
 
   private void analyzeConstructor(ConstructorNode node) {

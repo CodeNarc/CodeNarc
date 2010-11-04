@@ -40,6 +40,7 @@ import org.codenarc.util.AstUtil
  * violation. The <code>maxNestedBlockDepth</code> property defaults to 3.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class NestedBlockDepthRule extends AbstractAstVisitorRule {
@@ -54,9 +55,9 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
     private Set closureFieldExpressions
     private nestedBlockDepth = 0
 
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         addClosureFields(classNode)
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
     }
 
     private void addClosureFields(ClassNode classNode) {

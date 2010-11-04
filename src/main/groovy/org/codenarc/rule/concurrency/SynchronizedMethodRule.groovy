@@ -37,12 +37,12 @@ class SynchronizedMethodRule extends AbstractAstVisitorRule {
 
 class SynchronizedMethodAstVisitor extends AbstractAstVisitor  {
 
-    def void visitMethod(MethodNode node) {
+    def void visitMethodEx(MethodNode node) {
         if (isFirstVisit(node)) {
             if (node.getModifiers() & node.ACC_SYNCHRONIZED) {
                 addViolation(node)
             }
         }
-        super.visitMethod(node);
+        super.visitMethodEx(node);
     }
 }

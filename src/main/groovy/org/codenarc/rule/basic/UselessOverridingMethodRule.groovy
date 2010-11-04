@@ -24,9 +24,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * The overriding method merely calls the same method defined in a superclass
+ * The overriding method merely calls the same method defined in a superclass.
  *
  * @author Sven Lange
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class UselessOverridingMethodRule extends AbstractAstVisitorRule {
@@ -37,7 +38,7 @@ class UselessOverridingMethodRule extends AbstractAstVisitorRule {
 
 class UselessOverridingMethodAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethod(MethodNode node) {
+    def void visitMethodEx(MethodNode node) {
 
         if (isSingleLineMethod(node) && node.code.statements[0]?.expression instanceof MethodCallExpression) {
             MethodCallExpression methodCall = node.code.statements[0].expression
@@ -47,7 +48,7 @@ class UselessOverridingMethodAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-        super.visitMethod(node)
+        super.visitMethodEx(node)
     }
 
     private static boolean isSingleLineMethod(MethodNode node) {

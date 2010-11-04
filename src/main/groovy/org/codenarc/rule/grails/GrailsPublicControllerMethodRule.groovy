@@ -40,6 +40,7 @@ import org.codenarc.util.WildcardPattern
  * (String) if appropriate.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
@@ -52,13 +53,13 @@ class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
 }
 
 class GrailsPublicControllerMethodAstVisitor extends AbstractAstVisitor  {
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         if ( (methodNode.modifiers & MethodNode.ACC_PUBLIC)
                 && !(methodNode.modifiers & MethodNode.ACC_STATIC)
                 && !isIgnoredMethodName(methodNode))  {
             addViolation(methodNode)
         }
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
     private boolean isIgnoredMethodName(MethodNode node) {

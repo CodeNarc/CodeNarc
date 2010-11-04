@@ -28,6 +28,7 @@ import org.codenarc.util.AstUtil
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
@@ -38,7 +39,7 @@ class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
 }
 
 class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         if (JUnitUtil.isSetUpMethod(methodNode)) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
@@ -48,7 +49,7 @@ class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
                 addViolation(methodNode)
             }
         }
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
 }

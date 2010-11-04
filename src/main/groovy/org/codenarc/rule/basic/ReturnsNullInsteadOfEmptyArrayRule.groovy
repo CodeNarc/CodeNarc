@@ -38,12 +38,12 @@ class ReturnsNullInsteadOfEmptyArrayRule extends AbstractAstVisitorRule {
 
 class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethod(MethodNode node) {
+    def void visitMethodEx(MethodNode node) {
         if (methodReturnsArray(node)) {
             // does this method ever return null?
             node.code?.visit(new NullReturnTracker(parent: this))
         }
-        super.visitMethod(node)
+        super.visitMethodEx(node)
     }
 
     def void handleClosure(ClosureExpression expression) {

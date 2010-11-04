@@ -41,6 +41,7 @@ import org.codenarc.util.AstUtil
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
@@ -52,7 +53,7 @@ class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
 
 class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
 
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         if ((methodNode.modifiers & MethodNode.ACC_PUBLIC)
             && !(methodNode.modifiers & MethodNode.ACC_STATIC)
             && !isTestMethod(methodNode)
@@ -66,7 +67,7 @@ class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
 
                 addViolation(methodNode)
         }
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
     private boolean isZeroArgumentMethod(MethodNode methodNode, String methodName) {

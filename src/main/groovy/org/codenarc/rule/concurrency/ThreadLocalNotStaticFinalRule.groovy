@@ -23,13 +23,13 @@ class ThreadLocalNotStaticFinalRule extends AbstractAstVisitorRule {
 
 class ThreadLocalNotStaticFinalAstVisitor extends AbstractAstVisitor {
 
-    def void visitField(FieldNode node) {
+    def void visitFieldEx(FieldNode node) {
         if (node?.type?.name == "ThreadLocal") {
             if ((node.modifiers & Modifier.STATIC) != Modifier.STATIC ||
                     (node.modifiers & Modifier.FINAL) != Modifier.FINAL) {
                 addViolation(node)
             }
         }
-        super.visitField(node);
+        super.visitFieldEx(node);
     }
 }

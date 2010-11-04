@@ -28,6 +28,7 @@ import org.codenarc.util.AstUtil
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class JUnitUnnecessarySetUpRule extends AbstractAstVisitorRule {
@@ -38,14 +39,14 @@ class JUnitUnnecessarySetUpRule extends AbstractAstVisitorRule {
 }
 
 class JUnitUnnecessarySetUpAstVisitor extends AbstractAstVisitor  {
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         if (JUnitUtil.isSetUpMethod(methodNode)) {
             def statements = methodNode.code.statements
             if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'setUp', 0)) {
                 addViolation(methodNode)
             }
         }
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
 }

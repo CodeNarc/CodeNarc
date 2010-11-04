@@ -23,15 +23,16 @@ import org.codenarc.rule.AbstractAstVisitor
  * interfaces and abstract classes.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         assert rule.regex
         if (shouldVisit(classNode) && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
             addViolation(classNode)
         }
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
     }
 
     /**

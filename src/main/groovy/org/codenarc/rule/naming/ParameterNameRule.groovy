@@ -35,6 +35,7 @@ import org.codenarc.util.WildcardPattern
  * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class ParameterNameRule extends AbstractAstVisitorRule {
@@ -51,14 +52,14 @@ class ParameterNameRule extends AbstractAstVisitorRule {
 
 class ParameterNameAstVisitor extends AbstractAstVisitor  {
 
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         processParameters(methodNode.parameters)
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
-    void visitConstructor(ConstructorNode constructorNode) {
+    void visitConstructorEx(ConstructorNode constructorNode) {
         processParameters(constructorNode.parameters)
-        super.visitConstructor(constructorNode)
+        super.visitConstructorEx(constructorNode)
     }
 
     void visitClosureExpression(ClosureExpression closureExpression) {

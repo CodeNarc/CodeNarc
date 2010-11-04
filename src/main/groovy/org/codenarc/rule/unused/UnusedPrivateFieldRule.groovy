@@ -31,6 +31,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * Rule that checks for private fields that are not referenced within the same class.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
@@ -43,19 +44,20 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
 class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
     private unusedPrivateFields
 
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         this.unusedPrivateFields = classNode.fields.findAll { fieldNode ->
             def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
             def isNotGenerated = fieldNode.lineNumber != -1
             isPrivate && isNotGenerated
         }
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
+    }
 
+    void visitClassComplete(ClassNode classNode) {
         unusedPrivateFields.each { unusedPrivateField ->
             addViolation(unusedPrivateField)
         }
     }
-
     void visitVariableExpression(VariableExpression expression) {
         removeUnusedPrivateField(expression.name)
 
@@ -63,9 +65,9 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         //super.visitVariableExpression(expression)
     }
 
-    void visitProperty(PropertyNode node) {
+    void visitPropertyEx(PropertyNode node) {
         removeUnusedPrivateField(node.name)
-        super.visitProperty(node)
+        super.visitPropertyEx(node)
     }
 
     void visitPropertyExpression(PropertyExpression expression) {
@@ -78,7 +80,7 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         super.visitPropertyExpression(expression)
     }
 
-    void visitMethod(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         if (node.parameters) {
             node.parameters.each { parameter ->
                 def initialExpression = parameter.initialExpression
@@ -87,7 +89,7 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
                 }
             }
         }
-        super.visitMethod(node)
+        super.visitMethodEx(node)
     }
 
     void visitMethodCallExpression(MethodCallExpression call) {

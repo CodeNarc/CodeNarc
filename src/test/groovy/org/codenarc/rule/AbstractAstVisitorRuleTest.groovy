@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.ClassNode
  * Tests for AbstractAstVisitorRule
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
@@ -200,9 +201,9 @@ class TestAstVisitorRule extends AbstractAstVisitorRule {
 
 // Test AstVisitor implementation class
 class TestAstVisitor extends AbstractAstVisitor {
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         violations.add(new Violation(rule:rule))
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
     }
 }
 

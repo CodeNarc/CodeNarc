@@ -15,15 +15,12 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.*
-import org.codehaus.groovy.ast.AnnotatedNode
-import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Code containing duplicate String literals can usually be improved by declaring the String as a constant field.
@@ -32,8 +29,7 @@ import org.codehaus.groovy.ast.MethodNode
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class DuplicateLiteralRule extends AbstractAstVisitorRule {
-    static final RULE_NAME = 'DuplicateLiteral'
-    String name = RULE_NAME
+    String name = 'DuplicateLiteral'
     int priority = 2
     Class astVisitorClass = DuplicateLiteralAstVisitor
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
@@ -43,29 +39,9 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     List<String> constants = []
 
-    private static boolean suppressionIsPresent(AnnotatedNode node, String ruleName) {
-        def annos = node.annotations?.findAll { it.classNode?.name == 'SuppressWarnings' }
-        for (AnnotationNode annotation: annos) {
-            if (annotation.members?.value instanceof ConstantExpression && annotation.members?.value.value == ruleName) {
-                return true
-            }
-        }
-        return false
-    }
-
-    def void visitClass(ClassNode node) {
+    def void visitClassEx(ClassNode node) {
         constants.clear()
-        if (!suppressionIsPresent(node, DuplicateLiteralRule.RULE_NAME)) {
-            super.visitClass node
-        }
     }
-
-    def void visitMethod(MethodNode node) {
-        if (!suppressionIsPresent(node, DuplicateLiteralRule.RULE_NAME)) {
-            super.visitMethod node
-        }
-    }
-
 
     def void visitArgumentlistExpression(ArgumentListExpression expression) {
         expression.expressions.each {
@@ -86,9 +62,9 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitListExpression expression
     }
 
-    def void visitField(FieldNode node) {
+    def void visitFieldEx(FieldNode node) {
         addViolationIfDuplicate(node.initialValueExpression, node.isStatic())
-        super.visitField node
+        super.visitFieldEx node
     }
 
     def void visitBinaryExpression(BinaryExpression expression) {

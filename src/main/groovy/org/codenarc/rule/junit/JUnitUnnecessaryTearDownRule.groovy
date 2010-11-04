@@ -28,6 +28,7 @@ import org.codenarc.util.AstUtil
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class JUnitUnnecessaryTearDownRule extends AbstractAstVisitorRule {
@@ -38,14 +39,14 @@ class JUnitUnnecessaryTearDownRule extends AbstractAstVisitorRule {
 }
 
 class JUnitUnnecessaryTearDownAstVisitor extends AbstractAstVisitor  {
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         if (JUnitUtil.isTearDownMethod(methodNode)) {
             def statements = methodNode.code.statements
             if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'tearDown', 0)) {
                 addViolation(methodNode)
             }
         }
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
 }

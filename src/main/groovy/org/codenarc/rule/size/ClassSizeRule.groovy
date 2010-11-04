@@ -28,6 +28,7 @@ import org.codenarc.rule.Violation
  * <code>maxLines</code> property defaults to 1000.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class ClassSizeRule extends AbstractAstVisitorRule {
@@ -38,7 +39,7 @@ class ClassSizeRule extends AbstractAstVisitorRule {
 }
 
 class ClassSizeAstVisitor extends AbstractAstVisitor  {
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         if (classNode.lineNumber >= 0) {
             def numLines = classNode.lastLineNumber - classNode.lineNumber + 1
             if (numLines > rule.maxLines) {
@@ -48,7 +49,7 @@ class ClassSizeAstVisitor extends AbstractAstVisitor  {
                         message:"""Class "$classNameNoPackage" is $numLines lines"""))
             }
         }
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
     }
 
 }

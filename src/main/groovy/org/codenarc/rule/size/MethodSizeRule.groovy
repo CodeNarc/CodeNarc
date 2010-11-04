@@ -33,6 +33,7 @@ import org.codenarc.util.WildcardPattern
  * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class MethodSizeRule extends AbstractAstVisitorRule {
@@ -44,7 +45,7 @@ class MethodSizeRule extends AbstractAstVisitorRule {
 }
 
 class MethodSizeAstVisitor extends AbstractAstVisitor  {
-    void visitConstructorOrMethod(MethodNode methodNode, boolean isConstructor) {
+    void visitConstructorOrMethodEx(MethodNode methodNode, boolean isConstructor) {
         if (methodNode.lineNumber >= 0) {
             def numLines = methodNode.lastLineNumber - methodNode.lineNumber + 1
             if (numLines > rule.maxLines && !isIgnoredMethodName(methodNode)) {
@@ -52,7 +53,7 @@ class MethodSizeAstVisitor extends AbstractAstVisitor  {
                 violations.add(new Violation(rule:rule, lineNumber:methodNode.lineNumber, message:"""Method "$methodName" is $numLines lines"""))
             }
         }
-        super.visitConstructorOrMethod(methodNode, isConstructor)
+        super.visitConstructorOrMethodEx(methodNode, isConstructor)
     }
 
     private boolean isIgnoredMethodName(MethodNode node) {

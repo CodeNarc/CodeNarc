@@ -31,6 +31,7 @@ import org.codenarc.rule.Violation
  * all classes. It defaults to false.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class PackageNameRule extends AbstractAstVisitorRule {
@@ -42,7 +43,7 @@ class PackageNameRule extends AbstractAstVisitorRule {
 }
 
 class PackageNameAstVisitor extends AbstractAstVisitor  {
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         assert rule.regex
 
         if (classNode.packageName != null && !(classNode.packageName ==~ rule.regex)) {
@@ -52,7 +53,7 @@ class PackageNameAstVisitor extends AbstractAstVisitor  {
         if (rule.packageNameRequired && classNode.packageName == null) {
             addViolation(classNode, "Required package declaration is missing for class")
         }
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
     }
 
 }

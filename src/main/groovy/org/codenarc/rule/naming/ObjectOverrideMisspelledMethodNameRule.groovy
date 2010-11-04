@@ -24,6 +24,7 @@ import org.codehaus.groovy.ast.MethodNode
  * hashCode and toString, are correct.
  *
  * @author @Hackergarten
+ * @author Hamlet D'Arcy
  */
 class ObjectOverrideMisspelledMethodNameRule extends AbstractAstVisitorRule {
     String name = 'ObjectOverrideMisspelledMethodName'
@@ -34,11 +35,12 @@ class ObjectOverrideMisspelledMethodNameRule extends AbstractAstVisitorRule {
 class ObjectOverrideMisspelledMethodNameAstVisitor extends AbstractAstVisitor {
 
     @SuppressWarnings('DuplicateLiteral')
-    void visitMethod(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         checkForExactMethodName(node, 'equal', ['Object'], 'equals')
         checkForMethodNameWithIncorrectCase(node, 'equals', ['Object'])
         checkForMethodNameWithIncorrectCase(node, 'hashCode', [])
         checkForMethodNameWithIncorrectCase(node, 'toString', [])
+        super.visitMethodEx node
     }
 
     private void checkForMethodNameWithIncorrectCase(MethodNode node, String targetMethodName, List parameterTypes) {

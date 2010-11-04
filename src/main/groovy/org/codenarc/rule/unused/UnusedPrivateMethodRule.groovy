@@ -35,6 +35,7 @@ import org.codenarc.util.AstUtil
  * </ul>
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
@@ -48,13 +49,15 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
     private unusedPrivateMethods
     private currentClassNode
 
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         this.currentClassNode = classNode
         this.unusedPrivateMethods = classNode.methods.findAll { methodNode ->
             methodNode.modifiers & FieldNode.ACC_PRIVATE
         }
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
+    }
 
+    void visitClassComplete(ClassNode classNode) {
         unusedPrivateMethods.each { unusedPrivateMethod ->
             addViolation(unusedPrivateMethod)
         }

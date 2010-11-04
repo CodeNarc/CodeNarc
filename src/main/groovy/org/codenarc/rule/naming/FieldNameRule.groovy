@@ -54,6 +54,7 @@ import org.codehaus.groovy.ast.PropertyNode
  * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class FieldNameRule extends AbstractAstVisitorRule {
@@ -74,7 +75,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
 class FieldNameAstVisitor extends AbstractAstVisitor  {
     private Set propertyNames = []
 
-    void visitField(FieldNode fieldNode) {
+    void visitFieldEx(FieldNode fieldNode) {
         if (!isProperty(fieldNode) && !isIgnoredPropertyName(fieldNode)) {
             def mod = fieldNode.modifiers
             def re = rule.regex
@@ -93,12 +94,12 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
                 addViolation(fieldNode)
             }
         }
-        super.visitField(fieldNode)
+        super.visitFieldEx(fieldNode)
     }
 
-    void visitProperty(PropertyNode node) {
+    void visitPropertyEx(PropertyNode node) {
         propertyNames << node.name
-        super.visitProperty(node)
+        super.visitPropertyEx(node)
     }
 
     private boolean isIgnoredPropertyName(FieldNode node) {

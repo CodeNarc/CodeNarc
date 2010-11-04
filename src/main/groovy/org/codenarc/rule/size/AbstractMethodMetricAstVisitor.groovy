@@ -34,6 +34,7 @@ import org.codenarc.util.WildcardPattern
  * </ul>
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 @SuppressWarnings('DuplicateLiteral')
@@ -50,7 +51,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         metric = createMetric()
     }
     
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         def gmetricsSourceCode = new GMetricsSourceCodeAdapter(this.sourceCode)
         def classMetricResult = metric.applyToClass(classNode, gmetricsSourceCode)
 
@@ -63,7 +64,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         if (!AstUtil.isFromGeneratedSourceCode(classNode)) {
             checkClass(classMetricResult, classNode.name)
         }
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
     }
 
 

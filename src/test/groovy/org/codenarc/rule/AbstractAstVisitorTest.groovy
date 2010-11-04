@@ -24,6 +24,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for AbstractAstVisitor
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorTest extends AbstractTestCase {
@@ -72,7 +73,7 @@ class AbstractAstVisitorTest extends AbstractTestCase {
     void setUp() {
         super.setUp()
         sourceCode = new SourceString(SOURCE)
-        rule = [:] as Rule
+        rule = [getName : { 'DummyRule' } ] as Rule
         astVisitor = new TestAstVisitor1(rule:rule, sourceCode:sourceCode)
         def ast = sourceCode.ast
         astVisitor.visitClass(ast.classes[0])

@@ -29,7 +29,7 @@ import org.codenarc.util.AstUtil
  * This rule traps the condition where two methods or closures differ only by their capitalization.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class VeryConfusingMethodNameRule extends AbstractAstVisitorRule {
     String name = 'VeryConfusingMethodName'
@@ -39,7 +39,7 @@ class VeryConfusingMethodNameRule extends AbstractAstVisitorRule {
 
 class VeryConfusingMethodNameAstVisitor extends AbstractAstVisitor {
 
-    def void visitClass(ClassNode node) {
+    def void visitClassEx(ClassNode node) {
         node.visitContents(new ScopedConfusingMethodNameAstVisitor(parent: this))
     }
 }
@@ -50,7 +50,7 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
     def lowercaseClosureNames = [] as Set
     def parent
 
-    def void visitMethod(MethodNode node) {
+    def void visitMethodEx(MethodNode node) {
         String methodName = node.getName().toLowerCase()
         String parameterInfo = getParameterDefinitionAsString(node)
         String methodNameWithParameters = node.name.toLowerCase() + parameterInfo
@@ -65,10 +65,10 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         lowercaseMethodNames.add(methodName)
         lowercaseMethodNamesWithParameterTypes.add(methodNameWithParameters)
 
-        super.visitMethod node
+        super.visitMethodEx node
     }
 
-    def void visitField(FieldNode node) {
+    def void visitFieldEx(FieldNode node) {
         if (AstUtil.isClosureDeclaration(node)) {
             String methodName = node.name.toLowerCase()
 
@@ -78,14 +78,14 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
 
             lowercaseClosureNames.add(methodName)
         }
-        super.visitField(node)
+        super.visitFieldEx(node)
     }
 
-    def void visitClass(ClassNode node) {
-        parent.visitClass(node)
+    def void visitClassEx(ClassNode node) {
+        parent.visitClassEx(node)
     }
 
-    private String getParameterDefinitionAsString(MethodNode node) {
+    private static String getParameterDefinitionAsString(MethodNode node) {
         Parameter[] parameters = node?.getParameters()
         '(' + parameters?.collect { it?.type?.toString() }?.join(', ') + ')'
     }

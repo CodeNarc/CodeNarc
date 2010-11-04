@@ -54,6 +54,7 @@ import org.codenarc.util.WildcardPattern
  * with a modifier/type of <code>def</code>, then the type resolves to <code>java.lang.Object</code>.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class StatelessClassRule extends AbstractAstVisitorRule {
@@ -77,7 +78,7 @@ class StatelessClassRule extends AbstractAstVisitorRule {
 }
 
 class StatelessClassAstVisitor extends AbstractAstVisitor  {
-    void visitField(FieldNode fieldNode) {
+    void visitFieldEx(FieldNode fieldNode) {
 
         boolean ignore = fieldNode.modifiers & FieldNode.ACC_FINAL
         
@@ -92,7 +93,7 @@ class StatelessClassAstVisitor extends AbstractAstVisitor  {
         if (!ignore) {
             addViolation(fieldNode)
         }
-        super.visitField(fieldNode)
+        super.visitFieldEx(fieldNode)
     }
 
 }

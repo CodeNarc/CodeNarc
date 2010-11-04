@@ -33,6 +33,7 @@ import org.codenarc.util.WildcardPattern
  * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class MethodNameRule extends AbstractAstVisitorRule {
@@ -44,14 +45,14 @@ class MethodNameRule extends AbstractAstVisitorRule {
 }
 
 class MethodNameAstVisitor extends AbstractAstVisitor  {
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         assert rule.regex
         if (!new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)) {
             if (!(methodNode.name ==~ rule.regex)) {
                 addViolation(methodNode)
             }
         }
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
 }

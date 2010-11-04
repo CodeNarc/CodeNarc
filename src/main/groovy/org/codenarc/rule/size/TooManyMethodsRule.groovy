@@ -24,21 +24,22 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * a way to have more fine grained objects.
  *
  * @author Tomasz Bujok
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class TooManyMethodsRule extends AbstractAstVisitorRule {
-  String name = 'TooManyMethods'
-  int priority = 2
-  Class astVisitorClass = TooManyMethodsAstVisitor
-  int maxMethods = 50
+    String name = 'TooManyMethods'
+    int priority = 2
+    Class astVisitorClass = TooManyMethodsAstVisitor
+    int maxMethods = 50
 }
 
 class TooManyMethodsAstVisitor extends AbstractAstVisitor {
-  def void visitClass(ClassNode node) {
-    super.visitClass(node);
-    if (node.methods?.size() > rule.maxMethods) {
-      addViolation node
+    def void visitClassEx(ClassNode node) {
+        if (node.methods?.size() > rule.maxMethods) {
+            addViolation node
+        }
+        super.visitClassEx(node);
     }
-  }
 
 }

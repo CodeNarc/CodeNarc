@@ -34,14 +34,14 @@ class ConfusingClassNamedExceptionRule extends AbstractAstVisitorRule {
 
 class ConfusingClassNamedExceptionAstVisitor extends AbstractAstVisitor {
 
-    def void visitClass(ClassNode node) {
+    def void visitClassEx(ClassNode node) {
 
         if (node.name.endsWith('Exception')) {
             if (!AstUtil.classNodeImplementsType(node, Exception)) {
                 addViolation node, "Found a class named $node.name that does not extend Exception."
             }
         }
-        super.visitClass(node)
+        super.visitClassEx(node)
     }
 
 }

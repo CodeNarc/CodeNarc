@@ -24,6 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * the <code>int hashCode()</code> methods are overridden within a class, then both must be overridden.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class EqualsAndHashCodeRule extends AbstractAstVisitorRule {
@@ -34,7 +35,7 @@ class EqualsAndHashCodeRule extends AbstractAstVisitorRule {
 
 class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor {
 
-    void visitClass(ClassNode classNode) {
+    void visitClassEx(ClassNode classNode) {
         def methods = classNode.methods
         def equalsMethod = methods.find { m ->
             m.name == 'equals' &&
@@ -47,7 +48,7 @@ class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor {
         if (oneButNotBoth) {
             addViolation(classNode)
         }
-        super.visitClass(classNode)
+        super.visitClassEx(classNode)
     }
 }
 

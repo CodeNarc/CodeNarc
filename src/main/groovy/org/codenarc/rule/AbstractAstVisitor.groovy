@@ -19,11 +19,22 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceCode
+import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.PropertyNode
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.AnnotationNode
+import org.codehaus.groovy.ast.AnnotatedNode
+import org.codehaus.groovy.ast.ConstructorNode
+import java.beans.Expression
+import org.codehaus.groovy.ast.expr.ListExpression
 
 /**
  * Abstract superclass for Groovy AST Visitors used with Rules
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
@@ -35,6 +46,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     Rule rule
     SourceCode sourceCode
     Set visited = [] as Set
+    List isSuppressed = []
 
     /**
      * Return true if the AST expression has not already been visited. If it is
@@ -43,7 +55,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * @return true if the AST expression has NOT already been visited
      */
     protected isFirstVisit(expression) {
-        if(visited.contains(expression)) {
+        if (visited.contains(expression)) {
             return false
         }
         else {
@@ -58,7 +70,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      */
     protected String sourceLine(ASTNode node) {
         // TODO Handle statements that cross multiple lines?
-        return sourceCode.line(node.lineNumber-1)
+        return sourceCode.line(node.lineNumber - 1)
     }
 
     /**
@@ -67,11 +79,13 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * @param node - the Groovy AST Node
      * @param message - the message for the violation; defaults to null
      */
-    protected void addViolation(ASTNode node, message=null) {
-        def lineNumber = node.lineNumber
-        if (lineNumber >= 0) {
-            def sourceLine = sourceLine(node)
-            violations.add(new Violation(rule:rule, sourceLine:sourceLine, lineNumber:lineNumber, message:message))
+    protected void addViolation(ASTNode node, message = null) {
+        if (!isSuppressed) {
+            def lineNumber = node.lineNumber
+            if (lineNumber >= 0) {
+                def sourceLine = sourceLine(node)
+                violations.add(new Violation(rule: rule, sourceLine: sourceLine, lineNumber: lineNumber, message: message))
+            }
         }
     }
 
@@ -80,11 +94,121 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      * @param violation - the violation to add
      */
     protected void addViolation(Violation violation) {
-        violations.add(violation)
+        if (!isSuppressed) {
+            violations.add(violation)
+        }
     }
 
     protected SourceUnit getSourceUnit() {
         return source
     }
 
+    private boolean suppressionIsPresent(AnnotatedNode node) {
+        if (rule?.name) {
+            def annos = node.annotations?.findAll { it.classNode?.name == 'SuppressWarnings' }
+            for (AnnotationNode annotation: annos) {
+                if (suppressionIsPresent(annotation)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    @SuppressWarnings('NestedBlockDepth')
+    private boolean suppressionIsPresent(AnnotationNode node) {
+        for (Expression exp: node?.members?.values()) {
+            if (exp instanceof ConstantExpression && exp.value == rule.name) {
+                return true
+            } else if (exp instanceof ListExpression) {
+                for (Expression entry: exp.expressions) {
+                    if (entry instanceof ConstantExpression && entry.value == rule.name) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+
+    final void visitClass(ClassNode node) {
+        withSuppressionCheck(node) {
+            visitClassEx node
+            super.visitClass node
+            visitClassComplete node
+        }
+    }
+
+    protected void visitClassEx(ClassNode node) {
+        // empty on purpose
+    }
+
+    protected void visitClassComplete(ClassNode node) {
+        // empty on purpose
+    }
+
+    final protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
+        withSuppressionCheck(node) {
+            visitConstructorOrMethodEx node, isConstructor
+            super.visitConstructorOrMethod(node, isConstructor)
+        }
+    }
+
+    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
+        // empty on purpose
+    }
+
+    final void visitMethod(MethodNode node) {
+        withSuppressionCheck(node) {
+            visitMethodEx node
+            super.visitMethod node
+        }
+    }
+
+    void visitMethodEx(MethodNode node) {
+        // empty on purpose
+    }
+
+    final void visitField(FieldNode node) {
+        withSuppressionCheck(node) {
+            visitFieldEx node
+            super.visitField node
+        }
+    }
+
+    void visitFieldEx(FieldNode node) {
+        // empty on purpose
+    }
+
+    final void visitProperty(PropertyNode node) {
+        withSuppressionCheck(node.field) {
+            visitPropertyEx node
+            super.visitProperty node
+        }
+    }
+
+    void visitPropertyEx(PropertyNode node) {
+        // empty on purpose
+    }
+
+    final void visitConstructor(ConstructorNode node) {
+        withSuppressionCheck(node) {
+            visitConstructorEx node
+            super.visitConstructor node
+        }
+    }
+
+    def void visitConstructorEx(ConstructorNode node) {
+        // empty on purpose
+    }
+
+    private withSuppressionCheck(AnnotatedNode node, Closure f) {
+        boolean suppress = suppressionIsPresent(node)
+        if (suppress) {
+            isSuppressed.add(true)
+        }
+        f()
+        if (suppress) {
+            isSuppressed.remove(0)
+        }
+    }
 }

@@ -52,6 +52,7 @@ import org.codehaus.groovy.ast.FieldNode
  *   <li>java.util.concurrent.SynchronousQueue</li>
  * </ul>
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class ImplementationAsTypeRule extends AbstractAstVisitorRule {
@@ -86,15 +87,15 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         'SynchronousQueue', 'java.util.concurrent.SynchronousQueue',
     ]
 
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         processParameters(methodNode.parameters)
         processType(methodNode.returnType)
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
-    void visitConstructor(ConstructorNode constructorNode) {
+    void visitConstructorEx(ConstructorNode constructorNode) {
         processParameters(constructorNode.parameters)
-        super.visitConstructor(constructorNode)
+        super.visitConstructorEx(constructorNode)
     }
 
     void visitClosureExpression(ClosureExpression closureExpression) {
@@ -115,9 +116,9 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         super.visitDeclarationExpression(declarationExpression)
     }
 
-    void visitField(FieldNode fieldNode) {
+    void visitFieldEx(FieldNode fieldNode) {
         processType(fieldNode.type)
-        super.visitField(fieldNode)
+        super.visitFieldEx(fieldNode)
     }
 
     private void processParameters(parameters) {

@@ -28,6 +28,7 @@ import org.codenarc.util.AstUtil
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class JUnitTearDownCallsSuperRule extends AbstractAstVisitorRule {
@@ -38,7 +39,7 @@ class JUnitTearDownCallsSuperRule extends AbstractAstVisitorRule {
 }
 
 class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
-    void visitMethod(MethodNode methodNode) {
+    void visitMethodEx(MethodNode methodNode) {
         if (JUnitUtil.isTearDownMethod(methodNode)) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
@@ -48,7 +49,7 @@ class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
                 addViolation(methodNode)
             }
         }
-        super.visitMethod(methodNode)
+        super.visitMethodEx(methodNode)
     }
 
 }
