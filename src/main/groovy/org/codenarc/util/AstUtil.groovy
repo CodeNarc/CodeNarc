@@ -43,6 +43,7 @@ import org.codehaus.groovy.ast.expr.BinaryExpression
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 @SuppressWarnings('DuplicateLiteral')
@@ -234,6 +235,10 @@ class AstUtil {
 
     static boolean isBoolean(Expression expression) {
         return isTrue(expression) || isFalse(expression)
+    }
+
+    static boolean isNull(Expression expression) {
+        return expression instanceof ConstantExpression && expression.isNullExpression() 
     }
 
     static boolean isFalse(Expression expression) {
