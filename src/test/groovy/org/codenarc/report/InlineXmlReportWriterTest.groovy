@@ -29,6 +29,7 @@ import java.text.DateFormat
  * Tests for InlineXmlReportWriter.
  *
  * @author Robin Bramley
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class InlineXmlReportWriterTest extends AbstractTestCase {
@@ -149,7 +150,7 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
 
     private void assertXml(String actualXml) {
         log(actualXml)
-        assertEquals(normalizeXml(REPORT_XML), normalizeXml(actualXml))
+        assert normalizeXml(REPORT_XML) == normalizeXml(actualXml)
     }
 
     private String normalizeXml(String xml) {

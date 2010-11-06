@@ -1,0 +1,212 @@
+/*
+ * Copyright 2010 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codenarc.rule.junit
+
+import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.Rule
+
+/**
+ * Tests for UsingJUnitStyleAssertionsRule
+ *
+ * @author 'Hamlet D'Arcy'
+ * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
+ */
+class UsingJUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
+
+    void testRuleProperties() {
+        assert rule.priority == 2
+        assert rule.name == "UsingJUnitStyleAssertions"
+    }
+
+    void testSuccessScenario() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assert 1 == 2
+                    assert 1 == 2 : 'message'
+
+                    assertTrue()
+                    foo.assertTrue(x)
+                    foo.assertTrue('message', x)
+
+                    assertFalse()
+                    foo.assertFalse(x)
+                    foo.assertFalse('message', x)
+
+                    assertEquals()
+                    assertEquals(x)
+                    assertEquals(x, x, x, x)
+                    foo.assertEquals('message', 1, 2)
+
+                    assertNull()
+                    assertNull(1, 2, 3)
+                    foo.assertNull(x)
+                    foo.assertNull('message', x)
+
+                    assertNotNull()
+                    assertNotNull(1, 2, 3)
+                    foo.assertNotNull(x)
+                    foo.assertNotNull('message', x)
+                }
+             }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testTrueOnThis() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assertTrue(x)
+                    assertTrue('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'assertTrue(x)',
+                5, "assertTrue('message', x)")
+    }
+
+    void testTrueOnAssert() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    Assert.assertTrue(x)
+                    Assert.assertTrue('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'Assert.assertTrue(x)',
+                5, "Assert.assertTrue('message', x)")
+    }
+
+    void testFalseOnThis() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assertFalse(x)
+                    assertFalse('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'assertFalse(x)',
+                5, "assertFalse('message', x)")
+    }
+
+    void testFalseOnAssert() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    Assert.assertFalse(x)
+                    Assert.assertFalse('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'Assert.assertFalse(x)',
+                5, "Assert.assertFalse('message', x)")
+    }
+
+    void testNullOnThis() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assertNull(x)
+                    assertNull('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'assertNull(x)',
+                5, "assertNull('message', x)")
+    }
+
+    void testNullOnAssert() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    Assert.assertNull(x)
+                    Assert.assertNull('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'Assert.assertNull(x)',
+                5, "Assert.assertNull('message', x)")
+    }
+
+    void testNotNullOnThis() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assertNotNull(x)
+                    assertNotNull('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'assertNotNull(x)',
+                5, "assertNotNull('message', x)")
+    }
+
+    void testNotNullOnAssert() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    Assert.assertNotNull(x)
+                    Assert.assertNotNull('message', x)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'Assert.assertNotNull(x)',
+                5, "Assert.assertNotNull('message', x)")
+    }
+
+    void testAssertEqualsOnThis() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assertEquals(x, y)
+                    assertEquals('message', x, y)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'assertEquals(x, y)',
+                5, "assertEquals('message', x, y)")
+    }
+
+    void testAssertEqualsOnAssert() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    Assert.assertEquals(x, y)
+                    Assert.assertEquals('message', x, y)
+                }
+             }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'Assert.assertEquals(x, y)',
+                5, "Assert.assertEquals('message', x, y)")
+    }
+
+    protected Rule createRule() {
+        return new UsingJUnitStyleAssertionsRule()
+    }
+}

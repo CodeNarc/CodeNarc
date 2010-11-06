@@ -27,6 +27,7 @@ import org.codenarc.AnalysisContext
  * Tests for TestReportWriter
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class TextReportWriterTest extends AbstractTestCase {
@@ -150,9 +151,9 @@ File: src/main/dao/MyOtherDao.groovy
         actualLines.eachWithIndex { line, index ->
             def lineNumber = "$index".padLeft(2)
             println "$lineNumber: $line"
-            assertEquals("line=$line", expectedLines[index], line)
+            assert expectedLines[index] == line : "line=$line"
         }
-        assertEquals(expectedLines.size(), actualLines.size()) 
+        assert expectedLines.size() == actualLines.size() 
     }
 
 }

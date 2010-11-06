@@ -30,6 +30,7 @@ import java.text.DateFormat
  * Tests for XmlReportWriter
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class XmlReportWriterTest extends AbstractTestCase {
@@ -199,7 +200,7 @@ class XmlReportWriterTest extends AbstractTestCase {
 
     private void assertXml(String actualXml) {
         log(actualXml)
-        assertEquals(normalizeXml(REPORT_XML), normalizeXml(actualXml))
+        assert normalizeXml(REPORT_XML) == normalizeXml(actualXml)
     }
 
     private void assertContainsXml(String actualXml, String expectedPartialXml) {
