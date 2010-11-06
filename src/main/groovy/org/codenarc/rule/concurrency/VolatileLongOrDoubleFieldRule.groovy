@@ -11,6 +11,9 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * specifies that reads and writes from such fields are atomic, but many JVM's
  * have violated this specification. Unless you are certain of your JVM, it is
  * better to synchronize access to such fields rather than declare them volatile.
+ *
+ * @author 'Hamlet D'Arcy'
+ * @version $Revision$ - $Date$
  */
 class VolatileLongOrDoubleFieldRule extends AbstractAstVisitorRule {
 

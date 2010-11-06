@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 
@@ -23,7 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule to trap when IllegalMonitorStateException is being caught. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CatchingIllegalMonitorStateExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchingIllegalMonitorStateException'

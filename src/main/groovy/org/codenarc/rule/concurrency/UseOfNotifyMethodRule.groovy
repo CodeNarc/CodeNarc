@@ -24,7 +24,7 @@ import org.codenarc.util.AstUtil
  * This code calls notify() rather than notifyAll(). Java monitors are often used for multiple conditions. Calling notify() only wakes up one thread, meaning that the thread woken up might not be the one waiting for the condition that the caller just satisfied.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UseOfNotifyMethodRule extends AbstractAstVisitorRule {
     String name = 'UseOfNotifyMethod'

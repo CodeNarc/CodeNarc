@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.expr.TupleExpression
  * This rule catches calling the method removeAll with yourself as a parameter.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class RemoveAllOnSelfRule extends AbstractAstVisitorRule {
     String name = 'RemoveAllOnSelf'

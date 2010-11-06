@@ -22,6 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for GStringAsMapKeyRule
  *
  * @author @Hackergarten
+ * @version $Revision$ - $Date$
  */
 class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
 

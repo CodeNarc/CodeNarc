@@ -25,6 +25,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * The map keys and values are recursively checked.
  *
  * @author @Hackergarten
+ * @version $Revision$ - $Date$
  */
 class GStringAsMapKeyRule extends AbstractAstVisitorRule {
     String name = 'GStringAsMapKey'

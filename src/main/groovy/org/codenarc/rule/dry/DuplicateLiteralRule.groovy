@@ -26,7 +26,7 @@ import org.codehaus.groovy.ast.expr.*
  * Code containing duplicate String literals can usually be improved by declaring the String as a constant field.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class DuplicateLiteralRule extends AbstractAstVisitorRule {
     String name = 'DuplicateLiteral'

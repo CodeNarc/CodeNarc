@@ -21,10 +21,10 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.AstUtil
 
 /**
- * This rule traps classes named exception that do not inherit from excecption.
+ * This rule traps classes named exception that do not inherit from exception.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ConfusingClassNamedExceptionRule extends AbstractAstVisitorRule {
     String name = 'ConfusingClassNamedException'
