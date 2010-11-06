@@ -50,6 +50,13 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
+* SynchronizedOnGetClass Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Checks for synchronization on <<<getClass()>>> rather than class literal. This instance method
+  synchronizes on <<<this.getClass()>>>. If this class is subclassed, subclasses will synchronize
+  on the class object for the subclass, which isn't likely what was intended.
+
+
 * SynchronizedOnThis Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -144,14 +151,8 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SynchronizedOnGetClass Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  Synchronization on getClass rather than class literal. This instance method synchronizes on this.getClass(). If
-  this class is subclassed, subclasses will synchronize on the class object for the subclass, which isn't likely what
-  was intended.
-
 * UseOfNotifyMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  This code calls notify() rather than notifyAll(). Java monitors are often used for multiple conditions. Calling
-  notify() only wakes up one thread, meaning that the thread woken up might not be the one waiting for the condition
-  that the caller just satisfied.
+  Checks for code that calls <<<notify()>>> rather than <<<notifyAll()>>. Java monitors are often used
+  for multiple conditions. Calling <<<notify()>>> only wakes up one thread, meaning that the awakened
+  thread might not be the one waiting for the condition that the caller just satisfied.
