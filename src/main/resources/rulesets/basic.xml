@@ -39,5 +39,4 @@
     <rule class='org.codenarc.rule.basic.UselessCollectionCallRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryConstructorRule'/>
     <rule class='org.codenarc.rule.basic.UselessOverridingMethodRule'/>
-    <rule class='org.codenarc.rule.basic.DuplicateLiteralRule'/>
 </ruleset>

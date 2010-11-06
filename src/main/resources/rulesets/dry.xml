@@ -1,0 +1,13 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Dry rule set.
+        These rules check for duplicate code, enforcing the DRY (Don't Repeat Yourself) principle.
+    </description>
+
+    <rule class='org.codenarc.rule.dry.DuplicateLiteralRule'/>
+
+</ruleset>

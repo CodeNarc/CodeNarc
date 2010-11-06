@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.dry
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
@@ -153,7 +153,7 @@ class DuplicateLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "'foo'.equals('baz')")
     }
 
-    void testInNamedArumentList() {
+    void testInNamedArgumentList() {
         final SOURCE = '''
         	x(b: 'bar')
             y(a: 'bar')
