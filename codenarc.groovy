@@ -24,7 +24,8 @@ if (args[0] == 'create-rule') {
 	def ruleFile = makeRule(binding)
 	def testFile = makeRuleTest(binding)
 	updatePropertiesFile(ruleName, ruleDescription)
-	updateRuleList(ruleName, ruleCategory)
+    updateRuleList(ruleName, ruleCategory)
+    updateSiteDocumentation(ruleName, ruleCategory, ruleDescription)
     print "\tadding to svn... "
     print "svn add $ruleFile".execute().text
     print "\tadding to svn... "
@@ -73,6 +74,17 @@ def updateRuleList(ruleName, ruleCategory) {
 			'</ruleset>', 
 			"    <rule class='org.codenarc.rule.${ruleCategory}.${ruleName}Rule'/>\n</ruleset>")
 	println "\tUpdated $path"
+}
+
+def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
+    def path = "./src/site/apt/codenarc-rules-${ruleCategory}.apt"
+    new File(path).append """
+* $ruleName Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  $ruleDescription
+
+"""
+    println "\tUpdated $path"
 }
 
 def updatePropertiesFile(ruleName, ruleDescription) {

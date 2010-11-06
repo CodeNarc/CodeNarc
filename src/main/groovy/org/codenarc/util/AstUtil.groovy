@@ -155,7 +155,26 @@ class AstUtil {
      * @return true only if the method call matches the specified criteria
      */
     static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName) {
-        return isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName) 
+        return isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName)
+    }
+
+    static boolean isMethodCall(MethodCallExpression methodCall, List<String> methodObjects, List<String> methodNames) {
+        for (String name : methodNames) {
+            for (String objectName : methodObjects) {
+                def match = isMethodCallOnObject(methodCall, objectName) && isMethodNamed(methodCall, name)
+                if (match) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    static boolean isMethodCall(Expression methodCall, String methodName, int numArguments) {
+        if (methodCall instanceof MethodCallExpression && isMethodNamed(methodCall, methodName)) {
+            return getMethodArguments(methodCall).size() == numArguments
+        }
+        false
     }
 
     /**

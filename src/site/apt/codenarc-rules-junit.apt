@@ -129,3 +129,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   This rule detects JUnit calling assertEquals where the first or second parameter is null. These assertion should be 
   made against the assertNull method instead.
+
+* UseAssertSameInsteadOfAssertTrue Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for
+  reference equality. These assertion should be made against the assertSame or assertNotSame method instead.

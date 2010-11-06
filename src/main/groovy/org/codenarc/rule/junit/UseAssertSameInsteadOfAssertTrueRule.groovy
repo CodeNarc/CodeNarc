@@ -15,39 +15,34 @@
  */
 package org.codenarc.rule.junit
 
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
- * This rule detects JUnit assertions in object equality. These assertions should be made by more specific
- * methods, like assertEquals.
+ * This rule detects JUnit calling assertTrue where the first or second parameter is an Object#is() call testing for reference equality. These assertion should be made against the assertSame method instead.
  *
- * @author Per Junel
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class UseAssertEqualsInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
-    String name = 'UseAssertEqualsInsteadOfAssertTrue'
+class UseAssertSameInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
+    String name = 'UseAssertSameInsteadOfAssertTrue'
     int priority = 2
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
-    Class astVisitorClass = UseAssertEqualsInsteadOfAssertTrueAstVisitor
+    Class astVisitorClass = UseAssertSameInsteadOfAssertTrueAstVisitor
 }
 
-class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
-
-    @SuppressWarnings('DuplicateLiteral')
+class UseAssertSameInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
     def void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)
         if (AstUtil.isMethodCall(call, ['this', 'Assert'], ['assertTrue', 'assertFalse'])) {
 
-            if (args.size() < 3 && args.size() > 0) {
-                def arg = args[-1]
-                if (AstUtil.isBinaryExpressionType(arg, '==') || AstUtil.isBinaryExpressionType(arg, '!=')) {
-                    addViolation call
-                }
+            if (args.size() == 1 && AstUtil.isMethodCall(args[0], 'is', 1)) {
+                addViolation call
+            }else if (args.size() == 2 && AstUtil.isMethodCall(args[1], 'is', 1)) {
+                addViolation call                
             }
         }
 
