@@ -75,3 +75,12 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   specific exception subclass instead.
 
 
+* ConfusingClassNamedException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This class is not derived from another exception, but ends with 'Exception'. This will be confusing to users of
+  this class.
+
+* CatchingIllegalMonitorStateException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Dubious catching of IllegalMonitorStateException. IllegalMonitorStateException is generally only thrown in case of
+  a design flaw in your code (calling wait or notify on an object you do not hold a lock on).

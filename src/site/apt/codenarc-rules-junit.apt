@@ -115,3 +115,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
     }
 -------------------------------------------------------------------------------
 
+* UseAssertEqualsInsteadOfAssertTrue Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects JUnit assertions in object equality. These assertions should be made by more specific methods, like
+  assertEquals.

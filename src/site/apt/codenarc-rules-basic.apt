@@ -492,4 +492,52 @@ Basic Rules  ("<rulesets/basic.xml>")
     x ? MAX_VALUE : MAX_VALUE      // can be replaced by: MAX_VALUE
     ready ? minValue : minValue    // can be replaced by: minValue
 -------------------------------------------------------------------------------
- 
+
+* DuplicateLiteral Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Code containing duplicate <String> literals can usually be improved by declaring the <String> as a constant field.
+  This rule does not search across several files at once, only in the current file.
+  By default, the rule does not analyze test files.
+  You can suppress the error by annotating a class or method with the @SuppressWarnings('DuplicateLiteral') annotation.
+
+* BooleanMethodReturnsNull Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  A method with Boolean return type returns explicit null. A method that returns either Boolean.TRUE, Boolean.FALSE or
+  null is an accident waiting to happen. This method can be invoked as though it returned a value of type boolean, and
+  the compiler will insert automatic unboxing of the Boolean value. If a null value is returned, this will result in
+  a NullPointerException.
+
+* RemoveAllOnSelf Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Don't use removeAll to clear a collection. If you want to remove all elements from a collection c, use c.clear,
+  not c.removeAll(c). Calling c.removeAll(c) to clear a collection is less clear, susceptible to errors from typos,
+  less efficient and for some collections, might throw a ConcurrentModificationException.
+
+* ReturnsNullInsteadOfEmptyArray Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  If you have a method or closure that returns an array, then when there are no results return a zero length array
+  rather than null. It is often a better design to return a length zero array rather than a null reference to
+  indicate that there are no results (i.e., an empty list of results). This way, no explicit check for null is
+  needed by clients of the method.
+
+* ReturnsNullInsteadOfEmptyCollection Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  If you have a method or closure that returns a collection, then when there are no results return a zero length
+  collection rather than null. It is often a better design to return a length zero collection rather than a null
+  reference to indicate that there are no results (i.e., an empty list of results). This way, no explicit check for
+  null is needed by clients of the method.
+
+* UselessCollectionCall Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Useless call to collections. This call doesn't make sense. For any collection c, calling c.containsAll(c) should
+  always be true, and c.retainAll(c) should have no effect.
+
+* UnnecessaryConstructor Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has
+  an empty body, and takes no arguments.
+
+* UselessOverridingMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  The overriding method merely calls the same method defined in a superclass. Remove it. 
