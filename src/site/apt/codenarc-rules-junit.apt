@@ -134,3 +134,9 @@ JUnit Rules  ("<rulesets/junit.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for
   reference equality. These assertion should be made against the assertSame or assertNotSame method instead.
+
+* UseFailWithMessageInsteadOfWithout Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects JUnit calling the fail() method without an argument. For better error reporting you should always
+  provide a message.
+

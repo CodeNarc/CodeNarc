@@ -158,11 +158,13 @@ class AstUtil {
         return isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName)
     }
 
-    static boolean isMethodCall(MethodCallExpression methodCall, List<String> methodObjects, List<String> methodNames) {
+    static boolean isMethodCall(MethodCallExpression methodCall, List<String> methodObjects, List<String> methodNames, numArguments = null) {
         for (String name : methodNames) {
             for (String objectName : methodObjects) {
                 def match = isMethodCallOnObject(methodCall, objectName) && isMethodNamed(methodCall, name)
-                if (match) {
+                if (match && numArguments == null) {
+                    return true
+                } else if (match && getMethodArguments(methodCall).size() == numArguments) {
                     return true
                 }
             }

@@ -19,4 +19,5 @@
     <rule class='org.codenarc.rule.junit.UseAssertTrueInsteadOfAssertEqualsRule'/>
     <rule class='org.codenarc.rule.junit.UseAssertNullInsteadOfAssertEqualsRule'/>
     <rule class='org.codenarc.rule.junit.UseAssertSameInsteadOfAssertTrueRule'/>
+    <rule class='org.codenarc.rule.junit.UseFailWithMessageInsteadOfWithoutRule'/>
 </ruleset>
