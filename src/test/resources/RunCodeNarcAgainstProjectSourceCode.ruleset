@@ -1,3 +1,5 @@
+import org.codenarc.rule.generic.RequiredRegexRule
+
 ruleset {
     description 'RuleSet for running CodeNarc against the project source code. See RunCodeNarcAgainstProjectSourceCodeTest'
 
@@ -11,5 +13,16 @@ ruleset {
     ruleset('rulesets/naming.xml')
     ruleset('rulesets/size.xml')
     ruleset('rulesets/unused.xml')
+
+    // Ensure that each source file contains the Apache License header
+
+    rule(RequiredRegexRule) {
+        name = 'ApacheLicenseRequired'
+        regex = /Licensed under the Apache License\, Version 2\.0 \(the \"License\"\)\;/
+        violationMessage = 'The Apache License comment is missing from the source file'
+        description = 'Checks that all source files contain the Apache License 2.0 comment'
+    }
+
+
 
 }
