@@ -16,4 +16,5 @@
     <rule class='org.codenarc.rule.junit.JUnitUnnecessarySetUpRule'/>
     <rule class='org.codenarc.rule.junit.JUnitUnnecessaryTearDownRule'/>
     <rule class='org.codenarc.rule.junit.UseAssertEqualsInsteadOfAssertTrueRule'/>
+    <rule class='org.codenarc.rule.junit.UseAssertTrueInsteadOfAssertEqualsRule'/>
 </ruleset>

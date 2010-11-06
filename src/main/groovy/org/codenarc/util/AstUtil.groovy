@@ -232,6 +232,10 @@ class AstUtil {
                 expression.text == 'Boolean.TRUE'
     }
 
+    static boolean isBoolean(Expression expression) {
+        return isTrue(expression) || isFalse(expression)
+    }
+
     static boolean isFalse(Expression expression) {
         if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
             if (expression.property instanceof ConstantExpression && expression.property.value == "FALSE") {

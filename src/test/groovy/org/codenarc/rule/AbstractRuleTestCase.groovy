@@ -176,7 +176,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
             assert violation.sourceLine
             assert violation.sourceLine.contains(sourceLineText), """
 expected to contain:  $sourceLineText
-actual:  $violation.sourceLine
+actual:               $violation.sourceLine
 """
         }
         if (messageText) {
