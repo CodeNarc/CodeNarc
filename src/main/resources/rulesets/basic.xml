@@ -39,4 +39,10 @@
     <rule class='org.codenarc.rule.basic.UselessCollectionCallRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryConstructorRule'/>
     <rule class='org.codenarc.rule.basic.UselessOverridingMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToPlusMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToMinusMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToMultiplyMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToDivMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToPowerMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToModMethodRule'/>
 </ruleset>

@@ -541,3 +541,39 @@ Basic Rules  ("<rulesets/basic.xml>")
 * UselessOverridingMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   Checks for an overriding method that merely calls the same method defined in a superclass. Remove it. 
+
+* ExplicitCallToPlusMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the plus(Object) method is called directly in code instead of using the + operator. A groovier
+  way to express this: a.plus(b) is this: a + b
+
+
+* ExplicitCallToMinusMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the minus(Object) method is called directly in code instead of using the - operator. A groovier
+  way to express this: a.minus(b) is this: a - b
+
+
+* ExplicitCallToMultiplyMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the multiply(Object) method is called directly in code instead of using the * operator. A groovier
+  way to express this: a.multiply(b) is this: a * b
+
+
+* ExplicitCallToDivMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the div(Object) method is called directly in code instead of using the / operator. A groovier
+  way to express this: a.div(b) is this: a / b
+
+
+* ExplicitCallToPowerMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the power(Object) method is called directly in code instead of using the ** operator. A groovier
+  way to express this: a.power(b) is this: a ** b
+
+
+* ExplicitCallToModMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the mod(Object) method is called directly in code instead of using the % operator. A groovier
+  way to express this: a.mod(b) is this: a % b
+

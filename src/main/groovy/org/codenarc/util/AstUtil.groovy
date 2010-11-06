@@ -185,9 +185,14 @@ class AstUtil {
      * @param methodName - the expected name of the method being called
      * @return true only if the method call name matches
      */
-    static boolean isMethodNamed(MethodCallExpression methodCall, String methodName) {
+    static boolean isMethodNamed(MethodCallExpression methodCall, String methodName, Integer numArguments = null) {
         def method = methodCall.method
-        return method.properties['value'] == methodName
+        def match = method.properties['value'] == methodName
+
+        if (match && numArguments != null) {
+            return getMethodArguments(methodCall).size() == numArguments
+        }
+        return match
     }
 
     /**

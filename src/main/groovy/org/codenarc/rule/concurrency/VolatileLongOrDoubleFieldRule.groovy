@@ -12,7 +12,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * have violated this specification. Unless you are certain of your JVM, it is
  * better to synchronize access to such fields rather than declare them volatile.
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class VolatileLongOrDoubleFieldRule extends AbstractAstVisitorRule {

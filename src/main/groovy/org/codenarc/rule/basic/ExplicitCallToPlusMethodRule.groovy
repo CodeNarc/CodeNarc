@@ -13,41 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.junit
+package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.util.AstUtil
 
 /**
- * This rule detects JUnit calling assertEquals where the first parameter is a boolean. These assertions should be made by more specific methods, like assertTrue or assertFalse.
+ * This rule detects when the plus(Object) method is called directly in code instead of using the + operator. A groovier way to express this: a.plus(b) is this: a + b
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class UseAssertTrueInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
-    String name = 'UseAssertTrueInsteadOfAssertEquals'
+class ExplicitCallToPlusMethodRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitCallToPlusMethod'
     int priority = 2
-    String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
-    Class astVisitorClass = UseAssertTrueInsteadOfAssertEqualsAstVisitor
+    Class astVisitorClass = ExplicitCallToPlusMethodAstVisitor
 }
 
-class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
+class ExplicitCallToPlusMethodAstVisitor extends AbstractAstVisitor {
 
     def void visitMethodCallExpression(MethodCallExpression call) {
-
-        List args = AstUtil.getMethodArguments(call)
-        if (AstUtil.isMethodCall(call, 'this', 'assertEquals')) {
-
-            if (args.size() == 2 && (AstUtil.isBoolean(args[0]) || AstUtil.isBoolean(args[1]))) {
-                addViolation call
-            } else if (args.size() == 3 && (AstUtil.isBoolean(args[1]) || AstUtil.isBoolean(args[2]))) {
-                addViolation call
-            }
+        if (AstUtil.isMethodNamed(call, "plus", 1)) {
+            addViolation call
         }
         super.visitMethodCallExpression call
     }
-
-
 }
