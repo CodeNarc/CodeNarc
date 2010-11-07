@@ -148,9 +148,10 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
         stringWriter = new StringWriter()
     }
 
+    @SuppressWarnings('UsingJUnitStyleAssertions')
     private void assertXml(String actualXml) {
         log(actualXml)
-        assert normalizeXml(REPORT_XML) == normalizeXml(actualXml)
+        assertEquals(normalizeXml(REPORT_XML), normalizeXml(actualXml))
     }
 
     private String normalizeXml(String xml) {

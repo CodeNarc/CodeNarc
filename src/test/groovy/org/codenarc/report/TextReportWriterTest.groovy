@@ -145,15 +145,16 @@ File: src/main/dao/MyOtherDao.groovy
         stringWriter = new StringWriter()
     }
 
+    @SuppressWarnings('UsingJUnitStyleAssertions')
     private void assertReportText(String actualText) {
         def actualLines = actualText.readLines()
         def expectedLines = REPORT_TEXT.readLines()
         actualLines.eachWithIndex { line, index ->
             def lineNumber = "$index".padLeft(2)
             println "$lineNumber: $line"
-            assert expectedLines[index] == line : "line=$line"
+            assertEquals("line=$line", expectedLines[index], line)
         }
-        assert expectedLines.size() == actualLines.size() 
+        assertEquals(expectedLines.size(), actualLines.size())
     }
 
 }
