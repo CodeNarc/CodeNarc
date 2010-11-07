@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for VeryConfusingMethodNameRule
+ * Tests for ConfusingMethodNameRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class VeryConfusingMethodNameRuleTest extends AbstractRuleTestCase {
+class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "VeryConfusingMethodName"
+        assert rule.name == "ConfusingMethodName"
     }
 
     void testNoViolations() {
@@ -124,50 +124,48 @@ class VeryConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 6, 'def foO(int x) {}')
     }
 
-    // todo: uncomment when groovy 1.7 is supported
-//    void test2ViolationsInNestedClasses() {
-//        final SOURCE = '''
-//            class MyClass {
-//                def foo() {}
-//                def foO() {}
-//
-//                def x = new Object() {
-//                    def innerFoo() {}
-//                    def innerfoO = {} // this one is a closure!
-//                }
-//            }
-//        '''
-//        assertTwoViolations(SOURCE,
-//                4, 'def foO() {}',
-//                7, 'def innerFoo() {}') // this seems out of order but is correct
-//    }
+    void test2ViolationsInNestedClasses() {
+        final SOURCE = '''
+            class MyClass {
+                def foo() {}
+                def foO() {}
 
-    // todo: uncomment when groovy 1.7 is supported
-//    void testDeepNesting() {
-//        final SOURCE = '''
-//        	def foo() {}
-//        	def foo(int x) {}
-//            class MyClass {
-//                def foo() {}
-//                def foo(int x) {}
-//                def x = new Object() {
-//                    def foo() {}
-//                    def foo(int x) {}
-//                    def y = new Object() {
-//                        def foo = {}
-//                        def FoO = {}
-//                        def foO() {}
-//                    }
-//                }
-//            }
-//        '''
-//        assertTwoViolations(SOURCE,
-//                12, 'def FoO = {}',
-//                13, 'def foO() {}')
-//    }
+                def x = new Object() {
+                    def innerFoo() {}
+                    def innerfoO = {} // this one is a closure!
+                }
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'def foO() {}',
+                7, 'def innerFoo() {}') // this seems out of order but is correct
+    }
+
+    void testDeepNesting() {
+        final SOURCE = '''
+        	def foo() {}
+        	def foo(int x) {}
+            class MyClass {
+                def foo() {}
+                def foo(int x) {}
+                def x = new Object() {
+                    def foo() {}
+                    def foo(int x) {}
+                    def y = new Object() {
+                        def foo = {}
+                        def FoO = {}
+                        def foO() {}
+                    }
+                }
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                12, 'def FoO = {}',
+                13, 'def foO() {}')
+    }
 
     protected Rule createRule() {
-        return new VeryConfusingMethodNameRule()
+        return new ConfusingMethodNameRule()
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,13 +31,13 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class VeryConfusingMethodNameRule extends AbstractAstVisitorRule {
-    String name = 'VeryConfusingMethodName'
+class ConfusingMethodNameRule extends AbstractAstVisitorRule {
+    String name = 'ConfusingMethodName'
     int priority = 2
-    Class astVisitorClass = VeryConfusingMethodNameAstVisitor
+    Class astVisitorClass = ConfusingMethodNameAstVisitor
 }
 
-class VeryConfusingMethodNameAstVisitor extends AbstractAstVisitor {
+class ConfusingMethodNameAstVisitor extends AbstractAstVisitor {
 
     def void visitClassEx(ClassNode node) {
         node.visitContents(new ScopedConfusingMethodNameAstVisitor(parent: this))
