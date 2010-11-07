@@ -19,26 +19,26 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitCreationOfArrayListRule
+ * Tests for ExplicitCreationOfStackRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class ExplicitCreationOfArrayListRuleTest extends AbstractRuleTestCase {
+class ExplicitCreationOfStackRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCreationOfArrayList"
+        assert rule.name == "ExplicitCreationOfStack"
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = []
+        	def x = [] as Stack
             class MyClass {
-                def x = []
-                def m(foo = []) {
-                    def x = []
-                    def y = new ArrayList() {   // anony inner class OK                    
+                def x = [] as Stack
+                def m(foo = [] as Stack) {
+                    def x = [] as Stack
+                    def y = new Stack() {   // anony inner class OK
                     }
                 }
             }
@@ -48,32 +48,32 @@ class ExplicitCreationOfArrayListRuleTest extends AbstractRuleTestCase {
 
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new ArrayList()
+        	def x = new Stack()
             class MyClass {
                 def m() {
-                    def x = new ArrayList()
+                    def x = new Stack()
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                2, 'def x = new ArrayList()',
-                5, 'def x = new ArrayList()')
+                2, 'def x = new Stack()',
+                5, 'def x = new Stack()')
     }
 
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {
-                def x = new ArrayList()
-                def m(foo = new ArrayList()) {
+                def x = new Stack()
+                def m(foo = new Stack()) {
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new ArrayList()',  
-                4, 'def m(foo = new ArrayList())')
+                3, 'def x = new Stack()',
+                4, 'def m(foo = new Stack())')
     }
 
     protected Rule createRule() {
-        return new ExplicitCreationOfArrayListRule()
+        return new ExplicitCreationOfStackRule()
     }
 }

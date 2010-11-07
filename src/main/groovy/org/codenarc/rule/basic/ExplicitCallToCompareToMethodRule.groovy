@@ -23,7 +23,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 /**
  * This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <, and <= operators. A groovier way to express this: a.compareTo(b) is this: a <=> b, or using the other operators. 
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class ExplicitCallToCompareToMethodRule extends AbstractAstVisitorRule {

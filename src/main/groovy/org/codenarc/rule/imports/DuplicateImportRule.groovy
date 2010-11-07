@@ -28,6 +28,7 @@ import org.codenarc.source.SourceCode
  * Thus, it may produce multiple violations with the same line number in that case.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class DuplicateImportRule extends AbstractRule {
@@ -35,7 +36,7 @@ class DuplicateImportRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        def importedClassNames = new HashSet()
+        def importedClassNames = [] as Set
 
         sourceCode.ast?.imports.each { importNode ->
             if (importedClassNames.contains(importNode.className)) {

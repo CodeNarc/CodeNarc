@@ -17,27 +17,26 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 
 /**
- * This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator. A groovier way to express this: a.equals(b) is this: a == b and a groovier way to express : !a.equals(b) is : a != b
+ * This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write "new LinkedList()" as "[] as Queue", which creates the same object.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitCallToEqualsMethodRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitCallToEqualsMethod'
+class ExplicitCreationOfLinkedListRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitCreationOfLinkedList'
     int priority = 2
-    Class astVisitorClass = ExplicitCallToEqualsMethodAstVisitor
+    Class astVisitorClass = ExplicitCreationOfLinkedListAstVisitor
 }
 
-class ExplicitCallToEqualsMethodAstVisitor extends AbstractAstVisitor {
+class ExplicitCreationOfLinkedListAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "equals", 1)) {
+    def void visitConstructorCallExpression(ConstructorCallExpression call) {
+        if (isFirstVisit(call) && call?.type?.name == 'LinkedList') {
             addViolation call
         }
-        super.visitMethodCallExpression call
+        super.visitConstructorCallExpression call
     }
 }

@@ -19,26 +19,26 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitCreationOfArrayListRule
+ * Tests for ExplicitCreationOfHashMapRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class ExplicitCreationOfArrayListRuleTest extends AbstractRuleTestCase {
+class ExplicitCreationOfHashMapRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCreationOfArrayList"
+        assert rule.name == "ExplicitCreationOfHashMap"
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = []
+        	def x = [:]
             class MyClass {
-                def x = []
-                def m(foo = []) {
-                    def x = []
-                    def y = new ArrayList() {   // anony inner class OK                    
+                def x = [:]
+                def m(foo = [:]) {
+                    def x = [:]
+                    def y = new HashMap() {   // anony inner class OK
                     }
                 }
             }
@@ -48,32 +48,32 @@ class ExplicitCreationOfArrayListRuleTest extends AbstractRuleTestCase {
 
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new ArrayList()
+        	def x = new HashMap()
             class MyClass {
                 def m() {
-                    def x = new ArrayList()
+                    def x = new HashMap()
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                2, 'def x = new ArrayList()',
-                5, 'def x = new ArrayList()')
+                2, 'def x = new HashMap()',
+                5, 'def x = new HashMap()')
     }
 
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {
-                def x = new ArrayList()
-                def m(foo = new ArrayList()) {
+                def x = new HashMap()
+                def m(foo = new HashMap()) {
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new ArrayList()',  
-                4, 'def m(foo = new ArrayList())')
+                3, 'def x = new HashMap()',
+                4, 'def m(foo = new HashMap())')
     }
 
     protected Rule createRule() {
-        return new ExplicitCreationOfArrayListRule()
+        return new ExplicitCreationOfHashMapRule()
     }
 }

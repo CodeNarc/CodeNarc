@@ -54,4 +54,9 @@
     <rule class='org.codenarc.rule.basic.ExplicitCallToCompareToMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToEqualsMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfArrayListRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCreationOfHashMapRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCreationOfHashSetRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCreationOfTreeSetRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCreationOfLinkedListRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCreationOfStackRule'/>
 </ruleset>
