@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for TooManyMethodsRule
+ * Tests for MethodCountRule
  *
  * @author 'Tomasz Bujok'
  * @version $Revision$ - $Date$
  */
-class TooManyMethodsRuleTest extends AbstractRuleTestCase {
+class MethodCountRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "TooManyMethods"
+        assert rule.name == "MethodCount"
     }
 
     void testSuccessScenario() {
@@ -50,6 +50,6 @@ class TooManyMethodsRuleTest extends AbstractRuleTestCase {
      }
 
     protected Rule createRule() {
-        return new TooManyMethodsRule()
+        return new MethodCountRule()
     }
 }

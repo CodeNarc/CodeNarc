@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,20 @@ import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * A class with too many methods is probably a good suspect for refactoring, in order to reduce its complexity and find
- * a way to have more fine grained objects.
+ * a way to have more fine-grained objects.
  *
  * @author Tomasz Bujok
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class TooManyMethodsRule extends AbstractAstVisitorRule {
-    String name = 'TooManyMethods'
+class MethodCountRule extends AbstractAstVisitorRule {
+    String name = 'MethodCount'
     int priority = 2
-    Class astVisitorClass = TooManyMethodsAstVisitor
+    Class astVisitorClass = MethodCountAstVisitor
     int maxMethods = 50
 }
 
-class TooManyMethodsAstVisitor extends AbstractAstVisitor {
+class MethodCountAstVisitor extends AbstractAstVisitor {
     def void visitClassEx(ClassNode node) {
         if (node.methods?.size() > rule.maxMethods) {
             addViolation node

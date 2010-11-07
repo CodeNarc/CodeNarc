@@ -11,7 +11,7 @@
     <rule class='org.codenarc.rule.size.AbcComplexityRule'/>
     <rule class='org.codenarc.rule.size.ClassSizeRule'/>
     <rule class='org.codenarc.rule.size.CyclomaticComplexityRule'/>
+    <rule class='org.codenarc.rule.size.MethodCountRule'/>
     <rule class='org.codenarc.rule.size.MethodSizeRule'/>
     <rule class='org.codenarc.rule.size.NestedBlockDepthRule'/>
-    <rule class='org.codenarc.rule.size.TooManyMethodsRule'/>
 </ruleset>
