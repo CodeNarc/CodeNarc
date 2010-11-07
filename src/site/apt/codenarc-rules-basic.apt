@@ -633,3 +633,9 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator.
   A groovier way to express this: a.equals(b) is this: a == b and a groovier way to express : !a.equals(b) is : a != b
+
+* ExplicitCreationOfArrayList Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write "new ArrayList()"
+  as "[]", which creates the same object.
+

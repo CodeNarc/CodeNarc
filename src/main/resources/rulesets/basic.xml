@@ -53,4 +53,5 @@
     <rule class='org.codenarc.rule.basic.ExplicitCallToRightShiftMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToCompareToMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToEqualsMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCreationOfArrayListRule'/>
 </ruleset>

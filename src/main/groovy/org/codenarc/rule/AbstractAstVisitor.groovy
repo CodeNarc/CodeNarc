@@ -29,6 +29,7 @@ import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.ConstructorNode
 import java.beans.Expression
 import org.codehaus.groovy.ast.expr.ListExpression
+import org.codehaus.groovy.ast.Parameter
 
 /**
  * Abstract superclass for Groovy AST Visitors used with Rules
@@ -160,6 +161,11 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     final void visitMethod(MethodNode node) {
         withSuppressionCheck(node) {
             visitMethodEx node
+            node?.parameters?.each { Parameter parameter ->
+                if (parameter?.hasInitialExpression()) {
+                    parameter.initialExpression.visit this
+                }
+            }
             super.visitMethod node
         }
     }
