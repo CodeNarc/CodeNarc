@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for DuplicateSwitchStatementRule
+ * Tests for DuplicateCaseStatementRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class DuplicateSwitchStatementRuleTest extends AbstractRuleTestCase {
+class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "DuplicateSwitchStatement"
+        assert rule.name == "DuplicateCaseStatement"
     }
 
     void testApplyTo_NoViolations() {
@@ -77,7 +77,7 @@ class DuplicateSwitchStatementRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new DuplicateSwitchStatementRule()
+        return new DuplicateCaseStatementRule()
     }
 
 }

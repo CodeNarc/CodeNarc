@@ -124,7 +124,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* DuplicateSwitchStatement Rule
+* DuplicateCaseStatement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Check for duplicate <<<case>>> statements in a <<<switch>>> block, such as two equal

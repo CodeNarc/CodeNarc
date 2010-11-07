@@ -15,7 +15,7 @@
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
     <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>
-    <rule class='org.codenarc.rule.basic.DuplicateSwitchStatementRule'/>
+    <rule class='org.codenarc.rule.basic.DuplicateCaseStatementRule'/>
     <rule class='org.codenarc.rule.basic.EqualsAndHashCodeRule'/>
     <rule class='org.codenarc.rule.basic.EmptyCatchBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyElseBlockRule'/>

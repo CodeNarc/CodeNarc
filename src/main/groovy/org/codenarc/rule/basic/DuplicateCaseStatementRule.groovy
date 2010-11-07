@@ -28,13 +28,13 @@ import org.codehaus.groovy.ast.stmt.CaseStatement
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class DuplicateSwitchStatementRule extends AbstractAstVisitorRule {
-    String name = 'DuplicateSwitchStatement'
+class DuplicateCaseStatementRule extends AbstractAstVisitorRule {
+    String name = 'DuplicateCaseStatement'
     int priority = 2
-    Class astVisitorClass = DuplicateSwitchStatementAstVisitor
+    Class astVisitorClass = DuplicateCaseStatementAstVisitor
 }
 
-class DuplicateSwitchStatementAstVisitor extends AbstractAstVisitor {
+class DuplicateCaseStatementAstVisitor extends AbstractAstVisitor {
 
     void visitSwitch(SwitchStatement statement) {
         def allElements = statement?.caseStatements?.findAll { it?.expression instanceof ConstantExpression }
