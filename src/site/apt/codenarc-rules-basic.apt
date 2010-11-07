@@ -577,3 +577,39 @@ Basic Rules  ("<rulesets/basic.xml>")
   This rule detects when the mod(Object) method is called directly in code instead of using the % operator. A groovier
   way to express this: a.mod(b) is this: a % b
 
+
+* ExplicitCallToOrMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the or(Object) method is called directly in code instead of using the | operator. A groovier
+  way to express this: a.or(b) is this: a | b
+
+
+* ExplicitCallToAndMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the and(Object) method is called directly in code instead of using the & operator. A groovier
+  way to express this: a.and(b) is this: a & b
+
+
+* ExplicitCallToXorMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator. A groovier
+  way to express this: a.xor(b) is this: a ^ b
+
+
+* ExplicitCallToGetAtMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator.
+  A groovier way to express this: a.getAt(b) is this: a[b]
+
+
+* ExplicitCallToLeftShiftMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the leftShift(Object) method is called directly in code instead of using the << operator.
+  A groovier way to express this: a.leftShift(b) is this: a << b
+
+
+* ExplicitCallToRightShiftMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the rightShift(Object) method is called directly in code instead of using the >> operator.
+  A groovier way to express this: a.rightShift(b) is this: a >> b
+

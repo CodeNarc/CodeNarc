@@ -35,6 +35,7 @@ class StringInstantiationRule extends AbstractAstVisitorRule {
 class StringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
     static final NEW_STRING = /new +(java\.lang\.)?String\(/
 
+    @SuppressWarnings('ExplicitCallToGetAtMethod')
     protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         def firstArgExpression = constructorCall.arguments?.expressions?.getAt(0)
         return constructorCall.text =~ NEW_STRING &&

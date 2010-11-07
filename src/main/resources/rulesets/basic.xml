@@ -45,4 +45,10 @@
     <rule class='org.codenarc.rule.basic.ExplicitCallToDivMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToPowerMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToModMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToOrMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToAndMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToXorMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToGetAtMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToLeftShiftMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToRightShiftMethodRule'/>
 </ruleset>
