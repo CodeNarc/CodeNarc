@@ -51,4 +51,6 @@
     <rule class='org.codenarc.rule.basic.ExplicitCallToGetAtMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToLeftShiftMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToRightShiftMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToCompareToMethodRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitCallToEqualsMethodRule'/>
 </ruleset>

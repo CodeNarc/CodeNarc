@@ -613,3 +613,23 @@ Basic Rules  ("<rulesets/basic.xml>")
   This rule detects when the rightShift(Object) method is called directly in code instead of using the >> operator.
   A groovier way to express this: a.rightShift(b) is this: a >> b
 
+
+* ExplicitCallToCompareToMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <,
+  and <= operators. A groovier way to express this: a.compareTo(b) is this: a <=> b, or using the other operators. Here
+  are some other ways to write groovier code: 
+-------------------------------------------------------------------------------
+    a.compareTo(b) == 0               // can be replaced by: a == b
+    a.compareTo(b)                    // can be replaced by: a <=> b
+    a.compareTo(b) > 0                // can be replaced by: a > b
+    a.compareTo(b) >= 0               // can be replaced by: a >= b
+    a.compareTo(b) < 0                // can be replaced by: a < b
+    a.compareTo(b) <= 0               // can be replaced by: a <= b
+-------------------------------------------------------------------------------
+
+
+* ExplicitCallToEqualsMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator.
+  A groovier way to express this: a.equals(b) is this: a == b and a groovier way to express : !a.equals(b) is : a != b
