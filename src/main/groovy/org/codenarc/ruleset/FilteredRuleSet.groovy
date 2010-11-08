@@ -80,7 +80,7 @@ class FilteredRuleSet implements RuleSet {
                 }
             }
         }
-        return filteredRules.asImmutable()
+        filteredRules.asImmutable()
     }
 
 }

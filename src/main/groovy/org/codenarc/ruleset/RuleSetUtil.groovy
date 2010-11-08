@@ -36,7 +36,7 @@ class RuleSetUtil {
     }
 
     protected static RuleSet loadRuleSetFile(String path) {
-        return isXmlFile(path) ? new XmlFileRuleSet(path) : new GroovyDslRuleSet(path)
+        isXmlFile(path) ? new XmlFileRuleSet(path) : new GroovyDslRuleSet(path)
     }
 
     protected static Rule loadRuleScriptFile(String path) {
@@ -47,11 +47,11 @@ class RuleSetUtil {
             ruleClass = gcl.parseClass(input)
         }
         assertClassImplementsRuleInterface(ruleClass)
-        return ruleClass.newInstance()
+        ruleClass.newInstance()
     }
 
     private static boolean isXmlFile(String path) {
-        return path && path.endsWith('.xml')
+        path && path.endsWith('.xml')
     }
 
     private RuleSetUtil() { }

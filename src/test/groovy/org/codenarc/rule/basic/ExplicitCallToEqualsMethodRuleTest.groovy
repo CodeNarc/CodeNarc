@@ -49,6 +49,6 @@ class ExplicitCallToEqualsMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToEqualsMethodRule()
+        new ExplicitCallToEqualsMethodRule()
     }
 }

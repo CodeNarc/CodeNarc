@@ -34,30 +34,30 @@ class GMetricsSourceCodeAdapter implements SourceCode {
     }
 
     String getName() {
-        return codeNarcSourceCode.name
+        codeNarcSourceCode.name
     }
 
     String getPath() {
-        return codeNarcSourceCode.path
+        codeNarcSourceCode.path
     }
 
     String getText() {
-        return codeNarcSourceCode.text
+        codeNarcSourceCode.text
     }
 
     List getLines() {
-        return codeNarcSourceCode.lines
+        codeNarcSourceCode.lines
     }
 
     String line(int lineNumber) {
-        return codeNarcSourceCode.line(lineNumber)
+        codeNarcSourceCode.line(lineNumber)
     }
 
     ModuleNode getAst() {
-        return codeNarcSourceCode.ast
+        codeNarcSourceCode.ast
     }
 
     int getLineNumberForCharacterIndex(int charIndex) {
-        return codeNarcSourceCode.getLineNumberForCharacterIndex(charIndex)
+        codeNarcSourceCode.getLineNumberForCharacterIndex(charIndex)
     }
 }

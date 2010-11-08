@@ -140,6 +140,6 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new JUnitTearDownCallsSuperRule()
+        new JUnitTearDownCallsSuperRule()
     }
 }

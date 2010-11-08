@@ -74,7 +74,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnusedArrayRule()
+        new UnusedArrayRule()
     }
 
 }

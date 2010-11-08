@@ -69,7 +69,7 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ImportFromSamePackageRule()
+        new ImportFromSamePackageRule()
     }
 
 }

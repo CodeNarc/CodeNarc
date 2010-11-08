@@ -46,6 +46,6 @@ class ClassNameRule extends AbstractAstVisitorRule {
 
 class ClassNameAstVisitor extends AbstractTypeNameAstVisitor  {
     protected boolean shouldVisit(ClassNode classNode) {
-        return true
+        true
     }
 }

@@ -106,7 +106,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnnecessaryGroovyImportRule()
+        new UnnecessaryGroovyImportRule()
     }
 
 }

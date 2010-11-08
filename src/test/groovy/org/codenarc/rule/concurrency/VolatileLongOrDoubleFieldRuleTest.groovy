@@ -75,6 +75,6 @@ class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new VolatileLongOrDoubleFieldRule()
+        new VolatileLongOrDoubleFieldRule()
     }
 }

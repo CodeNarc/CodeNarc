@@ -74,6 +74,6 @@ class ExplicitCreationOfStackRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCreationOfStackRule()
+        new ExplicitCreationOfStackRule()
     }
 }

@@ -79,7 +79,7 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new SerialVersionUIDRule()
+        new SerialVersionUIDRule()
     }
 
 }

@@ -109,6 +109,6 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new GrailsServletContextReferenceRule()
+        new GrailsServletContextReferenceRule()
     }
 }

@@ -43,7 +43,7 @@ class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
         if (JUnitUtil.isSetUpMethod(methodNode)) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
-                return AstUtil.isMethodCall(stmt, 'super', 'setUp', 0)
+                AstUtil.isMethodCall(stmt, 'super', 'setUp', 0)
             }
             if (!found) {
                 addViolation(methodNode)

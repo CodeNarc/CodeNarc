@@ -30,7 +30,7 @@ class PathUtil {
         int separatorIndex1 = path.lastIndexOf('/');
         int separatorIndex2 = path.lastIndexOf('\\');
         int separatorIndex = [separatorIndex1, separatorIndex2].max();
-        return (separatorIndex == -1) ? path : path.substring(separatorIndex + 1);
+        (separatorIndex == -1) ? path : path.substring(separatorIndex + 1);
     }
 
     // Private constructor to prevent instantiation. All members are static.

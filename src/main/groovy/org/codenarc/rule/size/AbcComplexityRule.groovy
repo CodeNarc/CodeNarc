@@ -59,18 +59,18 @@ class AbcComplexityRule extends AbstractAstVisitorRule {
 class AbcComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
 
     protected Object createMetric() {
-        return new AbcMetric()
+        new AbcMetric()
     }
 
     protected String getMetricShortDescription() {
-        return 'ABC score'
+        'ABC score'
     }
 
     protected Object getMaxMethodMetricValue() {
-        return rule.maxMethodComplexity
+        rule.maxMethodComplexity
     }
 
     protected Object getMaxClassMetricValue() {
-        return rule.maxClassAverageMethodComplexity
+        rule.maxClassAverageMethodComplexity
     }
 }

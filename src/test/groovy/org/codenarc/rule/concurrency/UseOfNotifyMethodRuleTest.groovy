@@ -62,6 +62,6 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UseOfNotifyMethodRule()
+        new UseOfNotifyMethodRule()
     }
 }

@@ -87,6 +87,6 @@ class ThreadYieldRuleTest extends AbstractRuleTestCase {
      }
 
      protected Rule createRule() {
-         return new ThreadYieldRule()
+         new ThreadYieldRule()
      }
 }

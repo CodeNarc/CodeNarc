@@ -119,7 +119,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnusedImportRule()
+        new UnusedImportRule()
     }
 
 }

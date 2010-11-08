@@ -151,7 +151,7 @@ class CodeNarcTest extends AbstractTestCase {
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
 
         def codeNarcRunner = [execute: { }]
-        codeNarc.createCodeNarcRunner = { return codeNarcRunner }
+        codeNarc.createCodeNarcRunner = { codeNarcRunner }
 
         codeNarc.execute(ARGS)
 
@@ -172,7 +172,7 @@ class CodeNarcTest extends AbstractTestCase {
         final ARGS = [] as String[]
 
         def codeNarcRunner = [execute: { }]
-        codeNarc.createCodeNarcRunner = { return codeNarcRunner }
+        codeNarc.createCodeNarcRunner = { codeNarcRunner }
 
         codeNarc.execute(ARGS)
 

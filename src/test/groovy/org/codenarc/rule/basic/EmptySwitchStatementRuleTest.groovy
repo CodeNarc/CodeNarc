@@ -56,7 +56,7 @@ class EmptySwitchStatementRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EmptySwitchStatementRule()
+        new EmptySwitchStatementRule()
     }
 
 }

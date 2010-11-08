@@ -57,6 +57,6 @@ class MethodSizeAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean isIgnoredMethodName(MethodNode node) {
-        return new WildcardPattern(rule.ignoreMethodNames, false).matches(node.name)
+        new WildcardPattern(rule.ignoreMethodNames, false).matches(node.name)
     }
 }

@@ -74,6 +74,6 @@ class ExplicitCreationOfArrayListRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCreationOfArrayListRule()
+        new ExplicitCreationOfArrayListRule()
     }
 }

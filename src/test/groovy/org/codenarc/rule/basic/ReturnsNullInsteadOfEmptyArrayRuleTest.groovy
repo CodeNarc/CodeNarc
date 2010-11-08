@@ -182,7 +182,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
 //    }
 
     protected Rule createRule() {
-        return new ReturnsNullInsteadOfEmptyArrayRule()
+        new ReturnsNullInsteadOfEmptyArrayRule()
     }
 
 }

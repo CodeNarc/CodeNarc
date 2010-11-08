@@ -29,6 +29,6 @@ class CatchErrorRule extends AbstractAstVisitorRule {
     int priority = 2
 
     AstVisitor getAstVisitor() {
-        return new CommonCatchAstVisitor('Error')
+        new CommonCatchAstVisitor('Error')
     }
 }

@@ -88,7 +88,7 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean isMethodCall(MethodCallExpression expression, String targetName) {
-        return AstUtil.isMethodCallOnObject(expression, targetName) &&    
+        AstUtil.isMethodCallOnObject(expression, targetName) &&
                expression.method instanceof ConstantExpression
     }
 

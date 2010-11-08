@@ -283,7 +283,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnusedVariableRule()
+        new UnusedVariableRule()
     }
 
 }

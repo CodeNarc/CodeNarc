@@ -74,12 +74,12 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         }
 
         addDirectoryResults(reportResults)
-        return reportResults
+        reportResults
     }
 
     List getSourceDirectories() {
         def baseDir = project.baseDir.absolutePath
-        return fileSets.collect { fileSet ->
+        fileSets.collect { fileSet ->
             def path = fileSet.getDir(project).path
             removeBaseDirectoryPrefix(baseDir, path)
         }
@@ -117,7 +117,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
             return null
         }
         def parentList = partList[0..-2]
-        return parentList.join(SEP)
+        parentList.join(SEP)
     }
 
     private void incrementFileCount(String filePath) {
@@ -182,7 +182,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     }
 
     private String normalizePath(String path) {
-        return path ? path.replaceAll('\\\\', SEP) : path
+        path ? path.replaceAll('\\\\', SEP) : path
     }
 
     private String removeBaseDirectoryPrefix(String baseDir, String path) {
@@ -190,10 +190,10 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
             path = path - baseDir
             return removeLeadingSlash(path)
         }
-        return path
+        path
     }
 
     private String removeLeadingSlash(path) {
-        return (path.startsWith('\\') || path.startsWith(SEP)) ? path.substring(1) : path
+        (path.startsWith('\\') || path.startsWith(SEP)) ? path.substring(1) : path
     }
 }

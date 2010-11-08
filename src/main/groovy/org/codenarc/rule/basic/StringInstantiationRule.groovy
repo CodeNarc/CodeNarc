@@ -38,8 +38,7 @@ class StringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
     @SuppressWarnings('ExplicitCallToGetAtMethod')
     protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         def firstArgExpression = constructorCall.arguments?.expressions?.getAt(0)
-        return constructorCall.text =~ NEW_STRING &&
-            (firstArgExpression instanceof ConstantExpression)
+        constructorCall.text =~ NEW_STRING && (firstArgExpression instanceof ConstantExpression)
     }
 }
 

@@ -39,7 +39,7 @@ class BooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
     static final NEW_BOOLEAN = /new +(java\.lang\.)?Boolean\(/
 
     protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
-        return constructorCall.text =~ NEW_BOOLEAN
+        constructorCall.text =~ NEW_BOOLEAN
     }
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {

@@ -81,7 +81,7 @@ class CodeNarcRunner {
         def resultsMessage = "CodeNarc completed: " + countsText + " ${elapsedTime}ms"
         LOG.info(resultsMessage)
         println resultsMessage
-        return results
+        results
     }
 
     /**
@@ -96,7 +96,7 @@ class CodeNarcRunner {
             def ruleSet = RuleSetUtil.loadRuleSetFile(path.trim())
             newRuleSet.addRuleSet(ruleSet) 
         }
-        return newRuleSet
+        newRuleSet
     }
 
 }

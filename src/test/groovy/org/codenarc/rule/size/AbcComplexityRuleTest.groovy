@@ -84,13 +84,13 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod1() {
-                    return a && b && c
+                    a && b && c
                 }
 
                 def myMethod2(int someValue) { println 'ok' }
 
                 def myMethod3() {
-                    return a || b || c || d || e || f || g
+                    a || b || c || d || e || f || g
                 }
             }
         """
@@ -104,7 +104,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
             }
         """
@@ -116,12 +116,12 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod1() {
-                    return a = 1; b = 2
+                    a = 1; b = 2
                 }
                 def myMethod2(int someValue) { println 'ok' }
 
                 def myMethod3() {
-                    return a || b || c || d || e || f
+                    a || b || c || d || e || f
                 }
             }
         """
@@ -136,7 +136,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
             }
         """
@@ -149,7 +149,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
             }
         """
@@ -162,12 +162,12 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
                 def myClosure = { a && b && c }
                 def otherClosure = { a ?: (b ?: c) }
                 def myMethod2() {
-                    return a || b || c
+                    a || b || c
                 }
             }
         """
@@ -179,7 +179,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     void testApplyTo_NoExplicitClass_StillChecksMethods() {
         final SOURCE = '''
             def myMethod() {
-                return a && b && c && d && e && f
+                a && b && c && d && e && f
             }
         '''
         rule.maxMethodComplexity = 1
@@ -199,7 +199,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new AbcComplexityRule()
+        new AbcComplexityRule()
     }
 
 }

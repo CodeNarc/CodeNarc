@@ -13,53 +13,65 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.junit
+package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for UseFailWithMessageInsteadOfWithoutRule
+ * Tests for UnnecessaryReturnKeywordRule
  *
- * @author Hamlet D'Arcy
+ * @author 'Hamlet D'Arcy'
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class UseFailWithMessageInsteadOfWithoutRuleTest extends AbstractRuleTestCase {
+class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UseFailWithMessageInsteadOfWithout"
+        assert rule.name == "UnnecessaryReturnKeyword"
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
-                void testMethod() {
-                    fail('msg')
-                    Assert.fail('msg')
-                    this.fail('msg')
-                    foo.fail()
-                }
-             }
+        	def x = { y++; it }
+        	def x = { it }
+            def method1(it) {
+                y++
+                it
+            }
+            def method2(it) {
+                it
+            }
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testFailCalls() {
+    void testInClosures() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
-                void testMethod() {
-                    fail()
-                    Assert.fail()
-                }
-             }
+        	def x = { y++; return it }
+        	def x = { return it }
         '''
         assertTwoViolations(SOURCE,
-                4, 'fail()',
-                5, 'Assert.fail()')   
+                2, 'return it',
+                3, 'return it')
+    }
+
+    void testInMethods() {
+        final SOURCE = '''
+            def method1(it) {
+                y++
+                return it
+            }
+            def method2(it) {
+                return it
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'return it',
+                7, 'return it')
     }
 
     protected Rule createRule() {
-        new UseFailWithMessageInsteadOfWithoutRule()
+        new UnnecessaryReturnKeywordRule()
     }
 }

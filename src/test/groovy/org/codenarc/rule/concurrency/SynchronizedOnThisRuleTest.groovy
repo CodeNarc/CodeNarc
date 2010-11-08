@@ -71,7 +71,7 @@ class SynchronizedOnThisRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new SynchronizedOnThisRule()
+        new SynchronizedOnThisRule()
     }
 
 }

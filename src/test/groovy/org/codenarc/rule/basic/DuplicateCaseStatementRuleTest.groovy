@@ -77,7 +77,7 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new DuplicateCaseStatementRule()
+        new DuplicateCaseStatementRule()
     }
 
 }

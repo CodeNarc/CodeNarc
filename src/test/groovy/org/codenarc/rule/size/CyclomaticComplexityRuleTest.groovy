@@ -46,7 +46,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e
+                    a && b && c && d && e
                 }
             }
         """
@@ -58,7 +58,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
             }
         """
@@ -69,7 +69,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
         final SOURCE = """
             class MyClass {
-                def myClosure = { return a && b && c && d && e }
+                def myClosure = { a && b && c && d && e }
             }
         """
         rule.maxMethodComplexity = 2
@@ -80,13 +80,13 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod1() {
-                    return a && b && c
+                    a && b && c
                 }
 
                 def myMethod2(int someValue) { println 'ok' }
 
                 def myMethod3() {
-                    return a || b || c || d || e || f || g
+                    a || b || c || d || e || f || g
                 }
             }
         """
@@ -98,7 +98,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
             }
         """
@@ -110,12 +110,12 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod1() {
-                    return a && b && c
+                    a && b && c
                 }
                 def myMethod2(int someValue) { println 'ok' }
 
                 def myMethod3() {
-                    return a || b || c || d || e || f
+                    a || b || c || d || e || f
                 }
             }
         """
@@ -130,12 +130,12 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod1() {
-                    return a && b && c
+                    a && b && c
                 }
                 def myClosure = { a ?: (b ?: c) }
 
                 def myMethod2() {
-                    return a || b || c
+                    a || b || c
                 }
             }
         """
@@ -148,7 +148,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
             }
         """
@@ -161,7 +161,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
             }
         """
@@ -174,12 +174,12 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         final SOURCE = """
             class MyClass {
                 def myMethod() {
-                    return a && b && c && d && e && f
+                    a && b && c && d && e && f
                 }
                 def myClosure = { a ?: (b ?: c) }
                 def otherClosure = { a ?: (b ?: c) }
                 def myMethod2() {
-                    return a || b || c
+                    a || b || c
                 }
             }
         """
@@ -191,7 +191,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     void testApplyTo_NoExplicitClass_StillChecksMethods() {
         final SOURCE = '''
             def myMethod() {
-                return a && b && c && d && e && f
+                a && b && c && d && e && f
             }
         '''
         rule.maxMethodComplexity = 1
@@ -211,7 +211,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new CyclomaticComplexityRule()
+        new CyclomaticComplexityRule()
     }
 
 }

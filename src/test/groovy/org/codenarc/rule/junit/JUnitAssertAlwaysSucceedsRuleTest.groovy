@@ -154,6 +154,6 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new JUnitAssertAlwaysSucceedsRule()
+        new JUnitAssertAlwaysSucceedsRule()
     }
 }

@@ -79,7 +79,7 @@ class EmptyFinallyBlockRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EmptyFinallyBlockRule()
+        new EmptyFinallyBlockRule()
     }
 
 }

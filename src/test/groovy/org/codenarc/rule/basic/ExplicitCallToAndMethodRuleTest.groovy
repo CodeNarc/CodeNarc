@@ -49,6 +49,6 @@ class ExplicitCallToAndMethodRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new ExplicitCallToAndMethodRule()
+        new ExplicitCallToAndMethodRule()
     }
 }

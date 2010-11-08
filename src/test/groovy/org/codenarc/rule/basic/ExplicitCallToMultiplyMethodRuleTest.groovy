@@ -49,6 +49,6 @@ class ExplicitCallToMultiplyMethodRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new ExplicitCallToMultiplyMethodRule()
+        new ExplicitCallToMultiplyMethodRule()
     }
 }

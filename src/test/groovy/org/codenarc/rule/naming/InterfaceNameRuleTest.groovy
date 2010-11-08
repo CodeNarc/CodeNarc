@@ -82,7 +82,7 @@ class InterfaceNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new InterfaceNameRule()
+        new InterfaceNameRule()
     }
 
 }

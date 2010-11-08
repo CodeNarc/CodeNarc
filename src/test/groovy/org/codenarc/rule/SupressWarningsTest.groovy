@@ -166,7 +166,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ForceViolationsRule()
+        new ForceViolationsRule()
     }
 }
 

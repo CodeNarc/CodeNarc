@@ -71,7 +71,7 @@ class EmptyTryBlockRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EmptyTryBlockRule()
+        new EmptyTryBlockRule()
     }
 
 }

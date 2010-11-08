@@ -71,7 +71,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      */
     protected String sourceLine(ASTNode node) {
         // TODO Handle statements that cross multiple lines?
-        return sourceCode.line(node.lineNumber - 1)
+        sourceCode.line(node.lineNumber - 1)
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
     }
 
     protected SourceUnit getSourceUnit() {
-        return source
+        source
     }
 
     private boolean suppressionIsPresent(AnnotatedNode node) {
@@ -113,7 +113,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
                 }
             }
         }
-        return false
+        false
     }
 
     @SuppressWarnings('NestedBlockDepth')

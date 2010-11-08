@@ -48,6 +48,6 @@ class ExplicitCallToPowerMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToPowerMethodRule()
+        new ExplicitCallToPowerMethodRule()
     }
 }

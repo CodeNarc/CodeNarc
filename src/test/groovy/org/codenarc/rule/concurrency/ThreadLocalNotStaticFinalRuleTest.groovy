@@ -77,7 +77,7 @@ class ThreadLocalNotStaticFinalRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ThreadLocalNotStaticFinalRule()
+        new ThreadLocalNotStaticFinalRule()
     }
 
 }

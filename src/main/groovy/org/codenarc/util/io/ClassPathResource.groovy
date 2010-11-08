@@ -37,7 +37,7 @@ class ClassPathResource implements Resource {
      * @throws IOException - if an error occurs opening the InputStream
      */
     static InputStream getInputStream(String path) throws IOException {
-        return new ClassPathResource(path).getInputStream()
+        new ClassPathResource(path).getInputStream()
     }
 
     /**
@@ -61,6 +61,6 @@ class ClassPathResource implements Resource {
         if (!inputStream) {
             throw new FileNotFoundException("File [$path] does not exist or is not accessible")
         }
-        return inputStream
+        inputStream
     }
 }

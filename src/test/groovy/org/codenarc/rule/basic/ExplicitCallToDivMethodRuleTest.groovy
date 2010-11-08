@@ -48,6 +48,6 @@ class ExplicitCallToDivMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToDivMethodRule()
+        new ExplicitCallToDivMethodRule()
     }
 }

@@ -59,7 +59,7 @@ class RequiredRegexRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new RequiredRegexRule(regex:REGEX)
+        new RequiredRegexRule(regex:REGEX)
     }
 
 }

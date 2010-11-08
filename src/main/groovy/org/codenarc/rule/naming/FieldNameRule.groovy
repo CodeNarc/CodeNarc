@@ -103,11 +103,11 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean isIgnoredPropertyName(FieldNode node) {
-        return new WildcardPattern(rule.ignoreFieldNames, false).matches(node.name)
+        new WildcardPattern(rule.ignoreFieldNames, false).matches(node.name)
     }
 
     private boolean isProperty(FieldNode node) {
         // This assumes that the property node is visited before the (regular) field node
-        return propertyNames.contains(node.name)
+        propertyNames.contains(node.name)
     }
 }

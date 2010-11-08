@@ -64,7 +64,7 @@ class EmptySynchronizedStatementRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EmptySynchronizedStatementRule()
+        new EmptySynchronizedStatementRule()
     }
 
 }

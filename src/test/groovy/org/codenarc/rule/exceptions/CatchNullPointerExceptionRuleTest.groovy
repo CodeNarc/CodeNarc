@@ -58,7 +58,7 @@ class CatchNullPointerExceptionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new CatchNullPointerExceptionRule()
+        new CatchNullPointerExceptionRule()
     }
 
 }

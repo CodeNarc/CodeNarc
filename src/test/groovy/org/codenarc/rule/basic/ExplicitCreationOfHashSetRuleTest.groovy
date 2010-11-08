@@ -75,6 +75,6 @@ class ExplicitCreationOfHashSetRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new ExplicitCreationOfHashSetRule()
+        new ExplicitCreationOfHashSetRule()
     }
 }

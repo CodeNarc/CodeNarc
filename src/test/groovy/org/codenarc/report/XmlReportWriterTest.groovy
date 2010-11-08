@@ -209,7 +209,7 @@ class XmlReportWriterTest extends AbstractTestCase {
     }
 
     private String normalizeXml(String xml) {
-        return xml.replaceAll(/\>\s*\</, '><').trim()
+        xml.replaceAll(/\>\s*\</, '><').trim()
     }
 
 }

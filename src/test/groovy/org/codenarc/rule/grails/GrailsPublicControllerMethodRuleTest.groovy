@@ -150,6 +150,6 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new GrailsPublicControllerMethodRule()
+        new GrailsPublicControllerMethodRule()
     }
 }

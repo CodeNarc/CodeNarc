@@ -165,7 +165,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ConfusingMethodNameRule()
+        new ConfusingMethodNameRule()
     }
 
 }

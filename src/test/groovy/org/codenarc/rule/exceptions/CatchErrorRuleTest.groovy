@@ -62,7 +62,7 @@ class CatchErrorRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new CatchErrorRule()
+        new CatchErrorRule()
     }
 
 }

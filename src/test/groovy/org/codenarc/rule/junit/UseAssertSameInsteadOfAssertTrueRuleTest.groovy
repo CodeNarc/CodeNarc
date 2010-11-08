@@ -80,6 +80,6 @@ class UseAssertSameInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new UseAssertSameInsteadOfAssertTrueRule()
+        new UseAssertSameInsteadOfAssertTrueRule()
     }
 }

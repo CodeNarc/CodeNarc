@@ -50,6 +50,6 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
      }
 
     protected Rule createRule() {
-        return new MethodCountRule()
+        new MethodCountRule()
     }
 }

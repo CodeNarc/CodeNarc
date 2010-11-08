@@ -74,7 +74,7 @@ class UselessCollectionCallRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UselessCollectionCallRule()
+        new UselessCollectionCallRule()
     }
 
 }

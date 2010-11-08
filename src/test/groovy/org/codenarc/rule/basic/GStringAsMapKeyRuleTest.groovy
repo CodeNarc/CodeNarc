@@ -67,7 +67,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new GStringAsMapKeyRule()
+        new GStringAsMapKeyRule()
     }
 
 }

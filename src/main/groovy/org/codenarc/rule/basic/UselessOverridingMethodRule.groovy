@@ -59,7 +59,7 @@ class UselessOverridingMethodAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-        return false
+        false
     }
 
 }

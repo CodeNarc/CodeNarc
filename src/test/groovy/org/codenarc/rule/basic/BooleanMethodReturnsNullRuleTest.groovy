@@ -173,6 +173,6 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new BooleanMethodReturnsNullRule()
+        new BooleanMethodReturnsNullRule()
     }
 }

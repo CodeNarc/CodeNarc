@@ -48,6 +48,6 @@ class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToPlusMethodRule()
+        new ExplicitCallToPlusMethodRule()
     }
 }

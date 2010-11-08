@@ -113,6 +113,6 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new GrailsSessionReferenceRule(enabled:true)
+        new GrailsSessionReferenceRule(enabled:true)
     }
 }

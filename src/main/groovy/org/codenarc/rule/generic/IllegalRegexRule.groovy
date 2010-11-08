@@ -36,7 +36,7 @@ class IllegalRegexRule extends AbstractRule {
     String regex
 
     boolean isReady() {
-        return regex
+        regex
     }
 
     void applyTo(SourceCode sourceCode, List violations) {

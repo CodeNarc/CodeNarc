@@ -136,7 +136,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new BigDecimalInstantiationRule()
+        new BigDecimalInstantiationRule()
     }
 
 }

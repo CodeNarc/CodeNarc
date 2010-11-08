@@ -37,12 +37,12 @@ class ReportWriterFactory {
         }
 
         def reportClass = getClass().classLoader.loadClass(type)
-        return reportClass.newInstance()
+        reportClass.newInstance()
     }
 
     ReportWriter getReportWriter(String type, Map options) {
         def reportWriter = getReportWriter(type)
         options.each { name, value -> reportWriter[name] = value }
-        return reportWriter
+        reportWriter
     }
 }

@@ -95,7 +95,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EqualsAndHashCodeRule()
+        new EqualsAndHashCodeRule()
     }
 
 }

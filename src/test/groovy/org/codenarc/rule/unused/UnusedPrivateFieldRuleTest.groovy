@@ -174,7 +174,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
                 def getValue() {
                     def value = myClosure1()
                     def otherValue = someOtherObject.otherClosure()     // different object/method  
-                    return this.myClosure2(value, otherValue)
+                    this.myClosure2(value, otherValue)
                 }
             }
         '''
@@ -214,7 +214,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnusedPrivateFieldRule()
+        new UnusedPrivateFieldRule()
     }
 
 }

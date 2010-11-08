@@ -53,7 +53,7 @@ class SynchronizedMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new SynchronizedMethodRule()
+        new SynchronizedMethodRule()
     }
 
 }

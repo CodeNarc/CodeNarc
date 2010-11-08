@@ -74,6 +74,6 @@ class ExplicitCreationOfHashMapRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCreationOfHashMapRule()
+        new ExplicitCreationOfHashMapRule()
     }
 }

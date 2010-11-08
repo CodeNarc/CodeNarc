@@ -52,7 +52,7 @@ class UnusedImportRule extends AbstractRule {
 
     private findReference(SourceCode sourceCode, String alias, String className = null) {
         def aliasSameAsNonQualifiedClassName = className && className.endsWith(alias)
-        return sourceCode.lines.find { line ->
+        sourceCode.lines.find { line ->
             if (!isImportStatementForAlias(line, alias)) {
                 def aliasCount = line.count(alias)
                 return aliasSameAsNonQualifiedClassName ?
@@ -63,6 +63,6 @@ class UnusedImportRule extends AbstractRule {
 
     private isImportStatementForAlias(String line, String alias) {
         final IMPORT_PATTERN = /import\s+.*/ + alias
-        return line =~ IMPORT_PATTERN
+        line =~ IMPORT_PATTERN
     }
 }

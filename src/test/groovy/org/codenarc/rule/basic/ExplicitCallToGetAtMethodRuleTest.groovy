@@ -48,6 +48,6 @@ class ExplicitCallToGetAtMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToGetAtMethodRule()
+        new ExplicitCallToGetAtMethodRule()
     }
 }

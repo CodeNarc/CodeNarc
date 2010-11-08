@@ -91,7 +91,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     protected List reports = []
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
-    protected createCodeNarcRunner = { return new CodeNarcRunner() }
+    protected createCodeNarcRunner = { new CodeNarcRunner() }
 
     /**
      * Main command-line entry-point. Run the CodeNarc application.
@@ -150,7 +150,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     protected SourceAnalyzer createSourceAnalyzer() {
         def analyzer = new FilesystemSourceAnalyzer()
         analyzer.baseDirectory = baseDir
-        return analyzer
+        analyzer
     }
 
     protected void parseArgs(String[] args) {

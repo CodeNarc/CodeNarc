@@ -69,7 +69,7 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
         def visitorClass = getAstVisitorClass()
         assert visitorClass, "The astVisitorClass property must not be null"
         assert AstVisitor.isAssignableFrom(visitorClass), "The astVisitorClass property must specify a class that implements AstVisitor"
-        return visitorClass.newInstance()
+        visitorClass.newInstance()
     }
 
     void applyTo(SourceCode sourceCode, List violations) {
@@ -112,7 +112,7 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
             shouldApply = !pattern.matches(classNode.nameWithoutPackage) && !pattern.matches(classNode.name)
         }
 
-        return shouldApply
+        shouldApply
     }
 
 }

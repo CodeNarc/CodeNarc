@@ -75,6 +75,6 @@ class ExplicitCreationOfTreeSetRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new ExplicitCreationOfTreeSetRule()
+        new ExplicitCreationOfTreeSetRule()
     }
 }

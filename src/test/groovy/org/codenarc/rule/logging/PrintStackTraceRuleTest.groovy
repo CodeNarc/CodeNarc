@@ -80,6 +80,6 @@ class PrintStackTraceRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new PrintStackTraceRule()
+        new PrintStackTraceRule()
     }
 }

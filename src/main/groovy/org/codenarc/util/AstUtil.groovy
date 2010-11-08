@@ -51,8 +51,7 @@ class AstUtil {
     private static final PREDEFINED_CONSTANTS = ['Boolean':['FALSE', 'TRUE']]
 
     static boolean isConstantOrLiteral(Expression expression) {
-        return expression.class in [ConstantExpression, ListExpression, MapExpression] ||
-                isPredefinedConstant(expression)
+        expression.class in [ConstantExpression, ListExpression, MapExpression] || isPredefinedConstant(expression)
     }
 
     private static boolean isPredefinedConstant(Expression expression) {
@@ -65,7 +64,7 @@ class AstUtil {
                 return property.text in predefinedConstantNames
             }
         }
-        return false
+        false
     }
 
     /**
@@ -74,7 +73,7 @@ class AstUtil {
      * @return true if the Statement is a block
      */
     static boolean isBlock(Statement statement) {
-        return statement instanceof BlockStatement
+        statement instanceof BlockStatement
     }
 
     /**
@@ -85,7 +84,7 @@ class AstUtil {
      * @return true if the BlockStatement is empty
      */
     static boolean isEmptyBlock(Statement statement) {
-        return statement instanceof BlockStatement &&
+        statement instanceof BlockStatement &&
             (statement.empty ||
             (statement.statements.size() == 1 && statement.statements[0].empty))
     }
@@ -104,11 +103,11 @@ class AstUtil {
         if (respondsTo(argumentsExpression, 'getMapEntryExpressions')) {
             return argumentsExpression.mapEntryExpressions
         }
-        return []
+        []
     }
 
     static boolean isMethodCallOnObject(MethodCallExpression methodCallExpression, String methodObject) {
-        return (methodCallExpression.objectExpression instanceof VariableExpression &&
+        (methodCallExpression.objectExpression instanceof VariableExpression &&
                methodCallExpression.objectExpression.name == methodObject)
     }
 
@@ -129,7 +128,7 @@ class AstUtil {
                 match = isMethodCall(expression, methodObject, methodName, numArguments)
             }
         }
-        return match
+        match
     }
 
     /**
@@ -143,7 +142,7 @@ class AstUtil {
      */
     static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
         def match = isMethodCall(methodCall, methodObject, methodName)
-        return match && getMethodArguments(methodCall).size() == numArguments
+        match && getMethodArguments(methodCall).size() == numArguments
     }
 
     /**
@@ -155,7 +154,7 @@ class AstUtil {
      * @return true only if the method call matches the specified criteria
      */
     static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName) {
-        return isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName)
+        isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName)
     }
 
     static boolean isMethodCall(MethodCallExpression methodCall, List<String> methodObjects, List<String> methodNames, numArguments = null) {
@@ -169,7 +168,7 @@ class AstUtil {
                 }
             }
         }
-        return false
+        false
     }
 
     static boolean isMethodCall(Expression methodCall, String methodName, int numArguments) {
@@ -192,7 +191,7 @@ class AstUtil {
         if (match && numArguments != null) {
             return getMethodArguments(methodCall).size() == numArguments
         }
-        return match
+        match
     }
 
     /**
@@ -204,7 +203,7 @@ class AstUtil {
      */
     static AnnotationNode getAnnotation(AnnotatedNode node, String name) {
         def annotations = node.annotations
-        return annotations instanceof Map ?
+        annotations instanceof Map ?
             annotations[name] :                                         // Groovy 1.5
             annotations.find { annot -> annot.classNode.name == name }  // Groovy 1.6
     }
@@ -216,7 +215,7 @@ class AstUtil {
      */
     static List getVariableExpressions(DeclarationExpression declarationExpression) {
         def leftExpression = declarationExpression.leftExpression
-        return leftExpression.properties['expressions'] ?: [leftExpression]
+        leftExpression.properties['expressions'] ?: [leftExpression]
     }
 
     /**
@@ -239,14 +238,14 @@ class AstUtil {
 
         def modifiers = (startOfDeclaration >= 0 && startOfVariableName >= 0) ?
             sourceLine[startOfDeclaration-1..startOfVariableName-2] : ''
-        return modifiers.contains('final')
+        modifiers.contains('final')
     }
 
     /**
      * @return true if the ASTNode was generated (synthetic) rather than from the "real" input source code.
      */
     static boolean isFromGeneratedSourceCode(ASTNode node) {
-        return node.lineNumber < 0
+        node.lineNumber < 0
     }
 
     static boolean isTrue(Expression expression) {
@@ -255,16 +254,16 @@ class AstUtil {
                 return true
             }
         }
-        return ((expression instanceof ConstantExpression) && expression.isTrueExpression()) ||
+        ((expression instanceof ConstantExpression) && expression.isTrueExpression()) ||
                 expression.text == 'Boolean.TRUE'
     }
 
     static boolean isBoolean(Expression expression) {
-        return isTrue(expression) || isFalse(expression)
+        isTrue(expression) || isFalse(expression)
     }
 
     static boolean isNull(Expression expression) {
-        return expression instanceof ConstantExpression && expression.isNullExpression() 
+        expression instanceof ConstantExpression && expression.isNullExpression()
     }
 
     static boolean isFalse(Expression expression) {
@@ -273,7 +272,7 @@ class AstUtil {
                 return true
             }
         }
-        return ((expression instanceof ConstantExpression) && expression.isFalseExpression()) ||
+        ((expression instanceof ConstantExpression) && expression.isFalseExpression()) ||
                 expression.text == 'Boolean.FALSE'
     }
 
@@ -284,7 +283,7 @@ class AstUtil {
      * @return true if the object responds to the named method
      */
     public static boolean respondsTo(Object object, String methodName) {
-        return object.metaClass.respondsTo(object, methodName)
+        object.metaClass.respondsTo(object, methodName)
     }
 
     /**
@@ -310,7 +309,7 @@ class AstUtil {
         if (node.name == target.simpleName) {
             return true
         }
-        return false
+        false
     }
 
     /**
@@ -336,7 +335,7 @@ class AstUtil {
             }
         }
 
-        return false
+        false
     }
 
     /**
@@ -383,7 +382,7 @@ class AstUtil {
                 return true
             }
         }
-        return false
+        false
     }
 
     /**

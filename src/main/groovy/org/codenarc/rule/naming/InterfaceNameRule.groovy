@@ -35,12 +35,12 @@ class InterfaceNameRule extends AbstractAstVisitorRule {
     String regex
 
     boolean isReady() {
-        return regex
+        regex
     }
 }
 
 class InterfaceNameAstVisitor extends AbstractTypeNameAstVisitor  {
     protected boolean shouldVisit(ClassNode classNode) {
-        return classNode.modifiers & classNode.ACC_INTERFACE
+        classNode.modifiers & classNode.ACC_INTERFACE
     }
 }

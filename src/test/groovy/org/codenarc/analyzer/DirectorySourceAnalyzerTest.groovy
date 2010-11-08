@@ -219,10 +219,10 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
             paths << results.path
         }
         results.children.each { child -> resultsPaths(child, paths) }
-        return paths
+        paths
     }
 
     private List childResultsClasses(Results results) {
-        return results.children.collect { it.getClass() }
+        results.children.collect { it.getClass() }
     }
 }

@@ -144,6 +144,6 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new JUnitSetUpCallsSuperRule()
+        new JUnitSetUpCallsSuperRule()
     }
 }

@@ -173,7 +173,7 @@ abstract class AbstractRule implements Rule {
      * @return true if all preconditions for this rule are satisfied
      */
     boolean isReady() {
-        return true
+        true
     }
 
     /**
@@ -196,7 +196,7 @@ abstract class AbstractRule implements Rule {
      * @return a new Violation object
      */
     protected Violation createViolation(Integer lineNumber, String sourceLine=null, String message=null) {
-        return new Violation(rule:this, sourceLine:sourceLine, lineNumber:lineNumber, message:message)
+        new Violation(rule:this, sourceLine:sourceLine, lineNumber:lineNumber, message:message)
     }
 
     /**
@@ -207,7 +207,7 @@ abstract class AbstractRule implements Rule {
      */
     protected Violation createViolationForImport(SourceCode sourceCode, ImportNode importNode) {
         def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
-        return new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
+        new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
     }
 
     /**
@@ -219,7 +219,7 @@ abstract class AbstractRule implements Rule {
      */
     protected Violation createViolationForImport(SourceCode sourceCode, String className, String alias) {
         def importInfo = sourceLineAndNumberForImport(sourceCode, className, alias)
-        return new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
+        new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
     }
 
     /**
@@ -230,11 +230,11 @@ abstract class AbstractRule implements Rule {
      */
     protected Violation createViolation(SourceCode sourceCode, ASTNode node, message=null) {
         def sourceLine = sourceCode.line(node.lineNumber-1)
-        return createViolation(node.lineNumber, sourceLine, message)
+        createViolation(node.lineNumber, sourceLine, message)
     }
 
     protected List getImportsSortedByLineNumber(sourceCode) {
-        return sourceCode.ast.imports.sort { importNode ->
+        sourceCode.ast.imports.sort { importNode ->
             def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
             importInfo.lineNumber
         }
@@ -255,7 +255,7 @@ abstract class AbstractRule implements Rule {
         }
         def lineNumber = index == -1 ? null : index + 1
         def sourceLine = lineNumber == null ? "import $className as $alias".toString() : sourceCode.lines[lineNumber-1].trim()
-        return [sourceLine:sourceLine, lineNumber:lineNumber]
+        [sourceLine:sourceLine, lineNumber:lineNumber]
     }
 
     /**
@@ -265,7 +265,7 @@ abstract class AbstractRule implements Rule {
      * @return an object that has 'sourceLine' and 'lineNumber' fields
      */
     protected sourceLineAndNumberForImport(SourceCode sourceCode, ImportNode importNode) {
-        return sourceLineAndNumberForImport(sourceCode, importNode.className, importNode.alias)
+        sourceLineAndNumberForImport(sourceCode, importNode.className, importNode.alias)
     }
 
     /**
@@ -277,12 +277,12 @@ abstract class AbstractRule implements Rule {
     protected String packageNameForImport(ImportNode importNode) {
         def importClassName = importNode.className
         def index = importClassName.lastIndexOf('.')
-        return (index != -1) ? importClassName.substring(0, index) : ''
+        (index != -1) ? importClassName.substring(0, index) : ''
     }
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {
         // TODO Consider caching SourceCodeCriteria instance 
-        return enabled && isReady() &&
+        enabled && isReady() &&
             new SourceCodeCriteria(
                 applyToFilesMatching:getProperty('applyToFilesMatching'),
                 doNotApplyToFilesMatching:getProperty('doNotApplyToFilesMatching'),
@@ -293,7 +293,7 @@ abstract class AbstractRule implements Rule {
     private String getClassNameNoPackage() {
         def className = getClass().name
         def indexOfLastPeriod = className.lastIndexOf('.')
-        return (indexOfLastPeriod == -1) ? className : className.substring(indexOfLastPeriod+1)
+        (indexOfLastPeriod == -1) ? className : className.substring(indexOfLastPeriod+1)
     }
 
     /**

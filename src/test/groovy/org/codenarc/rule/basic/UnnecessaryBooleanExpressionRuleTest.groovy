@@ -182,7 +182,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnnecessaryBooleanExpressionRule()
+        new UnnecessaryBooleanExpressionRule()
     }
 
 }

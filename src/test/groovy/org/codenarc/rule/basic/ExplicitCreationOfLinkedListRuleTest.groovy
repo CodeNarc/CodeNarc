@@ -74,6 +74,6 @@ class ExplicitCreationOfLinkedListRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCreationOfLinkedListRule()
+        new ExplicitCreationOfLinkedListRule()
     }
 }

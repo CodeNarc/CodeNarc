@@ -72,7 +72,7 @@ class WildcardPattern {
         if (regexes.empty && strings.empty) {
             return defaultMatches
         }
-        return regexes.find { regex -> string ==~ regex } ||
+        regexes.find { regex -> string ==~ regex } ||
             strings.contains(string)
     }
 
@@ -82,7 +82,7 @@ class WildcardPattern {
      * @return true if the String contains wildcards
      */
     private static boolean containsWildcards(String string) {
-        return string =~ /\*|\?/
+        string =~ /\*|\?/
     }
 
     /**
@@ -116,7 +116,7 @@ class WildcardPattern {
                 default: result << ch
             }
         }
-        return result
+        result
     }
 
 }

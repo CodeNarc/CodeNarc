@@ -112,7 +112,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new PackageNameRule()
+        new PackageNameRule()
     }
 
 }

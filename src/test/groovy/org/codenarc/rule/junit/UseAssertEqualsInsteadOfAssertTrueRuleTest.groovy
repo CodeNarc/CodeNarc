@@ -77,6 +77,6 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UseAssertEqualsInsteadOfAssertTrueRule()
+        new UseAssertEqualsInsteadOfAssertTrueRule()
     }
 }

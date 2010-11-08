@@ -61,13 +61,13 @@ class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 
         boolean returnsArray = false
         node.code?.visit(new ArrayReturnTracker(callbackFunction: {returnsArray = true}))
-        return returnsArray
+        returnsArray
     }
 
     private static boolean closureReturnsArray(ClosureExpression node) {
         boolean returnsArray = false
         node.code?.visit(new ArrayReturnTracker(callbackFunction: {returnsArray = true}))
-        return returnsArray
+        returnsArray
     }
 }
 

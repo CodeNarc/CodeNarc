@@ -82,7 +82,7 @@ class AbstractClassNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new AbstractClassNameRule()
+        new AbstractClassNameRule()
     }
 
 }

@@ -58,7 +58,7 @@ class CatchThrowableRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new CatchThrowableRule()
+        new CatchThrowableRule()
     }
 
 }

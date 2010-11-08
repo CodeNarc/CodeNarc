@@ -28,6 +28,7 @@ import org.codenarc.util.PathUtil
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('UnnecessaryReturnKeyword')
 class XmlReportWriter extends AbstractReportWriter {
 
     String title

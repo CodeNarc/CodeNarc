@@ -69,29 +69,29 @@ class ReturnFromFinallyBlockRuleTest extends AbstractRuleTestCase {
                         }
                         println 'finally'
                         return 99 }             // BAD
-                    return 0                    // ok
+                    0                    // ok
                 }
             }
         '''
-        assertTwoViolations(SOURCE, 10, 'return 88', 15, 'return 99')
+        assertTwoViolations(SOURCE, 10, '88', 15, '99')
     }
 
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {
                     try {
-                        return 'abc'
+                        'abc'
                     } finally {
                         println 'ok'
                     }
-                    return 'def'
+                    'def'
                 }
             }'''
         assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
-        return new ReturnFromFinallyBlockRule()
+        new ReturnFromFinallyBlockRule()
     }
 
 }

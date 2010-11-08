@@ -184,10 +184,10 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         }
         results.children.each { child -> resultsPaths(child, paths) }
         log("resultsPaths=$paths")
-        return paths
+        paths
     }
 
     private List childResultsClasses(Results results) {
-        return results.children.collect { it.getClass() }
+        results.children.collect { it.getClass() }
     }
 }

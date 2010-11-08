@@ -43,7 +43,7 @@ class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
         if (JUnitUtil.isTearDownMethod(methodNode)) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
-                return AstUtil.isMethodCall(stmt, 'super', 'tearDown', 0)
+                AstUtil.isMethodCall(stmt, 'super', 'tearDown', 0)
             }
             if (!found) {
                 addViolation(methodNode)

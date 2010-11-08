@@ -69,7 +69,7 @@ class ThrowNullPointerExceptionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ThrowNullPointerExceptionRule()
+        new ThrowNullPointerExceptionRule()
     }
 
 }

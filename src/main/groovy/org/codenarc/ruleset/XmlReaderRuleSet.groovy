@@ -59,7 +59,7 @@ class XmlReaderRuleSet implements RuleSet {
      * @return a List of Rule objects
      */
     List getRules() {
-        return rules
+        rules
     }
 
     //--------------------------------------------------------------------------
@@ -130,6 +130,6 @@ class XmlReaderRuleSet implements RuleSet {
     }
 
     private InputStream getSchemaXmlInputStream() {
-        return ClassPathResource.getInputStream(RULESET_SCHEMA_FILE)
+        ClassPathResource.getInputStream(RULESET_SCHEMA_FILE)
     }
 }

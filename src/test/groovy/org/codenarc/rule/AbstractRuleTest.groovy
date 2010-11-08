@@ -325,14 +325,14 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new TestPathRule(name:NAME, priority:PRIORITY)
+        new TestPathRule(name:NAME, priority:PRIORITY)
     }
 
 }
 
 class NotReadyRule extends TestPathRule {
     boolean isReady() {
-        return false
+        false
     }
 }
 

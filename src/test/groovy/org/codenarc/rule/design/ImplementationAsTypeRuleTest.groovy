@@ -165,7 +165,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ImplementationAsTypeRule()
+        new ImplementationAsTypeRule()
     }
 
     private String classNameOnly(String fullClassName) {

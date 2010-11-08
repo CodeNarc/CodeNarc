@@ -219,7 +219,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnusedPrivateMethodRule()
+        new UnusedPrivateMethodRule()
     }
 
 }

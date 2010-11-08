@@ -67,7 +67,7 @@ class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new WhileStatementBracesRule()
+        new WhileStatementBracesRule()
     }
 
 }

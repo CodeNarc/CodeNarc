@@ -69,7 +69,7 @@ class ThrowThrowableRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ThrowThrowableRule()
+        new ThrowThrowableRule()
     }
 
 }

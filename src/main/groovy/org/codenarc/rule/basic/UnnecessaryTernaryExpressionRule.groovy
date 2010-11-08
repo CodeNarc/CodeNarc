@@ -86,7 +86,7 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
         if (expression instanceof BinaryExpression && isOperationThatReturnsABoolean(expression)) {
             return true
         }
-        return false
+        false
     }
 
     private boolean isOperationThatReturnsABoolean(expression) {
@@ -97,7 +97,7 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
         if (operationName in BOOLEAN_LOGIC_OPERATIONS) {
             return true
         }
-        return false
+        false
     }
 
     private boolean areBothTheSame(Expression trueExpression, Expression falseExpression) {
@@ -111,11 +111,11 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
             return true
         }
 
-        return false
+        false
     }
 
     private boolean areTrueAndFalse(Expression trueExpression, Expression falseExpression) {
-        return (AstUtil.isTrue(trueExpression) && AstUtil.isFalse(falseExpression)) ||
+        (AstUtil.isTrue(trueExpression) && AstUtil.isFalse(falseExpression)) ||
                (AstUtil.isFalse(trueExpression) && AstUtil.isTrue(falseExpression))
     }
 

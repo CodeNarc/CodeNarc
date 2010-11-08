@@ -56,6 +56,6 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnnecessaryConstructorRule()
+        new UnnecessaryConstructorRule()
     }
 }

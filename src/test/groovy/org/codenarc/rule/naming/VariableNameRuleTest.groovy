@@ -189,7 +189,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 def closure = {
                     int Count = 23
-                    return Count
+                    Count
                 }
             }
         '''
@@ -292,7 +292,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new VariableNameRule()
+        new VariableNameRule()
     }
 
 }

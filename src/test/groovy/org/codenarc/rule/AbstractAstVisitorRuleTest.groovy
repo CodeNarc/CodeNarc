@@ -188,7 +188,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new TestAstVisitorRule()
+        new TestAstVisitorRule()
     }
 }
 

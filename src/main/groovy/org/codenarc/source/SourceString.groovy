@@ -45,7 +45,7 @@ class SourceString extends AbstractSourceCode {
      * @return the full text of the source code
      */
     String getText() {
-        return source
+        source
     }
 
     void setPath(String path) {
@@ -53,7 +53,7 @@ class SourceString extends AbstractSourceCode {
     }
 
     String toString() {
-        return "SourceString[$source]"
+        "SourceString[$source]"
     }
 
 }

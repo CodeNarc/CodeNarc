@@ -198,6 +198,6 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new JUnitAssertAlwaysFailsRule()
+        new JUnitAssertAlwaysFailsRule()
     }
 }

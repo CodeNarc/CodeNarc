@@ -91,7 +91,7 @@ class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ThrowExceptionFromFinallyBlockRule()
+        new ThrowExceptionFromFinallyBlockRule()
     }
 
 }

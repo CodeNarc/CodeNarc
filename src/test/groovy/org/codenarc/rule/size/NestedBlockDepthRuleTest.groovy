@@ -275,6 +275,6 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new NestedBlockDepthRule()
+        new NestedBlockDepthRule()
     }
 }

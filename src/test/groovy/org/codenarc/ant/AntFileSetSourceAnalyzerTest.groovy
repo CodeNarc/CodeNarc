@@ -177,7 +177,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     private String normalizedPath(String path) {
-        return new File(path).path
+        new File(path).path
     }
 
     private void assertResultsCounts(Results results, int totalFiles, int filesWithViolations) {
@@ -189,7 +189,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         def paths = []
         resultsPaths(results, paths)
         log("allResultsPaths=$paths")
-        return paths
+        paths
     }
 
     private void resultsPaths(Results results, List paths) {

@@ -130,6 +130,6 @@ class JUnitUnnecessarySetUpRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new JUnitUnnecessarySetUpRule()
+        new JUnitUnnecessarySetUpRule()
     }
 }

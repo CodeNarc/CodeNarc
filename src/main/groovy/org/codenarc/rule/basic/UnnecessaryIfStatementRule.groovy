@@ -51,22 +51,22 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean areReturningTrueAndFalse(Statement ifBlock, Statement elseBlock) {
-        return (isReturnTrue(ifBlock) && isReturnFalse(elseBlock)) ||
+        (isReturnTrue(ifBlock) && isReturnFalse(elseBlock)) ||
                (isReturnFalse(ifBlock) && isReturnTrue(elseBlock))
     }
 
     private boolean isReturnTrue(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        return statement instanceof ReturnStatement && AstUtil.isTrue(statement.expression)
+        statement instanceof ReturnStatement && AstUtil.isTrue(statement.expression)
     }
 
     private boolean isReturnFalse(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        return statement instanceof ReturnStatement && AstUtil.isFalse(statement.expression)
+        statement instanceof ReturnStatement && AstUtil.isFalse(statement.expression)
     }
 
     private boolean hasElseBlock(IfStatement ifStatement) {
-        return !ifStatement.elseBlock.empty
+        !ifStatement.elseBlock.empty
     }
 
     private Statement getStatement(Statement statement) {
@@ -74,6 +74,6 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean isSingleStatementBlock(Statement statement) {
-        return statement instanceof BlockStatement && statement.statements.size() == 1
+        statement instanceof BlockStatement && statement.statements.size() == 1
     }
 }

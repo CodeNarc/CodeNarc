@@ -98,13 +98,13 @@ abstract class AbstractTestCase extends GroovyTestCase {
         finally {
             System.out = originalSystemOut
         }
-        return out.toString()
+        out.toString()
     }
 
     private String classNameNoPackage() {
         def className = getClass().name
         def index = className.lastIndexOf('.')
-        return index > -1 ? className.substring(index+1) : className
+        (index > -1) ? className.substring(index+1) : className
     }
 
     //------------------------------------------------------------------------------------

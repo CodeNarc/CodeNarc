@@ -240,7 +240,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
     }
 
     private String getReportText(String filename=HtmlReportWriter.DEFAULT_OUTPUT_FILE) {
-        return new File(filename).text
+        new File(filename).text
     }
 
 }

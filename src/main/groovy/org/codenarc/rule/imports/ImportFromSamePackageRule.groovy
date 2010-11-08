@@ -43,12 +43,12 @@ class ImportFromSamePackageRule extends AbstractRule {
     }
 
     private boolean hasAlias(importNode) {
-        return importNode.alias != getClassNameNoPackage(importNode.className)
+        importNode.alias != getClassNameNoPackage(importNode.className)
     }
 
     private String getClassNameNoPackage(String className) {
         def indexOfLastPeriod = className.lastIndexOf('.')
-        return (indexOfLastPeriod == -1) ? className : className.substring(indexOfLastPeriod+1)
+        (indexOfLastPeriod == -1) ? className : className.substring(indexOfLastPeriod+1)
     }
 
 }

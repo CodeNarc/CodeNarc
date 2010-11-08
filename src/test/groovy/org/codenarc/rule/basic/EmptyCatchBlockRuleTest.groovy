@@ -72,7 +72,7 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EmptyCatchBlockRule()
+        new EmptyCatchBlockRule()
     }
 
 }

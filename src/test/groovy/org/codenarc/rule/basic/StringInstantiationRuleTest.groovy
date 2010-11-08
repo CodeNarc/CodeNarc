@@ -81,7 +81,7 @@ class StringInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new StringInstantiationRule()
+        new StringInstantiationRule()
     }
 
 }

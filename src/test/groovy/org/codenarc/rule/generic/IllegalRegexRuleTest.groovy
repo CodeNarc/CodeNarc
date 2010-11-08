@@ -80,7 +80,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new IllegalRegexRule(regex:REGEX)
+        new IllegalRegexRule(regex:REGEX)
     }
 
 }

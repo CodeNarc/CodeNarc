@@ -99,6 +99,6 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnnecessaryIfStatementRule()
+        new UnnecessaryIfStatementRule()
     }
 }

@@ -80,6 +80,6 @@ class UselessOverridingMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UselessOverridingMethodRule()
+        new UselessOverridingMethodRule()
     }
 }

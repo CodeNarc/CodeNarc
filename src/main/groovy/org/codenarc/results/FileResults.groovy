@@ -35,14 +35,14 @@ class FileResults implements Results {
      * @return the path to the file or directory associated with these results
      */
     String getPath() {
-        return path
+        path
     }
 
     /**
      * @return true (this object represents the results for a single file)
      */
     boolean isFile() {
-        return true
+        true
     }
 
     /**
@@ -50,14 +50,14 @@ class FileResults implements Results {
      * @return the List of child Results objects; may be empty
      */
     List getChildren() {
-        return Collections.EMPTY_LIST
+        Collections.EMPTY_LIST
     }
 
     /**
      * @return the List of violations with the specified priority; may be empty
      */
     List getViolationsWithPriority(int priority) {
-        return violations.findAll { violation -> violation.rule.priority == priority}
+        violations.findAll { violation -> violation.rule.priority == priority}
     }
 
     /**
@@ -65,7 +65,7 @@ class FileResults implements Results {
      * @return the number of violations with the specified priority
      */
     int getNumberOfViolationsWithPriority(int priority, boolean recursive=true) {
-        return violations.sum(0) { violation -> violation.rule.priority == priority ? 1 : 0}
+        violations.sum(0) { violation -> violation.rule.priority == priority ? 1 : 0}
     }
 
     /**
@@ -74,7 +74,7 @@ class FileResults implements Results {
      * @return the total number of files (with or without violations)
      */
     int getTotalNumberOfFiles(boolean recursive=true) {
-        return 1
+        1
     }
 
     /**
@@ -83,7 +83,7 @@ class FileResults implements Results {
      * @return the number of files containing violations
      */
     int getNumberOfFilesWithViolations(boolean recursive=true) {
-        return violations.empty ? 0 : 1
+        violations.empty ? 0 : 1
     }
 
     /**
@@ -92,10 +92,10 @@ class FileResults implements Results {
      * @return this Results object if the path matches, otherwise null
      */
     Results findResultsForPath(String path) {
-        return this.path == path ? this : null 
+        this.path == path ? this : null
     }
 
     String toString() {
-        return "FileResults($path) $violations"
+        "FileResults($path) $violations"
     }
 }

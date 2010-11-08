@@ -104,7 +104,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
           class MyClass {
                def myMethod1() { 'println 23' }
                String myMethod2() {
-                   return 'error: 23'
+                   'error: 23'
                }
           }
         '''
@@ -136,7 +136,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new MethodSizeRule()
+        new MethodSizeRule()
     }
 
 }

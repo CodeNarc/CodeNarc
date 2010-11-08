@@ -267,7 +267,7 @@ class PropertyNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new PropertyNameRule()
+        new PropertyNameRule()
     }
 
 }

@@ -115,7 +115,7 @@ def getRuleCategory() {
 def getUserInput() {
 
 	def input = new java.util.Scanner(System.in)
-    return input.nextLine()
+    input.nextLine()
 
 }
 

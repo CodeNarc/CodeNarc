@@ -225,7 +225,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new NestedSynchronizationRule()
+        new NestedSynchronizationRule()
     }
 
 }

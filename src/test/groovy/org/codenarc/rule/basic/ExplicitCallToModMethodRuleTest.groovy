@@ -49,6 +49,6 @@ class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new ExplicitCallToModMethodRule()
+        new ExplicitCallToModMethodRule()
     }
 }

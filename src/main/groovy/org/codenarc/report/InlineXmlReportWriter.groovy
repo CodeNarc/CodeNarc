@@ -25,6 +25,7 @@ import org.codenarc.rule.Violation
  * @author Robin Bramley
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('UnnecessaryReturnKeyword')
 class InlineXmlReportWriter extends XmlReportWriter {
 
 

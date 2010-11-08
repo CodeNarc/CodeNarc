@@ -56,6 +56,6 @@ class XmlFileRuleSet implements RuleSet {
      * @return a List of Rule objects
      */
     List getRules() {
-        return rules
+        rules
     }
 }

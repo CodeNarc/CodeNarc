@@ -97,7 +97,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ConstantTernaryExpressionRule()
+        new ConstantTernaryExpressionRule()
     }
 
 }

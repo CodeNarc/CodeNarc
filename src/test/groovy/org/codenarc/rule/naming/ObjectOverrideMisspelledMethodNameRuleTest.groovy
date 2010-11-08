@@ -65,7 +65,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             int hashcode() {}
             int haSHcode(int value) {}      // ok; not empty params
-            Object hashCOde() {}            // Note that it does not enforce return type
+            Object hashCOde() {}            // Note that it does not enforce type
         '''
         assertViolations(SOURCE,
                 [lineNumber:2, sourceLineText:'int hashcode() {}'],
@@ -86,7 +86,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ObjectOverrideMisspelledMethodNameRule()
+        new ObjectOverrideMisspelledMethodNameRule()
     }
 
 }

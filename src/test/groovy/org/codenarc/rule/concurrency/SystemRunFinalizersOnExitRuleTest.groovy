@@ -86,7 +86,7 @@ class SystemRunFinalizersOnExitRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new SystemRunFinalizersOnExitRule()
+        new SystemRunFinalizersOnExitRule()
     }
 
 }

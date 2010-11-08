@@ -63,7 +63,7 @@ class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new RemoveAllOnSelfRule()
+        new RemoveAllOnSelfRule()
     }
 
 }

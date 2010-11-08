@@ -130,6 +130,6 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new JUnitUnnecessaryTearDownRule()
+        new JUnitUnnecessaryTearDownRule()
     }
 }

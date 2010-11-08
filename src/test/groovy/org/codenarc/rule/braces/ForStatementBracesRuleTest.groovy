@@ -67,7 +67,7 @@ class ForStatementBracesRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ForStatementBracesRule()
+        new ForStatementBracesRule()
     }
 
 }

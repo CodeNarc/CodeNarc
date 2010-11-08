@@ -64,13 +64,13 @@ class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
 
         boolean returnsBoolean = false
         node.code?.visit(new BooleanReturnTracker(callbackFunction: {returnsBoolean = true}))
-        return returnsBoolean
+        returnsBoolean
     }
 
     private static boolean closureReturnsBoolean(ClosureExpression node) {
         boolean returnsBoolean = false
         node.code?.visit(new BooleanReturnTracker(callbackFunction: {returnsBoolean = true}))
-        return returnsBoolean
+        returnsBoolean
     }
 }
 

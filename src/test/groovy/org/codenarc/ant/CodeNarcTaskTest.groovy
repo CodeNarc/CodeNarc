@@ -207,9 +207,9 @@ class CodeNarcTaskTest extends AbstractTestCase {
     }
 
     private createAndUseFakeCodeNarcRunner() {
-        def codeNarcRunner = [execute: { return RESULTS }]
-        codeNarcTask.createCodeNarcRunner = { return codeNarcRunner }
-        return codeNarcRunner
+        def codeNarcRunner = [execute: { RESULTS }]
+        codeNarcTask.createCodeNarcRunner = { codeNarcRunner }
+        codeNarcRunner
     }
 
     private void assertStandardHtmlReportWriter(codeNarcRunner) {
@@ -224,7 +224,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
         options?.each { name, value ->
             report.addConfiguredOption(new ReportOption(name:name, value:value))
         }
-        return report
+        report
     }
 }
 
@@ -234,7 +234,7 @@ class StubSourceAnalyzerCategory {
     static void reset() { violationCounts = [1:0, 2:0, 3:0] }
     
     static SourceAnalyzer createSourceAnalyzer(CodeNarcTask self) {
-        def results = [getNumberOfViolationsWithPriority:{ p, r -> return violationCounts[p]}] as Results
-        return [analyze:{RuleSet ruleSet -> return results}, getSourceDirectories:{[]}] as SourceAnalyzer
+        def results = [getNumberOfViolationsWithPriority:{ p, r -> violationCounts[p]}] as Results
+        [analyze:{RuleSet ruleSet -> results}, getSourceDirectories:{[]}] as SourceAnalyzer
     }
 }

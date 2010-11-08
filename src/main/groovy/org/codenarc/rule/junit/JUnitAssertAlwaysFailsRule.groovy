@@ -65,7 +65,7 @@ class JUnitAssertAlwaysFailsAstVisitor extends AbstractAstVisitor  {
             isMatch = args.size() in 1..2 &&
                 valueExpression instanceof ConstantExpression && valueExpression.value != null
         }
-        return isMatch
+        isMatch
     }
 
 }

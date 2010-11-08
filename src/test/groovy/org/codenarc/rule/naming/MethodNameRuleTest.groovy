@@ -150,7 +150,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new MethodNameRule()
+        new MethodNameRule()
     }
 
 }

@@ -252,7 +252,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
 //    }
 
     protected Rule createRule() {
-        return new ReturnsNullInsteadOfEmptyCollectionRule()
+        new ReturnsNullInsteadOfEmptyCollectionRule()
     }
 
 }

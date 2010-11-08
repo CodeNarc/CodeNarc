@@ -162,6 +162,6 @@ class DuplicateLiteralRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new DuplicateLiteralRule()
+        new DuplicateLiteralRule()
     }
 }

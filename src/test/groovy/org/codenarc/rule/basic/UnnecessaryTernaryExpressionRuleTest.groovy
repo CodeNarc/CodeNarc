@@ -177,7 +177,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnnecessaryTernaryExpressionRule()
+        new UnnecessaryTernaryExpressionRule()
     }
 
 }

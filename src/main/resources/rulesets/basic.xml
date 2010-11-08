@@ -59,4 +59,5 @@
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfTreeSetRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfLinkedListRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfStackRule'/>
+    <rule class='org.codenarc.rule.basic.UnnecessaryReturnKeywordRule'/>
 </ruleset>

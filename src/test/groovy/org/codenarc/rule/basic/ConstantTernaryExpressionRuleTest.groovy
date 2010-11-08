@@ -102,7 +102,7 @@ class ConstantTernaryExpressionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ConstantTernaryExpressionRule()
+        new ConstantTernaryExpressionRule()
     }
 
 }

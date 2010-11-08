@@ -234,7 +234,7 @@ class AstUtilTest extends AbstractTestCase {
             }
             mc.method.value == name
         }
-        return methodCall
+        methodCall
     }
 }
 
@@ -270,6 +270,6 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     }
 
     protected SourceUnit getSourceUnit() {
-        return source
+        source
     }
 }

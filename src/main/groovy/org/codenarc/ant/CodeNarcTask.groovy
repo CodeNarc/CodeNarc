@@ -68,7 +68,7 @@ class CodeNarcTask extends Task {
     protected ruleSet
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
-    protected createCodeNarcRunner = { return new CodeNarcRunner() }
+    protected createCodeNarcRunner = { new CodeNarcRunner() }
 
     /**
      * Execute this Ant Task
@@ -116,7 +116,7 @@ class CodeNarcTask extends Task {
      * @return a configured SourceAnalyzer instance
      */
     protected SourceAnalyzer createSourceAnalyzer() {
-        return new AntFileSetSourceAnalyzer(getProject(), fileSets)
+        new AntFileSetSourceAnalyzer(getProject(), fileSets)
     }
 
     private void checkMaxViolations(Results results) {

@@ -310,7 +310,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
     }
 
     private Rule findRule(String name) {
-        return rules.find { it.name == name }
+        rules.find { it.name == name }
     }
 
 }

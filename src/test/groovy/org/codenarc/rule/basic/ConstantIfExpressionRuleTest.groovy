@@ -97,7 +97,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ConstantIfExpressionRule()
+        new ConstantIfExpressionRule()
     }
 
 }

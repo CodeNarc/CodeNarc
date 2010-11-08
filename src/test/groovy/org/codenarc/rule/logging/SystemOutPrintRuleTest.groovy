@@ -88,6 +88,6 @@ class SystemOutPrintRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new SystemOutPrintRule()
+        new SystemOutPrintRule()
     }
 }

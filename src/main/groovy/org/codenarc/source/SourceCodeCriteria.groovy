@@ -83,7 +83,7 @@ class SourceCodeCriteria {
             apply = !new WildcardPattern(doNotApplyToFileNames).matches(target) 
         }
 
-        return apply
+        apply
     }
 
     private boolean includesPath(String value) {

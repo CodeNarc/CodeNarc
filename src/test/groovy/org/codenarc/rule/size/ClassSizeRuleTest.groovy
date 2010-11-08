@@ -76,7 +76,7 @@ class ClassSizeRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ClassSizeRule()
+        new ClassSizeRule()
     }
 
 }

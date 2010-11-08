@@ -41,6 +41,6 @@ class UrlResource implements Resource {
      */
     InputStream getInputStream() throws IOException {
         def url = new URL(path)
-        return url.openStream()
+        url.openStream()
     }
 }

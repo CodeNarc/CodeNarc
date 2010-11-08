@@ -77,11 +77,11 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
         def reportResults = new DirectoryResults()
         def dirResults = processDirectory('', ruleSet)
         reportResults.addChild(dirResults)
-        return reportResults
+        reportResults
     }
 
     List getSourceDirectories() {
-        return [baseDirectory]
+        [baseDirectory]
     }
 
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
@@ -101,7 +101,7 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
                 processFile(filePath, dirResults, ruleSet)
             }
         }
-        return dirResults
+        dirResults
     }
 
     private def processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
@@ -123,7 +123,7 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
     }
 
     protected boolean matches(SourceCode sourceFile) {
-        return includesPattern.matches(sourceFile.path) &&
+        includesPattern.matches(sourceFile.path) &&
             !excludesPattern.matches(sourceFile.path)
     }
 

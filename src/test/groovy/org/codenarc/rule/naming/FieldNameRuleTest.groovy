@@ -266,7 +266,7 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new FieldNameRule()
+        new FieldNameRule()
     }
 
 }

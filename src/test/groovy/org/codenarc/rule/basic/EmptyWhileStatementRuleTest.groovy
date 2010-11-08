@@ -76,7 +76,7 @@ class EmptyWhileStatementRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EmptyWhileStatementRule()
+        new EmptyWhileStatementRule()
     }
 
 }

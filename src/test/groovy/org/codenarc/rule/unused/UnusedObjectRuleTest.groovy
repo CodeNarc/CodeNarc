@@ -124,7 +124,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UnusedObjectRule()
+        new UnusedObjectRule()
     }
 
 }

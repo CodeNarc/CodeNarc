@@ -53,6 +53,6 @@ class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToCompareToMethodRule()
+        new ExplicitCallToCompareToMethodRule()
     }
 }

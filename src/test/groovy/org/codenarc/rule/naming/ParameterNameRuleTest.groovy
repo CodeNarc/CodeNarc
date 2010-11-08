@@ -118,7 +118,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
                 def closure = { int Count = 23 ->
-                    return Count
+                    Count
                 }
             }
         '''
@@ -130,7 +130,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 private MyClass(BigDecimal deposit_amount) { }
                 def closure = { int Count = 23 ->
-                    return Count
+                    Count
                 }
             }
         '''
@@ -177,7 +177,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ParameterNameRule()
+        new ParameterNameRule()
     }
 
 }

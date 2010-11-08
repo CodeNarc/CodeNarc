@@ -71,12 +71,11 @@ class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
     }
 
     private boolean isZeroArgumentMethod(MethodNode methodNode, String methodName) {
-        return methodNode.name == methodName &&
-               methodNode.parameters.size() == 0
+        methodNode.name == methodName && methodNode.parameters.size() == 0
     }
 
     private boolean isTestMethod(MethodNode methodNode) {
-        return (methodNode.modifiers & MethodNode.ACC_PUBLIC) &&
+        (methodNode.modifiers & MethodNode.ACC_PUBLIC) &&
                 methodNode.name.startsWith('test') &&
                 methodNode.parameters.size() == 0
     }

@@ -104,7 +104,7 @@ class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ElseBlockBracesRule()
+        new ElseBlockBracesRule()
     }
 
 }

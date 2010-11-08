@@ -67,7 +67,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new DuplicateImportRule()
+        new DuplicateImportRule()
     }
 
 }

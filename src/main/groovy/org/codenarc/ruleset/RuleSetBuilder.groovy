@@ -95,7 +95,7 @@ class TopLevelDelegate {
     }
 
     protected RuleSet getRuleSet() {
-        return allRuleSet
+        allRuleSet
     }
 }
 

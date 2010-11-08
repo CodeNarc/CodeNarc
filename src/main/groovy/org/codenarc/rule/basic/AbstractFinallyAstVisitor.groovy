@@ -43,7 +43,7 @@ abstract class AbstractFinallyAstVisitor extends AbstractAstVisitor {
      * @return true if the specified statement is within a finally block
      */
     protected boolean isStatementWithinFinally(Statement statement) {
-        return finallyLineRanges.find { statement.lineNumber in it }
+        finallyLineRanges.find { statement.lineNumber in it }
     }
 
 }

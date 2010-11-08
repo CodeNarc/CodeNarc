@@ -49,6 +49,6 @@ class ExplicitCallToMinusMethodRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new ExplicitCallToMinusMethodRule()
+        new ExplicitCallToMinusMethodRule()
     }
 }

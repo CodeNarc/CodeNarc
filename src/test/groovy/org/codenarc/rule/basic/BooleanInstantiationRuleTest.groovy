@@ -87,7 +87,7 @@ class BooleanInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new BooleanInstantiationRule()
+        new BooleanInstantiationRule()
     }
 
 }

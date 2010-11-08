@@ -58,7 +58,7 @@ class CatchingIllegalMonitorStateExceptionRuleTest extends AbstractRuleTestCase 
     }
 
     protected Rule createRule() {
-        return new CatchingIllegalMonitorStateExceptionRule()
+        new CatchingIllegalMonitorStateExceptionRule()
     }
 
 }

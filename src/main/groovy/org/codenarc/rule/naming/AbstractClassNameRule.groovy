@@ -37,7 +37,7 @@ class AbstractClassNameRule extends AbstractAstVisitorRule {
     String regex
 
     boolean isReady() {
-        return regex
+        regex
     }
 }
 
@@ -45,6 +45,6 @@ class AbstractClassNameAstVisitor extends AbstractTypeNameAstVisitor  {
     protected boolean shouldVisit(ClassNode classNode) {
         def isAbstract = classNode.modifiers & classNode.ACC_ABSTRACT
         def isInterface = classNode.modifiers & classNode.ACC_INTERFACE
-        return isAbstract && !isInterface
+        isAbstract && !isInterface
     }
 }

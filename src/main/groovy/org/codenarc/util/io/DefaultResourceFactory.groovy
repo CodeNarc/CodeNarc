@@ -40,11 +40,10 @@ class DefaultResourceFactory implements ResourceFactory {
             return new ClassPathResource(path - classPathID)
         }
 
-        return isUrl(path) ?
-            new UrlResource(path) : new ClassPathResource(path)  
+        isUrl(path) ? new UrlResource(path) : new ClassPathResource(path)
     }
 
     private isUrl(String path) {
-        return path =~ /.*\:.*/
+        path =~ /.*\:.*/
     }
 }

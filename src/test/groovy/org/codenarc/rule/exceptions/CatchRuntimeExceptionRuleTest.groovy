@@ -58,7 +58,7 @@ class CatchRuntimeExceptionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new CatchRuntimeExceptionRule()
+        new CatchRuntimeExceptionRule()
     }
 
 }

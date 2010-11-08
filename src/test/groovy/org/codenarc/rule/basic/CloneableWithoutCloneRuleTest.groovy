@@ -92,7 +92,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
 
 
     protected Rule createRule() {
-        return new CloneableWithoutCloneRule()
+        new CloneableWithoutCloneRule()
     }
 
 }

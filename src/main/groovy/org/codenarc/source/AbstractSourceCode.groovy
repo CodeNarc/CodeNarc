@@ -43,7 +43,7 @@ abstract class AbstractSourceCode implements SourceCode {
         if (lines == null) {
             lines = new StringReader(getText()).readLines()
         }
-        return lines
+        lines
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class AbstractSourceCode implements SourceCode {
      */
     String line(int lineNumber) {
         def allLines = getLines()
-        return (lineNumber >= 0) && lineNumber < allLines.size() ? 
+        (lineNumber >= 0) && lineNumber < allLines.size() ?
             allLines[lineNumber].trim() : null
     }
 
@@ -75,7 +75,7 @@ abstract class AbstractSourceCode implements SourceCode {
             }
             astParsed = true
         }
-        return ast
+        ast
     }
 
     /**
@@ -97,7 +97,7 @@ abstract class AbstractSourceCode implements SourceCode {
                 }
             }
         }
-        return lineCount
+        lineCount
     }
 
     /**
@@ -108,7 +108,7 @@ abstract class AbstractSourceCode implements SourceCode {
     protected String normalizePath(String path) {
         final SEP = '/' as char
         char separatorChar = System.getProperty(SEPARATOR_PROP).charAt(0)
-        return (separatorChar != SEP) ? path.replace(separatorChar, SEP) : path
+        (separatorChar != SEP) ? path.replace(separatorChar, SEP) : path
     }
 
 }

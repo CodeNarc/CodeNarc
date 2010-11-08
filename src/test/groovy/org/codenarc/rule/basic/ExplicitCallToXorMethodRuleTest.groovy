@@ -48,6 +48,6 @@ class ExplicitCallToXorMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToXorMethodRule()
+        new ExplicitCallToXorMethodRule()
     }
 }

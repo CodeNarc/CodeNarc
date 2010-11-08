@@ -61,6 +61,6 @@ class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new SynchronizedOnGetClassRule()
+        new SynchronizedOnGetClassRule()
     }
 }

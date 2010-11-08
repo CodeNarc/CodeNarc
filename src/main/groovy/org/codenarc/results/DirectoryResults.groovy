@@ -44,7 +44,7 @@ class DirectoryResults implements Results {
      * @return the path to the file or directory associated with these results
      */
     String getPath() {
-        return path
+        path
     }
 
     void addChild(Results child) {
@@ -55,7 +55,7 @@ class DirectoryResults implements Results {
      * @return the List of child Results objects; may be empty
      */
     List getChildren() {
-        return children
+        children
     }
 
     /**
@@ -71,7 +71,7 @@ class DirectoryResults implements Results {
      * @return the number of violations with the specified priority
      */
     int getNumberOfViolationsWithPriority(int priority, boolean recursive=true) {
-        return children.sum(0) { child ->
+        children.sum(0) { child ->
             (recursive || child.isFile()) ? child.getNumberOfViolationsWithPriority(priority) : 0 
         }
     }
@@ -97,14 +97,14 @@ class DirectoryResults implements Results {
         if (recursive) {
             total += children.sum(0) { child -> child.isFile() ? 0 : child.getTotalNumberOfFiles(true) }
         }
-        return total
+        total
     }
 
     /**
      * @return false (this object does not represents the results for a single file)
      */
     boolean isFile() {
-        return false
+        false
     }
 
     /**
@@ -122,11 +122,11 @@ class DirectoryResults implements Results {
                 return foundResults
             }
         }
-        return null
+        null
     }
 
     String toString() {
-        return "DirectoryResults($path) $children"
+        "DirectoryResults($path) $children"
     }
 
 }

@@ -198,7 +198,7 @@ actual:               $violation.sourceLine
         def sourceCode = new SourceString(source, sourceCodePath, sourceCodeName)
         def violations = rule.applyTo(sourceCode)
         log("violations=$violations")
-        return violations
+        violations
     }
 
     void setUp() {

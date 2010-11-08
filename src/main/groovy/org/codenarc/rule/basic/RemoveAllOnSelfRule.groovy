@@ -54,6 +54,6 @@ class RemoveAllOnSelfAstVisitor extends AbstractAstVisitor {
         if (call?.arguments instanceof TupleExpression) {
             return call?.arguments?.expressions?.size()
         }
-        return 0
+        0
     }
 }

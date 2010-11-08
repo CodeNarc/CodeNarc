@@ -103,6 +103,6 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new PrintlnRule()
+        new PrintlnRule()
     }
 }

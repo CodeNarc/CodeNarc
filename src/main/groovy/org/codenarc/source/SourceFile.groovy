@@ -42,14 +42,14 @@ class SourceFile extends AbstractSourceCode {
      * @return the filename for this source file, excluding path
      */
     String getName() {
-        return file.name
+        file.name
     }
 
     /**
      * @return the normalized path for this source file, including filename
      */
     String getPath() {
-        return path
+        path
     }
 
     /**
@@ -59,11 +59,11 @@ class SourceFile extends AbstractSourceCode {
         if (text == null) {
             text = file.text
         }
-        return text
+        text
     }
 
     String toString() {
-        return "SourceFile[$file.absolutePath]"
+        "SourceFile[$file.absolutePath]"
     }
 
 }

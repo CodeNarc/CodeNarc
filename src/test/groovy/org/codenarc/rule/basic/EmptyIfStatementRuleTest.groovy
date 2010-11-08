@@ -77,7 +77,7 @@ class EmptyIfStatementRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new EmptyIfStatementRule()
+        new EmptyIfStatementRule()
     }
 
 }

@@ -48,6 +48,6 @@ class ExplicitCallToRightShiftMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ExplicitCallToRightShiftMethodRule()
+        new ExplicitCallToRightShiftMethodRule()
     }
 }

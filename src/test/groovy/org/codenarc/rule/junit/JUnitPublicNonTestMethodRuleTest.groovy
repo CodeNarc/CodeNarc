@@ -196,6 +196,6 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new JUnitPublicNonTestMethodRule()
+        new JUnitPublicNonTestMethodRule()
     }
 }

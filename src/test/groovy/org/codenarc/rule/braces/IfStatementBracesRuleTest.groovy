@@ -67,7 +67,7 @@ class IfStatementBracesRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new IfStatementBracesRule()
+        new IfStatementBracesRule()
     }
 
 }

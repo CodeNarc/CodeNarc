@@ -183,7 +183,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new StatelessClassRule()
+        new StatelessClassRule()
     }
 
 }

@@ -86,7 +86,7 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
             def dirResults = processDirectory(srcDir, ruleSet)
             reportResults.addChild(dirResults)
         }
-        return reportResults
+        reportResults
     }
 
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
@@ -106,7 +106,7 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
                 processFile(filePath, dirResults, ruleSet)
             }
         }
-        return dirResults
+        dirResults
     }
 
     private def processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {

@@ -207,6 +207,6 @@ class UsingJUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new UsingJUnitStyleAssertionsRule()
+        new UsingJUnitStyleAssertionsRule()
     }
 }

@@ -197,6 +197,6 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new GrailsStatelessServiceRule()
+        new GrailsStatelessServiceRule()
     }
 }

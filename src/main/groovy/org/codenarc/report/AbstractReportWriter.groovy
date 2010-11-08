@@ -95,25 +95,25 @@ abstract class AbstractReportWriter implements ReportWriter {
     }
 
     protected String getHtmlDescriptionForRule(Rule rule) {
-        return getDescriptionProperty(rule) ?: getHtmlRuleDescription(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+        getDescriptionProperty(rule) ?: getHtmlRuleDescription(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
     }
 
     protected String getDescriptionForRule(Rule rule) {
-        return getDescriptionProperty(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+        getDescriptionProperty(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
     }
 
     private String getHtmlRuleDescription(Rule rule) {
         def resourceKey = rule.name + '.description.html'
-        return getResourceBundleString(resourceKey, null, false)
+        getResourceBundleString(resourceKey, null, false)
     }
 
     private String getRuleDescriptionOrDefaultMessage(Rule rule) {
         def resourceKey = rule.name + '.description'
-        return getResourceBundleString(resourceKey, "No description provided for rule named [$rule.name]")
+        getResourceBundleString(resourceKey, "No description provided for rule named [$rule.name]")
     }
 
     private String getDescriptionProperty(Rule rule) {
-        return AstUtil.respondsTo(rule, 'getDescription') ? rule.description : null
+        AstUtil.respondsTo(rule, 'getDescription') ? rule.description : null
     }
 
     protected String getResourceBundleString(String resourceKey, String defaultString='?', boolean logWarning=true) {
@@ -125,25 +125,25 @@ abstract class AbstractReportWriter implements ReportWriter {
                 LOG.warn("No string found for resourceKey=[$resourceKey]")
             }
         }
-        return string
+        string
     }
 
     protected String getFormattedTimestamp() {
         def dateFormat = java.text.DateFormat.getDateTimeInstance()
-        return dateFormat.format(getTimestamp())
+        dateFormat.format(getTimestamp())
     }
 
     protected List getSortedRules(AnalysisContext analysisContext) {
         def rules = analysisContext.ruleSet.rules.findAll { rule -> isEnabled(rule) }
-        return rules.toList().sort { rule -> rule.name }
+        rules.toList().sort { rule -> rule.name }
     }
 
     protected boolean isEnabled(Rule rule) {
-        return (!AstUtil.respondsTo(rule, 'getEnabled') || rule.enabled)
+        (!AstUtil.respondsTo(rule, 'getEnabled') || rule.enabled)
     }
 
     protected String getCodeNarcVersion() {
-        return ClassPathResource.getInputStream(VERSION_FILE).text
+        ClassPathResource.getInputStream(VERSION_FILE).text
     }
 
     private boolean isWriteToStandardOut() {

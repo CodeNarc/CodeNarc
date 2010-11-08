@@ -45,18 +45,18 @@ class JUnitUtil {
                 args[args.size()-1] instanceof ConstantExpression &&
                 args[args.size()-1].properties['value'] == value
         }
-        return isMatch
+        isMatch
     }
 
     protected static boolean isSetUpMethod(MethodNode methodNode) {
-        return (methodNode.name == 'setUp' &&
+        (methodNode.name == 'setUp' &&
                 methodNode.parameters.size() == 0 &&
                 !AstUtil.getAnnotation(methodNode, 'Before') &&
                 methodNode.code instanceof BlockStatement)
     }
 
     protected static boolean isTearDownMethod(MethodNode methodNode) {
-        return (methodNode.name == 'tearDown' &&
+        (methodNode.name == 'tearDown' &&
                 methodNode.parameters.size() == 0 &&
                 !AstUtil.getAnnotation(methodNode, 'After') &&
                 methodNode.code instanceof BlockStatement)

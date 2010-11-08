@@ -48,7 +48,7 @@ class CompositeRuleSet implements RuleSet {
      * @return a List of Rule objects. The returned List is immutable.
      */
     List getRules() {
-        return rules.asImmutable()
+        rules.asImmutable()
     }
 
 }

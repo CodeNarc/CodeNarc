@@ -28,6 +28,6 @@ class CatchingIllegalMonitorStateExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchingIllegalMonitorStateException'
     int priority = 2
     AstVisitor getAstVisitor() {
-        return new CommonCatchAstVisitor('IllegalMonitorStateException')
+        new CommonCatchAstVisitor('IllegalMonitorStateException')
     }
 }
