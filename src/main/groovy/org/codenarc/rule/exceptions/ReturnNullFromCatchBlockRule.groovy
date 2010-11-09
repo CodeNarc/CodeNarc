@@ -13,52 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.exceptions
 
-import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.stmt.CatchStatement
+import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codenarc.util.AstUtil
 
 /**
- * In Groovy, the return keyword is often optional. If a statement is the last line in a method or closure then you do not need to have the return keyword. 
+ * Returning null from a catch block often masks errors and requires the client to handle error codes. In some coding styles this is discouraged. 
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class UnnecessaryReturnKeywordRule extends AbstractAstVisitorRule {
-    String name = 'UnnecessaryReturnKeyword'
+class ReturnNullFromCatchBlockRule extends AbstractAstVisitorRule {
+    String name = 'ReturnNullFromCatchBlock'
     int priority = 2
-    Class astVisitorClass = UnnecessaryReturnKeywordAstVisitor
+    Class astVisitorClass = ReturnNullFromCatchBlockAstVisitor
 }
 
-class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
+class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethodEx(MethodNode node) {
-
+    def void visitCatchStatement(CatchStatement node) {
         def lastStatement = getLastStatement(node)
         if (lastStatement instanceof ReturnStatement) {
-            addViolation lastStatement
+            if (AstUtil.isNull(lastStatement.expression)) {
+                addViolation lastStatement
+            }
         }
-
-        super.visitMethodEx node
-    }
-
-    def void visitClosureExpression(ClosureExpression node) {
-
-        def lastStatement = getLastStatement(node)
-        if (lastStatement instanceof ReturnStatement) {
-            addViolation lastStatement
-        }
-
-        super.visitClosureExpression node
+        super.visitCatchStatement node
     }
 
     /**
      * This is not a good general function for AstUtils.
-     * It is too specific and may not work across different ASTNode subtypes. 
+     * It is too specific and may not work across different ASTNode subtypes.
      * @param node
      *      node
      */

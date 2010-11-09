@@ -11,6 +11,8 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
 * DuplicateNumberLiteral Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+  New in CodeNarc 0.11
+
   This rule checks for duplicate number literals within the current class.
 
   Code containing duplicate <Number> literals can usually be improved by declaring the <Number> as a constant field.
@@ -31,6 +33,8 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
 
 * DuplicateStringLiteral Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  New in CodeNarc 0.11
 
   This rule checks for duplicate String literals within the current class.
 

@@ -13,65 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for UnnecessaryReturnKeywordRule
+ * Tests for ReturnNullFromCatchBlockRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
+class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryReturnKeyword"
+        assert rule.name == "ReturnNullFromCatchBlock"
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = { y++; it }
-        	def x = { it }
-            def method1(it) {
-                y++
-                it
-            }
-            def method2(it) {
-                it
+      	    def x = null
+        	try {
+                return x
+        	} catch (Exception e) {
+                return x
+            } finally {
+                return x 
             }
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testInClosures() {
+    void testTwoExceptions() {
         final SOURCE = '''
-        	def x = { y++; return it }
-        	def x = { return it }
+        	try {
+      	    def x = null
+                return x
+        	} catch (IOException e) {
+                return null
+            } catch (Exception e) {
+                LOG.error(e.getMessage())
+                return null
+            } 
         '''
         assertTwoViolations(SOURCE,
-                2, 'return it',
-                3, 'return it')
-    }
-
-    void testInMethods() {
-        final SOURCE = '''
-            def method1(it) {
-                y++
-                return it
-            }
-            def method2(it) {
-                return it
-            }
-        '''
-        assertTwoViolations(SOURCE,
-                4, 'return it',
-                7, 'return it')
+                6, 'return null',
+                9, 'return null')
     }
 
     protected Rule createRule() {
-        new UnnecessaryReturnKeywordRule()
+        new ReturnNullFromCatchBlockRule()
     }
 }

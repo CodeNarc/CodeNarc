@@ -26,6 +26,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * BooleanMethodReturnsNull Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   Checks for a method with <<<Boolean>>> return type that returns an explicit <<<null>>>. A method that
   returns either <<<Boolean.TRUE>>>, <<<Boolean.FALSE>>> or <<<null>>> is an accident waiting to happen.
   This method can be invoked as though it returned a value of type <<<boolean>>>, and the compiler will
@@ -127,6 +128,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * DuplicateCaseStatement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+  New in CodeNarc 0.11
   Check for duplicate <<<case>>> statements in a <<<switch>>> block, such as two equal
   integers or strings. Here are some examples of code that produces violations:
 
@@ -329,12 +331,14 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * ExplicitCallToAndMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<and(Object)>>> method is called directly in code instead of using the <<<&>>>
   operator. A groovier way to express this: <<<a.and(b)>>> is this: <<<a & b>>>
 
 
 * ExplicitCallToCompareToMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<compareTo(Object)>>> method is called directly in code instead of using the
   \<\=\>, \>, \>\=, \<, and \<\= operators. A groovier way to express this: <<<a.compareTo(b)>>> is this:
   <<<a \<\=\> b>>>, or using the other operators. Here are some other ways to write groovier code:
@@ -351,12 +355,14 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * ExplicitCallToDivMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<div(Object)>>> method is called directly in code instead of using the
   <<</>>> operator. A groovier way to express this: <<<a.div(b)>>> is this: <<<a / b>>>
 
 
 * ExplicitCallToEqualsMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<equals(Object)>>> method is called directly in code instead of using the
   <<<==>>> or <<<!=>>> operator. A groovier way to express this: <<<a.equals(b)>>> is this: <<<a == b>>>
    and a groovier way to express : <<<!a.equals(b)>>> is: <<<a != b>>>
@@ -364,96 +370,112 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * ExplicitCallToGetAtMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<getAt(Object)>>> method is called directly in code instead of using the
   <<<[]>>> index operator. A groovier way to express this: <<<a.getAt(b)>>> is this: <<<a[b]>>>
 
 
 * ExplicitCallToLeftShiftMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<leftShift(Object)>>> method is called directly in code instead of using the
   \<\< operator. A groovier way to express this: <<<a.leftShift(b)>>> is this: <<<a \<\< b>>>
 
 
 * ExplicitCallToMinusMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<minus(Object)>>> method is called directly in code instead of using the
   <<<->>> operator. A groovier way to express this: <<<a.minus(b)>>> is this: <<<a - b>>>
 
 
 * ExplicitCallToMultiplyMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<multiply(Object)>>> method is called directly in code instead of using the
   <<<*>>> operator. A groovier  way to express this: <<<a.multiply(b)>>> is this: <<<a * b>>>
 
 
 * ExplicitCallToModMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<mod(Object)>>> method is called directly in code instead of using the
   <<<%>>> operator. A groovier way to express this: <<<a.mod(b)>>> is this: <<<a % b>>>
 
 
 * ExplicitCallToOrMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<or(Object)>>> method is called directly in code instead of using the <<<|>>>
   operator. A groovier way to express this: <<<a.or(b)>>> is this: <<<a | b>>>
 
 
 * ExplicitCallToPlusMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<plus(Object)>>> method is called directly in code instead of using the
   <<<+>>> operator. A groovier way to express this: <<<a.plus(b)>>> is this: <<<a + b>>>
 
 
 * ExplicitCallToPowerMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<power(Object)>>> method is called directly in code instead of using the
   <<<**>>> operator. A groovier way to express this: <<<a.power(b)>>> is this: <<<a ** b>>>
 
 
 * ExplicitCallToRightShiftMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<rightShift(Object)>>> method is called directly in code instead of using the
   \>\> operator. A groovier way to express this: <<<a.rightShift(b)>>> is this: <<<a \>\> b>>>
 
 
 * ExplicitCallToXorMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when the <<<xor(Object)>>> method is called directly in code instead of using the
   <<<^>>> operator. A groovier way to express this: <<<a.xor(b)>>> is this: <<<a ^ b>>>
 
 
 * ExplicitCreationOfArrayList Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule checks for the explicit instantiation of an <<<ArrayList>>>. In Groovy, it is best to write
   <<<new ArrayList() as []>>>, which creates the same object.
 
 
 * ExplicitCreationOfHashMap Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule checks for the explicit instantiation of a <<<HashMap>>>. In Groovy, it is best to write
   <<<new HashMap() as [:]>>>, which creates the same object.
 
 
 * ExplicitCreationOfHashSet Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule checks for the explicit instantiation of a <<<HashSet>>>. In Groovy, it is best to write
   <<<new HashSet()>>> as <<<[] as Set>>>, which creates the same object.
 
 
 * ExplicitCreationOfLinkedList Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule checks for the explicit instantiation of a <<<LinkedList>>>. In Groovy, it is best to write
   <<<new LinkedList()>>> as <<<[] as Queue>>>, which creates the same object.
 
 
 * ExplicitCreationOfStack Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule checks for the explicit instantiation of a <<<Stack>>>. In Groovy, it is best to write
   <<<new Stack()>>> as <<<[] as Stack>>>, which creates the same object.
 
 
 * ExplicitCreationOfTreeSet Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule checks for the explicit instantiation of a <<<TreeSet>>>. In Groovy, it is best to write
   <<<new TreeSet()>> as <<<[] as SortedSet>>>, which creates the same object.
 
@@ -461,6 +483,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * GStringAsMapKey Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+  New in CodeNarc 0.11
   A GString should not be used as a map key since its <hashcode> is not guaranteed to be stable.
   Consider calling <<<key.toString()>>>.
 
@@ -473,6 +496,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * RemoveAllOnSelf Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   Don't use <<<removeAll>>> to clear a collection. If you want to remove all elements from a
   collection <<<c>>>, use <<<c.clear>>>, not <<<c.removeAll(c)>>>. Calling <<<c.removeAll(c)>>>
   to clear a collection is less clear, susceptible to errors from typos, less efficient and
@@ -503,6 +527,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * ReturnsNullInsteadOfEmptyArray Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   If you have a method or closure that returns an array, then when there are no results return a zero-length
   (empty) array rather than <<<null>>>. It is often a better design to return a zero-length array rather than a
   <<<null>>> reference to indicate that there are no results (i.e., an <empty> list of results). This way,
@@ -511,6 +536,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * ReturnsNullInsteadOfEmptyCollection Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11 
   If you have a method or closure that returns a collection, then when there are no results return a zero-length
   (empty) collection rather than <<<null>>>. It is often a better design to return a zero-length collection
   rather than a <<<null>>> reference to indicate that there are no results (i.e., an <empty> list of results).
@@ -520,6 +546,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * SerialVersionUID Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+  New in CodeNarc 0.11
   A <<serialVersionUID>> is normally intended to be used with Serialization. It needs to be of type
   <<<long>>>, <<<static>>>, and <<<final>>>. Also, it should have a <visibility modifier> such
   as <<<public>>> or <<<private>>>. Providing no modifier creates a <Property> and Groovy generates
@@ -605,6 +632,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * UnnecessaryConstructor Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's
   <<<public>>>, has an empty body, and takes no arguments.
 
@@ -665,16 +693,19 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * UselessCollectionCall Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   Checks for useless calls to collections. For any collection <<<c>>>, calling <<<c.containsAll(c)>>>
   should always be <<<true>>>, and <<<c.retainAll(c)>>> should have no effect.
 
 
 * UselessOverridingMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   Checks for an overriding method that merely calls the same method defined in a superclass. Remove it. 
 
 * UnnecessaryReturnKeyword Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   In Groovy, the return keyword is often optional. If a statement is the last line in a method or closure then you do
   not need to have the return keyword.
 

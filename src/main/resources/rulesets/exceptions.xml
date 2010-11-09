@@ -20,4 +20,5 @@
     <rule class='org.codenarc.rule.exceptions.ThrowRuntimeExceptionRule'/>
     <rule class='org.codenarc.rule.exceptions.ThrowThrowableRule'/>
     <rule class='org.codenarc.rule.exceptions.CatchingIllegalMonitorStateExceptionRule'/>
+    <rule class='org.codenarc.rule.exceptions.ReturnNullFromCatchBlockRule'/>
 </ruleset>

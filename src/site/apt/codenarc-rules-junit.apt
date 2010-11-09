@@ -117,32 +117,38 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
 * UseAssertEqualsInsteadOfAssertTrue Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects JUnit assertions in object equality. These assertions should be made by more specific methods, like
   assertEquals.
 
 * UseAssertTrueInsteadOfAssertEqualsRule Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects JUnit calling assertEquals where the first parameter is a boolean. These assertions should be made
   by more specific methods, like assertTrue or assertFalse.
 
 * UseAssertNullInsteadOfAssertEquals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  This rule detects JUnit calling assertEquals where the first or second parameter is null. These assertion should be 
+  New in CodeNarc 0.11
+  This rule detects JUnit calling assertEquals where the first or second parameter is null. These assertion should be
   made against the assertNull method instead.
 
 * UseAssertSameInsteadOfAssertTrue Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for
   reference equality. These assertion should be made against the assertSame or assertNotSame method instead.
 
 * UseFailWithMessageInsteadOfWithout Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects JUnit calling the fail() method without an argument. For better error reporting you should always
   provide a message.
 
 
 * UsingJUnitStyleAssertions Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
   Groovy 1.7 ships with a feature called the "power assert", which is an assert statement with better error reporting.
   This is preferable to the JUnit assertions. 

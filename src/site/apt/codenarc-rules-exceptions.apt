@@ -77,10 +77,19 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 
 * ConfusingClassNamedException Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   This class is not derived from another exception, but ends with 'Exception'. This will be confusing to users of
   this class.
 
 * CatchingIllegalMonitorStateException Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
   Dubious catching of IllegalMonitorStateException. IllegalMonitorStateException is generally only thrown in case of
   a design flaw in your code (calling wait or notify on an object you do not hold a lock on).
+
+* ReturnNullFromCatchBlock Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11
+  Returning null from a catch block often masks errors and requires the client to handle error codes. In some coding
+  styles this is discouraged. 
+
