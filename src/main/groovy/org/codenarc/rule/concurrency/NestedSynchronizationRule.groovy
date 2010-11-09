@@ -39,30 +39,30 @@ class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
     private int visitCount = 0;
 
     def void visitSynchronizedStatement(SynchronizedStatement statement) {
-        if (!isFirstVisit(statement)) {
-            super.visitSynchronizedStatement(statement);
-        } else {
+        if (isFirstVisit(statement)) {
             if (visitCount > 0) {
                 addViolation statement
             }
             visitCount++
             super.visitSynchronizedStatement(statement);
             visitCount--
+        } else {
+            super.visitSynchronizedStatement(statement);
         }
     }
 
     def void visitClosureExpression(ClosureExpression expression) {
 
-        if (!isFirstVisit(expression)) {
-            super.visitClosureExpression(expression);
-        } else {
+        if (isFirstVisit(expression)) {
             // dispatch to a new instance b/c we have a new scope
             AbstractAstVisitor newVisitor = new NestedSynchronizationAstVisitor(sourceCode: this.sourceCode, rule: this.rule, visited: this.visited)
             expression.getCode().visit(newVisitor);
             newVisitor.getViolations().each { Violation it ->
                 addViolation(it)
             }
-        } 
+        } else {
+            super.visitClosureExpression(expression);
+        }
     }
 
 

@@ -120,11 +120,11 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitClosureExpression(ClosureExpression expression) {
-        if (!closureFieldExpressions.contains(expression)) {
-            handleNestedNode(expression) { super.visitClosureExpression(expression) }
+        if (closureFieldExpressions.contains(expression)) {
+            super.visitClosureExpression(expression)
         }
         else {
-            super.visitClosureExpression(expression)
+            handleNestedNode(expression) { super.visitClosureExpression(expression) }
         }
     }
 
