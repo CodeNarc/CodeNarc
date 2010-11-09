@@ -61,4 +61,5 @@
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfStackRule'/>
     <rule class='org.codenarc.rule.basic.UnnecessaryReturnKeywordRule'/>
     <rule class='org.codenarc.rule.basic.DoubleNegativeRule'/>
+    <rule class='org.codenarc.rule.basic.DeadCodeRule'/>
 </ruleset>
