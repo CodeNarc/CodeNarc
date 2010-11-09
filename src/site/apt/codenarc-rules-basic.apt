@@ -709,3 +709,10 @@ Basic Rules  ("<rulesets/basic.xml>")
   In Groovy, the return keyword is often optional. If a statement is the last line in a method or closure then you do
   not need to have the return keyword.
 
+
+* DoubleNegative Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.11 
+  There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x.
+  And !(!x) can as well. 
+

@@ -55,6 +55,6 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        return new ${ruleName}Rule()
+        new ${ruleName}Rule()
     }
 }
