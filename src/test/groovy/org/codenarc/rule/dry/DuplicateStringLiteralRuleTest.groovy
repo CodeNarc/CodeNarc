@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for DuplicateLiteralRule
+ * Tests for DuplicateStringLiteralRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class DuplicateLiteralRuleTest extends AbstractRuleTestCase {
+class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "DuplicateLiteral"
+        assert rule.name == "DuplicateStringLiteral"
     }
 
     void testSuccessScenario() {
@@ -53,7 +53,7 @@ class DuplicateLiteralRuleTest extends AbstractRuleTestCase {
                     return 'return'
                 }
             }
-            @SuppressWarnings('DuplicateLiteral')
+            @SuppressWarnings('DuplicateStringLiteral')
             class MyClass2 {
                 def y = 'x'
                 def z = 'x'                        
@@ -162,6 +162,6 @@ class DuplicateLiteralRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new DuplicateLiteralRule()
+        new DuplicateStringLiteralRule()
     }
 }

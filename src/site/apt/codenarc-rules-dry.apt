@@ -8,7 +8,28 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   These rules check for duplicate code, enforcing the DRY (Don't Repeat Yourself) principle.
 
 
-* DuplicateLiteral Rule
+* DuplicateNumberLiteral Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This rule checks for duplicate number literals within the current class.
+
+  Code containing duplicate <Number> literals can usually be improved by declaring the <Number> as a constant field.
+
+  By default, the rule does not analyze test files. This rule sets the default value of the
+  <doNotApplyToClassNames> property to only match class names that do not end in 'Test', 'Tests' or 'TestCase'.
+
+
+** Notes
+~~~~~~~~~
+
+  * This rule does not search across several files at once, only in the current file, and only
+    within the current class.
+
+  * You can suppress the error by annotating a class or method with the <<<@SuppressWarnings('DuplicateLiteral')>>>
+    annotation.
+
+
+* DuplicateStringLiteral Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This rule checks for duplicate String literals within the current class.

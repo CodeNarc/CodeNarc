@@ -8,6 +8,7 @@
         These rules check for duplicate code, enforcing the DRY (Don't Repeat Yourself) principle.
     </description>
 
-    <rule class='org.codenarc.rule.dry.DuplicateLiteralRule'/>
+    <rule class='org.codenarc.rule.dry.DuplicateNumberLiteralRule'/>
+    <rule class='org.codenarc.rule.dry.DuplicateStringLiteralRule'/>
 
 </ruleset>
