@@ -16,8 +16,8 @@
 
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -39,12 +39,13 @@ class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
     }
 
     def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, methodName, 1)) {
+        if (!AstUtil.isSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
             if (!rule.ignoreThisReference || !AstUtil.isMethodCallOnObject(call, 'this')) {
-                addViolation call
+                if (!AstUtil.isSafe(call.objectExpression)) {
+                    addViolation call
+                }
             }
         }
         super.visitMethodCallExpression call
     }
-
 }

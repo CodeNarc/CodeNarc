@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 
 /**
  * This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write "new Stack()" as "[] as Stack", which creates the same object.

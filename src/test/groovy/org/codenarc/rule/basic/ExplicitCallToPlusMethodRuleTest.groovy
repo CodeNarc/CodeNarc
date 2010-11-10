@@ -42,6 +42,15 @@ class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testChainedCall() {
+        rule.ignoreThisReference = false
+        final SOURCE = '''
+            value?.toBigDecimal()?.plus(100000)
+            value?.plus(100000) 
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testViolation() {
         final SOURCE = '''
             a.plus(b)

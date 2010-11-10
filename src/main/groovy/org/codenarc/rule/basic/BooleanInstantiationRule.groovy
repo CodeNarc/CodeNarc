@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for direct call to Boolean constructor - use Boolean.valueOf() instead.

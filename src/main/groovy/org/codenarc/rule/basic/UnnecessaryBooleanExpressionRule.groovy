@@ -15,9 +15,10 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.NotExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.*
 import org.codenarc.util.AstUtil
 
 /**

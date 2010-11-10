@@ -17,15 +17,8 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-
-import org.codehaus.groovy.ast.expr.TernaryExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.NotExpression
-import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Rule that checks for ternary expressions where the conditional expression always evaluates to

@@ -42,6 +42,13 @@ class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
             class MyClass {
         	    class MyNestedException extends Exception {}
             }
+
+            class AutoLinkProcessingException extends Exception{
+
+                AutoLinkProcessingException(String cause) {
+                     super(cause)
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }

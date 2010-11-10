@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.util.AstUtil
 
 /**

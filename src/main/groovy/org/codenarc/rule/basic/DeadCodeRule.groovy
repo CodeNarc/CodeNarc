@@ -15,14 +15,10 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.ReturnStatement
-import org.codehaus.groovy.ast.stmt.ThrowStatement
-import org.codehaus.groovy.ast.stmt.Statement
-import org.codehaus.groovy.ast.stmt.IfStatement
-import org.codehaus.groovy.ast.expr.TernaryExpression
+import org.codehaus.groovy.ast.stmt.*
 
 /**
  * Dead code appears after a return statement or an exception is thrown. If code appears after one of these statements then it will never be executed and can be safely deleted. 

@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.basic
 
+import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import java.lang.reflect.Modifier
 
 /**
  * UnnecessaryConstructor

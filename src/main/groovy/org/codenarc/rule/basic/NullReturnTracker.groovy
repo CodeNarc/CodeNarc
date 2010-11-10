@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.stmt.ReturnStatement
-import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * Helper AST visitor that adds rule violation if a return statement is encountered that returns a null constant. 

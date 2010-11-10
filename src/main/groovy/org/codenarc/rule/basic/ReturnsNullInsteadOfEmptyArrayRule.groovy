@@ -15,13 +15,12 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.ast.MethodNode
-
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * This rule detects when null is returned from a method that might return an

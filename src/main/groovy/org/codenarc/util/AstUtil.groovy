@@ -466,6 +466,23 @@ class AstUtil {
     }
 
     /**
+     * Tells you if the expression is a null safe dereference.
+     * @param expression
+     *      expression
+     * @return
+     *      true if is null safe dereference.
+     */
+    static boolean isSafe(Expression expression) {
+        if (expression instanceof MethodCallExpression) {
+            return expression.safe
+        }
+        if (expression instanceof PropertyExpression) {
+            return expression.safe
+        }
+        false
+    }
+
+    /**
      * Private constructor. All methods are static.
      */
     private AstUtil() { }

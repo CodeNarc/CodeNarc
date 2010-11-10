@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.TupleExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.TupleExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * Useless call to collections. This call doesn't make sense. For any collection c, calling c.containsAll(c) should

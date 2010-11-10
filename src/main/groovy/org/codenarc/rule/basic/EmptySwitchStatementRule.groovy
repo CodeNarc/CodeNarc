@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.SwitchStatement
 
 /**
  * Rule that checks for empty switch statements

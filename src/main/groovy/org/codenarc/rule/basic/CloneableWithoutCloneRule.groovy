@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.ClassHelper
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * A class that implements Cloneable should define a clone() method.

@@ -15,15 +15,14 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.BooleanExpression
+import org.codehaus.groovy.ast.expr.CastExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.CastExpression
-
-import org.codehaus.groovy.ast.stmt.ReturnStatement
-import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Method with Boolean return type returns explicit null. A method that returns either Boolean.TRUE, Boolean.FALSE or

@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * Abstract superclass for AST Visitor classes that deal with constructor calls

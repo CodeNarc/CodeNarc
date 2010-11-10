@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.stmt.CaseStatement
+import org.codehaus.groovy.ast.stmt.SwitchStatement
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Rule that checks for duplicate case statements in a switch block, such as two

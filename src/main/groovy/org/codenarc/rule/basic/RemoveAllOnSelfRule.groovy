@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.TupleExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * This rule catches calling the method removeAll with yourself as a parameter.
