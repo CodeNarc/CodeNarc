@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for CatchingIllegalMonitorStateExceptionRule
+ * Tests for CatchIllegalMonitorStateExceptionRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class CatchingIllegalMonitorStateExceptionRuleTest extends AbstractRuleTestCase {
+class CatchIllegalMonitorStateExceptionRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "CatchingIllegalMonitorStateException"
+        assert rule.name == "CatchIllegalMonitorStateException"
     }
 
     void testApplyTo_Violation() {
@@ -58,7 +58,7 @@ class CatchingIllegalMonitorStateExceptionRuleTest extends AbstractRuleTestCase 
     }
 
     protected Rule createRule() {
-        new CatchingIllegalMonitorStateExceptionRule()
+        new CatchIllegalMonitorStateExceptionRule()
     }
 
 }

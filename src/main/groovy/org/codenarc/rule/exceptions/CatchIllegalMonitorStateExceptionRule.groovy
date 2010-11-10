@@ -24,8 +24,8 @@ import org.codenarc.rule.AstVisitor
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class CatchingIllegalMonitorStateExceptionRule extends AbstractAstVisitorRule {
-    String name = 'CatchingIllegalMonitorStateException'
+class CatchIllegalMonitorStateExceptionRule extends AbstractAstVisitorRule {
+    String name = 'CatchIllegalMonitorStateException'
     int priority = 2
     AstVisitor getAstVisitor() {
         new CommonCatchAstVisitor('IllegalMonitorStateException')

@@ -19,7 +19,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   be restricted to framework or infrastructure code, rather than application code.
 
 
-* CatchingIllegalMonitorStateException Rule
+* CatchIllegalMonitorStateException Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
