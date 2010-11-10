@@ -79,7 +79,7 @@ class BooleanReturnTracker extends AbstractAstVisitor {
 
     def void visitReturnStatement(ReturnStatement statement) {
         def expression = statement.expression
-        if (AstUtil.isTrue(expression) || AstUtil.isFalse(expression)) {
+        if (AstUtil.isBoolean(expression)) {
             callbackFunction()
         } else if (expression instanceof BooleanExpression) {
             callbackFunction()

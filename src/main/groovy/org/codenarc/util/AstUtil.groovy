@@ -48,12 +48,27 @@ import org.codehaus.groovy.ast.expr.BinaryExpression
  */
 @SuppressWarnings('DuplicateLiteral')
 class AstUtil {
-    private static final PREDEFINED_CONSTANTS = ['Boolean':['FALSE', 'TRUE']]
+    private static final PREDEFINED_CONSTANTS = ['Boolean': ['FALSE', 'TRUE']]
 
+    /**
+     * Tells you if an expression is a constant or literal. Basically, is it a map, list, constant, or a predefined
+     * constant like true/false.
+     * @param expression
+     *     any expression
+     * @return
+     * as described
+     */
     static boolean isConstantOrLiteral(Expression expression) {
         expression.class in [ConstantExpression, ListExpression, MapExpression] || isPredefinedConstant(expression)
     }
 
+    /**
+     * Tells you if the expression is a predefined constant like TRUE or FALSE.
+     * @param expression
+     *      any expression
+     * @return
+     * as described
+     */
     private static boolean isPredefinedConstant(Expression expression) {
         if (expression instanceof PropertyExpression) {
             def object = expression.objectExpression
@@ -85,16 +100,16 @@ class AstUtil {
      */
     static boolean isEmptyBlock(Statement statement) {
         statement instanceof BlockStatement &&
-            (statement.empty ||
-            (statement.statements.size() == 1 && statement.statements[0].empty))
+                (statement.empty ||
+                        (statement.statements.size() == 1 && statement.statements[0].empty))
     }
 
-   /**
-    * Return the List of Arguments for the specified MethodCallExpression. The returned List contains
-    * either ConstantExpression or MapEntryExpression objects.
-    * @param methodCall - the AST MethodCallExpression
-    * @return the List of argument objects
-    */
+    /**
+     * Return the List of Arguments for the specified MethodCallExpression. The returned List contains
+     * either ConstantExpression or MapEntryExpression objects.
+     * @param methodCall - the AST MethodCallExpression
+     * @return the List of argument objects
+     */
     static List getMethodArguments(MethodCallExpression methodCall) {
         def argumentsExpression = methodCall.arguments
         if (respondsTo(argumentsExpression, 'getExpressions')) {
@@ -106,9 +121,20 @@ class AstUtil {
         []
     }
 
-    static boolean isMethodCallOnObject(MethodCallExpression methodCallExpression, String methodObject) {
-        (methodCallExpression.objectExpression instanceof VariableExpression &&
-               methodCallExpression.objectExpression.name == methodObject)
+    /**
+     * Tells you if the expression is a method call on a particual object (which is represented as a String).
+     * For instance, you may ask isMethodCallOnObject(e, 'this') to find a this reference.  
+     * @param expression
+     *      the expression
+     * @param methodObject
+     * @param methodObject - the name of the method object (receiver) such as 'this'
+     * @return
+     * as described
+     */
+    static boolean isMethodCallOnObject(Expression expression, String methodObject) {
+        (expression instanceof MethodCallExpression &&
+                expression.objectExpression instanceof VariableExpression &&
+                expression.objectExpression.name == methodObject)
     }
 
     /**
@@ -121,14 +147,13 @@ class AstUtil {
      * @return true only if the Statement is a method call matching the specified criteria
      */
     static boolean isMethodCall(Statement stmt, String methodObject, String methodName, int numArguments) {
-        def match = false
         if (stmt instanceof ExpressionStatement) {
             def expression = stmt.expression
             if (expression instanceof MethodCallExpression) {
-                match = isMethodCall(expression, methodObject, methodName, numArguments)
+                return isMethodCall(expression, methodObject, methodName, numArguments)
             }
         }
-        match
+        false
     }
 
     /**
@@ -141,8 +166,8 @@ class AstUtil {
      * @return true only if the method call matches the specified criteria
      */
     static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
-        def match = isMethodCall(methodCall, methodObject, methodName)
-        match && getMethodArguments(methodCall).size() == numArguments
+        (isMethodCall(methodCall, methodObject, methodName)
+                && getMethodArguments(methodCall).size() == numArguments)
     }
 
     /**
@@ -157,9 +182,24 @@ class AstUtil {
         isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName)
     }
 
+    /**
+     * Return true only if the MethodCallExpression represents a method call for any one of the specified method
+     * objects (receivers) and any one of the method names. Optionally, you can restrict it to a method call with
+     * a certain number of arguments.
+     * @param methodCall
+     *      the method call object
+     * @param methodObjects
+     *      a list of receivers, such as ['this', 'super']
+     * @param methodNames
+     *      a list of method names
+     * @param numArguments
+     *      optionally, require a certain number of arguments
+     * @return
+     * as described
+     */
     static boolean isMethodCall(MethodCallExpression methodCall, List<String> methodObjects, List<String> methodNames, numArguments = null) {
-        for (String name : methodNames) {
-            for (String objectName : methodObjects) {
+        for (String name: methodNames) {
+            for (String objectName: methodObjects) {
                 def match = isMethodCallOnObject(methodCall, objectName) && isMethodNamed(methodCall, name)
                 if (match && numArguments == null) {
                     return true
@@ -171,9 +211,21 @@ class AstUtil {
         false
     }
 
-    static boolean isMethodCall(Expression methodCall, String methodName, int numArguments) {
-        if (methodCall instanceof MethodCallExpression && isMethodNamed(methodCall, methodName)) {
-            return getMethodArguments(methodCall).size() == numArguments
+    /**
+     * Tells you if the expression is a method call for a certain method name with a certain
+     * number of arguments.
+     * @param expression
+     *      the (potentially) method call
+     * @param methodName
+     *      the name of the method expected
+     * @param numArguments
+     *      number of expected arguments
+     * @return
+     *      as described
+     */
+    static boolean isMethodCall(Expression expression, String methodName, int numArguments) {
+        if (expression instanceof MethodCallExpression && isMethodNamed(expression, methodName)) {
+            return getMethodArguments(expression).size() == numArguments
         }
         false
     }
@@ -186,12 +238,12 @@ class AstUtil {
      */
     static boolean isMethodNamed(MethodCallExpression methodCall, String methodName, Integer numArguments = null) {
         def method = methodCall.method
-        def match = method.properties['value'] == methodName
+        def isNameMatch = method.properties['value'] == methodName
 
-        if (match && numArguments != null) {
+        if (isNameMatch && numArguments != null) {
             return getMethodArguments(methodCall).size() == numArguments
         }
-        match
+        isNameMatch
     }
 
     /**
@@ -215,14 +267,14 @@ class AstUtil {
      */
     static List getVariableExpressions(DeclarationExpression declarationExpression) {
         def leftExpression = declarationExpression.leftExpression
-        leftExpression.properties['expressions'] ?: [leftExpression]
+            leftExpression.properties['expressions'] ?: [leftExpression]
     }
 
     /**
      * Return true if the DeclarationExpression represents a 'final' variable declaration.
      *
      * NOTE: THIS IS A WORKAROUND.
-     * 
+     *
      * There does not seem to be an easy way to determine whether the 'final' modifier has been
      * specified for a variable declaration. Return true if the 'final' is present before the variable name.
      */
@@ -234,10 +286,10 @@ class AstUtil {
         def variableExpression = variableExpressions[0]
         def startOfDeclaration = declarationExpression.columnNumber
         def startOfVariableName = variableExpression.columnNumber
-        def sourceLine = sourceCode.lines[declarationExpression.lineNumber-1]
+        def sourceLine = sourceCode.lines[declarationExpression.lineNumber - 1]
 
         def modifiers = (startOfDeclaration >= 0 && startOfVariableName >= 0) ?
-            sourceLine[startOfDeclaration-1..startOfVariableName-2] : ''
+            sourceLine[startOfDeclaration - 1..startOfVariableName - 2] : ''
         modifiers.contains('final')
     }
 
@@ -248,6 +300,13 @@ class AstUtil {
         node.lineNumber < 0
     }
 
+    /**
+     * Tells you if the expression is true, which can be true or Boolean.TRUE.
+     * @param expression
+     *      expression
+     * @return
+     *      as described
+     */
     static boolean isTrue(Expression expression) {
         if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
             if (expression.property instanceof ConstantExpression && expression.property.value == "TRUE") {
@@ -258,14 +317,35 @@ class AstUtil {
                 expression.text == 'Boolean.TRUE'
     }
 
+    /**
+     * Tells you if the expression is either the true or false literal.
+     * @param expression
+     *      expression
+     * @return
+     *      as described
+     */
     static boolean isBoolean(Expression expression) {
         isTrue(expression) || isFalse(expression)
     }
 
+    /**
+     * Tells you if the expression is the null literal.
+     * @param expression
+     *      expression.
+     * @return
+     *      as described
+     */
     static boolean isNull(Expression expression) {
         expression instanceof ConstantExpression && expression.isNullExpression()
     }
 
+    /**
+     * Tells you if the expression is the false expression, either literal or contant.
+     * @param expression
+     *      expression
+     * @return
+     *      as described
+     */
     static boolean isFalse(Expression expression) {
         if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
             if (expression.property instanceof ConstantExpression && expression.property.value == "FALSE") {
@@ -293,7 +373,7 @@ class AstUtil {
      * @param target
      *      the class
      * @return
-     *      true if the class node 'is a' target
+     * true if the class node 'is a' target
      */
     public static boolean classNodeImplementsType(ClassNode node, Class target) {
         ClassNode targetNode = ClassHelper.make(target)
@@ -318,7 +398,7 @@ class AstUtil {
      * @param expression
      *      the target expression
      * @return
-     *      as described
+     * as described
      */
     public static boolean isClosureDeclaration(ASTNode expression) {
         if (expression instanceof DeclarationExpression) {
@@ -343,7 +423,7 @@ class AstUtil {
      * @param node
      *      the node to search parameter names on
      * @return
-     *      argument names, never null
+     * argument names, never null
      */
     static List<String> getParameterNames(MethodNode node) {
         node.parameters?.collect { it.name }
@@ -355,7 +435,7 @@ class AstUtil {
      * @param methodCall
      *      the method call to search
      * @return
-     *      a list of strings, never null, but some elements may be null
+     * a list of strings, never null, but some elements may be null
      */
     static List<String> getArgumentNames(MethodCallExpression methodCall) {
         methodCall.arguments?.expressions?.collect {
@@ -374,7 +454,7 @@ class AstUtil {
      * @param token
      *      token
      * @return
-     *      as described
+     * as described
      */
     static boolean isBinaryExpressionType(Expression expression, String token) {
         if (expression instanceof BinaryExpression) {
