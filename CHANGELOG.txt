@@ -2,6 +2,74 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+
+Changes in version 0.11 (November 2010)
+-------------------------------------------
+NEW FEATURES
+- @SuppressWarnings support. All rules now recognize the java.lang.SuppressWarnings annotation on fields, methods, and classes. If this annotation is added then there will be no violations produced. Just as in Java, the annotation requires a String or List<String> parameter. For example, annotating a class with @SuppressWarnings('UnusedPrivateField') will ignore the rule for that class. Annotating a method with @SuppressWarnings(['UnusedPrivateField', 'UnnecessaryIfStatementRule']) will ignore both rules for the annotated method. 
+- Better "codenarc create-rule" support. You can create a new rule by running "codenarc create-rule" from the root of the CodeNarc codebase. This script has been updated to properly format Javadoc, prompt for the author name, and update the Maven Site .apt documentation. 
+
+NEW RULES
+BooleanMethodReturnsNull Rule (basic) : Checks for a method with Boolean return type that returns an explicit null. 
+DeadCode Rule (basic) :  Checks for dead code that appears after a return statement or after an exception is thrown. 
+DoubleNegative Rule (basic) :  Checks for using a double negative, which is always positive. 
+DuplicateCaseStatement Rule (basic) :  Check for duplicate case statements in a switch block, such as two equal integers or strings. 
+ExplicitCallToAndMethod Rule (basic) :  This rule detects when the and(Object) method is called directly in code instead of using the & operator. 
+ExplicitCallToCompareToMethod Rule (basic) :  This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <, and <= operators. 
+ExplicitCallToDivMethod Rule (basic) :  This rule detects when the div(Object) method is called directly in code instead of using the / operator.
+ExplicitCallToEqualsMethod Rule (basic) :  This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator. 
+ExplicitCallToGetAtMethod Rule (basic) :  This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator. 
+ExplicitCallToLeftShiftMethod Rule (basic) :  This rule detects when the leftShift(Object) method is called directly in code instead of using the \<\< operator. 
+ExplicitCallToMinusMethod Rule (basic) :  This rule detects when the minus(Object) method is called directly in code instead of using the - operator. 
+ExplicitCallToMultiplyMethod Rule (basic) :  This rule detects when the multiply(Object) method is called directly in code instead of using the * operator. 
+ExplicitCallToModMethod Rule (basic) :  This rule detects when the mod(Object) method is called directly in code instead of using the % operator. 
+ExplicitCallToOrMethod Rule (basic) :  This rule detects when the or(Object) method is called directly in code instead of using the | operator. 
+ExplicitCallToPlusMethod Rule (basic) :  This rule detects when the plus(Object) method is called directly in code instead of using the + operator. 
+ExplicitCallToPowerMethod Rule (basic) :  This rule detects when the power(Object) method is called directly in code instead of using the ** operator. 
+ExplicitCallToRightShiftMethod Rule (basic) :  This rule detects when the rightShift(Object) method is called directly in code instead of using the \>\> operator. 
+ExplicitCallToXorMethod Rule (basic) :  This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator. 
+ExplicitCreationOfArrayList Rule (basic) :  This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write new ArrayList() as [], which creates the same object. 
+ExplicitCreationOfHashMap Rule (basic) :  This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write new HashMap() as [:], which creates the same object. 
+ExplicitCreationOfHashSet Rule (basic) :  This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write new HashSet() as [] as Set, which creates the same object. 
+ExplicitCreationOfLinkedList Rule (basic) :  This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write new LinkedList() as [] as Queue, which creates the same object. 
+ExplicitCreationOfStack Rule (basic) :  This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write new Stack() as [] as Stack, which creates the same object. 
+ExplicitCreationOfTreeSet Rule (basic) :  This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write new TreeSet()>> as [] as SortedSet, which creates the same object. 
+GStringAsMapKey Rule  A GString should not be used as a map key since its hashcode is not guaranteed to be stable. 
+InvertedIfElse Rule (basic) :  An inverted if-else statement is one in which there is a single if statement with a single else branch and the boolean test of the if is negated. 
+RemoveAllOnSelf Rule (basic) : Don't use removeAll to clear a collection. 
+ReturnsNullInsteadOfEmptyArray Rule (basic) : If you have a method or closure that returns an array, then when there are no results return a zero-length (empty) array rather than null. 
+ReturnsNullInsteadOfEmptyCollection Rule (basic) : If you have a method or closure that returns a collection, then when there are no results return a zero-length (empty) collection rather than null. 
+SerialVersionUID Rule (basic) : A serialVersionUID is normally intended to be used with Serialization. It needs to be of type long, static, and final. 
+UnnecessaryConstructor Rule (basic) : This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has an empty body, and takes no arguments. 
+UselessCollectionCall Rule (basic) : Checks for useless calls to collections. 
+UselessOverridingMethod Rule (basic) : Checks for an overriding method that merely calls the same method defined in a superclass. 
+UnnecessaryReturnKeyword Rule (basic) :  In Groovy, the return keyword is often optional. 
+SynchronizedOnGetClass Rule (concurrency) : Checks for synchronization on getClass() rather than class literal. 
+UseOfNotifyMethod Rule (concurrency) : Checks for code that calls notify() rather than notifyAll(). 
+DuplicateNumberLiteral Rule (dry) : This rule checks for duplicate number literals within the current class. 
+DuplicateStringLiteral Rule (dry) : This rule checks for duplicate String literals within the current class.
+CatchIllegalMonitorStateException Rule (exceptions) : Dubious catching of IllegalMonitorStateException. 
+ConfusingClassNamedException Rule (exceptions) : This class is not derived from another exception, but ends with 'Exception'. 
+ReturnNullFromCatchBlock Rule (exceptions) : Returning null from a catch block often masks errors and requires the client to handle error codes. 
+UseAssertEqualsInsteadOfAssertTrue Rule (junit) : This rule detects JUnit assertions in object equality. 
+UseAssertTrueInsteadOfAssertEqualsRule Rule (junit) : This rule detects JUnit calling assertEquals where the first parameter is a boolean. 
+UseAssertNullInsteadOfAssertEquals Rule (junit) : This rule detects JUnit calling assertEquals where the first or second parameter is null. 
+UseAssertSameInsteadOfAssertTrue Rule (junit) : This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for reference equality. 
+UseFailWithMessageInsteadOfWithout Rule (junit) : This rule detects JUnit calling the fail() method without an argument. 
+UsingJUnitStyleAssertions Rule (junit) : This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
+ConfusingMethodName Rule (naming) : Checks for very confusing method names. The referenced methods have names that differ only by capitalization.
+ObjectOverrideMisspelledMethodName Rule (naming) : Verifies that the names of the most commonly overridden methods of Object: equals, hashCode and toString, are correct.
+MethodCount Rule (size) : Checks if the number of methods within a class exceeds the number of lines specified by the maxMethod property.
+
+BUG FIXES
+- None reported, none fixed! 
+
+OTHER CHANGES
+- CodeNarc now requires Groovy 1.7 to run. Keep in mind that it can still run against (analyze) older Groovy code.
+- There is a new rule category called "dry", meaning "do not repeat yourself".
+- AstUtil enhancements - For writers of rules: there are new utility methods in the AstUtil class. See the javadoc for more details. 
+- AbstractAstVisitor Breaking Changes - If you implemented your own rule by subclassing AbstractAstVisitor then your code might break. It is a compile error and the breakage will be clear and obvious. In order to support @SuppressWarnings, we needed to change AbstractAstVisitor. The method visitMethodNode became visitMethodNodeEx, visitClass became visitClassEx, visitConstructorOrMethod became visitConstructorOrMethodEx, visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. From within these new methods there is no need to call super.visitX. In the rare case that the simple renaming does not fix your problem then please contact the mailing list. 
+
 Changes in version 0.10 (26 September 2010)
 -------------------------------------------
 BUG FIXES
