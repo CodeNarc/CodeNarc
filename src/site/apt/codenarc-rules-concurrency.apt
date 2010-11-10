@@ -52,7 +52,8 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 
 * SynchronizedOnGetClass Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.11
+  <Since CodeNarc 0.11>
+
   Checks for synchronization on <<<getClass()>>> rather than class literal. This instance method
   synchronizes on <<<this.getClass()>>>. If this class is subclassed, subclasses will synchronize
   on the class object for the subclass, which isn't likely what was intended.
@@ -154,7 +155,8 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 
 * UseOfNotifyMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.11
+  <Since CodeNarc 0.11>
+  
   Checks for code that calls <<<notify()>>> rather than <<<notifyAll()>>. Java monitors are often used
   for multiple conditions. Calling <<<notify()>>> only wakes up one thread, meaning that the awakened
   thread might not be the one waiting for the condition that the caller just satisfied.

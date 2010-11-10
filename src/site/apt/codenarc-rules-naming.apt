@@ -38,7 +38,8 @@ Naming Rules  ("<rulesets/naming.xml>")
 
 * ConfusingMethodName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.11
+  <Since CodeNarc 0.11>
+
   Checks for very confusing method names. The referenced methods have names that differ only by capitalization.
   This is very confusing because if the capitalization were identical then one of the methods would override
   the other.
@@ -124,7 +125,8 @@ Naming Rules  ("<rulesets/naming.xml>")
 * ObjectOverrideMisspelledMethodName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  New in CodeNarc 0.11
+  <Since CodeNarc 0.11>
+  
   Verifies that the names of the most commonly overridden methods of <<<Object>>>: <<<equals>>>,
   <<<hashCode>>> and <<<toString>>>, are correct.
 
