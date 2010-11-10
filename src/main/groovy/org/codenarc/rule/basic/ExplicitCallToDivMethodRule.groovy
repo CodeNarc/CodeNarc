@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.util.AstUtil
 
 /**
  * This rule detects when the div(Object) method is called directly in code instead of using the / operator. A groovier way to express this: a.div(b) is this: a / b
@@ -30,14 +27,11 @@ class ExplicitCallToDivMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToDivMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToDivMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToDivMethodAstVisitor extends AbstractAstVisitor {
-
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "div", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+class ExplicitCallToDivMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
+    def ExplicitCallToDivMethodAstVisitor() {
+        super('div');
     }
 }

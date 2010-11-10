@@ -32,10 +32,12 @@ class ExplicitCallToLeftShiftMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testSuccessScenario() {
+        rule.ignoreThisReference = true
         final SOURCE = '''
         	a << b
             a.leftShift()
             a.leftShift(a, b)
+            leftShift(a)
         '''
         assertNoViolations(SOURCE)
     }

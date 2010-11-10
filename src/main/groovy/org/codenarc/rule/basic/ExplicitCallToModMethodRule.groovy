@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the mod(Object) method is called directly in code instead of using the % operator. A groovier way to express this: a.mod(b) is this: a % b
@@ -30,14 +27,11 @@ class ExplicitCallToModMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToModMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToModMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToModMethodAstVisitor extends AbstractAstVisitor {
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "mod", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+class ExplicitCallToModMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
+    def ExplicitCallToModMethodAstVisitor() {
+        super('mod');
     }
-
 }

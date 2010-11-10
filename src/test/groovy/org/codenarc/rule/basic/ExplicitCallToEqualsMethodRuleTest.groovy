@@ -33,10 +33,12 @@ class ExplicitCallToEqualsMethodRuleTest extends AbstractRuleTestCase {
 
 
     void testSuccessScenario() {
+        rule.ignoreThisReference = true
         final SOURCE = '''
                 a == b
                 a.equals()
                 a.equals(a, b)
+                equals(a)
             '''
         assertNoViolations(SOURCE)
     }

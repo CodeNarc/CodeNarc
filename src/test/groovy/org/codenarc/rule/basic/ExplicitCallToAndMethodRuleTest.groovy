@@ -36,6 +36,7 @@ class ExplicitCallToAndMethodRuleTest extends AbstractRuleTestCase {
         	a & b
             a.and()
             a.and(a, b)
+            and(b)
         '''
         assertNoViolations(SOURCE)
     }

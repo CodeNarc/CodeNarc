@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <, and <= operators. A groovier way to express this: a.compareTo(b) is this: a <=> b, or using the other operators. 
@@ -30,14 +27,12 @@ class ExplicitCallToCompareToMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToCompareToMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToCompareToMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToCompareToMethodAstVisitor extends AbstractAstVisitor {
+class ExplicitCallToCompareToMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "compareTo", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+    def ExplicitCallToCompareToMethodAstVisitor() {
+        super('compareTo');
     }
 }

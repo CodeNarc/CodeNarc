@@ -32,10 +32,12 @@ class ExplicitCallToMultiplyMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testSuccessScenario() {
+        rule.ignoreThisReference = true
         final SOURCE = '''
         	a * b
             a.multiply()
             a.multiply(a, b)
+            multiply(a)
         '''
         assertNoViolations(SOURCE)
     }

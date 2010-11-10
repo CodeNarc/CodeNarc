@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the and(Object) method is called directly in code instead of using the & operator. A groovier way to express this: a.and(b) is this: a & b
@@ -30,14 +27,11 @@ class ExplicitCallToAndMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToAndMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToAndMethodAstVisitor
+    boolean ignoreThisReference = true
 }
 
-class ExplicitCallToAndMethodAstVisitor extends AbstractAstVisitor {
-
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "and", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+class ExplicitCallToAndMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
+    def ExplicitCallToAndMethodAstVisitor() {
+        super('and');
     }
 }

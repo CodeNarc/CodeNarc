@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator. A groovier way to express this: a.xor(b) is this: a ^ b
@@ -30,14 +27,12 @@ class ExplicitCallToXorMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToXorMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToXorMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToXorMethodAstVisitor extends AbstractAstVisitor {
+class ExplicitCallToXorMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "xor", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+    def ExplicitCallToXorMethodAstVisitor() {
+        super('xor');
     }
 }

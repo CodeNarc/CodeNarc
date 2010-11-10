@@ -32,10 +32,12 @@ class ExplicitCallToMinusMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testSuccessScenario() {
+        rule.ignoreThisReference = true
         final SOURCE = '''
         	a - b
             a.minus()
             a.minus(a, b)
+            minus(a)
         '''
         assertNoViolations(SOURCE)
     }

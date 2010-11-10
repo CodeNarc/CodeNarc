@@ -36,6 +36,7 @@ class ExplicitCallToOrMethodRuleTest extends AbstractRuleTestCase {
         	a | b
             a.or()
             a.or(a, b)
+            or(a)
         '''
         assertNoViolations(SOURCE)
     }

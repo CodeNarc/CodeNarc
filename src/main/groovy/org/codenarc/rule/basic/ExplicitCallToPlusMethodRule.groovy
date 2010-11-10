@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.util.AstUtil
 
 /**
  * This rule detects when the plus(Object) method is called directly in code instead of using the + operator. A groovier way to express this: a.plus(b) is this: a + b
@@ -30,14 +27,12 @@ class ExplicitCallToPlusMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToPlusMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToPlusMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToPlusMethodAstVisitor extends AbstractAstVisitor {
+class ExplicitCallToPlusMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "plus", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+    def ExplicitCallToPlusMethodAstVisitor() {
+        super('plus');
     }
 }

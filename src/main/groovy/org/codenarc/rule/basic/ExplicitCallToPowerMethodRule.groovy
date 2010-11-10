@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the power(Object) method is called directly in code instead of using the ** operator. A groovier way to express this: a.power(b) is this: a ** b
@@ -30,15 +27,12 @@ class ExplicitCallToPowerMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToPowerMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToPowerMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToPowerMethodAstVisitor extends AbstractAstVisitor {
+class ExplicitCallToPowerMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "power", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+    def ExplicitCallToPowerMethodAstVisitor() {
+        super('power')
     }
-
 }

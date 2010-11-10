@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator. A groovier way to express this: a.equals(b) is this: a == b and a groovier way to express : !a.equals(b) is : a != b
@@ -30,14 +27,11 @@ class ExplicitCallToEqualsMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToEqualsMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToEqualsMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToEqualsMethodAstVisitor extends AbstractAstVisitor {
-
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "equals", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+class ExplicitCallToEqualsMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
+    def ExplicitCallToEqualsMethodAstVisitor() {
+        super('equals');
     }
 }

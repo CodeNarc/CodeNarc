@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the leftShift(Object) method is called directly in code instead of using the << operator. A groovier way to express this: a.leftShift(b) is this: a << b
@@ -30,14 +27,11 @@ class ExplicitCallToLeftShiftMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToLeftShiftMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToLeftShiftMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToLeftShiftMethodAstVisitor extends AbstractAstVisitor {
-
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "leftShift", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+class ExplicitCallToLeftShiftMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
+    def ExplicitCallToLeftShiftMethodAstVisitor() {
+        super('leftShift');
     }
 }

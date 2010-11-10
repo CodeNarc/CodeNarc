@@ -32,10 +32,12 @@ class ExplicitCallToXorMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testSuccessScenario() {
+        rule.ignoreThisReference = true
         final SOURCE = '''
         	a ^ b
             a.xor()
             a.xor(a, b)
+            xor(a)
         '''
         assertNoViolations(SOURCE)
     }

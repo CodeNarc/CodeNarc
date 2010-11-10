@@ -352,7 +352,10 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<and(Object)>>> method is called directly in code instead of using the <<<&>>>
-  operator. A groovier way to express this: <<<a.and(b)>>> is this: <<<a & b>>>
+  operator. A groovier way to express this: <<<a.and(b)>>> is this: <<<a & b>>>. This rule can be
+  configured to ignore <<<this.and(Object)>>> using the ignoreThisReference property. It defaults to true, so
+  even <<<and(x)>>> will not trigger a violation. The default is true because <<<and>>> appears commonly in Grails
+  criteria. 
 
 
 * ExplicitCallToCompareToMethod Rule
@@ -371,14 +374,17 @@ Basic Rules  ("<rulesets/basic.xml>")
     a.compareTo(b) < 0                // can be replaced by: a < b
     a.compareTo(b) <= 0               // can be replaced by: a <= b
 -------------------------------------------------------------------------------
-
+. This rule can be  configured to ignore <<<this.compareTo(Object)>>> using the ignoreThisReference property. It
+  defaults to false, so even <<<compareTo(x)>>> will trigger a violation. 
 
 * ExplicitCallToDivMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<div(Object)>>> method is called directly in code instead of using the
-  <<</>>> operator. A groovier way to express this: <<<a.div(b)>>> is this: <<<a / b>>>
+  <<</>>> operator. A groovier way to express this: <<<a.div(b)>>> is this: <<<a / b>>>. This rule can be
+  configured to ignore <<<div.xor(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<div(x)>>> will trigger a violation. 
 
 
 * ExplicitCallToEqualsMethod Rule
@@ -387,7 +393,9 @@ Basic Rules  ("<rulesets/basic.xml>")
 
   This rule detects when the <<<equals(Object)>>> method is called directly in code instead of using the
   <<<==>>> or <<<!=>>> operator. A groovier way to express this: <<<a.equals(b)>>> is this: <<<a == b>>>
-   and a groovier way to express : <<<!a.equals(b)>>> is: <<<a != b>>>
+   and a groovier way to express : <<<!a.equals(b)>>> is: <<<a != b>>>. This rule can be
+  configured to ignore <<<this.equals(Object)>>> using the ignoreThisReference property. It defaults to false, so 
+  even <<<equals(x)>>> will trigger a violation.
 
 
 * ExplicitCallToGetAtMethod Rule
@@ -395,7 +403,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<getAt(Object)>>> method is called directly in code instead of using the
-  <<<[]>>> index operator. A groovier way to express this: <<<a.getAt(b)>>> is this: <<<a[b]>>>
+  <<<[]>>> index operator. A groovier way to express this: <<<a.getAt(b)>>> is this: <<<a[b]>>>. This rule can be
+  configured to ignore <<<this.getAt(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<getAt(x)>>> will trigger a violation. 
 
 
 * ExplicitCallToLeftShiftMethod Rule
@@ -403,7 +413,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<leftShift(Object)>>> method is called directly in code instead of using the
-  \<\< operator. A groovier way to express this: <<<a.leftShift(b)>>> is this: <<<a \<\< b>>>
+  \<\< operator. A groovier way to express this: <<<a.leftShift(b)>>> is this: <<<a \<\< b>>>. This rule can be
+  configured to ignore <<<this.leftShift(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<leftShift(x)>>> will trigger a violation. 
 
 
 * ExplicitCallToMinusMethod Rule
@@ -411,7 +423,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<minus(Object)>>> method is called directly in code instead of using the
-  <<<->>> operator. A groovier way to express this: <<<a.minus(b)>>> is this: <<<a - b>>>
+  <<<->>> operator. A groovier way to express this: <<<a.minus(b)>>> is this: <<<a - b>>>. This rule can be
+  configured to ignore <<<minus.xor(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<minus(x)>>> will trigger a violation. 
 
 
 * ExplicitCallToMultiplyMethod Rule
@@ -419,7 +433,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<multiply(Object)>>> method is called directly in code instead of using the
-  <<<*>>> operator. A groovier  way to express this: <<<a.multiply(b)>>> is this: <<<a * b>>>
+  <<<*>>> operator. A groovier  way to express this: <<<a.multiply(b)>>> is this: <<<a * b>>>. This rule can be
+  configured to ignore <<<this.multiply(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<multiply(x)>>> will trigger a violation. 
 
 
 * ExplicitCallToModMethod Rule
@@ -427,7 +443,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<mod(Object)>>> method is called directly in code instead of using the
-  <<<%>>> operator. A groovier way to express this: <<<a.mod(b)>>> is this: <<<a % b>>>
+  <<<%>>> operator. A groovier way to express this: <<<a.mod(b)>>> is this: <<<a % b>>>. This rule can be
+  configured to ignore <<<this.mod(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<mod(x)>>> will trigger a violation. 
 
 
 * ExplicitCallToOrMethod Rule
@@ -435,7 +453,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<or(Object)>>> method is called directly in code instead of using the <<<|>>>
-  operator. A groovier way to express this: <<<a.or(b)>>> is this: <<<a | b>>>
+  operator. A groovier way to express this: <<<a.or(b)>>> is this: <<<a | b>>>. This rule can be
+  configured to ignore <<<this.or(Object)>>> using the ignoreThisReference property. It defaults to true, so
+  even <<<or(x)>>> will not trigger a violation. This is the default because it is commonly used in Grails criteria. 
 
 
 * ExplicitCallToPlusMethod Rule
@@ -443,7 +463,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<plus(Object)>>> method is called directly in code instead of using the
-  <<<+>>> operator. A groovier way to express this: <<<a.plus(b)>>> is this: <<<a + b>>>
+  <<<+>>> operator. A groovier way to express this: <<<a.plus(b)>>> is this: <<<a + b>>>. This rule can be
+  configured to ignore <<<this.plus(Object)>>> using the ignoreThisReference property. It defaults to false, so 
+  even <<<plus(x)>>> will trigger a violation.
 
 
 * ExplicitCallToPowerMethod Rule
@@ -451,7 +473,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<power(Object)>>> method is called directly in code instead of using the
-  <<<**>>> operator. A groovier way to express this: <<<a.power(b)>>> is this: <<<a ** b>>>
+  <<<**>>> operator. A groovier way to express this: <<<a.power(b)>>> is this: <<<a ** b>>>. This rule can be
+  configured to ignore <<<this.power(Object)>>> using the ignoreThisReference property. It defaults to false, so 
+  even <<<power(x)>>> will trigger a violation.
 
 
 * ExplicitCallToRightShiftMethod Rule
@@ -459,7 +483,9 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<rightShift(Object)>>> method is called directly in code instead of using the
-  \>\> operator. A groovier way to express this: <<<a.rightShift(b)>>> is this: <<<a \>\> b>>>
+  \>\> operator. A groovier way to express this: <<<a.rightShift(b)>>> is this: <<<a \>\> b>>>. This rule can be
+  configured to ignore <<<this.rightShift(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<rightShift(x)>>> will trigger a violation. 
 
 
 * ExplicitCallToXorMethod Rule
@@ -467,7 +493,10 @@ Basic Rules  ("<rulesets/basic.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when the <<<xor(Object)>>> method is called directly in code instead of using the
-  <<<^>>> operator. A groovier way to express this: <<<a.xor(b)>>> is this: <<<a ^ b>>>
+  <<<^>>> operator. A groovier way to express this: <<<a.xor(b)>>> is this: <<<a ^ b>>>. This rule can be
+  configured to ignore <<<this.xor(Object)>>> using the ignoreThisReference property. It defaults to false, so
+  even <<<xor(x)>>> will trigger a violation.
+
 
 
 * ExplicitCreationOfArrayList Rule

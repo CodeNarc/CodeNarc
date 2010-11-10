@@ -32,10 +32,12 @@ class ExplicitCallToRightShiftMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testSuccessScenario() {
+        rule.ignoreThisReference = true
         final SOURCE = '''
         	a >> b
             a.rightShift()
             a.rightShift(a, b)
+            rightShift(a)
         '''
         assertNoViolations(SOURCE)
     }

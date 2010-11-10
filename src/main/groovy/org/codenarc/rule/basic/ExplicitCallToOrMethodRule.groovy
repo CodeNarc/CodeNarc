@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the or(Object) method is called directly in code instead of using the | operator. A groovier way to express this: a.or(b) is this: a | b
@@ -30,14 +27,11 @@ class ExplicitCallToOrMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToOrMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToOrMethodAstVisitor
+    boolean ignoreThisReference = true
 }
 
-class ExplicitCallToOrMethodAstVisitor extends AbstractAstVisitor {
-
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "or", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+class ExplicitCallToOrMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
+    def ExplicitCallToOrMethodAstVisitor() {
+        super('or')
     }
 }

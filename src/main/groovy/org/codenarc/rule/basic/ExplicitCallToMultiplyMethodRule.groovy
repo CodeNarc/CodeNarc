@@ -15,10 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the multiply(Object) method is called directly in code instead of using the * operator. A groovier way to express this: a.multiply(b) is this: a * b
@@ -30,15 +27,11 @@ class ExplicitCallToMultiplyMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToMultiplyMethod'
     int priority = 2
     Class astVisitorClass = ExplicitCallToMultiplyMethodAstVisitor
+    boolean ignoreThisReference = false
 }
 
-class ExplicitCallToMultiplyMethodAstVisitor extends AbstractAstVisitor {
-
-    def void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, "multiply", 1)) {
-            addViolation call
-        }
-        super.visitMethodCallExpression call
+class ExplicitCallToMultiplyMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
+    def ExplicitCallToMultiplyMethodAstVisitor() {
+        super('multiply');
     }
-
 }
