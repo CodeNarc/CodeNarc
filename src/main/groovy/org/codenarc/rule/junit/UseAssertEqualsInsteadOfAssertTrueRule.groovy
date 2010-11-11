@@ -30,7 +30,7 @@ import org.codenarc.util.AstUtil
  */
 class UseAssertEqualsInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
     String name = 'UseAssertEqualsInsteadOfAssertTrue'
-    int priority = 2
+    int priority = 3
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
     Class astVisitorClass = UseAssertEqualsInsteadOfAssertTrueAstVisitor
 }

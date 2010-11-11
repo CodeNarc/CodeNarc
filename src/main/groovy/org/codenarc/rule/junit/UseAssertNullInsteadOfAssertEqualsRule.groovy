@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  */
 class UseAssertNullInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
     String name = 'UseAssertNullInsteadOfAssertEquals'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UseAssertNullInsteadOfAssertEqualsAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }

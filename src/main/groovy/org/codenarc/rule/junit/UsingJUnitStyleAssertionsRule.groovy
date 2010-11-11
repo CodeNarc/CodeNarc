@@ -30,7 +30,7 @@ import org.codenarc.util.AstUtil
  */
 class UsingJUnitStyleAssertionsRule extends AbstractAstVisitorRule {
     String name = 'UsingJUnitStyleAssertions'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UsingJUnitStyleAssertionsAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }

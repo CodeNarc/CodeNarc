@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  */
 class UseAssertSameInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
     String name = 'UseAssertSameInsteadOfAssertTrue'
-    int priority = 2
+    int priority = 3
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
     Class astVisitorClass = UseAssertSameInsteadOfAssertTrueAstVisitor
 }

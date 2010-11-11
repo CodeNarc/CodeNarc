@@ -28,7 +28,7 @@ import org.codenarc.rule.Rule
 class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == "UseAssertEqualsInsteadOfAssertTrue"
     }
 
