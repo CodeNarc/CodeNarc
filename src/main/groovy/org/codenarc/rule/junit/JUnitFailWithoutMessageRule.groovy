@@ -26,14 +26,14 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class UseFailWithMessageInsteadOfWithoutRule extends AbstractAstVisitorRule {
-    String name = 'UseFailWithMessageInsteadOfWithout'
+class JUnitFailWithoutMessageRule extends AbstractAstVisitorRule {
+    String name = 'JUnitFailWithoutMessage'
     int priority = 2
-    Class astVisitorClass = UseFailWithMessageInsteadOfWithoutAstVisitor
+    Class astVisitorClass = JUnitFailWithoutMessageRuleAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class UseFailWithMessageInsteadOfWithoutAstVisitor extends AbstractAstVisitor {
+class JUnitFailWithoutMessageRuleAstVisitor extends AbstractAstVisitor {
 
     def void visitMethodCallExpression(MethodCallExpression call) {
 

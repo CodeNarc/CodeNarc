@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for UseFailWithMessageInsteadOfWithoutRule
+ * Tests for JUnitFailWithoutMessageRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class UseFailWithMessageInsteadOfWithoutRuleTest extends AbstractRuleTestCase {
+class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UseFailWithMessageInsteadOfWithout"
+        assert rule.name == "JUnitFailWithoutMessage"
     }
 
     void testSuccessScenario() {
@@ -60,6 +60,6 @@ class UseFailWithMessageInsteadOfWithoutRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new UseFailWithMessageInsteadOfWithoutRule()
+        new JUnitFailWithoutMessageRule()
     }
 }

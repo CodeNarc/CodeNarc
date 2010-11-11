@@ -55,7 +55,7 @@ UseAssertEqualsInsteadOfAssertTrue Rule (junit) : This rule detects JUnit assert
 UseAssertTrueInsteadOfAssertEqualsRule Rule (junit) : This rule detects JUnit calling assertEquals where the first parameter is a boolean. 
 UseAssertNullInsteadOfAssertEquals Rule (junit) : This rule detects JUnit calling assertEquals where the first or second parameter is null. 
 UseAssertSameInsteadOfAssertTrue Rule (junit) : This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for reference equality. 
-UseFailWithMessageInsteadOfWithout Rule (junit) : This rule detects JUnit calling the fail() method without an argument. 
+JUnitFailWithoutMessage Rule (junit) : This rule detects JUnit calling the fail() method without an argument. 
 JUnitStyleAssertions Rule (junit) : This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
 ConfusingMethodName Rule (naming) : Checks for very confusing method names. The referenced methods have names that differ only by capitalization.
 ObjectOverrideMisspelledMethodName Rule (naming) : Verifies that the names of the most commonly overridden methods of Object: equals, hashCode and toString, are correct.
