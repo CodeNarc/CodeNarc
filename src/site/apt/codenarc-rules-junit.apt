@@ -66,6 +66,15 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
+* JUnitStyleAssertions Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
+  Groovy 1.7 ships with a feature called the "power assert", which is an assert statement with better error reporting.
+  This is preferable to the JUnit assertions.
+
+
 * JUnitTearDownCallsSuper Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -149,13 +158,3 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   This rule detects JUnit calling the fail() method without an argument. For better error reporting you should always
   provide a message.
-
-
-* UsingJUnitStyleAssertions Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.11>
-  
-  This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
-  Groovy 1.7 ships with a feature called the "power assert", which is an assert statement with better error reporting.
-  This is preferable to the JUnit assertions. 
-

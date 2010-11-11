@@ -145,7 +145,7 @@ File: src/main/dao/MyOtherDao.groovy
         stringWriter = new StringWriter()
     }
 
-    @SuppressWarnings('UsingJUnitStyleAssertions')
+    @SuppressWarnings('JUnitStyleAssertions')
     private void assertReportText(String actualText) {
         def actualLines = actualText.readLines()
         def expectedLines = REPORT_TEXT.readLines()

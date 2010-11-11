@@ -20,5 +20,5 @@
     <rule class='org.codenarc.rule.junit.UseAssertNullInsteadOfAssertEqualsRule'/>
     <rule class='org.codenarc.rule.junit.UseAssertSameInsteadOfAssertTrueRule'/>
     <rule class='org.codenarc.rule.junit.UseFailWithMessageInsteadOfWithoutRule'/>
-    <rule class='org.codenarc.rule.junit.UsingJUnitStyleAssertionsRule'/>
+    <rule class='org.codenarc.rule.junit.JUnitStyleAssertionsRule'/>
 </ruleset>

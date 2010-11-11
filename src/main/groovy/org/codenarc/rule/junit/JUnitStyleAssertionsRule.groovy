@@ -28,14 +28,14 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class UsingJUnitStyleAssertionsRule extends AbstractAstVisitorRule {
-    String name = 'UsingJUnitStyleAssertions'
+class JUnitStyleAssertionsRule extends AbstractAstVisitorRule {
+    String name = 'JUnitStyleAssertions'
     int priority = 3
-    Class astVisitorClass = UsingJUnitStyleAssertionsAstVisitor
+    Class astVisitorClass = JUnitStyleAssertionsAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class UsingJUnitStyleAssertionsAstVisitor extends AbstractAstVisitor {
+class JUnitStyleAssertionsAstVisitor extends AbstractAstVisitor {
 
     def void visitMethodCallExpression(MethodCallExpression call) {
 
