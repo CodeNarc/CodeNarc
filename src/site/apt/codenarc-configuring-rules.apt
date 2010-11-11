@@ -15,6 +15,8 @@ CodeNarc - Configuring Rules
 
   * {{{Turning_Off_A_Rule}Turning Off A Rule}}
 
+  * {{{Suppressing_A_Rule_From_Within_Source_Code}Suppressing A Rule From Within Source Code}}
+
   * {{{Customizing_Rule_Descriptions_Shown_in_the_HTML_Report}Customizing Rule Descriptions Shown in the HTML Report}} 
 
   []
@@ -211,6 +213,36 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
 +----------------------------------------------------------------------------------------
 # Turn off this rule
 AbstractClassName.enabled=false
++----------------------------------------------------------------------------------------
+
+
+* {Suppressing A Rule From Within Source Code}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  You can use the <<<@SuppressWarnings>>> annotation on a <class>, <method>, <constructor>, <field> or
+  <property> to suppress one or more <<CodeNarc>> rules within its source code.
+
+  Specify one or more rule name as the parameter of the <<<@SuppressWarnings>>> annotation. Note
+  that this is the rule <name>, not the <class> name (i.e., without the "Rule" suffix). Specify
+  multiple rule names by passing a <List> of rule names as a single parameter, e.g. 
+  <<<@SuppressWarnings(['IfStatementBraces', 'ThrowException'])>>>
+
+  NOTE: The <<<@SuppressWarnings>>> annotation only works for rule classes that subclass <<<AbstractAstVisitorRule>>>.
+
+  For example, the following code suppresses (prevents) violations of the <<DuplicateStringLiteral>>
+  rule within the <<<MyClass>>> class, as well as suppressing the <IfStatementBraces> and <ThrowException>
+  rules within its <<<getCount()>>> method.
+
++----------------------------------------------------------------------------------------
+    @SuppressWarnings('DuplicateStringLiteral')
+    class MyClass {
+        def y = 'x'
+        def z = 'x'
+
+        @SuppressWarnings(['IfStatementBraces', 'ThrowException'])
+        int getCount() {
+            if (!ready) throw new Exception('Not ready')
+        }
+    }
 +----------------------------------------------------------------------------------------
 
 
