@@ -20,6 +20,12 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   By default, the rule does not analyze test files. This rule sets the default value of the
   <doNotApplyToClassNames> property to only match class names that do not end in 'Test', 'Tests' or 'TestCase'.
 
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreNumbers       | The optional comma-separated list of numbers that should be    | <<<0,1>>>              |
+|                     | ignored (i.e., not cause a violation).                         |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
 
 ** Notes
 ~~~~~~~~~
@@ -43,6 +49,12 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   By default, the rule does not analyze test files. This rule sets the default value of the
   <doNotApplyToClassNames> property to only match class names that do not end in 'Test', 'Tests' or 'TestCase'.
 
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreStrings       | The optional comma-separated list of Strings that should be    | <<<null>>>             |
+|                     | ignored (i.e., not cause a violation).                         |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
 
 ** Notes
 ~~~~~~~~~

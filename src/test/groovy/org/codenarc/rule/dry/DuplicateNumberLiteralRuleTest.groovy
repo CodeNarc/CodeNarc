@@ -80,9 +80,9 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
 
     void testInAList() {
         final SOURCE = '''
-        	def x = [0, 11.783, 0]
+        	def x = [3, 11.783, 3]
         '''
-        assertSingleViolation(SOURCE, 2, "def x = [0, 11.783, 0]")
+        assertSingleViolation(SOURCE, 2, "def x = [3, 11.783, 3]")
     }
 
     void testInAMap() {
@@ -159,6 +159,39 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
             y(a: 11.783)
         '''
         assertSingleViolation(SOURCE, 3, "y(a: 11.783)")
+    }
+
+    void testIgnoreNumbers_IgnoresSingleValue() {
+        final SOURCE = '''
+        	def x = [23, -3.5, 23]
+            def y = [37, -7, 37]
+        '''
+        rule.ignoreNumbers = 23
+        assertSingleViolation(SOURCE, 3, "def y = [37, -7, 37]")
+    }
+
+    void testIgnoreNumbers_IgnoresMultipleValues() {
+        final SOURCE = '''
+        	def x = [0.725, 897.452, 0.725]
+            def y = [-97, 11, -97]
+        '''
+        rule.ignoreNumbers = '0.725,7654, -97'
+        assertNoViolations(SOURCE)
+    }
+
+    void testIgnoreNumbers_ByDefaultIgnoresZeroAndOne() {
+        final SOURCE = '''
+        	def x = [0, 12, 1, 34.567, 99, 1, 78, 0, 12.345]
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testIgnoreNumbers_InvalidNumber() {
+        final SOURCE = '''
+        	def x = [0, 'xxx']
+        '''
+        rule.ignoreNumbers = '0.725,xxx, yyy'
+        shouldFail(NumberFormatException) { applyRuleTo(SOURCE) }
     }
 
     protected Rule createRule() {

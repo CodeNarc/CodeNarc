@@ -39,10 +39,12 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     List<String> constants = []
     private Class constantType
+    private Set ignoreValuesSet
 
-    DuplicateLiteralAstVisitor(Class constantType) {
+    DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet) {
         assert constantType
         this.constantType = constantType
+        this.ignoreValuesSet = ignoreValuesSet
     }
 
     def void visitClassEx(ClassNode node) {
@@ -104,14 +106,19 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitMapEntryExpression expression
     }
 
-    def addViolationIfDuplicate(node, boolean isStatic = false) {
+    private addViolationIfDuplicate(node, boolean isStatic = false) {
         if (isFirstVisit(node) && (node instanceof ConstantExpression) && node.value != null && (constantType.isAssignableFrom(node.value.class))) {
             def literal = node.value
             if (constants.contains(literal) && !isStatic) {
-                addViolation node, "Duplicate ${constantType.simpleName} Literal: $literal"
+
+                if (!ignoreValuesSet.contains(literal)) {
+                    addViolation node, "Duplicate ${constantType.simpleName} Literal: $literal"
+                }
+                
             } else {
                 constants.add literal
             }
         }
     }
+
 }

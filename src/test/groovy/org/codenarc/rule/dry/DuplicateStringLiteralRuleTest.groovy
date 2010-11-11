@@ -161,6 +161,33 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "y(a: 'bar')")
     }
 
+    void testIgnoreStrings_IgnoresSingleValue() {
+        final SOURCE = '''
+        	def x = ['xyz', 'abc', 'xyz']
+            def y = ['foo', 'bar', 'foo']
+        '''
+        rule.ignoreStrings = 'xyz'
+        assertSingleViolation(SOURCE, 3, "def y = ['foo', 'bar', 'foo']")
+    }
+
+    void testIgnoreStrings_IgnoresMultipleValues() {
+        final SOURCE = '''
+        	def x = ['xyz', 'abc', 'xyz']
+            def y = ['foo', 'bar', 'foo']
+        '''
+        rule.ignoreStrings = 'xyz,foo'
+        assertNoViolations(SOURCE)
+    }
+
+    void testIgnoreValues_IgnoresValuesSurroundedByWhitespace() {
+        final SOURCE = '''
+        	def x = [' xyz ', 'abc', ' xyz ']
+            def y = ['foo', 'bar', 'foo']
+        '''
+        rule.ignoreStrings = ' xyz ,foo'
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new DuplicateStringLiteralRule()
     }
