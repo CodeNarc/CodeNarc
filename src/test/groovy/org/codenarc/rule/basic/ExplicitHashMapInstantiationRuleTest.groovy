@@ -24,11 +24,11 @@ import org.codenarc.rule.Rule
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class ExplicitCreationOfHashMapRuleTest extends AbstractRuleTestCase {
+class ExplicitHashMapInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCreationOfHashMap"
+        assert rule.name == "ExplicitHashMapInstantiation"
     }
 
     void testSuccessScenario() {
@@ -74,6 +74,6 @@ class ExplicitCreationOfHashMapRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new ExplicitCreationOfHashMapRule()
+        new ExplicitHashMapInstantiationRule()
     }
 }

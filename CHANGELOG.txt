@@ -28,12 +28,12 @@ ExplicitCallToPlusMethod Rule (basic) :  This rule detects when the plus(Object)
 ExplicitCallToPowerMethod Rule (basic) :  This rule detects when the power(Object) method is called directly in code instead of using the ** operator. 
 ExplicitCallToRightShiftMethod Rule (basic) :  This rule detects when the rightShift(Object) method is called directly in code instead of using the \>\> operator. 
 ExplicitCallToXorMethod Rule (basic) :  This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator. 
-ExplicitCreationOfArrayList Rule (basic) :  This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write new ArrayList() as [], which creates the same object. 
-ExplicitCreationOfHashMap Rule (basic) :  This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write new HashMap() as [:], which creates the same object. 
-ExplicitCreationOfHashSet Rule (basic) :  This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write new HashSet() as [] as Set, which creates the same object. 
-ExplicitCreationOfLinkedList Rule (basic) :  This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write new LinkedList() as [] as Queue, which creates the same object. 
-ExplicitCreationOfStack Rule (basic) :  This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write new Stack() as [] as Stack, which creates the same object. 
-ExplicitCreationOfTreeSet Rule (basic) :  This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write new TreeSet()>> as [] as SortedSet, which creates the same object. 
+ExplicitArrayListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write new ArrayList() as [], which creates the same object.
+ExplicitHashMapInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write new HashMap() as [:], which creates the same object.
+ExplicitHashSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write new HashSet() as [] as Set, which creates the same object.
+ExplicitLinkedListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write new LinkedList() as [] as Queue, which creates the same object.
+ExplicitStackInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write new Stack() as [] as Stack, which creates the same object.
+ExplicitTreeSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write new TreeSet()>> as [] as SortedSet, which creates the same object. 
 GStringAsMapKey Rule  A GString should not be used as a map key since its hashcode is not guaranteed to be stable. 
 InvertedIfElse Rule (basic) :  An inverted if-else statement is one in which there is a single if statement with a single else branch and the boolean test of the if is negated. 
 RemoveAllOnSelf Rule (basic) : Don't use removeAll to clear a collection. 

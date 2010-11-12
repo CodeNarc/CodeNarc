@@ -19,26 +19,26 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitCreationOfLinkedListRule
+ * Tests for ExplicitCreationOfStackRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class ExplicitCreationOfLinkedListRuleTest extends AbstractRuleTestCase {
+class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCreationOfLinkedList"
+        assert rule.name == "ExplicitStackInstantiation"
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [] as Queue
+        	def x = [] as Stack
             class MyClass {
-                def x = [] as Queue
-                def m(foo = [] as Queue) {
-                    def x = [] as Queue
-                    def y = new LinkedList() {   // anony inner class OK                    
+                def x = [] as Stack
+                def m(foo = [] as Stack) {
+                    def x = [] as Stack
+                    def y = new Stack() {   // anony inner class OK
                     }
                 }
             }
@@ -48,32 +48,32 @@ class ExplicitCreationOfLinkedListRuleTest extends AbstractRuleTestCase {
 
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new LinkedList()
+        	def x = new Stack()
             class MyClass {
                 def m() {
-                    def x = new LinkedList()
+                    def x = new Stack()
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                2, 'def x = new LinkedList()',
-                5, 'def x = new LinkedList()')
+                2, 'def x = new Stack()',
+                5, 'def x = new Stack()')
     }
 
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {
-                def x = new LinkedList()
-                def m(foo = new LinkedList()) {
+                def x = new Stack()
+                def m(foo = new Stack()) {
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new LinkedList()',
-                4, 'def m(foo = new LinkedList())')
+                3, 'def x = new Stack()',
+                4, 'def m(foo = new Stack())')
     }
 
     protected Rule createRule() {
-        new ExplicitCreationOfLinkedListRule()
+        new ExplicitStackInstantiationRule()
     }
 }

@@ -20,21 +20,21 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write "new LinkedList()" as "[] as Queue", which creates the same object.
+ * This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write "new TreeSet()" as "[] as SortedSet", which creates the same object.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitCreationOfLinkedListRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitCreationOfLinkedList'
+class ExplicitTreeSetInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitTreeSetInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitCreationOfLinkedListAstVisitor
+    Class astVisitorClass = ExplicitTreeSetInstantiationAstVisitor
 }
 
-class ExplicitCreationOfLinkedListAstVisitor extends AbstractAstVisitor {
+class ExplicitTreeSetInstantiationAstVisitor extends AbstractAstVisitor {
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'LinkedList') {
+        if (isFirstVisit(call) && call?.type?.name == 'TreeSet') {
             addViolation call
         }
         super.visitConstructorCallExpression call

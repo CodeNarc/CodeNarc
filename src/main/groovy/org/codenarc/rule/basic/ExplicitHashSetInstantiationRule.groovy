@@ -20,21 +20,21 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write "new TreeSet()" as "[] as SortedSet", which creates the same object.
+ * This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write "new HashSet()" as "[] as Set", which creates the same object.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitCreationOfTreeSetRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitCreationOfTreeSet'
+class ExplicitHashSetInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitHashSetInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitCreationOfTreeSetAstVisitor
+    Class astVisitorClass = ExplicitHashSetInstantiationAstVisitor
 }
 
-class ExplicitCreationOfTreeSetAstVisitor extends AbstractAstVisitor {
+class ExplicitHashSetInstantiationAstVisitor extends AbstractAstVisitor {
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'TreeSet') {
+        if (isFirstVisit(call) && call?.type?.name == 'HashSet') {
             addViolation call
         }
         super.visitConstructorCallExpression call

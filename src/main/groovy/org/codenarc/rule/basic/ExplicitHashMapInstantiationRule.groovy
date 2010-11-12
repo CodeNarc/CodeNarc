@@ -20,21 +20,21 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write "new Stack()" as "[] as Stack", which creates the same object.
+ * This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write "new HashMap()" as "[:]", which creates the same object.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitCreationOfStackRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitCreationOfStack'
+class ExplicitHashMapInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitHashMapInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitCreationOfStackAstVisitor
+    Class astVisitorClass = ExplicitHashMapInstantiationAstVisitor
 }
 
-class ExplicitCreationOfStackAstVisitor extends AbstractAstVisitor {
+class ExplicitHashMapInstantiationAstVisitor extends AbstractAstVisitor {
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'Stack') {
+        if (isFirstVisit(call) && call?.type?.name == 'HashMap') {
             addViolation call
         }
         super.visitConstructorCallExpression call

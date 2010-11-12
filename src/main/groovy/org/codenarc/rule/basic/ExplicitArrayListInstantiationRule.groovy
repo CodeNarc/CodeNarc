@@ -20,21 +20,21 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write "new HashMap()" as "[:]", which creates the same object.
+ * This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write "new ArrayList()" as "[]", which creates the same object.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitCreationOfHashMapRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitCreationOfHashMap'
+class ExplicitArrayListInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitArrayListInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitCreationOfHashMapAstVisitor
+    Class astVisitorClass = ExplicitArrayListInstantiationAstVisitor
 }
 
-class ExplicitCreationOfHashMapAstVisitor extends AbstractAstVisitor {
+class ExplicitArrayListInstantiationAstVisitor extends AbstractAstVisitor {
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'HashMap') {
+        if (isFirstVisit(call) && call?.type?.name == 'ArrayList') {
             addViolation call
         }
         super.visitConstructorCallExpression call

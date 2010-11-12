@@ -20,21 +20,21 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write "new HashSet()" as "[] as Set", which creates the same object.
+ * This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write "new Stack()" as "[] as Stack", which creates the same object.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitCreationOfHashSetRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitCreationOfHashSet'
+class ExplicitStackInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitStackInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitCreationOfHashSetAstVisitor
+    Class astVisitorClass = ExplicitStackInstantiationAstVisitor
 }
 
-class ExplicitCreationOfHashSetAstVisitor extends AbstractAstVisitor {
+class ExplicitStackInstantiationAstVisitor extends AbstractAstVisitor {
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'HashSet') {
+        if (isFirstVisit(call) && call?.type?.name == 'Stack') {
             addViolation call
         }
         super.visitConstructorCallExpression call

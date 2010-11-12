@@ -347,6 +347,14 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* ExplicitArrayListInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  This rule checks for the explicit instantiation of an <<<ArrayList>>>. In Groovy, it is best to write
+  <<<new ArrayList() as []>>>, which creates the same object.
+
+
 * ExplicitCallToAndMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -499,49 +507,40 @@ Basic Rules  ("<rulesets/basic.xml>")
   even <<<xor(x)>>> will trigger a violation.
 
 
-
-* ExplicitCreationOfArrayList Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.11>
-
-  This rule checks for the explicit instantiation of an <<<ArrayList>>>. In Groovy, it is best to write
-  <<<new ArrayList() as []>>>, which creates the same object.
-
-
-* ExplicitCreationOfHashMap Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* ExplicitHashMapInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule checks for the explicit instantiation of a <<<HashMap>>>. In Groovy, it is best to write
   <<<new HashMap() as [:]>>>, which creates the same object.
 
 
-* ExplicitCreationOfHashSet Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* ExplicitHashSetInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule checks for the explicit instantiation of a <<<HashSet>>>. In Groovy, it is best to write
   <<<new HashSet()>>> as <<<[] as Set>>>, which creates the same object.
 
 
-* ExplicitCreationOfLinkedList Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* ExplicitLinkedListInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule checks for the explicit instantiation of a <<<LinkedList>>>. In Groovy, it is best to write
   <<<new LinkedList()>>> as <<<[] as Queue>>>, which creates the same object.
 
 
-* ExplicitCreationOfStack Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* ExplicitStackInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule checks for the explicit instantiation of a <<<Stack>>>. In Groovy, it is best to write
   <<<new Stack()>>> as <<<[] as Stack>>>, which creates the same object.
 
 
-* ExplicitCreationOfTreeSet Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* ExplicitTreeSetInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule checks for the explicit instantiation of a <<<TreeSet>>>. In Groovy, it is best to write

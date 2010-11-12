@@ -20,21 +20,21 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write "new ArrayList()" as "[]", which creates the same object.
+ * This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write "new LinkedList()" as "[] as Queue", which creates the same object.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitCreationOfArrayListRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitCreationOfArrayList'
+class ExplicitLinkedListInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitLinkedListInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitCreationOfArrayListAstVisitor
+    Class astVisitorClass = ExplicitCreationOfLinkedListAstVisitor
 }
 
-class ExplicitCreationOfArrayListAstVisitor extends AbstractAstVisitor {
+class ExplicitCreationOfLinkedListAstVisitor extends AbstractAstVisitor {
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'ArrayList') {
+        if (isFirstVisit(call) && call?.type?.name == 'LinkedList') {
             addViolation call
         }
         super.visitConstructorCallExpression call

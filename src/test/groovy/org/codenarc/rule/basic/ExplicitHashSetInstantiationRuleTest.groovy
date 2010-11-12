@@ -19,26 +19,26 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitCreationOfTreeSetRule
+ * Tests for ExplicitCreationOfHashSetRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class ExplicitCreationOfTreeSetRuleTest extends AbstractRuleTestCase {
+class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCreationOfTreeSet"
+        assert rule.name == "ExplicitHashSetInstantiation"
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [] as SortedSet
+        	def x = [] as Set
             class MyClass {
-                def x = [] as SortedSet
-                def m(foo = [] as SortedSet) {
-                    def x = [] as SortedSet
-                    def y = new TreeSet() {   // anony inner class OK
+                def x = [] as Set
+                def m(foo = [] as Set) {
+                    def x = [] as Set
+                    def y = new HashSet() {   // anony inner class OK
                     }
                 }
             }
@@ -48,33 +48,33 @@ class ExplicitCreationOfTreeSetRuleTest extends AbstractRuleTestCase {
 
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new TreeSet()
+        	def x = new HashSet()
             class MyClass {
                 def m() {
-                    def x = new TreeSet()
+                    def x = new HashSet()
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                2, 'def x = new TreeSet()',
-                5, 'def x = new TreeSet()')
+                2, 'def x = new HashSet()',
+                5, 'def x = new HashSet()')
     }
 
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {
-                def x = new TreeSet()
-                def m(foo = new TreeSet()) {
+                def x = new HashSet()
+                def m(foo = new HashSet()) {
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new TreeSet()',
-                4, 'def m(foo = new TreeSet())')
+                3, 'def x = new HashSet()',
+                4, 'def m(foo = new HashSet())')
     }
 
 
     protected Rule createRule() {
-        new ExplicitCreationOfTreeSetRule()
+        new ExplicitHashSetInstantiationRule()
     }
 }
