@@ -7,10 +7,9 @@ CodeNarc
 
   The <<CodeNarc>> project provides a static analysis tool and framework for analyzing Groovy source code.
 
-  <<CodeNarc>> scans Groovy source code,
-  looking for violations of predefined or custom rules and generates an HTML or XML report of the results.
-  These rules include checks for coding standards, or searching for unused code, possible bugs or
-  bad coding practices.
+  <<CodeNarc>> scans Groovy source code, looking for violations of predefined or custom rules and
+  generates an HTML or XML report of the results. These rules include checks for coding standards,
+  or searching for unused code, possible bugs or bad coding practices.
 
   You can run <<CodeNarc>> using the supplied {{{codenarc-ant-task.html}Ant Task}},
   or run it from the {{{codenarc-command-line.html}command-line}}, or
@@ -25,6 +24,8 @@ CodeNarc
   <<CodeNarc>> integrates with other many other tools and frameworks, including <<Gradle>>, <<Grails>>,
   <<Griffon>>, <<Maven>>, <<Sonar>> and <<Hudson>>. See {{{codenarc-other-tools-frameworks.html}Integration with Other Tools / Frameworks}}.
 
+  <<NEW!>> You can play with the newest snapshot of <<CodeNarc>> online using: {{{http://meetcodenarc.appspot.com/}http://meetcodenarc.appspot.com/}}.
+
   <<CodeNarc>> was influenced by the wonderful {{{http://pmd.sourceforge.net/}PMD}}
   and {{{http://checkstyle.sourceforge.net/}Checkstyle}} tools for analyzing Java source code, as well
   as the extensive Groovy static analysis checks performed by the
@@ -35,7 +36,7 @@ CodeNarc
 
   The <<CodeNarc>> project requires:
 
-  *  Groovy version 1.6 or later
+  *  Groovy version 1.7
 
   * Java 1.5 or later.
 
