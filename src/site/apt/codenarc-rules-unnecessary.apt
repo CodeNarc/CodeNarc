@@ -1,0 +1,136 @@
+		--------------------------------------------------
+					  CodeNarc - Unnecessary Rules
+		--------------------------------------------------
+
+Unnecessary Rules  ("<rulesets/unnecessary.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* UnnecessaryBooleanExpression Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for unnecessary boolean expressions, including ANDing (&&) or ORing (||) with
+ <<<true>>>, <<<false>>>, <<<null>>>, or a Map/List/String/Number literal.
+
+ This rule also checks for negation (!) of <<<true>>>, <<<false>>>,
+ <<<null>>>, or a Map/List/String/Number literal.
+
+ Examples of violations include:
+
+-------------------------------------------------------------------------------
+
+    result = value && true              // AND or OR with boolean constants
+    if (false || value) { .. }
+    return value && Boolean.FALSE
+
+    result = null && value              // AND or OR with null
+
+    result = value && "abc"             // AND or OR with String literal
+
+    result = value && 123               // AND or OR with Number literal
+    result = 678.123 || true
+
+    result = value && [x, y]            // AND or OR with List literal
+
+    result = [a:123] && value           // AND or OR with Map literal
+
+    result = !true                      // Negation of boolean constants
+    result = !false
+    result = !Boolean.TRUE
+
+    result = !null                      // Negation of null
+
+    result = !"abc"                     // Negation of String literal
+
+    result = ![a:123]                   // Negation of Map literal
+
+    result = ![a,b]                     // Negation of List literal
+-------------------------------------------------------------------------------
+
+
+* UnnecessaryConstructor Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's
+  <<<public>>>, has an empty body, and takes no arguments.
+
+
+* UnnecessaryIfStatement Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for <<if>> statements where the <if> and <else> blocks are merely returning
+ <<<true>>> and <<<false>>> constants. These cases can be replaced by a simple return
+ statement. Examples of violations include:
+
+-------------------------------------------------------------------------------
+    if (someExpression)         // can be replaced by: return someExpression
+        return true
+    else
+        return false
+
+    if (someExpression) {       // can be replaced by: return someExpression
+        return true
+    } else {
+        return false
+    }
+
+    if (someExpression) {       // can be replaced by: return someExpression
+        return Boolean.TRUE
+    } else {
+        return Boolean.FALSE
+    }
+-------------------------------------------------------------------------------
+
+
+* UnnecessaryTernaryExpression Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for ternary expressions where the conditional expression always evaluates to a boolean
+ and the <true> and <false> expressions are merely returning <<<true>>> and <<<false>>> constants.
+ These cases can be replaced by a simple boolean expression. Examples of violations include:
+
+-------------------------------------------------------------------------------
+    x==99 ? true : false                    // can be replaced by: x==99
+    x && y ? true : false                   // can be replaced by: x && y
+    x||y ? false : true                     // can be replaced by: !(x||y)
+    x >= 1 ? true: false                    // can be replaced by: x >= 1
+    x < 99 ? Boolean.TRUE : Boolean.FALSE   // can be replaced by: x < 99
+    !x ? true : false                       // can be replaced by: !x
+-------------------------------------------------------------------------------
+
+ The rule also checks for ternary expressions where the <true> and <false> expressions are
+ the same constant or variable. Examples include:
+
+-------------------------------------------------------------------------------
+    x ? '123' : '123'              // can be replaced by: '123'
+    x ? null : null                // can be replaced by: null
+    x ? 23 : 23                    // can be replaced by: 23
+    x ? MAX_VALUE : MAX_VALUE      // can be replaced by: MAX_VALUE
+    ready ? minValue : minValue    // can be replaced by: minValue
+-------------------------------------------------------------------------------
+
+
+* UnnecessaryCollectionCall Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  Checks for useless calls to collections. For any collection <<<c>>>, calling <<<c.containsAll(c)>>>
+  should always be <<<true>>>, and <<<c.retainAll(c)>>> should have no effect.
+
+
+* UnnecessaryOverridingMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  Checks for an overriding method that merely calls the same method defined in a superclass. Remove it.
+
+
+* UnnecessaryReturnKeyword Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  In Groovy, the <<<return>>> keyword is often optional. If a statement is the last line in a method or
+  closure then you do not need to have the <<<return>>> keyword.
+
+
+

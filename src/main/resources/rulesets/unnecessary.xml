@@ -1,0 +1,19 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Unnecessary rule set.
+        These rules check for unnecessary code.
+    </description>
+
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryBooleanExpressionRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryCollectionCallRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryConstructorRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryOverridingMethodRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryReturnKeywordRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryIfStatementRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryTernaryExpressionRule'/>
+
+</ruleset>

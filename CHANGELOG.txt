@@ -40,10 +40,10 @@ RemoveAllOnSelf Rule (basic) : Don't use removeAll to clear a collection.
 ReturnsNullInsteadOfEmptyArray Rule (basic) : If you have a method or closure that returns an array, then when there are no results return a zero-length (empty) array rather than null. 
 ReturnsNullInsteadOfEmptyCollection Rule (basic) : If you have a method or closure that returns a collection, then when there are no results return a zero-length (empty) collection rather than null. 
 SerialVersionUID Rule (basic) : A serialVersionUID is normally intended to be used with Serialization. It needs to be of type long, static, and final. 
-UnnecessaryConstructor Rule (basic) : This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has an empty body, and takes no arguments. 
-UselessCollectionCall Rule (basic) : Checks for useless calls to collections. 
-UselessOverridingMethod Rule (basic) : Checks for an overriding method that merely calls the same method defined in a superclass. 
-UnnecessaryReturnKeyword Rule (basic) :  In Groovy, the return keyword is often optional. 
+UnnecessaryConstructor Rule (unnecessary) : This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has an empty body, and takes no arguments.
+UnnecessaryCollectionCall Rule (unnecessary) : Checks for useless calls to collections.
+UnnecessaryOverridingMethod Rule (unnecessary) : Checks for an overriding method that merely calls the same method defined in a superclass.
+UnnecessaryReturnKeyword Rule (unnecessary) :  In Groovy, the return keyword is often optional.
 SynchronizedOnGetClass Rule (concurrency) : Checks for synchronization on getClass() rather than class literal. 
 UseOfNotifyMethod Rule (concurrency) : Checks for code that calls notify() rather than notifyAll(). 
 DuplicateNumberLiteral Rule (dry) : This rule checks for duplicate number literals within the current class. 
@@ -64,11 +64,20 @@ MethodCount Rule (size) : Checks if the number of methods within a class exceeds
 BUG FIXES
 - None reported, none fixed! 
 
+POTENTIAL BREAKING CHANGES
+- AbstractAstVisitor - If you implemented your own rule by subclassing AbstractAstVisitor then your code might break. It is a compile error and the breakage will be clear and obvious. In order to support @SuppressWarnings, we needed to change AbstractAstVisitor. The method visitMethodNode became visitMethodNodeEx, visitClass became visitClassEx, visitConstructorOrMethod became visitConstructorOrMethodEx, visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. From within these new methods there is no need to call super.visitX. In the rare case that the simple renaming does not fix your problem then please contact the mailing list.
+- The following three classes were moved from the org.codenarc.rule.basic package into org.codenarc.rule.unnecessary.
+  Likewise, the associated rules were moved from the "basic" ruleset into the new "unnecessary" ruleset.
+  You will need to adjust your ruleset configuration if you included one of these rules specifically in a custom ruleset, or configured them as part of the "basic" ruleset. 
+    * UnnecessaryBooleanExpressionRule
+    * UnnecessaryIfStatementRule
+    * UnnecessaryTernaryExpressionRule
+
 OTHER CHANGES
 - CodeNarc now requires Groovy 1.7 to run. Keep in mind that it can still run against (analyze) older Groovy code.
-- There is a new rule category called "dry", meaning "do not repeat yourself".
-- AstUtil enhancements - For writers of rules: there are new utility methods in the AstUtil class. See the javadoc for more details. 
-- AbstractAstVisitor Breaking Changes - If you implemented your own rule by subclassing AbstractAstVisitor then your code might break. It is a compile error and the breakage will be clear and obvious. In order to support @SuppressWarnings, we needed to change AbstractAstVisitor. The method visitMethodNode became visitMethodNodeEx, visitClass became visitClassEx, visitConstructorOrMethod became visitConstructorOrMethodEx, visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. From within these new methods there is no need to call super.visitX. In the rare case that the simple renaming does not fix your problem then please contact the mailing list. 
+- There is a new rule set (category) called "dry", meaning "do not repeat yourself".
+- There is a new "unnecessary" rule set (category).
+- AstUtil enhancements - For writers of rules: there are new utility methods in the AstUtil class. See the javadoc for more details.
 
 Changes in version 0.10 (26 September 2010)
 -------------------------------------------

@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for UselessOverridingMethodRule
+ * Tests for UnnecessaryOverridingMethodRule
  *
  * @author 'Sven Lange'
  * @version $Revision$ - $Date$
  */
-class UselessOverridingMethodRuleTest extends AbstractRuleTestCase {
+class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
-        assert rule.priority == 2
-        assert rule.name == "UselessOverridingMethod"
+        assert rule.priority == 3
+        assert rule.name == "UnnecessaryOverridingMethod"
     }
 
     void testSuccessScenario() {
@@ -80,6 +80,6 @@ class UselessOverridingMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new UselessOverridingMethodRule()
+        new UnnecessaryOverridingMethodRule()
     }
 }

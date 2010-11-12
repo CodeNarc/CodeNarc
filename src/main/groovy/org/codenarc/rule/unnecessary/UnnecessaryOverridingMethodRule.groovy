@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -30,13 +30,13 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class UselessOverridingMethodRule extends AbstractAstVisitorRule {
-    String name = 'UselessOverridingMethod'
-    int priority = 2
-    Class astVisitorClass = UselessOverridingMethodAstVisitor
+class UnnecessaryOverridingMethodRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryOverridingMethod'
+    int priority = 3
+    Class astVisitorClass = UnnecessaryOverridingMethodAstVisitor
 }
 
-class UselessOverridingMethodAstVisitor extends AbstractAstVisitor {
+class UnnecessaryOverridingMethodAstVisitor extends AbstractAstVisitor {
 
     def void visitMethodEx(MethodNode node) {
 

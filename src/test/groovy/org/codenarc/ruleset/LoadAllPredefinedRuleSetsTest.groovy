@@ -39,6 +39,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
         'rulesets/junit.xml',
         'rulesets/naming.xml',
         'rulesets/size.xml',
+        'rulesets/unnecessary.xml',
         'rulesets/unused.xml'
     ]
     private messages

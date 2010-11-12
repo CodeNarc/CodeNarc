@@ -33,12 +33,6 @@
     <rule class='org.codenarc.rule.basic.SerialVersionUIDRule'/>
     <rule class='org.codenarc.rule.basic.StringInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
-    <rule class='org.codenarc.rule.basic.UnnecessaryBooleanExpressionRule'/>
-    <rule class='org.codenarc.rule.basic.UnnecessaryIfStatementRule'/>
-    <rule class='org.codenarc.rule.basic.UnnecessaryTernaryExpressionRule'/>
-    <rule class='org.codenarc.rule.basic.UselessCollectionCallRule'/>
-    <rule class='org.codenarc.rule.basic.UnnecessaryConstructorRule'/>
-    <rule class='org.codenarc.rule.basic.UselessOverridingMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToPlusMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToMinusMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToMultiplyMethodRule'/>
@@ -59,7 +53,6 @@
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfTreeSetRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfLinkedListRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCreationOfStackRule'/>
-    <rule class='org.codenarc.rule.basic.UnnecessaryReturnKeywordRule'/>
     <rule class='org.codenarc.rule.basic.DoubleNegativeRule'/>
     <rule class='org.codenarc.rule.basic.DeadCodeRule'/>
     <rule class='org.codenarc.rule.basic.InvertedIfElseRule'/>

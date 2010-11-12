@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.ClassNode
@@ -30,7 +30,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryConstructor'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryConstructorAstVisitor
 }
 

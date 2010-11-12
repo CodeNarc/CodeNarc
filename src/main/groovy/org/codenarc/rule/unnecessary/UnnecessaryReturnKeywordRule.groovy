@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
@@ -30,7 +30,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class UnnecessaryReturnKeywordRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryReturnKeyword'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryReturnKeywordAstVisitor
 }
 

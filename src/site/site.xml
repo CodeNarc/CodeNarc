@@ -71,6 +71,7 @@
             <item name="Logging Rules" href="/codenarc-rules-logging.html"/>
             <item name="Naming Rules" href="/codenarc-rules-naming.html"/>
             <item name="Size/Complexity Rules" href="/codenarc-rules-size.html"/>
+            <item name="Unnecessary Rules" href="/codenarc-rules-unnecessary.html"/>
             <item name="Unused Rules" href="/codenarc-rules-unused.html"/>
         </menu>
 

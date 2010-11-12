@@ -40,6 +40,7 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
             'rulesets/junit.xml',
             'rulesets/naming.xml',
             'rulesets/size.xml',
+            'rulesets/unnecessary.xml',
             'rulesets/unused.xml'].join(',')
     static final REPORT_FILE = 'CodeNarcTaskAllRuleSetsReport.html'
 

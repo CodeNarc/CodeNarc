@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.TupleExpression
@@ -27,13 +27,13 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class UselessCollectionCallRule extends AbstractAstVisitorRule {
-    String name = 'UselessCollectionCall'
-    int priority = 2
-    Class astVisitorClass = UselessCollectionCallAstVisitor
+class UnnecessaryCollectionCallRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryCollectionCall'
+    int priority = 3
+    Class astVisitorClass = UnnecessaryCollectionCallAstVisitor
 }
 
-class UselessCollectionCallAstVisitor extends AbstractAstVisitor {
+class UnnecessaryCollectionCallAstVisitor extends AbstractAstVisitor {
 
     private static final List USELESS_METHOD_NAMES = ['retainAll', 'containsAll']
 
