@@ -32,22 +32,33 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
     }
 
     void testSuccessScenario() {
-      String classContent = "class MyClass {\n"
-      for (int i = 0; i < rule.maxMethods; i++) {
-        classContent += "public void method${i}() {}\n"
-      }
-      classContent += "\n}"
-      assertNoViolations(classContent)
+        String classContent = "class MyClass {\n"
+        for (int i = 0; i < rule.maxMethods; i++) {
+            classContent += "public void method${i}() {}\n"
+        }
+        classContent += "\n}"
+        assertNoViolations(classContent)
     }
 
-     void testSingleViolation() {
-       String classContent = "class MyClass {\n"
-       for (int i = 0; i < rule.maxMethods + 1; i++) {
-         classContent += "public void method${i}() {}\n"
-       }
-       classContent += "\n}"
-       assertSingleViolation(classContent, 1, 'class MyClass {')
-     }
+    void testSingleViolation() {
+        String classContent = "class MyClass {\n"
+        for (int i = 0; i < rule.maxMethods + 1; i++) {
+            classContent += "public void method${i}() {}\n"
+        }
+        classContent += "\n}"
+        assertSingleViolation(classContent, 1, 'class MyClass {')
+    }
+
+    void testIgnoreGeneratedMethods() {
+        rule.maxMethods = 1
+        String classContent = """
+        class MyClass {
+            void method1() {}
+            void method2() {}
+        }
+        """
+        assertSingleViolation(classContent, 2, 'class MyClass {')
+    }
 
     protected Rule createRule() {
         new MethodCountRule()
