@@ -39,7 +39,7 @@ class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
         	class MyRuntimeException extends RuntimeException{}
         	class MyIllegalStateException extends IllegalStateException{}
             class MyExceptionSubclass extends MyException {}
-            class MyClass {
+            class MyOther {
         	    class MyNestedException extends Exception {}
             }
 
