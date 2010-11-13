@@ -33,22 +33,20 @@ CodeNarc - Open Source Project Reports
 ~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------
- <ruleset xmlns="http://codenarc.org/ruleset/1.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
-        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+ruleset {
 
-    <description>Sample generic rule set</description>
+    description 'A Generic Groovy RuleSet'
 
-    <ruleset-ref path='rulesets/basic.xml'/>
+    ruleset("rulesets/basic.xml")
 
-    <ruleset-ref path='rulesets/imports.xml'/>
+    ruleset("rulesets/imports.xml")
 
-    <ruleset-ref path='rulesets/junit.xml'/>
+    ruleset("rulesets/junit.xml")  {
+        exclude 'JUnitStyleAssertions'
+    }
 
-    <ruleset-ref path='rulesets/size.xml'/>
+    ruleset("rulesets/size.xml")
 
-    <ruleset-ref path='rulesets/unused.xml'/>
-
- </ruleset>
+    ruleset("rulesets/unused.xml")
+}
 +----------------------------------------------------------------------------------------
