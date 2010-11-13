@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * In Groovy, the return keyword is often optional. If a statement is the last line in a method or closure then you do not need to have the return keyword. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryReturnKeywordRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryReturnKeyword'

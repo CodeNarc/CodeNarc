@@ -24,7 +24,7 @@ import org.codenarc.util.AstUtil
  * This rule detects JUnit calling the fail() method without an argument. For better error reporting you should always provide a message. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class JUnitFailWithoutMessageRule extends AbstractAstVisitorRule {
     String name = 'JUnitFailWithoutMessage'

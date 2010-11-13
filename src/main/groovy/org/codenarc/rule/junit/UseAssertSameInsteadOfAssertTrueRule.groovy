@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * This rule detects JUnit calling assertTrue where the first or second parameter is an Object#is() call testing for reference equality. These assertion should be made against the assertSame method instead.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UseAssertSameInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
     String name = 'UseAssertSameInsteadOfAssertTrue'

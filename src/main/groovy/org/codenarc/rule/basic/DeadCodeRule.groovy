@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.stmt.*
  * Dead code appears after a return statement or an exception is thrown. If code appears after one of these statements then it will never be executed and can be safely deleted. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class DeadCodeRule extends AbstractAstVisitorRule {
     String name = 'DeadCode'

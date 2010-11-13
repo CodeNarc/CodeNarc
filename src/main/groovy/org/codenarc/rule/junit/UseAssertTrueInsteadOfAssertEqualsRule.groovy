@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * This rule detects JUnit calling assertEquals where the first parameter is a boolean. These assertions should be made by more specific methods, like assertTrue or assertFalse.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UseAssertTrueInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
     String name = 'UseAssertTrueInsteadOfAssertEquals'

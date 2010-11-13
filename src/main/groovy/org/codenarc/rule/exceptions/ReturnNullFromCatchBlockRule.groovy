@@ -26,7 +26,7 @@ import org.codenarc.util.AstUtil
  * Returning null from a catch block often masks errors and requires the client to handle error codes. In some coding styles this is discouraged. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ReturnNullFromCatchBlockRule extends AbstractAstVisitorRule {
     String name = 'ReturnNullFromCatchBlock'

@@ -23,7 +23,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write "new HashSet()" as "[] as Set", which creates the same object.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ExplicitHashSetInstantiationRule extends AbstractAstVisitorRule {
     String name = 'ExplicitHashSetInstantiation'

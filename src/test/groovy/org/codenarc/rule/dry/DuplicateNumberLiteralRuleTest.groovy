@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for DuplicateNumberLiteralRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 439 $ - $Date: 2010-11-08 15:16:30 -0500 (Mon, 08 Nov 2010) $
+ * @version $Revision$ - $Date$
  */
 class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
 

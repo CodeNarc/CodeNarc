@@ -26,7 +26,7 @@ import org.codenarc.rule.AstVisitor
  * defaults to "0,1" to ignore the constants zero and one.
  *
  * @author Chris Mair
- * @version $Revision: 428 $ - $Date: 2010-11-06 16:36:05 -0400 (Sat, 06 Nov 2010) $
+ * @version $Revision$ - $Date$
  */
 class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
     String name = 'DuplicateNumberLiteral'

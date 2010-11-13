@@ -23,7 +23,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x. And !(!x) can as well. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class DoubleNegativeRule extends AbstractAstVisitorRule {
     String name = 'DoubleNegative'

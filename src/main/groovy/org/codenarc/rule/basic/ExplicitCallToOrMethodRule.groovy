@@ -21,7 +21,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * This rule detects when the or(Object) method is called directly in code instead of using the | operator. A groovier way to express this: a.or(b) is this: a | b
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ExplicitCallToOrMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToOrMethod'

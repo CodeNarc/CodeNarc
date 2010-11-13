@@ -33,7 +33,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
- * @version $Revision: 428 $ - $Date: 2010-11-06 16:36:05 -0400 (Sat, 06 Nov 2010) $
+ * @version $Revision$ - $Date$
  */
 class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
