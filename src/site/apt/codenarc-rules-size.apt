@@ -175,13 +175,10 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
   A class with too many methods is probably a good suspect for refactoring, in order to reduce its
   complexity and find a way to have more fine grained objects.
 
-  NOTE: Groovy may generate some methods for you, and the method
-  count is for all methods in the object, not just the user defined methods in the source file.
-
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| maxMethods          | The maximum number of methods allowed in a class definition.   | 50                     |
+| maxMethods          | The maximum number of methods allowed in a class definition.   | 30                     |
 *---------------------+----------------------------------------------------------------+------------------------+
 
 

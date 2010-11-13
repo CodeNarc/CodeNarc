@@ -31,14 +31,14 @@ class MethodCountRule extends AbstractAstVisitorRule {
     String name = 'MethodCount'
     int priority = 2
     Class astVisitorClass = MethodCountAstVisitor
-    int maxMethods = 50
+    int maxMethods = 30
 }
 
 class MethodCountAstVisitor extends AbstractAstVisitor {
 
     def void visitClassEx(ClassNode node) {
         if (node.methods?.size() > rule.maxMethods) {
-            addViolation node
+            addViolation(node, "Class $node.name has ${node.methods?.size()} methods")
         }
         super.visitClassEx(node);
     }

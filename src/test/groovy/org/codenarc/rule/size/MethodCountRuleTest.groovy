@@ -29,6 +29,7 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == "MethodCount"
+        assert rule.maxMethods == 30
     }
 
     void testSuccessScenario() {
@@ -41,23 +42,26 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
     }
 
     void testSingleViolation() {
-        String classContent = "class MyClass {\n"
-        for (int i = 0; i < rule.maxMethods + 1; i++) {
-            classContent += "public void method${i}() {}\n"
-        }
-        classContent += "\n}"
-        assertSingleViolation(classContent, 1, 'class MyClass {')
+        String classContent = """
+            class MyClass {
+                void method1() { }
+                void method2() { }
+                void method3() { }
+            }
+        """
+        rule.maxMethods = 2
+        assertSingleViolation(classContent, 2, 'class MyClass {', ['MyClass', '3'])
     }
 
     void testIgnoreGeneratedMethods() {
-        rule.maxMethods = 1
+        rule.maxMethods = 2
+
+        // A script will result in generated run and main methods
         String classContent = """
-        class MyClass {
             void method1() {}
             void method2() {}
-        }
         """
-        assertSingleViolation(classContent, 2, 'class MyClass {')
+        assertNoViolations(classContent)
     }
 
     protected Rule createRule() {
