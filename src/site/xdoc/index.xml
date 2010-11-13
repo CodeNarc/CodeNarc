@@ -10,6 +10,14 @@
 
   <!-- Optional HEAD element, which is copied as is into the XHTML <head> element -->
   <head>
+     <style media="screen" type="text/css">
+          table.bodyTable tr.a {
+               background-color:#ffffff;
+          }
+          table.bodyTable tr.b {
+               background-color:#ffffff;
+          }
+     </style>
   </head>
 
   <body>
@@ -23,9 +31,9 @@ Static Analysis for Groovy: Less Bugs, Better Code
 </p>
 
 
-<table  style="background-color:#ffffff">
-<tr style="background-color:#ffffff">
-     <td style="background-color:#ffffff">
+<table>
+<tr>
+     <td width="50%">
           <section name="Try It Now">
           <p>The <a href="http://meetcodenarc.appspot.com/">CodeNarc Web Console</a> let's you play with the latest snapshot version. 
                Enter some text and click execute to see the violations, or run some scripts we made, like 
@@ -40,7 +48,7 @@ Static Analysis for Groovy: Less Bugs, Better Code
           </section>
      </td>
 </tr>
-<tr style="background-color:#ffffff">
+<tr>
      <td>
           <section name="Running CodeNarc">
                <p>
@@ -68,7 +76,7 @@ Static Analysis for Groovy: Less Bugs, Better Code
      </section>
      </td>
 </tr>
-<tr style="background-color:#ffffff">
+<tr>
      <td>
           <section name="Get it from Maven2">
                <p>
