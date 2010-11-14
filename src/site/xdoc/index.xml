@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
   <properties>
-    <title></title>
+    <title/>
     <author email="Codenarc-developer@lists.sourceforge.net">CodeNarc Development Team</author>
   </properties>
 
@@ -17,6 +17,10 @@
           table.bodyTable tr.b {
                background-color:#ffffff;
           }
+          table.bodyTable img {
+               padding-right:8px;
+               float:left;
+          }
      </style>
   </head>
 
@@ -27,73 +31,74 @@ Static Analysis for Groovy: Less Bugs, Better Code
 </div>
 
 <p>
-  <strong>CodeNarc</strong> analyzes Groovy code for defects, bad practices, inconsistencies, style issues and more. A flexible framework for rules, rulesets and custom rules means it's easy to configure CodeNarc to fit into your project. Build tool, framework support, and report generation are all enterprise ready. 
+  <strong>CodeNarc</strong> analyzes Groovy code for defects, bad practices, inconsistencies, style issues
+    and more. A flexible framework for rules, rulesets and custom rules means it's easy to configure CodeNarc
+    to fit into your project. Build tool, framework support, and report generation are all enterprise ready.
 </p>
 
 
 <table>
 <tr>
      <td width="50%">
-          <section name="Try It Now">
-          <p>The <a href="http://meetcodenarc.appspot.com/">CodeNarc Web Console</a> let's you play with the latest snapshot version. 
+          <a href="http://meetcodenarc.appspot.com/"><img src="images/tryit.png" class="bigimage"/></a>
+          The <a href="http://meetcodenarc.appspot.com/">CodeNarc Web Console</a> let's you play with the latest snapshot version.
                Enter some text and click execute to see the violations, or run some scripts we made, like 
                <a href="http://meetcodenarc.appspot.com/">ThrowFromFinally</a>, <a href="http://meetcodenarc.appspot.com/edit/2001">ReturnNullFromCollectionClosure</a>, 
                or <a href="http://meetcodenarc.appspot.com/edit/1">ReturnFromCatch</a>. 
-          </p>
-          </section>
      </td>
      <td>
-          <section name="Rules and Rulesets">
-          <p>CodeNarc triggers violations based on rules and rulesets. The latest version supplies nearly 150 rules and we're adding more every week. Click the rule links to the left to view all the rules, such as the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a> rules. Or you can <a href="codenarc-creating-ruleset.html">create your own custom ruleset</a> yourself. It's fast and fun. </p>
-          </section>
+             <a href="http://sourceforge.net/projects/codenarc/files//"><img src="images/getit.png" class="bigimage" /></a>
+          CodeNarc triggers violations based on rules and rulesets. The latest version supplies nearly 150 rules and
+              we're adding more every week. Click the rule links to the left to view all the rules, such as
+              the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
+              rules. Or you can <a href="codenarc-creating-ruleset.html">create your own custom ruleset</a> yourself.
+              It's fast and fun.
      </td>
 </tr>
 <tr>
      <td>
           <section name="Running CodeNarc">
-               <p>
                  Run CodeNarc with the <a href="codenarc-ant-task.html">Ant Task</a>,
                  the <a href="codenarc-command-line.html">command-line runner</a>, or
                  <a href="codenarc-run-as-a-test.html">as part of your test suite</a>. 
-                    Also,  plugins exist for <strong>Maven</strong>, <strong>Gradle</strong>, <strong>Grails</strong>,
-                    <strong>Griffon</strong>, <strong>Sonar</strong> and <strong>Hudson</strong>. See our 
+                    Also,  plugins exist for <a href="codenarc-other-tools-frameworks.html">Maven</a>,
+                   <a href="codenarc-other-tools-frameworks.html">Gradle</a>, <a href="codenarc-other-tools-frameworks.html">Grails</a>,
+                    <a href="codenarc-other-tools-frameworks.html">Griffon</a>, <a href="codenarc-other-tools-frameworks.html">Sonar</a>
+                   and <a href="codenarc-other-tools-frameworks.html">Hudson</a>. See our 
                     <a href="codenarc-other-tools-frameworks.html">Integration</a> page for more details.
                Reports come in HTML, XML, or text format.  Take a look at a <a href="SampleCodeNarcHtmlReport.html">Sample CodeNarc Report</a>, 
                or example reports from popular Groovy-based <a href="codenarc-opensource-projects.html">open source projects</a>.
-               </p>
           </section>
      </td>
      <td>
      <section name="Requirements">
-          <p>
           <strong>CodeNarc</strong> requires:
           <ul>
-               <li>Groovy version 1.7</li>
+               <li>
+                   <a href="http://groovy.codehaus.org/">Groovy</a> version 1.7</li>
                <li>Java 1.5 or later</li>
                <li><a href="http://logging.apache.org/log4j/index.html">Log4J</a> 1.2.13 or later on the classpath</li>
           </ul>
-          </p>
      </section>
      </td>
 </tr>
 <tr>
      <td>
           <section name="Get it from Maven2">
-               <p>
                For projects built using <a href="http://maven.apache.org/">Maven</a>, <strong>CodeNarc</strong> is available
-               from the <strong>Maven Central Repository</strong>.
+               from the
+                   <a href="http://repo1.maven.org/maven2/org/codenarc/CodeNarc/">Maven Central Repository</a>
                     <ul>
                          <li>groupId = org.codenarc</li>
                          <li>artifactId = CodeNarc</li>
                     </ul>
-               </p>
           </section>
      </td>
      <td>
           <section name="Inspirations">
-               <p>We're inspired by the wonderful <a href="http://pmd.sourceforge.net/">PMD</a>
+             We're inspired by the wonderful <a href="http://pmd.sourceforge.net/">PMD</a>
             and <a href="http://checkstyle.sourceforge.net/">Checkstyle</a> Java static analysis tools, as well
-            as the extensive Groovy inspections performed by <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.</p>
+            as the extensive Groovy inspections performed by <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>.
           </section>
      </td>
 </tr>
