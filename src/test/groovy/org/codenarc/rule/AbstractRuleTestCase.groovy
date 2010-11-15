@@ -185,7 +185,7 @@ actual:               $violation.sourceLine
                 assertContainsAll(violation.message, messageText)
             }
             else {
-                assert violation.message.contains(messageText), "messageText=[$messageText]"
+                assert violation.message.contains(messageText), "\nExpected message text: [$messageText]\nFound message text: [$violation.message]"
             }
         }
     }

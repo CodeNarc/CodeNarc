@@ -389,7 +389,9 @@ class AstUtil {
         if (node.name == target.simpleName) {
             return true
         }
-        false
+        node.interfaces.any { ClassNode declaredInterface ->
+            classNodeImplementsType(declaredInterface, target)
+        }
     }
 
     /**
@@ -480,6 +482,35 @@ class AstUtil {
             return expression.safe
         }
         false
+    }
+
+    /**
+     * Tells you if the ASTNode is a method node for the given name, arity, and return type.
+     * @param node
+     *      the node to inspect
+     * @param methodName
+     *      the expected name of the method
+     * @param numArguments
+     *      the expected number of arguments, optional
+     * @param returnType
+     *      the expected return type, optional
+     * @return
+     *      true if this node is a MethodNode meeting the parameters. false otherwise
+     */
+    static boolean isMethodNode(ASTNode node, String methodName, Integer numArguments = null, Class returnType = null) {
+        if (!node instanceof MethodNode) {
+            return false
+        }
+        if (node.name != methodName) {
+            return false
+        }
+        if (numArguments && node.parameters?.length != numArguments) {
+            return false
+        }
+        if (returnType && !AstUtil.classNodeImplementsType (node.returnType, returnType)) {
+            return false
+        }
+        true
     }
 
     /**
