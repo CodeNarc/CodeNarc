@@ -39,7 +39,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
             }
             class MyUtility {
               private MyUtility(){
-            
+                def inner = new Object() {}
               }
             }
         '''
