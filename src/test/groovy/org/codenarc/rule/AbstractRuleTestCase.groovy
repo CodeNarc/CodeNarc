@@ -174,7 +174,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         assert violation.lineNumber == lineNumber : "Wrong line number for violation: \n$violation\nExpected: $lineNumber\nFound:    $violation.lineNumber\n"
         if (sourceLineText) {
             assert violation.sourceLine
-            assert violation.sourceLine.contains(sourceLineText), """
+            assert violation.sourceLine.contains(sourceLineText), """Problem with source text:
 expected to contain:  $sourceLineText
 actual:               $violation.sourceLine
 """
@@ -185,7 +185,7 @@ actual:               $violation.sourceLine
                 assertContainsAll(violation.message, messageText)
             }
             else {
-                assert violation.message.contains(messageText), "\nExpected message text: [$messageText]\nFound message text: [$violation.message]"
+                assert violation.message.contains(messageText), "\nExpected message text: [$messageText]\nFound message text:    [$violation.message]\n"
             }
         }
     }

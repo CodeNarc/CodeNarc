@@ -13,33 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.expr.NotExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x. And !(!x) can as well. 
+ * It is unnecessary to instantiate Float objects. Instead just use the float literal with the 'F' identifier to force the type, such as 123.45F or 0.42f.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class DoubleNegativeRule extends AbstractAstVisitorRule {
-    String name = 'DoubleNegative'
+class UnnecessaryFloatInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryFloatInstantiation'
     int priority = 2
-    Class astVisitorClass = DoubleNegativeAstVisitor
+    Class astVisitorClass = UnnecessaryFloatInstantiationAstVisitor
 }
 
-class DoubleNegativeAstVisitor extends AbstractAstVisitor {
+class UnnecessaryFloatInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
-    def void visitNotExpression(NotExpression expression) {
-
-        if (expression.expression instanceof NotExpression) {
-            addViolation expression
-        }
-        super.visitNotExpression expression
+    UnnecessaryFloatInstantiationAstVisitor() {
+        super(Float, [String, Double, Float], 'f')
     }
-
-
 }

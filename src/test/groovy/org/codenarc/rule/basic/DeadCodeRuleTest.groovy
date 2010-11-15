@@ -21,7 +21,7 @@ import org.codenarc.rule.Rule
 /**
  * Tests for DeadCodeRule
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class DeadCodeRuleTest extends AbstractRuleTestCase {

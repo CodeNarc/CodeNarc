@@ -15,5 +15,10 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryReturnKeywordRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryIfStatementRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTernaryExpressionRule'/>
-
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryIntegerInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryLongInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryBigIntegerInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryBigDecimalInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDoubleInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryFloatInstantiationRule'/>
 </ruleset>

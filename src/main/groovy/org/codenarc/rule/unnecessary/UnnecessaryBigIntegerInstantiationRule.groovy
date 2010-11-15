@@ -13,33 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.expr.NotExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x. And !(!x) can as well. 
+ * It is unnecessary to instantiate BigInteger objects. Instead just use the literal with the 'G' identifier to force the type, such as 8G or 42G.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class DoubleNegativeRule extends AbstractAstVisitorRule {
-    String name = 'DoubleNegative'
+class UnnecessaryBigIntegerInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryBigIntegerInstantiation'
     int priority = 2
-    Class astVisitorClass = DoubleNegativeAstVisitor
+    Class astVisitorClass = UnnecessaryBigIntegerInstantiationAstVisitor
 }
 
-class DoubleNegativeAstVisitor extends AbstractAstVisitor {
+class UnnecessaryBigIntegerInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
-    def void visitNotExpression(NotExpression expression) {
-
-        if (expression.expression instanceof NotExpression) {
-            addViolation expression
-        }
-        super.visitNotExpression expression
+    UnnecessaryBigIntegerInstantiationAstVisitor() {
+        super(BigInteger, [String], 'G')
     }
-
-
 }
+

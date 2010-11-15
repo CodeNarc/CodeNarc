@@ -13,33 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.expr.NotExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x. And !(!x) can as well. 
+ * It is unnecessary to instantiate Integer objects. Instead just use the literal with the 'I' identifier to force the type, such as 8I or 42i. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class DoubleNegativeRule extends AbstractAstVisitorRule {
-    String name = 'DoubleNegative'
+class UnnecessaryIntegerInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryIntegerInstantiation'
     int priority = 2
-    Class astVisitorClass = DoubleNegativeAstVisitor
+    Class astVisitorClass = UnnecessaryIntegerInstantiationAstVisitor
 }
 
-class DoubleNegativeAstVisitor extends AbstractAstVisitor {
+class UnnecessaryIntegerInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
-    def void visitNotExpression(NotExpression expression) {
-
-        if (expression.expression instanceof NotExpression) {
-            addViolation expression
-        }
-        super.visitNotExpression expression
+    UnnecessaryIntegerInstantiationAstVisitor() {
+        super(Integer, [String, Integer], 'i')
     }
-
-
 }

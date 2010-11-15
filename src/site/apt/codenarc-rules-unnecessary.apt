@@ -5,6 +5,19 @@
 Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+* UnnecessaryBigDecimalInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  It is unnecessary to instantiate BigDecimal objects. Instead just use the decimal literal or the 'G' identifier to force the type, such as 123.45 or 123.45G.
+
+
+* UnnecessaryBigIntegerInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  It is unnecessary to instantiate BigInteger objects. Instead just use the literal with the 'G' identifier to force the type, such as 8G or 42G.
+
+
 * UnnecessaryBooleanExpression Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -53,6 +66,18 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
   This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's
   <<<public>>>, has an empty body, and takes no arguments.
+
+
+* UnnecessaryDoubleInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  It is unnecessary to instantiate Double objects. Instead just use the double literal with 'D' identifier to force the type, such as 123.45d or 0.42d.
+
+
+* UnnecessaryFloatInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  It is unnecessary to instantiate Float objects. Instead just use the float literal with the 'F' identifier to force the type, such as 123.45F or 0.42f.
 
 
 * UnnecessaryIfStatement Rule
@@ -118,6 +143,18 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   should always be <<<true>>>, and <<<c.retainAll(c)>>> should have no effect.
 
 
+* UnnecessaryIntegerInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  It is unnecessary to instantiate Integer objects. Instead just use the literal with the 'I' identifier to force the type, such as 8I or 42i.
+
+
+* UnnecessaryLongInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  It is unnecessary to instantiate Long objects. Instead just use the literal with the 'L' identifier to force the type, such as 8L or 42L.
+
+
 * UnnecessaryOverridingMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -131,6 +168,4 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
   In Groovy, the <<<return>>> keyword is often optional. If a statement is the last line in a method or
   closure then you do not need to have the <<<return>>> keyword.
-
-
 

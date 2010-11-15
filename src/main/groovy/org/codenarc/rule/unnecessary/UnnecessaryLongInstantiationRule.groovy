@@ -13,33 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.expr.NotExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x. And !(!x) can as well. 
+ * It is unnecessary to instantiate Long objects. Instead just use the literal with the 'L' identifier to force the type, such as 8L or 42L.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class DoubleNegativeRule extends AbstractAstVisitorRule {
-    String name = 'DoubleNegative'
+class UnnecessaryLongInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryLongInstantiation'
     int priority = 2
-    Class astVisitorClass = DoubleNegativeAstVisitor
+    Class astVisitorClass = UnnecessaryLongInstantiationAstVisitor
 }
 
-class DoubleNegativeAstVisitor extends AbstractAstVisitor {
+class UnnecessaryLongInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
-    def void visitNotExpression(NotExpression expression) {
-
-        if (expression.expression instanceof NotExpression) {
-            addViolation expression
-        }
-        super.visitNotExpression expression
+    UnnecessaryLongInstantiationAstVisitor() {
+        super(Long, [String, Long], 'L')
     }
-
-
 }
