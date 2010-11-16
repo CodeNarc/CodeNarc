@@ -103,6 +103,18 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'return null')
     }
 
+    void testDefTernaryReturnsNull() {
+        final SOURCE = '''
+            def scriptMethod() {
+                return x ? null : true
+            }
+            def scriptMethod2() {
+                return x ? false : null
+            }
+        '''
+        assertTwoViolations(SOURCE, 3, 'x ? null : true', 6, 'x ? false : null')
+    }
+
     void testDefClassMethodReturnsNull() {
         final SOURCE = '''
             class MyClass {

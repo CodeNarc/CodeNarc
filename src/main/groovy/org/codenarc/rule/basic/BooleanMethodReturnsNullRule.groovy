@@ -16,13 +16,11 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.CastExpression
-import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Method with Boolean return type returns explicit null. A method that returns either Boolean.TRUE, Boolean.FALSE or
@@ -77,14 +75,25 @@ class BooleanReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
     def void visitReturnStatement(ReturnStatement statement) {
-        def expression = statement.expression
-        if (AstUtil.isBoolean(expression)) {
-            callbackFunction()
-        } else if (expression instanceof BooleanExpression) {
-            callbackFunction()
-        } else if (expression instanceof CastExpression && AstUtil.classNodeImplementsType(expression.type, Boolean)) {
-            callbackFunction()
-        } 
+        callbackOnBoolean(statement.expression)
         super.visitReturnStatement(statement)
+    }
+
+    private def callbackOnBoolean(Expression expression) {
+
+        def stack = [expression] as Stack
+        while (stack) {
+            expression = stack.pop()
+            if (AstUtil.isBoolean(expression)) {
+                callbackFunction()
+            } else if (expression instanceof BooleanExpression) {
+                callbackFunction()
+            } else if (expression instanceof CastExpression && AstUtil.classNodeImplementsType(expression.type, Boolean)) {
+                callbackFunction()
+            } else if (expression instanceof TernaryExpression) {
+                stack.push(expression.trueExpression)
+                stack.push(expression.falseExpression)
+            }
+        }
     }
 }
