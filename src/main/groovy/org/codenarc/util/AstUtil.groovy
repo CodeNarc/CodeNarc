@@ -475,11 +475,22 @@ class AstUtil {
      *      true if is null safe dereference.
      */
     static boolean isSafe(Expression expression) {
-        if (expression instanceof MethodCallExpression) {
+        if (expression instanceof MethodCallExpression || expression instanceof PropertyExpression) {
             return expression.safe
         }
-        if (expression instanceof PropertyExpression) {
-            return expression.safe
+        false
+    }
+
+    /**
+     * Tells you if the expression is a spread operator call
+     * @param expression
+     *      expression
+     * @return
+     *      true if is spread expression
+     */
+    static boolean isSpreadSafe(Expression expression) {
+        if (expression instanceof MethodCallExpression || expression instanceof PropertyExpression) {
+            return expression.spreadSafe
         }
         false
     }
@@ -511,6 +522,19 @@ class AstUtil {
             return false
         }
         true
+    }
+
+    /**
+     * Tells you if the given ASTNode is a VariableExpression with the given name.
+     * @param expression
+     *      any AST Node
+     * @param name
+     *      a string name
+     * @return
+     *      true if the node is a variable with the specified name
+     */
+    static boolean isVariable(ASTNode expression, String name) {
+        return (expression instanceof VariableExpression && expression.name == name)
     }
 
     /**

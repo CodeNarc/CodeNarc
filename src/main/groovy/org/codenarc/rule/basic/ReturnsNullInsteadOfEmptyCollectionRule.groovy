@@ -92,17 +92,29 @@ class CollectionReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
     def void visitReturnStatement(ReturnStatement statement) {
-        def expression = statement.expression
-        if (expression instanceof ListExpression || expression instanceof MapExpression) {
-            callbackFunction()
-        }
-        if (expression instanceof ConstructorCallExpression || expression instanceof CastExpression) {
-            [Map, Iterable, List, Collection, ArrayList, Set, HashSet].each {
-                if (AstUtil.classNodeImplementsType(statement.expression.type, it)) {
-                    callbackFunction()
+        expressionReturnsList(statement.expression)
+        super.visitReturnStatement(statement)
+    }
+
+    private def expressionReturnsList(Expression expression) {
+
+        def stack = [expression] as Stack  // as alternative to recursion
+        while (stack) {
+            expression = stack.pop()
+            if (expression instanceof ListExpression || expression instanceof MapExpression) {
+                callbackFunction()
+            }
+            if (expression instanceof ConstructorCallExpression || expression instanceof CastExpression) {
+                [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {
+                    AstUtil.classNodeImplementsType(expression.type, it)
+                }.each {
+                    callbackFunction()                    
                 }
             }
+            if (expression instanceof TernaryExpression) {
+                stack.push(expression.trueExpression)
+                stack.push(expression.falseExpression)
+            }
         }
-        super.visitReturnStatement(statement)
     }
 }

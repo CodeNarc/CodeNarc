@@ -71,6 +71,22 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, "println 'w'", 4, "println 'w'")
     }
 
+    void testEnums() {
+        final SOURCE = '''
+            enum MyEnum {
+              FOO(
+                'FOO'
+                );
+
+              String field
+
+              MyEnum(String field) {
+                 this.field = field
+              }
+            }
+            '''
+        assertNoViolations SOURCE
+    }
     void testMethodCall() {
         final SOURCE = '''
         	println 'w', 'w', 'w'

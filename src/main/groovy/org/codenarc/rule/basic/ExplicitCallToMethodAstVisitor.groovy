@@ -39,7 +39,7 @@ class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
     }
 
     def void visitMethodCallExpression(MethodCallExpression call) {
-        if (!AstUtil.isSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
+        if (!AstUtil.isSafe(call) && !AstUtil.isSpreadSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
             if (!rule.ignoreThisReference || !AstUtil.isMethodCallOnObject(call, 'this')) {
                 if (!AstUtil.isSafe(call.objectExpression)) {
                     addViolation call

@@ -21,4 +21,8 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryBigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDoubleInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryFloatInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryCollectCallRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryCatchBlockRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryObjectReferencesRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryGetterRule'/>
 </ruleset>

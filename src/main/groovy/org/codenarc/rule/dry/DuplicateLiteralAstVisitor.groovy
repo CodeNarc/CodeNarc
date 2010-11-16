@@ -71,6 +71,9 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
     }
 
     def void visitFieldEx(FieldNode node) {
+        if (node.type == node.owner) {
+            ignoreValuesSet.add node.name
+        }
         addViolationIfDuplicate(node.initialValueExpression, node.isStatic())
         super.visitFieldEx node
     }
@@ -101,7 +104,6 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
     }
 
     def void visitMapEntryExpression(MapEntryExpression expression) {
-        //addViolationIfDuplicate expression.keyExpression
         addViolationIfDuplicate expression.valueExpression
         super.visitMapEntryExpression expression
     }

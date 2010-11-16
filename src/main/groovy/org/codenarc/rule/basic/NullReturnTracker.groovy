@@ -17,6 +17,8 @@ package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 
@@ -31,12 +33,28 @@ class NullReturnTracker extends AbstractAstVisitor {
     def parent
     static final ERROR_MSG = 'Returning null from a method.'
     def void visitReturnStatement(ReturnStatement statement) {
-        if (statement.expression == ConstantExpression.NULL) {
-            parent.addViolation(statement, ERROR_MSG)
-        } else if (statement.expression instanceof ConstantExpression && statement.expression.value == null) {
+        def expression = statement.expression
+        if (expressionReturnsNull(expression)) {
             parent.addViolation(statement, ERROR_MSG)
         }
         super.visitReturnStatement(statement)
+    }
+
+    private def expressionReturnsNull(Expression expression) {
+
+        def stack = [expression] as Stack  // alternative to recursion
+        while (stack) {
+            expression = stack.pop()
+            if (expression == ConstantExpression.NULL) {
+                return true
+            } else if (expression instanceof ConstantExpression && expression.value == null) {
+                return true
+            } else if (expression instanceof TernaryExpression) {
+                stack.push(expression.trueExpression)
+                stack.push(expression.falseExpression)
+            } 
+        }
+        false
     }
 
     def void visitClosureExpression(ClosureExpression expression) {

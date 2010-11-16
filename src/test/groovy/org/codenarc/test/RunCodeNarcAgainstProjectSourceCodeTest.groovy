@@ -15,10 +15,6 @@
  */
 package org.codenarc.test
 
-import org.codenarc.analyzer.StringSourceAnalyzer
-import org.codenarc.results.Results
-import org.codenarc.ruleset.RuleSetUtil
-
 /**
  * Test that runs CodeNarc against the project source code
  *
@@ -29,19 +25,6 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
 
     private static final GROOVY_FILES = '**/*.groovy'
     private static final RULESET_FILES = 'RunCodeNarcAgainstProjectSourceCode.ruleset'
-
-    void testRunAgainstString() {
-        def source = '''
-            def x = '123'
-            def y = '123'
-'''
-        def ruleset = RuleSetUtil.loadRuleSetFile(RULESET_FILES)
-        Results results = new StringSourceAnalyzer(source).analyze(ruleset)
-        assert !results.getViolationsWithPriority(0)
-        assert !results.getViolationsWithPriority(1)
-        assert 2 == results.getViolationsWithPriority(2).size()
-        assert 1 == results.getViolationsWithPriority(3).size()
-    }
 
 
     void testRunCodeNarc() {

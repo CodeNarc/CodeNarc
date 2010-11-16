@@ -60,6 +60,58 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
+* UnnecessaryCatchBlock Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  Violations are triggered when a catch block does nothing but throw the original exception. In this scenario
+  there is usually no need for a catch block, just let the exception be thrown from the original code. This
+  condition frequently occurs when catching an exception for debugging purposes but then forgetting to take the
+  catch statement out. 
+
+* UnnecessaryCollectCall Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  Some method calls to Object.collect(Closure) can be replaced with the spread operator. For instance,
+  list.collect { it.multiply(2) } can be replaced by list*.multiply(2).
+
+ Examples of violations include:
+
+-------------------------------------------------------------------------------
+
+    assert [1, 2, 3].collect { it.multiply(2) }
+    assert [1, 2, 3].collect { x -> x.multiply(2) }
+    ["1", "2", "3"].collect { it.bytes }
+
+ The following code does not produce violations:
+
+-------------------------------------------------------------------------------
+    [1, 2, 3].collect { it * it }   // OK, closure parameter is referenced twice
+
+    [1, 2, 3].mapMethod { it.multiply(5) } // OK, method call is not collect
+
+    [1, 2, 3].collect(5) // OK, collect parameter is not a closure
+
+    // OK, the closure is not a simple one line statement
+    [1, 2, 3].collect { println it; it.multiply(5) }
+
+    // OK, closure has too many arguments
+    [1, 2, 3].collect { a, b -> a.multiply(b) }
+
+    // OK, closure statement references parameter multiple times
+    [1, 2, 3].collect { it.multiply(it) }
+
+    // OK, it is referenced several times in the closure
+    [1, 2, 3].collect { it.multiply(2).multiply(it) }
+    ["1", "2", "3"].collect { it.bytes.foo(it) }
+
+    // OK, chained methods are too complex to analyze at this point
+    [1, 2, 3].collect { it.multiply(2).multiply(4) }
+
+    // in general the above examples can be rewritten like this: 
+    [1, 2, 3]*.multiply(2)
+    ["1", "2", "3"]*.bytes
+
+
 * UnnecessaryConstructor Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -143,6 +195,34 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   should always be <<<true>>>, and <<<c.retainAll(c)>>> should have no effect.
 
 
+* UnnecessaryGetter Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  Checks for explicit calls to getter/accessor methods which can, for the most part, be replaced by property access.
+  A getter is defined as a method call that matches get[A-Z] but not getClass() or get[A-Z][A-Z] such as getURL().
+  Getters do not take method arguments.
+
+  These bits of code produce violations:
+
+-------------------------------------------------------------------------------
+    x.getProperty()
+    x.getFirst()
+    x.getFirstName()
+    x.getA()
+-------------------------------------------------------------------------------
+
+  These bits of code do not:
+
+-------------------------------------------------------------------------------
+    x.property
+    x.first
+    x.firstName
+    x.a
+    x.getURL()
+    x.getClass()
+    x.getProperty('key')
+-------------------------------------------------------------------------------
+
 * UnnecessaryIntegerInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   New in CodeNarc 0.12
@@ -153,6 +233,55 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   New in CodeNarc 0.12
   It is unnecessary to instantiate Long objects. Instead just use the literal with the 'L' identifier to force the type, such as 8L or 42L.
+
+
+* UnnecessaryObjectReferences Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  Violations are triggered when an excessive set of consecutive statements all reference the same variable. This can be
+  made more readable by using a with or identity block. By default, 5 references are allowed. You can override this
+  property using the maxReferencesAllowed property on the rule.
+
+  These two bits of code produce violations:
+
+-------------------------------------------------------------------------------
+    def p1 = new Person()
+    p1.firstName = 'Hamlet'
+    p1.lastName = "D'Arcy"
+    p1.employer = 'Canoo'
+    p1.street = 'Kirschgaraten 5'
+    p1.city = 'Basel'
+    p1.zipCode = '4051'
+
+    def p2 = new Person()
+    p2.setFirstName('Hamlet')
+    p2.setLastName("D'Arcy")
+    p2.setEmployer('Canoo')
+    p2.setStreet('Kirschgaraten 5')
+    p2.setCity('Basel')
+    p2.setZipCode('4051')
+-------------------------------------------------------------------------------
+
+However, these two bits of code do not because they use either a <<<with>>> or <<<identity>>> block.
+-------------------------------------------------------------------------------
+    def p1 = new Person().with {
+        firstName = 'Hamlet'
+        lastName = "D'Arcy"
+        employer = 'Canoo'
+        street = 'Kirschgaraten 5'
+        city = 'Basel'
+        zipCode = '4051'
+    }
+
+    def p2 = new Person().identity {
+        firstName = 'Hamlet'
+        lastName = "D'Arcy"
+        employer = 'Canoo'
+        street = 'Kirschgaraten 5'
+        city = 'Basel'
+        zipCode = '4051'
+    }
+-------------------------------------------------------------------------------
 
 
 * UnnecessaryOverridingMethod Rule
