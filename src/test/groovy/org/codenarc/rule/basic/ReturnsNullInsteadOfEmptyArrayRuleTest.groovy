@@ -86,6 +86,21 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+
+    void testTernaryReturns() {
+        final SOURCE = '''
+                def a =  {
+                    return foo ? null : [] as String[]
+                }
+                def b =  {
+                    return foo ? [] as String[] : null
+                }
+            '''
+        assertTwoViolations SOURCE,
+                3, 'foo ? null : [] as String[]',
+                6, 'foo ? [] as String[] : null'
+    }
+
     void testDefMethodInClass() {
         final SOURCE = '''
             class MyClass {
@@ -98,18 +113,17 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
-    // todo: uncomment when groovy 1.7 is supported
-//    void testStringArrayMethodInInnerClass() {
-//        final SOURCE = '''
-//            def o = new Object() {
-//                String[] myMethod() {
-//                    if (x) return null
-//                    return [] as String[]
-//                }
-//            }
-//        '''
-//        assertSingleViolation(SOURCE, 4, 'null')
-//    }
+    void testStringArrayMethodInInnerClass() {
+        final SOURCE = '''
+            def o = new Object() {
+                String[] myMethod() {
+                    if (x) return null
+                    return [] as String[]
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'null')
+    }
 
     void testInClosure() {
         final SOURCE = '''
@@ -138,48 +152,48 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'null', 8, 'null')
     }
 
-    // todo: uncomment when groovy 1.7 is supported
-//    void testInAnonymousClassWithinAnonymousClass() {
-//        final SOURCE = '''
-//            def a = new Object() {
-//                String[] m1() {
-//                    def b = new Object() {
-//                        String[] m1() {
-//                            return null
-//                        }
-//                        String[] m2() {
-//                            return null
-//                        }
-//                    }
-//                    return [] as String[]
-//                }
-//            }
-//        '''
-//        assertTwoViolations(SOURCE, 6, 'null', 9, 'null')
-//    }
 
-    // todo: uncomment when groovy 1.7 is supported
-//    void testClosureInAnonymousClassWithinAnonymousClass() {
-//        final SOURCE = '''
-//            def a = new Object() {
-//                String[] m1() {
-//                    def b = new Object() {
-//                        void m1() {
-//                            def z = {
-//                                if (q) {
-//                                    return null
-//                                } else {
-//                                    return [] as String[]
-//                                }
-//                            }
-//                        }
-//                    }
-//                    return [] as String[]
-//                }
-//            }
-//        '''
-//        assertSingleViolation(SOURCE, 8, 'null')
-//    }
+    void testInAnonymousClassWithinAnonymousClass() {
+        final SOURCE = '''
+            def a = new Object() {
+                String[] m1() {
+                    def b = new Object() {
+                        String[] m1() {
+                            return null
+                        }
+                        String[] m2() {
+                            return null
+                        }
+                    }
+                    return [] as String[]
+                }
+            }
+        '''
+        assertTwoViolations(SOURCE, 6, 'null', 9, 'null')
+    }
+
+
+    void testClosureInAnonymousClassWithinAnonymousClass() {
+        final SOURCE = '''
+            def a = new Object() {
+                String[] m1() {
+                    def b = new Object() {
+                        void m1() {
+                            def z = {
+                                if (q) {
+                                    return null
+                                } else {
+                                    return [] as String[]
+                                }
+                            }
+                        }
+                    }
+                    return [] as String[]
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 8, 'null')
+    }
 
     protected Rule createRule() {
         new ReturnsNullInsteadOfEmptyArrayRule()

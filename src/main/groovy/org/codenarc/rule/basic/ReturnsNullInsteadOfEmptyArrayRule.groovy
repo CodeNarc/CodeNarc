@@ -18,6 +18,8 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -74,12 +76,24 @@ class ArrayReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
     def void visitReturnStatement(ReturnStatement statement) {
-        if (statement.expression instanceof CastExpression) {
-            if (statement.expression.type.isArray()) {
-                callbackFunction()
+
+        callBackForArrayReturns(statement.expression)
+        super.visitReturnStatement(statement)
+    }
+
+    private def callBackForArrayReturns(Expression exp) {
+        def stack = [exp] as Stack
+        while (stack) {
+            exp = stack.pop()
+            if (exp instanceof CastExpression) {
+                if (exp.type.isArray()) {
+                    callbackFunction()
+                }
+            } else if (exp instanceof TernaryExpression) {
+                stack.push(exp.trueExpression)
+                stack.push(exp.falseExpression)
             }
         }
-        super.visitReturnStatement(statement)
     }
 }
 
