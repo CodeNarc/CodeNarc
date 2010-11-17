@@ -22,7 +22,8 @@ import org.codenarc.rule.AstVisitor
  * Code containing duplicate String literals can usually be improved by declaring the String as a constant field.
  * <p/>
  * Set the optional <code>ignoreStrings</code> property to a comma-separated list (String) of
- * the strings that should be ignored by this rule (i.e., not cause a violation).
+ * the strings that should be ignored by this rule (i.e., not cause a violation). This property
+ * defaults to "" to ignore empty strings.
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
@@ -32,7 +33,7 @@ class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
     String name = 'DuplicateStringLiteral'
     int priority = 2
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
-    String ignoreStrings
+    String ignoreStrings = ''
 
     @Override
     AstVisitor getAstVisitor() {
@@ -41,7 +42,10 @@ class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
     }
 
     private Set parseIgnoreValues() {
-        def strings = ignoreStrings ? ignoreStrings.tokenize(',') : []
+        if (ignoreStrings == null) {
+            return Collections.EMPTY_SET
+        }
+        def strings = ignoreStrings.contains(',') ? ignoreStrings.tokenize(',') : [ignoreStrings]
         strings as Set
     }
 }

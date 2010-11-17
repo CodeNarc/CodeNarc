@@ -204,6 +204,13 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testIgnoreNumbers_ByDefaultIgnoresEmptyString() {
+        final SOURCE = '''
+        	def x = ['', 'abc', '', 'def', '']
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new DuplicateStringLiteralRule()
     }

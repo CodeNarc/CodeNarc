@@ -52,7 +52,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| ignoreStrings       | The optional comma-separated list of Strings that should be    | <<<null>>>             |
+| ignoreStrings       | The optional comma-separated list of Strings that should be    | <<<''>>> (empty string)|
 |                     | ignored (i.e., not cause a violation).                         |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
