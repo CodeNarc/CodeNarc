@@ -26,7 +26,7 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
     private static final GROOVY_FILES = '**/*.groovy'
     private static final RULESET_FILES = 'RunCodeNarcAgainstProjectSourceCode.ruleset'
 
-
+    @SuppressWarnings('JUnitTestMethodWithoutAssert')
     void testRunCodeNarc() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'RunCodeNarcAgainstProjectSourceCode.properties') // ignore
         def ant = new AntBuilder()

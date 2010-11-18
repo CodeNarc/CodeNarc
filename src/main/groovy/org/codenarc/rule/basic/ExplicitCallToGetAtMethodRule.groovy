@@ -16,6 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator. A groovier way to express this: a.getAt(b) is this: a[b]
@@ -33,5 +34,10 @@ class ExplicitCallToGetAtMethodRule extends AbstractAstVisitorRule {
 class ExplicitCallToGetAtMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
     def ExplicitCallToGetAtMethodAstVisitor() {
         super('getAt');
+    }
+
+    @Override
+    String getViolationMessage(MethodCallExpression call) {
+        "Explicit call to ${call.text} method can be rewritten as ${call.objectExpression.text}[${call.arguments.text}]"
     }
 }

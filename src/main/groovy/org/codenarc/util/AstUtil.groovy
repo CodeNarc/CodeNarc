@@ -36,6 +36,7 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import java.lang.reflect.Modifier
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -46,7 +47,7 @@ import org.codehaus.groovy.ast.expr.BinaryExpression
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-@SuppressWarnings('DuplicateLiteral')
+@SuppressWarnings(['DuplicateLiteral', 'MethodCount'])
 class AstUtil {
     private static final PREDEFINED_CONSTANTS = ['Boolean': ['FALSE', 'TRUE']]
 
@@ -537,6 +538,22 @@ class AstUtil {
         return (expression instanceof VariableExpression && expression.name == name)
     }
 
+    /**
+     * Tells you if the ASTNode has a public modifier on it. If the node does not have modifiers at all (like
+     * a variable expression) then false is returned.
+     * @param node
+     *      node to query
+     * @return
+     *      true if definitely public, false if not public or unknown
+     */
+    static boolean isPublic(ASTNode node) {
+        def modifiers = node.properties['modifiers']
+        if (modifiers && modifiers instanceof Integer) {
+            return Modifier.isPublic(modifiers)
+        }
+        false
+    }
+    
     /**
      * Private constructor. All methods are static.
      */

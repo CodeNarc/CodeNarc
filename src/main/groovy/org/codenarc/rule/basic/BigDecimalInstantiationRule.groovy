@@ -42,4 +42,8 @@ class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisito
             (firstArgExpression instanceof ConstantExpression) &&
             (firstArgExpression.type.name == 'java.math.BigDecimal' || firstArgExpression.type.name == 'java.lang.Double')
     }
+
+    @Override protected String getViolationMessage(ConstructorCallExpression call) {
+        """Call to $call.text uses the double constructor and should probably be replaced with new ${call.type.name}("${call.arguments?.expressions?.first().text}")"""
+    }
 }

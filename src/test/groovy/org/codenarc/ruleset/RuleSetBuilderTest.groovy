@@ -243,7 +243,9 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('DoNothing', [priority:1, enabled:false])
     }
 
+    @SuppressWarnings('JUnitTestMethodWithoutAssert')
     void testDescription() {
+        // lack of exception indicated success
         ruleSetBuilder.ruleset {
             description 'abc'
         }

@@ -39,7 +39,9 @@ class BooleanInstantiationRuleTest extends AbstractRuleTestCase {
                 def b2 = new java.lang.Boolean(false)
             }
         '''
-        assertTwoViolations(SOURCE, 3, 'new Boolean(true)', 5, 'new java.lang.Boolean(false)')
+        assertTwoViolations(SOURCE,
+                3, 'new Boolean(true)', 'There is typically no need to instantiate Boolean instances.',
+                5, 'new java.lang.Boolean(false)', 'There is typically no need to instantiate Boolean instances.')
     }
 
     void testApplyTo_NewBoolean_NotWithinClass() {
@@ -65,7 +67,9 @@ class BooleanInstantiationRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertTwoViolations(SOURCE, 4, 'Boolean.valueOf(true)', 6, 'Boolean.valueOf(false)')
+        assertTwoViolations(SOURCE,
+                4, 'Boolean.valueOf(true)', 'Call to Boolean.valueOf(true) is unnecessary and can probably be replaced with simply true',
+                6, 'Boolean.valueOf(false)', 'Call to Boolean.valueOf(false) is unnecessary and can probably be replaced with simply false')
     }
 
     void testApplyTo_WithinEnum() {

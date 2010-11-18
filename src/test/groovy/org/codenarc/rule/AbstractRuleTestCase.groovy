@@ -49,6 +49,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         }
     }
 
+    @SuppressWarnings('JUnitTestMethodWithoutAssert')
     void testApplyTo_CompilerError() {
         final SOURCE = '''
             @will not compile@ &^%$#

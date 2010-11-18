@@ -53,20 +53,20 @@ class CodeNarcTaskTest extends AbstractTestCase {
 
     void testExecute_MaxPriority1Violations() {
         codeNarcTask.maxPriority1Violations = 10
-        testMaxViolations(1, 13)
+        assertMaxViolations(1, 13)
     }
 
     void testExecute_MaxPriority2Violations() {
         codeNarcTask.maxPriority2Violations = 10
-        testMaxViolations(2, 12)
+        assertMaxViolations(2, 12)
     }
 
     void testExecute_MaxPriority3Violations() {
         codeNarcTask.maxPriority3Violations = 10
-        testMaxViolations(3, 11)
+        assertMaxViolations(3, 11)
     }
 
-    private void testMaxViolations(int priority, int numViolations) {
+    private void assertMaxViolations(int priority, int numViolations) {
         codeNarcTask.addFileset(fileSet)
         def reportWriter = [ writeReport: {ctx, results -> } ]
         codeNarcTask.reportWriters = [reportWriter]

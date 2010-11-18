@@ -24,9 +24,11 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Violations are triggered when a catch block does nothing but throw the original exception. In this scenario there is usually no need for a catch block, just let the exception be thrown from the original code. This condition frequently occurs when catching an exception for debugging purposes but then forgetting to take the catch statement out. 
+ * Violations are triggered when a catch block does nothing but throw the original exception. In this scenario there is
+ * usually no need for a catch block, just let the exception be thrown from the original code. This condition frequently
+ * occurs when catching an exception for debugging purposes but then forgetting to take the catch statement out. 
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class UnnecessaryCatchBlockRule extends AbstractAstVisitorRule {

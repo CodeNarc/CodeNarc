@@ -26,7 +26,7 @@ import org.codenarc.util.AstUtil
  * A getter is defined as a method call that matches get[A-Z] but not getClass() or get[A-Z][A-Z] such as getURL().
  * Getters do not take method arguments. 
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class UnnecessaryGetterRule extends AbstractAstVisitorRule {

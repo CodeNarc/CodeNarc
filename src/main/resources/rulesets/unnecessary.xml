@@ -25,4 +25,5 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCatchBlockRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryObjectReferencesRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryGetterRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryCallForLastElementRule'/>
 </ruleset>

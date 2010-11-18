@@ -60,6 +60,18 @@ class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testDoubleMessagesAreNotCreated() {
+        final  SOURCE = '''
+            class C {
+                def m = {
+                    synchronized(getClass()) {
+                        // ...
+                    }
+                }
+            } '''
+        assertSingleViolation(SOURCE, 4, 'synchronized(getClass())')
+    }
+
     protected Rule createRule() {
         new SynchronizedOnGetClassRule()
     }

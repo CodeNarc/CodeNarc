@@ -37,10 +37,12 @@ class ReturnsNullInsteadOfEmptyCollectionRule extends AbstractAstVisitorRule {
 
 class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisitor {
 
+    private static final String ERROR_MSG = 'Returning null from a method that might return a Collection or Map'
+
     def void visitMethodEx(MethodNode node) {
         if (methodReturnsCollection(node)) {
             // does this method ever return null?
-            node.code?.visit(new NullReturnTracker(parent: this))
+            node.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
         }
         super.visitMethodEx(node)
     }
@@ -48,7 +50,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
     def void handleClosure(ClosureExpression expression) {
         if (closureReturnsCollection(expression)) {
             // does this closure ever return null?
-            expression.code?.visit(new NullReturnTracker(parent: this))
+            expression.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
         }
         super.visitClosureExpression(expression)
     }

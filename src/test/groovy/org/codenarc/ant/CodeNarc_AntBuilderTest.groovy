@@ -45,12 +45,6 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
             fileset(dir:'samples/src') {
                 include(name:"**/*.groovy")
             }
-//           fileset(dir:'src/main/groovy') {
-//               include(name:"**/*.groovy")
-//           }
-//           fileset(dir:'src/test/groovy') {
-//               include(name:"**/*.groovy")
-//           }
            report(type:HTML) {
                option(name:'title', value:TITLE)
                option(name:'outputFile', value:HTML_REPORT_FILE)

@@ -53,7 +53,9 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, "def b2 = new BigDecimal(12.0001)")
+        assertSingleViolation(SOURCE, 4,
+                'def b2 = new BigDecimal(12.0001)',
+                'Call to new BigDecimal(12.0001) uses the double constructor and should probably be replaced with new BigDecimal("12.0001")')
     }
 
     void testApplyTo_Violation_NotWithinClass() {

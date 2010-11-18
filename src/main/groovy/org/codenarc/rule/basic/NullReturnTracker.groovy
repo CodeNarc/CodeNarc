@@ -31,11 +31,11 @@ import org.codenarc.rule.AbstractAstVisitor
 class NullReturnTracker extends AbstractAstVisitor {
 
     def parent
-    static final ERROR_MSG = 'Returning null from a method.'
+    def errorMessage
     def void visitReturnStatement(ReturnStatement statement) {
         def expression = statement.expression
         if (expressionReturnsNull(expression)) {
-            parent.addViolation(statement, ERROR_MSG)
+            parent.addViolation(statement, errorMessage)
         }
         super.visitReturnStatement(statement)
     }

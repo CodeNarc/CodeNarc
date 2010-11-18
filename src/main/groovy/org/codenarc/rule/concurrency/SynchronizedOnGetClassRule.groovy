@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.concurrency
 
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * Synchronized on getClass rather than class literal. This instance method synchronizes on this.getClass(). If this class is subclassed, subclasses will synchronize on the class object for the subclass, which isn't likely what was intended.
@@ -36,6 +36,10 @@ class SynchronizedOnGetClassRule extends AbstractAstVisitorRule {
 class SynchronizedOnGetClassAstVisitor extends AbstractAstVisitor {
 
     def void visitSynchronizedStatement(SynchronizedStatement statement) {
+        if (!isFirstVisit(statement)) {
+            return
+        }
+        
         if (statement.expression instanceof MethodCallExpression && AstUtil.isMethodNamed(statement.expression, 'getClass')) {
             if (statement.expression.arguments.properties['expressions']?.size() == 0) {
                 addViolation statement

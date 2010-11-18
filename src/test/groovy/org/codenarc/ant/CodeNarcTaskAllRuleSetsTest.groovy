@@ -51,7 +51,7 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
     void testExecute_MultipleRuleSetFiles() {
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
-        verifyReportFile()
+        assertReportFileExists()
     }
 
     void setUp() {
@@ -67,7 +67,7 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
         outputFile = new File(REPORT_FILE)
     }
 
-    private void verifyReportFile() {
+    private void assertReportFileExists() {
         assert outputFile.exists()
     }
 

@@ -30,9 +30,16 @@ abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
      */
     protected abstract isConstructorCallAViolation(ConstructorCallExpression constructorCall)
 
+    protected abstract String getViolationMessage(ConstructorCallExpression call);
+    
+    @SuppressWarnings('CatchThrowable')
     void visitConstructorCallExpression(ConstructorCallExpression constructorCall) {
         if (isFirstVisit(constructorCall) && isConstructorCallAViolation(constructorCall)) {
-            addViolation(constructorCall)
+            try {
+                addViolation(constructorCall, getViolationMessage(constructorCall))
+            } catch (Throwable t) {
+                addViolation(constructorCall)
+            }
         }
         super.visitConstructorCallExpression(constructorCall)
     }

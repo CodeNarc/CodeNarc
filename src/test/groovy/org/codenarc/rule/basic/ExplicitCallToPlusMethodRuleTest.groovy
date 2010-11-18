@@ -55,7 +55,7 @@ class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             a.plus(b)
         '''
-        assertSingleViolation(SOURCE, 2, 'a.plus(b)')
+        assertSingleViolation(SOURCE, 2, 'a.plus(b)', 'Explicit call to a.plus(b) method can be rewritten as a + (b)')
     }
 
     protected Rule createRule() {

@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.junit
 
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codenarc.util.AstUtil
 
 /**
  * Utility methods for JUnit rule classes. This class is not intended for general use.
@@ -60,6 +61,30 @@ class JUnitUtil {
                 methodNode.parameters.size() == 0 &&
                 !AstUtil.getAnnotation(methodNode, 'After') &&
                 methodNode.code instanceof BlockStatement)
+    }
+
+    /**
+     * Tells you if an ASTNode is a test MethodNode. A method node is a MethodNode and is named test.* or is annotated
+     * with @Test or @org.junit.Test,
+     * @param node
+     *       the node to analyze
+     * @return
+     *      true if the node is a test method
+     */
+    static boolean isTestMethod(ASTNode node) {
+        if (!(node instanceof MethodNode)) {
+            return false
+        }
+        if (node.returnType.name != "void") {
+            return false
+        }
+        if (AstUtil.isPublic(node) && node.name?.startsWith("test")) {
+            return true
+        }
+        node.properties['annotations']?.any { annotation ->
+            def name = annotation?.properties['classNode']?.name
+            name == 'Test' || name == 'org.junit.Test'
+        }
     }
 
     /**

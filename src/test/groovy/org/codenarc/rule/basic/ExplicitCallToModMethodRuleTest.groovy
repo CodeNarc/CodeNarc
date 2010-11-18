@@ -46,7 +46,7 @@ class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             a.mod(b)
         '''
-        assertSingleViolation(SOURCE, 2, 'a.mod(b)')
+        assertSingleViolation(SOURCE, 2, 'a.mod(b)', 'Explicit call to a.mod(b) method can be rewritten as a % (b)')
     }
 
 

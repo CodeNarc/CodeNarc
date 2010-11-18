@@ -34,22 +34,22 @@ class DefaultResourceFactoryTest extends AbstractTestCase {
     }
 
     void testGetResource_NoPrefix() {
-        testGetResource(PATH, ClassPathResource)
+        assertResourceTypeAndLocation(PATH, ClassPathResource)
     }
 
     void testGetResource_HttpPrefix() {
-        testGetResource("http://codenarc.org", UrlResource) 
+        assertResourceTypeAndLocation("http://codenarc.org", UrlResource)
     }
 
     void testGetResource_FtpPrefix() {
-        testGetResource("ftp://codenarc.org", UrlResource) 
+        assertResourceTypeAndLocation("ftp://codenarc.org", UrlResource)
     }
 
     void testGetResource_ClassPathPrefix() {
-        testGetResource("classpath:" + PATH, ClassPathResource, PATH)
+        assertResourceTypeAndLocation("classpath:" + PATH, ClassPathResource, PATH)
     }
 
-    private void testGetResource(String path, Class resourceClass, String expectedResourcePath=path) {
+    private void assertResourceTypeAndLocation(String path, Class resourceClass, String expectedResourcePath=path) {
         def resource = resourceFactory.getResource(path)
         assert resource.class == resourceClass
         assert resource.getPath() == expectedResourcePath

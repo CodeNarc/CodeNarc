@@ -25,7 +25,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
+abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
 
     final String methodName
 
@@ -42,10 +42,21 @@ class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
         if (!AstUtil.isSafe(call) && !AstUtil.isSpreadSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
             if (!rule.ignoreThisReference || !AstUtil.isMethodCallOnObject(call, 'this')) {
                 if (!AstUtil.isSafe(call.objectExpression)) {
-                    addViolation call
+                    safelyAddViolation(call)
                 }
             }
         }
         super.visitMethodCallExpression call
     }
+
+    @SuppressWarnings('CatchThrowable')
+    private def safelyAddViolation(MethodCallExpression call) {
+        try {
+            addViolation call, getViolationMessage(call)
+        } catch (Throwable t) {
+            addViolation call, 'Explicit call to $methodName can be simplified using Groovy operator overloading.'
+        }
+    }
+
+    abstract String getViolationMessage(MethodCallExpression exp)
 }

@@ -53,7 +53,7 @@ class StringInstantiationRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, "new String('abc')")
+        assertSingleViolation(SOURCE, 4, "new String('abc')", 'There is typically no need to call the String constructor')
     }
 
     void testApplyTo_Violation_NotWithinClass() {

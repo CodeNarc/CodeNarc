@@ -71,7 +71,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
      */
     protected String sourceLine(ASTNode node) {
         // TODO Handle statements that cross multiple lines?
-        sourceCode.line(node.lineNumber - 1)
+        sourceCode.line(findLastLineNumber(node) - 1)
     }
 
     /**
@@ -84,9 +84,27 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         if (!isSuppressed) {
             def lineNumber = node.lineNumber
             if (lineNumber >= 0) {
+                if (node instanceof AnnotatedNode) {
+                    lineNumber = findLastLineNumber(node)
+                }
                 def sourceLine = sourceLine(node)
                 violations.add(new Violation(rule: rule, sourceLine: sourceLine, lineNumber: lineNumber, message: message))
             }
+        }
+    }
+
+    /**
+     * gets the last line number of a node, taking into account annotations
+     * @param node
+     * @return
+     */
+    private static int findLastLineNumber(ASTNode node) {
+        if (node instanceof AnnotatedNode) {
+            node.annotations?.inject(node.lineNumber) { int acc, AnnotationNode val ->
+                Math.max(acc, val.lastLineNumber)
+            }
+        } else {
+            node.lineNumber
         }
     }
 

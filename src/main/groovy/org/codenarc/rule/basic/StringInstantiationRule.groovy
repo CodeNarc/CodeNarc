@@ -40,5 +40,9 @@ class StringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
         def firstArgExpression = constructorCall.arguments?.expressions?.getAt(0)
         constructorCall.text =~ NEW_STRING && (firstArgExpression instanceof ConstantExpression)
     }
+
+    @Override protected String getViolationMessage(ConstructorCallExpression call) {
+        "There is typically no need to call the String constructor"
+    }
 }
 

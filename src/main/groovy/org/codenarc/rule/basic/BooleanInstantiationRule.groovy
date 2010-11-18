@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.Expression
 
 /**
  * Rule that checks for direct call to Boolean constructor - use Boolean.valueOf() instead.
@@ -46,11 +47,17 @@ class BooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
         if (isFirstVisit(methodCall)) {
             def args = AstUtil.getMethodArguments(methodCall)
             def isMatch = AstUtil.isMethodCall(methodCall, 'Boolean', 'valueOf', 1) &&
-                args[0] instanceof ConstantExpression && args[0].value in [true, false]
+                    args[0] instanceof ConstantExpression && args[0].value in [true, false]
             if (isMatch) {
-                addViolation(methodCall)
+                addViolation(methodCall,
+                        "Call to $methodCall.text is unnecessary and can probably be replaced with simply ${args[0].value}")
             }
         }
         super.visitMethodCallExpression(methodCall)
+    }
+
+    @Override
+    protected String getViolationMessage(ConstructorCallExpression call) {
+        'There is typically no need to instantiate Boolean instances.'
     }
 }
