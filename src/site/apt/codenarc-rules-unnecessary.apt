@@ -185,6 +185,10 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     } else {
         return Boolean.FALSE
     }
+
+    if (someExpression)         // (implicit return) can be replaced by: someExpression
+        true                    // And if this is NOT the last statement in a block, then it is totally unnecessary
+    else false
 -------------------------------------------------------------------------------
 
 

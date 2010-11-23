@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.stmt.ExpressionStatement
 
 /**
  * Rule that checks for if statements where the if and else blocks are merely returning
@@ -30,7 +31,8 @@ import org.codenarc.util.AstUtil
  * <ul>
  *   <li><code>if (someExpression) return true else return false</code> - can be replaced by <code>return someExpression</code></li>
  *   <li><code>if (someExpression) { return true } else { return false }</code> - can be replaced by <code>return someExpression</code></li>
- *   <li><code>if (someExpression) { Boolean.TRUE } else { return Boolean.FALSE }</code> - can be replaced by <code>return someExpression</code></li>
+ *   <li><code>if (someExpression) { return Boolean.TRUE } else { return Boolean.FALSE }</code> - can be replaced by <code>return someExpression</code></li>
+ *   <li><code>if (someExpression) true; else false</code> - (implicit return) can be replaced by <code>someExpression</code></li>
  * </ul>
  *
  * @author Chris Mair
@@ -60,12 +62,14 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
     private boolean isReturnTrue(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        statement instanceof ReturnStatement && AstUtil.isTrue(statement.expression)
+        (statement instanceof ReturnStatement || statement instanceof ExpressionStatement) &&
+            AstUtil.isTrue(statement.expression)     
     }
 
     private boolean isReturnFalse(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        statement instanceof ReturnStatement && AstUtil.isFalse(statement.expression)
+        (statement instanceof ReturnStatement || statement instanceof ExpressionStatement) &&
+            AstUtil.isFalse(statement.expression)
     }
 
     private boolean hasElseBlock(IfStatement ifStatement) {

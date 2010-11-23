@@ -19,7 +19,7 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for UnnecessaryTernaryExpressionRule
+ * Tests for UnnecessaryIfStatementRule
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -67,6 +67,38 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'if (expression3)'])
     }
 
+    void testApplyTo_ImplicitReturnAtEndOfMethod_TrueAndFalse_IsAViolation() {
+        final SOURCE = '''
+            def isSpellingCorrect(word) {
+                File file = new File("...")
+                def found = false
+                file.eachLine {
+                    if (it == word) found = true
+                }
+                if (found) { true } else false
+                // if (found) true else false -- does not compile
+            }
+        '''
+        assertSingleViolation(SOURCE, 8, 'if (found) { true } else false')
+    }
+
+    void testApplyTo_IfElseInMiddleOfBlock_TrueAndFalse_IsAViolation() {
+        final SOURCE = '''
+            def myClosure = {
+                println 'initializing'
+                if (ready) {
+                    true
+                } else false
+                println 'other'
+                if (count > 5) false; else true
+                println 'done'
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'if (ready) {',
+                8, 'if (count > 5) false; else true')
+    }
+
     void testApplyTo_MultipleStatementBlocks_NotAViolation() {
         final SOURCE = '''
             if (expression1) { println 123; return true } else { return false }
@@ -85,6 +117,24 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             if (someExpression) return true else return 88
             if (someExpression) return Boolean.TRUE else return "false"
             if (someExpression) return "true" else return Boolean.FALSE
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ExpressionStatements_NotTrueAndFalse_NotAViolation() {
+        final SOURCE = '''
+            if (someExpression) 29; else 57
+            if (someExpression) { 'abc' } else { 'xyz' }
+            if (someExpression) 29; else false
+            if (someExpression) true; else 57
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_MethodCalls_NotAViolation() {
+        final SOURCE = '''
+            if (someExpression) doStep1(); else doStep2()
+            if (someExpression) { doStep1() } else { doStep2() }
         '''
         assertNoViolations(SOURCE)
     }
