@@ -153,6 +153,19 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_OnlyReferenceIsAMapKeyOrValue() {
+        final SOURCE = '''
+            class MyClass {
+                private static final NAME = 'abc'
+                private static final VALUE = 123
+                def doStuff() {
+                    [(NAME):VALUE] 
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_MoreThanOneClassInASourceFile() {
         final SOURCE = '''
             class MyClass {

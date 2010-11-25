@@ -67,8 +67,6 @@ class UnnecessaryIfStatementRule extends AbstractAstVisitorRule {
 
 class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
-    private static final CHECK_FOR_CONSTANT = 'constant'
-
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && hasElseBlock(ifStatement)) {
             if (areReturningTrueAndFalse(ifStatement.ifBlock, ifStatement.elseBlock)) {
