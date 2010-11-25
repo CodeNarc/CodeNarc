@@ -8,14 +8,18 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * UnnecessaryBigDecimalInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  It is unnecessary to instantiate BigDecimal objects. Instead just use the decimal literal or the 'G' identifier to force the type, such as 123.45 or 123.45G.
+  <Since CodeNarc 0.12>
+
+  It is unnecessary to instantiate <<<BigDecimal>>> objects. Instead just use the decimal literal
+  or the 'G' identifier to force the type, such as <<<123.45>>> or <<<123.45G>>>.
 
 
 * UnnecessaryBigIntegerInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  It is unnecessary to instantiate BigInteger objects. Instead just use the literal with the 'G' identifier to force the type, such as 8G or 42G.
+  <Since CodeNarc 0.12>
+
+  It is unnecessary to instantiate <<<BigInteger>>> objects. Instead just use the literal with
+  the 'G' identifier to force the type, such as <<<8G>>> or <<<42G>>>.
 
 
 * UnnecessaryBooleanExpression Rule
@@ -61,14 +65,17 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * UnnecessaryCallForLastElement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  This rule checks for excessively verbose methods of accessing the last element of an array or list. For instance, it
-  is possible to access the last element of an array by performing array[array.length - 1], in Groovy it is simpler to
-  either call array.last() or array[-1]. The same is true for lists. This violation is triggered whenever a get, getAt,
-  or array-style access is used with an object size check.
+  <Since CodeNarc 0.12>
+
+  This rule checks for excessively verbose methods of accessing the last element of an array or list. For
+  instance, it is possible to access the last element of an array by performing <<<array[array.length - 1]>>>,
+  in Groovy it is simpler to either call <<<array.last()>>> or <<<array[-1]>>>. The same is true for lists.
+  This violation is triggered whenever a <<<get>>>, <<<getAt>>>, or array-style access is used with an object
+  size check.
 
   Code like this all cause violations.
-  -------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
     def x = [0, 1, 2]
     def a = x.get(x.size() -1)
     def b = x.get(x.length -1)
@@ -76,10 +83,11 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     def d = x.getAt(x.length -1)
     def f = x[(x.size() -1]
     def d = x[(x.length -1]
-  -------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
   All of this code is fine though:
-  -------------------------------------------------------------------------------
+  
+-------------------------------------------------------------------------------
     def x = [0, 1, 2]
     def a = x.last()
     def b = x[-1]
@@ -87,31 +95,34 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     def d = x.get(z.size() -1)     // different objects
     def e = x.get(z.length -1)     // different objects
     def f = x.getAt(z.size() -1)   // different objects
-  -------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 * UnnecessaryCatchBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  Violations are triggered when a catch block does nothing but throw the original exception. In this scenario
-  there is usually no need for a catch block, just let the exception be thrown from the original code. This
+  <Since CodeNarc 0.12>
+
+  Violations are triggered when a <catch> block does nothing but throw the original exception. In this scenario
+  there is usually no need for a <catch> block, just let the exception be thrown from the original code. This
   condition frequently occurs when catching an exception for debugging purposes but then forgetting to take the
-  catch statement out. 
+  <<<catch>>> statement out. 
+
 
 * UnnecessaryCollectCall Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  Some method calls to Object.collect(Closure) can be replaced with the spread operator. For instance,
-  list.collect { it.multiply(2) } can be replaced by list*.multiply(2).
+  <Since CodeNarc 0.12>
+
+  Some method calls to <<<Object.collect(Closure)>>> can be replaced with the spread operator. For instance,
+  <<<list.collect { it.multiply(2) }>>> can be replaced by <<<list*.multiply(2)>>>.
 
  Examples of violations include:
 
 -------------------------------------------------------------------------------
-
     assert [1, 2, 3].collect { it.multiply(2) }
     assert [1, 2, 3].collect { x -> x.multiply(2) }
     ["1", "2", "3"].collect { it.bytes }
+-------------------------------------------------------------------------------
 
- The following code does not produce violations:
+  The following code does not produce violations:
 
 -------------------------------------------------------------------------------
     [1, 2, 3].collect { it * it }   // OK, closure parameter is referenced twice
@@ -136,9 +147,18 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     // OK, chained methods are too complex to analyze at this point
     [1, 2, 3].collect { it.multiply(2).multiply(4) }
 
-    // in general the above examples can be rewritten like this: 
+    // in general the above examples can be rewritten like this:
     [1, 2, 3]*.multiply(2)
     ["1", "2", "3"]*.bytes
+-------------------------------------------------------------------------------
+
+
+* UnnecessaryCollectionCall Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  Checks for useless calls to collections. For any collection <<<c>>>, calling <<<c.containsAll(c)>>>
+  should always be <<<true>>>, and <<<c.retainAll(c)>>> should have no effect.
 
 
 * UnnecessaryConstructor Rule
@@ -151,89 +171,27 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * UnnecessaryDoubleInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  It is unnecessary to instantiate Double objects. Instead just use the double literal with 'D' identifier to force the type, such as 123.45d or 0.42d.
+  <Since CodeNarc 0.12>
+
+  It is unnecessary to instantiate <<<Double>>> objects. Instead just use the double literal
+  with 'D' identifier to force the type, such as <<<123.45d>>> or <<<0.42d>>>.
 
 
 * UnnecessaryFloatInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  It is unnecessary to instantiate Float objects. Instead just use the float literal with the 'F' identifier to force the type, such as 123.45F or 0.42f.
+  <Since CodeNarc 0.12>
 
-
-* UnnecessaryIfStatement Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
- Checks for <<if>> statements where the <if> and <else> blocks are merely returning
- <<<true>>> and <<<false>>> constants. These cases can be replaced by a simple return
- statement. Examples of violations include:
-
--------------------------------------------------------------------------------
-    if (someExpression)         // can be replaced by: return someExpression
-        return true
-    else
-        return false
-
-    if (someExpression) {       // can be replaced by: return someExpression
-        return true
-    } else {
-        return false
-    }
-
-    if (someExpression) {       // can be replaced by: return someExpression
-        return Boolean.TRUE
-    } else {
-        return Boolean.FALSE
-    }
-
-    if (someExpression)         // (implicit return) can be replaced by: someExpression
-        true                    // And if this is NOT the last statement in a block, then it is totally unnecessary
-    else false
--------------------------------------------------------------------------------
-
-
-* UnnecessaryTernaryExpression Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
- Checks for ternary expressions where the conditional expression always evaluates to a boolean
- and the <true> and <false> expressions are merely returning <<<true>>> and <<<false>>> constants.
- These cases can be replaced by a simple boolean expression. Examples of violations include:
-
--------------------------------------------------------------------------------
-    x==99 ? true : false                    // can be replaced by: x==99
-    x && y ? true : false                   // can be replaced by: x && y
-    x||y ? false : true                     // can be replaced by: !(x||y)
-    x >= 1 ? true: false                    // can be replaced by: x >= 1
-    x < 99 ? Boolean.TRUE : Boolean.FALSE   // can be replaced by: x < 99
-    !x ? true : false                       // can be replaced by: !x
--------------------------------------------------------------------------------
-
- The rule also checks for ternary expressions where the <true> and <false> expressions are
- the same constant or variable. Examples include:
-
--------------------------------------------------------------------------------
-    x ? '123' : '123'              // can be replaced by: '123'
-    x ? null : null                // can be replaced by: null
-    x ? 23 : 23                    // can be replaced by: 23
-    x ? MAX_VALUE : MAX_VALUE      // can be replaced by: MAX_VALUE
-    ready ? minValue : minValue    // can be replaced by: minValue
--------------------------------------------------------------------------------
-
-
-* UnnecessaryCollectionCall Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.11>
-
-  Checks for useless calls to collections. For any collection <<<c>>>, calling <<<c.containsAll(c)>>>
-  should always be <<<true>>>, and <<<c.retainAll(c)>>> should have no effect.
+  It is unnecessary to instantiate <<<Float>>> objects. Instead just use the float literal
+  with the 'F' identifier to force the type, such as <<<123.45F>>> or <<<0.42f>>>.
 
 
 * UnnecessaryGetter Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   Checks for explicit calls to getter/accessor methods which can, for the most part, be replaced by property access.
-  A getter is defined as a method call that matches get[A-Z] but not getClass() or get[A-Z][A-Z] such as getURL().
-  Getters do not take method arguments.
+  A getter is defined as a method call that matches <<<get[A-Z]>>> but not <<<getClass()>>> or
+  <<<get[A-Z][A-Z]>>> such as <<<getURL()>>>. Getters do not take method arguments.
 
   These bits of code produce violations:
 
@@ -256,24 +214,84 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     x.getProperty('key')
 -------------------------------------------------------------------------------
 
+
+* UnnecessaryIfStatement Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for unnecessary <<if>> statements. The entire <<if>> statement, or at least the <if> or <else>
+  block, are considered unnecessary for the three scenarios described below.
+
+  (1) When the <if> and <else> blocks contain only an explicit return of <<<true>>> and <<<false>>>
+  constants. These cases can be replaced by a simple <return> statement. Examples of violations include:
+
+-------------------------------------------------------------------------------
+    if (someExpression)         // can be replaced by: return someExpression
+        return true
+    else
+        return false
+
+    if (someExpression) {       // can be replaced by: return someExpression
+        return true
+    } else {
+        return false
+    }
+
+    if (someExpression) {       // can be replaced by: return someExpression
+        return Boolean.TRUE
+    } else {
+        return Boolean.FALSE
+    }
+-------------------------------------------------------------------------------
+
+  (2) When the <<<if>>> statement is the last statement in a block and the <if> and <else> blocks
+  are only <<<true>>> and <<<false>>> expressions. This is an <implicit> return of <<<true>>>/<<<false>>>.
+  For example, the <<<if>>> statement in the following code can be replaced by <<<someExpression>>>
+  or <<<someExpression as boolean>>>:
+
+-------------------------------------------------------------------------------
+    def myMethod() {
+        doSomething()
+        if (someExpression)
+            true
+        else false
+    }
+-------------------------------------------------------------------------------
+
+  (3) When either the <if> block or <else> block of an <<<if>>> statement that is not the last statement
+  in a block contain only a single constant or literal expression. For example, the <<<if>>> statement
+  in the following code has no effect and can be removed:
+
+-------------------------------------------------------------------------------
+    def myMethod() {
+        if (someExpression) { 123 }
+        doSomething()
+    }
+-------------------------------------------------------------------------------
+
+
 * UnnecessaryIntegerInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  It is unnecessary to instantiate Integer objects. Instead just use the literal with the 'I' identifier to force the type, such as 8I or 42i.
+  <Since CodeNarc 0.12>
+
+  It is unnecessary to instantiate <<<Integer>>> objects. Instead just use the literal with
+  the 'I' identifier to force the type, such as <<<8I>>> or <<<42i>>>.
 
 
 * UnnecessaryLongInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  It is unnecessary to instantiate Long objects. Instead just use the literal with the 'L' identifier to force the type, such as 8L or 42L.
+  <Since CodeNarc 0.12>
+
+  It is unnecessary to instantiate <<<Long>>> objects. Instead just use the literal with
+  the 'L' identifier to force the type, such as <<<8L>>> or <<<42L>>>.
 
 
 * UnnecessaryObjectReferences Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  Violations are triggered when an excessive set of consecutive statements all reference the same variable. This can be
-  made more readable by using a with or identity block. By default, 5 references are allowed. You can override this
-  property using the maxReferencesAllowed property on the rule.
+  <Since CodeNarc 0.12>
+
+  Violations are triggered when an excessive set of consecutive statements all reference the same variable.
+  This can be made more readable by using a <<<with>>> or <<<identity>>> block. By default, 5 references
+  are allowed. You can override this property using the <<maxReferencesAllowed>>> property on the rule.
 
   These two bits of code produce violations:
 
@@ -295,7 +313,8 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     p2.setZipCode('4051')
 -------------------------------------------------------------------------------
 
-However, these two bits of code do not because they use either a <<<with>>> or <<<identity>>> block.
+  However, these two bits of code do not because they use either a <<<with>>> or <<<identity>>> block.
+
 -------------------------------------------------------------------------------
     def p1 = new Person().with {
         firstName = 'Hamlet'
@@ -331,3 +350,30 @@ However, these two bits of code do not because they use either a <<<with>>> or <
   In Groovy, the <<<return>>> keyword is often optional. If a statement is the last line in a method or
   closure then you do not need to have the <<<return>>> keyword.
 
+
+* UnnecessaryTernaryExpression Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Checks for ternary expressions where the conditional expression always evaluates to a boolean
+ and the <true> and <false> expressions are merely returning <<<true>>> and <<<false>>> constants.
+ These cases can be replaced by a simple boolean expression. Examples of violations include:
+
+-------------------------------------------------------------------------------
+    x==99 ? true : false                    // can be replaced by: x==99
+    x && y ? true : false                   // can be replaced by: x && y
+    x||y ? false : true                     // can be replaced by: !(x||y)
+    x >= 1 ? true: false                    // can be replaced by: x >= 1
+    x < 99 ? Boolean.TRUE : Boolean.FALSE   // can be replaced by: x < 99
+    !x ? true : false                       // can be replaced by: !x
+-------------------------------------------------------------------------------
+
+ The rule also checks for ternary expressions where the <true> and <false> expressions are
+ the same constant or variable. Examples include:
+
+-------------------------------------------------------------------------------
+    x ? '123' : '123'              // can be replaced by: '123'
+    x ? null : null                // can be replaced by: null
+    x ? 23 : 23                    // can be replaced by: 23
+    x ? MAX_VALUE : MAX_VALUE      // can be replaced by: MAX_VALUE
+    ready ? minValue : minValue    // can be replaced by: minValue
+-------------------------------------------------------------------------------

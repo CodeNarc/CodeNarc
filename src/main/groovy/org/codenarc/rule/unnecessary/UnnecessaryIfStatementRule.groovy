@@ -25,15 +25,36 @@ import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 
 /**
- * Rule that checks for if statements where the if and else blocks are merely returning
- * <code>true</code> and <code>false</code> constants. These cases can be replaced by a simple return
- * statement. Examples include:
+ * Rule that checks for unnecessary if statements. If/else statements are considered unnecessary for
+ * the three scenarios described below.
+ * <p/>
+ * (1) When the if and else blocks contain only an explicit return of <code>true</code> and <code>false</code>
+ * constants. These cases can be replaced by a simple return statement. Examples include:
  * <ul>
  *   <li><code>if (someExpression) return true else return false</code> - can be replaced by <code>return someExpression</code></li>
  *   <li><code>if (someExpression) { return true } else { return false }</code> - can be replaced by <code>return someExpression</code></li>
  *   <li><code>if (someExpression) { return Boolean.TRUE } else { return Boolean.FALSE }</code> - can be replaced by <code>return someExpression</code></li>
- *   <li><code>if (someExpression) true; else false</code> - (implicit return) can be replaced by <code>someExpression</code></li>
  * </ul>
+ *
+ * (2) When the if statement is the last statement in a block and the if and else blocks contain only
+ * <code>true</code> and <code>false</code> expressions. This is an implicit return of true/false.
+ * For example, the if statement in the following code can be replaced by <code>someExpression</code>:
+ *      <code>
+ *      boolean myMethod() {
+ *          doSomething()
+ *          if (someExpression) true; else false
+ *      }
+ *      </code>
+ *
+ * (3) When either the if block or else block of an if statement that is not the last statement in a
+ * block contain only a single constant or literal expression 
+ * For example, the if statement in the following code has no effect and can be removed:
+ *      <code>
+ *      def myMethod() {
+ *          if (someExpression) { 123 }
+ *          doSomething()
+ *      }
+ *      </code>
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -46,13 +67,46 @@ class UnnecessaryIfStatementRule extends AbstractAstVisitorRule {
 
 class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
+    private static final CHECK_FOR_CONSTANT = 'constant'
+
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && hasElseBlock(ifStatement)) {
             if (areReturningTrueAndFalse(ifStatement.ifBlock, ifStatement.elseBlock)) {
-                addViolation(ifStatement)
+                addViolation(ifStatement, 'The if and else blocks merely return true/false')
             }
         }
         super.visitIfElse(ifStatement)
+    }
+
+    void visitBlockStatement(BlockStatement block) {
+        def allStatements = block.statements
+        def allExceptLastStatement = allExceptLastElement(allStatements)
+        allExceptLastStatement.each { statement ->
+            if (statement instanceof IfStatement) {
+                visitIfElseThatIsNotTheLastStatementInABlock(statement)
+            }
+        }
+        if (allStatements && allStatements.last() instanceof IfStatement) {
+            visitIfElseThatIsTheLastStatementInABlock(allStatements.last())
+        }
+        super.visitBlockStatement(block)
+    }
+
+    private void visitIfElseThatIsNotTheLastStatementInABlock(IfStatement ifStatement) {
+        if (isOnlyAConstantOrLiteralExpression(ifStatement.ifBlock)) {
+            addViolation(ifStatement, 'The if block is a constant or literal')
+        }
+        if (isOnlyAConstantOrLiteralExpression(ifStatement.elseBlock)) {
+            addViolation(ifStatement.elseBlock, 'The else block is a constant or literal')
+        }
+    }
+
+    private void visitIfElseThatIsTheLastStatementInABlock(IfStatement ifStatement) {
+        if (isFirstVisit([CHECK_FOR_CONSTANT:ifStatement]) && hasElseBlock(ifStatement)) {
+            if (areTrueAndFalseExpressions(ifStatement.ifBlock, ifStatement.elseBlock)) {
+                addViolation(ifStatement, 'The if and else blocks implicitly return true/false')
+            }
+        }
     }
 
     private boolean areReturningTrueAndFalse(Statement ifBlock, Statement elseBlock) {
@@ -62,18 +116,37 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
     private boolean isReturnTrue(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        (statement instanceof ReturnStatement || statement instanceof ExpressionStatement) &&
-            AstUtil.isTrue(statement.expression)     
+        statement instanceof ReturnStatement && AstUtil.isTrue(statement.expression)
     }
 
     private boolean isReturnFalse(Statement blockStatement) {
         def statement = getStatement(blockStatement)
-        (statement instanceof ReturnStatement || statement instanceof ExpressionStatement) &&
-            AstUtil.isFalse(statement.expression)
+        statement instanceof ReturnStatement && AstUtil.isFalse(statement.expression)
+    }
+
+
+    private boolean areTrueAndFalseExpressions(Statement ifBlock, Statement elseBlock) {
+        (isTrueExpression(ifBlock) && isFalseExpression(elseBlock)) ||
+               (isFalseExpression(ifBlock) && isTrueExpression(elseBlock))
+    }
+
+    private boolean isTrueExpression(Statement blockStatement) {
+        def statement = getStatement(blockStatement)
+        statement instanceof ExpressionStatement && AstUtil.isTrue(statement.expression)
+    }
+
+    private boolean isFalseExpression(Statement blockStatement) {
+        def statement = getStatement(blockStatement)
+        statement instanceof ExpressionStatement && AstUtil.isFalse(statement.expression)
     }
 
     private boolean hasElseBlock(IfStatement ifStatement) {
         !ifStatement.elseBlock.empty
+    }
+
+    private boolean isOnlyAConstantOrLiteralExpression(Statement blockStatement) {
+        def statement = getStatement(blockStatement)
+        statement instanceof ExpressionStatement && AstUtil.isConstantOrLiteral(statement.expression)
     }
 
     private Statement getStatement(Statement statement) {
@@ -82,5 +155,10 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
     private boolean isSingleStatementBlock(Statement statement) {
         statement instanceof BlockStatement && statement.statements.size() == 1
+    }
+
+    private allExceptLastElement(list) {
+        def lastElement = list.empty ? null : list.last()
+        list - lastElement
     }
 }

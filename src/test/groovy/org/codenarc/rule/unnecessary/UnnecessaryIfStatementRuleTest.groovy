@@ -31,6 +31,8 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnnecessaryIfStatement'
     }
 
+    // Tests for explicit return of true/false
+
     void testApplyTo_ReturnTrueAndFalse_IsAViolation() {
         final SOURCE = '''
             if (expression1) return true else return false
@@ -55,7 +57,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'if (expression2)'] )
     }
 
-    void testApplyTo_WithBraces_IsAViolation() {
+    void testApplyTo_ReturnTrueFalse_WithBraces_IsAViolation() {
         final SOURCE = '''
             if (expression1) { return true } else { return false }
             if (expression2) return Boolean.FALSE else { return Boolean.TRUE }
@@ -67,44 +69,12 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'if (expression3)'])
     }
 
-    void testApplyTo_ImplicitReturnAtEndOfMethod_TrueAndFalse_IsAViolation() {
-        final SOURCE = '''
-            def isSpellingCorrect(word) {
-                File file = new File("...")
-                def found = false
-                file.eachLine {
-                    if (it == word) found = true
-                }
-                if (found) { true } else false
-                // if (found) true else false -- does not compile
-            }
-        '''
-        assertSingleViolation(SOURCE, 8, 'if (found) { true } else false')
-    }
-
-    void testApplyTo_IfElseInMiddleOfBlock_TrueAndFalse_IsAViolation() {
-        final SOURCE = '''
-            def myClosure = {
-                println 'initializing'
-                if (ready) {
-                    true
-                } else false
-                println 'other'
-                if (count > 5) false; else true
-                println 'done'
-            }
-        '''
-        assertTwoViolations(SOURCE,
-                4, 'if (ready) {',
-                8, 'if (count > 5) false; else true')
-    }
-
     void testApplyTo_MultipleStatementBlocks_NotAViolation() {
         final SOURCE = '''
             if (expression1) { println 123; return true } else { return false }
             if (expression2) return Boolean.FALSE else { doSomething(); return Boolean.TRUE }
             if (expression3) {
-                x = 98.6 
+                x = 98.6
                 return false
             } else return true
         '''
@@ -121,15 +91,91 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_ExpressionStatements_NotTrueAndFalse_NotAViolation() {
+    void testApplyTo_NoElseBlock_NotAViolation() {
         final SOURCE = '''
-            if (someExpression) 29; else 57
-            if (someExpression) { 'abc' } else { 'xyz' }
-            if (someExpression) 29; else false
-            if (someExpression) true; else 57
+            if (someExpression) return true
+            if (someExpression) return true else { }
+
         '''
         assertNoViolations(SOURCE)
     }
+
+    // Tests for implicit return of true/false (last statement in a block)
+
+    void testApplyTo_ImplicitReturnAtEndOfMethod_TrueAndFalse_IsAViolation() {
+        final SOURCE = '''
+            def isSpellingCorrect(word) {
+                File file = new File("...")
+                def found = false
+                file.eachLine {
+                    if (it == word) found = true
+                }
+                if (found) { true } else false
+            }
+        '''
+        assertSingleViolation(SOURCE, 8, 'if (found) { true } else false')
+    }
+
+    // Tests for if/else blocks that are merely constant or literal expressions (not at the end of a block)
+
+    void testApplyTo_NotLastStatement_IfBlockIsOnlyAConstantExpression_IsAViolation() {
+        final SOURCE = '''
+            def myClosure = {
+                doStuff()
+                if (ready) {
+                    'abc'
+                }
+                doOtherStuff()
+                if (ready) 123
+                doSomeOtherStuff()
+            }
+        '''
+        assertTwoViolations(SOURCE,
+            4, 'if (ready) {', 'if block',
+            8, 'if (ready) 123', 'if block')
+    }
+
+    void testApplyTo_NotLastStatement_ElseBlockIsOnlyAConstantExpression_IsAViolation() {
+        final SOURCE = '''
+            String myMethod() {
+                doStuff()
+                if (ready) {
+                    doStuff()
+                } else [a:123, b:456]
+                doOtherStuff()
+            }
+        '''
+        assertSingleViolation(SOURCE, 6, '} else [a:123, b:456]', 'else block')
+    }
+
+    void testApplyTo_NotLastStatement_IfAndElseBlocksAreOnlyAConstantExpressions_IsAViolation() {
+        final SOURCE = '''
+            Object myMethod() {
+                doStuff()
+                if (ready) {
+                    [1, 2, 3]
+                } else {
+                    Boolean.FALSE
+                }
+                doOtherStuff()
+            }
+        '''
+        assertTwoViolations(SOURCE,
+            4, 'if (ready) {', 'if block',
+            6, '} else {', 'else block')
+    }
+
+    void testApplyTo_IfElseStatement_LastStatement_IfBlockAndElseBlocksAreOnlyConstantExpressions_NotAViolation() {
+        final SOURCE = '''
+            String myMethod() {
+                doStuff()
+                if (ready) 'abc'; else 'xyz'
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    // Tests for if statements that do not apply for this rule
 
     void testApplyTo_MethodCalls_NotAViolation() {
         final SOURCE = '''
@@ -139,10 +185,11 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_NoElseBlock_NotAViolation() {
+    void testApplyTo_EmptyBlocks_NotAViolation() {
         final SOURCE = '''
-            if (someExpression) return true
-            if (someExpression) return true else { }
+            if (someExpression) {}
+            if (someExpression) { doSomething() } else { }
+            try { } finally { }
 
         '''
         assertNoViolations(SOURCE)
