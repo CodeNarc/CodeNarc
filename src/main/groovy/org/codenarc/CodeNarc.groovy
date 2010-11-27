@@ -47,6 +47,7 @@ import org.codenarc.report.ReportWriterFactory
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings(['Println', 'PrintStackTrace'])
 class CodeNarc {
     static final LOG = Logger.getLogger(CodeNarc)
     protected static final HELP = """CodeNarc - static analysis for Groovy',

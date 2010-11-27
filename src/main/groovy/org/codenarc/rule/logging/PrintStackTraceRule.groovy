@@ -24,6 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * Rule that checks for calls to <code>printStackTrace()</code>.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class PrintStackTraceRule extends AbstractAstVisitorRule {
@@ -32,15 +33,11 @@ class PrintStackTraceRule extends AbstractAstVisitorRule {
     Class astVisitorClass = PrintStackTraceAstVisitor
 }
 
-class PrintStackTraceAstVisitor extends AbstractAstVisitor  {
+class PrintStackTraceAstVisitor extends AbstractAstVisitor {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        if (isFirstVisit(methodCall)) {
-            def isMatch = AstUtil.isMethodNamed(methodCall, 'printStackTrace') &&
-                    AstUtil.getMethodArguments(methodCall).empty
-            if (isMatch) {
-                addViolation(methodCall)
-            }
+        if (isFirstVisit(methodCall) && AstUtil.isMethodNamed(methodCall, 'printStackTrace', 0)) {
+            addViolation(methodCall)
         }
         super.visitMethodCallExpression(methodCall)
     }
