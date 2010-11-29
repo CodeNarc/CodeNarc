@@ -66,16 +66,6 @@ class EmptyIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_SingleEmptyStatement() {
-        final SOURCE = '''class MyClass {
-                def myMethod() {
-                    if (isReady)
-                        ;
-                }
-            }'''
-        assertNoViolations(SOURCE)
-    }
-
     protected Rule createRule() {
         new EmptyIfStatementRule()
     }

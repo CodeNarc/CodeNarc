@@ -33,7 +33,9 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     private static final PATH = 'org/codenarc/MyTest.groovy'
     private static final MATCH = /.*Test\.groovy/
     private static final NO_MATCH = /.*Other\.groovy/
-    def skipTestThatUnrelatedCodeHasNoViolations
+
+    static skipTestThatUnrelatedCodeHasNoViolations
+    static skipTestThatInvalidCodeHasNoViolations
 
     void testToString() {
         assertContainsAll(rule.toString(), ['TestPathRule', NAME, PRIORITY.toString()])

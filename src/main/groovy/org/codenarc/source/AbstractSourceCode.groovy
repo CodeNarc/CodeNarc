@@ -101,6 +101,14 @@ abstract class AbstractSourceCode implements SourceCode {
     }
 
     /**
+     * Return true if and only if the source code can be successfully compiled
+     * @return true only if the source code is valid
+     */
+    boolean isValid() {
+        return getAst()
+    }
+    
+    /**
      * Return the normalized value of the specified path. Convert file separator chars to standard '/'.
      * @param path - the path to normalize
      * @return the normalized value

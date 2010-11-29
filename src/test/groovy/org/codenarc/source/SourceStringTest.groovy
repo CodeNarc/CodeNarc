@@ -25,10 +25,14 @@ import org.codenarc.test.AbstractTestCase
  */
 class SourceStringTest extends AbstractTestCase {
 
-    static final SOURCE = '''class SampleFile {
+    private static final SOURCE = '''class SampleFile {
             int count
         }'''
     private sourceString
+
+    void testImplementsSourceCode() {
+        assert sourceString instanceof SourceCode
+    }
 
     void testConstructor_NullSource() {
         shouldFail { new SourceString(null) }
@@ -147,6 +151,11 @@ class SourceStringTest extends AbstractTestCase {
         assert sourceString.getLineNumberForCharacterIndex(67) == -1
         assert sourceString.getLineNumberForCharacterIndex(999) == -1
         assert sourceString.getLineNumberForCharacterIndex(-1) == -1
+    }
+
+    void testIsValid() {
+        assert sourceString.valid
+        assert !new SourceString('%^#@$').valid
     }
 
     void setUp() {

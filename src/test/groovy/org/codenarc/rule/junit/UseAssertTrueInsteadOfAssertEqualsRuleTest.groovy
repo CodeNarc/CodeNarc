@@ -36,7 +36,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         	 class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals(1, foo())
-                    assertEquals('message'1, foo())
+                    assertEquals('message', foo())
                     assertTrue(foo())
                     assertTrue('message', foo())
                     assertSame(foo(), foo())

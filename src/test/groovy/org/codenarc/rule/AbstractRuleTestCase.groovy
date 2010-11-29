@@ -49,13 +49,15 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         }
     }
 
-    @SuppressWarnings('JUnitTestMethodWithoutAssert')
-    void testApplyTo_CompilerError() {
+    void testThatInvalidCodeHasNoViolations() {
         final SOURCE = '''
             @will not compile@ &^%$#
         '''
-        // Verify no errors/exceptions
-        applyRuleTo(SOURCE)
+        if (!getProperties().keySet().contains('skipTestThatInvalidCodeHasNoViolations')) {
+            // Verify no errors/exceptions
+            def sourceCode = new SourceString(SOURCE)
+            assert rule.applyTo(sourceCode).empty
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -198,6 +200,7 @@ actual:               $violation.sourceLine
      */
     protected List applyRuleTo(String source) {
         def sourceCode = new SourceString(source, sourceCodePath, sourceCodeName)
+        assert sourceCode.valid
         def violations = rule.applyTo(sourceCode)
         log("violations=$violations")
         violations

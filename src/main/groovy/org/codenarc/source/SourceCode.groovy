@@ -68,5 +68,13 @@ interface SourceCode {
      * @return the line number (one-based) containing the specified character; Return -1 if charIndex is not valid.
      */
     int getLineNumberForCharacterIndex(int charIndex)
-    
+
+
+
+    /**
+     * Return true if and only if the source code can be successfully compiled
+     * @return true only if the source code is valid
+     */
+    boolean isValid()
+
 }

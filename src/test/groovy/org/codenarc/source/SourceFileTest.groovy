@@ -25,9 +25,14 @@ import org.codenarc.test.AbstractTestCase
  */
 class SourceFileTest extends AbstractTestCase {
 
-    static final FILE = 'src/test/resources/SampleFile.groovy'
+    private static final FILE = 'src/test/resources/SampleFile.groovy'
+    private static final INVALID_FILE = 'src/test/resources/SampleInvalidFile.txt'
     private sourceFile
     private file
+
+    void testImplementsSourceCode() {
+        assert sourceFile instanceof SourceCode
+    }
 
     void testConstructor_NullPath() {
         shouldFail { new SourceFile(null) }
@@ -85,6 +90,11 @@ class SourceFileTest extends AbstractTestCase {
         assert sourceFile.getLineNumberForCharacterIndex(-1) == -1
     }
     
+    void testIsValid() {
+        assert sourceFile.valid
+        assert !new SourceFile(new File(INVALID_FILE)).valid
+    }
+
     void setUp() {
         super.setUp()
         file = new File(FILE)

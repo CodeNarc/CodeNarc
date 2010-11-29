@@ -58,6 +58,7 @@ class EmptySynchronizedStatementRuleTest extends AbstractRuleTestCase {
                 def myMethod() {
                     synchronized(lock) {
                         println "bad stuff happened"
+                    }
                 }
             }'''
         assertNoViolations(SOURCE)

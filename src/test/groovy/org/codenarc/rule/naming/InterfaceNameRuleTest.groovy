@@ -60,13 +60,13 @@ class InterfaceNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_NonInterfaceClass() {
-        final SOURCE = " class nonInterface$Class { } "
+        final SOURCE = " class nonInterfaceClass { } "
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_Interface() {
-        final SOURCE = "abstract class abstract$Class { }"
+        final SOURCE = "abstract class abstractClass { }"
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }

@@ -25,8 +25,11 @@ import org.codenarc.rule.Rule
  * @version $Revision$ - $Date$
  */
 class RequiredRegexRuleTest extends AbstractRuleTestCase {
-    static final REGEX = /\@author Joe/
-    def skipTestThatUnrelatedCodeHasNoViolations
+
+    static skipTestThatUnrelatedCodeHasNoViolations
+    static skipTestThatInvalidCodeHasNoViolations
+
+    private static final REGEX = /\@author Joe/
 
     void testRuleProperties() {
         assert rule.priority == 3

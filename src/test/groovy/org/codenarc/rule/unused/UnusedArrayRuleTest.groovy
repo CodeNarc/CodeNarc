@@ -34,7 +34,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ArrayAssigned_NoViolations() {
         final SOURCE = '''
         	def array1 = new String[3]
-            Object[] array2 = new Object[]
+            Object[] array2 = []
             println new Integer[3]
         '''
         assertNoViolations(SOURCE)
