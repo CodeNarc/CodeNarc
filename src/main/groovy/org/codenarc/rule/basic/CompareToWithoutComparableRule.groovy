@@ -24,7 +24,7 @@ import org.codenarc.util.AstUtil
  * If you implement a compareTo method then you should also implement the Comparable interface. If you don't then you could possibly get an exception if the Groovy == operator is invoked on your object. This is an issue fixed in Groovy 1.8 but present in previous versions. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CompareToWithoutComparableRule extends AbstractAstVisitorRule {
     String name = 'CompareToWithoutComparable'

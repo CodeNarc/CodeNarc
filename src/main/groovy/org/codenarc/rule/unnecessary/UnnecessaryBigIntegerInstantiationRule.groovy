@@ -21,7 +21,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * It is unnecessary to instantiate BigInteger objects. Instead just use the literal with the 'G' identifier to force the type, such as 8G or 42G.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryBigIntegerInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryBigIntegerInstantiation'

@@ -43,6 +43,24 @@ Generic Rules  ("<rulesets/generic.xml>")
   so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
 
 
+* RequiredString Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for a specified text string that must exist within the source code.
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| string              | The String to check for. If null or empty then do nothing.     | <<<null>>>             |
+*---------------------+----------------------------------------------------------------+------------------------+
+
+  A RuleSet can contain any number of instances of this rule, but each should be configured
+  with a unique rule <name> and <string>, and (optionally) customized <violationMessage> and <priority>.
+
+  <<NOTE:>> This rule applies to the text contents of an entire <file> rather than a specific <class>,
+  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+
+
 * StatelessClass Rule
 ~~~~~~~~~~~~~~~~~~~~~~
 

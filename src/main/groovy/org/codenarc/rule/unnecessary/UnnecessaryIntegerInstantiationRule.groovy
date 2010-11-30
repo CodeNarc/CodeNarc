@@ -21,7 +21,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * It is unnecessary to instantiate Integer objects. Instead just use the literal with the 'I' identifier to force the type, such as 8I or 42i. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryIntegerInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryIntegerInstantiation'

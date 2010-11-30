@@ -29,7 +29,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Violations are triggered when an excessive set of consecutive statements all reference the same variable. This can be made more readable by using a with or identity block. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryObjectReferencesRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryObjectReferences'
