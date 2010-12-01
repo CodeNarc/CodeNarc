@@ -41,6 +41,15 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'BigDecimal depositAmount', 4, 'def other')
     }
 
+    void testApplyTo_IgnoresClassesWithImmutableAnnotation() {
+        final SOURCE = '''
+            @Immutable class Coordinates {
+                Double latitude, longitude
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_FinalField() {
         final SOURCE = '''
           class MyClass {

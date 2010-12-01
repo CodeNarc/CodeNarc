@@ -19,15 +19,20 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for non-<code>final</code> fields on a class. The intent of this rule is
  * to check a configured set of classes that should remain "stateless" and reentrant. One
  * example might be Grails service classes, which are, by default, a singleton, and so they
- * should be reentrant.
+ * should be reentrant. DAO classes are also often kept stateless.
  * <p/>
  * This rule ignores <code>final</code> fields (either instance or static). Fields that are
  * <code>static</code> and non-<code>final</code>, however, do cause a violation.
+ * <p/>
+ * This rule also ignores all classes annotated with the <code>@Immutable</code> transformation.
+ * See http://groovy.codehaus.org/Immutable+transformation.
  * <p/>
  * You can configure this rule to ignore certain fields either by name or by type. This can be
  * useful to ignore fields that hold references to (static) dependencies (such as DAOs or
@@ -78,7 +83,19 @@ class StatelessClassRule extends AbstractAstVisitorRule {
 }
 
 class StatelessClassAstVisitor extends AbstractAstVisitor  {
+
+    private boolean immutable = false
+
+    protected void visitClassEx(ClassNode node) {
+        // TODO would prefer to just short-circuit the rule here, if immutable; but visitClass() is final
+        immutable = AstUtil.getAnnotation(node, 'Immutable')
+    }
+
     void visitFieldEx(FieldNode fieldNode) {
+
+        if (immutable) {
+            return
+        }
 
         boolean ignore = fieldNode.modifiers & FieldNode.ACC_FINAL
         
