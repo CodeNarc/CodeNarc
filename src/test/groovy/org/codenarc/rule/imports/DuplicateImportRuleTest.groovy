@@ -38,7 +38,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
             import java.io.OutputStream
             import java.io.InputStream
         '''
-        if (GroovyVersion.isGroovy1_5() || GroovyVersion.isGroovy1_6()) {
+        if (GroovyVersion.isGroovy1_6()) {
             assertSingleViolation(SOURCE, 2, 'import java.io.InputStream')
         }
     }
@@ -51,7 +51,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
             import xyz.OtherClass
             import abc.def.MyClass
         '''
-        if (GroovyVersion.isGroovy1_5() || GroovyVersion.isGroovy1_6()) {
+        if (GroovyVersion.isGroovy1_6()) {
             // Can't distinguish between multiple duplicate imports of the same class
             assertTwoViolations(SOURCE, 2, 'import abc.def.MyClass', 2, 'import abc.def.MyClass')
         }

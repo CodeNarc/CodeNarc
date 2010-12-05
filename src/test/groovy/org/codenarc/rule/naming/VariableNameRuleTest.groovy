@@ -17,7 +17,6 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
-import org.codenarc.util.GroovyVersion
 
 /**
  * Tests for VariableNameRule
@@ -211,10 +210,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
                 def (pkg, Count) = 123
             }
         '''
-        // Not valid under Groovy 1.5.x
-        if (!GroovyVersion.isGroovy1_5()) {
-            assertSingleViolation(SOURCE, 3, 'def (pkg, Count) = 123', 'Count')
-        }
+        assertSingleViolation(SOURCE, 3, 'def (pkg, Count) = 123', 'Count')
     }
 
     void testApplyTo_MultipleVariableNames_Final_OneDoesNotMatchDefaultRegex() {
@@ -223,10 +219,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
                 final def (OK, bad, OK2) = 123
             }
         '''
-        // Not valid under Groovy 1.5.x
-        if (!GroovyVersion.isGroovy1_5()) {
-            assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'bad')
-        }
+        assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'bad')
     }
 
     void testApplyTo_MultipleVariableNames_TwoDoNotMatchDefaultRegex() {
@@ -235,12 +228,9 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
                 def (Count, pkg, _MYVAR) = 123
             }
         '''
-        // Not valid under Groovy 1.5.x
-        if (!GroovyVersion.isGroovy1_5()) {
-            assertTwoViolations(SOURCE,
-                3, 'def (Count, pkg, _MYVAR) = 123', 'Count',
-                3, 'def (Count, pkg, _MYVAR) = 123', '_MYVAR')
-        }
+        assertTwoViolations(SOURCE,
+            3, 'def (Count, pkg, _MYVAR) = 123', 'Count',
+            3, 'def (Count, pkg, _MYVAR) = 123', '_MYVAR')
     }
 
     void testApplyTo_IgnoreVariableNames_MatchesSingleName() {

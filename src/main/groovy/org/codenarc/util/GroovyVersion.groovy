@@ -40,9 +40,5 @@ class GroovyVersion {
         getVersion().startsWith("1.6")
     }
 
-    static boolean isGroovy1_5() {
-        getVersion().startsWith("1.5")
-    }
-
     private GroovyVersion() { }
 }
