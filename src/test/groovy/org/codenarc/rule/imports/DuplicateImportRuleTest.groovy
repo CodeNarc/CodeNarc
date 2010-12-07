@@ -17,7 +17,6 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
 
 /**
  * Tests for DuplicateImportRule
@@ -37,10 +36,14 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
             import java.io.InputStream
             import java.io.OutputStream
             import java.io.InputStream
+            class MyClass {
+                def str = "import java.io.InputStream"    // ignored
+            }
+            interface MyInterface {
+                static final NAME = "import java.io.OutputStream"    // ignored
+            }
         '''
-        if (GroovyVersion.isGroovy1_6()) {
-            assertSingleViolation(SOURCE, 2, 'import java.io.InputStream')
-        }
+        assertSingleViolation(SOURCE, 4, 'import java.io.InputStream')
     }
 
     void testApplyTo_MultipleDuplicateImports() {
@@ -50,11 +53,9 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
             import abc.def.MyClass
             import xyz.OtherClass
             import abc.def.MyClass
+            interface MyInterface { }
         '''
-        if (GroovyVersion.isGroovy1_6()) {
-            // Can't distinguish between multiple duplicate imports of the same class
-            assertTwoViolations(SOURCE, 2, 'import abc.def.MyClass', 2, 'import abc.def.MyClass')
-        }
+        assertTwoViolations(SOURCE, 4, 'import abc.def.MyClass', 6, 'import abc.def.MyClass')
     }
 
     void testApplyTo_NoViolations() {
