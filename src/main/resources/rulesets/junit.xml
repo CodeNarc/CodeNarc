@@ -22,4 +22,6 @@
     <rule class='org.codenarc.rule.junit.JUnitFailWithoutMessageRule'/>
     <rule class='org.codenarc.rule.junit.JUnitStyleAssertionsRule'/>
     <rule class='org.codenarc.rule.junit.JUnitTestMethodWithoutAssertRule'/>
+    <rule class='org.codenarc.rule.junit.UseAssertTrueInsteadOfNegationRule'/>
+    <rule class='org.codenarc.rule.junit.UseAssertFalseInsteadOfNegationRule'/>
 </ruleset>
