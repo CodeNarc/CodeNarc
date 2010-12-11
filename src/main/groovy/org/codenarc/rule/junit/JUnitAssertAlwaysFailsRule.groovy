@@ -61,7 +61,7 @@ class JUnitAssertAlwaysFailsAstVisitor extends AbstractAstVisitor  {
         def isMatch = false
         if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
             def args = methodCall.arguments.expressions
-            def valueExpression = args[args.size()-1]
+            def valueExpression = args.last()
             isMatch = args.size() in 1..2 &&
                 valueExpression instanceof ConstantExpression && valueExpression.value != null
         }

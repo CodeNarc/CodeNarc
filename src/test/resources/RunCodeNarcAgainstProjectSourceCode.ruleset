@@ -12,6 +12,12 @@ ruleset {
     ruleset('rulesets/logging.xml')
     ruleset('rulesets/naming.xml')
     ruleset('rulesets/size.xml')
+    ruleset('rulesets/unnecessary.xml') {
+        exclude 'UnnecessaryCollectCall'
+        exclude 'UnnecessaryGetter'
+        exclude 'UnnecessaryObjectReferences'
+        exclude 'UnnecessaryReturnKeyword'
+    }
     ruleset('rulesets/unused.xml')
 
     // Ensure that each source file contains the Apache License header

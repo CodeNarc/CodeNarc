@@ -43,8 +43,8 @@ class JUnitUtil {
         if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
             def args = methodCall.arguments.expressions
             isMatch = args.size() in 1..2 &&
-                args[args.size()-1] instanceof ConstantExpression &&
-                args[args.size()-1].properties['value'] == value
+                args.last() instanceof ConstantExpression &&
+                args.last().properties['value'] == value
         }
         isMatch
     }
