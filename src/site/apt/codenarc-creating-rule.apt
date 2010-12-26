@@ -10,6 +10,9 @@ CodeNarc - Creating a Rule
   of the box by <<CodeNarc>>. <<CodeNarc>> provides abstract superclasses and
   helper classes for creating new rules.
 
+  See this {{{http://www.youtube.com/watch?v=ZPu8FaZZwRw}screencast}} showing how
+  easy it is to create a new rule.
+
 
 * The Rule Interface
 ~~~~~~~~~~~~~~~~~~~~~

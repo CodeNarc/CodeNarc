@@ -52,7 +52,8 @@ Static Analysis for Groovy: Less Bugs, Better Code
               we're adding more every week. Click the rule links to the left to view all the rules, such as
               the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
               rules. Or you can <a href="codenarc-creating-ruleset.html">create your own custom ruleset</a> yourself.
-              It's fast and fun.
+              It's fast and fun. See how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
+
      </td>
 </tr>
 <tr>
