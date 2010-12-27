@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.RuleSets
 
 /**
  * Load all predefined RuleSet files using XmlFileRuleSet
@@ -24,28 +25,12 @@ import org.codenarc.test.AbstractTestCase
  * @version $Revision$ - $Date$
  */
 class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
-    static final BASE_MESSAGES_BUNDLE = "codenarc-base-messages"
-    static final RULESET_FILES = [
-        'rulesets/basic.xml',
-        'rulesets/braces.xml',
-        'rulesets/concurrency.xml',
-        'rulesets/design.xml',
-        'rulesets/dry.xml',
-        'rulesets/exceptions.xml',
-        'rulesets/generic.xml',
-        'rulesets/grails.xml',
-        'rulesets/imports.xml',
-        'rulesets/logging.xml',
-        'rulesets/junit.xml',
-        'rulesets/naming.xml',
-        'rulesets/size.xml',
-        'rulesets/unnecessary.xml',
-        'rulesets/unused.xml'
-    ]
+
+    private static final BASE_MESSAGES_BUNDLE = "codenarc-base-messages"
     private messages
 
     void testLoadAllPredefinedRuleSets() {
-        RULESET_FILES.each { ruleSetPath ->
+        RuleSets.ALL_RULESET_FILES.each { ruleSetPath ->
             def ruleSet = new XmlFileRuleSet(ruleSetPath)
             def rules = ruleSet.rules
             log("[$ruleSetPath] rules=$rules")

@@ -18,31 +18,19 @@ package org.codenarc.ant
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.test.AbstractTestCase
+import org.codenarc.test.RuleSets
 
 /**
- * Run the CodeNarc Ant Task against CodeNarc source using all predefined RuleSets.
+ * Run the CodeNarc Ant Task against a portion of the CodeNarc source using all predefined RuleSets.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
-    static final BASE_DIR = 'src'
-    static final RULESET_FILES = [
-            'rulesets/basic.xml',
-            'rulesets/braces.xml',
-            'rulesets/design.xml',
-            'rulesets/dry.xml',
-            'rulesets/concurrency.xml',
-            'rulesets/exceptions.xml',
-            'rulesets/grails.xml',
-            'rulesets/imports.xml',
-            'rulesets/logging.xml',
-            'rulesets/junit.xml',
-            'rulesets/naming.xml',
-            'rulesets/size.xml',
-            'rulesets/unnecessary.xml',
-            'rulesets/unused.xml'].join(',')
-    static final REPORT_FILE = 'CodeNarcTaskAllRuleSetsReport.html'
+
+    private static final BASE_DIR = 'src'
+    private static final RULESET_FILES = RuleSets.ALL_RULESET_FILES.join(',')
+    private static final REPORT_FILE = 'CodeNarcTaskAllRuleSetsReport.html'
 
     private codeNarcTask
     private fileSet
@@ -59,7 +47,7 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
 
         def project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR), project:project)
-        fileSet.setIncludes('main/**/*.groovy,test/**/*.groovy')
+        fileSet.setIncludes('main/groovy/org/codenarc/rule/basic/*.groovy')
 
         codeNarcTask = new CodeNarcTask(project:project)
         codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:REPORT_FILE))

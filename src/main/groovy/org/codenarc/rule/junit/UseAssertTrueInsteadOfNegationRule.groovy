@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.expr.NotExpression
  * In unit tests, if a condition is expected to be true then there is no sense using assertFalse with the negation operator. For instance, assertFalse(!condition) can always be simplified to assertTrue(condition)
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UseAssertTrueInsteadOfNegationRule extends AbstractAstVisitorRule {
     String name = 'UseAssertTrueInsteadOfNegation'
