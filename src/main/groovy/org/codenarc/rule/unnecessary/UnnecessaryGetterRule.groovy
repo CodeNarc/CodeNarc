@@ -56,7 +56,7 @@ class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
             return
         }
 
-        if ((name[3] as Character).isUpperCase()) {
+        if (name[0..2] == 'get' && (name[3] as Character).isUpperCase()) {
             if (name.length() == 4) {
                 addViolation call, "$name() can probably be rewritten as ${name[3].toLowerCase()}"
             } else if ((name[4] as Character).isLowerCase()) {

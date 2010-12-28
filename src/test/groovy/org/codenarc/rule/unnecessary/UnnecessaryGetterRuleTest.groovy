@@ -69,6 +69,13 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'x.getA()', 'getA() can probably be rewritten as a')
     }
 
+    void testNonGetter() {
+        final SOURCE = '''
+            def allPaths = resultsMap.keySet()
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new UnnecessaryGetterRule()
     }
