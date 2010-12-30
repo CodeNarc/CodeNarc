@@ -21,6 +21,7 @@ import org.apache.log4j.Logger
 import org.codenarc.util.io.ClassPathResource
 import org.codenarc.rule.Rule
 import org.codenarc.util.AstUtil
+import groovy.text.SimpleTemplateEngine
 
 /**
  * Abstract superclass for ReportWriter implementation classes.
@@ -44,6 +45,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     protected getTimestamp = { new Date() }
     protected customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
     protected resourceBundle
+    private templateEngine = new SimpleTemplateEngine()
 
     // Allow tests to override this
     protected initializeResourceBundle = { initializeDefaultResourceBundle() }
@@ -95,11 +97,24 @@ abstract class AbstractReportWriter implements ReportWriter {
     }
 
     protected String getHtmlDescriptionForRule(Rule rule) {
-        getDescriptionProperty(rule) ?: getHtmlRuleDescription(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+        def rawMessageText = getDescriptionProperty(rule) ?: getHtmlRuleDescription(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+        return substituteMessageParametersIfPresent(rule, rawMessageText)
     }
 
     protected String getDescriptionForRule(Rule rule) {
-        getDescriptionProperty(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+        def rawMessageText = getDescriptionProperty(rule) ?: getRuleDescriptionOrDefaultMessage(rule)
+        return substituteMessageParametersIfPresent(rule, rawMessageText)
+    }
+
+    private String substituteMessageParametersIfPresent(Rule rule, String rawMessageText) {
+        if (rawMessageText.contains('${')) {
+            def template = templateEngine.createTemplate(rawMessageText)
+            def binding = [rule:rule]
+            return template.make(binding)
+        }
+        else {
+            return rawMessageText
+        }
     }
 
     private String getHtmlRuleDescription(Rule rule) {

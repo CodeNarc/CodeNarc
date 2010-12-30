@@ -118,6 +118,12 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert reportWriter.getDescriptionForRule(rule) == 'xyz'
     }
 
+    void testGetDescriptionForRule_DescriptionContainsSubstitutionParameters() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name: 'MyRuleXX', priority: 3, description: 'xyz.${rule.name}.${rule.priority}')
+        assert reportWriter.getDescriptionForRule(rule) == 'xyz.MyRuleXX.3'
+    }
+
     void testGetDescriptionForRule_RuleDescriptionNotFoundInMessagesFile() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'Unknown')
@@ -140,6 +146,12 @@ class AbstractReportWriterTest extends AbstractTestCase {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'MyRuleXX', description:'xyz')
         assert reportWriter.getHtmlDescriptionForRule(rule) == 'xyz'
+    }
+
+    void testGetHtmlDescriptionForRule_DescriptionContainsSubstitutionParameters() {
+        reportWriter.initializeResourceBundle()
+        def rule = new StubRule(name: 'MyRuleXX', priority: 3, description: 'xyz.${rule.name}.${rule.priority}')
+        assert reportWriter.getHtmlDescriptionForRule(rule) == 'xyz.MyRuleXX.3'
     }
 
     void testGetHtmlDescriptionForRule_NoRuleDescriptionNotFoundInMessagesFile() {
