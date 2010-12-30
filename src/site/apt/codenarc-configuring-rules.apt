@@ -195,7 +195,8 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
 
   The <<<description>>> property enables overriding the rule description text. If not null,
   this value is used as the description text for this rule, overriding any description text
-  found in the i18n resource bundles. This property defaults to <<<null>>>. 
+  found in the i18n resource bundles. This property defaults to <<<null>>>. Also see
+  {{{Include_Substitutable_Message_Parameters_in_a_Rule_Description}Include Substitutable Message Parameters in a Rule Description}}
 
   You can also override the default <<<name>>> or <<<priority>>> properties for each rule.
 
@@ -264,6 +265,17 @@ AbstractClassName.enabled=false
   See the javadoc for the <<<java.util.ResourceBundle>>> class for more information.
 
 
+** {Include Substitutable Message Parameters in a Rule Description}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can optionally include message parameters within a rule description, whether that description
+  is specified in a ResourceBundle properties file or through the <<<description>>> property of the
+  rule. Use the standard Groovy template parameter syntax: <<<$\{..\}>>>. You can reference rule property
+  values through the "rule" object within the template parameter closure. For example, this description
+  includes the rule <<<priority>>> within the rule description:
+  <<<"Description for rule with priority $\{rule.priority\}">>>.
+
+
 ** The Base Messages Resource Bundle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -310,7 +322,5 @@ AbstractClassName.enabled=false
 
   The rule description must be added to the custom messages resource bundle file 
   ("codenarc-messages.properties"). The message key will be "AuthorTagNotAllowed.description".
-
-
 
 
