@@ -31,8 +31,8 @@ import org.codenarc.test.AbstractTestCase
  */
 class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     private static final BASE_DIR = 'src/test/resources'
-    private project
-    private fileSet
+    private Project project
+    private FileSet fileSet
     private ruleSet
 
     void testConstructor_NullFileSet() {

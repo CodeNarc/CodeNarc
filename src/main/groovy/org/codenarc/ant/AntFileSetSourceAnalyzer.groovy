@@ -67,6 +67,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
      * @return the results from applying the RuleSet to all of the source
      */
     Results analyze(RuleSet ruleSet) {
+        def startTime = System.currentTimeMillis()
         def reportResults = new DirectoryResults()
 
         fileSets.each { fileSet ->
@@ -74,6 +75,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         }
 
         addDirectoryResults(reportResults)
+        LOG.info("analysis time=${System.currentTimeMillis() - startTime}ms")
         reportResults
     }
 
@@ -106,7 +108,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         }
 
         includedFiles.each {filePath ->
-            processFile(baseDir, filePath, reportResults, ruleSet)
+            processFile(baseDir, filePath, ruleSet)
         }
     }
 
@@ -120,18 +122,16 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         parentList.join(SEP)
     }
 
-    private void incrementFileCount(String filePath) {
-        def normalizedParentPath = getParentPath(filePath)
-        def fileCount = fileCountMap[normalizedParentPath]
-        fileCountMap[normalizedParentPath] = fileCount ? fileCount + 1 : 1
+    private void incrementFileCount(String parentPath) {
+        def fileCount = fileCountMap[parentPath]
+        fileCountMap[parentPath] = fileCount ? fileCount + 1 : 1
     }
 
-    private void addToResultsMap(String filePath, results) {
-        def normalizedParentPath = getParentPath(filePath)
-        def dirResults = resultsMap[normalizedParentPath]
+    private void addToResultsMap(String parentPath, results) {
+        def dirResults = resultsMap[parentPath]
         if (dirResults == null) {
             dirResults = []
-            resultsMap[normalizedParentPath] = dirResults
+            resultsMap[parentPath] = dirResults
         }
         if (results) {
             dirResults << results
@@ -164,7 +164,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         }
     }
 
-    private void processFile(File baseDir, String filePath, reportResults, RuleSet ruleSet) {
+    private void processFile(File baseDir, String filePath, RuleSet ruleSet) {
         def file = new File(baseDir, filePath)
         def sourceFile = new SourceFile(file)
         def allViolations = []
@@ -177,8 +177,9 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         if (allViolations) {
             fileResults = new FileResults(normalizePath(filePath), allViolations)
         }
-        addToResultsMap(filePath, fileResults)
-        incrementFileCount(filePath)
+        def parentPath = getParentPath(filePath)
+        addToResultsMap(parentPath, fileResults)
+        incrementFileCount(parentPath)
     }
 
     private String normalizePath(String path) {
