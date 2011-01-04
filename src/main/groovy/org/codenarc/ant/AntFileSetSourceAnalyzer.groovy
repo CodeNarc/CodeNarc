@@ -15,6 +15,13 @@
  */
 package org.codenarc.ant
 
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
+import org.apache.log4j.Logger
+import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.results.DirectoryResults
@@ -22,8 +29,6 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
-import org.apache.log4j.Logger
-import org.apache.tools.ant.Project
 
 /**
  * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
@@ -33,12 +38,13 @@ import org.apache.tools.ant.Project
  */
 class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     private static final LOG = Logger.getLogger(AntFileSetSourceAnalyzer)
-    private static final SEP = '/'
 
     private Project project
     protected List fileSets = []
-    private Map resultsMap = [:]
-    private Map fileCountMap = [:]
+
+    // Concurrent shared state
+    private ConcurrentMap resultsMap = new ConcurrentHashMap()
+    private ConcurrentMap fileCountMap = new ConcurrentHashMap()
 
     // TODO This class could still use some TLC and redesign/refactoring
 
@@ -75,7 +81,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         }
 
         addDirectoryResults(reportResults)
-        LOG.info("analysis time=${System.currentTimeMillis() - startTime}ms")
+        LOG.info("Analysis time=${System.currentTimeMillis() - startTime}ms")
         reportResults
     }
 
@@ -98,7 +104,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         this.fileSets = fileSets
     }
 
-    private void processFileSet(fileSet, ruleSet, reportResults) {
+    private void processFileSet(FileSet fileSet, RuleSet ruleSet, reportResults) {
         def dirScanner = fileSet.getDirectoryScanner(project)
         def baseDir = fileSet.getDir(project)
         def includedFiles = dirScanner.includedFiles
@@ -107,32 +113,59 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
             LOG.info("No matching files found for FileSet with basedir [$baseDir]")
         }
 
+        def numThreads = Runtime.currentRuntime.availableProcessors() + 1
+        def pool = Executors.newFixedThreadPool(numThreads)
+
         includedFiles.each {filePath ->
-            processFile(baseDir, filePath, ruleSet)
+            def task = buildTask(baseDir, filePath, ruleSet)
+            pool.submit(task)
         }
+
+        pool.shutdown()
+        def completed = pool.awaitTermination(60, TimeUnit.MINUTES)
+        assert completed, "Thread Pool terminated before completion."
     }
 
-    private String getParentPath(String filePath) {
-        def normalizedPath = normalizePath(filePath)
-        def partList = normalizedPath ? normalizedPath.tokenize(SEP) : []
-        if (partList.size() < 2) {
-            return null
+    private Runnable buildTask(File baseDir, String filePath, RuleSet ruleSet) {
+        return {
+            try {
+                processFile(baseDir, filePath, ruleSet)
+            } catch (Throwable t) {
+                LOG.info("Error processing filePath: $filePath''", t)
+            }
+        } as Runnable
+    }
+
+    private void processFile(File baseDir, String filePath, RuleSet ruleSet) {
+        def file = new File(baseDir, filePath)
+        def sourceFile = new SourceFile(file)
+        def allViolations = []
+        ruleSet.rules.each {rule ->
+            def violations = rule.applyTo(sourceFile)
+            allViolations.addAll(violations)
         }
-        def parentList = partList[0..-2]
-        parentList.join(SEP)
+
+        def fileResults = null
+        if (allViolations) {
+            fileResults = new FileResults(normalizePath(filePath), allViolations)
+        }
+        def parentPath = getParentPath(filePath)
+        def safeParentPath = parentPath ?: ''
+        addToResultsMap(safeParentPath, fileResults)
+        incrementFileCount(safeParentPath)
     }
 
     private void incrementFileCount(String parentPath) {
+        def initialZeroCount = new AtomicInteger(0)
+        fileCountMap.putIfAbsent(parentPath, initialZeroCount)
         def fileCount = fileCountMap[parentPath]
-        fileCountMap[parentPath] = fileCount ? fileCount + 1 : 1
+        fileCount.incrementAndGet()
     }
 
     private void addToResultsMap(String parentPath, results) {
+        def initialEmptyResults = Collections.synchronizedList([])
+        resultsMap.putIfAbsent(parentPath, initialEmptyResults)
         def dirResults = resultsMap[parentPath]
-        if (dirResults == null) {
-            dirResults = []
-            resultsMap[parentPath] = dirResults
-        }
         if (results) {
             dirResults << results
         }
@@ -153,10 +186,11 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     }
 
     private void addDirectoryResults(Results reportResults) {
-        def allPaths = resultsMap.keySet()
+        def allPaths = resultsMap.keySet().sort()
         allPaths.each { path ->
             def dirResults = new DirectoryResults(path)
-            resultsMap[path].each { child ->
+            def children = resultsMap[path].sort { child -> child.path }
+            children.each { child ->
                 dirResults.addChild(child)
             }
             dirResults.numberOfFilesInThisDirectory = fileCountMap[path] ?: 0
@@ -164,22 +198,18 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         }
     }
 
-    private void processFile(File baseDir, String filePath, RuleSet ruleSet) {
-        def file = new File(baseDir, filePath)
-        def sourceFile = new SourceFile(file)
-        def allViolations = []
-        ruleSet.rules.each {rule ->
-            def violations = rule.applyTo(sourceFile)
-            allViolations.addAll(violations)
-        }
+    // TODO Move to PathUtil----------------------------------------------------------
 
-        def fileResults = null
-        if (allViolations) {
-            fileResults = new FileResults(normalizePath(filePath), allViolations)
+    private static final SEP = '/'
+
+    private String getParentPath(String filePath) {
+        def normalizedPath = normalizePath(filePath)
+        def partList = normalizedPath ? normalizedPath.tokenize(SEP) : []
+        if (partList.size() < 2) {
+            return null
         }
-        def parentPath = getParentPath(filePath)
-        addToResultsMap(parentPath, fileResults)
-        incrementFileCount(parentPath)
+        def parentList = partList[0..-2]
+        parentList.join(SEP)
     }
 
     private String normalizePath(String path) {

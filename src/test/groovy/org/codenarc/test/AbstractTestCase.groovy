@@ -15,6 +15,9 @@
  */
 package org.codenarc.test
 
+import org.apache.log4j.Logger
+import org.apache.log4j.spi.LoggingEvent
+
 /**
  * Abstract superclass for tests 
  *
@@ -90,15 +93,28 @@ abstract class AbstractTestCase extends GroovyTestCase {
 
     protected String captureSystemOut(Closure closure) {
         def originalSystemOut = System.out
-        def out = new ByteArrayOutputStream()
+        def outputStream = new ByteArrayOutputStream()
         try {
-            System.out = new PrintStream(out)
+            System.out = new PrintStream(outputStream)
             closure()
         }
         finally {
             System.out = originalSystemOut
         }
-        out.toString()
+        outputStream.toString()
+    }
+
+    protected List<LoggingEvent> captureLog4JMessages(Closure closure) {
+        def inMemoryAppender = new InMemoryAppender()
+        def logger = Logger.rootLogger
+        logger.addAppender(inMemoryAppender)
+        try {
+            closure()
+        }
+        finally {
+            logger.removeAppender(inMemoryAppender)
+        }
+        return inMemoryAppender.getLoggingEvents()
     }
 
     private String classNameNoPackage() {

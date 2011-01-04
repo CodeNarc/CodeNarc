@@ -18,6 +18,7 @@ package org.codenarc.ant
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.results.Results
+import org.codenarc.rule.Rule
 import org.codenarc.rule.TestCountRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
@@ -54,15 +55,13 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         def sourceFilePaths = results.getViolationsWithPriority(1).collect { it.message }
         assert sourceFilePaths == [
                 'src/test/resources/source/SourceFile1.groovy',
-                'src/test/resources/source/SourceFile2.groovy'
-        ]
+                'src/test/resources/source/SourceFile2.groovy' ]
         assertResultsCounts(results, 2, 2)
 
         assert getAllResultsPaths(results) == [
                 'source',
                 'source/SourceFile1.groovy',
-                'source/SourceFile2.groovy',
-        ]
+                'source/SourceFile2.groovy']
     }
 
     void testAnalyze_NestedSubdirectories() {
@@ -75,10 +74,10 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
                 'src/test/resources/sourcewithdirs/SourceFile1.groovy',
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 //'src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy', -- EXCLUDED
-                'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
-                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
+                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy'
         ]
-        assertEqualSets(sourceFilePaths, EXPECTED_PATHS)
+        assert sourceFilePaths == EXPECTED_PATHS
         assertResultsCounts(results, 4, 4)
 
         final ALL_RESULTS_PATHS = [
@@ -87,11 +86,11 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
                 'sourcewithdirs/subdir1',
                 'sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'sourcewithdirs/subdir2',
+                'sourcewithdirs/subdir2/Subdir2File1.groovy',
                 'sourcewithdirs/subdir2/subdir2a',
-                'sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
-                'sourcewithdirs/subdir2/Subdir2File1.groovy'
+                'sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy'
         ]
-        assertEqualSets(getAllResultsPaths(results), ALL_RESULTS_PATHS)
+        assert getAllResultsPaths(results) == ALL_RESULTS_PATHS
         assertResultsCounts(results.findResultsForPath('sourcewithdirs/subdir1'), 1, 1)
         assertResultsCounts(results.findResultsForPath('sourcewithdirs/subdir2/subdir2a'), 1, 1)
     }
@@ -122,10 +121,10 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         final EXPECTED_PATHS = [
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File2.groovy',
-                'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
-                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
+                'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy',
+                'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy'
         ]
-        assertEqualSets(sourceFilePaths, EXPECTED_PATHS)
+        assert sourceFilePaths == EXPECTED_PATHS
         assertResultsCounts(results, 4, 4)
     }
 
@@ -134,6 +133,17 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
         assertResultsCounts(results, 0, 0)
+    }
+
+    void testAnalyze_LogsThrownExceptions() {
+        fileSet.setIncludes('source/**/*.groovy')
+        def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
+        final EXCEPTION = new RuntimeException("Error in applyTo()")
+        def badRule = [applyTo:{ sourceCode -> throw EXCEPTION }] as Rule
+        def loggingEvents = captureLog4JMessages {
+            analyzer.analyze(new ListRuleSet([badRule]))
+        }
+        assert loggingEvents.find { loggingEvent -> loggingEvent.throwableInformation.throwable == EXCEPTION }
     }
 
     void testGetSourceDirectories_ReturnsEmptyListForNoFileSets() {
