@@ -5,6 +5,15 @@
 Exceptions Rules  ("<rulesets/exceptions.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* CatchArrayIndexOutOfBoundsException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.12>
+
+  Checks for catching a <<<ArrayIndexOutOfBoundsException>>>. Catching <<<ArrayIndexOutOfBoundsException>>> should
+  be avoided in the first place by checking the array size before accessing an array element. Catching the
+  exception may mask underlying errors.
+
+
 * CatchError Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -25,6 +34,15 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 
   Dubious catching of IllegalMonitorStateException. IllegalMonitorStateException is generally only thrown in case of
   a design flaw in your code (calling wait or notify on an object you do not hold a lock on).
+
+
+* CatchIndexOutOfBoundsException Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.12>
+
+  Checks for catching a <<<IndexOutOfBoundsException>>>. Catching <<<IndexOutOfBoundsException>>> should
+  be avoided in the first place by checking for a valid index before accessing an indexed element. Catching the
+  exception may mask underlying errors.
 
 
 * CatchNullPointerException Rule
