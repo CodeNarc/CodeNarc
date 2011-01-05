@@ -34,4 +34,30 @@ class PathUtilTest extends AbstractTestCase{
         assert PathUtil.getName('\\abc') == 'abc'
     }
 
+    void testGetParentPath() {
+        assert PathUtil.getParentPath(null) == null
+        assert PathUtil.getParentPath('') == null
+        assert PathUtil.getParentPath('abc') == null
+        assert PathUtil.getParentPath('a/') == null
+        assert PathUtil.getParentPath('abc\\def\\') == 'abc'
+        assert PathUtil.getParentPath('a/b') == 'a'
+        assert PathUtil.getParentPath('abc/def/ghi') == 'abc/def'
+        assert PathUtil.getParentPath('a\\b\\c\\d\\e\\f') == 'a/b/c/d/e'
+    }
+
+    void testRemovePathPrefix() {
+        assert PathUtil.removePathPrefix(null, 'abc/def') == 'abc/def'
+        assert PathUtil.removePathPrefix('xxx', 'abc/def') == 'abc/def'
+        assert PathUtil.removePathPrefix('abc', 'abcdef') == 'def'
+        assert PathUtil.removePathPrefix('abc', 'abc/def') == 'def'
+        assert PathUtil.removePathPrefix('abc/', 'abc/def') == 'def'
+    }
+
+    void testNormalizePath() {
+        assert PathUtil.normalizePath(null) == null
+        assert PathUtil.normalizePath('') == ''
+        assert PathUtil.normalizePath('abc') == 'abc'
+        assert PathUtil.normalizePath('abc/def') == 'abc/def'
+        assert PathUtil.normalizePath('abc\\def\\ghi') == 'abc/def/ghi'
+    }
 }

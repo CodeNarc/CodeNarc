@@ -23,6 +23,8 @@ package org.codenarc.util
  */
 class PathUtil {
 
+    private static final SEP = '/'
+
     static String getName(String path) {
         if (!path) {
             return null
@@ -32,6 +34,33 @@ class PathUtil {
         int separatorIndex = [separatorIndex1, separatorIndex2].max();
         (separatorIndex == -1) ? path : path.substring(separatorIndex + 1);
     }
+
+     static String getParentPath(String filePath) {
+         def normalizedPath = normalizePath(filePath)
+         def partList = normalizedPath ? normalizedPath.tokenize(SEP) : []
+         if (partList.size() < 2) {
+             return null
+         }
+         def parentList = partList[0..-2]
+         parentList.join(SEP)
+     }
+
+     static String normalizePath(String path) {
+         path ? path.replaceAll('\\\\', SEP) : path
+     }
+
+     static String removePathPrefix(String prefix, String path) {
+         if (prefix && path.startsWith(prefix)) {
+             path = path - prefix
+             return removeLeadingSlash(path)
+         }
+         path
+     }
+
+     private static String removeLeadingSlash(path) {
+         (path.startsWith('\\') || path.startsWith(SEP)) ? path.substring(1) : path
+     }
+
 
     // Private constructor to prevent instantiation. All members are static.
     private PathUtil() { }

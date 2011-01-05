@@ -29,6 +29,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
+import org.codenarc.util.PathUtil
 
 /**
  * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
@@ -45,8 +46,6 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     // Concurrent shared state
     private ConcurrentMap resultsMap = new ConcurrentHashMap()
     private ConcurrentMap fileCountMap = new ConcurrentHashMap()
-
-    // TODO This class could still use some TLC and redesign/refactoring
 
     /**
      * Construct a new instance on the specified Ant FileSet.
@@ -89,7 +88,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         def baseDir = project.baseDir.absolutePath
         fileSets.collect { fileSet ->
             def path = fileSet.getDir(project).path
-            removeBaseDirectoryPrefix(baseDir, path)
+            PathUtil.removePathPrefix(baseDir, path)
         }
     }
 
@@ -111,15 +110,22 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
 
         if (!includedFiles) {
             LOG.info("No matching files found for FileSet with basedir [$baseDir]")
+            return
         }
 
+        executeWithThreadPool { pool ->
+            includedFiles.each { filePath ->
+                def task = buildTask(baseDir, filePath, ruleSet)
+                pool.submit(task)
+            }
+        }
+    }
+
+    private void executeWithThreadPool(Closure closure) {
         def numThreads = Runtime.currentRuntime.availableProcessors() + 1
         def pool = Executors.newFixedThreadPool(numThreads)
 
-        includedFiles.each {filePath ->
-            def task = buildTask(baseDir, filePath, ruleSet)
-            pool.submit(task)
-        }
+        closure(pool)
 
         pool.shutdown()
         def completed = pool.awaitTermination(60, TimeUnit.MINUTES)
@@ -147,9 +153,9 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
 
         def fileResults = null
         if (allViolations) {
-            fileResults = new FileResults(normalizePath(filePath), allViolations)
+            fileResults = new FileResults(PathUtil.normalizePath(filePath), allViolations)
         }
-        def parentPath = getParentPath(filePath)
+        def parentPath = PathUtil.getParentPath(filePath)
         def safeParentPath = parentPath ?: ''
         addToResultsMap(safeParentPath, fileResults)
         incrementFileCount(safeParentPath)
@@ -172,7 +178,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     }
 
     private void addToParentResults(Results reportResults, Results results) {
-        def parentPath = getParentPath(results.path)
+        def parentPath = PathUtil.getParentPath(results.path)
         if (parentPath == null) {
             reportResults.addChild(results)
             return
@@ -196,35 +202,5 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
             dirResults.numberOfFilesInThisDirectory = fileCountMap[path] ?: 0
             addToParentResults(reportResults, dirResults)
         }
-    }
-
-    // TODO Move to PathUtil----------------------------------------------------------
-
-    private static final SEP = '/'
-
-    private String getParentPath(String filePath) {
-        def normalizedPath = normalizePath(filePath)
-        def partList = normalizedPath ? normalizedPath.tokenize(SEP) : []
-        if (partList.size() < 2) {
-            return null
-        }
-        def parentList = partList[0..-2]
-        parentList.join(SEP)
-    }
-
-    private String normalizePath(String path) {
-        path ? path.replaceAll('\\\\', SEP) : path
-    }
-
-    private String removeBaseDirectoryPrefix(String baseDir, String path) {
-        if (path.startsWith(baseDir)) {
-            path = path - baseDir
-            return removeLeadingSlash(path)
-        }
-        path
-    }
-
-    private String removeLeadingSlash(path) {
-        (path.startsWith('\\') || path.startsWith(SEP)) ? path.substring(1) : path
     }
 }
