@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for BooleanInstantiationRule
+ * Tests for UnnecessaryBooleanInstantiationRule
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class BooleanInstantiationRuleTest extends AbstractRuleTestCase {
+class UnnecessaryBooleanInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'BooleanInstantiation'
+        assert rule.name == 'UnnecessaryBooleanInstantiation'
     }
 
     void testApplyTo_NewBoolean() {
@@ -91,7 +91,7 @@ class BooleanInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new BooleanInstantiationRule()
+        new UnnecessaryBooleanInstantiationRule()
     }
 
 }

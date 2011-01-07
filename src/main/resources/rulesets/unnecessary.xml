@@ -9,6 +9,7 @@
     </description>
 
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryBooleanExpressionRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCollectionCallRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryConstructorRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryOverridingMethodRule'/>
@@ -26,4 +27,5 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryObjectReferencesRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryGetterRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCallForLastElementRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule'/>
 </ruleset>

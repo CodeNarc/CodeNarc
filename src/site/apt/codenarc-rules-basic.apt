@@ -35,25 +35,6 @@ Basic Rules  ("<rulesets/basic.xml>")
   result in a <<<NullPointerException>>>.
 
 
-* BooleanInstantiation Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  Checks for direct call to a <<<Boolean>>> constructor. Use <<<Boolean.valueOf()>>> or the <<<Boolean.TRUE>>>
-  and <<<Boolean.FALSE>>> constants instead of calling the <<<Boolean()>>> constructor directly.
-
-  Also checks for <<<Boolean.valueOf(true)>>> or <<<Boolean.valueOf(false)>>>. Use the <<<Boolean.TRUE>>>
-  or <<<Boolean.FALSE>>> constants instead.
-
-  Here is an example of code that produces a violation:
-  
--------------------------------------------------------------------------------
-    def b1 = new Boolean(true)             // violation
-    def b2 = new java.lang.Boolean(false)  // violation
-    def b3 = Boolean.valueOf(true)         // violation
-    def b4 = Boolean.valueOf(false)        // violation
--------------------------------------------------------------------------------
-
-
 * CloneableWithoutClone Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -648,20 +629,6 @@ Basic Rules  ("<rulesets/basic.xml>")
   <<<long>>>, <<<static>>>, and <<<final>>>. Also, it should have a <visibility modifier> such
   as <<<public>>> or <<<private>>>. Providing no modifier creates a <Property> and Groovy generates
   a <getter>, which is probably not intended.
-
-
-* StringInstantiation Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  Checks for direct call to the <<<String>>> constructor that accepts a <<<String>>> literal.
-  In almost all cases, this is unnecessary. Use a <<<String>>> literal (e.g., "...") instead of calling the
-  corresponding <<<String>>> constructor (<<<new String("..")>>>) directly.
-
-  Here is an example of code that produces a violation:
-
--------------------------------------------------------------------------------
-    def s = new String('abc')
--------------------------------------------------------------------------------
 
 
 * ThrowExceptionFromFinallyBlock

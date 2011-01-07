@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule
 
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * Abstract superclass for AST Visitor classes that deal with constructor calls

@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.Expression
+
+import org.codenarc.rule.AbstractConstructorCallAstVisitor
 
 /**
  * Rule that checks for direct call to Boolean constructor - use Boolean.valueOf() instead.
@@ -30,13 +31,13 @@ import org.codehaus.groovy.ast.expr.Expression
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class BooleanInstantiationRule extends AbstractAstVisitorRule {
-    String name = 'BooleanInstantiation'
+class UnnecessaryBooleanInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryBooleanInstantiation'
     int priority = 2
-    Class astVisitorClass = BooleanInstantiationAstVisitor
+    Class astVisitorClass = UnnecessaryBooleanInstantiationAstVisitor
 }
 
-class BooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
+class UnnecessaryBooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
     static final NEW_BOOLEAN = /new +(java\.lang\.)?Boolean\(/
 
     protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {

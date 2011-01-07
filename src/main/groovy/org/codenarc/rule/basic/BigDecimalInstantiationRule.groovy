@@ -18,6 +18,7 @@ package org.codenarc.rule.basic
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractConstructorCallAstVisitor
 
 /**
  * Rule that checks for calls to the BigDecimal constructor with a double or float literal.

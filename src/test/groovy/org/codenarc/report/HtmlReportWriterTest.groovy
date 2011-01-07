@@ -20,9 +20,9 @@ import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
-import org.codenarc.rule.basic.BooleanInstantiationRule
+import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.rule.basic.ReturnFromFinallyBlockRule
-import org.codenarc.rule.basic.StringInstantiationRule
+import org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule
 import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.ruleset.ListRuleSet
@@ -97,13 +97,13 @@ class HtmlReportWriterTest extends AbstractTestCase {
     }
 
     void testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile() {
-        def biRule = new BooleanInstantiationRule()
+        def biRule = new UnnecessaryBooleanInstantiationRule()
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
         analysisContext.ruleSet = ruleSet
         reportWriter.writeReport(analysisContext, results)
         def reportText = getReportText()
         assertContainsAllInOrder(reportText, BASIC_CONTENTS)
-        assertContainsAllInOrder(reportText, [biRule.name, 'MyRuleXX', 'HTML Rule XX', 'MyRuleYY', 'My Rule YY'])
+        assertContainsAllInOrder(reportText, ['MyRuleXX', 'HTML Rule XX', 'MyRuleYY', 'My Rule YY', biRule.name])
     }
 
     void testWriteReport_RuleDescriptionsSetDirectlyOnTheRule() {
@@ -218,9 +218,9 @@ class HtmlReportWriterTest extends AbstractTestCase {
         results.addChild(dirResultsMain)
 
         ruleSet = new ListRuleSet([
-                new BooleanInstantiationRule(),
+                new UnnecessaryBooleanInstantiationRule(),
                 new ReturnFromFinallyBlockRule(),
-                new StringInstantiationRule(),
+                new UnnecessaryStringInstantiationRule(),
                 new ThrowExceptionFromFinallyBlockRule(),
                 new DuplicateImportRule()
         ])

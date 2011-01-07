@@ -9,7 +9,6 @@
     </description>
 
     <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
-    <rule class='org.codenarc.rule.basic.BooleanInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.BooleanMethodReturnsNullRule'/>
     <rule class='org.codenarc.rule.basic.CloneableWithoutCloneRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
@@ -31,7 +30,6 @@
     <rule class='org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyArrayRule'/>
     <rule class='org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyCollectionRule'/>
     <rule class='org.codenarc.rule.basic.SerialVersionUIDRule'/>
-    <rule class='org.codenarc.rule.basic.StringInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToPlusMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitCallToMinusMethodRule'/>

@@ -19,7 +19,7 @@ import org.codenarc.test.AbstractTestCase
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.rule.basic.BooleanInstantiationRule
+import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.AnalysisContext
 import org.codenarc.rule.Violation
@@ -104,11 +104,11 @@ class XmlReportWriterTest extends AbstractTestCase {
         </Package>
 
         <Rules>
-            <Rule name='BooleanInstantiation'>
-                <Description><![CDATA[Use Boolean.valueOf() for variable values or Boolean.TRUE and Boolean.FALSE for constant values instead of calling the Boolean() constructor directly or calling Boolean.valueOf(true) or Boolean.valueOf(false).]]></Description>
-            </Rule>
             <Rule name='DuplicateImport'>
                 <Description><![CDATA[Custom: Duplicate imports]]></Description>
+            </Rule>
+            <Rule name='UnnecessaryBooleanInstantiation'>
+                <Description><![CDATA[Use Boolean.valueOf() for variable values or Boolean.TRUE and Boolean.FALSE for constant values instead of calling the Boolean() constructor directly or calling Boolean.valueOf(true) or Boolean.valueOf(false).]]></Description>
             </Rule>
         </Rules>
     </CodeNarc>
@@ -192,7 +192,7 @@ class XmlReportWriterTest extends AbstractTestCase {
 
         ruleSet = new ListRuleSet([     // NOT in alphabetical order
             new DuplicateImportRule(description:'Custom: Duplicate imports'),
-            new BooleanInstantiationRule()
+            new UnnecessaryBooleanInstantiationRule()
         ])
         analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
         stringWriter = new StringWriter()

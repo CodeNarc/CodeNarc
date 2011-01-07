@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractConstructorCallAstVisitor
 
 /**
  * Rule that checks for direct call to the String constructor that accepts a String literal.
@@ -26,13 +27,13 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class StringInstantiationRule extends AbstractAstVisitorRule {
-    String name = 'StringInstantiation'
+class UnnecessaryStringInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryStringInstantiation'
     int priority = 2
-    Class astVisitorClass = StringInstantiationAstVisitor
+    Class astVisitorClass = UnnecessaryStringInstantiationAstVisitor
 }
 
-class StringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
+class UnnecessaryStringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
     static final NEW_STRING = /new +(java\.lang\.)?String\(/
 
     @SuppressWarnings('ExplicitCallToGetAtMethod')
