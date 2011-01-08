@@ -1,0 +1,122 @@
+/*
+ * Copyright 2009 the original author or authors.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codenarc.rule.unused
+
+import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.Rule
+
+/**
+ * Tests for UnusedPrivateMethodParameterRule
+ *
+ * @author Chris Mair
+ * @version $Revision$ - $Date$
+ */
+class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
+
+    void testRuleProperties() {
+        assert rule.priority == 2
+        assert rule.name == 'UnusedPrivateMethodParameter'
+    }
+
+    void testApplyTo_SingleUnusedPrivateMethodParameter() {
+        final SOURCE = '''
+            class MyClass {
+                private void myMethod(int value) { }
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'private void myMethod(int value) { }', 'value')
+    }
+
+    void testApplyTo_MultipleUnusedParametersForSinglePrivateMethod() {
+        final SOURCE = '''
+          class MyClass {
+              private void myMethod(int value, String name) { }
+          }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'private void myMethod(int value, String name) { }', messageText:'value'],
+            [lineNumber:3, sourceLineText:'private void myMethod(int value, String name) { }', messageText:'name'])
+    }
+
+    void testApplyTo_MultiplePrivateMethodsWithUnusedParameters() {
+        final SOURCE = '''
+          class MyClass {
+              private void myMethod1(String id, int value) { print value }
+              private void myMethod2(int value) { print value }
+              private int myMethod3(Date startDate) { }
+          }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'private void myMethod1(String id, int value) { print value }', messageText:'id'],
+            [lineNumber:5, sourceLineText:'private int myMethod3(Date startDate) { }', messageText:'startDate'])
+    }
+
+   void testApplyTo_AllParametersUsed() {
+        final SOURCE = '''
+          class MyClass {
+              private String myMethod1(String id, int value) { doSomething(value); return id }
+              private void myMethod2(int value) { def x = value }
+              private def myMethod3(Date startDate) { return "${startDate}" }
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_NonPrivateMethods() {
+        final SOURCE = '''
+            class MyClass {
+                void myMethod1(String id, int value) { }
+                protected void myMethod2(int value) { }
+                public int myMethod3(Date startDate) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_OnlyReferenceIsAMapKeyOrValue() {
+        final SOURCE = '''
+            class MyClass {
+                private myMethod1(String id, int value) {
+                    return [(id):value]
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ParameterIsAClosureThatIsCalled() {
+        final SOURCE = '''
+            class MyClass {
+                private myMethod1(Closure closure, def closure2, closure3) {
+                    def value1 = closure()
+                    def value2 = closure2.call()
+                    return closure3(value1, value2)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_NoMethods() {
+        final SOURCE = ' class MyClass { } '
+        assertNoViolations(SOURCE)
+    }
+
+    protected Rule createRule() {
+        new UnusedPrivateMethodParameterRule()
+    }
+
+}

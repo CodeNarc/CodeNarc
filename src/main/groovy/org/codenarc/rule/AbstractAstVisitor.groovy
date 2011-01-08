@@ -185,7 +185,12 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
                 }
             }
             super.visitMethod node
+            visitMethodComplete(node)
         }
+    }
+
+    protected void visitMethodComplete(MethodNode node) {
+        // empty on purpose
     }
 
     void visitMethodEx(MethodNode node) {

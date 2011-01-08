@@ -5,7 +5,7 @@ http://www.codenarc.org
 Changes in version 0.12 (January 2011)
 -------------------------------------------
 NEW FEATURES
-- Improved performance (by multi-threading source code analysis) - Feature #3150044
+- Improved performance of the CodeNarc Ant Task (by multi-threading source code analysis) - Feature #3150044
 - Add support for substitutable message parameters in Rule descriptions - Feature #3133988
 
 NEW RULES
@@ -30,6 +30,7 @@ NEW RULES
 - UnnecessaryCatchBlock rule  (unnecessary)- Feature #3110318
 - UnnecessaryObjectReferences rule (unnecessary)- Feature #3110319
 - UnnecessaryGetter rule  (unnecessary)- Feature #3110321
+- UnusedPrivateMethodParameter rule (unused) - Feature #3151598.
 
 BUG FIXES
 - Fix Bug #3127967 DuplicateImportRule: Fix for Groovy 1.7. Resort to parsing source code.

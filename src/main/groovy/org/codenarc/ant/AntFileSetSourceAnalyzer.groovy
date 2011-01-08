@@ -76,7 +76,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         def reportResults = new DirectoryResults()
 
         fileSets.each { fileSet ->
-            processFileSet(fileSet, ruleSet, reportResults)
+            processFileSet(fileSet, ruleSet)
         }
 
         addDirectoryResults(reportResults)
@@ -103,7 +103,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         this.fileSets = fileSets
     }
 
-    private void processFileSet(FileSet fileSet, RuleSet ruleSet, reportResults) {
+    private void processFileSet(FileSet fileSet, RuleSet ruleSet) {
         def dirScanner = fileSet.getDirectoryScanner(project)
         def baseDir = fileSet.getDir(project)
         def includedFiles = dirScanner.includedFiles
