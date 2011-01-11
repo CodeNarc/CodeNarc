@@ -55,4 +55,5 @@
     <rule class='org.codenarc.rule.basic.DeadCodeRule'/>
     <rule class='org.codenarc.rule.basic.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.basic.CompareToWithoutComparableRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitGarbageCollectionRule'/>
 </ruleset>
