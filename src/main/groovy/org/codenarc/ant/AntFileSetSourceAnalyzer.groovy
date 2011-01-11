@@ -122,7 +122,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     }
 
     private void executeWithThreadPool(Closure closure) {
-        def numThreads = Runtime.currentRuntime.availableProcessors() + 1
+        def numThreads = Runtime.getRuntime().availableProcessors() + 1
         def pool = Executors.newFixedThreadPool(numThreads)
 
         closure(pool)

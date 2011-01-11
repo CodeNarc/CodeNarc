@@ -28,7 +28,7 @@ import org.codenarc.util.io.DefaultResourceFactory
  * @version $Revision$ - $Date$
  */
 class GroovyDslRuleSet implements RuleSet {
-    private static final LOG = Logger.getLogger(XmlFileRuleSet)
+    private static final LOG = Logger.getLogger(GroovyDslRuleSet)
     private ResourceFactory resourceFactory = new DefaultResourceFactory()
     private rules
 

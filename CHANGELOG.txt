@@ -16,6 +16,7 @@ NEW RULES
 - UseAssertFalseInsteadOfNegation rule (junit) - Feature #3114728.
 - UseAssertTrueInsteadOfNegation rule (junit) - Feature #3114728.
 - JUnitTestMethodWithoutAssert. rule (junit) - Feature #3111443
+- LoggerForDifferentClass rule (logging) - Feature #3114736
 - UnnecessaryBigDecimalInstantiation rule (unnecessary).
 - UnnecessaryBigIntegerInstantiation rule (unnecessary).
 - UnnecessaryDoubleInstantiation rule (unnecessary).
