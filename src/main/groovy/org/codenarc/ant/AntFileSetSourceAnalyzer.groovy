@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,9 @@ import org.codenarc.util.PathUtil
  * @version $Revision$ - $Date$
  */
 class AntFileSetSourceAnalyzer implements SourceAnalyzer {
+
     private static final LOG = Logger.getLogger(AntFileSetSourceAnalyzer)
+    private static final POOL_TIMEOUT_SECONDS = 60 * 60
 
     private Project project
     protected List fileSets = []
@@ -128,7 +130,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
         closure(pool)
 
         pool.shutdown()
-        def completed = pool.awaitTermination(60, TimeUnit.MINUTES)
+        def completed = pool.awaitTermination(POOL_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         assert completed, "Thread Pool terminated before completion."
     }
 
