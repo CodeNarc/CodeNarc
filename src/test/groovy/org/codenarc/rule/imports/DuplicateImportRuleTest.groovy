@@ -46,6 +46,24 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'import java.io.InputStream')
     }
 
+    void testApplyTo_DuplicateImportWithWildcards_Violation() {
+        final SOURCE = '''
+            import java.io.*
+            import org.sample.MyClass
+            import java.io.*
+        '''
+        assertSingleViolation(SOURCE, 4, 'import java.io.*')
+    }
+
+    void testApplyTo_ImportsWithWildcards_NoViolations() {
+        final SOURCE = '''
+            import java.io.*
+            import org.sample.*
+            import java.text.*
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_MultipleDuplicateImports() {
         final SOURCE = '''
             import abc.def.MyClass
@@ -56,6 +74,32 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
             interface MyInterface { }
         '''
         assertTwoViolations(SOURCE, 4, 'import abc.def.MyClass', 6, 'import abc.def.MyClass')
+    }
+
+    void testApplyTo_DuplicateStaticImportWithWildcards_Violation() {
+        final SOURCE = '''
+            import static com.wystar.app.payroll.util.DataMaintenanceUtil.*
+            import static com.wystar.app.payroll.util.PayrollProcessingConstants.*
+            import static com.wystar.app.payroll.util.DataMaintenanceUtil.*
+            import org.sample.MyClass
+        '''
+        assertSingleViolation(SOURCE, 4, 'import static com.wystar.app.payroll.util.DataMaintenanceUtil.*')
+    }
+
+    void testApplyTo_StaticImportWithWildcards_NoViolations() {
+        final SOURCE = '''
+            import static com.wystar.app.payroll.util.DataMaintenanceUtil.*
+            import static com.wystar.app.payroll.util.PayrollProcessingConstants.*
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_CommentedOutDuplicateImport_NoViolations() {
+        final SOURCE = '''
+            import java.io.InputStream
+            // import java.io.InputStream
+        '''
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NoViolations() {

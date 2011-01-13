@@ -33,26 +33,45 @@ class DuplicateImportRule extends AbstractRule {
     String name = 'DuplicateImport'
     int priority = 3
 
-    private static final IMPORT_PATTERN = /\s*import\s+(\w+(\.\w+)*)\b.*/
+    private static final IMPORT_PATTERN = /^\s*import\s+(\w+(\.\w+)*)\b.*/
+    private static final STATIC_IMPORT_PATTERN = /^\s*import\s+static\s+(\w+(\.\w+)*)\b.*/
 
     void applyTo(SourceCode sourceCode, List violations) {
         def importNames = [] as Set
+        def staticImportNames = [] as Set
 
         def firstClassDeclarationLine = findLineNumberOfFirstClassDeclaration(sourceCode)
 
         for(int index=0; index < firstClassDeclarationLine; index++) {
-
             def line = sourceCode.lines[index]
             def lineNumber = index + 1
-            def importMatcher = line =~ IMPORT_PATTERN
-            if (importMatcher) {
-                def importName = importMatcher[0][1]
-                if (importNames.contains(importName)) {
-                    violations.add(new Violation(rule:this, sourceLine:line.trim(), lineNumber:lineNumber))
-                }
-                else {
-                    importNames.add(importName)
-                }
+            checkImport(line, lineNumber, importNames, violations)
+            checkStaticImport(line, lineNumber, staticImportNames, violations)
+        }
+    }
+
+    private void checkImport(line, lineNumber, importNames, violations) {
+        def importMatcher = line =~ IMPORT_PATTERN
+        if (importMatcher) {
+            def importName = importMatcher[0][1]
+            if (importName != 'static' && importNames.contains(importName)) {
+                violations.add(new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber))
+            }
+            else {
+                importNames.add(importName)
+            }
+        }
+    }
+
+    private void checkStaticImport(line, lineNumber, staticImportNames, violations) {
+        def importMatcher = line =~ STATIC_IMPORT_PATTERN
+        if (importMatcher) {
+            def staticImportName = importMatcher[0][1]
+            if (staticImportNames.contains(staticImportName)) {
+                violations.add(new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber))
+            }
+            else {
+                staticImportNames.add(staticImportName)
             }
         }
     }
