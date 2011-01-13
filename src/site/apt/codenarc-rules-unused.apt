@@ -118,5 +118,8 @@ Unused Rules  ("<rulesets/unused.xml>")
 
   Known limitations:
 
+  * Will not recognize variable references within an inner class. See
+    {{{https://sourceforge.net/tracker/index.php?func=detail&aid=3155974&group_id=250145&atid=1126573}CodeNarc bug #3155974}}.
+
   * Incorrectly considers a variable referenced if another variable with the same name is referenced
     elsewhere (in another scope/block).

@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'int count')
+        assertSingleViolation(SOURCE, 4, 'int count', 'count')
     }
 
     void testApplyTo_SingleUnusedVariable_WithInitialExpression() {
@@ -50,7 +50,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'int count = 23')
+        assertSingleViolation(SOURCE, 4, 'int count = 23', 'count')
     }
 
     void testApplyTo_MultipleUnusedVariables() {
@@ -98,7 +98,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'int count = 23')
+        assertSingleViolation(SOURCE, 4, 'int count = 23', 'count')
     }
 
     void testApplyTo_SameVariableInOtherBlocks() {
@@ -157,7 +157,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'int count = 99')
+        assertSingleViolation(SOURCE, 4, 'int count = 99', 'count')
     }
 
     void testApplyTo_ReferencedWithinClosure() {
@@ -235,7 +235,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, "def count = { println 'ok' }")
+        assertSingleViolation(SOURCE, 4, "def count = { println 'ok' }", 'count')
     }
 
     void testApplyTo_ExplicitMethodCallOnThisWithSameMethodName() {
@@ -248,7 +248,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 def count() { println 99 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'int count = 23')
+        assertSingleViolation(SOURCE, 4, 'int count = 23', 'count')
     }
 
     void testApplyTo_ReferencedOnSameLineAsDeclaration() {
@@ -263,11 +263,28 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    // Known issue: UnusedVariable rule misses references within inner classes
+    // See https://sourceforge.net/tracker/?func=detail&aid=3155974&group_id=250145&atid=1126573
+    void testApplyTo_VariableOnlyReferencedWithinInnerClass_Violation_KnownIssue() {
+        final SOURCE = '''
+            def buildCallable() {
+                String ssn = 'xxx'
+                return new Callable<Object>(){
+                    public Object call(){
+                        return participantDao.getParticipantPlans(ssn)
+                    }
+                }
+            }
+        '''
+        //assertNoViolations(SOURCE) -- should be this
+        assertSingleViolation(SOURCE, 3, "String ssn = 'xxx'", 'ssn')
+    }
+
     void testApplyTo_Script_UnusedVariable() {
         final SOURCE = '''
             BigDecimal depositAmount
         '''
-        assertSingleViolation(SOURCE, 2, 'BigDecimal depositAmount')
+        assertSingleViolation(SOURCE, 2, 'BigDecimal depositAmount', 'depositAmount')
     }
 
     void testApplyTo_Script_UnusedBinding() {

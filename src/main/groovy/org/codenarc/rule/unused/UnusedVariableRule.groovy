@@ -58,7 +58,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
 
         variablesInCurrentBlockScope.each { varExpression, isUsed ->
             if (!isUsed) {
-                addViolation(varExpression)
+                addViolation(varExpression, "The variable [${varExpression.name}] is not used")
             }
         }
 
