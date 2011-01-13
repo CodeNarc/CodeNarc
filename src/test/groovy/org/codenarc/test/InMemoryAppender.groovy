@@ -24,7 +24,7 @@ import org.apache.log4j.spi.LoggingEvent
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class InMemoryAppender extends AppenderSkeleton {
+class InMemoryAppender extends AppenderSkeleton implements Closeable {
 
     private List loggingEvents = []
 

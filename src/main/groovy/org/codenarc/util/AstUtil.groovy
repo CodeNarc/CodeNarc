@@ -529,7 +529,7 @@ class AstUtil {
         if (node.name != methodName) {
             return false
         }
-        if (numArguments && node.parameters?.length != numArguments) {
+        if (numArguments != null && node.parameters?.length != numArguments) {
             return false
         }
         if (returnType && !AstUtil.classNodeImplementsType (node.returnType, returnType)) {

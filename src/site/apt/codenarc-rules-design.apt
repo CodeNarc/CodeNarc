@@ -5,6 +5,11 @@
 Design Rules  ("<rulesets/design.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* CloseWithoutCloseable Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  If a class defines a "void close()" then that class should implement java.io.Closeable.
+
 * ImplementationAsType Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
