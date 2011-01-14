@@ -16,4 +16,5 @@
 
     <rule class='org.codenarc.rule.logging.LoggerWithWrongModifiersRule'/>
     <rule class='org.codenarc.rule.logging.MultipleLoggersRule'/>
+    <rule class='org.codenarc.rule.logging.LoggingSwallowsStacktraceRule'/>
 </ruleset>
