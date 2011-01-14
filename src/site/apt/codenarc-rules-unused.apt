@@ -108,6 +108,9 @@ Unused Rules  ("<rulesets/unused.xml>")
 
   Known limitations:
 
+  * Will not recognize parameter references within an inner class. This is related to
+    {{{https://sourceforge.net/tracker/index.php?func=detail&aid=3155974&group_id=250145&atid=1126573}CodeNarc bug #3155974}}.
+
   * Does not recognize parameter references when parameter name is a GString (e.g. <<<println "${parameterName}">>>)
 
 

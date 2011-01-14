@@ -10,6 +10,9 @@ NEW FEATURES
 
 NEW RULES
 - CompareToWithoutComparable rule (basic)
+- ExplicitGarbageCollection rule (basic) - Feature #3106689
+- CloseWithoutCloseable rule (design) - Feature #3138445
+- FinalClassWithProtectedMember rule (design) - Feature #3137650
 - CatchArrayIndexOutOfBoundsException rule (exceptions)  - Feature #3122979
 - CatchIndexOutOfBoundsException rule (exceptions)  - Feature #3122979
 - RequiredString rule (generic) - Feature #3122980
