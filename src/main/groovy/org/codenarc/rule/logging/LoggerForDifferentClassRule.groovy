@@ -22,14 +22,16 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Rule that checks for instantiating a logger for a class other than the current class. Checks for logger
- * instantiations for Log4J, Apache Commons Logging and Java Logging API (java.util.logging).
+ * Rule that checks for instantiating a logger for a class other than the current class. Supports logger
+ * instantiations for Log4J, Logback, SLF4J, Apache Commons Logging, Java Logging API (java.util.logging).
  *
  * Limitations:
  * <ul>
  *   <li>Only checks Loggers instantiated within a class field or property (not variables or expressions within a method)</li>
  *   <li>For Log4J: Does not catch Logger instantiations if you specify the full package name for the Logger class:
  *      e.g.  org.apache.log4.Logger.getLogger(..)</li>
+ *   <li>For SLF4J and Logback: Does not catch Log instantiations if you specify the full package name for the LoggerFactory
+ *      class: e.g.  org.slf4j.LoggerFactory.getLogger(..)</li>
  *   <li>For Commons Logging: Does not catch Log instantiations if you specify the full package name for the LogFactory
  *      class: e.g.  org.apache.commons.logging.LogFactory.getLog(..)</li>
  *   <li>For Java Logging API: Does not catch Logger instantiations if you specify the full package name for the Logger
@@ -68,7 +70,8 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
 
     private boolean isMatchingLoggerDefinition(expression) {
         return AstUtil.isMethodCall(expression, 'Logger', 'getLogger', 1) ||
-            AstUtil.isMethodCall(expression, 'LogFactory', 'getLog', 1)
+            AstUtil.isMethodCall(expression, 'LogFactory', 'getLog', 1) ||
+            AstUtil.isMethodCall(expression, 'LoggerFactory', 'getLogger', 1)
     }
 
     private boolean isEqualToCurrentClassOrClassName(String argText) {

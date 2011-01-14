@@ -10,20 +10,24 @@ Logging Rules  ("<rulesets/logging.xml>")
   <Since CodeNarc 0.12>
 
   Checks for instantiating a logger for a class other than the current class. Checks for logger
-  instantiations for <<Log4J>>, <<Apache Commons Logging>> and <<Java Logging API (java.util.logging)>>.
+  instantiations for <<Log4J>>, <<SLF4J>>, <<Logback>>, <<Apache Commons Logging>> and <<Java Logging API
+  (java.util.logging)>>.
 
   Limitations:
 
   * Only checks Loggers instantiated within a class field or property (not variables or expressions within a method)
 
-  * For <<Log4J>>: Does not catch Logger instantiations if you specify the full package name for the Logger class:
-    e.g.  <<<org.apache.log4.Logger.getLogger(..)>>>
+  * For <<Log4J>>: Does not catch Logger instantiations if you specify the full package name for the <<<Logger>>>
+    class: e.g.  <<<org.apache.log4.Logger.getLogger(..)>>>
 
-  * For <<Commons Logging>>: Does not catch Log instantiations if you specify the full package name for the LogFactory
-       class: e.g.  <<<org.apache.commons.logging.LogFactory.getLog(..)>>>
+  * For <<SLF4J>> and <<Logback>>: Does not catch Log instantiations if you specify the full package name for the
+    <<<LoggerFactory>>> class: e.g. <<<org.slf4j.LoggerFactory.getLogger(..)>>>
 
-  * For <<Java Logging API>>: Does not catch Logger instantiations if you specify the full package name for the Logger
-       class: e.g.  <<<java.util.logging.Logger.getLogger(..)>>>
+  * For <<Commons Logging>>: Does not catch Log instantiations if you specify the full package name for the
+    <<<LogFactory>>> class: e.g.  <<<org.apache.commons.logging.LogFactory.getLog(..)>>>
+
+  * For <<Java Logging API>>: Does not catch Logger instantiations if you specify the full package name for the
+    <<<Logger>>> class: e.g.  <<<java.util.logging.Logger.getLogger(..)>>>
 
   []
 

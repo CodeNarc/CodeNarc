@@ -178,6 +178,74 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    // LoggerFactory (SLF4J and Logback) Tests
+
+    void testApplyTo_LoggerFactory_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                private static final LOG = LoggerFactory.getLogger(SomeOtherClass)
+                Log log = LoggerFactory.getLogger(SomeOtherClass.class)
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'private static final LOG = LoggerFactory.getLogger(SomeOtherClass)'],
+            [lineNumber:4, sourceLineText:'Log log = LoggerFactory.getLogger(SomeOtherClass.class)'])
+    }
+
+    void testApplyTo_LoggerFactory_SameClass_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private static final LOG = LoggerFactory.getLogger(MyClass)
+                def log2 = LoggerFactory.getLogger(MyClass.class)
+                private static log3 = LoggerFactory.getLogger(MyClass.getClass().getName())
+                private static log4 = LoggerFactory.getLogger(MyClass.getClass().name)
+                private static log5 = LoggerFactory.getLogger(MyClass.class.getName())
+                private static log6 = LoggerFactory.getLogger(MyClass.class.name)
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_LoggerFactory_This_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private static final LOG = LoggerFactory.getLogger(this)
+                def log2 = LoggerFactory.getLogger(this.class)
+                private static log3 = LoggerFactory.getLogger(this.getName())
+                private static log4 = LoggerFactory.getLogger(this.name)
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_LoggerFactory_NotAClassOrClassName_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private static final log1 = LoggerFactory.getLogger(getLogName())
+                private static final log2 = LoggerFactory.getLogger("some.OtherName")
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_LoggerFactory_ConstantForLoggerName_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                private static final log = LoggerFactory.getLogger(CONSTANT)
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'private static final log = LoggerFactory.getLogger(CONSTANT)')
+    }
+
+    void testApplyTo_LoggerFactory_FullPackageNameOfLoggerFactory_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private static final log = org.apache.commons.logging.LoggerFactory.getLogger(SomeOtherClass)
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new LoggerForDifferentClassRule()
     }

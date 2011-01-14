@@ -25,7 +25,7 @@ import java.lang.reflect.Modifier
  * If a class defines a "void close()" then that class should implement java.io.Closeable.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CloseWithoutCloseableRule extends AbstractAstVisitorRule {
     String name = 'CloseWithoutCloseable'
