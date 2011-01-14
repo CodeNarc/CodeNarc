@@ -44,14 +44,14 @@ class UnnecessaryIntegerInstantiationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new Integer("42")
         '''
-        assertSingleViolation(SOURCE, 2, 'new Integer("42")', "Can probably be rewritten as 42i")
+        assertSingleViolation(SOURCE, 2, 'new Integer("42")', "Can be rewritten as 42 or 42i")
     }
 
     void testIntConstructor() {
         final SOURCE = '''
             new Integer(42)
         '''
-        assertSingleViolation(SOURCE, 2, 'new Integer(42)', "Can probably be rewritten as 42i")
+        assertSingleViolation(SOURCE, 2, 'new Integer(42)', "Can be rewritten as 42 or 42i")
     }
 
     protected Rule createRule() {

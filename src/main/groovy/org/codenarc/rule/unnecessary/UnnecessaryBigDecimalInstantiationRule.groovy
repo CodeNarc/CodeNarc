@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,6 @@ class UnnecessaryBigDecimalInstantiationRule extends AbstractAstVisitorRule {
 class UnnecessaryBigDecimalInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
     UnnecessaryBigDecimalInstantiationAstVisitor() {
-        super(BigDecimal, [String, Double, Integer, Long], 'G')
+        super(BigDecimal, [String, Double, Integer, Long], 'G', false)
     }
 }

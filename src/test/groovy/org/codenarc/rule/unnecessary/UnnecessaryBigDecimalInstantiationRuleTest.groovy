@@ -44,28 +44,28 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new BigDecimal("42.10")
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal("42.10")', 'Can probably be rewritten as 42.10G')
+        assertSingleViolation(SOURCE, 2, 'new BigDecimal("42.10")', 'Can be rewritten as 42.10 or 42.10G')
     }
 
     void testDoubleConstructor() {
         final SOURCE = '''
             new BigDecimal(42.10d)
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42.10d)', 'Can probably be rewritten as 42.1G')
+        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42.10d)', 'Can be rewritten as 42.1 or 42.1G')
     }
 
     void testIntConstructor() {
         final SOURCE = '''
             new BigDecimal(42i)
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42i)', 'Can probably be rewritten as 42G')
+        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42i)', 'Can be rewritten as 42 or 42G')
     }
 
     void testLongConstructor() {
         final SOURCE = '''
             new BigDecimal(42L)
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42L)', 'Can probably be rewritten as 42G')
+        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42L)', 'Can be rewritten as 42 or 42G')
     }
 
     protected Rule createRule() {

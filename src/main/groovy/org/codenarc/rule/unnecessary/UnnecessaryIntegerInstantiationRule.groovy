@@ -32,6 +32,6 @@ class UnnecessaryIntegerInstantiationRule extends AbstractAstVisitorRule {
 class UnnecessaryIntegerInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
     UnnecessaryIntegerInstantiationAstVisitor() {
-        super(Integer, [String, Integer], 'i')
+        super(Integer, [String, Integer], 'i', false)
     }
 }

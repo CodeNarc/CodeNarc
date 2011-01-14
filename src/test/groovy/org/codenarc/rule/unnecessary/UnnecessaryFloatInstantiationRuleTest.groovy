@@ -44,21 +44,21 @@ class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new Float("42.10")
         '''
-        assertSingleViolation(SOURCE, 2, 'new Float("42.10")', "Can probably be rewritten as 42.10f")
+        assertSingleViolation(SOURCE, 2, 'new Float("42.10")', "Can be rewritten as 42.10f")
     }
 
     void testDoubleConstructor() {
         final SOURCE = '''
             new Float(42.10d)
         '''
-        assertSingleViolation(SOURCE, 2, 'new Float(42.10d)', "Can probably be rewritten as 42.1f")
+        assertSingleViolation(SOURCE, 2, 'new Float(42.10d)', "Can be rewritten as 42.1f")
     }
 
     void testFloatConstructor() {
         final SOURCE = '''
             new Float(42.10f)
         '''
-        assertSingleViolation(SOURCE, 2, 'new Float(42.10f)', "Can probably be rewritten as 42.1f")
+        assertSingleViolation(SOURCE, 2, 'new Float(42.10f)', "Can be rewritten as 42.1f")
     }
 
     protected Rule createRule() {

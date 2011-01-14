@@ -44,7 +44,7 @@ class UnnecessaryBigIntegerInstantiationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new BigInteger("42")
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigInteger("42")', 'Can probably be rewritten as 42G')
+        assertSingleViolation(SOURCE, 2, 'new BigInteger("42")', 'Can be rewritten as 42G')
     }
 
     protected Rule createRule() {

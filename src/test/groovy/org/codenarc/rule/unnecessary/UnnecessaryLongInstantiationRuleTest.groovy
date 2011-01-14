@@ -44,14 +44,14 @@ class UnnecessaryLongInstantiationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new Long("42")
         '''
-        assertSingleViolation(SOURCE, 2, 'new Long("42")', "Can probably be rewritten as 42L")
+        assertSingleViolation(SOURCE, 2, 'new Long("42")', "Can be rewritten as 42L")
     }
 
     void testLongConstructor() {
         final SOURCE = '''
             new Long(42L)
         '''
-        assertSingleViolation(SOURCE, 2, 'new Long(42L)', "Can probably be rewritten as 42L")
+        assertSingleViolation(SOURCE, 2, 'new Long(42L)', "Can be rewritten as 42L")
     }
 
     protected Rule createRule() {

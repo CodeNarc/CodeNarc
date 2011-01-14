@@ -44,14 +44,14 @@ class UnnecessaryDoubleInstantiationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new Double("42.10")
         '''
-        assertSingleViolation(SOURCE, 2, 'new Double("42.10")', 'Can probably be rewritten as 42.10d')
+        assertSingleViolation(SOURCE, 2, 'new Double("42.10")', 'Can be rewritten as 42.10d')
     }
 
     void testDoubleConstructor() {
         final SOURCE = '''
             new Double(42.10d)
         '''
-        assertSingleViolation(SOURCE, 2, 'new Double(42.10d)', 'Can probably be rewritten as 42.1d')
+        assertSingleViolation(SOURCE, 2, 'new Double(42.10d)', 'Can be rewritten as 42.1d')
     }
 
     protected Rule createRule() {
