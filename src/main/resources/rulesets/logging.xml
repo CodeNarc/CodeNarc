@@ -15,4 +15,5 @@
     <rule class='org.codenarc.rule.logging.SystemOutPrintRule'/>
 
     <rule class='org.codenarc.rule.logging.LoggerWithWrongModifiersRule'/>
+    <rule class='org.codenarc.rule.logging.MultipleLoggersRule'/>
 </ruleset>

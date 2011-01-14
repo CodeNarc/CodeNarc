@@ -84,6 +84,11 @@ Logging Rules  ("<rulesets/logging.xml>")
   Logger objects should be declared private, static, and final. This rule find loggers that are not declared with these modifiers.
 
 
+* MultipleLoggers Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  This rule catches classes that have more than one logger object defined. Typically, a class has zero or one logger objects.
+
 * Println Rule
 ~~~~~~~~~~~~~~~
 
