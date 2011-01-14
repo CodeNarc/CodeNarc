@@ -169,6 +169,17 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private static final log = LogFactory.getLog(CONSTANT)')
     }
 
+    void testApplyTo_LogFactory_ConstantForLoggerName_InnerClassViolation() {
+        final SOURCE = '''
+            class MyClass {
+                class MyOtherClass {
+                }
+                private static final log = LogFactory.getLog(MyOtherClass)
+            }
+        '''
+        assertSingleViolation(SOURCE, 5, 'private static final log = LogFactory.getLog(MyOtherClass)')
+    }
+
     void testApplyTo_LogFactory_FullPackageNameOfLogFactory_NoViolations() {
         final SOURCE = '''
             class MyClass {

@@ -41,7 +41,7 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     String outputFile
     Object writeToStandardOut
-    protected final LOG = Logger.getLogger(getClass())
+    private static final LOG = Logger.getLogger(AbstractReportWriter)
     protected getTimestamp = { new Date() }
     protected customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
     protected resourceBundle

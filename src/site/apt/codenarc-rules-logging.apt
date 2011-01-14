@@ -78,6 +78,11 @@ Logging Rules  ("<rulesets/logging.xml>")
 -------------------------------------------------------------------------------
 
 
+* LoggerWithWrongModifiers Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  New in CodeNarc 0.12
+  Logger objects should be declared private, static, and final. This rule find loggers that are not declared with these modifiers.
+
 
 * Println Rule
 ~~~~~~~~~~~~~~~

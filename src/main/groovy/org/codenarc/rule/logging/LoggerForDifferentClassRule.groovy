@@ -15,11 +15,9 @@
  */
 package org.codenarc.rule.logging
 
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for instantiating a logger for a class other than the current class. Supports logger
@@ -49,40 +47,28 @@ class LoggerForDifferentClassRule extends AbstractAstVisitorRule {
 
 class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
 
-    private classNameWithoutPackage
-
-    void visitClassEx(ClassNode classNode) {
-        this.classNameWithoutPackage = classNode.nameWithoutPackage
-        super.visitClassEx(classNode)
-    }
-
     void visitFieldEx(FieldNode fieldNode) {
         def expression = fieldNode.getInitialExpression()
-        if (isMatchingLoggerDefinition(expression)) {
+        if (LogUtils.isMatchingLoggerDefinition(expression)) {
+            def classNameWithoutPackage = fieldNode.declaringClass.nameWithoutPackage
             def firstArg = expression.arguments?.expressions?.get(0)
             def argText = firstArg.text
-            if (isCapitalized(argText) && !isEqualToCurrentClassOrClassName(argText)) {
+            if (isCapitalized(argText) && !isEqualToCurrentClassOrClassName(argText, classNameWithoutPackage)) {
                 addViolation(fieldNode)
             }
         }
         super.visitFieldEx(fieldNode)
     }
 
-    private boolean isMatchingLoggerDefinition(expression) {
-        return AstUtil.isMethodCall(expression, 'Logger', 'getLogger', 1) ||
-            AstUtil.isMethodCall(expression, 'LogFactory', 'getLog', 1) ||
-            AstUtil.isMethodCall(expression, 'LoggerFactory', 'getLogger', 1)
+    private static boolean isEqualToCurrentClassOrClassName(String argText, classNameWithoutPackage) {
+        return isEqualToCurrentClass(argText, classNameWithoutPackage) || isEqualToCurrentClassName(argText, classNameWithoutPackage)
     }
 
-    private boolean isEqualToCurrentClassOrClassName(String argText) {
-        return isEqualToCurrentClass(argText) || isEqualToCurrentClassName(argText)
-    }
-
-    private boolean isEqualToCurrentClass(String argText) {
+    private static boolean isEqualToCurrentClass(String argText, classNameWithoutPackage) {
         return (argText == classNameWithoutPackage) || (argText == classNameWithoutPackage + ".class")
     }
 
-    private boolean isEqualToCurrentClassName(String argText) {
+    private static boolean isEqualToCurrentClassName(String argText, classNameWithoutPackage) {
         def classNameOptions = [
             classNameWithoutPackage + '.getClass().getName()',
             classNameWithoutPackage + '.getClass().name',
@@ -92,7 +78,7 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
         return argText in classNameOptions
     }
 
-    private boolean isCapitalized(String text) {
+    private static boolean isCapitalized(String text) {
         def firstCharacter = text[0]
         return firstCharacter.toUpperCase() == firstCharacter
     }
