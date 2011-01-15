@@ -56,4 +56,5 @@
     <rule class='org.codenarc.rule.basic.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.basic.CompareToWithoutComparableRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitGarbageCollectionRule'/>
+    <rule class='org.codenarc.rule.basic.ConfusingTernaryRule'/>
 </ruleset>

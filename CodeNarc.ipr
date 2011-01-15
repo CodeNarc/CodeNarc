@@ -397,6 +397,7 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/1.7.5/groovy-all-1.7.5-sources.jar!/" />
+        <root url="file://$PROJECT_DIR$/../groovy-1.7.x/src/main" />
       </SOURCES>
     </library>
     <library name="Maven: org.gmetrics:GMetrics:0.3">

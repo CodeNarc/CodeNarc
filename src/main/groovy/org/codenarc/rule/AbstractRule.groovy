@@ -277,7 +277,7 @@ abstract class AbstractRule implements Rule {
     protected String packageNameForImport(ImportNode importNode) {
         def importClassName = importNode.className
         def index = importClassName.lastIndexOf('.')
-        (index != -1) ? importClassName.substring(0, index) : ''
+        (index == -1) ? '' : importClassName.substring(0, index) 
     }
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {
