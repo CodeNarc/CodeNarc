@@ -24,7 +24,7 @@ import java.lang.reflect.Modifier
  * Logger objects should be declared private, static, and final. This rule find loggers that are not declared with these modifiers. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class LoggerWithWrongModifiersRule extends AbstractAstVisitorRule {
     String name = 'LoggerWithWrongModifiers'
@@ -35,7 +35,7 @@ class LoggerWithWrongModifiersRule extends AbstractAstVisitorRule {
 class LoggerWithWrongModifiersAstVisitor extends AbstractAstVisitor {
     @Override
     void visitFieldEx(FieldNode fieldNode) {
-        if (LogUtils.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
+        if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
             int modifiers = fieldNode.modifiers
             if (!Modifier.isPrivate(modifiers) || !Modifier.isStatic(modifiers) || !Modifier.isFinal(modifiers)) {
                 addViolation(fieldNode, "The Logger field $fieldNode.name should be private, static, and final")

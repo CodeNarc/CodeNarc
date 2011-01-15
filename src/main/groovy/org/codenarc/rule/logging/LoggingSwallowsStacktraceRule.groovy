@@ -30,7 +30,7 @@ import org.codenarc.util.AstUtil
  * If you are logging an exception then the proper API is to call error(Object, Throwable), which will log the message and the exception stack trace. If you call error(Object) then the stacktrace may not be logged. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class LoggingSwallowsStacktraceRule extends AbstractAstVisitorRule {
     String name = 'LoggingSwallowsStacktrace'
@@ -44,7 +44,7 @@ class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
     
     @Override
     void visitFieldEx(FieldNode fieldNode) {
-        if (LogUtils.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
+        if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
 
             List<String> logFields = classNodeToLoggerNames[fieldNode.declaringClass]
             if (logFields) {

@@ -49,7 +49,7 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
 
     void visitFieldEx(FieldNode fieldNode) {
         def expression = fieldNode.getInitialExpression()
-        if (LogUtils.isMatchingLoggerDefinition(expression)) {
+        if (LogUtil.isMatchingLoggerDefinition(expression)) {
             def classNameWithoutPackage = fieldNode.declaringClass.nameWithoutPackage
             def firstArg = expression.arguments?.expressions?.get(0)
             def argText = firstArg.text

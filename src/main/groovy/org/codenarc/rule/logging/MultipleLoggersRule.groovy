@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * This rule catches classes that have more than one logger object defined. Typically, a class has zero or one logger objects. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class MultipleLoggersRule extends AbstractAstVisitorRule {
     String name = 'MultipleLoggers'
@@ -38,7 +38,7 @@ class MultipleLoggersAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitFieldEx(FieldNode fieldNode) {
-        if (LogUtils.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
+        if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
 
             List<String> logFields = classNodeToFieldNames[fieldNode.declaringClass]
             if (logFields) {

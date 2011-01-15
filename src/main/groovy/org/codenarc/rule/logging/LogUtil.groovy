@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ package org.codenarc.rule.logging
 import org.codenarc.util.AstUtil
 
 /**
- * 
+ * Utility methods for Logging rules
  * @author Hamlet D'Arcy
  */
-class LogUtils {
+class LogUtil {
     static boolean isMatchingLoggerDefinition(expression) {
         return AstUtil.isMethodCall(expression, 'Logger', 'getLogger', 1) ||
             AstUtil.isMethodCall(expression, 'LogFactory', 'getLog', 1) ||
