@@ -36,7 +36,6 @@ class UnusedPrivateMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedPrivateMethodParameterAstVisitor
 }
 
-//@SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
 
     private unusedParameterNames = []
@@ -53,6 +52,7 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
         unusedParameterNames.each { parameterName ->
             addViolation(node, "Method parameter [$parameterName] is never referenced")
         }
+        unusedParameterNames.clear()
         super.visitMethodComplete(node)
     }
 
