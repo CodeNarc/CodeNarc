@@ -32,6 +32,15 @@ class UnnecessaryBigDecimalInstantiationRule extends AbstractAstVisitorRule {
 class UnnecessaryBigDecimalInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
     UnnecessaryBigDecimalInstantiationAstVisitor() {
-        super(BigDecimal, [String, Double, Integer, Long], 'G', false)
+        super(BigDecimal, [String, Double, Integer, Long], 'G')
     }
+
+    @Override
+    protected boolean isTypeSuffixNecessary(argument) {
+        if (argument.getClass() == String) {
+            return !argument.contains('.')
+        }
+        return argument.getClass() in [Integer, Long]
+    }
+
 }

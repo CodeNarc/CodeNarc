@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,8 +43,11 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
     void testStringConstructor() {
         final SOURCE = '''
             new BigDecimal("42.10")
+            new BigDecimal("42")
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal("42.10")', 'Can be rewritten as 42.10 or 42.10G')
+        assertTwoViolations(SOURCE,
+            2, 'new BigDecimal("42.10")', 'Can be rewritten as 42.10 or 42.10G',
+            3, 'new BigDecimal("42")', 'Can be rewritten as 42G')
     }
 
     void testDoubleConstructor() {
@@ -57,15 +60,18 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
     void testIntConstructor() {
         final SOURCE = '''
             new BigDecimal(42i)
+            new BigDecimal(42)
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42i)', 'Can be rewritten as 42 or 42G')
+        assertTwoViolations(SOURCE,
+            2, 'new BigDecimal(42i)', 'Can be rewritten as 42G',
+            3, 'new BigDecimal(42)', 'Can be rewritten as 42G')
     }
 
     void testLongConstructor() {
         final SOURCE = '''
             new BigDecimal(42L)
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42L)', 'Can be rewritten as 42 or 42G')
+        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42L)', 'Can be rewritten as 42G')
     }
 
     protected Rule createRule() {

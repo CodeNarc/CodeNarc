@@ -31,13 +31,15 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
     Class targetType
     List<Class> parameterTypes
     String suffix
-    boolean isSuffixNecessary
 
-    UnnecessaryInstantiationAstVisitor(Class targetType, List<Class> parameterTypes, String suffix, boolean isSuffixNecessary=true) {
+    UnnecessaryInstantiationAstVisitor(Class targetType, List<Class> parameterTypes, String suffix) {
         this.targetType = targetType
         this.parameterTypes = parameterTypes
         this.suffix = suffix
-        this.isSuffixNecessary = isSuffixNecessary
+    }
+
+    protected boolean isTypeSuffixNecessary(argument) {
+        return true
     }
 
     @Override
@@ -48,6 +50,7 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
             Expression argument = call.arguments.expressions.head()
             parameterTypes.each { Class clazz ->
                 if (argument instanceof ConstantExpression && argument.value.getClass() == clazz) {
+                    boolean isSuffixNecessary = isTypeSuffixNecessary(argument.value)
                     def replacementOptions = isSuffixNecessary ?
                         "${argument.value}$suffix" :
                         "${argument.value} or ${argument.value}$suffix"
