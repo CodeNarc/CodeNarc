@@ -349,7 +349,7 @@ class AstUtil {
      * @return
      *      as described
      */
-    static boolean isNull(Expression expression) {
+    static boolean isNull(ASTNode expression) {
         expression instanceof ConstantExpression && expression.isNullExpression()
     }
 

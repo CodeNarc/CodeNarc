@@ -157,10 +157,12 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         }
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     protected void visitClassEx(ClassNode node) {
         // empty on purpose
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     protected void visitClassComplete(ClassNode node) {
         // empty on purpose
     }
@@ -172,6 +174,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         }
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
         // empty on purpose
     }
@@ -189,10 +192,12 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         }
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     protected void visitMethodComplete(MethodNode node) {
         // empty on purpose
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     void visitMethodEx(MethodNode node) {
         // empty on purpose
     }
@@ -204,6 +209,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         }
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     void visitFieldEx(FieldNode node) {
         // empty on purpose
     }
@@ -215,6 +221,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         }
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     void visitPropertyEx(PropertyNode node) {
         // empty on purpose
     }
@@ -226,6 +233,7 @@ abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements Ast
         }
     }
 
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     def void visitConstructorEx(ConstructorNode node) {
         // empty on purpose
     }

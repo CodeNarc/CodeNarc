@@ -181,6 +181,7 @@ abstract class AbstractRule implements Rule {
      * This method is provided as a placeholder so subclasses can optionally override.
      * Subclasses will typically use <code>assert</code> calls to verify required preconditions.
      */
+    @SuppressWarnings('EmptyMethodInAbstractClass')
     void validate() {
     }
 
