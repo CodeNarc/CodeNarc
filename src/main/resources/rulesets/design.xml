@@ -12,4 +12,5 @@
 
     <rule class='org.codenarc.rule.design.FinalClassWithProtectedMemberRule'/>
     <rule class='org.codenarc.rule.design.CloseWithoutCloseableRule'/>
+    <rule class='org.codenarc.rule.design.ConstantsOnlyInterfaceRule'/>
 </ruleset>
