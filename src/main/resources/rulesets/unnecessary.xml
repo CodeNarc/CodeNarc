@@ -29,4 +29,5 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCallForLastElementRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryInstantiationToGetClassRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryNullCheckBeforeInstanceOfRule'/>
 </ruleset>
