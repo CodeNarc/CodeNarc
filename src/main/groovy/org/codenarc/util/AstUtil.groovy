@@ -181,7 +181,7 @@ class AstUtil {
      * @return true only if the method call matches the specified criteria
      */
     static boolean isMethodCall(Expression expression, String methodObject, String methodName, int numArguments) {
-        expression instanceof MethodCallExpression && isMethodCall((MethodCallExpression)expression, methodObject, methodName, numArguments)
+        expression instanceof MethodCallExpression && isMethodCall((MethodCallExpression) expression, methodObject, methodName, numArguments)
     }
 
     /**
@@ -235,7 +235,7 @@ class AstUtil {
      * @param numArguments
      *      number of expected arguments
      * @return
-     *      as described
+     * as described
      */
     static boolean isMethodCall(Expression expression, String methodName, int numArguments) {
         if (expression instanceof MethodCallExpression && isMethodNamed(expression, methodName)) {
@@ -281,7 +281,7 @@ class AstUtil {
      */
     static List getVariableExpressions(DeclarationExpression declarationExpression) {
         def leftExpression = declarationExpression.leftExpression
-            leftExpression.properties['expressions'] ?: [leftExpression]
+        leftExpression.properties['expressions'] ?: [leftExpression]
     }
 
     /**
@@ -319,7 +319,7 @@ class AstUtil {
      * @param expression
      *      expression
      * @return
-     *      as described
+     * as described
      */
     static boolean isTrue(Expression expression) {
         if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
@@ -336,7 +336,7 @@ class AstUtil {
      * @param expression
      *      expression
      * @return
-     *      as described
+     * as described
      */
     static boolean isBoolean(Expression expression) {
         isTrue(expression) || isFalse(expression)
@@ -347,7 +347,7 @@ class AstUtil {
      * @param expression
      *      expression.
      * @return
-     *      as described
+     * as described
      */
     static boolean isNull(ASTNode expression) {
         expression instanceof ConstantExpression && expression.isNullExpression()
@@ -358,7 +358,7 @@ class AstUtil {
      * @param expression
      *      expression
      * @return
-     *      as described
+     * as described
      */
     static boolean isFalse(Expression expression) {
         if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
@@ -486,7 +486,7 @@ class AstUtil {
      * @param expression
      *      expression
      * @return
-     *      true if is null safe dereference.
+     * true if is null safe dereference.
      */
     static boolean isSafe(Expression expression) {
         if (expression instanceof MethodCallExpression || expression instanceof PropertyExpression) {
@@ -500,7 +500,7 @@ class AstUtil {
      * @param expression
      *      expression
      * @return
-     *      true if is spread expression
+     * true if is spread expression
      */
     static boolean isSpreadSafe(Expression expression) {
         if (expression instanceof MethodCallExpression || expression instanceof PropertyExpression) {
@@ -520,7 +520,7 @@ class AstUtil {
      * @param returnType
      *      the expected return type, optional
      * @return
-     *      true if this node is a MethodNode meeting the parameters. false otherwise
+     * true if this node is a MethodNode meeting the parameters. false otherwise
      */
     static boolean isMethodNode(ASTNode node, String methodName, Integer numArguments = null, Class returnType = null) {
         if (!node instanceof MethodNode) {
@@ -532,7 +532,7 @@ class AstUtil {
         if (numArguments != null && node.parameters?.length != numArguments) {
             return false
         }
-        if (returnType && !AstUtil.classNodeImplementsType (node.returnType, returnType)) {
+        if (returnType && !AstUtil.classNodeImplementsType(node.returnType, returnType)) {
             return false
         }
         true
@@ -545,7 +545,7 @@ class AstUtil {
      * @param name
      *      a string name
      * @return
-     *      true if the node is a variable with the specified name
+     * true if the node is a variable with the specified name
      */
     static boolean isVariable(ASTNode expression, String name) {
         return (expression instanceof VariableExpression && expression.name == name)
@@ -557,7 +557,7 @@ class AstUtil {
      * @param node
      *      node to query
      * @return
-     *      true if definitely public, false if not public or unknown
+     * true if definitely public, false if not public or unknown
      */
     static boolean isPublic(ASTNode node) {
         def modifiers = node.properties['modifiers']
@@ -566,9 +566,40 @@ class AstUtil {
         }
         false
     }
-    
+
     /**
      * Private constructor. All methods are static.
      */
     private AstUtil() { }
+
+    static boolean isNotNullCheck(expression) {
+        if (expression instanceof BinaryExpression && expression.operation.text == '!=') {
+            if (AstUtil.isNull(expression.leftExpression) || AstUtil.isNull(expression.rightExpression)) {
+                return true
+            }
+        }
+        false
+    }
+
+    static String getNullComparisonTarget(expression) {
+        if (expression instanceof BinaryExpression && expression.operation.text == '!=') {
+            if (AstUtil.isNull(expression.leftExpression)) {
+                return expression.rightExpression.text
+            } else if (AstUtil.isNull(expression.rightExpression)) {
+                return expression.leftExpression.text
+            }
+        }
+        null
+    }
+
+    static boolean isInstanceOfCheck(expression) {
+        (expression instanceof BinaryExpression && expression.operation.text == 'instanceof')
+    }
+
+    static String getInstanceOfTarget(expression) {
+        if (expression instanceof BinaryExpression && expression.operation.text == 'instanceof') {
+            return expression.leftExpression.text
+        }
+        null
+    }
 }

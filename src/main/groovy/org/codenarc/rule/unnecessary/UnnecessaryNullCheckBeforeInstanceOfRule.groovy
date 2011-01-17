@@ -39,8 +39,8 @@ class UnnecessaryNullCheckBeforeInstanceOfAstVisitor extends AbstractAstVisitor 
     void visitBooleanExpression(BooleanExpression expression) {
         def exp = expression.expression
         if (exp instanceof BinaryExpression && exp.operation.text == '&&') {
-            if (isNotNullCheck(exp.leftExpression) || isNotNullCheck(exp.rightExpression)) {
-                if (isInstanceOfCheck(exp.leftExpression) || isInstanceOfCheck(exp.rightExpression)) {
+            if (AstUtil.isNotNullCheck(exp.leftExpression) || AstUtil.isNotNullCheck(exp.rightExpression)) {
+                if (AstUtil.isInstanceOfCheck(exp.leftExpression) || AstUtil.isInstanceOfCheck(exp.rightExpression)) {
                     addViolationIfTargetsMatch(expression)
                 }
             }
@@ -50,42 +50,11 @@ class UnnecessaryNullCheckBeforeInstanceOfAstVisitor extends AbstractAstVisitor 
 
     private addViolationIfTargetsMatch(BooleanExpression expression) {
         BinaryExpression exp = expression.expression
-        def nullTarget = getNullComparisonTarget(exp.leftExpression) ?: getNullComparisonTarget(exp.rightExpression)
-        def instanceofTarget = getInstanceOfTarget(exp.leftExpression) ?: getInstanceOfTarget(exp.rightExpression)
+        def nullTarget = AstUtil.getNullComparisonTarget(exp.leftExpression) ?: AstUtil.getNullComparisonTarget(exp.rightExpression)
+        def instanceofTarget = AstUtil.getInstanceOfTarget(exp.leftExpression) ?: AstUtil.getInstanceOfTarget(exp.rightExpression)
         if (nullTarget && instanceofTarget && nullTarget == instanceofTarget) {
-            def suggestion = isInstanceOfCheck(exp.leftExpression) ? exp.leftExpression.text : exp.rightExpression.text
+            def suggestion = AstUtil.isInstanceOfCheck(exp.leftExpression) ? exp.leftExpression.text : exp.rightExpression.text
             addViolation(expression, "The condition $exp.text can be safely simplified to $suggestion")
         }
-    }
-
-    private static boolean isNotNullCheck(expression) {
-        if (expression instanceof BinaryExpression && expression.operation.text == '!=') {
-            if (AstUtil.isNull(expression.leftExpression) || AstUtil.isNull(expression.rightExpression)) {
-                return true
-            }
-        }
-        false
-    }
-
-    private static String getNullComparisonTarget(expression) {
-        if (expression instanceof BinaryExpression && expression.operation.text == '!=') {
-            if (AstUtil.isNull(expression.leftExpression)) {
-                return expression.rightExpression.text
-            } else if (AstUtil.isNull(expression.rightExpression)) {
-                return expression.leftExpression.text
-            }
-        }
-        null
-    }
-
-    private static boolean isInstanceOfCheck(expression) {
-        (expression instanceof BinaryExpression && expression.operation.text == 'instanceof')
-    }
-
-    private static String getInstanceOfTarget(expression) {
-        if (expression instanceof BinaryExpression && expression.operation.text == 'instanceof') {
-            return expression.leftExpression.text
-        }
-        null
     }
 }
