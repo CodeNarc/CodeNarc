@@ -259,8 +259,10 @@ AbstractClassName.enabled=false
   translate these descriptions by providing your own locale-specific message properties file on the
   classpath. For example, a German one would be named "codenarc-messages_de.properties".
 
-  The rule description message key is of the form "<<\<rule-name\>.description>>". Examples include
-  "BooleanInstantiation.description" and "CatchThrowable.description".
+  The rule description message key is of the form "<<\<rule-name\>.description.html>>". Examples include
+  "BooleanInstantiation.description.html" and "CatchThrowable.description.html".
+
+  (Note that the rule description included in the XML report is specified by the key <<\<rule-name\>.description>>).
 
   See the javadoc for the <<<java.util.ResourceBundle>>> class for more information.
 
@@ -321,6 +323,8 @@ AbstractClassName.enabled=false
 +----------------------------------------------------------------------------------------
 
   The rule description must be added to the custom messages resource bundle file 
-  ("codenarc-messages.properties"). The message key will be "AuthorTagNotAllowed.description".
+  ("codenarc-messages.properties"). The message key will be "AuthorTagNotAllowed.description.html" to set
+  the description used in the HTML report, and "AuthorTagNotAllowed.description" for the description
+  used in the XML report.
 
 

@@ -14,8 +14,8 @@ XmlReportWriter
   <<Note:>> This XML format is still being refined and is subject to change.
   {{{https://sourceforge.net/sendmessage.php?touser=1853503}Contact me}} if you have specific requirements or suggestions.
 
-
-  See a {{{./SampleCodeNarcXmlReport.xml}Sample XML Report}}.
+  See a {{{./SampleCodeNarcXmlReport.xml}Sample XML Report}}. Also see the {{{http://mrhaki.blogspot.com/}mrhaki}} blog post about
+  {{{http://mrhaki.blogspot.com/2011/01/groovy-goodness-create-codenarc-reports.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+mrhaki+%28Messages+from+mrhaki%29}creating custom CodeNarc HTML reports using XSLT}}.
 
 * Option Nested Elements
 ~~~~~~~~~~~~~~~~~~~~~~~~
