@@ -303,20 +303,6 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     //--------------------------------------------------------------------------
-    // Tests for deprecated properties/methods
-    //--------------------------------------------------------------------------
-
-    void testApplyToFilenames_ThrowsUnsupportedOperationException() {
-        shouldFail(UnsupportedOperationException) { rule.applyToFilenames = FILENAME }
-        shouldFail(UnsupportedOperationException) { println rule.applyToFilenames }
-    }
-
-    void testDoNotApplyToFilenames_ThrowsUnsupportedOperationException() {
-        shouldFail(UnsupportedOperationException) { rule.doNotApplyToFilenames = FILENAME }
-        shouldFail(UnsupportedOperationException) { println rule.doNotApplyToFilenames }
-    }
-
-    //--------------------------------------------------------------------------
     // Setup and helper methods
     //--------------------------------------------------------------------------
 

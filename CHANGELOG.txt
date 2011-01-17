@@ -69,6 +69,7 @@ POTENTIAL BREAKING CHANGES
     * You configured one of these rules (by rule name) within "codenarc.properties"
     * You configured one of these rules (by rule name) within a @SuppressWarnings annotation
     * You configured one of these rules (by rule name) within "codenarc-message.properties".
+- Removed deprecated applyToFilenames and doNotApplyToFilenames properties of AbstractRule.
 
 OTHER CHANGES
 - UnnecessaryIfStatementRule: Expand the rule to also catch if/else statements that contain only single constant/literal expressions for the if and/or else blocks, if the if is not the last statement in the block.
