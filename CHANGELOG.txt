@@ -6,38 +6,42 @@ Changes in version 0.12 (January 2011)
 -------------------------------------------
 NEW FEATURES
 - Improved performance of the CodeNarc Ant Task (by multi-threading source code analysis) - Feature #3150044
-- Add support for substitutable message parameters in Rule descriptions - Feature #3133988
+- Add support for message parameter substitution in Rule descriptions - Feature #3133988
 
 NEW RULES
-- CompareToWithoutComparable rule (basic)
-- ExplicitGarbageCollection rule (basic) - Feature #3106689
-- CloseWithoutCloseable rule (design) - Feature #3138445
-- FinalClassWithProtectedMember rule (design) - Feature #3137650
-- CatchArrayIndexOutOfBoundsException rule (exceptions)  - Feature #3122979
-- CatchIndexOutOfBoundsException rule (exceptions)  - Feature #3122979
-- RequiredString rule (generic) - Feature #3122980
-- UseAssertFalseInsteadOfNegation rule (junit) - Feature #3114728.
-- UseAssertTrueInsteadOfNegation rule (junit) - Feature #3114728.
-- JUnitTestMethodWithoutAssert. rule (junit) - Feature #3111443
-- LoggerForDifferentClass rule (logging) - Feature #3114736
-- LoggerWithWrongModifiers rule (logging)
-- LoggingSwallowsStacktrace rule (logging)
-- MultipleLoggers rule (logging)
-- UnnecessaryBigDecimalInstantiation rule (unnecessary).
-- UnnecessaryBigIntegerInstantiation rule (unnecessary).
-- UnnecessaryDoubleInstantiation rule (unnecessary).
-- UnnecessaryFloatInstantiation rule (unnecessary).
-- UnnecessaryIntegerInstantiation rule (unnecessary).
-- UnnecessaryLongInstantiation rule (unnecessary).
-- UnnecessaryCatchBlock rule (unnecessary) - catch block does nothing but throw original exception - Feature #3107168
-- UnnecessaryObjectReferences rule (unnecessary): should use with/identity - Feature #3107838
-- UnnecessaryCallForLastElement rule (unnecessary): prefer x.last() to x.get(x.size() -1) and x[x.size()-1] - Feature #3107884
-- UnnecessaryCallForLastElement rule (unnecessary) - Feature #3111444
-- UnnecessaryCollectCall rule (unnecessary) - Feature #3110317
-- UnnecessaryCatchBlock rule  (unnecessary)- Feature #3110318
-- UnnecessaryObjectReferences rule (unnecessary)- Feature #3110319
-- UnnecessaryGetter rule  (unnecessary)- Feature #3110321
-- UnusedPrivateMethodParameter rule (unused) - Feature #3151598.
+- CompareToWithoutComparable rule (basic) - Adds violation if you implement a compare method without implementing the Comparable interface
+- ExplicitGarbageCollection rule (basic) - Feature #3106689 - Adds a violation if you try to manually trigger a garbage collection run
+- CloseWithoutCloseable rule (design) - Feature #3138445 - Adds a violation if you implement a close method without imlpementing the Closeable interface
+- FinalClassWithProtectedMember rule (design) - Feature #3137650 - Adds violation if you have a protected member in a final class
+- CatchArrayIndexOutOfBoundsException rule (exceptions)  - Feature #3122979 - Adds violation if you explicitly catch ArrayIndexOutOfBoundsException
+- CatchIndexOutOfBoundsException rule (exceptions) - Feature #3122979 - Adds violation if you explicitly catch IndexOutOfBoundsException
+- ConfusingTernary rule (basic) - Feature #3158945 - Adds violation if you use unnecessary negation within a ternary expression
+- ConstantsOnlyInterface rule (design) - Feature #3159134 - Adds violation if an interface contains constants but no methods
+- EmptyMethodInAbstractClass rule (design) - Feature #3159180 - Adds violation if an abstract class contains an empty method
+- RequiredString rule (generic) - Feature #3122980 - Adds violation if a user-defined String is not found. For example, a copyright notice may be required. 
+- UseAssertFalseInsteadOfNegation rule (junit) - Feature #3114728 - Adds violation if JUnit's assertEquals is used with the boolean literal 'false'
+- UseAssertTrueInsteadOfNegation rule (junit) - Feature #3114728 - Adds violation if JUnit's assertEquals is used with the boolean literal 'true'
+- JUnitTestMethodWithoutAssert. rule (junit) - Feature #3111443 - Adds violation if a JUnit test method contains no assert statements
+- LoggerForDifferentClass rule (logging) - Feature #3114736 - Adds violation if a Logger is created based on a Class that is not the enclosing class
+- LoggerWithWrongModifiers rule (logging) - Adds violation if a Logger is not private, final, and static. 
+- LoggingSwallowsStacktrace rule (logging) - Adds violation if a log statement logs an exception without the accompanying stack trace
+- MultipleLoggers rule (logging) - Adds a violation if a class declares more than one logger field
+- MissingNewInThrowStatement (exceptions) - Feature #3140762  -Adds a violation if a throw statement is used to throw a class literal
+- UnnecessaryBigDecimalInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of BigDecimal
+- UnnecessaryBigIntegerInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of BigInteger
+- UnnecessaryCatchBlock rule (unnecessary) - Feature #3107168 - Adds violation if catch block does nothing but throw original exception
+- UnnecessaryDoubleInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of Double
+- UnnecessaryFloatInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of Float
+- UnnecessaryInstantiationToGetClass (unnecessary) - Feature #3158935 - Adds a violation if a new instance is created in order to invoke getClass()
+- UnnecessaryIntegerInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of Integer
+- UnnecessaryLongInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of Long
+- UnnecessaryNullCheckBeforeInstanceOf rule (unnecessary) - Feature #3159274 - Adds a violation for an unnecessary null check before using the instanceof operator
+- UnnecessaryObjectReferences rule (unnecessary) - Feature #3107838 - Adds a violation for a chain of setters being invoked, which can be converted into a with or identity block
+- UnnecessaryCallForLastElement rule (unnecessary) - Feature #3107884 - Adds violation if accessing the last element of a list without using the .last() method or -1th index
+- UnnecessaryCollectCall rule (unnecessary) - Feature #3110317 - Adds a violation if a collect method call can be replaced with the spread operator
+- UnnecessaryCatchBlock rule  (unnecessary)- Feature #3110318 - Adds a violation if a catch block does nothing but throw the original exception
+- UnnecessaryGetter rule  (unnecessary)- Feature #3110321 - Adds a violation if a a getter method is called explicitly instead of using property syntax
+- UnusedPrivateMethodParameter rule (unused) - Feature #3151598 - Adds a violation if the parameter to a private method is never used within that method 
 
 BUG FIXES
 - Fix Bug #3127967 DuplicateImportRule: Fix for Groovy 1.7. Resort to parsing source code.
