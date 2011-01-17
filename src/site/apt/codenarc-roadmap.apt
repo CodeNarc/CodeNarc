@@ -19,9 +19,9 @@ CodeNarc - Road Map
 
   * Even more rules, perhaps including framework-specific rules for Grails (additional), Griffon, Gradle, etc..
 
-  * Analyze source code within jar files or zip files.
+  * Improve performance
 
-  * Create Hudson plugin.
+  * Analyze source code within jar files or zip files, and/or within Subversion, Git or CVS repositories.
 
 
 ** Considering (Optional)
@@ -32,7 +32,5 @@ CodeNarc - Road Map
   * Create IntelliJ IDEA plugin.
 
   * Create Netbeans plugin.
-
-  * Create Maven plugin.
 
   * Localization of report text.
