@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitCreationOfStackRule
+ * Tests for ExplicitStackInstantiationRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
@@ -40,6 +41,9 @@ class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
                     def x = [] as Stack
                     def y = new Stack() {   // anony inner class OK
                     }
+                    def m1 = new Stack(x)    // constructor with parameter is OK
+                    def m2 = new Stack(23)
+                    def m3 = new Stack([a:1, b:2])
                 }
             }
         '''

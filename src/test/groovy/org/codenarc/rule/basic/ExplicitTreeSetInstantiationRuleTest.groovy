@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitCreationOfTreeSetRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
@@ -40,6 +41,9 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
                     def x = [] as SortedSet
                     def y = new TreeSet() {   // anony inner class OK
                     }
+                    def m1 = new TreeSet(x)    // constructor with parameter is OK
+                    def m2 = new TreeSet(23)
+                    def m3 = new TreeSet([1,2,3])
                 }
             }
         '''

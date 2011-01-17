@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,28 +15,23 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AstVisitor
 
 /**
- * This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write "new HashSet()" as "[] as Set", which creates the same object.
+ * This rule checks for the explicit instantiation of a HashSet using the no-arg constructor.
+ * In Groovy, it is best to write "new HashSet()" as "[] as Set", which creates the same object.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class ExplicitHashSetInstantiationRule extends AbstractAstVisitorRule {
     String name = 'ExplicitHashSetInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitHashSetInstantiationAstVisitor
-}
 
-class ExplicitHashSetInstantiationAstVisitor extends AbstractAstVisitor {
-
-    def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'HashSet') {
-            addViolation call
+        @Override
+        AstVisitor getAstVisitor() {
+            new ExplicitTypeInstantiationAstVisitor('HashSet')
         }
-        super.visitConstructorCallExpression call
-    }
 }

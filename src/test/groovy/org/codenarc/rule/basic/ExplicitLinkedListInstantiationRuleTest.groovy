@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitCreationOfLinkedListRule
+ * Tests for ExplicitLinkedListInstantiationRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
@@ -40,6 +41,9 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
                     def x = [] as Queue
                     def y = new LinkedList() {   // anony inner class OK                    
                     }
+                    def m1 = new LinkedList(x)    // constructor with parameter is OK
+                    def m2 = new LinkedList(23)
+                    def m3 = new LinkedList([1,2,3])
                 }
             }
         '''

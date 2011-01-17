@@ -364,7 +364,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
-  This rule checks for the explicit instantiation of an <<<ArrayList>>>. In Groovy, it is best to write
+  This rule checks for explicit calls to the no-argument constructor of <<<ArrayList>>>. In Groovy, it is best to write
   <<<new ArrayList() as []>>>, which creates the same object.
 
 
@@ -521,7 +521,8 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * ExplicitGarbageCollection Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   Calls to System.gc(), Runtime.getRuntime().gc(), and System.runFinalization() are not advised. Code should have
   the same behavior whether the garbage collection is disabled using the option -Xdisableexplicitgc or not. Moreover,
   "modern" jvms do a very good job handling garbage collections. If memory usage issues unrelated to memory leaks develop
@@ -532,15 +533,15 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
-  This rule checks for the explicit instantiation of a <<<HashMap>>>. In Groovy, it is best to write
-  <<<new HashMap() as [:]>>>, which creates the same object.
+  This rule checks for explicit calls to the no-argument constructor of <<<HashMap>>>. In Groovy, it is best
+  to write <<<new HashMap() as [:]>>>, which creates the same object.
 
 
 * ExplicitHashSetInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
-  This rule checks for the explicit instantiation of a <<<HashSet>>>. In Groovy, it is best to write
+  This rule checks for explicit calls to the no-argument constructor of <<<HashSet>>>. In Groovy, it is best to write
   <<<new HashSet()>>> as <<<[] as Set>>>, which creates the same object.
 
 
@@ -548,7 +549,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
-  This rule checks for the explicit instantiation of a <<<LinkedList>>>. In Groovy, it is best to write
+  This rule checks for explicit calls to the no-argument constructor of <<<LinkedList>>>. In Groovy, it is best to write
   <<<new LinkedList()>>> as <<<[] as Queue>>>, which creates the same object.
 
 
@@ -556,7 +557,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
-  This rule checks for the explicit instantiation of a <<<Stack>>>. In Groovy, it is best to write
+  This rule checks for explicit calls to the no-argument constructor of <<<Stack>>>. In Groovy, it is best to write
   <<<new Stack()>>> as <<<[] as Stack>>>, which creates the same object.
 
 
@@ -564,7 +565,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
-  This rule checks for the explicit instantiation of a <<<TreeSet>>>. In Groovy, it is best to write
+  This rule checks for explicit calls to the no-argument constructor of <<<TreeSet>>>. In Groovy, it is best to write
   <<<new TreeSet()>>> as <<<[] as SortedSet>>>, which creates the same object.
 
 

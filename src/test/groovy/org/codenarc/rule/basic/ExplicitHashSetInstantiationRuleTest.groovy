@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitCreationOfHashSetRule
+ * Tests for ExplicitHashSetInstantiationRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
@@ -40,6 +40,9 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
                     def x = [] as Set
                     def y = new HashSet() {   // anony inner class OK
                     }
+                    def s1 = new HashSet(x)   // constructor with parameter is OK
+                    def s2 = new HashSet(23)
+                    def s3 = new HashSet([a:1, b:2])
                 }
             }
         '''

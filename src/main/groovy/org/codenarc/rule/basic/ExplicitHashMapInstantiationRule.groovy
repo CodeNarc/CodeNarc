@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,28 +15,23 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AstVisitor
 
 /**
- * This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write "new HashMap()" as "[:]", which creates the same object.
+ * This rule checks for the explicit instantiation of a HashMap using the no-arg constructor.
+ * In Groovy, it is best to write "new HashMap()" as "[:]", which creates the same object.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class ExplicitHashMapInstantiationRule extends AbstractAstVisitorRule {
     String name = 'ExplicitHashMapInstantiation'
     int priority = 2
-    Class astVisitorClass = ExplicitHashMapInstantiationAstVisitor
-}
 
-class ExplicitHashMapInstantiationAstVisitor extends AbstractAstVisitor {
-
-    def void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call?.type?.name == 'HashMap') {
-            addViolation call
-        }
-        super.visitConstructorCallExpression call
+    @Override
+    AstVisitor getAstVisitor() {
+        new ExplicitTypeInstantiationAstVisitor('HashMap')
     }
 }
