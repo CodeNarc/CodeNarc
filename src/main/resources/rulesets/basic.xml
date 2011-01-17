@@ -57,4 +57,5 @@
     <rule class='org.codenarc.rule.basic.CompareToWithoutComparableRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitGarbageCollectionRule'/>
     <rule class='org.codenarc.rule.basic.ConfusingTernaryRule'/>
+    <rule class='org.codenarc.rule.basic.SimpleDateFormatMissingLocaleRule'/>
 </ruleset>

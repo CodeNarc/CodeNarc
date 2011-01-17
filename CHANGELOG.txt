@@ -28,6 +28,7 @@ NEW RULES
 - LoggingSwallowsStacktrace rule (logging) - Adds violation if a log statement logs an exception without the accompanying stack trace
 - MultipleLoggers rule (logging) - Adds a violation if a class declares more than one logger field
 - MissingNewInThrowStatement (exceptions) - Feature #3140762  -Adds a violation if a throw statement is used to throw a class literal
+- SimpleDateFormatMissingLocale rule (basic) - Feature #3160227 - Adds a violation if SimpleDateFormat is used without a Locale.
 - UnnecessaryBigDecimalInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of BigDecimal
 - UnnecessaryBigIntegerInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of BigInteger
 - UnnecessaryCatchBlock rule (unnecessary) - Feature #3107168 - Adds violation if catch block does nothing but throw original exception
