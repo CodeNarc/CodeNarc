@@ -14,4 +14,5 @@
     <rule class='org.codenarc.rule.design.CloseWithoutCloseableRule'/>
     <rule class='org.codenarc.rule.design.ConstantsOnlyInterfaceRule'/>
     <rule class='org.codenarc.rule.design.EmptyMethodInAbstractClassRule'/>
+    <rule class='org.codenarc.rule.design.AbstractClassWithoutAbstractMethodRule'/>
 </ruleset>

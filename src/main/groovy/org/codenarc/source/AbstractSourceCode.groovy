@@ -28,6 +28,7 @@ import org.apache.log4j.Logger
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
+@SuppressWarnings('AbstractClassWithoutAbstractMethod')
 abstract class AbstractSourceCode implements SourceCode {
     static final LOG = Logger.getLogger(AbstractSourceCode)
     static final SEPARATOR_PROP = 'file.separator'
@@ -107,7 +108,7 @@ abstract class AbstractSourceCode implements SourceCode {
     boolean isValid() {
         return getAst()
     }
-    
+
     /**
      * Return the normalized value of the specified path. Convert file separator chars to standard '/'.
      * @param path - the path to normalize

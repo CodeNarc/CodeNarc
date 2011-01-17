@@ -9,6 +9,7 @@ NEW FEATURES
 - Add support for message parameter substitution in Rule descriptions - Feature #3133988
 
 NEW RULES
+- AbstractClassWithoutAbstractMethod rule (design) - Feature #3160204 - Adds a violation when an abstract class does not contain any abstract methods
 - CompareToWithoutComparable rule (basic) - Adds violation if you implement a compare method without implementing the Comparable interface
 - ExplicitGarbageCollection rule (basic) - Feature #3106689 - Adds a violation if you try to manually trigger a garbage collection run
 - CloseWithoutCloseable rule (design) - Feature #3138445 - Adds a violation if you implement a close method without imlpementing the Closeable interface

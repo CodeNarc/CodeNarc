@@ -38,7 +38,8 @@ import org.codehaus.groovy.ast.Parameter
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-abstract class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
+@SuppressWarnings('AbstractClassWithoutAbstractMethod')
+class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
     public static final MAX_SOURCE_LINE_LENGTH = 60
     public static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
     protected static final CONSTANT_EXPRESSION_VALUES = ['Boolean.TRUE', 'Boolean.FALSE', 'null']
