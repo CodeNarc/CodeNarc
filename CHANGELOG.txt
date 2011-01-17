@@ -35,6 +35,7 @@ NEW RULES
 - UnnecessaryInstantiationToGetClass (unnecessary) - Feature #3158935 - Adds a violation if a new instance is created in order to invoke getClass()
 - UnnecessaryIntegerInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of Integer
 - UnnecessaryLongInstantiation rule (unnecessary) - Adds a violation for explicit instantiation of Long
+- UnnecessaryNullCheck Rule (unnecessary) - Feature #3160184 - Adds violation when a null-safe dereference can be used instead of an explicit null check
 - UnnecessaryNullCheckBeforeInstanceOf rule (unnecessary) - Feature #3159274 - Adds a violation for an unnecessary null check before using the instanceof operator
 - UnnecessaryObjectReferences rule (unnecessary) - Feature #3107838 - Adds a violation for a chain of setters being invoked, which can be converted into a with or identity block
 - UnnecessaryCallForLastElement rule (unnecessary) - Feature #3107884 - Adds violation if accessing the last element of a list without using the .last() method or -1th index
