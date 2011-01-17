@@ -26,6 +26,7 @@ if (args[0] == 'create-rule') {
 	updatePropertiesFile(ruleName, ruleDescription)
     updateRuleList(ruleName, ruleCategory)
     updateSiteDocumentation(ruleName, ruleCategory, ruleDescription)
+    updateChangelog(ruleName, ruleCategory, ruleDescription)
     print "\tadding to svn... "
     print "svn add $ruleFile".execute().text
     print "\tadding to svn... "
@@ -81,10 +82,22 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
     new File(path).append """
 * $ruleName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12 
+  New in CodeNarc 0.12
   $ruleDescription
 
 """
+    println "\tUpdated $path"
+}
+
+def updateChangelog(ruleName, ruleCategory, ruleDescription) {
+    def path = './CHANGELOG.txt'
+    File file = new File(path)
+    String original = file.text
+    file.text = """
+#TODO: Sort the following line into the file
+- $ruleName rule ($ruleCategory) - $ruleDescription
+
+$original"""
     println "\tUpdated $path"
 }
 
