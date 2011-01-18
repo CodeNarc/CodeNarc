@@ -54,8 +54,9 @@ class UnnecessaryNullCheckAstVisitor extends AbstractAstVisitor {
                     addViolation(expression, "The expression $expression.text can be simplified to ($suggestion)")
                 }
             } else if (AstUtil.isNotNullCheck(exp.rightExpression)) {
+                def nullTarget = AstUtil.getNullComparisonTarget(exp.rightExpression)
                 // perform pointless null check test
-                if (isPropertyInvocation(exp.leftExpression) || isMethodInvocation(exp.leftExpression)) {
+                if (isPropertyInvocation(exp.leftExpression, nullTarget) || isMethodInvocation(exp.leftExpression, nullTarget)) {
                     def suggestion = exp.leftExpression.text
                     addViolation(expression, "The expression $expression.text can be simplified to ($suggestion)")
                 }
@@ -75,30 +76,12 @@ class UnnecessaryNullCheckAstVisitor extends AbstractAstVisitor {
         false
     }
 
-    private static boolean isPropertyInvocation(expression) {
-        if (expression instanceof PropertyExpression) {
-            if (expression.objectExpression instanceof VariableExpression) {
-                return true
-            }
-        }
-        false
-    }
-
     private static boolean isMethodInvocation(expression, String targetName) {
         if (expression instanceof MethodCallExpression) {
             if (expression.objectExpression instanceof VariableExpression) {
                 if (expression.objectExpression.variable == targetName) {
                     return true
                 }
-            }
-        }
-        false
-    }
-
-    private static boolean isMethodInvocation(expression) {
-        if (expression instanceof MethodCallExpression) {
-            if (expression.objectExpression instanceof VariableExpression) {
-                return true
             }
         }
         false

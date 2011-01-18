@@ -49,6 +49,9 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
             if (obj != null && obj.method().method2()) { }
             if (obj != null && obj.prop1.prop2) { }
 
+            // ok, different properties
+            if (obj.prop1 && obj.prop2 != null) {  }
+            if (obj.method1() && obj.method2() != null) {  }
         '''
         assertNoViolations(SOURCE)
     }
