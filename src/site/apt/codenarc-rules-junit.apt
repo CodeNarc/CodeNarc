@@ -134,9 +134,10 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
 * UseAssertFalseInsteadOfNegation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  In unit tests, if a condition is expected to be false then there is no sense using assertTrue with the negation operator.
-  For instance, assertTrue(!condition) can always be simplified to assertFalse(condition)
+  <Since CodeNarc 0.12>
+
+  In unit tests, if a condition is expected to be false then there is no sense using <<<assertTrue>>> with the negation operator.
+  For instance, <<<assertTrue(!condition)>>> can always be simplified to <<<assertFalse(condition)>>>.
 
 * UseAssertTrueInsteadOfAssertEqualsRule Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -147,9 +148,10 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
 * UseAssertTrueInsteadOfNegation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  In unit tests, if a condition is expected to be true then there is no sense using assertFalse with the negation operator.
-  For instance, assertFalse(!condition) can always be simplified to assertTrue(condition)
+  <Since CodeNarc 0.12>
+
+  In unit tests, if a condition is expected to be true then there is no sense using <<<assertFalse>>> with the negation operator.
+  For instance, <<<assertFalse(!condition)>>> can always be simplified to <<<assertTrue(condition)>>>.
 
 * UseAssertNullInsteadOfAssertEquals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -175,7 +177,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
 * JUnitTestMethodWithoutAssert Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12 
+  <Since CodeNarc 0.12> 
+
   This rule searches for test methods that do not contain assert statements. Either the test method is missing assert
   statements, which is an error, or the test method contains custom assert statements that do not follow a proper assert
   naming convention. Test methods are defined as public void methods that begin with the work test or have a @Test
@@ -183,15 +186,17 @@ JUnit Rules  ("<rulesets/junit.xml>")
   applyToClassNames property. An assertion is defined as either using the <<<assert>>> keyword or invoking a method that
   starts with the work assert, like assertEquals, assertNull, or assertMyClassIsSimilar. Also, any method named
   <<<should.*>>> also counts as an assertion so that <<<shouldFail>>> methods do not trigger an assertion, any method
-   that starts with <<<fail>> counts as an assertion, and any method that starts with <<<verify>>> counts as an assertion.
+  that starts with <<<fail>> counts as an assertion, and any method that starts with <<<verify>>> counts as an assertion.
 
-   What counts as an assertion method can be overridden using the assertMethodPatterns property of the rule. The
-    default value is this comma separated list of regular expressions:
+  What counts as an assertion method can be overridden using the assertMethodPatterns property of the rule. The
+  default value is this comma separated list of regular expressions:
 
 -------------------------------------------------------------------------------
         String assertMethodPatterns = 'assert.*,should.*,fail.*,verify.*'
 -------------------------------------------------------------------------------
+
     If you'd like to add any method starting with 'ensure' to the ignores then you would set the value to this:
+
 -------------------------------------------------------------------------------
     'assert.*,should.*,fail.*,verify.*,ensure.*'
 -------------------------------------------------------------------------------

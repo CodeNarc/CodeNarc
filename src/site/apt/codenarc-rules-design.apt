@@ -7,11 +7,14 @@ Design Rules  ("<rulesets/design.xml>")
 
 * AbstractClassWithoutAbstractMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   The abstract class does not contain any abstract methods. An abstract class suggests an incomplete implementation,
   which is to be completed by subclasses implementing the abstract methods. If the class is intended to be used as a
-   base class only (not to be instantiated directly) a protected constructor can be provided prevent direct instantiation.
-   Example:
+  base class only (not to be instantiated directly) a protected constructor can be provided prevent direct instantiation.
+
+  Example:
+
 -------------------------------------------------------------------------------
     public abstract class MyBaseClass {
         void method1() {  }
@@ -20,7 +23,9 @@ Design Rules  ("<rulesets/design.xml>")
         // the abstract modifier and adding protected constructors
     }
 -------------------------------------------------------------------------------
+
    The following examples all pass:
+
 -------------------------------------------------------------------------------
     abstract class MyClass extends AbstractParent {
         // OK because parent is named Abstract.*
@@ -33,13 +38,14 @@ Design Rules  ("<rulesets/design.xml>")
 
 * CloseWithoutCloseable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
 
   If a class defines a "void close()" then that class should implement java.io.Closeable.
 
 * ConstantsOnlyInterface Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   An interface should be used only to model a behaviour of a class: using an interface as a container of constants is
   a poor usage pattern. Example:
 
@@ -53,7 +59,8 @@ Design Rules  ("<rulesets/design.xml>")
 
 * EmptyMethodInAbstractClass Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   An empty method in an abstract class should be abstract instead, as developer may rely on this empty implementation
   rather than code the appropriate one.
 
@@ -151,9 +158,9 @@ Design Rules  ("<rulesets/design.xml>")
 
 * FinalClassWithProtectedMember Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
 
-  This rule finds classes marked final that contain protected members. If a class is final then it may not be
-  subclassed, and there is therefore no point in having a member with protected visibility. Either the class should
-  not be final or the member should be private or protected.
+  This rule finds classes marked final that contain <<<protected>>> members. If a class is <<<final>>> then it may not be
+  subclassed, and there is therefore no point in having a member with <<<protected>>> visibility. Either the class should
+  not be <<<final>>> or the member should be private or protected.
 

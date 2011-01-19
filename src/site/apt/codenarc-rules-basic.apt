@@ -51,12 +51,14 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * ConfusingTernary Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   In a ternary expression avoid negation in the test. For example, rephrase:
   <<<(x != y) ? diff : same>>> as: <<<(x == y) ? same : diff>>>. Consistent use of this rule makes the code easier to read.
   Also, this resolves trivial ordering problems, such as "does the error case go first?" or "does the common case go first?".
 
   Example:
+
 -------------------------------------------------------------------------------
     (x != y) ? diff : same      // triggers violation
     (!x) ? diff : same          // triggers violation
@@ -67,8 +69,9 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * CompareToWithoutComparable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  If you implement a compareTo method then you should also implement the Comparable interface. If you
+  <Since CodeNarc 0.12>
+
+  If you implement a compareTo method then you should also implement the <<<Comparable>>> interface. If you
   don't then you could possibly get an exception if the Groovy == operator is invoked on your object.
   This is an issue fixed in Groovy 1.8 but present in previous versions.
 
@@ -523,9 +526,9 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
-  Calls to System.gc(), Runtime.getRuntime().gc(), and System.runFinalization() are not advised. Code should have
-  the same behavior whether the garbage collection is disabled using the option -Xdisableexplicitgc or not. Moreover,
-  "modern" jvms do a very good job handling garbage collections. If memory usage issues unrelated to memory leaks develop
+  Calls to <<<System.gc()>>>, <<<Runtime.getRuntime().gc()>>>, and <<<System.runFinalization()>>> are not advised. Code should have
+  the same behavior whether the garbage collection is disabled using the option <<<-Xdisableexplicitgc>>> or not. Moreover,
+  "modern" JVMs do a very good job handling garbage collections. If memory usage issues unrelated to memory leaks develop
   within an application, it should be dealt with JVM options rather than within the code itself.
 
 
@@ -657,10 +660,11 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * SimpleDateFormatMissingLocale Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
-  Be sure to specify a Locale when creating a new instance of SimpleDateFormat; the class is locale-sensitive. If you
-  instantiate SimpleDateFormat without a Locale parameter, it will format the date and time according to the default
-  Locale. Both the pattern and the Locale determine the format. For the same pattern, SimpleDateFormat may format a
+  <Since CodeNarc 0.12>
+
+  Be sure to specify a <<<Locale>>> when creating a new instance of <<<SimpleDateFormat>>>; the class is locale-sensitive. If you
+  instantiate <<<SimpleDateFormat>>> without a <<<Locale>>> parameter, it will format the date and time according to the default
+  <<<Locale>>>. Both the pattern and the <<<Locale>>> determine the format. For the same pattern, <<<SimpleDateFormat>>> may format a
   date and time differently if the Locale varies.
 
 -------------------------------------------------------------------------------

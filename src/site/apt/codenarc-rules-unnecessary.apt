@@ -291,7 +291,8 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * UnnecessaryInstantiationToGetClass Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since in CodeNarc 0.12>
+
   Avoid instantiating an object just to call getClass() on it; use the .class public member instead.
 
 -------------------------------------------------------------------------------
@@ -372,11 +373,13 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * UnnecessaryNullCheck Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   Groovy contains the safe dereference operator. It can be used in boolean conditional statements to safely
   replace explicit <<<x == null>>> tests.
 
   Examples of violations:
+
 -------------------------------------------------------------------------------
     if (obj != null && obj.method()) { }
 
@@ -387,6 +390,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
   Examples of acceptable code:
+
 -------------------------------------------------------------------------------
     // null check it OK
     if (obj != null) { }
@@ -407,10 +411,12 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * UnnecessaryNullCheckBeforeInstanceOf Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.12
+  <Since CodeNarc 0.12>
+
   There is no need to check for null before an instanceof; the instanceof keyword returns false when given a null argument.
 
   Example:
+
 -------------------------------------------------------------------------------
     if (x != null && x instanceof MyClass) {
         // should drop the "x != null" check
@@ -447,7 +453,6 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 * UnnecessaryStringInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12 (formerly StringInstantiation Rule in the "basic" rule set)>
-
 
   Checks for direct call to the <<<String>>> constructor that accepts a <<<String>>> literal.
   In almost all cases, this is unnecessary. Use a <<<String>>> literal (e.g., "...") instead of calling the
