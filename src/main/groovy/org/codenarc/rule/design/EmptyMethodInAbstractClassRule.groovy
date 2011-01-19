@@ -28,7 +28,7 @@ import org.codenarc.util.AstUtil
  * An empty method in an abstract class should be abstract instead, as developer may rely on this empty implementation rather than code the appropriate one.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class EmptyMethodInAbstractClassRule extends AbstractAstVisitorRule {
     String name = 'EmptyMethodInAbstractClass'

@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * Avoid instantiating an object just to call getClass() on it; use the .class public member instead.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryInstantiationToGetClassRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryInstantiationToGetClass'

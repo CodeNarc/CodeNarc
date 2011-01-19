@@ -27,7 +27,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * look like a new keyword was meant to be used but forgotten.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class MissingNewInThrowStatementRule extends AbstractAstVisitorRule {
     String name = 'MissingNewInThrowStatement'

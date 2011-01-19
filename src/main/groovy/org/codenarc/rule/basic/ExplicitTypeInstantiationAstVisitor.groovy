@@ -23,7 +23,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * Used by the ExplicitXxxInstantiation rules.
  *
  * @author Chris Mair
- * @version $Revision: 465 $ - $Date: 2010-11-12 20:12:55 -0500 (Fri, 12 Nov 2010) $
+ * @version $Revision$ - $Date$
  */
 class ExplicitTypeInstantiationAstVisitor extends AbstractAstVisitor {
 
