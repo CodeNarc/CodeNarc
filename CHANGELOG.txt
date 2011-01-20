@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.13 (February 2011)
+-------------------------------------------
+NEW RULES
+- ExceptionExtendsError rule (exceptions) - Feature #3161749 - Errors are system exceptions. Do not extend them.
+
+
 Changes in version 0.12 (January 2011)
 -------------------------------------------
 NEW FEATURES

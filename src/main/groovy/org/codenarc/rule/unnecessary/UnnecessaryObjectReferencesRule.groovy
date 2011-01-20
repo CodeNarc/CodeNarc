@@ -74,7 +74,7 @@ class UnnecessaryObjectReferencesAstVisitor extends AbstractAstVisitor {
             } else {
                 runCollector.count = runCollector.count + 1
             }
-        } else {
+        } else if (variable != 'this') {
             runCollector.variable = variable
             runCollector.count = 1
         }

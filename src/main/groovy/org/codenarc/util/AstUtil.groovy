@@ -388,6 +388,12 @@ class AstUtil {
         if (node.name == target.simpleName) {
             return true
         }
+        if (node.superClass?.name == target.name) {
+            return true
+        }
+        if (node.superClass?.name == target.simpleName) {
+            return true
+        }
         node.interfaces.any { ClassNode declaredInterface ->
             classNodeImplementsType(declaredInterface, target)
         }
