@@ -1,3 +1,6 @@
+
+#TODO: Sort the following line into the file
+
 CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
@@ -10,6 +13,7 @@ NEW FEATURES
 
 NEW RULES
 - ExceptionExtendsError rule (exceptions) - Feature #3161749 - Errors are system exceptions. Do not extend them.
+- AvoidThreadGroup rule (concurrency) - Feature #3161692 - Avoid using ThreadGroup; although it is intended to be used in a threaded environment it contains methods that are not thread safe.
 
 BUG FIXES
 - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 

@@ -18,4 +18,5 @@
     <rule class='org.codenarc.rule.concurrency.UseOfNotifyMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.VolatileLongOrDoubleFieldRule'/>
 
+    <rule class='org.codenarc.rule.concurrency.AvoidThreadGroupRule'/>
 </ruleset>
