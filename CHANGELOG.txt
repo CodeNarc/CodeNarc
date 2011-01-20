@@ -7,6 +7,9 @@ Changes in version 0.13 (February 2011)
 NEW RULES
 - ExceptionExtendsError rule (exceptions) - Feature #3161749 - Errors are system exceptions. Do not extend them.
 
+BUG FIXES
+- Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 
+
 
 Changes in version 0.12 (January 2011)
 -------------------------------------------
