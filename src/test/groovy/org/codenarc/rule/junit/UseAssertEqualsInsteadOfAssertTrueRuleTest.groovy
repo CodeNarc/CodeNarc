@@ -41,6 +41,7 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
                     assertTrue('message', foo())
                     assertSame(foo(), foo())
                     assertTrue(foo() > bar())
+                    assertTrue('message', obj.foo() != obj.bar())
                 }
               }
         '''

@@ -40,7 +40,7 @@ class DuplicateCaseStatementAstVisitor extends AbstractAstVisitor {
         def allElements = statement?.caseStatements?.findAll { it?.expression instanceof ConstantExpression }
         allElements.inject([]) { list, CaseStatement item  ->
             if (list.contains(item?.expression?.value)) {
-                addViolation(item, 'Duplicate case statements found in switch')
+                addViolation(item, "Duplicate case statements found in switch. $item?.expression?.value appears twice")
             }
             else {
                 list.add item.expression?.value

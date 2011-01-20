@@ -51,7 +51,7 @@ class JUnitAssertAlwaysFailsAstVisitor extends AbstractAstVisitor  {
                 JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.TRUE) ||
                 isAssertConstantValueNotNullCall(methodCall, 'assertNull')
             if (isMatch) {
-                addViolation(methodCall)
+                addViolation(methodCall, "The assertion $methodCall.text will always fail. Replace with a call to the fail(String) method")
             }
         }
         super.visitMethodCallExpression(methodCall)

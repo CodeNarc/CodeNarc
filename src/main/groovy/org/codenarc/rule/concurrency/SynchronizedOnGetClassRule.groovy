@@ -40,10 +40,8 @@ class SynchronizedOnGetClassAstVisitor extends AbstractAstVisitor {
             return
         }
         
-        if (statement.expression instanceof MethodCallExpression && AstUtil.isMethodNamed(statement.expression, 'getClass')) {
-            if (statement.expression.arguments.properties['expressions']?.size() == 0) {
-                addViolation statement
-            }
+        if (statement.expression instanceof MethodCallExpression && AstUtil.isMethodNamed(statement.expression, 'getClass', 0)) {
+            addViolation statement, "Synchronizing on getClass() should be replaced with a class literal"
         }
         super.visitSynchronizedStatement(statement);
     }

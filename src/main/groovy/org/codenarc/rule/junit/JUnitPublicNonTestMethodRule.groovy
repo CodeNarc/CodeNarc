@@ -65,7 +65,7 @@ class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
             && !AstUtil.getAnnotation(methodNode, 'BeforeClass')
             && !AstUtil.getAnnotation(methodNode, 'AfterClass') ) {
 
-                addViolation(methodNode)
+                addViolation(methodNode, "The method $methodNode.name is public but not a test method")
         }
         super.visitMethodEx(methodNode)
     }

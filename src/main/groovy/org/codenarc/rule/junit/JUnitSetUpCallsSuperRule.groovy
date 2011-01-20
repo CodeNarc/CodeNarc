@@ -46,7 +46,7 @@ class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
                 AstUtil.isMethodCall(stmt, 'super', 'setUp', 0)
             }
             if (!found) {
-                addViolation(methodNode)
+                addViolation(methodNode, "The method setUp() does not call super.setUp()")
             }
         }
         super.visitMethodEx(methodNode)

@@ -46,7 +46,7 @@ class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
                 AstUtil.isMethodCall(stmt, 'super', 'tearDown', 0)
             }
             if (!found) {
-                addViolation(methodNode)
+                addViolation(methodNode, "The method tearDown() does not call super.tearDown()")
             }
         }
         super.visitMethodEx(methodNode)

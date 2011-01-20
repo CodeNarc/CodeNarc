@@ -40,9 +40,9 @@ class UseAssertSameInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
         if (AstUtil.isMethodCall(call, ['this', 'Assert'], ['assertTrue', 'assertFalse'])) {
 
             if (args.size() == 1 && AstUtil.isMethodCall(args[0], 'is', 1)) {
-                addViolation call
+                addViolation call, 'assert method can be simplified using the assertSame method'
             }else if (args.size() == 2 && AstUtil.isMethodCall(args[1], 'is', 1)) {
-                addViolation call                
+                addViolation call, 'assert method can be simplified using the assertSame method'
             }
         }
 

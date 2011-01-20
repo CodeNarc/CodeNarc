@@ -41,7 +41,7 @@ class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
     def void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (isFirstVisit(statement)) {
             if (visitCount > 0) {
-                addViolation statement
+                addViolation(statement, 'Nested synchronized statements are confusing and may lead to deadlock')
             }
             visitCount++
             super.visitSynchronizedStatement(statement);

@@ -40,7 +40,7 @@ class RemoveAllOnSelfAstVisitor extends AbstractAstVisitor {
             String variableName = call.objectExpression.text
             def argumentName = call.arguments.expressions[0].text
             if (argumentName == variableName) {
-                addViolation call
+                addViolation call, "A call to $call.text can be replaced with ${call.objectExpression.text}.clear()"
             }
         }
         super.visitMethodCallExpression(call)

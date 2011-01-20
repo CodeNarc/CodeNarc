@@ -90,7 +90,7 @@ class PropertyNameAstVisitor extends AbstractAstVisitor  {
             }
 
             if (!(node.name ==~ re)) {
-                addViolation(node)
+                addViolation(node, "The property name $node.name does not match the pattern $re")
             }
         }
         super.visitPropertyEx(node)

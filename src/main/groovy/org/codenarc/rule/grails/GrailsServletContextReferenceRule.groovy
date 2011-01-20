@@ -51,7 +51,7 @@ class GrailsServletContextReferenceRule extends AbstractAstVisitorRule {
 class GrailsServletContextReferenceAstVisitor extends AbstractAstVisitor  {
     void visitVariableExpression(VariableExpression expression) {
         if (isFirstVisit(expression) && expression.variable == 'servletContext') {
-            addViolation(expression)
+            addViolation(expression, 'Storing objects in the servletContext can limit scalability')
         }
         
         // This causes problems (StackOverflow) in Groovy 1.7.0

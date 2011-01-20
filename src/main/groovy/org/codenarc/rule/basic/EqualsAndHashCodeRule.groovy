@@ -46,7 +46,11 @@ class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor {
         def oneButNotBoth = (equalsMethod || hashCodeMethod) && !(equalsMethod && hashCodeMethod)
 
         if (oneButNotBoth) {
-            addViolation(classNode)
+            if (equalsMethod) {
+                addViolation(classNode, "The class $classNode.name defines equals(Object) but not hashCode()")
+            } else {
+                addViolation(classNode, "The class $classNode.name defines hashCode() but not equals(Object)")
+            }
         }
         super.visitClassEx(classNode)
     }

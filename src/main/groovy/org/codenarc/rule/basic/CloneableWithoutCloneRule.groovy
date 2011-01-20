@@ -47,7 +47,7 @@ class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
         }
         if (isCloneable) {
             if (!hasCloneMethod) {
-                addViolation(node)
+                addViolation(node, "The class $node.name implements Cloneable but does not define a proper clone() method")
             }
         }
         super.visitClassEx(node);

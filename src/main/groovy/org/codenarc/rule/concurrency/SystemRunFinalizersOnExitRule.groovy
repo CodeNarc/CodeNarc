@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Method calls to System.runFinalizersOnExit() should not be allowed. This method is inherently
@@ -40,11 +40,8 @@ class SystemRunFinalizersOnExitAstVisitor extends AbstractAstVisitor  {
 
     def void visitMethodCallExpression(MethodCallExpression call) {
         if (call.objectExpression instanceof VariableExpression) {
-            def target = call.objectExpression.variable
-            if (target == "System" && call.method instanceof ConstantExpression) {
-                if (call.method.value == "runFinalizersOnExit") {
-                    addViolation(call)
-                }
+            if (AstUtil.isMethodCall(call, 'System', 'runFinalizersOnExit', 1)) {
+                 addViolation(call, "System.runFinalizersOnExit() should not be invoked")
             }
         }
         super.visitMethodCallExpression(call);    

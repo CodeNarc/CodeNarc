@@ -59,7 +59,7 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
 
     void visitClassComplete(ClassNode classNode) {
         unusedPrivateMethods.each { unusedPrivateMethod ->
-            addViolation(unusedPrivateMethod)
+            addViolation(unusedPrivateMethod, "The method $unusedPrivateMethod.name is not used in the class $classNode.name")
         }
         this.currentClassNode = null
     }

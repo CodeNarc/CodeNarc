@@ -33,7 +33,7 @@ class ReturnFromFinallyBlockRule extends AbstractAstVisitorRule {
 class ReturnFromFinallyBlockAstVisitor extends AbstractFinallyAstVisitor  {
     void visitReturnStatement(ReturnStatement returnStatement) {
         if (isFirstVisit(returnStatement) && isStatementWithinFinally(returnStatement)) {
-            addViolation(returnStatement)
+            addViolation(returnStatement, "finally statements cannot return a value")
         }
         super.visitReturnStatement(returnStatement)
     }

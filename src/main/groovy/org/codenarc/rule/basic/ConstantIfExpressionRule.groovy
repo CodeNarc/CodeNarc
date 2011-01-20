@@ -51,7 +51,7 @@ class ConstantIfExpressionAstVisitor extends AbstractAstVisitor  {
         if (isFirstVisit(ifStatement)) {
             def booleanExpression = ifStatement.booleanExpression
             if (AstUtil.isConstantOrLiteral(booleanExpression.expression)) {
-                addViolation(ifStatement)
+                addViolation(ifStatement, "The if statement condition ($booleanExpression.text) contains a constant")
             }
         }
         super.visitIfElse(ifStatement)

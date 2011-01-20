@@ -43,7 +43,7 @@ class JUnitUnnecessaryTearDownAstVisitor extends AbstractAstVisitor  {
         if (JUnitUtil.isTearDownMethod(methodNode)) {
             def statements = methodNode.code.statements
             if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'tearDown', 0)) {
-                addViolation(methodNode)
+                addViolation(methodNode, 'The tearDown() method contains no logic and can be removed')
             }
         }
         super.visitMethodEx(methodNode)

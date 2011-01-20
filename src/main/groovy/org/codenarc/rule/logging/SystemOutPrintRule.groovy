@@ -36,7 +36,7 @@ class SystemOutPrintAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (isFirstVisit(methodCall) && methodCall.text.startsWith('System.out.print')) {
-            addViolation(methodCall)
+            addViolation(methodCall, "System.out.$methodCall.methodAsString should be replaced with something more robust")
         }
         super.visitMethodCallExpression(methodCall)
     }

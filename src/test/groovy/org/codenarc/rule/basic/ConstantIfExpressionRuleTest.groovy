@@ -51,7 +51,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             if (null) { }
         '''
-        assertSingleViolation(SOURCE, 2, 'if (null) { }')
+        assertSingleViolation(SOURCE, 2, 'if (null) { }', 'The if statement condition (null) contains a constant')
     }
 
     void testApplyTo_StringLiteral_IsAViolation() {

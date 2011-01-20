@@ -47,13 +47,13 @@ class ThreadLocalNotStaticFinalRuleTest extends AbstractRuleTestCase {
     void testApplyTo_Violation_NotFinalOrStatic() {
         final SOURCE = '''
             class ThreadLocalNotStaticFinalClass1 {
-                ThreadLocal local1 = new ThreadLocal()
-                protected ThreadLocal local2 = new ThreadLocal()
+                static ThreadLocal local1 = new ThreadLocal()
+                final protected ThreadLocal local2 = new ThreadLocal()
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'ThreadLocal local1 = new ThreadLocal()',
-                4, 'protected ThreadLocal local2 = new ThreadLocal()')
+                3, 'ThreadLocal local1 = new ThreadLocal()', 'The ThreadLocal field local1 is not final',
+                4, 'protected ThreadLocal local2 = new ThreadLocal()', 'The ThreadLocal field local2 is not static')
     }
 
     void testApplyTo_NoViolations() {

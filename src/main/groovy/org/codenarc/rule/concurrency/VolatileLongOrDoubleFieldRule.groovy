@@ -45,7 +45,7 @@ class VolatileLongOrDoubleFieldVisitor extends AbstractAstVisitor  {
                 node?.type?.name == "Long" ||
                 node?.type?.name == "Double") {
             if ((node.modifiers & Modifier.VOLATILE) == Modifier.VOLATILE) {
-                addViolation(node)
+                addViolation(node, 'Operations on volatile long and double fields are not guaranteed atomic on all JVMs')
             }
         }
         super.visitFieldEx(node);

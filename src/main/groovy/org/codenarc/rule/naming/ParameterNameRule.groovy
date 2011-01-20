@@ -73,7 +73,7 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
         parameters.each { parameter ->
             if (!new WildcardPattern(rule.ignoreParameterNames, false).matches(parameter.name)) {
                 if (parameter.lineNumber >= 0 && !(parameter.name ==~ rule.regex)) {
-                    addViolation(parameter)
+                    addViolation(parameter, "The parameter $parameter.name has an invalid name")
                 }
             }
         }

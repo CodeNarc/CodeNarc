@@ -36,7 +36,7 @@ class SystemErrPrintAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (isFirstVisit(methodCall) && methodCall.text.startsWith('System.err.print')) {
-            addViolation(methodCall)
+            addViolation(methodCall, "System.err.$methodCall.methodAsString should be replaced with something more robust")
         }
         super.visitMethodCallExpression(methodCall)
     }

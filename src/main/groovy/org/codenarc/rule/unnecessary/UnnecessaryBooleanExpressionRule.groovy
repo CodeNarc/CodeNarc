@@ -66,14 +66,14 @@ class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor  {
         if (operationName in BOOLEAN_LOGIC_OPERATIONS &&
                 (AstUtil.isConstantOrLiteral(expression.rightExpression) ||
                  AstUtil.isConstantOrLiteral(expression.leftExpression))) {
-            addViolation(expression)
+            addViolation(expression, "The expression using $operationName is compared to a constant")
         }
         super.visitBinaryExpression(expression)
     }
 
     void visitNotExpression(NotExpression expression) {
         if (AstUtil.isConstantOrLiteral(expression.expression)) {
-            addViolation(expression)
+            addViolation(expression, "The Not expression contains a literal or contant. ")
         }
          super.visitNotExpression(expression)
     }

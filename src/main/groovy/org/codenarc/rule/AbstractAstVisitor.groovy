@@ -80,8 +80,20 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
      * Only add the violation if the node lineNumber >= 0.
      * @param node - the Groovy AST Node
      * @param message - the message for the violation; defaults to null
+     * @Deprecated Always define a message. Use the other addViolation method instead of this one. 
      */
-    protected void addViolation(ASTNode node, message = null) {
+    @Deprecated
+    protected void addViolation(ASTNode node) {
+        addViolation(node, null)
+    }
+
+    /**
+     * Add a new Violation to the list of violations found by this visitor.
+     * Only add the violation if the node lineNumber >= 0.
+     * @param node - the Groovy AST Node
+     * @param message - the message for the violation; defaults to null
+     */
+    protected void addViolation(ASTNode node, message) {
         if (!isSuppressed) {
             def lineNumber = node.lineNumber
             if (lineNumber >= 0) {

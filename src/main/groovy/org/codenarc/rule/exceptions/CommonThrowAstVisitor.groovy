@@ -44,7 +44,7 @@ class CommonThrowAstVisitor extends AbstractAstVisitor  {
         if (isFirstVisit(throwStatement) &&
                 throwExpression instanceof ConstructorCallExpression &&
                 throwExpression.type.name in exceptionTypeNames) {
-            addViolation(throwStatement)
+            addViolation(throwStatement, "The type $throwExpression.type.name should not be thrown")
         }
         super.visitThrowStatement(throwStatement)
     }

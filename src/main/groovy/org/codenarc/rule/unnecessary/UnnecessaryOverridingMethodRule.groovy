@@ -44,7 +44,7 @@ class UnnecessaryOverridingMethodAstVisitor extends AbstractAstVisitor {
             MethodCallExpression methodCall = node.code.statements[0].expression
             if (AstUtil.isMethodCall(methodCall, "super", node.name, node.parameters.length)) {
                 if (AstUtil.getParameterNames(node) == AstUtil.getArgumentNames(methodCall)) {
-                    addViolation node
+                    addViolation node, "The method $node.name contains no logic and can be safely deleted"
                 }
             }
         }

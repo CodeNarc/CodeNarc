@@ -91,7 +91,7 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
             }
 
             if (!(fieldNode.name ==~ re)) {
-                addViolation(fieldNode)
+                addViolation(fieldNode, "THe fieldname $fieldNode.name does not match ${re.toString()}")
             }
         }
         super.visitFieldEx(fieldNode)

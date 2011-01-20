@@ -62,7 +62,7 @@ class ConstantTernaryExpressionAstVisitor extends AbstractAstVisitor  {
         if (isFirstVisit(ternaryExpression)) {
             def booleanExpression = ternaryExpression.booleanExpression
             if (AstUtil.isConstantOrLiteral(booleanExpression.expression)) {
-                addViolation(ternaryExpression)
+                addViolation(ternaryExpression, "The ternary expression contains the constant $booleanExpression.expression")
             }
         }
         super.visitTernaryExpression(ternaryExpression)

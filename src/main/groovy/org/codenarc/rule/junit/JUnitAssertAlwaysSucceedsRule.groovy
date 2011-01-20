@@ -48,7 +48,7 @@ class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractAstVisitor  {
             JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.FALSE) ||
             JUnitUtil.isAssertConstantValueCall(methodCall, 'assertNull', null)
         if (isMatch) {
-            addViolation(methodCall)
+            addViolation(methodCall, "The assertion $methodCall.text will always pass and is therefore pointless")
         }
         super.visitMethodCallExpression(methodCall)
     }

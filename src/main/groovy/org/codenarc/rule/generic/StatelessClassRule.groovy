@@ -108,7 +108,7 @@ class StatelessClassAstVisitor extends AbstractAstVisitor  {
         }
 
         if (!ignore) {
-            addViolation(fieldNode)
+            addViolation(fieldNode, "The class $fieldNode.owner.name is marked as stateless but contains the non-final field \"$fieldNode.name\"")
         }
         super.visitFieldEx(fieldNode)
     }

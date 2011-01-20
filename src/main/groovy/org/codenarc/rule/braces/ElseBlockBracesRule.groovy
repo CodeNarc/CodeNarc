@@ -44,7 +44,7 @@ class ElseBlockBracesAstVisitor extends AbstractAstVisitor  {
                 !AstUtil.isBlock(ifStatement.elseBlock)) {
 
             if (!(ifStatement.elseBlock instanceof IfStatement) || rule.bracesRequiredForElseIf) {
-                addViolation(ifStatement)
+                addViolation(ifStatement, 'The else block lacks braces')
             }
         }
         super.visitIfElse(ifStatement)

@@ -40,7 +40,7 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
 
         def lastStatement = getLastStatement(node)
         if (lastStatement instanceof ReturnStatement) {
-            addViolation lastStatement
+            addViolation lastStatement, 'The return keyword is not needed and can be removed'
         }
 
         super.visitMethodEx node
@@ -50,7 +50,7 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
 
         def lastStatement = getLastStatement(node)
         if (lastStatement instanceof ReturnStatement) {
-            addViolation lastStatement
+            addViolation lastStatement, 'The return keyword is not needed and can be removed'
         }
 
         super.visitClosureExpression node

@@ -44,7 +44,7 @@ class UnnecessaryCollectionCallAstVisitor extends AbstractAstVisitor {
             if (call.arguments instanceof TupleExpression && call.arguments.expressions.size() == 1) {
                 def argName = call.arguments.expressions[0].text
                 if (argName == variableName) {
-                    addViolation call
+                    addViolation call, "The call to $call.method.text has no effect"
                 }
             }
         }

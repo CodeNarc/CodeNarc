@@ -89,7 +89,7 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
 
     void visitMethodEx(MethodNode methodNode) {
         processParameters(methodNode.parameters)
-        processType(methodNode.returnType)
+        processType(methodNode.returnType, "The return type $methodNode.returnType.name should be replaced with an interface or more general parent class")
         super.visitMethodEx(methodNode)
     }
 
@@ -117,17 +117,17 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
     }
 
     void visitFieldEx(FieldNode fieldNode) {
-        processType(fieldNode.type)
+        processType(fieldNode.type, "The type $fieldNode.type.name should be replaced with an interface or more general parent class")
         super.visitFieldEx(fieldNode)
     }
 
     private void processParameters(parameters) {
         parameters.each { parameter ->
-            processType(parameter.type)
+            processType(parameter.type, "The type $parameter.type.name should be replaced with an interface or more general parent class")
         }
     }
 
-    private void processType(typeNode, String message=null) {
+    private void processType(typeNode, String message) {
         String typeName = typeNode.name
         if (typeNode.lineNumber >= 0 && (TYPES.contains(typeName))) {
             addViolation(typeNode, message)

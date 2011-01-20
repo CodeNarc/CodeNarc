@@ -16,11 +16,10 @@
 
 package org.codenarc.rule.concurrency
 
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
   * Method calls to Thread.yield() should not be allowed.
@@ -40,13 +39,8 @@ class ThreadYieldRule extends AbstractAstVisitorRule {
 class ThreadYieldAstVisitor extends AbstractAstVisitor {
 
      def void visitMethodCallExpression(MethodCallExpression call) {
-         if (call.objectExpression instanceof VariableExpression) {
-             def target = call.objectExpression.variable
-             if (target == "Thread" && call.method instanceof ConstantExpression) {
-                 if (call.method.value == "yield") {
-                     addViolation(call)
-                 }
-             }
+         if (AstUtil.isMethodCall(call, 'Thread', 'yield', 0)) {
+            addViolation(call, 'Thread.yield() has not useful guaranteed semantics')
          }
          super.visitMethodCallExpression(call);
      }

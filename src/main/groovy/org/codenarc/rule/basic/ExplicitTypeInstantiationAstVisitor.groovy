@@ -35,7 +35,7 @@ class ExplicitTypeInstantiationAstVisitor extends AbstractAstVisitor {
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isFirstVisit(call) && call?.type?.name == typeName && call.arguments.expressions.empty) {
-            addViolation call
+            addViolation call, "$typeName objects are better instantiated using the form \"[] as $typeName\""
         }
         super.visitConstructorCallExpression call
     }

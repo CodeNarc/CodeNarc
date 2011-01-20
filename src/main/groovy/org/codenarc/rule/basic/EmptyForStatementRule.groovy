@@ -35,7 +35,7 @@ class EmptyForStatementRule extends AbstractAstVisitorRule {
 class EmptyForStatementAstVisitor extends AbstractAstVisitor  {
     void visitForLoop(ForStatement forStatement) {
         if (isFirstVisit(forStatement) && AstUtil.isEmptyBlock(forStatement.loopBlock)) {
-            addViolation(forStatement)
+            addViolation(forStatement, 'The for statement is empty')
         }
         super.visitForLoop(forStatement)
     }

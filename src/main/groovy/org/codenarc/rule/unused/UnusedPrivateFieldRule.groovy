@@ -42,7 +42,7 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
 
 @SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
-    private unusedPrivateFields
+    private List<FieldNode> unusedPrivateFields
 
     void visitClassEx(ClassNode classNode) {
         this.unusedPrivateFields = classNode.fields.findAll { fieldNode ->
@@ -55,7 +55,7 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
 
     void visitClassComplete(ClassNode classNode) {
         unusedPrivateFields.each { unusedPrivateField ->
-            addViolation(unusedPrivateField)
+            addViolation(unusedPrivateField, "The field $unusedPrivateField.name is not used in the class $classNode.name")
         }
     }
     void visitVariableExpression(VariableExpression expression) {

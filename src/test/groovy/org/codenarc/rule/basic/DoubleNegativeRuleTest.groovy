@@ -44,8 +44,8 @@ class DoubleNegativeRuleTest extends AbstractRuleTestCase {
             def y = !(!true)
         '''
         assertTwoViolations(SOURCE,
-                2, 'def x = !!true',
-                3, 'def y = !(!true)')
+                2, 'def x = !!true', 'The expression (!!true) is a confusing double negative',
+                3, 'def y = !(!true)', 'The expression (!!true) is a confusing double negative')
     }
 
     protected Rule createRule() {

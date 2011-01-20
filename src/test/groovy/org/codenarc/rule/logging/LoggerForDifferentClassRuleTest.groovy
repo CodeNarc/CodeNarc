@@ -98,7 +98,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
                 private static final log = Logger.getLogger(CONSTANT)
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'private static final log = Logger.getLogger(CONSTANT)')
+        assertSingleViolation(SOURCE, 3, 'private static final log = Logger.getLogger(CONSTANT)', 'Logger is defined in MyClass but initialized with CONSTANT')
     }
 
     void testApplyTo_Logger_FullPackageNameOfLogger_NoViolations() {

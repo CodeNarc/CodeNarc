@@ -45,7 +45,7 @@ class PrintlnAstVisitor extends AbstractAstVisitor  {
                 (AstUtil.isMethodCall(methodCall, 'this', 'printf') && AstUtil.getMethodArguments(methodCall).size() > 1)
 
             if (isMatch) {
-                addViolation(methodCall)
+                addViolation(methodCall, 'println should be replaced with something more robust')
             }
         }
         super.visitMethodCallExpression(methodCall)

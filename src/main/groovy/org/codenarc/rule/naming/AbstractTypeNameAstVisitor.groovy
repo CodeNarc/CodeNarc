@@ -30,7 +30,7 @@ abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
     void visitClassEx(ClassNode classNode) {
         assert rule.regex
         if (shouldVisit(classNode) && !(classNode.getNameWithoutPackage() ==~ rule.regex)) {
-            addViolation(classNode)
+            addViolation(classNode, "The name ${classNode.getNameWithoutPackage()} failed to match the pattern ${rule.regex.toString()}")
         }
         super.visitClassEx(classNode)
     }

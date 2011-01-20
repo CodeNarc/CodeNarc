@@ -12,6 +12,8 @@ Changes in version 0.13 (February 2011)
 NEW FEATURES
 - Better support for command line runners. You can now specify the report type "console" as a command line parameter,
   and the CodeNarc text report is output to the console instead of a file. Feature #3162487
+- All rules now provide a nicely formatted message. This makes console tools and the CodeNarc Web Console much more
+  user friendly. Feature #3162847
 
 NEW RULES
 - ExceptionExtendsError rule (exceptions) - Feature #3161749 - Errors are system exceptions. Do not extend them.
@@ -21,6 +23,8 @@ NEW RULES
 BUG FIXES
 - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 
 
+POTENTIAL BREAKING CHANGES
+- addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.  
 
 Changes in version 0.12 (January 2011)
 -------------------------------------------

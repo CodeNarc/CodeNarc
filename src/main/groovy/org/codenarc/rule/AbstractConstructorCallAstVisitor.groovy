@@ -37,7 +37,7 @@ abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
             try {
                 addViolation(constructorCall, getViolationMessage(constructorCall))
             } catch (Throwable t) {
-                addViolation(constructorCall)
+                addViolation(constructorCall, "The type $constructorCall.type.name can be instantiated with a literal")
             }
         }
         super.visitConstructorCallExpression(constructorCall)

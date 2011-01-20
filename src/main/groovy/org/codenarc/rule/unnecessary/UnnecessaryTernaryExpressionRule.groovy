@@ -65,7 +65,7 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
             if (areBothTheSame(trueExpression, falseExpression)
                 || (isBooleanConditionalExpression(booleanExpression) && areTrueAndFalse(trueExpression, falseExpression))) {
 
-                addViolation(ternaryExpression)
+                addViolation(ternaryExpression, 'The ternary expression is useless or nonsensical')
             }
         }
         super.visitTernaryExpression(ternaryExpression)

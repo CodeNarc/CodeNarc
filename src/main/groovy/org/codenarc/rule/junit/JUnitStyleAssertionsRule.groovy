@@ -39,15 +39,16 @@ class JUnitStyleAssertionsAstVisitor extends AbstractAstVisitor {
 
     def void visitMethodCallExpression(MethodCallExpression call) {
 
+        // TODO better suggestions
         def objects = ['Assert', 'this']
         (1..2).each {
             if (AstUtil.isMethodCall(call, objects, ['assertTrue', 'assertFalse', 'assertNull', 'assertNotNull'], it)) {
-                addViolation call
+                addViolation call, "Replace $call.methodAsString with an assert statement"
             }
         }
         (2..3).each {
             if (AstUtil.isMethodCall(call, objects, ['assertEquals'], it)) {
-                addViolation call
+                addViolation call, "Replace $call.methodAsString with an assert statement"
             }
         }
         super.visitMethodCallExpression call

@@ -54,7 +54,7 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
             def firstArg = expression.arguments?.expressions?.get(0)
             def argText = firstArg.text
             if (isCapitalized(argText) && !isEqualToCurrentClassOrClassName(argText, classNameWithoutPackage)) {
-                addViolation(fieldNode)
+                addViolation(fieldNode, "Logger is defined in $classNameWithoutPackage but initialized with $argText")
             }
         }
         super.visitFieldEx(fieldNode)

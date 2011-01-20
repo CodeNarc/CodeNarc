@@ -45,8 +45,11 @@ class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
 
             if (args.size() < 3 && args.size() > 0) {
                 def arg = args.last()
-                if (AstUtil.isBinaryExpressionType(arg, '==') || AstUtil.isBinaryExpressionType(arg, '!=')) {
-                    addViolation call
+                if (AstUtil.isBinaryExpressionType(arg, '==')) {
+                    addViolation call, "Replace $call.methodAsString with a call to assertEquals()"
+                }
+                if (AstUtil.isBinaryExpressionType(arg, '!=') && call.methodAsString == 'assertFalse') {
+                    addViolation call, "Replace $call.methodAsString with a call to assertEquals()"
                 }
             }
         }

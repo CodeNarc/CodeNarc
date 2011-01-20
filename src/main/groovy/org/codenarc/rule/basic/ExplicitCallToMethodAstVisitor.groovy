@@ -54,7 +54,7 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
         try {
             addViolation call, getViolationMessage(call)
         } catch (Throwable t) {
-            addViolation call, 'Explicit call to $methodName can be simplified using Groovy operator overloading.'
+            addViolation call, "Explicit call to $methodName can be simplified using Groovy operator overloading."
         }
     }
 

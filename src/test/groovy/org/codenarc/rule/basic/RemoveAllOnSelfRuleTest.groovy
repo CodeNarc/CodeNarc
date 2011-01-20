@@ -47,7 +47,7 @@ class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
             def x = [1, 2, 3]
             x.removeAll(x)
         '''
-        assertSingleViolation(SOURCE, 3, 'x.removeAll(x)')
+        assertSingleViolation(SOURCE, 3, 'x.removeAll(x)', 'A call to x.removeAll(x) can be replaced with x.clear()')
     }
 
     void testViolationInClass() {

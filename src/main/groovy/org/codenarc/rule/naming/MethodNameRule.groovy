@@ -49,7 +49,7 @@ class MethodNameAstVisitor extends AbstractAstVisitor  {
         assert rule.regex
         if (!new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)) {
             if (!(methodNode.name ==~ rule.regex)) {
-                addViolation(methodNode)
+                addViolation(methodNode, "The method name $methodNode.name does not match $rule.regex")
             }
         }
         super.visitMethodEx(methodNode)

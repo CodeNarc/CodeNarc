@@ -35,7 +35,7 @@ class IfStatementBracesRule extends AbstractAstVisitorRule {
 class IfStatementBracesAstVisitor extends AbstractAstVisitor  {
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && !AstUtil.isBlock(ifStatement.ifBlock)) {
-            addViolation(ifStatement)
+            addViolation(ifStatement, 'The if statement lacks braces')
         }
         super.visitIfElse(ifStatement)
     }

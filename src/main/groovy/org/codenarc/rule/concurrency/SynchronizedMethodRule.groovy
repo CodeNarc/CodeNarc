@@ -40,7 +40,7 @@ class SynchronizedMethodAstVisitor extends AbstractAstVisitor  {
     def void visitMethodEx(MethodNode node) {
         if (isFirstVisit(node)) {
             if (node.getModifiers() & node.ACC_SYNCHRONIZED) {
-                addViolation(node)
+                addViolation(node, "The method $node.name is synchronized at the method level")
             }
         }
         super.visitMethodEx(node);
