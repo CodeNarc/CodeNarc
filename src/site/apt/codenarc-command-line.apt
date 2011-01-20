@@ -35,7 +35,7 @@ CodeNarc - Run From Command-Line
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
 | -report=<REPORT-TYPE[:FILENAME]>| The definition of the report to produce. The option value is of      | -report=html                         |
 |                                 | the form <<<TYPE[:FILENAME]>>>, where <<<TYPE>>> is one of the       | -report=html:MyProject.html    |
-|                                 | predefined type names: "html", "xml", "text" or else the fully-qualified  |                                      |
+|                                 | predefined type names: "html", "xml", "text", "console" or else the fully-qualified  |                                      |
 |                                 | class name of a class (accessible on the classpath) that implements  | -report=xml                          |
 |                                 | the <<<org.codenarc.report.ReportWriter>>> interface. And            | -report=xml:MyXmlReport.xml          |
 |                                 | <<<FILENAME>>> is the filename (with optional path) of the output    |                                      |

@@ -33,6 +33,7 @@ class ReportWriterFactory {
             case 'html': return new HtmlReportWriter()
             case 'xml': return new XmlReportWriter()
             case 'text': return new TextReportWriter()
+            case 'console': def w = new TextReportWriter(); w.writeToStandardOut = true; return w
             case 'inlineXml' : return new InlineXmlReportWriter()
         }
 

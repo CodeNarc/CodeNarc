@@ -70,7 +70,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         The title descriptive for this analysis; used in the output report(s). Optional.
     -report=<REPORT-TYPE[:FILENAME]>
         The definition of the report to produce. The option value is of the form
-        TYPE[:FILENAME], where TYPE is "html" or "xml" and FILENAME is the filename (with
+        TYPE[:FILENAME], where TYPE is "html", "text", "xml", or "console" and FILENAME is the filename (with
         optional path) of the output report filename. If the report filename is
         omitted, the default filename is used for the specified report type
         ("CodeNarcReport.html" for "html" and "CodeNarcXmlReport.xml" for "xml"). If no
