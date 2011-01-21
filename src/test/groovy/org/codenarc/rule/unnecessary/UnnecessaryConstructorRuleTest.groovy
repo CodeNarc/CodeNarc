@@ -36,6 +36,9 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 public MyClass() {}
                 public MyClass(String text) {}
+
+                class InnerClass {
+                }
             }
             class MyUtility {
               private MyUtility(){
@@ -49,10 +52,22 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass {
-                public MyClass() {}               
+                public MyClass() {}
             }
         '''
         assertSingleViolation(SOURCE, 3, 'public MyClass() {}')
+    }
+
+    void testInnerClass() {
+        final SOURCE = '''
+            class MyClass {
+
+                static class MyInnerClass {
+                    public MyInnerClass() {}
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 5, 'public MyInnerClass() {}', 'The constructor can be safely deleted')
     }
 
     protected Rule createRule() {
