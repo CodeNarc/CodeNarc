@@ -31,6 +31,77 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnusedPrivateMethod'
     }
 
+    // todo: reenable and fix
+    // void testAnonymousInnerClassAsField() {
+    //     final SOURCE = '''
+    //         class MyClass {
+    //             private static def methodWithParameters(a,b) { a >> b }
+    //
+    //             def x = new Class() {
+    //                 def call() {
+    //                     methodWithParameters(10,1)
+    //                 }
+    //             }
+    //         } '''
+    //     assertNoViolations SOURCE
+    // }
+
+    void testClosureAsField() {
+        final SOURCE = '''
+            class MyClass {
+                private static def methodWithParameters(a,b) { a >> b }
+
+                def x = {
+                    methodWithParameters(10,1)
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
+
+    // todo: reenable and fix
+    //void testAnonymousInnerClassAsLocalVariable() {
+    //    final SOURCE = '''
+    //        class MyClass {
+    //            private static def methodWithParameters(a,b) { a >> b }
+    //
+    //            def myMethod() {
+    //                return new Class() {
+    //                    def call() {
+    //                        methodWithParameters(10,1)
+    //                    }
+    //                }
+    //            }
+    //        } '''
+    //    assertNoViolations SOURCE
+    //}
+
+    void testClosureAsLocalVariable() {
+        final SOURCE = '''
+            class MyClass {
+                private static def methodWithParameters(a,b) { a >> b }
+
+                def myClosure = {
+                    methodWithParameters(10,1)
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
+
+    // todo: reenable and fix
+    //void testInnerClass() {
+    //    final SOURCE = '''
+    //        class MyClass {
+    //            private static def methodWithParameters(a,b) { a >> b }
+    //
+    //            class MyInnerClass {
+    //                def call() {
+    //                    methodWithParameters(10,1)
+    //                }
+    //            }
+    //        } '''
+    //    assertNoViolations SOURCE
+    //}
+
     void testApplyTo_SingleUnusedPrivateMethod() {
         final SOURCE = '''
             class MyClass {
