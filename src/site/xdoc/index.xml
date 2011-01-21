@@ -41,18 +41,17 @@ Static Analysis for Groovy: Less Bugs, Better Code
 <tr>
      <td width="50%">
           <a href="http://meetcodenarc.appspot.com/"><img src="images/tryit.png" class="bigimage"/></a>
-          The <a href="http://meetcodenarc.appspot.com/">CodeNarc Web Console</a> let's you play with the latest snapshot version.
-               Enter some text and click execute to see the violations, or run some scripts we made, like 
-               <a href="http://meetcodenarc.appspot.com/">ThrowFromFinally</a>, <a href="http://meetcodenarc.appspot.com/edit/2001">ReturnNullFromCollectionClosure</a>, 
-               or <a href="http://meetcodenarc.appspot.com/edit/1">ReturnFromCatch</a>. 
+          <a href="http://meetcodenarc.appspot.com/">CodeNarc Web Console</a> let's you play with the latest snapshot,
+               containing over 175 rules with more added each week.
+               Enter some text, click execute, and see the violations. Or run some <a href="http://meetcodenarc.appspot.com/">scripts</a>
+               <a href="http://meetcodenarc.appspot.com/edit/2001">we</a> <a href="http://meetcodenarc.appspot.com/edit/1">made</a>.
      </td>
      <td>
              <a href="http://sourceforge.net/projects/codenarc/files//"><img src="images/getit.png" class="bigimage" /></a>
-          CodeNarc triggers violations based on rules and rulesets. The latest version supplies nearly 150 rules and
-              we're adding more every week. Click the rule links to the left to view all the rules, such as
+          CodeNarc triggers violations based on rules. Click the links to the left to view all the rules, such as
               the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
-              rules. Or you can <a href="codenarc-creating-ruleset.html">create your own custom ruleset</a> yourself.
-              It's fast and fun. See how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
+              rules. Or you can <a href="codenarc-creating-ruleset.html">create your own ruleset</a>;
+              see how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
 
      </td>
 </tr>

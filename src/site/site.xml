@@ -30,6 +30,8 @@
             <item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=250145"/>
             <item name="Road Map" href="/codenarc-roadmap.html"/>
             <item name="Javadocs" href="/apidocs/index.html"/>
+            <item name="Mailing Lists" href="http://sourceforge.net/mail/?group_id=250145"/>
+            <item name="Bug Tracker" href="http://sourceforge.net/tracker/?group_id=250145"/>
             <item name="SourceForge Project" href="http://sourceforge.net/projects/codenarc"/>
         </menu>
 
@@ -54,7 +56,6 @@
 
         <menu name="Sample Reports">
             <item name="Sample HTML Report" href="/SampleCodeNarcHtmlReport.html"/>
-            <!-- <item name="Sample CodeNarc XML Report" href="/SampleCodeNarcXmlReport.xml"/> -->
             <item name="Open Source Projects" href="/codenarc-opensource-projects.html"/>
         </menu>
 
