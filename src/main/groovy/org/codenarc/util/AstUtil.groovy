@@ -84,11 +84,44 @@ class AstUtil {
      * @param statement - the Statement to check
      * @return true if the BlockStatement is empty
      */
-    static boolean isEmptyBlock(Statement statement) {
-        statement instanceof BlockStatement &&
-                (statement.empty ||
-                        (statement.statements.size() == 1 && statement.statements[0].empty))
+    static boolean isEmptyBlock(Statement origStatement) {
+        def stack = [origStatement] as Stack
+        while (stack) {
+            def statement = stack.pop()
+            if (!(statement instanceof BlockStatement)) {
+                return false
+            }
+            if (statement.empty) {
+                return true
+            }
+            if (statement.statements.size() != 1) {
+                return false
+            }
+            stack.push(statement.statements[0])
+        }
+        false
     }
+
+    static ASTNode getEmptyBlock(Statement origStatement) {
+
+        def stack = [origStatement] as Stack
+
+        while (stack) {
+            def statement = stack.pop()
+            if (!(statement instanceof BlockStatement)) {
+                return null
+            }
+            if (statement.empty) {
+                return statement
+            }
+            if (statement.statements.size() != 1) {
+                return null
+            }
+            stack.push(statement.statements[0])
+        }
+        return null
+    }
+
 
     /**
      * Return the List of Arguments for the specified MethodCallExpression. The returned List contains
