@@ -18,6 +18,7 @@ NEW RULES
 - EmptyInstanceInitializer rule (basic) - Feature #3163464 - An empty instance initializer. It is safe to remove it.
 - EmptyMethod rule (basic) - Feature #3163806 - A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation.
 - ConsecutiveStringConcatenation rule (basic) - Feature #3163826 - Catches concatenation of two string literals on the same line. These can safely by joined.
+- ConsecutiveLiteralAppends rule (basic) - Feature #3161779 - Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.
 
 
 

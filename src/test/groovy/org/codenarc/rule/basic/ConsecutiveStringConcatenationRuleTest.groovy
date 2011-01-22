@@ -35,7 +35,6 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def f = 'Hello' +           // OK because of line break
                         'World'
-            def g = 'Hello' + 5         // OK because not a string
             def h = 'Hello' + null      // OK because not a string
             def i = 'Hello' + method()  // OK because not a string
             def j = 'Hello' - "$World"  // OK because not +
@@ -47,7 +46,14 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def a = 'Hello' + 'World'   // should be 'HelloWorld'
         '''
-        assertSingleViolation(SOURCE, 2, "'Hello' + 'World'", 'String concatenation can be joined into a single literal')
+        assertSingleViolation(SOURCE, 2, "'Hello' + 'World'", "String concatenation can be joined into the literal 'HelloWorld")
+    }
+
+    void testStringAndNumber() {
+        final SOURCE = '''
+            def g = 'Hello' + 5         // should be 'Hello5'
+        '''
+        assertSingleViolation(SOURCE, 2, "'Hello' + 5", "String concatenation can be joined into the literal 'Hello5'")
     }
 
     void testGStringAndString() {
@@ -70,7 +76,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
                         world   // should be joined
                       '''
         """
-        assertSingleViolation(SOURCE, 2, "'Hello' +", 'String concatenation can be joined into a single literal')
+        assertSingleViolation(SOURCE, 2, "'Hello' +", "String concatenation can be joined into the literal 'Hello\\n                        world   // should be joined\\n                      '")
     }
 
     void testMultilineStringAndString() {
@@ -78,7 +84,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
             def e = '''Hello
                   ''' + 'world'   // should be joined
         """
-        assertSingleViolation(SOURCE, 3, "+ 'world'", 'String concatenation can be joined into a single literal')
+        assertSingleViolation(SOURCE, 3, "+ 'world'", "String concatenation can be joined into the literal 'Hello\\n                  world'")
     }
 
     protected Rule createRule() {
