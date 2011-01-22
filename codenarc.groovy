@@ -82,9 +82,13 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
     new File(path).append """
 * $ruleName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.13
+  <New in CodeNarc 0.13>
   $ruleDescription
 
+  Example of violations:
+-------------------------------------------------------------------------------
+    // TODO: Add examples
+-------------------------------------------------------------------------------
 """
     println "\tUpdated $path"
 }

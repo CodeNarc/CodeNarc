@@ -60,4 +60,5 @@
     <rule class='org.codenarc.rule.basic.SimpleDateFormatMissingLocaleRule'/>
     <rule class='org.codenarc.rule.basic.SerializableClassMustDefineSerialVersionUIDRule'/>
     <rule class='org.codenarc.rule.basic.EmptyStaticInitializerRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyInstanceInitializerRule'/>
 </ruleset>

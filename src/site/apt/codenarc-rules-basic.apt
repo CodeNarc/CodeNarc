@@ -269,6 +269,17 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* EmptyInstanceInitializer Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  An empty class instance initializer was found. It is safe to remove it. Example:
+-------------------------------------------------------------------------------
+    class MyClass {
+        { }     // empty instance initializer, not a closure
+    }
+-------------------------------------------------------------------------------
+
+
 * EmptyStaticInitializer Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>

@@ -19,40 +19,37 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for EmptyStaticInitializerRule
+ * Tests for EmptyInstanceInitializerRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class EmptyStaticInitializerRuleTest extends AbstractRuleTestCase {
+class EmptyInstanceInitializerRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "EmptyStaticInitializer"
+        assert rule.name == "EmptyInstanceInitializer"
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
-                static {
-                    println 'statement'
-                }
+                def x = { }
             }
-            class MyClass2 {
-            }        '''
+        '''
         assertNoViolations(SOURCE)
     }
 
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass {
-                static {
-                }
-            }        '''
-        assertSingleViolation(SOURCE, 3, 'static {', 'The class MyClass has an empty static initializer. It is safe to delete it')
+                { }
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, '{ }', 'The class MyClass defines an empty instance initializer. It is safe to delete it')
     }
 
     protected Rule createRule() {
-        new EmptyStaticInitializerRule()
+        new EmptyInstanceInitializerRule()
     }
 }

@@ -15,32 +15,31 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * An empty static initializer was found. It is safe to remove it. 
+ * The class has an empty instance initializer. It can safely by removed. 
  *
- * @author Hamlet D'Arcy
+ * @author 'Hamlet D'Arcy'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class EmptyStaticInitializerRule extends AbstractAstVisitorRule {
-    String name = 'EmptyStaticInitializer'
+class EmptyInstanceInitializerRule extends AbstractAstVisitorRule {
+    String name = 'EmptyInstanceInitializer'
     int priority = 2
-    Class astVisitorClass = EmptyStaticInitializerAstVisitor
+    Class astVisitorClass = EmptyInstanceInitializerAstVisitor
 }
 
-class EmptyStaticInitializerAstVisitor extends AbstractAstVisitor {
+class EmptyInstanceInitializerAstVisitor extends AbstractAstVisitor {
     @Override
-    void visitMethodEx(MethodNode node) {
-        if (node.name == '<clinit>' && AstUtil.isEmptyBlock(node.code)) {
-            def emptyBlock = AstUtil.getEmptyBlock(node.code)
+    protected void visitObjectInitializerStatements(ClassNode node) {
+        if (node.objectInitializerStatements.size() == 1 && AstUtil.isEmptyBlock(node.objectInitializerStatements[0])) {
+            def emptyBlock = AstUtil.getEmptyBlock(node.objectInitializerStatements[0])
             if (emptyBlock) {
-                addViolation(emptyBlock, "The class ${node?.declaringClass?.name} has an empty static initializer. It is safe to delete it")
+                addViolation(emptyBlock, "The class $node.name defines an empty instance initializer. It is safe to delete it")
             }
         }
-        super.visitMethodEx(node)
     }
 }
