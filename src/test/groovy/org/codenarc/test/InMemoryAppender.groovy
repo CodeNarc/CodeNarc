@@ -44,6 +44,7 @@ class InMemoryAppender extends AppenderSkeleton implements Closeable {
         loggingEvents.add(loggingEvent)
     }
 
+    @Override
     void close() {
         // Do nothing
     }

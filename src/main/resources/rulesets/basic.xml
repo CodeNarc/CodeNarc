@@ -61,4 +61,5 @@
     <rule class='org.codenarc.rule.basic.SerializableClassMustDefineSerialVersionUIDRule'/>
     <rule class='org.codenarc.rule.basic.EmptyStaticInitializerRule'/>
     <rule class='org.codenarc.rule.basic.EmptyInstanceInitializerRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyMethodRule'/>
 </ruleset>

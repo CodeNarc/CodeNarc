@@ -16,6 +16,8 @@ NEW RULES
 - SerializableClassMustDefineSerialVersionUID rule (basic) - Feature #3161076 - Classes that implement Serializable should define a serialVersionUID.
 - EmptyStaticInitializer rule (basic) - Feature #3161685 - An empty static initializer was found. It is safe to remove it.
 - EmptyInstanceInitializer rule (basic) - Feature #3163464 - An empty instance initializer. It is safe to remove it.
+- EmptyMethod rule (basic) - Feature #3163806 - A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation.
+
 
 BUG FIXES
 - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 

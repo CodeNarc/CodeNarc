@@ -49,6 +49,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
         assert rule.name == "ForceViolations"
     }
 
+    @Override
     @SuppressWarnings('JUnitTestMethodWithoutAssert')
     def void testThatUnrelatedCodeHasNoViolations() {
         // make sure parent does not run

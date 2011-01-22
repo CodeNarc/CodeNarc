@@ -90,6 +90,7 @@ class TopLevelDelegate {
         allRuleSet.addRule(rule)
     }
 
+    @SuppressWarnings('EmptyMethod')
     void description(String description) {
         // Do nothing
     }

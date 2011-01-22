@@ -15,32 +15,33 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import java.lang.reflect.Modifier
 
 /**
- * The class has an empty instance initializer. It can safely by removed. 
+ * A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation. 
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class EmptyInstanceInitializerRule extends AbstractAstVisitorRule {
-    String name = 'EmptyInstanceInitializer'
+class EmptyMethodRule extends AbstractAstVisitorRule {
+    String name = 'EmptyMethod'
     int priority = 2
-    Class astVisitorClass = EmptyInstanceInitializerAstVisitor
+    Class astVisitorClass = EmptyMethodAstVisitor
 }
 
-class EmptyInstanceInitializerAstVisitor extends AbstractAstVisitor {
+class EmptyMethodAstVisitor extends AbstractAstVisitor {
     @Override
-    protected void visitObjectInitializerStatements(ClassNode node) {
-        if (node.objectInitializerStatements.size() == 1 && AstUtil.isEmptyBlock(node.objectInitializerStatements[0])) {
-            def emptyBlock = AstUtil.getEmptyBlock(node.objectInitializerStatements[0])
-            if (emptyBlock) {
-                addViolation(emptyBlock, "The class $node.name defines an empty instance initializer. It is safe to delete it")
+    void visitMethodEx(MethodNode node) {
+
+        if (AstUtil.isEmptyBlock(node.code) && !Modifier.isAbstract(node.declaringClass.modifiers)) {
+            if (!node.annotations.find { it?.classNode?.name == 'Override'}) {
+                addViolation(node, "The method $node.name is both empty and not marked with @Override")
             }
         }
-        super.visitObjectInitializerStatements(node)
+        super.visitMethodEx(node)
     }
 }

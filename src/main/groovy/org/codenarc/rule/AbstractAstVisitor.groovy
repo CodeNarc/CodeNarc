@@ -170,12 +170,12 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         }
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     protected void visitClassEx(ClassNode node) {
         // empty on purpose
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     protected void visitClassComplete(ClassNode node) {
         // empty on purpose
     }
@@ -187,7 +187,7 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         }
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
         // empty on purpose
     }
@@ -205,12 +205,12 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         }
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     protected void visitMethodComplete(MethodNode node) {
         // empty on purpose
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     void visitMethodEx(MethodNode node) {
         // empty on purpose
     }
@@ -222,7 +222,7 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         }
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     void visitFieldEx(FieldNode node) {
         // empty on purpose
     }
@@ -234,7 +234,7 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         }
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     void visitPropertyEx(PropertyNode node) {
         // empty on purpose
     }
@@ -246,7 +246,7 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         }
     }
 
-    @SuppressWarnings('EmptyMethodInAbstractClass')
+    @SuppressWarnings(['EmptyMethodInAbstractClass', 'EmptyMethod'])
     def void visitConstructorEx(ConstructorNode node) {
         // empty on purpose
     }

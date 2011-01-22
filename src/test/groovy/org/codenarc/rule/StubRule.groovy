@@ -34,6 +34,7 @@ class StubRule extends AbstractRule {
         this.priority = priority
     }
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
     }
 

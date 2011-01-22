@@ -44,6 +44,7 @@ class InlineXmlReportWriter extends XmlReportWriter {
         }
     }
 
+    @Override
     protected buildRulesElement(AnalysisContext analysisContext) {
         // No-op as we have inline rule descriptions
     }
