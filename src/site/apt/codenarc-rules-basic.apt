@@ -85,6 +85,35 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 
 
+* ConsecutiveStringConcatenation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  Catches concatenation of two string literals on the same line. These can safely by joined. In Java, the Java compiler
+  will join two String literals together and place them in the Constant Pool. However, Groovy will not because the plus()
+  method may override the + operator.
+
+  Examples:
+-------------------------------------------------------------------------------
+    // Violations
+    def a = 'Hello' + 'World'   // should be 'HelloWorld'
+    def b = "$Hello" + 'World'  // should be "${Hello}World"
+    def c = 'Hello' + "$World"  // should be "Hello${World}"
+    def d = 'Hello' + '''
+                        world   // should be joined
+                      '''
+    def e = '''Hello
+                  ''' + 'world'   // should be joined
+
+
+    // Not Violations
+    def f = 'Hello' +           // OK because of line break
+                'World'
+    def g = 'Hello' + 5         // OK because not a string
+    def h = 'Hello' + null      // OK because not a string
+    def i = 'Hello' + method()  // OK because not a string
+    def j = 'Hello' - "$World"  // OK because not +
+-------------------------------------------------------------------------------
+
 * ConstantIfExpression Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
