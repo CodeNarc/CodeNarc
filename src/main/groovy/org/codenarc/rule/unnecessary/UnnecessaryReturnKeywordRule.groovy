@@ -39,7 +39,7 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
     def void visitMethodEx(MethodNode node) {
 
         def lastStatement = getLastStatement(node)
-        if (lastStatement instanceof ReturnStatement) {
+        if (lastStatement instanceof ReturnStatement && !(lastStatement.expression instanceof ClosureExpression)) {
             addViolation lastStatement, 'The return keyword is not needed and can be removed'
         }
 
@@ -49,7 +49,7 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
     def void visitClosureExpression(ClosureExpression node) {
 
         def lastStatement = getLastStatement(node)
-        if (lastStatement instanceof ReturnStatement) {
+        if (lastStatement instanceof ReturnStatement && !(lastStatement.expression instanceof ClosureExpression)) {
             addViolation lastStatement, 'The return keyword is not needed and can be removed'
         }
 

@@ -20,10 +20,9 @@ NEW RULES
 - ConsecutiveStringConcatenation rule (basic) - Feature #3163826 - Catches concatenation of two string literals on the same line. These can safely by joined.
 - ConsecutiveLiteralAppends rule (basic) - Feature #3161779 - Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.
 
-
-
 BUG FIXES
 - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 
+- Fix Bug #3164150 UnnecessaryReturnKeyword: Rule is no longer triggered if the return is for a closure.
 
 POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.  

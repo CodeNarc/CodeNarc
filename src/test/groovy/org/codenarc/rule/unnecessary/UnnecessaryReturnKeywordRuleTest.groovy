@@ -42,6 +42,9 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
             def method2(it) {
                 it
             }
+            def method3() {
+                return { 5 }
+            }
         '''
         assertNoViolations(SOURCE)
     }
