@@ -19,6 +19,7 @@ NEW RULES
 - EmptyMethod rule (basic) - Feature #3163806 - A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation.
 - ConsecutiveStringConcatenation rule (basic) - Feature #3163826 - Catches concatenation of two string literals on the same line. These can safely by joined.
 - ConsecutiveLiteralAppends rule (basic) - Feature #3161779 - Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.
+- AddEmptyString rule (basic) - Feature #3161763 - Finds empty string literals which are being added. This is an inefficient way to convert any type to a String.
 
 BUG FIXES
 - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 

@@ -64,4 +64,5 @@
     <rule class='org.codenarc.rule.basic.EmptyMethodRule'/>
     <rule class='org.codenarc.rule.basic.ConsecutiveStringConcatenationRule'/>
     <rule class='org.codenarc.rule.basic.ConsecutiveLiteralAppendsRule'/>
+    <rule class='org.codenarc.rule.basic.AddEmptyStringRule'/>
 </ruleset>
