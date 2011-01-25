@@ -19,4 +19,5 @@
     <rule class='org.codenarc.rule.concurrency.VolatileLongOrDoubleFieldRule'/>
 
     <rule class='org.codenarc.rule.concurrency.AvoidThreadGroupRule'/>
+    <rule class='org.codenarc.rule.concurrency.StaticCalendarFieldRule'/>
 </ruleset>
