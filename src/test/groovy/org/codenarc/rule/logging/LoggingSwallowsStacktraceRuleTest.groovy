@@ -55,6 +55,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
         	class MyClass {
                 private static final Log LOG = LogFactory.getLog( Main.class );
+                private static final Log logger = LogFactory.getLog( Main.class );
 
                 def method() {
                     try {
@@ -64,11 +65,27 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
                             LOG.error('error') // ok... surrounded by if
                         }
                         LOG.error(e) // violation
+                        logger.error(e) // violation
+                        foo(e)
                     }
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 12, 'LOG.error(e)', 'The error logging may hide the stacktrace from the exception named e')
+        assertTwoViolations(SOURCE,
+                13, 'LOG.error(e)', 'The error logging may hide the stacktrace from the exception named e',
+                14, 'logger.error(e)', 'The error logging may hide the stacktrace from the exception named e')
+    }
+    
+    void testReportedDefect() {
+        final SOURCE = '''
+            class MyClass {
+
+            private log = Logger.getLogger(Class)
+            private logger = Logger.getLogger(MyClass)
+
+            }'''
+
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

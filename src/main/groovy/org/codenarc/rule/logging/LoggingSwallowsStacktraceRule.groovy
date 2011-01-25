@@ -27,9 +27,10 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 
 /**
- * If you are logging an exception then the proper API is to call error(Object, Throwable), which will log the message and the exception stack trace. If you call error(Object) then the stacktrace may not be logged. 
+ * If you are logging an exception then the proper API is to call error(Object, Throwable), which will log the message
+ * and the exception stack trace. If you call error(Object) then the stacktrace may not be logged.
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class LoggingSwallowsStacktraceRule extends AbstractAstVisitorRule {
@@ -49,7 +50,6 @@ class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
             List<String> logFields = classNodeToLoggerNames[fieldNode.declaringClass]
             if (logFields) {
                 logFields.add(fieldNode.name)
-                addViolation(fieldNode, "The class $fieldNode.declaringClass.name defines multiple loggers: " + logFields.join(', '))
             } else {
                 classNodeToLoggerNames[fieldNode.declaringClass] = [fieldNode.name]
             }
