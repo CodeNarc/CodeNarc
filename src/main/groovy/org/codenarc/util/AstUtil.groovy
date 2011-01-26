@@ -49,6 +49,19 @@ class AstUtil {
     }
 
     /**
+     * Tells you if an expression is the  constant integer. 
+     * @param expression
+     *     any expression
+     * @param expected
+     *     the expected int
+     * @return
+     * as described
+     */
+    static boolean isConstant(Expression expression, int expected) {
+        (expression instanceof ConstantExpression && expression.value == expected)
+    }
+
+    /**
      * Tells you if the expression is a predefined constant like TRUE or FALSE.
      * @param expression
      *      any expression
@@ -121,7 +134,6 @@ class AstUtil {
         }
         return null
     }
-
 
     /**
      * Return the List of Arguments for the specified MethodCallExpression. The returned List contains
