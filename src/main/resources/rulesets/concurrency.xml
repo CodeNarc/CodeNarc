@@ -21,4 +21,5 @@
     <rule class='org.codenarc.rule.concurrency.AvoidThreadGroupRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticCalendarFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticDateFormatFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedOnStringRule'/>
 </ruleset>
