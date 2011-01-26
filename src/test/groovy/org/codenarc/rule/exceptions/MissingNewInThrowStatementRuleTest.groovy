@@ -47,6 +47,13 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'throw RuntimeException()', 'The throw statement appears to be throwing the class literal RuntimeException instead of a new instance')
     }
 
+    void testClassLiteral() {
+        final SOURCE = '''
+            throw RuntimeException    // class literal never allowed
+        '''
+        assertSingleViolation(SOURCE, 2, 'throw RuntimeException', 'The throw statement appears to be throwing the class literal RuntimeException instead of a new instance')
+    }
+
     void testFailure() {
         final SOURCE = '''
             throw RuntimeFailure()      // ends in Failure, first letter Capitalized

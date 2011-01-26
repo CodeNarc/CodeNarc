@@ -15,10 +15,11 @@
  */
 package org.codenarc.rule.exceptions
 
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.ThrowStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.ThrowStatement
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * A common Groovy mistake when throwing exceptions is to forget the new keyword. For instance, "throw RuntimeException()"
@@ -41,13 +42,25 @@ class MissingNewInThrowStatementAstVisitor extends AbstractAstVisitor {
 
         if (statement.expression instanceof MethodCallExpression) {
             String name = statement?.expression?.method?.properties['value']
-            if (isFirstLetterUpperCase(name)) {
-                if (name.endsWith('Exception') || name.endsWith('Failure')|| name.endsWith('Fault')) {
-                    addViolation (statement, "The throw statement appears to be throwing the class literal $name instead of a new instance")
-                }
+            if (looksLikeAnExceptionType(name)) {
+                addViolation (statement, "The throw statement appears to be throwing the class literal $name instead of a new instance")
+            }
+        } else if (statement.expression instanceof VariableExpression) {
+            String name = statement.expression.variable
+            if (looksLikeAnExceptionType(name)) {
+                addViolation (statement, "The throw statement appears to be throwing the class literal $name instead of a new instance")
             }
         }
         super.visitThrowStatement(statement)
+    }
+
+    private static boolean looksLikeAnExceptionType(String name) {
+        if (isFirstLetterUpperCase(name)) {
+            if (name.endsWith('Exception') || name.endsWith('Failure')|| name.endsWith('Fault')) {
+                return true
+            }
+        }
+        false
     }
 
     private static boolean isFirstLetterUpperCase(String name) {
