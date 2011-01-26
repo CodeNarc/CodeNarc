@@ -117,6 +117,22 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     def f = x.getAt(z.size() -1)   // different objects
 -------------------------------------------------------------------------------
 
+
+* UnnecessaryCallToSubstring Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  Calling String.substring(0) always returns the original string. This code is meaningless.
+
+  Examples:
+-------------------------------------------------------------------------------
+    string.substring(0)         // violation
+    method().substring(0)       // violation
+
+    prop.substring(1)           // OK, not constant 0
+    prop.substring(0, 1)        // OK, end is specified
+
+-------------------------------------------------------------------------------
+
 * UnnecessaryCatchBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
