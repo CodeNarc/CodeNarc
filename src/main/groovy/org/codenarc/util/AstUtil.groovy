@@ -640,7 +640,7 @@ class AstUtil {
     }
 
     /**
-     * Only supports discovering of String type so far... but expand as needed. 
+     * Only supports discovering of String and Booleans type so far... but expand as needed.
      * @param node
      * @param fieldName
      * @return
@@ -654,8 +654,14 @@ class AstUtil {
 
                 if (field.initialExpression instanceof ConstantExpression && field.initialExpression.value instanceof String) {
                     return String
+                } else if (field.initialExpression instanceof ConstantExpression && AstUtil.isBoolean(field.initialExpression)) {
+                    return Boolean
                 } else if (AstUtil.classNodeImplementsType(field.type, String)) {
                     return String
+                } else if (AstUtil.classNodeImplementsType(field.type, Boolean)) {
+                    return Boolean
+                } else if (AstUtil.classNodeImplementsType(field.type, Boolean.TYPE)) {
+                    return Boolean.TYPE
                 } else {
                     return null
                 }

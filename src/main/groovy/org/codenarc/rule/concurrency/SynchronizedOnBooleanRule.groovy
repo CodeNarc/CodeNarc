@@ -15,27 +15,26 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codehaus.groovy.ast.ClassNode
-
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.SynchronizedStatement
+import org.codehaus.groovy.ast.ClassNode
 
 /**
- * Synchronization on a String field can lead to deadlock because Strings are interned by the JVM and can be shared. 
+ * Synchronization on a Boolean field can lead to deadlock because Boolean are cached by the JVM and can be shared.
  *
- * @author Hamlet D'Arcy
+ * @author 'Hamlet D'Arcy'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class SynchronizedOnStringRule extends AbstractAstVisitorRule {
-    String name = 'SynchronizedOnString'
+class SynchronizedOnBooleanRule extends AbstractAstVisitorRule {
+    String name = 'SynchronizedOnBoolean'
     int priority = 2
-    Class astVisitorClass = SynchronizedOnStringAstVisitor
+    Class astVisitorClass = SynchronizedOnBooleanAstVisitor
 }
 
-class SynchronizedOnStringAstVisitor extends AbstractAstVisitor {
+class SynchronizedOnBooleanAstVisitor extends AbstractAstVisitor {
 
     ClassNode currentClassNode = null
 
@@ -46,17 +45,12 @@ class SynchronizedOnStringAstVisitor extends AbstractAstVisitor {
         super.visitClassEx(node)
     }
 
-    /**
-     * Only supports String
-     * @param node
-     * @param fieldName
-     * @return
-     */
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (statement.expression instanceof VariableExpression) {
-            if (AstUtil.getFieldType(currentClassNode, statement.expression.variable) == String) {
-                addViolation(statement, "Synchronizing on the constant String field $statement.expression.variable is unsafe. Do not synchronize on interned strings")
+            Class type = AstUtil.getFieldType(currentClassNode, statement.expression.variable)
+            if (type == Boolean || type == Boolean.TYPE) {
+                addViolation(statement, "Synchronizing on the Boolean field $statement.expression.variable is unsafe. Do not synchronize on booleans")
             }
         }
         super.visitSynchronizedStatement(statement)

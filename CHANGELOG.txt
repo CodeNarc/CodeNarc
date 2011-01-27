@@ -27,6 +27,7 @@ NEW RULES
 - MissingNewInThrowStatementRule (exceptions) - Feature #3166115 - Improved existing rule to catch throwing a class literal, which always causes a RuntimeException.
 - UnnecessaryCallToSubstring rule (unnecessary) - Feature #3164688 - Calling String.substring(0) always returns the original string. This code is meaningless.
 - SynchronizedOnString rule (concurrency) - Feature #3164707 - Synchronization on a String field can lead to deadlock because Strings are interned by the JVM and can be shared.
+- SynchronizedOnBoolean rule (concurrency) - Feature #3164710 - Synchronization on a Boolean field can lead to deadlock because Boolean are cached by the JVM and can be shared.
 
 
 BUG FIXES
