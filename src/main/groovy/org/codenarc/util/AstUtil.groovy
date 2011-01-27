@@ -638,4 +638,29 @@ class AstUtil {
         }
         null
     }
+
+    /**
+     * Only supports discovering of String type so far... but expand as needed. 
+     * @param node
+     * @param fieldName
+     * @return
+     */
+    static Class getFieldType(ClassNode node, String fieldName) {
+        while (node != null) {
+            for (FieldNode field: node.fields) {
+                if (field.name != fieldName) {
+                    continue;
+                }
+
+                if (field.initialExpression instanceof ConstantExpression && field.initialExpression.value instanceof String) {
+                    return String
+                } else if (AstUtil.classNodeImplementsType(field.type, String)) {
+                    return String
+                } else {
+                    return null
+                }
+            }
+            node = node.outerClass
+        }
+    }
 }

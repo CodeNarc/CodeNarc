@@ -16,17 +16,17 @@
 package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.expr.ConstantExpression
+
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Synchronization on a String field can lead to deadlock because Strings are interned by the JVM and can be shared. 
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class SynchronizedOnStringRule extends AbstractAstVisitorRule {
@@ -37,59 +37,29 @@ class SynchronizedOnStringRule extends AbstractAstVisitorRule {
 
 class SynchronizedOnStringAstVisitor extends AbstractAstVisitor {
 
-    private final static Map<ClassNode, List<String>> CLASSNODE_TO_STRING_FIELDS = [:]
-    private final static Map<ClassNode, List<String>> CLASSNODE_TO_OTHER_FIELDS = [:]
-    private final static LOCK = new Object[0]
-    
     ClassNode currentClassNode = null
 
     @Override
     protected void visitClassEx(ClassNode node) {
 
-        synchronized(LOCK) {
-            def stringFieldNames = []
-            def otherFieldNames = []
-            CLASSNODE_TO_STRING_FIELDS[node] = stringFieldNames
-            CLASSNODE_TO_OTHER_FIELDS[node] = otherFieldNames
-            currentClassNode = node
+        currentClassNode = node
 
-            // build list of String fields
-            node.fields.each { FieldNode it ->
-                if (it.initialExpression instanceof ConstantExpression && it.initialExpression.value instanceof String) {
-                    stringFieldNames << it.name
-                } else {
-                    otherFieldNames << it.name
-                }
-            }
-        }
         super.visitClassEx(node)
     }
 
+    /**
+     * Only supports String
+     * @param node
+     * @param fieldName
+     * @return
+     */
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (statement.expression instanceof VariableExpression) {
-            def varName = statement.expression.variable
-            if (isStringField(varName)) {
+            if (AstUtil.getFieldType(currentClassNode, statement.expression.variable) == String) {
                 addViolation(statement, "Synchronizing on the constant String field $statement.expression.variable is unsafe. Do not synchronize on interned strings")
             }
         }
         super.visitSynchronizedStatement(statement)
-    }
-
-    private boolean isStringField(String fieldName) {
-
-        ClassNode current = currentClassNode
-
-        synchronized(LOCK) {
-            while (current) {
-                if (CLASSNODE_TO_STRING_FIELDS[current]?.contains(fieldName)) {
-                    return true
-                } else if (CLASSNODE_TO_OTHER_FIELDS[current]?.contains(fieldName)) {
-                    return false        // stop searching in parent
-                }
-                current = current.outerClass
-            }
-        }
-        false
     }
 }

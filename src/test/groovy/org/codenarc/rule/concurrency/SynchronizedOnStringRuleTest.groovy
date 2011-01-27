@@ -75,17 +75,21 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
                     }
                 }
             }
+        '''
+        assertNoViolations(SOURCE)
+    }
 
+    void testStringField() {
+        final SOURCE = '''
             class MyClass5 {
-                final String lock = someMethod() // not interned
+                final String lock = someMethod() // not interned, but quite possibly is
                 def method() {
                     synchronized(lock) { }
                 }
             }
         '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 5, 'synchronized(lock)', 'Synchronizing on the constant String field lock is unsafe. Do not synchronize on interned strings')
     }
-
     void testBasicViolation() {
         final SOURCE = '''
             class MyClass {
