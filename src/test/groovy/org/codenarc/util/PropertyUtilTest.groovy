@@ -37,8 +37,18 @@ class PropertyUtilTest extends AbstractTestCase {
         assert object.getIntField() == 23456
     }
 
+    void testSetPropertyFromString_int_Whitespace() {
+        PropertyUtil.setPropertyFromString(object, 'intField', ' 23456 ')
+        assert object.getIntField() == 23456
+    }
+
     void testSetPropertyFromString_long() {
         PropertyUtil.setPropertyFromString(object, 'longField', '9999999999')
+        assert object.getLongField() == 9999999999
+    }
+
+    void testSetPropertyFromString_long_Whitespace() {
+        PropertyUtil.setPropertyFromString(object, 'longField', '\t9999999999  ')
         assert object.getLongField() == 9999999999
     }
 
@@ -47,6 +57,14 @@ class PropertyUtilTest extends AbstractTestCase {
         assert object.getBooleanField()
 
         PropertyUtil.setPropertyFromString(object, 'booleanField', 'false')
+        assert !object.getBooleanField()
+    }
+
+    void testSetPropertyFromString_boolean_Whitespace() {
+        PropertyUtil.setPropertyFromString(object, 'booleanField', ' true   ')
+        assert object.getBooleanField()
+
+        PropertyUtil.setPropertyFromString(object, 'booleanField', ' false\t')
         assert !object.getBooleanField()
     }
 

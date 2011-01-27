@@ -33,6 +33,7 @@ BUG FIXES
 - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 
 - Fix Bug #3164150 UnnecessaryReturnKeyword: Rule is no longer triggered if the return is for a closure.
 - Fix Bug #3165139 LoggingSwallowsStacktrace: No longer reports multiple logger errors.
+- Fix bug #3166311: Error on numeric/boolean property values if they contain leading or trailing whitespace in "codenarc.properties" or in XML ruleset file.
 
 POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.  

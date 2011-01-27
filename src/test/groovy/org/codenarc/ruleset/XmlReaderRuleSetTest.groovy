@@ -68,7 +68,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
             <ruleset $NAMESPACE>
                 <rule-script path='rule/DoNothingRule.txt'>
                     <property name='name' value='YYYY'/>
-                    <property name='priority' value='1'/>
+                    <property name='priority' value=' 1 '/>
                 </rule-script>
             </ruleset>"""
         parseXmlRuleSet(XML)
@@ -125,16 +125,18 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'>
                     <property name='name' value='XXXX'/>
+                    <property name='enabled' value=' false '/>
                 </rule>
                 <rule class='org.codenarc.rule.exceptions.CatchThrowableRule'>
                     <property name='name' value='YYYY'/>
-                    <property name='priority' value='1'/>
+                    <property name='priority' value=' 1 '/>
                 </rule>
             </ruleset>"""
         parseXmlRuleSet(XML)
         assertRuleClasses([StubRule, CatchThrowableRule])
         assert rules*.name == ['XXXX', 'YYYY']
         assert rules*.priority == [0, 1]
+        assert rules*.enabled == [false, true]
     }
 
     void testGroovyRuleSet() {

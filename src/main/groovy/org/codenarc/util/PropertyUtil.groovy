@@ -25,7 +25,7 @@ class PropertyUtil {
 
     /**
      * Set the value of the named property on the specified Object from a String value.
-     * If the name specifies an int, long or boolean value then parse the provided String value
+     * If the name specifies an int, long or boolean value then trim and parse the provided String value
      * and convert to the appropriate type.
      * @param object - the Object whose field should be set
      * @param name - the property name to set
@@ -41,15 +41,15 @@ class PropertyUtil {
         Object newPropertyValue = propertyValue
 
         if (property.type == int) {
-            newPropertyValue = Integer.parseInt(propertyValue)
+            newPropertyValue = Integer.parseInt(propertyValue.trim())
         }
 
         if (property.type == long) {
-            newPropertyValue = Long.parseLong(propertyValue)
+            newPropertyValue = Long.parseLong(propertyValue.trim())
         }
 
         if (property.type == boolean) {
-            newPropertyValue = Boolean.parseBoolean(propertyValue)
+            newPropertyValue = Boolean.parseBoolean(propertyValue.trim())
         }
 
         object[propertyName] = newPropertyValue
