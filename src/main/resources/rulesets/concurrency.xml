@@ -23,4 +23,5 @@
     <rule class='org.codenarc.rule.concurrency.StaticDateFormatFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnStringRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnBooleanRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedReadObjectMethodRule'/>
 </ruleset>

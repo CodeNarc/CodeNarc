@@ -28,6 +28,7 @@ NEW RULES
 - UnnecessaryCallToSubstring rule (unnecessary) - Feature #3164688 - Calling String.substring(0) always returns the original string. This code is meaningless.
 - SynchronizedOnString rule (concurrency) - Feature #3164707 - Synchronization on a String field can lead to deadlock because Strings are interned by the JVM and can be shared.
 - SynchronizedOnBoolean rule (concurrency) - Feature #3164710 - Synchronization on a Boolean field can lead to deadlock because Boolean are cached by the JVM and can be shared.
+- SynchronizedReadObjectMethod rule (concurrency) - Feature #3164704 - Catches Serializable classes that define a synchronized readObject method. By definition, an object created by deserialization is only reachable by one thread, and thus there is no need for readObject() to be synchronized. If the readObject() method itself is causing the object to become visible to another thread, that is an example of very dubious coding style.
 
 
 BUG FIXES
