@@ -33,4 +33,5 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryNullCheckRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryModOneRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCallToSubstringRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessarySelfAssignmentRule'/>
 </ruleset>
