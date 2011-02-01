@@ -648,25 +648,77 @@ class AstUtil {
     static Class getFieldType(ClassNode node, String fieldName) {
         while (node != null) {
             for (FieldNode field: node.fields) {
-                if (field.name != fieldName) {
-                    continue;
-                }
-
-                if (field.initialExpression instanceof ConstantExpression && field.initialExpression.value instanceof String) {
-                    return String
-                } else if (field.initialExpression instanceof ConstantExpression && AstUtil.isBoolean(field.initialExpression)) {
-                    return Boolean
-                } else if (AstUtil.classNodeImplementsType(field.type, String)) {
-                    return String
-                } else if (AstUtil.classNodeImplementsType(field.type, Boolean)) {
-                    return Boolean
-                } else if (AstUtil.classNodeImplementsType(field.type, Boolean.TYPE)) {
-                    return Boolean.TYPE
-                } else {
-                    return null
+                if (field.name == fieldName) {
+                    return getFieldType(field)
                 }
             }
             node = node.outerClass
         }
+        null
+    }
+
+    /**
+     * This is private. It is a helper function for the utils. 
+     */
+    private static Class getFieldType(FieldNode field) {
+        // Step 1: Analyze the field's declared type
+        def declaredType = getClassForClassNode(field.type)
+        if (declaredType) {
+            return declaredType
+        }
+
+        // Step 2: Analyze the cast type of the initial expression
+        if (field.initialExpression instanceof Expression) {
+            def castType = getClassForClassNode(field.initialExpression.type)
+            if (castType) {
+                return castType
+            }
+        }
+
+        // Step 3: Look at the literal within the constant
+        if (field.initialExpression instanceof ConstantExpression) {
+            if (field.initialExpression.value instanceof String) {
+                return String
+            } else if (isBoolean(field.initialExpression)) {
+                return Boolean
+            } else if (getClass() in [Integer, Integer.TYPE]) {
+                return Integer
+            } else if (getClass() in [Long, Long.TYPE]) {
+                return Long
+            } else if (getClass() in [Double, Double.TYPE]) {
+                return Double
+            } else if (getClass() in [Float, Float.TYPE]) {
+                return Float
+            }
+        }
+        return null
+    }
+
+    /**
+     * This is private. It is a helper function for the utils. 
+     */
+    private static Class getClassForClassNode(ClassNode type) {
+        if (AstUtil.classNodeImplementsType(type, String)) {
+            return String
+        } else if (AstUtil.classNodeImplementsType(type, Boolean) || AstUtil.classNodeImplementsType(type, Boolean.TYPE)) {
+            return Boolean
+        } else if (AstUtil.classNodeImplementsType(type, Long) || AstUtil.classNodeImplementsType(type, Long.TYPE)) {
+            return Long
+        } else if (AstUtil.classNodeImplementsType(type, Short) || AstUtil.classNodeImplementsType(type, Short.TYPE)) {
+            return Short
+        } else if (AstUtil.classNodeImplementsType(type, Double) || AstUtil.classNodeImplementsType(type, Double.TYPE)) {
+            return Double
+        } else if (AstUtil.classNodeImplementsType(type, Float) || AstUtil.classNodeImplementsType(type, Float.TYPE)) {
+            return Float
+        } else if (AstUtil.classNodeImplementsType(type, Character) || AstUtil.classNodeImplementsType(type, Character.TYPE)) {
+            return Character
+        } else if (AstUtil.classNodeImplementsType(type, Integer) || AstUtil.classNodeImplementsType(type, Integer.TYPE)) {
+            return Integer
+        } else if (AstUtil.classNodeImplementsType(type, Long) || AstUtil.classNodeImplementsType(type, Long.TYPE)) {
+            return Long
+        } else if (AstUtil.classNodeImplementsType(type, Byte) || AstUtil.classNodeImplementsType(type, Byte.TYPE)) {
+            return Byte
+        }
+        null
     }
 }
