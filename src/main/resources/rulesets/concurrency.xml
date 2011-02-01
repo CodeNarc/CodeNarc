@@ -24,4 +24,5 @@
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnStringRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnBooleanRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedReadObjectMethodRule'/>
+    <rule class='org.codenarc.rule.concurrency.InconsistentPropertySynchronizationRule'/>
 </ruleset>
