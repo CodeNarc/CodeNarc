@@ -21,6 +21,7 @@ NEW RULES
 - UnnecessaryTransientModifier rule (unnecessary) - Feature #3164672 - The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
 
   Bugs/Bad Practices
+- AssignmentInConditional rule (basic) - An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.
 - SerializableClassMustDefineSerialVersionUID rule (basic) - Feature #3161076 - Classes that implement Serializable should define a serialVersionUID.
 - ConsecutiveStringConcatenation rule (basic) - Feature #3163826 - Catches concatenation of two string literals on the same line. These can safely by joined.
 - ConsecutiveLiteralAppends rule (basic) - Feature #3161779 - Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.
