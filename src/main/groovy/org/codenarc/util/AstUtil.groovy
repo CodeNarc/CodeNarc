@@ -640,7 +640,7 @@ class AstUtil {
     }
 
     /**
-     * Only supports discovering of String and Booleans type so far... but expand as needed.
+     * Supports discovering many common JDK types, but not all.
      * @param node
      * @param fieldName
      * @return
@@ -658,9 +658,9 @@ class AstUtil {
     }
 
     /**
-     * This is private. It is a helper function for the utils. 
+     * Supports discovering many common JDK types, but not all.
      */
-    private static Class getFieldType(FieldNode field) {
+    static Class getFieldType(FieldNode field) {
         // Step 1: Analyze the field's declared type
         def declaredType = getClassForClassNode(field.type)
         if (declaredType) {
@@ -695,12 +695,23 @@ class AstUtil {
     }
 
     /**
-     * This is private. It is a helper function for the utils. 
+     * This is private. It is a helper function for the utils.
      */
     private static Class getClassForClassNode(ClassNode type) {
-        if (AstUtil.classNodeImplementsType(type, String)) {
+        // todo hamlet - move to a different "InferenceUtil" object
+        def primitiveType = getPrimitiveType(type)
+        if (primitiveType) {
+            return primitiveType
+        } else if (AstUtil.classNodeImplementsType(type, String)) {
             return String
-        } else if (AstUtil.classNodeImplementsType(type, Boolean) || AstUtil.classNodeImplementsType(type, Boolean.TYPE)) {
+        } else if (type.name?.endsWith('[]')) {
+            return Object[].class       // better type inference could be done, but oh well
+        }
+        null
+    }
+
+    private static Class getPrimitiveType(ClassNode type) {
+        if (AstUtil.classNodeImplementsType(type, Boolean) || AstUtil.classNodeImplementsType(type, Boolean.TYPE)) {
             return Boolean
         } else if (AstUtil.classNodeImplementsType(type, Long) || AstUtil.classNodeImplementsType(type, Long.TYPE)) {
             return Long

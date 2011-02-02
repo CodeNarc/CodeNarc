@@ -232,78 +232,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   on the class object for the subclass, which isn't likely what was intended.
 
 
-* SynchronizedOnBoolean Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
-  Synchronization on a Boolean field can lead to deadlock because Boolean are cached by the JVM and can be shared.
-  Since there normally exist only two Boolean objects, this code could be synchronizing on the same object as other,
-  unrelated code, leading to unresponsiveness and possible deadlock
-  Examples:
--------------------------------------------------------------------------------
-    class MyClass {
-
-        final String lock = false
-
-        def method() {
-            // violation
-            synchronized(lock) { }
-        }
-    }
-
-    class MyClass {
-
-        final String lock = false
-
-        class MyInnerClass {
-            def method() {
-                // violation
-                synchronized(lock) { }
-            }
-        }
-    }
-
-    class MyClass {
-        // implicit typing
-        final def lock = true
-
-        def method() {
-            // violation
-            synchronized(lock) { }
-        }
-    }
-
-    class MyClass {
-        // implicit typing
-        final def lock = new Object[0] // correct idiom
-
-        def method() {
-            return new Runnable() {
-                final def lock = false // shadows parent from inner class
-                public void run() {
-                    // violation
-                    synchronized(stringLock) { }
-                }
-            }
-        }
-    }
-
-    class MyClass {
-        // implicit typing
-        final def lock = new Object[0] // correct idiom
-
-        class MyInnerClass {
-
-            final def lock = true // shadows parent from inner class
-            def method() {
-                // violation
-                synchronized(stringLock) { }
-            }
-        }
-    }
--------------------------------------------------------------------------------
-
-
-* SynchronizationOnBoxedPrimitive Rule
+* SynchronizedOnBoxedPrimitive Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
   The code synchronizes on a boxed primitive constant, such as an Integer. Since Integer objects can be cached and shared,
@@ -410,6 +339,69 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
             synchronized(long6) {}
             synchronized(float6) {}
             synchronized(char6) {}
+        }
+    }
+-------------------------------------------------------------------------------
+And here is an in-depth example of how it works within inner classes and such: 
+-------------------------------------------------------------------------------
+    class MyClass {
+
+        final String lock = false
+
+        def method() {
+            // violation
+            synchronized(lock) { }
+        }
+    }
+
+    class MyClass {
+
+        final String lock = false
+
+        class MyInnerClass {
+            def method() {
+                // violation
+                synchronized(lock) { }
+            }
+        }
+    }
+
+    class MyClass {
+        // implicit typing
+        final def lock = true
+
+        def method() {
+            // violation
+            synchronized(lock) { }
+        }
+    }
+
+    class MyClass {
+        // implicit typing
+        final def lock = new Object[0] // correct idiom
+
+        def method() {
+            return new Runnable() {
+                final def lock = false // shadows parent from inner class
+                public void run() {
+                    // violation
+                    synchronized(stringLock) { }
+                }
+            }
+        }
+    }
+
+    class MyClass {
+        // implicit typing
+        final def lock = new Object[0] // correct idiom
+
+        class MyInnerClass {
+
+            final def lock = true // shadows parent from inner class
+            def method() {
+                // violation
+                synchronized(stringLock) { }
+            }
         }
     }
 -------------------------------------------------------------------------------
@@ -641,3 +633,21 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   thread might not be the one waiting for the condition that the caller just satisfied.
 
   Also see {{{http://www.javaconcurrencyinpractice.com/}<<Java_Concurrency_in_Practice>>}}, Brian Goetz, p 303.
+
+* VolatileArrayField Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  Volatile array fields are unsafe because the contents of the array are not treated as volatile. Changing the entire
+  array reference is visible to other threads, but changing an array element is not.
+
+  This rule take from Alex Miller's Java Concurrency in Practice slides, available at
+  http://www.slideshare.net/alexmiller/java-concurrency-gotchas-3666977. 
+
+  Example of violations:
+-------------------------------------------------------------------------------
+    class MyClass {
+        private volatile Object[] field1 = value()
+        volatile field2 = value as Object[]
+        volatile field3 = (Object[])foo
+    }
+-------------------------------------------------------------------------------

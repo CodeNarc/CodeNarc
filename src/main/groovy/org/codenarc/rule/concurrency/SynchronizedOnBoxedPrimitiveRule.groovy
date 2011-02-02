@@ -28,13 +28,13 @@ import org.codenarc.util.AstUtil
  * @author 'Hamlet D'Arcy'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class SynchronizationOnBoxedPrimitiveRule extends AbstractAstVisitorRule {
-    String name = 'SynchronizationOnBoxedPrimitive'
+class SynchronizedOnBoxedPrimitiveRule extends AbstractAstVisitorRule {
+    String name = 'SynchronizedOnBoxedPrimitive'
     int priority = 2
-    Class astVisitorClass = SynchronizationOnBoxedPrimitiveAstVisitor
+    Class astVisitorClass = SynchronizedOnBoxedPrimitiveAstVisitor
 }
 
-class SynchronizationOnBoxedPrimitiveAstVisitor extends AbstractAstVisitor {
+class SynchronizedOnBoxedPrimitiveAstVisitor extends AbstractAstVisitor {
     ClassNode currentClassNode = null
 
     @Override
@@ -48,7 +48,7 @@ class SynchronizationOnBoxedPrimitiveAstVisitor extends AbstractAstVisitor {
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (statement.expression instanceof VariableExpression) {
             Class type = AstUtil.getFieldType(currentClassNode, statement.expression.variable)
-            if (type in [Byte, Short, Double, Integer, Long, Float, Character]) {
+            if (type in [Byte, Short, Double, Integer, Long, Float, Character, Boolean]) {
                 addViolation(statement, "Synchronizing on the $type.simpleName field $statement.expression.variable is unsafe. Do not synchronize on boxed types")
             }
         }

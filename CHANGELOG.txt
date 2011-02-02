@@ -27,13 +27,13 @@ NEW RULES
 - MissingNewInThrowStatementRule (exceptions) - Feature #3166115 - Improved existing rule to catch throwing a class literal, which always causes a RuntimeException.
 - UnnecessaryCallToSubstring rule (unnecessary) - Feature #3164688 - Calling String.substring(0) always returns the original string. This code is meaningless.
 - SynchronizedOnString rule (concurrency) - Feature #3164707 - Synchronization on a String field can lead to deadlock because Strings are interned by the JVM and can be shared.
-- SynchronizedOnBoolean rule (concurrency) - Feature #3164710 - Synchronization on a Boolean field can lead to deadlock because Boolean are cached by the JVM and can be shared.
 - SynchronizedReadObjectMethod rule (concurrency) - Feature #3164704 - Catches Serializable classes that define a synchronized readObject method. By definition, an object created by deserialization is only reachable by one thread, and thus there is no need for readObject() to be synchronized. If the readObject() method itself is causing the object to become visible to another thread, that is an example of very dubious coding style.
 - UnnecessarySelfAssignment rule (unnecessary) - Feature #3164674 - Method contains a pointless self-assignment to a variable or property.
 - UnnecessaryTransientModifier rule (unnecessary) - Feature #3164672 - The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
 - InconsistentPropertySynchronization rule (concurrency) - Feature #3164699 - Class contains similarly-named get and set methods where the set method is synchronized and the get method is not, or the get method is synchronized and the set method is not.
 - InconsistentPropertyLocking rule (concurrency) - Feature #3164700 - Class contains similarly-named get and set methods where one method of the pair is marked either @WithReadLock or @WithWriteLock and the other is not locked at all.
-- SynchronizationOnBoxedPrimitive rule (concurrency) - Feature #3164708 - The code synchronizes on a boxed primitive constant, such as an Integer. Since Integer objects can be cached and shared, this code could be synchronizing on the same object as other, unrelated code, leading to unresponsiveness and possible deadlock
+- SynchronizedOnBoxedPrimitive rule (concurrency) - Feature #3164708 - The code synchronizes on a boxed primitive constant, such as an Integer. Since Integer objects can be cached and shared, this code could be synchronizing on the same object as other, unrelated code, leading to unresponsiveness and possible deadlock
+- VolatileArrayField rule (concurrency) - Feature #3170265 - Volatile array fields are unsafe because the contents of the array are not treated as volatile. Changing the entire array reference is visible to other threads, but changing an array element is not.
 
 BUG FIXES
 - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 
@@ -42,7 +42,7 @@ BUG FIXES
 - Fix bug #3166311: Error on numeric/boolean property values if they contain leading or trailing whitespace in "codenarc.properties" or in XML ruleset file.
 
 POTENTIAL BREAKING CHANGES
-- addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.  
+- addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
 
 Changes in version 0.12 (January 2011)
 -------------------------------------------
