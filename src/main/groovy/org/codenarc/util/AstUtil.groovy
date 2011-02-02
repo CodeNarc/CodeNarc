@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.*
 import org.codehaus.groovy.ast.expr.*
+import java.util.concurrent.locks.ReentrantLock
 
 /**
  * Contains static utility methods related to Groovy AST.
@@ -704,6 +705,8 @@ class AstUtil {
             return primitiveType
         } else if (AstUtil.classNodeImplementsType(type, String)) {
             return String
+        } else if (AstUtil.classNodeImplementsType(type, ReentrantLock)) {
+            return ReentrantLock
         } else if (type.name?.endsWith('[]')) {
             return Object[].class       // better type inference could be done, but oh well
         }

@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.concurrency
 
+import java.util.concurrent.locks.ReentrantLock
 import org.codehaus.groovy.ast.ClassNode
-
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -24,18 +24,18 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Synchronization on a String field can lead to deadlock because Strings are interned by the JVM and can be shared. 
+ * Synchronizing on a ReentrantLock field is almost never the intended usage. A ReentrantLock should be obtained using the lock() method and released in a finally block using the unlock() method. 
  *
- * @author Hamlet D'Arcy
+ * @author 'Hamlet D'Arcy'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class SynchronizedOnStringRule extends AbstractAstVisitorRule {
-    String name = 'SynchronizedOnString'
+class SynchronizedOnReentrantLockRule extends AbstractAstVisitorRule {
+    String name = 'SynchronizedOnReentrantLock'
     int priority = 2
-    Class astVisitorClass = SynchronizedOnStringAstVisitor
+    Class astVisitorClass = SynchronizedOnReentrantLockAstVisitor
 }
 
-class SynchronizedOnStringAstVisitor extends AbstractAstVisitor {
+class SynchronizedOnReentrantLockAstVisitor extends AbstractAstVisitor {
 
     ClassNode currentClassNode = null
 
@@ -49,8 +49,8 @@ class SynchronizedOnStringAstVisitor extends AbstractAstVisitor {
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (statement.expression instanceof VariableExpression) {
-            if (AstUtil.getFieldType(currentClassNode, statement.expression.variable) == String) {
-                addViolation(statement, "Synchronizing on the constant String field $statement.expression.variable is unsafe. Do not synchronize on interned strings")
+            if (AstUtil.getFieldType(currentClassNode, statement.expression.variable) == ReentrantLock) {
+                addViolation(statement, "Synchronizing on a ReentrantLock field $statement.expression.variable. This is almost never the intended usage; use the lock() and unlock() methods instead")
             }
         }
         super.visitSynchronizedStatement(statement)

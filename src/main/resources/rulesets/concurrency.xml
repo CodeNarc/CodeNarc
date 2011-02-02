@@ -28,4 +28,5 @@
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnBoxedPrimitiveRule'/>
     <rule class='org.codenarc.rule.concurrency.VolatileArrayFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticMatcherFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedOnReentrantLockRule'/>
 </ruleset>
