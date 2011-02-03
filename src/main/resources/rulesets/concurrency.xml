@@ -30,4 +30,5 @@
     <rule class='org.codenarc.rule.concurrency.StaticMatcherFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnReentrantLockRule'/>
     <rule class='org.codenarc.rule.concurrency.AvoidBusyWaitRule'/>
+    <rule class='org.codenarc.rule.concurrency.AvoidDoubleCheckedLockingRule'/>
 </ruleset>
