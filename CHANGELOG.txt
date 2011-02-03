@@ -31,6 +31,7 @@ NEW RULES
 - MissingNewInThrowStatementRule (exceptions) - Feature #3166115 - Improved existing rule to catch throwing a class literal, which always causes a RuntimeException.
 
   Concurrency Problems
+- AvoidBusyWait rule (concurrency) - Feature #3170271 - Busy waiting (forcing a Thread.sleep() while waiting on a condition) should be avoided. Prefer using the gate and barrier objects in the java.util.concurrent package.
 - AvoidThreadGroup rule (concurrency) - Feature #3161692 - Avoid using ThreadGroup; although it is intended to be used in a threaded environment it contains methods that are not thread safe.
 - InconsistentPropertyLocking rule (concurrency) - Feature #3164700 - Class contains similarly-named get and set methods where one method of the pair is marked either @WithReadLock or @WithWriteLock and the other is not locked at all.
 - InconsistentPropertySynchronization rule (concurrency) - Feature #3164699 - Class contains similarly-named get and set methods where the set method is synchronized and the get method is not, or the get method is synchronized and the set method is not.
