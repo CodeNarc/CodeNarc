@@ -19,6 +19,7 @@ NEW RULES
 - UnnecessaryModOne rule (unnecessary) - Feature #3164684 - Any expression mod 1 (exp % 1) is guaranteed to always return zero. This code is probably an error, and should be either (exp & 1) or (exp % 2).
 - UnnecessarySelfAssignment rule (unnecessary) - Feature #3164674 - Method contains a pointless self-assignment to a variable or property.
 - UnnecessaryTransientModifier rule (unnecessary) - Feature #3164672 - The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
+- UnnecessaryFail rule (junit) - Feature #3105925 - In a unit test, catching an exception and immediately calling Assert.fail() is pointless and hides the stack trace. It is better to rethrow the exception or not catch the exception at all.
 
   Bugs/Bad Practices
 - AssignmentInConditional rule (basic) - An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.
@@ -29,6 +30,7 @@ NEW RULES
 - BrokenOddnessCheck rule (basic) - Feature #3164687 - The code uses x % 2 == 1 to check to see if a value is odd, but this won't work for negative numbers (e.g., (-5) % 2 == -1). If this code is intending to check for oddness, consider using x & 1 == 1, or x % 2 != 0.
 - ExceptionExtendsError rule (exceptions) - Feature #3161749 - Errors are system exceptions. Do not extend them.
 - MissingNewInThrowStatementRule (exceptions) - Feature #3166115 - Improved existing rule to catch throwing a class literal, which always causes a RuntimeException.
+- UseAssertTrueInsteadOfAssertEquals (junit) - Feature #3172959 - This rule was expanded to handle assert statements as well as JUnit style assertions.
 
   Concurrency Problems
 - AvoidBusyWait rule (concurrency) - Feature #3170271 - Busy waiting (forcing a Thread.sleep() while waiting on a condition) should be avoided. Prefer using the gate and barrier objects in the java.util.concurrent package.

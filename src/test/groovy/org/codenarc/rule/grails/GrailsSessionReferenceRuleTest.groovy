@@ -30,7 +30,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
     static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
     void testDisabledByDefault() {
-        assert new GrailsSessionReferenceRule().enabled == false
+        assert !new GrailsSessionReferenceRule().enabled
     }
 
     void testRuleProperties() {

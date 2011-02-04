@@ -88,7 +88,7 @@ class AstUtilTest extends AbstractTestCase {
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 1
         assert args[0].mapEntryExpressions[1].keyExpression.value == 'failonerror'
-        assert args[0].mapEntryExpressions[1].valueExpression.value == false
+        assert !args[0].mapEntryExpressions[1].valueExpression.value
     }
 
     void testIsMethodCall_ExactMatch() {

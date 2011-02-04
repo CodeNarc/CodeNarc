@@ -15,10 +15,12 @@
  */
 package org.codenarc.rule.junit
 
+import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.stmt.AssertStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * This rule detects JUnit calling assertEquals where the first parameter is a boolean. These assertions should be made by more specific methods, like assertTrue or assertFalse.
@@ -49,5 +51,22 @@ class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression call
     }
 
+    @Override
+    void visitAssertStatement(AssertStatement statement) {
 
+        if (AstUtil.isBinaryExpressionType(statement.booleanExpression.expression, '==')) {
+            BinaryExpression exp = statement.booleanExpression.expression
+            if (AstUtil.isTrue(exp.leftExpression)) {
+                addViolation(statement, "The expression '$exp.text' can be simplified to '$exp.rightExpression.text'")
+            } else if (AstUtil.isTrue(exp.rightExpression)) {
+                addViolation(statement, "The expression '$exp.text' can be simplified to '$exp.leftExpression.text'")
+            } else if (AstUtil.isFalse(exp.leftExpression)) {
+                addViolation(statement, "The expression '$exp.text' can be simplified to '!$exp.rightExpression.text'")
+            } else if (AstUtil.isFalse(exp.rightExpression)) {
+                addViolation(statement, "The expression '$exp.text' can be simplified to '!$exp.leftExpression.text'")
+            }
+
+        }
+        super.visitAssertStatement(statement)
+    }
 }

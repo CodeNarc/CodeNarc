@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 /**
  * In unit tests, if a condition is expected to be false then there is no sense using assertTrue with the negation operator. For instance, assertTrue(!condition) can always be simplified to assertFalse(condition)
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class UseAssertFalseInsteadOfNegationRule extends AbstractAstVisitorRule {

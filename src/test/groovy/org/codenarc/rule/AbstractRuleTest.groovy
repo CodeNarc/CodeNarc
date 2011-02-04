@@ -58,12 +58,12 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     void testIsReady_DefaultsToTrue() {
-        assert rule.ready == true
+        assert rule.ready
     }
 
     void testIsReady() {
         rule = new NotReadyRule()
-        assert rule.isReady() == false
+        assert !rule.isReady()
         assertNoViolations(SOURCE)
     }
 

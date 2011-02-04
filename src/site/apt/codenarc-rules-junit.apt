@@ -146,6 +146,22 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule detects JUnit calling <<<assertEquals>>> where the first parameter is a boolean. These assertions
   should be made by more specific methods, like <<<assertTrue>>> or <<<assertFalse>>>.
 
+  All of the following examples can be simplified to assertTrue or remove the true literal: 
+-------------------------------------------------------------------------------
+    assertEquals(true, foo())
+    assertEquals("message", true, foo())
+    assert true == foo()
+    assert foo() == true : "message"
+    assertEquals(foo(), true)
+    assertEquals("message", foo(), true)
+    assertEquals(false, foo())
+    assertEquals("message", false, foo())
+    assert false == foo()
+    assert foo() == false : "message"
+    assertEquals(foo(), false)
+    assertEquals("message", foo(), false)
+-------------------------------------------------------------------------------
+
 * UseAssertTrueInsteadOfNegation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -202,3 +218,26 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
+
+* UnnecessaryFail Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  In a unit test, catching an exception and immediately calling Assert.fail() is pointless and hides the stack trace.
+  It is better to rethrow the exception or not catch the exception at all.
+
+  Example of violations:
+-------------------------------------------------------------------------------
+  public void testSomething() {
+    try {
+        something()
+    } catch (Exception e) {
+        fail(e.message)
+    }
+
+    try {
+        something()
+    } catch (Exception e) {
+        fail()
+    }
+  }
+-------------------------------------------------------------------------------

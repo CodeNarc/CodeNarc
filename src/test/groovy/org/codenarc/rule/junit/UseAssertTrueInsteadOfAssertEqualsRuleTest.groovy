@@ -41,6 +41,13 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
                     assertTrue('message', foo())
                     assertSame(foo(), foo())
                     assertTrue(foo() > bar())
+
+                    assert 1 == foo()
+                    assert 'message' == foo()
+                    assert foo()
+                    assert foo() : 'message'
+                    assert foo().is(foo())
+                    assert foo() > bar()
                 }
               }
         '''
@@ -57,6 +64,20 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
               }
         '''
         assertTwoViolations(SOURCE, 4, 'assertEquals(true, foo())', 5, 'assertEquals("message", true, foo())')
+    }
+
+    void testAssertTrueViolation_AssertStyle() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assert true == foo()
+                    assert foo() == true : "message"
+                }
+              }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'assert true == foo()', "The expression '(true == this.foo())' can be simplified to 'this.foo()'",
+                5, 'assert foo() == true : "message"', "The expression '(this.foo() == true)' can be simplified to 'this.foo()'")
     }
 
     void testAssertTrueViolation_Backwards() {
@@ -81,6 +102,20 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
               }
         '''
         assertTwoViolations(SOURCE, 4, 'assertEquals(false, foo())', 5, 'assertEquals("message", false, foo())')
+    }
+
+    void testAssertFalseViolation_AssertStyle() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assert false == foo()
+                    assert foo() == false : "message"
+                }
+              }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'assert false == foo()', "The expression '(false == this.foo())' can be simplified to '!this.foo()'",
+                5, 'assert foo() == false : "message"', "The expression '(this.foo() == false)' can be simplified to '!this.foo()'")
     }
 
     void testAssertFalseViolation_Backwards() {
