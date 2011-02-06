@@ -5,7 +5,7 @@
 Concurrency Rules  ("<rulesets/concurrency.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* AvoidBusyWait Rule
+* BusyWait Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -39,7 +39,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* AvoidDoubleCheckedLocking Rule
+* DoubleCheckedLocking Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -81,23 +81,6 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
             return ObjectHolder.object;
         }
     }
--------------------------------------------------------------------------------
-
-
-* AvoidThreadGroup Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
-
-  Avoid using ThreadGroup; although it is intended to be used in a threaded environment it contains methods
-  that are not thread safe.
-
-  Here is an example of code that produces a violation:
-
--------------------------------------------------------------------------------
-    new ThreadGroup("...")
-    new ThreadGroup(tg, "my thread group")
-    Thread.currentThread().getThreadGroup()
-    System.getSecurityManager().getThreadGroup()
 -------------------------------------------------------------------------------
 
 
@@ -776,6 +759,23 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
+* ThreadGroup Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+
+  Avoid using <<<ThreadGroup>>>; although it is intended to be used in a threaded environment it contains methods
+  that are not thread safe.
+
+  Here is an example of code that produces a violation:
+
+-------------------------------------------------------------------------------
+    new ThreadGroup("...")
+    new ThreadGroup(tg, "my thread group")
+    Thread.currentThread().getThreadGroup()
+    System.getSecurityManager().getThreadGroup()
+-------------------------------------------------------------------------------
+
+
 * ThreadLocalNotStaticFinal Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -813,27 +813,6 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* VolatileLongOrDoubleField Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  This rule reports on <<<long>>> or <<<double>>> fields that are declared <<<volatile>>>.
-
-  Long or double fields should not be declared as <<<volatile>>>. Java specifies that reads and
-  writes from such fields are atomic, but many JVM's have violated this specification. Unless you
-  are certain of your JVM, it is better to synchronize access to such fields rather than declare
-  them <<<volatile>>>. This rule flags fields marked <<<volatile>>> when their type is <<<double>>> 
-  or <<<long>>> or the name of their type is "Double" or "Long".
-
-  Here is an example of code that produces a violation:
-
--------------------------------------------------------------------------------
-     def method() {
-         private volatile double d
-         private volatile long f
-     }
--------------------------------------------------------------------------------
-
-
 * UseOfNotifyMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -843,6 +822,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   thread might not be the one waiting for the condition that the caller just satisfied.
 
   Also see {{{http://www.javaconcurrencyinpractice.com/}<<Java_Concurrency_in_Practice>>}}, Brian Goetz, p 303.
+
 
 * VolatileArrayField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -862,6 +842,27 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
         volatile field2 = value as Object[]
         volatile field3 = (Object[])foo
     }
+-------------------------------------------------------------------------------
+
+
+* VolatileLongOrDoubleField Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This rule reports on <<<long>>> or <<<double>>> fields that are declared <<<volatile>>>.
+
+  Long or double fields should not be declared as <<<volatile>>>. Java specifies that reads and
+  writes from such fields are atomic, but many JVM's have violated this specification. Unless you
+  are certain of your JVM, it is better to synchronize access to such fields rather than declare
+  them <<<volatile>>>. This rule flags fields marked <<<volatile>>> when their type is <<<double>>>
+  or <<<long>>> or the name of their type is "Double" or "Long".
+
+  Here is an example of code that produces a violation:
+
+-------------------------------------------------------------------------------
+     def method() {
+         private volatile double d
+         private volatile long f
+     }
 -------------------------------------------------------------------------------
 
 

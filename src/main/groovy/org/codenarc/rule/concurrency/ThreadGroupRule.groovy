@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,13 @@ import org.codenarc.util.AstUtil
  * @author 'Hamlet D'Arcy'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class AvoidThreadGroupRule extends AbstractAstVisitorRule {
-    String name = 'AvoidThreadGroup'
+class ThreadGroupRule extends AbstractAstVisitorRule {
+    String name = 'ThreadGroup'
     int priority = 2
-    Class astVisitorClass = AvoidThreadGroupAstVisitor
+    Class astVisitorClass = ThreadGroupAstVisitor
 }
 
-class AvoidThreadGroupAstVisitor extends AbstractAstVisitor {
+class ThreadGroupAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
 

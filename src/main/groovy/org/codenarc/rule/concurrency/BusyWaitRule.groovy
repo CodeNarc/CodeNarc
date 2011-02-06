@@ -30,13 +30,13 @@ import org.codehaus.groovy.ast.stmt.ForStatement
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class AvoidBusyWaitRule extends AbstractAstVisitorRule {
-    String name = 'AvoidBusyWait'
+class BusyWaitRule extends AbstractAstVisitorRule {
+    String name = 'BusyWait'
     int priority = 2
-    Class astVisitorClass = AvoidBusyWaitAstVisitor
+    Class astVisitorClass = BusyWaitAstVisitor
 }
 
-class AvoidBusyWaitAstVisitor extends AbstractAstVisitor {
+class BusyWaitAstVisitor extends AbstractAstVisitor {
     @Override
     void visitWhileLoop(WhileStatement node) {
         addViolationIfBusyWait(node)

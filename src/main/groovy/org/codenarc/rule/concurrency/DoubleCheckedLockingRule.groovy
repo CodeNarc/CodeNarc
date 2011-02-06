@@ -34,13 +34,13 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class AvoidDoubleCheckedLockingRule extends AbstractAstVisitorRule {
-    String name = 'AvoidDoubleCheckedLocking'
+class DoubleCheckedLockingRule extends AbstractAstVisitorRule {
+    String name = 'DoubleCheckedLocking'
     int priority = 2
-    Class astVisitorClass = AvoidDoubleCheckedLockingAstVisitor
+    Class astVisitorClass = DoubleCheckedLockingAstVisitor
 }
 
-class AvoidDoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
+class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
     @Override
     void visitIfElse(IfStatement node) {
 

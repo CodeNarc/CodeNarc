@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for AvoidThreadGroupRule
+ * Tests for ThreadGroupRule
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class AvoidThreadGroupRuleTest extends AbstractRuleTestCase {
+class ThreadGroupRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "AvoidThreadGroup"
+        assert rule.name == "ThreadGroup"
     }
 
     void testSuccessScenario() {
@@ -74,6 +74,6 @@ class AvoidThreadGroupRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new AvoidThreadGroupRule()
+        new ThreadGroupRule()
     }
 }

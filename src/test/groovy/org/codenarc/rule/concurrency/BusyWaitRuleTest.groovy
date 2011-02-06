@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for AvoidBusyWaitRule
+ * Tests for BusyWaitRule
  *
  * @author 'Hamlet D'Arcy'
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class AvoidBusyWaitRuleTest extends AbstractRuleTestCase {
+class BusyWaitRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "AvoidBusyWait"
+        assert rule.name == "BusyWait"
     }
 
     void testSuccessScenario() {
@@ -84,6 +84,6 @@ class AvoidBusyWaitRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new AvoidBusyWaitRule()
+        new BusyWaitRule()
     }
 }

@@ -19,7 +19,7 @@
     <rule class='org.codenarc.rule.concurrency.VolatileLongOrDoubleFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.WaitOutsideOfWhileLoopRule'/>
 
-    <rule class='org.codenarc.rule.concurrency.AvoidThreadGroupRule'/>
+    <rule class='org.codenarc.rule.concurrency.ThreadGroupRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticCalendarFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticDateFormatFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnStringRule'/>
@@ -30,6 +30,6 @@
     <rule class='org.codenarc.rule.concurrency.VolatileArrayFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.StaticMatcherFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnReentrantLockRule'/>
-    <rule class='org.codenarc.rule.concurrency.AvoidBusyWaitRule'/>
-    <rule class='org.codenarc.rule.concurrency.AvoidDoubleCheckedLockingRule'/>
+    <rule class='org.codenarc.rule.concurrency.BusyWaitRule'/>
+    <rule class='org.codenarc.rule.concurrency.DoubleCheckedLockingRule'/>
 </ruleset>
