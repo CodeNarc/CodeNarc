@@ -8,10 +8,12 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * AvoidBusyWait Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
-  Busy waiting (forcing a Thread.sleep() while waiting on a condition) should be avoided. Prefer using the gate and
-  barrier objects in the java.util.concurrent package.
+
+  Busy waiting (forcing a <<<Thread.sleep()>>> while waiting on a condition) should be avoided. Prefer using the gate and
+  barrier objects in the <<<java.util.concurrent>>> package.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     while (x) { Thread.sleep(1000) }
     while (x) { Thread.sleep(1000) { /* interruption handler */} }
@@ -40,13 +42,15 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * AvoidDoubleCheckedLocking Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   This rule detects double checked locking, where a 'lock hint' is tested for null before initializing an object within
   a synchronized block. Double checked locking does not guarantee correctness and is an anti-pattern.
 
   A full explanation of why double checked locking is broken in Java is available on Wikipedia:
-  http://en.wikipedia.org/wiki/Double-checked_locking
+  {{{http://en.wikipedia.org/wiki/Double-checked_locking}}}
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     if (object == null) {
         synchronized(this) {
@@ -82,11 +86,13 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 
 * AvoidThreadGroup Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  New in CodeNarc 0.13
+  <New in CodeNarc 0.13>
+
   Avoid using ThreadGroup; although it is intended to be used in a threaded environment it contains methods
   that are not thread safe.
 
   Here is an example of code that produces a violation:
+
 -------------------------------------------------------------------------------
     new ThreadGroup("...")
     new ThreadGroup(tg, "my thread group")
@@ -98,12 +104,14 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * InconsistentPropertyLocking Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Class contains similarly-named get and set methods where one method of the pair is marked either @WithReadLock
   or @WithWriteLock and the other is not locked at all. This may result in incorrect behavior at runtime, as
   callers of the get and set methods will not necessarily lock correctly and my see an inconsistent state for the object.
   The get and set method should both be guarded by @WithReadLock/@WithWriteLock or neither should be guarded.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     class Person {
         String name
@@ -151,12 +159,14 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * InconsistentPropertySynchronization Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Class contains similarly-named get and set methods where the set method is synchronized and the get method is not,
   or the get method is synchronized and the set method is not. This may result in incorrect behavior at runtime, as
   callers of the get and set methods will not necessarily see a consistent state for the object. The get and set method
   should both be synchronized or neither should be synchronized.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     class Person {
         String name
@@ -231,6 +241,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * StaticCalendarField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Calendar objects should not be used as static fields. Calendars are inherently unsafe for multithreaded use. Sharing a
   single instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
   Under 1.4 problems seem to surface less often than under Java 5 where you will probably see random ArrayIndexOutOfBoundsExceptions
@@ -240,6 +251,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   For more information on this see Sun Bug #6231579 and Sun Bug #6178997.
 
   Examples:
+
 -------------------------------------------------------------------------------
   // two violations
   class MyClass {
@@ -258,6 +270,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * StaticDateFormatField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   DateFormat objects should not be used as static fields. DateFormat are inherently unsafe for multithreaded use. Sharing a
   single instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
   Under 1.4 problems seem to surface less often than under Java 5 where you will probably see random ArrayIndexOutOfBoundsExceptions
@@ -267,6 +280,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   For more information on this see Sun Bug #6231579 and Sun Bug #6178997.
 
   Examples:
+
 -------------------------------------------------------------------------------
   // two violations
   class MyClass {
@@ -285,10 +299,12 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * StaticMatcherField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Matcher objects should not be used as static fields. Calendars are inherently unsafe for multithreaded use. Sharing a single
   instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
   // two violations
   class MyClass {
@@ -332,11 +348,13 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * SynchronizedOnBoxedPrimitive Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   The code synchronizes on a boxed primitive constant, such as an Integer. Since Integer objects can be cached and shared,
   this code could be synchronizing on the same object as other, unrelated code, leading to unresponsiveness and possible
   deadlock.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     class MyClass {
         Byte byte1 = 100
@@ -439,7 +457,9 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
         }
     }
 -------------------------------------------------------------------------------
-And here is an in-depth example of how it works within inner classes and such: 
+
+  And here is an in-depth example of how it works within inner classes and such:
+
 -------------------------------------------------------------------------------
     class MyClass {
 
@@ -506,13 +526,15 @@ And here is an in-depth example of how it works within inner classes and such:
 * SynchronizedOnString Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Synchronization on a String field can lead to deadlock. Constant Strings are interned and shared across all other
   classes loaded by the JVM. Thus, this could is locking on something that other code might also be locking. This could
   result in very strange and hard to diagnose blocking and deadlock behavior.
 
-  See http://www.javalobby.org/java/forums/t96352.html and http://jira.codehaus.org/browse/JETTY-352.
+  See {{{http://www.javalobby.org/java/forums/t96352.html and http://jira.codehaus.org/browse/JETTY-352}JETTY-352}}.
 
   Examples:
+
 -------------------------------------------------------------------------------
     class MyClass {
 
@@ -596,12 +618,14 @@ And here is an in-depth example of how it works within inner classes and such:
 * SynchronizedReadObjectMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Catches Serializable classes that define a synchronized readObject method. By definition, an object created by
   deserialization is only reachable by one thread, and thus there is no need for readObject() to be synchronized. If
   the readObject() method itself is causing the object to become visible to another thread, that is an example of very
   dubious coding style.
 
   Examples:
+
 -------------------------------------------------------------------------------
     class MyClass implements Serializable {
 
@@ -641,18 +665,20 @@ And here is an in-depth example of how it works within inner classes and such:
             doSomething()
         }
     }
+-------------------------------------------------------------------------------
 
 
 * SynchronizedOnReentrantLock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Synchronizing on a ReentrantLock field is almost never the intended usage. A ReentrantLock should be obtained using
   the lock() method and released in a finally block using the unlock() method.
 
-  This rule take from Alex Miller's Java Concurrency in Practice slides, available at
-  http://www.slideshare.net/alexmiller/java-concurrency-gotchas-3666977.
+  This rule take from Alex Miller's {{{http://www.slideshare.net/alexmiller/java-concurrency-gotchas-3666977}Java Concurrency in Practice}} slides.
 
-Here is the proper usage of ReentrantLock:
+  Here is the proper usage of ReentrantLock:
+
 -------------------------------------------------------------------------------
     import java.util.concurrent.locks.ReentrantLock;
     final lock = new ReentrantLock();
@@ -669,6 +695,7 @@ Here is the proper usage of ReentrantLock:
 -------------------------------------------------------------------------------
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     class MyClass {
 
@@ -820,6 +847,7 @@ Here is the proper usage of ReentrantLock:
 * VolatileArrayField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Volatile array fields are unsafe because the contents of the array are not treated as volatile. Changing the entire
   array reference is visible to other threads, but changing an array element is not.
 
@@ -827,6 +855,7 @@ Here is the proper usage of ReentrantLock:
   http://www.slideshare.net/alexmiller/java-concurrency-gotchas-3666977. 
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     class MyClass {
         private volatile Object[] field1 = value()
@@ -834,3 +863,60 @@ Here is the proper usage of ReentrantLock:
         volatile field3 = (Object[])foo
     }
 -------------------------------------------------------------------------------
+
+
+* WaitOutsideOfWhileLoop Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.13>
+
+  Calls to <<<Object.wait()>>> must be within a <<<while>>> loop. This ensures that the awaited condition
+  has not been satisfied already before the <<<wait()>>> is invoked and that the condition has been satisfied after
+  the <<<wait()>>> is invoked. See [1] and [3].
+
+  As a more modern and flexible alternative, consider using the Java <concurrency utilities> instead of
+  <<<wait()>>> and <<<notify()>>>. See discussion in <Effective Java> [2].
+
+  Example of violation:
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        private data
+
+        void processData()
+            synchronized(data) {
+                if (!data.isReady()) {
+                    data.wait()
+                }
+                data.calculateStatistics()
+            }
+        }
+    }
+-------------------------------------------------------------------------------
+
+  Example of correct usage:
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        private data
+
+        void processData()
+            synchronized(data) {
+                while (!data.isReady()) {
+                    data.wait()
+                }
+                data.calculateStatistics()
+            }
+        }
+    }
+-------------------------------------------------------------------------------
+
+** References
+
+  * [1] <<Effective Java, Programming Language Guide>>, by Joshua Bloch. Addison Wesley (2001).
+    Chapter 50 (1st edition) is entitled "Never invoke wait outside a loop."
+
+  * [2] <<Effective Java>>, 2nd edition, by Joshua Bloch, Addison Wesley (2008).
+    Item #69: <Prefer concurrency utilities to wait and notify>.
+
+  * [3] Software Engineering Institute - Secure Coding
+     {{{https://www.securecoding.cert.org/confluence/display/java/THI03-J.+Always+invoke+wait()+and+await()+methods+inside+a+loop}discussion of this issue}}

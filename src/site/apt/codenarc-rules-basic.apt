@@ -9,9 +9,11 @@ Basic Rules  ("<rulesets/basic.xml>")
 * AddEmptyString Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Finds empty string literals which are being added. This is an inefficient way to convert any type to a String.
 
   Examples:
+
 -------------------------------------------------------------------------------
     // do not add empty strings to things
     def a = '' + 123
@@ -26,9 +28,11 @@ Basic Rules  ("<rulesets/basic.xml>")
 * AssignmentInConditional Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     if ((value = true)) {
         // should be ==
@@ -82,6 +86,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * BrokenOddnessCheck Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   The code uses <<<x % 2 == 1>>> to check to see if a value is odd, but this won't work for negative numbers
   (e.g., <<<(-5) % 2 == -1)>>>. If this code is intending to check for oddness, consider using <<<x & 1 == 1>>>,
   or <<< x % 2 != 0>>>.
@@ -149,16 +154,20 @@ Basic Rules  ("<rulesets/basic.xml>")
 * ConsecutiveLiteralAppends Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Violations occur when method calls to append(Object) are chained together with literals as parameters. The
   chained calls can be joined into one invocation.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     writer.append('foo').append('bar')      // strings can be joined
     writer.append('foo').append(5)          // string and number can be joined
     writer.append('Hello').append("$World") // GString can be joined
 -------------------------------------------------------------------------------
+
   Example of passing code:
+
 -------------------------------------------------------------------------------
     // usage not chained invocation
     writer.append('Hello')
@@ -173,11 +182,13 @@ Basic Rules  ("<rulesets/basic.xml>")
 * ConsecutiveStringConcatenation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Catches concatenation of two string literals on the same line. These can safely by joined. In Java, the Java compiler
   will join two String literals together and place them in the Constant Pool. However, Groovy will not because the plus()
   method may override the + operator.
 
   Examples:
+
 -------------------------------------------------------------------------------
     // Violations
     def a = 'Hello' + 'World'   // should be 'HelloWorld'
@@ -274,7 +285,6 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * DuplicateCaseStatement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
   <Since CodeNarc 0.11>
 
   Check for duplicate <<<case>>> statements in a <<<switch>>> block, such as two equal
@@ -386,7 +396,9 @@ Basic Rules  ("<rulesets/basic.xml>")
 * EmptyInstanceInitializer Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   An empty class instance initializer was found. It is safe to remove it. Example:
+
 -------------------------------------------------------------------------------
     class MyClass {
         { }     // empty instance initializer, not a closure
@@ -397,11 +409,13 @@ Basic Rules  ("<rulesets/basic.xml>")
 * EmptyMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   A method was found without an implementation. If the method is overriding or implementing a parent method,
   then mark it with the @Override annotation. This rule should not be used with Java 5 code because you cannot
   put @Override on a method implementing an interface. Use with Java 6 and higher.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     class MyClass {
 
@@ -427,6 +441,7 @@ Basic Rules  ("<rulesets/basic.xml>")
   <New in CodeNarc 0.13>
 
   An empty static initializer was found. It is safe to remove it. Example:
+
 -------------------------------------------------------------------------------
     class MyClass {
         static { }
@@ -833,6 +848,7 @@ Basic Rules  ("<rulesets/basic.xml>")
   Java won't let you reload old data.
 
   An example of a missing serialVersionUID:
+
 -------------------------------------------------------------------------------
     class MyClass imlements Serializable {
         // missing serialVersionUID
