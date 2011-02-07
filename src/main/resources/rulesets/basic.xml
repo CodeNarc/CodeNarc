@@ -67,4 +67,5 @@
     <rule class='org.codenarc.rule.basic.AddEmptyStringRule'/>
     <rule class='org.codenarc.rule.basic.BrokenOddnessCheckRule'/>
     <rule class='org.codenarc.rule.basic.AssignmentInConditionalRule'/>
+    <rule class='org.codenarc.rule.basic.GroovyLangImmutableRule'/>
 </ruleset>

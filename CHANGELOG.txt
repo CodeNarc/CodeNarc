@@ -31,6 +31,7 @@ NEW RULES
 - ExceptionExtendsError rule (exceptions) - Feature #3161749 - Errors are system exceptions. Do not extend them.
 - MissingNewInThrowStatementRule (exceptions) - Feature #3166115 - Improved existing rule to catch throwing a class literal, which always causes a RuntimeException.
 - UseAssertTrueInsteadOfAssertEquals (junit) - Feature #3172959 - This rule was expanded to handle assert statements as well as JUnit style assertions.
+- GroovyLangImmutable rule (basic) - Feature #3175158 - The groovy.lang.Immutable annotation has been deprecated and replaced by groovy.transform.Immutable. Do not use the Immutable in groovy.lang.
 
   Concurrency Problems
 - BusyWait rule (concurrency) - Feature #3170271 - Busy waiting (forcing a Thread.sleep() while waiting on a condition) should be avoided. Prefer using the gate and barrier objects in the java.util.concurrent package.

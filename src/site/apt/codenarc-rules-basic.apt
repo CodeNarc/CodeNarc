@@ -752,6 +752,44 @@ Basic Rules  ("<rulesets/basic.xml>")
   <<<new TreeSet()>>> as <<<[] as SortedSet>>>, which creates the same object.
 
 
+
+
+* GroovyLangImmutable Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  The groovy.lang.Immutable annotation has been deprecated and replaced by groovy.transform.Immutable. Do
+  not use the Immutable in groovy.lang.
+
+  Example of violations:
+  
+-------------------------------------------------------------------------------
+  @Immutable
+  class Person { }
+
+  @groovy.lang.Immutable
+  class Person { }
+
+  import groovy.lang.Immutable as Imtl
+  @Imtl
+  class Person { }
+
+  // the following code is OK
+  @groovy.transform.Immutable
+  class Person { }
+
+  import groovy.transform.Immutable
+  @Immutable
+  class Person { }
+
+  import groovy.transform.*
+  @Immutable
+  class Person { }
+
+  import groovy.transform.Immutable as Imtl
+  @Imtl
+  class Person { }
+-------------------------------------------------------------------------------
+
 * GStringAsMapKey Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
