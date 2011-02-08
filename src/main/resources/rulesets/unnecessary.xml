@@ -35,4 +35,5 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCallToSubstringRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessarySelfAssignmentRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTransientModifierRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryPublicModifierRule'/>
 </ruleset>

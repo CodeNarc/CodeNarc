@@ -407,7 +407,7 @@ class AstUtil {
      * @param methodName - the name of the method
      * @return true if the object responds to the named method
      */
-    public static boolean respondsTo(Object object, String methodName) {
+    static boolean respondsTo(Object object, String methodName) {
         object.metaClass.respondsTo(object, methodName)
     }
 
@@ -420,7 +420,7 @@ class AstUtil {
      * @return
      * true if the class node 'is a' target
      */
-    public static boolean classNodeImplementsType(ClassNode node, Class target) {
+    static boolean classNodeImplementsType(ClassNode node, Class target) {
         ClassNode targetNode = ClassHelper.make(target)
         if (node.implementsInterface(targetNode)) {
             return true
@@ -453,7 +453,7 @@ class AstUtil {
      * @return
      * as described
      */
-    public static boolean isClosureDeclaration(ASTNode expression) {
+    static boolean isClosureDeclaration(ASTNode expression) {
         if (expression instanceof DeclarationExpression) {
             if (expression.rightExpression instanceof ClosureExpression) {
                 return true

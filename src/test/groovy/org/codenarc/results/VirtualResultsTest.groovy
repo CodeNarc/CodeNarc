@@ -24,7 +24,7 @@ import org.codenarc.rule.Rule
  */
 class VirtualResultsTest extends GroovyTestCase {
 
-    public void testViolations() {
+    void testViolations() {
         def violations = [
                 new Violation(rule: [getPriority : { 1 } ] as Rule),
                 new Violation(rule: [getPriority : { 2 } ] as Rule),

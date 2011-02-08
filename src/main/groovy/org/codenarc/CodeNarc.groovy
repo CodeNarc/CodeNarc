@@ -98,7 +98,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
      * Main command-line entry-point. Run the CodeNarc application.
      * @param args - the String[] of command-line arguments
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         def codeNarc = new CodeNarc()
 
         if (args == ['-help'] as String[]) {

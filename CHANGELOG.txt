@@ -20,6 +20,7 @@ NEW RULES
 - UnnecessarySelfAssignment rule (unnecessary) - Feature #3164674 - Method contains a pointless self-assignment to a variable or property.
 - UnnecessaryTransientModifier rule (unnecessary) - Feature #3164672 - The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
 - UnnecessaryFail rule (junit) - Feature #3105925 - In a unit test, catching an exception and immediately calling Assert.fail() is pointless and hides the stack trace. It is better to rethrow the exception or not catch the exception at all.
+- UnnecessaryPublicModifier rule (unnecessary) - Feature #3166320 - The 'public' modifier is not required on methods or classes.
 
   Bugs/Bad Practices
 - AssignmentInConditional rule (basic) - An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.

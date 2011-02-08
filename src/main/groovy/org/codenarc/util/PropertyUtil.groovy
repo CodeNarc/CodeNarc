@@ -32,7 +32,7 @@ class PropertyUtil {
      * @param value - the property value as a String
      * @throws NoSuchFieldException - if the object does not contain the named field
      */
-    public static void setPropertyFromString(Object object, String propertyName, String propertyValue) {
+    static void setPropertyFromString(Object object, String propertyName, String propertyValue) {
         def property = object.metaClass.getMetaProperty(propertyName)
         if (property == null) {
             throw new NoSuchFieldException(propertyName)

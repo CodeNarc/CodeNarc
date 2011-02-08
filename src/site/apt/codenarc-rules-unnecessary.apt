@@ -474,6 +474,22 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   Checks for an overriding method that merely calls the same method defined in a superclass. Remove it.
 
 
+
+* UnnecessaryPublicModifier Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  The 'public' modifier is not required on methods or classes.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    // violation on class
+    public class MyClass {
+        // violation on method
+        public void myMethod() {}    
+    }
+-------------------------------------------------------------------------------
+
 * UnnecessaryReturnKeyword Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>

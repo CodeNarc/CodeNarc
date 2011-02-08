@@ -55,7 +55,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
         // make sure parent does not run
     }
 
-    public void testSuppressOnClass() {
+    void testSuppressOnClass() {
         failOnClass = true
 
         final SOURCE = '''
@@ -68,7 +68,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
         assertTwoViolations SOURCE, 4, 'class MyClass3 {}', 5, 'class MyClass4 {}'
     }
 
-    public void testSuppressOnConstructor() {
+    void testSuppressOnConstructor() {
         failOnConstructor = true
         final SOURCE = '''
             class MyClass1 {
@@ -94,7 +94,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
                 16, 'MyClass4() {}'
     }
 
-    public void testVisitProperty() {
+    void testVisitProperty() {
         failOnProperty = true
         final SOURCE = '''
             class MyClass1 {
@@ -120,7 +120,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
                 16, 'def someProperty'
     }
 
-    public void testVisitField() {
+    void testVisitField() {
         failOnField = true
         final SOURCE = '''
             class MyClass1 {
@@ -146,7 +146,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
                 16, 'def someProperty'
     }
 
-    public void testVisitMethod() {
+    void testVisitMethod() {
         failOnMethod = true
         final SOURCE = '''
             class MyClass {

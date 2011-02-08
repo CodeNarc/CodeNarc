@@ -23,7 +23,7 @@ package org.codenarc.test
  */
 class SiteDocumentationTest extends GroovyTestCase {
 
-    public void testDocumentation() {
+    void testDocumentation() {
 
 
         new File('src/main/resources/rulesets').eachFileMatch(~/.*\.xml/) { File ruleset ->

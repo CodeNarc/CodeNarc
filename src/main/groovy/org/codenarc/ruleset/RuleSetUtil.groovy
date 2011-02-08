@@ -35,7 +35,7 @@ class RuleSetUtil {
         assert Rule.isAssignableFrom(ruleClass), "The rule class [${ruleClass.name}] does not implement the Rule interface"
     }
 
-    public static RuleSet loadRuleSetFile(String path) {
+    static RuleSet loadRuleSetFile(String path) {
         isXmlFile(path) ? new XmlFileRuleSet(path) : new GroovyDslRuleSet(path)
     }
 
