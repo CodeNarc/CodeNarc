@@ -193,12 +193,12 @@ class AstUtil {
      * method name, and with the specified number of arguments.
      * @param methodCall - the AST MethodCallExpression
      * @param methodObject - the name of the method object (receiver)
-     * @param methodName - the name of the method being called
+     * @param methodPattern - the name of the method being called
      * @param numArguments - the number of arguments passed into the method
      * @return true only if the method call matches the specified criteria
      */
-    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName, int numArguments) {
-        (isMethodCall(methodCall, methodObject, methodName)
+    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodPattern, int numArguments) {
+        (isMethodCall(methodCall, methodObject, methodPattern)
                 && getMethodArguments(methodCall).size() == numArguments)
     }
 
@@ -220,11 +220,11 @@ class AstUtil {
      * object (receiver) and method name.
      * @param methodCall - the AST MethodCallExpression
      * @param methodObject - the name of the method object (receiver)
-     * @param methodName - the name of the method being called
+     * @param methodNamePattern - the name of the method being called
      * @return true only if the method call matches the specified criteria
      */
-    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodName) {
-        isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodName)
+    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodNamePattern) {
+        isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodNamePattern)
     }
 
     /**
@@ -278,12 +278,12 @@ class AstUtil {
     /**
      * Return true only if the MethodCallExpression represents a method call for the specified method name
      * @param methodCall - the AST MethodCallExpression
-     * @param methodName - the expected name of the method being called
+     * @param methodNamePattern - the expected name of the method being called
      * @return true only if the method call name matches
      */
-    static boolean isMethodNamed(MethodCallExpression methodCall, String methodName, Integer numArguments = null) {
+    static boolean isMethodNamed(MethodCallExpression methodCall, String methodNamePattern, Integer numArguments = null) {
         def method = methodCall.method
-        def isNameMatch = method.properties['value'] == methodName
+        def isNameMatch = method.properties['value']?.matches(methodNamePattern)
 
         if (isNameMatch && numArguments != null) {
             return getMethodArguments(methodCall).size() == numArguments

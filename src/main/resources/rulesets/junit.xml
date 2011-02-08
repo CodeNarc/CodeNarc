@@ -25,4 +25,5 @@
     <rule class='org.codenarc.rule.junit.UseAssertTrueInsteadOfNegationRule'/>
     <rule class='org.codenarc.rule.junit.UseAssertFalseInsteadOfNegationRule'/>
     <rule class='org.codenarc.rule.junit.UnnecessaryFailRule'/>
+    <rule class='org.codenarc.rule.junit.ChainedTestRule'/>
 </ruleset>
