@@ -37,6 +37,11 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
                 void myMethod() {}
                 public String field
             }
+
+            class publicClass {
+                void publicMyMethod() {}
+                public String field
+            }
         '''
         assertNoViolations(SOURCE)
     }

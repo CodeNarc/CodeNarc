@@ -36,7 +36,10 @@ class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
 class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
-        if (getDeclaration(node).contains('public')) {
+        String declaration = getDeclaration(node)
+        if (declaration?.startsWith('public ')) {
+            addViolation(node, 'The public keyword is unnecessary for classes')
+        } else if (declaration?.contains(' public ')) {
             addViolation(node, 'The public keyword is unnecessary for classes')
         }
         super.visitClassEx(node)
@@ -44,19 +47,29 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodEx(MethodNode node) {
-        if (getDeclaration(node).contains('public')) {
+        String declaration = getDeclaration(node)
+        if (getDeclaration(node)?.startsWith('public ')) {
+            addViolation(node, 'The public keyword is unnecessary for methods')
+        } else if (declaration?.contains(' public ')) {
             addViolation(node, 'The public keyword is unnecessary for methods')
         }
         super.visitMethodEx(node)
     }
 
-
-
     private String getDeclaration(ASTNode node) {
+        if (node.lineNumber < 0) {
+            return ''
+        }
+
         def current = node.lineNumber - 1
         String acc = ''
-        while (current <= node.lastLineNumber && !acc.contains('{')) {
-            acc = acc + sourceCode.line(current)
+        while (current <= node.lastLineNumber) {
+            def line = sourceCode.line(current)
+            if (line.contains('{')) {
+                return acc + line[0..(line.indexOf('{'))]
+            } else {
+                acc = acc + line + ' ' 
+            }
             current++
         }
         acc

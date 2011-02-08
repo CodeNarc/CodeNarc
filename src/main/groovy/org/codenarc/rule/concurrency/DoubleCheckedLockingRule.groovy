@@ -48,7 +48,7 @@ class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
         super.visitIfElse(node)
     }
 
-    private def addViolationOnDoubleLocking(IfStatement node) {
+    private addViolationOnDoubleLocking(IfStatement node) {
         if (!expressionIsNullCheck(node)) {
             return
         }

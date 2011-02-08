@@ -67,7 +67,7 @@ class UnnecessaryCallForLastElementAstVisitor extends AbstractAstVisitor {
     }
 
 
-    private static def isSubtractOneOnObject(String methodObjectText, Expression exp) {
+    private static isSubtractOneOnObject(String methodObjectText, Expression exp) {
         if (!(exp instanceof BinaryExpression)) {
             return false
         }

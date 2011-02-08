@@ -83,7 +83,7 @@ class ArrayReturnTracker extends AbstractAstVisitor {
         super.visitReturnStatement(statement)
     }
 
-    private def callBackForArrayReturns(Expression exp) {
+    private callBackForArrayReturns(Expression exp) {
         def stack = [exp] as Stack
         while (stack) {
             exp = stack.pop()

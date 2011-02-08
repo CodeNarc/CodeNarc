@@ -205,6 +205,31 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   <<<public>>>, has an empty body, and takes no arguments.
 
 
+* UnnecessaryDefInMethodDeclaration Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.13>
+  If a method has a visibility modifier, then the def keyword is unneeded. For instance
+  'def private method() {}' is redundant and can be simplified to 'private method() {}'.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+// private and def are not needed
+def private method1() { return 4 }
+
+// def and protected unneeded
+def protected method2() { return 4 }
+
+// def and protected unneeded
+def public method3() { return 4 }
+
+// static and def are not needed
+def static method4() { return 4 }
+
+// static and def are not needed
+def Object method5() { return 4 }
+-------------------------------------------------------------------------------
+
 * UnnecessaryDoubleInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>

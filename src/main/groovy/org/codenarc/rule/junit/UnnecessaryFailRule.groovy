@@ -49,7 +49,7 @@ class UnnecessaryFailAstVisitor extends AbstractAstVisitor {
         super.visitCatchStatement(statement)
     }
 
-    private def addViolationIfFail(ASTNode it) {
+    private addViolationIfFail(ASTNode it) {
         if (it instanceof ExpressionStatement && it.expression instanceof MethodCallExpression) {
             if (AstUtil.isMethodCall(it.expression, ['this', 'Assert'], ['fail'], 0)) {
                 addViolation it.expression, 'Catching an exception and failing will hide the stack trace. It is better to rethrow the exception'

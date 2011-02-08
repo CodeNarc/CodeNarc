@@ -64,7 +64,7 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx(node)
     }
 
-    private def saveMethodInfo(MethodNode node) {
+    private saveMethodInfo(MethodNode node) {
         if (Modifier.isSynchronized(node.modifiers)) {
             synchronizedMethods.put(node.name, node)
         } else {

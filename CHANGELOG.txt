@@ -21,6 +21,7 @@ NEW RULES
 - UnnecessaryTransientModifier rule (unnecessary) - Feature #3164672 - The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
 - UnnecessaryFail rule (junit) - Feature #3105925 - In a unit test, catching an exception and immediately calling Assert.fail() is pointless and hides the stack trace. It is better to rethrow the exception or not catch the exception at all.
 - UnnecessaryPublicModifier rule (unnecessary) - Feature #3166320 - The 'public' modifier is not required on methods or classes.
+- UnnecessaryDefInMethodDeclaration rule (unnecessary) - Feature #3165469 - If a method has a visibility modifier, then the def keyword is unneeded. For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
 
   Bugs/Bad Practices
 - AssignmentInConditional rule (basic) - An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.

@@ -40,7 +40,7 @@ class NullReturnTracker extends AbstractAstVisitor {
         super.visitReturnStatement(statement)
     }
 
-    private def expressionReturnsNull(Expression expression) {
+    private expressionReturnsNull(Expression expression) {
 
         def stack = [expression] as Stack  // alternative to recursion
         while (stack) {

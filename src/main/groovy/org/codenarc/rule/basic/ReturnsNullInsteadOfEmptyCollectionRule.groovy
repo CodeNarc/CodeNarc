@@ -98,7 +98,7 @@ class CollectionReturnTracker extends AbstractAstVisitor {
         super.visitReturnStatement(statement)
     }
 
-    private def expressionReturnsList(Expression expression) {
+    private expressionReturnsList(Expression expression) {
 
         def stack = [expression] as Stack  // as alternative to recursion
         while (stack) {

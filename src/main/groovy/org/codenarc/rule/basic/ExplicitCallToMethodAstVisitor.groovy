@@ -50,7 +50,7 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
     }
 
     @SuppressWarnings('CatchThrowable')
-    private def safelyAddViolation(MethodCallExpression call) {
+    private safelyAddViolation(MethodCallExpression call) {
         try {
             addViolation call, getViolationMessage(call)
         } catch (Throwable t) {

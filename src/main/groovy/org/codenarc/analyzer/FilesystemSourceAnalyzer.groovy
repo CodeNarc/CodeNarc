@@ -104,7 +104,7 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
         dirResults
     }
 
-    private def processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
+    private processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
         def file = new File((String)baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
         if (matches(sourceFile)) {

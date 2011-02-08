@@ -54,7 +54,7 @@ class UnnecessaryCollectCallAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression call
     }
 
-    private def whenOneStatementClosureFound(List args, Closure callback) {
+    private whenOneStatementClosureFound(List args, Closure callback) {
         // do we have one closure parameter?
         if (args[0] instanceof ClosureExpression && args[0].parameters?.length < 2) {
             ClosureExpression c = args[0]
@@ -96,7 +96,7 @@ class UnnecessaryCollectCallAstVisitor extends AbstractAstVisitor {
     }
 
     @SuppressWarnings('CatchThrowable')
-    private def addViolationWithMessage(MethodCallExpression call, MethodCallExpression exp) {
+    private addViolationWithMessage(MethodCallExpression call, MethodCallExpression exp) {
         try {
             addViolation(call, "The call to collect could probably be rewritten as a spread expression: ${call.objectExpression.text}*.${exp.method.text}${exp.arguments.text}")
         } catch (Throwable t) {
@@ -105,7 +105,7 @@ class UnnecessaryCollectCallAstVisitor extends AbstractAstVisitor {
     }
 
     @SuppressWarnings('CatchThrowable')
-    private def addViolationWithMessage(MethodCallExpression call, PropertyExpression exp) {
+    private addViolationWithMessage(MethodCallExpression call, PropertyExpression exp) {
         try {
             addViolation(call, "The call to collect could probably be rewritten as a spread expression: ${call.objectExpression.text}*.${exp.property.text}")
         } catch (Throwable t) {

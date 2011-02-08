@@ -52,7 +52,7 @@ class BusyWaitAstVisitor extends AbstractAstVisitor {
         super.visitForLoop(node)
     }
 
-    private def addViolationIfBusyWait(node) {
+    private addViolationIfBusyWait(node) {
         if (node.loopBlock instanceof BlockStatement
                 && node.loopBlock.statements?.size() == 1
                 && node.loopBlock.statements[0] instanceof ExpressionStatement) {
