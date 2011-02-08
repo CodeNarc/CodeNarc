@@ -35,6 +35,7 @@ NEW RULES
 - IntegerGetInteger rule (basic) - Feature #3174771 - This rule catches usages of java.lang.Integer.getInteger(String, ...) which reads an Integer from the System properties. It is often mistakenly used to attempt to read user input or parse a String into an Integer. It is a poor piece of API to use; replace it with System.properties['prop'].
 - BooleanGetBoolean rule (basic) - Feature #3174770 - This rule catches usages of java.lang.Boolean.getBoolean(String) which reads a boolean from the System properties. It is often mistakenly used to attempt to read user input or parse a String into a boolean. It is a poor piece of API to use; replace it with System.properties['prop̈́'].
 - ChainedTest rule (junit) - Feature #3175647 - A test method that invokes another test method is a chained test; the methods are dependent on one another. Tests should be isolated, and not be dependent on one another.
+- CoupledTestCase rule (junit) - Feature #3175645 - This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test case or by creating instances of another test case. If you require shared logic in test cases then extract that logic to a new class where it can properly be reused.
 
   Concurrency Problems
 - BusyWait rule (concurrency) - Feature #3170271 - Busy waiting (forcing a Thread.sleep() while waiting on a condition) should be avoided. Prefer using the gate and barrier objects in the java.util.concurrent package.

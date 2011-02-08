@@ -15,32 +15,42 @@
  */
 package org.codenarc.rule.junit
 
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * A test method that invokes another test method is a chained test; the methods are dependent on one another. Tests should be atomic, and not be dependent on one another. 
+ * This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test case or by creating instances of another test case. If you require shared logic in test cases then extract that logic to a new class where it can properly be reused. 
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ChainedTestRule extends AbstractAstVisitorRule {
-    String name = 'ChainedTest'
+class CoupledTestCaseRule extends AbstractAstVisitorRule {
+    String name = 'CoupledTestCase'
     int priority = 2
-    Class astVisitorClass = ChainedTestAstVisitor
+    Class astVisitorClass = CoupledTestCaseAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class ChainedTestAstVisitor extends AbstractAstVisitor {
+class CoupledTestCaseAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
-        if (AstUtil.isMethodCall(call, 'this', 'test.*', 0)) {
-            addViolation(call, "The test method $call.methodAsString() is being invoked explicitly from within a unit test. Tests should be isolated and not dependent on one another")
+        if (AstUtil.isMethodCall(call, '[A-Z].*Test', '.*')) {
+            addViolation(call, "$call.text invokes a method on another test case. Test cases should not be coupled. Move this method to a helper object")
         }
         super.visitMethodCallExpression(call)
+    }
+
+    @Override
+    void visitConstructorCallExpression(ConstructorCallExpression call) {
+
+        if (call.type.name.matches('[A-Z].*Test')) {
+            addViolation(call, "$call.text creates an instance of a test case. Test cases should not be coupled. Move this method to a helper object")
+        }
+        super.visitConstructorCallExpression(call)
     }
 
 

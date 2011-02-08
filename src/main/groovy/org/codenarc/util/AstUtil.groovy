@@ -158,15 +158,15 @@ class AstUtil {
      * For instance, you may ask isMethodCallOnObject(e, 'this') to find a this reference.  
      * @param expression
      *      the expression
-     * @param methodObject
-     * @param methodObject - the name of the method object (receiver) such as 'this'
+     * @param methodObjectPattern
+     * @param methodObjectPattern - the name of the method object (receiver) such as 'this'
      * @return
      * as described
      */
-    static boolean isMethodCallOnObject(Expression expression, String methodObject) {
+    static boolean isMethodCallOnObject(Expression expression, String methodObjectPattern) {
         (expression instanceof MethodCallExpression &&
                 expression.objectExpression instanceof VariableExpression &&
-                expression.objectExpression.name == methodObject)
+                expression.objectExpression.name?.matches(methodObjectPattern))
     }
 
     /**
@@ -219,12 +219,12 @@ class AstUtil {
      * Return true only if the MethodCallExpression represents a method call for the specified method
      * object (receiver) and method name.
      * @param methodCall - the AST MethodCallExpression
-     * @param methodObject - the name of the method object (receiver)
+     * @param methodObjectPattern - the name of the method object (receiver)
      * @param methodNamePattern - the name of the method being called
      * @return true only if the method call matches the specified criteria
      */
-    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodNamePattern) {
-        isMethodCallOnObject(methodCall, methodObject) && isMethodNamed(methodCall, methodNamePattern)
+    static boolean isMethodCall(MethodCallExpression methodCall, String methodObjectPattern, String methodNamePattern) {
+        isMethodCallOnObject(methodCall, methodObjectPattern) && isMethodNamed(methodCall, methodNamePattern)
     }
 
     /**
