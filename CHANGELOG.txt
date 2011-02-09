@@ -22,7 +22,7 @@ NEW RULES
 - UnnecessaryFail rule (junit) - Feature #3105925 - In a unit test, catching an exception and immediately calling Assert.fail() is pointless and hides the stack trace. It is better to rethrow the exception or not catch the exception at all.
 - UnnecessaryPublicModifier rule (unnecessary) - Feature #3166320 - The 'public' modifier is not required on methods or classes.
 - UnnecessaryDefInMethodDeclaration rule (unnecessary) - Feature #3165469 - If a method has a visibility modifier, then the def keyword is unneeded. For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
-- UnnecessarySemicolon rule (unnecessary) - Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice.
+- UnnecessarySemicolon rule (unnecessary) - Feature #3176207 - Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice.
 
   Bugs/Bad Practices
 - AssignmentInConditional rule (basic) - An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.
