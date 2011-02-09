@@ -50,7 +50,7 @@ class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
                 addViolation(node, "The class $node.name implements Cloneable but does not define a proper clone() method")
             }
         }
-        super.visitClassEx(node);
+        super.visitClassEx(node)
     }
 
     protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
@@ -58,6 +58,6 @@ class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
         if ((node.name == "clone") && (!node.parameters)) {
             hasCloneMethod = true
         }
-        super.visitConstructorOrMethodEx(node, isConstructor);
+        super.visitConstructorOrMethodEx(node, isConstructor)
     }
 }

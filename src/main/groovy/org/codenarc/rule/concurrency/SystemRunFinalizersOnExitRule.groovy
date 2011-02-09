@@ -44,6 +44,6 @@ class SystemRunFinalizersOnExitAstVisitor extends AbstractAstVisitor  {
                  addViolation(call, "System.runFinalizersOnExit() should not be invoked")
             }
         }
-        super.visitMethodCallExpression(call);    
+        super.visitMethodCallExpression(call)
     }
 }

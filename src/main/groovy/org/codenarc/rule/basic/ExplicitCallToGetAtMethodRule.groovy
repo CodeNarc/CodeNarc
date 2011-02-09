@@ -33,7 +33,7 @@ class ExplicitCallToGetAtMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToGetAtMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
     def ExplicitCallToGetAtMethodAstVisitor() {
-        super('getAt');
+        super('getAt')
     }
 
     @Override

@@ -40,7 +40,7 @@ class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
     if (node.declaredConstructors?.size() == 1) {
         analyzeConstructor node.declaredConstructors[0]
     }
-    super.visitClassEx(node);
+    super.visitClassEx(node)
   }
 
   private void analyzeConstructor(ConstructorNode node) {

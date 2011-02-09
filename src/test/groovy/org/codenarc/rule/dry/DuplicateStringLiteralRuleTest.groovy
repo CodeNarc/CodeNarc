@@ -76,7 +76,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
             enum MyEnum {
               FOO(
                 'FOO'
-                );
+                )
 
               String field
 

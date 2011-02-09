@@ -46,6 +46,6 @@ class SynchronizedOnThisAstVisitor extends AbstractAstVisitor  {
                 }
             }
         }
-        super.visitSynchronizedStatement(statement);
+        super.visitSynchronizedStatement(statement)
     }
 }

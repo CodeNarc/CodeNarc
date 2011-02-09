@@ -36,9 +36,9 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
             def value = 2
             switch( value ) {
               case 1:
-                break;
+                break
               case 2:
-                break;
+                break
             }
         '''
         assertNoViolations(SOURCE)
@@ -48,11 +48,11 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             switch( 0 ) {
                 case 1:
-                  break;
+                  break
                 case 2:
-                  break;
+                  break
                 case 2:
-                  break;
+                  break
             }
         '''
         assertSingleViolation(SOURCE, 7, 'case 2:')
@@ -62,15 +62,15 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             switch( "test" ) {
                 case "$a":
-                  break;
+                  break
                 case "$a":
-                  break;
+                  break
                 case "ab":
-                  break;
+                  break
                 case "ab":
-                  break;
+                  break
                 case "abc":
-                  break;
+                  break
             }
         '''
         assertSingleViolation(SOURCE, 9, 'case "ab":')

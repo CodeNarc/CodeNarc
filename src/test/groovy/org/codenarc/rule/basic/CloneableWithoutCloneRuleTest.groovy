@@ -45,7 +45,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass1 implements Clonable {
                 public Object clone() {
-                    return super.clone();
+                    return super.clone()
                 }
             } '''
 

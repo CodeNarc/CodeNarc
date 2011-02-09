@@ -33,7 +33,7 @@ class ExplicitCallToDivMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToDivMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
     def ExplicitCallToDivMethodAstVisitor() {
-        super('div');
+        super('div')
     }
 
     @Override

@@ -86,7 +86,7 @@ class AssertionTrap extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (call.method instanceof ConstantExpression && methodNamesCountsAsAssertion(call.method.value)) {
-            assertionFound = true;
+            assertionFound = true
         } else {
             super.visitMethodCallExpression call
         }

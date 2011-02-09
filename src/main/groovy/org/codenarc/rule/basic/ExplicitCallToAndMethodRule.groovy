@@ -33,7 +33,7 @@ class ExplicitCallToAndMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToAndMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
     def ExplicitCallToAndMethodAstVisitor() {
-        super('and');
+        super('and')
     }
 
     @Override

@@ -47,7 +47,7 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase {
             }
             abstract class MyBaseClass {
                 void method1() { }
-                abstract void method2();
+                abstract void method2()
             } '''
         assertNoViolations(SOURCE)
     }

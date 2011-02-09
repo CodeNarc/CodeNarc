@@ -36,13 +36,13 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
             class MyClass1 {
                 final lock = new ReentrantLock()
                 def method()  {
-                   lock.lock();
+                   lock.lock()
                    try { } finally { lock.unlock() }
                 }
 
                 class MyInnerClass {
                     def method() {
-                        lock.lock();
+                        lock.lock()
                         try { } finally { lock.unlock() }
                     }
                 }
@@ -51,7 +51,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
             class MyClass2 {
                 final lock = new ReentrantLock()
                 def method() {
-                   lock.lock();
+                   lock.lock()
                    try { } finally { lock.unlock() }
                 }
             }
@@ -61,7 +61,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
                 def method() {
                     return new Runnable() {
                         public void run() {
-                           lock.lock();
+                           lock.lock()
                            try { } finally { lock.unlock() }
                         }
                     }

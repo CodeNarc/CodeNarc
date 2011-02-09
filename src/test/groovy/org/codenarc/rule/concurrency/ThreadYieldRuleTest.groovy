@@ -39,7 +39,7 @@ class ThreadYieldRuleTest extends AbstractRuleTestCase {
                  }
                  {
                      Thread.yield()
-                 };
+                 }
              }
          '''
          assertTwoViolations(SOURCE,

@@ -43,6 +43,6 @@ class SynchronizedMethodAstVisitor extends AbstractAstVisitor  {
                 addViolation(node, "The method $node.name is synchronized at the method level")
             }
         }
-        super.visitMethodEx(node);
+        super.visitMethodEx(node)
     }
 }

@@ -27,15 +27,15 @@ class VirtualResults implements Results {
     List violations
 
     def VirtualResults(List violations) {
-        this.violations = violations;
+        this.violations = violations
     }
 
     def String getPath() {
-        throw new UnsupportedOperationException("Not supported on virtual results");
+        throw new UnsupportedOperationException("Not supported on virtual results")
     }
 
     def List getChildren() {
-        throw new UnsupportedOperationException("Not supported on virtual results");
+        throw new UnsupportedOperationException("Not supported on virtual results")
     }
 
     def List getViolationsWithPriority(int priority) {
@@ -45,15 +45,15 @@ class VirtualResults implements Results {
     }
 
     def int getNumberOfViolationsWithPriority(int priority, boolean recursive) {
-        throw new UnsupportedOperationException("Not supported on virtual results");
+        throw new UnsupportedOperationException("Not supported on virtual results")
     }
 
     def int getTotalNumberOfFiles(boolean recursive) {
-        throw new UnsupportedOperationException("Not supported on virtual results");
+        throw new UnsupportedOperationException("Not supported on virtual results")
     }
 
     def int getNumberOfFilesWithViolations(boolean recursive) {
-        throw new UnsupportedOperationException("Not supported on virtual results");
+        throw new UnsupportedOperationException("Not supported on virtual results")
     }
 
     def boolean isFile() {

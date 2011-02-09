@@ -40,7 +40,7 @@ class ConfusingTernaryAstVisitor extends AbstractAstVisitor {
         if (expression.booleanExpression.expression instanceof BinaryExpression) {
             BinaryExpression exp = expression.booleanExpression.expression
             if (exp.operation.text == '!=') {
-                def suggestion = "($exp.leftExpression.text == $exp.rightExpression.text)";
+                def suggestion = "($exp.leftExpression.text == $exp.rightExpression.text)"
                 addViolation (expression, "$exp.text is a confusing negation in a ternary expression. Rewrite as $suggestion and invert the conditions.")
             }
         } else if (expression.booleanExpression.expression instanceof NotExpression) {

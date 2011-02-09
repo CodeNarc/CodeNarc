@@ -159,7 +159,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
         	def myMethod() {
                 if (x) return null
-                return new ArrayList();
+                return new ArrayList()
             }
         '''
         assertSingleViolation(SOURCE, 3, 'null')
@@ -169,7 +169,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
         	def myMethod() {
                 if (x) return null
-                return new java.awt.List();
+                return new java.awt.List()
             }
         '''
         assertNoViolations(SOURCE)

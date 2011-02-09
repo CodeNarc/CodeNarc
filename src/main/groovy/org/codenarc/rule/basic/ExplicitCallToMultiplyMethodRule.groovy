@@ -33,7 +33,7 @@ class ExplicitCallToMultiplyMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToMultiplyMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
     def ExplicitCallToMultiplyMethodAstVisitor() {
-        super('multiply');
+        super('multiply')
     }
 
     @Override

@@ -42,7 +42,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
 
     void setUp() {
         super.setUp()
-        messages = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE);
+        messages = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE)
     }
 
     private void assertDescriptionInMessagesBundle(String ruleName) {

@@ -66,6 +66,7 @@ class EmptyForStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @SuppressWarnings('UnnecessarySemicolon')
     void testApplyTo_SingleEmptyStatement() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

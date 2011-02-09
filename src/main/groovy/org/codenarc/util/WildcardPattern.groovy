@@ -105,14 +105,14 @@ class WildcardPattern {
                     // Single '*' matches single dir/file; Double '*' matches sequence of zero or more dirs/files
                     result << (prevCharWasStar ? /.*/ : /[^\/]*/) 
                     prevCharWasStar = !prevCharWasStar
-                    break;
+                    break
                 case '?':
                     // Any character except the normalized file separator ('/')
                     result << /[^\/]/
-                    break;
+                    break
                 case ['$', '|', '[', ']', '(', ')', '.', ':', '{', '}', '\\', '^', '+']:
                     result << '\\' + ch
-                    break;
+                    break
                 default: result << ch
             }
         }

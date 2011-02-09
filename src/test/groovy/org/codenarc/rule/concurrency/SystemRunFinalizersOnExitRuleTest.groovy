@@ -39,7 +39,7 @@ class SystemRunFinalizersOnExitRuleTest extends AbstractRuleTestCase {
                 }
                 {
                     System.runFinalizersOnExit(true)
-                };
+                }
             }
         '''
         assertTwoViolations(SOURCE,

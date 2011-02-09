@@ -33,7 +33,7 @@ class ExplicitCallToMinusMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToMinusMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
     def ExplicitCallToMinusMethodAstVisitor() {
-        super('minus');
+        super('minus')
     }
 
     @Override

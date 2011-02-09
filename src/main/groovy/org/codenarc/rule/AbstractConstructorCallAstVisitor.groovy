@@ -29,7 +29,7 @@ abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
      */
     protected abstract isConstructorCallAViolation(ConstructorCallExpression constructorCall)
 
-    protected abstract String getViolationMessage(ConstructorCallExpression call);
+    protected abstract String getViolationMessage(ConstructorCallExpression call)
     
     @SuppressWarnings('CatchThrowable')
     void visitConstructorCallExpression(ConstructorCallExpression constructorCall) {

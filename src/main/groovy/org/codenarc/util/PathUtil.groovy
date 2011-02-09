@@ -29,10 +29,10 @@ class PathUtil {
         if (!path) {
             return null
         }
-        int separatorIndex1 = path.lastIndexOf('/');
-        int separatorIndex2 = path.lastIndexOf('\\');
-        int separatorIndex = [separatorIndex1, separatorIndex2].max();
-        (separatorIndex == -1) ? path : path.substring(separatorIndex + 1);
+        int separatorIndex1 = path.lastIndexOf('/')
+        int separatorIndex2 = path.lastIndexOf('\\')
+        int separatorIndex = [separatorIndex1, separatorIndex2].max()
+        (separatorIndex == -1) ? path : path.substring(separatorIndex + 1)
     }
 
      static String getParentPath(String filePath) {

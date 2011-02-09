@@ -33,10 +33,10 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
 
     void testSuccessScenario() {
         final SOURCE = '''
-            def result = object;
+            def result = object
             if (result == null) {
                 synchronized(this) {
-                    result = object;
+                    result = object
                     if (result == null)
                         object = result = createObject()
                 }
@@ -48,7 +48,7 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
                    public static Object object = createObject()
                 }
                 public static Object getObject() {
-                    return ObjectHolder.object;
+                    return ObjectHolder.object
                 }
             }
 

@@ -36,7 +36,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
             import java.io.InputStream
             import java.io.OutputStream
             class ABC {
-                InputStream input;
+                InputStream input
             }
         '''
         assertSingleViolation(SOURCE, 3, 'import java.io.OutputStream')
@@ -48,7 +48,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
             import java.util.Map
             import java.io.OutputStream
             class ABC {
-                Map map;
+                Map map
             }
         '''
         assertTwoViolations(SOURCE, 2, 'import java.io.InputStream', 4, 'import java.io.OutputStream')
@@ -109,7 +109,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
             class ABC {
                 def run() {
                     String fff
-                    InputStream input;
+                    InputStream input
                     OutputStream output
                     def value = PI
                 }

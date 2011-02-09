@@ -55,6 +55,7 @@ class EmptyWhileStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'while (isReady) {')
     }
 
+    @SuppressWarnings('UnnecessarySemicolon')
     void testApplyTo_SingleEmptyStatement() {
         final SOURCE = '''
             def myMethod() {

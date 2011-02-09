@@ -34,7 +34,7 @@ class EmptyMethodInAbstractClassRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         final SOURCE = '''
             abstract class MyClass {
-                abstract def method1();
+                abstract def method1()
 
                 def method2() {
                     return "value"

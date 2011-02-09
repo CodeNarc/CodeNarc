@@ -47,6 +47,6 @@ class ThreadLocalNotStaticFinalAstVisitor extends AbstractAstVisitor {
                 addViolation(node, "The ThreadLocal field $node.name is not final")
             }
         }
-        super.visitFieldEx(node);
+        super.visitFieldEx(node)
     }
 }

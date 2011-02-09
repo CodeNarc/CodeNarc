@@ -49,8 +49,8 @@ class GroovyDslRuleSet implements RuleSet {
         }
         Binding binding = new Binding(ruleset:callRuleSet)
 
-        GroovyShell shell = new GroovyShell(binding);
-        shell.evaluate(inputStream);
+        GroovyShell shell = new GroovyShell(binding)
+        shell.evaluate(inputStream)
 
         rules = ruleSetBuilder.ruleSet.rules
     }
