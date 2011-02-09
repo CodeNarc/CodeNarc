@@ -210,6 +210,36 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, ['run', '6'])
     }
 
+    void testApplyTo_SuppressWarningsOnMethod_NoViolation() {
+        final SOURCE = """
+            class MyClass {
+                def myMethod(int value) {       // overloaded; only 2nd has annotation
+                    println 'ok'
+                }
+
+                @SuppressWarnings('CyclomaticComplexity')
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        """
+        rule.maxMethodComplexity = 5
+        assertNoViolations(SOURCE)
+   }
+
+    void testApplyTo_SuppressWarningsOnClass_NoViolations() {
+        final SOURCE = """
+            @SuppressWarnings('CyclomaticComplexity')
+            class MyClass {
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        """
+        rule.maxClassAverageMethodComplexity = 5
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new CyclomaticComplexityRule()
     }

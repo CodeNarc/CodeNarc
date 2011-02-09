@@ -135,9 +135,9 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         source
     }
 
-    private boolean suppressionIsPresent(AnnotatedNode node) {
+    protected boolean suppressionIsPresent(AnnotatedNode node) {
         if (rule?.name) {
-            def annos = node.annotations?.findAll { it.classNode?.name == 'SuppressWarnings' }
+            def annos = node?.annotations?.findAll { it.classNode?.name == 'SuppressWarnings' }
             for (AnnotationNode annotation: annos) {
                 if (suppressionIsPresent(annotation)) {
                     return true

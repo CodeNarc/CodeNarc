@@ -59,19 +59,22 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
             return
         }
 
-        checkMethods(classMetricResult)
+        checkMethods(classNode, classMetricResult)
 
         if (!AstUtil.isFromGeneratedSourceCode(classNode)) {
-            checkClass(classMetricResult, classNode.name)
+            checkClass(classMetricResult, classNode)
         }
         super.visitClassEx(classNode)
     }
 
 
-    private void checkMethods(classMetricResult) {
+    private void checkMethods(ClassNode classNode, classMetricResult) {
         def methodResults = classMetricResult.methodMetricResults
         methodResults.each { methodName, results ->
-            if (results['total'] > getMaxMethodMetricValue() && !isIgnoredMethodName(methodName)) {
+            def methodNode = getMethodNode(classNode, methodName, results)
+            if (results['total'] > getMaxMethodMetricValue() &&
+                    !isIgnoredMethodName(methodName) &&
+                    !suppressionIsPresent(methodNode)) {
                 def message = "The ${getMetricShortDescription()} for method [$methodName] is [${results['total']}]"
                 def lineNumber = getLineNumber(results)
                 def sourceLine = getSourceLine(lineNumber)
@@ -80,9 +83,19 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         }
     }
 
-    private void checkClass(classMetricResult, String className) {
+    protected getMethodNode(ClassNode classNode, String methodName, results) {
+        def matchingMethods = classNode.getDeclaredMethods(methodName)
+        if (matchingMethods.size() == 1) {
+            return matchingMethods[0]
+        }
+        def lineNumber = getLineNumber(results)
+        matchingMethods.find { method -> method.lineNumber == lineNumber }
+    }
+
+    private void checkClass(classMetricResult, classNode) {
+        def className = classNode.name
         def methodResults = classMetricResult.classMetricResult
-        if (methodResults['average'] > getMaxClassMetricValue()) {
+        if (methodResults['average'] > getMaxClassMetricValue() && !suppressionIsPresent(classNode)) {
             def message = "The ${getMetricShortDescription()} for class [$className] is [${methodResults['average']}]"
             def lineNumber = getLineNumber(methodResults)
             def sourceLine = getSourceLine(lineNumber)

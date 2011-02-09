@@ -198,6 +198,32 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, ['run', '6'])
     }
 
+    void testApplyTo_SuppressWarningsOnMethod_NoViolation() {
+        final SOURCE = """
+            class MyClass {
+                @SuppressWarnings('AbcComplexity')
+                def myMethod() {
+                    a = 1; b = 2; c = 3
+                }
+            }
+        """
+        rule.maxMethodComplexity = 2
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_SuppressWarningsOnClass_NoViolations() {
+        final SOURCE = """
+            @SuppressWarnings('AbcComplexity')
+            class MyClass {
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        """
+        rule.maxClassAverageMethodComplexity = 5
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new AbcComplexityRule()
     }

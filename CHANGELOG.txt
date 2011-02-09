@@ -60,6 +60,7 @@ BUG FIXES
 - Fix Bug #3164150 UnnecessaryReturnKeyword: Rule is no longer triggered if the return is for a closure.
 - Fix Bug #3165139 LoggingSwallowsStacktrace: No longer reports multiple logger errors.
 - Fix bug #3166311: Error on numeric/boolean property values if they contain leading or trailing whitespace in "codenarc.properties" or in XML ruleset file.
+- Fix bug #3170295: @SuppressWarnings does not work with GMetrics-based rules (CC and ABC).
 
 POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
