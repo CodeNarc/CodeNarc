@@ -38,6 +38,7 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateField'
     int priority = 2
     Class astVisitorClass = UnusedPrivateFieldAstVisitor
+    String ignoreRegex = 'serialVersionUID'
 }
 
 @SuppressWarnings('DuplicateLiteral')
@@ -48,7 +49,8 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         this.unusedPrivateFields = classNode.fields.findAll { fieldNode ->
             def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
             def isNotGenerated = fieldNode.lineNumber != -1
-            isPrivate && isNotGenerated
+            def isIgnored = fieldNode.name.matches(rule.ignoreRegex)
+            isPrivate && isNotGenerated && !isIgnored
         }
         super.visitClassEx(classNode)
     }

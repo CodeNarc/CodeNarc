@@ -112,6 +112,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 private int count
                 def other = this."count"
+                private serialVersionUID = 6700367864074699984L // should be ignored
             }
         '''
         assertNoViolations(SOURCE)
