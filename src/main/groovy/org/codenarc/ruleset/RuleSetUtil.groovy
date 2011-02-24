@@ -43,7 +43,7 @@ class RuleSetUtil {
         def inputStream = resourceFactory.getResource(path).inputStream
         Class ruleClass
         inputStream.withStream { input ->
-            GroovyClassLoader gcl = new GroovyClassLoader()
+            GroovyClassLoader gcl = new GroovyClassLoader(getClass().classLoader)
             ruleClass = gcl.parseClass(input)
         }
         assertClassImplementsRuleInterface(ruleClass)

@@ -37,7 +37,7 @@ NEW RULES
 - GroovyLangImmutable rule (basic) - Feature #3175158 - The groovy.lang.Immutable annotation has been deprecated and replaced by groovy.transform.Immutable. Do not use the Immutable in groovy.lang.
 - IntegerGetInteger rule (basic) - Feature #3174771 - This rule catches usages of java.lang.Integer.getInteger(String, ...) which reads an Integer from the System properties. It is often mistakenly used to attempt to read user input or parse a String into an Integer. It is a poor piece of API to use; replace it with System.properties['prop'].
 - BooleanGetBoolean rule (basic) - Feature #3174770 - This rule catches usages of java.lang.Boolean.getBoolean(String) which reads a boolean from the System properties. It is often mistakenly used to attempt to read user input or parse a String into a boolean. It is a poor piece of API to use; replace it with System.properties['prop̈́'].
-- ChainedTest rule (junit) - Feature #3175647 - A test method that invokes another test method is a chained test; the methods are dependent on one another. Tests should be isolated, and not be dependent on one another.
+- ChainedTest rule (junit) - Feature #3175647 - A test methodency that invokes another test method is a chained test; the methods are dependent on one another. Tests should be isolated, and not be dependent on one another.
 - CoupledTestCase rule (junit) - Feature #3175645 - This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test case or by creating instances of another test case. If you require shared logic in test cases then extract that logic to a new class where it can properly be reused.
 
   Concurrency Problems
@@ -124,6 +124,7 @@ BUG FIXES
 - Fix Bug #3110303: "ExplicitCallToXMethod rules should ignore spread statements".
 - Fix Bug #3109917: "DuplicateStringLiteralRule - enum names".
 - Fix Bug #3109628: "Exceptions are thrown with CodeNarc v0.11" – "GString as map key checking classes that do not exist yet” and “unnecessary ctor rule breaks for anonymous classes".
+- Fix Bug #3190754: Don't use default ClassLoader for loading rule scripts.
 
 POTENTIAL BREAKING CHANGES
 - Moved the existing StringInstantiation and BooleanInstantiation rules from the Basic ruleset into the Unnecessary ruleset.
