@@ -198,7 +198,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     void testMain_Help() {
-        final ARGS = ["-help"] as String[]
+        final ARGS = ['-help'] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)
         }
@@ -220,7 +220,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     void testMain_UnknownOption() {
-        final ARGS = ["-unknown=23", "-report=$HTML_REPORT_STR"] as String[]
+        final ARGS = ['-unknown=23', "-report=$HTML_REPORT_STR"] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)
         }

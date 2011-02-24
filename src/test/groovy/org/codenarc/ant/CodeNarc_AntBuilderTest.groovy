@@ -43,7 +43,7 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
 
         ant.codenarc(ruleSetFiles:RULESET_FILES) {
             fileset(dir:'samples/src') {
-                include(name:"**/*.groovy")
+                include(name:'**/*.groovy')
             }
            report(type:HTML) {
                option(name:'title', value:TITLE)

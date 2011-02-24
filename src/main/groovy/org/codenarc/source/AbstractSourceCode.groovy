@@ -64,7 +64,7 @@ abstract class AbstractSourceCode implements SourceCode {
      */
     ModuleNode getAst() {
         if (!astParsed) {
-            SourceUnit unit = SourceUnit.create("None", getText())
+            SourceUnit unit = SourceUnit.create('None', getText())
             CompilationUnit compUnit = new CompilationUnit()
             compUnit.addSource(unit)
             try {

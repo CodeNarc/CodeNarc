@@ -176,7 +176,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
                 int defaultCount = count
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'private int count')
+        assertNoViolations(SOURCE)
     }
                                               
     void testApplyTo_ClosureField() {
@@ -222,6 +222,35 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    
+    void testAnonymousInnerClassAsField() {
+        final SOURCE = '''
+            class MyClass {
+                private static def x
+
+                def y = new Class() {
+                    def call() {
+                        println(x)
+                    }
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
+
+    void testInnerClass() {
+        final SOURCE = '''
+            class MyClass {
+                private static def x = 5
+
+                class MyInnerClass {
+                    def call() {
+                        x++
+                    }
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
+
     void testApplyTo_IgnoreFieldNames() {
         final SOURCE = '''
           class MyClass {
@@ -234,6 +263,23 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+
+    void testAnonymousInnerClassAsLocalVariable() {
+        final SOURCE = '''
+            class MyClass {
+                private static def foo = {}
+
+                def myMethod() {
+                    return new Class() {
+                        def call() {
+                            foo()
+                        }
+                    }
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
+
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
@@ -242,5 +288,4 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     protected Rule createRule() {
         new UnusedPrivateFieldRule()
     }
-
 }

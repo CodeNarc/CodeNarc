@@ -28,7 +28,7 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ReturnNullFromCatchBlock"
+        assert rule.name == 'ReturnNullFromCatchBlock'
     }
 
     void testSuccessScenario() {

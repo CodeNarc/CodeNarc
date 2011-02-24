@@ -28,7 +28,7 @@ class EmptyMethodInAbstractClassRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "EmptyMethodInAbstractClass"
+        assert rule.name == 'EmptyMethodInAbstractClass'
     }
 
     void testSuccessScenario() {

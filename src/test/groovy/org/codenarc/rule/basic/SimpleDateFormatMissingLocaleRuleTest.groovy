@@ -28,7 +28,7 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "SimpleDateFormatMissingLocale"
+        assert rule.name == 'SimpleDateFormatMissingLocale'
     }
 
     void testSuccessScenario() {

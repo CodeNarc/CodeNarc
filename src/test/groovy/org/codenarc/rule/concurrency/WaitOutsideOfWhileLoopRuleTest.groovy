@@ -28,7 +28,7 @@ class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "WaitOutsideOfWhileLoop"
+        assert rule.name == 'WaitOutsideOfWhileLoop'
     }
 
     void testApplyTo_WaitWithinWhileLoop_NoViolation() {

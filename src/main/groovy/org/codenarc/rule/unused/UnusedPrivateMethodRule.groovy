@@ -17,9 +17,14 @@ package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.MethodPointerExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.*
+import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 
 /**
@@ -41,39 +46,69 @@ import org.codenarc.util.AstUtil
 class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateMethod'
     int priority = 2
-    Class astVisitorClass = UnusedPrivateMethodAstVisitor
+
+    @Override
+    void applyTo(SourceCode sourceCode, List violations) {
+        // If AST is null, skip this source code
+        def ast = sourceCode.ast
+        if (!ast) { return }
+
+        def allPrivateMethods = collectAllPrivateMethods(ast)
+
+        def visitor = new UnusedPrivateMethodAstVisitor(unusedPrivateMethods: allPrivateMethods)
+        visitor.rule = this
+        visitor.sourceCode = sourceCode
+        ast.classes.each { classNode ->
+            visitor.visitClass(classNode)
+        }
+
+        allPrivateMethods.each { key, value ->
+            visitor.addViolation(value, "The method $key is not used within ${sourceCode.name ?: 'the class'}")
+        }
+        violations.addAll(visitor.violations)
+    }
+
+    @SuppressWarnings('NestedBlockDepth')
+    private collectAllPrivateMethods(ast) {
+        def allPrivateMethods = [:]
+        ast.classes.each { classNode ->
+
+            if (shouldApplyThisRuleTo(classNode)) {
+                classNode.methods.inject(allPrivateMethods) { acc, methodNode ->
+                    if ((methodNode.modifiers & FieldNode.ACC_PRIVATE) && !allPrivateMethods.containsKey(methodNode.name)) {
+                        allPrivateMethods.put(methodNode.name, methodNode)
+                    }
+                }
+            }
+        }
+        allPrivateMethods
+    }
 }
 
 @SuppressWarnings('DuplicateLiteral')
-class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
-    private unusedPrivateMethods
+class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
+    Map<String, MethodNode> unusedPrivateMethods
     private currentClassNode
 
-    void visitClassEx(ClassNode classNode) {
-        this.currentClassNode = classNode
-        this.unusedPrivateMethods = classNode.methods.findAll { methodNode ->
-            methodNode.modifiers & FieldNode.ACC_PRIVATE
-        }
-        super.visitClassEx(classNode)
+    @Override
+    protected void visitClassEx(ClassNode node) {
+        currentClassNode = node
     }
 
-    void visitClassComplete(ClassNode classNode) {
-        unusedPrivateMethods.each { unusedPrivateMethod ->
-            addViolation(unusedPrivateMethod, "The method $unusedPrivateMethod.name is not used in the class $classNode.name")
-        }
-        this.currentClassNode = null
+    @Override
+    protected void visitClassComplete(ClassNode node) {
+        currentClassNode = null
     }
 
     void visitMethodCallExpression(MethodCallExpression expression) {
         if (isMethodCall(expression, 'this')) {
-            removeUnusedPrivateMethods(expression.method.value)
+            unusedPrivateMethods.remove(expression.method.value)
         }
 
         // Static invocation through current class name
         if (isMethodCall(expression, currentClassNode.nameWithoutPackage)) {
-            removeUnusedPrivateMethods(expression.method.value)
+            unusedPrivateMethods.remove(expression.method.value)
         }
-
         super.visitMethodCallExpression(expression)
     }
 
@@ -82,23 +117,13 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor  {
                 methodPointerExpression.expression.name == 'this' &&
                 methodPointerExpression.methodName instanceof ConstantExpression) {
 
-            removeUnusedPrivateMethods(methodPointerExpression.methodName.value)
+            unusedPrivateMethods.remove(methodPointerExpression.methodName.value)
         }
-         super.visitMethodPointerExpression(methodPointerExpression)
+        super.visitMethodPointerExpression(methodPointerExpression)
     }
 
-    private boolean isMethodCall(MethodCallExpression expression, String targetName) {
+    private static boolean isMethodCall(MethodCallExpression expression, String targetName) {
         AstUtil.isMethodCallOnObject(expression, targetName) &&
-               expression.method instanceof ConstantExpression
-    }
-
-    private void removeUnusedPrivateMethods(String name, boolean staticOnly=false) {
-        def referencedMethods = unusedPrivateMethods.findAll { methodNode ->
-            methodNode.name == name &&
-            (!staticOnly || methodNode.modifiers & FieldNode.ACC_STATIC)
-        }
-        referencedMethods.each { referencedMethod ->
-            unusedPrivateMethods.remove(referencedMethod)
-        }
+                expression.method instanceof ConstantExpression
     }
 }

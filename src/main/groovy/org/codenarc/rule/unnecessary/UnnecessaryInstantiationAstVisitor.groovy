@@ -54,7 +54,7 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
                     def replacementOptions = isSuffixNecessary ?
                         "${argument.value}$suffix" :
                         "${argument.value} or ${argument.value}$suffix"
-                    addViolation call, "Can be rewritten as " + replacementOptions
+                    addViolation call, "Can be rewritten as $replacementOptions"
                 }
             }
         }

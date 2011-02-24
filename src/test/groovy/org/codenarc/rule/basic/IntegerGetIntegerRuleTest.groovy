@@ -28,7 +28,7 @@ class IntegerGetIntegerRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "IntegerGetInteger"
+        assert rule.name == 'IntegerGetInteger'
     }
 
     void testSuccessScenario() {

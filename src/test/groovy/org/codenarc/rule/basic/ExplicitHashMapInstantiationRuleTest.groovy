@@ -28,7 +28,7 @@ class ExplicitHashMapInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitHashMapInstantiation"
+        assert rule.name == 'ExplicitHashMapInstantiation'
     }
 
     void testSuccessScenario() {

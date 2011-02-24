@@ -28,7 +28,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == "JUnitStyleAssertions"
+        assert rule.name == 'JUnitStyleAssertions'
     }
 
     void testSuccessScenario() {

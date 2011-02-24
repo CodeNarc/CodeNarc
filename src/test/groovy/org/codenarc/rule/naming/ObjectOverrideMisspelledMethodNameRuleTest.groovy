@@ -27,7 +27,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ObjectOverrideMisspelledMethodName"
+        assert rule.name == 'ObjectOverrideMisspelledMethodName'
     }
 
     void testApplyTo_NoViolations() {

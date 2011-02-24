@@ -67,8 +67,8 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
 
     AstVisitor getAstVisitor() {
         def visitorClass = getAstVisitorClass()
-        assert visitorClass, "The astVisitorClass property must not be null"
-        assert AstVisitor.isAssignableFrom(visitorClass), "The astVisitorClass property must specify a class that implements AstVisitor"
+        assert visitorClass, 'The astVisitorClass property must not be null'
+        assert AstVisitor.isAssignableFrom(visitorClass), 'The astVisitorClass property must specify a class that implements AstVisitor'
         visitorClass.newInstance()
     }
 

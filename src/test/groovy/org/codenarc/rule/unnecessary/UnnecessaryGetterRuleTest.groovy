@@ -28,7 +28,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryGetter"
+        assert rule.name == 'UnnecessaryGetter'
     }
 
     void testSuccessScenario() {

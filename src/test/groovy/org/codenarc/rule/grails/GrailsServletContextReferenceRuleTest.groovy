@@ -78,7 +78,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertTwoViolations(SOURCE, 3, "def mySession = servletContext", 6, 'println "amount=${servletContext.amount}"')
+        assertTwoViolations(SOURCE, 3, 'def mySession = servletContext', 6, 'println "amount=${servletContext.amount}"')
     }
 
     void testApplyTo_ReferenceWithinTagLib() {

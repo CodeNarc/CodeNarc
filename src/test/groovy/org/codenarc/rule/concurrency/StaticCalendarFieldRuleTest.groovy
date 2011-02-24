@@ -28,7 +28,7 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "StaticCalendarField"
+        assert rule.name == 'StaticCalendarField'
     }
 
     void testSuccessScenario() {

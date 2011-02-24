@@ -16,16 +16,16 @@
 package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.PropertyNode
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.PropertyExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.PropertyNode
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.WildcardPattern
 
 /**
@@ -42,40 +42,63 @@ import org.codenarc.util.WildcardPattern
 class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateField'
     int priority = 2
-    Class astVisitorClass = UnusedPrivateFieldAstVisitor
     String ignoreFieldNames = 'serialVersionUID'
+
+    @Override
+    void applyTo(SourceCode sourceCode, List violations) {
+        // If AST is null, skip this source code
+        def ast = sourceCode.ast
+        if (!ast) { return }
+
+        def allPrivateFields = collectAllPrivateFields(ast)
+
+        def visitor = new UnusedPrivateFieldAstVisitor(unusedPrivateFields: allPrivateFields)
+        visitor.rule = this
+        visitor.sourceCode = sourceCode
+        ast.classes.each { classNode ->
+            visitor.visitClass(classNode)
+        }
+
+        allPrivateFields.each { key, value ->
+            visitor.addViolation(value, "The field $key is not used within ${sourceCode.name ?: 'the class'}")
+        }
+        violations.addAll(visitor.violations)
+    }
+
+    @SuppressWarnings('NestedBlockDepth')
+    private collectAllPrivateFields(ast) {
+        def allPrivateFields = [:]
+        ast.classes.each { classNode ->
+            if (shouldApplyThisRuleTo(classNode)) {
+                classNode.fields.inject(allPrivateFields) { acc, fieldNode ->
+                    def wildcardPattern = new WildcardPattern(ignoreFieldNames, false)
+                    def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
+                    def isNotGenerated = fieldNode.lineNumber != -1
+                    def isIgnored = wildcardPattern.matches(fieldNode.name)
+                    if (isPrivate && isNotGenerated && !isIgnored) {
+                        acc.put(fieldNode.name, fieldNode)
+                    }
+                    acc
+                }
+            }
+        }
+        allPrivateFields
+    }
 }
 
 @SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
-    private List<FieldNode> unusedPrivateFields
-
-    void visitClassEx(ClassNode classNode) {
-        def wildcardPattern = new WildcardPattern(rule.ignoreFieldNames, false)
-        this.unusedPrivateFields = classNode.fields.findAll { fieldNode ->
-            def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
-            def isNotGenerated = fieldNode.lineNumber != -1
-            def isIgnored = wildcardPattern.matches(fieldNode.name)
-            isPrivate && isNotGenerated && !isIgnored
-        }
-        super.visitClassEx(classNode)
-    }
-
-    void visitClassComplete(ClassNode classNode) {
-        unusedPrivateFields.each { unusedPrivateField ->
-            addViolation(unusedPrivateField, "The field $unusedPrivateField.name is not used in the class $classNode.name")
-        }
-    }
+    private Map<String, FieldNode> unusedPrivateFields
 
     void visitVariableExpression(VariableExpression expression) {
-        removeUnusedPrivateField(expression.name)
+        unusedPrivateFields.remove(expression.name)
 
         // This causes problems (StackOverflow) in Groovy 1.7.0
         //super.visitVariableExpression(expression)
     }
 
     void visitPropertyEx(PropertyNode node) {
-        removeUnusedPrivateField(node.name)
+        unusedPrivateFields.remove(node.name)
         super.visitPropertyEx(node)
     }
 
@@ -84,7 +107,7 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
                 expression.objectExpression.name == 'this' &&
                 expression.property instanceof ConstantExpression) {
 
-            removeUnusedPrivateField(expression.property.value)
+            unusedPrivateFields.remove(expression.property.value)
         }
         super.visitPropertyExpression(expression)
     }
@@ -94,7 +117,7 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
             node.parameters.each { parameter ->
                 def initialExpression = parameter.initialExpression
                 if (initialExpression && AstUtil.respondsTo(initialExpression, 'getName')) {
-                    removeUnusedPrivateField(initialExpression.name)
+                    unusedPrivateFields.remove(initialExpression.name)
                 }
             }
         }
@@ -109,15 +132,8 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         //      myClosure()
         // But this could potentially "hide" some unused fields (i.e. false negatives).
         if (AstUtil.isMethodCallOnObject(call, 'this') && call.method instanceof ConstantExpression) {
-            removeUnusedPrivateField(call.method.value)
+            unusedPrivateFields.remove(call.method.value)
         }
         super.visitMethodCallExpression(call)
-    }
-
-    private void removeUnusedPrivateField(String name) {
-        def referencedField = unusedPrivateFields.find { it.name == name }
-        if (referencedField) {
-            unusedPrivateFields.remove(referencedField)
-        }
     }
 }

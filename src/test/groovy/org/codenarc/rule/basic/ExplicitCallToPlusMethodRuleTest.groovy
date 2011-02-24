@@ -28,7 +28,7 @@ class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToPlusMethod"
+        assert rule.name == 'ExplicitCallToPlusMethod'
     }
 
     void testSuccessScenario() {

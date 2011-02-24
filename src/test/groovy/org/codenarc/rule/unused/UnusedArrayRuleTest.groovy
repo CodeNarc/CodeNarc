@@ -28,7 +28,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnusedArray"
+        assert rule.name == 'UnusedArray'
     }
 
     void testApplyTo_ArrayAssigned_NoViolations() {

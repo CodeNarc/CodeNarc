@@ -28,7 +28,7 @@ class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryTransientModifier"
+        assert rule.name == 'UnnecessaryTransientModifier'
     }
 
     void testSuccessScenario() {

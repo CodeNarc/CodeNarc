@@ -38,15 +38,15 @@ class DefaultResourceFactoryTest extends AbstractTestCase {
     }
 
     void testGetResource_HttpPrefix() {
-        assertResourceTypeAndLocation("http://codenarc.org", UrlResource)
+        assertResourceTypeAndLocation('http://codenarc.org', UrlResource)
     }
 
     void testGetResource_FtpPrefix() {
-        assertResourceTypeAndLocation("ftp://codenarc.org", UrlResource)
+        assertResourceTypeAndLocation('ftp://codenarc.org', UrlResource)
     }
 
     void testGetResource_ClassPathPrefix() {
-        assertResourceTypeAndLocation("classpath:" + PATH, ClassPathResource, PATH)
+        assertResourceTypeAndLocation('classpath:' + PATH, ClassPathResource, PATH)
     }
 
     private void assertResourceTypeAndLocation(String path, Class resourceClass, String expectedResourcePath=path) {

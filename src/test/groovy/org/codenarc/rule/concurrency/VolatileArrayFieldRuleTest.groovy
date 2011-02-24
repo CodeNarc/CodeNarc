@@ -28,7 +28,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "VolatileArrayField"
+        assert rule.name == 'VolatileArrayField'
     }
 
     void testSuccessScenario() {

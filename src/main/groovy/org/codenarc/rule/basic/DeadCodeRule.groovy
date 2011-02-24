@@ -40,7 +40,7 @@ class DeadCodeAstVisitor extends AbstractAstVisitor {
             (block.statements.size() - 1).times {
                 def statement = block.statements[it]
                 if (statementForcesMethodReturn(statement)) {
-                    addViolation (block.statements[it+1], "This code cannot be reached")
+                    addViolation (block.statements[it+1], 'This code cannot be reached')
                 }
             }
         }

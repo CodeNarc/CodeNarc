@@ -28,7 +28,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryNullCheck"
+        assert rule.name == 'UnnecessaryNullCheck'
     }
 
     void testSuccessScenario() {

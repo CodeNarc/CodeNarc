@@ -28,7 +28,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "JUnitTestMethodWithoutAssert"
+        assert rule.name == 'JUnitTestMethodWithoutAssert'
     }
 
     void testAnnotatedMethods_SuccessScenario() {

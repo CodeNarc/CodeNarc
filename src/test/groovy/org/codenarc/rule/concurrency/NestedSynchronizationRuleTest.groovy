@@ -129,7 +129,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
                 }
             } '''
 
-        assertSingleViolation(SOURCE, 7, "synchronized(this) {}")
+        assertSingleViolation(SOURCE, 7, 'synchronized(this) {}')
     }
 
     void testApplyTo_Closure() {
@@ -143,7 +143,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
                 }
             } '''
 
-        assertSingleViolation(SOURCE, 6, "synchronized(this) { }")
+        assertSingleViolation(SOURCE, 6, 'synchronized(this) { }')
     }
 
     //todo: This test passes fine on Groovy 1.7. Rename it when you upgrade
@@ -205,7 +205,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
             }
             '''
 
-        assertSingleViolation(SOURCE, 12, "synchronized(this) {}")
+        assertSingleViolation(SOURCE, 12, 'synchronized(this) {}')
     }
 
     void testApplyTo_DifferentLockObjects() {
@@ -221,7 +221,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
                 }
             } '''
 
-        assertSingleViolation(SOURCE, 8, "synchronized(lock2) {}")
+        assertSingleViolation(SOURCE, 8, 'synchronized(lock2) {}')
     }
 
     protected Rule createRule() {

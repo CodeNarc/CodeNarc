@@ -28,7 +28,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "DuplicateStringLiteral"
+        assert rule.name == 'DuplicateStringLiteral'
     }
 
     void testSuccessScenario() {

@@ -75,10 +75,10 @@ class JUnitUtil {
         if (!(node instanceof MethodNode)) {
             return false
         }
-        if (node.returnType.name != "void") {
+        if (node.returnType.name != 'void') {
             return false
         }
-        if (AstUtil.isPublic(node) && node.name?.startsWith("test")) {
+        if (AstUtil.isPublic(node) && node.name?.startsWith('test')) {
             return true
         }
         node.properties['annotations']?.any { annotation ->

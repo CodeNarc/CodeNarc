@@ -28,7 +28,7 @@ class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToCompareToMethod"
+        assert rule.name == 'ExplicitCallToCompareToMethod'
     }
 
     void testSuccessScenario() {

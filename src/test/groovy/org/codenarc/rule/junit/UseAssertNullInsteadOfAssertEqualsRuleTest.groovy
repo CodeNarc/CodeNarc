@@ -28,7 +28,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == "UseAssertNullInsteadOfAssertEquals"
+        assert rule.name == 'UseAssertNullInsteadOfAssertEquals'
     }
 
     void testSuccessScenario() {
@@ -56,8 +56,8 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
               }
         '''
         assertTwoViolations(SOURCE,
-                4, "assertEquals(null, foo())",
-                5, "assertEquals(foo(), null)")   
+                4, 'assertEquals(null, foo())',
+                5, 'assertEquals(foo(), null)')
     }
 
     void testNullInAssertEqualsWithMessage() {

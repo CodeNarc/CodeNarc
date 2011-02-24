@@ -48,25 +48,25 @@ class AbstractClassNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_DoesNotMatchRegex() {
-        final SOURCE = " abstract class AbstractClass { } "
+        final SOURCE = ' abstract class AbstractClass { } '
         rule.regex = /z.*/
         assertSingleViolation(SOURCE, 1, 'AbstractClass')
     }
 
     void testApplyTo_MatchesRegex() {
-        final SOURCE = " abstract class zClass { } "
+        final SOURCE = ' abstract class zClass { } '
         rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NonAbstractClass() {
-        final SOURCE = " class nonAbstractClass { } "
+        final SOURCE = ' class nonAbstractClass { } '
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_Interface() {
-        final SOURCE = " interface interfaceClass { } "
+        final SOURCE = ' interface interfaceClass { } '
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }

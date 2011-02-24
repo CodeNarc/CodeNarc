@@ -131,7 +131,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
 
         pool.shutdown()
         def completed = pool.awaitTermination(POOL_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        assert completed, "Thread Pool terminated before completion."
+        assert completed, 'Thread Pool terminated before completion.'
     }
 
     private Runnable buildTask(File baseDir, String filePath, RuleSet ruleSet) {

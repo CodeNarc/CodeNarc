@@ -28,7 +28,7 @@ class ConfusingTernaryRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ConfusingTernary"
+        assert rule.name == 'ConfusingTernary'
     }
 
     void testSuccessScenario() {

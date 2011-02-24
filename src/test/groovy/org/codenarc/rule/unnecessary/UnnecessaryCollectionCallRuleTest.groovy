@@ -28,7 +28,7 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == "UnnecessaryCollectionCall"
+        assert rule.name == 'UnnecessaryCollectionCall'
     }
 
     void testNoViolations() {

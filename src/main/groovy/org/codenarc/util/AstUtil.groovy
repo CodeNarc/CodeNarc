@@ -354,7 +354,7 @@ class AstUtil {
      */
     static boolean isTrue(Expression expression) {
         if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
-            if (expression.property instanceof ConstantExpression && expression.property.value == "TRUE") {
+            if (expression.property instanceof ConstantExpression && expression.property.value == 'TRUE') {
                 return true
             }
         }
@@ -393,7 +393,7 @@ class AstUtil {
      */
     static boolean isFalse(Expression expression) {
         if (expression instanceof PropertyExpression && classNodeImplementsType(expression.objectExpression.type, Boolean)) {
-            if (expression.property instanceof ConstantExpression && expression.property.value == "FALSE") {
+            if (expression.property instanceof ConstantExpression && expression.property.value == 'FALSE') {
                 return true
             }
         }

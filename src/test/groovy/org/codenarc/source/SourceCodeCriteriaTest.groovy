@@ -106,6 +106,6 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
 
     void setUp() {
         super.setUp()
-        sourceCode = new SourceString("class ABC { }")
+        sourceCode = new SourceString('class ABC { }')
     }
 }

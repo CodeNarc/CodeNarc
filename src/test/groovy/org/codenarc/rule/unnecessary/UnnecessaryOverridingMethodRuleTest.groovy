@@ -28,7 +28,7 @@ class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == "UnnecessaryOverridingMethod"
+        assert rule.name == 'UnnecessaryOverridingMethod'
     }
 
     void testSuccessScenario() {

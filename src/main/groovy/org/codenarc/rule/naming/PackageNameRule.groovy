@@ -51,7 +51,7 @@ class PackageNameAstVisitor extends AbstractAstVisitor  {
         }
 
         if (rule.packageNameRequired && classNode.packageName == null) {
-            addViolation(classNode, "Required package declaration is missing for class")
+            addViolation(classNode, 'Required package declaration is missing for class')
         }
         super.visitClassEx(classNode)
     }

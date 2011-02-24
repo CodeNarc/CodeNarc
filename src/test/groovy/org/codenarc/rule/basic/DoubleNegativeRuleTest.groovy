@@ -28,7 +28,7 @@ class DoubleNegativeRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "DoubleNegative"
+        assert rule.name == 'DoubleNegative'
     }
 
     void testSuccessScenario() {

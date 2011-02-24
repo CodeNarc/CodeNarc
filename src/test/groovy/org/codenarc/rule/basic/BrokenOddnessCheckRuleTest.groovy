@@ -28,7 +28,7 @@ class BrokenOddnessCheckRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "BrokenOddnessCheck"
+        assert rule.name == 'BrokenOddnessCheck'
     }
 
     void testSuccessScenario() {

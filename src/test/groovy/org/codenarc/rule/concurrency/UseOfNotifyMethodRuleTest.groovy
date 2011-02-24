@@ -28,7 +28,7 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UseOfNotifyMethod"
+        assert rule.name == 'UseOfNotifyMethod'
     }
 
     void testSuccessScenario() {

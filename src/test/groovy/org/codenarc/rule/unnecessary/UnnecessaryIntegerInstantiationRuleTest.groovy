@@ -28,7 +28,7 @@ class UnnecessaryIntegerInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryIntegerInstantiation"
+        assert rule.name == 'UnnecessaryIntegerInstantiation'
     }
 
     void testSuccessScenario() {
@@ -44,14 +44,14 @@ class UnnecessaryIntegerInstantiationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new Integer("42")
         '''
-        assertSingleViolation(SOURCE, 2, 'new Integer("42")', "Can be rewritten as 42 or 42i")
+        assertSingleViolation(SOURCE, 2, 'new Integer("42")', 'Can be rewritten as 42 or 42i')
     }
 
     void testIntConstructor() {
         final SOURCE = '''
             new Integer(42)
         '''
-        assertSingleViolation(SOURCE, 2, 'new Integer(42)', "Can be rewritten as 42 or 42i")
+        assertSingleViolation(SOURCE, 2, 'new Integer(42)', 'Can be rewritten as 42 or 42i')
     }
 
     protected Rule createRule() {

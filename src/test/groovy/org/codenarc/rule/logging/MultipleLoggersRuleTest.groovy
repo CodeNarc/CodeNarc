@@ -28,7 +28,7 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "MultipleLoggers"
+        assert rule.name == 'MultipleLoggers'
     }
 
     void testSuccessScenario() {

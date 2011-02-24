@@ -28,7 +28,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "InconsistentPropertySynchronization"
+        assert rule.name == 'InconsistentPropertySynchronization'
     }
 
     void testSuccessScenario() {

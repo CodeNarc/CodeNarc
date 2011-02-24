@@ -28,7 +28,7 @@ class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "StaticDateFormatField"
+        assert rule.name == 'StaticDateFormatField'
     }
 
     void testSuccessScenario() {

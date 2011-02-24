@@ -76,7 +76,7 @@ class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.bracesRequiredForElseIf = true
-        assertSingleViolation(SOURCE, 2, "if (isReady)")
+        assertSingleViolation(SOURCE, 2, 'if (isReady)')
     }
 
     void testApplyTo_Violation_ElseBlockWithCommentOnly() {

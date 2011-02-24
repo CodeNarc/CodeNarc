@@ -28,7 +28,7 @@ class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "JUnitFailWithoutMessage"
+        assert rule.name == 'JUnitFailWithoutMessage'
     }
 
     void testSuccessScenario() {

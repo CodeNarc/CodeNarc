@@ -28,7 +28,7 @@ class SynchronizedReadObjectMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "SynchronizedReadObjectMethod"
+        assert rule.name == 'SynchronizedReadObjectMethod'
     }
 
     void testSuccessScenario() {

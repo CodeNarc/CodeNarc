@@ -28,7 +28,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryBigDecimalInstantiation"
+        assert rule.name == 'UnnecessaryBigDecimalInstantiation'
     }
 
     void testSuccessScenario() {

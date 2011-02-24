@@ -41,7 +41,7 @@ class SynchronizedOnThisAstVisitor extends AbstractAstVisitor  {
     def void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (isFirstVisit(statement)) {
             if (statement.getExpression() instanceof VariableExpression) {
-                if (statement.expression?.variable == "this") {
+                if (statement.expression?.variable == 'this') {
                     addViolation(statement, "The synchronized statement uses the 'this' reference")
                 }
             }

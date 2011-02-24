@@ -28,7 +28,7 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "CloseWithoutCloseable"
+        assert rule.name == 'CloseWithoutCloseable'
     }
 
     void testSuccessScenario() {

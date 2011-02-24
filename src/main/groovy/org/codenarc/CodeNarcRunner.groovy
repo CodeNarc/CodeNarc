@@ -59,8 +59,8 @@ class CodeNarcRunner {
      * @returns the <code>Results</code> object containing the results of the CodeNarc analysis.
      */
     Results execute() {
-        assert ruleSetFiles, "The ruleSetFiles property must be set"
-        assert sourceAnalyzer, "The sourceAnalyzer property must be set to a valid SourceAnalayzer"
+        assert ruleSetFiles, 'The ruleSetFiles property must be set'
+        assert sourceAnalyzer, 'The sourceAnalyzer property must be set to a valid SourceAnalayzer'
 
         def startTime = System.currentTimeMillis()
         def ruleSet = createRuleSet()
@@ -78,7 +78,7 @@ class CodeNarcRunner {
             reportWriter.writeReport(analysisContext, results)
         }
 
-        def resultsMessage = "CodeNarc completed: " + countsText + " ${elapsedTime}ms"
+        def resultsMessage = 'CodeNarc completed: ' + countsText + " ${elapsedTime}ms"
         LOG.info(resultsMessage)
         println resultsMessage
         results

@@ -28,7 +28,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ConsecutiveStringConcatenation"
+        assert rule.name == 'ConsecutiveStringConcatenation'
     }
 
     void testSuccessScenario() {

@@ -59,7 +59,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
 
         def paths = resultsPaths(results)
         log("paths=$paths")
-        assertEqualSets(paths, ["SourceFile1.groovy", "SourceFile2.groovy"])
+        assertEqualSets(paths, ['SourceFile1.groovy', 'SourceFile2.groovy'])
 
         def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
         assertEqualSets(fullPaths, [
@@ -161,7 +161,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
 
         def paths = resultsPaths(results)
         log("paths=$paths")
-        assertEqualSets(paths, ["subdir1", "subdir2", "subdir2/subdir2a"])
+        assertEqualSets(paths, ['subdir1', 'subdir2', 'subdir2/subdir2a'])
 
         assert testCountRule.count == 5
         assert results.numberOfFilesWithViolations == 0

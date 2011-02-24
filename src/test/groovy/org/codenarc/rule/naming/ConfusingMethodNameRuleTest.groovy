@@ -28,7 +28,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ConfusingMethodName"
+        assert rule.name == 'ConfusingMethodName'
     }
 
     void testNoViolations() {

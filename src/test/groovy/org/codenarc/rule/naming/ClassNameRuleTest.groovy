@@ -37,12 +37,12 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_DoesNotMatchDefaultRegex() {
-        final SOURCE = " class _MyClass { } "
+        final SOURCE = ' class _MyClass { } '
         assertSingleViolation(SOURCE, 1, '_MyClass')
     }
 
     void testApplyTo_MatchesDefaultRegex() {
-        final SOURCE = " class MyClass { } "
+        final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
     }
 
@@ -56,13 +56,13 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_DoesNotMatchCustomRegex() {
         rule.regex = /z.*/
-        final SOURCE = " class MyClass { } "
+        final SOURCE = ' class MyClass { } '
         assertSingleViolation(SOURCE, 1, 'MyClass')
     }
 
     void testApplyTo_MatchesCustomRegex() {
         rule.regex = /z.*/
-        final SOURCE = " class zClass { } "
+        final SOURCE = ' class zClass { } '
         assertNoViolations(SOURCE)
     }
 

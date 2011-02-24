@@ -28,7 +28,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "AssignmentInConditional"
+        assert rule.name == 'AssignmentInConditional'
     }
 
     void testSuccessScenario() {

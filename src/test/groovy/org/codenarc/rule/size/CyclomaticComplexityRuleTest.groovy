@@ -34,44 +34,44 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_ClassWithNoMethods() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myValue = 23
             }
-        """
+        '''
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_SingleMethod_EqualToMaxMethodComplexity() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e
                 }
             }
-        """
+        '''
         rule.maxMethodComplexity = 5
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_SingleMethod_ExceedsMaxMethodComplexity() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.maxMethodComplexity = 5
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
     void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myClosure = { a && b && c && d && e }
             }
-        """
+        '''
         rule.maxMethodComplexity = 2
         assertSingleViolation(SOURCE, 3, 'def myClosure', ['myClosure', '5'])
     }
@@ -95,19 +95,19 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_Class_ExceedsMaxAverageClassComplexity() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.maxClassAverageMethodComplexity = 5
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
     }
 
     void testApplyTo_ClassAndMethod_ExceedThreshold() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod1() {
                     a && b && c
@@ -118,7 +118,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
                     a || b || c || d || e || f
                 }
             }
-        """
+        '''
         rule.maxMethodComplexity = 5
         rule.maxClassAverageMethodComplexity = 3
         assertTwoViolations(SOURCE,
@@ -127,7 +127,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_ClassAndMethods_AtThreshold() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod1() {
                     a && b && c
@@ -138,40 +138,40 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
                     a || b || c
                 }
             }
-        """
+        '''
         rule.maxMethodComplexity = 3
         rule.maxClassAverageMethodComplexity = 3
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.ignoreMethodNames = 'myMethod'
         rule.maxMethodComplexity = 1
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.ignoreMethodNames = 'otherMethod'
         rule.maxMethodComplexity = 1
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
@@ -182,7 +182,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
                     a || b || c
                 }
             }
-        """
+        '''
         rule.ignoreMethodNames = 'myM*d*,otherC??su*'
         rule.maxMethodComplexity = 1
         assertSingleViolation(SOURCE, 6, 'def myClosure', ['myClosure', '3'])
@@ -211,7 +211,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_SuppressWarningsOnMethod_NoViolation() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod(int value) {       // overloaded; only 2nd has annotation
                     println 'ok'
@@ -222,20 +222,20 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.maxMethodComplexity = 5
         assertNoViolations(SOURCE)
    }
 
     void testApplyTo_SuppressWarningsOnClass_NoViolations() {
-        final SOURCE = """
+        final SOURCE = '''
             @SuppressWarnings('CyclomaticComplexity')
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.maxClassAverageMethodComplexity = 5
         assertNoViolations(SOURCE)
     }

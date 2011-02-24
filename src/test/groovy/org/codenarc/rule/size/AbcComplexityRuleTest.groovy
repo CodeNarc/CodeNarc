@@ -34,16 +34,16 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_ClassWithNoMethods() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myValue = 23
             }
-        """
+        '''
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_SingleMethod_EqualToClassAndMethodThreshold() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     switch(x) {
@@ -52,30 +52,30 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                     }
                 }
             }
-        """
+        '''
         rule.maxMethodComplexity = 2
         rule.maxClassAverageMethodComplexity = 2
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_SingleMethod_ExceedsMaxMethodComplexity() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a = 1; b = 2; c = 3
                 }
             }
-        """
+        '''
         rule.maxMethodComplexity = 2
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '3.0'])
     }
 
     void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myClosure = { a.someMethod(); b.aProperty }
             }
-        """
+        '''
         rule.maxMethodComplexity = 1
         assertSingleViolation(SOURCE, 3, 'def myClosure', ['myClosure', '2.0'])
     }
@@ -101,13 +101,13 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_Class_ExceedsMaxAverageClassComplexity() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.maxClassAverageMethodComplexity = 5
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
     }
@@ -133,33 +133,33 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.ignoreMethodNames = 'myMethod'
         rule.maxMethodComplexity = 1
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
                 }
             }
-        """
+        '''
         rule.ignoreMethodNames = 'otherMethod'
         rule.maxMethodComplexity = 1
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass {
                 def myMethod() {
                     a && b && c && d && e && f
@@ -170,7 +170,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                     a || b || c
                 }
             }
-        """
+        '''
         rule.ignoreMethodNames = 'myM*d*,otherC??su*'
         rule.maxMethodComplexity = 1
         assertSingleViolation(SOURCE, 6, 'def myClosure', ['myClosure', '3'])

@@ -43,7 +43,7 @@ class JUnitUnnecessarySetUpAstVisitor extends AbstractAstVisitor  {
         if (JUnitUtil.isSetUpMethod(methodNode)) {
             def statements = methodNode.code.statements
             if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'setUp', 0)) {
-                addViolation(methodNode, "The setUp() method contains no logic and can be removed")
+                addViolation(methodNode, 'The setUp() method contains no logic and can be removed')
             }
         }
         super.visitMethodEx(methodNode)

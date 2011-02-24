@@ -28,7 +28,7 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "SerialVersionUID"
+        assert rule.name == 'SerialVersionUID'
     }
 
     void testApplyTo_NoViolations() {

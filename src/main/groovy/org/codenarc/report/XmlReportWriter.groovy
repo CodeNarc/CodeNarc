@@ -156,7 +156,7 @@ class XmlReportWriter extends AbstractReportWriter {
     }
 
     protected cdata(String text) {
-        return { unescaped << "<![CDATA[" + text + "]]>" }
+        return { unescaped << '<![CDATA[' + text + ']]>' }
     }
 
 }

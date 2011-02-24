@@ -26,7 +26,7 @@ import org.codenarc.test.RuleSets
  */
 class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
 
-    private static final BASE_MESSAGES_BUNDLE = "codenarc-base-messages"
+    private static final BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
     private messages
 
     void testLoadAllPredefinedRuleSets() {

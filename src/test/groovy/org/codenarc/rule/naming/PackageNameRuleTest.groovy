@@ -37,26 +37,26 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_DoesNotMatchDefaultRegex() {
-        final SOURCE = """
+        final SOURCE = '''
             package MyPackage.base
             class _MyClass { }
-        """
+        '''
         assertSingleViolation(SOURCE, null, null, 'MyPackage.base')
     }
 
     void testApplyTo_MatchesDefaultRegex() {
-        final SOURCE = """
+        final SOURCE = '''
             package mypackage.base.domain
             class _MyClass { }
-        """
+        '''
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_MatchesDefaultRegex_Numbers() {
-        final SOURCE = """
+        final SOURCE = '''
             package mypackage.base.i18n
             class _MyClass { }
-        """
+        '''
         assertNoViolations(SOURCE)
     }
 
@@ -68,19 +68,19 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_DoesNotMatchCustomRegex() {
-        final SOURCE = """
+        final SOURCE = '''
             package mypackage.base.domain
             class _MyClass { }
-        """
+        '''
         rule.regex = /z.*/
         assertSingleViolation(SOURCE, null, null, 'mypackage.base.domain')
     }
 
     void testApplyTo_MatchesCustomRegex() {
-        final SOURCE = """
+        final SOURCE = '''
             package zpackage.base.domain
             class _MyClass { }
-        """
+        '''
         rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
@@ -95,18 +95,18 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_PackageNameRequired_MatchesDefaultRegex() {
-        final SOURCE = """
+        final SOURCE = '''
             package mypackage.base.domain
             class _MyClass { }
-        """
+        '''
         rule.packageNameRequired = true
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_PackageNameRequired_NoPackage() {
-        final SOURCE = """
+        final SOURCE = '''
             class MyClass { }
-        """
+        '''
         rule.packageNameRequired = true
         assertSingleViolation(SOURCE, 2, 'MyClass', 'Required package declaration is missing')
     }

@@ -48,7 +48,7 @@ class WaitOutsideOfWhileLoopAstVisitor extends AbstractAstVisitor {
 
     void visitMethodCallExpression(MethodCallExpression call) {
         if (AstUtil.isMethodNamed(call, 'wait', 0) && !withinWhileLoop) {
-            addViolation call, "Only call the wait() method within a while loop. Or better yet, prefer the Java concurrency utilities to wait() and notify()"
+            addViolation call, 'Only call the wait() method within a while loop. Or better yet, prefer the Java concurrency utilities to wait() and notify()'
         }
     }
 

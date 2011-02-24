@@ -40,7 +40,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:"new BigDecimal(123.45)"],
+            [lineNumber:3, sourceLineText:'new BigDecimal(123.45)'],
             [lineNumber:4, sourceLineText:'new java.math.BigDecimal(0.26789d)'],
             [lineNumber:5, sourceLineText:'new BigDecimal(123.45, MathContext.UNLIMITED)'])
     }
@@ -66,7 +66,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
                 def b2 = new BigDecimal(12345678.987654321d)
             }
         '''
-        assertTwoViolations(SOURCE, 2, "def b1 = new java.math.BigDecimal(0.1)", 5, 'def b2 = new BigDecimal(12345678.987654321d)')
+        assertTwoViolations(SOURCE, 2, 'def b1 = new java.math.BigDecimal(0.1)', 5, 'def b2 = new BigDecimal(12345678.987654321d)')
     }
 
     void testApplyTo_BigInteger_NoViolation() {

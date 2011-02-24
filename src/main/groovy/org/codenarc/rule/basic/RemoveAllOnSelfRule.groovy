@@ -36,7 +36,7 @@ class RemoveAllOnSelfAstVisitor extends AbstractAstVisitor {
 
     def void visitMethodCallExpression(MethodCallExpression call) {
 
-        if (isMethodNamed(call, "removeAll") && getArity(call) == 1) {
+        if (isMethodNamed(call, 'removeAll') && getArity(call) == 1) {
             String variableName = call.objectExpression.text
             def argumentName = call.arguments.expressions[0].text
             if (argumentName == variableName) {

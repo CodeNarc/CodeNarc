@@ -42,7 +42,7 @@ class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
                 !statement.expression.isSuperCall() &&
                 !statement.expression.isThisCall() &&
                 !isLastStatementInBlock(statement)) {
-            addViolation(statement, "The instantiated object is not used is not used")
+            addViolation(statement, 'The instantiated object is not used is not used')
         }
         super.visitExpressionStatement(statement)
     }

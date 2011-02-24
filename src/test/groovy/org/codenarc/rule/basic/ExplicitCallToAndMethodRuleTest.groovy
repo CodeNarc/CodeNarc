@@ -28,7 +28,7 @@ class ExplicitCallToAndMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToAndMethod"
+        assert rule.name == 'ExplicitCallToAndMethod'
     }
 
     void testSuccessScenario() {

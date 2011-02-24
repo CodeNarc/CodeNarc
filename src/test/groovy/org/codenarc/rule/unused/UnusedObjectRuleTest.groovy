@@ -28,7 +28,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnusedObject"
+        assert rule.name == 'UnusedObject'
     }
 
     void testApplyTo_ObjectAssigned_NoViolations() {

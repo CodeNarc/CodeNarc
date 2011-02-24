@@ -28,7 +28,7 @@ class ExplicitCallToPowerMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToPowerMethod"
+        assert rule.name == 'ExplicitCallToPowerMethod'
     }
 
     void testSuccessScenario() {

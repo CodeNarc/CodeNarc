@@ -28,7 +28,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "LoggerWithWrongModifiers"
+        assert rule.name == 'LoggerWithWrongModifiers'
     }
 
     void testSuccessScenario() {

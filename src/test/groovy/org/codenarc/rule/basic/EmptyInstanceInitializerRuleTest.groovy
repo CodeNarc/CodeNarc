@@ -28,7 +28,7 @@ class EmptyInstanceInitializerRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "EmptyInstanceInitializer"
+        assert rule.name == 'EmptyInstanceInitializer'
     }
 
     void testSuccessScenario() {

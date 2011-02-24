@@ -28,7 +28,7 @@ class ExplicitCallToRightShiftMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToRightShiftMethod"
+        assert rule.name == 'ExplicitCallToRightShiftMethod'
     }
 
     void testSuccessScenario() {

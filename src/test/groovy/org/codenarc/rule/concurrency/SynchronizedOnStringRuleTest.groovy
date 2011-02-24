@@ -28,7 +28,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "SynchronizedOnString"
+        assert rule.name == 'SynchronizedOnString'
     }
 
     void testSuccessScenario() {

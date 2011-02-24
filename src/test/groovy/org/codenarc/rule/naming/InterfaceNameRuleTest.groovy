@@ -48,25 +48,25 @@ class InterfaceNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_DoesNotMatchRegex() {
-        final SOURCE = " interface MyInterface { } "
+        final SOURCE = ' interface MyInterface { } '
         rule.regex = /z.*/
         assertSingleViolation(SOURCE, 1, 'interface MyInterface')
     }
 
     void testApplyTo_MatchesRegex() {
-        final SOURCE = " interface zClass { } "
+        final SOURCE = ' interface zClass { } '
         rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NonInterfaceClass() {
-        final SOURCE = " class nonInterfaceClass { } "
+        final SOURCE = ' class nonInterfaceClass { } '
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_Interface() {
-        final SOURCE = "abstract class abstractClass { }"
+        final SOURCE = 'abstract class abstractClass { }'
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }

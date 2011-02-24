@@ -28,7 +28,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "BooleanMethodReturnsNull"
+        assert rule.name == 'BooleanMethodReturnsNull'
     }
 
     void testSuccessScenario() {

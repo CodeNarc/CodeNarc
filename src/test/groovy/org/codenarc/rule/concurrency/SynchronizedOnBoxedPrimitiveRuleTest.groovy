@@ -28,7 +28,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "SynchronizedOnBoxedPrimitive"
+        assert rule.name == 'SynchronizedOnBoxedPrimitive'
     }
 
     void testSuccessScenario() {

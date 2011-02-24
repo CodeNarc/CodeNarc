@@ -28,7 +28,7 @@ class UnnecessaryBigIntegerInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryBigIntegerInstantiation"
+        assert rule.name == 'UnnecessaryBigIntegerInstantiation'
     }
 
     void testSuccessScenario() {

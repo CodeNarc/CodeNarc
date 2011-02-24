@@ -43,7 +43,7 @@ class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
         // is this class a Clonable?
         def cloneableClassNode = ClassHelper.make(Cloneable)
         def isCloneable = node.interfaces.find {
-            it == cloneableClassNode || it.name == "Cloneable"
+            it == cloneableClassNode || it.name == 'Cloneable'
         }
         if (isCloneable) {
             if (!hasCloneMethod) {
@@ -55,7 +55,7 @@ class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
 
     protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
         // is this method a clone method?
-        if ((node.name == "clone") && (!node.parameters)) {
+        if ((node.name == 'clone') && (!node.parameters)) {
             hasCloneMethod = true
         }
         super.visitConstructorOrMethodEx(node, isConstructor)

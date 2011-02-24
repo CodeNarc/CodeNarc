@@ -55,14 +55,14 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
         rule.applyToClassNames = 'OtherClass,SomeTest,MyClass'
         assertSingleViolation(SOURCE)
 
-        rule.applyToClassNames = "XXX"
+        rule.applyToClassNames = 'XXX'
         assertNoViolations(SOURCE)
     }
 
     void testApplyToClassNames_Wildcards() {
         rule.applyToClassNames = 'My*'
         assertSingleViolation(SOURCE)
-        rule.applyToClassNames = "MyTest??"
+        rule.applyToClassNames = 'MyTest??'
         assertNoViolations(SOURCE)
     }
 
@@ -90,7 +90,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     }
 
     void testDoNotApplyToClassNames() {
-        rule.doNotApplyToClassNames = "OtherClass"
+        rule.doNotApplyToClassNames = 'OtherClass'
         assertSingleViolation(SOURCE)
 
         rule.doNotApplyToClassNames = 'OtherClass,MyClass,SomeTest'
@@ -101,10 +101,10 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     }
 
     void testDoNotApplyToClassNames_Wildcards() {
-        rule.doNotApplyToClassNames = "My??Test"
+        rule.doNotApplyToClassNames = 'My??Test'
         assertSingleViolation(SOURCE)
 
-        rule.doNotApplyToClassNames = "My??Test,OtherTest"
+        rule.doNotApplyToClassNames = 'My??Test,OtherTest'
         assertSingleViolation(SOURCE)
 
         rule.doNotApplyToClassNames = 'M*Cl?ss'
@@ -157,16 +157,16 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
         rule.doNotApplyToClassNames = 'MyClass'    // doNotApply = YES
         assertNoViolations(SOURCE)
 
-        rule.applyToClassNames = "Xxx"             // apply = NO
+        rule.applyToClassNames = 'Xxx'             // apply = NO
         rule.doNotApplyToClassNames = 'MyClass'    // doNotApply = YES
         assertNoViolations(SOURCE)
 
         rule.applyToClassNames = 'MyClass'         // apply = YES
-        rule.doNotApplyToClassNames = "Xxx"        // doNotApply = NO
+        rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO
         assertSingleViolation(SOURCE)
 
-        rule.applyToClassNames = "Xxx"             // apply = NO
-        rule.doNotApplyToClassNames = "Xxx"        // doNotApply = NO
+        rule.applyToClassNames = 'Xxx'             // apply = NO
+        rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO
         assertNoViolations(SOURCE)
     }
 

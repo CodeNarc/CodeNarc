@@ -82,7 +82,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertTwoViolations(SOURCE, 3, "def mySession = session", 6, 'println "amount=${session.amount}"')
+        assertTwoViolations(SOURCE, 3, 'def mySession = session', 6, 'println "amount=${session.amount}"')
     }
 
     void testApplyTo_ReferenceWithinTagLib() {

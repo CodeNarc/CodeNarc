@@ -149,7 +149,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, "assertNull(false)")
+        assertSingleViolation(SOURCE, 4, 'assertNull(false)')
     }
 
     void testApplyTo_AssertNull_NonConstant() {

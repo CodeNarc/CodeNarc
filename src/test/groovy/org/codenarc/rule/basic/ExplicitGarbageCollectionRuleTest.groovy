@@ -28,7 +28,7 @@ class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitGarbageCollection"
+        assert rule.name == 'ExplicitGarbageCollection'
     }
 
     void testSuccessScenario() {

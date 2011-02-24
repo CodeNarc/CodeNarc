@@ -28,7 +28,7 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == "UnnecessaryReturnKeyword"
+        assert rule.name == 'UnnecessaryReturnKeyword'
     }
 
     void testSuccessScenario() {

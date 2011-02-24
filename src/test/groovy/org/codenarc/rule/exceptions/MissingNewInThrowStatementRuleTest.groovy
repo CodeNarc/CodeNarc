@@ -28,7 +28,7 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "MissingNewInThrowStatement"
+        assert rule.name == 'MissingNewInThrowStatement'
     }
 
     void testSuccessScenario() {

@@ -28,7 +28,7 @@ class CoupledTestCaseRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "CoupledTestCase"
+        assert rule.name == 'CoupledTestCase'
     }
 
     void testSuccessScenario() {

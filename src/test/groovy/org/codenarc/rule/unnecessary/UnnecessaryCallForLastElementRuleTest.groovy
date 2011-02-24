@@ -28,7 +28,7 @@ class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryCallForLastElement"
+        assert rule.name == 'UnnecessaryCallForLastElement'
     }
 
     void testSuccessScenario() {

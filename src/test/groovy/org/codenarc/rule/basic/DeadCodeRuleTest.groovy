@@ -28,7 +28,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "DeadCode"
+        assert rule.name == 'DeadCode'
     }
 
     void testSuccessScenario() {

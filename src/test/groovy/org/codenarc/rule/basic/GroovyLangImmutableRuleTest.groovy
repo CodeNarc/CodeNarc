@@ -28,7 +28,7 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "GroovyLangImmutable"
+        assert rule.name == 'GroovyLangImmutable'
     }
 
     void testSuccessScenario1() {

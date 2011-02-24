@@ -28,7 +28,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ThreadGroup"
+        assert rule.name == 'ThreadGroup'
     }
 
     void testSuccessScenario() {

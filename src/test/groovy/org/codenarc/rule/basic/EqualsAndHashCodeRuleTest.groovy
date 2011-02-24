@@ -39,7 +39,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 2, "class MyClass {")
+        assertSingleViolation(SOURCE, 2, 'class MyClass {')
     }
 
     void testApplyTo_HashCodeButNoEquals() {
@@ -50,7 +50,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 2, "class MyClass {")
+        assertSingleViolation(SOURCE, 2, 'class MyClass {')
     }
 
     void testApplyTo_BothEqualsAndHashCode() {

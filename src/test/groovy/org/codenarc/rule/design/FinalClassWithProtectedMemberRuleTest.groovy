@@ -28,7 +28,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "FinalClassWithProtectedMember"
+        assert rule.name == 'FinalClassWithProtectedMember'
     }
 
     void testSuccessScenario() {

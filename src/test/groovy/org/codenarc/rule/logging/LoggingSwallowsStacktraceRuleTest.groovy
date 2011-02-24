@@ -28,7 +28,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "LoggingSwallowsStacktrace"
+        assert rule.name == 'LoggingSwallowsStacktrace'
     }
 
     void testSuccessScenario() {

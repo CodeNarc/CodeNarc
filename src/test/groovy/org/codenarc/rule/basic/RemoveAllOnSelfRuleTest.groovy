@@ -28,7 +28,7 @@ class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "RemoveAllOnSelf"
+        assert rule.name == 'RemoveAllOnSelf'
     }
 
     void testNoViolations() {

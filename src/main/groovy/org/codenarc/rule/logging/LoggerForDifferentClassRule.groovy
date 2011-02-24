@@ -65,7 +65,7 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
     }
 
     private static boolean isEqualToCurrentClass(String argText, classNameWithoutPackage) {
-        return (argText == classNameWithoutPackage) || (argText == classNameWithoutPackage + ".class")
+        return (argText == classNameWithoutPackage) || (argText == classNameWithoutPackage + '.class')
     }
 
     private static boolean isEqualToCurrentClassName(String argText, classNameWithoutPackage) {

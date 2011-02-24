@@ -28,7 +28,7 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "DoubleCheckedLocking"
+        assert rule.name == 'DoubleCheckedLocking'
     }
 
     void testSuccessScenario() {

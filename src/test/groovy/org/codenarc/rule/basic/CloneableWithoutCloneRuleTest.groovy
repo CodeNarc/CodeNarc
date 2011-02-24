@@ -59,7 +59,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
                 }
             } '''
 
-        assertSingleViolation SOURCE, 2, "class CloneableWithoutCloneRuleClass2 implements Cloneable"
+        assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass2 implements Cloneable'
     }
 
     void testClonableWithMisnamedCloneWithPath() {
@@ -69,7 +69,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
                 }
             } '''
 
-        assertSingleViolation SOURCE, 2, "class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable"
+        assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable'
     }
 
     void testClonableWithParameters() {
@@ -79,7 +79,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
                 }
             } '''
 
-        assertSingleViolation SOURCE, 2, "class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable"
+        assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable'
     }
 
     void testClonableWithMissingClone() {
@@ -87,7 +87,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
             class CloneableWithoutCloneRuleClass4 implements Cloneable {
             } '''
 
-        assertSingleViolation SOURCE, 2, "class CloneableWithoutCloneRuleClass4 implements Cloneable "
+        assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass4 implements Cloneable '
     }
 
 

@@ -64,7 +64,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 }
           }
         '''
-        assertTwoViolations(SOURCE, 4, 'int count = 23', 6, "String other")
+        assertTwoViolations(SOURCE, 4, 'int count = 23', 6, 'String other')
     }
 
     void testApplyTo_AllVariablesUsed() {

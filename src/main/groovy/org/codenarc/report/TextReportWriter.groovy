@@ -42,7 +42,7 @@ class TextReportWriter extends AbstractReportWriter {
     }
 
     private void writeTitle(Writer writer) {
-        def titleString = "CodeNarc Report" + (title ? ": " + title : '') + " - " + getFormattedTimestamp()
+        def titleString = 'CodeNarc Report' + (title ? ': ' + title : '') + ' - ' + getFormattedTimestamp()
         writer.println(titleString)
     }
 
@@ -70,7 +70,7 @@ class TextReportWriter extends AbstractReportWriter {
     private void writeFileViolations(Writer writer, FileResults results) {
         if (results.violations) {
             writer.println()
-            writer.println("File: " + results.path)
+            writer.println('File: ' + results.path)
             def sortedViolations = results.violations.sort { violation -> violation.rule.priority }
             sortedViolations.each { violation ->
                 writeViolation(writer, violation)

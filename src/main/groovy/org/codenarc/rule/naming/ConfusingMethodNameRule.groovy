@@ -56,8 +56,8 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         String methodNameWithParameters = node.name.toLowerCase() + parameterInfo
 
         if (lowercaseClosureNames.contains(methodName)) {
-            parent.addViolation(node, "Found very confusing method name. " +
-                    "Conflicts with a similar closure name. " +
+            parent.addViolation(node, 'Found very confusing method name. ' +
+                    'Conflicts with a similar closure name. ' +
                     "Found method : $node.name $parameterInfo")
         } else if (lowercaseMethodNamesWithParameterTypes.contains(methodNameWithParameters)) {
             parent.addViolation(node, "Found very confusing method name: $node.name $parameterInfo")

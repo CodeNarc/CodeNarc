@@ -28,7 +28,7 @@ class BusyWaitRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "BusyWait"
+        assert rule.name == 'BusyWait'
     }
 
     void testSuccessScenario() {

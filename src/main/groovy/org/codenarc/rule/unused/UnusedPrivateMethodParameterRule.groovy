@@ -15,49 +15,79 @@
  */
 package org.codenarc.rule.unused
 
-import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.MethodNode
+import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.*
 
 /**
  * Rule that checks for parameters to private methods that are not referenced within the method body.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class UnusedPrivateMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateMethodParameter'
     int priority = 2
-    Class astVisitorClass = UnusedPrivateMethodParameterAstVisitor
+
+    void applyTo(SourceCode sourceCode, List violations) {
+        // If AST is null, skip this source code
+        def ast = sourceCode.ast
+        if (ast) {
+            ast.classes.each { classNode ->
+
+                if (shouldApplyThisRuleTo(classNode)) {
+                    def visitor = new UnusedPrivateMethodParameterAstVisitor(classes: ast.classes)
+                    visitor.rule = this
+                    visitor.sourceCode = sourceCode
+                    visitor.visitClass(classNode)
+                    violations.addAll(visitor.violations)
+                }
+            }
+        }
+    }
 }
 
 class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
 
-    private unusedParameterNames = []
+    List<ClassNode> classes
 
     void visitMethodEx(MethodNode node) {
-        def isPrivate = node.modifiers & FieldNode.ACC_PRIVATE
-        if (isPrivate) {
-            unusedParameterNames = node.parameters*.name
-            super.visitMethodEx(node)
+
+        if (Modifier.isPrivate(node.modifiers)) {
+            def unusedParameterNames = node.parameters*.name
+            def collector = new ReferenceCollector()
+            collector.visitMethod(node)
+            getAnonymousClasses().each { ClassNode it ->
+                it.visitContents(collector)
+            }
+            unusedParameterNames.removeAll(collector.references)
+            unusedParameterNames.each { parameterName ->
+                addViolation(node, "Method parameter [$parameterName] is never referenced")
+            }
         }
     }
 
-    protected void visitMethodComplete(MethodNode node) {
-        unusedParameterNames.each { parameterName ->
-            addViolation(node, "Method parameter [$parameterName] is never referenced")
+    private List<ClassNode> getAnonymousClasses() {
+        classes.findAll{
+            it instanceof InnerClassNode && it.anonymous
         }
-        unusedParameterNames.clear()
-        super.visitMethodComplete(node)
     }
+}
+
+class ReferenceCollector extends ClassCodeVisitorSupport {
+
+    def references = [] as Set
 
     void visitVariableExpression(VariableExpression expression) {
-        removeUnusedParameterName(expression.name)
+        references.add(expression.name)
     }
 
     void visitMethodCallExpression(MethodCallExpression call) {
@@ -67,12 +97,13 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
         //          println closure()
         //      }
         if (AstUtil.isMethodCallOnObject(call, 'this') && call.method instanceof ConstantExpression) {
-            removeUnusedParameterName(call.method.value)
+            references.add(call.method.value)
         }
         super.visitMethodCallExpression(call)
     }
 
-    private void removeUnusedParameterName(String name) {
-        unusedParameterNames.remove(name)
+    @Override
+    SourceUnit getSourceUnit() {
+        throw new UnsupportedOperationException()
     }
 }

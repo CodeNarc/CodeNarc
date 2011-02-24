@@ -63,7 +63,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ImplementationAsType"
+        assert rule.name == 'ImplementationAsType'
     }
 
     void testApplyTo_Parameters_NoViolations() {
@@ -137,14 +137,14 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     }
 
     void testApplyTo_MultipleVariables_Violations() {
-        final SOURCE = """
+        final SOURCE = '''
             def myMethod() {
                 def (LinkedList v1, Vector v2) = [null, null]
             }
-            """
+            '''
         assertViolations(SOURCE,
-            [lineNumber: 3, sourceLineText:"LinkedList v1"],
-            [lineNumber: 3, sourceLineText:"Vector v2"])
+            [lineNumber: 3, sourceLineText:'LinkedList v1'],
+            [lineNumber: 3, sourceLineText:'Vector v2'])
     }
 
     void testApplyTo_FieldTypes_Violations() {

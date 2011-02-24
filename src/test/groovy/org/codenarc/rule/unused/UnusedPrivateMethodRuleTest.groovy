@@ -31,20 +31,19 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnusedPrivateMethod'
     }
 
-    // todo: reenable and fix
-    // void testAnonymousInnerClassAsField() {
-    //     final SOURCE = '''
-    //         class MyClass {
-    //             private static def methodWithParameters(a,b) { a >> b }
-    //
-    //             def x = new Class() {
-    //                 def call() {
-    //                     methodWithParameters(10,1)
-    //                 }
-    //             }
-    //         } '''
-    //     assertNoViolations SOURCE
-    // }
+     void testAnonymousInnerClassAsField() {
+         final SOURCE = '''
+             class MyClass {
+                 private static def methodWithParameters(a,b) { a >> b }
+
+                 def x = new Class() {
+                     def call() {
+                         methodWithParameters(10,1)
+                     }
+                 }
+             } '''
+         assertNoViolations SOURCE
+     }
 
     void testClosureAsField() {
         final SOURCE = '''
@@ -58,22 +57,21 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
-    // todo: reenable and fix
-    //void testAnonymousInnerClassAsLocalVariable() {
-    //    final SOURCE = '''
-    //        class MyClass {
-    //            private static def methodWithParameters(a,b) { a >> b }
-    //
-    //            def myMethod() {
-    //                return new Class() {
-    //                    def call() {
-    //                        methodWithParameters(10,1)
-    //                    }
-    //                }
-    //            }
-    //        } '''
-    //    assertNoViolations SOURCE
-    //}
+    void testAnonymousInnerClassAsLocalVariable() {
+        final SOURCE = '''
+            class MyClass {
+                private static def methodWithParameters(a,b) { a >> b }
+
+                def myMethod() {
+                    return new Class() {
+                        def call() {
+                            methodWithParameters(10,1)
+                        }
+                    }
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
 
     void testClosureAsLocalVariable() {
         final SOURCE = '''
@@ -87,20 +85,19 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
-    // todo: reenable and fix
-    //void testInnerClass() {
-    //    final SOURCE = '''
-    //        class MyClass {
-    //            private static def methodWithParameters(a,b) { a >> b }
-    //
-    //            class MyInnerClass {
-    //                def call() {
-    //                    methodWithParameters(10,1)
-    //                }
-    //            }
-    //        } '''
-    //    assertNoViolations SOURCE
-    //}
+    void testInnerClass() {
+        final SOURCE = '''
+            class MyClass {
+                private static def methodWithParameters(a,b) { a >> b }
+
+                class MyInnerClass {
+                    def call() {
+                        methodWithParameters(10,1)
+                    }
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
 
     void testApplyTo_SingleUnusedPrivateMethod() {
         final SOURCE = '''
@@ -108,7 +105,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 private int countStuff() { }
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'private int countStuff() { }')
+        assertSingleViolation(SOURCE, 3, 'private int countStuff() { }', 'The method countStuff is not used within the class')
     }
 
     void testApplyTo_MultipleUnusedPrivateMethods() {
@@ -122,7 +119,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 }
           }
         '''
-        assertTwoViolations(SOURCE, 3, 'private int countStuff() { }', 6, "private static String buildName(int count) {")
+        assertTwoViolations(SOURCE, 3, 'private int countStuff() { }', 6, 'private static String buildName(int count) {')
     }
 
     void testApplyTo_PrivateConstructor_NotUsed() {

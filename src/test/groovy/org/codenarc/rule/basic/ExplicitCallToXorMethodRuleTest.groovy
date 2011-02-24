@@ -28,7 +28,7 @@ class ExplicitCallToXorMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToXorMethod"
+        assert rule.name == 'ExplicitCallToXorMethod'
     }
 
     void testSuccessScenario() {

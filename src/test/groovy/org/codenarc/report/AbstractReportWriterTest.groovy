@@ -51,7 +51,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
 
     void testWriteReport_WritesToStandardOut_IfWriteToStandardOutIsTrue_String() {
         reportWriter.outputFile = CUSTOM_FILENAME
-        reportWriter.writeToStandardOut = "true"
+        reportWriter.writeToStandardOut = 'true'
         def output = captureSystemOut {
             reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         }
@@ -78,7 +78,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
 
     void testWriteReport_WritesToOutputFile_IfWriteToStandardOutIsNotTrue() {
         reportWriter.outputFile = CUSTOM_FILENAME
-        reportWriter.writeToStandardOut = "false"
+        reportWriter.writeToStandardOut = 'false'
         reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         assertOutputFile(CUSTOM_FILENAME)
     }

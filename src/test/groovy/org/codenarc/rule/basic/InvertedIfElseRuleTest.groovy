@@ -28,7 +28,7 @@ class InvertedIfElseRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "InvertedIfElse"
+        assert rule.name == 'InvertedIfElse'
     }
 
     void testSuccessScenario() {

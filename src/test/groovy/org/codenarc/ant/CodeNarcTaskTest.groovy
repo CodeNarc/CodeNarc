@@ -184,7 +184,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     }
 
     void testAddConfiguredReport_ReportOptionsSetPropertiesOnReportWriter() {
-        def report = createReport("html", [title:'abc', outputFile:'def'])
+        def report = createReport('html', [title:'abc', outputFile:'def'])
         codeNarcTask.addConfiguredReport(report)
         log(codeNarcTask.reportWriters)
         assert codeNarcTask.reportWriters[0].title == 'abc'

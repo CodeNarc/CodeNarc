@@ -109,13 +109,13 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         rule.applyToFileNames = FILENAME
         assertSingleViolation(SOURCE)
 
-        rule.applyToFileNames = "Xxx.groovy"
+        rule.applyToFileNames = 'Xxx.groovy'
         assertNoViolations(SOURCE)
 
         rule.applyToFileNames = 'My*.groovy'
         assertSingleViolation(SOURCE)
 
-        rule.applyToFileNames = "MyTest??.groovy"
+        rule.applyToFileNames = 'MyTest??.groovy'
         assertNoViolations(SOURCE)
     }
 
@@ -132,21 +132,21 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         rule.applyToFileNames = '**org/*/My*.groovy'
         assertSingleViolation(SOURCE)
 
-        rule.applyToFileNames = "other/**/MyTest.groovy"
+        rule.applyToFileNames = 'other/**/MyTest.groovy'
         assertNoViolations(SOURCE)
 
-        rule.applyToFileNames = "org/codenarc/MyOtherTest.groovy"
+        rule.applyToFileNames = 'org/codenarc/MyOtherTest.groovy'
         assertNoViolations(SOURCE)
     }
 
     void testDoNotApplyToFileNames_FilenameOnly() {
-        rule.doNotApplyToFileNames = "Xxx.groovy"
+        rule.doNotApplyToFileNames = 'Xxx.groovy'
         assertSingleViolation(SOURCE)
 
         rule.doNotApplyToFileNames = FILENAME
         assertNoViolations(SOURCE)
 
-        rule.doNotApplyToFileNames = "MyTest??.groovy"
+        rule.doNotApplyToFileNames = 'MyTest??.groovy'
         assertSingleViolation(SOURCE)
 
         rule.doNotApplyToFileNames = 'My*.gr*'
@@ -154,7 +154,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     void testDoNotApplyToFileNames_WithPath() {
-        rule.doNotApplyToFileNames = "org/codenarc/Xxx.groovy"
+        rule.doNotApplyToFileNames = 'org/codenarc/Xxx.groovy'
         assertSingleViolation(SOURCE)
 
         rule.doNotApplyToFileNames = PATH
@@ -163,7 +163,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         rule.doNotApplyToFileNames = 'org/code*rc/MyT??t.groovy' 
         assertNoViolations(SOURCE)
 
-        rule.doNotApplyToFileNames = "*/codenarc/MyOtherTest.groovy"
+        rule.doNotApplyToFileNames = '*/codenarc/MyOtherTest.groovy'
         assertSingleViolation(SOURCE)
 
         rule.doNotApplyToFileNames = '**/codenarc/My*.gr*'
@@ -175,16 +175,16 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         rule.doNotApplyToFileNames = FILENAME        // doNotApply = YES
         assertNoViolations(SOURCE)
 
-        rule.applyToFileNames = "Xxx.groovy"         // apply = NO
+        rule.applyToFileNames = 'Xxx.groovy'         // apply = NO
         rule.doNotApplyToFileNames = FILENAME        // doNotApply = YES
         assertNoViolations(SOURCE)
 
         rule.applyToFileNames = FILENAME             // apply = YES
-        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply = NO
+        rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO
         assertSingleViolation(SOURCE)
 
-        rule.applyToFileNames = "Xxx.groovy"         // apply = NO
-        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply = NO
+        rule.applyToFileNames = 'Xxx.groovy'         // apply = NO
+        rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO
         assertNoViolations(SOURCE)
     }
 
@@ -193,14 +193,14 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
         assertNoViolations(SOURCE)
 
-        rule.applyToFileNames = "Xxx.groovy"         // apply filename = NO
+        rule.applyToFileNames = 'Xxx.groovy'         // apply filename = NO
         rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
         assertNoViolations(SOURCE)
     }
 
     void testApplyToFilesMatchingAndDoNotApplyToFileNames() {
         rule.applyToFilesMatching = MATCH            // apply regex = YES
-        rule.doNotApplyToFileNames = "Xxx.groovy"    // doNotApply filename = NO
+        rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply filename = NO
         assertSingleViolation(SOURCE)
 
         rule.applyToFilesMatching = NO_MATCH         // apply regex = NO
@@ -233,7 +233,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     void testCreateViolation() {
-        def v = rule.createViolation(23, "src", "msg")
+        def v = rule.createViolation(23, 'src', 'msg')
         assert v.lineNumber == 23
         assert v.sourceLine == 'src'
         assert v.message == 'msg'

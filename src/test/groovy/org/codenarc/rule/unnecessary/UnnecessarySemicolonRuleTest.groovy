@@ -28,7 +28,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessarySemicolon"
+        assert rule.name == 'UnnecessarySemicolon'
     }
 
     @SuppressWarnings('UnnecessarySemicolon')

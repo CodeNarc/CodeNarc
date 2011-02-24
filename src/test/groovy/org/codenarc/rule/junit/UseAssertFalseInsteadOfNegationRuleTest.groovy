@@ -28,7 +28,7 @@ class UseAssertFalseInsteadOfNegationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UseAssertFalseInsteadOfNegation"
+        assert rule.name == 'UseAssertFalseInsteadOfNegation'
     }
 
     void testSuccessScenario() {

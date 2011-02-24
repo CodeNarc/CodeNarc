@@ -28,7 +28,7 @@ class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToModMethod"
+        assert rule.name == 'ExplicitCallToModMethod'
     }
 
     void testSuccessScenario() {

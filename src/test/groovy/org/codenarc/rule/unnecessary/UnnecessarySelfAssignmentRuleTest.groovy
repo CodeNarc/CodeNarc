@@ -28,7 +28,7 @@ class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessarySelfAssignment"
+        assert rule.name == 'UnnecessarySelfAssignment'
     }
 
     void testSuccessScenario() {

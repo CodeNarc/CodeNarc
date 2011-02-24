@@ -34,10 +34,10 @@ import groovy.text.SimpleTemplateEngine
  */
 abstract class AbstractReportWriter implements ReportWriter {
 
-    protected static final BASE_MESSAGES_BUNDLE = "codenarc-base-messages"
-    protected static final CUSTOM_MESSAGES_BUNDLE = "codenarc-messages"
+    protected static final BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
+    protected static final CUSTOM_MESSAGES_BUNDLE = 'codenarc-messages'
     protected static final VERSION_FILE = 'codenarc-version.txt'
-    protected static final CODENARC_URL = "http://www.codenarc.org"
+    protected static final CODENARC_URL = 'http://www.codenarc.org'
 
     String outputFile
     Object writeToStandardOut

@@ -37,7 +37,19 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
                 private void myMethod(int value) { }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'private void myMethod(int value) { }', 'value')
+        assertSingleViolation(SOURCE, 3, 'private void myMethod(int value) { }', 'Method parameter [value] is never referenced')
+    }
+
+    void testApplyTo_SingleUnusedPrivateMethodParameterSuspiciousReferenceInAnonymousClass() {
+        final SOURCE = '''
+            class MyClass {
+                private void myMethod(int value) { }
+
+                // this is NOT a reference, but the AST does not have enough information for this
+                def x = new Object() { def y = value  }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_MultipleUnusedParametersForSinglePrivateMethod() {
@@ -66,11 +78,21 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
 
    void testApplyTo_AllParametersUsed() {
         final SOURCE = '''
-          class MyClass {
-              private String myMethod1(String id, int value) { doSomething(value); return id }
-              private void myMethod2(int value) { def x = value }
-              private def myMethod3(Date startDate) { return "${startDate}" }
-          }
+            class MyClass {
+                private String myMethod1(String id, int value) { doSomething(value); return id }
+                private void myMethod2(int value) { def x = value }
+                private def myMethod3(Date startDate) { return "${startDate}" }
+                private def myMethod4(Date startDate) {
+                    return new Object() {
+                        def x = startDate
+                    }
+                }
+                private def myMethod5(Date startDate) {
+                    return new Object() {
+                        String toString() { return startDate }
+                    }
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }

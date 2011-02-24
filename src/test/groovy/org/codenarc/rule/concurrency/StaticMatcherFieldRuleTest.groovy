@@ -28,7 +28,7 @@ class StaticMatcherFieldRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "StaticMatcherField"
+        assert rule.name == 'StaticMatcherField'
     }
 
     void testSuccessScenario() {

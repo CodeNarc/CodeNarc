@@ -29,7 +29,7 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == "UseAssertEqualsInsteadOfAssertTrue"
+        assert rule.name == 'UseAssertEqualsInsteadOfAssertTrue'
     }
 
     void testSuccessScenario() {

@@ -28,7 +28,7 @@ class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ConsecutiveLiteralAppends"
+        assert rule.name == 'ConsecutiveLiteralAppends'
     }
 
     void testSuccessScenario() {

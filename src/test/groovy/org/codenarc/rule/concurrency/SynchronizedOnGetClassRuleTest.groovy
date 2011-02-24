@@ -28,7 +28,7 @@ class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "SynchronizedOnGetClass"
+        assert rule.name == 'SynchronizedOnGetClass'
     }
 
 

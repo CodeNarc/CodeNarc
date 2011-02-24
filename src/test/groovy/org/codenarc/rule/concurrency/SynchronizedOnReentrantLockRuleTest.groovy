@@ -28,7 +28,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "SynchronizedOnReentrantLock"
+        assert rule.name == 'SynchronizedOnReentrantLock'
     }
 
     void testSuccessScenario() {

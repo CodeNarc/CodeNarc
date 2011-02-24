@@ -29,7 +29,7 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitTreeSetInstantiation"
+        assert rule.name == 'ExplicitTreeSetInstantiation'
     }
 
     void testSuccessScenario() {

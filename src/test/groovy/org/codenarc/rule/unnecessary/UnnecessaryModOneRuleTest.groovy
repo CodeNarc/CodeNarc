@@ -28,7 +28,7 @@ class UnnecessaryModOneRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryModOne"
+        assert rule.name == 'UnnecessaryModOne'
     }
 
     void testSuccessScenario() {
@@ -45,8 +45,8 @@ class UnnecessaryModOneRuleTest extends AbstractRuleTestCase {
             if (method() % 1) {}    // violation
         '''
         assertTwoViolations(SOURCE,
-                2, '(exp % 1)', "(exp % 1) is guaranteed to be zero. Did you mean (exp & 1) or (exp % 2)",
-                3, '(method() % 1)', "(this.method() % 1) is guaranteed to be zero. Did you mean (this.method() & 1) or (this.method() % 2)")
+                2, '(exp % 1)', '(exp % 1) is guaranteed to be zero. Did you mean (exp & 1) or (exp % 2)',
+                3, '(method() % 1)', '(this.method() % 1) is guaranteed to be zero. Did you mean (this.method() & 1) or (this.method() % 2)')
     }
 
     protected Rule createRule() {

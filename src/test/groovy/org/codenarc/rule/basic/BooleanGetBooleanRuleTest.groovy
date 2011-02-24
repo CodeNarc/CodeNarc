@@ -28,7 +28,7 @@ class BooleanGetBooleanRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "BooleanGetBoolean"
+        assert rule.name == 'BooleanGetBoolean'
     }
 
     void testSuccessScenario() {

@@ -28,7 +28,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "GStringAsMapKey"
+        assert rule.name == 'GStringAsMapKey'
     }
 
     void testSimpleMapIsOK() {

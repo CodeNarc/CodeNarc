@@ -184,7 +184,7 @@ actual:               $violation.sourceLine
 """
         }
         if (messageText) {
-            assert violation.message, "The violation message was null"
+            assert violation.message, 'The violation message was null'
             if (messageText instanceof Collection) {
                 assertContainsAll(violation.message, messageText)
             }

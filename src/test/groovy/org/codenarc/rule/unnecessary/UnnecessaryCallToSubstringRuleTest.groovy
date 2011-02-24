@@ -28,7 +28,7 @@ class UnnecessaryCallToSubstringRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryCallToSubstring"
+        assert rule.name == 'UnnecessaryCallToSubstring'
     }
 
     void testSuccessScenario() {

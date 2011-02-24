@@ -28,7 +28,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryPublicModifier"
+        assert rule.name == 'UnnecessaryPublicModifier'
     }
 
     void testSuccessScenario() {

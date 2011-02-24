@@ -28,7 +28,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "DuplicateNumberLiteral"
+        assert rule.name == 'DuplicateNumberLiteral'
     }
 
     void testSuccessScenario() {
@@ -68,28 +68,28 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
         	println 123
         	println 123
         '''
-        assertTwoViolations(SOURCE, 3, "println 123", 4, "println 123")
+        assertTwoViolations(SOURCE, 3, 'println 123', 4, 'println 123')
     }
 
     void testMethodCall() {
         final SOURCE = '''
         	println 123, 123, 123
         '''
-        assertTwoViolations(SOURCE, 2, "println 123, 123, 123", 2, "println 123, 123, 123")
+        assertTwoViolations(SOURCE, 2, 'println 123, 123, 123', 2, 'println 123, 123, 123')
     }
 
     void testInAList() {
         final SOURCE = '''
         	def x = [3, 11.783, 3]
         '''
-        assertSingleViolation(SOURCE, 2, "def x = [3, 11.783, 3]")
+        assertSingleViolation(SOURCE, 2, 'def x = [3, 11.783, 3]')
     }
 
     void testInAMap() {
         final SOURCE = '''
         	def y = [x: -99, y: -99]
         '''
-        assertSingleViolation(SOURCE, 2, "def y = [x: -99, y: -99]")        
+        assertSingleViolation(SOURCE, 2, 'def y = [x: -99, y: -99]')
     }
 
     void testInDeclarations() {
@@ -99,7 +99,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
             x = 11.783
             y = 11.783
         '''
-        assertTwoViolations(SOURCE, 3, "def y = 99", 5, "y = 11.783")
+        assertTwoViolations(SOURCE, 3, 'def y = 99', 5, 'y = 11.783')
     }
 
     void testInFields() {
@@ -109,7 +109,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
             	def y = 67890
             }
         '''
-        assertSingleViolation(SOURCE, 4, "def y = 67890")
+        assertSingleViolation(SOURCE, 4, 'def y = 67890')
 
     }
 
@@ -118,14 +118,14 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
             (0.7 == 0.7) ? -5.13 : 'h'
             (0.7 == 12) ? -5.13 : -5.13
         '''
-        assertTwoViolations(SOURCE, 2, "(0.7 == 0.7) ? -5.13 : 'h'", 3, "(0.7 == 12) ? -5.13 : -5.13")        
+        assertTwoViolations(SOURCE, 2, "(0.7 == 0.7) ? -5.13 : 'h'", 3, '(0.7 == 12) ? -5.13 : -5.13')
     }
 
     void testInElvis() {
         final SOURCE = '''
             67890 ?: 67890
         '''
-        assertSingleViolation(SOURCE, 2, "67890 ?: 67890")
+        assertSingleViolation(SOURCE, 2, '67890 ?: 67890')
     }
 
     void testInIf() {
@@ -134,7 +134,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
             else if (y == 67890) return y
             else if (z == 67890) return z
         '''
-        assertTwoViolations(SOURCE, 3, "else if (y == 67890) return y", 4, "else if (z == 67890) return z")
+        assertTwoViolations(SOURCE, 3, 'else if (y == 67890) return y', 4, 'else if (z == 67890) return z')
     }
 
     void testInReturn() {
@@ -142,7 +142,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
         	if (true) return 67890
             else return 67890
         '''
-        assertSingleViolation(SOURCE, 3, "else return 67890")
+        assertSingleViolation(SOURCE, 3, 'else return 67890')
     }
 
     void testInInvocation() {
@@ -150,7 +150,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
         	67890.equals(x)
             67890.equals(y)
         '''
-        assertSingleViolation(SOURCE, 3, "67890.equals(y)")
+        assertSingleViolation(SOURCE, 3, '67890.equals(y)')
     }
 
     void testInNamedArgumentList() {
@@ -158,7 +158,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
         	x(b: 11.783)
             y(a: 11.783)
         '''
-        assertSingleViolation(SOURCE, 3, "y(a: 11.783)")
+        assertSingleViolation(SOURCE, 3, 'y(a: 11.783)')
     }
 
     void testIgnoreNumbers_IgnoresSingleValue() {
@@ -167,7 +167,7 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
             def y = [37, -7, 37]
         '''
         rule.ignoreNumbers = 23
-        assertSingleViolation(SOURCE, 3, "def y = [37, -7, 37]")
+        assertSingleViolation(SOURCE, 3, 'def y = [37, -7, 37]')
     }
 
     void testIgnoreNumbers_IgnoresMultipleValues() {

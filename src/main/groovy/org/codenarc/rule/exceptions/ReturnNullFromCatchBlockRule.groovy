@@ -40,7 +40,7 @@ class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
         def lastStatement = getLastStatement(node)
         if (lastStatement instanceof ReturnStatement) {
             if (AstUtil.isNull(lastStatement.expression)) {
-                addViolation lastStatement, "Do not return null from a catch block"
+                addViolation lastStatement, 'Do not return null from a catch block'
             }
         }
         super.visitCatchStatement node

@@ -29,7 +29,7 @@ class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitStackInstantiation"
+        assert rule.name == 'ExplicitStackInstantiation'
     }
 
     void testSuccessScenario() {

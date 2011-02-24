@@ -33,11 +33,11 @@ class GroovyVersion {
     }
 
     static boolean isGroovy1_7() {
-        getVersion().startsWith("1.7")
+        getVersion().startsWith('1.7')
     }
 
     static boolean isGroovy1_6() {
-        getVersion().startsWith("1.6")
+        getVersion().startsWith('1.6')
     }
 
     private GroovyVersion() { }

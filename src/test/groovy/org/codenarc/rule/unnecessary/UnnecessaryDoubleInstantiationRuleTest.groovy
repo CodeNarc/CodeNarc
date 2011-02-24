@@ -28,7 +28,7 @@ class UnnecessaryDoubleInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryDoubleInstantiation"
+        assert rule.name == 'UnnecessaryDoubleInstantiation'
     }
 
     void testSuccessScenario() {

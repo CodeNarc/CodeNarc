@@ -28,7 +28,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "UnnecessaryObjectReferences"
+        assert rule.name == 'UnnecessaryObjectReferences'
     }
 
     void testSuccessScenario() {

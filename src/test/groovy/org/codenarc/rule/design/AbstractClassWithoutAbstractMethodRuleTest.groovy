@@ -28,7 +28,7 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "AbstractClassWithoutAbstractMethod"
+        assert rule.name == 'AbstractClassWithoutAbstractMethod'
     }
 
     void testSuccessScenario() {

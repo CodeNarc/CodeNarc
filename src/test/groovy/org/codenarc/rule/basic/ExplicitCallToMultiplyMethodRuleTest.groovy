@@ -28,7 +28,7 @@ class ExplicitCallToMultiplyMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ExplicitCallToMultiplyMethod"
+        assert rule.name == 'ExplicitCallToMultiplyMethod'
     }
 
     void testSuccessScenario() {

@@ -28,7 +28,7 @@ class ChainedTestRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == "ChainedTest"
+        assert rule.name == 'ChainedTest'
     }
 
     void testSuccessScenario() {

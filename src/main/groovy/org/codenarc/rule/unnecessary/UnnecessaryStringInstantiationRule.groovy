@@ -43,7 +43,7 @@ class UnnecessaryStringInstantiationAstVisitor extends AbstractConstructorCallAs
     }
 
     @Override protected String getViolationMessage(ConstructorCallExpression call) {
-        "There is typically no need to call the String constructor"
+        'There is typically no need to call the String constructor'
     }
 }
 

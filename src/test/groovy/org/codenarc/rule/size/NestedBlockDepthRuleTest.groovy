@@ -137,7 +137,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         rule.maxNestedBlockDepth = 1
         assertTwoViolations(SOURCE,
                 5, 'while (notReady()) {', '2',
-                12, "if (ready) {", '2')
+                12, 'if (ready) {', '2')
     }
 
     void testNestingDepthExceededForTryOrCatch_CausesAViolation() {
@@ -158,7 +158,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         rule.maxNestedBlockDepth = 1
         assertTwoViolations(SOURCE,
                 5, 'try {', '2',
-                8, "catch(Exception e) {", '2')
+                8, 'catch(Exception e) {', '2')
     }
 
     void testNestingDepthExceededForWhile_CausesAViolation() {

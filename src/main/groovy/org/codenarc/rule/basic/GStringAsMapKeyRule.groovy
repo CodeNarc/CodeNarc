@@ -38,7 +38,7 @@ class GStringAsMapKeyAstVisitor extends AbstractAstVisitor {
 
     def void visitMapEntryExpression(MapEntryExpression expression) {
         if (AstUtil.classNodeImplementsType(expression?.keyExpression?.type, GString)) {
-            addViolation expression, "GString as a key in a map is unsafe"
+            addViolation expression, 'GString as a key in a map is unsafe'
         }
         super.visitMapEntryExpression expression // needed for GStrings in nested keys and values
     }
