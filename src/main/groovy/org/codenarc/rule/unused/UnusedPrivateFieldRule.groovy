@@ -26,9 +26,14 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
+ * <p/>
+ * The <code>ignoreFieldNames</code> property optionally specifies one or more
+ * (comma-separated) field names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
@@ -38,7 +43,7 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateField'
     int priority = 2
     Class astVisitorClass = UnusedPrivateFieldAstVisitor
-    String ignoreRegex = 'serialVersionUID'
+    String ignoreFieldNames = 'serialVersionUID'
 }
 
 @SuppressWarnings('DuplicateLiteral')
@@ -46,10 +51,11 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
     private List<FieldNode> unusedPrivateFields
 
     void visitClassEx(ClassNode classNode) {
+        def wildcardPattern = new WildcardPattern(rule.ignoreFieldNames, false)
         this.unusedPrivateFields = classNode.fields.findAll { fieldNode ->
             def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
             def isNotGenerated = fieldNode.lineNumber != -1
-            def isIgnored = fieldNode.name.matches(rule.ignoreRegex)
+            def isIgnored = wildcardPattern.matches(fieldNode.name)
             isPrivate && isNotGenerated && !isIgnored
         }
         super.visitClassEx(classNode)
@@ -60,6 +66,7 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
             addViolation(unusedPrivateField, "The field $unusedPrivateField.name is not used in the class $classNode.name")
         }
     }
+
     void visitVariableExpression(VariableExpression expression) {
         removeUnusedPrivateField(expression.name)
 

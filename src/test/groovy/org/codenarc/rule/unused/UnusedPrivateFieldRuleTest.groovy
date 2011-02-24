@@ -222,6 +222,18 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreFieldNames() {
+        final SOURCE = '''
+          class MyClass {
+               private field1
+               private int count
+               private field2
+          }
+        '''
+        rule.ignoreFieldNames = 'count, fiel*'
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
