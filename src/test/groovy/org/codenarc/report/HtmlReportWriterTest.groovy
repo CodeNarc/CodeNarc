@@ -46,17 +46,18 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
     private static final HTML_TAG = 'html'
-    private static final BOTTOM_LINK = "<a href='http://www.codenarc.org'>CodeNarc"
+    private static final BOTTOM_LINK = "<a href='http://www.codenarc.org'>Generated with: CodeNarc"
     private static final NEW_REPORT_FILE = 'NewReport.html'
     private static final TITLE = 'My Cool Project'
     private static final BASIC_CONTENTS = [
             HTML_TAG,
             'Report timestamp',
+            BOTTOM_LINK, 
             'Summary by Package', 'Package', 'Total Files', 'Files with Violations', 'Priority 1', 'Priority 2', 'Priority 3',
             'MyAction.groovy', MESSAGE, TRUNCATED_LONG_LINE,
             'MyAction2.groovy',
             'MyActionTest.groovy',
-            BOTTOM_LINK]
+            ]
 
     private reportWriter
     private analysisContext
@@ -64,26 +65,24 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private ruleSet
 
     void testWriteReport() {
-        final CONTENTS = [
-                HTML_TAG,
-                'MyAction.groovy', 'RULE1', LINE1, 'RULE1', LINE1, 'RULE2', LINE2, MESSAGE, 'RULE3', LINE3, TRUNCATED_LONG_LINE,
-                'MyAction2.groovy', 'RULE3', LINE3, TRUNCATED_LONG_LINE,
-                'MyActionTest.groovy', 'RULE1', LINE1, 'RULE2', LINE2, MESSAGE,
-                BOTTOM_LINK]
         reportWriter.writeReport(analysisContext, results)
-        def reportText = getReportText()
-        assertContainsAllInOrder(reportText, CONTENTS)
-        assertContainsRuleIds(reportText)
+        def actual = getReportText()
+        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport.html')
+        assert actual
+        assert expected
+        assert actual == expected.text
     }
 
     void testWriteReport_Priority4() {
         VIOLATION1.rule.name = 'RULE4'
         VIOLATION1.rule.priority = 4
-        final CONTENTS = [HTML_TAG, 'MyActionTest.groovy', 'RULE2', 2, LINE2, MESSAGE, 'RULE4', 4, LINE1, BOTTOM_LINK]
         reportWriter.writeReport(analysisContext, results)
-        def reportText = getReportText()
-        assertContainsAllInOrder(reportText, CONTENTS)
-        assertContainsRuleIds(reportText)
+        def actual = getReportText()
+
+        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_Priority4.html')
+        assert actual
+        assert expected
+        assert actual == expected.text
     }
 
     void testWriteReport_NoDescriptionsForRuleIds() {
@@ -197,7 +196,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
 
     void setUp() {
         super.setUp()
-        reportWriter = new HtmlReportWriter()
+        reportWriter = new HtmlReportWriter() 
+        reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
 
         def dirResultsMain = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
         def dirResultsCode = new DirectoryResults(path:'src/main/code', numberOfFilesInThisDirectory:2)
@@ -229,7 +229,6 @@ class HtmlReportWriterTest extends AbstractTestCase {
 
     void tearDown() {
         super.tearDown()
-//        new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).delete()
         new File(NEW_REPORT_FILE).delete()
     }
 

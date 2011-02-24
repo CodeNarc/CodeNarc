@@ -94,11 +94,12 @@ class HtmlReportWriter extends AbstractReportWriter {
         return {
             body {
                 h1(buildTitle())
+                //  out << buildLogo()      TODO: copy the image or inline it in the css
                 out << buildReportTimestamp()
+                out << buildVersionFooter()
                 out << buildSummaryByPackage(results)
                 out << buildAllPackageSections(results)
                 out << buildRuleDescriptions(analysisContext)
-                out << buildVersionFooter()
             }
         }
     }
@@ -110,21 +111,30 @@ class HtmlReportWriter extends AbstractReportWriter {
         }
     }
 
+//    private buildLogo() {
+//        return {
+//            img(class: 'logo', src:'codenarc-logo.png', alt:'codenarc logo')
+//       }
+//    }
+
     private buildSummaryByPackage(results) {
         return {
-            h2(getResourceBundleString('htmlReport.summary.title'))
-            table() {
-                tr(class:'tableHeader') {
-                    th(getResourceBundleString('htmlReport.summary.packageHeading'))
-                    th(getResourceBundleString('htmlReport.summary.totalFilesHeading'))
-                    th(getResourceBundleString('htmlReport.summary.filesWithViolationsHeading'))
-                    th(getResourceBundleString('htmlReport.summary.priority1Heading'))
-                    th(getResourceBundleString('htmlReport.summary.priority2Heading'))
-                    th(getResourceBundleString('htmlReport.summary.priority3Heading'))
+            div(class: 'summary') {
+                h2(getResourceBundleString('htmlReport.summary.title'))
+                table() {
+                    tr(class:'tableHeader') {
+                        th(getResourceBundleString('htmlReport.summary.packageHeading'))
+                        th(getResourceBundleString('htmlReport.summary.totalFilesHeading'))
+                        th(getResourceBundleString('htmlReport.summary.filesWithViolationsHeading'))
+                        th(getResourceBundleString('htmlReport.summary.priority1Heading'))
+                        th(getResourceBundleString('htmlReport.summary.priority2Heading'))
+                        th(getResourceBundleString('htmlReport.summary.priority3Heading'))
+                    }
+                    out << buildSummaryByPackageRow(results, true)
+                    out << buildAllSummaryByPackageRowsRecursively(results)
                 }
-                out << buildSummaryByPackageRow(results, true)
-                out << buildAllSummaryByPackageRowsRecursively(results)
             }
+            br()
         }
     }
 
@@ -160,10 +170,10 @@ class HtmlReportWriter extends AbstractReportWriter {
                     }
                 }
                 td(results.getTotalNumberOfFiles(recursive), class:'number')
-                td(results.getNumberOfFilesWithViolations(recursive), class:'number')
-                td(results.getNumberOfViolationsWithPriority(1, recursive), class:'priority1')
-                td(results.getNumberOfViolationsWithPriority(2, recursive), class:'priority2')
-                td(results.getNumberOfViolationsWithPriority(3, recursive), class:'priority3')
+                td(results.getNumberOfFilesWithViolations(recursive) ?: '-', class:'number')
+                td(results.getNumberOfViolationsWithPriority(1, recursive) ?: '-', class:'priority1')
+                td(results.getNumberOfViolationsWithPriority(2, recursive) ?: '-', class:'priority2')
+                td(results.getNumberOfViolationsWithPriority(3, recursive) ?: '-', class:'priority3')
             }
         }
     }
@@ -180,13 +190,18 @@ class HtmlReportWriter extends AbstractReportWriter {
         return {
             if (isDirectoryContainingFilesWithViolations(results)) {
                 def pathName = results.path ?: ROOT_PACKAGE_NAME
-                a(name:pathName)
-                h2(pathName, class:'packageHeader')
+                div(class: 'summary') {
+                    a(name:pathName)
+                    h2(pathName, class:'packageHeader')
+                }
             }
             results.children.each { child ->
                 if (child.isFile()) {
-                    h3(child.path, class:'fileHeader')
-                    out << buildFileSection(child)
+                    div(class: 'summary') {
+                        h3(child.path, class:'fileHeader')
+                        out << buildFileSection(child)
+                    }
+                    br()
                 }
                 else {
                     out << buildPackageSection(child)
@@ -213,13 +228,12 @@ class HtmlReportWriter extends AbstractReportWriter {
                     results.getViolationsWithPriority(4)
 
                 violations.each { violation ->
-                    def priorityCssClass = "priority${violation.rule.priority}"
                     def moreInfo = violation.message ? violation.message : ''
                     tr {
                         td {
-                            a(violation.rule.name, href:"#${violation.rule.name}", class:priorityCssClass)
+                            a(violation.rule.name, href:"#${violation.rule.name}")
                         }
-                        td(violation.rule.priority, class:priorityCssClass)
+                        td(violation.rule.priority)
                         td(violation.lineNumber, class:'number')
                         td {
                             if (violation.sourceLine) {
@@ -232,7 +246,7 @@ class HtmlReportWriter extends AbstractReportWriter {
                             if (moreInfo) {
                                 p(class:'violationInfo') {
                                     span('[MSG]', class:'violationInfoPrefix')
-                                    span(moreInfo, class:'moreInfo')
+                                    span(moreInfo, class:'sourceCode')
                                 }
                             }
                         }
@@ -247,21 +261,23 @@ class HtmlReportWriter extends AbstractReportWriter {
         def sortedRules = getSortedRules(analysisContext)
 
         return {
-            h2(getResourceBundleString('htmlReport.ruleDescriptions.title'))
-            table(border:'1') {
-                tr(class:'tableHeader') {
-                    th('#', class:'ruleDescriptions')
-                    th(getResourceBundleString('htmlReport.ruleDescriptions.ruleNameHeading'), class:'ruleDescriptions')
-                    th(getResourceBundleString('htmlReport.ruleDescriptions.descriptionHeading'), class:'ruleDescriptions')
-                }
+            div(class: 'summary') {
+                h2(getResourceBundleString('htmlReport.ruleDescriptions.title'))
+                table(border:'1') {
+                    tr(class:'tableHeader') {
+                        th('#', class:'ruleDescriptions')
+                        th(getResourceBundleString('htmlReport.ruleDescriptions.ruleNameHeading'), class:'ruleDescriptions')
+                        th(getResourceBundleString('htmlReport.ruleDescriptions.descriptionHeading'), class:'ruleDescriptions')
+                    }
 
-                sortedRules.eachWithIndex { rule, index ->
-                    def ruleName = rule.name
-                    tr(class:'ruleDescriptions') {
-                        a(name:ruleName)
-                        td(index+1)
-                        td(ruleName, class:'ruleName')
-                        td { unescaped << getHtmlDescriptionForRule(rule) }
+                    sortedRules.eachWithIndex { rule, index ->
+                        def ruleName = rule.name
+                        tr(class:'ruleDescriptions') {
+                            a(name:ruleName)
+                            td(index+1)
+                            td(ruleName, class:'ruleName')
+                            td { unescaped << getHtmlDescriptionForRule(rule) }
+                        }
                     }
                 }
             }
@@ -288,7 +304,7 @@ class HtmlReportWriter extends AbstractReportWriter {
     }
 
     private buildVersionFooter() {
-        def versionText = 'CodeNarc v' + getCodeNarcVersion()
+        def versionText = getResourceBundleString('htmlReport.reportVersion.label') + getCodeNarcVersion()
         return {
             p(class:'version') {
                 a(versionText, href:CODENARC_URL)

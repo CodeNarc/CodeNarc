@@ -1,86 +1,112 @@
 <style type='text/css'>
-        .reportInfo {
-			font-size: 110%;
-		}
-		.allPackages {
-		    font-weight: bold;
-		}
-        .packageHeader {
-			background: lightblue;
-			font-size: 150%;
-		    font-weight: bold;
-		}
-        .fileHeader {
-			font-size: 120%;
-		    font-weight: bold;
-		}
-        .tableHeader {
-			background: lightblue;
-		    font-weight: bold;
-		}
-		.number {
-		    text-align: center;
-		}
-		.priority1 {
-		    color: red;
-		    font-weight: bold;
-		    text-align: center;
-		}
-		.priority2 {
-		    color: orange;
-		    font-weight: bold;
-		    text-align: center;
-		}
-		.priority3 {
-		    color: blue;
-		    font-weight: bold;
-		    text-align: center;
-		}
-        .priority4 {
-            color: gray;
-            font-weight: bold;
-            text-align: center;
-        }
-		.ruleName {
-		    font-weight: bold;
-		}
-        .violationInfo {
-            margin-bottom: 2px;
-            margin-top: 2px;
-        }
-        .violationInfoPrefix {
-            font-size: 55%;
-            width: 30px;
-            color: darkgray;
-        }
-		.sourceCode {
-		    font-family: Arial, sans-serif;
-		    font-size: 80%;
-            color: mediumblue;
-		}
-		.moreInfo {
-		    font-style: italic;
-            color: black;
-		}
-        .ruleDescriptions {
-            font-size: 85%;
-        }
-		.version {
-			font-size: 75%;
-		    color: blue;
-            margin-top: 10px;
-		}
+    body {
+        background: #000000;
+        color: #ffffff;
+    }
+    h1, h2, h3 {
+        color: #FFFFFF;
+    }
+    h2 {
+        background: #6F6F6F;
+        padding: 4px 4px 4px 4px;
+        font-size: 150%;
+        font-weight: bold;
+    }
 
-		table {
-		    border: 1px solid gray;
-		}
-		td, th {
-		    border: 1px solid gray;
-		    border-bottom: 1px solid aqua;
-		    border-right: 1px solid aqua;
-		}
-		em {
-		    font-weight: bold;
-		}
+    a {
+        text-decoration: underline;
+        color: #D93544;
+    }
+
+    .logo {
+        float: right;
+    }
+    .summary {
+        background: #212121;
+        padding: 4px 4px 4px 4px;
+    }
+    .reportInfo {
+        font-size: 110%;
+    }
+
+    .allPackages {
+        font-weight: bold;
+    }
+
+    .fileHeader {
+        font-size: 120%;
+        font-weight: bold;
+    }
+
+    .tableHeader {
+        background: #212121;
+        font-weight: bold;
+    }
+
+    .number {
+        text-align: center;
+    }
+
+    .priority1 {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .priority2 {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .priority3 {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .ruleName {
+        font-weight: bold;
+    }
+
+    .violationInfo {
+        margin-bottom: 2px;
+        margin-top: 2px;
+    }
+
+    .violationInfoPrefix {
+        font-size: 60%;
+        width: 30px;
+        color: #a9a9a9;
+        padding-right: 4px;
+    }
+
+    .sourceCode {
+        font-family: Arial, sans-serif;
+        font-size: 80%;
+        color: #a9a9a9;
+    }
+
+    .ruleDescriptions {
+        font-size: 85%;
+    }
+
+    .version {
+        margin-top: 1px;
+    }
+
+    table {
+        border: 1px solid gray;
+    }
+
+    td, th {
+        border: 1px solid gray;
+        border-bottom: 1px solid aqua;
+        border-right: 1px solid aqua;
+    }
+
+    em {
+        font-weight: bold;
+    }
 
 </style>
