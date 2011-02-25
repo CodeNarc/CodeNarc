@@ -263,21 +263,18 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    // Known issue: UnusedVariable rule misses references within inner classes
-    // See https://sourceforge.net/tracker/?func=detail&aid=3155974&group_id=250145&atid=1126573
     void testApplyTo_VariableOnlyReferencedWithinInnerClass_Violation_KnownIssue() {
         final SOURCE = '''
             def buildCallable() {
                 String ssn = 'xxx'
-                return new Callable<Object>(){
+                return new Callable<Object>() {
                     public Object call(){
                         return participantDao.getParticipantPlans(ssn)
                     }
                 }
             }
         '''
-        //assertNoViolations(SOURCE) -- should be this
-        assertSingleViolation(SOURCE, 3, "String ssn = 'xxx'", 'ssn')
+        assertNoViolations(SOURCE) 
     }
 
     void testApplyTo_Script_UnusedVariable() {

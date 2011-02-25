@@ -23,22 +23,59 @@ import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codenarc.source.SourceCode
+import org.codehaus.groovy.ast.InnerClassNode
+import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that checks for variables that are not referenced.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class UnusedVariableRule extends AbstractAstVisitorRule {
     String name = 'UnusedVariable'
     int priority = 2
-    Class astVisitorClass = UnusedVariableAstVisitor
+
+    @Override
+    void applyTo(SourceCode sourceCode, List violations) {
+        // If AST is null, skip this source code
+        def ast = sourceCode.ast
+        if (ast && ast.classes) {
+
+            def anonymousClasses = getAnonymousClasses(ast.classes)
+            def collector = new ReferenceCollector()
+            anonymousClasses.each {
+                collector.visitClass(it)
+            }
+            def anonymousReferences = collector.references
+            
+            ast.classes.each { classNode ->
+
+                if (shouldApplyThisRuleTo(classNode)) {
+                    def visitor = new UnusedVariableAstVisitor(anonymousReferences: anonymousReferences)
+                    visitor.rule = this
+                    visitor.sourceCode = sourceCode
+                    visitor.visitClass(classNode)
+                    violations.addAll(visitor.violations)
+                }
+            }
+        }
+    }
+
+    private static List<ClassNode> getAnonymousClasses(List<ClassNode> classes) {
+        classes.findAll{
+            it instanceof InnerClassNode && it.anonymous
+        }
+    }
+
 }
 
 class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     private variablesByBlockScope = [] as Stack
     private variablesInCurrentBlockScope
+    private anonymousReferences
 
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         if (isFirstVisit(declarationExpression)) {
@@ -57,7 +94,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         super.visitBlockStatement(block)
 
         variablesInCurrentBlockScope.each { varExpression, isUsed ->
-            if (!isUsed) {
+            if (!isUsed && !anonymousReferences.contains(varExpression.name)) {
                 addViolation(varExpression, "The variable [${varExpression.name}] is not used")
             }
         }

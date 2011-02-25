@@ -16,15 +16,12 @@
 package org.codenarc.rule.unused
 
 import java.lang.reflect.Modifier
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.control.SourceUnit
+import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.InnerClassNode
+import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.*
 
 /**
  * Rule that checks for parameters to private methods that are not referenced within the method body.
@@ -82,28 +79,3 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
     }
 }
 
-class ReferenceCollector extends ClassCodeVisitorSupport {
-
-    def references = [] as Set
-
-    void visitVariableExpression(VariableExpression expression) {
-        references.add(expression.name)
-    }
-
-    void visitMethodCallExpression(MethodCallExpression call) {
-        // Check for method call on a method with the same name as the parameter.
-        // This handles the case of a parameter being a closure that is then invoked within the method, e.g.:
-        //      private myMethod1(Closure closure) {
-        //          println closure()
-        //      }
-        if (AstUtil.isMethodCallOnObject(call, 'this') && call.method instanceof ConstantExpression) {
-            references.add(call.method.value)
-        }
-        super.visitMethodCallExpression(call)
-    }
-
-    @Override
-    SourceUnit getSourceUnit() {
-        throw new UnsupportedOperationException()
-    }
-}
