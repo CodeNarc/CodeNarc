@@ -9,6 +9,7 @@ NEW FEATURES
   and the CodeNarc text report is output to the console instead of a file. Feature #3162487
 - All rules now provide a nicely formatted message. This makes console tools and the CodeNarc Web Console much more
   user friendly. Feature #3162847
+- Greatly improved styling of the HTML report. Feature #3192593
 
 NEW RULES
   Dead/Unnecessary Code
@@ -70,6 +71,9 @@ BUG FIXES
 POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
 
+THANKS
+ - Many thanks to Mathilde Lemée, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
+ 
 Changes in version 0.12 (January 2011)
 -------------------------------------------
 NEW FEATURES

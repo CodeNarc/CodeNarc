@@ -1,112 +1,152 @@
-<style type='text/css'>
-    body {
-        background: #000000;
-        color: #ffffff;
-    }
-    h1, h2, h3 {
-        color: #FFFFFF;
-    }
-    h2 {
-        background: #6F6F6F;
-        padding: 4px 4px 4px 4px;
-        font-size: 150%;
-        font-weight: bold;
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px 20px 20px 30px;
+}
 
-    a {
-        text-decoration: underline;
-        color: #D93544;
-    }
+h1, h2, h3 {
+    font-weight: bold;
+}
 
-    .logo {
-        float: right;
-    }
-    .summary {
-        background: #212121;
-        padding: 4px 4px 4px 4px;
-    }
-    .reportInfo {
-        font-size: 110%;
-    }
+h1 {
+    width: 400px;
+    text-align: center;
 
-    .allPackages {
-        font-weight: bold;
-    }
+    color: white;
+    background-color: #557799;
+    padding: 10px;
 
-    .fileHeader {
-        font-size: 120%;
-        font-weight: bold;
-    }
+    -moz-box-shadow: 3px 3px 4px #AAA;
+    -webkit-box-shadow: 3px 3px 4px #AAA;
+    box-shadow: 3px 3px 4px #AAA;
 
-    .tableHeader {
-        background: #212121;
-        font-weight: bold;
-    }
+    border-radius: 10px;
+    -moz-border-radius: 10px;
 
-    .number {
-        text-align: center;
-    }
+    text-shadow: 2px 2px 2px black;
+}
 
-    .priority1 {
-        color: red;
-        font-weight: bold;
-        text-align: center;
-    }
+h2 {
+    font-size: 150%;
+    margin-top: 40px;
+    padding-top: 5px;
+    border-top: 5px solid lightgray;
+}
 
-    .priority2 {
-        color: red;
-        font-weight: bold;
-        text-align: center;
-    }
+h3 {
+    margin-left: 10px;
+    margin-top: 30px;
+}
 
-    .priority3 {
-        color: red;
-        font-weight: bold;
-        text-align: center;
-    }
+a {
+    text-decoration: underline;
+    color: #D93544;
+}
 
-    .ruleName {
-        font-weight: bold;
-    }
+.logo {
+    float: right;
+}
 
-    .violationInfo {
-        margin-bottom: 2px;
-        margin-top: 2px;
-    }
+.metadata {
+}
 
-    .violationInfoPrefix {
-        font-size: 60%;
-        width: 30px;
-        color: #a9a9a9;
-        padding-right: 4px;
-    }
+.summary {
+    margin-bottom: 20px;
+}
 
-    .sourceCode {
-        font-family: Arial, sans-serif;
-        font-size: 80%;
-        color: #a9a9a9;
-    }
+.reportInfo {
+    font-size: 110%;
+}
 
-    .ruleDescriptions {
-        font-size: 85%;
-    }
+.allPackages {
+    font-weight: bold;
+}
 
-    .version {
-        margin-top: 1px;
-    }
+.fileHeader {
+    font-size: 120%;
+    font-weight: bold;
+}
 
-    table {
-        border: 1px solid gray;
-    }
+.tableHeader {
+    font-weight: bold;
+}
 
-    td, th {
-        border: 1px solid gray;
-        border-bottom: 1px solid aqua;
-        border-right: 1px solid aqua;
-    }
+.number {
+    text-align: center;
+}
 
-    em {
-        font-weight: bold;
-    }
+.priority1, .priority2, .priority3 {
+    font-weight: bold;
+    text-align: center;
+    color: #990000;
+}
 
-</style>
+.priority1 {
+    background-color: #FFAAAA;
+}
+
+.priority2 {
+    background-color: #FFCCAA;
+}
+
+.priority3 {
+    background-color: #FFEEAA;
+}
+
+.ruleName {
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
+.violationInfo {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.violationInfoPrefix {
+    font-size: 60%;
+    width: 30px;
+    color: #a9a9a9;
+    padding-right: 4px;
+}
+
+.sourceCode {
+    font-family: Arial, sans-serif;
+    font-size: 80%;
+    color: #444444;
+}
+
+.ruleDescriptions {
+    font-size: 85%;
+}
+
+.version {
+    margin-top: 1px;
+}
+
+table {
+    border: 2px solid gray;
+    border-collapse: collapse;
+
+    -moz-box-shadow: 3px 3px 4px #AAA;
+    -webkit-box-shadow: 3px 3px 4px #AAA;
+    box-shadow: 3px 3px 4px #AAA;
+}
+
+td, th {
+    border: 1px solid #D3D3D3;
+    padding: 4px 20px 4px 20px;
+}
+
+th {
+    text-shadow: 2px 2px 2px white;
+}
+
+th {
+    border-bottom: 1px solid gray;
+    background-color: #DDDDFF;
+}
+
+em, .em {
+    font-weight: bold;
+}

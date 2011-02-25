@@ -1,0 +1,152 @@
+<html><head><title>CodeNarc Report</title><style type='text/css'>body {
+    font-family: Arial, sans-serif;
+    margin: 20px 20px 20px 30px;
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+h1 {
+    width: 400px;
+    text-align: center;
+
+    color: white;
+    background-color: #557799;
+    padding: 10px;
+
+    -moz-box-shadow: 3px 3px 4px #AAA;
+    -webkit-box-shadow: 3px 3px 4px #AAA;
+    box-shadow: 3px 3px 4px #AAA;
+
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+
+    text-shadow: 2px 2px 2px black;
+}
+
+h2 {
+    font-size: 150%;
+    margin-top: 40px;
+    padding-top: 5px;
+    border-top: 5px solid lightgray;
+}
+
+h3 {
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+a {
+    text-decoration: underline;
+    color: #D93544;
+}
+
+.logo {
+    float: right;
+}
+
+.metadata {
+}
+
+.summary {
+    margin-bottom: 20px;
+}
+
+.reportInfo {
+    font-size: 110%;
+}
+
+.allPackages {
+    font-weight: bold;
+}
+
+.fileHeader {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.tableHeader {
+    font-weight: bold;
+}
+
+.number {
+    text-align: center;
+}
+
+.priority1, .priority2, .priority3 {
+    font-weight: bold;
+    text-align: center;
+    color: #990000;
+}
+
+.priority1 {
+    background-color: #FFAAAA;
+}
+
+.priority2 {
+    background-color: #FFCCAA;
+}
+
+.priority3 {
+    background-color: #FFEEAA;
+}
+
+.ruleName {
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
+.violationInfo {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.violationInfoPrefix {
+    font-size: 60%;
+    width: 30px;
+    color: #a9a9a9;
+    padding-right: 4px;
+}
+
+.sourceCode {
+    font-family: Arial, sans-serif;
+    font-size: 80%;
+    color: #444444;
+}
+
+.ruleDescriptions {
+    font-size: 85%;
+}
+
+.version {
+    margin-top: 1px;
+}
+
+table {
+    border: 2px solid gray;
+    border-collapse: collapse;
+
+    -moz-box-shadow: 3px 3px 4px #AAA;
+    -webkit-box-shadow: 3px 3px 4px #AAA;
+    box-shadow: 3px 3px 4px #AAA;
+}
+
+td, th {
+    border: 1px solid #D3D3D3;
+    padding: 4px 20px 4px 20px;
+}
+
+th {
+    text-shadow: 2px 2px 2px white;
+}
+
+th {
+    border-bottom: 1px solid gray;
+    background-color: #DDDDFF;
+}
+
+em, .em {
+    font-weight: bold;
+}</style></head><body><img class='logo' src='http://codenarc.sourceforge.net/images/codenarc-logo.png' alt='CodeNarc' align='right'/><h1>CodeNarc Report</h1><div class='metadata'><table><tr><td class='em'>Report title:</td><td/></tr><tr><td class='em'>Date:</td><td>Feb 24, 2011 9:32:38 PM</td></tr><tr><td class='em'>Generated with:</td><td><a href='http://www.codenarc.org'>CodeNarc v0.12</a></td></tr></table></div><div class='summary'><h2>Summary by Package</h2><table><tr class='tableHeader'><th>Package</th><th>Total Files</th><th>Files with Violations</th><th>Priority 1</th><th>Priority 2</th><th>Priority 3</th></tr><tr><td class='allPackages'>All Packages</td><td class='number'>10</td><td class='number'>3</td><td class='priority1'>-</td><td class='priority2'>2</td><td class='priority3'>3</td></tr><tr><td><a href='#src/main'>src/main</a></td><td class='number'>1</td><td class='number'>1</td><td class='priority1'>-</td><td class='priority2'>1</td><td class='priority3'>2</td></tr><tr><td><a href='#src/main/code'>src/main/code</a></td><td class='number'>2</td><td class='number'>1</td><td class='priority1'>-</td><td class='priority2'>-</td><td class='priority3'>1</td></tr><tr><td><a href='#src/main/test'>src/main/test</a></td><td class='number'>3</td><td class='number'>1</td><td class='priority1'>-</td><td class='priority2'>1</td><td class='priority3'>-</td></tr><tr><td>src/main/test/noviolations</td><td class='number'>4</td><td class='number'>-</td><td class='priority1'>-</td><td class='priority2'>-</td><td class='priority3'>-</td></tr></table></div><div class='summary'><a name='src/main'> </a><h2 class='packageHeader'>Package: src.main</h2></div><div class='summary'><h3 class='fileHeader'>&#x27A5;&nbsp;MyAction.groovy</h3><table border='1'><tr class='tableHeader'><th>Rule Name</th><th>Priority</th><th>Line #</th><th>Source Line / Message</th></tr><tr><td><a href='#RULE2'>RULE2</a></td><td class='priority2'>2</td><td class='number'>222</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[MSG]</span><span class='sourceCode'>bad stuff</span></p></td></tr><tr><td><a href='#RULE3'>RULE3</a></td><td class='priority3'>3</td><td class='number'>333</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>throw new Exception() // Some very long message 12345678..901234567890</span></p><p class='violationInfo'><span class='violationInfoPrefix'>[MSG]</span><span class='sourceCode'>Other info</span></p></td></tr><tr><td><a href='#RULE3'>RULE3</a></td><td class='priority3'>3</td><td class='number'>333</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>throw new Exception() // Some very long message 12345678..901234567890</span></p><p class='violationInfo'><span class='violationInfoPrefix'>[MSG]</span><span class='sourceCode'>Other info</span></p></td></tr><tr><td><a href='#RULE4'>RULE4</a></td><td class='priority4'>4</td><td class='number'>111</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>if (file) {</span></p></td></tr><tr><td><a href='#RULE4'>RULE4</a></td><td class='priority4'>4</td><td class='number'>111</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>if (file) {</span></p></td></tr></table></div><div class='summary'><a name='src/main/code'> </a><h2 class='packageHeader'>Package: src.main.code</h2></div><div class='summary'><h3 class='fileHeader'>&#x27A5;&nbsp;src/main/MyAction2.groovy</h3><table border='1'><tr class='tableHeader'><th>Rule Name</th><th>Priority</th><th>Line #</th><th>Source Line / Message</th></tr><tr><td><a href='#RULE3'>RULE3</a></td><td class='priority3'>3</td><td class='number'>333</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>throw new Exception() // Some very long message 12345678..901234567890</span></p><p class='violationInfo'><span class='violationInfoPrefix'>[MSG]</span><span class='sourceCode'>Other info</span></p></td></tr></table></div><div class='summary'><a name='src/main/test'> </a><h2 class='packageHeader'>Package: src.main.test</h2></div><div class='summary'><h3 class='fileHeader'>&#x27A5;&nbsp;src/main/MyActionTest.groovy</h3><table border='1'><tr class='tableHeader'><th>Rule Name</th><th>Priority</th><th>Line #</th><th>Source Line / Message</th></tr><tr><td><a href='#RULE2'>RULE2</a></td><td class='priority2'>2</td><td class='number'>222</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[MSG]</span><span class='sourceCode'>bad stuff</span></p></td></tr><tr><td><a href='#RULE4'>RULE4</a></td><td class='priority4'>4</td><td class='number'>111</td><td><p class='violationInfo'><span class='violationInfoPrefix'>[SRC]</span><span class='sourceCode'>if (file) {</span></p></td></tr></table></div><div class='summary'><h2>Rule Descriptions</h2><table border='1'><tr class='tableHeader'><th class='ruleDescriptions'>#</th><th class='ruleDescriptions'>Rule Name</th><th class='ruleDescriptions'>Description</th></tr><tr class='ruleDescriptions'><a name='MyRuleXX'/><td>1</td><td class='ruleName priority0'>MyRuleXX</td><td>HTML Rule XX</td></tr><tr class='ruleDescriptions'><a name='MyRuleYY'/><td>2</td><td class='ruleName priority0'>MyRuleYY</td><td>My Rule YY</td></tr><tr class='ruleDescriptions'><a name='UnnecessaryBooleanInstantiation'/><td>3</td><td class='ruleName priority2'>UnnecessaryBooleanInstantiation</td><td>Use <em>Boolean.valueOf()</em> for variable values or <em>Boolean.TRUE</em> and <em>Boolean.FALSE</em> for constant values instead of calling the <em>Boolean()</em> constructor directly or calling <em>Boolean.valueOf(true)</em> or <em>Boolean.valueOf(false)</em>.</td></tr></table></div></body></html>
