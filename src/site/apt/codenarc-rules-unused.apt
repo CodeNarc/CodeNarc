@@ -82,9 +82,6 @@ Unused Rules  ("<rulesets/unused.xml>")
 
   Known limitations:
 
-  * Does not recognize field references within an inner class. See
-    {{{https://sourceforge.net/tracker/index.php?func=detail&aid=3155974&group_id=250145&atid=1126573}CodeNarc bug #3155974}}.
-
   * Does not recognize field access when field name is a GString (e.g. <<<this."${fieldName}">>>)
 
   * Does not recognize access of private field of another instance (i.e. other than <<<this>>>)
@@ -99,9 +96,6 @@ Unused Rules  ("<rulesets/unused.xml>")
   members within other classes).
 
   Known limitations:
-
-  * Does not recognize method references within an inner class. See
-    {{{https://sourceforge.net/tracker/index.php?func=detail&aid=3155974&group_id=250145&atid=1126573}CodeNarc bug #3155974}}.
 
   * Does not recognize method reference through property access (e.g. <<<getName()>>> accessed as <<<x.name>>>)
 
