@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.NotExpression
 import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * In an "if" expression with an "else" clause, avoid negation in the test. For example, rephrase: if (x != y) diff(); else same(); as: if (x == y) same(); else diff(); Most "if (x != y)" cases without an "else" are often return cases, so consistent use of this rule makes the code easier to read. Also, this resolves trivial ordering problems, such as "does the error case go first?" or "does the common case go first?".
@@ -38,17 +39,28 @@ class ConfusingTernaryAstVisitor extends AbstractAstVisitor {
     void visitTernaryExpression(TernaryExpression expression) {
 
         if (expression.booleanExpression.expression instanceof BinaryExpression) {
-            BinaryExpression exp = expression.booleanExpression.expression
-            if (exp.operation.text == '!=') {
-                def suggestion = "($exp.leftExpression.text == $exp.rightExpression.text)"
-                addViolation (expression, "$exp.text is a confusing negation in a ternary expression. Rewrite as $suggestion and invert the conditions.")
-            }
+            addViolationForBinaryExpression(expression.booleanExpression.expression, expression)
         } else if (expression.booleanExpression.expression instanceof NotExpression) {
-            NotExpression exp = expression.booleanExpression.expression
-            addViolation (expression, "(!$exp.text) is a confusing negation in a ternary expression. Rewrite as ($exp.expression.text) and invert the conditions.")
-
+            addViolationForNotExpression(expression, expression.booleanExpression.expression)
         }
         super.visitTernaryExpression(expression)
+    }
+
+    private addViolationForNotExpression(TernaryExpression expression, NotExpression exp) {
+        addViolation(expression, "(!$exp.text) is a confusing negation in a ternary expression. Rewrite as ($exp.expression.text) and invert the conditions.")
+    }
+
+    private addViolationForBinaryExpression(BinaryExpression exp, TernaryExpression expression) {
+        if (exp.operation.text == '!=') {
+            if (AstUtil.isNull(exp.leftExpression) || AstUtil.isNull(exp.rightExpression))  {
+                return
+            }
+            if (AstUtil.isBoolean(exp.leftExpression) || AstUtil.isBoolean(exp.rightExpression))  {
+                return
+            }
+            def suggestion = "($exp.leftExpression.text == $exp.rightExpression.text)"
+            addViolation(expression, "$exp.text is a confusing negation in a ternary expression. Rewrite as $suggestion and invert the conditions.")
+        }
     }
 
 

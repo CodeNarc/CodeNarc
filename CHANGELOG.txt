@@ -67,6 +67,7 @@ BUG FIXES
 - Fix bug #3190483: The UnusedPrivateField rule now ignores fields named serialVersionUID. The rule has a property called ignoreFieldNames that can be used to add other ignores as well.
 - Fix bug #3162975: The UnusedPrivate* rules now correctly read anonymous classes.
 - Fix bug #3155974: The UnusedPrivate* rules now correctly read inner classes.
+- Fix bug #3183443: Restricted the ConfusingTernary rule to reduce false positives. The rule looks for inverted conditionals in ternary statements. It did not account for Groovy Truth, and suggested 'x != null' be inverted to 'x', but that is not the inverse. So the rule was relaxed. 
 
 POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
@@ -119,7 +120,7 @@ NEW RULES
 - UnusedPrivateMethodParameter rule (unused) - Feature #3151598 - Adds a violation if the parameter to a private method is never used within that method 
 
 BUG FIXES
-- Fix Bug #3127967 DuplicateImportRule: Fix for Groovy 1.7. Resort to parsing source code.
+- Fix Bug #3127967: DuplicateImportRule: Fix for Groovy 1.7. Resort to parsing source code.
 - Fix Bug #3146678: UnnecessaryGetter false positive, e.g. def allPaths = resultsMap.keySet()  keySet() can probably be rewritten as set.
 - Fix Bug #3111189: "StatelessClassRule - Honor @Immutable".
 - Fix Bug #3111181: "UnnecessaryIfStatement - misses if without explicit return".
