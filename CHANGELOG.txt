@@ -10,6 +10,7 @@ NEW FEATURES
 - All rules now provide a nicely formatted message. This makes console tools and the CodeNarc Web Console much more
   user friendly. Feature #3162847
 - Greatly improved styling of the HTML report. Feature #3192593
+- Improved error messages when CodeNarc is mis-configured and configuration file does not compile. Feature #3193468
 
 NEW RULES
   Dead/Unnecessary Code

@@ -18,6 +18,7 @@ package org.codenarc.ruleset
 import org.apache.log4j.Logger
 import org.codenarc.util.io.ResourceFactory
 import org.codenarc.util.io.DefaultResourceFactory
+import org.codehaus.groovy.control.MultipleCompilationErrorsException
 
 /**
  * A <code>RuleSet</code> implementation that parses a Groovy DSL of RuleSet definitions.
@@ -50,7 +51,13 @@ class GroovyDslRuleSet implements RuleSet {
         Binding binding = new Binding(ruleset:callRuleSet)
 
         GroovyShell shell = new GroovyShell(binding)
-        shell.evaluate(inputStream)
+
+        try {
+            shell.evaluate(inputStream)
+        } catch (MultipleCompilationErrorsException compileError) {
+            LOG.error("An error occurred compiling the configuration file $path", compileError)
+            throw new IllegalStateException("An error occurred compiling the configuration file $path\n$compileError.message")
+        }
 
         rules = ruleSetBuilder.ruleSet.rules
     }

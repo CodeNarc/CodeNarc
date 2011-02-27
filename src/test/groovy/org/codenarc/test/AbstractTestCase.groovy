@@ -22,6 +22,7 @@ import org.apache.log4j.spi.LoggingEvent
  * Abstract superclass for tests 
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 
@@ -29,6 +30,8 @@ import org.apache.log4j.spi.LoggingEvent
 abstract class AbstractTestCase extends GroovyTestCase {
 
     protected static final CODENARC_PROPERTIES_FILE_PROP = 'codenarc.properties.file'
+
+    private static final LOG = Logger.getLogger(AbstractTestCase)
 
     /**
      * Assert that the specified closure should throw an exception whose message contains text
@@ -90,7 +93,7 @@ abstract class AbstractTestCase extends GroovyTestCase {
      * @param message - the message to log; toString() is applied first
      */
     protected void log(message) {
-        println "[${classNameNoPackage()}] ${message.toString()}"
+        LOG.debug "[${classNameNoPackage()}] ${message.toString()}"
     }
 
     protected String captureSystemOut(Closure closure) {
@@ -130,7 +133,7 @@ abstract class AbstractTestCase extends GroovyTestCase {
     //------------------------------------------------------------------------------------
 
     void setUp() {
-        println "-------------------------[ ${classNameNoPackage()}.${getName()} ]------------------------"
+        LOG.debug "-------------------------[ ${classNameNoPackage()}.${getName()} ]------------------------"
         super.setUp()
     }
 

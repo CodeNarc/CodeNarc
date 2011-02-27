@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
+import org.apache.log4j.Logger
 
 /**
  * Tests for GroovyDslRuleSet
@@ -24,6 +25,8 @@ import org.codenarc.test.AbstractTestCase
  * @version $Revision$ - $Date$
  */
 class GroovyDslRuleSetTest extends AbstractTestCase {
+
+    static final LOG = Logger.getLogger(GroovyDslRuleSetTest)
 
     void testNullPath() {
         shouldFailWithMessageContaining('path') { new GroovyDslRuleSet(null) }
@@ -62,6 +65,23 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
         assert rules[0].priority == 1
         assert !rules[0].enabled
         assert rules[1].priority == 3
+    }
+
+    void testLoadGroovyRuleSet_ConfigFileDoesNotCompile() {
+
+        def file = File.createTempFile('codenarctest', '.groovy')
+        file.deleteOnExit()
+        file.text = '''
+// OH HAI, I IZ DEFINITLY NOT COMPILING
++++++++++
+'''
+        def msg = shouldFail(IllegalStateException) {
+            new GroovyDslRuleSet('file:' + file.absolutePath)
+        }
+        assert msg.contains('error occurred compiling')
+        assert msg.contains(file.absolutePath)
+        assert msg.contains('unexpected token: ++ @ line 3, column 3')
+        file.delete()
     }
 
     void testLoadNestedGroovyRuleSet() {
