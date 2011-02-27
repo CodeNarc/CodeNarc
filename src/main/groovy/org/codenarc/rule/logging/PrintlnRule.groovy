@@ -28,6 +28,7 @@ import org.codenarc.util.AstUtil
  * or <code>this.printf()</code>.
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class PrintlnRule extends AbstractAstVisitorRule {
@@ -44,10 +45,10 @@ class PrintlnAstVisitor extends AbstractAstVisitor  {
     @Override
     protected void visitClassEx(ClassNode node) {
         printlnMethodDefined = node?.methods?.any { MethodNode it ->
-            it.name == 'println'
+            it.name == 'println' || it.name == 'print'
         }
         printlnClosureDefined = node?.fields?.any { FieldNode it ->
-            AstUtil.isClosureDeclaration(it) && it.name == 'println'
+            AstUtil.isClosureDeclaration(it) && (it.name == 'println' || it.name == 'print')
         }
     }
 
