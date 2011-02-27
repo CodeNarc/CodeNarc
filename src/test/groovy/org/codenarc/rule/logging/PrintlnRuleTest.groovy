@@ -102,6 +102,48 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_PrintlnLocallyDefinedMethod() {
+        final SOURCE = '''
+            class MyClass1 {
+                def println(p) {
+                }
+                def method() {
+                    println('a')
+                    println('b')
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_PrintlnLocallyDefinedClosure() {
+        final SOURCE = '''
+            class MyClass1 {
+                def println = {
+                }
+                def method() {
+                    println('a')
+                    println('b')
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_PrintlnLocallyDefinedClosure2() {
+        final SOURCE = '''
+            class MyClass1 {
+                Closure println = makeClosure()
+
+                def method() {
+                    println('a')
+                    println('b')
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new PrintlnRule()
     }

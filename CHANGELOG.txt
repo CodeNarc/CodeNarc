@@ -11,6 +11,7 @@ NEW FEATURES
   user friendly. Feature #3162847
 - Greatly improved styling of the HTML report. Feature #3192593
 - Improved error messages when CodeNarc is mis-configured and configuration file does not compile. Feature #3193468
+- Improved println rule. If a class defines a println method, then it is OK to call this method because it won't dispatch to System.out.println. Feature #3194121
 
 NEW RULES
   Dead/Unnecessary Code

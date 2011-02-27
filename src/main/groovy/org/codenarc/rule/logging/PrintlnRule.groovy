@@ -15,10 +15,13 @@
  */
 package org.codenarc.rule.logging
 
+import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * Rule that checks for calls to <code>this.print()</code>, <code>this.println()</code>
@@ -35,8 +38,30 @@ class PrintlnRule extends AbstractAstVisitorRule {
 
 class PrintlnAstVisitor extends AbstractAstVisitor  {
 
+    boolean printlnMethodDefined = false
+    boolean printlnClosureDefined = false
+
+    @Override
+    protected void visitClassEx(ClassNode node) {
+        printlnMethodDefined = node?.methods?.any { MethodNode it ->
+            it.name == 'println'
+        }
+        printlnClosureDefined = node?.fields?.any { FieldNode it ->
+            AstUtil.isClosureDeclaration(it) && it.name == 'println'
+        }
+    }
+
+    @Override protected void visitClassComplete(ClassNode node) {
+        printlnMethodDefined = false
+        printlnClosureDefined = false
+    }
+
     @SuppressWarnings('DuplicateLiteral')
     void visitMethodCallExpression(MethodCallExpression methodCall) {
+        if (printlnMethodDefined || printlnClosureDefined) {
+            return
+        }
+        
         if (isFirstVisit(methodCall)) {
             def isMatch =
                 AstUtil.isMethodCall(methodCall, 'this', 'println', 0) ||
