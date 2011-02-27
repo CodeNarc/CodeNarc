@@ -10,7 +10,7 @@
         The CodeNarc project provides a static analysis tool for Groovy code.
     </description>
     <packaging>jar</packaging>
-    <version>0.12</version>
+    <version>0.13-SNAPSHOT</version>
     <url>http://codenarc.sourceforge.net/</url>
 
     <scm>
