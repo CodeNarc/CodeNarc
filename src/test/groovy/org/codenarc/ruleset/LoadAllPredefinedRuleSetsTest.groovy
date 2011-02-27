@@ -16,7 +16,6 @@
 package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.test.RuleSets
 
 /**
  * Load all predefined RuleSet files using XmlFileRuleSet

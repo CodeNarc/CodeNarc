@@ -22,6 +22,7 @@ import org.codenarc.ruleset.CompositeRuleSet
 import org.apache.log4j.Logger
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSetUtil
+import org.codenarc.ruleregistry.RuleRegistryInitializer
 
 /**
  * Helper class to run CodeNarc.
@@ -63,6 +64,7 @@ class CodeNarcRunner {
         assert sourceAnalyzer, 'The sourceAnalyzer property must be set to a valid SourceAnalayzer'
 
         def startTime = System.currentTimeMillis()
+        new RuleRegistryInitializer().initializeRuleRegistry()
         def ruleSet = createRuleSet()
         new PropertiesFileRuleSetConfigurer().configure(ruleSet)
         def results = sourceAnalyzer.analyze(ruleSet)

@@ -122,7 +122,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
     }
 
     void testAnalyze_BaseDirectoryAndSourceDirectories() {
-        final SOURCE_DIRS = ['source', 'sourcewithdirs', 'rulesets']
+        final SOURCE_DIRS = ['source', 'sourcewithdirs']
         analyzer.baseDirectory = 'src/test/resources'
         analyzer.sourceDirectories = SOURCE_DIRS
         def results = analyzer.analyze(ruleSet)
@@ -142,14 +142,12 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
                 'sourcewithdirs/subdir2',
                 'sourcewithdirs/subdir2/subdir2a',
                 'sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
-                'sourcewithdirs/subdir2/Subdir2File1.groovy',
-                'rulesets',
-                'rulesets/GroovyRuleSet1.groovy'
+                'sourcewithdirs/subdir2/Subdir2File1.groovy'
         ])
-        assert testCountRule.count == 8
+        assert testCountRule.count == 7
         assertEqualSets(childResultsClasses(results), [DirectoryResults, DirectoryResults, DirectoryResults])
-        assert results.totalNumberOfFiles == 8
-        assert results.numberOfFilesWithViolations == 8
+        assert results.totalNumberOfFiles == 7
+        assert results.numberOfFilesWithViolations == 7
     }
 
     void testAnalyze_BaseDirectory_NoViolations() {

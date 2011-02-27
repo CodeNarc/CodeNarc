@@ -18,6 +18,9 @@ package org.codenarc.ruleset
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.generic.IllegalRegexRule
+import org.codenarc.ruleregistry.RuleRegistryHolder
+import org.codenarc.rule.naming.ClassNameRule
+import org.codenarc.ruleregistry.RuleRegistry
 
 /**
  * Tests for RuleSetBuilder
@@ -186,6 +189,14 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
     }
 
+    void testRule_Class_Map() {
+        ruleSetBuilder.ruleset {
+            rule(CatchThrowableRule, [priority:1, enabled:false])
+        }
+        assertRuleNames('CatchThrowable')
+        assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
+    }
+
     void testRule_Class_Closure_SetNonExistentProperty() {
         shouldFailWithMessageContaining('doesNotExist') {
             ruleSetBuilder.ruleset {
@@ -241,6 +252,53 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
         assertRuleNames('DoNothing')
         assertRuleProperties('DoNothing', [priority:1, enabled:false])
+    }
+
+    void testRuleNameOnly_EmptyParentheses() {
+        RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
+        ruleSetBuilder.ruleset {
+            ClassName()
+        }
+        assertRuleNames('ClassName')
+    }
+
+    void testRuleNameOnly_ParenthesesWithMap() {
+        RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
+        ruleSetBuilder.ruleset {
+            ClassName(priority:1)
+        }
+        assertRuleProperties('ClassName', [priority:1, enabled:true])
+    }
+
+    void testRuleNameOnly_NoParenthesesOrClosure() {
+        RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
+        ruleSetBuilder.ruleset {
+            ClassName
+        }
+        assertRuleNames('ClassName')
+    }
+
+    void testRuleNameOnly_NoSuchRuleName() {
+        RuleRegistryHolder.ruleRegistry = null
+        shouldFailWithMessageContaining('ClassName') {
+            ruleSetBuilder.ruleset {
+                ClassName()
+            }
+        }
+    }
+
+    void testRuleNameOnly_Closure() {
+        RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
+        ruleSetBuilder.ruleset {
+            ClassName {
+                priority = 1
+                enabled = false
+            }
+            def myVariable = 27
+            println "some arbitrary Groovy code: $myVariable"
+        }
+        assertRuleNames('ClassName')
+        assertRuleProperties('ClassName', [priority:1, enabled:false])
     }
 
     @SuppressWarnings('JUnitTestMethodWithoutAssert')

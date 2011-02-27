@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
+import org.codenarc.ruleregistry.RuleRegistryHolder
 
 /**
  * A Builder for RuleSets. Create a RuleSet by calling the <code>ruleset</code>
@@ -25,7 +26,7 @@ import org.codenarc.rule.Rule
  * <ul>
  *   <li><code>ruleset</code> - to load a RuleSet file. The path specifies either a
  *          Groovy file or an XML file.</li>
- *   <li><code>rule</code> - to load a single Rule</li>
+ *   <li><code>rule</code> - to load a single Rule (specify either the rule name or rule class)</li>
  *   <li><code>description</code> - description of the RuleSet (optional)</li>
  * </ul>
  *
@@ -58,6 +59,7 @@ class TopLevelDelegate {
         def ruleSet = RuleSetUtil.loadRuleSetFile(path)
         def ruleSetConfigurer = new RuleSetDelegate(ruleSet)
         closure.delegate = ruleSetConfigurer
+        closure.setResolveStrategy(Closure.DELEGATE_FIRST)
         closure.call()
         allRuleSet.addRuleSet(ruleSetConfigurer.ruleSet)
     }
@@ -65,6 +67,13 @@ class TopLevelDelegate {
     void rule(Class ruleClass) {
         RuleSetUtil.assertClassImplementsRuleInterface(ruleClass)
         Rule rule = ruleClass.newInstance()
+        allRuleSet.addRule(rule)
+    }
+
+    void rule(Class ruleClass, Map properties) {
+        RuleSetUtil.assertClassImplementsRuleInterface(ruleClass)  // TODO refactor
+        Rule rule = ruleClass.newInstance()
+        properties.each { key, value -> rule[key] = value }
         allRuleSet.addRule(rule)
     }
 
@@ -88,6 +97,24 @@ class TopLevelDelegate {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.call()
         allRuleSet.addRule(rule)
+    }
+
+    def propertyMissing(String name) {
+        def ruleClass = RuleRegistryHolder.ruleRegistry?.getRuleClass(name)
+        assert ruleClass, "No such rule named [$name]"
+        rule(ruleClass)
+    }
+
+    def methodMissing(String name, args) {
+        def ruleClass = RuleRegistryHolder.ruleRegistry?.getRuleClass(name)
+        assert ruleClass, "No such rule named [$name]"
+//        assert args[0] instanceof Closure || args[0] instanceof Map
+        if (args.size() > 0) {
+            rule(ruleClass, args[0])
+        }
+        else {
+            rule(ruleClass)
+        }
     }
 
     @SuppressWarnings('EmptyMethod')

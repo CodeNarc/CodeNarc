@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,28 +18,28 @@ package org.codenarc.ant
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.ruleset.RuleSets
 
 /**
- * Run the CodeNarc Ant Task against a portion of the CodeNarc source using all predefined RuleSets.
+ * Run the CodeNarc Ant Task against a portion of the CodeNarc source using a custom, predefined RuleSet.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
+class CodeNarcTask_CustomRuleSetTest extends AbstractTestCase {
 
     private static final BASE_DIR = 'src'
-    private static final RULESET_FILES = RuleSets.ALL_RULESET_FILES.join(',')
-    private static final REPORT_FILE = 'CodeNarcTaskAllRuleSetsReport.html'
+    private static final RULESET_FILES = 'rulesets/CustomRuleSet.groovy'
 
     private codeNarcTask
     private fileSet
-    private outputFile
 
-    void testExecute_MultipleRuleSetFiles() {
+    void testExecute_UseCustomRuleSet() {
         codeNarcTask.addFileset(fileSet)
-        codeNarcTask.execute()
-        assertReportFileExists()
+        def output = captureSystemOut {
+            codeNarcTask.execute()
+        }
+        log("output: $output")
+        assert output.contains('CyclomaticComplexity')
     }
 
     void setUp() {
@@ -47,16 +47,11 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
 
         def project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR), project:project)
-        fileSet.setIncludes('main/groovy/org/codenarc/rule/basic/*.groovy')
+        fileSet.setIncludes('main/groovy/org/codenarc/rule/dry/*.groovy')
 
         codeNarcTask = new CodeNarcTask(project:project)
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:REPORT_FILE))
+        codeNarcTask.addConfiguredReport(new Report(type:'console'))
         codeNarcTask.ruleSetFiles = RULESET_FILES
-        outputFile = new File(REPORT_FILE)
-    }
-
-    private void assertReportFileExists() {
-        assert outputFile.exists()
     }
 
 }
