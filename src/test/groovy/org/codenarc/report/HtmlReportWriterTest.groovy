@@ -194,6 +194,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         super.setUp()
         reportWriter = new HtmlReportWriter() 
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
+        reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
 
         def dirResultsMain = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
         def dirResultsCode = new DirectoryResults(path:'src/main/code', numberOfFilesInThisDirectory:2)
