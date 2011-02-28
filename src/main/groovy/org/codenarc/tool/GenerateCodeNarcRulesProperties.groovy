@@ -1,0 +1,51 @@
+/*
+ * Copyright 2011 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ package org.codenarc.tool
+
+import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
+
+/**
+ * Java application (main() method) that generates the 'codenarc-base-rules.properties' properties file.
+ * This properties file contains <ruleName> = <ruleClass> properties for all CodeNarc rules.
+ *
+ * @see org.codenarc.ruleregistry.PropertiesFileRuleRegistry
+ *
+ * @author Chris Mair
+ * @version $Revision: $ - $Date:  $
+ */
+class GenerateCodeNarcRulesProperties {
+
+    protected static final PROPERTIES_FILE = PropertiesFileRuleRegistry.PROPERTIES_FILE
+
+    /**
+     * Write out all current rules to the 'codenarc-base-rules.properties' properties file
+     * @param args - command-line args (not used)
+     */
+    static void main(String[] args) {
+        def sortedRules = GenerateUtil.buildSortedListOfAllRules()
+        println("sortedRules=$sortedRules")
+        def propertiesFile = new File(PROPERTIES_FILE)
+        propertiesFile.withWriter { writer ->
+            writer.println '# CodeNarc Rules (see PropertiesFileRuleRegistry)'
+            sortedRules.each { rule ->
+                writer.println "${rule.name} = ${rule.class.name}"
+            }
+        }
+        println "Finished writing ${sortedRules.size()} rules to $PROPERTIES_FILE"
+    }
+
+
+}

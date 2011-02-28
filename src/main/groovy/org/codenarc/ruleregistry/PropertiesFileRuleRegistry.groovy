@@ -16,13 +16,12 @@
 package org.codenarc.ruleregistry
 
 import org.apache.log4j.Logger
-import org.codenarc.ruleset.CompositeRuleSet
-import org.codenarc.ruleset.RuleSets
-import org.codenarc.ruleset.XmlFileRuleSet
 import org.codenarc.util.io.ClassPathResource
 
 /**
- * Implementation of RuleRegistry that loads the rules from the 'codenarc-base-rules.properties' properties file
+ * Implementation of RuleRegistry that loads the rules from the 'codenarc-base-rules.properties' properties file.
+ *
+ * @see org.codenarc.tool.GenerateCodeNarcRulesProperties
  *
  * @author Chris Mair
  * @version $Revision: $ - $Date:  $
@@ -30,8 +29,8 @@ import org.codenarc.util.io.ClassPathResource
 class PropertiesFileRuleRegistry implements RuleRegistry {
 
     private static final LOG = Logger.getLogger(PropertiesFileRuleRegistry)
-    private static final PROPERTIES_FILE = 'codenarc-base-rules.properties'
-    private static final PROPERTIES_FILE_PATH = "src/main/resources/$PROPERTIES_FILE"
+    private static final PROPERTIES_FILENAME = 'codenarc-base-rules.properties'
+    public static final PROPERTIES_FILE = "src/main/resources/$PROPERTIES_FILENAME"
 
     private Properties properties
 
@@ -51,39 +50,11 @@ class PropertiesFileRuleRegistry implements RuleRegistry {
 
     private void loadRules() {
         def startTime = System.currentTimeMillis()
-        def inputStream = ClassPathResource.getInputStream(PROPERTIES_FILE)
+        def inputStream = ClassPathResource.getInputStream(PROPERTIES_FILENAME)
         properties = new Properties()
         properties.load(inputStream)
         def elapsedTime = System.currentTimeMillis() - startTime
         LOG.info("Loaded properties file in ${elapsedTime}ms; ${properties.size()} rules")
-    }
-
-    //--------------------------------------------------------------------------
-    // Development-Time Utilities
-    //--------------------------------------------------------------------------
-
-    /**
-     * Write out all current rules to the 'codenarc-base-rules.properties' properties file
-     * @param args - command-line args (not used)
-     */
-    static void main(String[] args) {
-        def allRuleSet = new CompositeRuleSet()
-        RuleSets.ALL_RULESET_FILES.each { ruleSetPath ->
-            def ruleSet = new XmlFileRuleSet(ruleSetPath)
-            allRuleSet.addRuleSet(ruleSet)
-        }
-        def allRules = []
-        allRules.addAll(allRuleSet.rules)
-        def sortedRules = allRules.sort { rule -> rule.name }
-        println("sortedRules=$sortedRules")
-        def propertiesFile = new File(PROPERTIES_FILE_PATH)
-        propertiesFile.withWriter { writer ->
-            writer.println '# CodeNarc Rules (see PropertiesFileRuleRegistry)'
-            sortedRules.each { rule ->
-                writer.println "${rule.name} = ${rule.class.name}"
-            }
-        }
-        println "Finished writing ${sortedRules.size()} rules to $PROPERTIES_FILE_PATH"
     }
 
 }

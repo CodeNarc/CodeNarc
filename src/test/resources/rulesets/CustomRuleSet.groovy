@@ -20,8 +20,6 @@ ruleset {
     rule(org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule) {
         priority = 3
     }
-
     ruleset('rulesets/dry.xml')
-
 
 }

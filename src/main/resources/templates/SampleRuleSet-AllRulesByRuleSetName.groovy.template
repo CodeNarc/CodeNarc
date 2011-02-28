@@ -1,0 +1,13 @@
+ruleset {
+
+    description '''
+        A Sample Groovy RuleSet containing all CodeNarc Rules, grouped by RuleSet name.
+        You can use this as a template for your own custom RuleSet.
+        Just delete the rules that you don't want to include.
+        '''
+
+    <% ruleSets.each { name, rules -> %>// ${name}
+    <% rules.each { rule -> %>${rule.name}
+    <% } %>
+    <% } %>
+}

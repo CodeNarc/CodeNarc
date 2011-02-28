@@ -31,7 +31,8 @@ abstract class AbstractTestCase extends GroovyTestCase {
 
     protected static final CODENARC_PROPERTIES_FILE_PROP = 'codenarc.properties.file'
 
-    private static final LOG = Logger.getLogger(AbstractTestCase)
+    @SuppressWarnings('LoggerWithWrongModifiers')
+    protected final LOG = Logger.getLogger(getClass())
 
     /**
      * Assert that the specified closure should throw an exception whose message contains text
@@ -93,7 +94,7 @@ abstract class AbstractTestCase extends GroovyTestCase {
      * @param message - the message to log; toString() is applied first
      */
     protected void log(message) {
-        LOG.debug "[${classNameNoPackage()}] ${message.toString()}"
+        LOG.info message
     }
 
     protected String captureSystemOut(Closure closure) {
@@ -133,7 +134,7 @@ abstract class AbstractTestCase extends GroovyTestCase {
     //------------------------------------------------------------------------------------
 
     void setUp() {
-        LOG.debug "-------------------------[ ${classNameNoPackage()}.${getName()} ]------------------------"
+        log "----------[ ${classNameNoPackage()}.${getName()} ]----------"
         super.setUp()
     }
 
