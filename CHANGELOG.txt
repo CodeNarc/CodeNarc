@@ -70,6 +70,7 @@ BUG FIXES
 - Fix bug #3162975: The UnusedPrivate* rules now correctly read anonymous classes.
 - Fix bug #3155974: The UnusedPrivate* rules now correctly read inner classes.
 - Fix bug #3183443: Restricted the ConfusingTernary rule to reduce false positives. The rule looks for inverted conditionals in ternary statements. It did not account for Groovy Truth, and suggested 'x != null' be inverted to 'x', but that is not the inverse. So the rule was relaxed. 
+- Fix bug #3195027: The violation message for "Replace Getter with Property Access" suggests converting ".getURLs()" to ".uRLs". This has been corrected to ".URLs". 
 
 POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.

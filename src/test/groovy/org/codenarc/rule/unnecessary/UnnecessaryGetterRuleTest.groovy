@@ -39,7 +39,6 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
             x.firstName
             x.a
             x.getnotagetter()
-            x.getURL()
             x.getClass()
             x.getProperty('key') '''
         assertNoViolations(SOURCE)
@@ -67,6 +66,20 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
             x.getA()
         '''
         assertSingleViolation(SOURCE, 2, 'x.getA()', 'getA() can probably be rewritten as a')
+    }
+
+    void testUpperCaseGetter1() {
+        final SOURCE = '''
+            x.getURLs()
+        '''
+        assertSingleViolation(SOURCE, 2, 'x.getURLs()', 'getURLs() can probably be rewritten as URLs')
+    }
+
+    void testUpperCaseGetter2() {
+        final SOURCE = '''
+            x.getURL()
+        '''
+        assertSingleViolation(SOURCE, 2, 'x.getURL()', 'getURL() can probably be rewritten as URL')
     }
 
     void testNonGetter() {

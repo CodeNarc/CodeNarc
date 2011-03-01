@@ -26,14 +26,11 @@ import org.codenarc.test.AbstractTestCase
 class GenerateCodeNarcRulesPropertiesTest extends AbstractTestCase {
 
     void testMain_GeneratesPropertiesFile() {
-        def before = System.currentTimeMillis()
         GenerateCodeNarcRulesProperties.main(null)
 
         def outputFile = new File(GenerateCodeNarcRulesProperties.PROPERTIES_FILE)
         def outputFileText = outputFile.text
         log("contents=$outputFileText")
-        def lastModified = outputFile.lastModified()
-        assert lastModified >= before
 
         assert outputFileText.contains('UnnecessaryBigDecimalInstantiation = org.codenarc.rule.unnecessary.UnnecessaryBigDecimalInstantiationRule')
     }

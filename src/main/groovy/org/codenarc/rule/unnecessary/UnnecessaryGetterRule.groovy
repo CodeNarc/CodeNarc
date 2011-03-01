@@ -62,6 +62,9 @@ class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
             } else if ((name[4] as Character).isLowerCase()) {
                 def propertyName = name[3].toLowerCase() + name[4..-1]
                 addViolation call, "$name() can probably be rewritten as $propertyName"
+            } else {
+                def propertyName = name[3..-1]
+                addViolation call, "$name() can probably be rewritten as $propertyName"
             }
         }
     }

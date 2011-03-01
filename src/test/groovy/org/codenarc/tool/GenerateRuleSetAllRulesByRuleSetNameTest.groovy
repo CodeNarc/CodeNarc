@@ -26,14 +26,11 @@ import org.codenarc.test.AbstractTestCase
 class GenerateRuleSetAllRulesByRuleSetNameTest extends AbstractTestCase {
 
     void testMain_GeneratesSampleRuleSetFile() {
-        def before = System.currentTimeMillis()
         GenerateRuleSetAllRulesByRuleSetName.main(null)
 
         def outputFile = new File(GenerateRuleSetAllRulesByRuleSetName.RULESET_FILE)
         def outputFileText = outputFile.text
         log("contents=$outputFileText")
-        def lastModified = outputFile.lastModified()
-        assert lastModified >= before
 
         assertContainsAll(outputFileText, ['// ', 'unnecessary', 'UnnecessaryBigDecimalInstantiation'])
     }
