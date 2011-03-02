@@ -26,7 +26,7 @@ import org.codenarc.test.AbstractTestCase
 class GenerateRuleSetAllRulesTest extends AbstractTestCase {
 
     void testMain_GeneratesSampleRuleSetFile() {
-        def before = System.currentTimeMillis()
+        def before = System.currentTimeMillis() - 1000  // in case system clock rounds to second
         GenerateRuleSetAllRules.main(null)
 
         def outputFile = new File(GenerateRuleSetAllRules.RULESET_FILE)
