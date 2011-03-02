@@ -15,17 +15,20 @@
  */
 package org.codenarc.source
 
+import groovy.grape.GrabAnnotationTransformation
+import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.ModuleNode
+import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilationUnit
 import org.codehaus.groovy.control.Phases
 import org.codehaus.groovy.control.SourceUnit
-import org.codehaus.groovy.control.CompilationFailedException
-import org.apache.log4j.Logger
+import org.codehaus.groovy.transform.ASTTransformation
 
 /**
  * Abstract superclass for SourceCode implementations
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
@@ -68,15 +71,28 @@ abstract class AbstractSourceCode implements SourceCode {
             CompilationUnit compUnit = new CompilationUnit()
             compUnit.addSource(unit)
             try {
+                removeGrabTransformation(compUnit)
                 compUnit.compile(Phases.CONVERSION)
                 ast = unit.getAST()
             }
-            catch(CompilationFailedException e) {
+            catch (CompilationFailedException e) {
                 LOG.warn("Compilation failed for [${toString()}]")
             }
             astParsed = true
         }
         ast
+    }
+
+    private removeGrabTransformation(CompilationUnit compUnit) {
+        compUnit.phaseOperations?.each { List xforms ->
+            xforms?.removeAll { entry ->
+
+                entry.getClass().declaredFields.any {
+                    it.name == 'val$instance' &&
+                            it.type == ASTTransformation
+                } && entry.val$instance instanceof GrabAnnotationTransformation
+            }
+        }
     }
 
     /**
@@ -91,7 +107,7 @@ abstract class AbstractSourceCode implements SourceCode {
             return -1
         }
         if (charIndex > 0) {
-            (charIndex-1..0).each { index ->
+            (charIndex - 1..0).each { index ->
                 def ch = source[index]
                 if (ch == '\n') {
                     lineCount++

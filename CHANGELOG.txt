@@ -74,12 +74,14 @@ BUG FIXES
 - Fix bug #3155974: The UnusedPrivate* rules now correctly read inner classes.
 - Fix bug #3183443: Restricted the ConfusingTernary rule to reduce false positives. The rule looks for inverted conditionals in ternary statements. It did not account for Groovy Truth, and suggested 'x != null' be inverted to 'x', but that is not the inverse. So the rule was relaxed. 
 - Fix bug #3195027: The violation message for "Replace Getter with Property Access" suggests converting ".getURLs()" to ".uRLs". This has been corrected to ".URLs". 
+- Fix bug #3196019: Compiling files with unresolved Grapes dependencies no longer causes an error.
 
 POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
 
 THANKS
  - Many thanks to Mathilde Lemée, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
+ - Big thanks to Evgeny Goldin and Cédric Champeau for reporting bugs which helps us improve the product so much faster.
  
 Changes in version 0.12 (January 2011)
 -------------------------------------------
