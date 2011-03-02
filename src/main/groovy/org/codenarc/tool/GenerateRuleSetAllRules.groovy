@@ -16,9 +16,10 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
+import org.apache.log4j.Logger
 
 /**
- * Java application (main() method) that generates the "SampleRuleSet-AllRules.groovy.template" file.
+ * Java application (main() method) that generates the "StarterRuleSet-AllRules.groovy.txt.template" file.
  * This file is a valid CodeNarc ruleset file that includes ALL rules distributed with CodeNarc.
  *
  * @author Chris Mair
@@ -26,8 +27,9 @@ import groovy.text.SimpleTemplateEngine
  */
 class GenerateRuleSetAllRules {
 
-    protected static final RULESET_FILE = 'src/site/resources/SampleRuleSet-AllRules.groovy'
-    private static final TEMPLATE_FILE = 'src/main/resources/templates/SampleRuleSet-AllRules.groovy.template'
+    protected static final RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRules.groovy.txt'
+    private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRules.groovy.template'
+    private static final LOG = Logger.getLogger(GenerateRuleSetAllRules)
 
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file
@@ -35,7 +37,7 @@ class GenerateRuleSetAllRules {
      */
     static void main(String[] args) {
         def sortedRules = GenerateUtil.buildSortedListOfAllRules()
-        println("sortedRules=$sortedRules")
+        LOG.debug("sortedRules=$sortedRules")
 
         def binding = [rules:sortedRules]
         def ruleSetTemplateFile = new File(TEMPLATE_FILE)
@@ -46,7 +48,7 @@ class GenerateRuleSetAllRules {
         def outputFile = new File(RULESET_FILE)
         outputFile.text = ruleSetText
 
-        println "Finished writing ${sortedRules.size()} rules to $RULESET_FILE"
+        LOG.info("Finished writing ${sortedRules.size()} rules to $RULESET_FILE")
     }
 
 

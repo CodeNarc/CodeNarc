@@ -16,6 +16,7 @@
  package org.codenarc.tool
 
 import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
+import org.apache.log4j.Logger
 
 /**
  * Java application (main() method) that generates the 'codenarc-base-rules.properties' properties file.
@@ -29,6 +30,7 @@ import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
 class GenerateCodeNarcRulesProperties {
 
     protected static final PROPERTIES_FILE = PropertiesFileRuleRegistry.PROPERTIES_FILE
+    private static final LOG = Logger.getLogger(GenerateCodeNarcRulesProperties)
 
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file
@@ -36,7 +38,7 @@ class GenerateCodeNarcRulesProperties {
      */
     static void main(String[] args) {
         def sortedRules = GenerateUtil.buildSortedListOfAllRules()
-        println("sortedRules=$sortedRules")
+        LOG.debug("sortedRules=$sortedRules")
         def propertiesFile = new File(PROPERTIES_FILE)
         propertiesFile.withWriter { writer ->
             writer.println '# CodeNarc Rules (see PropertiesFileRuleRegistry)'
@@ -44,7 +46,7 @@ class GenerateCodeNarcRulesProperties {
                 writer.println "${rule.name} = ${rule.class.name}"
             }
         }
-        println "Finished writing ${sortedRules.size()} rules to $PROPERTIES_FILE"
+        LOG.info("Finished writing ${sortedRules.size()} rules to $PROPERTIES_FILE")
     }
 
 

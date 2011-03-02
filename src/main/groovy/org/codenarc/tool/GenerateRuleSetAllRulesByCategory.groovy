@@ -18,19 +18,21 @@
 import groovy.text.SimpleTemplateEngine
 import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
+import org.apache.log4j.Logger
 
 /**
- * Java application (main() method) that generates the "SampleRuleSet-AllRulesByRuleSetName.groovy.template" file.
+ * Java application (main() method) that generates the "StarterRuleSet-AllRulesByCategory.groovy.txt.template" file.
  * This file is a valid CodeNarc ruleset file that includes ALL rules distributed with CodeNarc, grouped by the
- * RuleSet name.
+ * category.
  *
  * @author Chris Mair
  * @version $Revision: $ - $Date:  $
  */
-class GenerateRuleSetAllRulesByRuleSetName {
+class GenerateRuleSetAllRulesByCategory {
 
-    protected static final RULESET_FILE = 'src/site/resources/SampleRuleSet-AllRulesByRuleSetName.groovy'
-    private static final TEMPLATE_FILE = 'src/main/resources/templates/SampleRuleSet-AllRulesByRuleSetName.groovy.template'
+    protected static final RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRulesByCategory.groovy.txt'
+    private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRulesByCategory.groovy.template'
+    private static final LOG = Logger.getLogger(GenerateRuleSetAllRulesByCategory)
 
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file
@@ -44,7 +46,7 @@ class GenerateRuleSetAllRulesByRuleSetName {
             rulesByRuleSet[ruleSetPath] = GenerateUtil.sortRules(ruleSet.rules)
         }
 
-        println("rulesByRuleSet=$rulesByRuleSet")
+        LOG.info("rulesByCategory=$rulesByRuleSet")
 
         def binding = [ruleSets:rulesByRuleSet]
         def ruleSetTemplateFile = new File(TEMPLATE_FILE)
@@ -55,7 +57,7 @@ class GenerateRuleSetAllRulesByRuleSetName {
         def outputFile = new File(RULESET_FILE)
         outputFile.text = ruleSetText
 
-        println "Finished writing $RULESET_FILE"
+        LOG.info("Finished writing $RULESET_FILE")
     }
 
 

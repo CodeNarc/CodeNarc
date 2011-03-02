@@ -5,6 +5,9 @@ http://www.codenarc.org
 Changes in version 0.13 (February 2011)
 -------------------------------------------
 NEW FEATURES
+- New and improved syntax for defining custom rulesets. Just list the rule names you want. No need to specify
+  ruleset filename or rule class. No more tweaking your custom rulesets with every CodeNarc release when we
+  add new rules to the "basic" ruleset or one of the others. Feature #3193684.
 - Better support for command line runners. You can now specify the report type "console" as a command line parameter,
   and the CodeNarc text report is output to the console instead of a file. Feature #3162487
 - All rules now provide a nicely formatted message. This makes console tools and the CodeNarc Web Console much more

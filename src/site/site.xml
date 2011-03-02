@@ -46,6 +46,7 @@
             <item name="Creating a RuleSet" href="/codenarc-creating-ruleset.html"/>
             <item name="Creating a Rule" href="/codenarc-creating-rule.html"/>
             <item name="Configuring Rules" href="/codenarc-configuring-rules.html"/>
+            <item name="Starter RuleSet (All)" href="/StarterRuleSet-AllRulesByCategory.groovy.txt"/>
         </menu>
 
         <menu name="Report Types">

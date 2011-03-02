@@ -18,18 +18,18 @@ package org.codenarc.tool
 import org.codenarc.test.AbstractTestCase
 
 /**
- * Tests for GenerateRuleSetAllRulesByRuleSetName
+ * Tests for GenerateRuleSetAllRulesByCategory
  *
  * @author Chris Mair
  * @version $Revision: 619 $ - $Date: 2011-02-27 15:38:33 -0500 (Sun, 27 Feb 2011) $
  */
-class GenerateRuleSetAllRulesByRuleSetNameTest extends AbstractTestCase {
+class GenerateRuleSetAllRulesByCategoryTest extends AbstractTestCase {
 
     void testMain_GeneratesSampleRuleSetFile() {
         def before = System.currentTimeMillis() - 1000  // in case system clock rounds to second
-        GenerateRuleSetAllRulesByRuleSetName.main(null)
+        GenerateRuleSetAllRulesByCategory.main(null)
 
-        def outputFile = new File(GenerateRuleSetAllRulesByRuleSetName.RULESET_FILE)
+        def outputFile = new File(GenerateRuleSetAllRulesByCategory.RULESET_FILE)
         def outputFileText = outputFile.text
         log("contents=$outputFileText")
         def lastModified = outputFile.lastModified()

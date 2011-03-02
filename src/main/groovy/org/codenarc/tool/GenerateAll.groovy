@@ -30,7 +30,7 @@ class GenerateAll {
     static void main(String[] args) {
         GenerateCodeNarcRulesProperties.main(null)
         GenerateRuleSetAllRules.main(null)
-        GenerateRuleSetAllRulesByRuleSetName.main(null)
+        GenerateRuleSetAllRulesByCategory.main(null)
     }
 
 
