@@ -32,6 +32,8 @@ class GenerateCodeNarcRulesProperties {
     protected static final PROPERTIES_FILE = PropertiesFileRuleRegistry.PROPERTIES_FILE
     private static final LOG = Logger.getLogger(GenerateCodeNarcRulesProperties)
 
+    protected static propertiesFile = PROPERTIES_FILE
+
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file
      * @param args - command-line args (not used)
@@ -39,14 +41,14 @@ class GenerateCodeNarcRulesProperties {
     static void main(String[] args) {
         def sortedRules = GenerateUtil.buildSortedListOfAllRules()
         LOG.debug("sortedRules=$sortedRules")
-        def propertiesFile = new File(PROPERTIES_FILE)
+        def propertiesFile = new File(propertiesFile)
         propertiesFile.withWriter { writer ->
             writer.println '# CodeNarc Rules (see PropertiesFileRuleRegistry)'
             sortedRules.each { rule ->
                 writer.println "${rule.name} = ${rule.class.name}"
             }
         }
-        LOG.info("Finished writing ${sortedRules.size()} rules to $PROPERTIES_FILE")
+        LOG.info("Finished writing ${sortedRules.size()} rules to $propertiesFile")
     }
 
 

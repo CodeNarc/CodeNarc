@@ -31,6 +31,8 @@ class GenerateRuleSetAllRules {
     private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRules.groovy.template'
     private static final LOG = Logger.getLogger(GenerateRuleSetAllRules)
 
+    protected static ruleSetFile = RULESET_FILE
+
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file
      * @param args - command-line args (not used)
@@ -45,10 +47,10 @@ class GenerateRuleSetAllRules {
         def engine = new SimpleTemplateEngine()
         def ruleSetText = engine.createTemplate(ruleSetTemplateFile).make(binding)
 
-        def outputFile = new File(RULESET_FILE)
+        def outputFile = new File(ruleSetFile)
         outputFile.text = ruleSetText
 
-        LOG.info("Finished writing ${sortedRules.size()} rules to $RULESET_FILE")
+        LOG.info("Finished writing ${sortedRules.size()} rules to $ruleSetFile")
     }
 
 

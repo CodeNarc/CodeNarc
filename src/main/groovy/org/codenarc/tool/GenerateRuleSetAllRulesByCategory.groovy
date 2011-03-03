@@ -34,6 +34,8 @@ class GenerateRuleSetAllRulesByCategory {
     private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRulesByCategory.groovy.template'
     private static final LOG = Logger.getLogger(GenerateRuleSetAllRulesByCategory)
 
+    protected static ruleSetFile = RULESET_FILE
+
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file
      * @param args - command-line args (not used)
@@ -54,10 +56,10 @@ class GenerateRuleSetAllRulesByCategory {
         def engine = new SimpleTemplateEngine()
         def ruleSetText = engine.createTemplate(ruleSetTemplateFile).make(binding)
 
-        def outputFile = new File(RULESET_FILE)
+        def outputFile = new File(ruleSetFile)
         outputFile.text = ruleSetText
 
-        LOG.info("Finished writing $RULESET_FILE")
+        LOG.info("Finished writing $ruleSetFile")
     }
 
 
