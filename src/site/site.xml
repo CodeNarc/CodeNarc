@@ -61,6 +61,7 @@
         </menu>
 
         <menu name="Rules">
+            <item name="Rule Index" href="/codenarc-rule-index.html"/>
             <item name="Basic Rules" href="/codenarc-rules-basic.html"/>
             <item name="Braces Rules" href="/codenarc-rules-braces.html"/>
             <item name="Concurrency Rules" href="/codenarc-rules-concurrency.html"/>

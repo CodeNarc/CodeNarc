@@ -1,0 +1,20 @@
+		--------------------------------------------------
+					  CodeNarc - Rule Index
+		--------------------------------------------------
+
+Rule Index
+~~~~~~~~~~
+  <<CodeNarc>> includes ${numberOfRules} rules.
+
+    <% ruleSets.each { name, rules -> %>
+    <% def ruleSetLink = "codenarc-rules-${name}.html" %>
+    <% def capitalizedName = name.capitalize() %>
+* {{{$ruleSetLink}$capitalizedName}}
+    <% rules.each { rule -> %>
+    * ${rule.name}
+    <% } %>
+    <% } %>
+
+
+
+

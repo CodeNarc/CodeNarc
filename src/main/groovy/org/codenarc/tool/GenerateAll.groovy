@@ -15,6 +15,8 @@
  */
  package org.codenarc.tool
 
+import org.apache.log4j.BasicConfigurator
+
 /**
  * Java application (main() method) that invokes all of the Generate* scripts.
  *
@@ -28,9 +30,12 @@ class GenerateAll {
      * @param args - command-line args (not used)
      */
     static void main(String[] args) {
+        BasicConfigurator.configure()
+
         GenerateCodeNarcRulesProperties.main(null)
         GenerateRuleSetAllRules.main(null)
         GenerateRuleSetAllRulesByCategory.main(null)
+        GenerateRuleIndexPage.main(null)
     }
 
 
