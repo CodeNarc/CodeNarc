@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.expr.GStringExpression
  */
 class UnnecessaryGStringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryGString'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryGStringAstVisitor
 }
 

@@ -29,7 +29,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryPublicModifier'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryPublicModifierAstVisitor
 }
 

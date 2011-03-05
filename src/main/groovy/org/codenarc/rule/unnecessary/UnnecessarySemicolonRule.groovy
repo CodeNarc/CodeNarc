@@ -32,7 +32,7 @@ import org.codenarc.source.SourceCode
  */
 class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySemicolon'
-    int priority = 2
+    int priority = 3
     // ^\\s*\\*.*   == any line that starts whitespace and a *
     // ^\\*.*       == any line that starts with a *
     // /\*.*        == any line that contains the /* sequence

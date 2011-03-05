@@ -28,7 +28,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class UnnecessaryDefInMethodDeclarationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDefInMethodDeclaration'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryDefInMethodDeclarationAstVisitor
 }
 

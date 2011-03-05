@@ -31,7 +31,7 @@ import org.codenarc.util.ConsecutiveUtils
  */
 class ConsecutiveStringConcatenationRule extends AbstractAstVisitorRule {
     String name = 'ConsecutiveStringConcatenation'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = ConsecutiveStringConcatenationAstVisitor
 }
 
