@@ -105,6 +105,14 @@ I am a string
 ' can be wrapped in single quotes instead of double quotes""")
     }
 
+    void testDoubleViolations() {
+        final SOURCE = '''
+            class Person {
+                def name = "Hamlet"
+            }        '''
+        assertSingleViolation(SOURCE, 3, 'def name = "Hamlet"')
+    }
+
     protected Rule createRule() {
         new UnnecessaryGStringRule()
     }

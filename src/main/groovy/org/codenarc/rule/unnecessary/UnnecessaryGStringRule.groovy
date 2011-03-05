@@ -35,7 +35,7 @@ class UnnecessaryGStringRule extends AbstractAstVisitorRule {
 class UnnecessaryGStringAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstantExpression(ConstantExpression expression) {
-        if (expression.value instanceof String && expression.lineNumber > -1) {
+        if (isFirstVisit(expression) && expression.value instanceof String && expression.lineNumber > -1) {
             if (!expressionContainsBannedCharacters(expression)) {
                 suppressException(StringIndexOutOfBoundsException) {
                     addViolationIfDoubleQuoted(expression)
