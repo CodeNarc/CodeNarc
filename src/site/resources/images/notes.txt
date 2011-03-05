@@ -1,4 +1,5 @@
 Font for button: 
 42 Point
 Sans Bold Italic
+White
 Sort of centered. 
