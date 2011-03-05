@@ -26,7 +26,7 @@ import org.codenarc.util.AstUtil
  * The code synchronizes on a boxed primitive constant, such as an Integer. Since Integer objects can be cached and shared, this code could be synchronizing on the same object as other, unrelated code, leading to unresponsiveness and possible deadlock
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SynchronizedOnBoxedPrimitiveRule extends AbstractAstVisitorRule {
     String name = 'SynchronizedOnBoxedPrimitive'

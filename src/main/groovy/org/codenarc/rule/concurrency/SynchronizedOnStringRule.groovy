@@ -27,7 +27,7 @@ import org.codenarc.util.AstUtil
  * Synchronization on a String field can lead to deadlock because Strings are interned by the JVM and can be shared. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SynchronizedOnStringRule extends AbstractAstVisitorRule {
     String name = 'SynchronizedOnString'

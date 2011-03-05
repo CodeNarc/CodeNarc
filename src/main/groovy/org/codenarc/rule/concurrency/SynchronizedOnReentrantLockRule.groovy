@@ -27,7 +27,7 @@ import org.codenarc.util.AstUtil
  * Synchronizing on a ReentrantLock field is almost never the intended usage. A ReentrantLock should be obtained using the lock() method and released in a finally block using the unlock() method. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class SynchronizedOnReentrantLockRule extends AbstractAstVisitorRule {
     String name = 'SynchronizedOnReentrantLock'

@@ -25,7 +25,7 @@ import java.lang.reflect.Modifier
  * A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class EmptyMethodRule extends AbstractAstVisitorRule {
     String name = 'EmptyMethod'

@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for GenerateRuleIndexPage
  *
  * @author Chris Mair
- * @version $Revision: 619 $ - $Date: 2011-02-27 15:38:33 -0500 (Sun, 27 Feb 2011) $
+ * @version $Revision$ - $Date$
  */
 class GenerateRuleIndexPageTest extends AbstractTestCase {
 

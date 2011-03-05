@@ -25,7 +25,7 @@ import org.apache.log4j.Logger
  * @see org.codenarc.ruleregistry.PropertiesFileRuleRegistry
  *
  * @author Chris Mair
- * @version $Revision: $ - $Date:  $
+ * @version $Revision$ - $Date$
  */
 class GenerateCodeNarcRulesProperties {
 

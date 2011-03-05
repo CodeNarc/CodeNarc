@@ -24,7 +24,7 @@ import org.codenarc.util.AstUtil
  * A test method that invokes another test method is a chained test; the methods are dependent on one another. Tests should be atomic, and not be dependent on one another. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ChainedTestRule extends AbstractAstVisitorRule {
     String name = 'ChainedTest'

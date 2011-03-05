@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * If a method has a visibility modifier, then the def keyword is unneeded. For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryDefInMethodDeclarationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDefInMethodDeclaration'

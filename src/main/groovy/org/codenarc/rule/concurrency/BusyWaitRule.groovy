@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.stmt.ForStatement
  * Busy waiting (forcing a Thread.sleep() while waiting on a condition) should be avoided. Prefer using the gate and barrier objects in the java.util.concurrent package. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class BusyWaitRule extends AbstractAstVisitorRule {
     String name = 'BusyWait'

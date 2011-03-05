@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.expr.GStringExpression
  * String objects should be created with single quotes, and GString objects created with double quotes. Creating normal String objects with double quotes is confusing to readers. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryGStringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryGString'

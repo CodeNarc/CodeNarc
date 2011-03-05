@@ -21,7 +21,7 @@ import org.apache.log4j.BasicConfigurator
  * Java application (main() method) that invokes all of the Generate* scripts.
  *
  * @author Chris Mair
- * @version $Revision: $ - $Date:  $
+ * @version $Revision$ - $Date$
  */
 class GenerateAll {
 

@@ -27,7 +27,7 @@ import org.codenarc.util.ConsecutiveUtils
  * Catches concatenation of two string literals on the same line. These can safely by joined. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class ConsecutiveStringConcatenationRule extends AbstractAstVisitorRule {
     String name = 'ConsecutiveStringConcatenation'

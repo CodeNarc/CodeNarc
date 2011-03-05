@@ -26,7 +26,7 @@ import org.apache.log4j.Logger
  * category.
  *
  * @author Chris Mair
- * @version $Revision: $ - $Date:  $
+ * @version $Revision$ - $Date$
  */
 class GenerateRuleSetAllRulesByCategory {
 

@@ -25,7 +25,7 @@ import java.lang.reflect.Modifier
  * Volatile array fields are unsafe because the contents of the array are not treated as volatile. Changing the entire array reference is visible to other threads, but changing an array element is not. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class VolatileArrayFieldRule extends AbstractAstVisitorRule {
     String name = 'VolatileArrayField'

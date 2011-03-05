@@ -25,7 +25,7 @@ import org.apache.log4j.Logger
  * which is the APT file for the Rule Index page of the project web site.
  *
  * @author Chris Mair
- * @version $Revision: $ - $Date:  $
+ * @version $Revision$ - $Date$
  */
 class GenerateRuleIndexPage {
 

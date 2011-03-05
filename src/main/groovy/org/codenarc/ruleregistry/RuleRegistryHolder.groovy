@@ -19,7 +19,7 @@ package org.codenarc.ruleregistry
  * Holds a reference to the RuleRegistry static singleton
  *
  * @author Chris Mair
- * @version $Revision: $ - $Date:  $
+ * @version $Revision$ - $Date$
  */
 class RuleRegistryHolder {
 

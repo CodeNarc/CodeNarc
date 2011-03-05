@@ -24,7 +24,7 @@ import org.codenarc.util.AstUtil
  * Class contains similarly-named get and set methods where one method of the pair is marked either @WithReadLock or @WithWriteLock and the other is not locked at all.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class InconsistentPropertyLockingRule extends AbstractAstVisitorRule {
     String name = 'InconsistentPropertyLocking'

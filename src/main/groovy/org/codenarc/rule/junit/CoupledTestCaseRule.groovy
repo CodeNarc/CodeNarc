@@ -25,7 +25,7 @@ import org.codenarc.util.AstUtil
  * This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test case or by creating instances of another test case. If you require shared logic in test cases then extract that logic to a new class where it can properly be reused. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class CoupledTestCaseRule extends AbstractAstVisitorRule {
     String name = 'CoupledTestCase'

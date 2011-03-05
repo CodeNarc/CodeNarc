@@ -19,7 +19,7 @@ package org.codenarc.ruleregistry
  * Represents a registry of rule classes, accessible by rule name
  *
  * @author Chris Mair
- * @version $Revision: 24 $ - $Date: 2009-01-31 07:47:09 -0500 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 interface RuleRegistry {
 

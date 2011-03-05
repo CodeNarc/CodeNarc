@@ -23,7 +23,7 @@ import org.apache.log4j.Logger
  * This file is a valid CodeNarc ruleset file that includes ALL rules distributed with CodeNarc.
  *
  * @author Chris Mair
- * @version $Revision: $ - $Date:  $
+ * @version $Revision$ - $Date$
  */
 class GenerateRuleSetAllRules {
 

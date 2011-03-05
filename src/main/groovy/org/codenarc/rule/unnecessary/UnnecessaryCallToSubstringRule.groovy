@@ -24,7 +24,7 @@ import org.codenarc.util.AstUtil
  * Calling String.substring(0) always returns the original string. This code is meaningless.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessaryCallToSubstringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCallToSubstring'

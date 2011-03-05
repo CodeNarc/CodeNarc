@@ -28,7 +28,7 @@ import org.codenarc.source.SourceCode
  * Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
+ * @version $Revision$ - $Date$
  */
 class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySemicolon'
