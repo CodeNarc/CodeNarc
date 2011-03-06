@@ -121,16 +121,17 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 * UnnecessaryCallToSubstring Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Calling String.substring(0) always returns the original string. This code is meaningless.
 
   Examples:
+
 -------------------------------------------------------------------------------
     string.substring(0)         // violation
     method().substring(0)       // violation
 
     prop.substring(1)           // OK, not constant 0
     prop.substring(0, 1)        // OK, end is specified
-
 -------------------------------------------------------------------------------
 
 * UnnecessaryCatchBlock Rule
@@ -280,6 +281,7 @@ def Object method5() { return 4 }
 * UnnecessaryGString Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   String objects should be created with single quotes, and GString objects created with double quotes.
   Creating normal String objects with double quotes is confusing to readers.
 
@@ -407,6 +409,7 @@ I am a string
 * UnnecessaryModOne Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Any expression mod 1 (exp % 1) is guaranteed to always return zero. This code is probably an error, and should be either (exp & 1) or (exp % 2).
 
   Examples:
@@ -544,6 +547,7 @@ I am a string
 * UnnecessaryPublicModifier Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   The 'public' modifier is not required on methods or classes.
 
   Example of violations:
@@ -568,11 +572,13 @@ I am a string
 * UnnecessarySelfAssignment Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Method contains a pointless self-assignment to a variable or property. Either the code is pointless or the equals()/get()
   method has been overridden to have a side effect, which is a terrible way to code getters and violates the contract of
   equals().
 
   Examples:
+
 -------------------------------------------------------------------------------
     x = x               // violation
     def method(y) {
@@ -589,6 +595,7 @@ I am a string
 * UnnecessarySemicolon Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for
   empty braces on for and while loops; this is a confusing practice.
 
@@ -662,6 +669,7 @@ I am a string
 * UnnecessaryTransientModifier Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
   This may be leftover marking from a previous version of the code in which the class was 
   transient, or it may indicate a misunderstanding of how serialization works.
@@ -672,6 +680,7 @@ I am a string
 
 
   Examples:
+
 -------------------------------------------------------------------------------
     class MyClass {
         // class not serializable, violation occurs

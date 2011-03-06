@@ -75,6 +75,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * BooleanGetBoolean Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   This rule catches usages of java.lang.Boolean.getBoolean(String) which reads a boolean from the System properties. It is often mistakenly used to attempt to read user input or parse a String into a boolean. It is a poor piece of API to use; replace it with System.properties['prop̈́'].
 
   Example of violations:
@@ -108,6 +109,7 @@ Basic Rules  ("<rulesets/basic.xml>")
   or <<< x % 2 != 0>>>.
 
   Examples:
+
 -------------------------------------------------------------------------------
     if (x % 2 == 1) { }             // violation
     if (method() % 2 == 1) { }      // violation
@@ -777,11 +779,10 @@ Basic Rules  ("<rulesets/basic.xml>")
   <<<new TreeSet()>>> as <<<[] as SortedSet>>>, which creates the same object.
 
 
-
-
 * GroovyLangImmutable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   The groovy.lang.Immutable annotation has been deprecated and replaced by groovy.transform.Immutable. Do
   not use the Immutable in groovy.lang.
 
@@ -832,6 +833,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * IntegerGetInteger Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   This rule catches usages of java.lang.Integer.getInteger(String, ...) which reads an Integer from the System properties.
   It is often mistakenly used to attempt to read user input or parse a String into an Integer.
   It is a poor piece of API to use; replace it with System.properties['prop'].
