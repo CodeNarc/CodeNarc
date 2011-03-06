@@ -5,6 +5,12 @@
 CodeNarc - Integration with Other Tools / Frameworks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* IDEs
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  * {{{http://www.jetbrains.com/idea/}IntelliJ IDEA}} - See the {{{http://plugins.jetbrains.com/plugin/?idea&id=5925}IDEA CodeNarc Plugin}}.
+
+
 * Application Frameworks
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
