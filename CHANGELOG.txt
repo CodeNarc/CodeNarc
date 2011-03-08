@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.14 (April 2011)
+-------------------------------------------
+BUG FIXES
+- Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
+
+
 Changes in version 0.13 (February 2011)
 -------------------------------------------
 NEW FEATURES

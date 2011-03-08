@@ -31,7 +31,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the regular expression used to validate the class    | /[A-Z]\w*/             |
+| regex               | Specifies the regular expression used to validate the class    | /([A-Z]\w*\$?)*/       |
 |                     | name. It is required and cannot be null or empty.              |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 

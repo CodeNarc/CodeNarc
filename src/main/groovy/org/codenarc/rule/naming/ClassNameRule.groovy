@@ -36,7 +36,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 class ClassNameRule extends AbstractAstVisitorRule {
     String name = 'ClassName'
     int priority = 2
-    String regex = /[A-Z]\w*/
+    String regex = /([A-Z]\w*\$?)*/
     Class astVisitorClass = ClassNameAstVisitor
 
     void validate() {

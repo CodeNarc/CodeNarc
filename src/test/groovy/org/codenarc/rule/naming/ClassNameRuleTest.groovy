@@ -41,8 +41,28 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, '_MyClass')
     }
 
+    void testApplyTo_NestedClassDoesNotMatchDefaultRegex() {
+        final SOURCE = ' class MyClass { static class _MyNestedClass { }  } '
+        assertSingleViolation(SOURCE, 1, '_MyNestedClass')
+    }
+
+    void testApplyTo_InnerClassDoesNotMatchDefaultRegex() {
+        final SOURCE = ''' class MyClass {
+            class _MyInnerClass { }
+        } '''
+        assertSingleViolation(SOURCE, 2, '_MyInnerClass')
+    }
+
     void testApplyTo_MatchesDefaultRegex() {
-        final SOURCE = ' class MyClass { } '
+        final SOURCE = ''' class MyClass {
+            MyClass() {
+                new _MyAnonymousClass() {}
+            }
+            class MyInnerClass {}
+            static class MyNestedClass {
+                class MyInnerInnerClass {}
+            }
+        } '''
         assertNoViolations(SOURCE)
     }
 
@@ -88,5 +108,4 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
     protected Rule createRule() {
         new ClassNameRule()
     }
-
 }
