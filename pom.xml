@@ -57,7 +57,8 @@
     <distributionManagement>
         <repository>
             <id>sourceforge</id>
-            <url>scp://shell.sourceforge.net/home/groups/c/co/codenarc/htdocs/m2repo</url>
+            <url>sftp://web.sourceforge.net/home/groups/c/co/codenarc/htdocs/m2repo</url>
+            <!-- <url>scp://shell.sourceforge.net/home/groups/c/co/codenarc/htdocs/m2repo</url> -->
         </repository>
     </distributionManagement>
 
