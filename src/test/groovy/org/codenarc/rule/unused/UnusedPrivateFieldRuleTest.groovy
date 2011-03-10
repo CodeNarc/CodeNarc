@@ -34,10 +34,11 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     void testApplyTo_SingleUnusedPrivateField() {
         final SOURCE = '''
           class MyClass {
+              @SomeAnnotationToCorruptLineNumbers
               private int count
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'private int count')
+        assertSingleViolation(SOURCE, 4, 'private int count')
     }
 
     void testApplyTo_MultipleUnusedPrivateFields() {
@@ -65,6 +66,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_AllPrivateFieldsUsed() {
         final SOURCE = '''
+            @MyAnnotation(elem = { 1 + 2 })
             class MyClass {
                 private int count
                 def otherField
@@ -73,6 +75,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
                 private startName = defaultName
                 def dateFormat = java.text.DateFormat.getDateTimeInstance()
 
+                @MyAnnotation(elem = { 1 + 2 })
                 def doStuff() {
                     this.count = 23
                     def newName = globalName + startName
