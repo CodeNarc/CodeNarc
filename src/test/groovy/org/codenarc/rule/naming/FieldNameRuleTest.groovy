@@ -64,7 +64,7 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
             private BigDecimal deposit_amount
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
+        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount', 'The fieldname deposit_amount does not match [a-z][a-zA-Z0-9]*')
     }
 
     void testApplyTo_MatchesDefaultRegex() {
