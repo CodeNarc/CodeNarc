@@ -42,7 +42,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
             def MyMethod() { println 'bad' }
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'def MyMethod')
+        assertSingleViolation(SOURCE, 3, 'def MyMethod', 'The method name MyMethod in class MyClass does not match [a-z]\\w*')
     }
 
     void testApplyTo_DoesMatchDefaultRegex() {

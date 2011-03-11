@@ -65,7 +65,6 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
         className = DEFAULT_NAME
     }
 
-
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
         if (isFirstVisit(declarationExpression)) {
