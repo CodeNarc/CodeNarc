@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that verifies that the name of each parameter matches a regular expression. This rule applies
@@ -52,28 +53,40 @@ class ParameterNameRule extends AbstractAstVisitorRule {
 
 class ParameterNameAstVisitor extends AbstractAstVisitor  {
 
+    final static DEFAULT_NAME = '<unknown>'
+    def className = DEFAULT_NAME
+
+    @Override
+    protected void visitClassEx(ClassNode node) {
+        className = node.name
+    }
+
+    @Override protected void visitClassComplete(ClassNode node) {
+        className = DEFAULT_NAME
+    }
+
     void visitMethodEx(MethodNode methodNode) {
-        processParameters(methodNode.parameters)
+        processParameters(methodNode.parameters, methodNode.name)
         super.visitMethodEx(methodNode)
     }
 
     void visitConstructorEx(ConstructorNode constructorNode) {
-        processParameters(constructorNode.parameters)
+        processParameters(constructorNode.parameters, '<init>')
         super.visitConstructorEx(constructorNode)
     }
 
     void visitClosureExpression(ClosureExpression closureExpression) {
         if (isFirstVisit(closureExpression)) {
-            processParameters(closureExpression.parameters)
+            processParameters(closureExpression.parameters, '<closure>')
         }
         super.visitClosureExpression(closureExpression)
     }
 
-    private void processParameters(parameters) {
+    private void processParameters(parameters, methodName) {
         parameters.each { parameter ->
             if (!new WildcardPattern(rule.ignoreParameterNames, false).matches(parameter.name)) {
                 if (parameter.lineNumber >= 0 && !(parameter.name ==~ rule.regex)) {
-                    addViolation(parameter, "The parameter $parameter.name has an invalid name")
+                    addViolation(parameter, "The parameter named $parameter.name in method $methodName of class $className does not match ${rule.regex.toString()}")
                 }
             }
         }

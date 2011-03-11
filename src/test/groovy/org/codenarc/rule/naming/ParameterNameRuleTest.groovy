@@ -50,7 +50,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
                 def myMethod(BigDecimal deposit_amount) { }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
+        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount', 'The parameter named deposit_amount in method myMethod of class MyClass does not match [a-z][a-zA-Z0-9]*')
     }
 
     void testApplyTo_MatchesDefaultRegex() {
