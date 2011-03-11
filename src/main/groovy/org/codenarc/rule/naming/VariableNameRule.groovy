@@ -56,8 +56,6 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
         assert rule.regex
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
-//            def sourceLine = sourceCode.lines[declarationExpression.lineNumber-1]
-//            def sourceLine = sourceLine(declarationExpression)
             def re = rule.finalRegex && AstUtil.isFinalVariable(declarationExpression, sourceCode) ?
                 rule.finalRegex : rule.regex
 
@@ -65,7 +63,7 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
 
                 if (!new WildcardPattern(rule.ignoreVariableNames, false).matches(varExpression.name) &&
                         !(varExpression.name ==~ re)) {
-                    def msg = varExpressions.size() > 1 ? "Variable name: [$varExpression.name]" : null
+                    def msg = "Variable named $varExpression.name does not match the pattern ${re.toString()}"
                     addViolation(declarationExpression, msg)
                 }
             }

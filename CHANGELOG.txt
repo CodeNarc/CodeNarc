@@ -1,3 +1,4 @@
+
 CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
@@ -6,7 +7,7 @@ Changes in version 0.14 (April 2011)
 -------------------------------------------
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
-
+- Fix Bug #3206167 - VariableNameRule now has a violation message that states the name of the variable and the regex it did not match.  
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------
