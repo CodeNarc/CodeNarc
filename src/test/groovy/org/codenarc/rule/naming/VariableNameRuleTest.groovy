@@ -62,7 +62,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'BigDecimal deposit_amount', 'Variable named deposit_amount does not match the pattern [a-z][a-zA-Z0-9]*')
+        assertSingleViolation(SOURCE, 4, 'BigDecimal deposit_amount', 'Variable named deposit_amount in class MyClass does not match the pattern [a-z][a-zA-Z0-9]*')
     }
 
     void testApplyTo_MatchesDefaultRegex() {
@@ -210,7 +210,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
                 def (pkg, Count) = 123
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'def (pkg, Count) = 123', 'Variable named Count does not match the pattern [a-z][a-zA-Z0-9]*')
+        assertSingleViolation(SOURCE, 3, 'def (pkg, Count) = 123', 'Variable named Count in class None does not match the pattern [a-z][a-zA-Z0-9]*')
     }
 
     void testApplyTo_MultipleVariableNames_Final_OneDoesNotMatchDefaultRegex() {
@@ -219,7 +219,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
                 final def (OK, bad, OK2) = 123
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'Variable named bad does not match the pattern [A-Z][A-Z0-9_]*')
+        assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'Variable named bad in class None does not match the pattern [A-Z][A-Z0-9_]*')
     }
 
     void testApplyTo_MultipleVariableNames_TwoDoNotMatchDefaultRegex() {
