@@ -58,13 +58,23 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
         shouldFailWithMessageContaining('regex') { applyRuleTo('class MyClass { int count }') }
     }
 
-    void testApplyTo_DoesNotMatchDefaultRegex() {
+    void testApplyTo_MatchesNewRegex() {
+        final SOURCE = '''
+          class MyClass {
+            private File bug4013
+          }
+        '''
+        rule.regex = /^[a-z]([a-zA-Z0-9$])*\b/
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_DoesNotMatchNewRegex() {
         final SOURCE = '''
           class MyClass {
             private BigDecimal deposit_amount
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount', 'The fieldname deposit_amount does not match [a-z][a-zA-Z0-9]*')
+        assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount', 'The fieldname deposit_amount in class MyClass does not match [a-z][a-zA-Z0-9]*')
     }
 
     void testApplyTo_MatchesDefaultRegex() {
