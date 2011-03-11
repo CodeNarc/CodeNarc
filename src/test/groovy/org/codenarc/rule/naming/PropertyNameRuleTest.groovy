@@ -82,7 +82,7 @@ class PropertyNameRuleTest extends AbstractRuleTestCase {
             static int Count
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'static int Count')
+        assertSingleViolation(SOURCE, 3, 'static int Count', 'The property name Count in class MyClass does not match the pattern [a-z][a-zA-Z0-9]*')
     }
 
     void testApplyTo_DoesNotMatchCustomRegex() {
