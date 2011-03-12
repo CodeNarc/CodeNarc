@@ -39,7 +39,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'int count', 'count')
+        assertSingleViolation(SOURCE, 4, 'int count', 'The variable [count] in class MyClass is not used')
     }
 
     void testApplyTo_SingleUnusedVariable_WithInitialExpression() {

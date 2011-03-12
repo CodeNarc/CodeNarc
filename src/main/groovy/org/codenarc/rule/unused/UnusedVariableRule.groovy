@@ -77,6 +77,18 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     private variablesInCurrentBlockScope
     private anonymousReferences
 
+    final static DEFAULT_NAME = '<unknown>'
+    def className = DEFAULT_NAME
+
+    @Override
+    protected void visitClassEx(ClassNode node) {
+        className = node.name
+    }
+
+    @Override protected void visitClassComplete(ClassNode node) {
+        className = DEFAULT_NAME
+    }
+
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
@@ -95,7 +107,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
 
         variablesInCurrentBlockScope.each { varExpression, isUsed ->
             if (!isUsed && !anonymousReferences.contains(varExpression.name)) {
-                addViolation(varExpression, "The variable [${varExpression.name}] is not used")
+                addViolation(varExpression, "The variable [${varExpression.name}] in class $className is not used")
             }
         }
 
