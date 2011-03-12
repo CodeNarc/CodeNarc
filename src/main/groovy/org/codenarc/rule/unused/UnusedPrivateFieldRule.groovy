@@ -59,8 +59,8 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
             visitor.visitClass(classNode)
         }
 
-        allPrivateFields.each { key, value ->
-            visitor.addViolation(value, "The field $key is not used within ${sourceCode.name ?: 'the class'}")
+        allPrivateFields.each { key, FieldNode value ->
+            visitor.addViolation(value, "The field $key is not used within the class ${value.owner?.name}")
         }
         violations.addAll(visitor.violations)
     }

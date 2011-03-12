@@ -38,7 +38,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
               private int count
           }
         '''
-        assertSingleViolation(SOURCE, 4, 'private int count')
+        assertSingleViolation(SOURCE, 4, 'private int count', 'The field count is not used within the class MyClass')
     }
 
     void testApplyTo_MultipleUnusedPrivateFields() {
