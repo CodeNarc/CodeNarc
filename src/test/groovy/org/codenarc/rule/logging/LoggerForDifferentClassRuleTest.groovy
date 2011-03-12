@@ -65,6 +65,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
                 private static log4 = Logger.getLogger(MyClass.getClass().name)
                 private static log5 = Logger.getLogger(MyClass.class.getName())
                 private static log6 = Logger.getLogger(MyClass.class.name)
+                private static log7 = Logger.getLogger(MyClass.name)
             }
         '''
         assertNoViolations(SOURCE)

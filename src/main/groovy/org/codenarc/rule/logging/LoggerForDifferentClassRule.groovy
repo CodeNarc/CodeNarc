@@ -74,6 +74,7 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
             classNameWithoutPackage + '.getClass().name',
             classNameWithoutPackage + '.class.getName()',
             classNameWithoutPackage + '.class.name',
+            classNameWithoutPackage + '.name',
         ]
         return argText in classNameOptions
     }
