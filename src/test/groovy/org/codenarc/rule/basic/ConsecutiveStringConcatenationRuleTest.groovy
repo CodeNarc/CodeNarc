@@ -47,28 +47,28 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def a = 'Hello' + 'World'   // should be 'HelloWorld'
         '''
-        assertSingleViolation(SOURCE, 2, "'Hello' + 'World'", "String concatenation can be joined into the literal 'HelloWorld")
+        assertSingleViolation(SOURCE, 2, "'Hello' + 'World'", "String concatenation in class None can be joined into the literal 'HelloWorld")
     }
 
     void testStringAndNumber() {
         final SOURCE = '''
             def g = 'Hello' + 5         // should be 'Hello5'
         '''
-        assertSingleViolation(SOURCE, 2, "'Hello' + 5", "String concatenation can be joined into the literal 'Hello5'")
+        assertSingleViolation(SOURCE, 2, "'Hello' + 5", "String concatenation in class None can be joined into the literal 'Hello5'")
     }
 
     void testGStringAndString() {
         final SOURCE = '''
             def b = "$Hello" + 'World'  // should be "${Hello}World"
         '''
-        assertSingleViolation(SOURCE, 2, """"\$Hello" + 'World'""", 'String concatenation can be joined into a single literal')
+        assertSingleViolation(SOURCE, 2, """"\$Hello" + 'World'""", 'String concatenation in class None can be joined into a single literal')
     }
 
     void testStringAndGString() {
         final SOURCE = '''
             def c = 'Hello' + "$World"  // should be "Hello${World}"
         '''
-        assertSingleViolation(SOURCE, 2, """ 'Hello' + \"\$World\"""", 'String concatenation can be joined into a single literal')
+        assertSingleViolation(SOURCE, 2, """ 'Hello' + \"\$World\"""", 'String concatenation in class None can be joined into a single literal')
     }
 
     void testStringAndMultilineString() {
@@ -77,15 +77,19 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
                         world   // should be joined
                       '''
         """
-        assertSingleViolation(SOURCE, 2, "'Hello' +", "String concatenation can be joined into the literal 'Hello\\n                        world   // should be joined\\n                      '")
+        assertSingleViolation(SOURCE, 2, "'Hello' +", "String concatenation in class None can be joined into the literal 'Hello\\n                        world   // should be joined\\n                      '")
     }
 
     void testMultilineStringAndString() {
         final SOURCE = """
-            def e = '''Hello
-                  ''' + 'world'   // should be joined
+        class MyClass {
+            static {
+                def e = '''Hello
+                      ''' + 'world'   // should be joined
+            }
+        }
         """
-        assertSingleViolation(SOURCE, 3, "+ 'world'", "String concatenation can be joined into the literal 'Hello\\n                  world'")
+        assertSingleViolation(SOURCE, 5, "+ 'world'", "String concatenation in class MyClass can be joined into the literal 'Hello\\n                      world'")
     }
 
     protected Rule createRule() {

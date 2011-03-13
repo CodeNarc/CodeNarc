@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Catches concatenation of two string literals on the same line. These can safely by joined. 
@@ -36,6 +37,18 @@ class ConsecutiveStringConcatenationRule extends AbstractAstVisitorRule {
 }
 
 class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
+    final static DEFAULT_NAME = '<unknown>'
+    def className = DEFAULT_NAME
+
+    @Override
+    protected void visitClassEx(ClassNode node) {
+        className = node.name
+    }
+
+    @Override protected void visitClassComplete(ClassNode node) {
+        className = DEFAULT_NAME
+    }
+
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
 
@@ -44,11 +57,11 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
             Expression right = expression.rightExpression
             if (areJoinableConstants(left, right)) {
                 if (left instanceof GStringExpression || right instanceof GStringExpression) {
-                    addViolation(expression, 'String concatenation can be joined into a single literal')
+                    addViolation(expression, "String concatenation in class $className can be joined into a single literal")
                 } else {
                     def lvalue = escape(left.value)
                     def rvalue = escape(right.value)
-                    addViolation(expression, "String concatenation can be joined into the literal '${lvalue}${rvalue}'")
+                    addViolation(expression, "String concatenation in class $className can be joined into the literal '${lvalue}${rvalue}'")
                 }
             }
         }
