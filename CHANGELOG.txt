@@ -12,6 +12,7 @@ BUG FIXES
 - Fix Bug #3206258 - LoggerForDifferentClass rule now accepts MyClass.name as a valid name for the logger.
 - Fix Bug #3206238 - The DuplicateNumberLiteral rule now allows you to ignore literals in the 1.2d, 1.2f, and 1.2G format.
 - Fix Bug #3207628 - The UnusedPrivateMethodParameter rule now allows you to ignore parameters by name. By default, parameters named 'ignore' and 'ignored' do not trigger a violation. You can configure this with the 'ignoreRegex' property on the rule.
+- Fix Bug #3205696 - The ConsecutiveStringConcatenation rule no longer suggesting that you join numbers together, it only suggests joining strings together.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------

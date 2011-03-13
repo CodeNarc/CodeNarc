@@ -33,6 +33,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
 
     void testSuccessScenario() {
         final SOURCE = '''
+            def a = 1 + 1
             def f = 'Hello' +           // OK because of line break
                         'World'
             def h = 'Hello' + null      // OK because not a string

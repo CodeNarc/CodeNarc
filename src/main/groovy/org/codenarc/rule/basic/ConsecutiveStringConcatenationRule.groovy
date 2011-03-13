@@ -16,12 +16,12 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codenarc.util.ConsecutiveUtils
 
 /**
  * Catches concatenation of two string literals on the same line. These can safely by joined. 
@@ -42,7 +42,7 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
         if (AstUtil.isBinaryExpressionType(expression, '+')) {
             Expression left = expression.leftExpression
             Expression right = expression.rightExpression
-            if (ConsecutiveUtils.areJoinableConstants(left, right)) {
+            if (areJoinableConstants(left, right)) {
                 if (left instanceof GStringExpression || right instanceof GStringExpression) {
                     addViolation(expression, 'String concatenation can be joined into a single literal')
                 } else {
@@ -60,5 +60,29 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
             return value.replaceAll('\n', '\\\\n').replaceAll("'", "\'")
         }
         value
+    }
+
+    private static boolean areJoinableConstants(Expression left, Expression right) {
+        if (left.lastLineNumber != right.lineNumber) {
+            return false
+        }
+        if (isJoinableType(left) && isJoinableType(right)) {
+            // don't join two numbers
+            if (!isNumberLiteral(left) || !isNumberLiteral(right)) {
+                return true
+            }
+        }
+        false
+    }
+
+    private static boolean isNumberLiteral(Expression node) {
+        (node instanceof ConstantExpression && !AstUtil.isNull(node) && node.type.isResolved() && Number.isAssignableFrom(node.type.typeClass))
+    }
+
+    private static boolean isJoinableType(Expression node) {
+        if (node instanceof ConstantExpression && !AstUtil.isNull(node)) {
+            return true
+        }
+        return node instanceof GStringExpression
     }
 }
