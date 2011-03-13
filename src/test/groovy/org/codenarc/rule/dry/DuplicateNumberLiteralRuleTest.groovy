@@ -58,6 +58,9 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
                 def y = -17
                 def z = -17
             }
+
+        	println '123'
+        	println '123'
         '''
         assertNoViolations(SOURCE)
     }
@@ -90,6 +93,23 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
         	def y = [x: -99, y: -99]
         '''
         assertSingleViolation(SOURCE, 2, 'def y = [x: -99, y: -99]')
+    }
+
+    void testDoublesAndFloatLiteralsCanBeIgnored() {
+        final SOURCE = '''
+        	println 99.0d
+        	println 99.0d
+        	println 99.0f
+        	println 99.0f
+        	println 99.0G
+        	println 99.0G
+        	println 99G
+        	println 99G
+        	println 99.0
+        	println 99.0
+        '''
+        rule.ignoreNumbers = '99,99.0,99.0d,99.0f,99.0G'
+        assertNoViolations(SOURCE)
     }
 
     void testInDeclarations() {
@@ -188,10 +208,10 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
 
     void testIgnoreNumbers_InvalidNumber() {
         final SOURCE = '''
-        	def x = [0, 'xxx']
+        	def x = [0.725,0.725, 'xxx']
         '''
         rule.ignoreNumbers = '0.725,xxx, yyy'
-        shouldFail(NumberFormatException) { applyRuleTo(SOURCE) }
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

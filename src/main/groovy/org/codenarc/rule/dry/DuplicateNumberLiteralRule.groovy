@@ -42,19 +42,7 @@ class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
 
     private Set parseIgnoreValues() {
         def strings = ignoreNumbers ? ignoreNumbers.tokenize(',') : []
-        def numbers = strings.collect { str -> parseNumber(str)  }
+        def numbers = strings.collect { str -> str.trim()  }
         numbers as Set
-    }
-
-    private parseNumber(String string) {
-        if (string.isInteger()) {
-            return string.toInteger()
-        }
-        else if (string.isBigDecimal()) {
-            return string.toBigDecimal()
-        }
-        else {
-            throw new NumberFormatException("[$string] is not a valid number")
-        }
     }
 }

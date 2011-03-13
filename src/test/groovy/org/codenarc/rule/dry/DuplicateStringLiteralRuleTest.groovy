@@ -58,6 +58,9 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
                 def y = 'x'
                 def z = 'x'                        
             }
+
+        	println 123
+        	println 123
         '''
         assertNoViolations(SOURCE)
     }

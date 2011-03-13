@@ -110,8 +110,8 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     private addViolationIfDuplicate(node, boolean isStatic = false) {
         if (isFirstVisit(node) && (node instanceof ConstantExpression) && node.value != null && (constantType.isAssignableFrom(node.value.class))) {
-            def literal = node.value
-            if (constants.contains(literal) && !isStatic) {
+            def literal = String.valueOf(node.value)
+            if (node.type.isResolved() && constantType.isAssignableFrom(node.type.typeClass) && constants.contains(literal) && !isStatic) {
 
                 if (!ignoreValuesSet.contains(literal)) {
                     addViolation node, "Duplicate ${constantType.simpleName} Literal: $literal"
