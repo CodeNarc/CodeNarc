@@ -11,6 +11,7 @@ BUG FIXES
 - Fix Bug #3206667 - FieldName, VariableName, MethodName, ParameterName, UnusedVariable, PropertyName, and UnusedPrivateField violations message now contains the class name of the enclosing class. This helps you configure an exclude.
 - Fix Bug #3206258 - LoggerForDifferentClass rule now accepts MyClass.name as a valid name for the logger.
 - Fix Bug #3206238 - The DuplicateNumberLiteral rule now allows you to ignore literals in the 1.2d, 1.2f, and 1.2G format.
+- Fix Bug #3207628 - The UnusedPrivateMethodParameter rule now allows you to ignore parameters by name. By default, parameters named 'ignore' and 'ignored' do not trigger a violation. You can configure this with the 'ignoreRegex' property on the rule.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------

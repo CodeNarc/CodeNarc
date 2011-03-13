@@ -33,7 +33,8 @@ import org.codenarc.source.SourceCode
 class UnusedPrivateMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateMethodParameter'
     int priority = 2
-
+    String ignoreRegex = 'ignore|ignored'
+    
     void applyTo(SourceCode sourceCode, List violations) {
         // If AST is null, skip this source code
         def ast = sourceCode.ast
@@ -56,6 +57,18 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
 
     List<ClassNode> classes
 
+    final static DEFAULT_NAME = '<unknown>'
+    def className = DEFAULT_NAME
+
+    @Override
+    protected void visitClassEx(ClassNode node) {
+        className = node.name
+    }
+
+    @Override protected void visitClassComplete(ClassNode node) {
+        className = DEFAULT_NAME
+    }
+
     void visitMethodEx(MethodNode node) {
 
         if (Modifier.isPrivate(node.modifiers)) {
@@ -66,8 +79,9 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
                 it.visitContents(collector)
             }
             unusedParameterNames.removeAll(collector.references)
+            unusedParameterNames.removeAll { it =~ rule.ignoreRegex }
             unusedParameterNames.each { parameterName ->
-                addViolation(node, "Method parameter [$parameterName] is never referenced")
+                addViolation(node, "Method parameter [$parameterName] is never referenced in the method $node.name of class $className")
             }
         }
     }

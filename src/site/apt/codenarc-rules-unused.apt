@@ -123,6 +123,9 @@ Unused Rules  ("<rulesets/unused.xml>")
 
   * Does not recognize parameter references when parameter name is a GString (e.g. <<<println "${parameterName}">>>)
 
+  <Since CodeNarc 0.14>
+  * You can specify an ignore list using the 'ignoreRegex' property. By default, a parameter named 'ignore' or 'ignored'
+    does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property. 
 
 * UnusedVariable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~

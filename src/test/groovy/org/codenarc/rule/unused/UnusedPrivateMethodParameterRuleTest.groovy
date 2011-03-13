@@ -40,6 +40,28 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private void myMethod(int value) { }', 'Method parameter [value] is never referenced')
     }
 
+    void testIgnoreRegexDefaults() {
+        final SOURCE = '''
+            class MyClass {
+                private void myMethod1(int ignore) { }
+                private void myMethod2(int ignored) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testCustomIgnoreRegex() {
+        final SOURCE = '''
+            class MyClass {
+                private void myMethod1(int value) { }
+                private void myMethod2(int ignore) { }
+                private void myMethod3(int ignored) { }
+            }
+        '''
+        rule.ignoreRegex = 'value|ignored|ignore'
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_SingleUnusedPrivateMethodParameterSuspiciousReferenceInAnonymousClass() {
         final SOURCE = '''
             class MyClass {
@@ -56,6 +78,8 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
           class MyClass {
               private void myMethod(int value, String name) { }
+              private void myMethod2(int ignore) { }
+              private void myMethod3(int ignored) { }
           }
         '''
         assertViolations(SOURCE,
