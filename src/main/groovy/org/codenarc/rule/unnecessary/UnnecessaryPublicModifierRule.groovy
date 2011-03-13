@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.apache.log4j.Logger
 
 /**
  * The 'public' modifier is not required on methods or classes. 
@@ -34,6 +35,8 @@ class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
+    private static final LOG = Logger.getLogger(UnnecessaryPublicModifierAstVisitor)
+
     @Override
     protected void visitClassEx(ClassNode node) {
         String declaration = getDeclaration(node)
@@ -65,7 +68,10 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
         String acc = ''
         while (current <= node.lastLineNumber) {
             def line = sourceCode.line(current)
-            if (line.contains('{')) {
+            if (line == null) {
+                LOG.warn("$rule.name cannot find source code line $current in ${sourceCode.name}. Scanning lines $node.lineNumber to $node.lastLineNumbe.")
+                return ''
+            } else if (line.contains('{')) {
                 return acc + line[0..(line.indexOf('{'))]
             } else {
                 acc = acc + line + ' ' 
