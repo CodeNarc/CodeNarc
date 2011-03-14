@@ -15,6 +15,7 @@ BUG FIXES
 - Fix Bug #3205696 - The ConsecutiveStringConcatenation rule no longer suggesting that you join numbers together, it only suggests joining strings together.
 - Fix Bug #3206150 - Fixed UnusedGroovyImport rule so that imports with aliases are ignored and do not cause violations. 
 - Fix Bug #3207605 - Fixed UnusedPrivateMethod rule to recognize static method references. 
+- Fix Bug #3207607 - Fixed UnusedPrivateMethod rule to recognize access of privately defined getters and setters as properties.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------

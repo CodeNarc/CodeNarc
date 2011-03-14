@@ -18,14 +18,11 @@ package org.codenarc.rule.unused
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.MethodPointerExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.
@@ -130,6 +127,38 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
         }
         super.visitMethodPointerExpression(methodPointerExpression)
     }
+
+    @Override
+    void visitVariableExpression(VariableExpression expression) {
+        if (expression.name.size() == 1) {
+            unusedPrivateMethods.remove('get' + expression.name.toUpperCase())
+            unusedPrivateMethods.remove('set' + expression.name.toUpperCase())
+        } else {
+            unusedPrivateMethods.remove('get' + expression.name[0].toUpperCase() + expression.name[1..-1])
+            unusedPrivateMethods.remove('set' + expression.name[0].toUpperCase() + expression.name[1..-1])
+        }
+        super.visitVariableExpression expression
+    }
+
+    @Override
+    void visitPropertyExpression(PropertyExpression expression) {
+
+        if (isConstantString(expression.property)) {
+            if (expression.property.value.size() == 1) {
+                unusedPrivateMethods.remove('get' + expression.property.value.toUpperCase())
+                unusedPrivateMethods.remove('set' + expression.property.value.toUpperCase())
+            } else {
+                unusedPrivateMethods.remove('get' + expression.property.value[0].toUpperCase() + expression.property.value[1..-1])
+                unusedPrivateMethods.remove('set' + expression.property.value[0].toUpperCase() + expression.property.value[1..-1])
+            }
+        }
+        super.visitPropertyExpression expression
+    }
+
+    private static boolean isConstantString(Expression expression) {
+        expression instanceof ConstantExpression && expression.value instanceof String
+    }
+
 
     private static boolean isMethodCall(MethodCallExpression expression, String targetName) {
         AstUtil.isMethodCallOnObject(expression, targetName) &&

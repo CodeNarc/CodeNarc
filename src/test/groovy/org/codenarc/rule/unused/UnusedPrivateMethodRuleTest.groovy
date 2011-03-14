@@ -31,6 +31,29 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnusedPrivateMethod'
     }
 
+    void testLocalUseOfGetter() {
+        final SOURCE = '''
+            class ExecuteTest {
+                private String getCmd() { 'cmd' }
+                private String getCmd2() { 'cmd' }
+                private String getCMD() { 'cmd' }
+                private String getCMD2() { 'cmd' }
+                private void setCMD3(x) {  }
+
+                private String getUnused() { 'unused' }
+
+                void myMethod() {
+                    cmd.execute(cmd2)
+                    new Foo().CMD
+                    foo.CMD2.bar = 'xxx'
+                    CMD3 = 'yyy'
+                }
+            }
+            '''
+
+        assertSingleViolation(SOURCE, 9, 'getUnused()', 'The method getUnused is not used within the class')
+    }
+    
     void testStaticMethodsInOuterClass() {
         final SOURCE = '''
             class MyClass {
@@ -178,18 +201,6 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
           }
         '''
         assertNoViolations(SOURCE)
-    }
-
-    void testApplyTo_PrivateMethod_AccessedAsProperty() {
-        final SOURCE = '''
-            class MyClass {
-                private String getName() { 'abc' }
-                def doStuff() {
-                    def newName = this.name     // known limitation: access getName() method
-                }
-          }
-        '''
-        assertSingleViolation(SOURCE, 3, "private String getName() { 'abc' }")
     }
 
     void testApplyTo_AllPrivateMethodsUsed() {
