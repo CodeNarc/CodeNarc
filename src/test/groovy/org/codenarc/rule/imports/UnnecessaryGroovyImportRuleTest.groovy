@@ -50,6 +50,15 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'groovy.lang.MetaClass', 4, 'groovy.lang.GString')
     }
 
+    void testImportAliases() {
+        final SOURCE = '''
+            import groovy.lang.MetaClass as Foo
+            import com.xxx.MyClass
+            import groovy.lang.GString as Bar
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_ImportGroovyUtil() {
         final SOURCE = '''
             import groovy.util.Eval
