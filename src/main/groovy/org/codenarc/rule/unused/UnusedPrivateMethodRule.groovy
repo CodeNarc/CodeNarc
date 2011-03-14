@@ -55,7 +55,7 @@ class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
 
         def allPrivateMethods = collectAllPrivateMethods(ast)
 
-        def visitor = new UnusedPrivateMethodAstVisitor(unusedPrivateMethods: allPrivateMethods)
+        def visitor = new UnusedPrivateMethodAstVisitor(allPrivateMethods, ast.classes.collect { it.name })
         visitor.rule = this
         visitor.sourceCode = sourceCode
         ast.classes.each { classNode ->
@@ -87,8 +87,15 @@ class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
 
 @SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
-    Map<String, MethodNode> unusedPrivateMethods
+    private Map<String, MethodNode> unusedPrivateMethods
+    private List<String> classNames
     private currentClassNode
+
+
+    UnusedPrivateMethodAstVisitor(Map<String, MethodNode> unusedPrivateMethods, List<String> classNames) {
+        this.unusedPrivateMethods = unusedPrivateMethods
+        this.classNames = ['this'] + classNames
+    }
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -101,8 +108,10 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
     }
 
     void visitMethodCallExpression(MethodCallExpression expression) {
-        if (isMethodCall(expression, 'this')) {
-            unusedPrivateMethods.remove(expression.method.value)
+        classNames.each {
+            if (isMethodCall(expression, it)) {
+                unusedPrivateMethods.remove(expression.method.value)
+            }
         }
 
         // Static invocation through current class name
@@ -114,7 +123,7 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
 
     void visitMethodPointerExpression(MethodPointerExpression methodPointerExpression) {
         if (methodPointerExpression.expression instanceof VariableExpression &&
-                methodPointerExpression.expression.name == 'this' &&
+                classNames.contains(methodPointerExpression.expression.name) &&
                 methodPointerExpression.methodName instanceof ConstantExpression) {
 
             unusedPrivateMethods.remove(methodPointerExpression.methodName.value)

@@ -31,8 +31,56 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnusedPrivateMethod'
     }
 
-     void testAnonymousInnerClassAsField() {
-         final SOURCE = '''
+    void testStaticMethodsInOuterClass() {
+        final SOURCE = '''
+            class MyClass {
+                void myMethod() {
+                    MyClass.myPrivateMethod()
+                    MyInnerClass.myInnerPrivateMethod()
+                }
+                private static void myPrivateMethod() {
+                }
+                private static void myUncalledPrivateMethod() {
+                }
+            }
+
+            class MyInnerClass {
+                private static myInnerPrivateMethod() {
+                }
+                private static myUnCalledPrivateMethod() {
+                }
+            }'''
+        assertTwoViolations(SOURCE,
+                9, 'myUncalledPrivateMethod', 'The method myUncalledPrivateMethod is not used within the class',
+                16, 'myUnCalledPrivateMethod', 'The method myUnCalledPrivateMethod is not used within the class')
+    }
+
+    void testStaticMethodsInOuterClass_MethodHandles() {
+        final SOURCE = '''
+            class MyClass {
+                void myMethod() {
+                    def x = MyClass.&myPrivateMethod()
+                    def y = MyInnerClass.&myInnerPrivateMethod()
+                }
+                private static void myPrivateMethod() {
+                }
+                private static void myUncalledPrivateMethod() {
+                }
+            }
+
+            class MyInnerClass {
+                private static myInnerPrivateMethod() {
+                }
+                private static myUnCalledPrivateMethod() {
+                }
+            }'''
+        assertTwoViolations(SOURCE,
+                9, 'myUncalledPrivateMethod', 'The method myUncalledPrivateMethod is not used within the class',
+                16, 'myUnCalledPrivateMethod', 'The method myUnCalledPrivateMethod is not used within the class')
+    }
+
+    void testAnonymousInnerClassAsField() {
+        final SOURCE = '''
              class MyClass {
                  private static def methodWithParameters(a,b) { a >> b }
 
@@ -42,8 +90,8 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                      }
                  }
              } '''
-         assertNoViolations SOURCE
-     }
+        assertNoViolations SOURCE
+    }
 
     void testClosureAsField() {
         final SOURCE = '''
