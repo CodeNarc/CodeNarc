@@ -52,7 +52,7 @@ class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
 
         def allPrivateMethods = collectAllPrivateMethods(ast)
 
-        def visitor = new UnusedPrivateMethodAstVisitor(allPrivateMethods, ast.classes.collect { it.name })
+        def visitor = new UnusedPrivateMethodAstVisitor(allPrivateMethods, ast.classes*.name)
         visitor.rule = this
         visitor.sourceCode = sourceCode
         ast.classes.each { classNode ->

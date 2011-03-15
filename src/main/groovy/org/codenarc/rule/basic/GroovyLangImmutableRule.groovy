@@ -44,7 +44,7 @@ class GroovyLangImmutableAstVisitor extends AbstractAstVisitor {
 
         groovyTransformIsImported  = node.imports.any { it.type.name == 'groovy.transform.Immutable' }
         groovyTransformIsStarImported = node.starImports.any { it.packageName == 'groovy.transform.' }
-        aliases = node.imports.findAll { it.type.name == 'groovy.lang.Immutable' && it.alias }.collect { it.alias }
+        aliases = node.imports.findAll { it.type.name == 'groovy.lang.Immutable' && it.alias }*.alias 
         super.visitImports(node)
     }
 

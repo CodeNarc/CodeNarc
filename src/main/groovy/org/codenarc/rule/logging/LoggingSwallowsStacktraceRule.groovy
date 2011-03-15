@@ -72,11 +72,10 @@ class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
         if (currentClass && statement.code instanceof BlockStatement) {
             List<String> loggerNames = classNodeToLoggerNames[currentClass]
 
-            statement.code.statements.findAll {
+            def expressions = statement.code.statements.findAll {
                 it instanceof ExpressionStatement && it.expression instanceof MethodCallExpression
-            }.collect {
-                it.expression
-            }.each { MethodCallExpression it -> 
+            }
+            expressions*.expression.each { MethodCallExpression it ->
                 if (AstUtil.isMethodCall(it, loggerNames, ['error'], 1)) {
                     addViolation(it, 'The error logging may hide the stacktrace from the exception named ' + statement.variable.name)
                 }

@@ -42,7 +42,7 @@ class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
 
     private Set parseIgnoreValues() {
         def strings = ignoreNumbers ? ignoreNumbers.tokenize(',') : []
-        def numbers = strings.collect { str -> str.trim()  }
+        def numbers = strings*.trim()  
         numbers as Set
     }
 }

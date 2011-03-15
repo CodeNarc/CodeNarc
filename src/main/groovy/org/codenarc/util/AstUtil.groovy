@@ -479,7 +479,7 @@ class AstUtil {
      * argument names, never null
      */
     static List<String> getParameterNames(MethodNode node) {
-        node.parameters?.collect { it.name }
+        node.parameters*.name 
     }
 
     /**

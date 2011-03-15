@@ -13,7 +13,6 @@ ruleset {
     ruleset('rulesets/naming.xml')
     ruleset('rulesets/size.xml')
     ruleset('rulesets/unnecessary.xml') {
-        exclude 'UnnecessaryCollectCall'
         exclude 'UnnecessaryGetter'
         exclude 'UnnecessaryObjectReferences'
         exclude 'UnnecessaryReturnKeyword'

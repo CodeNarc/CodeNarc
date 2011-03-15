@@ -52,7 +52,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         fileSet.setIncludes('source/**/*.groovy')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
-        def sourceFilePaths = results.getViolationsWithPriority(1).collect { it.message }
+        def sourceFilePaths = results.getViolationsWithPriority(1)*.message
         assert sourceFilePaths == [
                 'src/test/resources/source/SourceFile1.groovy',
                 'src/test/resources/source/SourceFile2.groovy' ]
@@ -69,7 +69,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         fileSet.setExcludes('**/*File2.groovy')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
-        def sourceFilePaths = results.getViolationsWithPriority(1).collect { it.message }
+        def sourceFilePaths = results.getViolationsWithPriority(1)*.message
         final EXPECTED_PATHS = [
                 'src/test/resources/sourcewithdirs/SourceFile1.groovy',
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
@@ -116,7 +116,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
         def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet1, fileSet2])
         def results = analyzer.analyze(ruleSet)
-        def sourceFilePaths = results.getViolationsWithPriority(1).collect { it.message }
+        def sourceFilePaths = results.getViolationsWithPriority(1)*.message 
         log("sourceFilePaths=$sourceFilePaths")
         final EXPECTED_PATHS = [
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',

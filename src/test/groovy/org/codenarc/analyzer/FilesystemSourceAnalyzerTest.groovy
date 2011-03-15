@@ -61,7 +61,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         log("paths=$paths")
         assertEqualSets(paths, ['SourceFile1.groovy', 'SourceFile2.groovy'])
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
+        def fullPaths = results.getViolationsWithPriority(1)*.message
         assertEqualSets(fullPaths, [
                 'src/test/resources/source/SourceFile1.groovy',
                 'src/test/resources/source/SourceFile2.groovy'
@@ -75,7 +75,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
+        def fullPaths = results.getViolationsWithPriority(1)*.message 
         assertEqualSets(fullPaths, [
                 'src/test/resources/sourcewithdirs/SourceFile1.groovy',
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
@@ -115,7 +115,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
+        def fullPaths = results.getViolationsWithPriority(1)*.message
         assertEqualSets(fullPaths, [
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/subdir2a/Subdir2aFile1.groovy',
@@ -135,7 +135,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
-        def fullPaths = results.getViolationsWithPriority(1).collect { it.message }
+        def fullPaths = results.getViolationsWithPriority(1)*.message
         assert fullPaths == [
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
@@ -188,6 +188,6 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     private List childResultsClasses(Results results) {
-        results.children.collect { it.getClass() }
+        results.children*.getClass() 
     }
 }
