@@ -16,7 +16,7 @@ BUG FIXES
 - Fix Bug #3206150 - Fixed UnusedGroovyImport rule so that imports with aliases are ignored and do not cause violations. 
 - Fix Bug #3207605 - Fixed UnusedPrivateMethod rule to recognize static method references. 
 - Fix Bug #3207607 - Fixed UnusedPrivateMethod rule to recognize access of privately defined getters and setters as properties.
-- Fix Bug #??????? - Fixed bug where the source line displayed for annotated nodes was sometimes showing just the annotation and not the node.
+- Fix Bug #3205697 - Fixed bug where the source line displayed for annotated nodes was sometimes showing just the annotation and not the node.
 Changes in version 0.13 (February 2011)
 -------------------------------------------
 NEW FEATURES
