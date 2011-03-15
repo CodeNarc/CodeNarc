@@ -90,8 +90,16 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
 
 
     UnusedPrivateMethodAstVisitor(Map<String, MethodNode> unusedPrivateMethods, List<String> classNames) {
+        this.classNames = classNames.inject(['this']) { acc, value ->
+            acc.add value
+            if (value.contains('$') && !value.endsWith('$')) {
+                acc.add value[value.lastIndexOf('$')+1..-1]
+            } else if (value.contains('.') && !value.endsWith('.')) {
+                acc.add value[value.lastIndexOf('.')+1..-1]
+            }
+            acc
+        }
         this.unusedPrivateMethods = unusedPrivateMethods
-        this.classNames = ['this'] + classNames
     }
 
     @Override

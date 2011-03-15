@@ -56,10 +56,12 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
     
     void testStaticMethodsInOuterClass() {
         final SOURCE = '''
+            package groovy.bugs
+
             class MyClass {
                 void myMethod() {
                     MyClass.myPrivateMethod()
-                    MyInnerClass.myInnerPrivateMethod()
+                    MyOuterClass.myInnerPrivateMethod()
                 }
                 private static void myPrivateMethod() {
                 }
@@ -67,7 +69,31 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 }
             }
 
-            class MyInnerClass {
+            class MyOuterClass {
+                private static myInnerPrivateMethod() {
+                }
+                private static myUnCalledPrivateMethod() {
+                }
+            }'''
+        assertTwoViolations(SOURCE,
+                11, 'myUncalledPrivateMethod', 'The method myUncalledPrivateMethod is not used within the class',
+                18, 'myUnCalledPrivateMethod', 'The method myUnCalledPrivateMethod is not used within the class')
+    }
+
+    void testStaticMethodsInOuterClass_MethodHandles() {
+        final SOURCE = '''
+            class MyClass {
+                void myMethod() {
+                    def x = MyClass.&myPrivateMethod
+                    def y = MyOuterClass.&myInnerPrivateMethod
+                }
+                private static void myPrivateMethod() {
+                }
+                private static void myUncalledPrivateMethod() {
+                }
+            }
+
+            class MyOuterClass {
                 private static myInnerPrivateMethod() {
                 }
                 private static myUnCalledPrivateMethod() {
@@ -78,28 +104,59 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 16, 'myUnCalledPrivateMethod', 'The method myUnCalledPrivateMethod is not used within the class')
     }
 
-    void testStaticMethodsInOuterClass_MethodHandles() {
+    void testStaticMethodsInInnerClass_MethodHandles() {
         final SOURCE = '''
+            package groovy.bugs
+
             class MyClass {
                 void myMethod() {
-                    def x = MyClass.&myPrivateMethod()
-                    def y = MyInnerClass.&myInnerPrivateMethod()
+                    def x = MyInnerClass.&myInnerPrivateMethod1
+                    def y = MyInnerClass.myInnerPrivateMethod2()
                 }
-                private static void myPrivateMethod() {
-                }
-                private static void myUncalledPrivateMethod() {
-                }
-            }
 
-            class MyInnerClass {
-                private static myInnerPrivateMethod() {
+                class MyInnerClass {
+                    private static myInnerPrivateMethod1() { }
+                    private static myInnerPrivateMethod2() { }
+                    private static myInnerPrivateMethod3() { }
+                    private static myInnerPrivateMethod4() { }
                 }
-                private static myUnCalledPrivateMethod() {
-                }
-            }'''
+            } '''
         assertTwoViolations(SOURCE,
-                9, 'myUncalledPrivateMethod', 'The method myUncalledPrivateMethod is not used within the class',
-                16, 'myUnCalledPrivateMethod', 'The method myUnCalledPrivateMethod is not used within the class')
+                13, 'myInnerPrivateMethod3', 'The method myInnerPrivateMethod3 is not used within the class',
+                14, 'myInnerPrivateMethod4', 'The method myInnerPrivateMethod4 is not used within the class')
+    }
+
+    void testGetterMethodsInOuterClass() {
+        final SOURCE = '''
+                package groovy.bugs
+
+                class MyClass {
+                  void test () {
+                     Foo.test()
+                  }
+                }
+
+                class Foo {
+                    private static test() { }
+                }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testGetterMethodsInInnerClass() {
+        final SOURCE = '''
+                package groovy.bugs
+
+                class MyClass {
+                    void test () {
+                        Foo.test()
+                    }
+                    class Foo {
+                        private static test() { }
+                    }
+                }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     void testAnonymousInnerClassAsField() {
