@@ -72,7 +72,12 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
      */
     protected String sourceLine(ASTNode node) {
         // TODO Handle statements that cross multiple lines?
-        sourceCode.line(findLastLineNumber(node) - 1)
+        sourceCode.line(findFirstNonAnnotationLine(node) - 1)
+    }
+
+    private static String getRawLine(sourceCode, int lineNumber) {
+        def allLines = sourceCode.getLines()
+        (lineNumber >= 0) && lineNumber < allLines.size() ? allLines[lineNumber] : null
     }
 
     /**
@@ -98,7 +103,7 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
             def lineNumber = node.lineNumber
             if (lineNumber >= 0) {
                 if (node instanceof AnnotatedNode) {
-                    lineNumber = findLastLineNumber(node)
+                    lineNumber = findFirstNonAnnotationLine(node)
                 }
                 def sourceLine = sourceLine(node)
                 violations.add(new Violation(rule: rule, sourceLine: sourceLine, lineNumber: lineNumber, message: message))
@@ -111,10 +116,17 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
      * @param node
      * @return
      */
-    private static int findLastLineNumber(ASTNode node) {
-        if (node instanceof AnnotatedNode) {
-            node.annotations?.inject(node.lineNumber) { int acc, AnnotationNode val ->
-                Math.max(acc, val.lastLineNumber)
+    private int findFirstNonAnnotationLine(ASTNode node) {
+        if (node instanceof AnnotatedNode && node.annotations) {
+            def lastAnnotation = node.annotations?.max { it.lastLineNumber }
+            def rawLine = getRawLine(sourceCode, lastAnnotation.lastLineNumber-1)
+            // is the annotation the last thing on the line?
+            if (rawLine.size() > lastAnnotation.lastColumnNumber) {
+                // no it is not
+                return lastAnnotation.lastLineNumber
+            } else {
+                // yes it is the last thing, return the next thing
+                return lastAnnotation.lastLineNumber + 1
             }
         } else {
             node.lineNumber
@@ -160,6 +172,7 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
                 }
             }
         }
+        false
     }
 
     final void visitClass(ClassNode node) {

@@ -62,10 +62,20 @@ class SupressWarningsTest extends AbstractRuleTestCase {
             @SuppressWarnings('ForceViolations') class MyClass1 {}
             @SuppressWarnings(["ForceViolations", "SomethingElse"]) class MyClass2 {}
             @SuppressWarnings class MyClass3 {}
+            @SuppressWarnings
             class MyClass4 {}
+            @SuppressWarnings() class MyClass5 {}
+            @SuppressWarnings()
+            class MyClass6 {}
+            class MyClass7 {}
         '''
 
-        assertTwoViolations SOURCE, 4, 'class MyClass3 {}', 5, 'class MyClass4 {}'
+        assertViolations SOURCE,
+                [lineNumber: 4, sourceLineText: 'class MyClass3 {}'],
+                [lineNumber: 6, sourceLineText: 'class MyClass4 {}'],
+                [lineNumber: 7, sourceLineText: 'class MyClass5 {}'],
+                [lineNumber: 9, sourceLineText: 'class MyClass6 {}'],
+                [lineNumber: 10, sourceLineText: 'class MyClass7 {}']
     }
 
     void testSuppressOnConstructor() {

@@ -22,6 +22,8 @@ import org.codenarc.rule.Rule
  * Tests for UnusedPrivateFieldRule
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
+ *
  * @version $Revision$ - $Date$
  */
 class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
@@ -31,6 +33,15 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnusedPrivateField'
     }
 
+    void testGroovyCoreBug() {
+        final SOURCE = '''
+            class CallOnOwner {
+                @AnnWithClassElement()
+                private aField
+            }'''
+        assertSingleViolation(SOURCE, 4, 'private aField', 'The field aField is not used within the class CallOnOwner')
+    }
+    
     void testApplyTo_SingleUnusedPrivateField() {
         final SOURCE = '''
           class MyClass {
