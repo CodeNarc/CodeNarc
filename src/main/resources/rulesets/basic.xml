@@ -70,5 +70,6 @@
     <rule class='org.codenarc.rule.basic.GroovyLangImmutableRule'/>
     <rule class='org.codenarc.rule.basic.BooleanGetBooleanRule'/>
     <rule class='org.codenarc.rule.basic.IntegerGetIntegerRule'/>
+    <rule class='org.codenarc.rule.basic.EqualsOverloadedRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateMapKeyRule'/>
 </ruleset>
