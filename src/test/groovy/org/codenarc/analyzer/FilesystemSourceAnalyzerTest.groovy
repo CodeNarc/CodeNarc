@@ -136,10 +136,11 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         log("results=$results")
 
         def fullPaths = results.getViolationsWithPriority(1)*.message
-        assert fullPaths == [
+        assert fullPaths.containsAll([
                 'src/test/resources/sourcewithdirs/subdir1/Subdir1File1.groovy',
                 'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
-        ]
+        ])
+        assert fullPaths.size() == 2
 
         assert testCountRule.count == 2
         assert results.numberOfFilesWithViolations == 2
