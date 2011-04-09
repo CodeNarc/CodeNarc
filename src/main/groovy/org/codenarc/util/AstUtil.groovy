@@ -50,16 +50,20 @@ class AstUtil {
     }
 
     /**
-     * Tells you if an expression is the  constant integer. 
+     * Tells you if an expression is the expected constant.
      * @param expression
      *     any expression
      * @param expected
-     *     the expected int
+     *     the expected int or String
      * @return
      * as described
      */
-    static boolean isConstant(Expression expression, int expected) {
+    static boolean isConstant(Expression expression, expected) {
         (expression instanceof ConstantExpression && expression.value == expected)
+    }
+
+    static boolean isPropertyNamed(Expression property, expectedName) {
+        return (property instanceof PropertyExpression && AstUtil.isConstant(property.property, expectedName))
     }
 
     /**

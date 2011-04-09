@@ -9,4 +9,5 @@
     </description>
 
     <rule class='org.codenarc.rule.security.NonFinalSubclassOfSensitiveInterfaceRule'/>
+    <rule class='org.codenarc.rule.security.InsecureRandomRule'/>
 </ruleset>
