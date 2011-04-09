@@ -39,4 +39,5 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInMethodDeclarationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessarySemicolonRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryGStringRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryFinalOnPrivateMethodRule'/>
 </ruleset>

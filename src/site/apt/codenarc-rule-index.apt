@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 211 rules.
+  <<CodeNarc>> includes 212 rules.
 
 
 
@@ -452,6 +452,8 @@ Rule Index
     * UnnecessaryDefInMethodDeclaration
 
     * UnnecessaryDoubleInstantiation
+
+    * UnnecessaryFinalOnPrivateMethod
 
     * UnnecessaryFloatInstantiation
 

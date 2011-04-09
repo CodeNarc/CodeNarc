@@ -239,6 +239,16 @@ def Object method5() { return 4 }
   with 'D' identifier to force the type, such as <<<123.45d>>> or <<<0.42d>>>.
 
 
+* UnnecessaryFinalOnPrivateMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+  A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
+
+  Example of violations:
+-------------------------------------------------------------------------------
+    private final method() {}
+-------------------------------------------------------------------------------
+
 * UnnecessaryFloatInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>

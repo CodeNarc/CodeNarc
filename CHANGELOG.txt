@@ -10,6 +10,7 @@ NEW FEATURES
 - EqualsOverloaded rule (basic) - The class has an equals method, but the parameter of the method is not of type Object. It is not overriding equals but instead overloading it.
 - NonFinalSubclassOfSensitiveInterface rule (security) - The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended. Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces such as java.security.PrivilegedAction and java.security.PrivilegedActionException must also be declared final for analogous reasons.
 - ImportFromSunPackages rule (imports) - Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
+- UnnecessaryFinalOnPrivateMethod rule (unnecessary) - A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
 
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
