@@ -1,500 +1,499 @@
 		--------------------------------------------------
-					  CodeNarc - Rule Index
-		--------------------------------------------------
+                      CodeNarc - Rule Index
+        --------------------------------------------------
 
 Rule Index
 ~~~~~~~~~~
   <<CodeNarc>> includes 206 rules.
 
-    
-    
-    
+
+
+
 * {{{codenarc-rules-basic.html}Basic}}
-    
+
     * AddEmptyString
-    
+
     * AssignmentInConditional
-    
+
     * BigDecimalInstantiation
-    
+
     * BooleanGetBoolean
-    
+
     * BooleanMethodReturnsNull
-    
+
     * BrokenOddnessCheck
-    
+
     * CloneableWithoutClone
-    
+
     * CompareToWithoutComparable
-    
+
     * ConfusingTernary
-    
+
     * ConsecutiveLiteralAppends
-    
+
     * ConsecutiveStringConcatenation
-    
+
     * ConstantIfExpression
-    
+
     * ConstantTernaryExpression
-    
+
     * DeadCode
-    
+
     * DoubleNegative
-    
+
     * DuplicateCaseStatement
-    
+
+    * DuplicateMapKey
+
     * EmptyCatchBlock
-    
+
     * EmptyElseBlock
-    
+
     * EmptyFinallyBlock
-    
+
     * EmptyForStatement
-    
+
     * EmptyIfStatement
-    
+
     * EmptyInstanceInitializer
-    
+
     * EmptyMethod
-    
+
     * EmptyStaticInitializer
-    
+
     * EmptySwitchStatement
-    
+
     * EmptySynchronizedStatement
-    
+
     * EmptyTryBlock
-    
+
     * EmptyWhileStatement
-    
+
     * EqualsAndHashCode
-    
+
+    * EqualsOverloaded
+
     * ExplicitArrayListInstantiation
-    
+
     * ExplicitCallToAndMethod
-    
+
     * ExplicitCallToCompareToMethod
-    
+
     * ExplicitCallToDivMethod
-    
+
     * ExplicitCallToEqualsMethod
-    
+
     * ExplicitCallToGetAtMethod
-    
+
     * ExplicitCallToLeftShiftMethod
-    
+
     * ExplicitCallToMinusMethod
-    
+
     * ExplicitCallToModMethod
-    
+
     * ExplicitCallToMultiplyMethod
-    
+
     * ExplicitCallToOrMethod
-    
+
     * ExplicitCallToPlusMethod
-    
+
     * ExplicitCallToPowerMethod
-    
+
     * ExplicitCallToRightShiftMethod
-    
+
     * ExplicitCallToXorMethod
-    
+
     * ExplicitGarbageCollection
-    
+
     * ExplicitHashMapInstantiation
-    
+
     * ExplicitHashSetInstantiation
-    
+
     * ExplicitLinkedListInstantiation
-    
+
     * ExplicitStackInstantiation
-    
+
     * ExplicitTreeSetInstantiation
-    
+
     * GStringAsMapKey
-    
+
     * GroovyLangImmutable
-    
+
     * IntegerGetInteger
-    
+
     * InvertedIfElse
-    
+
     * RemoveAllOnSelf
-    
+
     * ReturnFromFinallyBlock
-    
+
     * ReturnsNullInsteadOfEmptyArray
-    
+
     * ReturnsNullInsteadOfEmptyCollection
-    
+
     * SerialVersionUID
-    
+
     * SerializableClassMustDefineSerialVersionUID
-    
+
     * SimpleDateFormatMissingLocale
-    
+
     * ThrowExceptionFromFinallyBlock
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-braces.html}Braces}}
-    
+
     * ElseBlockBraces
-    
+
     * ForStatementBraces
-    
+
     * IfStatementBraces
-    
+
     * WhileStatementBraces
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-concurrency.html}Concurrency}}
-    
+
     * BusyWait
-    
+
     * DoubleCheckedLocking
-    
+
     * InconsistentPropertyLocking
-    
+
     * InconsistentPropertySynchronization
-    
+
     * NestedSynchronization
-    
+
     * StaticCalendarField
-    
+
     * StaticDateFormatField
-    
+
     * StaticMatcherField
-    
+
     * SynchronizedMethod
-    
+
     * SynchronizedOnBoxedPrimitive
-    
+
     * SynchronizedOnGetClass
-    
+
     * SynchronizedOnReentrantLock
-    
+
     * SynchronizedOnString
-    
+
     * SynchronizedOnThis
-    
+
     * SynchronizedReadObjectMethod
-    
+
     * SystemRunFinalizersOnExit
-    
+
     * ThreadGroup
-    
+
     * ThreadLocalNotStaticFinal
-    
+
     * ThreadYield
-    
+
     * UseOfNotifyMethod
-    
+
     * VolatileArrayField
-    
+
     * VolatileLongOrDoubleField
-    
+
     * WaitOutsideOfWhileLoop
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-design.html}Design}}
-    
+
     * AbstractClassWithoutAbstractMethod
-    
+
     * CloseWithoutCloseable
-    
+
     * ConstantsOnlyInterface
-    
+
     * EmptyMethodInAbstractClass
-    
+
     * FinalClassWithProtectedMember
-    
+
     * ImplementationAsType
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-dry.html}Dry}}
-    
+
     * DuplicateNumberLiteral
-    
+
     * DuplicateStringLiteral
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-exceptions.html}Exceptions}}
-    
+
     * CatchArrayIndexOutOfBoundsException
-    
+
     * CatchError
-    
+
     * CatchException
-    
+
     * CatchIllegalMonitorStateException
-    
+
     * CatchIndexOutOfBoundsException
-    
+
     * CatchNullPointerException
-    
+
     * CatchRuntimeException
-    
+
     * CatchThrowable
-    
+
     * ConfusingClassNamedException
-    
+
     * ExceptionExtendsError
-    
+
     * MissingNewInThrowStatement
-    
+
     * ReturnNullFromCatchBlock
-    
+
     * ThrowError
-    
+
     * ThrowException
-    
+
     * ThrowNullPointerException
-    
+
     * ThrowRuntimeException
-    
+
     * ThrowThrowable
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-generic.html}Generic}}
-    
+
     * IllegalRegex
-    
+
     * RequiredRegex
-    
+
     * StatelessClass
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-grails.html}Grails}}
-    
+
     * GrailsPublicControllerMethod
-    
+
     * GrailsServletContextReference
-    
+
     * GrailsSessionReference
-    
+
     * GrailsStatelessService
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-imports.html}Imports}}
-    
+
     * DuplicateImport
-    
+
     * ImportFromSamePackage
-    
+
     * UnnecessaryGroovyImport
-    
+
     * UnusedImport
-    
-    
-    
-    
-* {{{codenarc-rules-logging.html}Logging}}
-    
-    * LoggerForDifferentClass
-    
-    * LoggerWithWrongModifiers
-    
-    * LoggingSwallowsStacktrace
-    
-    * MultipleLoggers
-    
-    * PrintStackTrace
-    
-    * Println
-    
-    * SystemErrPrint
-    
-    * SystemOutPrint
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-junit.html}Junit}}
-    
+
     * ChainedTest
-    
+
     * CoupledTestCase
-    
+
     * JUnitAssertAlwaysFails
-    
+
     * JUnitAssertAlwaysSucceeds
-    
+
     * JUnitFailWithoutMessage
-    
+
     * JUnitPublicNonTestMethod
-    
+
     * JUnitSetUpCallsSuper
-    
+
     * JUnitStyleAssertions
-    
+
     * JUnitTearDownCallsSuper
-    
+
     * JUnitTestMethodWithoutAssert
-    
+
     * JUnitUnnecessarySetUp
-    
+
     * JUnitUnnecessaryTearDown
-    
+
     * UnnecessaryFail
-    
+
     * UseAssertEqualsInsteadOfAssertTrue
-    
+
     * UseAssertFalseInsteadOfNegation
-    
+
     * UseAssertNullInsteadOfAssertEquals
-    
+
     * UseAssertSameInsteadOfAssertTrue
-    
+
     * UseAssertTrueInsteadOfAssertEquals
-    
+
     * UseAssertTrueInsteadOfNegation
-    
-    
-    
-    
+
+
+
+
+* {{{codenarc-rules-logging.html}Logging}}
+
+    * LoggerForDifferentClass
+
+    * LoggerWithWrongModifiers
+
+    * LoggingSwallowsStacktrace
+
+    * MultipleLoggers
+
+    * PrintStackTrace
+
+    * Println
+
+    * SystemErrPrint
+
+    * SystemOutPrint
+
+
+
+
 * {{{codenarc-rules-naming.html}Naming}}
-    
+
     * AbstractClassName
-    
+
     * ClassName
-    
+
     * ConfusingMethodName
-    
+
     * FieldName
-    
+
     * InterfaceName
-    
+
     * MethodName
-    
+
     * ObjectOverrideMisspelledMethodName
-    
+
     * PackageName
-    
+
     * ParameterName
-    
+
     * PropertyName
-    
+
     * VariableName
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-size.html}Size}}
-    
+
     * AbcComplexity
-    
+
     * ClassSize
-    
+
     * CyclomaticComplexity
-    
+
     * MethodCount
-    
+
     * MethodSize
-    
+
     * NestedBlockDepth
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-unnecessary.html}Unnecessary}}
-    
+
     * UnnecessaryBigDecimalInstantiation
-    
+
     * UnnecessaryBigIntegerInstantiation
-    
+
     * UnnecessaryBooleanExpression
-    
+
     * UnnecessaryBooleanInstantiation
-    
+
     * UnnecessaryCallForLastElement
-    
+
     * UnnecessaryCallToSubstring
-    
+
     * UnnecessaryCatchBlock
-    
+
     * UnnecessaryCollectCall
-    
+
     * UnnecessaryCollectionCall
-    
+
     * UnnecessaryConstructor
-    
+
     * UnnecessaryDefInMethodDeclaration
-    
+
     * UnnecessaryDoubleInstantiation
-    
+
     * UnnecessaryFloatInstantiation
-    
+
     * UnnecessaryGString
-    
+
     * UnnecessaryGetter
-    
+
     * UnnecessaryIfStatement
-    
+
     * UnnecessaryInstantiationToGetClass
-    
+
     * UnnecessaryIntegerInstantiation
-    
+
     * UnnecessaryLongInstantiation
-    
+
     * UnnecessaryModOne
-    
+
     * UnnecessaryNullCheck
-    
+
     * UnnecessaryNullCheckBeforeInstanceOf
-    
+
     * UnnecessaryObjectReferences
-    
+
     * UnnecessaryOverridingMethod
-    
+
     * UnnecessaryPublicModifier
-    
+
     * UnnecessaryReturnKeyword
-    
+
     * UnnecessarySelfAssignment
-    
+
     * UnnecessarySemicolon
-    
+
     * UnnecessaryStringInstantiation
-    
+
     * UnnecessaryTernaryExpression
-    
+
     * UnnecessaryTransientModifier
-    
-    
-    
-    
+
+
+
+
 * {{{codenarc-rules-unused.html}Unused}}
-    
+
     * UnusedArray
-    
+
     * UnusedObject
-    
+
     * UnusedPrivateField
-    
+
     * UnusedPrivateMethod
-    
+
     * UnusedPrivateMethodParameter
-    
+
     * UnusedVariable
-    
-    
-
-
-
 

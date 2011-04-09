@@ -335,7 +335,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * DuplicateMapKey Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <New in CodeNarc 0.14>
   A map literal is created with duplicated key. The map entry will be overwritten.
 
   Example of violations:
@@ -592,7 +592,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * EqualsOverloaded Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <New in CodeNarc 0.14>
   The class has an equals method, but the parameter of the method is not of type Object.
   It is not overriding equals but instead overloading it.
 
