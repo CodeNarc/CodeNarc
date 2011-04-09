@@ -87,7 +87,7 @@ And document the following rules: $violations
             y.each {
                 output.append """    * $it\n\n"""
             }
-            ruleCount = y.size()
+            ruleCount += y.size()
         }
 
         def header = """		--------------------------------------------------
