@@ -72,4 +72,5 @@
     <rule class='org.codenarc.rule.basic.IntegerGetIntegerRule'/>
     <rule class='org.codenarc.rule.basic.EqualsOverloadedRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateMapKeyRule'/>
+    <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
 </ruleset>

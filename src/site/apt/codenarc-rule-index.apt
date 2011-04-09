@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 209 rules.
+  <<CodeNarc>> includes 210 rules.
 
 
 
@@ -44,6 +44,8 @@ Rule Index
     * DuplicateCaseStatement
 
     * DuplicateMapKey
+
+    * DuplicateSetValue
 
     * EmptyCatchBlock
 
