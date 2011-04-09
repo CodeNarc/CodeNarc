@@ -57,6 +57,7 @@ And document the following rules: $violations
     /**
      * This unit test regenerates the site index.
      */
+    @SuppressWarnings('JUnitTestMethodWithoutAssert')
     void testRegenerateSiteIndex() {
 
         def categories = []
@@ -66,7 +67,8 @@ And document the following rules: $violations
         categories.sort() // apply default sort order
 
         StringBuilder output = new StringBuilder()
-        
+        int ruleCount = 0
+
         categories.each { String it ->
             output.append "\n\n\n* {{{codenarc-rules-${it}.html}${it.capitalize()}}}\n\n"
             GString file = "src/main/resources/rulesets/${it}.xml"
@@ -85,6 +87,7 @@ And document the following rules: $violations
             y.each {
                 output.append """    * $it\n\n"""
             }
+            ruleCount = y.size()
         }
 
         def header = """		--------------------------------------------------
@@ -93,7 +96,7 @@ And document the following rules: $violations
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 206 rules.
+  <<CodeNarc>> includes $ruleCount rules.
 
 """
 

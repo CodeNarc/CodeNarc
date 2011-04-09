@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 206 rules.
+  <<CodeNarc>> includes 6 rules.
 
 
 
@@ -395,6 +395,13 @@ Rule Index
     * PropertyName
 
     * VariableName
+
+
+
+
+* {{{codenarc-rules-security.html}Security}}
+
+    * NonFinalSubclassOfSensitiveInterface
 
 
 
