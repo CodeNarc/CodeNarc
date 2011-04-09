@@ -17,6 +17,21 @@ Imports Rules  ("<rulesets/imports.xml>")
   Checks for an <import> of a class that is within the same package as the importing class.
 
 
+* ImportFromSunPackages Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+  Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    import sun.misc.foo
+    import sun.*
+    import sun.misc.foo as Foo
+
+    public class MyClass{}
+-------------------------------------------------------------------------------
+
 * UnnecessaryGroovyImport Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

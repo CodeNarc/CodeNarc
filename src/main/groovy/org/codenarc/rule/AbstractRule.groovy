@@ -174,9 +174,9 @@ abstract class AbstractRule implements Rule {
      * @param importNode - the ImportNode for the import triggering the violation
      * @return a new Violation object
      */
-    protected Violation createViolationForImport(SourceCode sourceCode, ImportNode importNode) {
+    protected Violation createViolationForImport(SourceCode sourceCode, ImportNode importNode, String message = null) {
         def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
-        new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
+        new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber, message: message)
     }
 
     /**
@@ -228,13 +228,37 @@ abstract class AbstractRule implements Rule {
     }
 
     /**
+     * Return the source line and line number for the specified import class name and alias
+     * @param sourceCode - the SourceCode being processed
+     * @param importNode - the ImportNode representing the import
+     * @return an object that has 'sourceLine' and 'lineNumber' fields
+     */
+    protected sourceLineAndNumberForStarImport(SourceCode sourceCode, ImportNode importNode) {
+        if (!importNode.isStar()) {
+            return [sourceLine:-1, lineNumber:-1]
+        }
+        // NOTE: This won't properly handle the case of multiple imports for same class if not all are aliased
+        def index = sourceCode.lines.findIndexOf { line ->
+            line.contains('import') &&
+                line.contains(importNode.packageName + '*')
+        }
+        def lineNumber = index == -1 ? null : index + 1
+        def sourceLine = lineNumber == null ? "import ${importNode.packageName}*".toString() : sourceCode.lines[lineNumber-1].trim()
+        [sourceLine:sourceLine, lineNumber:lineNumber]
+    }
+
+    /**
      * Return the source line and line number for the specified import
      * @param sourceCode - the SourceCode being processed
      * @param importNode - the ImportNode representing the import
      * @return an object that has 'sourceLine' and 'lineNumber' fields
      */
     protected sourceLineAndNumberForImport(SourceCode sourceCode, ImportNode importNode) {
-        sourceLineAndNumberForImport(sourceCode, importNode.className, importNode.alias)
+        if (importNode.isStar()) {
+            sourceLineAndNumberForStarImport(sourceCode, importNode)
+        } else {
+            sourceLineAndNumberForImport(sourceCode, importNode.className, importNode.alias)
+        }
     }
 
     /**

@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 210 rules.
+  <<CodeNarc>> includes 211 rules.
 
 
 
@@ -302,6 +302,8 @@ Rule Index
     * DuplicateImport
 
     * ImportFromSamePackage
+
+    * ImportFromSunPackages
 
     * UnnecessaryGroovyImport
 

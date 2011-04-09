@@ -9,8 +9,7 @@ NEW FEATURES
 - DuplicateSetValue rule (basic) - A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
 - EqualsOverloaded rule (basic) - The class has an equals method, but the parameter of the method is not of type Object. It is not overriding equals but instead overloading it.
 - NonFinalSubclassOfSensitiveInterface rule (security) - The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended. Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces such as java.security.PrivilegedAction and java.security.PrivilegedActionException must also be declared final for analogous reasons.
-
-
+- ImportFromSunPackages rule (imports) - Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
 
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.

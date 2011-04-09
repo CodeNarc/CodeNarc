@@ -13,4 +13,5 @@
     <rule class='org.codenarc.rule.imports.UnnecessaryGroovyImportRule'/>
     <rule class='org.codenarc.rule.imports.UnusedImportRule'/>
 
+    <rule class='org.codenarc.rule.imports.ImportFromSunPackagesRule'/>
 </ruleset>
