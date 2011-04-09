@@ -45,7 +45,9 @@ ruleset {
     DoubleNegative
     DuplicateCaseStatement
     DuplicateImport
+    DuplicateMapKey
     DuplicateNumberLiteral
+    DuplicateSetValue
     DuplicateStringLiteral
     ElseBlockBraces
     EmptyCatchBlock
@@ -62,6 +64,7 @@ ruleset {
     EmptyTryBlock
     EmptyWhileStatement
     EqualsAndHashCode
+    EqualsOverloaded
     ExceptionExtendsError
     ExplicitArrayListInstantiation
     ExplicitCallToAndMethod
@@ -122,6 +125,7 @@ ruleset {
     MultipleLoggers
     NestedBlockDepth
     NestedSynchronization
+    NonFinalSubclassOfSensitiveInterface
     ObjectOverrideMisspelledMethodName
     PackageName
     ParameterName
