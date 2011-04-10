@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 213 rules.
+  <<CodeNarc>> includes 214 rules.
 
 
 
@@ -404,6 +404,8 @@ Rule Index
 
 
 * {{{codenarc-rules-security.html}Security}}
+
+    * DirectConnectionManagement
 
     * InsecureRandom
 

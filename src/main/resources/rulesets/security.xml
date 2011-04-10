@@ -10,4 +10,5 @@
 
     <rule class='org.codenarc.rule.security.NonFinalSubclassOfSensitiveInterfaceRule'/>
     <rule class='org.codenarc.rule.security.InsecureRandomRule'/>
+    <rule class='org.codenarc.rule.security.DirectConnectionManagementRule'/>
 </ruleset>
