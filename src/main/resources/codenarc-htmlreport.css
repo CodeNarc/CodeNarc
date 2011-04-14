@@ -116,6 +116,12 @@ a {
     color: #444444;
 }
 
+.violationMessage {
+    font-style: italic;
+    font-size: 80%;
+    color: black;
+}
+
 .ruleDescriptions {
     font-size: 85%;
 }

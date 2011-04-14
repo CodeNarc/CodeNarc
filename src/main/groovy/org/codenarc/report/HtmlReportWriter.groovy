@@ -265,7 +265,7 @@ class HtmlReportWriter extends AbstractReportWriter {
                             if (moreInfo) {
                                 p(class:'violationInfo') {
                                     span('[MSG]', class:'violationInfoPrefix')
-                                    span(moreInfo, class:'sourceCode')
+                                    span(moreInfo, class:'violationMessage')
                                 }
                             }
                         }
