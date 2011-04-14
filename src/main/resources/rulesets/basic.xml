@@ -11,6 +11,7 @@
     <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.BooleanMethodReturnsNullRule'/>
     <rule class='org.codenarc.rule.basic.CloneableWithoutCloneRule'/>
+    <rule class='org.codenarc.rule.basic.ComparisonWithSelfRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
     <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>

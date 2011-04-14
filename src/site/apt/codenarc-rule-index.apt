@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 214 rules.
+  <<CodeNarc>> includes 215 rules.
 
 
 
@@ -26,6 +26,8 @@ Rule Index
     * CloneableWithoutClone
 
     * CompareToWithoutComparable
+
+    * ComparisonWithSelf
 
     * ConfusingTernary
 

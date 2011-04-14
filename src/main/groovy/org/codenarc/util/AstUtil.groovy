@@ -35,6 +35,8 @@ import java.util.concurrent.locks.ReentrantLock
  */
 @SuppressWarnings(['DuplicateLiteral', 'MethodCount'])
 class AstUtil {
+
+    public static final COMPARISON_OPERATORS = ['==', '!=', '<', '<=', '>', '>=', '<=>']
     private static final PREDEFINED_CONSTANTS = ['Boolean': ['FALSE', 'TRUE']]
 
     /**
@@ -516,6 +518,21 @@ class AstUtil {
     static boolean isBinaryExpressionType(Expression expression, String token) {
         if (expression instanceof BinaryExpression) {
             if (expression.operation.text == token) {
+                return true
+            }
+        }
+        false
+    }
+
+    /**
+     * Returns true if the expression is a binary expression with the specified token.
+     * @param expression - the expression node
+     * @param tokens - the List of allowable (operator) tokens
+     * @return as described
+     */
+    static boolean isBinaryExpressionType(Expression expression, List<String> tokens) {
+        if (expression instanceof BinaryExpression) {
+            if (expression.operation.text in tokens) {
                 return true
             }
         }
