@@ -13,6 +13,7 @@ NEW RULES
 - UnnecessaryFinalOnPrivateMethod rule (unnecessary) - A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
 - InsecureRandom rule (security) - Reports usages of java.util.Random, which can produce very predictable results. If two instances of Random are created with the same seed and sequence of method calls, they will generate the exact same results. Use java.security.SecureRandom instead, which provides a cryptographically strong random number generator. SecureRandom uses PRNG, which means they are using a deterministic algorithm to produce a pseudo-random number from a true random seed. SecureRandom produces non-deterministic output.
 - DirectConnectionManagement rule (security) - The J2EE standard requires that applications use the container's resource management facilities to obtain connections to resources. Every major web application container provides pooled database connection management as part of its resource management framework. Duplicating this functionality in an application is difficult and error prone, which is part of the reason it is forbidden under the J2EE standard.
+- ComparisonWithSelf (basic) - Checks for using a comparison operator or equals() or compareTo() to compare a variable to itself, e.g.: x == x, x != x, x <=> x, x < x, x > x, x <= x, x >= x, x.equals(x), or x.compareTo(x), where x is a variable.
 
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
