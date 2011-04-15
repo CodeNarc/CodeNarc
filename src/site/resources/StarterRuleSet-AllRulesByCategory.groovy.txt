@@ -15,6 +15,7 @@ ruleset {
     BrokenOddnessCheck
     CloneableWithoutClone
     CompareToWithoutComparable
+    ComparisonWithSelf
     ConfusingTernary
     ConsecutiveLiteralAppends
     ConsecutiveStringConcatenation
@@ -138,6 +139,7 @@ ruleset {
     // rulesets/generic.xml
     IllegalRegex
     RequiredRegex
+    RequiredString
     StatelessClass
     
     // rulesets/grails.xml
@@ -149,6 +151,7 @@ ruleset {
     // rulesets/imports.xml
     DuplicateImport
     ImportFromSamePackage
+    ImportFromSunPackages
     UnnecessaryGroovyImport
     UnusedImport
     
@@ -197,6 +200,8 @@ ruleset {
     VariableName
     
     // rulesets/security.xml
+    DirectConnectionManagement
+    InsecureRandom
     NonFinalSubclassOfSensitiveInterface
     
     // rulesets/size.xml
@@ -220,6 +225,7 @@ ruleset {
     UnnecessaryConstructor
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDoubleInstantiation
+    UnnecessaryFinalOnPrivateMethod
     UnnecessaryFloatInstantiation
     UnnecessaryGString
     UnnecessaryGetter

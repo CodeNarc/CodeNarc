@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 215 rules.
+  <<CodeNarc>> includes 216 rules.
 
 
 
@@ -280,6 +280,8 @@ Rule Index
     * IllegalRegex
 
     * RequiredRegex
+
+    * RequiredString
 
     * StatelessClass
 
