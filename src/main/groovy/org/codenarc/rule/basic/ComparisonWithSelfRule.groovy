@@ -31,7 +31,6 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * where x is a variable
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ComparisonWithSelfRule extends AbstractAstVisitorRule {
     String name = 'ComparisonWithSelf'

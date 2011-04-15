@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ComparisonWithSelfRule
  *
  * @author Chris mair
- * @version $Revision$ - $Date$
  */
 class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
 
