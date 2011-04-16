@@ -16,6 +16,7 @@ NEW RULES
 - ComparisonWithSelf (basic) - Checks for using a comparison operator or equals() or compareTo() to compare a variable to itself, e.g.: x == x, x != x, x <=> x, x < x, x > x, x <= x, x >= x, x.equals(x), or x.compareTo(x), where x is a variable.
 - FileCreateTempFile rule (security) - The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library. It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
 - SystemExit rule (security) - Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug code or code imported from a non-J2EE application.
+- ObjectFinalize rule (security) - The finalize() method should only be called by the JVM after the object has been garbage collected.
 
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.

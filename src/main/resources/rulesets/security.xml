@@ -13,4 +13,5 @@
     <rule class='org.codenarc.rule.security.DirectConnectionManagementRule'/>
     <rule class='org.codenarc.rule.security.FileCreateTempFileRule'/>
     <rule class='org.codenarc.rule.security.SystemExitRule'/>
+    <rule class='org.codenarc.rule.security.ObjectFinalizeRule'/>
 </ruleset>
