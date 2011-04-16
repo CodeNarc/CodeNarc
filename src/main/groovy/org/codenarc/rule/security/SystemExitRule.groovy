@@ -17,31 +17,28 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
- * The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library.
- * It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
+ * Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug code or code imported from a non-J2EE application.
  *
- * @author Hamlet D'Arcy
+ * @author 'Hamlet D'Arcy'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class FileCreateTempFileRule extends AbstractAstVisitorRule {
-    String name = 'FileCreateTempFile'
+class SystemExitRule extends AbstractAstVisitorRule {
+    String name = 'SystemExit'
     int priority = 2
-    Class astVisitorClass = FileCreateTempFileAstVisitor
-    String doNotApplyToFilesMatching = DEFAULT_TEST_CLASS_NAMES
+    Class astVisitorClass = SystemExitAstVisitor
 }
 
-class FileCreateTempFileAstVisitor extends AbstractAstVisitor {
+class SystemExitAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
-        if (AstUtil.isMethodCall(call, 'File', 'createTempFile', 2) ||
-                AstUtil.isMethodCall(call, 'File', 'createTempFile', 3)) {
-            addViolation(call, 'The method File.createTempFile is insecure. Use a secure API such as that provided by ESAPI')
+        if (AstUtil.isMethodCall(call, 'System', 'exit', 1)) {
+            addViolation(call, 'Calling System.exit() is insecure and can expose a denial of service attack')
         }
         super.visitMethodCallExpression(call)
     }

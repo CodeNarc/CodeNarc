@@ -15,6 +15,7 @@ NEW RULES
 - DirectConnectionManagement rule (security) - The J2EE standard requires that applications use the container's resource management facilities to obtain connections to resources. Every major web application container provides pooled database connection management as part of its resource management framework. Duplicating this functionality in an application is difficult and error prone, which is part of the reason it is forbidden under the J2EE standard.
 - ComparisonWithSelf (basic) - Checks for using a comparison operator or equals() or compareTo() to compare a variable to itself, e.g.: x == x, x != x, x <=> x, x < x, x > x, x <= x, x >= x, x.equals(x), or x.compareTo(x), where x is a variable.
 - FileCreateTempFile rule (security) - The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library. It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
+- SystemExit rule (security) - Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug code or code imported from a non-J2EE application.
 
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
