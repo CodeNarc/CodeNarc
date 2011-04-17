@@ -31,7 +31,7 @@ class FileCreateTempFileRule extends AbstractAstVisitorRule {
     String name = 'FileCreateTempFile'
     int priority = 2
     Class astVisitorClass = FileCreateTempFileAstVisitor
-    String doNotApplyToFilesMatching = DEFAULT_TEST_CLASS_NAMES
+    String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
 class FileCreateTempFileAstVisitor extends AbstractAstVisitor {
