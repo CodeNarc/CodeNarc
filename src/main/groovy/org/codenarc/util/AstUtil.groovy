@@ -52,6 +52,41 @@ class AstUtil {
     }
 
     /**
+     * Returns true if an expression is a constant or else a literal that contains only constant values.
+     * Basically, is it a constant, or else a map like [a:1, b:99, c:true], or a list like ['abc', 99.0, false]
+     * @param expression - any expression
+     */
+    static boolean isConstantOrConstantLiteral(Expression expression) {
+        expression instanceof ConstantExpression ||
+            isPredefinedConstant(expression) ||
+            isMapLiteralWithOnlyConstantValues(expression) ||
+            isListLiteralWithOnlyConstantValues(expression)
+    }
+
+    /**
+     * Returns true if a Map literal that contains only entries where both key and value are constants.
+     * @param expression - any expression
+     */
+    static boolean isMapLiteralWithOnlyConstantValues(Expression expression) {
+        if (expression instanceof MapExpression) {
+            return expression.mapEntryExpressions.every { mapEntryExpression ->
+                isConstantOrConstantLiteral(mapEntryExpression.keyExpression) &&
+                isConstantOrConstantLiteral(mapEntryExpression.valueExpression)
+            }
+        }
+    }
+
+    /**
+     * Returns true if a List literal that contains only entries that are constants.
+     * @param expression - any expression
+     */
+    static boolean isListLiteralWithOnlyConstantValues(Expression expression) {
+        if (expression instanceof ListExpression) {
+            return expression.expressions.every { listExpression -> isConstantOrConstantLiteral(listExpression) }
+        }
+    }
+
+    /**
      * Tells you if an expression is the expected constant.
      * @param expression
      *     any expression

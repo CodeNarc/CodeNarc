@@ -16,36 +16,37 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
- * CodeNarc Rule. Checks for using a comparison operator or equals() or compareTo() to compare a
- * variable to itself, e.g.:
- * x == x, x != x, x <=> x,
- * x < x, x > x, x <= x, x >= x,
- * x.equals(x), x.compareTo(x)
- * where x is a variable
+ * CodeNarc Rule. Checks for using a comparison operator or equals() or compareTo() to compare two
+ * constants to each other or two literal that contain only constant values, e.g.:
+ * 23 == 67, [3,2] != [1,2]
+ * Boolean.FALSE != false
+ * 23 < 88, 0.17 <= 0.99, "abc" > "ddd", [a] >= [x],
+ * [a:1] <=> [a:99.87]
+ * [1,2].equals([17,true])
+ * [a:1].compareTo([a:3])
  *
  * @author Chris Mair
  */
-class ComparisonWithSelfRule extends AbstractAstVisitorRule {
-    String name = 'ComparisonWithSelf'
+class ComparisonOfTwoConstantsRule extends AbstractAstVisitorRule {
+    String name = 'ComparisonOfTwoConstants'
     int priority = 2
-    Class astVisitorClass = ComparisonWithSelfAstVisitor
+    Class astVisitorClass = ComparisonOfTwoConstantsAstVisitor
 }
 
-class ComparisonWithSelfAstVisitor extends AbstractAstVisitor {
+class ComparisonOfTwoConstantsAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         if (isFirstVisit(expression) && AstUtil.isBinaryExpressionType(expression, AstUtil.COMPARISON_OPERATORS)) {
             def left = expression.leftExpression
             def right = expression.rightExpression
-            addViolationIfBothAreTheSameVariable(expression, left, right)
+            addViolationIfBothAreConstantsOrLiterals(expression, left, right)
         }
         super.visitBinaryExpression(expression)
     }
@@ -55,14 +56,14 @@ class ComparisonWithSelfAstVisitor extends AbstractAstVisitor {
         if (isFirstVisit(call) && (AstUtil.isMethodCall(call, 'equals', 1) || AstUtil.isMethodCall(call, 'compareTo', 1))) {
             def left = call.objectExpression
             def right = call.arguments.getExpression(0)
-            addViolationIfBothAreTheSameVariable(call, left, right)
+            addViolationIfBothAreConstantsOrLiterals(call, left, right)
         }
         super.visitMethodCallExpression(call)
     }
 
-    private void addViolationIfBothAreTheSameVariable(node, left, right) {
-        if (left instanceof VariableExpression && right instanceof VariableExpression && left.name == right.name) {
-            addViolation(node, "Comparing an object to itself is useless and may indicate a bug: ${node.text}")
+    private void addViolationIfBothAreConstantsOrLiterals(node, left, right) {
+        if (AstUtil.isConstantOrConstantLiteral(left) && AstUtil.isConstantOrConstantLiteral(right)) {
+            addViolation(node, "Comparing two constants or constant literals is useless and may indicate a bug: ${node.text}")
         }
     }
 }
