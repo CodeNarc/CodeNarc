@@ -24,8 +24,9 @@ import org.codenarc.util.AstUtil
 /**
  * Reports usages of java.util.Random, which can produce very predictable results. If two instances of Random are created with the same seed and sequence of method calls, they will generate the exact same results. Use java.security.SecureRandom instead, which provides a cryptographically strong random number generator. SecureRandom uses PRNG, which means they are using a deterministic algorithm to produce a pseudo-random number from a true random seed. SecureRandom produces non-deterministic output.
  *
+ * By default, this rule does not apply to test files.
+ *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class InsecureRandomRule extends AbstractAstVisitorRule {
     String name = 'InsecureRandom'

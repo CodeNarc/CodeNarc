@@ -24,14 +24,15 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Ignores unassigned objects if the construction is the last statement within a block,
  * because it may be the intentional return value.
  *
+ * By default, this rule does not apply to test files.
+ *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class UnusedObjectRule extends AbstractAstVisitorRule {
     String name = 'UnusedObject'
     int priority = 2
     Class astVisitorClass = UnusedObjectAstVisitor
-    String doNotApplyToClassNames = DEFAULT_TEST_CLASS_NAMES
+    String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
 class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
@@ -42,7 +43,7 @@ class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
                 !statement.expression.isSuperCall() &&
                 !statement.expression.isThisCall() &&
                 !isLastStatementInBlock(statement)) {
-            addViolation(statement, 'The instantiated object is not used is not used')
+            addViolation(statement, 'The instantiated object is not used')
         }
         super.visitExpressionStatement(statement)
     }

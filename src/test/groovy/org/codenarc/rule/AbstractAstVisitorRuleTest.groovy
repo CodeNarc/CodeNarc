@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 package org.codenarc.rule
 
 import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.util.WildcardPattern
 
 /**
  * Tests for AbstractAstVisitorRule
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     static final SOURCE = '''
@@ -185,6 +185,21 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     void testApplyTo_AstVisitorClassNotAnAstVisitor() {
         rule.astVisitorClass = String
         shouldFailWithMessageContaining('astVisitorClass') { applyRuleTo('def x') }
+    }
+
+    void testDEFAULT_TEST_FILES() {
+        assert 'MyTest.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
+        assert 'MyTests.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
+        assert 'MyTestCase.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
+        assertFalse 'MyNonTestClass.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
+    }
+
+    void testDEFAULT_TEST_CLASS_NAMES() {
+        def wildcardPattern = new WildcardPattern(AbstractAstVisitorRule.DEFAULT_TEST_CLASS_NAMES)
+        assert wildcardPattern.matches('MyTest')
+        assert wildcardPattern.matches('MyTests')
+        assert wildcardPattern.matches('MyTestCase')
+        assertFalse wildcardPattern.matches('MyNonTestClass')\
     }
 
     protected Rule createRule() {

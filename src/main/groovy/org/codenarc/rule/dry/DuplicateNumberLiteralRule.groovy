@@ -25,8 +25,9 @@ import org.codenarc.rule.AstVisitor
  * the numbers that should be ignored by this rule (i.e., not cause a violation). This property
  * defaults to "0,1" to ignore the constants zero and one.
  *
+ * By default, this rule does not apply to test files.
+ *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
     String name = 'DuplicateNumberLiteral'

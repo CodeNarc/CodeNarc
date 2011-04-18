@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,13 @@ import org.codenarc.rule.Rule
  * Tests for UnusedObjectRule
  *
  * @author Your Name Here
- * @version $Revision$ - $Date$
  */
 class UnusedObjectRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedObject'
+        assert rule.doNotApplyToFilesMatching == DEFAULT_TEST_FILES
     }
 
     void testApplyTo_ObjectAssigned_NoViolations() {
@@ -103,21 +103,6 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
                     this(name)
                     doSomething()
                 }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testApplyTo_TestClasses_NoViolations() {
-        final SOURCE = '''
-            class MyTest {
-                def closure = { new Object(); println "ok" }
-            }
-            class MyTests {
-                def closure = { new Object(); println "ok" }
-            }
-            class MyTestCase {
-                def closure = { new Object(); println "ok" }
             }
         '''
         assertNoViolations(SOURCE)

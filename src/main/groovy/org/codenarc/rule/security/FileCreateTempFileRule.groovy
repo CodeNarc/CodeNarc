@@ -24,8 +24,9 @@ import org.codenarc.util.AstUtil
  * The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library.
  * It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
  *
+ * By default, this rule does not apply to test files.
+ *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class FileCreateTempFileRule extends AbstractAstVisitorRule {
     String name = 'FileCreateTempFile'

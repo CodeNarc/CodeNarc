@@ -8,7 +8,9 @@ ruleset {
     ruleset('rulesets/design.xml')
     ruleset('rulesets/exceptions.xml')
     ruleset('rulesets/imports.xml')
-    ruleset('rulesets/junit.xml')
+    ruleset('rulesets/junit.xml') {
+        exclude 'JUnitStyleAssertions'
+    }
     ruleset('rulesets/logging.xml')
     ruleset('rulesets/naming.xml')
     ruleset('rulesets/size.xml')

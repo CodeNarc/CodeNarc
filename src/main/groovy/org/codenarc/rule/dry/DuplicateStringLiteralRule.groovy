@@ -25,9 +25,10 @@ import org.codenarc.rule.AstVisitor
  * the strings that should be ignored by this rule (i.e., not cause a violation). This property
  * defaults to "" to ignore empty strings.
  *
+ * By default, this rule does not apply to test files.
+ *
  * @author Hamlet D'Arcy
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
     String name = 'DuplicateStringLiteral'

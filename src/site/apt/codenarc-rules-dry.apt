@@ -18,7 +18,8 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   Code containing duplicate <Number> literals can usually be improved by declaring the <Number> as a constant field.
 
   By default, the rule does not analyze test files. This rule sets the default value of the
-  <doNotApplyToClassNames> property to only match class names that do not end in 'Test', 'Tests' or 'TestCase'.
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  or 'TestCase.groovy'.
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
@@ -47,7 +48,8 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   Code containing duplicate <String> literals can usually be improved by declaring the <String> as a constant field.
 
   By default, the rule does not analyze test files. This rule sets the default value of the
-  <doNotApplyToClassNames> property to only match class names that do not end in 'Test', 'Tests' or 'TestCase'.
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  or 'TestCase.groovy'.
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |

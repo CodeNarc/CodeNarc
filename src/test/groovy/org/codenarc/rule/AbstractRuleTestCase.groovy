@@ -28,6 +28,8 @@ import org.codenarc.test.AbstractTestCase
 @SuppressWarnings('DuplicateLiteral')
 abstract class AbstractRuleTestCase extends AbstractTestCase {
     protected static final CONSTRUCTOR_METHOD_NAME = '<init>'
+    protected static final DEFAULT_TEST_FILES = AbstractAstVisitorRule.DEFAULT_TEST_FILES
+    protected static final DEFAULT_TEST_CLASS_NAMES = AbstractAstVisitorRule.DEFAULT_TEST_CLASS_NAMES
     protected Rule rule
 
     // Subclasses can optionally set these to set the name or path of the SourceCode object created

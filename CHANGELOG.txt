@@ -31,6 +31,7 @@ BUG FIXES
 - Fix Bug #3207605 - Fixed UnusedPrivateMethod rule to recognize static method references. 
 - Fix Bug #3207607 - Fixed UnusedPrivateMethod rule to recognize access of privately defined getters and setters as properties.
 - Fix Bug #3205697 - Fixed bug where the source line displayed for annotated nodes was sometimes showing just the annotation and not the node.
+- Feature #3288895 - Expand default test file regex pattern to include *TestCase
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------
