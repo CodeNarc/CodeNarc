@@ -75,4 +75,5 @@
     <rule class='org.codenarc.rule.basic.EqualsOverloadedRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateMapKeyRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
+    <rule class='org.codenarc.rule.basic.SerialPersistentFieldsRule'/>
 </ruleset>

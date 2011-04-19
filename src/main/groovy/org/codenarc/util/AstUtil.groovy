@@ -178,18 +178,20 @@ class AstUtil {
     }
 
     /**
-     * Return the List of Arguments for the specified MethodCallExpression. The returned List contains
-     * either ConstantExpression or MapEntryExpression objects.
-     * @param methodCall - the AST MethodCallExpression
+     * Return the List of Arguments for the specified MethodCallExpression or a ConstructorCallExpression.
+     * The returned List contains either ConstantExpression or MapEntryExpression objects.
+     * @param methodCall - the AST MethodCallExpression or ConstructorCalLExpression
      * @return the List of argument objects
      */
-    static List getMethodArguments(MethodCallExpression methodCall) {
-        def argumentsExpression = methodCall.arguments
-        if (respondsTo(argumentsExpression, 'getExpressions')) {
-            return argumentsExpression.expressions
-        }
-        if (respondsTo(argumentsExpression, 'getMapEntryExpressions')) {
-            return argumentsExpression.mapEntryExpressions
+    static List getMethodArguments(ASTNode methodCall) {
+        if (respondsTo(methodCall, 'getArguments')) {
+            def argumentsExpression = methodCall.arguments
+            if (respondsTo(argumentsExpression, 'getExpressions')) {
+                return argumentsExpression.expressions
+            }
+            if (respondsTo(argumentsExpression, 'getMapEntryExpressions')) {
+                return argumentsExpression.mapEntryExpressions
+            }
         }
         []
     }

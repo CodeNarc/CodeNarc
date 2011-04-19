@@ -18,6 +18,14 @@ NEW RULES
 - FileCreateTempFile rule (security) - The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library. It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
 - SystemExit rule (security) - Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug code or code imported from a non-J2EE application.
 - ObjectFinalize rule (security) - The finalize() method should only be called by the JVM after the object has been garbage collected.
+- JavaIoPackageAccess rule (security) - This rule reports violations of the Enterprise JavaBeans specification by using the java.io package to access files or the file system.
+- UnsafeArrayDeclaration rule (security) - Triggers a violation when an array is declared public, final, and static. Secure coding principles state that, in most cases, an array declared public, final and static is a bug because arrays are mutable objects.
+- PublicFinalizeMethod rule (security) - Creates a violation when the program violates secure coding principles by declaring a finalize() method public.
+- NonFinalPublicField rule (security) - Finds code that violates secure coding principles for mobile code by declaring a member variable public but not final.
+- UnnecessaryEqualityWithNull rule (unnecessary) - The expression object.equals(null) is always false and is unnecessary.
+- SerialPersistentFields rule (basic) - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
+- StaticConnection rule (security) - Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.
+
 
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.

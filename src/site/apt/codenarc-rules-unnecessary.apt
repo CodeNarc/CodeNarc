@@ -239,6 +239,25 @@ def Object method5() { return 4 }
   with 'D' identifier to force the type, such as <<<123.45d>>> or <<<0.42d>>>.
 
 
+* UnnecessaryEqualityWithNull Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+  The expression <<<object.equals(null)>>> is always false and is unnecessary.
+
+  The <<<object.equals(null)>>> comparison will always return false, since the object is not null. (If the object is null,
+  the program will throw a NullPointerException). This is the basic contract of the <<<equals()>>> method.
+
+  References:
+    Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 398, CWE ID 754
+    JavaDoc for Object Sun Microsystems
+    Standards Mapping - SANS Top 25 2010 - (SANS 2010) Risky Resource Management - CWE ID 754
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    object.equals(null)
+-------------------------------------------------------------------------------
+
 * UnnecessaryFinalOnPrivateMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
@@ -703,3 +722,4 @@ I am a string
     }
 
 -------------------------------------------------------------------------------
+
