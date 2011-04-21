@@ -5,6 +5,21 @@
 Design Rules  ("<rulesets/design.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* AbstractClassWithPublicConstructor Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.14>
+
+  Checks for <<<abstract>>> classes that define a <<<public>>> constructor, which is useless and confusing.
+
+  The following code produces a violation:
+
+-------------------------------------------------------------------------------
+    abstract class MyClass {
+        MyClass() { }
+    }
+-------------------------------------------------------------------------------
+
+
 * AbstractClassWithoutAbstractMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -42,6 +57,7 @@ Design Rules  ("<rulesets/design.xml>")
 
   If a class defines a "void close()" then that class should implement java.io.Closeable.
 
+
 * ConstantsOnlyInterface Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -75,6 +91,7 @@ Design Rules  ("<rulesets/design.xml>")
         }
     }
 -------------------------------------------------------------------------------
+
 
 * ImplementationAsType Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

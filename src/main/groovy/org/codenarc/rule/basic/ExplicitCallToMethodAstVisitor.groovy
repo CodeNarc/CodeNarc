@@ -30,11 +30,9 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
     final String methodName
 
     /**
-     * The method name to watch for. 
-     * @param methodName
-     * @return
+     * @param methodName The method name to watch for.
      */
-    def ExplicitCallToMethodAstVisitor(String methodName) {
+    protected ExplicitCallToMethodAstVisitor(String methodName) {
         this.methodName = methodName
     }
 

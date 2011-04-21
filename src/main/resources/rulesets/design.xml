@@ -8,11 +8,11 @@
         These rules implement standards and best practices related to design issues.
     </description>
 
-    <rule class='org.codenarc.rule.design.ImplementationAsTypeRule'/>
-
-    <rule class='org.codenarc.rule.design.FinalClassWithProtectedMemberRule'/>
+    <rule class='org.codenarc.rule.design.AbstractClassWithoutAbstractMethodRule'/>
+    <rule class='org.codenarc.rule.design.AbstractClassWithPublicConstructorRule'/>
     <rule class='org.codenarc.rule.design.CloseWithoutCloseableRule'/>
     <rule class='org.codenarc.rule.design.ConstantsOnlyInterfaceRule'/>
     <rule class='org.codenarc.rule.design.EmptyMethodInAbstractClassRule'/>
-    <rule class='org.codenarc.rule.design.AbstractClassWithoutAbstractMethodRule'/>
+    <rule class='org.codenarc.rule.design.FinalClassWithProtectedMemberRule'/>
+    <rule class='org.codenarc.rule.design.ImplementationAsTypeRule'/>
 </ruleset>
