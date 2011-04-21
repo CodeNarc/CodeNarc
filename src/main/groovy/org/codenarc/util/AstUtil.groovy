@@ -25,16 +25,18 @@ import org.codehaus.groovy.ast.expr.*
 import java.util.concurrent.locks.ReentrantLock
 
 /**
- * Contains static utility methods related to Groovy AST.
+ * Contains static utility methods and constants related to Groovy AST.
  * <p/>
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 @SuppressWarnings(['DuplicateLiteral', 'MethodCount'])
 class AstUtil {
+
+    public static final AUTO_IMPORTED_PACKAGES = ['java.lang', 'java.io', 'java.net', 'java.util', 'groovy.lang', 'groovy.util']
+    public static final AUTO_IMPORTED_CLASSES = ['java.math.BigDecimal', 'java.math.BigInteger']
 
     public static final COMPARISON_OPERATORS = ['==', '!=', '<', '<=', '>', '>=', '<=>']
     private static final PREDEFINED_CONSTANTS = ['Boolean': ['FALSE', 'TRUE']]

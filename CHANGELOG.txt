@@ -25,7 +25,7 @@ NEW RULES
 - UnnecessaryEqualityWithNull rule (unnecessary) - The expression object.equals(null) is always false and is unnecessary.
 - SerialPersistentFields rule (basic) - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
 - StaticConnection rule (security) - Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.
-
+- UnnecessaryPackageReference (unnecessary) - Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String, java.util.Map and groovy.lang.Closure.
 
 BUG FIXES
 - Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.

@@ -258,15 +258,19 @@ def Object method5() { return 4 }
     object.equals(null)
 -------------------------------------------------------------------------------
 
+
 * UnnecessaryFinalOnPrivateMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     private final method() {}
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryFloatInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -321,8 +325,8 @@ def Object method5() { return 4 }
 
     // violation
     def b = """
-I am a string
-"""
+        I am a string
+    """
 
     def c = "I am a ' string"       // OK
 
@@ -334,17 +338,17 @@ I am a string
 
     // OK
     def g = """
-    I am a \$ string
+        I am a \$ string
     """
 
     // OK
     def h = """
-    I am a $string
-"""
+        I am a $string
+    """
 
     def i = 'i am a string'
     def j = '''i am a
-    string
+        string
     '''
 -------------------------------------------------------------------------------
 
@@ -418,6 +422,7 @@ I am a string
     }
 -------------------------------------------------------------------------------
 
+
 * UnnecessaryIntegerInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -442,6 +447,7 @@ I am a string
   Any expression mod 1 (exp % 1) is guaranteed to always return zero. This code is probably an error, and should be either (exp & 1) or (exp % 2).
 
   Examples:
+
 -------------------------------------------------------------------------------
     if (exp % 1) {}         // violation
     if (method() % 1) {}    // violation
@@ -571,6 +577,59 @@ I am a string
 
   Checks for an overriding method that merely calls the same method defined in a superclass. Remove it.
 
+
+* UnnecessaryPackageReference Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.14>
+
+  Checks for explicit package reference for classes that Groovy imports by default, such as <<<java.lang.String>>>,
+  <<<java.util.Map>>> and <<<groovy.lang.Closure>>>.
+
+  You do not need to specify the package for any classes from <java.lang>, <java.util>, <java.io>, <java.net>,
+  <groovy.lang> and <groovy.util>, as well as the classes <java.math.BigDecimal> and <java.math.BigInteger>.
+
+  Examples of violations include:
+
+-------------------------------------------------------------------------------
+    // Field types
+    class MyClass {
+        java.math.BigDecimal amount = 42.10         // violation
+    }
+
+    // Within expressions
+    if (value.class == java.math.BigInteger) { }                // violation
+    println "isClosure=${v instanceof groovy.lang.Closure}"     // violation
+    def p = java.lang.Runtime.availableProcessors()             // violation
+
+    // Constructor calls
+    def url = new java.net.URL('http://abc@example.com')        // violation
+
+    // Variable types
+    void doSomething() {
+        java.math.BigInteger maxValue = 0               // violation
+        java.net.URI uri                                // violation
+    }
+
+    // Method return types
+    java.io.Reader getReader() { }                      // violation
+    groovy.util.AntBuilder getAntBuilder() { }          // violation
+
+    // Method parameter types
+    void writeCount(java.io.Writer writer, int count) { }   // violation
+    void init(String name, groovy.lang.Binding binding) { } // violation
+
+    // Closure parameter types
+    def writeCount = { java.io.Writer writer, int count -> }    // violation
+
+    // Extends and implements
+    class MyHashMap extends java.util.HashMap { }           // violation
+    class MyList implements java.util.List { }              // violation
+-------------------------------------------------------------------------------
+
+  Known limitations:
+
+  * Does not catch class declarations that explicitly extend <<<java.lang.Object>>>. For instance,
+    <<<class MyClass extends java.lang.Object { }>>>. Just don't do that, okay?
 
 
 * UnnecessaryPublicModifier Rule
