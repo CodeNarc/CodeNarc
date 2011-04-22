@@ -27,6 +27,7 @@ import org.codenarc.util.AstUtil
  * single instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
  *
  * @author 'Hamlet D'Arcy'
+ * @author Chris Mair
  * @version $Revision$ - $Date$
  */
 class StaticDateFormatFieldRule extends AbstractAstVisitorRule {
@@ -41,8 +42,23 @@ class StaticDateFormatFieldAstVisitor extends AbstractAstVisitor {
     void visitFieldEx(FieldNode node) {
 
         if (Modifier.isStatic(node.modifiers) && AstUtil.classNodeImplementsType(node.type, DateFormat)) {
-            addViolation(node, "DateFormat instances are not thread safe. Wrap the DateFormat field $node.name in a ThreadLocal or make it an instance field")
+            addDateFormatViolation(node, node.name)
+        }
+        else {
+            if (node.initialValueExpression && isDateFormatFactoryMethodCall(node.initialValueExpression)) {
+                addDateFormatViolation(node, node.name)
+            }
         }
         super.visitFieldEx(node)
+    }
+
+    private boolean isDateFormatFactoryMethodCall(expression) {
+        AstUtil.isMethodCall(expression, 'DateFormat', 'getDateInstance') ||
+        AstUtil.isMethodCall(expression, 'DateFormat', 'getDateTimeInstance') ||
+        AstUtil.isMethodCall(expression, 'DateFormat', 'getTimeInstance')
+    }
+
+    private void addDateFormatViolation(node, String fieldName) {
+        addViolation(node, "DateFormat instances are not thread safe. Wrap the DateFormat field $fieldName in a ThreadLocal or make it an instance field")
     }
 }

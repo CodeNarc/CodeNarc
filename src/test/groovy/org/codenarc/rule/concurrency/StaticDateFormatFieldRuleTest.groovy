@@ -51,13 +51,44 @@ class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static DateFormat dateFormat', 'DateFormat instances are not thread safe. Wrap the DateFormat field dateFormat in a ThreadLocal or make it an instance field')
     }
 
-    void testStaticFieldFullyQUalifiedName() {
+    void testStaticFieldFullyQualifiedName() {
         final SOURCE = '''
               class MyClass {
                 static java.text.DateFormat dateFormat
               }
         '''
         assertSingleViolation(SOURCE, 3, 'static java.text.DateFormat dateFormat', 'DateFormat instances are not thread safe. Wrap the DateFormat field dateFormat in a ThreadLocal or make it an instance field')
+    }
+
+    void testStaticUntypedField_InitializerConstructsDateFormat() {
+        final SOURCE = '''
+              class MyClass {
+                static final DATE1 = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE)
+                static final def DATE2 = DateFormat.getDateInstance(DateFormat.LONG)
+                static Object date3 = DateFormat.getDateInstance()
+
+                static final DATETIME1 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE)
+                static final def DATETIME2 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT)
+                static Object dateTime3 = DateFormat.getDateTimeInstance()
+
+                static final TIME1 = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE)
+                static final def TIME2 = DateFormat.getTimeInstance(DateFormat.LONG)
+                static final Object TIME3 = DateFormat.getTimeInstance()
+              }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'static final DATE1 = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE)', messageText:['DateFormat', 'DATE1']],
+            [lineNumber:4, sourceLineText:'static final def DATE2 = DateFormat.getDateInstance(DateFormat.LONG)', messageText:['DateFormat', 'DATE2']],
+            [lineNumber:5, sourceLineText:'static Object date3 = DateFormat.getDateInstance()', messageText:['DateFormat', 'date3']],
+
+            [lineNumber:7, sourceLineText:'static final DATETIME1 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE)', messageText:['DateFormat', 'DATETIME1']],
+            [lineNumber:8, sourceLineText:'static final def DATETIME2 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT)', messageText:['DateFormat', 'DATETIME2']],
+            [lineNumber:9, sourceLineText:'static Object dateTime3 = DateFormat.getDateTimeInstance()', messageText:['DateFormat', 'dateTime3']],
+
+            [lineNumber:11, sourceLineText:'static final TIME1 = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE)', messageText:['DateFormat', 'TIME1']],
+            [lineNumber:12, sourceLineText:'static final def TIME2 = DateFormat.getTimeInstance(DateFormat.LONG)', messageText:['DateFormat', 'TIME2']],
+            [lineNumber:13, sourceLineText:'static final Object TIME3 = DateFormat.getTimeInstance()', messageText:['DateFormat', 'TIME3']],
+        )
     }
 
     protected Rule createRule() {

@@ -28,19 +28,21 @@ NEW RULES
 - UnnecessaryPackageReference (unnecessary) - Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String, java.util.Map and groovy.lang.Closure.
 - AbstractClassWithPublicConstructor (design) - Checks for abstract classes that define a public constructor, which is useless and confusing.
 
-BUG FIXES
-- Fix Bug #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
-- Fix Bug #3206167 - VariableNameRule now has a violation message that states the name of the variable and the regex it did not match.  
-- Fix Bug #3206667 - FieldName, VariableName, MethodName, ParameterName, UnusedVariable, PropertyName, and UnusedPrivateField violations message now contains the class name of the enclosing class. This helps you configure an exclude.
-- Fix Bug #3206258 - LoggerForDifferentClass rule now accepts MyClass.name as a valid name for the logger.
-- Fix Bug #3206238 - The DuplicateNumberLiteral rule now allows you to ignore literals in the 1.2d, 1.2f, and 1.2G format.
-- Fix Bug #3207628 - The UnusedPrivateMethodParameter rule now allows you to ignore parameters by name. By default, parameters named 'ignore' and 'ignored' do not trigger a violation. You can configure this with the 'ignoreRegex' property on the rule.
-- Fix Bug #3205696 - The ConsecutiveStringConcatenation rule no longer suggesting that you join numbers together, it only suggests joining strings together.
-- Fix Bug #3206150 - Fixed UnusedGroovyImport rule so that imports with aliases are ignored and do not cause violations. 
-- Fix Bug #3207605 - Fixed UnusedPrivateMethod rule to recognize static method references. 
-- Fix Bug #3207607 - Fixed UnusedPrivateMethod rule to recognize access of privately defined getters and setters as properties.
-- Fix Bug #3205697 - Fixed bug where the source line displayed for annotated nodes was sometimes showing just the annotation and not the node.
-- Feature #3288895 - Expand default test file regex pattern to include *TestCase
+BUG FIXES and NEW FEATURES
+- #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
+- #3206167 - VariableNameRule now has a violation message that states the name of the variable and the regex it did not match.
+- #3206667 - FieldName, VariableName, MethodName, ParameterName, UnusedVariable, PropertyName, and UnusedPrivateField violations message now contains the class name of the enclosing class. This helps you configure an exclude.
+- #3206258 - LoggerForDifferentClass rule now accepts MyClass.name as a valid name for the logger.
+- #3206238 - The DuplicateNumberLiteral rule now allows you to ignore literals in the 1.2d, 1.2f, and 1.2G format.
+- #3207628 - The UnusedPrivateMethodParameter rule now allows you to ignore parameters by name. By default, parameters named 'ignore' and 'ignored' do not trigger a violation. You can configure this with the 'ignoreRegex' property on the rule.
+- #3205696 - The ConsecutiveStringConcatenation rule no longer suggesting that you join numbers together, it only suggests joining strings together.
+- #3206150 - Fixed UnusedGroovyImport rule so that imports with aliases are ignored and do not cause violations.
+- #3207605 - Fixed UnusedPrivateMethod rule to recognize static method references.
+- #3207607 - Fixed UnusedPrivateMethod rule to recognize access of privately defined getters and setters as properties.
+- #3205697 - Fixed bug where the source line displayed for annotated nodes was sometimes showing just the annotation and not the node.
+- #3288895 - Expand default test file regex pattern to include *TestCase
+- #3291474 - Enhance StaticDateFormatFieldRule to also check for static fields initialized to a DateFormat, e.g. static final DATE_FORMAT = DateFormat.getDateInstance(DateFormat.LONG)
+
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------
