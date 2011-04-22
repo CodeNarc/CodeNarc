@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for StaticCalendarFieldRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @author Chris Mair
  */
 class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
 
@@ -51,13 +51,30 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static Calendar calendar', 'Calendar instances are not thread safe. Wrap the Calendar field calendar in a ThreadLocal or make it an instance field')
     }
 
-    void testStaticFieldFullyQUalifiedName() {
+    void testStaticFieldFullyQualifiedName() {
         final SOURCE = '''
               class MyClass {
                 static java.util.Calendar calendar
               }
         '''
         assertSingleViolation(SOURCE, 3, 'static java.util.Calendar calendar', 'Calendar instances are not thread safe. Wrap the Calendar field calendar in a ThreadLocal or make it an instance field')
+    }
+
+    void testStaticUntypedField_InitializesValueToCalendar() {
+        final SOURCE = '''
+            class MyClass {
+                static final CAL1 = Calendar.getInstance()
+                static final CAL2 = Calendar.getInstance(Locale.FRANCE)
+                static def cal3 = Calendar.getInstance(timezone)
+                static Object cal4 = Calendar.getInstance(timezone, locale)
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'static final CAL1 = Calendar.getInstance()', messageText:['Calendar', 'CAL1']],
+            [lineNumber:4, sourceLineText:'static final CAL2 = Calendar.getInstance(Locale.FRANCE)', messageText:['Calendar', 'CAL2']],
+            [lineNumber:5, sourceLineText:'static def cal3 = Calendar.getInstance(timezone)', messageText:['Calendar', 'cal3']],
+            [lineNumber:6, sourceLineText:'static Object cal4 = Calendar.getInstance(timezone, locale)', messageText:['Calendar', 'cal4']],
+        )
     }
 
     protected Rule createRule() {

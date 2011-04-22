@@ -225,27 +225,32 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
-  Calendar objects should not be used as static fields. Calendars are inherently unsafe for multithreaded use. Sharing a
+  <<<Calendar>>> objects should not be used as <<<static>>> fields. Calendars are inherently unsafe for multithreaded use. Sharing a
   single instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
-  Under 1.4 problems seem to surface less often than under Java 5 where you will probably see random ArrayIndexOutOfBoundsExceptions
-  or IndexOutOfBoundsExceptions in sun.util.calendar.BaseCalendar.getCalendarDateFromFixedDate(). You may also experience
-  serialization problems. Using an instance field or a ThreadLocal is recommended.
+  Under 1.4 problems seem to surface less often than under Java 5 where you will probably see random <<<ArrayIndexOutOfBoundsException>>>
+  or <<<IndexOutOfBoundsException>>> in <<<sun.util.calendar.BaseCalendar.getCalendarDateFromFixedDate()>>>. You may also experience
+  serialization problems. Using an instance field or a <<<ThreadLocal>>> is recommended.
 
   For more information on this see Sun Bug #6231579 and Sun Bug #6178997.
 
   Examples:
 
 -------------------------------------------------------------------------------
-  // two violations
+  // Violations
   class MyClass {
-    static Calendar calendar1
-    static java.util.Calendar calendar2
+      static Calendar calendar1
+      static java.util.Calendar calendar2
+
+      static final CAL1 = Calendar.getInstance()
+      static final CAL2 = Calendar.getInstance(Locale.FRANCE)
+      static def cal3 = Calendar.getInstance(timezone)
+      static Object cal4 = Calendar.getInstance(timezone, locale)
   }
 
-  // these usages are OK
+  // These usages are OK
   class MyCorrectClass {
-    private final Calendar calendar1
-    static ThreadLocal<Calendar> calendar2
+      private final Calendar calendar1
+      static ThreadLocal<Calendar> calendar2
   }
 -------------------------------------------------------------------------------
 
@@ -254,10 +259,10 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
-  DateFormat objects should not be used as <<<static>>> fields. DateFormat are inherently unsafe for multithreaded use. Sharing a
+  <<<DateFormat>>> objects should not be used as <<<static>>> fields. DateFormats are inherently unsafe for multithreaded use. Sharing a
   single instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
-  Under 1.4 problems seem to surface less often than under Java 5 where you will probably see random <<<ArrayIndexOutOfBoundsExceptions>>>
-  or <<<IndexOutOfBoundsExceptions>>> in <<<sun.util.calendar.BaseCalendar.getCalendarDateFromFixedDate()>>>. You may also experience
+  Under 1.4 problems seem to surface less often than under Java 5 where you will probably see random <<<ArrayIndexOutOfBoundsException>>>
+  or <<<IndexOutOfBoundsException>>> in <<<sun.util.calendar.BaseCalendar.getCalendarDateFromFixedDate()>>>. You may also experience
   serialization problems. Using an instance field or a <<<ThreadLocal>>> is recommended.
 
   For more information on this see Sun Bug #6231579 and Sun Bug #6178997.
@@ -283,7 +288,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
       static final Object TIME3 = DateFormat.getTimeInstance()
   }
 
-  // these usages are OK
+  // These usages are OK
   class MyCorrectClass {
       private DateFormat calendar1
       static ThreadLocal<DateFormat> calendar2

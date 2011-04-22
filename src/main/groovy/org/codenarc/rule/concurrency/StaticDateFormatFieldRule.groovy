@@ -28,7 +28,6 @@ import org.codenarc.util.AstUtil
  *
  * @author 'Hamlet D'Arcy'
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class StaticDateFormatFieldRule extends AbstractAstVisitorRule {
     String name = 'StaticDateFormatField'

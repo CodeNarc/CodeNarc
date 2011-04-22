@@ -42,6 +42,7 @@ BUG FIXES and NEW FEATURES
 - #3205697 - Fixed bug where the source line displayed for annotated nodes was sometimes showing just the annotation and not the node.
 - #3288895 - Expand default test file regex pattern to include *TestCase
 - #3291474 - Enhance StaticDateFormatFieldRule to also check for static fields initialized to a DateFormat, e.g. static final DATE_FORMAT = DateFormat.getDateInstance(DateFormat.LONG)
+- #3291559 - Enhance StaticCalendarFieldRule to also check for untyped static fields that are initialized to a Calendar, e.g. static final CALENDAR = Calendar.getInstance()
 
 
 Changes in version 0.13 (February 2011)

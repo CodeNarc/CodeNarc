@@ -22,7 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for StaticDateFormatFieldRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @author Chris Mair
  */
 class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase {
 
@@ -60,7 +60,7 @@ class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static java.text.DateFormat dateFormat', 'DateFormat instances are not thread safe. Wrap the DateFormat field dateFormat in a ThreadLocal or make it an instance field')
     }
 
-    void testStaticUntypedField_InitializerConstructsDateFormat() {
+    void testStaticUntypedField_InitializesValueToDateFormat() {
         final SOURCE = '''
               class MyClass {
                 static final DATE1 = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE)

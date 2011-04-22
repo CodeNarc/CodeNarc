@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2011 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.lang.reflect.Modifier
  * a single instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
+ * @author Chris Mair
  */
 class StaticCalendarFieldRule extends AbstractAstVisitorRule {
     String name = 'StaticCalendarField'
@@ -39,8 +39,21 @@ class StaticCalendarFieldAstVisitor extends AbstractAstVisitor {
     void visitFieldEx(FieldNode node) {
 
         if (Modifier.isStatic(node.modifiers) && AstUtil.classNodeImplementsType(node.type, Calendar)) {
-            addViolation(node, "Calendar instances are not thread safe. Wrap the Calendar field $node.name in a ThreadLocal or make it an instance field")
+            addCalendarViolation(node, node.name)
+        }
+        else {
+            if (node.initialValueExpression && isCalendarFactoryMethodCall(node.initialValueExpression)) {
+                addCalendarViolation(node, node.name)
+            }
         }
         super.visitFieldEx(node)
+    }
+
+    private boolean isCalendarFactoryMethodCall(expression) {
+        AstUtil.isMethodCall(expression, 'Calendar', 'getInstance')
+    }
+
+    private void addCalendarViolation(node, String fieldName) {
+        addViolation(node, "Calendar instances are not thread safe. Wrap the Calendar field $fieldName in a ThreadLocal or make it an instance field")
     }
 }
