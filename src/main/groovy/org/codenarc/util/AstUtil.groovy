@@ -261,15 +261,16 @@ class AstUtil {
     }
 
     /**
-     * Return true only if the MethodCallExpression represents a method call for the specified method
-     * object (receiver) and method name.
-     * @param methodCall - the AST MethodCallExpression
+     * Return true only if the expression represents a method call (MethodCallExpression) for the specified
+     * method object (receiver) and method name.
+     *
+     * @param expression - the AST expression to be checked
      * @param methodObjectPattern - the name of the method object (receiver)
      * @param methodNamePattern - the name of the method being called
-     * @return true only if the method call matches the specified criteria
+     * @return true only if the expression is a method call that matches the specified criteria
      */
-    static boolean isMethodCall(MethodCallExpression methodCall, String methodObjectPattern, String methodNamePattern) {
-        isMethodCallOnObject(methodCall, methodObjectPattern) && isMethodNamed(methodCall, methodNamePattern)
+    static boolean isMethodCall(expression, String methodObjectPattern, String methodNamePattern) {
+        isMethodCallOnObject(expression, methodObjectPattern) && isMethodNamed(expression, methodNamePattern)
     }
 
     /**
@@ -334,6 +335,16 @@ class AstUtil {
             return getMethodArguments(methodCall).size() == numArguments
         }
         isNameMatch
+    }
+
+    /**
+     * Return true if the expression is a constructor call on any of the named classes, with any number of parameters.
+     * @param expression - the expression
+     * @param className - the possible List of class names
+     * @return as described
+     */
+    static boolean isConstructorCall(Expression expression, List<String> classNames) {
+        expression instanceof ConstructorCallExpression && expression.type.name in classNames
     }
 
     /**

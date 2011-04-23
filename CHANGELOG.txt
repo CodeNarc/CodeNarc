@@ -27,6 +27,7 @@ NEW RULES
 - StaticConnection rule (security) - Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.
 - UnnecessaryPackageReference (unnecessary) - Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String, java.util.Map and groovy.lang.Closure.
 - AbstractClassWithPublicConstructor (design) - Checks for abstract classes that define a public constructor, which is useless and confusing.
+- StaticSimpleDateFormatField (concurrency) - Checks for static SimpleDateFormat fields. SimpleDateFormat objects are not threadsafe, and should not be shared across threads.
 
 BUG FIXES and NEW FEATURES
 - #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.

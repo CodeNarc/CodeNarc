@@ -8,28 +8,28 @@
         These rules check for unsafe or unrecommended practices related to concurrency.
     </description>
 
+    <rule class='org.codenarc.rule.concurrency.BusyWaitRule'/>
+    <rule class='org.codenarc.rule.concurrency.DoubleCheckedLockingRule'/>
+    <rule class='org.codenarc.rule.concurrency.InconsistentPropertyLockingRule'/>
+    <rule class='org.codenarc.rule.concurrency.InconsistentPropertySynchronizationRule'/>
     <rule class='org.codenarc.rule.concurrency.NestedSynchronizationRule'/>
+    <rule class='org.codenarc.rule.concurrency.StaticCalendarFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.StaticDateFormatFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.StaticMatcherFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.StaticSimpleDateFormatFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedOnBoxedPrimitiveRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnThisRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnGetClassRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedOnReentrantLockRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedOnStringRule'/>
+    <rule class='org.codenarc.rule.concurrency.SynchronizedReadObjectMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.SystemRunFinalizersOnExitRule'/>
+    <rule class='org.codenarc.rule.concurrency.ThreadGroupRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadLocalNotStaticFinalRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadYieldRule'/>
     <rule class='org.codenarc.rule.concurrency.UseOfNotifyMethodRule'/>
+    <rule class='org.codenarc.rule.concurrency.VolatileArrayFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.VolatileLongOrDoubleFieldRule'/>
     <rule class='org.codenarc.rule.concurrency.WaitOutsideOfWhileLoopRule'/>
-
-    <rule class='org.codenarc.rule.concurrency.ThreadGroupRule'/>
-    <rule class='org.codenarc.rule.concurrency.StaticCalendarFieldRule'/>
-    <rule class='org.codenarc.rule.concurrency.StaticDateFormatFieldRule'/>
-    <rule class='org.codenarc.rule.concurrency.SynchronizedOnStringRule'/>
-    <rule class='org.codenarc.rule.concurrency.SynchronizedReadObjectMethodRule'/>
-    <rule class='org.codenarc.rule.concurrency.InconsistentPropertySynchronizationRule'/>
-    <rule class='org.codenarc.rule.concurrency.InconsistentPropertyLockingRule'/>
-    <rule class='org.codenarc.rule.concurrency.SynchronizedOnBoxedPrimitiveRule'/>
-    <rule class='org.codenarc.rule.concurrency.VolatileArrayFieldRule'/>
-    <rule class='org.codenarc.rule.concurrency.StaticMatcherFieldRule'/>
-    <rule class='org.codenarc.rule.concurrency.SynchronizedOnReentrantLockRule'/>
-    <rule class='org.codenarc.rule.concurrency.BusyWaitRule'/>
-    <rule class='org.codenarc.rule.concurrency.DoubleCheckedLockingRule'/>
 </ruleset>
