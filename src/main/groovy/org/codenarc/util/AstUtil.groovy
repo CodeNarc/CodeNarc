@@ -209,9 +209,10 @@ class AstUtil {
      * as described
      */
     static boolean isMethodCallOnObject(Expression expression, String methodObjectPattern) {
-        (expression instanceof MethodCallExpression &&
-                expression.objectExpression instanceof VariableExpression &&
-                expression.objectExpression.name?.matches(methodObjectPattern))
+        expression instanceof MethodCallExpression &&
+            ((expression.objectExpression instanceof VariableExpression && expression.objectExpression.name?.matches(methodObjectPattern)) ||
+            (expression.objectExpression instanceof PropertyExpression && expression.objectExpression.text?.matches(methodObjectPattern)))
+
     }
 
     /**

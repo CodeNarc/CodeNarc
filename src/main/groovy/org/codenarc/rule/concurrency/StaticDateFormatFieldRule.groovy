@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 
 /**
  * DateFormat objects should not be used as static fields. DateFormat are inherently unsafe for multithreaded use. Sharing a
@@ -52,9 +53,8 @@ class StaticDateFormatFieldAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isDateFormatFactoryMethodCall(expression) {
-        AstUtil.isMethodCall(expression, 'DateFormat', 'getDateInstance') ||
-        AstUtil.isMethodCall(expression, 'DateFormat', 'getDateTimeInstance') ||
-        AstUtil.isMethodCall(expression, 'DateFormat', 'getTimeInstance')
+        expression instanceof MethodCallExpression &&
+            AstUtil.isMethodCall(expression, ['DateFormat', /java\.text\.DateFormat/], ['getDateInstance', 'getDateTimeInstance', 'getTimeInstance'])
     }
 
     private void addDateFormatViolation(node, String fieldName) {
