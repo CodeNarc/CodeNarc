@@ -24,7 +24,6 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  * A map literal is created with duplicated key. The map entry will be overwritten.
  *
  * @author 'Łukasz Indykiewicz'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class DuplicateMapKeyRule extends AbstractAstVisitorRule {
     String name = 'DuplicateMapKey'
@@ -37,19 +36,21 @@ class DuplicateMapKeyAstVisitor extends AbstractAstVisitor {
     @SuppressWarnings('UnnecessaryCollectCall')
     void visitMapExpression(MapExpression expression) {
 
-        def a = expression.mapEntryExpressions
-                .findAll { it.keyExpression instanceof ConstantExpression }
-                .collect { it.keyExpression }
+        if(isFirstVisit(expression)) {
+            def a = expression.mapEntryExpressions
+                    .findAll { it.keyExpression instanceof ConstantExpression }
+                    .collect { it.keyExpression }
 
-        a.inject([]) { result, it ->
-            if (result.contains(it.value)) {
-                addViolation(it, "Key '${it.value}' is duplicated.")
-            } else {
-                result.add(it.value)
+            a.inject([]) { result, it ->
+                if (result.contains(it.value)) {
+                    addViolation(it, "Key '${it.value}' is duplicated.")
+                } else {
+                    result.add(it.value)
+                }
+                result
             }
-            result
+            super.visitMapExpression(expression)
         }
-        super.visitMapExpression(expression)
     }
 
 }

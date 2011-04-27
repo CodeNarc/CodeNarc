@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for DuplicateMapKeyRule
  *
  * @author 'Łukasz Indykiewicz'
- * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
 class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
 
@@ -73,6 +72,16 @@ class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
               def var3 = ["a":1, "a":2, "b":3]
         '''
         assertSingleViolation SOURCE, 2, 'def var3 = ["a":1, "a":2, "b":3]', "Key 'a' is duplicated."
+    }
+
+    void testDuplicateKeyNotAdjacent() {
+        final SOURCE = '''
+            def list = {
+                    [breadCrumb: REPORT_BREAD_CRUMB, pageName: REPORT_PAGE_NAME, errorFlag:false,
+                    planId:"", errorFlag:false ]
+            }
+        '''
+        assertSingleViolation SOURCE, 4, 'planId:"", errorFlag:false ]', "Key 'errorFlag' is duplicated."
     }
 
     protected Rule createRule() {
