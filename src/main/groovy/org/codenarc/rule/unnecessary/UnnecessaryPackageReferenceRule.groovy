@@ -58,7 +58,7 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression node) {
-        if (isFirstVisit(node) && !node.superCall) {
+        if (isFirstVisit(node) && !node.superCall && !node.isThisCall()) {
             checkType(node.type.name, node)
         }
         super.visitConstructorCallExpression(node)

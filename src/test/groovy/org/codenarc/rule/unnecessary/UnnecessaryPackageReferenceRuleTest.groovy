@@ -93,6 +93,21 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testConstructorCall_CallToThis_NoViolation() {
+        final SOURCE = '''
+            class MyClass {
+                private String name
+                MyClass() {
+                    this('Default')
+                }
+                private MyClass(String name) {
+                    this.name = name
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testVariableTypes_Violations() {
         final SOURCE = '''
             void doSomething() {
