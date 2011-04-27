@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryNullCheckRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
 
@@ -87,6 +86,20 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if (obj.prop && obj != null)',
                 'The expression (obj.prop && (obj != null)) can be simplified to (obj.prop)')
     }
+
+    void testPointlessNullCheckInClosureWithinClass() {
+        final SOURCE = '''
+            class MyController extends AbstractController {
+                def edit = {
+                    if (value != null && value.equalsIgnoreCase(YES)) {
+                        editView = "/editCustomMessage"
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'if (value != null && value.equalsIgnoreCase(YES)) {', 'value?.equalsIgnoreCase(YES)')
+    }
+
 
     // todo: enable this test
 //    void ignore_testNullCheckWithMethodCallAndAdditionalConditional() {
