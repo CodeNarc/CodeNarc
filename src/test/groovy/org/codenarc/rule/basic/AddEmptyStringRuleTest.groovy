@@ -26,6 +26,8 @@ import org.codenarc.rule.Rule
  */
 class AddEmptyStringRuleTest extends AbstractRuleTestCase {
 
+    private static final VIOLATION_MESSAGE = 'Concatenating an empty string is an inefficient way to convert an object to a String. Consider using toString() or String.valueOf(Object)'
+
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AddEmptyString'
@@ -43,14 +45,25 @@ class AddEmptyStringRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def a = '' + 123
         '''
-        assertSingleViolation(SOURCE, 2, "'' + 123", 'Concatenating an empty string is an inefficient way to convert an object to a String. Consider using toString() or String.valueOf(Object)')
+        assertSingleViolation(SOURCE, 2, "'' + 123", VIOLATION_MESSAGE)
     }
 
     void testMethodParameters() {
         final SOURCE = '''
             def b = method('' + property)
         '''
-        assertSingleViolation(SOURCE, 2, "method('' + property)", 'Concatenating an empty string is an inefficient way to convert an object to a String. Consider using toString() or String.valueOf(Object)')
+        assertSingleViolation(SOURCE, 2, "method('' + property)", VIOLATION_MESSAGE)
+    }
+
+    void testAddingEmptyStringWithinAClosure() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    out << "" + count
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'out << "" + count', VIOLATION_MESSAGE)
     }
 
     protected Rule createRule() {

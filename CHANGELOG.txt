@@ -45,6 +45,7 @@ BUG FIXES and NEW FEATURES
 - #3291474 - Enhance StaticDateFormatFieldRule to also check for static fields initialized to a DateFormat, e.g. static final DATE_FORMAT = DateFormat.getDateInstance(DateFormat.LONG)
 - #3291559 - Enhance StaticCalendarFieldRule to also check for untyped static fields that are initialized to a Calendar, e.g. static final CALENDAR = Calendar.getInstance()
 - #3293429 - Fix UnnecessaryNullCheck duplicate violations.
+- #3295887 - Fix AddEmptyString duplicate violations.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------
