@@ -35,7 +35,7 @@ class AbstractClassWithoutAbstractMethodRule extends AbstractAstVisitorRule {
 class AbstractClassWithoutAbstractMethodAstVisitor extends AbstractAstVisitor {
     @Override protected void visitClassEx(ClassNode node) {
 
-        if (Modifier.isAbstract(node.modifiers) && !node.superClass.name.startsWith('Abstract') && !node.superClass.name.startsWith('Base')) {
+        if (!node.isInterface() && Modifier.isAbstract(node.modifiers) && !node.superClass.name.startsWith('Abstract') && !node.superClass.name.startsWith('Base')) {
             if (!node.methods.any {  Modifier.isAbstract(it.modifiers)  }) {
                 addViolation(node, "The abstract class $node.name contains no abstract methods")
             }
