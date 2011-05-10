@@ -22,14 +22,16 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
 import org.codehaus.groovy.ast.expr.*
+import org.codehaus.groovy.ast.ModuleNode
+import org.codenarc.util.ImportUtil
 
 /**
  * Checks for reference to any of the named packages.
- *
- * The <code>packageNames</code> property specifies the comma-separated list of package names to check for.
- * If null or empty, do nothing.
  * <p/>
-
+ * The <code>packageNames</code> property specifies the comma-separated list of package names to check for.
+ * The package name(s) may optionally include wildcard characters ('*' or '?'). Note that the '*' wildcard
+ * matches any sequence of zero or more characters in the package name, e.g. 'a.*' matches 'a.b' as well as
+ * 'a.b.c.d'. If <code>packageNames</code> is null or empty, do nothing.
  *
  * @author Chris Mair
  */
@@ -46,8 +48,11 @@ class IllegalPackageReferenceRule extends AbstractAstVisitorRule {
 
 class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
 
+    private wildcard
+
     @Override
     protected void visitClassEx(ClassNode node) {
+        wildcard = new WildcardPattern(rule.packageNames)
         def superClassName = node.superClass.name
         if (superClassName != 'java.lang.Object') {
             checkType(superClassName, node)
@@ -107,6 +112,18 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
         checkType(expression.text, expression)
     }
 
+    @Override
+    void visitImports(ModuleNode node) {
+        node.imports?.each { importNode ->
+            def parentPackage = ImportUtil.packageNameForImport(importNode)
+            if (wildcard.matches(parentPackage)) {
+//                violations.add(createViolationForImport(sourceCode, importNode, "Found reference to illegal package name $parentPackage"))
+                addViolation(
+                    rule.createViolationForImport(sourceCode, importNode, "Found reference to illegal package name $parentPackage".toString()))
+            }
+        }
+        super.visitImports(node)
+    }
     //--------------------------------------------------------------------------
     // Helper Methods
     //--------------------------------------------------------------------------
@@ -118,8 +135,12 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     private void checkType(String typeName, node) {
-        def wildcard = new WildcardPattern(rule.packageNames)
         def parentPackage = parentPackageName(typeName)
+        checkPackageName(parentPackage, node)
+    }
+
+    // TODO Cache WildcardPattern
+    private void checkPackageName(String parentPackage, node) {
         if (wildcard.matches(parentPackage)) {
             addViolation(node, "Found reference to illegal package name $parentPackage")
         }

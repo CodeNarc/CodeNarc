@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
+import org.codenarc.util.ImportUtil
 
 /**
  * Checks for an import of a class that is within the same package as the importing class.
@@ -30,11 +31,12 @@ class ImportFromSamePackageRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast?.imports && sourceCode.ast.packageName) {
+        def hasImports = sourceCode.ast?.imports || sourceCode.ast?.starImports
+        if (hasImports && sourceCode.ast.packageName) {
             def rawPackage = sourceCode.ast.packageName
             def filePackageName = rawPackage.endsWith('.') ? rawPackage[0..-2] : rawPackage
-            getImportsSortedByLineNumber(sourceCode).each { importNode ->
-                def importPackageName = packageNameForImport(importNode)
+            ImportUtil.getImportsSortedByLineNumber(sourceCode).each { importNode ->
+                def importPackageName = ImportUtil.packageNameForImport(importNode)
                 if (importPackageName == filePackageName && !hasAlias(importNode)) {
                     violations.add(createViolationForImport(sourceCode, importNode))
                 }
@@ -43,7 +45,7 @@ class ImportFromSamePackageRule extends AbstractRule {
     }
 
     private boolean hasAlias(importNode) {
-        importNode.alias != getClassNameNoPackage(importNode.className)
+        importNode.className && importNode.alias != getClassNameNoPackage(importNode.className)
     }
 
     private String getClassNameNoPackage(String className) {

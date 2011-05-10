@@ -18,6 +18,7 @@ package org.codenarc.rule.imports
 import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
+import org.codenarc.util.ImportUtil
 
 /**
  * Rule that checks for imports from any packages that are already automatically imported by Groovy
@@ -32,10 +33,10 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast?.imports) {
-            getImportsSortedByLineNumber(sourceCode).each { importNode ->
+        if (sourceCode.ast?.imports || sourceCode.ast?.starImports) {
+            ImportUtil.getImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importClassName = importNode.className
-                def importPackageName = packageNameForImport(importNode)
+                def importPackageName = ImportUtil.packageNameForImport(importNode)
 
                 if ((!importNode.alias || importClassName.endsWith(".$importNode.alias")) &&
                         (importPackageName in AstUtil.AUTO_IMPORTED_PACKAGES || importClassName in AstUtil.AUTO_IMPORTED_CLASSES)) {

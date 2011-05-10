@@ -47,6 +47,8 @@ BUG FIXES and NEW FEATURES
 - #3291559 - Enhance StaticCalendarFieldRule to also check for untyped static fields that are initialized to a Calendar, e.g. static final CALENDAR = Calendar.getInstance()
 - #3293429 - Fix UnnecessaryNullCheck duplicate violations.
 - #3295887 - Fix AddEmptyString duplicate violations.
+- #3299713 - Fix ImportFromSamePackage, UnnecessaryGroovyImport: Star import.
+- BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------

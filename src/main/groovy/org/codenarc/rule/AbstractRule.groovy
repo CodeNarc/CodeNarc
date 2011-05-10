@@ -20,6 +20,7 @@ import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceCodeCriteria
 import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.ASTNode
+import org.codenarc.util.ImportUtil
 
 /**
  * Abstract superclass for Rules.
@@ -169,13 +170,24 @@ abstract class AbstractRule implements Rule {
     }
 
     /**
+     * Create a new Violation for the AST node.
+     * @param sourceCode - the SourceCode
+     * @param node - the Groovy AST Node
+     * @param message - the message for the violation; defaults to null
+     */
+    protected Violation createViolation(SourceCode sourceCode, ASTNode node, message=null) {
+        def sourceLine = sourceCode.line(node.lineNumber-1)
+        createViolation(node.lineNumber, sourceLine, message)
+    }
+
+    /**
      * Create and return a new Violation for this rule and the specified import
      * @param sourceCode - the SourceCode
      * @param importNode - the ImportNode for the import triggering the violation
      * @return a new Violation object
      */
     protected Violation createViolationForImport(SourceCode sourceCode, ImportNode importNode, String message = null) {
-        def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
+        def importInfo = ImportUtil.sourceLineAndNumberForImport(sourceCode, importNode)
         new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber, message: message)
     }
 
@@ -187,90 +199,8 @@ abstract class AbstractRule implements Rule {
      * @return a new Violation object
      */
     protected Violation createViolationForImport(SourceCode sourceCode, String className, String alias) {
-        def importInfo = sourceLineAndNumberForImport(sourceCode, className, alias)
+        def importInfo = ImportUtil.sourceLineAndNumberForImport(sourceCode, className, alias)
         new Violation(rule:this, sourceLine:importInfo.sourceLine, lineNumber:importInfo.lineNumber)
-    }
-
-    /**
-     * Create a new Violation for the AST node.
-     * @param sourceCode - the SourceCode
-     * @param node - the Groovy AST Node
-     * @param message - the message for the violation; defaults to null
-     */
-    protected Violation createViolation(SourceCode sourceCode, ASTNode node, message=null) {
-        def sourceLine = sourceCode.line(node.lineNumber-1)
-        createViolation(node.lineNumber, sourceLine, message)
-    }
-
-    protected List getImportsSortedByLineNumber(sourceCode) {
-        sourceCode.ast.imports.sort { importNode ->
-            def importInfo = sourceLineAndNumberForImport(sourceCode, importNode)
-            importInfo.lineNumber
-        }
-    }
-
-    /**
-     * Return the source line and line number for the specified import class name and alias
-     * @param sourceCode - the SourceCode being processed
-     * @param importNode - the ImportNode representing the import
-     * @return an object that has 'sourceLine' and 'lineNumber' fields
-     */
-    protected sourceLineAndNumberForImport(SourceCode sourceCode, String className, String alias) {
-        // NOTE: This won't properly handle the case of multiple imports for same class if not all are aliased
-        def index = sourceCode.lines.findIndexOf { line ->
-            line.contains('import') &&
-                line.contains(className) &&
-                line.contains(alias)
-        }
-        def lineNumber = index == -1 ? null : index + 1
-        def sourceLine = lineNumber == null ? "import $className as $alias".toString() : sourceCode.lines[lineNumber-1].trim()
-        [sourceLine:sourceLine, lineNumber:lineNumber]
-    }
-
-    /**
-     * Return the source line and line number for the specified import class name and alias
-     * @param sourceCode - the SourceCode being processed
-     * @param importNode - the ImportNode representing the import
-     * @return an object that has 'sourceLine' and 'lineNumber' fields
-     */
-    protected sourceLineAndNumberForStarImport(SourceCode sourceCode, ImportNode importNode) {
-        if (!importNode.isStar()) {
-            return [sourceLine:-1, lineNumber:-1]
-        }
-        // NOTE: This won't properly handle the case of multiple imports for same class if not all are aliased
-        def index = sourceCode.lines.findIndexOf { line ->
-            line.contains('import') &&
-                line.contains(importNode.packageName + '*')
-        }
-        def lineNumber = index == -1 ? null : index + 1
-        def sourceLine = lineNumber == null ? "import ${importNode.packageName}*".toString() : sourceCode.lines[lineNumber-1].trim()
-        [sourceLine:sourceLine, lineNumber:lineNumber]
-    }
-
-    /**
-     * Return the source line and line number for the specified import
-     * @param sourceCode - the SourceCode being processed
-     * @param importNode - the ImportNode representing the import
-     * @return an object that has 'sourceLine' and 'lineNumber' fields
-     */
-    protected sourceLineAndNumberForImport(SourceCode sourceCode, ImportNode importNode) {
-        if (importNode.isStar()) {
-            sourceLineAndNumberForStarImport(sourceCode, importNode)
-        } else {
-            sourceLineAndNumberForImport(sourceCode, importNode.className, importNode.alias)
-        }
-    }
-
-    /**
-     * Return the package name for the specified import statement or else an empty String
-     * @param importNode - the ImportNode for the import
-     * @return the name package being imported (i.e., the import minus the class name/spec)
-     *      or an empty String if the import contains no package component
-     */
-    protected String packageNameForImport(ImportNode importNode) {
-        def importClassName = importNode.className
-        def index = importClassName.lastIndexOf('.')
-        (index == -1) ? '' : importClassName.substring(0, index) 
     }
 
     private boolean shouldApplyThisRuleTo(SourceCode sourceCode) {

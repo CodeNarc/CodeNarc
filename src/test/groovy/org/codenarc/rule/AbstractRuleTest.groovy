@@ -260,48 +260,6 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assert v.message == null
     }
 
-    void testSourceLineAndNumberForImport() {
-        final SOURCE = '''
-            import a.b.MyClass
-            import a.b.MyClass as Boo
-            // some comment
-            import a.pkg1.MyOtherClass as MOC
-        '''
-        def sourceCode = new SourceString(SOURCE)
-        def ast = sourceCode.ast
-
-        assertImport(sourceCode, ast, [sourceLine:'import a.b.MyClass', lineNumber:2])
-        assertImport(sourceCode, ast, [sourceLine:'import a.b.MyClass as Boo', lineNumber:3])
-        assertImport(sourceCode, ast, [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5])
-
-        // Not found
-        def otherSourceCode = new SourceString('def v = 1')
-        assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null])
-    }
-
-    private void assertImport(sourceCode, ast, Map importInfo) {
-        assert ast.imports.find { imp ->
-            rule.sourceLineAndNumberForImport(sourceCode, imp) == importInfo
-        }
-    }
-
-    void testSourceLineAndNumberForImport_ClassNameAndAlias() {
-        final SOURCE = '''
-            import a.b.MyClass
-            import a.b.MyClass as Boo
-            // some comment
-            import a.pkg1.MyOtherClass as MOC
-        '''
-        def sourceCode = new SourceString(SOURCE)
-        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass', lineNumber:2]
-        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'Boo') == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
-        assert rule.sourceLineAndNumberForImport(sourceCode, 'a.pkg1.MyOtherClass', 'MOC') == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]
-
-        // Not found
-        def otherSourceCode = new SourceString('def v = 1')
-        assert rule.sourceLineAndNumberForImport(otherSourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
-    }
-
     //--------------------------------------------------------------------------
     // Setup and helper methods
     //--------------------------------------------------------------------------

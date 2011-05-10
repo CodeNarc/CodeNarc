@@ -105,6 +105,13 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'java.io.InputStream', 4, 'java.io.OutputStream')
     }
 
+    void testApplyTo_ImportStar_Violations() {
+        final SOURCE = '''
+            import java.io.*
+        '''
+        assertSingleViolation(SOURCE, 2, 'import java.io.*')
+    }
+
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             import java.text.SimpleDateFormat

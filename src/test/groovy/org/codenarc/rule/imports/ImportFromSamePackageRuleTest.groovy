@@ -41,6 +41,14 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'org.xyz.MyController', 5, 'org.xyz.MyService')
     }
 
+    void testApplyTo_ImportStar_Violations() {
+        final SOURCE = '''
+            package org.xyz
+            import org.xyz.*
+        '''
+        assertSingleViolation(SOURCE, 3, 'import org.xyz.*')
+    }
+
     void testApplyTo_IgnoreStaticImports() {
         final SOURCE = '''
             package org.xyz

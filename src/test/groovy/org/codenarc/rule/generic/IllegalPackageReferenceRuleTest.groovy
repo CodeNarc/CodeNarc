@@ -173,6 +173,74 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'class MyRange implements org.bad.Range { }', messageText:'org.bad'] )
     }
 
+//    void testImports_Violations() {
+//        final SOURCE = '''
+//            import org.bad.BadStuff
+//            import org.bad.other.Stuff
+//            import org.evil.*
+//            class MyList {
+//                BadStuff badStuff = new Stuff()
+//            }
+//        '''
+//        rule.packageNames = 'org.bad, org.evil'
+//        assertViolations(SOURCE,
+//            [lineNumber:2, sourceLineText:'import org.bad.BadStuff', messageText:'org.bad'],
+//            [lineNumber:4, sourceLineText:'import org.evil.*', messageText:'org.evil'] )
+//    }
+//
+//    void testStaticImports_Violations() {
+//        final SOURCE = '''
+//            import org.other.Stuff
+//            import static org.bad.BadUtil.*
+//            class MyList {
+//                def name = BAD_NAME
+//            }
+//        '''
+//        rule.packageNames = 'org.bad'
+//        assertViolations(SOURCE,
+//            [lineNumber:3, sourceLineText:'import static org.bad.BadUtil.*', messageText:'org.bad'] )
+//    }
+
+    void testMultiplePackageNames_SingleViolation() {
+        final SOURCE = '''
+            class MyClass {
+                java.text.DateFormat dateFormat = 'MM'
+                com.example.service.MyService myService
+            }
+        '''
+        rule.packageNames = 'com.other,com.example.service'
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText:'com.example.service.MyService myService', messageText:'com.example.service'])
+    }
+
+    void testMultiplePackageNames_MultipleViolations() {
+        final SOURCE = '''
+            class MyHashMap extends org.bad.HashMap {
+                def myMethod() { println 'ok' }
+                int getCount(com.example.Widget widget) { return widget.count }
+            }
+        '''
+        rule.packageNames = 'com.example,com.example,org.bad,com.other.ignore'
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'class MyHashMap extends org.bad.HashMap {', messageText:'org.bad'],
+            [lineNumber:4, sourceLineText:'int getCount(com.example.Widget widget) { return widget.count }', messageText:'com.example'] )
+    }
+
+    void testMultiplePackageNames_Wildcards_MultipleViolations() {
+        final SOURCE = '''
+            import com.example.ExampleHelper
+            class MyClass implements com.example.print.Printable {
+                def myMethod() { println 'ok' }
+                int getCount(org.bad.widget.Widget widget) { return widget.count }
+            }
+        '''
+        rule.packageNames = 'com.ex?mple*,org.*,com.other.*'
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'import com.example.ExampleHelper', messageText:'com.example'],
+            [lineNumber:3, sourceLineText:'class MyClass implements com.example.print.Printable {', messageText:'com.example.print'],
+            [lineNumber:5, sourceLineText:'int getCount(org.bad.widget.Widget widget) { return widget.count }', messageText:'org.bad'] )
+    }
+
     protected Rule createRule() {
         new IllegalPackageReferenceRule()
     }
