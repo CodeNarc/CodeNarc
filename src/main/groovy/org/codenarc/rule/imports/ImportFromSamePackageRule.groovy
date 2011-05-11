@@ -35,7 +35,7 @@ class ImportFromSamePackageRule extends AbstractRule {
         if (hasImports && sourceCode.ast.packageName) {
             def rawPackage = sourceCode.ast.packageName
             def filePackageName = rawPackage.endsWith('.') ? rawPackage[0..-2] : rawPackage
-            ImportUtil.getImportsSortedByLineNumber(sourceCode).each { importNode ->
+            ImportUtil.getNonStaticImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importPackageName = ImportUtil.packageNameForImport(importNode)
                 if (importPackageName == filePackageName && !hasAlias(importNode)) {
                     violations.add(createViolationForImport(sourceCode, importNode))

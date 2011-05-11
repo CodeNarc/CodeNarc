@@ -34,14 +34,14 @@ class ImportUtil {
      *      or an empty String if the import contains no package component
      */
     static String packageNameForImport(ImportNode importNode) {
-        if (importNode.isStar()) {
-            def packageName = importNode.packageName
-            packageName.endsWith('.') ? packageName[0..-2] : packageName
-        }
-        else {
+        if (importNode.className) {
             def importClassName = importNode.className
             def index = importClassName.lastIndexOf('.')
             (index == -1) ? '' : importClassName.substring(0, index)
+        }
+        else {
+            def packageName = importNode.packageName
+            packageName.endsWith('.') ? packageName[0..-2] : packageName
         }
     }
 
@@ -76,7 +76,7 @@ class ImportUtil {
         // NOTE: This won't properly handle the case of multiple imports for same class if not all are aliased
         def index = sourceCode.lines.findIndexOf { line ->
             line.contains('import') &&
-                line.contains(importNode.packageName + '*')
+                (line.contains(importNode.packageName + '*') || (importNode.className && line.contains(importNode.className)))
         }
         def lineNumber = index == -1 ? null : index + 1
         def sourceLine = lineNumber == null ? "import ${importNode.packageName}*".toString() : sourceCode.lines[lineNumber-1].trim()
@@ -98,12 +98,21 @@ class ImportUtil {
     }
 
     static List getImportsSortedByLineNumber(sourceCode) {
+        def staticImports = sourceCode.ast.staticImports.values() + sourceCode.ast.staticStarImports.values()
+        def allImports = sourceCode.ast.imports + sourceCode.ast.starImports + staticImports
+        return sortImportsByLineNumber(allImports, sourceCode)
+    }
+
+    static List getNonStaticImportsSortedByLineNumber(sourceCode) {
         def allImports = sourceCode.ast.imports + sourceCode.ast.starImports
-        allImports.sort { importNode ->
+        return sortImportsByLineNumber(allImports, sourceCode)
+    }
+
+    private static List sortImportsByLineNumber(List imports, sourceCode) {
+        imports.sort { importNode ->
             def importInfo = ImportUtil.sourceLineAndNumberForImport(sourceCode, importNode)
             importInfo.lineNumber
         }
     }
-
 
 }

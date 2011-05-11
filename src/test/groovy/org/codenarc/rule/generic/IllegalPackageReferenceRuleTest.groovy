@@ -173,21 +173,21 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'class MyRange implements org.bad.Range { }', messageText:'org.bad'] )
     }
 
-//    void testImports_Violations() {
-//        final SOURCE = '''
-//            import org.bad.BadStuff
-//            import org.bad.other.Stuff
-//            import org.evil.*
-//            class MyList {
-//                BadStuff badStuff = new Stuff()
-//            }
-//        '''
-//        rule.packageNames = 'org.bad, org.evil'
-//        assertViolations(SOURCE,
-//            [lineNumber:2, sourceLineText:'import org.bad.BadStuff', messageText:'org.bad'],
-//            [lineNumber:4, sourceLineText:'import org.evil.*', messageText:'org.evil'] )
-//    }
-//
+    void testImports_Violations() {
+        final SOURCE = '''
+            import org.bad.BadStuff
+            import org.bad.other.Stuff
+            import org.evil.*
+            class MyList {
+                BadStuff badStuff = new Stuff()
+            }
+        '''
+        rule.packageNames = 'org.bad, org.evil'
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'import org.bad.BadStuff', messageText:'org.bad'],
+            [lineNumber:4, sourceLineText:'import org.evil.*', messageText:'org.evil'] )
+    }
+
 //    void testStaticImports_Violations() {
 //        final SOURCE = '''
 //            import org.other.Stuff

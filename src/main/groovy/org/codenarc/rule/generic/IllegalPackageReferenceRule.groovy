@@ -114,16 +114,17 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitImports(ModuleNode node) {
-        node.imports?.each { importNode ->
+        def allImports = node.imports + node.starImports
+        allImports?.each { importNode ->
             def parentPackage = ImportUtil.packageNameForImport(importNode)
             if (wildcard.matches(parentPackage)) {
-//                violations.add(createViolationForImport(sourceCode, importNode, "Found reference to illegal package name $parentPackage"))
-                addViolation(
-                    rule.createViolationForImport(sourceCode, importNode, "Found reference to illegal package name $parentPackage".toString()))
+                addViolation(rule.createViolationForImport(sourceCode, importNode,
+                    "Found reference to illegal package name $parentPackage"))
             }
         }
         super.visitImports(node)
     }
+
     //--------------------------------------------------------------------------
     // Helper Methods
     //--------------------------------------------------------------------------
@@ -139,7 +140,6 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
         checkPackageName(parentPackage, node)
     }
 
-    // TODO Cache WildcardPattern
     private void checkPackageName(String parentPackage, node) {
         if (wildcard.matches(parentPackage)) {
             addViolation(node, "Found reference to illegal package name $parentPackage")

@@ -33,12 +33,12 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast?.imports || sourceCode.ast?.starImports) {
+        if (sourceCode.ast?.imports || sourceCode.ast?.starImports || sourceCode.ast?.staticImports || sourceCode.ast?.staticStarImports) {
             ImportUtil.getImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importClassName = importNode.className
                 def importPackageName = ImportUtil.packageNameForImport(importNode)
 
-                if ((!importNode.alias || importClassName.endsWith(".$importNode.alias")) &&
+                if ((!importNode.alias || importNode.isStatic() || importClassName.endsWith(".$importNode.alias")) &&
                         (importPackageName in AstUtil.AUTO_IMPORTED_PACKAGES || importClassName in AstUtil.AUTO_IMPORTED_CLASSES)) {
                     violations.add(createViolationForImport(sourceCode, importNode))
                 }

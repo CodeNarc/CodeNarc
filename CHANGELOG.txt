@@ -48,6 +48,7 @@ BUG FIXES and NEW FEATURES
 - #3293429 - Fix UnnecessaryNullCheck duplicate violations.
 - #3295887 - Fix AddEmptyString duplicate violations.
 - #3299713 - Fix ImportFromSamePackage, UnnecessaryGroovyImport: Star import.
+- #3300225 - Fix UnnecessaryGroovyImport: Check static imports.
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 
 Changes in version 0.13 (February 2011)

@@ -61,11 +61,29 @@ class ImportUtilTest extends AbstractTestCase {
         assert ImportUtil.sourceLineAndNumberForImport(otherSourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
     }
 
+    void testSourceLineAndNumberForImport_StaticImport() {
+        final SOURCE = '''
+            import static java.io.DataInputStream.*
+            import static java.lang.Integer.MAX_VALUE
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def ast = sourceCode.ast
+
+        assertStaticImport(sourceCode, ast, [sourceLine:'import static java.io.DataInputStream.*', lineNumber:2])
+        assertStaticImport(sourceCode, ast, [sourceLine:'import static java.lang.Integer.MAX_VALUE', lineNumber:3])
+    }
+
     private void assertImport(sourceCode, ast, Map importInfo) {
         assert ast.imports.find { imp ->
             ImportUtil.sourceLineAndNumberForImport(sourceCode, imp) == importInfo
         }
     }
 
+    private void assertStaticImport(sourceCode, ast, Map importInfo) {
+        def allStaticImports = ast.staticImports + ast.staticStarImports
+        assert allStaticImports.find { name, imp ->
+            ImportUtil.sourceLineAndNumberForImport(sourceCode, imp) == importInfo
+        }
+    }
 
 }
