@@ -2,12 +2,13 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.14 (April 2011)
+Changes in version 0.14 (May 2011)
 -------------------------------------------
 NEW RULES
 - DuplicateMapKey rule (basic) - A map literal is created with duplicated key. The map entry will be overwritten.
 - DuplicateSetValue rule (basic) - A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
 - EqualsOverloaded rule (basic) - The class has an equals method, but the parameter of the method is not of type Object. It is not overriding equals but instead overloading it.
+- ForLoopShouldBeWhileLoop (basic) - A for-loop without an init and an update statement can be simplified to a while loop. 
 - NonFinalSubclassOfSensitiveInterface rule (security) - The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended. Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces such as java.security.PrivilegedAction and java.security.PrivilegedActionException must also be declared final for analogous reasons.
 - ImportFromSunPackages rule (imports) - Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
 - UnnecessaryFinalOnPrivateMethod rule (unnecessary) - A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
@@ -50,6 +51,9 @@ BUG FIXES and NEW FEATURES
 - #3299713 - Fix ImportFromSamePackage, UnnecessaryGroovyImport: Star import.
 - #3300225 - Fix UnnecessaryGroovyImport: Check static imports.
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
+
+THANKS
+  Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop rule. 
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------

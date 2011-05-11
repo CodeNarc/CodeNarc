@@ -76,4 +76,5 @@
     <rule class='org.codenarc.rule.basic.DuplicateMapKeyRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
     <rule class='org.codenarc.rule.basic.SerialPersistentFieldsRule'/>
+    <rule class='org.codenarc.rule.basic.ForLoopShouldBeWhileLoopRule'/>
 </ruleset>
