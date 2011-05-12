@@ -15,6 +15,7 @@ ruleset {
     BrokenOddnessCheck
     CloneableWithoutClone
     CompareToWithoutComparable
+    ComparisonOfTwoConstants
     ComparisonWithSelf
     ConfusingTernary
     ConsecutiveLiteralAppends
@@ -61,6 +62,7 @@ ruleset {
     ExplicitLinkedListInstantiation
     ExplicitStackInstantiation
     ExplicitTreeSetInstantiation
+    ForLoopShouldBeWhileLoop
     GStringAsMapKey
     GroovyLangImmutable
     IntegerGetInteger
@@ -69,6 +71,7 @@ ruleset {
     ReturnFromFinallyBlock
     ReturnsNullInsteadOfEmptyArray
     ReturnsNullInsteadOfEmptyCollection
+    SerialPersistentFields
     SerialVersionUID
     SerializableClassMustDefineSerialVersionUID
     SimpleDateFormatMissingLocale
@@ -89,6 +92,7 @@ ruleset {
     StaticCalendarField
     StaticDateFormatField
     StaticMatcherField
+    StaticSimpleDateFormatField
     SynchronizedMethod
     SynchronizedOnBoxedPrimitive
     SynchronizedOnGetClass
@@ -106,6 +110,7 @@ ruleset {
     WaitOutsideOfWhileLoop
     
     // rulesets/design.xml
+    AbstractClassWithPublicConstructor
     AbstractClassWithoutAbstractMethod
     CloseWithoutCloseable
     ConstantsOnlyInterface
@@ -137,6 +142,7 @@ ruleset {
     ThrowThrowable
     
     // rulesets/generic.xml
+    IllegalPackageReference
     IllegalRegex
     RequiredRegex
     RequiredString
@@ -201,8 +207,16 @@ ruleset {
     
     // rulesets/security.xml
     DirectConnectionManagement
+    FileCreateTempFile
     InsecureRandom
+    JavaIoPackageAccess
+    NonFinalPublicField
     NonFinalSubclassOfSensitiveInterface
+    ObjectFinalize
+    PublicFinalizeMethod
+    StaticConnection
+    SystemExit
+    UnsafeArrayDeclaration
     
     // rulesets/size.xml
     AbcComplexity
@@ -225,6 +239,7 @@ ruleset {
     UnnecessaryConstructor
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDoubleInstantiation
+    UnnecessaryEqualityWithNull
     UnnecessaryFinalOnPrivateMethod
     UnnecessaryFloatInstantiation
     UnnecessaryGString
@@ -238,6 +253,7 @@ ruleset {
     UnnecessaryNullCheckBeforeInstanceOf
     UnnecessaryObjectReferences
     UnnecessaryOverridingMethod
+    UnnecessaryPackageReference
     UnnecessaryPublicModifier
     UnnecessaryReturnKeyword
     UnnecessarySelfAssignment

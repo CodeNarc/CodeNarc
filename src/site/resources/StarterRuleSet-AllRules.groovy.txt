@@ -8,6 +8,7 @@ ruleset {
 
     AbcComplexity
     AbstractClassName
+    AbstractClassWithPublicConstructor
     AbstractClassWithoutAbstractMethod
     AddEmptyString
     AssignmentInConditional
@@ -30,6 +31,7 @@ ruleset {
     CloneableWithoutClone
     CloseWithoutCloseable
     CompareToWithoutComparable
+    ComparisonOfTwoConstants
     ComparisonWithSelf
     ConfusingClassNamedException
     ConfusingMethodName
@@ -90,7 +92,9 @@ ruleset {
     ExplicitStackInstantiation
     ExplicitTreeSetInstantiation
     FieldName
+    FileCreateTempFile
     FinalClassWithProtectedMember
+    ForLoopShouldBeWhileLoop
     ForStatementBraces
     GStringAsMapKey
     GrailsPublicControllerMethod
@@ -99,6 +103,7 @@ ruleset {
     GrailsStatelessService
     GroovyLangImmutable
     IfStatementBraces
+    IllegalPackageReference
     IllegalRegex
     ImplementationAsType
     ImportFromSamePackage
@@ -119,6 +124,7 @@ ruleset {
     JUnitTestMethodWithoutAssert
     JUnitUnnecessarySetUp
     JUnitUnnecessaryTearDown
+    JavaIoPackageAccess
     LoggerForDifferentClass
     LoggerWithWrongModifiers
     LoggingSwallowsStacktrace
@@ -129,13 +135,16 @@ ruleset {
     MultipleLoggers
     NestedBlockDepth
     NestedSynchronization
+    NonFinalPublicField
     NonFinalSubclassOfSensitiveInterface
+    ObjectFinalize
     ObjectOverrideMisspelledMethodName
     PackageName
     ParameterName
     PrintStackTrace
     Println
     PropertyName
+    PublicFinalizeMethod
     RemoveAllOnSelf
     RequiredRegex
     RequiredString
@@ -143,13 +152,16 @@ ruleset {
     ReturnNullFromCatchBlock
     ReturnsNullInsteadOfEmptyArray
     ReturnsNullInsteadOfEmptyCollection
+    SerialPersistentFields
     SerialVersionUID
     SerializableClassMustDefineSerialVersionUID
     SimpleDateFormatMissingLocale
     StatelessClass
     StaticCalendarField
+    StaticConnection
     StaticDateFormatField
     StaticMatcherField
+    StaticSimpleDateFormatField
     SynchronizedMethod
     SynchronizedOnBoxedPrimitive
     SynchronizedOnGetClass
@@ -158,6 +170,7 @@ ruleset {
     SynchronizedOnThis
     SynchronizedReadObjectMethod
     SystemErrPrint
+    SystemExit
     SystemOutPrint
     SystemRunFinalizersOnExit
     ThreadGroup
@@ -181,6 +194,7 @@ ruleset {
     UnnecessaryConstructor
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDoubleInstantiation
+    UnnecessaryEqualityWithNull
     UnnecessaryFail
     UnnecessaryFinalOnPrivateMethod
     UnnecessaryFloatInstantiation
@@ -196,6 +210,7 @@ ruleset {
     UnnecessaryNullCheckBeforeInstanceOf
     UnnecessaryObjectReferences
     UnnecessaryOverridingMethod
+    UnnecessaryPackageReference
     UnnecessaryPublicModifier
     UnnecessaryReturnKeyword
     UnnecessarySelfAssignment
@@ -203,6 +218,7 @@ ruleset {
     UnnecessaryStringInstantiation
     UnnecessaryTernaryExpression
     UnnecessaryTransientModifier
+    UnsafeArrayDeclaration
     UnusedArray
     UnusedImport
     UnusedObject

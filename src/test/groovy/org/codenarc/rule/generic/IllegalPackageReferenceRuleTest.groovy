@@ -188,18 +188,18 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'import org.evil.*', messageText:'org.evil'] )
     }
 
-//    void testStaticImports_Violations() {
-//        final SOURCE = '''
-//            import org.other.Stuff
-//            import static org.bad.BadUtil.*
-//            class MyList {
-//                def name = BAD_NAME
-//            }
-//        '''
-//        rule.packageNames = 'org.bad'
-//        assertViolations(SOURCE,
-//            [lineNumber:3, sourceLineText:'import static org.bad.BadUtil.*', messageText:'org.bad'] )
-//    }
+    void testStaticImports_Violations() {
+        final SOURCE = '''
+            import org.other.Stuff
+            import static org.bad.BadUtil.*
+            class MyList {
+                def name = BAD_NAME
+            }
+        '''
+        rule.packageNames = 'org.bad'
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'import static org.bad.BadUtil.*', messageText:'org.bad'] )
+    }
 
     void testMultiplePackageNames_SingleViolation() {
         final SOURCE = '''

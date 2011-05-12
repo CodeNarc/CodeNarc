@@ -114,7 +114,7 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitImports(ModuleNode node) {
-        def allImports = node.imports + node.starImports
+        def allImports = node.imports + node.starImports + node.staticImports.values() + node.staticStarImports.values()
         allImports?.each { importNode ->
             def parentPackage = ImportUtil.packageNameForImport(importNode)
             if (wildcard.matches(parentPackage)) {

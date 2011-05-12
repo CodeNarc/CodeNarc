@@ -5,6 +5,28 @@
 Generic Rules  ("<rulesets/generic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* IllegalPackageReference Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <Since CodeNarc 0.14>
+
+  Checks for reference to any of the packages configured in <<<packageNames>>>.
+
+  A RuleSet can contain any number of instances of this rule, but each should be configured
+  with a unique rule <name> and <packageNames>, and (optionally) customized <violationMessage> and <priority>.
+
+*---------------------+------------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                  | <<Default Value>>      |
+*---------------------+------------------------------------------------------------------+------------------------+
+| packageNames        | Specifies the comma-separated list of package names.             | <<<null>>>             |
+|                     | The package name(s) may optionally include wildcard characters   |                        |
+|                     | ('*' or '?'). Note that the '*' wildcard matches any sequence    |                        |
+|                     | of zero or more characters in the package name, e.g. 'a.*'       |                        |
+|                     | matches 'a.b' as well as 'a.b.c.d'. If <code>packageNames</code> |                        |
+|                     | is null or empty, do nothing.                                    |                        |
+*---------------------+------------------------------------------------------------------+------------------------+
+
+
 * IllegalRegex Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
