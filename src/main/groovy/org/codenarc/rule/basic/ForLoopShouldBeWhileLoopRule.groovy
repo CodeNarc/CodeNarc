@@ -19,9 +19,11 @@ import org.codehaus.groovy.ast.expr.EmptyExpression
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.expr.VariableExpression
 
 /**
  * For loops where init and update statements are empty can be simplified to while loops.
+ * Ignores For-Each Loops (for (Plan p : plans) { .. }) and Groovy For Loops (for (p in plans) { .. }).
  *
  * @author Victor Savkin
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
@@ -36,7 +38,7 @@ class ForLoopShouldBeWhileLoopAstVisitor extends AbstractAstVisitor {
     
     @Override
     void visitForLoop(ForStatement node) {
-        if(hasOnlyConditionExpr(node)) {
+        if(!isForEachLoop(node) && hasOnlyConditionExpr(node)) {
             addViolation node, 'The for loop can be simplified to a while loop'
         }
         super.visitForLoop node
@@ -49,5 +51,9 @@ class ForLoopShouldBeWhileLoopAstVisitor extends AbstractAstVisitor {
 
     private static isEmptyExpression(expr) {
         expr instanceof EmptyExpression
+    }
+
+    private boolean isForEachLoop(ForStatement forStatement) {
+        return forStatement.collectionExpression instanceof VariableExpression
     }
 }

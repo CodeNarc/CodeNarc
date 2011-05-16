@@ -922,21 +922,24 @@ class Object7 {
 
 -------------------------------------------------------------------------------
     int i = 0;
-    for(; i < 5;) { // violation
+    for(; i < 5;) {     // Violation
         println i++
     }
 
-    // these are OK
-    for(i in [1,2])
+    // These are OK
+    for(i in [1,2])         // OK
        println i
 
-    for(int i = 0; i<5;)
+    for(int i = 0; i<5;)    // OK
         println i++
 
     int i = 0;
-    for(; i < 5; i++)
+    for(; i < 5; i++)       // OK
         println i
 
+    for (Plan p : plans) {  // OK
+        println "Plan=$p"
+    }
 -------------------------------------------------------------------------------
 
 * GroovyLangImmutable Rule

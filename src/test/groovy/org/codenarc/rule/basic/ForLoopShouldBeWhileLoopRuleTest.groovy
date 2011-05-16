@@ -72,7 +72,16 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation SOURCE, 3, 'for(; i < 5;)', 'The for loop can be simplified to a while loop'
     }
-    
+
+    void testForEachLoop() {
+        final SOURCE = '''
+            for (Plan p : plans) {
+                println "Plan=$p"
+            }
+        '''
+        assertNoViolations SOURCE
+    }
+
     protected Rule createRule() {
         new ForLoopShouldBeWhileLoopRule()
     }
