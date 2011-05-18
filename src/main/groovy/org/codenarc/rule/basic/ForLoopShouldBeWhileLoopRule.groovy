@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codenarc.util.AstUtil
 
 /**
  * For loops where init and update statements are empty can be simplified to while loops.
@@ -45,8 +46,11 @@ class ForLoopShouldBeWhileLoopAstVisitor extends AbstractAstVisitor {
     }
 
     private hasOnlyConditionExpr(ForStatement forStatement) {
-        def (init, condition, update) = forStatement.collectionExpression.expressions
-        isEmptyExpression(init) && isEmptyExpression(update) && !isEmptyExpression(condition)
+        if (AstUtil.respondsTo(forStatement.collectionExpression, 'expressions')) {
+            def (init, condition, update) = forStatement.collectionExpression.expressions
+            return isEmptyExpression(init) && isEmptyExpression(update) && !isEmptyExpression(condition)
+        }
+        false
     }
 
     private static isEmptyExpression(expr) {
