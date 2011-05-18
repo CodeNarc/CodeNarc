@@ -275,6 +275,30 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
+* SpockIgnoreRestUsed Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+  If Spock's @IgnoreRest appears on any method, all non-annotated test methods are not executed. This behaviour is almost always
+  unintended. It's fine to use @IgnoreRest locally during development, but when committing code, it should be removed.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+            public class MySpec extends spock.lang.Specification {
+                @spock.lang.IgnoreRest
+                def "my first feature"() {
+                    expect: false
+                }
+
+                def "my second feature"() {
+                    given: def a = 2
+
+                    when: a *= 2
+
+                    then: a == 4
+                }
+            }
+-------------------------------------------------------------------------------
 
 * UnnecessaryFail Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -300,3 +324,4 @@ JUnit Rules  ("<rulesets/junit.xml>")
     }
   }
 -------------------------------------------------------------------------------
+

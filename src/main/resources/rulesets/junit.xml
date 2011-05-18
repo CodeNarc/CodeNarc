@@ -27,4 +27,5 @@
     <rule class='org.codenarc.rule.junit.UnnecessaryFailRule'/>
     <rule class='org.codenarc.rule.junit.ChainedTestRule'/>
     <rule class='org.codenarc.rule.junit.CoupledTestCaseRule'/>
+    <rule class='org.codenarc.rule.junit.SpockIgnoreRestUsedRule'/>
 </ruleset>

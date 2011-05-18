@@ -465,7 +465,7 @@ class AstUtil {
      * @return true if the object responds to the named method
      */
     static boolean respondsTo(Object object, String methodName) {
-        object.metaClass.respondsTo(object, methodName)
+        object.metaClass.respondsTo(object, methodName) || object.properties.containsKey(methodName)
     }
 
     /**

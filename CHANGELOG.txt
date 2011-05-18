@@ -30,6 +30,7 @@ NEW RULES
 - AbstractClassWithPublicConstructor (design) - Checks for abstract classes that define a public constructor, which is useless and confusing.
 - StaticSimpleDateFormatField (concurrency) - Checks for static SimpleDateFormat fields. SimpleDateFormat objects are not threadsafe, and should not be shared across threads.
 - IllegalPackageReference (generic) - Checks for reference to any of the packages configured in packageNames.
+- SpockIgnoreRestUsed rule (junit) - If Spock's @IgnoreRest appears on any method, then all non-annotated test methods are not executed. This behaviour is almost always unintended. It's fine to use @IgnoreRest locally during development, but when committing code, it should be removed.
 
 BUG FIXES and NEW FEATURES
 - #3290486 - AbstractClassWithoutAbstractMethod no longer flags marker interfaces as abstract classes that do not define a method. 
@@ -54,7 +55,8 @@ BUG FIXES and NEW FEATURES
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 
 THANKS
-  Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop rule. 
+  Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop rule.
+  Thank you to Jan Ahrens and Stefan Armbruster for the SpockIgnoreRestUsed rule.
 
 
 Changes in version 0.13 (February 2011)
