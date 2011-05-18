@@ -44,7 +44,19 @@ Naming Rules  ("<rulesets/naming.xml>")
   This is very confusing because if the capitalization were identical then one of the methods would override
   the other.
 
-  
+  Also, violations are triggered when methods and fields have very similar names.
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        int total
+        int total() {
+            1
+        }
+    }
+-------------------------------------------------------------------------------
+
+
+
 * FieldName Rule
 ~~~~~~~~~~~~~~~~~
 
@@ -126,7 +138,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.11>
-  
+
   Verifies that the names of the most commonly overridden methods of <<<Object>>>: <<<equals>>>,
   <<<hashCode>>> and <<<toString>>>, are correct.
 
@@ -169,7 +181,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 * ParameterName Rule
 ~~~~~~~~~~~~~~~~~~~~~
 
-  Verifies that the name of each parameter matches a regular expression. This rule applies to method parameters, 
+  Verifies that the name of each parameter matches a regular expression. This rule applies to method parameters,
   constructor parameters and closure parameters. By default it checks that parameter names start with a
   lowercase letter and contains only letters or numbers.
 

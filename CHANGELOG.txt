@@ -33,6 +33,7 @@ NEW RULES
 - SpockIgnoreRestUsed rule (junit) - If Spock's @IgnoreRest appears on any method, then all non-annotated test methods are not executed. This behaviour is almost always unintended. It's fine to use @IgnoreRest locally during development, but when committing code, it should be removed.
 - SwallowThreadDeath rule (exceptions) - Detects code that catches java.lang.ThreadDeath without rethrowing it
 - MisorderedStaticImports rule (imports) - Static imports should never be declared after nonstatic imports.
+- ConfusingMethodName (naming) - Existing rule updated to analyze fields and field names as well as just methods.
 
 
 BUG FIXES and NEW FEATURES
@@ -62,6 +63,7 @@ THANKS
   Thank you to Jan Ahrens and Stefan Armbruster for the SpockIgnoreRestUsed rule.
   Thank you to Rob Fletcher and Klaus Baumecker for the SwallowThreadDeath rule.
   Thank you to Erik Pragt and Marcin Erdmann for the MisorderedStaticImports rule.
+  Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
 
 
 Changes in version 0.13 (February 2011)

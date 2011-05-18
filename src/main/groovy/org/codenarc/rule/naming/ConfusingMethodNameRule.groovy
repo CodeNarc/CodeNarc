@@ -24,11 +24,13 @@ import org.codehaus.groovy.ast.ClassNode
 
 import org.codehaus.groovy.ast.Parameter
 import org.codenarc.util.AstUtil
+import org.codenarc.rule.Rule
 
 /**
  * This rule traps the condition where two methods or closures differ only by their capitalization.
  *
  * @author Hamlet D'Arcy
+ * @author Hubert 'Mr. Haki' Klein Ikkink
  * @version $Revision$ - $Date$
  */
 class ConfusingMethodNameRule extends AbstractAstVisitorRule {
@@ -40,7 +42,7 @@ class ConfusingMethodNameRule extends AbstractAstVisitorRule {
 class ConfusingMethodNameAstVisitor extends AbstractAstVisitor {
 
     def void visitClassEx(ClassNode node) {
-        node.visitContents(new ScopedConfusingMethodNameAstVisitor(parent: this))
+        node.visitContents(new ScopedConfusingMethodNameAstVisitor(this))
     }
 }
 
@@ -48,7 +50,13 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
     def lowercaseMethodNames = [] as Set
     def lowercaseMethodNamesWithParameterTypes = [] as Set
     def lowercaseClosureNames = [] as Set
+    def lowercaseFieldNames = [:]
     def parent
+
+    ScopedConfusingMethodNameAstVisitor(AbstractAstVisitor parent) {
+        this.parent = parent
+        this.rule = parent.rule
+    }
 
     def void visitMethodEx(MethodNode node) {
         String methodName = node.getName().toLowerCase()
@@ -61,6 +69,8 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
                     "Found method : $node.name $parameterInfo")
         } else if (lowercaseMethodNamesWithParameterTypes.contains(methodNameWithParameters)) {
             parent.addViolation(node, "Found very confusing method name: $node.name $parameterInfo")
+        } else if (lowercaseFieldNames.any { it.key == methodName }) {
+            parent.addViolation(node, "The method name $node.name is similar to the field name ${lowercaseFieldNames[methodName]}")
         }
         lowercaseMethodNames.add(methodName)
         lowercaseMethodNamesWithParameterTypes.add(methodNameWithParameters)
@@ -77,12 +87,19 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
             }
 
             lowercaseClosureNames.add(methodName)
+        } else {
+            String fieldName = node.name.toLowerCase()
+            lowercaseFieldNames[fieldName] = node.name
         }
         super.visitFieldEx(node)
     }
 
     def void visitClassEx(ClassNode node) {
         parent.visitClassEx(node)
+    }
+
+    Rule getRule() {
+        parent.rule
     }
 
     private static String getParameterDefinitionAsString(MethodNode node) {

@@ -22,6 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ConfusingMethodNameRule
  *
  * @author Hamlet D'Arcy
+ * @author Hubert 'Mr. Haki' Klein Ikkink
  * @version $Revision$ - $Date$
  */
 class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
@@ -39,6 +40,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
             def bar(int x) {}
             def baz = {}
             def bif = {}
+            def car = 100
             class MyClass {
                 def foo() {}
                 def foo(int x) {}
@@ -46,6 +48,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 def bar(int x) {}
                 def baz = {}
                 def bif = {}
+                def car = 100
                 def x = new Object() {
                     def foo() {}
                     def foo(int x) {}
@@ -162,6 +165,43 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE,
                 12, 'def FoO = {}',
                 13, 'def foO() {}')
+    }
+
+    void testViolatingFieldNameAndMethodName() {
+        final SOURCE = '''
+            class Totaller {
+                int total
+                int total() {}
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 4, 'int total', 'The method name total is similar to the field name total')
+    }
+
+    void testSuppressWarnings() {
+
+        final SOURCE = '''
+            @SuppressWarnings('ConfusingMethodName')
+            class MyClass {
+                def LOGGER
+
+                def Logger() {}
+            }
+        '''
+        assertNoViolations SOURCE
+    }
+
+    void test2ViolatingFieldNameAndMethodNames() {
+        final SOURCE = '''
+            class MyClass {
+                def total = 1
+                def totaL() {}
+                def toTal() {}
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                4, 'def totaL() {}',
+                5, 'def toTal() {}')
     }
 
     protected Rule createRule() {

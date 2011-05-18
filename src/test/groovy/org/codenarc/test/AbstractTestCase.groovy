@@ -26,7 +26,7 @@ import org.apache.log4j.spi.LoggingEvent
  * @version $Revision$ - $Date$
  */
 
-@SuppressWarnings('AbstractClassWithoutAbstractMethod')
+@SuppressWarnings(['AbstractClassWithoutAbstractMethod', 'ConfusingMethodName'])
 abstract class AbstractTestCase extends GroovyTestCase {
 
     protected static final CODENARC_PROPERTIES_FILE_PROP = 'codenarc.properties.file'
