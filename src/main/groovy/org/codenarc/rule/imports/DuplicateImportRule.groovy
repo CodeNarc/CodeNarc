@@ -15,9 +15,8 @@
  */
 package org.codenarc.rule.imports
 
-import org.codenarc.rule.AbstractRule
-import org.codenarc.source.SourceCode
 import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
 
 /**
  * Rule that checks for a duplicate import
@@ -29,32 +28,25 @@ import org.codenarc.rule.Violation
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
-class DuplicateImportRule extends AbstractRule {
+class DuplicateImportRule extends AbstractImportRule {
     String name = 'DuplicateImport'
     int priority = 3
-
-    private static final IMPORT_PATTERN = /^\s*import\s+(\w+(\.\w+)*)\b.*/
-    private static final STATIC_IMPORT_PATTERN = /^\s*import\s+static\s+(\w+(\.\w+)*)\b.*/
 
     void applyTo(SourceCode sourceCode, List violations) {
         def importNames = [] as Set
         def staticImportNames = [] as Set
 
-        def firstClassDeclarationLine = findLineNumberOfFirstClassDeclaration(sourceCode)
-
-        for(int index=0; index < firstClassDeclarationLine; index++) {
-            def line = sourceCode.lines[index]
-            def lineNumber = index + 1
+        eachImportLine(sourceCode) { int lineNumber, String line ->
             checkImport(line, lineNumber, importNames, violations)
             checkStaticImport(line, lineNumber, staticImportNames, violations)
         }
     }
 
     private void checkImport(line, lineNumber, importNames, violations) {
-        def importMatcher = line =~ IMPORT_PATTERN
+        def importMatcher = line =~ NON_STATIC_IMPORT_PATTERN
         if (importMatcher) {
             def importName = importMatcher[0][1]
-            if (importName != 'static' && importNames.contains(importName)) {
+            if (importNames.contains(importName)) {
                 violations.add(new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber))
             }
             else {
@@ -74,19 +66,5 @@ class DuplicateImportRule extends AbstractRule {
                 staticImportNames.add(staticImportName)
             }
         }
-    }
-
-    /**
-     * Optimization: Stop checking lines for imports once a class/interface has been declared
-     */
-    private findLineNumberOfFirstClassDeclaration(SourceCode sourceCode) {
-       int firstLineNumber = sourceCode.lines.size()
-       def ast = sourceCode.ast
-        ast?.classes.each { classNode ->
-            if (classNode.lineNumber >= 0 && classNode.lineNumber < firstLineNumber) {
-                firstLineNumber = classNode.lineNumber
-            }
-        }
-        firstLineNumber
     }
 }

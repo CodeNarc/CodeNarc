@@ -32,6 +32,21 @@ Imports Rules  ("<rulesets/imports.xml>")
     public class MyClass{}
 -------------------------------------------------------------------------------
 
+
+* MisorderedStaticImports Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+  Checks for static <import> statements which should never be after nonstatic imports.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+     import my.something.*
+     import static foo.bar.*
+
+     public class MyClass{}
+-------------------------------------------------------------------------------
+
 * UnnecessaryGroovyImport Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
