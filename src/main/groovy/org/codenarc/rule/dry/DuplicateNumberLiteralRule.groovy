@@ -35,10 +35,18 @@ class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
     String ignoreNumbers = '0,1'
 
+    private static final NUMBER_TYPES = [Number,
+            Byte.TYPE,
+            Double.TYPE,
+            Float.TYPE,
+            Integer.TYPE,
+            Long.TYPE,
+            Short.TYPE]
+
     @Override
     AstVisitor getAstVisitor() {
         def ignoreValuesSet = parseIgnoreValues()
-        new DuplicateLiteralAstVisitor(Number, ignoreValuesSet)
+        new DuplicateLiteralAstVisitor(NUMBER_TYPES, ignoreValuesSet)
     }
 
     private Set parseIgnoreValues() {

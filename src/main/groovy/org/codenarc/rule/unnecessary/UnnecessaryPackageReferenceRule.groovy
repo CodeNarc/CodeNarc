@@ -23,6 +23,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.*
+import org.codenarc.util.GroovyVersion
 
 /**
  * Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String,
@@ -43,7 +44,7 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
         def superClassName = node.superClass.name
-        if (superClassName != 'java.lang.Object') {
+        if (superClassName != 'java.lang.Object' && !(GroovyVersion.groovy1_8 && node.isScript() && node.name == 'None')) {
             checkType(superClassName, node)
         }
         node.interfaces.each { interfaceNode ->

@@ -100,7 +100,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
     protected void assertViolations(String source, Map[] violationMaps) {
         def rawViolations = applyRuleTo(source)
         def violations = rawViolations.sort { v -> v.lineNumber }
-        assert violations.size() == violationMaps.size(), "Expected ${violationMaps.size()} violations\nFound ${violations.size()}: $violations\n"
+        assert violations.size() == violationMaps.size(), "Expected ${violationMaps.size()} violations\nFound ${violations.size()}: \n    ${violations.join('\n    ')}\n"
         violationMaps.eachWithIndex { violationMap, index ->
             assert violationMap.keySet().every { key -> key in ['lineNumber', 'sourceLineText', 'messageText'] },"violationMap keys must be 'lineNumber', 'sourceLineText' and/or 'messageText'"
             assertViolation(violations[index], violationMap.lineNumber, violationMap.sourceLineText, violationMap.messageText)

@@ -37,7 +37,13 @@ class ConsecutiveStringConcatenationRule extends AbstractAstVisitorRule {
 }
 
 class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
-    final static DEFAULT_NAME = '<unknown>'
+    private static final DEFAULT_NAME = '<unknown>'
+    private static final PRIMITIVE_TYPES = [Byte.TYPE,
+            Double.TYPE,
+            Float.TYPE,
+            Integer.TYPE,
+            Long.TYPE,
+            Short.TYPE]
     def className = DEFAULT_NAME
 
     @Override
@@ -89,7 +95,11 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
     }
 
     private static boolean isNumberLiteral(Expression node) {
-        (node instanceof ConstantExpression && !AstUtil.isNull(node) && node.type.isResolved() && Number.isAssignableFrom(node.type.typeClass))
+        if (!node instanceof ConstantExpression) { return false }
+        if (AstUtil.isNull(node)) { return false }
+        if (!node.type.isResolved()) { return false }
+
+        (Number.isAssignableFrom(node.type.typeClass) || node.type.typeClass in PRIMITIVE_TYPES)
     }
 
     private static boolean isJoinableType(Expression node) {

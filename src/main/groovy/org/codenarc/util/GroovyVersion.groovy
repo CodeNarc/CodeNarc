@@ -32,6 +32,10 @@ class GroovyVersion {
         }
     }
 
+    static boolean isGroovy1_8() {
+        getVersion().startsWith('1.8')
+    }
+
     static boolean isGroovy1_7() {
         getVersion().startsWith('1.7')
     }

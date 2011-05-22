@@ -17,6 +17,8 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
+import org.codenarc.util.GroovyVersion
+import org.codehaus.groovy.ast.ImportNode
 
 /**
  * Rule that checks for an unreferenced import
@@ -43,9 +45,17 @@ class UnusedImportRule extends AbstractRule {
     }
 
     private void processStaticImports(SourceCode sourceCode, List violations) {
-        sourceCode.ast?.staticImportAliases?.each {alias, classNode ->
-            if (!findReference(sourceCode, alias)) {
-                violations.add(createViolationForImport(sourceCode, classNode.name, alias))
+        if (GroovyVersion.isGroovy1_8()) {
+            sourceCode.ast?.staticImports?.each {alias, ImportNode classNode ->
+                if (!findReference(sourceCode, alias)) {
+                    violations.add(createViolationForImport(sourceCode, classNode.className, alias))
+                }
+            }
+        } else {
+            sourceCode.ast?.staticImportAliases?.each {alias, classNode ->
+                if (!findReference(sourceCode, alias)) {
+                    violations.add(createViolationForImport(sourceCode, classNode.name, alias))
+                }
             }
         }
     }

@@ -27,9 +27,9 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.ConstructorNode
-import java.beans.Expression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.Parameter
+import org.codehaus.groovy.ast.expr.Expression
 
 /**
  * Abstract superclass for Groovy AST Visitors used with Rules

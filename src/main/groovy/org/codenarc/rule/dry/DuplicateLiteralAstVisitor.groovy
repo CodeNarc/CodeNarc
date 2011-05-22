@@ -38,12 +38,18 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     List<String> constants = []
-    private Class constantType
+    private final List<Class> CONSTANT_TYPES
     private Set ignoreValuesSet
 
     DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet) {
         assert constantType
-        this.constantType = constantType
+        this.CONSTANT_TYPES = [constantType]
+        this.ignoreValuesSet = ignoreValuesSet
+    }
+
+    DuplicateLiteralAstVisitor(List<Class> constantTypes, Set ignoreValuesSet) {
+        assert constantTypes
+        this.CONSTANT_TYPES = constantTypes
         this.ignoreValuesSet = ignoreValuesSet
     }
 
@@ -109,18 +115,21 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
     }
 
     private addViolationIfDuplicate(node, boolean isStatic = false) {
-        if (isFirstVisit(node) && (node instanceof ConstantExpression) && node.value != null && (constantType.isAssignableFrom(node.value.class))) {
-            def literal = String.valueOf(node.value)
-            if (node.type.isResolved() && constantType.isAssignableFrom(node.type.typeClass) && constants.contains(literal) && !isStatic) {
+        if (!isFirstVisit(node)) { return }
+        if (!(node instanceof ConstantExpression)) { return }
+        if (node.value == null) { return }
+        if (!node.type.isResolved()) { return }
 
-                if (!ignoreValuesSet.contains(literal)) {
+        def literal = String.valueOf(node.value)
+
+        for (Class constantType: CONSTANT_TYPES) {
+            if ((constantType.isAssignableFrom(node.value.class) || node.value.class == constantType || node.type.typeClass == constantType)) {
+                if (constants.contains(literal) && !isStatic && !ignoreValuesSet.contains(literal)) {
                     addViolation node, "Duplicate ${constantType.simpleName} Literal: $literal"
+                    return
                 }
-                
-            } else {
-                constants.add literal
             }
         }
+        constants.add literal
     }
-
 }

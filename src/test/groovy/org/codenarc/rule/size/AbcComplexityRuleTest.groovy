@@ -227,5 +227,4 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     protected Rule createRule() {
         new AbcComplexityRule()
     }
-
 }
