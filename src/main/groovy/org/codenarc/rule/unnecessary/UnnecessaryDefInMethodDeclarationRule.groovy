@@ -63,9 +63,8 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
             def line = sourceCode.line(current)
             if (line?.contains('{')) {
                 return acc + line[0..(line.indexOf('{'))]
-            } else {
-                acc = acc + line + ' '
             }
+            acc = acc + line + ' '
             current++
         }
         acc

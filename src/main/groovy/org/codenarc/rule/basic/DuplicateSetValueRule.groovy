@@ -54,9 +54,8 @@ class DuplicateSetValueAstVisitor extends AbstractAstVisitor {
         if ((expression instanceof ConstantExpression)) {
             if (previousValues.contains(expression.value)) {
                 return true
-            } else {
-                previousValues.add(expression.value)
             }
+            previousValues.add(expression.value)
         }
         false
     }

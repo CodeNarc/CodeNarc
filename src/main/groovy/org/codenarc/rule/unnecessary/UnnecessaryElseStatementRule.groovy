@@ -18,9 +18,9 @@ package org.codenarc.rule.unnecessary
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.Statement
 
 /**
  * When an if statement block ends with a return statement the else is unnecessary
@@ -38,14 +38,39 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitIfElse(IfStatement node) {
-        if(hasElseBlock(node) && allBranchesReturn(node.ifBlock)){
-            addViolation node, 'When an if statement block ends with a return statement the else is unnecessary'
+        if (isFirstVisit(node)) {
+            def (allIfBlocks, theElseBlock) = collectIfsAndElses(node)
+
+            if (isValidElseBlock(theElseBlock)) {
+
+                if(allIfBlocks && allIfBlocks.every { allBranchesReturn(it.ifBlock) }){
+                    addViolation theElseBlock, 'When an if statement block ends with a return statement the else is unnecessary'
+                }
+            }
+            visited.addAll allIfBlocks
+            visited.add theElseBlock
         }
+
         super.visitIfElse node
     }
 
-    private static hasElseBlock(IfStatement ifElse) {
-        !ifElse.elseBlock.empty
+    private static collectIfsAndElses(IfStatement node) {
+        def ifs = []
+        def theElse = null
+
+        while (theElse == null) {
+            ifs.add node
+            if (node.elseBlock instanceof IfStatement) {
+                node = node.elseBlock
+            } else {
+                theElse = node.elseBlock
+            }
+        }
+        [ifs, theElse]
+    }
+
+    private static isValidElseBlock(Statement elseBlock) {
+        elseBlock != null && !elseBlock.empty && !(elseBlock instanceof IfStatement)
     }
 
     private static allBranchesReturn(Statement expr){

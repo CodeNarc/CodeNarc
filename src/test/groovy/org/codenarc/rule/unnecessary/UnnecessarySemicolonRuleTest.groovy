@@ -61,7 +61,35 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    @SuppressWarnings('UnnecessarySemicolon')
+    void testSimpleString() {
+        final SOURCE = """
+            def string = 'hello world';
+            """
+        assertSingleViolation SOURCE, 2, "def string = 'hello world';"
+    }
+    void testSemiColonInMultilineString() {
+        final SOURCE = """
+            def javascript = '''
+                // this next semicolon is ignored
+                window.alert("some embedded javascript...");
+            // this next semicolon is not ignored!
+            ''';
+            """
+        assertSingleViolation SOURCE, 6, '            \'\'\';'
+    }
+
+    void testSemiColonInGStringString() {
+        final SOURCE = '''
+            def var = 'yo yo yo'
+            def javascript = """
+                // this next semicolon is ignored
+                window.alert($var);
+            // this next semicolon is not ignored!
+            """;
+            '''
+        assertSingleViolation SOURCE, 7, '            """;'
+    }
+
     void testSuppressWarningsOnImport() {
         final SOURCE = '''
 
@@ -79,7 +107,6 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    @SuppressWarnings('UnnecessarySemicolon')
     void testSuppressWarningsOnClass() {
         final SOURCE = '''
 

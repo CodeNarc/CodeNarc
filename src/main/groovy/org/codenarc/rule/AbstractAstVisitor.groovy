@@ -60,10 +60,8 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
         if (visited.contains(expression)) {
             return false
         }
-        else {
-            visited << expression
-            return true
-        }
+        visited << expression
+        true
     }
 
     /**
@@ -124,13 +122,12 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
             if (rawLine.size() > lastAnnotation.lastColumnNumber) {
                 // no it is not
                 return lastAnnotation.lastLineNumber
-            } else {
-                // yes it is the last thing, return the next thing
-                return lastAnnotation.lastLineNumber + 1
             }
-        } else {
-            node.lineNumber
+            // yes it is the last thing, return the next thing
+            return lastAnnotation.lastLineNumber + 1
         }
+
+        node.lineNumber
     }
 
     /**

@@ -112,9 +112,7 @@ abstract class AbstractReportWriter implements ReportWriter {
             def binding = [rule:rule]
             return template.make(binding)
         }
-        else {
-            return rawMessageText
-        }
+        rawMessageText
     }
 
     private String getHtmlRuleDescription(Rule rule) {

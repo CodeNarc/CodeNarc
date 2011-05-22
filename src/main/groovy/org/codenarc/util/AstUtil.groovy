@@ -551,9 +551,8 @@ class AstUtil {
         methodCall.arguments?.expressions?.collect {
             if (it instanceof VariableExpression) {
                 return it.name
-            } else {
-                return null
             }
+            return null
         }
     }
 

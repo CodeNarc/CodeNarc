@@ -23,6 +23,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice. 
@@ -97,32 +98,32 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
 
-        if (ignoreViolations) {
-            return
-        }
-
-        if (suppressionIsPresent(node)) {
-            // remove all violations that are in range
-            def start = node.lineNumber
-            def end = node.lastLineNumber
-            rule.temporaryViolations.removeAll { Violation v ->
-                v.lineNumber >= start && v.lineNumber <= end
-            }
+        if (!ignoreViolations && suppressionIsPresent(node)) {
+            removeViolationsInRange(node.lineNumber, node.lastLineNumber)
         } 
     }
 
     @Override
     void visitMethodEx(MethodNode node) {
-        if (ignoreViolations) {
-            return
-        }
-        if (suppressionIsPresent(node)) {
-            // remove all violations that are in range
-            def start = node.lineNumber
-            def end = node.lastLineNumber
-            rule.temporaryViolations.removeAll { Violation v ->
-                v.lineNumber >= start && v.lineNumber <= end
-            }
+        if (!ignoreViolations && suppressionIsPresent(node)) {
+            removeViolationsInRange(node.lineNumber, node.lastLineNumber)
         } 
+    }
+
+    @Override
+    void visitConstantExpression(ConstantExpression node) {
+
+        // search inside multiline strings
+        if (node.value instanceof String && node.lineNumber != node.lastLineNumber) {
+            removeViolationsInRange(node.lineNumber, node.lastLineNumber - 1)
+        }
+
+        super.visitConstantExpression(node)
+    }
+
+    private removeViolationsInRange(start, end) {
+        rule.temporaryViolations.removeAll { Violation v ->
+            v.lineNumber >= start && v.lineNumber <= end
+        }
     }
 }

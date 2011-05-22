@@ -59,6 +59,7 @@ BUG FIXES and NEW FEATURES
 - #3295887 - Fix AddEmptyString duplicate violations.
 - #3299713 - Fix ImportFromSamePackage, UnnecessaryGroovyImport: Star import.
 - #3300225 - Fix UnnecessaryGroovyImport: Check static imports.
+- #3290324 - Fix UnnecessarySemicolon: the contents of multiline strings and GStrings are no longer checked, just the strings themselves. For example, embedding JavaScript or Java within a Multi-line String would previously trigger the violation.  
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 
 THANKS

@@ -151,8 +151,6 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
             def lastPeriod = typeName.lastIndexOf('.')
             return typeName[0..lastPeriod-1]
         }
-        else {
-            return null
-        }
+        null
     }
 }
