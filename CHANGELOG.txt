@@ -24,6 +24,7 @@ NEW RULES
 - PublicFinalizeMethod rule (security) - Creates a violation when the program violates secure coding principles by declaring a finalize() method public.
 - NonFinalPublicField rule (security) - Finds code that violates secure coding principles for mobile code by declaring a member variable public but not final.
 - UnnecessaryEqualityWithNull rule (unnecessary) - The expression object.equals(null) is always false and is unnecessary.
+- UnnecessaryElseStatement rule (unnecessary) - When an if statement block ends with a return statement the else is unnecessary. The logic in the else branch can be run without being in a new scope.
 - SerialPersistentFields rule (basic) - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
 - StaticConnection rule (security) - Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.
 - UnnecessaryPackageReference (unnecessary) - Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String, java.util.Map and groovy.lang.Closure.
@@ -34,6 +35,7 @@ NEW RULES
 - SwallowThreadDeath rule (exceptions) - Detects code that catches java.lang.ThreadDeath without rethrowing it
 - MisorderedStaticImports rule (imports) - Static imports should never be declared after nonstatic imports.
 - ConfusingMethodName (naming) - Existing rule updated to analyze fields and field names as well as just methods.
+- PublicInstanceField rule (design) - Using public fields is considered to be a bad design. Use properties instead.
 
 
 BUG FIXES and NEW FEATURES
@@ -60,7 +62,7 @@ BUG FIXES and NEW FEATURES
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 
 THANKS
-  Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop rule.
+  Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop, UnnecessaryElse, and PublicInstanceField rules.
   Thank you to Jan Ahrens and Stefan Armbruster for the SpockIgnoreRestUsed rule.
   Thank you to Rob Fletcher and Klaus Baumecker for the SwallowThreadDeath rule.
   Thank you to Erik Pragt and Marcin Erdmann for the MisorderedStaticImports rule.

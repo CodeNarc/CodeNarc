@@ -181,3 +181,16 @@ Design Rules  ("<rulesets/design.xml>")
   subclassed, and there is therefore no point in having a member with <<<protected>>> visibility. Either the class should
   not be <<<final>>> or the member should be private or protected.
 
+
+* PublicInstanceField Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+  Using public fields is considered to be a bad design. Use properties instead.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class Person {
+        public String name
+    }
+-------------------------------------------------------------------------------
