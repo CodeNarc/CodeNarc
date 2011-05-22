@@ -18,6 +18,7 @@ package org.codenarc.rule.logging
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.InnerClassNode
 
 /**
  * Rule that checks for instantiating a logger for a class other than the current class. Supports logger
@@ -50,11 +51,16 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
     void visitFieldEx(FieldNode fieldNode) {
         def expression = fieldNode.getInitialExpression()
         if (LogUtil.isMatchingLoggerDefinition(expression)) {
-            def classNameWithoutPackage = fieldNode.declaringClass.nameWithoutPackage
             def firstArg = expression.arguments?.expressions?.get(0)
             def argText = firstArg.text
-            if (isCapitalized(argText) && !isEqualToCurrentClassOrClassName(argText, classNameWithoutPackage)) {
-                addViolation(fieldNode, "Logger is defined in $classNameWithoutPackage but initialized with $argText")
+            final CLASSNAME_WITHOUT_PACKAGE
+            if (fieldNode.owner instanceof InnerClassNode) {
+                CLASSNAME_WITHOUT_PACKAGE = fieldNode.owner.nameWithoutPackage - "$fieldNode.owner.outerClass.nameWithoutPackage\$"
+            } else {
+                CLASSNAME_WITHOUT_PACKAGE = fieldNode.declaringClass.nameWithoutPackage
+            }
+            if (isCapitalized(argText) && !isEqualToCurrentClassOrClassName(argText, CLASSNAME_WITHOUT_PACKAGE)) {
+                addViolation(fieldNode, "Logger is defined in $CLASSNAME_WITHOUT_PACKAGE but initialized with $argText")
             }
         }
         super.visitFieldEx(fieldNode)

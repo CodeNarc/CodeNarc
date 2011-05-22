@@ -105,6 +105,17 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testInnerClasses() {
+        final SOURCE = '''
+        class Outer {
+            private class InnerRunnable implements Runnable {
+                final Logger LOGGER = LoggerFactory.getLogger(InnerRunnable.class)
+            }
+        }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new ClassNameRule()
     }

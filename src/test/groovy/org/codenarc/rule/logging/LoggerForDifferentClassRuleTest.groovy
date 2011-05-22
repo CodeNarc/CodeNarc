@@ -258,6 +258,28 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testInnerClasses() {
+        final SOURCE = '''
+        class Outer {
+            private class InnerRunnable implements Runnable {
+                final Logger LOGGER = LoggerFactory.getLogger(InnerRunnable.class)
+            }
+        }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testInnerClassViolation() {
+        final SOURCE = '''
+        class Outer {
+            private class InnerRunnable implements Runnable {
+                final Logger LOGGER = LoggerFactory.getLogger(Outer)
+            }
+        }
+        '''
+        assertSingleViolation(SOURCE, 4, 'LoggerFactory.getLogger(Outer)', 'Logger is defined in InnerRunnable but initialized with Outer')
+    }
+
     protected Rule createRule() {
         new LoggerForDifferentClassRule()
     }
