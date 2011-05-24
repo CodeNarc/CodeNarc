@@ -689,6 +689,15 @@ class AstUtil {
         false
     }
 
+    static boolean isNullCheck(expression) {
+        if (expression instanceof BinaryExpression && expression.operation.text == '==') {
+            if (AstUtil.isNull(expression.leftExpression) || AstUtil.isNull(expression.rightExpression)) {
+                return true
+            }
+        }
+        false
+    }
+
     static String getNullComparisonTarget(expression) {
         if (expression instanceof BinaryExpression && expression.operation.text == '!=') {
             if (AstUtil.isNull(expression.leftExpression)) {
@@ -805,5 +814,9 @@ class AstUtil {
             return Byte
         }
         null
+    }
+
+    static boolean isThisReference(Expression expression) {
+        expression instanceof VariableExpression && expression.variable == 'this'
     }
 }

@@ -36,7 +36,7 @@ NEW RULES
 - MisorderedStaticImports rule (imports) - Static imports should never be declared after nonstatic imports.
 - ConfusingMethodName (naming) - Existing rule updated to analyze fields and field names as well as just methods.
 - PublicInstanceField rule (design) - Using public fields is considered to be a bad design. Use properties instead.
-
+- UnnecessaryNullCheck (unnecessary) - Updated rule to flag null and not-null checks against the this reference. The this reference can never be null. 
 
 BUG FIXES and NEW FEATURES
 - Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime. 

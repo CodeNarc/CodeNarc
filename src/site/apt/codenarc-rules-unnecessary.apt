@@ -538,7 +538,8 @@ def Object method5() { return 4 }
   <Since CodeNarc 0.12>
 
   Groovy contains the safe dereference operator. It can be used in boolean conditional statements to safely
-  replace explicit <<<x == null>>> tests.
+  replace explicit <<<x == null>>> tests. Also, testing the 'this' or 'super' reference for null equality is
+  pointless and can be removed. 
 
   Examples of violations:
 
@@ -549,6 +550,17 @@ def Object method5() { return 4 }
 
     // this is pointless and won't avoid NullPointerException
     if (obj.method() && obj != null ) { }
+
+    if (this == null) { }
+    if (null == this) { }
+    if (this != null) { }
+    if (null != this) { }
+
+    if (super == null) { }
+    if (null == super) { }
+    if (super != null) { }
+    if (null != super) { }
+
 -------------------------------------------------------------------------------
 
   Examples of acceptable code:

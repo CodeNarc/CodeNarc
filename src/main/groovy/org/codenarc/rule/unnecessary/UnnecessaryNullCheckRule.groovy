@@ -18,11 +18,7 @@ package org.codenarc.rule.unnecessary
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Groovy contains the safe dereference operator, which can be used in boolean conditional statements to safely
@@ -62,9 +58,57 @@ class UnnecessaryNullCheckAstVisitor extends AbstractAstVisitor {
                         addViolation(expression, "The expression $expression.text can be simplified to ($suggestion)")
                     }
                 }
+            } else if (isNotNullCheckAgainstThisReference(exp)) {
+                addViolation(expression, 'Testing the this reference for not null will always return true')
+            } else if (isNullCheckAgainstThisReference(exp)) {
+                addViolation(expression, 'Testing the this reference for null will always return false')
+            } else if (isNotNullCheckAgainstSuperReference(exp)) {
+                addViolation(expression, 'Testing the super reference for not null will always return true')
+            } else if (isNullCheckAgainstSuperReference(exp)) {
+                addViolation(expression, 'Testing the super reference for null will always return false')
             }
             super.visitBooleanExpression(expression)
         }
+    }
+
+    private static boolean isSuperReference(Expression expression) {
+        expression instanceof VariableExpression && expression.variable == 'super'
+    }
+
+    private static boolean isNotNullCheckAgainstThisReference(Expression exp) {
+        if (exp instanceof BinaryExpression && AstUtil.isNotNullCheck(exp)) {
+            if (AstUtil.isThisReference(exp.leftExpression) || AstUtil.isThisReference(exp.rightExpression)) {
+                return true
+            } 
+        }
+        false
+    }
+
+    private static boolean isNotNullCheckAgainstSuperReference(Expression exp) {
+        if (exp instanceof BinaryExpression && AstUtil.isNotNullCheck(exp)) {
+            if (isSuperReference(exp.leftExpression) || isSuperReference(exp.rightExpression)) {
+                return true
+            }
+        }
+        false
+    }
+
+    private static boolean isNullCheckAgainstThisReference(Expression exp) {
+        if (exp instanceof BinaryExpression && AstUtil.isNullCheck(exp)) {
+            if (AstUtil.isThisReference(exp.leftExpression) || AstUtil.isThisReference(exp.rightExpression)) {
+                return true
+            }
+        }
+        false
+    }
+
+    private static boolean isNullCheckAgainstSuperReference(Expression exp) {
+        if (exp instanceof BinaryExpression && AstUtil.isNullCheck(exp)) {
+            if (isSuperReference(exp.leftExpression) || isSuperReference(exp.rightExpression)) {
+                return true
+            }
+        }
+        false
     }
 
     private static boolean isPropertyInvocation(expression, String targetName) {
