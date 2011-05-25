@@ -34,7 +34,7 @@ class SiteDocumentationTest extends GroovyTestCase {
             def violations = new XmlSlurper().parse(ruleset).rule.collect {
                 it.@class.text()
             }.collect { String className ->
-                def ruleInstance = Class.forName(className).newInstance()
+                def ruleInstance = this.class.getClassLoader().loadClass(className).newInstance()
                 ruleInstance.name
             }.collect { ruleName ->
                 documentation.contains(ruleName) ? null : ruleName

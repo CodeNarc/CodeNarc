@@ -77,4 +77,5 @@
     <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
     <rule class='org.codenarc.rule.basic.SerialPersistentFieldsRule'/>
     <rule class='org.codenarc.rule.basic.ForLoopShouldBeWhileLoopRule'/>
+    <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
 </ruleset>

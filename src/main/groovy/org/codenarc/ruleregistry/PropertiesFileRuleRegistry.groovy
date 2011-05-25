@@ -45,7 +45,7 @@ class PropertiesFileRuleRegistry implements RuleRegistry {
      */
     Class getRuleClass(String ruleName) {
         String className = properties[ruleName]
-        return className ? Class.forName(className) : null
+        return className ? PropertiesFileRuleRegistry.getClassLoader().loadClass(className) : null
     }
 
     private void loadRules() {
