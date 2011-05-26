@@ -52,6 +52,15 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Workaround: See http://jira.codehaus.org/browse/MCOBERTURA-69 -->
+        <dependency>
+             <groupId>net.sourceforge.cobertura</groupId>
+             <artifactId>cobertura</artifactId>
+             <version>1.9</version>
+             <optional>true</optional>
+         </dependency>
+
     </dependencies>
 
     <distributionManagement>
