@@ -27,7 +27,7 @@ import org.codenarc.rule.Rule
 class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
-        assert rule.priority == 5
+        assert rule.priority == 2
         assert rule.name == 'PublicInstanceField'
     }
 

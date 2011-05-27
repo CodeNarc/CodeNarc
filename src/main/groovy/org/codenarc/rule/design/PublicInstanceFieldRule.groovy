@@ -27,7 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class PublicInstanceFieldRule extends AbstractAstVisitorRule {
     String name = 'PublicInstanceField'
-    int priority = 5
+    int priority = 2
     Class astVisitorClass = PublicInstanceFieldAstVisitor
 }
 
