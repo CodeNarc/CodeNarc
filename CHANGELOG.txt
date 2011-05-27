@@ -62,6 +62,7 @@ BUG FIXES and NEW FEATURES
 - #3300225 - Fix UnnecessaryGroovyImport: Check static imports.
 - #3290324 - Fix UnnecessarySemicolon: the contents of multiline strings and GStrings are no longer checked, just the strings themselves. For example, embedding JavaScript or Java within a Multi-line String would previously trigger the violation.  
 - #3305896 - Fix LoggerForDifferentClass: The rule now correctly handles inner classes (that are not static)
+- #3305019 - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable. 
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 
 THANKS

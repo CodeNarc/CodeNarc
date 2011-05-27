@@ -58,6 +58,36 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(MyException e)')
     }
 
+    void testApplyTo_NoViolations_IfParameterNameContainsIgnore() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    try {
+                    } catch(MyException ignore) {
+                    }
+
+                    try {
+                    } catch(MyException ignored) {
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_Violation_IfThereIsNoParameterName() {
+        final SOURCE = '''
+            class MyClass {
+                def myClosure = {
+                    try {
+                    } catch(MyException) {
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 5, 'catch(MyException) {')
+    }
+
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

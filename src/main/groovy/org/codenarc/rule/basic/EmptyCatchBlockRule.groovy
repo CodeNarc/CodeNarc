@@ -30,14 +30,22 @@ class EmptyCatchBlockRule extends AbstractAstVisitorRule {
     String name = 'EmptyCatchBlock'
     int priority = 2
     Class astVisitorClass = EmptyCatchBlockAstVisitor
+    String ignoreRegex = 'ignore|ignored'
 }
 
-class EmptyCatchBlockAstVisitor extends AbstractAstVisitor  {
+class EmptyCatchBlockAstVisitor extends AbstractAstVisitor {
     void visitCatchStatement(CatchStatement catchStatement) {
-        if (isFirstVisit(catchStatement) && AstUtil.isEmptyBlock(catchStatement.code)) {
+        if (isFirstVisit(catchStatement) && isExceptionIgnored(catchStatement)) {
             addViolation(catchStatement, 'The catch block is empty')
         }
         super.visitCatchStatement(catchStatement)
     }
 
+    private isExceptionIgnored(catchStatement) {
+        AstUtil.isEmptyBlock(catchStatement.code) && !doesContainIgnoreWord(catchStatement.variable?.name)
+    }
+
+    private doesContainIgnoreWord(String name) {
+        name ==~ rule.ignoreRegex
+    }
 }
