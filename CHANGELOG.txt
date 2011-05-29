@@ -4,7 +4,7 @@ http://www.codenarc.org
 
 Changes in version 0.14 (May 2011)
 -------------------------------------------
-NEW RULES
+NEW AND UPDATED RULES
 - DuplicateMapKey rule (basic) - A map literal is created with duplicated key. The map entry will be overwritten.
 - DuplicateSetValue rule (basic) - A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
 - EqualsOverloaded rule (basic) - The class has an equals method, but the parameter of the method is not of type Object. It is not overriding equals but instead overloading it.
@@ -39,6 +39,7 @@ NEW RULES
 - UnnecessaryNullCheck (unnecessary) - Updated rule to flag null and not-null checks against the this reference. The this reference can never be null. 
 - ClassForName rule (basic) - Using Class.forName(...) is a common way to add dynamic behavior to a system. However, using this method can cause resource leaks because the classes can be pinned in memory for long periods of time.
 - StatelessSingleton rule (design) - Rule finds occurrences of the Singleton pattern where the object has no state (mutable or otherwise). There is no point in creating a stateless Singleton, just make a new instance with the new keyword instead.
+- InconsistentPropertySynchronization rule (concurrency) - The rule is a little smarter now and flags code that defines a synchronized getter without any setter and vice versa. Those methods will be generated in unsynchronized from by the Groovy compiler later.
 
 BUG FIXES and NEW FEATURES
 - Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime. 

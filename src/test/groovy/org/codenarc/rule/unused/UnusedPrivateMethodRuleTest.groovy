@@ -402,6 +402,10 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testStackOverflow() {
+        final SOURCE = ' Map map = ["a" : 1, "b": 2, "$c": 3, "b": 4 ] '
+        assertNoViolations(SOURCE)
+    }
     protected Rule createRule() {
         new UnusedPrivateMethodRule()
     }

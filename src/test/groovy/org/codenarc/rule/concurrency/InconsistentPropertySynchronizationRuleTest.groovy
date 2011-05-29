@@ -149,6 +149,35 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The setter method setParent is synchronized but the getter method isParent is not')
     }
 
+    void testSyncedSetterMissingGetter() {
+        final SOURCE = '''
+            class Person {
+                String name
+                List addresses
+
+                synchronized void setAddresses(List addresses) {
+                    this.addresses.clear()
+                    this.addresses.addAll(addresses)
+                }
+            }'''
+        assertSingleViolation(SOURCE, 6, 'synchronized void setAddresses',
+                'The setter method setAddresses is synchronized but the getter method [getAddresses, isAddresses] is not')
+    }
+
+    void testSyncedGetterMissingSetter() {
+        final SOURCE = '''
+            class Person {
+                String name
+                List addresses
+
+                synchronized List getAddresses() {
+                    addresses
+                }
+            }'''
+        assertSingleViolation(SOURCE, 6, 'synchronized List getAddresses',
+                'The getter method getAddresses is synchronized but the setter method setAddresses is not')
+    }
+
     protected Rule createRule() {
         new InconsistentPropertySynchronizationRule()
     }
