@@ -31,7 +31,7 @@ import org.codenarc.util.AstUtil
  */
 class ForLoopShouldBeWhileLoopRule extends AbstractAstVisitorRule {
     String name = 'ForLoopShouldBeWhileLoop'
-    int priority = 5
+    int priority = 3
     Class astVisitorClass = ForLoopShouldBeWhileLoopAstVisitor
 }
 

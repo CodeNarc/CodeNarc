@@ -28,7 +28,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class StatelessSingletonRule extends AbstractAstVisitorRule {
     String name = 'StatelessSingleton'
-    int priority = 5
+    int priority = 2
     Class astVisitorClass = StatelessSingletonAstVisitor
     String instanceRegex = 'instance|_instance'
 }

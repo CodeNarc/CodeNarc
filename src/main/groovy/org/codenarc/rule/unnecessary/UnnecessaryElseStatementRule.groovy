@@ -30,7 +30,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class UnnecessaryElseStatementRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryElseStatement'
-    int priority = 5
+    int priority = 3
     Class astVisitorClass = UnnecessaryElseStatementAstVisitor
 }
 

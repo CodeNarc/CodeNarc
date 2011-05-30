@@ -27,7 +27,7 @@ import org.codenarc.rule.Rule
 class StatelessSingletonRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
-        assert rule.priority == 5
+        assert rule.priority == 2
         assert rule.name == 'StatelessSingleton'
     }
 

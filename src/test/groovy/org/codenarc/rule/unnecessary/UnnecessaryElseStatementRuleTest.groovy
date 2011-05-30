@@ -27,7 +27,7 @@ import org.codenarc.rule.Rule
 class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
-        assert rule.priority == 5
+        assert rule.priority == 3
         assert rule.name == 'UnnecessaryElseStatement'
     }
 
