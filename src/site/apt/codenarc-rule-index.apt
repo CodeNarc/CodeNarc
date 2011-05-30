@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 232 rules.
+  <<CodeNarc>> includes 240 rules.
 
     
     
@@ -23,7 +23,11 @@ Rule Index
     
     * BrokenOddnessCheck
     
+    * ClassForName
+    
     * CloneableWithoutClone
+    
+    * ClosureAsLastMethodParameterInBrackets
     
     * CompareToWithoutComparable
     
@@ -234,6 +238,10 @@ Rule Index
     
     * ImplementationAsType
     
+    * PublicInstanceField
+    
+    * StatelessSingleton
+    
     
     
     
@@ -271,6 +279,8 @@ Rule Index
     * MissingNewInThrowStatement
     
     * ReturnNullFromCatchBlock
+    
+    * SwallowThreadDeath
     
     * ThrowError
     
@@ -321,9 +331,18 @@ Rule Index
     
     * ImportFromSunPackages
     
+    * MisorderedStaticImports
+    
     * UnnecessaryGroovyImport
     
     * UnusedImport
+    
+    
+    
+    
+* {{{codenarc-rules-jdbc.html}Jdbc}}
+    
+    * DirectConnectionManagement
     
     
     
@@ -353,6 +372,8 @@ Rule Index
     * JUnitUnnecessarySetUp
     
     * JUnitUnnecessaryTearDown
+    
+    * SpockIgnoreRestUsed
     
     * UnnecessaryFail
     
@@ -421,8 +442,6 @@ Rule Index
     
 * {{{codenarc-rules-security.html}Security}}
     
-    * DirectConnectionManagement
-    
     * FileCreateTempFile
     
     * InsecureRandom
@@ -488,6 +507,8 @@ Rule Index
     * UnnecessaryDefInMethodDeclaration
     
     * UnnecessaryDoubleInstantiation
+    
+    * UnnecessaryElseStatement
     
     * UnnecessaryEqualityWithNull
     

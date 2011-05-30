@@ -26,10 +26,12 @@ ruleset {
     CatchRuntimeException
     CatchThrowable
     ChainedTest
+    ClassForName
     ClassName
     ClassSize
     CloneableWithoutClone
     CloseWithoutCloseable
+    ClosureAsLastMethodParameterInBrackets
     CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
@@ -131,6 +133,7 @@ ruleset {
     MethodCount
     MethodName
     MethodSize
+    MisorderedStaticImports
     MissingNewInThrowStatement
     MultipleLoggers
     NestedBlockDepth
@@ -145,6 +148,7 @@ ruleset {
     Println
     PropertyName
     PublicFinalizeMethod
+    PublicInstanceField
     RemoveAllOnSelf
     RequiredRegex
     RequiredString
@@ -156,12 +160,15 @@ ruleset {
     SerialVersionUID
     SerializableClassMustDefineSerialVersionUID
     SimpleDateFormatMissingLocale
+    SpockIgnoreRestUsed
     StatelessClass
+    StatelessSingleton
     StaticCalendarField
     StaticConnection
     StaticDateFormatField
     StaticMatcherField
     StaticSimpleDateFormatField
+    SwallowThreadDeath
     SynchronizedMethod
     SynchronizedOnBoxedPrimitive
     SynchronizedOnGetClass
@@ -194,6 +201,7 @@ ruleset {
     UnnecessaryConstructor
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDoubleInstantiation
+    UnnecessaryElseStatement
     UnnecessaryEqualityWithNull
     UnnecessaryFail
     UnnecessaryFinalOnPrivateMethod

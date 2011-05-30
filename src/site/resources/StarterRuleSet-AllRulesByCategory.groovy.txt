@@ -13,7 +13,9 @@ ruleset {
     BooleanGetBoolean
     BooleanMethodReturnsNull
     BrokenOddnessCheck
+    ClassForName
     CloneableWithoutClone
+    ClosureAsLastMethodParameterInBrackets
     CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
@@ -117,6 +119,8 @@ ruleset {
     EmptyMethodInAbstractClass
     FinalClassWithProtectedMember
     ImplementationAsType
+    PublicInstanceField
+    StatelessSingleton
     
     // rulesets/dry.xml
     DuplicateNumberLiteral
@@ -135,6 +139,7 @@ ruleset {
     ExceptionExtendsError
     MissingNewInThrowStatement
     ReturnNullFromCatchBlock
+    SwallowThreadDeath
     ThrowError
     ThrowException
     ThrowNullPointerException
@@ -158,8 +163,12 @@ ruleset {
     DuplicateImport
     ImportFromSamePackage
     ImportFromSunPackages
+    MisorderedStaticImports
     UnnecessaryGroovyImport
     UnusedImport
+    
+    // rulesets/jdbc.xml
+    DirectConnectionManagement
     
     // rulesets/junit.xml
     ChainedTest
@@ -174,6 +183,7 @@ ruleset {
     JUnitTestMethodWithoutAssert
     JUnitUnnecessarySetUp
     JUnitUnnecessaryTearDown
+    SpockIgnoreRestUsed
     UnnecessaryFail
     UseAssertEqualsInsteadOfAssertTrue
     UseAssertFalseInsteadOfNegation
@@ -206,7 +216,6 @@ ruleset {
     VariableName
     
     // rulesets/security.xml
-    DirectConnectionManagement
     FileCreateTempFile
     InsecureRandom
     JavaIoPackageAccess
@@ -239,6 +248,7 @@ ruleset {
     UnnecessaryConstructor
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDoubleInstantiation
+    UnnecessaryElseStatement
     UnnecessaryEqualityWithNull
     UnnecessaryFinalOnPrivateMethod
     UnnecessaryFloatInstantiation

@@ -71,6 +71,7 @@
             <item name="Generic Rules" href="/codenarc-rules-generic.html"/>
             <item name="Grails Rules" href="/codenarc-rules-grails.html"/>
             <item name="Imports Rules" href="/codenarc-rules-imports.html"/>
+            <item name="JDBC Rules" href="/codenarc-rules-jdbc.html"/>
             <item name="JUnit Rules" href="/codenarc-rules-junit.html"/>
             <item name="Logging Rules" href="/codenarc-rules-logging.html"/>
             <item name="Naming Rules" href="/codenarc-rules-naming.html"/>

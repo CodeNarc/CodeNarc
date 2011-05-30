@@ -33,6 +33,7 @@ class RuleSets {
         'rulesets/generic.xml',
         'rulesets/grails.xml',
         'rulesets/imports.xml',
+        'rulesets/jdbc.xml',
         'rulesets/junit.xml',
         'rulesets/logging.xml',
         'rulesets/naming.xml',
