@@ -1,12 +1,12 @@
 /*
- * Copyright 2009 the original author or authors.
- * 
+ * Copyright 2011 the original author or authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,26 +31,36 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnnecessaryGroovyImport'
     }
 
-    void testApplyTo_ImportJavaMath() {
+    /*
+     * no violations
+     */
+
+    void testApplyTo_NoViolations() {
         final SOURCE = '''
-            import java.math.BigDecimal
+            import java.text.SimpleDateFormat
             import com.xxx.MyClass
-            import java.math.RoundingMode
-            import java.math.BigInteger
+            import MyClassFromSamePackage
         '''
-        assertTwoViolations(SOURCE, 2, 'java.math.BigDecimal', 5, 'java.math.BigInteger')
+        assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_ImportGroovyLang() {
+    void testApplyTo_StaticImport() {
         final SOURCE = '''
-            import groovy.lang.MetaClass
-            import com.xxx.MyClass
-            import groovy.lang.GString
+            import static java.math.BigDecimal.*
+            import static java.math.BigInteger.*
+
+            import static java.io.InputStream.*
+            import static java.lang.Integer.*
+            import static java.net.Socket.*
+            import static java.util.Map.*
+
+            import static groovy.lang.GString.*
+            import static groovy.util.Expando.*
         '''
-        assertTwoViolations(SOURCE, 2, 'groovy.lang.MetaClass', 4, 'groovy.lang.GString')
+        assertNoViolations(SOURCE)
     }
 
-    void testImportAliases() {
+    void testImportAliases_NoViolations() {
         final SOURCE = '''
             import groovy.lang.MetaClass as Foo
             import com.xxx.MyClass
@@ -59,13 +69,28 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_ImportGroovyUtil() {
+    /*
+     * violations - misc.
+     */
+
+    void testApplyTo_ImportStar_Violations() {
         final SOURCE = '''
-            import groovy.util.Eval
-            import com.xxx.MyClass
-            import groovy.util.Expando
+            import java.io.*
         '''
-        assertTwoViolations(SOURCE, 2, 'groovy.util.Eval', 4, 'groovy.util.Expando')
+        assertSingleViolation(SOURCE, 2, 'import java.io.*')
+    }
+
+    /*
+     * violations - Java imports
+     */
+
+    void testApplyTo_ImportJavaIo() {
+        final SOURCE = '''
+            import com.xxx.MyClass
+            import java.io.InputStream
+            import java.io.OutputStream
+        '''
+        assertTwoViolations(SOURCE, 3, 'java.io.InputStream', 4, 'java.io.OutputStream')
     }
 
     void testApplyTo_ImportJavaLang() {
@@ -76,6 +101,16 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
             import java.lang.Integer
         '''
         assertTwoViolations(SOURCE, 2, 'java.lang.String', 5, 'java.lang.Integer')
+    }
+
+    void testApplyTo_ImportJavaMath() {
+        final SOURCE = '''
+            import java.math.BigDecimal
+            import com.xxx.MyClass
+            import java.math.RoundingMode
+            import java.math.BigInteger
+        '''
+        assertTwoViolations(SOURCE, 2, 'java.math.BigDecimal', 5, 'java.math.BigInteger')
     }
 
     void testApplyTo_ImportJavaNet() {
@@ -96,41 +131,29 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'java.util.List', 4, 'java.util.Map')
     }
 
-    void testApplyTo_ImportJavaIo() {
+    /*
+     * violations - Groovy imports
+     */
+
+    void testApplyTo_ImportGroovyLang() {
         final SOURCE = '''
+            import groovy.lang.MetaClass
             import com.xxx.MyClass
-            import java.io.InputStream
-            import java.io.OutputStream
+            import groovy.lang.GString
         '''
-        assertTwoViolations(SOURCE, 3, 'java.io.InputStream', 4, 'java.io.OutputStream')
+        assertTwoViolations(SOURCE, 2, 'groovy.lang.MetaClass', 4, 'groovy.lang.GString')
     }
 
-    void testApplyTo_ImportStar_Violations() {
+    void testApplyTo_ImportGroovyUtil() {
         final SOURCE = '''
-            import java.io.*
-        '''
-        assertSingleViolation(SOURCE, 2, 'import java.io.*')
-    }
-
-    void testApplyTo_StaticImport_Violations() {
-        final SOURCE = '''
-            import static java.io.DataInputStream.*
-            import static java.lang.Integer.MAX_VALUE
-        '''
-        assertTwoViolations(SOURCE, 2, 'import static java.io.DataInputStream.*', 3, 'import static java.lang.Integer.MAX_VALUE')
-    }
-
-    void testApplyTo_NoViolations() {
-        final SOURCE = '''
-            import java.text.SimpleDateFormat
+            import groovy.util.Eval
             import com.xxx.MyClass
-            import MyClassFromSamePackage
+            import groovy.util.Expando
         '''
-        assertNoViolations(SOURCE)
+        assertTwoViolations(SOURCE, 2, 'groovy.util.Eval', 4, 'groovy.util.Expando')
     }
 
     protected Rule createRule() {
         new UnnecessaryGroovyImportRule()
     }
-
 }

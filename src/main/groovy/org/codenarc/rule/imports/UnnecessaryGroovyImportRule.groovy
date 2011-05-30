@@ -21,9 +21,18 @@ import org.codenarc.util.AstUtil
 import org.codenarc.util.ImportUtil
 
 /**
- * Rule that checks for imports from any packages that are already automatically imported by Groovy
- * classes, including java.lang, java.net, java.util, java.io, java.net, groovy.lang and groovy.util,
- * as well as the classes java.math.BigDecimal and java.math.BigInteger
+ * Rule that checks for imports from any packages that are
+ * automatically imported by Groovy, including:
+ * <ul>
+ *   <li>java.io</li>
+ *   <li>java.lang</li>
+ *   <li>java.net</li>
+ *   <li>java.util</li>
+ *   <li>java.math.BigDecimal</li>
+ *   <li>java.math.BigInteger</li>
+ *   <li>groovy.lang</li>
+ *   <li>groovy.util</li>
+ * </ul>
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
@@ -33,12 +42,12 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
     int priority = 3
 
     void applyTo(SourceCode sourceCode, List violations) {
-        if (sourceCode.ast?.imports || sourceCode.ast?.starImports || sourceCode.ast?.staticImports || sourceCode.ast?.staticStarImports) {
+        if (sourceCode.ast?.imports || sourceCode.ast?.starImports) {
             ImportUtil.getImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importClassName = importNode.className
                 def importPackageName = ImportUtil.packageNameForImport(importNode)
 
-                if ((!importNode.alias || importNode.isStatic() || importClassName.endsWith(".$importNode.alias")) &&
+                if ((!importNode.alias || importClassName.endsWith(".$importNode.alias")) &&
                         (importPackageName in AstUtil.AUTO_IMPORTED_PACKAGES || importClassName in AstUtil.AUTO_IMPORTED_CLASSES)) {
                     violations.add(createViolationForImport(sourceCode, importNode))
                 }

@@ -66,6 +66,7 @@ BUG FIXES and NEW FEATURES
 - #3290324 - Fix UnnecessarySemicolon: the contents of multiline strings and GStrings are no longer checked, just the strings themselves. For example, embedding JavaScript or Java within a Multi-line String would previously trigger the violation.  
 - #3305896 - Fix LoggerForDifferentClass: The rule now correctly handles inner classes (that are not static)
 - #3305019 - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable. 
+- #3309062 - UnnecessaryGroovyImportRule handles static imports incorrectly
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 
 THANKS
@@ -75,6 +76,7 @@ THANKS
   Thank you to Erik Pragt for the MisorderedStaticImports rule.
   Thank you to Marcin Erdmann for the MisorderedStaticImports and ClosureAsLastMethodParameterInBracketsRule.
   Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
+  Thank you to René Scheibe for sending in a patch for the UnnecessaryGroovyImportRule rule.
 
 
 Changes in version 0.13 (February 2011)
