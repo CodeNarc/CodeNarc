@@ -925,8 +925,17 @@ class Object7 {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
-  This rule checks for explicit calls to the no-argument constructor of <<<HashMap>>>. In Groovy, it is best
-  to write <<<new HashMap() as [:]>>>, which creates the same object.
+  This rule checks for explicit calls to the no-argument constructor of <<<HashMap>>>. In Groovy, it is best to write
+  <<<new HashMap() as [:]>>>, which creates (mostly) the same object. <<<[:]>>> is technically a LinkedHashMap but it
+   is very rare that someone absolutely needs an instance of HashMap and not a subclass.
+
+
+* ExplicitLinkedHashMapInstantiation Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since in CodeNarc 0.14>
+
+  This rule checks for the explicit instantiation of a <<<LinkedHashMap>>> using the no-arg constructor. In Groovy, it is best to write
+  <<<new LinkedHashMap() as [:]>>>, which creates the same object.
 
 
 * ExplicitHashSetInstantiation Rule

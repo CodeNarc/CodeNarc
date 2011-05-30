@@ -59,8 +59,8 @@ class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-                2, 'def x = new ArrayList()',
-                5, 'def x = new ArrayList()')
+                2, 'def x = new ArrayList()', 'ArrayList objects are better instantiated using the form "[]"',
+                5, 'def x = new ArrayList()', 'ArrayList objects are better instantiated using the form "[]"')
     }
 
     void testInClassUsage() {

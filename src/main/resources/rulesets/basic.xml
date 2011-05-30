@@ -49,6 +49,7 @@
     <rule class='org.codenarc.rule.basic.ExplicitCallToEqualsMethodRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitArrayListInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitHashMapInstantiationRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitLinkedHashMapInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitHashSetInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitLinkedListInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.ExplicitStackInstantiationRule'/>

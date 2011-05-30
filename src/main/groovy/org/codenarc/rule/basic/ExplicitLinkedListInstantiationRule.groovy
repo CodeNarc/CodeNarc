@@ -30,8 +30,13 @@ class ExplicitLinkedListInstantiationRule extends AbstractAstVisitorRule {
     String name = 'ExplicitLinkedListInstantiation'
     int priority = 2
 
-        @Override
-        AstVisitor getAstVisitor() {
-            new ExplicitTypeInstantiationAstVisitor('LinkedList')
+    @Override
+    AstVisitor getAstVisitor() {
+        new ExplicitTypeInstantiationAstVisitor('LinkedList') {
+            @Override
+            String createErrorMessage() {
+                'LinkedList objects are better instantiated using the form "[] as Queue"'
+            }
         }
+    }
 }

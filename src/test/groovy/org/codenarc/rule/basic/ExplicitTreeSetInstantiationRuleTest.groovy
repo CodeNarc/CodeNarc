@@ -73,8 +73,8 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new TreeSet()',
-                4, 'def m(foo = new TreeSet())')
+                3, 'def x = new TreeSet()', 'TreeSet objects are better instantiated using the form "[] as SortedSet"',
+                4, 'def m(foo = new TreeSet())', 'TreeSet objects are better instantiated using the form "[] as SortedSet"')
     }
 
 

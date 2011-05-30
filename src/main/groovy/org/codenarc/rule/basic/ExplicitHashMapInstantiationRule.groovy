@@ -32,6 +32,11 @@ class ExplicitHashMapInstantiationRule extends AbstractAstVisitorRule {
 
     @Override
     AstVisitor getAstVisitor() {
-        new ExplicitTypeInstantiationAstVisitor('HashMap')
+        new ExplicitTypeInstantiationAstVisitor('HashMap') {
+            @Override
+            String createErrorMessage() {
+                'HashMap objects are normally instantiated using the form "[:]"'
+            }
+        }
     }
 }

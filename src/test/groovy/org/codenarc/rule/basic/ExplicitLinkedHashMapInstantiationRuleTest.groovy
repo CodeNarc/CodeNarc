@@ -19,31 +19,30 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ExplicitLinkedListInstantiationRule
+ * Tests for ExplicitLinkedHashMapInstantiationRule
  *
- * @author Hamlet D'Arcy
- * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @author René Scheibe
+ * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
+class ExplicitLinkedHashMapInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'ExplicitLinkedListInstantiation'
+        assert rule.name == 'ExplicitLinkedHashMapInstantiation'
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [] as Queue
+        	def x = [:]
             class MyClass {
-                def x = [] as Queue
-                def m(foo = [] as Queue) {
-                    def x = [] as Queue
-                    def y = new LinkedList() {   // anony inner class OK                    
+                def x = [:]
+                def m(foo = [:]) {
+                    def x = [:]
+                    def y = new LinkedHashMap() {   // anonymous inner class OK
                     }
-                    def m1 = new LinkedList(x)    // constructor with parameter is OK
-                    def m2 = new LinkedList(23)
-                    def m3 = new LinkedList([1,2,3])
+                    def m1 = new LinkedHashMap(x)   // constructor with parameter is OK
+                    def m2 = new LinkedHashMap(23)
+                    def m3 = new LinkedHashMap([a:1, b:2])
                 }
             }
         '''
@@ -52,32 +51,32 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new LinkedList()
+        	def x = new LinkedHashMap()
             class MyClass {
                 def m() {
-                    def x = new LinkedList()
+                    def x = new LinkedHashMap()
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                2, 'def x = new LinkedList()',
-                5, 'def x = new LinkedList()')
+                2, 'def x = new LinkedHashMap()', 'LinkedHashMap objects are better instantiated using the form "[:]"',
+                5, 'def x = new LinkedHashMap()', 'LinkedHashMap objects are better instantiated using the form "[:]"')
     }
 
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {
-                def x = new LinkedList()
-                def m(foo = new LinkedList()) {
+                def x = new LinkedHashMap()
+                def m(foo = new LinkedHashMap()) {
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new LinkedList()', 'LinkedList objects are better instantiated using the form "[] as Queue"',
-                4, 'def m(foo = new LinkedList())', 'LinkedList objects are better instantiated using the form "[] as Queue"')
+                3, 'def x = new LinkedHashMap()', 'LinkedHashMap objects are better instantiated using the form "[:]"',
+                4, 'def m(foo = new LinkedHashMap())', 'LinkedHashMap objects are better instantiated using the form "[:]"')
     }
 
     protected Rule createRule() {
-        new ExplicitLinkedListInstantiationRule()
+        new ExplicitLinkedHashMapInstantiationRule()
     }
 }

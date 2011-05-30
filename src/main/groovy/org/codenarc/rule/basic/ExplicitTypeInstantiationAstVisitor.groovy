@@ -25,19 +25,20 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class ExplicitTypeInstantiationAstVisitor extends AbstractAstVisitor {
+abstract class ExplicitTypeInstantiationAstVisitor extends AbstractAstVisitor {
 
     private String typeName
 
-    ExplicitTypeInstantiationAstVisitor(String typeName) {
+    protected ExplicitTypeInstantiationAstVisitor(String typeName) {
         this.typeName = typeName
     }
 
     def void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isFirstVisit(call) && call?.type?.name == typeName && call.arguments.expressions.empty) {
-            addViolation call, "$typeName objects are better instantiated using the form \"[] as $typeName\""
+            addViolation call, createErrorMessage()
         }
         super.visitConstructorCallExpression call
     }
 
+    abstract String createErrorMessage()
 }

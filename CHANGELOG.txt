@@ -5,6 +5,7 @@ http://www.codenarc.org
 Changes in version 0.14 (May 2011)
 -------------------------------------------
 NEW AND UPDATED RULES
+- ExplicitLinkedHashMapInstantiation rule (basic) - This rule checks for the explicit instantiation of a LinkedHashMap using the no-arg constructor. In Groovy, it is best to write "new LinkedHashMap()" as "[:]", which creates the same object.
 - DuplicateMapKey rule (basic) - A map literal is created with duplicated key. The map entry will be overwritten.
 - DuplicateSetValue rule (basic) - A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
 - EqualsOverloaded rule (basic) - The class has an equals method, but the parameter of the method is not of type Object. It is not overriding equals but instead overloading it.
@@ -67,7 +68,9 @@ BUG FIXES and NEW FEATURES
 - #3305896 - Fix LoggerForDifferentClass: The rule now correctly handles inner classes (that are not static)
 - #3305019 - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable. 
 - #3309062 - UnnecessaryGroovyImportRule handles static imports incorrectly
+-          - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.  
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
+- BREAKING CHANGE: The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 
 THANKS
   Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop, UnnecessaryElse, StatelessSingleton, PublicInstanceField, and EmptyCatchBlock rules.
@@ -76,8 +79,7 @@ THANKS
   Thank you to Erik Pragt for the MisorderedStaticImports rule.
   Thank you to Marcin Erdmann for the MisorderedStaticImports and ClosureAsLastMethodParameterInBracketsRule.
   Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
-  Thank you to René Scheibe for sending in a patch for the UnnecessaryGroovyImportRule rule.
-
+  Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule patches.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------

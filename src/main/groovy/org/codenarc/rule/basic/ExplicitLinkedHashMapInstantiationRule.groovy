@@ -19,23 +19,22 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 
 /**
- * This rule checks for the explicit instantiation of a Stack using the no-arg constructor.
- * In Groovy, it is best to write "new Stack()" as "[] as Stack", which creates the same object.
+ * This rule checks for the explicit instantiation of a LinkedHashMap using the no-arg constructor.
+ * In Groovy, it is best to write "new LinkedHashMap()" as "[:]", which creates the same object.
  *
- * @author Hamlet D'Arcy
- * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @author René Scheibe
+ * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ExplicitStackInstantiationRule extends AbstractAstVisitorRule {
-    String name = 'ExplicitStackInstantiation'
+class ExplicitLinkedHashMapInstantiationRule extends AbstractAstVisitorRule {
+    String name = 'ExplicitLinkedHashMapInstantiation'
     int priority = 2
 
     @Override
     AstVisitor getAstVisitor() {
-        new ExplicitTypeInstantiationAstVisitor('Stack') {
+        new ExplicitTypeInstantiationAstVisitor('LinkedHashMap') {
             @Override
             String createErrorMessage() {
-                'Stack objects are better instantiated using the form "[] as Stack"'
+                'LinkedHashMap objects are better instantiated using the form "[:]"'
             }
         }
     }

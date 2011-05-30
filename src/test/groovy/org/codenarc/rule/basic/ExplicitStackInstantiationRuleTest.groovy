@@ -73,8 +73,8 @@ class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new Stack()',
-                4, 'def m(foo = new Stack())')
+                3, 'def x = new Stack()', 'Stack objects are better instantiated using the form "[] as Stack"',
+                4, 'def m(foo = new Stack())', 'Stack objects are better instantiated using the form "[] as Stack"')
     }
 
     protected Rule createRule() {
