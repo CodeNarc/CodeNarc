@@ -44,8 +44,8 @@ NEW AND UPDATED RULES
 - ClosureAsLastMethodParameterInBrackets rule (basic) - If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.
 
 BUG FIXES and NEW FEATURES
-- Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime. 
-- #3290486 - AbstractClassWithoutAbstractMethod no longer flags marker interfaces as abstract classes that do not define a method. 
+- Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime.
+- #3290486 - AbstractClassWithoutAbstractMethod no longer flags marker interfaces as abstract classes that do not define a method.
 - #3202691 - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
 - #3206167 - VariableNameRule now has a violation message that states the name of the variable and the regex it did not match.
 - #3206667 - FieldName, VariableName, MethodName, ParameterName, UnusedVariable, PropertyName, and UnusedPrivateField violations message now contains the class name of the enclosing class. This helps you configure an exclude.
@@ -69,6 +69,8 @@ BUG FIXES and NEW FEATURES
 - #3305019 - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable. 
 - #3309062 - UnnecessaryGroovyImportRule handles static imports incorrectly
 -          - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.  
+- #3308930 - LoggerWithWrongModifiersRule now contains a parameter 'allowProtectedLogger' so that loggers can also be instantiated as 'protected final LOG = Logger.getLogger(this.class)'. Also, it has a 'allowNonStatic' logger property, that allows you to create a non static logger.
+- #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass(). 
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 - BREAKING CHANGE: The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 

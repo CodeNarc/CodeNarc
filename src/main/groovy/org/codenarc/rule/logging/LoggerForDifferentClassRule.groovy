@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.InnerClassNode
+import org.codehaus.groovy.ast.expr.Expression
 
 /**
  * Rule that checks for instantiating a logger for a class other than the current class. Supports logger
@@ -43,6 +44,7 @@ import org.codehaus.groovy.ast.InnerClassNode
 class LoggerForDifferentClassRule extends AbstractAstVisitorRule {
     String name = 'LoggerForDifferentClass'
     int priority = 2
+    boolean allowDerivedClasses = false
     Class astVisitorClass = LoggerForDifferentClassAstVisitor
 }
 
@@ -59,7 +61,9 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
             } else {
                 CLASSNAME_WITHOUT_PACKAGE = fieldNode.declaringClass.nameWithoutPackage
             }
-            if (isCapitalized(argText) && !isEqualToCurrentClassOrClassName(argText, CLASSNAME_WITHOUT_PACKAGE)) {
+            if (!rule.allowDerivedClasses && isCapitalized(argText) && !isEqualToCurrentClassOrClassName(argText, CLASSNAME_WITHOUT_PACKAGE)) {
+                addViolation(fieldNode, "Logger is defined in $CLASSNAME_WITHOUT_PACKAGE but initialized with $argText")
+            } else if (rule.allowDerivedClasses && !isLoggerForDerivedClass(fieldNode)) {
                 addViolation(fieldNode, "Logger is defined in $CLASSNAME_WITHOUT_PACKAGE but initialized with $argText")
             }
         }
@@ -72,6 +76,11 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
 
     private static boolean isEqualToCurrentClass(String argText, classNameWithoutPackage) {
         return (argText == classNameWithoutPackage) || (argText == classNameWithoutPackage + '.class')
+    }
+
+    private static boolean isLoggerForDerivedClass(FieldNode fieldNode) {
+        Expression methodArgument = fieldNode.getInitialValueExpression().arguments.expressions.first()
+        methodArgument.text in ['this.class', 'this.getClass()', 'getClass()']
     }
 
     private static boolean isEqualToCurrentClassName(String argText, classNameWithoutPackage) {

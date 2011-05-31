@@ -13,6 +13,8 @@ Logging Rules  ("<rulesets/logging.xml>")
   instantiations for <<Log4J>>, <<SLF4J>>, <<Logback>>, <<Apache Commons Logging>> and <<Java Logging API
   (java.util.logging)>>.
 
+  This rule contains a parameter <<<allowDerivedClasses>>>. When set, a logger may be created about this.getClass().
+
   Limitations:
 
   * Only checks Loggers instantiated within a class field or property (not variables or expressions within a method)
@@ -87,7 +89,13 @@ Logging Rules  ("<rulesets/logging.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
-  Logger objects should be declared private, static, and final. This rule find loggers that are not declared with these modifiers.
+  Logger objects should be declared private, static and final.
+
+  This rule has a property: <<<allowProtectedLogger>>>, which defaults to false. Set it to true if you believe
+  subclasses should have access to a Logger in a parent class and that Logger should be declared protected or public.
+
+  This rule has a property: <<<allowNonStaticLogger>>>, which defaults to false. Set it to true if you believe
+  a logger should be allowed to be non-static. 
 
 
 * MultipleLoggers Rule

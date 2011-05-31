@@ -31,46 +31,146 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'LoggerWithWrongModifiers'
     }
 
-    void testSuccessScenario() {
+    /*
+     * static logger
+     */
+
+    void testSuccessScenario_staticLogger() {
         final SOURCE = '''
             class MyClass {
                 private static final LOG = Logger.getLogger(MyClass)
             }
         '''
+
         assertNoViolations(SOURCE)
     }
 
-    void testNotPrivate() {
+    void testNotPrivate_staticLogger() {
         final SOURCE = '''
             class MyClass {
                 public static final LOG = Logger.getLogger(MyClass)
             }
         '''
+
         assertSingleViolation(SOURCE, 3,
-                'static final LOG = Logger.getLogger(MyClass)',
-                'The Logger field LOG should be private, static, and final')
+                'public static final LOG = Logger.getLogger(MyClass)',
+                'The Logger field LOG should be private, static and final')
     }
 
-    void testNotStatic() {
+    void testNotStatic_staticLogger() {
         final SOURCE = '''
             class MyClass {
                 private final LOG = Logger.getLogger(MyClass)
             }
         '''
+
         assertSingleViolation(SOURCE, 3,
                 'private final LOG = Logger.getLogger(MyClass)',
-                'The Logger field LOG should be private, static, and final')
+                'The Logger field LOG should be private, static and final')
     }
 
-    void testNotFinal() {
+    void testNotFinal_staticLogger() {
         final SOURCE = '''
             class MyClass {
                 private static LOG = Logger.getLogger(MyClass)
             }
         '''
+
         assertSingleViolation(SOURCE, 3,
                 'private static LOG = Logger.getLogger(MyClass)',
-                'The Logger field LOG should be private, static, and final')
+                'The Logger field LOG should be private, static and final')
+    }
+
+
+    void testSuccessScenario_derivedLogger() {
+        rule.allowProtectedLogger = true
+        rule.allowNonStaticLogger = true
+        
+        final SOURCE = '''
+            class MyClass1 {
+                protected final LOG = Logger.getLogger(this.class)
+            }
+
+            class MyClass2 {
+                protected final LOG = Logger.getLogger(this.getClass())
+            }
+
+            class MyClass3 {
+                protected final LOG = Logger.getLogger(getClass())
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    void testPublic_derivedLogger() {
+        rule.allowProtectedLogger = true
+        rule.allowNonStaticLogger = true
+
+        final SOURCE = '''
+            class MyClass {
+                public final LOG = Logger.getLogger(this.class)
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 3,
+                'public final LOG = Logger.getLogger(this.class)',
+                'The Logger field LOG should be private (or protected) and final')
+    }
+
+    void testPublic() {
+        rule.allowProtectedLogger = true
+
+        final SOURCE = '''
+            class MyClass {
+                public static final LOG = Logger.getLogger(this.class)
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 3,
+                'public static final LOG = Logger.getLogger(this.class)',
+                'The Logger field LOG should be private (or protected), static and final')
+    }
+
+    void testPrivate_derivedLogger() {
+        rule.allowProtectedLogger = true
+        rule.allowNonStaticLogger = true
+
+        final SOURCE = '''
+            class MyClass {
+                private final LOG = Logger.getLogger(this.class)
+                protected static final LOG2 = Logger.getLogger(this.class)
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    void testStatic_derivedLogger() {
+        rule.allowProtectedLogger = true
+        rule.allowNonStaticLogger = true
+
+        final SOURCE = '''
+            class MyClass {
+                protected static final LOG = Logger.getLogger(this.class)
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    void testNotFinal_derivedLogger() {
+        rule.allowProtectedLogger = true
+
+        final SOURCE = '''
+            class MyClass {
+                protected LOG = Logger.getLogger(this.class)
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 3,
+                'protected LOG = Logger.getLogger(this.class)',
+                'The Logger field LOG should be private (or protected), static and final')
     }
 
     protected Rule createRule() {

@@ -71,6 +71,28 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_Logger_SameClass_NoViolations_DerivedAllowed() {
+        rule.allowDerivedClasses = true
+        final SOURCE = '''
+            class MyClass {
+                private final LOG1 = Logger.getLogger(this.class)
+                private final LOG2 = Logger.getLogger(this.getClass())
+                private final LOG3 = Logger.getLogger(getClass())
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_Logger_SameClass_Violations_DerivedAllowed() {
+        rule.allowDerivedClasses = true
+        final SOURCE = '''
+            class MyClass {
+                private final LOG1 = Logger.getLogger(unknown)
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'private final LOG1 = Logger.getLogger(unknown)', 'Logger is defined in MyClass but initialized with unknown')
+    }
+
     void testApplyTo_Logger_This_NoViolations() {
         final SOURCE = '''
             class MyClass {
