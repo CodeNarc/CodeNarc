@@ -43,6 +43,7 @@ Security Rules  ("<rulesets/security.xml>")
 * JavaIoPackageAccess Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   This rule reports violations of the Enterprise JavaBeans specification by using the java.io package to access files or the file system.
 
   The Enterprise JavaBeans specification requires that every bean provider follow a set of programming guidelines designed to ensure that

@@ -33,7 +33,7 @@ class JavaIoPackageAccessRule extends AbstractAstVisitorRule {
     String name = 'JavaIoPackageAccess'
     int priority = 2
     Class astVisitorClass = JavaIoPackageAccessAstVisitor
-    String doNotApplyToFilesMatching = DEFAULT_TEST_CLASS_NAMES
+    String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
 class JavaIoPackageAccessAstVisitor extends AbstractAstVisitor {
