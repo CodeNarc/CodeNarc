@@ -9,6 +9,7 @@ Security Rules  ("<rulesets/security.xml>")
 * FileCreateTempFile Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library.
   It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
 
@@ -19,6 +20,7 @@ Security Rules  ("<rulesets/security.xml>")
 * InsecureRandom Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   Reports usages of <<<java.util.Random>>>, which can produce very predictable results. If two instances of Random are created with the same seed and sequence of method calls, they will generate the exact same results.
   Use <<<java.security.SecureRandom>>> instead, which provides a cryptographically strong random number generator. SecureRandom uses PRNG, which means they are using a deterministic algorithm to produce a pseudo-random number from a true random seed. SecureRandom produces non-deterministic output.
 
@@ -85,6 +87,7 @@ new RandomAccessFile(name, parent)
 * NonFinalPublicField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   Finds code that violates secure coding principles for mobile code by declaring a member variable public but not final.
 
   All public member variables in an Applet and in classes used by an Applet should be declared final to prevent an attacker
@@ -98,6 +101,7 @@ new RandomAccessFile(name, parent)
 * NonFinalSubclassOfSensitiveInterface Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended.
   Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that
   malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces
@@ -129,9 +133,11 @@ new RandomAccessFile(name, parent)
     }
 -------------------------------------------------------------------------------
 
+
 * PublicFinalizeMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   Creates a violation when the program violates secure coding principles by declaring a <<<finalize()>>> method public.
 
   A program should never call finalize explicitly, except to call super.finalize() inside an implementation of <<<finalize()>>>.
@@ -142,14 +148,15 @@ new RandomAccessFile(name, parent)
 
   References: 
 
-  Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 583
-  G. McGraw Securing Java. Chapter 7: Java Security Guidelines
+  * Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 583
 
+  * G. McGraw Securing Java. Chapter 7: Java Security Guidelines
 
 
 * ObjectFinalize Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   The finalize() method should only be called by the JVM after the object has been garbage collected.
 
   While the Java Language Specification allows an object's finalize() method to be called from outside the
@@ -160,26 +167,10 @@ new RandomAccessFile(name, parent)
   References: Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 586
 
 
-* StaticConnection Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
-  Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads,
-  which is unsafe and can lead to race conditions.
-
-  A transactional resource object such as database connection can only be associated with one transaction at a time. For this reason, a connection should not be
-  shared between threads and should not be stored in a static field. See Section 4.2.3 of the J2EE Specification for more details.
-
-  References:
-    Standards Mapping - Security Technical Implementation Guide Version 3 - (STIG 3) APP3630.1 CAT II
-    Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 362, CWE ID 567
-    Standards Mapping - SANS Top 25 2009 - (SANS 2009) Insecure Interaction - CWE ID 362
-    Standards Mapping - SANS Top 25 2010 - (SANS 2010) Insecure Interaction - CWE ID 362
-    Java 2 Platform Enterprise Edition Specification, v1.4 Sun Microsystems
-
-
 * SystemExit Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug
   code or code imported from a non-J2EE application.
 
@@ -193,6 +184,7 @@ new RandomAccessFile(name, parent)
 * UnsafeArrayDeclaration Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   Triggers a violation when an array is declared public, final, and static.
 
   In most cases an array declared public, final and static is a bug. Because arrays are mutable objects, the
