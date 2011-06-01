@@ -14,7 +14,7 @@ Security Rules  ("<rulesets/security.xml>")
   It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
 
   For more information see the ESAPI website: http://code.google.com/p/owasp-esapi-java/
-  and the Randomizer Javadoc: http://owasp-esapi-java.googlecode.com/svn/trunk_doc/latest/org/owasp/esapi/Randomizer.html
+  and the Randomizer Javadoc: {{http://owasp-esapi-java.googlecode.com/svn/trunk_doc/latest/org/owasp/esapi/Randomizer.html}}
 
 
 * InsecureRandom Rule
@@ -26,7 +26,7 @@ Security Rules  ("<rulesets/security.xml>")
 
   By default, this rule ignores test classes are ignored.
 
-  For more information see: http://www.klocwork.com/products/documentation/current/Checkers:SV.RANDOM
+  For more information see: {{http://www.klocwork.com/products/documentation/current/Checkers:SV.RANDOM}}
 
   Example of violations:
 
@@ -57,8 +57,11 @@ Security Rules  ("<rulesets/security.xml>")
 
   REFERENCES
 
-  [1] Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 576
-  [2] The Enterprise JavaBeans 2.1 Specification Sun Microsystems
+  [[1]] Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 576
+
+  [[2]] The Enterprise JavaBeans 2.1 Specification Sun Microsystems
+
+  []
 
   By default, this rule is not applied to tests and test cases.  
 
@@ -94,20 +97,22 @@ new RandomAccessFile(name, parent)
   from manipulating or gaining unauthorized access to the internal state of the Applet.
 
   References:
-    Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 493
-    G. McGraw Securing Java. Chapter 7: Java Security Guidelines
+
+    * Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 493
+
+    * G. McGraw Securing Java. Chapter 7: Java Security Guidelines
 
 
 * NonFinalSubclassOfSensitiveInterface Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
-  The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended.
+  The permissions classes such as <<<java.security.Permission>>> and <<<java.security.BasicPermission>>> are designed to be extended.
   Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that
   malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces
-  such as java.security.PrivilegedAction and java.security.PrivilegedActionException must also be declared final for analogous reasons.
+  such as <<<java.security.PrivilegedAction>>> and <<<java.security.PrivilegedActionException>>> must also be declared <<<final>>> for analogous reasons.
 
-  For more information see: https://www.securecoding.cert.org/confluence/display/java/SEC07-J.+Classes+that+derive+from+a+sensitive+class+or+implement+a+sensitive+interface+must+be+declared+final
+  For more information see: {{https://www.securecoding.cert.org/confluence/display/java/SEC07-J.+Classes+that+derive+from+a+sensitive+class+or+implement+a+sensitive+interface+must+be+declared+final}}
 
   Example of violations:
 
@@ -174,10 +179,13 @@ new RandomAccessFile(name, parent)
   Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug
   code or code imported from a non-J2EE application.
 
-  [1] Standards Mapping - OWASP Top 10 2004 - (OWASP 2004) A9 Application Denial of Service
-  [2] Standards Mapping - Security Technical Implementation Guide Version 3 - (STIG 3) APP6080 CAT II
-  [3] Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 382
-  [4] Standards Mapping - Payment Card Industry Data Security Standard Version 1.1 - (PCI 1.1) Requirement 6.5.9
+  [[1]] Standards Mapping - OWASP Top 10 2004 - (OWASP 2004) A9 Application Denial of Service
+
+  [[2]] Standards Mapping - Security Technical Implementation Guide Version 3 - (STIG 3) APP6080 CAT II
+
+  [[3]] Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 382
+
+  [[4]] Standards Mapping - Payment Card Industry Data Security Standard Version 1.1 - (PCI 1.1) Requirement 6.5.9
 
 
 
@@ -193,6 +201,7 @@ new RandomAccessFile(name, parent)
   values stored in the array. In most situations the array should be made private.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
   class MyClass {
     public static final String[] myArray = init()
