@@ -26,7 +26,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 
   Verifies that the name of a class matches a regular expression. By default it checks that the
   class name starts with an uppercase letter and is followed by zero or more word characters
-  (letters, numbers or underscores).
+  (letters, numbers or underscores) or dollar signs ($).
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
@@ -61,9 +61,9 @@ Naming Rules  ("<rulesets/naming.xml>")
 ~~~~~~~~~~~~~~~~~
 
   Verifies that the name of each field matches a regular expression. By default it checks that
-  non-<final> field names start with a lowercase letter and contains only letters or numbers.
-  By default, <final> field names start with an uppercase letter and contain only uppercase
-  letters, numbers and underscores.
+  fields that are not <static final> have field names that start with a lowercase letter and contains
+  only letters or numbers. By default, <static final> field names start with an uppercase letter and
+  contain only uppercase letters, numbers and underscores.
 
   <<NOTE:>> This rule checks only regular <fields> of a class, not <properties>. In Groovy,
   <properties> are fields declared with no access modifier (public, protected, private). Thus,
@@ -76,7 +76,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 | regex               | Specifies the default regular expression used to validate the  | /[a-z][a-zA-Z0-9]*/    |
 |                     | field name. It is required and cannot be null or empty.        |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-| finalRegex          | Specifies the regular expression used to validate <<<final>>>  | /[A-Z][A-Z0-9_]*/      |
+| finalRegex          | Specifies the regular expression used to validate <<<final>>>  | <<<null>>>             |
 |                     | field names. It is optional. If not set, then <<<final>>>      |                        |
 |                     | fields that are non-<<<static>>> are validated using <<regex>>.|                        |
 *---------------------+----------------------------------------------------------------+------------------------+
@@ -84,7 +84,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     | field names. It is optional. If not set, then <<<static>>>     |                        |
 |                     | fields that are non-<<<final>>> are validated using <<regex>>. |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-| staticFinalRegex    | Specifies the regular expression used to validate              | <<<null>>>             |
+| staticFinalRegex    | Specifies the regular expression used to validate              | /[A-Z][A-Z0-9_]*/      |
 |                     | <<<static final>>> field names. It is optional. If not set,    |                        |
 |                     | then <<<static final>>> fields are validated using             |                        |
 |                     | <<finalRegex>>, <<staticRegex>> or <<regex>>.                  |                        |

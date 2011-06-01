@@ -31,6 +31,7 @@ abstract class AbstractTestCase extends GroovyTestCase {
 
     protected static final CODENARC_PROPERTIES_FILE_PROP = 'codenarc.properties.file'
 
+    @SuppressWarnings('FieldName')
     protected final LOG = Logger.getLogger(getClass())
 
     /**

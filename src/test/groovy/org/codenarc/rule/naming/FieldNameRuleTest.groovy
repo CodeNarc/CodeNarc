@@ -39,10 +39,7 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testFinalRegex_DefaultValue() {
-        assert 'ABC' ==~ rule.finalRegex
-        assert 'ABC_123_DEF' ==~ rule.finalRegex
-        assert !('abc_def' ==~ rule.finalRegex)
-        assert !('ABC123abc' ==~ rule.finalRegex)
+        assert rule.finalRegex == null
     }
 
     void testStaticRegex_DefaultValue() {
@@ -50,7 +47,10 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
     }
 
     void testStaticFinalRegex_DefaultValue() {
-        assert rule.staticFinalRegex == null
+        assert 'ABC' ==~ rule.staticFinalRegex
+        assert 'ABC_123_DEF' ==~ rule.staticFinalRegex
+        assert !('abcdef' ==~ rule.staticFinalRegex)
+        assert !('ABC123abc' ==~ rule.staticFinalRegex)
     }
 
     void testRegexIsNull() {
@@ -129,10 +129,10 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
     void testApplyTo_Final_DefaultFinalRegex() {
         final SOURCE = '''
           class MyClass {
-            public final int count
+            public final int COUNT
           }
         '''
-        assertSingleViolation(SOURCE, 3, 'final int count')
+        assertSingleViolation(SOURCE, 3, 'final int COUNT')
     }
 
     void testApplyTo_Final_FinalRegexSet() {
@@ -185,14 +185,16 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_StaticFinal_DefaultsToFinalRegex() {
+    void testApplyTo_StaticFinal_StaticFinalRegexIsNull_DefaultsToFinalRegex() {
         final SOURCE = '''
           class MyClass {
-            protected static final int Count
+            protected static final int COUNT
           }
         '''
         rule.staticRegex = /C.*/       // ignored
-        assertSingleViolation(SOURCE, 3, 'static final int Count')
+        rule.finalRegex = /X.*/
+        rule.staticFinalRegex = null
+        assertSingleViolation(SOURCE, 3, 'static final int COUNT')
     }
 
     void testApplyTo_StaticFinal_DefaultsToStaticRegex() {
@@ -203,6 +205,7 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
         '''
         rule.finalRegex = null
         rule.staticRegex = /C.*/
+        rule.staticFinalRegex = null
         assertNoViolations(SOURCE)
     }
 
@@ -212,6 +215,7 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
             public static final int Count
           }
         '''
+        rule.staticFinalRegex = null
         rule.finalRegex = null
         rule.staticRegex = null
         rule.regex = /C.*/

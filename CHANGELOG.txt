@@ -71,6 +71,7 @@ BUG FIXES and NEW FEATURES
 -          - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.  
 - #3308930 - LoggerWithWrongModifiersRule now contains a parameter 'allowProtectedLogger' so that loggers can also be instantiated as 'protected final LOG = Logger.getLogger(this.class)'. Also, it has a 'allowNonStatic' logger property, that allows you to create a non static logger.
 - #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass(). 
+- #3309748 - FieldName:Do not treat non-static final fields as constants
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 - BREAKING CHANGE: The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 

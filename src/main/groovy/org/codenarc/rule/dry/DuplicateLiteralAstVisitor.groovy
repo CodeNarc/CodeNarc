@@ -38,18 +38,18 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     List<String> constants = []
-    private final List<Class> CONSTANT_TYPES
+    private final List<Class> constantTypes
     private Set ignoreValuesSet
 
     DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet) {
         assert constantType
-        this.CONSTANT_TYPES = [constantType]
+        this.constantTypes = [constantType]
         this.ignoreValuesSet = ignoreValuesSet
     }
 
     DuplicateLiteralAstVisitor(List<Class> constantTypes, Set ignoreValuesSet) {
         assert constantTypes
-        this.CONSTANT_TYPES = constantTypes
+        this.constantTypes = constantTypes
         this.ignoreValuesSet = ignoreValuesSet
     }
 
@@ -122,7 +122,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
         def literal = String.valueOf(node.value)
 
-        for (Class constantType: CONSTANT_TYPES) {
+        for (Class constantType: constantTypes) {
             if ((constantType.isAssignableFrom(node.value.class) || node.value.class == constantType || node.type.typeClass == constantType)) {
                 if (constants.contains(literal) && !isStatic && !ignoreValuesSet.contains(literal)) {
                     addViolation node, "Duplicate ${constantType.simpleName} Literal: $literal"
