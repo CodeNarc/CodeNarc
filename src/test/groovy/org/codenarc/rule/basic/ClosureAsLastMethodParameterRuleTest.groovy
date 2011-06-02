@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ClosureAsLastMethodParameterInBracketsRule
+ * Tests for ClosureAsLastMethodParameterRule
  *
  * @author Marcin Erdmann
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class ClosureAsLastMethodParameterInBracketsRuleTest extends AbstractRuleTestCase {
+class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == 'ClosureAsLastMethodParameterInBrackets'
+        assert rule.name == 'ClosureAsLastMethodParameter'
     }
 
     void testSimpleSuccessScenario() {
@@ -142,6 +142,6 @@ class ClosureAsLastMethodParameterInBracketsRuleTest extends AbstractRuleTestCas
     }
 
     protected Rule createRule() {
-        new ClosureAsLastMethodParameterInBracketsRule()
+        new ClosureAsLastMethodParameterRule()
     }
 }

@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 240 rules.
+  <<CodeNarc>> includes 241 rules.
 
     
     
@@ -27,7 +27,7 @@ Rule Index
     
     * CloneableWithoutClone
     
-    * ClosureAsLastMethodParameterInBrackets
+    * ClosureAsLastMethodParameter
     
     * CompareToWithoutComparable
     
@@ -119,6 +119,8 @@ Rule Index
     
     * ExplicitHashSetInstantiation
     
+    * ExplicitLinkedHashMapInstantiation
+    
     * ExplicitLinkedListInstantiation
     
     * ExplicitStackInstantiation
@@ -182,6 +184,8 @@ Rule Index
     * NestedSynchronization
     
     * StaticCalendarField
+    
+    * StaticConnection
     
     * StaticDateFormatField
     
@@ -455,8 +459,6 @@ Rule Index
     * ObjectFinalize
     
     * PublicFinalizeMethod
-    
-    * StaticConnection
     
     * SystemExit
     

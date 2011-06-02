@@ -29,13 +29,13 @@ import java.util.regex.Pattern
  * @author Marcin Erdmann
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ClosureAsLastMethodParameterInBracketsRule extends AbstractAstVisitorRule {
-    String name = 'ClosureAsLastMethodParameterInBrackets'
+class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
+    String name = 'ClosureAsLastMethodParameter'
     int priority = 3
-    Class astVisitorClass = ClosureAsLastMethodParameterInBracketsAstVisitor
+    Class astVisitorClass = ClosureAsLastMethodParameterAstVisitor
 }
 
-class ClosureAsLastMethodParameterInBracketsAstVisitor extends AbstractAstVisitor {
+class ClosureAsLastMethodParameterAstVisitor extends AbstractAstVisitor {
     // \/\*.*?\*\/ matches multiline comments on a single line
     // \/\*.*$ matches from opening of a multiline comment to the end of the line
     // \/\/.* matches single line comments

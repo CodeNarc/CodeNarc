@@ -11,6 +11,7 @@
     <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.BooleanMethodReturnsNullRule'/>
     <rule class='org.codenarc.rule.basic.CloneableWithoutCloneRule'/>
+    <rule class='org.codenarc.rule.basic.ClosureAsLastMethodParameterRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonOfTwoConstantsRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonWithSelfRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
@@ -79,5 +80,4 @@
     <rule class='org.codenarc.rule.basic.SerialPersistentFieldsRule'/>
     <rule class='org.codenarc.rule.basic.ForLoopShouldBeWhileLoopRule'/>
     <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
-    <rule class='org.codenarc.rule.basic.ClosureAsLastMethodParameterInBracketsRule'/>
 </ruleset>

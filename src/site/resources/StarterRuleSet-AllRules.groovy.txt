@@ -31,7 +31,7 @@ ruleset {
     ClassSize
     CloneableWithoutClone
     CloseWithoutCloseable
-    ClosureAsLastMethodParameterInBrackets
+    ClosureAsLastMethodParameter
     CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
@@ -90,6 +90,7 @@ ruleset {
     ExplicitGarbageCollection
     ExplicitHashMapInstantiation
     ExplicitHashSetInstantiation
+    ExplicitLinkedHashMapInstantiation
     ExplicitLinkedListInstantiation
     ExplicitStackInstantiation
     ExplicitTreeSetInstantiation

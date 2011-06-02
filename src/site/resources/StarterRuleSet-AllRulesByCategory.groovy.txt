@@ -15,7 +15,7 @@ ruleset {
     BrokenOddnessCheck
     ClassForName
     CloneableWithoutClone
-    ClosureAsLastMethodParameterInBrackets
+    ClosureAsLastMethodParameter
     CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
@@ -61,6 +61,7 @@ ruleset {
     ExplicitGarbageCollection
     ExplicitHashMapInstantiation
     ExplicitHashSetInstantiation
+    ExplicitLinkedHashMapInstantiation
     ExplicitLinkedListInstantiation
     ExplicitStackInstantiation
     ExplicitTreeSetInstantiation
@@ -92,6 +93,7 @@ ruleset {
     InconsistentPropertySynchronization
     NestedSynchronization
     StaticCalendarField
+    StaticConnection
     StaticDateFormatField
     StaticMatcherField
     StaticSimpleDateFormatField
@@ -223,7 +225,6 @@ ruleset {
     NonFinalSubclassOfSensitiveInterface
     ObjectFinalize
     PublicFinalizeMethod
-    StaticConnection
     SystemExit
     UnsafeArrayDeclaration
     
