@@ -41,7 +41,7 @@ NEW AND UPDATED RULES
 - ClassForName rule (basic) - Using Class.forName(...) is a common way to add dynamic behavior to a system. However, using this method can cause resource leaks because the classes can be pinned in memory for long periods of time.
 - StatelessSingleton rule (design) - Rule finds occurrences of the Singleton pattern where the object has no state (mutable or otherwise). There is no point in creating a stateless Singleton, just make a new instance with the new keyword instead.
 - InconsistentPropertySynchronization rule (concurrency) - The rule is a little smarter now and flags code that defines a synchronized getter without any setter and vice versa. Those methods will be generated in unsynchronized from by the Groovy compiler later.
-- ClosureAsLastMethodParameterInBrackets rule (basic) - If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.
+- ClosureAsLastMethodParameter rule (basic) - If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.
 
 BUG FIXES and NEW FEATURES
 - Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime.
@@ -72,6 +72,7 @@ BUG FIXES and NEW FEATURES
 - #3308930 - LoggerWithWrongModifiersRule now contains a parameter 'allowProtectedLogger' so that loggers can also be instantiated as 'protected final LOG = Logger.getLogger(this.class)'. Also, it has a 'allowNonStatic' logger property, that allows you to create a non static logger.
 - #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass(). 
 - #3309748 - FieldName:Do not treat non-static final fields as constants
+- #3310413 - Fix UnnecessaryPublicModifier does not catch public on constructors.
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 - BREAKING CHANGE: The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 
