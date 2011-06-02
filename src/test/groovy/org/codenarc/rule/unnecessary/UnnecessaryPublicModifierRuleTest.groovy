@@ -98,6 +98,15 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public void myMethod()', 'The public keyword is unnecessary for methods')
     }
 
+    void testConstructor() {
+        final SOURCE = '''
+            class MyClass {
+                public MyClass() {}
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'public MyClass() {}', 'The public keyword is unnecessary for constructors')
+    }
+
     protected Rule createRule() {
         new UnnecessaryPublicModifierRule()
     }

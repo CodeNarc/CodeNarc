@@ -21,9 +21,10 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.apache.log4j.Logger
+import org.codehaus.groovy.ast.ConstructorNode
 
 /**
- * The 'public' modifier is not required on methods or classes. 
+ * The 'public' modifier is not required on methods, constructors or classes.
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
@@ -39,24 +40,30 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
-        String declaration = getDeclaration(node)
-        if (declaration?.startsWith('public ')) {
-            addViolation(node, 'The public keyword is unnecessary for classes')
-        } else if (declaration?.contains(' public ')) {
-            addViolation(node, 'The public keyword is unnecessary for classes')
-        }
+        checkDeclaration(node, 'classes')
         super.visitClassEx(node)
     }
 
     @Override
     void visitMethodEx(MethodNode node) {
+        checkDeclaration(node, 'methods')
+        super.visitMethodEx(node)
+    }
+
+    @Override
+    def void visitConstructorEx(ConstructorNode node) {
+        checkDeclaration(node, 'constructors')
+        super.visitConstructorEx(node)
+    }
+
+    private void checkDeclaration(node, String nodeType) {
         String declaration = getDeclaration(node)
         if (getDeclaration(node)?.startsWith('public ')) {
-            addViolation(node, 'The public keyword is unnecessary for methods')
-        } else if (declaration?.contains(' public ')) {
-            addViolation(node, 'The public keyword is unnecessary for methods')
+            addViolation(node, "The public keyword is unnecessary for $nodeType")
         }
-        super.visitMethodEx(node)
+        else if (declaration?.contains(' public ')) {
+            addViolation(node, "The public keyword is unnecessary for $nodeType")
+        }
     }
 
     private String getDeclaration(ASTNode node) {

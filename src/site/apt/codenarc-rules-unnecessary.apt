@@ -674,13 +674,16 @@ def Object method5() { return 4 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
-  The 'public' modifier is not required on methods or classes.
+  The 'public' modifier is not required on methods, constructors or classes.
 
   Example of violations:
 
 -------------------------------------------------------------------------------
     // violation on class
     public class MyClass {
+        // violation on constructor
+        public MyClass() {}
+
         // violation on method
         public void myMethod() {}    
     }
