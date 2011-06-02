@@ -156,6 +156,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
         Date birthday
         boolean deceased
         boolean parent
+        int weight
 
         synchronized setName(String name) {
             this.name = name
@@ -190,6 +191,12 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
         // violation, get method should be synchronized
         boolean isParent() {
             parent
+        }
+
+        // violation get method should be synchronized
+        @groovy.transform.Synchronized
+        void setWeight(int value) {
+            weight = value
         }
     }
 -------------------------------------------------------------------------------

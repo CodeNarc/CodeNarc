@@ -69,6 +69,7 @@ BUG FIXES and NEW FEATURES
 - #3305019 - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable. 
 - #3309062 - UnnecessaryGroovyImportRule handles static imports incorrectly
 -          - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.  
+-          - Fixed the InconsistentPropertySynchronization rule so that it recognizes the new @Synchronized annotation.
 - #3308930 - LoggerWithWrongModifiersRule now contains a parameter 'allowProtectedLogger' so that loggers can also be instantiated as 'protected final LOG = Logger.getLogger(this.class)'. Also, it has a 'allowNonStatic' logger property, that allows you to create a non static logger.
 - #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass(). 
 - #3309748 - FieldName:Do not treat non-static final fields as constants

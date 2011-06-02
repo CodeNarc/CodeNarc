@@ -177,6 +177,35 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'synchronized List getAddresses',
                 'The getter method getAddresses is synchronized but the setter method setAddresses is not')
     }
+    void testAtSyncedGetterMissingSetter_FullyQualified() {
+        final SOURCE = '''
+            class Person {
+                String name
+                List addresses
+
+                @groovy.transform.Synchronized List getAddresses() {
+                    addresses
+                }
+            }'''
+        assertSingleViolation(SOURCE, 6, '@groovy.transform.Synchronized List getAddresses()',
+                'The getter method getAddresses is synchronized but the setter method setAddresses is not')
+    }
+
+    void testAtSyncedGetterMissingSetter() {
+        final SOURCE = '''
+            import groovy.transform.*
+
+            class Person {
+                String name
+                List addresses
+
+                @Synchronized List getAddresses() {
+                    addresses
+                }
+            }'''
+        assertSingleViolation(SOURCE, 8, '@Synchronized List getAddresses()',
+                'The getter method getAddresses is synchronized but the setter method setAddresses is not')
+    }
 
     protected Rule createRule() {
         new InconsistentPropertySynchronizationRule()

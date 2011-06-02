@@ -79,6 +79,10 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
     private saveMethodInfo(MethodNode node) {
         if (Modifier.isSynchronized(node.modifiers)) {
             synchronizedMethods.put(node.name, node)
+        } else if (AstUtil.getAnnotation(node, 'Synchronized')) {
+            synchronizedMethods.put(node.name, node)
+        } else if (AstUtil.getAnnotation(node, 'groovy.transform.Synchronized')) {
+            synchronizedMethods.put(node.name, node)
         } else {
             unsynchronizedMethods.put(node.name, node)
         }
