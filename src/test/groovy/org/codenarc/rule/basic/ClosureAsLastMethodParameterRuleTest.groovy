@@ -42,16 +42,16 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testWithCommentAtTheEndSuccessScenario() {
-        final SOURCE = '''
-        	[1,2,3].each { println it } //some comment
-            [1,2,3].each { println it } /*some comment*/
-            [1,2,3].each { println it } // strange comment /*some comment*/
-            [1,2,3].each {
-                println it
-            } // multiline with comment
-        '''
-        assertNoViolations(SOURCE)
+    void testWithComments() {
+         final SOURCE = '''
+            [1, 2, 3].each { /*
+            sth // */ println it }
+            [1, 2, 3].each { /*
+            ) // */ println it }
+            [1, 2, 3].each { /*
+            // */ println it }
+         '''
+         assertNoViolations(SOURCE)
     }
 
     void testWithLogicalStatementAtTheEndSuccessScenario() {
@@ -80,19 +80,6 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
             [1,2,3].each({ println it })
         '''
         assertSingleViolation(SOURCE, 2, '[1,2,3].each({ println it })', "The last parameter to the 'each' method call is a closure an can appear outside the parenthesis")
-    }
-
-    void testSimpleSingleViolationWithComment() {
-        final SOURCE = '''
-            [1,2,3].each({
-                println it
-            }) //some comment'
-        '''
-        assertSingleViolation(SOURCE, 2,
-            '''[1,2,3].each({
-                println it
-            })'''
-        )
     }
 
     void testComplexSingleViolation() {
