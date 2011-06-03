@@ -141,6 +141,29 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    void testLinesWithStringsContainingDoubleSlash() {
+        final SOURCE = '''
+            void testProcess() {
+                shouldFail { process('xxx://wrsnetdev.usa.wachovia.net') }
+                shouldFail(Exception) { process('http://')
+                }
+                shouldFail {
+                    process('http://wrsnetdev.usa.wachovia.net:xxx') }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testMethodCallWiderThanClosureParameter() {
+        final SOURCE = '''
+            doWithTransactionAndReallyLongName(
+                'testing within a transaction',
+                new BigDecimal("123456789012345")) {
+                    process('12345') }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new ClosureAsLastMethodParameterRule()
     }

@@ -21,7 +21,6 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.ASTNode
-import java.util.regex.Pattern
 
 /**
  * If a method is called and the last parameter is an inline closure it can be declared outside of the method call brackets.
@@ -36,10 +35,6 @@ class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
 }
 
 class ClosureAsLastMethodParameterAstVisitor extends AbstractAstVisitor {
-    // \/\*.*?\*\/ matches multiline comments on a single line
-    // \/\*.*$ matches from opening of a multiline comment to the end of the line
-    // \/\/.* matches single line comments
-    private final static Pattern COMMENTS_REGEXP = ~/(\/\*.*?\*\/)|(\/\*.*$)|(\/\/.*)/
 
     @Override
     protected String sourceLine(ASTNode node) {
@@ -52,23 +47,19 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractAstVisitor {
         return nodeLines.first()[(node.columnNumber - 1)..(node.lastColumnNumber - 2)]
     }
 
-
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (isFirstVisit(call)) {
             def arguments = AstUtil.getMethodArguments(call)
             if (arguments && arguments.last() instanceof ClosureExpression) {
-                def lastExpressionLine = sourceCode.lines[call.lastLineNumber - 1][0..(call.lastColumnNumber - 2)]
-                if (getLastCharacterAfterRemovingCommentsAndTrimming(lastExpressionLine) != '}') {
+                def lastColumnForClosure = arguments.last().lastColumnNumber
+                def lastColumnForMethodCall = call.lastColumnNumber
+                if (lastColumnForClosure < lastColumnForMethodCall) {
                     addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure an can appear outside the parenthesis")
                 }
             }
         }
         super.visitMethodCallExpression(call)
-    }
-
-    private String getLastCharacterAfterRemovingCommentsAndTrimming(String lastExpressionLine) {
-        lastExpressionLine.replaceAll(COMMENTS_REGEXP, '').trim()[-1]
     }
 
 }
