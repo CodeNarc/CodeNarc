@@ -122,14 +122,19 @@ Basic Rules  ("<rulesets/basic.xml>")
 * ClassForName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
-  Using Class.forName(...) is a common way to add dynamic behavior to a system. However, using this method can cause
+
+  Using <<<Class.forName(...)>>> is a common way to add dynamic behavior to a system. However, using this method can cause
   resource leaks because the classes can be pinned in memory for long periods of time. If you're forced to do dynamic
-  class loading then use ClassLoader.loadClass instead. All variations of the Class.forName(...) method suffer from the
+  class loading then use ClassLoader.loadClass instead. All variations of the <<<Class.forName(...)>>> method suffer from the
   same problem. 
 
   For more information see these links:
-  http://blog.bjhargrave.com/2007/09/classforname-caches-defined-class-in.html
-  http://www.osgi.org/blog/2011/05/what-you-should-know-about-class.html
+
+  * {{http://blog.bjhargrave.com/2007/09/classforname-caches-defined-class-in.html}}
+
+  * {{http://www.osgi.org/blog/2011/05/what-you-should-know-about-class.html}}
+
+  []
 
   Example of violations:
   
@@ -160,7 +165,8 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
-  If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.
+  If a method is called and the last parameter is an inline closure then it can be declared outside
+  of the method call parentheses.
 
   Example of violations:
 
@@ -425,7 +431,8 @@ Basic Rules  ("<rulesets/basic.xml>")
 * DuplicateMapKey Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
-  A map literal is created with duplicated key. The map entry will be overwritten.
+
+  A <Map> literal is created with duplicated key. The map entry will be overwritten.
 
   Example of violations:
 
@@ -444,7 +451,8 @@ Basic Rules  ("<rulesets/basic.xml>")
 * DuplicateSetValue Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
-  A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
+
+  A <Set> literal is created with duplicate constant value. A set cannot contain two elements with the same value.
 
   Example of violations:
 
@@ -469,9 +477,16 @@ def c = [1, '1'] as Set
 
   Checks for empty <catch> blocks. In most cases, exceptions should not be caught and ignored (swallowed).
 
-  The rule has a property named ignoreRegex that defaults to the value 'ignore|ignored'. If the name of the exception
+  The rule has a property named <<<ignoreRegex>>> that defaults to the value 'ignore|ignored'. If the name of the exception
   matches this regex then no violations are produced.
-   
+
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>                    | <<Description>>                                                | <<Default Value>>      |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| ignoreRegex                     | Regular expression - exception parameter names matching this   | 'ignore|ignored'       |
+|                                 | regular expression are ignored and no volations are produced.  |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+
   Here is an example of code that produces a violation:
 
 -------------------------------------------------------------------------------
@@ -579,8 +594,8 @@ def c = [1, '1'] as Set
   <New in CodeNarc 0.13>
 
   A method was found without an implementation. If the method is overriding or implementing a parent method,
-  then mark it with the @Override annotation. This rule should not be used with Java 5 code because you cannot
-  put @Override on a method implementing an interface. Use with Java 6 and higher.
+  then mark it with the <<<@Override>>> annotation. This rule should not be used with Java 5 code because you cannot
+  put <<<@Override>>> on a method implementing an interface. Use with Java 6 and higher.
 
   Example of violations:
 
@@ -711,13 +726,12 @@ def c = [1, '1'] as Set
 -------------------------------------------------------------------------------
 
 
-
-
 * EqualsOverloaded Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
-  The class has an equals method, but the parameter of the method is not of type Object.
-  It is not overriding equals but instead overloading it.
+
+  The class has an <<<equals>>> method, but the parameter of the method is not of type <<<Object>>>.
+  It is not overriding <<<equals>>> but instead overloading it.
 
   Example of violations:
 
@@ -976,7 +990,7 @@ class Object7 {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
-  A <<<for-loop>>> without an init and update statement can be simplified to a while loop.
+  A <<<for>>> loop without an init and update statement can be simplified to a <<<while>>> loop.
 
   Example of violations:
 
@@ -1006,8 +1020,8 @@ class Object7 {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
-  The groovy.lang.Immutable annotation has been deprecated and replaced by groovy.transform.Immutable. Do
-  not use the Immutable in groovy.lang.
+  The <<<groovy.lang.Immutable>>> annotation has been deprecated and replaced by <<<groovy.transform.Immutable>>>. Do
+  not use the <<<Immutable>>> in <<<groovy.lang>>>.
 
   Example of violations:
   
@@ -1137,17 +1151,22 @@ class Object7 {
 * SerialPersistentFields Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
-  To use a Serializable object's <<<serialPersistentFields>>> correctly, it must be declared <<<private>>>, <<<static>>>,
+
+  To use a <<Serializable>> object's <<<serialPersistentFields>>> correctly, it must be declared <<<private>>>, <<<static>>>,
   and <<<final>>>.
 
   The Java Object Serialization Specification allows developers to manually define <<<Serializable>>> fields for a
   class by specifying them in the <<<serialPersistentFields>>> array. This feature will only work if
   <<<serialPersistentFields>>> is declared as <<<private>>>, <<<static>>>, and <<<final>>>. Also, specific to Groovy,
-  the field must be of type ObjectStreamField[], and cannot be Object. 
+  the field must be of type <<<ObjectStreamField[]>>>, and cannot be <<<Object>>>.
 
   References:
-    Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 485
-    Sun Microsystems, Inc. Java Sun Tutorial
+
+    * Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 485
+
+    * Sun Microsystems, Inc. Java Sun Tutorial
+
+    []
 
   Example of violations:
 

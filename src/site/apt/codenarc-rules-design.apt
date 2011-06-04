@@ -185,6 +185,7 @@ Design Rules  ("<rulesets/design.xml>")
 * PublicInstanceField Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   Using public fields is considered to be a bad design. Use properties instead.
 
   Example of violations:
@@ -198,6 +199,7 @@ Design Rules  ("<rulesets/design.xml>")
 * StatelessSingleton Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   There is no point in creating a stateless Singleton because there is nothing within the class that needs guarding and
   no side effects to calling the constructor. Just create new instances of the object or write a Utility class with
   static methods. In the long term, Singletons can cause strong coupling and hard to change systems.

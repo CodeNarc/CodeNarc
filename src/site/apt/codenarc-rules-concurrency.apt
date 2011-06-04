@@ -266,11 +266,12 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
-  Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads,
-  which is unsafe and can lead to race conditions.
+  Creates violations when a <<<java.sql.Connection>>> object is used as a <<<static>>> field. Database connections
+  stored in <<<static>>> fields will be shared between threads, which is unsafe and can lead to race conditions.
 
-  A transactional resource object such as database connection can only be associated with one transaction at a time. For this reason, a connection should not be
-  shared between threads and should not be stored in a static field. See Section 4.2.3 of the J2EE Specification for more details.
+  A transactional resource object such as database connection can only be associated with one transaction at a time.
+  For this reason, a connection should not be shared between threads and should not be stored in a static field.
+  See Section 4.2.3 of the <J2EE Specification> for more details.
 
   References:
 
@@ -915,8 +916,8 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   Volatile array fields are unsafe because the contents of the array are not treated as volatile. Changing the entire
   array reference is visible to other threads, but changing an array element is not.
 
-  This rule take from Alex Miller's Java Concurrency in Practice slides, available at
-  http://www.slideshare.net/alexmiller/java-concurrency-gotchas-3666977. 
+  This rule take from Alex Miller's <Java Concurrency in Practice> slides, available at
+  {{http://www.slideshare.net/alexmiller/java-concurrency-gotchas-3666977}}.
 
   Example of violations:
 

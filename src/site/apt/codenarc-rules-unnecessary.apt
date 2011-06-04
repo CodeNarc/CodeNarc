@@ -209,6 +209,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 * UnnecessaryDefInMethodDeclaration Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
+
   If a method has a visibility modifier, then the def keyword is unneeded. For instance
   'def private method() {}' is redundant and can be simplified to 'private method() {}'.
 
@@ -242,8 +243,9 @@ def Object method5() { return 4 }
 * UnnecessaryElseStatement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
-  When an if statement block ends with a return statement the else is unnecessary.
-  The logic in the else branch can be run without being in a new scope.
+
+  When an <<<if>>> statement block ends with a <<<return>>> statement, then the <<<else>>> is unnecessary.
+  The logic in the <<<else>>> branch can be run without being in a new scope.
 
   Example of violations:
 
@@ -268,6 +270,7 @@ def Object method5() { return 4 }
 * UnnecessaryEqualityWithNull Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
+
   The expression <<<object.equals(null)>>> is always false and is unnecessary.
 
   The <<<object.equals(null)>>> comparison will always return false, since the object is not null. (If the object is null,
