@@ -300,12 +300,16 @@
     <dictionary name="Chris">
       <words>
         <w>arcy</w>
+        <w>codenarc</w>
+        <w>jdbc</w>
         <w>junit</w>
         <w>plugins</w>
         <w>println</w>
         <w>reentrant</w>
         <w>regex</w>
+        <w>rené</w>
         <w>ruleset</w>
+        <w>scheibe</w>
         <w>timestamp</w>
       </words>
     </dictionary>

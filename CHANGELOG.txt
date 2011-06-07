@@ -14,7 +14,7 @@ NEW AND UPDATED RULES
 - ImportFromSunPackages rule (imports) - Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
 - UnnecessaryFinalOnPrivateMethod rule (unnecessary) - A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
 - InsecureRandom rule (security) - Reports usages of java.util.Random, which can produce very predictable results. If two instances of Random are created with the same seed and sequence of method calls, they will generate the exact same results. Use java.security.SecureRandom instead, which provides a cryptographically strong random number generator. SecureRandom uses PRNG, which means they are using a deterministic algorithm to produce a pseudo-random number from a true random seed. SecureRandom produces non-deterministic output.
-- DirectConnectionManagement rule (security) - The J2EE standard requires that applications use the container's resource management facilities to obtain connections to resources. Every major web application container provides pooled database connection management as part of its resource management framework. Duplicating this functionality in an application is difficult and error prone, which is part of the reason it is forbidden under the J2EE standard.
+- DirectConnectionManagement rule (jdbc) - The J2EE standard requires that applications use the container's resource management facilities to obtain connections to resources. Every major web application container provides pooled database connection management as part of its resource management framework. Duplicating this functionality in an application is difficult and error prone, which is part of the reason it is forbidden under the J2EE standard.
 - ComparisonWithSelf (basic) - Checks for using a comparison operator or equals() or compareTo() to compare a variable to itself, e.g.: x == x, x != x, x <=> x, x < x, x > x, x <= x, x >= x, x.equals(x), or x.compareTo(x), where x is a variable.
 - ComparisonOfTwoConstants (basic) - Checks for using a comparison operator or equals() or compareTo() to compare two constants to each other or two literals that contain only constant values.
 - FileCreateTempFile rule (security) - The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library. It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
@@ -74,6 +74,7 @@ BUG FIXES and NEW FEATURES
 - #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass(). 
 - #3309748 - FieldName:Do not treat non-static final fields as constants
 - #3310413 - Fix UnnecessaryPublicModifier does not catch public on constructors.
+- #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from René Scheibe
 - BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
 - BREAKING CHANGE: The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 
@@ -84,7 +85,7 @@ THANKS
   Thank you to Erik Pragt for the MisorderedStaticImports rule.
   Thank you to Marcin Erdmann for the MisorderedStaticImports and ClosureAsLastMethodParameterInBracketsRule.
   Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
-  Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule patches.
+  Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------

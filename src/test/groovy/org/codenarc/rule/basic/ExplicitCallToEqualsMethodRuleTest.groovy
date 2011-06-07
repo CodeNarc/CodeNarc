@@ -39,6 +39,8 @@ class ExplicitCallToEqualsMethodRuleTest extends AbstractRuleTestCase {
                 a.equals()
                 a.equals(a, b)
                 equals(a)
+                this.equals(a)
+                super.equals(a)
             '''
         assertNoViolations(SOURCE)
     }

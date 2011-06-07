@@ -24,6 +24,7 @@ import org.codenarc.util.AstUtil
  * Parent Visitor for "ExplicitCallToX" Rules.
  *
  * @author Hamlet D'Arcy
+ * @author René Scheibe
  */
 abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
 
@@ -38,7 +39,10 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
 
     def void visitMethodCallExpression(MethodCallExpression call) {
         if (!AstUtil.isSafe(call) && !AstUtil.isSpreadSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
-            if (!rule.ignoreThisReference || !AstUtil.isMethodCallOnObject(call, 'this')) {
+            boolean isAllowedCallOnThis = rule.ignoreThisReference && AstUtil.isMethodCallOnObject(call, 'this')
+            boolean isAllowedCallOnSuper = AstUtil.isMethodCallOnObject(call, 'super')
+
+            if (!isAllowedCallOnThis && !isAllowedCallOnSuper) {
                 if (!AstUtil.isSafe(call.objectExpression)) {
                     safelyAddViolation(call)
                 }
