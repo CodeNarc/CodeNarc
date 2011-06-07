@@ -784,7 +784,9 @@ class Object7 {
   operator. A groovier way to express this: <<<a.and(b)>>> is this: <<<a & b>>>. This rule can be
   configured to ignore <<<this.and(Object)>>> using the <ignoreThisReference> property. It defaults to <true>, so
   even <<<and(x)>>> will not trigger a violation. The default is <true> because <<<and>>> appears commonly in Grails
-  criteria. 
+  criteria.
+
+  This rule also ignores all calls to <<<super.and(Object)>>>.
 
 
 * ExplicitCallToCompareToMethod Rule
@@ -806,6 +808,8 @@ class Object7 {
   This rule can be  configured to ignore <<<this.compareTo(Object)>>> using the <ignoreThisReference>
   property. It defaults to <<<false>>>, so even <<<compareTo(x)>>> will trigger a violation.
 
+  This rule also ignores all calls to <<<super.compareTo(Object)>>>.
+
 
 * ExplicitCallToDivMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -815,6 +819,8 @@ class Object7 {
   <<</>>> operator. A groovier way to express this: <<<a.div(b)>>> is this: <<<a / b>>>. This rule can be
   configured to ignore <<<div.xor(Object)>>> using the <ignoreThisReference> property. It defaults to <false>,
   so even <<<div(x)>>> will trigger a violation.
+
+  This rule also ignores all calls to <<<super.div(Object)>>>.
 
 
 * ExplicitCallToEqualsMethod Rule
@@ -827,6 +833,8 @@ class Object7 {
   configured to ignore <<<this.equals(Object)>>> using the <ignoreThisReference> property. It defaults to
   <false>, so even <<<equals(x)>>> will trigger a violation.
 
+  This rule also ignores all calls to <<<super.equals(Object)>>>.
+
 
 * ExplicitCallToGetAtMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -836,6 +844,8 @@ class Object7 {
   <<<[]>>> index operator. A groovier way to express this: <<<a.getAt(b)>>> is this: <<<a[b]>>>. This rule can be
   configured to ignore <<<this.getAt(Object)>>> using the <ignoreThisReference> property. It defaults to <false>,
   so even <<<getAt(x)>>> will trigger a violation.
+
+  This rule also ignores all calls to <<<super.getAt(Object)>>>.
 
 
 * ExplicitCallToLeftShiftMethod Rule
@@ -847,6 +857,8 @@ class Object7 {
   configured to ignore <<<this.leftShift(Object)>>> using the <ignoreThisReference> property. It defaults to
   <false>, so even <<<leftShift(x)>>> will trigger a violation.
 
+  This rule also ignores all calls to <<<super.leftShift(Object)>>>.
+
 
 * ExplicitCallToMinusMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -856,6 +868,8 @@ class Object7 {
   <<<->>> operator. A groovier way to express this: <<<a.minus(b)>>> is this: <<<a - b>>>. This rule can be
   configured to ignore <<<minus.xor(Object)>>> using the <ignoreThisReference> property. It defaults to
   <false>, so even <<<minus(x)>>> will trigger a violation.
+
+  This rule also ignores all calls to <<<super.minus(Object)>>>.
 
 
 * ExplicitCallToMultiplyMethod Rule
@@ -867,6 +881,8 @@ class Object7 {
   configured to ignore <<<this.multiply(Object)>>> using the <ignoreThisReference> property. It defaults to
   <false>, so even <<<multiply(x)>>> will trigger a violation. 
 
+  This rule also ignores all calls to <<<super.multiply(Object)>>>.
+
 
 * ExplicitCallToModMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -876,6 +892,8 @@ class Object7 {
   <<<%>>> operator. A groovier way to express this: <<<a.mod(b)>>> is this: <<<a % b>>>. This rule can be
   configured to ignore <<<this.mod(Object)>>> using the <ignoreThisReference> property. It defaults to <false>, so
   even <<<mod(x)>>> will trigger a violation. 
+
+  This rule also ignores all calls to <<<super.mod(Object)>>>.
 
 
 * ExplicitCallToOrMethod Rule
@@ -887,6 +905,8 @@ class Object7 {
   configured to ignore <<<this.or(Object)>>> using the <ignoreThisReference> property. It defaults to <true>, so
   even <<<or(x)>>> will not trigger a violation. This is the default because it is commonly used in Grails criteria. 
 
+  This rule also ignores all calls to <<<super.or(Object)>>>.
+
 
 * ExplicitCallToPlusMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -896,6 +916,8 @@ class Object7 {
   <<<+>>> operator. A groovier way to express this: <<<a.plus(b)>>> is this: <<<a + b>>>. This rule can be
   configured to ignore <<<this.plus(Object)>>> using the <ignoreThisReference> property. It defaults to <false>, so
   even <<<plus(x)>>> will trigger a violation.
+
+  This rule also ignores all calls to <<<super.plus(Object)>>>.
 
 
 * ExplicitCallToPowerMethod Rule
@@ -907,6 +929,8 @@ class Object7 {
   configured to ignore <<<this.power(Object)>>> using the <ignoreThisReference> property. It defaults to <false>, so
   even <<<power(x)>>> will trigger a violation.
 
+  This rule also ignores all calls to <<<super.power(Object)>>>.
+
 
 * ExplicitCallToRightShiftMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -917,6 +941,8 @@ class Object7 {
   configured to ignore <<<this.rightShift(Object)>>> using the <ignoreThisReference> property. It defaults to
   <false>, so even <<<rightShift(x)>>> will trigger a violation.
 
+  This rule also ignores all calls to <<<super.rightShift(Object)>>>.
+
 
 * ExplicitCallToXorMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -926,6 +952,9 @@ class Object7 {
   <<<^>>> operator. A groovier way to express this: <<<a.xor(b)>>> is this: <<<a ^ b>>>. This rule can be
   configured to ignore <<<this.xor(Object)>>> using the <ignoreThisReference> property. It defaults to <false>, so
   even <<<xor(x)>>> will trigger a violation.
+
+  This rule also ignores all calls to <<<super.xor(Object)>>>.
+
 
 * ExplicitGarbageCollection Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
