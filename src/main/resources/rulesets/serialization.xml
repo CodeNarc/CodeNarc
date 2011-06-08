@@ -1,0 +1,15 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Serialization rule set.
+        These rules check for Java serialization-specific violations.
+    </description>
+
+    <rule class='org.codenarc.rule.serialization.SerializableClassMustDefineSerialVersionUIDRule'/>
+    <rule class='org.codenarc.rule.serialization.SerialPersistentFieldsRule'/>
+    <rule class='org.codenarc.rule.serialization.SerialVersionUIDRule'/>
+
+</ruleset>

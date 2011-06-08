@@ -25,7 +25,6 @@ NEW AND UPDATED RULES
 - PublicFinalizeMethod rule (security) - Creates a violation when the program violates secure coding principles by declaring a finalize() method public.
 - NonFinalPublicField rule (security) - Finds code that violates secure coding principles for mobile code by declaring a member variable public but not final.
 - UnnecessaryElseStatement rule (unnecessary) - When an if statement block ends with a return statement the else is unnecessary. The logic in the else branch can be run without being in a new scope.
-- SerialPersistentFields rule (basic) - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
 - StaticConnection rule (concurrency) - Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.
 - UnnecessaryPackageReference (unnecessary) - Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String, java.util.Map and groovy.lang.Closure.
 - AbstractClassWithPublicConstructor (design) - Checks for abstract classes that define a public constructor, which is useless and confusing.
@@ -41,6 +40,7 @@ NEW AND UPDATED RULES
 - StatelessSingleton rule (design) - Rule finds occurrences of the Singleton pattern where the object has no state (mutable or otherwise). There is no point in creating a stateless Singleton, just make a new instance with the new keyword instead.
 - InconsistentPropertySynchronization rule (concurrency) - The rule is a little smarter now and flags code that defines a synchronized getter without any setter and vice versa. Those methods will be generated in unsynchronized from by the Groovy compiler later.
 - ClosureAsLastMethodParameter rule (basic) - If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.
+- SerialPersistentFields rule (serialization) - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
 
 BUG FIXES and NEW FEATURES
 - Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime.
@@ -74,8 +74,13 @@ BUG FIXES and NEW FEATURES
 - #3309748 - FieldName:Do not treat non-static final fields as constants
 - #3310413 - Fix UnnecessaryPublicModifier does not catch public on constructors.
 - #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from René Scheibe
-- BREAKING CHANGE: Moved import-specific helper methods out of AbstractRule into ImportUtil.
-- BREAKING CHANGE: The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
+
+BREAKING CHANGES
+*** Moved the following rules out of the "basic" ruleset into the new "serialization" ruleset:
+   - SerialVersionUID
+   - SerializableClassMustDefineSerialVersionUID
+*** Moved import-specific helper methods out of AbstractRule into ImportUtil.
+*** The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 
 THANKS
   Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop, UnnecessaryElse, StatelessSingleton, PublicInstanceField, and EmptyCatchBlock rules.

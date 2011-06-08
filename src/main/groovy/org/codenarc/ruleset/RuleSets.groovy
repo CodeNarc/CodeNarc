@@ -38,6 +38,7 @@ class RuleSets {
         'rulesets/logging.xml',
         'rulesets/naming.xml',
         'rulesets/security.xml',
+        'rulesets/serialization.xml',
         'rulesets/size.xml',
         'rulesets/unnecessary.xml',
         'rulesets/unused.xml'

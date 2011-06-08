@@ -145,12 +145,6 @@ Rule Index
     
     * ReturnsNullInsteadOfEmptyCollection
     
-    * SerialPersistentFields
-    
-    * SerialVersionUID
-    
-    * SerializableClassMustDefineSerialVersionUID
-    
     * SimpleDateFormatMissingLocale
     
     * ThrowExceptionFromFinallyBlock
@@ -463,6 +457,17 @@ Rule Index
     * SystemExit
     
     * UnsafeArrayDeclaration
+    
+    
+    
+    
+* {{{codenarc-rules-serialization.html}Serialization}}
+    
+    * SerialPersistentFields
+    
+    * SerialVersionUID
+    
+    * SerializableClassMustDefineSerialVersionUID
     
     
     

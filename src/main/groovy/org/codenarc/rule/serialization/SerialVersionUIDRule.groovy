@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.serialization
 
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode

@@ -74,9 +74,6 @@ ruleset {
     ReturnFromFinallyBlock
     ReturnsNullInsteadOfEmptyArray
     ReturnsNullInsteadOfEmptyCollection
-    SerialPersistentFields
-    SerialVersionUID
-    SerializableClassMustDefineSerialVersionUID
     SimpleDateFormatMissingLocale
     ThrowExceptionFromFinallyBlock
     
@@ -227,6 +224,11 @@ ruleset {
     PublicFinalizeMethod
     SystemExit
     UnsafeArrayDeclaration
+    
+    // rulesets/serialization.xml
+    SerialPersistentFields
+    SerialVersionUID
+    SerializableClassMustDefineSerialVersionUID
     
     // rulesets/size.xml
     AbcComplexity
