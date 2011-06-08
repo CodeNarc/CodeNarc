@@ -74,6 +74,8 @@ BUG FIXES and NEW FEATURES
 - #3309748 - FieldName:Do not treat non-static final fields as constants
 - #3310413 - Fix UnnecessaryPublicModifier does not catch public on constructors.
 - #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from René Scheibe
+- #3313550 - Some HTML violation descriptions in the properties files were not well-formed HTML. This has been fixed.
+- #3205688 - Fixed false positives in UseAssertEqualsInsteadOfAssertTrue when using the JUnit assertFalse method. 
 
 BREAKING CHANGES
 *** Moved the following rules out of the "basic" ruleset into the new "serialization" ruleset:

@@ -42,6 +42,12 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
                     assertSame(foo(), foo())
                     assertTrue(foo() > bar())
                     assertTrue('message', obj.foo() != obj.bar())
+
+                   assertFalse(foo() == bar())
+                   assertFalse('message', obj.foo() == obj.bar())
+
+                   assertTrue(foo() != bar())
+                   assertTrue('message', obj.foo() != obj.bar())
                 }
               }
         '''
@@ -63,17 +69,17 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     }
 
 
-    void testEqualsInFalseTest() {
+    void testNotEqualsInAssertFalseTest() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
                 void testMethod() {
-                   assertFalse(foo() == bar())
+                   assertFalse(foo() != bar())
                    assertFalse('message', obj.foo() != obj.bar())
                 }
               }
         '''
         assertTwoViolations(SOURCE,
-                4, 'assertFalse(foo() == bar())',
+                4, 'assertFalse(foo() != bar())',
                 5, "assertFalse('message', obj.foo() != obj.bar())")
     }
 

@@ -41,16 +41,15 @@ class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
     def void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)
-        if (AstUtil.isMethodCall(call, ['this', 'Assert'], ['assertTrue', 'assertFalse'])) {
-
-            if (args.size() < 3 && args.size() > 0) {
-                def arg = args.last()
-                if (AstUtil.isBinaryExpressionType(arg, '==')) {
-                    addViolation call, "Replace $call.methodAsString with a call to assertEquals()"
-                }
-                if (AstUtil.isBinaryExpressionType(arg, '!=') && call.methodAsString == 'assertFalse') {
-                    addViolation call, "Replace $call.methodAsString with a call to assertEquals()"
-                }
+        if (args.size() < 3 && args.size() > 0) {
+            def arg = args.last()
+            if (AstUtil.isMethodCall(call, ['this', 'Assert'], ['assertTrue']) &&
+                    AstUtil.isBinaryExpressionType(arg, '==')) {
+                addViolation call, "Replace $call.methodAsString with a call to assertEquals()"
+            }
+            if (AstUtil.isMethodCall(call, ['this', 'Assert'], ['assertFalse']) &&
+                    AstUtil.isBinaryExpressionType(arg, '!=') && call.methodAsString == 'assertFalse') {
+                addViolation call, "Replace $call.methodAsString with a call to assertEquals()"
             }
         }
 

@@ -15,6 +15,8 @@
  */
 package org.codenarc.ruleset
 
+import javax.xml.parsers.DocumentBuilder
+import javax.xml.parsers.DocumentBuilderFactory
 import org.codenarc.test.AbstractTestCase
 
 /**
@@ -28,14 +30,54 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
     private static final BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
     private messages
 
-    void testLoadAllPredefinedRuleSets() {
+    void testPredefinedRulesHaveDescriptions() {
+
+        forEachRule { rule ->
+            assert messages.getString(rule.name + '.description')
+            assert messages.getString(rule.name + '.description.html')
+        }
+    }
+
+    @SuppressWarnings('CatchThrowable')
+    void testPredefinedRulesHaveValidHtmlDescriptions() {
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance()
+        factory.validating = false
+        factory.namespaceAware = true
+        DocumentBuilder builder = factory.newDocumentBuilder()
+
+
+        def errors = []
+        forEachRule { rule ->
+            String propertyName = rule.name + '.description.html'
+
+            def htmlSnippet = messages.getString(propertyName)
+
+            //builder.setErrorHandler(new SimpleErrorHandler());
+            ByteArrayInputStream bs = new ByteArrayInputStream(('<root>' + htmlSnippet + '</root>').bytes)
+            try {
+                builder.parse(bs)
+            } catch (Throwable t) {
+                errors.add("""An error occurred parsing the property $propertyName
+Value: $htmlSnippet
+Error: $t.message
+
+""")
+            }
+        }
+        if (errors) {
+            fail(errors.join('\n'))
+        }
+    }
+
+    private forEachRule(Closure assertion) {
         RuleSets.ALL_RULESET_FILES.each { ruleSetPath ->
             def ruleSet = new XmlFileRuleSet(ruleSetPath)
             def rules = ruleSet.rules
             log("[$ruleSetPath] rules=$rules")
             assert rules
 
-            rules.each { rule -> assertDescriptionInMessagesBundle(rule.name) }
+            rules.each(assertion)
         }
     }
 
@@ -44,8 +86,4 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
         messages = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE)
     }
 
-    private void assertDescriptionInMessagesBundle(String ruleName) {
-        assert messages.getString(ruleName + '.description')
-        assert messages.getString(ruleName + '.description.html')
-    }
 }
