@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -24,18 +24,19 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codenarc.util.SourceCodeUtil
 
 /**
- * If a method is called and the last parameter is an inline closure it can be declared outside of the method call brackets.
+ * If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
  *
- * @author Marcin Erdmann
+ * @author 'Marcin Erdmann'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
-    String name = 'ClosureAsLastMethodParameter'
+class UnnecessaryBracketsForMethodWithClosureCallRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryBracketsForMethodWithClosureCall'
     int priority = 3
-    Class astVisitorClass = ClosureAsLastMethodParameterAstVisitor
+    Class astVisitorClass = UnnecessaryBracketsForMethodWithClosureCallAstVisitor
 }
 
-class ClosureAsLastMethodParameterAstVisitor extends AbstractAstVisitor {
+class UnnecessaryBracketsForMethodWithClosureCallAstVisitor extends AbstractAstVisitor {
+    private final static EMPTY_BRACKETS_PATTERN = /\s*\(\s*\)\s*/
 
     @Override
     protected String sourceLine(ASTNode node) {
@@ -44,17 +45,16 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
+        super.visitMethodCallExpression(call)
         if (isFirstVisit(call)) {
             def arguments = AstUtil.getMethodArguments(call)
-            if (arguments && arguments.last() instanceof ClosureExpression) {
-                def lastColumnForClosure = arguments.last().lastColumnNumber
-                def lastColumnForMethodCall = call.lastColumnNumber
-                if (lastColumnForClosure < lastColumnForMethodCall) {
-                    addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure an can appear outside the parenthesis")
+            if (arguments.size() == 1 && arguments.first() instanceof ClosureExpression) {
+                def sourceBetweenMethodAndClosure = SourceCodeUtil.sourceLinesBetweenNodes(sourceCode, call.method,
+                    arguments.first()).join()
+                if (sourceBetweenMethodAndClosure ==~ EMPTY_BRACKETS_PATTERN) {
+                    addViolation(call, "Brackets in the '$call.methodAsString' method call are unnecessary and can be removed.")
                 }
             }
         }
-        super.visitMethodCallExpression(call)
     }
-
 }

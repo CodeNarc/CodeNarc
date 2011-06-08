@@ -83,6 +83,17 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
+* UnnecessaryBracketsForMethodWithClosureCall Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+  If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    [1,2,3].each() { println it }
+-------------------------------------------------------------------------------
+
 * UnnecessaryCallForLastElement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>

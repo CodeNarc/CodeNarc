@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.14 (May 2011)
+Changes in version 0.14 (June 2011)
 -------------------------------------------
 NEW AND UPDATED RULES
 - ExplicitLinkedHashMapInstantiation rule (basic) - This rule checks for the explicit instantiation of a LinkedHashMap using the no-arg constructor. In Groovy, it is best to write "new LinkedHashMap()" as "[:]", which creates the same object.
@@ -41,6 +41,7 @@ NEW AND UPDATED RULES
 - InconsistentPropertySynchronization rule (concurrency) - The rule is a little smarter now and flags code that defines a synchronized getter without any setter and vice versa. Those methods will be generated in unsynchronized from by the Groovy compiler later.
 - ClosureAsLastMethodParameter rule (basic) - If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.
 - SerialPersistentFields rule (serialization) - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
+- UnnecessaryBracketsForMethodWithClosureCall rule (unnecessary) - If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
 
 BUG FIXES and NEW FEATURES
 - Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime.
@@ -89,7 +90,7 @@ THANKS
   Thank you to Jan Ahrens and Stefan Armbruster for the SpockIgnoreRestUsed rule.
   Thank you to Rob Fletcher and Klaus Baumecker for the SwallowThreadDeath rule.
   Thank you to Erik Pragt for the MisorderedStaticImports rule.
-  Thank you to Marcin Erdmann for the MisorderedStaticImports and ClosureAsLastMethodParameterInBracketsRule.
+  Thank you to Marcin Erdmann for the MisorderedStaticImports, ClosureAsLastMethodParameterInBracketsRule, and UnnecessaryBracketsForMethodWithClosureCall rules.
   Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
   Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
 

@@ -144,7 +144,7 @@ class XmlReportWriter extends AbstractReportWriter {
     protected buildRulesElement(AnalysisContext analysisContext) {
         def sortedRules = getSortedRules(analysisContext)
         return {
-            Rules() {
+            Rules {
                 sortedRules.each { rule ->
                     def description = this.getDescriptionForRule(rule)
                     Rule(name:rule.name) {

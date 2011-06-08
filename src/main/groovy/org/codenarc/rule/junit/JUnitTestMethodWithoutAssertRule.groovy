@@ -94,7 +94,7 @@ class AssertionTrap extends AbstractAstVisitor {
 
     private boolean methodNamesCountsAsAssertion(methodName) {
         if (methodName instanceof String) {
-            return assertMethodPatterns.any() { pattern ->
+            return assertMethodPatterns.any { pattern ->
                 methodName.matches(pattern)
             }
         }

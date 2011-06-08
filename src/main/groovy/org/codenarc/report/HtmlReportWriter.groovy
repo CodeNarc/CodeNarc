@@ -57,7 +57,7 @@ class HtmlReportWriter extends AbstractReportWriter {
 
         initializeResourceBundle()
         def builder = new StreamingMarkupBuilder()
-        def html = builder.bind() {
+        def html = builder.bind {
             html {
                 out << buildHeaderSection()
                 out << buildBodySection(analysisContext, results)
@@ -139,7 +139,7 @@ class HtmlReportWriter extends AbstractReportWriter {
         return {
             div(class: 'summary') {
                 h2(getResourceBundleString('htmlReport.summary.title'))
-                table() {
+                table {
                     tr(class:'tableHeader') {
                         th(getResourceBundleString('htmlReport.summary.packageHeading'))
                         th(getResourceBundleString('htmlReport.summary.totalFilesHeading'))
