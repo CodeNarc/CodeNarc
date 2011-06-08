@@ -203,7 +203,6 @@ ruleset {
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDoubleInstantiation
     UnnecessaryElseStatement
-    UnnecessaryEqualityWithNull
     UnnecessaryFail
     UnnecessaryFinalOnPrivateMethod
     UnnecessaryFloatInstantiation

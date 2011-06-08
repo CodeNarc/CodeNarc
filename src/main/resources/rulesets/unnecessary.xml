@@ -20,7 +20,6 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryConstructorRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInMethodDeclarationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDoubleInstantiationRule'/>
-    <rule class='org.codenarc.rule.unnecessary.UnnecessaryEqualityWithNullRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryFinalOnPrivateMethodRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryFloatInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryGetterRule'/>

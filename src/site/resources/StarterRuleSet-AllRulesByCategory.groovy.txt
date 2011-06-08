@@ -250,7 +250,6 @@ ruleset {
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDoubleInstantiation
     UnnecessaryElseStatement
-    UnnecessaryEqualityWithNull
     UnnecessaryFinalOnPrivateMethod
     UnnecessaryFloatInstantiation
     UnnecessaryGString
