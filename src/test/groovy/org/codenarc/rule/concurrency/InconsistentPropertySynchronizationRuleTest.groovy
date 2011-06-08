@@ -177,6 +177,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'synchronized List getAddresses',
                 'The getter method getAddresses is synchronized but the setter method setAddresses is not')
     }
+
     void testAtSyncedGetterMissingSetter_FullyQualified() {
         final SOURCE = '''
             class Person {
@@ -205,6 +206,48 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
             }'''
         assertSingleViolation(SOURCE, 8, '@Synchronized List getAddresses()',
                 'The getter method getAddresses is synchronized but the setter method setAddresses is not')
+    }
+
+    /**
+     * In this test there is no Properties property, so synchronizing on getProperties is OK because there is never a setter. 
+     */
+    void testFalsePositiveOnGetter() {
+        final SOURCE = '''
+            class DbConfigurationProperties {
+
+                String dbConfigurationFile
+
+                private synchronized Object getA() {
+                    null
+                }
+            } '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testFalsePositiveOnSetter() {
+        final SOURCE = '''
+            class DbConfigurationProperties {
+
+                String dbConfigurationFile
+
+                private synchronized void setProperties(Properties p) {
+
+                }
+            } '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testFalsePositiveOnIzzer() {
+        final SOURCE = '''
+            class DbConfigurationProperties {
+
+                String dbConfigurationFile
+
+                private synchronized boolean isProperties() {
+                    true
+                }
+            } '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

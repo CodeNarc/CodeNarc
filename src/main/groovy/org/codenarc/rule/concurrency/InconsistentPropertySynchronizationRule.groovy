@@ -56,24 +56,46 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
             // is a getter
             def propName = node.name[3..-1]
             saveMethodInfo(node)
-            addViolationOnMismatch([node.name], "set$propName")
+            // does the enclosing class have this property?
+            if (AstUtil.classNodeHasProperty(currentClass, extractPropertyName(node))) {
+                addViolationOnMismatch([node.name], "set$propName")
+            }
         }
 
         if (node.name.startsWith('is') && node.name.size() > 2 && AstUtil.getParameterNames(node).isEmpty()) {
             // is a getter
             def propName = node.name[2..-1]
             saveMethodInfo(node)
-            addViolationOnMismatch([node.name], "set$propName")
+            if (AstUtil.classNodeHasProperty(currentClass, extractPropertyName(node))) {
+                addViolationOnMismatch([node.name], "set$propName")
+            }
         }
 
         if (node.name.startsWith('set') && node.name.size() > 3 && AstUtil.getParameterNames(node).size() == 1) {
             // is a setter
             def propName = node.name[3..-1]
             saveMethodInfo(node)
-            addViolationOnMismatch(["get$propName", "is$propName"], node.name)
+            if (AstUtil.classNodeHasProperty(currentClass, extractPropertyName(node))) {
+                addViolationOnMismatch(["get$propName", "is$propName"], node.name)
+            }
         }
 
         super.visitMethodEx(node)
+    }
+
+    private static String extractPropertyName(MethodNode node) {
+        if (node.name.startsWith('get') || node.name.startsWith('set')) {
+            if (node.name.length() == 4) {
+                return node.name[3..-1].toLowerCase()
+            }
+            return node.name[3].toLowerCase() + node.name[4..-1]
+        } else if (node.name.startsWith('is')) {
+            if (node.name.length() == 3) {
+                return node.name[2..-1].toLowerCase()
+            }
+            return node.name[2].toLowerCase() + node.name[3..-1]
+        }
+        throw new IllegalArgumentException("MethodNode $node.name is not a getter/setter/izzer")
     }
 
     private saveMethodInfo(MethodNode node) {
@@ -90,7 +112,7 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
 
     void addViolationOnMismatch(List getterNames, String setterName) {
         getterNames = getterNames*.toString() // force GString into strings
-        
+
         if (containsKey(synchronizedMethods, getterNames) && unsynchronizedMethods.containsKey(setterName)) {
             def getterName = getFirstValue(synchronizedMethods, getterNames).name
             MethodNode node = unsynchronizedMethods.get(setterName)

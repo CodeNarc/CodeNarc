@@ -819,4 +819,8 @@ class AstUtil {
     static boolean isThisReference(Expression expression) {
         expression instanceof VariableExpression && expression.variable == 'this'
     }
+
+    static classNodeHasProperty(ClassNode classNode, String propertyName) {
+        classNode.fields.any { it.name == propertyName } || classNode.properties.any { it.name == propertyName }
+    }
 }
