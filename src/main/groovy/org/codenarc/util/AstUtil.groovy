@@ -199,7 +199,7 @@ class AstUtil {
     }
 
     /**
-     * Tells you if the expression is a method call on a particual object (which is represented as a String).
+     * Tells you if the expression is a method call on a particular object (which is represented as a String).
      * For instance, you may ask isMethodCallOnObject(e, 'this') to find a this reference.  
      * @param expression
      *      the expression
@@ -209,10 +209,18 @@ class AstUtil {
      * as described
      */
     static boolean isMethodCallOnObject(Expression expression, String methodObjectPattern) {
-        expression instanceof MethodCallExpression &&
-            ((expression.objectExpression instanceof VariableExpression && expression.objectExpression.name?.matches(methodObjectPattern)) ||
-            (expression.objectExpression instanceof PropertyExpression && expression.objectExpression.text?.matches(methodObjectPattern)))
-
+        if (expression instanceof MethodCallExpression) {
+            if (expression.objectExpression instanceof VariableExpression && expression.objectExpression.name?.matches(methodObjectPattern)) {
+                return true
+            }
+            if (expression.objectExpression instanceof PropertyExpression && expression.objectExpression.text?.matches(methodObjectPattern)) {
+                return true
+            }
+            if (expression.objectExpression instanceof MethodCallExpression && isMethodNamed(expression.objectExpression, methodObjectPattern)) {
+                return true
+            }
+        }
+        false
     }
 
     /**
@@ -346,6 +354,16 @@ class AstUtil {
      */
     static boolean isConstructorCall(Expression expression, List<String> classNames) {
         expression instanceof ConstructorCallExpression && expression.type.name in classNames
+    }
+
+    /**
+     * Return true if the expression is a constructor call on a class that matches the supplied.
+     * @param expression - the expression
+     * @param className - the possible List of class names
+     * @return as described
+     */
+    static boolean isConstructorCall(Expression expression, String classNamePattern) {
+        expression instanceof ConstructorCallExpression && expression.type.name ==~ classNamePattern
     }
 
     /**

@@ -15,20 +15,13 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.TryCatchStatement
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.stmt.IfStatement
-import org.codehaus.groovy.ast.stmt.EmptyStatement
-import org.codehaus.groovy.ast.stmt.WhileStatement
-import org.codehaus.groovy.ast.stmt.CaseStatement
-import org.codehaus.groovy.ast.stmt.ForStatement
-import org.codehaus.groovy.ast.stmt.SynchronizedStatement
-import org.codehaus.groovy.ast.stmt.CatchStatement
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.stmt.*
 
 /**
  * Rule that checks for blocks or closures nested more than a configured maximum number.
@@ -47,10 +40,11 @@ class NestedBlockDepthRule extends AbstractAstVisitorRule {
     String name = 'NestedBlockDepth'
     int priority = 2
     int maxNestedBlockDepth = 5
+    String ignoreRegex = '.*(b|B)uilder'
     Class astVisitorClass = NestedBlockDepthAstVisitor
 }
 
-class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
+class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
     private Set blocksToProcess = []
     private Set closureFieldExpressions
     private nestedBlockDepth = 0
@@ -65,7 +59,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
         classNode.fields.each {fieldNode ->
             if (!AstUtil.isFromGeneratedSourceCode(fieldNode) &&
                     fieldNode.initialExpression instanceof ClosureExpression) {
-                closureFieldExpressions << fieldNode.initialExpression 
+                closureFieldExpressions << fieldNode.initialExpression
             }
         }
     }
@@ -125,6 +119,15 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor  {
         }
         else {
             handleNestedNode(expression) { super.visitClosureExpression(expression) }
+        }
+    }
+
+
+    @Override
+    void visitMethodCallExpression(MethodCallExpression call) {
+        if (!AstUtil.isMethodCallOnObject(call, rule.ignoreRegex)
+                && !AstUtil.isConstructorCall(call.objectExpression, rule.ignoreRegex)) {
+            super.visitMethodCallExpression(call)
         }
     }
 

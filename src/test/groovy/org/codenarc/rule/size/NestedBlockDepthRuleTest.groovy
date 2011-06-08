@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.Rule
 
 /**
  * Tests for NestedBlockDepthRule
@@ -272,6 +272,84 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
             '''
         rule.maxNestedBlockDepth = 1
         assertSingleViolation(SOURCE, 5, 'myList.each { element ->', '2')
+    }
+
+    void testBuilderConstructorInvocation() {
+        final SOURCE = '''
+            new MarkupBuilder().root {
+                foo {
+                    bar {
+                        baz {
+                            quix {
+                                qux {
+                                    quaxz {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testBuilderPropertyInvocation() {
+        final SOURCE = '''
+            myBuilder.root {
+                foo {
+                    bar {
+                        baz {
+                            quix {
+                                qux {
+                                    quaxz {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testBuilderMethodInvocation() {
+        final SOURCE = '''
+            createBuilder().root {
+                foo {
+                    bar {
+                        baz {
+                            quix {
+                                qux {
+                                    quaxz {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testNotABuilderMethodInvocation() {
+        final SOURCE = '''
+            notABuilderMethod().root {
+                foo {
+                    bar {
+                        baz {
+                            quix {
+                                qux {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 7, 'qux {', 'The nested block depth is 6')
     }
 
     protected Rule createRule() {
