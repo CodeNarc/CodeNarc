@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 241 rules.
+  <<CodeNarc>> includes 240 rules.
 
     
     
@@ -511,8 +511,6 @@ Rule Index
     * UnnecessaryDoubleInstantiation
     
     * UnnecessaryElseStatement
-    
-    * UnnecessaryEqualityWithNull
     
     * UnnecessaryFinalOnPrivateMethod
     
