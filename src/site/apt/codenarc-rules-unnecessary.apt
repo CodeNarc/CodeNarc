@@ -83,17 +83,6 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryBracketsForMethodWithClosureCall Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
-  If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-    [1,2,3].each() { println it }
--------------------------------------------------------------------------------
-
 * UnnecessaryCallForLastElement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -662,6 +651,19 @@ def Object method5() { return 4 }
 
   * Does not catch class declarations that explicitly extend <<<java.lang.Object>>>. For instance,
     <<<class MyClass extends java.lang.Object { }>>>. Just don't do that, okay?
+
+
+* UnnecessaryParenthesesForMethodCallWithClosure Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.14>
+
+  If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    [1,2,3].each() { println it }
+-------------------------------------------------------------------------------
 
 
 * UnnecessaryPublicModifier Rule

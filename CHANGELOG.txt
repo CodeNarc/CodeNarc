@@ -41,7 +41,7 @@ NEW AND UPDATED RULES
 - InconsistentPropertySynchronization rule (concurrency) - The rule is a little smarter now and flags code that defines a synchronized getter without any setter and vice versa. Those methods will be generated in unsynchronized from by the Groovy compiler later.
 - ClosureAsLastMethodParameter rule (basic) - If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.
 - SerialPersistentFields rule (serialization) - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
-- UnnecessaryBracketsForMethodWithClosureCall rule (unnecessary) - If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
+- UnnecessaryParenthesesForMethodCallWithClosure rule (unnecessary) - If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
 
 BUG FIXES and NEW FEATURES
 - Groovy 1.8 Support - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime.

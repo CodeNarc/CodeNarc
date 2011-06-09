@@ -29,13 +29,13 @@ import org.codenarc.util.SourceCodeUtil
  * @author 'Marcin Erdmann'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class UnnecessaryBracketsForMethodWithClosureCallRule extends AbstractAstVisitorRule {
-    String name = 'UnnecessaryBracketsForMethodWithClosureCall'
+class UnnecessaryParenthesesForMethodCallWithClosureRule extends AbstractAstVisitorRule {
+    String name = 'UnnecessaryParenthesesForMethodCallWithClosure'
     int priority = 3
-    Class astVisitorClass = UnnecessaryBracketsForMethodWithClosureCallAstVisitor
+    Class astVisitorClass = UnnecessaryParenthesesForMethodCallWithClosureAstVisitor
 }
 
-class UnnecessaryBracketsForMethodWithClosureCallAstVisitor extends AbstractAstVisitor {
+class UnnecessaryParenthesesForMethodCallWithClosureAstVisitor extends AbstractAstVisitor {
     private final static EMPTY_BRACKETS_PATTERN = /\s*\(\s*\)\s*/
 
     @Override

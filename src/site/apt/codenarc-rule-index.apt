@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 240 rules.
+  <<CodeNarc>> includes 241 rules.
 
     
     
@@ -544,6 +544,8 @@ Rule Index
     * UnnecessaryOverridingMethod
     
     * UnnecessaryPackageReference
+    
+    * UnnecessaryParenthesesForMethodCallWithClosure
     
     * UnnecessaryPublicModifier
     

@@ -219,6 +219,7 @@ ruleset {
     UnnecessaryObjectReferences
     UnnecessaryOverridingMethod
     UnnecessaryPackageReference
+    UnnecessaryParenthesesForMethodCallWithClosure
     UnnecessaryPublicModifier
     UnnecessaryReturnKeyword
     UnnecessarySelfAssignment
