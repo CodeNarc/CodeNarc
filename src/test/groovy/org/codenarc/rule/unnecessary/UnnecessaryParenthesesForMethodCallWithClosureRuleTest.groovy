@@ -47,7 +47,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         final SOURCE = '''
             [1,2,3].each() { println it }
         '''
-        assertSingleViolation(SOURCE, 2, '[1,2,3].each() { println it }', "Brackets in the 'each' method call are unnecessary and can be removed.")
+        assertSingleViolation(SOURCE, 2, '[1,2,3].each() { println it }', "Parentheses in the 'each' method call are unnecessary and can be removed.")
     }
 
     void testTwoViolations() {

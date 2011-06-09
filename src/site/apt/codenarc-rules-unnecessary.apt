@@ -657,7 +657,7 @@ def Object method5() { return 4 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
-  If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
+  If a method is called and the only parameter to that method is an inline closure then the parentheses of the method call can be omitted.
 
   Example of violations:
 

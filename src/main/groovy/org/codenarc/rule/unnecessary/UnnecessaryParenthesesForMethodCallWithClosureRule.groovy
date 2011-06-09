@@ -52,7 +52,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureAstVisitor extends AbstractA
                 def sourceBetweenMethodAndClosure = SourceCodeUtil.sourceLinesBetweenNodes(sourceCode, call.method,
                     arguments.first()).join()
                 if (sourceBetweenMethodAndClosure ==~ EMPTY_BRACKETS_PATTERN) {
-                    addViolation(call, "Brackets in the '$call.methodAsString' method call are unnecessary and can be removed.")
+                    addViolation(call, "Parentheses in the '$call.methodAsString' method call are unnecessary and can be removed.")
                 }
             }
         }
