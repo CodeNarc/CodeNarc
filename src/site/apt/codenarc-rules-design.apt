@@ -1,9 +1,10 @@
-		--------------------------------------------------
-					  CodeNarc - Design Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Design Rules
+        --------------------------------------------------
 
 Design Rules  ("<rulesets/design.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * AbstractClassWithPublicConstructor Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,7 +108,7 @@ Design Rules  ("<rulesets/design.xml>")
    * java.util.HashMap
 
    * java.util.HashSet
-   
+
    * java.util.Hashtable
 
    * java.util.LinkedHashMap
@@ -172,7 +173,6 @@ Design Rules  ("<rulesets/design.xml>")
 -------------------------------------------------------------------------------
 
 
-
 * FinalClassWithProtectedMember Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -196,6 +196,7 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
+
 * StatelessSingleton Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
@@ -211,23 +212,24 @@ Design Rules  ("<rulesets/design.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-  @groovy.lang.Singleton
-  class Service {
-     // violation: the class has no fields but is marked Singleton
-      void processItem(item){
-      }
-  }
+    @groovy.lang.Singleton
+    class Service {
+       // violation: the class has no fields but is marked Singleton
+        void processItem(item){
+        }
+    }
 
-  class Service {
-     // violation: the class has no fields other than 'instance' but is marked Singleton
-      static instance
-      void processItem(item){
-      }
-  }
-  
-  class Service {                                       // violation
-      static Service service
-      void processItem(item){
-      }
-  }  
+    class Service {
+       // violation: the class has no fields other than 'instance' but is marked Singleton
+        static instance
+        void processItem(item){
+        }
+    }
+
+    class Service {                                       // violation
+        static Service service
+        void processItem(item){
+        }
+    }
 -------------------------------------------------------------------------------
+

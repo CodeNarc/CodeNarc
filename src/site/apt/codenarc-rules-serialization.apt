@@ -1,9 +1,10 @@
-		--------------------------------------------------
-					  CodeNarc - Serialization Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Serialization Rules
+        --------------------------------------------------
 
 Serialization Rules  ("<rulesets/serialization.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * SerialPersistentFields Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,6 +67,4 @@ Serialization Rules  ("<rulesets/serialization.xml>")
         // missing serialVersionUID
     }
 -------------------------------------------------------------------------------
-
-
 

@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					  CodeNarc - Security Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Security Rules
+        --------------------------------------------------
 
 Security Rules  ("<rulesets/security.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,14 +31,14 @@ Security Rules  ("<rulesets/security.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-      def r1 = new Random()
-      def r2 = new java.util.Random()
-      Math.random()
-      java.lang.Math.random()
+     def r1 = new Random()
+     def r2 = new java.util.Random()
+     Math.random()
+     java.lang.Math.random()
 
-      // this is OK
-      new java.security.SecureRandom()
-      new SecureRandom()
+     // this is OK
+     new java.security.SecureRandom()
+     new SecureRandom()
 -------------------------------------------------------------------------------
 
 
@@ -63,27 +63,27 @@ Security Rules  ("<rulesets/security.xml>")
 
   []
 
-  By default, this rule is not applied to tests and test cases.  
+  By default, this rule is not applied to tests and test cases.
 
   Example of violations:
 
 -------------------------------------------------------------------------------
-FileSystem.getFileSystem() // any method on FileSystem
-FileSystem.fileSystem.delete(aFile) // property access of FileSystem
+    FileSystem.getFileSystem()          // any method on FileSystem
+    FileSystem.fileSystem.delete(aFile) // property access of FileSystem
 
-// shouldn't create files
-new File(name)
-new File(name, parent)
+    // shouldn't create files
+    new File(name)
+    new File(name, parent)
 
-// don't create file readers
-new FileReader(name)
+    // don't create file readers
+    new FileReader(name)
 
-// don't create file output streams
-new FileOutputStream(name)
-new FileOutputStream(name, true)
+    // don't create file output streams
+    new FileOutputStream(name)
+    new FileOutputStream(name, true)
 
-// don't create random access file
-new RandomAccessFile(name, parent)
+    // don't create random access file
+    new RandomAccessFile(name, parent)
 -------------------------------------------------------------------------------
 
 
@@ -151,7 +151,7 @@ new RandomAccessFile(name, parent)
   you are using <<<finalize()>>> as it was designed, there is no reason to declare <<<finalize()>>> with anything other than protected
   access.
 
-  References: 
+  References:
 
   * Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 583
 
@@ -188,7 +188,6 @@ new RandomAccessFile(name, parent)
   [[4]] Standards Mapping - Payment Card Industry Data Security Standard Version 1.1 - (PCI 1.1) Requirement 6.5.9
 
 
-
 * UnsafeArrayDeclaration Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
@@ -203,9 +202,9 @@ new RandomAccessFile(name, parent)
   Example of violations:
 
 -------------------------------------------------------------------------------
-  class MyClass {
-    public static final String[] myArray = init()
-    public static final def myArray = [] as String[]
-  }
+    class MyClass {
+        public static final String[] myArray = init()
+        public static final def myArray = [] as String[]
+    }
 -------------------------------------------------------------------------------
 

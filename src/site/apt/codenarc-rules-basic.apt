@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					  CodeNarc - Basic Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Basic Rules
+        --------------------------------------------------
 
 Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,11 +53,12 @@ Basic Rules  ("<rulesets/basic.xml>")
     value == true ?: x
 -------------------------------------------------------------------------------
 
+
 * BigDecimalInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for calls to the <<<java.math.BigDecimal>>> constructors that take a <<<double>>> value as
-  the first parameter. As described in the <<<BigDecimal>>> javadoc, the results from these constructors 
+  the first parameter. As described in the <<<BigDecimal>>> javadoc, the results from these constructors
   can be somewhat unpredictable, and their use is generally not recommended. This is because some numbers,
   such as 0.1, cannot be represented exactly as a <<<double>>>.
 
@@ -88,6 +89,7 @@ Basic Rules  ("<rulesets/basic.xml>")
     Boolean.getBoolean(value, 1)
     Boolean.getBoolean()
 -------------------------------------------------------------------------------
+
 
 * BooleanMethodReturnsNull Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,7 +128,7 @@ Basic Rules  ("<rulesets/basic.xml>")
   Using <<<Class.forName(...)>>> is a common way to add dynamic behavior to a system. However, using this method can cause
   resource leaks because the classes can be pinned in memory for long periods of time. If you're forced to do dynamic
   class loading then use ClassLoader.loadClass instead. All variations of the <<<Class.forName(...)>>> method suffer from the
-  same problem. 
+  same problem.
 
   For more information see these links:
 
@@ -137,12 +139,10 @@ Basic Rules  ("<rulesets/basic.xml>")
   []
 
   Example of violations:
-  
--------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------
     Class.forName('SomeClassName')
     Class.forName(aClassName, true, aClassLoader)
-
 -------------------------------------------------------------------------------
 
 
@@ -301,6 +301,7 @@ Basic Rules  ("<rulesets/basic.xml>")
     writer.append('a', 'b').append('Hello')     // two arg append is unknown
 -------------------------------------------------------------------------------
 
+
 * ConsecutiveStringConcatenation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -331,6 +332,7 @@ Basic Rules  ("<rulesets/basic.xml>")
     def i = 'Hello' + method()  // OK because not a string
     def j = 'Hello' - "$World"  // OK because not +
 -------------------------------------------------------------------------------
+
 
 * ConstantIfExpression Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -413,20 +415,21 @@ Basic Rules  ("<rulesets/basic.xml>")
   integers or strings. Here are some examples of code that produces violations:
 
 -------------------------------------------------------------------------------
-            switch( 0 ) {
-                case 1: break;
-                case 2: break;
-                case 2: break;          // violation
-            }
-
-            switch( "test" ) {
-                case "$a": break;
-                case "$a": break;       // ok; only flags constant values (not GStrings)
-                case "ab": break;
-                case "ab": break;       // violation
-                case "abc": break;
-            }
+    switch( 0 ) {
+        case 1: break;
+        case 2: break;
+        case 2: break;          // violation
+    }
+    
+    switch( "test" ) {
+        case "$a": break;
+        case "$a": break;       // ok; only flags constant values (not GStrings)
+        case "ab": break;
+        case "ab": break;       // violation
+        case "abc": break;
+    }
 -------------------------------------------------------------------------------
+
 
 * DuplicateMapKey Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -437,14 +440,14 @@ Basic Rules  ("<rulesets/basic.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-  def var1 = [a:1, a:2, b:3]        //violation
-  def var2 = [1:1, 1:2, 2:3]        //violation
-  def var3 = ["a":1, "a":2, "b":3]  //violation
+    def var1 = [a:1, a:2, b:3]        //violation
+    def var2 = [1:1, 1:2, 2:3]        //violation
+    def var3 = ["a":1, "a":2, "b":3]  //violation
 
-  // these are OK
-  def var4 = [a:1, b:1, c:1]
-  def var5 = [1:1, 2:1, 3:1]
-  def var6 = ["a":1, "b":1, "c":1]
+    // these are OK
+    def var4 = [a:1, b:1, c:1]
+    def var5 = [1:1, 2:1, 3:1]
+    def var6 = ["a":1, "b":1, "c":1]
 -------------------------------------------------------------------------------
 
 
@@ -457,20 +460,21 @@ Basic Rules  ("<rulesets/basic.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-def a = [1, 2, 2, 4] as Set
-def b = [1, 2, 2, 4] as HashSet
-def c = [1, 2, 2, 4] as SortedSet
-def d = [1, 2, 2, 4] as FooSet
-def e = ['1', '2', '2', '4'] as Set
-def f = ['1', '2', '2', '4'] as HashSet
-def g = ['1', '2', '2', '4'] as SortedSet
-def h = ['1', '2', '2', '4'] as FooSet
+    def a = [1, 2, 2, 4] as Set
+    def b = [1, 2, 2, 4] as HashSet
+    def c = [1, 2, 2, 4] as SortedSet
+    def d = [1, 2, 2, 4] as FooSet
+    def e = ['1', '2', '2', '4'] as Set
+    def f = ['1', '2', '2', '4'] as HashSet
+    def g = ['1', '2', '2', '4'] as SortedSet
+    def h = ['1', '2', '2', '4'] as FooSet
 
-// these are OK
-def a = [1, 2, 3, 4] as Set
-def b = ['1', '2', '3', '4'] as Set
-def c = [1, '1'] as Set
+    // these are OK
+    def a = [1, 2, 3, 4] as Set
+    def b = ['1', '2', '3', '4'] as Set
+    def c = [1, '1'] as Set
 -------------------------------------------------------------------------------
+
 
 * EmptyCatchBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -619,6 +623,7 @@ def c = [1, '1'] as Set
     }
 -------------------------------------------------------------------------------
 
+
 * EmptyStaticInitializer Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -736,37 +741,41 @@ def c = [1, '1'] as Set
   Example of violations:
 
 -------------------------------------------------------------------------------
+    class Object1 {
+        //parameter should be Object not String
+        boolean equals(String other) { true }
+    }
 
-class Object1 {
-    //parameter should be Object not String
-    boolean equals(String other)  { true }
-}
-class Object2 {
-    // Overloading equals() with 2 parameters is just mean
-    boolean equals(Object other, String other2)  { true }
-}
+    class Object2 {
+        // Overloading equals() with 2 parameters is just mean
+        boolean equals(Object other, String other2) { true }
+    }
 
-class Object3 {
-    // a no-arg equals()? What is this supposed to do?
-    boolean equals()  { true }
-}
+    class Object3 {
+        // a no-arg equals()? What is this supposed to do?
+        boolean equals() { true }
+    }
 
 
-// all of these are OK and do not cause violations
-class Object4 {
-    boolean equals(Object other)  { true }
-}
-@SuppressWarnings('EqualsOverloaded')
-class Object5 {
-    boolean equals(String other)  { true }
-}
-class Object6 {
-    boolean equals(java.lang.Object other)  { true }
-}
-class Object7 {
-    boolean equals(other)  { true }
-}
+    // all of these are OK and do not cause violations
+    class Object4 {
+        boolean equals(Object other) { true }
+    }
+
+    @SuppressWarnings('EqualsOverloaded')
+    class Object5 {
+        boolean equals(String other) { true }
+    }
+
+    class Object6 {
+        boolean equals(java.lang.Object other) { true }
+    }
+
+    class Object7 {
+        boolean equals(other) { true }
+    }
 -------------------------------------------------------------------------------
+
 
 * ExplicitArrayListInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -879,7 +888,7 @@ class Object7 {
   This rule detects when the <<<multiply(Object)>>> method is called directly in code instead of using the
   <<<*>>> operator. A groovier  way to express this: <<<a.multiply(b)>>> is this: <<<a * b>>>. This rule can be
   configured to ignore <<<this.multiply(Object)>>> using the <ignoreThisReference> property. It defaults to
-  <false>, so even <<<multiply(x)>>> will trigger a violation. 
+  <false>, so even <<<multiply(x)>>> will trigger a violation.
 
   This rule also ignores all calls to <<<super.multiply(Object)>>>.
 
@@ -891,7 +900,7 @@ class Object7 {
   This rule detects when the <<<mod(Object)>>> method is called directly in code instead of using the
   <<<%>>> operator. A groovier way to express this: <<<a.mod(b)>>> is this: <<<a % b>>>. This rule can be
   configured to ignore <<<this.mod(Object)>>> using the <ignoreThisReference> property. It defaults to <false>, so
-  even <<<mod(x)>>> will trigger a violation. 
+  even <<<mod(x)>>> will trigger a violation.
 
   This rule also ignores all calls to <<<super.mod(Object)>>>.
 
@@ -903,7 +912,7 @@ class Object7 {
   This rule detects when the <<<or(Object)>>> method is called directly in code instead of using the <<<|>>>
   operator. A groovier way to express this: <<<a.or(b)>>> is this: <<<a | b>>>. This rule can be
   configured to ignore <<<this.or(Object)>>> using the <ignoreThisReference> property. It defaults to <true>, so
-  even <<<or(x)>>> will not trigger a violation. This is the default because it is commonly used in Grails criteria. 
+  even <<<or(x)>>> will not trigger a violation. This is the default because it is commonly used in Grails criteria.
 
   This rule also ignores all calls to <<<super.or(Object)>>>.
 
@@ -1045,6 +1054,7 @@ class Object7 {
     }
 -------------------------------------------------------------------------------
 
+
 * GroovyLangImmutable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -1053,34 +1063,35 @@ class Object7 {
   not use the <<<Immutable>>> in <<<groovy.lang>>>.
 
   Example of violations:
-  
+
 -------------------------------------------------------------------------------
-  @Immutable
-  class Person { }
+    @Immutable
+    class Person { }
 
-  @groovy.lang.Immutable
-  class Person { }
+    @groovy.lang.Immutable
+    class Person { }
 
-  import groovy.lang.Immutable as Imtl
-  @Imtl
-  class Person { }
+    import groovy.lang.Immutable as Imtl
+    @Imtl
+    class Person { }
 
-  // the following code is OK
-  @groovy.transform.Immutable
-  class Person { }
+    // the following code is OK
+    @groovy.transform.Immutable
+    class Person { }
 
-  import groovy.transform.Immutable
-  @Immutable
-  class Person { }
+    import groovy.transform.Immutable
+    @Immutable
+    class Person { }
 
-  import groovy.transform.*
-  @Immutable
-  class Person { }
+    import groovy.transform.*
+    @Immutable
+    class Person { }
 
-  import groovy.transform.Immutable as Imtl
-  @Imtl
-  class Person { }
+    import groovy.transform.Immutable as Imtl
+    @Imtl
+    class Person { }
 -------------------------------------------------------------------------------
+
 
 * GStringAsMapKey Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1095,6 +1106,7 @@ class Object7 {
 -------------------------------------------------------------------------------
     Map map = ["${someRef}" : 'invalid' ]       // violation
 -------------------------------------------------------------------------------
+
 
 * IntegerGetInteger Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1115,6 +1127,7 @@ class Object7 {
     Integer.getInteger()
     Integer.getInteger(value, radix, locale)
 -------------------------------------------------------------------------------
+
 
 * InvertedIfElse Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1138,7 +1151,7 @@ class Object7 {
 * ReturnFromFinallyBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Checks for a return from within a <finally> block. Returning from a <finally> block is confusing and 
+  Checks for a return from within a <finally> block. Returning from a <finally> block is confusing and
   can hide the original exception.
 
   Here is an example of code that produces a violation:
@@ -1197,6 +1210,7 @@ class Object7 {
     new SimpleDateFormat('pattern', locale)
 -------------------------------------------------------------------------------
 
+
 * ThrowExceptionFromFinallyBlock
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1216,3 +1230,4 @@ class Object7 {
         }
     }
 -------------------------------------------------------------------------------
+

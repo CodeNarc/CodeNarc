@@ -1,9 +1,10 @@
-		--------------------------------------------------
-				    CodeNarc - Exceptions Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                    CodeNarc - Exceptions Rules
+        --------------------------------------------------
 
 Exceptions Rules  ("<rulesets/exceptions.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * CatchArrayIndexOutOfBoundsException Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -122,6 +123,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   Returning null from a catch block often masks errors and requires the client to handle error codes. In some coding
   styles this is discouraged.
 
+
 * SwallowThreadDeath Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
@@ -130,12 +132,13 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-        try {
-            def a = 0
-        } catch (ThreadDeath td) {
-            td.printStackTrace()
-        }
+    try {
+        def a = 0
+    } catch (ThreadDeath td) {
+        td.printStackTrace()
+    }
 -------------------------------------------------------------------------------
+
 
 * ThrowError Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

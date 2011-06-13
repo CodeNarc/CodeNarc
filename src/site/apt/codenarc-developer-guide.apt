@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					CodeNarc - Developer Guide
-		--------------------------------------------------
+        --------------------------------------------------
+                    CodeNarc - Developer Guide
+        --------------------------------------------------
 
 CodeNarc - Developer Guide
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,7 +64,6 @@ CodeNarc - Developer Guide
 
   [[5]] Run <<<mvn site>>> from the command-line. Make sure all of the tests pass and review
         the new rule description on the appropriate ruleset page on the project site.
-
 
 
 * {New Rule Checklist}

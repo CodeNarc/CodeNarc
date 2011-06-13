@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					  CodeNarc - JUnit Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - JUnit Rules
+        --------------------------------------------------
 
 JUnit Rules  ("<rulesets/junit.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,6 +60,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
         }
     }
 -------------------------------------------------------------------------------
+
 
 * JUnitAssertAlwaysFails Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,7 +129,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   This rule detects calling JUnit style assertions like <<<assertEquals>>>, <<<assertTrue>>>,
   <<<assertFalse>>>, <<<assertNull>>>, <<<assertNotNull>>>. Groovy 1.7 ships with a feature called the
-  "power assert", which is an assert statement with better error reporting. This is preferable to the 
+  "power assert", which is an assert statement with better error reporting. This is preferable to the
   JUnit assertions.
 
 
@@ -181,6 +182,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
     }
 -------------------------------------------------------------------------------
 
+
 * UseAssertEqualsInsteadOfAssertTrue Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -188,12 +190,14 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule detects JUnit assertions in object equality. These assertions should be made by more specific methods,
   like <<<assertEquals>>>.
 
+
 * UseAssertFalseInsteadOfNegation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
   In unit tests, if a condition is expected to be false then there is no sense using <<<assertTrue>>> with the negation operator.
   For instance, <<<assertTrue(!condition)>>> can always be simplified to <<<assertFalse(condition)>>>.
+
 
 * UseAssertTrueInsteadOfAssertEqualsRule Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -219,6 +223,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
     assertEquals("message", foo(), false)
 -------------------------------------------------------------------------------
 
+
 * UseAssertTrueInsteadOfNegation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -226,12 +231,13 @@ JUnit Rules  ("<rulesets/junit.xml>")
   In unit tests, if a condition is expected to be true then there is no sense using <<<assertFalse>>> with the negation operator.
   For instance, <<<assertFalse(!condition)>>> can always be simplified to <<<assertTrue(condition)>>>.
 
-* UseAssertNullInsteadOfAssertEquals
+* UseAssertNullInsteadOfAssertEquals Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule detects JUnit calling <<<assertEquals>>> where the first or second parameter is <<<null>>>.
   These assertion should be made against the <<<assertNull>>> method instead.
+
 
 * UseAssertSameInsteadOfAssertTrue Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -241,6 +247,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   is an <<<Object#is()>>> call testing for reference equality. These assertion should be made against the
   <<<assertSame>>> or <<<assertNotSame>>> method instead.
 
+
 * JUnitFailWithoutMessage Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -248,9 +255,10 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule detects JUnit calling the <<<fail()>>> method without an argument. For better error reporting you
   should always provide a message.
 
+
 * JUnitTestMethodWithoutAssert Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.12> 
+  <Since CodeNarc 0.12>
 
   This rule searches for test methods that do not contain assert statements. Either the test method is missing assert
   statements, which is an error, or the test method contains custom assert statements that do not follow a proper assert
@@ -284,21 +292,22 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-            public class MySpec extends spock.lang.Specification {
-                @spock.lang.IgnoreRest
-                def "my first feature"() {
-                    expect: false
-                }
+    public class MySpec extends spock.lang.Specification {
+        @spock.lang.IgnoreRest
+        def "my first feature"() {
+            expect: false
+        }
 
-                def "my second feature"() {
-                    given: def a = 2
+        def "my second feature"() {
+            given: def a = 2
 
-                    when: a *= 2
+            when: a *= 2
 
-                    then: a == 4
-                }
-            }
+            then: a == 4
+        }
+    }
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryFail Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -310,18 +319,18 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-  public void testSomething() {
-    try {
-        something()
-    } catch (Exception e) {
-        fail(e.message)
-    }
+    public void testSomething() {
+        try {
+            something()
+        } catch (Exception e) {
+            fail(e.message)
+        }
 
-    try {
-        something()
-    } catch (Exception e) {
-        fail()
+        try {
+            something()
+        } catch (Exception e) {
+            fail()
+        }
     }
-  }
 -------------------------------------------------------------------------------
 

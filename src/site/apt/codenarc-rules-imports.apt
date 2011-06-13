@@ -1,9 +1,10 @@
-		--------------------------------------------------
-					  CodeNarc - Imports Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Imports Rules
+        --------------------------------------------------
 
 Imports Rules  ("<rulesets/imports.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * DuplicateImport Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,11 +42,12 @@ Imports Rules  ("<rulesets/imports.xml>")
   Examples of violations:
 
 -------------------------------------------------------------------------------
-     import my.something.*
-     import static foo.bar.*
+    import my.something.*
+    import static foo.bar.*
 
-     public class MyClass{}
+    public class MyClass{}
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryGroovyImport Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,5 +69,5 @@ Imports Rules  ("<rulesets/imports.xml>")
   * Does not check for unused imports containing wildcards (e.g. <<<import org.codenarc.*>>>)
 
   * Misses unused imports if the class/alias name is contained within strings, comments or other (longer)
-    names (i.e., if that string shows up almost anywhere within the source code). 
+    names (i.e., if that string shows up almost anywhere within the source code).
 

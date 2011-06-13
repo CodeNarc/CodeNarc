@@ -1,9 +1,10 @@
-		--------------------------------------------------
-					  CodeNarc - Unused Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Unused Rules
+        --------------------------------------------------
 
 Unused Rules  ("<rulesets/unused.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * UnusedArray Rule
 ~~~~~~~~~~~~~~~~~~~
@@ -87,7 +88,6 @@ Unused Rules  ("<rulesets/unused.xml>")
   * Does not recognize access of private field of another instance (i.e. other than <<<this>>>)
 
 
-
 * UnusedPrivateMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -125,7 +125,8 @@ Unused Rules  ("<rulesets/unused.xml>")
 
   <Since CodeNarc 0.14>
   * You can specify an ignore list using the 'ignoreRegex' property. By default, a parameter named 'ignore' or 'ignored'
-    does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property. 
+    does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property.
+
 
 * UnusedVariable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -139,3 +140,4 @@ Unused Rules  ("<rulesets/unused.xml>")
 
   * Incorrectly considers a variable referenced if another variable with the same name is referenced
     elsewhere (in another scope/block).
+

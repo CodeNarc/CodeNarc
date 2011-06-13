@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					  CodeNarc Ant Task
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc Ant Task
+        --------------------------------------------------
 
 CodeNarc - Ant Task
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -102,3 +102,4 @@ CodeNarc - Ant Task
     * The <fileset> specifies that all ".groovy" files are analyzed.
 
     * Remember that you need the <<log4j>> jar (and a "log4j.properties" file) on the classpath.
+

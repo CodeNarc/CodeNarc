@@ -1,9 +1,10 @@
-		--------------------------------------------------
-					  CodeNarc - Generic Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Generic Rules
+        --------------------------------------------------
 
 Generic Rules  ("<rulesets/generic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * IllegalPackageReference Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -49,7 +50,6 @@ Generic Rules  ("<rulesets/generic.xml>")
 
   A RuleSet can contain any number of instances of this rule, but each should be configured
   with a unique rule <name> and <packageNames>, and (optionally) customized <violationMessage> and <priority>.
-
 
 
 * IllegalRegex Rule

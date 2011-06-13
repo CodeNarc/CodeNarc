@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					  CodeNarc - Creating a Rule
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Creating a Rule
+        --------------------------------------------------
 
 CodeNarc - Creating a Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,8 +20,8 @@ CodeNarc - Creating a Rule
   All rules must implement the <<<org.codenarc.rule.Rule>>> interface. This
   interface specifies that all rules must define a <name>, a <priority> (from 1 to 3),
   and also implement the <<<List applyTo(SourceCode sourceCode)>>> method. The
-   method returns the <List> of <<<Violation>>> objects that result from applying
-   the rule to a single source file.
+  method returns the <List> of <<<Violation>>> objects that result from applying
+  the rule to a single source file.
 
 
 * The AbstractRule Class

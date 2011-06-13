@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					  CodeNarc - Unnecessary Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Unnecessary Rules
+        --------------------------------------------------
 
 Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,7 +34,6 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
  Examples of violations include:
 
 -------------------------------------------------------------------------------
-
     result = value && true              // AND or OR with boolean constants
     if (false || value) { .. }
     return value && Boolean.FALSE
@@ -62,6 +61,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
     result = ![a,b]                     // Negation of List literal
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryBooleanInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,7 +106,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
   All of this code is fine though:
-  
+
 -------------------------------------------------------------------------------
     def x = [0, 1, 2]
     def a = x.last()
@@ -134,6 +134,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     prop.substring(0, 1)        // OK, end is specified
 -------------------------------------------------------------------------------
 
+
 * UnnecessaryCatchBlock Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
@@ -141,7 +142,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   Violations are triggered when a <catch> block does nothing but throw the original exception. In this scenario
   there is usually no need for a <catch> block, just let the exception be thrown from the original code. This
   condition frequently occurs when catching an exception for debugging purposes but then forgetting to take the
-  <<<catch>>> statement out. 
+  <<<catch>>> statement out.
 
 
 * UnnecessaryCollectCall Rule
@@ -216,21 +217,22 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-// private and def are not needed
-def private method1() { return 4 }
+    // private and def are not needed
+    def private method1() { return 4 }
 
-// def and protected unneeded
-def protected method2() { return 4 }
+    // def and protected unneeded
+    def protected method2() { return 4 }
 
-// def and protected unneeded
-def public method3() { return 4 }
+    // def and protected unneeded
+    def public method3() { return 4 }
 
-// static and def are not needed
-def static method4() { return 4 }
+    // static and def are not needed
+    def static method4() { return 4 }
 
-// static and def are not needed
-def Object method5() { return 4 }
+    // static and def are not needed
+    def Object method5() { return 4 }
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryDoubleInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -264,7 +266,6 @@ def Object method5() { return 4 }
         return true
     }
     println 'Executing else logic...'
-
 -------------------------------------------------------------------------------
 
 
@@ -319,7 +320,6 @@ def Object method5() { return 4 }
 -------------------------------------------------------------------------------
 
 
-
 * UnnecessaryGString Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -360,6 +360,7 @@ def Object method5() { return 4 }
         string
     '''
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryIfStatement Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -448,7 +449,6 @@ def Object method5() { return 4 }
   the 'L' identifier to force the type, such as <<<8L>>> or <<<42L>>>.
 
 
-
 * UnnecessaryModOne Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -516,13 +516,14 @@ def Object method5() { return 4 }
     }
 -------------------------------------------------------------------------------
 
+
 * UnnecessaryNullCheck Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
   Groovy contains the safe dereference operator. It can be used in boolean conditional statements to safely
   replace explicit <<<x == null>>> tests. Also, testing the 'this' or 'super' reference for null equality is
-  pointless and can be removed. 
+  pointless and can be removed.
 
   Examples of violations:
 
@@ -543,7 +544,6 @@ def Object method5() { return 4 }
     if (null == super) { }
     if (super != null) { }
     if (null != super) { }
-
 -------------------------------------------------------------------------------
 
   Examples of acceptable code:
@@ -563,8 +563,8 @@ def Object method5() { return 4 }
 
     // rule is not so complex yet...
     (obj != null && obj.prop && obj.method()) ? x : y
-
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryNullCheckBeforeInstanceOf Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -614,7 +614,7 @@ def Object method5() { return 4 }
 -------------------------------------------------------------------------------
     // Field types
     class MyClass {
-        java.math.BigDecimal amount = 42.10         // violation
+        java.math.BigDecimal amount = 42.10                     // violation
     }
 
     // Within expressions
@@ -627,24 +627,24 @@ def Object method5() { return 4 }
 
     // Variable types
     void doSomething() {
-        java.math.BigInteger maxValue = 0               // violation
-        java.net.URI uri                                // violation
+        java.math.BigInteger maxValue = 0                       // violation
+        java.net.URI uri                                        // violation
     }
 
     // Method return types
-    java.io.Reader getReader() { }                      // violation
-    groovy.util.AntBuilder getAntBuilder() { }          // violation
+    java.io.Reader getReader() { }                              // violation
+    groovy.util.AntBuilder getAntBuilder() { }                  // violation
 
     // Method parameter types
-    void writeCount(java.io.Writer writer, int count) { }   // violation
-    void init(String name, groovy.lang.Binding binding) { } // violation
+    void writeCount(java.io.Writer writer, int count) { }       // violation
+    void init(String name, groovy.lang.Binding binding) { }     // violation
 
     // Closure parameter types
     def writeCount = { java.io.Writer writer, int count -> }    // violation
 
     // Extends and implements
-    class MyHashMap extends java.util.HashMap { }           // violation
-    class MyList implements java.util.List { }              // violation
+    class MyHashMap extends java.util.HashMap { }               // violation
+    class MyList implements java.util.List { }                  // violation
 -------------------------------------------------------------------------------
 
   Known limitations:
@@ -681,9 +681,10 @@ def Object method5() { return 4 }
         public MyClass() {}
 
         // violation on method
-        public void myMethod() {}    
+        public void myMethod() {}
     }
 -------------------------------------------------------------------------------
+
 
 * UnnecessaryReturnKeyword Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -691,7 +692,6 @@ def Object method5() { return 4 }
 
   In Groovy, the <<<return>>> keyword is often optional. If a statement is the last line in a method or
   closure then you do not need to have the <<<return>>> keyword.
-
 
 
 * UnnecessarySelfAssignment Rule
@@ -726,7 +726,7 @@ def Object method5() { return 4 }
 
   The rule contains a String property called 'excludePattern'. Any source code line matching this pattern will not
   trigger a violation. The default value is '\\s?\\*.*|/\\*.*|.*//.*|.*\\*/.*' This is to filter out comments.
-  Any source line that even looks like it is a comment is ignored. 
+  Any source line that even looks like it is a comment is ignored.
 
     \s?\*.*   ==  whitespace plus star character plus anything
     /\*.*    == any line that contains the /* sequence
@@ -791,12 +791,13 @@ def Object method5() { return 4 }
     ready ? minValue : minValue    // can be replaced by: minValue
 -------------------------------------------------------------------------------
 
+
 * UnnecessaryTransientModifier Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
   The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
-  This may be leftover marking from a previous version of the code in which the class was 
+  This may be leftover marking from a previous version of the code in which the class was
   transient, or it may indicate a misunderstanding of how serialization works.
 
   Some Java frameworks change the semantics of the transient keyword. For instance, when using Terracotta
@@ -816,6 +817,5 @@ def Object method5() { return 4 }
         // OK, class is serializable
         transient String property
     }
-
 -------------------------------------------------------------------------------
 

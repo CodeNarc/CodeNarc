@@ -1,6 +1,6 @@
-		--------------------------------------------------
-					  CodeNarc - Creating a RuleSet
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Creating a RuleSet
+        --------------------------------------------------
 
 CodeNarc - Creating a RuleSet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -291,7 +291,6 @@ ruleset {
     * Remember that the <name> for a \<rule-config\> specifies the rule <name>, not the class name.
     (In most cases, the rule <name> is the class name without the "Rule" suffix.)
 
-
   About the \<rule\> elements:
 
     * You must specify the fully-qualified class name for each <Rule>.
@@ -387,12 +386,11 @@ ruleset {
 
   In the following <RuleSet> excerpt, all rules matching '*Instantiation' are included from the
   "rulesets/basic.xml" <RuleSet>. In this case, that will include the <<StringInstantiationRule>>
-  and <<BooleanInstantiationRule>> rules. 
+  and <<BooleanInstantiationRule>> rules.
 
 +----------------------------------------------------------------------------------------
     <ruleset-ref path='rulesets/basic.xml'>
         <include name='*Instantiation'/>
     </ruleset-ref>
 +----------------------------------------------------------------------------------------
-
 

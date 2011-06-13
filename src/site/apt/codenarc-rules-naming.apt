@@ -1,9 +1,10 @@
-		--------------------------------------------------
-					  CodeNarc - Naming Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Naming Rules
+        --------------------------------------------------
 
 Naming Rules  ("<rulesets/naming.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * AbstractClassName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,7 +55,6 @@ Naming Rules  ("<rulesets/naming.xml>")
         }
     }
 -------------------------------------------------------------------------------
-
 
 
 * FieldName Rule
@@ -260,5 +260,4 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     | should be ignored (i.e., that should not cause a rule          |                        |
 |                     | violation). The names may optionally contain wildcards (*,?).  |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-
 

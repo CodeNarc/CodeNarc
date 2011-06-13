@@ -343,6 +343,17 @@
             <SvnBranchConfiguration>
               <option name="branchMap">
                 <map>
+                  <entry key="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches">
+                    <value>
+                      <list>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1257988656828" />
+                          <option name="revision" value="239" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/MetricReporting" />
+                        </SvnBranchItem>
+                      </list>
+                    </value>
+                  </entry>
                   <entry key="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5">
                     <value>
                       <list />
@@ -352,10 +363,11 @@
               </option>
               <option name="branchUrls">
                 <list>
+                  <option value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches" />
                   <option value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5" />
                 </list>
               </option>
-              <option name="trunkUrl" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.7" />
+              <option name="trunkUrl" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags" />
             </SvnBranchConfiguration>
           </value>
         </entry>

@@ -1,9 +1,10 @@
-		--------------------------------------------------
-					  CodeNarc - Concurrency Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                      CodeNarc - Concurrency Rules
+        --------------------------------------------------
 
 Concurrency Rules  ("<rulesets/concurrency.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * BusyWait Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,7 +27,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 
     // this is weird code to write, but does not cause a violation
     for (def x : collections) {
-        sleep(1000)     
+        sleep(1000)
     }
 
     while (x) {
@@ -35,7 +36,6 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
         doSomething()
         sleep(1000)
     }
-
 -------------------------------------------------------------------------------
 
 
@@ -56,7 +56,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
         synchronized(this) {
             if (object == null) {
                 // createObject() could be called twice depending
-                // on the Thread Scheduler.  
+                // on the Thread Scheduler.
                 object = createObject()
             }
         }
@@ -139,6 +139,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
     }
 -------------------------------------------------------------------------------
 
+
 * InconsistentPropertySynchronization Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -201,6 +202,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
     }
 -------------------------------------------------------------------------------
 
+
 * NestedSynchronization Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -212,19 +214,19 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   Note that a <closure> or an <anonymous inner class> carries its own context (scope).
   A <<<synchronized>>> statement within a <closure> or an <anonymous inner class> defined
   within an outer <<<synchronized>>> statement does not cause a violation (though nested
-  <<<synchronized>>> statements within either of those will). 
+  <<<synchronized>>> statements within either of those will).
 
   Here is an example of code that produces a violation:
 
 -------------------------------------------------------------------------------
-                def myMethod() {
-                    synchronized(this) {
-                        // do something ...
-                        synchronized(this) {
-                            // do something else ...
-                        }
-                    }
-                }
+    def myMethod() {
+        synchronized(this) {
+            // do something ...
+            synchronized(this) {
+                // do something else ...
+            }
+        }
+    }
 -------------------------------------------------------------------------------
 
 
@@ -243,22 +245,22 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   Examples:
 
 -------------------------------------------------------------------------------
-  // Violations
-  class MyClass {
-      static Calendar calendar1
-      static java.util.Calendar calendar2
+    // Violations
+    class MyClass {
+        static Calendar calendar1
+        static java.util.Calendar calendar2
 
-      static final CAL1 = Calendar.getInstance()
-      static final CAL2 = Calendar.getInstance(Locale.FRANCE)
-      static def cal3 = Calendar.getInstance(timezone)
-      static Object cal4 = Calendar.getInstance(timezone, locale)
-  }
+        static final CAL1 = Calendar.getInstance()
+        static final CAL2 = Calendar.getInstance(Locale.FRANCE)
+        static def cal3 = Calendar.getInstance(timezone)
+        static Object cal4 = Calendar.getInstance(timezone, locale)
+    }
 
-  // These usages are OK
-  class MyCorrectClass {
-      private final Calendar calendar1
-      static ThreadLocal<Calendar> calendar2
-  }
+    // These usages are OK
+    class MyCorrectClass {
+        private final Calendar calendar1
+        static ThreadLocal<Calendar> calendar2
+    }
 -------------------------------------------------------------------------------
 
 
@@ -301,29 +303,29 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   Examples:
 
 -------------------------------------------------------------------------------
-  // Violations
-  class MyClass {
-      static DateFormat dateFormat1
-      static java.text.DateFormat dateFormat2
+    // Violations
+    class MyClass {
+        static DateFormat dateFormat1
+        static java.text.DateFormat dateFormat2
 
-      static final DATE1 = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE)
-      static final def DATE2 = DateFormat.getDateInstance(DateFormat.LONG)
-      static Object date3 = DateFormat.getDateInstance()
+        static final DATE1 = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE)
+        static final def DATE2 = DateFormat.getDateInstance(DateFormat.LONG)
+        static Object date3 = DateFormat.getDateInstance()
 
-      static final DATETIME1 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE)
-      static final def DATETIME2 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT)
-      static final Object DATETIME3 = DateFormat.getDateTimeInstance()
+        static final DATETIME1 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE)
+        static final def DATETIME2 = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT)
+        static final Object DATETIME3 = DateFormat.getDateTimeInstance()
 
-      static final TIME1 = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE)
-      static final def TIME2 = DateFormat.getTimeInstance(DateFormat.LONG)
-      static final Object TIME3 = DateFormat.getTimeInstance()
-  }
+        static final TIME1 = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE)
+        static final def TIME2 = DateFormat.getTimeInstance(DateFormat.LONG)
+        static final Object TIME3 = DateFormat.getTimeInstance()
+    }
 
-  // These usages are OK
-  class MyCorrectClass {
-      private DateFormat calendar1
-      static ThreadLocal<DateFormat> calendar2
-  }
+    // These usages are OK
+    class MyCorrectClass {
+        private DateFormat calendar1
+        static ThreadLocal<DateFormat> calendar2
+    }
 -------------------------------------------------------------------------------
 
 
@@ -337,17 +339,17 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-  // two violations
-  class MyClass {
-    static Matcher matcher1
-    static java.util.regex.Matcher matcher2
-  }
+    // two violations
+    class MyClass {
+      static Matcher matcher1
+      static java.util.regex.Matcher matcher2
+    }
 
-  // these usages are OK
-  class MyCorrectClass {
-    private Matcher matcher1
-    static ThreadLocal<Matcher> matcher2
-  }
+    // these usages are OK
+    class MyCorrectClass {
+      private Matcher matcher1
+      static ThreadLocal<Matcher> matcher2
+    }
 -------------------------------------------------------------------------------
 
 
@@ -367,23 +369,23 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   Examples:
 
 -------------------------------------------------------------------------------
-  // Violations
-  class MyClass {
-      static SimpleDateFormat dateFormat1
-      static java.text.SimpleDateFormat dateFormat2
+    // Violations
+    class MyClass {
+        static SimpleDateFormat dateFormat1
+        static java.text.SimpleDateFormat dateFormat2
 
-      static final DATE1 = new SimpleDateFormat()
-      static final DATE2 = new SimpleDateFormat('MM/dd')
-      static final DATE3 = new SimpleDateFormat('MM/dd', DateFormatSymbols.instance)
-      static date4 = new SimpleDateFormat('MM/dd', Locale.FRANCE)
-      static date5 = new java.text.SimpleDateFormat('MM/dd')
-  }
+        static final DATE1 = new SimpleDateFormat()
+        static final DATE2 = new SimpleDateFormat('MM/dd')
+        static final DATE3 = new SimpleDateFormat('MM/dd', DateFormatSymbols.instance)
+        static date4 = new SimpleDateFormat('MM/dd', Locale.FRANCE)
+        static date5 = new java.text.SimpleDateFormat('MM/dd')
+    }
 
-  // These usages are OK
-  class MyCorrectClass {
-      private SimpleDateFormat calendar1
-      static ThreadLocal<SimpleDateFormat> calendar2
-  }
+    // These usages are OK
+    class MyCorrectClass {
+        private SimpleDateFormat calendar1
+        static ThreadLocal<SimpleDateFormat> calendar2
+    }
 -------------------------------------------------------------------------------
 
 
@@ -591,6 +593,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
     }
 -------------------------------------------------------------------------------
 
+
 * SynchronizedOnString Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -664,6 +667,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
         }
     }
 -------------------------------------------------------------------------------
+
 
 * SynchronizedOnThis Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -826,10 +830,11 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
     }
 -------------------------------------------------------------------------------
 
+
 * SystemRunFinalizersOnExit Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  This rule reports uses of the <<<System.runFinalizersOnExit()>>> method. 
+  This rule reports uses of the <<<System.runFinalizersOnExit()>>> method.
 
   Method calls to <<<System.runFinalizersOnExit()>>> should not be allowed. This method is inherently
   non-thread-safe, may result in data corruption, deadlock, and may affect parts of the program
@@ -886,7 +891,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 
   This rule reports uses of the <<<Thread.yield()>>> method.
 
-  Method calls to <<<Thread.yield()>>> should not be allowed. This method has no useful guaranteed 
+  Method calls to <<<Thread.yield()>>> should not be allowed. This method has no useful guaranteed
   semantics, and is often used by inexperienced programmers to mask race conditions.
 
   Here is an example of code that produces a violation:
@@ -901,7 +906,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 * UseOfNotifyMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
-  
+
   Checks for code that calls <<<notify()>>> rather than <<<notifyAll()>>>. Java monitors are often used
   for multiple conditions. Calling <<<notify()>>> only wakes up one thread, meaning that the awakened
   thread might not be the one waiting for the condition that the caller just satisfied.
@@ -1006,3 +1011,4 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 
   * [3] Software Engineering Institute - Secure Coding
      {{{https://www.securecoding.cert.org/confluence/display/java/THI03-J.+Always+invoke+wait()+and+await()+methods+inside+a+loop}discussion of this issue}}
+

@@ -1,6 +1,6 @@
-		--------------------------------------------------
-			        CodeNarc - Configuring Rules
-		--------------------------------------------------
+        --------------------------------------------------
+                    CodeNarc - Configuring Rules
+        --------------------------------------------------
 
 CodeNarc - Configuring Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,7 +17,7 @@ CodeNarc - Configuring Rules
 
   * {{{Suppressing_A_Rule_From_Within_Source_Code}Suppressing A Rule From Within Source Code}}
 
-  * {{{Customizing_Rule_Descriptions_Shown_in_the_HTML_Report}Customizing Rule Descriptions Shown in the HTML Report}} 
+  * {{{Customizing_Rule_Descriptions_Shown_in_the_HTML_Report}Customizing Rule Descriptions Shown in the HTML Report}}
 
   []
 
@@ -28,7 +28,7 @@ CodeNarc - Configuring Rules
   "codenarc.properties" file support, allows multiple layers of rule configuration. The hierarchical
   layering of configuration can come in handy within organizations comprised of multiple teams
   or projects. For instance, you can define an organization <RuleSet> file. Then each team can define its
-  own <RuleSet> file and/or a "codenarc.properties" file, customizing the rules from the top-level file. 
+  own <RuleSet> file and/or a "codenarc.properties" file, customizing the rules from the top-level file.
 
 
 * {Configuring Rules Within a RuleSet File}
@@ -224,7 +224,7 @@ AbstractClassName.enabled=false
 
   Specify one or more rule name as the parameter of the <<<@SuppressWarnings>>> annotation. Note
   that this is the rule <name>, not the <class> name (i.e., without the "Rule" suffix). Specify
-  multiple rule names by passing a <List> of rule names as a single parameter, e.g. 
+  multiple rule names by passing a <List> of rule names as a single parameter, e.g.
   <<<@SuppressWarnings(['IfStatementBraces', 'ThrowException'])>>>
 
   NOTE: The <<<@SuppressWarnings>>> annotation only works for rule classes that subclass <<<AbstractAstVisitorRule>>>.
@@ -322,9 +322,8 @@ AbstractClassName.enabled=false
     </rule>
 +----------------------------------------------------------------------------------------
 
-  The rule description must be added to the custom messages resource bundle file 
+  The rule description must be added to the custom messages resource bundle file
   ("codenarc-messages.properties"). The message key will be "AuthorTagNotAllowed.description.html" to set
   the description used in the HTML report, and "AuthorTagNotAllowed.description" for the description
   used in the XML report.
-
 
