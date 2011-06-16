@@ -19,6 +19,7 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCollectionCallRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryConstructorRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInMethodDeclarationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInVariableDeclarationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDoubleInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryFinalOnPrivateMethodRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryFloatInstantiationRule'/>
@@ -44,3 +45,4 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTransientModifierRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryElseStatementRule'/>
 </ruleset>
+

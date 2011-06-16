@@ -2,6 +2,15 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.15 (??? 2011)
+-------------------------------------------
+NEW AND UPDATED RULES
+- UnnecessaryDefInVariableDeclaration rule (unnecessary) - If a variable has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.
+- UnnecessaryDefInMethodDeclaration rule (unnecessary) - Added more checked modifiers: final, synchronized, abstract, strictfp. Multiple method declarations in a single line are handled correctly.
+
+THANKS
+- Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule.
+
 Changes in version 0.14 (June 2011)
 -------------------------------------------
 NEW AND UPDATED RULES
@@ -9,7 +18,7 @@ NEW AND UPDATED RULES
 - DuplicateMapKey rule (basic) - A map literal is created with duplicated key. The map entry will be overwritten.
 - DuplicateSetValue rule (basic) - A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
 - EqualsOverloaded rule (basic) - The class has an equals method, but the parameter of the method is not of type Object. It is not overriding equals but instead overloading it.
-- ForLoopShouldBeWhileLoop (basic) - A for-loop without an init and an update statement can be simplified to a while loop. 
+- ForLoopShouldBeWhileLoop (basic) - A for-loop without an init and an update statement can be simplified to a while loop.
 - NonFinalSubclassOfSensitiveInterface rule (security) - The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended. Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces such as java.security.PrivilegedAction and java.security.PrivilegedActionException must also be declared final for analogous reasons.
 - ImportFromSunPackages rule (imports) - Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
 - UnnecessaryFinalOnPrivateMethod rule (unnecessary) - A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
@@ -35,7 +44,7 @@ NEW AND UPDATED RULES
 - MisorderedStaticImports rule (imports) - Static imports should never be declared after nonstatic imports.
 - ConfusingMethodName (naming) - Existing rule updated to analyze fields and field names as well as just methods.
 - PublicInstanceField rule (design) - Using public fields is considered to be a bad design. Use properties instead.
-- UnnecessaryNullCheck (unnecessary) - Updated rule to flag null and not-null checks against the this reference. The this reference can never be null. 
+- UnnecessaryNullCheck (unnecessary) - Updated rule to flag null and not-null checks against the this reference. The this reference can never be null.
 - ClassForName rule (basic) - Using Class.forName(...) is a common way to add dynamic behavior to a system. However, using this method can cause resource leaks because the classes can be pinned in memory for long periods of time.
 - StatelessSingleton rule (design) - Rule finds occurrences of the Singleton pattern where the object has no state (mutable or otherwise). There is no point in creating a stateless Singleton, just make a new instance with the new keyword instead.
 - InconsistentPropertySynchronization rule (concurrency) - The rule is a little smarter now and flags code that defines a synchronized getter without any setter and vice versa. Those methods will be generated in unsynchronized from by the Groovy compiler later.
@@ -64,19 +73,19 @@ BUG FIXES and NEW FEATURES
 - #3295887 - Fix AddEmptyString duplicate violations.
 - #3299713 - Fix ImportFromSamePackage, UnnecessaryGroovyImport: Star import.
 - #3300225 - Fix UnnecessaryGroovyImport: Check static imports.
-- #3290324 - Fix UnnecessarySemicolon: the contents of multiline strings and GStrings are no longer checked, just the strings themselves. For example, embedding JavaScript or Java within a Multi-line String would previously trigger the violation.  
+- #3290324 - Fix UnnecessarySemicolon: the contents of multiline strings and GStrings are no longer checked, just the strings themselves. For example, embedding JavaScript or Java within a Multi-line String would previously trigger the violation.
 - #3305896 - Fix LoggerForDifferentClass: The rule now correctly handles inner classes (that are not static)
-- #3305019 - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable. 
+- #3305019 - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable.
 - #3309062 - UnnecessaryGroovyImportRule handles static imports incorrectly
--          - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.  
+-          - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.
 -          - Fixed the InconsistentPropertySynchronization rule so that it recognizes the new @Synchronized annotation.
 - #3308930 - LoggerWithWrongModifiersRule now contains a parameter 'allowProtectedLogger' so that loggers can also be instantiated as 'protected final LOG = Logger.getLogger(this.class)'. Also, it has a 'allowNonStatic' logger property, that allows you to create a non static logger.
-- #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass(). 
+- #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass().
 - #3309748 - FieldName:Do not treat non-static final fields as constants
 - #3310413 - Fix UnnecessaryPublicModifier does not catch public on constructors.
 - #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from René Scheibe
 - #3313550 - Some HTML violation descriptions in the properties files were not well-formed HTML. This has been fixed.
-- #3205688 - Fixed false positives in UseAssertEqualsInsteadOfAssertTrue when using the JUnit assertFalse method. 
+- #3205688 - Fixed false positives in UseAssertEqualsInsteadOfAssertTrue when using the JUnit assertFalse method.
 
 BREAKING CHANGES
 *** Moved the following rules out of the "basic" ruleset into the new "serialization" ruleset:
@@ -107,7 +116,7 @@ NEW FEATURES
 - Greatly improved styling of the HTML report. Feature #3192593
 - Improved error messages when CodeNarc is mis-configured and configuration file does not compile. Feature #3193468
 - Improved println rule. If a class defines a println method, then it is OK to call this method because it won't dispatch to System.out.println. Feature #3194121
-- Improved NestedBlockDepth rule. Method calls on builder objects are now ignored, so you can nest builder calls arbitrarily deep. What constitutes a builder is exposed in the ignoreRegex property, which defaults to '.*(b|B)uilder'. 
+- Improved NestedBlockDepth rule. Method calls on builder objects are now ignored, so you can nest builder calls arbitrarily deep. What constitutes a builder is exposed in the ignoreRegex property, which defaults to '.*(b|B)uilder'.
 
 NEW RULES
   Dead/Unnecessary Code
@@ -157,7 +166,7 @@ NEW RULES
 - WaitOutsideOfWhileLoop rule (concurrency) - Feature #3127703 - Calls to Object.wait() must be within a while loop. This ensures that the awaited condition has not already been satisfied by another thread before the wait() is invoked. It also ensures that the proper thread was resumed and guards against incorrect notification.
 
 BUG FIXES
-- Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives. 
+- Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives.
 - Fix Bug #3164150 UnnecessaryReturnKeyword: Rule is no longer triggered if the return is for a closure.
 - Fix Bug #3165139 LoggingSwallowsStacktrace: No longer reports multiple logger errors.
 - Fix bug #3166311: Error on numeric/boolean property values if they contain leading or trailing whitespace in "codenarc.properties" or in XML ruleset file.
@@ -165,8 +174,8 @@ BUG FIXES
 - Fix bug #3190483: The UnusedPrivateField rule now ignores fields named serialVersionUID. The rule has a property called ignoreFieldNames that can be used to add other ignores as well.
 - Fix bug #3162975: The UnusedPrivate* rules now correctly read anonymous classes.
 - Fix bug #3155974: The UnusedPrivate* rules now correctly read inner classes.
-- Fix bug #3183443: Restricted the ConfusingTernary rule to reduce false positives. The rule looks for inverted conditionals in ternary statements. It did not account for Groovy Truth, and suggested 'x != null' be inverted to 'x', but that is not the inverse. So the rule was relaxed. 
-- Fix bug #3195027: The violation message for "Replace Getter with Property Access" suggests converting ".getURLs()" to ".uRLs". This has been corrected to ".URLs". 
+- Fix bug #3183443: Restricted the ConfusingTernary rule to reduce false positives. The rule looks for inverted conditionals in ternary statements. It did not account for Groovy Truth, and suggested 'x != null' be inverted to 'x', but that is not the inverse. So the rule was relaxed.
+- Fix bug #3195027: The violation message for "Replace Getter with Property Access" suggests converting ".getURLs()" to ".uRLs". This has been corrected to ".URLs".
 - Fix bug #3196019: Compiling files with unresolved Grapes dependencies no longer causes an error.
 
 POTENTIAL BREAKING CHANGES
@@ -175,7 +184,7 @@ POTENTIAL BREAKING CHANGES
 THANKS
  - Many thanks to Mathilde Lemée, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
  - Big thanks to Evgeny Goldin and Cédric Champeau for reporting bugs which helps us improve the product so much faster.
- 
+
 Changes in version 0.12 (January 2011)
 -------------------------------------------
 NEW FEATURES
@@ -193,12 +202,12 @@ NEW RULES
 - ConfusingTernary rule (basic) - Feature #3158945 - Adds violation if you use unnecessary negation within a ternary expression
 - ConstantsOnlyInterface rule (design) - Feature #3159134 - Adds violation if an interface contains constants but no methods
 - EmptyMethodInAbstractClass rule (design) - Feature #3159180 - Adds violation if an abstract class contains an empty method
-- RequiredString rule (generic) - Feature #3122980 - Adds violation if a user-defined String is not found. For example, a copyright notice may be required. 
+- RequiredString rule (generic) - Feature #3122980 - Adds violation if a user-defined String is not found. For example, a copyright notice may be required.
 - UseAssertFalseInsteadOfNegation rule (junit) - Feature #3114728 - Adds violation if JUnit's assertEquals is used with the boolean literal 'false'
 - UseAssertTrueInsteadOfNegation rule (junit) - Feature #3114728 - Adds violation if JUnit's assertEquals is used with the boolean literal 'true'
 - JUnitTestMethodWithoutAssert. rule (junit) - Feature #3111443 - Adds violation if a JUnit test method contains no assert statements
 - LoggerForDifferentClass rule (logging) - Feature #3114736 - Adds violation if a Logger is created based on a Class that is not the enclosing class
-- LoggerWithWrongModifiers rule (logging) - Adds violation if a Logger is not private, final, and static. 
+- LoggerWithWrongModifiers rule (logging) - Adds violation if a Logger is not private, final, and static.
 - LoggingSwallowsStacktrace rule (logging) - Adds violation if a log statement logs an exception without the accompanying stack trace
 - MultipleLoggers rule (logging) - Adds a violation if a class declares more than one logger field
 - MissingNewInThrowStatement (exceptions) - Feature #3140762  -Adds a violation if a throw statement is used to throw a class literal
@@ -218,7 +227,7 @@ NEW RULES
 - UnnecessaryCollectCall rule (unnecessary) - Feature #3110317 - Adds a violation if a collect method call can be replaced with the spread operator
 - UnnecessaryCatchBlock rule  (unnecessary)- Feature #3110318 - Adds a violation if a catch block does nothing but throw the original exception
 - UnnecessaryGetter rule  (unnecessary)- Feature #3110321 - Adds a violation if a a getter method is called explicitly instead of using property syntax
-- UnusedPrivateMethodParameter rule (unused) - Feature #3151598 - Adds a violation if the parameter to a private method is never used within that method 
+- UnusedPrivateMethodParameter rule (unused) - Feature #3151598 - Adds a violation if the parameter to a private method is never used within that method
 
 BUG FIXES
 - Fix Bug #3127967: DuplicateImportRule: Fix for Groovy 1.7. Resort to parsing source code.
@@ -257,69 +266,69 @@ OTHER CHANGES
 Changes in version 0.11 (November 2010)
 -------------------------------------------
 NEW FEATURES
-- @SuppressWarnings support. All rules now recognize the java.lang.SuppressWarnings annotation on fields, methods, and classes. If this annotation is added then there will be no violations produced. Just as in Java, the annotation requires a String or List<String> parameter. For example, annotating a class with @SuppressWarnings('UnusedPrivateField') will ignore the rule for that class. Annotating a method with @SuppressWarnings(['UnusedPrivateField', 'UnnecessaryIfStatementRule']) will ignore both rules for the annotated method. 
-- Better "codenarc create-rule" support. You can create a new rule by running "codenarc create-rule" from the root of the CodeNarc codebase. This script has been updated to properly format Javadoc, prompt for the author name, and update the Maven Site .apt documentation. 
+- @SuppressWarnings support. All rules now recognize the java.lang.SuppressWarnings annotation on fields, methods, and classes. If this annotation is added then there will be no violations produced. Just as in Java, the annotation requires a String or List<String> parameter. For example, annotating a class with @SuppressWarnings('UnusedPrivateField') will ignore the rule for that class. Annotating a method with @SuppressWarnings(['UnusedPrivateField', 'UnnecessaryIfStatementRule']) will ignore both rules for the annotated method.
+- Better "codenarc create-rule" support. You can create a new rule by running "codenarc create-rule" from the root of the CodeNarc codebase. This script has been updated to properly format Javadoc, prompt for the author name, and update the Maven Site .apt documentation.
 
 NEW RULES
-BooleanMethodReturnsNull Rule (basic) : Checks for a method with Boolean return type that returns an explicit null. 
-DeadCode Rule (basic) :  Checks for dead code that appears after a return statement or after an exception is thrown. 
-DoubleNegative Rule (basic) :  Checks for using a double negative, which is always positive. 
-DuplicateCaseStatement Rule (basic) :  Check for duplicate case statements in a switch block, such as two equal integers or strings. 
-ExplicitCallToAndMethod Rule (basic) :  This rule detects when the and(Object) method is called directly in code instead of using the & operator. 
-ExplicitCallToCompareToMethod Rule (basic) :  This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <, and <= operators. 
+BooleanMethodReturnsNull Rule (basic) : Checks for a method with Boolean return type that returns an explicit null.
+DeadCode Rule (basic) :  Checks for dead code that appears after a return statement or after an exception is thrown.
+DoubleNegative Rule (basic) :  Checks for using a double negative, which is always positive.
+DuplicateCaseStatement Rule (basic) :  Check for duplicate case statements in a switch block, such as two equal integers or strings.
+ExplicitCallToAndMethod Rule (basic) :  This rule detects when the and(Object) method is called directly in code instead of using the & operator.
+ExplicitCallToCompareToMethod Rule (basic) :  This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <, and <= operators.
 ExplicitCallToDivMethod Rule (basic) :  This rule detects when the div(Object) method is called directly in code instead of using the / operator.
-ExplicitCallToEqualsMethod Rule (basic) :  This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator. 
-ExplicitCallToGetAtMethod Rule (basic) :  This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator. 
-ExplicitCallToLeftShiftMethod Rule (basic) :  This rule detects when the leftShift(Object) method is called directly in code instead of using the \<\< operator. 
-ExplicitCallToMinusMethod Rule (basic) :  This rule detects when the minus(Object) method is called directly in code instead of using the - operator. 
-ExplicitCallToMultiplyMethod Rule (basic) :  This rule detects when the multiply(Object) method is called directly in code instead of using the * operator. 
-ExplicitCallToModMethod Rule (basic) :  This rule detects when the mod(Object) method is called directly in code instead of using the % operator. 
-ExplicitCallToOrMethod Rule (basic) :  This rule detects when the or(Object) method is called directly in code instead of using the | operator. 
-ExplicitCallToPlusMethod Rule (basic) :  This rule detects when the plus(Object) method is called directly in code instead of using the + operator. 
-ExplicitCallToPowerMethod Rule (basic) :  This rule detects when the power(Object) method is called directly in code instead of using the ** operator. 
-ExplicitCallToRightShiftMethod Rule (basic) :  This rule detects when the rightShift(Object) method is called directly in code instead of using the \>\> operator. 
-ExplicitCallToXorMethod Rule (basic) :  This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator. 
+ExplicitCallToEqualsMethod Rule (basic) :  This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator.
+ExplicitCallToGetAtMethod Rule (basic) :  This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator.
+ExplicitCallToLeftShiftMethod Rule (basic) :  This rule detects when the leftShift(Object) method is called directly in code instead of using the \<\< operator.
+ExplicitCallToMinusMethod Rule (basic) :  This rule detects when the minus(Object) method is called directly in code instead of using the - operator.
+ExplicitCallToMultiplyMethod Rule (basic) :  This rule detects when the multiply(Object) method is called directly in code instead of using the * operator.
+ExplicitCallToModMethod Rule (basic) :  This rule detects when the mod(Object) method is called directly in code instead of using the % operator.
+ExplicitCallToOrMethod Rule (basic) :  This rule detects when the or(Object) method is called directly in code instead of using the | operator.
+ExplicitCallToPlusMethod Rule (basic) :  This rule detects when the plus(Object) method is called directly in code instead of using the + operator.
+ExplicitCallToPowerMethod Rule (basic) :  This rule detects when the power(Object) method is called directly in code instead of using the ** operator.
+ExplicitCallToRightShiftMethod Rule (basic) :  This rule detects when the rightShift(Object) method is called directly in code instead of using the \>\> operator.
+ExplicitCallToXorMethod Rule (basic) :  This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator.
 ExplicitArrayListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write new ArrayList() as [], which creates the same object.
 ExplicitHashMapInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write new HashMap() as [:], which creates the same object.
 ExplicitHashSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write new HashSet() as [] as Set, which creates the same object.
 ExplicitLinkedListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write new LinkedList() as [] as Queue, which creates the same object.
 ExplicitStackInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write new Stack() as [] as Stack, which creates the same object.
-ExplicitTreeSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write new TreeSet()>> as [] as SortedSet, which creates the same object. 
-GStringAsMapKey Rule  A GString should not be used as a map key since its hashcode is not guaranteed to be stable. 
-InvertedIfElse Rule (basic) :  An inverted if-else statement is one in which there is a single if statement with a single else branch and the boolean test of the if is negated. 
-RemoveAllOnSelf Rule (basic) : Don't use removeAll to clear a collection. 
-ReturnsNullInsteadOfEmptyArray Rule (basic) : If you have a method or closure that returns an array, then when there are no results return a zero-length (empty) array rather than null. 
-ReturnsNullInsteadOfEmptyCollection Rule (basic) : If you have a method or closure that returns a collection, then when there are no results return a zero-length (empty) collection rather than null. 
-SerialVersionUID Rule (basic) : A serialVersionUID is normally intended to be used with Serialization. It needs to be of type long, static, and final. 
+ExplicitTreeSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write new TreeSet()>> as [] as SortedSet, which creates the same object.
+GStringAsMapKey Rule  A GString should not be used as a map key since its hashcode is not guaranteed to be stable.
+InvertedIfElse Rule (basic) :  An inverted if-else statement is one in which there is a single if statement with a single else branch and the boolean test of the if is negated.
+RemoveAllOnSelf Rule (basic) : Don't use removeAll to clear a collection.
+ReturnsNullInsteadOfEmptyArray Rule (basic) : If you have a method or closure that returns an array, then when there are no results return a zero-length (empty) array rather than null.
+ReturnsNullInsteadOfEmptyCollection Rule (basic) : If you have a method or closure that returns a collection, then when there are no results return a zero-length (empty) collection rather than null.
+SerialVersionUID Rule (basic) : A serialVersionUID is normally intended to be used with Serialization. It needs to be of type long, static, and final.
 UnnecessaryConstructor Rule (unnecessary) : This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has an empty body, and takes no arguments.
 UnnecessaryCollectionCall Rule (unnecessary) : Checks for useless calls to collections.
 UnnecessaryOverridingMethod Rule (unnecessary) : Checks for an overriding method that merely calls the same method defined in a superclass.
 UnnecessaryReturnKeyword Rule (unnecessary) :  In Groovy, the return keyword is often optional.
-SynchronizedOnGetClass Rule (concurrency) : Checks for synchronization on getClass() rather than class literal. 
-UseOfNotifyMethod Rule (concurrency) : Checks for code that calls notify() rather than notifyAll(). 
-DuplicateNumberLiteral Rule (dry) : This rule checks for duplicate number literals within the current class. 
+SynchronizedOnGetClass Rule (concurrency) : Checks for synchronization on getClass() rather than class literal.
+UseOfNotifyMethod Rule (concurrency) : Checks for code that calls notify() rather than notifyAll().
+DuplicateNumberLiteral Rule (dry) : This rule checks for duplicate number literals within the current class.
 DuplicateStringLiteral Rule (dry) : This rule checks for duplicate String literals within the current class.
-CatchIllegalMonitorStateException Rule (exceptions) : Dubious catching of IllegalMonitorStateException. 
-ConfusingClassNamedException Rule (exceptions) : This class is not derived from another exception, but ends with 'Exception'. 
-ReturnNullFromCatchBlock Rule (exceptions) : Returning null from a catch block often masks errors and requires the client to handle error codes. 
-UseAssertEqualsInsteadOfAssertTrue Rule (junit) : This rule detects JUnit assertions in object equality. 
-UseAssertTrueInsteadOfAssertEqualsRule Rule (junit) : This rule detects JUnit calling assertEquals where the first parameter is a boolean. 
-UseAssertNullInsteadOfAssertEquals Rule (junit) : This rule detects JUnit calling assertEquals where the first or second parameter is null. 
-UseAssertSameInsteadOfAssertTrue Rule (junit) : This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for reference equality. 
-JUnitFailWithoutMessage Rule (junit) : This rule detects JUnit calling the fail() method without an argument. 
+CatchIllegalMonitorStateException Rule (exceptions) : Dubious catching of IllegalMonitorStateException.
+ConfusingClassNamedException Rule (exceptions) : This class is not derived from another exception, but ends with 'Exception'.
+ReturnNullFromCatchBlock Rule (exceptions) : Returning null from a catch block often masks errors and requires the client to handle error codes.
+UseAssertEqualsInsteadOfAssertTrue Rule (junit) : This rule detects JUnit assertions in object equality.
+UseAssertTrueInsteadOfAssertEqualsRule Rule (junit) : This rule detects JUnit calling assertEquals where the first parameter is a boolean.
+UseAssertNullInsteadOfAssertEquals Rule (junit) : This rule detects JUnit calling assertEquals where the first or second parameter is null.
+UseAssertSameInsteadOfAssertTrue Rule (junit) : This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for reference equality.
+JUnitFailWithoutMessage Rule (junit) : This rule detects JUnit calling the fail() method without an argument.
 JUnitStyleAssertions Rule (junit) : This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
 ConfusingMethodName Rule (naming) : Checks for very confusing method names. The referenced methods have names that differ only by capitalization.
 ObjectOverrideMisspelledMethodName Rule (naming) : Verifies that the names of the most commonly overridden methods of Object: equals, hashCode and toString, are correct.
 MethodCount Rule (size) : Checks if the number of methods within a class exceeds the number of lines specified by the maxMethod property.
 
 BUG FIXES
-- None reported, none fixed! 
+- None reported, none fixed!
 
 POTENTIAL BREAKING CHANGES
 - AbstractAstVisitor - If you implemented your own rule by subclassing AbstractAstVisitor then your code might break. It is a compile error and the breakage will be clear and obvious. In order to support @SuppressWarnings, we needed to change AbstractAstVisitor. The method visitMethodNode became visitMethodNodeEx, visitClass became visitClassEx, visitConstructorOrMethod became visitConstructorOrMethodEx, visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. From within these new methods there is no need to call super.visitX. In the rare case that the simple renaming does not fix your problem then please contact the mailing list.
 - The following three classes were moved from the org.codenarc.rule.basic package into org.codenarc.rule.unnecessary.
   Likewise, the associated rules were moved from the "basic" ruleset into the new "unnecessary" ruleset.
-  You will need to adjust your ruleset configuration if you included one of these rules specifically in a custom ruleset, or configured them as part of the "basic" ruleset. 
+  You will need to adjust your ruleset configuration if you included one of these rules specifically in a custom ruleset, or configured them as part of the "basic" ruleset.
     * UnnecessaryBooleanExpressionRule
     * UnnecessaryIfStatementRule
     * UnnecessaryTernaryExpressionRule
@@ -346,7 +355,7 @@ NEW RULES
 - New JUnitUnnecessaryTearDownRule (junit). Checks for tearDown() methods that only call super.tearDown().
 - New JUnitUnnecessarySetUpRule (junit). Checks for setUp() methods that only call super.setUp().
 NEW REPORT WRITER
-- New InlineXmlReportWriter (from Robin Bramley) for improved integration with the Hudson Violations plugin. See http://wiki.hudson-ci.org/display/HUDSON/Violations.   
+- New InlineXmlReportWriter (from Robin Bramley) for improved integration with the Hudson Violations plugin. See http://wiki.hudson-ci.org/display/HUDSON/Violations.
 OTHER CHANGES
 - CodeNarc now requires Groovy 1.6 to run. Keep in mind that it can still run against (analyze) older Groovy code.
 - Upgrade to GMetrics 0.3 for AbcComplexityRule and CyclomaticComplexityRule. Violations now include line number and source line.
@@ -372,7 +381,7 @@ NEW SIZE/COMPLEXITY RULES
 NEW CONCURRENCY RULES
 - NestedSynchronizationRule (concurrency - Hamlet D�Arcy)
 - RunFinalizersOnExitRule (concurrency - Hamlet D�Arcy)
-- SynchronizedMethodRule (concurrency - Hamlet D�Arcy) 
+- SynchronizedMethodRule (concurrency - Hamlet D�Arcy)
 - SynchronizedOnThisRule (concurrency - Hamlet D�Arcy)
 - ThreadLocalNotStaticFinalRule (concurrency - Hamlet D�Arcy)
 - ThreadYieldRule: (concurrency - Hamlet D�Arcy)

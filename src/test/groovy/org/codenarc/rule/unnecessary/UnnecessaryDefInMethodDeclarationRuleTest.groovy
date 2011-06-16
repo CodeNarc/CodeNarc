@@ -31,57 +31,136 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnnecessaryDefInMethodDeclaration'
     }
 
-    void testSuccessScenario() {
-        final SOURCE = '''
-            def method() { return 4 }
+    /*
+     * Success scenarios
+     */
 
-            private method1() { return 4 }
-            protected method2() { return 4 }
-            public method3() { return 4 }
-            static method4() { return 4 }
-            Object method5() { return 4 }
+    void testSuccessScenario_modifiers() {
+        final SOURCE = '''
+            def          method1() { }
+            private      method2() { }
+            protected    method3() { }
+            public       method4() { }
+            static       method5() { }
+            final        method6() { }
+            synchronized method7() { }
+            strictfp     method8() { }
+
+            class Test { abstract method() }
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testPrivateAndDef() {
+    void testSuccessScenario_methodNamesContainingModifierNames() {
         final SOURCE = '''
-            // private and def is redundant
-            def private method() { return 4 }
+            def privateMethod() { }
+            def protectedMethod() { }
+            def publicMethod() { }
+            def staticMethod() { }
+            def finalMethod() { }
+            def synchronizedMethod() { }
+            def strictfpMethod() { }
+            def abstractMethod() { }
         '''
-        assertSingleViolation(SOURCE, 3, 'def private method()', 'The def keyword is unneeded when a method is marked private')
+        assertNoViolations(SOURCE)
     }
 
-    void testProtectedAndDef() {
+    void testSuccessScenario_types() {
         final SOURCE = '''
-            // def and protected is redundant
-            def protected method() { return 4 }
+            Object method1() { null }
+            String method2() { null }
+            int    method3() { 1 }
+            void   method4() { }
         '''
-        assertSingleViolation(SOURCE, 3, 'def protected method()', 'The def keyword is unneeded when a method is marked protected')
+        assertNoViolations(SOURCE)
     }
 
-    void testPublicAndDef() {
+    /*
+     * Violations
+     */
+
+    void testViolation_defAndPrivate() {
         final SOURCE = '''
-            // def and protected is redundant
-            def public method() { return 4 }
+            def private method() { }
         '''
-        assertSingleViolation(SOURCE, 3, 'def public method()', 'The def keyword is unneeded when a method is marked public')
+        assertSingleViolation(SOURCE, 2, 'def private method()', 'The def keyword is unneeded when a method is marked private')
     }
 
-    void testStaticAndDef() {
+    void testViolation_defAndProtected() {
         final SOURCE = '''
-            // static and def is redundant
-            def static method() { return 4 }
+            def protected method() { }
         '''
-        assertSingleViolation(SOURCE, 3, 'def static method()', 'The def keyword is unneeded when a method is marked static')
+        assertSingleViolation(SOURCE, 2, 'def protected method()', 'The def keyword is unneeded when a method is marked protected')
     }
 
-    void testObjectAndDef() {
+    void testViolation_defAndPublic() {
         final SOURCE = '''
-            // static and def is redundant
-            def Object method() { return 4 }
+            def public method() { }
         '''
-        assertSingleViolation(SOURCE, 3, 'def Object method', 'The def keyword is unneeded when a method returns the Object type')
+        assertSingleViolation(SOURCE, 2, 'def public method()', 'The def keyword is unneeded when a method is marked public')
+    }
+
+    void testViolation_defAndStatic() {
+        final SOURCE = '''
+            def static method() { }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def static method()', 'The def keyword is unneeded when a method is marked static')
+    }
+
+    void testViolation_defAndFinal() {
+        final SOURCE = '''
+            def final method() { }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def final method()', 'The def keyword is unneeded when a method is marked final')
+    }
+
+    void testViolation_defAndSynchronized() {
+        final SOURCE = '''
+            def synchronized method() { }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def synchronized method()', 'The def keyword is unneeded when a method is marked synchronized')
+    }
+
+    void testViolation_defAndStrictfp() {
+        final SOURCE = '''
+            def strictfp method() { }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def strictfp method()', 'The def keyword is unneeded when a method is marked strictfp')
+    }
+
+    void testViolation_defAndAbstract() {
+        final SOURCE = '''
+            abstract class Test {
+                def abstract method()
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'def abstract method()', 'The def keyword is unneeded when a method is marked abstract')
+    }
+
+    void testViolation_defAndObjectType() {
+        final SOURCE = '''
+            def Object method() { null }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def Object method()', 'The def keyword is unneeded when a method returns the Object type')
+    }
+
+    void testViolation_methodDeclarationAcrossMultipleLines() {
+        final SOURCE = '''
+            def
+            static
+            String method() { }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def', 'The def keyword is unneeded when a method is marked static')
+    }
+
+    void testViolation_multipleMethodsOnSingleLine() {
+        final SOURCE = '''
+            def method1() { 'good' }; def public method2() { 'bad' }
+            def public method3() { 'bad' }; def method4() { 'good' }
+        '''
+        assertTwoViolations(SOURCE,
+                            2, 'def public method2()', 'The def keyword is unneeded when a method is marked public',
+                            3, 'def public method3()', 'The def keyword is unneeded when a method is marked public')
     }
 
     protected Rule createRule() {

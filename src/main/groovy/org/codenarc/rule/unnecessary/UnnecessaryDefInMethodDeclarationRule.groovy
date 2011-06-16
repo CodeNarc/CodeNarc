@@ -15,13 +15,13 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * If a method has a visibility modifier, then the def keyword is unneeded. For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
+ * If a method has a visibility modifier or a type declaration, then the def keyword is unneeded.
+ * For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
@@ -36,37 +36,65 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodEx(MethodNode node) {
         String declaration = getDeclaration(node)
-        if (declaration?.startsWith('def ') || declaration?.contains(' def ')) {
-            if (declaration?.startsWith('private ') || declaration?.contains(' private ')) {
+
+        if (contains(declaration, 'def')) {
+            if (contains(declaration, 'private')) {
                 addViolation(node, 'The def keyword is unneeded when a method is marked private')
-            } else if (declaration?.startsWith('protected ') || declaration?.contains(' protected ')) {
+            } else if (contains(declaration, 'protected')) {
                 addViolation(node, 'The def keyword is unneeded when a method is marked protected')
-            } else if (declaration?.startsWith('public ') || declaration?.contains(' public ')) {
+            } else if (contains(declaration, 'public')) {
                 addViolation(node, 'The def keyword is unneeded when a method is marked public')
-            } else if (declaration?.startsWith('static ') || declaration?.contains(' static ')) {
+            } else if (contains(declaration, 'static')) {
                 addViolation(node, 'The def keyword is unneeded when a method is marked static')
-            } else if (declaration?.startsWith('Object ') || declaration?.contains(' Object ')) {
+            } else if (contains(declaration, 'final')) {
+                addViolation(node, 'The def keyword is unneeded when a method is marked final')
+            } else if (contains(declaration, 'synchronized')) {
+                addViolation(node, 'The def keyword is unneeded when a method is marked synchronized')
+            } else if (contains(declaration, 'abstract')) {
+                addViolation(node, 'The def keyword is unneeded when a method is marked abstract')
+            } else if (contains(declaration, 'strictfp')) {
+                addViolation(node, 'The def keyword is unneeded when a method is marked strictfp')
+            } else if (contains(declaration, 'Object')) {
                 addViolation(node, 'The def keyword is unneeded when a method returns the Object type')
             }
         }
+
         super.visitMethodEx(node)
     }
 
-    private String getDeclaration(ASTNode node) {
-        if (node.lineNumber < 0) {
+    private String getDeclaration(MethodNode node) {
+        if ([node.lineNumber, node.lastLineNumber, node.columnNumber, node.lastColumnNumber].any{ it < 1 }) {
             return ''
         }
 
-        def current = node.lineNumber - 1
         String acc = ''
-        while (current <= node.lastLineNumber) {
-            def line = sourceCode.line(current)
-            if (line?.contains('{')) {
-                return acc + line[0..(line.indexOf('{'))]
+        for (lineIndex in (node.lineNumber-1 .. node.lastLineNumber-1)) {
+            // the raw line is required to apply columnNumber and lastColumnNumber
+            def line = getRawLine(sourceCode, lineIndex)
+
+            // extract the relevant part of the first line
+            if (lineIndex == node.lineNumber - 1) {
+                int nonRelevantColumns = node.columnNumber - 1
+                line = line.replaceFirst(".{$nonRelevantColumns}", ' ' * nonRelevantColumns) // retain the line length as it's important when using lastColumnNumber
             }
-            acc = acc + line + ' '
-            current++
+
+            // extract the relevant part of the last line
+            if (lineIndex == node.lastLineNumber - 1) {
+                def stopIndex = node.lastColumnNumber < line.size() ? node.lastColumnNumber - 2 : line.size() - 1
+                line = line[0..stopIndex]
+            }
+
+            if (line.contains('{')) {
+                acc += line[0..<line.indexOf('{')]
+                break
+            } else {
+                acc += line + ' '
+            }
         }
         acc
+    }
+
+    private boolean contains(String declaration, String modifier) {
+        declaration?.startsWith(modifier) || declaration?.contains(' ' + modifier + ' ')
     }
 }
