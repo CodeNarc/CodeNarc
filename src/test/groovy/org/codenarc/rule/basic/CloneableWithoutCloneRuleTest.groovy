@@ -31,7 +31,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'CloneableWithoutClone'
     }
 
-    void testNonClonableClass() {
+    void testNonCloneableClass() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass0 {
                 def myMethod() {
@@ -41,9 +41,9 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
-    void testClonableWithClone() {
+    void testCloneableWithClone() {
         final SOURCE = '''
-            class CloneableWithoutCloneRuleClass1 implements Clonable {
+            class CloneableWithoutCloneRuleClass1 implements Cloneable {
                 public Object clone() {
                     return super.clone()
                 }
@@ -52,7 +52,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
-    void testClonableWithMisnamedClone() {
+    void testCloneableWithMisnamedClone() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass2 implements Cloneable, Serializable {
                 public Object CLONE() {
@@ -62,7 +62,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass2 implements Cloneable'
     }
 
-    void testClonableWithMisnamedCloneWithPath() {
+    void testCloneableWithMisnamedCloneWithPath() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable, Serializable {
                 public Object CLONE() {
@@ -72,7 +72,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable'
     }
 
-    void testClonableWithParameters() {
+    void testCloneableWithParameters() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable, Serializable {
                 public Object clone(int x) {
@@ -82,7 +82,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable'
     }
 
-    void testClonableWithMissingClone() {
+    void testCloneableWithMissingClone() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass4 implements Cloneable {
             } '''

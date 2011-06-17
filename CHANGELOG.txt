@@ -8,8 +8,12 @@ NEW AND UPDATED RULES
 - UnnecessaryDefInVariableDeclaration rule (unnecessary) - If a variable has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.
 - UnnecessaryDefInMethodDeclaration rule (unnecessary) - Added more checked modifiers: final, synchronized, abstract, strictfp. Multiple method declarations in a single line are handled correctly.
 
+BUG FIXES and NEW FEATURES
+- #3317632: CloneableWithoutClone - false positive.
+
 THANKS
 - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule.
+
 
 Changes in version 0.14 (June 2011)
 -------------------------------------------

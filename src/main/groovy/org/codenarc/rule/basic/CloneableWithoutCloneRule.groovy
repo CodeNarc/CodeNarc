@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@ package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.Parameter
 
 /**
  * A class that implements Cloneable should define a clone() method.
@@ -37,27 +37,22 @@ class CloneableWithoutCloneRule extends AbstractAstVisitorRule {
 
 class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
 
-    private boolean hasCloneMethod
-    
-    def void visitClassEx(ClassNode node) {
-        // is this class a Clonable?
+    @Override
+    void visitClassEx(ClassNode node) {
+        // is this class a Cloneable?
         def cloneableClassNode = ClassHelper.make(Cloneable)
         def isCloneable = node.interfaces.find {
             it == cloneableClassNode || it.name == 'Cloneable'
         }
         if (isCloneable) {
-            if (!hasCloneMethod) {
+            if (!hasCloneMethod(node)) {
                 addViolation(node, "The class $node.name implements Cloneable but does not define a proper clone() method")
             }
         }
         super.visitClassEx(node)
     }
 
-    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
-        // is this method a clone method?
-        if ((node.name == 'clone') && (!node.parameters)) {
-            hasCloneMethod = true
-        }
-        super.visitConstructorOrMethodEx(node, isConstructor)
+    private boolean hasCloneMethod(ClassNode classNode) {
+        classNode.getDeclaredMethod('clone', [] as Parameter[])
     }
 }
