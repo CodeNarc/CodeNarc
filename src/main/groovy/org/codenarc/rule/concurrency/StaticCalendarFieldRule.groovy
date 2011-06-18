@@ -42,7 +42,7 @@ class StaticCalendarFieldAstVisitor extends AbstractAstVisitor {
             addCalendarViolation(node, node.name)
         }
         else {
-            if (node.initialValueExpression && isCalendarFactoryMethodCall(node.initialValueExpression)) {
+            if (Modifier.isStatic(node.modifiers) && node.initialValueExpression && isCalendarFactoryMethodCall(node.initialValueExpression)) {
                 addCalendarViolation(node, node.name)
             }
         }

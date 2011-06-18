@@ -80,7 +80,15 @@ class StaticSimpleDateFormatFieldRuleTest extends AbstractRuleTestCase {
         )
     }
 
-    // TODO fully-qualified package name; on DateFormat and Calendar classes as well.
+    void testNonStaticFieldWithSimpleDateFormatInitializer() {
+        final SOURCE = '''
+          class MyClass {
+            final SimpleDateFormat filenameDateFormat = new SimpleDateFormat("yyyyMMdd")
+            def anotherFormat = new SimpleDateFormat("yyyyMMdd")
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
 
     protected Rule createRule() {
         new StaticSimpleDateFormatFieldRule()

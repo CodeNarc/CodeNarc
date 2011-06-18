@@ -77,6 +77,16 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    void testNonStaticFieldWithCalendarInitializer() {
+        final SOURCE = '''
+          class MyClass {
+            final Calendar cal = Calendar.getInstance()
+            def anotherCalendar = Calendar.getInstance(timezone)
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new StaticCalendarFieldRule()
     }

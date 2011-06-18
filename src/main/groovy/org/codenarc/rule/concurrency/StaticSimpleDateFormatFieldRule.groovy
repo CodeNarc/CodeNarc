@@ -44,7 +44,7 @@ class StaticSimpleDateFormatFieldAstVisitor extends AbstractAstVisitor {
             addSimpleDateFormatViolation(node, node.name)
         }
         else {
-            if (node.initialValueExpression && isSimpleDateFormatConstructorCall(node.initialValueExpression)) {
+            if (Modifier.isStatic(node.modifiers) && node.initialValueExpression && isSimpleDateFormatConstructorCall(node.initialValueExpression)) {
                 addSimpleDateFormatViolation(node, node.name)
             }
         }

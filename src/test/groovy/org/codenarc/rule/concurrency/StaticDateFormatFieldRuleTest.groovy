@@ -99,6 +99,16 @@ class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    void testNonStaticFieldWithDateFormatInitializer() {
+        final SOURCE = '''
+          class MyClass {
+            final DateFormat filenameDateFormat = DateFormat.getTimeInstance(DateFormat.LONG)
+            def anotherFormat = DateFormat.getDateInstance()
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new StaticDateFormatFieldRule()
     }

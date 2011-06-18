@@ -45,7 +45,7 @@ class StaticDateFormatFieldAstVisitor extends AbstractAstVisitor {
             addDateFormatViolation(node, node.name)
         }
         else {
-            if (node.initialValueExpression && isDateFormatFactoryMethodCall(node.initialValueExpression)) {
+            if (Modifier.isStatic(node.modifiers) && node.initialValueExpression && isDateFormatFactoryMethodCall(node.initialValueExpression)) {
                 addDateFormatViolation(node, node.name)
             }
         }
