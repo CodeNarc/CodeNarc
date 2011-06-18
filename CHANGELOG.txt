@@ -11,6 +11,7 @@ NEW AND UPDATED RULES
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.
 - #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
+- #3314773: UnnecessaryGroovyImportRule: false positive on static imports
 
 THANKS
 - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule.

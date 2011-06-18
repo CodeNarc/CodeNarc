@@ -347,9 +347,80 @@
                     <value>
                       <list>
                         <SvnBranchItem>
+                          <option name="creationDateMillis" value="1308274680479" />
+                          <option name="revision" value="764" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
                           <option name="creationDateMillis" value="1257988656828" />
                           <option name="revision" value="239" />
                           <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/MetricReporting" />
+                        </SvnBranchItem>
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14">
+                    <value>
+                      <list>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1308349519899" />
+                          <option name="revision" value="765" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/src" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1308349519899" />
+                          <option name="revision" value="765" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/CHANGELOG.txt" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1308349519899" />
+                          <option name="revision" value="765" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/CodeNarc.ipr" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1308274680479" />
+                          <option name="revision" value="764" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/CodeNarc.iml" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1306377583971" />
+                          <option name="revision" value="720" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/pom.xml" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1306087193126" />
+                          <option name="revision" value="716" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/pom1_8.xml" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1302355251093" />
+                          <option name="revision" value="666" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/codenarc.groovy" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1296613396609" />
+                          <option name="revision" value="585" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/templates" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1288378703536" />
+                          <option name="revision" value="414" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/samples" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1286937090186" />
+                          <option name="revision" value="390" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/README.txt" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/LICENSE.txt" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1232592720857" />
+                          <option name="revision" value="7" />
+                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/NOTICE.txt" />
                         </SvnBranchItem>
                       </list>
                     </value>
@@ -364,6 +435,7 @@
               <option name="branchUrls">
                 <list>
                   <option value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches" />
+                  <option value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14" />
                   <option value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5" />
                 </list>
               </option>

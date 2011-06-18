@@ -60,6 +60,20 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_MixtureOfStaticAndRegularImports_NoViolations() {
+        final SOURCE = '''
+            import static java.net.HttpURLConnection.*
+            import org.junit.*
+
+            class Test1 {
+                static me() {
+                   println HTTP_OK
+                }
+            }
+         '''
+        assertNoViolations(SOURCE)
+    }
+
     void testImportAliases_NoViolations() {
         final SOURCE = '''
             import groovy.lang.MetaClass as Foo
