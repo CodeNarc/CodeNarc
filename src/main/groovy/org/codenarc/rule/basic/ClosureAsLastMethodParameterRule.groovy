@@ -49,7 +49,15 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractAstVisitor {
             if (arguments && arguments.last() instanceof ClosureExpression) {
                 def lastColumnForClosure = arguments.last().lastColumnNumber
                 def lastColumnForMethodCall = call.lastColumnNumber
-                if (lastColumnForClosure < lastColumnForMethodCall) {
+                def lastColumnForMethodArguments = call.arguments.lastColumnNumber
+                def sourceLine = sourceCode.lines[call.lineNumber - 1]
+                def firstChar = sourceLine[call.columnNumber - 1]
+
+                // If a method call is surrounded by parentheses (possibly unnecessary), then the AST includes those in the
+                // MethodCall start/end column indexes. In that case, do not include the ending parentheses in the comparison.
+                def endIndex = firstChar == '(' ? lastColumnForMethodArguments : lastColumnForMethodCall
+
+                if (lastColumnForClosure < endIndex) {
                     addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure an can appear outside the parenthesis")
                 }
             }
