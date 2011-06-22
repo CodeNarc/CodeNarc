@@ -85,7 +85,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
             Integer lineNumber1, String sourceLineText1,
             Integer lineNumber2, String sourceLineText2) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 2, "Expected 2 Violations\nFound: \n${violations.join('\n')}\n"
+        assert violations.size() == 2, "Expected 2 violations\nFound: \n${violations.join('\n')}\n"
         assertViolation(violations[0], lineNumber1, sourceLineText1)
         assertViolation(violations[1], lineNumber2, sourceLineText2)
     }
@@ -102,7 +102,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         def violations = rawViolations.sort { v -> v.lineNumber }
         assert violations.size() == violationMaps.size(), "Expected ${violationMaps.size()} violations\nFound ${violations.size()}: \n    ${violations.join('\n    ')}\n"
         violationMaps.eachWithIndex { violationMap, index ->
-            assert violationMap.keySet().every { key -> key in ['lineNumber', 'sourceLineText', 'messageText'] },"violationMap keys must be 'lineNumber', 'sourceLineText' and/or 'messageText'"
+            assert violationMap.keySet().every { key -> key in ['lineNumber', 'sourceLineText', 'messageText'] }, "violationMap keys must be 'lineNumber', 'sourceLineText' and/or 'messageText'"
             assertViolation(violations[index], violationMap.lineNumber, violationMap.sourceLineText, violationMap.messageText)
         }
     }
@@ -122,7 +122,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
             Integer lineNumber1, String sourceLineText1, msg1,
             Integer lineNumber2, String sourceLineText2, msg2) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 2, "Expected 2 Violation2\nFound: \n${violations.join('\n')}\n"
+        assert violations.size() == 2, "Expected 2 violations\nFound: \n${violations.join('\n')}\n"
         assertViolation(violations[0], lineNumber1, sourceLineText1, msg1)
         assertViolation(violations[1], lineNumber2, sourceLineText2, msg2)
     }
@@ -137,7 +137,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, messageText=null) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 1, "Expected 1 Violation\nFound: \n${violations.join('\n')}\n  for sourceLineText: [$sourceLineText]"
+        assert violations.size() == 1, "Expected 1 violation\nFound: \n${violations.join('\n')}\n  for sourceLineText: [$sourceLineText]"
         assertViolation(violations[0], lineNumber, sourceLineText, messageText)
     }
 
@@ -149,7 +149,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertSingleViolation(String source, Closure closure) {
         def violations = applyRuleTo(source)
-        assert violations.size() == 1, "Expected 1 Violation\nFound: \n${violations.join('\n')}\n"
+        assert violations.size() == 1, "Expected 1 violation\nFound: \n${violations.join('\n')}\n"
         assert closure(violations[0]), "Closure failed for ${violations[0]}"
     }
 
