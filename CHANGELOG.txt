@@ -14,9 +14,11 @@ BUG FIXES and NEW FEATURES
 - #3314773: UnnecessaryGroovyImportRule: false positive on static imports
 - #3315992: ClosureAsLastMethodParameter - false positive, when method call surrounded by parentheses.
 - #3307699: Fixed a typo and made some "Violation" strings lowercase, so the log messages are consistent.
+- #3315946: Cmdline runner does not respect -includes and -excludes
 
 THANKS
-- Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule.
+- Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
+  and fixing the command-line runner support for includes/excludes.
 
 
 Changes in version 0.14 (June 2011)

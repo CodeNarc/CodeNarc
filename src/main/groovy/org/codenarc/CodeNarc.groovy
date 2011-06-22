@@ -149,9 +149,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
      * @return a configured SourceAnalyzer instance
      */
     protected SourceAnalyzer createSourceAnalyzer() {
-        def analyzer = new FilesystemSourceAnalyzer()
-        analyzer.baseDirectory = baseDir
-        analyzer
+        new FilesystemSourceAnalyzer(baseDirectory: baseDir, includes: includes, excludes: excludes)
     }
 
     protected void parseArgs(String[] args) {

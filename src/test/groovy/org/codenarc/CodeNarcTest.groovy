@@ -159,8 +159,12 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.includes == INCLUDES
         assert codeNarc.excludes == EXCLUDES
 
-        assert codeNarcRunner.sourceAnalyzer.class == FilesystemSourceAnalyzer
-        assert codeNarcRunner.sourceAnalyzer.baseDirectory == BASE_DIR
+        def sourceAnalyzer = codeNarcRunner.sourceAnalyzer
+        assert sourceAnalyzer.class == FilesystemSourceAnalyzer
+        assert sourceAnalyzer.baseDirectory == BASE_DIR
+        assert sourceAnalyzer.includes == INCLUDES
+        assert sourceAnalyzer.excludes == EXCLUDES
+
         assert codeNarcRunner.ruleSetFiles == RULESET1
 
         assert codeNarcRunner.reportWriters.size == 1
