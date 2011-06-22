@@ -76,7 +76,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
         while (current <= node.lastLineNumber) {
             def line = sourceCode.line(current)
             if (line == null) {
-                LOG.warn("$rule.name cannot find source code line $current in ${sourceCode.name}. Scanning lines $node.lineNumber to $node.lastLineNumbe.")
+                LOG.warn("${rule.name} cannot find source code line $current in ${sourceCode.name}. Scanning lines ${node.lineNumber} to ${node.lastLineNumber}.")
                 return ''
             } else if (line.contains('{')) {
                 return acc + line[0..(line.indexOf('{'))]
