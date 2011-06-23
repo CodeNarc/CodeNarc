@@ -33,22 +33,46 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
 
     void testAnnotatedMethods_SuccessScenario() {
         final SOURCE = '''
-        	class MyTest {
+            class MyTest {
                 @Test
-                public void someTestMethod1() {
+                void someTestMethod1() {
                     assert 1 == 2
                 }
                 @Test
-                public void someTestMethod2() {
+                void someTestMethod2() {
                     assertEquals(1, 2)
                 }
                 @org.junit.Test
-                public void someTestMethod1() {
+                void someTestMethod3() {
                     assert 1 == 2
                 }
                 @org.junit.Test
-                public void someTestMethod2() {
+                void someTestMethod4() {
                     assertEquals(1, 2)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testAnnotatedMethodsWithAnnotationParameters_SuccessScenario() {
+        final SOURCE = '''
+            class MyTest {
+                @Test(expected = IllegalArgumentException)
+                void someTestMethod1() {
+                    doSomething()
+                }
+                @Test(timeout = 1000)
+                void someTestMethod2() {
+                    doSomething()
+                }
+                @org.junit.Test(expected = IllegalArgumentException)
+                void someTestMethod3() {
+                    doSomething()
+                }
+                @org.junit.Test(timeout = 1000)
+                void someTestMethod4() {
+                    doSomething()
                 }
             }
         '''
@@ -57,28 +81,28 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
 
     void testJUnitStyleConventions_SuccessScenario() {
         final SOURCE = '''
-        	class MyTest {
+            class MyTest {
                 private void testPrivate() {
                     // ignored because method is private
                 }
-                public int testIntMethod() {
+                int testIntMethod() {
                     // ignored because method returns int
                 }
-                public void testMethod1() {
+                void testMethod1() {
                     assert 1 == 2
                 }
-                public void testMethod2() {
+                void testMethod2() {
                     assertEquals(1, 2)
                 }
-                public void testMethod3() {
+                void testMethod3() {
                     shouldFail {
                         foo()
                     }
                 }
-                public void testMethod4() {
+                void testMethod4() {
                     fail()
                 }
-                public void testMethod5() {
+                void testMethod5() {
                     verify()
                 }
             }
@@ -88,47 +112,47 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
 
     void testViolationWithMethodNameConvention() {
         final SOURCE = '''
-        	class MyTest {
-                public void testMethod() {
+            class MyTest {
+                void testMethod() {
                     doSomething()
                     doSomethingElse()
-                    // where is assertion?
+                    // where is the assertion?
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'public void testMethod()', "Test method 'testMethod' makes no assertions")
+        assertSingleViolation(SOURCE, 3, 'void testMethod()', "Test method 'testMethod' makes no assertions")
     }
 
     void testViolationWithEmptyBody() {
         final SOURCE = '''
-        	class MyTest {
-                public void testMethod() { }
+            class MyTest {
+                void testMethod() { }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'public void testMethod()', "Test method 'testMethod' makes no assertions")
+        assertSingleViolation(SOURCE, 3, 'void testMethod()', "Test method 'testMethod' makes no assertions")
     }
 
     void testViolationWithTestAnnotation() {
         final SOURCE = '''
-        	class MyTest {
+            class MyTest {
                 @Test
-                public void someMethod1() {
+                void someMethod1() {
                     doSomething()
                     doSomethingElse()
-                    // where is assertion?
+                    // where is the assertion?
                 }
                 @org.junit.Test
                 @Unknown
                 @YetAnotherAnnotation // these annotations ALSO test the line number fix
-                public void someMethod2() {
+                void someMethod2() {
                     doSomething()
                     doSomethingElse()
-                    // where is assertion?
+                    // where is the assertion?
                 }
             }
         '''
         assertTwoViolations(SOURCE,
-                4, 'void someMethod1()', "Test method 'someMethod1' makes no assertions",
+                4,  'void someMethod1()', "Test method 'someMethod1' makes no assertions",
                 12, 'void someMethod2()', "Test method 'someMethod2' makes no assertions")
     }
 

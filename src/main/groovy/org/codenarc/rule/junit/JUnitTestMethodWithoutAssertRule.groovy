@@ -23,6 +23,8 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
+import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.ASTNode
 
 /**
  * This rule searches for test methods that do not contain assert statements. Either the test method is missing assert
@@ -35,6 +37,7 @@ import org.codenarc.rule.AstVisitor
  * @version $Revision$ - $Date$
  */
 class JUnitTestMethodWithoutAssertRule extends AbstractAstVisitorRule {
+
     String name = 'JUnitTestMethodWithoutAssert'
     int priority = 2
     String assertMethodPatterns = 'assert.*,should.*,fail.*,verify.*'
@@ -54,7 +57,7 @@ class JUnitTestMethodWithoutAssertAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodEx(MethodNode node) {
         if (JUnitUtil.isTestMethod(node)) {
-            if (!statementContainsAssertions(node.code)) {
+            if (!statementContainsAssertions(node.code) && !checksException(node) && !checksTimeout(node)) {
                 addViolation node, "Test method '$node.name' makes no assertions"
             }
         }
@@ -68,6 +71,19 @@ class JUnitTestMethodWithoutAssertAstVisitor extends AbstractAstVisitor {
         def assertionTrap = new AssertionTrap(assertMethodPatterns: assertMethodPatterns)
         code.visit assertionTrap
         assertionTrap.assertionFound
+    }
+
+    private boolean checksException(ASTNode node) {
+        hasTestAnnotationWithMember(node, 'expected')
+    }
+
+    private boolean checksTimeout(ASTNode node) {
+        hasTestAnnotationWithMember(node, 'timeout')
+    }
+
+    private boolean hasTestAnnotationWithMember(ASTNode node, String memberName) {
+        def testAnnotation = AstUtil.getAnnotation(node, 'Test') ?: AstUtil.getAnnotation(node, 'org.junit.Test')
+        testAnnotation?.getMember(memberName)
     }
 }
 
