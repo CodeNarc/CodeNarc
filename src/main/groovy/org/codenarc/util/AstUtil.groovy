@@ -246,13 +246,13 @@ class AstUtil {
      * Return true only if the MethodCallExpression represents a method call for the specified method object (receiver),
      * method name, and with the specified number of arguments.
      * @param methodCall - the AST MethodCallExpression
-     * @param methodObject - the name of the method object (receiver)
+     * @param methodObjectPattern - the name of the method object (receiver)
      * @param methodPattern - the name of the method being called
      * @param numArguments - the number of arguments passed into the method
      * @return true only if the method call matches the specified criteria
      */
-    static boolean isMethodCall(MethodCallExpression methodCall, String methodObject, String methodPattern, int numArguments) {
-        (isMethodCall(methodCall, methodObject, methodPattern)
+    static boolean isMethodCall(MethodCallExpression methodCall, String methodObjectPattern, String methodPattern, int numArguments) {
+        (isMethodCall(methodCall, methodObjectPattern, methodPattern)
                 && getMethodArguments(methodCall).size() == numArguments)
     }
 

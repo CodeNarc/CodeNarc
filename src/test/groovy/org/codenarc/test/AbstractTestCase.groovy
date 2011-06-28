@@ -126,7 +126,7 @@ abstract class AbstractTestCase extends GroovyTestCase {
     private String classNameNoPackage() {
         def className = getClass().name
         def index = className.lastIndexOf('.')
-        (index > -1) ? className.substring(index+1) : className
+        (index > -1) ? className[index+1 .. -1] : className
     }
 
     //------------------------------------------------------------------------------------

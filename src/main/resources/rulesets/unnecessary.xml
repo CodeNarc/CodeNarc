@@ -46,5 +46,6 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryElseStatementRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDotClassRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryInstanceOfCheckRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessarySubstringRule'/>
 </ruleset>
 

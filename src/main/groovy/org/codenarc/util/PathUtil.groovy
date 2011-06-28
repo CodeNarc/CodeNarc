@@ -32,7 +32,7 @@ class PathUtil {
         int separatorIndex1 = path.lastIndexOf('/')
         int separatorIndex2 = path.lastIndexOf('\\')
         int separatorIndex = [separatorIndex1, separatorIndex2].max()
-        (separatorIndex == -1) ? path : path.substring(separatorIndex + 1)
+        (separatorIndex == -1) ? path : path[separatorIndex + 1 .. -1]
     }
 
      static String getParentPath(String filePath) {
@@ -58,7 +58,7 @@ class PathUtil {
      }
 
      private static String removeLeadingSlash(path) {
-         (path.startsWith('\\') || path.startsWith(SEP)) ? path.substring(1) : path
+         (path.startsWith('\\') || path.startsWith(SEP)) ? path[1 .. -1] : path
      }
 
 

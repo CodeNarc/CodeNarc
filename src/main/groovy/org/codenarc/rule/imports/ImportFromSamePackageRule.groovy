@@ -50,7 +50,7 @@ class ImportFromSamePackageRule extends AbstractRule {
 
     private String getClassNameNoPackage(String className) {
         def indexOfLastPeriod = className.lastIndexOf('.')
-        (indexOfLastPeriod == -1) ? className : className.substring(indexOfLastPeriod+1)
+        (indexOfLastPeriod == -1) ? className : className[indexOfLastPeriod+1..-1]
     }
 
 }

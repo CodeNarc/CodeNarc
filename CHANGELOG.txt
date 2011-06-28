@@ -12,6 +12,7 @@ NEW AND UPDATED RULES
 - UnnecessaryDotClass rule (unnecessary) - To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
 - BitwiseOperatorInConditional rule (basic) - Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practive to extract a temp variable.
 - UnnecessaryInstanceOfCheck rule (unnecessary) - This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that (!variable instanceof String) will never be true because the result of a not expression is always a boolean. 
+- UnnecessarySubstring rule (unnecessary) - This rule finds usages of String.substring(int) and String.substring(int, int) that can be replaced by use of the subscript operator. For instance, var.substring(5) can be replaced with var[5..-1].
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.

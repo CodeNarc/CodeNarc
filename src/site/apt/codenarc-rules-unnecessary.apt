@@ -811,6 +811,24 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
+* UnnecessarySubstring Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  This rule finds usages of <<<String.substring(int)>>> and <<<String.substring(int, int)>>> that can be replaced by use of the
+  subscript operator. For instance, <<<var.substring(5)>>> can be replaced with <<<var[5..-1]>>>.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    myVar.substring(5)
+    myVar.substring(1, 5)
+
+    // ok
+    myVar[5..-1]
+    myVar[1..5]
+-------------------------------------------------------------------------------
+
 * UnnecessaryStringInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12 (formerly StringInstantiation Rule in the "basic" rule set)>

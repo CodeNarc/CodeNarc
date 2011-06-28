@@ -37,7 +37,7 @@ class ImportUtil {
         if (importNode.className) {
             def importClassName = importNode.className
             def index = importClassName.lastIndexOf('.')
-            (index == -1) ? '' : importClassName.substring(0, index)
+            (index == -1) ? '' : importClassName[0..index-1]
         }
         else {
             def packageName = importNode.packageName

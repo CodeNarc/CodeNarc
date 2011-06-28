@@ -216,7 +216,7 @@ abstract class AbstractRule implements Rule {
     private String getClassNameNoPackage() {
         def className = getClass().name
         def indexOfLastPeriod = className.lastIndexOf('.')
-        (indexOfLastPeriod == -1) ? className : className.substring(indexOfLastPeriod+1)
+        (indexOfLastPeriod == -1) ? className : className[indexOfLastPeriod+1..-1]
     }
 
     /**
