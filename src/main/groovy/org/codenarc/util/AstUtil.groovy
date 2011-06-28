@@ -669,12 +669,12 @@ class AstUtil {
      * @param expression
      *      any AST Node
      * @param name
-     *      a string name
+     *      a string pattern to match
      * @return
      * true if the node is a variable with the specified name
      */
-    static boolean isVariable(ASTNode expression, String name) {
-        return (expression instanceof VariableExpression && expression.name == name)
+    static boolean isVariable(ASTNode expression, String pattern) {
+        return (expression instanceof VariableExpression && expression.name ==~ pattern)
     }
 
     /**

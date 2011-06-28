@@ -44,5 +44,6 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTransientModifierRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryElseStatementRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDotClassRule'/>
 </ruleset>
 
