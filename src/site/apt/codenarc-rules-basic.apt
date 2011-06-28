@@ -25,12 +25,30 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* AssignCollectionSort Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a
+  variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
+  This violation is triggered when a sort() method call appears as the right hand side of an assignment, or when it appears
+  as the first method call in a series of chained method calls.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+  def a = myList.sort()
+  def b = myList.sort() { it }
+  def c = myList.sort().findAll { x < 1 }
+-------------------------------------------------------------------------------
+
 * AssignCollectionUnique Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
-  The unique method mutates the original list. If a user is using the result of this method then they probably don't understand this.
+  The Collections.unique() method mutates the list and returns the list as a value. If you are assigning the result of unique() to a
+  variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
   This violation is triggered when a unique() method call appears as the right hand side of an assignment, or when it appears
-  as the first method call in a series of chained method calls. 
+  as the first method call in a series of chained method calls.
 
   Example of violations:
 

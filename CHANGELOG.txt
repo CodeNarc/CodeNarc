@@ -7,7 +7,8 @@ Changes in version 0.15 (July 2011)
 NEW AND UPDATED RULES
 - UnnecessaryDefInVariableDeclaration rule (unnecessary) - If a variable has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.
 - UnnecessaryDefInMethodDeclaration rule (unnecessary) - Added more checked modifiers: final, synchronized, abstract, strictfp. Multiple method declarations in a single line are handled correctly.
-- AssignCollectionUnique rule (basic) - the unique method mutates the original list. If a user is using the result of this method then they probably don't understand this.
+- AssignCollectionUnique rule (basic) - The Collections.unique() method mutates the list and returns the list as a value. If you are assigning the result of unique() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
+- AssignCollectionSort rule (basic) - The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
 - UnnecessaryDotClass rule (unnecessary) - To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
 
 BUG FIXES and NEW FEATURES

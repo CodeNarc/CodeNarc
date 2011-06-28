@@ -331,6 +331,28 @@ class AstUtil {
     }
 
     /**
+     * Tells you if the expression is a method call for a certain method name with a certain
+     * number of arguments.
+     * @param expression
+     *      the (potentially) method call
+     * @param methodName
+     *      the name of the method expected
+     * @param numArguments
+     *      number of expected arguments
+     * @return
+     * as described
+     */
+    static boolean isMethodCall(Expression expression, String methodName, Range numArguments) {
+        if (expression instanceof MethodCallExpression && isMethodNamed(expression, methodName)) {
+            int arity = getMethodArguments(expression).size()
+            if (arity >= numArguments.getFrom() && arity <= numArguments.getTo()) {
+                return true
+            }
+        }
+        false
+    }
+
+    /**
      * Return true only if the MethodCallExpression represents a method call for the specified method name
      * @param methodCall - the AST MethodCallExpression
      * @param methodNamePattern - the expected name of the method being called

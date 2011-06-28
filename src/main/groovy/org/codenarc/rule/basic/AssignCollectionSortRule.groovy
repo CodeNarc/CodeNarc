@@ -24,35 +24,33 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * the unique method mutates the original list. If a user is using the result of this method then they probably don't understand thiss
+ * The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs. 
  *
- * @author Nick Larson
- * @author Juan Vazquez
- * @author Jon DeJong
+ * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class AssignCollectionUniqueRule extends AbstractAstVisitorRule {
-    String name = 'AssignCollectionUnique'
+class AssignCollectionSortRule extends AbstractAstVisitorRule {
+    String name = 'AssignCollectionSort'
     int priority = 2
-    Class astVisitorClass = AssignCollectionUniqueAstVisitor
+    Class astVisitorClass = AssignCollectionSortAstVisitor
 }
 
-class AssignCollectionUniqueAstVisitor extends AbstractAstVisitor {
+class AssignCollectionSortAstVisitor extends AbstractAstVisitor {
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
 
         Expression right = expression.rightExpression
 
         if (right instanceof MethodCallExpression) {
-            if (isChainedUnique(right) || (isChainedUnique(right.objectExpression))) {
-                addViolation(expression, 'unique() mutates the original list.')
+            if (isChainedSort(right) || (isChainedSort(right.objectExpression))) {
+                addViolation(expression, 'sort() mutates the original list.')
             }
         }
         super.visitDeclarationExpression expression
     }
 
-    private static boolean isChainedUnique(Expression right) {
-        if (AstUtil.isMethodCall(right, 'unique', 0..1)) {
+    private static boolean isChainedSort(Expression right) {
+        if (AstUtil.isMethodCall(right, 'sort', 0..1)) {
             if (right.objectExpression instanceof VariableExpression) {
                 return true
             }

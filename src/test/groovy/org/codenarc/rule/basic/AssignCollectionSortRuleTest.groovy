@@ -19,57 +19,54 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for AssignCollectionUniqueRule
+ * Tests for AssignCollectionSortRule
  *
- * @author Nick Larson
- * @author Juan Vazquez
- * @author Jon DeJong
- * 
+ * @author Hamlet D'Arcy
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
+class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'AssignCollectionUnique'
+        assert rule.name == 'AssignCollectionSort'
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-            def allPaths = resultsMap.values().unique()
-        	myList.unique()
-        	myList.unique() { it }
-        	myList.unique(2) { it }
-            myList.findAll{ it < 50 }.unique()
-            def w = getMyList().unique().findAll { x < 1 }
-            def x = myList.foo.unique().findAll { x < 1 }
-            def y = myList.foo().unique().findAll { x < 1 }
+            def allPaths = resultsMap.keySet().sort()
+        	myList.sort()
+        	myList.sort() { it }
+        	myList.sort(2) { it }
+            myList.findAll{ it < 50 }.sort()
+            def w = getMyList().sort().findAll { x < 1 }
+            def x = myList.foo.sort().findAll { x < 1 }
+            def y = myList.foo().sort().findAll { x < 1 }
         '''
         assertNoViolations(SOURCE)
     }
 
     void testNoArgs() {
         final SOURCE = '''
-            def x = myList.unique()
+            def x = myList.sort()
         '''
-        assertSingleViolation(SOURCE, 2, 'def x = myList.unique()')
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort()')
     }
 
     void testOneArgs() {
         final SOURCE = '''
-            def x = myList.unique() { it }
+            def x = myList.sort() { it }
         '''
-        assertSingleViolation(SOURCE, 2, 'def x = myList.unique()')
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort()')
     }
 
     void testChaining() {
         final SOURCE = '''
-            def x = myList.unique().findAll { x < 1 }
+            def x = myList.sort().findAll { x < 1 }
         '''
-        assertSingleViolation(SOURCE, 2, 'def x = myList.unique().findAll { x < 1 }')
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort().findAll { x < 1 }')
     }
 
     protected Rule createRule() {
-        new AssignCollectionUniqueRule()
+        new AssignCollectionSortRule()
     }
 }
