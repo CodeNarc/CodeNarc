@@ -14,15 +14,15 @@ BUG FIXES and NEW FEATURES
 - #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
 - #3314773: UnnecessaryGroovyImportRule: false positive on static imports
 - #3315992: ClosureAsLastMethodParameter - false positive, when method call surrounded by parentheses.
-- #3307699: Fixed a typo and made some "Violation" strings lowercase, so the log messages are consistent. (Fixed by René Scheibe)
-- #3315946: Cmdline runner does not respect -includes and -excludes.  (Fixed by René Scheibe)
-- #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by René Scheibe)
-- #3322395: JUnitTestMethodWithoutAssert - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by René Scheibe)
+- #3307699: Fixed a typo and made some "Violation" strings lowercase, so the log messages are consistent. (Fixed by Rene Scheibe)
+- #3315946: Cmdline runner does not respect -includes and -excludes.  (Fixed by Rene Scheibe)
+- #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by Rene Scheibe)
+- #3322395: JUnitTestMethodWithoutAssert - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by Rene Scheibe)
 
 THANKS
-- Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
+- Thanks to Rene Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
   as well as the many bug fixes.
-
+- Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
 
 Changes in version 0.14 (June 2011)
 -------------------------------------------
@@ -96,7 +96,7 @@ BUG FIXES and NEW FEATURES
 - #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass().
 - #3309748 - FieldName:Do not treat non-static final fields as constants
 - #3310413 - Fix UnnecessaryPublicModifier does not catch public on constructors.
-- #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from René Scheibe
+- #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from Rene Scheibe
 - #3313550 - Some HTML violation descriptions in the properties files were not well-formed HTML. This has been fixed.
 - #3205688 - Fixed false positives in UseAssertEqualsInsteadOfAssertTrue when using the JUnit assertFalse method.
 
@@ -114,7 +114,7 @@ THANKS
   Thank you to Erik Pragt for the MisorderedStaticImports rule.
   Thank you to Marcin Erdmann for the MisorderedStaticImports, ClosureAsLastMethodParameterInBracketsRule, and UnnecessaryBracketsForMethodWithClosureCall rules.
   Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
-  Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
+  Thank you to Rene Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------
@@ -195,8 +195,8 @@ POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
 
 THANKS
- - Many thanks to Mathilde Lemée, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
- - Big thanks to Evgeny Goldin and Cédric Champeau for reporting bugs which helps us improve the product so much faster.
+ - Many thanks to Mathilde LemÔøΩe, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
+ - Big thanks to Evgeny Goldin and CÔøΩdric Champeau for reporting bugs which helps us improve the product so much faster.
 
 Changes in version 0.12 (January 2011)
 -------------------------------------------
@@ -254,7 +254,7 @@ BUG FIXES
 - Fix Bug #3110308: "Rules to catch null returns ignore ternary expressions".
 - Fix Bug #3110303: "ExplicitCallToXMethod rules should ignore spread statements".
 - Fix Bug #3109917: "DuplicateStringLiteralRule - enum names".
-- Fix Bug #3109628: "Exceptions are thrown with CodeNarc v0.11" – "GString as map key checking classes that do not exist yet” and “unnecessary ctor rule breaks for anonymous classes".
+- Fix Bug #3109628: "Exceptions are thrown with CodeNarc v0.11" ÔøΩ "GString as map key checking classes that do not exist yetÔøΩ and ÔøΩunnecessary ctor rule breaks for anonymous classes".
 - Fix Bug #3190754: Don't use default ClassLoader for loading rule scripts.
 
 POTENTIAL BREAKING CHANGES

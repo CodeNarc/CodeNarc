@@ -27,7 +27,7 @@ import org.codenarc.util.AstUtil
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class UnnecessaryDotClassRule extends AbstractAstVisitorRule {
-    String name = 'UnecessaryDotClass'
+    String name = 'UnnecessaryDotClass'
     int priority = 2
     Class astVisitorClass = UnnecessaryDotClassAstVisitor
 }

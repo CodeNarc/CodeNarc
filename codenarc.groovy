@@ -83,6 +83,7 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
 * $ruleName Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
+
   $ruleDescription
 
   Example of violations:

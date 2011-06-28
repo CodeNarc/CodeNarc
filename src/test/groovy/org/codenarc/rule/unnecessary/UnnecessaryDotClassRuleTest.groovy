@@ -28,7 +28,7 @@ class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'UnecessaryDotClass'
+        assert rule.name == 'UnnecessaryDotClass'
     }
 
     void testSuccessScenario() {
