@@ -25,6 +25,22 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* AssignCollectionUnique Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+  The unique method mutates the original list. If a user is using the result of this method then they probably don't understand this.
+  This violation is triggered when a unique() method call appears as the right hand side of an assignment, or when it appears
+  as the first method call in a series of chained method calls. 
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+  def a = myList.unique()
+  def b = myList.unique() { it }
+  def c = myList.unique().findAll { x < 1 }
+
+-------------------------------------------------------------------------------
+
 * AssignmentInConditional Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>

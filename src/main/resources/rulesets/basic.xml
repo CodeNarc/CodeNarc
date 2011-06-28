@@ -77,4 +77,5 @@
     <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
     <rule class='org.codenarc.rule.basic.ForLoopShouldBeWhileLoopRule'/>
     <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
+    <rule class='org.codenarc.rule.basic.AssignCollectionUniqueRule'/>
 </ruleset>
