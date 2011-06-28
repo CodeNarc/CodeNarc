@@ -671,7 +671,7 @@ class AstUtil {
      * true if this node is a MethodNode meeting the parameters. false otherwise
      */
     static boolean isMethodNode(ASTNode node, String methodName, Integer numArguments = null, Class returnType = null) {
-        if (!node instanceof MethodNode) {
+        if (!(node instanceof MethodNode)) {
             return false
         }
         if (node.name != methodName) {

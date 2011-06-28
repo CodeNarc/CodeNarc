@@ -95,7 +95,7 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
     }
 
     private static boolean isNumberLiteral(Expression node) {
-        if (!node instanceof ConstantExpression) { return false }
+        if (!(node instanceof ConstantExpression)) { return false }
         if (AstUtil.isNull(node)) { return false }
         if (!node.type.isResolved()) { return false }
 

@@ -11,6 +11,7 @@ NEW AND UPDATED RULES
 - AssignCollectionSort rule (basic) - The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
 - UnnecessaryDotClass rule (unnecessary) - To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
 - BitwiseOperatorInConditional rule (basic) - Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practive to extract a temp variable.
+- UnnecessaryInstanceOfCheck rule (unnecessary) - This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that (!variable instanceof String) will never be true because the result of a not expression is always a boolean. 
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.
