@@ -18,6 +18,7 @@ package org.codenarc.rule.concurrency
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import java.lang.reflect.Modifier
 
 /**
  * Synchronized Method Rule - This rule reports uses of the synchronized keyword on
@@ -39,7 +40,7 @@ class SynchronizedMethodAstVisitor extends AbstractAstVisitor  {
 
     def void visitMethodEx(MethodNode node) {
         if (isFirstVisit(node)) {
-            if (node.getModifiers() & node.ACC_SYNCHRONIZED) {
+            if (Modifier.isSynchronized(node.getModifiers())) {
                 addViolation(node, "The method $node.name is synchronized at the method level")
             }
         }

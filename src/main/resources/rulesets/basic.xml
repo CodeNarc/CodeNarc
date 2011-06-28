@@ -79,4 +79,6 @@
     <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
     <rule class='org.codenarc.rule.basic.AssignCollectionUniqueRule'/>
     <rule class='org.codenarc.rule.basic.AssignCollectionSortRule'/>
+    <rule class='org.codenarc.rule.basic.BitwiseOperatorInConditionalRule'/>
+    <rule class='org.codenarc.rule.basic.AssignCollectionSortRule'/>
 </ruleset>

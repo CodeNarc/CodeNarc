@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
 import org.codehaus.groovy.ast.PropertyNode
+import java.lang.reflect.Modifier
 
 /**
  * Rule that verifies that the name of each property matches a regular expression. By default it checks that
@@ -79,13 +80,13 @@ class PropertyNameAstVisitor extends AbstractAstVisitor  {
             def re = rule.regex
             def mod = node.modifiers
 
-            if (mod & PropertyNode.ACC_STATIC) {
+            if (Modifier.isStatic(mod)) {
                 re = rule.staticRegex ?: re
             }
-            if (mod & PropertyNode.ACC_FINAL) {
+            if (Modifier.isFinal(mod)) {
                 re = rule.finalRegex ?: re
             }
-            if ((mod & PropertyNode.ACC_FINAL) && (mod & PropertyNode.ACC_STATIC)) {
+            if ((Modifier.isFinal(mod)) && (Modifier.isStatic(mod))) {
                 re = rule.staticFinalRegex ?: re
             }
 

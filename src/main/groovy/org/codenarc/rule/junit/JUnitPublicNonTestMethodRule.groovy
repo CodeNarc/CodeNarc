@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import java.lang.reflect.Modifier
 
 /**
  * Rule that checks if a JUnit test class contains public methods other than:
@@ -54,8 +55,8 @@ class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
 class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
 
     void visitMethodEx(MethodNode methodNode) {
-        if ((methodNode.modifiers & MethodNode.ACC_PUBLIC)
-            && !(methodNode.modifiers & MethodNode.ACC_STATIC)
+        if (Modifier.isPublic(methodNode.modifiers)
+            && !(Modifier.isStatic(methodNode.modifiers))
             && !isTestMethod(methodNode)
             && !isZeroArgumentMethod(methodNode, 'setUp')
             && !isZeroArgumentMethod(methodNode, 'tearDown')

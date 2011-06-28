@@ -16,13 +16,13 @@
 package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
+import java.lang.reflect.Modifier
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.
@@ -72,7 +72,7 @@ class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
 
             if (shouldApplyThisRuleTo(classNode)) {
                 classNode.methods.inject(allPrivateMethods) { acc, methodNode ->
-                    if ((methodNode.modifiers & FieldNode.ACC_PRIVATE) && !allPrivateMethods.containsKey(methodNode.name)) {
+                    if ((Modifier.isPrivate(methodNode.modifiers)) && !allPrivateMethods.containsKey(methodNode.name)) {
                         allPrivateMethods.put(methodNode.name, methodNode)
                     }
                 }

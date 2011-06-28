@@ -10,6 +10,7 @@ NEW AND UPDATED RULES
 - AssignCollectionUnique rule (basic) - The Collections.unique() method mutates the list and returns the list as a value. If you are assigning the result of unique() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
 - AssignCollectionSort rule (basic) - The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
 - UnnecessaryDotClass rule (unnecessary) - To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
+- BitwiseOperatorInConditional rule (basic) - Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practive to extract a temp variable.
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.
@@ -26,6 +27,7 @@ THANKS
   as well as the many bug fixes.
 - Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
 - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule. 
+- Thanks to Jeff Beck for the BitwiseOperatorInConditional rule. 
 
 Changes in version 0.14 (June 2011)
 -------------------------------------------

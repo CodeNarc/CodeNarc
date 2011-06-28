@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
 import org.codehaus.groovy.ast.PropertyNode
+import java.lang.reflect.Modifier
 
 /**
  * Rule that verifies that the name of each field matches a regular expression. By default it checks that
@@ -81,13 +82,13 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
             def mod = fieldNode.modifiers
             def re = rule.regex
 
-            if (mod & FieldNode.ACC_STATIC) {
+            if (Modifier.isStatic(mod)) {
                 re = rule.staticRegex ?: re
             }
-            if (mod & FieldNode.ACC_FINAL) {
+            if (Modifier.isFinal(FieldNode.ACC_FINAL)) {
                 re = rule.finalRegex ?: re
             }
-            if ((mod & FieldNode.ACC_FINAL) && (mod & FieldNode.ACC_STATIC)) {
+            if ((Modifier.isFinal(mod)) && (Modifier.isStatic(mod))) {
                 re = rule.staticFinalRegex ?: re
             }
 
