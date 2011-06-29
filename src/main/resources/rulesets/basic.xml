@@ -83,4 +83,5 @@
     <rule class='org.codenarc.rule.basic.AssignCollectionSortRule'/>
     <rule class='org.codenarc.rule.basic.HardcodedWindowsRootDirectoryRule'/>
     <rule class='org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule'/>
+    <rule class='org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule'/>
 </ruleset>

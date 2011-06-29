@@ -15,6 +15,7 @@ NEW AND UPDATED RULES
 - UnnecessarySubstring rule (unnecessary) - This rule finds usages of String.substring(int) and String.substring(int, int) that can be replaced by use of the subscript operator. For instance, var.substring(5) can be replaced with var[5..-1].
 - HardcodedWindowsRootDirectory rule (basic) - This rule find cases where a File object is constructed with a windows-based path. This is not portable, and using the File.listRoots() method is a better alternative.
 - HardCodedWindowsFileSeparator rule (basic) - This rule finds usages of a Windows file separator within the constructor call of a File object. It is better to use the Unix file separator or use the File.separator constant.
+- RandomDoubleCoercedToZero rule (basic) - The Math.random() method returns a double result greater than or equal to 0.0 and less than 1.0. If you coerce this result into an Integer or int, then it is coerced to zero. Casting the result to int, or assigning it to an int field is probably a bug.
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.
