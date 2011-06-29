@@ -82,4 +82,5 @@
     <rule class='org.codenarc.rule.basic.BitwiseOperatorInConditionalRule'/>
     <rule class='org.codenarc.rule.basic.AssignCollectionSortRule'/>
     <rule class='org.codenarc.rule.basic.HardcodedWindowsRootDirectoryRule'/>
+    <rule class='org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule'/>
 </ruleset>
