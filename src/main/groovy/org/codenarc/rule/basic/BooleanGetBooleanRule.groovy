@@ -21,7 +21,9 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 
 /**
- * This rule catches usages of java.lang.Boolean.getBoolean(String) which reads a boolean from the System properties. It is often mistakenly used to attempt to read user input or parse a String into a boolean. It is a poor piece of API to use; replace it with System.properties['prop̈́'].
+ * This rule catches usages of java.lang.Boolean.getBoolean(String) which reads a boolean from the System properties.
+ * It is often mistakenly used to attempt to read user input or parse a String into a boolean. It is a poor piece of API
+ * to use; replace it with System.properties['prop̈́'].
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$

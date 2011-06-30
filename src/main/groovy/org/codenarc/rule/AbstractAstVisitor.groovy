@@ -15,21 +15,10 @@
  */
 package org.codenarc.rule
 
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceCode
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.PropertyNode
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.AnnotationNode
-import org.codehaus.groovy.ast.AnnotatedNode
-import org.codehaus.groovy.ast.ConstructorNode
-import org.codehaus.groovy.ast.expr.ListExpression
-import org.codehaus.groovy.ast.Parameter
-import org.codehaus.groovy.ast.expr.Expression
+import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.*
 
 /**
  * Abstract superclass for Groovy AST Visitors used with Rules
@@ -145,31 +134,7 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
     }
 
     protected boolean suppressionIsPresent(AnnotatedNode node) {
-        if (rule?.name) {
-            def annos = node?.annotations?.findAll { it.classNode?.name == 'SuppressWarnings' }
-            for (AnnotationNode annotation: annos) {
-                if (suppressionIsPresent(annotation)) {
-                    return true
-                }
-            }
-        }
-        false
-    }
-
-    @SuppressWarnings('NestedBlockDepth')
-    private boolean suppressionIsPresent(AnnotationNode node) {
-        for (Expression exp: node?.members?.values()) {
-            if (exp instanceof ConstantExpression && exp.value == rule.name) {
-                return true
-            } else if (exp instanceof ListExpression) {
-                for (Expression entry: exp.expressions) {
-                    if (entry instanceof ConstantExpression && entry.value == rule.name) {
-                        return true
-                    }
-                }
-            }
-        }
-        false
+        AstUtil.isSuppressionPresent(node, rule?.name)
     }
 
     final void visitClass(ClassNode node) {

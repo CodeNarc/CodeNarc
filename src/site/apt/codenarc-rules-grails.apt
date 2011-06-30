@@ -5,6 +5,19 @@
 Grails Rules  ("<rulesets/grails.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* GrailsDomainHasEquals Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks that Grails domain classes redefine equals().
+
+
+* GrailsDomainHasToString Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks that Grails domain classes redefine toString()
+
 
 * GrailsPublicControllerMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

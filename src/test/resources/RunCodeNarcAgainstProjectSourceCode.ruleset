@@ -7,6 +7,7 @@ ruleset {
     ruleset('rulesets/braces.xml')
     ruleset('rulesets/design.xml')
     ruleset('rulesets/exceptions.xml')
+    ruleset('rulesets/formatting.xml')
     ruleset('rulesets/imports.xml')
     ruleset('rulesets/junit.xml') {
         exclude 'JUnitStyleAssertions'

@@ -21,7 +21,8 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ClassNode
 
 /**
- * If Spock's @IgnoreRest on any method, all non-annotated test methods are not executed. This behaviour is almost always unintended. It's fine to use @IgnoreRest locally during development, but when committing code, it should be removed.
+ * If Spock's @IgnoreRest on any method, all non-annotated test methods are not executed. This behaviour is almost always
+ * unintended. It's fine to use @IgnoreRest locally during development, but when committing code, it should be removed.
  *
  * @author Jan Ahrens
  * @author Stefan Armbruster

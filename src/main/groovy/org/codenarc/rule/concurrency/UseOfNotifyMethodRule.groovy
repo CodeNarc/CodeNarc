@@ -21,7 +21,9 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 
 /**
- * This code calls notify() rather than notifyAll(). Java monitors are often used for multiple conditions. Calling notify() only wakes up one thread, meaning that the thread woken up might not be the one waiting for the condition that the caller just satisfied.
+ * This code calls notify() rather than notifyAll(). Java monitors are often used for multiple conditions. Calling
+ * notify() only wakes up one thread, meaning that the thread woken up might not be the one waiting for the condition
+ * that the caller just satisfied.
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$

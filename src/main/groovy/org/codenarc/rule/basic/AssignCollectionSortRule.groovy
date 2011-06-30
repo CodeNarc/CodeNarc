@@ -24,7 +24,9 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs. 
+ * The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of
+ * sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is
+ * frequently the cause of subtle bugs.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $

@@ -22,7 +22,9 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test case or by creating instances of another test case. If you require shared logic in test cases then extract that logic to a new class where it can properly be reused. 
+ * This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test
+ * case or by creating instances of another test case. If you require shared logic in test cases then extract that
+ * logic to a new class where it can properly be reused.
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$

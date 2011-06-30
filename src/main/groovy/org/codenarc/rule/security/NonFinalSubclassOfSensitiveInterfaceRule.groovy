@@ -26,7 +26,11 @@ import java.security.BasicPermission
 import java.lang.reflect.Modifier
 
 /**
- * The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended. Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces such as java.security.PrivilegedAction and java.security.PrivilegedActionException must also be declared final for analogous reasons.
+ * The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended.
+ * Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that
+ * malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces
+ * such as java.security.PrivilegedAction and java.security.PrivilegedActionException must also be declared final for
+ * analogous reasons.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $

@@ -16,6 +16,10 @@ NEW AND UPDATED RULES
 - HardcodedWindowsRootDirectory rule (basic) - This rule find cases where a File object is constructed with a windows-based path. This is not portable, and using the File.listRoots() method is a better alternative.
 - HardCodedWindowsFileSeparator rule (basic) - This rule finds usages of a Windows file separator within the constructor call of a File object. It is better to use the Unix file separator or use the File.separator constant.
 - RandomDoubleCoercedToZero rule (basic) - The Math.random() method returns a double result greater than or equal to 0.0 and less than 1.0. If you coerce this result into an Integer or int, then it is coerced to zero. Casting the result to int, or assigning it to an int field is probably a bug.
+- BracesForClass rule (formatting) - Checks the location of the opening brace ({) for classes. By default, requires them on the same line, but the sameLine property can be set to false to override this.
+- LineLength rule (formatting) - Checks the maximum length for each line of source code. It checks for number of characters, so lines that include tabs may appear longer than the allowed number when viewing the file. The maximum line length can be configured by setting the length property, which defaults to 120.
+- GrailsDomainHasToString rule (grails) - Checks that Grails domain classes redefine toString()
+- GrailsDomainHasEquals rule (grails) - Checks that Grails domain classes redefine equals().
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.

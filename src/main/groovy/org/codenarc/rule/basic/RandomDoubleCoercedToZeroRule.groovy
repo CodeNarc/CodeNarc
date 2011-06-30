@@ -26,7 +26,9 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * The Math.random() method returns a double result greater than or equal to 0.0 and less than 1.0. If you coerce this result into an Integer or int, then it is coerced to zero. Casting the result to int, or assigning it to an int field is probably a bug. 
+ * The Math.random() method returns a double result greater than or equal to 0.0 and less than 1.0. If you coerce this
+ * result into an Integer or int, then it is coerced to zero. Casting the result to int, or assigning it to an int
+ * field is probably a bug.
  *
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
@@ -70,12 +72,12 @@ class RandomDoubleCoercedToZeroAstVisitor extends AbstractAstVisitor {
     void visitMethodEx(MethodNode node) {
         if (isFirstVisit(node)) {
             if (node.returnType.name in ['int', 'Integer']) {
-                node.code.visit(new MathRandomTracker(callbackFunction: {
+                node.code?.visit(new MathRandomTracker(callbackFunction: {
                     addViolation(it, "Returning the result of Math.random() from an ${node.returnType.name}-returning method always returns 0")
                 }))
             }
             if (node.returnType.name in ['long', 'Long']) {
-                node.code.visit(new MathRandomTracker(callbackFunction: {
+                node.code?.visit(new MathRandomTracker(callbackFunction: {
                     addViolation(it, "Returning the result of Math.random() from a ${node.returnType.name}-returning method always returns 0")
                 }))
             }

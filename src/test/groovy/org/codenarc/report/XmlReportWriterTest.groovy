@@ -53,6 +53,7 @@ class XmlReportWriterTest extends AbstractTestCase {
     private static final VERSION = new File(VERSION_FILE).text
     private static final TIMESTAMP_DATE = new Date(1262361072497)
     private static final FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
+    @SuppressWarnings('LineLength')
     private static final REPORT_XML = """<?xml version='1.0'?>
     <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
         <Report timestamp='${FORMATTED_TIMESTAMP}'/>

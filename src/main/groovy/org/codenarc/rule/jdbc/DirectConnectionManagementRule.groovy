@@ -21,7 +21,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * The J2EE standard requires that applications use the container's resource management facilities to obtain connections to resources. Every major web application container provides pooled database connection management as part of its resource management framework. Duplicating this functionality in an application is difficult and error prone, which is part of the reason it is forbidden under the J2EE standard.
+ * The J2EE standard requires that applications use the container's resource management facilities to obtain
+ * connections to resources. Every major web application container provides pooled database connection management as
+ * part of its resource management framework. Duplicating this functionality in an application is difficult and
+ * error prone, which is part of the reason it is forbidden under the J2EE standard.
  *
  * @author 'Hamlet D'Arcy'
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $

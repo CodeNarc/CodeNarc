@@ -1,0 +1,47 @@
+
+/**
+ * Comment
+ */
+@SuppressWarnings('foo')
+class First{
+    def x
+
+    First(){}
+
+    void method1(){}
+}
+
+public class Second{
+    public Second(){
+        try{
+            def range = 2..3
+            range.each(){print it}
+        }catch (Exception e){
+        }finally{
+        }
+
+        for (i in 0..3){
+        }
+    }
+
+    private int method2(){
+        if(1==1) {
+        } else if(2==2) {
+        } else{
+        }
+
+        if (3==3){
+        }
+
+        while(1==1){
+            print ""
+        }
+
+        return 2
+    }
+}
+
+public interface Third{
+    public static final Y
+
+}

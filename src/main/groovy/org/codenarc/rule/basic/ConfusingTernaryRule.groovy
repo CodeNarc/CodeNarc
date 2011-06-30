@@ -23,7 +23,13 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * In an "if" expression with an "else" clause, avoid negation in the test. For example, rephrase: if (x != y) diff(); else same(); as: if (x == y) same(); else diff(); Most "if (x != y)" cases without an "else" are often return cases, so consistent use of this rule makes the code easier to read. Also, this resolves trivial ordering problems, such as "does the error case go first?" or "does the common case go first?".
+ * In an "if" expression with an "else" clause, avoid negation in the test. For example, rephrase:
+ *     if (x != y) diff(); else same();
+ * as:
+ *     if (x == y) same(); else diff();
+ * Most "if (x != y)" cases without an "else" are often return cases, so consistent use of this rule makes the code
+ * easier to read. Also, this resolves trivial ordering problems, such as "does the error case go first?" or "does
+ * the common case go first?".
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$

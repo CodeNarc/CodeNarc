@@ -22,7 +22,8 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Synchronized on getClass rather than class literal. This instance method synchronizes on this.getClass(). If this class is subclassed, subclasses will synchronize on the class object for the subclass, which isn't likely what was intended.
+ * Synchronized on getClass rather than class literal. This instance method synchronizes on this.getClass(). If this
+ * class is subclassed, subclasses will synchronize on the class object for the subclass, which isn't likely what was intended.
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$

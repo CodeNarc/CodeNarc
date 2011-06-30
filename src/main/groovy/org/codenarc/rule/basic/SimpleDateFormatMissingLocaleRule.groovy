@@ -21,7 +21,10 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.util.AstUtil
 
 /**
- * Be sure to specify a Locale when creating a new instance of SimpleDateFormat; the class is locale-sensitive. If you instantiate SimpleDateFormat without a Locale parameter, it will format the date and time according to the default Locale. Both the pattern and the Locale determine the format. For the same pattern, SimpleDateFormat may format a date and time differently if the Locale varies.
+ * Be sure to specify a Locale when creating a new instance of SimpleDateFormat; the class is locale-sensitive. If you
+ * instantiate SimpleDateFormat without a Locale parameter, it will format the date and time according to the default
+ * Locale. Both the pattern and the Locale determine the format. For the same pattern, SimpleDateFormat may format a date
+ * and time differently if the Locale varies.
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$

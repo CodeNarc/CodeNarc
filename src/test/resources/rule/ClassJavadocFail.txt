@@ -1,0 +1,188 @@
+/*
+ * BKOOL
+ *
+ * Copyright 2009. All Rights Reserved.
+ */
+package com.bkool.webapp.user
+
+import com.bkool.webapp.user.GenericSportProfile
+import com.bkool.webapp.datatype.Gender
+import com.bkool.webapp.datatype.SportType
+import com.bkool.webapp.datatype.UserState
+import com.bkool.webapp.datatype.FriendshipState
+import com.bkool.webapp.user.UserConfig
+import com.bkool.webapp.user.PersonalProfile
+import com.bkool.webapp.social.SocialNetworkConnection
+
+
+class User
+{
+
+
+    /**
+     * {@link com.bkool.webapp.user.UserService} dependency injected.
+     */
+    def userService
+
+
+    String    email
+    String    password
+    boolean   enabled
+    Gender    gender
+    Date      birthDate
+    Date      lastUpdated
+    Date      dateCreated
+    String    unsubscribingReason
+    SportType sport = SportType.CYCLING  // Represents the sport sub-site the datatype is currently using, defaults to CYCLING until we have more sites
+    UserState state
+    UserConfig config
+    PersonalProfile pProfile
+    GenericSportProfile gSportProfile
+    List sSportProfiles
+    Double profileCompleteness = 0
+
+    /**
+     * Many-to-many relationship with the datatype's roles.
+     */
+    static hasMany = [
+        roles: Role,
+        sSportProfiles: SpecificSportProfile,
+        following: Friendship,
+        followers: Friendship,
+        socialNetworks: SocialNetworkConnection]
+
+    static belongsTo = [sport: SportType, state: UserState]
+
+    static fetchMode = [config: 'eager']
+
+    static mappedBy = [
+        following: 'followingUser',
+        followers: 'followerUser' ]
+
+    static constraints =
+    {
+        email(blank: false, email:true, unique: true)
+        password(blank: false, minSize:6)
+        birthDate(blank: false)
+        gender(inList:[Gender.MALE, Gender.FEMALE])
+        state(nullable: true)
+        unsubscribingReason(nullable: true, maxSize:500)
+        config(nullable: true)
+        pProfile(nullable:true)
+        gSportProfile(nullable:true)
+        following(nullable: true)
+        followers(nullable: true)
+        socialNetworks(nullable: true)
+    }
+
+    Integer ageInDays()
+    {
+       return new Date() - birthDate
+    }
+    Integer ageInYears()
+    {
+      ageInDays() / 365
+    }
+
+    /**
+   *  Instead of having an ageGroup field, as it is calculated from an age range table, we just
+    * implement a getter.
+    * Age groups come in 5 year steps, starting at 20 and ending at 70
+    * < 20 = 1
+    * 20-24 = 2
+    * 25-29 = 3
+    * ...
+    * 55-59 = 9
+    * 60-64 = 10
+    * 65-69 = 11
+    * >70 = 12
+    */
+    public Integer ageGroup()
+    {
+        def age = ageInYears()
+        if (age>=70)
+          return 12
+        else if (age<20)
+          return 1
+        else
+          return (age-20) / 5 + 2
+    }
+
+
+  /**
+   * Same as ageGroup but with competition categories
+   *
+   * Cadete	15 / 16
+   * Junior	17/18/19
+   * Sub 23	20 a 23
+   * Absoluto	24 a 39
+   * Veterano 1	40 a 49
+   * Veterano 2	50 a 59
+   * Veterano 3	60 a 69
+   *
+   */
+    public Integer category()
+    {
+
+    }
+
+
+    /**
+     * Returns the set of friends, i.e. the friendship relationships
+     * with <code>FriendshipState.ACCEPTED</code> state, whether they
+     * habe been initiated by the datatype or they have been received and
+     * accepted by him.
+     */
+    def getFriends()
+    {
+
+    }
+
+
+    String toString()
+    {
+        email
+    }
+
+    boolean equals(Object o)
+    {
+        if (o instanceof User  && o.email == this.email )
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+
+
+    /**
+     * Closure to update the profile completeness value.
+     */
+    def updateProfileCompleteness =
+    {
+
+    }
+
+}
+
+/*
+ * Second class
+ */
+public interface Second
+{
+
+}
+
+    /**
+     * Comments
+     *
+     */
+
+
+
+    enum Name
+    {
+        ONE, TWO
+    }

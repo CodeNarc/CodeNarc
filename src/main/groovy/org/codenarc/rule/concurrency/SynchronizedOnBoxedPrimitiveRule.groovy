@@ -23,7 +23,9 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * The code synchronizes on a boxed primitive constant, such as an Integer. Since Integer objects can be cached and shared, this code could be synchronizing on the same object as other, unrelated code, leading to unresponsiveness and possible deadlock
+ * The code synchronizes on a boxed primitive constant, such as an Integer. Since Integer objects can be cached and
+ * shared, this code could be synchronizing on the same object as other, unrelated code, leading to unresponsiveness and
+ * possible deadlock
  *
  * @author 'Hamlet D'Arcy'
  * @version $Revision$ - $Date$

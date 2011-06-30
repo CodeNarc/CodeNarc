@@ -21,7 +21,9 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * If you implement a compareTo method then you should also implement the Comparable interface. If you don't then you could possibly get an exception if the Groovy == operator is invoked on your object. This is an issue fixed in Groovy 1.8 but present in previous versions. 
+ * If you implement a compareTo method then you should also implement the Comparable interface. If you don't then you
+ * could possibly get an exception if the Groovy == operator is invoked on your object. This is an issue fixed in
+ * Groovy 1.8 but present in previous versions.
  *
  * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$

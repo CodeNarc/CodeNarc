@@ -13,4 +13,6 @@
     <rule class='org.codenarc.rule.grails.GrailsServletContextReferenceRule'/>
     <rule class='org.codenarc.rule.grails.GrailsStatelessServiceRule'/>
 
+    <rule class='org.codenarc.rule.grails.GrailsDomainHasEqualsRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsDomainHasToStringRule'/>
 </ruleset>
