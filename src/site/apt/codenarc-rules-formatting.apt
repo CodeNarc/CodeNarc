@@ -13,6 +13,13 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   Checks the location of the opening brace ({) for classes. By default, requires them on the same
   line, but the sameLine property can be set to false to override this.
 
+* BracesForForLoop Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks the location of the opening brace ({) for for loops. By default, requires them on the same line, but the
+  sameLine property can be set to false to override this.
+
 
 * LineLength Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -11,4 +11,5 @@
 
     <rule class='org.codenarc.rule.formatting.BracesForClassRule'/>
     <rule class='org.codenarc.rule.formatting.LineLengthRule'/>
+    <rule class='org.codenarc.rule.formatting.BracesForForLoopRule'/>
 </ruleset>

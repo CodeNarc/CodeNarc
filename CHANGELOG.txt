@@ -20,6 +20,7 @@ NEW AND UPDATED RULES
 - LineLength rule (formatting) - Checks the maximum length for each line of source code. It checks for number of characters, so lines that include tabs may appear longer than the allowed number when viewing the file. The maximum line length can be configured by setting the length property, which defaults to 120.
 - GrailsDomainHasToString rule (grails) - Checks that Grails domain classes redefine toString()
 - GrailsDomainHasEquals rule (grails) - Checks that Grails domain classes redefine equals().
+- BracesForForLoop rule (formatting) - Checks the location of the opening brace ({) for for loops. By default, requires them on the same line, but the sameLine property can be set to false to override this.
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.
