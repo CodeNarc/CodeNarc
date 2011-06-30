@@ -68,6 +68,7 @@
             <item name="Design Rules" href="/codenarc-rules-design.html"/>
             <item name="DRY Rules" href="/codenarc-rules-dry.html"/>
             <item name="Exceptions Rules" href="/codenarc-rules-exceptions.html"/>
+            <item name="Formatting Rules" href="/codenarc-rules-formatting.html"/>
             <item name="Generic Rules" href="/codenarc-rules-generic.html"/>
             <item name="Grails Rules" href="/codenarc-rules-grails.html"/>
             <item name="Imports Rules" href="/codenarc-rules-imports.html"/>

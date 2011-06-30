@@ -30,6 +30,7 @@ class RuleSets {
         'rulesets/design.xml',
         'rulesets/dry.xml',
         'rulesets/exceptions.xml',
+        'rulesets/formatting.xml',
         'rulesets/generic.xml',
         'rulesets/grails.xml',
         'rulesets/imports.xml',
