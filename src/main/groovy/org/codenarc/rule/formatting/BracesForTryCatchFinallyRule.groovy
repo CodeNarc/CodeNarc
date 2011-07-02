@@ -17,35 +17,37 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.ForStatement
+import org.codehaus.groovy.ast.stmt.TryCatchStatement
 
 /**
- * Checks the location of the opening brace ({) for for loops. By default, requires them on a new line, but the
- * sameLine property can be set to true to override this.
+ * Checks the location of the opening brace ({) for try statements. By default, requires them on the line, but the
+ * sameLine property can be set to false to override this.
  *
+ * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @author Hamlet D'Arcy
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class BracesForForLoopRule extends AbstractAstVisitorRule {
-    String name = 'BracesForForLoop'
+class BracesForTryCatchFinallyRule extends AbstractAstVisitorRule {
+    String name = 'BracesForTryCatchFinally'
     int priority = 2
+    Class astVisitorClass = BracesForTryCatchFinallyAstVisitor
     boolean sameLine = true
-    Class astVisitorClass = BracesForForLoopAstVisitor
 }
 
-class BracesForForLoopAstVisitor extends AbstractAstVisitor {
+class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
 
+    //TODO Check catch and finally statements
     @Override
-    void visitForLoop(ForStatement node) {
+    void visitTryCatchFinally(TryCatchStatement node) {
         if (rule.sameLine) {
-            if(!lastSourceLine(node.collectionExpression)?.contains('{')) {
+            if(!sourceLine(node)?.contains('{')) {
                 addViolation(node, 'Braces should start on the same line')
             }
         } else {
-            if(lastSourceLine(node.collectionExpression)?.contains('{')) {
+            if(sourceLine(node)?.contains('{')) {
                 addViolation(node, 'Braces should start on a new line')
             }
         }
-        super.visitForLoop(node)
+        super.visitTryCatchFinally(node)
     }
 }

@@ -31,6 +31,50 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'BracesForClass'
     }
 
+    void testMultilineDefinition() {
+        final SOURCE = '''
+            class MyClass
+                        extends File {
+
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testMultilineDefinitionViolation() {
+        final SOURCE = '''
+            class MyClass
+                        extends File
+            {
+
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, '{')
+    }
+
+    void testMultilineDefinitionOverride() {
+        final SOURCE = '''
+            class MyClass
+                        extends File
+            {
+
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
+    }
+
+    void testMultilineDefinitionOverrideViolation() {
+        final SOURCE = '''
+            class MyClass
+                        extends File {
+
+            }
+        '''
+        rule.sameLine = false
+        assertSingleViolation(SOURCE, 3, 'extends File {', 'Opening brace for the class MyClass should start on a new line')
+    }
+
     void testSuccessScenarioSameLine() {
 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
@@ -50,9 +94,9 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 5, sourceLineText: 'class First', messageText: 'Braces should start on the same line'],
-                [lineNumber: 17, sourceLineText: 'class Second', messageText: 'Braces should start on the same line'],
-                [lineNumber: 63, sourceLineText: 'interface Third', messageText: 'Braces should start on the same line'])
+                [lineNumber: 6, sourceLineText: '{', messageText: 'Opening brace for the class First should start on the same line'],
+                [lineNumber: 18, sourceLineText: '{', messageText: 'Opening brace for the class Second should start on the same line'],
+                [lineNumber: 64, sourceLineText: '{', messageText: 'Opening brace for the interface Third should start on the same line'])
     }
 
     void testViolationNewLine() {
@@ -60,9 +104,9 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 6, sourceLineText: 'class First{', messageText: 'Braces should start on a new line'],
-                [lineNumber: 14, sourceLineText: 'class Second{', messageText: 'Braces should start on a new line'],
-                [lineNumber: 44, sourceLineText: 'interface Third{', messageText: 'Braces should start on a new line'])
+                [lineNumber: 6, sourceLineText: 'class First{', messageText: 'Opening brace for the class First should start on a new line'],
+                [lineNumber: 14, sourceLineText: 'class Second{', messageText: 'Opening brace for the class Second should start on a new line'],
+                [lineNumber: 44, sourceLineText: 'interface Third{', messageText: 'Opening brace for the interface Third should start on a new line'])
     }
 
     protected Rule createRule() {

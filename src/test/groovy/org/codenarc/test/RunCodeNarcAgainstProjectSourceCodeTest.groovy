@@ -19,6 +19,7 @@ package org.codenarc.test
  * Test that runs CodeNarc against the project source code
  *
  * @author Chris Mair
+ * @author Hamlet D'Arcy
  * @version $Revision$ - $Date$
  */
 class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
@@ -28,7 +29,7 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
 
     @SuppressWarnings('JUnitTestMethodWithoutAssert')
     void testRunCodeNarc() {
-        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'RunCodeNarcAgainstProjectSourceCode.properties') // ignore
+        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'RunCodeNarcAgainstProjectSourceCode.properties') 
         def ant = new AntBuilder()
 
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')

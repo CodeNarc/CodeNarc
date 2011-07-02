@@ -15,9 +15,12 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
+import org.codenarc.util.AstUtil
 
 /**
  * Checks the location of the opening brace ({) for classes. By default, requires them on the same line, but the sameLine property can be set to false to override this.
@@ -26,24 +29,50 @@ import org.codehaus.groovy.ast.ClassNode
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
-class BracesForClassRule extends AbstractAstVisitorRule {
+class BracesForClassRule extends AbstractRule {
     String name = 'BracesForClass'
     int priority = 2
-    Class astVisitorClass = BracesForClassAstVisitor
     boolean sameLine = true
-}
 
-class BracesForClassAstVisitor extends AbstractAstVisitor {
     @Override
-    void visitClassComplete(ClassNode node) {
-        if (rule.sameLine) {
-            if(!sourceLine(node)?.contains('{')) {
-                addViolation(node, 'Braces should start on the same line')
-            }
-        } else {
-            if(sourceLine(node)?.contains('{')) {
-                addViolation(node, 'Braces should start on a new line')
+    void applyTo(SourceCode sourceCode, List violations) {
+
+        sourceCode?.ast?.classes?.each { ClassNode classNode ->
+
+            def (lineNumber, sourceLine) = findOpeningBraceLine(sourceCode, classNode)
+
+            if (sameLine) {
+                if (sourceLine?.startsWith('{')) {
+                    violations.add(new Violation(
+                            rule: this,
+                            lineNumber: lineNumber,
+                            sourceLine: sourceLine,
+                            message: "Opening brace for the ${classNode.isInterface() ? 'interface' : 'class'} $classNode.name should start on the same line"))
+                }
+            } else {
+                if (!sourceLine?.startsWith('{')) {
+                    violations.add(new Violation(
+                            rule: this,
+                            lineNumber: lineNumber,
+                            sourceLine: sourceLine,
+                            message: "Opening brace for the ${classNode.isInterface() ? 'interface' : 'class'} $classNode.name should start on a new line"))
+                }
             }
         }
+    }
+
+    private static findOpeningBraceLine(SourceCode sourceCode, ASTNode node) {
+        int line = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
+        def sourceLine = sourceCode.line(line - 1)
+        while (sourceLine != null) {
+
+            if (sourceLine?.contains('{')) {
+                return [line, sourceLine]
+            }
+            line++
+            sourceLine = sourceCode.line(line - 1)
+        }
+
+        return [line, null]
     }
 }

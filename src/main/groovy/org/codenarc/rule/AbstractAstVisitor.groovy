@@ -58,13 +58,15 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
      * @param node - the Groovy AST node
      */
     protected String sourceLine(ASTNode node) {
-        // TODO Handle statements that cross multiple lines?
-        sourceCode.line(findFirstNonAnnotationLine(node) - 1)
+        sourceCode.line(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1)
     }
 
-    private static String getRawLine(sourceCode, int lineNumber) {
-        def allLines = sourceCode.getLines()
-        (lineNumber >= 0) && lineNumber < allLines.size() ? allLines[lineNumber] : null
+    /**
+     * Return the last source line corresponding to the specified AST node
+     * @param node - the Groovy AST node
+     */
+    protected String lastSourceLine(ASTNode node) {
+        sourceCode.line(node.lastLineNumber - 1)
     }
 
     /**
@@ -90,33 +92,12 @@ class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
             def lineNumber = node.lineNumber
             if (lineNumber >= 0) {
                 if (node instanceof AnnotatedNode) {
-                    lineNumber = findFirstNonAnnotationLine(node)
+                    lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
                 }
                 def sourceLine = sourceLine(node)
                 violations.add(new Violation(rule: rule, sourceLine: sourceLine, lineNumber: lineNumber, message: message))
             }
         }
-    }
-
-    /**
-     * gets the last line number of a node, taking into account annotations
-     * @param node
-     * @return
-     */
-    private int findFirstNonAnnotationLine(ASTNode node) {
-        if (node instanceof AnnotatedNode && node.annotations) {
-            def lastAnnotation = node.annotations?.max { it.lastLineNumber }
-            def rawLine = getRawLine(sourceCode, lastAnnotation.lastLineNumber-1)
-            // is the annotation the last thing on the line?
-            if (rawLine.size() > lastAnnotation.lastColumnNumber) {
-                // no it is not
-                return lastAnnotation.lastLineNumber
-            }
-            // yes it is the last thing, return the next thing
-            return lastAnnotation.lastLineNumber + 1
-        }
-
-        node.lineNumber
     }
 
     /**

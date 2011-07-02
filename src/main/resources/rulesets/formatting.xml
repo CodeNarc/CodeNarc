@@ -12,4 +12,8 @@
     <rule class='org.codenarc.rule.formatting.BracesForClassRule'/>
     <rule class='org.codenarc.rule.formatting.LineLengthRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForForLoopRule'/>
+    <rule class='org.codenarc.rule.formatting.BracesForIfElseRule'/>
+    <rule class='org.codenarc.rule.formatting.BracesForMethodRule'/>
+    <rule class='org.codenarc.rule.formatting.BracesForTryCatchFinallyRule'/>
+    <rule class='org.codenarc.rule.formatting.ClassJavadocRule'/>
 </ruleset>

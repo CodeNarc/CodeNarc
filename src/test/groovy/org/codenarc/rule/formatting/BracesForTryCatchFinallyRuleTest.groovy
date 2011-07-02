@@ -19,46 +19,23 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for BracesForForLoopRule
+ * Tests for BracesForTryCatchFinallyRule
  *
  * @author Hamlet D'Arcy
+ * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
-class BracesForForLoopRuleTest extends AbstractRuleTestCase {
+class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'BracesForForLoop'
-    }
-
-    void testMultilineForLoop() {
-
-        final SOURCE = '''
-            for (int x = 0;
-                    x < 10;
-                    x++) {
-
-            } '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testMultilineForLoopOverride() {
-
-        final SOURCE = '''
-            for (int x = 0;
-                    x < 10;
-                    x++)
-            {
-
-            } '''
-        rule.sameLine = false
-        assertNoViolations(SOURCE)
+        assert rule.name == 'BracesForTryCatchFinally'
     }
 
     void testNewLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
-        assertSingleViolation(SOURCE, 33, 'for (i in 0..3)', 'Braces should start on the same line')
+        assertSingleViolation(SOURCE, 21, 'try', 'Braces should start on the same line')
     }
 
     void testNewLineOverride() {
@@ -78,10 +55,10 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         rule.sameLine = false
-        assertSingleViolation(SOURCE, 23, 'for (i in 0..3){', 'Braces should start on a new line')
+        assertSingleViolation(SOURCE, 16, 'try{', 'Braces should start on a new line')
     }
 
     protected Rule createRule() {
-        new BracesForForLoopRule()
+        new BracesForTryCatchFinallyRule()
     }
 }

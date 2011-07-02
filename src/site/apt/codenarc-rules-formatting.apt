@@ -20,6 +20,39 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   Checks the location of the opening brace ({) for for loops. By default, requires them on the same line, but the
   sameLine property can be set to false to override this.
 
+* BracesForIfElse Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks the location of the opening brace ({) for if statements. By default, requires them on the same
+  line, but the sameLine property can be set to false to override this.
+
+
+* BracesForMethod Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks the location of the opening brace ({) for constructors and methods. By default, requires them on the same
+  line, but the sameLine property can be set to false to override this.
+
+
+* BracesForTryCatchFinally Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks the location of the opening brace ({) for try statements. By default, requires them on the line, but the sameLine property can be set to false to override this.
+
+
+* ClassJavadoc Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Makes sure each class and interface definition is preceded by javadoc. Enum definitions are not checked, due to strange
+  behavior in the Groovy AST. By default, only the main class in a file is checked for Javadoc. The main class is defined as
+  the class that has the same name as the source file, for instance MyClass is the main class in MyClass.groovy but the class
+  MyOtherClass defined in the same source file is not the main class. To check all the classes in the file set the rule
+  property <<<applyToNonMainClasses>>> to true.
+  
 
 * LineLength Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

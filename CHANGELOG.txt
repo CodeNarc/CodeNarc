@@ -21,6 +21,10 @@ NEW AND UPDATED RULES
 - GrailsDomainHasToString rule (grails) - Checks that Grails domain classes redefine toString()
 - GrailsDomainHasEquals rule (grails) - Checks that Grails domain classes redefine equals().
 - BracesForForLoop rule (formatting) - Checks the location of the opening brace ({) for for loops. By default, requires them on the same line, but the sameLine property can be set to false to override this.
+- BracesForIfElse rule (formatting) - Checks the location of the opening brace ({) for if statements. By default, requires them on the same line, but the sameLine property can be set to false to override this.
+- BracesForMethod rule (formatting) - Checks the location of the opening brace ({) for constructors and methods. By default, requires them on the same line, but the sameLine property can be set to false to override this.
+- BracesForTryCatchFinally rule (formatting) - Checks the location of the opening brace ({) for try statements. By default, requires them on the line, but the sameLine property can be set to false to override this.
+- ClassJavadoc rule (formatting) - Makes sure each class and interface definition is preceeded by javadoc. Enum definitions are not checked, due to strange behavior in the Groovy AST.
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.

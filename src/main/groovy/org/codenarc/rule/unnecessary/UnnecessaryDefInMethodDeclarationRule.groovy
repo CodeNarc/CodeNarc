@@ -18,6 +18,7 @@ package org.codenarc.rule.unnecessary
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * If a method has a visibility modifier or a type declaration, then the def keyword is unneeded.
@@ -70,7 +71,7 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
         String acc = ''
         for (lineIndex in (node.lineNumber-1 .. node.lastLineNumber-1)) {
             // the raw line is required to apply columnNumber and lastColumnNumber
-            def line = getRawLine(sourceCode, lineIndex)
+            def line = AstUtil.getRawLine(sourceCode, lineIndex)
 
             // extract the relevant part of the first line
             if (lineIndex == node.lineNumber - 1) {
