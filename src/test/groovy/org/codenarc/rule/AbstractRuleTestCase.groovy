@@ -17,6 +17,8 @@ package org.codenarc.rule
 
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import java.util.regex.Pattern
+import java.util.regex.PatternSyntaxException
 
 /**
  * Abstract superclass for tests of Rule classes
@@ -59,6 +61,22 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
             // Verify no errors/exceptions
             def sourceCode = new SourceString(SOURCE)
             assert rule.applyTo(sourceCode).empty
+        }
+    }
+
+    void testThatApplyToFilesMatchingValuesAreValidRegex() {
+        assertValidRegex(rule.applyToFilesMatching, 'applyToFilesMatching')
+        assertValidRegex(rule.doNotApplyToFilesMatching, 'doNotApplyToFilesMatching')
+    }
+
+    private void assertValidRegex(String regex, String name) {
+        if (regex) {
+            try {
+                Pattern.compile(regex)
+            }
+            catch(PatternSyntaxException e) {
+                fail("The $name value [$regex] is not a valid regular expression: $e")
+            }
         }
     }
 
