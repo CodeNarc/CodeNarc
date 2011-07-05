@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * The finalize() method should only be called by the JVM after the object has been garbage collected.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class ObjectFinalizeRule extends AbstractAstVisitorRule {
     String name = 'ObjectFinalize'
     int priority = 2

@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for AbstractClassWithoutAbstractMethodRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase {
 

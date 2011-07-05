@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * This rule detects JUnit calling assertEquals where the first or second parameter is null. These assertion should be made against the assertNull method instead.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UseAssertNullInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
     String name = 'UseAssertNullInsteadOfAssertEquals'
     int priority = 3

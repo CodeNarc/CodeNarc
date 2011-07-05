@@ -23,8 +23,7 @@ import org.apache.log4j.spi.LoggingEvent
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 
 @SuppressWarnings(['AbstractClassWithoutAbstractMethod', 'ConfusingMethodName'])
 abstract class AbstractTestCase extends GroovyTestCase {

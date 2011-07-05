@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ConsecutiveLiteralAppendsRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
 

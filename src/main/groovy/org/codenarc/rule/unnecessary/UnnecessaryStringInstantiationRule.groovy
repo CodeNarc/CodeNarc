@@ -25,8 +25,7 @@ import org.codenarc.rule.AbstractConstructorCallAstVisitor
  * In almost all cases, this is unnecessary - use a String literal instead.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryStringInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryStringInstantiation'
     int priority = 2

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for InterfaceNameRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class InterfaceNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

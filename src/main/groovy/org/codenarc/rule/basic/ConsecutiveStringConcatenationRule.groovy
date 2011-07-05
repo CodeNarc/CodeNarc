@@ -28,7 +28,6 @@ import org.codehaus.groovy.ast.ClassNode
  * Catches concatenation of two string literals on the same line. These can safely by joined. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ConsecutiveStringConcatenationRule extends AbstractAstVisitorRule {
     String name = 'ConsecutiveStringConcatenation'

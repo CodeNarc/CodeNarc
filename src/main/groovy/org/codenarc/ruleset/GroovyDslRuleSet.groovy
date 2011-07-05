@@ -26,8 +26,7 @@ import org.codehaus.groovy.control.MultipleCompilationErrorsException
  * Note that this class attempts to read the file and parse the Groovy from within the constructor.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GroovyDslRuleSet implements RuleSet {
     private static final LOG = Logger.getLogger(GroovyDslRuleSet)
     private ResourceFactory resourceFactory = new DefaultResourceFactory()

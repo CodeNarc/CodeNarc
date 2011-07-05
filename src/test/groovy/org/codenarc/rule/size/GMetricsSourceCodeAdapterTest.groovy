@@ -22,8 +22,7 @@ import org.codenarc.source.SourceString
  * Tests for GMetricsSourceCodeAdapter
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GMetricsSourceCodeAdapterTest extends AbstractTestCase {
     private static final SOURCE = 'abc\ndef'
 

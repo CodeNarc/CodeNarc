@@ -25,7 +25,6 @@ import org.codehaus.groovy.ast.*
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
 class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {

@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptyWhileStatementRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyWhileStatementRuleTest extends AbstractRuleTestCase {
 

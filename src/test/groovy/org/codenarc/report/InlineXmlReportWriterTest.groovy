@@ -30,7 +30,6 @@ import java.text.DateFormat
  *
  * @author Robin Bramley
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class InlineXmlReportWriterTest extends AbstractTestCase {
 

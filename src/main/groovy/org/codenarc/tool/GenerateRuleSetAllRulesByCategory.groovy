@@ -26,8 +26,7 @@ import org.apache.log4j.Logger
  * category.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GenerateRuleSetAllRulesByCategory {
 
     protected static final RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRulesByCategory.groovy.txt'

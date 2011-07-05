@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ConstantIfExpressionRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
 

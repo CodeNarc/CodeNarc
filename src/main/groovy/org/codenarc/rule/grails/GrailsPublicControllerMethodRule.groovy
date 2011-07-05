@@ -42,8 +42,7 @@ import java.lang.reflect.Modifier
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
     String name = 'GrailsPublicControllerMethod'
     int priority = 2

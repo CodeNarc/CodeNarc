@@ -23,8 +23,7 @@ import org.codenarc.rule.Rule
  *
  * @author Per Junel
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

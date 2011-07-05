@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.stmt.Statement
  * the last statement within a block.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 abstract class AbstractLastStatementInBlockAstVisitor extends AbstractAstVisitor {
     
     private lastStatements = [] as Set

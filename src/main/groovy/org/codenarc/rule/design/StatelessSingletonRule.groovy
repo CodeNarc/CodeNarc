@@ -24,8 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * There is no benefit in creating a stateless Singleton. Make a new instance with the new keyword instead.
  *
  * @author 'Victor Savkin'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class StatelessSingletonRule extends AbstractAstVisitorRule {
     String name = 'StatelessSingleton'
     int priority = 2

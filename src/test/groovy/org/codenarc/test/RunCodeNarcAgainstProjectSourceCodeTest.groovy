@@ -20,8 +20,7 @@ package org.codenarc.test
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
 
     private static final GROOVY_FILES = '**/*.groovy'

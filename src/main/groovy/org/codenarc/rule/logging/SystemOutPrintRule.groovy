@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * or <code>System.out.printf()</code>.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SystemOutPrintRule extends AbstractAstVisitorRule {
     String name = 'SystemOutPrint'
     int priority = 2

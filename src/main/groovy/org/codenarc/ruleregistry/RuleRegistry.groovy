@@ -19,8 +19,7 @@ package org.codenarc.ruleregistry
  * Represents a registry of rule classes, accessible by rule name
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 interface RuleRegistry {
 
     Class getRuleClass(String ruleName)

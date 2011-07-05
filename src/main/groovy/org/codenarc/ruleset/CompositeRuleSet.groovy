@@ -21,8 +21,7 @@ import org.codenarc.rule.Rule
  * A <code>RuleSet</code> implementation that aggregates a set of RuleSets and Rules.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CompositeRuleSet implements RuleSet {
     private rules = []
 

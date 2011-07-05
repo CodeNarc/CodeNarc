@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for DoubleNegativeRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class DoubleNegativeRuleTest extends AbstractRuleTestCase {
 

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryFailRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

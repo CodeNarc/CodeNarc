@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for SourceString
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SourceStringTest extends AbstractTestCase {
 
     private static final SOURCE = '''class SampleFile {

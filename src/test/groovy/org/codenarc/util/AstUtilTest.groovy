@@ -34,8 +34,7 @@ import org.codehaus.groovy.ast.expr.DeclarationExpression
  * Tests for AstUtil
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class AstUtilTest extends AbstractTestCase {
     static final SOURCE = '''
         class MyClass {

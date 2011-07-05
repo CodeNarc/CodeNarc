@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryNullCheckBeforeInstanceOfRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

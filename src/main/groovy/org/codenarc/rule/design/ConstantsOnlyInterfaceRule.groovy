@@ -23,7 +23,6 @@ import org.codehaus.groovy.ast.ClassNode
  * An interface should be used only to model a behaviour of a class: using an interface as a container of constants is a poor usage pattern.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class ConstantsOnlyInterfaceRule extends AbstractAstVisitorRule {
     String name = 'ConstantsOnlyInterface'

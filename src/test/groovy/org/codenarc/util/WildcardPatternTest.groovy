@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for WildcardPattern
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class WildcardPatternTest extends AbstractTestCase {
 
     void testMatches_DefaultMatches_True() {

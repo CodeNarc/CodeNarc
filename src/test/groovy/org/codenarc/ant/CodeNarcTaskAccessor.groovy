@@ -21,7 +21,6 @@ import org.apache.tools.ant.types.FileSet
  * Test-only class for accessing protected members of CodeNarcTask from test classes in other packages
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcTaskAccessor {
     private CodeNarcTask codeNarcTask

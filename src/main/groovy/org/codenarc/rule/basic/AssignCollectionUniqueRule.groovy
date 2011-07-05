@@ -29,7 +29,6 @@ import org.codenarc.util.AstUtil
  * @author Nick Larson
  * @author Juan Vazquez
  * @author Jon DeJong
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class AssignCollectionUniqueRule extends AbstractAstVisitorRule {
     String name = 'AssignCollectionUnique'

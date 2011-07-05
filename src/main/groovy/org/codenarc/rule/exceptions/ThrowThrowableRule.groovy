@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for throwing an instance of java.lang.Throwable
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ThrowThrowableRule extends AbstractAstVisitorRule {
     String name = 'ThrowThrowable'
     int priority = 2

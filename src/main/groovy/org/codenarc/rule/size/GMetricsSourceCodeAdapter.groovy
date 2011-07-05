@@ -22,8 +22,7 @@ import org.codehaus.groovy.ast.ModuleNode
  * Adapter that adapts from a GMetrics SourceCode object to a CodeNarc SourceCode object.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GMetricsSourceCodeAdapter implements SourceCode {
 
     private codeNarcSourceCode

@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty for statements
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyForStatementRule extends AbstractAstVisitorRule {
     String name = 'EmptyForStatement'

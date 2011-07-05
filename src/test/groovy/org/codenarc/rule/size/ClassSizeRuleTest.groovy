@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ClassSizeRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ClassSizeRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

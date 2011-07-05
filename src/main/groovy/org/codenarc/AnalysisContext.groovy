@@ -21,7 +21,6 @@ import org.codenarc.ruleset.RuleSet
  * Holds information related to the configuration and context for the source code analysis.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class AnalysisContext {
 

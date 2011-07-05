@@ -19,7 +19,6 @@ package org.codenarc.results
  * Represents the results of applying a set of rules against a single sourcefile
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class FileResults implements Results {
 

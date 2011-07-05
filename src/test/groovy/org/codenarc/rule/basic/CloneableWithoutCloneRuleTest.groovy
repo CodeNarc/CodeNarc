@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for CloneableWithoutCloneRule
  * 
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
 

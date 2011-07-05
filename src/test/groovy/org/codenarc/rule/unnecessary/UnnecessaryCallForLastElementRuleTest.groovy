@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryCallForLastElementRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

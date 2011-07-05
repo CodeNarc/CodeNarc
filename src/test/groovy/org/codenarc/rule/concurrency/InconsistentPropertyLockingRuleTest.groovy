@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for InconsistentPropertyLockingRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase {
 

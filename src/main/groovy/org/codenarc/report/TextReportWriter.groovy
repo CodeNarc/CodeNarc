@@ -24,7 +24,6 @@ import org.codenarc.rule.Violation
  * ReportWriter that generates an simple ASCII text report.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class TextReportWriter extends AbstractReportWriter {
 

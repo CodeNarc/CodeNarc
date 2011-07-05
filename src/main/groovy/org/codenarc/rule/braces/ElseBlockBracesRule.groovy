@@ -29,7 +29,6 @@ import org.codenarc.util.AstUtil
  * require braces is that situation as well. 
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ElseBlockBracesRule extends AbstractAstVisitorRule {
     String name = 'ElseBlockBraces'

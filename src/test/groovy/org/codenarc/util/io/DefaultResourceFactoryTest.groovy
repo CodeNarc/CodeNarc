@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for DefaultResourceFactory
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class DefaultResourceFactoryTest extends AbstractTestCase {
 
     private static final PATH = 'src/test/resources/resource/SampleResource.txt'

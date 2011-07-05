@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitFailWithoutMessageRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

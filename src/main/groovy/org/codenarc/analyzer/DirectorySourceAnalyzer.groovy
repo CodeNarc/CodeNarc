@@ -28,7 +28,6 @@ import org.codenarc.source.SourceCodeCriteria
  * @deprecated This is an internal class that will be removed in the future
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class DirectorySourceAnalyzer implements SourceAnalyzer {
     static final SEP = '/'

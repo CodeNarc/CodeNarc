@@ -25,7 +25,6 @@ import org.codenarc.util.AstUtil
  * If this code is intending to check for oddness, consider using x & 1 == 1, or x % 2 != 0.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class BrokenOddnessCheckRule extends AbstractAstVisitorRule {
     String name = 'BrokenOddnessCheck'

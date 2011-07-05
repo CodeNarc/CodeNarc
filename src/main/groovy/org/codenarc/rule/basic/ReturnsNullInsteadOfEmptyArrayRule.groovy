@@ -29,7 +29,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * array. Instead of null, return a zero length array. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ReturnsNullInsteadOfEmptyArrayRule extends AbstractAstVisitorRule {
     String name = 'ReturnsNullInsteadOfEmptyArray'

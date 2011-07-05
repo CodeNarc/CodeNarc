@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty synchronized statement
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptySynchronizedStatementRule extends AbstractAstVisitorRule {
     String name = 'EmptySynchronizedStatement'

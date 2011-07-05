@@ -21,8 +21,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * It is unnecessary to instantiate BigDecimal objects. Instead just use the decimal literal or the 'G' identifier to force the type, such as 123.45 or 123.45G.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryBigDecimalInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryBigDecimalInstantiation'
     int priority = 2

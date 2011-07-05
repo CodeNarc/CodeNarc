@@ -19,7 +19,6 @@ package org.codenarc.rule
  * Represents a single instance of a rule violation
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class Violation {
     Rule rule

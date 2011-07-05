@@ -28,8 +28,7 @@ import org.codenarc.util.AstUtil
  * In a unit test, catching an exception and immedietly calling Assert.fail() is pointless and hides the stack trace. It is better to rethrow the exception or not catch the exception at all.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryFailRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryFail'
     int priority = 2

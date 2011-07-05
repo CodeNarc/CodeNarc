@@ -22,7 +22,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Rule that checks for throwing an exception from within a finally block
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ThrowExceptionFromFinallyBlockRule extends AbstractAstVisitorRule {
     String name = 'ThrowExceptionFromFinallyBlock'

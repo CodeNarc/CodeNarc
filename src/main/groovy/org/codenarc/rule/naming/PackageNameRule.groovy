@@ -32,8 +32,7 @@ import org.codenarc.rule.Violation
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class PackageNameRule extends AbstractAstVisitorRule {
     String name = 'PackageName'
     int priority = 2

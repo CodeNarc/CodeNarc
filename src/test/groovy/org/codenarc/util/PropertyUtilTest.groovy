@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for PropertyUtil
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PropertyUtilTest extends AbstractTestCase {
 
     def object

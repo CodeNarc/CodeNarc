@@ -26,8 +26,7 @@ import org.codenarc.source.SourceCode
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class DuplicateImportRule extends AbstractImportRule {
     String name = 'DuplicateImport'
     int priority = 3

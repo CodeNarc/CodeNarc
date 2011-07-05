@@ -25,8 +25,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Rule that checks that serialVersionUID field is static final and type long, and is not a property.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class SerialVersionUIDRule extends AbstractAstVisitorRule {
     String name = 'SerialVersionUID'
     int priority = 2

@@ -26,7 +26,6 @@ import org.codenarc.util.AstUtil
  * to use; replace it with System.properties['prop̈́'].
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class BooleanGetBooleanRule extends AbstractAstVisitorRule {
     String name = 'BooleanGetBoolean'

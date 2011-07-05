@@ -19,8 +19,7 @@ package org.codenarc.rule.grails
  * Utility methods and constants for Grails rule classes. This class is not intended for general use.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GrailsUtil {
     protected static final SERVICE_FILES = /.*grails-app\/services\/.*/
     protected static final DOMAIN_FILES = /.*grails-app\/domain\/.*/

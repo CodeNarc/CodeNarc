@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UseAssertNullInsteadOfAssertEqualsRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

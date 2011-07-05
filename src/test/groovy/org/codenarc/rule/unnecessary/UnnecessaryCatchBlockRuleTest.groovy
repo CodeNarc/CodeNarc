@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryCatchBlockRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

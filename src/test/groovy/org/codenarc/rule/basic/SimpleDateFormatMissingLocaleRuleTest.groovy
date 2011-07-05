@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for SimpleDateFormatMissingLocaleRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
 

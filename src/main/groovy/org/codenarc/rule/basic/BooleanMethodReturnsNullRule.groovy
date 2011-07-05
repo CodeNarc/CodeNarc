@@ -29,7 +29,6 @@ import org.codehaus.groovy.ast.expr.*
  * result in a NullPointerException.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class BooleanMethodReturnsNullRule extends AbstractAstVisitorRule {
     String name = 'BooleanMethodReturnsNull'

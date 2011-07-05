@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitCallToPowerMethodRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitCallToPowerMethodRuleTest extends AbstractRuleTestCase {
 

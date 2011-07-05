@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for FieldNameRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class FieldNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -24,8 +24,7 @@ import org.codenarc.rule.unused.UnusedPrivateFieldRule
  * Tests for PropertiesFileRuleRegistry
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PropertiesFileRuleRegistryTest extends AbstractTestCase {
 
     private registry = new PropertiesFileRuleRegistry()

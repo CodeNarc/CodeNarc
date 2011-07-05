@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitCallToDivMethodRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitCallToDivMethodRuleTest extends AbstractRuleTestCase {
 

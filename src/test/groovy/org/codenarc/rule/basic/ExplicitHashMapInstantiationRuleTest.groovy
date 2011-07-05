@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitCreationOfHashMapRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitHashMapInstantiationRuleTest extends AbstractRuleTestCase {
 

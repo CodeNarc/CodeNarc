@@ -25,7 +25,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class EqualsAndHashCodeRule extends AbstractAstVisitorRule {
     String name = 'EqualsAndHashCode'

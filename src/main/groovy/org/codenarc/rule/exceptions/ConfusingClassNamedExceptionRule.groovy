@@ -24,8 +24,7 @@ import org.codenarc.util.AstUtil
  * This rule traps classes named exception that do not inherit from exception.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class ConfusingClassNamedExceptionRule extends AbstractAstVisitorRule {
     String name = 'ConfusingClassNamedException'
     int priority = 2

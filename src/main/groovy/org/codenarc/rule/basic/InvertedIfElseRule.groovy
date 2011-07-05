@@ -28,7 +28,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * "if (x) true else false".
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class InvertedIfElseRule extends AbstractAstVisitorRule {
     String name = 'InvertedIfElse'

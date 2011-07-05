@@ -32,7 +32,6 @@ import org.codenarc.util.AstUtil
  * the common case go first?".
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ConfusingTernaryRule extends AbstractAstVisitorRule {
     String name = 'ConfusingTernary'

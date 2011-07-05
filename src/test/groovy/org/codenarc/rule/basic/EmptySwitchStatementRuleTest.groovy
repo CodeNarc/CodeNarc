@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptySwitchStatementRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptySwitchStatementRuleTest extends AbstractRuleTestCase {
 

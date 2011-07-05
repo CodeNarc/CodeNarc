@@ -31,8 +31,7 @@ import org.codenarc.util.AstUtil
  * and the exception stack trace. If you call error(Object) then the stacktrace may not be logged.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class LoggingSwallowsStacktraceRule extends AbstractAstVisitorRule {
     String name = 'LoggingSwallowsStacktrace'
     int priority = 2

@@ -28,7 +28,6 @@ import org.codenarc.source.SourceString
  * Tests for FilesystemSourceAnalyzer.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     private static final BASE_DIR = 'src/test/resources/sourcewithdirs'

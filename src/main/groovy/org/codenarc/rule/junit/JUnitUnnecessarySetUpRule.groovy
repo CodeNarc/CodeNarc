@@ -29,8 +29,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitUnnecessarySetUpRule extends AbstractAstVisitorRule {
     String name = 'JUnitUnnecessarySetUp'
     int priority = 3

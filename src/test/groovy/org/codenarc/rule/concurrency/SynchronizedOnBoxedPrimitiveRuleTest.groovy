@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for SynchronizedOnBoxedPrimitiveRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
 

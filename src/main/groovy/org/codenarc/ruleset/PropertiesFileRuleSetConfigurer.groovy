@@ -36,8 +36,7 @@ import org.codenarc.util.io.DefaultResourceFactory
  * names not within the specified RuleSet are ignored.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PropertiesFileRuleSetConfigurer {
 
     private static final LOG = Logger.getLogger(PropertiesFileRuleSetConfigurer)

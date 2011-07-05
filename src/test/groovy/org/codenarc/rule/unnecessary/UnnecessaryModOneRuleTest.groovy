@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryModOneRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryModOneRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

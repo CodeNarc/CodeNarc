@@ -22,7 +22,6 @@ import org.codenarc.source.SourceCode
  * Tests for the AbstractRule class
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class AbstractRuleTest extends AbstractRuleTestCase {
 

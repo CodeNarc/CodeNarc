@@ -22,7 +22,6 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator. A groovier way to express this: a.getAt(b) is this: a[b]
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitCallToGetAtMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToGetAtMethod'

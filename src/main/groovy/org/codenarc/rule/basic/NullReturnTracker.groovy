@@ -26,7 +26,6 @@ import org.codenarc.rule.AbstractAstVisitor
  * Helper AST visitor that adds rule violation if a return statement is encountered that returns a null constant. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class NullReturnTracker extends AbstractAstVisitor {
 

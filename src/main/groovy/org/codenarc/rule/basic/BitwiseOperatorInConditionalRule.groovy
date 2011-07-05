@@ -29,7 +29,6 @@ import org.codenarc.util.AstUtil
  * Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practive to extract a temp variable.
  *
  * @author Jeff Beck
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class BitwiseOperatorInConditionalRule extends AbstractAstVisitorRule {
     String name = 'BitwiseOperatorInConditional'

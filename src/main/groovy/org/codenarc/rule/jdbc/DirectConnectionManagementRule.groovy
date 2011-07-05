@@ -27,8 +27,7 @@ import org.codenarc.util.AstUtil
  * error prone, which is part of the reason it is forbidden under the J2EE standard.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class DirectConnectionManagementRule extends AbstractAstVisitorRule {
     String name = 'DirectConnectionManagement'
     int priority = 2

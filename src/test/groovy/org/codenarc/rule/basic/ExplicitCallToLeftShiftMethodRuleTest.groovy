@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitCallToLeftShiftMethodRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitCallToLeftShiftMethodRuleTest extends AbstractRuleTestCase {
 

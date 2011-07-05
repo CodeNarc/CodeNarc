@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for GenerateCodeNarcRulesProperties
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GenerateCodeNarcRulesPropertiesTest extends AbstractTestCase {
 
     void testMain_GeneratesPropertiesFile() {

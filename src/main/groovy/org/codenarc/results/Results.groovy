@@ -19,7 +19,6 @@ package org.codenarc.results
  * Represents the results of applying rules to one or more source files/directories
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 interface Results {
 

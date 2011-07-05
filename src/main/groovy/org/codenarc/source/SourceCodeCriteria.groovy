@@ -24,8 +24,7 @@ import org.codenarc.util.WildcardPattern
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SourceCodeCriteria {
 
     /**

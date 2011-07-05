@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for GenerateRuleSetAllRulesByCategory
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GenerateRuleSetAllRulesByCategoryTest extends AbstractTestCase {
 
     void testMain_GeneratesSampleRuleSetFile() {

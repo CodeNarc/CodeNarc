@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitUnnecessarySetUp
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitUnnecessarySetUpRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

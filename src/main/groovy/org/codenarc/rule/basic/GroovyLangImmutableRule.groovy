@@ -26,7 +26,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Immutable in groovy.lang.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class GroovyLangImmutableRule extends AbstractAstVisitorRule {
     String name = 'GroovyLangImmutable'

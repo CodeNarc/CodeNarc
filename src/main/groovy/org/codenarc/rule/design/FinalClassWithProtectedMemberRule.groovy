@@ -27,7 +27,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * the member should be private or protected.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class FinalClassWithProtectedMemberRule extends AbstractAstVisitorRule {
     String name = 'FinalClassWithProtectedMember'

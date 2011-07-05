@@ -26,8 +26,7 @@ import org.codenarc.ruleregistry.RuleRegistry
  * Tests for RuleSetBuilder
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RuleSetBuilderTest extends AbstractTestCase {
 
     private static final RULESET_XML_FILE1 = 'rulesets/RuleSet1.xml'

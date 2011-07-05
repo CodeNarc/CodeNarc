@@ -24,7 +24,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * This rule catches calling the method removeAll with yourself as a parameter.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class RemoveAllOnSelfRule extends AbstractAstVisitorRule {
     String name = 'RemoveAllOnSelf'

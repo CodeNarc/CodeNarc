@@ -39,8 +39,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
  * @deprecated This rule is deprecated and disabled (enabled=false) by default
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GrailsSessionReferenceRule extends AbstractAstVisitorRule {
     String name = 'GrailsSessionReference'
     int priority = 2

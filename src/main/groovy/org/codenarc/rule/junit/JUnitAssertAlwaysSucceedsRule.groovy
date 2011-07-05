@@ -31,8 +31,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitAssertAlwaysSucceedsRule extends AbstractAstVisitorRule {
     String name = 'JUnitAssertAlwaysSucceeds'
     int priority = 2

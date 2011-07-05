@@ -24,7 +24,6 @@ import org.codenarc.ruleset.RuleSets
  * Run the CodeNarc Ant Task against a portion of the CodeNarc source using all predefined RuleSets.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
 

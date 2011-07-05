@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for throwing an instance of java.lang.RuntimeException
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ThrowRuntimeExceptionRule extends AbstractAstVisitorRule {
     String name = 'ThrowRuntimeException'
     int priority = 2

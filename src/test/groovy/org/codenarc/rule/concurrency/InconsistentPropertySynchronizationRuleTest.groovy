@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for InconsistentPropertySynchronizationRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
 

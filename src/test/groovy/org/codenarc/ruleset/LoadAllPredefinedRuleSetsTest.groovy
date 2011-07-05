@@ -23,8 +23,7 @@ import org.codenarc.test.AbstractTestCase
  * Load all predefined RuleSet files using XmlFileRuleSet
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
 
     private static final BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'

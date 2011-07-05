@@ -35,8 +35,7 @@ import org.codenarc.util.ImportUtil
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryGroovyImportRule extends AbstractRule {
     String name = 'UnnecessaryGroovyImport'
     int priority = 3

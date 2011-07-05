@@ -31,7 +31,6 @@ import java.text.DateFormat
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class XmlReportWriterTest extends AbstractTestCase {
 

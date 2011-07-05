@@ -34,8 +34,7 @@ import org.codehaus.groovy.ast.ASTNode
  * applyToClassNames property. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitTestMethodWithoutAssertRule extends AbstractAstVisitorRule {
 
     String name = 'JUnitTestMethodWithoutAssert'

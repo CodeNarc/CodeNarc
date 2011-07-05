@@ -25,7 +25,6 @@ import org.codenarc.report.XmlReportWriter
  * Tests for CodeNarc command-line runner
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcTest extends AbstractTestCase {
     static final BASE_DIR = 'src/test/resources'

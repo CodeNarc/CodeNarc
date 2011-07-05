@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for InvertedIfElseRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class InvertedIfElseRuleTest extends AbstractRuleTestCase {
 

@@ -23,7 +23,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Rule that checks for empty switch statements
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptySwitchStatementRule extends AbstractAstVisitorRule {
     String name = 'EmptySwitchStatement'

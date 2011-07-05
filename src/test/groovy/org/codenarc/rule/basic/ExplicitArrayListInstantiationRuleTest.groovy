@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitArrayListInstantiationRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
 

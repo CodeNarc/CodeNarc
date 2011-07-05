@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for BrokenOddnessCheckRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class BrokenOddnessCheckRuleTest extends AbstractRuleTestCase {
 

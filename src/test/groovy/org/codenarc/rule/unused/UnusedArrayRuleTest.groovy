@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnusedArrayRule
  *
  * @author Your Name Here
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedArrayRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

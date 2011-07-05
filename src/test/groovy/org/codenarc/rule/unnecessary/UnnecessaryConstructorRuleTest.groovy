@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryConstructorRule
  *
  * @author 'Tomasz Bujok'
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

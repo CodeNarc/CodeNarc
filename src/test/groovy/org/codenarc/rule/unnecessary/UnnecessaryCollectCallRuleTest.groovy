@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryCollectCallRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for AddEmptyStringRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class AddEmptyStringRuleTest extends AbstractRuleTestCase {
 

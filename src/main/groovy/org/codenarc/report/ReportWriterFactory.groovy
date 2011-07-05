@@ -23,7 +23,6 @@ package org.codenarc.report
  * the classpath) that implements the <code>org.codenarc.report.ReportWriter</code> interface.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ReportWriterFactory {
 

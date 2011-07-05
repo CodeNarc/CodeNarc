@@ -21,8 +21,7 @@ import org.codehaus.groovy.ast.ModuleNode
  * Represents a unit of source code to be analyzed
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 interface SourceCode {
 
     /**

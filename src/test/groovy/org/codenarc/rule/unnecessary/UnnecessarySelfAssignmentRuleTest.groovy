@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessarySelfAssignmentRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

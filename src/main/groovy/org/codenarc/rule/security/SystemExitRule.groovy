@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug code or code imported from a non-J2EE application.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class SystemExitRule extends AbstractAstVisitorRule {
     String name = 'SystemExit'
     int priority = 2

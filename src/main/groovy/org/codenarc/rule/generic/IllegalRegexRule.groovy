@@ -28,8 +28,7 @@ import org.codenarc.rule.Violation
  * with a unique rule name, regex, violationMessage and (optionally) customized priority.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class IllegalRegexRule extends AbstractRule {
     String name = 'IllegalRegex'
     int priority = 3

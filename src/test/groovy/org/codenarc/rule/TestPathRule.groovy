@@ -22,7 +22,6 @@ import org.codenarc.source.SourceCode
  * equal to the source file path. Set <code>numberOfViolations</code> to generate more than one violation.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class TestPathRule extends AbstractRule {
     String name = 'TestPath'

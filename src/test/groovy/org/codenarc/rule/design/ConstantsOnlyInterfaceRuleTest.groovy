@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ConstantsOnlyInterfaceRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
 

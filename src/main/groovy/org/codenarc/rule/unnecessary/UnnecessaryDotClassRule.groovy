@@ -24,8 +24,7 @@ import org.codenarc.util.AstUtil
  * To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
  *
  * @author 'Dean Del Ponte'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class UnnecessaryDotClassRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDotClass'
     int priority = 2

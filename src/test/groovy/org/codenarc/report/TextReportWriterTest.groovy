@@ -28,7 +28,6 @@ import org.codenarc.AnalysisContext
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class TextReportWriterTest extends AbstractTestCase {
 

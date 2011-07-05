@@ -26,8 +26,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Per Junel
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UseAssertEqualsInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
     String name = 'UseAssertEqualsInsteadOfAssertTrue'
     int priority = 3

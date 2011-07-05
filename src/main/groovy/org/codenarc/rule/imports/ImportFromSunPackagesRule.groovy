@@ -23,8 +23,7 @@ import org.codenarc.source.SourceCode
  * Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class ImportFromSunPackagesRule extends AbstractAstVisitorRule {
     String name = 'ImportFromSunPackages'
     int priority = 2

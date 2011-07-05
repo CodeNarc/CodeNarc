@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for CatchIndexOutOfBoundsExceptionRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchIndexOutOfBoundsExceptionRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for catching a Error
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchErrorRule extends AbstractAstVisitorRule {
     String name = 'CatchError'
     int priority = 2

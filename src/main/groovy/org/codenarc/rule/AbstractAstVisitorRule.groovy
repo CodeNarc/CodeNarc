@@ -26,7 +26,6 @@ import org.codenarc.util.WildcardPattern
  * to applied to the specified source code.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 abstract class AbstractAstVisitorRule extends AbstractRule {
 

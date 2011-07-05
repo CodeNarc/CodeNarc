@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for SynchronizedOnGetClassRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
 

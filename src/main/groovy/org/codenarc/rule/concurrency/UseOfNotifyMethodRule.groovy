@@ -26,7 +26,6 @@ import org.codenarc.util.AstUtil
  * that the caller just satisfied.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class UseOfNotifyMethodRule extends AbstractAstVisitorRule {
     String name = 'UseOfNotifyMethod'

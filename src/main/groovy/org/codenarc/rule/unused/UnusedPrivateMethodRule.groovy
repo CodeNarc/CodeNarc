@@ -38,8 +38,7 @@ import java.lang.reflect.Modifier
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateMethod'
     int priority = 2

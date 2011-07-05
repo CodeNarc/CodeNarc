@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for CatchThrowableRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchThrowableRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

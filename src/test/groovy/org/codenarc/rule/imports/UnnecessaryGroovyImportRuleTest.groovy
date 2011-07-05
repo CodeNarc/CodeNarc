@@ -22,8 +22,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * Tests for UnnecessaryGroovyImportRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ParameterNameRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ParameterNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

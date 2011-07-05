@@ -21,7 +21,6 @@ package org.codenarc.ant
  * @see CodeNarcTask
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class Report {
     String type

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitTestMethodWithoutAssertRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

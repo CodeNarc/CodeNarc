@@ -27,8 +27,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class BracesForClassRule extends AbstractRule {
     String name = 'BracesForClass'
     int priority = 2

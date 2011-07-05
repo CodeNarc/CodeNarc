@@ -25,8 +25,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  *
  * @author Tomasz Bujok
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class MethodCountRule extends AbstractAstVisitorRule {
     String name = 'MethodCount'
     int priority = 2

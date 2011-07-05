@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * or <code>System.err.printf()</code>.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SystemErrPrintRule extends AbstractAstVisitorRule {
     String name = 'SystemErrPrint'
     int priority = 2

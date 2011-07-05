@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitGarbageCollectionRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
 

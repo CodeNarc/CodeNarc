@@ -19,8 +19,7 @@ package org.codenarc.test
  * Tests that the "site" documentation is up to date.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class SiteDocumentationTest extends GroovyTestCase {
 
     void testDocumentation() {

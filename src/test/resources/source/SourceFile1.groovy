@@ -19,8 +19,7 @@ package source
  * Source file for testing
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SourceFile1 {
 
 }

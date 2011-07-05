@@ -30,8 +30,7 @@ import org.codenarc.util.AstUtil
  * For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.
  *
  * @author 'René Scheibe'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class UnnecessaryDefInVariableDeclarationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDefInVariableDeclaration'
     int priority = 3

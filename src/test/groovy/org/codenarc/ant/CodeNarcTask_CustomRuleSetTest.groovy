@@ -23,7 +23,6 @@ import org.codenarc.test.AbstractTestCase
  * Run the CodeNarc Ant Task against a portion of the CodeNarc source using a custom, predefined RuleSet.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcTask_CustomRuleSetTest extends AbstractTestCase {
 

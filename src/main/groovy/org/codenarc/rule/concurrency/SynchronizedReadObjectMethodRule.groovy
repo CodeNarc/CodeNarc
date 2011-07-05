@@ -33,7 +33,6 @@ import org.codenarc.util.AstUtil
  * very dubious coding style.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SynchronizedReadObjectMethodRule extends AbstractAstVisitorRule {
     String name = 'SynchronizedReadObjectMethod'

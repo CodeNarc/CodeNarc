@@ -19,7 +19,6 @@ package org.codenarc.results
  * Represents the results for a directory
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class DirectoryResults implements Results {
     private String path

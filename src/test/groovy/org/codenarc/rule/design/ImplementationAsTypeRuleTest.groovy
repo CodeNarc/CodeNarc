@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ImplementationAsTypeRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     private static final BAD_TYPES = [
         'java.util.ArrayList',

@@ -23,8 +23,7 @@ import org.codenarc.ruleset.XmlFileRuleSet
  * Contains static utility methods related to the Generate* tools.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GenerateUtil {
 
     static List buildSortedListOfAllRules() {

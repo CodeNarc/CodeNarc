@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ConfusingTernaryRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ConfusingTernaryRuleTest extends AbstractRuleTestCase {
 

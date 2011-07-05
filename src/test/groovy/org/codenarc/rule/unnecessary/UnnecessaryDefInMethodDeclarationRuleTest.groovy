@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryDefInMethodDeclarationRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

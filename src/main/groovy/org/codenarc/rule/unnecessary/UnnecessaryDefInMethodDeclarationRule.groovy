@@ -25,8 +25,7 @@ import org.codenarc.util.AstUtil
  * For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryDefInMethodDeclarationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDefInMethodDeclaration'
     int priority = 3

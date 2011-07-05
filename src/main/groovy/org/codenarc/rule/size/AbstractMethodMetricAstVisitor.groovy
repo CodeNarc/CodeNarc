@@ -35,8 +35,7 @@ import org.codenarc.util.WildcardPattern
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 @SuppressWarnings('DuplicateLiteral')
 abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 

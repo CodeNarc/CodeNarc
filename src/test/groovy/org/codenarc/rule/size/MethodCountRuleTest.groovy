@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for MethodCountRule
  *
  * @author 'Tomasz Bujok'
- * @version $Revision$ - $Date$
- */
+  */
 class MethodCountRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

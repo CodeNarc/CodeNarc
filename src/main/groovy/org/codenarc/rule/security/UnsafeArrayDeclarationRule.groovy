@@ -25,8 +25,7 @@ import org.codenarc.util.AstUtil
  * Triggers a violation when an array is declared public, final, and static. Secure coding principles state that, in most cases, an array declared public, final and static is a bug because arrays are mutable objects.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class UnsafeArrayDeclarationRule extends AbstractAstVisitorRule {
     String name = 'UnsafeArrayDeclaration'
     int priority = 2

@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for throwing an instance of java.lang.Error
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ThrowErrorRule extends AbstractAstVisitorRule {
     String name = 'ThrowError'
     int priority = 2

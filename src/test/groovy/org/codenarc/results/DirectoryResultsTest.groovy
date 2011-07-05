@@ -23,7 +23,6 @@ import org.codenarc.test.AbstractTestCase
  * Tests for DirectoryResults 
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class DirectoryResultsTest extends AbstractTestCase {
 

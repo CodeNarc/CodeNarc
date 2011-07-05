@@ -57,8 +57,7 @@ import java.lang.reflect.Modifier
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class FieldNameRule extends AbstractAstVisitorRule {
     String name = 'FieldName'
     int priority = 2

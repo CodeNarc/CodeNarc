@@ -29,8 +29,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitTearDownCallsSuperRule extends AbstractAstVisitorRule {
     String name = 'JUnitTearDownCallsSuper'
     int priority = 2

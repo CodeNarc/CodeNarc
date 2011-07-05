@@ -27,7 +27,6 @@ import org.codenarc.util.AstUtil
  * Ignores For-Each Loops (for (Plan p : plans) { .. }) and Groovy For Loops (for (p in plans) { .. }).
  *
  * @author Victor Savkin
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class ForLoopShouldBeWhileLoopRule extends AbstractAstVisitorRule {
     String name = 'ForLoopShouldBeWhileLoop'

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for InstantiationToGetClassRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

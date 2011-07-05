@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for VolatileArrayFieldRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
 

@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty try blocks
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyTryBlockRule extends AbstractAstVisitorRule {
     String name = 'EmptyTryBlock'

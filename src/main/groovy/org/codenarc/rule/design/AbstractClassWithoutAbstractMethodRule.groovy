@@ -26,7 +26,6 @@ import java.lang.reflect.Modifier
  * base class only (not to be instantiated direcly) a protected constructor can be provided prevent direct instantiation.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class AbstractClassWithoutAbstractMethodRule extends AbstractAstVisitorRule {
     String name = 'AbstractClassWithoutAbstractMethod'

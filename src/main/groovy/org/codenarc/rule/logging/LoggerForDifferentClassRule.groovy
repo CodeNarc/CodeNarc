@@ -39,8 +39,7 @@ import org.codehaus.groovy.ast.expr.Expression
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class LoggerForDifferentClassRule extends AbstractAstVisitorRule {
     String name = 'LoggerForDifferentClass'
     int priority = 2

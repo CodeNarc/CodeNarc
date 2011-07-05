@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for catching a IndexOutOfBoundsException
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchIndexOutOfBoundsExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchIndexOutOfBoundsException'
     int priority = 2

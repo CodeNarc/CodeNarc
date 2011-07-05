@@ -25,8 +25,7 @@ import org.codenarc.util.AstUtil
  * This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that (!variable instanceof String) will never be true because the result of a not expression is always a boolean. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class UnnecessaryInstanceOfCheckRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryInstanceOfCheck'
     int priority = 2

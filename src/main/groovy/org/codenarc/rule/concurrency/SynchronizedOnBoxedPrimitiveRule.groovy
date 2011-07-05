@@ -28,7 +28,6 @@ import org.codenarc.util.AstUtil
  * possible deadlock
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class SynchronizedOnBoxedPrimitiveRule extends AbstractAstVisitorRule {
     String name = 'SynchronizedOnBoxedPrimitive'

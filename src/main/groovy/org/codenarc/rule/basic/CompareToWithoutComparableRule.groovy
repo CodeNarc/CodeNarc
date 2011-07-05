@@ -26,7 +26,6 @@ import org.codenarc.util.AstUtil
  * Groovy 1.8 but present in previous versions.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class CompareToWithoutComparableRule extends AbstractAstVisitorRule {
     String name = 'CompareToWithoutComparable'

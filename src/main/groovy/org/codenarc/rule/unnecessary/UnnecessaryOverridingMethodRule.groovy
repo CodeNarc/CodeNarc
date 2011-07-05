@@ -28,8 +28,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Sven Lange
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryOverridingMethodRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryOverridingMethod'
     int priority = 3

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for CatchErrorRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchErrorRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

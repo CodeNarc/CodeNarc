@@ -21,7 +21,6 @@ import org.codenarc.test.AbstractTestCase
  * Tests for ReportWriterFactory
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ReportWriterFactoryTest extends AbstractTestCase {
 

@@ -31,8 +31,7 @@ import org.codenarc.rule.Rule
  *
  * @author Hamlet D'Arcy
  * @author Hubert 'Mr. Haki' Klein Ikkink
- * @version $Revision$ - $Date$
- */
+  */
 class ConfusingMethodNameRule extends AbstractAstVisitorRule {
     String name = 'ConfusingMethodName'
     int priority = 2

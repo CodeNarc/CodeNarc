@@ -26,7 +26,6 @@ import java.lang.reflect.Modifier
  * Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class StaticConnectionRule extends AbstractAstVisitorRule {
     String name = 'StaticConnection'

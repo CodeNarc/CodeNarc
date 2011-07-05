@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptyElseBlockRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyElseBlockRuleTest extends AbstractRuleTestCase {
 

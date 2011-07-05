@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryBooleanInstantiationRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryBooleanInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

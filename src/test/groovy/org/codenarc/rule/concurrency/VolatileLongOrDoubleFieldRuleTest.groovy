@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Unit test for VolatileLongOrDoubleFieldRule.
  * 
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {

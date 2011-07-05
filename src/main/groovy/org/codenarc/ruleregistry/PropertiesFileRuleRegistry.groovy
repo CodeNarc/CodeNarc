@@ -24,8 +24,7 @@ import org.codenarc.util.io.ClassPathResource
  * @see org.codenarc.tool.GenerateCodeNarcRulesProperties
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PropertiesFileRuleRegistry implements RuleRegistry {
 
     private static final LOG = Logger.getLogger(PropertiesFileRuleRegistry)

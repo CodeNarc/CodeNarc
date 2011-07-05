@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for UrlResource
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UrlResourceTest extends AbstractTestCase {
 
     private static final TEXT_FILE = 'src/test/resources/resource/SampleResource.txt'

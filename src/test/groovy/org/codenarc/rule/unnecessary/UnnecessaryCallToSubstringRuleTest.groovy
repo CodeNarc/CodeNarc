@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryCallToSubstringRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCallToSubstringRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

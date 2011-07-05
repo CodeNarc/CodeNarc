@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty finally blocks
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyFinallyBlockRule extends AbstractAstVisitorRule {
     String name = 'EmptyFinallyBlock'

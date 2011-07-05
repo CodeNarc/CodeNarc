@@ -27,8 +27,7 @@ import org.codenarc.rule.Rule
  * Tests for XmlReaderRuleSet
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class XmlReaderRuleSetTest extends AbstractTestCase {
     static final NAMESPACE = '''
         xmlns="http://codenarc.org/ruleset/1.0"

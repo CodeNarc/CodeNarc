@@ -44,8 +44,7 @@ import org.gmetrics.metric.cyclomatic.CyclomaticComplexityMetric
  * @see <a href="http://gmetrics.sourceforge.net/gmetrics-CyclomaticComplexityMetric.html">GMetrics Cyclomatic Complexity metric</a>.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CyclomaticComplexityRule extends AbstractAstVisitorRule {
     String name = 'CyclomaticComplexity'
     int priority = 2

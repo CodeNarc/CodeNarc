@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ClassNameRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ClassNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

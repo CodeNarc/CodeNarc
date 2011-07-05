@@ -21,8 +21,7 @@ import org.codenarc.rule.Rule
  * A <code>RuleSet</code> implementation that returns a static List of Rules passed into its constructor.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ListRuleSet implements RuleSet {
 
     private rules

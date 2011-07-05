@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ForLoopShouldBeWhileLoopRule
  *
  * @author 'Victor Savkin'
- * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
  */
 class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
 

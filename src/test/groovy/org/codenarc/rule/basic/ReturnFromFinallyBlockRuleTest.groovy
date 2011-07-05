@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ReturnFromFinallyBlockRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ReturnFromFinallyBlockRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {

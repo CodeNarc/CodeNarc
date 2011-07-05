@@ -22,8 +22,7 @@ import org.apache.log4j.Logger
  * Tests for GroovyDslRuleSet
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GroovyDslRuleSetTest extends AbstractTestCase {
 
     static final LOG = Logger.getLogger(GroovyDslRuleSetTest)

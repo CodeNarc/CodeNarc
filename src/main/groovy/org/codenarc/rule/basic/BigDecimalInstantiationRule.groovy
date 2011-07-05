@@ -25,7 +25,6 @@ import org.codenarc.rule.AbstractConstructorCallAstVisitor
  * The String literal should be used instead.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class BigDecimalInstantiationRule extends AbstractAstVisitorRule {
     String name = 'BigDecimalInstantiation'

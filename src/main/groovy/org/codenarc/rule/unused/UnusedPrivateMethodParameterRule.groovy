@@ -28,8 +28,7 @@ import org.codenarc.source.SourceCode
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedPrivateMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateMethodParameter'
     int priority = 2

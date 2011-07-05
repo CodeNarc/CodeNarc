@@ -27,8 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  *
  * @author Hamlet D'Arcy
  * @author René Scheibe
- * @version $Revision$ - $Date$
- */
+  */
 class LoggerWithWrongModifiersRule extends AbstractAstVisitorRule {
 
     String name = 'LoggerWithWrongModifiers'

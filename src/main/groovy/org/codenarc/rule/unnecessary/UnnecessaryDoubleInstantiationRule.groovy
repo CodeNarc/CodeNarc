@@ -21,8 +21,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * It is unnecessary to instantiate Double objects. Instead just use the double literal or the 'D' identifier to force the type, such as 123.45d or 0.42d.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryDoubleInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDoubleInstantiation'
     int priority = 2

@@ -20,8 +20,7 @@ package org.codenarc.source
  * Note that the path is normalized: file separator chars are normalized to standard '/'.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SourceString extends AbstractSourceCode {
 
     String path

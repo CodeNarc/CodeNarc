@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * The class has an empty instance initializer. It can safely by removed. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class EmptyInstanceInitializerRule extends AbstractAstVisitorRule {
     String name = 'EmptyInstanceInitializer'

@@ -43,8 +43,7 @@ import java.lang.reflect.Modifier
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
     String name = 'JUnitPublicNonTestMethod'
     int priority = 2

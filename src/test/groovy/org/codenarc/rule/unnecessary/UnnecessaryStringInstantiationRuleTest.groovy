@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryStringInstantiationRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

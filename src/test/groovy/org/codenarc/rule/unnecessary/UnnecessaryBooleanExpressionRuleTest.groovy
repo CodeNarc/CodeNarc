@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryBooleanExpressionRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

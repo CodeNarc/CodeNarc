@@ -23,8 +23,7 @@ import org.codenarc.source.SourceCode
  *
  * @author Erik Pragt
  * @author Marcin Erdmann
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class MisorderedStaticImportsRule extends AbstractImportRule {
     String name = 'MisorderedStaticImports'
     int priority = 3

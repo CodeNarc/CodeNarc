@@ -27,7 +27,6 @@ import org.codenarc.test.AbstractTestCase
  * Tests for DirectorySourceAnalyzer.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class DirectorySourceAnalyzerTest extends AbstractTestCase {
     static final BASE_DIR = '/usr'

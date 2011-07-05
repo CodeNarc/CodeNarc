@@ -27,7 +27,6 @@ import org.codenarc.util.WildcardPattern
  * SourceAnalyzer implementation that recursively processes files from the file system.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class FilesystemSourceAnalyzer implements SourceAnalyzer {
     static final SEP = '/'

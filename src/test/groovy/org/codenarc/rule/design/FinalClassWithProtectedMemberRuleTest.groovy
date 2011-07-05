@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for FinalClassWithProtectedMemberRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
 

@@ -57,8 +57,7 @@ import org.codehaus.groovy.ast.stmt.ExpressionStatement
  *      </code>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryIfStatementRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryIfStatement'
     int priority = 3

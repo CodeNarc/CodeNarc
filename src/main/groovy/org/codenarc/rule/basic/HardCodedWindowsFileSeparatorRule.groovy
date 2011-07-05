@@ -28,7 +28,6 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * This rule finds usages of a Windows file separator within the constructor call of a File object. It is better to use the Unix file separator or use the File.separator constant. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class HardCodedWindowsFileSeparatorRule extends AbstractAstVisitorRule {
     String name = 'HardCodedWindowsFileSeparator'

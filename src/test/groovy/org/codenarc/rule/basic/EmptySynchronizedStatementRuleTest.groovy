@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptySynchronizedStatementRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptySynchronizedStatementRuleTest extends AbstractRuleTestCase {
 

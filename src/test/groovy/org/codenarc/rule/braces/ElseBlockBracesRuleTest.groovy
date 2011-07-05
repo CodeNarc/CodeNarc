@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ElseBlockBracesRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
 

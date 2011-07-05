@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for IntegerGetIntegerRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class IntegerGetIntegerRuleTest extends AbstractRuleTestCase {
 

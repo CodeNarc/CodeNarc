@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for DuplicateStringLiteralRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

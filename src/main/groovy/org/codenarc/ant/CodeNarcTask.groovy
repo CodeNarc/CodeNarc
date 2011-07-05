@@ -48,7 +48,6 @@ import org.codenarc.report.ReportWriterFactory
  * @see "http://ant.apache.org/manual/index.html"
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcTask extends Task {
     private static final LOG = Logger.getLogger(CodeNarcTask)

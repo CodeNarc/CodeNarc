@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnusedVariableRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedVariableRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

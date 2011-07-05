@@ -22,8 +22,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * Tests for DuplicateImportRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class DuplicateImportRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -25,8 +25,7 @@ import org.codenarc.util.AstUtil
  * To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class SerialPersistentFieldsRule extends AbstractAstVisitorRule {
     String name = 'SerialPersistentFields'
     int priority = 2

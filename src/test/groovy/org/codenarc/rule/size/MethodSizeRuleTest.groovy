@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for MethodSizeRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class MethodSizeRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

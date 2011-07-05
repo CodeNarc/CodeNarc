@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitTearDownCallsSuperRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

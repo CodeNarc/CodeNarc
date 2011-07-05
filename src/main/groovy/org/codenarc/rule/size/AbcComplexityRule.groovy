@@ -45,8 +45,7 @@ import org.gmetrics.metric.abc.AbcMetric
  * @see <a href="http://gmetrics.sourceforge.net/gmetrics-AbcMetric.html">GMetrics ABC metric</a>.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class AbcComplexityRule extends AbstractAstVisitorRule {
     String name = 'AbcComplexity'
     int priority = 2

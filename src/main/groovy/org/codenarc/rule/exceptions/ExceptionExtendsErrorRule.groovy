@@ -24,8 +24,7 @@ import org.codenarc.util.AstUtil
  * Errors are system exceptions. Do not extend them.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class ExceptionExtendsErrorRule extends AbstractAstVisitorRule {
     String name = 'ExceptionExtendsError'
     int priority = 2

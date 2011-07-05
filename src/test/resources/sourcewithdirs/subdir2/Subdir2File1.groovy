@@ -19,8 +19,7 @@ package sourcewithdirs.subdir2
  * Source file for testing
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class Subdir2File1 {
 
 }

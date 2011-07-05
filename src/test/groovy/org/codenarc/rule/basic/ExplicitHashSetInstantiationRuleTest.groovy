@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ExplicitHashSetInstantiationRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
 

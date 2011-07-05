@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnusedPrivateMethodParameterRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

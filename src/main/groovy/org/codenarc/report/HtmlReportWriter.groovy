@@ -32,7 +32,6 @@ import org.codenarc.rule.Rule
  * file on the classpath, with entries of the form: {rule-name}.description=..."
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 @SuppressWarnings(['DuplicateLiteral', 'UnnecessaryReturnKeyword'])
 class HtmlReportWriter extends AbstractReportWriter {

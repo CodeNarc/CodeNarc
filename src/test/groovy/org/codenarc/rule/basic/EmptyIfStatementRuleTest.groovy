@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptyIfStatementRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyIfStatementRuleTest extends AbstractRuleTestCase {
 

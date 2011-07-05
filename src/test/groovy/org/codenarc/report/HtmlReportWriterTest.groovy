@@ -33,7 +33,6 @@ import org.codenarc.test.AbstractTestCase
  * Tests for HtmlReportWriter
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class HtmlReportWriterTest extends AbstractTestCase {
     private static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'

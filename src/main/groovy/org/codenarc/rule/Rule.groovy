@@ -21,7 +21,6 @@ import org.codenarc.source.SourceCode
  * Represents a source code analysis rule 
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 interface Rule {
 

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ThrowNullPointerExceptionRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ThrowNullPointerExceptionRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2

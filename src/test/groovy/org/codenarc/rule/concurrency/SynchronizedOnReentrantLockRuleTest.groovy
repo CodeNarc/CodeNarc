@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for SynchronizedOnReentrantLockRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
 

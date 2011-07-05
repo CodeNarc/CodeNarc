@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for StaticMatcherFieldRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class StaticMatcherFieldRuleTest extends AbstractRuleTestCase {
 

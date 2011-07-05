@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for WaitOutsideOfWhileLoopRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
 

@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ConsecutiveStringConcatenationRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
 

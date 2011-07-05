@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EqualsAndHashCodeRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
 

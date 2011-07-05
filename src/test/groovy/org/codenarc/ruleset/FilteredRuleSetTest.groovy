@@ -22,8 +22,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for FilteredRuleSet
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class FilteredRuleSetTest extends AbstractTestCase {
     static final RULE1 = new StubRule(name:'Rule1')
     static final RULE2 = new StubRule(name:'Rule2')

@@ -28,7 +28,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * better to synchronize access to such fields rather than declare them volatile.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class VolatileLongOrDoubleFieldRule extends AbstractAstVisitorRule {
 

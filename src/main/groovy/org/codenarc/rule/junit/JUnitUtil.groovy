@@ -26,8 +26,7 @@ import org.codenarc.util.AstUtil
  * Utility methods for JUnit rule classes. This class is not intended for general use.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitUtil {
 
     /**

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for RequiredRegexRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RequiredRegexRuleTest extends AbstractRuleTestCase {
 
     static skipTestThatUnrelatedCodeHasNoViolations

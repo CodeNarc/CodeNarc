@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for CyclomaticComplexityRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

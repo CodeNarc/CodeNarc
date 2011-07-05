@@ -29,8 +29,7 @@ import org.codenarc.util.AstUtil
  * occurs when catching an exception for debugging purposes but then forgetting to take the catch statement out. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCatchBlockRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCatchBlock'
     int priority = 2

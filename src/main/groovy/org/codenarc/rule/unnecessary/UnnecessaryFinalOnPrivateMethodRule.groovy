@@ -24,8 +24,7 @@ import java.lang.reflect.Modifier
  * A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class UnnecessaryFinalOnPrivateMethodRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryFinalOnPrivateMethod'
     int priority = 2

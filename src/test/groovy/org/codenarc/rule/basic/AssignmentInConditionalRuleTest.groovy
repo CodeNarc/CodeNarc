@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for AssignmentInConditionalRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
 

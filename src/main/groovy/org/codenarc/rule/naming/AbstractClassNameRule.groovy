@@ -28,8 +28,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @see InterfaceNameRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class AbstractClassNameRule extends AbstractAstVisitorRule {
     String name = 'AbstractClassName'
     int priority = 2

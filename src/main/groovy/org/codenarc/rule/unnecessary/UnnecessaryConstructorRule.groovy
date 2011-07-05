@@ -26,8 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  *
  * @author Tomasz Bujok
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryConstructor'
     int priority = 3

@@ -27,7 +27,6 @@ import org.codenarc.util.AstUtil
   * programmers to mask race conditions.
   *
   * @author Hamlet D'Arcy
-  * @version $Revision$ - $Date$
   */
 class ThreadYieldRule extends AbstractAstVisitorRule {
 

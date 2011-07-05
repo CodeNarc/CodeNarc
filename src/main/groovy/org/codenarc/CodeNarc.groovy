@@ -45,7 +45,6 @@ import org.codenarc.report.ReportWriterFactory
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 @SuppressWarnings(['Println', 'PrintStackTrace'])
 class CodeNarc {

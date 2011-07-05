@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for CatchNullPointerExceptionRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchNullPointerExceptionRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

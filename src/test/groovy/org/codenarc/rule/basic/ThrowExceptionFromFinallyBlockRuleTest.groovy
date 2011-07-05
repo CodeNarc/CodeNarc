@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ThrowExceptionFromFinallyBlockRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {

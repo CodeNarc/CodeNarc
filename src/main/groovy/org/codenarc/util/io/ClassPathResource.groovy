@@ -23,8 +23,7 @@ package org.codenarc.util.io
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ClassPathResource implements Resource {
     final String path
 

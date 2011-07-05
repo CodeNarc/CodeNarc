@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for catching a Exception
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchException'
     int priority = 2

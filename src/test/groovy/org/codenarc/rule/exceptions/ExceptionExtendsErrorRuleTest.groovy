@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ExceptionExtendsErrorRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

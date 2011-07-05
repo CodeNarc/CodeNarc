@@ -22,8 +22,7 @@ import org.codenarc.rule.StubRule
  * Tests for PropertiesFileRuleSetConfigurer
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
     private ruleSet
     private rule1 = new StubRule(name:'rule1', priority:1, violationMessage:'abc')

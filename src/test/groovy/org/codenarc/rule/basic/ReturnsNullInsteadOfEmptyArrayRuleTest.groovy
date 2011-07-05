@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ReturnsNullInsteadOfEmptyArrayRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
 

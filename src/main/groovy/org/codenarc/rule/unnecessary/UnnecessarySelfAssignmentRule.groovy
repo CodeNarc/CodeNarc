@@ -27,8 +27,7 @@ import org.codenarc.util.AstUtil
  * Method contains a pointless self-assignment to a variable or property.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessarySelfAssignmentRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySelfAssignment'
     int priority = 2

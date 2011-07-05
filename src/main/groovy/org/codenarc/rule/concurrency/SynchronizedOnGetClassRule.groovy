@@ -26,7 +26,6 @@ import org.codenarc.util.AstUtil
  * class is subclassed, subclasses will synchronize on the class object for the subclass, which isn't likely what was intended.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SynchronizedOnGetClassRule extends AbstractAstVisitorRule {
     String name = 'SynchronizedOnGetClass'

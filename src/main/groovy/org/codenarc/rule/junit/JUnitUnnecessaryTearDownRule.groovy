@@ -29,8 +29,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitUnnecessaryTearDownRule extends AbstractAstVisitorRule {
     String name = 'JUnitUnnecessaryTearDown'
     int priority = 3

@@ -28,7 +28,6 @@ import org.codehaus.groovy.ast.stmt.WhileStatement
  * See https://www.securecoding.cert.org/confluence/display/java/THI03-J.+Always+invoke+wait()+and+await()+methods+inside+a+loop
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class WaitOutsideOfWhileLoopRule extends AbstractAstVisitorRule {
     String name = 'WaitOutsideOfWhileLoop'

@@ -39,7 +39,6 @@ import org.codenarc.ruleregistry.RuleRegistryInitializer
  * NOTE: This is an internal class. Its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcRunner {
     private static final LOG = Logger.getLogger(CodeNarcRunner)

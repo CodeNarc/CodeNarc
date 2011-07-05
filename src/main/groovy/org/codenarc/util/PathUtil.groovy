@@ -19,8 +19,7 @@ package org.codenarc.util
  * Path-related utility methods.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PathUtil {
 
     private static final SEP = '/'

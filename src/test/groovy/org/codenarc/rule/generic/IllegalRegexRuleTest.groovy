@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for IllegalRegexRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class IllegalRegexRuleTest extends AbstractRuleTestCase {
     static final REGEX = /\@author Joe/
 

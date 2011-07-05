@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for PackageNameRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PackageNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

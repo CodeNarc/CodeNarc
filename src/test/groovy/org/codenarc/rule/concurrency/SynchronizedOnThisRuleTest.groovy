@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for SynchronizedOnThisRule.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SynchronizedOnThisRuleTest extends AbstractRuleTestCase {
 

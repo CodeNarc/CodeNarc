@@ -26,8 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * When an if statement block ends with a return statement the else is unnecessary
  *
  * @author Victor Savkin
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class UnnecessaryElseStatementRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryElseStatement'
     int priority = 3

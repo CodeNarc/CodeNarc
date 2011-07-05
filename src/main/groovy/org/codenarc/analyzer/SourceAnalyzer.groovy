@@ -23,7 +23,6 @@ import org.codenarc.ruleset.RuleSet
  * trees using a specified RuleSet and produce report results.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 interface SourceAnalyzer {
 

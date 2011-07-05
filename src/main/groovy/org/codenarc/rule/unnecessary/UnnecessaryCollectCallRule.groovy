@@ -30,8 +30,7 @@ import org.codehaus.groovy.ast.expr.Expression
  * Some method calls to Object.collect(Closure) can be replaced with the spread operator. For instance, list.collect { it.multiply(2) } can be replaced by list*.multiply(2). 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCollectCallRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCollectCall'
     int priority = 2

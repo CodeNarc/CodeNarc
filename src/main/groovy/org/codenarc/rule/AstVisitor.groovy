@@ -22,7 +22,6 @@ import org.codenarc.source.SourceCode
  * Interface for Groovy AST Visitors used with Rules
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 interface AstVisitor extends GroovyClassVisitor {
 

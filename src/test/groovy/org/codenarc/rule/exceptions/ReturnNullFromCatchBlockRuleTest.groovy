@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ReturnNullFromCatchBlockRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

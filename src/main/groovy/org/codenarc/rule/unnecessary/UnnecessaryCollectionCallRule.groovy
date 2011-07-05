@@ -25,8 +25,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * always be true, and c.retainAll(c) should have no effect.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCollectionCallRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCollectionCall'
     int priority = 3

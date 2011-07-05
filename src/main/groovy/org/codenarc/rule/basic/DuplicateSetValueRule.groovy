@@ -26,7 +26,6 @@ import org.codehaus.groovy.ast.ASTNode
  * A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class DuplicateSetValueRule extends AbstractAstVisitorRule {
     String name = 'DuplicateSetValue'

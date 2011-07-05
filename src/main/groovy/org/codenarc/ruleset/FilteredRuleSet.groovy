@@ -25,8 +25,7 @@ import org.codenarc.util.WildcardPattern
  * Rule is NOT includes in the result from <code>getRules()</code>.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class FilteredRuleSet implements RuleSet {
     private rules = []
     private includes = []

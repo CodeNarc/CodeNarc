@@ -22,8 +22,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for RuleRegistryInitializer
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RuleRegistryInitializerTest extends AbstractTestCase {
 
     void testInitializeRuleRegistry() {

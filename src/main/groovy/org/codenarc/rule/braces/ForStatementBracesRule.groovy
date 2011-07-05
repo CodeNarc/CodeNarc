@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks that for statements use braces rather than a single statement.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ForStatementBracesRule extends AbstractAstVisitorRule {
     String name = 'ForStatementBraces'

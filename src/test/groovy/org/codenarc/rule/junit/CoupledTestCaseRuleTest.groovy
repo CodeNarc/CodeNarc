@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for CoupledTestCaseRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class CoupledTestCaseRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for SystemErrPrintRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SystemErrPrintRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

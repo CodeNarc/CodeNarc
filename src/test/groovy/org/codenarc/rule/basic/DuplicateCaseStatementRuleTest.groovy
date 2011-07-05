@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for DuplicateCaseStatementRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
 

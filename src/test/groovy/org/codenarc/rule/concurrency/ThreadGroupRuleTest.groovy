@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ThreadGroupRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ThreadGroupRuleTest extends AbstractRuleTestCase {
 

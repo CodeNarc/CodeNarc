@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for ForStatementBracesRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ForStatementBracesRuleTest extends AbstractRuleTestCase {
 

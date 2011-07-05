@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for AbcComplexityRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class AbcComplexityRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

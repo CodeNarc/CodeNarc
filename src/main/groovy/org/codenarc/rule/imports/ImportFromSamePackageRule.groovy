@@ -23,8 +23,7 @@ import org.codenarc.util.ImportUtil
  * Checks for an import of a class that is within the same package as the importing class.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 @SuppressWarnings('DuplicateLiteral')
 class ImportFromSamePackageRule extends AbstractRule {
     String name = 'ImportFromSamePackage'

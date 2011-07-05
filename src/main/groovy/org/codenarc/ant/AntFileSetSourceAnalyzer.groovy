@@ -35,7 +35,6 @@ import org.codenarc.util.PathUtil
  * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class AntFileSetSourceAnalyzer implements SourceAnalyzer {
 

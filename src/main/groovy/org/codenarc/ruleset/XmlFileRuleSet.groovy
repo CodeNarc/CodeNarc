@@ -28,8 +28,7 @@ import org.codenarc.util.io.DefaultResourceFactory
  * Note that this class attempts to read the file and parse the XML from within the constructor.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class XmlFileRuleSet implements RuleSet {
     private static final LOG = Logger.getLogger(XmlFileRuleSet)
     private ResourceFactory resourceFactory = new DefaultResourceFactory()

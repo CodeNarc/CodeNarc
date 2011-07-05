@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks that if statements use braces rather than a single statement.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class IfStatementBracesRule extends AbstractAstVisitorRule {
     String name = 'IfStatementBraces'

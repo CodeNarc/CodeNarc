@@ -44,8 +44,7 @@ import org.codehaus.groovy.ast.expr.*
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryTernaryExpressionRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryTernaryExpression'
     int priority = 3

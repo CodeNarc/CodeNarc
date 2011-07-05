@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptyInstanceInitializerRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class EmptyInstanceInitializerRuleTest extends AbstractRuleTestCase {
 

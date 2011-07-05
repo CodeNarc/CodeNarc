@@ -25,8 +25,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * This is an internal class and its API is subject to change.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CommonThrowAstVisitor extends AbstractAstVisitor  {
     private List exceptionTypeNames
 

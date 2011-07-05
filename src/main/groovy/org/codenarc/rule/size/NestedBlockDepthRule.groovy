@@ -34,8 +34,7 @@ import org.codehaus.groovy.ast.stmt.*
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class NestedBlockDepthRule extends AbstractAstVisitorRule {
     String name = 'NestedBlockDepth'
     int priority = 2

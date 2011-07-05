@@ -27,7 +27,6 @@ import java.lang.reflect.Modifier
  * bug which can cause memory leaks and possibly incorrect behavior.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ThreadLocalNotStaticFinalRule extends AbstractAstVisitorRule {
 

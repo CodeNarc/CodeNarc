@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryTransientModifierRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

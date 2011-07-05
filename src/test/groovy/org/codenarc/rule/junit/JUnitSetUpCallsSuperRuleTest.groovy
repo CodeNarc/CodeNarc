@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitSetUpCallsSuperRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

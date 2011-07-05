@@ -35,8 +35,7 @@ import org.codehaus.groovy.ast.ClassNode
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class MethodNameRule extends AbstractAstVisitorRule {
     String name = 'MethodName'
     int priority = 2

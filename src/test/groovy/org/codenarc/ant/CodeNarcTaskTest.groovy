@@ -30,7 +30,6 @@ import org.codenarc.report.XmlReportWriter
  * Tests for the CodeNarc Ant Task
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcTaskTest extends AbstractTestCase {
 

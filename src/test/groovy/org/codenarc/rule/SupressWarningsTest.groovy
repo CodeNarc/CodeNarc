@@ -25,7 +25,6 @@ import org.codehaus.groovy.ast.ConstructorNode
  * This class tests the @SuppressWarnings functionality.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SupressWarningsTest extends AbstractRuleTestCase {
 

@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.stmt.ForStatement
  * sameLine property can be set to true to override this.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class BracesForForLoopRule extends AbstractAstVisitorRule {
     String name = 'BracesForForLoop'
     int priority = 2

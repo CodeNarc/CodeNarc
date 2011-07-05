@@ -29,8 +29,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  * Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySemicolon'
     int priority = 3

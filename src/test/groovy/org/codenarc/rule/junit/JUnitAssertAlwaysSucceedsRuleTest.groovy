@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitAssertAlwaysSucceedsRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

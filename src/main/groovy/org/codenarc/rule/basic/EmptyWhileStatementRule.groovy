@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty while statements
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyWhileStatementRule extends AbstractAstVisitorRule {
     String name = 'EmptyWhileStatement'

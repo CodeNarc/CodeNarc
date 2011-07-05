@@ -27,7 +27,6 @@ import org.codehaus.groovy.ast.expr.*
  * collection. Instead of null, return a zero length array.
  * 
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ReturnsNullInsteadOfEmptyCollectionRule extends AbstractAstVisitorRule {
     String name = 'ReturnsNullInsteadOfEmptyCollection'

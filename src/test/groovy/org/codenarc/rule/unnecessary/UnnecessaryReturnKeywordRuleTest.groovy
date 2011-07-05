@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryReturnKeywordRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

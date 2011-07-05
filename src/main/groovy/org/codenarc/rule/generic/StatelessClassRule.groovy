@@ -60,8 +60,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class StatelessClassRule extends AbstractAstVisitorRule {
     String name = 'StatelessClass'
     int priority = 2

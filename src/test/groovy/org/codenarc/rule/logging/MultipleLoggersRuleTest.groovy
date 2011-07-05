@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for MultipleLoggersRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class MultipleLoggersRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

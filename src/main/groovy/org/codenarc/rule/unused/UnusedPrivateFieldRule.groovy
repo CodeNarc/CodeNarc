@@ -37,8 +37,7 @@ import org.codenarc.util.WildcardPattern
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateField'
     int priority = 2

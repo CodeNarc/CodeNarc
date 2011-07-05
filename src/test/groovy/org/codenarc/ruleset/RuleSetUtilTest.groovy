@@ -23,8 +23,7 @@ import org.codenarc.rule.Rule
  * Tests for RuleSetUtil
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RuleSetUtilTest extends AbstractTestCase {
     private static final RULESET_XML_FILE = 'rulesets/RuleSet1.xml'
     private static final RULESET_GROOVY_FILE = 'rulesets/GroovyRuleSet1.txt'

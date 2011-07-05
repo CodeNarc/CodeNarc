@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty catch blocks
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyCatchBlockRule extends AbstractAstVisitorRule {
     String name = 'EmptyCatchBlock'

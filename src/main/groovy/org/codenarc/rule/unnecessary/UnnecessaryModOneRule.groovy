@@ -26,8 +26,7 @@ import org.codehaus.groovy.ast.expr.Expression
  * Any expression mod 1 (exp % 1) is guaranteed to always return zero. This code is probably an error, and should be either (exp & 1) or (exp % 2).
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryModOneRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryModOne'
     int priority = 2

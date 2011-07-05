@@ -27,8 +27,7 @@ import org.codehaus.groovy.ast.ConstructorNode
  * The 'public' modifier is not required on methods, constructors or classes.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryPublicModifier'
     int priority = 3

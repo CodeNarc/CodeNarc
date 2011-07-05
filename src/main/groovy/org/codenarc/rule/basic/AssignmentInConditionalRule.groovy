@@ -27,7 +27,6 @@ import org.codenarc.util.AstUtil
  * An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class AssignmentInConditionalRule extends AbstractAstVisitorRule {
     String name = 'AssignmentInConditional'

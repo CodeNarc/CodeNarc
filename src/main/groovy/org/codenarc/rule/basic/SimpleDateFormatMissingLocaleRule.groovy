@@ -27,7 +27,6 @@ import org.codenarc.util.AstUtil
  * and time differently if the Locale varies.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SimpleDateFormatMissingLocaleRule extends AbstractAstVisitorRule {
     String name = 'SimpleDateFormatMissingLocale'

@@ -28,7 +28,6 @@ import org.codenarc.test.AbstractTestCase
  * Tests for AntFileSetSourceAnalyzer
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     private static final BASE_DIR = 'src/test/resources'

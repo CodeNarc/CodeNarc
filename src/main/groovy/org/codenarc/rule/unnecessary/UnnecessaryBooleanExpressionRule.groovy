@@ -49,8 +49,7 @@ import org.codenarc.util.AstUtil
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryBooleanExpressionRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryBooleanExpression'
     int priority = 3

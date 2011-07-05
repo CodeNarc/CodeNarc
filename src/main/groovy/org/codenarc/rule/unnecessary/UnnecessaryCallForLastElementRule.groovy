@@ -27,8 +27,7 @@ import org.codehaus.groovy.ast.expr.*
  * get, getAt, or array-style access is used with an object size check.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryCallForLastElementRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCallForLastElement'
     int priority = 2

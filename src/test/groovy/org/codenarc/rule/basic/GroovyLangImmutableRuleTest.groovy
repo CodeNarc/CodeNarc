@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for GroovyLangImmutableRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
 

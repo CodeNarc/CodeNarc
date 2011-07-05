@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryTernaryExpressionRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

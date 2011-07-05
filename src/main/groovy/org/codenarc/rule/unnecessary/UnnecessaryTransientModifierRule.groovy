@@ -25,8 +25,7 @@ import org.codenarc.util.AstUtil
  * The field is marked as transient, but the class isn't Serializable, so marking it as transient should have no effect.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryTransientModifierRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryTransientModifier'
     int priority = 2

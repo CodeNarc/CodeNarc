@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryObjectReferencesRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

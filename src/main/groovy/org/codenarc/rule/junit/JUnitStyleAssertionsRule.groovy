@@ -26,8 +26,7 @@ import org.codenarc.util.AstUtil
  * better error reporting. This is preferable to the JUnit assertions.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitStyleAssertionsRule extends AbstractAstVisitorRule {
     String name = 'JUnitStyleAssertions'
     int priority = 3

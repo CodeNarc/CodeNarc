@@ -33,8 +33,7 @@ import java.lang.reflect.Modifier
  * analogous reasons.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class NonFinalSubclassOfSensitiveInterfaceRule extends AbstractAstVisitorRule {
     String name = 'NonFinalSubclassOfSensitiveInterface'
     int priority = 2

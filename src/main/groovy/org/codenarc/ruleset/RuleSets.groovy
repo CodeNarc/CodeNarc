@@ -19,8 +19,7 @@ package org.codenarc.ruleset
  * Holds list of all RuleSet files.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RuleSets {
 
     static final ALL_RULESET_FILES = [

@@ -26,8 +26,7 @@ import org.codehaus.groovy.ast.InnerClassNode
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
     void visitClassEx(ClassNode classNode) {
         assert rule.regex

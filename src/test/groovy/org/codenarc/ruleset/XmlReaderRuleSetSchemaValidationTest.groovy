@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * XML Schema validation tests for XmlReaderRuleSet class 
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
     static final NAMESPACE = '''
         xmlns="http://codenarc.org/ruleset/1.0"

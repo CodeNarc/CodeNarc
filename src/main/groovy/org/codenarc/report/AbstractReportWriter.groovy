@@ -30,7 +30,6 @@ import groovy.text.SimpleTemplateEngine
  * and define a <code>defaultOutputFile</code> property.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 abstract class AbstractReportWriter implements ReportWriter {
 

@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptyTryBlockRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyTryBlockRuleTest extends AbstractRuleTestCase {
 

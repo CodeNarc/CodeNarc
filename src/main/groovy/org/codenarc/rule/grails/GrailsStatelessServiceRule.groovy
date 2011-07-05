@@ -62,8 +62,7 @@ import org.codenarc.rule.generic.StatelessClassRule
  * (String) if appropriate.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GrailsStatelessServiceRule extends StatelessClassRule {
     String name = 'GrailsStatelessService'
     int priority = 2

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ConfusingClassNamedExceptionRule
  *
  * @author Your Name Here
- * @version $Revision$ - $Date$
- */
+  */
 class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

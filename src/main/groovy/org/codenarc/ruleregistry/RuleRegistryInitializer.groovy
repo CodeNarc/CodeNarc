@@ -19,8 +19,7 @@
  * Performs initialization (loading) of the RuleRegistry singleton held by RuleRegistryHolder
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RuleRegistryInitializer {
 
     void initializeRuleRegistry() {

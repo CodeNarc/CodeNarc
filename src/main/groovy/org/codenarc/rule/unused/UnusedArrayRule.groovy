@@ -25,8 +25,7 @@ import org.codehaus.groovy.ast.expr.ArrayExpression
  * because it may be the intentional return value.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedArrayRule extends AbstractAstVisitorRule {
     String name = 'UnusedArray'
     int priority = 2

@@ -26,7 +26,6 @@ import org.codenarc.util.AstUtil
  * to use; replace it with System.properties['prop'].
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class IntegerGetIntegerRule extends AbstractAstVisitorRule {
     String name = 'IntegerGetInteger'

@@ -25,7 +25,6 @@ import java.util.regex.PatternSyntaxException
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 @SuppressWarnings('DuplicateLiteral')
 abstract class AbstractRuleTestCase extends AbstractTestCase {

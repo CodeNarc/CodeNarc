@@ -33,8 +33,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitAssertAlwaysFailsRule extends AbstractAstVisitorRule {
     String name = 'JUnitAssertAlwaysFails'
     int priority = 2

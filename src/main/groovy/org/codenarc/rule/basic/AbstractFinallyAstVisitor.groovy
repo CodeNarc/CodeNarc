@@ -23,7 +23,6 @@ import org.codenarc.rule.AbstractAstVisitor
  * Abstract superclass for AST Visitor classes that check for conditions within a finally block
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 abstract class AbstractFinallyAstVisitor extends AbstractAstVisitor {
     private finallyLineRanges = []

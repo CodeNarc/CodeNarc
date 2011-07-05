@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryIfStatementRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

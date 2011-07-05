@@ -24,8 +24,7 @@ import org.codenarc.util.AstUtil
  * Classes that implement Serializable should define a serialVersionUID. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class SerializableClassMustDefineSerialVersionUIDRule extends AbstractAstVisitorRule {
     String name = 'SerializableClassMustDefineSerialVersionUID'
     int priority = 2

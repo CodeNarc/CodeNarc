@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for StatelessClassRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class StatelessClassRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for CompareToWithoutComparableRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase {
 

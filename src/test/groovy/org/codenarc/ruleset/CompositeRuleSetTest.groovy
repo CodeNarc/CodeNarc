@@ -22,8 +22,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for CompositeRuleSet
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CompositeRuleSetTest extends AbstractTestCase {
     static final RULE1 = [:] as Rule
     static final RULE2 = [:] as Rule

@@ -25,8 +25,7 @@ import org.codehaus.groovy.ast.ClassNode
  *
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class GrailsDomainHasToStringRule extends AbstractAstVisitorRule {
     String name = 'GrailsDomainHasToString'
     int priority = 2

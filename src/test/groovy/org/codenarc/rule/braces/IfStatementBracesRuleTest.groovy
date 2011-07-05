@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for IfStatementBracesRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class IfStatementBracesRuleTest extends AbstractRuleTestCase {
 

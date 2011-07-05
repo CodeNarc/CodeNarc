@@ -26,7 +26,6 @@ import org.codenarc.ruleset.ListRuleSet
  * Tests for AbstractReportWriter
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class AbstractReportWriterTest extends AbstractTestCase {
 

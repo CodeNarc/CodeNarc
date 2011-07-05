@@ -27,7 +27,6 @@ import java.lang.reflect.Modifier
  * To avoid possibilities of deadlock, it is better to synchronize on internal objects. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SynchronizedMethodRule extends AbstractAstVisitorRule {
 

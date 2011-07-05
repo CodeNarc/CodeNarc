@@ -24,8 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * This rule catches classes that have more than one logger object defined. Typically, a class has zero or one logger objects. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class MultipleLoggersRule extends AbstractAstVisitorRule {
     String name = 'MultipleLoggers'
     int priority = 2

@@ -21,7 +21,6 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
  * Abstract superclass for AST Visitor classes that deal with constructor calls
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
     /**

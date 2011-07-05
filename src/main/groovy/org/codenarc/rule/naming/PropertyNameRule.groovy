@@ -56,8 +56,7 @@ import java.lang.reflect.Modifier
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class PropertyNameRule extends AbstractAstVisitorRule {
     String name = 'PropertyName'
     int priority = 2

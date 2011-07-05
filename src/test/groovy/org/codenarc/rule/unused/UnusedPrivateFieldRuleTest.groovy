@@ -24,8 +24,7 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  * @author Hamlet D'Arcy
  *
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

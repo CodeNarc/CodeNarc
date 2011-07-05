@@ -26,7 +26,6 @@ import org.codenarc.util.AstUtil
  * Class contains similarly-named get and set methods where the set method is synchronized and the get method is not, or the get method is synchronized and the set method is not. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class InconsistentPropertySynchronizationRule extends AbstractAstVisitorRule {
     String name = 'InconsistentPropertySynchronization'

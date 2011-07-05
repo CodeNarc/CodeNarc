@@ -22,8 +22,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * Tests for ImportFromSamePackageRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

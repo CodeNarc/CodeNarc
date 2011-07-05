@@ -21,7 +21,6 @@ import org.codenarc.source.SourceCode
  * Stub implementation of the Rule interface for testing
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class StubRule extends AbstractRule {
     int priority

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ThrowRuntimeExceptionRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ThrowRuntimeExceptionRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2

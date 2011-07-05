@@ -27,8 +27,7 @@ import org.codenarc.util.AstUtil
  * Getters do not take method arguments. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryGetterRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryGetter'
     int priority = 2

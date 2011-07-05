@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for MissingNewInThrowStatementRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitUnnecessaryTearDown
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

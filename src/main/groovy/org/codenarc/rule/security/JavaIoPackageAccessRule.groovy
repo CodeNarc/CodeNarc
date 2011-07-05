@@ -27,8 +27,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * This rule reports violations of the Enterprise JavaBeans specification by using the java.io package to access files or the file system. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class JavaIoPackageAccessRule extends AbstractAstVisitorRule {
     String name = 'JavaIoPackageAccess'
     int priority = 2

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for GrailsSessionReferenceRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
     static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
     static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'

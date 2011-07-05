@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for EmptyFinallyBlockRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyFinallyBlockRuleTest extends AbstractRuleTestCase {
 

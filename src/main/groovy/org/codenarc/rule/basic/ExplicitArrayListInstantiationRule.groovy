@@ -24,7 +24,6 @@ import org.codenarc.rule.AstVisitor
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ExplicitArrayListInstantiationRule extends AbstractAstVisitorRule {
     String name = 'ExplicitArrayListInstantiation'

@@ -25,7 +25,6 @@ import org.codenarc.test.AbstractTestCase
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class AbstractAstVisitorTest extends AbstractTestCase {
     private static final LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'

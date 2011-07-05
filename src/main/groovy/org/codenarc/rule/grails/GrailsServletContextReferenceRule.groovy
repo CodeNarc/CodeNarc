@@ -39,8 +39,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
  * with a different regular expression value if appropriate.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GrailsServletContextReferenceRule extends AbstractAstVisitorRule {
     String name = 'GrailsServletContextReference'
     int priority = 2

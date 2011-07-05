@@ -25,8 +25,7 @@ import java.lang.reflect.Modifier
  * Creates a violation when the program violates secure coding principles by declaring a finalize() method public.
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class PublicFinalizeMethodRule extends AbstractAstVisitorRule {
     String name = 'PublicFinalizeMethod'
     int priority = 2

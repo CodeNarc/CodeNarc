@@ -28,8 +28,7 @@ import org.codenarc.source.SourceCode
  * with a unique rule name, string, violationMessage and (optionally) customized priority.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RequiredStringRule extends AbstractRule {
     String name = 'RequiredString'
     int priority = 3

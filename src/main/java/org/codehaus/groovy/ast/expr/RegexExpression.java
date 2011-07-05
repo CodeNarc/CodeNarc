@@ -26,7 +26,6 @@ import java.lang.reflect.Method;
  * a regular expression. 
  * 
  * @author <a href="mailto:james@coredevelopers.net">James Strachan</a>
- * @version $Revision$
  */
 @Deprecated
 public class RegexExpression extends Expression {

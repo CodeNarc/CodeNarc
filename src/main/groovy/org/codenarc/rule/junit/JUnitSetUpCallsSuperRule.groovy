@@ -29,8 +29,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
     String name = 'JUnitSetUpCallsSuper'
     int priority = 2

@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for ClassPathResource
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ClassPathResourceTest extends AbstractTestCase {
 
     private static final TEXT_FILE = 'resource/SampleResource.txt'

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for PrintStackTraceRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PrintStackTraceRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

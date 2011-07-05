@@ -25,7 +25,6 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  * Finds empty string literals which are being added. This is an inefficient way to convert any type to a String.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class AddEmptyStringRule extends AbstractAstVisitorRule {
     String name = 'AddEmptyString'

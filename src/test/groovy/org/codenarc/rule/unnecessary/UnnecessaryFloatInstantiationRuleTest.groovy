@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryFloatInstantiationRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

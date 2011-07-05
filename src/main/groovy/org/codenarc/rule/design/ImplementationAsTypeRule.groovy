@@ -53,8 +53,7 @@ import org.codehaus.groovy.ast.FieldNode
  * </ul>
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class ImplementationAsTypeRule extends AbstractAstVisitorRule {
     String name = 'ImplementationAsType'
     int priority = 2

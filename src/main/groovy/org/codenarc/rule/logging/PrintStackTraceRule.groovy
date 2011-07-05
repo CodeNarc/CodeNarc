@@ -25,8 +25,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class PrintStackTraceRule extends AbstractAstVisitorRule {
     String name = 'PrintStackTrace'
     int priority = 2

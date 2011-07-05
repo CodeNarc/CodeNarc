@@ -25,7 +25,6 @@ import org.codenarc.report.ReportWriter
  * Tests for CodeNarcRunner
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class CodeNarcRunnerTest extends AbstractTestCase {
     private static final XML_RULESET1 = 'rulesets/RuleSet1.xml'

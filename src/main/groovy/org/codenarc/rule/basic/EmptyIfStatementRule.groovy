@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty if statements
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyIfStatementRule extends AbstractAstVisitorRule {
     String name = 'EmptyIfStatement'

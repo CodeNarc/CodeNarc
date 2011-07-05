@@ -48,7 +48,6 @@ import org.codenarc.util.AstUtil
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ConstantTernaryExpressionRule extends AbstractAstVisitorRule {
     String name = 'ConstantTernaryExpression'

@@ -31,8 +31,7 @@ import org.codenarc.ruleregistry.RuleRegistryHolder
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class RuleSetBuilder {
 
     private topLevelDelegate = new TopLevelDelegate()

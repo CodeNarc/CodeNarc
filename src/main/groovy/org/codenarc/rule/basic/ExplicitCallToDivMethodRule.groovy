@@ -22,7 +22,6 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * This rule detects when the div(Object) method is called directly in code instead of using the / operator. A groovier way to express this: a.div(b) is this: a / b
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitCallToDivMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToDivMethod'

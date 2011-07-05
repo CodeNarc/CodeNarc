@@ -24,8 +24,7 @@ import org.codehaus.groovy.ast.ImportNode
  * Rule that checks for an unreferenced import
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedImportRule extends AbstractRule {
 
     String name = 'UnusedImport'

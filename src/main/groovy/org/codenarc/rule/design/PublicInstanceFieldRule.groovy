@@ -23,8 +23,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Using public fields is considered to be a bad design. Use properties instead.
  *
  * @author Victor Savkin
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class PublicInstanceFieldRule extends AbstractAstVisitorRule {
     String name = 'PublicInstanceField'
     int priority = 2

@@ -28,7 +28,6 @@ import org.codehaus.groovy.ast.expr.GStringExpression
  * This rule find cases where a File object is constructed with a windows-based path. This is not portable, and using the File.listRoots() method is a better alternative. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class HardcodedWindowsRootDirectoryRule extends AbstractAstVisitorRule {
     String name = 'HardcodedWindowsRootDirectory'

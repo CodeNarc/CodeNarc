@@ -27,8 +27,7 @@ import org.codenarc.util.io.ClassPathResource
  * the constructor.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 @SuppressWarnings('DuplicateLiteral')
 class XmlReaderRuleSet implements RuleSet {
 

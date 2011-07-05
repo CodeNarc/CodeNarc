@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryOverridingMethodRule
  *
  * @author 'Sven Lange'
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

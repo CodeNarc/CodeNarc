@@ -26,8 +26,7 @@ import org.codenarc.util.AstUtil
  * This rule detects JUnit calling assertEquals where the first parameter is a boolean. These assertions should be made by more specific methods, like assertTrue or assertFalse.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UseAssertTrueInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
     String name = 'UseAssertTrueInsteadOfAssertEquals'
     int priority = 3

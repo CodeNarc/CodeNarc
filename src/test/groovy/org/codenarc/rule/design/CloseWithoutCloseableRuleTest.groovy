@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for CloseWithoutCloseableRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
 

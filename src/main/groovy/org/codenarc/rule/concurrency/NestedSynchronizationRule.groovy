@@ -25,7 +25,6 @@ import org.codenarc.rule.Violation
  * Rule to detect nested synchronization blocks.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class NestedSynchronizationRule extends AbstractAstVisitorRule {
 

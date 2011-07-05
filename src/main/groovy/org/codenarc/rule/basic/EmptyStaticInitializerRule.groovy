@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * An empty static initializer was found. It is safe to remove it. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class EmptyStaticInitializerRule extends AbstractAstVisitorRule {
     String name = 'EmptyStaticInitializer'

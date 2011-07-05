@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UseAssertFalseInsteadOfNegationRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class UseAssertFalseInsteadOfNegationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

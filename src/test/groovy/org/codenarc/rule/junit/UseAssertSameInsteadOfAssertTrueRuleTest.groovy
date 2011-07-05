@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UseAssertSameInsteadOfAssertTrueRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UseAssertSameInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

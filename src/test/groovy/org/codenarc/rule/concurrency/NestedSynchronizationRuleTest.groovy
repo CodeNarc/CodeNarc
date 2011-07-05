@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Unit test for NestedSynchronizationRule.
  * 
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {

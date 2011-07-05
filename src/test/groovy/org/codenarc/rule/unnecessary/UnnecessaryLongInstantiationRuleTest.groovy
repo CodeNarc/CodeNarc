@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryLongInstantiationRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryLongInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

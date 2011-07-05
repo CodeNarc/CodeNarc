@@ -27,8 +27,7 @@ import org.codenarc.util.AstUtil
  * logic to a new class where it can properly be reused.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class CoupledTestCaseRule extends AbstractAstVisitorRule {
     String name = 'CoupledTestCase'
     int priority = 2

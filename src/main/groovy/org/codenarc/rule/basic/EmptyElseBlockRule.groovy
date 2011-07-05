@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Rule that checks for empty else blocks
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class EmptyElseBlockRule extends AbstractAstVisitorRule {
     String name = 'EmptyElseBlock'

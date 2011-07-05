@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for NestedBlockDepthRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

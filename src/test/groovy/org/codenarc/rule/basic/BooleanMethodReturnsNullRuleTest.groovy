@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for BooleanMethodReturnsNullRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
 

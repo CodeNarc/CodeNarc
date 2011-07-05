@@ -29,8 +29,7 @@ import org.codehaus.groovy.transform.ASTTransformation
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
 abstract class AbstractSourceCode implements SourceCode {
     static final LOG = Logger.getLogger(AbstractSourceCode)

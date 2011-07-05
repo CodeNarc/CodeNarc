@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for SourceCodeUtil
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SourceCodeCriteriaTest extends AbstractTestCase {
     static final NAME = 'MyTest.groovy'
     static final PATH = "src/$NAME"

@@ -22,7 +22,6 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * This rule detects when the rightShift(Object) method is called directly in code instead of using the >> operator. A groovier way to express this: a.rightShift(b) is this: a >> b
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class ExplicitCallToRightShiftMethodRule extends AbstractAstVisitorRule {
     String name = 'ExplicitCallToRightShiftMethod'

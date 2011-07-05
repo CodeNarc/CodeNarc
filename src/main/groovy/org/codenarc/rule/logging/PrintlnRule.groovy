@@ -29,8 +29,7 @@ import org.codenarc.util.AstUtil
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class PrintlnRule extends AbstractAstVisitorRule {
     String name = 'Println'
     int priority = 2

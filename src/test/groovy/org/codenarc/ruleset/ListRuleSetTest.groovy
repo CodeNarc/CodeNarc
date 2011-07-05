@@ -22,8 +22,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for ListRuleSet
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class ListRuleSetTest extends AbstractTestCase {
 
     static final RULE = [:] as Rule

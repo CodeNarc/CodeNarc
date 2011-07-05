@@ -24,8 +24,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for XmlFileRuleSet
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class XmlFileRuleSetTest extends AbstractTestCase {
 
     void testNullPath() {

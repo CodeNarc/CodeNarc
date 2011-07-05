@@ -26,7 +26,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * equal integers or strings.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class DuplicateCaseStatementRule extends AbstractAstVisitorRule {
     String name = 'DuplicateCaseStatement'

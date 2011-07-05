@@ -22,7 +22,6 @@ import org.codenarc.results.Results
  * Represents the interface of an object that can write out a report
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 interface ReportWriter {
 

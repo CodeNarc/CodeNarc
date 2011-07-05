@@ -25,8 +25,7 @@ import org.codenarc.util.AstUtil
  * This rule finds usages of String.substring(int) and String.substring(int, int) that can be replaced by use of the subscript operator. For instance, var.substring(5) can be replaced with var[5..-1]. 
  *
  * @author Hamlet D'Arcy
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
- */
+  */
 class UnnecessarySubstringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySubstring'
     int priority = 2

@@ -23,8 +23,7 @@ import org.codenarc.rule.Rule
  *
  * @author Jan Ahrens
  * @auther Stefan Armbruster
- * @version $Revision: 329 $ - $Date: 2010-04-29 04:20:25 +0200 (Thu, 29 Apr 2010) $
- */
+  */
 class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

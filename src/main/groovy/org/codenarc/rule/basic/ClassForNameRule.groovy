@@ -24,7 +24,6 @@ import org.codenarc.util.AstUtil
  * Using Class.forName(...) is a common way to add dynamic behavior to a system. However, using this method can cause resource leaks because the classes can be pinned in memory for long periods of time. 
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision: 24 $ - $Date: 2009-01-31 13:47:09 +0100 (Sat, 31 Jan 2009) $
  */
 class ClassForNameRule extends AbstractAstVisitorRule {
     String name = 'ClassForName'

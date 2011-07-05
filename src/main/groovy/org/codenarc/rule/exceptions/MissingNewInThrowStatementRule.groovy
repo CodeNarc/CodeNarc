@@ -28,8 +28,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * look like a new keyword was meant to be used but forgotten.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class MissingNewInThrowStatementRule extends AbstractAstVisitorRule {
     String name = 'MissingNewInThrowStatement'
     int priority = 2

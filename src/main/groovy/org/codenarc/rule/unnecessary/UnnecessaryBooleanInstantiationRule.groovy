@@ -29,8 +29,7 @@ import org.codenarc.rule.AbstractConstructorCallAstVisitor
  * Boolean.FALSE instead.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryBooleanInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryBooleanInstantiation'
     int priority = 2

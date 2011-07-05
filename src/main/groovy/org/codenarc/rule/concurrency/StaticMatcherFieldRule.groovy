@@ -27,7 +27,6 @@ import org.codenarc.util.AstUtil
  * single instance across thread boundaries without proper synchronization will result in erratic behavior of the application.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class StaticMatcherFieldRule extends AbstractAstVisitorRule {
     String name = 'StaticMatcherField'

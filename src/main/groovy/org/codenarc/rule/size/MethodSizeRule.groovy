@@ -34,8 +34,7 @@ import org.codenarc.util.WildcardPattern
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class MethodSizeRule extends AbstractAstVisitorRule {
     String name = 'MethodSize'
     int priority = 3

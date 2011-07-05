@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryBigIntegerInstantiationRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryBigIntegerInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

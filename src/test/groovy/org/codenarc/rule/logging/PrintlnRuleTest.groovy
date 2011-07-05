@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for PrintlnRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PrintlnRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

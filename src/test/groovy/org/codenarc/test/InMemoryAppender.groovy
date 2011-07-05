@@ -22,8 +22,7 @@ import org.apache.log4j.spi.LoggingEvent
  * Log4J Appender that saves all logged loggingEvents in a List.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class InMemoryAppender extends AppenderSkeleton implements Closeable {
 
     private List loggingEvents = []

@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for catching a Throwable
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchThrowableRule extends AbstractAstVisitorRule {
     String name = 'CatchThrowable'
     int priority = 2

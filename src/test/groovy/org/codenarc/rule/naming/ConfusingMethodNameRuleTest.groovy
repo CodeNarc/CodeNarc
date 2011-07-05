@@ -23,8 +23,7 @@ import org.codenarc.rule.Rule
  *
  * @author Hamlet D'Arcy
  * @author Hubert 'Mr. Haki' Klein Ikkink
- * @version $Revision$ - $Date$
- */
+  */
 class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

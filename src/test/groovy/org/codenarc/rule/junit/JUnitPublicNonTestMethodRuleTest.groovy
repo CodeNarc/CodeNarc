@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for JUnitPublicNonTestMethodRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

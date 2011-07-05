@@ -29,7 +29,6 @@ import org.codenarc.util.ImportUtil
  * (integer 1..3).
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 @SuppressWarnings('DuplicateLiteral')
 abstract class AbstractRule implements Rule {

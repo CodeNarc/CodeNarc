@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
   * Tests for ThreadYieldRule
   *
   * @author Hamlet D'Arcy
-  * @version $Revision$ - $Date$
   */
 class ThreadYieldRuleTest extends AbstractRuleTestCase {
 

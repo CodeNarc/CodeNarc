@@ -19,8 +19,7 @@ package source
  * Source file for testing
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class SourceFile2 {
     static final METHOD_NAME = 'calculateValue'
     static someVariable = "${METHOD_NAME}"()            // GString method name

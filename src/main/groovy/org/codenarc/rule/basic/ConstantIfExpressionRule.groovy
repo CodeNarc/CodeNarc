@@ -37,7 +37,6 @@ import org.codenarc.util.AstUtil
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ConstantIfExpressionRule extends AbstractAstVisitorRule {
     String name = 'ConstantIfExpression'

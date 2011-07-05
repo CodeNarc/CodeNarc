@@ -25,7 +25,6 @@ import org.codehaus.groovy.ast.Parameter
  * A class that implements Cloneable should define a clone() method.
  * 
  * @author Hamlet D'Arcy & Rene Groeschke
- * @version $Revision$ - $Date$
  */
 class CloneableWithoutCloneRule extends AbstractAstVisitorRule {
 

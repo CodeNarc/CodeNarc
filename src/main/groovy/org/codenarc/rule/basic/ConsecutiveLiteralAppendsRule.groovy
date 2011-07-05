@@ -26,7 +26,6 @@ import org.codehaus.groovy.ast.expr.GStringExpression
  * Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
  */
 class ConsecutiveLiteralAppendsRule extends AbstractAstVisitorRule {
     String name = 'ConsecutiveLiteralAppends'

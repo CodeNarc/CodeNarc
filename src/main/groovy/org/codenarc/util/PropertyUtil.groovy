@@ -19,8 +19,7 @@ package org.codenarc.util
  * Contains property-related static utility methods
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PropertyUtil {
 
     /**

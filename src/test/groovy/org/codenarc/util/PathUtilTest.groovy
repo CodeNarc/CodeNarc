@@ -21,8 +21,7 @@ import org.codenarc.test.AbstractTestCase
  * Tests for PathUtil
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class PathUtilTest extends AbstractTestCase{
 
     void testGetName() {

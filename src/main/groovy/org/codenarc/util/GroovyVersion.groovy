@@ -19,8 +19,7 @@ package org.codenarc.util
  * Utility methods to determine the version of Groovy currently executing.
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class GroovyVersion {
 
     static String getVersion() {

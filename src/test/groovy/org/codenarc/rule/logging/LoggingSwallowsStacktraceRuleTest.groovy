@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for LoggingSwallowsStacktraceRule
  *
  * @author 'Hamlet D'Arcy'
- * @version $Revision$ - $Date$
- */
+  */
 class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

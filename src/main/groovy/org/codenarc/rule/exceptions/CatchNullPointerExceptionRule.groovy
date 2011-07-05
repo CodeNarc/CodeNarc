@@ -22,8 +22,7 @@ import org.codenarc.rule.AstVisitor
  * Rule that checks for catching a NullPointerException
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class CatchNullPointerExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchNullPointerException'
     int priority = 2

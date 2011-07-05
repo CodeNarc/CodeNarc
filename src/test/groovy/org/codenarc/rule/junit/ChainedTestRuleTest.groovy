@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for ChainedTestRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class ChainedTestRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

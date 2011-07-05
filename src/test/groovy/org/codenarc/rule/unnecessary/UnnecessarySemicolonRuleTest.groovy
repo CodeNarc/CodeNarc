@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessarySemicolonRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for SystemRunFinalizersOnExitRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SystemRunFinalizersOnExitRuleTest extends AbstractRuleTestCase {
 

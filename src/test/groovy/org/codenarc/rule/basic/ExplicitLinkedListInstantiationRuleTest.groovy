@@ -23,7 +23,6 @@ import org.codenarc.rule.Rule
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
- * @version $Revision$ - $Date$
  */
 class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
 

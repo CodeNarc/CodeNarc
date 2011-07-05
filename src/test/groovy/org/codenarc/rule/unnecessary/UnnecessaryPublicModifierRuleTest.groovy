@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryPublicModifierRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

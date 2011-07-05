@@ -33,8 +33,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     List<String> constants = []

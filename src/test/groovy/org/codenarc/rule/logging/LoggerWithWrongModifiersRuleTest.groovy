@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for LoggerWithWrongModifiersRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -40,8 +40,7 @@ import org.codehaus.groovy.ast.ClassNode
  * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class VariableNameRule extends AbstractAstVisitorRule {
     String name = 'VariableName'
     int priority = 2

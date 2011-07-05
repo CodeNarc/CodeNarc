@@ -29,8 +29,7 @@ import org.codenarc.rule.Violation
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class ClassSizeRule extends AbstractAstVisitorRule {
     String name = 'ClassSize'
     int priority = 3

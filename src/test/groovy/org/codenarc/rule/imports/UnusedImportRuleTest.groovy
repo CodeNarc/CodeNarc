@@ -22,8 +22,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * Tests for UnusedImportRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class UnusedImportRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

@@ -27,7 +27,6 @@ import org.codenarc.util.AstUtil
  * far removed from it's call point. It is deprecated, and it's use strongly discouraged.
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class SystemRunFinalizersOnExitRule extends AbstractAstVisitorRule {
 

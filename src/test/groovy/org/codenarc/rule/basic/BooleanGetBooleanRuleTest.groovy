@@ -22,7 +22,6 @@ import org.codenarc.rule.Rule
  * Tests for BooleanGetBooleanRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
  */
 class BooleanGetBooleanRuleTest extends AbstractRuleTestCase {
 

@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for LoggerForDifferentClassRule
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
- */
+  */
 class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {

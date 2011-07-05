@@ -22,8 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for SerializableClassMustDefineSerialVersionUIDRule
  *
  * @author Hamlet D'Arcy
- * @version $Revision$ - $Date$
- */
+  */
 class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
