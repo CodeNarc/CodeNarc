@@ -36,6 +36,7 @@ BUG FIXES and NEW FEATURES
 - #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by René Scheibe)
 - #3322395: JUnitTestMethodWithoutAssert - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by René Scheibe)
 - #3310381: Added test for all rules (in AbstractRuleTestCase) to verify that any values specified for (doNot)applyToFilesMatching are valid regular expressions.
+- #3325049: Change StatelessClassRule (generic) to require applyToClassNames, applyToFileNames or applyToFilesMatching to be configured.
 
 THANKS
 - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;

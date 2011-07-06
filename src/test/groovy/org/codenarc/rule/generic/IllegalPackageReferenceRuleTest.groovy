@@ -25,8 +25,6 @@ import org.codenarc.rule.Rule
  */
 class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
 
-    // TODO Check imports, including static imports
-
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'IllegalPackageReference'

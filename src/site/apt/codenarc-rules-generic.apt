@@ -156,3 +156,6 @@ Generic Rules  ("<rulesets/generic.xml>")
   [[2]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
   with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
 
+  [[3]] At least one of the (standard) <<<applyToClassNames>>>, <<<applyToFileNames>>> or <<<applyToFilesMatching>>>
+  properties must be set (i.e., not null or empty) or else this rule does nothing. In other words, you must configure
+  this rule to apply to a specific set of classes or files.

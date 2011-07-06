@@ -68,6 +68,9 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     String ignoreFieldTypes
     Class astVisitorClass = StatelessClassAstVisitor
 
+    boolean isReady() {
+        applyToClassNames || applyToFileNames || applyToFilesMatching
+    }
 
     /**
      * Add more field names to the existing <code>ignoreFieldNames</code> property value.

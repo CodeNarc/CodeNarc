@@ -30,6 +30,17 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'StatelessClass'
     }
 
+    void testDefaultConfiguration_NoViolations() {
+        final SOURCE = '''
+          class MyClass {
+            BigDecimal depositAmount
+            def other
+          }
+        '''
+        assertNoViolations(SOURCE)
+        assert !rule.ready
+    }
+
     void testApplyTo_HasFields() {
         final SOURCE = '''
           class MyClass {
@@ -37,6 +48,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             def other
           }
         '''
+        rule.applyToClassNames = 'MyClass'
         assertTwoViolations(SOURCE, 3, 'BigDecimal depositAmount', 4, 'def other')
     }
 
@@ -46,6 +58,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
                 Double latitude, longitude
             }
         '''
+        rule.applyToClassNames = '*'
         assertNoViolations(SOURCE)
     }
 
@@ -55,6 +68,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             final value = 5
           }
         '''
+        rule.applyToFileNames = '*'
         assertNoViolations(SOURCE)
     }
 
@@ -65,6 +79,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             def other
           }
         '''
+        rule.applyToFilesMatching = /.*/
         assertTwoViolations(SOURCE, 3, 'static depositCount = 5', 4, 'def other')
     }
 
@@ -74,6 +89,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             static final DEFAULT_NAME = 'ABC'
           }
         '''
+        rule.applyToClassNames = '*'
         assertNoViolations(SOURCE)
     }
 
@@ -84,6 +100,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             def other
           }
         '''
+        rule.applyToClassNames = '*'
         rule.ignoreFieldNames = 'other'
         assertSingleViolation(SOURCE, 3, 'BigDecimal depositAmount', 'The class MyClass is marked as stateless but contains the non-final field "depositAmount"')
     }
@@ -95,6 +112,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             def other
           }
         '''
+        rule.applyToClassNames = '*'
         rule.ignoreFieldNames = 'other,depositAmount'
         assertNoViolations(SOURCE)
     }
@@ -108,6 +126,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             long otherMax
           }
         '''
+        rule.applyToClassNames = '*'
         rule.ignoreFieldNames = 'oth*,xxxx'
         rule.addToIgnoreFieldNames = 'yyy,deposit??ount'
         assertSingleViolation(SOURCE, 5, 'int count')
@@ -120,6 +139,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             def other
           }
         '''
+        rule.applyToClassNames = '*'
         rule.ignoreFieldTypes = 'BigDecimal'
         assertSingleViolation(SOURCE, 4, 'def other')
     }
@@ -134,6 +154,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             Object lock = new Object()
           }
         '''
+        rule.applyToClassNames = '*'
         rule.ignoreFieldTypes = '*Decimal,java.lang.Object,l?n?'
         assertTwoViolations(SOURCE, 5, 'int count = 23', 7, 'Object lock = new Object()')
     }
@@ -147,6 +168,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             long otherMax
           }
         '''
+        rule.applyToClassNames = '*'
         rule.ignoreFieldNames = 'oth*,XXX'
         rule.ignoreFieldTypes = '*Decimal,YYY,int,l?n?'
         assertNoViolations(SOURCE)
@@ -159,11 +181,13 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
             xxx = 23                        // not considered a field
             println 'ok'
         '''
+        rule.applyToFileNames = '*'
         assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
+        rule.applyToClassNames = '*'
         assertNoViolations(SOURCE)
     }
 
