@@ -46,6 +46,7 @@ THANKS
 - Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
 - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule. 
 - Thanks to Jeff Beck for the BitwiseOperatorInConditional rule. 
+- Thanks to Geli Crick and Rafael Luque for the BracesForClass, LineLength, GrailsDomainHasToString,GrailsDomainHasEquals, BracesForIfElseRule, BracesForMethod, BracesForTryCatchFinally and ClassJavadoc rules.
 
 
 Changes in version 0.14 (June 2011)
