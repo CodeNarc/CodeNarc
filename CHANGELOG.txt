@@ -25,6 +25,7 @@ NEW AND UPDATED RULES
 - BracesForMethod rule (formatting) - Checks the location of the opening brace ({) for constructors and methods. By default, requires them on the same line, but the sameLine property can be set to false to override this.
 - BracesForTryCatchFinally rule (formatting) - Checks the location of the opening brace ({) for try statements. By default, requires them on the line, but the sameLine property can be set to false to override this.
 - ClassJavadoc rule (formatting) - Makes sure each class and interface definition is preceeded by javadoc. Enum definitions are not checked, due to strange behavior in the Groovy AST.
+- JdbcConnectionReference rule (jdbc) - Check for direct use of java.sql.Connection, which is discouraged and almost never necessary in application code.
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.
@@ -275,7 +276,7 @@ BUG FIXES
 - Fix Bug #3110308: "Rules to catch null returns ignore ternary expressions".
 - Fix Bug #3110303: "ExplicitCallToXMethod rules should ignore spread statements".
 - Fix Bug #3109917: "DuplicateStringLiteralRule - enum names".
-- Fix Bug #3109628: "Exceptions are thrown with CodeNarc v0.11" – "GString as map key checking classes that do not exist yet” and “unnecessary ctor rule breaks for anonymous classes".
+- Fix Bug #3109628: "Exceptions are thrown with CodeNarc v0.11" – "GString as map key checking classes that do not exist yet�? and “unnecessary ctor rule breaks for anonymous classes".
 - Fix Bug #3190754: Don't use default ClassLoader for loading rule scripts.
 
 POTENTIAL BREAKING CHANGES

@@ -24,3 +24,14 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
     java.sql.DriverManager.getConnection()
 -------------------------------------------------------------------------------
 
+
+* JdbcConnectionReference Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks for direct use of <<<java.sql.Connection>>>, which is discouraged and almost never necessary
+  in application code.
+
+  For a more <Groovy> alternative, see {{{http://groovy.codehaus.org/Database+features}}} for information on the
+  <<Groovy Sql>> abstraction layer for JDBC/SQL.
+
