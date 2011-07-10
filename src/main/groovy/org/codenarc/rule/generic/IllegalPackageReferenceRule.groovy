@@ -33,6 +33,8 @@ import org.codenarc.util.ImportUtil
  * matches any sequence of zero or more characters in the package name, e.g. 'a.*' matches 'a.b' as well as
  * 'a.b.c.d'. If <code>packageNames</code> is null or empty, do nothing.
  *
+ * Known limitation: Does not catch references as Anonymous Inner class: def x = new org.bad.Handler() { .. }
+ *
  * @author Chris Mair
  */
 class IllegalPackageReferenceRule extends AbstractAstVisitorRule {
@@ -82,15 +84,15 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
         super.visitVariableExpression(expression)
     }
 
+
     @Override
-    void visitMethodEx(MethodNode node) {
+    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
         if (!node.isDynamicReturnType()) {       // ignore 'def' which resolves to java.lang.Object
             checkType(node.returnType.name, node)
         }
         node.parameters.each { parameter ->
             checkTypeIfNotDynamicallyTyped(parameter)
         }
-        super.visitMethodEx(node)
     }
 
     @Override
@@ -99,6 +101,12 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
             checkTypeIfNotDynamicallyTyped(parameter)
         }
         super.visitClosureExpression(expression)
+    }
+
+    @Override
+    void visitCastExpression(CastExpression expression) {
+        checkType(expression.type.name, expression)
+        super.visitCastExpression(expression)
     }
 
     @Override

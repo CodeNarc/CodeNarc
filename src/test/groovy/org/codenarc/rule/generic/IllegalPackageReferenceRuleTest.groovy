@@ -135,6 +135,24 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'void initializeBinding(String name, org.bad.Binding binding) { }', messageText:'org.bad'] )
     }
 
+    void testConstructorCall_Parameter_Violation() {
+        final SOURCE = '''
+            def handler = new Handler(org.bad.Request)
+        '''
+        rule.packageNames = 'org.bad'
+        assertSingleViolation(SOURCE, 2, 'def handler = new Handler(org.bad.Request)', 'org.bad')
+    }
+
+    void testConstructorParameterType_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass(org.bad.Stuff stuff) { }
+            }
+        '''
+        rule.packageNames = 'org.bad'
+        assertSingleViolation(SOURCE, 3, 'MyClass(org.bad.Stuff stuff) { }', 'org.bad')
+    }
+
     void testClosureParameterTypes_Violations() {
         final SOURCE = '''
             def writeCount = { org.bad.Writer writer, int count -> }
@@ -145,6 +163,14 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'def writeCount = { org.bad.Writer writer, int count -> }', messageText:'org.bad'],
             [lineNumber:3, sourceLineText:'def initializeBinding = { String name, org.bad.Binding binding -> }', messageText:'org.bad'] )
+    }
+
+    void testAsType_Violation() {
+        final SOURCE = '''
+            def x = value as org.bad.Widget
+        '''
+        rule.packageNames = 'org.bad'
+        assertSingleViolation(SOURCE, 2, 'def x = value as org.bad.Widget', 'org.bad')
     }
 
     void testExtendsSuperclassOrSuperInterfaceTypes_Violations() {
@@ -237,6 +263,15 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:2, sourceLineText:'import com.example.ExampleHelper', messageText:'com.example'],
             [lineNumber:3, sourceLineText:'class MyClass implements com.example.print.Printable {', messageText:'com.example.print'],
             [lineNumber:5, sourceLineText:'int getCount(org.bad.widget.Widget widget) { return widget.count }', messageText:'org.bad'] )
+    }
+
+    void testAnonymousInnerClass_KnownIssue_NoViolation() {
+        final SOURCE = '''
+            def x = new org.bad.Handler() { }
+        '''
+        // TODO This should produce a violation
+        rule.packageNames = 'org.bad'
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

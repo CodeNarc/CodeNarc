@@ -82,6 +82,17 @@ class JdbcConnectionReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def c = new java.sql.Connection()', CONNECTION_CLASS_NAME)
     }
 
+    void testConstructorCall_CallToSuper_NoViolation() {
+        final SOURCE = '''
+            class MyClass extends Object {
+                MyClass() {
+                    super('and')
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testVariableType_Violation() {
         final SOURCE = '''
             java.sql.Connection c = getConnection()
@@ -108,7 +119,7 @@ class JdbcConnectionReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'void initializeBinding(String name, java.sql.Connection connection) { }', messageText:CONNECTION_CLASS_NAME])
     }
 
-    void testConstructorCall_ParameterType_Violation() {
+    void testConstructorCall_Parameter_Violation() {
         final SOURCE = '''
             def handler = new Handler(java.sql.Connection)
         '''

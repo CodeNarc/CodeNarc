@@ -85,7 +85,7 @@ class JdbcConnectionReferenceAstVisitor extends AbstractAstVisitor {
     @Override
     void visitVariableExpression(VariableExpression expression) {
         checkType(expression)
-//        super.visitVariableExpression(expression)
+        super.visitVariableExpression(expression)
     }
 
     @Override

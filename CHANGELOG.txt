@@ -38,6 +38,7 @@ BUG FIXES and NEW FEATURES
 - #3322395: JUnitTestMethodWithoutAssert - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by René Scheibe)
 - #3310381: Added test for all rules (in AbstractRuleTestCase) to verify that any values specified for (doNot)applyToFilesMatching are valid regular expressions.
 - #3325049: Change StatelessClassRule (generic) to require applyToClassNames, applyToFileNames or applyToFilesMatching to be configured.
+- #3361263: IllegalPackageReferenceRule: Also check constructor parameter types and type coercion (x as Type).
 
 THANKS
 - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
@@ -45,6 +46,7 @@ THANKS
 - Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
 - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule. 
 - Thanks to Jeff Beck for the BitwiseOperatorInConditional rule. 
+
 
 Changes in version 0.14 (June 2011)
 -------------------------------------------
