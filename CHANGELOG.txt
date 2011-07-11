@@ -26,6 +26,7 @@ NEW AND UPDATED RULES
 - BracesForTryCatchFinally rule (formatting) - Checks the location of the opening brace ({) for try statements. By default, requires them on the line, but the sameLine property can be set to false to override this.
 - ClassJavadoc rule (formatting) - Makes sure each class and interface definition is preceeded by javadoc. Enum definitions are not checked, due to strange behavior in the Groovy AST.
 - JdbcConnectionReference rule (jdbc) - Check for direct use of java.sql.Connection, which is discouraged and almost never necessary in application code.
+- JdbcResultSetReference rule (jdbc) - Check for direct use of java.sql.ResultSet, which is not necessary if using the Groovy Sql facility or an ORM framework such as Hibernate.
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.

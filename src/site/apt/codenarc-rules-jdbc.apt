@@ -35,3 +35,14 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
   For a more <Groovy> alternative, see {{{http://groovy.codehaus.org/Database+features}}} for information on the
   <<Groovy Sql>> abstraction layer for JDBC/SQL.
 
+
+* JdbcResultSetReference Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks for direct use of <<<java.sql.ResultSet>>>, which is not necessary if using the Groovy <<Sql>> facility or an
+  ORM framework such as <Hibernate>.
+
+  See {{{http://groovy.codehaus.org/Database+features}}} for information on the <<Groovy Sql>> abstraction
+  layer for JDBC/SQL.
+

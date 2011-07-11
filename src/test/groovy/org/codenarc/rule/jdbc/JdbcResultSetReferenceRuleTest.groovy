@@ -18,23 +18,23 @@ package org.codenarc.rule.jdbc
 import org.codenarc.rule.Rule
 
 /**
- * Tests for JdbcConnectionReferenceRule
+ * Tests for JdbcResultSetReferenceRule
  *
  * @author Chris Mair
  */
-class JdbcConnectionReferenceRuleTest extends AbstractClassReferenceRuleTestCase {
+class JdbcResultSetReferenceRuleTest extends AbstractClassReferenceRuleTestCase {
 
     @Override
     protected String getClassName() {
-        'java.sql.Connection'
+        'java.sql.ResultSet'
     }
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'JdbcConnectionReference'
+        assert rule.name == 'JdbcResultSetReference'
     }
 
     protected Rule createRule() {
-        new JdbcConnectionReferenceRule()
+        new JdbcResultSetReferenceRule()
     }
 }

@@ -9,6 +9,6 @@
     </description>
 
     <rule class='org.codenarc.rule.jdbc.DirectConnectionManagementRule'/>
-
     <rule class='org.codenarc.rule.jdbc.JdbcConnectionReferenceRule'/>
+    <rule class='org.codenarc.rule.jdbc.JdbcResultSetReferenceRule'/>
 </ruleset>
