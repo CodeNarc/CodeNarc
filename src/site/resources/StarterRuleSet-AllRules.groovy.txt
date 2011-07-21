@@ -11,10 +11,19 @@ ruleset {
     AbstractClassWithPublicConstructor
     AbstractClassWithoutAbstractMethod
     AddEmptyString
+    AssignCollectionSort
+    AssignCollectionSort
+    AssignCollectionUnique
     AssignmentInConditional
     BigDecimalInstantiation
+    BitwiseOperatorInConditional
     BooleanGetBoolean
     BooleanMethodReturnsNull
+    BracesForClass
+    BracesForForLoop
+    BracesForIfElse
+    BracesForMethod
+    BracesForTryCatchFinally
     BrokenOddnessCheck
     BusyWait
     CatchArrayIndexOutOfBoundsException
@@ -27,6 +36,7 @@ ruleset {
     CatchThrowable
     ChainedTest
     ClassForName
+    ClassJavadoc
     ClassName
     ClassSize
     CloneableWithoutClone
@@ -100,11 +110,15 @@ ruleset {
     ForLoopShouldBeWhileLoop
     ForStatementBraces
     GStringAsMapKey
+    GrailsDomainHasEquals
+    GrailsDomainHasToString
     GrailsPublicControllerMethod
     GrailsServletContextReference
     GrailsSessionReference
     GrailsStatelessService
     GroovyLangImmutable
+    HardCodedWindowsFileSeparator
+    HardcodedWindowsRootDirectory
     IfStatementBraces
     IllegalPackageReference
     IllegalRegex
@@ -128,6 +142,10 @@ ruleset {
     JUnitUnnecessarySetUp
     JUnitUnnecessaryTearDown
     JavaIoPackageAccess
+    JdbcConnectionReference
+    JdbcResultSetReference
+    JdbcStatementReference
+    LineLength
     LoggerForDifferentClass
     LoggerWithWrongModifiers
     LoggingSwallowsStacktrace
@@ -150,6 +168,7 @@ ruleset {
     PropertyName
     PublicFinalizeMethod
     PublicInstanceField
+    RandomDoubleCoercedToZero
     RemoveAllOnSelf
     RequiredRegex
     RequiredString
@@ -201,6 +220,8 @@ ruleset {
     UnnecessaryCollectionCall
     UnnecessaryConstructor
     UnnecessaryDefInMethodDeclaration
+    UnnecessaryDefInVariableDeclaration
+    UnnecessaryDotClass
     UnnecessaryDoubleInstantiation
     UnnecessaryElseStatement
     UnnecessaryFail
@@ -210,6 +231,7 @@ ruleset {
     UnnecessaryGetter
     UnnecessaryGroovyImport
     UnnecessaryIfStatement
+    UnnecessaryInstanceOfCheck
     UnnecessaryInstantiationToGetClass
     UnnecessaryIntegerInstantiation
     UnnecessaryLongInstantiation
@@ -225,6 +247,7 @@ ruleset {
     UnnecessarySelfAssignment
     UnnecessarySemicolon
     UnnecessaryStringInstantiation
+    UnnecessarySubstring
     UnnecessaryTernaryExpression
     UnnecessaryTransientModifier
     UnsafeArrayDeclaration

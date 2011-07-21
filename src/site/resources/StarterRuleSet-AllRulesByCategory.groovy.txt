@@ -8,8 +8,12 @@ ruleset {
 
     // rulesets/basic.xml
     AddEmptyString
+    AssignCollectionSort
+    AssignCollectionSort
+    AssignCollectionUnique
     AssignmentInConditional
     BigDecimalInstantiation
+    BitwiseOperatorInConditional
     BooleanGetBoolean
     BooleanMethodReturnsNull
     BrokenOddnessCheck
@@ -68,8 +72,11 @@ ruleset {
     ForLoopShouldBeWhileLoop
     GStringAsMapKey
     GroovyLangImmutable
+    HardCodedWindowsFileSeparator
+    HardcodedWindowsRootDirectory
     IntegerGetInteger
     InvertedIfElse
+    RandomDoubleCoercedToZero
     RemoveAllOnSelf
     ReturnFromFinallyBlock
     ReturnsNullInsteadOfEmptyArray
@@ -145,6 +152,15 @@ ruleset {
     ThrowRuntimeException
     ThrowThrowable
     
+    // rulesets/formatting.xml
+    BracesForClass
+    BracesForForLoop
+    BracesForIfElse
+    BracesForMethod
+    BracesForTryCatchFinally
+    ClassJavadoc
+    LineLength
+    
     // rulesets/generic.xml
     IllegalPackageReference
     IllegalRegex
@@ -153,6 +169,8 @@ ruleset {
     StatelessClass
     
     // rulesets/grails.xml
+    GrailsDomainHasEquals
+    GrailsDomainHasToString
     GrailsPublicControllerMethod
     GrailsServletContextReference
     GrailsSessionReference
@@ -168,6 +186,9 @@ ruleset {
     
     // rulesets/jdbc.xml
     DirectConnectionManagement
+    JdbcConnectionReference
+    JdbcResultSetReference
+    JdbcStatementReference
     
     // rulesets/junit.xml
     ChainedTest
@@ -250,6 +271,8 @@ ruleset {
     UnnecessaryCollectionCall
     UnnecessaryConstructor
     UnnecessaryDefInMethodDeclaration
+    UnnecessaryDefInVariableDeclaration
+    UnnecessaryDotClass
     UnnecessaryDoubleInstantiation
     UnnecessaryElseStatement
     UnnecessaryFinalOnPrivateMethod
@@ -257,6 +280,7 @@ ruleset {
     UnnecessaryGString
     UnnecessaryGetter
     UnnecessaryIfStatement
+    UnnecessaryInstanceOfCheck
     UnnecessaryInstantiationToGetClass
     UnnecessaryIntegerInstantiation
     UnnecessaryLongInstantiation
@@ -272,6 +296,7 @@ ruleset {
     UnnecessarySelfAssignment
     UnnecessarySemicolon
     UnnecessaryStringInstantiation
+    UnnecessarySubstring
     UnnecessaryTernaryExpression
     UnnecessaryTransientModifier
     

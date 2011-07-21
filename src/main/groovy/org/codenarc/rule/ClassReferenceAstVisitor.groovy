@@ -25,6 +25,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.util.WildcardPattern
 
 /**
  * AstVisitor that check for references for a named class
@@ -33,19 +34,22 @@ import org.codehaus.groovy.ast.ClassNode
  */
 class ClassReferenceAstVisitor extends AbstractAstVisitor {
 
-    private final className = 'java.sql.Connection'
-    private final String violationMessage = "Found reference to $className"
+    private final classNamePattern
 
-    ClassReferenceAstVisitor(String className) {
-        this.className = className
-        violationMessage = "Found reference to $className"
+    /**
+     * Constructor
+     * @param classNames - one or more comma-separated class name patterns. Can contain wildcards (*,?)
+     */
+    ClassReferenceAstVisitor(String classNames) {
+        this.classNamePattern = new WildcardPattern(classNames)
     }
 
     @Override
     void visitImports(ModuleNode node) {
         def allImports = node.imports + node.staticStarImports.values()
         allImports?.each { importNode ->
-            if (importNode.className == className) {
+            if (classNamePattern.matches(importNode.className)) {
+                def violationMessage = "Found reference to ${importNode.className}"
                 addViolation(rule.createViolationForImport(sourceCode, importNode, violationMessage))
             }
         }
@@ -123,13 +127,15 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     //--------------------------------------------------------------------------
 
     private void checkType(String type, node) {
-        if (type == className) {
+        if (classNamePattern.matches(type)) {
+            def violationMessage = "Found reference to $type"
             addViolation(node, violationMessage)
         }
     }
 
     private void checkType(node) {
-        if (node.type.name == className) {
+        if (classNamePattern.matches(node.type.name)) {
+            def violationMessage = "Found reference to ${node.type.name}"
             addViolation(node, violationMessage)
         }
     }
