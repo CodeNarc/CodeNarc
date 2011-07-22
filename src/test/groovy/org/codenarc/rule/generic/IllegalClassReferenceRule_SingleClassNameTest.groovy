@@ -13,24 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.jdbc
+package org.codenarc.rule.generic
 
-import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
+import org.codenarc.rule.Rule
 
 /**
- * Tests for JdbcStatementReferenceRule - checks for references to java.sql.CallableStatement
+ * Tests for IllegalClassReferenceRule - checks for specifying a single class name for the classNames field
+ *
+ * @see IllegalClassReferenceRule_MultipleClassNamesTest
+ * @see IllegalClassReferenceRule_WildcardsClassNamesTest
  *
  * @author Chris Mair
  */
-class JdbcStatementReferenceRule_CallableStatementTest extends AbstractClassReferenceRuleTestCase {
+class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferenceRuleTestCase {
 
     @Override
     protected String getClassName() {
-        'java.sql.CallableStatement'
+        'com.example.MyExampleClass'
+    }
+
+    void testRuleProperties() {
+        rule = new IllegalClassReferenceRule()
+        assert rule.priority == 2
+        assert rule.name == 'IllegalClassReference'
+        assert rule.classNames == null
+        assert !rule.ready
     }
 
     protected Rule createRule() {
-        new JdbcStatementReferenceRule()
+        new IllegalClassReferenceRule(classNames:'com.example.MyExampleClass')
     }
 }

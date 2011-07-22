@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.jdbc
-
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+package org.codenarc.rule
 
 /**
  * Abstract superclass for tests of classes that check for class references.
@@ -29,7 +26,16 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
      * @return the name of the class to check for
      */
     abstract protected String getClassName()
-    
+
+    /**
+     * @return an initialized rule instance
+     */
+    protected abstract Rule createRule()
+
+    //------------------------------------------------------------------------------------
+    // Common Tests
+    //------------------------------------------------------------------------------------
+
     void testImport_Violation() {
         final SOURCE = """
             import ${getClassName()}
@@ -177,9 +183,5 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
             }
         '''
         assertNoViolations(SOURCE)
-    }
-
-    protected Rule createRule() {
-        new JdbcConnectionReferenceRule()
     }
 }

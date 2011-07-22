@@ -28,6 +28,7 @@ NEW AND UPDATED RULES
 - JdbcConnectionReference rule (jdbc) - Check for direct use of java.sql.Connection, which is discouraged and almost never necessary in application code.
 - JdbcResultSetReference rule (jdbc) - Check for direct use of java.sql.ResultSet, which is not necessary if using the Groovy Sql facility or an ORM framework such as Hibernate.
 - JdbcStatementReference rule (jdbc) - Check for direct use of java.sql.Statement, java.sql.PreparedStatement, or java.sql.CallableStatement, which is not necessary if using the Groovy Sql facility or an ORM framework such as Hibernate.
+- IllegalClassReference rule (generic) - Checks for reference to any of the classes configured in classNames.
 
 BUG FIXES and NEW FEATURES
 - #3317632: CloneableWithoutClone - false positive.

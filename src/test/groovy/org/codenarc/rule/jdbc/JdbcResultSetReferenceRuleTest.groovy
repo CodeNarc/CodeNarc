@@ -16,6 +16,7 @@
 package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.Rule
+import org.codenarc.rule.AbstractClassReferenceRuleTestCase
 
 /**
  * Tests for JdbcResultSetReferenceRule
