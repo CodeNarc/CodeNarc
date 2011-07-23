@@ -65,13 +65,6 @@ class DirectoryResults implements Results {
     }
 
     /**
-     * @return the List of violations with the specified priority; may be empty
-     */
-    List getViolationsWithPriority(int priority) {
-        children.inject([]) { violations, child -> violations.addAll(child.getViolationsWithPriority(priority)); violations }
-    }
-
-    /**
      * Return the number of violations with the specified priority
      * @param recursive - true if the returned count should include subdirectories as well; defaults to true
      * @return the number of violations with the specified priority

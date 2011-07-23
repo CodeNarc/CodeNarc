@@ -37,9 +37,7 @@ class FileResultsTest extends AbstractTestCase {
         def results = new FileResults(PATH, [])
         assert results.path == PATH
         assert results.children == []
-        assert results.getViolationsWithPriority(1) == []
-        assert results.getViolationsWithPriority(2) == []
-        assert results.getViolationsWithPriority(3) == []
+        assert results.violations == []
 
         assert results.getNumberOfViolationsWithPriority(1) == 0
         assert results.getNumberOfViolationsWithPriority(2) == 0
@@ -55,9 +53,9 @@ class FileResultsTest extends AbstractTestCase {
         assert results.children == []
         assert results.getViolations() == [VIOLATION1, VIOLATION3, VIOLATION7, VIOLATION3, VIOLATION1, VIOLATION2, VIOLATION4]
 
-        assert results.getViolationsWithPriority(1) == [VIOLATION1, VIOLATION1]
-        assert results.getViolationsWithPriority(2) == [VIOLATION2]
-        assert results.getViolationsWithPriority(3) == [VIOLATION3, VIOLATION3]
+        assert results.violations.findAll { v -> v.rule.priority == 1 } == [VIOLATION1, VIOLATION1]
+        assert results.violations.findAll { v -> v.rule.priority == 2 } == [VIOLATION2]
+        assert results.violations.findAll { v -> v.rule.priority == 3 } == [VIOLATION3, VIOLATION3]
 
         assert results.getNumberOfViolationsWithPriority(1) == 2
         assert results.getNumberOfViolationsWithPriority(2) == 1

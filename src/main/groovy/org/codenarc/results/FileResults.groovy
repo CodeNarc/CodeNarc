@@ -60,13 +60,6 @@ class FileResults implements Results {
     }
 
     /**
-     * @return the List of violations with the specified priority; may be empty
-     */
-    List getViolationsWithPriority(int priority) {
-        violations.findAll { violation -> violation.rule.priority == priority}
-    }
-
-    /**
      * @param recursive - true if the returned count should include subdirectories as well; defaults to true
      * @return the number of violations with the specified priority
      */

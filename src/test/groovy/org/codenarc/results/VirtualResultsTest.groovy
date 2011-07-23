@@ -38,10 +38,10 @@ class VirtualResultsTest extends GroovyTestCase {
 
         assert results.getViolations() == violations
 
-        assert 1 == results.getViolationsWithPriority(1).size()
-        assert 2 == results.getViolationsWithPriority(2).size()
-        assert 3 == results.getViolationsWithPriority(3).size()
-        assert 1 == results.getViolationsWithPriority(7).size()
+        assert 1 == results.violations.findAll { v -> v.rule.priority == 1 }.size()
+        assert 2 == results.violations.findAll { v -> v.rule.priority == 2 }.size()
+        assert 3 == results.violations.findAll { v -> v.rule.priority == 3 }.size()
+        assert 1 == results.violations.findAll { v -> v.rule.priority == 7 }.size()
     }
 
     void testGetViolations_ReturnsDefensiveCopy() {

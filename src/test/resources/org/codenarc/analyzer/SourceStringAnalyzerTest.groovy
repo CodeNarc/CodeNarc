@@ -1,25 +1,23 @@
 package org.codenarc.analyzer
 
 import org.codenarc.results.Results
-import org.codenarc.ruleset.RuleSetUtil
+import org.codenarc.rule.naming.ClassNameRule
+import org.codenarc.ruleset.ListRuleSet
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Test for SourceStringAnalyzer.
  * @author Hamlet D'Arcy
  */
-class SourceStringAnalyzerTest {
-    private static final RULESET_FILES = 'RunCodeNarcAgainstProjectSourceCode.ruleset'
+class SourceStringAnalyzerTest extends AbstractTestCase {
 
     void testRunAgainstString() {
         def source = '''
-            def x = '123'
-            def y = '123'
-'''
-        def ruleset = RuleSetUtil.loadRuleSetFile(RULESET_FILES)
-        Results results = new StringSourceAnalyzer(source).analyze(ruleset)
-        assert !results.getViolationsWithPriority(0)
-        assert !results.getViolationsWithPriority(1)
-        assert 2 == results.getViolationsWithPriority(2).size()
-        assert 1 == results.getViolationsWithPriority(3).size()
+            class badName { }
+        '''
+        def ruleSet = new ListRuleSet([new ClassNameRule()])
+        Results results = new StringSourceAnalyzer(source).analyze(ruleSet)
+        log(results.violations)
+        assert results.violations*.rule.name == ['ClassName']
     }
 }

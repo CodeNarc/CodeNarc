@@ -42,12 +42,6 @@ class VirtualResults implements Results {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 
-    def List getViolationsWithPriority(int priority) {
-        violations.findAll { Violation violation ->
-            violation.rule.priority == priority
-        }
-    }
-
     def int getNumberOfViolationsWithPriority(int priority, boolean recursive) {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }

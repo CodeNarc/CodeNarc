@@ -38,13 +38,6 @@ interface Results {
     List getViolations()
 
     /**
-     * Return the List of violations with the specified priority
-     * @param priority - the priority
-     * @return the List of violations with the specified priority; may be empty
-     */
-    List getViolationsWithPriority(int priority)
-
-    /**
      * Return the number of violations with the specified priority
      * @param priority - the priority
      * @param recursive - true if the returned count should include subdirectories as well

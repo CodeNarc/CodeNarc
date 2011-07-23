@@ -37,9 +37,7 @@ class DirectoryResultsTest extends AbstractTestCase {
         def results = new DirectoryResults(PATH)
         assert results.path == PATH
         assert results.children == []
-        assert results.getViolationsWithPriority(1) == []
-        assert results.getViolationsWithPriority(2) == []
-        assert results.getViolationsWithPriority(3) == []
+        assert results.violations == []
 
         assert results.getNumberOfViolationsWithPriority(1) == 0
         assert results.getNumberOfViolationsWithPriority(2) == 0
@@ -58,9 +56,9 @@ class DirectoryResultsTest extends AbstractTestCase {
         results.addChild(fileResults)
         results.numberOfFilesInThisDirectory = 7
         assert results.children == [fileResults]
-        assert results.getViolationsWithPriority(1) == [VIOLATION1, VIOLATION1]
-        assert results.getViolationsWithPriority(2) == [VIOLATION2]
-        assert results.getViolationsWithPriority(3) == [VIOLATION3, VIOLATION3]
+        assert results.violations.findAll { v -> v.rule.priority == 1 } == [VIOLATION1, VIOLATION1]
+        assert results.violations.findAll { v -> v.rule.priority == 2 } == [VIOLATION2]
+        assert results.violations.findAll { v -> v.rule.priority == 3 } == [VIOLATION3, VIOLATION3]
 
         assert results.getNumberOfViolationsWithPriority(1) == 2
         assert results.getNumberOfViolationsWithPriority(2) == 1
@@ -87,11 +85,11 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.children == [fileResults1, subDirResults]
         assert results.getViolations().sort { v -> v.rule.priority } == [VIOLATION1, VIOLATION1, VIOLATION2, VIOLATION2, VIOLATION3, VIOLATION3, VIOLATION3, VIOLATION4, VIOLATION7]
 
-        assert results.getViolationsWithPriority(1) == [VIOLATION1, VIOLATION1]
-        assert results.getViolationsWithPriority(2) == [VIOLATION2, VIOLATION2]
-        assert results.getViolationsWithPriority(3) == [VIOLATION3, VIOLATION3, VIOLATION3]
-        assert results.getViolationsWithPriority(4) == [VIOLATION4]
-        assert results.getViolationsWithPriority(7) == [VIOLATION7]
+        assert results.violations.findAll { v -> v.rule.priority == 1 } == [VIOLATION1, VIOLATION1]
+        assert results.violations.findAll { v -> v.rule.priority == 2 } == [VIOLATION2, VIOLATION2]
+        assert results.violations.findAll { v -> v.rule.priority == 3 } == [VIOLATION3, VIOLATION3, VIOLATION3]
+        assert results.violations.findAll { v -> v.rule.priority == 4 } == [VIOLATION4]
+        assert results.violations.findAll { v -> v.rule.priority == 7 } == [VIOLATION7]
 
         assert results.getNumberOfViolationsWithPriority(1) == 2
         assert results.getNumberOfViolationsWithPriority(2) == 2
