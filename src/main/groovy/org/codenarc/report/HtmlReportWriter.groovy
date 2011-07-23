@@ -239,11 +239,8 @@ class HtmlReportWriter extends AbstractReportWriter {
                     th(getResourceBundleString('htmlReport.violations.sourceLine'))
                 }
 
-                def violations =
-                    results.getViolationsWithPriority(1) +
-                    results.getViolationsWithPriority(2) +
-                    results.getViolationsWithPriority(3) +
-                    results.getViolationsWithPriority(4)
+                def violations = results.violations
+                violations.sort { v -> v.rule.priority }
 
                 violations.each { Violation violation ->
                     def moreInfo = violation.message ? violation.message : ''

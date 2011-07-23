@@ -33,6 +33,11 @@ interface Results {
     List getChildren()
 
     /**
+     * @return the List of all violations; may be empty
+     */
+    List getViolations()
+
+    /**
      * Return the List of violations with the specified priority
      * @param priority - the priority
      * @return the List of violations with the specified priority; may be empty

@@ -53,6 +53,13 @@ class FileResults implements Results {
     }
 
     /**
+     * @return the List of all violations
+     */
+    List getViolations() {
+        new ArrayList(violations)
+    }
+
+    /**
      * @return the List of violations with the specified priority; may be empty
      */
     List getViolationsWithPriority(int priority) {

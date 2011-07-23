@@ -32,11 +32,22 @@ class VirtualResultsTest extends GroovyTestCase {
                 new Violation(rule: [getPriority : { 3 } ] as Rule),
                 new Violation(rule: [getPriority : { 3 } ] as Rule),
                 new Violation(rule: [getPriority : { 3 } ] as Rule),
+                new Violation(rule: [getPriority : { 7 } ] as Rule),
         ]
         def results = new VirtualResults(violations)
+
+        assert results.getViolations() == violations
 
         assert 1 == results.getViolationsWithPriority(1).size()
         assert 2 == results.getViolationsWithPriority(2).size()
         assert 3 == results.getViolationsWithPriority(3).size()
+        assert 1 == results.getViolationsWithPriority(7).size()
     }
+
+    void testGetViolations_ReturnsDefensiveCopy() {
+        def results = new VirtualResults([new Violation(rule: [getPriority : { 1 } ] as Rule)])
+        results.getViolations() << 123
+        assert results.getViolations().size() == 1
+    }
+
 }

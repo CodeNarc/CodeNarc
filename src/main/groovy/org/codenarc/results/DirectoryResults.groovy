@@ -58,6 +58,13 @@ class DirectoryResults implements Results {
     }
 
     /**
+     * @return the List of all violations; may be empty
+     */
+    List getViolations() {
+        children.inject([]) { violations, child -> violations.addAll(child.getViolations()); violations }
+    }
+
+    /**
      * @return the List of violations with the specified priority; may be empty
      */
     List getViolationsWithPriority(int priority) {

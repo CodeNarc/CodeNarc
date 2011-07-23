@@ -24,10 +24,14 @@ import org.codenarc.rule.Violation
  */
 class VirtualResults implements Results {
 
-    List violations
+    private final List violations
 
     def VirtualResults(List violations) {
         this.violations = violations
+    }
+
+    List getViolations() {
+        return new ArrayList(violations)
     }
 
     def String getPath() {

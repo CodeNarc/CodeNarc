@@ -70,8 +70,7 @@ class TextReportWriter extends AbstractReportWriter {
         if (results.violations) {
             writer.println()
             writer.println('File: ' + results.path)
-            results.violations.sort { violation -> violation.rule.priority }
-            results.violations.each { violation ->
+            results.violations.sort { violation -> violation.rule.priority }.each { violation ->
                 writeViolation(writer, violation)
             }
         }

@@ -30,6 +30,8 @@ class DirectoryResultsTest extends AbstractTestCase {
     static final VIOLATION1 = new Violation(rule:new StubRule(1))
     static final VIOLATION2 = new Violation(rule:new StubRule(2))
     static final VIOLATION3 = new Violation(rule:new StubRule(3))
+    static final VIOLATION4 = new Violation(rule:new StubRule(4))
+    static final VIOLATION7 = new Violation(rule:new StubRule(7))
 
     void testNoChildren() {
         def results = new DirectoryResults(PATH)
@@ -75,21 +77,27 @@ class DirectoryResultsTest extends AbstractTestCase {
         def results = new DirectoryResults(PATH)
         assert results.path == PATH
         results.numberOfFilesInThisDirectory = 3
-        def fileResults1 = new FileResults('path', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def fileResults1 = new FileResults('path', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION7, VIOLATION1, VIOLATION2])
         results.addChild(fileResults1)
         def subDirResults = new DirectoryResults('subdir')
         subDirResults.numberOfFilesInThisDirectory = 2
-        def fileResults2 = new FileResults('path', [VIOLATION2, VIOLATION3])
+        def fileResults2 = new FileResults('path', [VIOLATION2, VIOLATION3, VIOLATION4])
         subDirResults.addChild(fileResults2)
         results.addChild(subDirResults)
         assert results.children == [fileResults1, subDirResults]
+        assert results.getViolations().sort { v -> v.rule.priority } == [VIOLATION1, VIOLATION1, VIOLATION2, VIOLATION2, VIOLATION3, VIOLATION3, VIOLATION3, VIOLATION4, VIOLATION7]
+
         assert results.getViolationsWithPriority(1) == [VIOLATION1, VIOLATION1]
         assert results.getViolationsWithPriority(2) == [VIOLATION2, VIOLATION2]
         assert results.getViolationsWithPriority(3) == [VIOLATION3, VIOLATION3, VIOLATION3]
+        assert results.getViolationsWithPriority(4) == [VIOLATION4]
+        assert results.getViolationsWithPriority(7) == [VIOLATION7]
 
         assert results.getNumberOfViolationsWithPriority(1) == 2
         assert results.getNumberOfViolationsWithPriority(2) == 2
         assert results.getNumberOfViolationsWithPriority(3) == 3
+        assert results.getNumberOfViolationsWithPriority(4) == 1
+        assert results.getNumberOfViolationsWithPriority(7) == 1
 
         assert results.getNumberOfViolationsWithPriority(1, false) == 2
         assert results.getNumberOfViolationsWithPriority(2, false) == 1
@@ -117,6 +125,14 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.findResultsForPath('file1') == fileResults1
         assert results.findResultsForPath('subdir') == subDirResults
         assert results.findResultsForPath('file2') == fileResults2
+    }
+
+    void testGetViolations_ReturnsDefensiveCopy() {
+        def results = new DirectoryResults(PATH)
+        def fileResults = new FileResults('path', [VIOLATION1, VIOLATION3])
+        results.addChild(fileResults)
+        results.getViolations() << VIOLATION7
+        assert results.getViolations() == [VIOLATION1, VIOLATION3]
     }
 
 }

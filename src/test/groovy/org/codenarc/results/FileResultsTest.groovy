@@ -26,10 +26,12 @@ import org.codenarc.test.AbstractTestCase
  */
 class FileResultsTest extends AbstractTestCase {
 
-    static final PATH = '/src/main/MyFile.groovy'
-    static final VIOLATION1 = new Violation(rule:new StubRule(1))
-    static final VIOLATION2 = new Violation(rule:new StubRule(2))
-    static final VIOLATION3 = new Violation(rule:new StubRule(3))
+    private static final PATH = '/src/main/MyFile.groovy'
+    private static final VIOLATION1 = new Violation(rule:new StubRule(1))
+    private static final VIOLATION2 = new Violation(rule:new StubRule(2))
+    private static final VIOLATION3 = new Violation(rule:new StubRule(3))
+    private static final VIOLATION4 = new Violation(rule:new StubRule(4))
+    private static final VIOLATION7 = new Violation(rule:new StubRule(7))
 
     void testWithNoViolations() {
         def results = new FileResults(PATH, [])
@@ -49,8 +51,10 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     void testWithViolations() {
-        def results = new FileResults(PATH, [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+        def results = new FileResults(PATH, [VIOLATION1, VIOLATION3, VIOLATION7, VIOLATION3, VIOLATION1, VIOLATION2, VIOLATION4])
         assert results.children == []
+        assert results.getViolations() == [VIOLATION1, VIOLATION3, VIOLATION7, VIOLATION3, VIOLATION1, VIOLATION2, VIOLATION4]
+
         assert results.getViolationsWithPriority(1) == [VIOLATION1, VIOLATION1]
         assert results.getViolationsWithPriority(2) == [VIOLATION2]
         assert results.getViolationsWithPriority(3) == [VIOLATION3, VIOLATION3]
@@ -58,6 +62,8 @@ class FileResultsTest extends AbstractTestCase {
         assert results.getNumberOfViolationsWithPriority(1) == 2
         assert results.getNumberOfViolationsWithPriority(2) == 1
         assert results.getNumberOfViolationsWithPriority(3) == 2
+        assert results.getNumberOfViolationsWithPriority(4) == 1
+        assert results.getNumberOfViolationsWithPriority(7) == 1
 
         assert results.numberOfFilesWithViolations == 1
         assert results.totalNumberOfFiles == 1
@@ -68,6 +74,12 @@ class FileResultsTest extends AbstractTestCase {
         assert results.findResultsForPath(null) == null
         assert results.findResultsForPath('xx/yy') == null
         assert results.findResultsForPath(PATH) == results
+    }
+
+    void testGetViolations_ReturnsDefensiveCopy() {
+        def results = new FileResults(PATH, [VIOLATION1, VIOLATION3])
+        results.getViolations() << 123
+        assert results.getViolations() == [VIOLATION1, VIOLATION3]
     }
 
 }
