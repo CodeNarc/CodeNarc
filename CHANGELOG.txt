@@ -24,7 +24,7 @@ NEW AND UPDATED RULES
 - BracesForIfElse rule (formatting) - Checks the location of the opening brace ({) for if statements. By default, requires them on the same line, but the sameLine property can be set to false to override this.
 - BracesForMethod rule (formatting) - Checks the location of the opening brace ({) for constructors and methods. By default, requires them on the same line, but the sameLine property can be set to false to override this.
 - BracesForTryCatchFinally rule (formatting) - Checks the location of the opening brace ({) for try statements. By default, requires them on the line, but the sameLine property can be set to false to override this.
-- ClassJavadoc rule (formatting) - Makes sure each class and interface definition is preceeded by javadoc. Enum definitions are not checked, due to strange behavior in the Groovy AST.
+- ClassJavadoc rule (formatting) - Makes sure each class and interface definition is preceded by javadoc. Enum definitions are not checked, due to strange behavior in the Groovy AST.
 - JdbcConnectionReference rule (jdbc) - Check for direct use of java.sql.Connection, which is discouraged and almost never necessary in application code.
 - JdbcResultSetReference rule (jdbc) - Check for direct use of java.sql.ResultSet, which is not necessary if using the Groovy Sql facility or an ORM framework such as Hibernate.
 - JdbcStatementReference rule (jdbc) - Check for direct use of java.sql.Statement, java.sql.PreparedStatement, or java.sql.CallableStatement, which is not necessary if using the Groovy Sql facility or an ORM framework such as Hibernate.
