@@ -44,6 +44,9 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
 
     @Override
     final void visitConstructorCallExpression(ConstructorCallExpression call) {
+        if (!isFirstVisit(call)) {
+            return
+        }
         if (AstUtil.classNodeImplementsType(call.type, targetType)
                 && call.arguments instanceof TupleExpression
                 && call.arguments.expressions.size() == 1) {

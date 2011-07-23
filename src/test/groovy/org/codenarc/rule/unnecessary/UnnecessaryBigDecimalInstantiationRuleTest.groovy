@@ -73,6 +73,15 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new BigDecimal(42L)', 'Can be rewritten as 42G')
     }
 
+    void testStaticField() {
+        final SOURCE = '''
+            class MyClass {
+                static final BigDecimal ZERO = new BigDecimal('0')
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, "static final BigDecimal ZERO = new BigDecimal('0')")
+    }
+
     protected Rule createRule() {
         new UnnecessaryBigDecimalInstantiationRule()
     }
