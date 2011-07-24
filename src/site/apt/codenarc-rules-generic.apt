@@ -199,6 +199,11 @@ Generic Rules  ("<rulesets/generic.xml>")
 |                       |                                                                |                        |
 *-----------------------+----------------------------------------------------------------+------------------------+
 
+  Note that you can use the standard rule properties, such as <<<applyToClassNames>>>, <<<doNotApplyToFileNames>>>
+  and <<<applyToFilesMatching>>> to only apply this rule to a subset of all classes/files. These rule properties
+  are described in {{{codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+  Standard Properties for Configuring Rules}}.
+
 **  Notes
 ~~~~~~~~~~~~
 
