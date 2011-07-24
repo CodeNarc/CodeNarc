@@ -189,6 +189,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
                 int defaultCount = count
             }
         '''
+        // TODO This "should" cause a violation for count
         assertNoViolations(SOURCE)
     }
                                               
@@ -206,6 +207,21 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 5, "private otherClosure = { println '3' }")
+    }
+
+    void testApplyTo_StaticFieldReferencedThroughClassName() {
+        final SOURCE = '''
+            package com.example
+            class MyClass {
+                private static count = 0
+                private static calc = { val -> val * 2 }
+                void printReport(){
+                    println MyClass.count
+                    println MyClass.calc.call(99)
+                }
+            }
+         '''
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_NoFields() {

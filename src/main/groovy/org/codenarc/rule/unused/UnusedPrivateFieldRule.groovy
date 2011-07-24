@@ -27,6 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
@@ -88,6 +89,12 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
 @SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
     private Map<String, FieldNode> unusedPrivateFields
+    private String thisClassNameWithoutPackage
+
+    @Override
+    protected void visitClassEx(ClassNode node) {
+        thisClassNameWithoutPackage = node.nameWithoutPackage
+    }
 
     void visitVariableExpression(VariableExpression expression) {
         unusedPrivateFields.remove(expression.name)
@@ -103,7 +110,7 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
 
     void visitPropertyExpression(PropertyExpression expression) {
         if (    expression.objectExpression instanceof VariableExpression &&
-                expression.objectExpression.name == 'this' &&
+                expression.objectExpression.name in ['this', thisClassNameWithoutPackage] &&
                 expression.property instanceof ConstantExpression) {
 
             unusedPrivateFields.remove(expression.property.value)
