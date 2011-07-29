@@ -45,6 +45,7 @@ BUG FIXES and NEW FEATURES
 - #3315991: Unnecessary*Instantiation (including UnnecessaryBigDecimalInstantiation): Duplicate violations.
 - #3351964: Include rules w/ priority > 4 in HTML report. Add getViolations() to Results interface.
 - #3375718: UnusedPrivateField: Recognize references to static fields through the class name.
+- #3380494: Automatically create report output folders.
 
 THANKS
 - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;

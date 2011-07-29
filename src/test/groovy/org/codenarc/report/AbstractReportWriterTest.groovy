@@ -33,6 +33,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
     private static final ANALYSIS_CONTEXT = new AnalysisContext()
     private static final DEFAULT_STRING = '?'
     private static final CUSTOM_FILENAME = 'abc.txt'
+    private static final NEW_OUTPUT_DIR = 'tempdir'
     private static final CONTENTS = 'abc'
     private reportWriter
 
@@ -46,6 +47,17 @@ class AbstractReportWriterTest extends AbstractTestCase {
         reportWriter.outputFile = CUSTOM_FILENAME
         reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         assertOutputFile(CUSTOM_FILENAME)
+    }
+
+    void testWriteReport_CreatesOutputDirectoryIfItDoesNotExist() {
+        def outputDir = new File(NEW_OUTPUT_DIR)
+        outputDir.delete()
+        assert !outputDir.exists()
+        def filename = NEW_OUTPUT_DIR + '/' + CUSTOM_FILENAME
+        reportWriter.outputFile = filename
+        reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
+        assertOutputFile(filename)
+        outputDir.delete()
     }
 
     void testWriteReport_WritesToStandardOut_IfWriteToStandardOutIsTrue_String() {
