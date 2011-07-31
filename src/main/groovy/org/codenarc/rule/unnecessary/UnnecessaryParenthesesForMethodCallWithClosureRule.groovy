@@ -45,7 +45,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureAstVisitor extends AbstractA
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         super.visitMethodCallExpression(call)
-        if (isFirstVisit(call)) {
+        if (isFirstVisit(call) && !AstUtil.isFromGeneratedSourceCode(call.method)) {
             def arguments = AstUtil.getMethodArguments(call)
             if (arguments.size() == 1 && arguments.first() instanceof ClosureExpression) {
                 def sourceBetweenMethodAndClosure = SourceCodeUtil.sourceLinesBetweenNodes(sourceCode, call.method,

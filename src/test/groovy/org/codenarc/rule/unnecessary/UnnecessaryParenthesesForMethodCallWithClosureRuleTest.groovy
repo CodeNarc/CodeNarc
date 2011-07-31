@@ -70,6 +70,18 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
             }''')   // todo: replace violation line number and message
     }
 
+    void testSyntheticMethodCall() {
+        final SOURCE = '''
+            dependencies {
+                testCompile "org.springframework:spring-test:$springVersion",
+                            ( 'org.spockframework:spock-core:0.5-groovy-1.8' ) {
+                                exclude group: 'org.codehaus.groovy'
+                            }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testNonDetectableViolations() {
         final SOURCE = '''
         	[1, 2, 3].each(/*comment*/) { println it }
