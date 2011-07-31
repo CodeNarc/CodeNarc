@@ -464,6 +464,28 @@
         <root url="jar://$M2_REPO$/ant/ant/1.6.5/ant-1.6.5-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: asm:asm-tree:2.2.1">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/asm/asm-tree/2.2.1/asm-tree-2.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/asm/asm-tree/2.2.1/asm-tree-2.2.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/asm/asm-tree/2.2.1/asm-tree-2.2.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: asm:asm:2.2.1">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/asm/asm/2.2.1/asm-2.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/asm/asm/2.2.1/asm-2.2.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/asm/asm/2.2.1/asm-2.2.1-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: junit:junit:3.8.1">
       <CLASSES>
         <root url="jar://$M2_REPO$/junit/junit/3.8.1/junit-3.8.1.jar!/" />
@@ -484,6 +506,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$M2_REPO$/log4j/log4j/1.2.13/log4j-1.2.13-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: net.sourceforge.cobertura:cobertura:1.9">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/net/sourceforge/cobertura/cobertura/1.9/cobertura-1.9.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/net/sourceforge/cobertura/cobertura/1.9/cobertura-1.9-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/net/sourceforge/cobertura/cobertura/1.9/cobertura-1.9-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.ant:ant-launcher:1.7.1">
@@ -529,6 +562,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: oro:oro:2.0.8">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/oro/oro/2.0.8/oro-2.0.8.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/oro/oro/2.0.8/oro-2.0.8-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/oro/oro/2.0.8/oro-2.0.8-sources.jar!/" />
       </SOURCES>
     </library>
   </component>

@@ -45,6 +45,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * AssignCollectionUnique Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
+
   The Collections.unique() method mutates the list and returns the list as a value. If you are assigning the result of unique() to a
   variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
   This violation is triggered when a unique() method call appears as the right hand side of an assignment, or when it appears
@@ -104,6 +105,22 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
     def b1 = new BigDecimal(0.1)               // violation
     def b2 = new java.math.BigDecimal(23.45d)  // violation
+-------------------------------------------------------------------------------
+
+
+* BitwiseOperatorInConditional Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Checks for bitwise operations in conditionals. For instance, the condition <<<if (a | b)>>> is almost
+  always a mistake and should be <<<if (a || b)>>>. If you need to do a bitwise operation then it is
+  best practice to extract a temp variable.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    if (a | b) { }
+    if (a & b) { }
 -------------------------------------------------------------------------------
 
 
@@ -194,20 +211,6 @@ Basic Rules  ("<rulesets/basic.xml>")
     }
 -------------------------------------------------------------------------------
 
-
-* BitwiseOperatorInConditional Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
-  Checks for bitwise operations in conditionals. For instance, the condition <<<if (a | b)>>> is almost
-  always a mistake and should be <<<if (a || b)>>>. If you need to do a bitwise operation then it is
-  best practice to extract a temp variable.
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-    if (a | b) { }
-    if (a & b) { }
--------------------------------------------------------------------------------
 
 * ClosureAsLastMethodParameter Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
