@@ -12,7 +12,6 @@ ruleset {
     AbstractClassWithoutAbstractMethod
     AddEmptyString
     AssignCollectionSort
-    AssignCollectionSort
     AssignCollectionUnique
     AssignmentInConditional
     BigDecimalInstantiation
@@ -120,6 +119,7 @@ ruleset {
     HardCodedWindowsFileSeparator
     HardcodedWindowsRootDirectory
     IfStatementBraces
+    IllegalClassReference
     IllegalPackageReference
     IllegalRegex
     ImplementationAsType

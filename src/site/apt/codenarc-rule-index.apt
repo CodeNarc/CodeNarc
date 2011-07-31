@@ -15,8 +15,6 @@ Rule Index
     
     * AssignCollectionSort
     
-    * AssignCollectionSort
-    
     * AssignCollectionUnique
     
     * AssignmentInConditional
@@ -327,6 +325,8 @@ Rule Index
     
     
 * {{{codenarc-rules-generic.html}Generic}}
+    
+    * IllegalClassReference
     
     * IllegalPackageReference
     

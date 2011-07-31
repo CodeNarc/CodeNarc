@@ -9,7 +9,6 @@ ruleset {
     // rulesets/basic.xml
     AddEmptyString
     AssignCollectionSort
-    AssignCollectionSort
     AssignCollectionUnique
     AssignmentInConditional
     BigDecimalInstantiation
@@ -162,6 +161,7 @@ ruleset {
     LineLength
     
     // rulesets/generic.xml
+    IllegalClassReference
     IllegalPackageReference
     IllegalRegex
     RequiredRegex
