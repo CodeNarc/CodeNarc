@@ -46,6 +46,8 @@ BUG FIXES and NEW FEATURES
 - #3351964: Include rules w/ priority > 4 in HTML report. Add getViolations() to Results interface.
 - #3375718: UnusedPrivateField: Recognize references to static fields through the class name.
 - #3380494: Automatically create report output folders.
+- #3376518: UnnecessaryBigDecimalInstantiation should not produce violations for new BigDecimal(42), new BigDecimal(42L) or new BigDecimal("42") - i.e., when the parameter evaluates to an integer/long.
+
 
 THANKS
 - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;

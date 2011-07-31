@@ -13,6 +13,9 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   It is unnecessary to instantiate <<<BigDecimal>>> objects. Instead just use the decimal literal
   or the 'G' identifier to force the type, such as <<<123.45>>> or <<<123.45G>>>.
 
+  This rule does not produce violations when the parameter evaluates to an integer/long, e.g.
+  <<<new BigDecimal(42)>>>, <<<new BigDecimal(42L)>>> or <<<new BigDecimal("42")>>>.
+
 
 * UnnecessaryBigIntegerInstantiation Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

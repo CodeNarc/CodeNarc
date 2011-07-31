@@ -39,14 +39,18 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testStringConstructor() {
+    void testStringConstructor_Decimal() {
         final SOURCE = '''
             new BigDecimal("42.10")
+        '''
+        assertSingleViolation(SOURCE, 2, 'new BigDecimal("42.10")', 'Can be rewritten as 42.10 or 42.10G')
+    }
+
+    void testStringConstructor_Integer() {
+        final SOURCE = '''
             new BigDecimal("42")
         '''
-        assertTwoViolations(SOURCE,
-            2, 'new BigDecimal("42.10")', 'Can be rewritten as 42.10 or 42.10G',
-            3, 'new BigDecimal("42")', 'Can be rewritten as 42G')
+        assertNoViolations(SOURCE)
     }
 
     void testDoubleConstructor() {
@@ -61,25 +65,23 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
             new BigDecimal(42i)
             new BigDecimal(42)
         '''
-        assertTwoViolations(SOURCE,
-            2, 'new BigDecimal(42i)', 'Can be rewritten as 42G',
-            3, 'new BigDecimal(42)', 'Can be rewritten as 42G')
+        assertNoViolations(SOURCE)
     }
 
     void testLongConstructor() {
         final SOURCE = '''
             new BigDecimal(42L)
         '''
-        assertSingleViolation(SOURCE, 2, 'new BigDecimal(42L)', 'Can be rewritten as 42G')
+        assertNoViolations(SOURCE)
     }
 
     void testStaticField() {
         final SOURCE = '''
             class MyClass {
-                static final BigDecimal ZERO = new BigDecimal('0')
+                static final BigDecimal ZERO = new BigDecimal('0.5')
             }
         '''
-        assertSingleViolation(SOURCE, 3, "static final BigDecimal ZERO = new BigDecimal('0')")
+        assertSingleViolation(SOURCE, 3, "static final BigDecimal ZERO = new BigDecimal('0.5')")
     }
 
     protected Rule createRule() {

@@ -31,7 +31,12 @@ class UnnecessaryBigDecimalInstantiationRule extends AbstractAstVisitorRule {
 class UnnecessaryBigDecimalInstantiationAstVisitor extends UnnecessaryInstantiationAstVisitor {
 
     UnnecessaryBigDecimalInstantiationAstVisitor() {
-        super(BigDecimal, [String, Double, Integer, Long], 'G')
+        super(BigDecimal, [String, Double], 'G')
+    }
+
+    @Override
+    protected boolean shouldSkipViolation(Object value) {
+        (value instanceof String) && !value.contains('.')
     }
 
     @Override

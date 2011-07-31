@@ -52,7 +52,9 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
                 && call.arguments.expressions.size() == 1) {
             Expression argument = call.arguments.expressions.head()
             parameterTypes.each { Class clazz ->
-                if (argument instanceof ConstantExpression && argument.value.getClass() == clazz) {
+                if (argument instanceof ConstantExpression
+                        && argument.value.getClass() == clazz
+                        && !shouldSkipViolation(argument.value)) {
                     boolean isSuffixNecessary = isTypeSuffixNecessary(argument.value)
                     def replacementOptions = isSuffixNecessary ?
                         "${argument.value}$suffix" :
@@ -62,5 +64,9 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitConstructorCallExpression call
+    }
+
+    protected boolean shouldSkipViolation(Object value) {
+        false
     }
 }
