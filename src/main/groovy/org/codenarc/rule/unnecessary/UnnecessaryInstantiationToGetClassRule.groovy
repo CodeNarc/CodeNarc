@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
   */
 class UnnecessaryInstantiationToGetClassRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryInstantiationToGetClass'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryInstantiationToGetClassAstVisitor
 }
 

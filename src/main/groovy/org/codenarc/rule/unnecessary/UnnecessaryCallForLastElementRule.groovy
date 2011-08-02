@@ -30,7 +30,7 @@ import org.codehaus.groovy.ast.expr.*
   */
 class UnnecessaryCallForLastElementRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCallForLastElement'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryCallForLastElementAstVisitor
 }
 

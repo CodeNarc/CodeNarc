@@ -30,7 +30,7 @@ import org.codenarc.util.AstUtil
   */
 class UnnecessarySelfAssignmentRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySelfAssignment'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessarySelfAssignmentAstVisitor
 }
 

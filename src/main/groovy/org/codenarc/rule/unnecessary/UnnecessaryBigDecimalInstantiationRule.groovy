@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
   */
 class UnnecessaryBigDecimalInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryBigDecimalInstantiation'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryBigDecimalInstantiationAstVisitor
 }
 

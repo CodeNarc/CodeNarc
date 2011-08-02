@@ -28,7 +28,7 @@ import org.codenarc.util.AstUtil
   */
 class UnnecessaryTransientModifierRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryTransientModifier'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryTransientModifierAstVisitor
 }
 

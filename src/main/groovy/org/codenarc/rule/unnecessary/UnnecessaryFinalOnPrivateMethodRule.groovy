@@ -27,7 +27,7 @@ import java.lang.reflect.Modifier
   */
 class UnnecessaryFinalOnPrivateMethodRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryFinalOnPrivateMethod'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryFinalOnPrivateMethodAstVisitor
 }
 

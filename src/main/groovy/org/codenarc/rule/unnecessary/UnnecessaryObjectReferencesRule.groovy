@@ -32,7 +32,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
   */
 class UnnecessaryObjectReferencesRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryObjectReferences'
-    int priority = 2
+    int priority = 3
     int maxReferencesAllowed = 5
     Class astVisitorClass = UnnecessaryObjectReferencesAstVisitor
 }

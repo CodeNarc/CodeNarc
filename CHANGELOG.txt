@@ -49,6 +49,7 @@ BUG FIXES and NEW FEATURES
 - #3380494: Automatically create report output folders.
 - #3376518: UnnecessaryBigDecimalInstantiation should not produce violations for new BigDecimal(42), new BigDecimal(42L) or new BigDecimal("42") - i.e., when the parameter evaluates to an integer/long.
 - #3376576: UnnecessaryParenthesesForMethodCallWithClosureRule: IllegalArgumentException: Start and end indexes are one based and have to be greater than zero.
+- #3384056: Unnecessary* rules should be priority 3.
 
 THANKS
 - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;

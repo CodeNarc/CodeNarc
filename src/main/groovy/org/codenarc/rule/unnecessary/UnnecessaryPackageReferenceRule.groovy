@@ -33,7 +33,7 @@ import org.codenarc.util.GroovyVersion
  */
 class UnnecessaryPackageReferenceRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryPackageReference'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryPackageReferenceAstVisitor
 }
 

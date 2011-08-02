@@ -33,7 +33,7 @@ import org.codehaus.groovy.ast.expr.Expression
   */
 class UnnecessaryCollectCallRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCollectCall'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryCollectCallAstVisitor
 }
 

@@ -26,7 +26,7 @@ import org.codenarc.rule.Rule
 class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'UnnecessaryFloatInstantiation'
     }
 

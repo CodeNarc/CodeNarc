@@ -29,7 +29,7 @@ import org.codehaus.groovy.ast.expr.Expression
   */
 class UnnecessaryModOneRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryModOne'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryModOneAstVisitor
 }
 

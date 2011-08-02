@@ -32,7 +32,7 @@ import org.codenarc.rule.AbstractConstructorCallAstVisitor
   */
 class UnnecessaryBooleanInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryBooleanInstantiation'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryBooleanInstantiationAstVisitor
 }
 

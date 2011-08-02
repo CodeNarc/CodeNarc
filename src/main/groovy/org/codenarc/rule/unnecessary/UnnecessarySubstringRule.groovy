@@ -28,7 +28,7 @@ import org.codenarc.util.AstUtil
   */
 class UnnecessarySubstringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySubstring'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessarySubstringAstVisitor
 }
 

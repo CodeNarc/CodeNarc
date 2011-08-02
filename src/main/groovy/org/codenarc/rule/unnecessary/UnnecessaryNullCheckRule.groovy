@@ -28,7 +28,7 @@ import org.codehaus.groovy.ast.expr.*
  */
 class UnnecessaryNullCheckRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryNullCheck'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryNullCheckAstVisitor
 }
 

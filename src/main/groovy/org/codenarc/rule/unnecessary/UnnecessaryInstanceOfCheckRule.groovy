@@ -28,7 +28,7 @@ import org.codenarc.util.AstUtil
   */
 class UnnecessaryInstanceOfCheckRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryInstanceOfCheck'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryInstanceOfCheckAstVisitor
 }
 

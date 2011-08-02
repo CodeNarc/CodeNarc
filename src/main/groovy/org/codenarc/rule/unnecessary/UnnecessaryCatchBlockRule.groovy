@@ -32,7 +32,7 @@ import org.codenarc.util.AstUtil
   */
 class UnnecessaryCatchBlockRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryCatchBlock'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryCatchBlockAstVisitor
 }
 

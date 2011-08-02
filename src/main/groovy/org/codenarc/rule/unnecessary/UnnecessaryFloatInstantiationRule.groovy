@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
   */
 class UnnecessaryFloatInstantiationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryFloatInstantiation'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryFloatInstantiationAstVisitor
 }
 
