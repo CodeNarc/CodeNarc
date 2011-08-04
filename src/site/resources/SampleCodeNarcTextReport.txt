@@ -1,4 +1,4 @@
-CodeNarc Report: Sample Project - Jun 9, 2011 6:37:52 PM
+CodeNarc Report: Sample Project - Aug 1, 2011 10:40:04 PM
 
 Summary: TotalFiles=7 FilesWithViolations=4 P1=0 P2=9 P3=5
 
@@ -24,4 +24,4 @@ File: org/codenarc/sample/service/SampleService.groovy
     Violation: Rule=UnnecessaryGroovyImport P=3 Line=3 Src=[import java.util.Map]
     Violation: Rule=UnusedImport P=3 Line=4 Src=[import org.codenarc.sample.domain.SampleDomain]
 
-[CodeNarc (http://www.codenarc.org) v0.14]
+[CodeNarc (http://www.codenarc.org) v0.15]
