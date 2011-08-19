@@ -4,6 +4,9 @@ http://www.codenarc.org
 
 Changes in version 0.16 (October 2011)
 -------------------------------------------
+NEW FEATURES
+- Performance Improvements (3394481) - There are big performance improvements in this release. 
+
 NEW AND UPDATED RULES
 - CouldBeElvis rule (basic) - Catch an if block that could be written as an elvis expression.
 

@@ -361,12 +361,19 @@ class AstUtil {
      */
     static boolean isMethodNamed(MethodCallExpression methodCall, String methodNamePattern, Integer numArguments = null) {
         def method = methodCall.method
-        def isNameMatch = method.properties['value']?.matches(methodNamePattern)
 
-        if (isNameMatch && numArguments != null) {
+        // !important: performance enhancement
+        final IS_NAME_MATCH
+        if (method instanceof ConstantExpression) {
+            IS_NAME_MATCH = method.value?.matches(methodNamePattern)
+        } else {
+            IS_NAME_MATCH = method.properties['value']?.matches(methodNamePattern)
+        }
+
+        if (IS_NAME_MATCH && numArguments != null) {
             return getMethodArguments(methodCall).size() == numArguments
         }
-        isNameMatch
+        IS_NAME_MATCH
     }
 
     /**
@@ -410,7 +417,17 @@ class AstUtil {
      */
     static List getVariableExpressions(DeclarationExpression declarationExpression) {
         def leftExpression = declarationExpression.leftExpression
-        leftExpression.properties['expressions'] ?: [leftExpression]
+
+        // !important: performance enhancement
+        if (leftExpression instanceof ArrayExpression) {
+            leftExpression.expressions ?: [leftExpression]
+        } else if (leftExpression instanceof ListExpression) {
+            leftExpression.expressions ?: [leftExpression]
+        } else if (leftExpression instanceof TupleExpression) {
+            leftExpression.expressions ?: [leftExpression]
+        } else {
+            leftExpression.properties['expressions'] ?: [leftExpression]
+        }
     }
 
     /**
@@ -709,7 +726,20 @@ class AstUtil {
      * true if definitely public, false if not public or unknown
      */
     static boolean isPublic(ASTNode node) {
-        def modifiers = node.properties['modifiers']
+
+        def modifiers
+        // !important - Performance improvement
+        if (node instanceof ClassNode) {
+            modifiers = node.modifiers
+        } else if (node instanceof FieldNode) {
+            modifiers = node.modifiers
+        }else if (node instanceof MethodNode) {
+            modifiers = node.modifiers
+        }else if (node instanceof PropertyNode) {
+            modifiers = node.modifiers
+        } else {
+            modifiers = node.properties['modifiers']
+        }
         if (modifiers && modifiers instanceof Integer) {
             return Modifier.isPublic(modifiers)
         }
