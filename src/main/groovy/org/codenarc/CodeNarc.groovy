@@ -129,15 +129,10 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     }
 
     protected void setDefaultsIfNecessary() {
-        if (!baseDir) {
-            baseDir = '.'
-        }
-        if (!includes) {
-            includes = '**/*.groovy'
-        }
-        if (!ruleSetFiles) {
-            ruleSetFiles = 'rulesets/basic.xml'
-        }
+        baseDir = baseDir ?: '.'
+        includes = includes  ?: '**/*.groovy'
+        ruleSetFiles = ruleSetFiles ?: 'rulesets/basic.xml'
+
         if (reports.empty) {
             reports << new HtmlReportWriter(title:title)
         }

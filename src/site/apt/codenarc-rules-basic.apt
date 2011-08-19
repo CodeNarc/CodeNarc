@@ -1332,3 +1332,21 @@ Basic Rules  ("<rulesets/basic.xml>")
     }
 -------------------------------------------------------------------------------
 
+
+* CouldBeElvis Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Catch an if block that could be written as an elvis expression.
+
+  Example of violations:
+  
+-------------------------------------------------------------------------------
+// violation
+if (!x) {
+    x = 'some value'
+}
+
+// OK
+x ?: 'some value'
+-------------------------------------------------------------------------------

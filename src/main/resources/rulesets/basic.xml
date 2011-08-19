@@ -83,4 +83,5 @@
     <rule class='org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyCollectionRule'/>
     <rule class='org.codenarc.rule.basic.SimpleDateFormatMissingLocaleRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.CouldBeElvisRule'/>
 </ruleset>

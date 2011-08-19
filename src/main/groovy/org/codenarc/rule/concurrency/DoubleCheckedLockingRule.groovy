@@ -17,11 +17,11 @@ package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.Expression
+
 import org.codehaus.groovy.ast.expr.NotExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.ExpressionStatement
+
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -48,35 +48,26 @@ class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
     }
 
     private addViolationOnDoubleLocking(IfStatement node) {
-        if (!expressionIsNullCheck(node)) {
+        if (!AstUtil.expressionIsNullCheck(node)) {
             return
         }
         SynchronizedStatement syncStatement = getSynchronizedStatement(node.ifBlock)
         if (!syncStatement) {
             return
         }
-        if (!isOneLiner(syncStatement.code)) {
+        if (!AstUtil.isOneLiner(syncStatement.code)) {
             return
         }
         def synchContents = syncStatement.code.statements[0]
-        if (expressionIsNullCheck(synchContents)) {
+        if (AstUtil.expressionIsNullCheck(synchContents)) {
             def varName1 = getNullCheckVariableName(node.booleanExpression)
             def varName2 = getNullCheckVariableName(synchContents.booleanExpression)
             if (varName1 == varName2) {
-                if (isOneLiner(synchContents.ifBlock) && expressionIsAssignment(synchContents.ifBlock.statements[0], varName2)) {
+                if (AstUtil.isOneLiner(synchContents.ifBlock) && AstUtil.expressionIsAssignment(synchContents.ifBlock.statements[0], varName2)) {
                     addViolation(synchContents.ifBlock.statements[0], "Double checked locking detected for variable ${varName1}. replace with more robust lazy initialization")
                 }
             }
         }
-    }
-
-    private static boolean isOneLiner(statement) {
-        if (statement instanceof BlockStatement) {
-            if (statement.statements?.size() == 1) {
-                return true
-            }
-        }
-        false
     }
 
     private static SynchronizedStatement getSynchronizedStatement(ASTNode statement) {
@@ -88,25 +79,6 @@ class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
         null
     }
 
-    private static boolean expressionIsNullCheck(ASTNode node) {
-        if (!(node instanceof IfStatement)) {
-            return false
-        }
-        if (!(node.booleanExpression instanceof BooleanExpression)) {
-            return false
-        }
-        def booleanExp = node.booleanExpression
-        if (AstUtil.isBinaryExpressionType(booleanExp.expression, '==')) {
-            if (AstUtil.isNull(booleanExp.expression.leftExpression) && booleanExp.expression.rightExpression instanceof VariableExpression) {
-                return true
-            } else if (AstUtil.isNull(booleanExp.expression.rightExpression) && booleanExp.expression.leftExpression instanceof VariableExpression) {
-                return true
-            }
-        } else if (booleanExp.expression instanceof NotExpression && booleanExp.expression.expression instanceof VariableExpression) {
-            return true
-        }
-        false
-    }
 
     private static String getNullCheckVariableName(ASTNode node) {
         if (!(node instanceof BooleanExpression)) {
@@ -124,16 +96,4 @@ class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
         null
     }
 
-    private static boolean expressionIsAssignment(ASTNode node, String variableName) {
-        if (node instanceof Expression && AstUtil.isBinaryExpressionType(node, '=')) {
-            if (AstUtil.isVariable(node.leftExpression, variableName)) {
-                return true
-            }
-        } else if (node instanceof ExpressionStatement && AstUtil.isBinaryExpressionType(node.expression, '=')) {
-            if (AstUtil.isVariable(node.expression.leftExpression, variableName)) {
-                return true
-            }
-        }
-        false
-    }
 }

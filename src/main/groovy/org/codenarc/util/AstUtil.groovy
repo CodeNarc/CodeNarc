@@ -23,6 +23,7 @@ import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.*
 import org.codehaus.groovy.ast.expr.*
 import java.util.concurrent.locks.ReentrantLock
+import org.codehaus.groovy.ast.stmt.IfStatement
 
 /**
  * Contains static utility methods and constants related to Groovy AST.
@@ -921,5 +922,47 @@ class AstUtil {
     static String getRawLine(sourceCode, int lineNumber) {
         def allLines = sourceCode.getLines()
         (lineNumber >= 0) && lineNumber < allLines.size() ? allLines[lineNumber] : null
+    }
+
+    static boolean isOneLiner(statement) {
+        if (statement instanceof BlockStatement) {
+            if (statement.statements?.size() == 1) {
+                return true
+            }
+        }
+        false
+    }
+
+    static boolean expressionIsNullCheck(ASTNode node) {
+        if (!(node instanceof IfStatement)) {
+            return false
+        }
+        if (!(node.booleanExpression instanceof BooleanExpression)) {
+            return false
+        }
+        def booleanExp = node.booleanExpression
+        if (AstUtil.isBinaryExpressionType(booleanExp.expression, '==')) {
+            if (AstUtil.isNull(booleanExp.expression.leftExpression) && booleanExp.expression.rightExpression instanceof VariableExpression) {
+                return true
+            } else if (AstUtil.isNull(booleanExp.expression.rightExpression) && booleanExp.expression.leftExpression instanceof VariableExpression) {
+                return true
+            }
+        } else if (booleanExp.expression instanceof NotExpression && booleanExp.expression.expression instanceof VariableExpression) {
+            return true
+        }
+        false
+    }
+
+    static boolean expressionIsAssignment(ASTNode node, String variableName) {
+        if (node instanceof Expression && AstUtil.isBinaryExpressionType(node, '=')) {
+            if (AstUtil.isVariable(node.leftExpression, variableName)) {
+                return true
+            }
+        } else if (node instanceof ExpressionStatement && AstUtil.isBinaryExpressionType(node.expression, '=')) {
+            if (AstUtil.isVariable(node.expression.leftExpression, variableName)) {
+                return true
+            }
+        }
+        false
     }
 }

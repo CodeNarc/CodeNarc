@@ -2,6 +2,14 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.16 (October 2011)
+-------------------------------------------
+NEW AND UPDATED RULES
+- CouldBeElvis rule (basic) - Catch an if block that could be written as an elvis expression.
+
+THANKS
+- Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.
+
 Changes in version 0.15 (August 2011)
 -------------------------------------------
 NEW AND UPDATED RULES
