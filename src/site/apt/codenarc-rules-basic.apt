@@ -442,6 +442,24 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* CouldBeElvis Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.15>
+
+  Catch an if block that could be written as an elvis expression.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+// violation
+if (!x) {
+    x = 'some value'
+}
+
+// OK
+x ?: 'some value'
+-------------------------------------------------------------------------------
+
 * DeadCode Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -1217,6 +1235,21 @@ Basic Rules  ("<rulesets/basic.xml>")
   <<<else>>> branch and the boolean test of the <<<if>>> is negated. For instance <<<if (!x) false else true>>>.
   It is usually clearer to write this as <<<if (x) true else false>>>.
 
+* LongLiteralWithLowerCaseL Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.16>
+
+  In Java and Groovy, you can specify long literals with the L or l character,
+  for instance 55L or 24l. It is best practice to always use an uppercase L and never
+  a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
+
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def x = 1l
+    def y = 55l
+-------------------------------------------------------------------------------
 
 * RandomDoubleCoercedToZero Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1332,21 +1365,3 @@ Basic Rules  ("<rulesets/basic.xml>")
     }
 -------------------------------------------------------------------------------
 
-
-* CouldBeElvis Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
-
-  Catch an if block that could be written as an elvis expression.
-
-  Example of violations:
-  
--------------------------------------------------------------------------------
-// violation
-if (!x) {
-    x = 'some value'
-}
-
-// OK
-x ?: 'some value'
--------------------------------------------------------------------------------

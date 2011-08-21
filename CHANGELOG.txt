@@ -9,6 +9,7 @@ NEW FEATURES
 
 NEW AND UPDATED RULES
 - CouldBeElvis rule (basic) - Catch an if block that could be written as an elvis expression.
+- LongLiteralWithLowerCaseL rule (basic) - In Java and Groovy, you can speicfy long literals with the L or l character, for instance 55L or 24l. It is best practice to always use an uppercase L and never a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
 
 THANKS
 - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.
