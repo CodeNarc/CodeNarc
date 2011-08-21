@@ -41,5 +41,5 @@ interface AstVisitor extends GroovyClassVisitor {
      * Retrieve the List of Violations resulting from applying this visitor
      * @return the List of Violations; may be empty
      */
-    List getViolations()
+    List<Violation> getViolations()
 }
