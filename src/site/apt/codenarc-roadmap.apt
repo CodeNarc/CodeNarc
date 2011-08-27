@@ -13,6 +13,8 @@ CodeNarc - Road Map
 
   * More rules
 
+  * Performance improvements.
+
 
 * Long-Term Goals
 ~~~~~~~~~~~~~~~~~
@@ -26,8 +28,6 @@ CodeNarc - Road Map
 
 ** Considering (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  * Create Eclipse plugin.
 
   * Create Netbeans plugin.
 
