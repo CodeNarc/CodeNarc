@@ -103,12 +103,10 @@ class SourceCodeUtilTest extends AbstractTestCase {
 }
 
 class SourceCodeUtilTestVisitor extends ClassCodeVisitorSupport {
-    def methodCalls = [:]
 
-    @Override
-    protected SourceUnit getSourceUnit() {
-        return null
-    }
+    final SourceUnit sourceUnit = null
+
+    def methodCalls = [:]
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {

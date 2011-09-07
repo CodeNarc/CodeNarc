@@ -679,7 +679,7 @@ class AstUtil {
      * Tells you if the ASTNode is a method node for the given name, arity, and return type.
      * @param node
      *      the node to inspect
-     * @param methodName
+     * @param methodNamePattern
      *      the expected name of the method
      * @param numArguments
      *      the expected number of arguments, optional
@@ -688,11 +688,11 @@ class AstUtil {
      * @return
      * true if this node is a MethodNode meeting the parameters. false otherwise
      */
-    static boolean isMethodNode(ASTNode node, String methodName, Integer numArguments = null, Class returnType = null) {
+    static boolean isMethodNode(ASTNode node, String methodNamePattern, Integer numArguments = null, Class returnType = null) {
         if (!(node instanceof MethodNode)) {
             return false
         }
-        if (node.name != methodName) {
+        if (!(node.name ==~ methodNamePattern)) {
             return false
         }
         if (numArguments != null && node.parameters?.length != numArguments) {

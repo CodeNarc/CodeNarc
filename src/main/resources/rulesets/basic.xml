@@ -85,4 +85,5 @@
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.CouldBeElvisRule'/>
     <rule class='org.codenarc.rule.basic.LongLiteralWithLowerCaseLRule'/>
+    <rule class='org.codenarc.rule.basic.ConfusingMultipleReturnsRule'/>
 </ruleset>

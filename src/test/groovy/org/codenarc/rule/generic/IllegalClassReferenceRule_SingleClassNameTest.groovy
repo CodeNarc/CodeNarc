@@ -28,10 +28,7 @@ import org.codenarc.rule.Rule
  */
 class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferenceRuleTestCase {
 
-    @Override
-    protected String getClassName() {
-        'com.example.MyExampleClass'
-    }
+    final String className = 'com.example.MyExampleClass'  
 
     void testRuleProperties() {
         rule = new IllegalClassReferenceRule()

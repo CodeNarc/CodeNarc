@@ -56,12 +56,10 @@ class CyclomaticComplexityRule extends AbstractAstVisitorRule {
 
 class CyclomaticComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
 
+    final String metricShortDescription = 'cyclomatic complexity'
+
     protected Object createMetric() {
         new CyclomaticComplexityMetric()
-    }
-
-    protected String getMetricShortDescription() {
-        'cyclomatic complexity'
     }
 
     protected Object getMaxMethodMetricValue() {

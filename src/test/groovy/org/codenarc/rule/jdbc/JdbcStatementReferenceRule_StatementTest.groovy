@@ -25,10 +25,7 @@ import org.codenarc.rule.AbstractClassReferenceRuleTestCase
  */
 class JdbcStatementReferenceRule_StatementTest extends AbstractClassReferenceRuleTestCase {
 
-    @Override
-    protected String getClassName() {
-        'java.sql.Statement'
-    }
+    final String className = 'java.sql.Statement'
 
     void testRuleProperties() {
         assert rule.priority == 2

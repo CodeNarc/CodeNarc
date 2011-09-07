@@ -658,6 +658,44 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
+* UnnecessaryOverridingGetter Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.16>
+
+  If a parent class defines a method that follows the Java getter notation, and a subclass overrides that method to
+  return a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    interface Parent {
+        String getSomething()
+        String getSomethingElse()
+    }
+
+    class Child extends Parent {
+        static VALUE = 'value'
+
+        @Override
+        String getSomething() {
+            'something'         // this could be simplified
+        }
+
+        @Override
+        String getSomethingElse() {
+            VALUE       // this could be simplified
+        }
+
+    }
+
+    class Child2 extends Parent {
+        static VALUE = 'value'
+        final String something = 'something'  // this is cleaner
+        final String somethingElse = VALUE      // this is cleaner
+    }
+-------------------------------------------------------------------------------
+
+
 * UnnecessaryOverridingMethod Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>

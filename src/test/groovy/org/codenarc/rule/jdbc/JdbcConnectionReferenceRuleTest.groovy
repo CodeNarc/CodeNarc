@@ -25,10 +25,7 @@ import org.codenarc.rule.AbstractClassReferenceRuleTestCase
  */
 class JdbcConnectionReferenceRuleTest extends AbstractClassReferenceRuleTestCase {
 
-    @Override
-    protected String getClassName() {
-        'java.sql.Connection'
-    }
+    final String className = 'java.sql.Connection'
 
     void testRuleProperties() {
         assert rule.priority == 2

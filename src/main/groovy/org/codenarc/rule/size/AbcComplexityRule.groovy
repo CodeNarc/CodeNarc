@@ -57,12 +57,10 @@ class AbcComplexityRule extends AbstractAstVisitorRule {
 
 class AbcComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
 
+    final String metricShortDescription = 'ABC score'
+
     protected Object createMetric() {
         new AbcMetric()
-    }
-
-    protected String getMetricShortDescription() {
-        'ABC score'
     }
 
     protected Object getMaxMethodMetricValue() {

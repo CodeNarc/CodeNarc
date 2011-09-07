@@ -25,10 +25,7 @@ import org.codenarc.rule.AbstractClassReferenceRuleTestCase
  */
 class JdbcStatementReferenceRule_CallableStatementTest extends AbstractClassReferenceRuleTestCase {
 
-    @Override
-    protected String getClassName() {
-        'java.sql.CallableStatement'
-    }
+    final String className = 'java.sql.CallableStatement'
 
     protected Rule createRule() {
         new JdbcStatementReferenceRule()
