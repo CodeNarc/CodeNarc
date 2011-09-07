@@ -15,13 +15,12 @@
  */
 package org.codenarc.rule.naming
 
+import org.codehaus.groovy.ast.ConstructorNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.ConstructorNode
-import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that verifies that the name of each parameter matches a regular expression. This rule applies
@@ -52,18 +51,6 @@ class ParameterNameRule extends AbstractAstVisitorRule {
 
 class ParameterNameAstVisitor extends AbstractAstVisitor  {
 
-    final static DEFAULT_NAME = '<unknown>'
-    def className = DEFAULT_NAME
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-        className = node.name
-    }
-
-    @Override protected void visitClassComplete(ClassNode node) {
-        className = DEFAULT_NAME
-    }
-
     void visitMethodEx(MethodNode methodNode) {
         processParameters(methodNode.parameters, methodNode.name)
         super.visitMethodEx(methodNode)
@@ -85,7 +72,7 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
         parameters.each { parameter ->
             if (!new WildcardPattern(rule.ignoreParameterNames, false).matches(parameter.name)) {
                 if (parameter.lineNumber >= 0 && !(parameter.name ==~ rule.regex)) {
-                    addViolation(parameter, "The parameter named $parameter.name in method $methodName of class $className does not match ${rule.regex.toString()}")
+                    addViolation(parameter, "The parameter named $parameter.name in method $methodName of class $currentClassName does not match ${rule.regex.toString()}")
                 }
             }
         }

@@ -42,12 +42,10 @@ class SynchronizedReadObjectMethodRule extends AbstractAstVisitorRule {
 
     class SynchronizedReadObjectMethodAstVisitor extends AbstractAstVisitor {
         ClassNode serializableClass = null
-        String currentClassName = null
 
         @Override
         protected void visitClassEx(ClassNode node) {
 
-            currentClassName = node.name
             node.interfaces?.each {
                 if (AstUtil.classNodeImplementsType(it, Serializable)) {
                     serializableClass = it

@@ -20,7 +20,6 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that verifies that the name of each variable matches a regular expression. By default it checks that
@@ -52,18 +51,6 @@ class VariableNameRule extends AbstractAstVisitorRule {
 
 class VariableNameAstVisitor extends AbstractAstVisitor  {
 
-    final static DEFAULT_NAME = '<unknown>'
-    def className = DEFAULT_NAME
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-        className = node.name
-    }
-
-    @Override protected void visitClassComplete(ClassNode node) {
-        className = DEFAULT_NAME
-    }
-
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
         if (isFirstVisit(declarationExpression)) {
@@ -75,7 +62,7 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
 
                 if (!new WildcardPattern(rule.ignoreVariableNames, false).matches(varExpression.name) &&
                         !(varExpression.name ==~ re)) {
-                    def msg = "Variable named $varExpression.name in class $className does not match the pattern ${re.toString()}"
+                    def msg = "Variable named $varExpression.name in class $currentClassName does not match the pattern ${re.toString()}"
                     addViolation(declarationExpression, msg)
                 }
             }

@@ -22,7 +22,6 @@ import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Catches concatenation of two string literals on the same line. These can safely by joined. 
@@ -36,23 +35,12 @@ class ConsecutiveStringConcatenationRule extends AbstractAstVisitorRule {
 }
 
 class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
-    private static final DEFAULT_NAME = '<unknown>'
     private static final PRIMITIVE_TYPES = [Byte.TYPE,
             Double.TYPE,
             Float.TYPE,
             Integer.TYPE,
             Long.TYPE,
             Short.TYPE]
-    def className = DEFAULT_NAME
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-        className = node.name
-    }
-
-    @Override protected void visitClassComplete(ClassNode node) {
-        className = DEFAULT_NAME
-    }
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
@@ -62,11 +50,11 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
             Expression right = expression.rightExpression
             if (areJoinableConstants(left, right)) {
                 if (left instanceof GStringExpression || right instanceof GStringExpression) {
-                    addViolation(expression, "String concatenation in class $className can be joined into a single literal")
+                    addViolation(expression, "String concatenation in class $currentClassName can be joined into a single literal")
                 } else {
                     def lvalue = escape(left.value)
                     def rvalue = escape(right.value)
-                    addViolation(expression, "String concatenation in class $className can be joined into the literal '${lvalue}${rvalue}'")
+                    addViolation(expression, "String concatenation in class $currentClassName can be joined into the literal '${lvalue}${rvalue}'")
                 }
             }
         }
