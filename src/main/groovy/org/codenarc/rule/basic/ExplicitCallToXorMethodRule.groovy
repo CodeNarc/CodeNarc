@@ -32,7 +32,7 @@ class ExplicitCallToXorMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToXorMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def ExplicitCallToXorMethodAstVisitor() {
+    ExplicitCallToXorMethodAstVisitor() {
         super('xor')
     }
 

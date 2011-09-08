@@ -37,7 +37,7 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
         this.methodName = methodName
     }
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
         if (!AstUtil.isSafe(call) && !AstUtil.isSpreadSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
             boolean isAllowedCallOnThis = rule.ignoreThisReference && AstUtil.isMethodCallOnObject(call, 'this')
             boolean isAllowedCallOnSuper = AstUtil.isMethodCallOnObject(call, 'super')

@@ -32,7 +32,7 @@ class ExplicitCallToRightShiftMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToRightShiftMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def ExplicitCallToRightShiftMethodAstVisitor() {
+    ExplicitCallToRightShiftMethodAstVisitor() {
         super('rightShift')
     }
 

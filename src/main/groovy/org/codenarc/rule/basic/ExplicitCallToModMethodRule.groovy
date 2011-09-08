@@ -31,7 +31,7 @@ class ExplicitCallToModMethodRule extends AbstractAstVisitorRule {
 }
 
 class ExplicitCallToModMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
-    def ExplicitCallToModMethodAstVisitor() {
+    ExplicitCallToModMethodAstVisitor() {
         super('mod')
     }
 

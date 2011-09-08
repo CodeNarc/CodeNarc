@@ -210,6 +210,37 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   <<<public>>>, has an empty body, and takes no arguments.
 
 
+
+* UnnecessaryDefInFieldDeclaration Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.16>
+
+  If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        // def is redundant
+        static def constraints = {  }
+
+        // def and private is redundant
+        def private field1 = { }
+
+        // def and protected is redundant
+        def protected field2 = { }
+
+        // def and public is redundant
+        def public field3 = { }
+
+        // def and static is redundant
+        def static field4 = { }
+
+        // def and type is redundant
+        def Object field5 = { }
+    }
+-------------------------------------------------------------------------------
+
 * UnnecessaryDefInMethodDeclaration Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -233,6 +264,10 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
     // def and type is redundant
     def Object method5() { return 4 }
+
+    class MyClass {
+        def MyClass() {}    // def is redundant
+    }
 -------------------------------------------------------------------------------
 
 

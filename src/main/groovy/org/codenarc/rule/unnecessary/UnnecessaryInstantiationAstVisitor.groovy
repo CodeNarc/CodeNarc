@@ -38,6 +38,7 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
         this.suffix = suffix
     }
 
+    @SuppressWarnings('UnusedMethodParameter')
     protected boolean isTypeSuffixNecessary(argument) {
         return true
     }
@@ -66,6 +67,7 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
         super.visitConstructorCallExpression call
     }
 
+    @SuppressWarnings('UnusedMethodParameter')
     protected boolean shouldSkipViolation(Object value) {
         false
     }

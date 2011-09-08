@@ -48,5 +48,6 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryInstanceOfCheckRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessarySubstringRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryOverridingGetterRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule'/>
 </ruleset>
 

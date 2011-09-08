@@ -31,7 +31,7 @@ class ExplicitCallToAndMethodRule extends AbstractAstVisitorRule {
 }
 
 class ExplicitCallToAndMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
-    def ExplicitCallToAndMethodAstVisitor() {
+    ExplicitCallToAndMethodAstVisitor() {
         super('and')
     }
 

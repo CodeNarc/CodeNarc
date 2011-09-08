@@ -127,6 +127,33 @@ Unused Rules  ("<rulesets/unused.xml>")
   * You can specify an ignore list using the 'ignoreRegex' property. By default, a parameter named 'ignore' or 'ignored'
     does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property.
 
+* UnusedMethodParameter Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <New in CodeNarc 0.16>
+
+  This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by
+  the UnusedPrivateMethodParameter rule) or methods marked @Override.
+
+  * You can specify an ignore list using the 'ignoreRegex' property. By default, a parameter named 'ignore' or 'ignored'
+    does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property.
+
+  * You can specify a class name pattern to ignore using the 'categoryClassRegex' property. By default classes named
+    '*.Category' are ignored because they are category classes and have unused parameters in static methods.
+    
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        def method(def param) {
+            // param is unused
+        }
+
+        @Override
+        def otherMethod(def param) {
+            // this is OK because it overrides a super class
+        }
+    }
+-------------------------------------------------------------------------------
 
 * UnusedVariable Rule
 ~~~~~~~~~~~~~~~~~~~~~~~

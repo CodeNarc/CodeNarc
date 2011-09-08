@@ -32,7 +32,7 @@ class ExplicitCallToCompareToMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToCompareToMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def ExplicitCallToCompareToMethodAstVisitor() {
+    ExplicitCallToCompareToMethodAstVisitor() {
         super('compareTo')
     }
 

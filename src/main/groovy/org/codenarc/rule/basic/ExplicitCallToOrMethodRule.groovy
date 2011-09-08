@@ -31,7 +31,7 @@ class ExplicitCallToOrMethodRule extends AbstractAstVisitorRule {
 }
 
 class ExplicitCallToOrMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
-    def ExplicitCallToOrMethodAstVisitor() {
+    ExplicitCallToOrMethodAstVisitor() {
         super('or')
     }
 

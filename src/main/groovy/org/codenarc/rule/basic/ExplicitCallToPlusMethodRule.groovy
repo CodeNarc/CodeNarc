@@ -32,7 +32,7 @@ class ExplicitCallToPlusMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToPlusMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def ExplicitCallToPlusMethodAstVisitor() {
+    ExplicitCallToPlusMethodAstVisitor() {
         super('plus')
     }
 

@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -33,68 +34,41 @@ class UnnecessaryDefInMethodDeclarationRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
+
     @Override
-    void visitMethodEx(MethodNode node) {
-        String declaration = getDeclaration(node)
+    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
+        String declaration = AstUtil.getDeclaration(node, sourceCode)
 
         if (contains(declaration, 'def')) {
-            if (contains(declaration, 'private')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked private')
+            if (isConstructor) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded on constructors")
+            } else if (contains(declaration, 'private')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked private")
             } else if (contains(declaration, 'protected')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked protected')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked protected")
             } else if (contains(declaration, 'public')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked public')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked public")
             } else if (contains(declaration, 'static')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked static')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked static")
             } else if (contains(declaration, 'final')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked final')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked final")
             } else if (contains(declaration, 'synchronized')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked synchronized')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked synchronized")
             } else if (contains(declaration, 'abstract')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked abstract')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked abstract")
             } else if (contains(declaration, 'strictfp')) {
-                addViolation(node, 'The def keyword is unneeded when a method is marked strictfp')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method is marked strictfp")
             } else if (contains(declaration, 'Object')) {
-                addViolation(node, 'The def keyword is unneeded when a method returns the Object type')
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method returns the Object type")
+            } else if (node.returnType != ClassHelper.DYNAMIC_TYPE) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a method specifies a return type")
             }
         }
 
         super.visitMethodEx(node)
     }
 
-    private String getDeclaration(MethodNode node) {
-        if ([node.lineNumber, node.lastLineNumber, node.columnNumber, node.lastColumnNumber].any{ it < 1 }) {
-            return ''
-        }
-
-        String acc = ''
-        for (lineIndex in (node.lineNumber-1 .. node.lastLineNumber-1)) {
-            // the raw line is required to apply columnNumber and lastColumnNumber
-            def line = AstUtil.getRawLine(sourceCode, lineIndex)
-
-            // extract the relevant part of the first line
-            if (lineIndex == node.lineNumber - 1) {
-                int nonRelevantColumns = node.columnNumber - 1
-                line = line.replaceFirst(".{$nonRelevantColumns}", ' ' * nonRelevantColumns) // retain the line length as it's important when using lastColumnNumber
-            }
-
-            // extract the relevant part of the last line
-            if (lineIndex == node.lastLineNumber - 1) {
-                def stopIndex = node.lastColumnNumber < line.size() ? node.lastColumnNumber - 2 : line.size() - 1
-                line = line[0..stopIndex]
-            }
-
-            if (line.contains('{')) {
-                acc += line[0..<line.indexOf('{')]
-                break
-            } else {
-                acc += line + ' '
-            }
-        }
-        acc
-    }
-
-    private boolean contains(String declaration, String modifier) {
+    private static boolean contains(String declaration, String modifier) {
         declaration?.startsWith(modifier) || declaration?.contains(' ' + modifier + ' ')
     }
 }

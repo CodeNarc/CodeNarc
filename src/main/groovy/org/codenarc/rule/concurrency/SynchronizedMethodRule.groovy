@@ -37,7 +37,7 @@ class SynchronizedMethodRule extends AbstractAstVisitorRule {
 
 class SynchronizedMethodAstVisitor extends AbstractAstVisitor  {
 
-    def void visitMethodEx(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         if (isFirstVisit(node)) {
             if (Modifier.isSynchronized(node.getModifiers())) {
                 addViolation(node, "The method $node.name is synchronized at the method level")

@@ -36,7 +36,7 @@ class JUnitStyleAssertionsRule extends AbstractAstVisitorRule {
 
 class JUnitStyleAssertionsAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
 
         // TODO better suggestions
         def objects = ['Assert', 'this']

@@ -15,9 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.AnnotatedNode
-import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -38,80 +36,43 @@ class UnnecessaryDefInVariableDeclarationRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessaryDefInVariableDeclarationAstVisitor extends AbstractAstVisitor {
-    @Override
-    void visitFieldEx(FieldNode node) {
-        checkViolations(node)
-
-        super.visitFieldEx(node)
-    }
-
+    
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {
-        if (!(statement.expression instanceof DeclarationExpression)) { return }
-        if (!(statement.expression.leftExpression instanceof VariableExpression)) { return }
+        def node = statement.expression
 
-        checkViolations(statement.expression)
+        if (!(node instanceof DeclarationExpression)) { return }
+        if (!(node.leftExpression instanceof VariableExpression)) { return }
+
+        String declaration = AstUtil.getDeclaration(node, sourceCode)
+        declaration = declaration[0..(declaration.indexOf('='))] // ignore everything to the right of equals
+        
+        if (contains(declaration, 'def')) {
+            if (contains(declaration, 'private')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked private")
+            } else if (contains(declaration, 'protected')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked protected")
+            } else if (contains(declaration, 'public')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked public")
+            } else if (contains(declaration, 'static')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked static")
+            } else if (contains(declaration, 'final')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked final")
+            } else if (contains(declaration, 'transient')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked transient")
+            } else if (contains(declaration, 'volatile')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked volatile")
+            } else if (contains(declaration, 'Object')) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is of type Object")
+            } else if (node.leftExpression.type != ClassHelper.DYNAMIC_TYPE) {
+                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is declared with a type")
+            }
+        }
 
         super.visitExpressionStatement(statement)
     }
 
-    private checkViolations(ASTNode node) {
-        String declaration = getDeclaration(node)
-
-        if (contains(declaration, 'def')) {
-            if (contains(declaration, 'private')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is marked private')
-            } else if (contains(declaration, 'protected')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is marked protected')
-            } else if (contains(declaration, 'public')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is marked public')
-            } else if (contains(declaration, 'static')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is marked static')
-            } else if (contains(declaration, 'final')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is marked final')
-            } else if (contains(declaration, 'transient')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is marked transient')
-            } else if (contains(declaration, 'volatile')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is marked volatile')
-            } else if (contains(declaration, 'Object')) {
-                addViolation(node, 'The def keyword is unneeded when a variable is of type Object')
-            }
-        }
-    }
-
-    private String getDeclaration(AnnotatedNode node) {
-        if ([node.lineNumber, node.lastLineNumber, node.columnNumber, node.lastColumnNumber].any{ it < 1 }) {
-            return ''
-        }
-
-        String acc = ''
-        for (lineIndex in (node.lineNumber-1 .. node.lastLineNumber-1)) {
-            // the raw line is required to apply columnNumber and lastColumnNumber
-            def line = AstUtil.getRawLine(sourceCode, lineIndex)
-
-            // extract the relevant part of the first line
-            if (lineIndex == node.lineNumber - 1) {
-                int nonRelevantColumns = node.columnNumber - 1
-                line = line.replaceFirst(".{$nonRelevantColumns}", ' ' * nonRelevantColumns) // retain the line length as it's important when using lastColumnNumber
-            }
-
-            // extract the relevant part of the last line
-            if (lineIndex == node.lastLineNumber - 1) {
-                def stopIndex = node.lastColumnNumber < line.size() ? node.lastColumnNumber - 2 : line.size() - 1
-                line = line[0..stopIndex]
-            }
-
-            if (line.contains('=')) {
-                acc += line[0..<line.indexOf('=')]
-                break
-            } else {
-                acc += line + ' '
-            }
-        }
-        acc
-    }
-
-    private boolean contains(String declaration, String modifier) {
-        declaration?.startsWith(modifier) || declaration?.contains(' ' + modifier + ' ')
+    static private boolean contains(String declaration, String modifier) {
+        return declaration?.startsWith(modifier) || declaration?.contains(' ' + modifier + ' ')
     }
 }

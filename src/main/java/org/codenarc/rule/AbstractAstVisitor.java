@@ -37,7 +37,7 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
     private SourceCode sourceCode;
     private Set<Object> visited = new HashSet<Object>();
     private final List<Boolean> isSuppressed = new ArrayList<Boolean>();
-    private String currentClassName = "<UNKNOWN>";
+    private ClassNode currentClassNode = null;
 
     /**
      * Return true if the AST expression has not already been visited. If it is
@@ -133,7 +133,7 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
     }
 
     public final void visitClass(final ClassNode node) {
-        currentClassName = node.getName();
+        currentClassNode = node;
         withSuppressionCheck(node, new Runnable() {
             public void run() {
                 visitClassEx(node);
@@ -141,7 +141,7 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
                 visitClassComplete(node);
             }
         });
-        currentClassName = "<UNKNOWN>";
+        currentClassNode = null;
     }
 
     protected void visitClassEx(ClassNode node) {
@@ -269,6 +269,10 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
     }
 
     protected String getCurrentClassName() {
-        return currentClassName;
+        return currentClassNode.getName();
+    }
+
+    protected ClassNode getCurrentClassNode() {
+        return currentClassNode;
     }
 }

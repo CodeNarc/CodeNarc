@@ -31,6 +31,7 @@ class TestCountRule extends AbstractRule {
      * Increment count and add no violations
      * @param sourceCode - the sourceCode to which the rule is applied
      */
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         count ++
     }

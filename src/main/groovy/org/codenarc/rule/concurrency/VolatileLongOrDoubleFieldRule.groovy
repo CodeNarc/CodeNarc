@@ -38,7 +38,7 @@ class VolatileLongOrDoubleFieldRule extends AbstractAstVisitorRule {
 
 class VolatileLongOrDoubleFieldVisitor extends AbstractAstVisitor  {
 
-    def void visitFieldEx(FieldNode node) {
+    void visitFieldEx(FieldNode node) {
         if (node?.type == ClassHelper.double_TYPE ||
                 node?.type == ClassHelper.long_TYPE ||
                 node?.type?.name == 'Long' ||

@@ -35,7 +35,7 @@ class UseOfNotifyMethodRule extends AbstractAstVisitorRule {
 
 class UseOfNotifyMethodAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
         if (AstUtil.isMethodNamed(call, 'notify', 0)) {
             addViolation call, "The method $call.text should be replaced with ${call.objectExpression.text}.notifyAll()"
         }

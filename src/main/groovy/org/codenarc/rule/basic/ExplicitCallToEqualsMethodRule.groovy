@@ -31,7 +31,7 @@ class ExplicitCallToEqualsMethodRule extends AbstractAstVisitorRule {
 }
 
 class ExplicitCallToEqualsMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
-    def ExplicitCallToEqualsMethodAstVisitor() {
+    ExplicitCallToEqualsMethodAstVisitor() {
         super('equals')
     }
 

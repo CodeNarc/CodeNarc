@@ -21,7 +21,6 @@ import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.source.SourceCode
 
 /**
  * Rule that checks for parameters to private methods that are not referenced within the method body.
@@ -33,28 +32,10 @@ class UnusedPrivateMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateMethodParameter'
     int priority = 2
     String ignoreRegex = 'ignore|ignored'
-    
-    void applyTo(SourceCode sourceCode, List violations) {
-        // If AST is null, skip this source code
-        def ast = sourceCode.ast
-        if (ast) {
-            ast.classes.each { classNode ->
-
-                if (shouldApplyThisRuleTo(classNode)) {
-                    def visitor = new UnusedPrivateMethodParameterAstVisitor(classes: ast.classes)
-                    visitor.rule = this
-                    visitor.sourceCode = sourceCode
-                    visitor.visitClass(classNode)
-                    violations.addAll(visitor.violations)
-                }
-            }
-        }
-    }
+    Class astVisitorClass = UnusedPrivateMethodParameterAstVisitor
 }
 
 class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
-
-    List<ClassNode> classes
 
     void visitMethodEx(MethodNode node) {
 
@@ -74,7 +55,7 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
     }
 
     private List<ClassNode> getAnonymousClasses() {
-        classes.findAll{
+        sourceCode.ast.classes.findAll{
             it instanceof InnerClassNode && it.anonymous
         }
     }

@@ -44,7 +44,7 @@ class AssignCollectionSortAstVisitor extends AbstractAstVisitor {
 
         if (right instanceof MethodCallExpression) {
             if (isChainedSort(right) || (isChainedSort(right.objectExpression))) {
-                addViolation(expression, 'sort() mutates the original list.')
+                addViolation(expression, 'Violation in $currentClassName. sort() mutates the original list, but the return value is being assigned')
             }
         }
         super.visitDeclarationExpression expression

@@ -87,7 +87,7 @@ class RandomDoubleCoercedToZeroAstVisitor extends AbstractAstVisitor {
 class MathRandomTracker extends AbstractAstVisitor {
     def callbackFunction
 
-    def void visitReturnStatement(ReturnStatement statement) {
+    void visitReturnStatement(ReturnStatement statement) {
         callBackForMathRandomReturns(statement.expression)
         super.visitReturnStatement(statement)
     }

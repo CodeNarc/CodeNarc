@@ -995,4 +995,36 @@ class AstUtil {
         }
         false
     }
+
+    static String getDeclaration(ASTNode node, SourceCode sourceCode) {
+        if ([node.lineNumber, node.lastLineNumber, node.columnNumber, node.lastColumnNumber].any{ it < 1 }) {
+            return ''
+        }
+
+        String acc = ''
+        for (lineIndex in (node.lineNumber-1 .. node.lastLineNumber-1)) {
+            // the raw line is required to apply columnNumber and lastColumnNumber
+            def line = AstUtil.getRawLine(sourceCode, lineIndex)
+
+            // extract the relevant part of the first line
+            if (lineIndex == node.lineNumber - 1) {
+                int nonRelevantColumns = node.columnNumber - 1
+                line = line.replaceFirst(".{$nonRelevantColumns}", ' ' * nonRelevantColumns) // retain the line length as it's important when using lastColumnNumber
+            }
+
+            // extract the relevant part of the last line
+            if (lineIndex == node.lastLineNumber - 1) {
+                def stopIndex = node.lastColumnNumber < line.size() ? node.lastColumnNumber - 2 : line.size() - 1
+                line = line[0..stopIndex]
+            }
+
+            if (line.contains('{')) {
+                acc += line[0..<line.indexOf('{')]
+                break
+            } else {
+                acc += line + ' '
+            }
+        }
+        acc
+    }
 }

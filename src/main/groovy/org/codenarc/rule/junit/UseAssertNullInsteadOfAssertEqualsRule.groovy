@@ -33,7 +33,7 @@ class UseAssertNullInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
 }
 
 class UseAssertNullInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)
         if (AstUtil.isMethodCall(call, 'this', 'assertEquals')) {

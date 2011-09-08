@@ -28,11 +28,11 @@ import org.codenarc.results.VirtualResults
 class StringSourceAnalyzer implements SourceAnalyzer {
     SourceString source
 
-    def StringSourceAnalyzer(source) {
+    StringSourceAnalyzer(source) {
         this.source = new SourceString(source)
     }
 
-    def Results analyze(RuleSet ruleSet) {
+    Results analyze(RuleSet ruleSet) {
         def allViolations = []
         ruleSet.rules.each { rule ->
             def violations = rule.applyTo(source)
@@ -41,7 +41,7 @@ class StringSourceAnalyzer implements SourceAnalyzer {
         new VirtualResults(allViolations)
     }
 
-    def List getSourceDirectories() {
+    List getSourceDirectories() {
         []
     }
 }

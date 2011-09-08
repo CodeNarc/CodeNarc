@@ -37,7 +37,7 @@ class UnnecessaryOverridingMethodRule extends AbstractAstVisitorRule {
 
 class UnnecessaryOverridingMethodAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethodEx(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
 
         if (isSingleLineMethod(node) && node.code.statements[0]?.expression instanceof MethodCallExpression) {
             MethodCallExpression methodCall = node.code.statements[0].expression

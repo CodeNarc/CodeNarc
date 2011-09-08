@@ -32,7 +32,7 @@ class DoubleNegativeRule extends AbstractAstVisitorRule {
 
 class DoubleNegativeAstVisitor extends AbstractAstVisitor {
 
-    def void visitNotExpression(NotExpression expression) {
+    void visitNotExpression(NotExpression expression) {
 
         if (expression.expression instanceof NotExpression) {
             addViolation expression, "The expression (!!$expression.text) is a confusing double negative"

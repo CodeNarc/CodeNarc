@@ -40,7 +40,7 @@ class ConfusingMethodNameRule extends AbstractAstVisitorRule {
 
 class ConfusingMethodNameAstVisitor extends AbstractAstVisitor {
 
-    def void visitClassEx(ClassNode node) {
+    void visitClassEx(ClassNode node) {
         node.visitContents(new ScopedConfusingMethodNameAstVisitor(this))
     }
 }
@@ -57,7 +57,7 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         this.rule = parent.rule
     }
 
-    def void visitMethodEx(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         String methodName = node.getName().toLowerCase()
         String parameterInfo = getParameterDefinitionAsString(node)
         String methodNameWithParameters = node.name.toLowerCase() + parameterInfo
@@ -77,7 +77,7 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx node
     }
 
-    def void visitFieldEx(FieldNode node) {
+    void visitFieldEx(FieldNode node) {
         if (AstUtil.isClosureDeclaration(node)) {
             String methodName = node.name.toLowerCase()
 
@@ -93,7 +93,7 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         super.visitFieldEx(node)
     }
 
-    def void visitClassEx(ClassNode node) {
+    void visitClassEx(ClassNode node) {
         parent.visitClassEx(node)
     }
 

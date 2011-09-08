@@ -35,7 +35,7 @@ class ReturnNullFromCatchBlockRule extends AbstractAstVisitorRule {
 
 class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
 
-    def void visitCatchStatement(CatchStatement node) {
+    void visitCatchStatement(CatchStatement node) {
         def lastStatement = getLastStatement(node)
         if (lastStatement instanceof ReturnStatement) {
             if (AstUtil.isNull(lastStatement.expression)) {

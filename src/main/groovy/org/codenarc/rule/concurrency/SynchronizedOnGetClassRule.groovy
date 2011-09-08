@@ -35,7 +35,7 @@ class SynchronizedOnGetClassRule extends AbstractAstVisitorRule {
 
 class SynchronizedOnGetClassAstVisitor extends AbstractAstVisitor {
 
-    def void visitSynchronizedStatement(SynchronizedStatement statement) {
+    void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (!isFirstVisit(statement)) {
             return
         }

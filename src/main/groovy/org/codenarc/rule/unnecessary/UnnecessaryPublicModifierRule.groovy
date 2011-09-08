@@ -50,7 +50,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    def void visitConstructorEx(ConstructorNode node) {
+    void visitConstructorEx(ConstructorNode node) {
         checkDeclaration(node, 'constructors')
         super.visitConstructorEx(node)
     }

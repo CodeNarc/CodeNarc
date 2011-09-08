@@ -35,7 +35,7 @@ class CompareToWithoutComparableRule extends AbstractAstVisitorRule {
 
 class CompareToWithoutComparableAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethodEx(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         if (AstUtil.isMethodNode(node, 'compareTo', 1, Integer.TYPE)) {
             if (!AstUtil.classNodeImplementsType(node.declaringClass, Comparable)) {
                 addViolation(node.declaringClass, "compareTo method at line $node.lineNumber would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable.")

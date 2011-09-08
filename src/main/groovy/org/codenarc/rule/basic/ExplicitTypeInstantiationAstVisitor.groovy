@@ -32,7 +32,7 @@ abstract class ExplicitTypeInstantiationAstVisitor extends AbstractAstVisitor {
         this.typeName = typeName
     }
 
-    def void visitConstructorCallExpression(ConstructorCallExpression call) {
+    void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isFirstVisit(call) && call?.type?.name == typeName && call.arguments.expressions.empty) {
             addViolation call, createErrorMessage()
         }

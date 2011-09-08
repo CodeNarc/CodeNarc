@@ -21,7 +21,7 @@ import org.codenarc.rule.Rule
 /**
  * Tests for UnnecessaryDefInVariableDeclarationRule
  *
- * @author 'René Scheibe'
+ * @author René Scheibe
   */
 class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
 
@@ -36,6 +36,10 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
 
     void testSuccessScenario_modifiers() {
         final SOURCE = '''
+            final SOURCE = \'\'\'
+                def closure = { new Date() }
+            \'\'\'
+            final     variable0 = 'example'
             def       variable1 = 'example'
             private   variable2 = 'example'
             protected variable3 = 'example'
@@ -114,18 +118,6 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def public variable2', 'The def keyword is unneeded when a variable is marked public')
     }
 
-    void testViolation_defAndStatic() {
-        final SOURCE = '''
-            class Test {
-                def static variable1
-                def static variable2 = 'example'
-            }
-        '''
-        assertTwoViolations(SOURCE,
-                            3, 'def static variable1', 'The def keyword is unneeded when a variable is marked static',
-                            4, 'def static variable2', 'The def keyword is unneeded when a variable is marked static')
-    }
-
     void testViolation_defAndFinal() {
         final SOURCE = '''
             def final variable1
@@ -173,6 +165,13 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
             int a = 1
         '''
         assertSingleViolation(SOURCE, 2, 'def', 'The def keyword is unneeded when a variable is marked public')
+    }
+
+    void testViolation_variableTypeDeclared() {
+        final SOURCE = '''
+            def String foo
+        '''
+        assertSingleViolation(SOURCE, 2, 'def String foo', 'The def keyword is unneeded when a variable is declared with a type')
     }
 
     void testViolation_multipleVariablesOnSingleLine() {

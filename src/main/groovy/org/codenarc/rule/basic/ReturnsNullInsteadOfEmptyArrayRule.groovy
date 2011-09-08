@@ -40,7 +40,7 @@ class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 
     private static final String ERROR_MSG = 'Returning null from a method that might return an Array'
 
-    def void visitMethodEx(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         if (methodReturnsArray(node)) {
             // does this method ever return null?
             node.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
@@ -48,7 +48,7 @@ class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx(node)
     }
 
-    def void handleClosure(ClosureExpression expression) {
+    void handleClosure(ClosureExpression expression) {
         if (closureReturnsArray(expression)) {
             // does this closure ever return null?
             expression.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
@@ -76,7 +76,7 @@ class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 class ArrayReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
-    def void visitReturnStatement(ReturnStatement statement) {
+    void visitReturnStatement(ReturnStatement statement) {
 
         callBackForArrayReturns(statement.expression)
         super.visitReturnStatement(statement)

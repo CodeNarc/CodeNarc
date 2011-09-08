@@ -30,6 +30,7 @@ class TextReportWriter extends AbstractReportWriter {
     String title
     String defaultOutputFile = 'CodeNarcReport.txt'
 
+    @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         initializeResourceBundle()
         def printWriter = new PrintWriter(writer)

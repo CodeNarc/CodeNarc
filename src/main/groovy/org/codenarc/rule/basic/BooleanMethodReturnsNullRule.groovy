@@ -39,7 +39,7 @@ class BooleanMethodReturnsNullRule extends AbstractAstVisitorRule {
 class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
     private static final String ERROR_MSG = 'Returning null from a method that might return a Boolean'
 
-    def void visitMethodEx(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         if (methodReturnsBoolean(node)) {
             // does this method ever return null?
             node.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
@@ -47,7 +47,7 @@ class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx(node)
     }
 
-    def void handleClosure(ClosureExpression expression) {
+    void handleClosure(ClosureExpression expression) {
         if (closureReturnsBoolean(expression)) {
             // does this closure ever return null?
             expression.code?.visit(new NullReturnTracker(parent: this, errorMessage: ERROR_MSG))
@@ -75,7 +75,7 @@ class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
 class BooleanReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
-    def void visitReturnStatement(ReturnStatement statement) {
+    void visitReturnStatement(ReturnStatement statement) {
         callbackOnBoolean(statement.expression)
         super.visitReturnStatement(statement)
     }

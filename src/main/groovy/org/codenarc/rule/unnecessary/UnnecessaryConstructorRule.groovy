@@ -35,7 +35,7 @@ class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
 
 class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
 
-  def void visitClassEx(ClassNode node) {
+  void visitClassEx(ClassNode node) {
     if (node.declaredConstructors?.size() == 1) {
         analyzeConstructor node.declaredConstructors[0]
     }

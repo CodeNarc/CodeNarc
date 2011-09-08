@@ -290,6 +290,7 @@ class ExceptionRule extends AbstractRule {
         this.throwable = throwable
     }
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         throw throwable
     }

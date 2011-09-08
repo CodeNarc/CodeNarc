@@ -224,6 +224,7 @@ class TestAbstractReportWriter extends AbstractReportWriter {
     static defaultOutputFile = 'TestReportWriter.txt'
     String title 
 
+    @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         writer.write('abc')
         writer.flush()

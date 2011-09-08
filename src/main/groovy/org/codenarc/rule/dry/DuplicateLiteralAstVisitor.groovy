@@ -52,30 +52,31 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         this.ignoreValuesSet = ignoreValuesSet
     }
 
-    def void visitClassEx(ClassNode node) {
+    @Override
+    void visitClassEx(ClassNode node) {
         constants.clear()
     }
 
-    def void visitArgumentlistExpression(ArgumentListExpression expression) {
+    void visitArgumentlistExpression(ArgumentListExpression expression) {
         expression.expressions.each {
             addViolationIfDuplicate(it)
         }
         super.visitArgumentlistExpression expression
     }
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
         addViolationIfDuplicate(call.objectExpression)
         super.visitMethodCallExpression call
     }
 
-    def void visitListExpression(ListExpression expression) {
+    void visitListExpression(ListExpression expression) {
         expression.expressions.findAll {
             addViolationIfDuplicate it
         }
         super.visitListExpression expression
     }
 
-    def void visitFieldEx(FieldNode node) {
+    void visitFieldEx(FieldNode node) {
         if (node.type == node.owner) {
             ignoreValuesSet.add node.name
         }
@@ -83,32 +84,32 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitFieldEx node
     }
 
-    def void visitBinaryExpression(BinaryExpression expression) {
+    void visitBinaryExpression(BinaryExpression expression) {
         addViolationIfDuplicate expression.leftExpression
         addViolationIfDuplicate expression.rightExpression
         super.visitBinaryExpression expression
     }
 
-    def void visitShortTernaryExpression(ElvisOperatorExpression expression) {
+    void visitShortTernaryExpression(ElvisOperatorExpression expression) {
         addViolationIfDuplicate expression.booleanExpression
         addViolationIfDuplicate expression.trueExpression
         addViolationIfDuplicate expression.falseExpression
         super.visitShortTernaryExpression expression
     }
 
-    def void visitReturnStatement(ReturnStatement statement) {
+    void visitReturnStatement(ReturnStatement statement) {
         addViolationIfDuplicate(statement.expression)
         super.visitReturnStatement statement
     }
 
-    def void visitStaticMethodCallExpression(StaticMethodCallExpression call) {
+    void visitStaticMethodCallExpression(StaticMethodCallExpression call) {
         call.arguments.each {
             addViolationIfDuplicate(it)
         }
         super.visitStaticMethodCallExpression call
     }
 
-    def void visitMapEntryExpression(MapEntryExpression expression) {
+    void visitMapEntryExpression(MapEntryExpression expression) {
         addViolationIfDuplicate expression.valueExpression
         super.visitMapEntryExpression expression
     }

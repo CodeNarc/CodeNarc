@@ -36,7 +36,7 @@ class UnnecessaryCollectionCallAstVisitor extends AbstractAstVisitor {
 
     private static final List USELESS_METHOD_NAMES = ['retainAll', 'containsAll']
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
 
         if (USELESS_METHOD_NAMES.contains(call.method.text)) {
             String variableName = call.objectExpression.text

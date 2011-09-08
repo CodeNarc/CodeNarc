@@ -32,7 +32,7 @@ class ExplicitCallToPowerMethodRule extends AbstractAstVisitorRule {
 
 class ExplicitCallToPowerMethodAstVisitor extends ExplicitCallToMethodAstVisitor {
 
-    def ExplicitCallToPowerMethodAstVisitor() {
+    ExplicitCallToPowerMethodAstVisitor() {
         super('power')
     }
 

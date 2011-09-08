@@ -78,6 +78,15 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
      * Violations
      */
 
+    void testViolation_defInConstructor() {
+        final SOURCE = '''
+            class MyClass {
+                def MyClass() {}
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'def MyClass()', 'Violation in class MyClass. The def keyword is unneeded on constructors')
+    }
+
     void testViolation_defAndPrivate() {
         final SOURCE = '''
             def private method() { }
@@ -141,6 +150,13 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
             def Object method() { null }
         '''
         assertSingleViolation(SOURCE, 2, 'def Object method()', 'The def keyword is unneeded when a method returns the Object type')
+    }
+
+    void testViolation_defAndReturnType() {
+        final SOURCE = '''
+            def List method() { null }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def List method()', 'The def keyword is unneeded when a method specifies a return type')
     }
 
     void testViolation_methodDeclarationAcrossMultipleLines() {

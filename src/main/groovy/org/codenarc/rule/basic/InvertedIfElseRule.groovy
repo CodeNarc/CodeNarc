@@ -37,7 +37,7 @@ class InvertedIfElseRule extends AbstractAstVisitorRule {
 
 class InvertedIfElseAstVisitor extends AbstractAstVisitor {
 
-    def void visitIfElse(IfStatement ifElse) {
+    void visitIfElse(IfStatement ifElse) {
 
         if (ifElse.booleanExpression.expression instanceof NotExpression) {
             if (ifElse.elseBlock instanceof BlockStatement) {
@@ -49,7 +49,7 @@ class InvertedIfElseAstVisitor extends AbstractAstVisitor {
         
     }
 
-    def void dispatchToIfWithoutSuper(IfStatement ifElse) {
+    void dispatchToIfWithoutSuper(IfStatement ifElse) {
         // no need to visit boolean expression
 
         // if block might have another instance of this error

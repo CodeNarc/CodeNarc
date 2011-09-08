@@ -37,7 +37,7 @@ class SystemRunFinalizersOnExitRule extends AbstractAstVisitorRule {
 
 class SystemRunFinalizersOnExitAstVisitor extends AbstractAstVisitor  {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
         if (call.objectExpression instanceof VariableExpression) {
             if (AstUtil.isMethodCall(call, 'System', 'runFinalizersOnExit', 1)) {
                  addViolation(call, 'System.runFinalizersOnExit() should not be invoked')

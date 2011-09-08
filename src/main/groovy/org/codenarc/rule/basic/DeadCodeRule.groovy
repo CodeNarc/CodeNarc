@@ -33,7 +33,7 @@ class DeadCodeRule extends AbstractAstVisitorRule {
 
 class DeadCodeAstVisitor extends AbstractAstVisitor {
 
-    def void visitBlockStatement(BlockStatement block) {
+    void visitBlockStatement(BlockStatement block) {
 
         if (block.statements && block.statements.size() >= 2) {
             (block.statements.size() - 1).times {

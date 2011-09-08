@@ -33,7 +33,7 @@ class RemoveAllOnSelfRule extends AbstractAstVisitorRule {
 
 class RemoveAllOnSelfAstVisitor extends AbstractAstVisitor {
 
-    def void visitMethodCallExpression(MethodCallExpression call) {
+    void visitMethodCallExpression(MethodCallExpression call) {
 
         if (isMethodNamed(call, 'removeAll') && getArity(call) == 1) {
             String variableName = call.objectExpression.text

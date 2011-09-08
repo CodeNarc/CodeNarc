@@ -116,7 +116,7 @@ class TopLevelDelegate {
         }
     }
 
-    @SuppressWarnings('EmptyMethod')
+    @SuppressWarnings(['EmptyMethod', 'UnusedMethodParameter'])
     void description(String description) {
         // Do nothing
     }

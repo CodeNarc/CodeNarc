@@ -37,7 +37,7 @@ class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
 
     private int visitCount = 0
 
-    def void visitSynchronizedStatement(SynchronizedStatement statement) {
+    void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (isFirstVisit(statement)) {
             if (visitCount > 0) {
                 addViolation(statement, 'Nested synchronized statements are confusing and may lead to deadlock')
@@ -50,7 +50,7 @@ class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
         }
     }
 
-    def void visitClosureExpression(ClosureExpression expression) {
+    void visitClosureExpression(ClosureExpression expression) {
 
         if (isFirstVisit(expression)) {
             // dispatch to a new instance b/c we have a new scope

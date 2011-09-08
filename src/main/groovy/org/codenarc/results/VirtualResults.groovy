@@ -26,7 +26,7 @@ class VirtualResults implements Results {
 
     private final List violations
 
-    def VirtualResults(List violations) {
+    VirtualResults(List violations) {
         this.violations = violations
     }
 
@@ -34,31 +34,36 @@ class VirtualResults implements Results {
         return new ArrayList(violations)
     }
 
-    def String getPath() {
+    String getPath() {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 
-    def List getChildren() {
+    List getChildren() {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 
-    def int getNumberOfViolationsWithPriority(int priority, boolean recursive) {
+    @Override
+    int getNumberOfViolationsWithPriority(int priority, boolean recursive) {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 
-    def int getTotalNumberOfFiles(boolean recursive) {
+    @Override
+    int getTotalNumberOfFiles(boolean recursive) {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 
-    def int getNumberOfFilesWithViolations(boolean recursive) {
+    @Override
+    int getNumberOfFilesWithViolations(boolean recursive) {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 
-    def boolean isFile() {
+    @Override
+    boolean isFile() {
         false
     }
 
-    def Results findResultsForPath(String path) {
+    @Override
+    Results findResultsForPath(String path) {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 }

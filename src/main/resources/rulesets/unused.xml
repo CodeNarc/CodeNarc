@@ -14,4 +14,5 @@
     <rule class='org.codenarc.rule.unused.UnusedPrivateMethodParameterRule'/>
     <rule class='org.codenarc.rule.unused.UnusedPrivateMethodRule'/>
     <rule class='org.codenarc.rule.unused.UnusedVariableRule'/>
+    <rule class='org.codenarc.rule.unused.UnusedMethodParameterRule'/>
 </ruleset>

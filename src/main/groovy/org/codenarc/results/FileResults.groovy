@@ -63,6 +63,7 @@ class FileResults implements Results {
      * @param recursive - true if the returned count should include subdirectories as well; defaults to true
      * @return the number of violations with the specified priority
      */
+    @Override
     int getNumberOfViolationsWithPriority(int priority, boolean recursive=true) {
         violations.sum(0) { violation -> violation.rule.priority == priority ? 1 : 0}
     }
@@ -72,6 +73,7 @@ class FileResults implements Results {
      * @param recursive - true if the returned count should include subdirectories as well
      * @return the total number of files (with or without violations)
      */
+    @Override
     int getTotalNumberOfFiles(boolean recursive=true) {
         1
     }
@@ -81,6 +83,7 @@ class FileResults implements Results {
      * @param recursive - ignored; defaults to true
      * @return the number of files containing violations
      */
+    @Override
     int getNumberOfFilesWithViolations(boolean recursive=true) {
         violations.empty ? 0 : 1
     }

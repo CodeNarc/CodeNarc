@@ -12,6 +12,10 @@ NEW AND UPDATED RULES
 - LongLiteralWithLowerCaseL rule (basic) - In Java and Groovy, you can specify long literals with the L or l character, for instance 55L or 24l. It is best practice to always use an uppercase L and never a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
 - ConfusingMultipleReturns rule (basic) - Multiple return values can be used to set several variables at once. To use multiple return values, the left hand side of the assignment must be enclosed in parenthesis. If not, then you are not using multiple return values, you're only assigning the last element.
 - UnnecessaryOverridingGetter rule (unnecessary) - If a parent class defines a method that follows the Java getter notation, and a subclass overrides that method to return a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
+- UnnecessaryDefInMethodDeclaration rule (unnecessary) - 3176230 - Rule now catches when you try to add the def keyword to constructor declarations. Also expanded to catch more instances of in method declarations with explicit return types. 
+- UnnecessaryDefInFieldDeclaration rule (unnecessary) - If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.
+- UnnecessaryDefInVariableDeclaration rule (unnecessary) - Expanded rule to catch more instances of unneeded defs.
+- UnusedMethodParameter rule (unused) - This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override.
 
 THANKS
 - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.

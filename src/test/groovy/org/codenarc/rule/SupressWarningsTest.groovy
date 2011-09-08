@@ -34,7 +34,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
     static boolean failOnProperty = false
     static boolean failOnField = false
 
-    def void setUp() {
+    void setUp() {
         super.setUp()
         failOnClass = false
         failOnConstructor = false
@@ -50,7 +50,7 @@ class SupressWarningsTest extends AbstractRuleTestCase {
 
     @Override
     @SuppressWarnings('JUnitTestMethodWithoutAssert')
-    def void testThatUnrelatedCodeHasNoViolations() {
+    void testThatUnrelatedCodeHasNoViolations() {
         // make sure parent does not run
     }
 
@@ -195,25 +195,25 @@ class ForceViolationsRuleAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    def void visitPropertyEx(PropertyNode node) {
+    void visitPropertyEx(PropertyNode node) {
         if (SupressWarningsTest.failOnProperty && isFirstVisit(node)) {
             addViolation node, 'visitPropertyEx'
         }
     }
 
-    def void visitFieldEx(FieldNode node) {
+    void visitFieldEx(FieldNode node) {
         if (SupressWarningsTest.failOnField && isFirstVisit(node)) {
             addViolation node, 'visitFieldEx'
         }
     }
 
-    def void visitMethodEx(MethodNode node) {
+    void visitMethodEx(MethodNode node) {
         if (SupressWarningsTest.failOnMethod && isFirstVisit(node)) {
             addViolation node, 'visitMethodEx'
         }
     }
 
-    def void visitConstructorEx(ConstructorNode node) {
+    void visitConstructorEx(ConstructorNode node) {
         if (SupressWarningsTest.failOnConstructor && isFirstVisit(node)) {
             addViolation node, 'visitConstructorEx'
         }
