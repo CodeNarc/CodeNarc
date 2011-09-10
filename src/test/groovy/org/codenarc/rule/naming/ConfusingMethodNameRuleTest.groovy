@@ -177,19 +177,6 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int total', 'The method name total is similar to the field name total')
     }
 
-    void testSuppressWarnings() {
-
-        final SOURCE = '''
-            @SuppressWarnings('ConfusingMethodName')
-            class MyClass {
-                def LOGGER
-
-                def Logger() {}
-            }
-        '''
-        assertNoViolations SOURCE
-    }
-
     void test2ViolatingFieldNameAndMethodNames() {
         final SOURCE = '''
             class MyClass {

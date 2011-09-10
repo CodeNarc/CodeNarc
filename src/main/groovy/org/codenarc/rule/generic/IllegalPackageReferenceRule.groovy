@@ -66,7 +66,7 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         checkTypeIfNotDynamicallyTyped(node)
     }
 
@@ -86,13 +86,14 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
 
 
     @Override
-    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
+    void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         if (!node.isDynamicReturnType()) {       // ignore 'def' which resolves to java.lang.Object
             checkType(node.returnType.name, node)
         }
         node.parameters.each { parameter ->
             checkTypeIfNotDynamicallyTyped(parameter)
         }
+        super.visitConstructorOrMethod(node, isConstructor)
     }
 
     @Override

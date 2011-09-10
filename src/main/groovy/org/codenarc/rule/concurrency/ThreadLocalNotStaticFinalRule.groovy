@@ -37,7 +37,7 @@ class ThreadLocalNotStaticFinalRule extends AbstractAstVisitorRule {
 
 class ThreadLocalNotStaticFinalAstVisitor extends AbstractAstVisitor {
 
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         if (node?.type?.name == 'ThreadLocal') {
             if (!Modifier.isStatic(node.modifiers)) {
                 addViolation(node, "The ThreadLocal field $node.name is not static")
@@ -46,6 +46,6 @@ class ThreadLocalNotStaticFinalAstVisitor extends AbstractAstVisitor {
                 addViolation(node, "The ThreadLocal field $node.name is not final")
             }
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 }

@@ -36,7 +36,6 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
     private Rule rule;
     private SourceCode sourceCode;
     private Set<Object> visited = new HashSet<Object>();
-    private final List<Boolean> isSuppressed = new ArrayList<Boolean>();
     private ClassNode currentClassNode = null;
 
     /**
@@ -92,20 +91,18 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
      * @param message - the message for the violation; defaults to null
      */
     protected void addViolation(ASTNode node, String message) {
-        if (isSuppressed.isEmpty()) {
-            int lineNumber = node.getLineNumber();
-            if (lineNumber >= 0) {
-                if (node instanceof AnnotatedNode) {
-                    lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode);
-                }
-                String sourceLine = sourceLine(node);
-                Violation violation = new Violation();
-                violation.setRule(rule);
-                violation.setLineNumber(lineNumber);
-                violation.setSourceLine(sourceLine);
-                violation.setMessage(message);
-                violations.add(violation);
+        int lineNumber = node.getLineNumber();
+        if (lineNumber >= 0) {
+            if (node instanceof AnnotatedNode) {
+                lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode);
             }
+            String sourceLine = sourceLine(node);
+            Violation violation = new Violation();
+            violation.setRule(rule);
+            violation.setLineNumber(lineNumber);
+            violation.setSourceLine(sourceLine);
+            violation.setMessage(message);
+            violations.add(violation);
         }
     }
 
@@ -115,32 +112,18 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
      * @param violation - the violation to add
      */
     protected void addViolation(Violation violation) {
-        if (isSuppressed.isEmpty()) {
-            violations.add(violation);
-        }
+        violations.add(violation);
     }
 
     protected SourceUnit getSourceUnit() {
         throw new RuntimeException("should never be called");
     }
 
-    protected boolean suppressionIsPresent(AnnotatedNode node) {
-        if (rule == null) {
-            return AstUtil.isSuppressionPresent(node, null);
-        } else {
-            return AstUtil.isSuppressionPresent(node, rule.getName());
-        }
-    }
-
     public final void visitClass(final ClassNode node) {
         currentClassNode = node;
-        withSuppressionCheck(node, new Runnable() {
-            public void run() {
-                visitClassEx(node);
-                AbstractAstVisitor.super.visitClass(node);
-                visitClassComplete(node);
-            }
-        });
+        visitClassEx(node);
+        super.visitClass(node);
+        visitClassComplete(node);
         currentClassNode = null;
     }
 
@@ -152,34 +135,17 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
         // empty on purpose
     }
 
-    final protected void visitConstructorOrMethod(final MethodNode node, final boolean isConstructor) {
-        withSuppressionCheck(node, new Runnable() {
-            public void run() {
-                visitConstructorOrMethodEx(node, isConstructor);
-                AbstractAstVisitor.super.visitConstructorOrMethod(node, isConstructor);
-            }
-        });
-    }
-
-    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
-        // empty on purpose
-    }
-
     public final void visitMethod(final MethodNode node) {
-        withSuppressionCheck(node, new Runnable() {
-            public void run() {
-                visitMethodEx(node);
-                if (node != null && node.getParameters() != null) {
-                    for (Parameter parameter : node.getParameters()) {
-                        if (parameter.hasInitialExpression()) {
-                            parameter.getInitialExpression().visit(AbstractAstVisitor.this);
-                        }
-                    }
+        visitMethodEx(node);
+        if (node != null && node.getParameters() != null) {
+            for (Parameter parameter : node.getParameters()) {
+                if (parameter.hasInitialExpression()) {
+                    parameter.getInitialExpression().visit(AbstractAstVisitor.this);
                 }
-                AbstractAstVisitor.super.visitMethod(node);
-                visitMethodComplete(node);
             }
-        });
+        }
+        super.visitMethod(node);
+        visitMethodComplete(node);
     }
 
     protected void visitMethodComplete(MethodNode node) {
@@ -188,56 +154,6 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVi
 
     protected void visitMethodEx(MethodNode node) {
         // empty on purpose
-    }
-
-    public final void visitField(final FieldNode node) {
-        withSuppressionCheck(node, new Runnable() {
-            public void run() {
-                visitFieldEx(node);
-                AbstractAstVisitor.super.visitField(node);
-            }
-        });
-    }
-
-    protected void visitFieldEx(FieldNode node) {
-        // empty on purpose
-    }
-
-    public final void visitProperty(final PropertyNode node) {
-        withSuppressionCheck(node.getField(), new Runnable() {
-            public void run() {
-                visitPropertyEx(node);
-                AbstractAstVisitor.super.visitProperty(node);
-            }
-        });
-    }
-
-    protected void visitPropertyEx(PropertyNode node) {
-        // empty on purpose
-    }
-
-    public final void visitConstructor(final ConstructorNode node) {
-        withSuppressionCheck(node, new Runnable() {
-            public void run() {
-                visitConstructorEx(node);
-                AbstractAstVisitor.super.visitConstructor(node);
-            }
-        });
-    }
-
-    protected void visitConstructorEx(ConstructorNode node) {
-        // empty on purpose
-    }
-
-    private void withSuppressionCheck(AnnotatedNode node, Runnable f) {
-        boolean suppress = suppressionIsPresent(node);
-        if (suppress) {
-            isSuppressed.add(true);
-        }
-        f.run();
-        if (suppress) {
-            isSuppressed.remove(0);
-        }
     }
 
     public void setRule(Rule rule) {

@@ -54,8 +54,9 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         checkTypeIfNotDynamicallyTyped(node)
+        super.visitField(node)
     }
 
     @Override

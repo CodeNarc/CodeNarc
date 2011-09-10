@@ -36,7 +36,7 @@ class StaticCalendarFieldRule extends AbstractAstVisitorRule {
 
 class StaticCalendarFieldAstVisitor extends AbstractAstVisitor {
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
 
         if (Modifier.isStatic(node.modifiers) && AstUtil.classNodeImplementsType(node.type, Calendar)) {
             addCalendarViolation(node, node.name)
@@ -46,7 +46,7 @@ class StaticCalendarFieldAstVisitor extends AbstractAstVisitor {
                 addCalendarViolation(node, node.name)
             }
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
     private boolean isCalendarFactoryMethodCall(expression) {

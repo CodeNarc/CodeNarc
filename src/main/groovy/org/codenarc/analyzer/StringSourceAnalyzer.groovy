@@ -28,15 +28,19 @@ import org.codenarc.results.VirtualResults
 class StringSourceAnalyzer implements SourceAnalyzer {
     SourceString source
 
-    StringSourceAnalyzer(source) {
+    StringSourceAnalyzer(String source) {
         this.source = new SourceString(source)
     }
 
     Results analyze(RuleSet ruleSet) {
         def allViolations = []
+        def suppressionService = new SuppressionAnalyzer(source)
         ruleSet.rules.each { rule ->
-            def violations = rule.applyTo(source)
-            allViolations.addAll(violations)
+            if (!suppressionService.isRuleSuppressed(rule)) {
+                def violations = rule.applyTo(source)
+                violations.removeAll { suppressionService.isViolationSuppressed(it) }
+                allViolations.addAll(violations)
+            }
         }
         new VirtualResults(allViolations)
     }

@@ -49,7 +49,7 @@ class LoggerForDifferentClassRule extends AbstractAstVisitorRule {
 
 class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
 
-    void visitFieldEx(FieldNode fieldNode) {
+    void visitField(FieldNode fieldNode) {
         def expression = fieldNode.getInitialExpression()
         if (LogUtil.isMatchingLoggerDefinition(expression)) {
             def firstArg = expression.arguments?.expressions?.get(0)
@@ -66,7 +66,7 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
                 addViolation(fieldNode, "Logger is defined in $CLASSNAME_WITHOUT_PACKAGE but initialized with $argText")
             }
         }
-        super.visitFieldEx(fieldNode)
+        super.visitField(fieldNode)
     }
 
     private static boolean isEqualToCurrentClassOrClassName(String argText, classNameWithoutPackage) {

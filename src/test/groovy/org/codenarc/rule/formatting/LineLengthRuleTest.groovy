@@ -52,53 +52,6 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
                 'The line exceeds 120 characters. The line is 121 characters.')
     }
 
-    void testSuppressWarningsOnMethod() {
-        final SOURCE = '''
-        	class Person {
-                @SuppressWarnings('LineLength')
-                def longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456() {
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testSuppressWarningsOnField() {
-        final SOURCE = '''
-        	class Person {
-                @SuppressWarnings('LineLength')
-                def longMethod1234567890123456789001234567890123456789012345678901234567890123456789012345678901234567890123456 = {
-                    // long long long long long long long long long long long long long long long long long long long long long long long long 
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testSuppressWarningsOnClass() {
-        final SOURCE = '''
-            @SuppressWarnings('LineLength')
-        	class Person {
-                def longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456() {
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testSuppressWarningsOnPackage() {
-        final SOURCE = '''
-            @SuppressWarnings('LineLength')
-            package foo
-
-        	class Person {
-                def longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456() {
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
     void testComments() {
         final SOURCE = '''
         	class Person {

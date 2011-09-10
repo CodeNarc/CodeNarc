@@ -74,7 +74,7 @@ class PropertyNameRule extends AbstractAstVisitorRule {
 
 class PropertyNameAstVisitor extends AbstractAstVisitor  {
 
-    void visitPropertyEx(PropertyNode node) {
+    void visitProperty(PropertyNode node) {
         if (!new WildcardPattern(rule.ignorePropertyNames, false).matches(node.name)) {
             def re = rule.regex
             def mod = node.modifiers
@@ -93,7 +93,7 @@ class PropertyNameAstVisitor extends AbstractAstVisitor  {
                 addViolation(node, "The property name $node.name in class ${node.field?.owner?.name} does not match the pattern $re")
             }
         }
-        super.visitPropertyEx(node)
+        super.visitProperty(node)
     }
 
 }

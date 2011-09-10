@@ -30,6 +30,7 @@ import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
 import org.codenarc.util.PathUtil
+import org.codenarc.analyzer.SuppressionAnalyzer
 
 /**
  * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
@@ -146,10 +147,14 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     private void processFile(File baseDir, String filePath, RuleSet ruleSet) {
         def file = new File(baseDir, filePath)
         def sourceFile = new SourceFile(file)
+        def suppressionService = new SuppressionAnalyzer(sourceFile)
         def allViolations = []
         ruleSet.rules.each {rule ->
-            def violations = rule.applyTo(sourceFile)
-            allViolations.addAll(violations)
+            if (!suppressionService.isRuleSuppressed(rule)) {
+                def violations = rule.applyTo(sourceFile)
+                violations.removeAll { suppressionService.isViolationSuppressed(it) }
+                allViolations.addAll(violations)
+            }
         }
 
         def fileResults = null

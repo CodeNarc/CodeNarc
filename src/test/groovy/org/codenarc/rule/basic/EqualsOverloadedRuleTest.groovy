@@ -38,10 +38,6 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
         	class Person {
                 boolean equals(Object other)  { true }
             }
-            @SuppressWarnings('EqualsOverloaded')
-        	class Person2 {
-                boolean equals(String other)  { true }
-            }
         	class Person3 {
                 boolean equals(java.lang.Object other)  { true }
             }

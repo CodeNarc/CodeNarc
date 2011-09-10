@@ -76,12 +76,12 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitListExpression expression
     }
 
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         if (node.type == node.owner) {
             ignoreValuesSet.add node.name
         }
         addViolationIfDuplicate(node.initialValueExpression, node.isStatic())
-        super.visitFieldEx node
+        super.visitField node
     }
 
     void visitBinaryExpression(BinaryExpression expression) {

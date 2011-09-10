@@ -39,7 +39,7 @@ class StaticDateFormatFieldRule extends AbstractAstVisitorRule {
 class StaticDateFormatFieldAstVisitor extends AbstractAstVisitor {
 
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
 
         if (Modifier.isStatic(node.modifiers) && AstUtil.classNodeImplementsType(node.type, DateFormat)) {
             addDateFormatViolation(node, node.name)
@@ -49,7 +49,7 @@ class StaticDateFormatFieldAstVisitor extends AbstractAstVisitor {
                 addDateFormatViolation(node, node.name)
             }
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
     private boolean isDateFormatFactoryMethodCall(expression) {

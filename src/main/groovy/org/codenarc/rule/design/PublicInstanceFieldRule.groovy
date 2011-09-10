@@ -33,11 +33,11 @@ class PublicInstanceFieldRule extends AbstractAstVisitorRule {
 class PublicInstanceFieldAstVisitor extends AbstractAstVisitor {
     
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         if(node.public && !node.static){
             addViolation node, createErrorMessage(node)
         }
-        super.visitFieldEx node
+        super.visitField node
     }
 
     private createErrorMessage(node) {

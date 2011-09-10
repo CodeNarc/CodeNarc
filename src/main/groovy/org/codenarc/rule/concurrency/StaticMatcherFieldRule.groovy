@@ -37,11 +37,11 @@ class StaticMatcherFieldRule extends AbstractAstVisitorRule {
 class StaticMatcherFieldAstVisitor extends AbstractAstVisitor {
 
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
 
         if (Modifier.isStatic(node.modifiers) && AstUtil.classNodeImplementsType(node.type, Matcher)) {
             addViolation(node, "Matcher instances are not thread safe. Wrap the Matcher field $node.name in a ThreadLocal or make it an instance field")
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 }

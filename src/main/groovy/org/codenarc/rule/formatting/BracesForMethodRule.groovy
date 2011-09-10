@@ -35,7 +35,7 @@ class BracesForMethodRule extends AbstractAstVisitorRule {
 class BracesForMethodAstVisitor extends AbstractAstVisitor {
 
     @Override
-    void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
+    void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
 
         if (node.declaringClass?.isInterface() || node.isAbstract()) {
             return
@@ -59,5 +59,6 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
                 addViolation(node, "Opening brace for the method $node.name should start on a new line")
             }
         }
+        super.visitConstructorOrMethod(node, isConstructor)
     }
 }

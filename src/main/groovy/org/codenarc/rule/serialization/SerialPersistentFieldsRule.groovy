@@ -35,7 +35,7 @@ class SerialPersistentFieldsRule extends AbstractAstVisitorRule {
 class SerialPersistentFieldsAstVisitor extends AbstractAstVisitor {
 
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
 
         if (AstUtil.classNodeImplementsType(node.owner, Serializable)) {
             if (node.name == 'serialPersistentFields') {
@@ -48,7 +48,7 @@ class SerialPersistentFieldsAstVisitor extends AbstractAstVisitor {
                 addViolation(node, "The Serializable class $node.owner.name defines a field named $node.name. This should be named serialPersistentFields instead")
             }
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
     // private static final ObjectStreamField[] serialPersistentFields = [ new ObjectStreamField("myField", List.class) ] as ObjectStreamField[]

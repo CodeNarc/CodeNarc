@@ -34,8 +34,9 @@ class UnnecessaryDefInFieldDeclarationRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessaryDefInFieldDeclarationAstVisitor extends AbstractAstVisitor {
+
     @Override
-    protected void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         String declaration = AstUtil.getDeclaration(node, sourceCode)
 
         if (contains(declaration, 'def')) {
@@ -58,7 +59,7 @@ class UnnecessaryDefInFieldDeclarationAstVisitor extends AbstractAstVisitor {
             }
         }
 
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
     private static boolean contains(String declaration, String modifier) {

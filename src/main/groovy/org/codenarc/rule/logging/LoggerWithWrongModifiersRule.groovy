@@ -41,7 +41,7 @@ class LoggerWithWrongModifiersRule extends AbstractAstVisitorRule {
 class LoggerWithWrongModifiersAstVisitor extends AbstractAstVisitor {
 
     @Override
-    void visitFieldEx(FieldNode fieldNode) {
+    void visitField(FieldNode fieldNode) {
         if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
             int modifiers = fieldNode.modifiers
 
@@ -62,7 +62,7 @@ class LoggerWithWrongModifiersAstVisitor extends AbstractAstVisitor {
                 addViolationForField(fieldNode)
             }
         }
-        super.visitFieldEx(fieldNode)
+        super.visitField(fieldNode)
     }
 
     private addViolationForField(FieldNode fieldNode) {

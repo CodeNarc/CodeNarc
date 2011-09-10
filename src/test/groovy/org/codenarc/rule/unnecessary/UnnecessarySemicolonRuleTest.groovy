@@ -89,44 +89,6 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 7, '            """;'
     }
 
-    void testSuppressWarningsOnImport() {
-        final SOURCE = '''
-
-            @SuppressWarnings('UnnecessarySemicolon')
-            import java.lang.String
-
-            println(value);
-
-            class MyClass {
-                def method() {
-                    println(value);
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testSuppressWarningsOnClass() {
-        final SOURCE = '''
-
-            import java.lang.String
-
-            @SuppressWarnings('UnnecessarySemicolon')
-            class MyClass {
-                def method() {
-                    println(value);
-                }
-            }
-
-            class MyClass2 {
-                def method() {
-                    println(value);
-                }
-            }
-        '''
-        assertSingleViolation(SOURCE, 14, 'println(value);', 'Semi-colons as line endings can be removed safely')
-    }
-
     @SuppressWarnings('UnnecessarySemicolon')
     void testPackage() {
         final SOURCE = '''

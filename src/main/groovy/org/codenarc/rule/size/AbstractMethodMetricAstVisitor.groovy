@@ -58,7 +58,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
             return
         }
 
-        checkMethods(classNode, classMetricResult)
+        checkMethods(classMetricResult)
 
         if (!AstUtil.isFromGeneratedSourceCode(classNode)) {
             if (!(classNode.isScript() && classNode.name == 'None')) {
@@ -69,14 +69,12 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     }
 
 
-    private void checkMethods(ClassNode classNode, classMetricResult) {
+    private void checkMethods(classMetricResult) {
         def methodResults = classMetricResult.methodMetricResults
         methodResults.each { methodName, results ->
-            def methodNode = getMethodNode(classNode, methodName, results)
             if (results['total'] > getMaxMethodMetricValue() &&
-                    !isIgnoredMethodName(methodName) &&
-                    !suppressionIsPresent(methodNode)) {
-                def message = "The ${getMetricShortDescription()} for method [$methodName] is [${results['total']}]"
+                    !isIgnoredMethodName(methodName)) {
+                def message = "Violation in class $currentClassName. The ${getMetricShortDescription()} for method [$methodName] is [${results['total']}]"
                 def lineNumber = getLineNumber(results)
                 def sourceLine = getSourceLine(lineNumber)
                 violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
@@ -96,7 +94,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     private void checkClass(classMetricResult, classNode) {
         def className = classNode.name
         def methodResults = classMetricResult.classMetricResult
-        if (methodResults['average'] > getMaxClassMetricValue() && !suppressionIsPresent(classNode)) {
+        if (methodResults['average'] > getMaxClassMetricValue()) {
             def message = "The ${getMetricShortDescription()} for class [$className] is [${methodResults['average']}]"
             def lineNumber = getLineNumber(methodResults)
             def sourceLine = getSourceLine(lineNumber)

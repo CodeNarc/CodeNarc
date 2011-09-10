@@ -32,11 +32,11 @@ class NonFinalPublicFieldRule extends AbstractAstVisitorRule {
 
 class NonFinalPublicFieldAstVisitor extends AbstractAstVisitor {
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
 
         if (node.isPublic() && !node.isFinal()) {
             addViolation(node, "The field $node.name is public but not final, which violates secure coding principles")
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 }

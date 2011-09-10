@@ -52,11 +52,6 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
                     return 'return'
                 }
             }
-            @SuppressWarnings('DuplicateStringLiteral')
-            class MyClass2 {
-                def y = 'x'
-                def z = 'x'                        
-            }
 
         	println 123
         	println 123

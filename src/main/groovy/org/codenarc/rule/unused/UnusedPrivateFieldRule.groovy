@@ -103,9 +103,9 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         //super.visitVariableExpression(expression)
     }
 
-    void visitPropertyEx(PropertyNode node) {
+    void visitProperty(PropertyNode node) {
         unusedPrivateFields.remove(node.name)
-        super.visitPropertyEx(node)
+        super.visitProperty(node)
     }
 
     void visitPropertyExpression(PropertyExpression expression) {

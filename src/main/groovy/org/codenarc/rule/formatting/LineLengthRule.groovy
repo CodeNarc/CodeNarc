@@ -15,12 +15,8 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.FieldNode
 
 /**
  * Checks the maximum length for each line of source code. It checks for number of characters, so lines that include
@@ -38,44 +34,13 @@ class LineLengthRule extends AbstractAstVisitorRule {
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
 
-        if (AstUtil.isSuppressionPresent(sourceCode?.ast?.getPackage(), name)) {
-            return
-        }
-
-        List suppressedLines = calculateSuppressedWarningLines(sourceCode, name)
-
         int lineNumber = 0
         for (line in sourceCode.getLines()) {
             lineNumber++
-            if (line.length() > length && !suppressedLines.contains(lineNumber)) {
+            if (line.length() > length) {
                 violations << createViolation(lineNumber, line, "The line exceeds $length characters. The line is ${line.length()} characters.")
             }
         }
-    }
-
-    @SuppressWarnings('NestedBlockDepth')
-    private static List calculateSuppressedWarningLines(SourceCode sourceCode, String ruleName) {
-        if (!sourceCode.ast) {
-            return []
-        }
-        def suppressedLines = []
-        for (ClassNode classNode: sourceCode.ast.classes) {
-            if (AstUtil.isSuppressionPresent(classNode, ruleName)) {
-                suppressedLines.addAll((classNode.lineNumber..classNode.lastLineNumber) as ArrayList)
-            } else {
-                for (MethodNode method: classNode.methods) {
-                    if (AstUtil.isSuppressionPresent(method, ruleName)) {
-                        suppressedLines.addAll((method.lineNumber..method.lastLineNumber) as ArrayList)
-                    }
-                }
-                for (FieldNode field: classNode.fields) {
-                    if (AstUtil.isSuppressionPresent(field, ruleName)) {
-                        suppressedLines.addAll((field.lineNumber..field.lastLineNumber) as ArrayList)
-                    }
-                }
-            }
-        }
-        suppressedLines
     }
 }
 

@@ -43,7 +43,7 @@ class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
     ClassNode currentClass
     
     @Override
-    void visitFieldEx(FieldNode fieldNode) {
+    void visitField(FieldNode fieldNode) {
         if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
 
             List<String> logFields = classNodeToLoggerNames[fieldNode.declaringClass]
@@ -53,7 +53,7 @@ class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
                 classNodeToLoggerNames[fieldNode.declaringClass] = [fieldNode.name]
             }
         }
-        super.visitFieldEx(fieldNode)
+        super.visitField(fieldNode)
     }
 
     @Override protected void visitClassEx(ClassNode node) {

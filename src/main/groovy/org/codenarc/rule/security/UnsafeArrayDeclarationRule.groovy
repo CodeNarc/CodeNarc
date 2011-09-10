@@ -34,11 +34,11 @@ class UnsafeArrayDeclarationRule extends AbstractAstVisitorRule {
 
 class UnsafeArrayDeclarationAstVisitor extends AbstractAstVisitor {
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         if (isPublicStaticFinal(node) && isArray(node)) {
             addViolation(node, "The Array field $node.name is public, static, and final but still mutable")
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
     private static boolean isArray(FieldNode node) {

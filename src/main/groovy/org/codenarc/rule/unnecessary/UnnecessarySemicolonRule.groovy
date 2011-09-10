@@ -16,14 +16,12 @@
 package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.ImportNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.ModuleNode
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
-import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice. 
@@ -85,26 +83,16 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
     boolean ignoreViolations = false
 
     @Override
-    void visitImports(ModuleNode node) {
-        if (node.imports?.any { ImportNode importNode ->
-            suppressionIsPresent(importNode)
-        }) {
-            ignoreViolations = true // ignore forever
-            rule.temporaryViolations.clear()
-        } 
-    }
-
-    @Override
     protected void visitClassEx(ClassNode node) {
 
-        if (!ignoreViolations && suppressionIsPresent(node)) {
+        if (!ignoreViolations) {
             removeViolationsInRange(node.lineNumber, node.lastLineNumber)
         } 
     }
 
     @Override
     void visitMethodEx(MethodNode node) {
-        if (!ignoreViolations && suppressionIsPresent(node)) {
+        if (!ignoreViolations) {
             removeViolationsInRange(node.lineNumber, node.lastLineNumber)
         } 
     }

@@ -79,19 +79,6 @@ class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'data.wait()')
     }
 
-    void testApplyTo_Suppressed_NoViolation() {
-        final SOURCE = '''
-            @SuppressWarnings('WaitOutsideOfWhileLoop')
-            def processData() {
-                synchronized(data) {
-                    data.wait()
-                    data.calculateStatistics()
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
     protected Rule createRule() {
         new WaitOutsideOfWhileLoopRule()
     }

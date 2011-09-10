@@ -41,7 +41,7 @@ class UnusedMethodParameterAstVisitor extends AbstractAstVisitor {
 
         if (!currentClassNode.isInterface() && !node.isAbstract() && !(currentClassName ==~ rule.categoryClassRegex)
             && !Modifier.isPrivate(node.modifiers) && AstUtil.getAnnotation(node, 'Override') == null
-            && !isMainMethod(node) && AstUtil.isSuppressionPresent(node, rule.name)) {
+            && !isMainMethod(node)) {
             
             def unusedParameterNames = node.parameters*.name
             def collector = new ReferenceCollector()

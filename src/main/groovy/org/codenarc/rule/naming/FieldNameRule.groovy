@@ -76,7 +76,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
 class FieldNameAstVisitor extends AbstractAstVisitor  {
     private Set propertyNames = []
 
-    void visitFieldEx(FieldNode fieldNode) {
+    void visitField(FieldNode fieldNode) {
         if (!isProperty(fieldNode) && !isIgnoredPropertyName(fieldNode)) {
             def mod = fieldNode.modifiers
             def re = rule.regex
@@ -95,12 +95,12 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
                 addViolation(fieldNode, "The fieldname $fieldNode.name in class ${fieldNode.owner?.name} does not match ${re.toString()}")
             }
         }
-        super.visitFieldEx(fieldNode)
+        super.visitField(fieldNode)
     }
 
-    void visitPropertyEx(PropertyNode node) {
+    void visitProperty(PropertyNode node) {
         propertyNames << node.name
-        super.visitPropertyEx(node)
+        super.visitProperty(node)
     }
 
     private boolean isIgnoredPropertyName(FieldNode node) {

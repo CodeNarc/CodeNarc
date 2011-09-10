@@ -36,7 +36,7 @@ class MultipleLoggersAstVisitor extends AbstractAstVisitor {
     Map<ClassNode, List<String>> classNodeToFieldNames = [:]
 
     @Override
-    void visitFieldEx(FieldNode fieldNode) {
+    void visitField(FieldNode fieldNode) {
         if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
 
             List<String> logFields = classNodeToFieldNames[fieldNode.declaringClass]
@@ -47,6 +47,6 @@ class MultipleLoggersAstVisitor extends AbstractAstVisitor {
                 classNodeToFieldNames[fieldNode.declaringClass] = [fieldNode.name]
             }
         }
-        super.visitFieldEx(fieldNode)
+        super.visitField(fieldNode)
     }
 }

@@ -18,9 +18,10 @@ package org.codenarc.analyzer
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
+import org.codenarc.rule.Rule
 import org.codenarc.ruleset.RuleSet
-import org.codenarc.source.SourceFile
 import org.codenarc.source.SourceCode
+import org.codenarc.source.SourceFile
 import org.codenarc.util.WildcardPattern
 
 /**
@@ -85,7 +86,7 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
 
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
         def dirResults = new DirectoryResults(dir)
-        def dirFile = new File((String)baseDirectory, (String)dir)
+        def dirFile = new File((String) baseDirectory, (String) dir)
         dirFile.eachFile {file ->
             def dirPrefix = dir ? dir + SEP : dir
             def filePath = dirPrefix + file.name
@@ -104,13 +105,16 @@ class FilesystemSourceAnalyzer implements SourceAnalyzer {
     }
 
     private processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
-        def file = new File((String)baseDirectory, filePath)
+        def file = new File((String) baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
+        def suppressionService = new SuppressionAnalyzer(sourceFile)
         if (matches(sourceFile)) {
-            dirResults.numberOfFilesInThisDirectory ++
+            dirResults.numberOfFilesInThisDirectory++
             def allViolations = []
-            ruleSet.rules.each {rule ->
+            def validRules = ruleSet.rules.findAll {!suppressionService.isRuleSuppressed(it)}
+            for (Rule rule: validRules) {
                 def violations = rule.applyTo(sourceFile)
+                violations.removeAll { suppressionService.isViolationSuppressed(it) }
                 allViolations.addAll(violations)
             }
 

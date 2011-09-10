@@ -93,7 +93,7 @@ class StatelessClassAstVisitor extends AbstractAstVisitor  {
         immutable = AstUtil.getAnnotation(node, 'Immutable')
     }
 
-    void visitFieldEx(FieldNode fieldNode) {
+    void visitField(FieldNode fieldNode) {
 
         if (immutable) {
             return
@@ -112,7 +112,7 @@ class StatelessClassAstVisitor extends AbstractAstVisitor  {
         if (!ignore) {
             addViolation(fieldNode, "The class $fieldNode.owner.name is marked as stateless but contains the non-final field \"$fieldNode.name\"")
         }
-        super.visitFieldEx(fieldNode)
+        super.visitField(fieldNode)
     }
 
 }

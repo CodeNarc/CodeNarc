@@ -895,35 +895,6 @@ class AstUtil {
         classNode.fields.any { it.name == propertyName } || classNode.properties.any { it.name == propertyName }
     }
 
-    static boolean isSuppressionPresent(AnnotatedNode node, String ruleName) {
-        if (ruleName) {
-            def annos = node?.annotations?.findAll { it.classNode?.name == 'SuppressWarnings' }
-            for (AnnotationNode annotation: annos) {
-                if (suppressionIsPresent(annotation, ruleName)) {
-                    return true
-                }
-            }
-        }
-        false
-    }
-
-    @SuppressWarnings('NestedBlockDepth')
-    private static boolean suppressionIsPresent(AnnotationNode node, String ruleName) {
-        for (Expression exp: node?.members?.values()) {
-            if (exp instanceof ConstantExpression && exp.value == ruleName) {
-                return true
-            } else if (exp instanceof ListExpression) {
-                for (Expression entry: exp.expressions) {
-                    if (entry instanceof ConstantExpression && entry.value == ruleName) {
-                        return true
-                    }
-                }
-            }
-        }
-        false
-    }
-
-
     /**
      * gets the first non annotation line number of a node, taking into account annotations. 
      * @param node

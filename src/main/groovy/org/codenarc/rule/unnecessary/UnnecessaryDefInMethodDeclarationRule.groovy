@@ -36,7 +36,7 @@ class UnnecessaryDefInMethodDeclarationRule extends AbstractAstVisitorRule {
 class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
 
     @Override
-    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
+    protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         String declaration = AstUtil.getDeclaration(node, sourceCode)
 
         if (contains(declaration, 'def')) {
@@ -65,7 +65,7 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
             }
         }
 
-        super.visitMethodEx(node)
+        super.visitConstructorOrMethod(node, isConstructor)
     }
 
     private static boolean contains(String declaration, String modifier) {

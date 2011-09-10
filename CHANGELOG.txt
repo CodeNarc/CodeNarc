@@ -8,6 +8,7 @@ NEW FEATURES
 - Performance Improvements (3394481) - There are big performance improvements in this release. 
 
 NEW AND UPDATED RULES
+- @SuppressWarnings Support - The support for @SuppressWarnings was redesigned so that it is more reliable. @SuppressWarnings no works on *all* rules at the Class, Field, and Method level. 
 - CouldBeElvis rule (basic) - Catch an if block that could be written as an elvis expression.
 - LongLiteralWithLowerCaseL rule (basic) - In Java and Groovy, you can specify long literals with the L or l character, for instance 55L or 24l. It is best practice to always use an uppercase L and never a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
 - ConfusingMultipleReturns rule (basic) - Multiple return values can be used to set several variables at once. To use multiple return values, the left hand side of the assignment must be enclosed in parenthesis. If not, then you are not using multiple return values, you're only assigning the last element.
@@ -16,6 +17,9 @@ NEW AND UPDATED RULES
 - UnnecessaryDefInFieldDeclaration rule (unnecessary) - If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.
 - UnnecessaryDefInVariableDeclaration rule (unnecessary) - Expanded rule to catch more instances of unneeded defs.
 - UnusedMethodParameter rule (unused) - This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override.
+
+BREAKING CHANGES
+*** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors. 
 
 THANKS
 - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.

@@ -52,11 +52,6 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
                     return 'return'
                 }
             }
-            @SuppressWarnings('DuplicateNumberLiteral')
-            class MyClass2 {
-                def y = -17
-                def z = -17
-            }
 
         	println '123'
         	println '123'

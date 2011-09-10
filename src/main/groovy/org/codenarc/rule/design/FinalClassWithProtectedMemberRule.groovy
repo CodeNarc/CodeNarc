@@ -36,23 +36,23 @@ class FinalClassWithProtectedMemberRule extends AbstractAstVisitorRule {
 
 class FinalClassWithProtectedMemberAstVisitor extends AbstractAstVisitor {
     @Override
-    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
+    void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         if (node.isProtected()) {
             if (Modifier.isFinal(node.declaringClass.modifiers)) {
                 addViolation node, "The method $node.name has protected visibility but the enclosing class $node.declaringClass.name is marked final"
             }
         }
-        super.visitConstructorOrMethodEx(node, isConstructor)
+        super.visitConstructorOrMethod(node, isConstructor)
     }
 
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         if (isProtected(node)) {
             if (Modifier.isFinal(node.declaringClass.modifiers)) {
                 addViolation node, "The field $node.name has protected visibility but the enclosing class $node.declaringClass.name is marked final"
             }
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
 

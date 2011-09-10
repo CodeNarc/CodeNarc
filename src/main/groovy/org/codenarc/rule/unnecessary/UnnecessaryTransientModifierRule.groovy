@@ -34,7 +34,7 @@ class UnnecessaryTransientModifierRule extends AbstractAstVisitorRule {
 
 class UnnecessaryTransientModifierAstVisitor extends AbstractAstVisitor {
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
 
         if (Modifier.isTransient(node.modifiers)) {
             if (!AstUtil.classNodeImplementsType(node.owner, Serializable)) {
@@ -42,6 +42,6 @@ class UnnecessaryTransientModifierAstVisitor extends AbstractAstVisitor {
             }
 
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 }

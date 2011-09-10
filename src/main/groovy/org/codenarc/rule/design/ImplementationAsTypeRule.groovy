@@ -92,9 +92,10 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx(methodNode)
     }
 
-    void visitConstructorEx(ConstructorNode constructorNode) {
+    @Override
+    void visitConstructor(ConstructorNode constructorNode) {
         processParameters(constructorNode.parameters)
-        super.visitConstructorEx(constructorNode)
+        super.visitConstructor(constructorNode)
     }
 
     void visitClosureExpression(ClosureExpression closureExpression) {
@@ -115,9 +116,9 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         super.visitDeclarationExpression(declarationExpression)
     }
 
-    void visitFieldEx(FieldNode fieldNode) {
+    void visitField(FieldNode fieldNode) {
         processType(fieldNode.type, "The type $fieldNode.type.name should be replaced with an interface or more general parent class")
-        super.visitFieldEx(fieldNode)
+        super.visitField(fieldNode)
     }
 
     private void processParameters(parameters) {

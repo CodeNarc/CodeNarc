@@ -57,8 +57,9 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         checkType(node)
+        super.visitField(node)
     }
 
     @Override
@@ -88,12 +89,13 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
+    void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         checkType(node.returnType.name, node)
 
         node.parameters.each { parameter ->
             checkType(parameter)
         }
+        super.visitConstructorOrMethod(node, isConstructor)
     }
 
     @Override

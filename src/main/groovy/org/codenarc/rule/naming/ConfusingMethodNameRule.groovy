@@ -77,7 +77,7 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx node
     }
 
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
         if (AstUtil.isClosureDeclaration(node)) {
             String methodName = node.name.toLowerCase()
 
@@ -90,7 +90,7 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
             String fieldName = node.name.toLowerCase()
             lowercaseFieldNames[fieldName] = node.name
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
     void visitClassEx(ClassNode node) {

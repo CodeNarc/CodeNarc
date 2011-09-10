@@ -35,12 +35,12 @@ class StaticConnectionRule extends AbstractAstVisitorRule {
 
 class StaticConnectionAstVisitor extends AbstractAstVisitor {
     @Override
-    void visitFieldEx(FieldNode node) {
+    void visitField(FieldNode node) {
 
         if (AstUtil.classNodeImplementsType(node.type, Connection) && Modifier.isStatic(node.modifiers)) {
             addViolation(node, "The field $node.name in class $node.owner.name is marked static, meaning the Connection will be shared between threads and will possibly experience race conditions")
         }
-        super.visitFieldEx(node)
+        super.visitField(node)
     }
 
 

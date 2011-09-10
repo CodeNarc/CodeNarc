@@ -56,9 +56,10 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
         super.visitMethodEx(methodNode)
     }
 
-    void visitConstructorEx(ConstructorNode constructorNode) {
+    @Override
+    void visitConstructor(ConstructorNode constructorNode) {
         processParameters(constructorNode.parameters, '<init>')
-        super.visitConstructorEx(constructorNode)
+        super.visitConstructor(constructorNode)
     }
 
     void visitClosureExpression(ClosureExpression closureExpression) {
