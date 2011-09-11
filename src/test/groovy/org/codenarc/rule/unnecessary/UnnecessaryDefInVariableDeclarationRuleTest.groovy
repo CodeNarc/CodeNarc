@@ -84,6 +84,19 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testSuccessScenario_Enum() {
+        final SOURCE = '''
+            enum MavenScope {
+                COMPILE,
+                RUNTIME,
+                TEST,
+                PROVIDED,
+                SYSTEM
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     /*
      * Violations
      */

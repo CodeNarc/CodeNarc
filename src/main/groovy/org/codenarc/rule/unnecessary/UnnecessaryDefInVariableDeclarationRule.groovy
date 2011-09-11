@@ -45,8 +45,10 @@ class UnnecessaryDefInVariableDeclarationAstVisitor extends AbstractAstVisitor {
         if (!(node.leftExpression instanceof VariableExpression)) { return }
 
         String declaration = AstUtil.getDeclaration(node, sourceCode)
-        declaration = declaration[0..(declaration.indexOf('='))] // ignore everything to the right of equals
-        
+        if (declaration.contains('=')) {
+            declaration = declaration[0..(declaration.indexOf('='))] // ignore everything to the right of equals
+        }
+
         if (contains(declaration, 'def')) {
             if (contains(declaration, 'private')) {
                 addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a variable is marked private")
