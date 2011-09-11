@@ -18,8 +18,8 @@ package org.codenarc.rule.concurrency
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * This rule reports long or double fields which are declared as volatile. Java
@@ -36,8 +36,9 @@ class VolatileLongOrDoubleFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = VolatileLongOrDoubleFieldVisitor
 }
 
-class VolatileLongOrDoubleFieldVisitor extends AbstractAstVisitor  {
+class VolatileLongOrDoubleFieldVisitor extends AbstractFieldVisitor {
 
+    @Override
     void visitField(FieldNode node) {
         if (node?.type == ClassHelper.double_TYPE ||
                 node?.type == ClassHelper.long_TYPE ||
@@ -47,6 +48,5 @@ class VolatileLongOrDoubleFieldVisitor extends AbstractAstVisitor  {
                 addViolation(node, 'Operations on volatile long and double fields are not guaranteed atomic on all JVMs')
             }
         }
-        super.visitField(node)
     }
 }

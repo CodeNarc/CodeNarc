@@ -133,8 +133,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        // TODO This should not be order-dependent
-        assertTwoViolations(SOURCE, 4, 'int Count = 23', 3, 'BigDecimal deposit_amount')
+        assertTwoViolations(SOURCE, 3, 'BigDecimal deposit_amount', 4, 'int Count = 23')
     }
 
     void testApplyTo_IgnoreParametersNames_MatchesSingleName() {

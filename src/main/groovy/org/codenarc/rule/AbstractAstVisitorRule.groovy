@@ -86,6 +86,7 @@ abstract class AbstractAstVisitorRule extends AbstractRule {
                 }
             }
         }
+        violations.sort {it.lineNumber }
     }
 
     /**

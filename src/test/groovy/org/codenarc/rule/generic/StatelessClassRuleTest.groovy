@@ -102,7 +102,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         '''
         rule.applyToClassNames = '*'
         rule.ignoreFieldNames = 'other'
-        assertSingleViolation(SOURCE, 3, 'BigDecimal depositAmount', 'The class MyClass is marked as stateless but contains the non-final field "depositAmount"')
+        assertSingleViolation(SOURCE, 3, 'BigDecimal depositAmount', "Violation in class MyClass. The class is marked as stateless but contains the non-final field 'depositAmount'")
     }
 
     void testApplyTo_IgnoreFieldNames_TwoExactNames() {

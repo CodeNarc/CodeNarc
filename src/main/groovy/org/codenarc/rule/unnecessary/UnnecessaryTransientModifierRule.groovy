@@ -17,8 +17,8 @@ package org.codenarc.rule.unnecessary
 
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -32,16 +32,15 @@ class UnnecessaryTransientModifierRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryTransientModifierAstVisitor
 }
 
-class UnnecessaryTransientModifierAstVisitor extends AbstractAstVisitor {
+class UnnecessaryTransientModifierAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
 
         if (Modifier.isTransient(node.modifiers)) {
             if (!AstUtil.classNodeImplementsType(node.owner, Serializable)) {
-                addViolation(node, "The field $node.name in class $node.owner.name is marked transient, but $node.owner.name does not implement Serializable")
+                addViolation(node, "The field '$node.name' is marked transient, but $node.owner.name does not implement Serializable")
             }
 
         }
-        super.visitField(node)
     }
 }

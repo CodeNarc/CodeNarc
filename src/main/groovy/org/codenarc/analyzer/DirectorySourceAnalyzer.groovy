@@ -21,7 +21,6 @@ import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
 import org.codenarc.source.SourceCodeCriteria
-import org.codenarc.rule.Rule
 
 /**
  * SourceAnalyzer implementation that recursively processes files in the configured source directories.
@@ -30,7 +29,7 @@ import org.codenarc.rule.Rule
  *
  * @author Chris Mair
  */
-class DirectorySourceAnalyzer implements SourceAnalyzer {
+class DirectorySourceAnalyzer extends BaseSourceAnalyzer {
     static final SEP = '/'
 
     /**
@@ -118,22 +117,13 @@ class DirectorySourceAnalyzer implements SourceAnalyzer {
                 doNotApplyToFilesMatching:doNotApplyToFilesMatching,
                 applyToFileNames:applyToFileNames,
                 doNotApplyToFileNames:doNotApplyToFileNames).matches(sourceFile)) {
+
             dirResults.numberOfFilesInThisDirectory ++
-            def allViolations = []
-            def suppressionService = new SuppressionAnalyzer(sourceFile)
-
-            def validRules = ruleSet.rules.findAll {!suppressionService.isRuleSuppressed(it)}
-            for (Rule rule: validRules) {
-                def violations = rule.applyTo(sourceFile)
-                violations.removeAll { suppressionService.isViolationSuppressed(it) }
-                allViolations.addAll(violations)
-            }
-
+            List allViolations = collectViolations(sourceFile, ruleSet)
             if (allViolations) {
                 def fileResults = new FileResults(filePath, allViolations)
                 dirResults.addChild(fileResults)
             }
         }
     }
-
 }

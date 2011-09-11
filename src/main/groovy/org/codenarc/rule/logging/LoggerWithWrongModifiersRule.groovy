@@ -17,8 +17,8 @@ package org.codenarc.rule.logging
 
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * Logger objects should be declared private, static and final.
@@ -38,7 +38,7 @@ class LoggerWithWrongModifiersRule extends AbstractAstVisitorRule {
 
 }
 
-class LoggerWithWrongModifiersAstVisitor extends AbstractAstVisitor {
+class LoggerWithWrongModifiersAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode fieldNode) {
@@ -62,7 +62,6 @@ class LoggerWithWrongModifiersAstVisitor extends AbstractAstVisitor {
                 addViolationForField(fieldNode)
             }
         }
-        super.visitField(fieldNode)
     }
 
     private addViolationForField(FieldNode fieldNode) {

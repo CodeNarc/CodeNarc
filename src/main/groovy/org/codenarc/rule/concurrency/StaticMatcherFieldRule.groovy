@@ -18,8 +18,8 @@ package org.codenarc.rule.concurrency
 import java.lang.reflect.Modifier
 import java.util.regex.Matcher
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -34,7 +34,7 @@ class StaticMatcherFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = StaticMatcherFieldAstVisitor
 }
 
-class StaticMatcherFieldAstVisitor extends AbstractAstVisitor {
+class StaticMatcherFieldAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
@@ -42,6 +42,5 @@ class StaticMatcherFieldAstVisitor extends AbstractAstVisitor {
         if (Modifier.isStatic(node.modifiers) && AstUtil.classNodeImplementsType(node.type, Matcher)) {
             addViolation(node, "Matcher instances are not thread safe. Wrap the Matcher field $node.name in a ThreadLocal or make it an instance field")
         }
-        super.visitField(node)
     }
 }

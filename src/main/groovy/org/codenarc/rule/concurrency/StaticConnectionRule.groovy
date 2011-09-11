@@ -15,12 +15,12 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.util.AstUtil
-import java.sql.Connection
 import java.lang.reflect.Modifier
+import java.sql.Connection
+import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.
@@ -33,14 +33,13 @@ class StaticConnectionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = StaticConnectionAstVisitor
 }
 
-class StaticConnectionAstVisitor extends AbstractAstVisitor {
+class StaticConnectionAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
 
         if (AstUtil.classNodeImplementsType(node.type, Connection) && Modifier.isStatic(node.modifiers)) {
-            addViolation(node, "The field $node.name in class $node.owner.name is marked static, meaning the Connection will be shared between threads and will possibly experience race conditions")
+            addViolation(node, "The field $node.name is marked static, meaning the Connection will be shared between threads and will possibly experience race conditions")
         }
-        super.visitField(node)
     }
 
 

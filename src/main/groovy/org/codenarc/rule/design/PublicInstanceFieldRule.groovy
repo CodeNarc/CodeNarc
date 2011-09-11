@@ -16,8 +16,8 @@
 package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * Using public fields is considered to be a bad design. Use properties instead.
@@ -30,17 +30,16 @@ class PublicInstanceFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = PublicInstanceFieldAstVisitor
 }
 
-class PublicInstanceFieldAstVisitor extends AbstractAstVisitor {
+class PublicInstanceFieldAstVisitor extends AbstractFieldVisitor {
     
     @Override
     void visitField(FieldNode node) {
         if(node.public && !node.static){
             addViolation node, createErrorMessage(node)
         }
-        super.visitField node
     }
 
-    private createErrorMessage(node) {
-        "Using public fields is considered bad design. Create property '${node.name}' instead."
+    private static createErrorMessage(node) {
+        "Using public fields is considered bad design. Create property '$node.name' instead."
     }
 }

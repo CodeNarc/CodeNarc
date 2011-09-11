@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.FieldNode
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * ThreadLocal fields should be static and final. In the most common case a java.lang.ThreadLocal 
@@ -35,7 +35,7 @@ class ThreadLocalNotStaticFinalRule extends AbstractAstVisitorRule {
      Class astVisitorClass = ThreadLocalNotStaticFinalAstVisitor
 }
 
-class ThreadLocalNotStaticFinalAstVisitor extends AbstractAstVisitor {
+class ThreadLocalNotStaticFinalAstVisitor extends AbstractFieldVisitor {
 
     void visitField(FieldNode node) {
         if (node?.type?.name == 'ThreadLocal') {
@@ -46,6 +46,5 @@ class ThreadLocalNotStaticFinalAstVisitor extends AbstractAstVisitor {
                 addViolation(node, "The ThreadLocal field $node.name is not final")
             }
         }
-        super.visitField(node)
     }
 }

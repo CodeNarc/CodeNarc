@@ -17,8 +17,8 @@ package org.codenarc.rule.serialization
 
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -32,7 +32,7 @@ class SerialPersistentFieldsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SerialPersistentFieldsAstVisitor
 }
 
-class SerialPersistentFieldsAstVisitor extends AbstractAstVisitor {
+class SerialPersistentFieldsAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
@@ -40,17 +40,13 @@ class SerialPersistentFieldsAstVisitor extends AbstractAstVisitor {
         if (AstUtil.classNodeImplementsType(node.owner, Serializable)) {
             if (node.name == 'serialPersistentFields') {
                 if (!AstUtil.classNodeImplementsType(node.type, ObjectStreamField[].class)) {
-                    addViolation(node, "The Serializable class $node.owner.name defines a field named serialPersistentFields of type $node.type.name. The field should be declared as a ObjectStreamField[] instead")
+                    addViolation(node, "The class is Serializable and defines a field named serialPersistentFields of type $node.type.name. The field should be declared as a ObjectStreamField[] instead")
                 } else if (!Modifier.isFinal(node.modifiers) || !Modifier.isStatic(node.modifiers) || !Modifier.isPrivate(node.modifiers)) {
-                    addViolation(node, "The Serializable class $node.owner.name defines a field named serialPersistentFields which is not private, static, and final")
+                    addViolation(node, 'The class is Serializable and defines a field named serialPersistentFields which is not private, static, and final')
                 }
             } else if (node.name?.toLowerCase() == 'serialpersistentfields') {
-                addViolation(node, "The Serializable class $node.owner.name defines a field named $node.name. This should be named serialPersistentFields instead")
+                addViolation(node, "The class is Serializable and defines a field named $node.name. This should be named serialPersistentFields instead")
             }
         }
-        super.visitField(node)
     }
-
-    // private static final ObjectStreamField[] serialPersistentFields = [ new ObjectStreamField("myField", List.class) ] as ObjectStreamField[]
-
 }

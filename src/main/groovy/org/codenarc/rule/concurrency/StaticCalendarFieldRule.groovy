@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Calendar objects should not be used as static fields. Calendars are inherently unsafe for multithreaded use. Sharing
@@ -34,7 +34,7 @@ class StaticCalendarFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = StaticCalendarFieldAstVisitor
 }
 
-class StaticCalendarFieldAstVisitor extends AbstractAstVisitor {
+class StaticCalendarFieldAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
 
@@ -46,10 +46,9 @@ class StaticCalendarFieldAstVisitor extends AbstractAstVisitor {
                 addCalendarViolation(node, node.name)
             }
         }
-        super.visitField(node)
     }
 
-    private boolean isCalendarFactoryMethodCall(expression) {
+    private static boolean isCalendarFactoryMethodCall(expression) {
         AstUtil.isMethodCall(expression, 'Calendar', 'getInstance')
     }
 

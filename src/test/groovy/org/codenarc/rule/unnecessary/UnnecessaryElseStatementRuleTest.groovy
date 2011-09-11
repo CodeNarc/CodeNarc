@@ -187,7 +187,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
                 println false
             }
         '''
-        assertTwoViolations SOURCE, 8, '} else {', 5, '} else {'
+        assertTwoViolations SOURCE, 5, '} else {', 8, '} else {'
     }
 
     void testShouldAddTwoViolationForTwoEmbeddedIfStatementsContainingUnconditionalReturn() {
@@ -204,7 +204,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
                 println false
             }
         '''
-        assertTwoViolations SOURCE, 10, '} else {', 6, '} else {'
+        assertTwoViolations SOURCE, 6, '} else {', 10, '} else {'
     }
 
     protected Rule createRule() {

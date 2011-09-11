@@ -40,8 +40,7 @@ class LoggingSwallowsStacktraceRule extends AbstractAstVisitorRule {
 
 class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
     Map<ClassNode, List<String>> classNodeToLoggerNames = [:]
-    ClassNode currentClass
-    
+
     @Override
     void visitField(FieldNode fieldNode) {
         if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
@@ -56,20 +55,11 @@ class LoggingSwallowsStacktraceAstVisitor extends AbstractAstVisitor {
         super.visitField(fieldNode)
     }
 
-    @Override protected void visitClassEx(ClassNode node) {
-        this.currentClass = node
-    }
-
-    @Override protected void visitClassComplete(ClassNode node) {
-        this.currentClass = null
-    }
-
-
     @Override
     void visitCatchStatement(CatchStatement statement) {
 
-        if (currentClass && statement.code instanceof BlockStatement) {
-            List<String> loggerNames = classNodeToLoggerNames[currentClass]
+        if (currentClassNode && statement.code instanceof BlockStatement) {
+            List<String> loggerNames = classNodeToLoggerNames[currentClassNode]
 
             def expressions = statement.code.statements.findAll {
                 it instanceof ExpressionStatement && it.expression instanceof MethodCallExpression

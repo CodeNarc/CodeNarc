@@ -58,7 +58,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 3,
                 'private static final serialPerSIStentFields',
-                'The Serializable class MyClass defines a field named serialPerSIStentFields. This should be named serialPersistentFields instead')
+                'Violation in class MyClass. The class is Serializable and defines a field named serialPerSIStentFields. This should be named serialPersistentFields instead')
     }
 
     void testWrongFieldType() {
@@ -70,7 +70,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4,
                 'private static final serialPersistentFields',
-                'The Serializable class MyClass defines a field named serialPersistentFields of type java.lang.Object. The field should be declared as a ObjectStreamField[] instead')
+                'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields of type java.lang.Object. The field should be declared as a ObjectStreamField[] instead')
     }
 
     void testNotFinal() {
@@ -82,7 +82,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4,
                 'private static ObjectStreamField[] serialPersistentFields',
-                'The Serializable class MyClass defines a field named serialPersistentFields which is not private, static, and final')
+                'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields which is not private, static, and final')
     }
 
     void testNotPrivate() {
@@ -93,7 +93,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 4, 'static final public ObjectStreamField[] serialPersistentFields',
-                'The Serializable class MyClass defines a field named serialPersistentFields which is not private, static, and final')
+                'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields which is not private, static, and final')
     }
 
     void testNotStatic() {
@@ -104,7 +104,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 4, 'private final ObjectStreamField[] serialPersistentFields',
-                'The Serializable class MyClass defines a field named serialPersistentFields which is not private, static, and final')
+                'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields which is not private, static, and final')
     }
 
 

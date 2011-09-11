@@ -18,10 +18,10 @@ package org.codenarc.rule.concurrency
 import java.lang.reflect.Modifier
 import java.text.DateFormat
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * DateFormat objects should not be used as static fields. DateFormat are inherently unsafe for multithreaded use. Sharing a
@@ -36,7 +36,7 @@ class StaticDateFormatFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = StaticDateFormatFieldAstVisitor
 }
 
-class StaticDateFormatFieldAstVisitor extends AbstractAstVisitor {
+class StaticDateFormatFieldAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
@@ -49,10 +49,9 @@ class StaticDateFormatFieldAstVisitor extends AbstractAstVisitor {
                 addDateFormatViolation(node, node.name)
             }
         }
-        super.visitField(node)
     }
 
-    private boolean isDateFormatFactoryMethodCall(expression) {
+    private static boolean isDateFormatFactoryMethodCall(expression) {
         expression instanceof MethodCallExpression &&
             AstUtil.isMethodCall(expression, ['DateFormat', /java\.text\.DateFormat/], ['getDateInstance', 'getDateTimeInstance', 'getTimeInstance'])
     }

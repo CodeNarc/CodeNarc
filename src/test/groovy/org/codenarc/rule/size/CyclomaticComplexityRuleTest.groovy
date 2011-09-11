@@ -121,8 +121,8 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         rule.maxMethodComplexity = 5
         rule.maxClassAverageMethodComplexity = 3
         assertTwoViolations(SOURCE,
-                8, 'def myMethod3()', ['myMethod3', '6'],
-                2, 'class MyClass', ['MyClass', '3.3'])
+                2, 'class MyClass', ['MyClass', '3.3'],
+                8, 'def myMethod3()', ['myMethod3', '6'])
     }
 
     void testApplyTo_ClassAndMethods_AtThreshold() {

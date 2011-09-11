@@ -54,7 +54,8 @@ class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
                     transient String property
                 }
         '''
-        assertSingleViolation(SOURCE, 4, 'transient String property', 'The field property in class MyClass is marked transient, but MyClass does not implement Serializable')
+        assertSingleViolation(SOURCE, 4, 'transient String property',
+            'Violation in class MyClass. The field \'property\' is marked transient, but MyClass does not implement Serializable')
     }
 
     void testTransientPropertyInInnerClassThatIsNotSerializable() {
@@ -66,7 +67,8 @@ class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
                     }
                 }
         '''
-        assertSingleViolation(SOURCE, 5, 'transient String property', 'The field property in class MyClass$InnerClass is marked transient, but MyClass$InnerClass does not implement Serializable')
+        assertSingleViolation(SOURCE, 5, 'transient String property',
+            'Violation in class MyClass$InnerClass. The field \'property\' is marked transient, but MyClass$InnerClass does not implement Serializable')
     }
 
     protected Rule createRule() {

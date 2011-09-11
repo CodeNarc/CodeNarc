@@ -16,11 +16,10 @@
 package org.codenarc.rule.generic
 
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks for non-<code>final</code> fields on a class. The intent of this rule is
@@ -84,22 +83,17 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     }
 }
 
-class StatelessClassAstVisitor extends AbstractAstVisitor  {
-
-    private boolean immutable = false
-
-    protected void visitClassEx(ClassNode node) {
-        // TODO would prefer to just short-circuit the rule here, if immutable; but visitClass() is final
-        immutable = AstUtil.getAnnotation(node, 'Immutable')
-    }
+class StatelessClassAstVisitor extends AbstractFieldVisitor  {
 
     void visitField(FieldNode fieldNode) {
+
+        def immutable = AstUtil.getAnnotation(fieldNode.owner, 'Immutable')
 
         if (immutable) {
             return
         }
 
-        boolean ignore = fieldNode.modifiers & FieldNode.ACC_FINAL
+        boolean ignore = fieldNode.isFinal()
         
         if (!ignore && rule.ignoreFieldNames) {
             ignore = new WildcardPattern(rule.ignoreFieldNames).matches(fieldNode.name)
@@ -110,9 +104,8 @@ class StatelessClassAstVisitor extends AbstractAstVisitor  {
         }
 
         if (!ignore) {
-            addViolation(fieldNode, "The class $fieldNode.owner.name is marked as stateless but contains the non-final field \"$fieldNode.name\"")
+            addViolation(fieldNode, "The class is marked as stateless but contains the non-final field '$fieldNode.name'")
         }
-        super.visitField(fieldNode)
     }
 
 }

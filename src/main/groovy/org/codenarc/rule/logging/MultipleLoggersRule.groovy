@@ -17,8 +17,8 @@ package org.codenarc.rule.logging
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * This rule catches classes that have more than one logger object defined. Typically, a class has zero or one logger objects. 
@@ -31,7 +31,7 @@ class MultipleLoggersRule extends AbstractAstVisitorRule {
     Class astVisitorClass = MultipleLoggersAstVisitor
 }
 
-class MultipleLoggersAstVisitor extends AbstractAstVisitor {
+class MultipleLoggersAstVisitor extends AbstractFieldVisitor {
 
     Map<ClassNode, List<String>> classNodeToFieldNames = [:]
 
@@ -42,11 +42,10 @@ class MultipleLoggersAstVisitor extends AbstractAstVisitor {
             List<String> logFields = classNodeToFieldNames[fieldNode.declaringClass]
             if (logFields) {
                 logFields.add(fieldNode.name)
-                addViolation(fieldNode, "The class $fieldNode.declaringClass.name defines multiple loggers: " + logFields.join(', '))
+                addViolation(fieldNode, 'The class defines multiple loggers: ' + logFields.join(', '))
             } else {
                 classNodeToFieldNames[fieldNode.declaringClass] = [fieldNode.name]
             }
         }
-        super.visitField(fieldNode)
     }
 }

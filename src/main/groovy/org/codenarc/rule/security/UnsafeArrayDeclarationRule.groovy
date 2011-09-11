@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.FieldNode
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -32,13 +32,12 @@ class UnsafeArrayDeclarationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnsafeArrayDeclarationAstVisitor
 }
 
-class UnsafeArrayDeclarationAstVisitor extends AbstractAstVisitor {
+class UnsafeArrayDeclarationAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
         if (isPublicStaticFinal(node) && isArray(node)) {
             addViolation(node, "The Array field $node.name is public, static, and final but still mutable")
         }
-        super.visitField(node)
     }
 
     private static boolean isArray(FieldNode node) {

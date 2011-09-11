@@ -45,7 +45,8 @@ class StaticConnectionRuleTest extends AbstractRuleTestCase {
                 static Connection conn
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'static Connection conn', 'The field conn in class MyClass is marked static, meaning the Connection will be shared between threads and will possibly experience race conditions')
+        assertSingleViolation(SOURCE, 3, 'static Connection conn',
+            'Violation in class MyClass. The field conn is marked static, meaning the Connection will be shared between threads and will possibly experience race conditions')
     }
 
     protected Rule createRule() {

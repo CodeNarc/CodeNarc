@@ -53,7 +53,7 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
                 def logger = Logger.getLogger(MyClass)
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'def logger = Logger.getLogger(MyClass)', 'The class MyClass defines multiple loggers: LOG, logger')
+        assertSingleViolation(SOURCE, 4, 'def logger = Logger.getLogger(MyClass)', 'Violation in class MyClass. The class defines multiple loggers: LOG, logger')
     }
 
     void testInnerClass() {
@@ -65,7 +65,8 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 5, 'def logger = Logger.getLogger(MyClass)', 'The class MyClass$MyInnerClass defines multiple loggers: LOG, logger')
+        assertSingleViolation(SOURCE, 5, 'def logger = Logger.getLogger(MyClass)',
+            'Violation in class MyClass$MyInnerClass. The class defines multiple loggers: LOG, logger')
     }
 
     protected Rule createRule() {

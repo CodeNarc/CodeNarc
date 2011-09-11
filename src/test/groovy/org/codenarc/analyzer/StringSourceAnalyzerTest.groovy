@@ -17,6 +17,8 @@ package org.codenarc.analyzer
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
+import org.codenarc.rule.design.PublicInstanceFieldRule
+import org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule
 import org.codenarc.ruleset.ListRuleSet
 
 class StringSourceAnalyzerTest extends GroovyTestCase {
@@ -53,6 +55,24 @@ class StringSourceAnalyzerTest extends GroovyTestCase {
                     applyTo: { [new Violation() ] } ] as Rule,
                 [ getName : { 'rule2'} ,
                     applyTo: { [new Violation() ] } ] as Rule,
+            ]
+        ))
+        assert results.violations.size() == 2
+    }
+
+    void testFieldRules() {
+        final SOURCE = '''
+        	class Person {
+                def String name // should cause violation
+                public String address  // should cause violation
+            }
+        '''
+        def analyzer = new StringSourceAnalyzer(SOURCE)
+
+        def results = analyzer.analyze(new ListRuleSet(
+            [
+                new UnnecessaryDefInFieldDeclarationRule(),
+                new PublicInstanceFieldRule(),
             ]
         ))
         assert results.violations.size() == 2

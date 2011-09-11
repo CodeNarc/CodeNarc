@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Volatile array fields are unsafe because the contents of the array are not treated as volatile. Changing the entire array reference is visible to other threads, but changing an array element is not. 
@@ -32,14 +32,13 @@ class VolatileArrayFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = VolatileArrayFieldAstVisitor
 }
 
-class VolatileArrayFieldAstVisitor extends AbstractAstVisitor {
+class VolatileArrayFieldAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
 
         if (Modifier.isVolatile(node.modifiers) && AstUtil.getFieldType(node)?.isArray()) {
             addViolation(node, "The array field $node.name is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type")
         }
-        super.visitField(node)
     }
 
 

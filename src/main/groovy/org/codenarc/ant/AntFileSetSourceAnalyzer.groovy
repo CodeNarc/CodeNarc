@@ -23,21 +23,20 @@ import java.util.concurrent.atomic.AtomicInteger
 import org.apache.log4j.Logger
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
-import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.analyzer.BaseSourceAnalyzer
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
 import org.codenarc.util.PathUtil
-import org.codenarc.analyzer.SuppressionAnalyzer
 
 /**
  * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
  *
  * @author Chris Mair
  */
-class AntFileSetSourceAnalyzer implements SourceAnalyzer {
+class AntFileSetSourceAnalyzer extends BaseSourceAnalyzer {
 
     private static final LOG = Logger.getLogger(AntFileSetSourceAnalyzer)
     private static final POOL_TIMEOUT_SECONDS = 60 * 60
@@ -147,16 +146,7 @@ class AntFileSetSourceAnalyzer implements SourceAnalyzer {
     private void processFile(File baseDir, String filePath, RuleSet ruleSet) {
         def file = new File(baseDir, filePath)
         def sourceFile = new SourceFile(file)
-        def suppressionService = new SuppressionAnalyzer(sourceFile)
-        def allViolations = []
-        ruleSet.rules.each {rule ->
-            if (!suppressionService.isRuleSuppressed(rule)) {
-                def violations = rule.applyTo(sourceFile)
-                violations.removeAll { suppressionService.isViolationSuppressed(it) }
-                allViolations.addAll(violations)
-            }
-        }
-
+        def allViolations = collectViolations(sourceFile, ruleSet)
         def fileResults = null
         if (allViolations) {
             fileResults = new FileResults(PathUtil.normalizePath(filePath), allViolations)

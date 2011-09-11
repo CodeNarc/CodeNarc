@@ -16,10 +16,10 @@
 package org.codenarc.rule.logging
 
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.expr.Expression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * Rule that checks for instantiating a logger for a class other than the current class. Supports logger
@@ -47,8 +47,9 @@ class LoggerForDifferentClassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = LoggerForDifferentClassAstVisitor
 }
 
-class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
+class LoggerForDifferentClassAstVisitor extends AbstractFieldVisitor {
 
+    @Override
     void visitField(FieldNode fieldNode) {
         def expression = fieldNode.getInitialExpression()
         if (LogUtil.isMatchingLoggerDefinition(expression)) {
@@ -66,7 +67,6 @@ class LoggerForDifferentClassAstVisitor extends AbstractAstVisitor  {
                 addViolation(fieldNode, "Logger is defined in $CLASSNAME_WITHOUT_PACKAGE but initialized with $argText")
             }
         }
-        super.visitField(fieldNode)
     }
 
     private static boolean isEqualToCurrentClassOrClassName(String argText, classNameWithoutPackage) {

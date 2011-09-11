@@ -15,14 +15,14 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * Finds code that violates secure coding principles for mobile code by declaring a member variable public but not final.
  *
- * @author 'Hamlet D'Arcy'
+ * @author Hamlet D'Arcy
   */
 class NonFinalPublicFieldRule extends AbstractAstVisitorRule {
     String name = 'NonFinalPublicField'
@@ -30,13 +30,12 @@ class NonFinalPublicFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = NonFinalPublicFieldAstVisitor
 }
 
-class NonFinalPublicFieldAstVisitor extends AbstractAstVisitor {
+class NonFinalPublicFieldAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
 
         if (node.isPublic() && !node.isFinal()) {
             addViolation(node, "The field $node.name is public but not final, which violates secure coding principles")
         }
-        super.visitField(node)
     }
 }

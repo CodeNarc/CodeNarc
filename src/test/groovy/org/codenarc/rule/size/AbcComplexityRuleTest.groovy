@@ -127,8 +127,8 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         rule.maxMethodComplexity = 4.5
         rule.maxClassAverageMethodComplexity = 1.9
         assertTwoViolations(SOURCE,
-                8, 'def myMethod3()', ['myMethod3', '6'],
-                2, 'class MyClass', ['MyClass', '2.2'])
+                2, 'class MyClass', ['MyClass', '2.2'],
+                8, 'def myMethod3()', ['myMethod3', '6'])
     }
 
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {

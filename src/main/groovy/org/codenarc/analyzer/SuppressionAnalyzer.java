@@ -6,7 +6,7 @@ import org.codehaus.groovy.ast.expr.Expression;
 import org.codehaus.groovy.ast.expr.ListExpression;
 import org.codenarc.rule.Rule;
 import org.codenarc.rule.Violation;
-import org.codenarc.source.AbstractSourceCode;
+import org.codenarc.source.SourceCode;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,13 +17,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SuppressionAnalyzer {
 
     private static final ClassNode SUPPRESS_WARNINGS = ClassHelper.make(SuppressWarnings.class);
-    private final AbstractSourceCode source;
+    private final SourceCode source;
     private boolean initialized = false;
     private final Object initializationLock = new Object();
     private final Set<String> suppressedRuleNames = Collections.synchronizedSet(new HashSet<String>()); 
     private final Map<String, BitSet> suppressionsByLineNumber = new ConcurrentHashMap<String, BitSet>();
 
-    public SuppressionAnalyzer(AbstractSourceCode source) {
+    public SuppressionAnalyzer(SourceCode source) {
         this.source = source;
     }
 

@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.ClassHelper
+import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractFieldVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance,
@@ -33,7 +33,7 @@ class UnnecessaryDefInFieldDeclarationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryDefInFieldDeclarationAstVisitor
 }
 
-class UnnecessaryDefInFieldDeclarationAstVisitor extends AbstractAstVisitor {
+class UnnecessaryDefInFieldDeclarationAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
@@ -41,25 +41,23 @@ class UnnecessaryDefInFieldDeclarationAstVisitor extends AbstractAstVisitor {
 
         if (contains(declaration, 'def')) {
             if (contains(declaration, 'private')) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field is marked private")
+                addViolation(node, 'The def keyword is unneeded when a field is marked private')
             } else if (contains(declaration, 'protected')) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field is marked protected")
+                addViolation(node, 'The def keyword is unneeded when a field is marked protected')
             } else if (contains(declaration, 'public')) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field is marked public")
+                addViolation(node, 'The def keyword is unneeded when a field is marked public')
             } else if (contains(declaration, 'static')) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field is marked static")
+                addViolation(node, 'The def keyword is unneeded when a field is marked static')
             } else if (contains(declaration, 'final')) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field is marked final")
+                addViolation(node, 'The def keyword is unneeded when a field is marked final')
             } else if (contains(declaration, 'strictfp')) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field is marked strictfp")
+                addViolation(node, 'The def keyword is unneeded when a field is marked strictfp')
             } else if (contains(declaration, 'Object')) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field is specified Object type")
+                addViolation(node, 'The def keyword is unneeded when a field is specified Object type')
             } else if (node.type != ClassHelper.DYNAMIC_TYPE) {
-                addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded when a field type is specified")
+                addViolation(node, 'The def keyword is unneeded when a field type is specified')
             }
         }
-
-        super.visitField(node)
     }
 
     private static boolean contains(String declaration, String modifier) {

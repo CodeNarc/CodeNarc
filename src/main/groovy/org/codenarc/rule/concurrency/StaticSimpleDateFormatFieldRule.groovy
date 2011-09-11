@@ -21,6 +21,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import java.text.SimpleDateFormat
+import org.codenarc.rule.AbstractFieldVisitor
 
 /**
  * SimpleDateFormat objects should not be used as static fields. SimpleDateFormat are inherently unsafe for
@@ -35,7 +36,7 @@ class StaticSimpleDateFormatFieldRule extends AbstractAstVisitorRule {
     Class astVisitorClass = StaticSimpleDateFormatFieldAstVisitor
 }
 
-class StaticSimpleDateFormatFieldAstVisitor extends AbstractAstVisitor {
+class StaticSimpleDateFormatFieldAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
@@ -48,10 +49,9 @@ class StaticSimpleDateFormatFieldAstVisitor extends AbstractAstVisitor {
                 addSimpleDateFormatViolation(node, node.name)
             }
         }
-        super.visitField(node)
     }
 
-    private boolean isSimpleDateFormatConstructorCall(expression) {
+    private static boolean isSimpleDateFormatConstructorCall(expression) {
         AstUtil.isConstructorCall(expression, ['SimpleDateFormat', 'java.text.SimpleDateFormat'])
     }
 
