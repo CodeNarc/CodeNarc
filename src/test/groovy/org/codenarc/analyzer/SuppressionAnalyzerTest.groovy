@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -256,6 +256,14 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 17))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 18))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 19))
+    }
+
+    void testCompilationFails() {
+        def analyzer = new SuppressionAnalyzer(new SourceString('''
+            class XYZ ^&**(
+        '''))
+
+        assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
     }
 
     private static Violation violationFor(String ruleName, int lineNumber) {

@@ -54,18 +54,19 @@ public class SuppressionAnalyzer {
         synchronized (initializationLock) {
             if (!initialized) {
                 ModuleNode ast = source.getAst();
-                suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getPackage()));
-                suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getImports()));
-                suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStaticStarImports().values()));
-                suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStarImports()));
-                // if it is the only class in the file, then a @SuppressWarnings applies to everything
-                if (ast.getClasses() != null && ast.getClasses().size() == 1) {
-                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getClasses()));
+                if (ast != null) {
+                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getPackage()));
+                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getImports()));
+                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStaticStarImports().values()));
+                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStarImports()));
+                    // if it is the only class in the file, then a @SuppressWarnings applies to everything
+                    if (ast.getClasses() != null && ast.getClasses().size() == 1) {
+                        suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getClasses()));
+                    }
+
+                    // build up suppressions by line number
+                    suppressionsByLineNumber.putAll(getSuppressionsByLineNumber(ast));
                 }
-
-                // build up suppressions by line number
-                suppressionsByLineNumber.putAll(getSuppressionsByLineNumber(ast));
-
                 initialized = true;
             }
         }
