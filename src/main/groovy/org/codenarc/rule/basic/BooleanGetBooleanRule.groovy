@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -33,13 +33,12 @@ class BooleanGetBooleanRule extends AbstractAstVisitorRule {
     Class astVisitorClass = BooleanGetBooleanAstVisitor
 }
 
-class BooleanGetBooleanAstVisitor extends AbstractAstVisitor {
+class BooleanGetBooleanAstVisitor extends AbstractMethodCallExpressionVisitor {
+
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, 'Boolean', 'getBoolean', 1)) {
             addViolation(call, 'Boolean.getBoolean(String) is a confusing API for reading System properties. Prefer the System.getProperty(String) API.')
         }
-        super.visitMethodCallExpression(call)
     }
 }

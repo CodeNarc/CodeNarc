@@ -15,12 +15,11 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.ASTNode
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
+import org.codenarc.util.AstUtil
 import org.codenarc.util.SourceCodeUtil
 
 /**
@@ -34,18 +33,12 @@ class UnnecessaryParenthesesForMethodCallWithClosureRule extends AbstractAstVisi
     Class astVisitorClass = UnnecessaryParenthesesForMethodCallWithClosureAstVisitor
 }
 
-class UnnecessaryParenthesesForMethodCallWithClosureAstVisitor extends AbstractAstVisitor {
+class UnnecessaryParenthesesForMethodCallWithClosureAstVisitor extends AbstractMethodCallExpressionVisitor {
     private final static EMPTY_BRACKETS_PATTERN = /\s*\(\s*\)\s*/
 
     @Override
-    protected String sourceLine(ASTNode node) {
-        SourceCodeUtil.nodeSourceLines(sourceCode, node).join('\n')
-    }
-
-    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        super.visitMethodCallExpression(call)
-        if (isFirstVisit(call) && !AstUtil.isFromGeneratedSourceCode(call.method)) {
+        if (!AstUtil.isFromGeneratedSourceCode(call.method)) {
             def arguments = AstUtil.getMethodArguments(call)
             if (arguments.size() == 1 && arguments.first() instanceof ClosureExpression) {
                 def sourceBetweenMethodAndClosure = SourceCodeUtil.sourceLinesBetweenNodes(sourceCode, call.method,

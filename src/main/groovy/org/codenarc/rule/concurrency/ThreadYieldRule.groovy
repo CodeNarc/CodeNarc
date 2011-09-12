@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
   * Method calls to Thread.yield() should not be allowed.
@@ -35,12 +36,11 @@ class ThreadYieldRule extends AbstractAstVisitorRule {
      Class astVisitorClass = ThreadYieldAstVisitor
  }
 
-class ThreadYieldAstVisitor extends AbstractAstVisitor {
+class ThreadYieldAstVisitor extends AbstractMethodCallExpressionVisitor {
 
      void visitMethodCallExpression(MethodCallExpression call) {
          if (AstUtil.isMethodCall(call, 'Thread', 'yield', 0)) {
             addViolation(call, 'Thread.yield() has not useful guaranteed semantics')
          }
-         super.visitMethodCallExpression(call)
      }
  }

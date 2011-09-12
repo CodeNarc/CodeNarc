@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Avoid instantiating an object just to call getClass() on it; use the .class public member instead.
@@ -32,7 +33,7 @@ class UnnecessaryInstantiationToGetClassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryInstantiationToGetClassAstVisitor
 }
 
-class UnnecessaryInstantiationToGetClassAstVisitor extends AbstractAstVisitor {
+class UnnecessaryInstantiationToGetClassAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
@@ -42,6 +43,5 @@ class UnnecessaryInstantiationToGetClassAstVisitor extends AbstractAstVisitor {
                 addViolation(call, "$typeName instantiation with getClass() should be simplified to ${typeName}.class")
             }
         }
-        super.visitMethodCallExpression(call)
     }
 }

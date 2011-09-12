@@ -88,9 +88,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
             }).someMethodCall()
         '''
         assertSingleViolation(SOURCE, 2,
-            '''[1,2,3].each({
-                println it
-            })'''
+            '''[1,2,3].each({'''
         )
     }
 
@@ -114,16 +112,8 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
             )
         '''
         assertTwoViolations(SOURCE,
-                2,
-            '''[1,2,3].each({
-                println it
-            }).someMethod('first param',
-                { println it }
-            )''',
-                2,
-            '''[1,2,3].each({
-                println it
-            })'''
+                2, '''[1,2,3].each({''',
+                2, '''[1,2,3].each({'''
         )
     }
 

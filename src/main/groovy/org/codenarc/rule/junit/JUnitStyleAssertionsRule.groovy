@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -34,8 +34,9 @@ class JUnitStyleAssertionsRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitStyleAssertionsAstVisitor extends AbstractAstVisitor {
+class JUnitStyleAssertionsAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
         // TODO better suggestions
@@ -50,8 +51,5 @@ class JUnitStyleAssertionsAstVisitor extends AbstractAstVisitor {
                 addViolation call, "Replace $call.methodAsString with an assert statement"
             }
         }
-        super.visitMethodCallExpression call
     }
-
-
 }

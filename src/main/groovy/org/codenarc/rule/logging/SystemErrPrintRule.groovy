@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.logging
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Rule that checks for calls to <code>System.err.print()</code>, <code>System.err.println()</code>
@@ -31,12 +31,11 @@ class SystemErrPrintRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SystemErrPrintAstVisitor
 }
 
-class SystemErrPrintAstVisitor extends AbstractAstVisitor  {
+class SystemErrPrintAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        if (isFirstVisit(methodCall) && methodCall.text.startsWith('System.err.print')) {
+        if (methodCall.text.startsWith('System.err.print')) {
             addViolation(methodCall, "System.err.$methodCall.methodAsString should be replaced with something more robust")
         }
-        super.visitMethodCallExpression(methodCall)
     }
 }

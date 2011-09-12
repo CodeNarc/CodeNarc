@@ -15,14 +15,10 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Calls to System.gc(), Runtime.getRuntime().gc(), and System.runFinalization() are not advised. Code should have the
@@ -38,7 +34,7 @@ class ExplicitGarbageCollectionRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ExplicitGarbageCollectionAstVisitor
 }
 
-class ExplicitGarbageCollectionAstVisitor extends AbstractAstVisitor {
+class ExplicitGarbageCollectionAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (AstUtil.isMethodCall(call, ['System'], ['gc', 'runFinalization'], 0)) {
@@ -51,12 +47,9 @@ class ExplicitGarbageCollectionAstVisitor extends AbstractAstVisitor {
             }
 
         } 
-
-
-        super.visitMethodCallExpression call
     }
 
-    private boolean isPropertyExpression(Expression expression, String object, String propertyName) {
+    private static boolean isPropertyExpression(Expression expression, String object, String propertyName) {
         if (!(expression instanceof PropertyExpression)) {
             return false
         }

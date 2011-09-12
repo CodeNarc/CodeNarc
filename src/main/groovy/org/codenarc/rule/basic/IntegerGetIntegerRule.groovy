@@ -16,8 +16,8 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -33,7 +33,7 @@ class IntegerGetIntegerRule extends AbstractAstVisitorRule {
     Class astVisitorClass = IntegerGetIntegerAstVisitor
 }
 
-class IntegerGetIntegerAstVisitor extends AbstractAstVisitor {
+class IntegerGetIntegerAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
@@ -42,8 +42,5 @@ class IntegerGetIntegerAstVisitor extends AbstractAstVisitor {
         } else if (AstUtil.isMethodCall(call, 'Integer', 'getInteger', 2)) {
             addViolation call, 'Integer.getInteger(String, Integer) is a confusing API for reading System properties. Prefer the System.getProperty(String) API.'
         }
-        super.visitMethodCallExpression(call)
     }
-
-
 }

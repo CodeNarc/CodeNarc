@@ -17,7 +17,7 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -26,7 +26,7 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  * @author René Scheibe
  */
-abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
+abstract class ExplicitCallToMethodAstVisitor extends AbstractMethodCallExpressionVisitor  {
 
     final String methodName
 
@@ -48,7 +48,6 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractAstVisitor  {
                 }
             }
         }
-        super.visitMethodCallExpression call
     }
 
     @SuppressWarnings('CatchThrowable')

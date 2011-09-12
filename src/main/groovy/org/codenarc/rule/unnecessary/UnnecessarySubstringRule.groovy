@@ -17,32 +17,29 @@ package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
  * This rule finds usages of String.substring(int) and String.substring(int, int) that can be replaced by use of the subscript operator. For instance, var.substring(5) can be replaced with var[5..-1]. 
  *
  * @author Hamlet D'Arcy
-  */
+ */
 class UnnecessarySubstringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySubstring'
     int priority = 3
     Class astVisitorClass = UnnecessarySubstringAstVisitor
 }
 
-class UnnecessarySubstringAstVisitor extends AbstractAstVisitor {
+class UnnecessarySubstringAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
-        if (isFirstVisit(call)) {
-            if (AstUtil.isMethodCall(call, '[^A-Z].*', 'substring', 1) && call.arguments instanceof ArgumentListExpression) {
-                addViolation(call, 'The String.substring(int) method can be replaced with the subscript operator')
-            } else if (AstUtil.isMethodCall(call, '[^A-Z].*', 'substring', 2) && call.arguments instanceof ArgumentListExpression) {
-                addViolation(call, 'The String.substring(int, int) method can be replaced with the subscript operator')
-            }
-            super.visitMethodCallExpression(call)
+        if (AstUtil.isMethodCall(call, '[^A-Z].*', 'substring', 1) && call.arguments instanceof ArgumentListExpression) {
+            addViolation(call, 'The String.substring(int) method can be replaced with the subscript operator')
+        } else if (AstUtil.isMethodCall(call, '[^A-Z].*', 'substring', 2) && call.arguments instanceof ArgumentListExpression) {
+            addViolation(call, 'The String.substring(int, int) method can be replaced with the subscript operator')
         }
     }
 }

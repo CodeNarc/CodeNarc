@@ -17,8 +17,8 @@ package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -34,12 +34,10 @@ class UnnecessaryGetterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryGetterAstVisitor
 }
 
-class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
+class UnnecessaryGetterAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         addViolationsIfGetter(call)
-        super.visitMethodCallExpression call
     }
 
     private addViolationsIfGetter(MethodCallExpression call) {

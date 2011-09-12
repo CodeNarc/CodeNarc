@@ -15,13 +15,11 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.ASTNode
-import org.codenarc.util.SourceCodeUtil
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * If a method is called and the last parameter is an inline closure it can be declared outside of the method call brackets.
@@ -34,34 +32,26 @@ class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ClosureAsLastMethodParameterAstVisitor
 }
 
-class ClosureAsLastMethodParameterAstVisitor extends AbstractAstVisitor {
-
-    @Override
-    protected String sourceLine(ASTNode node) {
-        SourceCodeUtil.nodeSourceLines(sourceCode, node).join('\n')
-    }
+class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        if (isFirstVisit(call)) {
-            def arguments = AstUtil.getMethodArguments(call)
-            if (arguments && arguments.last() instanceof ClosureExpression) {
-                def lastColumnForClosure = arguments.last().lastColumnNumber
-                def lastColumnForMethodCall = call.lastColumnNumber
-                def lastColumnForMethodArguments = call.arguments.lastColumnNumber
-                def sourceLine = sourceCode.lines[call.lineNumber - 1]
-                def firstChar = sourceLine[call.columnNumber - 1]
+        def arguments = AstUtil.getMethodArguments(call)
+        if (arguments && arguments.last() instanceof ClosureExpression) {
+            def lastColumnForClosure = arguments.last().lastColumnNumber
+            def lastColumnForMethodCall = call.lastColumnNumber
+            def lastColumnForMethodArguments = call.arguments.lastColumnNumber
+            def sourceLine = sourceCode.lines[call.lineNumber - 1]
+            def firstChar = sourceLine[call.columnNumber - 1]
 
-                // If a method call is surrounded by parentheses (possibly unnecessary), then the AST includes those in the
-                // MethodCall start/end column indexes. In that case, do not include the ending parentheses in the comparison.
-                def endIndex = firstChar == '(' ? lastColumnForMethodArguments : lastColumnForMethodCall
+            // If a method call is surrounded by parentheses (possibly unnecessary), then the AST includes those in the
+            // MethodCall start/end column indexes. In that case, do not include the ending parentheses in the comparison.
+            def endIndex = firstChar == '(' ? lastColumnForMethodArguments : lastColumnForMethodCall
 
-                if (lastColumnForClosure < endIndex) {
-                    addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure an can appear outside the parenthesis")
-                }
+            if (lastColumnForClosure < endIndex) {
+                addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure an can appear outside the parenthesis")
             }
         }
-        super.visitMethodCallExpression(call)
     }
 
 }

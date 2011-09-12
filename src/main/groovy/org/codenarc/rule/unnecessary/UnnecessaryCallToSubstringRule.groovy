@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Calling String.substring(0) always returns the original string. This code is meaningless.
@@ -31,7 +32,7 @@ class UnnecessaryCallToSubstringRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryCallToSubstringAstVisitor
 }
 
-class UnnecessaryCallToSubstringAstVisitor extends AbstractAstVisitor {
+class UnnecessaryCallToSubstringAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
@@ -41,8 +42,5 @@ class UnnecessaryCallToSubstringAstVisitor extends AbstractAstVisitor {
                 addViolation(call, 'Invoking the String method substring(0) always returns the original value. Method possibly missing 2nd parameter')
             }
         }
-        super.visitMethodCallExpression(call)
     }
-
-
 }

@@ -59,15 +59,8 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
             }
         '''
         assertTwoViolations(SOURCE,
-                2, '''[1, 2, 3].collect() {
-                it * 2
-            }''',
-                2, '''[1, 2, 3].collect() {
-                it * 2
-            }.any (
-            ) {
-                it > 5
-            }''')   // todo: replace violation line number and message
+                2, '''[1, 2, 3].collect() {''',
+                2, '''[1, 2, 3].collect() {''')   // todo: replace violation line number and message
     }
 
     void testSyntheticMethodCall() {

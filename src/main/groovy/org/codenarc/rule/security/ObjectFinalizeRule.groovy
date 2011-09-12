@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * The finalize() method should only be called by the JVM after the object has been garbage collected.
@@ -31,7 +32,7 @@ class ObjectFinalizeRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ObjectFinalizeAstVisitor
 }
 
-class ObjectFinalizeAstVisitor extends AbstractAstVisitor {
+class ObjectFinalizeAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
@@ -39,6 +40,5 @@ class ObjectFinalizeAstVisitor extends AbstractAstVisitor {
         if (AstUtil.isMethodNamed(call, 'finalize', 0)) {
             addViolation(call, 'The finalize() method should only be called by the JVM after the object has been garbage collected')
         }
-        super.visitMethodCallExpression(call)
     }
 }

@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -32,15 +32,13 @@ class JUnitFailWithoutMessageRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitFailWithoutMessageRuleAstVisitor extends AbstractAstVisitor {
+class JUnitFailWithoutMessageRuleAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override 
     void visitMethodCallExpression(MethodCallExpression call) {
 
         if (AstUtil.isMethodCall(call, ['this', 'Assert'], ['fail'], 0)) {
             addViolation call, 'Pass a String parameter to the fail method'
         }
-        super.visitMethodCallExpression call
     }
-
-
 }

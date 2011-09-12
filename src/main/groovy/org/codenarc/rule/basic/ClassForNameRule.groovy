@@ -16,8 +16,8 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -31,15 +31,12 @@ class ClassForNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ClassForNameAstVisitor
 }
 
-class ClassForNameAstVisitor extends AbstractAstVisitor {
+class ClassForNameAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression node) {
 
-        if (isFirstVisit(node)) {
             if (AstUtil.isMethodCall(node, 'Class', 'forName', 1) || AstUtil.isMethodCall(node, 'Class', 'forName', 3)) {
-               addViolation(node, 'Methods calls to Class.forName(...) can create resource leaks and should almost always be replaced with calls to ClassLoader.loadClass(...)')
+                addViolation(node, 'Methods calls to Class.forName(...) can create resource leaks and should almost always be replaced with calls to ClassLoader.loadClass(...)')
             }
-        }
-        super.visitMethodCallExpression(node)
     }
 }

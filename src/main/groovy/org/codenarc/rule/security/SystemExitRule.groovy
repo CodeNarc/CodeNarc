@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug code or code imported from a non-J2EE application.
@@ -31,7 +32,7 @@ class SystemExitRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SystemExitAstVisitor
 }
 
-class SystemExitAstVisitor extends AbstractAstVisitor {
+class SystemExitAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
@@ -39,6 +40,5 @@ class SystemExitAstVisitor extends AbstractAstVisitor {
         if (AstUtil.isMethodCall(call, 'System', 'exit', 1)) {
             addViolation(call, 'Calling System.exit() is insecure and can expose a denial of service attack')
         }
-        super.visitMethodCallExpression(call)
     }
 }

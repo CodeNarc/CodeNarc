@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 import org.codenarc.util.ConsecutiveUtils
 import org.codehaus.groovy.ast.expr.GStringExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.
@@ -33,10 +34,10 @@ class ConsecutiveLiteralAppendsRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ConsecutiveLiteralAppendsAstVisitor
 }
 
-class ConsecutiveLiteralAppendsAstVisitor extends AbstractAstVisitor {
+class ConsecutiveLiteralAppendsAstVisitor extends AbstractMethodCallExpressionVisitor {
+
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
 
         if (isChainedAppend(call)) {
             def arg1 = AstUtil.getMethodArguments(call.objectExpression)[0]
@@ -49,7 +50,6 @@ class ConsecutiveLiteralAppendsAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-        super.visitMethodCallExpression(call)
     }
 
     static private boolean isChainedAppend(MethodCallExpression call) {

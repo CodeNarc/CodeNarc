@@ -25,6 +25,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codehaus.groovy.ast.expr.Expression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Some method calls to Object.collect(Closure) can be replaced with the spread operator. For instance, list.collect { it.multiply(2) } can be replaced by list*.multiply(2). 
@@ -37,7 +38,7 @@ class UnnecessaryCollectCallRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryCollectCallAstVisitor
 }
 
-class UnnecessaryCollectCallAstVisitor extends AbstractAstVisitor {
+class UnnecessaryCollectCallAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
@@ -50,7 +51,6 @@ class UnnecessaryCollectCallAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-        super.visitMethodCallExpression call
     }
 
     private whenOneStatementClosureFound(List args, Closure callback) {

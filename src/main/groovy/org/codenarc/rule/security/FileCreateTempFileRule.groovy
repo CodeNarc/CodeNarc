@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library.
@@ -35,7 +36,7 @@ class FileCreateTempFileRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 
-class FileCreateTempFileAstVisitor extends AbstractAstVisitor {
+class FileCreateTempFileAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
@@ -44,6 +45,5 @@ class FileCreateTempFileAstVisitor extends AbstractAstVisitor {
                 AstUtil.isMethodCall(call, 'File', 'createTempFile', 3)) {
             addViolation(call, 'The method File.createTempFile is insecure. Use a secure API such as that provided by ESAPI')
         }
-        super.visitMethodCallExpression(call)
     }
 }

@@ -16,8 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -34,7 +34,7 @@ class UseAssertEqualsInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UseAssertEqualsInsteadOfAssertTrueAstVisitor
 }
 
-class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
+class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @SuppressWarnings('DuplicateLiteral')
     void visitMethodCallExpression(MethodCallExpression call) {
@@ -51,8 +51,5 @@ class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
                 addViolation call, "Replace $call.methodAsString with a call to assertEquals()"
             }
         }
-
-        super.visitMethodCallExpression call
     }
-
 }

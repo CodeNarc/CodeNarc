@@ -17,8 +17,8 @@ package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.TupleExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * This rule catches calling the method removeAll with yourself as a parameter.
@@ -31,7 +31,7 @@ class RemoveAllOnSelfRule extends AbstractAstVisitorRule {
     Class astVisitorClass = RemoveAllOnSelfAstVisitor
 }
 
-class RemoveAllOnSelfAstVisitor extends AbstractAstVisitor {
+class RemoveAllOnSelfAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     void visitMethodCallExpression(MethodCallExpression call) {
 
@@ -42,7 +42,6 @@ class RemoveAllOnSelfAstVisitor extends AbstractAstVisitor {
                 addViolation call, "A call to $call.text can be replaced with ${call.objectExpression.text}.clear()"
             }
         }
-        super.visitMethodCallExpression(call)
     }
 
     private static boolean isMethodNamed(MethodCallExpression call, target) {

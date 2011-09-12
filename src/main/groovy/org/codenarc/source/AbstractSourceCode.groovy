@@ -17,7 +17,9 @@ package org.codenarc.source
 
 import groovy.grape.GrabAnnotationTransformation
 import org.apache.log4j.Logger
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ModuleNode
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilationUnit
 import org.codehaus.groovy.control.Phases
@@ -38,15 +40,18 @@ abstract class AbstractSourceCode implements SourceCode {
     private ModuleNode ast
     private List lines
     private astParsed = false
+    private final initLock = new Object()
+    private Map<ClassNode, List<MethodCallExpression>> methodCallExpressions
+
 
     /**
      * @return the List of lines of the source code (with line terminators removed)
      */
     List getLines() {
         if (lines == null) {
-            lines = new StringReader(getText()).readLines()
+            lines = new StringReader(getText()).readLines();
         }
-        lines
+        return lines;
     }
 
     /**
@@ -65,21 +70,35 @@ abstract class AbstractSourceCode implements SourceCode {
      * @return the ModuleNode representing the AST for this source file
      */
     ModuleNode getAst() {
-        if (!astParsed) {
-            SourceUnit unit = SourceUnit.create('None', getText())
-            CompilationUnit compUnit = new CompilationUnit()
-            compUnit.addSource(unit)
-            try {
-                removeGrabTransformation(compUnit)
-                compUnit.compile(Phases.CONVERSION)
-                ast = unit.getAST()
-            }
-            catch (CompilationFailedException e) {
-                LOG.warn("Compilation failed for [${toString()}]")
-            }
-            astParsed = true
-        }
+        init()
         ast
+    }
+
+    private void init() {
+        synchronized (initLock) {
+            if (!astParsed) {
+                SourceUnit unit = SourceUnit.create('None', getText())
+                CompilationUnit compUnit = new CompilationUnit()
+                compUnit.addSource(unit)
+                try {
+                    removeGrabTransformation(compUnit)
+                    compUnit.compile(Phases.CONVERSION)
+                    ast = unit.getAST()
+                }
+                catch (CompilationFailedException e) {
+                    LOG.warn("Compilation failed for [${toString()}]")
+                }
+
+                methodCallExpressions = new ExpressionCollector().getMethodCalls(ast)
+
+                astParsed = true
+            }
+        }
+    }
+
+    Map<ClassNode, List<MethodCallExpression>> getMethodCallExpressions() {
+        init()
+        methodCallExpressions.asImmutable()
     }
 
     private removeGrabTransformation(CompilationUnit compUnit) {

@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * This rule detects JUnit calling assertEquals where the first or second parameter is null. These assertion should be made against the assertNull method instead.
@@ -32,7 +32,8 @@ class UseAssertNullInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class UseAssertNullInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
+class UseAssertNullInsteadOfAssertEqualsAstVisitor extends AbstractMethodCallExpressionVisitor {
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)
@@ -44,7 +45,6 @@ class UseAssertNullInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
                 addViolation call, 'assertEquals can be simplified using assertNull'
             }
         }
-        super.visitMethodCallExpression call
     }
 
 }

@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Method calls to System.runFinalizersOnExit() should not be allowed. This method is inherently
@@ -35,7 +36,7 @@ class SystemRunFinalizersOnExitRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SystemRunFinalizersOnExitAstVisitor
 }
 
-class SystemRunFinalizersOnExitAstVisitor extends AbstractAstVisitor  {
+class SystemRunFinalizersOnExitAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     void visitMethodCallExpression(MethodCallExpression call) {
         if (call.objectExpression instanceof VariableExpression) {
@@ -43,6 +44,5 @@ class SystemRunFinalizersOnExitAstVisitor extends AbstractAstVisitor  {
                  addViolation(call, 'System.runFinalizersOnExit() should not be invoked')
             }
         }
-        super.visitMethodCallExpression(call)
     }
 }

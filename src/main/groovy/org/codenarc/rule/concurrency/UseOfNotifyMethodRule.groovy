@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * This code calls notify() rather than notifyAll(). Java monitors are often used for multiple conditions. Calling
@@ -33,13 +34,11 @@ class UseOfNotifyMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UseOfNotifyMethodAstVisitor
 }
 
-class UseOfNotifyMethodAstVisitor extends AbstractAstVisitor {
+class UseOfNotifyMethodAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     void visitMethodCallExpression(MethodCallExpression call) {
         if (AstUtil.isMethodNamed(call, 'notify', 0)) {
             addViolation call, "The method $call.text should be replaced with ${call.objectExpression.text}.notifyAll()"
         }
     }
-
-
 }

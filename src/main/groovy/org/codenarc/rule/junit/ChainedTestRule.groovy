@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * A test method that invokes another test method is a chained test; the methods are dependent on one another. Tests should be atomic, and not be dependent on one another. 
@@ -32,15 +33,11 @@ class ChainedTestRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class ChainedTestAstVisitor extends AbstractAstVisitor {
+class ChainedTestAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, 'this', 'test.*', 0)) {
             addViolation(call, "The test method $call.methodAsString() is being invoked explicitly from within a unit test. Tests should be isolated and not dependent on one another")
         }
-        super.visitMethodCallExpression(call)
     }
-
-
 }

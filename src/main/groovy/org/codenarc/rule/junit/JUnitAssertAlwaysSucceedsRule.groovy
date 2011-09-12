@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Rule that checks for JUnit <code>assert()</code> method calls with constant arguments
@@ -39,7 +39,7 @@ class JUnitAssertAlwaysSucceedsRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractAstVisitor  {
+class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         def isMatch =
@@ -49,7 +49,5 @@ class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractAstVisitor  {
         if (isMatch) {
             addViolation(methodCall, "The assertion $methodCall.text will always pass and is therefore pointless")
         }
-        super.visitMethodCallExpression(methodCall)
     }
-
 }

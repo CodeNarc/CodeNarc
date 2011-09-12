@@ -17,8 +17,8 @@ package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.TupleExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Useless call to collections. This call doesn't make sense. For any collection c, calling c.containsAll(c) should
@@ -32,7 +32,7 @@ class UnnecessaryCollectionCallRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryCollectionCallAstVisitor
 }
 
-class UnnecessaryCollectionCallAstVisitor extends AbstractAstVisitor {
+class UnnecessaryCollectionCallAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     private static final List USELESS_METHOD_NAMES = ['retainAll', 'containsAll']
 
@@ -47,8 +47,5 @@ class UnnecessaryCollectionCallAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-
-        super.visitMethodCallExpression(call)
     }
-
 }

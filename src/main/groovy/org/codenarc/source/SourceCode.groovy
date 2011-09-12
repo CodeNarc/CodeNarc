@@ -16,6 +16,8 @@
  package org.codenarc.source
 
 import org.codehaus.groovy.ast.ModuleNode
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Represents a unit of source code to be analyzed
@@ -75,5 +77,12 @@ interface SourceCode {
      * @return true only if the source code is valid
      */
     boolean isValid()
+
+    /**
+     * This method gives you all of the MethodCallExpressions defined in the AST without forcing you to walk the
+     * entire tree on every request. They are cached for the lifespan of the SourceCode. 
+     * @return
+     */
+    Map<ClassNode, List<MethodCallExpression>> getMethodCallExpressions()
 
 }

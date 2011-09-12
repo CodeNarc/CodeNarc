@@ -16,8 +16,8 @@
 package org.codenarc.rule.jdbc
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -34,7 +34,7 @@ class DirectConnectionManagementRule extends AbstractAstVisitorRule {
     Class astVisitorClass = DirectConnectionManagementAstVisitor
 }
 
-class DirectConnectionManagementAstVisitor extends AbstractAstVisitor {
+class DirectConnectionManagementAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
@@ -44,8 +44,6 @@ class DirectConnectionManagementAstVisitor extends AbstractAstVisitor {
         } else if (AstUtil.isMethodNamed(call, 'getConnection') && isJavaSQLDriverManagerCall(call)) {
             addViolation(call, 'Using DriverManager.getConnection() violates the J2EE standards. Use the connection from the context instead')
         }
-
-        super.visitMethodCallExpression(call)
     }
 
     private static boolean isJavaSQLDriverManagerCall(MethodCallExpression call) {

@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.NotExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * In unit tests, if a condition is expected to be true then there is no sense using assertFalse with the negation operator. For instance, assertFalse(!condition) can always be simplified to assertTrue(condition)
@@ -33,7 +34,7 @@ class UseAssertTrueInsteadOfNegationRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class UseAssertTrueInsteadOfNegationAstVisitor extends AbstractAstVisitor {
+class UseAssertTrueInsteadOfNegationAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @SuppressWarnings('DuplicateLiteral')
     void visitMethodCallExpression(MethodCallExpression call) {
@@ -50,7 +51,5 @@ class UseAssertTrueInsteadOfNegationAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-
-        super.visitMethodCallExpression call
     }
 }

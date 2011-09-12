@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * This rule detects JUnit calling assertTrue where the first or second parameter is an Object#is() call testing for reference equality. These assertion should be made against the assertSame method instead.
@@ -32,7 +33,9 @@ class UseAssertSameInsteadOfAssertTrueRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UseAssertSameInsteadOfAssertTrueAstVisitor
 }
 
-class UseAssertSameInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
+class UseAssertSameInsteadOfAssertTrueAstVisitor extends AbstractMethodCallExpressionVisitor {
+
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)
@@ -44,8 +47,6 @@ class UseAssertSameInsteadOfAssertTrueAstVisitor extends AbstractAstVisitor {
                 addViolation call, 'assert method can be simplified using the assertSame method'
             }
         }
-
-        super.visitMethodCallExpression call
     }
 
 }

@@ -19,6 +19,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Rule that checks for calls to <code>printStackTrace()</code>.
@@ -32,12 +33,11 @@ class PrintStackTraceRule extends AbstractAstVisitorRule {
     Class astVisitorClass = PrintStackTraceAstVisitor
 }
 
-class PrintStackTraceAstVisitor extends AbstractAstVisitor {
+class PrintStackTraceAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
-        if (isFirstVisit(methodCall) && AstUtil.isMethodNamed(methodCall, 'printStackTrace', 0)) {
+        if (AstUtil.isMethodNamed(methodCall, 'printStackTrace', 0)) {
             addViolation(methodCall, 'printStackTrace() should be replaced with something more robust')
         }
-        super.visitMethodCallExpression(methodCall)
     }
 }

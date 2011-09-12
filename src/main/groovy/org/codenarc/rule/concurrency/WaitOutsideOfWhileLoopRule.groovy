@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.concurrency
 
+import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.stmt.WhileStatement
 
 /**
  * Checks for calls to wait() that are not within a while loop.
@@ -49,7 +49,6 @@ class WaitOutsideOfWhileLoopAstVisitor extends AbstractAstVisitor {
         if (AstUtil.isMethodNamed(call, 'wait', 0) && !withinWhileLoop) {
             addViolation call, 'Only call the wait() method within a while loop. Or better yet, prefer the Java concurrency utilities to wait() and notify()'
         }
+        super.visitMethodCallExpression(call)
     }
-
-
 }
