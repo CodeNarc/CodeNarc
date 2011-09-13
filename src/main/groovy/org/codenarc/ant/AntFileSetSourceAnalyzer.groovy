@@ -15,10 +15,6 @@
  */
 package org.codenarc.ant
 
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.ConcurrentMap
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import org.apache.log4j.Logger
 import org.apache.tools.ant.Project
@@ -30,6 +26,7 @@ import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceFile
 import org.codenarc.util.PathUtil
+import java.util.concurrent.*
 
 /**
  * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
@@ -76,9 +73,15 @@ class AntFileSetSourceAnalyzer extends BaseSourceAnalyzer {
         def startTime = System.currentTimeMillis()
         def reportResults = new DirectoryResults()
 
+        def numThreads = Runtime.getRuntime().availableProcessors() + 1
+        def pool = Executors.newFixedThreadPool(numThreads)
+
         fileSets.each { fileSet ->
-            processFileSet(fileSet, ruleSet)
+            processFileSet(fileSet, ruleSet, pool)
         }
+        pool.shutdown()
+        def completed = pool.awaitTermination(POOL_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        assert completed, 'Thread Pool terminated before completion.'
 
         addDirectoryResults(reportResults)
         LOG.info("Analysis time=${System.currentTimeMillis() - startTime}ms")
@@ -104,7 +107,7 @@ class AntFileSetSourceAnalyzer extends BaseSourceAnalyzer {
         this.fileSets = fileSets
     }
 
-    private void processFileSet(FileSet fileSet, RuleSet ruleSet) {
+    private void processFileSet(FileSet fileSet, RuleSet ruleSet, ExecutorService pool) {
         def dirScanner = fileSet.getDirectoryScanner(project)
         def baseDir = fileSet.getDir(project)
         def includedFiles = dirScanner.includedFiles
@@ -114,23 +117,10 @@ class AntFileSetSourceAnalyzer extends BaseSourceAnalyzer {
             return
         }
 
-        executeWithThreadPool { pool ->
-            includedFiles.each { filePath ->
-                def task = buildTask(baseDir, filePath, ruleSet)
-                pool.submit(task)
-            }
+        includedFiles.each { filePath ->
+            def task = buildTask(baseDir, filePath, ruleSet)
+            pool.submit(task)
         }
-    }
-
-    private void executeWithThreadPool(Closure closure) {
-        def numThreads = Runtime.getRuntime().availableProcessors() + 1
-        def pool = Executors.newFixedThreadPool(numThreads)
-
-        closure(pool)
-
-        pool.shutdown()
-        def completed = pool.awaitTermination(POOL_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        assert completed, 'Thread Pool terminated before completion.'
     }
 
     private Runnable buildTask(File baseDir, String filePath, RuleSet ruleSet) {
