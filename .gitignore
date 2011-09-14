@@ -1,0 +1,14 @@
+
+# /
+/.classpath
+/.settings
+/.project
+/hamlet_docs
+/*.patch
+/*.iws
+/AntBuilderTestXmlReport.xml
+/*.html
+/target
+/AntBuilderTestTextReport.txt
+/CodeNarcReport.txt
+/CodeNarcXmlReport.xml
