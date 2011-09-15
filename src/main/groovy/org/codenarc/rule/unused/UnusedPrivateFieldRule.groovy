@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unused
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.PropertyNode
@@ -27,7 +28,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
@@ -54,15 +54,16 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
 
         def visitor = new UnusedPrivateFieldAstVisitor(unusedPrivateFields: allPrivateFields)
         visitor.rule = this
-        visitor.sourceCode = sourceCode
         ast.classes.each { classNode ->
             visitor.visitClass(classNode)
         }
+        visitor.sourceCode = sourceCode
 
         allPrivateFields.each { key, FieldNode value ->
             visitor.addViolation(value, "The field $key is not used within the class ${value.owner?.name}")
         }
-        violations.addAll(visitor.violations)
+        def filteredViolations = sourceCode.suppressionAnalyzer.filterSuppressedViolations(visitor.violations)
+        violations.addAll(filteredViolations)
     }
 
     @SuppressWarnings('NestedBlockDepth')

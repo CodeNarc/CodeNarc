@@ -25,6 +25,7 @@ import org.codehaus.groovy.control.CompilationUnit
 import org.codehaus.groovy.control.Phases
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
+import org.codenarc.analyzer.SuppressionAnalyzer
 
 /**
  * Abstract superclass for SourceCode implementations
@@ -42,7 +43,15 @@ abstract class AbstractSourceCode implements SourceCode {
     private astParsed = false
     private final initLock = new Object()
     private Map<ClassNode, List<MethodCallExpression>> methodCallExpressions
+    SuppressionAnalyzer suppressionAnalyzer
 
+    /**
+     * Setter exists to avoid circular dependency.
+     * @param suppressionAnalyzer suppression analyzer
+     */
+    protected void setSuppressionAnalyzer(SuppressionAnalyzer suppressionAnalyzer) {
+        this.suppressionAnalyzer = suppressionAnalyzer;
+    }
 
     /**
      * @return the List of lines of the source code (with line terminators removed)

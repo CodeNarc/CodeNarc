@@ -20,6 +20,7 @@ NEW AND UPDATED RULES
 
 BUG FIXES 
 - #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override
+- #3394313: Fixed UnusedPrivateField to honor the @SuppressWarnings annotation.
 
 BREAKING CHANGES
 *** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors. 

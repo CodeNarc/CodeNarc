@@ -15,6 +15,8 @@
  */
 package org.codenarc.source
 
+import org.codenarc.analyzer.SuppressionAnalyzer
+
 /**
  * SourceCode implementation that uses source from a pre-defined String.
  * Note that the path is normalized: file separator chars are normalized to standard '/'.
@@ -38,6 +40,7 @@ class SourceString extends AbstractSourceCode {
         this.source = source
         setPath(path)
         this.name = name
+        setSuppressionAnalyzer(new SuppressionAnalyzer(this))
     }
 
     /**

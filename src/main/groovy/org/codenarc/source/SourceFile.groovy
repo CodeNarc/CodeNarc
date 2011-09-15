@@ -15,6 +15,8 @@
  */
 package org.codenarc.source
 
+import org.codenarc.analyzer.SuppressionAnalyzer
+
 /**
  * The SourceCode implementation for a single file.
  * Note that the path is normalized: file separator chars are normalized to standard '/'.
@@ -35,6 +37,7 @@ class SourceFile extends AbstractSourceCode {
         assert file
         this.file = file
         this.path = normalizePath(file.path)
+        setSuppressionAnalyzer(new SuppressionAnalyzer(this))
     }
 
     /**

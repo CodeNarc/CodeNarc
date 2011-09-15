@@ -74,6 +74,26 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count = 23')
     }
 
+    void testSuppressWarningsOnClass() {
+        final SOURCE = '''
+            @SuppressWarnings('UnusedPrivateField')
+            class MyClass {
+                private int count = 23
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testSuppressWarningsOnField() {
+        final SOURCE = '''
+            class MyClass {
+                @SuppressWarnings('UnusedPrivateField')
+                private int count = 23
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_AllPrivateFieldsUsed() {
         final SOURCE = '''
             @MyAnnotation(elem = { 1 + 2 })

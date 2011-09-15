@@ -32,6 +32,17 @@ public class SuppressionAnalyzer {
         return suppressedRuleNames.contains(rule.getName());
     }
 
+    public List<Violation> filterSuppressedViolations(Iterable<Violation> violations) {
+        List<Violation> result = new ArrayList<Violation>();
+        if (violations == null) return result;
+        for (Violation v : violations) {
+            if (!isViolationSuppressed(v)) {
+                result.add(v);
+            }
+        }
+        return result;
+    }
+
     public boolean isViolationSuppressed(Violation violation) {
         if (violation == null) return false;
         if (violation.getRule() == null) return false;

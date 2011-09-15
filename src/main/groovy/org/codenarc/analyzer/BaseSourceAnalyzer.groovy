@@ -26,13 +26,13 @@ import org.codenarc.source.SourceCode
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
 abstract class BaseSourceAnalyzer implements SourceAnalyzer {
 
-    protected List<Violation> collectViolations(SourceCode sourceFile, RuleSet ruleSet) {
+    protected List<Violation> collectViolations(SourceCode sourceCode, RuleSet ruleSet) {
         def allViolations = []
-        def suppressionService = new SuppressionAnalyzer(sourceFile)
+        def suppressionService = sourceCode.suppressionAnalyzer
 
         def validRules = ruleSet.rules.findAll {!suppressionService.isRuleSuppressed(it)}
         for (Rule rule: validRules) {
-            def violations = rule.applyTo(sourceFile)
+            def violations = rule.applyTo(sourceCode)
             violations.removeAll { suppressionService.isViolationSuppressed(it) }
             allViolations.addAll(violations)
         }

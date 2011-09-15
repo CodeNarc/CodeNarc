@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- package org.codenarc.source
+package org.codenarc.source
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.analyzer.SuppressionAnalyzer
 
 /**
  * Represents a unit of source code to be analyzed
@@ -25,6 +26,12 @@ import org.codehaus.groovy.ast.ClassNode
  * @author Chris Mair
   */
 interface SourceCode {
+
+    /**
+     * Returns information about this classes' suppressed warnings.
+     * @return suppression analyzer
+     */
+    SuppressionAnalyzer getSuppressionAnalyzer()
 
     /**
      * Get the logical name for this source code. If this object is a file, then the name
