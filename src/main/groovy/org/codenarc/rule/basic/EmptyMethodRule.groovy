@@ -1,4 +1,4 @@
-/*
+/*AbstractMethodVisitor
  * Copyright 2009 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation. 
@@ -32,15 +32,14 @@ class EmptyMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyMethodAstVisitor
 }
 
-class EmptyMethodAstVisitor extends AbstractAstVisitor {
+class EmptyMethodAstVisitor extends AbstractMethodVisitor {
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
 
         if (AstUtil.isEmptyBlock(node.code) && !Modifier.isAbstract(node.declaringClass.modifiers)) {
             if (!node.annotations.find { it?.classNode?.name == 'Override'}) {
                 addViolation(node, "The method $node.name is both empty and not marked with @Override")
             }
         }
-        super.visitMethodEx(node)
     }
 }

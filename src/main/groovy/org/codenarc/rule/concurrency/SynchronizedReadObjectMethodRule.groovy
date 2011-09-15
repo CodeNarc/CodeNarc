@@ -22,8 +22,8 @@ import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -40,50 +40,46 @@ class SynchronizedReadObjectMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SynchronizedReadObjectMethodAstVisitor
 }
 
-    class SynchronizedReadObjectMethodAstVisitor extends AbstractAstVisitor {
-        ClassNode serializableClass = null
+class SynchronizedReadObjectMethodAstVisitor extends AbstractMethodVisitor {
 
-        @Override
-        protected void visitClassEx(ClassNode node) {
+    @Override
+    void visitMethod(MethodNode node) {
+        def classNode = getCurrentClassNode()
+        if (isSerializable(classNode) && AstUtil.isMethodNode(node, 'readObject', 1)
+            && Modifier.isPrivate(node.modifiers)) {
+            Parameter parm = node.parameters[0]
+            if (node?.returnType?.name == 'void' && AstUtil.classNodeImplementsType(parm.type, ObjectInputStream)) {
 
-            node.interfaces?.each {
-                if (AstUtil.classNodeImplementsType(it, Serializable)) {
-                    serializableClass = it
+                if (Modifier.isSynchronized(node.modifiers)) {
+                    addViolation(node, "The Serializable class $classNode.name has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable")
+                } else if (isSynchronizedBlock(node.code)) {
+                    addViolation(node.code, "The Serializable class $classNode.name has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable")
                 }
             }
-            super.visitClassEx(node)
         }
-
-
-        @Override
-        void visitMethodEx(MethodNode node) {
-
-            if (serializableClass && AstUtil.isMethodNode(node, 'readObject', 1)
-                    && Modifier.isPrivate(node.modifiers)) {
-                Parameter parm = node.parameters[0]
-                if (node?.returnType?.name == 'void' && AstUtil.classNodeImplementsType(parm.type, ObjectInputStream)) {
-
-                    if (Modifier.isSynchronized(node.modifiers)) {
-                        addViolation(node, "The Serializable class $currentClassName has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable")
-                    } else if (isSynchronizedBlock(node.code)) {
-                        addViolation(node.code, "The Serializable class $currentClassName has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable")
-                    }
-                }
-            }
-            super.visitMethodEx(node)
-        }
-
-        static boolean isSynchronizedBlock(Statement statement) {
-            if (!(statement instanceof BlockStatement)) {
-                return false
-            }
-            
-            if (statement.statements.size() != 1) {
-                return false
-            }
-
-            statement.statements[0] instanceof SynchronizedStatement
-        }
-
-
     }
+
+    private static isSerializable(ClassNode node) {
+        boolean isSerializable = false
+        node.interfaces?.each {
+            if (AstUtil.classNodeImplementsType(it, Serializable)) {
+                isSerializable = true
+            }
+        }
+        isSerializable
+    }
+
+    static boolean isSynchronizedBlock(Statement statement) {
+        if (!(statement instanceof BlockStatement)) {
+            return false
+        }
+
+        if (statement.statements.size() != 1) {
+            return false
+        }
+
+        statement.statements[0] instanceof SynchronizedStatement
+    }
+
+
+}

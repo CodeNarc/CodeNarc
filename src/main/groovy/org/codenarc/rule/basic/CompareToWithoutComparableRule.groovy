@@ -16,8 +16,8 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -33,14 +33,14 @@ class CompareToWithoutComparableRule extends AbstractAstVisitorRule {
     Class astVisitorClass = CompareToWithoutComparableAstVisitor
 }
 
-class CompareToWithoutComparableAstVisitor extends AbstractAstVisitor {
+class CompareToWithoutComparableAstVisitor extends AbstractMethodVisitor {
 
-    void visitMethodEx(MethodNode node) {
+    @Override
+    void visitMethod(MethodNode node) {
         if (AstUtil.isMethodNode(node, 'compareTo', 1, Integer.TYPE)) {
             if (!AstUtil.classNodeImplementsType(node.declaringClass, Comparable)) {
                 addViolation(node.declaringClass, "compareTo method at line $node.lineNumber would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable.")
             }
         }
-        super.visitMethodEx node
     }
 }

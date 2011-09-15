@@ -19,8 +19,8 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -35,9 +35,10 @@ class UnnecessaryOverridingMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryOverridingMethodAstVisitor
 }
 
-class UnnecessaryOverridingMethodAstVisitor extends AbstractAstVisitor {
+class UnnecessaryOverridingMethodAstVisitor extends AbstractMethodVisitor {
 
-    void visitMethodEx(MethodNode node) {
+    @Override
+    void visitMethod(MethodNode node) {
 
         if (isSingleLineMethod(node) && node.code.statements[0]?.expression instanceof MethodCallExpression) {
             MethodCallExpression methodCall = node.code.statements[0].expression
@@ -47,7 +48,6 @@ class UnnecessaryOverridingMethodAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-        super.visitMethodEx(node)
     }
 
     private static boolean isSingleLineMethod(MethodNode node) {

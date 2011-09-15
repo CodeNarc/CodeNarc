@@ -16,8 +16,8 @@
 package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -31,13 +31,13 @@ class InconsistentPropertyLockingRule extends AbstractAstVisitorRule {
     Class astVisitorClass = InconsistentPropertyLockingAstVisitor
 }
 
-class InconsistentPropertyLockingAstVisitor extends AbstractAstVisitor {
+class InconsistentPropertyLockingAstVisitor extends AbstractMethodVisitor {
 
     private Map<String, MethodNode> guardedMethods = [:]
     private Map<String, MethodNode> unguardedMethods = [:]
 
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
         if (node.name.startsWith('get') && node.name.size() > 3 && AstUtil.getParameterNames(node).isEmpty()) {
             // is a getter
             def propName = node.name[3..-1]
@@ -59,8 +59,6 @@ class InconsistentPropertyLockingAstVisitor extends AbstractAstVisitor {
             addViolationOnMismatch("get$propName", node.name)
             addViolationOnMismatch("is$propName", node.name)
         }
-
-        super.visitMethodEx(node)
     }
 
     private saveMethodInfo(MethodNode node) {

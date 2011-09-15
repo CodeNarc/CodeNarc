@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.MethodNode
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 
 /**
  * A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary. 
@@ -31,15 +31,13 @@ class UnnecessaryFinalOnPrivateMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryFinalOnPrivateMethodAstVisitor
 }
 
-class UnnecessaryFinalOnPrivateMethodAstVisitor extends AbstractAstVisitor {
+class UnnecessaryFinalOnPrivateMethodAstVisitor extends AbstractMethodVisitor {
+
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
 
         if (Modifier.isFinal(node.modifiers) && Modifier.isPrivate(node.modifiers)) {
             addViolation(node, "The '$node.name' method is both private and final")
         }
-        super.visitMethodEx(node)
     }
-
-
 }

@@ -19,8 +19,8 @@ import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 
 /**
  * Rule that checks for parameters to private methods that are not referenced within the method body.
@@ -35,9 +35,10 @@ class UnusedPrivateMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedPrivateMethodParameterAstVisitor
 }
 
-class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor  {
+class UnusedPrivateMethodParameterAstVisitor extends AbstractMethodVisitor {
 
-    void visitMethodEx(MethodNode node) {
+    @Override
+    void visitMethod(MethodNode node) {
 
         if (Modifier.isPrivate(node.modifiers)) {
             def unusedParameterNames = node.parameters*.name

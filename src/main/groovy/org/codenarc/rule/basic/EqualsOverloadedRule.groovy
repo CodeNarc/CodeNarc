@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -34,14 +34,14 @@ class EqualsOverloadedRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EqualsOverloadedAstVisitor
 }
 
-class EqualsOverloadedAstVisitor extends AbstractAstVisitor {
+class EqualsOverloadedAstVisitor extends AbstractMethodVisitor {
+
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
         
         if (AstUtil.isMethodNode(node, 'equals')) {
             addViolationIfOverloaded(node)
         }
-        super.visitMethodEx(node)
     }
 
     void addViolationIfOverloaded(MethodNode method) {

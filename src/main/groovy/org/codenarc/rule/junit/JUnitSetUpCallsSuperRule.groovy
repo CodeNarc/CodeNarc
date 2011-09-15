@@ -16,8 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -37,8 +37,10 @@ class JUnitSetUpCallsSuperRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
-    void visitMethodEx(MethodNode methodNode) {
+class JUnitSetUpCallsSuperAstVisitor extends AbstractMethodVisitor {
+
+    @Override
+    void visitMethod(MethodNode methodNode) {
         if (JUnitUtil.isSetUpMethod(methodNode)) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
@@ -48,7 +50,5 @@ class JUnitSetUpCallsSuperAstVisitor extends AbstractAstVisitor  {
                 addViolation(methodNode, 'The method setUp() does not call super.setUp()')
             }
         }
-        super.visitMethodEx(methodNode)
     }
-
 }

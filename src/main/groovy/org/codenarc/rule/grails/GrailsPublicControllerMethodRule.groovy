@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.util.WildcardPattern
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks for public methods on Grails controller classes. Static methods are ignored.
@@ -52,14 +52,16 @@ class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
     String applyToClassNames = GrailsUtil.CONTROLLERS_CLASSES
 }
 
-class GrailsPublicControllerMethodAstVisitor extends AbstractAstVisitor  {
-    void visitMethodEx(MethodNode methodNode) {
+class GrailsPublicControllerMethodAstVisitor extends AbstractMethodVisitor {
+
+    @Override
+    void visitMethod(MethodNode methodNode) {
+
         if (Modifier.isPublic(methodNode.modifiers)
                 && !(methodNode.modifiers & MethodNode.ACC_STATIC)
                 && !isIgnoredMethodName(methodNode))  {
             addViolation(methodNode, "The Grails controller has a public method $methodNode.name. This should be a closure property or moved")
         }
-        super.visitMethodEx(methodNode)
     }
 
     private boolean isIgnoredMethodName(MethodNode node) {

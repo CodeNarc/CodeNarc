@@ -16,8 +16,8 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -31,15 +31,15 @@ class EmptyStaticInitializerRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyStaticInitializerAstVisitor
 }
 
-class EmptyStaticInitializerAstVisitor extends AbstractAstVisitor {
+class EmptyStaticInitializerAstVisitor extends AbstractMethodVisitor {
+
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
         if (node.name == '<clinit>' && AstUtil.isEmptyBlock(node.code)) {
             def emptyBlock = AstUtil.getEmptyBlock(node.code)
             if (emptyBlock) {
                 addViolation(emptyBlock, "The class ${node?.declaringClass?.name} has an empty static initializer. It is safe to delete it")
             }
         }
-        super.visitMethodEx(node)
     }
 }

@@ -20,8 +20,8 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -35,9 +35,10 @@ class EmptyMethodInAbstractClassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = EmptyMethodInAbstractClassAstVisitor
 }
 
-class EmptyMethodInAbstractClassAstVisitor extends AbstractAstVisitor {
+class EmptyMethodInAbstractClassAstVisitor extends AbstractMethodVisitor {
+
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
 
         if (isAbstract(node.declaringClass) && !isAbstract(node) && !node.isPrivate()) {
             if (node.returnType.name == 'void') {
@@ -55,7 +56,6 @@ class EmptyMethodInAbstractClassAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-        super.visitMethodEx(node)
     }
 
     private static boolean isAbstract(node) {

@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 
 /**
  * Rule that checks that the names of the most commonly overridden methods: equals,
@@ -32,15 +32,15 @@ class ObjectOverrideMisspelledMethodNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = ObjectOverrideMisspelledMethodNameAstVisitor
 }
 
-class ObjectOverrideMisspelledMethodNameAstVisitor extends AbstractAstVisitor {
+class ObjectOverrideMisspelledMethodNameAstVisitor extends AbstractMethodVisitor {
 
+    @Override
     @SuppressWarnings('DuplicateLiteral')
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
         checkForExactMethodName(node, 'equal', ['Object'], 'equals')
         checkForMethodNameWithIncorrectCase(node, 'equals', ['Object'])
         checkForMethodNameWithIncorrectCase(node, 'hashCode', [])
         checkForMethodNameWithIncorrectCase(node, 'toString', [])
-        super.visitMethodEx node
     }
 
     private void checkForMethodNameWithIncorrectCase(MethodNode node, String targetMethodName, List parameterTypes) {

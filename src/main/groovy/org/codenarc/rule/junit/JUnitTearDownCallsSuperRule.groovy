@@ -16,8 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -37,8 +37,10 @@ class JUnitTearDownCallsSuperRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
-    void visitMethodEx(MethodNode methodNode) {
+class JUnitTearDownCallsSuperAstVisitor extends AbstractMethodVisitor {
+
+    @Override
+    void visitMethod(MethodNode methodNode) {
         if (JUnitUtil.isTearDownMethod(methodNode)) {
             def statements = methodNode.code.statements
             def found = statements.find { stmt ->
@@ -48,7 +50,5 @@ class JUnitTearDownCallsSuperAstVisitor extends AbstractAstVisitor  {
                 addViolation(methodNode, 'The method tearDown() does not call super.tearDown()')
             }
         }
-        super.visitMethodEx(methodNode)
     }
-
 }

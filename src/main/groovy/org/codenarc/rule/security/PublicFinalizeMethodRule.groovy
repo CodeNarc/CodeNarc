@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Creates a violation when the program violates secure coding principles by declaring a finalize() method public.
@@ -32,14 +32,12 @@ class PublicFinalizeMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = PublicFinalizeMethodAstVisitor
 }
 
-class PublicFinalizeMethodAstVisitor extends AbstractAstVisitor {
-    @Override
-    void visitMethodEx(MethodNode node) {
+class PublicFinalizeMethodAstVisitor extends AbstractMethodVisitor {
 
+    @Override
+    void visitMethod(MethodNode node) {
         if (AstUtil.isMethodNode(node, 'finalize', 0) && !Modifier.isProtected(node.modifiers)) {
             addViolation(node, 'The finalize() method should only be declared with protected visibility')
         }
-
-        super.visitMethodEx(node)
     }
 }

@@ -15,11 +15,10 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that verifies that the name of each method matches a regular expression. By default it checks that the
@@ -44,28 +43,16 @@ class MethodNameRule extends AbstractAstVisitorRule {
     String ignoreMethodNames
 }
 
-class MethodNameAstVisitor extends AbstractAstVisitor  {
-
-    final static DEFAULT_NAME = '<unknown>'
-    def className = DEFAULT_NAME
+class MethodNameAstVisitor extends AbstractMethodVisitor {
 
     @Override
-    protected void visitClassEx(ClassNode node) {
-        className = node.name
-    }
-
-    @Override protected void visitClassComplete(ClassNode node) {
-        className = DEFAULT_NAME
-    }
-
-    void visitMethodEx(MethodNode methodNode) {
+    void visitMethod(MethodNode methodNode) {
         assert rule.regex
         if (!new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)) {
             if (!(methodNode.name ==~ rule.regex)) {
-                addViolation(methodNode, "The method name $methodNode.name in class $className does not match $rule.regex")
+                addViolation(methodNode, "The method name $methodNode.name in class $currentClassName does not match $rule.regex")
             }
         }
-        super.visitMethodEx(methodNode)
     }
 
 }

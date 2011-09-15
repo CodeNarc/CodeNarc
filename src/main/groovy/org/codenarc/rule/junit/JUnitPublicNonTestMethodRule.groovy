@@ -17,8 +17,8 @@ package org.codenarc.rule.junit
 
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -51,9 +51,10 @@ class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
+class JUnitPublicNonTestMethodAstVisitor extends AbstractMethodVisitor {
 
-    void visitMethodEx(MethodNode methodNode) {
+    @Override
+    void visitMethod(MethodNode methodNode) {
         if (Modifier.isPublic(methodNode.modifiers)
             && !(Modifier.isStatic(methodNode.modifiers))
             && !JUnitUtil.isTestMethod(methodNode)
@@ -67,6 +68,5 @@ class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
 
                 addViolation(methodNode, "The method $methodNode.name is public but not a test method")
         }
-        super.visitMethodEx(methodNode)
     }
 }

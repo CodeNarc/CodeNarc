@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 
 /**
  * If Spock's @IgnoreRest on any method, all non-annotated test methods are not executed. This behaviour is almost always
@@ -33,13 +33,13 @@ class SpockIgnoreRestUsedRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SpockIgnoreRestUsedAstVisitor
 }
 
-class SpockIgnoreRestUsedAstVisitor extends AbstractAstVisitor {
+class SpockIgnoreRestUsedAstVisitor extends AbstractMethodVisitor {
+
     private final static ACC_PUBLIC = 1
     private final static CANDIDATE_SUPER_CLASSNODES = ['spock.lang.Specification', 'Specification'].collect {new ClassNode(it, ACC_PUBLIC, null)}
 
     @Override
-    void visitMethodEx(MethodNode node) {
-
+    void visitMethod(MethodNode node) {
         if (CANDIDATE_SUPER_CLASSNODES.any { node.declaringClass.isDerivedFrom(it)}) {
 
             def hasIgnoreRest = node.annotations.any {

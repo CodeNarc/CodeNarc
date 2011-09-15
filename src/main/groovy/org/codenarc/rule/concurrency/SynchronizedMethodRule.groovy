@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 
 /**
  * Synchronized Method Rule - This rule reports uses of the synchronized keyword on
@@ -35,14 +35,12 @@ class SynchronizedMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = SynchronizedMethodAstVisitor
 }
 
-class SynchronizedMethodAstVisitor extends AbstractAstVisitor  {
+class SynchronizedMethodAstVisitor extends AbstractMethodVisitor {
 
-    void visitMethodEx(MethodNode node) {
-        if (isFirstVisit(node)) {
-            if (Modifier.isSynchronized(node.getModifiers())) {
-                addViolation(node, "The method $node.name is synchronized at the method level")
-            }
+    @Override
+    void visitMethod(MethodNode node) {
+        if (Modifier.isSynchronized(node.getModifiers())) {
+            addViolation(node, "The method $node.name is synchronized at the method level")
         }
-        super.visitMethodEx(node)
     }
 }

@@ -16,10 +16,9 @@
 package org.codenarc.rule.concurrency
 
 import java.lang.reflect.Modifier
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -33,30 +32,19 @@ class InconsistentPropertySynchronizationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = InconsistentPropertySynchronizationAstVisitor
 }
 
-class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
+class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisitor {
+
     private Map<String, MethodNode> synchronizedMethods = [:]
     private Map<String, MethodNode> unsynchronizedMethods = [:]
-    private ClassNode currentClass = null
 
     @Override
-    protected void visitClassEx(ClassNode node) {
-        currentClass = node
-    }
-
-    @Override
-    protected void visitClassComplete(ClassNode node) {
-        currentClass = null
-
-    }
-
-    @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
         if (node.name.startsWith('get') && node.name.size() > 3 && AstUtil.getParameterNames(node).isEmpty()) {
             // is a getter
             def propName = node.name[3..-1]
             saveMethodInfo(node)
             // does the enclosing class have this property?
-            if (AstUtil.classNodeHasProperty(currentClass, extractPropertyName(node))) {
+            if (AstUtil.classNodeHasProperty(currentClassNode, extractPropertyName(node))) {
                 addViolationOnMismatch([node.name], "set$propName")
             }
         }
@@ -65,7 +53,7 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
             // is a getter
             def propName = node.name[2..-1]
             saveMethodInfo(node)
-            if (AstUtil.classNodeHasProperty(currentClass, extractPropertyName(node))) {
+            if (AstUtil.classNodeHasProperty(currentClassNode, extractPropertyName(node))) {
                 addViolationOnMismatch([node.name], "set$propName")
             }
         }
@@ -74,12 +62,10 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
             // is a setter
             def propName = node.name[3..-1]
             saveMethodInfo(node)
-            if (AstUtil.classNodeHasProperty(currentClass, extractPropertyName(node))) {
+            if (AstUtil.classNodeHasProperty(currentClassNode, extractPropertyName(node))) {
                 addViolationOnMismatch(["get$propName", "is$propName"], node.name)
             }
         }
-
-        super.visitMethodEx(node)
     }
 
     private static String extractPropertyName(MethodNode node) {
@@ -124,12 +110,12 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractAstVisitor {
             // perhaps the owner didn't define the method
             def getterName = getFirstValue(synchronizedMethods, getterNames).name
             MethodNode node = synchronizedMethods.get(getterName)
-            if (!currentClass?.methods?.find { it?.name == setterName && it?.parameters?.length == 1}) {
+            if (!currentClassNode?.methods?.find { it?.name == setterName && it?.parameters?.length == 1}) {
                 addViolation(node, "The getter method $getterName is synchronized but the setter method $setterName is not")
             }
         } else if (synchronizedMethods.containsKey(setterName)) {
             // the setter is synchronized, perhaps the getter was never defined?
-            if (!currentClass?.methods?.find { getterNames.contains(it?.name) && it?.parameters?.length == 0 }) {
+            if (!currentClassNode?.methods?.find { getterNames.contains(it?.name) && it?.parameters?.length == 0 }) {
                 MethodNode node = synchronizedMethods.get(setterName)
                 addViolation(node, "The setter method $setterName is synchronized but the getter method ${getterNames.size() == 1 ? getterNames[0] : getterNames} is not")
             }

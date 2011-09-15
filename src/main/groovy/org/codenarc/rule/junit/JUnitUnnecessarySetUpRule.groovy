@@ -16,8 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -37,15 +37,16 @@ class JUnitUnnecessarySetUpRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitUnnecessarySetUpAstVisitor extends AbstractAstVisitor  {
-    void visitMethodEx(MethodNode methodNode) {
+class JUnitUnnecessarySetUpAstVisitor extends AbstractMethodVisitor {
+
+    @Override
+    void visitMethod(MethodNode methodNode) {
         if (JUnitUtil.isSetUpMethod(methodNode)) {
             def statements = methodNode.code.statements
             if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'setUp', 0)) {
                 addViolation(methodNode, 'The setUp() method contains no logic and can be removed')
             }
         }
-        super.visitMethodEx(methodNode)
     }
 
 }

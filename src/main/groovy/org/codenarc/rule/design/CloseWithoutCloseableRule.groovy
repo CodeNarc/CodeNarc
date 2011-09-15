@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * If a class defines a "void close()" then that class should implement java.io.Closeable.
@@ -32,14 +32,14 @@ class CloseWithoutCloseableRule extends AbstractAstVisitorRule {
     Class astVisitorClass = CloseWithoutCloseableAstVisitor
 }
 
-class CloseWithoutCloseableAstVisitor extends AbstractAstVisitor {
+class CloseWithoutCloseableAstVisitor extends AbstractMethodVisitor {
+
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
         if (AstUtil.isMethodNode(node, 'close', 0, Void.TYPE) && !Modifier.isPrivate(node.modifiers)) {
             if (!AstUtil.classNodeImplementsType(node.declaringClass, Closeable) && !AstUtil.classNodeImplementsType(node.declaringClass, Script)) {
                 addViolation(node, 'void close() method defined without implementing Closeable')
             }
         }
-        super.visitMethodEx(node)
     }
 }

@@ -19,8 +19,8 @@ import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -36,8 +36,10 @@ class UnusedMethodParameterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnusedMethodParameterAstVisitor
 }
 
-class UnusedMethodParameterAstVisitor extends AbstractAstVisitor {
-    void visitMethodEx(MethodNode node) {
+class UnusedMethodParameterAstVisitor extends AbstractMethodVisitor {
+
+    @Override
+    void visitMethod(MethodNode node) {
 
         if (!currentClassNode.isInterface() && !node.isAbstract() && !(currentClassName ==~ rule.categoryClassRegex)
             && !Modifier.isPrivate(node.modifiers) && AstUtil.getAnnotation(node, 'Override') == null

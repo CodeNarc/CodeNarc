@@ -8,43 +8,61 @@ import org.codehaus.groovy.control.SourceUnit;
 import org.codenarc.source.SourceCode;
 import org.codenarc.util.AstUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * This is the base class for AST Visitors that only need to visit the fields of
- * a class. It will not visit anything except the FieldNode. It is much faster than
+ * This is the base class for AST Visitors that only need to visit the methods of
+ * a class. It will not visit anything except the MethodNode. It is much faster than
  * the alternative of visiting the whole class. <br/>
  * <br/>
- * When you override visitField(FieldNode), there is no need to invoke the super method.
+ * When you override visitMethod(MethodNode), there is no need to invoke the super method.
  */
-public class AbstractFieldVisitor extends ClassCodeVisitorSupport implements AstVisitor {
+public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements AstVisitor {
 
 
     private Rule rule;
     private SourceCode sourceCode;
     private final List<Violation> violations = new ArrayList<Violation>();
+    private ClassNode currentClassNode = null;
 
     @Override
     public void visitClass(ClassNode node) {
-        Set<FieldNode> nodes = new HashSet<FieldNode>();
-        for (PropertyNode property : node.getProperties()) {
-            if (property.getField() != null) {
-                nodes.add(property.getField());
-            }
+        currentClassNode = node;
+        for (MethodNode method : node.getMethods()) {
+            visitMethod(method);
         }
+        currentClassNode = null; 
+    }
 
-        for (FieldNode field : node.getFields()) {
-            nodes.add(field);
+    protected final ClassNode getCurrentClassNode() {
+        return currentClassNode;
+    }
+
+    protected final String getCurrentClassName() {
+        if (currentClassNode == null) {
+            return "<unknown>";
         }
+        return currentClassNode.getName(); 
+    }
 
-        List<FieldNode> sortedFields = new ArrayList<FieldNode>(nodes);
-        Collections.sort(sortedFields, new Comparator<FieldNode>() {
-            public int compare(FieldNode o1, FieldNode o2) {
-                return o1.getLineNumber() - o2.getLineNumber();
-            }
-        });
-        for (FieldNode field : sortedFields) {
-            visitField(field);
+    /**
+     * Add a new Violation to the list of violations found by this visitor.
+     * Only add the violation if the node lineNumber >= 0.
+     *
+     * @param node    - the Groovy AST Node
+     * @param message - the message for the violation; defaults to null
+     */
+    protected void addViolation(ASTNode node, String message) {
+        if (node.getLineNumber() >= 0) {
+            int lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode);
+            String sourceLine = sourceCode.line(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1);
+            Violation violation = new Violation();
+            violation.setRule(rule);
+            violation.setLineNumber(lineNumber);
+            violation.setSourceLine(sourceLine);
+            violation.setMessage(message);
+            violations.add(violation);
         }
     }
 
@@ -55,19 +73,23 @@ public class AbstractFieldVisitor extends ClassCodeVisitorSupport implements Ast
      * @param node    - the Groovy AST Node
      * @param message - the message for the violation; defaults to null
      */
-    protected void addViolation(FieldNode node, String message) {
-        if (node.getLineNumber() >= 0) {
-            int lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode);
-            String sourceLine = sourceCode.line(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1);
-            Violation violation = new Violation();
-            violation.setRule(rule);
-            violation.setLineNumber(lineNumber);
-            violation.setSourceLine(sourceLine);
-            violation.setMessage(String.format(
-                    "Violation in class %s. %s", node.getOwner().getName(), message
-            ));
-            violations.add(violation);
-        }
+    protected void addViolation(MethodNode node, String message) {
+        addViolation((ASTNode) node, String.format(
+                "Violation in class %s. %s", node.getDeclaringClass().getName(), message
+        ));
+    }
+
+    /**
+     * Add a new Violation to the list of violations found by this visitor.
+     * Only add the violation if the node lineNumber >= 0.
+     *
+     * @param node    - the Groovy AST Node
+     * @param message - the message for the violation; defaults to null
+     */
+    protected void addViolation(ClassNode node, String message) {
+        addViolation((ASTNode) node, String.format(
+                "Violation in class %s. %s", node.getName(), message
+        ));
     }
 
     protected SourceCode getSourceCode() {
@@ -85,12 +107,13 @@ public class AbstractFieldVisitor extends ClassCodeVisitorSupport implements Ast
 
     /**
      * Gets the rule for this visitor.
-     * @return
-     *      the rule
+     *
+     * @return the rule
      */
     public Rule getRule() {
         return rule;
     }
+
     /**
      * Set the SourceCode associated with this visitor
      *
@@ -107,6 +130,11 @@ public class AbstractFieldVisitor extends ClassCodeVisitorSupport implements Ast
      */
     public List<Violation> getViolations() {
         return violations;
+    }
+
+    @Override
+    public final void visitField(FieldNode node) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -433,8 +461,9 @@ public class AbstractFieldVisitor extends ClassCodeVisitorSupport implements Ast
     public final void visitBytecodeExpression(BytecodeExpression cle) {
         throw new UnsupportedOperationException();
     }
+
     @Override
-    public final void visitMethod(MethodNode node) {
+    public void visitMethod(MethodNode node) {
         throw new UnsupportedOperationException();
     }
 }

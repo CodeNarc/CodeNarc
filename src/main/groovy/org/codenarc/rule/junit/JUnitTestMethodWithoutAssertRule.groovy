@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.junit
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -22,9 +23,9 @@ import org.codehaus.groovy.ast.stmt.AssertStatement
 import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.rule.AstVisitor
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.ASTNode
 
 /**
  * This rule searches for test methods that do not contain assert statements. Either the test method is missing assert
@@ -49,18 +50,17 @@ class JUnitTestMethodWithoutAssertRule extends AbstractAstVisitorRule {
     }
 }
 
-class JUnitTestMethodWithoutAssertAstVisitor extends AbstractAstVisitor {
+class JUnitTestMethodWithoutAssertAstVisitor extends AbstractMethodVisitor {
 
     Set<String> assertMethodPatterns
 
     @Override
-    void visitMethodEx(MethodNode node) {
+    void visitMethod(MethodNode node) {
         if (JUnitUtil.isTestMethod(node)) {
             if (!statementContainsAssertions(node.code) && !checksException(node) && !checksTimeout(node)) {
                 addViolation node, "Test method '$node.name' makes no assertions"
             }
         }
-        super.visitMethodEx node
     }
 
     private boolean statementContainsAssertions(Statement code) {

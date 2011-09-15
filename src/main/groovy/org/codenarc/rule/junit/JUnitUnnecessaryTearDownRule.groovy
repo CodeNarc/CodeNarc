@@ -16,8 +16,8 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -37,15 +37,15 @@ class JUnitUnnecessaryTearDownRule extends AbstractAstVisitorRule {
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 }
 
-class JUnitUnnecessaryTearDownAstVisitor extends AbstractAstVisitor  {
-    void visitMethodEx(MethodNode methodNode) {
+class JUnitUnnecessaryTearDownAstVisitor extends AbstractMethodVisitor {
+
+    @Override
+    void visitMethod(MethodNode methodNode) {
         if (JUnitUtil.isTearDownMethod(methodNode)) {
             def statements = methodNode.code.statements
             if (statements.size() == 1 && AstUtil.isMethodCall(statements[0], 'super', 'tearDown', 0)) {
                 addViolation(methodNode, 'The tearDown() method contains no logic and can be removed')
             }
         }
-        super.visitMethodEx(methodNode)
     }
-
 }
