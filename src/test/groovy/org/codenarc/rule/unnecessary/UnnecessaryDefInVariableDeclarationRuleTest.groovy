@@ -97,6 +97,16 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testThatFieldsAreNotChecked() {
+        final SOURCE = '''
+            class MyClass {
+                def private variable1
+                def private variable2 = 'example'
+            }
+        '''
+        assertNoViolations SOURCE
+    }
+
     /*
      * Violations
      */
