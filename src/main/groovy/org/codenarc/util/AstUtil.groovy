@@ -425,6 +425,8 @@ class AstUtil {
             leftExpression.expressions ?: [leftExpression]
         } else if (leftExpression instanceof TupleExpression) {
             leftExpression.expressions ?: [leftExpression]
+        } else if (leftExpression instanceof VariableExpression) {
+            [leftExpression]
         } else {
             leftExpression.properties['expressions'] ?: [leftExpression]
         }
