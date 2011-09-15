@@ -101,6 +101,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
       * Methods annotated with <<<@BeforeClass>>> and <<<@AfterClass>>>
 
+      * Methods annotated with <<<@Override>>> 
+
   Public, non-test methods on a test class violate conventional usage of test classes,
   and they typically break encapsulation unnecessarily.
 

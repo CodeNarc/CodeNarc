@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
+import org.codehaus.groovy.vmplugin.v5.JUnit4Utils
 
 /**
  * Rule that checks if a JUnit test class contains public methods other than:
@@ -56,9 +57,9 @@ class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
     void visitMethodEx(MethodNode methodNode) {
         if (Modifier.isPublic(methodNode.modifiers)
             && !(Modifier.isStatic(methodNode.modifiers))
-            && !isTestMethod(methodNode)
-            && !isZeroArgumentMethod(methodNode, 'setUp')
-            && !isZeroArgumentMethod(methodNode, 'tearDown')
+            && !JUnitUtil.isTestMethod(methodNode)
+            && !AstUtil.isMethodNode(methodNode, 'setUp|tearDown', 0)
+            && !AstUtil.getAnnotation(methodNode, 'Override')
             && !AstUtil.getAnnotation(methodNode, 'Test')
             && !AstUtil.getAnnotation(methodNode, 'Before')
             && !AstUtil.getAnnotation(methodNode, 'After')
@@ -69,15 +70,4 @@ class JUnitPublicNonTestMethodAstVisitor extends AbstractAstVisitor  {
         }
         super.visitMethodEx(methodNode)
     }
-
-    private boolean isZeroArgumentMethod(MethodNode methodNode, String methodName) {
-        methodNode.name == methodName && methodNode.parameters.size() == 0
-    }
-
-    private boolean isTestMethod(MethodNode methodNode) {
-        (methodNode.modifiers & MethodNode.ACC_PUBLIC) &&
-                methodNode.name.startsWith('test') &&
-                methodNode.parameters.size() == 0
-    }
-
 }

@@ -18,6 +18,9 @@ NEW AND UPDATED RULES
 - UnnecessaryDefInVariableDeclaration rule (unnecessary) - Expanded rule to catch more instances of unneeded defs.
 - UnusedMethodParameter rule (unused) - This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override.
 
+BUG FIXES 
+- #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override
+
 BREAKING CHANGES
 *** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors. 
 

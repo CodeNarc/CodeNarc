@@ -194,6 +194,16 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testThatAtOverrideSuppressesViolation() {
+        final SOURCE = '''
+            class MyTest {
+                @Override
+                public doSomething() { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new JUnitPublicNonTestMethodRule()
     }

@@ -71,13 +71,19 @@ class JUnitUtil {
      *      true if the node is a test method
      */
     static boolean isTestMethod(ASTNode node) {
+        if (!AstUtil.isPublic(node)) {
+            return false
+        }
         if (!(node instanceof MethodNode)) {
             return false
         }
-        if (node.returnType.name != 'void') {
+        if (!node.isVoidMethod()) {
             return false
         }
-        if (AstUtil.isPublic(node) && node.name?.startsWith('test')) {
+        if (node.parameters?.length > 0) {
+            return false
+        }
+        if (node.name?.startsWith('test')) {
             return true
         }
         node.properties['annotations']?.any { annotation ->
