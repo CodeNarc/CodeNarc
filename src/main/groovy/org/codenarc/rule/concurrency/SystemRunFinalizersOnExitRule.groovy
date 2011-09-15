@@ -17,10 +17,9 @@ package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Method calls to System.runFinalizersOnExit() should not be allowed. This method is inherently

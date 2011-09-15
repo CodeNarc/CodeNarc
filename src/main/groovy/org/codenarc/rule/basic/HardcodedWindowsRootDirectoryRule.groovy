@@ -17,12 +17,8 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.ArgumentListExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.GStringExpression
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * This rule find cases where a File object is constructed with a windows-based path. This is not portable, and using the File.listRoots() method is a better alternative. 

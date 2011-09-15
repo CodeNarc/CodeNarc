@@ -16,12 +16,11 @@
 package org.codenarc.rule.concurrency
 
 import java.lang.reflect.Modifier
-import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import java.text.SimpleDateFormat
+import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * SimpleDateFormat objects should not be used as static fields. SimpleDateFormat are inherently unsafe for

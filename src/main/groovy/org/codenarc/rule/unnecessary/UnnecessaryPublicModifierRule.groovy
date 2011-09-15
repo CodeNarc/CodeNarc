@@ -15,13 +15,13 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.apache.log4j.Logger
-import org.codehaus.groovy.ast.ConstructorNode
 
 /**
  * The 'public' modifier is not required on methods, constructors or classes.

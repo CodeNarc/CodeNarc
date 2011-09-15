@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.stmt.CatchStatement
+import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * AstVisitor implementation that checks for catching an exception type specified in the constructor

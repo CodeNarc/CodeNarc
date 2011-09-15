@@ -16,7 +16,6 @@
 package org.codenarc.rule.concurrency
 
 import java.util.concurrent.locks.ReentrantLock
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -35,15 +34,6 @@ class SynchronizedOnReentrantLockRule extends AbstractAstVisitorRule {
 }
 
 class SynchronizedOnReentrantLockAstVisitor extends AbstractAstVisitor {
-
-    ClassNode currentClassNode = null
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-
-        currentClassNode = node
-        super.visitClassEx(node)
-    }
 
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {

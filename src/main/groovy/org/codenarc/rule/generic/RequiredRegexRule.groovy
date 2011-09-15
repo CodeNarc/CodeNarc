@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.source.SourceCode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
 
 /**
  * Checks for a specified regular expression that must exist within the source code.

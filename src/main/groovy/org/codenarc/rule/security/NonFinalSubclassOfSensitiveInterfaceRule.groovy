@@ -15,15 +15,15 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ClassNode
-import org.codenarc.util.AstUtil
+import java.lang.reflect.Modifier
+import java.security.BasicPermission
 import java.security.Permission
 import java.security.PrivilegedAction
 import java.security.PrivilegedActionException
-import java.security.BasicPermission
-import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * The permissions classes such as java.security.Permission and java.security.BasicPermission are designed to be extended.

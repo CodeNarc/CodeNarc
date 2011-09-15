@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.ForStatement
 
 /**
  * Checks the location of the opening brace ({) for for loops. By default, requires them on a new line, but the

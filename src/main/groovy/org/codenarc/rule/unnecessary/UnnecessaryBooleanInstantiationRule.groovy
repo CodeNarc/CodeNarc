@@ -19,9 +19,8 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
-
 import org.codenarc.rule.AbstractConstructorCallAstVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for direct call to Boolean constructor - use Boolean.valueOf() instead.

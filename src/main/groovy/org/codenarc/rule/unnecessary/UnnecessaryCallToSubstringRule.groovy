@@ -16,10 +16,9 @@
 package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Calling String.substring(0) always returns the original string. This code is meaningless.

@@ -15,17 +15,12 @@
  */
  package org.codenarc.rule
 
-import org.codehaus.groovy.ast.ModuleNode
-import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.ClassExpression
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * AstVisitor that check for references for a named class

@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Finds empty string literals which are being added. This is an inefficient way to convert any type to a String.

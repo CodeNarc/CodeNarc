@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.imports
 
+import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.GroovyVersion
-import org.codehaus.groovy.ast.ImportNode
 
 /**
  * Rule that checks for an unreferenced import

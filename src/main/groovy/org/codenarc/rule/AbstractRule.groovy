@@ -15,11 +15,11 @@
  */
 package org.codenarc.rule
 
+import org.apache.log4j.Logger
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceCodeCriteria
-import org.apache.log4j.Logger
-import org.codehaus.groovy.ast.ASTNode
 import org.codenarc.util.ImportUtil
 
 /**

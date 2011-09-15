@@ -15,12 +15,12 @@
  */
 package org.codenarc.rule.naming
 
+import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.PropertyNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.PropertyNode
-import java.lang.reflect.Modifier
 
 /**
  * Rule that verifies that the name of each field matches a regular expression. By default it checks that

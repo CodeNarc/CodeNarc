@@ -15,12 +15,12 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ASTNode
 
 /**
  * A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.

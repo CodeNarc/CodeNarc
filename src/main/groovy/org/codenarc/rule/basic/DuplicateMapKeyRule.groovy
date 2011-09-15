@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.MapExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.MapExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * A map literal is created with duplicated key. The map entry will be overwritten.

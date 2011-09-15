@@ -16,10 +16,10 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.EmptyExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.util.AstUtil
 
 /**

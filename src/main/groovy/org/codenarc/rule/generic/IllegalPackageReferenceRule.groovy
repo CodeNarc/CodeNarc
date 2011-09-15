@@ -18,12 +18,12 @@ package org.codenarc.rule.generic
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.ImportUtil
 import org.codenarc.util.WildcardPattern
 import org.codehaus.groovy.ast.expr.*
-import org.codehaus.groovy.ast.ModuleNode
-import org.codenarc.util.ImportUtil
 
 /**
  * Checks for reference to any of the named packages.

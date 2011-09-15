@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Rule that checks for references to the session object from within Grails controller and

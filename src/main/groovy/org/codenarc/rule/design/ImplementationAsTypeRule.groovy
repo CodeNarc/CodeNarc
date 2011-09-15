@@ -15,14 +15,14 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.ConstructorNode
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.FieldNode
 
 /**
  * Checks for use of the following concrete classes when specifying the type of a method

@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * This rule detects when the mod(Object) method is called directly in code instead of using the % operator. A groovier way to express this: a.mod(b) is this: a % b

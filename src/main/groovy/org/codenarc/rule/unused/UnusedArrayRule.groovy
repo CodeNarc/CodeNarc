@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.unused
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.expr.ArrayExpression
+import org.codehaus.groovy.ast.stmt.ExpressionStatement
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Checks for array allocations that are not assigned or used (i.e., it is ignored).

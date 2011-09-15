@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.grails
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Checks that Grails domain classes redefine toString()

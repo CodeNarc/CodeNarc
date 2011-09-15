@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.design
 
+import java.lang.reflect.Modifier
+import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ClassNode
-import java.lang.reflect.Modifier
 
 /**
  * The abstract class does not contain any abstract methods. An abstract class suggests an incomplete implementation,

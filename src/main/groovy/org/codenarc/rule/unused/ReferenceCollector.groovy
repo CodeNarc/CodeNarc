@@ -19,9 +19,8 @@ import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.control.SourceUnit
-
-import org.codenarc.util.AstUtil
 import org.codenarc.rule.ClassCodeVisitorSupportHack
+import org.codenarc.util.AstUtil
 
 /**
  * 

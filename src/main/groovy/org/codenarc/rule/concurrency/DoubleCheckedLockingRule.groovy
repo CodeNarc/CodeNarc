@@ -17,11 +17,9 @@ package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.expr.BooleanExpression
-
 import org.codehaus.groovy.ast.expr.NotExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
-
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor

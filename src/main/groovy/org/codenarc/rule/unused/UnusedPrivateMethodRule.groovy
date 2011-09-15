@@ -15,14 +15,13 @@
  */
 package org.codenarc.rule.unused
 
-import org.codehaus.groovy.ast.ClassNode
+import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
-import java.lang.reflect.Modifier
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.
@@ -85,7 +84,6 @@ class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
 class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
     private Map<String, MethodNode> unusedPrivateMethods
     private List<String> classNames
-    private currentClassNode
 
 
     UnusedPrivateMethodAstVisitor(Map<String, MethodNode> unusedPrivateMethods, List<String> classNames) {
@@ -99,16 +97,6 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
             acc
         }
         this.unusedPrivateMethods = unusedPrivateMethods
-    }
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-        currentClassNode = node
-    }
-
-    @Override
-    protected void visitClassComplete(ClassNode node) {
-        currentClassNode = null
     }
 
     void visitMethodCallExpression(MethodCallExpression expression) {

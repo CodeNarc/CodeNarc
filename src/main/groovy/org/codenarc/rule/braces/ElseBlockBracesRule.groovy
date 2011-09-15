@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.braces
 
+import org.codehaus.groovy.ast.stmt.EmptyStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.EmptyStatement
 import org.codenarc.util.AstUtil
 
 /**

@@ -15,12 +15,12 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.TupleExpression
-import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.TupleExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * Base visitor for unnecessary constructor calls.

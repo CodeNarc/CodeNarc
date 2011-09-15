@@ -16,9 +16,9 @@
 package org.codenarc.rule.naming
 
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.InnerClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.util.GroovyVersion
-import org.codehaus.groovy.ast.InnerClassNode
 
 /**
  * Abstract superclass for AstVisitor classes dealing with class/type names, e.g. classes,

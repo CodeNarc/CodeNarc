@@ -15,18 +15,11 @@
  */
 package org.codenarc.rule.dry
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.expr.ArgumentListExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.ElvisOperatorExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
-import org.codehaus.groovy.ast.expr.StaticMethodCallExpression
-import org.codehaus.groovy.ast.expr.MapEntryExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Abstract superclass for rule AstVisitor classes that detect duplicate literal constants

@@ -15,13 +15,12 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 import org.codenarc.util.ConsecutiveUtils
-import org.codehaus.groovy.ast.expr.GStringExpression
-import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 
 /**
  * Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.

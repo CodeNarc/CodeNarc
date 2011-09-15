@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * AstVisitor that checks for no-arg constructor calls for the type specified in the constructor.

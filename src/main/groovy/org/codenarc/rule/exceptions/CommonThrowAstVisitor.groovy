@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.stmt.ThrowStatement
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.stmt.ThrowStatement
+import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * AstVisitor implementation that checks for throwing one of the exception type names specified in the constructor

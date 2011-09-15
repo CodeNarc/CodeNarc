@@ -15,15 +15,15 @@
  */
 package org.codenarc.rule.unnecessary
 
-import static org.codenarc.util.AstUtil.*
-
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.*
 import org.codenarc.util.GroovyVersion
+import org.codehaus.groovy.ast.expr.*
+import static org.codenarc.util.AstUtil.AUTO_IMPORTED_CLASSES
+import static org.codenarc.util.AstUtil.AUTO_IMPORTED_PACKAGES
 
 /**
  * Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String,

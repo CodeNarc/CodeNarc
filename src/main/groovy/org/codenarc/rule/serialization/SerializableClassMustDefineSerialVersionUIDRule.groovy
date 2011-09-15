@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.serialization
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.AstUtil
 
 /**

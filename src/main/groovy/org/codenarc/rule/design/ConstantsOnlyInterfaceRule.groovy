@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.design
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.ClassNode
 
 /**
  * An interface should be used only to model a behaviour of a class: using an interface as a container of constants is a poor usage pattern.

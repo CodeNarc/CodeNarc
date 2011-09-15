@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.unused
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.Statement
+import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * Abstract superclass for AstVisitor classes that need to determine whether a Statement is

@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -36,14 +35,6 @@ class SynchronizedOnBoxedPrimitiveRule extends AbstractAstVisitorRule {
 }
 
 class SynchronizedOnBoxedPrimitiveAstVisitor extends AbstractAstVisitor {
-    ClassNode currentClassNode = null
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-
-        currentClassNode = node
-        super.visitClassEx(node)
-    }
 
     @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {

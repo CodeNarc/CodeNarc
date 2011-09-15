@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.size
 
-import org.gmetrics.source.SourceCode
 import org.codehaus.groovy.ast.ModuleNode
+import org.gmetrics.source.SourceCode
 
 /**
  * Adapter that adapts from a GMetrics SourceCode object to a CodeNarc SourceCode object.

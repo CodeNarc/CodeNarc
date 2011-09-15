@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.IfStatement
 
 /**
  * Checks the location of the opening brace ({) for if statements. By default, requires them on the same line, but the

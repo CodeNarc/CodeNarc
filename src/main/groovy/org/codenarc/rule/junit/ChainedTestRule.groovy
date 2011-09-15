@@ -16,10 +16,9 @@
 package org.codenarc.rule.junit
 
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
+import org.codenarc.util.AstUtil
 
 /**
  * A test method that invokes another test method is a chained test; the methods are dependent on one another. Tests should be atomic, and not be dependent on one another. 
