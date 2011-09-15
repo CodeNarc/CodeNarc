@@ -15,8 +15,10 @@
  */
 package org.codenarc.rule.size
 
+import org.codenarc.analyzer.StringSourceAnalyzer
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.ruleset.ListRuleSet
 
 /**
  * Tests for CyclomaticComplexityRule
@@ -64,6 +66,44 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         rule.maxMethodComplexity = 5
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
+
+    void testSuppressWarningsOnClass() {
+        final SOURCE = '''
+            @SuppressWarnings('CyclomaticComplexity')
+            class MyClass {
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        '''
+        rule.maxMethodComplexity = 5
+        assert manuallyApplyRule(SOURCE).size() == 0
+    }
+
+    void testSuppressWarningsOnMethod() {
+        final SOURCE = '''
+            class MyClass {
+                @SuppressWarnings('CyclomaticComplexity')
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        '''
+        rule.maxMethodComplexity = 5
+        assert manuallyApplyRule(SOURCE).size() == 0
+    }
+
+    /**
+     * Apply the current Rule to the specified source (String) and return the resulting List of Violations.
+     * @param source - the full source code to which the rule is applied, as a String
+     */
+    private List manuallyApplyRule(String source) {
+        def analyzer = new StringSourceAnalyzer(source)
+        assert analyzer.source.valid
+        def results = analyzer.analyze(new ListRuleSet([rule]))
+        results.violations
+    }
+
 
     void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
         final SOURCE = '''
