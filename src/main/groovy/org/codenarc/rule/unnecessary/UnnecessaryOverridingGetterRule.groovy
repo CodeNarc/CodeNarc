@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ClassExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -61,16 +62,20 @@ class UnnecessaryOverridingGetterAstVisitor extends AbstractAstVisitor {
             if (statement instanceof ExpressionStatement) {
                 if (statement.expression instanceof ConstantExpression) {
                     addViolation(node, makeMessage(node))
+                } else if (statement.expression instanceof VariableExpression && statement.expression.variable ==~ /[A-Z].*/) {
+                    addViolation(node, makeMessage(node))
                 } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
                     addViolation(node, makeMessage(node))
                 }
             } else if (statement instanceof ReturnStatement) {
                 if (statement.expression instanceof ConstantExpression) {
                     addViolation(node, makeMessage(node))
+                } else if (statement.expression instanceof ClassExpression) {
+                    addViolation(node, makeMessage(node))
                 } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
                     addViolation(node, makeMessage(node))
-                }
-            }
+                } 
+            } 
         }
         super.visitMethodEx(node)
     }
@@ -84,6 +89,8 @@ class UnnecessaryOverridingGetterAstVisitor extends AbstractAstVisitor {
         def constantValue = null
         if (constant instanceof ConstantExpression) {
             constantValue = constant.value instanceof String ? "'" + constant.value + "'" : constant.value
+        } else if (constant instanceof ClassExpression) {
+            constantValue = constant.text
         } else if (constant instanceof VariableExpression) {
             constantValue = constant.name
         } else {

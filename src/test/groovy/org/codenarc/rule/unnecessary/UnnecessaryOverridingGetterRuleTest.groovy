@@ -36,6 +36,7 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
                 static VALUE = 'value'
                 final String something = 'something'  // this is cleaner
                 final String somethingElse = VALUE      // this is cleaner
+                final String someClass = String      // this is cleaner
 
                 @Override
                 String getSomething(def parameter) {
@@ -64,6 +65,34 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4,
             'String getSomething()',
             "The method 'getSomething ' in class Child can be expressed more simply as the field declaration\nfinal String something = 'something'")
+    }
+
+    void testConstantReturnExplicit() {
+        final SOURCE = '''
+            class Child extends Parent {
+                @Override
+                String getSomething() {
+                    return 'something'         // this could be simplified
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4,
+            'String getSomething()',
+            "The method 'getSomething ' in class Child can be expressed more simply as the field declaration\nfinal String something = 'something'")
+    }
+
+    void testClassReturn() {
+        final SOURCE = '''
+            class Child extends Parent {
+                @Override
+                Class getSomething() {
+                    String         // this could be simplified
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4,
+            'Class getSomething()',
+            "The method 'getSomething ' in class Child can be expressed more simply as the field declaration\nfinal Class something = String")
     }
 
     void testConstantExplicitReturn() {
