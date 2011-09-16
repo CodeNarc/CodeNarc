@@ -42,6 +42,18 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         assertNoViolations(SOURCE)
     }
 
+    void testSuccessScenario2() {
+        final SOURCE = '''
+            (1..10).inject(0) { acc, count ->
+                if (delegate."msn$count"?.length() > 0) {
+                    acc++
+                }
+                acc
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testSingleViolation() {
         final SOURCE = '''
             [1,2,3].each() { println it }

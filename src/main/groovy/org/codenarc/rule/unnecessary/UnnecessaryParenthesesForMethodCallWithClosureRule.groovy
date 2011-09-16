@@ -25,7 +25,7 @@ import org.codenarc.util.SourceCodeUtil
 /**
  * If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
  *
- * @author 'Marcin Erdmann'
+ * @author Marcin Erdmann
   */
 class UnnecessaryParenthesesForMethodCallWithClosureRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryParenthesesForMethodCallWithClosure'
@@ -41,8 +41,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureAstVisitor extends AbstractM
         if (!AstUtil.isFromGeneratedSourceCode(call.method)) {
             def arguments = AstUtil.getMethodArguments(call)
             if (arguments.size() == 1 && arguments.first() instanceof ClosureExpression) {
-                def sourceBetweenMethodAndClosure = SourceCodeUtil.sourceLinesBetweenNodes(sourceCode, call.method,
-                    arguments.first()).join()
+                def sourceBetweenMethodAndClosure = SourceCodeUtil.sourceLinesBetweenNodes(sourceCode, call.method, arguments.first()).join()
                 if (sourceBetweenMethodAndClosure ==~ EMPTY_BRACKETS_PATTERN) {
                     addViolation(call, "Parentheses in the '$call.methodAsString' method call are unnecessary and can be removed.")
                 }
