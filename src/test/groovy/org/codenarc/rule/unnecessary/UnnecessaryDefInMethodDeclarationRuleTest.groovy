@@ -36,6 +36,9 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
 
     void testSuccessScenario_modifiers() {
         final SOURCE = '''
+            String getTreeCellRendererComponent(String p1, def p2) {
+                null
+            }
             def          method1() { }
             private      method2() { }
             protected    method3() { }

@@ -38,7 +38,9 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         String declaration = AstUtil.getDeclaration(node, sourceCode)
-
+        if (declaration.contains('(')) {
+            declaration = declaration[0..declaration.indexOf('(')+1]
+        }
         if (contains(declaration, 'def')) {
             if (isConstructor) {
                 addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded on constructors")
