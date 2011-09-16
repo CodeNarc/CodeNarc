@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * This rule finds classes marked final that contain protected methods and fields. If a class is final then it may not be subclassed,
@@ -38,7 +39,7 @@ class FinalClassWithProtectedMemberAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         if (node.isProtected()) {
-            if (Modifier.isFinal(node.declaringClass.modifiers)) {
+            if (Modifier.isFinal(node.declaringClass.modifiers) && !AstUtil.getAnnotation(node, 'Override')) {
                 addViolation node, "The method $node.name has protected visibility but the enclosing class $node.declaringClass.name is marked final"
             }
         }

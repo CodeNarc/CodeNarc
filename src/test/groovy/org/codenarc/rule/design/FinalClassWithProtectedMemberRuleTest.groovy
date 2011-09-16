@@ -43,6 +43,11 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
                 protected def closure = {}
                 protected String property
             }
+
+        	final class MyClass {
+                @Override
+                protected def methodName() {}
+            }
         '''
         assertNoViolations(SOURCE)
     }
