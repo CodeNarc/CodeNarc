@@ -48,7 +48,7 @@ class ExplicitCallToEqualsMethodRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
                 a.equals(b)
             '''
-        assertSingleViolation(SOURCE, 2, 'a.equals(b)')
+        assertSingleViolation(SOURCE, 2, 'a.equals(b)', 'Violation in class None. Explicit call to a.equals(b) method can be rewritten as (a == (b))')
     }
 
     protected Rule createRule() {

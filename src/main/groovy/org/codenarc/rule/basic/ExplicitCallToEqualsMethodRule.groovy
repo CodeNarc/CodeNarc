@@ -37,6 +37,6 @@ class ExplicitCallToEqualsMethodAstVisitor extends ExplicitCallToMethodAstVisito
 
     @Override
     String getViolationMessage(MethodCallExpression exp) {
-        "Explicit call to ${exp.text} method can be rewritten as ${exp.objectExpression.text} == ${exp.arguments.text}"
+        "Explicit call to ${exp.text} method can be rewritten as (${exp.objectExpression.text} == ${exp.arguments.text})"
     }
 }
