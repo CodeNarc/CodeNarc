@@ -41,7 +41,7 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
         if (declaration.contains('(')) {
             declaration = declaration[0..declaration.indexOf('(')+1]
         }
-        if (contains(declaration, 'def')) {
+        if (contains(declaration, 'def') && !declaration.contains('<')) {
             if (isConstructor) {
                 addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded on constructors")
             } else if (contains(declaration, 'private')) {

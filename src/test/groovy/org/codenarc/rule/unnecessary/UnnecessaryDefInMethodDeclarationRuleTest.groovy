@@ -53,6 +53,13 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testSuccessScenario_generics() {
+        final SOURCE = '''
+            def <T> T getService(String serviceName) { null }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testSuccessScenario_methodNamesContainingModifierNames() {
         final SOURCE = '''
             def privateMethod() { }
