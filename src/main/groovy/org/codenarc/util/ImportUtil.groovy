@@ -54,9 +54,14 @@ class ImportUtil {
     static sourceLineAndNumberForImport(SourceCode sourceCode, String className, String alias) {
         // NOTE: This won't properly handle the case of multiple imports for same class if not all are aliased
         def index = sourceCode.lines.findIndexOf { line ->
-            line.contains('import') &&
-                line.contains(className) &&
-                line.contains(alias)
+            if (!line.contains('import')) { return false }
+            if (!line.contains(alias)) { return false }
+            def classNameIndex = line.indexOf(className)
+            if (classNameIndex == -1) { return false }
+            def afterIndex = classNameIndex + className.size()
+            if (afterIndex >= line.size()) { return true }    // the className is the last thing on the line
+            if (line[afterIndex..-1].startsWith('.' + alias)) { return true }   // className.<member>
+            return line[afterIndex..afterIndex+1] =~ /[\/\s]/
         }
         def lineNumber = index == -1 ? null : index + 1
         def sourceLine = lineNumber == null ? "import $className as $alias".toString() : sourceCode.lines[lineNumber-1].trim()

@@ -73,6 +73,17 @@ class ImportUtilTest extends AbstractTestCase {
         assertStaticImport(sourceCode, ast, [sourceLine:'import static java.lang.Integer.MAX_VALUE', lineNumber:3])
     }
 
+    void testSourceLineAndNumberForImport_SimilarlyNamedImports() {
+        final SOURCE = '''
+            import static com.example.FaultMessages.*
+            import com.example.FaultCode.*
+            import com.example.Fault
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        assert ImportUtil.sourceLineAndNumberForImport(sourceCode, 'com.example.Fault', 'Fault') ==
+            [sourceLine:'import com.example.Fault', lineNumber:4]
+    }
+
     private void assertImport(sourceCode, ast, Map importInfo) {
         assert ast.imports.find { imp ->
             ImportUtil.sourceLineAndNumberForImport(sourceCode, imp) == importInfo

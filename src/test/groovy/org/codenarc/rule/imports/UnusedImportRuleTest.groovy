@@ -76,6 +76,22 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'import static Math.PI')
     }
 
+    void testApplyTo_SimilarlyNamedImports() {
+        final SOURCE = '''
+            import static com.example.FaultCode.*
+            import com.example.Fault
+
+            class MyResourceTest {
+                void testUpdateUserWidget_UpdateFails() {
+                    useStubFormatter(false, [UPDATE_FAILED])
+                    def response = resource.getRecords()
+                    assert response.status == 404
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'import com.example.Fault')
+    }
+
     void testApplyTo_UnusedImportWildcard() {
         final SOURCE = '''
             import org.codenarc.*
