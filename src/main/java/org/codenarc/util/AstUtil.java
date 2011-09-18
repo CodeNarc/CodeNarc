@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.util
+package org.codenarc.util;
 
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.stmt.BlockStatement
@@ -33,7 +33,6 @@ import org.codehaus.groovy.ast.stmt.IfStatement
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-@SuppressWarnings(['DuplicateLiteral', 'MethodCount'])
 class AstUtil {
 
     public static final AUTO_IMPORTED_PACKAGES = ['java.lang', 'java.io', 'java.net', 'java.util', 'groovy.lang', 'groovy.util']
