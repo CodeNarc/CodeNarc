@@ -156,6 +156,24 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 17, "p2.setZipCode('4051')",	'The code could be more concise by using a with() or identity() block')
     }
 
+    void testReferencesAcrossMethods() {
+        final SOURCE = '''
+            class MyClass {
+                def method1() {
+                    obj.method('param')
+                }
+                def method2() {
+                    obj.method('param')
+                }
+                def method3() {
+                    obj.method('param')
+                }
+            }
+'''
+        rule.maxReferencesAllowed = 2
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new UnnecessaryObjectReferencesRule()
     }

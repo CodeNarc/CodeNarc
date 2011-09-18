@@ -31,6 +31,7 @@ BUG FIXES
 - #3393184: Fixed ExplicitCallToEqualsMethod to suggest a better rewrite, which works better with negation
 - #3408108: Fixed UnnecessaryDefInMethodDeclaration to not flag generic methods with a required def as an error
 - #3410261: Fixed UnusedImport - confuses import of similar class names
+- #3408440: Fixed unnecessaryObjectReferences rule to not track references across methods.
 
 BREAKING CHANGES
 *** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors. 

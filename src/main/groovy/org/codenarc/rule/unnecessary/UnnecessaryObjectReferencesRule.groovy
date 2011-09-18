@@ -63,6 +63,7 @@ class UnnecessaryObjectReferencesAstVisitor extends AbstractAstVisitor {
             }
         }
 
+        runCollector.clear()
         super.visitBlockStatement block
     }
 
