@@ -55,12 +55,31 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testSuccessScenarioWithCorrectSequence_After() {
+        final SOURCE = '''
+            import my.something.*
+        	import static foo.bar.*
+        '''
+
+        rule.comesBefore = false
+        assertNoViolations(SOURCE)
+    }
+
     void testSingleViolationWithIncorrectSequence() {
         final SOURCE = '''
             import my.something.*
         	import static foo.bar.*
         '''
-        assertSingleViolation(SOURCE, 3, 'import static foo.bar.*')
+        assertSingleViolation(SOURCE, 3, 'import static foo.bar.*', 'Static imports should appear before normal imports')
+    }
+
+    void testSingleViolationWithIncorrect_After() {
+        final SOURCE = '''
+        	import static foo.bar.*
+            import my.something.*
+        '''
+        rule.comesBefore = false
+        assertSingleViolation(SOURCE, 3, 'import my.something.*', 'Normal imports should appear before static imports')
     }
 
     void testTwoViolations() {

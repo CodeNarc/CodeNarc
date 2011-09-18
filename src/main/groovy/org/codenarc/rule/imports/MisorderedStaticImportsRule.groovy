@@ -23,24 +23,35 @@ import org.codenarc.source.SourceCode
  *
  * @author Erik Pragt
  * @author Marcin Erdmann
-  */
+ * @author Hamlet D'Arcy
+ */
 class MisorderedStaticImportsRule extends AbstractImportRule {
+    private static final String COMES_BEFORE_MESSAGE = 'Static imports should appear before normal imports'
+    private static final String COMES_AFTER_MESSAGE = 'Normal imports should appear before static imports'
     String name = 'MisorderedStaticImports'
     int priority = 3
+    boolean comesBefore = true
 
     void applyTo(SourceCode sourceCode, List violations) {
-        boolean nonStaticFound = false
-
-        eachImportLine(sourceCode) { int lineNumber, String line ->
-            nonStaticFound = nonStaticFound || line =~ NON_STATIC_IMPORT_PATTERN
-
-            if (nonStaticFound && line =~ STATIC_IMPORT_PATTERN) {
-                violateStaticImport(line, lineNumber, violations)
-            }
+        if (comesBefore) {
+            violations.addAll addOrderingViolations(sourceCode, NON_STATIC_IMPORT_PATTERN, STATIC_IMPORT_PATTERN, COMES_BEFORE_MESSAGE)
+        } else {
+            violations.addAll addOrderingViolations(sourceCode, STATIC_IMPORT_PATTERN, NON_STATIC_IMPORT_PATTERN, COMES_AFTER_MESSAGE)
         }
     }
 
-    private void violateStaticImport(line, lineNumber, violations) {
-        violations.add(new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber))
+    private addOrderingViolations(SourceCode sourceCode, String earlyPattern, String latePattern, String message) {
+        List violations = []
+        boolean nonStaticFound = false
+
+        eachImportLine(sourceCode) { int lineNumber, String line ->
+            nonStaticFound = nonStaticFound || line =~ earlyPattern
+
+            if (nonStaticFound && line =~ latePattern) {
+                violations << new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber, message: message)
+            }
+        }
+        violations
     }
+
 }
