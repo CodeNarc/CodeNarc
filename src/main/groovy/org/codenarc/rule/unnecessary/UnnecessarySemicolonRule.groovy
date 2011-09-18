@@ -41,17 +41,23 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 
     Class astVisitorClass = UnnecessarySemicolonAstVisitor
 
-    List<Violation> temporaryViolations = []
+    // this rule is shared across threads and has state, so make the state thread local
+    def temporaryViolations = new ThreadLocal() {
+        @Override
+        protected Object initialValue() {
+            []
+        }
+    };
 
     @Override
-    synchronized void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List violations) {
 
-        temporaryViolations.addAll(getViolationsForSource(sourceCode))
+        temporaryViolations.get().addAll(getViolationsForSource(sourceCode))
         super.applyTo(sourceCode, violations)
-        if (temporaryViolations) {
-            violations.addAll(temporaryViolations)
+        if (temporaryViolations.get()) {
+            violations.addAll(temporaryViolations.get())
         }
-        temporaryViolations.clear()
+        temporaryViolations.get().clear()
     }
 
 
@@ -109,7 +115,7 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
     }
 
     private removeViolationsInRange(start, end) {
-        rule.temporaryViolations.removeAll { Violation v ->
+        rule.temporaryViolations.get().removeAll { Violation v ->
             v.lineNumber >= start && v.lineNumber <= end
         }
     }

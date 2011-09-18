@@ -153,7 +153,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     }
 
     protected boolean isEnabled(Rule rule) {
-        (!AstUtil.respondsTo(rule, 'getEnabled') || rule.enabled)
+        (!AstUtil.respondsTo(rule, 'isEnabled') || rule.enabled)
     }
 
     protected String getCodeNarcVersion() {

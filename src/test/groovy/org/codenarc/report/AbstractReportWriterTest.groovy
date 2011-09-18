@@ -35,7 +35,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
     private static final CUSTOM_FILENAME = 'abc.txt'
     private static final NEW_OUTPUT_DIR = 'tempdir'
     private static final CONTENTS = 'abc'
-    private reportWriter
+    private TestAbstractReportWriter reportWriter
 
     void testWriteReport_WritesToDefaultOutputFile_IfOutputFileIsNull() {
         def defaultOutputFile = TestAbstractReportWriter.defaultOutputFile
