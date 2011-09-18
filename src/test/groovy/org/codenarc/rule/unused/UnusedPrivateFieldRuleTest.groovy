@@ -329,6 +329,57 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    void testSuperPropertyReferenceFromInner() {
+        final SOURCE = '''
+            class ImportForm {
+
+                private String importFilePath = null
+
+                class ChooseFileHandler implements IFileChooseHandler {
+                    void onSuccess(String[] paths, String[] names) {
+                        ImportForm.this.importFilePath = paths[0]
+                    }
+
+                    void onFailure(int i, String s) {
+                        println ImportForm.this.importFilePath
+                    }
+                }
+            }
+'''
+        assertNoViolations(SOURCE)
+    }
+
+    void testSuperMethodReferenceFromInner() {
+        final SOURCE = '''
+            class ImportForm {
+
+                private importFilePath = {}
+
+                class ChooseFileHandler implements IFileChooseHandler {
+                    void onFailure(int i, String s) {
+                        ImportForm.this.importFilePath()
+                    }
+                }
+            }
+'''
+        assertNoViolations(SOURCE)
+    }
+
+    void testSuperMethodReferenceFromInner_InMethodParmDefault() {
+        final SOURCE = '''
+            class ImportForm {
+
+                private String importFilePath = 'xxx'
+
+                class ChooseFileHandler implements IFileChooseHandler {
+                    def myMethod(foo = ImportForm.this.importFilePath) {
+                    }
+                }
+            }
+'''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

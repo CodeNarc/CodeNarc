@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.unused
 
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.PropertyNode
@@ -38,7 +37,7 @@ import org.codenarc.util.WildcardPattern
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
-  */
+ */
 class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
     String name = 'UnusedPrivateField'
     int priority = 2
@@ -88,14 +87,8 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
 }
 
 @SuppressWarnings('DuplicateLiteral')
-class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
+class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor {
     private Map<String, FieldNode> unusedPrivateFields
-    private String thisClassNameWithoutPackage
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-        thisClassNameWithoutPackage = node.nameWithoutPackage
-    }
 
     void visitVariableExpression(VariableExpression expression) {
         unusedPrivateFields.remove(expression.name)
@@ -110,9 +103,16 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitPropertyExpression(PropertyExpression expression) {
-        if (    expression.objectExpression instanceof VariableExpression &&
-                expression.objectExpression.name in ['this', thisClassNameWithoutPackage] &&
-                expression.property instanceof ConstantExpression) {
+        if (expression.objectExpression instanceof VariableExpression &&
+            expression.objectExpression.name in ['this', currentClassNode.nameWithoutPackage] &&
+            expression.property instanceof ConstantExpression) {
+
+            unusedPrivateFields.remove(expression.property.value)
+        } else if (expression.objectExpression instanceof PropertyExpression &&
+            expression.objectExpression.objectExpression instanceof VariableExpression &&
+            expression.objectExpression.property instanceof ConstantExpression &&
+            expression.objectExpression.objectExpression.name  == currentClassNode.outerClass?.name &&
+            expression.objectExpression.property.value == 'this' ) {
 
             unusedPrivateFields.remove(expression.property.value)
         }
@@ -139,6 +139,13 @@ class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor  {
         //      myClosure()
         // But this could potentially "hide" some unused fields (i.e. false negatives).
         if (AstUtil.isMethodCallOnObject(call, 'this') && call.method instanceof ConstantExpression) {
+            unusedPrivateFields.remove(call.method.value)
+        } else if (call.objectExpression instanceof PropertyExpression &&
+            call.objectExpression.objectExpression instanceof VariableExpression &&
+            call.objectExpression.property instanceof ConstantExpression &&
+            call.method instanceof ConstantExpression &&
+            call.objectExpression.objectExpression.name == currentClassNode.outerClass?.name &&
+            call.objectExpression.property.value == 'this') {
             unusedPrivateFields.remove(call.method.value)
         }
         super.visitMethodCallExpression(call)
