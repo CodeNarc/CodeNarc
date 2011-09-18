@@ -17,7 +17,8 @@ NEW AND UPDATED RULES
 - UnnecessaryDefInFieldDeclaration rule (unnecessary) - If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.
 - UnnecessaryDefInVariableDeclaration rule (unnecessary) - Expanded rule to catch more instances of unneeded defs.
 - UnusedMethodParameter rule (unused) - This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override.
-- UnnecessaryOverridingGetter rule - 3401516 - Rule now flags methods that return a class literal. 
+- UnnecessaryOverridingGetter rule (unnecessary) - 3401516 - Rule now flags methods that return a class literal.
+- BuilderMethodWithSideEffects rule (design) - 3408045 - A builder method is defined as one that creates objects. As such, they should never be of void return type. If a method is named build, create, or make, then it should always return a value.
 
 BUG FIXES 
 - #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override
