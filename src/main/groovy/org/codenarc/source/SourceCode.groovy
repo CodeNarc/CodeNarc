@@ -55,7 +55,7 @@ interface SourceCode {
     /**
      * @return the List of lines of the source code (with line terminators removed)
      */
-    List getLines()
+    List<String> getLines()
 
     /**
      * Get the trimmed line at the specified index
