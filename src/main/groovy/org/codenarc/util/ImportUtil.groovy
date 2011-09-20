@@ -61,7 +61,7 @@ class ImportUtil {
             def afterIndex = classNameIndex + className.size()
             if (afterIndex >= line.size()) { return true }    // the className is the last thing on the line
             if (line[afterIndex..-1].startsWith('.' + alias)) { return true }   // className.<member>
-            return line[afterIndex..afterIndex + 1] =~ /[\/\s]/
+            return line[afterIndex] =~ /[\/\s]/
         }
         def lineNumber = index == -1 ? null : index + 1
         def sourceLine = lineNumber == null ? "import $className as $alias".toString() : sourceCode.lines[lineNumber - 1].trim()
