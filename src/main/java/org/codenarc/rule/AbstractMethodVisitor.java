@@ -75,7 +75,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
      */
     protected void addViolation(MethodNode node, String message) {
         addViolation((ASTNode) node, String.format(
-                "Violation in class %s. %s", node.getDeclaringClass().getName(), message
+                "Violation in class %s. %s", node.getDeclaringClass().getNameWithoutPackage(), message
         ));
     }
 
@@ -88,7 +88,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
      */
     protected void addViolation(ClassNode node, String message) {
         addViolation((ASTNode) node, String.format(
-                "Violation in class %s. %s", node.getName(), message
+                "Violation in class %s. %s", node.getNameWithoutPackage(), message
         ));
     }
 

@@ -19,4 +19,5 @@
     <rule class='org.codenarc.rule.naming.ParameterNameRule'/>
     <rule class='org.codenarc.rule.naming.PropertyNameRule'/>
     <rule class='org.codenarc.rule.naming.VariableNameRule'/>
+    <rule class='org.codenarc.rule.naming.FactoryMethodNameRule'/>
 </ruleset>

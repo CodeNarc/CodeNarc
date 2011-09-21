@@ -61,26 +61,26 @@ class UnnecessaryOverridingGetterAstVisitor extends AbstractAstVisitor {
             def statement = node.code.statements[0]
             if (statement instanceof ExpressionStatement) {
                 if (statement.expression instanceof ConstantExpression) {
-                    addViolation(node, makeMessage(node))
+                    addViolation(node, createMessage(node))
                 } else if (statement.expression instanceof VariableExpression && statement.expression.variable ==~ /[A-Z].*/) {
-                    addViolation(node, makeMessage(node))
+                    addViolation(node, createMessage(node))
                 } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
-                    addViolation(node, makeMessage(node))
+                    addViolation(node, createMessage(node))
                 }
             } else if (statement instanceof ReturnStatement) {
                 if (statement.expression instanceof ConstantExpression) {
-                    addViolation(node, makeMessage(node))
+                    addViolation(node, createMessage(node))
                 } else if (statement.expression instanceof ClassExpression) {
-                    addViolation(node, makeMessage(node))
+                    addViolation(node, createMessage(node))
                 } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
-                    addViolation(node, makeMessage(node))
+                    addViolation(node, createMessage(node))
                 } 
             } 
         }
         super.visitMethodEx(node)
     }
 
-    private String makeMessage(MethodNode node) {
+    private String createMessage(MethodNode node) {
         def constant = node.code.statements[0].expression
         def methodName = node.name
         def methodType = node.returnType.nameWithoutPackage

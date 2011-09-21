@@ -56,7 +56,7 @@ class CouldBeElvisAstVisitor extends AbstractAstVisitor {
 
                 // space check is a safe guard against crazy ass AST getText() implementations
                 if (conditionalText == leftAssignText && !conditionalText.contains(' ')) {
-                    def rightText = makePrettyExpression(bodyOfIfStatement.rightExpression)
+                    def rightText = createPrettyExpression(bodyOfIfStatement.rightExpression)
                     def rewrite = "$leftAssignText = $leftAssignText ?: $rightText "
                     addViolation(node, "Code could use elvis operator: $rewrite")
                 }
@@ -64,7 +64,7 @@ class CouldBeElvisAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private static makePrettyExpression(ASTNode expression) {
+    private static createPrettyExpression(ASTNode expression) {
         if (expression instanceof ConstantExpression && expression.value instanceof String) {
             "'$expression.text'"
         } else {

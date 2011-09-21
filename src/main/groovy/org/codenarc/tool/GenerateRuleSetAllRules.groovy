@@ -37,7 +37,7 @@ class GenerateRuleSetAllRules {
      * @param args - command-line args (not used)
      */
     static void main(String[] args) {
-        def sortedRules = GenerateUtil.buildSortedListOfAllRules()
+        def sortedRules = GenerateUtil.createSortedListOfAllRules()
         LOG.debug("sortedRules=$sortedRules")
 
         def binding = [rules:sortedRules]

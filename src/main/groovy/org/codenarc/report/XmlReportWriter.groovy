@@ -27,7 +27,7 @@ import org.codenarc.util.PathUtil
  *
  * @author Chris Mair
  */
-@SuppressWarnings('UnnecessaryReturnKeyword')
+@SuppressWarnings(['UnnecessaryReturnKeyword', 'FactoryMethodName'])
 class XmlReportWriter extends AbstractReportWriter {
 
     String title

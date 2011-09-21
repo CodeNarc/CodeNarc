@@ -20,6 +20,7 @@ NEW AND UPDATED RULES
 - UnnecessaryOverridingGetter rule (unnecessary) - 3401516 - Rule now flags methods that return a class literal.
 - BuilderMethodWithSideEffects rule (design) - 3408045 - A builder method is defined as one that creates objects. As such, they should never be of void return type. If a method is named build, create, or make, then it should always return a value.
 - MisorderedStaticImportRule - 3392892 - The rule now allows you to specify that static imports come after the other imports, not just before.  This rule has one property comesBefore, which defaults to true. If you like your static imports to come after the others, then set this property to false.
+- FactoryMethodName rule (naming) - A factory method is a method that creates objects, and they are typically named either buildFoo(), makeFoo(), or createFoo(). This rule enforces that only one naming convention is used. It defaults to makeFoo(), but that can be changed using the property 'regex'.
 
 BUG FIXES 
 - #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override

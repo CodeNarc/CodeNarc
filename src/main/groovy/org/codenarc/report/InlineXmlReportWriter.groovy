@@ -31,7 +31,7 @@ class InlineXmlReportWriter extends XmlReportWriter {
     //--------------------------------------------------------------------------
     // Internal Helper Methods
     //--------------------------------------------------------------------------
-
+    @Override
     protected buildViolationElement(Violation violation) {
         def rule = violation.rule
         return {
@@ -47,7 +47,8 @@ class InlineXmlReportWriter extends XmlReportWriter {
     protected buildRulesElement(AnalysisContext analysisContext) {
         // No-op as we have inline rule descriptions
     }
-    
+
+    @SuppressWarnings('FactoryMethodName')
     private buildDescriptionElement(rule) {
         def description = this.getDescriptionForRule(rule)
         return { Description(cdata(description)) }

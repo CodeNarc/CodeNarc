@@ -26,7 +26,7 @@ import org.codenarc.ruleset.XmlFileRuleSet
   */
 class GenerateUtil {
 
-    static List buildSortedListOfAllRules() {
+    static List createSortedListOfAllRules() {
         def allRuleSet = new CompositeRuleSet()
         RuleSets.ALL_RULESET_FILES.each { ruleSetPath ->
             def ruleSet = new XmlFileRuleSet(ruleSetPath)
