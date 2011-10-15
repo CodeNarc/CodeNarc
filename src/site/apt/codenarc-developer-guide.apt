@@ -11,6 +11,8 @@ CodeNarc - Developer Guide
 
   * {{{New_Rule_Checklist}New Rule Checklist}}
 
+  * {{{Before_You_Submit_a_Patch_or_Check-In_Code}Before You Submit a Patch or Check-In Code}}
+
   []
 
 
@@ -87,6 +89,15 @@ CodeNarc - Developer Guide
 
   [[7]] Before you check the new files into SVN, set the SVN "keyword" property. If using IntelliJ IDEA:
         <Subversion .. Set Property .. svn:keywords> = <<<Author Revision Date>>> (recursive)
+
+
+* {Before You Submit a Patch or Check-In Code}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Please do the following before submitting a patch or checking in code:
+
+  * Run the full <<CodeNarc>> test suite. This includes a test called <<<RunCodeNarcAgainstProjectSourceCodeTest>>>
+    that runs <<CodeNarc>> against its own source code (including any code that you have added or changed).
 
 
 **  NOTES
