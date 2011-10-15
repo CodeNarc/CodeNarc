@@ -249,6 +249,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
 
   Examples of violations:
+
 -------------------------------------------------------------------------------
     // def and private is redundant
     def private method1() { return 4 }
@@ -279,6 +280,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.
 
   Examples of violations:
+
 -------------------------------------------------------------------------------
     // def and private is redundant
     def private string1 = 'example'
