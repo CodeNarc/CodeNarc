@@ -87,4 +87,6 @@
     <rule class='org.codenarc.rule.basic.LongLiteralWithLowerCaseLRule'/>
     <rule class='org.codenarc.rule.basic.ConfusingMultipleReturnsRule'/>
     <rule class='org.codenarc.rule.basic.UseCollectManyRule'/>
+    <rule class='org.codenarc.rule.basic.CollectAllIsDeprecatedRule'/>
+    <rule class='org.codenarc.rule.basic.UseCollectNestedRule'/>
 </ruleset>

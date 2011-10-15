@@ -1,3 +1,4 @@
+
 CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
@@ -21,7 +22,9 @@ NEW AND UPDATED RULES
 - BuilderMethodWithSideEffects rule (design) - 3408045 - A builder method is defined as one that creates objects. As such, they should never be of void return type. If a method is named build, create, or make, then it should always return a value.
 - MisorderedStaticImportRule - 3392892 - The rule now allows you to specify that static imports come after the other imports, not just before.  This rule has one property comesBefore, which defaults to true. If you like your static imports to come after the others, then set this property to false.
 - FactoryMethodName rule (naming) - A factory method is a method that creates objects, and they are typically named either buildFoo(), makeFoo(), or createFoo(). This rule enforces that only one naming convention is used. It defaults to makeFoo(), but that can be changed using the property 'regex'.
-- UseCollectMany rule (basic) - In many case collectMany() yields the same result as collect{}.flatten. It is easier to understand and more clearly conveys the intent.
+- UseCollectMany rule (basic) - 3411722 - In many case collectMany() yields the same result as collect{}.flatten. It is easier to understand and more clearly conveys the intent.
+- CollectAllIsDeprecated rule (basic) - 3411724 - collectAll is deprecated since Groovy 1.8.1. Use collectNested instead
+- UseCollectNested rule (basic) - 3411724 - Instead of nested collect{}-calls use collectNested{}
 
 BUG FIXES 
 - #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override
@@ -42,7 +45,7 @@ BREAKING CHANGES
 
 THANKS
 - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.
-- Thanks to Joachim Baumann for UseCollectManyRule.
+- Thanks to Joachim Baumann for UseCollectMany, CollectAllIsDeprecated, UseCollectNested.
 
 Changes in version 0.15 (August 2011)
 -------------------------------------------
