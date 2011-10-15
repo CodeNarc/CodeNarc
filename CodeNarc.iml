@@ -52,12 +52,11 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.13" level="project" />
-    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.4" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:1.7.5" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: ant:ant:1.6.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: net.sourceforge.cobertura:cobertura:1.9" level="project" />
     <orderEntry type="library" name="Maven: oro:oro:2.0.8" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:2.2.1" level="project" />

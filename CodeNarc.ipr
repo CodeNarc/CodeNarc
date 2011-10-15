@@ -547,17 +547,6 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="Maven: ant:ant:1.6.5">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/ant/ant/1.6.5/ant-1.6.5.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/ant/ant/1.6.5/ant-1.6.5-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/ant/ant/1.6.5/ant-1.6.5-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: asm:asm-tree:2.2.1">
       <CLASSES>
         <root url="jar://$M2_REPO$/asm/asm-tree/2.2.1/asm-tree-2.2.1.jar!/" />
@@ -647,15 +636,15 @@
         <root url="file://$PROJECT_DIR$/../groovy-1.7.x/src/main" />
       </SOURCES>
     </library>
-    <library name="Maven: org.gmetrics:GMetrics:0.3">
+    <library name="Maven: org.gmetrics:GMetrics:0.4">
       <CLASSES>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-sources.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: oro:oro:2.0.8">

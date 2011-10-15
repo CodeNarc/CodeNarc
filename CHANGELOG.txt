@@ -1,4 +1,3 @@
-
 CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
@@ -6,7 +5,8 @@ http://www.codenarc.org
 Changes in version 0.16 (October 2011)
 -------------------------------------------
 NEW FEATURES
-- Performance Improvements (3394481) - There are big performance improvements in this release. 
+- Performance Improvements (3394481) - There are big performance improvements in this release.
+- Upgrade to GMetrics 0.4. (3424121) - This upgrade is optional for users, but may provide performance improvements.
 
 NEW AND UPDATED RULES
 - @SuppressWarnings Support - The support for @SuppressWarnings was redesigned so that it is more reliable. @SuppressWarnings no works on *all* rules at the Class, Field, and Method level. 
