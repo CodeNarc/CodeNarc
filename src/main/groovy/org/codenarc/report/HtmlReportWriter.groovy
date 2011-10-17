@@ -33,7 +33,7 @@ import org.codenarc.rule.Rule
  *
  * @author Chris Mair
  */
-@SuppressWarnings(['DuplicateLiteral', 'UnnecessaryReturnKeyword', 'FactoryMethodName'])
+@SuppressWarnings(['DuplicateMapLiteral', 'UnnecessaryReturnKeyword', 'FactoryMethodName'])
 class HtmlReportWriter extends AbstractReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'

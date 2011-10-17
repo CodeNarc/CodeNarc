@@ -25,6 +25,7 @@ NEW AND UPDATED RULES
 - UseCollectMany rule (basic) - 3411722 - In many case collectMany() yields the same result as collect{}.flatten. It is easier to understand and more clearly conveys the intent.
 - CollectAllIsDeprecated rule (basic) - 3411724 - collectAll is deprecated since Groovy 1.8.1. Use collectNested instead
 - UseCollectNested rule (basic) - 3411724 - Instead of nested collect{}-calls use collectNested{}
+- DuplicateMapLiteral (dry) - 3413600 - Check for multiple instances of the same Map literal; limited to Maps where the keys and values are all constants or literals.
 
 BUG FIXES 
 - #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override

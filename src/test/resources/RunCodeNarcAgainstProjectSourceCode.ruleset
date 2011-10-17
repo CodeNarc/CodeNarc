@@ -6,6 +6,9 @@ ruleset {
     ruleset('rulesets/basic.xml')
     ruleset('rulesets/braces.xml')
     ruleset('rulesets/design.xml')
+    ruleset('rulesets/dry.xml') {
+        include 'DuplicateMapLiteral'
+    }
     ruleset('rulesets/exceptions.xml')
     ruleset('rulesets/formatting.xml')
     ruleset('rulesets/imports.xml')
@@ -30,7 +33,5 @@ ruleset {
         violationMessage = 'The Apache License 2.0 comment is missing from the source file'
         description = 'Checks that all source files contain the Apache License 2.0 comment'
     }
-
-
 
 }

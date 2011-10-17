@@ -8,6 +8,29 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   These rules check for duplicate code, enforcing the DRY (Don't Repeat Yourself) principle.
 
 
+* DuplicateMapLiteral Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <Since CodeNarc 0.16>
+
+  This rule checks for duplicate <Map> literals within the current class.
+
+  Code containing duplicate <Map> literals can usually be improved by declaring the <Map> as a constant field.
+
+  By default, the rule does not analyze test files. This rule sets the default value of the
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  or 'TestCase.groovy'.
+
+** Notes
+~~~~~~~~~
+
+  * This rule does not search across several files at once, only in the current file, and only
+    within the current class.
+
+  * You can suppress the error by annotating a class or method with the <<<@SuppressWarnings('DuplicateMapLiteral')>>>
+    annotation.
+
+
 * DuplicateNumberLiteral Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -34,7 +57,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   * This rule does not search across several files at once, only in the current file, and only
     within the current class.
 
-  * You can suppress the error by annotating a class or method with the <<<@SuppressWarnings('DuplicateLiteral')>>>
+  * You can suppress the error by annotating a class or method with the <<<@SuppressWarnings('DuplicateNumberLiteral')>>>
     annotation.
 
 
@@ -64,6 +87,6 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   * This rule does not search across several files at once, only in the current file, and only
     within the current class.
 
-  * You can suppress the error by annotating a class or method with the <<<@SuppressWarnings('DuplicateLiteral')>>>
+  * You can suppress the error by annotating a class or method with the <<<@SuppressWarnings('DuplicateStringLiteral')>>>
     annotation.
 
