@@ -36,6 +36,7 @@ class GMetricsSourceCodeAdapterTest extends AbstractTestCase {
         assert adapter.name == sourceCode.name
         assert adapter.path == sourceCode.path
         assert adapter.text == sourceCode.text
+        assert adapter.valid == sourceCode.valid
         assert adapter.lines == sourceCode.lines
         assert adapter.line(0) == sourceCode.line(0)
         assert adapter.ast == sourceCode.ast

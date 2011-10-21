@@ -59,4 +59,8 @@ class GMetricsSourceCodeAdapter implements SourceCode {
     int getLineNumberForCharacterIndex(int charIndex) {
         codeNarcSourceCode.getLineNumberForCharacterIndex(charIndex)
     }
+
+    boolean isValid() {
+        return codeNarcSourceCode.isValid()
+    }
 }

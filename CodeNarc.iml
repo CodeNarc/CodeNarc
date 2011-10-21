@@ -38,16 +38,15 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="GMetrics-0.3">
+      <library name="GMetrics-0.4">
         <CLASSES>
-          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3.jar!/" />
+          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-javadoc.jar!/" />
+          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-javadoc.jar!/" />
         </JAVADOC>
         <SOURCES>
-          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-sources.jar!/" />
-          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.3/GMetrics-0.3-sources.jar!/" />
+          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
