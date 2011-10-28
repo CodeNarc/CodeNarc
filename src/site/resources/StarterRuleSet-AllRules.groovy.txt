@@ -24,6 +24,7 @@ ruleset {
     BracesForMethod
     BracesForTryCatchFinally
     BrokenOddnessCheck
+    BuilderMethodWithSideEffects
     BusyWait
     CatchArrayIndexOutOfBoundsException
     CatchError
@@ -41,17 +42,20 @@ ruleset {
     CloneableWithoutClone
     CloseWithoutCloseable
     ClosureAsLastMethodParameter
+    CollectAllIsDeprecated
     CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
     ConfusingClassNamedException
     ConfusingMethodName
+    ConfusingMultipleReturns
     ConfusingTernary
     ConsecutiveLiteralAppends
     ConsecutiveStringConcatenation
     ConstantIfExpression
     ConstantTernaryExpression
     ConstantsOnlyInterface
+    CouldBeElvis
     CoupledTestCase
     CyclomaticComplexity
     DeadCode
@@ -60,7 +64,9 @@ ruleset {
     DoubleNegative
     DuplicateCaseStatement
     DuplicateImport
+    DuplicateListLiteral
     DuplicateMapKey
+    DuplicateMapLiteral
     DuplicateNumberLiteral
     DuplicateSetValue
     DuplicateStringLiteral
@@ -103,6 +109,7 @@ ruleset {
     ExplicitLinkedListInstantiation
     ExplicitStackInstantiation
     ExplicitTreeSetInstantiation
+    FactoryMethodName
     FieldName
     FileCreateTempFile
     FinalClassWithProtectedMember
@@ -149,6 +156,7 @@ ruleset {
     LoggerForDifferentClass
     LoggerWithWrongModifiers
     LoggingSwallowsStacktrace
+    LongLiteralWithLowerCaseL
     MethodCount
     MethodName
     MethodSize
@@ -219,6 +227,7 @@ ruleset {
     UnnecessaryCollectCall
     UnnecessaryCollectionCall
     UnnecessaryConstructor
+    UnnecessaryDefInFieldDeclaration
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDefInVariableDeclaration
     UnnecessaryDotClass
@@ -239,6 +248,7 @@ ruleset {
     UnnecessaryNullCheck
     UnnecessaryNullCheckBeforeInstanceOf
     UnnecessaryObjectReferences
+    UnnecessaryOverridingGetter
     UnnecessaryOverridingMethod
     UnnecessaryPackageReference
     UnnecessaryParenthesesForMethodCallWithClosure
@@ -253,6 +263,7 @@ ruleset {
     UnsafeArrayDeclaration
     UnusedArray
     UnusedImport
+    UnusedMethodParameter
     UnusedObject
     UnusedPrivateField
     UnusedPrivateMethod
@@ -264,6 +275,8 @@ ruleset {
     UseAssertSameInsteadOfAssertTrue
     UseAssertTrueInsteadOfAssertEquals
     UseAssertTrueInsteadOfNegation
+    UseCollectMany
+    UseCollectNested
     UseOfNotifyMethod
     VariableName
     VolatileArrayField

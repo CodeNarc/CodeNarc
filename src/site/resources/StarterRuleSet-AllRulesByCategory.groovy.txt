@@ -19,14 +19,17 @@ ruleset {
     ClassForName
     CloneableWithoutClone
     ClosureAsLastMethodParameter
+    CollectAllIsDeprecated
     CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
+    ConfusingMultipleReturns
     ConfusingTernary
     ConsecutiveLiteralAppends
     ConsecutiveStringConcatenation
     ConstantIfExpression
     ConstantTernaryExpression
+    CouldBeElvis
     DeadCode
     DoubleNegative
     DuplicateCaseStatement
@@ -75,6 +78,7 @@ ruleset {
     HardcodedWindowsRootDirectory
     IntegerGetInteger
     InvertedIfElse
+    LongLiteralWithLowerCaseL
     RandomDoubleCoercedToZero
     RemoveAllOnSelf
     ReturnFromFinallyBlock
@@ -82,6 +86,8 @@ ruleset {
     ReturnsNullInsteadOfEmptyCollection
     SimpleDateFormatMissingLocale
     ThrowExceptionFromFinallyBlock
+    UseCollectMany
+    UseCollectNested
     
     // rulesets/braces.xml
     ElseBlockBraces
@@ -119,6 +125,7 @@ ruleset {
     // rulesets/design.xml
     AbstractClassWithPublicConstructor
     AbstractClassWithoutAbstractMethod
+    BuilderMethodWithSideEffects
     CloseWithoutCloseable
     ConstantsOnlyInterface
     EmptyMethodInAbstractClass
@@ -128,6 +135,8 @@ ruleset {
     StatelessSingleton
     
     // rulesets/dry.xml
+    DuplicateListLiteral
+    DuplicateMapLiteral
     DuplicateNumberLiteral
     DuplicateStringLiteral
     
@@ -226,6 +235,7 @@ ruleset {
     AbstractClassName
     ClassName
     ConfusingMethodName
+    FactoryMethodName
     FieldName
     InterfaceName
     MethodName
@@ -270,6 +280,7 @@ ruleset {
     UnnecessaryCollectCall
     UnnecessaryCollectionCall
     UnnecessaryConstructor
+    UnnecessaryDefInFieldDeclaration
     UnnecessaryDefInMethodDeclaration
     UnnecessaryDefInVariableDeclaration
     UnnecessaryDotClass
@@ -288,6 +299,7 @@ ruleset {
     UnnecessaryNullCheck
     UnnecessaryNullCheckBeforeInstanceOf
     UnnecessaryObjectReferences
+    UnnecessaryOverridingGetter
     UnnecessaryOverridingMethod
     UnnecessaryPackageReference
     UnnecessaryParenthesesForMethodCallWithClosure
@@ -302,6 +314,7 @@ ruleset {
     
     // rulesets/unused.xml
     UnusedArray
+    UnusedMethodParameter
     UnusedObject
     UnusedPrivateField
     UnusedPrivateMethod

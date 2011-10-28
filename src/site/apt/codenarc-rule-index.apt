@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 264 rules.
+  <<CodeNarc>> includes 277 rules.
 
     
     
@@ -35,11 +35,15 @@ Rule Index
     
     * ClosureAsLastMethodParameter
     
+    * CollectAllIsDeprecated
+    
     * CompareToWithoutComparable
     
     * ComparisonOfTwoConstants
     
     * ComparisonWithSelf
+    
+    * ConfusingMultipleReturns
     
     * ConfusingTernary
     
@@ -50,6 +54,8 @@ Rule Index
     * ConstantIfExpression
     
     * ConstantTernaryExpression
+    
+    * CouldBeElvis
     
     * DeadCode
     
@@ -147,6 +153,8 @@ Rule Index
     
     * InvertedIfElse
     
+    * LongLiteralWithLowerCaseL
+    
     * RandomDoubleCoercedToZero
     
     * RemoveAllOnSelf
@@ -160,6 +168,10 @@ Rule Index
     * SimpleDateFormatMissingLocale
     
     * ThrowExceptionFromFinallyBlock
+    
+    * UseCollectMany
+    
+    * UseCollectNested
     
     
     
@@ -238,6 +250,8 @@ Rule Index
     
     * AbstractClassWithoutAbstractMethod
     
+    * BuilderMethodWithSideEffects
+    
     * CloseWithoutCloseable
     
     * ConstantsOnlyInterface
@@ -256,6 +270,10 @@ Rule Index
     
     
 * {{{codenarc-rules-dry.html}Dry}}
+    
+    * DuplicateListLiteral
+    
+    * DuplicateMapLiteral
     
     * DuplicateNumberLiteral
     
@@ -462,6 +480,8 @@ Rule Index
     
     * ConfusingMethodName
     
+    * FactoryMethodName
+    
     * FieldName
     
     * InterfaceName
@@ -554,6 +574,8 @@ Rule Index
     
     * UnnecessaryConstructor
     
+    * UnnecessaryDefInFieldDeclaration
+    
     * UnnecessaryDefInMethodDeclaration
     
     * UnnecessaryDefInVariableDeclaration
@@ -590,6 +612,8 @@ Rule Index
     
     * UnnecessaryObjectReferences
     
+    * UnnecessaryOverridingGetter
+    
     * UnnecessaryOverridingMethod
     
     * UnnecessaryPackageReference
@@ -618,6 +642,8 @@ Rule Index
 * {{{codenarc-rules-unused.html}Unused}}
     
     * UnusedArray
+    
+    * UnusedMethodParameter
     
     * UnusedObject
     
