@@ -9,6 +9,7 @@
     </description>
 
     <rule class='org.codenarc.rule.dry.DuplicateNumberLiteralRule'/>
+    <rule class='org.codenarc.rule.dry.DuplicateListLiteralRule'/>
     <rule class='org.codenarc.rule.dry.DuplicateMapLiteralRule'/>
     <rule class='org.codenarc.rule.dry.DuplicateStringLiteralRule'/>
 
