@@ -18,10 +18,11 @@ package org.codenarc.rule.formatting
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
- * Checks the location of the opening brace ({) for for loops. By default, requires them on a new line, but the
- * sameLine property can be set to true to override this.
+ * Checks the location of the opening brace ({) for for loops. By default, requires them on the same line,
+ * but the sameLine property can be set to false to override this.
  *
  * @author Hamlet D'Arcy
   */
@@ -36,13 +37,15 @@ class BracesForForLoopAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitForLoop(ForStatement node) {
-        if (rule.sameLine) {
-            if(!lastSourceLine(node.collectionExpression)?.contains('{')) {
-                addViolation(node, 'Braces should start on the same line')
-            }
-        } else {
-            if(lastSourceLine(node.collectionExpression)?.contains('{')) {
-                addViolation(node, 'Braces should start on a new line')
+        if (AstUtil.isBlock(node.loopBlock)) {
+            if (rule.sameLine) {
+                if(!lastSourceLine(node.collectionExpression)?.contains('{')) {
+                    addViolation(node, 'Braces should start on the same line')
+                }
+            } else {
+                if(lastSourceLine(node.collectionExpression)?.contains('{')) {
+                    addViolation(node, 'Braces should start on a new line')
+                }
             }
         }
         super.visitForLoop(node)

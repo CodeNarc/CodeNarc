@@ -31,38 +31,45 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'BracesForIfElse'
     }
 
-    void testSuccessScenarioSameLine() {
-
+    void testBraceOnSameLine_NoViolations() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
-    void testSuccessScenarioNewLine() {
+    void testBraceOnNewLine_SameLineFalse_NoViolations() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
-    void testMultilineIfStatementSuccess() {
+    void testIfOrElseWithNoBraces_NoViolations() {
+        final SOURCE = '''
+            if (a && b)
+                println 'ok'
+            else
+                println 'bad'
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testMultilineIfStatement_NoViolations() {
         final SOURCE = '''
             if (a &&
                     b) {
             }
         '''
-
         assertNoViolations(SOURCE)
     }
 
-    void testMultilineIfStatementFail() {
+    void testMultilineIfStatement_Violation() {
         final SOURCE = '''
             if (a &&
                     b)
             {
             }
         '''
-
         assertSingleViolation(SOURCE, 2, 'if (a &&', 'Braces should start on the same line')
     }
 

@@ -54,6 +54,14 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testForLoopWithNoBraces_NoViolations() {
+        final SOURCE = '''
+            for (int x = 0; x < 10; x++)
+                println x
+            '''
+        assertNoViolations(SOURCE)
+    }
+
     void testNewLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text

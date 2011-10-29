@@ -32,7 +32,6 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testInterfaces() {
-
         final SOURCE = '''
             interface MyInterface {
                 def method()
@@ -42,7 +41,6 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testMultilineInterfaces() {
-
         final SOURCE = '''
             interface MyInterface
                     extends OtherInterface {
@@ -53,7 +51,6 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testMultiLineMethods() {
-
         final SOURCE = '''
             def myMethod1(String x,
                 String y) {
@@ -75,7 +72,6 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testMultilineInterfacesOverride() {
-
         final SOURCE = '''
             interface MyInterface
                     extends OtherInterface
@@ -145,7 +141,6 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testSuccessScenarioSameLine() {
-
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
@@ -159,7 +154,6 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     }
 
     void testViolationSameLine() {
-
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,

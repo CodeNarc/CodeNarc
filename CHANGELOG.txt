@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.16 (October 2011)
+Changes in version 0.16 (November 2011)
 -------------------------------------------
 NEW FEATURES
 - Performance Improvements (3394481) - There are big performance improvements in this release.
@@ -41,6 +41,7 @@ BUG FIXES
 - #3408440: Fixed UnnecessaryObjectReferences rule to not track references across methods.
 - #3393144: Fixed unnecessaryObjectReferences rule to not track references across fields.
 - #3394312: Fixed UnusedPrivateField rule to search for usages based on super class references.
+- #3423987: BracesFor* rules should not produce violations if there are no braces.
 
 BREAKING CHANGES
 *** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors. 

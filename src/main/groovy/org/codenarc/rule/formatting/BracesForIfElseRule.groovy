@@ -18,6 +18,7 @@ package org.codenarc.rule.formatting
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Checks the location of the opening brace ({) for if statements. By default, requires them on the same line, but the
@@ -38,7 +39,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
     @Override
     // TODO: also check else blocks
     void visitIfElse(IfStatement node) {
-        if (isFirstVisit(node)) {
+        if (isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
             if (rule.sameLine) {
                 if(!lastSourceLine(node.booleanExpression)?.contains('{')) {
                     addViolation(node, 'Braces should start on the same line')
