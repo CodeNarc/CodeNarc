@@ -38,6 +38,8 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 private String getCMD() { 'cmd' }
                 private String getCMD2() { 'cmd' }
                 private void setCMD3(x) {  }
+                private boolean isCmd4() { false }
+                private boolean isCmd5() { true }
 
                 private String getUnused() { 'unused' }
 
@@ -46,13 +48,28 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                     new Foo().CMD
                     foo.CMD2.bar = 'xxx'
                     CMD3 = 'yyy'
+                    cmd4.class
+                    cmd5.toString()
                 }
             }
             '''
-
-        assertSingleViolation(SOURCE, 9, 'getUnused()', 'The method getUnused is not used within the class')
+        assertSingleViolation(SOURCE, 11, 'getUnused()', 'The method getUnused is not used within the class')
     }
-    
+
+    void testGetterMethodWithIsPrefix_AccessedAsProperty_NoViolation() {
+        final SOURCE = '''
+            class A {
+                private boolean isCompleted() {
+                    true
+                }
+                boolean ready() {
+                    completed
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testStaticMethodsInOuterClass() {
         final SOURCE = '''
             package groovy.bugs
@@ -405,6 +422,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         final SOURCE = ' Map map = ["a" : 1, "b": 2, "$c": 3, "b": 4 ] '
         assertNoViolations(SOURCE)
     }
+
     protected Rule createRule() {
         new UnusedPrivateMethodRule()
     }

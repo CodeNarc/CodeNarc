@@ -42,6 +42,7 @@ BUG FIXES
 - #3393144: Fixed unnecessaryObjectReferences rule to not track references across fields.
 - #3394312: Fixed UnusedPrivateField rule to search for usages based on super class references.
 - #3423987: BracesFor* rules should not produce violations if there are no braces.
+- #3429658: False positive for UnusedPrivateMethod rule
 
 BREAKING CHANGES
 *** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors. 

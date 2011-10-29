@@ -127,9 +127,11 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
     void visitVariableExpression(VariableExpression expression) {
         if (expression.name.size() == 1) {
             unusedPrivateMethods.remove('get' + expression.name.toUpperCase())
+            unusedPrivateMethods.remove('is' + expression.name.toUpperCase())
             unusedPrivateMethods.remove('set' + expression.name.toUpperCase())
         } else {
             unusedPrivateMethods.remove('get' + expression.name[0].toUpperCase() + expression.name[1..-1])
+            unusedPrivateMethods.remove('is' + expression.name[0].toUpperCase() + expression.name[1..-1])
             unusedPrivateMethods.remove('set' + expression.name[0].toUpperCase() + expression.name[1..-1])
         }
         super.visitVariableExpression expression
