@@ -27,7 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * If a parent class defines a method that follows the Java getter notation, and a subclass overrides that method to
+ * If a parent class defines a public method that follows the Java getter notation, and a subclass overrides that method to
  * return a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
  *
  * @author Hamlet D'Arcy
@@ -56,7 +56,7 @@ class UnnecessaryOverridingGetterAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodEx(MethodNode node) {
-        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && !node.isStatic() && AstUtil.isOneLiner(node.code)) {
+        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && node.isPublic() && !node.isStatic() && AstUtil.isOneLiner(node.code)) {
 
             def statement = node.code.statements[0]
             if (statement instanceof ExpressionStatement) {

@@ -53,6 +53,20 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testIgnoreProtectedGetterMethods() {
+        final SOURCE = '''
+            class Child extends Parent {
+                @Override
+                protected int getValue() { 123 }
+
+                @Override
+                protected getValue2() { return 'abc' }
+
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testConstantReturn() {
         final SOURCE = '''
             class Child extends Parent {
