@@ -25,6 +25,7 @@ import org.codenarc.util.AstUtil
  * If a method is called and the last parameter is an inline closure it can be declared outside of the method call brackets.
  *
  * @author Marcin Erdmann
+ * @Chris Mair
  */
 class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'ClosureAsLastMethodParameter'
@@ -38,17 +39,23 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
     void visitMethodCallExpression(MethodCallExpression call) {
         def arguments = AstUtil.getMethodArguments(call)
         if (arguments && arguments.last() instanceof ClosureExpression) {
-            def lastColumnForClosure = arguments.last().lastColumnNumber
-            def lastColumnForMethodCall = call.lastColumnNumber
-            def lastColumnForMethodArguments = call.arguments.lastColumnNumber
+
+            def lastArgument = arguments.last()
             def sourceLine = sourceCode.lines[call.lineNumber - 1]
             def firstChar = sourceLine[call.columnNumber - 1]
 
             // If a method call is surrounded by parentheses (possibly unnecessary), then the AST includes those in the
-            // MethodCall start/end column indexes. In that case, do not include the ending parentheses in the comparison.
-            def endIndex = firstChar == '(' ? lastColumnForMethodArguments : lastColumnForMethodCall
+            // MethodCall start/end column indexes. In that case, it gets too complicated. Just bail.
+            if (firstChar == '(') {
+                super.visitMethodCallExpression(call)
+                return
+            }
 
-            if (lastColumnForClosure < endIndex) {
+            def isViolation = call.lastLineNumber > lastArgument.lastLineNumber ||
+                (call.lastLineNumber == lastArgument.lastLineNumber &&
+                    call.lastColumnNumber > lastArgument.lastColumnNumber)
+
+            if (isViolation) {
                 addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure an can appear outside the parenthesis")
             }
         }

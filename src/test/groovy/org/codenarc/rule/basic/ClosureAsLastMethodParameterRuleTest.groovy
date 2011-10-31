@@ -92,6 +92,18 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    void testLastParenthesesOnLineFollowingEndOfClosure() {
+        final SOURCE = '''
+            [1,2,3].each({
+                println it
+            }
+            ).someMethodCall()
+        '''
+        assertSingleViolation(SOURCE, 2,
+            '''[1,2,3].each({'''
+        )
+    }
+
     void testSimpleTwoViolations() {
         final SOURCE = '''
             [1,2,3].each({ println it })
@@ -145,6 +157,9 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
             def filterFunds() {
                (funds.findAll { it.fundCode } )
             }
+            def filterFunds_TwoExtraParentheses() {
+               ((funds.findAll{it.fundCode}))
+            }
             def extendFunds() {
                (funds.extend(3) { it.fundCode } )
             }
@@ -165,10 +180,33 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
 
             // The only violation
             def clearFunds() {
-               println(funds.clear('clearing', { it.fundCode }) )
+               (println(funds.clear('clearing', { it.fundCode }) ))
             }
           '''
-        assertSingleViolation(SOURCE, 25, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure an can appear outside the parenthesis")
+        assertSingleViolation(SOURCE, 28, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure an can appear outside the parenthesis")
+    }
+
+    void testNestedMethodCallSurroundedByExtraParentheses_KnownLimitation() {
+        final SOURCE = '''
+            def clearFunds() {
+               (println((funds.clear('clearing', { it.fundCode })) ))
+            }
+          '''
+        // Should actually fail with violation for inner method call -- clear()
+        //assertSingleViolation(SOURCE, 3, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure an can appear outside the parenthesis")
+        assertNoViolations(SOURCE)
+    }
+
+    void testMultiLineMethodCall_StartsWithParentheses() {
+        final SOURCE = '''
+            ((Node)o).children().inject( [:] ){ Map<String, String> m, Node childNode ->
+                println m
+            }
+            (0..1).inject( [:] ){ Map<String, String> m, Node childNode ->
+                println m
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
