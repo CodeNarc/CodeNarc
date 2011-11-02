@@ -29,7 +29,7 @@ import org.codenarc.util.AstUtil
  */
 class UnnecessaryDefInFieldDeclarationRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDefInFieldDeclaration'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryDefInFieldDeclarationAstVisitor
 }
 

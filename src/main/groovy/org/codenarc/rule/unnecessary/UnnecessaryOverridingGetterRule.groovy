@@ -34,7 +34,7 @@ import org.codenarc.util.AstUtil
  */
 class UnnecessaryOverridingGetterRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryOverridingGetter'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = UnnecessaryOverridingGetterAstVisitor
 }
 
