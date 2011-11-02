@@ -38,7 +38,7 @@ class DryUtil {
         def mapEntryExpressions2 = mapExpression2.mapEntryExpressions
 
         if (mapEntryExpressions1.size() == mapEntryExpressions2.size()) {
-            for (int index in 0..mapEntryExpressions1.size()-1) {
+            for (int index = 0; index < mapEntryExpressions1.size(); index++) { // may be empty
                 if (!areTheSameConstantOrLiteralMapEntryExpression(mapEntryExpressions1[index], mapEntryExpressions2[index])) {
                     return false
                 }
@@ -52,6 +52,9 @@ class DryUtil {
      * @return true only if both MapEntryExpressions have the same constant or literal key and value
      */
     static boolean areTheSameConstantOrLiteralMapEntryExpression(MapEntryExpression mapEntryExpression1, MapEntryExpression mapEntryExpression2) {
+        if (mapEntryExpression1 == null || mapEntryExpression2 == null) {
+            return mapEntryExpression1 == mapEntryExpression2
+        }
         return haveTheSameConstantOrLiteralValue(mapEntryExpression1.keyExpression, mapEntryExpression2.keyExpression) &&
                haveTheSameConstantOrLiteralValue(mapEntryExpression1.valueExpression, mapEntryExpression2.valueExpression)
     }

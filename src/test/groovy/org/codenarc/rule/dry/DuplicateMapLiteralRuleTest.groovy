@@ -196,6 +196,16 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'def var2 = [a:99]', '[a:99]')
     }
 
+    void testDuplicateMapLiteral_NestedEmptyMap_Violations() {
+        final SOURCE = '''
+            class Maps {
+                def map1 = [messages:[:]]
+                def map2 = [messages:[:]]
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'def map2 = [messages:[:]]', '[messages:[]]')
+    }
+
     protected Rule createRule() {
         new DuplicateMapLiteralRule()
     }
