@@ -105,7 +105,7 @@ class DryUtil {
         def expressions2 = listExpression2.expressions
 
         if (expressions1.size() == expressions2.size()) {
-            for (int index in 0..expressions1.size()-1) {
+            for (int index = 0; index < expressions1.size(); index++) { // may be empty
                 if (!haveTheSameConstantOrLiteralValue(expressions1[index], expressions2[index])) {
                     return false
                 }

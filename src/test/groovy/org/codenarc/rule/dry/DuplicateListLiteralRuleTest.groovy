@@ -131,6 +131,16 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [99, [3, 4, [x:99], 5]]', '[3, 4, [x:99], 5]')
     }
 
+    void testDuplicateListLiteral_NestedEmptyList_Violations() {
+        final SOURCE = '''
+            class Lists {
+                def list1 = [1, []]
+                def list2 = [1, []]
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'def list2 = [1, []]', '[1, []]')
+    }
+
     protected Rule createRule() {
         new DuplicateListLiteralRule()
     }
