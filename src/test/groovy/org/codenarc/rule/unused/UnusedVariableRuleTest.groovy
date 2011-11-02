@@ -262,7 +262,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_VariableOnlyReferencedWithinInnerClass_Violation_KnownIssue() {
+    void testApplyTo_VariableOnlyReferencedWithinInnerClass() {
         final SOURCE = '''
             def buildCallable() {
                 String ssn = 'xxx'

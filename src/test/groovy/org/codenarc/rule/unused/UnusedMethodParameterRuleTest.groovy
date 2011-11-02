@@ -22,6 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnusedMethodParameterRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
 
@@ -58,6 +59,27 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.ignoreRegex = 'value|ignored|ignore'
+        assertNoViolations(SOURCE)
+    }
+
+    void testIgnoresCategoryClassesByDefault() {
+        final SOURCE = '''
+            class MyCategory {
+                void myMethod1(String string, int value) { }
+                void myMethod1(String string, int value, name) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testCustomIgnoreClassRegex() {
+        final SOURCE = '''
+            class MyCustomClass {
+                void myMethod1(int value) { }
+                void myMethod1(int value, name) { }
+            }
+        '''
+        rule.ignoreClassRegex = '.*Custom.*'
         assertNoViolations(SOURCE)
     }
 

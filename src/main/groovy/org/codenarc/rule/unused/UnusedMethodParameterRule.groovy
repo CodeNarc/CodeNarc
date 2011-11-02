@@ -27,12 +27,13 @@ import org.codenarc.util.AstUtil
  * This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override. 
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class UnusedMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'UnusedMethodParameter'
     int priority = 2
     String ignoreRegex = 'ignore|ignored'
-    String categoryClassRegex = '.*Category'
+    String ignoreClassRegex = '.*Category'
     Class astVisitorClass = UnusedMethodParameterAstVisitor
 }
 
@@ -41,7 +42,7 @@ class UnusedMethodParameterAstVisitor extends AbstractMethodVisitor {
     @Override
     void visitMethod(MethodNode node) {
 
-        if (!currentClassNode.isInterface() && !node.isAbstract() && !(currentClassName ==~ rule.categoryClassRegex)
+        if (!currentClassNode.isInterface() && !node.isAbstract() && !(currentClassName ==~ rule.ignoreClassRegex)
             && !Modifier.isPrivate(node.modifiers) && AstUtil.getAnnotation(node, 'Override') == null
             && !isMainMethod(node)) {
             

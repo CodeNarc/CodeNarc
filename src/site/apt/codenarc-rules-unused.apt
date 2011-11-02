@@ -140,10 +140,11 @@ Unused Rules  ("<rulesets/unused.xml>")
     parameter. That parameter can either be typed as <<<String[]>>> or else the type can be omitted
     (be dynamically typed). And the <<<main()>> method must be <<<static>>>.
 
-  * You can specify an ignore list using the 'ignoreRegex' property. By default, a parameter named 'ignore' or 'ignored'
-    does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property.
+  * You can specify an ignore list of parameter names using the 'ignoreRegex' property. By default, a parameter
+    named 'ignore' or 'ignored'  does not trigger a violation (the regex value is 'ignore|ignored').
+    You can add your own ignore list using this property.
 
-  * You can specify a class name pattern to ignore using the 'categoryClassRegex' property. By default classes named
+  * You can specify a class name pattern to ignore using the 'ignoreClassRegex' property. By default classes named
     '*.Category' are ignored because they are category classes and have unused parameters in static methods.
     
   Example of violations:
@@ -153,11 +154,32 @@ Unused Rules  ("<rulesets/unused.xml>")
         def method(def param) {
             // param is unused
         }
+    }
+-------------------------------------------------------------------------------
 
+  Example of code that does not cause violations:
+
+-------------------------------------------------------------------------------
+    class MyClass {
         @Override
         def otherMethod(def param) {
             // this is OK because it overrides a super class
         }
+    }
+
+    class MyCategory {
+        // Category classes are ignored by default
+        void myMethod1(String string, int value) { }
+        void myMethod1(String string, int value, name) { }
+    }
+
+    class MainClass1 {
+        // main() methods are ignored
+        public static void main(String[] args) { }
+    }
+    class MainClass2 {
+        // This is also a valid Groovy main() method
+        static main(args) { }
     }
 -------------------------------------------------------------------------------
 
@@ -168,9 +190,6 @@ Unused Rules  ("<rulesets/unused.xml>")
   Checks for variables that are never referenced.
 
   Known limitations:
-
-  * Does not recognize variable references within an inner class. See
-    {{{https://sourceforge.net/tracker/index.php?func=detail&aid=3155974&group_id=250145&atid=1126573}CodeNarc bug #3155974}}.
 
   * Incorrectly considers a variable referenced if another variable with the same name is referenced
     elsewhere (in another scope/block).
