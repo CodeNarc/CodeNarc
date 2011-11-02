@@ -155,6 +155,43 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreMainMethod() {
+        // In Groovy, the main() method does not have to specify void return type or String[] args type.
+        // But it must be static, with one parameter.
+        final SOURCE = '''
+            class MyClass1 {
+                public static void main(String[] args) { }
+            }
+            class MyClass2 {
+                static main(args) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_IgnoreNonMatchingMainMethods() {
+        final SOURCE = '''
+            class MyClass1 {
+                void main(String[] args) { }    // not static
+            }
+            class MyClass2 {
+                static main(arg1, arg2) { }     // too many args
+            }
+            class MyClass3 {
+                static main(int value) { }     // wrong arg type
+            }
+            class MyClass4 {
+                static int main(String[] args) { }     // wrong return type
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'void main(String[] args) { }', messageText:'args'],
+            [lineNumber:6, sourceLineText:'static main(arg1, arg2) { }', messageText:'arg1'],
+            [lineNumber:6, sourceLineText:'static main(arg1, arg2) { }', messageText:'arg2'],
+            [lineNumber:9, sourceLineText:'static main(int value) { }', messageText:'value'],
+            [lineNumber:12, sourceLineText:'static int main(String[] args) { }', messageText:'args'])
+    }
+
     void testApplyTo_NoMethods() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
