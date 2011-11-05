@@ -37,8 +37,39 @@ CodeNarc - Configuring Rules
   {{{codenarc-custom-ruleset.html}Creating a RuleSet}} describes how to create a new <RuleSet> and
   configure the rules within it.
 
-  You can configure rules when you include a whole <RuleSet> using <<<\<ruleset-ref\>>>>,
-  as in the following example:
+  Here is an example of a Groovy <RuleSet> file that configures all three rules that it contains:
+
++----------------------------------------------------------------------------------------
+ruleset {
+    CyclomaticComplexity {
+        maxMethodComplexity = 1
+    }
+
+    ConfusingTernary(priority:3)
+
+    StatelessClass {
+        name = 'StatelessDao'
+        applyToClassNames = '*Dao'
+    }
+}
++----------------------------------------------------------------------------------------
+
+  Here is another example of a Groovy <RuleSet> file. This one includes another <RuleSet>, and configures
+  a couple of the rules that it contains:
+
++----------------------------------------------------------------------------------------
+ruleset {
+    ruleset('rulesets/basic.xml') {
+        CatchThrowable {
+            priority = 1
+        }
+        EqualsAndHashCode priority:3
+    }
+}
++----------------------------------------------------------------------------------------
+
+  If you have an XML <RuleSet>, then you can configure rules when you include a whole <RuleSet>
+  using <<<\<ruleset-ref\>>>>, as in the following example:
 
 +----------------------------------------------------------------------------------------
     <ruleset-ref path='rulesets/size.xml'>
@@ -47,7 +78,6 @@ CodeNarc - Configuring Rules
         </rule-config>
     </ruleset-ref>
 +----------------------------------------------------------------------------------------
-
 
   Or you can configure <Rules> that you include individually using <<<\<rule\>>>>, as in the following example:
 
@@ -214,6 +244,17 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
 +----------------------------------------------------------------------------------------
 # Turn off this rule
 AbstractClassName.enabled=false
++----------------------------------------------------------------------------------------
+
+  And here is an example of disabling a rule within a Groovy <RuleSet> by setting its <<<enabled>>>
+  attribute to <<<false>>>.
+
++----------------------------------------------------------------------------------------
+ruleset {
+    ruleset('rulesets/basic.xml') {
+        CatchThrowable(enabled:false)
+    }
+}
 +----------------------------------------------------------------------------------------
 
 

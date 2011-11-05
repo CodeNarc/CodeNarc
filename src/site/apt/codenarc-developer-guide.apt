@@ -87,9 +87,6 @@ CodeNarc - Developer Guide
 
   [[6]] Add a description of the new rule to the appropriate "src/main/site/apt/codenarc-rules-XX.apt" document.
 
-  [[7]] Before you check the new files into SVN, set the SVN "keyword" property. If using IntelliJ IDEA:
-        <Subversion .. Set Property .. svn:keywords> = <<<Author Revision Date>>> (recursive)
-
 
 * {Before You Submit a Patch or Check-In Code}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

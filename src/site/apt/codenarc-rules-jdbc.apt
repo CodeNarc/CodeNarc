@@ -35,6 +35,9 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
   For a more <Groovy> alternative, see {{http://groovy.codehaus.org/Database+features}} for information on the
   <<Groovy Sql>> abstraction layer for JDBC/SQL.
 
+  Note: If a violation is triggered from an <<import>> statement, then you may get multiple violations per
+  import if there are multiple classes in the source file. In that case, the imports are processed once per class.
+
 
 * JdbcResultSetReference Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,6 +48,9 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 
   See {{http://groovy.codehaus.org/Database+features}} for information on the <<Groovy Sql>> abstraction
   layer for JDBC/SQL.
+
+  Note: If a violation is triggered from an <<import>> statement, then you may get multiple violations per
+  import if there are multiple classes in the source file. In that case, the imports are processed once per class.
 
 
 * JdbcStatementReference Rule
@@ -57,4 +63,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 
   See {{http://groovy.codehaus.org/Database+features}} for information on the <<Groovy Sql>> abstraction
   layer for JDBC/SQL.
+
+  Note: If a violation is triggered from an <<import>> statement, then you may get multiple violations per
+  import if there are multiple classes in the source file. In that case, the imports are processed once per class.
 
