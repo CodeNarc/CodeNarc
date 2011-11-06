@@ -73,7 +73,7 @@
     <rule class='org.codenarc.rule.basic.GroovyLangImmutableRule'/>
     <rule class='org.codenarc.rule.basic.GStringAsMapKeyRule'/>
     <rule class='org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule'/>
-    <rule class='org.codenarc.rule.basic.HardcodedWindowsRootDirectoryRule'/>
+    <rule class='org.codenarc.rule.basic.HardCodedWindowsRootDirectoryRule'/>
     <rule class='org.codenarc.rule.basic.IntegerGetIntegerRule'/>
     <rule class='org.codenarc.rule.basic.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule'/>

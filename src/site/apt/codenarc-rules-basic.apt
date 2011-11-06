@@ -1191,7 +1191,7 @@ x ?: 'some value'
    new File('../foo\\')
 -------------------------------------------------------------------------------
 
-* {HardcodedWindowsRootDirectory} Rule
+* {HardCodedWindowsRootDirectory} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 

@@ -124,7 +124,7 @@ ruleset {
     GrailsStatelessService
     GroovyLangImmutable
     HardCodedWindowsFileSeparator
-    HardcodedWindowsRootDirectory
+    HardCodedWindowsRootDirectory
     IfStatementBraces
     IllegalClassReference
     IllegalPackageReference

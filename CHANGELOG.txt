@@ -47,7 +47,8 @@ BUG FIXES
 - #3387422: ClosureAsLastMethodParameter - false positive
 
 BREAKING CHANGES
-*** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors. 
+*** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors.
+*** The HardcodedWindowsRootDirectory has been renamed to HardCodedWindowsRootDirectory. (#3433741)
 
 THANKS
 - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.

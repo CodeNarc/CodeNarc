@@ -147,7 +147,7 @@ Rule Index
     
     * {{{codenarc-rules-basic.html#HardCodedWindowsFileSeparator}HardCodedWindowsFileSeparator}}
     
-    * {{{codenarc-rules-basic.html#HardcodedWindowsRootDirectory}HardcodedWindowsRootDirectory}}
+    * {{{codenarc-rules-basic.html#HardCodedWindowsRootDirectory}HardCodedWindowsRootDirectory}}
     
     * {{{codenarc-rules-basic.html#IntegerGetInteger}IntegerGetInteger}}
     
