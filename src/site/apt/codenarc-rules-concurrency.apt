@@ -6,7 +6,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* BusyWait Rule
+* {BusyWait} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -39,7 +39,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* DoubleCheckedLocking Rule
+* {DoubleCheckedLocking} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -84,7 +84,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* InconsistentPropertyLocking Rule
+* {InconsistentPropertyLocking} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -140,7 +140,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* InconsistentPropertySynchronization Rule
+* {InconsistentPropertySynchronization} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -203,7 +203,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* NestedSynchronization Rule
+* {NestedSynchronization} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This rule reports occurrences of nested <<<synchronized>>> statements.
@@ -230,7 +230,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* StaticCalendarField Rule
+* {StaticCalendarField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -264,7 +264,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* StaticConnection Rule
+* {StaticConnection} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -288,7 +288,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   *  Java 2 Platform Enterprise Edition Specification, v1.4 Sun Microsystems
 
 
-* StaticDateFormatField Rule
+* {StaticDateFormatField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -329,7 +329,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* StaticMatcherField Rule
+* {StaticMatcherField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -353,7 +353,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* StaticSimpleDateFormatField Rule
+* {StaticSimpleDateFormatField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -389,7 +389,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SynchronizedMethod Rule
+* {SynchronizedMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  This rule reports uses of the <<<synchronized>>> keyword on methods. Synchronized methods
@@ -406,7 +406,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SynchronizedOnGetClass Rule
+* {SynchronizedOnGetClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -415,7 +415,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   on the class object for the subclass, which isn't likely what was intended.
 
 
-* SynchronizedOnBoxedPrimitive Rule
+* {SynchronizedOnBoxedPrimitive} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -594,7 +594,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SynchronizedOnString Rule
+* {SynchronizedOnString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -669,7 +669,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SynchronizedOnThis Rule
+* {SynchronizedOnThis} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This rule reports uses of the <<<synchronized>>> blocks where the synchronization reference
@@ -687,7 +687,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SynchronizedReadObjectMethod Rule
+* {SynchronizedReadObjectMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -740,7 +740,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SynchronizedOnReentrantLock Rule
+* {SynchronizedOnReentrantLock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -831,7 +831,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* SystemRunFinalizersOnExit Rule
+* {SystemRunFinalizersOnExit} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This rule reports uses of the <<<System.runFinalizersOnExit()>>> method.
@@ -849,7 +849,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* ThreadGroup Rule
+* {ThreadGroup} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -866,7 +866,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* ThreadLocalNotStaticFinal Rule
+* {ThreadLocalNotStaticFinal} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This rule reports definition of the <<<ThreadLocal>>> fields that are not <<<static>>> and <<<final>>>.
@@ -886,7 +886,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* ThreadYield Rule
+* {ThreadYield} Rule
 ~~~~~~~~~~~~~~~~~~~
 
   This rule reports uses of the <<<Thread.yield()>>> method.
@@ -903,7 +903,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* UseOfNotifyMethod Rule
+* {UseOfNotifyMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -914,7 +914,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
   Also see {{{http://www.javaconcurrencyinpractice.com/}<<Java_Concurrency_in_Practice>>}}, Brian Goetz, p 303.
 
 
-* VolatileArrayField Rule
+* {VolatileArrayField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -935,7 +935,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* VolatileLongOrDoubleField Rule
+* {VolatileLongOrDoubleField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This rule reports on <<<long>>> or <<<double>>> fields that are declared <<<volatile>>>.
@@ -956,7 +956,7 @@ Concurrency Rules  ("<rulesets/concurrency.xml>")
 -------------------------------------------------------------------------------
 
 
-* WaitOutsideOfWhileLoop Rule
+* {WaitOutsideOfWhileLoop} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.13>
 

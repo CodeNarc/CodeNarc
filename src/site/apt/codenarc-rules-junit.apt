@@ -6,7 +6,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* ChainedTest Rule
+* {ChainedTest} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -39,7 +39,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
-* CoupledTestCase Rule
+* {CoupledTestCase} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -62,7 +62,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
-* JUnitAssertAlwaysFails Rule
+* {JUnitAssertAlwaysFails} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   Rule that checks for JUnit <<<assert()>>> method calls with constant arguments such that the
   assertion always fails. This includes: <<<assertTrue(false)>>>, <<<assertFalse(true)>>>
@@ -72,7 +72,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
-* JUnitAssertAlwaysSucceeds Rule
+* {JUnitAssertAlwaysSucceeds} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks for JUnit <<<assert()>>> method calls with constant arguments such that the
@@ -83,7 +83,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
-* JUnitPublicNonTestMethod Rule
+* {JUnitPublicNonTestMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks if a JUnit test class contains public methods other than standard test methods,
@@ -115,7 +115,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
-* JUnitSetUpCallsSuper Rule
+* {JUnitSetUpCallsSuper} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks that if the JUnit <<<setUp>>> method is defined, that it includes a call to
@@ -125,7 +125,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
-* JUnitStyleAssertions Rule
+* {JUnitStyleAssertions} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -135,7 +135,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   JUnit assertions.
 
 
-* JUnitTearDownCallsSuper Rule
+* {JUnitTearDownCallsSuper} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks that if the JUnit <<<tearDown>>> method is defined, that it includes a call to
@@ -145,7 +145,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
-* JUnitUnnecessarySetUp Rule
+* {JUnitUnnecessarySetUp} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks checks for JUnit <<<setUp()>>> methods that contain only a call to
@@ -165,7 +165,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
-* JUnitUnnecessaryTearDown Rule
+* {JUnitUnnecessaryTearDown} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks checks for JUnit <<<tearDown()>>> methods that contain only a call to
@@ -185,7 +185,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
-* UseAssertEqualsInsteadOfAssertTrue Rule
+* {UseAssertEqualsInsteadOfAssertTrue} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -193,7 +193,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   like <<<assertEquals>>>.
 
 
-* UseAssertFalseInsteadOfNegation Rule
+* {UseAssertFalseInsteadOfNegation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -201,7 +201,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   For instance, <<<assertTrue(!condition)>>> can always be simplified to <<<assertFalse(condition)>>>.
 
 
-* UseAssertTrueInsteadOfAssertEqualsRule Rule
+* {UseAssertTrueInsteadOfAssertEqualsRule} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -226,14 +226,14 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
-* UseAssertTrueInsteadOfNegation Rule
+* {UseAssertTrueInsteadOfNegation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
   In unit tests, if a condition is expected to be true then there is no sense using <<<assertFalse>>> with the negation operator.
   For instance, <<<assertFalse(!condition)>>> can always be simplified to <<<assertTrue(condition)>>>.
 
-* UseAssertNullInsteadOfAssertEquals Rule
+* {UseAssertNullInsteadOfAssertEquals} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -241,7 +241,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   These assertion should be made against the <<<assertNull>>> method instead.
 
 
-* UseAssertSameInsteadOfAssertTrue Rule
+* {UseAssertSameInsteadOfAssertTrue} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -250,7 +250,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<assertSame>>> or <<<assertNotSame>>> method instead.
 
 
-* JUnitFailWithoutMessage Rule
+* {JUnitFailWithoutMessage} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -258,7 +258,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   should always provide a message.
 
 
-* JUnitTestMethodWithoutAssert Rule
+* {JUnitTestMethodWithoutAssert} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -285,7 +285,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
-* SpockIgnoreRestUsed Rule
+* {SpockIgnoreRestUsed} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
   If Spock's @IgnoreRest appears on any method, all non-annotated test methods are not executed. This behaviour is almost always
@@ -311,7 +311,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryFail Rule
+* {UnnecessaryFail} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 

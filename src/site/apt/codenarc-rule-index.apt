@@ -11,649 +11,649 @@ Rule Index
     
 * {{{codenarc-rules-basic.html}Basic}}
     
-    * AddEmptyString
+    * {{{codenarc-rules-basic.html#AddEmptyString}AddEmptyString}}
     
-    * AssignCollectionSort
+    * {{{codenarc-rules-basic.html#AssignCollectionSort}AssignCollectionSort}}
     
-    * AssignCollectionUnique
+    * {{{codenarc-rules-basic.html#AssignCollectionUnique}AssignCollectionUnique}}
     
-    * AssignmentInConditional
+    * {{{codenarc-rules-basic.html#AssignmentInConditional}AssignmentInConditional}}
     
-    * BigDecimalInstantiation
+    * {{{codenarc-rules-basic.html#BigDecimalInstantiation}BigDecimalInstantiation}}
     
-    * BitwiseOperatorInConditional
+    * {{{codenarc-rules-basic.html#BitwiseOperatorInConditional}BitwiseOperatorInConditional}}
     
-    * BooleanGetBoolean
+    * {{{codenarc-rules-basic.html#BooleanGetBoolean}BooleanGetBoolean}}
     
-    * BooleanMethodReturnsNull
+    * {{{codenarc-rules-basic.html#BooleanMethodReturnsNull}BooleanMethodReturnsNull}}
     
-    * BrokenOddnessCheck
+    * {{{codenarc-rules-basic.html#BrokenOddnessCheck}BrokenOddnessCheck}}
     
-    * ClassForName
+    * {{{codenarc-rules-basic.html#ClassForName}ClassForName}}
     
-    * CloneableWithoutClone
+    * {{{codenarc-rules-basic.html#CloneableWithoutClone}CloneableWithoutClone}}
     
-    * ClosureAsLastMethodParameter
+    * {{{codenarc-rules-basic.html#ClosureAsLastMethodParameter}ClosureAsLastMethodParameter}}
     
-    * CollectAllIsDeprecated
+    * {{{codenarc-rules-basic.html#CollectAllIsDeprecated}CollectAllIsDeprecated}}
     
-    * CompareToWithoutComparable
+    * {{{codenarc-rules-basic.html#CompareToWithoutComparable}CompareToWithoutComparable}}
     
-    * ComparisonOfTwoConstants
+    * {{{codenarc-rules-basic.html#ComparisonOfTwoConstants}ComparisonOfTwoConstants}}
     
-    * ComparisonWithSelf
+    * {{{codenarc-rules-basic.html#ComparisonWithSelf}ComparisonWithSelf}}
     
-    * ConfusingMultipleReturns
+    * {{{codenarc-rules-basic.html#ConfusingMultipleReturns}ConfusingMultipleReturns}}
     
-    * ConfusingTernary
+    * {{{codenarc-rules-basic.html#ConfusingTernary}ConfusingTernary}}
     
-    * ConsecutiveLiteralAppends
+    * {{{codenarc-rules-basic.html#ConsecutiveLiteralAppends}ConsecutiveLiteralAppends}}
     
-    * ConsecutiveStringConcatenation
+    * {{{codenarc-rules-basic.html#ConsecutiveStringConcatenation}ConsecutiveStringConcatenation}}
     
-    * ConstantIfExpression
+    * {{{codenarc-rules-basic.html#ConstantIfExpression}ConstantIfExpression}}
     
-    * ConstantTernaryExpression
+    * {{{codenarc-rules-basic.html#ConstantTernaryExpression}ConstantTernaryExpression}}
     
-    * CouldBeElvis
+    * {{{codenarc-rules-basic.html#CouldBeElvis}CouldBeElvis}}
     
-    * DeadCode
+    * {{{codenarc-rules-basic.html#DeadCode}DeadCode}}
     
-    * DoubleNegative
+    * {{{codenarc-rules-basic.html#DoubleNegative}DoubleNegative}}
     
-    * DuplicateCaseStatement
+    * {{{codenarc-rules-basic.html#DuplicateCaseStatement}DuplicateCaseStatement}}
     
-    * DuplicateMapKey
+    * {{{codenarc-rules-basic.html#DuplicateMapKey}DuplicateMapKey}}
     
-    * DuplicateSetValue
+    * {{{codenarc-rules-basic.html#DuplicateSetValue}DuplicateSetValue}}
     
-    * EmptyCatchBlock
+    * {{{codenarc-rules-basic.html#EmptyCatchBlock}EmptyCatchBlock}}
     
-    * EmptyElseBlock
+    * {{{codenarc-rules-basic.html#EmptyElseBlock}EmptyElseBlock}}
     
-    * EmptyFinallyBlock
+    * {{{codenarc-rules-basic.html#EmptyFinallyBlock}EmptyFinallyBlock}}
     
-    * EmptyForStatement
+    * {{{codenarc-rules-basic.html#EmptyForStatement}EmptyForStatement}}
     
-    * EmptyIfStatement
+    * {{{codenarc-rules-basic.html#EmptyIfStatement}EmptyIfStatement}}
     
-    * EmptyInstanceInitializer
+    * {{{codenarc-rules-basic.html#EmptyInstanceInitializer}EmptyInstanceInitializer}}
     
-    * EmptyMethod
+    * {{{codenarc-rules-basic.html#EmptyMethod}EmptyMethod}}
     
-    * EmptyStaticInitializer
+    * {{{codenarc-rules-basic.html#EmptyStaticInitializer}EmptyStaticInitializer}}
     
-    * EmptySwitchStatement
+    * {{{codenarc-rules-basic.html#EmptySwitchStatement}EmptySwitchStatement}}
     
-    * EmptySynchronizedStatement
+    * {{{codenarc-rules-basic.html#EmptySynchronizedStatement}EmptySynchronizedStatement}}
     
-    * EmptyTryBlock
+    * {{{codenarc-rules-basic.html#EmptyTryBlock}EmptyTryBlock}}
     
-    * EmptyWhileStatement
+    * {{{codenarc-rules-basic.html#EmptyWhileStatement}EmptyWhileStatement}}
     
-    * EqualsAndHashCode
+    * {{{codenarc-rules-basic.html#EqualsAndHashCode}EqualsAndHashCode}}
     
-    * EqualsOverloaded
+    * {{{codenarc-rules-basic.html#EqualsOverloaded}EqualsOverloaded}}
     
-    * ExplicitArrayListInstantiation
+    * {{{codenarc-rules-basic.html#ExplicitArrayListInstantiation}ExplicitArrayListInstantiation}}
     
-    * ExplicitCallToAndMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToAndMethod}ExplicitCallToAndMethod}}
     
-    * ExplicitCallToCompareToMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToCompareToMethod}ExplicitCallToCompareToMethod}}
     
-    * ExplicitCallToDivMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToDivMethod}ExplicitCallToDivMethod}}
     
-    * ExplicitCallToEqualsMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToEqualsMethod}ExplicitCallToEqualsMethod}}
     
-    * ExplicitCallToGetAtMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToGetAtMethod}ExplicitCallToGetAtMethod}}
     
-    * ExplicitCallToLeftShiftMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToLeftShiftMethod}ExplicitCallToLeftShiftMethod}}
     
-    * ExplicitCallToMinusMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToMinusMethod}ExplicitCallToMinusMethod}}
     
-    * ExplicitCallToModMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToModMethod}ExplicitCallToModMethod}}
     
-    * ExplicitCallToMultiplyMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToMultiplyMethod}ExplicitCallToMultiplyMethod}}
     
-    * ExplicitCallToOrMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToOrMethod}ExplicitCallToOrMethod}}
     
-    * ExplicitCallToPlusMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToPlusMethod}ExplicitCallToPlusMethod}}
     
-    * ExplicitCallToPowerMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToPowerMethod}ExplicitCallToPowerMethod}}
     
-    * ExplicitCallToRightShiftMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToRightShiftMethod}ExplicitCallToRightShiftMethod}}
     
-    * ExplicitCallToXorMethod
+    * {{{codenarc-rules-basic.html#ExplicitCallToXorMethod}ExplicitCallToXorMethod}}
     
-    * ExplicitGarbageCollection
+    * {{{codenarc-rules-basic.html#ExplicitGarbageCollection}ExplicitGarbageCollection}}
     
-    * ExplicitHashMapInstantiation
+    * {{{codenarc-rules-basic.html#ExplicitHashMapInstantiation}ExplicitHashMapInstantiation}}
     
-    * ExplicitHashSetInstantiation
+    * {{{codenarc-rules-basic.html#ExplicitHashSetInstantiation}ExplicitHashSetInstantiation}}
     
-    * ExplicitLinkedHashMapInstantiation
+    * {{{codenarc-rules-basic.html#ExplicitLinkedHashMapInstantiation}ExplicitLinkedHashMapInstantiation}}
     
-    * ExplicitLinkedListInstantiation
+    * {{{codenarc-rules-basic.html#ExplicitLinkedListInstantiation}ExplicitLinkedListInstantiation}}
     
-    * ExplicitStackInstantiation
+    * {{{codenarc-rules-basic.html#ExplicitStackInstantiation}ExplicitStackInstantiation}}
     
-    * ExplicitTreeSetInstantiation
+    * {{{codenarc-rules-basic.html#ExplicitTreeSetInstantiation}ExplicitTreeSetInstantiation}}
     
-    * ForLoopShouldBeWhileLoop
+    * {{{codenarc-rules-basic.html#ForLoopShouldBeWhileLoop}ForLoopShouldBeWhileLoop}}
     
-    * GStringAsMapKey
+    * {{{codenarc-rules-basic.html#GStringAsMapKey}GStringAsMapKey}}
     
-    * GroovyLangImmutable
+    * {{{codenarc-rules-basic.html#GroovyLangImmutable}GroovyLangImmutable}}
     
-    * HardCodedWindowsFileSeparator
+    * {{{codenarc-rules-basic.html#HardCodedWindowsFileSeparator}HardCodedWindowsFileSeparator}}
     
-    * HardcodedWindowsRootDirectory
+    * {{{codenarc-rules-basic.html#HardcodedWindowsRootDirectory}HardcodedWindowsRootDirectory}}
     
-    * IntegerGetInteger
+    * {{{codenarc-rules-basic.html#IntegerGetInteger}IntegerGetInteger}}
     
-    * InvertedIfElse
+    * {{{codenarc-rules-basic.html#InvertedIfElse}InvertedIfElse}}
     
-    * LongLiteralWithLowerCaseL
+    * {{{codenarc-rules-basic.html#LongLiteralWithLowerCaseL}LongLiteralWithLowerCaseL}}
     
-    * RandomDoubleCoercedToZero
+    * {{{codenarc-rules-basic.html#RandomDoubleCoercedToZero}RandomDoubleCoercedToZero}}
     
-    * RemoveAllOnSelf
+    * {{{codenarc-rules-basic.html#RemoveAllOnSelf}RemoveAllOnSelf}}
     
-    * ReturnFromFinallyBlock
+    * {{{codenarc-rules-basic.html#ReturnFromFinallyBlock}ReturnFromFinallyBlock}}
     
-    * ReturnsNullInsteadOfEmptyArray
+    * {{{codenarc-rules-basic.html#ReturnsNullInsteadOfEmptyArray}ReturnsNullInsteadOfEmptyArray}}
     
-    * ReturnsNullInsteadOfEmptyCollection
+    * {{{codenarc-rules-basic.html#ReturnsNullInsteadOfEmptyCollection}ReturnsNullInsteadOfEmptyCollection}}
     
-    * SimpleDateFormatMissingLocale
+    * {{{codenarc-rules-basic.html#SimpleDateFormatMissingLocale}SimpleDateFormatMissingLocale}}
     
-    * ThrowExceptionFromFinallyBlock
+    * {{{codenarc-rules-basic.html#ThrowExceptionFromFinallyBlock}ThrowExceptionFromFinallyBlock}}
     
-    * UseCollectMany
+    * {{{codenarc-rules-basic.html#UseCollectMany}UseCollectMany}}
     
-    * UseCollectNested
+    * {{{codenarc-rules-basic.html#UseCollectNested}UseCollectNested}}
     
     
     
     
 * {{{codenarc-rules-braces.html}Braces}}
     
-    * ElseBlockBraces
+    * {{{codenarc-rules-braces.html#ElseBlockBraces}ElseBlockBraces}}
     
-    * ForStatementBraces
+    * {{{codenarc-rules-braces.html#ForStatementBraces}ForStatementBraces}}
     
-    * IfStatementBraces
+    * {{{codenarc-rules-braces.html#IfStatementBraces}IfStatementBraces}}
     
-    * WhileStatementBraces
+    * {{{codenarc-rules-braces.html#WhileStatementBraces}WhileStatementBraces}}
     
     
     
     
 * {{{codenarc-rules-concurrency.html}Concurrency}}
     
-    * BusyWait
+    * {{{codenarc-rules-concurrency.html#BusyWait}BusyWait}}
     
-    * DoubleCheckedLocking
+    * {{{codenarc-rules-concurrency.html#DoubleCheckedLocking}DoubleCheckedLocking}}
     
-    * InconsistentPropertyLocking
+    * {{{codenarc-rules-concurrency.html#InconsistentPropertyLocking}InconsistentPropertyLocking}}
     
-    * InconsistentPropertySynchronization
+    * {{{codenarc-rules-concurrency.html#InconsistentPropertySynchronization}InconsistentPropertySynchronization}}
     
-    * NestedSynchronization
+    * {{{codenarc-rules-concurrency.html#NestedSynchronization}NestedSynchronization}}
     
-    * StaticCalendarField
+    * {{{codenarc-rules-concurrency.html#StaticCalendarField}StaticCalendarField}}
     
-    * StaticConnection
+    * {{{codenarc-rules-concurrency.html#StaticConnection}StaticConnection}}
     
-    * StaticDateFormatField
+    * {{{codenarc-rules-concurrency.html#StaticDateFormatField}StaticDateFormatField}}
     
-    * StaticMatcherField
+    * {{{codenarc-rules-concurrency.html#StaticMatcherField}StaticMatcherField}}
     
-    * StaticSimpleDateFormatField
+    * {{{codenarc-rules-concurrency.html#StaticSimpleDateFormatField}StaticSimpleDateFormatField}}
     
-    * SynchronizedMethod
+    * {{{codenarc-rules-concurrency.html#SynchronizedMethod}SynchronizedMethod}}
     
-    * SynchronizedOnBoxedPrimitive
+    * {{{codenarc-rules-concurrency.html#SynchronizedOnBoxedPrimitive}SynchronizedOnBoxedPrimitive}}
     
-    * SynchronizedOnGetClass
+    * {{{codenarc-rules-concurrency.html#SynchronizedOnGetClass}SynchronizedOnGetClass}}
     
-    * SynchronizedOnReentrantLock
+    * {{{codenarc-rules-concurrency.html#SynchronizedOnReentrantLock}SynchronizedOnReentrantLock}}
     
-    * SynchronizedOnString
+    * {{{codenarc-rules-concurrency.html#SynchronizedOnString}SynchronizedOnString}}
     
-    * SynchronizedOnThis
+    * {{{codenarc-rules-concurrency.html#SynchronizedOnThis}SynchronizedOnThis}}
     
-    * SynchronizedReadObjectMethod
+    * {{{codenarc-rules-concurrency.html#SynchronizedReadObjectMethod}SynchronizedReadObjectMethod}}
     
-    * SystemRunFinalizersOnExit
+    * {{{codenarc-rules-concurrency.html#SystemRunFinalizersOnExit}SystemRunFinalizersOnExit}}
     
-    * ThreadGroup
+    * {{{codenarc-rules-concurrency.html#ThreadGroup}ThreadGroup}}
     
-    * ThreadLocalNotStaticFinal
+    * {{{codenarc-rules-concurrency.html#ThreadLocalNotStaticFinal}ThreadLocalNotStaticFinal}}
     
-    * ThreadYield
+    * {{{codenarc-rules-concurrency.html#ThreadYield}ThreadYield}}
     
-    * UseOfNotifyMethod
+    * {{{codenarc-rules-concurrency.html#UseOfNotifyMethod}UseOfNotifyMethod}}
     
-    * VolatileArrayField
+    * {{{codenarc-rules-concurrency.html#VolatileArrayField}VolatileArrayField}}
     
-    * VolatileLongOrDoubleField
+    * {{{codenarc-rules-concurrency.html#VolatileLongOrDoubleField}VolatileLongOrDoubleField}}
     
-    * WaitOutsideOfWhileLoop
+    * {{{codenarc-rules-concurrency.html#WaitOutsideOfWhileLoop}WaitOutsideOfWhileLoop}}
     
     
     
     
 * {{{codenarc-rules-design.html}Design}}
     
-    * AbstractClassWithPublicConstructor
+    * {{{codenarc-rules-design.html#AbstractClassWithPublicConstructor}AbstractClassWithPublicConstructor}}
     
-    * AbstractClassWithoutAbstractMethod
+    * {{{codenarc-rules-design.html#AbstractClassWithoutAbstractMethod}AbstractClassWithoutAbstractMethod}}
     
-    * BuilderMethodWithSideEffects
+    * {{{codenarc-rules-design.html#BuilderMethodWithSideEffects}BuilderMethodWithSideEffects}}
     
-    * CloseWithoutCloseable
+    * {{{codenarc-rules-design.html#CloseWithoutCloseable}CloseWithoutCloseable}}
     
-    * ConstantsOnlyInterface
+    * {{{codenarc-rules-design.html#ConstantsOnlyInterface}ConstantsOnlyInterface}}
     
-    * EmptyMethodInAbstractClass
+    * {{{codenarc-rules-design.html#EmptyMethodInAbstractClass}EmptyMethodInAbstractClass}}
     
-    * FinalClassWithProtectedMember
+    * {{{codenarc-rules-design.html#FinalClassWithProtectedMember}FinalClassWithProtectedMember}}
     
-    * ImplementationAsType
+    * {{{codenarc-rules-design.html#ImplementationAsType}ImplementationAsType}}
     
-    * PublicInstanceField
+    * {{{codenarc-rules-design.html#PublicInstanceField}PublicInstanceField}}
     
-    * StatelessSingleton
+    * {{{codenarc-rules-design.html#StatelessSingleton}StatelessSingleton}}
     
     
     
     
 * {{{codenarc-rules-dry.html}Dry}}
     
-    * DuplicateListLiteral
+    * {{{codenarc-rules-dry.html#DuplicateListLiteral}DuplicateListLiteral}}
     
-    * DuplicateMapLiteral
+    * {{{codenarc-rules-dry.html#DuplicateMapLiteral}DuplicateMapLiteral}}
     
-    * DuplicateNumberLiteral
+    * {{{codenarc-rules-dry.html#DuplicateNumberLiteral}DuplicateNumberLiteral}}
     
-    * DuplicateStringLiteral
+    * {{{codenarc-rules-dry.html#DuplicateStringLiteral}DuplicateStringLiteral}}
     
     
     
     
 * {{{codenarc-rules-exceptions.html}Exceptions}}
     
-    * CatchArrayIndexOutOfBoundsException
+    * {{{codenarc-rules-exceptions.html#CatchArrayIndexOutOfBoundsException}CatchArrayIndexOutOfBoundsException}}
     
-    * CatchError
+    * {{{codenarc-rules-exceptions.html#CatchError}CatchError}}
     
-    * CatchException
+    * {{{codenarc-rules-exceptions.html#CatchException}CatchException}}
     
-    * CatchIllegalMonitorStateException
+    * {{{codenarc-rules-exceptions.html#CatchIllegalMonitorStateException}CatchIllegalMonitorStateException}}
     
-    * CatchIndexOutOfBoundsException
+    * {{{codenarc-rules-exceptions.html#CatchIndexOutOfBoundsException}CatchIndexOutOfBoundsException}}
     
-    * CatchNullPointerException
+    * {{{codenarc-rules-exceptions.html#CatchNullPointerException}CatchNullPointerException}}
     
-    * CatchRuntimeException
+    * {{{codenarc-rules-exceptions.html#CatchRuntimeException}CatchRuntimeException}}
     
-    * CatchThrowable
+    * {{{codenarc-rules-exceptions.html#CatchThrowable}CatchThrowable}}
     
-    * ConfusingClassNamedException
+    * {{{codenarc-rules-exceptions.html#ConfusingClassNamedException}ConfusingClassNamedException}}
     
-    * ExceptionExtendsError
+    * {{{codenarc-rules-exceptions.html#ExceptionExtendsError}ExceptionExtendsError}}
     
-    * MissingNewInThrowStatement
+    * {{{codenarc-rules-exceptions.html#MissingNewInThrowStatement}MissingNewInThrowStatement}}
     
-    * ReturnNullFromCatchBlock
+    * {{{codenarc-rules-exceptions.html#ReturnNullFromCatchBlock}ReturnNullFromCatchBlock}}
     
-    * SwallowThreadDeath
+    * {{{codenarc-rules-exceptions.html#SwallowThreadDeath}SwallowThreadDeath}}
     
-    * ThrowError
+    * {{{codenarc-rules-exceptions.html#ThrowError}ThrowError}}
     
-    * ThrowException
+    * {{{codenarc-rules-exceptions.html#ThrowException}ThrowException}}
     
-    * ThrowNullPointerException
+    * {{{codenarc-rules-exceptions.html#ThrowNullPointerException}ThrowNullPointerException}}
     
-    * ThrowRuntimeException
+    * {{{codenarc-rules-exceptions.html#ThrowRuntimeException}ThrowRuntimeException}}
     
-    * ThrowThrowable
+    * {{{codenarc-rules-exceptions.html#ThrowThrowable}ThrowThrowable}}
     
     
     
     
 * {{{codenarc-rules-formatting.html}Formatting}}
     
-    * BracesForClass
+    * {{{codenarc-rules-formatting.html#BracesForClass}BracesForClass}}
     
-    * BracesForForLoop
+    * {{{codenarc-rules-formatting.html#BracesForForLoop}BracesForForLoop}}
     
-    * BracesForIfElse
+    * {{{codenarc-rules-formatting.html#BracesForIfElse}BracesForIfElse}}
     
-    * BracesForMethod
+    * {{{codenarc-rules-formatting.html#BracesForMethod}BracesForMethod}}
     
-    * BracesForTryCatchFinally
+    * {{{codenarc-rules-formatting.html#BracesForTryCatchFinally}BracesForTryCatchFinally}}
     
-    * ClassJavadoc
+    * {{{codenarc-rules-formatting.html#ClassJavadoc}ClassJavadoc}}
     
-    * LineLength
+    * {{{codenarc-rules-formatting.html#LineLength}LineLength}}
     
     
     
     
 * {{{codenarc-rules-generic.html}Generic}}
     
-    * IllegalClassReference
+    * {{{codenarc-rules-generic.html#IllegalClassReference}IllegalClassReference}}
     
-    * IllegalPackageReference
+    * {{{codenarc-rules-generic.html#IllegalPackageReference}IllegalPackageReference}}
     
-    * IllegalRegex
+    * {{{codenarc-rules-generic.html#IllegalRegex}IllegalRegex}}
     
-    * RequiredRegex
+    * {{{codenarc-rules-generic.html#RequiredRegex}RequiredRegex}}
     
-    * RequiredString
+    * {{{codenarc-rules-generic.html#RequiredString}RequiredString}}
     
-    * StatelessClass
+    * {{{codenarc-rules-generic.html#StatelessClass}StatelessClass}}
     
     
     
     
 * {{{codenarc-rules-grails.html}Grails}}
     
-    * GrailsDomainHasEquals
+    * {{{codenarc-rules-grails.html#GrailsDomainHasEquals}GrailsDomainHasEquals}}
     
-    * GrailsDomainHasToString
+    * {{{codenarc-rules-grails.html#GrailsDomainHasToString}GrailsDomainHasToString}}
     
-    * GrailsPublicControllerMethod
+    * {{{codenarc-rules-grails.html#GrailsPublicControllerMethod}GrailsPublicControllerMethod}}
     
-    * GrailsServletContextReference
+    * {{{codenarc-rules-grails.html#GrailsServletContextReference}GrailsServletContextReference}}
     
-    * GrailsSessionReference
+    * {{{codenarc-rules-grails.html#GrailsSessionReference}GrailsSessionReference}}
     
-    * GrailsStatelessService
+    * {{{codenarc-rules-grails.html#GrailsStatelessService}GrailsStatelessService}}
     
     
     
     
 * {{{codenarc-rules-imports.html}Imports}}
     
-    * DuplicateImport
+    * {{{codenarc-rules-imports.html#DuplicateImport}DuplicateImport}}
     
-    * ImportFromSamePackage
+    * {{{codenarc-rules-imports.html#ImportFromSamePackage}ImportFromSamePackage}}
     
-    * ImportFromSunPackages
+    * {{{codenarc-rules-imports.html#ImportFromSunPackages}ImportFromSunPackages}}
     
-    * MisorderedStaticImports
+    * {{{codenarc-rules-imports.html#MisorderedStaticImports}MisorderedStaticImports}}
     
-    * UnnecessaryGroovyImport
+    * {{{codenarc-rules-imports.html#UnnecessaryGroovyImport}UnnecessaryGroovyImport}}
     
-    * UnusedImport
+    * {{{codenarc-rules-imports.html#UnusedImport}UnusedImport}}
     
     
     
     
 * {{{codenarc-rules-jdbc.html}Jdbc}}
     
-    * DirectConnectionManagement
+    * {{{codenarc-rules-jdbc.html#DirectConnectionManagement}DirectConnectionManagement}}
     
-    * JdbcConnectionReference
+    * {{{codenarc-rules-jdbc.html#JdbcConnectionReference}JdbcConnectionReference}}
     
-    * JdbcResultSetReference
+    * {{{codenarc-rules-jdbc.html#JdbcResultSetReference}JdbcResultSetReference}}
     
-    * JdbcStatementReference
+    * {{{codenarc-rules-jdbc.html#JdbcStatementReference}JdbcStatementReference}}
     
     
     
     
 * {{{codenarc-rules-junit.html}Junit}}
     
-    * ChainedTest
+    * {{{codenarc-rules-junit.html#ChainedTest}ChainedTest}}
     
-    * CoupledTestCase
+    * {{{codenarc-rules-junit.html#CoupledTestCase}CoupledTestCase}}
     
-    * JUnitAssertAlwaysFails
+    * {{{codenarc-rules-junit.html#JUnitAssertAlwaysFails}JUnitAssertAlwaysFails}}
     
-    * JUnitAssertAlwaysSucceeds
+    * {{{codenarc-rules-junit.html#JUnitAssertAlwaysSucceeds}JUnitAssertAlwaysSucceeds}}
     
-    * JUnitFailWithoutMessage
+    * {{{codenarc-rules-junit.html#JUnitFailWithoutMessage}JUnitFailWithoutMessage}}
     
-    * JUnitPublicNonTestMethod
+    * {{{codenarc-rules-junit.html#JUnitPublicNonTestMethod}JUnitPublicNonTestMethod}}
     
-    * JUnitSetUpCallsSuper
+    * {{{codenarc-rules-junit.html#JUnitSetUpCallsSuper}JUnitSetUpCallsSuper}}
     
-    * JUnitStyleAssertions
+    * {{{codenarc-rules-junit.html#JUnitStyleAssertions}JUnitStyleAssertions}}
     
-    * JUnitTearDownCallsSuper
+    * {{{codenarc-rules-junit.html#JUnitTearDownCallsSuper}JUnitTearDownCallsSuper}}
     
-    * JUnitTestMethodWithoutAssert
+    * {{{codenarc-rules-junit.html#JUnitTestMethodWithoutAssert}JUnitTestMethodWithoutAssert}}
     
-    * JUnitUnnecessarySetUp
+    * {{{codenarc-rules-junit.html#JUnitUnnecessarySetUp}JUnitUnnecessarySetUp}}
     
-    * JUnitUnnecessaryTearDown
+    * {{{codenarc-rules-junit.html#JUnitUnnecessaryTearDown}JUnitUnnecessaryTearDown}}
     
-    * SpockIgnoreRestUsed
+    * {{{codenarc-rules-junit.html#SpockIgnoreRestUsed}SpockIgnoreRestUsed}}
     
-    * UnnecessaryFail
+    * {{{codenarc-rules-junit.html#UnnecessaryFail}UnnecessaryFail}}
     
-    * UseAssertEqualsInsteadOfAssertTrue
+    * {{{codenarc-rules-junit.html#UseAssertEqualsInsteadOfAssertTrue}UseAssertEqualsInsteadOfAssertTrue}}
     
-    * UseAssertFalseInsteadOfNegation
+    * {{{codenarc-rules-junit.html#UseAssertFalseInsteadOfNegation}UseAssertFalseInsteadOfNegation}}
     
-    * UseAssertNullInsteadOfAssertEquals
+    * {{{codenarc-rules-junit.html#UseAssertNullInsteadOfAssertEquals}UseAssertNullInsteadOfAssertEquals}}
     
-    * UseAssertSameInsteadOfAssertTrue
+    * {{{codenarc-rules-junit.html#UseAssertSameInsteadOfAssertTrue}UseAssertSameInsteadOfAssertTrue}}
     
-    * UseAssertTrueInsteadOfAssertEquals
+    * {{{codenarc-rules-junit.html#UseAssertTrueInsteadOfAssertEquals}UseAssertTrueInsteadOfAssertEquals}}
     
-    * UseAssertTrueInsteadOfNegation
+    * {{{codenarc-rules-junit.html#UseAssertTrueInsteadOfNegation}UseAssertTrueInsteadOfNegation}}
     
     
     
     
 * {{{codenarc-rules-logging.html}Logging}}
     
-    * LoggerForDifferentClass
+    * {{{codenarc-rules-logging.html#LoggerForDifferentClass}LoggerForDifferentClass}}
     
-    * LoggerWithWrongModifiers
+    * {{{codenarc-rules-logging.html#LoggerWithWrongModifiers}LoggerWithWrongModifiers}}
     
-    * LoggingSwallowsStacktrace
+    * {{{codenarc-rules-logging.html#LoggingSwallowsStacktrace}LoggingSwallowsStacktrace}}
     
-    * MultipleLoggers
+    * {{{codenarc-rules-logging.html#MultipleLoggers}MultipleLoggers}}
     
-    * PrintStackTrace
+    * {{{codenarc-rules-logging.html#PrintStackTrace}PrintStackTrace}}
     
-    * Println
+    * {{{codenarc-rules-logging.html#Println}Println}}
     
-    * SystemErrPrint
+    * {{{codenarc-rules-logging.html#SystemErrPrint}SystemErrPrint}}
     
-    * SystemOutPrint
+    * {{{codenarc-rules-logging.html#SystemOutPrint}SystemOutPrint}}
     
     
     
     
 * {{{codenarc-rules-naming.html}Naming}}
     
-    * AbstractClassName
+    * {{{codenarc-rules-naming.html#AbstractClassName}AbstractClassName}}
     
-    * ClassName
+    * {{{codenarc-rules-naming.html#ClassName}ClassName}}
     
-    * ConfusingMethodName
+    * {{{codenarc-rules-naming.html#ConfusingMethodName}ConfusingMethodName}}
     
-    * FactoryMethodName
+    * {{{codenarc-rules-naming.html#FactoryMethodName}FactoryMethodName}}
     
-    * FieldName
+    * {{{codenarc-rules-naming.html#FieldName}FieldName}}
     
-    * InterfaceName
+    * {{{codenarc-rules-naming.html#InterfaceName}InterfaceName}}
     
-    * MethodName
+    * {{{codenarc-rules-naming.html#MethodName}MethodName}}
     
-    * ObjectOverrideMisspelledMethodName
+    * {{{codenarc-rules-naming.html#ObjectOverrideMisspelledMethodName}ObjectOverrideMisspelledMethodName}}
     
-    * PackageName
+    * {{{codenarc-rules-naming.html#PackageName}PackageName}}
     
-    * ParameterName
+    * {{{codenarc-rules-naming.html#ParameterName}ParameterName}}
     
-    * PropertyName
+    * {{{codenarc-rules-naming.html#PropertyName}PropertyName}}
     
-    * VariableName
+    * {{{codenarc-rules-naming.html#VariableName}VariableName}}
     
     
     
     
 * {{{codenarc-rules-security.html}Security}}
     
-    * FileCreateTempFile
+    * {{{codenarc-rules-security.html#FileCreateTempFile}FileCreateTempFile}}
     
-    * InsecureRandom
+    * {{{codenarc-rules-security.html#InsecureRandom}InsecureRandom}}
     
-    * JavaIoPackageAccess
+    * {{{codenarc-rules-security.html#JavaIoPackageAccess}JavaIoPackageAccess}}
     
-    * NonFinalPublicField
+    * {{{codenarc-rules-security.html#NonFinalPublicField}NonFinalPublicField}}
     
-    * NonFinalSubclassOfSensitiveInterface
+    * {{{codenarc-rules-security.html#NonFinalSubclassOfSensitiveInterface}NonFinalSubclassOfSensitiveInterface}}
     
-    * ObjectFinalize
+    * {{{codenarc-rules-security.html#ObjectFinalize}ObjectFinalize}}
     
-    * PublicFinalizeMethod
+    * {{{codenarc-rules-security.html#PublicFinalizeMethod}PublicFinalizeMethod}}
     
-    * SystemExit
+    * {{{codenarc-rules-security.html#SystemExit}SystemExit}}
     
-    * UnsafeArrayDeclaration
+    * {{{codenarc-rules-security.html#UnsafeArrayDeclaration}UnsafeArrayDeclaration}}
     
     
     
     
 * {{{codenarc-rules-serialization.html}Serialization}}
     
-    * SerialPersistentFields
+    * {{{codenarc-rules-serialization.html#SerialPersistentFields}SerialPersistentFields}}
     
-    * SerialVersionUID
+    * {{{codenarc-rules-serialization.html#SerialVersionUID}SerialVersionUID}}
     
-    * SerializableClassMustDefineSerialVersionUID
+    * {{{codenarc-rules-serialization.html#SerializableClassMustDefineSerialVersionUID}SerializableClassMustDefineSerialVersionUID}}
     
     
     
     
 * {{{codenarc-rules-size.html}Size}}
     
-    * AbcComplexity
+    * {{{codenarc-rules-size.html#AbcComplexity}AbcComplexity}}
     
-    * ClassSize
+    * {{{codenarc-rules-size.html#ClassSize}ClassSize}}
     
-    * CyclomaticComplexity
+    * {{{codenarc-rules-size.html#CyclomaticComplexity}CyclomaticComplexity}}
     
-    * MethodCount
+    * {{{codenarc-rules-size.html#MethodCount}MethodCount}}
     
-    * MethodSize
+    * {{{codenarc-rules-size.html#MethodSize}MethodSize}}
     
-    * NestedBlockDepth
+    * {{{codenarc-rules-size.html#NestedBlockDepth}NestedBlockDepth}}
     
     
     
     
 * {{{codenarc-rules-unnecessary.html}Unnecessary}}
     
-    * UnnecessaryBigDecimalInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryBigDecimalInstantiation}UnnecessaryBigDecimalInstantiation}}
     
-    * UnnecessaryBigIntegerInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryBigIntegerInstantiation}UnnecessaryBigIntegerInstantiation}}
     
-    * UnnecessaryBooleanExpression
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryBooleanExpression}UnnecessaryBooleanExpression}}
     
-    * UnnecessaryBooleanInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryBooleanInstantiation}UnnecessaryBooleanInstantiation}}
     
-    * UnnecessaryCallForLastElement
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryCallForLastElement}UnnecessaryCallForLastElement}}
     
-    * UnnecessaryCallToSubstring
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryCallToSubstring}UnnecessaryCallToSubstring}}
     
-    * UnnecessaryCatchBlock
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryCatchBlock}UnnecessaryCatchBlock}}
     
-    * UnnecessaryCollectCall
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryCollectCall}UnnecessaryCollectCall}}
     
-    * UnnecessaryCollectionCall
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryCollectionCall}UnnecessaryCollectionCall}}
     
-    * UnnecessaryConstructor
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryConstructor}UnnecessaryConstructor}}
     
-    * UnnecessaryDefInFieldDeclaration
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryDefInFieldDeclaration}UnnecessaryDefInFieldDeclaration}}
     
-    * UnnecessaryDefInMethodDeclaration
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryDefInMethodDeclaration}UnnecessaryDefInMethodDeclaration}}
     
-    * UnnecessaryDefInVariableDeclaration
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryDefInVariableDeclaration}UnnecessaryDefInVariableDeclaration}}
     
-    * UnnecessaryDotClass
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryDotClass}UnnecessaryDotClass}}
     
-    * UnnecessaryDoubleInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryDoubleInstantiation}UnnecessaryDoubleInstantiation}}
     
-    * UnnecessaryElseStatement
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryElseStatement}UnnecessaryElseStatement}}
     
-    * UnnecessaryFinalOnPrivateMethod
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryFinalOnPrivateMethod}UnnecessaryFinalOnPrivateMethod}}
     
-    * UnnecessaryFloatInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryFloatInstantiation}UnnecessaryFloatInstantiation}}
     
-    * UnnecessaryGString
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryGString}UnnecessaryGString}}
     
-    * UnnecessaryGetter
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryGetter}UnnecessaryGetter}}
     
-    * UnnecessaryIfStatement
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryIfStatement}UnnecessaryIfStatement}}
     
-    * UnnecessaryInstanceOfCheck
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryInstanceOfCheck}UnnecessaryInstanceOfCheck}}
     
-    * UnnecessaryInstantiationToGetClass
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryInstantiationToGetClass}UnnecessaryInstantiationToGetClass}}
     
-    * UnnecessaryIntegerInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryIntegerInstantiation}UnnecessaryIntegerInstantiation}}
     
-    * UnnecessaryLongInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryLongInstantiation}UnnecessaryLongInstantiation}}
     
-    * UnnecessaryModOne
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryModOne}UnnecessaryModOne}}
     
-    * UnnecessaryNullCheck
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryNullCheck}UnnecessaryNullCheck}}
     
-    * UnnecessaryNullCheckBeforeInstanceOf
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryNullCheckBeforeInstanceOf}UnnecessaryNullCheckBeforeInstanceOf}}
     
-    * UnnecessaryObjectReferences
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryObjectReferences}UnnecessaryObjectReferences}}
     
-    * UnnecessaryOverridingGetter
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryOverridingGetter}UnnecessaryOverridingGetter}}
     
-    * UnnecessaryOverridingMethod
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryOverridingMethod}UnnecessaryOverridingMethod}}
     
-    * UnnecessaryPackageReference
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryPackageReference}UnnecessaryPackageReference}}
     
-    * UnnecessaryParenthesesForMethodCallWithClosure
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryParenthesesForMethodCallWithClosure}UnnecessaryParenthesesForMethodCallWithClosure}}
     
-    * UnnecessaryPublicModifier
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryPublicModifier}UnnecessaryPublicModifier}}
     
-    * UnnecessaryReturnKeyword
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryReturnKeyword}UnnecessaryReturnKeyword}}
     
-    * UnnecessarySelfAssignment
+    * {{{codenarc-rules-unnecessary.html#UnnecessarySelfAssignment}UnnecessarySelfAssignment}}
     
-    * UnnecessarySemicolon
+    * {{{codenarc-rules-unnecessary.html#UnnecessarySemicolon}UnnecessarySemicolon}}
     
-    * UnnecessaryStringInstantiation
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryStringInstantiation}UnnecessaryStringInstantiation}}
     
-    * UnnecessarySubstring
+    * {{{codenarc-rules-unnecessary.html#UnnecessarySubstring}UnnecessarySubstring}}
     
-    * UnnecessaryTernaryExpression
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryTernaryExpression}UnnecessaryTernaryExpression}}
     
-    * UnnecessaryTransientModifier
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryTransientModifier}UnnecessaryTransientModifier}}
     
     
     
     
 * {{{codenarc-rules-unused.html}Unused}}
     
-    * UnusedArray
+    * {{{codenarc-rules-unused.html#UnusedArray}UnusedArray}}
     
-    * UnusedMethodParameter
+    * {{{codenarc-rules-unused.html#UnusedMethodParameter}UnusedMethodParameter}}
     
-    * UnusedObject
+    * {{{codenarc-rules-unused.html#UnusedObject}UnusedObject}}
     
-    * UnusedPrivateField
+    * {{{codenarc-rules-unused.html#UnusedPrivateField}UnusedPrivateField}}
     
-    * UnusedPrivateMethod
+    * {{{codenarc-rules-unused.html#UnusedPrivateMethod}UnusedPrivateMethod}}
     
-    * UnusedPrivateMethodParameter
+    * {{{codenarc-rules-unused.html#UnusedPrivateMethodParameter}UnusedPrivateMethodParameter}}
     
-    * UnusedVariable
+    * {{{codenarc-rules-unused.html#UnusedVariable}UnusedVariable}}
     
     
 

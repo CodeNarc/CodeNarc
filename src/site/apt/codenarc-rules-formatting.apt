@@ -6,21 +6,21 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* BracesForClass Rule
+* {BracesForClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for classes. By default, requires them on the same
   line, but the sameLine property can be set to false to override this.
 
-* BracesForForLoop Rule
+* {BracesForForLoop} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for for loops. By default, requires them on the same line, but the
   sameLine property can be set to false to override this.
 
-* BracesForIfElse Rule
+* {BracesForIfElse} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -28,7 +28,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   line, but the sameLine property can be set to false to override this.
 
 
-* BracesForMethod Rule
+* {BracesForMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -36,14 +36,14 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   line, but the sameLine property can be set to false to override this.
 
 
-* BracesForTryCatchFinally Rule
+* {BracesForTryCatchFinally} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for try statements. By default, requires them on the line, but the sameLine property can be set to false to override this.
 
 
-* ClassJavadoc Rule
+* {ClassJavadoc} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -54,7 +54,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   property <<<applyToNonMainClasses>>> to true.
   
 
-* LineLength Rule
+* {LineLength} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 

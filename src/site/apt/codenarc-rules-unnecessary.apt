@@ -6,7 +6,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* UnnecessaryBigDecimalInstantiation Rule
+* {UnnecessaryBigDecimalInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -17,7 +17,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   <<<new BigDecimal(42)>>>, <<<new BigDecimal(42L)>>> or <<<new BigDecimal("42")>>>.
 
 
-* UnnecessaryBigIntegerInstantiation Rule
+* {UnnecessaryBigIntegerInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -25,7 +25,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   the 'G' identifier to force the type, such as <<<8G>>> or <<<42G>>>.
 
 
-* UnnecessaryBooleanExpression Rule
+* {UnnecessaryBooleanExpression} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  Checks for unnecessary boolean expressions, including ANDing (&&) or ORing (||) with
@@ -66,7 +66,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryBooleanInstantiation Rule
+* {UnnecessaryBooleanInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12 (formerly BooleanInstantiation Rule in the "basic" rule set)>
 
@@ -86,7 +86,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryCallForLastElement Rule
+* {UnnecessaryCallForLastElement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -121,7 +121,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryCallToSubstring Rule
+* {UnnecessaryCallToSubstring} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -138,7 +138,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryCatchBlock Rule
+* {UnnecessaryCatchBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -148,7 +148,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   <<<catch>>> statement out.
 
 
-* UnnecessaryCollectCall Rule
+* {UnnecessaryCollectCall} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -194,7 +194,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryCollectionCall Rule
+* {UnnecessaryCollectionCall} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -202,7 +202,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   should always be <<<true>>>, and <<<c.retainAll(c)>>> should have no effect.
 
 
-* UnnecessaryConstructor Rule
+* {UnnecessaryConstructor} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -211,7 +211,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 
 
-* UnnecessaryDefInFieldDeclaration Rule
+* {UnnecessaryDefInFieldDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -241,7 +241,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     }
 -------------------------------------------------------------------------------
 
-* UnnecessaryDefInMethodDeclaration Rule
+* {UnnecessaryDefInMethodDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -272,7 +272,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryDefInVariableDeclaration Rule
+* {UnnecessaryDefInVariableDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -301,7 +301,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     def String string6 = 'example'
 -------------------------------------------------------------------------------
 
-* UnnecessaryDotClass Rule
+* {UnnecessaryDotClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -317,7 +317,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     def x = String
 -------------------------------------------------------------------------------
 
-* UnnecessaryDoubleInstantiation Rule
+* {UnnecessaryDoubleInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -325,7 +325,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   with 'D' identifier to force the type, such as <<<123.45d>>> or <<<0.42d>>>.
 
 
-* UnnecessaryElseStatement Rule
+* {UnnecessaryElseStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -352,7 +352,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryFinalOnPrivateMethod Rule
+* {UnnecessaryFinalOnPrivateMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -365,7 +365,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryFloatInstantiation Rule
+* {UnnecessaryFloatInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -373,7 +373,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   with the 'F' identifier to force the type, such as <<<123.45F>>> or <<<0.42f>>>.
 
 
-* UnnecessaryGetter Rule
+* {UnnecessaryGetter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -403,7 +403,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryGString Rule
+* {UnnecessaryGString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -445,7 +445,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryIfStatement Rule
+* {UnnecessaryIfStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for unnecessary <<if>> statements. The entire <<if>> statement, or at least the <if> or <else>
@@ -499,7 +499,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryInstanceOfCheck Rule
+* {UnnecessaryInstanceOfCheck} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -519,7 +519,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     if (!(variable instanceof String)) { ... }
 -------------------------------------------------------------------------------
 
-* UnnecessaryInstantiationToGetClass Rule
+* {UnnecessaryInstantiationToGetClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since in CodeNarc 0.12>
 
@@ -536,7 +536,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryIntegerInstantiation Rule
+* {UnnecessaryIntegerInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -544,7 +544,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   the 'I' identifier to force the type, such as <<<8I>>> or <<<42i>>>.
 
 
-* UnnecessaryLongInstantiation Rule
+* {UnnecessaryLongInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -552,7 +552,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   the 'L' identifier to force the type, such as <<<8L>>> or <<<42L>>>.
 
 
-* UnnecessaryModOne Rule
+* {UnnecessaryModOne} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -569,7 +569,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryObjectReferences Rule
+* {UnnecessaryObjectReferences} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -620,7 +620,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryNullCheck Rule
+* {UnnecessaryNullCheck} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -669,7 +669,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryNullCheckBeforeInstanceOf Rule
+* {UnnecessaryNullCheckBeforeInstanceOf} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -695,7 +695,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryOverridingGetter Rule
+* {UnnecessaryOverridingGetter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -734,14 +734,14 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryOverridingMethod Rule
+* {UnnecessaryOverridingMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   Checks for an overriding method that merely calls the same method defined in a superclass. Remove it.
 
 
-* UnnecessaryPackageReference Rule
+* {UnnecessaryPackageReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.14>
 
@@ -795,7 +795,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     <<<class MyClass extends java.lang.Object { }>>>. Just don't do that, okay?
 
 
-* UnnecessaryParenthesesForMethodCallWithClosure Rule
+* {UnnecessaryParenthesesForMethodCallWithClosure} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -808,7 +808,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryPublicModifier Rule
+* {UnnecessaryPublicModifier} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -828,7 +828,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryReturnKeyword Rule
+* {UnnecessaryReturnKeyword} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -836,7 +836,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   closure then you do not need to have the <<<return>>> keyword.
 
 
-* UnnecessarySelfAssignment Rule
+* {UnnecessarySelfAssignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -859,7 +859,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessarySemicolon Rule
+* {UnnecessarySemicolon} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -891,7 +891,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessarySubstring Rule
+* {UnnecessarySubstring} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -909,7 +909,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     myVar[1..5]
 -------------------------------------------------------------------------------
 
-* UnnecessaryStringInstantiation Rule
+* {UnnecessaryStringInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12 (formerly StringInstantiation Rule in the "basic" rule set)>
 
@@ -924,7 +924,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryTernaryExpression Rule
+* {UnnecessaryTernaryExpression} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  Checks for ternary expressions where the conditional expression always evaluates to a boolean
@@ -952,7 +952,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryTransientModifier Rule
+* {UnnecessaryTransientModifier} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 

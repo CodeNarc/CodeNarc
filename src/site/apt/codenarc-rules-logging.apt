@@ -6,7 +6,7 @@ Logging Rules  ("<rulesets/logging.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* LoggerForDifferentClass Rule
+* {LoggerForDifferentClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -81,14 +81,14 @@ Logging Rules  ("<rulesets/logging.xml>")
 -------------------------------------------------------------------------------
 
 
-* LoggingSwallowsStacktrace Rule
+* {LoggingSwallowsStacktrace} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
   If you are logging an exception then the proper API is to call error(Object, Throwable), which will log the message and the exception stack trace. If you call error(Object) then the stacktrace may not be logged.
 
 
-* LoggerWithWrongModifiers Rule
+* {LoggerWithWrongModifiers} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -101,34 +101,34 @@ Logging Rules  ("<rulesets/logging.xml>")
   a logger should be allowed to be non-static.
 
 
-* MultipleLoggers Rule
+* {MultipleLoggers} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
   This rule catches classes that have more than one logger object defined. Typically, a class has zero or one logger objects.
 
 
-* Println Rule
+* {Println} Rule
 ~~~~~~~~~~~~~~~
 
   Checks for calls to <<<this.print()>>>, <<<this.println()>>> or <<<this.printf()>>>. Consider using
   a standard logging facility instead.
 
 
-* PrintStackTrace Rule
+* {PrintStackTrace} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for calls to <<<printStackTrace()>>>. Consider using a standard logging facility instead.
 
 
-* SystemErrPrint Rule
+* {SystemErrPrint} Rule
 ~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for calls to <<<System.err.print()>>>, <<<System.err.println()>>> or <<<System.err.printf()>>>.
   Consider using a standard logging facility instead.
 
 
-* SystemOutPrint Rule
+* {SystemOutPrint} Rule
 ~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for calls to <<<System.out.print()>>>, <<<System.out.println()>>> or <<<System.out.printf()>>>.

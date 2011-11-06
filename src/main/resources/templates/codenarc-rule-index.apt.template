@@ -11,7 +11,7 @@ Rule Index
     <% def capitalizedName = name.capitalize() %>
 * {{{$ruleSetLink}$capitalizedName}}
     <% rules.each { rule -> %>
-    * ${rule.name}
+    * {{{codenarc-rules-${name}.html#${rule.name}}${rule.name}}}
     <% } %>
     <% } %>
 

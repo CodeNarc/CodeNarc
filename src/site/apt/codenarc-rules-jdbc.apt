@@ -6,7 +6,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* DirectConnectionManagement Rule
+* {DirectConnectionManagement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -25,7 +25,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 -------------------------------------------------------------------------------
 
 
-* JdbcConnectionReference Rule
+* {JdbcConnectionReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -39,7 +39,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
   import if there are multiple classes in the source file. In that case, the imports are processed once per class.
 
 
-* JdbcResultSetReference Rule
+* {JdbcResultSetReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -53,7 +53,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
   import if there are multiple classes in the source file. In that case, the imports are processed once per class.
 
 
-* JdbcStatementReference Rule
+* {JdbcStatementReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 

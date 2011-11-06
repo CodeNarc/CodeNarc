@@ -6,7 +6,7 @@ Unused Rules  ("<rulesets/unused.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* UnusedArray Rule
+* {UnusedArray} Rule
 ~~~~~~~~~~~~~~~~~~~
 
   Checks for array allocations that are not assigned or used, unless it is the last
@@ -33,7 +33,7 @@ Unused Rules  ("<rulesets/unused.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnusedObject Rule
+* {UnusedObject} Rule
 ~~~~~~~~~~~~~~~~~~~~
 
   Checks for object allocations that are not assigned or used, unless it is the last
@@ -64,7 +64,7 @@ Unused Rules  ("<rulesets/unused.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnusedPrivateField Rule
+* {UnusedPrivateField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for private fields that are not referenced within the same class. Note that the <<<private>>>
@@ -88,7 +88,7 @@ Unused Rules  ("<rulesets/unused.xml>")
   * Does not recognize access of private field of another instance (i.e. other than <<<this>>>)
 
 
-* UnusedPrivateMethod Rule
+* {UnusedPrivateMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for private methods that are not referenced within the same class. Note that the <<<private>>>
@@ -108,7 +108,7 @@ Unused Rules  ("<rulesets/unused.xml>")
   * Does not check for unused constructors
 
 
-* UnusedPrivateMethodParameter Rule
+* {UnusedPrivateMethodParameter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -128,7 +128,7 @@ Unused Rules  ("<rulesets/unused.xml>")
     does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property.
 
 
-* UnusedMethodParameter Rule
+* {UnusedMethodParameter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -184,7 +184,7 @@ Unused Rules  ("<rulesets/unused.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnusedVariable Rule
+* {UnusedVariable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for variables that are never referenced.

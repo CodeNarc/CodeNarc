@@ -6,7 +6,7 @@ Design Rules  ("<rulesets/design.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* AbstractClassWithPublicConstructor Rule
+* {AbstractClassWithPublicConstructor} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.14>
 
@@ -21,7 +21,7 @@ Design Rules  ("<rulesets/design.xml>")
 -------------------------------------------------------------------------------
 
 
-* AbstractClassWithoutAbstractMethod Rule
+* {AbstractClassWithoutAbstractMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -51,7 +51,7 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
-* BuilderMethodWithSideEffects Rule
+* {BuilderMethodWithSideEffects} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -78,14 +78,14 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
-* CloseWithoutCloseable Rule
+* {CloseWithoutCloseable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
   If a class defines a "void close()" then that class should implement java.io.Closeable.
 
 
-* ConstantsOnlyInterface Rule
+* {ConstantsOnlyInterface} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -100,7 +100,7 @@ Design Rules  ("<rulesets/design.xml>")
 -------------------------------------------------------------------------------
 
 
-* EmptyMethodInAbstractClass Rule
+* {EmptyMethodInAbstractClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -120,7 +120,7 @@ Design Rules  ("<rulesets/design.xml>")
 -------------------------------------------------------------------------------
 
 
-* ImplementationAsType Rule
+* {ImplementationAsType} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for use of the following concrete classes when specifying the type of a method
@@ -199,7 +199,7 @@ Design Rules  ("<rulesets/design.xml>")
 -------------------------------------------------------------------------------
 
 
-* FinalClassWithProtectedMember Rule
+* {FinalClassWithProtectedMember} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -208,7 +208,7 @@ Design Rules  ("<rulesets/design.xml>")
   not be <<<final>>> or the member should be private or protected.
 
 
-* PublicInstanceField Rule
+* {PublicInstanceField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -223,7 +223,7 @@ Design Rules  ("<rulesets/design.xml>")
 -------------------------------------------------------------------------------
 
 
-* StatelessSingleton Rule
+* {StatelessSingleton} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 

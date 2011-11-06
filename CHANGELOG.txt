@@ -7,6 +7,7 @@ Changes in version 0.16 (November 2011)
 NEW FEATURES
 - Performance Improvements (3394481) - There are big performance improvements in this release.
 - Upgrade to GMetrics 0.4. (3424121) - This upgrade is optional for users, but may provide performance improvements.
+- Rule Index page: Rule name is now a link to the rule description web page. (3434063)
 
 NEW AND UPDATED RULES
 - @SuppressWarnings Support - The support for @SuppressWarnings was redesigned so that it is more reliable. @SuppressWarnings no works on *all* rules at the Class, Field, and Method level. 

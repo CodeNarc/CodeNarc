@@ -6,7 +6,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* AddEmptyString Rule
+* {AddEmptyString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -25,7 +25,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* AssignCollectionSort Rule
+* {AssignCollectionSort} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -42,7 +42,7 @@ Basic Rules  ("<rulesets/basic.xml>")
   def c = myList.sort().findAll { x < 1 }
 -------------------------------------------------------------------------------
 
-* AssignCollectionUnique Rule
+* {AssignCollectionUnique} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -60,7 +60,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 -------------------------------------------------------------------------------
 
-* AssignmentInConditional Rule
+* {AssignmentInConditional} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -89,7 +89,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* BigDecimalInstantiation Rule
+* {BigDecimalInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for calls to the <<<java.math.BigDecimal>>> constructors that take a <<<double>>> value as
@@ -108,7 +108,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* BitwiseOperatorInConditional Rule
+* {BitwiseOperatorInConditional} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -124,7 +124,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* BooleanGetBoolean Rule
+* {BooleanGetBoolean} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -142,7 +142,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* BooleanMethodReturnsNull Rule
+* {BooleanMethodReturnsNull} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -153,7 +153,7 @@ Basic Rules  ("<rulesets/basic.xml>")
   result in a <<<NullPointerException>>>.
 
 
-* BrokenOddnessCheck Rule
+* {BrokenOddnessCheck} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -172,7 +172,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ClassForName Rule
+* {ClassForName} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -197,7 +197,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* CloneableWithoutClone Rule
+* {CloneableWithoutClone} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for classes that implement the <<<java.lang.Cloneable>>> interface without implementing
@@ -212,7 +212,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ClosureAsLastMethodParameter Rule
+* {ClosureAsLastMethodParameter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -230,7 +230,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* CompareToWithoutComparable Rule
+* {CompareToWithoutComparable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -247,7 +247,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ComparisonOfTwoConstants Rule
+* {ComparisonOfTwoConstants} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.14>
 
@@ -273,7 +273,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ComparisonWithSelf Rule
+* {ComparisonWithSelf} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.14>
 
@@ -296,7 +296,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ConfusingTernary Rule
+* {ConfusingTernary} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -324,7 +324,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ConsecutiveLiteralAppends Rule
+* {ConsecutiveLiteralAppends} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -353,7 +353,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ConsecutiveStringConcatenation Rule
+* {ConsecutiveStringConcatenation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -385,7 +385,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ConstantIfExpression Rule
+* {ConstantIfExpression} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for <if> statements with a constant value for the <if> boolean expression, such as
@@ -408,7 +408,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* ConstantTernaryExpression Rule
+* {ConstantTernaryExpression} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  Checks for ternary expressions with a constant value for the boolean expression, such as
@@ -442,7 +442,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* CouldBeElvis Rule
+* {CouldBeElvis} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -460,7 +460,7 @@ if (!x) {
 x ?: 'some value'
 -------------------------------------------------------------------------------
 
-* DeadCode Rule
+* {DeadCode} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -468,7 +468,7 @@ x ?: 'some value'
   statements then it will never be executed and can be safely deleted.
 
 
-* DoubleNegative Rule
+* {DoubleNegative} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -476,7 +476,7 @@ x ?: 'some value'
   simplified to <<<x>>>. And <<<!(!x)>>> can as well.
 
 
-* DuplicateCaseStatement Rule
+* {DuplicateCaseStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -500,7 +500,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* DuplicateMapKey Rule
+* {DuplicateMapKey} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -520,7 +520,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* DuplicateSetValue Rule
+* {DuplicateSetValue} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -545,7 +545,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyCatchBlock Rule
+* {EmptyCatchBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <catch> blocks. In most cases, exceptions should not be caught and ignored (swallowed).
@@ -581,7 +581,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyElseBlock Rule
+* {EmptyElseBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <else> blocks. Empty <else> blocks are confusing and serve no purpose.
@@ -599,7 +599,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyFinallyBlock Rule
+* {EmptyFinallyBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <finally> blocks. Empty <finally> blocks are confusing and serve no purpose.
@@ -617,7 +617,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyForStatement Rule
+* {EmptyForStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <for> blocks. Empty <for> statements are confusing and serve no purpose.
@@ -633,7 +633,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyIfStatement Rule
+* {EmptyIfStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <if> statements. Empty <if> statements are confusing and serve no purpose.
@@ -649,7 +649,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyInstanceInitializer Rule
+* {EmptyInstanceInitializer} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -662,7 +662,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyMethod Rule
+* {EmptyMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -693,7 +693,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyStaticInitializer Rule
+* {EmptyStaticInitializer} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -706,7 +706,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptySwitchStatement Rule
+* {EmptySwitchStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <switch> statements. Empty <switch> statements are confusing and serve no purpose.
@@ -722,7 +722,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptySynchronizedStatement Rule
+* {EmptySynchronizedStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <synchronized> statements. Empty <synchronized> statements are confusing and serve no purpose.
@@ -739,7 +739,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyTryBlock Rule
+* {EmptyTryBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <try> blocks. Empty <try> blocks are confusing and serve no purpose.
@@ -757,7 +757,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EmptyWhileStatement Rule
+* {EmptyWhileStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for empty <while> statements. Empty <while> statements are confusing and serve no purpose.
@@ -773,7 +773,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EqualsAndHashCode Rule
+* {EqualsAndHashCode} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks that if either the <<<boolean equals(Object)>>> or the <<<int hashCode()>>> methods
@@ -800,7 +800,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* EqualsOverloaded Rule
+* {EqualsOverloaded} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -846,7 +846,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* ExplicitArrayListInstantiation Rule
+* {ExplicitArrayListInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -854,7 +854,7 @@ x ?: 'some value'
   <<<new ArrayList() as []>>>, which creates the same object.
 
 
-* ExplicitCallToAndMethod Rule
+* {ExplicitCallToAndMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -867,7 +867,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.and(Object)>>>.
 
 
-* ExplicitCallToCompareToMethod Rule
+* {ExplicitCallToCompareToMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -889,7 +889,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.compareTo(Object)>>>.
 
 
-* ExplicitCallToDivMethod Rule
+* {ExplicitCallToDivMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -901,7 +901,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.div(Object)>>>.
 
 
-* ExplicitCallToEqualsMethod Rule
+* {ExplicitCallToEqualsMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -914,7 +914,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.equals(Object)>>>.
 
 
-* ExplicitCallToGetAtMethod Rule
+* {ExplicitCallToGetAtMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -926,7 +926,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.getAt(Object)>>>.
 
 
-* ExplicitCallToLeftShiftMethod Rule
+* {ExplicitCallToLeftShiftMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -938,7 +938,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.leftShift(Object)>>>.
 
 
-* ExplicitCallToMinusMethod Rule
+* {ExplicitCallToMinusMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -950,7 +950,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.minus(Object)>>>.
 
 
-* ExplicitCallToMultiplyMethod Rule
+* {ExplicitCallToMultiplyMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -962,7 +962,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.multiply(Object)>>>.
 
 
-* ExplicitCallToModMethod Rule
+* {ExplicitCallToModMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -974,7 +974,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.mod(Object)>>>.
 
 
-* ExplicitCallToOrMethod Rule
+* {ExplicitCallToOrMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -986,7 +986,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.or(Object)>>>.
 
 
-* ExplicitCallToPlusMethod Rule
+* {ExplicitCallToPlusMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -998,7 +998,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.plus(Object)>>>.
 
 
-* ExplicitCallToPowerMethod Rule
+* {ExplicitCallToPowerMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1010,7 +1010,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.power(Object)>>>.
 
 
-* ExplicitCallToRightShiftMethod Rule
+* {ExplicitCallToRightShiftMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1022,7 +1022,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.rightShift(Object)>>>.
 
 
-* ExplicitCallToXorMethod Rule
+* {ExplicitCallToXorMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1034,7 +1034,7 @@ x ?: 'some value'
   This rule also ignores all calls to <<<super.xor(Object)>>>.
 
 
-* ExplicitGarbageCollection Rule
+* {ExplicitGarbageCollection} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -1044,7 +1044,7 @@ x ?: 'some value'
   within an application, it should be dealt with JVM options rather than within the code itself.
 
 
-* ExplicitHashMapInstantiation Rule
+* {ExplicitHashMapInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1053,7 +1053,7 @@ x ?: 'some value'
    is very rare that someone absolutely needs an instance of <<<HashMap>>> and not a subclass.
 
 
-* ExplicitLinkedHashMapInstantiation Rule
+* {ExplicitLinkedHashMapInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since in CodeNarc 0.14>
 
@@ -1061,7 +1061,7 @@ x ?: 'some value'
   is best to replace <<<new LinkedHashMap()>>> with <<<[:]>>>, which creates the same object.
 
 
-* ExplicitHashSetInstantiation Rule
+* {ExplicitHashSetInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1069,7 +1069,7 @@ x ?: 'some value'
   <<<new HashSet()>>> with <<<[] as Set>>>, which creates the same object.
 
 
-* ExplicitLinkedListInstantiation Rule
+* {ExplicitLinkedListInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1077,7 +1077,7 @@ x ?: 'some value'
   <<<new LinkedList()>>> with <<<[] as Queue>>>, which creates the same object.
 
 
-* ExplicitStackInstantiation Rule
+* {ExplicitStackInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1085,7 +1085,7 @@ x ?: 'some value'
   <<<new Stack()>>> with <<<[] as Stack>>>, which creates the same object.
 
 
-* ExplicitTreeSetInstantiation Rule
+* {ExplicitTreeSetInstantiation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1093,7 +1093,7 @@ x ?: 'some value'
   <<<new TreeSet()>>> with <<<[] as SortedSet>>>, which creates the same object.
 
 
-* ForLoopShouldBeWhileLoop Rule
+* {ForLoopShouldBeWhileLoop} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -1124,7 +1124,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* GroovyLangImmutable Rule
+* {GroovyLangImmutable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -1162,7 +1162,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* GStringAsMapKey Rule
+* {GStringAsMapKey} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.11>
@@ -1176,7 +1176,7 @@ x ?: 'some value'
     Map map = ["${someRef}" : 'invalid' ]       // violation
 -------------------------------------------------------------------------------
 
-* HardCodedWindowsFileSeparator Rule
+* {HardCodedWindowsFileSeparator} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -1191,7 +1191,7 @@ x ?: 'some value'
    new File('../foo\\')
 -------------------------------------------------------------------------------
 
-* HardcodedWindowsRootDirectory Rule
+* {HardcodedWindowsRootDirectory} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -1206,7 +1206,7 @@ x ?: 'some value'
    new File('E:\\dir')
 -------------------------------------------------------------------------------
 
-* IntegerGetInteger Rule
+* {IntegerGetInteger} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -1227,7 +1227,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* InvertedIfElse Rule
+* {InvertedIfElse} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1235,7 +1235,7 @@ x ?: 'some value'
   <<<else>>> branch and the boolean test of the <<<if>>> is negated. For instance <<<if (!x) false else true>>>.
   It is usually clearer to write this as <<<if (x) true else false>>>.
 
-* LongLiteralWithLowerCaseL Rule
+* {LongLiteralWithLowerCaseL} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -1251,7 +1251,7 @@ x ?: 'some value'
     def y = 55l
 -------------------------------------------------------------------------------
 
-* RandomDoubleCoercedToZero Rule
+* {RandomDoubleCoercedToZero} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
@@ -1272,7 +1272,7 @@ x ?: 'some value'
     (Math.random()) as Integer
 -------------------------------------------------------------------------------
 
-* RemoveAllOnSelf Rule
+* {RemoveAllOnSelf} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1282,7 +1282,7 @@ x ?: 'some value'
   for some collections, might throw a <<<ConcurrentModificationException>>>.
 
 
-* ReturnFromFinallyBlock Rule
+* {ReturnFromFinallyBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for a return from within a <finally> block. Returning from a <finally> block is confusing and
@@ -1304,7 +1304,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* ReturnsNullInsteadOfEmptyArray Rule
+* {ReturnsNullInsteadOfEmptyArray} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1314,7 +1314,7 @@ x ?: 'some value'
   no explicit check for <<<null>>> is needed by clients of the method.
 
 
-* ReturnsNullInsteadOfEmptyCollection Rule
+* {ReturnsNullInsteadOfEmptyCollection} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -1324,7 +1324,7 @@ x ?: 'some value'
   This way, no explicit check for <<<null>>> is needed by clients of the method.
 
 
-* SimpleDateFormatMissingLocale Rule
+* {SimpleDateFormatMissingLocale} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -1366,7 +1366,7 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
-* ConfusingMultipleReturns Rule
+* {ConfusingMultipleReturns} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -1388,7 +1388,7 @@ def (f, g) = [1, 2]    // ok
 (a, b, c) = [1, 2, 3]  // ok
 -------------------------------------------------------------------------------
 
-* UseCollectMany Rule
+* {UseCollectMany} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -1405,7 +1405,7 @@ l.collect{ [it, it*2] }.flatten() // suboptimal
 l.collectMany{ [it, it*2] }       // same functionality, better readability
 -------------------------------------------------------------------------------
 
-* CollectAllIsDeprecated Rule
+* {CollectAllIsDeprecated} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 
@@ -1422,7 +1422,7 @@ list.collectNested { it * 2 }   // replacement
 -------------------------------------------------------------------------------
 
 
-* UseCollectNested Rule
+* {UseCollectNested} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
 

@@ -6,7 +6,7 @@ Serialization Rules  ("<rulesets/serialization.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* SerialPersistentFields Rule
+* {SerialPersistentFields} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -40,7 +40,7 @@ Serialization Rules  ("<rulesets/serialization.xml>")
 -------------------------------------------------------------------------------
 
 
-* SerialVersionUID Rule
+* {SerialVersionUID} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.11>
@@ -51,7 +51,7 @@ Serialization Rules  ("<rulesets/serialization.xml>")
   a <getter>, which is probably not intended.
 
 
-* SerializableClassMustDefineSerialVersionUID Rule
+* {SerializableClassMustDefineSerialVersionUID} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 

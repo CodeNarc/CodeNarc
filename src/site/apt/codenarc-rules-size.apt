@@ -6,7 +6,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* AbcComplexity Rule
+* {AbcComplexity} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Calculates the <ABC> metric for methods/classes and checks against configured threshold values.
@@ -82,7 +82,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
   * This rule requires the GMetrics jar on the classpath. See {{{http://gmetrics.sourceforge.net/}GMetrics}}.
 
 
-* ClassSize Rule
+* {ClassSize} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks if the size of a class exceeds the number of lines specified by the <<maxLines>> property.
@@ -94,7 +94,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
-* CyclomaticComplexity Rule
+* {CyclomaticComplexity} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Calculates the <Cyclomatic Complexity> for methods/classes and checks against configured threshold values.
@@ -167,7 +167,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
   * This rule requires the GMetrics jar on the classpath. See {{{http://gmetrics.sourceforge.net/}GMetrics}}.
 
 
-* MethodCount Rule
+* {MethodCount} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -183,7 +183,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
-* MethodSize Rule
+* {MethodSize} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks if the size of a method exceeds the number of lines specified by the <<maxLines>> property.
@@ -199,7 +199,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
-* NestedBlockDepthRule Rule
+* {NestedBlockDepthRule} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for blocks or closures nested more deeply than a configured maximum number.

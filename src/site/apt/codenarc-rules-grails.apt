@@ -5,21 +5,21 @@
 Grails Rules  ("<rulesets/grails.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* GrailsDomainHasEquals Rule
+* {GrailsDomainHasEquals} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
   Checks that Grails domain classes redefine <<<equals()>>>.
 
 
-* GrailsDomainHasToString Rule
+* {GrailsDomainHasToString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.15>
 
   Checks that Grails domain classes redefine <<<toString()>>>.
 
 
-* GrailsPublicControllerMethod Rule
+* {GrailsPublicControllerMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks for public methods on Grails controller classes. Static methods are ignored.
@@ -45,7 +45,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   (String with wildcards) if appropriate.
 
 
-* GrailsServletContextReference Rule
+* {GrailsServletContextReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Rule that checks for references to the <<<servletContext>>> object from within Grails controller and
@@ -74,7 +74,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   with a different regular expression value if appropriate.
 
 
-* GrailsSessionReference Rule (deprecated)
+* {GrailsSessionReference} Rule (deprecated)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *-------------------------------------------------------------------------------------------------+
@@ -105,7 +105,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   with a different regular expression value if appropriate.
 
 
-* GrailsStatelessService Rule
+* {GrailsStatelessService} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for non-<<<final>>> fields on a Grails service class. Grails service classes are singletons by

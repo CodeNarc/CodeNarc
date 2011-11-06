@@ -5,7 +5,7 @@
 Generic Rules  ("<rulesets/generic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* IllegalClassReference Rule
+* {IllegalClassReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.15>
@@ -56,7 +56,7 @@ Generic Rules  ("<rulesets/generic.xml>")
   with a unique rule <name> and <classNames>, and (optionally) customized <violationMessage> and <priority>.
 
 
-* IllegalPackageReference Rule
+* {IllegalPackageReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.14>
@@ -107,7 +107,7 @@ Generic Rules  ("<rulesets/generic.xml>")
   with a unique rule <name> and <packageNames>, and (optionally) customized <violationMessage> and <priority>.
 
 
-* IllegalRegex Rule
+* {IllegalRegex} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for a specified illegal regular expression within the source code.
@@ -126,7 +126,7 @@ Generic Rules  ("<rulesets/generic.xml>")
   so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
 
 
-* RequiredRegex Rule
+* {RequiredRegex} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for a specified regular expression that must exist within the source code.
@@ -145,7 +145,7 @@ Generic Rules  ("<rulesets/generic.xml>")
   so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
 
 
-* RequiredString Rule
+* {RequiredString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for a specified text string that must exist within the source code.
@@ -163,7 +163,7 @@ Generic Rules  ("<rulesets/generic.xml>")
   so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
 
 
-* StatelessClass Rule
+* {StatelessClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for non-<<<final>>> fields on a class. The intent of this rule is to check a configured set

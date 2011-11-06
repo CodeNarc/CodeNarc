@@ -8,7 +8,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   These rules check for duplicate code, enforcing the DRY (Don't Repeat Yourself) principle.
 
 
-* DuplicateListLiteral Rule
+* {DuplicateListLiteral} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.16>
@@ -57,7 +57,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
     annotation.
 
 
-* DuplicateMapLiteral Rule
+* {DuplicateMapLiteral} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.16>
@@ -112,7 +112,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
     annotation.
 
 
-* DuplicateNumberLiteral Rule
+* {DuplicateNumberLiteral} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.11>
@@ -142,7 +142,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
     annotation.
 
 
-* DuplicateStringLiteral Rule
+* {DuplicateStringLiteral} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.11>

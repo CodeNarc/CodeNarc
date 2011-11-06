@@ -6,7 +6,7 @@ Security Rules  ("<rulesets/security.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* FileCreateTempFile Rule
+* {FileCreateTempFile} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -17,7 +17,7 @@ Security Rules  ("<rulesets/security.xml>")
   and the Randomizer Javadoc: {{http://owasp-esapi-java.googlecode.com/svn/trunk_doc/latest/org/owasp/esapi/Randomizer.html}}
 
 
-* InsecureRandom Rule
+* {InsecureRandom} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -42,7 +42,7 @@ Security Rules  ("<rulesets/security.xml>")
 -------------------------------------------------------------------------------
 
 
-* JavaIoPackageAccess Rule
+* {JavaIoPackageAccess} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -87,7 +87,7 @@ Security Rules  ("<rulesets/security.xml>")
 -------------------------------------------------------------------------------
 
 
-* NonFinalPublicField Rule
+* {NonFinalPublicField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -103,7 +103,7 @@ Security Rules  ("<rulesets/security.xml>")
     * G. McGraw Securing Java. Chapter 7: Java Security Guidelines
 
 
-* NonFinalSubclassOfSensitiveInterface Rule
+* {NonFinalSubclassOfSensitiveInterface} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -139,7 +139,7 @@ Security Rules  ("<rulesets/security.xml>")
 -------------------------------------------------------------------------------
 
 
-* PublicFinalizeMethod Rule
+* {PublicFinalizeMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -158,7 +158,7 @@ Security Rules  ("<rulesets/security.xml>")
   * G. McGraw Securing Java. Chapter 7: Java Security Guidelines
 
 
-* ObjectFinalize Rule
+* {ObjectFinalize} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -172,7 +172,7 @@ Security Rules  ("<rulesets/security.xml>")
   References: Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 586
 
 
-* SystemExit Rule
+* {SystemExit} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 
@@ -188,7 +188,7 @@ Security Rules  ("<rulesets/security.xml>")
   [[4]] Standards Mapping - Payment Card Industry Data Security Standard Version 1.1 - (PCI 1.1) Requirement 6.5.9
 
 
-* UnsafeArrayDeclaration Rule
+* {UnsafeArrayDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
 

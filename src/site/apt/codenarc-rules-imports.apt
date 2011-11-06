@@ -6,19 +6,19 @@ Imports Rules  ("<rulesets/imports.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* DuplicateImport Rule
+* {DuplicateImport} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for a duplicate <import> statements.
 
 
-* ImportFromSamePackage Rule
+* {ImportFromSamePackage} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for an <import> of a class that is within the same package as the importing class.
 
 
-* ImportFromSunPackages Rule
+* {ImportFromSunPackages} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
   Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
@@ -34,7 +34,7 @@ Imports Rules  ("<rulesets/imports.xml>")
 -------------------------------------------------------------------------------
 
 
-* MisorderedStaticImports Rule
+* {MisorderedStaticImports} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
   Checks for static <import> statements which should never be after nonstatic imports.
@@ -52,7 +52,7 @@ Imports Rules  ("<rulesets/imports.xml>")
 -------------------------------------------------------------------------------
 
 
-* UnnecessaryGroovyImport Rule
+* {UnnecessaryGroovyImport} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for an <import> from any package that is already automatically imported for
@@ -61,7 +61,7 @@ Imports Rules  ("<rulesets/imports.xml>")
   classes <java.math.BigDecimal> and <java.math.BigInteger>.
 
 
-* UnusedImport Rule
+* {UnusedImport} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for <import> statements for classes that are never referenced within the source file. Also

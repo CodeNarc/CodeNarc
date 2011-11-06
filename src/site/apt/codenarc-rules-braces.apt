@@ -6,7 +6,7 @@ Braces Rules  ("<rulesets/braces.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* ElseBlockBraces Rule
+* {ElseBlockBraces} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks that <else> blocks use braces, even for a single statement.
@@ -22,19 +22,19 @@ Braces Rules  ("<rulesets/braces.xml>")
 *-------------------------+----------------------------------------------------------------+------------------------+
 
 
-* ForStatementBraces Rule
+* {ForStatementBraces} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks that <for> statements use braces, even for a single statement.
 
 
-* IfStatementBraces Rule
+* {IfStatementBraces} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks that <if> statements use braces, even for a single statement.
 
 
-* WhileStatementBraces Rule
+* {WhileStatementBraces} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks that while statements use braces, even for a single statement.

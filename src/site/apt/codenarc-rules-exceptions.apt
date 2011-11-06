@@ -6,7 +6,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* CatchArrayIndexOutOfBoundsException Rule
+* {CatchArrayIndexOutOfBoundsException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -15,21 +15,21 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   exception may mask underlying errors.
 
 
-* CatchError Rule
+* {CatchError} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for catching a <<<Error>>>. In most cases that is much too broad, and is also dangerous
   because it can catch exceptions such as <<<ThreadDeath>>> and <<<OutOfMemoryError>>>.
 
 
-* CatchException Rule
+* {CatchException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for catching a <<<Exception>>>. In most cases that is too broad or general. It should usually
   be restricted to framework or infrastructure code, rather than application code.
 
 
-* CatchIllegalMonitorStateException Rule
+* {CatchIllegalMonitorStateException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -37,7 +37,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   a design flaw in your code (calling wait or notify on an object you do not hold a lock on).
 
 
-* CatchIndexOutOfBoundsException Rule
+* {CatchIndexOutOfBoundsException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -46,28 +46,28 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   exception may mask underlying errors.
 
 
-* CatchNullPointerException Rule
+* {CatchNullPointerException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for catching a <<<NullPointerException>>>. Catching <<<NullPointerException>>> is never
   appropriate. It should be avoided in the first place with proper null checking, and it can mask underlying errors.
 
 
-* CatchRuntimeException Rule
+* {CatchRuntimeException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for catching a <<<RuntimeException>>>. In most cases that is too broad or general. It should
   usually be restricted to framework or infrastructure code, rather than application code.
 
 
-* CatchThrowable Rule
+* {CatchThrowable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for catching a <<<Throwable>>>. In most cases that is much too broad, and is also dangerous
   because it can catch exceptions such as <<<ThreadDeath>>> and <<<OutOfMemoryError>>>.
 
 
-* ConfusingClassNamedException Rule
+* {ConfusingClassNamedException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -75,7 +75,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   this class.
 
 
-* ExceptionExtendsError Rule
+* {ExceptionExtendsError} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
 
@@ -91,7 +91,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 -------------------------------------------------------------------------------
 
 
-* MissingNewInThrowStatement Rule
+* {MissingNewInThrowStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
@@ -116,7 +116,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 -------------------------------------------------------------------------------
 
 
-* ReturnNullFromCatchBlock Rule
+* {ReturnNullFromCatchBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
@@ -124,7 +124,7 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
   styles this is discouraged.
 
 
-* SwallowThreadDeath Rule
+* {SwallowThreadDeath} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.14>
   Detects code that catches java.lang.ThreadDeath without re-throwing it.
@@ -140,35 +140,35 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 -------------------------------------------------------------------------------
 
 
-* ThrowError Rule
+* {ThrowError} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for throwing an instance of <<<java.lang.Error>>>. This is not appropriate within
   normal application code. Throw an instance of a more specific exception subclass instead.
 
 
-* ThrowException Rule
+* {ThrowException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for throwing an instance of <<<java.lang.Exception>>>. Throw an instance of a more
   specific exception subclass instead.
 
 
-* ThrowNullPointerException Rule
+* {ThrowNullPointerException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for throwing an instance of <<<java.lang.NullPointerException>>>. Applications should never
   throw a <<<NullPointerException>>>.
 
 
-* ThrowRuntimeException Rule
+* {ThrowRuntimeException} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for throwing an instance of <<<java.lang.RuntimeException>>>. Throw an instance of a more
   specific exception subclass instead.
 
 
-* ThrowThrowable Rule
+* {ThrowThrowable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for throwing an instance of <<<java.lang.Throwable>>>. Throw an instance of a more
