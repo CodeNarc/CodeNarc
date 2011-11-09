@@ -13,13 +13,10 @@
     <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.BitwiseOperatorInConditionalRule'/>
     <rule class='org.codenarc.rule.basic.BooleanGetBooleanRule'/>
-    <rule class='org.codenarc.rule.basic.BooleanMethodReturnsNullRule'/>
     <rule class='org.codenarc.rule.basic.BrokenOddnessCheckRule'/>
     <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
-    <rule class='org.codenarc.rule.basic.CloneableWithoutCloneRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonOfTwoConstantsRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonWithSelfRule'/>
-    <rule class='org.codenarc.rule.basic.CompareToWithoutComparableRule'/>
     <rule class='org.codenarc.rule.basic.ConfusingTernaryRule'/>
     <rule class='org.codenarc.rule.basic.ConsecutiveStringConcatenationRule'/>
     <rule class='org.codenarc.rule.basic.ConsecutiveLiteralAppendsRule'/>
@@ -53,9 +50,6 @@
     <rule class='org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule'/>
     <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
-    <rule class='org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyArrayRule'/>
-    <rule class='org.codenarc.rule.basic.ReturnsNullInsteadOfEmptyCollectionRule'/>
-    <rule class='org.codenarc.rule.basic.SimpleDateFormatMissingLocaleRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.CouldBeElvisRule'/>
     <rule class='org.codenarc.rule.basic.LongLiteralWithLowerCaseLRule'/>

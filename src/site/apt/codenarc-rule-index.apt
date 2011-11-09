@@ -21,15 +21,9 @@ Rule Index
     
     * {{{codenarc-rules-basic.html#BooleanGetBoolean}BooleanGetBoolean}}
     
-    * {{{codenarc-rules-basic.html#BooleanMethodReturnsNull}BooleanMethodReturnsNull}}
-    
     * {{{codenarc-rules-basic.html#BrokenOddnessCheck}BrokenOddnessCheck}}
     
     * {{{codenarc-rules-basic.html#ClassForName}ClassForName}}
-    
-    * {{{codenarc-rules-basic.html#CloneableWithoutClone}CloneableWithoutClone}}
-    
-    * {{{codenarc-rules-basic.html#CompareToWithoutComparable}CompareToWithoutComparable}}
     
     * {{{codenarc-rules-basic.html#ComparisonOfTwoConstants}ComparisonOfTwoConstants}}
     
@@ -104,12 +98,6 @@ Rule Index
     * {{{codenarc-rules-basic.html#RemoveAllOnSelf}RemoveAllOnSelf}}
     
     * {{{codenarc-rules-basic.html#ReturnFromFinallyBlock}ReturnFromFinallyBlock}}
-    
-    * {{{codenarc-rules-basic.html#ReturnsNullInsteadOfEmptyArray}ReturnsNullInsteadOfEmptyArray}}
-    
-    * {{{codenarc-rules-basic.html#ReturnsNullInsteadOfEmptyCollection}ReturnsNullInsteadOfEmptyCollection}}
-    
-    * {{{codenarc-rules-basic.html#SimpleDateFormatMissingLocale}SimpleDateFormatMissingLocale}}
     
     * {{{codenarc-rules-basic.html#ThrowExceptionFromFinallyBlock}ThrowExceptionFromFinallyBlock}}
     
@@ -190,9 +178,15 @@ Rule Index
     
     * {{{codenarc-rules-design.html#AbstractClassWithoutAbstractMethod}AbstractClassWithoutAbstractMethod}}
     
+    * {{{codenarc-rules-design.html#BooleanMethodReturnsNull}BooleanMethodReturnsNull}}
+    
     * {{{codenarc-rules-design.html#BuilderMethodWithSideEffects}BuilderMethodWithSideEffects}}
     
+    * {{{codenarc-rules-design.html#CloneableWithoutClone}CloneableWithoutClone}}
+    
     * {{{codenarc-rules-design.html#CloseWithoutCloseable}CloseWithoutCloseable}}
+    
+    * {{{codenarc-rules-design.html#CompareToWithoutComparable}CompareToWithoutComparable}}
     
     * {{{codenarc-rules-design.html#ConstantsOnlyInterface}ConstantsOnlyInterface}}
     
@@ -203,6 +197,12 @@ Rule Index
     * {{{codenarc-rules-design.html#ImplementationAsType}ImplementationAsType}}
     
     * {{{codenarc-rules-design.html#PublicInstanceField}PublicInstanceField}}
+    
+    * {{{codenarc-rules-design.html#ReturnsNullInsteadOfEmptyArray}ReturnsNullInsteadOfEmptyArray}}
+    
+    * {{{codenarc-rules-design.html#ReturnsNullInsteadOfEmptyCollection}ReturnsNullInsteadOfEmptyCollection}}
+    
+    * {{{codenarc-rules-design.html#SimpleDateFormatMissingLocale}SimpleDateFormatMissingLocale}}
     
     * {{{codenarc-rules-design.html#StatelessSingleton}StatelessSingleton}}
     

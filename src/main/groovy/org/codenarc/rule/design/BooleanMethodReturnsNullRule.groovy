@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.ReturnStatement
@@ -21,6 +21,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
+import org.codenarc.rule.NullReturnTracker
 
 /**
  * Method with Boolean return type returns explicit null. A method that returns either Boolean.TRUE, Boolean.FALSE or

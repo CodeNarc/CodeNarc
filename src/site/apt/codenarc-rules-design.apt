@@ -51,6 +51,18 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
+
+* {BooleanMethodReturnsNull} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  Checks for a method with <<<Boolean>>> return type that returns an explicit <<<null>>>. A method that
+  returns either <<<Boolean.TRUE>>>, <<<Boolean.FALSE>>> or <<<null>>> is an accident waiting to happen.
+  This method can be invoked as though it returned a value of type <<<boolean>>>, and the compiler will
+  insert automatic <unboxing> of the <<<Boolean>>> value. If a <<<null>>> value is returned, this will
+  result in a <<<NullPointerException>>>.
+
+
 * {BuilderMethodWithSideEffects} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
@@ -78,11 +90,43 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
+* {CloneableWithoutClone} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for classes that implement the <<<java.lang.Cloneable>>> interface without implementing
+  the <<<clone()>>> method.
+
+  Here is an example of code that produces a violation:
+
+-------------------------------------------------------------------------------
+    class BadClass implements Cloneable {
+        def someMethod()
+    }
+-------------------------------------------------------------------------------
+
+
 * {CloseWithoutCloseable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.12>
 
   If a class defines a "void close()" then that class should implement java.io.Closeable.
+
+
+* {CompareToWithoutComparable} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.12>
+
+  If you implement a compareTo method then you should also implement the <<<Comparable>>> interface. If you
+  don't then you could possibly get an exception if the Groovy == operator is invoked on your object.
+  This is an issue fixed in Groovy 1.8 but present in previous versions.
+
+  Here is an example of code that produces a violation:
+
+-------------------------------------------------------------------------------
+    class BadClass {
+        int compareTo(Object o) { ... }
+    }
+-------------------------------------------------------------------------------
 
 
 * {ConstantsOnlyInterface} Rule
@@ -220,6 +264,47 @@ Design Rules  ("<rulesets/design.xml>")
     class Person {
         public String name
     }
+-------------------------------------------------------------------------------
+
+
+* {ReturnsNullInsteadOfEmptyArray} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  If you have a method or closure that returns an array, then when there are no results return a zero-length
+  (empty) array rather than <<<null>>>. It is often a better design to return a zero-length array rather than a
+  <<<null>>> reference to indicate that there are no results (i.e., an <empty> list of results). This way,
+  no explicit check for <<<null>>> is needed by clients of the method.
+
+
+* {ReturnsNullInsteadOfEmptyCollection} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  If you have a method or closure that returns a collection, then when there are no results return a zero-length
+  (empty) collection rather than <<<null>>>. It is often a better design to return a zero-length collection
+  rather than a <<<null>>> reference to indicate that there are no results (i.e., an <empty> list of results).
+  This way, no explicit check for <<<null>>> is needed by clients of the method.
+
+
+* {SimpleDateFormatMissingLocale} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.12>
+
+  Be sure to specify a <<<Locale>>> when creating a new instance of <<<SimpleDateFormat>>>; the class is locale-sensitive. If you
+  instantiate <<<SimpleDateFormat>>> without a <<<Locale>>> parameter, it will format the date and time according to the default
+  <<<Locale>>>. Both the pattern and the <<<Locale>>> determine the format. For the same pattern, <<<SimpleDateFormat>>> may format a
+  date and time differently if the Locale varies.
+
+-------------------------------------------------------------------------------
+    // violation, missing locale
+    new SimpleDateFormat('pattern')
+
+    // OK, includes locale
+    new SimpleDateFormat('pattern', Locale.US)
+
+    // OK, includes a variable that perhaps is a locale
+    new SimpleDateFormat('pattern', locale)
 -------------------------------------------------------------------------------
 
 

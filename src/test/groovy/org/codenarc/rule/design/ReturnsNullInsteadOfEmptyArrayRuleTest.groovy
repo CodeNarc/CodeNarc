@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for ReturnsNullInsteadOfEmptyCollectionRule
+ * Tests for ReturnsNullInsteadOfEmptyArrayRule
  *
  * @author Hamlet D'Arcy
  */
-class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
+class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'ReturnsNullInsteadOfEmptyCollection'
+        assert rule.name == 'ReturnsNullInsteadOfEmptyArray'
     }
 
     void testNoViolation() {
         final SOURCE = '''
-        	List myMethod() {
+        	String[] myMethod() {
 
                 def c = {
                     return null // ignore returns from nested closure
@@ -42,102 +42,33 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
                         return null // ignore returns from nested class
                     }
                 }
-                return []
+                return [] as String[]
             }
 
             def c =  {
-                return []
+                return [] as String[]
             }
         '''
         assertNoViolations(SOURCE)
     }
 
-    void testTernaryReturns() {
-        final SOURCE = '''
-            def a =  {
-                return foo ? null : []
-            }
-            def b =  {
-                return foo ? [] : null
-            }
-        '''
-        assertTwoViolations SOURCE,
-                3, 'foo ? null : []',
-                6, 'foo ? [] : null'
-    }
 
-    void testElvis() {
+    void testStringArrayMethod() {
         final SOURCE = '''
-            def a =  {
+        	String[] myMethod() {
                 if (x) return null
-                return foo ?: []
-            }
-            def b =  {
-                if (x) return []
-                return foo ?: null
-            }
-        '''
-        assertTwoViolations SOURCE,
-                3, 'return null',
-                8, 'foo ?: null'
-    }
-
-    void testListMethod() {
-        final SOURCE = '''
-        	List myMethod() {
-                if (x) return null
-                return foo()
+                return [] as String[]
             }
         '''
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
-    void testCollectionMethod() {
-        final SOURCE = '''
-        	Collection myMethod() {
-                if (x) return null
-                return foo()
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'null')
-    }
-
-    void testStringListMethod() {
-        final SOURCE = '''
-        	List<String> myMethod() {
-                if (x) return null
-                return foo()
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'null')
-    }
-
-    void testMapMethod() {
-        final SOURCE = '''
-        	Map myMethod() {
-                if (x) return null
-                return foo()
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'null')
-    }
-
-    void testGenericMapMethod() {
-        final SOURCE = '''
-        	Map<String, String> myMethod() {
-                if (x) return null
-                return foo()
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'null')
-    }
-
-    void testStringListMethodInClass() {
+    void testStringArrayMethodInClass() {
         final SOURCE = '''
             class MyClass {
-                List myMethod() {
+                String[] myMethod() {
                     if (x) return null
-                    return []
+                    return [] as String[]
                 }
             }
         '''
@@ -148,40 +79,25 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
         	def myMethod() {
                 if (x) return null
-                return []
+                return [] as String[]
             }
         '''
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
-    void testDefMethodCtorCall() {
-        final SOURCE = '''
-        	def myMethod() {
-                if (x) return null
-                return new ArrayList()
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'null')
-    }
 
-    void testDefMethodCtorCallNotCollection() {
+    void testTernaryReturns() {
         final SOURCE = '''
-        	def myMethod() {
-                if (x) return null
-                return new java.awt.List()
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    void testDefMethodCastResult() {
-        final SOURCE = '''
-        	def myMethod() {
-                if (x) return null
-                return foo() as List
-            }
-        '''
-        assertSingleViolation(SOURCE, 3, 'null')
+                def a =  {
+                    return foo ? null : [] as String[]
+                }
+                def b =  {
+                    return foo ? [] as String[] : null
+                }
+            '''
+        assertTwoViolations SOURCE,
+                3, 'foo ? null : [] as String[]',
+                6, 'foo ? [] as String[] : null'
     }
 
     void testDefMethodInClass() {
@@ -189,19 +105,19 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 def myMethod() {
                     if (x) return null
-                    return []
+                    return [] as String[]
                 }
             }
         '''
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
-    void testStringListMethodInInnerClass() {
+    void testStringArrayMethodInInnerClass() {
         final SOURCE = '''
             def o = new Object() {
-                List myMethod() {
+                String[] myMethod() {
                     if (x) return null
-                    return []
+                    return [] as String[]
                 }
             }
         '''
@@ -212,7 +128,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def c = {
                 if (x) return null      // bad
-                return []
+                return [] as String[]
             }
         '''
         assertSingleViolation(SOURCE, 3, 'null')
@@ -223,36 +139,38 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
             def a = {
                 def b = {
                     if (x) return null      // bad
-                    return []
+                    return [] as String[]
                 }
                 def c = {
                     if (x) return null      // bad
-                    return []
+                    return [] as String[]
                 }
-                return []  // ok
+                return [] as String[] // ok
             }
         '''
         assertTwoViolations(SOURCE, 4, 'null', 8, 'null')
     }
 
+
     void testInAnonymousClassWithinAnonymousClass() {
         final SOURCE = '''
             def a = new Object() {
-                List m1() {
+                String[] m1() {
                     def b = new Object() {
-                        List m1() {
+                        String[] m1() {
                             return null
                         }
-                        List m2() {
+                        String[] m2() {
                             return null
                         }
                     }
-                    return []
+                    return [] as String[]
                 }
             }
         '''
         assertTwoViolations(SOURCE, 6, 'null', 9, 'null')
     }
+
 
     void testClosureInAnonymousClassWithinAnonymousClass() {
         final SOURCE = '''
@@ -264,12 +182,12 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
                                 if (q) {
                                     return null
                                 } else {
-                                    return []
+                                    return [] as String[]
                                 }
                             }
                         }
                     }
-                    return []
+                    return [] as String[]
                 }
             }
         '''
@@ -277,7 +195,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new ReturnsNullInsteadOfEmptyCollectionRule()
+        new ReturnsNullInsteadOfEmptyArrayRule()
     }
 
 }

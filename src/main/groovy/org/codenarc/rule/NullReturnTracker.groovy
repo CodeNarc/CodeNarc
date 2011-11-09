@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule
 
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
-import org.codenarc.rule.AbstractAstVisitor
 
 /**
  * Helper AST visitor that adds rule violation if a return statement is encountered that returns a null constant. 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.CastExpression
@@ -23,6 +23,7 @@ import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.NullReturnTracker
 
 /**
  * This rule detects when null is returned from a method that might return an

@@ -12,11 +12,8 @@ ruleset {
     BigDecimalInstantiation
     BitwiseOperatorInConditional
     BooleanGetBoolean
-    BooleanMethodReturnsNull
     BrokenOddnessCheck
     ClassForName
-    CloneableWithoutClone
-    CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
     ConfusingTernary
@@ -54,9 +51,6 @@ ruleset {
     RandomDoubleCoercedToZero
     RemoveAllOnSelf
     ReturnFromFinallyBlock
-    ReturnsNullInsteadOfEmptyArray
-    ReturnsNullInsteadOfEmptyCollection
-    SimpleDateFormatMissingLocale
     ThrowExceptionFromFinallyBlock
     
     // rulesets/braces.xml
@@ -95,13 +89,19 @@ ruleset {
     // rulesets/design.xml
     AbstractClassWithPublicConstructor
     AbstractClassWithoutAbstractMethod
+    BooleanMethodReturnsNull
     BuilderMethodWithSideEffects
+    CloneableWithoutClone
     CloseWithoutCloseable
+    CompareToWithoutComparable
     ConstantsOnlyInterface
     EmptyMethodInAbstractClass
     FinalClassWithProtectedMember
     ImplementationAsType
     PublicInstanceField
+    ReturnsNullInsteadOfEmptyArray
+    ReturnsNullInsteadOfEmptyCollection
+    SimpleDateFormatMissingLocale
     StatelessSingleton
     
     // rulesets/dry.xml
