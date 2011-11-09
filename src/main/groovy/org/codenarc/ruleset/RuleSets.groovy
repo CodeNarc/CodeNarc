@@ -32,6 +32,7 @@ class RuleSets {
         'rulesets/formatting.xml',
         'rulesets/generic.xml',
         'rulesets/grails.xml',
+        'rulesets/groovyism.xml',
         'rulesets/imports.xml',
         'rulesets/jdbc.xml',
         'rulesets/junit.xml',

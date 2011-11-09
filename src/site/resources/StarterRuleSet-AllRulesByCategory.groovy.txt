@@ -8,8 +8,6 @@ ruleset {
 
     // rulesets/basic.xml
     AddEmptyString
-    AssignCollectionSort
-    AssignCollectionUnique
     AssignmentInConditional
     BigDecimalInstantiation
     BitwiseOperatorInConditional
@@ -18,12 +16,9 @@ ruleset {
     BrokenOddnessCheck
     ClassForName
     CloneableWithoutClone
-    ClosureAsLastMethodParameter
-    CollectAllIsDeprecated
     CompareToWithoutComparable
     ComparisonOfTwoConstants
     ComparisonWithSelf
-    ConfusingMultipleReturns
     ConfusingTernary
     ConsecutiveLiteralAppends
     ConsecutiveStringConcatenation
@@ -49,31 +44,8 @@ ruleset {
     EmptyWhileStatement
     EqualsAndHashCode
     EqualsOverloaded
-    ExplicitArrayListInstantiation
-    ExplicitCallToAndMethod
-    ExplicitCallToCompareToMethod
-    ExplicitCallToDivMethod
-    ExplicitCallToEqualsMethod
-    ExplicitCallToGetAtMethod
-    ExplicitCallToLeftShiftMethod
-    ExplicitCallToMinusMethod
-    ExplicitCallToModMethod
-    ExplicitCallToMultiplyMethod
-    ExplicitCallToOrMethod
-    ExplicitCallToPlusMethod
-    ExplicitCallToPowerMethod
-    ExplicitCallToRightShiftMethod
-    ExplicitCallToXorMethod
     ExplicitGarbageCollection
-    ExplicitHashMapInstantiation
-    ExplicitHashSetInstantiation
-    ExplicitLinkedHashMapInstantiation
-    ExplicitLinkedListInstantiation
-    ExplicitStackInstantiation
-    ExplicitTreeSetInstantiation
     ForLoopShouldBeWhileLoop
-    GStringAsMapKey
-    GroovyLangImmutable
     HardCodedWindowsFileSeparator
     HardCodedWindowsRootDirectory
     IntegerGetInteger
@@ -86,8 +58,6 @@ ruleset {
     ReturnsNullInsteadOfEmptyCollection
     SimpleDateFormatMissingLocale
     ThrowExceptionFromFinallyBlock
-    UseCollectMany
-    UseCollectNested
     
     // rulesets/braces.xml
     ElseBlockBraces
@@ -184,6 +154,38 @@ ruleset {
     GrailsServletContextReference
     GrailsSessionReference
     GrailsStatelessService
+    
+    // rulesets/groovyism.xml
+    AssignCollectionSort
+    AssignCollectionUnique
+    ClosureAsLastMethodParameter
+    CollectAllIsDeprecated
+    ConfusingMultipleReturns
+    ExplicitArrayListInstantiation
+    ExplicitCallToAndMethod
+    ExplicitCallToCompareToMethod
+    ExplicitCallToDivMethod
+    ExplicitCallToEqualsMethod
+    ExplicitCallToGetAtMethod
+    ExplicitCallToLeftShiftMethod
+    ExplicitCallToMinusMethod
+    ExplicitCallToModMethod
+    ExplicitCallToMultiplyMethod
+    ExplicitCallToOrMethod
+    ExplicitCallToPlusMethod
+    ExplicitCallToPowerMethod
+    ExplicitCallToRightShiftMethod
+    ExplicitCallToXorMethod
+    ExplicitHashMapInstantiation
+    ExplicitHashSetInstantiation
+    ExplicitLinkedHashMapInstantiation
+    ExplicitLinkedListInstantiation
+    ExplicitStackInstantiation
+    ExplicitTreeSetInstantiation
+    GStringAsMapKey
+    GroovyLangImmutable
+    UseCollectMany
+    UseCollectNested
     
     // rulesets/imports.xml
     DuplicateImport

@@ -13,10 +13,6 @@ Rule Index
     
     * {{{codenarc-rules-basic.html#AddEmptyString}AddEmptyString}}
     
-    * {{{codenarc-rules-basic.html#AssignCollectionSort}AssignCollectionSort}}
-    
-    * {{{codenarc-rules-basic.html#AssignCollectionUnique}AssignCollectionUnique}}
-    
     * {{{codenarc-rules-basic.html#AssignmentInConditional}AssignmentInConditional}}
     
     * {{{codenarc-rules-basic.html#BigDecimalInstantiation}BigDecimalInstantiation}}
@@ -33,17 +29,11 @@ Rule Index
     
     * {{{codenarc-rules-basic.html#CloneableWithoutClone}CloneableWithoutClone}}
     
-    * {{{codenarc-rules-basic.html#ClosureAsLastMethodParameter}ClosureAsLastMethodParameter}}
-    
-    * {{{codenarc-rules-basic.html#CollectAllIsDeprecated}CollectAllIsDeprecated}}
-    
     * {{{codenarc-rules-basic.html#CompareToWithoutComparable}CompareToWithoutComparable}}
     
     * {{{codenarc-rules-basic.html#ComparisonOfTwoConstants}ComparisonOfTwoConstants}}
     
     * {{{codenarc-rules-basic.html#ComparisonWithSelf}ComparisonWithSelf}}
-    
-    * {{{codenarc-rules-basic.html#ConfusingMultipleReturns}ConfusingMultipleReturns}}
     
     * {{{codenarc-rules-basic.html#ConfusingTernary}ConfusingTernary}}
     
@@ -95,55 +85,9 @@ Rule Index
     
     * {{{codenarc-rules-basic.html#EqualsOverloaded}EqualsOverloaded}}
     
-    * {{{codenarc-rules-basic.html#ExplicitArrayListInstantiation}ExplicitArrayListInstantiation}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToAndMethod}ExplicitCallToAndMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToCompareToMethod}ExplicitCallToCompareToMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToDivMethod}ExplicitCallToDivMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToEqualsMethod}ExplicitCallToEqualsMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToGetAtMethod}ExplicitCallToGetAtMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToLeftShiftMethod}ExplicitCallToLeftShiftMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToMinusMethod}ExplicitCallToMinusMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToModMethod}ExplicitCallToModMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToMultiplyMethod}ExplicitCallToMultiplyMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToOrMethod}ExplicitCallToOrMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToPlusMethod}ExplicitCallToPlusMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToPowerMethod}ExplicitCallToPowerMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToRightShiftMethod}ExplicitCallToRightShiftMethod}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitCallToXorMethod}ExplicitCallToXorMethod}}
-    
     * {{{codenarc-rules-basic.html#ExplicitGarbageCollection}ExplicitGarbageCollection}}
     
-    * {{{codenarc-rules-basic.html#ExplicitHashMapInstantiation}ExplicitHashMapInstantiation}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitHashSetInstantiation}ExplicitHashSetInstantiation}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitLinkedHashMapInstantiation}ExplicitLinkedHashMapInstantiation}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitLinkedListInstantiation}ExplicitLinkedListInstantiation}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitStackInstantiation}ExplicitStackInstantiation}}
-    
-    * {{{codenarc-rules-basic.html#ExplicitTreeSetInstantiation}ExplicitTreeSetInstantiation}}
-    
     * {{{codenarc-rules-basic.html#ForLoopShouldBeWhileLoop}ForLoopShouldBeWhileLoop}}
-    
-    * {{{codenarc-rules-basic.html#GStringAsMapKey}GStringAsMapKey}}
-    
-    * {{{codenarc-rules-basic.html#GroovyLangImmutable}GroovyLangImmutable}}
     
     * {{{codenarc-rules-basic.html#HardCodedWindowsFileSeparator}HardCodedWindowsFileSeparator}}
     
@@ -168,10 +112,6 @@ Rule Index
     * {{{codenarc-rules-basic.html#SimpleDateFormatMissingLocale}SimpleDateFormatMissingLocale}}
     
     * {{{codenarc-rules-basic.html#ThrowExceptionFromFinallyBlock}ThrowExceptionFromFinallyBlock}}
-    
-    * {{{codenarc-rules-basic.html#UseCollectMany}UseCollectMany}}
-    
-    * {{{codenarc-rules-basic.html#UseCollectNested}UseCollectNested}}
     
     
     
@@ -372,6 +312,71 @@ Rule Index
     * {{{codenarc-rules-grails.html#GrailsSessionReference}GrailsSessionReference}}
     
     * {{{codenarc-rules-grails.html#GrailsStatelessService}GrailsStatelessService}}
+    
+    
+    
+    
+* {{{codenarc-rules-groovyism.html}Groovyism}}
+    
+    * {{{codenarc-rules-groovyism.html#AssignCollectionSort}AssignCollectionSort}}
+    
+    * {{{codenarc-rules-groovyism.html#AssignCollectionUnique}AssignCollectionUnique}}
+    
+    * {{{codenarc-rules-groovyism.html#ClosureAsLastMethodParameter}ClosureAsLastMethodParameter}}
+    
+    * {{{codenarc-rules-groovyism.html#CollectAllIsDeprecated}CollectAllIsDeprecated}}
+    
+    * {{{codenarc-rules-groovyism.html#ConfusingMultipleReturns}ConfusingMultipleReturns}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitArrayListInstantiation}ExplicitArrayListInstantiation}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToAndMethod}ExplicitCallToAndMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToCompareToMethod}ExplicitCallToCompareToMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToDivMethod}ExplicitCallToDivMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToEqualsMethod}ExplicitCallToEqualsMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToGetAtMethod}ExplicitCallToGetAtMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToLeftShiftMethod}ExplicitCallToLeftShiftMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToMinusMethod}ExplicitCallToMinusMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToModMethod}ExplicitCallToModMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToMultiplyMethod}ExplicitCallToMultiplyMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToOrMethod}ExplicitCallToOrMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToPlusMethod}ExplicitCallToPlusMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToPowerMethod}ExplicitCallToPowerMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToRightShiftMethod}ExplicitCallToRightShiftMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitCallToXorMethod}ExplicitCallToXorMethod}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitHashMapInstantiation}ExplicitHashMapInstantiation}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitHashSetInstantiation}ExplicitHashSetInstantiation}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitLinkedHashMapInstantiation}ExplicitLinkedHashMapInstantiation}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitLinkedListInstantiation}ExplicitLinkedListInstantiation}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitStackInstantiation}ExplicitStackInstantiation}}
+    
+    * {{{codenarc-rules-groovyism.html#ExplicitTreeSetInstantiation}ExplicitTreeSetInstantiation}}
+    
+    * {{{codenarc-rules-groovyism.html#GStringAsMapKey}GStringAsMapKey}}
+    
+    * {{{codenarc-rules-groovyism.html#GroovyLangImmutable}GroovyLangImmutable}}
+    
+    * {{{codenarc-rules-groovyism.html#UseCollectMany}UseCollectMany}}
+    
+    * {{{codenarc-rules-groovyism.html#UseCollectNested}UseCollectNested}}
     
     
     
