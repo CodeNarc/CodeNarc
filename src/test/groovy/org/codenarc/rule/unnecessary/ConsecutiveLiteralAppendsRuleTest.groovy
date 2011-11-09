@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule

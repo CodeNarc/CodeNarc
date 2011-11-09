@@ -7,7 +7,6 @@ ruleset {
         '''
 
     // rulesets/basic.xml
-    AddEmptyString
     AssignmentInConditional
     BigDecimalInstantiation
     BitwiseOperatorInConditional
@@ -17,8 +16,6 @@ ruleset {
     ComparisonOfTwoConstants
     ComparisonWithSelf
     ConfusingTernary
-    ConsecutiveLiteralAppends
-    ConsecutiveStringConcatenation
     ConstantIfExpression
     ConstantTernaryExpression
     CouldBeElvis
@@ -272,6 +269,9 @@ ruleset {
     NestedBlockDepth
     
     // rulesets/unnecessary.xml
+    AddEmptyString
+    ConsecutiveLiteralAppends
+    ConsecutiveStringConcatenation
     UnnecessaryBigDecimalInstantiation
     UnnecessaryBigIntegerInstantiation
     UnnecessaryBooleanExpression

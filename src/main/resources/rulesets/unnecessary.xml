@@ -8,6 +8,9 @@
         These rules check for unnecessary code.
     </description>
 
+    <rule class='org.codenarc.rule.unnecessary.AddEmptyStringRule'/>
+    <rule class='org.codenarc.rule.unnecessary.ConsecutiveStringConcatenationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.ConsecutiveLiteralAppendsRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryBigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryBigIntegerInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryBooleanExpressionRule'/>

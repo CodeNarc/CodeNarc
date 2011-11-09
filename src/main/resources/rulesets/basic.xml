@@ -8,7 +8,6 @@
         These rules are intended to be broadly (if not universally) applicable.
     </description>
 
-    <rule class='org.codenarc.rule.basic.AddEmptyStringRule'/>
     <rule class='org.codenarc.rule.basic.AssignmentInConditionalRule'/>
     <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.BitwiseOperatorInConditionalRule'/>
@@ -18,8 +17,6 @@
     <rule class='org.codenarc.rule.basic.ComparisonOfTwoConstantsRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonWithSelfRule'/>
     <rule class='org.codenarc.rule.basic.ConfusingTernaryRule'/>
-    <rule class='org.codenarc.rule.basic.ConsecutiveStringConcatenationRule'/>
-    <rule class='org.codenarc.rule.basic.ConsecutiveLiteralAppendsRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
     <rule class='org.codenarc.rule.basic.DeadCodeRule'/>

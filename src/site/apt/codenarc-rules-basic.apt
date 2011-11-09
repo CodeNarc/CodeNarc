@@ -6,25 +6,6 @@ Basic Rules  ("<rulesets/basic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-* {AddEmptyString} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
-
-  Finds empty string literals which are being added. This is an inefficient way to convert any type to a String.
-
-  Examples:
-
--------------------------------------------------------------------------------
-    // do not add empty strings to things
-    def a = '' + 123
-    def b = method('' + property)
-
-    // these examples are OK and do not trigger violations
-    def c = 456.toString()
-    def d = property?.toString() ?: ""
--------------------------------------------------------------------------------
-
-
 * {AssignmentInConditional} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -225,67 +206,6 @@ Basic Rules  ("<rulesets/basic.xml>")
 
     // this is OK, because of GroovyTruth there is no inverse of != false
     (x != false) ? diff : same
--------------------------------------------------------------------------------
-
-
-* {ConsecutiveLiteralAppends} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
-
-  Violations occur when method calls to append(Object) are chained together with literals as parameters. The
-  chained calls can be joined into one invocation.
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-    writer.append('foo').append('bar')      // strings can be joined
-    writer.append('foo').append(5)          // string and number can be joined
-    writer.append('Hello').append("$World") // GString can be joined
--------------------------------------------------------------------------------
-
-  Example of passing code:
-
--------------------------------------------------------------------------------
-    // usage not chained invocation
-    writer.append('Hello')
-    writer.append('World')
-
-    writer.append(null).append(5)           // nulls cannot be joined
-
-    writer.append().append('Hello')             // no arg append is unknown
-    writer.append('a', 'b').append('Hello')     // two arg append is unknown
--------------------------------------------------------------------------------
-
-
-* {ConsecutiveStringConcatenation} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
-
-  Catches concatenation of two string literals on the same line. These can safely by joined. In Java, the Java compiler
-  will join two String literals together and place them in the Constant Pool. However, Groovy will not because the plus()
-  method may override the + operator.
-
-  Examples:
-
--------------------------------------------------------------------------------
-    // Violations
-    def a = 'Hello' + 'World'   // should be 'HelloWorld'
-    def b = "$Hello" + 'World'  // should be "${Hello}World"
-    def c = 'Hello' + "$World"  // should be "Hello${World}"
-    def d = 'Hello' + 5         // should be 'Hello5'
-    def e = 'Hello' + '''
-                        world   // should be joined
-                      '''
-    def f = '''Hello
-                  ''' + 'world'   // should be joined
-
-
-    // Not Violations
-    def g = 'Hello' +           // OK because of line break
-                'World'
-    def h = 'Hello' + null      // OK because not a string
-    def i = 'Hello' + method()  // OK because not a string
-    def j = 'Hello' - "$World"  // OK because not +
 -------------------------------------------------------------------------------
 
 
