@@ -15,20 +15,20 @@
  */
 package org.codenarc.util
 
-import org.codenarc.test.AbstractTestCase
+import org.apache.log4j.Logger
+import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
-import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codenarc.source.SourceString
+import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.stmt.Statement
+import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
-import org.codehaus.groovy.ast.expr.GStringExpression
-import org.codehaus.groovy.ast.AnnotationNode
-import org.apache.log4j.Logger
-import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codehaus.groovy.ast.stmt.Statement
+import org.codehaus.groovy.control.SourceUnit
+import org.codenarc.source.SourceString
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for AstUtil

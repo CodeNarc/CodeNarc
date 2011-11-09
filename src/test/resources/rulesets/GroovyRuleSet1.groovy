@@ -1,5 +1,6 @@
 // Example Groovy RuleSet for testing
 
+
 import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
 
 ruleset {

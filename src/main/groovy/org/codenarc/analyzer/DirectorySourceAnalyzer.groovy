@@ -19,8 +19,8 @@ import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
-import org.codenarc.source.SourceFile
 import org.codenarc.source.SourceCodeCriteria
+import org.codenarc.source.SourceFile
 
 /**
  * SourceAnalyzer implementation that recursively processes files in the configured source directories.

@@ -15,11 +15,11 @@
  */
 package org.codenarc
 
-import org.codenarc.test.AbstractTestCase
-import org.codenarc.report.HtmlReportWriter
-import org.codenarc.results.FileResults
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
+import org.codenarc.results.FileResults
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for CodeNarcRunner

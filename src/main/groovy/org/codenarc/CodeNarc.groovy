@@ -15,10 +15,10 @@
  */
 package org.codenarc
 
-import org.codenarc.analyzer.SourceAnalyzer
 import org.apache.log4j.Logger
-import org.codenarc.report.HtmlReportWriter
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
+import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriterFactory
 
 /**

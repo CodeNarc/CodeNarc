@@ -15,13 +15,7 @@
  */
  package org.codenarc.rule.dry
 
-import org.codehaus.groovy.ast.expr.MapExpression
-import org.codehaus.groovy.ast.expr.MapEntryExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.ListExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Utility methods for the DRY rule classes

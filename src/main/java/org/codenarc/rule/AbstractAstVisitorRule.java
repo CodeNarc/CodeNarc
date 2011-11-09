@@ -23,7 +23,6 @@ import org.codenarc.util.WildcardPattern;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Abstract superclass for Rules that use a Groovy AST Visitor.

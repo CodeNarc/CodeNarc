@@ -15,12 +15,12 @@
  */
 package org.codenarc.report
 
-import org.codenarc.test.AbstractTestCase
-import org.codenarc.results.Results
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
+import org.codenarc.results.Results
 import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for AbstractReportWriter

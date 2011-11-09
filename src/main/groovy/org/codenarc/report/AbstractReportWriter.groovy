@@ -15,13 +15,13 @@
  */
 package org.codenarc.report
 
+import groovy.text.SimpleTemplateEngine
+import org.apache.log4j.Logger
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
-import org.apache.log4j.Logger
-import org.codenarc.util.io.ClassPathResource
 import org.codenarc.rule.Rule
 import org.codenarc.util.AstUtil
-import groovy.text.SimpleTemplateEngine
+import org.codenarc.util.io.ClassPathResource
 
 /**
  * Abstract superclass for ReportWriter implementation classes.

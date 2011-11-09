@@ -16,9 +16,9 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
+import org.apache.log4j.Logger
 import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
-import org.apache.log4j.Logger
 
 /**
  * Java application (main() method) that generates the "codenarc-rule-index.apt.template" file.

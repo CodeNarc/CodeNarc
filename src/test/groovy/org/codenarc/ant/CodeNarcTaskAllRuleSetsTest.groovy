@@ -17,8 +17,8 @@ package org.codenarc.ant
 
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.ruleset.RuleSets
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Run the CodeNarc Ant Task against a portion of the CodeNarc source using all predefined RuleSets.

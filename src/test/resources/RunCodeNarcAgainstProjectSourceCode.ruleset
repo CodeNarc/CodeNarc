@@ -10,6 +10,7 @@ ruleset {
         include 'DuplicateMapLiteral'
     }
     ruleset('rulesets/exceptions.xml')
+    ruleset('rulesets/groovyism.xml')
     ruleset('rulesets/formatting.xml')
     ruleset('rulesets/imports.xml')
     ruleset('rulesets/junit.xml') {

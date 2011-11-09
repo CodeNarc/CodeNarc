@@ -1,6 +1,5 @@
 package org.codenarc.sample.domain
 
-import java.util.Map
 import org.codenarc.sample.domain.OtherDomain
 import org.codenarc.sample.other.Other
 import org.codenarc.sample.other.Other

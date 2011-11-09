@@ -1,6 +1,5 @@
 package org.codenarc.sample.service
 
-import java.util.Map
 import org.codenarc.sample.domain.SampleDomain
 import org.codenarc.sample.processor.SampleProcessor
 

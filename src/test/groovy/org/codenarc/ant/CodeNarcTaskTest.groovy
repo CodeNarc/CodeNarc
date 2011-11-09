@@ -18,13 +18,13 @@ package org.codenarc.ant
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
-import org.codenarc.report.HtmlReportWriter
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.analyzer.SourceAnalyzer
-import org.codenarc.ruleset.RuleSet
-import org.codenarc.results.Results
-import org.codenarc.results.FileResults
+import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.XmlReportWriter
+import org.codenarc.results.FileResults
+import org.codenarc.results.Results
+import org.codenarc.ruleset.RuleSet
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for the CodeNarc Ant Task

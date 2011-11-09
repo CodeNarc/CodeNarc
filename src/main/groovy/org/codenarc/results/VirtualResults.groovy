@@ -15,8 +15,6 @@
  */
 package org.codenarc.results
 
-import org.codenarc.rule.Violation
-
 /**
  * This is a Results object for something that has no real file system, such as a string.
  *  

@@ -15,8 +15,8 @@
  */
 package org.codenarc.results
 
-import org.codenarc.rule.Violation
 import org.codenarc.rule.Rule
+import org.codenarc.rule.Violation
 
 /**
  * Test for virtual results

@@ -16,8 +16,8 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
-import org.codenarc.util.io.ResourceFactory
 import org.codenarc.util.io.DefaultResourceFactory
+import org.codenarc.util.io.ResourceFactory
 
 /**
  * A private utility class for the <code>RuleSet</code> classes. All methods are static.

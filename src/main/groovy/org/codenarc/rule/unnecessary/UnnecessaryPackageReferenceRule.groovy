@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import static org.codenarc.util.AstUtil.AUTO_IMPORTED_CLASSES
 import static org.codenarc.util.AstUtil.AUTO_IMPORTED_PACKAGES
+
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode

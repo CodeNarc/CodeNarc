@@ -16,8 +16,8 @@
 package org.codenarc.ruleset
 
 import org.apache.log4j.Logger
-import org.codenarc.util.io.ResourceFactory
 import org.codenarc.util.io.DefaultResourceFactory
+import org.codenarc.util.io.ResourceFactory
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a

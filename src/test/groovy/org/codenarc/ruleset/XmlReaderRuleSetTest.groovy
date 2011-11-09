@@ -15,13 +15,13 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.rule.StubRule
-import org.codenarc.rule.imports.DuplicateImportRule
-import org.codenarc.rule.exceptions.CatchThrowableRule
-import org.codenarc.rule.basic.EmptyIfStatementRule
-import org.codenarc.rule.TestPathRule
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.rule.StubRule
+import org.codenarc.rule.TestPathRule
+import org.codenarc.rule.basic.EmptyIfStatementRule
+import org.codenarc.rule.exceptions.CatchThrowableRule
+import org.codenarc.rule.imports.DuplicateImportRule
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for XmlReaderRuleSet

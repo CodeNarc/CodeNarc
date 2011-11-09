@@ -15,12 +15,12 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.generic.IllegalRegexRule
-import org.codenarc.ruleregistry.RuleRegistryHolder
 import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.ruleregistry.RuleRegistry
+import org.codenarc.ruleregistry.RuleRegistryHolder
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for RuleSetBuilder

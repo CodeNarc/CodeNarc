@@ -15,8 +15,8 @@
  */
  package org.codenarc.tool
 
-import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
 import org.apache.log4j.Logger
+import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
 
 /**
  * Java application (main() method) that generates the 'codenarc-base-rules.properties' properties file.

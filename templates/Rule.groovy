@@ -15,9 +15,6 @@
  */
 package org.codenarc.rule.${ruleCategory}
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-
 /**
  * ${ruleDescription}
  *

@@ -15,15 +15,15 @@
  */
 package org.codenarc.report
 
-import org.codenarc.test.AbstractTestCase
+import java.text.DateFormat
+import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
+import org.codenarc.rule.Violation
 import org.codenarc.rule.basic.EmptyCatchBlockRule
 import org.codenarc.rule.imports.UnusedImportRule
 import org.codenarc.rule.unused.UnusedPrivateMethodRule
-import org.codenarc.AnalysisContext
-import org.codenarc.rule.Violation
-import java.text.DateFormat
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for InlineXmlReportWriter.

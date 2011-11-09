@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.source.SourceString
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for GMetricsSourceCodeAdapter

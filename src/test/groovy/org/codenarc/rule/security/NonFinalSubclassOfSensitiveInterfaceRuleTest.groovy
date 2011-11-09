@@ -17,10 +17,6 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
-import java.security.Permission
-import java.security.PrivilegedAction
-import java.security.PrivilegedActionException
-import java.security.BasicPermission
 
 /**
  * Tests for NonFinalSubclassOfSensitiveInterfaceRule

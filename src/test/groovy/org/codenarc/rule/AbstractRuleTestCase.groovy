@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule
 
-import org.codenarc.source.SourceString
-import org.codenarc.test.AbstractTestCase
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
+import org.codenarc.source.SourceString
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Abstract superclass for tests of Rule classes

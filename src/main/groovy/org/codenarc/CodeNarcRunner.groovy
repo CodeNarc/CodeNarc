@@ -15,14 +15,14 @@
  */
 package org.codenarc
 
-import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
-import org.codenarc.analyzer.SourceAnalyzer
-import org.codenarc.ruleset.RuleSet
-import org.codenarc.ruleset.CompositeRuleSet
 import org.apache.log4j.Logger
+import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.results.Results
-import org.codenarc.ruleset.RuleSetUtil
 import org.codenarc.ruleregistry.RuleRegistryInitializer
+import org.codenarc.ruleset.CompositeRuleSet
+import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
+import org.codenarc.ruleset.RuleSet
+import org.codenarc.ruleset.RuleSetUtil
 
 /**
  * Helper class to run CodeNarc.

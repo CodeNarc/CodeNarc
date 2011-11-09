@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.${ruleCategory}
 
-import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**

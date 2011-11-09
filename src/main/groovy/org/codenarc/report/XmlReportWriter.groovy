@@ -15,10 +15,10 @@
  */
 package org.codenarc.report
 
-import org.codenarc.AnalysisContext
-import org.codenarc.results.Results
 import groovy.xml.StreamingMarkupBuilder
+import org.codenarc.AnalysisContext
 import org.codenarc.results.FileResults
+import org.codenarc.results.Results
 import org.codenarc.rule.Violation
 import org.codenarc.util.PathUtil
 

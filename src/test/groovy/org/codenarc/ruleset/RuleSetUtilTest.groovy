@@ -15,9 +15,9 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTestCase
-import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.Rule
+import org.codenarc.rule.exceptions.CatchThrowableRule
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for RuleSetUtil

@@ -15,10 +15,10 @@
  */
 package org.codenarc.analyzer
 
-import org.codenarc.ruleset.RuleSet
 import org.codenarc.results.Results
-import org.codenarc.source.SourceString
 import org.codenarc.results.VirtualResults
+import org.codenarc.ruleset.RuleSet
+import org.codenarc.source.SourceString
 
 /**
  * Analyzes Strings.

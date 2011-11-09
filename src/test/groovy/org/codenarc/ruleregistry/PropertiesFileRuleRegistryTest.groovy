@@ -15,10 +15,10 @@
  */
 package org.codenarc.ruleregistry
 
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.rule.naming.MethodNameRule
 import org.codenarc.rule.unused.UnusedPrivateFieldRule
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for PropertiesFileRuleRegistry

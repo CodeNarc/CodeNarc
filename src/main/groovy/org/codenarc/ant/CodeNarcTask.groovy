@@ -21,8 +21,8 @@ import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.CodeNarcRunner
 import org.codenarc.analyzer.SourceAnalyzer
-import org.codenarc.results.Results
 import org.codenarc.report.ReportWriterFactory
+import org.codenarc.results.Results
 
 /**
  * Ant Task for running CodeNarc.

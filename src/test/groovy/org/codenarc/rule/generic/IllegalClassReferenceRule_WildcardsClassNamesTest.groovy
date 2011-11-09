@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.Rule
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.Rule
 
 /**
  * Tests for IllegalClassReferenceRule - checks for specifying values containing wildcards for the classNames field

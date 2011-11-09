@@ -15,8 +15,8 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTestCase
 import org.apache.log4j.Logger
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for GroovyDslRuleSet

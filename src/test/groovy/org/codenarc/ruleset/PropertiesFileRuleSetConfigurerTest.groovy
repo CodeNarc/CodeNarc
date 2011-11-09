@@ -15,8 +15,8 @@
  */
 package org.codenarc.ruleset
 
-import org.codenarc.test.AbstractTestCase
 import org.codenarc.rule.StubRule
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for PropertiesFileRuleSetConfigurer

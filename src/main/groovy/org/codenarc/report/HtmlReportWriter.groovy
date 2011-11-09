@@ -18,9 +18,9 @@ package org.codenarc.report
 import groovy.xml.StreamingMarkupBuilder
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
-import org.codenarc.util.io.ClassPathResource
-import org.codenarc.rule.Violation
 import org.codenarc.rule.Rule
+import org.codenarc.rule.Violation
+import org.codenarc.util.io.ClassPathResource
 
 /**
  * ReportWriter that generates an HTML report.

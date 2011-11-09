@@ -15,13 +15,13 @@
  */
 package org.codenarc.report
 
-import org.codenarc.test.AbstractTestCase
-import org.codenarc.results.DirectoryResults
-import org.codenarc.results.FileResults
-import org.codenarc.rule.Violation
-import org.codenarc.rule.StubRule
 import java.text.DateFormat
 import org.codenarc.AnalysisContext
+import org.codenarc.results.DirectoryResults
+import org.codenarc.results.FileResults
+import org.codenarc.rule.StubRule
+import org.codenarc.rule.Violation
+import org.codenarc.test.AbstractTestCase
 
 /**
  * Tests for TestReportWriter

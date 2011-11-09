@@ -17,8 +17,8 @@ package org.codenarc.ruleset
 
 import org.apache.log4j.Logger
 import org.codenarc.util.PropertyUtil
-import org.codenarc.util.io.ResourceFactory
 import org.codenarc.util.io.DefaultResourceFactory
+import org.codenarc.util.io.ResourceFactory
 
 /**
  * Reads the properties file named "codenarc.properties", if found on the classpath, and applies

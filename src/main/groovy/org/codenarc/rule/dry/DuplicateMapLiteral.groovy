@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.dry
 
+import org.codehaus.groovy.ast.expr.MapExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.*
 
 /**
  * Check for multiple instances of the same Map literal, limited to Maps where the keys

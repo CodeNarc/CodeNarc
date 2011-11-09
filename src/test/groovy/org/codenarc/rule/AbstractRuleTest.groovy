@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule
 
-import org.codenarc.source.SourceString
 import org.codenarc.source.SourceCode
+import org.codenarc.source.SourceString
 
 /**
  * Tests for the AbstractRule class
