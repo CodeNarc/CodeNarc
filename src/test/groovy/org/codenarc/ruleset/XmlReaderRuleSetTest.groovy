@@ -269,6 +269,18 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('DoesNotExist') { parseXmlRuleSet(XML) }
     }
 
+    void testNestedRuleSet_ConfigRuleWasRenamed() {
+        final XML = """
+            <ruleset $NAMESPACE>
+                <ruleset-ref path='rulesets/NestedRuleSet1.xml'>
+                    <rule-config name='HardcodedWindowsRootDirectory'>
+                        <property name='priority' value='3'/>
+                    </rule-config>
+                </ruleset-ref>
+            </ruleset>"""
+        shouldFailWithMessageContaining('HardCodedWindowsRootDirectory') { parseXmlRuleSet(XML) }
+    }
+
     void testNestedRuleSet_ConfigRulePropertyDoesNotExist() {
         final XML = """
             <ruleset $NAMESPACE>

@@ -86,7 +86,7 @@ class PropertiesFileRuleSetConfigurer {
                     PropertyUtil.setPropertyFromString(rule, propertyName, v)
                 }
                 else {
-                    LOG.warn("No such rule [$ruleName] for property [$k]")
+                    LOG.warn("No such rule [$ruleName] for property [$k]. "  + MovedRules.getMovedOrRenamedMessageForRuleName(ruleName))
                 }
             }
         }

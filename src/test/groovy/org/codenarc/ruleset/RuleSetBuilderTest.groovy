@@ -286,6 +286,44 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    void testRuleNameOnly_NoParentheses_NoSuchRuleName() {
+        RuleRegistryHolder.ruleRegistry = null
+        shouldFailWithMessageContaining('ClassName') {
+            ruleSetBuilder.ruleset {
+                ClassName
+            }
+        }
+    }
+
+    void testRuleNameOnly_RuleWasMovedToAnotherRuleSet() {
+        RuleRegistryHolder.ruleRegistry = null
+        shouldFailWithMessageContaining('design') {
+            ruleSetBuilder.ruleset {
+                BooleanMethodReturnsNull()
+            }
+        }
+    }
+
+    void testRuleNameOnly_NoParentheses_Closure_RuleWasMovedToAnotherRuleSet() {
+        RuleRegistryHolder.ruleRegistry = null
+        shouldFailWithMessageContaining('design') {
+            ruleSetBuilder.ruleset {
+                BooleanMethodReturnsNull { }
+            }
+        }
+    }
+
+    void testRuleNameOnly_NoParentheses_NoClosure_RuleWasMovedToAnotherRuleSet() {
+        RuleRegistryHolder.ruleRegistry = null
+        shouldFailWithMessageContaining('design') {
+            def closure = {
+                BooleanMethodReturnsNull
+            }
+            closure.resolveStrategy = Closure.DELEGATE_ONLY
+            ruleSetBuilder.ruleset(closure)
+        }
+    }
+
     void testRuleNameOnly_Closure() {
         RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
         ruleSetBuilder.ruleset {

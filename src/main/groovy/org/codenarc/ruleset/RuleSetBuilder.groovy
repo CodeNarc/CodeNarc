@@ -100,14 +100,13 @@ class TopLevelDelegate {
 
     def propertyMissing(String name) {
         def ruleClass = RuleRegistryHolder.ruleRegistry?.getRuleClass(name)
-        assert ruleClass, "No such rule named [$name]"
+        assert ruleClass, "No such rule named [$name]. " + MovedRules.getMovedOrRenamedMessageForRuleName(name)
         rule(ruleClass)
     }
 
     def methodMissing(String name, args) {
         def ruleClass = RuleRegistryHolder.ruleRegistry?.getRuleClass(name)
-        assert ruleClass, "No such rule named [$name]"
-//        assert args[0] instanceof Closure || args[0] instanceof Map
+        assert ruleClass, "No such rule named [$name]. " + MovedRules.getMovedOrRenamedMessageForRuleName(name)
         if (args.size() > 0) {
             rule(ruleClass, args[0])
         }

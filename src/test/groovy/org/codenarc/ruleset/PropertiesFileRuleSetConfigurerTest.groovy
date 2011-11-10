@@ -24,6 +24,7 @@ import org.codenarc.test.AbstractTestCase
  * @author Chris Mair
   */
 class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
+
     private ruleSet
     private rule1 = new StubRule(name:'rule1', priority:1, violationMessage:'abc')
     private rule2 = new StubRule(name:'rule2', priority:2, violationMessage:'def')

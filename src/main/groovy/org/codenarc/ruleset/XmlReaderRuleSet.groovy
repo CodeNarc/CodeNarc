@@ -82,7 +82,8 @@ class XmlReaderRuleSet implements RuleSet {
             ruleSetRefNode[NS.'rule-config'].each { configNode ->
                 def configRuleName = configNode.attribute('name')
                 def rule = allRules.find { it.name == configRuleName }
-                assert rule, "Rule named [$configRuleName] referenced within <rule-config> was not found"
+                assert rule, "Rule named [$configRuleName] referenced within <rule-config> was not found. " +
+                    MovedRules.getMovedOrRenamedMessageForRuleName(configRuleName)
                 configNode[NS.property].each { p ->
                     def name = p.attribute('name')
                     def value = p.attribute('value')
