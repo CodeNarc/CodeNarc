@@ -26,6 +26,7 @@ class RuleSets {
         'rulesets/basic.xml',
         'rulesets/braces.xml',
         'rulesets/concurrency.xml',
+        'rulesets/convention.xml',
         'rulesets/design.xml',
         'rulesets/dry.xml',
         'rulesets/exceptions.xml',

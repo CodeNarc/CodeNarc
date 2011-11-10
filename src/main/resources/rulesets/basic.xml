@@ -16,7 +16,6 @@
     <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonOfTwoConstantsRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonWithSelfRule'/>
-    <rule class='org.codenarc.rule.basic.ConfusingTernaryRule'/>
     <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
     <rule class='org.codenarc.rule.basic.DeadCodeRule'/>
@@ -43,11 +42,8 @@
     <rule class='org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule'/>
     <rule class='org.codenarc.rule.basic.HardCodedWindowsRootDirectoryRule'/>
     <rule class='org.codenarc.rule.basic.IntegerGetIntegerRule'/>
-    <rule class='org.codenarc.rule.basic.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule'/>
     <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
-    <rule class='org.codenarc.rule.basic.CouldBeElvisRule'/>
-    <rule class='org.codenarc.rule.basic.LongLiteralWithLowerCaseLRule'/>
 </ruleset>

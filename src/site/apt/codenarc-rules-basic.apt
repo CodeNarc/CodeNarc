@@ -181,34 +181,6 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
-* {ConfusingTernary} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.12>
-
-  In a ternary expression avoid negation in the test. For example, rephrase:
-  <<<(x != y) ? diff : same>>> as: <<<(x == y) ? same : diff>>>. Consistent use of this rule makes the code easier to read.
-  Also, this resolves trivial ordering problems, such as "does the error case go first?" or "does the common case go first?".
-
-  Example:
-
--------------------------------------------------------------------------------
-    (x != y) ? diff : same      // triggers violation
-    (!x) ? diff : same          // triggers violation
-
-    (x == y) ? same : diff      // OK
-    (x) ? same : diff           // OK
-
-    // this is OK, because of GroovyTruth there is no inverse of != null
-    (x != null) ? diff : same
-
-    // this is OK, because of GroovyTruth there is no inverse of != true
-    (x != true) ? diff : same
-
-    // this is OK, because of GroovyTruth there is no inverse of != false
-    (x != false) ? diff : same
--------------------------------------------------------------------------------
-
-
 * {ConstantIfExpression} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -265,24 +237,6 @@ Basic Rules  ("<rulesets/basic.xml>")
     [a, b, c] ?: y
 -------------------------------------------------------------------------------
 
-
-* {CouldBeElvis} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
-
-  Catch an if block that could be written as an elvis expression.
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-// violation
-if (!x) {
-    x = 'some value'
-}
-
-// OK
-x ?: 'some value'
--------------------------------------------------------------------------------
 
 * {DeadCode} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -761,30 +715,6 @@ x ?: 'some value'
     Integer.getInteger(value, radix, locale)
 -------------------------------------------------------------------------------
 
-
-* {InvertedIfElse} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.11>
-
-  An inverted <if-else> statement is one in which there is a single <<<if>>> statement with a single
-  <<<else>>> branch and the boolean test of the <<<if>>> is negated. For instance <<<if (!x) false else true>>>.
-  It is usually clearer to write this as <<<if (x) true else false>>>.
-
-* {LongLiteralWithLowerCaseL} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
-
-  In Java and Groovy, you can specify long literals with the L or l character,
-  for instance 55L or 24l. It is best practice to always use an uppercase L and never
-  a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
-
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-    def x = 1l
-    def y = 55l
--------------------------------------------------------------------------------
 
 * {RandomDoubleCoercedToZero} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -27,13 +27,9 @@ Rule Index
     
     * {{{codenarc-rules-basic.html#ComparisonWithSelf}ComparisonWithSelf}}
     
-    * {{{codenarc-rules-basic.html#ConfusingTernary}ConfusingTernary}}
-    
     * {{{codenarc-rules-basic.html#ConstantIfExpression}ConstantIfExpression}}
     
     * {{{codenarc-rules-basic.html#ConstantTernaryExpression}ConstantTernaryExpression}}
-    
-    * {{{codenarc-rules-basic.html#CouldBeElvis}CouldBeElvis}}
     
     * {{{codenarc-rules-basic.html#DeadCode}DeadCode}}
     
@@ -82,10 +78,6 @@ Rule Index
     * {{{codenarc-rules-basic.html#HardCodedWindowsRootDirectory}HardCodedWindowsRootDirectory}}
     
     * {{{codenarc-rules-basic.html#IntegerGetInteger}IntegerGetInteger}}
-    
-    * {{{codenarc-rules-basic.html#InvertedIfElse}InvertedIfElse}}
-    
-    * {{{codenarc-rules-basic.html#LongLiteralWithLowerCaseL}LongLiteralWithLowerCaseL}}
     
     * {{{codenarc-rules-basic.html#RandomDoubleCoercedToZero}RandomDoubleCoercedToZero}}
     
@@ -162,6 +154,19 @@ Rule Index
     * {{{codenarc-rules-concurrency.html#VolatileLongOrDoubleField}VolatileLongOrDoubleField}}
     
     * {{{codenarc-rules-concurrency.html#WaitOutsideOfWhileLoop}WaitOutsideOfWhileLoop}}
+    
+    
+    
+    
+* {{{codenarc-rules-convention.html}Convention}}
+    
+    * {{{codenarc-rules-convention.html#ConfusingTernary}ConfusingTernary}}
+    
+    * {{{codenarc-rules-convention.html#CouldBeElvis}CouldBeElvis}}
+    
+    * {{{codenarc-rules-convention.html#InvertedIfElse}InvertedIfElse}}
+    
+    * {{{codenarc-rules-convention.html#LongLiteralWithLowerCaseL}LongLiteralWithLowerCaseL}}
     
     
     
