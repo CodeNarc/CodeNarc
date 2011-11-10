@@ -142,7 +142,7 @@ class RuleSetDelegate {
 
     def methodMissing(String name, args) {
         def rule = findRule(name)
-        assert rule, "No such rule named [$name]"
+        assert rule, "No such rule named [$name]. " + MovedRules.getMovedOrRenamedMessageForRuleName(name)
 
         def arg = args[0]
         if (arg instanceof Closure) {

@@ -133,6 +133,16 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    void testRuleset_XmlFile_ConfigureRuleUsingClosure_RuleWasMovedToAnotherRuleSet() {
+        shouldFailWithMessageContaining('design') {
+            ruleSetBuilder.ruleset {
+                ruleset(RULESET_XML_FILE2) {
+                    BooleanMethodReturnsNull(enabled:false)
+                }
+            }
+        }
+    }
+
     void testRuleset_GroovyFile_NoClosure() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_GROOVY_FILE1)
