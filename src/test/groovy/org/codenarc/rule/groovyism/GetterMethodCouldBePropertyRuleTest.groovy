@@ -13,26 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.unnecessary
+package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for UnnecessaryOverridingMethodRule
+ * Tests for GetterMethodCouldBePropertyRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
-class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
+class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == 'UnnecessaryOverridingGetter'
+        assert rule.name == 'GetterMethodCouldBeProperty'
     }
 
     void testSuccessScenario() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 static VALUE = 'value'
                 final String something = 'something'  // this is cleaner
                 final String somethingElse = VALUE      // this is cleaner
@@ -55,7 +56,7 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
 
     void testIgnoreProtectedGetterMethods() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 @Override
                 protected int getValue() { 123 }
 
@@ -69,7 +70,7 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
 
     void testConstantReturn() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 @Override
                 String getSomething() {
                     'something'         // this could be simplified
@@ -78,12 +79,12 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4,
             'String getSomething()',
-            "The method 'getSomething ' in class Child can be expressed more simply as the field declaration\nfinal String something = 'something'")
+            "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = 'something'")
     }
 
     void testConstantReturnExplicit() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 @Override
                 String getSomething() {
                     return 'something'         // this could be simplified
@@ -92,12 +93,12 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4,
             'String getSomething()',
-            "The method 'getSomething ' in class Child can be expressed more simply as the field declaration\nfinal String something = 'something'")
+            "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = 'something'")
     }
 
     void testClassReturn() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 @Override
                 Class getSomething() {
                     String         // this could be simplified
@@ -106,12 +107,12 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4,
             'Class getSomething()',
-            "The method 'getSomething ' in class Child can be expressed more simply as the field declaration\nfinal Class something = String")
+            "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal Class something = String")
     }
 
     void testConstantExplicitReturn() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 @Override
                 String getSomething() {
                     return 'something'         // this could be simplified
@@ -120,12 +121,12 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4,
             'String getSomething()',
-            "The method 'getSomething ' in class Child can be expressed more simply as the field declaration\nfinal String something = 'something'")
+            "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = 'something'")
     }
 
     void testStaticReturn() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 static VALUE = 'value'
 
                 @Override
@@ -136,12 +137,12 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 6,
             'String getSomethingElse()',
-            "The method 'getSomethingElse ' in class Child can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
+            "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
     }
 
     void testStaticExplicitReturn() {
         final SOURCE = '''
-            class Child extends Parent {
+            class MyClass {
                 static VALUE = 'value'
 
                 @Override
@@ -152,10 +153,10 @@ class UnnecessaryOverridingGetterRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 6,
             'String getSomethingElse()',
-            "The method 'getSomethingElse ' in class Child can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
+            "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
     }
 
     protected Rule createRule() {
-        new UnnecessaryOverridingGetterRule()
+        new GetterMethodCouldBePropertyRule()
     }
 }

@@ -34,6 +34,7 @@
     <rule class='org.codenarc.rule.groovyism.ExplicitLinkedListInstantiationRule'/>
     <rule class='org.codenarc.rule.groovyism.ExplicitStackInstantiationRule'/>
     <rule class='org.codenarc.rule.groovyism.ExplicitTreeSetInstantiationRule'/>
+    <rule class='org.codenarc.rule.groovyism.GetterMethodCouldBePropertyRule'/>
     <rule class='org.codenarc.rule.groovyism.GroovyLangImmutableRule'/>
     <rule class='org.codenarc.rule.groovyism.GStringAsMapKeyRule'/>
     <rule class='org.codenarc.rule.groovyism.UseCollectManyRule'/>

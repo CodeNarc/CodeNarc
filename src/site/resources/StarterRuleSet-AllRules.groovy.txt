@@ -116,6 +116,7 @@ ruleset {
     ForLoopShouldBeWhileLoop
     ForStatementBraces
     GStringAsMapKey
+    GetterMethodCouldBeProperty
     GrailsDomainHasEquals
     GrailsDomainHasToString
     GrailsPublicControllerMethod
@@ -248,7 +249,6 @@ ruleset {
     UnnecessaryNullCheck
     UnnecessaryNullCheckBeforeInstanceOf
     UnnecessaryObjectReferences
-    UnnecessaryOverridingGetter
     UnnecessaryOverridingMethod
     UnnecessaryPackageReference
     UnnecessaryParenthesesForMethodCallWithClosure

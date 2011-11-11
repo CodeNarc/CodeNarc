@@ -11,21 +11,20 @@ NEW FEATURES
 
 NEW AND UPDATED RULES
 - @SuppressWarnings Support - The support for @SuppressWarnings was redesigned so that it is more reliable. @SuppressWarnings no works on *all* rules at the Class, Field, and Method level. 
-- CouldBeElvis rule (basic) - Catch an if block that could be written as an elvis expression.
-- LongLiteralWithLowerCaseL rule (basic) - In Java and Groovy, you can specify long literals with the L or l character, for instance 55L or 24l. It is best practice to always use an uppercase L and never a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
-- ConfusingMultipleReturns rule (basic) - Multiple return values can be used to set several variables at once. To use multiple return values, the left hand side of the assignment must be enclosed in parenthesis. If not, then you are not using multiple return values, you're only assigning the last element.
-- UnnecessaryOverridingGetter rule (unnecessary) - If a parent class defines a method that follows the Java getter notation, and a subclass overrides that method to return a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
+- CouldBeElvis rule (convention) - Catch an if block that could be written as an elvis expression.
+- LongLiteralWithLowerCaseL rule (convention) - In Java and Groovy, you can specify long literals with the L or l character, for instance 55L or 24l. It is best practice to always use an uppercase L and never a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
+- ConfusingMultipleReturns rule (groovyism) - Multiple return values can be used to set several variables at once. To use multiple return values, the left hand side of the assignment must be enclosed in parenthesis. If not, then you are not using multiple return values, you're only assigning the last element.
+- GetterMethodCouldBeProperty rule (groovyism) - If a class defines a public method that follows the Java getter notation, and returns a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
 - UnnecessaryDefInMethodDeclaration rule (unnecessary) - 3176230 - Rule now catches when you try to add the def keyword to constructor declarations. Also expanded to catch more instances of in method declarations with explicit return types. 
 - UnnecessaryDefInFieldDeclaration rule (unnecessary) - If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.
 - UnnecessaryDefInVariableDeclaration rule (unnecessary) - Expanded rule to catch more instances of unneeded defs.
 - UnusedMethodParameter rule (unused) - This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override.
-- UnnecessaryOverridingGetter rule (unnecessary) - 3401516 - Rule now flags methods that return a class literal.
 - BuilderMethodWithSideEffects rule (design) - 3408045 - A builder method is defined as one that creates objects. As such, they should never be of void return type. If a method is named build, create, or make, then it should always return a value.
 - MisorderedStaticImportRule - 3392892 - The rule now allows you to specify that static imports come after the other imports, not just before.  This rule has one property comesBefore, which defaults to true. If you like your static imports to come after the others, then set this property to false.
 - FactoryMethodName rule (naming) - A factory method is a method that creates objects, and they are typically named either buildFoo(), makeFoo(), or createFoo(). This rule enforces that only one naming convention is used. It defaults to makeFoo(), but that can be changed using the property 'regex'.
-- UseCollectMany rule (basic) - 3411722 - In many case collectMany() yields the same result as collect{}.flatten. It is easier to understand and more clearly conveys the intent.
-- CollectAllIsDeprecated rule (basic) - 3411724 - collectAll is deprecated since Groovy 1.8.1. Use collectNested instead
-- UseCollectNested rule (basic) - 3411724 - Instead of nested collect{}-calls use collectNested{}
+- UseCollectMany rule (groovyism) - 3411722 - In many case collectMany() yields the same result as collect{}.flatten. It is easier to understand and more clearly conveys the intent.
+- CollectAllIsDeprecated rule (groovyism) - 3411724 - collectAll is deprecated since Groovy 1.8.1. Use collectNested instead
+- UseCollectNested rule (groovyism) - 3411724 - Instead of nested collect{}-calls use collectNested{}
 - DuplicateMapLiteral (dry) - 3413600 - Check for multiple instances of the same Map literal; limited to Maps where the keys and values are all constants or literals.
 - DuplicateListLiteral (dry) - 3413601 - Check for multiple instances of the same List literal; limited to Lists where the values are all constants or literals.
 

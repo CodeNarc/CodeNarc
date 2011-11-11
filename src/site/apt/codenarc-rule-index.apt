@@ -371,6 +371,8 @@ Rule Index
     
     * {{{codenarc-rules-groovyism.html#GStringAsMapKey}GStringAsMapKey}}
     
+    * {{{codenarc-rules-groovyism.html#GetterMethodCouldBeProperty}GetterMethodCouldBeProperty}}
+    
     * {{{codenarc-rules-groovyism.html#GroovyLangImmutable}GroovyLangImmutable}}
     
     * {{{codenarc-rules-groovyism.html#UseCollectMany}UseCollectMany}}
@@ -621,8 +623,6 @@ Rule Index
     * {{{codenarc-rules-unnecessary.html#UnnecessaryNullCheckBeforeInstanceOf}UnnecessaryNullCheckBeforeInstanceOf}}
     
     * {{{codenarc-rules-unnecessary.html#UnnecessaryObjectReferences}UnnecessaryObjectReferences}}
-    
-    * {{{codenarc-rules-unnecessary.html#UnnecessaryOverridingGetter}UnnecessaryOverridingGetter}}
     
     * {{{codenarc-rules-unnecessary.html#UnnecessaryOverridingMethod}UnnecessaryOverridingMethod}}
     

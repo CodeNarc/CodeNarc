@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.unnecessary
+package org.codenarc.rule.groovyism
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
@@ -27,18 +27,19 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * If a parent class defines a public method that follows the Java getter notation, and a subclass overrides that method to
- * return a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
+ * If a class defines a public method that follows the Java getter notation and returns a constant,
+ * then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
  *
  * @author Hamlet D'Arcy
  */
-class UnnecessaryOverridingGetterRule extends AbstractAstVisitorRule {
-    String name = 'UnnecessaryOverridingGetter'
+class GetterMethodCouldBePropertyRule extends AbstractAstVisitorRule {
+
+    String name = 'GetterMethodCouldBeProperty'
     int priority = 3
-    Class astVisitorClass = UnnecessaryOverridingGetterAstVisitor
+    Class astVisitorClass = GetterMethodCouldBePropertyAstVisitor
 }
 
-class UnnecessaryOverridingGetterAstVisitor extends AbstractAstVisitor {
+class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
     private staticFieldNames = []
 
