@@ -46,8 +46,58 @@ BUG FIXES
 - #3387422: ClosureAsLastMethodParameter - false positive
 
 BREAKING CHANGES
-*** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors.
 *** The HardcodedWindowsRootDirectory has been renamed to HardCodedWindowsRootDirectory. (#3433741)
+*** Major Reorganization of the "Basic" RuleSet. (#3432475)
+  This included moving several rules from the "Basic" ruleset to other rulesets, as well as adding two new rulesets:
+      1. "Groovyism" – Groovy idiomatic usage, and Groovy-specific bad practices
+      2. "Convention" – Coding conventions; not typically errors.
+
+  The following rules were moved out of the "Basic" ruleset:
+     - AddEmptyString                      (unnecessary)
+     - AssignCollectionSort                (groovyism)
+     - AssignCollectionUnique              (groovyism)
+     - BooleanMethodReturnsNull            (design)
+     - CloneableWithoutClone               (design)
+     - ClosureAsLastMethodParameter        (groovyism)
+     - CollectAllIsDeprecated              (groovyism)
+     - CompareToWithoutComparable          (design)
+     - ConfusingMultipleReturns            (groovyism)
+     - ConfusingTernary                    (convention)
+     - ConsecutiveLiteralAppends           (unnecessary)
+     - ConsecutiveStringConcatenation      (unnecessary)
+     - CouldBeElvis                        (convention)
+     - ExplicitArrayListInstantiation      (groovyism)
+     - ExplicitCallToAndMethod             (groovyism)
+     - ExplicitCallToCompareToMethod       (groovyism)
+     - ExplicitCallToDivMethod             (groovyism)
+     - ExplicitCallToEqualsMethod          (groovyism)
+     - ExplicitCallToGetAtMethod           (groovyism)
+     - ExplicitCallToLeftShiftMethod       (groovyism)
+     - ExplicitCallToMinusMethod           (groovyism)
+     - ExplicitCallToModMethod             (groovyism)
+     - ExplicitCallToMultiplyMethod        (groovyism)
+     - ExplicitCallToOrMethod              (groovyism)
+     - ExplicitCallToPlusMethod            (groovyism)
+     - ExplicitCallToPowerMethod           (groovyism)
+     - ExplicitCallToRightShiftMethod      (groovyism)
+     - ExplicitCallToXorMethod             (groovyism)
+     - ExplicitHashMapInstantiation        (groovyism)
+     - ExplicitHashSetInstantiation        (groovyism)
+     - ExplicitLinkedHashMapInstantiation  (groovyism)
+     - ExplicitLinkedListInstantiation     (groovyism)
+     - ExplicitStackInstantiation          (groovyism)
+     - ExplicitTreeSetInstantiation        (groovyism)
+     - GStringAsMapKey                     (groovyism)
+     - GroovyLangImmutable                 (groovyism)
+     - InvertedIfElse                      (convention)
+     - LongLiteralWithLowerCaseL           (convention)
+     - ReturnsNullInsteadOfEmptyArray      (design)
+     - ReturnsNullInsteadOfEmptyCollection (design)
+     - SimpleDateFormatMissingLocale       (design)
+     - UseCollectMany                      (groovyism)
+     - UseCollectNested                    (groovyism)
+  The ruleset parser classes have been modified to print a helpful error message for moved and renamed rules (see MovedRules helper class).
+*** In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors.
 
 THANKS
 - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.
