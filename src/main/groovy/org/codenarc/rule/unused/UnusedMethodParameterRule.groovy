@@ -62,7 +62,7 @@ class UnusedMethodParameterAstVisitor extends AbstractMethodVisitor {
 
     private static boolean isMainMethod(MethodNode node) {
         AstUtil.isMethodNode(node, 'main', 1) &&
-            (node.parameters[0].dynamicTyped || node.parameters[0].type.name == 'String[]') &&
+            (node.parameters[0].dynamicTyped || node.parameters[0].type.name in ['String[]', '[Ljava.lang.String;']) &&
             (node.isVoidMethod() || node.dynamicReturnType) &&
             node.isStatic()
     }
