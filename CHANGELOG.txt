@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.16.1 (November 2011)
+-------------------------------------------
+- Fix #3436461: StackOverflowError when running CodeNarc with a Groovy 1.8 runtime. Use ClassCodeVisitorSupportHack for all AstVisitor classes.
+  This is a workaround for a known groovy issue: http://jira.codehaus.org/browse/GROOVY-4922
+
+
 Changes in version 0.16 (November 2011)
 -------------------------------------------
 NEW FEATURES
