@@ -123,12 +123,12 @@ public abstract class AbstractAstVisitorRule extends AbstractRule {
         String applyTo = getApplyToClassNames();
         String doNotApplyTo = getDoNotApplyToClassNames();
 
-        if (applyTo != null  && !applyTo.isEmpty()) {
+        if (applyTo != null  && applyTo.length() > 0) {
             WildcardPattern pattern = new WildcardPattern(applyTo, true);
             shouldApply = pattern.matches(classNode.getNameWithoutPackage()) || pattern.matches(classNode.getName());
         }
 
-        if (shouldApply && doNotApplyTo != null && !doNotApplyTo.isEmpty()) {
+        if (shouldApply && doNotApplyTo != null && doNotApplyTo.length() > 0) {
             WildcardPattern pattern = new WildcardPattern(doNotApplyTo, true);
             shouldApply = !pattern.matches(classNode.getNameWithoutPackage()) && !pattern.matches(classNode.getName());
         }
