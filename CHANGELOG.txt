@@ -6,6 +6,7 @@ Changes in version 0.17 (??? 2012)
 -------------------------------------------
 BUG FIXES
 - #3463408: Remove dependency on Java 1.6 (String.isEmpty()).
+- #3475170: Fix duplicate violations for SimpleDateFormatMissingLocale.
 
 
 Changes in version 0.16.1 (November 2011)

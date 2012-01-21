@@ -25,6 +25,8 @@ import org.codenarc.rule.Rule
  */
 class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
 
+    private static final VIOLATION_MESSAGE = 'Created an instance of SimpleDateFormat without specifying a Locale'
+
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SimpleDateFormatMissingLocale'
@@ -45,14 +47,23 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             new SimpleDateFormat('pattern')
         '''
-        assertSingleViolation(SOURCE, 2, "new SimpleDateFormat('pattern')", 'Created an instance of SimpleDateFormat without specifying a Locale')
+        assertSingleViolation(SOURCE, 2, "new SimpleDateFormat('pattern')", VIOLATION_MESSAGE)
     }
 
     void testMissingLocaleFullyQualified() {
         final SOURCE = '''
             new java.text.SimpleDateFormat('pattern')
         '''
-        assertSingleViolation(SOURCE, 2, "new java.text.SimpleDateFormat('pattern')", 'Created an instance of SimpleDateFormat without specifying a Locale')
+        assertSingleViolation(SOURCE, 2, "new java.text.SimpleDateFormat('pattern')", VIOLATION_MESSAGE)
+    }
+
+    void testMissingLocale_NoDuplicateViolation() {
+        final SOURCE = '''
+            class CalendarUtil {
+                static FORMAT = new SimpleDateFormat('MM/dd/YYYY')
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, "new SimpleDateFormat('MM/dd/YYYY')", VIOLATION_MESSAGE)
     }
 
     protected Rule createRule() {

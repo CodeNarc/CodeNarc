@@ -38,7 +38,7 @@ class SimpleDateFormatMissingLocaleAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
 
-        if (call.type.name == 'SimpleDateFormat' || call.type.name == 'java.text.SimpleDateFormat') {
+        if (isFirstVisit(call) && call.type.name in ['SimpleDateFormat', 'java.text.SimpleDateFormat']) {
             if (!hasMinimumParameterCount(call, 2)) {
                 addViolation(call, 'Created an instance of SimpleDateFormat without specifying a Locale')
             }
