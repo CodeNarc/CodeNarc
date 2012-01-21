@@ -38,7 +38,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
                 InputStream input
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'import java.io.OutputStream')
+        assertSingleViolation(SOURCE, 3, 'import java.io.OutputStream', 'The [java.io.OutputStream] import is never referenced')
     }
 
     void testApplyTo_TwoViolations() {
@@ -50,7 +50,9 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
                 Map map
             }
         '''
-        assertTwoViolations(SOURCE, 2, 'import java.io.InputStream', 4, 'import java.io.OutputStream')
+        assertTwoViolations(SOURCE,
+            2, 'import java.io.InputStream', 'The [java.io.InputStream] import is never referenced',
+            4, 'import java.io.OutputStream', 'The [java.io.OutputStream] import is never referenced')
     }
 
     void testApplyTo_OnlyFullyQualifiedClassNameReferenced() {
@@ -63,7 +65,9 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
                 def info = f.g.ThirdClass.name + ":" + TC.metaClass.name
             }
         '''
-        assertTwoViolations(SOURCE, 2, 'import a.b.SomeClass', 3, 'import d.e.OtherClass as OC')
+        assertTwoViolations(SOURCE,
+            2, 'import a.b.SomeClass', 'The [a.b.SomeClass] import is never referenced',
+            3, 'import d.e.OtherClass as OC', 'The [d.e.OtherClass] import is never referenced')
     }
 
     void testApplyTo_UnusedStaticImportConstant() {
@@ -73,7 +77,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
                 def name
             }
         '''
-        assertSingleViolation(SOURCE, 2, 'import static Math.PI')
+        assertSingleViolation(SOURCE, 2, 'import static Math.PI', 'The [Math] import is never referenced')
     }
 
     void testApplyTo_UnusedImport_WithSemicolon() {
@@ -88,7 +92,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 2, 'import com.example.MyService')
+        assertSingleViolation(SOURCE, 2, 'import com.example.MyService', 'The [com.example.MyService] import is never referenced')
     }
 
     void testApplyTo_SimilarlyNamedImports() {
@@ -104,7 +108,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'import com.example.Fault')
+        assertSingleViolation(SOURCE, 3, 'import com.example.Fault', 'The [com.example.Fault] import is never referenced')
     }
 
     void testApplyTo_UnusedImportWildcard() {

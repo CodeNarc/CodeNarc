@@ -254,15 +254,16 @@ public abstract class AbstractRule implements Rule {
      * @param sourceCode - the SourceCode
      * @param className - the class name (as specified within the import statement)
      * @param alias - the alias for the import statement
+     * @param violationMessage - the violation message; may be null
      * @return a new Violation object
      */
-    @Deprecated // should assign a message
-    protected Violation createViolationForImport(SourceCode sourceCode, String className, String alias) {
+    protected Violation createViolationForImport(SourceCode sourceCode, String className, String alias, String violationMessage) {
         Map importInfo = ImportUtil.sourceLineAndNumberForImport(sourceCode, className, alias);
         Violation violation = new Violation();
         violation.setRule(this);
         violation.setSourceLine((String) importInfo.get("sourceLine"));
         violation.setLineNumber((Integer) importInfo.get("lineNumber"));
+        violation.setMessage(violationMessage);
         return violation;
     }
 
