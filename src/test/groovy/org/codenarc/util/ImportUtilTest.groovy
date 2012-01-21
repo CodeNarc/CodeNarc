@@ -31,6 +31,8 @@ class ImportUtilTest extends AbstractTestCase {
             import a.b.MyClass as Boo
             // some comment
             import a.pkg1.MyOtherClass as MOC
+            import a.b.MyOtherClass;
+            import a.b.MyOtherClass as Moo;
         '''
         def sourceCode = new SourceString(SOURCE)
         def ast = sourceCode.ast
@@ -38,6 +40,8 @@ class ImportUtilTest extends AbstractTestCase {
         assertImport(sourceCode, ast, [sourceLine:'import a.b.MyClass', lineNumber:2])
         assertImport(sourceCode, ast, [sourceLine:'import a.b.MyClass as Boo', lineNumber:3])
         assertImport(sourceCode, ast, [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5])
+        assertImport(sourceCode, ast, [sourceLine:'import a.b.MyOtherClass;', lineNumber:6])
+        assertImport(sourceCode, ast, [sourceLine:'import a.b.MyOtherClass as Moo;', lineNumber:7])
 
         // Not found
         def otherSourceCode = new SourceString('def v = 1')
@@ -84,10 +88,14 @@ class ImportUtilTest extends AbstractTestCase {
             [sourceLine:'import com.example.Fault', lineNumber:4]
     }
 
-    private void assertImport(sourceCode, ast, Map importInfo) {
+    private void assertImport(sourceCode, ast, Map expectedImportInfo) {
         assert ast.imports.find { imp ->
-            ImportUtil.sourceLineAndNumberForImport(sourceCode, imp) == importInfo
-        }
+            def importInfo = ImportUtil.sourceLineAndNumberForImport(sourceCode, imp)
+            if (importInfo.lineNumber == expectedImportInfo.lineNumber) {
+                log(importInfo)
+            }
+            importInfo == expectedImportInfo
+        }, expectedImportInfo.toString()
     }
 
     private void assertStaticImport(sourceCode, ast, Map importInfo) {

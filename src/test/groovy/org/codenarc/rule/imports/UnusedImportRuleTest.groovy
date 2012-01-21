@@ -76,6 +76,21 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'import static Math.PI')
     }
 
+    void testApplyTo_UnusedImport_WithSemicolon() {
+        final SOURCE = '''
+            import com.example.MyService;
+            import com.example.test.AbstractTestCase;
+
+            abstract class AbstractMyProfileTestCase extends AbstractTestCase {
+
+                protected void assertEmailAddress(EmailPreference emailPref) {
+                    assert emailPref.emailAddress
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'import com.example.MyService')
+    }
+
     void testApplyTo_SimilarlyNamedImports() {
         final SOURCE = '''
             import static com.example.FaultCode.*
