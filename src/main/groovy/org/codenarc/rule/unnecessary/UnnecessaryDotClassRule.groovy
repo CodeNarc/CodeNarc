@@ -36,13 +36,12 @@ class UnnecessaryDotClassAstVisitor extends AbstractAstVisitor {
     @Override
     void visitPropertyExpression(PropertyExpression expression) {
 
-        if (AstUtil.isConstant(expression.property, 'class')) {
+        if (isFirstVisit(expression) && AstUtil.isConstant(expression.property, 'class')) {
             if (AstUtil.isVariable(expression.objectExpression, '[A-Z].*')) {
                 addViolation(expression, "${expression.objectExpression.name}.class can be rewritten as $expression.objectExpression.name")
             }
         }
         super.visitPropertyExpression(expression)
     }
-
 
 }

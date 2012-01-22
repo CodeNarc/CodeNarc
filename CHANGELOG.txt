@@ -8,6 +8,7 @@ BUG FIXES
 - #3463408: Remove dependency on Java 1.6 (String.isEmpty()).
 - #3475170: Fix duplicate violations for SimpleDateFormatMissingLocale.
 - #3477085. Fix UnusedImport violations missing line numbers for imports with semicolons.
+- #3477162: Fix duplicate violations for UnnecessaryDotClass.
 
 
 Changes in version 0.16.1 (November 2011)
