@@ -287,8 +287,22 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   <Since CodeNarc 0.11>
 
   This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's
-  <<<public>>>, has an empty body, and takes no arguments.
+  <<<public>>>, has an empty body, and takes no arguments, or else contains only a single call to <<<super()>>>.
 
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        public MyClass() {          // violation; constructor is not necessary
+        }
+    }
+
+    class MyClass2 extends OtherClass {
+        MyClass2() {                // violation; constructor is not necessary
+            super()
+        }
+    }
+-------------------------------------------------------------------------------
 
 
 * {UnnecessaryDefInFieldDeclaration} Rule

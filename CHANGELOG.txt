@@ -12,6 +12,7 @@ BUG FIXES
 
 NEW AND UPDATED RULES
 - #3476844: Extend GetterMethodCouldBeProperty to also check static getter methods.
+- #3477351: UnnecessaryConstructor: Also catch constructor containing only call to super().
 
 
 Changes in version 0.16.1 (November 2011)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryConstructorRule
  *
  * @author 'Tomasz Bujok'
+ * @author Chris Mair
   */
 class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
 
@@ -30,7 +31,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnnecessaryConstructor'
     }
 
-    void testSuccessScenario() {
+    void testConstructors_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 public MyClass() {}
@@ -55,6 +56,54 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 3, 'public MyClass() {}')
+    }
+
+    void testConstructor_CallsOnlySuper_Violation() {
+        final SOURCE = '''
+            class MyClass extends OtherClass {
+                MyClass() {
+                    super()
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'MyClass() {')
+    }
+
+    void testConstructor_CallsSuperAndDoesOtherStuff_NoViolation() {
+        final SOURCE = '''
+            class MyClass extends OtherClass {
+                MyClass() {
+                    super()
+                    doSomethingElse()
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testConstructor_CallsThis_NoViolation() {
+        final SOURCE = '''
+            class MyClass extends OtherClass {
+                MyClass() {
+                    this('abc')
+                }
+                private MyClass(String name) {
+                    println name
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testConstructor_NotEmpty_NoViolation() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass() {
+                    println 123
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     void testInnerClass() {
