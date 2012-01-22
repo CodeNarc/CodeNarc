@@ -9,6 +9,7 @@ BUG FIXES
 - #3475170: Fix duplicate violations for SimpleDateFormatMissingLocale.
 - #3477085. Fix UnusedImport violations missing line numbers for imports with semicolons.
 - #3477162: Fix duplicate violations for UnnecessaryDotClass.
+- #3476844: Extend GetterMethodCouldBeProperty to also check static getter methods.
 
 
 Changes in version 0.16.1 (November 2011)

@@ -156,6 +156,20 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
     }
 
+    void testStaticGetterMethod() {
+        final SOURCE = '''
+            class MyClass {
+                static VALUE = 'value'
+                static String getValue() {
+                    VALUE       // this could be simplified
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4,
+            'static String getValue()',
+            "The method 'getValue ' in class MyClass can be expressed more simply as the field declaration\nstatic final String value = VALUE")
+    }
+
     protected Rule createRule() {
         new GetterMethodCouldBePropertyRule()
     }

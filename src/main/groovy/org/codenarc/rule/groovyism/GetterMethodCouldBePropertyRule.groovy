@@ -31,6 +31,7 @@ import org.codenarc.util.AstUtil
  * then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class GetterMethodCouldBePropertyRule extends AbstractAstVisitorRule {
 
@@ -57,7 +58,7 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodEx(MethodNode node) {
-        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && node.isPublic() && !node.isStatic() && AstUtil.isOneLiner(node.code)) {
+        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && node.isPublic() && AstUtil.isOneLiner(node.code)) {
 
             def statement = node.code.statements[0]
             if (statement instanceof ExpressionStatement) {
@@ -85,9 +86,10 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
         def constant = node.code.statements[0].expression
         def methodName = node.name
         def methodType = node.returnType.nameWithoutPackage
+        def staticModifier = node.isStatic() ? 'static ' : ''
         def propertyName = node.name[3].toLowerCase() + (node.name.length() == 4 ? '' : node.name[4..-1])
 
-        def constantValue = null
+        def constantValue
         if (constant instanceof ConstantExpression) {
             constantValue = constant.value instanceof String ? "'" + constant.value + "'" : constant.value
         } else if (constant instanceof ClassExpression) {
@@ -99,6 +101,6 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
         }
 
         "The method '$methodName ' in class $currentClassName can be expressed more simply as the field declaration\n" +
-            "final $methodType $propertyName = $constantValue"
+            "${staticModifier}final $methodType $propertyName = $constantValue"
     }
 }

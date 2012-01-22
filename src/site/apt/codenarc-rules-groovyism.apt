@@ -367,6 +367,10 @@ def (f, g) = [1, 2]    // ok
         int getOtherValue() {
             123
         }
+
+        static String getName() {
+            'MyName'
+        }
     }
 
     class Child2 extends Parent {
@@ -374,6 +378,7 @@ def (f, g) = [1, 2]    // ok
         final String something = 'something'    // this is cleaner
         final String somethingElse = VALUE      // this is cleaner
         final int otherValue = 123              // this is cleaner
+        static final String name = 'MyName'     // this is cleaner
     }
 -------------------------------------------------------------------------------
 
