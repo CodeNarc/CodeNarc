@@ -16,17 +16,12 @@
 package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.PropertyNode
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codenarc.rule.AbstractAstVisitor
+
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
-import org.codenarc.util.AstUtil
+
 import org.codenarc.util.WildcardPattern
+import org.codenarc.rule.FieldReferenceAstVisitor
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
@@ -51,15 +46,15 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
 
         def allPrivateFields = collectAllPrivateFields(ast)
 
-        def visitor = new UnusedPrivateFieldAstVisitor(unusedPrivateFields: allPrivateFields)
+        def visitor = new FieldReferenceAstVisitor(allPrivateFields)
         visitor.rule = this
         ast.classes.each { classNode ->
             visitor.visitClass(classNode)
         }
         visitor.sourceCode = sourceCode
 
-        allPrivateFields.each { key, FieldNode value ->
-            visitor.addViolation(value, "The field $key is not used within the class ${value.owner?.name}")
+        visitor.unreferencedFields.each { FieldNode fieldNode ->
+            visitor.addViolation(fieldNode, "The field ${fieldNode.name} is not used within the class ${fieldNode.owner?.name}")
         }
         def filteredViolations = sourceCode.suppressionAnalyzer.filterSuppressedViolations(visitor.violations)
         violations.addAll(filteredViolations)
@@ -67,7 +62,7 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
 
     @SuppressWarnings('NestedBlockDepth')
     private collectAllPrivateFields(ast) {
-        def allPrivateFields = [:]
+        def allPrivateFields = []
         ast.classes.each { classNode ->
             if (shouldApplyThisRuleTo(classNode)) {
                 classNode.fields.inject(allPrivateFields) { acc, fieldNode ->
@@ -76,7 +71,7 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
                     def isNotGenerated = fieldNode.lineNumber != -1
                     def isIgnored = wildcardPattern.matches(fieldNode.name)
                     if (isPrivate && isNotGenerated && !isIgnored) {
-                        acc.put(fieldNode.name, fieldNode)
+                        acc << fieldNode
                     }
                     acc
                 }
@@ -86,68 +81,3 @@ class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
     }
 }
 
-@SuppressWarnings('DuplicateLiteral')
-class UnusedPrivateFieldAstVisitor extends AbstractAstVisitor {
-    private Map<String, FieldNode> unusedPrivateFields
-
-    void visitVariableExpression(VariableExpression expression) {
-        unusedPrivateFields.remove(expression.name)
-
-        // This causes problems (StackOverflow) in Groovy 1.7.0
-        //super.visitVariableExpression(expression)
-    }
-
-    void visitProperty(PropertyNode node) {
-        unusedPrivateFields.remove(node.name)
-        super.visitProperty(node)
-    }
-
-    void visitPropertyExpression(PropertyExpression expression) {
-        if (expression.objectExpression instanceof VariableExpression &&
-            expression.objectExpression.name in ['this', currentClassNode.nameWithoutPackage] &&
-            expression.property instanceof ConstantExpression) {
-
-            unusedPrivateFields.remove(expression.property.value)
-        } else if (expression.objectExpression instanceof PropertyExpression &&
-            expression.objectExpression.objectExpression instanceof VariableExpression &&
-            expression.objectExpression.property instanceof ConstantExpression &&
-            expression.objectExpression.objectExpression.name  == currentClassNode.outerClass?.name &&
-            expression.objectExpression.property.value == 'this' ) {
-
-            unusedPrivateFields.remove(expression.property.value)
-        }
-        super.visitPropertyExpression(expression)
-    }
-
-    void visitMethodEx(MethodNode node) {
-        if (node.parameters) {
-            node.parameters.each { parameter ->
-                def initialExpression = parameter.initialExpression
-                if (initialExpression && AstUtil.respondsTo(initialExpression, 'getName')) {
-                    unusedPrivateFields.remove(initialExpression.name)
-                }
-            }
-        }
-        super.visitMethodEx(node)
-    }
-
-    void visitMethodCallExpression(MethodCallExpression call) {
-        // If there happens to be a method call on a method with the same name as the field.
-        // This handles the case of defining a closure and then executing it, e.g.:
-        //      private myClosure = { println 'ok' }
-        //      ...
-        //      myClosure()
-        // But this could potentially "hide" some unused fields (i.e. false negatives).
-        if (AstUtil.isMethodCallOnObject(call, 'this') && call.method instanceof ConstantExpression) {
-            unusedPrivateFields.remove(call.method.value)
-        } else if (call.objectExpression instanceof PropertyExpression &&
-            call.objectExpression.objectExpression instanceof VariableExpression &&
-            call.objectExpression.property instanceof ConstantExpression &&
-            call.method instanceof ConstantExpression &&
-            call.objectExpression.objectExpression.name == currentClassNode.outerClass?.name &&
-            call.objectExpression.property.value == 'this') {
-            unusedPrivateFields.remove(call.method.value)
-        }
-        super.visitMethodCallExpression(call)
-    }
-}
