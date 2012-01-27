@@ -32,12 +32,11 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'PrivateFieldCouldBeFinal'
     }
 
-    // TODO set within initializer and closure field
     // TODO set within initializer and inner class method
+    // TODO set within initializer and incremented (++) in method
+    // TODO set within initializer and += or *= in method
     // TODO set within initializer and anonymous inner class assigned to field
     // TODO set within initializer and anonymous inner class within method
-    // TODO set within initializer and referenced within method but not set
-    // TODO set within initializer and compared within method (<) but not set
 
     void testApplyTo_NonPrivateField_OnlySetWithinInitializer_NoViolations() {
         final SOURCE = '''
@@ -56,6 +55,16 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
                 void initialize() {
                     count = 1
                 }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_PrivateFieldSetWithinClosure_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private int count = 11
+                def myClosure = { count = 1 }
             }
         '''
         assertNoViolations(SOURCE)
@@ -113,6 +122,30 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
                 private int count = 0
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
+    }
+
+    void testApplyTo_PrivateField_ComparedWithinMethodButNotSet_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                private int count = 0
+                boolean hasCount() {
+                    count > 0
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
+    }
+
+    void testApplyTo_PrivateField_ReferencedWithinMethodButNotSet_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                private int count = 0
+                void printCount() {
+                    println count
+                }
             }
         '''
         assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
@@ -201,6 +234,20 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
     }
+
+//    void testApplyTo_PrivateField_ReferencedWithinInnerClass_NoViolations() {
+//        final SOURCE = '''
+//            class MyClass {
+//                private int count = 0
+//                class MyInnerClass {
+//                    def doStuff() {
+//                        count = count + 5
+//                    }
+//                }
+//            }
+//        '''
+//        assertNoViolations(SOURCE)
+//    }
 
     protected Rule createRule() {
         new PrivateFieldCouldBeFinalRule()

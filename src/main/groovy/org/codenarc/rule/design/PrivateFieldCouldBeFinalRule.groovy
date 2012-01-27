@@ -86,7 +86,8 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
                 matchingFieldName = propertyExpression.property.value
             }
         }
-        if (matchingFieldName) {
+        boolean isAssignment = expression.operation.text == '='
+        if (isAssignment && matchingFieldName) {
             if (withinConstructor) {
                 addInitializedField(matchingFieldName)
             }
