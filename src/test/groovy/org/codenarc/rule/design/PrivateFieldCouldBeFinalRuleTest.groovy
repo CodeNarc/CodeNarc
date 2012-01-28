@@ -32,12 +32,6 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'PrivateFieldCouldBeFinal'
     }
 
-    // TODO set within initializer and inner class method
-    // TODO set within initializer and incremented (++) in method
-    // TODO set within initializer and += or *= in method
-    // TODO set within initializer and anonymous inner class assigned to field
-    // TODO set within initializer and anonymous inner class within method
-
     void testApplyTo_NonPrivateField_OnlySetWithinInitializer_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -85,6 +79,29 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
                 private int count = 99
                 void initialize() {
                     count = 1
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_PrivateField_AssignedUsingOtherOperators_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private value1 = 0
+                private value2 = 3
+                private value3 = 2
+                private value4 = 0
+                private value5 = 0
+                private value6 = 0
+
+                void initialize() {
+                    value1 += 2
+                    value2 *= 3
+                    value3 |= 1
+                    value4++
+                    value5--
+                    ++value6
                 }
             }
         '''
@@ -227,27 +244,45 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
                 private int count = 0
+                private other = 'abc'
             }
             class MyOtherClass {
                 int defaultCount = count
+                int other = 123
+                void init() { other = 456 }
             }
         '''
+        // Should also get a violation for other from MyClass, but that is "overshadowed" by other in MyOtherClass
         assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
     }
 
-//    void testApplyTo_PrivateField_ReferencedWithinInnerClass_NoViolations() {
-//        final SOURCE = '''
-//            class MyClass {
-//                private int count = 0
-//                class MyInnerClass {
-//                    def doStuff() {
-//                        count = count + 5
-//                    }
-//                }
-//            }
-//        '''
-//        assertNoViolations(SOURCE)
-//    }
+    void testApplyTo_PrivateField_ReferencedWithinInnerClass_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private int count = 0
+                class MyInnerClass {
+                    def doStuff() {
+                        count = count + 5
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_PrivateField_ReferencedWithinAnonymousInnerClass_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private int count = 0
+                def runnable = new Runnable() {
+                    void run() {
+                        count = count + 5
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
 
     protected Rule createRule() {
         new PrivateFieldCouldBeFinalRule()
