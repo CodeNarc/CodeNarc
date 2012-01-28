@@ -28,6 +28,9 @@ import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.expr.PrefixExpression
 import org.codehaus.groovy.ast.expr.PostfixExpression
+import org.codenarc.util.WildcardPattern
+import org.codenarc.rule.Violation
+import org.codenarc.rule.AstVisitor
 
 /**
  * Rule that checks for private fields that are only set within a constructor or field initializer.
@@ -39,27 +42,40 @@ class PrivateFieldCouldBeFinalRule extends AbstractAstVisitorRule {
 
     String name = 'PrivateFieldCouldBeFinal'
     int priority = 2
-//    String ignoreFieldNames = 'serialVersionUID'
+    String ignoreFieldNames
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-        // If AST is null, skip this source code
-        def ast = sourceCode.ast
-        if (!ast) { return }
+        if (!sourceCode.valid) { return }
 
         def visitor = new PrivateFieldCouldBeFinalAstVisitor()
+        applyVisitor(visitor, sourceCode)
+        List<Violation> visitorViolations = getValidViolations(visitor, sourceCode)
+        violations.addAll(visitorViolations)
+    }
+
+    private void applyVisitor(AstVisitor visitor, SourceCode sourceCode) {
         visitor.rule = this
         visitor.sourceCode = sourceCode
-        ast.classes.each { classNode ->
-            visitor.visitClass(classNode)
+        sourceCode.ast.classes.each { classNode ->
+            if (shouldApplyThisRuleTo(classNode)) {
+                visitor.visitClass(classNode)
+            }
         }
+    }
+
+    private List<Violation> getValidViolations(PrivateFieldCouldBeFinalAstVisitor visitor, SourceCode sourceCode) {
+        def wildcardPattern = new WildcardPattern(ignoreFieldNames, false)
 
         visitor.initializedFields.each { FieldNode fieldNode ->
-            def violationMessage = "Private field [${fieldNode.name}] is only set within the field initializer or a constructor, and so it can be made private."
-             visitor.addViolation(fieldNode, violationMessage)
+            def isIgnored = wildcardPattern.matches(fieldNode.name)
+            if (!isIgnored) {
+                def violationMessage = "Private field [${fieldNode.name}] is only set within the field initializer or a constructor, and so it can be made private."
+                visitor.addViolation(fieldNode, violationMessage)
+            }
         }
         def filteredViolations = sourceCode.suppressionAnalyzer.filterSuppressedViolations(visitor.violations)
-        violations.addAll(filteredViolations)
+        return filteredViolations
     }
 }
 
@@ -87,19 +103,7 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-        def matchingFieldName
-        if (expression.leftExpression instanceof VariableExpression) {
-            matchingFieldName = expression.leftExpression.name
-        }
-        if (expression.leftExpression instanceof PropertyExpression) {
-            def propertyExpression = expression.leftExpression
-            boolean isMatchingPropertyExpression = propertyExpression.objectExpression instanceof VariableExpression &&
-                    propertyExpression.objectExpression.name == 'this' &&
-                    propertyExpression.property instanceof ConstantExpression
-            if (isMatchingPropertyExpression) {
-                matchingFieldName = propertyExpression.property.value
-            }
-        }
+        def matchingFieldName = extractVariableOrFieldName(expression)
         boolean isAssignment = expression.operation.text.endsWith('=')
         if (isAssignment && matchingFieldName) {
             if (withinConstructor) {
@@ -111,6 +115,23 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
         }
 
         super.visitBinaryExpression(expression)
+    }
+
+    private String extractVariableOrFieldName(BinaryExpression expression) {
+        def matchingFieldName
+        if (expression.leftExpression instanceof VariableExpression) {
+            matchingFieldName = expression.leftExpression.name
+        }
+        if (expression.leftExpression instanceof PropertyExpression) {
+            def propertyExpression = expression.leftExpression
+            boolean isMatchingPropertyExpression = propertyExpression.objectExpression instanceof VariableExpression &&
+                propertyExpression.objectExpression.name == 'this' &&
+                propertyExpression.property instanceof ConstantExpression
+            if (isMatchingPropertyExpression) {
+                matchingFieldName = propertyExpression.property.value
+            }
+        }
+        return matchingFieldName
     }
 
     @Override

@@ -284,6 +284,37 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoreFieldNames_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private int count = 0
+                private int other = 0
+            }
+        '''
+        rule.ignoreFieldNames = 'count, xxx, ot*r'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_DoNotApplyToClassNames_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private int count = 0
+            }
+        '''
+        rule.doNotApplyToClassNames = 'MyClass'
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_SuppressWarningsOnClass_NoViolations() {
+        final SOURCE = '''
+            @SuppressWarnings('PrivateFieldCouldBeFinal')
+            class MyClass {
+                private int count = 0
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new PrivateFieldCouldBeFinalRule()
     }
