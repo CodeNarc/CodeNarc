@@ -15,22 +15,17 @@
  */
  package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.ConstructorNode
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codenarc.source.SourceCode
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
-import org.codehaus.groovy.ast.expr.PrefixExpression
-import org.codehaus.groovy.ast.expr.PostfixExpression
-import org.codenarc.util.WildcardPattern
-import org.codenarc.rule.Violation
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractSharedAstVisitorRule
 import org.codenarc.rule.AstVisitor
+import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
+import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Rule that checks for private fields that are only set within a constructor or field initializer.
@@ -38,33 +33,15 @@ import org.codenarc.rule.AstVisitor
  *
  * @author Chris Mair
  */
-class PrivateFieldCouldBeFinalRule extends AbstractAstVisitorRule {
+class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
 
     String name = 'PrivateFieldCouldBeFinal'
     int priority = 2
     String ignoreFieldNames
+    Class astVisitorClass = PrivateFieldCouldBeFinalAstVisitor
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
-        if (!sourceCode.valid) { return }
-
-        def visitor = new PrivateFieldCouldBeFinalAstVisitor()
-        applyVisitor(visitor, sourceCode)
-        List<Violation> visitorViolations = getValidViolations(visitor, sourceCode)
-        violations.addAll(visitorViolations)
-    }
-
-    private void applyVisitor(AstVisitor visitor, SourceCode sourceCode) {
-        visitor.rule = this
-        visitor.sourceCode = sourceCode
-        sourceCode.ast.classes.each { classNode ->
-            if (shouldApplyThisRuleTo(classNode)) {
-                visitor.visitClass(classNode)
-            }
-        }
-    }
-
-    private List<Violation> getValidViolations(PrivateFieldCouldBeFinalAstVisitor visitor, SourceCode sourceCode) {
+    protected List<Violation> getViolations(AstVisitor visitor, SourceCode sourceCode) {
         def wildcardPattern = new WildcardPattern(ignoreFieldNames, false)
 
         visitor.initializedFields.each { FieldNode fieldNode ->
@@ -74,8 +51,7 @@ class PrivateFieldCouldBeFinalRule extends AbstractAstVisitorRule {
                 visitor.addViolation(fieldNode, violationMessage)
             }
         }
-        def filteredViolations = sourceCode.suppressionAnalyzer.filterSuppressedViolations(visitor.violations)
-        return filteredViolations
+        return visitor.violations
     }
 }
 
@@ -87,7 +63,7 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
-        def allClassFields = node.getFields().findAll { field -> isPrivate(field) && !field.isFinal() && !field.synthetic }
+        def allClassFields = node.fields.findAll { field -> isPrivate(field) && !field.isFinal() && !field.synthetic }
         allFields.addAll(allClassFields)
         def initializedClassFields = allClassFields.findAll { field -> field.initialExpression }
         initializedFields.addAll(initializedClassFields)
@@ -117,6 +93,21 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
         super.visitBinaryExpression(expression)
     }
 
+    @Override
+    void visitExpressionStatement(ExpressionStatement statement) {
+        if (statement.expression instanceof PrefixExpression || statement.expression instanceof PostfixExpression) {
+            if (statement.expression.expression instanceof VariableExpression) {
+                def varName = statement.expression.expression.name
+                removeInitializedField(varName)
+            }
+        }
+        super.visitExpressionStatement(statement)
+    }
+
+    //------------------------------------------------------------------------------------
+    // Helper Methods
+    //------------------------------------------------------------------------------------
+
     private String extractVariableOrFieldName(BinaryExpression expression) {
         def matchingFieldName
         if (expression.leftExpression instanceof VariableExpression) {
@@ -133,21 +124,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
         }
         return matchingFieldName
     }
-
-    @Override
-    void visitExpressionStatement(ExpressionStatement statement) {
-        if (statement.expression instanceof PrefixExpression || statement.expression instanceof PostfixExpression) {
-            if (statement.expression.expression instanceof VariableExpression) {
-                def varName = statement.expression.expression.name
-                removeInitializedField(varName)
-            }
-        }
-        super.visitExpressionStatement(statement)
-    }
-
-    //------------------------------------------------------------------------------------
-    // Helper Methods
-    //------------------------------------------------------------------------------------
 
     private void addInitializedField(varName) {
         def fieldNode = allFields.find { field -> field.name == varName }

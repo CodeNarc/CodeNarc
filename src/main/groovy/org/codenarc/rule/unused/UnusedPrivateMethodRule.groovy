@@ -18,10 +18,12 @@ package org.codenarc.rule.unused
 import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractSharedAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
+import org.codenarc.rule.Violation
+import org.codenarc.rule.AstVisitor
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.
@@ -38,29 +40,23 @@ import org.codehaus.groovy.ast.expr.*
  * @author Chris Mair
  * @author Hamlet D'Arcy
   */
-class UnusedPrivateMethodRule extends AbstractAstVisitorRule {
+class UnusedPrivateMethodRule extends AbstractSharedAstVisitorRule {
+
     String name = 'UnusedPrivateMethod'
     int priority = 2
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
-        // If AST is null, skip this source code
-        def ast = sourceCode.ast
-        if (!ast) { return }
+    protected AstVisitor getAstVisitor(SourceCode sourceCode) {
+        def allPrivateMethods = collectAllPrivateMethods(sourceCode.ast)
+        return new UnusedPrivateMethodAstVisitor(allPrivateMethods, sourceCode.ast.classes*.name)
+    }
 
-        def allPrivateMethods = collectAllPrivateMethods(ast)
-
-        def visitor = new UnusedPrivateMethodAstVisitor(allPrivateMethods, ast.classes*.name)
-        visitor.rule = this
-        visitor.sourceCode = sourceCode
-        ast.classes.each { classNode ->
-            visitor.visitClass(classNode)
-        }
-
-        allPrivateMethods.each { key, value ->
+    @Override
+    protected List<Violation> getViolations(AstVisitor visitor, SourceCode sourceCode) {
+        visitor.unusedPrivateMethods.each { key, value ->
             visitor.addViolation(value, "The method $key is not used within ${sourceCode.name ?: 'the class'}")
         }
-        violations.addAll(visitor.violations)
+        return visitor.violations
     }
 
     @SuppressWarnings('NestedBlockDepth')

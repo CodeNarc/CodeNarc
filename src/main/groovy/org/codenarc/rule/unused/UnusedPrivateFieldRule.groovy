@@ -16,12 +16,12 @@
 package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.FieldNode
-
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.source.SourceCode
-
-import org.codenarc.util.WildcardPattern
+import org.codenarc.rule.AbstractSharedAstVisitorRule
+import org.codenarc.rule.AstVisitor
 import org.codenarc.rule.FieldReferenceAstVisitor
+import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
@@ -33,31 +33,23 @@ import org.codenarc.rule.FieldReferenceAstVisitor
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-class UnusedPrivateFieldRule extends AbstractAstVisitorRule {
+class UnusedPrivateFieldRule extends AbstractSharedAstVisitorRule {
     String name = 'UnusedPrivateField'
     int priority = 2
     String ignoreFieldNames = 'serialVersionUID'
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
-        // If AST is null, skip this source code
-        def ast = sourceCode.ast
-        if (!ast) { return }
+    protected AstVisitor getAstVisitor(SourceCode sourceCode) {
+        def allPrivateFields = collectAllPrivateFields(sourceCode.ast)
+        return new FieldReferenceAstVisitor(allPrivateFields)
+    }
 
-        def allPrivateFields = collectAllPrivateFields(ast)
-
-        def visitor = new FieldReferenceAstVisitor(allPrivateFields)
-        visitor.rule = this
-        ast.classes.each { classNode ->
-            visitor.visitClass(classNode)
-        }
-        visitor.sourceCode = sourceCode
-
+    @Override
+    protected List<Violation> getViolations(AstVisitor visitor, SourceCode sourceCode) {
         visitor.unreferencedFields.each { FieldNode fieldNode ->
             visitor.addViolation(fieldNode, "The field ${fieldNode.name} is not used within the class ${fieldNode.owner?.name}")
         }
-        def filteredViolations = sourceCode.suppressionAnalyzer.filterSuppressedViolations(visitor.violations)
-        violations.addAll(filteredViolations)
+        return visitor.violations
     }
 
     @SuppressWarnings('NestedBlockDepth')

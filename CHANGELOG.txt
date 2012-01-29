@@ -14,6 +14,9 @@ NEW AND UPDATED RULES
 - #3476844: Extend GetterMethodCouldBeProperty to also check static getter methods.
 - #3477351: UnnecessaryConstructor: Also catch constructor containing only call to super().
 
+FRAMEWORK
+- Introduce AbstractSharedAstVisitorRule. Refactor UnusedPrivateFieldRule and UnusedPrivateMethodRule to use it.
+
 
 Changes in version 0.16.1 (November 2011)
 -------------------------------------------
@@ -121,6 +124,7 @@ BREAKING CHANGES
 THANKS
 - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.
 - Thanks to Joachim Baumann for UseCollectMany, CollectAllIsDeprecated, UseCollectNested.
+
 
 Changes in version 0.15 (August 2011)
 -------------------------------------------
