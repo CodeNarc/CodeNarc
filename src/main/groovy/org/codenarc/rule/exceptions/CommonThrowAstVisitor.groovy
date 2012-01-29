@@ -27,7 +27,8 @@ import org.codenarc.rule.AbstractAstVisitor
  * @author Chris Mair
   */
 class CommonThrowAstVisitor extends AbstractAstVisitor  {
-    private List exceptionTypeNames
+
+    private final List exceptionTypeNames
 
     /**
      * Construct a new instance, specifying the exception type names

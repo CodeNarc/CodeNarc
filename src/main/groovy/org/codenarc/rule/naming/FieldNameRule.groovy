@@ -74,7 +74,8 @@ class FieldNameRule extends AbstractAstVisitorRule {
 }
 
 class FieldNameAstVisitor extends AbstractAstVisitor  {
-    private Set propertyNames = []
+
+    private final Set propertyNames = []
 
     void visitField(FieldNode fieldNode) {
         if (!isProperty(fieldNode) && !isIgnoredPropertyName(fieldNode)) {

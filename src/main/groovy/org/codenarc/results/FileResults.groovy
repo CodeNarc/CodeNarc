@@ -22,8 +22,8 @@ package org.codenarc.results
  */
 class FileResults implements Results {
 
-    private String path
-    private List violations
+    private final String path
+    private final List violations
 
     FileResults(String path, List violations) {
         this.path = path

@@ -31,7 +31,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  */
 class FieldReferenceAstVisitor extends AbstractAstVisitor {
 
-    private Map<String, FieldNode> unreferencedFieldMap = [:]
+    private final Map<String, FieldNode> unreferencedFieldMap = [:]
 
     FieldReferenceAstVisitor(Collection<FieldNode> fields) {
         fields.each { fieldNode -> unreferencedFieldMap[fieldNode.name] = fieldNode }

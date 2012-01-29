@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitor
  */
 abstract class ExplicitTypeInstantiationAstVisitor extends AbstractAstVisitor {
 
-    private String typeName
+    private final String typeName
 
     protected ExplicitTypeInstantiationAstVisitor(String typeName) {
         this.typeName = typeName

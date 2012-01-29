@@ -73,6 +73,21 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_PrivateField_OnlyInitializedInClosureWithinConstructor_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                private int count
+                public MyClass() {
+                    1..2.each {
+                        count = 99
+                    }
+                }
+            }
+        '''
+        // Closures within constructor cannot set final fields, so cannot make count final
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_PrivateFieldSetWithinInitializerAndWithinMethod_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -144,16 +159,31 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
     }
 
+    void testApplyTo_PrivateStaticNonFinalField_OnlySetWithinInitializer_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                private static int count = 100
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'private static int count = 100', VIOLATION_MESSAGE)
+    }
+
     void testApplyTo_PrivateField_ComparedWithinMethodButNotSet_Violation() {
         final SOURCE = '''
             class MyClass {
                 private int count = 0
+                private completed = 0
                 boolean hasCount() {
                     count > 0
                 }
+                boolean isReady() {
+                    completed == 5
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'private int count = 0', messageText:VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:'private completed = 0', messageText:'Private field [completed] is only'])
     }
 
     void testApplyTo_PrivateField_ReferencedWithinMethodButNotSet_Violation() {

@@ -78,8 +78,9 @@ class UnusedPrivateMethodRule extends AbstractSharedAstVisitorRule {
 
 @SuppressWarnings('DuplicateLiteral')
 class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
-    private Map<String, MethodNode> unusedPrivateMethods
-    private List<String> classNames
+
+    private final Map<String, MethodNode> unusedPrivateMethods
+    private final List<String> classNames
 
 
     UnusedPrivateMethodAstVisitor(Map<String, MethodNode> unusedPrivateMethods, List<String> classNames) {

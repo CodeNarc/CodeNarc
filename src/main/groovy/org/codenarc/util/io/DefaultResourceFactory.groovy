@@ -24,7 +24,7 @@ package org.codenarc.util.io
   */
 class DefaultResourceFactory implements ResourceFactory {
 
-    private static String classPathID = 'classpath:'
+    private static final String CLASSPATH_PREFIX = 'classpath:'
 
     /**
      * Return a Resource instance suitable for the specified path.
@@ -35,8 +35,8 @@ class DefaultResourceFactory implements ResourceFactory {
      */
     Resource getResource(String path) throws IOException {
         assert path
-        if (path.startsWith(classPathID)) {
-            return new ClassPathResource(path - classPathID)
+        if (path.startsWith(CLASSPATH_PREFIX)) {
+            return new ClassPathResource(path - CLASSPATH_PREFIX)
         }
 
         isUrl(path) ? new UrlResource(path) : new ClassPathResource(path)

@@ -21,8 +21,9 @@ package org.codenarc.results
  * @author Chris Mair
  */
 class DirectoryResults implements Results {
-    private String path
-    private List children = []
+
+    private final String path
+    private final List children = []
     int numberOfFilesInThisDirectory = 0
 
     /**
@@ -37,6 +38,14 @@ class DirectoryResults implements Results {
      */
     DirectoryResults(String path) {
         this.path = path
+    }
+
+    /**
+     * Create a new instance with the specified path and number of files in the directory
+     */
+    DirectoryResults(String path, int numberOfFilesInThisDirectory) {
+        this.path = path
+        this.numberOfFilesInThisDirectory = numberOfFilesInThisDirectory
     }
 
     /**

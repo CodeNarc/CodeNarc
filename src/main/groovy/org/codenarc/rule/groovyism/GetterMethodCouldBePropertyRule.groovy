@@ -42,7 +42,7 @@ class GetterMethodCouldBePropertyRule extends AbstractAstVisitorRule {
 
 class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
-    private staticFieldNames = []
+    private final staticFieldNames = []
 
     @Override
     protected void visitClassEx(ClassNode node) {

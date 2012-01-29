@@ -30,8 +30,9 @@ import org.codenarc.util.io.ResourceFactory
  * @author Chris Mair
   */
 class XmlFileRuleSet implements RuleSet {
+
     private static final LOG = Logger.getLogger(XmlFileRuleSet)
-    private ResourceFactory resourceFactory = new DefaultResourceFactory()
+    private final ResourceFactory resourceFactory = new DefaultResourceFactory()
     private List rules = []
 
     /**

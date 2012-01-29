@@ -35,7 +35,7 @@ class DuplicateListLiteralRule extends AbstractAstVisitorRule {
 
 class DuplicateListLiteralAstVisitor extends AbstractAstVisitor {
 
-    private Collection<Map> listLiterals = []
+    private final Collection<Map> listLiterals = []
 
     @Override
     void visitListExpression(ListExpression expression) {

@@ -127,9 +127,9 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
         reportWriter = new InlineXmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
-        srcMainDaoDirResults = new DirectoryResults(path:'src/main/dao', numberOfFilesInThisDirectory:2)
-        def srcTestDirResults = new DirectoryResults(path:'src/test', numberOfFilesInThisDirectory:3)
+        def srcMainDirResults = new DirectoryResults('src/main', 1)
+        srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
+        def srcTestDirResults = new DirectoryResults('src/test', 3)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])

@@ -28,9 +28,10 @@ import org.codenarc.util.io.ResourceFactory
  * @author Chris Mair
   */
 class GroovyDslRuleSet implements RuleSet {
+
     private static final LOG = Logger.getLogger(GroovyDslRuleSet)
-    private ResourceFactory resourceFactory = new DefaultResourceFactory()
-    private rules
+    private final ResourceFactory resourceFactory = new DefaultResourceFactory()
+    private final rules
 
     /**
      * Construct a new instance on the specified Groovy DSL RuleSet file path

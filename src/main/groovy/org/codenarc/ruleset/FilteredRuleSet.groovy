@@ -27,9 +27,10 @@ import org.codenarc.util.WildcardPattern
  * @author Chris Mair
   */
 class FilteredRuleSet implements RuleSet {
-    private rules = []
-    private includes = []
-    private excludes = []
+
+    private final rules = []
+    private final includes = []
+    private final excludes = []
 
     /**
      * Construct a new instance on the specified RuleSet

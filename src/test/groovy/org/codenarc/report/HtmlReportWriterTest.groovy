@@ -195,11 +195,11 @@ class HtmlReportWriterTest extends AbstractTestCase {
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
         reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
 
-        def dirResultsMain = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
-        def dirResultsCode = new DirectoryResults(path:'src/main/code', numberOfFilesInThisDirectory:2)
-        def dirResultsTest = new DirectoryResults(path:'src/main/test', numberOfFilesInThisDirectory:3)
-        def dirResultsTestSubdirNoViolations = new DirectoryResults(path:'src/main/test/noviolations', numberOfFilesInThisDirectory:4)
-        def dirResultsTestSubdirEmpty = new DirectoryResults(path:'src/main/test/empty')
+        def dirResultsMain = new DirectoryResults('src/main', 1)
+        def dirResultsCode = new DirectoryResults('src/main/code', 2)
+        def dirResultsTest = new DirectoryResults('src/main/test', 3)
+        def dirResultsTestSubdirNoViolations = new DirectoryResults('src/main/test/noviolations', 4)
+        def dirResultsTestSubdirEmpty = new DirectoryResults('src/main/test/empty')
         def fileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResults2 = new FileResults('src/main/MyAction2.groovy', [VIOLATION3])
         def fileResults3 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION1, VIOLATION2])

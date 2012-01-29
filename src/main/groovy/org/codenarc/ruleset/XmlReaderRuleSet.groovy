@@ -36,7 +36,7 @@ class XmlReaderRuleSet implements RuleSet {
 
     private static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
     private static final RULESET_SCHEMA_FILE = 'ruleset-schema.xsd'
-    private List rules = []
+    private final List rules = []
 
     /**
      * Construct a new instance on the specified Reader

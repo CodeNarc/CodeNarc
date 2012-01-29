@@ -27,7 +27,8 @@ import org.codenarc.util.io.ResourceFactory
  * @author Chris Mair
   */
 class RuleSetUtil {
-    private static ResourceFactory resourceFactory = new DefaultResourceFactory()
+
+    private static final ResourceFactory RESOURCE_FACTORY = new DefaultResourceFactory()
 
     protected static void assertClassImplementsRuleInterface(Class ruleClass) {
         assert ruleClass
@@ -39,7 +40,7 @@ class RuleSetUtil {
     }
 
     protected static Rule loadRuleScriptFile(String path) {
-        def inputStream = resourceFactory.getResource(path).inputStream
+        def inputStream = RESOURCE_FACTORY.getResource(path).inputStream
         Class ruleClass
         inputStream.withStream { input ->
             GroovyClassLoader gcl = new GroovyClassLoader(getClass().classLoader)

@@ -128,14 +128,15 @@ class XmlReportWriterTest extends AbstractTestCase {
 
     void testWriteReport_Writer_ProperPackageSummaryForPackageWithEmptyRelativePath() {
         final XML = """
-            <PackageSummary totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
+            <PackageSummary totalFiles='2' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
             </PackageSummary>
 
-            <Package path='' totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
+            <Package path='' totalFiles='2' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
         """
-        srcMainDaoDirResults.path = ''
+        def dirResults = new DirectoryResults('', 2)
+        dirResults.addChild(new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3]))
         def rootResults = new DirectoryResults()
-        rootResults.addChild(srcMainDaoDirResults)
+        rootResults.addChild(dirResults)
         reportWriter.writeReport(stringWriter, analysisContext, rootResults)
         assertContainsXml(stringWriter.toString(), XML)
     }
@@ -174,9 +175,9 @@ class XmlReportWriterTest extends AbstractTestCase {
         reportWriter = new XmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 
-        def srcMainDirResults = new DirectoryResults(path:'src/main', numberOfFilesInThisDirectory:1)
-        srcMainDaoDirResults = new DirectoryResults(path:'src/main/dao', numberOfFilesInThisDirectory:2)
-        def srcTestDirResults = new DirectoryResults(path:'src/test', numberOfFilesInThisDirectory:3)
+        def srcMainDirResults = new DirectoryResults('src/main', 1)
+        srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
+        def srcTestDirResults = new DirectoryResults('src/test', 3)
         def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
         def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
         def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])

@@ -29,7 +29,7 @@ import org.codehaus.groovy.ast.stmt.*
  * blocks/statements, as well as closures. 
  * <p/>
  * The <code>maxNestedBlockDepth</code> property holds the threshold value for the maximum number of
- * nesting levels. A block or closures nested deeper than that numer of levels is considered a
+ * nesting levels. A block or closures nested deeper than that number of levels is considered a
  * violation. The <code>maxNestedBlockDepth</code> property defaults to 3.
  *
  * @author Chris Mair
@@ -44,7 +44,8 @@ class NestedBlockDepthRule extends AbstractAstVisitorRule {
 }
 
 class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
-    private Set blocksToProcess = []
+
+    private final Set blocksToProcess = []
     private Set closureFieldExpressions
     private nestedBlockDepth = 0
 

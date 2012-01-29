@@ -31,7 +31,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     List<String> constants = []
     private final List<Class> constantTypes
-    private Set ignoreValuesSet
+    private final Set ignoreValuesSet
 
     DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet) {
         assert constantType

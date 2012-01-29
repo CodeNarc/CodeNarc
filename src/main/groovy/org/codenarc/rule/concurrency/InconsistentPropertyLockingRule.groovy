@@ -33,8 +33,8 @@ class InconsistentPropertyLockingRule extends AbstractAstVisitorRule {
 
 class InconsistentPropertyLockingAstVisitor extends AbstractMethodVisitor {
 
-    private Map<String, MethodNode> guardedMethods = [:]
-    private Map<String, MethodNode> unguardedMethods = [:]
+    private final Map<String, MethodNode> guardedMethods = [:]
+    private final Map<String, MethodNode> unguardedMethods = [:]
 
     @Override
     void visitMethod(MethodNode node) {

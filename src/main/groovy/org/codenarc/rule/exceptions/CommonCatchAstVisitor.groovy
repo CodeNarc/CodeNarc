@@ -26,7 +26,8 @@ import org.codenarc.rule.AbstractAstVisitor
  * @author Chris Mair
   */
 class CommonCatchAstVisitor extends AbstractAstVisitor  {
-    private exceptionClassNameWithoutPackage
+
+    private final exceptionClassNameWithoutPackage
 
     /**
      * Construct a new instance, specifying the exception class name

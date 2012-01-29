@@ -42,7 +42,7 @@ class UseCollectNestedRule extends AbstractAstVisitorRule {
 class UseCollectNestedAstVisitor extends AbstractAstVisitor {
     private static final LOG = Logger.getLogger(UseCollectNestedAstVisitor)
 
-    private Stack<Parameter> parameterStack = []
+    private final Stack<Parameter> parameterStack = []
 
     @Override
     protected void visitClassComplete(ClassNode cn) {

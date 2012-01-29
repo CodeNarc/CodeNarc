@@ -25,7 +25,7 @@ import org.apache.log4j.spi.LoggingEvent
   */
 class InMemoryAppender extends AppenderSkeleton implements Closeable {
 
-    private List loggingEvents = []
+    private final List loggingEvents = []
 
     /**
      * Return the List of LoggingEvents logged to this Appender

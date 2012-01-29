@@ -42,7 +42,7 @@ class PropertiesFileRuleSetConfigurer {
     private static final LOG = Logger.getLogger(PropertiesFileRuleSetConfigurer)
     private static final PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
 
-    private ResourceFactory resourceFactory = new DefaultResourceFactory()
+    private final ResourceFactory resourceFactory = new DefaultResourceFactory()
     protected defaultPropertiesFilename = 'codenarc.properties'
 
     /**

@@ -27,7 +27,7 @@ class SourceString extends AbstractSourceCode {
 
     String path
     String name
-    private String source
+    private final String source
 
     /**
      * Construct a new instance for the file at the specified path

@@ -80,7 +80,7 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
         def matchingFieldName = extractVariableOrFieldName(expression)
-        boolean isAssignment = expression.operation.text.endsWith('=')
+        boolean isAssignment = expression.operation.text.endsWith('=') && expression.operation.text != '=='
         if (isAssignment && matchingFieldName) {
             if (withinConstructor) {
                 addInitializedField(matchingFieldName)
@@ -102,6 +102,17 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitExpressionStatement(statement)
+    }
+
+    @Override
+    void visitClosureExpression(ClosureExpression expression) {
+        def originalWithinConstructor = withinConstructor
+
+        // Closures within constructor cannot set final fields, so turn off constructor context for closures
+        withinConstructor = false
+
+        super.visitClosureExpression(expression)
+        withinConstructor = originalWithinConstructor
     }
 
     //------------------------------------------------------------------------------------

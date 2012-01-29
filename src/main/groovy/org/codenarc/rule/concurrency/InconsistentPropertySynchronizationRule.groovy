@@ -34,8 +34,8 @@ class InconsistentPropertySynchronizationRule extends AbstractAstVisitorRule {
 
 class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisitor {
 
-    private Map<String, MethodNode> synchronizedMethods = [:]
-    private Map<String, MethodNode> unsynchronizedMethods = [:]
+    private final Map<String, MethodNode> synchronizedMethods = [:]
+    private final Map<String, MethodNode> unsynchronizedMethods = [:]
 
     @Override
     void visitMethod(MethodNode node) {

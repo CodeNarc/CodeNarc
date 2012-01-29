@@ -44,7 +44,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     protected getTimestamp = { new Date() }
     protected customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
     protected resourceBundle
-    private templateEngine = new SimpleTemplateEngine()
+    private final templateEngine = new SimpleTemplateEngine()
 
     // Allow tests to override this
     protected initializeResourceBundle = { initializeDefaultResourceBundle() }

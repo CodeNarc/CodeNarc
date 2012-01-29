@@ -23,7 +23,8 @@ import org.apache.tools.ant.types.FileSet
  * @author Chris Mair
  */
 class CodeNarcTaskAccessor {
-    private CodeNarcTask codeNarcTask
+
+    private final CodeNarcTask codeNarcTask
 
     CodeNarcTaskAccessor(CodeNarcTask codeNarcTask) {
         assert codeNarcTask

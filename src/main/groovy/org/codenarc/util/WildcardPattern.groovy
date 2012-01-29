@@ -35,9 +35,10 @@ package org.codenarc.util
  * @author Chris Mair
   */
 class WildcardPattern {
-    private List regexes = []
-    private List strings = []
-    private defaultMatches
+
+    private final List regexes = []
+    private final List strings = []
+    private final defaultMatches
 
     /**
      * Construct a new WildcardPattern instance on a single pattern or a comma-separated list of patterns.
