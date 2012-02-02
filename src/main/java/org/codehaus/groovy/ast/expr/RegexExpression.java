@@ -38,7 +38,8 @@ public class RegexExpression extends Expression {
         this.string = string;
         super.setType(ClassHelper.PATTERN_TYPE);
     }
-    
+
+    @SuppressWarnings("PMD.EmptyCatchBlock")
     public void visit(GroovyCodeVisitor visitor) {
 
         // find the visitRegexExpression if it exists, ignore otherwise

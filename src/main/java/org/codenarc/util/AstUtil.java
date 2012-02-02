@@ -18,6 +18,7 @@ package org.codenarc.util;
 import groovy.lang.Closure;
 import groovy.lang.MetaClass;
 import groovy.lang.Range;
+import org.apache.log4j.Logger;
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.*;
 import org.codehaus.groovy.ast.stmt.BlockStatement;
@@ -41,8 +42,10 @@ import static java.util.Arrays.asList;
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
+@SuppressWarnings("PMD.CollapsibleIfStatements")
 public class AstUtil {
 
+    private static final Logger LOG = Logger.getLogger(AstUtil.class);
     public static final List<String> AUTO_IMPORTED_PACKAGES = asList("java.lang", "java.io", "java.net", "java.util", "groovy.lang", "groovy.util");
     public static final List<String> AUTO_IMPORTED_CLASSES = asList("java.math.BigDecimal", "java.math.BigInteger");
     public static final List<String> COMPARISON_OPERATORS = asList("==", "!=", "<", "<=", ">", ">=", "<=>");
@@ -427,8 +430,6 @@ public class AstUtil {
             if (((ConstantExpression) method).getValue() instanceof String) {
                 IS_NAME_MATCH = ((String)((ConstantExpression) method).getValue()).matches(methodNamePattern);
             }
-        } else {
-            // TODO write a warning
         }
 
         if (IS_NAME_MATCH && numArguments != null) {
@@ -712,7 +713,7 @@ public class AstUtil {
         } else if (arguments instanceof TupleExpression) {
             argExpressions = ((TupleExpression) arguments).getExpressions();
         } else {
-            // TODO: write a warning
+            LOG.warn("getArgumentNames arguments is not an expected type");
         }
 
         if (argExpressions != null) {
@@ -861,7 +862,7 @@ public class AstUtil {
         }else if (node instanceof PropertyNode) {
             modifiers = ((PropertyNode) node).getModifiers();
         } else {
-            // TODO: Write a warning
+            LOG.warn("isPublic node is not an expected type");
         }
         if (modifiers != null) {
             return Modifier.isPublic(modifiers);
@@ -916,9 +917,6 @@ public class AstUtil {
 
     /**
      * Supports discovering many common JDK types, but not all.
-     * @param node
-     * @param fieldName
-     * @return
      */
     public static Class getFieldType(ClassNode node, String fieldName) {
         while (node != null) {
@@ -1035,9 +1033,6 @@ public class AstUtil {
 
     /**
      * gets the first non annotation line number of a node, taking into account annotations. 
-     * @param node
-     * @param sourceCode
-     * @return
      */
     public static int findFirstNonAnnotationLine(ASTNode node, SourceCode sourceCode) {
         if (node instanceof AnnotatedNode && !((AnnotatedNode) node).getAnnotations().isEmpty()) {

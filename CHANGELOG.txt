@@ -17,7 +17,7 @@ NEW AND UPDATED RULES
 
 FRAMEWORK
 - Introduce AbstractSharedAstVisitorRule. Refactor UnusedPrivateFieldRule and UnusedPrivateMethodRule to use it.
-
+- #3476394: Include PMD report in project reports; Fix/resolve violations.
 
 Changes in version 0.16.1 (November 2011)
 -------------------------------------------

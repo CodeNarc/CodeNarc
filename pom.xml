@@ -13,6 +13,10 @@
     <version>0.17-SNAPSHOT</version>
     <url>http://codenarc.sourceforge.net/</url>
 
+    <properties>
+        <targetJdk>1.5</targetJdk> <!-- Necessary for PMD plugin -->
+    </properties>
+
     <scm>
         <connection>scm:svn:https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk</connection>
         <developerConnection>scm:svn:https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk
@@ -176,6 +180,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
 
         </plugins>

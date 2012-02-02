@@ -12,6 +12,7 @@ import java.util.List;
  * This is a horrible hack needed because method dispatch is broken in Groovy 1.8.
  * When they fix the defect then we can remove this class. 
  */
+@SuppressWarnings("PMD.UselessOverridingMethod")
 public abstract class ClassCodeVisitorSupportHack extends ClassCodeVisitorSupport {
 
     @Override
