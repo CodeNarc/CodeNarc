@@ -62,6 +62,17 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoresFieldsWithInjectAnnotation() {
+        final SOURCE = '''
+          class MyClass {
+            @Inject
+            BigDecimal depositAmount
+          }
+        '''
+        rule.applyToClassNames = '*'
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_FinalField() {
         final SOURCE = '''
           class MyClass {

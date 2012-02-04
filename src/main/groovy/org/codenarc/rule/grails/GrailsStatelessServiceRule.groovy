@@ -25,6 +25,8 @@ import org.codenarc.rule.generic.StatelessClassRule
  * This rule ignores <code>final</code> fields (either instance or static). Fields that are
  * <code>static</code> and non-<code>final</code>, however, do cause a violation.
  * <p/>
+ * This rule also ignores fields annotated with the <code>@Inject</code> annotation.
+ * <p/>
  * You can configure this rule to ignore certain fields either by name or by type. This can be
  * useful to ignore fields that hold references to (static) dependencies (such as DAOs or
  * Service objects) or static configuration.

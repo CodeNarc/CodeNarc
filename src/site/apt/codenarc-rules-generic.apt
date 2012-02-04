@@ -176,6 +176,8 @@ Generic Rules  ("<rulesets/generic.xml>")
   This rule also ignores all classes annotated with the <<<@Immutable>>> transformation.
   See {{{http://groovy.codehaus.org/Immutable+transformation}http://groovy.codehaus.org/Immutable+transformation}}.
 
+  This rule also ignores all fields annotated with the <<<@Inject>>> annotation.
+
   You can configure this rule to ignore certain fields either by name or by type. This can be
   useful to ignore fields that hold references to (static) dependencies (such as DAOs or
   Service objects) or static configuration.
