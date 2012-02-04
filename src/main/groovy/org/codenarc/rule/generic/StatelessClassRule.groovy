@@ -84,6 +84,14 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     void setAddToIgnoreFieldNames(String moreFieldNames) {
         this.ignoreFieldNames = this.ignoreFieldNames ? this.ignoreFieldNames + ',' + moreFieldNames : moreFieldNames
     }
+
+    /**
+     * Subclasses can optionally override to provide more specific filtering of fields
+     */
+    @SuppressWarnings('UnusedMethodParameter')
+    protected boolean shouldIgnoreField(FieldNode fieldNode) {
+        return false
+    }
 }
 
 class StatelessClassAstVisitor extends AbstractFieldVisitor  {
@@ -97,8 +105,8 @@ class StatelessClassAstVisitor extends AbstractFieldVisitor  {
             return
         }
 
-        boolean ignore = fieldNode.isFinal()
-        
+        boolean ignore = fieldNode.isFinal() || rule.shouldIgnoreField(fieldNode)
+
         if (!ignore && rule.ignoreFieldNames) {
             ignore = new WildcardPattern(rule.ignoreFieldNames).matches(fieldNode.name)
         }

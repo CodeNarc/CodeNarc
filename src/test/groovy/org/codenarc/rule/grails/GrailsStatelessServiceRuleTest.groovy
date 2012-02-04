@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,9 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
   */
 class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
-    static final SERVICE_PATH = 'project/MyProject/grails-app/services/com/xxx/MyService.groovy'
-    static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
+
+    private static final SERVICE_PATH = 'project/MyProject/grails-app/services/com/xxx/MyService.groovy'
+    private static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
     void testRuleProperties() {
         assert rule.priority == 2
@@ -36,10 +37,10 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
           class MyService {
             BigDecimal depositAmount
-            def other
+            int other
           }
         '''
-        assertTwoViolations(SOURCE, 3, 'BigDecimal depositAmount', 4, 'def other')
+        assertTwoViolations(SOURCE, 3, 'BigDecimal depositAmount', 4, 'int other')
     }
 
     void testApplyTo_FinalField() {
@@ -51,14 +52,42 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoresDefProperties() {
+        final SOURCE = '''
+          class MyService {
+            def maxValue
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_DoesNotIgnoreDefFieldsWithVisibilityModifier() {
+        final SOURCE = '''
+          class MyService {
+            private def depositAmount
+            public def other
+          }
+        '''
+        assertTwoViolations(SOURCE, 3, 'private def depositAmount', 4, 'public def other')
+    }
+
+    void testApplyTo_DoesNotIgnoreStaticDefProperties() {
+        final SOURCE = '''
+          class MyService {
+            static def other
+          }
+        '''
+        assertSingleViolation(SOURCE, 3, 'static def other')
+    }
+
     void testApplyTo_DefaultIgnoredFieldNames() {
         final SOURCE = '''
           class MyService {
-            def dataSource
-            def otherService
+            DataSource dataSource
+            OtherService otherService
             static scope = 'session'
             static transactional = false
-            def sessionFactory
+            Sessionfactory sessionFactory
           }
         '''
         assertNoViolations(SOURCE)
@@ -68,10 +97,10 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
           class MyService {
             static depositCount = 5
-            def other
+            int other
           }
         '''
-        assertTwoViolations(SOURCE, 3, 'static depositCount = 5', 4, 'def other')
+        assertTwoViolations(SOURCE, 3, 'static depositCount = 5', 4, 'int other')
     }
 
     void testApplyTo_StaticFinalField() {
@@ -87,7 +116,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
           class MyService {
             BigDecimal depositAmount
-            def other
+            int other
           }
         '''
         rule.ignoreFieldNames = 'other'
@@ -98,7 +127,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
           class MyService {
             BigDecimal depositAmount
-            def other
+            int other
           }
         '''
         rule.ignoreFieldNames = 'other,depositAmount'
@@ -109,7 +138,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
           class MyService {
             BigDecimal depositAmount
-            def other
+            int other
             int count
             long otherMax
           }
@@ -122,32 +151,31 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
           class MyService {
             BigDecimal depositAmount
-            def other
+            int other
           }
         '''
         rule.ignoreFieldTypes = 'BigDecimal'
-        assertSingleViolation(SOURCE, 4, 'def other')
+        assertSingleViolation(SOURCE, 4, 'int other')
     }
 
     void testApplyTo_IgnoreFieldTypes_Wildcards() {
         final SOURCE = '''
           class MyService {
             BigDecimal depositAmount
-            def other
             int count = 23
             long otherMax
             Object lock = new Object()
           }
         '''
         rule.ignoreFieldTypes = '*Decimal,java.lang.Object,l?n?'
-        assertTwoViolations(SOURCE, 5, 'int count = 23', 7, 'Object lock = new Object()')
+        assertTwoViolations(SOURCE, 4, 'int count = 23', 6, 'Object lock = new Object()')
     }
 
     void testApplyTo_IgnoreFieldNamesAndIgnoreFieldTypes() {
         final SOURCE = '''
           class MyService {
             BigDecimal depositAmount
-            def other
+            int other
             int count
             long otherMax
           }

@@ -16,6 +16,7 @@
 package org.codenarc.rule.grails
 
 import org.codenarc.rule.generic.StatelessClassRule
+import org.codehaus.groovy.ast.FieldNode
 
 /**
  * Rule that checks for non-<code>final</code> fields on a Grails service class. Grails service
@@ -24,6 +25,8 @@ import org.codenarc.rule.generic.StatelessClassRule
  * <p/>
  * This rule ignores <code>final</code> fields (either instance or static). Fields that are
  * <code>static</code> and non-<code>final</code>, however, do cause a violation.
+ * <p/>
+ * This rule ignores non-static properties (i.e., no visibility modifier specified) declared with "def".
  * <p/>
  * This rule also ignores fields annotated with the <code>@Inject</code> annotation.
  * <p/>
@@ -66,6 +69,7 @@ import org.codenarc.rule.generic.StatelessClassRule
  * @author Chris Mair
   */
 class GrailsStatelessServiceRule extends StatelessClassRule {
+
     String name = 'GrailsStatelessService'
     int priority = 2
     String applyToFilesMatching = GrailsUtil.SERVICE_FILES
@@ -74,4 +78,11 @@ class GrailsStatelessServiceRule extends StatelessClassRule {
     GrailsStatelessServiceRule() {
         ignoreFieldNames = 'dataSource,scope,sessionFactory,transactional,*Service'
     }
+
+    @Override
+    protected boolean shouldIgnoreField(FieldNode fieldNode) {
+        fieldNode.isDynamicTyped() && !fieldNode.static && fieldNode.synthetic
+    }
+
+
 }
