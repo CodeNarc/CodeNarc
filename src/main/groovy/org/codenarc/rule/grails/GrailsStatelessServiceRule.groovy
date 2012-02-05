@@ -81,7 +81,8 @@ class GrailsStatelessServiceRule extends StatelessClassRule {
 
     @Override
     protected boolean shouldIgnoreField(FieldNode fieldNode) {
-        fieldNode.isDynamicTyped() && !fieldNode.static && fieldNode.synthetic
+        return super.shouldIgnoreField(fieldNode) ||
+            fieldNode.isDynamicTyped() && !fieldNode.static && fieldNode.synthetic
     }
 
 

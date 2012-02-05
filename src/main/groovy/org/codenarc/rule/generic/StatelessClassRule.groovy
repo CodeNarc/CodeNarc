@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.AnnotationNode
 
 /**
  * Rule that checks for non-<code>final</code> fields on a class. The intent of this rule is
@@ -88,33 +89,35 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     /**
      * Subclasses can optionally override to provide more specific filtering of fields
      */
-    @SuppressWarnings('UnusedMethodParameter')
     protected boolean shouldIgnoreField(FieldNode fieldNode) {
-        return false
+        return classHasImmutableAnnotation(fieldNode) ||
+            fieldHasInjectAnnotation(fieldNode) ||
+            fieldNode.isFinal() ||
+            matchesIgnoreFieldNames(fieldNode) ||
+            matchesIgnoreFieldTypes(fieldNode)
+    }
+
+    private AnnotationNode fieldHasInjectAnnotation(FieldNode fieldNode) {
+        AstUtil.getAnnotation(fieldNode, 'Inject')
+    }
+
+    private AnnotationNode classHasImmutableAnnotation(FieldNode fieldNode) {
+        AstUtil.getAnnotation(fieldNode.owner, 'Immutable')
+    }
+
+    private boolean matchesIgnoreFieldNames(FieldNode fieldNode) {
+        ignoreFieldNames && new WildcardPattern(ignoreFieldNames).matches(fieldNode.name)
+    }
+
+    private boolean matchesIgnoreFieldTypes(FieldNode fieldNode) {
+        ignoreFieldTypes && new WildcardPattern(ignoreFieldTypes).matches(fieldNode.type.name)
     }
 }
 
 class StatelessClassAstVisitor extends AbstractFieldVisitor  {
 
     void visitField(FieldNode fieldNode) {
-
-        def immutable = AstUtil.getAnnotation(fieldNode.owner, 'Immutable')
-        def inject = AstUtil.getAnnotation(fieldNode, 'Inject')
-
-        if (immutable || inject) {
-            return
-        }
-
-        boolean ignore = fieldNode.isFinal() || rule.shouldIgnoreField(fieldNode)
-
-        if (!ignore && rule.ignoreFieldNames) {
-            ignore = new WildcardPattern(rule.ignoreFieldNames).matches(fieldNode.name)
-        }
-
-        if (!ignore && rule.ignoreFieldTypes) {
-            ignore = new WildcardPattern(rule.ignoreFieldTypes).matches(fieldNode.type.name)
-        }
-
+        boolean ignore = rule.shouldIgnoreField(fieldNode)
         if (!ignore) {
             addViolation(fieldNode, "The class is marked as stateless but contains the non-final field '$fieldNode.name'")
         }

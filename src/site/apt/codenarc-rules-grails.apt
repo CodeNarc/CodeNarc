@@ -128,6 +128,8 @@ Grails Rules  ("<rulesets/grails.xml>")
 
   * All fields with types matching the <ignoreFieldTypes> property.
 
+  []
+
   The <<<ignoreFieldNames>>> property of this rule is preconfigured to ignore the standard Grails
   service configuration field names ('scope', 'transactional') and the standard injected bean names
   ('dataSource', 'sessionFactory'), as well as all other field names ending with 'Service'.
