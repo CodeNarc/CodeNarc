@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,18 @@ import org.codenarc.rule.Rule
  * Tests for AssignmentInConditionalRule
  *
  * @author 'Hamlet D'Arcy'
+ * @author Chris Mair
  */
 class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
+
+    private static final VIOLATION_MESSAGE = 'Assignment used as conditional value, which always results in true. Use the == operator instead'
 
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AssignmentInConditional'
     }
 
-    void testSuccessScenario() {
+    void testConditionalsWithoutAssignments_NoViolations() {
         final SOURCE = '''
             if (value == true) {
             }
@@ -48,7 +51,19 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
                 // should be ==
             }
         '''
-        assertSingleViolation(SOURCE, 2, 'if ((value = true))', 'Assignment used as conditional value, which always results in true. Use the == operator instead')
+        assertSingleViolation(SOURCE, 2, 'if ((value = true))', VIOLATION_MESSAGE)
+    }
+
+    void testExpressionWithMultipleConditions_ContainsAssignment_ThrowsException() {
+        final SOURCE = '''
+            while(value > 5 || (value = -1)) { }
+            if ((value = 5) && ready && doSomething()) { }
+            if (ready && (doSomething() || (value = 5))) { }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'while(value > 5 || (value = -1)) { }', messageText:VIOLATION_MESSAGE],
+            [lineNumber:3, sourceLineText:'if ((value = 5) && ready && doSomething()) { }', messageText:VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:'if (ready && (doSomething() || (value = 5))) { }', messageText:VIOLATION_MESSAGE])
     }
 
     void testWhileStatement() {
@@ -57,21 +72,28 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
                 // should be ==
             }
         '''
-        assertSingleViolation(SOURCE, 2, 'while (value = true)', 'Assignment used as conditional value, which always results in true. Use the == operator instead')
+        assertSingleViolation(SOURCE, 2, 'while (value = true)', VIOLATION_MESSAGE)
+    }
+
+    void testExpressionContainingConditionalWithAssignment_NoViolation() {
+        final SOURCE = '''
+            def ready = (value = true)
+        '''
+        assertNoViolations(SOURCE)
     }
 
     void testElvis() {
         final SOURCE = '''
             (value = true) ?: x
         '''
-        assertSingleViolation(SOURCE, 2, '(value = true) ?: x', 'Assignment used as conditional value, which always results in true. Use the == operator instead')
+        assertSingleViolation(SOURCE, 2, '(value = true) ?: x', VIOLATION_MESSAGE)
     }
 
     void testTernary() {
         final SOURCE = '''
             (value = true) ? x : y
         '''
-        assertSingleViolation(SOURCE, 2, '(value = true) ? x : y', 'Assignment used as conditional value, which always results in true. Use the == operator instead')
+        assertSingleViolation(SOURCE, 2, '(value = true) ? x : y', VIOLATION_MESSAGE)
     }
 
     protected Rule createRule() {

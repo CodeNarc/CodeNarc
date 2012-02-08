@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,13 @@ import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.BinaryExpression
 
 /**
  * An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.
  *
  * @author 'Hamlet D'Arcy'
+ * @author Chris Mair
  */
 class AssignmentInConditionalRule extends AbstractAstVisitorRule {
     String name = 'AssignmentInConditional'
@@ -60,8 +61,14 @@ class AssignmentInConditionalAstVisitor extends AbstractAstVisitor {
     }
 
     private addViolationIfAssignment(node) {
-        if (isFirstVisit(node) && AstUtil.isBinaryExpressionType(node, '=')) {
-            addViolation(node, 'Assignment used as conditional value, which always results in true. Use the == operator instead')
+        if (isFirstVisit(node) && node instanceof BinaryExpression) {
+            if (node.operation.text == '=') {
+                addViolation(node, 'Assignment used as conditional value, which always results in true. Use the == operator instead')
+            }
+            else {
+                addViolationIfAssignment(node.leftExpression)
+                addViolationIfAssignment(node.rightExpression)
+            }
         }
     }
 }
