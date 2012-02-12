@@ -49,11 +49,12 @@ class PathUtil {
      }
 
      static String removePathPrefix(String prefix, String path) {
-         if (prefix && path.startsWith(prefix)) {
-             path = path - prefix
-             return removeLeadingSlash(path)
+         def resultPath = path
+         if (prefix && resultPath.startsWith(prefix)) {
+             resultPath = resultPath - prefix
+             return removeLeadingSlash(resultPath)
          }
-         path
+         resultPath
      }
 
      private static String removeLeadingSlash(path) {

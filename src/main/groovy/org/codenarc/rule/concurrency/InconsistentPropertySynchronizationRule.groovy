@@ -95,8 +95,8 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisito
         }
     }
 
-    void addViolationOnMismatch(List getterNames, String setterName) {
-        getterNames = getterNames*.toString() // force GString into strings
+    private void addViolationOnMismatch(List rawGetterNames, String setterName) {
+        def getterNames = rawGetterNames*.toString() // force GString into strings
 
         if (containsKey(synchronizedMethods, getterNames) && unsynchronizedMethods.containsKey(setterName)) {
             def getterName = getFirstValue(synchronizedMethods, getterNames).name

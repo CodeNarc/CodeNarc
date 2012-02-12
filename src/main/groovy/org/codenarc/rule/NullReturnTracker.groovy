@@ -42,14 +42,14 @@ class NullReturnTracker extends AbstractAstVisitor {
 
         def stack = [expression] as Stack  // alternative to recursion
         while (stack) {
-            expression = stack.pop()
-            if (expression == ConstantExpression.NULL) {
+            def expr = stack.pop()
+            if (expr == ConstantExpression.NULL) {
                 return true
-            } else if (expression instanceof ConstantExpression && expression.value == null) {
+            } else if (expr instanceof ConstantExpression && expr.value == null) {
                 return true
-            } else if (expression instanceof TernaryExpression) {
-                stack.push(expression.trueExpression)
-                stack.push(expression.falseExpression)
+            } else if (expr instanceof TernaryExpression) {
+                stack.push(expr.trueExpression)
+                stack.push(expr.falseExpression)
             } 
         }
         false

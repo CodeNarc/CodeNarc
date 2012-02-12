@@ -172,6 +172,7 @@ ruleset {
     ObjectOverrideMisspelledMethodName
     PackageName
     ParameterName
+    ParameterReassignment
     PrintStackTrace
     Println
     PrivateFieldCouldBeFinal

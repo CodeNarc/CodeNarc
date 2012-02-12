@@ -53,9 +53,10 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
         super.visitIfElse node
     }
 
-    private static collectIfsAndElses(IfStatement node) {
+    private static collectIfsAndElses(IfStatement ifStatement) {
         def ifs = []
         def theElse = null
+        def node = ifStatement
 
         while (theElse == null) {
             ifs.add node

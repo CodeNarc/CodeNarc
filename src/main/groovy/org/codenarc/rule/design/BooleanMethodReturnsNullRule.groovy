@@ -85,16 +85,16 @@ class BooleanReturnTracker extends AbstractAstVisitor {
 
         def stack = [expression] as Stack
         while (stack) {
-            expression = stack.pop()
-            if (AstUtil.isBoolean(expression)) {
+            def expr = stack.pop()
+            if (AstUtil.isBoolean(expr)) {
                 callbackFunction()
-            } else if (expression instanceof BooleanExpression) {
+            } else if (expr instanceof BooleanExpression) {
                 callbackFunction()
-            } else if (expression instanceof CastExpression && AstUtil.classNodeImplementsType(expression.type, Boolean)) {
+            } else if (expr instanceof CastExpression && AstUtil.classNodeImplementsType(expr.type, Boolean)) {
                 callbackFunction()
-            } else if (expression instanceof TernaryExpression) {
-                stack.push(expression.trueExpression)
-                stack.push(expression.falseExpression)
+            } else if (expr instanceof TernaryExpression) {
+                stack.push(expr.trueExpression)
+                stack.push(expr.falseExpression)
             }
         }
     }

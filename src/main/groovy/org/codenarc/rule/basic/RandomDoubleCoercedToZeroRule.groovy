@@ -96,12 +96,12 @@ class MathRandomTracker extends AbstractAstVisitor {
     private callBackForMathRandomReturns(Expression exp) {
         def stack = [exp] as Stack
         while (stack) {
-            exp = stack.pop()
-            if (AstUtil.isMethodCall(exp, 'Math', 'random', 0)) {
-                callbackFunction(exp)
-            } else if (exp instanceof TernaryExpression) {
-                stack.push(exp.trueExpression)
-                stack.push(exp.falseExpression)
+            def expression = stack.pop()
+            if (AstUtil.isMethodCall(expression, 'Math', 'random', 0)) {
+                callbackFunction(expression)
+            } else if (expression instanceof TernaryExpression) {
+                stack.push(expression.trueExpression)
+                stack.push(expression.falseExpression)
             }
         }
     }

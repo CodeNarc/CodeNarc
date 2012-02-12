@@ -70,11 +70,32 @@ x ?: 'some value'
   for instance 55L or 24l. It is best practice to always use an uppercase L and never
   a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
 
-
   Example of violations:
 
 -------------------------------------------------------------------------------
     def x = 1l
     def y = 55l
 -------------------------------------------------------------------------------
+
+
+* {ParameterReassignment} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.17>
+
+  Checks for a method or closure parameter being reassigned to a new value within the body of the method/closure,
+  which is a confusing and questionable practice. Use a temporary variable instead.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    void myMethod(int a, String b) {
+        println a
+        b = 'new value'     // violation
+    }
+
+    def myClosure1 = { int a, b ->
+        a = 123             // violation
+    }
+-------------------------------------------------------------------------------
+
 

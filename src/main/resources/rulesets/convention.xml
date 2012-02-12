@@ -12,5 +12,6 @@
     <rule class='org.codenarc.rule.convention.CouldBeElvisRule'/>
     <rule class='org.codenarc.rule.convention.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.convention.LongLiteralWithLowerCaseLRule'/>
+    <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
 
 </ruleset>

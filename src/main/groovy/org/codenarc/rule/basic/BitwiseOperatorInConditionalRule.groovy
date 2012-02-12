@@ -38,16 +38,16 @@ class BitwiseOperatorInConditionalRule extends AbstractAstVisitorRule {
 
 class BitwiseOperatorInConditionalAstVisitor extends AbstractAstVisitor {
 
-    private addViolationBitwiseConditional(Expression node) {
+    private addViolationBitwiseConditional(Expression expression) {
 
-        if (!isFirstVisit(node)) {
+        if (!isFirstVisit(expression)) {
             return
         }
 
-        def parms = [node] as Stack
+        def parms = [expression] as Stack
 
         while (parms) {
-            node = parms.pop()
+            def node = parms.pop()
             if (node instanceof BinaryExpression) {
 
                 if (AstUtil.isBinaryExpressionType(node, '|')) {

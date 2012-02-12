@@ -83,17 +83,17 @@ class ArrayReturnTracker extends AbstractAstVisitor {
         super.visitReturnStatement(statement)
     }
 
-    private callBackForArrayReturns(Expression exp) {
-        def stack = [exp] as Stack
+    private callBackForArrayReturns(Expression expression) {
+        def stack = [expression] as Stack
         while (stack) {
-            exp = stack.pop()
-            if (exp instanceof CastExpression) {
-                if (exp.type.isArray()) {
+            def expr = stack.pop()
+            if (expr instanceof CastExpression) {
+                if (expr.type.isArray()) {
                     callbackFunction()
                 }
-            } else if (exp instanceof TernaryExpression) {
-                stack.push(exp.trueExpression)
-                stack.push(exp.falseExpression)
+            } else if (expr instanceof TernaryExpression) {
+                stack.push(expr.trueExpression)
+                stack.push(expr.falseExpression)
             }
         }
     }
