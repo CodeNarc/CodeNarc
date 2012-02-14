@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.BooleanExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
@@ -25,6 +24,7 @@ import org.codenarc.util.AstUtil
  * There is no need to check for null before an instanceof; the instanceof keyword returns false when given a null argument.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class UnnecessaryNullCheckBeforeInstanceOfRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryNullCheckBeforeInstanceOf'
@@ -33,27 +33,24 @@ class UnnecessaryNullCheckBeforeInstanceOfRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessaryNullCheckBeforeInstanceOfAstVisitor extends AbstractAstVisitor {
-
     @Override
-    void visitBooleanExpression(BooleanExpression expression) {
-        def exp = expression.expression
-        if (exp instanceof BinaryExpression && exp.operation.text == '&&') {
+    void visitBinaryExpression(BinaryExpression exp) {
+        if (exp.operation.text == '&&') {
             if (AstUtil.isNotNullCheck(exp.leftExpression) || AstUtil.isNotNullCheck(exp.rightExpression)) {
                 if (AstUtil.isInstanceOfCheck(exp.leftExpression) || AstUtil.isInstanceOfCheck(exp.rightExpression)) {
-                    addViolationIfTargetsMatch(expression)
+                    addViolationIfTargetsMatch(exp)
                 }
             }
         }
-        super.visitBooleanExpression(expression)
+        super.visitBinaryExpression(exp)
     }
 
-    private addViolationIfTargetsMatch(BooleanExpression expression) {
-        BinaryExpression exp = expression.expression
+    private addViolationIfTargetsMatch(BinaryExpression exp) {
         def nullTarget = AstUtil.getNullComparisonTarget(exp.leftExpression) ?: AstUtil.getNullComparisonTarget(exp.rightExpression)
         def instanceofTarget = AstUtil.getInstanceOfTarget(exp.leftExpression) ?: AstUtil.getInstanceOfTarget(exp.rightExpression)
         if (nullTarget && instanceofTarget && nullTarget == instanceofTarget) {
             def suggestion = AstUtil.isInstanceOfCheck(exp.leftExpression) ? exp.leftExpression.text : exp.rightExpression.text
-            addViolation(expression, "The condition $exp.text can be safely simplified to $suggestion")
+            addViolation(exp, "The condition $exp.text can be safely simplified to $suggestion")
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,8 @@ import org.codenarc.rule.Rule
  * Tests for UnnecessaryNullCheckBeforeInstanceOfRule
  *
  * @author 'Hamlet D'Arcy'
-  */
+ * @author Chris Mair
+ */
 class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase {
 
     void testRuleProperties() {
@@ -35,7 +36,6 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
             if (x instanceof MyClass) { }
             if (x instanceof MyClass) { } else if (x instanceof OtherClass) {}
             (x instanceof MyClass) ? foo : bar
-            if (x != null && x instanceof MyClass && x.isValid()) { }
             if (x != null && y instanceof MyClass) { } // different references
         '''
         assertNoViolations(SOURCE)
@@ -75,6 +75,17 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 2,
                 '(x instanceof MyClass && x != null)',
                 'The condition ((x instanceof MyClass) && (x != null)) can be safely simplified to (x instanceof MyClass)')
+    }
+
+    void testStandaloneBinaryExpression() {
+        final SOURCE = '''
+            boolean equals(Object object) {
+                object != null && object instanceof RequestKey
+            }
+        '''
+        assertSingleViolation(SOURCE, 3,
+                'object != null && object instanceof RequestKey',
+                'The condition ((object != null) && (object instanceof RequestKey)) can be safely simplified to (object instanceof RequestKey)')
     }
 
     protected Rule createRule() {
