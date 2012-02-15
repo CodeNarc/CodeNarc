@@ -53,9 +53,10 @@ class ParameterReassignmentAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitClosureExpression(ClosureExpression expression) {
-        currentClosureParameterNames.addAll(expression.parameters.name)
+        def parameterNames = expression.parameters?.name ?: []
+        currentClosureParameterNames.addAll(parameterNames)
         super.visitClosureExpression(expression)
-        currentClosureParameterNames.removeAll(expression.parameters.name)
+        currentClosureParameterNames.removeAll(parameterNames)
     }
 
     @Override
