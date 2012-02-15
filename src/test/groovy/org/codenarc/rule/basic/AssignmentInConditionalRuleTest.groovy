@@ -54,7 +54,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if ((value = true))', VIOLATION_MESSAGE)
     }
 
-    void testExpressionWithMultipleConditions_ContainsAssignment_ThrowsException() {
+    void testExpressionWithMultipleConditionsWithAssignment_AndOr_Violations() {
         final SOURCE = '''
             while(value > 5 || (value = -1)) { }
             if ((value = 5) && ready && doSomething()) { }
@@ -64,6 +64,14 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
             [lineNumber:2, sourceLineText:'while(value > 5 || (value = -1)) { }', messageText:VIOLATION_MESSAGE],
             [lineNumber:3, sourceLineText:'if ((value = 5) && ready && doSomething()) { }', messageText:VIOLATION_MESSAGE],
             [lineNumber:4, sourceLineText:'if (ready && (doSomething() || (value = 5))) { }', messageText:VIOLATION_MESSAGE])
+    }
+
+    void testExpressionWithMultipleConditionsWithAssignment_ButNotAndOr_NoViolations() {
+        final SOURCE = '''
+            while ((len = input.read(buf)) > 0) { }
+            if ((ready = true) == (temp && doSomething())) { }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     void testWhileStatement() {

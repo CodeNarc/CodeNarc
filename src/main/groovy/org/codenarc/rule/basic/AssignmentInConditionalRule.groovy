@@ -66,8 +66,10 @@ class AssignmentInConditionalAstVisitor extends AbstractAstVisitor {
                 addViolation(node, 'Assignment used as conditional value, which always results in true. Use the == operator instead')
             }
             else {
-                addViolationIfAssignment(node.leftExpression)
-                addViolationIfAssignment(node.rightExpression)
+                if (node.operation.text in ['&&', '||']) {
+                    addViolationIfAssignment(node.leftExpression)
+                    addViolationIfAssignment(node.rightExpression)
+                }
             }
         }
     }
