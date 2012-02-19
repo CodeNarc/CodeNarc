@@ -19,6 +19,7 @@ NEW AND UPDATED RULES
 - #3460463: StatelessClassRule and GrailsStatelessServiceRule: Ignore fields annotated with @Inject.
 - #3460463: GrailsStatelessServiceRule: Ignore non-static properties (i.e., no visibility modifier specified) declared with "def".
 - #3485544: AssignmentInConditional: Also catch nested binary expressions, e.g. if (x==1 || x=3)
+- #3488705: GrailsDomainHasToString: Ignore classes annotated with @ToString or @Canonical.
 
 FRAMEWORK
 - Introduce AbstractSharedAstVisitorRule. Refactor UnusedPrivateFieldRule and UnusedPrivateMethodRule to use it.

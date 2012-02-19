@@ -187,6 +187,11 @@ class AstUtilTest extends AbstractTestCase {
         assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'Before') instanceof AnnotationNode
     }
 
+    void testHashAnnotation() {
+        assert !AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'doesNotExist')
+        assert AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'Before')
+    }
+
     void testGetVariableExpressions_SingleDeclaration() {
         log("declarationExpressions=${visitor.declarationExpressions}")
         def variableExpressions = AstUtil.getVariableExpressions(visitor.declarationExpressions[0])
@@ -242,21 +247,17 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     def declarationExpressions = []
 
     void visitMethod(MethodNode methodNode) {
-        LOG.info("visitMethod name=${methodNode.name}")
         methodNodes[methodNode.name] = methodNode
         super.visitMethod(methodNode)
     }
 
     void visitStatement(Statement statement) {
-        LOG.info("visitStatement text=${statement.text}")
         this.statements << statement
         super.visitStatement(statement)
     }
 
     void visitMethodCallExpression(MethodCallExpression methodCallExpression) {
         this.methodCallExpressions << methodCallExpression
-        def args = AstUtil.getMethodArguments(methodCallExpression)
-        LOG.info("visitMethodCallExpression object=${methodCallExpression.objectExpression} args=$args")
         super.visitMethodCallExpression(methodCallExpression)
     }
 

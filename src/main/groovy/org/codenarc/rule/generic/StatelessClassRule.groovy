@@ -15,12 +15,11 @@
  */
 package org.codenarc.rule.generic
 
+import static org.codenarc.util.AstUtil.*
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
-import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.AnnotationNode
 
 /**
  * Rule that checks for non-<code>final</code> fields on a class. The intent of this rule is
@@ -90,19 +89,11 @@ class StatelessClassRule extends AbstractAstVisitorRule {
      * Subclasses can optionally override to provide more specific filtering of fields
      */
     protected boolean shouldIgnoreField(FieldNode fieldNode) {
-        return classHasImmutableAnnotation(fieldNode) ||
-            fieldHasInjectAnnotation(fieldNode) ||
+        return hasAnnotation(fieldNode.owner, 'Immutable') ||
+            hasAnnotation(fieldNode, 'Inject') ||
             fieldNode.isFinal() ||
             matchesIgnoreFieldNames(fieldNode) ||
             matchesIgnoreFieldTypes(fieldNode)
-    }
-
-    private AnnotationNode fieldHasInjectAnnotation(FieldNode fieldNode) {
-        AstUtil.getAnnotation(fieldNode, 'Inject')
-    }
-
-    private AnnotationNode classHasImmutableAnnotation(FieldNode fieldNode) {
-        AstUtil.getAnnotation(fieldNode.owner, 'Immutable')
     }
 
     private boolean matchesIgnoreFieldNames(FieldNode fieldNode) {

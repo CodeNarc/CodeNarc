@@ -18,6 +18,8 @@ Grails Rules  ("<rulesets/grails.xml>")
 
   Checks that Grails domain classes redefine <<<toString()>>>.
 
+  Ignores classes annotated with <<<@ToString>>> or <<<@Canonical>>>.
+
 
 * {GrailsPublicControllerMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

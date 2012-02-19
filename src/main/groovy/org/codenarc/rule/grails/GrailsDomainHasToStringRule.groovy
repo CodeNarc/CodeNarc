@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,17 @@
  */
 package org.codenarc.rule.grails
 
+import static org.codenarc.util.AstUtil.*
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 
 /**
  * Checks that Grails domain classes redefine toString()
  *
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class GrailsDomainHasToStringRule extends AbstractAstVisitorRule {
     String name = 'GrailsDomainHasToString'
@@ -36,8 +37,8 @@ class GrailsDomainHasToStringRule extends AbstractAstVisitorRule {
 class GrailsDomainHasToStringAstVisitor extends AbstractAstVisitor {
 
     void visitClassComplete(ClassNode classNode) {
-        if (isFirstVisit(classNode)) {
-            if (!classNode.methods.any { AstUtil.isMethodNode(it, 'toString', 0) }) {
+        if (isFirstVisit(classNode) && !hasAnnotation(classNode, 'ToString') && !hasAnnotation(classNode, 'Canonical')) {
+            if (!classNode.methods.any { isMethodNode(it, 'toString', 0) }) {
                 addViolation(classNode, "The domain class $classNode.name should define a toString() method")
             }
         }
