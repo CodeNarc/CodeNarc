@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for GrailsDomainHasEqualsRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
 
@@ -50,6 +51,25 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
 
         sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Person.groovy'
         assertSingleViolation(SOURCE, 2, 'class Person', 'The domain class Person should define an equals(Object) method')
+    }
+
+    void testIgnoresClassWithToStringAnnotation() {
+        final SOURCE = '''
+            @EqualsAndHashCode
+        	class Person {
+            }
+        '''
+        sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Person.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    void testIgnoresClassWithCanonicalAnnotation() {
+        final SOURCE = '''
+            @Canonical class Person {
+            }
+        '''
+        sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Person.groovy'
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

@@ -11,6 +11,8 @@ Grails Rules  ("<rulesets/grails.xml>")
 
   Checks that Grails domain classes redefine <<<equals()>>>.
 
+  Ignores classes annotated with <<<@EqualsAndHashCode>>> or <<<@Canonical>>>.
+
 
 * {GrailsDomainHasToString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
