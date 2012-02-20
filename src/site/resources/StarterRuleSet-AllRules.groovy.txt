@@ -211,6 +211,7 @@ ruleset {
     SystemExit
     SystemOutPrint
     SystemRunFinalizersOnExit
+    TernaryCouldBeElvis
     ThreadGroup
     ThreadLocalNotStaticFinal
     ThreadYield

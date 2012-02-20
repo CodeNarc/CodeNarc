@@ -85,6 +85,7 @@ ruleset {
     InvertedIfElse
     LongLiteralWithLowerCaseL
     ParameterReassignment
+    TernaryCouldBeElvis
     
     // rulesets/design.xml
     AbstractClassWithPublicConstructor
