@@ -11,6 +11,7 @@ ruleset {
     AbstractClassWithPublicConstructor
     AbstractClassWithoutAbstractMethod
     AddEmptyString
+    AssertWithinFinallyBlock
     AssignCollectionSort
     AssignCollectionUnique
     AssignmentInConditional

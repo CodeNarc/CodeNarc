@@ -32,7 +32,7 @@ class ThrowExceptionFromFinallyBlockRule extends AbstractAstVisitorRule {
 class ThrowExceptionFromFinallyBlockAstVisitor extends AbstractFinallyAstVisitor  {
     void visitThrowStatement(ThrowStatement throwStatement) {
         if (isFirstVisit(throwStatement) && isStatementWithinFinally(throwStatement)) {
-            addViolation(throwStatement, 'Throwing an exception from a finally block can hide an underlieing error')
+            addViolation(throwStatement, 'Throwing an exception from a finally block can hide an underlying error')
         }
         super.visitThrowStatement(throwStatement)
     }

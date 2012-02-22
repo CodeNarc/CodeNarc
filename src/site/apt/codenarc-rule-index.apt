@@ -4,12 +4,14 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 280 rules.
+  <<CodeNarc>> includes 281 rules.
 
     
     
     
 * {{{codenarc-rules-basic.html}Basic}}
+    
+    * {{{codenarc-rules-basic.html#AssertWithinFinallyBlock}AssertWithinFinallyBlock}}
     
     * {{{codenarc-rules-basic.html#AssignmentInConditional}AssignmentInConditional}}
     

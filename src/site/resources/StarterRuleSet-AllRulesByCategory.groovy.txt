@@ -7,6 +7,7 @@ ruleset {
         '''
 
     // rulesets/basic.xml
+    AssertWithinFinallyBlock
     AssignmentInConditional
     BigDecimalInstantiation
     BitwiseOperatorInConditional
