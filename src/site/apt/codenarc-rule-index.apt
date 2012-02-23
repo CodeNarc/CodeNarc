@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 281 rules.
+  <<CodeNarc>> includes 282 rules.
 
     
     
@@ -28,6 +28,8 @@ Rule Index
     * {{{codenarc-rules-basic.html#ComparisonOfTwoConstants}ComparisonOfTwoConstants}}
     
     * {{{codenarc-rules-basic.html#ComparisonWithSelf}ComparisonWithSelf}}
+    
+    * {{{codenarc-rules-basic.html#ConstantAssertExpression}ConstantAssertExpression}}
     
     * {{{codenarc-rules-basic.html#ConstantIfExpression}ConstantIfExpression}}
     

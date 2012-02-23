@@ -53,6 +53,7 @@ ruleset {
     ConfusingTernary
     ConsecutiveLiteralAppends
     ConsecutiveStringConcatenation
+    ConstantAssertExpression
     ConstantIfExpression
     ConstantTernaryExpression
     ConstantsOnlyInterface

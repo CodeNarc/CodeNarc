@@ -160,7 +160,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
                 case 'excludes': excludes = value; break
                 case 'title': title = value; break
                 case 'report': parseReport(value); break
-                default: assert false, "Invalid option: [$arg]"
+                default: throw new IllegalArgumentException("Invalid option: [$arg]")
             }
         }
     }

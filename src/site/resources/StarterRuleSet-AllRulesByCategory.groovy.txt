@@ -16,6 +16,7 @@ ruleset {
     ClassForName
     ComparisonOfTwoConstants
     ComparisonWithSelf
+    ConstantAssertExpression
     ConstantIfExpression
     ConstantTernaryExpression
     DeadCode

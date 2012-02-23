@@ -8,7 +8,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 * AssertWithinFinallyBlock
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- Checks for <<<assert>>> statements within a <finally> block. An <<<assert>>> can throw an exception,
+ Checks for <assert> statements within a <finally> block. An <assert> can throw an exception,
  hiding the original exception, if there is one.
 
   Here is an example of code that produces a violation:
@@ -197,6 +197,29 @@ Basic Rules  ("<rulesets/basic.xml>")
     def c = (x <=> x) { }           // violation
     println isReady = x.equals(x)   // violation
     println x.compareTo(x)          // violation
+-------------------------------------------------------------------------------
+
+
+* {ConstantAssertExpression} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Checks for <assert> statements with a constant value for the <assert> boolean expression, such as
+  <<<true>>>, <<<false>>>, <<<null>>>, or a literal constant value. These <assert> statements
+  will always pass or always fail, depending on the constant/literal value. Examples of violations include:
+
+-------------------------------------------------------------------------------
+    assert true
+    assert false, "assertion message"
+    assert Boolean.TRUE
+    assert Boolean.FALSE
+    assert null
+    assert 0
+    assert 99.7
+    assert ""
+    assert "abc"
+    assert [:]
+    assert [a:123, b:456]
+    assert [a, b, c]
 -------------------------------------------------------------------------------
 
 
