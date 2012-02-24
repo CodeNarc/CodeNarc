@@ -35,7 +35,7 @@ class AssertWithinFinallyBlockAstVisitor extends AbstractFinallyAstVisitor  {
     @Override
     void visitAssertStatement(AssertStatement statement) {
         if (isFirstVisit(statement) && isStatementWithinFinally(statement)) {
-            addViolation(statement, 'An assert statement within a finally block can throw an exception, hiding the original exception, if there is one')
+            addViolation(statement, "A finally block within class $currentClassName contains an assert statement, potentially hiding the original exception, if there is one")
         }
         super.visitAssertStatement(statement)
     }

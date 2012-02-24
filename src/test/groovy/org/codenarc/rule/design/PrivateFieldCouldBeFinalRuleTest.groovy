@@ -25,7 +25,7 @@ import org.codenarc.rule.Rule
  */
 class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
 
-    private static final VIOLATION_MESSAGE = 'Private field [count] is only'
+    private static final VIOLATION_MESSAGE = 'Private field [count] in class MyClass is only'
 
     void testRuleProperties() {
         assert rule.priority == 2
@@ -183,7 +183,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         '''
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'private int count = 0', messageText:VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'private completed = 0', messageText:'Private field [completed] is only'])
+            [lineNumber:4, sourceLineText:'private completed = 0', messageText:'Private field [completed] in class MyClass is only'])
     }
 
     void testApplyTo_PrivateField_ReferencedWithinMethodButNotSet_Violation() {
@@ -234,7 +234,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         '''
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'private int count', messageText:VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:"private name = 'abc'", messageText:'Private field [name] is only'])
+            [lineNumber:4, sourceLineText:"private name = 'abc'", messageText:'Private field [name] in class MyClass is only'])
     }
 
     void testApplyTo_PrivateField_SetWithinInitializerAndConstructor_Violation() {

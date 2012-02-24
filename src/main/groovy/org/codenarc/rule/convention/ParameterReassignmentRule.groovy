@@ -63,7 +63,7 @@ class ParameterReassignmentAstVisitor extends AbstractAstVisitor {
     void visitBinaryExpression(BinaryExpression expression) {
         if (isFirstVisit(expression) && isReassigningAParameter(expression)) {
             def name = expression.leftExpression.name
-            addViolation(expression, "The method parameter [$name] was reassigned. Use a temporary variable instead.")
+            addViolation(expression, "The method parameter [$name] in class $currentClassName was reassigned. Use a temporary variable instead.")
         }
         super.visitBinaryExpression(expression)
     }

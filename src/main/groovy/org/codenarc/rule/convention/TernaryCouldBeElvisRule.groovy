@@ -41,7 +41,7 @@ class TernaryCouldBeElvisAstVisitor extends AbstractAstVisitor {
     void visitTernaryExpression(TernaryExpression expression) {
         if (isNotElvis(expression) && areTheSame(expression.booleanExpression.expression, expression.trueExpression)) {
             def asElvis = "${expression.trueExpression.text} ?: ${expression.falseExpression.text}"
-            addViolation(expression, "${expression.text} can be simplified to $asElvis")
+            addViolation(expression, "${expression.text} in class $currentClassName can be simplified to $asElvis")
         }
         super.visitTernaryExpression(expression)
     }

@@ -53,7 +53,7 @@ class ConstantAssertExpressionAstVisitor extends AbstractAstVisitor  {
         if (isFirstVisit(statement)) {
             def booleanExpression = statement.booleanExpression
             if (AstUtil.isConstantOrLiteral(booleanExpression.expression)) {
-                addViolation(statement, "The assert statement has a constant boolean expression [$booleanExpression.text]")
+                addViolation(statement, "The assert statement within class $currentClassName has a constant boolean expression [$booleanExpression.text]")
             }
         }
         super.visitAssertStatement(statement)

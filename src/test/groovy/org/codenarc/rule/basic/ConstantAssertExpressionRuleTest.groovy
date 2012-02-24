@@ -69,12 +69,16 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
 
     void testApplyTo_NumberLiteral_IsAViolation() {
         final SOURCE = '''
-            assert 99.9, 'bad stuff'
-            assert 0
+            class MyClass {
+                def doStuff() {
+                    assert 99.9, 'bad stuff'
+                    assert 0
+                }
+            }
         '''
         assertTwoViolations(SOURCE,
-            2, "assert 99.9, 'bad stuff'", '99.9',
-            3, 'assert 0', '0')
+            4, "assert 99.9, 'bad stuff'", ['99.9', 'MyClass'],
+            5, 'assert 0', ['0', 'MyClass'])
     }
 
     void testApplyTo_MapLiteral_IsAViolation() {

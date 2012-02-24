@@ -43,7 +43,7 @@ class AssertWithinFinallyBlockRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 8, 'assert ready', 'finally block')
+        assertSingleViolation(SOURCE, 8, 'assert ready', ['finally block', 'MyClass'])
     }
 
     void testApplyTo_NestedTryFinallyWithAssert_Violation() {

@@ -54,12 +54,14 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
 
     void testParameterReassigned_Violation() {
         final SOURCE = '''
-            void myMethod(int a, String b) {
-                println a
-                b = 'new value'
+            class MyClass {
+                void myMethod(int a, String b) {
+                    println a
+                    b = 'new value'
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 4, "b = 'new value'", 'parameter [b] was reassigned')
+        assertSingleViolation(SOURCE, 5, "b = 'new value'", 'parameter [b] in class MyClass was reassigned')
     }
 
     void testTwoParametersReassigned_Violations() {
@@ -70,8 +72,8 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-            3, 'a = 123', 'parameter [a] was reassigned',
-            4, 'b = new Object()', 'parameter [b] was reassigned')
+            3, 'a = 123', 'parameter [a] in class None was reassigned',
+            4, 'b = new Object()', 'parameter [b] in class None was reassigned')
     }
 
     void testMultipleMethodsWithParametersReassigned_Violations() {
@@ -84,8 +86,8 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-            3, 'a = 123', 'parameter [a] was reassigned',
-            6, 'b = new Object()', 'parameter [b] was reassigned')
+            3, 'a = 123', 'parameter [a] in class None was reassigned',
+            6, 'b = new Object()', 'parameter [b] in class None was reassigned')
     }
 
     void testMultipleClosuresWithParametersReassigned_Violations() {
@@ -98,8 +100,8 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-            3, 'a = 123', 'parameter [a] was reassigned',
-            6, 'b = new Object()', 'parameter [b] was reassigned')
+            3, 'a = 123', 'parameter [a] in class None was reassigned',
+            6, 'b = new Object()', 'parameter [b] in class None was reassigned')
     }
 
     void testParameterReassignedWithinInnerClass_Violation() {
@@ -114,7 +116,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
                 return comparable.compareTo(a)
             }
         '''
-        assertSingleViolation(SOURCE, 5, 's = null', 'parameter [s] was reassigned')
+        assertSingleViolation(SOURCE, 5, 's = null', 'parameter [s] in class None')
     }
 
     void testNestedClosure_ParametersReassigned_Violations() {
@@ -130,9 +132,9 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:5, sourceLineText:'c = 39', messageText:'parameter [c] was reassigned'],
-            [lineNumber:6, sourceLineText:'a = 0', messageText:'parameter [a] was reassigned'],
-            [lineNumber:8, sourceLineText:'b = null', messageText:'parameter [b] was reassigned'])
+            [lineNumber:5, sourceLineText:'c = 39', messageText:'parameter [c] in class None was reassigned'],
+            [lineNumber:6, sourceLineText:'a = 0', messageText:'parameter [a] in class None was reassigned'],
+            [lineNumber:8, sourceLineText:'b = null', messageText:'parameter [b] in class None was reassigned'])
     }
 
     void testAssignToFieldWithSameNameAsParameter_NoViolations() {
