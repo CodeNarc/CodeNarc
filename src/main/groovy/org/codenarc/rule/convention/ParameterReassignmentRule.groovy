@@ -30,7 +30,7 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
  */
 class ParameterReassignmentRule extends AbstractAstVisitorRule {
     String name = 'ParameterReassignment'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = ParameterReassignmentAstVisitor
 }
 
