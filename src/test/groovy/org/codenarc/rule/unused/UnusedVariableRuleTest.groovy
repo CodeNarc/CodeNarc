@@ -276,6 +276,17 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE) 
     }
 
+    void testApplyTo_LoopVariable() {
+        final SOURCE = '''
+            def doStuff() {
+                for (int i = 0; i < 8; i++) {
+                    outputMap.putAll(CopanSystemService.canisterInfo(suuid[i], i))
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_Script_UnusedVariable() {
         final SOURCE = '''
             BigDecimal depositAmount
