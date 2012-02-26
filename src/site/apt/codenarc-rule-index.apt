@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 282 rules.
+  <<CodeNarc>> includes 283 rules.
 
     
     
@@ -20,6 +20,8 @@ Rule Index
     * {{{codenarc-rules-basic.html#BitwiseOperatorInConditional}BitwiseOperatorInConditional}}
     
     * {{{codenarc-rules-basic.html#BooleanGetBoolean}BooleanGetBoolean}}
+    
+    * {{{codenarc-rules-basic.html#BrokenNullCheck}BrokenNullCheck}}
     
     * {{{codenarc-rules-basic.html#BrokenOddnessCheck}BrokenOddnessCheck}}
     

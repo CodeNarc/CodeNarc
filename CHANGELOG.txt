@@ -10,6 +10,7 @@ NEW RULES
 - #3108331: New TernaryCouldBeElvis rule: Checks for ternary with boolean and true expressions are the same; can be simplified to an Elvis expression.
 - #3489801: New AssertWithinFinallyBlock rule: Checks for assert statements within a finally block. An assert can throw an exception, hiding the original exception, if there is one.
 - #3489800: New ConstantAssertExpression rule: Checks for assert statements where the assert condition expressions is a constant value or literal value.
+- #3161693: New BrokenNullCheck rule: Looks for faulty checks for null that can cause a NullPointerException.
 
 UPDATED/ENHANCED RULES
 - #3476844: Extend GetterMethodCouldBeProperty to also check static getter methods.

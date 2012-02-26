@@ -13,6 +13,7 @@
     <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
     <rule class='org.codenarc.rule.basic.BitwiseOperatorInConditionalRule'/>
     <rule class='org.codenarc.rule.basic.BooleanGetBooleanRule'/>
+    <rule class='org.codenarc.rule.basic.BrokenNullCheckRule'/>
     <rule class='org.codenarc.rule.basic.BrokenOddnessCheckRule'/>
     <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
     <rule class='org.codenarc.rule.basic.ComparisonOfTwoConstantsRule'/>

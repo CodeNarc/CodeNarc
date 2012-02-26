@@ -24,6 +24,7 @@ ruleset {
     BracesForIfElse
     BracesForMethod
     BracesForTryCatchFinally
+    BrokenNullCheck
     BrokenOddnessCheck
     BuilderMethodWithSideEffects
     BusyWait

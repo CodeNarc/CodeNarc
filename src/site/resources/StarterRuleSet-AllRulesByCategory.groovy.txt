@@ -12,6 +12,7 @@ ruleset {
     BigDecimalInstantiation
     BitwiseOperatorInConditional
     BooleanGetBoolean
+    BrokenNullCheck
     BrokenOddnessCheck
     ClassForName
     ComparisonOfTwoConstants

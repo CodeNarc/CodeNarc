@@ -107,9 +107,32 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* {BrokenNullCheck} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.17>
+
+  Looks for faulty checks for <null> that can cause a <<<NullPointerException>>>.
+
+  Examples:
+
+-------------------------------------------------------------------------------
+    if (name != null || name.length > 0) { }            // violation
+    if (name != null || name.length) { }                // violation
+    while (record == null && record.id < 10) { }        // violation
+    if (record == null && record.id && doStuff()) { }   // violation
+    def isNotValid = record == null && record.id < 10   // violation
+    return record == null && !record.id                 // violation
+
+    if (name != null || name.size() > 0) { }            // violation
+    if (string == null && string.equals("")) { }        // violation
+    def isValid = name != null || name.size() > 0       // violation
+    return name != null || !name.size()                 // violation
+-------------------------------------------------------------------------------
+
+
 * {BrokenOddnessCheck} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   The code uses <<<x % 2 == 1>>> to check to see if a value is odd, but this won't work for negative numbers
   (e.g., <<<(-5) % 2 == -1)>>>. If this code is intending to check for oddness, consider using <<<x & 1 == 1>>>,
