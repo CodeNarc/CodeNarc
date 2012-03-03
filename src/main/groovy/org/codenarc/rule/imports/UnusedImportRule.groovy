@@ -44,7 +44,7 @@ class UnusedImportRule extends AbstractRule {
     }
 
     private void processStaticImports(SourceCode sourceCode, List violations) {
-        if (GroovyVersion.isGroovy1_8()) {
+        if (GroovyVersion.isGroovy1_8_OrGreater()) {
             sourceCode.ast?.staticImports?.each {alias, ImportNode classNode ->
                 if (!findReference(sourceCode, alias)) {
                     violations.add(createViolationForImport(sourceCode, classNode.className, alias, "The [${classNode.className}] import is never referenced"))
