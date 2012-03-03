@@ -45,7 +45,7 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
         def superClassName = node.superClass.name
-        if (superClassName != 'java.lang.Object' && !(GroovyVersion.groovy1_8 && node.isScript() && node.name == 'None')) {
+        if (superClassName != 'java.lang.Object' && !(GroovyVersion.groovy1_8_OrGreater && node.isScript() && node.name == 'None')) {
             checkType(superClassName, node)
         }
         node.interfaces.each { interfaceNode ->

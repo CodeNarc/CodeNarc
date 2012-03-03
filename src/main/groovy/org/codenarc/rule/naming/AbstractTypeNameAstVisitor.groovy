@@ -31,10 +31,10 @@ abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
     void visitClassEx(ClassNode classNode) {
         assert rule.regex
 
-        if (GroovyVersion.isGroovy1_8() && classNode instanceof InnerClassNode && classNode.anonymous) {
+        if (GroovyVersion.isGroovy1_8_OrGreater() && classNode instanceof InnerClassNode && classNode.anonymous) {
             // do nothing for anonymous inner classes
             super.visitClassEx(classNode)
-        } else if (GroovyVersion.isGroovy1_8() && classNode.isScript()) {
+        } else if (GroovyVersion.isGroovy1_8_OrGreater() && classNode.isScript()) {
             // do nothing for script classes 
             super.visitClassEx(classNode)
         } else {
