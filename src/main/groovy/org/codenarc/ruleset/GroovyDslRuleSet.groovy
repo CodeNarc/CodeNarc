@@ -31,6 +31,8 @@ class GroovyDslRuleSet implements RuleSet {
 
     private static final LOG = Logger.getLogger(GroovyDslRuleSet)
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
+    private final RuleSetBuilder ruleSetBuilder = new RuleSetBuilder()
+    private final String path
     private final rules
 
     /**
@@ -39,27 +41,33 @@ class GroovyDslRuleSet implements RuleSet {
      */
     GroovyDslRuleSet(String path) {
         assert path
+        this.path = path
         LOG.info("Loading ruleset from [$path]")
-        def inputStream = resourceFactory.getResource(path).inputStream 
+        GroovyShell shell = createGroovyShell()
+        evaluateDsl(shell)
+        rules = ruleSetBuilder.ruleSet.rules
+    }
 
-        def ruleSetBuilder = new RuleSetBuilder()
-
-        def callRuleSet = { Closure closure -> 
+    private GroovyShell createGroovyShell() {
+        def callRuleSet = { Closure closure ->
             closure.resolveStrategy = Closure.DELEGATE_ONLY    // fail if access non-existent properties
             ruleSetBuilder.ruleset(closure)
         }
         Binding binding = new Binding(ruleset:callRuleSet)
 
-        GroovyShell shell = new GroovyShell(binding)
+        return new GroovyShell(binding)
+    }
 
-        try {
-            shell.evaluate(inputStream)
-        } catch (MultipleCompilationErrorsException compileError) {
-            LOG.error("An error occurred compiling the configuration file $path", compileError)
-            throw new IllegalStateException("An error occurred compiling the configuration file $path\n$compileError.message")
+    private void evaluateDsl(GroovyShell shell) {
+        def inputStream = resourceFactory.getResource(path).inputStream
+        inputStream.withReader { reader ->
+            try {
+                shell.evaluate(reader)
+            } catch (MultipleCompilationErrorsException compileError) {
+                LOG.error("An error occurred compiling the configuration file $path", compileError)
+                throw new IllegalStateException("An error occurred compiling the configuration file $path\n${compileError.message}")
+            }
         }
-
-        rules = ruleSetBuilder.ruleSet.rules
     }
 
     /**
