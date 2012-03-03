@@ -30,6 +30,7 @@ BUG FIXES
 - #3496557: UseCollectNestedRule: GroovyCastException: Cannot cast object VariableExpression to class ClosureExpression
 
 FRAMEWORK AND INFRASTRUCTURE
+- #3495841: Support Groovy 2.x.
 - #3496463: Support GMetrics 0.5.
 - Introduce AbstractSharedAstVisitorRule. Refactor UnusedPrivateFieldRule and UnusedPrivateMethodRule to use it.
 - #3476394: Include PMD report in project reports; Fix/resolve violations.
