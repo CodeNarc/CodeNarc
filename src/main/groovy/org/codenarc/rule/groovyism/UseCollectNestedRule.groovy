@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,13 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.Expression
 
 /**
  * Instead of nested collect{}-calls use collectNested{}
  *
  * @author Joachim Baumann
+ * @author Chris Mair
  */
 class UseCollectNestedRule extends AbstractAstVisitorRule {
     String name = 'UseCollectNested'
@@ -54,7 +56,7 @@ class UseCollectNestedAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         boolean isCollectCall = false
-        Parameter param
+        Parameter parameter
         Parameter it = new Parameter(ClassHelper.OBJECT_TYPE, 'it')
         
         /*
@@ -64,45 +66,66 @@ class UseCollectNestedAstVisitor extends AbstractAstVisitor {
          the parameter on the top of the stack
          */
         if(AstUtil.isMethodCall(call, 'collect', 1..2)) {
-            isCollectCall = true
+            Expression expression = getMethodCallParameterThatIsAClosure(call)
+            isCollectCall = expression instanceof ClosureExpression
 
-            // Extract the parameter of the provided closure for subsequent calls
-            int arity = AstUtil.getMethodArguments(call).size()
-            ClosureExpression ce
-            if(arity == 1) {
-                // closure is the first parameter
-                ce = call.arguments.expressions[0]
-            } else {
-                // closure is second parameter
-                ce = call.arguments.expressions[1]
-            }
-            if(ce.parameters.size() != 0) {
-                // we assume correct syntax and thus only one parameter
-                param = ce.parameters[0]
-            }
-            else {
-                // implicit parameter, we use our own parameter object as placeholder
-                param = it
-            }
-
-            // Now if the call is to the parameter of the closure then the node on
-            // which collect is called has to be a VariableExpression
-            if( call.objectExpression instanceof VariableExpression
-                && !parameterStack.empty()
-                && parameterStack.peek().name == call.objectExpression.name) {
-                    addViolation(call, UseCollectNestedRule.MESSAGE)
+            if (isCollectCall) {
+                parameter = getClosureParameter(expression, it)
+                checkForCallToClosureParameter(call)
             }
         }
 
-        // add argument list
-        if(isCollectCall) {
-            parameterStack.push(param)
-        }
+        addArgumentList(isCollectCall, parameter)
 
         super.visitMethodCallExpression(call)
 
-        // remove argument list
-        if(isCollectCall) {
+        removeArgumentList(isCollectCall)
+    }
+
+    private Parameter getClosureParameter(ClosureExpression expression, Parameter it) {
+        Parameter param
+        if (expression.parameters.size() != 0) {
+            // we assume correct syntax and thus only one parameter
+            param = expression.parameters[0]
+        }
+        else {
+            // implicit parameter, we use our own parameter object as placeholder
+            param = it
+        }
+        return param
+    }
+
+    private Expression getMethodCallParameterThatIsAClosure(MethodCallExpression call) {
+        int arity = AstUtil.getMethodArguments(call).size()
+        Expression expression
+        if (arity == 1) {
+            // closure is the first parameter
+            expression = call.arguments.expressions[0]
+        } else {
+            // closure is second parameter
+            expression = call.arguments.expressions[1]
+        }
+        return expression
+    }
+
+    private void checkForCallToClosureParameter(MethodCallExpression call) {
+        // Now if the call is to the parameter of the closure then the node on
+        // which collect is called has to be a VariableExpression
+        if (call.objectExpression instanceof VariableExpression
+            && !parameterStack.empty()
+            && parameterStack.peek().name == call.objectExpression.name) {
+            addViolation(call, UseCollectNestedRule.MESSAGE)
+        }
+    }
+
+    private void addArgumentList(boolean isCollectCall, Parameter param) {
+        if (isCollectCall) {
+            parameterStack.push(param)
+        }
+    }
+
+    private void removeArgumentList(boolean isCollectCall) {
+        if (isCollectCall) {
             parameterStack.pop()
         }
     }

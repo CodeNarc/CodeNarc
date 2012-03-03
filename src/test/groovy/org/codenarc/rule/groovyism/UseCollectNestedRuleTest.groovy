@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.codenarc.rule.Rule
  * Tests for UseCollectNestedRule
  *
  * @author Joachim Baumann
+ * @author Chris Mair
  */
 class UseCollectNestedRuleTest extends AbstractRuleTestCase {
 
@@ -30,7 +31,7 @@ class UseCollectNestedRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UseCollectNested'
     }
 
-    void testSuccessScenario() {
+    void testProperUsageOfCollect_NoViolations() {
         final SOURCE = '''
             def list = [1, 2, [3, 4, 5, 6], [7]]
 
@@ -61,6 +62,18 @@ class UseCollectNestedRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE,
                  6, 'elem.collect {it *2} // violation', UseCollectNestedRule.MESSAGE,
                 12, 'it.collect {it *2} // violation', UseCollectNestedRule.MESSAGE)
+    }
+
+    void testBugFix_CannotCastVariableExpression_NoViolations() {
+        final SOURCE = '''
+            class MyBuilder {
+                void execute(Closure antClosure) {
+                    Closure converter = {File file -> file.toURI().toURL() }
+                    List<URL> classpathUrls = fullClasspath.collect(converter)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

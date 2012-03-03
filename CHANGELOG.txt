@@ -27,6 +27,7 @@ BUG FIXES
 - #3477085. Fix UnusedImport violations missing line numbers for imports with semicolons.
 - #3477162: Fix duplicate violations for UnnecessaryDotClass.
 - #3487448: Fix UnnecessaryNullCheckBeforeInstanceOf should also check standalone binary (boolean) expressions, e.g. boolean ready = x != null && x instanceof Integer
+- #3496557: UseCollectNestedRule: GroovyCastException: Cannot cast object VariableExpression to class ClosureExpression
 
 FRAMEWORK AND INFRASTRUCTURE
 - #3496463: Support GMetrics 0.5.
