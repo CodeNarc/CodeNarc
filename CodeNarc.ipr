@@ -638,15 +638,15 @@
         <root url="file://$PROJECT_DIR$/../groovy-1.7.x/src/main" />
       </SOURCES>
     </library>
-    <library name="Maven: org.gmetrics:GMetrics:0.4">
+    <library name="Maven: org.gmetrics:GMetrics:0.5">
       <CLASSES>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.5/GMetrics-0.5.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.5/GMetrics-0.5-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-sources.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.5/GMetrics-0.5-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: oro:oro:2.0.8">

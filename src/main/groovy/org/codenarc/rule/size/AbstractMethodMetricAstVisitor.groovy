@@ -68,10 +68,10 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         super.visitClassEx(classNode)
     }
 
-
     private void checkMethods(classMetricResult) {
         def methodResults = classMetricResult.methodMetricResults
-        methodResults.each { methodName, results ->
+        methodResults.each { method, results ->
+            String methodName = extractMethodName(method)
             if (results['total'] > getMaxMethodMetricValue() &&
                     !isIgnoredMethodName(methodName)) {
                 def message = "Violation in class $currentClassName. The ${getMetricShortDescription()} for method [$methodName] is [${results['total']}]"
@@ -80,6 +80,11 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
                 violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
             }
         }
+    }
+
+    protected String extractMethodName(method) {
+        // For GMetrics 0.4, it is a String; For GMetrics 0.5 it is a MethodKey
+        method instanceof String ? method : method.methodName
     }
 
     protected getMethodNode(ClassNode classNode, String methodName, results) {

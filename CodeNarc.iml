@@ -37,21 +37,8 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="GMetrics-0.4">
-        <CLASSES>
-          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4.jar!/" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-javadoc.jar!/" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.4/GMetrics-0.4-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.13" level="project" />
-    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.5" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.7.1" level="project" />
