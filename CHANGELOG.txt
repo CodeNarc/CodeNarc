@@ -27,7 +27,8 @@ BUG FIXES
 - #3477085. Fix UnusedImport violations missing line numbers for imports with semicolons.
 - #3477162: Fix duplicate violations for UnnecessaryDotClass.
 - #3487448: Fix UnnecessaryNullCheckBeforeInstanceOf should also check standalone binary (boolean) expressions, e.g. boolean ready = x != null && x instanceof Integer
-- #3496557: UseCollectNestedRule: GroovyCastException: Cannot cast object VariableExpression to class ClosureExpression
+- #3496557: Fix UseCollectNestedRule: GroovyCastException: Cannot cast object VariableExpression to class ClosureExpression
+- #3496696:	Fix UnusedPrivateFieldRule: GroovyCastException: Cannot cast object with class 'org.codehaus.groovy.ast.FieldNode' to class 'groovy.lang.MetaClass'.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #3495841: Support Groovy 2.x.

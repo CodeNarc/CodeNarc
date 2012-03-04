@@ -380,6 +380,18 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testBugFix_CannotCastFieldNodeToMetaClass() {
+        final SOURCE = '''
+            class FlowBuilder extends AbstractFlowBuilder implements GroovyObject, ApplicationContextAware {
+                private MetaClass metaClass
+                FlowBuilder() {
+                    println metaClass
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

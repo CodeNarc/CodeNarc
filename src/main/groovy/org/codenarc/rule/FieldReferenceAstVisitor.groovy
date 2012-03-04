@@ -34,7 +34,10 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
     private final Map<String, FieldNode> unreferencedFieldMap = [:]
 
     FieldReferenceAstVisitor(Collection<FieldNode> fields) {
-        fields.each { fieldNode -> unreferencedFieldMap[fieldNode.name] = fieldNode }
+        fields.each { fieldNode ->
+            // Cannot use map syntax here because the name might be a property on Map, such as "metaClass"
+            unreferencedFieldMap.put(fieldNode.name, fieldNode)
+        }
     }
 
     Collection<FieldNode> getUnreferencedFields() {
