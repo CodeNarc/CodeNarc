@@ -39,7 +39,9 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
-        checkDeclaration(node, 'classes')
+        if (!node.isScript()) {
+            checkDeclaration(node, 'classes')
+        }
         super.visitClassEx(node)
     }
 
