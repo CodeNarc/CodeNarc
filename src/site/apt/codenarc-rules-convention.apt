@@ -133,3 +133,18 @@ x ?: 'some value'
   <side-effects> as part of a ternary expression behavior is confusing, error-prone and just a
   bad idea. In any case, that code should be refactored to move the reliance on the side-effects
   out of the ternary expression.
+
+
+* {VectorIsObsolete} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.17>
+
+  Checks for references to the (<effectively>) obsolete <<<java.util.Vector>>> class.
+  Use the <<Java Collections Framework>> classes instead, including <<<ArrayList>>> or
+  <<<Collections.synchronizedList()>>>. See the JDK javadoc.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def myList = new Vector()           // violation
+-------------------------------------------------------------------------------

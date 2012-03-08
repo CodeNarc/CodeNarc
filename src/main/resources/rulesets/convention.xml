@@ -14,5 +14,6 @@
     <rule class='org.codenarc.rule.convention.LongLiteralWithLowerCaseLRule'/>
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
     <rule class='org.codenarc.rule.convention.TernaryCouldBeElvisRule'/>
+    <rule class='org.codenarc.rule.convention.VectorIsObsoleteRule'/>
 
 </ruleset>

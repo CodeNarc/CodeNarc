@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.util.WildcardPattern
 import org.codehaus.groovy.ast.expr.*
+import java.text.MessageFormat
 
 /**
  * AstVisitor that check for references for a named class
@@ -30,13 +31,25 @@ import org.codehaus.groovy.ast.expr.*
 class ClassReferenceAstVisitor extends AbstractAstVisitor {
 
     private final classNamePattern
+    private final String violationMessagePattern
 
     /**
      * Constructor
      * @param classNames - one or more comma-separated class name patterns. Can contain wildcards (*,?)
      */
     ClassReferenceAstVisitor(String classNames) {
+        this(classNames, 'Found reference to {0}')
+    }
+
+    /**
+     * Constructor
+     * @param classNames - one or more comma-separated class name patterns. Can contain wildcards (*,?)
+     * @param violationMessagePattern - the MessageFormat String pattern used to build the violation message.
+     *          The class name is passed as the single argument to the pattern. e.g. "Found reference to {0}"
+     */
+    ClassReferenceAstVisitor(String classNames, String violationMessagePattern) {
         this.classNamePattern = new WildcardPattern(classNames)
+        this.violationMessagePattern = violationMessagePattern
     }
 
     @Override
@@ -44,7 +57,7 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
         def allImports = node.imports + node.staticStarImports.values()
         allImports?.each { importNode ->
             if (classNamePattern.matches(importNode.className)) {
-                def violationMessage = "Found reference to ${importNode.className}"
+                def violationMessage = formatViolationMessage(importNode.className)
                 addViolation(rule.createViolationForImport(sourceCode, importNode, violationMessage))
             }
         }
@@ -53,7 +66,7 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitField(FieldNode node) {
-        checkType(node)
+        checkNodeType(node)
         super.visitField(node)
     }
 
@@ -65,21 +78,22 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitClassExpression(ClassExpression expression) {
-        checkType(expression)
+        checkNodeType(expression)
         super.visitClassExpression(expression)
     }
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression node) {
         if (isFirstVisit(node)) {
-            checkType(node)
+            checkNodeType(node)
         }
         super.visitConstructorCallExpression(node)
     }
 
     @Override
     void visitVariableExpression(VariableExpression expression) {
-        checkType(expression)
+        checkNodeType(expression)
+        checkType(expression.name, expression)
         super.visitVariableExpression(expression)
     }
 
@@ -88,7 +102,7 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
         checkType(node.returnType.name, node)
 
         node.parameters.each { parameter ->
-            checkType(parameter)
+            checkNodeType(parameter)
         }
         super.visitConstructorOrMethod(node, isConstructor)
     }
@@ -96,14 +110,14 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     @Override
     void visitClosureExpression(ClosureExpression expression) {
         expression.parameters.each { parameter ->
-            checkType(parameter)
+            checkNodeType(parameter)
         }
         super.visitClosureExpression(expression)
     }
 
     @Override
     void visitCastExpression(CastExpression expression) {
-        checkType(expression)
+        checkNodeType(expression)
         super.visitCastExpression(expression)
     }
 
@@ -125,15 +139,19 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
 
     private void checkType(String type, node) {
         if (classNamePattern.matches(type)) {
-            def violationMessage = "Found reference to $type"
+            def violationMessage = formatViolationMessage(type)
             addViolation(node, violationMessage)
         }
     }
 
-    private void checkType(node) {
+    private void checkNodeType(node) {
         if (classNamePattern.matches(node.type.name)) {
-            def violationMessage = "Found reference to ${node.type.name}"
+            def violationMessage = formatViolationMessage(node.type.name)
             addViolation(node, violationMessage)
         }
+    }
+
+    private String formatViolationMessage(String typeName) {
+        MessageFormat.format(violationMessagePattern, typeName)
     }
 }
