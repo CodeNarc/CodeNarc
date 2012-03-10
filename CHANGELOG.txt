@@ -12,6 +12,7 @@ NEW RULES
 - #3489800: New ConstantAssertExpression rule: Checks for assert statements where the assert condition expressions is a constant value or literal value.
 - #3161693: New BrokenNullCheck rule: Looks for faulty checks for null that can cause a NullPointerException.
 - #3495466: New VectorIsObsolete rule: Checks for references to the (effectively) obsolete java.util.Vector class. Use the Java Collections Framework classes instead including ArrayList or Collections.synchronizedList().
+- #3495466: New HashtableIsObsolete rule: Checks for references to the (effectively) obsolete java.util.Hashtable class. Use the Java Collections Framework classes instead including HashMap or ConcurrentHashMap.
 
 UPDATED/ENHANCED RULES
 - #3476844: Extend GetterMethodCouldBeProperty to also check static getter methods.

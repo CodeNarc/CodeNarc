@@ -397,6 +397,7 @@
         <w>codenarc</w>
         <w>gradle</w>
         <w>groovyism</w>
+        <w>hashtable</w>
         <w>jdbc</w>
         <w>junit</w>
         <w>plugins</w>

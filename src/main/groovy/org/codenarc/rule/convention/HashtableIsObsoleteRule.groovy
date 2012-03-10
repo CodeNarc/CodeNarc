@@ -20,18 +20,18 @@ import org.codenarc.rule.AstVisitor
 import org.codenarc.rule.ClassReferenceAstVisitor
 
 /**
- * Check for direct use of Vector or java.util.Vector.
+ * Check for direct use of Vector or java.util.Hashtable.
  *
  * Known limitation: Does not catch references as Anonymous Inner class: def x = new java.util.Vector() { .. }
  *
  * @author Chris Mair
  */
-class VectorIsObsoleteRule extends AbstractAstVisitorRule {
-    String name = 'VectorIsObsolete'
+class HashtableIsObsoleteRule extends AbstractAstVisitorRule {
+    String name = 'HashtableIsObsolete'
     int priority = 2
 
     @Override
     AstVisitor getAstVisitor() {
-        new ClassReferenceAstVisitor('Vector, java.util.Vector', 'The {0} class is obsolete. Use classes from the Java Collections Framework instead, including ArrayList or Collections.synchronizedList().')
+        new ClassReferenceAstVisitor('Hashtable, java.util.Hashtable', 'The {0} class is obsolete. Use classes from the Java Collections Framework instead, including HashMap or ConcurrentHashMap.')
     }
 }

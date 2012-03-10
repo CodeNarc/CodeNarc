@@ -25,20 +25,17 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
     /**
      * @return the name of the class to check for
      */
-    abstract protected String getClassName()
+    protected abstract String getClassName()
+
+    // Subclasses can override (or define property) to customize violation message
+    protected String getViolationMessage() {
+        "Found reference to ${getClassName()}"
+    }
 
     /**
      * @return an initialized rule instance
      */
     protected abstract Rule createRule()
-
-    private String violationMessage
-
-    @Override
-    void setUp() {
-        super.setUp()
-        violationMessage = "Found reference to ${getClassName()}"
-    }
 
     //------------------------------------------------------------------------------------
     // Common Tests

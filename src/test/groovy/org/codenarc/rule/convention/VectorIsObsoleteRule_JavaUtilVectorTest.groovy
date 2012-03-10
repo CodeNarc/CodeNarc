@@ -26,6 +26,7 @@ import org.codenarc.rule.Rule
 class VectorIsObsoleteRule_JavaUtilVectorTest extends AbstractClassReferenceRuleTestCase {
 
     final String className = 'java.util.Vector'
+    final String violationMessage = "The $className class is obsolete"
 
     void testRuleProperties() {
         assert rule.priority == 2

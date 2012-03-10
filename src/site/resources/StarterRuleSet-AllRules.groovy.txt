@@ -129,6 +129,7 @@ ruleset {
     GroovyLangImmutable
     HardCodedWindowsFileSeparator
     HardCodedWindowsRootDirectory
+    HashtableIsObsolete
     IfStatementBraces
     IllegalClassReference
     IllegalPackageReference
@@ -285,6 +286,7 @@ ruleset {
     UseCollectNested
     UseOfNotifyMethod
     VariableName
+    VectorIsObsolete
     VolatileArrayField
     VolatileLongOrDoubleField
     WaitOutsideOfWhileLoop

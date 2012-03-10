@@ -85,10 +85,12 @@ ruleset {
     // rulesets/convention.xml
     ConfusingTernary
     CouldBeElvis
+    HashtableIsObsolete
     InvertedIfElse
     LongLiteralWithLowerCaseL
     ParameterReassignment
     TernaryCouldBeElvis
+    VectorIsObsolete
     
     // rulesets/design.xml
     AbstractClassWithPublicConstructor

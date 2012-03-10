@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 283 rules.
+  <<CodeNarc>> includes 285 rules.
 
     
     
@@ -170,6 +170,8 @@ Rule Index
     
     * {{{codenarc-rules-convention.html#CouldBeElvis}CouldBeElvis}}
     
+    * {{{codenarc-rules-convention.html#HashtableIsObsolete}HashtableIsObsolete}}
+    
     * {{{codenarc-rules-convention.html#InvertedIfElse}InvertedIfElse}}
     
     * {{{codenarc-rules-convention.html#LongLiteralWithLowerCaseL}LongLiteralWithLowerCaseL}}
@@ -177,6 +179,8 @@ Rule Index
     * {{{codenarc-rules-convention.html#ParameterReassignment}ParameterReassignment}}
     
     * {{{codenarc-rules-convention.html#TernaryCouldBeElvis}TernaryCouldBeElvis}}
+    
+    * {{{codenarc-rules-convention.html#VectorIsObsolete}VectorIsObsolete}}
     
     
     

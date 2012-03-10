@@ -19,21 +19,21 @@ import org.codenarc.rule.AbstractClassReferenceRuleTestCase
 import org.codenarc.rule.Rule
 
 /**
- * Tests for VectorIsObsoleteRule
+ * Tests for HashtableIsObsoleteRule. Checks for references to 'java.util.Hashtable'.
  *
  * @author Chris Mair
  */
-class VectorIsObsoleteRule_VectorTest extends AbstractClassReferenceRuleTestCase {
+class HashtableIsObsoleteRule_JavaUtilHashtableTest extends AbstractClassReferenceRuleTestCase {
 
-    final String className = 'Vector'
+    final String className = 'java.util.Hashtable'
     final String violationMessage = "The $className class is obsolete"
 
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'VectorIsObsolete'
+        assert rule.name == 'HashtableIsObsolete'
     }
 
     protected Rule createRule() {
-        new VectorIsObsoleteRule()
+        new HashtableIsObsoleteRule()
     }
 }
