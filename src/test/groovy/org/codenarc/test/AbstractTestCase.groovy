@@ -50,19 +50,19 @@ abstract class AbstractTestCase extends GroovyTestCase {
     /**
      * Return true if the text contains each of the specified strings
      * @param text - the text to search
-     * @param strings - the Strings to check for
+     * @param strings - the Strings to check for; toString() is invoked on each element
      */
     protected boolean containsAll(String text, strings) {
-        strings.every { text.contains(it) }
+        strings.every { text.contains(it.toString()) }
     }
 
     /**
      * Assert that the text contains each of the specified strings
      * @param text - the text to search
-     * @param strings - the Strings that must be present within text 
+     * @param strings - the Strings that must be present within text; toString() is invoked on each element
      */
     protected void assertContainsAll(String text, strings) {
-        strings.each { assert text.contains(it), "text does not contain [$it]" }
+        strings.each { assert text.contains(it.toString()), "text does not contain [$it]" }
     }
 
     /**

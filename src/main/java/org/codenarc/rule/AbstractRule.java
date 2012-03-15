@@ -36,7 +36,7 @@ import java.util.Map;
  * @author Hamlet D'Arcy
  */
 public abstract class AbstractRule implements Rule {
-    static final Logger LOG = Logger.getLogger(AbstractRule.class);
+    private static final Logger LOG = Logger.getLogger(AbstractRule.class);
 
     /**
      * Flag indicating whether this rule should be enabled (applied). Defaults to true.

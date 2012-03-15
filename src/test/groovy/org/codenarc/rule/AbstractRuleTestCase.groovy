@@ -19,6 +19,8 @@ import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.codenarc.analyzer.StringSourceAnalyzer
+import org.codenarc.ruleset.ListRuleSet
 
 /**
  * Abstract superclass for tests of Rule classes
@@ -224,6 +226,17 @@ actual:               $violation.sourceLine
         def violations = rule.applyTo(sourceCode)
         log("violations=$violations")
         violations
+    }
+
+    /**
+     * Apply the current Rule to the specified source (String) and return the resulting List of Violations.
+     * @param source - the full source code to which the rule is applied, as a String
+     */
+    protected List manuallyApplyRule(String source) {
+        def analyzer = new StringSourceAnalyzer(source)
+        assert analyzer.source.valid
+        def results = analyzer.analyze(new ListRuleSet([rule]))
+        results.violations
     }
 
     void setUp() {

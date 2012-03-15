@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.Violation
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
+import org.gmetrics.metric.Metric
 
 /**
  * Abstract superclass for AstVisitor classes that use method-level GMetrics Metrics.
@@ -39,20 +40,26 @@ import org.codenarc.util.WildcardPattern
 @SuppressWarnings('DuplicateLiteral')
 abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 
-    protected metric
+    protected Metric metric
+    private final metricLock = new Object()
 
     protected abstract createMetric()
     protected abstract String getMetricShortDescription()
     protected abstract Object getMaxMethodMetricValue()
     protected abstract Object getMaxClassMetricValue()
 
-    protected AbstractMethodMetricAstVisitor() {
-        metric = createMetric()
+    private Metric getMetric() {
+        synchronized(metricLock) {
+            if (metric == null) {
+                metric = createMetric()
+            }
+            return metric
+        }
     }
-    
+
     void visitClassEx(ClassNode classNode) {
         def gmetricsSourceCode = new GMetricsSourceCodeAdapter(this.sourceCode)
-        def classMetricResult = metric.applyToClass(classNode, gmetricsSourceCode)
+        def classMetricResult = getMetric().applyToClass(classNode, gmetricsSourceCode)
 
         if (classMetricResult == null) {    // no methods or closure fields
             return
