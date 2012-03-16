@@ -31,6 +31,11 @@ import org.apache.log4j.Logger
  * a Cobertura XML coverage file. If either of these prerequisites is not available, this rule
  * logs a warning messages and exits (i.e., does nothing).
  * <p/>
+ * The <code>coberturaXmlFile</code> property must be set to the path to the Cobertura XML coverage file
+ * for the Groovy code being analyzed. By default, the path is relative to the classpath. But the path
+ * may be optionally prefixed by any of the valid java.net.URL prefixes, such as "file:" (to load from
+ * a relative or absolute path on the filesystem), or "http:". This property is REQUIRED.
+ * <p/>
  * The <code>maxMethodCrapScore</code> property holds the threshold value for the CRAP crapMetric
  * value for each method. If this value is non-zero, a method with a CRAP score value greater than
  * this value is considered a violation. The <code>maxMethodCrapScore</code> property defaults to 30.

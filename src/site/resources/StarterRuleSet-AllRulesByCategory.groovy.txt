@@ -274,6 +274,7 @@ ruleset {
     // rulesets/size.xml
     AbcComplexity
     ClassSize
+    CrapMetric
     CyclomaticComplexity
     MethodCount
     MethodSize

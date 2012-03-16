@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 285 rules.
+  <<CodeNarc>> includes 286 rules.
 
     
     
@@ -562,6 +562,8 @@ Rule Index
     * {{{codenarc-rules-size.html#AbcComplexity}AbcComplexity}}
     
     * {{{codenarc-rules-size.html#ClassSize}ClassSize}}
+    
+    * {{{codenarc-rules-size.html#CrapMetric}CrapMetric}}
     
     * {{{codenarc-rules-size.html#CyclomaticComplexity}CyclomaticComplexity}}
     
