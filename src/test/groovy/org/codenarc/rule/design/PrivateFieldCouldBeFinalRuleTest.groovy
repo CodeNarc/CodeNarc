@@ -282,8 +282,9 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
                 void init() { other = 456 }
             }
         '''
-        // Should also get a violation for other from MyClass, but that is "overshadowed" by other in MyOtherClass
-        assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'private int count = 0', messageText:VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:"private other = 'abc'", messageText:'Private field [other] in class MyClass is only'])
     }
 
     void testApplyTo_PrivateField_ReferencedWithinInnerClass_NoViolations() {
@@ -313,6 +314,28 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         '''
         assertNoViolations(SOURCE)
     }
+
+    void testApplyTo_MultipleClassesWithinSource_HavePrivateFieldWithSameName_Violation() {
+        final SOURCE = '''
+            class MyOtherClass {
+                private count
+
+                def doStuff() {
+                    count = new MyClass(count)
+                }
+            }
+
+            class MyClass {
+                private int count
+
+                protected MyClass(int count) {
+                    this.count = count
+                }
+            }
+            '''
+        assertSingleViolation(SOURCE, 11, 'private int count', VIOLATION_MESSAGE)
+    }
+
 
     void testApplyTo_IgnoreFieldNames_NoViolations() {
         final SOURCE = '''

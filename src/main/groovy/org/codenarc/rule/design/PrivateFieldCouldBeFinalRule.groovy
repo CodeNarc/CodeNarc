@@ -61,9 +61,11 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     private final Collection<FieldNode> initializedFields = []
     private final Collection<FieldNode> allFields = []
     private boolean withinConstructor
+    private ClassNode currentClassNode
 
     @Override
     protected void visitClassEx(ClassNode node) {
+        currentClassNode = node
         def allClassFields = node.fields.findAll { field -> isPrivate(field) && !field.isFinal() && !field.synthetic }
         allFields.addAll(allClassFields)
         def initializedClassFields = allClassFields.findAll { field -> field.initialExpression }
@@ -90,7 +92,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
                 removeInitializedField(matchingFieldName)
             }
         }
-
         super.visitBinaryExpression(expression)
     }
 
@@ -138,8 +139,8 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     }
 
     private void addInitializedField(varName) {
-        def fieldNode = allFields.find { field -> field.name == varName }
-        def alreadyInitializedFieldNode = initializedFields.find { field -> field.name == varName }
+        def fieldNode = allFields.find { field -> isMatchingField(field, varName) }
+        def alreadyInitializedFieldNode = initializedFields.find { field -> isMatchingField(field, varName) }
         if (fieldNode && !alreadyInitializedFieldNode) {
             initializedFields << fieldNode
         }
@@ -147,11 +148,22 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
 
     private void removeInitializedField(String varName) {
         if (varName in initializedFields.name) {
-            initializedFields.removeAll { field -> field.name == varName }
+            initializedFields.removeAll { field -> isMatchingField(field, varName) }
         }
     }
 
     private Number isPrivate(FieldNode field) {
         return field.modifiers & FieldNode.ACC_PRIVATE
+    }
+
+    private boolean isMatchingField(FieldNode field, String name) {
+        isOwnedByClassOrItsOuterClass(field, currentClassNode) && field.name == name
+    }
+
+    private boolean isOwnedByClassOrItsOuterClass(FieldNode field, ClassNode classNode) {
+        if (classNode == null) {
+            return false
+        }
+        field.owner == classNode || isOwnedByClassOrItsOuterClass(field, classNode.outerClass)
     }
 }
