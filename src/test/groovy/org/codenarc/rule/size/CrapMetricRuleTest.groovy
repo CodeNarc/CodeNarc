@@ -189,6 +189,11 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_CoberturaXmlFileDoesNotExist_ThrowsFileNotFoundException() {
+        rule.coberturaXmlFile = 'DoesNotExist.xml'
+        shouldFail(FileNotFoundException) { applyRuleTo(SOURCE) }
+    }
+
     @Override
     protected Rule createRule() {
         new CrapMetricRule(coberturaXmlFile:COBERTURA_FILE)

@@ -20,8 +20,8 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.gmetrics.metric.crap.CrapMetric
 import org.gmetrics.metric.coverage.CoberturaLineCoverageMetric
 
-import java.util.concurrent.atomic.AtomicBoolean
 import org.apache.log4j.Logger
+import org.codenarc.rule.AstVisitor
 
 /**
  * Rule that calculates the CRAP Metric for methods/classes and checks against
@@ -68,19 +68,44 @@ class CrapMetricRule extends AbstractAstVisitorRule {
     BigDecimal maxClassAverageMethodCrapScore = 30
     String coberturaXmlFile
     String ignoreMethodNames
-    Class astVisitorClass = CrapMetricAstVisitor
 
     protected String crapMetricClassName = 'org.gmetrics.metric.crap.CrapMetric'
-    private final AtomicBoolean hasNotReadyWarningBeenLogged = new AtomicBoolean(false)
+    private Boolean ready
+    private CrapMetric crapMetric
+    private final readyLock = new Object()
+    private final createMetricLock = new Object()
+
+    @Override
+    AstVisitor getAstVisitor() {
+        return new CrapMetricAstVisitor(createCrapMetric())
+    }
 
     @Override
     boolean isReady() {
-        def ready = coberturaXmlFile && isCrapMetricClassOnClasspath()
-        if (!ready && !hasNotReadyWarningBeenLogged.value) {
-            LOG.warn("Cobertura XML file [$coberturaXmlFile] is not accessible and/or GMetrics CrapMetric class is not on the classpath; skipping this rule")
-            hasNotReadyWarningBeenLogged.set(true)
+        synchronized(readyLock) {
+            if (ready == null) {
+                ready = true
+                if (!coberturaXmlFile) {
+                    LOG.warn("The Cobertura XML file [$coberturaXmlFile] is not accessible; skipping this rule")
+                    ready = false
+                }
+                if (!isCrapMetricClassOnClasspath()) {
+                    LOG.warn('The GMetrics CrapMetric class is not on the classpath; skipping this rule')
+                    ready = false
+                }
+            }
         }
         return ready
+    }
+
+    private CrapMetric createCrapMetric() {
+        synchronized(createMetricLock) {
+            if (!crapMetric) {
+                def coverageMetric = new CoberturaLineCoverageMetric(coberturaFile:coberturaXmlFile)
+                crapMetric = new CrapMetric(coverageMetric:coverageMetric)
+            }
+        }
+        return crapMetric
     }
 
     private boolean isCrapMetricClassOnClasspath() {
@@ -98,15 +123,23 @@ class CrapMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
 
     final String metricShortDescription = 'CRAP score'
 
-    protected Object createMetric() {
-        def coverageMetric = new CoberturaLineCoverageMetric(coberturaFile:rule.coberturaXmlFile)
-        return new CrapMetric(coverageMetric:coverageMetric)
+    private final CrapMetric crapMetric
+
+    protected CrapMetricAstVisitor(CrapMetric crapMetric) {
+        this.crapMetric = crapMetric
     }
 
+    @Override
+    protected Object createMetric() {
+        return crapMetric
+    }
+
+    @Override
     protected Object getMaxMethodMetricValue() {
         rule.maxMethodCrapScore
     }
 
+    @Override
     protected Object getMaxClassMetricValue() {
         rule.maxClassAverageMethodCrapScore
     }

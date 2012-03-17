@@ -11,7 +11,9 @@ ruleset {
         exclude 'JUnitStyleAssertions'
     }
 
-    ruleset("rulesets/size.xml")
+    ruleset("rulesets/size.xml") {
+        exclude 'CrapMetric'
+    }
 
     ruleset("rulesets/unused.xml")
 
