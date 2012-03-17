@@ -157,7 +157,7 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isMatchingField(FieldNode field, String name) {
-        isOwnedByClassOrItsOuterClass(field, currentClassNode) && field.name == name
+        field.name == name && isOwnedByClassOrItsOuterClass(field, currentClassNode)
     }
 
     private boolean isOwnedByClassOrItsOuterClass(FieldNode field, ClassNode classNode) {
