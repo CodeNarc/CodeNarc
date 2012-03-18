@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import org.codenarc.test.AbstractTestCase
 class ClassPathResourceTest extends AbstractTestCase {
 
     private static final TEXT_FILE = 'resource/SampleResource.txt'
+    private static final FILE_DOES_NOT_EXIST = 'bad/DoesNotExist.txt'
     private static final TEXT_FILE_CONTENTS = 'abcdef12345'
 
     void testConstructor_NullOrEmpty() {
@@ -66,5 +67,15 @@ class ClassPathResourceTest extends AbstractTestCase {
     void testGetInputStream_Static_NullOrEmpty() {
         shouldFailWithMessageContaining('path') { ClassPathResource.getInputStream(null) }
         shouldFailWithMessageContaining('path') { ClassPathResource.getInputStream('') }
+    }
+
+    void testExists_DoesExist() {
+        def resource = new ClassPathResource(TEXT_FILE)
+        assert resource.exists()
+    }
+
+    void testExists_DoesNotExist() {
+        def resource = new ClassPathResource(FILE_DOES_NOT_EXIST)
+        assert !resource.exists()
     }
 }

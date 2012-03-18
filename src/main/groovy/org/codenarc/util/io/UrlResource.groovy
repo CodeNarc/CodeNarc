@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,5 +41,25 @@ class UrlResource implements Resource {
     InputStream getInputStream() throws IOException {
         def url = new URL(path)
         url.openStream()
+    }
+
+    /**
+     * @return true only if this resource exists and is accessible
+     */
+    boolean exists() {
+        def inputStream
+        try {
+            def url = new URL(path)
+            inputStream = url.openStream()
+            return inputStream != null
+        }
+        catch (IOException e) {
+            return false
+        }
+        finally {
+            if (inputStream) {
+                inputStream.close()
+            }
+        }
     }
 }

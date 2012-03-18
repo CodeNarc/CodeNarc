@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ class UrlResourceTest extends AbstractTestCase {
 
     private static final TEXT_FILE = 'src/test/resources/resource/SampleResource.txt'
     private static final RELATIVE_FILE_URL = 'file:' + TEXT_FILE
+    private static final URL_DOEST_NOT_EXIST = 'file:bad/DoesNotExist.txt'
     private static final TEXT_FILE_CONTENTS = 'abcdef12345'
 
     void testConstructor_NullOrEmpty() {
@@ -75,5 +76,15 @@ class UrlResourceTest extends AbstractTestCase {
         def inputStream = resource.getInputStream()
         assert inputStream.text == TEXT_FILE_CONTENTS
         assert resource.getInputStream().text == TEXT_FILE_CONTENTS
+    }
+
+    void testExists_DoesExist() {
+        def resource = new UrlResource(RELATIVE_FILE_URL)
+        assert resource.exists()
+    }
+
+    void testExists_DoesNotExist() {
+        def resource = new UrlResource(URL_DOEST_NOT_EXIST)
+        assert !resource.exists()
     }
 }

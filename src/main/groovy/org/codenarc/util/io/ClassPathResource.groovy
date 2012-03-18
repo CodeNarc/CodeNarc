@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,5 +61,24 @@ class ClassPathResource implements Resource {
             throw new FileNotFoundException("File [$path] does not exist or is not accessible")
         }
         inputStream
+    }
+
+    /**
+     * @return true only if this resource exists and is accessible
+     */
+    boolean exists() {
+        def inputStream
+        try {
+            inputStream = getClass().classLoader.getResourceAsStream(path)
+            return inputStream != null
+        }
+        catch (IOException e) {
+            return false
+        }
+        finally {
+            if (inputStream) {
+                inputStream.close()
+            }
+        }
     }
 }

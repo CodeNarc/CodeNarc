@@ -36,8 +36,9 @@ BUG FIXES
 FRAMEWORK AND INFRASTRUCTURE
 - #3495841: Support Groovy 2.x.
 - #3496463: Support GMetrics 0.5.
-- Introduce AbstractSharedAstVisitorRule. Refactor UnusedPrivateFieldRule and UnusedPrivateMethodRule to use it.
 - #3476394: Include PMD report in project reports; Fix/resolve violations.
+- Introduce AbstractSharedAstVisitorRule. Refactor UnusedPrivateFieldRule and UnusedPrivateMethodRule to use it.
+- Add exists() method to org.codenarc.util.io.Resource and implementations
 
 
 Changes in version 0.16.1 (November 2011)
