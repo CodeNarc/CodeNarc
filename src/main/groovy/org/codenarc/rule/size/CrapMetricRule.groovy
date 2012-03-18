@@ -22,6 +22,7 @@ import org.gmetrics.metric.coverage.CoberturaLineCoverageMetric
 
 import org.apache.log4j.Logger
 import org.codenarc.rule.AstVisitor
+import org.codenarc.util.io.DefaultResourceFactory
 
 /**
  * Rule that calculates the CRAP Metric for methods/classes and checks against
@@ -74,6 +75,7 @@ class CrapMetricRule extends AbstractAstVisitorRule {
     private crapMetric      // omit CrapMetric type; it may not be on the classpath
     private final readyLock = new Object()
     private final createMetricLock = new Object()
+    private final resourceFactory = new DefaultResourceFactory()
 
     @Override
     AstVisitor getAstVisitor() {
@@ -85,7 +87,7 @@ class CrapMetricRule extends AbstractAstVisitorRule {
         synchronized(readyLock) {
             if (ready == null) {
                 ready = true
-                if (!coberturaXmlFile) {
+                if (!doesCoberturaXmlFileExist()) {
                     LOG.warn("The Cobertura XML file [$coberturaXmlFile] is not accessible; skipping this rule")
                     ready = false
                 }
@@ -96,6 +98,14 @@ class CrapMetricRule extends AbstractAstVisitorRule {
             }
         }
         return ready
+    }
+
+    private boolean doesCoberturaXmlFileExist() {
+        if (!coberturaXmlFile) {
+            return false
+        }
+        def resource = resourceFactory.getResource(coberturaXmlFile)
+        return resource.exists()
     }
 
     private createCrapMetric() {        // omit CrapMetric type; it may not be on the classpath

@@ -53,11 +53,28 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
     }
 
     void testCoberturaXmlFileNullOrEmpty_IsReadyReturnsFalse() {
-        rule.coberturaXmlFile = null
-        assert !rule.ready
+        def logEvents = captureLog4JMessages {
+            rule.coberturaXmlFile = null
+            assert !rule.ready
 
-        rule.coberturaXmlFile = ''
+            rule.coberturaXmlFile = ''
+            assert !rule.ready
+        }
+        assertNumberOfLogMessages(logEvents, 'Cobertura XML file', 1)
+    }
+
+    void testApplyTo_CoberturaXmlFileDoesNotExist_IsReadyReturnsFalse_OnlyLogsWarningOnce() {
+        rule.coberturaXmlFile = 'DoesNotExist.xml'
         assert !rule.ready
+    }
+
+    void testApplyTo_CoberturaXmlFileDoesNotExist_NoViolations_OnlyLogsWarningOnce() {
+        rule.coberturaXmlFile = 'DoesNotExist.xml'
+        def logEvents = captureLog4JMessages {
+            assertNoViolations(SOURCE)
+            assertNoViolations(SOURCE)
+        }
+        assertNumberOfLogMessages(logEvents, 'Cobertura XML file', 1)
     }
 
     void testCrapMetricClassNotOnClassPath_IsReadyReturnsFalse() {
@@ -68,8 +85,12 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
     void testCrapMetricClassNotOnClassPath_NoViolations() {
         rule.crapMetricClassName = 'some.NonExistentClass'
         rule.maxMethodCrapScore = 1.0
-        assertNoViolations(SOURCE)
-        assertNoViolations(SOURCE)
+
+        def logEvents = captureLog4JMessages {
+            assertNoViolations(SOURCE)
+            assertNoViolations(SOURCE)
+        }
+        assertNumberOfLogMessages(logEvents, 'GMetrics CrapMetric class', 1)
     }
 
     void testApplyTo_ClassWithNoMethods() {
@@ -189,14 +210,14 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testApplyTo_CoberturaXmlFileDoesNotExist_ThrowsFileNotFoundException() {
-        rule.coberturaXmlFile = 'DoesNotExist.xml'
-        shouldFail(FileNotFoundException) { applyRuleTo(SOURCE) }
-    }
-
     @Override
     protected Rule createRule() {
         new CrapMetricRule(coberturaXmlFile:COBERTURA_FILE)
+    }
+
+    private void assertNumberOfLogMessages(logEvents, String expectedText, int expectedCount) {
+        def matchingLogEvents = logEvents.findAll { it.message.contains(expectedText) }
+        assert matchingLogEvents.size() == expectedCount
     }
 
 }
