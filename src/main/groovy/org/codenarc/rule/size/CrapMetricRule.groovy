@@ -71,7 +71,7 @@ class CrapMetricRule extends AbstractAstVisitorRule {
 
     protected String crapMetricClassName = 'org.gmetrics.metric.crap.CrapMetric'
     private Boolean ready
-    private CrapMetric crapMetric
+    private crapMetric      // omit CrapMetric type; it may not be on the classpath
     private final readyLock = new Object()
     private final createMetricLock = new Object()
 
@@ -98,7 +98,7 @@ class CrapMetricRule extends AbstractAstVisitorRule {
         return ready
     }
 
-    private CrapMetric createCrapMetric() {
+    private createCrapMetric() {        // omit CrapMetric type; it may not be on the classpath
         synchronized(createMetricLock) {
             if (!crapMetric) {
                 def coverageMetric = new CoberturaLineCoverageMetric(coberturaFile:coberturaXmlFile)
