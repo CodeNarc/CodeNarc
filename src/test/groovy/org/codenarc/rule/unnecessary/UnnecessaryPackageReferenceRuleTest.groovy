@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -190,6 +190,46 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'class MyList implements java.util.List { }', messageText:'java.util'],
             [lineNumber:3, sourceLineText:'class MyRange implements groovy.lang.Range { }', messageText:'groovy.lang'] )
+    }
+
+    // TODO Add test(s) for [:] as <class>
+    // TODO Add test(s) for anonymous inner class declaration
+
+    void testPackageReferencesForExplicitlyImportedClasses_Violations() {
+        final SOURCE = '''
+            import javax.servlet.http.Cookie
+            import javax.sql.DataSource
+            import com.example.OtherClass
+
+            class MyClass {
+                void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies) {
+                    def dataSource = new javax.sql.DataSource()
+                    DataSource dataSource2 = wrap(dataSource)
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
+            [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
+//            [lineNumber:8, sourceLineText:'def dataSource = [:] as javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
+    }
+
+    void testPackageReferencesForStarImports_Violations() {
+        final SOURCE = '''
+            import javax.servlet.http.*
+            import javax.sql.*
+            import com.example.OtherClass
+
+            class MyClass {
+                void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies) {
+                    def dataSource = new javax.sql.DataSource()
+                    DataSource dataSource2 = wrap(dataSource)
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
+            [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
     }
 
     protected Rule createRule() {

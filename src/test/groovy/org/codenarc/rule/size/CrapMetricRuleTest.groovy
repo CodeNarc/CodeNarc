@@ -17,7 +17,6 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
-
 /**
  * Tests for CrapMetricRule
  *

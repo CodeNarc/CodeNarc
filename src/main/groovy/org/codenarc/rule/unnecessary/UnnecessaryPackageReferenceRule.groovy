@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +25,11 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.GroovyVersion
 import org.codehaus.groovy.ast.expr.*
+import org.codenarc.util.ImportUtil
 
 /**
  * Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String,
- * java.util.Map and groovy.lang.Closure.
+ * java.util.Map and groovy.lang.Closure, as well as classes that were explicitly imported.
  *
  * @author Chris Mair
  */
@@ -40,10 +41,14 @@ class UnnecessaryPackageReferenceRule extends AbstractAstVisitorRule {
 
 class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
 
+    private final List<String> importedClassNames = []
+    private final List<String> starImportPackageNames = []
+
     // TODO Only ignore java.util.Object superclass if it was not explicitly specified
 
     @Override
     protected void visitClassEx(ClassNode node) {
+        initializeImportNames()
         def superClassName = node.superClass.name
         if (superClassName != 'java.lang.Object' && !(GroovyVersion.groovy1_8_OrGreater && node.isScript() && node.name == 'None')) {
             checkType(superClassName, node)
@@ -110,6 +115,15 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     // Helper Methods
     //--------------------------------------------------------------------------
 
+    private initializeImportNames() {
+        sourceCode.ast.imports.each { importNode ->
+            importedClassNames << importNode.className
+        }
+        sourceCode.ast.starImports.each { importNode ->
+            starImportPackageNames << ImportUtil.packageNameForImport(importNode)
+        }
+    }
+
     private void checkTypeIfNotDynamicallyTyped(node) {
         if (!node.isDynamicTyped()) {       // ignore 'def' which resolves to java.lang.Object
             checkType(node.type.name, node)
@@ -119,6 +133,9 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     private void checkType(String typeName, node) {
         if (typeName in AUTO_IMPORTED_CLASSES || parentPackageName(typeName) in AUTO_IMPORTED_PACKAGES) {
             addViolation(node, "Specifying the package name is not necessary for $typeName")
+        }
+        if (typeName in importedClassNames || parentPackageName(typeName) in starImportPackageNames) {
+            addViolation(node, "The $typeName class was explicitly imported, so specifying the package name is not necessary")
         }
     }
 

@@ -23,6 +23,7 @@ UPDATED/ENHANCED RULES
 - #3485544: AssignmentInConditional: Also catch nested binary expressions, e.g. if (x==1 || x=3)
 - #3488705: GrailsDomainHasToString: Ignore classes annotated with @ToString or @Canonical.
 - #3488704: GrailsDomainHasEquals: Ignore classes annotated with @EqualsAndHashCode or @Canonical.
+- #3501349: UnnecessaryPackageReference: Also check for explicitly-imported classes.
 
 BUG FIXES
 - #3463408: Remove dependency on Java 1.6 (String.isEmpty()).
