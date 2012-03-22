@@ -36,7 +36,7 @@ import org.codehaus.groovy.ast.expr.*
 class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
 
     String name = 'PrivateFieldCouldBeFinal'
-    int priority = 2
+    int priority = 3
     String ignoreFieldNames
     Class astVisitorClass = PrivateFieldCouldBeFinalAstVisitor
 

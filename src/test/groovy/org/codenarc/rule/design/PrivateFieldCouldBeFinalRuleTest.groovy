@@ -28,7 +28,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
     private static final VIOLATION_MESSAGE = 'Private field [count] in class MyClass is only'
 
     void testRuleProperties() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'PrivateFieldCouldBeFinal'
     }
 
