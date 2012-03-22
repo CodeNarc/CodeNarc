@@ -111,6 +111,16 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
         checkType(expression.text, expression)
     }
 
+    @Override
+    void visitCastExpression(CastExpression expression) {
+        if (isFirstVisit(expression)) {
+            checkType(expression.type.name, expression)
+        }
+        super.visitCastExpression(expression)
+    }
+
+
+
     //--------------------------------------------------------------------------
     // Helper Methods
     //--------------------------------------------------------------------------

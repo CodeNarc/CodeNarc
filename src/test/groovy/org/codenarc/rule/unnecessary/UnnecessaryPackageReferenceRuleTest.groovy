@@ -192,8 +192,27 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'class MyRange implements groovy.lang.Range { }', messageText:'groovy.lang'] )
     }
 
-    // TODO Add test(s) for [:] as <class>
-    // TODO Add test(s) for anonymous inner class declaration
+    void testAsType_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                def runnable = [:] as java.lang.Runnable
+                def string = (java.lang.String)123
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'def runnable = [:] as java.lang.Runnable', messageText:'java.lang'],
+            [lineNumber:4, sourceLineText:'def string = (java.lang.String)123', messageText:'java.lang'])
+    }
+
+    void testAnonymousInnerClassDeclaration_KnownLimitation_NoViolation() {
+        final SOURCE = '''
+            def runnable = new java.lang.Runnable() {
+                void run() { }
+            }
+        '''
+        // Known limitation: Does not check anonymous inner class violations
+        assertNoViolations(SOURCE)
+    }
 
     void testPackageReferencesForExplicitlyImportedClasses_Violations() {
         final SOURCE = '''
@@ -203,15 +222,14 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
 
             class MyClass {
                 void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies) {
-                    def dataSource = new javax.sql.DataSource()
+                    def dataSource = [:] as javax.sql.DataSource
                     DataSource dataSource2 = wrap(dataSource)
                 }
             }
         '''
         assertViolations(SOURCE,
             [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
-            [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
-//            [lineNumber:8, sourceLineText:'def dataSource = [:] as javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
+            [lineNumber:8, sourceLineText:'def dataSource = [:] as javax.sql.DataSource', messageText:'javax.sql.DataSource'] )
     }
 
     void testPackageReferencesForStarImports_Violations() {

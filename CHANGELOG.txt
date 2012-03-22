@@ -24,6 +24,7 @@ UPDATED/ENHANCED RULES
 - #3488705: GrailsDomainHasToString: Ignore classes annotated with @ToString or @Canonical.
 - #3488704: GrailsDomainHasEquals: Ignore classes annotated with @EqualsAndHashCode or @Canonical.
 - #3501349: UnnecessaryPackageReference: Also check for explicitly-imported classes.
+- #3509542: UnnecessaryPackageReference: Also check for package references in "as <Class>".
 
 BUG FIXES
 - #3463408: Remove dependency on Java 1.6 (String.isEmpty()).
