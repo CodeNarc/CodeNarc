@@ -34,8 +34,9 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  */
 class ConfusingTernaryRule extends AbstractAstVisitorRule {
+
     String name = 'ConfusingTernary'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = ConfusingTernaryAstVisitor
 }
 

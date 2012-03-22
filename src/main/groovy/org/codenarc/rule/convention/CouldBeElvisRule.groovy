@@ -29,8 +29,9 @@ import org.codenarc.util.AstUtil
  * @author GUM
  */
 class CouldBeElvisRule extends AbstractAstVisitorRule {
+
     String name = 'CouldBeElvis'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = CouldBeElvisAstVisitor
 }
 

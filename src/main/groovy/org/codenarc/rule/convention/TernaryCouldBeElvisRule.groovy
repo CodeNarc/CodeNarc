@@ -30,8 +30,9 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * @author Chris Mair
  */
 class TernaryCouldBeElvisRule extends AbstractAstVisitorRule {
+
     String name = 'TernaryCouldBeElvis'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = TernaryCouldBeElvisAstVisitor
 }
 
