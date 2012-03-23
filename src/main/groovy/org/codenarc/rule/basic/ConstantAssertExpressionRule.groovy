@@ -42,7 +42,7 @@ import org.codenarc.util.AstUtil
 class ConstantAssertExpressionRule extends AbstractAstVisitorRule {
 
     String name = 'ConstantAssertExpression'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = ConstantAssertExpressionAstVisitor
 }
 
