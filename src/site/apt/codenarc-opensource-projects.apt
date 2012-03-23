@@ -21,13 +21,13 @@ CodeNarc - Open Source Project Reports
 * Grails
 ~~~~~~~~~
 
-  <<CodeNarc>> report for {{{CodeNarc-Grails-Report.html}Grails 1.3.7}}
+  <<CodeNarc>> report for {{{CodeNarc-Grails-Report.html}Grails 2.0.0 RC1}}
 
 
 * Gradle
 ~~~~~~~~~
 
-  <<CodeNarc>> report for {{{CodeNarc-Gradle-Report.html}Gradle 1.0-milestone-4}}
+  <<CodeNarc>> report for {{{CodeNarc-Gradle-Report.html}Gradle 1.0-milestone-9}}
 
 
 * {Generic RuleSet}
@@ -48,7 +48,7 @@ ruleset {
         exclude 'JUnitStyleAssertions'
     }
 
-    ruleset("rulesets/size.xml")
+    CyclomaticComplexity
 
     ruleset("rulesets/unused.xml")
 

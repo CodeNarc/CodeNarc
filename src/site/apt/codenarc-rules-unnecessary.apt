@@ -860,7 +860,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     <<<class MyClass extends java.lang.Object { }>>>. Just don't do that, okay?
 
   * Does not catch unnecessary package references if they are the types of anonymous inner class
-    definitions. For instance, <<<def runnable = new java.lang.Runnable() { void run() { } }>>>.
+    definitions. For instance, <<<def runnable = new java.lang.Runnable() { ... }>>>.
 
 
 * {UnnecessaryParenthesesForMethodCallWithClosure} Rule
