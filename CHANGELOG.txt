@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.17 (??? 2012)
+Changes in version 0.17 (March 2012)
 -------------------------------------------
 NEW RULES
 - #3433042: New PrivateFieldCouldBeFinal rule: Checks for private fields that are only set within a constructor or field initializer. Such fields can safely be made final.
