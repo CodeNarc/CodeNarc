@@ -70,17 +70,19 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
             {
             }
         '''
-        assertSingleViolation(SOURCE, 2, 'if (a &&', 'Braces should start on the same line')
+        assertSingleViolation(SOURCE, 2, 'if (a &&', "Opening brace should be on the same line as 'if'")
     }
 
     void testViolationSameLine() {
-
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 40, sourceLineText: 'if(1==1)', messageText: 'Braces should start on the same line'],
-                [lineNumber: 43, sourceLineText: 'else if (2==2)', messageText: 'Braces should start on the same line'],
-                [lineNumber: 50, sourceLineText: 'if (3==3)', messageText: 'Braces should start on the same line'])
+                [lineNumber: 40, sourceLineText: 'if(1==1)',       messageText: "Opening brace should be on the same line as 'if'"],
+                [lineNumber: 43, sourceLineText: 'else if (2==2)', messageText: "'else' should be on the same line as the closing brace"],
+                [lineNumber: 43, sourceLineText: 'else if (2==2)', messageText: "Opening brace should be on the same line as 'if'"],
+                [lineNumber: 47, sourceLineText: '{',              messageText: "'else' should be on the same line as the closing brace"],
+                [lineNumber: 47, sourceLineText: '{',              messageText: "Opening brace should be on the same line as 'else'"],
+                [lineNumber: 50, sourceLineText: 'if (3==3)',      messageText: "Opening brace should be on the same line as 'if'"])
     }
 
     void testViolationNewLine() {
@@ -88,12 +90,18 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
-                [lineNumber: 28, sourceLineText: 'if(1==1) {', messageText: 'Braces should start on a new line'],
-                [lineNumber: 29, sourceLineText: '} else if(2==2)', messageText: 'Braces should start on a new line'],
-                [lineNumber: 33, sourceLineText: 'if (3==3){', messageText: 'Braces should start on a new line'])
+                [lineNumber: 28, sourceLineText: 'if(1==1) {',        messageText: "Opening brace should not be on the same line as 'if'"],
+                [lineNumber: 29, sourceLineText: '} else if(2==2) {', messageText: "'else' should not be on the same line as the closing brace"],
+                [lineNumber: 29, sourceLineText: '} else if(2==2) {', messageText: "Opening brace should not be on the same line as 'if'"],
+                [lineNumber: 30, sourceLineText: '} else{',           messageText: "'else' should not be on the same line as the closing brace"],
+                [lineNumber: 30, sourceLineText: '} else{',           messageText: "Opening brace should not be on the same line as 'else'"],
+                [lineNumber: 33, sourceLineText: 'if (3==3){',        messageText: "Opening brace should not be on the same line as 'if'"])
     }
 
     protected Rule createRule() {
-        new BracesForIfElseRule()
+        BracesForIfElseRule rule = new BracesForIfElseRule()
+        rule.validateElse = true
+
+        rule
     }
 }
