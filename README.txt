@@ -1,6 +1,5 @@
-CodeNarc version ${project.version}
+CodeNarc  --  http://codenarc.org/
 -------------------------------------------------------------------------------
-${project.url}
 
 CodeNarc is a static analysis tool for Groovy source code, enabling monitoring and enforcement of
 many coding standards and best practices. CodeNarc applies a set of Rules (predefined and/or custom)
@@ -14,7 +13,7 @@ which analyze Java code, CodeNarc analyzes Groovy code.
 DEPENDENCIES
 
 CodeNarc requires
- - Groovy version 1.6 or later
+ - Groovy version 1.7 or later
  - The Log4J jar, version 1.2.13 or later, accessible on the CLASSPATH
    (http://logging.apache.org/log4j/index.html).
 

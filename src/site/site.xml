@@ -6,6 +6,12 @@
         <href>/</href>
     </bannerLeft>
 
+    <bannerRight>
+        <name>Fork me on GitHub</name>
+        <src>images/forkme_right_red_aa0000.png</src>
+        <href>http://github.com/CodeNarc</href>
+    </bannerRight>
+
     <publishDate format="dd MMM yyyy"/>
 
     <poweredBy>
@@ -28,11 +34,11 @@
         <menu name="General">
             <item name="Home" href="/index.html"/>
             <item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=250145"/>
-            <item name="Road Map" href="/codenarc-roadmap.html"/>
             <item name="Javadocs" href="/apidocs/index.html"/>
             <item name="Mailing Lists" href="http://sourceforge.net/mail/?group_id=250145"/>
             <item name="Bug Tracker" href="http://sourceforge.net/tracker/?group_id=250145"/>
             <item name="SourceForge Project" href="http://sourceforge.net/projects/codenarc"/>
+            <item name="GitHub Project" href="http://github.com/CodeNarc"/>
         </menu>
 
         <menu name="Running">

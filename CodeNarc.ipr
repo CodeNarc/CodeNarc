@@ -183,13 +183,11 @@
         <inspection_tool class="GroovyAssignmentToMethodParameter" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyConditionalCanBeConditionalCall" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyConditionalCanBeElvis" enabled="true" level="WARNING" enabled_by_default="true" />
-        <inspection_tool class="GroovyConditionalWithIdenticalBranches" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyContinueOrBreakFromFinallyBlock" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyEmptyCatchBlock" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyEmptyFinallyBlock" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyEmptyTryBlock" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyGetterCallCanBePropertyAccess" enabled="true" level="WARNING" enabled_by_default="true" />
-        <inspection_tool class="GroovyIfStatementWithIdenticalBranches" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyListGetCanBeKeyedAccess" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyListSetCanBeKeyedAccess" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyLoopStatementThatDoesntLoop" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -201,7 +199,6 @@
         <inspection_tool class="GroovyReturnFromFinallyBlock" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovySetterCallCanBePropertyAccess" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="GroovyThrowFromFinallyBlock" enabled="true" level="WARNING" enabled_by_default="true" />
-        <inspection_tool class="GroovyUnusedCatchParameter" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true" />
       </profile>
     </profiles>
@@ -387,6 +384,38 @@
       </item>
     </group>
   </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+        <ADDITIONAL_INDENT_OPTIONS fileType="haml">
+          <option name="INDENT_SIZE" value="2" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="sass">
+          <option name="INDENT_SIZE" value="2" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="sql">
+          <option name="INDENT_SIZE" value="2" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="yml">
+          <option name="INDENT_SIZE" value="2" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <codeStyleSettings language="Groovy">
+          <indentOptions>
+            <option name="CONTINUATION_INDENT_SIZE" value="4" />
+          </indentOptions>
+        </codeStyleSettings>
+        <codeStyleSettings language="JavaScript">
+          <indentOptions>
+            <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          </indentOptions>
+        </codeStyleSettings>
+      </value>
+    </option>
+    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+  </component>
   <component name="ProjectDetails">
     <option name="projectName" value="CodeNarc" />
   </component>
@@ -438,97 +467,6 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches">
-                    <value>
-                      <list>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1308274680479" />
-                          <option name="revision" value="764" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1257988656828" />
-                          <option name="revision" value="239" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/MetricReporting" />
-                        </SvnBranchItem>
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14">
-                    <value>
-                      <list>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1308349519899" />
-                          <option name="revision" value="765" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/src" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1308349519899" />
-                          <option name="revision" value="765" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/CHANGELOG.txt" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1308349519899" />
-                          <option name="revision" value="765" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/CodeNarc.ipr" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1308274680479" />
-                          <option name="revision" value="764" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/CodeNarc.iml" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1306377583971" />
-                          <option name="revision" value="720" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/pom.xml" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1306087193126" />
-                          <option name="revision" value="716" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/pom1_8.xml" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1302355251093" />
-                          <option name="revision" value="666" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/codenarc.groovy" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1296613396609" />
-                          <option name="revision" value="585" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/templates" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1288378703536" />
-                          <option name="revision" value="414" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/samples" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1286937090186" />
-                          <option name="revision" value="390" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/README.txt" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1232592720857" />
-                          <option name="revision" value="7" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/LICENSE.txt" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1232592720857" />
-                          <option name="revision" value="7" />
-                          <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches/ReleaseBranch-0.14/NOTICE.txt" />
-                        </SvnBranchItem>
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="https://codenarc.svn.sourceforge.net/svnroot/codenarc/tags/0.5">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="branchUrls">
                 <list>
                   <option value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/branches" />
@@ -546,7 +484,7 @@
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="svn" />
+    <mapping directory="" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
