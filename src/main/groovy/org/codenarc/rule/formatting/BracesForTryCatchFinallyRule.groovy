@@ -23,8 +23,8 @@ import org.codehaus.groovy.ast.stmt.CatchStatement
 /**
  * Checks the location of the opening brace ({) for try statements, the location 
  * of the 'catch' keyword and corresponding opening braces, and the location of the 'finally'
- * keyword and the corresponding opening braces. By default, requires opening braces them on the
- * line, but the sameLine property can be set to false to override this.
+ * keyword and the corresponding opening braces. By default, requires opening braces on the
+ * same line, but the sameLine property can be set to false to override this.
  *
  * By default does not validate catch and finally clauses, to turn this on set properties
  * validateCatch and validateFinally to true respectively. The catch and finally handling
