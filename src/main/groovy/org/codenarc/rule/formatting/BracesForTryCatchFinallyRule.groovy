@@ -75,8 +75,12 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
         //TODO: Understand AstUtil.isBlock and isFirstVisit and apply them as appropriate to the below block
         if (myRule.validateCatch && node.catchStatements) {
             //if user has not explicitly set the catch brace settings, 'inherit' them from sameLine
-            if (myRule.catchOnSameLineAsClosingBrace == null) myRule.catchOnSameLineAsClosingBrace = myRule.sameLine
-            if (myRule.catchOnSameLineAsOpeningBrace == null) myRule.catchOnSameLineAsOpeningBrace = myRule.sameLine
+            if (myRule.catchOnSameLineAsClosingBrace == null) {
+                myRule.catchOnSameLineAsClosingBrace = myRule.sameLine
+            }
+            if (myRule.catchOnSameLineAsOpeningBrace == null) {
+                myRule.catchOnSameLineAsOpeningBrace = myRule.sameLine
+            }
 
             node.catchStatements.each { CatchStatement stmt ->
                 def srcLine = sourceLine(stmt)
@@ -99,8 +103,12 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
     void visitFinally(BracesForTryCatchFinallyRule myRule, TryCatchStatement node) {
         //TODO: Understand AstUtil.isBlock and isFirstVisit and apply them as appropriate to the below block
         //if user has not explicitly set the finally brace settings, 'inherit' them from sameLine
-        if (myRule.finallyOnSameLineAsClosingBrace == null) myRule.finallyOnSameLineAsClosingBrace = myRule.sameLine
-        if (myRule.finallyOnSameLineAsOpeningBrace == null) myRule.finallyOnSameLineAsOpeningBrace = myRule.sameLine
+        if (myRule.finallyOnSameLineAsClosingBrace == null) {
+            myRule.finallyOnSameLineAsClosingBrace = myRule.sameLine
+        }
+        if (myRule.finallyOnSameLineAsOpeningBrace == null) {
+            myRule.finallyOnSameLineAsOpeningBrace = myRule.sameLine
+        }
 
         if (myRule.validateFinally && node.finallyStatement) {
             def stmt = node.finallyStatement

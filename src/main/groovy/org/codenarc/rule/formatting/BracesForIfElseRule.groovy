@@ -77,33 +77,48 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
             }
         }
 
+        visitElse(myRule, node)
+
+        super.visitIfElse(node)
+    }
+
+    void visitElse(BracesForIfElseRule myRule, IfStatement node) {
         //TODO: Understand isFirstVisit and apply them as appropriate to the below block
         if (myRule.validateElse && node.elseBlock) {
             //if user has not explicitly set the else brace settings, 'inherit' them from sameLine
-            if (myRule.elseOnSameLineAsClosingBrace == null) myRule.elseOnSameLineAsClosingBrace = myRule.sameLine
-            if (myRule.elseOnSameLineAsOpeningBrace == null) myRule.elseOnSameLineAsOpeningBrace = myRule.sameLine
+            if (myRule.elseOnSameLineAsClosingBrace == null) {
+                myRule.elseOnSameLineAsClosingBrace = myRule.sameLine
+            }
+            if (myRule.elseOnSameLineAsOpeningBrace == null) {
+                myRule.elseOnSameLineAsOpeningBrace = myRule.sameLine
+            }
 
             def srcLine = sourceLine(node.elseBlock)
 
-            //only test for else closing curlies if the if statement has curlies to test for (i.e. is not one-line)
-            if (AstUtil.isBlock(node.ifBlock)) {
-                if (myRule.elseOnSameLineAsClosingBrace && srcLine && !(srcLine?.contains('else') && srcLine?.contains('}'))) {
-                    addViolation(node.elseBlock, "'else' should be on the same line as the closing brace")
-                } else if (!myRule.elseOnSameLineAsClosingBrace && srcLine?.contains("else") && srcLine?.contains('}')) {
-                    addViolation(node.elseBlock, "'else' should not be on the same line as the closing brace")
-                }
-            }
+            visitElseClosingBrace(myRule, node, srcLine)
+            visitElseOpeningBrace(myRule, node, srcLine)
+        }
+    }
 
-            //only test for else opening curlies if the else statement has curlies to test for (i.e. is not one-line)
-            if (AstUtil.isBlock(node.elseBlock)) {
-                if (myRule.elseOnSameLineAsOpeningBrace && srcLine && !(srcLine?.contains('else') && srcLine?.contains('{'))) {
-                    addViolation(node.elseBlock, "Opening brace should be on the same line as 'else'")
-                } else if (!myRule.elseOnSameLineAsOpeningBrace && srcLine?.contains('else') && srcLine?.contains('{')) {
-                    addViolation(node.elseBlock, "Opening brace should not be on the same line as 'else'")
-                }
+    void visitElseClosingBrace(BracesForIfElseRule myRule, IfStatement node, String srcLine) {
+        //only test for else closing curlies if the if statement has curlies to test for (i.e. is not one-line)
+        if (AstUtil.isBlock(node.ifBlock)) {
+            if (myRule.elseOnSameLineAsClosingBrace && srcLine && !(srcLine?.contains('else') && srcLine?.contains('}'))) {
+                addViolation(node.elseBlock, "'else' should be on the same line as the closing brace")
+            } else if (!myRule.elseOnSameLineAsClosingBrace && srcLine?.contains('else') && srcLine?.contains('}')) {
+                addViolation(node.elseBlock, "'else' should not be on the same line as the closing brace")
             }
         }
+    }
 
-        super.visitIfElse(node)
+    void visitElseOpeningBrace(BracesForIfElseRule myRule, IfStatement node, String srcLine) {
+        //only test for else opening curlies if the else statement has curlies to test for (i.e. is not one-line)
+        if (AstUtil.isBlock(node.elseBlock)) {
+            if (myRule.elseOnSameLineAsOpeningBrace && srcLine && !(srcLine?.contains('else') && srcLine?.contains('{'))) {
+                addViolation(node.elseBlock, "Opening brace should be on the same line as 'else'")
+            } else if (!myRule.elseOnSameLineAsOpeningBrace && srcLine?.contains('else') && srcLine?.contains('{')) {
+                addViolation(node.elseBlock, "Opening brace should not be on the same line as 'else'")
+            }
+        }
     }
 }
