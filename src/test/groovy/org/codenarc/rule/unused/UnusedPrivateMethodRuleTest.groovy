@@ -418,8 +418,18 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void testStackOverflow() {
+    void testApplyTo_StackOverflow() {
         final SOURCE = ' Map map = ["a" : 1, "b": 2, "$c": 3, "b": 4 ] '
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_ZeroLengthMethodName() {
+        final SOURCE = '''
+            def doStuff() {
+                def results = calculate()
+                results[0].""
+            }
+        '''
         assertNoViolations(SOURCE)
     }
 

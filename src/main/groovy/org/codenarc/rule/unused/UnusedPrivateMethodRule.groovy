@@ -138,12 +138,16 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
     void visitPropertyExpression(PropertyExpression expression) {
 
         if (isConstantString(expression.property)) {
-            if (expression.property.value.size() == 1) {
-                unusedPrivateMethods.remove('get' + expression.property.value.toUpperCase())
-                unusedPrivateMethods.remove('set' + expression.property.value.toUpperCase())
+            def propertyName = expression.property.value
+            if (propertyName.size() == 1) {
+                def propertyNameUpperCase = expression.property.value.toUpperCase()
+                unusedPrivateMethods.remove('get' + propertyNameUpperCase)
+                unusedPrivateMethods.remove('set' + propertyNameUpperCase)
             } else {
-                unusedPrivateMethods.remove('get' + expression.property.value[0].toUpperCase() + expression.property.value[1..-1])
-                unusedPrivateMethods.remove('set' + expression.property.value[0].toUpperCase() + expression.property.value[1..-1])
+                if (propertyName) {
+                    unusedPrivateMethods.remove('get' + propertyName[0].toUpperCase() + propertyName[1..-1])
+                    unusedPrivateMethods.remove('set' + propertyName[0].toUpperCase() + propertyName[1..-1])
+                }
             }
         }
         super.visitPropertyExpression expression

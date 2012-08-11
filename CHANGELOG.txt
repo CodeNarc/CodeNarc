@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.18 (??? 2012)
+-------------------------------------------
+BUG FIXES
+- Fix #3555096: UnusedPrivateMethod - StringIndexOutOfBoundsException for zero-length method name.
+
+
 Changes in version 0.17 (March 2012)
 -------------------------------------------
 NEW RULES
