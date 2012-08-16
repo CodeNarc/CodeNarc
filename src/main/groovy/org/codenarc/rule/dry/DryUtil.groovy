@@ -127,10 +127,10 @@ class DryUtil {
             return false
         }
 
-        Expression object1 = ((PropertyExpression) expression1).getObjectExpression();
-        Expression property1 = ((PropertyExpression) expression1).getProperty();
-        Expression object2 = ((PropertyExpression) expression2).getObjectExpression();
-        Expression property2 = ((PropertyExpression) expression2).getProperty();
+        Expression object1 = ((PropertyExpression) expression1).getObjectExpression()
+        Expression property1 = ((PropertyExpression) expression1).getProperty()
+        Expression object2 = ((PropertyExpression) expression2).getObjectExpression()
+        Expression property2 = ((PropertyExpression) expression2).getProperty()
 
         boolean isTheSame = false
 

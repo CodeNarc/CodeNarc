@@ -50,7 +50,7 @@ abstract class AbstractSourceCode implements SourceCode {
      * @param suppressionAnalyzer suppression analyzer
      */
     protected void setSuppressionAnalyzer(SuppressionAnalyzer suppressionAnalyzer) {
-        this.suppressionAnalyzer = suppressionAnalyzer;
+        this.suppressionAnalyzer = suppressionAnalyzer
     }
 
     /**
@@ -58,9 +58,9 @@ abstract class AbstractSourceCode implements SourceCode {
      */
     List getLines() {
         if (lines == null) {
-            lines = new StringReader(getText()).readLines();
+            lines = new StringReader(getText()).readLines()
         }
-        return lines;
+        return lines
     }
 
     /**

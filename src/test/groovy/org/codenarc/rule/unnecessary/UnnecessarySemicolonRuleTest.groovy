@@ -30,7 +30,6 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'UnnecessarySemicolon'
     }
 
-    @SuppressWarnings('UnnecessarySemicolon')
     void testSuccessScenario() {
         final SOURCE = '''
 /*
@@ -56,8 +55,13 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
                 ;
             }
 
+            @SuppressWarnings('UnnecessarySemicolon')
+            class A {
+                String a = 'text';
+            }
+
         '''
-        assertNoViolations(SOURCE)
+        assert !manuallyApplyRule(SOURCE)
     }
 
     void testSimpleString() {
@@ -89,7 +93,6 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 7, '            """;'
     }
 
-    @SuppressWarnings('UnnecessarySemicolon')
     void testPackage() {
         final SOURCE = '''
             package my.company.server;
@@ -97,7 +100,6 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'package my.company.server;', 'Semi-colons as line endings can be removed safely')
     }
 
-    @SuppressWarnings('UnnecessarySemicolon')
     void testLoop() {
         final SOURCE = '''
             for (def x : list);
@@ -105,7 +107,6 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'for (def x : list);', 'Semi-colons as line endings can be removed safely')
     }
 
-    @SuppressWarnings('UnnecessarySemicolon')
     void testMethodCall() {
         final SOURCE = '''
             println(value) ;
@@ -119,6 +120,17 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
             import java.lang.String;    
         '''
         assertSingleViolation(SOURCE, 2, 'import java.lang.String;', 'Semi-colons as line endings can be removed safely')
+    }
+
+    void testClass() {
+        final SOURCE = '''
+            class A {
+                int a() {
+                    return 1;
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'return 1;', 'Semi-colons as line endings can be removed safely')
     }
 
     protected Rule createRule() {
