@@ -277,7 +277,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
 
         @Override
         List applyTo(SourceCode sourceCode) {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException()
         }
     }
 }
