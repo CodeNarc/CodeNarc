@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.util.GroovyVersion
 
 /**
  * Tests for UnnecessaryPackageReferenceRule
@@ -210,8 +211,13 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
                 void run() { }
             }
         '''
-        // Known limitation: Does not check anonymous inner class violations
-        assertNoViolations(SOURCE)
+        if (GroovyVersion.groovy1_8_OrGreater ) {
+            assertSingleViolation(SOURCE, 2, 'java.lang.Runnable')
+        }
+        else {
+            // Known limitation: Does not check anonymous inner class violations
+            assertNoViolations(SOURCE)
+        }
     }
 
     void testPackageReferencesForExplicitlyImportedClasses_Violations() {
@@ -248,6 +254,14 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
             [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
+    }
+
+    void testEnums() {
+        final SOURCE = '''
+            package com.company.payment
+            enum PaymentStatus {  APPROVED,  REJECTED,  CANCELLED,  UNDETERMINED}
+            '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

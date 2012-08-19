@@ -41,6 +41,7 @@ class UnnecessaryPackageReferenceRule extends AbstractAstVisitorRule {
 
 class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
 
+    private static final IGNORE_SUPERCLASS_NAMES = ['java.lang.Object', 'java.lang.Enum']
     private final List<String> importedClassNames = []
     private final List<String> starImportPackageNames = []
 
@@ -50,7 +51,7 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     protected void visitClassEx(ClassNode node) {
         initializeImportNames()
         def superClassName = node.superClass.name
-        if (superClassName != 'java.lang.Object' && !(GroovyVersion.groovy1_8_OrGreater && node.isScript() && node.name == 'None')) {
+        if (!IGNORE_SUPERCLASS_NAMES.contains(superClassName) && !(GroovyVersion.groovy1_8_OrGreater && node.isScript() && node.name == 'None')) {
             checkType(superClassName, node)
         }
         node.interfaces.each { interfaceNode ->

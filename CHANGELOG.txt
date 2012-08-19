@@ -4,8 +4,12 @@ http://www.codenarc.org
 
 Changes in version 0.18 (??? 2012)
 -------------------------------------------
+UPDATED/ENHANCED RULES
+- Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.
+
 BUG FIXES
 - Fix #3555096: UnusedPrivateMethod - StringIndexOutOfBoundsException for zero-length method name.
+- Fix #3524882: False positive UnnecessaryPackageReference violation for Enums.
 
 
 Changes in version 0.17 (March 2012)
