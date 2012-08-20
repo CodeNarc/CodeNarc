@@ -15,8 +15,6 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -47,7 +45,7 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
         protected Object initialValue() {
             []
         }
-    };
+    }
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
@@ -86,23 +84,6 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
-    boolean ignoreViolations = false
-
-    @Override
-    protected void visitClassEx(ClassNode node) {
-
-        if (!ignoreViolations) {
-            removeViolationsInRange(node.lineNumber, node.lastLineNumber)
-        } 
-    }
-
-    @Override
-    void visitMethodEx(MethodNode node) {
-        if (!ignoreViolations) {
-            removeViolationsInRange(node.lineNumber, node.lastLineNumber)
-        } 
-    }
-
     @Override
     void visitConstantExpression(ConstantExpression node) {
 
