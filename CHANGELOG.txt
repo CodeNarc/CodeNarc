@@ -10,6 +10,10 @@ UPDATED/ENHANCED RULES
 BUG FIXES
 - Fix #3555096: UnusedPrivateMethod - StringIndexOutOfBoundsException for zero-length method name.
 - Fix #3524882: False positive UnnecessaryPackageReference violation for Enums.
+- Fix #3558623: UnnecessarySemicolon - violations inside classes were ignored. Thanks to Marcin Erdmann.
+
+FRAMEWORK AND INFRASTRUCTURE
+- #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.
 
 
 Changes in version 0.17 (March 2012)
