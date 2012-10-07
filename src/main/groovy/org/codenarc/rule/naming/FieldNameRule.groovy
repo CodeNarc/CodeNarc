@@ -65,7 +65,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
     String staticRegex
     String finalRegex
     String staticFinalRegex = DEFAULT_CONST_NAME
-    String ignoreFieldNames
+    String ignoreFieldNames = 'serialVersionUID'
     Class astVisitorClass = FieldNameAstVisitor
 
     void validate() {

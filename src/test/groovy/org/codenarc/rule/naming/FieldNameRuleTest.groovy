@@ -221,6 +221,15 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    void testApplyTo_IgnoresSerialVersionUID () {
+        final SOURCE = '''
+          class MyClass {
+            private static final long serialVersionUID = 1234567890L
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_IgnoreFieldNames_MatchesSingleName() {
         final SOURCE = '''
           class MyClass {

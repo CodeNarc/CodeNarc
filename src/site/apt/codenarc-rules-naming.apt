@@ -151,7 +151,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     | then <<<static final>>> fields are validated using             |                        |
 |                     | <<finalRegex>>, <<staticRegex>> or <<regex>>.                  |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-| ignoreFieldNames    | Specifies one or more (comma-separated) field names that       | <<<null>>>             |
+| ignoreFieldNames    | Specifies one or more (comma-separated) field names that       | serialVersionUID       |
 |                     | should be ignored (i.e., that should not cause a rule          |                        |
 |                     | violation). The names may optionally contain wildcards (*,?).  |                        |
 *---------------------+----------------------------------------------------------------+------------------------+

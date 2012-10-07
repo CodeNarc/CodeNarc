@@ -8,10 +8,11 @@ UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.
 
 BUG FIXES
-- Fix #3574259: CyclomaticComplexity, CrapMetric and AbcComplexity: Do not check class-level metric value if maxClassAverageMethodXX value is null or 0.
 - Fix #3555096: UnusedPrivateMethod - StringIndexOutOfBoundsException for zero-length method name.
 - Fix #3524882: False positive UnnecessaryPackageReference violation for Enums.
 - Fix #3558623: UnnecessarySemicolon - violations inside classes were ignored. Thanks to Marcin Erdmann.
+- Fix #3574259: CyclomaticComplexity, CrapMetric and AbcComplexity: Do not check class-level metric value if maxClassAverageMethodXX value is null or 0.
+- Fix #3526749: The FieldName rule should ignore serialVersionUID fields by default.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.
