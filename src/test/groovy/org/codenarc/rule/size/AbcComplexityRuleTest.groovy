@@ -99,7 +99,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 9, 'def myMethod3()', ['myMethod3', '7'])
     }
 
-    void testApplyTo_Class_ExceedsMaxAverageClassComplexity() {
+    void testApplyTo_Class_ExceedsMaxClassAverageMethodComplexity() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -109,6 +109,18 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         '''
         rule.maxClassAverageMethodComplexity = 5
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
+    }
+
+    void testApplyTo_Class_ZeroMaxClassAverageMethodComplexity_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        '''
+        rule.maxClassAverageMethodComplexity = 0
+        assertNoViolations(SOURCE)
     }
 
     void testApplyTo_ClassAndMethod_ExceedThreshold() {

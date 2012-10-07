@@ -178,6 +178,16 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'class Email', [CLASS_NAME, METRIC_DESCRIPTION, CRAP_SCORE])
     }
 
+    void testApplyTo_Class_ZeroMaxClassAverageMethodCrapScore_NoViolations() {
+        rule.maxClassAverageMethodCrapScore = 0.0
+        assertNoViolations(SOURCE)
+    }
+
+    void testApplyTo_Class_NullMaxClassAverageMethodCrapScore_NoViolations() {
+        rule.maxClassAverageMethodCrapScore = null
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_ClassAndMethod_ExceedThreshold() {
         rule.maxMethodCrapScore = 1.0
         rule.maxClassAverageMethodCrapScore = 1.0

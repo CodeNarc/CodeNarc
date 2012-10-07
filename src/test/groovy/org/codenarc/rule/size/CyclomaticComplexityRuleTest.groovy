@@ -131,6 +131,18 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
     }
 
+    void testApplyTo_Class_ZeroMaxClassAverageMethodComplexity_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        '''
+        rule.maxClassAverageMethodComplexity = 0
+        assertNoViolations(SOURCE)
+    }
+
     void testApplyTo_ClassAndMethod_ExceedThreshold() {
         final SOURCE = '''
             class MyClass {

@@ -2,12 +2,13 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.18 (??? 2012)
+Changes in version 0.18 (??? 2012 )
 -------------------------------------------
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.
 
 BUG FIXES
+- Fix #3574259: CyclomaticComplexity, CrapMetric and AbcComplexity: Do not check class-level metric value if maxClassAverageMethodXX value is null or 0.
 - Fix #3555096: UnusedPrivateMethod - StringIndexOutOfBoundsException for zero-length method name.
 - Fix #3524882: False positive UnnecessaryPackageReference violation for Enums.
 - Fix #3558623: UnnecessarySemicolon - violations inside classes were ignored. Thanks to Marcin Erdmann.

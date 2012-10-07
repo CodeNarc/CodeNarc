@@ -106,7 +106,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     private void checkClass(classMetricResult, classNode) {
         def className = classNode.name
         def methodResults = classMetricResult.classMetricResult
-        if (methodResults['average'] > getMaxClassMetricValue()) {
+        if (getMaxClassMetricValue() && methodResults['average'] > getMaxClassMetricValue()) {
             def message = "The ${getMetricShortDescription()} for class [$className] is [${methodResults['average']}]"
             def lineNumber = getLineNumber(methodResults)
             def sourceLine = getSourceLine(lineNumber)
