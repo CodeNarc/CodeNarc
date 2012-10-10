@@ -13,6 +13,8 @@ BUG FIXES
 - Fix #3558623: UnnecessarySemicolon - violations inside classes were ignored. Thanks to Marcin Erdmann.
 - Fix #3574259: CyclomaticComplexity, CrapMetric and AbcComplexity: Do not check class-level metric value if maxClassAverageMethodXX value is null or 0.
 - Fix #3526749: The FieldName rule should ignore serialVersionUID fields by default.
+- Fix #3543848: Online docs; formatting on Naming rules doc.
+- Fix #3441842: Online docs; UnnecessarySubstring documentation is misleading.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.
