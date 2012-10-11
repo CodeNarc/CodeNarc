@@ -15,6 +15,7 @@ BUG FIXES
 - Fix #3526749: The FieldName rule should ignore serialVersionUID fields by default.
 - Fix #3543848: Online docs; formatting on Naming rules doc.
 - Fix #3441842: Online docs; UnnecessarySubstring documentation is misleading.
+- Fix #3511004: PrivateFieldCouldBeFinal false positive (-- and ++ operators).
 
 FRAMEWORK AND INFRASTRUCTURE
 - #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.

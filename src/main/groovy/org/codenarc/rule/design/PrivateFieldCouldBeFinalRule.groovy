@@ -18,7 +18,6 @@
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractSharedAstVisitorRule
 import org.codenarc.rule.AstVisitor
@@ -96,17 +95,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    void visitExpressionStatement(ExpressionStatement statement) {
-        if (statement.expression instanceof PrefixExpression || statement.expression instanceof PostfixExpression) {
-            if (statement.expression.expression instanceof VariableExpression) {
-                def varName = statement.expression.expression.name
-                removeInitializedField(varName)
-            }
-        }
-        super.visitExpressionStatement(statement)
-    }
-
-    @Override
     void visitClosureExpression(ClosureExpression expression) {
         def originalWithinConstructor = withinConstructor
 
@@ -117,9 +105,29 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
         withinConstructor = originalWithinConstructor
     }
 
+
+    @Override
+    void visitPostfixExpression(PostfixExpression expression) {
+        removeExpressionVariableName(expression)
+        super.visitPostfixExpression(expression)
+    }
+
+    @Override
+    void visitPrefixExpression(PrefixExpression expression) {
+        removeExpressionVariableName(expression)
+        super.visitPrefixExpression(expression)
+    }
+
     //------------------------------------------------------------------------------------
     // Helper Methods
     //------------------------------------------------------------------------------------
+
+    private void removeExpressionVariableName(expression) {
+        if (expression.expression instanceof VariableExpression) {
+            def varName = expression.expression.name
+            removeInitializedField(varName)
+        }
+    }
 
     private String extractVariableOrFieldName(BinaryExpression expression) {
         def matchingFieldName
