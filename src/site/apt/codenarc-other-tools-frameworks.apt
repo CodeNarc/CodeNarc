@@ -24,11 +24,7 @@ CodeNarc - Integration with Other Tools / Frameworks
 * Build and Code Quality Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * {{{http://www.gradle.org/}Gradle}} build system
-
-       * See the {{{http://www.gradle.org/code_quality_plugin.html}Gradle Code Quality Plugin}}.
-
-       * See the {{{http://evgeny-goldin.com/wiki/Gradle-CodeNarc-plugin}Gradle CodeNarc Plugin}}.
+    * {{{http://www.gradle.org/}Gradle}} build system - See the {{{http://gradle.org/docs/current/userguide/codenarc_plugin.html}Gradle CodeNarc Plugin}}.
 
     * {{{http://maven.apache.org/}Maven}} - See the {{{http://mojo.codehaus.org/codenarc-maven-plugin/index.html}Maven CodeNarc Plugin}}
 

@@ -73,7 +73,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the default regular expression used to validate the  | /(build.*|create.*)/   |
+| regex               | Specifies the default regular expression used to validate the  | /(build.*\|create.*)/  |
 |                     | method name. It is required and cannot be null or empty.       |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
