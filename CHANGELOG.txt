@@ -19,6 +19,7 @@ BUG FIXES
 
 FRAMEWORK AND INFRASTRUCTURE
 - #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.
+- #3578372: Add notes to rule index and sample rule sets that ABC/CC rules require the GMetrics jar.
 
 
 Changes in version 0.17 (March 2012)

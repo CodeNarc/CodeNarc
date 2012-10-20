@@ -49,7 +49,9 @@ class GenerateRuleSetAllRulesByCategory {
 
         LOG.info("rulesByCategory=$rulesByRuleSet")
 
-        def binding = [ruleSets:rulesByRuleSet]
+        Properties ruleExtraInformation = GenerateUtil.getRuleExtraInformation()
+
+        def binding = [ruleSets:rulesByRuleSet, ruleExtraInformation:ruleExtraInformation]
         def ruleSetTemplateFile = new File(TEMPLATE_FILE)
 
         def engine = new SimpleTemplateEngine()

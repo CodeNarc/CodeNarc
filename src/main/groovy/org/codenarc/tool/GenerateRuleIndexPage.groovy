@@ -49,7 +49,8 @@ class GenerateRuleIndexPage {
             numberOfRules += rulesByRuleSet[ruleSetName].size()
         }
 
-        def binding = [ruleSets:rulesByRuleSet, numberOfRules:numberOfRules]
+        Properties ruleExtraInformation = GenerateUtil.getRuleExtraInformation()
+        def binding = [ruleSets:rulesByRuleSet, numberOfRules:numberOfRules, ruleExtraInformation:ruleExtraInformation]
         def ruleSetTemplateFile = new File(TEMPLATE_FILE)
 
         def engine = new SimpleTemplateEngine()

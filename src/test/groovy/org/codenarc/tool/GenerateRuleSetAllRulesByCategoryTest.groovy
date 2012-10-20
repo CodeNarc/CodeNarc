@@ -33,7 +33,7 @@ class GenerateRuleSetAllRulesByCategoryTest extends AbstractTestCase {
         def outputFileText = tempFile.text
         log("contents=$outputFileText")
 
-        assertContainsAll(outputFileText, ['// ', 'unnecessary', 'UnnecessaryBigDecimalInstantiation'])
+        assertContainsAll(outputFileText, ['// ', 'Requires the GMetrics jar', 'unnecessary', 'UnnecessaryBigDecimalInstantiation'])
     }
 
 }

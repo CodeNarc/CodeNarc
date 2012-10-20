@@ -40,7 +40,9 @@ class GenerateRuleSetAllRules {
         def sortedRules = GenerateUtil.createSortedListOfAllRules()
         LOG.debug("sortedRules=$sortedRules")
 
-        def binding = [rules:sortedRules]
+        Properties ruleExtraInformation = GenerateUtil.getRuleExtraInformation()
+
+        def binding = [rules:sortedRules, ruleExtraInformation:ruleExtraInformation]
         def ruleSetTemplateFile = new File(TEMPLATE_FILE)
 
         def engine = new SimpleTemplateEngine()

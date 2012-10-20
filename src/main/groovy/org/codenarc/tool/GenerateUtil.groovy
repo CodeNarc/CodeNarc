@@ -18,6 +18,7 @@
 import org.codenarc.ruleset.CompositeRuleSet
 import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
+import org.codenarc.util.io.ClassPathResource
 
 /**
  * Contains static utility methods related to the Generate* tools.
@@ -25,6 +26,18 @@ import org.codenarc.ruleset.XmlFileRuleSet
  * @author Chris Mair
   */
 class GenerateUtil {
+
+    private static final RULE_EXTRA_INFO_FILE = 'codenarc-rule-extrainfo.properties'
+    private static Properties ruleExtraInformation;
+
+    static Properties getRuleExtraInformation() {
+        if (ruleExtraInformation) {
+            return ruleExtraInformation
+        }
+        ruleExtraInformation = new Properties()
+        ruleExtraInformation.load(ClassPathResource.getInputStream(RULE_EXTRA_INFO_FILE))
+        ruleExtraInformation
+    }
 
     static List createSortedListOfAllRules() {
         def allRuleSet = new CompositeRuleSet()

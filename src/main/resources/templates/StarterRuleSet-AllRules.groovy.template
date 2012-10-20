@@ -6,6 +6,6 @@ ruleset {
         Just delete the rules that you don't want to include.
         '''
 
-    <% rules.each { rule -> %>${rule.name}
+    <% rules.each { rule -> def extraInfo = ruleExtraInformation[rule.name] ? "  // ${ruleExtraInformation[rule.name]}" : ''  %>${rule.name} ${extraInfo}
     <% } %>
 }

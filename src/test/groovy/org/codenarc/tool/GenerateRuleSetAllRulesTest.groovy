@@ -33,6 +33,7 @@ class GenerateRuleSetAllRulesTest extends AbstractTestCase {
         log("contents=$outputFileText")
 
         assert outputFileText.contains('UnnecessaryBigDecimalInstantiation')
+        assert outputFileText.contains('Requires the GMetrics jar')
     }
 
 }

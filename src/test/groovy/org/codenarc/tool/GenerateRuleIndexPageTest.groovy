@@ -34,6 +34,7 @@ class GenerateRuleIndexPageTest extends AbstractTestCase {
         log("contents=$outputFileText")
 
         assertContainsAll(outputFileText, [
+            'CyclomaticComplexity', 'Requires the GMetrics jar',
             'Generic', 'IllegalRegex',
             'Unnecessary', 'UnnecessaryBigDecimalInstantiation'])
     }
