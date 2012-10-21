@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * Calendar objects should not be used as static fields. Calendars are inherently unsafe for multithreaded use. Sharing

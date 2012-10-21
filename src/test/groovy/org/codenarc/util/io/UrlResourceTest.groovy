@@ -17,6 +17,8 @@ package org.codenarc.util.io
 
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for UrlResource
  *

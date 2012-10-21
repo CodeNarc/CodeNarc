@@ -15,16 +15,11 @@
  */
 package org.codenarc.rule.basic
 
-import static org.codenarc.util.AstUtil.*
+import static org.codenarc.util.AstUtil.isNull
 
-import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.NotExpression
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Looks for faulty checks for null in boolean conditions, e.g.

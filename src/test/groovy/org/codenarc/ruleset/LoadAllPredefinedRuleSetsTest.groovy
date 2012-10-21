@@ -15,9 +15,10 @@
  */
 package org.codenarc.ruleset
 
+import org.codenarc.test.AbstractTestCase
+
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
-import org.codenarc.test.AbstractTestCase
 
 /**
  * Load all predefined RuleSet files using XmlFileRuleSet

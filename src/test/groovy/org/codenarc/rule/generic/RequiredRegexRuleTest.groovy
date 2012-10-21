@@ -18,6 +18,8 @@ package org.codenarc.rule.generic
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
+import static org.codenarc.test.TestUtil.containsAll
+
 /**
  * Tests for RequiredRegexRule
  *

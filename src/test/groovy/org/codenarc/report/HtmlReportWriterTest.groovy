@@ -29,6 +29,9 @@ import org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.assertContainsAllInOrder
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for HtmlReportWriter
  *

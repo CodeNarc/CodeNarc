@@ -15,7 +15,8 @@
  */
 package org.codenarc.rule.generic
 
-import static org.codenarc.util.AstUtil.*
+import static org.codenarc.util.AstUtil.hasAnnotation
+
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor

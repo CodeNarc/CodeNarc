@@ -17,6 +17,8 @@ package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.assertContainsAllInOrder
+
 /**
  * Tests for MovedRules
  *

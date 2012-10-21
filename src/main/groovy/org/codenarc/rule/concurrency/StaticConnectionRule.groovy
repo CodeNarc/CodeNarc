@@ -15,12 +15,13 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.lang.reflect.Modifier
-import java.sql.Connection
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
+import java.sql.Connection
 
 /**
  * Creates violations when a java.sql.Connection object is used as a static field. Database connections stored in static fields will be shared between threads, which is unsafe and can lead to race conditions.

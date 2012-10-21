@@ -24,8 +24,8 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.GroovyVersion
-import org.codehaus.groovy.ast.expr.*
 import org.codenarc.util.ImportUtil
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String,

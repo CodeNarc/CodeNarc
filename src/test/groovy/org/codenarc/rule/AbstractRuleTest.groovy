@@ -18,6 +18,9 @@ package org.codenarc.rule
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 
+import static org.codenarc.test.TestUtil.assertContainsAll
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for the AbstractRule class
  *

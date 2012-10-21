@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.serialization
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.

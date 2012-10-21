@@ -16,13 +16,13 @@
  package org.codenarc.rule
 
 import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codehaus.groovy.ast.PropertyNode
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.PropertyNode
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.PropertyExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codenarc.util.AstUtil
 
 /**
  * AST Visitor that searches for references to the fields specified on the constructor

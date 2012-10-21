@@ -15,12 +15,13 @@
  */
 package org.codenarc.rule.design
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * This rule finds classes marked final that contain protected methods and fields. If a class is final then it may not be subclassed,

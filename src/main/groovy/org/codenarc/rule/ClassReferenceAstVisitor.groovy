@@ -20,8 +20,10 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.expr.*
+
 import java.text.MessageFormat
+
+import org.codehaus.groovy.ast.expr.*
 
 /**
  * AstVisitor that check for references for a named class

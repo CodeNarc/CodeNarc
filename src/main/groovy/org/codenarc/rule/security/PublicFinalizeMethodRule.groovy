@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.security
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * Creates a violation when the program violates secure coding principles by declaring a finalize() method public.

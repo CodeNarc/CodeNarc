@@ -15,10 +15,11 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
+
+import java.lang.reflect.Modifier
 
 /**
  * Synchronized Method Rule - This rule reports uses of the synchronized keyword on

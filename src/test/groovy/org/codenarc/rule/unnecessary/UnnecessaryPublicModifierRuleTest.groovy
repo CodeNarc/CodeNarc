@@ -15,9 +15,11 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.apache.log4j.Level
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
-import org.apache.log4j.Level
+
+import static org.codenarc.test.TestUtil.captureLog4JMessages
 
 /**
  * Tests for UnnecessaryPublicModifierRule

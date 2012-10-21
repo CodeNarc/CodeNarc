@@ -17,6 +17,8 @@ package org.codenarc.tool
 
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.assertContainsAll
+
 /**
  * Tests for GenerateRuleIndexPage
  *

@@ -22,6 +22,8 @@ import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.captureSystemOut
+
 /**
  * Tests for AbstractReportWriter
  *

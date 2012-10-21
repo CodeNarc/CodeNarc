@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.junit
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * Rule that checks if a JUnit test class contains public methods other than:

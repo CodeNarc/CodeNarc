@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
+
+import java.lang.reflect.Modifier
 
 /**
  * This rule reports long or double fields which are declared as volatile. Java

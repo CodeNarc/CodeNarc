@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.serialization
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.PropertyNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+
+import java.lang.reflect.Modifier
 
 /**
  * Rule that checks that serialVersionUID field is static final and type long, and is not a property.

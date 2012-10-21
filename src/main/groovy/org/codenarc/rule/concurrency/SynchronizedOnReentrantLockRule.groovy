@@ -15,12 +15,13 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.util.concurrent.locks.ReentrantLock
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.SynchronizedStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+
+import java.util.concurrent.locks.ReentrantLock
 
 /**
  * Synchronizing on a ReentrantLock field is almost never the intended usage. A ReentrantLock should be obtained using the lock() method and released in a finally block using the unlock() method. 

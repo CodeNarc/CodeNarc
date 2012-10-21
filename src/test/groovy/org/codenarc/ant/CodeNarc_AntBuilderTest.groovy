@@ -17,6 +17,8 @@ package org.codenarc.ant
 
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.assertContainsAllInOrder
+
 /**
  * Tests for CodeNarcTask that use the Groovy AntBuilder.
  *

@@ -15,10 +15,11 @@
  */
 package org.codenarc.rule.design
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+
+import java.lang.reflect.Modifier
 
 /**
  * An abstract class cannot be instantiated, therefore a public constructor is useless and confusing.

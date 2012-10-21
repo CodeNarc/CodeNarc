@@ -18,6 +18,9 @@ package org.codenarc.ruleset
 import org.apache.log4j.Logger
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.assertContainsAll
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for GroovyDslRuleSet
  *

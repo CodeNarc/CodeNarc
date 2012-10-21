@@ -18,6 +18,8 @@ package org.codenarc.rule.naming
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for ClassNameRule
  *

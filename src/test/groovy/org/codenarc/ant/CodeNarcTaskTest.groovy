@@ -26,6 +26,8 @@ import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for the CodeNarc Ant Task
  *

@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * Class contains similarly-named get and set methods where the set method is synchronized and the get method is not, or the get method is synchronized and the set method is not. 

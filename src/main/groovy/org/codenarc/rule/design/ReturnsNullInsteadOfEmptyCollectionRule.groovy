@@ -19,9 +19,9 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.NullReturnTracker
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
-import org.codenarc.rule.NullReturnTracker
 
 /**
  * This rule detects when null is returned from a method that might return a

@@ -15,7 +15,6 @@
  */
 package org.codenarc.report
 
-import java.text.DateFormat
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
@@ -25,6 +24,10 @@ import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+
+import java.text.DateFormat
+
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for XmlReportWriter

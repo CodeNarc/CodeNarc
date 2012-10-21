@@ -21,7 +21,7 @@ import org.codenarc.rule.Rule
 /**
  * Tests for ExplicitLinkedHashMapInstantiationRule
  *
- * @author René Scheibe
+ * @author Ren? Scheibe
  */
 class ExplicitLinkedHashMapInstantiationRuleTest extends AbstractRuleTestCase {
 

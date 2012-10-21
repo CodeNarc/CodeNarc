@@ -15,13 +15,13 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ElvisOperatorExpression
 import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.BinaryExpression
 
 /**
  * An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.

@@ -15,10 +15,11 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
+
+import java.lang.reflect.Modifier
 
 /**
  * ThreadLocal fields should be static and final. In the most common case a java.lang.ThreadLocal 

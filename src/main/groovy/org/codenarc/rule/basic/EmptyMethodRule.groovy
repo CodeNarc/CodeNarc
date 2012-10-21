@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.basic
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation. 

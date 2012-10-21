@@ -19,6 +19,8 @@ import org.codenarc.rule.Rule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for RuleSetUtil
  *

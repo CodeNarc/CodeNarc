@@ -24,6 +24,9 @@ import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.captureLog4JMessages
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for AntFileSetSourceAnalyzer
  *

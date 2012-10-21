@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.design
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * If a class defines a "void close()" then that class should implement java.io.Closeable.

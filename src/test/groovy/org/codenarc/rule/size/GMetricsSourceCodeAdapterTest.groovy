@@ -18,6 +18,8 @@ package org.codenarc.rule.size
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for GMetricsSourceCodeAdapter
  *

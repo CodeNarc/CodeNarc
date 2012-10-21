@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.grails
 
-import static org.codenarc.util.AstUtil.*
+import static org.codenarc.util.AstUtil.hasAnnotation
+import static org.codenarc.util.AstUtil.isMethodNode
+
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule

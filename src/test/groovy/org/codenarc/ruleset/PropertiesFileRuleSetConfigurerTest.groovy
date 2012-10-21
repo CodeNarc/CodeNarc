@@ -18,6 +18,8 @@ package org.codenarc.ruleset
 import org.codenarc.rule.StubRule
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for PropertiesFileRuleSetConfigurer
  *

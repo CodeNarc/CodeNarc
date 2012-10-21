@@ -18,6 +18,8 @@ package org.codenarc.rule
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.WildcardPattern
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for AbstractAstVisitorRule
  *

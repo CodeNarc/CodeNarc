@@ -19,6 +19,8 @@ import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.captureSystemOut
+
 /**
  * Run the CodeNarc Ant Task against a portion of the CodeNarc source using a custom, predefined RuleSet.
  *

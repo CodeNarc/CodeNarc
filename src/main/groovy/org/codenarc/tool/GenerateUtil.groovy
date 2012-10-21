@@ -28,7 +28,7 @@ import org.codenarc.util.io.ClassPathResource
 class GenerateUtil {
 
     private static final RULE_EXTRA_INFO_FILE = 'codenarc-rule-extrainfo.properties'
-    private static Properties ruleExtraInformation;
+    private static Properties ruleExtraInformation
 
     static Properties getRuleExtraInformation() {
         if (ruleExtraInformation) {

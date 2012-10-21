@@ -15,10 +15,10 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.stmt.CatchStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.stmt.CatchStatement
 
 /**
  * Checks the location of the opening brace ({) for try statements, the location 

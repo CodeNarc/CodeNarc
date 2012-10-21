@@ -15,10 +15,11 @@
  */
 package org.codenarc.rule.unnecessary
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
+
+import java.lang.reflect.Modifier
 
 /**
  * A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary. 

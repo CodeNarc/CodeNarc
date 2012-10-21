@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.unnecessary
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
 
 /**
  * The field is marked as transient, but the class isn't Serializable, so marking it as transient should have no effect.

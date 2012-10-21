@@ -15,6 +15,8 @@
  */
 package org.codenarc
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter

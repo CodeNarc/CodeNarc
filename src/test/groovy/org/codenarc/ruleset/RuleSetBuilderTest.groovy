@@ -22,6 +22,8 @@ import org.codenarc.ruleregistry.RuleRegistry
 import org.codenarc.ruleregistry.RuleRegistryHolder
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for RuleSetBuilder
  *

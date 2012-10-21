@@ -15,10 +15,11 @@
  */
 package org.codenarc.rule.logging
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
+
+import java.lang.reflect.Modifier
 
 /**
  * Logger objects should be declared private, static and final.

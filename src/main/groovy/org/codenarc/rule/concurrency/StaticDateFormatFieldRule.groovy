@@ -15,13 +15,14 @@
  */
 package org.codenarc.rule.concurrency
 
-import java.lang.reflect.Modifier
-import java.text.DateFormat
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
+import java.text.DateFormat
 
 /**
  * DateFormat objects should not be used as static fields. DateFormat are inherently unsafe for multithreaded use. Sharing a

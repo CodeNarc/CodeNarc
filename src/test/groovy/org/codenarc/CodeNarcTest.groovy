@@ -21,6 +21,9 @@ import org.codenarc.report.XmlReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.captureSystemOut
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for CodeNarc command-line runner
  *

@@ -23,6 +23,9 @@ import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.assertEqualSets
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for XmlReaderRuleSet
  *

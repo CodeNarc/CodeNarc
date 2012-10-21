@@ -17,10 +17,10 @@ package org.codenarc.rule.convention
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.ClosureExpression
 
 /**
  * Checks for a method or closure parameter being reassigned to a new value within the body of the

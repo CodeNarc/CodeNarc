@@ -21,7 +21,7 @@ import org.codenarc.rule.Rule
 /**
  * Tests for UnnecessaryDefInVariableDeclarationRule
  *
- * @author René Scheibe
+ * @author Ren? Scheibe
   */
 class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
 

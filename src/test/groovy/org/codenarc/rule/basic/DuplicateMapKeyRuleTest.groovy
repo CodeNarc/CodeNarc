@@ -21,7 +21,7 @@ import org.codenarc.rule.Rule
 /**
  * Tests for DuplicateMapKeyRule
  *
- * @author 'Łukasz Indykiewicz'
+ * @author '?ukasz Indykiewicz'
  */
 class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
 

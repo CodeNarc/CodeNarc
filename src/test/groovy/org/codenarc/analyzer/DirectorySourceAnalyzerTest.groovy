@@ -23,6 +23,9 @@ import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 
+import static org.codenarc.test.TestUtil.assertEqualSets
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 /**
  * Tests for DirectorySourceAnalyzer.
  *

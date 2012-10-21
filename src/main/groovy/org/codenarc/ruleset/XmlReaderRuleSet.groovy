@@ -16,10 +16,11 @@
 package org.codenarc.ruleset
 
 import groovy.xml.Namespace
-import javax.xml.transform.stream.StreamSource
-import javax.xml.validation.SchemaFactory
 import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.ClassPathResource
+
+import javax.xml.transform.stream.StreamSource
+import javax.xml.validation.SchemaFactory
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from XML read from a

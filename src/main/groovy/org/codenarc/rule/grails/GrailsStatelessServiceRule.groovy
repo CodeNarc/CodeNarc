@@ -15,8 +15,8 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.generic.StatelessClassRule
 import org.codehaus.groovy.ast.FieldNode
+import org.codenarc.rule.generic.StatelessClassRule
 
 /**
  * Rule that checks for non-<code>final</code> fields on a Grails service class. Grails service

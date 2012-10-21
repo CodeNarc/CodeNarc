@@ -15,15 +15,17 @@
  */
 package org.codenarc.rule.unused
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractSharedAstVisitorRule
+import org.codenarc.rule.AstVisitor
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
+
+import java.lang.reflect.Modifier
+
 import org.codehaus.groovy.ast.expr.*
-import org.codenarc.rule.Violation
-import org.codenarc.rule.AstVisitor
 
 /**
  * Rule that checks for private methods that are not referenced within the same class.

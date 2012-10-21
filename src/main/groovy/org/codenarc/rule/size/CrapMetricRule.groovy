@@ -15,14 +15,12 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.AbstractAstVisitorRule
-
-import org.gmetrics.metric.crap.CrapMetric
-import org.gmetrics.metric.coverage.CoberturaLineCoverageMetric
-
 import org.apache.log4j.Logger
+import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 import org.codenarc.util.io.DefaultResourceFactory
+import org.gmetrics.metric.coverage.CoberturaLineCoverageMetric
+import org.gmetrics.metric.crap.CrapMetric
 
 /**
  * Rule that calculates the CRAP Metric for methods/classes and checks against

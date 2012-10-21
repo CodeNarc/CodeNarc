@@ -15,11 +15,12 @@
  */
 package org.codenarc.rule.grails
 
-import java.lang.reflect.Modifier
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.WildcardPattern
+
+import java.lang.reflect.Modifier
 
 /**
  * Rule that checks for public methods on Grails controller classes. Static methods are ignored.
