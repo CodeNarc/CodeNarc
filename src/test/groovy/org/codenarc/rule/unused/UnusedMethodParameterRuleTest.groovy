@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedMethodParameterRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
  */
 class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedMethodParameter'
     }
 
+    @Test
     void testApplyTo_SingleUnusedMethodParameter() {
         final SOURCE = '''
             class MyClass {
@@ -40,6 +43,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void myMethod(int value) { }', 'Method parameter [value] is never referenced')
     }
 
+    @Test
     void testIgnoreRegexDefaults() {
         final SOURCE = '''
             class MyClass {
@@ -50,6 +54,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCustomIgnoreRegex() {
         final SOURCE = '''
             class MyClass {
@@ -62,6 +67,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresCategoryClassesByDefault() {
         final SOURCE = '''
             class MyCategory {
@@ -72,6 +78,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCustomIgnoreClassRegex() {
         final SOURCE = '''
             class MyCustomClass {
@@ -83,6 +90,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleUnusedPrivateMethodParameterSuspiciousReferenceInAnonymousClass() {
         final SOURCE = '''
             class MyClass {
@@ -95,6 +103,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MultipleUnusedParametersForSinglePrivateMethod() {
         final SOURCE = '''
           class MyClass {
@@ -108,6 +117,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'void myMethod(int value, String name) { }', messageText:'name'])
     }
 
+    @Test
     void testApplyTo_MultiplePrivateMethodsWithUnusedParameters() {
         final SOURCE = '''
           class MyClass {
@@ -121,6 +131,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'int myMethod3(Date startDate) { }', messageText:'startDate'])
     }
 
+    @Test
    void testApplyTo_AllParametersUsed() {
         final SOURCE = '''
             class MyClass {
@@ -142,6 +153,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonPrivateMethodsWithOverride() {
         final SOURCE = '''
             class MyClass {
@@ -153,6 +165,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_OnlyReferenceIsAMapKeyOrValue() {
         final SOURCE = '''
             class MyClass {
@@ -164,6 +177,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ParameterIsAClosureThatIsCalled() {
         final SOURCE = '''
             class MyClass {
@@ -177,6 +191,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMainMethod() {
         // In Groovy, the main() method does not have to specify void return type or String[] args type.
         // But it must be static, with one parameter.
@@ -194,6 +209,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreNonMatchingMainMethods() {
         final SOURCE = '''
             class MyClass1 {
@@ -217,6 +233,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
             [lineNumber:12, sourceLineText:'static int main(String[] args) { }', messageText:'args'])
     }
 
+    @Test
     void testApplyTo_NoMethods() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

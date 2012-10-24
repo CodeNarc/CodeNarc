@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitCallToAndMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitCallToAndMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitCallToAndMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	a & b
@@ -40,6 +43,7 @@ class ExplicitCallToAndMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolation() {
         final SOURCE = '''
             a.and(b)

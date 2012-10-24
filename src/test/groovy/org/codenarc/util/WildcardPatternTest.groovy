@@ -16,6 +16,7 @@
 package org.codenarc.util
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for WildcardPattern
@@ -24,6 +25,7 @@ import org.codenarc.test.AbstractTestCase
   */
 class WildcardPatternTest extends AbstractTestCase {
 
+    @Test
     void testMatches_DefaultMatches_True() {
         assert new WildcardPattern(null, true).matches('')
         assert new WildcardPattern(null, true).matches('abc')
@@ -34,6 +36,7 @@ class WildcardPatternTest extends AbstractTestCase {
         assert !new WildcardPattern('a', true).matches('b')
     }
 
+    @Test
     void testMatches_DefaultMatches_False() {
         assert new WildcardPattern('a', false).matches('a')
 
@@ -44,6 +47,7 @@ class WildcardPatternTest extends AbstractTestCase {
         assert !new WildcardPattern('', false).matches('abc')
     }
 
+    @Test
     void testMatches() {
         assert new WildcardPattern('').matches('')
         assert new WildcardPattern('').matches('abc')
@@ -68,11 +72,13 @@ class WildcardPatternTest extends AbstractTestCase {
         assert !new WildcardPattern('**/c*.groovy').matches('a/b/c/def.groovy')
     }
 
+    @Test
     void testMatches_TrimsPatternStrings() {
         assert new WildcardPattern(' abc ').matches('abc')
         assert new WildcardPattern('\ta ?c ').matches('a bc')
     }
 
+    @Test
     void testMatches_CommaSeparatedListOfPatterns() {
         assert new WildcardPattern('a,b').matches('a')
         assert new WildcardPattern('x,a@b.c').matches('a@b.c')
@@ -92,6 +98,7 @@ class WildcardPatternTest extends AbstractTestCase {
         assert !new WildcardPattern('**/c*.groovy,xx').matches('a/b/c/def.groovy')
     }
 
+    @Test
     void testMatches_CommaSeparatedListOfPatterns_TrimsPatternStrings() {
         assert new WildcardPattern(' a , b ').matches('a')
         assert new WildcardPattern(' a , b\t,  c ').matches('b')

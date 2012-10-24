@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for AssertWithinFinallyBlockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class AssertWithinFinallyBlockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AssertWithinFinallyBlock'
     }
 
+    @Test
     void testApplyTo_FinallyWithAssert_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -46,6 +49,7 @@ class AssertWithinFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 8, 'assert ready', ['finally block', 'MyClass'])
     }
 
+    @Test
     void testApplyTo_NestedTryFinallyWithAssert_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -67,6 +71,7 @@ class AssertWithinFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 9, 'assert ready', 13, 'assert ready')
     }
 
+    @Test
     void testApplyTo_FinallyBlockWithoutAssert_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -84,6 +89,7 @@ class AssertWithinFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertInMethod_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -94,6 +100,7 @@ class AssertWithinFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertInTry_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -109,6 +116,7 @@ class AssertWithinFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertInCatch_NoViolation() {
         final SOURCE = '''
             class MyClass {

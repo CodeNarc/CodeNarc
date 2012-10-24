@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for InstantiationToGetClassRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryInstantiationToGetClass'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	Class c = String.class
@@ -39,6 +42,7 @@ class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBasicViolation() {
         final SOURCE = '''
         	Class c = new String().getClass()
@@ -48,6 +52,7 @@ class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
                 'String instantiation with getClass() should be simplified to String.class')
     }
 
+    @Test
     void testComplexViolation() {
         final SOURCE = '''
         	new String('parm').getClass()

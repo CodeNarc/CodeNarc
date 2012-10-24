@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessarySemicolonRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessarySemicolon'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
 /*
@@ -64,12 +67,14 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assert !manuallyApplyRule(SOURCE)
     }
 
+    @Test
     void testSimpleString() {
         final SOURCE = """
             def string = 'hello world';
             """
         assertSingleViolation SOURCE, 2, "def string = 'hello world';"
     }
+    @Test
     void testSemiColonInMultilineString() {
         final SOURCE = """
             def javascript = '''
@@ -81,6 +86,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 6, '            \'\'\';'
     }
 
+    @Test
     void testSemiColonInGStringString() {
         final SOURCE = '''
             def var = 'yo yo yo'
@@ -93,6 +99,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 7, '            """;'
     }
 
+    @Test
     void testPackage() {
         final SOURCE = '''
             package my.company.server;
@@ -100,6 +107,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'package my.company.server;', 'Semi-colons as line endings can be removed safely')
     }
 
+    @Test
     void testLoop() {
         final SOURCE = '''
             for (def x : list);
@@ -107,6 +115,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'for (def x : list);', 'Semi-colons as line endings can be removed safely')
     }
 
+    @Test
     void testMethodCall() {
         final SOURCE = '''
             println(value) ;
@@ -115,6 +124,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
     }
 
     @SuppressWarnings('UnnecessarySemicolon')
+    @Test
     void testImport() {
         final SOURCE = '''
             import java.lang.String;    
@@ -122,6 +132,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'import java.lang.String;', 'Semi-colons as line endings can be removed safely')
     }
 
+    @Test
     void testClass() {
         final SOURCE = '''
             class A {

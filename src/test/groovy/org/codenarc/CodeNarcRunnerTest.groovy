@@ -15,13 +15,15 @@
  */
 package org.codenarc
 
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
+
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for CodeNarcRunner
@@ -39,16 +41,19 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     private codeNarcRunner
 
+    @Test
     void testExecute_NoRuleSetFiles() {
         shouldFailWithMessageContaining('ruleSetFiles') { codeNarcRunner.execute() }
     }
 
+    @Test
     void testExecute_NoSourceAnalyzer() {
         codeNarcRunner.ruleSetFiles = XML_RULESET1
         codeNarcRunner.reportWriters << new HtmlReportWriter(outputFile:REPORT_FILE)
         shouldFailWithMessageContaining('sourceAnalyzer') { codeNarcRunner.execute() }
     }
 
+    @Test
     void testExecute() {
         def ruleSet
         def sourceAnalyzer = [analyze: { rs -> ruleSet = rs; RESULTS }, getSourceDirectories:{SOURCE_DIRS}] as SourceAnalyzer
@@ -69,6 +74,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert results == RESULTS
     }
 
+    @Test
     void testExecute_NoReportWriters() {
         def sourceAnalyzer = [analyze: { RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
@@ -76,24 +82,28 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert codeNarcRunner.execute() == RESULTS
     }
 
+    @Test
     void testCreateRuleSet_OneXmlRuleSet() {
         codeNarcRunner.ruleSetFiles = XML_RULESET1
         def ruleSet = codeNarcRunner.createRuleSet()
         assert ruleSet.rules*.name == ['TestPath']
     }
 
+    @Test
     void testCreateRuleSet_OneGroovyRuleSet() {
         codeNarcRunner.ruleSetFiles = GROOVY_RULESET1
         def ruleSet = codeNarcRunner.createRuleSet()
         assert ruleSet.rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock']
     }
 
+    @Test
     void testCreateRuleSet_MultipleRuleSets() {
         codeNarcRunner.ruleSetFiles = RULESET_FILES
         def ruleSet = codeNarcRunner.createRuleSet()
         assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'StatelessClass']
     }
 
+    @Test
     void testCreateRuleSet_MultipleRuleSets_WithSpaces() {
         codeNarcRunner.ruleSetFiles = RULESET_FILES_WITH_SPACES
         def ruleSet = codeNarcRunner.createRuleSet()
@@ -104,8 +114,8 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     // Test setUp/tearDown and helper methods
     //--------------------------------------------------------------------------
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpCodeNarcRunnerTest() {
         codeNarcRunner = new CodeNarcRunner()
     }
 }

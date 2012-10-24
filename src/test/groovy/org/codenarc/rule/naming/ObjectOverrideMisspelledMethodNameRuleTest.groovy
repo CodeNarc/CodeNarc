@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ObjectOverrideMisspelledMethodNameRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ObjectOverrideMisspelledMethodName'
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
         	class MyClass { boolean equals(o){} }
@@ -40,6 +43,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testEqual() {
         final SOURCE = '''
             boolean equal(Object o) {}
@@ -49,6 +53,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'boolean equal(Object o) {}')
     }
 
+    @Test
     void testEquals_WrongCase() {
         final SOURCE = '''
             boolean eQuals(Object o) {}
@@ -61,6 +66,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
                 [lineNumber:3, sourceLineText:'boolean equaLS(Object o) {}'])
     }
 
+    @Test
     void testHashCode_WrongCase() {
         final SOURCE = '''
             int hashcode() {}
@@ -73,6 +79,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testToString_WrongCase() {
         final SOURCE = '''
             String tostring() {}

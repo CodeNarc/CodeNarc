@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ReturnFromFinallyBlockRule
@@ -24,11 +25,13 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  */
 class ReturnFromFinallyBlockRuleTest extends AbstractRuleTestCase {
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ReturnFromFinallyBlock'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -52,6 +55,7 @@ class ReturnFromFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 15, 'return 99')
     }
 
+    @Test
     void testApplyTo_NestedTryFinally() {
         final SOURCE = '''
             class MyClass {
@@ -75,6 +79,7 @@ class ReturnFromFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 10, '88', 15, '99')
     }
 
+    @Test
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

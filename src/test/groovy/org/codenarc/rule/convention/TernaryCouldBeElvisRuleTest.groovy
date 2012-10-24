@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for TernaryCouldBeElvisRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'TernaryCouldBeElvis'
     }
 
+    @Test
     void testElvis_NoViolation() {
         final SOURCE = '''
             x ?: 1
@@ -38,6 +41,7 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTernaryWithDifferentBooleanAndTrueVariableExpressions_NoViolation() {
         final SOURCE = '''
             (x == y) ? same : diff
@@ -53,6 +57,7 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTernary_SimpleVariable_SameBooleanAndTrueExpression_Violation() {
         final SOURCE = '''
             x ? x : false
@@ -60,6 +65,7 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2,'x ? x : false', 'x ?: false')
     }
 
+    @Test
     void testTernaryWithDifferentBooleanAndTrueMethodCalls_NoViolation() {
         final SOURCE = '''
             foo() ? bar() : 123
@@ -72,6 +78,7 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTernary_MethodCall_SameBooleanAndTrueExpression_Violation() {
         final SOURCE = '''
             foo() ? foo() : bar()

@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitCallToEqualsMethodRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
  */
 class ExplicitCallToEqualsMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitCallToEqualsMethod'
     }
 
 
+    @Test
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
@@ -44,6 +47,7 @@ class ExplicitCallToEqualsMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolation() {
         final SOURCE = '''
                 a.equals(b)

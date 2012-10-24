@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BuilderMethodWithSideEffectsRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BuilderMethodWithSideEffects'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -47,6 +50,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMakeMethod() {
         final SOURCE = '''
             class MyClass {
@@ -56,6 +60,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void make()', "Violation in class MyClass. The method 'make' is named like a builder method but has a void return type")
     }
 
+    @Test
     void testCreateMethod() {
         final SOURCE = '''
             class MyClass {
@@ -65,6 +70,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void create()', "Violation in class MyClass. The method 'create' is named like a builder method but has a void return type")
     }
 
+    @Test
     void testBuildMethod() {
         final SOURCE = '''
             class MyClass {
@@ -74,6 +80,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void build()', "Violation in class MyClass. The method 'build' is named like a builder method but has a void return type")
     }
 
+    @Test
     void testMakeSomethingMethod() {
         final SOURCE = '''
             class MyClass {
@@ -83,6 +90,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void makeSomething()', "Violation in class MyClass. The method 'makeSomething' is named like a builder method but has a void return type")
     }
 
+    @Test
     void testCreateSomethingMethod() {
         final SOURCE = '''
             class MyClass {
@@ -92,6 +100,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void createSomething()', "Violation in class MyClass. The method 'createSomething' is named like a builder method but has a void return type")
     }
 
+    @Test
     void testBuildSomethingMethod() {
         final SOURCE = '''
             class MyClass {

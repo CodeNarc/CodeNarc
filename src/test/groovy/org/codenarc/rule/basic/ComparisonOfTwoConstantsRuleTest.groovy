@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ComparisonOfTwoConstants
@@ -27,11 +28,13 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
 
     private static final MESSAGE = 'Comparing two constants or constant literals'
     
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ComparisonOfTwoConstants'
     }
 
+    @Test
     void testComparisonOperators_NoViolations() {
         final SOURCE = '''
             if (value == true) { }
@@ -47,6 +50,7 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testEqualsMethod_NoViolations() {
         final SOURCE = '''
             if (value.equals(true)) { }
@@ -60,6 +64,7 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCompareToMethod_NoViolations() {
         final SOURCE = '''
             if (value.compareTo(23)) { }
@@ -71,6 +76,7 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testComparisonOperators_Violations() {
         final SOURCE = '''
             println isReady = 23 == 67
@@ -92,6 +98,7 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testEqualsMethod_Violation() {
         final SOURCE = '''
             println isReady = [1,2].equals([3,4])
@@ -103,6 +110,7 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testCompareToMethod_Violation() {
         final SOURCE = '''
             println cmp = [a:123, b:456].compareTo([a:222, b:567])

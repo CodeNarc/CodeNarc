@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SwallowThreadDeathRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SwallowThreadDeath'
     }
 
+    @Test
     void testRethrowingCaughtErrorIsLegal() {
         final SOURCE = '''
         	try {
@@ -42,6 +45,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testReThrowingAnotherInstanceOfThreadDeathIsLegal() {
         final SOURCE = '''
         	try {
@@ -53,6 +57,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNesting() {
         final SOURCE = '''
         	try {
@@ -65,6 +70,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCatchingWithoutRethrowingAnythingIsAViolation() {
         final SOURCE = '''
         	try {
@@ -76,6 +82,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, '} catch (ThreadDeath td) {')
     }
 
+    @Test
     void testCatchingAndThrowingAnotherVariableIsAViolation() {
         final SOURCE = '''
             def other = new ThreadDeath()
@@ -88,6 +95,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, '} catch (ThreadDeath td) {')
     }
 
+    @Test
     void testCatchingAndThrowingSomethingElseIsAViolation() {
         final SOURCE = '''
         	try {

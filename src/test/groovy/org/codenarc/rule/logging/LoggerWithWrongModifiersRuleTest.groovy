@@ -17,6 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for LoggerWithWrongModifiersRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
   */
 class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'LoggerWithWrongModifiers'
@@ -34,6 +36,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
      * static logger
      */
 
+    @Test
     void testSuccessScenario_staticLogger() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNotPrivate_staticLogger() {
         final SOURCE = '''
             class MyClass {
@@ -56,6 +60,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
                 'The Logger field LOG should be private, static and final')
     }
 
+    @Test
     void testNotStatic_staticLogger() {
         final SOURCE = '''
             class MyClass {
@@ -68,6 +73,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
                 'The Logger field LOG should be private, static and final')
     }
 
+    @Test
     void testNotFinal_staticLogger() {
         final SOURCE = '''
             class MyClass {
@@ -81,6 +87,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testSuccessScenario_derivedLogger() {
         rule.allowProtectedLogger = true
         rule.allowNonStaticLogger = true
@@ -102,6 +109,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testPublic_derivedLogger() {
         rule.allowProtectedLogger = true
         rule.allowNonStaticLogger = true
@@ -117,6 +125,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
                 'The Logger field LOG should be private (or protected) and final')
     }
 
+    @Test
     void testPublic() {
         rule.allowProtectedLogger = true
 
@@ -131,6 +140,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
                 'The Logger field LOG should be private (or protected), static and final')
     }
 
+    @Test
     void testPrivate_derivedLogger() {
         rule.allowProtectedLogger = true
         rule.allowNonStaticLogger = true
@@ -145,6 +155,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStatic_derivedLogger() {
         rule.allowProtectedLogger = true
         rule.allowNonStaticLogger = true
@@ -158,6 +169,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNotFinal_derivedLogger() {
         rule.allowProtectedLogger = true
 

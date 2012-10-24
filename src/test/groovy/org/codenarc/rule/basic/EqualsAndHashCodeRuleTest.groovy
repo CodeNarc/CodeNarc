@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EqualsAndHashCodeRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EqualsAndHashCode'
     }
 
+    @Test
     void testApplyTo_EqualsButNoHashCode() {
         final SOURCE = '''
             class MyClass {
@@ -41,6 +44,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class MyClass {')
     }
 
+    @Test
     void testApplyTo_HashCodeButNoEquals() {
         final SOURCE = '''
             class MyClass {
@@ -52,6 +56,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class MyClass {')
     }
 
+    @Test
     void testApplyTo_BothEqualsAndHashCode() {
         final SOURCE = '''
             class MyClass {
@@ -66,6 +71,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_EqualsButWithDifferentSignature() {
         final SOURCE = '''
             class MyClass {
@@ -75,6 +81,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_HashCodeButWithDifferentSignature() {
         final SOURCE = '''
             class MyClass {
@@ -84,6 +91,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NeitherEqualsNorHashCode() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

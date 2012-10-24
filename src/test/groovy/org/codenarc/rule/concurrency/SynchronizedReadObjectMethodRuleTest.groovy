@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SynchronizedReadObjectMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class SynchronizedReadObjectMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SynchronizedReadObjectMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
           // OK, class not Serializable
@@ -55,6 +58,7 @@ class SynchronizedReadObjectMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSynchronizedMethod() {
         final SOURCE = '''
             class MyClass implements Serializable {
@@ -67,6 +71,7 @@ class SynchronizedReadObjectMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'synchronized void readObject', 'The Serializable class MyClass has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable')
     }
 
+    @Test
     void testSynchronizedBlock() {
         final SOURCE = '''
             class MyClass implements Serializable {

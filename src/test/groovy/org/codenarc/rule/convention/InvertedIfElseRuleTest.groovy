@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for InvertedIfElseRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class InvertedIfElseRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'InvertedIfElse'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             if (!x) {
@@ -52,6 +55,7 @@ class InvertedIfElseRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenarioWithElseIf() {
         final SOURCE = '''
             if (x) {
@@ -64,6 +68,7 @@ class InvertedIfElseRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             if (!x) {
@@ -75,6 +80,7 @@ class InvertedIfElseRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if (!x) {')
     }
 
+    @Test
     void testDeepNesting() {
         final SOURCE = '''
             if (x) {

@@ -20,9 +20,11 @@ import org.codenarc.rule.Violation
 import org.codenarc.rule.design.PublicInstanceFieldRule
 import org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule
 import org.codenarc.ruleset.ListRuleSet
+import org.junit.Test
 
 class StringSourceAnalyzerTest extends GroovyTestCase {
 
+    @Test
     void testSuppressWarningsOnPackage() {
         final SOURCE = '''
             @SuppressWarnings('rule1')
@@ -43,6 +45,7 @@ class StringSourceAnalyzerTest extends GroovyTestCase {
         assert results.violations.size() == 1
     }
 
+    @Test
     void testTwoRules() {
         final SOURCE = '''
         	class Person { }
@@ -60,6 +63,7 @@ class StringSourceAnalyzerTest extends GroovyTestCase {
         assert results.violations.size() == 2
     }
 
+    @Test
     void testFieldRules() {
         final SOURCE = '''
         	class Person {

@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnsafeArrayDeclarationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnsafeArrayDeclarationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnsafeArrayDeclaration'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
           class MyClass {
@@ -42,6 +45,7 @@ class UnsafeArrayDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testArrayDeclaration() {
         final SOURCE = '''
               class MyClass {
@@ -51,6 +55,7 @@ class UnsafeArrayDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public static final String[] myArray = init()', 'The Array field myArray is public, static, and final but still mutable')
     }
 
+    @Test
     void testArrayInitialization() {
         final SOURCE = '''
               class MyClass {

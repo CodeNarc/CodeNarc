@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CompareToWithoutComparableRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CompareToWithoutComparable'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass implements Comparable {
@@ -51,6 +54,7 @@ class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNoInterfaces() {
         final SOURCE = '''
             class MyClass {
@@ -62,6 +66,7 @@ class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class MyClass', 'compareTo method at line 3 would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable')
     }
 
+    @Test
     void testTwoInterfaces() {
         final SOURCE = '''
             class MyClass implements Serializable, Cloneable {

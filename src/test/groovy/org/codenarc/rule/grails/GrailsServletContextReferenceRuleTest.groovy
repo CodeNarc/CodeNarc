@@ -17,6 +17,8 @@ package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for GrailsServletContextReferenceRule
@@ -28,11 +30,13 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
     static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'
     static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsServletContextReference'
     }
 
+    @Test
     void testApplyTo_AssignmentToServletContextProperty() {
         final SOURCE = '''
             class MyClass {
@@ -45,6 +49,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'servletContext.count = 23')
     }
 
+    @Test
     void testApplyTo_SimpleReference() {
         final SOURCE = '''
             class MyClass {
@@ -56,6 +61,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'println servletContext')
     }
 
+    @Test
     void testApplyTo_ReferenceWithinMethodCallArgument() {
         final SOURCE = '''
             class MyClass {
@@ -67,6 +73,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, "doSomething(1, 'abc', servletContext)")
     }
 
+    @Test
     void testApplyTo_ReferenceWithinFieldInitializer() {
         final SOURCE = '''
             class MyClass {
@@ -80,6 +87,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'def mySession = servletContext', 6, 'println "amount=${servletContext.amount}"')
     }
 
+    @Test
     void testApplyTo_ReferenceWithinTagLib() {
         final SOURCE = '''
             class SimpleTagLib {
@@ -90,6 +98,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def simple = { attrs, body -> servletContext.amount = attrs.amount }')
     }
 
+    @Test
     void testApplyTo_ReferenceWithinNonControllerClass() {
         final SOURCE = '''
             class MyClass {
@@ -102,8 +111,8 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpGrailsServletContextReferenceRuleTest() {
         sourceCodePath = CONTROLLER_PATH
     }
 

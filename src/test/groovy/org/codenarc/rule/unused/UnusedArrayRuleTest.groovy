@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedArrayRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnusedArrayRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedArray'
     }
 
+    @Test
     void testApplyTo_ArrayAssigned_NoViolations() {
         final SOURCE = '''
         	def array1 = new String[3]
@@ -39,6 +42,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ArrayNotAssigned_ButLastStatementWithinAMethod_NoViolations() {
         final SOURCE = '''
             println new BigDecimal("23.45")
@@ -47,6 +51,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ArrayNotAssigned_ButLastStatementWithinAClosure_NoViolations() {
         final SOURCE = '''
             def closure = { new String[3] }
@@ -54,6 +59,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ArrayNotAssigned_Violations() {
         final SOURCE = '''
         	new String[3]
@@ -62,6 +68,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE, [lineNumber: 2, sourceLineText: 'new String[3]'])
     }
 
+    @Test
     void testApplyTo_ArrayNotAssigned_WithinClosure_Violations() {
         final SOURCE = '''
             def myClosure = { ->

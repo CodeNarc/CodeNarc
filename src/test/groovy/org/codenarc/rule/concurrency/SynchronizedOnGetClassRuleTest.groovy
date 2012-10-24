@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SynchronizedOnGetClassRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
  */
 class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SynchronizedOnGetClass'
     }
 
 
+    @Test
     void testBadSynchronization() {
         final SOURCE = '''
                 class MyClass {
@@ -42,6 +45,7 @@ class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'synchronized(getClass()) { ; }')
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
                 class MyClass {
@@ -59,6 +63,7 @@ class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoubleMessagesAreNotCreated() {
         final  SOURCE = '''
             class C {

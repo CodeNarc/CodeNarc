@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for VectorIsObsoleteRule. Checks for references to 'java.util.Vector'.
@@ -28,6 +29,7 @@ class VectorIsObsoleteRule_JavaUtilVectorTest extends AbstractClassReferenceRule
     final String className = 'java.util.Vector'
     final String violationMessage = "The $className class is obsolete"
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'VectorIsObsolete'

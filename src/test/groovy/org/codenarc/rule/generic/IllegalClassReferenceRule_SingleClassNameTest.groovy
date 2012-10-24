@@ -17,6 +17,7 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for IllegalClassReferenceRule - checks for specifying a single class name for the classNames field
@@ -30,6 +31,7 @@ class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferen
 
     final String className = 'com.example.MyExampleClass'  
 
+    @Test
     void testRuleProperties() {
         rule = new IllegalClassReferenceRule()
         assert rule.priority == 2

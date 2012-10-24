@@ -17,6 +17,8 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for ImplementationAsTypeRule
@@ -60,11 +62,13 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     ]
     private allBadTypes
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ImplementationAsType'
     }
 
+    @Test
     void testApplyTo_Parameters_NoViolations() {
         final SOURCE = '''
         	def findUnique(Calendar cal, Map map, Set set, List list, def other) { }
@@ -72,6 +76,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReturnTypes_NoViolations() {
         final SOURCE = '''
         	Calendar m1() { }
@@ -81,6 +86,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Variables_NoViolations() {
         final SOURCE = '''
         	Calendar v1
@@ -90,6 +96,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MethodParameters_Violations() {
         allBadTypes.each { badType ->
             log("Testing for [$badType]")
@@ -98,6 +105,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         }
     }
 
+    @Test
     void testApplyTo_ConstructorParameters_Violations() {
         allBadTypes.each { badType ->
             final SOURCE = """
@@ -109,6 +117,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         }
     }
 
+    @Test
     void testApplyTo_ClosureParameters_Violations() {
         allBadTypes.each { badType ->
             log("Testing for [$badType]")
@@ -117,6 +126,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         }
     }
 
+    @Test
     void testApplyTo_ReturnTypes_Violations() {
         allBadTypes.each { badType ->
             final SOURCE = "$badType doSomething() { }"
@@ -124,6 +134,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         }
     }
 
+    @Test
     void testApplyTo_VariableTypes_Violations() {
         allBadTypes.each { badType ->
             final SOURCE = """
@@ -135,6 +146,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         }
     }
 
+    @Test
     void testApplyTo_MultipleVariables_Violations() {
         final SOURCE = '''
             def myMethod() {
@@ -146,6 +158,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
             [lineNumber: 3, sourceLineText:'Vector v2'])
     }
 
+    @Test
     void testApplyTo_FieldTypes_Violations() {
         allBadTypes.each { badType ->
             final SOURCE = """
@@ -157,8 +170,8 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         }
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpImplementationAsTypeRuleTest() {
         def badTypesClassNameOnly = BAD_TYPES.collect {badType ->  classNameOnly(badType) }
         allBadTypes = BAD_TYPES + badTypesClassNameOnly
     }

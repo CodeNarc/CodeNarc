@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for LineLengthRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class LineLengthRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'LineLength'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class Person {
@@ -41,6 +44,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
         	class Person {
@@ -52,6 +56,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
                 'The line exceeds 120 characters. The line is 121 characters.')
     }
 
+    @Test
     void testComments() {
         final SOURCE = '''
         	class Person {

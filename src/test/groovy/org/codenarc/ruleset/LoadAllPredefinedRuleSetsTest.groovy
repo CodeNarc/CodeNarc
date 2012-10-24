@@ -16,6 +16,8 @@
 package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
@@ -30,6 +32,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
     private static final BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
     private messages
 
+    @Test
     void testPredefinedRulesHaveDescriptions() {
 
         forEachRule { rule ->
@@ -39,6 +42,7 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
     }
 
     @SuppressWarnings('CatchThrowable')
+    @Test
     void testPredefinedRulesHaveValidHtmlDescriptions() {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance()
@@ -81,8 +85,8 @@ Error: $t.message
         }
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpLoadAllPredefinedRuleSetsTest() {
         messages = ResourceBundle.getBundle(BASE_MESSAGES_BUNDLE)
     }
 

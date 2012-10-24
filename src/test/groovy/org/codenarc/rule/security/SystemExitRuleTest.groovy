@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SystemExitRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class SystemExitRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SystemExit'
     }
 
+    @Test
     void testApplyTo_Violation_Initializers() {
         final SOURCE = '''
             class MyClass {
@@ -46,6 +49,7 @@ class SystemExitRuleTest extends AbstractRuleTestCase {
                 7, 'System.exit(0)', 'Calling System.exit() is insecure and can expose a denial of service attack')
     }
 
+    @Test
     void testApplyTo_Violation_Methods() {
         final SOURCE = '''
             class MyClass {
@@ -62,6 +66,7 @@ class SystemExitRuleTest extends AbstractRuleTestCase {
                 7, 'System.exit(0)', 'Calling System.exit() is insecure and can expose a denial of service attack')
     }
 
+    @Test
     void testApplyTo_Violation_Closures() {
         final SOURCE = '''
             System.exit(0)
@@ -74,6 +79,7 @@ class SystemExitRuleTest extends AbstractRuleTestCase {
                 4, 'System.exit(0)')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

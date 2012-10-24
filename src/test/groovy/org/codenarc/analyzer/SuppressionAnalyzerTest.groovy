@@ -19,9 +19,11 @@ import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
+import org.junit.Test
 
 class SuppressionAnalyzerTest extends GroovyTestCase {
 
+    @Test
     void testNone() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
             println 4
@@ -32,6 +34,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule3'))
     }
 
+    @Test
     void testPackage() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -48,6 +51,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule4'))
     }
 
+    @Test
     void testImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -73,6 +77,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule7'))
     }
 
+    @Test
     void testStarImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -98,6 +103,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule7'))
     }
 
+    @Test
     void testStaticStarImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -123,6 +129,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule7'))
     }
 
+    @Test
     void testSingleClass() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -137,6 +144,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule4'))
     }
 
+    @Test
     void testTwoClassesClass() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -165,6 +173,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 9))
     }
 
+    @Test
     void testFields() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -190,6 +199,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
     }
 
+    @Test
     void testProperties() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -215,6 +225,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
     }
 
+    @Test
     void testMethods() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -258,6 +269,7 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 19))
     }
 
+    @Test
     void testCompilationFails() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
             class XYZ ^&**(

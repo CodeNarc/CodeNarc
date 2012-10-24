@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BracesForClassRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class BracesForClassRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BracesForClass'
     }
 
+    @Test
     void testMultilineDefinition() {
         final SOURCE = '''
             class MyClass
@@ -40,6 +43,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultilineDefinitionViolation() {
         final SOURCE = '''
             class MyClass
@@ -51,6 +55,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, '{')
     }
 
+    @Test
     void testMultilineDefinitionOverride() {
         final SOURCE = '''
             class MyClass
@@ -63,6 +68,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultilineDefinitionOverrideViolation() {
         final SOURCE = '''
             class MyClass
@@ -74,6 +80,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'extends File {', 'Opening brace for the class MyClass should start on a new line')
     }
 
+    @Test
     void testSuccessScenarioSameLine() {
 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
@@ -81,6 +88,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenarioNewLine() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
@@ -88,6 +96,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolationSameLine() {
 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
@@ -98,6 +107,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 64, sourceLineText: '{', messageText: 'Opening brace for the interface Third should start on the same line'])
     }
 
+    @Test
     void testViolationNewLine() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')

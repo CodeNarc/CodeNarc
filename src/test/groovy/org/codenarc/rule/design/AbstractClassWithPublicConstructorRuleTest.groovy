@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for AbstractClassWithPublicConstructorRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class AbstractClassWithPublicConstructorRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AbstractClassWithPublicConstructor'
     }
 
+    @Test
     void testNoViolations() {
         final SOURCE = '''
             class MyClass { }
@@ -54,6 +57,7 @@ class AbstractClassWithPublicConstructorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testAbstractClassWithOnlyPublicConstructor() {
         final SOURCE = '''
             abstract class MyClass {
@@ -62,6 +66,7 @@ class AbstractClassWithPublicConstructorRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'MyClass() { }', 'MyClass')
     }
 
+    @Test
     void testAbstractClassWithMultipleConstructors() {
         final SOURCE = '''
             abstract class MyClass {

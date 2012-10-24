@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitCallToCompareToMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitCallToCompareToMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
@@ -46,6 +49,7 @@ class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolation() {
         final SOURCE = '''
             a.compareTo(b)

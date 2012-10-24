@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ThrowExceptionFromFinallyBlockRule
@@ -24,11 +25,13 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
  */
 class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTestCase {
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ThrowExceptionFromFinallyBlock'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -52,6 +55,7 @@ class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 15, 'throw new Exception()')
     }
 
+    @Test
     void testApplyTo_NestedTryFinally() {
         final SOURCE = '''
             class MyClass {
@@ -75,6 +79,7 @@ class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 10, "throw new Exception('A')", 15, "throw new Exception('B')")
     }
 
+    @Test
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

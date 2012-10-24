@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for IntegerGetIntegerRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class IntegerGetIntegerRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'IntegerGetInteger'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             Integer.getInteger()
@@ -38,6 +41,7 @@ class IntegerGetIntegerRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTwoViolations() {
         final SOURCE = '''
             Integer.getInteger(value)

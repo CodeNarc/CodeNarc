@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyTryBlockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyTryBlockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyTryBlock'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class EmptyTryBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'try {')
     }
 
+    @Test
     void testApplyTo_Violation_TryBlockContainsComment() {
         final SOURCE = '''
             try {
@@ -55,6 +59,7 @@ class EmptyTryBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'try')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

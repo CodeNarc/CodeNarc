@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UseAssertFalseInsteadOfNegationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UseAssertFalseInsteadOfNegationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UseAssertFalseInsteadOfNegation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -44,6 +47,7 @@ class UseAssertFalseInsteadOfNegationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testUsingThisReference() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -55,6 +59,7 @@ class UseAssertFalseInsteadOfNegationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertTrue(!condition)', 'assertTrue(!condition) can be simplified to assertFalse(condition)')
     }
 
+    @Test
     void testUsingStaticReference() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {

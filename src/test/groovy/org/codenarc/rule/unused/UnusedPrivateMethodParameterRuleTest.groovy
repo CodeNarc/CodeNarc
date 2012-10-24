@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedPrivateMethodParameterRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedPrivateMethodParameter'
     }
 
+    @Test
     void testApplyTo_SingleUnusedPrivateMethodParameter() {
         final SOURCE = '''
             class MyClass {
@@ -39,6 +42,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private void myMethod(int value) { }', 'Method parameter [value] is never referenced')
     }
 
+    @Test
     void testIgnoreRegexDefaults() {
         final SOURCE = '''
             class MyClass {
@@ -49,6 +53,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCustomIgnoreRegex() {
         final SOURCE = '''
             class MyClass {
@@ -61,6 +66,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleUnusedPrivateMethodParameterSuspiciousReferenceInAnonymousClass() {
         final SOURCE = '''
             class MyClass {
@@ -73,6 +79,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MultipleUnusedParametersForSinglePrivateMethod() {
         final SOURCE = '''
           class MyClass {
@@ -86,6 +93,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'private void myMethod(int value, String name) { }', messageText:'name'])
     }
 
+    @Test
     void testApplyTo_MultiplePrivateMethodsWithUnusedParameters() {
         final SOURCE = '''
           class MyClass {
@@ -99,6 +107,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'private int myMethod3(Date startDate) { }', messageText:'startDate'])
     }
 
+    @Test
    void testApplyTo_AllParametersUsed() {
         final SOURCE = '''
             class MyClass {
@@ -120,6 +129,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonPrivateMethods() {
         final SOURCE = '''
             class MyClass {
@@ -131,6 +141,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_OnlyReferenceIsAMapKeyOrValue() {
         final SOURCE = '''
             class MyClass {
@@ -142,6 +153,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ParameterIsAClosureThatIsCalled() {
         final SOURCE = '''
             class MyClass {
@@ -155,6 +167,7 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoMethods() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

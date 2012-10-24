@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitFailWithoutMessageRule
@@ -25,14 +26,17 @@ import org.codenarc.rule.Rule
   */
 class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JUnitFailWithoutMessage'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
+    @Test
                 void testMethod() {
                     fail('msg')
                     Assert.fail('msg')
@@ -44,6 +48,7 @@ class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testFailCalls() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {

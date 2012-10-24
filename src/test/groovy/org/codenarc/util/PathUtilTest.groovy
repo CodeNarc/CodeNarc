@@ -16,6 +16,7 @@
 package org.codenarc.util
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for PathUtil
@@ -24,6 +25,7 @@ import org.codenarc.test.AbstractTestCase
   */
 class PathUtilTest extends AbstractTestCase{
 
+    @Test
     void testGetName() {
         assert PathUtil.getName(null) == null
         assert PathUtil.getName('') == null
@@ -33,6 +35,7 @@ class PathUtilTest extends AbstractTestCase{
         assert PathUtil.getName('\\abc') == 'abc'
     }
 
+    @Test
     void testGetParentPath() {
         assert PathUtil.getParentPath(null) == null
         assert PathUtil.getParentPath('') == null
@@ -44,6 +47,7 @@ class PathUtilTest extends AbstractTestCase{
         assert PathUtil.getParentPath('a\\b\\c\\d\\e\\f') == 'a/b/c/d/e'
     }
 
+    @Test
     void testRemovePathPrefix() {
         assert PathUtil.removePathPrefix(null, 'abc/def') == 'abc/def'
         assert PathUtil.removePathPrefix('xxx', 'abc/def') == 'abc/def'
@@ -52,6 +56,7 @@ class PathUtilTest extends AbstractTestCase{
         assert PathUtil.removePathPrefix('abc/', 'abc/def') == 'def'
     }
 
+    @Test
     void testNormalizePath() {
         assert PathUtil.normalizePath(null) == null
         assert PathUtil.normalizePath('') == ''

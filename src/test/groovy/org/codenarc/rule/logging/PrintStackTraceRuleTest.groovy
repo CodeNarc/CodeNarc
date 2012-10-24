@@ -17,6 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for PrintStackTraceRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class PrintStackTraceRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'PrintStackTrace'
     }
 
+    @Test
     void testApplyTo_PrintStackTrace() {
         final SOURCE = '''
             try {
@@ -40,6 +43,7 @@ class PrintStackTraceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'e.printStackTrace()')
     }
 
+    @Test
     void testApplyTo_PrintStackTrace_WithinClosure() {
         final SOURCE = '''
             class MyClass {
@@ -54,6 +58,7 @@ class PrintStackTraceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'e.printStackTrace()')
     }
 
+    @Test
     void testApplyTo_PrintStackTrace_WithParameter() {
         final SOURCE = '''
             try {
@@ -64,8 +69,10 @@ class PrintStackTraceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolation() {
         final SOURCE = '''
+    @Test
             void testSomething() {
                 println "123"
             }
@@ -73,6 +80,7 @@ class PrintStackTraceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_GStringMethodName() {
         final SOURCE = ' "$myMethodName"(1234) '
         assertNoViolations(SOURCE)

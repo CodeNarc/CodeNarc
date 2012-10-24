@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for InsecureRandomRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class InsecureRandomRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'InsecureRandom'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
               new java.security.SecureRandom()
@@ -38,6 +41,7 @@ class InsecureRandomRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMathRandom() {
         final SOURCE = '''
           Math.random()
@@ -48,6 +52,7 @@ class InsecureRandomRuleTest extends AbstractRuleTestCase {
             3, 'java.lang.Math.random()', 'Using Math.random() is insecure. Use SecureRandom instead')
     }
 
+    @Test
     void testRandom() {
         final SOURCE = '''
               def r1 = new Random()

@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitCreationOfTreeSetRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitTreeSetInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	def x = [] as SortedSet
@@ -49,6 +52,7 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableDeclarations() {
         final SOURCE = '''
         	def x = new TreeSet()
@@ -63,6 +67,7 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
                 5, 'def x = new TreeSet()')
     }
 
+    @Test
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {

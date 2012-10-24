@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptySwitchStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptySwitchStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptySwitchStatement'
     }
 
+    @Test
     void testApplyTo_EmptySwitchStatement() {
         final SOURCE = '''
             class MyClass {
@@ -43,6 +46,7 @@ class EmptySwitchStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'switch(myVariable) {')
     }
 
+    @Test
     void testApplyTo_NonEmptySwitchStatement() {
         final SOURCE = '''
             def myVar = 123

@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryBooleanInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryBooleanInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryBooleanInstantiation'
     }
 
+    @Test
     void testApplyTo_NewBoolean() {
         final SOURCE = '''
             class MyClass {
@@ -43,6 +46,7 @@ class UnnecessaryBooleanInstantiationRuleTest extends AbstractRuleTestCase {
                 5, 'new java.lang.Boolean(false)', 'There is typically no need to instantiate Boolean instances.')
     }
 
+    @Test
     void testApplyTo_NewBoolean_NotWithinClass() {
         final SOURCE = '''
             def b1 = new java.lang.Boolean(true)
@@ -56,6 +60,7 @@ class UnnecessaryBooleanInstantiationRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'new java.lang.Boolean(true)', 6, 'new Boolean(true)')
     }
 
+    @Test
     void testApplyTo_BooleanValueOf() {
         final SOURCE = '''
             class MyClass {
@@ -71,6 +76,7 @@ class UnnecessaryBooleanInstantiationRuleTest extends AbstractRuleTestCase {
                 6, 'Boolean.valueOf(false)', 'Call to Boolean.valueOf(false) is unnecessary and can probably be replaced with simply false')
     }
 
+    @Test
     void testApplyTo_WithinEnum() {
         final SOURCE = '''
             enum MyEnum {
@@ -80,6 +86,7 @@ class UnnecessaryBooleanInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

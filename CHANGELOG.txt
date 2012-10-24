@@ -21,6 +21,7 @@ FRAMEWORK AND INFRASTRUCTURE
 - #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.
 - #3578372: Add notes to rule index and sample rule sets that ABC/CC rules require the GMetrics jar.
 - #3578909: Move helper methods from AbstractTestCase into new TestUtil class (to enable use by other test frameworks, e.g. Spock)
+- #3578909: Upgrade tests and test framework to JUnit 4.
 
 
 Changes in version 0.17 (March 2012)

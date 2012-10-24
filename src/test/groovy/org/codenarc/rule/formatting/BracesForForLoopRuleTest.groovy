@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BracesForForLoopRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class BracesForForLoopRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BracesForForLoop'
     }
 
+    @Test
     void testMultilineForLoop() {
 
         final SOURCE = '''
@@ -41,6 +44,7 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultilineForLoopOverride() {
 
         final SOURCE = '''
@@ -54,6 +58,7 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testForLoopWithNoBraces_NoViolations() {
         final SOURCE = '''
             for (int x = 0; x < 10; x++)
@@ -62,12 +67,14 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNewLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertSingleViolation(SOURCE, 33, 'for (i in 0..3)', 'Braces should start on the same line')
     }
 
+    @Test
     void testNewLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
@@ -75,12 +82,14 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSameLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSameLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text

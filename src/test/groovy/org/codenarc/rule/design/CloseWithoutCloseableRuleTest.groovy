@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CloseWithoutCloseableRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CloseWithoutCloseable'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	void close() { } // in script, OK
@@ -50,6 +53,7 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testPublicCloseViolation() {
         final SOURCE = '''
             class MyClass {
@@ -59,6 +63,7 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void close() { }', 'void close() method defined without implementing Closeable')
     }
 
+    @Test
     void testProtectedCloseViolation() {
         final SOURCE = '''
             class MyClass {

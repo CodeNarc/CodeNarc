@@ -23,6 +23,8 @@ import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertEqualSets
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -38,20 +40,24 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     private ruleSet
     private testCountRule
 
+    @Test
     void testAnalyze_NullRuleSet() {
         analyzer.baseDirectory = BASE_DIR
         shouldFailWithMessageContaining('ruleSet') { analyzer.analyze(null) }
     }
 
+    @Test
     void testAnalyze_BaseDirectoryNull() {
         shouldFailWithMessageContaining('baseDirectory') { analyzer.analyze(ruleSet) }
     }
 
+    @Test
     void testAnalyze_BaseDirectoryEmpty() {
         analyzer.baseDirectory = ''
         shouldFailWithMessageContaining('baseDirectory') { analyzer.analyze(ruleSet) }
     }
 
+    @Test
     void testAnalyze_FilesOnly() {
         final DIR = 'src/test/resources/source'
         analyzer.baseDirectory = DIR
@@ -72,6 +78,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 2
     }
 
+    @Test
     void testAnalyze() {
         analyzer.baseDirectory = BASE_DIR
         def results = analyzer.analyze(ruleSet)
@@ -95,6 +102,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assertEqualSets(childResultsClasses(top), [FileResults, DirectoryResults, DirectoryResults])
     }
 
+    @Test
     void testAnalyze_NoViolations() {
         analyzer.baseDirectory = BASE_DIR
         ruleSet = new ListRuleSet([testCountRule])
@@ -109,6 +117,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 5
     }
 
+    @Test
     void testAnalyze_IncludesAndExcludes() {
         analyzer.baseDirectory = BASE_DIR
         analyzer.includes = '**ubdir*.groovy'
@@ -129,6 +138,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 3
     }
 
+    @Test
     void testAnalyze_IncludesAndExcludes_Lists() {
         analyzer.baseDirectory = BASE_DIR
         analyzer.includes = '**/Subdir1File1.groovy,**/Subdir2a*1.groovy,**/Sub?ir2File1.groovy'
@@ -149,11 +159,13 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 2
     }
 
+    @Test
     void testGetSourceDirectories_ReturnsListWithBaseDirectory() {
         analyzer.baseDirectory = BASE_DIR
         assert analyzer.sourceDirectories == [BASE_DIR]
     }
 
+    @Test
     void testMatches() {
         def source = new SourceString('def x', 'dir/file.txt')
         assertMatches(source, null, null, true)
@@ -167,8 +179,8 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         assertMatches(source, '**/OTHER.*', '', false)
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpFilesystemSourceAnalyzerTest() {
         analyzer = new FilesystemSourceAnalyzer()
         testCountRule = new TestCountRule()
         ruleSet = new ListRuleSet([new TestPathRule(), testCountRule])

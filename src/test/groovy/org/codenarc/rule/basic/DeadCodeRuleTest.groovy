@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DeadCodeRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class DeadCodeRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DeadCode'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def x = true
@@ -45,6 +48,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCodeAfterThrow() {
         final SOURCE = '''
             def x = {
@@ -61,6 +65,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
                 8, 'println x')
     }
 
+    @Test
     void testCodeAfterReturn() {
         final SOURCE = '''
             def x = {
@@ -77,6 +82,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
                 8, 'println x')
     }
 
+    @Test
     void testInIfStatement() {
         final SOURCE = '''
             def x = {
@@ -87,6 +93,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
             } '''
         assertSingleViolation(SOURCE, 5, 'println x')
     }
+    @Test
     void testIfStatementAllBranchesReturn() {
         final SOURCE = '''
             def x = {
@@ -101,6 +108,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, 'println x')
     }
 
+    @Test
     void testInWhile() {
         final SOURCE = '''
             while (true) {

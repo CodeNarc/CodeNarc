@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedPrivateMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedPrivateMethod'
     }
 
+    @Test
     void testLocalUseOfGetter() {
         final SOURCE = '''
             class ExecuteTest {
@@ -56,6 +59,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'getUnused()', 'The method getUnused is not used within the class')
     }
 
+    @Test
     void testGetterMethodWithIsPrefix_AccessedAsProperty_NoViolation() {
         final SOURCE = '''
             class A {
@@ -70,6 +74,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStaticMethodsInOuterClass() {
         final SOURCE = '''
             package groovy.bugs
@@ -96,6 +101,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 18, 'myUnCalledPrivateMethod', 'The method myUnCalledPrivateMethod is not used within the class')
     }
 
+    @Test
     void testStaticMethodsInOuterClass_MethodHandles() {
         final SOURCE = '''
             class MyClass {
@@ -120,6 +126,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 16, 'myUnCalledPrivateMethod', 'The method myUnCalledPrivateMethod is not used within the class')
     }
 
+    @Test
     void testStaticMethodsInInnerClass_MethodHandles() {
         final SOURCE = '''
             package groovy.bugs
@@ -142,11 +149,13 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
                 14, 'myInnerPrivateMethod4', 'The method myInnerPrivateMethod4 is not used within the class')
     }
 
+    @Test
     void testGetterMethodsInOuterClass() {
         final SOURCE = '''
                 package groovy.bugs
 
                 class MyClass {
+    @Test
                   void test () {
                      Foo.test()
                   }
@@ -159,11 +168,13 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testGetterMethodsInInnerClass() {
         final SOURCE = '''
                 package groovy.bugs
 
                 class MyClass {
+    @Test
                     void test () {
                         Foo.test()
                     }
@@ -175,6 +186,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testAnonymousInnerClassAsField() {
         final SOURCE = '''
              class MyClass {
@@ -189,6 +201,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testClosureAsField() {
         final SOURCE = '''
             class MyClass {
@@ -201,6 +214,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testAnonymousInnerClassAsLocalVariable() {
         final SOURCE = '''
             class MyClass {
@@ -217,6 +231,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testClosureAsLocalVariable() {
         final SOURCE = '''
             class MyClass {
@@ -229,6 +244,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testInnerClass() {
         final SOURCE = '''
             class MyClass {
@@ -243,6 +259,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testApplyTo_SingleUnusedPrivateMethod() {
         final SOURCE = '''
             class MyClass {
@@ -252,6 +269,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int countStuff() { }', 'The method countStuff is not used within the class')
     }
 
+    @Test
     void testApplyTo_MultipleUnusedPrivateMethods() {
         final SOURCE = '''
             class MyClass {
@@ -266,6 +284,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'private int countStuff() { }', 6, 'private static String buildName(int count) {')
     }
 
+    @Test
     void testApplyTo_PrivateConstructor_NotUsed() {
         final SOURCE = '''
             class MyClass {
@@ -276,6 +295,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AllPrivateMethodsUsed() {
         final SOURCE = '''
             class MyClass {
@@ -296,6 +316,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonPrivateMethods() {
         final SOURCE = '''
             class MyClass {
@@ -307,6 +328,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MultipleOverloadedMethods() {
         final SOURCE = '''
             class MyClass {
@@ -319,6 +341,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReferenceMethodOfAnotherObject() {
         final SOURCE = '''
             class MyClass {
@@ -331,6 +354,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int countStuff() { }')
     }
 
+    @Test
     void testApplyTo_UnusedPrivateStaticMethod() {
         final SOURCE = '''
             class MyClass {
@@ -340,6 +364,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private static int countStuff() { }')
     }
 
+    @Test
     void testApplyTo_PrivateStaticMethodAccessedThroughClassName() {
         final SOURCE = '''
             class MyClass {
@@ -352,6 +377,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_GStringMethodReference() {
         final SOURCE = '''
             class MyClass {
@@ -362,6 +388,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int countStuff() { }')
     }
 
+    @Test
     void testApplyTo_StringMethodReference() {
         final SOURCE = '''
             class MyClass {
@@ -372,6 +399,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DereferencedGStringMethodReference() {
         final SOURCE = '''
             class MyClass {
@@ -383,6 +411,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int countStuff() { }')
     }
 
+    @Test
     void testApplyTo_MethodPointerReference() {
         final SOURCE = '''
             class MyClass {
@@ -394,6 +423,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'private int otherMethod()')
     }
 
+    @Test
     void testApplyTo_MoreThanOneClassInASourceFile() {
         final SOURCE = '''
             class MyClass {
@@ -406,6 +436,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int countStuff() { }')
     }
 
+    @Test
     void testApplyTo_Script() {
         final SOURCE = '''
             private BigDecimal calculateDepositAmount() { 23 }
@@ -413,16 +444,19 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'private BigDecimal calculateDepositAmount() { 23 }')
     }
 
+    @Test
     void testApplyTo_NoMethodDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_StackOverflow() {
         final SOURCE = ' Map map = ["a" : 1, "b": 2, "$c": 3, "b": 4 ] '
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ZeroLengthMethodName() {
         final SOURCE = '''
             def doStuff() {

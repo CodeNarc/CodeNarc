@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DuplicateMapKeyRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DuplicateMapKey'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	  def var4 = [a:1, b:1, c:1]
@@ -39,6 +42,7 @@ class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDuplicateKey() {
         final SOURCE = '''
               def var1 = [a:1,
@@ -48,6 +52,7 @@ class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'a:2,', "Key 'a' is duplicated.")
     }
 
+    @Test
     void testMultipleDuplicateKeys() {
         final SOURCE = '''
               def var1 = [a:1,
@@ -60,6 +65,7 @@ class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
                 4, 'a:4,', "Key 'a' is duplicated.")
     }
 
+    @Test
     void testDuplicateIntegerKey() {
         final SOURCE = '''
               def var2 = [1:1, 1:2, 2:3]
@@ -67,6 +73,7 @@ class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def var2 = [1:1, 1:2, 2:3]', "Key '1' is duplicated.")
     }
 
+    @Test
     void testDuplicateStringKey() {
         final SOURCE = '''
               def var3 = ["a":1, "a":2, "b":3]
@@ -74,6 +81,7 @@ class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'def var3 = ["a":1, "a":2, "b":3]', "Key 'a' is duplicated."
     }
 
+    @Test
     void testDuplicateKeyNotAdjacent() {
         final SOURCE = '''
             def list = {

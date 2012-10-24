@@ -21,11 +21,14 @@ import org.codenarc.results.FileResults
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import java.text.DateFormat
 
 import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import static org.junit.Assert.assertEquals
 
 /**
  * Tests for TestReportWriter
@@ -80,12 +83,14 @@ File: src/main/dao/MyOtherDao.groovy
     private results, srcMainDaoDirResults
     private stringWriter
 
+    @Test
     void testWriteReport_Writer() {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def reportText = stringWriter.toString()
         assertReportText(reportText)
     }
 
+    @Test
     void testWriteReport_WritesToDefaultReportFile() {
         reportWriter.writeReport(analysisContext, results)
         def reportFile = new File('CodeNarcReport.txt')
@@ -94,6 +99,7 @@ File: src/main/dao/MyOtherDao.groovy
         assertReportText(reportText)
     }
 
+    @Test
     void testWriteReport_WritesToConfiguredReportFile() {
         reportWriter.outputFile = NEW_REPORT_FILE
         reportWriter.writeReport(analysisContext, results)
@@ -103,6 +109,7 @@ File: src/main/dao/MyOtherDao.groovy
         assertReportText(reportText)
     }
 
+    @Test
     void testWriteReport_WritesToStandardOut() {
         reportWriter.writeToStandardOut = true
         def output = captureSystemOut {
@@ -111,20 +118,23 @@ File: src/main/dao/MyOtherDao.groovy
         assertReportText(output)
     }
 
+    @Test
     void testWriteReport_NullResults() {
         shouldFailWithMessageContaining('results') { reportWriter.writeReport(analysisContext, null) }
     }
 
+    @Test
     void testWriteReport_NullAnalysisContext() {
         shouldFailWithMessageContaining('analysisContext') { reportWriter.writeReport(null, results) }
     }
 
+    @Test
     void testDefaultOutputFile_CodeNarcReport() {
         assert reportWriter.defaultOutputFile == 'CodeNarcReport.txt'
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpTextReportWriterTest() {
         reportWriter = new TextReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 

@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for InterfaceNameRule
@@ -25,18 +26,21 @@ import org.codenarc.rule.Rule
   */
 class InterfaceNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'InterfaceName'
         assert rule.regex == null
     }
 
+    @Test
     void testRegexIsNull() {
         final SOURCE = 'interface aaa$bbb{ }'
         assert !rule.ready
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_WithPackage_MatchesRegex() {
         final SOURCE = '''
             package org.codenarc.sample
@@ -46,30 +50,35 @@ class InterfaceNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchRegex() {
         final SOURCE = ' interface MyInterface { } '
         rule.regex = /z.*/
         assertSingleViolation(SOURCE, 1, 'interface MyInterface')
     }
 
+    @Test
     void testApplyTo_MatchesRegex() {
         final SOURCE = ' interface zClass { } '
         rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonInterfaceClass() {
         final SOURCE = ' class nonInterfaceClass { } '
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Interface() {
         final SOURCE = 'abstract class abstractClass { }'
         rule.regex = /[A-Z].*/
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoClassDefinition() {
         rule.regex = /[A-Z].*/
         final SOURCE = '''

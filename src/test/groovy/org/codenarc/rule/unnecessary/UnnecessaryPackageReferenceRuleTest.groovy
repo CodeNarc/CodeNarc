@@ -18,6 +18,7 @@ package org.codenarc.rule.unnecessary
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.codenarc.util.GroovyVersion
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryPackageReferenceRule
@@ -26,11 +27,13 @@ import org.codenarc.util.GroovyVersion
  */
 class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryPackageReference'
     }
 
+    @Test
     void testNoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -43,6 +46,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testFieldsTypes_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -59,6 +63,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'java.util.Map mapping', messageText:'java.util'] )
     }
 
+    @Test
     void testWithinExpressions_Violations() {
         final SOURCE = '''
             if (value.class == java.math.BigDecimal) { }
@@ -71,6 +76,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'def processors = java.lang.Runtime.availableProcessors()', messageText:'java.lang'] )
     }
 
+    @Test
     void testConstructorCalls_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -83,6 +89,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:"def url = new java.net.URL('http://abc@example.com')", messageText:'java.net'] )
     }
 
+    @Test
     void testConstructorCall_CallToSuper_NoViolation() {
         final SOURCE = '''
             class MyClass extends Object {
@@ -94,6 +101,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testConstructorCall_CallToThis_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -109,6 +117,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableTypes_Violations() {
         final SOURCE = '''
             void doSomething() {
@@ -127,6 +136,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:"groovy.lang.Closure closure = { println 'ok' }", messageText:'groovy.lang'] )
     }
 
+    @Test
     void testMethodReturnTypes_Violations() {
         final SOURCE = '''
             java.net.Socket getSocket() { }
@@ -141,6 +151,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'groovy.util.AntBuilder getAntBuilder() { }', messageText:'groovy.util'] )
     }
 
+    @Test
     void testMethodParameterTypes_Violations() {
         final SOURCE = '''
             void writeCount(java.io.Writer writer, int count) { }
@@ -152,6 +163,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'void initializeBinding(String name, groovy.lang.Binding binding) { }', messageText:'groovy.lang'] )
     }
 
+    @Test
     void testClosureParameterTypes_Violations() {
         final SOURCE = '''
             def writeCount = { java.io.Writer writer, int count -> }
@@ -163,6 +175,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'def initializeBinding = { String name, groovy.lang.Binding binding -> }', messageText:'groovy.lang'] )
     }
 
+    @Test
     void testExtendsSuperclassOrSuperInterfaceTypes_Violations() {
         final SOURCE = '''
             class MyHashMap extends java.util.HashMap { }
@@ -175,6 +188,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'interface MyList extends java.util.List { }', messageText:'java.util'] )
     }
 
+    @Test
     void testExplicitlyExtendJavaLangObject_KnownLimitation_NoViolations() {
         final SOURCE = '''
             class MyClass extends java.lang.Object { }
@@ -183,6 +197,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testImplementsInterfaceTypes_Violations() {
         final SOURCE = '''
             class MyList implements java.util.List { }
@@ -193,6 +208,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'class MyRange implements groovy.lang.Range { }', messageText:'groovy.lang'] )
     }
 
+    @Test
     void testAsType_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -205,6 +221,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'def string = (java.lang.String)123', messageText:'java.lang'])
     }
 
+    @Test
     void testAnonymousInnerClassDeclaration_KnownLimitation_NoViolation() {
         final SOURCE = '''
             def runnable = new java.lang.Runnable() {
@@ -220,6 +237,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         }
     }
 
+    @Test
     void testPackageReferencesForExplicitlyImportedClasses_Violations() {
         final SOURCE = '''
             import javax.servlet.http.Cookie
@@ -238,6 +256,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:8, sourceLineText:'def dataSource = [:] as javax.sql.DataSource', messageText:'javax.sql.DataSource'] )
     }
 
+    @Test
     void testPackageReferencesForStarImports_Violations() {
         final SOURCE = '''
             import javax.servlet.http.*
@@ -256,6 +275,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
     }
 
+    @Test
     void testEnums() {
         final SOURCE = '''
             package com.company.payment

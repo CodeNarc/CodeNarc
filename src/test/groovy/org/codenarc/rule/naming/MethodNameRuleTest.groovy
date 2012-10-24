@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -27,16 +28,19 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class MethodNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'MethodName'
     }
 
+    @Test
     void testRegexIsNull() {
         rule.regex = null
         shouldFailWithMessageContaining('regex') { applyRuleTo('def myMethod() { }') }
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
           class MyClass {
@@ -46,6 +50,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def MyMethod', 'The method name MyMethod in class MyClass does not match [a-z]\\w*')
     }
 
+    @Test
     void testApplyTo_DoesMatchDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -55,6 +60,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreConstructors() {
         final SOURCE = '''
             class MyClass {
@@ -67,6 +73,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchCustomRegex() {
         final SOURCE = '''
             class MyClass {
@@ -77,6 +84,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myMethod()')
     }
 
+    @Test
     void testApplyTo_DoesMatchCustomRegex() {
         final SOURCE = '''
             class MyClass {
@@ -87,18 +95,21 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchCustomRegex_NoClassDefined() {
         final SOURCE = ' def myMethod() { println "bad" }'
         rule.regex = /z.*/
         assertSingleViolation(SOURCE, 1, 'def myMethod()')
     }
 
+    @Test
     void testApplyTo_DoesMatchCustomRegex_NoClassDefined() {
         final SOURCE = ' def zMethod() { println "bad" } '
         rule.regex = /z.*/
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         final SOURCE = '''
           class MyClass {
@@ -109,6 +120,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
         final SOURCE = '''
           class MyClass {
@@ -119,6 +131,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def MyMethod')
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
           class MyClass {
@@ -132,6 +145,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def MyMethod')
     }
 
+    @Test
     void testApplyTo_NoMethodDefinition() {
         final SOURCE = '''
             class MyClass {
@@ -141,6 +155,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ClosureDefinition() {
         final SOURCE = '''
             class MyClass {

@@ -19,6 +19,7 @@ import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.rule.naming.MethodNameRule
 import org.codenarc.rule.unused.UnusedPrivateFieldRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for PropertiesFileRuleRegistry
@@ -29,12 +30,14 @@ class PropertiesFileRuleRegistryTest extends AbstractTestCase {
 
     private registry = new PropertiesFileRuleRegistry()
 
+    @Test
     void testGetRuleClass_LoadsRulesFromPropertiesFile() {
         assert registry.getRuleClass('ClassName') == ClassNameRule
         assert registry.getRuleClass('MethodName') == MethodNameRule
         assert registry.getRuleClass('UnusedPrivateField') == UnusedPrivateFieldRule
     }
 
+    @Test
     void testGetRuleClass_ReturnsNullForNoMatchingRule() {
         assert registry.getRuleClass('NoSuchRule') == null
     }

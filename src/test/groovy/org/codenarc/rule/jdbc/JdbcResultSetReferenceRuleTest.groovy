@@ -17,6 +17,7 @@ package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JdbcResultSetReferenceRule
@@ -27,6 +28,7 @@ class JdbcResultSetReferenceRuleTest extends AbstractClassReferenceRuleTestCase 
 
     final String className = 'java.sql.ResultSet'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JdbcResultSetReference'

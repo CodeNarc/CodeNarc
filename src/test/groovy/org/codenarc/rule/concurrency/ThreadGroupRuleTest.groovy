@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ThreadGroupRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ThreadGroupRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ThreadGroup'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	getThreadGroup('...')    // a parameter means it must not be a getter.  
@@ -37,6 +40,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testConstructors() {
         final SOURCE = '''
             new ThreadGroup("...")
@@ -44,6 +48,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new ThreadGroup("...")', 'Avoid using java.lang.ThreadGroup; it is unsafe')
     }
 
+    @Test
     void testConstructorsFullyQualified() {
         final SOURCE = '''
             new java.lang.ThreadGroup("...")
@@ -51,6 +56,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new java.lang.ThreadGroup("...")', 'Avoid using java.lang.ThreadGroup; it is unsafe')
     }
 
+    @Test
     void testConstructors2() {
         final SOURCE = '''
             new ThreadGroup(tg, "my thread group")
@@ -58,6 +64,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new ThreadGroup(tg, "my thread group")', 'Avoid using java.lang.ThreadGroup; it is unsafe')
     }
 
+    @Test
     void testFromCurrentThread() {
         final SOURCE = '''
             Thread.currentThread().getThreadGroup()
@@ -65,6 +72,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'Thread.currentThread().getThreadGroup()', 'Avoid using java.lang.ThreadGroup; it is unsafe')
     }
 
+    @Test
     void testFromSecurityManager() {
         final SOURCE = '''
             System.getSecurityManager().getThreadGroup()

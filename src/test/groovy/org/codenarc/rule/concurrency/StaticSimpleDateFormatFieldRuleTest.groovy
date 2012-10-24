@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for StaticSimpleDateFormatFieldRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class StaticSimpleDateFormatFieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'StaticSimpleDateFormatField'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
           // these usages are OK
@@ -43,6 +46,7 @@ class StaticSimpleDateFormatFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStaticField() {
         final SOURCE = '''
               class MyClass {
@@ -52,6 +56,7 @@ class StaticSimpleDateFormatFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static SimpleDateFormat dateFormat', 'SimpleDateFormat instances are not thread safe. Wrap the SimpleDateFormat field dateFormat in a ThreadLocal or make it an instance field')
     }
 
+    @Test
     void testStaticFieldFullyQualifiedName() {
         final SOURCE = '''
               class MyClass {
@@ -61,6 +66,7 @@ class StaticSimpleDateFormatFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static java.text.SimpleDateFormat dateFormat', 'SimpleDateFormat instances are not thread safe. Wrap the SimpleDateFormat field dateFormat in a ThreadLocal or make it an instance field')
     }
 
+    @Test
     void testStaticUntypedField_InitializesValueToDateFormat() {
         final SOURCE = '''
               class MyClass {
@@ -80,6 +86,7 @@ class StaticSimpleDateFormatFieldRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testNonStaticFieldWithSimpleDateFormatInitializer() {
         final SOURCE = '''
           class MyClass {

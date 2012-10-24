@@ -18,6 +18,8 @@ package org.codenarc.ant
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.captureSystemOut
 
@@ -34,6 +36,7 @@ class CodeNarcTask_CustomRuleSetTest extends AbstractTestCase {
     private codeNarcTask
     private fileSet
 
+    @Test
     void testExecute_UseCustomRuleSet() {
         codeNarcTask.addFileset(fileSet)
         def output = captureSystemOut {
@@ -43,8 +46,8 @@ class CodeNarcTask_CustomRuleSetTest extends AbstractTestCase {
         assert output.contains('CyclomaticComplexity')
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpCodeNarcTask_CustomRuleSetTest() {
 
         def project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR), project:project)

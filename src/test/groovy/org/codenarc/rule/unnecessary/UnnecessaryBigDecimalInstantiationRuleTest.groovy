@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryBigDecimalInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryBigDecimalInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             assert 42G == foo()
@@ -39,6 +42,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringConstructor_Decimal() {
         final SOURCE = '''
             new BigDecimal("42.10")
@@ -46,6 +50,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new BigDecimal("42.10")', 'Can be rewritten as 42.10 or 42.10G')
     }
 
+    @Test
     void testStringConstructor_Integer() {
         final SOURCE = '''
             new BigDecimal("42")
@@ -53,6 +58,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoubleConstructor() {
         final SOURCE = '''
             new BigDecimal(42.10d)
@@ -60,6 +66,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new BigDecimal(42.10d)', 'Can be rewritten as 42.1 or 42.1G')
     }
 
+    @Test
     void testIntConstructor() {
         final SOURCE = '''
             new BigDecimal(42i)
@@ -68,6 +75,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testLongConstructor() {
         final SOURCE = '''
             new BigDecimal(42L)
@@ -75,6 +83,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStaticField() {
         final SOURCE = '''
             class MyClass {

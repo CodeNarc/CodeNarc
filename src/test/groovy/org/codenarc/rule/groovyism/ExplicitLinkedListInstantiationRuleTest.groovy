@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitLinkedListInstantiationRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitLinkedListInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	def x = [] as Queue
@@ -49,6 +52,7 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableDeclarations() {
         final SOURCE = '''
         	def x = new LinkedList()
@@ -63,6 +67,7 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
                 5, 'def x = new LinkedList()')
     }
 
+    @Test
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {

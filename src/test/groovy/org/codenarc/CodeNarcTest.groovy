@@ -20,6 +20,9 @@ import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.XmlReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.test.AbstractTestCase
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -46,43 +49,52 @@ class CodeNarcTest extends AbstractTestCase {
     private codeNarc
     private outputFile
 
+    @Test
     void testParseArgs_InvalidOptionName() {
         shouldFailWithMessageContaining('unknown') { parseArgs('-unknown=abc') }
     }
 
+    @Test
     void testParseArgs_InvalidOption_NoHyphen() {
         shouldFailWithMessageContaining('bad') { parseArgs('bad=abc') }
     }
 
+    @Test
     void testParseArgs_InvalidOption_NoEquals() {
         shouldFailWithMessageContaining('badstuff') { parseArgs('badstuff') }
     }
 
+    @Test
     void testParseArgs_SingleRuleSetFile() {
         parseArgs("-rulesetfiles=$RULESET1")
         assert codeNarc.ruleSetFiles == RULESET1
     }
 
+    @Test
     void testParseArgs_BaseDir() {
         parseArgs("-basedir=$BASE_DIR")
         assert codeNarc.baseDir == BASE_DIR
     }
 
+    @Test
     void testParseArgs_Includes() {
         parseArgs("-includes=$INCLUDES")
         assert codeNarc.includes == INCLUDES
     }
 
+    @Test
     void testParseArgs_Excludes() {
         parseArgs("-excludes=$EXCLUDES")
         assert codeNarc.excludes == EXCLUDES
     }
 
+    @Test
     void testParseArgs_Title() {
         parseArgs("-title=$TITLE")
         assert codeNarc.title == TITLE
     }
 
+    @Test
     void testParseArgs_SingleHtmlReport() {
         parseArgs("-report=$HTML_REPORT_STR")
         assert codeNarc.reports.size() == 1
@@ -90,6 +102,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports[0].outputFile == HTML_REPORT_FILE
     }
 
+    @Test
     void testParseArgs_SingleXmlReport() {
         parseArgs("-report=$XML_REPORT_STR")
         assert codeNarc.reports.size() == 1
@@ -97,6 +110,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports[0].outputFile == XML_REPORT_FILE
     }
 
+    @Test
     void testParseArgs_SingleReportSpecifyingFullReportWriterClassName() {
         def reportString = "org.codenarc.report.HtmlReportWriter:$HTML_REPORT_FILE"
         parseArgs("-report=$reportString")
@@ -105,6 +119,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports[0].outputFile == HTML_REPORT_FILE
     }
 
+    @Test
     void testParseArgs_ThreeReports() {
         parseArgs("-report=$HTML_REPORT_STR", '-report=html', "-report=$XML_REPORT_STR")
         assert codeNarc.reports.size() == 3
@@ -116,11 +131,13 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports[2].outputFile == XML_REPORT_FILE
     }
 
+    @Test
     void testParseArgs_InvalidReportType() {
         shouldFailWithMessageContaining('pdf') { parseArgs('-report=pdf') }
         shouldFailWithMessageContaining('pdf') { parseArgs('-report=pdf:MyReport.pdf') }
     }
 
+    @Test
     void testSetDefaultsIfNecessary_ValuesNotSet() {
         codeNarc.setDefaultsIfNecessary()
         assert codeNarc.includes == '**/*.groovy'
@@ -129,12 +146,14 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.baseDir == '.'
     }
 
+    @Test
     void testSetDefaultsIfNecessary_TitleSet() {
         codeNarc.title = 'abc'
         codeNarc.setDefaultsIfNecessary()
         assertReport(codeNarc.reports[0], HtmlReportWriter, null, 'abc')
     }
 
+    @Test
     void testSetDefaultsIfNecessary_ValuesAlreadySet() {
         codeNarc.includes = 'aaa'
         codeNarc.ruleSetFiles = 'bbb'
@@ -147,6 +166,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.baseDir == 'ddd'
     }
 
+    @Test
     void testExecute() {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
@@ -174,6 +194,7 @@ class CodeNarcTest extends AbstractTestCase {
         assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
     }
 
+    @Test
     void testExecute_NoArgs() {
         final ARGS = [] as String[]
 
@@ -195,6 +216,7 @@ class CodeNarcTest extends AbstractTestCase {
         assertReport(reportWriter, HtmlReportWriter, null, null)
     }
 
+    @Test
     void testMain() {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
@@ -203,6 +225,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert outputFile.exists()
     }
 
+    @Test
     void testMain_Help() {
         final ARGS = ['-help'] as String[]
         def stdout = captureSystemOut {
@@ -214,6 +237,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert !outputFile.exists()
     }
 
+    @Test
     void testMain_BadOptionFormat() {
         final ARGS = ["-report=$HTML_REPORT_STR", '&^%#BAD%$#'] as String[]
         def stdout = captureSystemOut {
@@ -225,6 +249,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert !outputFile.exists()
     }
 
+    @Test
     void testMain_UnknownOption() {
         final ARGS = ['-unknown=23', "-report=$HTML_REPORT_STR"] as String[]
         def stdout = captureSystemOut {
@@ -240,14 +265,14 @@ class CodeNarcTest extends AbstractTestCase {
     // Test setUp/tearDown and helper methods
     //--------------------------------------------------------------------------
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpCodeNarcTest() {
         codeNarc = new CodeNarc()
         outputFile = new File(HTML_REPORT_FILE)
     }
 
-    void tearDown() {
-        super.tearDown()
+    @After
+    void tearDownCodeNarcTest() {
         outputFile.delete()
     }
 

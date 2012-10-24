@@ -17,6 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for MultipleLoggersRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class MultipleLoggersRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'MultipleLoggers'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -46,6 +49,7 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass {
@@ -56,6 +60,7 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'def logger = Logger.getLogger(MyClass)', 'Violation in class MyClass. The class defines multiple loggers: LOG, logger')
     }
 
+    @Test
     void testInnerClass() {
         final SOURCE = '''
             class MyClass {

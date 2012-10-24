@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitArrayListInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitArrayListInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	def x = []
@@ -48,6 +51,7 @@ class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableDeclarations() {
         final SOURCE = '''
         	def x = new ArrayList()
@@ -62,6 +66,7 @@ class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
                 5, 'def x = new ArrayList()', 'ArrayList objects are better instantiated using the form "[]"')
     }
 
+    @Test
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {

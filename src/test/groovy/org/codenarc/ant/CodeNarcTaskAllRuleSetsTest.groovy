@@ -19,6 +19,8 @@ import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.ruleset.RuleSets
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Run the CodeNarc Ant Task against a portion of the CodeNarc source using all predefined RuleSets.
@@ -35,14 +37,15 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
     private fileSet
     private outputFile
 
+    @Test
     void testExecute_MultipleRuleSetFiles() {
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
         assertReportFileExists()
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpCodeNarcTaskAllRuleSetsTest() {
 
         def project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR), project:project)

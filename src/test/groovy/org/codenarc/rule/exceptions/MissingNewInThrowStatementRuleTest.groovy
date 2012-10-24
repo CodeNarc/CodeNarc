@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for MissingNewInThrowStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'MissingNewInThrowStatement'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             throw runtimeFailure()      
@@ -39,6 +42,7 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testException() {
         final SOURCE = '''
             throw RuntimeException()    // ends in Exceptions, first letter Capitalized
@@ -46,6 +50,7 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'throw RuntimeException()', 'The throw statement appears to be throwing the class literal RuntimeException instead of a new instance')
     }
 
+    @Test
     void testClassLiteral() {
         final SOURCE = '''
             throw RuntimeException    // class literal never allowed
@@ -53,6 +58,7 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'throw RuntimeException', 'The throw statement appears to be throwing the class literal RuntimeException instead of a new instance')
     }
 
+    @Test
     void testFailure() {
         final SOURCE = '''
             throw RuntimeFailure()      // ends in Failure, first letter Capitalized
@@ -60,6 +66,7 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'throw RuntimeFailure()', 'The throw statement appears to be throwing the class literal RuntimeFailure instead of a new instance')
     }
 
+    @Test
     void testFault() {
         final SOURCE = '''
             throw RuntimeFault(foo)     // ends in Fault, first letter Capitalized

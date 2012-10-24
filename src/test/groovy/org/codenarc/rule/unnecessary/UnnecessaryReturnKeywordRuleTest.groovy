@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryReturnKeywordRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryReturnKeyword'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	def x = { y++; it }
@@ -48,6 +51,7 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testInClosures() {
         final SOURCE = '''
         	def x = { y++; return it }
@@ -58,6 +62,7 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
                 3, 'return it')
     }
 
+    @Test
     void testInMethods() {
         final SOURCE = '''
             def method1(it) {

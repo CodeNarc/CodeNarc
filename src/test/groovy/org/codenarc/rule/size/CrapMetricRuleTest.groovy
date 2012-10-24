@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.captureLog4JMessages
 
@@ -46,6 +47,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
     // Tests
     //------------------------------------------------------------------------------------
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CrapMetric'
@@ -54,6 +56,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assert rule.crapMetricClassName == 'org.gmetrics.metric.crap.CrapMetric'
     }
 
+    @Test
     void testCoberturaXmlFileNullOrEmpty_IsReadyReturnsFalse() {
         def logEvents = captureLog4JMessages {
             rule.coberturaXmlFile = null
@@ -65,11 +68,13 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNumberOfLogMessages(logEvents, 'Cobertura XML file', 1)
     }
 
+    @Test
     void testApplyTo_CoberturaXmlFileDoesNotExist_IsReadyReturnsFalse_OnlyLogsWarningOnce() {
         rule.coberturaXmlFile = 'DoesNotExist.xml'
         assert !rule.ready
     }
 
+    @Test
     void testApplyTo_CoberturaXmlFileDoesNotExist_NoViolations_OnlyLogsWarningOnce() {
         rule.coberturaXmlFile = 'DoesNotExist.xml'
         def logEvents = captureLog4JMessages {
@@ -79,11 +84,13 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNumberOfLogMessages(logEvents, 'Cobertura XML file', 1)
     }
 
+    @Test
     void testCrapMetricClassNotOnClassPath_IsReadyReturnsFalse() {
         rule.crapMetricClassName = 'some.NonExistentClass'
         assert !rule.ready
     }
 
+    @Test
     void testCrapMetricClassNotOnClassPath_NoViolations() {
         rule.crapMetricClassName = 'some.NonExistentClass'
         rule.maxMethodCrapScore = 1.0
@@ -95,6 +102,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNumberOfLogMessages(logEvents, 'GMetrics CrapMetric class', 1)
     }
 
+    @Test
     void testApplyTo_ClassWithNoMethods() {
         final SOURCE = '''
             class MyClass {
@@ -104,16 +112,19 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleMethod_EqualToMaxMethodCrapScore() {
         rule.maxMethodCrapScore = CRAP_SCORE
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleMethod_ExceedsMaxMethodCrapScore() {
         rule.maxMethodCrapScore = 5.0
         assertSingleViolation(SOURCE, 4, 'String toString() {', [CLASS_NAME, METRIC_DESCRIPTION, METHOD_NAME, CRAP_SCORE])
     }
 
+    @Test
     void testSuppressWarningsOnClass() {
         final SOURCE = '''
             package com.example.service
@@ -128,6 +139,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assert manuallyApplyRule(SOURCE).size() == 0
     }
 
+    @Test
     void testSuppressWarningsOnMethod() {
         final SOURCE = '''
             package com.example.service
@@ -142,6 +154,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assert manuallyApplyRule(SOURCE).size() == 0
     }
 
+    @Test
     void testApplyTo_IgnoresClosureFields() {
         final SOURCE = '''
             class MyClass {
@@ -152,6 +165,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoresMethodThatHasNoCoverageInformation() {
         final SOURCE = '''
             package com.example.service
@@ -165,6 +179,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoresAbstractMethods() {
         final SOURCE = '''
             package com.example.service
@@ -176,21 +191,25 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Class_ExceedsMaxAverageClassComplexity() {
         rule.maxClassAverageMethodCrapScore = 1.0
         assertSingleViolation(SOURCE, 3, 'class Email', [CLASS_NAME, METRIC_DESCRIPTION, CRAP_SCORE])
     }
 
+    @Test
     void testApplyTo_Class_ZeroMaxClassAverageMethodCrapScore_NoViolations() {
         rule.maxClassAverageMethodCrapScore = 0.0
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Class_NullMaxClassAverageMethodCrapScore_NoViolations() {
         rule.maxClassAverageMethodCrapScore = null
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ClassAndMethod_ExceedThreshold() {
         rule.maxMethodCrapScore = 1.0
         rule.maxClassAverageMethodCrapScore = 1.0
@@ -199,24 +218,28 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
                 4, 'String toString() {', [CLASS_NAME, METRIC_DESCRIPTION, METHOD_NAME, CRAP_SCORE])
     }
 
+    @Test
     void testApplyTo_ClassAndMethods_AtThreshold() {
         rule.maxMethodCrapScore = CRAP_SCORE
         rule.maxClassAverageMethodCrapScore = CRAP_SCORE
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         rule.maxMethodCrapScore = 1.0
         rule.ignoreMethodNames = METHOD_NAME
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
         rule.maxMethodCrapScore = 1.0
         rule.ignoreMethodNames = 'other,x*'
         assertSingleViolation(SOURCE, 4, 'String toString() {', [CLASS_NAME, METRIC_DESCRIPTION, METHOD_NAME, CRAP_SCORE])
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
         rule.ignoreMethodNames = 'myM*d*,t?Str*ng'
         assertNoViolations(SOURCE)

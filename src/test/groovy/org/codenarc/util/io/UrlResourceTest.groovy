@@ -16,7 +16,9 @@
 package org.codenarc.util.io
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
+import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
@@ -31,16 +33,19 @@ class UrlResourceTest extends AbstractTestCase {
     private static final URL_DOEST_NOT_EXIST = 'file:bad/DoesNotExist.txt'
     private static final TEXT_FILE_CONTENTS = 'abcdef12345'
 
+    @Test
     void testConstructor_NullOrEmpty() {
         shouldFailWithMessageContaining('path') { new UrlResource(null) }
         shouldFailWithMessageContaining('path') { new UrlResource('') }
     }
 
+    @Test
     void testGetPath() {
         def resource = new UrlResource(TEXT_FILE)
         assert resource.getPath() == TEXT_FILE
     }
 
+    @Test
     void testGetInputStream_File_AbsolutePath() {
         def file = new File(TEXT_FILE)
         def urlName = 'file:' + file.absolutePath
@@ -50,6 +55,7 @@ class UrlResourceTest extends AbstractTestCase {
         assert inputStream.text == TEXT_FILE_CONTENTS
     }
 
+    @Test
     void testGetInputStream_File_RelativePath() {
         def resource = new UrlResource(RELATIVE_FILE_URL)
         def inputStream = resource.getInputStream()
@@ -63,16 +69,19 @@ class UrlResourceTest extends AbstractTestCase {
 //        assert inputStream.text.contains('Google')
 //    }
 
+    @Test
     void testGetInputStream_MalformedUrlName() {
         def resource = new UrlResource('DoesNotExist.txt')
         shouldFail(MalformedURLException) { resource.getInputStream() }
     }
 
+    @Test
     void testGetInputStream_ResourceDoesNotExist() {
         def resource = new UrlResource('file:///DoesNotExist.txt')
         shouldFail(IOException) { resource.getInputStream() }
     }
 
+    @Test
     void testGetInputStream_TwiceOnTheSameResource() {
         def resource = new UrlResource(RELATIVE_FILE_URL)
         def inputStream = resource.getInputStream()
@@ -80,11 +89,13 @@ class UrlResourceTest extends AbstractTestCase {
         assert resource.getInputStream().text == TEXT_FILE_CONTENTS
     }
 
+    @Test
     void testExists_DoesExist() {
         def resource = new UrlResource(RELATIVE_FILE_URL)
         assert resource.exists()
     }
 
+    @Test
     void testExists_DoesNotExist() {
         def resource = new UrlResource(URL_DOEST_NOT_EXIST)
         assert !resource.exists()

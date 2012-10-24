@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConsecutiveStringConcatenationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ConsecutiveStringConcatenation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def a = 1 + 1
@@ -42,6 +45,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSimpleCase() {
         final SOURCE = '''
             def a = 'Hello' + 'World'   // should be 'HelloWorld'
@@ -49,6 +53,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "'Hello' + 'World'", "String concatenation in class None can be joined into the literal 'HelloWorld")
     }
 
+    @Test
     void testStringAndNumber() {
         final SOURCE = '''
             def g = 'Hello' + 5         // should be 'Hello5'
@@ -56,6 +61,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "'Hello' + 5", "String concatenation in class None can be joined into the literal 'Hello5'")
     }
 
+    @Test
     void testGStringAndString() {
         final SOURCE = '''
             def b = "$Hello" + 'World'  // should be "${Hello}World"
@@ -63,6 +69,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, """"\$Hello" + 'World'""", 'String concatenation in class None can be joined into a single literal')
     }
 
+    @Test
     void testStringAndGString() {
         final SOURCE = '''
             def c = 'Hello' + "$World"  // should be "Hello${World}"
@@ -70,6 +77,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, """ 'Hello' + \"\$World\"""", 'String concatenation in class None can be joined into a single literal')
     }
 
+    @Test
     void testStringAndMultilineString() {
         final SOURCE = """
             def d = 'Hello' + '''
@@ -79,6 +87,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "'Hello' +", "String concatenation in class None can be joined into the literal 'Hello\\n                        world   // should be joined\\n                      '")
     }
 
+    @Test
     void testMultilineStringAndString() {
         final SOURCE = """
         class MyClass {

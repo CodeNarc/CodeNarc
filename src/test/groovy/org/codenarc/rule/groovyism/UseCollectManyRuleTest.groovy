@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UseCollectManyRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class UseCollectManyRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UseCollectMany'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def l = [1, 2, 3, 4]
@@ -42,6 +45,7 @@ class UseCollectManyRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             def l = [1, 2, 3, 4]

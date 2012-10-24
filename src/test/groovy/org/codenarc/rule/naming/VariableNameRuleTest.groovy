@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -27,11 +28,13 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class VariableNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'VariableName'
     }
 
+    @Test
     void testRegex_DefaultValue() {
         assert 'abc' ==~ rule.regex
         assert 'aXaX123' ==~ rule.regex
@@ -40,6 +43,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assert !('ABC123abc' ==~ rule.regex)
     }
 
+    @Test
     void testFinalRegex_DefaultValue() {
         assert 'ABC' ==~ rule.finalRegex
         assert 'A_B_C' ==~ rule.finalRegex
@@ -50,11 +54,13 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assert !('a_b_CDEF' ==~ rule.finalRegex)
     }
 
+    @Test
     void testRegexIsNull() {
         rule.regex = null
         shouldFailWithMessageContaining('regex') { applyRuleTo('def myMethod() { int count }') }
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -66,6 +72,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'BigDecimal deposit_amount', 'Variable named deposit_amount in class MyClass does not match the pattern [a-z][a-zA-Z0-9]*')
     }
 
+    @Test
     void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -77,6 +84,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchCustomRegex() {
         final SOURCE = '''
             class MyClass {
@@ -89,6 +97,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int count = 23')
     }
 
+    @Test
     void testApplyTo_MatchesCustomRegex() {
         final SOURCE = '''
             class MyClass {
@@ -101,6 +110,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonFinal_IgnoreFinalInValue() {
         final SOURCE = '''
           class MyClass {
@@ -112,6 +122,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Final_MatchesDefaultFinalRegex() {
         final SOURCE = '''
             class MyClass {
@@ -123,6 +134,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Final_DoesNotMatchDefaultFinalRegex() {
         final SOURCE = '''
           class MyClass {
@@ -134,6 +146,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'final int count')
     }
 
+    @Test
     void testApplyTo_Final_FinalRegexIsEmpty() {
         final SOURCE = '''
             class MyClass {
@@ -146,6 +159,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Final_DoesNotMatchCustomFinalRegex() {
         final SOURCE = '''
           class MyClass {
@@ -158,6 +172,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'final\tString COUNT = 23')
     }
 
+    @Test
     void testApplyTo_Final_MatchesCustomFinalRegex() {
         final SOURCE = '''
             class MyClass {
@@ -170,6 +185,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex_NoClassDefined() {
         final SOURCE = '''
             def myMethod() {
@@ -179,11 +195,13 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'int Count = 23')
     }
 
+    @Test
     void testApplyTo_NoVariableDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex_ClosureDefinition() {
         final SOURCE = '''
             class MyClass {
@@ -196,6 +214,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int Count = 23')
     }
 
+    @Test
     void testApplyTo_MultipleVariableNames_MatchesDefaultRegex() {
         final SOURCE = '''
             def myMethod() {
@@ -205,6 +224,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MultipleVariableNames_OneDoesNotMatchDefaultRegex() {
         final SOURCE = '''
             def myMethod() {
@@ -214,6 +234,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def (pkg, Count) = 123', 'Variable named Count in class None does not match the pattern [a-z][a-zA-Z0-9]*')
     }
 
+    @Test
     void testApplyTo_MultipleVariableNames_Final_OneDoesNotMatchDefaultRegex() {
         final SOURCE = '''
             def myMethod() {
@@ -223,6 +244,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'Variable named bad in class None does not match the pattern [A-Z][A-Z0-9_]*')
     }
 
+    @Test
     void testApplyTo_MultipleVariableNames_TwoDoNotMatchDefaultRegex() {
         final SOURCE = '''
             def myMethod() {
@@ -234,6 +256,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
             3, 'def (Count, pkg, _MYVAR) = 123', '_MYVAR')
     }
 
+    @Test
     void testApplyTo_IgnoreVariableNames_MatchesSingleName() {
         final SOURCE = '''
             class MyClass {
@@ -246,6 +269,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreVariableNames_MatchesNoNames() {
         final SOURCE = '''
             class MyClass {
@@ -258,6 +282,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'BigDecimal deposit_amount')
     }
 
+    @Test
     void testApplyTo_IgnoreVariableNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
             class MyClass {
@@ -273,6 +298,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'BigDecimal deposit_amount')
     }
 
+    @Test
     void testApplyTo_Enums() {
         final SOURCE = '''
             public enum AuthorizationLevel { 

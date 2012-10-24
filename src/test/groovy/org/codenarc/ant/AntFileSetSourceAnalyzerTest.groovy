@@ -23,6 +23,8 @@ import org.codenarc.rule.TestCountRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.captureLog4JMessages
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -38,18 +40,22 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     private FileSet fileSet
     private ruleSet
 
+    @Test
     void testConstructor_NullFileSet() {
         shouldFailWithMessageContaining('fileSet') { new AntFileSetSourceAnalyzer(project, (FileSet)null) }
     }
 
+    @Test
     void testConstructor_NullListOfFileSets() {
         shouldFailWithMessageContaining('fileSet') { new AntFileSetSourceAnalyzer(project, (List)null) }
     }
 
+    @Test
     void testConstructor_NullProject() {
         shouldFailWithMessageContaining('project') { new AntFileSetSourceAnalyzer(null, fileSet) }
     }
 
+    @Test
     void testAnalyze_SimpleDirectory() {
         fileSet.setIncludes('source/**/*.groovy')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
@@ -66,6 +72,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
                 'source/SourceFile2.groovy']
     }
 
+    @Test
     void testAnalyze_NestedSubdirectories() {
         fileSet.setIncludes('sourcewithdirs/**/*.groovy')
         fileSet.setExcludes('**/*File2.groovy')
@@ -97,6 +104,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assertResultsCounts(results.findResultsForPath('sourcewithdirs/subdir2/subdir2a'), 1, 1)
     }
 
+    @Test
     void testAnalyze_NestedSubdirectories_NoViolations() {
         ruleSet = new ListRuleSet([new TestCountRule()])
         fileSet.setIncludes('sourcewithdirs/**/*.groovy')
@@ -109,6 +117,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assertResultsCounts(results.findResultsForPath('sourcewithdirs/subdir2/subdir2a'), 1, 0)
     }
 
+    @Test
     void testAnalyze_MultipleFileSets() {
         final DIR1 = 'src/test/resources/sourcewithdirs/subdir1'
         final DIR2 = 'src/test/resources/sourcewithdirs/subdir2'
@@ -130,6 +139,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assertResultsCounts(results, 4, 4)
     }
 
+    @Test
     void testAnalyze_EmptyFileSet() {
         fileSet.setExcludes('**/*')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
@@ -137,6 +147,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assertResultsCounts(results, 0, 0)
     }
 
+    @Test
     void testAnalyze_LogsThrownExceptions() {
         fileSet.setIncludes('source/**/*.groovy')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
@@ -148,16 +159,19 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assert loggingEvents.find { loggingEvent -> loggingEvent.throwableInformation.throwable == EXCEPTION }
     }
 
+    @Test
     void testGetSourceDirectories_ReturnsEmptyListForNoFileSets() {
         def analyzer = new AntFileSetSourceAnalyzer(project, [])
         assert analyzer.sourceDirectories == []
     }
 
+    @Test
     void testGetSourceDirectories_ReturnsSingleDirectoryForSingleFileSet() {
         def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet])
         assert analyzer.sourceDirectories == [normalizedPath(BASE_DIR)]
     }
 
+    @Test
     void testGetSourceDirectories_ReturnsDirectoryForEachFileSet() {
         def fileSet1 = new FileSet(dir:new File('abc'), project:project)
         def fileSet2 = new FileSet(dir:new File('def'), project:project)
@@ -166,6 +180,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assert analyzer.sourceDirectories == [normalizedPath('abc'), normalizedPath('def')]
     }
 
+    @Test
     void testGetSourceDirectories_ReturnsDirectoryRelativeToBaseDirectory() {
         def currentDir = new File('').absolutePath
         project = new Project(basedir:currentDir)
@@ -176,8 +191,8 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         assert analyzer.sourceDirectories == [normalizedPath('src/main/groovy')]
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpAntFileSetSourceAnalyzerTest() {
         fileSet = new FileSet()
         fileSet.dir = new File(BASE_DIR)
 

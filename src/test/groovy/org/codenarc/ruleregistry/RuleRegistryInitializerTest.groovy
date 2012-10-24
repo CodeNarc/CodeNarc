@@ -17,6 +17,7 @@ package org.codenarc.ruleregistry
 
 import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for RuleRegistryInitializer
@@ -25,6 +26,7 @@ import org.codenarc.test.AbstractTestCase
   */
 class RuleRegistryInitializerTest extends AbstractTestCase {
 
+    @Test
     void testInitializeRuleRegistry() {
         def ruleRegistryInitializer = new RuleRegistryInitializer()
         ruleRegistryInitializer.initializeRuleRegistry()

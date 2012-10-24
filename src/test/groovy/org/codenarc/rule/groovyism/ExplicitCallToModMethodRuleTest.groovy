@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitCallToModMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitCallToModMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
@@ -41,6 +44,7 @@ class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolation() {
         final SOURCE = '''
             a.mod(b)

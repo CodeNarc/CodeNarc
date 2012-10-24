@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ReturnNullFromCatchBlockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ReturnNullFromCatchBlock'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
       	    def x = null
@@ -44,6 +47,7 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTwoExceptions() {
         final SOURCE = '''
         	try {

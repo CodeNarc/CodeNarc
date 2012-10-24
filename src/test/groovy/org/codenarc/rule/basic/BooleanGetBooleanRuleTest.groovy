@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BooleanGetBooleanRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BooleanGetBooleanRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BooleanGetBoolean'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             Boolean.getBoolean(value, 1)
@@ -38,6 +41,7 @@ class BooleanGetBooleanRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             Boolean.getBoolean(value)

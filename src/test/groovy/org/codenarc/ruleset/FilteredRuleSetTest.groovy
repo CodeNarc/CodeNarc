@@ -17,7 +17,10 @@ package org.codenarc.ruleset
 
 import org.codenarc.rule.StubRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
+import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
@@ -32,64 +35,77 @@ class FilteredRuleSetTest extends AbstractTestCase {
     private innerRuleSet
     private filteredRuleSet
 
+    @Test
     void testConstructor_NullRuleSet() {
         shouldFailWithMessageContaining('ruleSet') { new FilteredRuleSet(null) }
     }
 
+    @Test
     void testGetRules() {
         assert filteredRuleSet.getRules() == [RULE1, RULE2, RULE3]
     }
 
+    @Test
     void testAddInclude_Null() {
         shouldFailWithMessageContaining('include') { filteredRuleSet.addInclude(null) }
     }
 
+    @Test
     void testAddInclude_Empty() {
         shouldFailWithMessageContaining('include') { filteredRuleSet.addInclude('') }
     }
 
+    @Test
     void testAddExclude_Null() {
         shouldFailWithMessageContaining('exclude') { filteredRuleSet.addExclude(null) }
     }
 
+    @Test
     void testAddExclude_Empty() {
         shouldFailWithMessageContaining('exclude') { filteredRuleSet.addExclude('') }
     }
 
+    @Test
     void testOneInclude() {
         filteredRuleSet.addInclude('Rule2')
         assert filteredRuleSet.getRules() == [RULE2]
     }
 
+    @Test
     void testTwoIncludes() {
         filteredRuleSet.addInclude('Rule1')
         filteredRuleSet.addInclude('Rule3')
         assert filteredRuleSet.getRules() == [RULE1, RULE3]
     }
 
+    @Test
     void testIncludes_Wildcards() {
         filteredRuleSet.addInclude('Ru?e1')
         filteredRuleSet.addInclude('*3')
         assert filteredRuleSet.getRules() == [RULE1, RULE3]
     }
 
+    @Test
     void testOneExclude() {
         filteredRuleSet.addExclude('Rule2')
         assert filteredRuleSet.getRules() == [RULE1, RULE3]
     }
 
+    @Test
     void testTwoExclude() {
         filteredRuleSet.addExclude('Rule2')
         filteredRuleSet.addExclude('Rule3')
         assert filteredRuleSet.getRules() == [RULE1]
     }
 
+    @Test
     void testExcludes_Wildcards() {
         filteredRuleSet.addExclude('*2')
         filteredRuleSet.addExclude('R?l?3')
         assert filteredRuleSet.getRules() == [RULE1]
     }
 
+    @Test
     void testBothIncludesAndExcludes() {
         filteredRuleSet.addInclude('Rule1')
         filteredRuleSet.addInclude('Rule2')
@@ -98,6 +114,7 @@ class FilteredRuleSetTest extends AbstractTestCase {
         assert filteredRuleSet.getRules() == [RULE1]
     }
 
+    @Test
     void testBothIncludesAndExcludes_Wildcards() {
         filteredRuleSet.addInclude('R?le1')
         filteredRuleSet.addInclude('Rule2')
@@ -106,13 +123,14 @@ class FilteredRuleSetTest extends AbstractTestCase {
         assert filteredRuleSet.getRules() == [RULE1]
     }
 
+    @Test
     void testInternalRulesListIsImmutable() {
         def rules = filteredRuleSet.rules
         shouldFail(UnsupportedOperationException) { rules.add(123) }
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpFilteredRuleSetTest() {
         innerRuleSet = new ListRuleSet([RULE1, RULE2, RULE3])
         filteredRuleSet = new FilteredRuleSet(innerRuleSet)
     }

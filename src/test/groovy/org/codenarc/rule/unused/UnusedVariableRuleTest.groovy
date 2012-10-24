@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedVariableRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnusedVariableRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedVariable'
     }
 
+    @Test
     void testApplyTo_SingleUnusedVariable() {
         final SOURCE = '''
             class MyClass {
@@ -41,6 +44,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int count', 'The variable [count] in class MyClass is not used')
     }
 
+    @Test
     void testApplyTo_SingleUnusedVariable_WithInitialExpression() {
         final SOURCE = '''
             class MyClass {
@@ -52,6 +56,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int count = 23', 'count')
     }
 
+    @Test
     void testApplyTo_MultipleUnusedVariables() {
         final SOURCE = '''
           class MyClass {
@@ -66,6 +71,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'int count = 23', 6, 'String other')
     }
 
+    @Test
     void testApplyTo_AllVariablesUsed() {
         final SOURCE = '''
             class MyClass {
@@ -84,6 +90,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_VariableWithSameNameReferencedInAnotherBlock() {
         final SOURCE = '''
             class MyClass {
@@ -100,6 +107,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int count = 23', 'count')
     }
 
+    @Test
     void testApplyTo_SameVariableInOtherBlocks() {
         final SOURCE = '''
             class MyClass {
@@ -117,6 +125,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'int count = 23', 10, 'int count = 99')
     }
 
+    @Test
     void testApplyTo_NestedBlock() {
         final SOURCE = '''
             class MyClass {
@@ -133,6 +142,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReferencedFromReturn() {
         final SOURCE = '''
             def defaultMethod = dc.metaClass.getMetaMethod(name, args)
@@ -147,6 +157,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReferencePropertyWithSameName() {
         final SOURCE = '''
             class MyClass {
@@ -159,6 +170,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int count = 99', 'count')
     }
 
+    @Test
     void testApplyTo_ReferencedWithinClosure() {
         final SOURCE = '''
             class MyClass {
@@ -171,6 +183,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReferenceClosureVariableByInvokingIt() {
         final SOURCE = '''
             class MyClass {
@@ -185,6 +198,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReferenceNestedClosureVariablesByInvokingThem() {
         final SOURCE = '''
             class MyClass {
@@ -200,6 +214,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ClosureVariableReferencedButNotInvoked() {
         final SOURCE = '''
             class MyClass {
@@ -214,6 +229,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_UntypedVariableInvokedAsAClosure() {
         final SOURCE = '''
             class MyClass {
@@ -226,6 +242,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_UnusedClosureVariable() {
         final SOURCE = '''
             class MyClass {
@@ -237,6 +254,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, "def count = { println 'ok' }", 'count')
     }
 
+    @Test
     void testApplyTo_ExplicitMethodCallOnThisWithSameMethodName() {
         final SOURCE = '''
             class MyClass {
@@ -250,6 +268,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int count = 23', 'count')
     }
 
+    @Test
     void testApplyTo_ReferencedOnSameLineAsDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -262,6 +281,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_VariableOnlyReferencedWithinInnerClass() {
         final SOURCE = '''
             def buildCallable() {
@@ -276,6 +296,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE) 
     }
 
+    @Test
     void testApplyTo_LoopVariable() {
         final SOURCE = '''
             def doStuff() {
@@ -287,6 +308,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Script_UnusedVariable() {
         final SOURCE = '''
             BigDecimal depositAmount
@@ -294,6 +316,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'BigDecimal depositAmount', 'depositAmount')
     }
 
+    @Test
     void testApplyTo_Script_UnusedBinding() {
         final SOURCE = '''
             depositCount = 99      // not considered a variable
@@ -301,6 +324,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoVariableDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UseAssertTrueInsteadOfAssertEqualsRule
@@ -25,14 +26,17 @@ import org.codenarc.rule.Rule
   */
 class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UseAssertTrueInsteadOfAssertEquals'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
+    @Test
                 void testMethod() {
                     assertEquals(1, foo())
                     assertEquals('message', foo())
@@ -53,6 +57,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testAssertTrueViolation() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -65,6 +70,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'assertEquals(true, foo())', 5, 'assertEquals("message", true, foo())')
     }
 
+    @Test
     void testAssertTrueViolation_AssertStyle() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -79,6 +85,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
                 5, 'assert foo() == true : "message"', "The expression '(this.foo() == true)' can be simplified to 'this.foo()'")
     }
 
+    @Test
     void testAssertTrueViolation_Backwards() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -91,6 +98,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'assertEquals(foo(), true)', 5, 'assertEquals("message", foo(), true)')
     }
 
+    @Test
     void testAssertFalseViolation() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -103,6 +111,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'assertEquals(false, foo())', 5, 'assertEquals("message", false, foo())')
     }
 
+    @Test
     void testAssertFalseViolation_AssertStyle() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -117,6 +126,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
                 5, 'assert foo() == false : "message"', "The expression '(this.foo() == false)' can be simplified to '!this.foo()'")
     }
 
+    @Test
     void testAssertFalseViolation_Backwards() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {

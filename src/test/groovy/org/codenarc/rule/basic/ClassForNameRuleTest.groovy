@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ClassForNameRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ClassForNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ClassForName'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             Class.forName() // zero args is not API
@@ -39,6 +42,7 @@ class ClassForNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolations() {
         final SOURCE = '''
             Class.forName('SomeClassName')

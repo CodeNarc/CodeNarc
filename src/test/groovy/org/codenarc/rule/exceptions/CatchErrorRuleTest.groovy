@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CatchErrorRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class CatchErrorRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CatchError'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -45,11 +48,13 @@ class CatchErrorRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'catch(Error t) {')
     }
 
+    @Test
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = 'try {  } catch(java.lang.Error t) { }'
         assertSingleViolation(SOURCE, 1, 'catch(java.lang.Error t) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
                 def myMethod() {

@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for GroovyLangImmutableRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GroovyLangImmutable'
     }
 
+    @Test
     void testSuccessScenario1() {
         final SOURCE = '''
               @groovy.transform.Immutable
@@ -38,6 +41,7 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario2() {
         final SOURCE = '''
               import groovy.transform.Immutable
@@ -47,6 +51,7 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario3() {
         final SOURCE = '''
               import groovy.transform.*
@@ -56,6 +61,7 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario4() {
         final SOURCE = '''
               import groovy.transform.Immutable as Imtl
@@ -65,6 +71,7 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDefaultImport() {
         final SOURCE = '''
               @Immutable
@@ -73,6 +80,7 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '@Immutable', 'groovy.lang.Immutable is deprecated in favor of groovy.transform.Immutable')
     }
 
+    @Test
     void testFullyQualified() {
         final SOURCE = '''
           @groovy.lang.Immutable
@@ -81,6 +89,7 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '@groovy.lang.Immutable', 'groovy.lang.Immutable is deprecated in favor of groovy.transform.Immutable')
     }
 
+    @Test
     void testImportAlias() {
         final SOURCE = '''
               import groovy.lang.Immutable as Imtl

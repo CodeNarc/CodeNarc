@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryInstanceOfCheckRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryInstanceOfCheck'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             if (!(variable instanceof String)) { /* */ }
@@ -39,6 +42,7 @@ class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDeclaration() {
         final SOURCE = '''
             def x = !variable instanceof String
@@ -46,6 +50,7 @@ class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '!variable instanceof String', "The result of '!(variable)' will never be a String")
     }
 
+    @Test
     void testDeclaration2() {
         final SOURCE = '''
             def x = !variable instanceof Boolean
@@ -53,6 +58,7 @@ class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '!variable instanceof Boolean', "The result of '!(variable)' will always be a Boolean")
     }
 
+    @Test
     void testIfStatement() {
         final SOURCE = '''
             if (!var instanceof Integer) { /* */ }
@@ -60,6 +66,7 @@ class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '!var instanceof Integer', "The result of '!(var)' will never be a Integer")
     }
 
+    @Test
     void testIfStatement2() {
         final SOURCE = '''
             if (!var instanceof Boolean) { /* */ }

@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for VolatileArrayFieldRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'VolatileArrayField'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -41,6 +44,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDeclarationType() {
         final SOURCE = '''
             class MyClass {
@@ -52,6 +56,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
                 'The array field field1 is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type')
     }
 
+    @Test
     void testDeclarationType2() {
         final SOURCE = '''
             class MyClass {
@@ -63,6 +68,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
                 'The array field field1 is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type')
     }
 
+    @Test
     void testCastAsType() {
         final SOURCE = '''
             class MyClass {
@@ -74,6 +80,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
                 'The array field field2 is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type')
     }
 
+    @Test
     void testCastAsType2() {
         final SOURCE = '''
             class MyClass {
@@ -85,6 +92,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
                 'The array field field2 is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type')
     }
 
+    @Test
     void testCastType() {
         final SOURCE = '''
             class MyClass {
@@ -96,6 +104,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
                 'The array field field3 is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type')
     }
 
+    @Test
     void testCastType2() {
         final SOURCE = '''
             class MyClass {

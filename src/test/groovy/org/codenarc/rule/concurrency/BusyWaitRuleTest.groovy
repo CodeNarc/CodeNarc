@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BusyWaitRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BusyWaitRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BusyWait'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             // here is the proper way to wait:
@@ -55,6 +58,7 @@ class BusyWaitRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testWhileLoop() {
         final SOURCE = '''
             while (x) {
@@ -64,6 +68,7 @@ class BusyWaitRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'Thread.sleep(1000)', 'Busy wait detected. Switch the usage of Thread.sleep() to a lock or gate from java.util.concurrent')
     }
 
+    @Test
     void testWhileLoopWithClosure() {
         final SOURCE = '''
             while (x) {
@@ -73,6 +78,7 @@ class BusyWaitRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'sleep(1000)', 'Busy wait detected. Switch the usage of Thread.sleep() to a lock or gate from java.util.concurrent')
     }
 
+    @Test
     void testForLoop() {
         final SOURCE = '''
             for (int x = 10; x; x--) {

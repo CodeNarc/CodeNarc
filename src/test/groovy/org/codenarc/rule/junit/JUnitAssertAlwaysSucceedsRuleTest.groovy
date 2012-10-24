@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitAssertAlwaysSucceedsRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JUnitAssertAlwaysSucceeds'
     }
 
+    @Test
     void testApplyTo_AssertTrue_False() {
         final SOURCE = '''
             class MyTestCase extends TestCase {
@@ -41,6 +44,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertTrue_True() {
         final SOURCE = '''
             class MyTestCase extends TestCase {
@@ -52,6 +56,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertTrue(true)')
     }
 
+    @Test
     void testApplyTo_AssertTrue_TrueWithMessage() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -63,6 +68,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertTrue("This passed!", true)')
     }
 
+    @Test
     void testApplyTo_AssertFalse_True() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -74,6 +80,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertFalse_False() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -85,6 +92,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertFalse(false)')
     }
 
+    @Test
     void testApplyTo_AssertFalse_FalseWithMessage() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -96,6 +104,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertFalse("This passed!", false)')
     }
 
+    @Test
     void testApplyTo_AssertNull_NotNullConstant() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -107,6 +116,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertNull_Variable() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -118,6 +128,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertNull_Null() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -129,6 +140,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertNull(null)')
     }
 
+    @Test
     void testApplyTo_AssertNull_NullWithMessage() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -140,6 +152,7 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertNull("This passed!", null)')
     }
 
+    @Test
     void testApplyTo_NonTestFile() {
         final SOURCE = '''
           class MyClass {

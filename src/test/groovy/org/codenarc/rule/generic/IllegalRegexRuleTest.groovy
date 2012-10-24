@@ -17,6 +17,7 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for IllegalRegexRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
 class IllegalRegexRuleTest extends AbstractRuleTestCase {
     static final REGEX = /\@author Joe/
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'IllegalRegex'
     }
 
+    @Test
     void testRegexIsNull() {
         final SOURCE = ' class MyClass { }'
         rule.regex = null
@@ -38,6 +41,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testRegexIsPresent() {
         final SOURCE = '''
             /** @author Joe */
@@ -47,6 +51,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, '@author Joe', ['regular expression', REGEX])
     }
 
+    @Test
     void testTwoOccurrences() {
         final SOURCE = '''
             /** @author Joe */
@@ -59,6 +64,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
                 4, '@author Joe', ['regular expression', REGEX])
     }
 
+    @Test
     void testRegexIsNotPresent() {
         final SOURCE = '''
             /** @author Mike */
@@ -68,6 +74,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testOverrideViolationMessage() {
         final SOURCE = '''
             /** @author Joe */

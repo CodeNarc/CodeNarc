@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JavaIoPackageAccessRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JavaIoPackageAccessRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JavaIoPackageAccess'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             fileSystem.getFileSystem() //just a variable reference, not a FileSystem reference
@@ -50,6 +53,7 @@ class JavaIoPackageAccessRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testFileOutputStream() {
         final SOURCE = '''
             new FileOutputStream(name)
@@ -60,6 +64,7 @@ class JavaIoPackageAccessRuleTest extends AbstractRuleTestCase {
                 3, 'new FileOutputStream(name, true)', 'The use of java.io.FileOutputStream violates the Enterprise Java Bean specification')
     }
 
+    @Test
     void testFileReader() {
         final SOURCE = '''
             new FileReader(file)
@@ -68,6 +73,7 @@ class JavaIoPackageAccessRuleTest extends AbstractRuleTestCase {
                 2, 'new FileReader(file)', 'The use of java.io.FileReader violates the Enterprise Java Bean specification')
     }
 
+    @Test
     void testRandomAccessFile() {
         final SOURCE = '''
             new RandomAccessFile(name, parent)
@@ -76,6 +82,7 @@ class JavaIoPackageAccessRuleTest extends AbstractRuleTestCase {
                 2, 'new RandomAccessFile(name, parent)', 'The use of java.io.RandomAccessFile violates the Enterprise Java Bean specification')
     }
 
+    @Test
     void testFile() {
         final SOURCE = '''
             new File(name)
@@ -86,6 +93,7 @@ class JavaIoPackageAccessRuleTest extends AbstractRuleTestCase {
                 3, 'new File(name, parent)', 'The use of java.io.File violates the Enterprise Java Bean specification')
     }
 
+    @Test
     void testFileSystem() {
         final SOURCE = '''
             FileSystem.getFileSystem() // any method on FileSystem

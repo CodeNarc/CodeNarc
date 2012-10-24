@@ -19,6 +19,8 @@ import org.codenarc.analyzer.StringSourceAnalyzer
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
@@ -50,6 +52,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      * Make sure that code unrelated to the rule under test causes no violations.
      * Subclasses can skip this rule by defining a property named 'skipTestThatUnrelatedCodeHasNoViolations'.
      */
+    @Test
     void testThatUnrelatedCodeHasNoViolations() {
         final SOURCE = 'class MyClass { }'
         if (!getProperties().keySet().contains('skipTestThatUnrelatedCodeHasNoViolations')) {
@@ -57,6 +60,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         }
     }
 
+    @Test
     void testThatInvalidCodeHasNoViolations() {
         final SOURCE = '''
             @will not compile@ &^%$#
@@ -68,6 +72,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         }
     }
 
+    @Test
     void testThatApplyToFilesMatchingValuesAreValidRegex() {
         assertValidRegex(rule.applyToFilesMatching, 'applyToFilesMatching')
         assertValidRegex(rule.doNotApplyToFilesMatching, 'doNotApplyToFilesMatching')
@@ -242,8 +247,8 @@ actual:               $violation.sourceLine
         results.violations
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpAbstractRuleTestCase() {
         this.rule = createRule()
     }
 

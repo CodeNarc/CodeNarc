@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ObjectFinalizeRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ObjectFinalizeRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ObjectFinalize'
     }
 
+    @Test
     void testApplyTo_Violation_Initializers() {
         final SOURCE = '''
             class MyClass {
@@ -46,6 +49,7 @@ class ObjectFinalizeRuleTest extends AbstractRuleTestCase {
                 7, 'widget.finalize()', 'The finalize() method should only be called by the JVM after the object has been garbage collected')
     }
 
+    @Test
     void testApplyTo_Violation_Methods() {
         final SOURCE = '''
             class MyClass {
@@ -62,6 +66,7 @@ class ObjectFinalizeRuleTest extends AbstractRuleTestCase {
                 7, 'property.finalize()', 'The finalize() method should only be called by the JVM after the object has been garbage collected')
     }
 
+    @Test
     void testApplyTo_Violation_Closures() {
         final SOURCE = '''
             File.finalize()
@@ -74,6 +79,7 @@ class ObjectFinalizeRuleTest extends AbstractRuleTestCase {
                 4, 'file.finalize()')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

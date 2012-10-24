@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyStaticInitializerRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyStaticInitializerRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyStaticInitializer'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -42,6 +45,7 @@ class EmptyStaticInitializerRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass {

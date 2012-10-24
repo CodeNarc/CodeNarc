@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for NestedBlockDepthRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
   */
 class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'NestedBlockDepth'
         assert rule.maxNestedBlockDepth == 5
     }
 
+    @Test
     void testNoNestedBlocks_CausesNoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -42,6 +45,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNestingDepthLessThanDefaultMaximum_CausesNoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -57,6 +61,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNestingDepthGreaterThanDefaultMaximum_CausesAViolation() {
         final SOURCE = '''
             class MyClass {
@@ -82,6 +87,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'element.values.each {', '6')
     }
 
+    @Test
     void testIgnoresOuterClosureForNestingDepthOfClosureField() {
         final SOURCE = '''
             class MyClass {
@@ -98,6 +104,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testClosureFieldThatExceedsConfiguredNesting_CausesAViolation() {
         final SOURCE = '''
             class MyClass {
@@ -114,6 +121,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'while(notReady()) {', '2')
     }
 
+    @Test
     void testNestingDepthExceededForFinally_CausesAViolation() {
         final SOURCE = '''
             class MyClass {
@@ -139,6 +147,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
                 12, 'if (ready) {', '2')
     }
 
+    @Test
     void testNestingDepthExceededForTryOrCatch_CausesAViolation() {
         final SOURCE = '''
             class MyClass {
@@ -160,6 +169,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
                 8, 'catch(Exception e) {', '2')
     }
 
+    @Test
     void testNestingDepthExceededForWhile_CausesAViolation() {
         final SOURCE = '''
             def myMethod() {
@@ -174,6 +184,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'while(hasChars()) {', '2')
     }
 
+    @Test
     void testNestingDepthExceededForIfOrElse_CausesAViolation() {
         final SOURCE = '''
             if (ready) {                // 1
@@ -190,6 +201,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
                 5, '} else {', '2')
     }
 
+    @Test
     void testNestingDepthExceededForSwitch_CausesAViolation() {
         final SOURCE = '''
             if (ready) {                    // 1
@@ -205,6 +217,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
                 5, 'case 2: println "two"', '2')
     }
 
+    @Test
     void testNestingDepthExceededForAForLoop_CausesAViolation() {
         final SOURCE = '''
             while (notReady()) {                // 1
@@ -218,6 +231,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'for(int i=0; i < 5; i++) {', '2')
     }
 
+    @Test
     void testNestingDepthExceededForSynchronized_CausesAViolation() {
         final SOURCE = '''
             def myMethod() {
@@ -233,6 +247,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'synchronized(this) {', '2')
     }
 
+    @Test
     void testNestingDepthExceeded_IfStatementWithoutABlock_CausesNoViolation() {
         final SOURCE = '''
             if (ready) {                    // 1
@@ -243,6 +258,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNestingDepthExceededForClosureAssignment_CausesAViolation() {
         final SOURCE = '''
             def myMethod() {
@@ -258,6 +274,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'def closure = {', '2')
     }
 
+    @Test
     void testNestingDepthExceededForClosureIteration_CausesAViolation() {
         final SOURCE = '''
             def myMethod() {
@@ -273,6 +290,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'myList.each { element ->', '2')
     }
 
+    @Test
     void testBuilderConstructorInvocation() {
         final SOURCE = '''
             new MarkupBuilder().root {
@@ -293,6 +311,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBuilderPropertyInvocation() {
         final SOURCE = '''
             myBuilder.root {
@@ -313,6 +332,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBuilderMethodInvocation() {
         final SOURCE = '''
             createBuilder().root {
@@ -333,6 +353,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNotABuilderMethodInvocation() {
         final SOURCE = '''
             notABuilderMethod().root {

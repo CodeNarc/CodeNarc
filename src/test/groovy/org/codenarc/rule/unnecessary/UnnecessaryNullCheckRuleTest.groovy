@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryNullCheckRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryNullCheck'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             // null check it OK
@@ -58,6 +61,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNullCheckWithMethodCall() {
         final SOURCE = '''
             if (obj != null && obj.method()) { }
@@ -66,6 +70,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
                 'The expression ((obj != null) && obj.method()) can be simplified to (obj?.method())')
     }
 
+    @Test
     void testNullCheckWithProperty() {
         final SOURCE = '''
             if (obj != null && obj.prop) { }
@@ -74,6 +79,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
                 'The expression ((obj != null) && obj.prop) can be simplified to (obj?.prop)')
     }
 
+    @Test
     void testPointlessNullCheckOnMethod() {
         final SOURCE = '''
             if (obj.method() && obj != null) { }
@@ -82,6 +88,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
                 'The expression (obj.method() && (obj != null)) can be simplified to (obj.method())')
     }
 
+    @Test
     void testPointlessNullCheckOnProperty() {
         final SOURCE = '''
             if (obj.prop && obj != null) { }
@@ -90,6 +97,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
                 'The expression (obj.prop && (obj != null)) can be simplified to (obj.prop)')
     }
 
+    @Test
     void testPointlessNullCheckInClosureWithinClass() {
          final SOURCE = '''
              class MyController extends AbstractController {
@@ -103,6 +111,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
          assertSingleViolation(SOURCE, 4, 'if (value != null && value.equalsIgnoreCase(YES)) {', 'value?.equalsIgnoreCase(YES)')
      }
 
+    @Test
     void testPointlessNullCheckAgainstThis() {
          final SOURCE = '''
              if (this == null) { }
@@ -113,6 +122,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
                 3, '(null == this)', 'Testing the this reference for null will always return false')
      }
 
+    @Test
     void testPointlessNullCheckAgainstSuper() {
          final SOURCE = '''
              if (super == null) { }
@@ -123,6 +133,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
                 3, '(null == super)', 'Testing the super reference for null will always return false')
      }
 
+    @Test
     void testPointlessNotNullCheckAgainstSuper() {
          final SOURCE = '''
              if (super != null) { }

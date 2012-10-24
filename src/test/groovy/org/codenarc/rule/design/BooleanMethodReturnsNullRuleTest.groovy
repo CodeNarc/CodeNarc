@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BooleanMethodReturnsNullRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BooleanMethodReturnsNull'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	def c = {
@@ -89,6 +92,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDefMethodReturnsNull() {
         final SOURCE = '''
             def scriptMethod() {
@@ -102,6 +106,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'return null')
     }
 
+    @Test
     void testDefTernaryReturnsNull() {
         final SOURCE = '''
             def scriptMethod() {
@@ -114,6 +119,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'x ? null : true', 6, 'x ? false : null')
     }
 
+    @Test
     void testDefClassMethodReturnsNull() {
         final SOURCE = '''
             class MyClass {
@@ -129,6 +135,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'return null')
     }
 
+    @Test
     void testAnonymousClassMethodReturnsNull() {
         final SOURCE = '''
             def x = new Object() {
@@ -144,6 +151,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'return null')
     }
 
+    @Test
     void testDefMethodReturnsNullAndTRUE() {
         final SOURCE = '''
             def scriptMethod() {
@@ -157,6 +165,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'return null')
     }
 
+    @Test
     void testDefMethodReturnsBooleanCast() {
         final SOURCE = '''
             def scriptMethod() {
@@ -170,6 +179,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'return null')
     }
 
+    @Test
     void testBooleanMethodReturnsNull() {
         final SOURCE = '''
             boolean scriptMethod() {

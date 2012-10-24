@@ -17,6 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for PrintlnRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class PrintlnRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'Println'
     }
 
+    @Test
     void testApplyTo_Println_NoArgs() {
         final SOURCE = '''
             println()
@@ -37,6 +40,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'println')
     }
 
+    @Test
     void testApplyTo_Println_NoArgs_WithinClosure() {
         final SOURCE = '''
             class MyClass {
@@ -50,6 +54,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'println')
     }
 
+    @Test
     void testApplyTo_Println_OneArg() {
         final SOURCE = '''
             println "message"
@@ -57,6 +62,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'println "message"')
     }
 
+    @Test
     void testApplyTo_Println_ExplicitThis() {
         final SOURCE = '''
             this.println "message"
@@ -64,6 +70,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'this.println "message"')
     }
 
+    @Test
     void testApplyTo_Print_OneArg() {
         final SOURCE = '''
             print("message")
@@ -71,6 +78,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'print("message")')
     }
 
+    @Test
     void testApplyTo_Printf_TwoArgs() {
         final SOURCE = '''
             printf "%d", 99
@@ -78,6 +86,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'printf "%d", 99')
     }
 
+    @Test
     void testApplyTo_Printf_ThreeArgs() {
         final SOURCE = '''
             printf "%d, %d", 23, 34
@@ -85,6 +94,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'printf "%d, %d", 23, 34')
     }
 
+    @Test
     void testApplyTo_Printf_FourArgs() {
         final SOURCE = '''
             printf "%d, %d", 23, 34, 45
@@ -92,8 +102,10 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'printf "%d, %d", 23, 34, 45')
     }
 
+    @Test
     void testApplyTo_PrintlnButNotThis() {
         final SOURCE = '''
+    @Test
             void testSomething() {
                 System.out.println "123"
             }
@@ -101,6 +113,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrintlnLocallyDefinedMethod() {
         final SOURCE = '''
             class MyClass1 {
@@ -115,6 +128,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrintlnLocallyDefinedClosure() {
         final SOURCE = '''
             class MyClass1 {
@@ -129,6 +143,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrintlnLocallyDefinedClosure2() {
         final SOURCE = '''
             class MyClass1 {
@@ -143,6 +158,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrintLocallyDefinedClosure() {
         final SOURCE = '''
             class MyClass1 {
@@ -157,6 +173,7 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrintLocallyDefinedClosure2() {
         final SOURCE = '''
             class MyClass1 {

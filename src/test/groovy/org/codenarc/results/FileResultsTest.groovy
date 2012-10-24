@@ -18,6 +18,7 @@ package org.codenarc.results
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for the FileResults class
@@ -33,6 +34,7 @@ class FileResultsTest extends AbstractTestCase {
     private static final VIOLATION4 = new Violation(rule:new StubRule(4))
     private static final VIOLATION7 = new Violation(rule:new StubRule(7))
 
+    @Test
     void testWithNoViolations() {
         def results = new FileResults(PATH, [])
         assert results.path == PATH
@@ -48,6 +50,7 @@ class FileResultsTest extends AbstractTestCase {
         assert results.isFile()
     }
 
+    @Test
     void testWithViolations() {
         def results = new FileResults(PATH, [VIOLATION1, VIOLATION3, VIOLATION7, VIOLATION3, VIOLATION1, VIOLATION2, VIOLATION4])
         assert results.children == []
@@ -67,6 +70,7 @@ class FileResultsTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 1
     }
 
+    @Test
     void testFindResultsForPath() {
         def results = new FileResults(PATH, [])
         assert results.findResultsForPath(null) == null
@@ -74,6 +78,7 @@ class FileResultsTest extends AbstractTestCase {
         assert results.findResultsForPath(PATH) == results
     }
 
+    @Test
     void testGetViolations_ReturnsDefensiveCopy() {
         def results = new FileResults(PATH, [VIOLATION1, VIOLATION3])
         results.getViolations() << 123

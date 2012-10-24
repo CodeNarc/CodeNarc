@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for GetterMethodCouldBePropertyRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
  */
 class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'GetterMethodCouldBeProperty'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -54,6 +57,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoreProtectedGetterMethods() {
         final SOURCE = '''
             class MyClass {
@@ -68,6 +72,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testConstantReturn() {
         final SOURCE = '''
             class MyClass {
@@ -82,6 +87,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = 'something'")
     }
 
+    @Test
     void testConstantReturnExplicit() {
         final SOURCE = '''
             class MyClass {
@@ -96,6 +102,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = 'something'")
     }
 
+    @Test
     void testClassReturn() {
         final SOURCE = '''
             class MyClass {
@@ -110,6 +117,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal Class something = String")
     }
 
+    @Test
     void testConstantExplicitReturn() {
         final SOURCE = '''
             class MyClass {
@@ -124,6 +132,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = 'something'")
     }
 
+    @Test
     void testStaticReturn() {
         final SOURCE = '''
             class MyClass {
@@ -140,6 +149,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
     }
 
+    @Test
     void testStaticExplicitReturn() {
         final SOURCE = '''
             class MyClass {
@@ -156,6 +166,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
     }
 
+    @Test
     void testStaticGetterMethod() {
         final SOURCE = '''
             class MyClass {

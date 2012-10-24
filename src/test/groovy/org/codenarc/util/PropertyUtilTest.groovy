@@ -16,6 +16,10 @@
 package org.codenarc.util
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
+
+import static org.codenarc.test.TestUtil.shouldFail
 
 /**
  * Tests for PropertyUtil
@@ -24,33 +28,39 @@ import org.codenarc.test.AbstractTestCase
   */
 class PropertyUtilTest extends AbstractTestCase {
 
-    def object
+    private object
 
+    @Test
     void testSetPropertyFromString_String() {
         PropertyUtil.setPropertyFromString(object, 'stringField', 'AbcdefGHI')
         assert object.getStringField() == 'AbcdefGHI'
     }
 
+    @Test
     void testSetPropertyFromString_int() {
         PropertyUtil.setPropertyFromString(object, 'intField', '23456')
         assert object.getIntField() == 23456
     }
 
+    @Test
     void testSetPropertyFromString_int_Whitespace() {
         PropertyUtil.setPropertyFromString(object, 'intField', ' 23456 ')
         assert object.getIntField() == 23456
     }
 
+    @Test
     void testSetPropertyFromString_long() {
         PropertyUtil.setPropertyFromString(object, 'longField', '9999999999')
         assert object.getLongField() == 9999999999
     }
 
+    @Test
     void testSetPropertyFromString_long_Whitespace() {
         PropertyUtil.setPropertyFromString(object, 'longField', '\t9999999999  ')
         assert object.getLongField() == 9999999999
     }
 
+    @Test
     void testSetPropertyFromString_boolean() {
         PropertyUtil.setPropertyFromString(object, 'booleanField', 'true')
         assert object.getBooleanField()
@@ -59,6 +69,7 @@ class PropertyUtilTest extends AbstractTestCase {
         assert !object.getBooleanField()
     }
 
+    @Test
     void testSetPropertyFromString_boolean_Whitespace() {
         PropertyUtil.setPropertyFromString(object, 'booleanField', ' true   ')
         assert object.getBooleanField()
@@ -67,17 +78,19 @@ class PropertyUtilTest extends AbstractTestCase {
         assert !object.getBooleanField()
     }
 
+    @Test
     void testSetPropertyFromString_intFromSuperclass() {
         PropertyUtil.setPropertyFromString(object, 'superclassIntField', '23456')
         assert object.getSuperclassIntField() == 23456
     }
 
+    @Test
     void testSetPropertyFromString_NoSuchField() {
         shouldFail(NoSuchFieldException) { PropertyUtil.setPropertyFromString(object, 'XXX', '23456') }
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpPropertyUtilTest() {
         object = new TestPropertyUtilClass()
     }
 }

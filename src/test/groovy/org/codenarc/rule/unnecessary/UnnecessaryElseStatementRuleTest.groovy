@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryElseStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryElseStatement'
     }
 
+    @Test
     void testShouldNotAddViolationsForCodeWithoutIfStatement() {
         final SOURCE = '''
             while(true){
@@ -39,6 +42,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldNotAddViolationsForIfStatementWithoutElse() {
         final SOURCE = '''
             if(value){
@@ -48,6 +52,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldNotAddViolationsForIfStatementThatDoesNotHaveReturn() {
         final SOURCE = '''
             if(value){
@@ -59,6 +64,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldNoViolationsForIfStatementWhereNotEveryBranchEndsWithReturn() {
         final SOURCE = '''
              if(value){
@@ -72,6 +78,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testIfElseIf_NoViolations() {
         final SOURCE = '''
             if (foo) {
@@ -83,6 +90,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIfElseIf() {
         final SOURCE = '''
             if (foo) {
@@ -96,6 +104,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNesting() {
         final SOURCE = '''
             if (foo) {
@@ -113,6 +122,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, '} else {')
     }
 
+    @Test
     void testShouldAddViolationForIfStatementHavingOnlyReturnStatement() {
         final SOURCE = '''
             if(value)
@@ -123,6 +133,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 5, 'println false', 'When an if statement block ends with a return statement the else is unnecessary'
     }
 
+    @Test
     void testShouldAddViolationForIfStatementHavingBlockWithReturnStatement() {
         final SOURCE = '''
             if(value){
@@ -134,6 +145,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 4, '}else{', 'When an if statement block ends with a return statement the else is unnecessary'
     }
 
+    @Test
     void testShouldAddViolationForIfStatementEndingWithReturnStatement() {
         final SOURCE = '''
             if(value){
@@ -146,6 +158,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 5, '} else {', 'When an if statement block ends with a return statement the else is unnecessary'
     }
 
+    @Test
     void testShouldAddViolationForIfStatementWithAllBranchesEndingWithReturnStatements() {
         final SOURCE = '''
             if(value){
@@ -162,6 +175,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 9, '} else {', 'When an if statement block ends with a return statement the else is unnecessary'
     }
 
+    @Test
     void testShouldAddViolationForIfStatementContainingUnconditionalReturnStatement() {
         final SOURCE = '''
             if(value){
@@ -175,6 +189,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 6, '} else {', 'When an if statement block ends with a return statement the else is unnecessary'
     }
 
+    @Test
     void testShouldAddTwoViolationForTwoEmbeddedIfStatementsEndingWithReturn() {
         final SOURCE = '''
             if(value){
@@ -190,6 +205,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertTwoViolations SOURCE, 5, '} else {', 8, '} else {'
     }
 
+    @Test
     void testShouldAddTwoViolationForTwoEmbeddedIfStatementsContainingUnconditionalReturn() {
         final SOURCE = '''
             if(value){

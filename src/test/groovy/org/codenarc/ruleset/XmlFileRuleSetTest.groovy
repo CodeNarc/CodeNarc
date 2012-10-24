@@ -19,9 +19,9 @@ import org.codenarc.rule.StubRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
-import static org.codenarc.test.TestUtil.assertContainsAll
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import static org.codenarc.test.TestUtil.*
 
 /**
  * Tests for XmlFileRuleSet
@@ -30,19 +30,23 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class XmlFileRuleSetTest extends AbstractTestCase {
 
+    @Test
     void testNullPath() {
         shouldFailWithMessageContaining('path') { new XmlFileRuleSet(null) }
     }
 
+    @Test
     void testEmptyPath() {
         shouldFailWithMessageContaining('path') { new XmlFileRuleSet('') }
     }
 
+    @Test
     void testFileDoesNotExist() {
         def errorMessage = shouldFail { new XmlFileRuleSet('DoesNotExist.xml') }
         assertContainsAll(errorMessage, ['DoesNotExist.xml', 'does not exist'])
     }
 
+    @Test
     void testOneRule() {
         final PATH = 'rulesets/RuleSet1.xml'
         def ruleSet = new XmlFileRuleSet(PATH)
@@ -50,6 +54,7 @@ class XmlFileRuleSetTest extends AbstractTestCase {
         assert rules*.class == [TestPathRule]
     }
 
+    @Test
     void testMultipleRulesWithProperties() {
         final PATH = 'rulesets/RuleSet2.xml'
         def ruleSet = new XmlFileRuleSet(PATH)
@@ -61,6 +66,7 @@ class XmlFileRuleSetTest extends AbstractTestCase {
         assert rules*.priority == [0, 1, 2]
     }
 
+    @Test
     void testFileUrl() {
         final PATH = 'file:src/test/resources/rulesets/RuleSet1.xml'
         def ruleSet = new XmlFileRuleSet(PATH)
@@ -68,6 +74,7 @@ class XmlFileRuleSetTest extends AbstractTestCase {
         assert rules*.class == [TestPathRule]
     }
 
+    @Test
     void testRulesListIsImmutable() {
         final PATH = 'rulesets/RuleSet1.xml'
         def ruleSet = new XmlFileRuleSet(PATH)

@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryModOneRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryModOneRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryModOne'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             if (exp & 1) {}     // ok
@@ -38,6 +41,7 @@ class UnnecessaryModOneRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolations() {
         final SOURCE = '''
             if (exp % 1) {}         // violation

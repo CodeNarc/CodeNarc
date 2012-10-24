@@ -17,6 +17,7 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for RequiredStringRule
@@ -30,11 +31,13 @@ class RequiredStringRuleTest extends AbstractRuleTestCase {
 
     private static final TEXT = '@author Joe'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'RequiredString'
     }
 
+    @Test
     void testStringIsNull() {
         final SOURCE = 'class MyClass { } '
         rule.string = null
@@ -42,6 +45,7 @@ class RequiredStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringIsPresent() {
         final SOURCE = '''
             /** @author Joe */
@@ -51,6 +55,7 @@ class RequiredStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringIsNotPresent() {
         final SOURCE = '''
             /** @author Mike */

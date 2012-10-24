@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UseAssertEqualsInsteadOfAssertTrueRule
@@ -26,14 +27,17 @@ import org.codenarc.rule.Rule
   */
 class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UseAssertEqualsInsteadOfAssertTrue'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
+    @Test
                 void testMethod() {
                     assertEquals(1, foo())
                     assertTrue(foo())
@@ -53,6 +57,7 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testEqualsInTrueTest() {
         final SOURCE = '''
                  class MyTestCase extends TestCase {
@@ -68,6 +73,7 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testNotEqualsInAssertFalseTest() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {

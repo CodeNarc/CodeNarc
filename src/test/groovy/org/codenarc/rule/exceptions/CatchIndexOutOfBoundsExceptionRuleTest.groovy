@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CatchIndexOutOfBoundsExceptionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class CatchIndexOutOfBoundsExceptionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CatchIndexOutOfBoundsException'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
                 try {
@@ -41,11 +44,13 @@ class CatchIndexOutOfBoundsExceptionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(IndexOutOfBoundsException t) {')
     }
 
+    @Test
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = 'try {  } catch(java.lang.IndexOutOfBoundsException t) { }'
         assertSingleViolation(SOURCE, 1, 'catch(java.lang.IndexOutOfBoundsException t) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             def myMethod() {

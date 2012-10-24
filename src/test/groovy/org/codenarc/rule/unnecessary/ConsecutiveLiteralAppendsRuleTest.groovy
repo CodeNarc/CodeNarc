@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConsecutiveLiteralAppendsRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ConsecutiveLiteralAppends'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             // usage not chained invocation
@@ -44,6 +47,7 @@ class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStrings() {
         final SOURCE = '''
             writer.append('foo').append('bar')      // strings can be joined
@@ -51,6 +55,7 @@ class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'writer.append', "Consecutive calls to append method with literal parameters can be joined into append('foobar')")
     }
 
+    @Test
     void testStringAndNumber() {
         final SOURCE = '''
             writer.append('foo').append(5)          // string and number can be joined
@@ -58,6 +63,7 @@ class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'writer.append', "Consecutive calls to append method with literal parameters can be joined into append('foo5')")
     }
 
+    @Test
     void testGString() {
         final SOURCE = '''
             writer.append('Hello').append("$World") // GString can be joined

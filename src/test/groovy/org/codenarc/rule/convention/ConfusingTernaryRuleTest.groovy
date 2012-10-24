@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConfusingTernaryRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ConfusingTernaryRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ConfusingTernary'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             (x == y) ? same : diff
@@ -50,6 +53,7 @@ class ConfusingTernaryRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNotEquals() {
         final SOURCE = '''
             (x != y) ? diff : same
@@ -59,6 +63,7 @@ class ConfusingTernaryRuleTest extends AbstractRuleTestCase {
                 '(x != y) is a confusing negation in a ternary expression. Rewrite as (x == y) and invert the conditions.')
     }
 
+    @Test
     void testNot() {
         final SOURCE = '''
             (!x) ? diff : same

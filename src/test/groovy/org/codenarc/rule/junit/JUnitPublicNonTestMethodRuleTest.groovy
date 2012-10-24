@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitPublicNonTestMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JUnitPublicNonTestMethod'
     }
 
+    @Test
     void testApplyTo_PublicNonTestMethod() {
         final SOURCE = '''
             class MyTestCase extends GroovyTestCase {
@@ -41,6 +44,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void doSomething() {')
     }
 
+    @Test
     void testApplyTo_TwoPublicMethods() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -56,6 +60,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'boolean isThisNecessary() { false }', 7, 'void doSomething() {')
     }
 
+    @Test
     void testApplyTo_MethodNameStartsWithTestButHasParameters() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -67,6 +72,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void testSomething(int count) {')
     }
 
+    @Test
     void testApplyTo_TestMethodsOnly() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -80,6 +86,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoresConstructors() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -90,6 +97,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SetUpAndTearDown() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -110,6 +118,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'void doSomething() {')
     }
 
+    @Test
     void testApplyTo_TestAnnotation() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -120,6 +129,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_BeforeAnnotation() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -130,6 +140,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AfterAnnotation() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -140,6 +151,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_BeforeClassAnnotation() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -150,6 +162,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AfterClassAnnotation() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -160,6 +173,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_StaticMethods() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -171,6 +185,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoPublicNonTestMethods() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -184,6 +199,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonTestFile() {
         final SOURCE = '''
             class MyClass {
@@ -194,6 +210,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testThatAtOverrideSuppressesViolation() {
         final SOURCE = '''
             class MyTest {

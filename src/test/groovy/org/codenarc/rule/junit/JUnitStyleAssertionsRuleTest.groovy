@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitStyleAssertionsRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'JUnitStyleAssertions'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -65,6 +68,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTrueOnThis() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -79,6 +83,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "assertTrue('message', x)")
     }
 
+    @Test
     void testTrueOnAssert() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -93,6 +98,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "Assert.assertTrue('message', x)")
     }
 
+    @Test
     void testFalseOnThis() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -107,6 +113,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "assertFalse('message', x)")
     }
 
+    @Test
     void testFalseOnAssert() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -121,6 +128,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "Assert.assertFalse('message', x)")
     }
 
+    @Test
     void testNullOnThis() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -135,6 +143,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "assertNull('message', x)")
     }
 
+    @Test
     void testNullOnAssert() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -149,6 +158,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "Assert.assertNull('message', x)")
     }
 
+    @Test
     void testNotNullOnThis() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -163,6 +173,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "assertNotNull('message', x)")
     }
 
+    @Test
     void testNotNullOnAssert() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -177,6 +188,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "Assert.assertNotNull('message', x)")
     }
 
+    @Test
     void testAssertEqualsOnThis() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -191,6 +203,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "assertEquals('message', x, y)")
     }
 
+    @Test
     void testAssertEqualsOnAssert() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {

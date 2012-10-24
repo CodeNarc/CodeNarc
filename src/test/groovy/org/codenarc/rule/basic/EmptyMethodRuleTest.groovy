@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -48,6 +51,7 @@ class EmptyMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDeclaredMethod() {
         final SOURCE = '''
             class MyClass {
@@ -57,6 +61,7 @@ class EmptyMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'method()', 'The method method is both empty and not marked with @Override')
     }
 
+    @Test
     void testDeffedMethod() {
         final SOURCE = '''
             class MyClass {

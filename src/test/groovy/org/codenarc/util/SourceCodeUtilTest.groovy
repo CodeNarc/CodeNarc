@@ -21,6 +21,10 @@ import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
+
+import static org.codenarc.test.TestUtil.shouldFail
 
 /**
  * @author Marcin Erdmann
@@ -38,8 +42,8 @@ class SourceCodeUtilTest extends AbstractTestCase {
     SourceCodeUtilTestVisitor visitor
 
     @Override
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpSourceCodeUtilTest() {
         sourceCode = new SourceString(SOURCE)
     }
 
@@ -49,11 +53,13 @@ class SourceCodeUtilTest extends AbstractTestCase {
     }
 
 
+    @Test
     void testSourceLinesBetweenForSingleLine() {
         assert SourceCodeUtil.sourceLinesBetween(sourceCode, 2, 19, 2, 23) == ['each']
         assert SourceCodeUtil.sourceLinesBetween(sourceCode, 2, 9, 2, 18) == ['[1, 2, 3]']
     }
 
+    @Test
     void testSourceLinesBetweenForMultiLine() {
         def lines = SourceCodeUtil.sourceLinesBetween(sourceCode, 3, 23, 5, 10)
         assert lines.size() == 3
@@ -62,6 +68,7 @@ class SourceCodeUtilTest extends AbstractTestCase {
         assert lines[2] == '        }'
     }
 
+    @Test
     void testIfExceptionIsThrownWhenParamsAreWrong() {
         assert shouldFail(IllegalArgumentException) {
             SourceCodeUtil.sourceLinesBetween(sourceCode, 0, 1, 1, 1)
@@ -76,6 +83,7 @@ class SourceCodeUtilTest extends AbstractTestCase {
         } == 'End line/column has to be after start line/column'
     }
 
+    @Test
     void testNodeSourceLines() {
         applyVisitor()
         def lines = SourceCodeUtil.nodeSourceLines(sourceCode, visitor.methodCalls['each'])
@@ -88,6 +96,7 @@ class SourceCodeUtilTest extends AbstractTestCase {
         assert lines[2] == '        }'
     }
 
+    @Test
     void testSourceLinesBetweenNodes() {
         applyVisitor()
         def lines = SourceCodeUtil.sourceLinesBetweenNodes(sourceCode, visitor.methodCalls['each'].method, visitor.methodCalls['any'])

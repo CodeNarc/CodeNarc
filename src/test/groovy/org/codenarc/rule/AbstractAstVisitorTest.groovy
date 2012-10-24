@@ -19,6 +19,8 @@ import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for AbstractAstVisitor
@@ -41,24 +43,28 @@ class AbstractAstVisitorTest extends AbstractTestCase {
     private sourceCode
     private rule
 
+    @Test
     void testIsFirstVisit() {
         assert astVisitor.isFirstVisit('abc')
         assert !astVisitor.isFirstVisit('abc')
         assert astVisitor.isFirstVisit('def')
     }
 
+    @Test
     void testSourceLine_ASTNode() {
         def sourceLine = astVisitor.sourceLine(astVisitor.returnStatement)
         log("sourceLine=[$sourceLine]")
         assert sourceLine == 'println "about to return"; return "ABC"'
     }
 
+    @Test
     void testSourceLine_ASTNode_LongLine() {
         def sourceLine = astVisitor.sourceLine(astVisitor.ifStatement)
         log("sourceLine=[$sourceLine]")
         assert sourceLine == LONG_LINE
     }
 
+    @Test
     void testAddViolation() {
         assert astVisitor.violations == []
         astVisitor.addViolation(astVisitor.returnStatement)
@@ -69,8 +75,8 @@ class AbstractAstVisitorTest extends AbstractTestCase {
         assert v.lineNumber == 3
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpAbstractAstVisitorTest() {
         sourceCode = new SourceString(SOURCE)
         rule = [getName : { 'DummyRule' } ] as Rule
         astVisitor = new TestAstVisitor1(rule:rule, sourceCode:sourceCode)

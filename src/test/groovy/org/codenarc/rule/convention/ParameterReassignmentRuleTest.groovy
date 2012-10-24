@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ParameterReassignmentRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ParameterReassignment'
     }
 
+    @Test
     void testMethodParametersWithoutReassignment_NoViolations() {
         final SOURCE = '''
             void myMethod(int a, String b, c) {
@@ -41,6 +44,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testClosureParametersWithoutReassignment_NoViolations() {
         final SOURCE = '''
             def myClosure = { int a, String b, c ->
@@ -52,6 +56,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testParameterReassigned_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -64,6 +69,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, "b = 'new value'", 'parameter [b] in class MyClass was reassigned')
     }
 
+    @Test
     void testTwoParametersReassigned_Violations() {
         final SOURCE = '''
             void myMethod(int a, b) {
@@ -76,6 +82,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             4, 'b = new Object()', 'parameter [b] in class None was reassigned')
     }
 
+    @Test
     void testMultipleMethodsWithParametersReassigned_Violations() {
         final SOURCE = '''
             void myMethod1(int a, b) {
@@ -90,6 +97,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             6, 'b = new Object()', 'parameter [b] in class None was reassigned')
     }
 
+    @Test
     void testMultipleClosuresWithParametersReassigned_Violations() {
         final SOURCE = '''
             def myClosure1 = { int a, b ->
@@ -104,6 +112,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             6, 'b = new Object()', 'parameter [b] in class None was reassigned')
     }
 
+    @Test
     void testParameterReassignedWithinInnerClass_Violation() {
         final SOURCE = '''
             int myMethod(Integer a) {
@@ -119,6 +128,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 's = null', 'parameter [s] in class None')
     }
 
+    @Test
     void testNestedClosure_ParametersReassigned_Violations() {
         final SOURCE = '''
             def myClosure = { int a, String b ->
@@ -137,6 +147,7 @@ class ParameterReassignmentRuleTest extends AbstractRuleTestCase {
             [lineNumber:8, sourceLineText:'b = null', messageText:'parameter [b] in class None was reassigned'])
     }
 
+    @Test
     void testAssignToFieldWithSameNameAsParameter_NoViolations() {
         final SOURCE = '''
             class MyClass {

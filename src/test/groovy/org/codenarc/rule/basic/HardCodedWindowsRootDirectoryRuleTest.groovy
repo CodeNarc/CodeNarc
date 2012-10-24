@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for HardCodedWindowsRootDirectoryRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'HardCodedWindowsRootDirectory'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
            new File('cc:\\\\')
@@ -39,6 +42,7 @@ class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCRoot() {
         final SOURCE = '''
            new File('c:\\\\')
@@ -46,6 +50,7 @@ class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "new File('c:\\\\')", 'The file location c:\\ is not portable')
     }
 
+    @Test
     void testCRootTwoParm1() {
         final SOURCE = '''
            new File('c:\\\\', null)
@@ -53,6 +58,7 @@ class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "new File('c:\\\\', null)", 'The file location c:\\ is not portable')
     }
 
+    @Test
     void testCRootTwoParm2() {
         final SOURCE = '''
            new File(null, 'c:\\\\')
@@ -60,6 +66,7 @@ class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "new File(null, 'c:\\\\')", 'The file location c:\\ is not portable')
     }
 
+    @Test
     void testCRootAndDir() {
         final SOURCE = '''
            new File('c:\\\\dir')
@@ -67,6 +74,7 @@ class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "new File('c:\\\\dir')", 'The file location c:\\ is not portable')
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
            new File('E:\\\\dir')
@@ -74,6 +82,7 @@ class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "new File('E:\\\\dir')", 'The file location E:\\ is not portable')
     }
 
+    @Test
     void testGStringParameter() {
         final SOURCE = '''
            new File("E:\\\\dir\\\\$foo")

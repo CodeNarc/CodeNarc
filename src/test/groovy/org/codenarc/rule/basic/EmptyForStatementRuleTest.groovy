@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyForStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyForStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyForStatement'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -45,6 +48,7 @@ class EmptyForStatementRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'for (int i=0; i < 23; i++) {', 7, 'for (int j=0; j < 10; j++) {')
     }
 
+    @Test
     void testApplyTo_Violation_ForStatementContainsComment() {
         final SOURCE = '''
             for (int j=0; j < 10; j++) {
@@ -54,6 +58,7 @@ class EmptyForStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'for (int j=0; j < 10; j++) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {
@@ -66,6 +71,7 @@ class EmptyForStatementRuleTest extends AbstractRuleTestCase {
     }
 
     @SuppressWarnings('UnnecessarySemicolon')
+    @Test
     void testApplyTo_SingleEmptyStatement() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

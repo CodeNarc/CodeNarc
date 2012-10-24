@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConstantsOnlyInterfaceRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ConstantsOnlyInterface'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             public interface Interface1 {
@@ -47,6 +50,7 @@ class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessInScript() {
         final SOURCE = '''
             int CONSTANT_1 = 0
@@ -56,6 +60,7 @@ class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
     
+    @Test
     void testViolation() {
         final SOURCE = '''
             public interface ConstantInterface {

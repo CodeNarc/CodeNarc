@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for MethodSizeRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class MethodSizeRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'MethodSize'
     }
 
+    @Test
     void testApplyTo_LongerThanDefaultMaxLines() {
         final SOURCE = """
             class MyClass {
@@ -41,6 +44,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, null, 'myMethod')
     }
 
+    @Test
     void testApplyTo_SetMaxLines() {
         final SOURCE = """
             /** class description */
@@ -54,6 +58,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, null, 'myMethod')
     }
 
+    @Test
     void testApplyTo_ConstructorExceedsMaxLines() {
         final SOURCE = """
             class MyClass {
@@ -66,6 +71,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, null, CONSTRUCTOR_METHOD_NAME)
     }
 
+    @Test
     void testApplyTo_NoMethodDefinition() {
         final SOURCE = '''
             class MyClass {
@@ -75,6 +81,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_EqualToMaxLines() {
         final SOURCE = """
             class MyClass {
@@ -85,6 +92,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         final SOURCE = '''
           class MyClass {
@@ -98,6 +106,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
         final SOURCE = '''
           class MyClass {
@@ -112,6 +121,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, null, 'myMethod2')
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
             class MyClass {

@@ -17,6 +17,7 @@ package org.codenarc.rule.braces
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ElseBlockBracesRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ElseBlockBraces'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -46,6 +49,7 @@ class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, "else println '23'", 6, 'if (alreadyInitialized())')
     }
 
+    @Test
     void testApplyTo_IfWithoutElse() {
         final SOURCE = '''
             if (isReady) {
@@ -55,6 +59,7 @@ class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ElseIf() {
         final SOURCE = '''
             if (isReady) {
@@ -66,6 +71,7 @@ class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_BracesRequiredForElseIf() {
         final SOURCE = '''
             if (isReady) {
@@ -78,6 +84,7 @@ class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if (isReady)')
     }
 
+    @Test
     void testApplyTo_Violation_ElseBlockWithCommentOnly() {
         final SOURCE = '''
             if (isReady) {
@@ -89,6 +96,7 @@ class ElseBlockBracesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

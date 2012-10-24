@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for FactoryMethodNameRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'FactoryMethodName'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -48,6 +51,7 @@ class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCreate() {
         final SOURCE = '''
             class MyClass {
@@ -61,6 +65,7 @@ class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
             "Violation in class MyClass. The method 'create' matches the regular expression /(build.*|create.*)/ and does not appear in a class matching /*.Builder/")
     }
 
+    @Test
     void testCreateSomething() {
         final SOURCE = '''
             class MyClass {
@@ -74,6 +79,7 @@ class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
             "Violation in class MyClass. The method 'createSomething' matches the regular expression /(build.*|create.*)/ and does not appear in a class matching /*.Builder/")
     }
 
+    @Test
     void testBuild() {
         final SOURCE = '''
             package test
@@ -89,6 +95,7 @@ class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
             "Violation in class MyClass. The method 'build' matches the regular expression /$rule.regex/ and does not appear in a class matching /*.Builder/")
     }
 
+    @Test
     void testBuildSomething() {
         final SOURCE = '''
             package test
@@ -104,6 +111,7 @@ class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
             "The method 'buildSomething' matches the regular expression /(build.*|create.*)/ and does not appear in a class matching /*.Builder/")
     }
 
+    @Test
     void testCreateInBuilder() {
         final SOURCE = '''
             class WidgetBuilder {

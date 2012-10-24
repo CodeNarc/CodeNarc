@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for AssignCollectionUniqueRule
@@ -28,11 +29,13 @@ import org.codenarc.rule.Rule
  */
 class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AssignCollectionUnique'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def allPaths = resultsMap.values().unique()
@@ -47,6 +50,7 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNoArgs() {
         final SOURCE = '''
             def x = myList.unique()
@@ -54,6 +58,7 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = myList.unique()')
     }
 
+    @Test
     void testOneArgs() {
         final SOURCE = '''
             def x = myList.unique() { it }
@@ -61,6 +66,7 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = myList.unique()')
     }
 
+    @Test
     void testChaining() {
         final SOURCE = '''
             def x = myList.unique().findAll { x < 1 }

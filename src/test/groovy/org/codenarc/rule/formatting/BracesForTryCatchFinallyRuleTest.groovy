@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BracesForTryCatchFinallyRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BracesForTryCatchFinally'
     }
 
+    @Test
     void testNewLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
@@ -43,6 +46,7 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testNewLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
@@ -50,12 +54,14 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSameLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSameLineOverride() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text

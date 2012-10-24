@@ -17,6 +17,7 @@ package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for GrailsDomainHasEqualsRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsDomainHasEquals'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class Person {
@@ -41,6 +44,7 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
         	class Person {
@@ -53,6 +57,7 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class Person', 'The domain class Person should define an equals(Object) method')
     }
 
+    @Test
     void testIgnoresClassWithToStringAnnotation() {
         final SOURCE = '''
             @EqualsAndHashCode
@@ -63,6 +68,7 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresClassWithCanonicalAnnotation() {
         final SOURCE = '''
             @Canonical class Person {

@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ImportFromSunPackagesRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ImportFromSunPackagesRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ImportFromSunPackages'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	import foo.bar
@@ -38,6 +41,7 @@ class ImportFromSunPackagesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             import sun.misc.foo
@@ -50,6 +54,7 @@ class ImportFromSunPackagesRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 3, sourceLineText: 'import sun.misc.foo as Foo', messageText: 'The file imports sun.misc.foo, which is not portable and likely to change'])
     }
 
+    @Test
     void testStarImport() {
         final SOURCE = '''
             import sun.*

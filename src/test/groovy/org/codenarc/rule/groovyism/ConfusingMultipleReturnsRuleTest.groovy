@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConfusingMultipleReturnsRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ConfusingMultipleReturns'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             final uninitialized_variable
@@ -45,6 +48,7 @@ class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDeclaration() {
         final SOURCE = '''
             def c
@@ -56,6 +60,7 @@ class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'def a, b = [1, 2]', 'Confusing decaration in class None. The variable \'a\' is initialized to null')
     }
 
+    @Test
     void testInClass() {
         final SOURCE = '''
             class MyClass {

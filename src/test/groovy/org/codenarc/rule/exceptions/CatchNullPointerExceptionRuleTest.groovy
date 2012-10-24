@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CatchNullPointerExceptionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class CatchNullPointerExceptionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CatchNullPointerException'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
                 try {
@@ -41,11 +44,13 @@ class CatchNullPointerExceptionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(NullPointerException t) {')
     }
 
+    @Test
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = 'try {  } catch(java.lang.NullPointerException t) { }'
         assertSingleViolation(SOURCE, 1, 'catch(java.lang.NullPointerException t) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             def myMethod() {

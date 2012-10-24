@@ -15,6 +15,9 @@
  */
 package org.codenarc.test
 
+import org.junit.After
+import org.junit.Test
+
 /**
  * Test that runs CodeNarc against the project source code
  *
@@ -27,6 +30,7 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
     private static final RULESET_FILES = 'RunCodeNarcAgainstProjectSourceCode.ruleset'
 
     @SuppressWarnings('JUnitTestMethodWithoutAssert')
+    @Test
     void testRunCodeNarc() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'RunCodeNarcAgainstProjectSourceCode.properties') 
         def ant = new AntBuilder()
@@ -48,8 +52,8 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
         }
     }
 
-    void tearDown() {
-        super.tearDown()
+    @After
+    void tearDownRunCodeNarcAgainstProjectSourceCodeTest() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, '')
     }
 

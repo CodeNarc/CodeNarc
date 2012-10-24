@@ -17,7 +17,10 @@ package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
+import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
@@ -30,20 +33,24 @@ class CompositeRuleSetTest extends AbstractTestCase {
     static final RULE2 = [:] as Rule
     private compositeRuleSet
 
+    @Test
     void testDefaultsToEmpyRuleSet() {
         assert compositeRuleSet.getRules() == []
     }
 
+    @Test
     void testAddRuleSet_Null() {
         shouldFailWithMessageContaining('ruleSet') { compositeRuleSet.addRuleSet((RuleSet)null) }
     }
 
+    @Test
     void testAddRuleSet_OneRuleSet() {
         def ruleSet = new ListRuleSet([RULE1])
         compositeRuleSet.addRuleSet(ruleSet)
         assert compositeRuleSet.getRules() == [RULE1]
     }
 
+    @Test
     void testAddRuleSet_TwoRuleSets() {
         def ruleSet1 = new ListRuleSet([RULE1])
         def ruleSet2 = new ListRuleSet([RULE2])
@@ -52,23 +59,26 @@ class CompositeRuleSetTest extends AbstractTestCase {
         assert compositeRuleSet.getRules() == [RULE1, RULE2]
     }
 
+    @Test
     void testAddRule_Null() {
         shouldFailWithMessageContaining('rule') { compositeRuleSet.addRule((Rule)null) }
     }
 
+    @Test
     void testAddRule() {
         compositeRuleSet.addRule(RULE1)
         compositeRuleSet.addRule(RULE2)
         assert compositeRuleSet.getRules() == [RULE1, RULE2]
     }
 
+    @Test
     void testInternalRulesListIsImmutable() {
         def rules = compositeRuleSet.rules
         shouldFail(UnsupportedOperationException) { rules.add(123) }
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpCompositeRuleSetTest() {
         compositeRuleSet = new CompositeRuleSet()
     }
 }

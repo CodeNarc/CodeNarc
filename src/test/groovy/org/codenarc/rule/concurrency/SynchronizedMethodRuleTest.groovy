@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SynchronizedMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class SynchronizedMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SynchronizedMethod'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class SynchronizedMethodRuleTestClass1 {
@@ -44,6 +47,7 @@ class SynchronizedMethodRuleTest extends AbstractRuleTestCase {
                 5, 'synchronized def syncMethod3() {}')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class SynchronizedMethodRuleTestClass2 {
                 def myMethod() {}

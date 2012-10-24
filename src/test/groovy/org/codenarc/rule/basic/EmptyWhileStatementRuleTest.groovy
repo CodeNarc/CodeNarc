@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyWhileStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyWhileStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyWhileStatement'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -45,6 +48,7 @@ class EmptyWhileStatementRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'while (x==23) {', 7, 'while (!stopped) {')
     }
 
+    @Test
     void testApplyTo_Violation_WhileStatementContainsComment() {
         final SOURCE = '''
             while (isReady) {
@@ -55,6 +59,7 @@ class EmptyWhileStatementRuleTest extends AbstractRuleTestCase {
     }
 
     @SuppressWarnings('UnnecessarySemicolon')
+    @Test
     void testApplyTo_SingleEmptyStatement() {
         final SOURCE = '''
             def myMethod() {
@@ -64,6 +69,7 @@ class EmptyWhileStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

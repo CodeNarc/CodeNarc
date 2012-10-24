@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UseCollectNestedRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
  */
 class UseCollectNestedRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UseCollectNested'
     }
 
+    @Test
     void testProperUsageOfCollect_NoViolations() {
         final SOURCE = '''
             def list = [1, 2, [3, 4, 5, 6], [7]]
@@ -43,6 +46,7 @@ class UseCollectNestedRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolations() {
         final SOURCE = '''
             def list = [1, 2, [3, 4, 5, 6], [7]]
@@ -64,6 +68,7 @@ class UseCollectNestedRuleTest extends AbstractRuleTestCase {
                 12, 'it.collect {it *2} // violation', UseCollectNestedRule.MESSAGE)
     }
 
+    @Test
     void testBugFix_CannotCastVariableExpression_NoViolations() {
         final SOURCE = '''
             class MyBuilder {

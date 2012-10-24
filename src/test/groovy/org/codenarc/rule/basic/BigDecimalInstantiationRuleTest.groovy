@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BigDecimalInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BigDecimalInstantiation'
     }
 
+    @Test
     void testApplyTo_double_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'new BigDecimal(123.45, MathContext.UNLIMITED)'])
     }
 
+    @Test
     void testApplyTo_WithinClosure() {
         final SOURCE = '''
             class MyClass {
@@ -57,6 +61,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
                 'Call to new BigDecimal(12.0001) uses the double constructor and should probably be replaced with new BigDecimal("12.0001")')
     }
 
+    @Test
     void testApplyTo_Violation_NotWithinClass() {
         final SOURCE = '''
             def b1 = new java.math.BigDecimal(0.1)
@@ -68,6 +73,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def b1 = new java.math.BigDecimal(0.1)', 5, 'def b2 = new BigDecimal(12345678.987654321d)')
     }
 
+    @Test
     void testApplyTo_BigInteger_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -81,6 +87,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_CharArray_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -94,6 +101,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_int_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -105,6 +113,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_long_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -117,6 +126,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_String_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -128,6 +138,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Variable_NoViolation() {
         final SOURCE = '''
             def myMethod() {

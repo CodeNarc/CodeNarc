@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Unit test for NestedSynchronizationRule.
@@ -24,11 +25,13 @@ import org.codenarc.rule.Rule
  * @author Hamlet D'Arcy
  */
 class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'NestedSynchronization'
     }
 
+    @Test
     void testApplyTo_NoViolations_InClosure() {
         final SOURCE = '''
             class testApplyTo_NoViolations_InClosureClass {
@@ -47,6 +50,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations_AnonymousInnerClass() {
         final SOURCE = '''
             class testApplyTo_NoViolations_InAnonymousInnerClass {
@@ -64,6 +68,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_FileWithTwoClasses() {
         final SOURCE = '''
             class NestedSynchronizationClass1 {
@@ -116,6 +121,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Method() {
         final SOURCE = '''
             class NestedSynchronizationClass4 {
@@ -131,6 +137,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'synchronized(this) {}')
     }
 
+    @Test
     void testApplyTo_Closure() {
         final SOURCE = '''
             class NestedSynchronizationClass5 {
@@ -186,6 +193,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
 //                12, "synchronized(this) {}")
 //    }
 
+    @Test
     void testApplyTo_SecondClass() {
         final SOURCE = '''
             class NestedSynchronizationClass9 {
@@ -207,6 +215,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 12, 'synchronized(this) {}')
     }
 
+    @Test
     void testApplyTo_DifferentLockObjects() {
         final SOURCE = '''
             class NestedSynchronizationClass10 {

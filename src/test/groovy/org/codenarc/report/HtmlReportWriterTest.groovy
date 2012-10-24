@@ -28,6 +28,9 @@ import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertContainsAllInOrder
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -54,6 +57,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private results
     private ruleSet
 
+    @Test
     void testWriteReport() {
         reportWriter.writeReport(analysisContext, results)
         def actual = getReportText()
@@ -63,6 +67,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert actual == expected.text
     }
 
+    @Test
     void testWriteReport_Priority4() {
         VIOLATION1.rule.name = 'RULE4'
         VIOLATION1.rule.priority = 4
@@ -75,6 +80,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert actual == expected.text
     }
 
+    @Test
     void testWriteReport_NoDescriptionsForRuleIds() {
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY')])
         reportWriter.customMessagesBundleName = 'DoesNotExist'
@@ -88,6 +94,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert actual == expected.text
     }
 
+    @Test
     void testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile() {
         def biRule = new UnnecessaryBooleanInstantiationRule()
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
@@ -100,6 +107,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert actual == expected.text
     }
 
+    @Test
     void testWriteReport_RuleDescriptionsSetDirectlyOnTheRule() {
         ruleSet = new ListRuleSet([
                 new StubRule(name:'MyRuleXX', description:'description77'),
@@ -113,6 +121,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert actual == expected.text
     }
 
+    @Test
     void testWriteReport_DoesNotIncludeRuleDescriptionsForDisabledRules() {
         ruleSet = new ListRuleSet([
                 new StubRule(name:'MyRuleXX', enabled:false),
@@ -125,12 +134,14 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert !reportText.contains('MyRuleZZ')
     }
 
+    @Test
     void testWriteReport_IncludesRuleThatDoesNotSupportGetDescription() {
         analysisContext.ruleSet = new ListRuleSet([ [getName:{'RuleABC'}, getPriority: { 2 } ] as Rule])
         reportWriter.writeReport(analysisContext, results)
         assertContainsAllInOrder(getReportText(), ['RuleABC', 'No description'])
     }
 
+    @Test
     void testWriteReport_SetOutputFileAndTitle() {
         final OUTPUT_FILE = NEW_REPORT_FILE
         reportWriter.outputFile = OUTPUT_FILE
@@ -143,14 +154,17 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert actual == expected.text
     }
 
+    @Test
     void testWriteReport_NullResults() {
         shouldFailWithMessageContaining('results') { reportWriter.writeReport(analysisContext, null) }
     }
 
+    @Test
     void testWriteReport_NullAnalysisContext() {
         shouldFailWithMessageContaining('analysisContext') { reportWriter.writeReport(null, results) }
     }
 
+    @Test
     void testIsDirectoryContainingFilesWithViolations() {
         def results = new FileResults('', [])
         assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
@@ -173,6 +187,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert reportWriter.isDirectoryContainingFilesWithViolations(results)
     }
 
+    @Test
     void testIsDirectoryContainingFiles() {
         def results = new FileResults('', [])
         assert !reportWriter.isDirectoryContainingFiles(results)
@@ -184,6 +199,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert reportWriter.isDirectoryContainingFiles(results)
     }
 
+    @Test
     void testFormatSourceLine() {
         assert reportWriter.formatSourceLine('') == null
         assert reportWriter.formatSourceLine('abc') == 'abc'
@@ -192,8 +208,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert reportWriter.formatSourceLine('abcdef'*20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpHtmlReportWriterTest() {
         reportWriter = new HtmlReportWriter() 
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
         reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
@@ -226,8 +242,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
         analysisContext = new AnalysisContext(sourceDirectories:['/src/main'], ruleSet:ruleSet)
     }
 
-    void tearDown() {
-        super.tearDown()
+    @After
+    void tearDownHtmlReportWriterTest() {
         new File(NEW_REPORT_FILE).delete()
     }
 

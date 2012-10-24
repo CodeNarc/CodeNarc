@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for PublicInstanceFieldRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'PublicInstanceField'
     }
 
+    @Test
     void testShouldAddNoViolationsForPrivateField() {
         final SOURCE = '''
         	class Person {
@@ -39,6 +42,7 @@ class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddViolationForPublicField() {
         final SOURCE = '''
             class Person {
@@ -48,6 +52,7 @@ class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 3, null, "Using public fields is considered bad design. Create property 'name' instead."
     }
 
+    @Test
     void testShouldAddViolationForPublicFieldWithInitializer() {
         final SOURCE = '''
             class Person {
@@ -57,6 +62,7 @@ class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 3, null, "Using public fields is considered bad design. Create property 'name' instead."
     }
 
+    @Test
     void testShouldAddNoViolationsForPublicStaticField() {
         final SOURCE = '''
         	class Person {

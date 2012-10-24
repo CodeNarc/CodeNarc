@@ -17,6 +17,7 @@ package org.codenarc.rule.dry
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DuplicateMapLiteralRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
  */
 class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'DuplicateMapLiteral'
         assert 'MyTest.groovy' =~ rule.doNotApplyToFilesMatching
     }
 
+    @Test
     void testIgnoresDifferentKeys_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresDifferentValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -55,6 +59,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresMapsWithVariableKeys_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -69,6 +74,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresNestedMapsWithNonConstantValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -80,6 +86,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresNestedListsWithNonConstantValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -91,6 +98,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresMapsWithVariableValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -109,6 +117,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresValuesContainingExpressions_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -119,6 +128,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresEmptyMap_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -129,6 +139,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDuplicateMapLiteral_MapValuesAsConstants() {
         final SOURCE = '''
             class MyClass {
@@ -145,6 +156,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
             7, 'return ["a":99]', '[a:99]')
     }
 
+    @Test
     void testDuplicateMapLiteral_HandlesNestedMapLiterals() {
         final SOURCE = '''
         	  def var1 = [a:1, b:[x:3,y:4]]
@@ -153,6 +165,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:1, b:[x:3,y:4]]', '[a:1, b:[x:3, y:4]]')
     }
 
+    @Test
     void testDuplicateMapLiteral_HandlesNestedMapLiterals_OuterMapsAreNotTheSame() {
         final SOURCE = '''
         	  def var1 = [a:123, b:[x:3,y:4]]
@@ -161,6 +174,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:99, b:[x:3,y:4]]', '[x:3, y:4]')
     }
 
+    @Test
     void testDuplicateMapLiteral_HandlesNestedListLiterals() {
         final SOURCE = '''
         	  def var1 = [a:1, b:[3,4]]
@@ -169,6 +183,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:1, b:[3,4]]', '[a:1, b:[3, 4]]')
     }
 
+    @Test
     void testDuplicateMapLiteral_HandlesMapsNestedWithinListLiterals() {
         final SOURCE = '''
         	  def var1 = [a:123, b:[3, 4, [x:99], 5]]
@@ -177,6 +192,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:99, b:[3, 4, [other:[x:99]], 5]]', '[x:99]')
     }
 
+    @Test
     void testDuplicateMapLiteral_MapKeysAsConstants() {
         final SOURCE = '''
         	  def var1 = [null:1, 'b':2, (Boolean.FALSE):3, (4):4, (true):5]
@@ -186,6 +202,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
             3, "def var2 = [null:1, 'b':2, (Boolean.FALSE):3, (4):4, (true):5]", '[null:1, b:2, Boolean.FALSE:3, 4:4, true:5]')
     }
 
+    @Test
     void testDuplicateMapLiteral_HandlesQuotedKeys() {
         final SOURCE = '''
             class MyClass {
@@ -196,6 +213,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'def var2 = [a:99]', '[a:99]')
     }
 
+    @Test
     void testDuplicateMapLiteral_NestedEmptyMap_Violations() {
         final SOURCE = '''
             class Maps {

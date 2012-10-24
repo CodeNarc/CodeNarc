@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryIntegerInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryIntegerInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryIntegerInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             assert 42i == foo()
@@ -39,6 +42,7 @@ class UnnecessaryIntegerInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringConstructor() {
         final SOURCE = '''
             new Integer("42")
@@ -46,6 +50,7 @@ class UnnecessaryIntegerInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Integer("42")', 'Can be rewritten as 42 or 42i')
     }
 
+    @Test
     void testIntConstructor() {
         final SOURCE = '''
             new Integer(42)

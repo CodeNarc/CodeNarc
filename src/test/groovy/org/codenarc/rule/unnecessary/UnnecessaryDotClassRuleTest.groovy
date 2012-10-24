@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryDotClassRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryDotClass'
     }
 
+    @Test
     void testNoViolations() {
         final SOURCE = '''
           def x = String
@@ -40,6 +43,7 @@ class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             def x = String.class
@@ -47,6 +51,7 @@ class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = String.class', 'String.class can be rewritten as String')
     }
 
+    @Test
     void testNoDuplicateViolation() {
         final SOURCE = '''
             class MyClass {

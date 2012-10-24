@@ -17,6 +17,7 @@ package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for GrailsDomainHasToStringRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsDomainHasToString'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class Person {
@@ -41,6 +44,7 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
         	class Person {
@@ -53,6 +57,7 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class Person', 'The domain class Person should define a toString() method')
     }
 
+    @Test
     void testIgnoresClassWithToStringAnnotation() {
         final SOURCE = '''
             @ToString
@@ -63,6 +68,7 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresClassWithCanonicalAnnotation() {
         final SOURCE = '''
             @Canonical class Person {

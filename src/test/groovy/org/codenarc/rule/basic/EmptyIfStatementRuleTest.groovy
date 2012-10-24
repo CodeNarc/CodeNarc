@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyIfStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyIfStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyIfStatement'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -45,6 +48,7 @@ class EmptyIfStatementRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'if (x==23) {', 7, 'if (alreadyInitialized()) {')
     }
 
+    @Test
     void testApplyTo_Violation_IfStatementContainsComment() {
         final SOURCE = '''
             if (isReady) {
@@ -54,6 +58,7 @@ class EmptyIfStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if (isReady)')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

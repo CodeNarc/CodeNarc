@@ -17,6 +17,8 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for StatelessClassRule
@@ -25,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class StatelessClassRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'StatelessClass'
     }
 
+    @Test
     void testDefaultConfiguration_NoViolations() {
         final SOURCE = '''
           class MyClass {
@@ -41,6 +45,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assert !rule.ready
     }
 
+    @Test
     void testApplyTo_HasFields() {
         final SOURCE = '''
           class MyClass {
@@ -52,6 +57,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'BigDecimal depositAmount', 4, 'def other')
     }
 
+    @Test
     void testApplyTo_IgnoresClassesWithImmutableAnnotation() {
         final SOURCE = '''
             @Immutable class Coordinates {
@@ -62,6 +68,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoresFieldsWithInjectAnnotation() {
         final SOURCE = '''
           class MyClass {
@@ -73,6 +80,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_FinalField() {
         final SOURCE = '''
           class MyClass {
@@ -83,6 +91,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_StaticField() {
         final SOURCE = '''
           class MyClass {
@@ -94,6 +103,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'static depositCount = 5', 4, 'def other')
     }
 
+    @Test
     void testApplyTo_StaticFinalField() {
         final SOURCE = '''
           class MyClass {
@@ -104,6 +114,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNames_OneExactName() {
         final SOURCE = '''
           class MyClass {
@@ -116,6 +127,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'BigDecimal depositAmount', "Violation in class MyClass. The class is marked as stateless but contains the non-final field 'depositAmount'")
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNames_TwoExactNames() {
         final SOURCE = '''
           class MyClass {
@@ -128,6 +140,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNames_Wildcards() {
         final SOURCE = '''
           class MyClass {
@@ -143,6 +156,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'int count')
     }
 
+    @Test
     void testApplyTo_IgnoreFieldTypes_OneExactName() {
         final SOURCE = '''
           class MyClass {
@@ -155,6 +169,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'def other')
     }
 
+    @Test
     void testApplyTo_IgnoreFieldTypes_Wildcards() {
         final SOURCE = '''
           class MyClass {
@@ -170,6 +185,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 5, 'int count = 23', 7, 'Object lock = new Object()')
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNamesAndIgnoreFieldTypes() {
         final SOURCE = '''
           class MyClass {
@@ -186,6 +202,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testApplyTo_Script_HasField() {
         final SOURCE = '''
             BigDecimal depositAmount        // not considered a field
@@ -196,31 +213,35 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         rule.applyToClassNames = '*'
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSetAddToIgnoreFieldNames_IgnoreFieldNamesIsNull() {
         rule.setAddToIgnoreFieldNames('abc')
         assert rule.ignoreFieldNames == 'abc'
     }
 
+    @Test
     void testSetAddToIgnoreFieldNames_IgnoreFieldNamesAlreadySet() {
         rule.ignoreFieldNames = 'abc'
         rule.setAddToIgnoreFieldNames('def,ghi')
         assert rule.ignoreFieldNames == 'abc,def,ghi'
     }
 
+    @Test
     void testSetAddToIgnoreFieldNames_MultipleCalls_AddToIgnoreFieldNames() {
         rule.setAddToIgnoreFieldNames('abc,d*f')
         rule.addToIgnoreFieldNames = 'gh?'
         assert rule.ignoreFieldNames == 'abc,d*f,gh?'
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpStatelessClassRuleTest() {
         sourceCodeName = 'MyClass.groovy'
         sourceCodePath = "/$sourceCodeName"
     }

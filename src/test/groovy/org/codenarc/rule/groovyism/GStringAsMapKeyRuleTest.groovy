@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for GStringAsMapKeyRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GStringAsMapKey'
     }
 
+    @Test
     void testSimpleMapIsOK() {
         final SOURCE = '''
         	Map map = [string: 'thats ok']
@@ -37,6 +40,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testAnyGStringIsDisallowedAsKey() {
         final SOURCE = '''
             Map map = ["${ someRef }" : 'invalid' ]
@@ -45,6 +49,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
                 2, '["${ someRef }" :')
     }
 
+    @Test
     void testNestedGStringInValueIsCalled() {
         final SOURCE = '''
             def x = 'something'
@@ -57,6 +62,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
                 4, '["nested $x" ')
     }
 
+    @Test
     void testNestedGStringInKeyIsCalled() {
         final SOURCE = '''
             def x = 'something'

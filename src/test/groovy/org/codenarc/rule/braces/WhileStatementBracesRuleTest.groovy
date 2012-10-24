@@ -17,6 +17,7 @@ package org.codenarc.rule.braces
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for WhileStatementBracesRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'WhileStatementBraces'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'while (x==23)', 6, 'while (alreadyInitialized())')
     }
 
+    @Test
     void testApplyTo_Violation_IfStatementWithCommentOnly() {
         final SOURCE = '''
             while (isReady) {
@@ -53,6 +57,7 @@ class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

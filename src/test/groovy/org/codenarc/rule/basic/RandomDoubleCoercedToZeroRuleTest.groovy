@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for RandomDoubleCoercedToZeroRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'RandomDoubleCoercedToZero'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -55,6 +58,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
         void testFieldsCastToLong() {
             final SOURCE = '''
                 class MyClass {
@@ -67,6 +71,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     4, '(Long) Math.random()', 'Casting the result of Math.random() to a Long always results in 0')
         }
 
+    @Test
         void testLongFields() {
             final SOURCE = '''
                 class MyClass {
@@ -79,6 +84,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     4, 'Long d = Math.random()', 'Assigning the result of Math.random() to a Long always results in 0')
         }
 
+    @Test
         void testFieldsAsLong() {
             final SOURCE = '''
                 class MyClass {
@@ -91,6 +97,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     4, '(Math.random()) as Long', 'Casting the result of Math.random() to a Long always results in 0')
         }
 
+    @Test
         void testLongReturningMethods() {
             final SOURCE = '''
                 long longMethod() {
@@ -106,6 +113,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
         }
 
 
+    @Test
         void testFieldsCastToInt() {
             final SOURCE = '''
                 class MyClass {
@@ -118,6 +126,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     4, '(Integer) Math.random()', 'Casting the result of Math.random() to an Integer always results in 0')
         }
 
+    @Test
         void testIntFields() {
             final SOURCE = '''
                 class MyClass {
@@ -130,6 +139,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     4, 'Integer d = Math.random()', 'Assigning the result of Math.random() to an Integer always results in 0')
         }
 
+    @Test
         void testFieldsAsInt() {
             final SOURCE = '''
                 class MyClass {
@@ -142,6 +152,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     4, '(Math.random()) as Integer', 'Casting the result of Math.random() to an Integer always results in 0')
         }
 
+    @Test
         void testIntReturningMethods() {
             final SOURCE = '''
                 int intMethod() {

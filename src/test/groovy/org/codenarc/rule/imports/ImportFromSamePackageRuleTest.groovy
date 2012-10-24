@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ImportFromSamePackageRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ImportFromSamePackage'
     }
 
+    @Test
     void testApplyTo_Violations() {
         final SOURCE = '''
             package org.xyz
@@ -40,6 +43,7 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'org.xyz.MyController', 5, 'org.xyz.MyService')
     }
 
+    @Test
     void testApplyTo_ImportStar_Violations() {
         final SOURCE = '''
             package org.xyz
@@ -48,6 +52,7 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'import org.xyz.*')
     }
 
+    @Test
     void testApplyTo_IgnoreStaticImports() {
         final SOURCE = '''
             package org.xyz
@@ -58,6 +63,7 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreImportsWithExplicitAliasDeclarations() {
         final SOURCE = '''
             package org.xyz
@@ -66,6 +72,7 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             package org.mypackage

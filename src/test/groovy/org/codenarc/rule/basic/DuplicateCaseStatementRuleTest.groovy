@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DuplicateCaseStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DuplicateCaseStatement'
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             def value = 2
@@ -43,6 +46,7 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleViolationInteger() {
         final SOURCE = '''
             switch( 0 ) {
@@ -57,6 +61,7 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'case 2:')
     }
 
+    @Test
     void testApplyTo_SingleViolationString() {
         final SOURCE = '''
             switch( "test" ) {

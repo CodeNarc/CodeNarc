@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyElseBlockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyElseBlockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyElseBlock'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -47,6 +50,7 @@ class EmptyElseBlockRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 6, '} else {', 10, '} else { }')
     }
 
+    @Test
     void testApplyTo_Violation_ElseBlockContainsComment() {
         final SOURCE = '''
             class MyClass {
@@ -63,6 +67,7 @@ class EmptyElseBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'else {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

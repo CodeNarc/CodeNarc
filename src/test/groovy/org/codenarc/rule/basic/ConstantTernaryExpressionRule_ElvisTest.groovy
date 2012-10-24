@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConstantTernaryExpressionRule handling of the "Elvis" operator.
@@ -27,6 +28,7 @@ import org.codenarc.rule.Rule
  */
 class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
 
+    @Test
     void testApplyTo_True_IsAViolation() {
         final SOURCE = '''
             def x = true ?: 0
@@ -36,6 +38,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = true ?: 0', 4, 'def z = Boolean.TRUE ?: 0')
     }
 
+    @Test
     void testApplyTo_False_IsAViolation() {
         final SOURCE = '''
             def x = false ?: 0
@@ -45,6 +48,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = false ?: 0', 4, 'def y = Boolean.FALSE ?: 0')
     }
 
+    @Test
     void testApplyTo_Null_IsAViolation() {
         final SOURCE = '''
             def x = null ?: 0
@@ -52,6 +56,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = null ?: 0')
     }
 
+    @Test
     void testApplyTo_StringLiteral_IsAViolation() {
         final SOURCE = '''
             def x = "abc" ?: 0
@@ -60,6 +65,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = "abc" ?: 0', 3, 'def y = "" ?: 0')
     }
 
+    @Test
     void testApplyTo_NumberLiteral_IsAViolation() {
         final SOURCE = '''
             def x = 99.9 ?: 0
@@ -68,6 +74,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = 99.9 ?: 0', 3, 'def y = 0 ?: 0')
     }
 
+    @Test
     void testApplyTo_MapLiteral_IsAViolation() {
         final SOURCE = '''
             def x = [:] ?: 0
@@ -76,6 +83,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = [:] ?: 0', 3, 'def y = [a:123, b:456] ?: 0')
     }
 
+    @Test
     void testApplyTo_ListLiteral_IsAViolation() {
         final SOURCE = '''
             def x = [] ?: 0
@@ -84,6 +92,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = [] ?: 0', 3, 'def y = [a, 456] ?: 0')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             class MyClass {

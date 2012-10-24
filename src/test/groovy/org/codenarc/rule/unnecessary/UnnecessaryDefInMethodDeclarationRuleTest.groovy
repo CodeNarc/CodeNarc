@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryDefInMethodDeclarationRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryDefInMethodDeclaration'
@@ -34,6 +36,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
      * Success scenarios
      */
 
+    @Test
     void testSuccessScenario_modifiers() {
         final SOURCE = '''
             String getTreeCellRendererComponent(String p1, def p2) {
@@ -53,6 +56,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_generics() {
         final SOURCE = '''
             def <T> T getService(String serviceName) { null }
@@ -60,6 +64,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_methodNamesContainingModifierNames() {
         final SOURCE = '''
             def privateMethod() { }
@@ -74,6 +79,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_types() {
         final SOURCE = '''
             Object method1() { null }
@@ -88,6 +94,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
      * Violations
      */
 
+    @Test
     void testViolation_defInConstructor() {
         final SOURCE = '''
             class MyClass {
@@ -97,6 +104,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def MyClass()', 'Violation in class MyClass. The def keyword is unneeded on constructors')
     }
 
+    @Test
     void testViolation_defAndPrivate() {
         final SOURCE = '''
             def private method() { }
@@ -104,6 +112,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def private method()', 'The def keyword is unneeded when a method is marked private')
     }
 
+    @Test
     void testViolation_defAndProtected() {
         final SOURCE = '''
             def protected method() { }
@@ -111,6 +120,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def protected method()', 'The def keyword is unneeded when a method is marked protected')
     }
 
+    @Test
     void testViolation_defAndPublic() {
         final SOURCE = '''
             def public method() { }
@@ -118,6 +128,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def public method()', 'The def keyword is unneeded when a method is marked public')
     }
 
+    @Test
     void testViolation_defAndStatic() {
         final SOURCE = '''
             def static method() { }
@@ -125,6 +136,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def static method()', 'The def keyword is unneeded when a method is marked static')
     }
 
+    @Test
     void testViolation_defAndFinal() {
         final SOURCE = '''
             def final method() { }
@@ -132,6 +144,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def final method()', 'The def keyword is unneeded when a method is marked final')
     }
 
+    @Test
     void testViolation_defAndSynchronized() {
         final SOURCE = '''
             def synchronized method() { }
@@ -139,6 +152,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def synchronized method()', 'The def keyword is unneeded when a method is marked synchronized')
     }
 
+    @Test
     void testViolation_defAndStrictfp() {
         final SOURCE = '''
             def strictfp method() { }
@@ -146,6 +160,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def strictfp method()', 'The def keyword is unneeded when a method is marked strictfp')
     }
 
+    @Test
     void testViolation_defAndAbstract() {
         final SOURCE = '''
             abstract class Test {
@@ -155,6 +170,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def abstract method()', 'The def keyword is unneeded when a method is marked abstract')
     }
 
+    @Test
     void testViolation_defAndObjectType() {
         final SOURCE = '''
             def Object method() { null }
@@ -162,6 +178,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def Object method()', 'The def keyword is unneeded when a method returns the Object type')
     }
 
+    @Test
     void testViolation_defAndReturnType() {
         final SOURCE = '''
             def List method() { null }
@@ -169,6 +186,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def List method()', 'The def keyword is unneeded when a method specifies a return type')
     }
 
+    @Test
     void testViolation_methodDeclarationAcrossMultipleLines() {
         final SOURCE = '''
             def
@@ -178,6 +196,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def', 'The def keyword is unneeded when a method is marked static')
     }
 
+    @Test
     void testViolation_multipleMethodsOnSingleLine() {
         final SOURCE = '''
             def method1() { 'good' }; def public method2() { 'bad' }

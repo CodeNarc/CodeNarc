@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for StatelessSingletonRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class StatelessSingletonRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'StatelessSingleton'
     }
 
+    @Test
     void testShouldAddNoViolationsForStatelessClassThatIsNotSingleton() {
         final SOURCE = '''
             class Service {
@@ -40,6 +43,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddNoViolationsForStatefulClassThatIsNotSingleton() {
         final SOURCE = '''
             class Service {
@@ -52,6 +56,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddNoViolationsForStatefulClassAnnotatedAsSingleton() {
         final SOURCE = '''
             @groovy.lang.Singleton
@@ -62,6 +67,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddNoViolationsForStatefulClassImplementingSingletonPattern() {
         final SOURCE = '''
             class Service {
@@ -72,6 +78,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddViolationForClassAnnotatedAsSingletonThatDoesNotHaveState() {
         final SOURCE = '''
             @groovy.lang.Singleton
@@ -83,6 +90,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 3, 'class Service', createErrorMsgForClass('Service')
     }
 
+    @Test
     void testShouldAddNoViolationsForClassAnnotatedAsSingletonExtendingAnotherClass() {
         final SOURCE = '''
             class Parent {}
@@ -96,6 +104,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddViolationForClassHavingOneStaticFieldOfItsOwnType() {
         final SOURCE = '''
             class Service {
@@ -107,6 +116,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class Service', createErrorMsgForClass('Service')
     }
 
+    @Test
     void testShouldAddViolationForClassHavingOneStaticFieldNamedInstance() {
         final SOURCE = '''
             class Service {
@@ -118,6 +128,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class Service', createErrorMsgForClass('Service')
     }
 
+    @Test
     void testShouldAddViolationForClassHavingOneStaticFieldNamed_Instance() {
         final SOURCE = '''
             class Service {
@@ -129,6 +140,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class Service', createErrorMsgForClass('Service')
     }
 
+    @Test
     void testShouldAddNoViolationsForClassHavingStaticFieldNamedInstanceOfDifferentType() {
         final SOURCE = '''
             class Service {
@@ -140,6 +152,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddNoViolationsForClassImplementingSingletonPatternAndExtendingAnotherClass() {
         final SOURCE = '''
             class Parent {}
@@ -153,6 +166,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddNoViolationsForClassHaving2StaticFieldsOfItsOwnType() {
         final SOURCE = '''
             class Service {

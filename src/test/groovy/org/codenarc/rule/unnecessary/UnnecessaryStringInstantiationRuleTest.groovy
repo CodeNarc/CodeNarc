@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryStringInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryStringInstantiation'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 5, "new String('abc')", 6, 'new java.lang.String("abc")')
     }
 
+    @Test
     void testApplyTo_WithinClosure() {
         final SOURCE = '''
             class MyClass {
@@ -55,6 +59,7 @@ class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, "new String('abc')", 'There is typically no need to call the String constructor')
     }
 
+    @Test
     void testApplyTo_Violation_NotWithinClass() {
         final SOURCE = '''
             def b1 = new java.lang.String('abc')
@@ -70,6 +75,7 @@ class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, "new java.lang.String('abc')", 6, 'new String(')
     }
 
+    @Test
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

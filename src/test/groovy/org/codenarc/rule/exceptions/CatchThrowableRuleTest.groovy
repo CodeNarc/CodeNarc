@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CatchThrowableRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class CatchThrowableRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CatchThrowable'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
                 try {
@@ -41,11 +44,13 @@ class CatchThrowableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(Throwable t) {')
     }
 
+    @Test
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = 'try {  } catch(java.lang.Throwable t) { }'
         assertSingleViolation(SOURCE, 1, 'catch(java.lang.Throwable t) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

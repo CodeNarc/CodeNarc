@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ComparisonWithSelfRule
@@ -27,11 +28,13 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
 
     private static final MESSAGE = 'Comparing an object to itself' 
     
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ComparisonWithSelf'
     }
 
+    @Test
     void testComparisonOperators_NoViolations() {
         final SOURCE = '''
             if (value == true) { }
@@ -45,6 +48,7 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testEqualsMethod_NoViolations() {
         final SOURCE = '''
             if (value.equals(true)) { }
@@ -57,6 +61,7 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCompareToMethod_NoViolations() {
         final SOURCE = '''
             if (value.compareTo(other)) { }
@@ -68,6 +73,7 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testComparisonOperators_Violations() {
         final SOURCE = '''
             println isReady = x == x
@@ -89,6 +95,7 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testEqualsMethod_Violation() {
         final SOURCE = '''
             println isReady = x.equals(x)
@@ -96,6 +103,7 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'println isReady = x.equals(x)', MESSAGE)
     }
 
+    @Test
     void testCompareToMethod_Violation() {
         final SOURCE = '''
             println x.compareTo(x)

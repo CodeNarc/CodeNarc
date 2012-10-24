@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptySynchronizedStatementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptySynchronizedStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptySynchronizedStatement'
     }
 
+    @Test
     void testApplyTo_EmptySynchronized() {
         final SOURCE = '''
             class MyClass {
@@ -42,6 +45,7 @@ class EmptySynchronizedStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'synchronized(lock) {')
     }
 
+    @Test
     void testApplyTo_Violation_SynchronizedContainsComment() {
         final SOURCE = '''
             synchronized(lock) {
@@ -51,6 +55,7 @@ class EmptySynchronizedStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'synchronized(lock) {')
     }
 
+    @Test
     void testApplyTo_NonEmptySynchronized() {
         final SOURCE = '''
             class MyClass {

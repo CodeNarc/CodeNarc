@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for NonFinalPublicFieldRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class NonFinalPublicFieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'NonFinalPublicField'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class MyClass {
@@ -40,6 +43,7 @@ class NonFinalPublicFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
         	class MyClass {

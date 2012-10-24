@@ -16,6 +16,9 @@
 package org.codenarc.test
 
 import org.apache.log4j.Logger
+import org.junit.Before
+import org.junit.Rule
+import org.junit.rules.TestName
 
 /**
  * Abstract superclass for tests 
@@ -25,12 +28,15 @@ import org.apache.log4j.Logger
   */
 
 @SuppressWarnings(['AbstractClassWithoutAbstractMethod', 'ConfusingMethodName'])
-abstract class AbstractTestCase extends GroovyTestCase {
+abstract class AbstractTestCase {
 
     protected static final CODENARC_PROPERTIES_FILE_PROP = 'codenarc.properties.file'
 
     @SuppressWarnings('FieldName')
     protected final LOG = Logger.getLogger(getClass())
+
+    @SuppressWarnings('PublicInstanceField')
+    @Rule public TestName testName = new TestName()
 
     /**
      * Write out the specified log message, prefixing with the current class name.
@@ -38,6 +44,10 @@ abstract class AbstractTestCase extends GroovyTestCase {
      */
     protected void log(message) {
         LOG.info message
+    }
+
+    protected String getName() {
+        return testName.getMethodName()
     }
 
     private String classNameNoPackage() {
@@ -50,9 +60,9 @@ abstract class AbstractTestCase extends GroovyTestCase {
     // Test Setup and Tear Down
     //------------------------------------------------------------------------------------
 
-    void setUp() {
+    @Before
+    void setUpAbstractTestCase() {
         log "----------[ ${classNameNoPackage()}.${getName()} ]----------"
-        super.setUp()
     }
 
 }

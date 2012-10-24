@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BitwiseOperatorInConditionalRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BitwiseOperatorInConditional'
     }
 
+    @Test
     void testTempBitwiseOr() {
         //(3 | 6) == 7   a bitwise or
         final SOURCE = '''
@@ -40,6 +43,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testOr() {
         final SOURCE = '''
         	def a = false
@@ -50,6 +54,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTempWhileOr() {
         final SOURCE = '''
         	def temp = (3 | 6)
@@ -59,6 +64,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBitwiseOrViolation() {
         final SOURCE = '''
                 def a = false
@@ -68,6 +74,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if(a|b) { return true}', 'Use of a bitwise or (|) operator in a conditional')
     }
 
+    @Test
     void testBitwiseOrViolationNested() {
         final SOURCE = '''
         	def a = false
@@ -77,6 +84,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if(a|b||a) { return true}')
     }
 
+    @Test
     void testBitwiseOrViolationNestedLeft() {
         final SOURCE = '''
             def a = false
@@ -86,6 +94,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if((a|b)||(a||b)) { return true}')
     }
 
+    @Test
     void testBitwiseOrViolationNestedRight() {
         final SOURCE = '''
             def a = false
@@ -95,6 +104,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if((a||b)||(a|b)) { return true}')
     }
 
+    @Test
     void testBitwiseOrViolationNestedRightDeep() {
         final SOURCE = '''
             def a = false
@@ -104,6 +114,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if((a||b)||a && b || b || (a|b)) { return true}')
     }
 
+    @Test
     void testBitwiseOrViolationWhile() {
         final SOURCE = '''
             def a = false
@@ -113,6 +124,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'while(a|b) { return true}')
     }
 
+    @Test
     void testBitwiseOrViolationTernary() {
         final SOURCE = '''
             def a = false
@@ -122,6 +134,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'a|b ?  true :  false', 'Use of a bitwise or (|) operator in a conditional')
     }
 
+    @Test
     void testBitwiseOrViolationShortTernary() {
         final SOURCE = '''
             def a = false
@@ -132,6 +145,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testTempBitwiseAnd() {
         //(3 & 6) == 2 a bitwise and
         final SOURCE = '''
@@ -142,6 +156,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBitwiseAndViolation() {
         final SOURCE = '''
         	def a = false
@@ -151,6 +166,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if(a&b) { return true}', 'Use of a bitwise and (&) operator in a conditional')
     }
 
+    @Test
     void testBitwiseAndViolationNested() {
         final SOURCE = '''
         	def a = false
@@ -160,6 +176,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if(a&b||a) { return true}')
     }
 
+    @Test
     void testBitwiseAndViolationNestedLeft() {
         final SOURCE = '''
             def a = false
@@ -169,6 +186,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if((a&b)||(a||b)) { return true}')
     }
 
+    @Test
     void testBitwiseAndViolationNestedRight() {
         final SOURCE = '''
             def a = false
@@ -178,6 +196,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if((a||b)||(a&b)) { return true}')
     }
 
+    @Test
     void testBitwiseAndViolationNestedRightDeep() {
         final SOURCE = '''
             def a = false
@@ -187,6 +206,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if((a||b)||a && b || b || (a&b)) { return true}')
     }
 
+    @Test
     void testBitwiseAndViolationWhile() {
         final SOURCE = '''
             def a = false
@@ -196,6 +216,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'while(a&b) { return true}')
     }
 
+    @Test
     void testBitwiseAndViolationTernary() {
         final SOURCE = '''
             def a = false
@@ -205,6 +226,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'a&b ?  true :  false')
     }
 
+    @Test
     void testBitwiseAndViolationShortTernary() {
         final SOURCE = '''
             def a = false

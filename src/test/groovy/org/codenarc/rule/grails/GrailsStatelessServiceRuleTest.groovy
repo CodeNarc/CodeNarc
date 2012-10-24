@@ -17,6 +17,8 @@ package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for GrailsStatelessServiceRule
@@ -28,11 +30,13 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
     private static final SERVICE_PATH = 'project/MyProject/grails-app/services/com/xxx/MyService.groovy'
     private static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsStatelessService'
     }
 
+    @Test
     void testApplyTo_HasFields() {
         final SOURCE = '''
           class MyService {
@@ -43,6 +47,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'BigDecimal depositAmount', 4, 'int other')
     }
 
+    @Test
     void testApplyTo_FinalField() {
         final SOURCE = '''
           class MyService {
@@ -52,6 +57,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoresDefProperties() {
         final SOURCE = '''
           class MyService {
@@ -61,6 +67,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotIgnoreDefFieldsWithVisibilityModifier() {
         final SOURCE = '''
           class MyService {
@@ -71,6 +78,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'private def depositAmount', 4, 'public def other')
     }
 
+    @Test
     void testApplyTo_DoesNotIgnoreStaticDefProperties() {
         final SOURCE = '''
           class MyService {
@@ -80,6 +88,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static def other')
     }
 
+    @Test
     void testApplyTo_DefaultIgnoredFieldNames() {
         final SOURCE = '''
           class MyService {
@@ -93,6 +102,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_StaticField() {
         final SOURCE = '''
           class MyService {
@@ -103,6 +113,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'static depositCount = 5', 4, 'int other')
     }
 
+    @Test
     void testApplyTo_StaticFinalField() {
         final SOURCE = '''
           class MyService {
@@ -112,6 +123,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNames_OneExactName() {
         final SOURCE = '''
           class MyService {
@@ -123,6 +135,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'BigDecimal depositAmount')
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNames_TwoExactNames() {
         final SOURCE = '''
           class MyService {
@@ -134,6 +147,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNames_Wildcards() {
         final SOURCE = '''
           class MyService {
@@ -147,6 +161,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'int count')
     }
 
+    @Test
     void testApplyTo_IgnoreFieldTypes_OneExactName() {
         final SOURCE = '''
           class MyService {
@@ -158,6 +173,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int other')
     }
 
+    @Test
     void testApplyTo_IgnoreFieldTypes_Wildcards() {
         final SOURCE = '''
           class MyService {
@@ -171,6 +187,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'int count = 23', 6, 'Object lock = new Object()')
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNamesAndIgnoreFieldTypes() {
         final SOURCE = '''
           class MyService {
@@ -185,6 +202,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Script_HasField() {
         final SOURCE = '''
             BigDecimal depositAmount        // not considered a field
@@ -194,11 +212,13 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyService { } '
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_FieldWithinNonServiceClass() {
         final SOURCE = '''
             class MyServiceHelper {
@@ -208,6 +228,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_FieldWithinNonServiceDirectory() {
         final SOURCE = '''
             class MyService {
@@ -218,8 +239,8 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpGrailsStatelessServiceRuleTest() {
         sourceCodePath = SERVICE_PATH
     }
 

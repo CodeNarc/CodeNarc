@@ -17,6 +17,7 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for IllegalPackageReferenceRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
  */
 class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'IllegalPackageReference'
         assert rule.packageNames == null
     }
 
+    @Test
     void testDefaultConfiguration_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
         assert !rule.ready
     }
 
+    @Test
     void testFieldsTypes_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -56,6 +60,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'java.math.BigDecimal amount = 42.10', messageText:'java.math'])
     }
 
+    @Test
     void testWithinExpressions_Violations() {
         final SOURCE = '''
             if (value.class == org.bad.BadClass) { }
@@ -69,6 +74,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'def count = org.bad.Helper.getCount()', messageText:'org.bad'] )
     }
 
+    @Test
     void testConstructorCalls_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -82,6 +88,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:"def url = new org.bad.Name('ABC')", messageText:'org.bad'] )
     }
 
+    @Test
     void testConstructorCall_CallToSuper_NoViolation() {
         final SOURCE = '''
             class MyClass extends Object {
@@ -94,6 +101,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableTypes_Violations() {
         final SOURCE = '''
             void doSomething() {
@@ -110,6 +118,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'org.bad.Code code', messageText:'org.bad'] )
     }
 
+    @Test
     void testMethodReturnTypes_Violations() {
         final SOURCE = '''
             org.bad.Socket getSocket() { }
@@ -124,6 +133,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'org.bad.AntBuilder getAntBuilder() { }', messageText:'org.bad'] )
     }
 
+    @Test
     void testMethodParameterTypes_Violations() {
         final SOURCE = '''
             void writeCount(org.bad.Writer writer, int count) { }
@@ -135,6 +145,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'void initializeBinding(String name, org.bad.Binding binding) { }', messageText:'org.bad'] )
     }
 
+    @Test
     void testConstructorCall_Parameter_Violation() {
         final SOURCE = '''
             def handler = new Handler(org.bad.Request)
@@ -143,6 +154,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def handler = new Handler(org.bad.Request)', 'org.bad')
     }
 
+    @Test
     void testConstructorParameterType_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -153,6 +165,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'MyClass(org.bad.Stuff stuff) { }', 'org.bad')
     }
 
+    @Test
     void testClosureParameterTypes_Violations() {
         final SOURCE = '''
             def writeCount = { org.bad.Writer writer, int count -> }
@@ -165,6 +178,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'def initializeBinding = { String name, org.bad.Binding binding -> }', messageText:'org.bad'] )
     }
 
+    @Test
     void testAsType_Violation() {
         final SOURCE = '''
             def x = value as org.bad.Widget
@@ -173,6 +187,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = value as org.bad.Widget', 'org.bad')
     }
 
+    @Test
     void testExtendsSuperclassOrSuperInterfaceTypes_Violations() {
         final SOURCE = '''
             class MyHashMap extends org.bad.HashMap { }
@@ -186,6 +201,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'interface MyList extends org.bad.List { }', messageText:'org.bad'] )
     }
 
+    @Test
     void testImplementsInterfaceTypes_Violations() {
         final SOURCE = '''
             class MyList implements org.bad.List { }
@@ -197,6 +213,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'class MyRange implements org.bad.Range { }', messageText:'org.bad'] )
     }
 
+    @Test
     void testImports_Violations() {
         final SOURCE = '''
             import org.bad.BadStuff
@@ -212,6 +229,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'import org.evil.*', messageText:'org.evil'] )
     }
 
+    @Test
     void testStaticImports_Violations() {
         final SOURCE = '''
             import org.other.Stuff
@@ -225,6 +243,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'import static org.bad.BadUtil.*', messageText:'org.bad'] )
     }
 
+    @Test
     void testMultiplePackageNames_SingleViolation() {
         final SOURCE = '''
             class MyClass {
@@ -237,6 +256,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'com.example.service.MyService myService', messageText:'com.example.service'])
     }
 
+    @Test
     void testMultiplePackageNames_MultipleViolations() {
         final SOURCE = '''
             class MyHashMap extends org.bad.HashMap {
@@ -250,6 +270,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'int getCount(com.example.Widget widget) { return widget.count }', messageText:'com.example'] )
     }
 
+    @Test
     void testMultiplePackageNames_Wildcards_MultipleViolations() {
         final SOURCE = '''
             import com.example.ExampleHelper
@@ -265,6 +286,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'int getCount(org.bad.widget.Widget widget) { return widget.count }', messageText:'org.bad'] )
     }
 
+    @Test
     void testAnonymousInnerClass_KnownIssue_NoViolation() {
         final SOURCE = '''
             def x = new org.bad.Handler() { }

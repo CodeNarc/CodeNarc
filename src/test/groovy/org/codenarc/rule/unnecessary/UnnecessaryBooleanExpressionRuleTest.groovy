@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryBooleanExpressionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryBooleanExpression'
     }
 
+    @Test
     void testApplyTo_AndOr_WithTrueOrFalse_IsAViolation() {
         final SOURCE = '''
             def ready = value && true
@@ -51,6 +54,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:10, sourceLineText:'result = false && value'])
     }
 
+    @Test
     void testApplyTo_AndOr_WithBooleanTrueOrFalse_IsAViolation() {
         final SOURCE = '''
             def ready = value && Boolean.TRUE
@@ -72,6 +76,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:10, sourceLineText:'result = Boolean.FALSE && value'])
     }
 
+    @Test
     void testApplyTo_AndOr_WithMapLiteral_IsAViolation() {
         final SOURCE = '''
             result = value && [:]
@@ -82,6 +87,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'result = [a:123] || value'])
     }
 
+    @Test
     void testApplyTo_AndOr_WithListLiteral_IsAViolation() {
         final SOURCE = '''
             result = value && []
@@ -92,6 +98,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'result = [x, y, z] || value'])
     }
 
+    @Test
     void testApplyTo_AndOr_WithNumberLiteral_IsAViolation() {
         final SOURCE = '''
             result = value && 19
@@ -102,6 +109,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'result = 67.898 || value'])
     }
 
+    @Test
     void testApplyTo_AndOr_WithStringLiteral_IsAViolation() {
         final SOURCE = '''
             result = value && ""
@@ -112,6 +120,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:"result = 'abcdef' || value"])
     }
 
+    @Test
     void testApplyTo_AndOr_WithNull_IsAViolation() {
         final SOURCE = '''
             result = value && null
@@ -122,6 +131,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'result = null || value'])
     }
 
+    @Test
     void testApplyTo_AndOr_NotWithTrueOrFalse_NoViolations() {
         final SOURCE = '''
             def ready = value && other
@@ -133,6 +143,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_OtherOperators_WithTrueOrFalse_NoViolations() {
         final SOURCE = '''
             def ready = value == true
@@ -142,6 +153,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NegatingABoolean_IsAViolation() {
         final SOURCE = '''
             def ready = !true
@@ -156,6 +168,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'println !Boolean.TRUE'])
     }
 
+    @Test
     void testApplyTo_NegatingAConstantLiteral_IsAViolation() {
         final SOURCE = '''
             def ready = !"abc"
@@ -172,6 +185,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:6, sourceLineText:'result = !null'])
     }
 
+    @Test
     void testApplyTo_NegatingNonConstant_NoViolations() {
         final SOURCE = '''
             result = !abc

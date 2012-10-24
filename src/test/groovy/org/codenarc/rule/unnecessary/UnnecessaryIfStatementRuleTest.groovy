@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryIfStatementRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryIfStatement'
@@ -32,6 +34,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
 
     // Tests for explicit return of true/false
 
+    @Test
     void testApplyTo_ReturnTrueAndFalse_IsAViolation() {
         final SOURCE = '''
             if (expression1) return true else return false
@@ -46,6 +49,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'if (expression4)'])
     }
 
+    @Test
     void testApplyTo_ReturnFalseAndTrue_IsAViolation() {
         final SOURCE = '''
             if (expression1) return false else return true
@@ -56,6 +60,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'if (expression2)'] )
     }
 
+    @Test
     void testApplyTo_ReturnTrueFalse_WithBraces_IsAViolation() {
         final SOURCE = '''
             if (expression1) { return true } else { return false }
@@ -68,6 +73,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'if (expression3)'])
     }
 
+    @Test
     void testApplyTo_MultipleStatementBlocks_NotAViolation() {
         final SOURCE = '''
             if (expression1) { println 123; return true } else { return false }
@@ -80,6 +86,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReturnOtherValues_NotAViolation() {
         final SOURCE = '''
             if (someExpression) return 67 else return false
@@ -90,6 +97,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoElseBlock_NotAViolation() {
         final SOURCE = '''
             if (someExpression) return true
@@ -101,6 +109,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
 
     // Tests for implicit return of true/false (last statement in a block)
 
+    @Test
     void testApplyTo_ImplicitReturnAtEndOfMethod_TrueAndFalse_IsAViolation() {
         final SOURCE = '''
             def isSpellingCorrect(word) {
@@ -117,6 +126,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
 
     // Tests for if/else blocks that are merely constant or literal expressions (not at the end of a block)
 
+    @Test
     void testApplyTo_NotLastStatement_IfBlockIsOnlyAConstantExpression_IsAViolation() {
         final SOURCE = '''
             def myClosure = {
@@ -134,6 +144,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             8, 'if (ready) 123', 'if block')
     }
 
+    @Test
     void testApplyTo_NotLastStatement_ElseBlockIsOnlyAConstantExpression_IsAViolation() {
         final SOURCE = '''
             String myMethod() {
@@ -147,6 +158,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, '} else [a:123, b:456]', 'else block')
     }
 
+    @Test
     void testApplyTo_NotLastStatement_IfAndElseBlocksAreOnlyAConstantExpressions_IsAViolation() {
         final SOURCE = '''
             Object myMethod() {
@@ -164,6 +176,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
             6, '} else {', 'else block')
     }
 
+    @Test
     void testApplyTo_IfElseStatement_LastStatement_IfBlockAndElseBlocksAreOnlyConstantExpressions_NotAViolation() {
         final SOURCE = '''
             String myMethod() {
@@ -176,6 +189,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
 
     // Tests for if statements that do not apply for this rule
 
+    @Test
     void testApplyTo_MethodCalls_NotAViolation() {
         final SOURCE = '''
             if (someExpression) doStep1(); else doStep2()
@@ -184,6 +198,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_EmptyBlocks_NotAViolation() {
         final SOURCE = '''
             if (someExpression) {}

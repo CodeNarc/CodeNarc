@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UseAssertNullInsteadOfAssertEqualsRule
@@ -25,14 +26,17 @@ import org.codenarc.rule.Rule
   */
 class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UseAssertNullInsteadOfAssertEquals'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
+    @Test
                 void testMethod() {
                     assertEquals(1, foo())
                     assertTrue(foo())
@@ -45,6 +49,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNullInAssertEquals() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
@@ -59,6 +64,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
                 5, 'assertEquals(foo(), null)')
     }
 
+    @Test
     void testNullInAssertEqualsWithMessage() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {

@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConfusingMethodNameRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ConfusingMethodName'
     }
 
+    @Test
     void testNoViolations() {
         final SOURCE = '''
         	def foo() {}
@@ -62,6 +65,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void test2MethodViolationsInScript() {
         final SOURCE = '''
         	def foo() {}
@@ -74,6 +78,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 5, 'def foO() {}')
     }
 
+    @Test
     void test2ClosureViolationsInScript() {
         final SOURCE = '''
         	def foo = {}
@@ -99,6 +104,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
 //                5, 'def foO = {}')
 //    }
 
+    @Test
     void test2ViolationsInClass() {
         final SOURCE = '''
             class MyClass {
@@ -112,6 +118,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 5, 'def foO() {}')
     }
 
+    @Test
     void test2ViolationsInClassWithOverloading() {
         final SOURCE = '''
             class MyClass {
@@ -126,6 +133,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 6, 'def foO(int x) {}')
     }
 
+    @Test
     void test2ViolationsInNestedClasses() {
         final SOURCE = '''
             class MyClass {
@@ -143,6 +151,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 7, 'def innerFoo() {}') // this seems out of order but is correct
     }
 
+    @Test
     void testDeepNesting() {
         final SOURCE = '''
         	def foo() {}
@@ -166,6 +175,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 13, 'def foO() {}')
     }
 
+    @Test
     void testViolatingFieldNameAndMethodName() {
         final SOURCE = '''
             class Totaller {
@@ -177,6 +187,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'int total', 'The method name total is similar to the field name total')
     }
 
+    @Test
     void test2ViolatingFieldNameAndMethodNames() {
         final SOURCE = '''
             class MyClass {

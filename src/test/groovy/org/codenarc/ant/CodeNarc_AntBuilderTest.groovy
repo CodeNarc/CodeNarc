@@ -16,6 +16,7 @@
 package org.codenarc.ant
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertContainsAllInOrder
 
@@ -37,6 +38,7 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
             'rulesets/basic.xml',
             'rulesets/imports.xml'].join(',')
 
+    @Test
     void testAntTask_Execute_UsingAntBuilder() {
         def ant = new AntBuilder()
 

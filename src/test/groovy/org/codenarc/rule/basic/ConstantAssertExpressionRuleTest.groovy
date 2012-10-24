@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConstantAssertExpressionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ConstantAssertExpression'
     }
 
+    @Test
     void testApplyTo_True_IsAViolation() {
         final SOURCE = '''
             assert true
@@ -40,6 +43,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
             3, 'assert Boolean.TRUE', 'Boolean.TRUE')
     }
 
+    @Test
     void testApplyTo_False_IsAViolation() {
         final SOURCE = '''
             assert false
@@ -50,6 +54,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
             3, 'assert Boolean.FALSE', 'Boolean.FALSE')
     }
 
+    @Test
     void testApplyTo_Null_IsAViolation() {
         final SOURCE = '''
             assert null
@@ -57,6 +62,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'assert null', 'null')
     }
 
+    @Test
     void testApplyTo_StringLiteral_IsAViolation() {
         final SOURCE = '''
             assert 'abc'
@@ -67,6 +73,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
             3, 'assert ""', '')
     }
 
+    @Test
     void testApplyTo_NumberLiteral_IsAViolation() {
         final SOURCE = '''
             class MyClass {
@@ -81,6 +88,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
             5, 'assert 0', ['0', 'MyClass'])
     }
 
+    @Test
     void testApplyTo_MapLiteral_IsAViolation() {
         final SOURCE = '''
             assert [:]
@@ -91,6 +99,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
             3, 'assert [a:123, b:456]', '[a:123, b:456]')
     }
 
+    @Test
     void testApplyTo_ListLiteral_IsAViolation() {
         final SOURCE = '''
             assert []
@@ -101,6 +110,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
             3, 'assert [a, 456]', '[a, 456]')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             class MyClass {

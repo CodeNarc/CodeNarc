@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryCollectCallRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryCollectCall'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
                 // OK, is not method call in closure
@@ -62,6 +65,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSimpleCaseImplicitItParameter() {
         final SOURCE = '''
             assert [1, 2, 3].collect {
@@ -71,6 +75,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '[1, 2, 3].collect', 'The call to collect could probably be rewritten as a spread expression: [1, 2, 3]*.multiply(2)')
     }
 
+    @Test
     void testSimpleCaseNamedParameter() {
         final SOURCE = '''
             assert [1, 2, 3].collect { x -> 
@@ -80,6 +85,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '[1, 2, 3].collect', 'The call to collect could probably be rewritten as a spread expression: [1, 2, 3]*.multiply(2)')
     }
 
+    @Test
     void testPropertyExpression() {
         final SOURCE = '''
             ["1", "2", "3"].collect {

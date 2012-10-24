@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryFloatInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryFloatInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             assert 0.42f == foo()
@@ -39,6 +42,7 @@ class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringConstructor() {
         final SOURCE = '''
             new Float("42.10")
@@ -46,6 +50,7 @@ class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Float("42.10")', 'Can be rewritten as 42.10f')
     }
 
+    @Test
     void testDoubleConstructor() {
         final SOURCE = '''
             new Float(42.10d)
@@ -53,6 +58,7 @@ class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Float(42.10d)', 'Can be rewritten as 42.1f')
     }
 
+    @Test
     void testFloatConstructor() {
         final SOURCE = '''
             new Float(42.10f)

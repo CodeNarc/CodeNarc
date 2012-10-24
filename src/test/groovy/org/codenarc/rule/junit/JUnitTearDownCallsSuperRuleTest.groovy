@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitTearDownCallsSuperRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JUnitTearDownCallsSuper'
     }
 
+    @Test
     void testApplyTo_TearDownCallsSuperTearDown() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -42,6 +45,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_TearDownDoesNotCallSuperTearDown() {
         final SOURCE = '''
           class MyTestCase extends TestCase {
@@ -53,6 +57,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
+    @Test
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsSuperTearDownWithParameters() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -66,6 +71,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
+    @Test
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsSuper() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -78,6 +84,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
+    @Test
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsTearDown() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -90,6 +97,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
+    @Test
     void testApplyTo_NonTestClass() {
         final SOURCE = '''
           class MyClass {
@@ -100,6 +108,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonTestFile_TearDownMethodHasAfterAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -109,6 +118,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonTearDownMethod() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -119,6 +129,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_TearDownMethodHasParameters() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -129,6 +140,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoMethodDefinition() {
         final SOURCE = '''
             class MyTest extends TestCase {

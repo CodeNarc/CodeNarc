@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessarySubstringRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessarySubstringRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessarySubstring'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             myVar[5..-1]
@@ -43,6 +46,7 @@ class UnnecessarySubstringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testOneParmSubstring() {
         final SOURCE = '''
             myVar.substring(5)
@@ -50,6 +54,7 @@ class UnnecessarySubstringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'myVar.substring(5)', 'The String.substring(int) method can be replaced with the subscript operator')
     }
 
+    @Test
     void testTwoParmSubstring() {
         final SOURCE = '''
             myVar.substring(1, 5)

@@ -18,6 +18,7 @@ package org.codenarc.ruleset
 import org.codenarc.rule.Rule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -32,43 +33,51 @@ class RuleSetUtilTest extends AbstractTestCase {
     private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'
     private static final RULE_SCRIPT_FILE_URL = 'file:src/test/resources/rule/DoNothingRule.txt'
 
+    @Test
     void testAssertClassImplementsRuleInterface_RuleClass() {
         RuleSetUtil.assertClassImplementsRuleInterface(CatchThrowableRule)
     }
 
+    @Test
     void testAssertClassImplementsRuleInterface_NotARuleClass() {
         shouldFailWithMessageContaining('Rule interface') {
             RuleSetUtil.assertClassImplementsRuleInterface(this.class)
         }
     }
 
+    @Test
     void testAssertClassImplementsRuleInterface_Null() {
         shouldFailWithMessageContaining('ruleClass') {
             RuleSetUtil.assertClassImplementsRuleInterface(null)
         }
     }
 
+    @Test
     void testLoadRuleSetFile() {
         assert RuleSetUtil.loadRuleSetFile(RULESET_GROOVY_FILE).class == GroovyDslRuleSet
         assert RuleSetUtil.loadRuleSetFile(RULESET_XML_FILE).class == XmlFileRuleSet
     }
 
+    @Test
     void testLoadRuleScriptFile() {
         def rule = RuleSetUtil.loadRuleScriptFile(RULE_SCRIPT_FILE)
         assert rule instanceof Rule
         assert rule.name == 'DoNothing'
     }
 
+    @Test
     void testLoadRuleScriptFile_FileUrl() {
         def rule = RuleSetUtil.loadRuleScriptFile(RULE_SCRIPT_FILE_URL)
         assert rule instanceof Rule
         assert rule.name == 'DoNothing'
     }
 
+    @Test
     void testLoadRuleScriptFile_NotARule() {
         shouldFailWithMessageContaining('Rule') { RuleSetUtil.loadRuleScriptFile('rule/NotARule.txt') }
     }
 
+    @Test
     void testLoadRuleScriptFile_FileNotFound() {
         shouldFailWithMessageContaining('DoesNotExist.txt') { RuleSetUtil.loadRuleScriptFile('DoesNotExist.txt') }
     }

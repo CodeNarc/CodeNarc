@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryDoubleInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryDoubleInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryDoubleInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             assert 0.42d == foo()
@@ -39,6 +42,7 @@ class UnnecessaryDoubleInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringConstructor() {
         final SOURCE = '''
             new Double("42.10")
@@ -46,6 +50,7 @@ class UnnecessaryDoubleInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Double("42.10")', 'Can be rewritten as 42.10d')
     }
 
+    @Test
     void testDoubleConstructor() {
         final SOURCE = '''
             new Double(42.10d)

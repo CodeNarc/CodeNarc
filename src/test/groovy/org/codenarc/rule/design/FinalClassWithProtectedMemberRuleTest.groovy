@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for FinalClassWithProtectedMemberRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'FinalClassWithProtectedMember'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	final class MyClass1 {
@@ -52,6 +55,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMethodFailure() {
         final SOURCE = '''
         	final class MyClass {
@@ -64,6 +68,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
                 'The method methodName has protected visibility but the enclosing class MyClass is marked final')
     }
 
+    @Test
     void testFieldFailure() {
         final SOURCE = '''
         	final class MyClass {
@@ -76,6 +81,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
                 'The field closure has protected visibility but the enclosing class MyClass is marked final')
     }
 
+    @Test
     void testPropertyFailure() {
         final SOURCE = '''
         	final class MyClass {

@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ChainedTestRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ChainedTestRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ChainedTest'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -51,6 +54,7 @@ class ChainedTestRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSelfCallImpliedThis() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -62,6 +66,7 @@ class ChainedTestRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'testBar()', 'The test method testBar() is being invoked explicitly from within a unit test. Tests should be isolated and not dependent on one another')
     }
 
+    @Test
     void testSelfCallExplicitThis() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -73,6 +78,7 @@ class ChainedTestRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'this.testBar()', 'The test method testBar() is being invoked explicitly from within a unit test. Tests should be isolated and not dependent on one another')
     }
 
+    @Test
     void testCallsInHelperMethods() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {

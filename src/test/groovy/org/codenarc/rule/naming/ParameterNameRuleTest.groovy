@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -27,11 +28,13 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class ParameterNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ParameterName'
     }
 
+    @Test
     void testRegex_DefaultValue() {
         assert 'abc' ==~ rule.regex
         assert 'aXaX123' ==~ rule.regex
@@ -40,11 +43,13 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assert !('ABC123abc' ==~ rule.regex)
     }
 
+    @Test
     void testRegexIsNull() {
         rule.regex = null
         shouldFailWithMessageContaining('regex') { applyRuleTo('def myMethod(int count) { }') }
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -54,6 +59,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount', 'The parameter named deposit_amount in method myMethod of class MyClass does not match [a-z][a-zA-Z0-9]*')
     }
 
+    @Test
     void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -63,6 +69,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchCustomRegex() {
         final SOURCE = '''
             class MyClass {
@@ -73,6 +80,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'int count')
     }
 
+    @Test
     void testApplyTo_MatchesCustomRegex() {
         final SOURCE = '''
             class MyClass {
@@ -83,6 +91,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Final_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -92,6 +101,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'final BigDecimal deposit_amount')
     }
 
+    @Test
     void testApplyTo_Constructor_MatchesDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -101,6 +111,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Constructor_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -110,11 +121,13 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex_NoClassDefined() {
         final SOURCE = 'def myMethod(int Count = 23) { }'
         assertSingleViolation(SOURCE, 1, 'int Count = 23')
     }
 
+    @Test
     void testApplyTo_Closure_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
             class MyClass {
@@ -126,6 +139,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'int Count = 23')
     }
 
+    @Test
     void testApplyTo_ClosureAndConstructor() {
         final SOURCE = '''
             class MyClass {
@@ -138,6 +152,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'BigDecimal deposit_amount', 4, 'int Count = 23')
     }
 
+    @Test
     void testApplyTo_IgnoreParametersNames_MatchesSingleName() {
         final SOURCE = '''
             class MyClass {
@@ -148,6 +163,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreParameterNames_MatchesNoNames() {
         final SOURCE = '''
             class MyClass {
@@ -158,6 +174,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
     }
 
+    @Test
     void testApplyTo_IgnoreParameterNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
             class MyClass {
@@ -171,6 +188,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'BigDecimal deposit_amount')
     }
 
+    @Test
     void testApplyTo_NoParameterDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

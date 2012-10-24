@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SpockIgnoreRestUsedRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SpockIgnoreRestUsed'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             public class MySpec extends spock.lang.Specification {
@@ -50,6 +53,7 @@ class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessWithNonSpecificationClass() {
         final SOURCE = '''
             public class SomeFancyClass  { // I'm not a spec
@@ -70,6 +74,7 @@ class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''\
             import spock.lang.*
@@ -91,6 +96,7 @@ class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'def "my first feature"() {', "The method 'my first feature' in class MySpec uses @IgnoreRest")
     }
 
+    @Test
     void testSingleViolationFullSpecificationClassName() {
         final SOURCE = '''\
             public class MySpec extends spock.lang.Specification {

@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EqualsOverloadedRule
@@ -28,11 +29,13 @@ import org.codenarc.rule.Rule
  */
 class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EqualsOverloaded'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class Person {
@@ -49,6 +52,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
     }
 
     // TODO: WHen we have more type information then this can be moved to a passing test.
+    @Test
     void testFalsePositive() {
         final SOURCE = '''
             import java.lang.Object as Foo
@@ -60,6 +64,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'boolean equals(Foo other)')
     }
 
+    @Test
     void testSingleParameter() {
         final SOURCE = '''
         	class Person {
@@ -69,6 +74,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'equals(String other)', 'The class Person overloads the equals method, it does not override it.')
     }
 
+    @Test
     void testDoubleParameter() {
         final SOURCE = '''
         	class Widget {
@@ -78,6 +84,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'equals(Object other, String other2)', 'The class Widget overloads the equals method, it does not override it.')
     }
 
+    @Test
     void testNoParameters() {
         final SOURCE = '''
         	class Person {

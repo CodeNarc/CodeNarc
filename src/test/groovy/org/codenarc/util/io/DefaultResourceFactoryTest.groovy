@@ -16,6 +16,8 @@
 package org.codenarc.util.io
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -29,23 +31,28 @@ class DefaultResourceFactoryTest extends AbstractTestCase {
     private static final PATH = 'src/test/resources/resource/SampleResource.txt'
     private resourceFactory
 
+    @Test
     void testConstructor_NullOrEmpty() {
         shouldFailWithMessageContaining('path') { resourceFactory.getResource(null) }
         shouldFailWithMessageContaining('path') { resourceFactory.getResource('') }
     }
 
+    @Test
     void testGetResource_NoPrefix() {
         assertResourceTypeAndLocation(PATH, ClassPathResource)
     }
 
+    @Test
     void testGetResource_HttpPrefix() {
         assertResourceTypeAndLocation('http://codenarc.org', UrlResource)
     }
 
+    @Test
     void testGetResource_FtpPrefix() {
         assertResourceTypeAndLocation('ftp://codenarc.org', UrlResource)
     }
 
+    @Test
     void testGetResource_ClassPathPrefix() {
         assertResourceTypeAndLocation('classpath:' + PATH, ClassPathResource, PATH)
     }
@@ -56,8 +63,8 @@ class DefaultResourceFactoryTest extends AbstractTestCase {
         assert resource.getPath() == expectedResourcePath
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpDefaultResourceFactoryTest() {
         resourceFactory = new DefaultResourceFactory()
     }
 }

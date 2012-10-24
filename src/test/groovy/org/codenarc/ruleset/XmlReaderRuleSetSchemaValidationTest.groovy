@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -31,11 +32,13 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
         xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd" '''
 
+    @Test
     void testIllegalTopLevelElement() {
         final XML = '<ruleset2></ruleset2>'
         assertSchemaValidationError(XML, 'ruleset2')
     }
 
+    @Test
     void testNoNamespaceDeclaration() {
         final XML = """
             <ruleset>
@@ -44,6 +47,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'ruleset')
     }
 
+    @Test
     void testIllegalRuleSetChildElement() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -53,6 +57,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleChildElement() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -64,6 +69,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleAttribute() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -72,6 +78,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleScriptChildElement() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -83,6 +90,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleScriptAttribute() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -91,6 +99,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalPropertyAttribute() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -101,6 +110,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleSetRefChildElement() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -111,6 +121,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleSetRefAttribute() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -119,6 +130,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalIncludeAttribute() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -129,6 +141,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalExcludeAttribute() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -139,6 +152,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleConfigAttribute() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -149,6 +163,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleConfigChildElement() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -161,6 +176,7 @@ class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
         assertSchemaValidationError(XML, 'other')
     }
 
+    @Test
     void testIllegalRuleConfigPropertyAttribute() {
         final XML = """
             <ruleset $NAMESPACE>

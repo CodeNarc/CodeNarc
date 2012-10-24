@@ -21,6 +21,8 @@ import org.codenarc.results.Results
 import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.captureSystemOut
 
@@ -39,18 +41,21 @@ class AbstractReportWriterTest extends AbstractTestCase {
     private static final CONTENTS = 'abc'
     private TestAbstractReportWriter reportWriter
 
+    @Test
     void testWriteReport_WritesToDefaultOutputFile_IfOutputFileIsNull() {
         def defaultOutputFile = TestAbstractReportWriter.defaultOutputFile
         reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         assertOutputFile(defaultOutputFile)
     }
 
+    @Test
     void testWriteReport_WritesToOutputFile_IfOutputFileIsDefined() {
         reportWriter.outputFile = CUSTOM_FILENAME
         reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         assertOutputFile(CUSTOM_FILENAME)
     }
 
+    @Test
     void testWriteReport_CreatesOutputDirectoryIfItDoesNotExist() {
         def outputDir = new File(NEW_OUTPUT_DIR)
         outputDir.delete()
@@ -62,6 +67,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
         outputDir.delete()
     }
 
+    @Test
     void testWriteReport_WritesToStandardOut_IfWriteToStandardOutIsTrue_String() {
         reportWriter.outputFile = CUSTOM_FILENAME
         reportWriter.writeToStandardOut = 'true'
@@ -72,6 +78,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert output == CONTENTS
     }
 
+    @Test
     void testWriteReport_WritesToStandardOut_IfWriteToStandardOutIsTrue() {
         reportWriter.outputFile = CUSTOM_FILENAME
         reportWriter.writeToStandardOut = true
@@ -82,6 +89,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert output == CONTENTS
     }
 
+    @Test
     void testWriteReport_WritesToStandardOut_AndResetsSystemOut() {
         def originalSystemOut = System.out
         reportWriter.writeToStandardOut = true
@@ -89,6 +97,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert System.out == originalSystemOut
     }
 
+    @Test
     void testWriteReport_WritesToOutputFile_IfWriteToStandardOutIsNotTrue() {
         reportWriter.outputFile = CUSTOM_FILENAME
         reportWriter.writeToStandardOut = 'false'
@@ -96,12 +105,14 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assertOutputFile(CUSTOM_FILENAME)
     }
 
+    @Test
     void testInitializeResourceBundle_CustomMessagesFileExists() {
         reportWriter.initializeResourceBundle()
         assert reportWriter.getResourceBundleString('htmlReport.titlePrefix', null)   // in "codenarc-base-messages.properties"
         assert reportWriter.getResourceBundleString('abc', null)                      // in "codenarc-messages.properties"
     }
 
+    @Test
     void testInitializeResourceBundle_CustomMessagesFileDoesNotExist() {
         reportWriter.customMessagesBundleName = 'DoesNotExist'
         reportWriter.initializeResourceBundle()
@@ -109,70 +120,82 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert reportWriter.getResourceBundleString('abc') == DEFAULT_STRING
     }
 
+    @Test
     void testGetResourceBundleString() {
         reportWriter.initializeResourceBundle()
         assert reportWriter.getResourceBundleString('abc') == '123'
     }
 
+    @Test
     void testGetResourceBundleString_ReturnsDefaultStringIfKeyNotFound() {
         reportWriter.initializeResourceBundle()
         assert reportWriter.getResourceBundleString('DoesNotExist') == DEFAULT_STRING
     }
 
+    @Test
     void testGetDescriptionForRule_RuleDescriptionFoundInMessagesFile() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'MyRuleXX')
         assert reportWriter.getDescriptionForRule(rule) == 'My Rule XX'
     }
 
+    @Test
     void testGetDescriptionForRule_DescriptionPropertySetOnRuleObject() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'MyRuleXX', description:'xyz')
         assert reportWriter.getDescriptionForRule(rule) == 'xyz'
     }
 
+    @Test
     void testGetDescriptionForRule_DescriptionContainsSubstitutionParameters() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name: 'MyRuleXX', priority: 3, description: 'xyz.${rule.name}.${rule.priority}')
         assert reportWriter.getDescriptionForRule(rule) == 'xyz.MyRuleXX.3'
     }
 
+    @Test
     void testGetDescriptionForRule_RuleDescriptionNotFoundInMessagesFile() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'Unknown')
         assert reportWriter.getDescriptionForRule(rule).startsWith('No description provided')
     }
 
+    @Test
     void testGetHtmlDescriptionForRule_HtmlRuleDescriptionFoundInMessagesFile() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'MyRuleXX')
         assert reportWriter.getHtmlDescriptionForRule(rule) == 'HTML Rule XX'
     }
 
+    @Test
     void testGetHtmlDescriptionForRule_OnlyRuleDescriptionFoundInMessagesFile() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'MyRuleYY')
         assert reportWriter.getHtmlDescriptionForRule(rule) == 'My Rule YY'
     }
 
+    @Test
     void testGetHtmlDescriptionForRule_DescriptionPropertySetOnRuleObject() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'MyRuleXX', description:'xyz')
         assert reportWriter.getHtmlDescriptionForRule(rule) == 'xyz'
     }
 
+    @Test
     void testGetHtmlDescriptionForRule_DescriptionContainsSubstitutionParameters() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name: 'MyRuleXX', priority: 3, description: 'xyz.${rule.name}.${rule.priority}')
         assert reportWriter.getHtmlDescriptionForRule(rule) == 'xyz.MyRuleXX.3'
     }
 
+    @Test
     void testGetHtmlDescriptionForRule_NoRuleDescriptionNotFoundInMessagesFile() {
         reportWriter.initializeResourceBundle()
         def rule = new StubRule(name:'Unknown')
         assert reportWriter.getHtmlDescriptionForRule(rule).startsWith('No description provided')
     }
 
+    @Test
     void testGetFormattedTimestamp() {
         def timestamp = new Date(1262361072497)
         reportWriter.getTimestamp = { timestamp }
@@ -180,6 +203,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert reportWriter.getFormattedTimestamp() == expected
     }
 
+    @Test
     void testGetSortedRules() {
         def ruleSet = new ListRuleSet([new StubRule(name:'BB'), new StubRule(name:'AA'), new StubRule(name:'DD'), new StubRule(name:'CC')])
         def analysisContext = new AnalysisContext(ruleSet:ruleSet)
@@ -188,6 +212,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert sorted.name == ['AA', 'BB', 'CC', 'DD']
     }
 
+    @Test
     void testGetSortedRules_RemovesDisabledRules() {
         def ruleSet = new ListRuleSet([new StubRule(name:'BB', enabled:false), new StubRule(name:'AA'), new StubRule(name:'DD'), new StubRule(name:'CC', enabled:false)])
         def analysisContext = new AnalysisContext(ruleSet:ruleSet)
@@ -196,12 +221,13 @@ class AbstractReportWriterTest extends AbstractTestCase {
         assert sorted.name == ['AA', 'DD']
     }
 
+    @Test
     void testGetCodeNarcVersion() {
         assert reportWriter.getCodeNarcVersion() == new File('src/main/resources/codenarc-version.txt').text
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpAbstractReportWriterTest() {
         reportWriter = new TestAbstractReportWriter()
     }
 

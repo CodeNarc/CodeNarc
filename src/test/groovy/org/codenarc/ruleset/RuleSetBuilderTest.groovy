@@ -21,6 +21,8 @@ import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.ruleregistry.RuleRegistry
 import org.codenarc.ruleregistry.RuleRegistryHolder
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -37,6 +39,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
     private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'
     private ruleSetBuilder
 
+    @Test
     void testRuleset_NullFilename() {
         shouldFailWithMessageContaining('path') { 
             ruleSetBuilder.ruleset {
@@ -45,6 +48,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleset_XmlFile_RuleSetFileDoesNotExist() {
         shouldFailWithMessageContaining('DoesNotExist.xml') {
             ruleSetBuilder.ruleset {
@@ -53,6 +57,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleset_XmlFile_GroovyRuleSetFileDoesNotExist() {
         shouldFailWithMessageContaining('DoesNotExist.groovy') {
             ruleSetBuilder.ruleset {
@@ -61,6 +66,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleset_XmlFile_NoClosure() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_XML_FILE1)
@@ -68,6 +74,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames('TestPath')
     }
 
+    @Test
     void testRuleset_XmlFile_Exclude() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_XML_FILE1) {
@@ -77,6 +84,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames()
     }
 
+    @Test
     void testRuleset_XmlFile_Include() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_XML_FILE2) {
@@ -87,6 +95,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames('CatchThrowable', 'EmptyTryBlock')
     }
 
+    @Test
     void testRuleset_XmlFile_ConfigureRuleUsingMap() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_XML_FILE2) {
@@ -98,6 +107,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
     }
 
+    @Test
     void testRuleset_XmlFile_ConfigureRuleUsingMap_RuleNotFound() {
         shouldFailWithMessageContaining('NotFound') { 
             ruleSetBuilder.ruleset {
@@ -108,6 +118,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleset_XmlFile_ConfigureRuleUsingClosure() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_XML_FILE2) {
@@ -122,6 +133,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
     }
 
+    @Test
     void testRuleset_XmlFile_ConfigureRuleUsingClosure_RuleNotFound() {
         shouldFailWithMessageContaining('NotFound') {
             ruleSetBuilder.ruleset {
@@ -135,6 +147,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleset_XmlFile_ConfigureRuleUsingClosure_RuleWasMovedToAnotherRuleSet() {
         shouldFailWithMessageContaining('design') {
             ruleSetBuilder.ruleset {
@@ -145,6 +158,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleset_GroovyFile_NoClosure() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_GROOVY_FILE1)
@@ -152,6 +166,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames('CatchThrowable', 'ThrowExceptionFromFinallyBlock')
     }
 
+    @Test
     void testRuleset_GroovyFile_ConfigureRuleUsingClosure() {
         ruleSetBuilder.ruleset {
             ruleset(RULESET_GROOVY_FILE1) {
@@ -166,6 +181,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
     }
 
+    @Test
     void testRule_Class_NoClosure() {
         ruleSetBuilder.ruleset {
             rule CatchThrowableRule
@@ -173,6 +189,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames('CatchThrowable')
     }
 
+    @Test
     void testRule_Class_NoClosure_NullRuleClass() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
@@ -181,6 +198,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRule_Class_NoClosure_ClassDoesNotImplementRuleInterface() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
@@ -189,6 +207,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRule_Class_Closure() {
         ruleSetBuilder.ruleset {
             rule(CatchThrowableRule) {
@@ -200,6 +219,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
     }
 
+    @Test
     void testRule_Class_Map() {
         ruleSetBuilder.ruleset {
             rule(CatchThrowableRule, [priority:1, enabled:false])
@@ -208,6 +228,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('CatchThrowable', [priority:1, enabled:false])
     }
 
+    @Test
     void testRule_Class_Closure_SetNonExistentProperty() {
         shouldFailWithMessageContaining('doesNotExist') {
             ruleSetBuilder.ruleset {
@@ -218,6 +239,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRule_Class_Closure_NullRuleClass() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
@@ -228,6 +250,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRule_Class_Closure_ClassDoesNotImplementRuleInterface() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
@@ -238,6 +261,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRule_Script_NoClosure() {
         ruleSetBuilder.ruleset {
             rule RULE_SCRIPT_FILE
@@ -245,6 +269,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames('DoNothing')
     }
 
+    @Test
     void testRule_Script_NoClosure_ClassDoesNotImplementRuleInterface() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
@@ -253,6 +278,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRule_Script_Closure() {
         ruleSetBuilder.ruleset {
             def scriptPath = RULE_SCRIPT_FILE
@@ -265,6 +291,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('DoNothing', [priority:1, enabled:false])
     }
 
+    @Test
     void testRuleNameOnly_EmptyParentheses() {
         RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
         ruleSetBuilder.ruleset {
@@ -273,6 +300,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames('ClassName')
     }
 
+    @Test
     void testRuleNameOnly_ParenthesesWithMap() {
         RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
         ruleSetBuilder.ruleset {
@@ -281,6 +309,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleProperties('ClassName', [priority:1, enabled:true])
     }
 
+    @Test
     void testRuleNameOnly_NoParenthesesOrClosure() {
         RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
         ruleSetBuilder.ruleset {
@@ -289,6 +318,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         assertRuleNames('ClassName')
     }
 
+    @Test
     void testRuleNameOnly_NoSuchRuleName() {
         RuleRegistryHolder.ruleRegistry = null
         shouldFailWithMessageContaining('ClassName') {
@@ -298,6 +328,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleNameOnly_NoParentheses_NoSuchRuleName() {
         RuleRegistryHolder.ruleRegistry = null
         shouldFailWithMessageContaining('ClassName') {
@@ -307,6 +338,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleNameOnly_RuleWasMovedToAnotherRuleSet() {
         RuleRegistryHolder.ruleRegistry = null
         shouldFailWithMessageContaining('design') {
@@ -316,6 +348,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleNameOnly_NoParentheses_Closure_RuleWasMovedToAnotherRuleSet() {
         RuleRegistryHolder.ruleRegistry = null
         shouldFailWithMessageContaining('design') {
@@ -325,6 +358,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleNameOnly_NoParentheses_NoClosure_RuleWasMovedToAnotherRuleSet() {
         RuleRegistryHolder.ruleRegistry = null
         shouldFailWithMessageContaining('design') {
@@ -336,6 +370,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testRuleNameOnly_Closure() {
         RuleRegistryHolder.ruleRegistry = [getRuleClass:{ ClassNameRule }] as RuleRegistry
         ruleSetBuilder.ruleset {
@@ -351,6 +386,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
     }
 
     @SuppressWarnings('JUnitTestMethodWithoutAssert')
+    @Test
     void testDescription() {
         // lack of exception indicated success
         ruleSetBuilder.ruleset {
@@ -358,8 +394,8 @@ class RuleSetBuilderTest extends AbstractTestCase {
         }
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpRuleSetBuilderTest() {
         ruleSetBuilder = new RuleSetBuilder()
     }
 

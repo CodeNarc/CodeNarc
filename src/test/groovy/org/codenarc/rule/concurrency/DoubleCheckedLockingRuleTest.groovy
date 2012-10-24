@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DoubleCheckedLockingRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DoubleCheckedLocking'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def result = object
@@ -113,6 +116,7 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testPlainViolation() {
         final SOURCE = '''
             if (object == null) {
@@ -126,6 +130,7 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'object = createObject()', 'Double checked locking detected for variable object. replace with more robust lazy initialization')
     }
 
+    @Test
     void testBackwardIfViolations() {
         final SOURCE = '''
             if (null == object) {
@@ -139,6 +144,7 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'object = createObject()', 'Double checked locking detected for variable object. replace with more robust lazy initialization')
     }
 
+    @Test
     void testNoCompare() {
         final SOURCE = '''
             if (!object) {

@@ -17,6 +17,7 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.containsAll
 
@@ -32,11 +33,13 @@ class RequiredRegexRuleTest extends AbstractRuleTestCase {
 
     private static final REGEX = /\@author Joe/
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'RequiredRegex'
     }
 
+    @Test
     void testRegexIsNull() {
         final SOURCE = 'class MyClass { } '
         rule.regex = null
@@ -44,6 +47,7 @@ class RequiredRegexRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testRegexIsPresent() {
         final SOURCE = '''
             /** @author Joe */
@@ -53,6 +57,7 @@ class RequiredRegexRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testRegexIsNotPresent() {
         final SOURCE = '''
             /** @author Mike */

@@ -18,6 +18,7 @@ package org.codenarc.results
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for DirectoryResults 
@@ -33,6 +34,7 @@ class DirectoryResultsTest extends AbstractTestCase {
     static final VIOLATION4 = new Violation(rule:new StubRule(4))
     static final VIOLATION7 = new Violation(rule:new StubRule(7))
 
+    @Test
     void testNoChildren() {
         def results = new DirectoryResults(PATH)
         assert results.path == PATH
@@ -49,6 +51,7 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert !results.isFile()
     }
 
+    @Test
     void testWithOneChild() {
         def results = new DirectoryResults(PATH)
         assert results.path == PATH
@@ -71,6 +74,7 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getTotalNumberOfFiles(false) == 7
     }
 
+    @Test
     void testWithMultipleChildren() {
         def results = new DirectoryResults(PATH)
         assert results.path == PATH
@@ -108,6 +112,7 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getTotalNumberOfFiles(false) == 3
     }
 
+    @Test
     void testFindResultsForPath() {
         def results = new DirectoryResults(PATH)
         def fileResults1 = new FileResults('file1', [])
@@ -125,6 +130,7 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.findResultsForPath('file2') == fileResults2
     }
 
+    @Test
     void testGetViolations_ReturnsDefensiveCopy() {
         def results = new DirectoryResults(PATH)
         def fileResults = new FileResults('path', [VIOLATION1, VIOLATION3])

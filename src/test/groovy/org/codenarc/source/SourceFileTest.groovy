@@ -16,6 +16,10 @@
 package org.codenarc.source
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
+
+import static org.codenarc.test.TestUtil.shouldFail
 
 /**
  * Tests for SourceFile 
@@ -29,27 +33,33 @@ class SourceFileTest extends AbstractTestCase {
     private sourceFile
     private file
 
+    @Test
     void testImplementsSourceCode() {
         assert sourceFile instanceof SourceCode
     }
 
+    @Test
     void testConstructor_NullPath() {
         shouldFail { new SourceFile(null) }
     }
 
+    @Test
     void testConstructor_EmptyPath() {
         shouldFail { new SourceFile('') }
     }
 
+    @Test
     void testGetName() {
         assert sourceFile.getName() == 'SampleFile.groovy'
     }
 
+    @Test
     void testGetPath() {
         log("path=${sourceFile.path}") 
         assert sourceFile.getPath() == FILE
     }
 
+    @Test
     void testGetText() {
         def text = sourceFile.text
         assert text == new File(FILE).text
@@ -58,6 +68,7 @@ class SourceFileTest extends AbstractTestCase {
         assert sourceFile.text.is(text)
     }
 
+    @Test
     void testGetLines() {
         def lines = sourceFile.lines
         assert lines == ['class SampleFile {', '', '}']
@@ -66,12 +77,14 @@ class SourceFileTest extends AbstractTestCase {
         assert sourceFile.lines.is(lines)
     }
 
+    @Test
     void testLine() {
         assert sourceFile.line(0) ==  'class SampleFile {'
         assert sourceFile.line(-1) ==  null
         assert sourceFile.line(99) ==  null
     }
 
+    @Test
     void testGetAst() {
         def ast = sourceFile.ast
         log("classes=${ast.classes}")
@@ -81,6 +94,7 @@ class SourceFileTest extends AbstractTestCase {
         assert sourceFile.ast.is(ast)
     }
 
+    @Test
     void testGetLineNumberForCharacterIndex() {
         assert sourceFile.getLineNumberForCharacterIndex(0) == 0
         assert sourceFile.getLineNumberForCharacterIndex(1) == 0
@@ -89,13 +103,14 @@ class SourceFileTest extends AbstractTestCase {
         assert sourceFile.getLineNumberForCharacterIndex(-1) == -1
     }
     
+    @Test
     void testIsValid() {
         assert sourceFile.valid
         assert !new SourceFile(new File(INVALID_FILE)).valid
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpSourceFileTest() {
         file = new File(FILE)
         sourceFile = new SourceFile(file)
     }

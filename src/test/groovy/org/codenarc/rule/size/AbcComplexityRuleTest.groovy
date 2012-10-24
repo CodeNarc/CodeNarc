@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for AbcComplexityRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
   */
 class AbcComplexityRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AbcComplexity'
@@ -32,6 +34,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assert rule.maxClassAverageMethodComplexity == 60
     }
 
+    @Test
     void testApplyTo_ClassWithNoMethods() {
         final SOURCE = '''
             class MyClass {
@@ -41,6 +44,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleMethod_EqualToClassAndMethodThreshold() {
         final SOURCE = '''
             class MyClass {
@@ -57,6 +61,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleMethod_ExceedsMaxMethodComplexity() {
         final SOURCE = '''
             class MyClass {
@@ -69,6 +74,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '3.0'])
     }
 
+    @Test
     void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
         final SOURCE = '''
             class MyClass {
@@ -79,6 +85,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myClosure', ['myClosure', '2.0'])
     }
 
+    @Test
     void testApplyTo_TwoMethodsExceedsMaxMethodComplexity() {
         final SOURCE = """
             class MyClass {
@@ -99,6 +106,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 9, 'def myMethod3()', ['myMethod3', '7'])
     }
 
+    @Test
     void testApplyTo_Class_ExceedsMaxClassAverageMethodComplexity() {
         final SOURCE = '''
             class MyClass {
@@ -111,6 +119,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
     }
 
+    @Test
     void testApplyTo_Class_ZeroMaxClassAverageMethodComplexity_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -123,6 +132,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ClassAndMethod_ExceedThreshold() {
         final SOURCE = """
             class MyClass {
@@ -143,6 +153,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 8, 'def myMethod3()', ['myMethod3', '6'])
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         final SOURCE = '''
             class MyClass {
@@ -156,6 +167,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
         final SOURCE = '''
             class MyClass {
@@ -169,6 +181,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
             class MyClass {
@@ -187,6 +200,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'def myClosure', ['myClosure', '3'])
     }
 
+    @Test
     void testApplyTo_NoExplicitClass_StillChecksMethods() {
         final SOURCE = '''
             def myMethod() {
@@ -198,6 +212,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def myMethod()', ['myMethod', '6'])
     }
 
+    @Test
     void testApplyTo_NoExplicitMethodDefinition_ChecksAsRunMethod() {
         final SOURCE = '''
             if (isReady) {

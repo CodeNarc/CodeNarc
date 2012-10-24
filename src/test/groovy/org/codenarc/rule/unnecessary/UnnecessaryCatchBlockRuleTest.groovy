@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryCatchBlockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryCatchBlock'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	try {
@@ -48,6 +51,7 @@ class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleCatchBlock() {
         final SOURCE = '''
         	try {
@@ -59,6 +63,7 @@ class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'catch (Exception e)', 'Catch statement can probably be removed')
     }
 
+    @Test
     void testMultipleCatchBlocks() {
         final SOURCE = '''
         	try {

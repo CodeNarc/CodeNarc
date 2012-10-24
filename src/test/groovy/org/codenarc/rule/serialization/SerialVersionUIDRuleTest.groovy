@@ -17,6 +17,7 @@ package org.codenarc.rule.serialization
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SerialVersionUIDRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SerialVersionUID'
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
         	class MyClass {
@@ -39,6 +42,7 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_2_Violations() {
         final SOURCE = '''
             class MyClass1 {
@@ -53,6 +57,7 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
                 6, 'private static long serialVersionUID = 665544')
     }
 
+    @Test
     void testApplyTo_WrongType() {
         final SOURCE = '''
             class MyClass1 {
@@ -67,6 +72,7 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
                 6, 'static final Long serialVersionUID = 665544')
     }
 
+    @Test
     void testApplyTo_Property() {
         final SOURCE = '''
             class MyClass1 {

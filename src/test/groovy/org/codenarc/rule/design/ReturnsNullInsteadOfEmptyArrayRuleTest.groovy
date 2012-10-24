@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ReturnsNullInsteadOfEmptyArrayRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ReturnsNullInsteadOfEmptyArray'
     }
 
+    @Test
     void testNoViolation() {
         final SOURCE = '''
         	String[] myMethod() {
@@ -53,6 +56,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testStringArrayMethod() {
         final SOURCE = '''
         	String[] myMethod() {
@@ -63,6 +67,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testStringArrayMethodInClass() {
         final SOURCE = '''
             class MyClass {
@@ -75,6 +80,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
+    @Test
     void testDefMethod() {
         final SOURCE = '''
         	def myMethod() {
@@ -86,6 +92,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testTernaryReturns() {
         final SOURCE = '''
                 def a =  {
@@ -100,6 +107,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
                 6, 'foo ? [] as String[] : null'
     }
 
+    @Test
     void testDefMethodInClass() {
         final SOURCE = '''
             class MyClass {
@@ -112,6 +120,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
+    @Test
     void testStringArrayMethodInInnerClass() {
         final SOURCE = '''
             def o = new Object() {
@@ -124,6 +133,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
+    @Test
     void testInClosure() {
         final SOURCE = '''
             def c = {
@@ -134,6 +144,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testInClosureWithinAClosure() {
         final SOURCE = '''
             def a = {
@@ -152,6 +163,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testInAnonymousClassWithinAnonymousClass() {
         final SOURCE = '''
             def a = new Object() {
@@ -172,6 +184,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testClosureInAnonymousClassWithinAnonymousClass() {
         final SOURCE = '''
             def a = new Object() {

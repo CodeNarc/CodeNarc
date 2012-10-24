@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for PublicFinalizeMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'PublicFinalizeMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class MyClass1 {
@@ -43,6 +46,7 @@ class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
         	class MyClass {
@@ -52,6 +56,7 @@ class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public finalize()', 'The finalize() method should only be declared with protected visibility')
     }
 
+    @Test
     void testPrivateDeclaration() {
         final SOURCE = '''
         	class MyClass {

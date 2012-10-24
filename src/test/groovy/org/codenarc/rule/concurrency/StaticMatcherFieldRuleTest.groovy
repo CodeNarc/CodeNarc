@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for StaticMatcherFieldRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class StaticMatcherFieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'StaticMatcherField'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
           // these usages are OK
@@ -41,6 +44,7 @@ class StaticMatcherFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStaticField() {
         final SOURCE = '''
           class MyClass {
@@ -50,6 +54,7 @@ class StaticMatcherFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static Matcher matcher1', 'Matcher instances are not thread safe. Wrap the Matcher field matcher1 in a ThreadLocal or make it an instance field')
     }
 
+    @Test
     void testStaticFieldFullyQUalifiedName() {
         final SOURCE = '''
           class MyClass {

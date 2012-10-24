@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BracesForMethodRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class BracesForMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BracesForMethod'
     }
 
+    @Test
     void testInterfaces() {
         final SOURCE = '''
             interface MyInterface {
@@ -40,6 +43,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultilineInterfaces() {
         final SOURCE = '''
             interface MyInterface
@@ -50,6 +54,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultiLineMethods() {
         final SOURCE = '''
             def myMethod1(String x,
@@ -71,6 +76,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultilineInterfacesOverride() {
         final SOURCE = '''
             interface MyInterface
@@ -83,6 +89,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testAbstractMethods() {
         final SOURCE = '''
             abstract class MyClass {
@@ -92,6 +99,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultipleAnnotations() {
         final SOURCE = '''
             @Override
@@ -102,6 +110,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultipleAnnotations2() {
         final SOURCE = '''
             @SuppressWarnings('parameter')  // for some reason the parameter is important and causes a failure
@@ -112,6 +121,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultipleAnnotations3() {
         final SOURCE = '''
             @Override
@@ -121,6 +131,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultipleAnnotations4() {
         final SOURCE = '''
             @Override
@@ -131,6 +142,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultipleAnnotations5() {
         final SOURCE = '''
             @Override
@@ -140,12 +152,14 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenarioSameLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenarioNewLine() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
@@ -153,6 +167,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolationSameLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
@@ -163,6 +178,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 38, sourceLineText: 'private int method2()', messageText: 'Opening brace for the method method2 should start on the same line'])
     }
 
+    @Test
     void testViolationNewLine() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')

@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessarySelfAssignmentRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessarySelfAssignment'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             x = y               // acceptable
@@ -40,6 +43,7 @@ class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableAssignment() {
         final SOURCE = '''
             x = x               // violation
@@ -47,6 +51,7 @@ class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'x = x', 'Assignment a variable to itself should be unnecessary. Remove this dead code')
     }
 
+    @Test
     void testParameterAssignment() {
         final SOURCE = '''
             def method(y) {
@@ -56,6 +61,7 @@ class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'y = y', 'Assignment a variable to itself should be unnecessary. Remove this dead code')
     }
 
+    @Test
     void testPropertyAssignment() {
         final SOURCE = '''
             a.b = a.b       // violation
@@ -63,6 +69,7 @@ class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.b = a.b', 'Assignment a variable to itself should be unnecessary. Remove this dead code')
     }
 
+    @Test
     void testPropertyAssignment2() {
         final SOURCE = '''
             a.b.c = a.b.c       // violation

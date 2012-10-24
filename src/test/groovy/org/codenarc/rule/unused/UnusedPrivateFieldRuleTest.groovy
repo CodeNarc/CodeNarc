@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedPrivateFieldRule
@@ -27,11 +28,13 @@ import org.codenarc.rule.Rule
   */
 class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedPrivateField'
     }
 
+    @Test
     void testGroovyCoreBug() {
         final SOURCE = '''
             class CallOnOwner {
@@ -41,6 +44,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'private aField', 'The field aField is not used within the class CallOnOwner')
     }
     
+    @Test
     void testApplyTo_SingleUnusedPrivateField() {
         final SOURCE = '''
           class MyClass {
@@ -51,6 +55,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'private int count', 'The field count is not used within the class MyClass')
     }
 
+    @Test
     void testApplyTo_MultipleUnusedPrivateFields() {
         final SOURCE = '''
           class MyClass {
@@ -65,6 +70,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'private int count', 5, "private static String globalName = 'xxx'")
     }
 
+    @Test
     void testApplyTo_UnusedPrivateFieldWithAssignment() {
         final SOURCE = '''
           class MyClass {
@@ -74,6 +80,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count = 23')
     }
 
+    @Test
     void testSuppressWarningsOnClass() {
         final SOURCE = '''
             @SuppressWarnings('UnusedPrivateField')
@@ -84,6 +91,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuppressWarningsOnField() {
         final SOURCE = '''
             class MyClass {
@@ -94,6 +102,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AllPrivateFieldsUsed() {
         final SOURCE = '''
             @MyAnnotation(elem = { 1 + 2 })
@@ -117,6 +126,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonPrivateFields() {
         final SOURCE = '''
             class MyClass {
@@ -128,6 +138,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ReferencePropertyOfAnotherObject() {
         final SOURCE = '''
             class MyClass {
@@ -140,6 +151,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count')
     }
 
+    @Test
     void testApplyTo_StringPropertyReference() {
         final SOURCE = '''
             class MyClass {
@@ -151,6 +163,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_GStringPropertyReference() {
         final SOURCE = '''
             class MyClass {
@@ -161,6 +174,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count')
     }
 
+    @Test
     void testApplyTo_DereferencedGStringPropertyReference() {
         final SOURCE = '''
             class MyClass {
@@ -172,6 +186,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count')
     }
 
+    @Test
     void testApplyTo_OnlyReferenceIsAMethodDefaultValue() {
         final SOURCE = '''
             class MyClass {
@@ -187,6 +202,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_OnlyReferenceIsAMapKeyOrValue() {
         final SOURCE = '''
             class MyClass {
@@ -200,6 +216,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MoreThanOneClassInASourceFile() {
         final SOURCE = '''
             class MyClass {
@@ -213,6 +230,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
                                               
+    @Test
     void testApplyTo_ClosureField() {
         final SOURCE = '''
             class MyClass {
@@ -229,6 +247,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, "private otherClosure = { println '3' }")
     }
 
+    @Test
     void testApplyTo_StaticFieldReferencedThroughClassName() {
         final SOURCE = '''
             package com.example
@@ -244,6 +263,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoFields() {
         final SOURCE = '''
             class DataServiceException extends RuntimeException{
@@ -263,6 +283,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Script() {
         final SOURCE = '''
             private BigDecimal depositAmount       // not considered a field
@@ -272,6 +293,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     }
 
     
+    @Test
     void testAnonymousInnerClassAsField() {
         final SOURCE = '''
             class MyClass {
@@ -286,6 +308,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testInnerClass() {
         final SOURCE = '''
             class MyClass {
@@ -300,6 +323,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testApplyTo_IgnoreFieldNames() {
         final SOURCE = '''
           class MyClass {
@@ -313,6 +337,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testAnonymousInnerClassAsLocalVariable() {
         final SOURCE = '''
             class MyClass {
@@ -329,6 +354,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testSuperPropertyReferenceFromInner() {
         final SOURCE = '''
             class ImportForm {
@@ -349,6 +375,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuperMethodReferenceFromInner() {
         final SOURCE = '''
             class ImportForm {
@@ -365,6 +392,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuperMethodReferenceFromInner_InMethodParmDefault() {
         final SOURCE = '''
             class ImportForm {
@@ -380,6 +408,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBugFix_CannotCastFieldNodeToMetaClass() {
         final SOURCE = '''
             class FlowBuilder extends AbstractFlowBuilder implements GroovyObject, ApplicationContextAware {
@@ -392,6 +421,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)

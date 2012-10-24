@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SimpleDateFormatMissingLocaleRule
@@ -27,11 +28,13 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
 
     private static final VIOLATION_MESSAGE = 'Created an instance of SimpleDateFormat without specifying a Locale'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SimpleDateFormatMissingLocale'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             // OK, includes locale
@@ -43,6 +46,7 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMissingLocale() {
         final SOURCE = '''
             new SimpleDateFormat('pattern')
@@ -50,6 +54,7 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "new SimpleDateFormat('pattern')", VIOLATION_MESSAGE)
     }
 
+    @Test
     void testMissingLocaleFullyQualified() {
         final SOURCE = '''
             new java.text.SimpleDateFormat('pattern')
@@ -57,6 +62,7 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "new java.text.SimpleDateFormat('pattern')", VIOLATION_MESSAGE)
     }
 
+    @Test
     void testMissingLocale_NoDuplicateViolation() {
         final SOURCE = '''
             class CalendarUtil {

@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ClassSizeRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ClassSizeRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ClassSize'
     }
 
+    @Test
     void testApplyTo_LongerThanDefaultMaxLines() {
         final SOURCE = """
             class MyClass {
@@ -41,6 +44,7 @@ class ClassSizeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, null, 'MyClass')
     }
 
+    @Test
     void testApplyTo_SetMaxLines() {
         final SOURCE = """
             package some.pkg
@@ -55,6 +59,7 @@ class ClassSizeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, null, '"MyClass"')
     }
 
+    @Test
     void testApplyTo_NoClassDefinition() {
         final SOURCE = '''
             if (isReady) {
@@ -64,6 +69,7 @@ class ClassSizeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_EqualToMaxLines() {
         final SOURCE = """
             class MyClass {

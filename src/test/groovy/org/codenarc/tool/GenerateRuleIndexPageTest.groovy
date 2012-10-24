@@ -16,6 +16,7 @@
 package org.codenarc.tool
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertContainsAll
 
@@ -26,6 +27,7 @@ import static org.codenarc.test.TestUtil.assertContainsAll
   */
 class GenerateRuleIndexPageTest extends AbstractTestCase {
 
+    @Test
     void testMain_GeneratesSampleRuleSetFile() {
         def tempFile = File.createTempFile('GenerateRuleIndexPageTest', null)
         tempFile.deleteOnExit()

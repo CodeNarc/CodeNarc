@@ -18,6 +18,7 @@ package org.codenarc.rule.unnecessary
 import org.apache.log4j.Level
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.captureLog4JMessages
 
@@ -28,11 +29,13 @@ import static org.codenarc.test.TestUtil.captureLog4JMessages
   */
 class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryPublicModifier'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -48,6 +51,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testClass0() {
         final SOURCE = '''public class MyClass {
             }
@@ -55,6 +59,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, 'public class MyClass', 'The public keyword is unnecessary for classes')
     }
 
+    @Test
     void testClass() {
         final SOURCE = '''
             public class MyClass {
@@ -63,6 +68,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'public class MyClass', 'The public keyword is unnecessary for classes')
     }
 
+    @Test
     void testClassSplit() {
         final SOURCE = '''
             public
@@ -72,6 +78,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'public', 'The public keyword is unnecessary for classes')
     }
 
+    @Test
     void testClassSplit2() {
         final SOURCE = '''public
             class MyClass
@@ -81,6 +88,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, 'public', 'The public keyword is unnecessary for classes')
     }
 
+    @Test
     void testMethodSplit() {
         final SOURCE = '''
             class MyClass {
@@ -91,6 +99,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public', 'The public keyword is unnecessary for methods')
     }
 
+    @Test
     void testMethod() {
         final SOURCE = '''
             class MyClass {
@@ -100,6 +109,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public void myMethod()', 'The public keyword is unnecessary for methods')
     }
 
+    @Test
     void testConstructor() {
         final SOURCE = '''
             class MyClass {
@@ -109,6 +119,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public MyClass() {}', 'The public keyword is unnecessary for constructors')
     }
 
+    @Test
     void testGantScript() {
         final SOURCE = '''
             includeTargets << grailsScript("_GrailsClean")

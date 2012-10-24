@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryGStringRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryGString'
     }
 
+    @Test
     void testSimpleCase() {
         final SOURCE = '''
             def docFile = "src/site/apt/codenarc-rules-${ruleSetName}.apt"
@@ -37,6 +40,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
     
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         // OK
@@ -47,6 +51,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario0() {
         final SOURCE = '''
         def h = """
@@ -56,6 +61,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario1() {
         final SOURCE = '''
         def i = 'i am a string'
@@ -63,6 +69,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario2() {
         final SOURCE = """
         def j = '''i am a
@@ -72,6 +79,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario3() {
         final SOURCE = '''
         def c = "I am a ' string"       // OK
@@ -86,6 +94,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoubleQuotes() {
         final SOURCE = '''
             def a = "I am a string"     // violation
@@ -93,6 +102,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '"I am a string"', 'The String \'I am a string\' can be wrapped in single quotes instead of double quotes')
     }
 
+    @Test
     void testMultiline() {
         final SOURCE = '''
             def a = """
@@ -104,6 +114,7 @@ I am a string
 ' can be wrapped in single quotes instead of double quotes""")
     }
 
+    @Test
     void testDoubleViolations() {
         final SOURCE = '''
             class Person {

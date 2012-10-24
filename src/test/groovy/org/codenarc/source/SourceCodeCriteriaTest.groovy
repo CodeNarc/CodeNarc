@@ -16,6 +16,8 @@
 package org.codenarc.source
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for SourceCodeUtil
@@ -31,12 +33,14 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
     static final ANYTHING = 'abc'
     private sourceCode
 
+    @Test
     void testMatches_NullPathAndName() {
         assert new SourceCodeCriteria().matches(sourceCode)
         assert new SourceCodeCriteria(doNotApplyToFilesMatching:ANYTHING).matches(sourceCode)
         assert !new SourceCodeCriteria(applyToFilesMatching:ANYTHING).matches(sourceCode)
     }
 
+    @Test
     void testMatches_Path() {
         sourceCode.path = PATH
         assert new SourceCodeCriteria().matches(sourceCode)
@@ -47,6 +51,7 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
         assert !new SourceCodeCriteria(applyToFilesMatching:MATCH, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
     }
 
+    @Test
     void testMatches_Name() {
         sourceCode.name = NAME
         assert new SourceCodeCriteria().matches(sourceCode)
@@ -61,6 +66,7 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
         assert !new SourceCodeCriteria(doNotApplyToFileNames:"$OTHER_NAME,$NAME").matches(sourceCode)
     }
 
+    @Test
     void testMatches_Name_Wildcards() {
         sourceCode.name = NAME
         assert new SourceCodeCriteria(applyToFileNames:'*.groovy').matches(sourceCode)
@@ -74,6 +80,7 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
         assert !new SourceCodeCriteria(doNotApplyToFileNames:"$OTHER_NAME,My*.groovy").matches(sourceCode)
     }
 
+    @Test
     void testMatches_NameAndPath() {
         sourceCode.name = NAME
         sourceCode.path = PATH
@@ -88,6 +95,7 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
         assert !new SourceCodeCriteria(applyToFileNames:NAME, doNotApplyToFilesMatching:MATCH).matches(sourceCode)
     }
 
+    @Test
     void testMatches_NameAndPath_ApplyToFileNamesSpecifiesPath() {
         sourceCode.name = NAME
         sourceCode.path = PATH
@@ -103,8 +111,8 @@ class SourceCodeCriteriaTest extends AbstractTestCase {
         assert !new SourceCodeCriteria(doNotApplyToFileNames:"$OTHER_NAME,src/**My*.groovy").matches(sourceCode)
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpSourceCodeCriteriaTest() {
         sourceCode = new SourceString('class ABC { }')
     }
 }

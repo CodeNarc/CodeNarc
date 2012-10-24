@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ForLoopShouldBeWhileLoopRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ForLoopShouldBeWhileLoop'
     }
 
+    @Test
     void testShouldNotAddViolationsForWhileLoops() {
         final SOURCE = '''
         	while(1 > 2)
@@ -38,6 +41,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldNotAddViolationsForNewLoops() {
         final SOURCE = '''
         	for(i in [1,2])
@@ -46,6 +50,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testForWithPropertyExpression() {
         final SOURCE = '''
         for(child in this.children) {
@@ -53,6 +58,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
         } '''
         assertNoViolations SOURCE
     }
+    @Test
     void testShouldNotAddViolationsIfForLoopHasInitExpr() {
         final SOURCE = '''
         	for(int i = 0; i<5;)
@@ -61,6 +67,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldNotAddViolationsIfForLoopHasUpdateExpr() {
         final SOURCE = '''
             int i = 0
@@ -70,6 +77,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testShouldAddViolationIfForLoopHasOnlyConditionExpr() {
         final SOURCE = '''
             int i = 0
@@ -79,6 +87,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 3, 'for(; i < 5;)', 'The for loop can be simplified to a while loop'
     }
 
+    @Test
     void testForEachLoop() {
         final SOURCE = '''
             for (Plan p : plans) {

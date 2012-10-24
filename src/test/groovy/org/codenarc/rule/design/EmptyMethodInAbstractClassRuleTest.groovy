@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyMethodInAbstractClassRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyMethodInAbstractClassRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyMethodInAbstractClass'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             abstract class MyClass {
@@ -66,6 +69,7 @@ class EmptyMethodInAbstractClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testReturnVoid() {
         final SOURCE = '''
             abstract class MyClass {
@@ -77,6 +81,7 @@ class EmptyMethodInAbstractClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void couldBeAbstract()', 'The method couldBeAbstract in abstract class MyClass is empty. Consider making it abstract')
     }
 
+    @Test
     void testReturnNull() {
         final SOURCE = '''
             abstract class MyClass {
@@ -88,6 +93,7 @@ class EmptyMethodInAbstractClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def couldBeAbstract()', 'The method couldBeAbstract in abstract class MyClass contains no logic. Consider making it abstract')
     }
 
+    @Test
     void testReturnNullImplicitReturn() {
         final SOURCE = '''
             abstract class MyClass {

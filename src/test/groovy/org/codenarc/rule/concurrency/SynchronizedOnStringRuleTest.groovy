@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SynchronizedOnStringRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SynchronizedOnString'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass1 {
@@ -78,6 +81,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringField() {
         final SOURCE = '''
             class MyClass5 {
@@ -89,6 +93,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 5, 'synchronized(lock)', 'Synchronizing on the constant String field lock is unsafe. Do not synchronize on interned strings')
     }
+    @Test
     void testBasicViolation() {
         final SOURCE = '''
             class MyClass {
@@ -103,6 +108,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'synchronized(stringLock)', 'Synchronizing on the constant String field stringLock is unsafe. Do not synchronize on interned strings')
     }
 
+    @Test
     void testInnerClass() {
         final SOURCE = '''
             class MyClass {
@@ -120,6 +126,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, 'synchronized(stringLock)', 'Synchronizing on the constant String field stringLock is unsafe. Do not synchronize on interned strings')
     }
 
+    @Test
     void testImplicitTyping() {
         final SOURCE = '''
             class MyClass {
@@ -135,6 +142,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 8, 'synchronized(stringLock)', 'Synchronizing on the constant String field stringLock is unsafe. Do not synchronize on interned strings')
     }
 
+    @Test
     void testAnonymousClass() {
         final SOURCE = '''
             class MyClass {
@@ -155,6 +163,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'synchronized(lock)', 'Synchronizing on the constant String field lock is unsafe. Do not synchronize on interned strings')
     }
 
+    @Test
     void testShadowing() {
         final SOURCE = '''
             class MyClass {

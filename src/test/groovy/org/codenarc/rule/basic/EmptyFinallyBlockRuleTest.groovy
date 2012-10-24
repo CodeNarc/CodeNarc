@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyFinallyBlockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyFinallyBlockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyFinallyBlock'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class EmptyFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'finally {')
     }
 
+    @Test
     void testApplyTo_Violation_FinallyBlockContainsComment() {
         final SOURCE = '''
             class MyClass {
@@ -63,6 +67,7 @@ class EmptyFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, 'finally')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

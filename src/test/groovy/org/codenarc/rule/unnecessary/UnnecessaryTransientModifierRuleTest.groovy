@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryTransientModifierRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryTransientModifier'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MySerializableClass implements Serializable {
@@ -47,6 +50,7 @@ class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTransientPropertyInClassThatIsNotSerializable() {
         final SOURCE = '''
                 class MyClass {
@@ -58,6 +62,7 @@ class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
             'Violation in class MyClass. The field \'property\' is marked transient, but MyClass does not implement Serializable')
     }
 
+    @Test
     void testTransientPropertyInInnerClassThatIsNotSerializable() {
         final SOURCE = '''
                 class MyClass {

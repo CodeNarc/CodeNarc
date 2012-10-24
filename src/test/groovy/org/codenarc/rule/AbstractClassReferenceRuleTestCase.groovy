@@ -15,6 +15,8 @@
  */
 package org.codenarc.rule
 
+import org.junit.Test
+
 /**
  * Abstract superclass for tests of classes that check for class references.
  *
@@ -41,6 +43,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
     // Common Tests
     //------------------------------------------------------------------------------------
 
+    @Test
     void testImport_Violation() {
         final SOURCE = """
             import ${getClassName()}
@@ -49,6 +52,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "import ${getClassName()}", violationMessage)
     }
 
+    @Test
     void testStaticImport_Violation() {
         final SOURCE = """
             import static ${getClassName()}.*
@@ -57,6 +61,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "import static ${getClassName()}.*", violationMessage)
     }
 
+    @Test
     void testFieldType_Violation() {
         final SOURCE = """
             class MyClass {
@@ -66,6 +71,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "${getClassName()} connection", violationMessage)
     }
 
+    @Test
     void testWithinExpressions_Violations() {
         final SOURCE = """
             if (value.class == ${getClassName()}) { }
@@ -84,6 +90,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testConstructorCall_Violation() {
         final SOURCE = """
             def c = new ${getClassName()}()
@@ -91,6 +98,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "def c = new ${getClassName()}()", violationMessage)
     }
 
+    @Test
     void testConstructorCall_CallToSuper_NoViolation() {
         final SOURCE = """
             class MyClass extends Object {
@@ -102,6 +110,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableType_Violation() {
         final SOURCE = """
             ${getClassName()} c = getConnection()
@@ -109,6 +118,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "${getClassName()} c = getConnection()", violationMessage)
     }
 
+    @Test
     void testMethodReturnType_Violation() {
         final SOURCE = """
             class MyClass {
@@ -118,6 +128,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "${getClassName()} getConnection() { }", violationMessage)
     }
 
+    @Test
     void testMethodParameterType_Violations() {
         final SOURCE = """
             void writeCount(${getClassName()} connection, int count) { }
@@ -128,6 +139,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:"void initializeBinding(String name, ${getClassName()} connection) { }", messageText:violationMessage])
     }
 
+    @Test
     void testConstructorCall_Parameter_Violation() {
         final SOURCE = """
             def handler = new Handler(${getClassName()})
@@ -135,6 +147,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "def handler = new Handler(${getClassName()})", violationMessage)
     }
 
+    @Test
     void testConstructorParameterType_Violation() {
         final SOURCE = """
             class MyClass {
@@ -144,6 +157,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "MyClass(${getClassName()} connection) { }", violationMessage)
     }
 
+    @Test
     void testClosureParameterType_Violations() {
         final SOURCE = """
             def writeCount = { ${getClassName()} connection, int count -> }
@@ -154,6 +168,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:"def initializeBinding = { String name, ${getClassName()} connection -> }", messageText:violationMessage])
     }
 
+    @Test
     void testAsType_Violation() {
         final SOURCE = """
             def x = value as ${getClassName()}
@@ -161,6 +176,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "def x = value as ${getClassName()}", violationMessage)
     }
 
+    @Test
     void testExtendsSuperclassOrSuperInterfaceTypes_Violations() {
         final SOURCE = """
             class MyConnection extends ${getClassName()} { }
@@ -171,6 +187,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:"interface MyInterface extends ${getClassName()} { }", messageText:violationMessage])
     }
 
+    @Test
     void testAnonymousInnerClass_KnownIssue_NoViolation() {
         final SOURCE = """
             def x = new ${getClassName()}() { }
@@ -179,6 +196,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testOtherConnectionClasses_NoViolations() {
         final SOURCE = '''
             import org.example.dating.Connection

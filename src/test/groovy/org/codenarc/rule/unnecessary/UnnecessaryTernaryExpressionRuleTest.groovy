@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryTernaryExpressionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryTernaryExpression'
     }
 
+    @Test
     void testApplyTo_TrueAndFalse_IsAViolation() {
         final SOURCE = '''
             def x = !ready ? true : false
@@ -40,6 +43,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'def y = !ready ? Boolean.TRUE : Boolean.FALSE'])
     }
 
+    @Test
     void testApplyTo_TrueAndFalse_MixedUseOfBooleanClassConstants_IsAViolation() {
         final SOURCE = '''
             def x = !ready ? Boolean.TRUE : false
@@ -48,6 +52,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = !ready ? Boolean.TRUE : false', 3, 'def y = !ready ? true : Boolean.FALSE')
     }
 
+    @Test
     void testApplyTo_FalseAndTrue_IsAViolation() {
         final SOURCE = '''
             def x = !ready ? false : true
@@ -56,6 +61,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = !ready ? false : true', 3, 'def y = !ready ? Boolean.FALSE : Boolean.TRUE')
     }
 
+    @Test
     void testApplyTo_ConditionalExpressionIsABoolean_IsAViolation() {
         final SOURCE = '''
             def x
@@ -90,6 +96,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testApplyTo_TrueAndFalseExpressionsAreTheSameLiteral_IsAViolation() {
         final SOURCE = '''
             def x = ready ? 123 : 123
@@ -98,6 +105,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = ready ? 123 : 123', 3, 'def y = !ready ? "abc" : "abc"')
     }
 
+    @Test
     void testApplyTo_TrueAndFalseExpressionsAreBothTrueOrBothFalse_IsAViolation() {
         final SOURCE = '''
             def x = ready ? true : true
@@ -106,6 +114,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = ready ? true : true', 3, 'def y = ready ? false : false')
     }
 
+    @Test
     void testApplyTo_TrueAndFalseExpressionsAreBothNull_IsAViolation() {
         final SOURCE = '''
             def x = ready ? null : null
@@ -113,6 +122,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = ready ? null : null')
     }
 
+    @Test
     void testApplyTo_TrueAndFalseExpressionsAreBothEmptyString_IsAViolation() {
         final SOURCE = '''
             def x = ready ? '' : ""
@@ -120,6 +130,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, /def x = ready ? '' : ""/)
     }
 
+    @Test
     void testApplyTo_TrueAndFalseExpressionsAreTheSameVariable_IsAViolation() {
         final SOURCE = '''
             def x = ready ? MAX_VALUE : MAX_VALUE
@@ -128,6 +139,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'def x = ready ? MAX_VALUE : MAX_VALUE', 3, 'def y = !ready ? result : result')
     }
 
+    @Test
     void testApplyTo_TrueAndFalseExpressionsAreTheSameMethodCall_NotAViolation() {
         final SOURCE = '''
             def x = !ready ? process('abc') : process('abc')
@@ -136,6 +148,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ComplexExpressions_NotAViolation() {
         final SOURCE = '''
             transactionTypes.equals('ALL') ?
@@ -145,6 +158,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ConditionalExpressionIsNotABoolean_NoViolations() {
         final SOURCE = '''
             def x
@@ -159,6 +173,7 @@ class UnnecessaryTernaryExpressionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NotTrueAndFalse_NoViolations() {
         final SOURCE = '''
             def x

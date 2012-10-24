@@ -16,6 +16,7 @@
 package org.codenarc.ant
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for Report
@@ -25,6 +26,7 @@ import org.codenarc.test.AbstractTestCase
 class ReportTest extends AbstractTestCase {
     private report = new Report()
 
+    @Test
     void testAddConfiguredOption_AddsToOptions() {
         def option = new ReportOption(name:'a', value:'1')
         report.addConfiguredOption(option)

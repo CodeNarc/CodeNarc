@@ -17,6 +17,7 @@ package org.codenarc.results
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
+import org.junit.Test
 
 /**
  * Test for virtual results
@@ -24,6 +25,7 @@ import org.codenarc.rule.Violation
  */
 class VirtualResultsTest extends GroovyTestCase {
 
+    @Test
     void testViolations() {
         def violations = [
                 new Violation(rule: [getPriority : { 1 } ] as Rule),
@@ -44,6 +46,7 @@ class VirtualResultsTest extends GroovyTestCase {
         assert 1 == results.violations.findAll { v -> v.rule.priority == 7 }.size()
     }
 
+    @Test
     void testGetViolations_ReturnsDefensiveCopy() {
         def results = new VirtualResults([new Violation(rule: [getPriority : { 1 } ] as Rule)])
         results.getViolations() << 123

@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryParenthesesForMethodCallWithClosureRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryParenthesesForMethodCallWithClosure'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	[1, 2, 3].each { println it }
@@ -42,6 +45,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario2() {
         final SOURCE = '''
             (1..10).inject(0) { acc, count ->
@@ -54,6 +58,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             [1,2,3].each() { println it }
@@ -61,6 +66,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         assertSingleViolation(SOURCE, 2, '[1,2,3].each() { println it }', "Parentheses in the 'each' method call are unnecessary and can be removed.")
     }
 
+    @Test
     void testTwoViolations() {
         final SOURCE = '''
             [1, 2, 3].collect() {
@@ -75,6 +81,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
                 2, '''[1, 2, 3].collect() {''')   // todo: replace violation line number and message
     }
 
+    @Test
     void testSyntheticMethodCall() {
         final SOURCE = '''
             dependencies {
@@ -87,6 +94,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNonDetectableViolations() {
         final SOURCE = '''
         	[1, 2, 3].each(/*comment*/) { println it }

@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitAssertAlwaysFailsRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JUnitAssertAlwaysFails'
     }
 
+    @Test
     void testApplyTo_AssertTrue_False() {
         final SOURCE = '''
             class MyTestCase extends TestCase {
@@ -41,6 +44,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertTrue(false)')
     }
 
+    @Test
     void testApplyTo_AssertTrue_True() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -52,6 +56,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertTrue_ConstantNumber() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -63,6 +68,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertTrue_Variable() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -74,6 +80,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertTrue_FalseWithMessage() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -85,6 +92,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertTrue("This passed!", false)')
     }
 
+    @Test
     void testApplyTo_AssertFalse_True() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -96,6 +104,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertFalse(true)')
     }
 
+    @Test
     void testApplyTo_AssertFalse_False() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -107,6 +116,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertFalse_TrueWithMessage() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -118,6 +128,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertFalse("This passed!", true)')
     }
 
+    @Test
     void testApplyTo_AssertNull_ConstantNumber() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -129,6 +140,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertNull(123)')
     }
 
+    @Test
     void testApplyTo_AssertNull_ConstantString() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -140,6 +152,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, "assertNull('abc')")
     }
 
+    @Test
     void testApplyTo_AssertNull_ConstantBoolean() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -151,6 +164,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertNull(false)')
     }
 
+    @Test
     void testApplyTo_AssertNull_NonConstant() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -162,6 +176,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertNull_Null() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -173,6 +188,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_AssertNull_NullWithMessage() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -184,6 +200,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertNull("What?", false)')
     }
 
+    @Test
     void testApplyTo_NonTestFile() {
         final SOURCE = '''
           class MyClass {

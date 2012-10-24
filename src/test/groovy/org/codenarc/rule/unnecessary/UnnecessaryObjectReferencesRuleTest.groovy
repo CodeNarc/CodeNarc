@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryObjectReferencesRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryObjectReferences'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
 
@@ -86,6 +89,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testExcessivePropertyAccess() {
         final SOURCE = '''
                 class Person {
@@ -115,6 +119,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 17, "p1.zipCode = '4051'", 25, "p2.zipCode = '4051'")
     }
 
+    @Test
     void testOverridingProperty() {
         rule.maxReferencesAllowed = 2
         final SOURCE = '''
@@ -134,6 +139,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 14, "p1.employer = 'Canoo'", 'The code could be more concise by using a with() or identity() block')
     }
 
+    @Test
     void testExcessiveSetters() {
         final SOURCE = '''
                 class Person {
@@ -156,6 +162,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 17, "p2.setZipCode('4051')",	'The code could be more concise by using a with() or identity() block')
     }
 
+    @Test
     void testReferencesAcrossMethods() {
         final SOURCE = '''
             class MyClass {
@@ -174,6 +181,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testReferencesAcrossFields() {
         final SOURCE = '''
             class MyClass {

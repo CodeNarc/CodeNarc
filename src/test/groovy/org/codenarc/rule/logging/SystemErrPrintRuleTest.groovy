@@ -17,6 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SystemErrPrintRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class SystemErrPrintRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SystemErrPrint'
     }
 
+    @Test
     void testApplyTo_SystemErrPrintln_NoArgs() {
         final SOURCE = '''
             System.err.println()
@@ -37,6 +40,7 @@ class SystemErrPrintRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'System.err.println()')
     }
 
+    @Test
     void testApplyTo_SystemErrPrintln_String() {
         final SOURCE = '''
             System.err.println("yes")
@@ -44,6 +48,7 @@ class SystemErrPrintRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'System.err.println("yes")')
     }
 
+    @Test
     void testApplyTo_SystemErrPrintln_Int() {
         final SOURCE = '''
             System.err.println(1234)
@@ -51,6 +56,7 @@ class SystemErrPrintRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'System.err.println(1234)')
     }
 
+    @Test
     void testApplyTo_SystemErrPrint_Int() {
         final SOURCE = '''
             System.err.print(1234)
@@ -58,6 +64,7 @@ class SystemErrPrintRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'System.err.print(1234)')
     }
 
+    @Test
     void testApplyTo_SystemErrPrintf() {
         final SOURCE = '''
             System.err.printf("%d", 1234)
@@ -66,6 +73,7 @@ class SystemErrPrintRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'System.err.printf("%d", 1234)', 3, 'System.err.printf("%d %d", 1234, -99)')
     }
 
+    @Test
     void testApplyTo_WithinClosure() {
         final SOURCE = '''
             class MyClass {
@@ -77,8 +85,10 @@ class SystemErrPrintRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'System.err.print(1234)')
     }
 
+    @Test
     void testApplyTo_PrintlnButNotSystemErr() {
         final SOURCE = '''
+    @Test
             void testSomething() {
                 println "123"
             }

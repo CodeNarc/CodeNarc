@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UseOfNotifyMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UseOfNotifyMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	notifyAll()
@@ -39,6 +42,7 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testThisNotify() {
         final SOURCE = '''
             this.notify()
@@ -46,6 +50,7 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'this.notify()')
     }
 
+    @Test
     void testNotify() {
         final SOURCE = '''
             notify()
@@ -53,6 +58,7 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'notify()')
     }
 
+    @Test
     void testOther() {
         final SOURCE = '''
             other.notify()

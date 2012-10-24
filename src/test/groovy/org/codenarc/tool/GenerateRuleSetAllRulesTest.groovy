@@ -16,6 +16,7 @@
 package org.codenarc.tool
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for GenerateRuleSetAllRules
@@ -24,6 +25,7 @@ import org.codenarc.test.AbstractTestCase
   */
 class GenerateRuleSetAllRulesTest extends AbstractTestCase {
 
+    @Test
     void testMain_GeneratesSampleRuleSetFile() {
         def tempFile = File.createTempFile('GenerateRuleSetAllRulesTest', null)
         tempFile.deleteOnExit()

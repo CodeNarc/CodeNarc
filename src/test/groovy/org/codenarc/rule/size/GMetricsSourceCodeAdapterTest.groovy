@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -28,10 +29,12 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 class GMetricsSourceCodeAdapterTest extends AbstractTestCase {
     private static final SOURCE = 'abc\ndef'
 
+    @Test
     void testConstructor_Null() {
         shouldFailWithMessageContaining('sourceCode') { new GMetricsSourceCodeAdapter(null) }
     }
 
+    @Test
     void testDelegatesMethods() {
         def sourceCode = new SourceString(SOURCE, 'path', 'name')
         def adapter = new GMetricsSourceCodeAdapter(sourceCode)

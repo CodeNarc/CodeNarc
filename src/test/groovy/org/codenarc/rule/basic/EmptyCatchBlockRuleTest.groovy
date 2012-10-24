@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for EmptyCatchBlockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class EmptyCatchBlockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'EmptyCatchBlock'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -43,6 +46,7 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(MyException e) {')
     }
 
+    @Test
     void testApplyTo_Violation_CatchBlockContainsComment() {
         final SOURCE = '''
             class MyClass {
@@ -57,6 +61,7 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(MyException e)')
     }
 
+    @Test
     void testApplyTo_NoViolations_IfParameterNameContainsIgnore() {
         final SOURCE = '''
             class MyClass {
@@ -74,6 +79,7 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Violation_IfThereIsNoParameterName() {
         final SOURCE = '''
             class MyClass {
@@ -87,6 +93,7 @@ class EmptyCatchBlockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(MyException) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

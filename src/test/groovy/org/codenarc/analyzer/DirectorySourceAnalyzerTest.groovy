@@ -22,6 +22,8 @@ import org.codenarc.rule.TestCountRule
 import org.codenarc.rule.TestPathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertEqualSets
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -37,21 +39,25 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
     def ruleSet
     def testCountRule
 
+    @Test
     void testAnalyze_NullRuleSet() {
         analyzer.baseDirectory = BASE_DIR
         shouldFailWithMessageContaining('ruleSet') { analyzer.analyze(null) }
     }
 
+    @Test
     void testAnalyze_BaseDirectoryNullAndSourceDirectoriesNull() {
         shouldFailWithMessageContaining(['baseDirectory','sourceDirectories']) { analyzer.analyze(ruleSet) }
     }
 
+    @Test
     void testAnalyze_BaseDirectoryEmptyAndSourceDirectoriesEmpty() {
         analyzer.baseDirectory = ''
         analyzer.sourceDirectories = []
         shouldFailWithMessageContaining(['baseDirectory','sourceDirectories']) { analyzer.analyze(ruleSet) }
     }
 
+    @Test
     void testAnalyze_BaseDirectory_FilesOnly() {
         final DIR = 'src/test/resources/source'
         analyzer.baseDirectory = DIR
@@ -72,6 +78,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 2
     }
 
+    @Test
     void testAnalyze_BaseDirectory() {
         final DIR = 'src/test/resources/sourcewithdirs'
         analyzer.baseDirectory = DIR
@@ -101,6 +108,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
 //        assert childResultsClasses(top.children[2].children[0]) == [FileResults]
     }
 
+    @Test
     void testAnalyze_SourceDirectories() {
         final DIR1 = 'src/test/resources/source'
         final DIR2 = 'src/test/resources/sourcewithdirs'
@@ -123,6 +131,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assert results.numberOfFilesWithViolations == 7
     }
 
+    @Test
     void testAnalyze_BaseDirectoryAndSourceDirectories() {
         final SOURCE_DIRS = ['source', 'sourcewithdirs']
         analyzer.baseDirectory = 'src/test/resources'
@@ -152,6 +161,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assert results.numberOfFilesWithViolations == 7
     }
 
+    @Test
     void testAnalyze_BaseDirectory_NoViolations() {
         final DIR = 'src/test/resources/sourcewithdirs'
         analyzer.baseDirectory = DIR
@@ -168,6 +178,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 5
     }
 
+    @Test
     void testAnalyze_BaseDirectory_ApplyToFilesMatching() {
         final DIR = 'src/test/resources/sourcewithdirs'
         analyzer.baseDirectory = DIR
@@ -188,6 +199,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 3
     }
 
+    @Test
     void testAnalyze_BaseDirectory_ApplyToFileNames() {
         final DIR = 'src/test/resources/sourcewithdirs'
         analyzer.baseDirectory = DIR
@@ -207,8 +219,8 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assert results.totalNumberOfFiles == 2
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpDirectorySourceAnalyzerTest() {
         analyzer = new DirectorySourceAnalyzer()
         testCountRule = new TestCountRule()
         ruleSet = new ListRuleSet([new TestPathRule(), testCountRule])

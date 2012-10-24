@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConstantIfExpressionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ConstantIfExpression'
     }
 
+    @Test
     void testApplyTo_True_IsAViolation() {
         final SOURCE = '''
             if (true) { }
@@ -38,6 +41,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if (true) { }', 3, 'if (Boolean.TRUE) { }')
     }
 
+    @Test
     void testApplyTo_False_IsAViolation() {
         final SOURCE = '''
             if (false) { }
@@ -46,6 +50,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if (false) { }', 3, 'if (Boolean.FALSE) { }')
     }
 
+    @Test
     void testApplyTo_Null_IsAViolation() {
         final SOURCE = '''
             if (null) { }
@@ -53,6 +58,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if (null) { }', 'The if statement condition (null) contains a constant')
     }
 
+    @Test
     void testApplyTo_StringLiteral_IsAViolation() {
         final SOURCE = '''
             if ("abc") { }
@@ -61,6 +67,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if ("abc") { }', 3, 'if ("") { }')
     }
 
+    @Test
     void testApplyTo_NumberLiteral_IsAViolation() {
         final SOURCE = '''
             if (99.9) { }
@@ -69,6 +76,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if (99.9) { }', 3, 'if (0) { }')
     }
 
+    @Test
     void testApplyTo_MapLiteral_IsAViolation() {
         final SOURCE = '''
             if ([:]) { }
@@ -77,6 +85,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if ([:])', 3, 'if ([a:123, b:234])')
     }
 
+    @Test
     void testApplyTo_ListLiteral_IsAViolation() {
         final SOURCE = '''
             if ([]) { }
@@ -85,6 +94,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'if ([])', 3, 'if ([a, 123])')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             if (z) { }

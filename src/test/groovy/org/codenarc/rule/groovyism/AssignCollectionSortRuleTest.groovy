@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for AssignCollectionSortRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AssignCollectionSort'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def allPaths = resultsMap.keySet().sort()
@@ -44,6 +47,7 @@ class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testNoArgs() {
         final SOURCE = '''
             def x = myList.sort()
@@ -51,6 +55,7 @@ class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = myList.sort()')
     }
 
+    @Test
     void testOneArgs() {
         final SOURCE = '''
             def x = myList.sort() { it }
@@ -58,6 +63,7 @@ class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = myList.sort()')
     }
 
+    @Test
     void testChaining() {
         final SOURCE = '''
             def x = myList.sort().findAll { x < 1 }

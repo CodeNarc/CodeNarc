@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CatchIllegalMonitorStateExceptionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class CatchIllegalMonitorStateExceptionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CatchIllegalMonitorStateException'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
                 try {
@@ -41,11 +44,13 @@ class CatchIllegalMonitorStateExceptionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(IllegalMonitorStateException t) {')
     }
 
+    @Test
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = 'try {  } catch(java.lang.IllegalMonitorStateException t) { }'
         assertSingleViolation(SOURCE, 1, 'catch(java.lang.IllegalMonitorStateException t) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
                 def myMethod() {

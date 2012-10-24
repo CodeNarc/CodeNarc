@@ -23,8 +23,12 @@ import org.codenarc.rule.basic.EmptyCatchBlockRule
 import org.codenarc.rule.imports.UnusedImportRule
 import org.codenarc.rule.unused.UnusedPrivateMethodRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import java.text.DateFormat
+
+import static org.junit.Assert.assertEquals
 
 /**
  * Tests for InlineXmlReportWriter.
@@ -117,14 +121,15 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
     private ruleSet
     private stringWriter
 
+    @Test
     void testWriteReport_Writer() {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def xmlAsString = stringWriter.toString()
         assertXml(xmlAsString)
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpInlineXmlReportWriterTest() {
         reportWriter = new InlineXmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 

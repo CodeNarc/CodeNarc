@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExceptionExtendsErrorRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExceptionExtendsError'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyException extends Exception { }  // OK
@@ -37,6 +40,7 @@ class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolations() {
         final SOURCE = '''
             class MyError1 extends Error { }  // violation

@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedImportRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnusedImportRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnusedImport'
     }
 
+    @Test
     void testApplyTo_OneViolation() {
         final SOURCE = '''
             import java.io.InputStream
@@ -41,6 +44,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'import java.io.OutputStream', 'The [java.io.OutputStream] import is never referenced')
     }
 
+    @Test
     void testApplyTo_TwoViolations() {
         final SOURCE = '''
             import java.io.InputStream
@@ -55,6 +59,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
             4, 'import java.io.OutputStream', 'The [java.io.OutputStream] import is never referenced')
     }
 
+    @Test
     void testApplyTo_OnlyFullyQualifiedClassNameReferenced() {
         final SOURCE = '''
             import a.b.SomeClass
@@ -70,6 +75,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
             3, 'import d.e.OtherClass as OC', 'The [d.e.OtherClass] import is never referenced')
     }
 
+    @Test
     void testApplyTo_UnusedStaticImportConstant() {
         final SOURCE = '''
             import static Math.PI
@@ -80,6 +86,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'import static Math.PI', 'The [Math] import is never referenced')
     }
 
+    @Test
     void testApplyTo_UnusedImport_WithSemicolon() {
         final SOURCE = '''
             import com.example.MyService;
@@ -95,12 +102,14 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'import com.example.MyService', 'The [com.example.MyService] import is never referenced')
     }
 
+    @Test
     void testApplyTo_SimilarlyNamedImports() {
         final SOURCE = '''
             import static com.example.FaultCode.*
             import com.example.Fault
 
             class MyResourceTest {
+    @Test
                 void testUpdateUserWidget_UpdateFails() {
                     useStubFormatter(false, [UPDATE_FAILED])
                     def response = resource.getRecords()
@@ -111,6 +120,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'import com.example.Fault', 'The [com.example.Fault] import is never referenced')
     }
 
+    @Test
     void testApplyTo_UnusedImportWildcard() {
         final SOURCE = '''
             import org.codenarc.*
@@ -123,6 +133,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_UnusedStaticImportWildcard() {
         final SOURCE = '''
             import static Math.*
@@ -135,6 +146,7 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             import java.io.InputStream

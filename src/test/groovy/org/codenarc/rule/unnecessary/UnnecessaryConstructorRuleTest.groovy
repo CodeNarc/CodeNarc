@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryConstructorRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryConstructor'
     }
 
+    @Test
     void testConstructors_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -49,6 +52,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass {
@@ -58,6 +62,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public MyClass() {}')
     }
 
+    @Test
     void testConstructor_CallsOnlySuper_Violation() {
         final SOURCE = '''
             class MyClass extends OtherClass {
@@ -69,6 +74,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'MyClass() {')
     }
 
+    @Test
     void testConstructor_CallsSuperAndDoesOtherStuff_NoViolation() {
         final SOURCE = '''
             class MyClass extends OtherClass {
@@ -81,6 +87,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testConstructor_CallsThis_NoViolation() {
         final SOURCE = '''
             class MyClass extends OtherClass {
@@ -95,6 +102,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testConstructor_NotEmpty_NoViolation() {
         final SOURCE = '''
             class MyClass {
@@ -106,6 +114,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testInnerClass() {
         final SOURCE = '''
             class MyClass {

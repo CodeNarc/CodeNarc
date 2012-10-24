@@ -17,6 +17,7 @@ package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DirectConnectionManagementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class DirectConnectionManagementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DirectConnectionManagement'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             OtherManager.getConnection()
@@ -38,6 +41,7 @@ class DirectConnectionManagementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolations() {
         final SOURCE = '''
             DriverManager.getConnection()

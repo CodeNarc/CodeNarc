@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for NonFinalSubclassOfSensitiveInterfaceRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'NonFinalSubclassOfSensitiveInterface'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             final class MyPermission extends java.security.Permission {
@@ -58,6 +61,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testPermissionFullyQualified() {
         final SOURCE = '''
             class MyPermission extends java.security.Permission {
@@ -70,6 +74,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 2, 'class MyPermission extends java.security.Permission', 'The class MyPermission extends java.security.Permission but is not final')
     }
 
+    @Test
     void testBasicPermissionFullyQualified() {
         final SOURCE = '''
             class MyBasicPermission extends java.security.BasicPermission {
@@ -78,6 +83,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 2, 'class MyBasicPermission extends java.security.BasicPermission {', 'The class MyBasicPermission extends java.security.BasicPermission but is not final')
     }
 
+    @Test
     void testPrivilegedActionFullyQualified() {
         final SOURCE = '''
             class MyPrivilegedAction implements java.security.PrivilegedAction {
@@ -86,6 +92,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 2, 'class MyPrivilegedAction implements java.security.PrivilegedAction', 'The class MyPrivilegedAction implements java.security.PrivilegedAction but is not final')
     }
 
+    @Test
     void testPrivilegedActionExceptionFullyQualified() {
         final SOURCE = '''
             class MyPrivilegedActionException extends java.security.PrivilegedActionException {
@@ -94,6 +101,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 2, 'class MyPrivilegedActionException extends java.security.PrivilegedActionException', ' class MyPrivilegedActionException extends java.security.PrivilegedActionException but is not final')
     }
 
+    @Test
     void testPermission() {
         final SOURCE = '''
             import java.security.Permission
@@ -107,6 +115,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 3, 'class MyPermission extends Permission', 'The class MyPermission extends java.security.Permission but is not final')
     }
 
+    @Test
     void testBasicPermission() {
         final SOURCE = '''
             import java.security.BasicPermission
@@ -116,6 +125,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 3, 'class MyBasicPermission extends BasicPermission', 'The class MyBasicPermission extends java.security.BasicPermission but is not final')
     }
 
+    @Test
     void testPrivilegedAction() {
         final SOURCE = '''
             import java.security.PrivilegedAction
@@ -125,6 +135,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 3, 'class MyPrivilegedAction implements PrivilegedAction', 'The class MyPrivilegedAction implements java.security.PrivilegedAction but is not final')
     }
 
+    @Test
     void testPrivilegedActionException() {
         final SOURCE = '''
             import java.security.PrivilegedActionException

@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryLongInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryLongInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryLongInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             assert 42L == foo()
@@ -39,6 +42,7 @@ class UnnecessaryLongInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStringConstructor() {
         final SOURCE = '''
             new Long("42")
@@ -46,6 +50,7 @@ class UnnecessaryLongInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Long("42")', 'Can be rewritten as 42L')
     }
 
+    @Test
     void testLongConstructor() {
         final SOURCE = '''
             new Long(42L)

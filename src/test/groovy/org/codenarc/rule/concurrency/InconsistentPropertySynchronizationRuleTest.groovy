@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for InconsistentPropertySynchronizationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'InconsistentPropertySynchronization'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class Person {
@@ -73,6 +76,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testUnsynchronizedStringGetMethod() {
         final SOURCE = '''
             class Person {
@@ -91,6 +95,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The setter method setName is synchronized but the getter method getName is not')
     }
 
+    @Test
     void testUnsynchronizedDateSetMethod() {
         final SOURCE = '''
             class Person {
@@ -110,6 +115,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The getter method getBirthday is synchronized but the setter method setBirthday is not')
     }
 
+    @Test
     void testUnsynchronizedBooleanSetMethod() {
         final SOURCE = '''
             class Person {
@@ -129,6 +135,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The getter method isDeceased is synchronized but the setter method setDeceased is not')
     }
 
+    @Test
     void testUnsynchronizedBooleanGetMethod() {
         final SOURCE = '''
             class Person {
@@ -148,6 +155,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The setter method setParent is synchronized but the getter method isParent is not')
     }
 
+    @Test
     void testSyncedSetterMissingGetter() {
         final SOURCE = '''
             class Person {
@@ -163,6 +171,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The setter method setAddresses is synchronized but the getter method [getAddresses, isAddresses] is not')
     }
 
+    @Test
     void testSyncedGetterMissingSetter() {
         final SOURCE = '''
             class Person {
@@ -177,6 +186,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The getter method getAddresses is synchronized but the setter method setAddresses is not')
     }
 
+    @Test
     void testAtSyncedGetterMissingSetter_FullyQualified() {
         final SOURCE = '''
             class Person {
@@ -191,6 +201,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
                 'The getter method getAddresses is synchronized but the setter method setAddresses is not')
     }
 
+    @Test
     void testAtSyncedGetterMissingSetter() {
         final SOURCE = '''
             import groovy.transform.*
@@ -210,6 +221,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
     /**
      * In this test there is no Properties property, so synchronizing on getProperties is OK because there is never a setter. 
      */
+    @Test
     void testFalsePositiveOnGetter() {
         final SOURCE = '''
             class DbConfigurationProperties {
@@ -223,6 +235,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testFalsePositiveOnSetter() {
         final SOURCE = '''
             class DbConfigurationProperties {
@@ -236,6 +249,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testFalsePositiveOnIzzer() {
         final SOURCE = '''
             class DbConfigurationProperties {

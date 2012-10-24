@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BrokenNullCheckRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BrokenNullCheckRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BrokenNullCheck'
     }
 
+    @Test
     void testNoNullChecks_NoViolations() {
         final SOURCE = '''
             if (name == 'xxx' || name.length > 0) { }
@@ -40,6 +43,7 @@ class BrokenNullCheckRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testProperNullChecks_NoViolations() {
         final SOURCE = '''
             if (name == null || name.length < 1) { }
@@ -53,6 +57,7 @@ class BrokenNullCheckRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBrokenNullChecks_PropertyAccess_Violations() {
         final SOURCE = '''
             if (name != null || name.length > 0) { }
@@ -71,6 +76,7 @@ class BrokenNullCheckRuleTest extends AbstractRuleTestCase {
             [lineNumber:7, sourceLineText:'return record == null && !record.id', messageText:'record'])
     }
 
+    @Test
     void testBrokenNullChecks_MethodCall_Violations() {
         final SOURCE = '''
             class MyClass {

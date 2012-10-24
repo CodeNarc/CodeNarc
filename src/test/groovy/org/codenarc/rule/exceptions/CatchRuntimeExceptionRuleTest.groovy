@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CatchRuntimeExceptionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class CatchRuntimeExceptionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CatchRuntimeException'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
                 try {
@@ -41,11 +44,13 @@ class CatchRuntimeExceptionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'catch(RuntimeException t) {')
     }
 
+    @Test
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = 'try {  } catch(java.lang.RuntimeException t) { }'
         assertSingleViolation(SOURCE, 1, 'catch(java.lang.RuntimeException t) {')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
                 def myMethod() {

@@ -15,6 +15,8 @@
  */
 package org.codenarc.test
 
+import org.junit.Test
+
 /**
  * Tests that the "site" documentation is up to date.
  *
@@ -22,6 +24,7 @@ package org.codenarc.test
   */
 class SiteDocumentationTest extends GroovyTestCase {
 
+    @Test
     void testDocumentation() {
 
 

@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CloneableWithoutCloneRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CloneableWithoutClone'
     }
 
+    @Test
     void testNonCloneableClass() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass0 {
@@ -40,6 +43,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testCloneableWithClone() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass1 implements Cloneable {
@@ -51,6 +55,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertNoViolations SOURCE
     }
 
+    @Test
     void testCloneableWithMisnamedClone() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass2 implements Cloneable, Serializable {
@@ -61,6 +66,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass2 implements Cloneable'
     }
 
+    @Test
     void testCloneableWithMisnamedCloneWithPath() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable, Serializable {
@@ -71,6 +77,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable'
     }
 
+    @Test
     void testCloneableWithParameters() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable, Serializable {
@@ -81,6 +88,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass3 implements java.lang.Cloneable'
     }
 
+    @Test
     void testCloneableWithMissingClone() {
         final SOURCE = '''
             class CloneableWithoutCloneRuleClass4 implements Cloneable {

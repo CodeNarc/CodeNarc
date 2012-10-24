@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryGroovyImportRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryGroovyImport'
@@ -34,6 +36,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
      * no violations
      */
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             import java.text.SimpleDateFormat
@@ -43,6 +46,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_StaticImport() {
         final SOURCE = '''
             import static java.math.BigDecimal.*
@@ -59,6 +63,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MixtureOfStaticAndRegularImports_NoViolations() {
         final SOURCE = '''
             import static java.net.HttpURLConnection.*
@@ -73,6 +78,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testImportAliases_NoViolations() {
         final SOURCE = '''
             import groovy.lang.MetaClass as Foo
@@ -86,6 +92,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
      * violations - misc.
      */
 
+    @Test
     void testApplyTo_ImportStar_Violations() {
         final SOURCE = '''
             import java.io.*
@@ -97,6 +104,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
      * violations - Java imports
      */
 
+    @Test
     void testApplyTo_ImportJavaIo() {
         final SOURCE = '''
             import com.xxx.MyClass
@@ -106,6 +114,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'java.io.InputStream', 4, 'java.io.OutputStream')
     }
 
+    @Test
     void testApplyTo_ImportJavaLang() {
         final SOURCE = '''
             import java.lang.String
@@ -116,6 +125,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'java.lang.String', 5, 'java.lang.Integer')
     }
 
+    @Test
     void testApplyTo_ImportJavaMath() {
         final SOURCE = '''
             import java.math.BigDecimal
@@ -126,6 +136,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'java.math.BigDecimal', 5, 'java.math.BigInteger')
     }
 
+    @Test
     void testApplyTo_ImportJavaNet() {
         final SOURCE = '''
             import java.net.URL
@@ -135,6 +146,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'java.net.URL', 4, 'java.net.Socket')
     }
 
+    @Test
     void testApplyTo_ImportJavaUtil() {
         final SOURCE = '''
             import java.util.List
@@ -148,6 +160,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
      * violations - Groovy imports
      */
 
+    @Test
     void testApplyTo_ImportGroovyLang() {
         final SOURCE = '''
             import groovy.lang.MetaClass
@@ -157,6 +170,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'groovy.lang.MetaClass', 4, 'groovy.lang.GString')
     }
 
+    @Test
     void testApplyTo_ImportGroovyUtil() {
         final SOURCE = '''
             import groovy.util.Eval

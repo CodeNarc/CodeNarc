@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitGarbageCollectionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitGarbageCollection'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             System.gc(666)
@@ -47,6 +50,7 @@ class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSystemGC() {
         final SOURCE = '''
             System.gc()
@@ -54,6 +58,7 @@ class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'System.gc()', 'Garbage collection should not be explicitly forced')
     }
 
+    @Test
     void testSystemFinalization() {
         final SOURCE = '''
             System.runFinalization()
@@ -61,6 +66,7 @@ class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'System.runFinalization()', 'Garbage collection should not be explicitly forced')
     }
 
+    @Test
     void testRuntimeGcMethodCall() {
         final SOURCE = '''
             Runtime.getRuntime().gc()
@@ -69,6 +75,7 @@ class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
                 2, 'Runtime.getRuntime().gc()', 'Garbage collection should not be explicitly forced')
     }
 
+    @Test
     void testRuntimeGcPropertyInvocation() {
         final SOURCE = '''
             Runtime.runtime.gc()

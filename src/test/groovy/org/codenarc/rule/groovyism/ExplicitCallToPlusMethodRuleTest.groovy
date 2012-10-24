@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitCallToPlusMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitCallToPlusMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
@@ -41,6 +44,7 @@ class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testChainedCall() {
         rule.ignoreThisReference = false
         final SOURCE = '''
@@ -50,6 +54,7 @@ class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolation() {
         final SOURCE = '''
             a.plus(b)

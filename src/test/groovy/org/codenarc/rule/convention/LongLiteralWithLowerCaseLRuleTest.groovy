@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for LongLiteralWithLowerCaseLRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class LongLiteralWithLowerCaseLRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'LongLiteralWithLowerCaseL'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	def a = 55
@@ -41,6 +44,7 @@ class LongLiteralWithLowerCaseLRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             def x = 1l
@@ -48,6 +52,7 @@ class LongLiteralWithLowerCaseLRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = 1l', 'The literal 1l should be rewritten 1L')
     }
 
+    @Test
     void testLongerNUmber() {
         final SOURCE = '''
             def x = 222l

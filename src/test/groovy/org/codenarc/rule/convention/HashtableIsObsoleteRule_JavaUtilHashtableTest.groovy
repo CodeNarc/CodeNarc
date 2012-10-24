@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for HashtableIsObsoleteRule. Checks for references to 'java.util.Hashtable'.
@@ -28,6 +29,7 @@ class HashtableIsObsoleteRule_JavaUtilHashtableTest extends AbstractClassReferen
     final String className = 'java.util.Hashtable'
     final String violationMessage = "The $className class is obsolete"
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'HashtableIsObsolete'

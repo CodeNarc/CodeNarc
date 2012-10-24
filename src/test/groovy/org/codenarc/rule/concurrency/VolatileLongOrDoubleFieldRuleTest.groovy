@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Unit test for VolatileLongOrDoubleFieldRule.
@@ -24,11 +25,13 @@ import org.codenarc.rule.Rule
  * @author Hamlet D'Arcy
  */
 class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase {
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'VolatileLongOrDoubleField'
     }
 
+    @Test
     void testApplyTo_Violation_Doubles() {
         final SOURCE = '''
             class VolatileLongOrDoubleFieldClass1 {
@@ -41,6 +44,7 @@ class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase {
                 4, 'private volatile Double e')
     }
 
+    @Test
     void testApplyTo_Violation_Floats() {
         final SOURCE = '''
             class VolatileLongOrDoubleFieldClass2 {
@@ -53,6 +57,7 @@ class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase {
                 4, 'private volatile Long g')
     }
 
+    @Test
     void testApplyTo_Violation_FloatsWithoutModifier() {
         final SOURCE = '''
             class VolatileLongOrDoubleFieldClass3 {
@@ -65,6 +70,7 @@ class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase {
                 4, 'def volatile Long g')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class VolatileLongOrDoubleFieldClass4 {
                 double d

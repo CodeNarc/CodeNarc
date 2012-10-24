@@ -521,15 +521,15 @@
         <root url="jar://$M2_REPO$/asm/asm/2.2.1/asm-2.2.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: junit:junit:3.8.1">
+    <library name="Maven: junit:junit:4.8.2">
       <CLASSES>
-        <root url="jar://$M2_REPO$/junit/junit/3.8.1/junit-3.8.1.jar!/" />
+        <root url="jar://$M2_REPO$/junit/junit/4.8.2/junit-4.8.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/junit/junit/3.8.1/junit-3.8.1-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/junit/junit/4.8.2/junit-4.8.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/junit/junit/3.8.1/junit-3.8.1-sources.jar!/" />
+        <root url="jar://$M2_REPO$/junit/junit/4.8.2/junit-4.8.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: log4j:log4j:1.2.13">

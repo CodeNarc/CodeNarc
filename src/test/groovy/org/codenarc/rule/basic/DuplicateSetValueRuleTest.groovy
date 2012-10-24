@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DuplicateSetValueRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class DuplicateSetValueRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DuplicateSetValue'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def a = [1, 2, 3, 4, null] as Set
@@ -40,6 +43,7 @@ class DuplicateSetValueRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDuplicateIntegers() {
         final SOURCE = '''
             def a = [1, 2, null, 2, 4] as Set
@@ -54,6 +58,7 @@ class DuplicateSetValueRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 5, sourceLineText: 'def d = [1, null, null, 3, 4] as SortedSet', messageText: 'The constant value null is duplicated in the Set literal'])
     }
 
+    @Test
     void testDuplicateStrings() {
         final SOURCE = '''
             def e = ['1', '2', '2', null, '4'] as Set
@@ -66,6 +71,7 @@ class DuplicateSetValueRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 4, sourceLineText: "def g = ['1', '3', '3', null, '4'] as SortedSet", messageText: "The constant value '3' is duplicated in the Set literal"])
     }
 
+    @Test
     void testDuplicateIntsInCustomType() {
         final SOURCE = '''
             def d = [1, 2, 2, 4] as FooSet

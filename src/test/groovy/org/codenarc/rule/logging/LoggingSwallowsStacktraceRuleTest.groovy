@@ -17,6 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for LoggingSwallowsStacktraceRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'LoggingSwallowsStacktrace'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class MyClass {
@@ -50,6 +53,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
         	class MyClass {
@@ -75,6 +79,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
                 14, 'logger.error(e)', 'The error logging may hide the stacktrace from the exception named e')
     }
     
+    @Test
     void testReportedDefect() {
         final SOURCE = '''
             class MyClass {

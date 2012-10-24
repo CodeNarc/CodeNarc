@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DoubleNegativeRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class DoubleNegativeRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DoubleNegative'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	!true
@@ -37,6 +40,7 @@ class DoubleNegativeRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoubleNegatives() {
         final SOURCE = '''
             def x = !!true

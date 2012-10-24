@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryCollectionCallRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryCollectionCall'
     }
 
+    @Test
     void testNoViolations() {
         final SOURCE = '''
         	def x = [1, 2, 3]
@@ -44,6 +47,7 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testScriptFailure() {
         final SOURCE = '''
         	def x = [1, 2, 3]
@@ -56,6 +60,7 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testClassFailure() {
         final SOURCE = '''
             class MyClass {

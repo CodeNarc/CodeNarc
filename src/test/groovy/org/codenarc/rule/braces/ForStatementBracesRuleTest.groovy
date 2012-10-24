@@ -17,6 +17,7 @@ package org.codenarc.rule.braces
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ForStatementBracesRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ForStatementBracesRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ForStatementBraces'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -44,6 +47,7 @@ class ForStatementBracesRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'for (int i=0; i < 10; i++)', 6, 'for (int j=0; j < 10; j++)')
     }
 
+    @Test
     void testApplyTo_Violation_ForStatementWithCommentOnly() {
         final SOURCE = '''
             for (int i=0; i < 10; i++) {
@@ -53,6 +57,7 @@ class ForStatementBracesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

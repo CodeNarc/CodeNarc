@@ -17,6 +17,8 @@ package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for GrailsPublicControllerMethodRule
@@ -27,11 +29,13 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
     static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsPublicControllerMethod'
     }
 
+    @Test
     void testApplyTo_PublicMethod() {
         final SOURCE = '''
             class MyController {
@@ -47,6 +51,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'void doSomething() {')
     }
 
+    @Test
     void testApplyTo_TwoPublicMethods() {
         final SOURCE = '''
             class MyController {
@@ -60,6 +65,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'boolean isThisNecessary() { false }', 5, 'void doSomething() {')
     }
 
+    @Test
     void testApplyTo_PublicStaticMethods() {
         final SOURCE = '''
             class MyClass {
@@ -70,6 +76,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoPublicMethods() {
         final SOURCE = '''
             class MyController {
@@ -86,6 +93,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PublicMethodsWithinNonControllerClass() {
         final SOURCE = '''
             class MyHelper {
@@ -97,6 +105,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PublicMethodsWithinNonControllerPath() {
         final SOURCE = '''
             class MyController {
@@ -110,6 +119,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         final SOURCE = '''
             class MyController {
@@ -120,6 +130,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
         final SOURCE = '''
             class MyController {
@@ -130,6 +141,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE, [lineNumber:3, sourceLineText:'void myMethod()'])
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
             class MyController {
@@ -143,8 +155,8 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     }
 
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpGrailsPublicControllerMethodRuleTest() {
         sourceCodePath = CONTROLLER_PATH
     }
 

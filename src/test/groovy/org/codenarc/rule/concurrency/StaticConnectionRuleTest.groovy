@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for StaticConnectionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class StaticConnectionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'StaticConnection'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class MyClass {
@@ -39,6 +42,7 @@ class StaticConnectionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
         	class MyClass {

@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for MethodCountRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
   */
 class MethodCountRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'MethodCount'
         assert rule.maxMethods == 30
     }
 
+    @Test
     void testSuccessScenario() {
         String classContent = 'class MyClass {\n'
         for (int i = 0; i < rule.maxMethods; i++) {
@@ -40,6 +43,7 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
         assertNoViolations(classContent)
     }
 
+    @Test
     void testSingleViolation() {
         String classContent = '''
             class MyClass {
@@ -52,6 +56,7 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(classContent, 2, 'class MyClass {', ['MyClass', '3'])
     }
 
+    @Test
     void testIgnoreGeneratedMethods() {
         rule.maxMethods = 2
 

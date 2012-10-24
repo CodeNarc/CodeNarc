@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryDefInVariableDeclarationRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryDefInVariableDeclaration'
@@ -34,6 +36,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
      * Success scenarios
      */
 
+    @Test
     void testSuccessScenario_modifiers() {
         final SOURCE = '''
             final SOURCE = \'\'\'
@@ -53,6 +56,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_variableNamesContainingModifierNames() {
         final SOURCE = '''
             def privateVariable   = 'example'
@@ -67,6 +71,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_types() {
         final SOURCE = '''
             Object variable1 = 'example'
@@ -76,6 +81,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_misc() {
         final SOURCE = '''
             def variable1 = variable2 = 'example'
@@ -84,6 +90,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_Enum() {
         final SOURCE = '''
             enum MavenScope {
@@ -97,6 +104,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testThatFieldsAreNotChecked() {
         final SOURCE = '''
             class MyClass {
@@ -111,6 +119,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
      * Violations
      */
 
+    @Test
     void testViolation_defAndPrivate() {
         final SOURCE = '''
             def private variable1
@@ -121,6 +130,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def private variable2', 'The def keyword is unneeded when a variable is marked private')
     }
 
+    @Test
     void testViolation_defAndProtected() {
         final SOURCE = '''
             def protected variable1
@@ -131,6 +141,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def protected variable2', 'The def keyword is unneeded when a variable is marked protected')
     }
 
+    @Test
     void testViolation_defAndPublic() {
         final SOURCE = '''
             def public variable1
@@ -141,6 +152,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def public variable2', 'The def keyword is unneeded when a variable is marked public')
     }
 
+    @Test
     void testViolation_defAndFinal() {
         final SOURCE = '''
             def final variable1
@@ -151,6 +163,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def final variable2', 'The def keyword is unneeded when a variable is marked final')
     }
 
+    @Test
     void testViolation_defAndVolatile() {
         final SOURCE = '''
             def volatile variable1
@@ -161,6 +174,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def volatile variable2', 'The def keyword is unneeded when a variable is marked volatile')
     }
 
+    @Test
     void testViolation_defAndTransient() {
         final SOURCE = '''
             def transient variable1
@@ -171,6 +185,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def transient variable2', 'The def keyword is unneeded when a variable is marked transient')
     }
 
+    @Test
     void testViolation_defAndObjectType() {
         final SOURCE = '''
             def Object variable1
@@ -181,6 +196,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def Object variable2', 'The def keyword is unneeded when a variable is of type Object')
     }
 
+    @Test
     void testViolation_variableDeclarationAcrossMultipleLines() {
         final SOURCE = '''
             def
@@ -190,6 +206,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def', 'The def keyword is unneeded when a variable is marked public')
     }
 
+    @Test
     void testViolation_variableTypeDeclared() {
         final SOURCE = '''
             def String foo
@@ -197,6 +214,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def String foo', 'The def keyword is unneeded when a variable is declared with a type')
     }
 
+    @Test
     void testViolation_multipleVariablesOnSingleLine() {
         final SOURCE = '''
             def variable1 = 'good'; def public variable2 = 'bad'

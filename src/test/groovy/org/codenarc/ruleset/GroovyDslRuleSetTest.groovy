@@ -17,9 +17,9 @@ package org.codenarc.ruleset
 
 import org.apache.log4j.Logger
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
-import static org.codenarc.test.TestUtil.assertContainsAll
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import static org.codenarc.test.TestUtil.*
 
 /**
  * Tests for GroovyDslRuleSet
@@ -30,23 +30,28 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
 
     static final LOG = Logger.getLogger(GroovyDslRuleSetTest)
 
+    @Test
     void testNullPath() {
         shouldFailWithMessageContaining('path') { new GroovyDslRuleSet(null) }
     }
 
+    @Test
     void testEmptyPath() {
         shouldFailWithMessageContaining('path') { new GroovyDslRuleSet('') }
     }
 
+    @Test
     void testFileDoesNotExist() {
         def errorMessage = shouldFail { new GroovyDslRuleSet('DoesNotExist.xml') }
         assertContainsAll(errorMessage, ['DoesNotExist.xml', 'does not exist'])
     }
 
+    @Test
     void testLoadGroovyRuleSet_SetNonExistentRuleProperty() {
         shouldFailWithMessageContaining('noSuchProperty') { new GroovyDslRuleSet('rulesets/GroovyRuleSet_Bad.txt') }
     }
 
+    @Test
     void testLoadGroovyRuleSet() {
         final PATH = 'rulesets/GroovyRuleSet1.txt'  // groovy files are not on classpath; have to use *.txt
         def groovyDslRuleSet = new GroovyDslRuleSet(PATH)
@@ -58,6 +63,7 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
         assert rules[1].priority == 3
     }
 
+    @Test
     void testLoadGroovyRuleSet_RelativeFileUrl() {
         final PATH = 'file:src/test/resources/rulesets/GroovyRuleSet1.groovy'
         def groovyDslRuleSet = new GroovyDslRuleSet(PATH)
@@ -69,6 +75,7 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
         assert rules[1].priority == 3
     }
 
+    @Test
     void testLoadGroovyRuleSet_ConfigFileDoesNotCompile() {
 
         def file = File.createTempFile('codenarctest', '.groovy')
@@ -86,6 +93,7 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
         file.delete()
     }
 
+    @Test
     void testLoadNestedGroovyRuleSet() {
         final PATH = 'rulesets/GroovyRuleSet2.txt'
         def groovyDslRuleSet = new GroovyDslRuleSet(PATH)

@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryGetterRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryGetter'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             x.get()
@@ -43,6 +46,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTwoSimpleGetters() {
         final SOURCE = '''
             x.getProperty()
@@ -53,6 +57,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
                 3, 'x.getPi()', 'getPi() can probably be rewritten as pi'
     }
 
+    @Test
     void testCamelCaseGetters() {
         final SOURCE = '''
             x.getFirstName()
@@ -60,6 +65,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'x.getFirstName()', 'getFirstName() can probably be rewritten as firstName')
     }
 
+    @Test
     void testSingleLetterNamedGetters() {
         final SOURCE = '''
             x.getA()
@@ -67,6 +73,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'x.getA()', 'getA() can probably be rewritten as a')
     }
 
+    @Test
     void testUpperCaseGetter1() {
         final SOURCE = '''
             x.getURLs()
@@ -74,6 +81,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'x.getURLs()', 'getURLs() can probably be rewritten as URLs')
     }
 
+    @Test
     void testUpperCaseGetter2() {
         final SOURCE = '''
             x.getURL()
@@ -81,6 +89,7 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'x.getURL()', 'getURL() can probably be rewritten as URL')
     }
 
+    @Test
     void testNonGetter() {
         final SOURCE = '''
             def allPaths = resultsMap.keySet()

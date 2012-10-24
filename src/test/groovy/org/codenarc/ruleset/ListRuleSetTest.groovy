@@ -17,7 +17,9 @@ package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
+import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
@@ -29,11 +31,13 @@ class ListRuleSetTest extends AbstractTestCase {
 
     static final RULE = [:] as Rule
 
+    @Test
     void testWithRules() {
         def ruleSet = new ListRuleSet([RULE])
         assert ruleSet.getRules() == [RULE]
     }
 
+    @Test
     void testRulesListIsImmutable() {
         def list = [RULE]
         def ruleSet = new ListRuleSet(list)
@@ -43,10 +47,12 @@ class ListRuleSetTest extends AbstractTestCase {
         shouldFail(UnsupportedOperationException) { r.clear() }
     }
 
+    @Test
     void testWithNull() {
         shouldFailWithMessageContaining('rules') { new ListRuleSet(null) }
     }
 
+    @Test
     void testWithNonRules() {
         shouldFail { new ListRuleSet([RULE, 23]) }
     }

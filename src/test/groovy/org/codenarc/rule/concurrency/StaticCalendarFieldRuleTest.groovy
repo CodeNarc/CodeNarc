@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for StaticCalendarFieldRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
  */
 class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'StaticCalendarField'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
           // these usages are OK
@@ -42,6 +45,7 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStaticField() {
         final SOURCE = '''
               class MyClass {
@@ -51,6 +55,7 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static Calendar calendar', 'Calendar instances are not thread safe. Wrap the Calendar field calendar in a ThreadLocal or make it an instance field')
     }
 
+    @Test
     void testStaticFieldFullyQualifiedName() {
         final SOURCE = '''
               class MyClass {
@@ -60,6 +65,7 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static java.util.Calendar calendar', 'Calendar instances are not thread safe. Wrap the Calendar field calendar in a ThreadLocal or make it an instance field')
     }
 
+    @Test
     void testStaticUntypedField_InitializesValueToCalendar() {
         final SOURCE = '''
             class MyClass {
@@ -77,6 +83,7 @@ class StaticCalendarFieldRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testNonStaticFieldWithCalendarInitializer() {
         final SOURCE = '''
           class MyClass {

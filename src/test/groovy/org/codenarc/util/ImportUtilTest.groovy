@@ -17,6 +17,7 @@
 
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for ImportUtil
@@ -25,6 +26,7 @@ import org.codenarc.test.AbstractTestCase
  */
 class ImportUtilTest extends AbstractTestCase {
 
+    @Test
     void testSourceLineAndNumberForImport() {
         final SOURCE = '''
             import a.b.MyClass
@@ -48,6 +50,7 @@ class ImportUtilTest extends AbstractTestCase {
         assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null])
     }
 
+    @Test
     void testSourceLineAndNumberForImport_ClassNameAndAlias() {
         final SOURCE = '''
             import a.b.MyClass
@@ -65,6 +68,7 @@ class ImportUtilTest extends AbstractTestCase {
         assert ImportUtil.sourceLineAndNumberForImport(otherSourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
     }
 
+    @Test
     void testSourceLineAndNumberForImport_StaticImport() {
         final SOURCE = '''
             import static java.io.DataInputStream.*
@@ -77,6 +81,7 @@ class ImportUtilTest extends AbstractTestCase {
         assertStaticImport(sourceCode, ast, [sourceLine:'import static java.lang.Integer.MAX_VALUE', lineNumber:3])
     }
 
+    @Test
     void testSourceLineAndNumberForImport_SimilarlyNamedImports() {
         final SOURCE = '''
             import static com.example.FaultMessages.*

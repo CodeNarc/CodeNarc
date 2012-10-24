@@ -17,6 +17,8 @@ package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for GrailsSessionReferenceRule
@@ -28,15 +30,18 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
     static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'
     static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
+    @Test
     void testDisabledByDefault() {
         assert !new GrailsSessionReferenceRule().enabled
     }
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsSessionReference'
     }
 
+    @Test
     void testApplyTo_AssignmentToSessionProperty() {
         final SOURCE = '''
             class MyClass {
@@ -49,6 +54,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'session.count = 23')
     }
 
+    @Test
     void testApplyTo_SimpleReferenceToSession() {
         final SOURCE = '''
             class MyClass {
@@ -60,6 +66,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'println session')
     }
 
+    @Test
     void testApplyTo_ReferenceWithinMethodCallArgument() {
         final SOURCE = '''
             class MyClass {
@@ -71,6 +78,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, "doSomething(1, 'abc', session)")
     }
 
+    @Test
     void testApplyTo_ReferenceWithinFieldInitializer() {
         final SOURCE = '''
             class MyClass {
@@ -84,6 +92,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'def mySession = session', 6, 'println "amount=${session.amount}"')
     }
 
+    @Test
     void testApplyTo_ReferenceWithinTagLib() {
         final SOURCE = '''
             class SimpleTagLib {
@@ -94,6 +103,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def simple = { attrs, body -> session.amount = attrs.amount }')
     }
 
+    @Test
     void testApplyTo_ReferenceWithinNonControllerClass() {
         final SOURCE = '''
             class MyClass {
@@ -106,8 +116,8 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpGrailsSessionReferenceRuleTest() {
         sourceCodePath = CONTROLLER_PATH
     }
 

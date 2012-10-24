@@ -17,6 +17,7 @@ package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CyclomaticComplexityRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
   */
 class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CyclomaticComplexity'
@@ -32,6 +34,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assert rule.maxClassAverageMethodComplexity == 20
     }
 
+    @Test
     void testApplyTo_ClassWithNoMethods() {
         final SOURCE = '''
             class MyClass {
@@ -41,6 +44,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleMethod_EqualToMaxMethodComplexity() {
         final SOURCE = '''
             class MyClass {
@@ -53,6 +57,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SingleMethod_ExceedsMaxMethodComplexity() {
         final SOURCE = '''
             class MyClass {
@@ -65,6 +70,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
+    @Test
     void testSuppressWarningsOnClass() {
         final SOURCE = '''
             @SuppressWarnings('CyclomaticComplexity')
@@ -78,6 +84,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assert manuallyApplyRule(SOURCE).size() == 0
     }
 
+    @Test
     void testSuppressWarningsOnMethod() {
         final SOURCE = '''
             class MyClass {
@@ -91,6 +98,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assert manuallyApplyRule(SOURCE).size() == 0
     }
 
+    @Test
     void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
         final SOURCE = '''
             class MyClass {
@@ -101,6 +109,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myClosure', ['myClosure', '5'])
     }
 
+    @Test
     void testApplyTo_TwoMethodsExceedsMaxMethodComplexity() {
         final SOURCE = """
             class MyClass {
@@ -119,6 +128,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, 'def myMethod1()', ['myMethod1', '3'], 9, 'def myMethod3()', ['myMethod3', '7'])
     }
 
+    @Test
     void testApplyTo_Class_ExceedsMaxAverageClassComplexity() {
         final SOURCE = '''
             class MyClass {
@@ -131,6 +141,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
     }
 
+    @Test
     void testApplyTo_Class_ZeroMaxClassAverageMethodComplexity_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -143,6 +154,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ClassAndMethod_ExceedThreshold() {
         final SOURCE = '''
             class MyClass {
@@ -163,6 +175,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
                 8, 'def myMethod3()', ['myMethod3', '6'])
     }
 
+    @Test
     void testApplyTo_ClassAndMethods_AtThreshold() {
         final SOURCE = '''
             class MyClass {
@@ -181,6 +194,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         final SOURCE = '''
             class MyClass {
@@ -194,6 +208,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
         final SOURCE = '''
             class MyClass {
@@ -207,6 +222,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
+    @Test
     void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
         final SOURCE = '''
             class MyClass {
@@ -225,6 +241,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'def myClosure', ['myClosure', '3'])
     }
 
+    @Test
     void testApplyTo_NoExplicitClass_StillChecksMethods() {
         final SOURCE = '''
             def myMethod() {
@@ -236,6 +253,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def myMethod()', ['myMethod', '6'])
     }
 
+    @Test
     void testApplyTo_NoExplicitMethodDefinition_ChecksAsRunMethod() {
         final SOURCE = '''
             if (isReady) {

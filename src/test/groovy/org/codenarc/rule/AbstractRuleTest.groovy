@@ -17,6 +17,8 @@ package org.codenarc.rule
 
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertContainsAll
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
@@ -39,42 +41,50 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     static skipTestThatUnrelatedCodeHasNoViolations
     static skipTestThatInvalidCodeHasNoViolations
 
+    @Test
     void testToString() {
         assertContainsAll(rule.toString(), ['TestPathRule', NAME, PRIORITY.toString()])
     }
 
+    @Test
     void testName() {
         rule.name = 'abc'
         assert rule.getName() == 'abc'
     }
 
+    @Test
     void testDescription() {
         assert rule.description == null
         rule.description = 'abc'
         assert rule.getDescription() == 'abc'
     }
 
+    @Test
     void testPriority() {
         rule.priority = 1
         assert rule.getPriority() == 1
     }
 
+    @Test
     void testIsReady_DefaultsToTrue() {
         assert rule.ready
     }
 
+    @Test
     void testIsReady() {
         rule = new NotReadyRule()
         assert !rule.isReady()
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testEnabled() {
         assertSingleViolation(SOURCE)
         rule.enabled = false
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyToFilesMatching() {
         rule.applyToFilesMatching = MATCH
         assertSingleViolation(SOURCE)
@@ -82,6 +92,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoNotApplyToFilesMatching() {
         rule.doNotApplyToFilesMatching = NO_MATCH
         assertSingleViolation(SOURCE)
@@ -89,6 +100,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBothApplyToFilesMatchingAndDoNotApplyToFilesMatching() {
         rule.applyToFilesMatching = MATCH            // apply = YES
         rule.doNotApplyToFilesMatching = MATCH       // doNotApply = YES
@@ -107,6 +119,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyToFileNames_FilenameOnly() {
         rule.applyToFileNames = FILENAME
         assertSingleViolation(SOURCE)
@@ -121,6 +134,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyToFileNames_WithPath() {
         rule.applyToFileNames = 'org/codenarc/MyTest.groovy'
         assertSingleViolation(SOURCE)
@@ -141,6 +155,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoNotApplyToFileNames_FilenameOnly() {
         rule.doNotApplyToFileNames = 'Xxx.groovy'
         assertSingleViolation(SOURCE)
@@ -155,6 +170,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoNotApplyToFileNames_WithPath() {
         rule.doNotApplyToFileNames = 'org/codenarc/Xxx.groovy'
         assertSingleViolation(SOURCE)
@@ -172,6 +188,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBothApplyToFileNamesAndDoNotApplyToFileNames() {
         rule.applyToFileNames = FILENAME             // apply = YES
         rule.doNotApplyToFileNames = FILENAME        // doNotApply = YES
@@ -190,6 +207,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyToFileNamesAndDoNotApplyToFilesMatching() {
         rule.applyToFileNames = FILENAME             // apply filename = YES
         rule.doNotApplyToFilesMatching = MATCH       // doNotApply regex = YES
@@ -200,6 +218,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyToFilesMatchingAndDoNotApplyToFileNames() {
         rule.applyToFilesMatching = MATCH            // apply regex = YES
         rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply filename = NO
@@ -210,17 +229,20 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ViolationMessageIsNotSet() {
         def violations = applyRuleTo(SOURCE)
         assert violations[0].message == PATH
     }
 
+    @Test
     void testApplyTo_ViolationMessageIsSetToEmpty() {
         rule.violationMessage = ''
         def violations = applyRuleTo(SOURCE)
         assert violations[0].message == ''
     }
 
+    @Test
     void testApplyTo_ViolationMessageIsSet() {
         rule.violationMessage = 'abc'
         rule.numberOfViolations = 2
@@ -229,11 +251,13 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assert violations[1].message == 'abc'
     }
 
+    @Test
     void testApplyTo_Error() {
         rule = new ExceptionRule(new Exception('abc'))
         shouldFailWithMessageContaining('abc') { applyRuleTo(SOURCE) }
     }
 
+    @Test
     void testCreateViolation() {
         def v = rule.createViolation(23, 'src', 'msg')
         assert v.lineNumber == 23
@@ -241,6 +265,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assert v.message == 'msg'
     }
 
+    @Test
     void testCreateViolation_Defaults() {
         def v = rule.createViolation(99)
         assert v.lineNumber == 99
@@ -248,6 +273,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assert v.message == null
     }
 
+    @Test
     void testCreateViolation_ASTNode() {
         final SOURCE = '''
             class MyClass {
@@ -266,8 +292,8 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     // Setup and helper methods
     //--------------------------------------------------------------------------
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpAbstractRuleTest() {
         sourceCodePath = PATH
         sourceCodeName = FILENAME
     }

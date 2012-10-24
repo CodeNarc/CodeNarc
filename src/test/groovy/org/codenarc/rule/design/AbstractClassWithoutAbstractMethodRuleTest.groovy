@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for AbstractClassWithoutAbstractMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AbstractClassWithoutAbstractMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
@@ -55,6 +58,7 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             abstract class MyBaseClass {

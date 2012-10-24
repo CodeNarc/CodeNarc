@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnusedObjectRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
  */
 class UnusedObjectRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnusedObject'
         assert rule.doNotApplyToFilesMatching == DEFAULT_TEST_FILES
     }
 
+    @Test
     void testApplyTo_ObjectAssigned_NoViolations() {
         final SOURCE = '''
         	def v1 = new Object()
@@ -40,6 +43,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ObjectNotAssigned_ButLastStatementWithinAMethod_NoViolations() {
         final SOURCE = '''
             println new BigDecimal("23.45")
@@ -48,6 +52,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ObjectNotAssigned_ButLastStatementWithinAClosure_NoViolations() {
         final SOURCE = '''
             def closure = { new Date() }
@@ -55,6 +60,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ObjectNotAssigned_Violations() {
         final SOURCE = '''
         	new Object()
@@ -66,6 +72,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 3, sourceLineText: 'new URL("www.google.com")'])
     }
 
+    @Test
     void testApplyTo_ObjectNotAssigned_WithinClosure_Violations() {
         final SOURCE = '''
             def myClosure = { ->
@@ -76,6 +83,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE, [lineNumber: 3, sourceLineText: 'new Object()'])
     }
 
+    @Test
     void testApplyTo_SuperConstructorCall_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -92,6 +100,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ThisConstructorCall_NoViolations() {
         final SOURCE = '''
             class MyClass {

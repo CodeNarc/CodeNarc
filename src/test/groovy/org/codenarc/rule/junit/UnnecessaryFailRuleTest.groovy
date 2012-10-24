@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryFailRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnnecessaryFail'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyTest {
@@ -60,6 +63,7 @@ class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testFailWithArgument() {
         final SOURCE = '''
             class MyTest {
@@ -75,6 +79,7 @@ class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'fail()', 'Catching an exception and failing will hide the stack trace. It is better to rethrow the exception')
     }
 
+    @Test
     void testMultiCatch() {
         final SOURCE = '''
             class MyTest {
@@ -92,6 +97,7 @@ class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, 'fail()', 'Catching an exception and failing will hide the stack trace. It is better to rethrow the exception')
     }
 
+    @Test
     void testFailMultiline() {
         final SOURCE = '''
             class MyTest {
@@ -108,6 +114,7 @@ class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 8, 'fail()', 'Catching an exception and failing will hide the stack trace. It is better to rethrow the exception')
     }
 
+    @Test
     void testFail() {
         final SOURCE = '''
             class MyTest {
@@ -123,6 +130,7 @@ class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'fail()', 'Catching an exception and failing will hide the stack trace. It is better to rethrow the exception')
     }
 
+    @Test
     void testFailWithArgument_FullyQualified() {
         final SOURCE = '''
             class MyTest {
@@ -137,6 +145,7 @@ class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'Assert.fail()', 'Catching an exception and failing will hide the stack trace. It is better to rethrow the exception')
     }
 
+    @Test
     void testFail_FullyQualified() {
         final SOURCE = '''
             class MyTest {

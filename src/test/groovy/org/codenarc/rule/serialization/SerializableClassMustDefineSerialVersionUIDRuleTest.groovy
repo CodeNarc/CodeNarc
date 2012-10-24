@@ -17,6 +17,7 @@ package org.codenarc.rule.serialization
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SerializableClassMustDefineSerialVersionUIDRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SerializableClassMustDefineSerialVersionUID'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass implements Serializable {
@@ -43,6 +46,7 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass implements Serializable {

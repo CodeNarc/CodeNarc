@@ -17,6 +17,7 @@ package org.codenarc.rule.dry
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DuplicateStringLiteralRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DuplicateStringLiteral'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	println 'w'
@@ -59,6 +62,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testAcrossManyMethodCalls() {
         final SOURCE = '''
         	println 'w'
@@ -68,6 +72,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, "println 'w'", 4, "println 'w'")
     }
 
+    @Test
     void testEnums() {
         final SOURCE = '''
             enum MyEnum {
@@ -84,6 +89,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
             '''
         assertNoViolations SOURCE
     }
+    @Test
     void testMethodCall() {
         final SOURCE = '''
         	println 'w', 'w', 'w'
@@ -91,6 +97,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, "println 'w', 'w', 'w'", 2, "println 'w', 'w', 'w'")
     }
 
+    @Test
     void testInAList() {
         final SOURCE = '''
         	def x = ['foo', 'bar', 'foo']
@@ -98,6 +105,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "def x = ['foo', 'bar', 'foo']")        
     }
 
+    @Test
     void testInAMap() {
         final SOURCE = '''
         	def y = [x: 'bar', y: 'bar']
@@ -105,6 +113,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "def y = [x: 'bar', y: 'bar']")        
     }
 
+    @Test
     void testInDeclarations() {
         final SOURCE = '''
         	def x = 'foo'
@@ -115,6 +124,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, "def y = 'foo'", 5, "y = 'bar'")
     }
 
+    @Test
     void testInFields() {
         final SOURCE = '''
             class MyClass {
@@ -126,6 +136,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
 
     }
 
+    @Test
     void testInTernary() {
         final SOURCE = '''
             ('e' == 'e') ? 'g' : 'h'
@@ -134,6 +145,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, "('e' == 'e') ? 'g' : 'h'", 3, "('e' == 'f') ? 'g' : 'g'")        
     }
 
+    @Test
     void testInElvis() {
         final SOURCE = '''
             'foo' ?: 'foo'
@@ -141,6 +153,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, "'foo' ?: 'foo'")
     }
 
+    @Test
     void testInIf() {
         final SOURCE = '''
         	if (x == 'foo') return x
@@ -150,6 +163,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 3, "else if (y == 'foo') return y", 4, "else if (z == 'foo') return z")
     }
 
+    @Test
     void testInReturn() {
         final SOURCE = '''
         	if (true) return 'foo'
@@ -158,6 +172,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "else return 'foo'")
     }
 
+    @Test
     void testInInvocation() {
         final SOURCE = '''
         	'foo'.equals('bar')
@@ -166,6 +181,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "'foo'.equals('baz')")
     }
 
+    @Test
     void testInNamedArgumentList() {
         final SOURCE = '''
         	x(b: 'bar')
@@ -174,6 +190,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "y(a: 'bar')")
     }
 
+    @Test
     void testIgnoreStrings_IgnoresSingleValue() {
         final SOURCE = '''
         	def x = ['xyz', 'abc', 'xyz']
@@ -183,6 +200,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "def y = ['foo', 'bar', 'foo']")
     }
 
+    @Test
     void testIgnoreStrings_IgnoresMultipleValues() {
         final SOURCE = '''
         	def x = ['xyz', 'abc', 'xyz']
@@ -192,6 +210,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoreValues_IgnoresValuesSurroundedByWhitespace() {
         final SOURCE = '''
         	def x = [' xyz ', 'abc', ' xyz ']
@@ -201,6 +220,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoreNumbers_ByDefaultIgnoresEmptyString() {
         final SOURCE = '''
         	def x = ['', 'abc', '', 'def', '']

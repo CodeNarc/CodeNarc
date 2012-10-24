@@ -17,6 +17,7 @@ package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JdbcStatementReferenceRule - checks for references to java.sql.Statement
@@ -27,11 +28,13 @@ class JdbcStatementReferenceRule_StatementTest extends AbstractClassReferenceRul
 
     final String className = 'java.sql.Statement'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JdbcStatementReference'
     }
 
+    @Test
     void testOtherClassesInTheSamePackage_NoViolations() {
         final SOURCE = '''
             import java.sql.Other

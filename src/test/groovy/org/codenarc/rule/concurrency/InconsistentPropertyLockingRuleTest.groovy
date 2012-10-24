@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for InconsistentPropertyLockingRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'InconsistentPropertyLocking'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class Person {
@@ -73,6 +76,7 @@ class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testWriteLockStringGetMethod() {
         final SOURCE = '''
             class Person {
@@ -91,6 +95,7 @@ class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase {
                 'The setter method setName is marked @WithWriteLock but the getter method getName is not locked')
     }
 
+    @Test
     void testReadLockDateSetMethod() {
         final SOURCE = '''
             class Person {
@@ -110,6 +115,7 @@ class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase {
                 'The getter method getBirthday is marked @WithReadLock but the setter method setBirthday is not locked')
     }
 
+    @Test
     void testLockedBooleanSetMethod() {
         final SOURCE = '''
             class Person {
@@ -129,6 +135,7 @@ class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase {
                 'The getter method isDeceased is marked @WithReadLock but the setter method setDeceased is not locked')
     }
 
+    @Test
     void testWriteLockBooleanGetMethod() {
         final SOURCE = '''
             class Person {

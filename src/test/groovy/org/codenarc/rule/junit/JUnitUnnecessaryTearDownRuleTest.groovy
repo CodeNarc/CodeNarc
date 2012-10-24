@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitUnnecessaryTearDown
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'JUnitUnnecessaryTearDown'
     }
 
+    @Test
     void testApplyTo_TearDownOnlyCallsSuperTearDown_Violation() {
         final SOURCE = '''
           class MyTestCase extends TestCase {
@@ -41,6 +44,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void tearDown() {')
     }
 
+    @Test
     void testApplyTo_TearDownCallsSuperTearDownAndSomethingElse() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -53,6 +57,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_TearDownDoesNotCallSuperTearDown() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -64,6 +69,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsSuper() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -75,6 +81,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_TearDownDoesNotCallSuperTearDown_CallsTearDown() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -86,6 +93,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_TearDownMethodHasAfterAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -97,6 +105,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonTearDownMethod() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -108,6 +117,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_TearDownMethodHasParameters() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -119,6 +129,7 @@ class JUnitUnnecessaryTearDownRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonTestClass() {
         final SOURCE = '''
             class MyClass {

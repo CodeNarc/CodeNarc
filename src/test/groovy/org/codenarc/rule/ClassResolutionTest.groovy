@@ -15,12 +15,15 @@
  */
 package org.codenarc.rule
 
+import org.junit.Test
+
 /**
  * 
  * @author Hamlet D'Arcy
  */
 class ClassResolutionTest extends AbstractRuleTestCase {
 
+    @Test
     void testGrabError() {
         def source = '''
             @Grab(group='org.springframework', module='spring', version='2.5.6')

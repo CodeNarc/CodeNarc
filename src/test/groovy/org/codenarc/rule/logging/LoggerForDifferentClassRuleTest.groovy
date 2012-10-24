@@ -17,6 +17,7 @@ package org.codenarc.rule.logging
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for LoggerForDifferentClassRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'LoggerForDifferentClass'
     }
 
+    @Test
     void testApplyTo_NoLoggers_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -41,6 +44,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
 
     // Logger (Log4J and Java Logging API) Tests
 
+    @Test
     void testApplyTo_Logger_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -55,6 +59,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'def log2 = Logger.getLogger(SomeOtherClass.class.name)'])
     }
 
+    @Test
     void testApplyTo_Logger_SameClass_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -70,6 +75,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Logger_SameClass_NoViolations_DerivedAllowed() {
         rule.allowDerivedClasses = true
         final SOURCE = '''
@@ -82,6 +88,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Logger_SameClass_Violations_DerivedAllowed() {
         rule.allowDerivedClasses = true
         final SOURCE = '''
@@ -92,6 +99,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private final LOG1 = Logger.getLogger(unknown)', 'Logger is defined in MyClass but initialized with unknown')
     }
 
+    @Test
     void testApplyTo_Logger_This_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -104,6 +112,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Logger_NotAClassOrClassName_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -114,6 +123,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_Logger_ConstantForLoggerName_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -123,6 +133,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private static final log = Logger.getLogger(CONSTANT)', 'Logger is defined in MyClass but initialized with CONSTANT')
     }
 
+    @Test
     void testApplyTo_Logger_FullPackageNameOfLogger_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -134,6 +145,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
 
     // LogFactory (Commons Logging) Tests
 
+    @Test
     void testApplyTo_LogFactory_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -146,6 +158,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'Log log = LogFactory.getLog(SomeOtherClass.class)'])
     }
 
+    @Test
     void testApplyTo_LogFactory_SameClass_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -160,6 +173,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_LogFactory_This_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -172,6 +186,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_LogFactory_NotAClassOrClassName_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -182,6 +197,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_LogFactory_ConstantForLoggerName_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -191,6 +207,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private static final log = LogFactory.getLog(CONSTANT)')
     }
 
+    @Test
     void testApplyTo_LogFactory_ConstantForLoggerName_InnerClassViolation() {
         final SOURCE = '''
             class MyClass {
@@ -202,6 +219,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'private static final log = LogFactory.getLog(MyOtherClass)')
     }
 
+    @Test
     void testApplyTo_LogFactory_FullPackageNameOfLogFactory_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -213,6 +231,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
 
     // LoggerFactory (SLF4J and Logback) Tests
 
+    @Test
     void testApplyTo_LoggerFactory_Violations() {
         final SOURCE = '''
             class MyClass {
@@ -225,6 +244,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'Log log = LoggerFactory.getLogger(SomeOtherClass.class)'])
     }
 
+    @Test
     void testApplyTo_LoggerFactory_SameClass_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -239,6 +259,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_LoggerFactory_This_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -251,6 +272,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_LoggerFactory_NotAClassOrClassName_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -261,6 +283,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_LoggerFactory_ConstantForLoggerName_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -270,6 +293,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private static final log = LoggerFactory.getLogger(CONSTANT)')
     }
 
+    @Test
     void testApplyTo_LoggerFactory_FullPackageNameOfLoggerFactory_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -279,6 +303,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testInnerClasses() {
         final SOURCE = '''
         class Outer {
@@ -290,6 +315,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testInnerClassViolation() {
         final SOURCE = '''
         class Outer {

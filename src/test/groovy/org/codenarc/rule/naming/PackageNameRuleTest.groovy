@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -27,16 +28,19 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class PackageNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'PackageName'
     }
 
+    @Test
     void testRegexIsNull() {
         rule.regex = null
         shouldFailWithMessageContaining('regex') { applyRuleTo('println 1') }
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex() {
         final SOURCE = '''
             package MyPackage.base
@@ -45,6 +49,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, 'MyPackage.base')
     }
 
+    @Test
     void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = '''
             package mypackage.base.domain
@@ -53,6 +58,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MatchesDefaultRegex_Numbers() {
         final SOURCE = '''
             package mypackage.base.i18n
@@ -61,6 +67,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoPackage() {
         final SOURCE = '''
             class MyClass { }
@@ -68,6 +75,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchCustomRegex() {
         final SOURCE = '''
             package mypackage.base.domain
@@ -77,6 +85,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, 'mypackage.base.domain')
     }
 
+    @Test
     void testApplyTo_MatchesCustomRegex() {
         final SOURCE = '''
             package zpackage.base.domain
@@ -86,6 +95,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoClassDefinition() {
         final SOURCE = '''
             if (isReady) {
@@ -95,6 +105,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PackageNameRequired_MatchesDefaultRegex() {
         final SOURCE = '''
             package mypackage.base.domain
@@ -104,6 +115,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PackageNameRequired_NoPackage() {
         final SOURCE = '''
             class MyClass { }

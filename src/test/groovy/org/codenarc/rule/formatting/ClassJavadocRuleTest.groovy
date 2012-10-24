@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ClassJavadocRule
@@ -27,11 +28,13 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
 
     static skipTestThatUnrelatedCodeHasNoViolations
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ClassJavadoc'
     }
 
+    @Test
     void testNonMainClasses() {
         final SOURCE = '''
             /**
@@ -46,12 +49,14 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
 
     }
+    @Test
     void testSuccess() {
         def testFile = this.getClass().getClassLoader().getResource('rule/ClassJavadocPass.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testFailure() {
 
         def testFile = this.getClass().getClassLoader().getResource('rule/ClassJavadocFail.txt')

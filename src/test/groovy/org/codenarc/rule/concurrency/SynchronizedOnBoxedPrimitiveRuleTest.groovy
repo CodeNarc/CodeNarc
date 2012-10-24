@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SynchronizedOnBoxedPrimitiveRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SynchronizedOnBoxedPrimitive'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass1 {
@@ -78,6 +81,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testReferenceTypeDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -110,6 +114,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 18, sourceLineText: 'synchronized(char1)', messageText: 'Synchronizing on the Character field char1 is unsafe. Do not synchronize on boxed types'])
     }
 
+    @Test
     void testPrimitiveTypeDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -142,6 +147,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 18, sourceLineText: 'synchronized(char2)', messageText: 'Synchronizing on the Character field char2 is unsafe. Do not synchronize on boxed types'])
     }
 
+    @Test
     void testReferenceInstanceDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -174,6 +180,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 18, sourceLineText: 'synchronized(char3)', messageText: 'Synchronizing on the Character field char3 is unsafe. Do not synchronize on boxed types'])
     }
 
+    @Test
     void testPrimitiveCastDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -206,6 +213,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 18, sourceLineText: 'synchronized(char4)', messageText: 'Synchronizing on the Character field char4 is unsafe. Do not synchronize on boxed types'])
     }
 
+    @Test
     void testReferenceCastDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -238,6 +246,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 18, sourceLineText: 'synchronized(char5)', messageText: 'Synchronizing on the Character field char5 is unsafe. Do not synchronize on boxed types'])
     }
 
+    @Test
     void testPrimitiveJava5StyleCastDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -270,6 +279,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 18, sourceLineText: 'synchronized(char7)', messageText: 'Synchronizing on the Character field char7 is unsafe. Do not synchronize on boxed types'])
     }
 
+    @Test
     void testLiteralDeclaration() {
         final SOURCE = '''
             class MyClass {
@@ -297,6 +307,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testBooleanSuccessScenario() {
         final SOURCE = '''
                 class MyClass1 {
@@ -345,6 +356,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testBoolPrimitiveField() {
         final SOURCE = '''
                 class MyClass5 {
@@ -357,6 +369,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'synchronized(lock)', 'Synchronizing on the Boolean field lock is unsafe. Do not synchronize on boxed types')
     }
 
+    @Test
     void testBoolField() {
         final SOURCE = '''
                 class MyClass5 {
@@ -369,6 +382,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'synchronized(lock)', 'Synchronizing on the Boolean field lock is unsafe. Do not synchronize on boxed types')
     }
 
+    @Test
     void testBasicViolation() {
         final SOURCE = '''
                 class MyClass {
@@ -383,6 +397,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'synchronized(lock)', 'Synchronizing on the Boolean field lock is unsafe. Do not synchronize on boxed types')
     }
 
+    @Test
     void testInnerClass() {
         final SOURCE = '''
                 class MyClass {
@@ -400,6 +415,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, 'synchronized(boollock)', 'Synchronizing on the Boolean field boollock is unsafe. Do not synchronize on boxed types')
     }
 
+    @Test
     void testImplicitTyping() {
         final SOURCE = '''
                 class MyClass {
@@ -415,6 +431,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 8, 'synchronized(lock)', 'Synchronizing on the Boolean field lock is unsafe. Do not synchronize on boxed types')
     }
 
+    @Test
     void testAnonymousClass() {
         final SOURCE = '''
                 class MyClass {
@@ -435,6 +452,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'synchronized(lock)', 'Synchronizing on the Boolean field lock is unsafe. Do not synchronize on boxed types')
     }
 
+    @Test
     void testShadowing() {
         final SOURCE = '''
                 class MyClass {

@@ -17,6 +17,7 @@ package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for IllegalClassReferenceRule - checks for specifying values containing wildcards for the classNames field
@@ -31,6 +32,7 @@ class IllegalClassReferenceRule_WildcardsClassNamesTest extends AbstractRuleTest
     // Just test proper handling of wildcards by this rule. Assume that the other IllegalClassReferenceRule_*Test
     // classes sufficiently test references across the possible language constructs.
 
+    @Test
     void testWildcards_Violations() {
         final SOURCE = '''
             import com.other.Example
@@ -47,6 +49,7 @@ class IllegalClassReferenceRule_WildcardsClassNamesTest extends AbstractRuleTest
             [lineNumber:5, sourceLineText:'def myDao = new org.stuff.CoolDao', messageText:'org.stuff.CoolDao'])
     }
 
+    @Test
     void testWildcards_NoViolations() {
         final SOURCE = '''
             import com.other.Example

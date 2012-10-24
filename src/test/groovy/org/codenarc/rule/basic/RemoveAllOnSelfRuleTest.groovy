@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for RemoveAllOnSelfRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'RemoveAllOnSelf'
     }
 
+    @Test
     void testNoViolations() {
         final SOURCE = '''
         	def x = [1, 2, 3]
@@ -41,6 +44,7 @@ class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolation() {
         final SOURCE = '''
             def x = [1, 2, 3]
@@ -49,6 +53,7 @@ class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'x.removeAll(x)', 'A call to x.removeAll(x) can be replaced with x.clear()')
     }
 
+    @Test
     void testViolationInClass() {
         final SOURCE = '''
             class MyClass {

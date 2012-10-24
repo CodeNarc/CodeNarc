@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SystemRunFinalizersOnExitRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class SystemRunFinalizersOnExitRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SystemRunFinalizersOnExit'
     }
 
+    @Test
     void testApplyTo_Violation_Initializers() {
         final SOURCE = '''
             class SystemRunFinalizersOnExitClass1 {
@@ -46,6 +49,7 @@ class SystemRunFinalizersOnExitRuleTest extends AbstractRuleTestCase {
                 7, 'System.runFinalizersOnExit(true)')
     }
 
+    @Test
     void testApplyTo_Violation_Methods() {
         final SOURCE = '''
             class SystemRunFinalizersOnExitClass2 {
@@ -62,6 +66,7 @@ class SystemRunFinalizersOnExitRuleTest extends AbstractRuleTestCase {
                 7, 'System.runFinalizersOnExit(true)')
     }
 
+    @Test
     void testApplyTo_Violation_Closures() {
         final SOURCE = '''
             System.runFinalizersOnExit(true)
@@ -74,6 +79,7 @@ class SystemRunFinalizersOnExitRuleTest extends AbstractRuleTestCase {
                 4, 'System.runFinalizersOnExit(false)')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class SystemRunFinalizersOnExitClass3 {
                 def myMethod() {

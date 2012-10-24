@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitSetUpCallsSuperRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JUnitSetUpCallsSuper'
     }
 
+    @Test
     void testApplyTo_SetUpCallsSuperSetUp() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -42,6 +45,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SetUpDoesNotCallSuperSetUp() {
         final SOURCE = '''
           class MyTestCase extends TestCase {
@@ -53,6 +57,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void setUp() {')
     }
 
+    @Test
     void testApplyTo_SetUpDoesNotCallSuperSetUp_CallsSuperSetUpWithParameters() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -66,6 +71,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void setUp() {')
     }
 
+    @Test
     void testApplyTo_SetUpDoesNotCallSuperSetUp_CallsSuper() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -78,6 +84,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void setUp() {')
     }
 
+    @Test
     void testApplyTo_SetUpDoesNotCallSuperSetUp_CallsSetUp() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -90,6 +97,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void setUp() {')
     }
 
+    @Test
     void testApplyTo_SetUpIncludesCallWithNamedParameterList() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -102,6 +110,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SetUpMethodHasBeforeAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
@@ -113,6 +122,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonSetUpMethod() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -123,6 +133,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SetUpMethodHasParameters() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -133,6 +144,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NonTestClass() {
         final SOURCE = '''
             class MyClass {

@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SynchronizedOnReentrantLockRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SynchronizedOnReentrantLock'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass1 {
@@ -82,6 +85,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTypeDeclarationInField() {
         final SOURCE = '''
             class MyClass5 {
@@ -93,6 +97,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 5, 'synchronized(lock)', 'Synchronizing on a ReentrantLock field lock. This is almost never the intended usage; use the lock() and unlock() methods instead')
     }
+    @Test
     void testFQNViolation() {
         final SOURCE = '''
             class MyClass {
@@ -107,6 +112,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'synchronized(lock)', 'Synchronizing on a ReentrantLock field lock. This is almost never the intended usage; use the lock() and unlock() methods instead')
     }
 
+    @Test
     void testInnerClass() {
         final SOURCE = '''
             class MyClass {
@@ -124,6 +130,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, 'synchronized(lock)', 'Synchronizing on a ReentrantLock field lock. This is almost never the intended usage; use the lock() and unlock() methods instead')
     }
 
+    @Test
     void testImplicitTyping() {
         final SOURCE = '''
             class MyClass {
@@ -139,6 +146,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 8, 'synchronized(lock)', 'Synchronizing on a ReentrantLock field lock. This is almost never the intended usage; use the lock() and unlock() methods instead')
     }
 
+    @Test
     void testAnonymousClass() {
         final SOURCE = '''
             class MyClass {
@@ -159,6 +167,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'synchronized(lock)', 'Synchronizing on a ReentrantLock field lock. This is almost never the intended usage; use the lock() and unlock() methods instead')
     }
 
+    @Test
     void testShadowing() {
         final SOURCE = '''
             class MyClass {

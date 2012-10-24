@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -27,26 +28,31 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class ClassNameRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ClassName'
     }
 
+    @Test
     void testRegexIsNull() {
         rule.regex = null
         shouldFailWithMessageContaining('regex') { applyRuleTo('println 1') }
     }
 
+    @Test
     void testApplyTo_DoesNotMatchDefaultRegex() {
         final SOURCE = ' class _MyClass { } '
         assertSingleViolation(SOURCE, 1, '_MyClass')
     }
 
+    @Test
     void testApplyTo_NestedClassDoesNotMatchDefaultRegex() {
         final SOURCE = ' class MyClass { static class _MyNestedClass { }  } '
         assertSingleViolation(SOURCE, 1, '_MyNestedClass')
     }
 
+    @Test
     void testApplyTo_InnerClassDoesNotMatchDefaultRegex() {
         final SOURCE = ''' class MyClass {
             class _MyInnerClass { }
@@ -54,6 +60,7 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '_MyInnerClass')
     }
 
+    @Test
     void testApplyTo_MatchesDefaultRegex() {
         final SOURCE = ''' class MyClass {
             MyClass() {
@@ -67,6 +74,7 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_WithPackage_MatchesDefaultRegex() {
         final SOURCE = '''
             package org.codenarc.sample
@@ -75,18 +83,21 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoesNotMatchCustomRegex() {
         rule.regex = /z.*/
         final SOURCE = ' class MyClass { } '
         assertSingleViolation(SOURCE, 1, 'MyClass')
     }
 
+    @Test
     void testApplyTo_MatchesCustomRegex() {
         rule.regex = /z.*/
         final SOURCE = ' class zClass { } '
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoClassDefinition_DoesNotMatchRegex() {
         final SOURCE = '''
             if (isReady) {
@@ -97,6 +108,7 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_ClosureDefinition() {
         final SOURCE = '''
             class MyClass {
@@ -106,6 +118,7 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testInnerClasses() {
         final SOURCE = '''
         class Outer {

@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for AssignmentInConditionalRule
@@ -28,11 +29,13 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
 
     private static final VIOLATION_MESSAGE = 'Assignment used as conditional value, which always results in true. Use the == operator instead'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'AssignmentInConditional'
     }
 
+    @Test
     void testConditionalsWithoutAssignments_NoViolations() {
         final SOURCE = '''
             if (value == true) {
@@ -45,6 +48,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIfStatement() {
         final SOURCE = '''
             if ((value = true)) {
@@ -54,6 +58,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if ((value = true))', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testExpressionWithMultipleConditionsWithAssignment_AndOr_Violations() {
         final SOURCE = '''
             while(value > 5 || (value = -1)) { }
@@ -66,6 +71,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'if (ready && (doSomething() || (value = 5))) { }', messageText:VIOLATION_MESSAGE])
     }
 
+    @Test
     void testExpressionWithMultipleConditionsWithAssignment_ButNotAndOr_NoViolations() {
         final SOURCE = '''
             while ((len = input.read(buf)) > 0) { }
@@ -74,6 +80,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testWhileStatement() {
         final SOURCE = '''
             while (value = true) {
@@ -83,6 +90,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'while (value = true)', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testExpressionContainingConditionalWithAssignment_NoViolation() {
         final SOURCE = '''
             def ready = (value = true)
@@ -90,6 +98,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testElvis() {
         final SOURCE = '''
             (value = true) ?: x
@@ -97,6 +106,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '(value = true) ?: x', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testTernary() {
         final SOURCE = '''
             (value = true) ? x : y

@@ -16,6 +16,10 @@
 package org.codenarc.source
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
+
+import static org.codenarc.test.TestUtil.shouldFail
 
 /**
  * Tests for SourceString
@@ -29,29 +33,35 @@ class SourceStringTest extends AbstractTestCase {
         }'''
     private sourceString
 
+    @Test
     void testImplementsSourceCode() {
         assert sourceString instanceof SourceCode
     }
 
+    @Test
     void testConstructor_NullSource() {
         shouldFail { new SourceString(null) }
     }
 
+    @Test
     void testConstructor_EmptySource() {
         shouldFail { new SourceString('') }
     }
 
+    @Test
     void testConstructor_DefaultPathAndName() {
         assert sourceString.getPath() == null
         assert sourceString.getName() == null
     }
 
+    @Test
     void testConstructor_PathAndName() {
         sourceString = new SourceString(SOURCE, 'Path', 'Name')
         assert sourceString.getPath() == 'Path'
         assert sourceString.getName() == 'Name'
     }
 
+    @Test
     void testNormalizedPath() {
         def originalFileSeparator = System.getProperty('file.separator')
         try {
@@ -72,6 +82,7 @@ class SourceStringTest extends AbstractTestCase {
         }
     }
 
+    @Test
     void testGetText() {
         def text = sourceString.text
         assert text == SOURCE
@@ -80,6 +91,7 @@ class SourceStringTest extends AbstractTestCase {
         assert sourceString.text.is(text)
     }
 
+    @Test
     void testGetLines() {
         def lines = sourceString.lines
         assert lines == ['class SampleFile {', '            int count', '        }']
@@ -88,6 +100,7 @@ class SourceStringTest extends AbstractTestCase {
         assert sourceString.lines.is(lines)
     }
 
+    @Test
     void testLine() {
         assert sourceString.line(0) ==  'class SampleFile {'
         assert sourceString.line(1) ==  'int count'
@@ -95,6 +108,7 @@ class SourceStringTest extends AbstractTestCase {
         assert sourceString.line(3) ==  null
     }
 
+    @Test
     void testGetAst() {
         def ast = sourceString.ast
         log("classes=${ast.classes}")
@@ -104,6 +118,7 @@ class SourceStringTest extends AbstractTestCase {
         assert sourceString.ast.is(ast)
     }
 
+    @Test
     void testGetAst_ReferencesClassNotInClasspath() {
         final NEW_SOURCE = '''
             import some.other.pkg.Processor
@@ -117,6 +132,7 @@ class SourceStringTest extends AbstractTestCase {
         assert ast.classes[0].name == 'MyClass'
     }
 
+    @Test
     void testGetAst_CompilerErrorInSource() {
         final NEW_SOURCE = '''
             class MyClass {
@@ -130,6 +146,7 @@ class SourceStringTest extends AbstractTestCase {
         assert sourceString.ast == null
     }
 
+    @Test
     void testGetLineNumberForCharacterIndex() {
         final NEW_SOURCE = '\nclass MyClass { \r\n  try {\n} catch(MyException e) {\n// TODO \n }\n }\n'
         NEW_SOURCE.eachWithIndex { ch, i -> print "$i=${(int)(ch as char)} " }
@@ -152,13 +169,14 @@ class SourceStringTest extends AbstractTestCase {
         assert sourceString.getLineNumberForCharacterIndex(-1) == -1
     }
 
+    @Test
     void testIsValid() {
         assert sourceString.valid
         assert !new SourceString('%^#@$').valid
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpSourceStringTest() {
         sourceString = new SourceString(SOURCE)
     }
 

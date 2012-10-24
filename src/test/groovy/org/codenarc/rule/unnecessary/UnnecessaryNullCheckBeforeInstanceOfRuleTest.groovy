@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryNullCheckBeforeInstanceOfRule
@@ -26,11 +27,13 @@ import org.codenarc.rule.Rule
  */
 class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryNullCheckBeforeInstanceOf'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             if (x instanceof MyClass) { }
@@ -41,6 +44,7 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIfStatement() {
         final SOURCE = '''
             if (x != null && x instanceof MyClass) { }
@@ -50,6 +54,7 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
                 'The condition ((x != null) && (x instanceof MyClass)) can be safely simplified to (x instanceof MyClass)')
     }
 
+    @Test
     void testElseIfStatement() {
         final SOURCE = '''
             if (foo) {} else if (x != null && x instanceof MyClass) { }
@@ -59,6 +64,7 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
                 'The condition ((x != null) && (x instanceof MyClass)) can be safely simplified to (x instanceof MyClass)')
     }
 
+    @Test
     void testTernaryStatement() {
         final SOURCE = '''
             (x != null && x instanceof MyClass) ? foo : bar
@@ -68,6 +74,7 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
                 'The condition ((x != null) && (x instanceof MyClass)) can be safely simplified to (x instanceof MyClass)')
     }
 
+    @Test
     void testTernaryStatementSwappedOrder() {
         final SOURCE = '''
             (x instanceof MyClass && x != null) ? foo : bar
@@ -77,6 +84,7 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
                 'The condition ((x instanceof MyClass) && (x != null)) can be safely simplified to (x instanceof MyClass)')
     }
 
+    @Test
     void testStandaloneBinaryExpression() {
         final SOURCE = '''
             boolean equals(Object object) {

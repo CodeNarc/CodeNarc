@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CollectAllIsDeprecatedRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class CollectAllIsDeprecatedRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CollectAllIsDeprecated'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             def list = [1, 2, [3, 4, [5, 6]], 7]
@@ -38,6 +41,7 @@ class CollectAllIsDeprecatedRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolations() {
         final SOURCE = '''
             def list = [1, 2, [3, 4, [5, 6]], 7]

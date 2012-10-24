@@ -17,6 +17,8 @@ package org.codenarc.ruleset
 
 import org.codenarc.rule.StubRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -32,11 +34,13 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
     private rule2 = new StubRule(name:'rule2', priority:2, violationMessage:'def')
     private configurer
 
+    @Test
     void testConfigure() {
         configurer.configure(ruleSet)
         assert ruleMap() == [rule1:[3, 'abc'], rule99:[2, 'violation']], ruleMap()
     }
 
+    @Test
     void testConfigure_OverridePropertiesFilenameThroughSystemProperty() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'override-codenarc.properties')
         configurer.configure(ruleSet)
@@ -44,6 +48,7 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, '')
     }
 
+    @Test
     void testConfigure_OverridePropertiesFilenameThroughSystemProperty_FileUrl() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'file:src/test/resources/override-codenarc.properties')
         configurer.configure(ruleSet)
@@ -51,24 +56,27 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, '')
     }
 
+    @Test
     void testConfigure_PropertiesFileDoesNotExist() {
         configurer.defaultPropertiesFilename = 'DoesNotExist.properties'
         configurer.configure(ruleSet)
         assert ruleMap() == [rule1:[1, 'abc'], rule2:[2, 'def']]
     }
 
+    @Test
     void testConfigure_EmptyRuleSet() {
         ruleSet = new ListRuleSet([]) 
         configurer.configure(ruleSet)
         assert ruleMap() == [:], ruleMap()
     }
 
+    @Test
     void testConfigure_NullRuleSet() {
         shouldFailWithMessageContaining('ruleSet') { configurer.configure(null) }
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpPropertiesFileRuleSetConfigurerTest() {
         configurer = new PropertiesFileRuleSetConfigurer()
         ruleSet = new ListRuleSet([rule1, rule2])
     }

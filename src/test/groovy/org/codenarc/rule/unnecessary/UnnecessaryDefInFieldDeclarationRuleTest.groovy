@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryDefInFieldDeclarationRule
@@ -25,6 +26,7 @@ import org.codenarc.rule.Rule
  */
 class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryDefInFieldDeclaration'
@@ -34,6 +36,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
      * Success scenarios
      */
 
+    @Test
     void testSuccessScenario_modifiers() {
         final SOURCE = '''
             class MyClass {
@@ -49,6 +52,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_fieldNamesContainingModifierNames() {
         final SOURCE = '''
              class MyClass {
@@ -65,6 +69,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSuccessScenario_types() {
         final SOURCE = '''
             class MyClass {
@@ -81,6 +86,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
      * Violations
      */
 
+    @Test
     void testViolation_defAndPrivate() {
         final SOURCE = '''
             class MyClass {
@@ -90,6 +96,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def private field', 'The def keyword is unneeded when a field is marked private')
     }
 
+    @Test
     void testViolation_defAndProtected() {
         final SOURCE = '''
             class MyClass {
@@ -99,6 +106,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def protected field', 'The def keyword is unneeded when a field is marked protected')
     }
 
+    @Test
     void testViolation_defAndPublic() {
         final SOURCE = '''
             class MyClass {
@@ -108,6 +116,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def public field', 'The def keyword is unneeded when a field is marked public')
     }
 
+    @Test
     void testViolation_defAndStatic() {
         final SOURCE = '''
             class MyClass {
@@ -117,6 +126,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def static field', 'The def keyword is unneeded when a field is marked static')
     }
 
+    @Test
     void testViolation_defAndFinal() {
         final SOURCE = '''
             class MyClass {
@@ -126,6 +136,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def final field', 'The def keyword is unneeded when a field is marked final')
     }
 
+    @Test
     void testViolation_defAndTyped() {
         final SOURCE = '''
             class MyClass {
@@ -135,6 +146,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def String field', 'The def keyword is unneeded when a field type is specified')
     }
 
+    @Test
     void testViolation_defAndStrictfp() {
         final SOURCE = '''
             class MyClass {
@@ -144,6 +156,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def strictfp field', 'The def keyword is unneeded when a field is marked strictfp')
     }
 
+    @Test
     void testViolation_defAndObjectType() {
         final SOURCE = '''
             class MyClass {
@@ -153,6 +166,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def Object field', 'The def keyword is unneeded when a field is specified Object type')
     }
 
+    @Test
     void testViolation_fieldDeclarationAcrossMultipleLines() {
         final SOURCE = '''
             class MyClass {
@@ -164,6 +178,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def', 'The def keyword is unneeded when a field is marked static')
     }
 
+    @Test
     void testViolation_multipleFieldsOnSingleLine() {
         final SOURCE = '''
             class MyClass {

@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ExplicitHashSetInstantiationRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ExplicitHashSetInstantiation'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	def x = [] as Set
@@ -48,6 +51,7 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testVariableDeclarations() {
         final SOURCE = '''
         	def x = new HashSet()
@@ -62,6 +66,7 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
                 5, 'def x = new HashSet()')
     }
 
+    @Test
     void testInClassUsage() {
         final SOURCE = '''
             class MyClass {

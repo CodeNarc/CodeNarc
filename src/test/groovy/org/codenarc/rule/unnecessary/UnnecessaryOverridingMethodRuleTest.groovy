@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryOverridingMethodRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryOverridingMethod'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	class MyLabel extends javax.swing.JLabel {
@@ -54,6 +57,7 @@ class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testOneParameterViolation() {
         final SOURCE = '''
             class MyLabel extends javax.swing.JLabel {
@@ -66,6 +70,7 @@ class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'setVisible(boolean value)')
     }
 
+    @Test
     void testThreeParameterViolation() {
         final SOURCE = '''
             class MyLabel extends javax.swing.JLabel {

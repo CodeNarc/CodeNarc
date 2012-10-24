@@ -29,6 +29,8 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for AstUtil
@@ -59,22 +61,26 @@ class AstUtilTest extends AbstractTestCase {
     '''
     private visitor
 
+    @Test
     void testIsFromGeneratedSourceCode() {
         assert !AstUtil.isFromGeneratedSourceCode(methodNamed('print'))
     }
 
+    @Test
     void testGetMethodArguments_ConstructorWithinEnum() {
         def methodCall = methodNamed('methodCallWithinEnum')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 3
     }
 
+    @Test
     void testGetMethodArguments_NoArgument() {
         def methodCall = methodNamed('print')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 0
     }
 
+    @Test
     void testGetMethodArguments_SingleArgument() {
         def methodCall = methodNamed('stringMethodName')
         def args = AstUtil.getMethodArguments(methodCall)
@@ -82,6 +88,7 @@ class AstUtilTest extends AbstractTestCase {
         assert args[0].value == 123
     }
 
+    @Test
     void testGetMethodArguments_NamedArguments() {
         def methodCall = methodNamed('delete')
         def args = AstUtil.getMethodArguments(methodCall)
@@ -90,6 +97,7 @@ class AstUtilTest extends AbstractTestCase {
         assert !args[0].mapEntryExpressions[1].valueExpression.value
     }
 
+    @Test
     void testIsMethodCall_ExactMatch() {
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert AstUtil.isMethodCall(statement, 'object', 'print', 0)
@@ -97,6 +105,7 @@ class AstUtilTest extends AbstractTestCase {
         assert AstUtil.isMethodCall(statement.expression, 'object', 'print')
     }
 
+    @Test
     void testIsMethodCall_WrongMethodName() {
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print2', 0)
@@ -104,6 +113,7 @@ class AstUtilTest extends AbstractTestCase {
         assert !AstUtil.isMethodCall(statement.expression, 'object', 'print2')
     }
 
+    @Test
     void testIsMethodCall_WrongMethodObjectName() {
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object2', 'print', 0)
@@ -111,6 +121,7 @@ class AstUtilTest extends AbstractTestCase {
         assert !AstUtil.isMethodCall(statement.expression, 'object2', 'print')
     }
 
+    @Test
     void testIsMethodCall_WrongNumberOfArguments() {
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 1)
@@ -118,6 +129,7 @@ class AstUtilTest extends AbstractTestCase {
         assert AstUtil.isMethodCall(statement.expression, 'object', 'print')
     }
 
+    @Test
     void testIsMethodCall_NamedArgumentList() {
         def methodCall = visitor.methodCallExpressions.find { mc -> mc.method.value == 'delete' }
         assert AstUtil.isMethodCall(methodCall, 'ant', 'delete', 1)
@@ -125,6 +137,7 @@ class AstUtilTest extends AbstractTestCase {
         assert AstUtil.isMethodCall(methodCall, 'ant', 'delete')
     }
 
+    @Test
     void testIsMethodCall_StringLiteralMethodName() {
         def methodCall = methodNamed('stringMethodName')
         assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 1)
@@ -132,6 +145,7 @@ class AstUtilTest extends AbstractTestCase {
         assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName')
     }
 
+    @Test
     void testIsMethodCall_GStringMethodName() {
         def methodCall = visitor.methodCallExpressions.find { mc -> log(mc.method); mc.method instanceof GStringExpression }
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod', 1)
@@ -139,59 +153,70 @@ class AstUtilTest extends AbstractTestCase {
         assert !AstUtil.isMethodCall(methodCall, 'this', 'anotherMethod')
     }
 
+    @Test
     void testIsMethodCall_NotAMethodCall() {
         def statement = visitor.statements.find { st -> st instanceof BlockStatement }
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 0)
     }
 
+    @Test
     void testIsMethodNamed() {
         def methodCall = methodNamed('print')
         assert AstUtil.isMethodNamed(methodCall, 'print')
         assert !AstUtil.isMethodNamed(methodCall, 'other')
     }
 
+    @Test
     void testIsMethodNamed_GStringMethodName() {
         def methodCall = visitor.methodCallExpressions.find { mc -> mc.method instanceof GStringExpression }
         assert !AstUtil.isMethodNamed(methodCall, 'print')
     }
 
+    @Test
     void testIsBlock_Block() {
         applyVisitor(SOURCE)
         def statement = visitor.statements.find { st -> st instanceof BlockStatement }
         assert AstUtil.isBlock(statement)
     }
 
+    @Test
     void testIsBlock_NotABlock() {
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isBlock(statement)
     }
 
+    @Test
     void testIsEmptyBlock_NonEmptyBlock() {
         def statement = visitor.statements.find { st -> st instanceof BlockStatement }
         assert !AstUtil.isEmptyBlock(statement)
     }
 
+    @Test
     void testIsEmptyBlock_EmptyBlock() {
         def statement = visitor.statements.find { st -> st instanceof IfStatement }
         assert AstUtil.isEmptyBlock(statement.ifBlock)
     }
 
+    @Test
     void testIsEmptyBlock_NotABlock() {
         def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
         assert !AstUtil.isEmptyBlock(statement)
     }
 
+    @Test
     void testGetAnnotation() {
         assert AstUtil.getAnnotation(visitor.methodNodes['otherMethod'], 'doesNotExist') == null
         assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'doesNotExist') == null
         assert AstUtil.getAnnotation(visitor.methodNodes['setUp'], 'Before') instanceof AnnotationNode
     }
 
+    @Test
     void testHashAnnotation() {
         assert !AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'doesNotExist')
         assert AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'Before')
     }
 
+    @Test
     void testGetVariableExpressions_SingleDeclaration() {
         log("declarationExpressions=${visitor.declarationExpressions}")
         def variableExpressions = AstUtil.getVariableExpressions(visitor.declarationExpressions[0])
@@ -200,6 +225,7 @@ class AstUtilTest extends AbstractTestCase {
         assert variableExpressions.name == ['myVariable']
     }
 
+    @Test
     void testGetVariableExpressions_MultipleDeclarations() {
         final NEW_SOURCE = '''
             class MyClass {
@@ -216,8 +242,8 @@ class AstUtilTest extends AbstractTestCase {
         assert names.contains('name1') && names.contains('name2')
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpAstUtilTest() {
         visitor = new AstUtilTestVisitor()
         applyVisitor(SOURCE)
     }

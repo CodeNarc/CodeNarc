@@ -17,6 +17,7 @@ package org.codenarc.rule.serialization
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for SerialPersistentFieldsRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SerialPersistentFields'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass implements Serializable {
@@ -50,6 +53,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCommonMisspelling() {
         final SOURCE = '''
             class MyClass implements Serializable {
@@ -61,6 +65,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
                 'Violation in class MyClass. The class is Serializable and defines a field named serialPerSIStentFields. This should be named serialPersistentFields instead')
     }
 
+    @Test
     void testWrongFieldType() {
         final SOURCE = '''
             // Wrong field type, JVM sees it as Object!
@@ -73,6 +78,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
                 'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields of type java.lang.Object. The field should be declared as a ObjectStreamField[] instead')
     }
 
+    @Test
     void testNotFinal() {
         final SOURCE = '''
             // Wrong field type, JVM sees it as Object!
@@ -85,6 +91,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
                 'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields which is not private, static, and final')
     }
 
+    @Test
     void testNotPrivate() {
         final SOURCE = '''
             // Wrong field type, JVM sees it as Object!
@@ -96,6 +103,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
                 'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields which is not private, static, and final')
     }
 
+    @Test
     void testNotStatic() {
         final SOURCE = '''
             // Wrong field type, JVM sees it as Object!

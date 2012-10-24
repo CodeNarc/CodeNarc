@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ReturnsNullInsteadOfEmptyCollectionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ReturnsNullInsteadOfEmptyCollection'
     }
 
+    @Test
     void testNoViolation() {
         final SOURCE = '''
         	List myMethod() {
@@ -52,6 +55,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testTernaryReturns() {
         final SOURCE = '''
             def a =  {
@@ -66,6 +70,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
                 6, 'foo ? [] : null'
     }
 
+    @Test
     void testElvis() {
         final SOURCE = '''
             def a =  {
@@ -82,6 +87,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
                 8, 'foo ?: null'
     }
 
+    @Test
     void testListMethod() {
         final SOURCE = '''
         	List myMethod() {
@@ -92,6 +98,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testCollectionMethod() {
         final SOURCE = '''
         	Collection myMethod() {
@@ -102,6 +109,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testStringListMethod() {
         final SOURCE = '''
         	List<String> myMethod() {
@@ -112,6 +120,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testMapMethod() {
         final SOURCE = '''
         	Map myMethod() {
@@ -122,6 +131,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testGenericMapMethod() {
         final SOURCE = '''
         	Map<String, String> myMethod() {
@@ -132,6 +142,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testStringListMethodInClass() {
         final SOURCE = '''
             class MyClass {
@@ -144,6 +155,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
+    @Test
     void testDefMethod() {
         final SOURCE = '''
         	def myMethod() {
@@ -154,6 +166,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testDefMethodCtorCall() {
         final SOURCE = '''
         	def myMethod() {
@@ -164,6 +177,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testDefMethodCtorCallNotCollection() {
         final SOURCE = '''
         	def myMethod() {
@@ -174,6 +188,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDefMethodCastResult() {
         final SOURCE = '''
         	def myMethod() {
@@ -184,6 +199,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testDefMethodInClass() {
         final SOURCE = '''
             class MyClass {
@@ -196,6 +212,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
+    @Test
     void testStringListMethodInInnerClass() {
         final SOURCE = '''
             def o = new Object() {
@@ -208,6 +225,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'null')
     }
 
+    @Test
     void testInClosure() {
         final SOURCE = '''
             def c = {
@@ -218,6 +236,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'null')
     }
 
+    @Test
     void testInClosureWithinAClosure() {
         final SOURCE = '''
             def a = {
@@ -235,6 +254,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'null', 8, 'null')
     }
 
+    @Test
     void testInAnonymousClassWithinAnonymousClass() {
         final SOURCE = '''
             def a = new Object() {
@@ -254,6 +274,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 6, 'null', 9, 'null')
     }
 
+    @Test
     void testClosureInAnonymousClassWithinAnonymousClass() {
         final SOURCE = '''
             def a = new Object() {

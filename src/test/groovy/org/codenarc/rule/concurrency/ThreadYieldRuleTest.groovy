@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
   * Tests for ThreadYieldRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ThreadYieldRuleTest extends AbstractRuleTestCase {
 
+    @Test
      void testRuleProperties() {
          assert rule.priority == 2
          assert rule.name == 'ThreadYield'
      }
 
+    @Test
      void testApplyTo_Violation_Initializers() {
          final SOURCE = '''
              class ThreadYieldClass1 {
@@ -46,6 +49,7 @@ class ThreadYieldRuleTest extends AbstractRuleTestCase {
              7, 'Thread.yield()')
      }
 
+    @Test
      void testApplyTo_Violation_Methods() {
          final SOURCE = '''
              class ThreadYieldClass2 {
@@ -62,6 +66,7 @@ class ThreadYieldRuleTest extends AbstractRuleTestCase {
              7, 'Thread.yield()')
      }
 
+    @Test
      void testApplyTo_Violation_Closures() {
          final SOURCE = '''
              Thread.yield()
@@ -74,6 +79,7 @@ class ThreadYieldRuleTest extends AbstractRuleTestCase {
              4, 'Thread.yield()')
      }
 
+    @Test
      void testApplyTo_NoViolations() {
          final SOURCE = '''
              class ThreadYieldClass3 {

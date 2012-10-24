@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for JUnitTestMethodWithoutAssertRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'JUnitTestMethodWithoutAssert'
     }
 
+    @Test
     void testAnnotatedMethods_SuccessScenario() {
         final SOURCE = '''
             class MyTest {
@@ -54,6 +57,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testAnnotatedMethodsWithAnnotationParameters_SuccessScenario() {
         final SOURCE = '''
             class MyTest {
@@ -78,6 +82,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testJUnitStyleConventions_SuccessScenario() {
         final SOURCE = '''
             class MyTest {
@@ -109,6 +114,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testViolationWithMethodNameConvention() {
         final SOURCE = '''
             class MyTest {
@@ -122,6 +128,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void testMethod()', "Test method 'testMethod' makes no assertions")
     }
 
+    @Test
     void testViolationWithEmptyBody() {
         final SOURCE = '''
             class MyTest {
@@ -131,6 +138,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void testMethod()', "Test method 'testMethod' makes no assertions")
     }
 
+    @Test
     void testViolationWithTestAnnotation() {
         final SOURCE = '''
             class MyTest {

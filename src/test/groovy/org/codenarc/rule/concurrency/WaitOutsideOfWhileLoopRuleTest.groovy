@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for WaitOutsideOfWhileLoopRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'WaitOutsideOfWhileLoop'
     }
 
+    @Test
     void testApplyTo_WaitWithinWhileLoop_NoViolation() {
         final SOURCE = '''
             synchronized(data) {
@@ -42,6 +45,7 @@ class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_WaitWithinNestedLoop_NoViolation() {
         final SOURCE = '''
             synchronized(data) {
@@ -57,6 +61,7 @@ class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_WaitNotWithinWhileLoop_Violation() {
         final SOURCE = '''
             synchronized(data) {
@@ -67,6 +72,7 @@ class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'data.wait()')
     }
 
+    @Test
     void testApplyTo_WaitWithinForLoop_Violation() {
         final SOURCE = '''
             synchronized(data) {

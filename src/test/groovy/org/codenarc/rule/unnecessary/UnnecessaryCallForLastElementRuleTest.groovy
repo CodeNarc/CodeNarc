@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for UnnecessaryCallForLastElementRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryCallForLastElement'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
                 def x = [0, 1, 2]
@@ -45,6 +48,7 @@ class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testGetAccessList() {
         final SOURCE = '''
             x.get(x.size() - 1)
@@ -53,6 +57,7 @@ class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
                 'x.get(x.size() - 1)', 'Unnecessarily complex access of last element. This can be simplified to x.last() or x[-1]'
     }
 
+    @Test
     void testGetAccessArray() {
         final SOURCE = '''
             x.get(x.length - 1)
@@ -61,6 +66,7 @@ class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
                 2, 'x.get(x.length - 1)', 'Unnecessarily complex access of last element. This can be simplified to x.last() or x[-1]'
     }
 
+    @Test
     void testGetAtAccessList() {
         final SOURCE = '''
             x.getAt(x.size() - 1)
@@ -69,6 +75,7 @@ class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
                 2, 'x.getAt(x.size() - 1)', 'Unnecessarily complex access of last element. This can be simplified to x.last() or x[-1]'
     }
 
+    @Test
     void testGetAtAccessArray() {
         final SOURCE = '''
             x.getAt(x.length -1)
@@ -77,6 +84,7 @@ class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
                 2, 'x.getAt(x.length -1)', 'Unnecessarily complex access of last element. This can be simplified to x.last() or x[-1]'
     }
 
+    @Test
     void testArrayStyleAccess() {
         final SOURCE = '''
             x[x.size() -1]

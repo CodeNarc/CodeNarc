@@ -17,6 +17,7 @@ package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ClosureAsLastMethodParameterRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'ClosureAsLastMethodParameter'
     }
 
+    @Test
     void testSimpleSuccessScenario() {
         final SOURCE = '''
         	[1,2,3].each { println it }
@@ -41,6 +44,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testWithComments() {
          final SOURCE = '''
             [1, 2, 3].each { /*
@@ -53,6 +57,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
          assertNoViolations(SOURCE)
     }
 
+    @Test
     void testWithLogicalStatementAtTheEndSuccessScenario() {
         final SOURCE = '''
         	[1,2,3].any {
@@ -62,11 +67,13 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testOneLineWithWhiteCharactersAtTheEndSuccessScenario() {
         final SOURCE = ' [1,2,3].each { println it }   '
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCallWithClosureThatIsNotTheLastMethodParameter() {
         final SOURCE = '''
         	[1,2,3].someMethod({ println it }, 'second param')
@@ -74,6 +81,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSimpleSingleViolation() {
         final SOURCE = '''
             [1,2,3].each({ println it })
@@ -81,6 +89,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '[1,2,3].each({ println it })', "The last parameter to the 'each' method call is a closure an can appear outside the parenthesis")
     }
 
+    @Test
     void testComplexSingleViolation() {
         final SOURCE = '''
             [1,2,3].each({
@@ -92,6 +101,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testLastParenthesesOnLineFollowingEndOfClosure() {
         final SOURCE = '''
             [1,2,3].each({
@@ -104,6 +114,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testSimpleTwoViolations() {
         final SOURCE = '''
             [1,2,3].each({ println it })
@@ -115,6 +126,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
                 4, '[1,2,3].someMethod(\'first param\', { println it })')
     }
 
+    @Test
     void testComplexTwoViolations() {
         final SOURCE = '''
             [1,2,3].each({
@@ -129,8 +141,10 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
     void testLinesWithStringsContainingDoubleSlash() {
         final SOURCE = '''
+    @Test
             void testProcess() {
                 shouldFail { process('xxx://wrsnetdev.usa.wachovia.net') }
                 shouldFail(Exception) { process('http://')
@@ -142,6 +156,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMethodCallWiderThanClosureParameter() {
         final SOURCE = '''
             doWithTransactionAndReallyLongName(
@@ -152,6 +167,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMethodCallSurroundedByExtraParentheses() {
         final SOURCE = '''
             def filterFunds() {
@@ -186,6 +202,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 28, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure an can appear outside the parenthesis")
     }
 
+    @Test
     void testNestedMethodCallSurroundedByExtraParentheses_KnownLimitation() {
         final SOURCE = '''
             def clearFunds() {
@@ -197,6 +214,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testMultiLineMethodCall_StartsWithParentheses() {
         final SOURCE = '''
             ((Node)o).children().inject( [:] ){ Map<String, String> m, Node childNode ->

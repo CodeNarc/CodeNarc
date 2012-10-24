@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for BrokenOddnessCheckRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class BrokenOddnessCheckRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BrokenOddnessCheck'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             if (x & 1 == 1) { }             // OK
@@ -38,6 +41,7 @@ class BrokenOddnessCheckRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testProperty() {
         final SOURCE = '''
             if (x % 2 == 1) { }             // violation
@@ -45,6 +49,7 @@ class BrokenOddnessCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '(x % 2 == 1)', "The code uses '(x % 2 == 1)' to check for oddness, which does not work for negative numbers. Use (x & 1 == 1) or (x % 2 != 0) instead")
     }
 
+    @Test
     void testPropertyReverse() {
         final SOURCE = '''
             if (1 == x % 2) { }             // violation
@@ -52,6 +57,7 @@ class BrokenOddnessCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '(1 == x % 2)', "The code uses '(1 == x % 2)' to check for oddness, which does not work for negative numbers. Use (x & 1 == 1) or (x % 2 != 0) instead")
     }
 
+    @Test
     void testMethod() {
         final SOURCE = '''
             if (method() % 2 == 1) { }      // violation

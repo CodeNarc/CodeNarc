@@ -22,9 +22,9 @@ import org.codenarc.rule.basic.EmptyIfStatementRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
-import static org.codenarc.test.TestUtil.assertEqualSets
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import static org.codenarc.test.TestUtil.*
 
 /**
  * Tests for XmlReaderRuleSet
@@ -40,21 +40,25 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
 
     private List rules
 
+    @Test
     void testNullReader() {
         shouldFailWithMessageContaining('reader') { new XmlReaderRuleSet(null) }
     }
 
+    @Test
     void testEmptyReader() {
         def reader = new StringReader('')
         shouldFail { new XmlReaderRuleSet(reader) }
     }
 
+    @Test
     void testNoRules() {
         final XML = "<ruleset $NAMESPACE></ruleset>"
         parseXmlRuleSet(XML)
         assert rules == []
     }
 
+    @Test
     void testOneRuleScript() {
         // Load ".txt" file so that it gets copied as resource in Idea
         final XML = """
@@ -65,6 +69,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assertEqualSets(rules*.class.name, ['DoNothingRule'])
     }
 
+    @Test
     void testOneRuleScriptWithProperties() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -79,6 +84,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assert rules*.priority == [1]
     }
 
+    @Test
     void testRuleScriptFileNotFound() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -87,6 +93,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('DoesNotExist.groovy') { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testRuleScriptCompileError() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -95,6 +102,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFail { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testRuleScriptNotARule() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -103,6 +111,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('NotARule') { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testOneRule() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -112,6 +121,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assertRuleClasses([StubRule])
     }
 
+    @Test
     void testTwoRules() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -122,6 +132,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assertRuleClasses([StubRule, CatchThrowableRule])
     }
 
+    @Test
     void testTwoRulesWithProperties() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -141,6 +152,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assert rules*.enabled == [false, true]
     }
 
+    @Test
     void testGroovyRuleSet() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -150,6 +162,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assertRuleNames(['CatchThrowable', 'ThrowExceptionFromFinallyBlock'])
     }
 
+    @Test
     void testNestedRuleSet() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -165,6 +178,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assert rules[0].priority == 1
     }
 
+    @Test
     void testDeeplyNestedRuleSet() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -181,6 +195,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assert findRule('CatchThrowable').priority == 1
     }
 
+    @Test
     void testNestedRuleSet_Excludes() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -194,6 +209,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assertRuleClasses([DuplicateImportRule, CatchThrowableRule])
     }
 
+    @Test
     void testNestedRuleSet_IncludesAndExcludes() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -215,6 +231,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assertRuleClasses([DuplicateImportRule, TestPathRule, EmptyIfStatementRule, CatchThrowableRule])
     }
 
+    @Test
     void testNestedRuleSet_IncludesExcludesAndConfig() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -236,6 +253,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         assert findRule('CatchThrowable').priority == 3
     }
 
+    @Test
     void testRuleClassNotFound() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -244,6 +262,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFail(ClassNotFoundException) { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testRuleClassNotARule() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -252,6 +271,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('java.lang.Object') { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testNestedRuleSet_RuleSetFileNotFound() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -260,6 +280,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('DoesNotExist.xml') { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testNestedRuleSet_ConfigRuleDoesNotExist() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -272,6 +293,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('DoesNotExist') { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testNestedRuleSet_ConfigRuleWasRenamed() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -284,6 +306,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('HardCodedWindowsRootDirectory') { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testNestedRuleSet_ConfigRulePropertyDoesNotExist() {
         final XML = """
             <ruleset $NAMESPACE>
@@ -296,6 +319,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
         shouldFailWithMessageContaining('DoesNotExist') { parseXmlRuleSet(XML) }
     }
 
+    @Test
     void testRulesListIsImmutable() {
         final XML = """
             <ruleset $NAMESPACE>

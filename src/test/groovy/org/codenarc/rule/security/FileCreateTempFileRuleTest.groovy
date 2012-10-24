@@ -17,6 +17,7 @@ package org.codenarc.rule.security
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for FileCreateTempFileRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class FileCreateTempFileRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'FileCreateTempFile'
     }
 
+    @Test
     void testApplyTo_Violation_Initializers() {
         final SOURCE = '''
             class MyClass {
@@ -46,6 +49,7 @@ class FileCreateTempFileRuleTest extends AbstractRuleTestCase {
                 7, 'File.createTempFile(null, null, null)', 'The method File.createTempFile is insecure. Use a secure API such as that provided by ESAPI')
     }
 
+    @Test
     void testApplyTo_Violation_Methods() {
         final SOURCE = '''
             class MyClass {
@@ -62,6 +66,7 @@ class FileCreateTempFileRuleTest extends AbstractRuleTestCase {
                 7, 'File.createTempFile(null, null, null)', 'The method File.createTempFile is insecure. Use a secure API such as that provided by ESAPI')
     }
 
+    @Test
     void testApplyTo_Violation_Closures() {
         final SOURCE = '''
             File.createTempFile('a', 'b')
@@ -74,6 +79,7 @@ class FileCreateTempFileRuleTest extends AbstractRuleTestCase {
                 4, "File.createTempFile('a', 'b')")
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

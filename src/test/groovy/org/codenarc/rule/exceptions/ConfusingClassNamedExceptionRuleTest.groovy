@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ConfusingClassNamedExceptionRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ConfusingClassNamedException'
     }
 
+    @Test
     void testNoViolations() {
         final SOURCE = '''
         	class MyClass {}
@@ -52,6 +55,7 @@ class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testExceptionWithParent() {
         final SOURCE = '''
             class MyException extends PrintWriter {}
@@ -59,6 +63,7 @@ class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'class MyException extends PrintWriter {}')
     }
 
+    @Test
     void testExceptionWithoutParent() {
         final SOURCE = '''
             class MyException {}

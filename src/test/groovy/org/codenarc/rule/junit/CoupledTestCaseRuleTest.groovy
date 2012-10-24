@@ -17,6 +17,7 @@ package org.codenarc.rule.junit
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CoupledTestCaseRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class CoupledTestCaseRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'CoupledTestCase'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -43,6 +46,7 @@ class CoupledTestCaseRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testStaticMethod() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -55,6 +59,7 @@ class CoupledTestCaseRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'MyOtherTest.helperMethod()', 'MyOtherTest.helperMethod() invokes a method on another test case. Test cases should not be coupled. Move this method to a helper object')
     }
 
+    @Test
     void testInstantiation() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {

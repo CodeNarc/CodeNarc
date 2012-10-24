@@ -17,6 +17,7 @@ package org.codenarc.rule.exceptions
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ThrowThrowableRule
@@ -24,11 +25,13 @@ import org.codenarc.rule.Rule
  * @author Chris Mair
   */
 class ThrowThrowableRuleTest extends AbstractRuleTestCase {
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ThrowThrowable'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -40,6 +43,7 @@ class ThrowThrowableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'throw new Throwable()')
     }
 
+    @Test
     void testApplyTo_Violation_FullPackageName() {
         final SOURCE = '''
             class MyClass {
@@ -53,6 +57,7 @@ class ThrowThrowableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, "throw new java.lang.Throwable('something bad')")
     }
 
+    @Test
     void testApplyTo_NoViolation() {
         final SOURCE = '''class MyClass {
                 def myMethod() {

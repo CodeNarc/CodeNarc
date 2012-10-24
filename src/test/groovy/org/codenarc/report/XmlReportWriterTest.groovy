@@ -24,6 +24,8 @@ import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.Before
+import org.junit.Test
 
 import java.text.DateFormat
 
@@ -123,12 +125,14 @@ class XmlReportWriterTest extends AbstractTestCase {
     private ruleSet
     private stringWriter
 
+    @Test
     void testWriteReport_Writer() {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def xmlAsString = stringWriter.toString()
         assertXml(xmlAsString)
     }
 
+    @Test
     void testWriteReport_Writer_ProperPackageSummaryForPackageWithEmptyRelativePath() {
         final XML = """
             <PackageSummary totalFiles='2' filesWithViolations='1' priority1='0' priority2='0' priority3='1'>
@@ -144,6 +148,7 @@ class XmlReportWriterTest extends AbstractTestCase {
         assertContainsXml(stringWriter.toString(), XML)
     }
 
+    @Test
     void testWriteReport_WritesToDefaultReportFile() {
         reportWriter.writeReport(analysisContext, results)
         def reportFile = new File('CodeNarcXmlReport.xml')
@@ -152,6 +157,7 @@ class XmlReportWriterTest extends AbstractTestCase {
         assertXml(xmlAsString)
     }
 
+    @Test
     void testWriteReport_WritesToConfiguredReportFile() {
         reportWriter.outputFile = NEW_REPORT_FILE
         reportWriter.writeReport(analysisContext, results)
@@ -161,20 +167,23 @@ class XmlReportWriterTest extends AbstractTestCase {
         assertXml(xmlAsString)
     }
 
+    @Test
     void testWriteReport_NullResults() {
         shouldFailWithMessageContaining('results') { reportWriter.writeReport(analysisContext, null) }
     }
 
+    @Test
     void testWriteReport_NullAnalysisContext() {
         shouldFailWithMessageContaining('analysisContext') { reportWriter.writeReport(null, results) }
     }
 
+    @Test
     void testDefaultOutputFile_CodeNarcXmlReport() {
         assert reportWriter.defaultOutputFile == 'CodeNarcXmlReport.xml'
     }
 
-    void setUp() {
-        super.setUp()
+    @Before
+    void setUpXmlReportWriterTest() {
         reportWriter = new XmlReportWriter(title:TITLE)
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 

@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for CouldBeElvisRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class CouldBeElvisRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'CouldBeElvis'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	   def x
@@ -44,6 +47,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testSecondSuccessScenario() {
         final SOURCE = '''
         	   def x
@@ -57,6 +61,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testCouldBeElvisViolation() {
         final SOURCE = '''
               def x
@@ -68,6 +73,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'if (!x)', "Code could use elvis operator: x = x ?: 'some value'")
     }
 
+    @Test
     void testThisReferenceCouldBeElvisViolation() {
         final SOURCE = '''
               if (!this.x) {
@@ -77,6 +83,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'if (!this.x)', 'Code could use elvis operator: this.x = this.x ?: this.foo()')
     }
 
+    @Test
     void testDoingWorkInIf() {
         final SOURCE = '''
               def x
@@ -91,6 +98,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDoingWorkInIfWithXFirst() {
         final SOURCE = '''
               def x

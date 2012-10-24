@@ -17,6 +17,7 @@ package org.codenarc.rule.concurrency
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ThreadLocalNotStaticFinalRule.
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
  */
 class ThreadLocalNotStaticFinalRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ThreadLocalNotStaticFinal'
     }
 
+    @Test
     void testApplyTo_Violation_StaticOrFinalButNotBoth() {
         final SOURCE = '''
             class ThreadLocalNotStaticFinalClass1 {
@@ -43,6 +46,7 @@ class ThreadLocalNotStaticFinalRuleTest extends AbstractRuleTestCase {
                 4, 'private final ThreadLocal local2 = new ThreadLocal()')
     }
 
+    @Test
     void testApplyTo_Violation_NotFinalOrStatic() {
         final SOURCE = '''
             class ThreadLocalNotStaticFinalClass1 {
@@ -55,6 +59,7 @@ class ThreadLocalNotStaticFinalRuleTest extends AbstractRuleTestCase {
                 4, 'protected ThreadLocal local2 = new ThreadLocal()', 'The ThreadLocal field local2 is not static')
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             class ThreadLocalNotStaticFinalClass3 {
@@ -64,6 +69,7 @@ class ThreadLocalNotStaticFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolationsInnerClass() {
         final SOURCE = '''
             class ThreadLocalNotStaticFinalClass4 {

@@ -16,6 +16,7 @@
 package org.codenarc.tool
 
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Tests for GenerateCodeNarcRulesProperties
@@ -24,6 +25,7 @@ import org.codenarc.test.AbstractTestCase
   */
 class GenerateCodeNarcRulesPropertiesTest extends AbstractTestCase {
 
+    @Test
     void testMain_GeneratesPropertiesFile() {
         def tempFile = File.createTempFile('GenerateCodeNarcRulesPropertiesTest', null)
         tempFile.deleteOnExit()

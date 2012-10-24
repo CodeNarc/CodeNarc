@@ -17,6 +17,7 @@
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for PrivateFieldCouldBeFinalRule
@@ -27,11 +28,13 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
 
     private static final VIOLATION_MESSAGE = 'Private field [count] in class MyClass is only'
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'PrivateFieldCouldBeFinal'
     }
 
+    @Test
     void testApplyTo_NonPrivateField_OnlySetWithinInitializer_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -42,6 +45,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateFieldSetWithinMethod_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -54,6 +58,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateFieldSetWithinClosure_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -64,6 +69,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateFieldNeverSet_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -73,6 +79,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateField_OnlyInitializedInClosureWithinConstructor_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -88,6 +95,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateFieldSetWithinInitializerAndWithinMethod_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -100,6 +108,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateField_AssignedUsingOtherOperators_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -123,6 +132,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateFieldSetWithinConstructorAndWithinMethod_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -138,6 +148,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateFieldSetUsingThis_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -150,6 +161,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateField_OnlySetWithinInitializer_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -159,6 +171,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testApplyTo_PrivateStaticNonFinalField_OnlySetWithinInitializer_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -168,6 +181,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private static int count = 100', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testApplyTo_PrivateField_ComparedWithinMethodButNotSet_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -186,6 +200,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'private completed = 0', messageText:'Private field [completed] in class MyClass is only'])
     }
 
+    @Test
     void testApplyTo_PrivateField_ReferencedWithinMethodButNotSet_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -198,6 +213,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count = 0', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testApplyTo_PrivateField_OnlySetWithinConstructor_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -210,6 +226,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testApplyTo_PrivateField_OnlySetWithinConstructorUsingThis_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -222,6 +239,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testApplyTo_PrivateFields_MultipleViolations() {
         final SOURCE = '''
             class MyClass {
@@ -237,6 +255,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:"private name = 'abc'", messageText:'Private field [name] in class MyClass is only'])
     }
 
+    @Test
     void testApplyTo_PrivateField_SetWithinInitializerAndConstructor_Violation() {
         final SOURCE = '''
             class MyClass {
@@ -249,6 +268,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private int count', VIOLATION_MESSAGE)
     }
 
+    @Test
     void testApplyTo_PrivateFinalField_OnlySetWithinInitializer_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -258,6 +278,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateFinalField_OnlySetWithinConstructor_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -270,6 +291,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateField_MultipleClassesWithinSource() {
         final SOURCE = '''
             class MyClass {
@@ -287,6 +309,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:"private other = 'abc'", messageText:'Private field [other] in class MyClass is only'])
     }
 
+    @Test
     void testApplyTo_PrivateField_ReferencedWithinInnerClass_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -301,6 +324,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateField_ReferencedWithinAnonymousInnerClass_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -315,6 +339,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_PrivateField_PostfixAndPrefixOperators() {
         final SOURCE = '''
             class FakeIdGeneratorHelper {
@@ -333,6 +358,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MultipleClassesWithinSource_HavePrivateFieldWithSameName_Violation() {
         final SOURCE = '''
             class MyOtherClass {
@@ -355,6 +381,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
     }
 
 
+    @Test
     void testApplyTo_IgnoreFieldNames_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -366,6 +393,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_DoNotApplyToClassNames_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -376,6 +404,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_SuppressWarningsOnClass_NoViolations() {
         final SOURCE = '''
             @SuppressWarnings('PrivateFieldCouldBeFinal')

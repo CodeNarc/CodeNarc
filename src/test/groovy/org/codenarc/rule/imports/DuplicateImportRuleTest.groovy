@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DuplicateImportRule
@@ -25,11 +26,13 @@ import org.codenarc.rule.Rule
   */
 class DuplicateImportRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'DuplicateImport'
     }
 
+    @Test
     void testApplyTo_Violation() {
         final SOURCE = '''
             import java.io.InputStream
@@ -45,6 +48,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'import java.io.InputStream')
     }
 
+    @Test
     void testApplyTo_DuplicateImportWithWildcards_Violation() {
         final SOURCE = '''
             import java.io.*
@@ -54,6 +58,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'import java.io.*')
     }
 
+    @Test
     void testApplyTo_ImportsWithWildcards_NoViolations() {
         final SOURCE = '''
             import java.io.*
@@ -63,6 +68,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_MultipleDuplicateImports() {
         final SOURCE = '''
             import abc.def.MyClass
@@ -75,6 +81,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'import abc.def.MyClass', 6, 'import abc.def.MyClass')
     }
 
+    @Test
     void testApplyTo_DuplicateStaticImportWithWildcards_Violation() {
         final SOURCE = '''
             import static com.wystar.app.payroll.util.DataMaintenanceUtil.*
@@ -85,6 +92,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'import static com.wystar.app.payroll.util.DataMaintenanceUtil.*')
     }
 
+    @Test
     void testApplyTo_StaticImportWithWildcards_NoViolations() {
         final SOURCE = '''
             import static com.wystar.app.payroll.util.DataMaintenanceUtil.*
@@ -93,6 +101,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_CommentedOutDuplicateImport_NoViolations() {
         final SOURCE = '''
             import java.io.InputStream
@@ -101,6 +110,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             import java.io.InputStream

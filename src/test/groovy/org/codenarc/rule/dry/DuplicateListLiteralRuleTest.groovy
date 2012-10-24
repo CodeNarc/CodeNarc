@@ -17,6 +17,7 @@ package org.codenarc.rule.dry
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for DuplicateListLiteralRule
@@ -25,12 +26,14 @@ import org.codenarc.rule.Rule
  */
 class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'DuplicateListLiteral'
         assert 'MyTest.groovy' =~ rule.doNotApplyToFilesMatching
     }
 
+    @Test
     void testIgnoresDifferentValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -46,6 +49,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresVariableValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -60,6 +64,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresNestedListsWithNonConstantValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -71,6 +76,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresValuesContainingExpressions_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -81,6 +87,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testIgnoresEmptyList_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -91,6 +98,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testDuplicateListLiteral_ListValuesAsConstants() {
         final SOURCE = '''
             class MyClass {
@@ -107,6 +115,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
             7, 'return ["a", 99]', '[a, 99]')
     }
 
+    @Test
     void testDuplicateListLiteral_HandlesNestedListLiterals() {
         final SOURCE = '''
         	  def var1 = [1, [3, 4]]
@@ -115,6 +124,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [1, [3,4]]', '[1, [3, 4]]')
     }
 
+    @Test
     void testDuplicateListLiteral_HandlesNestedListLiterals_OuterListsAreNotTheSame() {
         final SOURCE = '''
         	  def var1 = [123, [3,4]]
@@ -123,6 +133,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [99, [3,4]]', '[3, 4]')
     }
 
+    @Test
     void testDuplicateListLiteral_HandlesMapsNestedWithinListLiterals() {
         final SOURCE = '''
         	  def var1 = [123, [3, 4, [x:99], 5]]
@@ -131,6 +142,7 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def var2 = [99, [3, 4, [x:99], 5]]', '[3, 4, [x:99], 5]')
     }
 
+    @Test
     void testDuplicateListLiteral_NestedEmptyList_Violations() {
         final SOURCE = '''
             class Lists {
