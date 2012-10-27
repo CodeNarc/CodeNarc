@@ -98,6 +98,9 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule checks for classes that import JUnit 4 classes and contain a <<<public>>>, instance, <<<void>>>,
   no-arg method named <test>* that is not annotated with the JUnit 4 <<<@Test>>> annotation.
 
+  Note: This rule should be disabled for Grails 2.x projects, since the Grails test framework can use
+  AST Transformations to automatically annotate test methods.
+
   Example of violations:
 
 -------------------------------------------------------------------------------
