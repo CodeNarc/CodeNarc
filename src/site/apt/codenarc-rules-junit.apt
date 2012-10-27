@@ -83,6 +83,32 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
+* {JUnitFailWithoutMessage} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.11>
+
+  This rule detects JUnit calling the <<<fail()>>> method without an argument. For better error reporting you
+  should always provide a message.
+
+
+* {JUnitLostTest} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  This rule checks for classes that import JUnit 4 classes and contain a <<<public>>>, instance, <<<void>>>,
+  no-arg method named <test>* that is not annotated with the JUnit 4 <<<@Test>>> annotation.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    import org.junit.Test
+
+    class MyTestCase {
+        void testMe() { }           // missing @Test annotation
+    }
+-------------------------------------------------------------------------------
+
+
 * {JUnitPublicNonTestMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -143,6 +169,33 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
   ending in 'Test', 'Tests' or 'TestCase'.
+
+
+* {JUnitTestMethodWithoutAssert} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.12>
+
+  This rule searches for test methods that do not contain assert statements. Either the test method is missing assert
+  statements, which is an error, or the test method contains custom assert statements that do not follow a proper assert
+  naming convention. Test methods are defined as public void methods that begin with the work test or have a @Test
+  annotation. By default this rule applies to the default test class names, but this can be changed using the rule's
+  applyToClassNames property. An assertion is defined as either using the <<<assert>>> keyword or invoking a method that
+  starts with the work assert, like assertEquals, assertNull, or assertMyClassIsSimilar. Also, any method named
+  <<<should.*>>> also counts as an assertion so that <<<shouldFail>>> methods do not trigger an assertion, any method
+  that starts with <<<fail>> counts as an assertion, and any method that starts with <<<verify>>> counts as an assertion.
+
+  What counts as an assertion method can be overridden using the assertMethodPatterns property of the rule. The
+  default value is this comma separated list of regular expressions:
+
+-------------------------------------------------------------------------------
+        String assertMethodPatterns = 'assert.*,should.*,fail.*,verify.*'
+-------------------------------------------------------------------------------
+
+    If you'd like to add any method starting with 'ensure' to the ignores then you would set the value to this:
+
+-------------------------------------------------------------------------------
+    'assert.*,should.*,fail.*,verify.*,ensure.*'
+-------------------------------------------------------------------------------
 
 
 * {JUnitUnnecessarySetUp} Rule
@@ -248,41 +301,6 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule detects JUnit calling <<<assertTrue>>> or <<<assertFalse>>> where the first or second parameter
   is an <<<Object#is()>>> call testing for reference equality. These assertion should be made against the
   <<<assertSame>>> or <<<assertNotSame>>> method instead.
-
-
-* {JUnitFailWithoutMessage} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.11>
-
-  This rule detects JUnit calling the <<<fail()>>> method without an argument. For better error reporting you
-  should always provide a message.
-
-
-* {JUnitTestMethodWithoutAssert} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.12>
-
-  This rule searches for test methods that do not contain assert statements. Either the test method is missing assert
-  statements, which is an error, or the test method contains custom assert statements that do not follow a proper assert
-  naming convention. Test methods are defined as public void methods that begin with the work test or have a @Test
-  annotation. By default this rule applies to the default test class names, but this can be changed using the rule's
-  applyToClassNames property. An assertion is defined as either using the <<<assert>>> keyword or invoking a method that
-  starts with the work assert, like assertEquals, assertNull, or assertMyClassIsSimilar. Also, any method named
-  <<<should.*>>> also counts as an assertion so that <<<shouldFail>>> methods do not trigger an assertion, any method
-  that starts with <<<fail>> counts as an assertion, and any method that starts with <<<verify>>> counts as an assertion.
-
-  What counts as an assertion method can be overridden using the assertMethodPatterns property of the rule. The
-  default value is this comma separated list of regular expressions:
-
--------------------------------------------------------------------------------
-        String assertMethodPatterns = 'assert.*,should.*,fail.*,verify.*'
--------------------------------------------------------------------------------
-
-    If you'd like to add any method starting with 'ensure' to the ignores then you would set the value to this:
-
--------------------------------------------------------------------------------
-    'assert.*,should.*,fail.*,verify.*,ensure.*'
--------------------------------------------------------------------------------
 
 
 * {SpockIgnoreRestUsed} Rule

@@ -4,6 +4,9 @@ http://www.codenarc.org
 
 Changes in version 0.18 (??? 2012 )
 -------------------------------------------
+NEW RULES
+- #3531554: New JUnitLostTest rule. Checks for classes that import JUnit 4 classes and contain a public, instance, void, no-arg method named test* that is not annotated with @Test.
+
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.
 

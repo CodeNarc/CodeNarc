@@ -11,6 +11,7 @@
     <rule class='org.codenarc.rule.junit.JUnitAssertAlwaysFailsRule'/>
     <rule class='org.codenarc.rule.junit.JUnitAssertAlwaysSucceedsRule'/>
     <rule class='org.codenarc.rule.junit.JUnitPublicNonTestMethodRule'/>
+    <rule class='org.codenarc.rule.junit.JUnitLostTestRule'/>
     <rule class='org.codenarc.rule.junit.JUnitSetUpCallsSuperRule'/>
     <rule class='org.codenarc.rule.junit.JUnitTearDownCallsSuperRule'/>
     <rule class='org.codenarc.rule.junit.JUnitUnnecessarySetUpRule'/>

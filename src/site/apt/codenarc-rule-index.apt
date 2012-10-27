@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 286 rules.
+  <<CodeNarc>> includes 287 rules.
 
     
       
@@ -621,6 +621,9 @@ Rule Index
     
       
     * {{{codenarc-rules-junit.html#JUnitFailWithoutMessage}JUnitFailWithoutMessage}}  
+    
+      
+    * {{{codenarc-rules-junit.html#JUnitLostTest}JUnitLostTest}}  
     
       
     * {{{codenarc-rules-junit.html#JUnitPublicNonTestMethod}JUnitPublicNonTestMethod}}  

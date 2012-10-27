@@ -147,6 +147,7 @@ ruleset {
     JUnitAssertAlwaysFails 
     JUnitAssertAlwaysSucceeds 
     JUnitFailWithoutMessage 
+    JUnitLostTest 
     JUnitPublicNonTestMethod 
     JUnitSetUpCallsSuper 
     JUnitStyleAssertions 
