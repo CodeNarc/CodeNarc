@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.codenarc.rule.${ruleCategory}
 
 import org.codenarc.rule.Rule
+import org.junit.Test
 
 /**
  * Tests for ${ruleName}Rule
@@ -24,11 +25,13 @@ import org.codenarc.rule.Rule
  */
 class ${ruleName}RuleTest extends AbstractRuleTestCase {
 
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == '$ruleName'
     }
 
+    @Test
     void testSuccessScenario() {
         final SOURCE = '''
         	// todo: replace with source for passing edge case
@@ -36,6 +39,7 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             // todo: replace with source that triggers a violation
@@ -43,6 +47,7 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, '...')
     }
 
+    @Test
     void testTwoViolations() {
         final SOURCE = '''
             // todo: replace with source that triggers 2 violations
