@@ -434,6 +434,7 @@
     <dictionary name="Chris">
       <words>
         <w>arcy</w>
+        <w>argumentlist</w>
         <w>codenarc</w>
         <w>gradle</w>
         <w>groovyism</w>
