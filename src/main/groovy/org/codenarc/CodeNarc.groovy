@@ -166,7 +166,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     }
 
     private parseReport(String argValue) {
-        def parts = argValue.tokenize(':')
+        def parts = argValue.split(':', 2)
         def type = parts[0]
         def reportWriter = new ReportWriterFactory().getReportWriter(type)
 
