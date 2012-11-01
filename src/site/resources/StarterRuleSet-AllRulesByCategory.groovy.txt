@@ -145,6 +145,7 @@ ruleset {
     BracesForTryCatchFinally 
     ClassJavadoc 
     LineLength 
+    SpaceAfterComma 
     
     // rulesets/generic.xml
     IllegalClassReference 

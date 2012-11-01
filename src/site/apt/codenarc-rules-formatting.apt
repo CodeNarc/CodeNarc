@@ -8,21 +8,21 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
 * {BracesForClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for classes. By default, requires them on the same
   line, but the sameLine property can be set to false to override this.
 
 * {BracesForForLoop} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for for loops. By default, requires them on the same line, but the
   sameLine property can be set to false to override this.
 
 * {BracesForIfElse} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for if statements. By default, requires them on the same
   line, but the sameLine property can be set to false to override this.
@@ -30,7 +30,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
 * {BracesForMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for constructors and methods. By default, requires them on the same
   line, but the sameLine property can be set to false to override this.
@@ -38,14 +38,14 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
 * {BracesForTryCatchFinally} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks the location of the opening brace (\{) for try statements. By default, requires them on the line, but the sameLine property can be set to false to override this.
 
 
 * {ClassJavadoc} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Makes sure each class and interface definition is preceded by javadoc. Enum definitions are not checked, due to strange
   behavior in the Groovy AST. By default, only the main class in a file is checked for Javadoc. The main class is defined as
@@ -56,7 +56,28 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
 * {LineLength} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks the maximum length for each line of source code. It checks for number of characters, so lines that include tabs may appear longer than the allowed number when viewing the file. The maximum line length can be configured by setting the length property, which defaults to 120.
 
+
+* {SpaceAfterComma} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Checks that there is at least one space or whitespace following each comma. That includes checks for method
+  and closure declaration parameter lists, method call parameter lists, Map literals and List literals.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+    def value = calculate(1,399, 'abc')         // violation on parameter 399
+
+    def method1(int a,String b) { }             // violation on parameter b
+
+    def closure1 = { int a,String b -> }        // violation on parameter b
+
+    def list1 = [a,b, c]                        // violation on list element b
+
+    def map1 = [a:1,b:2, c:3]                   // violation on map element b:2
+-------------------------------------------------------------------------------

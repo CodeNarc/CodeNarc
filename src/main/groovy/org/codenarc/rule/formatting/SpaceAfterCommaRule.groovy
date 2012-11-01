@@ -20,17 +20,19 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ListExpression
+import org.codehaus.groovy.ast.expr.MapExpression
 
 /**
- * Check that there is at least one space (blank) or whitespace following each comma. That includes
- * checks for method and closure declaration parameter lists, method calls, Map literals and List literals.
+ * Check that there is at least one space (blank) or whitespace following each comma. That includes checks
+ * for method and closure declaration parameter lists, method call parameter lists, Map literals and List literals.
  *
  * @author Chris Mair
   */
 class SpaceAfterCommaRule extends AbstractAstVisitorRule {
 
     String name = 'SpaceAfterComma'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = SpaceBetweenParametersAstVisitor
 }
 
@@ -42,7 +44,6 @@ class SpaceBetweenParametersAstVisitor extends AbstractAstVisitor {
         node.parameters.each { parameter ->
             if (lastColumn && parameter.columnNumber == lastColumn + 1) {
                 addViolation(node, "The parameter ${parameter.name} of method ${node.name} within class $currentClassName is not preceded by a space or whitespace")
-
             }
             lastColumn = parameter.lastColumnNumber
         }
@@ -55,7 +56,6 @@ class SpaceBetweenParametersAstVisitor extends AbstractAstVisitor {
             expression.parameters.each { parameter ->
                 if (lastColumn && parameter.columnNumber == lastColumn + 1) {
                     addViolation(expression, "The closure parameter ${parameter.name} within class $currentClassName is not preceded by a space or whitespace")
-
                 }
                 lastColumn = parameter.lastColumnNumber
             }
@@ -73,11 +73,38 @@ class SpaceBetweenParametersAstVisitor extends AbstractAstVisitor {
             parameterExpressions.each { e ->
                 if (lastColumn && e.columnNumber == lastColumn + 1) {
                     addViolation(call, "The parameter ${e.text} in the call to method ${call.methodAsString} within class $currentClassName is not preceded by a space or whitespace")
-
                 }
                 lastColumn = e.lastColumnNumber
             }
         }
     }
 
+    @Override
+    void visitListExpression(ListExpression listExpression) {
+        if (isFirstVisit(listExpression)) {
+            def lastColumn
+            listExpression.expressions.each { e ->
+                if (lastColumn && e.columnNumber == lastColumn + 1) {
+                    addViolation(listExpression, "The list element ${e.text} within class $currentClassName is not preceded by a space or whitespace")
+                }
+                lastColumn = e.lastColumnNumber
+            }
+        }
+        super.visitListExpression(listExpression)
+    }
+
+    @Override
+    void visitMapExpression(MapExpression mapExpression) {
+        if (isFirstVisit(mapExpression)) {
+            def lastColumn
+            mapExpression.mapEntryExpressions.each { e ->
+                if (lastColumn && e.keyExpression.columnNumber == lastColumn + 1) {
+                    def mapEntryAsString = e.keyExpression.text + ':' + e.valueExpression.text
+                    addViolation(mapExpression, "The map entry $mapEntryAsString within class $currentClassName is not preceded by a space or whitespace")
+                }
+                lastColumn = e.valueExpression.lastColumnNumber
+            }
+        }
+        super.visitMapExpression(mapExpression)
+    }
 }

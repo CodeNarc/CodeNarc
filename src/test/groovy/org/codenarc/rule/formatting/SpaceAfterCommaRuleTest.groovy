@@ -28,7 +28,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testRuleProperties() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'SpaceAfterComma'
     }
 
@@ -148,6 +148,79 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'void calculate = { a,int b,String name,count -> }', messageText:'The closure parameter b'],
             [lineNumber:3, sourceLineText:'void calculate = { a,int b,String name,count -> }', messageText:'The closure parameter name'],
             [lineNumber:3, sourceLineText:'void calculate = { a,int b,String name,count -> }', messageText:'The closure parameter count'] )
+    }
+
+    // Tests for list literals
+
+    @Test
+    void testApplyTo_ListLiteral_ProperSpacing_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def list1 = []
+                def list2 = [1]
+                def list3 = [1, 2,\tx,    '123']
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ListLiteral_NoPrecedingSpaceForSingleParameter_Violation() {
+        final SOURCE = '''
+            def list1 = [a,b, c]
+        '''
+        assertSingleViolation(SOURCE, 2, 'def list1 = [a,b, c]', 'The list element b')
+    }
+
+    @Test
+    void testApplyTo_ListLiteral_NoPrecedingSpaceForMultipleParameters_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                def list1 = [a,b,name,123,[x]]
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element b'],
+            [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element name'],
+            [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element 123'],
+            [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element [x]'] )
+    }
+
+    // Tests for map literals
+
+    @Test
+    void testApplyTo_MapLiteral_ProperSpacing_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def map1 = [:]
+                def map2 = [a:1]
+                def map3 = [a:1, b:2,\tc:x,    d:'123']
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_MapLiteral_NoPrecedingSpaceForSingleParameter_Violation() {
+        final SOURCE = '''
+            def map1 = [a:1,b:2, c:3]
+        '''
+        assertSingleViolation(SOURCE, 2, 'def map1 = [a:1,b:2, c:3]', 'The map entry b:2')
+    }
+
+    @Test
+    void testApplyTo_MapLiteral_NoPrecedingSpaceForMultipleParameters_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry b:value'],
+            [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry c:123'],
+            [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry d:123'],
+            [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry e:[x]'],
+            [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry f:[a:1]'] )
     }
 
     protected Rule createRule() {

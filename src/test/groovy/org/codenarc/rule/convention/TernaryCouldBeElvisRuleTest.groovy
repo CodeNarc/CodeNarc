@@ -62,7 +62,7 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             x ? x : false
         '''
-        assertSingleViolation(SOURCE, 2,'x ? x : false', 'x ?: false')
+        assertSingleViolation(SOURCE, 2, 'x ? x : false', 'x ?: false')
     }
 
     @Test
