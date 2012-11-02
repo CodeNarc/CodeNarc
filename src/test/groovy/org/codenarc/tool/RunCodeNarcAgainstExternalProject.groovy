@@ -37,12 +37,14 @@ class RunCodeNarcAgainstExternalProject {
         assert baseDir, 'The "basedir" system property must be set to the base directory of the external project.'
         assert title, 'The "title" system property must be set to the title of the external project.'
 
+        def rulesetfiles = System.getProperty('rulesetfiles') ?: DEFAULT_RULESET_FILES
+
         System.setProperty('codenarc.properties.file', 'Ignore')
         def ant = new AntBuilder()
 
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
-        ant.codenarc(ruleSetFiles:DEFAULT_RULESET_FILES) {
+        ant.codenarc(ruleSetFiles:rulesetfiles) {
 
            fileset(dir:baseDir) {
                include(name:'**/*.groovy')

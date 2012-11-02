@@ -22,6 +22,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapExpression
+import org.codehaus.groovy.ast.expr.Expression
 
 /**
  * Check that there is at least one space (blank) or whitespace following each comma. That includes checks
@@ -31,12 +32,17 @@ import org.codehaus.groovy.ast.expr.MapExpression
   */
 class SpaceAfterCommaRule extends AbstractAstVisitorRule {
 
+    // Initialize displayed text for AST ClosureExpression
+    {
+        ClosureExpression.metaClass.getText = { return CLOSURE_TEXT }
+    }
+
     String name = 'SpaceAfterComma'
     int priority = 3
-    Class astVisitorClass = SpaceBetweenParametersAstVisitor
+    Class astVisitorClass = SpaceAfterCommaAstVisitor
 }
 
-class SpaceBetweenParametersAstVisitor extends AbstractAstVisitor {
+class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodEx(MethodNode node) {
@@ -71,12 +77,16 @@ class SpaceBetweenParametersAstVisitor extends AbstractAstVisitor {
             def lastColumn
 
             parameterExpressions.each { e ->
-                if (lastColumn && e.columnNumber == lastColumn + 1) {
+                if (lastColumn && e.columnNumber == lastColumn + 1 && !isClosureParameterOutsideParentheses(e, arguments)) {
                     addViolation(call, "The parameter ${e.text} in the call to method ${call.methodAsString} within class $currentClassName is not preceded by a space or whitespace")
                 }
                 lastColumn = e.lastColumnNumber
             }
         }
+    }
+
+    private boolean isClosureParameterOutsideParentheses(Expression e, arguments) {
+        e instanceof ClosureExpression && e.columnNumber > arguments.lastColumnNumber
     }
 
     @Override

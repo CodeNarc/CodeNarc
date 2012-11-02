@@ -223,6 +223,22 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry f:[a:1]'] )
     }
 
+    @Test
+    void testApplyTo_ClosureParameterAfterParentheses_NoViolation() {
+        final SOURCE = '''
+            shouldFail(Exception){ dao.read() }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ClosureParameterAfterParentheses_InsideParentheses_Violation() {
+        final SOURCE = '''
+            shouldFail(Exception,{ dao.read() })
+        '''
+        assertSingleViolation(SOURCE, 2, 'shouldFail(Exception,{ dao.read() })', 'The parameter ' + SpaceAfterCommaRule.CLOSURE_TEXT)
+    }
+
     protected Rule createRule() {
         new SpaceAfterCommaRule()
     }

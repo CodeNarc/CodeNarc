@@ -42,6 +42,8 @@ public abstract class AbstractAstVisitorRule extends AbstractRule {
     protected static final String DEFAULT_TEST_FILES = ".*(Test|Tests|TestCase)\\.groovy";
     protected static final String DEFAULT_TEST_CLASS_NAMES = "*Test,*Tests,*TestCase";
 
+    public static final String CLOSURE_TEXT = "{ -> ... }";
+
     /** Each concrete subclass must either set this property or define its own property with the same name */
     protected Class getAstVisitorClass() { return null; }
 
