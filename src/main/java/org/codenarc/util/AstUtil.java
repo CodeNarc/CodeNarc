@@ -1124,6 +1124,16 @@ public class AstUtil {
         return result;
     }
 
+    public static String getNodeText(ASTNode expression, SourceCode sourceCode) {
+        String line = sourceCode.getLines().get(expression.getLineNumber() - 1);
+
+        // If multi-line, only include rest of first line
+        int endColumn = expression.getLineNumber() == expression.getLastLineNumber()
+                ? expression.getLastColumnNumber() - 1
+                : line.length();
+        return line.substring(expression.getColumnNumber() - 1, endColumn);
+    }
+
     public static String getDeclaration(ASTNode node, SourceCode sourceCode) {
         if (node.getLineNumber() < 1) return "";
         if (node.getLastLineNumber() < 1) return "";

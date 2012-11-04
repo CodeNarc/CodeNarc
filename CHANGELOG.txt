@@ -7,6 +7,7 @@ Changes in version 0.18 (??? 2012 )
 NEW RULES
 - #3531554: New JUnitLostTest rule. Checks for classes that import JUnit 4 classes and contain a public, instance, void, no-arg method named test* that is not annotated with @Test.
 - #3509530: New SpaceAfterComma rule. Checks that there is at least one space or whitespace following each comma. That includes checks for method and closure declaration parameter lists, method call parameter lists, Map literals and List literals.
+- #3583257: New SpaceAfterSemicolon rule. Checks that there is at least one space or whitespace following a semicolon that separates classic for loop clauses and also multiple statements per line.
 
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.
@@ -27,7 +28,7 @@ FRAMEWORK AND INFRASTRUCTURE
 - #3578909: Move helper methods from AbstractTestCase into new TestUtil class (to enable use by other test frameworks, e.g. Spock)
 - #3578909: Upgrade tests and test framework to JUnit 4.
 - #3578909: Move test framework classes into src/main/groovy, so that they are included in the CodeNarc jar:
-        AbstractTestCase, InMemoryAppender, TestUtil, AbstractRuleTestCase, StubRule
+            AbstractTestCase, InMemoryAppender, TestUtil, AbstractRuleTestCase, StubRule
 
 
 Changes in version 0.17 (March 2012)

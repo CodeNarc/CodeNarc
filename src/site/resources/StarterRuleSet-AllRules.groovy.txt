@@ -198,6 +198,7 @@ ruleset {
     SerializableClassMustDefineSerialVersionUID 
     SimpleDateFormatMissingLocale 
     SpaceAfterComma 
+    SpaceAfterSemicolon 
     SpockIgnoreRestUsed 
     StatelessClass 
     StatelessSingleton 

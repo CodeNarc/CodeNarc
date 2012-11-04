@@ -49,21 +49,30 @@ class AstUtilTest extends AbstractTestCase {
                 gstringMethodName = 'anotherMethod'
                 "$gstringMethodName"(234)
                 int myVariable = 99
+                multilineMethodCall(1,
+                    2, 3)
             }
             @Before setUp() {  }
         }
         enum MyEnum {
             READ, WRITE
             def doStuff() {
-                println methodCallWithinEnum(true, 'abc', 123)
+                println methodCallWithinEnum(true, 'abc', 123); doStuff()
             }
         }
     '''
     private visitor
+    private sourceCode
 
     @Test
     void testIsFromGeneratedSourceCode() {
         assert !AstUtil.isFromGeneratedSourceCode(methodNamed('print'))
+    }
+
+    @Test
+    void testGetNodeTest() {
+        assert AstUtil.getNodeText(methodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
+        assert AstUtil.getNodeText(methodNamed('multilineMethodCall'), sourceCode) == 'multilineMethodCall(1,'
     }
 
     @Test
@@ -249,7 +258,7 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     private void applyVisitor(String source) {
-        def sourceCode = new SourceString(source)
+        sourceCode = new SourceString(source)
         def ast = sourceCode.ast
         ast.classes.each { classNode -> visitor.visitClass(classNode) }
     }

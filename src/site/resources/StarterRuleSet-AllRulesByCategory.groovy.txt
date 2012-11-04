@@ -146,6 +146,7 @@ ruleset {
     ClassJavadoc 
     LineLength 
     SpaceAfterComma 
+    SpaceAfterSemicolon 
     
     // rulesets/generic.xml
     IllegalClassReference 
