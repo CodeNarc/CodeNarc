@@ -290,7 +290,7 @@ class HtmlReportWriter extends AbstractReportWriter {
                         def priority = rule.priority
                         tr(class:'ruleDescriptions') {
                             a(name:ruleName)
-                            td(index+1)
+                            td(index + 1)
                             td(ruleName, class:"ruleName priority${priority}")
                             td { unescaped << getHtmlDescriptionForRule(rule) }
                         }
@@ -312,7 +312,7 @@ class HtmlReportWriter extends AbstractReportWriter {
         if (source && source.size() > MAX_SOURCE_LINE_LENGTH) {
             source = startColumn ? sourceLine[startColumn..-1] : sourceLine.trim()
             def lengthOfFirstSegment = MAX_SOURCE_LINE_LENGTH - SOURCE_LINE_LAST_SEGMENT_LENGTH - 2
-            def firstSegment = source[0..lengthOfFirstSegment-1]
+            def firstSegment = source[0..lengthOfFirstSegment - 1]
             def lastSegment = source[-SOURCE_LINE_LAST_SEGMENT_LENGTH..-1]
             source = firstSegment + '..' + lastSegment
         }

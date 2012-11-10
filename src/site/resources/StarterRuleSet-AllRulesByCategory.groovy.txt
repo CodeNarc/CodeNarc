@@ -147,6 +147,7 @@ ruleset {
     LineLength 
     SpaceAfterComma 
     SpaceAfterSemicolon 
+    SpaceAroundOperator 
     
     // rulesets/generic.xml
     IllegalClassReference 

@@ -55,7 +55,7 @@ class MissingNewInThrowStatementAstVisitor extends AbstractAstVisitor {
 
     private static boolean looksLikeAnExceptionType(String name) {
         if (isFirstLetterUpperCase(name)) {
-            if (name.endsWith('Exception') || name.endsWith('Failure')|| name.endsWith('Fault')) {
+            if (name.endsWith('Exception') || name.endsWith('Failure') || name.endsWith('Fault')) {
                 return true
             }
         }

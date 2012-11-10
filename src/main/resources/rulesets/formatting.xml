@@ -18,4 +18,5 @@
     <rule class='org.codenarc.rule.formatting.ClassJavadocRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterSemicolonRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAroundOperatorRule'/>
 </ruleset>

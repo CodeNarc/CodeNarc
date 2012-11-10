@@ -203,9 +203,9 @@ class HtmlReportWriterTest extends AbstractTestCase {
     void testFormatSourceLine() {
         assert reportWriter.formatSourceLine('') == null
         assert reportWriter.formatSourceLine('abc') == 'abc'
-        assert reportWriter.formatSourceLine('abcdef'*20) == 'abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefab..abcdefabcdef'
+        assert reportWriter.formatSourceLine('abcdef' * 20) == 'abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefab..abcdefabcdef'
         assert reportWriter.formatSourceLine('abc', 2) == 'abc'
-        assert reportWriter.formatSourceLine('abcdef'*20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
+        assert reportWriter.formatSourceLine('abcdef' * 20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
     }
 
     @Before

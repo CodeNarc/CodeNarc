@@ -158,7 +158,7 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
     private String parentPackageName(String typeName) {
         if (typeName.contains('.')) {
             def lastPeriod = typeName.lastIndexOf('.')
-            return typeName[0..lastPeriod-1]
+            return typeName[0..lastPeriod - 1]
         }
         null
     }

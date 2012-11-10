@@ -115,12 +115,12 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     }
 
     protected getLineNumber(methodResults) {
-        def lineNumber = AstUtil.respondsTo(methodResults, 'getLineNumber')? methodResults.getLineNumber() : null
+        def lineNumber = AstUtil.respondsTo(methodResults, 'getLineNumber') ? methodResults.getLineNumber() : null
         (lineNumber == -1) ? null : lineNumber
     }
 
     protected String getSourceLine(lineNumber) {
-        lineNumber == null ?: this.sourceCode.line(lineNumber-1)
+        lineNumber == null ?: this.sourceCode.line(lineNumber - 1)
     }
 
     protected boolean isIgnoredMethodName(String methodName) {

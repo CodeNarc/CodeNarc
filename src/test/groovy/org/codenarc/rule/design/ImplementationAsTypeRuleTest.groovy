@@ -183,7 +183,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     private String classNameOnly(String fullClassName) {
         def index = fullClassName.lastIndexOf('.')
         assert index > -1
-        fullClassName[index+1..-1]
+        fullClassName[index + 1..-1]
     }
 
 }

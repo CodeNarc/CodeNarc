@@ -199,6 +199,7 @@ ruleset {
     SimpleDateFormatMissingLocale 
     SpaceAfterComma 
     SpaceAfterSemicolon 
+    SpaceAroundOperator 
     SpockIgnoreRestUsed 
     StatelessClass 
     StatelessSingleton 

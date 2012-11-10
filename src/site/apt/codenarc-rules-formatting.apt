@@ -91,17 +91,49 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
      * multiple statements on a single line
 
-     * the clauses within a classic for loop, e.g. for (i=0;i<10;i++)
+     * the clauses within a classic for loop, e.g. for (i=0;i\<10;i++)
 
   Examples of violations:
 
 -------------------------------------------------------------------------------
     def myMethod() {
         println 1;println 2                         // violation
-        def closure = { x -> doStuff();x = 23; }    // violation
+        def closure = { x -\> doStuff();x = 23; }    // violation
 
-        for (int i=0;i<10;i++) {                    // violations (2)
-            for (int j=0; j < 10;j++) { }           // violation
+        for (int i=0;i\<10;i++) {                    // violations (2)
+            for (int j=0; j \< 10;j++) { }           // violation
         }
+    }
+-------------------------------------------------------------------------------
+
+
+* {SpaceAroundOperator} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Check that there is at least one space (blank) or whitespace around each binary operator,
+  including: +, -, *, /, \>\>, \<\<, &&, ||, &, |, ?:, =.
+
+  Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
+  Do not check array ('[') operator.
+
+  Known limitations:
+
+  * Does not catch violations of missing space around equals operator (=) within a declaration expression, e.g.  <<<def x=23>>>
+
+  * Does not catch violations of certain ternary expressions.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+    def myMethod() {
+        3+ 5-x*23/ 100              // violation
+        list \<\<123                // violation
+        other\>\> writer            // violation
+        x=99                        // violation
+        x&& y                       // violation
+        x ||y                       // violation
+        x &y                        // violation
+        x| y                        // violation
     }
 -------------------------------------------------------------------------------

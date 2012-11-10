@@ -39,7 +39,7 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         String declaration = AstUtil.getDeclaration(node, sourceCode)
         if (declaration.contains('(')) {
-            declaration = declaration[0..declaration.indexOf('(')+1]
+            declaration = declaration[0..declaration.indexOf('(') + 1]
         }
         if (contains(declaration, 'def') && !declaration.contains('<')) {
             if (isConstructor) {

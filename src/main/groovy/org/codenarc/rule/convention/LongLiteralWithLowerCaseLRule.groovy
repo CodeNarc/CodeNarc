@@ -43,7 +43,7 @@ class LongLiteralWithLowerCaseLAstVisitor extends AbstractAstVisitor {
         if (expression.type.name == 'java.lang.Long') {
             def line = getSourceCode().lines[expression.lineNumber - 1]
             if (line?.length() <= expression.lastColumnNumber) {
-                def definition = line[expression.lastColumnNumber-2]
+                def definition = line[expression.lastColumnNumber - 2]
                 if (definition == 'l') {
                     addViolation(expression, "The literal ${expression.value}l should be rewritten ${expression.value}L")
                 }

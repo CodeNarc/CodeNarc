@@ -89,9 +89,9 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
         this.classNames = classNames.inject(['this']) { acc, value ->
             acc.add value
             if (value.contains('$') && !value.endsWith('$')) {
-                acc.add value[value.lastIndexOf('$')+1..-1]
+                acc.add value[value.lastIndexOf('$') + 1..-1]
             } else if (value.contains('.') && !value.endsWith('.')) {
-                acc.add value[value.lastIndexOf('.')+1..-1]
+                acc.add value[value.lastIndexOf('.') + 1..-1]
             }
             acc
         }

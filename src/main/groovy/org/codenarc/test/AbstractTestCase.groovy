@@ -53,7 +53,7 @@ abstract class AbstractTestCase {
     private String classNameNoPackage() {
         def className = getClass().name
         def index = className.lastIndexOf('.')
-        (index > -1) ? className[index+1 .. -1] : className
+        (index > -1) ? className[index + 1 .. -1] : className
     }
 
     //------------------------------------------------------------------------------------

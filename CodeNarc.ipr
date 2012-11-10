@@ -449,6 +449,7 @@
         <w>ruleset</w>
         <w>scheibe</w>
         <w>timestamp</w>
+        <w>unary</w>
       </words>
     </dictionary>
   </component>
