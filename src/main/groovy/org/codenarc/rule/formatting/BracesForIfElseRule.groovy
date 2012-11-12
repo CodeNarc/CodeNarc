@@ -93,7 +93,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
                 myRule.elseOnSameLineAsOpeningBrace = myRule.sameLine
             }
 
-            def srcLine = sourceLine(node.elseBlock)
+            def srcLine = sourceLineTrimmed(node.elseBlock)
 
             visitElseClosingBrace(myRule, node, srcLine)
             visitElseOpeningBrace(myRule, node, srcLine)

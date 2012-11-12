@@ -56,11 +56,11 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
     void visitTryCatchFinally(TryCatchStatement node) {
         BracesForTryCatchFinallyRule myRule = rule as BracesForTryCatchFinallyRule
         if (myRule.sameLine) {
-            if(!sourceLine(node)?.contains('{')) {
+            if(!sourceLineTrimmed(node)?.contains('{')) {
                 addViolation(node, "Opening brace should be on the same line as 'try'")
             }
         } else {
-            if(sourceLine(node)?.contains('{')) {
+            if(sourceLineTrimmed(node)?.contains('{')) {
                 addViolation(node, "Opening brace should not be on the same line as 'try'")
             }
         }
@@ -83,7 +83,7 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
             }
 
             node.catchStatements.each { CatchStatement stmt ->
-                def srcLine = sourceLine(stmt)
+                def srcLine = sourceLineTrimmed(stmt)
 
                 if (myRule.catchOnSameLineAsClosingBrace && !srcLine?.contains('}')) {
                     addViolation(stmt, "'catch' should be on the same line as the closing brace")
@@ -112,7 +112,7 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
 
         if (myRule.validateFinally && node.finallyStatement) {
             def stmt = node.finallyStatement
-            def srcLine = sourceLine(stmt)
+            def srcLine = sourceLineTrimmed(stmt)
 
             if (myRule.finallyOnSameLineAsClosingBrace && srcLine && !srcLine?.contains('}')) {
                 addViolation(stmt, "'finally' should be on the same line as the closing brace")

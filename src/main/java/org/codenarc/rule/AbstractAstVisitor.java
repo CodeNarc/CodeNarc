@@ -63,7 +63,7 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupportHack implements A
      *
      * @param node - the Groovy AST node
      */
-    protected String sourceLine(ASTNode node) {
+    protected String sourceLineTrimmed(ASTNode node) {
         return sourceCode.line(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1);
     }
 
@@ -101,7 +101,7 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupportHack implements A
             if (node instanceof AnnotatedNode) {
                 lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode);
             }
-            String sourceLine = sourceLine(node);
+            String sourceLine = sourceLineTrimmed(node);
             Violation violation = new Violation();
             violation.setRule(rule);
             violation.setLineNumber(lineNumber);

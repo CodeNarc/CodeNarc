@@ -51,15 +51,15 @@ class AbstractAstVisitorTest extends AbstractTestCase {
     }
 
     @Test
-    void testSourceLine_ASTNode() {
-        def sourceLine = astVisitor.sourceLine(astVisitor.returnStatement)
+    void testSourceLineTrimmed_ASTNode() {
+        def sourceLine = astVisitor.sourceLineTrimmed(astVisitor.returnStatement)
         log("sourceLine=[$sourceLine]")
         assert sourceLine == 'println "about to return"; return "ABC"'
     }
 
     @Test
-    void testSourceLine_ASTNode_LongLine() {
-        def sourceLine = astVisitor.sourceLine(astVisitor.ifStatement)
+    void testSourceLineTrimmed_ASTNode_LongLine() {
+        def sourceLine = astVisitor.sourceLineTrimmed(astVisitor.ifStatement)
         log("sourceLine=[$sourceLine]")
         assert sourceLine == LONG_LINE
     }
