@@ -70,7 +70,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
     private void processTernaryExpression(TernaryExpression expression) {
         def opColumn = expression.columnNumber
-        def line = sourceCode.lines[expression.lineNumber - 1]
+        def line = sourceLine(expression)
         def beforeChar = line[opColumn - 2] as char
 
         // Known limitation: Ternary expression column does not always indicate column of '?'

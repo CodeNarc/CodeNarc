@@ -46,6 +46,8 @@ class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase {
                     for(int i=0; i<10; i++) { }
                     for(String name in names) { }
                     for(String name: names) { }
+                    if (count > this."maxPriority${priority}Violations") { }
+                    while (count > this."maxPriority${priority}Violations") { }
                 }
             }
             interface MyInterface { }
@@ -95,9 +97,13 @@ c        '''
     void testApplyTo_If_Violations() {
         final SOURCE = '''
             if (ready){ }
+            if (ready ||
+                done){ }
             if (ready) println '{'  // no block; ignore
         '''
-        assertSingleViolation(SOURCE, 2, 'if (ready){ }', 'The opening brace for the if block in class None is not preceded')
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'if (ready){ }', messageText:'The opening brace for the if block in class None is not preceded'],
+            [lineNumber:3, sourceLineText:'if (ready ||', messageText:'The opening brace for the if block in class None is not preceded'] )
     }
 
     @Test
@@ -118,21 +124,30 @@ c        '''
             for (int i=0; i<10; i++) println '{'  // no block; ignore
             for (String name in names){ }
             for (String name: names){ }
+            for (int i=0;
+                i<10;
+                i++){ }
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'for (int i=0; i<10; i++){ }', messageText:'The opening brace for the for block in class None is not preceded'],
             [lineNumber:4, sourceLineText:'for (String name in names){ }', messageText:'The opening brace for the for block in class None is not preceded'],
-            [lineNumber:5, sourceLineText:'for (String name: names){ }', messageText:'The opening brace for the for block in class None is not preceded']
-            )
+            [lineNumber:5, sourceLineText:'for (String name: names){ }', messageText:'The opening brace for the for block in class None is not preceded'],
+            [lineNumber:6, sourceLineText:'for (int i=0;', messageText:'The opening brace for the for block in class None is not preceded']
+        )
     }
 
     @Test
     void testApplyTo_While_Violations() {
         final SOURCE = '''
             while (ready){ }
+            while (ready ||
+                    done){ }
             while (ready) println '{'  // no block; ignore
         '''
-        assertSingleViolation(SOURCE, 2, 'while (ready){ }', 'The opening brace for the while block in class None is not preceded')
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'while (ready){ }', messageText:'The opening brace for the while block in class None is not preceded'],
+            [lineNumber:3, sourceLineText:'while (ready ||', messageText:'The opening brace for the while block in class None is not preceded'],
+            )
     }
 
     @Test

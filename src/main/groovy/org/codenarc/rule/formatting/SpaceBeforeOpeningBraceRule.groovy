@@ -43,7 +43,7 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
-        def line = sourceCode.lines[node.lineNumber - 1]
+        def line = sourceLineOrEmpty(node)
         def indexOfBrace = line.indexOf('{')
         if (indexOfBrace > 1) {
             if (!Character.isWhitespace(line[indexOfBrace - 1] as char)) {
@@ -63,12 +63,12 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
     @Override
     void visitIfElse(IfStatement ifElse) {
         if (ifElse.ifBlock instanceof BlockStatement) {
-            checkForOpeningBrace(ifElse, 'if block')
+            checkForOpeningBraceAfter(ifElse.booleanExpression, 'if block')
         }
         if (ifElse.elseBlock instanceof BlockStatement) {
-            def line = sourceCode.lines[ifElse.elseBlock.lineNumber - 1]
+            def line = sourceLineOrEmpty(ifElse.elseBlock)
             if (line.contains('else{')) {
-                addViolation(ifElse.elseBlock, "The opening brace for the else block in class $currentClassName is not preceded by a space or whitespace")
+                addOpeningBraceViolation(ifElse.elseBlock, 'else block')
             }
         }
         super.visitIfElse(ifElse)
@@ -77,7 +77,7 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
     @Override
     void visitForLoop(ForStatement forLoop) {
         if (forLoop.loopBlock instanceof BlockStatement) {
-            checkForOpeningBrace(forLoop, 'for block')
+            checkForOpeningBraceAfter(forLoop.collectionExpression, 'for block')
         }
         super.visitForLoop(forLoop)
     }
@@ -85,37 +85,63 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
     @Override
     void visitWhileLoop(WhileStatement loop) {
         if (loop.loopBlock instanceof BlockStatement) {
-            checkForOpeningBrace(loop, 'while block')
+            checkForOpeningBraceAfter(loop.booleanExpression, 'while block')
         }
         super.visitWhileLoop(loop)
     }
 
     @Override
     void visitTryCatchFinally(TryCatchStatement statement) {
-        checkForOpeningBrace(statement, 'try block')
+        def tryLine = sourceLineOrEmpty(statement)
+        if (tryLine.contains('try{')) {
+            addOpeningBraceViolation(statement, 'try block')
+        }
 
         statement.catchStatements.each { catchStatement ->
-            def line = sourceCode.lines[catchStatement.lineNumber - 1]
+            def line = sourceLine(catchStatement)
             if (line =~ /catch\(.*\)\{/) {
-                addViolation(catchStatement, "The opening brace for the catch block in class $currentClassName is not preceded by a space or whitespace")
+                addOpeningBraceViolation(catchStatement, 'catch block')
             }
         }
 
-        def finallyLine = sourceCode.lines[statement.finallyStatement.lineNumber - 1]
+        def finallyLine = sourceLineOrEmpty(statement.finallyStatement)
         if (finallyLine.contains('finally{')) {
-            addViolation(statement.finallyStatement, "The opening brace for the finally block in class $currentClassName is not preceded by a space or whitespace")
+            addOpeningBraceViolation(statement.finallyStatement, 'finally block')
         }
 
         super.visitTryCatchFinally(statement)
     }
 
-    private void checkForOpeningBrace(ASTNode node, String keyword) {
-        def line = sourceCode.lines[node.lineNumber - 1]
-        def indexOfBrace = line.indexOf('{')
+    private String sourceLineOrEmpty(node) {
+        node.lineNumber == -1 ? '' : sourceLine(node)
+    }
+
+    protected String lastSourceLineOrEmpty(ASTNode node) {
+        return node.lastLineNumber == -1 ? '' : sourceCode.getLines().get(node.lastLineNumber - 1)
+    }
+
+    private void checkForOpeningBrace(ASTNode node, String keyword, int fromIndex=0) {
+        def line = sourceLineOrEmpty(node)
+        checkForOpeningBrace(node, line, keyword, fromIndex)
+    }
+
+    private void checkForOpeningBrace(ASTNode node, String line, String keyword, int fromIndex=0) {
+        def indexOfBrace = line.indexOf('{', fromIndex)
         if (indexOfBrace > 1) {
             if (!Character.isWhitespace(line[indexOfBrace - 1] as char)) {
-                addViolation(node, "The opening brace for the $keyword in class $currentClassName is not preceded by a space or whitespace")
+                addOpeningBraceViolation(node, keyword)
             }
         }
     }
+
+    private void checkForOpeningBraceAfter(ASTNode node, String keyword) {
+        def fromIndex = node.lastColumnNumber
+        def lastLine = lastSourceLineOrEmpty(node)
+        checkForOpeningBrace(node, lastLine, keyword, fromIndex)
+    }
+
+    private void addOpeningBraceViolation(ASTNode node, String keyword) {
+        addViolation(node, "The opening brace for the $keyword in class $currentClassName is not preceded by a space or whitespace")
+    }
+
 }

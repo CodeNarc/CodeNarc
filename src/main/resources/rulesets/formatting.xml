@@ -19,4 +19,5 @@
     <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterSemicolonRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAroundOperatorRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceBeforeOpeningBraceRule'/>
 </ruleset>

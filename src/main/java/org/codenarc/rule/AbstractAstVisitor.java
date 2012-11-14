@@ -59,12 +59,21 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupportHack implements A
     }
 
     /**
-     * Return the source line corresponding to the specified AST node
+     * Return the trimmed source line corresponding to the specified AST node
      *
      * @param node - the Groovy AST node
      */
     protected String sourceLineTrimmed(ASTNode node) {
         return sourceCode.line(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1);
+    }
+
+    /**
+     * Return the raw source line corresponding to the specified AST node
+     *
+     * @param node - the Groovy AST node
+     */
+    protected String sourceLine(ASTNode node) {
+        return sourceCode.getLines().get(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1);
     }
 
     /**

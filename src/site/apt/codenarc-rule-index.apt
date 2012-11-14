@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 290 rules.
+  <<CodeNarc>> includes 291 rules.
 
     
       
@@ -426,6 +426,9 @@ Rule Index
     
       
     * {{{codenarc-rules-formatting.html#SpaceAroundOperator}SpaceAroundOperator}}  
+    
+      
+    * {{{codenarc-rules-formatting.html#SpaceBeforeOpeningBrace}SpaceBeforeOpeningBrace}}  
     
     
       

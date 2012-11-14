@@ -200,6 +200,7 @@ ruleset {
     SpaceAfterComma 
     SpaceAfterSemicolon 
     SpaceAroundOperator 
+    SpaceBeforeOpeningBrace 
     SpockIgnoreRestUsed 
     StatelessClass 
     StatelessSingleton 

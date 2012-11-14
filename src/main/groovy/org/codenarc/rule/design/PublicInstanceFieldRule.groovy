@@ -34,7 +34,7 @@ class PublicInstanceFieldAstVisitor extends AbstractFieldVisitor {
     
     @Override
     void visitField(FieldNode node) {
-        if(node.public && !node.static){
+        if(node.public && !node.static) {
             addViolation node, createErrorMessage(node)
         }
     }

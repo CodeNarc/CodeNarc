@@ -42,7 +42,7 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
 
             if (isValidElseBlock(theElseBlock)) {
 
-                if(allIfBlocks && allIfBlocks.every { allBranchesReturn(it.ifBlock) }){
+                if (allIfBlocks && allIfBlocks.every { allBranchesReturn(it.ifBlock) }) {
                     addViolation theElseBlock, 'When an if statement block ends with a return statement the else is unnecessary'
                 }
             }
@@ -73,12 +73,12 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
         elseBlock != null && !elseBlock.empty && !(elseBlock instanceof IfStatement)
     }
 
-    private static allBranchesReturn(Statement expr){
-        if(expr instanceof BlockStatement){
+    private static allBranchesReturn(Statement expr) {
+        if(expr instanceof BlockStatement) {
             expr.statements.any {
                 allBranchesReturn(it)
             }
-        } else if(expr instanceof IfStatement){
+        } else if (expr instanceof IfStatement) {
             allBranchesReturn(expr.ifBlock) && allBranchesReturn(expr.elseBlock)
         } else {
             isReturn expr

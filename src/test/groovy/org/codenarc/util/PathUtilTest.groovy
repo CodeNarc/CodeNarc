@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class PathUtilTest extends AbstractTestCase{
+class PathUtilTest extends AbstractTestCase {
 
     @Test
     void testGetName() {

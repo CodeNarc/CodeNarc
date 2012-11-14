@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,9 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  */
 class AbstractAstVisitorTest extends AbstractTestCase {
+
     private static final LONG_LINE = 'println "prefix"; if (true) println "1234567890123456789012345678901234567890123456789012345678901234567890"'
+    private static final INDENT = '                '
     private static final SOURCE = """class ABC {
             def justReturn() {
                 println "about to return"; return "ABC"
@@ -51,17 +53,15 @@ class AbstractAstVisitorTest extends AbstractTestCase {
     }
 
     @Test
-    void testSourceLineTrimmed_ASTNode() {
-        def sourceLine = astVisitor.sourceLineTrimmed(astVisitor.returnStatement)
-        log("sourceLine=[$sourceLine]")
-        assert sourceLine == 'println "about to return"; return "ABC"'
+    void testSourceLine_ASTNode() {
+        assert astVisitor.sourceLineTrimmed(astVisitor.returnStatement) == 'println "about to return"; return "ABC"'
+        assert astVisitor.sourceLine(astVisitor.returnStatement) == INDENT + 'println "about to return"; return "ABC"'
     }
 
     @Test
-    void testSourceLineTrimmed_ASTNode_LongLine() {
-        def sourceLine = astVisitor.sourceLineTrimmed(astVisitor.ifStatement)
-        log("sourceLine=[$sourceLine]")
-        assert sourceLine == LONG_LINE
+    void testSourceLine_ASTNode_LongLine() {
+        assert astVisitor.sourceLineTrimmed(astVisitor.ifStatement) == LONG_LINE
+        assert astVisitor.sourceLine(astVisitor.ifStatement) == INDENT + LONG_LINE
     }
 
     @Test

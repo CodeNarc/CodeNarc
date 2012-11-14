@@ -148,6 +148,7 @@ ruleset {
     SpaceAfterComma 
     SpaceAfterSemicolon 
     SpaceAroundOperator 
+    SpaceBeforeOpeningBrace 
     
     // rulesets/generic.xml
     IllegalClassReference 
