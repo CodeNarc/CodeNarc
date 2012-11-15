@@ -144,27 +144,43 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   <Since CodeNarc 0.18>
 
   Check that there is at least one space (blank) or whitespace before each opening brace ("{") for
-  method/class/interface declarations, as well as <<<try>>>/<<<for>>>/<<<while>>>/<<<if>>> statements.
+  method/class/interface declarations, closure expressions and <<<try>>>/<<<catch>>>/<<<finally>>>/<<<for>>>/<<<while>>>/<<<if>>> statements.
 
   Examples of violations:
 
 -------------------------------------------------------------------------------
     class MyClass{ }                            // violation
     class MyOtherClass extends AbstractClass{ } // violation
+
     interface MyInterface{ }                    // violation
+
     enum MyEnum{ OK, BAD }                      // violation
+
     def myMethod(){ }                           // violation
+
     if (ready){ }                               // violation
+
     if (ready) {
     } else{}                                    // violation
+
     for (int i=0; i<10; i++){ }                 // violation
+
     for (String name in names){ }               // violation
+
     for (String name: names){ }                 // violation
+
     while (ready){ }                            // violation
+
     try{
     } finally { }                               // violation
+
     try {
     } catch(Exception e){ }                     // violation
+
     try {
     } finally{ }                                // violation
+
+    list.each{ name -> }                        // violation
+
+    shouldFail(Exception){ doStuff() }          // violation
 -------------------------------------------------------------------------------

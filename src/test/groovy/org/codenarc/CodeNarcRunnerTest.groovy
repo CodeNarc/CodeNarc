@@ -56,7 +56,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     @Test
     void testExecute() {
         def ruleSet
-        def sourceAnalyzer = [analyze: { rs -> ruleSet = rs; RESULTS }, getSourceDirectories:{SOURCE_DIRS}] as SourceAnalyzer
+        def sourceAnalyzer = [analyze: { rs -> ruleSet = rs; RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
 
         def analysisContext, results

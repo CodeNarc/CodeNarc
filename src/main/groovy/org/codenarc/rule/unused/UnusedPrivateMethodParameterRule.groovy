@@ -57,7 +57,7 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractMethodVisitor {
     }
 
     private List<ClassNode> getAnonymousClasses() {
-        sourceCode.ast.classes.findAll{
+        sourceCode.ast.classes.findAll {
             it instanceof InnerClassNode && it.anonymous
         }
     }

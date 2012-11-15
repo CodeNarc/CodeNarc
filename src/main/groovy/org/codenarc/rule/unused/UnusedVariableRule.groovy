@@ -64,7 +64,7 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
     }
 
     private static List<ClassNode> getAnonymousClasses(List<ClassNode> classes) {
-        classes.findAll{
+        classes.findAll {
             it instanceof InnerClassNode && it.anonymous
         }
     }

@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.stmt.IfStatement
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.ForStatement
-import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.stmt.TryCatchStatement
-import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.MapEntryExpression
+import org.codehaus.groovy.ast.ConstructorNode
 
 /**
  * Check that there is at least one space (blank) or whitespace before each opening brace ("{").
@@ -37,6 +36,7 @@ class SpaceBeforeOpeningBraceRule extends AbstractAstVisitorRule {
     String name = 'SpaceBeforeOpeningBrace'
     int priority = 3
     Class astVisitorClass = SpaceBeforeOpeningBraceAstVisitor
+    boolean checkClosureMapEntryValue = true
 }
 
 class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
@@ -55,89 +55,53 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    protected void visitMethodEx(MethodNode node) {
-        checkForOpeningBrace(node, "method ${node.name}")
-        super.visitMethodEx(node)
+    void visitConstructor(ConstructorNode node) {
+        // The AST for constructors is "special". The BlockStatement begins on the line following the
+        // opening brace if it is a multi-line method. Bug?
+
+        isFirstVisit(node.code)   // Register the code block so that it will be ignored in visitBlockStatement()
+        def line = sourceLineOrEmpty(node)
+        if (line.contains('){')) {
+            addOpeningBraceViolation(node, 'block')
+        }
+        super.visitConstructor(node)
     }
 
     @Override
-    void visitIfElse(IfStatement ifElse) {
-        if (ifElse.ifBlock instanceof BlockStatement) {
-            checkForOpeningBraceAfter(ifElse.booleanExpression, 'if block')
-        }
-        if (ifElse.elseBlock instanceof BlockStatement) {
-            def line = sourceLineOrEmpty(ifElse.elseBlock)
-            if (line.contains('else{')) {
-                addOpeningBraceViolation(ifElse.elseBlock, 'else block')
+    void visitBlockStatement(BlockStatement block) {
+        if (isFirstVisit(block) && !AstUtil.isFromGeneratedSourceCode(block)) {
+            def line = sourceLineOrEmpty(block)
+            def startCol = block.columnNumber
+            if (startCol > 1 && !Character.isWhitespace(line[startCol - 2] as char)) {
+                addOpeningBraceViolation(block, 'block')
             }
         }
-        super.visitIfElse(ifElse)
+        super.visitBlockStatement(block)
     }
 
     @Override
-    void visitForLoop(ForStatement forLoop) {
-        if (forLoop.loopBlock instanceof BlockStatement) {
-            checkForOpeningBraceAfter(forLoop.collectionExpression, 'for block')
-        }
-        super.visitForLoop(forLoop)
-    }
-
-    @Override
-    void visitWhileLoop(WhileStatement loop) {
-        if (loop.loopBlock instanceof BlockStatement) {
-            checkForOpeningBraceAfter(loop.booleanExpression, 'while block')
-        }
-        super.visitWhileLoop(loop)
-    }
-
-    @Override
-    void visitTryCatchFinally(TryCatchStatement statement) {
-        def tryLine = sourceLineOrEmpty(statement)
-        if (tryLine.contains('try{')) {
-            addOpeningBraceViolation(statement, 'try block')
-        }
-
-        statement.catchStatements.each { catchStatement ->
-            def line = sourceLine(catchStatement)
-            if (line =~ /catch\(.*\)\{/) {
-                addOpeningBraceViolation(catchStatement, 'catch block')
+    void visitClosureExpression(ClosureExpression expression) {
+        isFirstVisit(expression.code)   // Register the code block so that it will be ignored in visitBlockStatement()
+        if (isFirstVisit(expression)) {
+            def line = sourceLineOrEmpty(expression)
+            def startCol = expression.columnNumber
+            if (startCol > 1 && !Character.isWhitespace(line[startCol - 2] as char)) {
+                addOpeningBraceViolation(expression, 'closure')
             }
         }
+        super.visitClosureExpression(expression)
+    }
 
-        def finallyLine = sourceLineOrEmpty(statement.finallyStatement)
-        if (finallyLine.contains('finally{')) {
-            addOpeningBraceViolation(statement.finallyStatement, 'finally block')
+    @Override
+    void visitMapEntryExpression(MapEntryExpression expression) {
+        if (!rule.checkClosureMapEntryValue && expression.valueExpression instanceof ClosureExpression) {
+            isFirstVisit(expression.valueExpression)   // Register the closure so that it will be ignored in visitClosureExpression()
         }
-
-        super.visitTryCatchFinally(statement)
+        super.visitMapEntryExpression(expression)
     }
 
     private String sourceLineOrEmpty(node) {
         node.lineNumber == -1 ? '' : sourceLine(node)
-    }
-
-    protected String lastSourceLineOrEmpty(ASTNode node) {
-        return node.lastLineNumber == -1 ? '' : sourceCode.getLines().get(node.lastLineNumber - 1)
-    }
-
-    private void checkForOpeningBrace(ASTNode node, String keyword, int fromIndex=0) {
-        def line = sourceLineOrEmpty(node)
-        checkForOpeningBrace(node, line, keyword, fromIndex)
-    }
-
-    private void checkForOpeningBrace(ASTNode node, String line, String keyword, int fromIndex=0) {
-        def indexOfBrace = line.indexOf('{', fromIndex)
-        if (indexOfBrace > 1) {
-            if (!Character.isWhitespace(line[indexOfBrace - 1] as char)) {
-                addOpeningBraceViolation(node, keyword)
-            }
-        }
-    }
-
-    private void checkForOpeningBraceAfter(ASTNode node, String keyword) {
-        def fromIndex = node.lastColumnNumber
-        def lastLine = lastSourceLineOrEmpty(node)
-        checkForOpeningBrace(node, lastLine, keyword, fromIndex)
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {

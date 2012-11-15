@@ -26,6 +26,8 @@ import org.junit.Test
   */
 class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase {
 
+    private static final String BLOCK_VIOLATION_MESSAGE = BLOCK_VIOLATION_MESSAGE
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
@@ -48,6 +50,9 @@ class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase {
                     for(String name: names) { }
                     if (count > this."maxPriority${priority}Violations") { }
                     while (count > this."maxPriority${priority}Violations") { }
+                }
+                MyClass() {
+                    this(classNames)
                 }
             }
             interface MyInterface { }
@@ -90,7 +95,22 @@ c        '''
             def otherMethod()
             { }     // opening brace on separate line; no violation
         '''
-        assertSingleViolation(SOURCE, 2, 'def myMethod(){ }', 'The opening brace for the method myMethod in class None is not preceded')
+        assertSingleViolation(SOURCE, 2, 'def myMethod(){ }', BLOCK_VIOLATION_MESSAGE)
+    }
+
+    @Test
+    void testApplyTo_Constructor_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass(){ }
+                MyClass(int num){
+                    doStuff()
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'MyClass(){ }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:'MyClass(int num){', messageText:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -102,8 +122,8 @@ c        '''
             if (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if (ready){ }', messageText:'The opening brace for the if block in class None is not preceded'],
-            [lineNumber:3, sourceLineText:'if (ready ||', messageText:'The opening brace for the if block in class None is not preceded'] )
+            [lineNumber:2, sourceLineText:'if (ready){ }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:'done){ }', messageText:BLOCK_VIOLATION_MESSAGE] )
     }
 
     @Test
@@ -114,7 +134,7 @@ c        '''
             if (ready) {}
             else println '{'  // no block; ignore
         '''
-        assertSingleViolation(SOURCE, 3, 'else{}', 'The opening brace for the else block in class None is not preceded')
+        assertSingleViolation(SOURCE, 3, 'else{}', BLOCK_VIOLATION_MESSAGE)
     }
 
     @Test
@@ -129,10 +149,10 @@ c        '''
                 i++){ }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i=0; i<10; i++){ }', messageText:'The opening brace for the for block in class None is not preceded'],
-            [lineNumber:4, sourceLineText:'for (String name in names){ }', messageText:'The opening brace for the for block in class None is not preceded'],
-            [lineNumber:5, sourceLineText:'for (String name: names){ }', messageText:'The opening brace for the for block in class None is not preceded'],
-            [lineNumber:6, sourceLineText:'for (int i=0;', messageText:'The opening brace for the for block in class None is not preceded']
+            [lineNumber:2, sourceLineText:'for (int i=0; i<10; i++){ }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:'for (String name in names){ }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [lineNumber:5, sourceLineText:'for (String name: names){ }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [lineNumber:8, sourceLineText:'i++){ }', messageText:BLOCK_VIOLATION_MESSAGE]
         )
     }
 
@@ -145,8 +165,8 @@ c        '''
             while (ready) println '{'  // no block; ignore
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while (ready){ }', messageText:'The opening brace for the while block in class None is not preceded'],
-            [lineNumber:3, sourceLineText:'while (ready ||', messageText:'The opening brace for the while block in class None is not preceded'],
+            [lineNumber:2, sourceLineText:'while (ready){ }', messageText:BLOCK_VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:'done){ }', messageText:BLOCK_VIOLATION_MESSAGE],
             )
     }
 
@@ -155,7 +175,7 @@ c        '''
         final SOURCE = '''
             try{ } finally { }
         '''
-        assertSingleViolation(SOURCE, 2, 'try{ }', 'The opening brace for the try block in class None is not preceded')
+        assertSingleViolation(SOURCE, 2, 'try{ }', BLOCK_VIOLATION_MESSAGE)
     }
 
     @Test
@@ -163,7 +183,7 @@ c        '''
         final SOURCE = '''
             try { } catch(Exception e){ }
         '''
-        assertSingleViolation(SOURCE, 2, 'catch(Exception e){ }', 'The opening brace for the catch block in class None is not preceded')
+        assertSingleViolation(SOURCE, 2, 'catch(Exception e){ }', BLOCK_VIOLATION_MESSAGE)
     }
 
     @Test
@@ -171,7 +191,31 @@ c        '''
         final SOURCE = '''
             try { } finally{ }
         '''
-        assertSingleViolation(SOURCE, 2, 'finally{ }', 'The opening brace for the finally block in class None is not preceded')
+        assertSingleViolation(SOURCE, 2, 'finally{ }', BLOCK_VIOLATION_MESSAGE)
+    }
+
+    @Test
+    void testApplyTo_Closure_Violations() {
+        final SOURCE = '''
+            list.each{ name -> }
+            shouldFail(Exception){ doStuff() }
+            def c ={ println 123 }
+            def m = [a:123, b:{ println 7 }]
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'list.each{ name -> }', messageText:'The opening brace for the closure in class None is not preceded'],
+            [lineNumber:3, sourceLineText:'shouldFail(Exception){ doStuff() }', messageText:'The opening brace for the closure in class None is not preceded'],
+            [lineNumber:4, sourceLineText:'def c ={ println 123 }', messageText:'The opening brace for the closure in class None is not preceded'],
+            [lineNumber:5, sourceLineText:'def m = [a:123, b:{ println 7 }]', messageText:'The opening brace for the closure in class None is not preceded'])
+    }
+
+    @Test
+    void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
+        final SOURCE = '''
+            def m = [a:123, b:{ println 7 }]
+        '''
+        rule.checkClosureMapEntryValue = false
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
