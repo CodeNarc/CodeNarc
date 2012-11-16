@@ -91,7 +91,7 @@ class DirectorySourceAnalyzer extends BaseSourceAnalyzer {
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
         def dirResults = new DirectoryResults(dir)
         def dirFile = new File((String)baseDirectory, (String)dir)
-        dirFile.eachFile {file ->
+        dirFile.eachFile { file ->
             def dirPrefix = dir ? dir + SEP : dir
             def filePath = dirPrefix + file.name
             if (file.directory) {

@@ -36,7 +36,7 @@ class SpockIgnoreRestUsedRule extends AbstractAstVisitorRule {
 class SpockIgnoreRestUsedAstVisitor extends AbstractMethodVisitor {
 
     private final static ACC_PUBLIC = 1
-    private final static CANDIDATE_SUPER_CLASSNODES = ['spock.lang.Specification', 'Specification'].collect {new ClassNode(it, ACC_PUBLIC, null)}
+    private final static CANDIDATE_SUPER_CLASSNODES = ['spock.lang.Specification', 'Specification'].collect { new ClassNode(it, ACC_PUBLIC, null) }
 
     @Override
     void visitMethod(MethodNode node) {

@@ -9,7 +9,8 @@ NEW RULES
 - #3509530: New SpaceAfterComma rule. Checks that there is at least one space or whitespace following each comma. That includes checks for method and closure declaration parameter lists, method call parameter lists, Map literals and List literals.
 - #3583257: New SpaceAfterSemicolon rule. Checks that there is at least one space or whitespace following a semicolon that separates classic for loop clauses and also multiple statements per line.
 - #3509532: New SpaceAroundOperator rule. Check that there is at least one space (blank) or whitespace around each binary operator, including: +, -, *, /, >>, <<, &&, ||, &, |, ?:, =.
-- #3583262: New SpaceBeforeOpeningBrace rule. Check that there is at least one space (blank) or whitespace before each opening brace ("{"). This checks method/class/interface declarations, closure expressions and try/for/while/if statements.
+- #3583262: New SpaceBeforeOpeningBrace rule. Check that there is at least one space (blank) or whitespace before each opening brace ("{"). This checks method/class/interface declarations, closure expressions and block statements.
+- #3583262: New SpaceAfterOpeningBrace rule. Check that there is at least one space (blank) or whitespace after each opening brace ("{"). This checks method/class/interface declarations, closure expressions and block statements.
 
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.

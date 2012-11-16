@@ -172,7 +172,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
 
     @Before
     void setUpImplementationAsTypeRuleTest() {
-        def badTypesClassNameOnly = BAD_TYPES.collect {badType ->  classNameOnly(badType) }
+        def badTypesClassNameOnly = BAD_TYPES.collect { badType ->  classNameOnly(badType) }
         allBadTypes = BAD_TYPES + badTypesClassNameOnly
     }
 

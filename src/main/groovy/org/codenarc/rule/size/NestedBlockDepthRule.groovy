@@ -56,7 +56,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
 
     private void addClosureFields(ClassNode classNode) {
         closureFieldExpressions = []
-        classNode.fields.each {fieldNode ->
+        classNode.fields.each { fieldNode ->
             if (!AstUtil.isFromGeneratedSourceCode(fieldNode) &&
                     fieldNode.initialExpression instanceof ClosureExpression) {
                 closureFieldExpressions << fieldNode.initialExpression

@@ -76,7 +76,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
 
     private void assertMaxViolations(int priority, int numViolations) {
         codeNarcTask.addFileset(fileSet)
-        def reportWriter = [ writeReport: {ctx, results -> } ]
+        def reportWriter = [ writeReport: { ctx, results -> } ]
         codeNarcTask.reportWriters = [reportWriter]
         StubSourceAnalyzerCategory.reset()
         StubSourceAnalyzerCategory.violationCounts[priority] = numViolations
@@ -90,7 +90,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     @Test
     void testExecute_CodeNarcProperties() {
         def analysisContext = null
-        def reportWriter = [ writeReport: {ctx, results -> analysisContext = ctx} ]
+        def reportWriter = [ writeReport: { ctx, results -> analysisContext = ctx} ]
         codeNarcTask.reportWriters = [reportWriter]
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
@@ -257,6 +257,6 @@ class StubSourceAnalyzerCategory {
     
     static SourceAnalyzer createSourceAnalyzer(CodeNarcTask self) {
         def results = [getNumberOfViolationsWithPriority:{ p, r -> violationCounts[p]}] as Results
-        [analyze:{RuleSet ruleSet -> results}, getSourceDirectories:{[]}] as SourceAnalyzer
+        [analyze:{ RuleSet ruleSet -> results }, getSourceDirectories:{ [] }] as SourceAnalyzer
     }
 }

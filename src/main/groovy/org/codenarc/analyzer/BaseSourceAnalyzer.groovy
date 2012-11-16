@@ -30,7 +30,7 @@ abstract class BaseSourceAnalyzer implements SourceAnalyzer {
         def allViolations = []
         def suppressionService = sourceCode.suppressionAnalyzer
 
-        def validRules = ruleSet.rules.findAll {!suppressionService.isRuleSuppressed(it)}
+        def validRules = ruleSet.rules.findAll { !suppressionService.isRuleSuppressed(it) }
         for (Rule rule: validRules) {
             def violations = rule.applyTo(sourceCode)
             violations.removeAll { suppressionService.isViolationSuppressed(it) }

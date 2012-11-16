@@ -99,7 +99,7 @@ class WildcardPattern {
 
         def result = new StringBuffer()
         def prevCharWasStar = false
-        stringWithWildcards.each {ch ->
+        stringWithWildcards.each { ch ->
             switch (ch) {
                 case '*':
                     // Single '*' matches single dir/file; Double '*' matches sequence of zero or more dirs/files

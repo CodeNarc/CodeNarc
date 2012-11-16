@@ -27,7 +27,6 @@ class SiteDocumentationTest extends GroovyTestCase {
     @Test
     void testDocumentation() {
 
-
         new File('src/main/resources/rulesets').eachFileMatch(~/.*\.xml/) { File ruleset ->
             def ruleSetName = ruleset.name[0..-5]
             def docFile = "src/site/apt/codenarc-rules-${ruleSetName}.apt"
@@ -40,7 +39,7 @@ class SiteDocumentationTest extends GroovyTestCase {
                 ruleInstance.name
             }.collect { ruleName ->
                 documentation.contains(ruleName) ? null : ruleName
-            }.removeAll {} {
+            }.removeAll { } {
                 it == null
             }
 

@@ -72,6 +72,6 @@ class StatelessSingletonAstVisitor extends AbstractAstVisitor {
     }
 
     private static hasSingletonAnnotation(classNode) {
-        classNode?.annotations?.any {it.classNode.name == Singleton.name}
+        classNode?.annotations?.any { it.classNode.name == Singleton.name }
     }
 }

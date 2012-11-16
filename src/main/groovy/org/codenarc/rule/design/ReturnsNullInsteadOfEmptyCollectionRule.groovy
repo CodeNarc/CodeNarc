@@ -79,13 +79,13 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
         }
 
         boolean returnsCollection = false
-        node.code?.visit(new CollectionReturnTracker(callbackFunction: {returnsCollection = true}))
+        node.code?.visit(new CollectionReturnTracker(callbackFunction: { returnsCollection = true }))
         returnsCollection
     }
 
     private static boolean closureReturnsCollection(ClosureExpression node) {
         boolean returnsArray = false
-        node.code?.visit(new CollectionReturnTracker(callbackFunction: {returnsArray = true}))
+        node.code?.visit(new CollectionReturnTracker(callbackFunction: { returnsArray = true }))
         returnsArray
     }
 }

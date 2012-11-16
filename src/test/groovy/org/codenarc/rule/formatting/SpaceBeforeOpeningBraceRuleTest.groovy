@@ -26,7 +26,7 @@ import org.junit.Test
   */
 class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase {
 
-    private static final String BLOCK_VIOLATION_MESSAGE = BLOCK_VIOLATION_MESSAGE
+    private static final String BLOCK_VIOLATION_MESSAGE = 'The opening brace for the block in class None is not preceded by a space or whitespace'
 
     @Test
     void testRuleProperties() {
@@ -109,8 +109,8 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass(){ }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'MyClass(int num){', messageText:BLOCK_VIOLATION_MESSAGE])
+            [lineNumber:3, sourceLineText:'MyClass(){ }', messageText:'The opening brace for the block in class MyClass'],
+            [lineNumber:4, sourceLineText:'MyClass(int num){', messageText:'The opening brace for the block in class MyClass'])
     }
 
     @Test

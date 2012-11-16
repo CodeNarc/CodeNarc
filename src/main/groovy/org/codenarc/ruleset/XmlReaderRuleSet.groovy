@@ -116,7 +116,7 @@ class XmlReaderRuleSet implements RuleSet {
     }
 
     private setRuleProperties(ruleNode, rule) {
-        ruleNode[NS.property].each {p ->
+        ruleNode[NS.property].each { p ->
             def name = p.attribute('name')
             def value = p.attribute('value')
             PropertyUtil.setPropertyFromString(rule, name, value)

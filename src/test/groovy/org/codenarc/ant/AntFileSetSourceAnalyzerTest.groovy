@@ -152,7 +152,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         fileSet.setIncludes('source/**/*.groovy')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         final EXCEPTION = new RuntimeException('TESTING AN EXCEPTION. Error in applyTo()')
-        def badRule = [getName: {'dummy'}, applyTo:{ sourceCode -> throw EXCEPTION }] as Rule
+        def badRule = [getName:{ 'dummy' }, applyTo:{ sourceCode -> throw EXCEPTION }] as Rule
         def loggingEvents = captureLog4JMessages {
             analyzer.analyze(new ListRuleSet([badRule]))
         }

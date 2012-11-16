@@ -136,7 +136,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
 
     @Test
     void testWriteReport_IncludesRuleThatDoesNotSupportGetDescription() {
-        analysisContext.ruleSet = new ListRuleSet([ [getName:{'RuleABC'}, getPriority: { 2 } ] as Rule])
+        analysisContext.ruleSet = new ListRuleSet([ [getName:{ 'RuleABC' }, getPriority: { 2 } ] as Rule])
         reportWriter.writeReport(analysisContext, results)
         assertContainsAllInOrder(getReportText(), ['RuleABC', 'No description'])
     }

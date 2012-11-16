@@ -36,7 +36,7 @@ class UnusedImportRule extends AbstractRule {
     }
 
     private void processImports(SourceCode sourceCode, List violations) {
-        sourceCode.ast?.imports?.each {importNode ->
+        sourceCode.ast?.imports?.each { importNode ->
             if (!findReference(sourceCode, importNode.alias, importNode.className)) {
                 violations.add(createViolationForImport(sourceCode, importNode, "The [${importNode.className}] import is never referenced"))
             }
@@ -45,13 +45,13 @@ class UnusedImportRule extends AbstractRule {
 
     private void processStaticImports(SourceCode sourceCode, List violations) {
         if (GroovyVersion.isGroovy1_8_OrGreater()) {
-            sourceCode.ast?.staticImports?.each {alias, ImportNode classNode ->
+            sourceCode.ast?.staticImports?.each { alias, ImportNode classNode ->
                 if (!findReference(sourceCode, alias)) {
                     violations.add(createViolationForImport(sourceCode, classNode.className, alias, "The [${classNode.className}] import is never referenced"))
                 }
             }
         } else {
-            sourceCode.ast?.staticImportAliases?.each {alias, classNode ->
+            sourceCode.ast?.staticImportAliases?.each { alias, classNode ->
                 if (!findReference(sourceCode, alias)) {
                     violations.add(createViolationForImport(sourceCode, classNode.name, alias, "The [${classNode.name}] import is never referenced"))
                 }
