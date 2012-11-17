@@ -41,7 +41,6 @@ class SourceCodeUtilTest extends AbstractTestCase {
     SourceCode sourceCode
     SourceCodeUtilTestVisitor visitor
 
-    @Override
     @Before
     void setUpSourceCodeUtilTest() {
         sourceCode = new SourceString(SOURCE)
