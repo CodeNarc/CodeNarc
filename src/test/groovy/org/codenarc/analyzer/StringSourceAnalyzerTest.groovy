@@ -36,9 +36,9 @@ class StringSourceAnalyzerTest extends GroovyTestCase {
 
         def results = analyzer.analyze(new ListRuleSet(
             [
-                [ getName : { 'rule1'} ,
+                [ getName : { 'rule1' },
                     applyTo: { fail('Rule should be suppressed') } ] as Rule,
-                [ getName : { 'rule2'} ,
+                [ getName : { 'rule2' },
                     applyTo: { [new Violation()] } ] as Rule,
             ]
         ))
@@ -54,9 +54,9 @@ class StringSourceAnalyzerTest extends GroovyTestCase {
 
         def results = analyzer.analyze(new ListRuleSet(
             [
-                [ getName : { 'rule1'} ,
+                [ getName : { 'rule1' },
                     applyTo: { [new Violation() ] } ] as Rule,
-                [ getName : { 'rule2'} ,
+                [ getName : { 'rule2' },
                     applyTo: { [new Violation() ] } ] as Rule,
             ]
         ))

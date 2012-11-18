@@ -65,7 +65,7 @@ class FileResults implements Results {
      */
     @Override
     int getNumberOfViolationsWithPriority(int priority, boolean recursive=true) {
-        violations.sum(0) { violation -> violation.rule.priority == priority ? 1 : 0}
+        violations.sum(0) { violation -> violation.rule.priority == priority ? 1 : 0 }
     }
 
     /**

@@ -11,6 +11,7 @@ NEW RULES
 - #3509532: New SpaceAroundOperator rule. Check that there is at least one space (blank) or whitespace around each binary operator, including: +, -, *, /, >>, <<, &&, ||, &, |, ?:, =.
 - #3583262: New SpaceBeforeOpeningBrace rule. Check that there is at least one space (blank) or whitespace before each opening brace ("{"). This checks method/class/interface declarations, closure expressions and block statements.
 - #3583262: New SpaceAfterOpeningBrace rule. Check that there is at least one space (blank) or whitespace after each opening brace ("{"). This checks method/class/interface declarations, closure expressions and block statements.
+- #3583262: New SpaceBeforeClosingBrace rule. Check that there is at least one space (blank) or whitespace before each closing brace ("}"). This checks method/class/interface declarations, closure expressions and block statements.
 
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.

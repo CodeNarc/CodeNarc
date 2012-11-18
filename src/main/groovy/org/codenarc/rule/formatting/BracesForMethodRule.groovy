@@ -43,9 +43,9 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
 
         String lastLine
         if (node.exceptions) {
-            lastLine = lastSourceLine(node.exceptions[-1])
+            lastLine = lastSourceLineTrimmed(node.exceptions[-1])
         } else if (node.parameters) {
-            lastLine = lastSourceLine(node.parameters[-1])
+            lastLine = lastSourceLineTrimmed(node.parameters[-1])
         } else {
             lastLine = sourceLineTrimmed(node)
         }

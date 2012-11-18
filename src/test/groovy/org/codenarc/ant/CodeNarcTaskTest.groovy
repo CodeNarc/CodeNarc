@@ -90,7 +90,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     @Test
     void testExecute_CodeNarcProperties() {
         def analysisContext = null
-        def reportWriter = [ writeReport: { ctx, results -> analysisContext = ctx} ]
+        def reportWriter = [ writeReport: { ctx, results -> analysisContext = ctx } ]
         codeNarcTask.reportWriters = [reportWriter]
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
@@ -256,7 +256,7 @@ class StubSourceAnalyzerCategory {
     static void reset() { violationCounts = [1:0, 2:0, 3:0] }
     
     static SourceAnalyzer createSourceAnalyzer(CodeNarcTask self) {
-        def results = [getNumberOfViolationsWithPriority:{ p, r -> violationCounts[p]}] as Results
+        def results = [getNumberOfViolationsWithPriority:{ p, r -> violationCounts[p] }] as Results
         [analyze:{ RuleSet ruleSet -> results }, getSourceDirectories:{ [] }] as SourceAnalyzer
     }
 }

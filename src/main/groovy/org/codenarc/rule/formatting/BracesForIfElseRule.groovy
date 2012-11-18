@@ -67,11 +67,11 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
 
         if (isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
             if (myRule.sameLine) {
-                if(!lastSourceLine(node.booleanExpression)?.contains('{')) {
+                if(!lastSourceLineTrimmed(node.booleanExpression)?.contains('{')) {
                     addViolation(node, "Opening brace should be on the same line as 'if'")
                 }
             } else {
-                if(lastSourceLine(node.booleanExpression)?.contains('{')) {
+                if(lastSourceLineTrimmed(node.booleanExpression)?.contains('{')) {
                     addViolation(node, "Opening brace should not be on the same line as 'if'")
                 }
             }

@@ -77,11 +77,20 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupportHack implements A
     }
 
     /**
-     * Return the last source line corresponding to the specified AST node
+     * Return the last raw source line corresponding to the specified AST node
      *
      * @param node - the Groovy AST node
      */
     protected String lastSourceLine(ASTNode node) {
+        return sourceCode.getLines().get(node.getLastLineNumber() - 1);
+    }
+
+    /**
+     * Return the trimmed last source line corresponding to the specified AST node
+     *
+     * @param node - the Groovy AST node
+     */
+    protected String lastSourceLineTrimmed(ASTNode node) {
         return sourceCode.line(node.getLastLineNumber() - 1);
     }
 

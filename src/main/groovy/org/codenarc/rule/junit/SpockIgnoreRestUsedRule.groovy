@@ -40,7 +40,7 @@ class SpockIgnoreRestUsedAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode node) {
-        if (CANDIDATE_SUPER_CLASSNODES.any { node.declaringClass.isDerivedFrom(it)}) {
+        if (CANDIDATE_SUPER_CLASSNODES.any { node.declaringClass.isDerivedFrom(it) }) {
 
             def hasIgnoreRest = node.annotations.any {
                 it.classNode.nameWithoutPackage == 'IgnoreRest'

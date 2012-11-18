@@ -38,7 +38,7 @@ class EmptyMethodAstVisitor extends AbstractMethodVisitor {
     void visitMethod(MethodNode node) {
 
         if (AstUtil.isEmptyBlock(node.code) && !Modifier.isAbstract(node.declaringClass.modifiers)) {
-            if (!node.annotations.find { it?.classNode?.name == 'Override'}) {
+            if (!node.annotations.find { it?.classNode?.name == 'Override' }) {
                 addViolation(node, "The method $node.name is both empty and not marked with @Override")
             }
         }

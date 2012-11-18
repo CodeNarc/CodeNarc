@@ -56,7 +56,7 @@ class EqualsOverloadedAstVisitor extends AbstractMethodVisitor {
     }
 
     private static boolean onlyArgumentHasTypeObject(MethodNode method) {
-        if (method.parameters[0].type.name == 'Object') { return true}
+        if (method.parameters[0].type.name == 'Object') { return true }
         if (method.parameters[0].type.name == 'java.lang.Object') { return true }
         false
     }

@@ -59,6 +59,12 @@ class AbstractAstVisitorTest extends AbstractTestCase {
     }
 
     @Test
+    void testLastSourceLine_ASTNode() {
+        assert astVisitor.lastSourceLineTrimmed(astVisitor.returnStatement) == 'println "about to return"; return "ABC"'
+        assert astVisitor.lastSourceLine(astVisitor.returnStatement) == INDENT + 'println "about to return"; return "ABC"'
+    }
+
+    @Test
     void testSourceLine_ASTNode_LongLine() {
         assert astVisitor.sourceLineTrimmed(astVisitor.ifStatement) == LONG_LINE
         assert astVisitor.sourceLine(astVisitor.ifStatement) == INDENT + LONG_LINE

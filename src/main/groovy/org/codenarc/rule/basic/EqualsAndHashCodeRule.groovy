@@ -41,7 +41,7 @@ class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor {
             m.parameters.size() == 1 &&
             m.parameters[0].type.name in ['Object', 'java.lang.Object'] 
         }
-        def hashCodeMethod = methods.find { m -> m.name == 'hashCode' && m.parameters.size() == 0}
+        def hashCodeMethod = methods.find { m -> m.name == 'hashCode' && m.parameters.size() == 0 }
         def oneButNotBoth = (equalsMethod || hashCodeMethod) && !(equalsMethod && hashCodeMethod)
 
         if (oneButNotBoth) {

@@ -111,7 +111,7 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisito
             // perhaps the owner didn't define the method
             def getterName = getFirstValue(synchronizedMethods, getterNames).name
             MethodNode node = synchronizedMethods.get(getterName)
-            if (!currentClassNode?.methods?.find { it?.name == setterName && it?.parameters?.length == 1}) {
+            if (!currentClassNode?.methods?.find { it?.name == setterName && it?.parameters?.length == 1 }) {
                 addViolation(node, "The getter method $getterName is synchronized but the setter method $setterName is not")
             }
         } else if (synchronizedMethods.containsKey(setterName)) {
