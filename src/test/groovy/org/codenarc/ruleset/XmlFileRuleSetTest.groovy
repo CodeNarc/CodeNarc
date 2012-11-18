@@ -16,12 +16,13 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.StubRule
-import org.codenarc.rule.TestPathRule
+
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
 import static org.codenarc.test.TestUtil.*
+import org.codenarc.rule.FakePathRule
 
 /**
  * Tests for XmlFileRuleSet
@@ -51,7 +52,7 @@ class XmlFileRuleSetTest extends AbstractTestCase {
         final PATH = 'rulesets/RuleSet1.xml'
         def ruleSet = new XmlFileRuleSet(PATH)
         def rules = ruleSet.rules
-        assert rules*.class == [TestPathRule]
+        assert rules*.class == [FakePathRule]
     }
 
     @Test
@@ -71,7 +72,7 @@ class XmlFileRuleSetTest extends AbstractTestCase {
         final PATH = 'file:src/test/resources/rulesets/RuleSet1.xml'
         def ruleSet = new XmlFileRuleSet(PATH)
         def rules = ruleSet.rules
-        assert rules*.class == [TestPathRule]
+        assert rules*.class == [FakePathRule]
     }
 
     @Test

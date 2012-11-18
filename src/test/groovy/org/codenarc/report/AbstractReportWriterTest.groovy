@@ -39,11 +39,11 @@ class AbstractReportWriterTest extends AbstractTestCase {
     private static final CUSTOM_FILENAME = 'abc.txt'
     private static final NEW_OUTPUT_DIR = 'tempdir'
     private static final CONTENTS = 'abc'
-    private TestAbstractReportWriter reportWriter
+    private FakeAbstractReportWriter reportWriter
 
     @Test
     void testWriteReport_WritesToDefaultOutputFile_IfOutputFileIsNull() {
-        def defaultOutputFile = TestAbstractReportWriter.defaultOutputFile
+        def defaultOutputFile = FakeAbstractReportWriter.defaultOutputFile
         reportWriter.writeReport(ANALYSIS_CONTEXT, RESULTS)
         assertOutputFile(defaultOutputFile)
     }
@@ -228,7 +228,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
 
     @Before
     void setUpAbstractReportWriterTest() {
-        reportWriter = new TestAbstractReportWriter()
+        reportWriter = new FakeAbstractReportWriter()
     }
 
     private void assertOutputFile(String outputFile) {
@@ -248,7 +248,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
 /**
  * Concrete subclass of AbstractReportWriter for testing
  */
-class TestAbstractReportWriter extends AbstractReportWriter {
+class FakeAbstractReportWriter extends AbstractReportWriter {
     static defaultOutputFile = 'TestReportWriter.txt'
     String title 
 

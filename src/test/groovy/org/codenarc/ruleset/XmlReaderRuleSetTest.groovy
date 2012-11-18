@@ -17,7 +17,7 @@ package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
-import org.codenarc.rule.TestPathRule
+import org.codenarc.rule.FakePathRule
 import org.codenarc.rule.basic.EmptyIfStatementRule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.imports.DuplicateImportRule
@@ -189,7 +189,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
                 </rule>
             </ruleset>"""
         parseXmlRuleSet(XML)
-        assertRuleClasses([StubRule, DuplicateImportRule, CatchThrowableRule, TestPathRule, EmptyIfStatementRule])
+        assertRuleClasses([StubRule, DuplicateImportRule, CatchThrowableRule, FakePathRule, EmptyIfStatementRule])
         assert findRule('DuplicateImport').priority == 1
         assert findRule('EmptyIfStatement').priority == 1
         assert findRule('CatchThrowable').priority == 1
@@ -228,7 +228,7 @@ class XmlReaderRuleSetTest extends AbstractTestCase {
                 </rule>
             </ruleset>"""
         parseXmlRuleSet(XML)
-        assertRuleClasses([DuplicateImportRule, TestPathRule, EmptyIfStatementRule, CatchThrowableRule])
+        assertRuleClasses([DuplicateImportRule, FakePathRule, EmptyIfStatementRule, CatchThrowableRule])
     }
 
     @Test

@@ -191,7 +191,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testDefineNewApplyToClassNamesProperty() {
-        rule = new TestAstVisitorRuleDefinesNewApplyToClassNamesRule()
+        rule = new FakeAstVisitorRuleDefinesNewApplyToClassNamesRule()
         assertSingleViolation('class ApplyToClassName { }')
         assertNoViolations('class DoNotApplyToClassName { }')
         assertNoViolations('class OtherClass { }')
@@ -227,19 +227,19 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new TestAstVisitorRule()
+        new FakeAstVisitorRule()
     }
 }
 
 // Test AbstractAstVisitorRule implementation class
-class TestAstVisitorRule extends AbstractAstVisitorRule {
+class FakeAstVisitorRule extends AbstractAstVisitorRule {
     String name = 'Test'
     int priority = 3
-    Class astVisitorClass = TestAstVisitor
+    Class astVisitorClass = FakeAstVisitor
 }
 
 // Test AstVisitor implementation class
-class TestAstVisitor extends AbstractAstVisitor {
+class FakeAstVisitor extends AbstractAstVisitor {
     void visitClassEx(ClassNode classNode) {
         violations.add(new Violation(rule:rule))
         super.visitClassEx(classNode)
@@ -247,10 +247,10 @@ class TestAstVisitor extends AbstractAstVisitor {
 }
 
 // Test AbstractAstVisitorRule implementation class that defines new 'applyToClassNames' and 'doNotApplyToClassNames' properties
-class TestAstVisitorRuleDefinesNewApplyToClassNamesRule extends AbstractAstVisitorRule {
+class FakeAstVisitorRuleDefinesNewApplyToClassNamesRule extends AbstractAstVisitorRule {
     String name = 'Test'
     int priority = 3
-    Class astVisitorClass = TestAstVisitor
+    Class astVisitorClass = FakeAstVisitor
     String applyToClassNames = 'ApplyToClassName'
     String doNotApplyToClassNames = 'DoNotApplyToClassName'
 }

@@ -18,8 +18,8 @@ package org.codenarc.analyzer
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
-import org.codenarc.rule.TestCountRule
-import org.codenarc.rule.TestPathRule
+import org.codenarc.rule.FakeCountRule
+
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
@@ -28,6 +28,7 @@ import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertEqualSets
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import org.codenarc.rule.FakePathRule
 
 /**
  * Tests for FilesystemSourceAnalyzer.
@@ -61,7 +62,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     void testAnalyze_FilesOnly() {
         final DIR = 'src/test/resources/source'
         analyzer.baseDirectory = DIR
-        ruleSet = new ListRuleSet([new TestPathRule()])     // override
+        ruleSet = new ListRuleSet([new FakePathRule()])     // override
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
@@ -182,8 +183,8 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     @Before
     void setUpFilesystemSourceAnalyzerTest() {
         analyzer = new FilesystemSourceAnalyzer()
-        testCountRule = new TestCountRule()
-        ruleSet = new ListRuleSet([new TestPathRule(), testCountRule])
+        testCountRule = new FakeCountRule()
+        ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])
     }
 
     private void assertMatches(source, includes, excludes, shouldMatch) {

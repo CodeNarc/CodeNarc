@@ -91,17 +91,17 @@ class PropertyUtilTest extends AbstractTestCase {
 
     @Before
     void setUpPropertyUtilTest() {
-        object = new TestPropertyUtilClass()
+        object = new FakePropertyUtilClass()
     }
 }
 
-class TestPropertyUtilClass extends TestPropertyUtilSuperclass {
+class FakePropertyUtilClass extends FakePropertyUtilSuperclass {
     String stringField
     int intField
     long longField
     boolean booleanField
 }
 
-class TestPropertyUtilSuperclass {
+class FakePropertyUtilSuperclass {
     int superclassIntField
 }

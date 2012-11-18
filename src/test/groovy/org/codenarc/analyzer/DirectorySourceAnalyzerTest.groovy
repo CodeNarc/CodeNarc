@@ -18,8 +18,7 @@ package org.codenarc.analyzer
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
-import org.codenarc.rule.TestCountRule
-import org.codenarc.rule.TestPathRule
+
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
@@ -27,6 +26,8 @@ import org.junit.Test
 
 import static org.codenarc.test.TestUtil.assertEqualSets
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import org.codenarc.rule.FakePathRule
+import org.codenarc.rule.FakeCountRule
 
 /**
  * Tests for DirectorySourceAnalyzer.
@@ -61,7 +62,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
     void testAnalyze_BaseDirectory_FilesOnly() {
         final DIR = 'src/test/resources/source'
         analyzer.baseDirectory = DIR
-        def ruleSet = new ListRuleSet([new TestPathRule()])
+        def ruleSet = new ListRuleSet([new FakePathRule()])
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
 
@@ -222,8 +223,8 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
     @Before
     void setUpDirectorySourceAnalyzerTest() {
         analyzer = new DirectorySourceAnalyzer()
-        testCountRule = new TestCountRule()
-        ruleSet = new ListRuleSet([new TestPathRule(), testCountRule])
+        testCountRule = new FakeCountRule()
+        ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])
     }
 
     private List resultsPaths(Results results, List paths=[]) {

@@ -43,7 +43,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testToString() {
-        assertContainsAll(rule.toString(), ['TestPathRule', NAME, PRIORITY.toString()])
+        assertContainsAll(rule.toString(), ['FakePathRule', NAME, PRIORITY.toString()])
     }
 
     @Test
@@ -299,12 +299,12 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new TestPathRule(name:NAME, priority:PRIORITY)
+        new FakePathRule(name:NAME, priority:PRIORITY)
     }
 
 }
 
-class NotReadyRule extends TestPathRule {
+class NotReadyRule extends FakePathRule {
     boolean isReady() {
         false
     }

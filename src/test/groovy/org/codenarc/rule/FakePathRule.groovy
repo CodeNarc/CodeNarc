@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 the original author or authors.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,21 +18,23 @@ package org.codenarc.rule
 import org.codenarc.source.SourceCode
 
 /**
- * Test-specific Rule implementation that maintins count of how many times it has been applied.
+ * Test-specific Rule implementation that always returns one or more violation whose messages are
+ * equal to the source file path. Set <code>numberOfViolations</code> to generate more than one violation.
  *
  * @author Chris Mair
  */
-class TestCountRule extends AbstractRule {
-    String name ='TestCountRule'
-    int priority = 2
-    int count = 0
+class FakePathRule extends AbstractRule {
+    String name = 'TestPath'
+    int priority = 1
+    int numberOfViolations = 1
 
     /**
-     * Increment count and add no violations
+     * Always add a single violation whose message is equal to the source file path
      * @param sourceCode - the sourceCode to which the rule is applied
      */
-    @Override
     void applyTo(SourceCode sourceCode, List violations) {
-        count ++
+        def message = sourceCode.path?.replaceAll('\\\\', '/')
+        numberOfViolations.times { violations << new Violation(rule:this, message:message) }
     }
+
 }

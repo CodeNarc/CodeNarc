@@ -24,6 +24,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import org.codenarc.rule.FakePathRule
 
 /**
  * Tests for CodeNarcRunner
@@ -67,7 +68,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
         assert codeNarcRunner.execute() == RESULTS
 
-        assert ruleSet.rules*.class == [org.codenarc.rule.TestPathRule]
+        assert ruleSet.rules*.class == [FakePathRule]
 
         assert analysisContext.ruleSet == ruleSet
         assert analysisContext.sourceDirectories == SOURCE_DIRS

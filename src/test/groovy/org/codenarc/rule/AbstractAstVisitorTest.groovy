@@ -85,14 +85,14 @@ class AbstractAstVisitorTest extends AbstractTestCase {
     void setUpAbstractAstVisitorTest() {
         sourceCode = new SourceString(SOURCE)
         rule = [getName : { 'DummyRule' } ] as Rule
-        astVisitor = new TestAstVisitor1(rule:rule, sourceCode:sourceCode)
+        astVisitor = new FakeAstVisitor1(rule:rule, sourceCode:sourceCode)
         def ast = sourceCode.ast
         astVisitor.visitClass(ast.classes[0])
     }
 }
 
 // Test AstVisitor implementation class
-class TestAstVisitor1 extends AbstractAstVisitor {
+class FakeAstVisitor1 extends AbstractAstVisitor {
     def returnStatement
     def ifStatement
 

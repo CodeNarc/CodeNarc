@@ -19,8 +19,8 @@ import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
-import org.codenarc.rule.TestCountRule
-import org.codenarc.rule.TestPathRule
+import org.codenarc.rule.FakeCountRule
+import org.codenarc.rule.FakePathRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
@@ -106,7 +106,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testAnalyze_NestedSubdirectories_NoViolations() {
-        ruleSet = new ListRuleSet([new TestCountRule()])
+        ruleSet = new ListRuleSet([new FakeCountRule()])
         fileSet.setIncludes('sourcewithdirs/**/*.groovy')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
@@ -200,7 +200,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         project.setBasedir('.')
         fileSet.setProject(project)
 
-        ruleSet = new ListRuleSet([new TestPathRule()])
+        ruleSet = new ListRuleSet([new FakePathRule()])
     }
 
     private String normalizedPath(String path) {
