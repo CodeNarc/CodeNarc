@@ -19,7 +19,6 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MapEntryExpression
@@ -39,14 +38,14 @@ class SpaceBeforeOpeningBraceRule extends AbstractAstVisitorRule {
     boolean checkClosureMapEntryValue = true
 }
 
-class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
+class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
         def line = sourceLineOrEmpty(node)
         def indexOfBrace = line.indexOf('{')
         if (indexOfBrace > 1) {
-            if (!Character.isWhitespace(line[indexOfBrace - 1] as char)) {
+            if (isNotWhitespace(line, indexOfBrace)) {
                 def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
                 addViolation(node, "The opening brace for $typeName $currentClassName is not preceded by a space or whitespace")
             }
@@ -72,7 +71,7 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
         if (isFirstVisit(block) && !AstUtil.isFromGeneratedSourceCode(block)) {
             def line = sourceLineOrEmpty(block)
             def startCol = block.columnNumber
-            if (startCol > 1 && !Character.isWhitespace(line[startCol - 2] as char)) {
+            if (isNotWhitespace(line, startCol - 1)) {
                 addOpeningBraceViolation(block, 'block')
             }
         }
@@ -85,7 +84,7 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
         if (isFirstVisit(expression)) {
             def line = sourceLineOrEmpty(expression)
             def startCol = expression.columnNumber
-            if (startCol > 1 && !Character.isWhitespace(line[startCol - 2] as char)) {
+            if (isNotWhitespace(line, startCol - 1)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
@@ -98,10 +97,6 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractAstVisitor {
             isFirstVisit(expression.valueExpression)   // Register the closure so that it will be ignored in visitClosureExpression()
         }
         super.visitMapEntryExpression(expression)
-    }
-
-    private String sourceLineOrEmpty(node) {
-        node.lineNumber == -1 ? '' : sourceLine(node)
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {

@@ -16,7 +16,6 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.stmt.BlockStatement
@@ -40,14 +39,14 @@ class SpaceBeforeClosingBraceRule extends AbstractAstVisitorRule {
     boolean checkClosureMapEntryValue = true
 }
 
-class SpaceBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
+class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
         def line = lastSourceLineOrEmpty(node)
         def indexOfBrace = line.indexOf('}')
         if (indexOfBrace > 1) {
-            if (!Character.isWhitespace(line[indexOfBrace - 1] as char)) {
+            if (isNotWhitespace(line, indexOfBrace)) {
                 def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
                 addViolation(node, "The closing brace for $typeName $currentClassName is not preceded by a space or whitespace")
             }
@@ -71,9 +70,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
         if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
             def line = lastSourceLineOrEmpty(node.code)
             def lastCol = node.code.lastColumnNumber
-            if (line.size() >= lastCol &&
-                !Character.isWhitespace(line[lastCol - 2] as char) &&
-                line[lastCol - 1] == '}' ) {
+            if (line.size() >= lastCol && isNotWhitespace(line, lastCol - 1) && line[lastCol - 1] == '}' ) {
                 addOpeningBraceViolation(node.code, 'block')
             }
         }
@@ -88,7 +85,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
             def startCol = block.columnNumber
             if (startLine[startCol - 1] == '{') {
                 int lastIndex = indexOfBrace(line, lastCol)
-                if (lastCol > 0 && !Character.isWhitespace(line[lastIndex - 1] as char)) {
+                if (isNotWhitespace(line, lastIndex)) {
                     addOpeningBraceViolation(block, 'block')
                 }
             }
@@ -103,7 +100,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
             def line = lastSourceLineOrEmpty(expression)
             def lastCol = expression.lastColumnNumber
             int lastIndex = indexOfBrace(line, lastCol)
-            if (lastCol > 1 && !Character.isWhitespace(line[lastIndex - 1] as char)) {
+            if (isNotWhitespace(line, lastIndex)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
@@ -127,14 +124,6 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
             index--
         }
         return index
-    }
-
-    private String lastSourceLineOrEmpty(node) {
-        node.lastLineNumber == -1 ? '' : lastSourceLine(node)
-    }
-
-    private String sourceLineOrEmpty(node) {
-        node.lineNumber == -1 ? '' : sourceLine(node)
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {
