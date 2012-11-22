@@ -17,38 +17,41 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.ConstructorNode
-import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.MethodNode
 
 /**
- * Check that there is at least one space (blank) or whitespace before each closing brace ("}").
+ * Check that there is at least one space (blank) or whitespace after each closing brace ("}").
  * This checks method/class/interface declarations, closure expressions and block statements.
+ *
+ * A closure expression followed by a dot operator (.), a comma, a closing parenthesis, the
+ * spread-dot operator (*.) or the null-safe operator (?.) does not cause a violation.
  *
  * @author Chris Mair
  */
-class SpaceBeforeClosingBraceRule extends AbstractAstVisitorRule {
+class SpaceAfterClosingBraceRule extends AbstractAstVisitorRule {
 
-    String name = 'SpaceBeforeClosingBrace'
+    String name = 'SpaceAfterClosingBrace'
     int priority = 3
-    Class astVisitorClass = SpaceBeforeClosingBraceAstVisitor
+    Class astVisitorClass = SpaceAfterClosingBraceAstVisitor
     boolean checkClosureMapEntryValue = true
 }
 
-class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
+class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
         def line = lastSourceLineOrEmpty(node)
         def indexOfBrace = line.indexOf('}')
         if (indexOfBrace > 1) {
-            if (isNotWhitespace(line, indexOfBrace)) {
+            if (isNotWhitespace(line, indexOfBrace + 2)) {
                 def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
-                addViolation(node, "The closing brace for $typeName $currentClassName is not preceded by a space or whitespace")
+                addViolation(node, "The closing brace for $typeName $currentClassName is not followed by a space or whitespace")
             }
         }
         super.visitClassEx(node)
@@ -70,7 +73,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
         if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
             def line = lastSourceLineOrEmpty(node.code)
             def lastCol = node.code.lastColumnNumber
-            if (line.size() >= lastCol && isNotWhitespace(line, lastCol - 1) && line[lastCol - 1] == '}' ) {
+            if (line.size() >= lastCol && isNotWhitespace(line, lastCol + 1) && line[lastCol - 1] == '}' ) {
                 addOpeningBraceViolation(node.code, 'block')
             }
         }
@@ -85,7 +88,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
             def startCol = block.columnNumber
             if (startLine[startCol - 1] == '{') {
                 int lastIndex = indexOfClosingBrace(line, lastCol)
-                if (isNotWhitespace(line, lastIndex)) {
+                if (isNotWhitespace(line, lastIndex + 2)) {
                     addOpeningBraceViolation(block, 'block')
                 }
             }
@@ -100,7 +103,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
             def line = lastSourceLineOrEmpty(expression)
             def lastCol = expression.lastColumnNumber
             int lastIndex = indexOfClosingBrace(line, lastCol)
-            if (isNotWhitespace(line, lastIndex)) {
+            if (isNotWhitespace(line, lastIndex + 2) && isNotAllowedCharacter(line, lastIndex + 2)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
@@ -115,8 +118,12 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
         super.visitMapEntryExpression(expression)
     }
 
+    private boolean isNotAllowedCharacter(String line, int index) {
+        index >= 1 && index <= line.size() && !['.', ',', ')', '*', '?'].contains(line[index - 1])
+    }
+
     private void addOpeningBraceViolation(ASTNode node, String keyword) {
-        addViolation(node, "The closing brace for the $keyword in class $currentClassName is not preceded by a space or whitespace")
+        addViolation(node, "The closing brace for the $keyword in class $currentClassName is not followed by a space or whitespace")
     }
 
 }
