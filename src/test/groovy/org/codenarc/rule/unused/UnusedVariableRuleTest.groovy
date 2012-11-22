@@ -330,6 +330,48 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_IgnoreVariableNames_MatchesSingleName() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    BigDecimal depositAmount
+                }
+            }
+        '''
+        rule.ignoreVariableNames = 'depositAmount'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_IgnoreVariableNames_MatchNoNames() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    BigDecimal depositAmount
+                }
+            }
+        '''
+        rule.ignoreVariableNames = 'other'
+        assertSingleViolation(SOURCE, 4, 'BigDecimal depositAmount', 'The variable [depositAmount] in class MyClass is not used')
+    }
+
+    @Test
+    void testApplyTo_IgnoreVariableNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    BigDecimal depositAmount
+                    def other
+                    int count
+                    long otherMax
+                }
+            }
+        '''
+        rule.ignoreVariableNames = 'oth*,xxx,deposit??ount'
+        assertSingleViolation(SOURCE, 6, 'int count', 'The variable [count] in class MyClass is not used')
+    }
+
     protected Rule createRule() {
         new UnusedVariableRule()
     }
