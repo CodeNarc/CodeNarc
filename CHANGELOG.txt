@@ -13,6 +13,11 @@ NEW RULES
 - #3583262: New SpaceAfterOpeningBrace rule. Check that there is at least one space (blank) or whitespace after each opening brace ("{"). This checks method/class/interface declarations, closure expressions and block statements.
 - #3583262: New SpaceAfterClosingBrace rule. Check that there is at least one space (blank) or whitespace after each closing brace ("}"). This checks method/class/interface declarations, closure expressions and block statements.
 - #3583262: New SpaceBeforeClosingBrace rule. Check that there is at least one space (blank) or whitespace before each closing brace ("}"). This checks method/class/interface declarations, closure expressions and block statements.
+- #3589701: New SpaceAfterIf rule. Check that there is exactly one space (blank) after the if keyword and before the opening parenthesis.
+- #3589701: New SpaceAfterWhile rule. Check that there is exactly one space (blank) after the while keyword and before the opening parenthesis.
+- #3589701: New SpaceAfterFor rule. Check that there is exactly one space (blank) after the for keyword and before the opening parenthesis.
+- #3589701: New SpaceAfterSwitch rule. Check that there is exactly one space (blank) after the switch keyword and before the opening parenthesis.
+- #3589701: New SpaceAfterCatch rule. Check that there is exactly one space (blank) after the catch keyword and before the opening parenthesis.
 
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.

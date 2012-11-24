@@ -16,10 +16,15 @@
     <rule class='org.codenarc.rule.formatting.BracesForMethodRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForTryCatchFinallyRule'/>
     <rule class='org.codenarc.rule.formatting.ClassJavadocRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterCatchRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterClosingBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterForRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterIfRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterOpeningBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterSemicolonRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterSwitchRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterWhileRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAroundOperatorRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceBeforeClosingBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceBeforeOpeningBraceRule'/>

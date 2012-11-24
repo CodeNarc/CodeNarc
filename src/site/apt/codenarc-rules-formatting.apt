@@ -61,6 +61,20 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   Checks the maximum length for each line of source code. It checks for number of characters, so lines that include tabs may appear longer than the allowed number when viewing the file. The maximum line length can be configured by setting the length property, which defaults to 120.
 
 
+* {SpaceAfterCatch} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Check that there is exactly one space (blank) after the <<<catch>>> keyword and before the opening parenthesis.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+    try { } catch(Exception e) { }          // violation
+    try { } catch  (Exception e) { }        // violation
+-------------------------------------------------------------------------------
+
+
 * {SpaceAfterComma} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
@@ -114,6 +128,34 @@ Formatting Rules  ("<rulesets/formatting.xml>")
     processItems(list.select { it.isReady() })          // no violation for closing parenthesis
     def names = records.findAll { it.age > 1 }*.name    // no violation for spread operator
     list?.collect { it?.type }?.join(',')               // no violation for null-safe operator
+-------------------------------------------------------------------------------
+
+
+* {SpaceAfterFor} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Check that there is exactly one space (blank) after the <<<for>>> keyword and before the opening parenthesis.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+    for(name in names) { }                  // violation
+    for  (int i=0; i < 10; i++) { }         // violation
+-------------------------------------------------------------------------------
+
+
+* {SpaceAfterIf} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Check that there is exactly one space (blank) after the <<<if>>> keyword and before the opening parenthesis.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+    if(true) { }                            // violation
+    if  (true) { }                          // violation
 -------------------------------------------------------------------------------
 
 
@@ -187,6 +229,38 @@ Formatting Rules  ("<rulesets/formatting.xml>")
             for (int j=0; j \< 10;j++) { }           // violation
         }
     }
+-------------------------------------------------------------------------------
+
+
+* {SpaceAfterSwitch} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Check that there is exactly one space (blank) after the <<<switch>>> keyword and before the opening parenthesis.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+    switch(x) {                                 // violation
+        case 1: println 'one'
+    }
+    switch  (x) {                               // violation
+        case 1: println 'one'
+    }
+-------------------------------------------------------------------------------
+
+
+* {SpaceAfterWhile} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Check that there is exactly one space (blank) after the <<<while>>> keyword and before the opening parenthesis.
+
+  Examples of violations:
+
+-------------------------------------------------------------------------------
+    while(true) { }             // violation
+    while  (true) { }           // violation
 -------------------------------------------------------------------------------
 
 

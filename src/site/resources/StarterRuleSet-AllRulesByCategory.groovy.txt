@@ -145,9 +145,12 @@ ruleset {
     BracesForTryCatchFinally 
     ClassJavadoc 
     LineLength 
+    SpaceAfterClosingBrace 
     SpaceAfterComma 
+    SpaceAfterOpeningBrace 
     SpaceAfterSemicolon 
     SpaceAroundOperator 
+    SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 
     
     // rulesets/generic.xml

@@ -197,9 +197,12 @@ ruleset {
     SerialVersionUID 
     SerializableClassMustDefineSerialVersionUID 
     SimpleDateFormatMissingLocale 
+    SpaceAfterClosingBrace 
     SpaceAfterComma 
+    SpaceAfterOpeningBrace 
     SpaceAfterSemicolon 
     SpaceAroundOperator 
+    SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 
     SpockIgnoreRestUsed 
     StatelessClass 

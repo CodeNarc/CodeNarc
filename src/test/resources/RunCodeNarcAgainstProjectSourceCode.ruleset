@@ -18,7 +18,13 @@ ruleset {
 
     ruleset('rulesets/groovyism.xml')
 
-    ruleset('rulesets/formatting.xml')
+    ruleset('rulesets/formatting.xml') {
+        exclude 'SpaceAfterCatch'
+        exclude 'SpaceAfterFor'
+        exclude 'SpaceAfterIf'
+        exclude 'SpaceAfterSwitch'
+        exclude 'SpaceAfterWhile'
+    }
 
     ruleset('rulesets/imports.xml')
 
