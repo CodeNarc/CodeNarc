@@ -118,7 +118,8 @@ Logging Rules  ("<rulesets/logging.xml>")
 * {PrintStackTrace} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Checks for calls to <<<printStackTrace()>>>. Consider using a standard logging facility instead.
+  Checks for calls to <<<Throwable.printStackTrace()>>> or <<<StackTraceUtils.printSanitizedStackTrace(Throwable)>>>.
+  Consider using a standard logging facility instead.
 
 
 * {SystemErrPrint} Rule

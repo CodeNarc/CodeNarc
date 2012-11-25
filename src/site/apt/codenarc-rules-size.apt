@@ -29,8 +29,13 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 |                                 | method (or "closure field"). If zero or <null>, then do not    |                        |
 |                                 | check method-level complexity.                                 |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
-| maxClassAverageMethodComplexity | The maximum <ABC complexity> value (score) allowed for a class,| 60                     |
-|                                 | calculated as the average complexity of its methods or         |                        |
+| maxClassAverageMethodComplexity | The maximum <ABC complexity> average value (score) allowed for | 60                     |
+|                                 | a class, calculated as the average complexity of its methods or|                        |
+|                                 | "closure fields". If zero or <null>, then do not check         |                        |
+|                                 | class-level average complexity.                                |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| maxClassComplexity              | The maximum <ABC complexity> value (score) allowed for a class,| 0                      |
+|                                 | calculated as the total complexity of its methods or           |                        |
 |                                 | "closure fields". If zero or <null>, then do not check         |                        |
 |                                 | class-level complexity.                                        |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
@@ -130,9 +135,13 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 | maxMethodCrapScore              | The maximum <CRAP> metric value allowed for a single method.   | 30                     |
 |                                 | If zero or <null>, then do not check method-level complexity.  |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
-| maxClassAverageMethodCrapScore  | The maximum <CRAP> metric value allowed for a class,           | 30                     |
-|                                 | calculated as the average CRAP value of its methods. If        |                        |
-|                                 | zero or <null>, then do not check class-level CRAP value.        |                        |
+| maxClassAverageMethodCrapScore  | The maximum <CRAP> average metric value allowed for a class,   | 30                     |
+|                                 | calculated as the average CRAP value of its methods. If zero or|                        |
+|                                 | <null>, then do not check the average class-level CRAP value.  |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| maxClassCrapScore               | The maximum total <CRAP> metric value allowed for a class,     | 0                      |
+|                                 | calculated as the total CRAP value of its methods. If          |                        |
+|                                 | zero or <null>, then do not check class-level CRAP value.      |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
 | ignoreMethodNames               | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
 |                                 | that should not cause a rule violation. The names may          |                        |
@@ -196,10 +205,15 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 |                                 | method (or "closure field"). If zero or <null>, then do not    |                        |
 |                                 | check method-level complexity.                                 |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
-| maxClassAverageMethodComplexity | The maximum <cyclomatic complexity> value allowed for a class, | 20                     |
-|                                 | calculated as the average complexity of its methods or         |                        |
+| maxClassAverageMethodComplexity | The maximum average <cyclomatic complexity> value allowed for a| 20                     |
+|                                 | class, calculated as the average complexity of its methods or  |                        |
 |                                 | "closure fields". If zero or <null>, then do not check         |                        |
-|                                 | class-level complexity.                                        |                        |
+|                                 | average class-level complexity.                                |                        |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| maxClassComplexity              | The maximum total <cyclomatic complexity> value allowed for a  | 0                      |
+|                                 | class, calculated as the total complexity of its methods or    |                        |
+|                                 | "closure fields". If zero or <null>, then do not check         |                        |
+|                                 | total class-level complexity.                                  |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
 | ignoreMethodNames               | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
 |                                 | that should not cause a rule violation. The names may          |                        |

@@ -32,6 +32,11 @@ import org.gmetrics.metric.abc.AbcMetric
  * value greater than this value is considered a violation. The value does not have to be an integer
  * (i.e., 1.7 is allowed). The <code>maxClassAverageMethodComplexity</code> property defaults to 60.
  * <p/>
+ * The <code>maxClassComplexity</code> property holds the threshold value for the total ABC
+ * complexity value for each class. If this value is non-zero, a class with a total ABC complexity
+ * value greater than this value is considered a violation. The value does not have to be an integer
+ * (i.e., 1.7 is allowed). The <code>maxClassComplexity</code> property defaults to 0.
+ * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method
  * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
  * include wildcard characters ('*' or '?'). Note that the ignored methods still contribute to the class
@@ -52,6 +57,7 @@ class AbcComplexityRule extends AbstractAstVisitorRule {
     Class astVisitorClass = AbcComplexityAstVisitor
     int maxMethodComplexity = 60
     int maxClassAverageMethodComplexity = 60
+    int maxClassComplexity = 0
     String ignoreMethodNames
 }
 
@@ -67,7 +73,11 @@ class AbcComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
         rule.maxMethodComplexity
     }
 
-    protected Object getMaxClassMetricValue() {
+    protected Object getMaxClassAverageMethodMetricValue() {
         rule.maxClassAverageMethodComplexity
+    }
+
+    protected Object getMaxClassMetricValue() {
+        rule.maxClassComplexity
     }
 }

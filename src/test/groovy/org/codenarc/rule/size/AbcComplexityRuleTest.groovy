@@ -32,6 +32,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'AbcComplexity'
         assert rule.maxMethodComplexity == 60
         assert rule.maxClassAverageMethodComplexity == 60
+        assert rule.maxClassComplexity == 0
     }
 
     @Test
@@ -120,6 +121,19 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_Class_ExceedsMaxClassComplexity() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        '''
+        rule.maxClassComplexity = 5
+        assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
+    }
+
+    @Test
     void testApplyTo_Class_ZeroMaxClassAverageMethodComplexity_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -148,9 +162,11 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
         """
         rule.maxMethodComplexity = 4.5
         rule.maxClassAverageMethodComplexity = 1.9
-        assertTwoViolations(SOURCE,
-                2, 'class MyClass', ['MyClass', '2.2'],
-                8, 'def myMethod3()', ['myMethod3', '6'])
+        rule.maxClassComplexity = 6.0
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '2.2']],
+                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '6.4']],
+                [lineNumber:8, sourceLineText:'def myMethod3()', messageText:['myMethod3', '6']])
     }
 
     @Test

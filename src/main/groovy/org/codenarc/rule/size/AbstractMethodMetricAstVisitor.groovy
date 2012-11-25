@@ -30,7 +30,7 @@ import org.gmetrics.metric.Metric
  *   <li>Implement the abstract <code>createMetric()</code> method</li>
  *   <li>Implement the abstract <code>getMetricShortDescription()</code> method</li>
  *   <li>Implement the abstract <code>getMaxMethodMetricValue()</code> method</li>
- *   <li>Implement the abstract <code>getMaxClassMetricValue()</code> method</li>
+ *   <li>Implement the abstract <code>getMaxClassAverageMethodMetricValue()</code> method</li>
  *   <li>The owning Rule class must have the <code>ignoreMethodNames</code> property</li>
  * </ul>
  *
@@ -47,6 +47,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     protected abstract String getMetricShortDescription()
     protected abstract Object getMaxMethodMetricValue()
     protected abstract Object getMaxClassMetricValue()
+    protected abstract Object getMaxClassAverageMethodMetricValue()
 
     private Metric getMetric() {
         synchronized(metricLock) {
@@ -69,7 +70,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 
         if (!AstUtil.isFromGeneratedSourceCode(classNode)) {
             if (!(classNode.isScript() && classNode.name == 'None')) {
-            checkClass(classMetricResult, classNode)
+                checkClass(classMetricResult, classNode)
             }
         }
         super.visitClassEx(classNode)
@@ -79,12 +80,9 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         def methodResults = classMetricResult.methodMetricResults
         methodResults.each { method, results ->
             String methodName = extractMethodName(method)
-            if (results['total'] > getMaxMethodMetricValue() &&
-                    !isIgnoredMethodName(methodName)) {
+            if (results['total'] > getMaxMethodMetricValue() && !isIgnoredMethodName(methodName)) {
                 def message = "Violation in class $currentClassName. The ${getMetricShortDescription()} for method [$methodName] is [${results['total']}]"
-                def lineNumber = getLineNumber(results)
-                def sourceLine = getSourceLine(lineNumber)
-                violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
+                addViolation(results, message)
             }
         }
     }
@@ -94,24 +92,24 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         method instanceof String ? method : method.methodName
     }
 
-    protected getMethodNode(ClassNode classNode, String methodName, results) {
-        def matchingMethods = classNode.getDeclaredMethods(methodName)
-        if (matchingMethods.size() == 1) {
-            return matchingMethods[0]
-        }
-        def lineNumber = getLineNumber(results)
-        matchingMethods.find { method -> method.lineNumber == lineNumber }
-    }
-
     private void checkClass(classMetricResult, classNode) {
         def className = classNode.name
-        def methodResults = classMetricResult.classMetricResult
-        if (getMaxClassMetricValue() && methodResults['average'] > getMaxClassMetricValue()) {
-            def message = "The ${getMetricShortDescription()} for class [$className] is [${methodResults['average']}]"
-            def lineNumber = getLineNumber(methodResults)
-            def sourceLine = getSourceLine(lineNumber)
-            violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
+        def classResults = classMetricResult.classMetricResult
+        if (getMaxClassAverageMethodMetricValue() && classResults['average'] > getMaxClassAverageMethodMetricValue()) {
+            def message = "The average method ${getMetricShortDescription()} for class [$className] is [${classResults['average']}]"
+            addViolation(classResults, message)
         }
+
+        if (getMaxClassMetricValue() && classResults['total'] > getMaxClassMetricValue()) {
+            def message = "The total class ${getMetricShortDescription()} for class [$className] is [${classResults['total']}]"
+            addViolation(classResults, message)
+        }
+    }
+
+    protected void addViolation(classResults, String message) {
+        def lineNumber = getLineNumber(classResults)
+        def sourceLine = getSourceLine(lineNumber)
+        violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
     }
 
     protected getLineNumber(methodResults) {

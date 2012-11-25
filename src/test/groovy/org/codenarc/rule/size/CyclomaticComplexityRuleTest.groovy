@@ -31,6 +31,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assert rule.priority == 2
         assert rule.name == 'CyclomaticComplexity'
         assert rule.maxMethodComplexity == 20
+        assert rule.maxClassComplexity == 0
         assert rule.maxClassAverageMethodComplexity == 20
     }
 
@@ -142,6 +143,19 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_Class_ExceedsMaxClassComplexity() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        '''
+        rule.maxClassComplexity = 5
+        assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
+    }
+
+    @Test
     void testApplyTo_Class_ZeroMaxClassAverageMethodComplexity_NoViolations() {
         final SOURCE = '''
             class MyClass {
@@ -169,10 +183,12 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.maxMethodComplexity = 5
+        rule.maxClassComplexity = 9
         rule.maxClassAverageMethodComplexity = 3
-        assertTwoViolations(SOURCE,
-                2, 'class MyClass', ['MyClass', '3.3'],
-                8, 'def myMethod3()', ['myMethod3', '6'])
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '3.3']],
+                [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '10']],
+                [lineNumber:8, sourceLineText:'def myMethod3()', messageText:['myMethod3', '6']])
     }
 
     @Test
@@ -190,6 +206,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.maxMethodComplexity = 3
+        rule.maxClassComplexity = 9
         rule.maxClassAverageMethodComplexity = 3
         assertNoViolations(SOURCE)
     }

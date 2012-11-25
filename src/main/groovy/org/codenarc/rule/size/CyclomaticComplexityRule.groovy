@@ -28,8 +28,13 @@ import org.gmetrics.metric.cyclomatic.CyclomaticComplexityMetric
  * <p/>
  * The <code>maxClassAverageMethodComplexity</code> property holds the threshold value for the average cyclomatic
  * complexity value for each class. If this value is non-zero, a class with an average cyclomatic complexity
- * value greater than this value is considered a violation. The <code>maxMethodComplexity</code> property
+ * value greater than this value is considered a violation. The <code>maxClassAverageMethodComplexity</code> property
  * defaults to 20.
+ * <p/>
+ * The <code>maxClassComplexity</code> property holds the threshold value for the total cyclomatic
+ * complexity value for each class. If this value is non-zero, a class with a total cyclomatic complexity
+ * value greater than this value is considered a violation. The <code>maxClassComplexity</code> property
+ * defaults to 0.
  * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method
  * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
@@ -50,6 +55,7 @@ class CyclomaticComplexityRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = CyclomaticComplexityAstVisitor
     int maxMethodComplexity = 20
+    int maxClassComplexity = 0
     int maxClassAverageMethodComplexity = 20
     String ignoreMethodNames
 }
@@ -66,7 +72,11 @@ class CyclomaticComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
         rule.maxMethodComplexity
     }
 
-    protected Object getMaxClassMetricValue() {
+    protected Object getMaxClassAverageMethodMetricValue() {
         rule.maxClassAverageMethodComplexity
+    }
+
+    protected Object getMaxClassMetricValue() {
+        rule.maxClassComplexity
     }
 }

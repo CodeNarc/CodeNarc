@@ -44,6 +44,11 @@ import org.gmetrics.metric.crap.CrapMetric
  * value greater than this value is considered a violation. The <code>maxMethodAverageCrapScore</code> property
  * defaults to 30.
  * <p/>
+ * The <code>maxClassCrapScore</code> property holds the threshold value for the total CRAP
+ * crapMetric value for each class. If this value is non-zero, a class with a total CRAP score
+ * value greater than this value is considered a violation. The <code>maxClassCrapScore</code> property
+ * defaults to 0.
+ * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method
  * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
  * include wildcard characters ('*' or '?'). Note that the ignored methods still contribute to the class
@@ -65,6 +70,7 @@ class CrapMetricRule extends AbstractAstVisitorRule {
     int priority = 2
     BigDecimal maxMethodCrapScore = 30
     BigDecimal maxClassAverageMethodCrapScore = 30
+    BigDecimal maxClassCrapScore = 0
     String coberturaXmlFile
     String ignoreMethodNames
 
@@ -148,7 +154,11 @@ class CrapMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
     }
 
     @Override
-    protected Object getMaxClassMetricValue() {
+    protected Object getMaxClassAverageMethodMetricValue() {
         rule.maxClassAverageMethodCrapScore
+    }
+
+    protected Object getMaxClassMetricValue() {
+        rule.maxClassCrapScore
     }
 }

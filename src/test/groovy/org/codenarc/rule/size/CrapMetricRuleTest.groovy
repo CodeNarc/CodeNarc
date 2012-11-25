@@ -53,6 +53,7 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'CrapMetric'
         assert rule.maxMethodCrapScore == 30.0
         assert rule.maxClassAverageMethodCrapScore == 30.0
+        assert rule.maxClassCrapScore == 0
         assert rule.crapMetricClassName == 'org.gmetrics.metric.crap.CrapMetric'
     }
 
@@ -198,6 +199,12 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_Class_ExceedsMaxClassComplexity() {
+        rule.maxClassCrapScore = 1.0
+        assertSingleViolation(SOURCE, 3, 'class Email', [CLASS_NAME, METRIC_DESCRIPTION, 'total', CRAP_SCORE])
+    }
+
+    @Test
     void testApplyTo_Class_ZeroMaxClassAverageMethodCrapScore_NoViolations() {
         rule.maxClassAverageMethodCrapScore = 0.0
         assertNoViolations(SOURCE)
@@ -213,9 +220,11 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ClassAndMethod_ExceedThreshold() {
         rule.maxMethodCrapScore = 1.0
         rule.maxClassAverageMethodCrapScore = 1.0
-        assertTwoViolations(SOURCE,
-                3, 'class Email', [CLASS_NAME, METRIC_DESCRIPTION, CRAP_SCORE],
-                4, 'String toString() {', [CLASS_NAME, METRIC_DESCRIPTION, METHOD_NAME, CRAP_SCORE])
+        rule.maxClassCrapScore = 5.9
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'class Email', messageText:[CLASS_NAME, METRIC_DESCRIPTION, 'average', CRAP_SCORE]],
+                [lineNumber:3, sourceLineText:'class Email', messageText:[CLASS_NAME, METRIC_DESCRIPTION, 'total', CRAP_SCORE]],
+                [lineNumber:4, sourceLineText:'String toString() {', messageText:[CLASS_NAME, METRIC_DESCRIPTION, METHOD_NAME, CRAP_SCORE]])
     }
 
     @Test
