@@ -59,11 +59,33 @@ class PrintStackTraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_PrintStackTrace_WithParameter() {
+    void testApplyTo_PrintStackTrace_WithParameter_NoViolation() {
         final SOURCE = '''
             try {
             } catch(MyException e) {
                 e.printStackTrace(System.err)
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_PrintSanitizedStackTrace() {
+        final SOURCE = '''
+            try {
+            } catch(MyException e) {
+                StackTracUtils.printSanitizedStackTrace(e)
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'StackTracUtils.printSanitizedStackTrace(e)')
+    }
+
+    @Test
+    void testApplyTo_PrintSanitizedStackTrace_WithPrintWriter_NoViolation() {
+        final SOURCE = '''
+            try {
+            } catch(MyException e) {
+                StackTracUtils.printSanitizedStackTrace(e, myPrintWriter)
             }
         '''
         assertNoViolations(SOURCE)

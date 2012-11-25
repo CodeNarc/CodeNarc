@@ -38,5 +38,9 @@ class PrintStackTraceAstVisitor extends AbstractMethodCallExpressionVisitor {
         if (AstUtil.isMethodNamed(methodCall, 'printStackTrace', 0)) {
             addViolation(methodCall, 'printStackTrace() should be replaced with something more robust')
         }
+
+        if (AstUtil.isMethodNamed(methodCall, 'printSanitizedStackTrace', 1)) {
+            addViolation(methodCall, 'printSanitizedStackTrace() should be replaced with something more robust')
+        }
     }
 }
