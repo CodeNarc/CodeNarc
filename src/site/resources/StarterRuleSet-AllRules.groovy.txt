@@ -6,7 +6,8 @@ ruleset {
         Just delete the rules that you don't want to include.
         '''
 
-    AbcComplexity   // Requires the GMetrics jar
+    AbcComplexity   // DEPRECATED: Use the AbcMetric rule instead. Requires the GMetrics jar
+    AbcMetric   // Requires the GMetrics jar
     AbstractClassName 
     AbstractClassWithPublicConstructor 
     AbstractClassWithoutAbstractMethod 
@@ -60,7 +61,7 @@ ruleset {
     ConstantsOnlyInterface 
     CouldBeElvis 
     CoupledTestCase 
-    CrapMetric 
+    CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file
     CyclomaticComplexity   // Requires the GMetrics jar
     DeadCode 
     DirectConnectionManagement 
@@ -125,7 +126,7 @@ ruleset {
     GrailsDomainHasToString 
     GrailsPublicControllerMethod 
     GrailsServletContextReference 
-    GrailsSessionReference 
+    GrailsSessionReference   // DEPRECATED
     GrailsStatelessService 
     GroovyLangImmutable 
     HardCodedWindowsFileSeparator 
@@ -197,10 +198,15 @@ ruleset {
     SerialVersionUID 
     SerializableClassMustDefineSerialVersionUID 
     SimpleDateFormatMissingLocale 
+    SpaceAfterCatch 
     SpaceAfterClosingBrace 
     SpaceAfterComma 
+    SpaceAfterFor 
+    SpaceAfterIf 
     SpaceAfterOpeningBrace 
     SpaceAfterSemicolon 
+    SpaceAfterSwitch 
+    SpaceAfterWhile 
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 

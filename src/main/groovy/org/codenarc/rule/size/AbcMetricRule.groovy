@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +19,23 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.gmetrics.metric.abc.AbcMetric
 
 /**
- * Rule that calculates the ABC Complexity for methods/classes and checks against
+ * Rule that calculates the ABC metric score for methods/classes and checks against
  * configured threshold values.
  * <p/>
- * The <code>maxMethodComplexity</code> property holds the threshold value for the ABC complexity value
- * (magnitude) for each method. If this value is non-zero, a method with a cyclomatic complexity value greater than
+ * The <code>maxMethodAbcScore</code> property holds the threshold value for the ABC score
+ * (magnitude) for each method. If this value is non-zero, a method with an ABC score greater than
  * this value is considered a violation. The value does not have to be an integer (i.e., 1.7 is allowed). The
- * <code>maxMethodComplexity</code> property defaults to 60.
+ * <code>maxMethodAbcScore</code> property defaults to 60.
  * <p/>
- * The <code>maxClassAverageMethodComplexity</code> property holds the threshold value for the average ABC
- * complexity value for each class. If this value is non-zero, a class with an average ABC complexity
- * value greater than this value is considered a violation. The value does not have to be an integer
- * (i.e., 1.7 is allowed). The <code>maxClassAverageMethodComplexity</code> property defaults to 60.
+ * The <code>maxClassAverageMethodAbcScore</code> property holds the threshold value for the average ABC
+ * score for each class. If this value is non-zero, a class with an average ABC score
+ * greater than this value is considered a violation. The value does not have to be an integer
+ * (i.e., 1.7 is allowed). The <code>maxClassAverageMethodAbcScore</code> property defaults to 60.
  * <p/>
- * The <code>maxClassComplexity</code> property holds the threshold value for the total ABC
- * complexity value for each class. If this value is non-zero, a class with a total ABC complexity
- * value greater than this value is considered a violation. The value does not have to be an integer
- * (i.e., 1.7 is allowed). The <code>maxClassComplexity</code> property defaults to 0.
+ * The <code>maxClassAbcScore</code> property holds the threshold value for the total ABC
+ * score value for each class. If this value is non-zero, a class with a total ABC score
+ * greater than this value is considered a violation. The value does not have to be an integer
+ * (i.e., 1.7 is allowed). The <code>maxClassAbcScore</code> property defaults to 0.
  * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more (comma-separated) method
  * names that should be ignored (i.e., that should not cause a rule violation). The name(s) may optionally
@@ -49,25 +49,20 @@ import org.gmetrics.metric.abc.AbcMetric
  * @see <a href="http://jakescruggs.blogspot.com/2008/08/whats-good-flog-score.html">Blog post</a> describing guidelines for interpreting an ABC score.
  * @see <a href="http://gmetrics.sourceforge.net/gmetrics-AbcMetric.html">GMetrics ABC metric</a>.
  *
- * @deprecated This rule is deprecated and disabled (enabled=false) by default. Use AbcMetric rule instead.
- *
  * @author Chris Mair
- */
-class AbcComplexityRule extends AbstractAstVisitorRule {
-    String name = 'AbcComplexity'
-    int priority = 2
-    Class astVisitorClass = AbcComplexityAstVisitor
-    int maxMethodComplexity = 60
-    int maxClassAverageMethodComplexity = 60
-    int maxClassComplexity = 0
-    String ignoreMethodNames
+  */
+class AbcMetricRule extends AbstractAstVisitorRule {
 
-    AbcComplexityRule() {
-        this.enabled = false        // deprecated; disabled by default
-    }
+    String name = 'AbcMetric'
+    int priority = 2
+    Class astVisitorClass = AbcMetricAstVisitor
+    int maxMethodAbcScore = 60
+    int maxClassAverageMethodAbcScore = 60
+    int maxClassAbcScore = 0
+    String ignoreMethodNames
 }
 
-class AbcComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
+class AbcMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
 
     final String metricShortDescription = 'ABC score'
 
@@ -76,14 +71,14 @@ class AbcComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
     }
 
     protected Object getMaxMethodMetricValue() {
-        rule.maxMethodComplexity
+        rule.maxMethodAbcScore
     }
 
     protected Object getMaxClassAverageMethodMetricValue() {
-        rule.maxClassAverageMethodComplexity
+        rule.maxClassAverageMethodAbcScore
     }
 
     protected Object getMaxClassMetricValue() {
-        rule.maxClassComplexity
+        rule.maxClassAbcScore
     }
 }

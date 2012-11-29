@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 294 rules.
+  <<CodeNarc>> includes 300 rules.
 
     
       
@@ -419,16 +419,31 @@ Rule Index
     * {{{codenarc-rules-formatting.html#LineLength}LineLength}}  
     
       
+    * {{{codenarc-rules-formatting.html#SpaceAfterCatch}SpaceAfterCatch}}  
+    
+      
     * {{{codenarc-rules-formatting.html#SpaceAfterClosingBrace}SpaceAfterClosingBrace}}  
     
       
     * {{{codenarc-rules-formatting.html#SpaceAfterComma}SpaceAfterComma}}  
     
       
+    * {{{codenarc-rules-formatting.html#SpaceAfterFor}SpaceAfterFor}}  
+    
+      
+    * {{{codenarc-rules-formatting.html#SpaceAfterIf}SpaceAfterIf}}  
+    
+      
     * {{{codenarc-rules-formatting.html#SpaceAfterOpeningBrace}SpaceAfterOpeningBrace}}  
     
       
     * {{{codenarc-rules-formatting.html#SpaceAfterSemicolon}SpaceAfterSemicolon}}  
+    
+      
+    * {{{codenarc-rules-formatting.html#SpaceAfterSwitch}SpaceAfterSwitch}}  
+    
+      
+    * {{{codenarc-rules-formatting.html#SpaceAfterWhile}SpaceAfterWhile}}  
     
       
     * {{{codenarc-rules-formatting.html#SpaceAroundOperator}SpaceAroundOperator}}  
@@ -480,7 +495,7 @@ Rule Index
     * {{{codenarc-rules-grails.html#GrailsServletContextReference}GrailsServletContextReference}}  
     
       
-    * {{{codenarc-rules-grails.html#GrailsSessionReference}GrailsSessionReference}}  
+    * {{{codenarc-rules-grails.html#GrailsSessionReference}GrailsSessionReference}}    (DEPRECATED)
     
       
     * {{{codenarc-rules-grails.html#GrailsStatelessService}GrailsStatelessService}}  
@@ -813,13 +828,16 @@ Rule Index
 * {{{codenarc-rules-size.html}Size}}
       
       
-    * {{{codenarc-rules-size.html#AbcComplexity}AbcComplexity}}    (Requires the GMetrics jar)
+    * {{{codenarc-rules-size.html#AbcComplexity}AbcComplexity}}    (DEPRECATED: Use the AbcMetric rule instead. Requires the GMetrics jar)
+    
+      
+    * {{{codenarc-rules-size.html#AbcMetric}AbcMetric}}    (Requires the GMetrics jar)
     
       
     * {{{codenarc-rules-size.html#ClassSize}ClassSize}}  
     
       
-    * {{{codenarc-rules-size.html#CrapMetric}CrapMetric}}  
+    * {{{codenarc-rules-size.html#CrapMetric}CrapMetric}}    (Requires the GMetrics jar and a Cobertura coverage file)
     
       
     * {{{codenarc-rules-size.html#CyclomaticComplexity}CyclomaticComplexity}}    (Requires the GMetrics jar)

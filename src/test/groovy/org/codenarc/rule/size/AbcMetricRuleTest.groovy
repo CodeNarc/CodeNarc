@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,24 +20,19 @@ import org.codenarc.rule.Rule
 import org.junit.Test
 
 /**
- * Tests for AbcComplexityRule
+ * Tests for AbcMetricRule
  *
  * @author Chris Mair
   */
-class AbcComplexityRuleTest extends AbstractRuleTestCase {
-
-    @Test
-    void testDisabledByDefault() {
-        assert !new AbcComplexityRule().enabled
-    }
+class AbcMetricRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'AbcComplexity'
-        assert rule.maxMethodComplexity == 60
-        assert rule.maxClassAverageMethodComplexity == 60
-        assert rule.maxClassComplexity == 0
+        assert rule.name == 'AbcMetric'
+        assert rule.maxMethodAbcScore == 60
+        assert rule.maxClassAverageMethodAbcScore == 60
+        assert rule.maxClassAbcScore == 0
     }
 
     @Test
@@ -62,13 +57,13 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        rule.maxMethodComplexity = 2
-        rule.maxClassAverageMethodComplexity = 2
+        rule.maxMethodAbcScore = 2
+        rule.maxClassAverageMethodAbcScore = 2
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testApplyTo_SingleMethod_ExceedsMaxMethodComplexity() {
+    void testApplyTo_SingleMethod_ExceedsMaxMethodAbcScore() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -76,23 +71,23 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        rule.maxMethodComplexity = 2
+        rule.maxMethodAbcScore = 2
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '3.0'])
     }
 
     @Test
-    void testApplyTo_SingleClosureField_ExceedsMaxMethodComplexity() {
+    void testApplyTo_SingleClosureField_ExceedsMaxMethodAbcScore() {
         final SOURCE = '''
             class MyClass {
                 def myClosure = { a.someMethod(); b.aProperty }
             }
         '''
-        rule.maxMethodComplexity = 1
+        rule.maxMethodAbcScore = 1
         assertSingleViolation(SOURCE, 3, 'def myClosure', ['myClosure', '2.0'])
     }
 
     @Test
-    void testApplyTo_TwoMethodsExceedsMaxMethodComplexity() {
+    void testApplyTo_TwoMethodsExceedsMaxMethodAbcScore() {
         final SOURCE = """
             class MyClass {
                 def myMethod1() {
@@ -106,14 +101,14 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         """
-        rule.maxMethodComplexity = 2
+        rule.maxMethodAbcScore = 2
         assertTwoViolations(SOURCE,
                 3, 'def myMethod1()', ['myMethod1', '3'],
                 9, 'def myMethod3()', ['myMethod3', '7'])
     }
 
     @Test
-    void testApplyTo_Class_ExceedsMaxClassAverageMethodComplexity() {
+    void testApplyTo_Class_ExceedsMaxClassAverageMethodAbcScore() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -121,12 +116,12 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        rule.maxClassAverageMethodComplexity = 5
+        rule.maxClassAverageMethodAbcScore = 5
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
     }
 
     @Test
-    void testApplyTo_Class_ExceedsMaxClassComplexity() {
+    void testApplyTo_Class_ExceedsMaxClassAbcScore() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -134,12 +129,12 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        rule.maxClassComplexity = 5
+        rule.maxClassAbcScore = 5
         assertSingleViolation(SOURCE, 2, 'class MyClass', ['MyClass', '6'])
     }
 
     @Test
-    void testApplyTo_Class_ZeroMaxClassAverageMethodComplexity_NoViolations() {
+    void testApplyTo_Class_ZeroMaxClassAverageMethodAbcScore_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -147,7 +142,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         '''
-        rule.maxClassAverageMethodComplexity = 0
+        rule.maxClassAverageMethodAbcScore = 0
         assertNoViolations(SOURCE)
     }
 
@@ -165,9 +160,9 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 }
             }
         """
-        rule.maxMethodComplexity = 4.5
-        rule.maxClassAverageMethodComplexity = 1.9
-        rule.maxClassComplexity = 6.0
+        rule.maxMethodAbcScore = 4.5
+        rule.maxClassAverageMethodAbcScore = 1.9
+        rule.maxClassAbcScore = 6.0
         assertViolations(SOURCE,
                 [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '2.2']],
                 [lineNumber:2, sourceLineText:'class MyClass', messageText:['MyClass', '6.4']],
@@ -184,7 +179,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.ignoreMethodNames = 'myMethod'
-        rule.maxMethodComplexity = 1
+        rule.maxMethodAbcScore = 1
         assertNoViolations(SOURCE)
     }
 
@@ -198,7 +193,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.ignoreMethodNames = 'otherMethod'
-        rule.maxMethodComplexity = 1
+        rule.maxMethodAbcScore = 1
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
@@ -217,7 +212,7 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.ignoreMethodNames = 'myM*d*,otherC??su*'
-        rule.maxMethodComplexity = 1
+        rule.maxMethodAbcScore = 1
         assertSingleViolation(SOURCE, 6, 'def myClosure', ['myClosure', '3'])
     }
 
@@ -228,8 +223,8 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 a && b && c && d && e && f
             }
         '''
-        rule.maxMethodComplexity = 1
-        rule.maxClassAverageMethodComplexity = 1
+        rule.maxMethodAbcScore = 1
+        rule.maxClassAverageMethodAbcScore = 1
         assertSingleViolation(SOURCE, 2, 'def myMethod()', ['myMethod', '6'])
     }
 
@@ -240,12 +235,12 @@ class AbcComplexityRuleTest extends AbstractRuleTestCase {
                 println a && b && c && d && e
             }
         '''
-        rule.maxMethodComplexity = 1
-        rule.maxClassAverageMethodComplexity = 1
+        rule.maxMethodAbcScore = 1
+        rule.maxClassAverageMethodAbcScore = 1
         assertSingleViolation(SOURCE, null, null, ['run', '6'])
     }
 
     protected Rule createRule() {
-        new AbcComplexityRule(enabled: true)
+        new AbcMetricRule()
     }
 }

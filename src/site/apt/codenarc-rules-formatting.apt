@@ -101,7 +101,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
 
-  Check that there is at least one space (blank) or whitespace after each closing brace ("{") for
+  Check that there is at least one space (blank) or whitespace after each closing brace ("\{") for
   method/class/interface declarations, closure expressions and block statements.
 
   A closure expression followed by a dot operator (.), a comma, a closing parenthesis, the
@@ -163,7 +163,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
 
-  Check that there is at least one space (blank) or whitespace after each opening brace ("{") for
+  Check that there is at least one space (blank) or whitespace after each opening brace ("\{") for
   method/class/interface declarations, closure expressions and block statements.
 
 *---------------------------+------------------------------------------------------------------+------------------------+
@@ -300,7 +300,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
 
-  Check that there is at least one space (blank) or whitespace before each closing brace ("}") for
+  Check that there is at least one space (blank) or whitespace before each closing brace ("\}") for
   method/class/interface declarations, closure expressions and block statements.
 
 *---------------------------+------------------------------------------------------------------+------------------------+
@@ -349,7 +349,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
 
-  Check that there is at least one space (blank) or whitespace before each opening brace ("{") for
+  Check that there is at least one space (blank) or whitespace before each opening brace ("\{") for
   method/class/interface declarations, closure expressions and block statements.
 
 *---------------------------+------------------------------------------------------------------+------------------------+

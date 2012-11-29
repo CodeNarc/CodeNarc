@@ -145,10 +145,15 @@ ruleset {
     BracesForTryCatchFinally 
     ClassJavadoc 
     LineLength 
+    SpaceAfterCatch 
     SpaceAfterClosingBrace 
     SpaceAfterComma 
+    SpaceAfterFor 
+    SpaceAfterIf 
     SpaceAfterOpeningBrace 
     SpaceAfterSemicolon 
+    SpaceAfterSwitch 
+    SpaceAfterWhile 
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 
@@ -166,7 +171,7 @@ ruleset {
     GrailsDomainHasToString 
     GrailsPublicControllerMethod 
     GrailsServletContextReference 
-    GrailsSessionReference 
+    GrailsSessionReference   // DEPRECATED
     GrailsStatelessService 
     
     // rulesets/groovyism.xml
@@ -280,9 +285,10 @@ ruleset {
     SerializableClassMustDefineSerialVersionUID 
     
     // rulesets/size.xml
-    AbcComplexity   // Requires the GMetrics jar
+    AbcComplexity   // DEPRECATED: Use the AbcMetric rule instead. Requires the GMetrics jar
+    AbcMetric   // Requires the GMetrics jar
     ClassSize 
-    CrapMetric 
+    CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file
     CyclomaticComplexity   // Requires the GMetrics jar
     MethodCount 
     MethodSize 

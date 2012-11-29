@@ -4,11 +4,12 @@
         xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
 
     <description>
-        Size rule set.
-        These rules check against thresholds for code size.
+        Size and complexity rule set.
+        These rules check against thresholds for code size and complexity.
     </description>
 
     <rule class='org.codenarc.rule.size.AbcComplexityRule'/>
+    <rule class='org.codenarc.rule.size.AbcMetricRule'/>
     <rule class='org.codenarc.rule.size.ClassSizeRule'/>
     <rule class='org.codenarc.rule.size.CrapMetricRule'/>
     <rule class='org.codenarc.rule.size.CyclomaticComplexityRule'/>
