@@ -17,6 +17,7 @@ package org.codenarc.rule.${ruleCategory}
 
 import org.codenarc.rule.Rule
 import org.junit.Test
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ${ruleName}Rule
