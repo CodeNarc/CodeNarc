@@ -235,6 +235,7 @@ ruleset {
     JUnitTestMethodWithoutAssert 
     JUnitUnnecessarySetUp 
     JUnitUnnecessaryTearDown 
+    JUnitUnnecessaryThrowsException 
     SpockIgnoreRestUsed 
     UnnecessaryFail 
     UseAssertEqualsInsteadOfAssertTrue 

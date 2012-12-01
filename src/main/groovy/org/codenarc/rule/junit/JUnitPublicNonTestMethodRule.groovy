@@ -39,8 +39,8 @@ import java.lang.reflect.Modifier
  * method may accidentally not follow the "test.." naming convention and not have the @Test annotation,
  * and thus be ignored by JUnit.
  * <p/>
- * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
- * paths ending in 'Test.groovy' or 'Tests.groovy'.
+ * This rule sets the default value of the <applyToClassNames> property to only match class names
+ * ending in 'Test', 'Tests' or 'TestCase'.
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy

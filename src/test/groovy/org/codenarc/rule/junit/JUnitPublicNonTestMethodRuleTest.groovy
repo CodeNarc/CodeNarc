@@ -200,13 +200,12 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_NonTestFile() {
+    void testApplyTo_NonTestClass() {
         final SOURCE = '''
             class MyClass {
                 public doSomething() { }
             }
         '''
-        sourceCodePath = 'src/MyController.groovy'
         assertNoViolations(SOURCE)
     }
 

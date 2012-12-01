@@ -117,7 +117,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
             }
         }
 
-        if (!ignore && opEndColumn < line.size()) {
+        if (!ignore && opEndColumn != -1 && opEndColumn < line.size()) {
             def afterChar = line[opEndColumn] as char
             if (!Character.isWhitespace(afterChar)) {
                 addViolation(expression, "The operator \"${expression.operation.text}\" within class $currentClassName is not followed by a space or whitespace")

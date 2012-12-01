@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 300 rules.
+  <<CodeNarc>> includes 301 rules.
 
     
       
@@ -681,6 +681,9 @@ Rule Index
     
       
     * {{{codenarc-rules-junit.html#JUnitUnnecessaryTearDown}JUnitUnnecessaryTearDown}}  
+    
+      
+    * {{{codenarc-rules-junit.html#JUnitUnnecessaryThrowsException}JUnitUnnecessaryThrowsException}}  
     
       
     * {{{codenarc-rules-junit.html#SpockIgnoreRestUsed}SpockIgnoreRestUsed}}  

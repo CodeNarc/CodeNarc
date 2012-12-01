@@ -35,6 +35,7 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
     @Test
     void testAnnotatedMethods_NoThrows_NoViolations() {
         final SOURCE = '''
+        class MyTest {
             @Test
             void shouldDoSomething() { }
 
@@ -42,6 +43,7 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
             @Before void setUp() { }
             @After void tearDown() { }
             @AfterClass void cleanUp() { }
+        }
         '''
         assertNoViolations(SOURCE)
     }
@@ -93,7 +95,7 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
     @Test
     void testStaticMethod_WithThrows_NoViolations() {
         final SOURCE = '''
-            class MyTest extends GroovyTestCase {
+            class MyTestCase extends GroovyTestCase {
                 static void test1() throws RuntimeException { }
             }
         '''
@@ -113,7 +115,9 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
     @Test
     void testNonAnnotatedNonTestMethod_WithThrows_NoViolations() {
         final SOURCE = '''
-            void other1() throws RuntimeException { }
+            class MyTests {
+                void other1() throws RuntimeException { }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -121,6 +125,7 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
     @Test
     void testAnnotatedMethods_ThrowsClauses_Violations() {
         final SOURCE = '''
+        class MyTest {
             @Test
             void shouldDoStuff() throws Exception { }
 
@@ -129,14 +134,15 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
             @After void tearDown() throws Exception { }
             @AfterClass void cleanUp() throws Exception { }
             @Ignore void ignored() throws Exception { }
+        }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void shouldDoStuff() throws Exception { }', messageText:'The shouldDoStuff method in class None'],
-            [lineNumber:5, sourceLineText:'@BeforeClass void initialize() throws RuntimeException { }', messageText:'The initialize method in class None'],
-            [lineNumber:6, sourceLineText:'@Before void setUp() throws Exception { }', messageText:'The setUp method in class None'],
-            [lineNumber:7, sourceLineText:'@After void tearDown() throws Exception { }', messageText:'The tearDown method in class None'],
-            [lineNumber:8, sourceLineText:'@AfterClass void cleanUp() throws Exception { }', messageText:'The cleanUp method in class None'],
-            [lineNumber:9, sourceLineText:'@Ignore void ignored() throws Exception { }', messageText:'The ignored method in class None'])
+            [lineNumber:4, sourceLineText:'void shouldDoStuff() throws Exception { }', messageText:'The shouldDoStuff method in class MyTest'],
+            [lineNumber:6, sourceLineText:'@BeforeClass void initialize() throws RuntimeException { }', messageText:'The initialize method in class MyTest'],
+            [lineNumber:7, sourceLineText:'@Before void setUp() throws Exception { }', messageText:'The setUp method in class MyTest'],
+            [lineNumber:8, sourceLineText:'@After void tearDown() throws Exception { }', messageText:'The tearDown method in class MyTest'],
+            [lineNumber:9, sourceLineText:'@AfterClass void cleanUp() throws Exception { }', messageText:'The cleanUp method in class MyTest'],
+            [lineNumber:10, sourceLineText:'@Ignore void ignored() throws Exception { }', messageText:'The ignored method in class MyTest'])
     }
 
     @Test
@@ -163,6 +169,16 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'void setUp() throws Exception { }', messageText:'The setUp method in class MyTest'],
             [lineNumber:4, sourceLineText:'public void tearDown() throws IOException { }', messageText:'The tearDown method in class MyTest'])
+    }
+
+    @Test
+    void testApplyTo_NonTestClass() {
+        final SOURCE = '''
+            class SomeClass {
+                void test1() throws Exception { }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

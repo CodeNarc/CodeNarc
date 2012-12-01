@@ -8,7 +8,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
 * {ChainedTest} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   A test method that invokes another test method is a chained test; the methods are dependent on one another.
   Tests should be isolated, and not be dependent on one another.
@@ -41,7 +41,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
 * {CoupledTestCase} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test case
   or by creating instances of another test case. If you require shared logic in test cases then extract that logic to a
@@ -248,6 +248,9 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   Check for <<<throws>>> clauses on JUnit test methods. That is not necessary in Groovy.
 
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
+
   Example of violations:
 -------------------------------------------------------------------------------
     @Test
@@ -267,12 +270,71 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
 
 
+* {SpockIgnoreRestUsed} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.14>
+
+  If Spock's @IgnoreRest appears on any method, all non-annotated test methods are not executed. This behaviour is almost always
+  unintended. It's fine to use @IgnoreRest locally during development, but when committing code, it should be removed.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    public class MySpec extends spock.lang.Specification {
+        @spock.lang.IgnoreRest
+        def "my first feature"() {
+            expect: false
+        }
+
+        def "my second feature"() {
+            given: def a = 2
+
+            when: a *= 2
+
+            then: a == 4
+        }
+    }
+-------------------------------------------------------------------------------
+
+
+* {UnnecessaryFail} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.13>
+
+  In a unit test, catching an exception and immediately calling Assert.fail() is pointless and hides the stack trace.
+  It is better to rethrow the exception or not catch the exception at all.
+
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    public void testSomething() {
+        try {
+            something()
+        } catch (Exception e) {
+            fail(e.message)
+        }
+
+        try {
+            something()
+        } catch (Exception e) {
+            fail()
+        }
+    }
+-------------------------------------------------------------------------------
+
+
 * {UseAssertEqualsInsteadOfAssertTrue} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule detects JUnit assertions in object equality. These assertions should be made by more specific methods,
   like <<<assertEquals>>>.
+
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 
 * {UseAssertFalseInsteadOfNegation} Rule
@@ -282,6 +344,9 @@ JUnit Rules  ("<rulesets/junit.xml>")
   In unit tests, if a condition is expected to be false then there is no sense using <<<assertTrue>>> with the negation operator.
   For instance, <<<assertTrue(!condition)>>> can always be simplified to <<<assertFalse(condition)>>>.
 
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
+
 
 * {UseAssertTrueInsteadOfAssertEqualsRule} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -289,6 +354,9 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   This rule detects JUnit calling <<<assertEquals>>> where the first parameter is a boolean. These assertions
   should be made by more specific methods, like <<<assertTrue>>> or <<<assertFalse>>>.
+
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
 
   All of the following examples can be simplified to assertTrue or remove the true literal:
 
@@ -315,12 +383,19 @@ JUnit Rules  ("<rulesets/junit.xml>")
   In unit tests, if a condition is expected to be true then there is no sense using <<<assertFalse>>> with the negation operator.
   For instance, <<<assertFalse(!condition)>>> can always be simplified to <<<assertTrue(condition)>>>.
 
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
+
+
 * {UseAssertNullInsteadOfAssertEquals} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 
   This rule detects JUnit calling <<<assertEquals>>> where the first or second parameter is <<<null>>>.
   These assertion should be made against the <<<assertNull>>> method instead.
+
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 
 * {UseAssertSameInsteadOfAssertTrue} Rule
@@ -331,56 +406,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   is an <<<Object#is()>>> call testing for reference equality. These assertion should be made against the
   <<<assertSame>>> or <<<assertNotSame>>> method instead.
 
-
-* {SpockIgnoreRestUsed} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
-  If Spock's @IgnoreRest appears on any method, all non-annotated test methods are not executed. This behaviour is almost always
-  unintended. It's fine to use @IgnoreRest locally during development, but when committing code, it should be removed.
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-    public class MySpec extends spock.lang.Specification {
-        @spock.lang.IgnoreRest
-        def "my first feature"() {
-            expect: false
-        }
-
-        def "my second feature"() {
-            given: def a = 2
-
-            when: a *= 2
-
-            then: a == 4
-        }
-    }
--------------------------------------------------------------------------------
-
-
-* {UnnecessaryFail} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
-
-  In a unit test, catching an exception and immediately calling Assert.fail() is pointless and hides the stack trace.
-  It is better to rethrow the exception or not catch the exception at all.
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-    public void testSomething() {
-        try {
-            something()
-        } catch (Exception e) {
-            fail(e.message)
-        }
-
-        try {
-            something()
-        } catch (Exception e) {
-            fail()
-        }
-    }
--------------------------------------------------------------------------------
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
 
 

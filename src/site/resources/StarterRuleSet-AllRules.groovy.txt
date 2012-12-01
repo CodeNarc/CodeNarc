@@ -156,6 +156,7 @@ ruleset {
     JUnitTestMethodWithoutAssert 
     JUnitUnnecessarySetUp 
     JUnitUnnecessaryTearDown 
+    JUnitUnnecessaryThrowsException 
     JavaIoPackageAccess 
     JdbcConnectionReference 
     JdbcResultSetReference 
