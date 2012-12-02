@@ -18,8 +18,9 @@ NEW RULES
 - #3589701: New SpaceAfterFor rule. Check that there is exactly one space (blank) after the for keyword and before the opening parenthesis.
 - #3589701: New SpaceAfterSwitch rule. Check that there is exactly one space (blank) after the switch keyword and before the opening parenthesis.
 - #3589701: New SpaceAfterCatch rule. Check that there is exactly one space (blank) after the catch keyword and before the opening parenthesis.
-- #3581377: New JUnitUnnecessaryThrowsException rule (junit) - Check for throws clauses on JUnit test methods. That is not necessary in Groovy.
+- #3581377: New JUnitUnnecessaryThrowsException rule. Check for throws clauses on JUnit test methods. That is not necessary in Groovy.
 - #3575859: New GrailsDuplicateMapping rule. Check for duplicate entry in a domain class mapping.
+- #3575861: New GrailsDuplicateConstraint rule. Check for duplicate constraints entry
 
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.

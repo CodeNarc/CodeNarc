@@ -23,12 +23,34 @@ Grails Rules  ("<rulesets/grails.xml>")
   Ignores classes annotated with <<<@ToString>>> or <<<@Canonical>>>.
 
 
+* {GrailsDuplicateConstraint} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <Since CodeNarc 0.18>
+
+  Check for duplicate entry in a Grails domain class constraints.
+
+  Example of violations:
+-------------------------------------------------------------------------------
+    class Person {
+        String firstName
+        String lastName
+
+        static constraints = {
+            firstName nullable:true
+            lastName nullable:true, maxSize:30
+            firstName nullable:false                // violation
+        }
+    }
+-------------------------------------------------------------------------------
+
+
 * {GrailsDuplicateMapping} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   <Since CodeNarc 0.18>
 
-  Check for duplicate name in a domain class mapping.
+  Check for duplicate name in a Grails domain class mapping.
 
   Example of violations:
 -------------------------------------------------------------------------------
@@ -200,4 +222,5 @@ Grails Rules  ("<rulesets/grails.xml>")
 
   [[2]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
   with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
+
 

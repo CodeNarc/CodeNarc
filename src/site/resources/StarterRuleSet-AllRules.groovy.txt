@@ -124,6 +124,7 @@ ruleset {
     GetterMethodCouldBeProperty 
     GrailsDomainHasEquals 
     GrailsDomainHasToString 
+    GrailsDuplicateConstraint 
     GrailsDuplicateMapping 
     GrailsPublicControllerMethod 
     GrailsServletContextReference 
