@@ -124,6 +124,7 @@ ruleset {
     GetterMethodCouldBeProperty 
     GrailsDomainHasEquals 
     GrailsDomainHasToString 
+    GrailsDuplicateMapping 
     GrailsPublicControllerMethod 
     GrailsServletContextReference 
     GrailsSessionReference   // DEPRECATED

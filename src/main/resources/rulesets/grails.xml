@@ -8,11 +8,11 @@
         These rules implement standards and best practices related to the Grails framework (http://grails.org).
     </description>
 
-    <rule class='org.codenarc.rule.grails.GrailsPublicControllerMethodRule'/>
-    <rule class='org.codenarc.rule.grails.GrailsSessionReferenceRule'/>
-    <rule class='org.codenarc.rule.grails.GrailsServletContextReferenceRule'/>
-    <rule class='org.codenarc.rule.grails.GrailsStatelessServiceRule'/>
-
     <rule class='org.codenarc.rule.grails.GrailsDomainHasEqualsRule'/>
     <rule class='org.codenarc.rule.grails.GrailsDomainHasToStringRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsDuplicateMappingRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsPublicControllerMethodRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsServletContextReferenceRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsSessionReferenceRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsStatelessServiceRule'/>
 </ruleset>

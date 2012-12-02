@@ -23,6 +23,30 @@ Grails Rules  ("<rulesets/grails.xml>")
   Ignores classes annotated with <<<@ToString>>> or <<<@Canonical>>>.
 
 
+* {GrailsDuplicateMapping} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <Since CodeNarc 0.18>
+
+  Check for duplicate name in a domain class mapping.
+
+  Example of violations:
+-------------------------------------------------------------------------------
+    class Person {
+        String firstName
+        String lastName
+
+        static mapping = {
+            table 'people'
+            firstName column: 'First_Name'
+            lastName column: 'Last_Name'
+            firstName column: 'First_Name'      // violation
+            table 'people2'                     // violation
+        }
+    }
+-------------------------------------------------------------------------------
+
+
 * {GrailsPublicControllerMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
