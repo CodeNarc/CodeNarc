@@ -26,6 +26,7 @@ import org.codehaus.groovy.ast.FieldNode
  * @author Chris Mair
  */
 class GrailsDuplicateMappingRule extends AbstractAstVisitorRule {
+
     String name = 'GrailsDuplicateMapping'
     int priority = 2
     Class astVisitorClass = GrailsDuplicateMappingAstVisitor
@@ -41,8 +42,9 @@ class GrailsDuplicateMappingAstVisitor extends AbstractAstVisitor {
     void visitField(FieldNode node) {
         if (node.name == 'mapping') {
             withinMapping = true
+            super.visitField(node)
+            withinMapping = false
         }
-        super.visitField(node)
     }
 
     @Override
@@ -55,7 +57,11 @@ class GrailsDuplicateMappingAstVisitor extends AbstractAstVisitor {
             else {
                 mappingNames << name
             }
+
+            // Process optional nested columns closure
+            if (name == 'columns') {
+                super.visitMethodCallExpression(call)
+            }
         }
-        super.visitMethodCallExpression(call)
     }
 }

@@ -115,6 +115,41 @@ class GrailsDuplicateMappingRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testMappingsAndConstraints_NoViolation() {
+        final SOURCE = '''
+            class Person {
+                String firstName
+                static mapping = {
+                    columns {
+                        firstName column: 'First_Name'
+                    }
+                }
+                static constraints = {
+                    firstName nullable:true
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testMappings_ContainsMethodCalls_NoViolation() {
+        final SOURCE = '''
+            class Person {
+                String firstName
+                String lastName
+                static mapping = {
+                    columns {
+                        firstName column: buildColumnName(1)
+                        lastName column: buildColumnName(2)
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testNotDomainClass_DuplicateMappings_NoViolation() {
         final SOURCE = '''
             class Person {

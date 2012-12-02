@@ -26,6 +26,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
  * @author Chris Mair
  */
 class GrailsDuplicateConstraintRule extends AbstractAstVisitorRule {
+
     String name = 'GrailsDuplicateConstraint'
     int priority = 2
     Class astVisitorClass = GrailsDuplicateConstraintAstVisitor
@@ -41,8 +42,9 @@ class GrailsDuplicateConstraintAstVisitor extends AbstractAstVisitor {
     void visitField(FieldNode node) {
         if (node.name == 'constraints') {
             withinConstraint = true
+            super.visitField(node)
+            withinConstraint = false
         }
-        super.visitField(node)
     }
 
     @Override
@@ -56,6 +58,5 @@ class GrailsDuplicateConstraintAstVisitor extends AbstractAstVisitor {
                 constraintNames << name
             }
         }
-        super.visitMethodCallExpression(call)
     }
 }
