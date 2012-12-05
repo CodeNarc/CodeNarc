@@ -68,6 +68,24 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
 
 
+* {IfStatementCouldBeTernary} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.18>
+
+  Checks for <<<if>>> statements where both the <<<if>>> and <<<else>>> blocks contain only a single <<<return>>>
+  statement with a value.
+
+  Example of violations:
+-------------------------------------------------------------------------------
+    if (condition) { return 44 } else { return 'yes' }                  // violation
+    if (check()) { return doStuff() } else { return "count=$count" }    // violation
+
+    if (condition)                                                      // violation
+        return 44
+    else return 55
+-------------------------------------------------------------------------------
+
+
 * {InvertedIfElse} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -163,3 +181,4 @@ x ?: 'some value'
 -------------------------------------------------------------------------------
     def myList = new Vector()           // violation
 -------------------------------------------------------------------------------
+

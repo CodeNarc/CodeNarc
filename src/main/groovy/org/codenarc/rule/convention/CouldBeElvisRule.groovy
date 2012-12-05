@@ -15,8 +15,6 @@
  */
 package org.codenarc.rule.convention
 
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.NotExpression
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -27,6 +25,7 @@ import org.codenarc.util.AstUtil
  * Catch an if block that could be written as an elvis expression.
  *
  * @author GUM
+ * @author Chris Mair
  */
 class CouldBeElvisRule extends AbstractAstVisitorRule {
 
@@ -57,19 +56,11 @@ class CouldBeElvisAstVisitor extends AbstractAstVisitor {
 
                 // space check is a safe guard against crazy ass AST getText() implementations
                 if (conditionalText == leftAssignText && !conditionalText.contains(' ')) {
-                    def rightText = createPrettyExpression(bodyOfIfStatement.rightExpression)
+                    def rightText = AstUtil.createPrettyExpression(bodyOfIfStatement.rightExpression)
                     def rewrite = "$leftAssignText = $leftAssignText ?: $rightText "
                     addViolation(node, "Code could use elvis operator: $rewrite")
                 }
             }
-        }
-    }
-
-    private static createPrettyExpression(ASTNode expression) {
-        if (expression instanceof ConstantExpression && expression.value instanceof String) {
-            "'$expression.text'"
-        } else {
-            expression.text
         }
     }
 

@@ -1166,4 +1166,15 @@ public class AstUtil {
         }
         return acc;
     }
+
+    public static String createPrettyExpression(ASTNode expression) {
+        if (expression instanceof ConstantExpression && ((ConstantExpression) expression).getValue() instanceof String) {
+            return "'" + expression.getText() + "'";
+        }
+        if (expression instanceof GStringExpression) {
+            return "\"" + expression.getText() + "\"";
+        }
+        return expression.getText();
+    }
+
 }

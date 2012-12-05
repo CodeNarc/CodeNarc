@@ -21,6 +21,7 @@ NEW RULES
 - #3581377: New JUnitUnnecessaryThrowsException rule. Check for throws clauses on JUnit test methods. That is not necessary in Groovy.
 - #3575859: New GrailsDuplicateMapping rule. Check for duplicate entry in a domain class mapping.
 - #3575861: New GrailsDuplicateConstraint rule. Check for duplicate constraints entry
+- #3592678: New IfStatementCouldBeTernary rule - Checks for if statements where both the if and else blocks contain only a single return statement with a value
 
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.

@@ -135,6 +135,7 @@ ruleset {
     HardCodedWindowsRootDirectory 
     HashtableIsObsolete 
     IfStatementBraces 
+    IfStatementCouldBeTernary 
     IllegalClassReference 
     IllegalPackageReference 
     IllegalRegex 

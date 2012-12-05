@@ -11,6 +11,7 @@
     <rule class='org.codenarc.rule.convention.ConfusingTernaryRule'/>
     <rule class='org.codenarc.rule.convention.CouldBeElvisRule'/>
     <rule class='org.codenarc.rule.convention.HashtableIsObsoleteRule'/>
+    <rule class='org.codenarc.rule.convention.IfStatementCouldBeTernaryRule'/>
     <rule class='org.codenarc.rule.convention.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.convention.LongLiteralWithLowerCaseLRule'/>
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>

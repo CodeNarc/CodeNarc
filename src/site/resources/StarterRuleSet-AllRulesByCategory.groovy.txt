@@ -86,6 +86,7 @@ ruleset {
     ConfusingTernary 
     CouldBeElvis 
     HashtableIsObsolete 
+    IfStatementCouldBeTernary 
     InvertedIfElse 
     LongLiteralWithLowerCaseL 
     ParameterReassignment 
