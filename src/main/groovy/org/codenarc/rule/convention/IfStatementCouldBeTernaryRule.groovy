@@ -40,7 +40,7 @@ class IfStatementCouldBeTernaryAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitIfElse(IfStatement ifElse) {
-        if (isOnlyReturnStatement(ifElse.ifBlock) && isOnlyReturnStatement(ifElse.elseBlock)) {
+        if (isFirstVisit(ifElse) && isOnlyReturnStatement(ifElse.ifBlock) && isOnlyReturnStatement(ifElse.elseBlock)) {
             def ternaryExpression = "return ${ifElse.booleanExpression.text} ? ${getReturnValue(ifElse.ifBlock)} : ${getReturnValue(ifElse.elseBlock)}"
             addViolation(ifElse, "The if statement in class $currentClassName can be rewritten using the ternary operator: $ternaryExpression")
         }

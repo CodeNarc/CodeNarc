@@ -144,6 +144,25 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
             [lineNumber:2, sourceLineText:'if (condition)', messageText:'The if statement in class None can be rewritten using the ternary'])
     }
 
+    @Test
+    void testMatchingIfElseWithinClosure_Violation() {
+        final SOURCE = '''
+            class MyDomain {
+                static constraints = {
+                    registrationState(nullable: true, validator: { val, obj ->
+                        if (val) {
+                            return (val in STATES)
+                        } else {
+                            return true
+                        }
+                    })
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:5, sourceLineText:'if (val) {', messageText:'The if statement in class MyDomain can be rewritten using the ternary'])
+    }
+
     protected Rule createRule() {
         new IfStatementCouldBeTernaryRule()
     }
