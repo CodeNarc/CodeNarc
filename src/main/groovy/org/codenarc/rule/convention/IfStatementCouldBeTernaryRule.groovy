@@ -21,8 +21,8 @@ import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codenarc.util.AstUtil
+import org.codehaus.groovy.ast.expr.GStringExpression
 
 /**
  * Checks for if statements where both the if and else blocks contain only a single return statement with a value
@@ -48,22 +48,18 @@ class IfStatementCouldBeTernaryAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isOnlyReturnStatement(ASTNode node) {
-        isBlockWithSingleReturnStatement(node) || isReturnStatementWithValue(node)
+        isBlockWithSingleReturnStatement(node) || isReturnStatementWithConstantOrLiteralValue(node)
     }
 
     private boolean isBlockWithSingleReturnStatement(ASTNode node) {
         return node instanceof BlockStatement &&
             node.statements.size() == 1 &&
-            isReturnStatementWithValue(node.statements[0])
+            isReturnStatementWithConstantOrLiteralValue(node.statements[0])
     }
 
-    private boolean isReturnStatementWithValue(ASTNode node) {
+    private boolean isReturnStatementWithConstantOrLiteralValue(ASTNode node) {
         return node instanceof ReturnStatement &&
-            !isNullValue(node.expression)
-    }
-
-    private boolean isNullValue(expression) {
-        expression instanceof ConstantExpression && expression.isNullExpression()
+            (AstUtil.isConstantOrLiteral(node.expression) || node.expression instanceof GStringExpression)
     }
 
     private String getReturnValue(ASTNode node) {

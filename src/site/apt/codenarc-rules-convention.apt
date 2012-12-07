@@ -73,16 +73,16 @@ x ?: 'some value'
   <Since CodeNarc 0.18>
 
   Checks for <<<if>>> statements where both the <<<if>>> and <<<else>>> blocks contain only a single <<<return>>>
-  statement with a value.
+  statement returning a constant or literal value.
 
   Example of violations:
 -------------------------------------------------------------------------------
     if (condition) { return 44 } else { return 'yes' }                  // violation
-    if (check()) { return doStuff() } else { return "count=$count" }    // violation
+    if (check()) { return [1, 2] } else { return "count=$count" }       // violation
 
     if (condition)                                                      // violation
-        return 44
-    else return 55
+        return null
+    else return [a:1]
 -------------------------------------------------------------------------------
 
 

@@ -55,7 +55,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     void testIfNoReturn_NoViolations() {
         final SOURCE = '''
             if (condition) {
-                doStuff()
+                [a:1]
         	} else { return 55 }
         '''
         assertNoViolations(SOURCE)
@@ -66,7 +66,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             if (condition) {
                 return 44
-        	} else { doStuff() }
+        	} else { 99 }
         '''
         assertNoViolations(SOURCE)
     }
@@ -85,24 +85,12 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testIfReturnWithoutValue_NoViolations() {
+    void testReturnNotConstantOrLiteral_NoViolations() {
         final SOURCE = '''
             if (condition) {
-        	    return
+        	    return doStuff()
         	} else {
-        	    return 55
-        	}
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void testElseReturnWithoutValue_NoViolations() {
-        final SOURCE = '''
-            if (condition) {
-        	    return 44
-        	} else {
-        	    return
+        	    return condition
         	}
         '''
         assertNoViolations(SOURCE)
@@ -124,13 +112,22 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     void testMatchingIfElse_Violation() {
         final SOURCE = '''
              if (condition) { return 44 } else { return 'yes' }
-             if (check()) { return doStuff() } else { return "count=$count" }
+             if (check()) { return [a:1] } else { return "count=$count" }
+             if (x + y - z) { return [1, 2, 3] } else { return 99.50 }
+             if (other.name()) { return null } else { return false }
+             if (x) { return } else { return Boolean.FALSE }
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:"if (condition) { return 44 } else { return 'yes' }",
                 messageText:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
-            [lineNumber:3, sourceLineText:'if (check()) { return doStuff() } else { return "count=$count" }',
-                messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? this.doStuff() : "count=$count"'])
+            [lineNumber:3, sourceLineText:'if (check()) { return [a:1] } else { return "count=$count" }',
+                messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? [a:1] : "count=$count"'],
+            [lineNumber:4, sourceLineText:'if (x + y - z) { return [1, 2, 3] } else { return 99.50 }',
+                messageText:'The if statement in class None can be rewritten using the ternary operator: return ((x + y) - z) ? [1, 2, 3] : 99.50'],
+            [lineNumber:5, sourceLineText:'if (other.name()) { return null } else { return false }',
+                messageText:'The if statement in class None can be rewritten using the ternary operator: return other.name() ? null : false'],
+            [lineNumber:6, sourceLineText:'if (x) { return } else { return Boolean.FALSE }',
+                messageText:'The if statement in class None can be rewritten using the ternary operator: return x ? null : Boolean.FALSE'])
     }
 
     @Test
@@ -151,7 +148,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
                 static constraints = {
                     registrationState(nullable: true, validator: { val, obj ->
                         if (val) {
-                            return (val in STATES)
+                            return false
                         } else {
                             return true
                         }
