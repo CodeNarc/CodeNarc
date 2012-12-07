@@ -73,6 +73,17 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_ClassDeclarationOnMultipleLines_Violation() {
+        final SOURCE = '''
+// starts at leftmost column
+class MyTest
+     extends AbstractTest implements ManualTest {
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_InterfaceDeclaration_Violation() {
         final SOURCE = '''
             interface MyInterface {static final COUNT = 1 }

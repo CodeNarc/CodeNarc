@@ -45,7 +45,7 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     protected void visitClassEx(ClassNode node) {
         def line = sourceLineOrEmpty(node)
         def indexOfBrace = line.indexOf('{')
-        if (isNotWhitespace(line, indexOfBrace + 2)) {
+        if (indexOfBrace != -1 && isNotWhitespace(line, indexOfBrace + 2)) {
             def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
             addViolation(node, "The opening brace for $typeName $currentClassName is not followed by a space or whitespace")
         }
