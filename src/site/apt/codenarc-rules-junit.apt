@@ -252,6 +252,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     @Test
     void shouldDoStuff() throws Exception { }           // violation

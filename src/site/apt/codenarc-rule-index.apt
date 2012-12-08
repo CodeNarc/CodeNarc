@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 304 rules.
+  <<CodeNarc>> includes 305 rules.
 
     
       
@@ -370,6 +370,9 @@ Rule Index
     
       
     * {{{codenarc-rules-exceptions.html#ExceptionExtendsError}ExceptionExtendsError}}  
+    
+      
+    * {{{codenarc-rules-exceptions.html#ExceptionNotThrown}ExceptionNotThrown}}  
     
       
     * {{{codenarc-rules-exceptions.html#MissingNewInThrowStatement}MissingNewInThrowStatement}}  

@@ -129,6 +129,7 @@ ruleset {
     CatchThrowable 
     ConfusingClassNamedException 
     ExceptionExtendsError 
+    ExceptionNotThrown 
     MissingNewInThrowStatement 
     ReturnNullFromCatchBlock 
     SwallowThreadDeath 

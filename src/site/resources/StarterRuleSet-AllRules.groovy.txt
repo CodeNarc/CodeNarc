@@ -92,6 +92,7 @@ ruleset {
     EqualsAndHashCode 
     EqualsOverloaded 
     ExceptionExtendsError 
+    ExceptionNotThrown 
     ExplicitArrayListInstantiation 
     ExplicitCallToAndMethod 
     ExplicitCallToCompareToMethod 

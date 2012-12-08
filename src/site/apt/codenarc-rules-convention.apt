@@ -76,6 +76,7 @@ x ?: 'some value'
   statement returning a constant or literal value.
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     if (condition) { return 44 } else { return 'yes' }                  // violation
     if (check()) { return [1, 2] } else { return "count=$count" }       // violation

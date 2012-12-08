@@ -22,6 +22,7 @@ NEW RULES
 - #3575859: New GrailsDuplicateMapping rule. Check for duplicate entry in a domain class mapping.
 - #3575861: New GrailsDuplicateConstraint rule. Check for duplicate constraints entry
 - #3592678: New IfStatementCouldBeTernary rule - Checks for if statements where both the if and else blocks contain only a single return statement with a value
+- #3581378: New ExceptionNotThrown rule - Checks for an exception constructor call without a throw as the last statement within a catch block.
 
 UPDATED/ENHANCED RULES
 - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.

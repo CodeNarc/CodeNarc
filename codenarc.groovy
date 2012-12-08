@@ -87,6 +87,7 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
   $ruleDescription
 
   Example of violations:
+
 -------------------------------------------------------------------------------
     // TODO: Add examples
 -------------------------------------------------------------------------------
