@@ -43,6 +43,20 @@ class SpaceAfterIfRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_SyntheticIf_NoViolations() {
+        final SOURCE = '''
+            enum MavenScope {
+                COMPILE,
+                RUNTIME,
+                TEST,
+                PROVIDED,
+                SYSTEM
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_IfWithoutSingleSpace_Violation() {
         final SOURCE = '''
             if(true) { }
