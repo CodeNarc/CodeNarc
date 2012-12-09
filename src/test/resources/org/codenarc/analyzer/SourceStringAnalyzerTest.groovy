@@ -4,6 +4,7 @@ import org.codenarc.results.Results
 import org.codenarc.rule.naming.ClassNameRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.Test
 
 /**
  * Test for SourceStringAnalyzer.
@@ -11,6 +12,7 @@ import org.codenarc.test.AbstractTestCase
  */
 class SourceStringAnalyzerTest extends AbstractTestCase {
 
+    @Test
     void testRunAgainstString() {
         def source = '''
             class badName { }
