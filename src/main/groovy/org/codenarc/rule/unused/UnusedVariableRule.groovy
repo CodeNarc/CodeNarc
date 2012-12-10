@@ -26,6 +26,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
+import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks for variables that are not referenced.
@@ -36,6 +37,7 @@ import org.codenarc.util.AstUtil
 class UnusedVariableRule extends AbstractAstVisitorRule {
     String name = 'UnusedVariable'
     int priority = 2
+    String ignoreVariableNames
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
@@ -94,7 +96,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         super.visitBlockStatement(block)
 
         variablesInCurrentBlockScope.each { varExpression, isUsed ->
-            if (!isUsed && !anonymousReferences.contains(varExpression.name)) {
+            if (!isIgnoredVariable(varExpression) && !isUsed && !anonymousReferences.contains(varExpression.name)) {
                 addViolation(varExpression, "The variable [${varExpression.name}] in class $currentClassName is not used")
             }
         }
@@ -132,5 +134,9 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
                 }
             }
         }
+    }
+
+    private boolean isIgnoredVariable(VariableExpression expression) {
+        new WildcardPattern(rule.ignoreVariableNames, false).matches(expression.name)
     }
 }
