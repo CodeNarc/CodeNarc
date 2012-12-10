@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package org.codenarc
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.XmlReportWriter
-import org.codenarc.results.FileResults
 import org.codenarc.test.AbstractTestCase
 import org.junit.After
 import org.junit.Before
@@ -36,15 +35,13 @@ class CodeNarcTest extends AbstractTestCase {
     static final BASE_DIR = 'src/test/resources'
     static final BASIC_RULESET = 'rulesets/basic.xml'
     static final RULESET1 = 'rulesets/RuleSet1.xml'
-    static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
     static final INCLUDES = 'sourcewithdirs/**/*.groovy'
     static final EXCLUDES = '**/*File2.groovy'
     static final TITLE = 'My Title'
-    static final HTML_REPORT_FILE = 'CodeNarcTest-Report.html'
+    static final HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
     static final HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
     static final XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
     static final XML_REPORT_STR = "xml:$XML_REPORT_FILE"
-    static final RESULTS = new FileResults('path', [])
 
     private codeNarc
     private outputFile
