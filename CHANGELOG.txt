@@ -29,6 +29,7 @@ UPDATED/ENHANCED RULES
 - #3521130: PrintStackTrace: Also check for StackTraceUtils.printSanitizedStackTrace().
 - #3589971: Add threshold for max class metric value for CyclomaticComplexity, AbcMetric and CrapMetric.
 - #3574257: Rename AbcComplexity rule to AbcMetric. Deprecate old AbcComplexity rule and set enabled=false. Rename properties, e.g. maxMethodAbcScore.
+- Pull request #5: Enhanced UnusedVariableRule to enable ignoring some variables (ignoreVariableNames). Thanks to René Scheibe.
 
 BUG FIXES
 - Fix #3555096: UnusedPrivateMethod - StringIndexOutOfBoundsException for zero-length method name.
