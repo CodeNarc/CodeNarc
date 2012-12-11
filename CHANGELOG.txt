@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.18 (??? 2012 )
+Changes in version 0.18 (Dec 2012 )
 -------------------------------------------
 NEW RULES
 - #3531554: New JUnitLostTest rule. Checks for classes that import JUnit 4 classes and contain a public, instance, void, no-arg method named test* that is not annotated with @Test.

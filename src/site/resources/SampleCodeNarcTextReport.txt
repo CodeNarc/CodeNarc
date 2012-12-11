@@ -1,4 +1,4 @@
-CodeNarc Report: Sample Project - Mar 23, 2012 5:51:18 PM
+CodeNarc Report: Sample Project - Dec 9, 2012 8:02:02 PM
 
 Summary: TotalFiles=7 FilesWithViolations=4 P1=0 P2=9 P3=3
 
@@ -22,4 +22,4 @@ File: org/codenarc/sample/service/SampleService.groovy
     Violation: Rule=ThrowExceptionFromFinallyBlock P=2 Line=30 Msg=[Throwing an exception from a finally block can hide an underlying error] Src=[throw new Exception('bad stuff')]
     Violation: Rule=UnusedImport P=3 Line=3 Msg=[The [org.codenarc.sample.domain.SampleDomain] import is never referenced] Src=[import org.codenarc.sample.domain.SampleDomain]
 
-[CodeNarc (http://www.codenarc.org) v0.17]
+[CodeNarc (http://www.codenarc.org) v0.18]

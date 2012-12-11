@@ -63,7 +63,7 @@
 
         <menu name="Sample Reports">
             <item name="Sample HTML Report" href="/SampleCodeNarcHtmlReport.html"/>
-            <item name="Open Source Projects" href="/codenarc-opensource-projects.html"/>
+            <item name="Sample XML Report" href="/SampleCodeNarcXmlReport.xml"/>
         </menu>
 
         <menu name="Rules">
