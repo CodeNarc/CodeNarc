@@ -94,8 +94,14 @@ c        '''
             def myMethod(){ }
             def otherMethod()
             { }     // opening brace on separate line; no violation
+
+            int putBulkAccountInfo(List<Map> jsonObject){
+                doStuff()
+            }
         '''
-        assertSingleViolation(SOURCE, 2, 'def myMethod(){ }', BLOCK_VIOLATION_MESSAGE)
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'def myMethod(){ }', messageText:'The opening brace for the method'],
+            [lineNumber:6, sourceLineText:'int putBulkAccountInfo(List<Map> jsonObject){', messageText:'The opening brace for the method'] )
     }
 
     @Test
@@ -109,8 +115,8 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass(){ }', messageText:'The opening brace for the block in class MyClass'],
-            [lineNumber:4, sourceLineText:'MyClass(int num){', messageText:'The opening brace for the block in class MyClass'])
+            [lineNumber:3, sourceLineText:'MyClass(){ }', messageText:'The opening brace for the constructor in class MyClass'],
+            [lineNumber:4, sourceLineText:'MyClass(int num){', messageText:'The opening brace for the constructor in class MyClass'])
     }
 
     @Test

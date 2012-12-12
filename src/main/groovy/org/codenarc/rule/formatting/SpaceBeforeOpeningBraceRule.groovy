@@ -23,6 +23,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.ConstructorNode
+import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Check that there is at least one space (blank) or whitespace before each opening brace ("{").
@@ -54,16 +55,24 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     }
 
     @Override
-    void visitConstructor(ConstructorNode node) {
-        // The AST for constructors is "special". The BlockStatement begins on the line following the
-        // opening brace if it is a multi-line method. Bug?
+    protected void visitMethodEx(MethodNode node) {
+        processMethodNode(node, 'method')
+        super.visitMethodEx(node)
+    }
 
-        isFirstVisit(node.code)   // Register the code block so that it will be ignored in visitBlockStatement()
-        def line = sourceLineOrEmpty(node)
-        if (line.contains('){')) {
-            addOpeningBraceViolation(node, 'block')
-        }
+    @Override
+    void visitConstructor(ConstructorNode node) {
+        processMethodNode(node, 'constructor')
         super.visitConstructor(node)
+    }
+
+    private void processMethodNode(MethodNode node, String keyword) {
+        if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
+            def line = sourceLineOrEmpty(node)
+            if (line.contains('){')) {
+                addOpeningBraceViolation(node, keyword)
+            }
+        }
     }
 
     @Override
