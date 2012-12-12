@@ -10,18 +10,23 @@
         The CodeNarc project provides a static analysis tool for Groovy code.
     </description>
     <packaging>jar</packaging>
-    <version>0.18</version>
+    <version>0.18-SNAPSHOT</version>
     <url>http://codenarc.sourceforge.net/</url>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <properties>
         <targetJdk>1.5</targetJdk> <!-- Necessary for PMD plugin -->
     </properties>
 
     <scm>
-        <connection>scm:svn:https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk</connection>
-        <developerConnection>scm:svn:https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk
-        </developerConnection>
-        <url>https://codenarc.svn.sourceforge.net/svnroot/codenarc</url>
+        <connection>scm:git:git@github.com:CodeNarc/CodeNarc.git</connection>
+        <url>scm:git:git@github.com:CodeNarc/CodeNarc.git</url>
+        <developerConnection>scm:git:git@github.com:CodeNarc/CodeNarc.git</developerConnection>
     </scm>
 
     <dependencies>
@@ -65,14 +70,6 @@
          </dependency>
 
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>sourceforge</id>
-            <url>sftp://web.sourceforge.net/home/groups/c/co/codenarc/htdocs/m2repo</url>
-            <!-- <url>scp://shell.sourceforge.net/home/groups/c/co/codenarc/htdocs/m2repo</url> -->
-        </repository>
-    </distributionManagement>
 
     <build>
         <plugins>
@@ -138,12 +135,31 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptors>
                         <descriptor>src/assembly/assembly.xml</descriptor>
                     </descriptors>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.0-beta-9</version>
             </plugin>
 
         </plugins>
@@ -188,6 +204,19 @@
 
         </plugins>
     </reporting>
+
+    <developers>
+        <developer>
+            <id>chrismair</id>
+            <name>Chris Mair</name>
+            <email>chrismair@users.sourceforge.net</email>
+            <url>https://sourceforge.net/users/chrismair</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>-4</timezone>
+        </developer>
+    </developers>
 
     <licenses>
         <license>

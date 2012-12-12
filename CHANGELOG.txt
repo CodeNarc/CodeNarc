@@ -40,7 +40,7 @@ BUG FIXES
 - Fix #3543848: Online docs; formatting on Naming rules doc.
 - Fix #3441842: Online docs; UnnecessarySubstring documentation is misleading.
 - Fix #3511004: PrivateFieldCouldBeFinal false positive (-- and ++ operators).
-- Pull request #4: parseReport doesn't work with absolute paths on windows. Thanks to Gavin Matthews.
+- Fix Pull request #4: parseReport doesn't work with absolute paths on windows. Thanks to Gavin Matthews.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.
@@ -49,6 +49,7 @@ FRAMEWORK AND INFRASTRUCTURE
 - #3578909: Upgrade tests and test framework to JUnit 4.
 - #3578909: Move test framework classes into src/main/groovy, so that they are included in the CodeNarc jar:
             AbstractTestCase, InMemoryAppender, TestUtil, AbstractRuleTestCase, StubRule
+- Switch to Sonatype OSS Maven Repository
 
 
 Changes in version 0.17 (March 2012)
