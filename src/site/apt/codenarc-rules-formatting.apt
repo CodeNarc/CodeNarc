@@ -296,7 +296,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
   * Does not catch violations of missing space around equals operator (=) within a declaration expression, e.g.  <<<def x=23>>>
 
-  * Does not catch violations of certain ternary expressions.
+  * Does not catch violations of certain ternary expressions and standalone elvis operator (?:) expressions
 
   []
 

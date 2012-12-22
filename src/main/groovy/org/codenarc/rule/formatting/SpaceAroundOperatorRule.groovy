@@ -59,11 +59,13 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitTernaryExpression(TernaryExpression expression) {
-        if (expression instanceof ElvisOperatorExpression) {
-            processElvisExpression(expression)
-        }
-        else {
-            processTernaryExpression(expression)
+        if (isFirstVisit(expression)) {
+            if (expression instanceof ElvisOperatorExpression) {
+                processElvisExpression(expression)
+            }
+            else {
+                processTernaryExpression(expression)
+            }
         }
         super.visitTernaryExpression(expression)
     }
@@ -91,9 +93,14 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private void processElvisExpression(ElvisOperatorExpression expression) {
-        if (expression.columnNumber == rightMostColumn(expression.trueExpression)) {
+        def line = sourceCode.lines[expression.lineNumber - 1]
+        def beforeChar = line[expression.columnNumber - 2] as char
+
+        // Known limitation: standalone elvis expression has messed up columnNumber/lastColumnNumber
+        if (expression.lastColumnNumber == expression.columnNumber + 2 && !Character.isWhitespace(beforeChar)) {
             addViolation(expression, "The operator \"?:\" within class $currentClassName is not preceded by a space or whitespace")
         }
+
         if (expression.lastColumnNumber == leftMostColumn(expression.falseExpression)) {
             addViolation(expression, "The operator \"?:\" within class $currentClassName is not followed by a space or whitespace")
         }

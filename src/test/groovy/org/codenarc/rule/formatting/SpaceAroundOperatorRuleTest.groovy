@@ -65,6 +65,18 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_OperatorFollowingClosure() {
+        final SOURCE = '''
+            class MyClass {
+                def order1 = existingFunds.collect {it.fundSortOrder} ?: []
+                def order2 = existingFunds.collect {it.fundSortOrder} ? [1] : [2]
+                def order3 = { 23 } << { 37}
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
         final SOURCE = '''
             class MyClass {
@@ -164,12 +176,24 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 def myMethod() {
                     def greeting = fullname?:'you'
+                    def f = funds.collect {it.fundSortOrder}?:[]
                 }
             }
         '''
         assertViolations(SOURCE,
             [lineNumber:4, sourceLineText:"def greeting = fullname?:'you'", messageText:'The operator "?:" within class MyClass is not preceded'],
-            [lineNumber:4, sourceLineText:"def greeting = fullname?:'you'", messageText:'The operator "?:" within class MyClass is not followed'])
+            [lineNumber:4, sourceLineText:"def greeting = fullname?:'you'", messageText:'The operator "?:" within class MyClass is not followed'],
+            [lineNumber:5, sourceLineText:'def f = funds.collect {it.fundSortOrder}?:[]', messageText:'The operator "?:" within class MyClass is not preceded'],
+            [lineNumber:5, sourceLineText:'def f = funds.collect {it.fundSortOrder}?:[]', messageText:'The operator "?:" within class MyClass is not followed'])
+    }
+
+    @Test
+    void testApplyTo_StandaloneElvisOperatorExpression_KnownIssue_NoViolations() {
+        final SOURCE = '''
+            funds.collect {it.fundSortOrder}?:[]
+            /*comment*/f?:0
+        '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
