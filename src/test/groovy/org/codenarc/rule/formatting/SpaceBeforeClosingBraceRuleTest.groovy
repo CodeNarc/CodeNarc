@@ -212,6 +212,14 @@ c        '''
     }
 
     @Test
+    void testApplyTo_Closure_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+        final SOURCE = '''
+            list.each { name -> doStuff('\\u00A0')}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
         final SOURCE = '''
             def m = [a:123, b: { println 7}]

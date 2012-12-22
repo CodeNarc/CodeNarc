@@ -65,6 +65,20 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+        final SOURCE = '''
+            class MyClass {
+                def mapping = myService.findAllMappings(0)?.collect { domain ->
+                  [description: countryCode?.padRight(6, '\\u00A0')+ domain.countryName]
+                }
+
+                String myString = ready ? '\\u00A0': 'error'+'99'
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_IgnoreUnaryOperators_NoViolations() {
         final SOURCE = '''
             doStuff(x++, y--, -x, +y, !ready, x?.name)

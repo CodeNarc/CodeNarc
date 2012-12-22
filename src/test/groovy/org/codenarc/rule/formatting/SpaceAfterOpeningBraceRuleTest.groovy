@@ -224,6 +224,14 @@ c        '''
     }
 
     @Test
+    void testApplyTo_UnicodeCharacterLiteral() {
+        final SOURCE = '''
+            if (valid('\\u00A0')) {println 9 }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
         final SOURCE = '''
             def m = [a:123, b: {println 7 }]

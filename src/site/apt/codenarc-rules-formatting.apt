@@ -88,6 +88,12 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   Checks that there is at least one space or whitespace following each comma. That includes checks for method
   and closure declaration parameter lists, method call parameter lists, Map literals and List literals.
 
+  Known limitations:
+
+  * May not catch actual violations if the source line contains unicode character literals, e.g. <<<'\\u00A0'>>>
+
+  []
+
   Examples of violations:
 
 -------------------------------------------------------------------------------
@@ -121,6 +127,12 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
 |                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
+
+  Known limitations:
+
+  * May not catch actual violations if the source line contains unicode character literals, e.g. <<<'\\u00A0'>>>
+
+  []
 
   Examples of violations and exceptions:
 
@@ -286,6 +298,8 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
   * Does not catch violations of certain ternary expressions.
 
+  []
+
   Examples of violations:
 
 -------------------------------------------------------------------------------
@@ -316,6 +330,12 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
 |                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
+
+  Known limitations:
+
+  * May not catch actual violations if the source line contains unicode character literals, e.g. <<<'\\u00A0'>>>
+
+  []
 
   Examples of violations:
 
@@ -365,6 +385,12 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
 |                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
+
+  Known limitations:
+
+  * May not catch actual violations if the source line contains unicode character literals, e.g. <<<'\\u00A0'>>>
+
+  []
 
   Examples of violations:
 

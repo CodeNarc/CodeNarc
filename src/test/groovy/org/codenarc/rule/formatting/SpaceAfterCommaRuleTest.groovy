@@ -59,6 +59,14 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_UnicodeLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+        final SOURCE = '''
+            def value2 = calculate('\\u00A0',399,'abc'       ,17)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_MethodCall_NoPrecedingSpaceForMultipleParameters_Violation() {
         final SOURCE = '''
             class MyTestCase {

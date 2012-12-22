@@ -216,6 +216,15 @@ c        '''
     }
 
     @Test
+    void testApplyTo_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+        final SOURCE = '''
+            if (valid('\\u00A0')){ }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'if (valid(', messageText:BLOCK_VIOLATION_MESSAGE])
+    }
+
+    @Test
     void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
         final SOURCE = '''
             def m = [a:123, b:{ println 7 }]

@@ -101,6 +101,10 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
+        if (!isFirstVisit(expression)) {
+            return
+        }
+
         def op = expression.operation
         def opText = op.text
         def opEndColumn = op.startColumn + opText.size() - 1
@@ -108,10 +112,12 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
         boolean assignmentWithinDeclaration = (opText == '=') && withinDeclarationExpression
         boolean arrayOperator = opText == '['
-        boolean ignore = assignmentWithinDeclaration || arrayOperator
+        boolean isOperatorAtIndex = line[op.startColumn - 1] == opText[0]
+        boolean ignore = assignmentWithinDeclaration || arrayOperator || !isOperatorAtIndex
 
         if (!ignore && op.startColumn > 1) {
             def beforeChar = line[op.startColumn - 2] as char
+
             if (!Character.isWhitespace(beforeChar)) {
                 addViolation(expression, "The operator \"${expression.operation.text}\" within class $currentClassName is not preceded by a space or whitespace")
             }

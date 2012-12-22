@@ -226,6 +226,15 @@ c        '''
     }
 
     @Test
+    void testApplyTo_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+        final SOURCE = '''
+            if (valid()) { return '\\u00A0' }else { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+
+    @Test
     void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
         final SOURCE = '''
             def m = [a:123, b:{ println 7 }]
