@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 package org.codenarc.rule.formatting
-
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
-
 /**
  * Checks the location of the opening brace ({) for classes. By default, requires them on the same line, but the sameLine property can be set to false to override this.
  *
@@ -39,28 +37,39 @@ class BracesForClassRule extends AbstractRule {
         sourceCode?.ast?.classes?.each { ClassNode classNode ->
 
             def (lineNumber, sourceLine) = findOpeningBraceLine(sourceCode, classNode)
-
-            if (sameLine) {
-                if (sourceLine?.startsWith('{')) {
-                    violations.add(new Violation(
-                            rule: this,
-                            lineNumber: lineNumber,
-                            sourceLine: sourceLine,
-                            message: "Opening brace for the ${classNode.isInterface() ? 'interface' : 'class'} $classNode.name should start on the same line"))
-                }
-            } else {
-                if (!sourceLine?.startsWith('{')) {
-                    violations.add(new Violation(
-                            rule: this,
-                            lineNumber: lineNumber,
-                            sourceLine: sourceLine,
-                            message: "Opening brace for the ${classNode.isInterface() ? 'interface' : 'class'} $classNode.name should start on a new line"))
-                }
+            // Groovy 1.7 returns -1 as line number for a ClassNode representing an enum.
+            // In this case we ignore the rule
+            if (lineNumber != -1) {
+                applyTo(classNode, lineNumber, sourceLine, violations)
             }
         }
     }
 
-    private static findOpeningBraceLine(SourceCode sourceCode, ASTNode node) {
+    private applyTo(ClassNode classNode, int lineNumber, String sourceLine, List violations) {
+        if (sameLine) {
+            if (sourceLine?.startsWith('{')) {
+                violations.add(new Violation(
+                    rule: this,
+                    lineNumber: lineNumber,
+                    sourceLine: sourceLine,
+                    message: "Opening brace for the ${classNode.isInterface() ? 'interface' : 'class'} $classNode.name should start on the same line"))
+            }
+        } else {
+            if (!sourceLine?.startsWith('{') && !definesAnnotationType(sourceLine)) {
+                violations.add(new Violation(
+                    rule: this,
+                    lineNumber: lineNumber,
+                    sourceLine: sourceLine,
+                    message: "Opening brace for the ${classNode.isInterface() ? 'interface' : 'class'} $classNode.name should start on a new line"))
+            }
+        }
+    }
+
+    private definesAnnotationType(String sourceLine) {
+        sourceLine?.contains('@interface')
+    }
+
+    private findOpeningBraceLine(SourceCode sourceCode, ASTNode node) {
         int line = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
         def sourceLine = sourceCode.line(line - 1)
         while (sourceLine != null) {

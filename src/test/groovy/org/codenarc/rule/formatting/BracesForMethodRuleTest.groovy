@@ -153,6 +153,80 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testSuccessScenarioClosureParameterSameLine() {
+        final SOURCE = '''
+            def method1(closure = {}) {
+            }
+
+            def method2(closure = {}) {}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSuccessScenarioMultiLineClosureParameterSameLine() {
+        final SOURCE = '''
+            def method(closure = {
+
+            }) { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSuccessScenarioMultipleClosureParameterSameLine() {
+        final SOURCE = '''
+            def method(closure1 = {}, closure2 = {}) {
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationClosureParameterSameLine() {
+        final SOURCE = '''
+            def method(closure = {})
+            {
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def method(closure = {})', 'Opening brace for the method method should start on the same line')
+    }
+
+    @Test
+    void testSuccessScenarioClosureParameterNewLine() {
+        final SOURCE = '''
+            def method(closure = {})
+            {
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSuccessScenarioMultiLineClosureParameterNewLine() {
+        final SOURCE = '''
+            def method(closure = {
+
+            })
+            {
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationClosureParameterNewLine() {
+        final SOURCE = '''
+            def method(closure = {}) {
+            }
+        '''
+        rule.sameLine = false
+        assertSingleViolation(SOURCE, 2, 'def method(closure = {}) {', 'Opening brace for the method method should start on a new line')
+    }
+
+    @Test
     void testSuccessScenarioSameLine() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
