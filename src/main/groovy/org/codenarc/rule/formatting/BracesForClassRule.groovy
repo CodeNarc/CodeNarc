@@ -49,7 +49,7 @@ class BracesForClassRule extends AbstractRule {
                             message: "Opening brace for the ${classNode.isInterface() ? 'interface' : 'class'} $classNode.name should start on the same line"))
                 }
             } else {
-                if (!sourceLine?.startsWith('{')) {
+                if (!sourceLine?.startsWith('{') && !definesAnnotationType(sourceLine)) {
                     violations.add(new Violation(
                             rule: this,
                             lineNumber: lineNumber,
@@ -60,7 +60,11 @@ class BracesForClassRule extends AbstractRule {
         }
     }
 
-    private static findOpeningBraceLine(SourceCode sourceCode, ASTNode node) {
+    private definesAnnotationType(String sourceLine) {
+        sourceLine?.contains('@interface')
+    }
+
+    private findOpeningBraceLine(SourceCode sourceCode, ASTNode node) {
         int line = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
         def sourceLine = sourceCode.line(line - 1)
         while (sourceLine != null) {

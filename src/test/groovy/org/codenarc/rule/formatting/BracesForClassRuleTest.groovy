@@ -81,6 +81,28 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testIgnoredForAnnotationTypeDefinition1() {
+        final SOURCE = '''
+            @interface MyClass {
+
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testIgnoredForAnnotationTypeDefinition2() {
+        final SOURCE = '''
+            public @interface MyClass {
+
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testSuccessScenarioSameLine() {
 
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
