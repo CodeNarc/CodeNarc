@@ -7,7 +7,11 @@ Changes in version 0.19 (??? 2013)
 BUG FIXES
 - Fix #3596256: SpaceAroundOperatorRule: False positive if source line contains unicode chars.
       Also affects (known limitation): SpaceAfterClosingBrace, SpaceBeforeOpeningBrace, SpaceBeforeClosingBrace  - Known limitation: will not catch violations on same line following unicode char literal.
-- Fix  #3598154: SpaceAroundOperator: bad/duplicate violation for ?: after closure. Ignore standalone elvis expression statements (known limitation).
+- Fix #3598154: SpaceAroundOperator: bad/duplicate violation for ?: after closure. Ignore standalone elvis expression statements (known limitation).
+- Fix #3598717: BracesForClassRule failing on annotation types. (Known limitation: ignore for @interface). Thanks to Marcin Gryszko.
+- Fix #3598732: BracesForMethodRule fixed for methods with closure parameters. Thanks to Marcin Gryszko.
+- Fix #3596323: BracesForClassRule ignored for enums and Groovy 1.7. Thanks to Marcin Gryszko.
+
 
 Changes in version 0.18 (Dec 2012 )
 -------------------------------------------
