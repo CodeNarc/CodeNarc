@@ -51,14 +51,19 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
         }
 
         if (rule.sameLine) {
-            if(!lastLine?.contains('{')) {
+            if(!(containsOpeningBraceAfterParenthesis(lastLine))) {
                 addViolation(node, "Opening brace for the method $node.name should start on the same line")
             }
         } else {
-            if (lastLine?.contains('{')) {
+            if (containsOpeningBraceAfterParenthesis(lastLine)) {
                 addViolation(node, "Opening brace for the method $node.name should start on a new line")
             }
         }
         super.visitConstructorOrMethod(node, isConstructor)
+    }
+
+    private containsOpeningBraceAfterParenthesis(String lastLine) {
+        int parenthesisIndex = lastLine?.lastIndexOf(')')
+        lastLine?.indexOf('{', parenthesisIndex) >= 0
     }
 }
