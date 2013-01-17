@@ -11,6 +11,7 @@ BUG FIXES
 - Fix #3598717: BracesForClassRule failing on annotation types. (Known limitation: ignore for @interface). Thanks to Marcin Gryszko.
 - Fix #3598732: BracesForMethodRule fixed for methods with closure parameters. Thanks to Marcin Gryszko.
 - Fix #3596323: BracesForClassRule ignored for enums and Groovy 1.7. Thanks to Marcin Gryszko.
+- Fix for CodeNarc GitHub issue #10: No such property: maxMethodComplexity for class: org.codenarc.rule.size.AbcMetricRule.
 
 
 Changes in version 0.18 (Dec 2012 )
