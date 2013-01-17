@@ -54,6 +54,10 @@ class RunCodeNarcAgainstExternalProject {
                option(name:'title', value:title)
                option(name:'outputFile', value:title + '-CodeNarcReport.html')
            }
+            report(type:'xml') {
+                option(name:'title', value:title)
+                option(name:'outputFile', value:title + '-CodeNarcReport.xml')
+            }
             report(type:'text') {
                 option(name:'writeToStandardOut', value:true)
             }
