@@ -297,12 +297,22 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_LoopVariable() {
+    void testApplyTo_LoopVariable_ReferencedWithinLoopBlock() {
         final SOURCE = '''
             def doStuff() {
                 for (int i = 0; i < 8; i++) {
                     outputMap.putAll(CopanSystemService.canisterInfo(suuid[i], i))
                 }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ClassicForLoop() {
+        final SOURCE = '''
+            for (int i=0;i<3;i++) {
+                System.out.println("bla")
             }
         '''
         assertNoViolations(SOURCE)
