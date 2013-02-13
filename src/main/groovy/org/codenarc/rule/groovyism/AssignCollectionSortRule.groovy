@@ -50,9 +50,11 @@ class AssignCollectionSortAstVisitor extends AbstractAstVisitor {
         super.visitDeclarationExpression expression
     }
 
-    private static boolean isChainedSort(Expression right) {
-        if (AstUtil.isMethodCall(right, 'sort', 0..1)) {
-            if (right.objectExpression instanceof VariableExpression) {
+    private static boolean isChainedSort(Expression expression) {
+        if (AstUtil.isMethodCall(expression, 'sort', 0..2)) {
+            def arguments = AstUtil.getMethodArguments(expression)
+            def isMutateFalse = arguments && AstUtil.isFalse(arguments[0])
+            if (expression.objectExpression instanceof VariableExpression && !isMutateFalse) {
                 return true
             }
         }

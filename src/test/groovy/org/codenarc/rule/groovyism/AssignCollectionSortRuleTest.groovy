@@ -23,6 +23,7 @@ import org.junit.Test
  * Tests for AssignCollectionSortRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
 
@@ -33,7 +34,7 @@ class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             def allPaths = resultsMap.keySet().sort()
         	myList.sort()
@@ -56,11 +57,67 @@ class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testOneArgs() {
+    void testOneArg_Closure() {
         final SOURCE = '''
-            def x = myList.sort() { it }
+            def x = myList.sort { it }
         '''
-        assertSingleViolation(SOURCE, 2, 'def x = myList.sort()')
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort')
+    }
+
+    @Test
+    void testOneArg_Comparator() {
+        final SOURCE = '''
+            def x = myList.sort(comparator)
+        '''
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort')
+    }
+
+    @Test
+    void testOneArg_True() {
+        final SOURCE = '''
+            def x = myList.sort(true)
+        '''
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort')
+    }
+
+    @Test
+    void testOneArg_False() {
+        final SOURCE = '''
+            def x = myList.sort(false)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testTwoArgs_Closure_MutateTrue() {
+        final SOURCE = '''
+            def x = myList.sort(true) { it }
+        '''
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort')
+    }
+
+    @Test
+    void testTwoArgs_Closure_MutateFalse() {
+        final SOURCE = '''
+            def x = myList.sort(false) { it }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testTwoArgs_Comparator_MutateTrue() {
+        final SOURCE = '''
+            def x = myList.sort(true, comparator)
+        '''
+        assertSingleViolation(SOURCE, 2, 'def x = myList.sort')
+    }
+
+    @Test
+    void testTwoArgs_Comparator_MutateFalse() {
+        final SOURCE = '''
+            def x = myList.sort(false, comparator)
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Test

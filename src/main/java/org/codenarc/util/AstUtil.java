@@ -555,6 +555,9 @@ public class AstUtil {
      * as described
      */
     public static boolean isTrue(Expression expression) {
+        if (expression == null) {
+            return false;
+        }
         if (expression instanceof PropertyExpression
                 && classNodeImplementsType(((PropertyExpression) expression).getObjectExpression().getType(), Boolean.class)) {
             if (((PropertyExpression) expression).getProperty() instanceof ConstantExpression
@@ -596,6 +599,9 @@ public class AstUtil {
      * as described
      */
     public static boolean isFalse(Expression expression) {
+        if (expression == null) {
+            return false;
+        }
         if (expression instanceof PropertyExpression && classNodeImplementsType(((PropertyExpression) expression).getObjectExpression().getType(), Boolean.class)) {
             if (((PropertyExpression) expression).getProperty() instanceof ConstantExpression
                     && "FALSE".equals(((ConstantExpression) ((PropertyExpression) expression).getProperty()).getValue())) {
