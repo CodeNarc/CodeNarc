@@ -27,6 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
+import org.codehaus.groovy.ast.stmt.ForStatement
 
 /**
  * Rule that checks for variables that are not referenced.
@@ -90,21 +91,33 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitBlockStatement(BlockStatement block) {
+        beforeBlock()
+        super.visitBlockStatement(block)
+        afterBlock()
+    }
+
+    @Override
+    void visitForLoop(ForStatement forLoop) {
+        beforeBlock()
+        super.visitForLoop(forLoop)
+        afterBlock()
+    }
+
+    private beforeBlock() {
         variablesInCurrentBlockScope = [:]
         variablesByBlockScope.push(variablesInCurrentBlockScope)
+    }
 
-        super.visitBlockStatement(block)
-
+    private afterBlock() {
         variablesInCurrentBlockScope.each { varExpression, isUsed ->
             if (!isIgnoredVariable(varExpression) && !isUsed && !anonymousReferences.contains(varExpression.name)) {
                 addViolation(varExpression, "The variable [${varExpression.name}] in class $currentClassName is not used")
             }
         }
-
         variablesByBlockScope.pop()
         variablesInCurrentBlockScope = variablesByBlockScope.empty() ? null : variablesByBlockScope.peek()
     }
-    
+
     void visitVariableExpression(VariableExpression expression) {
         markVariableAsReferenced(expression.name, expression)
 

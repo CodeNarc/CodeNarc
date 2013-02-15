@@ -309,8 +309,20 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_ClassicForLoop() {
+    void testApplyTo_LoopVariable_NotReferenced() {
         final SOURCE = '''
+            for (int i = 0; ; ) { }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'for (int i = 0; ; )', messageText:'i'])
+    }
+
+    @Test
+    void testApplyTo_ClassicForLoop_SameVariableName() {
+        final SOURCE = '''
+            for (int i=0;i<3;i++) {
+                System.out.println("bla")
+            }
             for (int i=0;i<3;i++) {
                 System.out.println("bla")
             }
