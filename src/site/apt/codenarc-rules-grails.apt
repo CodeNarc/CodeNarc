@@ -232,3 +232,9 @@ Grails Rules  ("<rulesets/grails.xml>")
   with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
 
 
+
+* {GrailsDomainCantReferenceServiceRule} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Checks that Grails Domain classes do not have Service classes injected.
