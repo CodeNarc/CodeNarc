@@ -119,7 +119,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
         boolean assignmentWithinDeclaration = (opText == '=') && withinDeclarationExpression
         boolean arrayOperator = opText == '['
-        boolean isOperatorAtIndex = line[op.startColumn - 1] == opText[0]
+        boolean isOperatorAtIndex = op.startColumn != -1 && (line[op.startColumn - 1] == opText[0])
         boolean ignore = assignmentWithinDeclaration || arrayOperator || !isOperatorAtIndex
 
         if (!ignore && op.startColumn > 1) {

@@ -196,6 +196,14 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_Enum_NoViolations() {
+        final SOURCE = '''
+            enum Day { YESTERDAY, TODAY, TOMORROW }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new SpaceAroundOperatorRule()
     }

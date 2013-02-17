@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.19 (??? 2013)
+Changes in version 0.18.1 (Feb 2013)
 -------------------------------------------
 BUG FIXES
 - Fix #3596256: SpaceAroundOperatorRule: False positive if source line contains unicode chars.
