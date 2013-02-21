@@ -16,4 +16,5 @@
     <rule class='org.codenarc.rule.grails.GrailsSessionReferenceRule'/>
     <rule class='org.codenarc.rule.grails.GrailsStatelessServiceRule'/>
     <rule class='org.codenarc.rule.grails.GrailsDuplicateConstraintRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsDomainCantReferenceServiceRule'/>
 </ruleset>
