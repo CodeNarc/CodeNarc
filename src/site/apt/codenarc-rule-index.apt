@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 305 rules.
+  <<CodeNarc>> includes 306 rules.
 
     
       
@@ -493,6 +493,9 @@ Rule Index
     
       
     * {{{codenarc-rules-grails.html#GrailsDomainHasToString}GrailsDomainHasToString}}  
+    
+      
+    * {{{codenarc-rules-grails.html#GrailsDomainWithServiceReference}GrailsDomainWithServiceReference}}  
     
       
     * {{{codenarc-rules-grails.html#GrailsDuplicateConstraint}GrailsDuplicateConstraint}}  

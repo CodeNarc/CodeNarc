@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.19 (??? 2013)
+-------------------------------------------
+NEW RULES
+- Feature request #339: GrailsDomainWithServiceReferenceRule: Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
+
+
 Changes in version 0.18.1 (Feb 2013)
 -------------------------------------------
 BUG FIXES

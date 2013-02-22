@@ -7,20 +7,39 @@ Grails Rules  ("<rulesets/grails.xml>")
 
 * {GrailsDomainHasEquals} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks that Grails domain classes redefine <<<equals()>>>.
 
   Ignores classes annotated with <<<@EqualsAndHashCode>>> or <<<@Canonical>>>.
 
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files
+  under the 'grails-app/domain' folder. You can override this with a different regular
+  expression value if appropriate.
+
 
 * {GrailsDomainHasToString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks that Grails domain classes redefine <<<toString()>>>.
 
   Ignores classes annotated with <<<@ToString>>> or <<<@Canonical>>>.
+
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files
+  under the 'grails-app/domain' folder. You can override this with a different regular
+  expression value if appropriate.
+
+
+* {GrailsDomainWithServiceReference} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Checks that Grails Domain classes do not have Service classes injected.
+
+  This rule sets the default value of <<<applyToFilesMatching>>> to only match files
+  under the 'grails-app/domain' folder. You can override this with a different regular
+  expression value if appropriate.
 
 
 * {GrailsDuplicateConstraint} Rule
@@ -230,11 +249,3 @@ Grails Rules  ("<rulesets/grails.xml>")
 
   [[2]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
   with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
-
-
-
-* {GrailsDomainCantReferenceServiceRule} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.19>
-
-  Checks that Grails Domain classes do not have Service classes injected.

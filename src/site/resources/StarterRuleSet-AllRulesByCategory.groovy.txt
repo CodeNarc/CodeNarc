@@ -171,6 +171,7 @@ ruleset {
     // rulesets/grails.xml
     GrailsDomainHasEquals 
     GrailsDomainHasToString 
+    GrailsDomainWithServiceReference 
     GrailsDuplicateConstraint 
     GrailsDuplicateMapping 
     GrailsPublicControllerMethod 
