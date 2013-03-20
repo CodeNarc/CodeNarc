@@ -47,7 +47,7 @@ class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
             def isIgnored = wildcardPattern.matches(fieldNode.name)
             if (!isIgnored) {
                 def className = fieldNode.owner.name
-                def violationMessage = "Private field [${fieldNode.name}] in class $className is only set within the field initializer or a constructor, and so it can be made private."
+                def violationMessage = "Private field [${fieldNode.name}] in class $className is only set within the field initializer or a constructor, and so it can be made final."
                 visitor.addViolation(fieldNode, violationMessage)
             }
         }

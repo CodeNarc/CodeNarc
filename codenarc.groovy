@@ -27,10 +27,10 @@ if (args[0] == 'create-rule') {
     updateRuleList(ruleName, ruleCategory)
     updateSiteDocumentation(ruleName, ruleCategory, ruleDescription)
     updateChangelog(ruleName, ruleCategory, ruleDescription)
-    print "\tadding to svn... "
-    print "svn add $ruleFile".execute().text
-    print "\tadding to svn... "
-    print "svn add $testFile".execute().text
+    print "\tadding to git... "
+    print "git add -v $ruleFile".execute().text
+    print "\tadding to git... "
+    print "git add -v $testFile".execute().text
 	println "\tFinished"
 } else {
 	println usage()

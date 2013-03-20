@@ -5,6 +5,7 @@ http://www.codenarc.org
 Changes in version 0.19 (??? 2013)
 -------------------------------------------
 NEW RULES
+- Feature request #340: GrailsDomainReservedSqlKeywordNameRule: Check for Grails domain class with class or field name which is a reserved SQL keyword.
 - Feature request #339: GrailsDomainWithServiceReferenceRule: Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
 
 
@@ -499,7 +500,7 @@ NEW RULES
 
 BUG FIXES
 - Fix Bug #3127967: DuplicateImportRule: Fix for Groovy 1.7. Resort to parsing source code.
-- Fix Bug #3146678: UnnecessaryGetter false positive, e.g. def allPaths = resultsMap.keySet()  keySet() can probably be rewritten as set.
+- Fix Bug #3146678: UnnecessaryGetter false positive, e.g. def allPaths = resultsMap.keySet() �?� keySet() can probably be rewritten as set.
 - Fix Bug #3111189: "StatelessClassRule - Honor @Immutable".
 - Fix Bug #3111181: "UnnecessaryIfStatement - misses if without explicit return".
 - Fix Bug #3108126: "assertNoViolations still passes when compile fails"
