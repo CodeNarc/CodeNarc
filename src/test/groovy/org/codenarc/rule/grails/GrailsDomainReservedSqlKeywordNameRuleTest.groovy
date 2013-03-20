@@ -165,6 +165,16 @@ class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
             violation(5, 'Relation order', violationMessage('order')))
     }
 
+    @Test
+    void testNonDomain_WithKeywordName_NoViolations() {
+        final SOURCE = '''
+            class Order {
+            }
+        '''
+        sourceCodePath = 'project/MyProject/grails-app/service/Order.groovy'
+        assertNoViolations(SOURCE)
+    }
+
     private Map violation(int lineNumber, String sourceLineText, String messageText) {
         [lineNumber: lineNumber, sourceLineText: sourceLineText, messageText: messageText]
     }

@@ -19,11 +19,9 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ListExpression
+import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.rule.AstVisitor
-import org.codenarc.rule.Violation
-import org.codenarc.util.AstUtil
 
 /**
  * Forbids usage of SQL reserved keywords as class or field names in Grails domain classes.
@@ -37,6 +35,7 @@ import org.codenarc.util.AstUtil
  * @author Artur Gajowy
  */
 class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
+
     String name = 'GrailsDomainReservedSqlKeywordName'
     int priority = 2
     Class astVisitorClass = GrailsDomainReservedSqlKeywordNameAstVisitor
@@ -101,7 +100,7 @@ class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
     }
 }
 
-class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractFieldVisitor {
+class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractAstVisitor {
 
     private final reservedSqlKeywords
     private final hibernateBasicTypes
@@ -114,25 +113,15 @@ class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractFieldVisitor 
     }
 
     @Override
-    void visitClass(ClassNode node) {
+    protected void visitClassEx(ClassNode node) {
         if (node.name.toUpperCase() in reservedSqlKeywords) {
             addViolation(node, violationMessage(node.name, 'domain class name'))
         }
-        super.visitClass(node)
-        addViolationsForInstanceFields()
     }
 
-    private void addViolation(ClassNode node, String message) {
-        if (node.getLineNumber() >= 0) {
-            int lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
-            String sourceLine = sourceCode.line(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1)
-            Violation violation = new Violation()
-            violation.setRule(rule)
-            violation.setLineNumber(lineNumber)
-            violation.setSourceLine(sourceLine)
-            violation.setMessage(message)
-            violations.add(violation)
-        }
+    @Override
+    protected void visitClassComplete(ClassNode node) {
+        addViolationsForInstanceFields()
     }
 
     @Override
@@ -175,5 +164,3 @@ class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractFieldVisitor 
         "'$identifier' is a reserved SQL keyword and - as such - a problematic $kindOfName."
     }
 }
-
-
