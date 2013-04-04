@@ -125,6 +125,7 @@ ruleset {
     GetterMethodCouldBeProperty 
     GrailsDomainHasEquals 
     GrailsDomainHasToString 
+    GrailsDomainReservedSqlKeywordName 
     GrailsDomainWithServiceReference 
     GrailsDuplicateConstraint 
     GrailsDuplicateMapping 
@@ -154,6 +155,7 @@ ruleset {
     JUnitAssertAlwaysSucceeds 
     JUnitFailWithoutMessage 
     JUnitLostTest 
+    JUnitPublicField 
     JUnitPublicNonTestMethod 
     JUnitSetUpCallsSuper 
     JUnitStyleAssertions 

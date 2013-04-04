@@ -104,6 +104,9 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Note: This rule should be disabled for Grails 2.x projects, since the Grails test framework can use
   AST Transformations to automatically annotate test methods.
 
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
+
   Example of violations:
 
 -------------------------------------------------------------------------------
@@ -111,6 +114,30 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
     class MyTestCase {
         void testMe() { }           // missing @Test annotation
+    }
+-------------------------------------------------------------------------------
+
+
+* {JUnitPublicField} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Checks for public fields on a JUnit test class.  There is usually no reason to have a public
+  field (even a constant) on a test class. One exception: fields annotated with @Rule are ignored.
+
+  This rule sets the default value of the <applyToClassNames> property to only match class names
+  ending in 'Test', 'Tests' or 'TestCase'.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    import org.junit.Test
+    class MyTestCase {
+        public int count                        // violation
+        public static final MAX_VALUE = 1000    // violation
+
+        @Test
+        void testMe() { }
     }
 -------------------------------------------------------------------------------
 
@@ -412,5 +439,4 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
   ending in 'Test', 'Tests' or 'TestCase'.
-
 
