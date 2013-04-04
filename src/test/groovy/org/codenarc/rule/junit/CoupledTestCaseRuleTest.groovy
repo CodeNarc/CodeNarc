@@ -72,6 +72,18 @@ class CoupledTestCaseRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'new MyOtherTest()', 'new MyOtherTest() creates an instance of a test case. Test cases should not be coupled. Move this method to a helper object')
     }
 
+    @Test
+    void testStaticReferenceToSameClass_NoViolation() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                void testMethod() {
+                    def input = MyTest.getResourceAsStream('sample.txt')
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new CoupledTestCaseRule()
     }

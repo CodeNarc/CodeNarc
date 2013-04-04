@@ -23,10 +23,11 @@ import org.codenarc.util.AstUtil
 
 /**
  * This rule finds test cases that are coupled to other test cases, either by invoking static methods on another test
- * case or by creating instances of another test case. If you require shared logic in test cases then extract that
- * logic to a new class where it can properly be reused.
+ * case or by creating instances of another test case. If you require shared logic in test cases then extract that logic
+ * to a new class where it can properly be reused. Static references to methods on the current test class are ignored.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class CoupledTestCaseRule extends AbstractAstVisitorRule {
     String name = 'CoupledTestCase'
@@ -39,7 +40,7 @@ class CoupledTestCaseAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
-        if (AstUtil.isMethodCall(call, '[A-Z].*Test', '.*')) {
+        if (AstUtil.isMethodCall(call, '[A-Z].*Test', '.*') && !AstUtil.isMethodCallOnObject(call, getCurrentClassName())) {
             addViolation(call, "$call.text invokes a method on another test case. Test cases should not be coupled. Move this method to a helper object")
         }
         super.visitMethodCallExpression(call)
@@ -53,6 +54,5 @@ class CoupledTestCaseAstVisitor extends AbstractAstVisitor {
         }
         super.visitConstructorCallExpression(call)
     }
-
 
 }
