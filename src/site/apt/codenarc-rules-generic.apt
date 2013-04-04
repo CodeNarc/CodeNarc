@@ -221,3 +221,6 @@ Generic Rules  ("<rulesets/generic.xml>")
   [[3]] At least one of the (standard) <<<applyToClassNames>>>, <<<applyToFileNames>>> or <<<applyToFilesMatching>>>
   properties must be set (i.e., not null or empty) or else this rule does nothing. In other words, you must configure
   this rule to apply to a specific set of classes or files.
+
+  [[4]] This rule will not catch violations of true <statelessness>/<reentrancy> if you define a <<<final>>>
+  field whose value is itself mutable, e.g. a <<<final HashMap>>>.
