@@ -12,6 +12,7 @@ NEW RULES
 
 UPDATED/ENHANCED RULES
 - #371: CouldBeElvis rule. Added support for IF statements without braces.
+- #408: SerialVersionUID rule: Also check that serialVersionUID field is declared private.
 
 BUG FIXES
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.

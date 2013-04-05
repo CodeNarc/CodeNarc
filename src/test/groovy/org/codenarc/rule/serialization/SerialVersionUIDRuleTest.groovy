@@ -23,7 +23,8 @@ import org.junit.Test
  * Tests for SerialVersionUIDRule
  *
  * @author Hamlet D'Arcy
-  */
+ * @author Chris Mair
+ */
 class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
 
     @Test
@@ -61,7 +62,7 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
     void testApplyTo_WrongType() {
         final SOURCE = '''
             class MyClass1 {
-                public static final int serialVersionUID = 13241234134
+                private static final int serialVersionUID = 13241234134
             }
             class MyClass2 {
                 private static final Long serialVersionUID = 665544
@@ -80,7 +81,17 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE,
-                3, 'static final long serialVersionUID = 13241234134 as long')
+            3, 'static final long serialVersionUID = 13241234134 as long')
+    }
+
+    @Test
+    void testApplyTo_NotPrivate() {
+        final SOURCE = '''
+            class MyClass {
+                protected static final long serialVersionUID = 12345
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'protected static final long serialVersionUID = 12345')
     }
 
     protected Rule createRule() {

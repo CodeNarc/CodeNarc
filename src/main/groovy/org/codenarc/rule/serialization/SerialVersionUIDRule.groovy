@@ -38,11 +38,14 @@ class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
     private final static SERIAL_ID = 'serialVersionUID'
     void visitField(FieldNode node) {
         if (node?.name == SERIAL_ID) {
+            if (!Modifier.isPrivate(node?.modifiers)) {
+                addViolation node, 'serialVersionUID found that is not private.'
+            }
             if (!Modifier.isStatic(node?.modifiers)) {
-                addViolation node, 'serialVersionUID found that is not static. '
+                addViolation node, 'serialVersionUID found that is not static.'
             }
             if (!Modifier.isFinal(node?.modifiers)) {
-                addViolation node, 'serialVersionUID found that is not final. '
+                addViolation node, 'serialVersionUID found that is not final.'
             }
             if (node?.type?.name != 'long') {
                 addViolation node, 'serialVersionUID found that is not long. Found: ' + node?.type?.name
@@ -57,6 +60,5 @@ class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
         }
         super.visitProperty(node)
     }
-
 
 }
