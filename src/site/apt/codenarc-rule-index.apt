@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 308 rules.
+  <<CodeNarc>> includes 309 rules.
 
     
       
@@ -603,6 +603,9 @@ Rule Index
     
       
     * {{{codenarc-rules-groovyism.html#GStringAsMapKey}GStringAsMapKey}}  
+    
+      
+    * {{{codenarc-rules-groovyism.html#GStringExpressionWithinString}GStringExpressionWithinString}}  
     
       
     * {{{codenarc-rules-groovyism.html#GetterMethodCouldBeProperty}GetterMethodCouldBeProperty}}  

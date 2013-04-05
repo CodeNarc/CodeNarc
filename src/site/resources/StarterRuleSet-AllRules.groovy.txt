@@ -122,6 +122,7 @@ ruleset {
     ForLoopShouldBeWhileLoop 
     ForStatementBraces 
     GStringAsMapKey 
+    GStringExpressionWithinString 
     GetterMethodCouldBeProperty 
     GrailsDomainHasEquals 
     GrailsDomainHasToString 

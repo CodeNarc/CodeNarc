@@ -1,4 +1,3 @@
-
 CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
@@ -8,7 +7,8 @@ Changes in version 0.19 (??? 2013)
 NEW RULES
 - #340: New GrailsDomainReservedSqlKeywordName rule: Check for Grails domain class with class or field name which is a reserved SQL keyword. Thanks to Artur Gajowy. (pull request #13)
 - #339: New GrailsDomainWithServiceReference rule: Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
-- #382. New JUnitPublicField rule. There is usually no reason to have a public field (even a constant) on a test class.
+- #382: New JUnitPublicField rule. There is usually no reason to have a public field (even a constant) on a test class.
+- #407: New GStringExpressionWithinString rule (groovyism) - Check for regular (single quote) strings containing a GString-type expression (${..}).
 
 UPDATED/ENHANCED RULES
 - #371: CouldBeElvis rule. Added support for IF statements without braces.

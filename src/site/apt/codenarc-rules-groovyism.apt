@@ -435,6 +435,25 @@ def (f, g) = [1, 2]    // ok
     Map map = ["${someRef}" : 'invalid' ]       // violation
 -------------------------------------------------------------------------------
 
+
+* {GStringExpressionWithinString} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Check for regular (single quote) strings containing a GString-type expression (${..}).
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def str1 = 'total: ${count}'                // violation
+    def str2 = 'average: ${total / count}'      // violation
+
+    def str3 = "abc ${count}"                   // ok; GString
+    def str4 = '$123'                           // ok
+    def str5 = 'abc {123}'                      // ok
+-------------------------------------------------------------------------------
+
+
 * {UseCollectMany} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.16>
@@ -477,3 +496,4 @@ println list.collect([8]) {
 
 println list.collectNested { it * 2 } // same functionality, better readability
 -------------------------------------------------------------------------------
+

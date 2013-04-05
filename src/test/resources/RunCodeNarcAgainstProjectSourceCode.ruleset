@@ -16,7 +16,9 @@ ruleset {
     }
     ruleset('rulesets/exceptions.xml')
 
-    ruleset('rulesets/groovyism.xml')
+    ruleset('rulesets/groovyism.xml') {
+        GStringExpressionWithinString(doNotApplyToClassNames:'*Test')
+    }
 
     ruleset('rulesets/formatting.xml') {
         exclude 'SpaceAfterCatch'

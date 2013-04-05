@@ -37,6 +37,7 @@
     <rule class='org.codenarc.rule.groovyism.GetterMethodCouldBePropertyRule'/>
     <rule class='org.codenarc.rule.groovyism.GroovyLangImmutableRule'/>
     <rule class='org.codenarc.rule.groovyism.GStringAsMapKeyRule'/>
+    <rule class='org.codenarc.rule.groovyism.GStringExpressionWithinStringRule'/>
     <rule class='org.codenarc.rule.groovyism.UseCollectManyRule'/>
     <rule class='org.codenarc.rule.groovyism.UseCollectNestedRule'/>
 </ruleset>

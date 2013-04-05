@@ -208,6 +208,7 @@ ruleset {
     ExplicitStackInstantiation 
     ExplicitTreeSetInstantiation 
     GStringAsMapKey 
+    GStringExpressionWithinString 
     GetterMethodCouldBeProperty 
     GroovyLangImmutable 
     UseCollectMany 
