@@ -43,13 +43,18 @@ Convention Rules  ("<rulesets/convention.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-// violation
-if (!x) {
-    x = 'some value'
-}
+    if (!x) {                   // violation
+        x = 'some value'
+    }
 
-// OK
-x ?: 'some value'
+    if (!x)                     // violation
+        x = "some value"
+
+    if (!params.max) {          // violation
+      params.max = 10
+    }
+
+    x ?: 'some value'           // OK
 -------------------------------------------------------------------------------
 
 

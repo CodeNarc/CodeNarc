@@ -33,7 +33,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSuccessScenario() {
+    void testIfStatement_AssignmentToDifferentVariable_NoViolation() {
         final SOURCE = '''
         	   def x
         	   def y 
@@ -48,7 +48,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
 
 
     @Test
-    void testSecondSuccessScenario() {
+    void testIfStatement_NonAssignmentToSameVariable_NoViolation() {
         final SOURCE = '''
         	   def x
         	   def y 
@@ -62,7 +62,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testCouldBeElvisViolation() {
+    void testIfStatement_AssignmentToSameVariable_Violation() {
         final SOURCE = '''
               def x
               
@@ -71,6 +71,38 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
               }
             '''
         assertSingleViolation(SOURCE, 4, 'if (!x)', "Code could use elvis operator: x = x ?: 'some value'")
+    }
+
+    @Test
+    void testIfStatement_NoBraces_AssignmentToSameVariable_Violation() {
+        final SOURCE = '''
+              def x
+
+              if (!x)
+                  x = "some value"
+            '''
+        assertSingleViolation(SOURCE, 4, 'if (!x)', "Code could use elvis operator: x = x ?: 'some value'")
+    }
+
+    @Test
+    void testIfStatement_AssignmentToSameObjectProperty_Violation() {
+        final SOURCE = '''
+              def params
+
+              if (!params.max) {
+                  params.max = 10
+              }
+            '''
+        assertSingleViolation(SOURCE, 4, 'if (!params.max)', 'Code could use elvis operator: params.max = params.max ?: 10')
+    }
+
+    @Test
+    void testIfStatement_NoBraces_AssignmentToSameObjectProperty_Violation() {
+        final SOURCE = '''
+              def params
+              if (!params.max) params.max = 10
+            '''
+        assertSingleViolation(SOURCE, 3, 'if (!params.max)', 'Code could use elvis operator: params.max = params.max ?: 10')
     }
 
     @Test

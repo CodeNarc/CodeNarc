@@ -10,6 +10,9 @@ NEW RULES
 - #339: New GrailsDomainWithServiceReference rule: Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
 - #382. New JUnitPublicField rule. There is usually no reason to have a public field (even a constant) on a test class.
 
+UPDATED/ENHANCED RULES
+- #371: CouldBeElvis rule. Added support for IF statements without braces.
+
 BUG FIXES
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.
 
