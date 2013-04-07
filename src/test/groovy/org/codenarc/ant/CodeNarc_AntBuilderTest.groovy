@@ -30,9 +30,9 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
     private static final XML = 'xml'
     private static final HTML = 'html'
     private static final TEXT = 'text'
-    private static final HTML_REPORT_FILE = 'AntBuilderTestHtmlReport.html'
-    private static final XML_REPORT_FILE = 'AntBuilderTestXmlReport.xml'
-    private static final TEXT_REPORT_FILE = 'AntBuilderTestTextReport.txt'
+    private static final HTML_REPORT_FILE = 'target/AntBuilderTestHtmlReport.html'
+    private static final XML_REPORT_FILE = 'target/AntBuilderTestXmlReport.xml'
+    private static final TEXT_REPORT_FILE = 'target/AntBuilderTestTextReport.txt'
     private static final TITLE = 'Sample Project'
     private static final RULESET_FILES = [
             'rulesets/basic.xml',

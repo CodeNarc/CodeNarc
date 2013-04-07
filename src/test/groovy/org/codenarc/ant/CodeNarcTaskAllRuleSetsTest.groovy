@@ -31,7 +31,7 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
 
     private static final BASE_DIR = 'src'
     private static final RULESET_FILES = RuleSets.ALL_RULESET_FILES.join(',')
-    private static final REPORT_FILE = 'CodeNarcTaskAllRuleSetsReport.html'
+    private static final REPORT_FILE = 'target/CodeNarcTaskAllRuleSetsReport.html'
 
     private codeNarcTask
     private fileSet

@@ -48,7 +48,7 @@ class TextReportWriterTest extends AbstractTestCase {
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'Rule1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'AnotherRule', priority:2), lineNumber:LINE2, message:MESSAGE2)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
-    private static final NEW_REPORT_FILE = 'NewTextReport.txt'
+    private static final NEW_REPORT_FILE = 'target/NewTextReport.txt'
     private static final TITLE = 'My Cool Project'
     private static final SRC_DIR1 = 'c:/MyProject/src/main/groovy'
     private static final SRC_DIR2 = 'c:/MyProject/src/test/groovy'
@@ -95,7 +95,7 @@ File: src/main/dao/MyOtherDao.groovy
         reportWriter.writeReport(analysisContext, results)
         def reportFile = new File('CodeNarcReport.txt')
         def reportText = reportFile.text
-        // reportFile.delete()      // keep report file around for easy inspection
+        reportFile.delete()      // comment out to keep report file around for easy inspection
         assertReportText(reportText)
     }
 

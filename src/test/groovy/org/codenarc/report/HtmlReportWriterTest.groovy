@@ -49,7 +49,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:'if (file) {')
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
-    private static final NEW_REPORT_FILE = 'NewReport.html'
+    private static final NEW_REPORT_FILE = 'target/NewReport.html'
     private static final TITLE = 'My Cool Project'
 
     private reportWriter
@@ -245,6 +245,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
     @After
     void tearDownHtmlReportWriterTest() {
         new File(NEW_REPORT_FILE).delete()
+        new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).delete()
     }
 
     private String getReportText(String filename=HtmlReportWriter.DEFAULT_OUTPUT_FILE) {
