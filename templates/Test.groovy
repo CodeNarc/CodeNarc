@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
-        	// todo: replace with source for passing edge case
+        	// todo: replace with source for passing edge case(s)
         '''
         assertNoViolations(SOURCE)
     }
@@ -49,13 +49,13 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testTwoViolations() {
+    void testMultipleViolations() {
         final SOURCE = '''
             // todo: replace with source that triggers 2 violations
         '''
-        assertTwoViolations(SOURCE,
-                1, '...',	// todo: replace violation line number and message
-                2, '...')   // todo: replace violation line number and message
+        assertViolations(SOURCE,
+            [lineNumber:1, sourceLineText:'...', messageText:'...'],	// todo: replace line number, source line and message
+            [lineNumber:1, sourceLineText:'...', messageText:'...'])	// todo: replace line number, source line and message
     }
 
     protected Rule createRule() {
