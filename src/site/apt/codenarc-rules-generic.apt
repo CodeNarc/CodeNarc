@@ -5,6 +5,122 @@
 Generic Rules  ("<rulesets/generic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+* {IllegalClassMember} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Checks for classes containing fields/properties/methods matching configured illegal member
+  modifiers or not matching any of the configured allowed member modifiers.
+
+*--------------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>             | <<Description>>                                                | <<Default Value>>      |
+*--------------------------+----------------------------------------------------------------+------------------------+
+| allowedFieldModifiers    | Specifies one or more groups of whitespace-delimited modifier  | <<<null>>>             |
+|                          | names (e.g. "public static" or "protected"). Multiple groups   |                        |
+|                          | are separated by commas (e.g. "private final, protected"). If  |                        |
+|                          | a field does not match all of the modifiers in any group, then |                        |
+|                          | trigger a violation. If <<<null>>> or empty, skip this check.  |                        |
+*--------------------------+----------------------------------------------------------------+------------------------+
+| allowedMethodModifiers   | Specifies one or more groups of whitespace-delimited modifier  | <<<null>>>             |
+|                          | names (e.g. "public static" or "protected"). Multiple groups   |                        |
+|                          | are separated by commas (e.g. "private final, protected"). If  |                        |
+|                          | a method does not match all of the modifiers in any group, then|                        |
+|                          | trigger a violation. If <<<null>>> or empty, skip this check.  |                        |
+*--------------------------+----------------------------------------------------------------+------------------------+
+| allowedPropertyModifiers | Specifies one or more groups of whitespace-delimited modifier  | <<<null>>>             |
+|                          | names (e.g. "public static" or "protected"). Multiple groups   |                        |
+|                          | are separated by commas (e.g. "private final, protected"). If a|                        |
+|                          | property does not match all of the modifiers in any group, then|                        |
+|                          | trigger a violation. If <<<null>>> or empty, skip this check.  |                        |
+*--------------------------+----------------------------------------------------------------+------------------------+
+| illegalFieldModifiers    | Specifies one or more groups of whitespace-delimited modifier  | <<<null>>>             |
+|                          | names (e.g. "public static" or "protected"). Multiple groups   |                        |
+|                          | are separated by commas (e.g. "private final, protected").     |                        |
+|                          | If a field matches all of the modifiers in any group, then     |                        |
+|                          | trigger a violation. If <<<null>>> or empty, skip this check.  |                        |
+*--------------------------+----------------------------------------------------------------+------------------------+
+| illegalMethodModifiers   | Specifies one or more groups of whitespace-delimited modifier  | <<<null>>>             |
+|                          | names (e.g. "public static" or "protected"). Multiple groups   |                        |
+|                          | are separated by commas (e.g. "private final, protected").     |                        |
+|                          | If a method matches all of the modifiers in any group, then     |                        |
+|                          | trigger a violation. If <<<null>>> or empty, skip this check.  |                        |
+*--------------------------+----------------------------------------------------------------+------------------------+
+| illegalPropertyModifiers | Specifies one or more groups of whitespace-delimited modifier  | <<<null>>>             |
+|                          | names (e.g. "public static" or "protected"). Multiple groups   |                        |
+|                          | are separated by commas (e.g. "private final, protected").     |                        |
+|                          | If a property matches all of the modifiers in any group, then     |                        |
+|                          | trigger a violation. If <<<null>>> or empty, skip this check.  |                        |
+*--------------------------+----------------------------------------------------------------+------------------------+
+
+  Modifiers for fields and methods include:
+
+      * public
+
+      * protected
+
+      * private
+
+      * static
+
+      * final
+
+      * volatile (fields only)
+
+      * transient (fields only)
+
+  Modifiers for properties are only:
+
+      * static
+
+      * final
+
+  Note that you must use the standard rule properties, such as <<<applyToClassNames>>>, <<<doNotApplyToFileNames>>>
+  and <<<applyToFilesMatching>>> to apply this rule to a subset of all classes/files. These rule properties
+  are described in {{{codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+  Standard Properties for Configuring Rules}}.
+
+  Example of violations for methods:
+
+-------------------------------------------------------------------------------
+    // IllegalClassMember.allowedMethodModifiers = 'public final, private, protected static'
+
+    class MyClass {
+        public method1() { }            // violation
+        protected method2() { }         // violation
+        protected static method3() { }
+    }
+-------------------------------------------------------------------------------
+
+  Example of violations for properties:
+
+-------------------------------------------------------------------------------
+    // IllegalClassMember.illegalPropertyModifiers = 'final'
+
+    class MyClass {
+        def property1
+        final property2         // violation
+        static property3
+    }
+-------------------------------------------------------------------------------
+
+  A RuleSet can contain any number of instances of this rule, but each should be configured
+  with a unique rule <name> and <classNames>, and (optionally) customized <violationMessage> and <priority>.
+
+**  Notes
+~~~~~~~~~~~~
+
+  [[1]] At least one the <<<illegalFieldModifiers>>>, <<<allowedFieldModifiers>>>, <<<illegalPropertyModifiers>>>,
+  <<<allowedPropertyModifiers>>>, <<<illegalMethodModifiers>>> or <<<allowedMethodModifiers>>>
+  properties must be set (i.e., not null or empty) or else this rule does nothing. In other words, you must configure
+  this rule with at least one kind of illegal or allowed class member.
+
+  [[2]] At least one of the (standard) <<<applyToClassNames>>>, <<<applyToFileNames>>> or <<<applyToFilesMatching>>>
+  properties must be set (i.e., not null or empty) or else this rule does nothing. In other words, you must configure
+  this rule to apply to a specific set of classes or files.
+
+
+
 * {IllegalClassReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -224,3 +340,4 @@ Generic Rules  ("<rulesets/generic.xml>")
 
   [[4]] This rule will not catch violations of true <statelessness>/<reentrancy> if you define a <<<final>>>
   field whose value is itself mutable, e.g. a <<<final HashMap>>>.
+

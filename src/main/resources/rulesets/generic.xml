@@ -8,11 +8,11 @@
         These rules are generic, and are intended to be customized.
     </description>
 
+    <rule class='org.codenarc.rule.generic.IllegalClassMemberRule'/>
     <rule class='org.codenarc.rule.generic.IllegalClassReferenceRule'/>
     <rule class='org.codenarc.rule.generic.IllegalPackageReferenceRule'/>
     <rule class='org.codenarc.rule.generic.IllegalRegexRule'/>
     <rule class='org.codenarc.rule.generic.RequiredRegexRule'/>
     <rule class='org.codenarc.rule.generic.RequiredStringRule'/>
     <rule class='org.codenarc.rule.generic.StatelessClassRule'/>
-
 </ruleset>
