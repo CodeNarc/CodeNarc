@@ -19,6 +19,8 @@ UPDATED/ENHANCED RULES
 BUG FIXES
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.
 
+FRAMEWORK AND INFRASTRUCTURE
+- added support for per-rule custom compilation phase, allowing for more type information in AST when required
 
 Changes in version 0.18.1 (Feb 2013)
 -------------------------------------------

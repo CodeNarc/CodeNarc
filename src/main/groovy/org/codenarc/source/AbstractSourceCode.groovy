@@ -22,10 +22,10 @@ import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilationUnit
-import org.codehaus.groovy.control.Phases
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codenarc.analyzer.SuppressionAnalyzer
+import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for SourceCode implementations
@@ -37,7 +37,6 @@ import org.codenarc.analyzer.SuppressionAnalyzer
 abstract class AbstractSourceCode implements SourceCode {
     static final LOG = Logger.getLogger(AbstractSourceCode)
     static final SEPARATOR_PROP = 'file.separator'
-    static final FILE_SEPARATOR = System.getProperty(SEPARATOR_PROP)
     private ModuleNode ast
     private List lines
     private astParsed = false
@@ -91,7 +90,7 @@ abstract class AbstractSourceCode implements SourceCode {
                 compUnit.addSource(unit)
                 try {
                     removeGrabTransformation(compUnit)
-                    compUnit.compile(Phases.CONVERSION)
+                    compUnit.compile(getAstCompilerPhase())
                     ast = unit.getAST()
                 }
                 catch (CompilationFailedException e) {
@@ -103,6 +102,13 @@ abstract class AbstractSourceCode implements SourceCode {
                 astParsed = true
             }
         }
+    }
+
+    /**
+     * @return compiler phase (as in {@link org.codehaus.groovy.control.Phases}) up to which the AST will be processed
+     */
+    int getAstCompilerPhase() {
+        Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT
     }
 
     Map<ClassNode, List<MethodCallExpression>> getMethodCallExpressions() {

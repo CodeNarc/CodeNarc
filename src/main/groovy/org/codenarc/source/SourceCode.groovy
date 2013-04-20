@@ -69,12 +69,17 @@ interface SourceCode {
      * @return the ModuleNode representing the AST for this source file
      */
     ModuleNode getAst()
+
+    /**
+     * @return compiler phase (as in {@link org.codehaus.groovy.control.Phases}) up to which the AST will be processed
+     */
+    int getAstCompilerPhase()
     
     /**
      * Return the line index for the line containing the character at the specified index within the source code.
      * @param charIndex - the index of the character within the source code (zero-based)
      * @return the line number (one-based) containing the specified character; Return -1 if charIndex is not valid.
-     */
+     */                             
     int getLineNumberForCharacterIndex(int charIndex)
 
 

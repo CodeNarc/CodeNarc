@@ -18,9 +18,9 @@ package org.codenarc.ant
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.results.Results
-import org.codenarc.rule.Rule
 import org.codenarc.rule.FakeCountRule
 import org.codenarc.rule.FakePathRule
+import org.codenarc.rule.MockRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
@@ -152,7 +152,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         fileSet.setIncludes('source/**/*.groovy')
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         final EXCEPTION = new RuntimeException('TESTING AN EXCEPTION. Error in applyTo()')
-        def badRule = [getName:{ 'dummy' }, applyTo:{ sourceCode -> throw EXCEPTION }] as Rule
+        def badRule = new MockRule(applyTo: { sourceCode -> throw EXCEPTION })
         def loggingEvents = captureLog4JMessages {
             analyzer.analyze(new ListRuleSet([badRule]))
         }
