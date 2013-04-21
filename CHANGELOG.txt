@@ -5,6 +5,7 @@ http://www.codenarc.org
 Changes in version 0.19 (??? 2013)
 -------------------------------------------
 NEW RULES
+- #364: New CloneWithoutCloneable rule: The method clone() should only be declared if the class implements the Cloneable interface.
 - #340: New GrailsDomainReservedSqlKeywordName rule: Check for Grails domain class with class or field name which is a reserved SQL keyword. Thanks to Artur Gajowy. (pull request #13)
 - #339: New GrailsDomainWithServiceReference rule: Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
 - #382: New JUnitPublicField rule. There is usually no reason to have a public field (even a constant) on a test class.
