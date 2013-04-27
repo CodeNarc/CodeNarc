@@ -94,7 +94,11 @@ abstract class AbstractSourceCode implements SourceCode {
                     ast = unit.getAST()
                 }
                 catch (CompilationFailedException e) {
-                    LOG.warn("Compilation failed for [${toString()}]")
+                    logCompilationError(e)
+                }
+                catch (NoClassDefFoundError e) {
+                    logCompilationError(e)
+                    LOG.info("Most likely, a lib containing $e.message is missing from CodeNarc's runtime classpath.")
                 }
 
                 methodCallExpressions = new ExpressionCollector().getMethodCalls(ast)
@@ -102,6 +106,11 @@ abstract class AbstractSourceCode implements SourceCode {
                 astParsed = true
             }
         }
+    }
+
+    private void logCompilationError(Throwable e) {
+        LOG.warn("Compilation failed for [${toString()}].")
+        LOG.info("Compilation failed because of [${e.class.name}] with message: [$e.message]")
     }
 
     /**
