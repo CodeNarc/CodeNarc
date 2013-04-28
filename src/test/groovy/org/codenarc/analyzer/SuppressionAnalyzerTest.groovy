@@ -15,9 +15,8 @@
  */
 package org.codenarc.analyzer
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.MockRule
 import org.codenarc.rule.Violation
-import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.junit.Test
 
@@ -280,16 +279,5 @@ class SuppressionAnalyzerTest extends GroovyTestCase {
 
     private static Violation violationFor(String ruleName, int lineNumber) {
         new Violation(rule: new MockRule(name: ruleName), lineNumber: lineNumber)
-    }
-
-    static class MockRule implements Rule {
-
-        String name
-        int priority = 0
-
-        @Override
-        List applyTo(SourceCode sourceCode) {
-            throw new UnsupportedOperationException()
-        }
     }
 }

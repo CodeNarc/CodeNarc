@@ -104,6 +104,20 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
+* {CloneWithoutCloneable} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  The method clone() should only be declared if the class implements the Cloneable interface.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class ValueClass {
+        ValueClass clone() {
+        }            
+    }
+-------------------------------------------------------------------------------
 
 * {CloseWithoutCloseable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

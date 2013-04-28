@@ -208,3 +208,18 @@ Security Rules  ("<rulesets/security.xml>")
     }
 -------------------------------------------------------------------------------
 
+
+* {UnsafeImplementationAsMap} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Reports incomplete interface implementations created by map-to-interface coercions.
+  
+  By default, this rule does not apply to test files.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    [mouseClicked: { ... }] as MouseListener 
+    //not all MouseListener methods are implemented which can lead to UnsupportedOperationException-s
+-------------------------------------------------------------------------------

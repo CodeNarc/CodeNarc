@@ -18,6 +18,7 @@ package org.codenarc.analyzer
 import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
 import org.codenarc.ruleset.RuleSet
+import org.codenarc.source.CustomCompilerPhaseSourceDecorator
 import org.codenarc.source.SourceCode
 
 /**
@@ -31,8 +32,12 @@ abstract class BaseSourceAnalyzer implements SourceAnalyzer {
         def suppressionService = sourceCode.suppressionAnalyzer
 
         def validRules = ruleSet.rules.findAll { !suppressionService.isRuleSuppressed(it) }
+        def sourceAfterPhase = [(Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT): sourceCode].withDefault { phase -> 
+            new CustomCompilerPhaseSourceDecorator(sourceCode, phase)
+        }
         for (Rule rule: validRules) {
-            def violations = rule.applyTo(sourceCode)
+            def sourceAfterRequiredPhase = sourceAfterPhase[rule.requiredAstCompilerPhase]
+            def violations = rule.applyTo(sourceAfterRequiredPhase)
             violations.removeAll { suppressionService.isViolationSuppressed(it) }
             allViolations.addAll(violations)
         }

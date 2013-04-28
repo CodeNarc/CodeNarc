@@ -17,6 +17,8 @@ package org.codenarc.rule
 
 import org.codenarc.analyzer.StringSourceAnalyzer
 import org.codenarc.ruleset.ListRuleSet
+import org.codenarc.source.CustomCompilerPhaseSourceDecorator
+import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
@@ -67,7 +69,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
         '''
         if (!getProperties().keySet().contains('skipTestThatInvalidCodeHasNoViolations')) {
             // Verify no errors/exceptions
-            def sourceCode = new SourceString(SOURCE)
+            def sourceCode = prepareSourceCode(SOURCE)
             assert rule.applyTo(sourceCode).empty
         }
     }
@@ -229,11 +231,19 @@ actual:               $violation.sourceLine
      * @param source - the full source code to which the rule is applied, as a String
      */
     protected List applyRuleTo(String source) {
-        def sourceCode = new SourceString(source, sourceCodePath, sourceCodeName)
+        def sourceCode = prepareSourceCode(source)
         assert sourceCode.valid
         def violations = rule.applyTo(sourceCode)
         log("violations=$violations")
         violations
+    }
+
+    private SourceCode prepareSourceCode(String source) {
+        def sourceCode = new SourceString(source, sourceCodePath, sourceCodeName)
+        if (rule.requiredAstCompilerPhase != Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT) {
+            sourceCode = new CustomCompilerPhaseSourceDecorator(sourceCode, rule.requiredAstCompilerPhase)
+        }
+        sourceCode
     }
 
     /**

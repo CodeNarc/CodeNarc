@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * This is the base class for AST Visitors that only need to visit the MethodCallExpressions of
- * a class. It will not visit anything except the FieldNode. It is much faster than
+ * a class. It will not visit anything except MethodCallExpression-s. It is much faster than
  * the alternative of visiting the whole class. <br/>
  * <br/>
  * When you override visitField(FieldNode), there is no need to invoke the super method.

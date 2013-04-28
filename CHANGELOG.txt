@@ -5,6 +5,8 @@ http://www.codenarc.org
 Changes in version 0.19 (??? 2013)
 -------------------------------------------
 NEW RULES
+- #329: New UnsafeImplementationAsMap rule (security) - Reports incomplete interface implementations created by map-to-interface coercions. By default, this rule does not apply to test files.  
+- #364: New CloneWithoutCloneable rule: The method clone() should only be declared if the class implements the Cloneable interface.
 - #340: New GrailsDomainReservedSqlKeywordName rule: Check for Grails domain class with class or field name which is a reserved SQL keyword. Thanks to Artur Gajowy. (pull request #13)
 - #339: New GrailsDomainWithServiceReference rule: Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
 - #382: New JUnitPublicField rule. There is usually no reason to have a public field (even a constant) on a test class.
@@ -19,6 +21,8 @@ UPDATED/ENHANCED RULES
 BUG FIXES
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.
 
+FRAMEWORK AND INFRASTRUCTURE
+- added support for per-rule custom compilation phase, allowing for more type information in AST when required
 
 Changes in version 0.18.1 (Feb 2013)
 -------------------------------------------
