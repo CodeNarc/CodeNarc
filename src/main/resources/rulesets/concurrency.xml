@@ -26,6 +26,7 @@
     <rule class='org.codenarc.rule.concurrency.SynchronizedOnStringRule'/>
     <rule class='org.codenarc.rule.concurrency.SynchronizedReadObjectMethodRule'/>
     <rule class='org.codenarc.rule.concurrency.SystemRunFinalizersOnExitRule'/>
+    <rule class='org.codenarc.rule.concurrency.ThisReferenceEscapesConstructorRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadGroupRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadLocalNotStaticFinalRule'/>
     <rule class='org.codenarc.rule.concurrency.ThreadYieldRule'/>
