@@ -15,7 +15,7 @@
  */
 package org.codenarc.analyzer
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.MockRule
 import org.codenarc.rule.Violation
 import org.codenarc.rule.design.PublicInstanceFieldRule
 import org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule
@@ -36,10 +36,8 @@ class StringSourceAnalyzerTest extends GroovyTestCase {
 
         def results = analyzer.analyze(new ListRuleSet(
             [
-                [ getName : { 'rule1' },
-                    applyTo: { fail('Rule should be suppressed') } ] as Rule,
-                [ getName : { 'rule2' },
-                    applyTo: { [new Violation()] } ] as Rule,
+                new MockRule(name: 'rule1', applyTo: { fail('Rule should be suppressed') }),
+                new MockRule(name: 'rule2', applyTo: { [new Violation()] })
             ]
         ))
         assert results.violations.size() == 1
@@ -54,10 +52,8 @@ class StringSourceAnalyzerTest extends GroovyTestCase {
 
         def results = analyzer.analyze(new ListRuleSet(
             [
-                [ getName : { 'rule1' },
-                    applyTo: { [new Violation() ] } ] as Rule,
-                [ getName : { 'rule2' },
-                    applyTo: { [new Violation() ] } ] as Rule,
+                new MockRule(name: 'rule1', applyTo: { [new Violation()] }),
+                new MockRule(name: 'rule2', applyTo: { [new Violation()] })
             ]
         ))
         assert results.violations.size() == 2

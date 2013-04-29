@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule;
 
+import org.codehaus.groovy.control.Phases;
 import org.codenarc.source.SourceCode;
 
 import java.util.List;
@@ -43,5 +44,14 @@ public interface Rule {
      * @return the unique id for this rule
      */
     String getName();
+
+    /**
+     * @return the required compiler phase (as in {@link org.codehaus.groovy.control.Phases})
+     * of the AST of the {@link SourceCode}
+     * handed to the rule via {@link #applyTo(SourceCode sourceCode)}
+     */
+    int getRequiredAstCompilerPhase();
+
+    int REQUIRED_AST_COMPILER_PHASE_DEFAULT = Phases.CONVERSION;
 
 }

@@ -108,6 +108,15 @@ public abstract class AbstractRule implements Rule {
     public abstract void setPriority(int priority);
 
     /**
+     * @return the required compiler phase (as in {@link org.codehaus.groovy.control.Phases})
+     * of the AST of the {@link SourceCode}
+     * handed to the rule via {@link #applyTo(SourceCode sourceCode)}
+     */
+    public int getRequiredAstCompilerPhase() {
+        return REQUIRED_AST_COMPILER_PHASE_DEFAULT;
+    }
+    
+    /**
      * Apply this rule to the specified source and return a list of violations (or an empty List)
      * @param sourceCode - the source to apply this rule to
      * @param violations - the List of violations to which new violations from this rule are to be added
@@ -124,6 +133,7 @@ public abstract class AbstractRule implements Rule {
      */
     public List<Violation> applyTo(SourceCode sourceCode) throws Throwable {
         try {
+            validateAstCompilerPhase(sourceCode);
             validate();
             List<Violation> violations = new ArrayList<Violation>();
             if (shouldApplyThisRuleTo(sourceCode)) {
@@ -134,6 +144,14 @@ public abstract class AbstractRule implements Rule {
         } catch(Throwable t) {
             LOG.error("Error from [" + getClass().getName() + "] processing source file [" + sourceCode.getPath() + "]", t);
             throw t;
+        }
+    }
+
+    private void validateAstCompilerPhase(SourceCode sourceCode) {
+        if (sourceCode.getAstCompilerPhase() != getRequiredAstCompilerPhase()) {
+            throw new IllegalArgumentException("This rule requires SourceCode with AST compiler phase '"
+                    + getRequiredAstCompilerPhase() + "', but was handed one with AST compiler phase '"
+                    + sourceCode.getAstCompilerPhase() + "'");
         }
     }
 

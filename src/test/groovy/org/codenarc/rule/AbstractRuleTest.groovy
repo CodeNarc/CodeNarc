@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule
 
+import org.codehaus.groovy.control.Phases
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.junit.Before
@@ -82,6 +83,18 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE)
         rule.enabled = false
         assertNoViolations(SOURCE)
+    }       
+    
+    @Test
+    void testValidatesAstCompilerPhase() {
+        rule = new FakePathRule() {
+            int requiredAstCompilerPhase = Phases.SEMANTIC_ANALYSIS
+        }
+        def source = new SourceString(SOURCE)
+        assert source.astCompilerPhase == Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT
+        shouldFailWithMessageContaining(IllegalArgumentException, 'SourceCode with AST compiler phase') {
+            rule.applyTo(source)
+        }
     }
 
     @Test
