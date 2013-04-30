@@ -240,7 +240,7 @@ actual:               $violation.sourceLine
 
     private SourceCode prepareSourceCode(String source) {
         def sourceCode = new SourceString(source, sourceCodePath, sourceCodeName)
-        if (rule.requiredAstCompilerPhase != Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT) {
+        if (rule.requiredAstCompilerPhase != SourceCode.DEFAULT_COMPILER_PHASE) {
             sourceCode = new CustomCompilerPhaseSourceDecorator(sourceCode, rule.requiredAstCompilerPhase)
         }
         sourceCode

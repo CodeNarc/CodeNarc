@@ -27,7 +27,7 @@ class MockRule implements Rule {
     MockRule(Map parameters) {
         this.name = parameters.name
         this.priority = parameters.priority ?: 0
-        this.requiredAstCompilerPhase = parameters.requiredAstCompilerPhase ?: REQUIRED_AST_COMPILER_PHASE_DEFAULT
+        this.requiredAstCompilerPhase = parameters.requiredAstCompilerPhase ?: SourceCode.DEFAULT_COMPILER_PHASE
         this.applyToClosure = parameters.applyTo
     }
 

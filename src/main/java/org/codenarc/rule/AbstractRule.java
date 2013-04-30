@@ -113,7 +113,7 @@ public abstract class AbstractRule implements Rule {
      * handed to the rule via {@link #applyTo(SourceCode sourceCode)}
      */
     public int getRequiredAstCompilerPhase() {
-        return REQUIRED_AST_COMPILER_PHASE_DEFAULT;
+        return SourceCode.DEFAULT_COMPILER_PHASE;
     }
     
     /**

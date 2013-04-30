@@ -18,6 +18,7 @@ package org.codenarc.source
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.control.Phases
 import org.codenarc.analyzer.SuppressionAnalyzer
 
 /**
@@ -26,6 +27,8 @@ import org.codenarc.analyzer.SuppressionAnalyzer
  * @author Chris Mair
   */
 interface SourceCode {
+
+    public static final int DEFAULT_COMPILER_PHASE = Phases.CONVERSION
 
     /**
      * Returns information about this classes' suppressed warnings.

@@ -25,7 +25,6 @@ import org.codehaus.groovy.control.CompilationUnit
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codenarc.analyzer.SuppressionAnalyzer
-import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for SourceCode implementations
@@ -116,8 +115,9 @@ abstract class AbstractSourceCode implements SourceCode {
     /**
      * @return compiler phase (as in {@link org.codehaus.groovy.control.Phases}) up to which the AST will be processed
      */
+    @SuppressWarnings('GetterMethodCouldBeProperty')
     int getAstCompilerPhase() {
-        Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT
+        DEFAULT_COMPILER_PHASE
     }
 
     Map<ClassNode, List<MethodCallExpression>> getMethodCallExpressions() {

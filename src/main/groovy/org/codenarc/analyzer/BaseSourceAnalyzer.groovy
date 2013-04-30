@@ -32,7 +32,7 @@ abstract class BaseSourceAnalyzer implements SourceAnalyzer {
         def suppressionService = sourceCode.suppressionAnalyzer
 
         def validRules = ruleSet.rules.findAll { !suppressionService.isRuleSuppressed(it) }
-        def sourceAfterPhase = [(Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT): sourceCode].withDefault { phase -> 
+        def sourceAfterPhase = [(SourceCode.DEFAULT_COMPILER_PHASE): sourceCode].withDefault { phase ->
             new CustomCompilerPhaseSourceDecorator(sourceCode, phase)
         }
         for (Rule rule: validRules) {

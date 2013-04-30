@@ -91,7 +91,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
             int requiredAstCompilerPhase = Phases.SEMANTIC_ANALYSIS
         }
         def source = new SourceString(SOURCE)
-        assert source.astCompilerPhase == Rule.REQUIRED_AST_COMPILER_PHASE_DEFAULT
+        assert source.astCompilerPhase == SourceCode.DEFAULT_COMPILER_PHASE
         shouldFailWithMessageContaining(IllegalArgumentException, 'SourceCode with AST compiler phase') {
             rule.applyTo(source)
         }
