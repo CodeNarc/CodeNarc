@@ -24,7 +24,7 @@ import org.junit.Test
 
 class BaseSourceAnalyzerTest extends GroovyTestCase {
 
-    BaseSourceAnalyzer analyzer = new StringSourceAnalyzer('class MyClass {}') 
+    private BaseSourceAnalyzer analyzer = new StringSourceAnalyzer('class MyClass {}')
     
     @Test
     void testProvidesRulesWithSourceCodeOfRequiredAstCompilationPhase() {

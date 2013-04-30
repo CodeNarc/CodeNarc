@@ -22,7 +22,7 @@ import org.junit.Test
 
 class CustomCompilerPhaseSourceDecoratorTest {
 
-    def phasesCausingClassOutputToDisk = [
+    private static final PHASES_CAUSING_OUTPUT = [
         Phases.OUTPUT,
         Phases.FINALIZATION,
         Phases.ALL
@@ -32,7 +32,7 @@ class CustomCompilerPhaseSourceDecoratorTest {
     void testEnsuresCompilerPhaseBeforeClassOutputToDisk() {
         def source = new SourceString('class MyClass {}')
 
-        phasesCausingClassOutputToDisk.each { int phase ->
+        PHASES_CAUSING_OUTPUT.each { int phase ->
             TestUtil.shouldFail(AssertionError) {
                 new CustomCompilerPhaseSourceDecorator(source, phase)
             }
