@@ -17,13 +17,14 @@ package org.codenarc.results
 
 import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
+import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
 /**
  * Test for virtual results
  * @author Hamlet D'Arcy
  */
-class VirtualResultsTest extends GroovyTestCase {
+class VirtualResultsTest extends AbstractTestCase {
 
     @Test
     void testViolations() {

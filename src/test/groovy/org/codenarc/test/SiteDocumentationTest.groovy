@@ -22,7 +22,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class SiteDocumentationTest extends GroovyTestCase {
+class SiteDocumentationTest extends AbstractTestCase {
 
     @Test
     void testDocumentation() {

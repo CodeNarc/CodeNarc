@@ -18,9 +18,10 @@ package org.codenarc.analyzer
 import org.codenarc.rule.MockRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceString
+import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
-class SuppressionAnalyzerTest extends GroovyTestCase {
+class SuppressionAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testNone() {

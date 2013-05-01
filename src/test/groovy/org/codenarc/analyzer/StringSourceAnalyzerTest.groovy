@@ -20,9 +20,10 @@ import org.codenarc.rule.Violation
 import org.codenarc.rule.design.PublicInstanceFieldRule
 import org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule
 import org.codenarc.ruleset.ListRuleSet
+import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
-class StringSourceAnalyzerTest extends GroovyTestCase {
+class StringSourceAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testSuppressWarningsOnPackage() {

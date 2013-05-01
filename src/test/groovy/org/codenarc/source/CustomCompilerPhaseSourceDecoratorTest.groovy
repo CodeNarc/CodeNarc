@@ -17,10 +17,11 @@ package org.codenarc.source
 
 import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.control.Phases
+import org.codenarc.test.AbstractTestCase
 import org.codenarc.test.TestUtil
 import org.junit.Test
 
-class CustomCompilerPhaseSourceDecoratorTest {
+class CustomCompilerPhaseSourceDecoratorTest extends AbstractTestCase {
 
     private static final PHASES_CAUSING_OUTPUT = [
         Phases.OUTPUT,

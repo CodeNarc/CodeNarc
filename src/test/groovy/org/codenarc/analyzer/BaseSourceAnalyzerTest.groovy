@@ -20,9 +20,10 @@ import org.codenarc.rule.MockRule
 import org.codenarc.rule.Rule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceCode
+import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
-class BaseSourceAnalyzerTest extends GroovyTestCase {
+class BaseSourceAnalyzerTest extends AbstractTestCase {
 
     private BaseSourceAnalyzer analyzer = new StringSourceAnalyzer('class MyClass {}')
     
