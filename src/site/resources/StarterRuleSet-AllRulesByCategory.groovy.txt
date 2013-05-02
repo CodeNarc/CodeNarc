@@ -74,6 +74,7 @@ ruleset {
     SynchronizedOnThis 
     SynchronizedReadObjectMethod 
     SystemRunFinalizersOnExit 
+    ThisReferenceEscapesConstructor 
     ThreadGroup 
     ThreadLocalNotStaticFinal 
     ThreadYield 
@@ -98,6 +99,7 @@ ruleset {
     AbstractClassWithoutAbstractMethod 
     BooleanMethodReturnsNull 
     BuilderMethodWithSideEffects 
+    CloneWithoutCloneable 
     CloneableWithoutClone 
     CloseWithoutCloseable 
     CompareToWithoutComparable 
@@ -161,6 +163,7 @@ ruleset {
     SpaceBeforeOpeningBrace 
     
     // rulesets/generic.xml
+    IllegalClassMember 
     IllegalClassReference 
     IllegalPackageReference 
     IllegalRegex 
@@ -287,6 +290,7 @@ ruleset {
     PublicFinalizeMethod 
     SystemExit 
     UnsafeArrayDeclaration 
+    UnsafeImplementationAsMap 
     
     // rulesets/serialization.xml
     SerialPersistentFields 

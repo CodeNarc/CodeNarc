@@ -42,6 +42,7 @@ ruleset {
     ClassJavadoc 
     ClassName 
     ClassSize 
+    CloneWithoutCloneable 
     CloneableWithoutClone 
     CloseWithoutCloseable 
     ClosureAsLastMethodParameter 
@@ -140,6 +141,7 @@ ruleset {
     HashtableIsObsolete 
     IfStatementBraces 
     IfStatementCouldBeTernary 
+    IllegalClassMember 
     IllegalClassReference 
     IllegalPackageReference 
     IllegalRegex 
@@ -240,6 +242,7 @@ ruleset {
     SystemOutPrint 
     SystemRunFinalizersOnExit 
     TernaryCouldBeElvis 
+    ThisReferenceEscapesConstructor 
     ThreadGroup 
     ThreadLocalNotStaticFinal 
     ThreadYield 
@@ -292,6 +295,7 @@ ruleset {
     UnnecessaryTernaryExpression 
     UnnecessaryTransientModifier 
     UnsafeArrayDeclaration 
+    UnsafeImplementationAsMap 
     UnusedArray 
     UnusedImport 
     UnusedMethodParameter 

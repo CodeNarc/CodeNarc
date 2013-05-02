@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 309 rules.
+  <<CodeNarc>> includes 313 rules.
 
     
       
@@ -211,6 +211,9 @@ Rule Index
     * {{{codenarc-rules-concurrency.html#SystemRunFinalizersOnExit}SystemRunFinalizersOnExit}}  
     
       
+    * {{{codenarc-rules-concurrency.html#ThisReferenceEscapesConstructor}ThisReferenceEscapesConstructor}}  
+    
+      
     * {{{codenarc-rules-concurrency.html#ThreadGroup}ThreadGroup}}  
     
       
@@ -279,6 +282,9 @@ Rule Index
     
       
     * {{{codenarc-rules-design.html#BuilderMethodWithSideEffects}BuilderMethodWithSideEffects}}  
+    
+      
+    * {{{codenarc-rules-design.html#CloneWithoutCloneable}CloneWithoutCloneable}}  
     
       
     * {{{codenarc-rules-design.html#CloneableWithoutClone}CloneableWithoutClone}}  
@@ -465,6 +471,9 @@ Rule Index
       
 * {{{codenarc-rules-generic.html}Generic}}
       
+      
+    * {{{codenarc-rules-generic.html#IllegalClassMember}IllegalClassMember}}  
+    
       
     * {{{codenarc-rules-generic.html#IllegalClassReference}IllegalClassReference}}  
     
@@ -834,6 +843,9 @@ Rule Index
     
       
     * {{{codenarc-rules-security.html#UnsafeArrayDeclaration}UnsafeArrayDeclaration}}  
+    
+      
+    * {{{codenarc-rules-security.html#UnsafeImplementationAsMap}UnsafeImplementationAsMap}}  
     
     
       
