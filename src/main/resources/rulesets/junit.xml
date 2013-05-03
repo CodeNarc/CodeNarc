@@ -12,6 +12,7 @@
     <rule class='org.codenarc.rule.junit.CoupledTestCaseRule'/>
     <rule class='org.codenarc.rule.junit.JUnitAssertAlwaysFailsRule'/>
     <rule class='org.codenarc.rule.junit.JUnitAssertAlwaysSucceedsRule'/>
+    <rule class='org.codenarc.rule.junit.JUnitAssertEqualsConstantActualValueRule'/>
     <rule class='org.codenarc.rule.junit.JUnitFailWithoutMessageRule'/>
     <rule class='org.codenarc.rule.junit.JUnitPublicNonTestMethodRule'/>
     <rule class='org.codenarc.rule.junit.JUnitLostTestRule'/>
