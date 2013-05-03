@@ -20,6 +20,7 @@ UPDATED/ENHANCED RULES
 - #408: SerialVersionUID rule: Also check that serialVersionUID field is declared private.
 
 BUG FIXES
+- bug in UnnecessaryDefInFieldDeclarationRule making it report false positives with 'def' on right hand side of assignment
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.
 
 FRAMEWORK AND INFRASTRUCTURE
