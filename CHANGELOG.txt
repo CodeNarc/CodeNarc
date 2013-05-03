@@ -5,6 +5,7 @@ http://www.codenarc.org
 Changes in version 0.19 (??? 2013)
 -------------------------------------------
 NEW RULES
+- #278: New JUnitAssertEqualsConstantActualValue rule (junit) - Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter is a constant or a literal. Most likely it was intended to be the 'expected' value.
 - #214: New ThisReferenceEscapesConstructor rule (concurrency) - Reports constructors passing the 'this' reference to other methods. Thanks to Artur Gajowy. (pull request #15)
 - #340: New GrailsDomainReservedSqlKeywordName rule - Check for Grails domain class with class or field name which is a reserved SQL keyword. Thanks to Artur Gajowy. (pull request #13)
 - #339: New GrailsDomainWithServiceReference rule - Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
@@ -20,6 +21,7 @@ UPDATED/ENHANCED RULES
 - #408: SerialVersionUID rule: Also check that serialVersionUID field is declared private.
 
 BUG FIXES
+- bug in UnnecessaryDefInFieldDeclarationRule making it report false positives with 'def' on right hand side of assignment
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.
 
 FRAMEWORK AND INFRASTRUCTURE

@@ -82,6 +82,18 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testSuccessScenario_defAfterAssignment() {
+        final SOURCE = '''
+            class SampleTest {
+                private static final String SOURCE_SHARED_BETWEEN_TESTS = \'\'\'
+                    def sum = 1 + 1
+                \'\'\'
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     /*
      * Violations
      */

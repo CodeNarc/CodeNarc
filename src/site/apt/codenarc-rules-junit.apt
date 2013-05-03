@@ -86,6 +86,23 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
+* {JUnitAssertEqualsConstantActualValue} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Reports usages of <<<org.junit.Assert.assertEquals([message,] expected, actual)>>> where the <<<actual>>> parameter
+  is a constant or a literal. Most likely it was intended to be the <<<expected>>> value.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    assertEquals(result, 2)
+    assertEquals("Message", result, 2)
+    assertEquals(result, 2.3d, 0.5d)
+    assertEquals("Message", result, 2.3d, 0.5d)
+-------------------------------------------------------------------------------
+
+
 * {JUnitFailWithoutMessage} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>

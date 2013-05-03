@@ -38,6 +38,10 @@ class UnnecessaryDefInFieldDeclarationAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
         String declaration = AstUtil.getDeclaration(node, sourceCode)
+        def definitionStart = declaration.indexOf('=')
+        if (definitionStart != -1) {
+            declaration = declaration[0 .. definitionStart - 1]
+        }
 
         if (contains(declaration, 'def')) {
             if (contains(declaration, 'private')) {
