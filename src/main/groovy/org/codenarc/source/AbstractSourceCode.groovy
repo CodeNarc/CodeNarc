@@ -109,7 +109,9 @@ abstract class AbstractSourceCode implements SourceCode {
 
     private void logCompilationError(Throwable e) {
         LOG.warn("Compilation failed for [${toString()}].")
-        LOG.info("Compilation failed because of [${e.class.name}] with message: [$e.message]")
+        if (getAstCompilerPhase() <= DEFAULT_COMPILER_PHASE) {
+            LOG.info("Compilation failed because of [${e.class.name}] with message: [$e.message]")
+        }
     }
 
     /**
