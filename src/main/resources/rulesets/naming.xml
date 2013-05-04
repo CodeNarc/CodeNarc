@@ -10,6 +10,7 @@
 
     <rule class='org.codenarc.rule.naming.AbstractClassNameRule'/>
     <rule class='org.codenarc.rule.naming.ClassNameRule'/>
+    <rule class='org.codenarc.rule.naming.ClassNameSameAsFilenameRule'/>
     <rule class='org.codenarc.rule.naming.ConfusingMethodNameRule'/>
     <rule class='org.codenarc.rule.naming.FieldNameRule'/>
     <rule class='org.codenarc.rule.naming.InterfaceNameRule'/>

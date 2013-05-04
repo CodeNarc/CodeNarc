@@ -37,6 +37,13 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
+* {ClassNameSameAsFilename} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Reports files containing only one top level class / enum / interface which is named differently than the file.
+
+
 * {ConfusingMethodName} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
