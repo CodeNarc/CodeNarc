@@ -424,6 +424,13 @@ Basic Rules  ("<rulesets/basic.xml>")
 -------------------------------------------------------------------------------
 
 
+* {EmptyClass} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Reports classes without methods, fields or properties. Why would you need a class like this?
+
+
 * {EmptyElseBlock} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

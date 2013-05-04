@@ -5,6 +5,8 @@ http://www.codenarc.org
 Changes in version 0.19 (??? 2013)
 -------------------------------------------
 NEW RULES
+- #349: New EmptyClass rule (basic) - Reports classes without methods, fields or properties. Why would you need a class like this?
+- #409: New ClassNameSameAsFilename rule (naming) - Reports files containing only one top level class / enum / interface which is named differently than the file.
 - #278: New JUnitAssertEqualsConstantActualValue rule (junit) - Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter is a constant or a literal. Most likely it was intended to be the 'expected' value.
 - #214: New ThisReferenceEscapesConstructor rule (concurrency) - Reports constructors passing the 'this' reference to other methods. Thanks to Artur Gajowy. (pull request #15)
 - #340: New GrailsDomainReservedSqlKeywordName rule - Check for Grails domain class with class or field name which is a reserved SQL keyword. Thanks to Artur Gajowy. (pull request #13)
