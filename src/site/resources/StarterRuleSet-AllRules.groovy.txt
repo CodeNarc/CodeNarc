@@ -41,6 +41,7 @@ ruleset {
     ClassForName 
     ClassJavadoc 
     ClassName 
+    ClassNameSameAsFilename 
     ClassSize 
     CloneWithoutCloneable 
     CloneableWithoutClone 
@@ -78,6 +79,7 @@ ruleset {
     DuplicateStringLiteral 
     ElseBlockBraces 
     EmptyCatchBlock 
+    EmptyClass 
     EmptyElseBlock 
     EmptyFinallyBlock 
     EmptyForStatement 
@@ -156,6 +158,7 @@ ruleset {
     InvertedIfElse 
     JUnitAssertAlwaysFails 
     JUnitAssertAlwaysSucceeds 
+    JUnitAssertEqualsConstantActualValue 
     JUnitFailWithoutMessage 
     JUnitLostTest 
     JUnitPublicField 

@@ -15,14 +15,16 @@
  */
 package org.codenarc.rule.generic
 
-import static org.codenarc.util.ModifiersUtil.*
+import static org.codenarc.util.ModifiersUtil.matchesAnyModifiers
+import static org.codenarc.util.ModifiersUtil.parseModifiersList
 
+import org.codehaus.groovy.ast.AnnotationNode
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.PropertyNode
-
-import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.WildcardPattern
 
 /**
  * Checks for classes containing fields/properties/methods matching configured illegal member modifiers.
@@ -30,9 +32,12 @@ import org.codenarc.rule.AbstractAstVisitor
  * @author Chris Mair
  */
 class IllegalClassMemberRule extends AbstractAstVisitorRule {
+
     String name = 'IllegalClassMember'
     int priority = 2
     Class astVisitorClass = IllegalClassMemberAstVisitor
+    String ignoreMethodNames
+    String ignoreMethodsWithAnnotationNames
 
     protected Collection<Integer> illegalFieldModifiersList = []
     protected String illegalFieldModifiersString
@@ -125,15 +130,31 @@ class IllegalClassMemberAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitMethodEx(MethodNode node) {
         boolean matchesIllegal = matchesAnyModifiers(node.modifiers, rule.illegalMethodModifiersList)
-        if (matchesIllegal) {
+        if (matchesIllegal && !matchesIgnoreMethodNames(node) && !matchesIgnoreMethodsWithAnnotationNames(node)) {
             addViolation(node, "Method \"${node.name}\" has modifiers matching one of the configured illegalMethodModifiers: \"${rule.illegalMethodModifiersString}\"")
         }
 
         if (rule.allowedMethodModifiersList) {
             boolean matchesAllowed = matchesAnyModifiers(node.modifiers, rule.allowedMethodModifiersList)
-            if (!matchesAllowed) {
+            if (!matchesAllowed && !matchesIgnoreMethodNames(node) && !matchesIgnoreMethodsWithAnnotationNames(node)) {
                 addViolation(node, "Method \"${node.name}\" does not have modifiers matching one of the configured allowedMethodModifiers: \"${rule.allowedMethodModifiersString}\"")
             }
         }
+    }
+
+    private boolean matchesIgnoreMethodNames(MethodNode methodNode) {
+        return new WildcardPattern(rule.ignoreMethodNames, false).matches(methodNode.name)
+    }
+
+    private boolean matchesIgnoreMethodsWithAnnotationNames(MethodNode methodNode) {
+        def wildcardPattern = new WildcardPattern(rule.ignoreMethodsWithAnnotationNames, false)
+        List<AnnotationNode> annotations = methodNode.getAnnotations()
+        for (AnnotationNode annotation : annotations) {
+            def annotationName = annotation.getClassNode().getName()
+            if (wildcardPattern.matches(annotationName)) {
+                return true
+            }
+        }
+        return false
     }
 }

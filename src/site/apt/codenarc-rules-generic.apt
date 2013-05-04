@@ -34,6 +34,15 @@ Generic Rules  ("<rulesets/generic.xml>")
 |                          | property does not match all of the modifiers in any group, then|                        |
 |                          | trigger a violation. If <<<null>>> or empty, skip this check.  |                        |
 *--------------------------+----------------------------------------------------------------+------------------------+
+| ignoreMethodNames        | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
+|                          | should be ignored (i.e., that should not cause a rule          |                        |
+|                          | violation). The names may optionally contain wildcards (*,?).  |                        |
+*--------------------------+----------------------------------------------------------------+------------------------+
+| ignoreMethodsWith-       | Specifies one or more (comma-separated) annotation names that  | <<<null>>>             |
+|    AnnotationNames       | should be ignored (i.e., methods with those annotations should |                        |
+|                          | not cause a rule violation). The names may optionally contain  |                        |
+|                          | wildcards (*,?). (Do not include the "@" in the annotation name.|                       |
+*--------------------------+----------------------------------------------------------------+------------------------+
 | illegalFieldModifiers    | Specifies one or more groups of whitespace-delimited modifier  | <<<null>>>             |
 |                          | names (e.g. "public static" or "protected"). Multiple groups   |                        |
 |                          | are separated by commas (e.g. "private final, protected").     |                        |

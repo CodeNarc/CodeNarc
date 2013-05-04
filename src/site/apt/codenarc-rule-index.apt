@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 313 rules.
+  <<CodeNarc>> includes 316 rules.
 
     
       
@@ -67,6 +67,9 @@ Rule Index
     
       
     * {{{codenarc-rules-basic.html#EmptyCatchBlock}EmptyCatchBlock}}  
+    
+      
+    * {{{codenarc-rules-basic.html#EmptyClass}EmptyClass}}  
     
       
     * {{{codenarc-rules-basic.html#EmptyElseBlock}EmptyElseBlock}}  
@@ -686,6 +689,9 @@ Rule Index
     * {{{codenarc-rules-junit.html#JUnitAssertAlwaysSucceeds}JUnitAssertAlwaysSucceeds}}  
     
       
+    * {{{codenarc-rules-junit.html#JUnitAssertEqualsConstantActualValue}JUnitAssertEqualsConstantActualValue}}  
+    
+      
     * {{{codenarc-rules-junit.html#JUnitFailWithoutMessage}JUnitFailWithoutMessage}}  
     
       
@@ -781,6 +787,9 @@ Rule Index
     
       
     * {{{codenarc-rules-naming.html#ClassName}ClassName}}  
+    
+      
+    * {{{codenarc-rules-naming.html#ClassNameSameAsFilename}ClassNameSameAsFilename}}  
     
       
     * {{{codenarc-rules-naming.html#ConfusingMethodName}ConfusingMethodName}}  

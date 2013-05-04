@@ -26,6 +26,7 @@ ruleset {
     DuplicateMapKey 
     DuplicateSetValue 
     EmptyCatchBlock 
+    EmptyClass 
     EmptyElseBlock 
     EmptyFinallyBlock 
     EmptyForStatement 
@@ -236,6 +237,7 @@ ruleset {
     CoupledTestCase 
     JUnitAssertAlwaysFails 
     JUnitAssertAlwaysSucceeds 
+    JUnitAssertEqualsConstantActualValue 
     JUnitFailWithoutMessage 
     JUnitLostTest 
     JUnitPublicField 
@@ -269,6 +271,7 @@ ruleset {
     // rulesets/naming.xml
     AbstractClassName 
     ClassName 
+    ClassNameSameAsFilename 
     ConfusingMethodName 
     FactoryMethodName 
     FieldName 

@@ -94,10 +94,10 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'protected field2', messageText:'field2'])
     }
 
-    // Fields
+    // Properties
 
     @Test
-    void testProperties_IllegalFieldModifiers_Match_Violations() {
+    void testProperties_IllegalPropertyModifiers_Match_Violations() {
         final SOURCE = '''
         	class MyClass {
         	    def property1
@@ -111,7 +111,7 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testProperties_AllowedFieldModifiers_NoMatch_Violations() {
+    void testProperties_AllowedPropertyModifiers_NoMatch_Violations() {
         final SOURCE = '''
         	class MyClass {
         	    def property1
@@ -128,7 +128,7 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     // Methods
 
     @Test
-    void testMethods_IllegalFieldModifiers_Match_Violations() {
+    void testMethods_IllegalMethodModifiers_Match_Violations() {
         final SOURCE = '''
         	class MyClass {
         	    public method1() { }
@@ -144,7 +144,7 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testMethods_AllowedFieldModifiers_NoMatch_Violations() {
+    void testMethods_AllowedMethodModifiers_NoMatch_Violations() {
         final SOURCE = '''
         	class MyClass {
         	    public method1() { }
@@ -157,7 +157,90 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'protected method2', messageText:'method2'])
     }
 
+    @Test
+    void testMethods_IgnoreMethodNames_MatchesSingleName_NoViolations() {
+        final SOURCE = '''
+          class MyClass {
+            public method1() { }
+          }
+        '''
+        rule.ignoreMethodNames = 'method1'
+        rule.illegalMethodModifiers = 'public'
+        assertNoViolations(SOURCE)
+    }
 
+    @Test
+    void testApplyTo_IgnoreMethodNames_MatchesNoNames() {
+        final SOURCE = '''
+          class MyClass {
+            public method1() { }
+          }
+        '''
+        rule.ignoreMethodNames = 'method2'
+        rule.illegalMethodModifiers = 'public'
+        assertSingleViolation(SOURCE, 3, 'public method1')
+    }
+
+    @Test
+    void testApplyTo_IgnoreMethodNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+          class MyClass {
+            public method1() { }
+            public otherMethod1() { }
+            public badMethod1() { }
+          }
+        '''
+        rule.allowedMethodModifiers = 'protected'
+        rule.ignoreMethodNames = 'meth?d?,x*, badM*'
+        assertSingleViolation(SOURCE, 4, 'public otherMethod1')
+    }
+
+//-----------------------
+
+    @Test
+    void testMethods_IgnoreMethodsWithAnnotationNames_MatchesSingleName_NoViolations() {
+        final SOURCE = '''
+          class MyClass {
+            @Override
+            public method1() { }
+          }
+        '''
+        rule.ignoreMethodsWithAnnotationNames = 'Override'
+        rule.illegalMethodModifiers = 'public'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_IgnoreMethodsWithAnnotationNames_MatchesNoNames() {
+        final SOURCE = '''
+          class MyClass {
+            @Override
+            public method1() { }
+          }
+        '''
+        rule.ignoreMethodsWithAnnotationNames = 'Test'
+        rule.illegalMethodModifiers = 'public'
+        assertSingleViolation(SOURCE, 4, 'public method1')
+    }
+
+    @Test
+    void testApplyTo_IgnoreMethodsWithAnnotationNames_MultipleNamesWithWildcards() {
+        final SOURCE = '''
+          class MyClass {
+            @Override public method1() { }
+
+            public otherMethod1() { }
+
+            @SuppressWarnings('Bad')
+            public badMethod1() { }
+          }
+        '''
+        rule.allowedMethodModifiers = 'protected'
+        rule.ignoreMethodsWithAnnotationNames = 'Over?ide,Other,Supp*Warnings'
+        assertSingleViolation(SOURCE, 5, 'public otherMethod1')
+    }
+
+//---------------
 
     protected Rule createRule() {
         new IllegalClassMemberRule(applyToClassNames:'*')
