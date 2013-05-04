@@ -27,6 +27,7 @@
     <rule class='org.codenarc.rule.basic.DuplicateMapKeyRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
     <rule class='org.codenarc.rule.basic.EmptyCatchBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyClassRule'/>
     <rule class='org.codenarc.rule.basic.EmptyElseBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.EmptyForStatementRule'/>
