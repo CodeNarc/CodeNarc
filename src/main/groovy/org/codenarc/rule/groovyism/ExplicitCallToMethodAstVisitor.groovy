@@ -59,5 +59,5 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractMethodCallExpressi
         }
     }
 
-    abstract String getViolationMessage(MethodCallExpression exp)
+    abstract protected String getViolationMessage(MethodCallExpression exp)
 }

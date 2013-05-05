@@ -95,10 +95,6 @@ class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
         parent.visitClassEx(node)
     }
 
-    Rule getRule() {
-        parent.rule
-    }
-
     private static String getParameterDefinitionAsString(MethodNode node) {
         Parameter[] parameters = node?.getParameters()
         '(' + parameters?.collect { it?.type?.toString() }?.join(', ') + ')'

@@ -46,7 +46,7 @@ class HardCodedWindowsFileSeparatorAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    void addViolationForWindowsSeparator(Expression expression) {
+    private void addViolationForWindowsSeparator(Expression expression) {
         if (expression instanceof ConstantExpression && expression.value instanceof String) {
             if (expression.value.contains('\\')) {
                 addViolation(expression, 'The windows file separator is not portable')

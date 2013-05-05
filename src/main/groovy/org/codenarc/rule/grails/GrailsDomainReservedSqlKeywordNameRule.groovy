@@ -156,7 +156,7 @@ class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    boolean hibernateWouldCreateColumnFor(FieldNode field) {
+    private boolean hibernateWouldCreateColumnFor(FieldNode field) {
         !(field.dynamicTyped || field.name in transients) && field.type.name in hibernateBasicTypes
     }
 

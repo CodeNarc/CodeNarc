@@ -32,7 +32,7 @@ class ExplicitLinkedHashMapInstantiationRule extends AbstractAstVisitorRule {
     AstVisitor getAstVisitor() {
         new ExplicitTypeInstantiationAstVisitor('LinkedHashMap') {
             @Override
-            String createErrorMessage() {
+            protected String createErrorMessage() {
                 'LinkedHashMap objects are better instantiated using the form "[:]"'
             }
         }

@@ -33,7 +33,7 @@ class ExplicitTreeSetInstantiationRule extends AbstractAstVisitorRule {
     AstVisitor getAstVisitor() {
         new ExplicitTypeInstantiationAstVisitor('TreeSet') {
             @Override
-            String createErrorMessage() {
+            protected String createErrorMessage() {
                 'TreeSet objects are better instantiated using the form "[] as SortedSet"'
             }
         }

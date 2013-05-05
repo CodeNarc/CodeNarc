@@ -33,7 +33,7 @@ class ExplicitArrayListInstantiationRule extends AbstractAstVisitorRule {
     AstVisitor getAstVisitor() {
         new ExplicitTypeInstantiationAstVisitor('ArrayList') {
             @Override
-            String createErrorMessage() {
+            protected String createErrorMessage() {
                 'ArrayList objects are better instantiated using the form "[]"'
             }
         }

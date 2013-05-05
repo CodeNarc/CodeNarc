@@ -50,7 +50,7 @@ class InvertedIfElseAstVisitor extends AbstractAstVisitor {
         
     }
 
-    void dispatchToIfWithoutSuper(IfStatement ifElse) {
+    private void dispatchToIfWithoutSuper(IfStatement ifElse) {
         // no need to visit boolean expression
 
         // if block might have another instance of this error

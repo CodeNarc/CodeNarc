@@ -1,5 +1,7 @@
 import org.codenarc.rule.generic.RequiredStringRule
 
+final TEST_FILES = ".*(Test|Tests|TestCase)\\.groovy"
+
 ruleset {
     description 'RuleSet for running CodeNarc against the project source code. See RunCodeNarcAgainstProjectSourceCodeTest'
 
@@ -48,6 +50,22 @@ ruleset {
     }
 
     ruleset('rulesets/unused.xml')
+
+    //------------------------------------------------------------------------------------
+    // Custom rules
+    //------------------------------------------------------------------------------------
+
+    // Ensure that Rule and AstVisitor classes do not contain unnecessary public methods
+    IllegalClassMember {
+        name = 'UnnecessaryPublicMethodsInRuleClasses'
+        applyToClassNames = 'Rule, *AstVisitor'
+        doNotApplyToClassNames = 'AstVisitor, FieldReferenceAstVisitor'
+        doNotApplyToFilesMatching = TEST_FILES
+        illegalMethodModifiers = 'public'
+        ignoreMethodsWithAnnotationNames = 'Override'
+        ignoreMethodNames = 'visit*, handleClosure'
+        description = 'Checks that Rule and AstVisitor classes do not contain unnecessary public methods'
+    }
 
     // Ensure that each source file contains the Apache License header
     rule(RequiredStringRule) {

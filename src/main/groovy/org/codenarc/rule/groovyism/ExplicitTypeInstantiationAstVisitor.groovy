@@ -39,5 +39,5 @@ abstract class ExplicitTypeInstantiationAstVisitor extends AbstractAstVisitor {
         super.visitConstructorCallExpression call
     }
 
-    abstract String createErrorMessage()
+    abstract protected String createErrorMessage()
 }

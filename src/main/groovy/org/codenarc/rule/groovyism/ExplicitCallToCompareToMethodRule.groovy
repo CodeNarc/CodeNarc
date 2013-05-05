@@ -37,7 +37,7 @@ class ExplicitCallToCompareToMethodAstVisitor extends ExplicitCallToMethodAstVis
     }
 
     @Override
-    String getViolationMessage(MethodCallExpression exp) {
+    protected String getViolationMessage(MethodCallExpression exp) {
         "Explicit call to ${exp.text} method can be rewritten using the compareTo operators such as >, <, <=, >=, and <=>"
     }
 }

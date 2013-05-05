@@ -33,7 +33,7 @@ class ExplicitStackInstantiationRule extends AbstractAstVisitorRule {
     AstVisitor getAstVisitor() {
         new ExplicitTypeInstantiationAstVisitor('Stack') {
             @Override
-            String createErrorMessage() {
+            protected String createErrorMessage() {
                 'Stack objects are better instantiated using the form "[] as Stack"'
             }
         }

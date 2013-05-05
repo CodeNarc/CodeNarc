@@ -45,7 +45,7 @@ class HardcodedWindowsRootDirectoryAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    void addViolationForWindowsPath(Expression expression) {
+    private void addViolationForWindowsPath(Expression expression) {
         if (expression instanceof ConstantExpression && expression.value instanceof String) {
             if (expression.value ==~ /[a-zA-Z]:\\.*/) {
                 addViolation(expression, "The file location ${expression.value[0..2]} is not portable")

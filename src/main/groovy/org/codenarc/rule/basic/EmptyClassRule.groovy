@@ -39,7 +39,7 @@ class EmptyClassRule extends AbstractRule {
         }
     }
 
-    boolean isAnonymousInnerClass(ClassNode classNode) {
+    private boolean isAnonymousInnerClass(ClassNode classNode) {
         return classNode instanceof InnerClassNode && classNode.isAnonymous()
     }
 

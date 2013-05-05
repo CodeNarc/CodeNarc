@@ -66,7 +66,7 @@ class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor 
         }
     }
 
-    Expression getActualArgument(def methodCall) {
+    private Expression getActualArgument(def methodCall) {
         List<? extends Expression> arguments = AstUtil.getMethodArguments(methodCall)
         int actualArgumentIndex = getActualArgumentIndex(arguments)
         return actualArgumentIndex == -1 ? null : arguments[actualArgumentIndex]
@@ -89,7 +89,7 @@ class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor 
         actualArgumentIndex
     }
 
-    boolean isConvertibleToDouble(ClassNode classNode) {
+    private boolean isConvertibleToDouble(ClassNode classNode) {
         return classNode.typeClass in [int, Integer, long, Long, float, Float, double, Double, BigInteger, BigDecimal]
     }
 

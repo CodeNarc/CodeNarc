@@ -33,7 +33,7 @@ class ExplicitHashSetInstantiationRule extends AbstractAstVisitorRule {
         AstVisitor getAstVisitor() {
             new ExplicitTypeInstantiationAstVisitor('HashSet')  {
             @Override
-            String createErrorMessage() {
+            protected String createErrorMessage() {
                 'HashSet objects are better instantiated using the form "[:] as Set"'
             }
         }

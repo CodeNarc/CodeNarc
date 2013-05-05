@@ -70,7 +70,7 @@ class SynchronizedReadObjectMethodAstVisitor extends AbstractMethodVisitor {
         isSerializable
     }
 
-    static boolean isSynchronizedBlock(Statement statement) {
+    private static boolean isSynchronizedBlock(Statement statement) {
         if (!(statement instanceof BlockStatement)) {
             return false
         }
@@ -81,6 +81,5 @@ class SynchronizedReadObjectMethodAstVisitor extends AbstractMethodVisitor {
 
         statement.statements[0] instanceof SynchronizedStatement
     }
-
 
 }

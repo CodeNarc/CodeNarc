@@ -45,11 +45,11 @@ class CloneWithoutCloneableAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    MethodNode cloneMethod(ClassNode classNode) {
+    private MethodNode cloneMethod(ClassNode classNode) {
         classNode.getDeclaredMethod('clone', [] as Parameter[])
     }
 
-    boolean isCloneable(ClassNode classNode) {
+    private boolean isCloneable(ClassNode classNode) {
         AstUtil.classNodeImplementsType(classNode, Cloneable)
     }
 }

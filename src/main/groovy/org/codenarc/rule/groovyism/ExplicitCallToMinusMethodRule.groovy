@@ -36,7 +36,7 @@ class ExplicitCallToMinusMethodAstVisitor extends ExplicitCallToMethodAstVisitor
     }
 
     @Override
-    String getViolationMessage(MethodCallExpression exp) {
+    protected String getViolationMessage(MethodCallExpression exp) {
         "Explicit call to ${exp.text} method can be rewritten as ${exp.objectExpression.text} - ${exp.arguments.text}"        
     }
 }

@@ -70,7 +70,7 @@ class InconsistentPropertyLockingAstVisitor extends AbstractMethodVisitor {
         }
     }
 
-    void addViolationOnMismatch(String getterName, String setterName) {
+    private void addViolationOnMismatch(String getterName, String setterName) {
         if (guardedMethods.containsKey(getterName) && unguardedMethods.containsKey(setterName)) {
             MethodNode unguardedNode = unguardedMethods.get(setterName)
             MethodNode guardedNode = guardedMethods.get(getterName)
