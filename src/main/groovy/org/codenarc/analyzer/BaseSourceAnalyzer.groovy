@@ -36,7 +36,7 @@ abstract class BaseSourceAnalyzer implements SourceAnalyzer {
             new CustomCompilerPhaseSourceDecorator(sourceCode, phase)
         }
         for (Rule rule: validRules) {
-            def sourceAfterRequiredPhase = sourceAfterPhase[rule.requiredAstCompilerPhase]
+            def sourceAfterRequiredPhase = sourceAfterPhase[rule.compilerPhase]
             def violations = rule.applyTo(sourceAfterRequiredPhase)
             violations.removeAll { suppressionService.isViolationSuppressed(it) }
             allViolations.addAll(violations)

@@ -37,7 +37,7 @@ class UnsafeImplementationAsMapRule extends AbstractAstVisitorRule {
     String name = 'UnsafeImplementationAsMap'
     int priority = 2
     Class astVisitorClass = UnsafeImplementationAsMapAstVisitor
-    int requiredAstCompilerPhase = Phases.SEMANTIC_ANALYSIS
+    int compilerPhase = Phases.SEMANTIC_ANALYSIS
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
 }
 

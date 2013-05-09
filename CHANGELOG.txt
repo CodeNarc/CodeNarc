@@ -7,16 +7,16 @@ Changes in version 0.19 (??? 2013)
 NEW RULES
 - #349: New EmptyClass rule (basic) - Reports classes without methods, fields or properties. Why would you need a class like this?
 - #409: New ClassNameSameAsFilename rule (naming) - Reports files containing only one top level class / enum / interface which is named differently than the file.
-- #278: New JUnitAssertEqualsConstantActualValue rule (junit) - Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter is a constant or a literal. Most likely it was intended to be the 'expected' value.
 - #214: New ThisReferenceEscapesConstructor rule (concurrency) - Reports constructors passing the 'this' reference to other methods. Thanks to Artur Gajowy. (pull request #15)
 - #340: New GrailsDomainReservedSqlKeywordName rule - Check for Grails domain class with class or field name which is a reserved SQL keyword. Thanks to Artur Gajowy. (pull request #13)
 - #339: New GrailsDomainWithServiceReference rule - Check for Grails domain class with reference to service class (field). Thanks to Artur Gajowy. (pull request #12)
 - #382: New JUnitPublicField rule - There is usually no reason to have a public field (even a constant) on a test class.
 - #407: New GStringExpressionWithinString rule (groovyism) - Check for regular (single quote) strings containing a GString-type expression (${..}).
 - #417: New IllegalClassMember rule (generic) - Checks for classes containing fields/properties/methods matching configured illegal member modifiers or not matching any of the configured allowed member modifiers.
-- #329: New UnsafeImplementationAsMap rule (*) - Reports incomplete interface implementations created by map-to-interface coercions. By default, this rule does not apply to test files. Thanks to Artur Gajowy. (pull request #14)
-- #364: New CloneWithoutCloneable rule (*) - The method clone() should only be declared if the class implements the Cloneable interface. Thanks to Artur Gajowy. (pull request #14)
-(*) These rules require application classes on CodeNarc's classpath.
+These rules require application classes on CodeNarc's classpath.
+- #329: New UnsafeImplementationAsMap rule - Reports incomplete interface implementations created by map-to-interface coercions. By default, this rule does not apply to test files. Thanks to Artur Gajowy. (pull request #14)
+- #364: New CloneWithoutCloneable rule - The method clone() should only be declared if the class implements the Cloneable interface. Thanks to Artur Gajowy. (pull request #14)
+- #278: New JUnitAssertEqualsConstantActualValue rule (junit) - Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter is a constant or a literal. Most likely it was intended to be the 'expected' value.
 
 UPDATED/ENHANCED RULES
 - #371: CouldBeElvis rule. Added support for IF statements without braces.
@@ -28,8 +28,8 @@ BUG FIXES
 
 FRAMEWORK AND INFRASTRUCTURE
 - Added support for per-rule custom compilation phase, allowing for more type information in AST when required.
-  NOTE: New rules that use a later compilation phase require that CodeNarc have the application classes
-  being analyzed on the classpath. Thanks to Artur Gajowy. (pull request #14)
+  NOTE: New rules that use a later compilation phase require that CodeNarc have the application classes being
+  analyzed on the classpath. This adds a new int getCompilerPhase() method to Rule. Thanks to Artur Gajowy. (pull request #14)
 
 
 Changes in version 0.18.1 (Feb 2013)

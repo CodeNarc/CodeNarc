@@ -88,7 +88,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     @Test
     void testValidatesAstCompilerPhase() {
         rule = new FakePathRule() {
-            int requiredAstCompilerPhase = Phases.SEMANTIC_ANALYSIS
+            int compilerPhase = Phases.SEMANTIC_ANALYSIS
         }
         def source = new SourceString(SOURCE)
         assert source.astCompilerPhase == SourceCode.DEFAULT_COMPILER_PHASE

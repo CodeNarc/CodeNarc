@@ -36,6 +36,7 @@ import java.util.Map;
  * @author Hamlet D'Arcy
  */
 public abstract class AbstractRule implements Rule {
+
     private static final Logger LOG = Logger.getLogger(AbstractRule.class);
 
     /**
@@ -112,7 +113,7 @@ public abstract class AbstractRule implements Rule {
      * of the AST of the {@link SourceCode}
      * handed to the rule via {@link #applyTo(SourceCode sourceCode)}
      */
-    public int getRequiredAstCompilerPhase() {
+    public int getCompilerPhase() {
         return SourceCode.DEFAULT_COMPILER_PHASE;
     }
     
@@ -148,9 +149,9 @@ public abstract class AbstractRule implements Rule {
     }
 
     private void validateAstCompilerPhase(SourceCode sourceCode) {
-        if (sourceCode.getAstCompilerPhase() != getRequiredAstCompilerPhase()) {
+        if (sourceCode.getAstCompilerPhase() != getCompilerPhase()) {
             throw new IllegalArgumentException("This rule requires SourceCode with AST compiler phase '"
-                    + getRequiredAstCompilerPhase() + "', but was handed one with AST compiler phase '"
+                    + getCompilerPhase() + "', but was handed one with AST compiler phase '"
                     + sourceCode.getAstCompilerPhase() + "'");
         }
     }

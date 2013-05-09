@@ -49,6 +49,6 @@ public interface Rule {
      * of the AST of the {@link SourceCode}
      * handed to the rule via {@link #applyTo(SourceCode sourceCode)}
      */
-    int getRequiredAstCompilerPhase();
+    int getCompilerPhase();
 
 }

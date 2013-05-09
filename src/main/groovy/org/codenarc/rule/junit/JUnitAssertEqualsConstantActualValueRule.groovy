@@ -37,7 +37,7 @@ class JUnitAssertEqualsConstantActualValueRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = JUnitAssertEqualsConstantActualValueAstVisitor
     String applyToFilesMatching = DEFAULT_TEST_FILES
-    int requiredAstCompilerPhase = Phases.SEMANTIC_ANALYSIS
+    int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
 class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor {

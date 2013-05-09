@@ -37,6 +37,7 @@ import static org.codenarc.test.TestUtil.assertContainsAll
  */
 @SuppressWarnings('DuplicateLiteral')
 abstract class AbstractRuleTestCase extends AbstractTestCase {
+
     protected static final CONSTRUCTOR_METHOD_NAME = '<init>'
     protected static final DEFAULT_TEST_FILES = AbstractAstVisitorRule.DEFAULT_TEST_FILES
     protected static final DEFAULT_TEST_CLASS_NAMES = AbstractAstVisitorRule.DEFAULT_TEST_CLASS_NAMES
@@ -240,8 +241,8 @@ actual:               $violation.sourceLine
 
     private SourceCode prepareSourceCode(String source) {
         def sourceCode = new SourceString(source, sourceCodePath, sourceCodeName)
-        if (rule.requiredAstCompilerPhase != SourceCode.DEFAULT_COMPILER_PHASE) {
-            sourceCode = new CustomCompilerPhaseSourceDecorator(sourceCode, rule.requiredAstCompilerPhase)
+        if (rule.compilerPhase != SourceCode.DEFAULT_COMPILER_PHASE) {
+            sourceCode = new CustomCompilerPhaseSourceDecorator(sourceCode, rule.compilerPhase)
         }
         sourceCode
     }

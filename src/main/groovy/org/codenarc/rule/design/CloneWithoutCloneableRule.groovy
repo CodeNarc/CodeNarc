@@ -32,7 +32,7 @@ class CloneWithoutCloneableRule extends AbstractAstVisitorRule {
     String name = 'CloneWithoutCloneable'
     int priority = 2
     Class astVisitorClass = CloneWithoutCloneableAstVisitor
-    int requiredAstCompilerPhase = Phases.SEMANTIC_ANALYSIS
+    int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
 class CloneWithoutCloneableAstVisitor extends AbstractAstVisitor {

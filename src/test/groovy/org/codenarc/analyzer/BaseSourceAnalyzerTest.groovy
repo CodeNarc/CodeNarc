@@ -39,7 +39,7 @@ class BaseSourceAnalyzerTest extends AbstractTestCase {
 
     private Rule astCompilerPhaseAssertingRule(int compilerPhase) {
         return new MockRule(
-            requiredAstCompilerPhase: compilerPhase, 
+            compilerPhase: compilerPhase,
             applyTo: { SourceCode source -> 
                 assert source.astCompilerPhase == compilerPhase
                 []

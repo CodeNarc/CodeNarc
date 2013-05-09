@@ -21,13 +21,13 @@ class MockRule implements Rule {
 
     String name
     int priority
-    int requiredAstCompilerPhase
+    int compilerPhase
     private final Closure applyToClosure
 
     MockRule(Map parameters) {
         this.name = parameters.name
         this.priority = parameters.priority ?: 0
-        this.requiredAstCompilerPhase = parameters.requiredAstCompilerPhase ?: SourceCode.DEFAULT_COMPILER_PHASE
+        this.compilerPhase = parameters.compilerPhase ?: SourceCode.DEFAULT_COMPILER_PHASE
         this.applyToClosure = parameters.applyTo
     }
 
