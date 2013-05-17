@@ -30,6 +30,11 @@ HtmlReportWriter
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Attribute>>       | <<Description>>                                                | <<Required>>           |
 *---------------------+----------------------------------------------------------------+------------------------+
+| maxPriority         | The maximum priority level for violations in the report. For   | 3                      |
+|                     | instance, setting <maxPriority> to 2 will result in the report |                        |
+|                     | containing only priority 1 and 2 violations (and omitting      |                        |
+|                     | violations with priority 3).                                   |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
 | outputFile          | The path and filename for the output report file.              | No                     |
 *---------------------+----------------------------------------------------------------+------------------------+
 | title               | The title for the output report.                               | No                     |

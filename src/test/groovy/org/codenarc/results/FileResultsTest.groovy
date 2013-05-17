@@ -45,7 +45,7 @@ class FileResultsTest extends AbstractTestCase {
         assert results.getNumberOfViolationsWithPriority(2) == 0
         assert results.getNumberOfViolationsWithPriority(3) == 0
 
-        assert results.numberOfFilesWithViolations == 0
+        assert results.getNumberOfFilesWithViolations(1) == 0
         assert results.totalNumberOfFiles == 1
         assert results.isFile()
     }
@@ -66,8 +66,16 @@ class FileResultsTest extends AbstractTestCase {
         assert results.getNumberOfViolationsWithPriority(4) == 1
         assert results.getNumberOfViolationsWithPriority(7) == 1
 
-        assert results.numberOfFilesWithViolations == 1
+        assert results.getNumberOfFilesWithViolations(1) == 1
         assert results.totalNumberOfFiles == 1
+    }
+
+    @Test
+    void testGetNumberOfFilesWithViolations_IgnoresViolationsWithHigherPriority() {
+        def results = new FileResults(PATH, [VIOLATION3])
+        assert results.getNumberOfFilesWithViolations(3) == 1
+        assert results.getNumberOfFilesWithViolations(2) == 0
+        assert results.getNumberOfFilesWithViolations(1) == 0
     }
 
     @Test

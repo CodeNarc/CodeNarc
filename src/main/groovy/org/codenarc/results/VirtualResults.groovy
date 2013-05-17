@@ -51,7 +51,7 @@ class VirtualResults implements Results {
     }
 
     @Override
-    int getNumberOfFilesWithViolations(boolean recursive) {
+    int getNumberOfFilesWithViolations(int maxPriority, boolean recursive) {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 

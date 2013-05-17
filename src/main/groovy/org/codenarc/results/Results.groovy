@@ -54,10 +54,11 @@ interface Results {
 
     /**
      * Return the number of files with violations
+     * @param maxPriority - the maximum priority level; ignore violations with priority greater than this
      * @param recursive - true if the returned count should include subdirectories as well
      * @return the number of files containing violations
      */
-    int getNumberOfFilesWithViolations(boolean recursive)
+    int getNumberOfFilesWithViolations(int maxPriority, boolean recursive)
 
     /**
      * @return true only if this object represents the results for a single file

@@ -80,12 +80,13 @@ class FileResults implements Results {
 
     /**
      * Return 1 if these results include at least one violation
+     * @param maxPriority - the maximum priority level; ignore violations with priority greater than this
      * @param recursive - ignored; defaults to true
      * @return the number of files containing violations
      */
     @Override
-    int getNumberOfFilesWithViolations(boolean recursive=true) {
-        violations.empty ? 0 : 1
+    int getNumberOfFilesWithViolations(int maxPriority, boolean recursive=true) {
+        violations.find { v -> v.rule.priority <= maxPriority } ? 1 : 0
     }
 
     /**

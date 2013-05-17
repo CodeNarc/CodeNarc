@@ -23,12 +23,18 @@ import org.codenarc.rule.Violation
 /**
  * ReportWriter that generates an simple ASCII text report.
  *
+ * Set the maxPriority property to control the maximum priority level for violations in
+ * the report. For instance, setting maxPriority to 2 will result in the report containing
+ * only priority 1 and 2 violations (and omitting violations with priority 3). The
+ * maxPriority property defaults to 3.
+ *
  * @author Chris Mair
  */
 class TextReportWriter extends AbstractReportWriter {
 
     String title
     String defaultOutputFile = 'CodeNarcReport.txt'
+    int maxPriority = 3
 
     @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
@@ -48,10 +54,10 @@ class TextReportWriter extends AbstractReportWriter {
 
     private void writeSummary(Writer writer, Results results) {
         def summary = "Summary: TotalFiles=${results.totalNumberOfFiles} " +
-            "FilesWithViolations=${results.numberOfFilesWithViolations} " +
-            "P1=${results.getNumberOfViolationsWithPriority(1)} " +
-            "P2=${results.getNumberOfViolationsWithPriority(2)} " +
-            "P3=${results.getNumberOfViolationsWithPriority(3)}"
+            "FilesWithViolations=${results.getNumberOfFilesWithViolations(maxPriority)}"
+        (1..maxPriority).each { p ->
+            summary += " P$p=${results.getNumberOfViolationsWithPriority(p)}"
+        }
         writer.println()
         writer.println(summary)
     }
@@ -68,10 +74,11 @@ class TextReportWriter extends AbstractReportWriter {
     }
 
     private void writeFileViolations(Writer writer, FileResults results) {
-        if (results.violations) {
+        if (results.violations.find { v -> v.rule.priority <= maxPriority }) {
             writer.println()
             writer.println('File: ' + results.path)
-            results.violations.sort { violation -> violation.rule.priority }.each { violation ->
+            def violations = results.violations.findAll { v -> v.rule.priority <= maxPriority }
+            violations.sort { violation -> violation.rule.priority }.each { violation ->
                 writeViolation(writer, violation)
             }
         }

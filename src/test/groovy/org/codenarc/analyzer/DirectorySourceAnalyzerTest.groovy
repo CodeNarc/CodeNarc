@@ -75,7 +75,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
                 'src/test/resources/source/SourceFile1.groovy',
                 'src/test/resources/source/SourceFile2.groovy'
         ])
-        assert results.numberOfFilesWithViolations == 2
+        assert results.getNumberOfFilesWithViolations(3) == 2
         assert results.totalNumberOfFiles == 2
     }
 
@@ -95,7 +95,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
                 'src/test/resources/sourcewithdirs/subdir2/Subdir2File1.groovy'
         ])
         assert testCountRule.count == 5
-        assert results.numberOfFilesWithViolations == 5
+        assert results.getNumberOfFilesWithViolations(3) == 5
         assert results.totalNumberOfFiles == 5
 
         // Verify that the directory structure is properly reflected within the results
@@ -129,7 +129,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         ])
         assert testCountRule.count == 7
         assert results.totalNumberOfFiles == 7
-        assert results.numberOfFilesWithViolations == 7
+        assert results.getNumberOfFilesWithViolations(3) == 7
     }
 
     @Test
@@ -159,7 +159,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assert testCountRule.count == 7
         assertEqualSets(childResultsClasses(results), [DirectoryResults, DirectoryResults, DirectoryResults])
         assert results.totalNumberOfFiles == 7
-        assert results.numberOfFilesWithViolations == 7
+        assert results.getNumberOfFilesWithViolations(3) == 7
     }
 
     @Test
@@ -175,7 +175,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         assertEqualSets(paths, ['subdir1', 'subdir2', 'subdir2/subdir2a'])
 
         assert testCountRule.count == 5
-        assert results.numberOfFilesWithViolations == 0
+        assert results.getNumberOfFilesWithViolations(3) == 0
         assert results.totalNumberOfFiles == 5
     }
 
@@ -196,7 +196,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         ])
 
         assert testCountRule.count == 3
-        assert results.numberOfFilesWithViolations == 3
+        assert results.getNumberOfFilesWithViolations(3) == 3
         assert results.totalNumberOfFiles == 3
     }
 
@@ -216,7 +216,7 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
         ])
 
         assert testCountRule.count == 2
-        assert results.numberOfFilesWithViolations == 2
+        assert results.getNumberOfFilesWithViolations(3) == 2
         assert results.totalNumberOfFiles == 2
     }
 

@@ -96,7 +96,7 @@ class XmlReportWriter extends AbstractReportWriter {
     protected Map buildPackageAttributeMap(results) {
         def attributeMap = [
             totalFiles: results.getTotalNumberOfFiles(),
-            filesWithViolations: results.getNumberOfFilesWithViolations(),
+            filesWithViolations: results.getNumberOfFilesWithViolations(3),
             priority1:results.getNumberOfViolationsWithPriority(1),
             priority2:results.getNumberOfViolationsWithPriority(2),
             priority3:results.getNumberOfViolationsWithPriority(3)

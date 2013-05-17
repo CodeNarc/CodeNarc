@@ -31,6 +31,11 @@ import org.codenarc.util.io.ClassPathResource
  * You can optionally add rule descriptions for custom rules by placing them within a "codenarc-messages.properties"
  * file on the classpath, with entries of the form: {rule-name}.description=..."
  *
+ * Set the maxPriority property to control the maximum priority level for violations in
+ * the report. For instance, setting maxPriority to 2 will result in the report containing
+ * only priority 1 and 2 violations (and omitting violations with priority 3). The
+ * maxPriority property defaults to 3.
+ *
  * @author Chris Mair
  */
 @SuppressWarnings(['DuplicateMapLiteral', 'UnnecessaryReturnKeyword', 'FactoryMethodName'])
@@ -44,6 +49,7 @@ class HtmlReportWriter extends AbstractReportWriter {
 
     String title
     String defaultOutputFile = DEFAULT_OUTPUT_FILE
+    int maxPriority = 3
 
     /**
      * Write out a report to the specified Writer for the analysis results
@@ -143,9 +149,9 @@ class HtmlReportWriter extends AbstractReportWriter {
                         th(getResourceBundleString('htmlReport.summary.packageHeading'))
                         th(getResourceBundleString('htmlReport.summary.totalFilesHeading'))
                         th(getResourceBundleString('htmlReport.summary.filesWithViolationsHeading'))
-                        th(getResourceBundleString('htmlReport.summary.priority1Heading'))
-                        th(getResourceBundleString('htmlReport.summary.priority2Heading'))
-                        th(getResourceBundleString('htmlReport.summary.priority3Heading'))
+                        (1..maxPriority).each { p ->
+                            th(getResourceBundleString("htmlReport.summary.priority${p}Heading"))
+                        }
                     }
                     out << buildSummaryByPackageRow(results, true)
                     out << buildAllSummaryByPackageRowsRecursively(results)
@@ -186,10 +192,10 @@ class HtmlReportWriter extends AbstractReportWriter {
                     }
                 }
                 td(results.getTotalNumberOfFiles(recursive), class:'number')
-                td(results.getNumberOfFilesWithViolations(recursive) ?: '-', class:'number')
-                td(results.getNumberOfViolationsWithPriority(1, recursive) ?: '-', class:'priority1')
-                td(results.getNumberOfViolationsWithPriority(2, recursive) ?: '-', class:'priority2')
-                td(results.getNumberOfViolationsWithPriority(3, recursive) ?: '-', class:'priority3')
+                td(results.getNumberOfFilesWithViolations(maxPriority, recursive) ?: '-', class:'number')
+                (1..maxPriority).each { p ->
+                    td(results.getNumberOfViolationsWithPriority(p, recursive) ?: '-', class:'priority' + p)
+                }
             }
         }
     }
@@ -212,7 +218,7 @@ class HtmlReportWriter extends AbstractReportWriter {
                 }
             }
             results.children.each { child ->
-                if (child.isFile()) {
+                if (child.isFile() && child.violations.find { v -> v.rule.priority <= maxPriority }) {
                     div(class: 'summary') {
                         h3(class:'fileHeader') {
                             mkp.yieldUnescaped '&#x27A5;&nbsp;' + (child.path - "$pathName/")
@@ -239,7 +245,8 @@ class HtmlReportWriter extends AbstractReportWriter {
                     th(getResourceBundleString('htmlReport.violations.sourceLine'))
                 }
 
-                def violations = results.violations
+                def violations = results.violations.findAll { v -> v.rule.priority <= maxPriority }
+//                def violations = results.violations
                 violations.sort { v -> v.rule.priority }
 
                 violations.each { Violation violation ->
@@ -326,7 +333,7 @@ class HtmlReportWriter extends AbstractReportWriter {
      * @param results - the Results
      */
     protected boolean isDirectoryContainingFilesWithViolations(Results results) {
-        return !results.isFile() && results.getNumberOfFilesWithViolations(false)
+        return !results.isFile() && results.getNumberOfFilesWithViolations(maxPriority, false)
     }
 
     /**

@@ -77,6 +77,20 @@ File: src/main/dao/MyOtherDao.groovy
 
 [CodeNarc (http://www.codenarc.org) v${VERSION}]
 """.trim()
+    private static final REPORT_TEXT_MAX_PRIORITY = """
+CodeNarc Report: My Cool Project - ${FORMATTED_TIMESTAMP}
+
+Summary: TotalFiles=6 FilesWithViolations=2 P1=3
+
+File: src/main/MyAction.groovy
+    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
+
+File: src/main/dao/MyOtherDao.groovy
+    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
+
+[CodeNarc (http://www.codenarc.org) v${VERSION}]
+""".trim()
 
     private reportWriter
     private analysisContext
@@ -88,6 +102,14 @@ File: src/main/dao/MyOtherDao.groovy
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def reportText = stringWriter.toString()
         assertReportText(reportText)
+    }
+
+    @Test
+    void testWriteReport_MaxPriority() {
+        reportWriter.maxPriority = 1
+        reportWriter.writeReport(stringWriter, analysisContext, results)
+        def reportText = stringWriter.toString()
+        assertReportText(reportText, REPORT_TEXT_MAX_PRIORITY)
     }
 
     @Test
@@ -133,6 +155,11 @@ File: src/main/dao/MyOtherDao.groovy
         assert reportWriter.defaultOutputFile == 'CodeNarcReport.txt'
     }
 
+    @Test
+    void testMaxPriority_DefaultsTo3() {
+        assert reportWriter.maxPriority == 3
+    }
+
     @Before
     void setUpTextReportWriterTest() {
         reportWriter = new TextReportWriter(title:TITLE)
@@ -159,9 +186,9 @@ File: src/main/dao/MyOtherDao.groovy
     }
 
     @SuppressWarnings('JUnitStyleAssertions')
-    private void assertReportText(String actualText) {
+    private void assertReportText(String actualText, String expectedText=REPORT_TEXT) {
         def actualLines = actualText.readLines()
-        def expectedLines = REPORT_TEXT.readLines()
+        def expectedLines = expectedText.readLines()
         actualLines.eachWithIndex { line, index ->
             def lineNumber = "$index".padLeft(2)
             println "$lineNumber: $line"

@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2013 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 package org.codenarc.report
+
+import static org.junit.Assert.assertEquals
+import static org.codenarc.test.TestUtil.assertContainsAllInOrder
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
@@ -32,15 +36,13 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-import static org.codenarc.test.TestUtil.assertContainsAllInOrder
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-
 /**
  * Tests for HtmlReportWriter
  *
  * @author Chris Mair
  */
 class HtmlReportWriterTest extends AbstractTestCase {
+
     private static final LONG_LINE = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
     private static final MESSAGE = 'bad stuff'
     private static final LINE1 = 111
@@ -49,35 +51,36 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:'if (file) {')
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
+    private static final VIOLATION4 = new Violation(rule:new StubRule(name:'RULE4', priority:4), lineNumber:LINE1, sourceLine:'if (file) {')
     private static final NEW_REPORT_FILE = 'target/NewReport.html'
     private static final TITLE = 'My Cool Project'
 
     private reportWriter
     private analysisContext
     private results
+    private dirResultsMain
     private ruleSet
 
     @Test
     void testWriteReport() {
-        reportWriter.writeReport(analysisContext, results)
-        def actual = getReportText()
-        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport.html')
-        assert actual
-        assert expected
-        assert actual == expected.text
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport.html'
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
+    void testWriteReport_MaxPriority1() {
+        reportWriter.maxPriority = 1
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_MaxPriority1.html'
+        assertSameReportHtml(HTML_FILE)
     }
 
     @Test
     void testWriteReport_Priority4() {
-        VIOLATION1.rule.name = 'RULE4'
-        VIOLATION1.rule.priority = 4
-        reportWriter.writeReport(analysisContext, results)
-        def actual = getReportText()
-
-        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_Priority4.html')
-        assert actual
-        assert expected
-        assert actual == expected.text
+        def fileResults4 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION4])
+        dirResultsMain.addChild(fileResults4)
+        reportWriter.maxPriority = 4
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_Priority4.html'
+        assertSameReportHtml(HTML_FILE)
     }
 
     @Test
@@ -85,13 +88,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY')])
         reportWriter.customMessagesBundleName = 'DoesNotExist'
         analysisContext.ruleSet = ruleSet
-        reportWriter.writeReport(analysisContext, results)
-        def actual = getReportText()
-
-        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_NoDescriptionsForRuleIds.html')
-        assert actual
-        assert expected
-        assert actual == expected.text
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_NoDescriptionsForRuleIds.html'
+        assertSameReportHtml(HTML_FILE)
     }
 
     @Test
@@ -99,12 +97,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
         def biRule = new UnnecessaryBooleanInstantiationRule()
         ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
         analysisContext.ruleSet = ruleSet
-        reportWriter.writeReport(analysisContext, results)
-        def actual = getReportText()
-        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile.html')
-        assert actual
-        assert expected
-        assert actual == expected.text
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile.html'
+        assertSameReportHtml(HTML_FILE)
     }
 
     @Test
@@ -113,12 +107,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
                 new StubRule(name:'MyRuleXX', description:'description77'),
                 new StubRule(name:'MyRuleYY', description:'description88')])
         analysisContext.ruleSet = ruleSet
-        reportWriter.writeReport(analysisContext, results)
-        def actual = getReportText()
-        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsSetDirectlyOnTheRule.html')
-        assert actual
-        assert expected
-        assert actual == expected.text
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsSetDirectlyOnTheRule.html'
+        assertSameReportHtml(HTML_FILE)
     }
 
     @Test
@@ -146,12 +136,8 @@ class HtmlReportWriterTest extends AbstractTestCase {
         final OUTPUT_FILE = NEW_REPORT_FILE
         reportWriter.outputFile = OUTPUT_FILE
         reportWriter.title = TITLE
-        reportWriter.writeReport(analysisContext, results)
-        def actual = getReportText(OUTPUT_FILE)
-        def expected = new File('./src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_SetOutputFileAndTitle.html')
-        assert actual
-        assert expected
-        assert actual == expected.text
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_SetOutputFileAndTitle.html'
+        assertSameReportHtml(HTML_FILE)
     }
 
     @Test
@@ -165,14 +151,17 @@ class HtmlReportWriterTest extends AbstractTestCase {
     }
 
     @Test
-    void testIsDirectoryContainingFilesWithViolations() {
+    void testIsDirectoryContainingFilesWithViolations_FileResults() {
         def results = new FileResults('', [])
         assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
 
         results = new FileResults('', [VIOLATION1])
         assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
+    }
 
-        results = new DirectoryResults('')
+    @Test
+    void testIsDirectoryContainingFilesWithViolations_DirectoryResults() {
+        def results = new DirectoryResults('')
         assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
 
         results.addChild(new FileResults('', []))
@@ -183,6 +172,16 @@ class HtmlReportWriterTest extends AbstractTestCase {
         results.addChild(child)
         assert !reportWriter.isDirectoryContainingFilesWithViolations(results), 'grandchild with violations'
 
+        results.addChild(new FileResults('', [VIOLATION2]))
+        assert reportWriter.isDirectoryContainingFilesWithViolations(results)
+
+        reportWriter.maxPriority = 1
+        assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
+
+        reportWriter.maxPriority = 2
+        assert reportWriter.isDirectoryContainingFilesWithViolations(results)
+
+        reportWriter.maxPriority = 1
         results.addChild(new FileResults('', [VIOLATION1]))
         assert reportWriter.isDirectoryContainingFilesWithViolations(results)
     }
@@ -208,13 +207,22 @@ class HtmlReportWriterTest extends AbstractTestCase {
         assert reportWriter.formatSourceLine('abcdef' * 20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
     }
 
+    @Test
+    void testMaxPriority_DefaultsTo3() {
+        assert reportWriter.maxPriority == 3
+    }
+
+    //------------------------------------------------------------------------------------
+    // Setup and tear-down and helper methods
+    //------------------------------------------------------------------------------------
+
     @Before
     void setUpHtmlReportWriterTest() {
         reportWriter = new HtmlReportWriter() 
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
         reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
 
-        def dirResultsMain = new DirectoryResults('src/main', 1)
+        dirResultsMain = new DirectoryResults('src/main', 1)
         def dirResultsCode = new DirectoryResults('src/main/code', 2)
         def dirResultsTest = new DirectoryResults('src/main/test', 3)
         def dirResultsTestSubdirNoViolations = new DirectoryResults('src/main/test/noviolations', 4)
@@ -245,11 +253,19 @@ class HtmlReportWriterTest extends AbstractTestCase {
     @After
     void tearDownHtmlReportWriterTest() {
         new File(NEW_REPORT_FILE).delete()
-        new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).delete()
+//        new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).delete()
     }
 
     private String getReportText(String filename=HtmlReportWriter.DEFAULT_OUTPUT_FILE) {
         new File(filename).text
+    }
+
+    private void assertSameReportHtml(String filename) {
+        def actual = getReportText()
+        def expected = new File(filename)
+        assert actual
+        assert expected
+        assertEquals(expected.text, actual)
     }
 
 }

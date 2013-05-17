@@ -209,7 +209,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
     private void assertResultsCounts(Results results, int totalFiles, int filesWithViolations) {
         assert results.totalNumberOfFiles == totalFiles, "results.totalNumberOfFiles=${results.totalNumberOfFiles}"
-        assert results.numberOfFilesWithViolations == filesWithViolations, "results.numberOfFilesWithViolations=${results.numberOfFilesWithViolations}"
+        assert results.getNumberOfFilesWithViolations(3) == filesWithViolations, "results.getNumberOfFilesWithViolations(3)=${results.getNumberOfFilesWithViolations(3)}"
     }
 
     private List getAllResultsPaths(Results results) {

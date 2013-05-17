@@ -46,8 +46,8 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getNumberOfViolationsWithPriority(3) == 0
 
         assert results.totalNumberOfFiles == 0
-        assert results.numberOfFilesWithViolations == 0
-        assert results.getNumberOfFilesWithViolations(false) == 0
+        assert results.getNumberOfFilesWithViolations(1) == 0
+        assert results.getNumberOfFilesWithViolations(1, false) == 0
         assert !results.isFile()
     }
 
@@ -67,8 +67,9 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getNumberOfViolationsWithPriority(2) == 1
         assert results.getNumberOfViolationsWithPriority(3, false) == 2
 
-        assert results.numberOfFilesWithViolations == 1
-        assert results.getNumberOfFilesWithViolations(false) == 1
+        assert results.getNumberOfFilesWithViolations(3) == 1
+        assert results.getNumberOfFilesWithViolations(1) == 1
+        assert results.getNumberOfFilesWithViolations(1, false) == 1
 
         assert results.getTotalNumberOfFiles() == 7
         assert results.getTotalNumberOfFiles(false) == 7
@@ -105,8 +106,10 @@ class DirectoryResultsTest extends AbstractTestCase {
         assert results.getNumberOfViolationsWithPriority(2, false) == 1
         assert results.getNumberOfViolationsWithPriority(3, false) == 2
 
-        assert results.numberOfFilesWithViolations == 2
-        assert results.getNumberOfFilesWithViolations(false) == 1
+        assert results.getNumberOfFilesWithViolations(1) == 1
+        assert results.getNumberOfFilesWithViolations(2) == 2
+        assert results.getNumberOfFilesWithViolations(1, false) == 1
+        assert subDirResults.getNumberOfFilesWithViolations(1, false) == 0
 
         assert results.getTotalNumberOfFiles() == 5
         assert results.getTotalNumberOfFiles(false) == 3

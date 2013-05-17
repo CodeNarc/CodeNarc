@@ -86,12 +86,13 @@ class DirectoryResults implements Results {
 
     /**
      * Return the number of files with violations
+     * @param maxPriority - the maximum priority level; ignore violations with priority greater than this
      * @param recursive - true if the returned count should include subdirectories as well; defaults to true
      * @return the number of files containing violations
      */
-    int getNumberOfFilesWithViolations(boolean recursive=true) {
+    int getNumberOfFilesWithViolations(int maxPriority, boolean recursive=true) {
         children.sum(0) { child ->
-            (recursive || child.isFile()) ? child.numberOfFilesWithViolations : 0 
+            (recursive || child.isFile()) ? child.getNumberOfFilesWithViolations(maxPriority) : 0
         }
     }
 
