@@ -264,6 +264,17 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 27, sourceLineText: 'private int method2(){', messageText: 'Opening brace for the method method2 should start on a new line'])
     }
 
+    @Test
+    void testSingleLineMethod_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                int size() { groups.size() }
+                AutoScalingGroupData get(int i) { groups[i] }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new BracesForMethodRule()
     }

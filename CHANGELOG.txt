@@ -26,11 +26,13 @@ UPDATED/ENHANCED RULES
 BUG FIXES
 - bug in UnnecessaryDefInFieldDeclarationRule making it report false positives with 'def' on right hand side of assignment
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.
+- #19: Fix BracesForMethod rule for single-line methods.
 
 FRAMEWORK AND INFRASTRUCTURE
 - Added support for per-rule custom compilation phase, allowing for more type information in AST when required.
   NOTE: New rules that use a later compilation phase require that CodeNarc have the application classes being
   analyzed on the classpath. This adds a new int getCompilerPhase() method to Rule. Thanks to Artur Gajowy. (pull request #14)
+- #419: Add maxPriority property to HTML and Text ReportWriters - filter out lower priority violations.
 
 
 Changes in version 0.18.1 (Feb 2013)
