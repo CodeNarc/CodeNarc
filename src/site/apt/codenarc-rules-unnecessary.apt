@@ -543,7 +543,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for unnecessary <<if>> statements. The entire <<if>> statement, or at least the <if> or <else>
-  block, are considered unnecessary for the three scenarios described below.
+  block, are considered unnecessary for the four scenarios described below.
 
   (1) When the <if> and <else> blocks contain only an explicit return of <<<true>>> and <<<false>>>
   constants. These cases can be replaced by a simple <return> statement. Examples of violations include:
@@ -581,7 +581,19 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     }
 -------------------------------------------------------------------------------
 
-  (3) When either the <if> block or <else> block of an <<<if>>> statement that is not the last statement
+  (3) When the second-to-last statement in a block is an <<<if>>> statement with no <<<else>>>, where the block
+  contains a single <<<return>>> statement, and the last statement in the block is a <<<return>>> statement, and
+  one <<<return>>> statement returns a <<<true>>> expression and the other returns a <<<false>>> expression.
+  For example, the <<<if>>> statement in the following code can be replaced by <<<return expression1>>>:
+
+-------------------------------------------------------------------------------
+    if (expression1) {
+        return true
+    }
+    return false
+-------------------------------------------------------------------------------
+
+  (4) When either the <if> block or <else> block of an <<<if>>> statement that is not the last statement
   in a block contain only a single constant or literal expression. For example, the <<<if>>> statement
   in the following code has no effect and can be removed:
 

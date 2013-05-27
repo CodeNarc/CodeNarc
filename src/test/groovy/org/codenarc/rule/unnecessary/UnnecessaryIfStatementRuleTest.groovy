@@ -107,6 +107,26 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_IfReturn_FallsThroughToReturnFalse_IsAViolation() {
+        final SOURCE = '''
+            def method1() {
+                if (expression1) {
+                    return true
+                }
+                return false
+            }
+            def closure1 = {
+                if (expression2)
+                    return Boolean.FALSE
+                return Boolean.TRUE
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'if (expression1)'],
+            [lineNumber:9, sourceLineText:'if (expression2)'])
+    }
+
     // Tests for implicit return of true/false (last statement in a block)
 
     @Test

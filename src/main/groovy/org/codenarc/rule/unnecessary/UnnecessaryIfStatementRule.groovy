@@ -22,7 +22,7 @@ import org.codehaus.groovy.ast.stmt.*
 
 /**
  * Rule that checks for unnecessary if statements. If/else statements are considered unnecessary for
- * the three scenarios described below.
+ * the four scenarios described below.
  * <p/>
  * (1) When the if and else blocks contain only an explicit return of <code>true</code> and <code>false</code>
  * constants. These cases can be replaced by a simple return statement. Examples include:
@@ -42,7 +42,18 @@ import org.codehaus.groovy.ast.stmt.*
  *      }
  *      </code>
  *
- * (3) When either the if block or else block of an if statement that is not the last statement in a
+ * (3) When the second-to-last statement in a block is an if statement with no else, where the block contains a single
+ * return statement, and the last statement in the block is a return statement, and one return statement returns a
+ * <code>true</code> expression and the other returns a <code>false</code> expression.
+ * For example, the if statement in the following code can be replaced by <code>return expression1</code>:
+ *      <code>
+ *        if (expression1) {
+ *            return true
+ *        }
+ *        return false
+ *      </code>
+ *
+ * (4) When either the if block or else block of an if statement that is not the last statement in a
  * block contain only a single constant or literal expression 
  * For example, the if statement in the following code has no effect and can be removed:
  *      <code>
@@ -82,6 +93,17 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
         if (allStatements && allStatements.last() instanceof IfStatement) {
             visitIfElseThatIsTheLastStatementInABlock(allStatements.last())
         }
+
+        if (allStatements.size() > 1) {
+            def nextToLastStatement = allStatements[-2]
+            if (nextToLastStatement instanceof IfStatement && hasNoElseBlock(nextToLastStatement)) {
+                def lastStatement = allStatements[-1]
+                if (areReturningTrueAndFalse(nextToLastStatement.ifBlock, lastStatement)) {
+                    addViolation(nextToLastStatement, 'The if block and the subsequent fall-through statement merely return true/false')
+                }
+            }
+        }
+
         super.visitBlockStatement(block)
     }
 
@@ -135,6 +157,10 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
     private boolean hasElseBlock(IfStatement ifStatement) {
         !ifStatement.elseBlock.empty
+    }
+
+    private boolean hasNoElseBlock(IfStatement ifStatement) {
+        ifStatement.elseBlock.empty
     }
 
     private boolean isOnlyAConstantOrLiteralExpression(Statement blockStatement) {

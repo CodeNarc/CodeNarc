@@ -22,6 +22,7 @@ These rules require application classes on CodeNarc's classpath:
 UPDATED/ENHANCED RULES
 - #371: CouldBeElvis rule. Added support for IF statements without braces.
 - #408: SerialVersionUID rule: Also check that serialVersionUID field is declared private.
+- #414: Extend UnnecessaryIfStatement rule: if (condition){ return true }; return false.
 
 BUG FIXES
 - bug in UnnecessaryDefInFieldDeclarationRule making it report false positives with 'def' on right hand side of assignment
