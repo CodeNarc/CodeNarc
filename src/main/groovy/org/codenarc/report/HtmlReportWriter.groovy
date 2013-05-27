@@ -296,8 +296,10 @@ class HtmlReportWriter extends AbstractReportWriter {
                         def ruleName = rule.name
                         def priority = rule.priority
                         tr(class:'ruleDescriptions') {
-                            a(name:ruleName)
-                            td(index + 1)
+                            td {
+                                a(name:ruleName){}                                
+                                span(index + 1,class:'ruleIndex')    
+                            }
                             td(ruleName, class:"ruleName priority${priority}")
                             td { unescaped << getHtmlDescriptionForRule(rule) }
                         }
