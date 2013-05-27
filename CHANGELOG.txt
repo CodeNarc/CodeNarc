@@ -27,6 +27,7 @@ BUG FIXES
 - bug in UnnecessaryDefInFieldDeclarationRule making it report false positives with 'def' on right hand side of assignment
 - Fix #135: CoupledTestCase incorrect violation when referencing the current class.
 - #19: Fix BracesForMethod rule for single-line methods.
+- #20: HTML Report Anchor Fix. Thanks to Jeff Beck.
 
 FRAMEWORK AND INFRASTRUCTURE
 - Added support for per-rule custom compilation phase, allowing for more type information in AST when required.
