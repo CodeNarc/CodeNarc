@@ -160,6 +160,28 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'if (val) {', messageText:'The if statement in class MyDomain can be rewritten using the ternary'])
     }
 
+    @Test
+    void testMatchingIfReturn_NoElse_FallsThroughToReturn_Violation() {
+        final SOURCE = '''
+            def method1() {
+                if (condition) {
+                    return 44
+                }
+                return 'yes'
+            }
+            def closure1 = {
+                if (check())
+                    return Boolean.FALSE
+                return [1, 2]
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'if (condition)',
+                messageText:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
+            [lineNumber:9, sourceLineText:'if (check())',
+                messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? Boolean.FALSE : [1, 2]'] )
+    }
+
     protected Rule createRule() {
         new IfStatementCouldBeTernaryRule()
     }

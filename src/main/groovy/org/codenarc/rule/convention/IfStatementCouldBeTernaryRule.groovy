@@ -25,7 +25,14 @@ import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.GStringExpression
 
 /**
- * Checks for if statements where both the if and else blocks contain only a single return statement with a value
+ * Checks for:
+ *
+ * (1) An if statements where both the if and else blocks contain only a single return statement with a constant or
+ * literal value.
+ *
+ * (2) When the second-to-last statement in a block is an if statement with no else, where the block contains a single
+ * return statement, and the last statement in the block is a return statement, and both return statements return a
+ * constant or literal value.
  *
  * @author Chris Mair
  */
@@ -45,6 +52,30 @@ class IfStatementCouldBeTernaryAstVisitor extends AbstractAstVisitor {
             addViolation(ifElse, "The if statement in class $currentClassName can be rewritten using the ternary operator: $ternaryExpression")
         }
         super.visitIfElse(ifElse)
+    }
+
+    @Override
+    void visitBlockStatement(BlockStatement block) {
+        def allStatements = block.statements
+        if (allStatements.size() > 1) {
+            def nextToLastStatement = allStatements[-2]
+            if (nextToLastStatement instanceof IfStatement && hasNoElseBlock(nextToLastStatement)) {
+                def lastStatement = allStatements[-1]
+                IfStatement ifStatement = nextToLastStatement
+
+                if (isOnlyReturnStatement(ifStatement.ifBlock) && isReturnStatementWithConstantOrLiteralValue(lastStatement)) {
+                    def elseReturnExpression = AstUtil.createPrettyExpression(lastStatement.expression)
+                    def ternaryExpression = "return ${ifStatement.booleanExpression.text} ? ${getReturnValue(ifStatement.ifBlock)} : ${elseReturnExpression}"
+                    addViolation(ifStatement, "The if statement in class $currentClassName can be rewritten using the ternary operator: $ternaryExpression")
+                }
+            }
+        }
+
+        super.visitBlockStatement(block)
+    }
+
+    private boolean hasNoElseBlock(IfStatement ifStatement) {
+        ifStatement.elseBlock.empty
     }
 
     private boolean isOnlyReturnStatement(ASTNode node) {

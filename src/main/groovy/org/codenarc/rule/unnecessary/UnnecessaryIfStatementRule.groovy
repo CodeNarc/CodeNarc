@@ -73,6 +73,7 @@ class UnnecessaryIfStatementRule extends AbstractAstVisitorRule {
 
 class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
 
+    @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && hasElseBlock(ifStatement)) {
             if (areReturningTrueAndFalse(ifStatement.ifBlock, ifStatement.elseBlock)) {
@@ -82,6 +83,7 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
         super.visitIfElse(ifStatement)
     }
 
+    @Override
     void visitBlockStatement(BlockStatement block) {
         def allStatements = block.statements
         def allExceptLastStatement = allExceptLastElement(allStatements)

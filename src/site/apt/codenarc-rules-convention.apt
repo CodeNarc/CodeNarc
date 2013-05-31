@@ -77,8 +77,14 @@ Convention Rules  ("<rulesets/convention.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
 
-  Checks for <<<if>>> statements where both the <<<if>>> and <<<else>>> blocks contain only a single <<<return>>>
-  statement returning a constant or literal value.
+  Checks for:
+
+  * An <<<if>>> statement where both the <<<if>>> and <<<else>>> blocks contain only a single <<<return>>>
+    statement returning a constant or literal value.
+
+  * A block where the second-to-last statement in a block is an <<<if>>> statement with no <<<else>>>, where
+    the block contains a single <<<return>>> statement, and the last statement in the block is a <<<return>>>
+    statement, and both <<<return>>> statements return a constant or literal value.
 
   Example of violations:
 
@@ -89,6 +95,13 @@ Convention Rules  ("<rulesets/convention.xml>")
     if (condition)                                                      // violation
         return null
     else return [a:1]
+
+    def method1() {
+        if (condition) {                                                // violation
+            return 44
+        }
+        return 'yes'
+    }
 -------------------------------------------------------------------------------
 
 

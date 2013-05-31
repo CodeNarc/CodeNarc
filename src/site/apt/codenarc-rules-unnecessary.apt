@@ -554,10 +554,10 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     else
         return false
 
-    if (someExpression) {       // can be replaced by: return someExpression
-        return true
-    } else {
+    if (someExpression) {       // can be replaced by: return !someExpression
         return false
+    } else {
+        return true
     }
 
     if (someExpression) {       // can be replaced by: return someExpression
@@ -587,10 +587,13 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   For example, the <<<if>>> statement in the following code can be replaced by <<<return expression1>>>:
 
 -------------------------------------------------------------------------------
-    if (expression1) {
-        return true
+    def myMethod() {
+        doSomething()
+        if (expression1) {
+            return true
+        }
+        return false
     }
-    return false
 -------------------------------------------------------------------------------
 
   (4) When either the <if> block or <else> block of an <<<if>>> statement that is not the last statement
