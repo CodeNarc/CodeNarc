@@ -32,6 +32,8 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'JUnitAssertAlwaysFails'
     }
 
+    // Tests for assertTrue()
+
     @Test
     void testApplyTo_AssertTrue_False() {
         final SOURCE = '''
@@ -69,6 +71,30 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_AssertTrue_LiteralsThatEvaluateToFalse_Violations() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertTrue(0)
+                    assertTrue('error message', '')
+                    assertTrue([])
+                    assertTrue('error message', [:])
+
+                    assertTrue(99)          // Not violations
+                    assertTrue('abc')
+                    assertTrue([123])
+                    assertTrue([a:123])
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText:'assertTrue(0)'],
+            [lineNumber:5, sourceLineText:"assertTrue('error message', '')"],
+            [lineNumber:6, sourceLineText:'assertTrue([])'],
+            [lineNumber:7, sourceLineText:"assertTrue('error message', [:])"])
+    }
+
+    @Test
     void testApplyTo_AssertTrue_Variable() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -91,6 +117,8 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4, 'assertTrue("This passed!", false)')
     }
+
+    // Tests for assertFalse()
 
     @Test
     void testApplyTo_AssertFalse_True() {
@@ -129,6 +157,32 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_AssertFalse_LiteralsThatEvaluateToTrue_Violations() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertFalse(99)
+                    assertFalse('error message', 'abc')
+                    assertFalse([123])
+                    assertFalse('error message', [a:123])
+
+                    assertFalse(0)          // Not violations
+                    assertFalse('')
+                    assertFalse([])
+                    assertFalse([:])
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText:'assertFalse(99)'],
+            [lineNumber:5, sourceLineText:"assertFalse('error message', 'abc')"],
+            [lineNumber:6, sourceLineText:'assertFalse([123])'],
+            [lineNumber:7, sourceLineText:"assertFalse('error message', [a:123])"])
+    }
+
+    // Tests for assertNull
+
+    @Test
     void testApplyTo_AssertNull_ConstantNumber() {
         final SOURCE = '''
             class MyTest extends TestCase {
@@ -162,6 +216,25 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 4, 'assertNull(false)')
+    }
+
+    @Test
+    void testApplyTo_AssertNull_LiteralListOrMap() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNull([])
+                    assertNull([123])
+                    assertNull([a:123])
+                    assertNull([:])
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText:'assertNull([])'],
+            [lineNumber:5, sourceLineText:'assertNull([123])'],
+            [lineNumber:6, sourceLineText:'assertNull([a:123])'],
+            [lineNumber:7, sourceLineText:'assertNull([:])'])
     }
 
     @Test

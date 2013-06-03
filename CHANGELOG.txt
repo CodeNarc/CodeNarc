@@ -24,6 +24,7 @@ UPDATED/ENHANCED RULES
 - #408: SerialVersionUID rule: Also check that serialVersionUID field is declared private.
 - #414: Extend UnnecessaryIfStatement rule: if (condition){ return true }; return false.
 - #415: Extend IfStatementCouldBeTernary rule: if (condition) { return 1 }; return 2.
+- #416: Enhance JUnitAssertAlwaysSucceeds and JUnitAssertAlwaysFails to catch String or number constant or List or Map literal passed in as condition parameter.
 
 BUG FIXES
 - bug in UnnecessaryDefInFieldDeclarationRule making it report false positives with 'def' on right hand side of assignment

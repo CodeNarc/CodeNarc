@@ -26,8 +26,19 @@ import org.codenarc.util.AstUtil
  * such that the assertion always fails. This includes:
  * <ul>
  *   <li><code>assertTrue(false)</code>.</li>
+ *   <li><code>assertTrue(0)</code>.</li>
+ *   <li><code>assertTrue('')</code>.</li>
+ *   <li><code>assertTrue([123])</code>.</li>
+ *   <li><code>assertTrue([a:123])</code>.</li>
  *   <li><code>assertFalse(true)</code>.</li>
+ *   <li><code>assertFalse(99)</code>.</li>
+ *   <li><code>assertFalse([123])</code>.</li>
+ *   <li><code>assertFalse([a:123])</code>.</li>
  *   <li><code>assertNull(CONSTANT)</code>.</li>
+ *   <li><code>assertNull([])</code>.</li>
+ *   <li><code>assertNull([123])</code>.</li>
+ *   <li><code>assertNull([a:123])</code>.</li>
+ *   <li><code>assertNull([:])</code>.</li>
  * </ul>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
@@ -45,9 +56,11 @@ class JUnitAssertAlwaysFailsAstVisitor extends AbstractMethodCallExpressionVisit
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         def isMatch =
-        JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', Boolean.FALSE) ||
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.TRUE) ||
-            isAssertConstantValueNotNullCall(methodCall, 'assertNull')
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertTrue', false) ||
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertFalse', true) ||
+            isAssertConstantValueNotNullCall(methodCall, 'assertNull') ||
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertNull', true) ||
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertNull', false)
         if (isMatch) {
             addViolation(methodCall, "The assertion $methodCall.text will always fail. Replace with a call to the fail(String) method")
         }

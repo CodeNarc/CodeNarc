@@ -24,7 +24,15 @@ import org.codenarc.rule.AbstractMethodCallExpressionVisitor
  * such that the assertion always succeeds. This includes:
  * <ul>
  *   <li><code>assertTrue(true)</code>.</li>
+ *   <li><code>assertTrue('abc')</code>.</li>
+ *   <li><code>assertTrue(99)</code>.</li>
+ *   <li><code>assertTrue([123])</code>.</li>
+ *   <li><code>assertTrue([a:123])</code>.</li>
  *   <li><code>assertFalse(false)</code>.</li>
+ *   <li><code>assertFalse(0)</code>.</li>
+ *   <li><code>assertFalse('')</code>.</li>
+ *   <li><code>assertFalse([])</code>.</li>
+ *   <li><code>assertFalse([:])</code>.</li>
  *   <li><code>assertNull(null)</code>.</li>
  * </ul>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
@@ -43,9 +51,9 @@ class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractMethodCallExpressionVi
 
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         def isMatch =
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertTrue', Boolean.TRUE) ||
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertFalse', Boolean.FALSE) ||
-            JUnitUtil.isAssertConstantValueCall(methodCall, 'assertNull', null)
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertTrue', true) ||
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertFalse', false) ||
+            JUnitUtil.isAssertCallWithConstantValue(methodCall, 'assertNull', null)
         if (isMatch) {
             addViolation(methodCall, "The assertion $methodCall.text will always pass and is therefore pointless")
         }

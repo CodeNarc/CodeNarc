@@ -18,6 +18,9 @@ package org.codenarc.rule.junit
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.ListExpression
+import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codenarc.util.AstUtil
@@ -37,7 +40,7 @@ class JUnitUtil {
      * @param methodName - the name of the method
      * @param value - the argument value
      */
-    protected static boolean isAssertConstantValueCall(MethodCallExpression methodCall, String methodName, Object value) {
+    protected static boolean isAssertCallWithConstantValue(MethodCallExpression methodCall, String methodName, Object value) {
         def isMatch = false
         if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
             def args = methodCall.arguments.expressions
@@ -46,6 +49,36 @@ class JUnitUtil {
                 args.last().properties['value'] == value
         }
         isMatch
+    }
+
+    /**
+     * Return true if the MethodCallExpression represents a JUnit assert method call with the specified
+     * method name and constant argument value. This handles either single-argument assert calls or
+     * 2-argument assert methods where the first parameter is the assertion message.
+     * @param methodCall - the MethodCallExpression of the method call
+     * @param methodName - the name of the method
+     * @param literalEvaluatesToTrue - true if the argument value must evaluate to true using Groovy truth
+     */
+    protected static boolean isAssertCallWithLiteralValue(MethodCallExpression methodCall, String methodName, boolean literalEvaluatesToTrue) {
+        def isMatch = false
+        if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
+            def args = methodCall.arguments.expressions
+            isMatch = args.size() in 1..2 &&
+            isLiteralWithValueThatEvaluatesTo(args.last(), literalEvaluatesToTrue)
+        }
+        isMatch
+    }
+
+    private static boolean isLiteralWithValueThatEvaluatesTo(Expression expression, boolean literalEvaluatesToTrue) {
+        if (expression instanceof ConstantExpression) {
+            return (expression.properties['value'] as boolean) == literalEvaluatesToTrue
+        }
+        if (expression instanceof ListExpression) {
+            return expression.expressions.isEmpty() == !literalEvaluatesToTrue
+        }
+        if (expression instanceof MapExpression) {
+            return expression.mapEntryExpressions.isEmpty() == !literalEvaluatesToTrue
+        }
     }
 
     protected static boolean isSetUpMethod(MethodNode methodNode) {
