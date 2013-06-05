@@ -23,7 +23,7 @@ import org.junit.Test
  * Tests for JUnitAssertAlwaysSucceedsRule
  *
  * @author Chris Mair
-  */
+ */
 class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
 
     @Test
@@ -205,6 +205,89 @@ class JUnitAssertAlwaysSucceedsRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 4, 'assertNull("This passed!", null)')
     }
+
+    // Tests for assertNotNull
+
+    @Test
+    void testApplyTo_AssertNotNull_ConstantNumber() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull(123)
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'assertNotNull(123)')
+    }
+
+    @Test
+    void testApplyTo_AssertNotNull_ConstantString() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull('abc')
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, "assertNotNull('abc')")
+    }
+
+    @Test
+    void testApplyTo_AssertNotNull_ConstantBoolean() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull(false)
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'assertNotNull(false)')
+    }
+
+    @Test
+    void testApplyTo_AssertNotNull_LiteralListOrMap() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull([])
+                    assertNotNull([123])
+                    assertNotNull([a:123])
+                    assertNotNull([:])
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText:'assertNotNull([])'],
+            [lineNumber:5, sourceLineText:'assertNotNull([123])'],
+            [lineNumber:6, sourceLineText:'assertNotNull([a:123])'],
+            [lineNumber:7, sourceLineText:'assertNotNull([:])'])
+    }
+
+    @Test
+    void testApplyTo_AssertNotNull_NonConstant() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull(plugin)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_AssertNotNull_Null() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull(null)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    // Tests for non-Test files
 
     @Test
     void testApplyTo_NonTestFile() {

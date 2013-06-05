@@ -273,6 +273,42 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'assertNull("What?", false)')
     }
 
+    // Tests for assertNotNull
+
+    @Test
+    void testApplyTo_AssertNotNull_Null() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull(null)
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'assertNotNull(null)')
+    }
+
+    @Test
+    void testApplyTo_AssertNotNull_NonNullValues() {
+        final SOURCE = '''
+            class MyTest extends TestCase {
+                void testSomething() {
+                    assertNotNull(123)
+                    assertNotNull('abc')
+                    assertNotNull(true)
+                    assertNotNull(false)
+                    assertNotNull(Boolean.FALSE)
+                    assertNotNull([])
+                    assertNotNull([123])
+                    assertNotNull([:])
+                    assertNotNull([a:123])
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    // Tests for non-Test files
+
     @Test
     void testApplyTo_NonTestFile() {
         final SOURCE = '''

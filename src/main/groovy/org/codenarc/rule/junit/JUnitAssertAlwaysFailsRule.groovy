@@ -15,11 +15,9 @@
  */
 package org.codenarc.rule.junit
 
-import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
-import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks for JUnit <code>assert()</code> method calls with constant arguments
@@ -58,23 +56,13 @@ class JUnitAssertAlwaysFailsAstVisitor extends AbstractMethodCallExpressionVisit
         def isMatch =
             JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertTrue', false) ||
             JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertFalse', true) ||
-            isAssertConstantValueNotNullCall(methodCall, 'assertNull') ||
+            JUnitUtil.isAssertCallWithNonNullConstantValue(methodCall, 'assertNull') ||
             JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertNull', true) ||
-            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertNull', false)
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertNull', false) ||
+            JUnitUtil.isAssertCallWithConstantValue(methodCall, 'assertNotNull', null)
         if (isMatch) {
             addViolation(methodCall, "The assertion $methodCall.text will always fail. Replace with a call to the fail(String) method")
         }
-    }
-
-    private static boolean isAssertConstantValueNotNullCall(MethodCallExpression methodCall, String methodName) {
-        def isMatch = false
-        if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
-            def args = methodCall.arguments.expressions
-            def valueExpression = args.last()
-            isMatch = args.size() in 1..2 &&
-                valueExpression instanceof ConstantExpression && valueExpression.value != null
-        }
-        isMatch
     }
 
 }

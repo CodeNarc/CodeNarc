@@ -53,7 +53,10 @@ class JUnitAssertAlwaysSucceedsAstVisitor extends AbstractMethodCallExpressionVi
         def isMatch =
             JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertTrue', true) ||
             JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertFalse', false) ||
-            JUnitUtil.isAssertCallWithConstantValue(methodCall, 'assertNull', null)
+            JUnitUtil.isAssertCallWithConstantValue(methodCall, 'assertNull', null) ||
+            JUnitUtil.isAssertCallWithNonNullConstantValue(methodCall, 'assertNotNull') ||
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertNotNull', true) ||
+            JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertNotNull', false)
         if (isMatch) {
             addViolation(methodCall, "The assertion $methodCall.text will always pass and is therefore pointless")
         }

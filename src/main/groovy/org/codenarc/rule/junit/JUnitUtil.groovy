@@ -41,12 +41,21 @@ class JUnitUtil {
      * @param value - the argument value
      */
     protected static boolean isAssertCallWithConstantValue(MethodCallExpression methodCall, String methodName, Object value) {
+        return isAssertCallWithValueMatching(methodCall, methodName) { v -> v == value }
+    }
+
+    protected static boolean isAssertCallWithNonNullConstantValue(MethodCallExpression methodCall, String methodName) {
+        return isAssertCallWithValueMatching(methodCall, methodName) { v -> v != null }
+    }
+
+    private static boolean isAssertCallWithValueMatching(MethodCallExpression methodCall, String methodName, Closure closure) {
         def isMatch = false
         if (AstUtil.isMethodCall(methodCall, 'this', methodName)) {
             def args = methodCall.arguments.expressions
+            def valueExpression = args.last()
             isMatch = args.size() in 1..2 &&
-                args.last() instanceof ConstantExpression &&
-                args.last().properties['value'] == value
+                valueExpression instanceof ConstantExpression &&
+                closure(valueExpression.value)
         }
         isMatch
     }
@@ -129,4 +138,5 @@ class JUnitUtil {
      * Private constructor. All members are static.
      */
     private JUnitUtil() { }
+
 }
