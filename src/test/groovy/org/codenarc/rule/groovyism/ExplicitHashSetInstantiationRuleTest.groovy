@@ -76,8 +76,8 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new HashSet()', 'HashSet objects are better instantiated using the form "[:] as Set"',
-                4, 'def m(foo = new HashSet())', 'HashSet objects are better instantiated using the form "[:] as Set"')
+                3, 'def x = new HashSet()', 'HashSet objects are better instantiated using the form "[] as Set"',
+                4, 'def m(foo = new HashSet())', 'HashSet objects are better instantiated using the form "[] as Set"')
     }
 
 
