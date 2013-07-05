@@ -77,6 +77,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
         // Known limitation: Ternary expression column does not always indicate column of '?'
         if (opColumn <= leftMostColumn(expression.booleanExpression)) {
+            checkForSpaceAroundTernaryOperator(expression, line)
             return
         }
 
@@ -89,6 +90,20 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
         if (rightMostColumn(expression.trueExpression) + 1 == leftMostColumn(expression.falseExpression)) {
             addViolation(expression, "The operator \":\" within class $currentClassName is not surrounded by a space or whitespace")
+        }
+    }
+
+    private checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
+        if (expression.lineNumber == expression.lastLineNumber) {
+            def hasWhitespaceAroundQuestionMark = (line =~ /\s\?\s/)
+            if (!hasWhitespaceAroundQuestionMark) {
+                addViolation(expression, "The operator \"?\" within class $currentClassName is not surrounded by a space or whitespace")
+            }
+
+            def hasWhitespaceAroundColon = (line =~ /\s\:\s/)
+            if (!hasWhitespaceAroundColon) {
+                addViolation(expression, "The operator \":\" within class $currentClassName is not surrounded by a space or whitespace")
+            }
         }
     }
 

@@ -347,7 +347,7 @@ class HtmlReportWriter extends AbstractReportWriter {
     }
 
     private String buildTitle() {
-        getResourceBundleString('htmlReport.titlePrefix')  + (title ? ": $title": '')
+        getResourceBundleString('htmlReport.titlePrefix')  + (title ? ": $title" : '')
     }
 
 }

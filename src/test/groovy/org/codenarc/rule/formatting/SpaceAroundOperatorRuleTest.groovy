@@ -55,7 +55,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
                     def moreInfo = violation.message ? violation.message : ''
                     return expression instanceof BinaryExpression ? leftMostColumn(expression.leftExpression) : expression.columnNumber
                     AstUtil.respondsTo(rule, 'getDescription') ? rule.description : null
-                    getResourceBundleString('htmlReport.titlePrefix')  + (title ? ": $title": '')
+                    getResourceBundleString('htmlReport.titlePrefix')  + (title ? " : $title" : '')
                     def x = 3 +
                       5
                 }
@@ -117,7 +117,8 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_TernaryOperationWithMethodCall_WithoutSpace_KnownLimitation_NoViolations() {
         final SOURCE = '''
-            AstUtil.respondsTo(rule, 'getDescription')?rule.description:null
+            AstUtil.respondsTo(rule, 'getDescription')?rule.description:
+                null
         '''
         assertNoViolations(SOURCE)
     }
@@ -161,13 +162,22 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 def myMethod() {
                     def name = fullname?fullname + 'ME':'unknown'
+                    println name?
+                            'yes'  :'no'
+                    isEcpr? processRecords(records[0]): ''
+                    isEcpr ?processRecords(records[0]) :''
                 }
             }
         '''
         assertViolations(SOURCE,
             [lineNumber:4, sourceLineText:"def name = fullname?fullname + 'ME':'unknown'", messageText:'The operator "?" within class MyClass is not preceded'],
             [lineNumber:4, sourceLineText:"def name = fullname?fullname + 'ME':'unknown'", messageText:'The operator "?" within class MyClass is not followed'],
-            [lineNumber:4, sourceLineText:"def name = fullname?fullname + 'ME':'unknown'", messageText:'The operator ":" within class MyClass is not surrounded'])
+            [lineNumber:4, sourceLineText:"def name = fullname?fullname + 'ME':'unknown'", messageText:'The operator ":" within class MyClass is not surrounded'],
+            [lineNumber:5, sourceLineText:'println name?', messageText:'The operator "?" within class MyClass is not preceded'],
+            [lineNumber:7, sourceLineText:"isEcpr? processRecords(records[0]): ''", messageText:'The operator "?" within class MyClass is not surrounded'],
+            [lineNumber:7, sourceLineText:"isEcpr? processRecords(records[0]): ''", messageText:'The operator ":" within class MyClass is not surrounded'],
+            [lineNumber:8, sourceLineText:"isEcpr ?processRecords(records[0]) :''", messageText:'The operator "?" within class MyClass is not surrounded'],
+            [lineNumber:8, sourceLineText:"isEcpr ?processRecords(records[0]) :''", messageText:'The operator ":" within class MyClass is not surrounded'])
     }
 
     @Test

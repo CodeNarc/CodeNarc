@@ -32,6 +32,7 @@ BUG FIXES
 - #19: Fix BracesForMethod rule for single-line methods.
 - #20: HTML Report Anchor Fix. Thanks to Jeff Beck.
 - #137: Mistake in ExplicitHashSetInstantiationRule violation message.
+- #138: SpaceAroundOperators: Add violation for isEcpr?processRecords(records[0]):''
 
 FRAMEWORK AND INFRASTRUCTURE
 - Added support for per-rule custom compilation phase, allowing for more type information in AST when required.
