@@ -159,6 +159,7 @@ ruleset {
     SpaceAfterSemicolon 
     SpaceAfterSwitch 
     SpaceAfterWhile 
+    SpaceAroundClosureArrow 
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 
@@ -296,6 +297,7 @@ ruleset {
     UnsafeImplementationAsMap 
     
     // rulesets/serialization.xml
+    EnumCustomSerializationIgnored 
     SerialPersistentFields 
     SerialVersionUID 
     SerializableClassMustDefineSerialVersionUID 

@@ -92,6 +92,7 @@ ruleset {
     EmptySynchronizedStatement 
     EmptyTryBlock 
     EmptyWhileStatement 
+    EnumCustomSerializationIgnored 
     EqualsAndHashCode 
     EqualsOverloaded 
     ExceptionExtendsError 
@@ -221,6 +222,7 @@ ruleset {
     SpaceAfterSemicolon 
     SpaceAfterSwitch 
     SpaceAfterWhile 
+    SpaceAroundClosureArrow 
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 

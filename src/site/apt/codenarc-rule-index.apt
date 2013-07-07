@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 316 rules.
+  <<CodeNarc>> includes 318 rules.
 
     
       
@@ -461,6 +461,9 @@ Rule Index
     * {{{codenarc-rules-formatting.html#SpaceAfterWhile}SpaceAfterWhile}}  
     
       
+    * {{{codenarc-rules-formatting.html#SpaceAroundClosureArrow}SpaceAroundClosureArrow}}  
+    
+      
     * {{{codenarc-rules-formatting.html#SpaceAroundOperator}SpaceAroundOperator}}  
     
       
@@ -861,6 +864,9 @@ Rule Index
       
 * {{{codenarc-rules-serialization.html}Serialization}}
       
+      
+    * {{{codenarc-rules-serialization.html#EnumCustomSerializationIgnored}EnumCustomSerializationIgnored}}  
+    
       
     * {{{codenarc-rules-serialization.html#SerialPersistentFields}SerialPersistentFields}}  
     
