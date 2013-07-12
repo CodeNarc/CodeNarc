@@ -12,7 +12,6 @@
     <rule class='org.codenarc.rule.design.AbstractClassWithPublicConstructorRule'/>
     <rule class='org.codenarc.rule.design.BooleanMethodReturnsNullRule'/>
     <rule class='org.codenarc.rule.design.CloneableWithoutCloneRule'/>
-    <rule class='org.codenarc.rule.design.CloneWithoutCloneableRule'/>
     <rule class='org.codenarc.rule.design.CloseWithoutCloseableRule'/>
     <rule class='org.codenarc.rule.design.CompareToWithoutComparableRule'/>
     <rule class='org.codenarc.rule.design.ConstantsOnlyInterfaceRule'/>

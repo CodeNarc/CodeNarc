@@ -29,6 +29,7 @@ class RuleSets {
         'rulesets/convention.xml',
         'rulesets/design.xml',
         'rulesets/dry.xml',
+        'rulesets/enhanced.xml',
         'rulesets/exceptions.xml',
         'rulesets/formatting.xml',
         'rulesets/generic.xml',

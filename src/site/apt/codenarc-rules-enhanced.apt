@@ -1,0 +1,70 @@
+        --------------------------------------------------
+                      CodeNarc - Enhanced Classpath Rules
+        --------------------------------------------------
+
+Enhanced Classpath Rules ("<rulesets/enhanced.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  These rules use a later compilation phase for parsing of the Groovy source code, allowing <<CodeNarc>>
+  to use a richer and more complete Abstract Syntax Tree (AST). The downside is that the later
+  compiler phase requires <<CodeNarc>> to have the application classes being analyzed, as well as
+  any referenced classes, on the classpath.
+
+
+* {CloneWithoutCloneable} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  The method clone() should only be declared if the class implements the Cloneable interface.
+
+  NOTE: This is a {{{codenarc-enhanced-classpath-rules.html}CodeNarc Enhanced Classpath Rule}}.
+  It requires <<CodeNarc>> to have the application classes being analyzed, as well as any referenced classes, on the classpath.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class ValueClass {
+        ValueClass clone() {
+        }
+    }
+-------------------------------------------------------------------------------
+
+
+* {JUnitAssertEqualsConstantActualValue} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Reports usages of <<<org.junit.Assert.assertEquals([message,] expected, actual)>>> where the <<<actual>>> parameter
+  is a constant or a literal. Most likely it was intended to be the <<<expected>>> value.
+
+  NOTE: This is a {{{codenarc-enhanced-classpath-rules.html}CodeNarc Enhanced Classpath Rule}}.
+  It requires <<CodeNarc>> to have the application classes being analyzed, as well as any referenced classes, on the classpath.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    assertEquals(result, 2)
+    assertEquals("Message", result, 2)
+    assertEquals(result, 2.3d, 0.5d)
+    assertEquals("Message", result, 2.3d, 0.5d)
+-------------------------------------------------------------------------------
+
+
+* {UnsafeImplementationAsMap} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Reports incomplete interface implementations created by map-to-interface coercions.
+
+  By default, this rule does not apply to test files.
+
+  NOTE: This is a {{{codenarc-enhanced-classpath-rules.html}CodeNarc Enhanced Classpath Rule}}.
+  It requires <<CodeNarc>> to have the application classes being analyzed, as well as any referenced classes, on the classpath.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    [mouseClicked: { ... }] as MouseListener
+    //not all MouseListener methods are implemented which can lead to UnsupportedOperationException-s
+-------------------------------------------------------------------------------
+

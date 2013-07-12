@@ -287,9 +287,6 @@ Rule Index
     * {{{codenarc-rules-design.html#BuilderMethodWithSideEffects}BuilderMethodWithSideEffects}}  
     
       
-    * {{{codenarc-rules-design.html#CloneWithoutCloneable}CloneWithoutCloneable}}  
-    
-      
     * {{{codenarc-rules-design.html#CloneableWithoutClone}CloneableWithoutClone}}  
     
       
@@ -344,6 +341,20 @@ Rule Index
     
       
     * {{{codenarc-rules-dry.html#DuplicateStringLiteral}DuplicateStringLiteral}}  
+    
+    
+      
+      
+* {{{codenarc-rules-enhanced.html}Enhanced}}
+      
+      
+    * {{{codenarc-rules-enhanced.html#CloneWithoutCloneable}CloneWithoutCloneable}}  
+    
+      
+    * {{{codenarc-rules-enhanced.html#JUnitAssertEqualsConstantActualValue}JUnitAssertEqualsConstantActualValue}}  
+    
+      
+    * {{{codenarc-rules-enhanced.html#UnsafeImplementationAsMap}UnsafeImplementationAsMap}}  
     
     
       
@@ -692,9 +703,6 @@ Rule Index
     * {{{codenarc-rules-junit.html#JUnitAssertAlwaysSucceeds}JUnitAssertAlwaysSucceeds}}  
     
       
-    * {{{codenarc-rules-junit.html#JUnitAssertEqualsConstantActualValue}JUnitAssertEqualsConstantActualValue}}  
-    
-      
     * {{{codenarc-rules-junit.html#JUnitFailWithoutMessage}JUnitFailWithoutMessage}}  
     
       
@@ -855,9 +863,6 @@ Rule Index
     
       
     * {{{codenarc-rules-security.html#UnsafeArrayDeclaration}UnsafeArrayDeclaration}}  
-    
-      
-    * {{{codenarc-rules-security.html#UnsafeImplementationAsMap}UnsafeImplementationAsMap}}  
     
     
       

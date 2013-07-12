@@ -100,7 +100,6 @@ ruleset {
     AbstractClassWithoutAbstractMethod 
     BooleanMethodReturnsNull 
     BuilderMethodWithSideEffects 
-    CloneWithoutCloneable 
     CloneableWithoutClone 
     CloseWithoutCloseable 
     CompareToWithoutComparable 
@@ -120,6 +119,11 @@ ruleset {
     DuplicateMapLiteral 
     DuplicateNumberLiteral 
     DuplicateStringLiteral 
+    
+    // rulesets/enhanced.xml
+    CloneWithoutCloneable 
+    JUnitAssertEqualsConstantActualValue 
+    UnsafeImplementationAsMap 
     
     // rulesets/exceptions.xml
     CatchArrayIndexOutOfBoundsException 
@@ -238,7 +242,6 @@ ruleset {
     CoupledTestCase 
     JUnitAssertAlwaysFails 
     JUnitAssertAlwaysSucceeds 
-    JUnitAssertEqualsConstantActualValue 
     JUnitFailWithoutMessage 
     JUnitLostTest 
     JUnitPublicField 
@@ -294,7 +297,6 @@ ruleset {
     PublicFinalizeMethod 
     SystemExit 
     UnsafeArrayDeclaration 
-    UnsafeImplementationAsMap 
     
     // rulesets/serialization.xml
     EnumCustomSerializationIgnored 

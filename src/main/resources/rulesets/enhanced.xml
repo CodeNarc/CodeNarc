@@ -1,0 +1,17 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+    
+    <description>
+        Enhanced classpath rule set.
+        These rules use a later compilation phase for parsing of the Groovy source code, allowing CodeNarc
+        to use a richer and more complete Abstract Syntax Tree (AST). The downside is that the later
+        compiler phase requires CodeNarc to have the application classes being analyzed, as well as
+        any referenced classes, on the classpath.
+    </description>
+
+    <rule class='org.codenarc.rule.design.CloneWithoutCloneableRule'/>
+    <rule class='org.codenarc.rule.junit.JUnitAssertEqualsConstantActualValueRule'/>
+    <rule class='org.codenarc.rule.security.UnsafeImplementationAsMapRule'/>
+</ruleset>
