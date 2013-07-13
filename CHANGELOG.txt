@@ -16,10 +16,10 @@ NEW RULES
 - #412: New EnumCustomSerializationIgnored rule (serialization) - Checks for enums that define writeObject() or writeReplace() methods, or declare serialPersistentFields or serialVersionUID fields, all of which are ignored for enums.
 - #421: SpaceAroundClosureArrow rule (formatting) - Checks that there is whitespace around the closure arrow (->) symbol
 
-These rules require application classes on CodeNarc's classpath:
+New "Enhanced Classpath" Ruleset: These rules require application classes on CodeNarc's classpath:
 - #329: New UnsafeImplementationAsMap rule - Reports incomplete interface implementations created by map-to-interface coercions. By default, this rule does not apply to test files. Thanks to Artur Gajowy. (pull request #14)
 - #364: New CloneWithoutCloneable rule - The method clone() should only be declared if the class implements the Cloneable interface. Thanks to Artur Gajowy. (pull request #14)
-- #278: New JUnitAssertEqualsConstantActualValue rule (junit) - Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter is a constant or a literal. Most likely it was intended to be the 'expected' value.
+- #278: New JUnitAssertEqualsConstantActualValue rule - Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter is a constant or a literal. Most likely it was intended to be the 'expected' value.
 
 UPDATED/ENHANCED RULES
 - #371: CouldBeElvis rule. Added support for IF statements without braces.

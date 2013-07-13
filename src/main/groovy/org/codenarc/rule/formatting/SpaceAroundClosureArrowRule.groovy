@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitor
  */
 class SpaceAroundClosureArrowRule extends AbstractAstVisitorRule {
     String name = 'SpaceAroundClosureArrow'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = SpaceAroundClosureArrowAstVisitor
 }
 
