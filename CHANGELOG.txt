@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.19 (??? 2013)
+Changes in version 0.19 (Jul 2013)
 -------------------------------------------
 NEW RULES
 - #349: New EmptyClass rule (basic) - Reports classes without methods, fields or properties. Why would you need a class like this?

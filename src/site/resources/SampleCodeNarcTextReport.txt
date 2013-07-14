@@ -1,12 +1,15 @@
-CodeNarc Report: Sample Project - Dec 9, 2012 8:02:02 PM
+CodeNarc Report: Sample Project - Jul 14, 2013 4:17:01 PM
 
-Summary: TotalFiles=7 FilesWithViolations=4 P1=0 P2=9 P3=3
+Summary: TotalFiles=7 FilesWithViolations=5 P1=0 P2=10 P3=3
 
 File: org/codenarc/sample/domain/SampleDomain.groovy
     Violation: Rule=EmptyIfStatement P=2 Line=20 Msg=[The if statement is empty] Src=[if (name) {]
     Violation: Rule=EmptyElseBlock P=2 Line=23 Msg=[The else block is empty] Src=[else {]
     Violation: Rule=ImportFromSamePackage P=3 Line=3 Src=[import org.codenarc.sample.domain.OtherDomain]
     Violation: Rule=DuplicateImport P=3 Line=5 Src=[import org.codenarc.sample.other.Other]
+
+File: org/codenarc/sample/other/Other.groovy
+    Violation: Rule=EmptyClass P=2 Line=6 Msg=[Class 'Other' is empty (has no methods, fields or properties). Why would you need a class like this?] Src=[class Other {]
 
 File: org/codenarc/sample/service/NewService.groovy
     Violation: Rule=EmptyForStatement P=2 Line=12 Msg=[The for statement is empty] Src=[for(int i=0; i < values.size(); i++) {]
@@ -22,4 +25,4 @@ File: org/codenarc/sample/service/SampleService.groovy
     Violation: Rule=ThrowExceptionFromFinallyBlock P=2 Line=30 Msg=[Throwing an exception from a finally block can hide an underlying error] Src=[throw new Exception('bad stuff')]
     Violation: Rule=UnusedImport P=3 Line=3 Msg=[The [org.codenarc.sample.domain.SampleDomain] import is never referenced] Src=[import org.codenarc.sample.domain.SampleDomain]
 
-[CodeNarc (http://www.codenarc.org) v0.18]
+[CodeNarc (http://www.codenarc.org) v0.19]
