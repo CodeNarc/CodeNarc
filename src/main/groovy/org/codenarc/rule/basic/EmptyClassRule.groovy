@@ -22,7 +22,9 @@ import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
- * Reports classes without methods, fields or properties. Why would you need a class like this?
+ * Reports classes without methods, fields or properties.
+ *
+ * Ignores interfaces, Enums, anonymous inner classes, subclasses (extends), and classes with annotations.
  *
  * @author Artur Gajowy
  */
@@ -32,11 +34,25 @@ class EmptyClassRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        sourceCode.ast?.classes?.each {
-            if (!it.isInterface() && !it.isEnum() && !isAnonymousInnerClass(it) && isEmpty(it)) {
-                violations << createViolation(sourceCode, it, violationMessage(it))
+        sourceCode.ast?.classes?.each { classNode ->
+            if (
+                    !classNode.isInterface() &&
+                    !classNode.isEnum() &&
+                    !isAnonymousInnerClass(classNode) &&
+                    !isSubclass(classNode) &&
+                    !hasAnnotation(classNode) &&
+                    isEmpty(classNode)) {
+                violations << createViolation(sourceCode, classNode, violationMessage(classNode))
             }
         }
+    }
+
+    private boolean isSubclass(ClassNode classNode) {
+        return classNode.superClass.name != 'java.lang.Object'
+    }
+
+    private boolean hasAnnotation(ClassNode classNode) {
+        return classNode.getAnnotations()
     }
 
     private boolean isAnonymousInnerClass(ClassNode classNode) {

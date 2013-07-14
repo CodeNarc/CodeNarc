@@ -132,7 +132,7 @@ class EmptyClassRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testEmptySubclassesViolate() {
+    void testEmptySubclasses_NoViolations() {
         final SOURCE = '''
             class MyException extends RuntimeException {
             }
@@ -140,9 +140,26 @@ class EmptyClassRuleTest extends AbstractRuleTestCase {
             class ArrayListOfStrings extends ArrayList<String> {
             }
         '''
-        assertViolations(SOURCE,
-            [lineNumber: 2, sourceLineText: 'class MyException', messageText: violationMessage('MyException')],
-            [lineNumber: 5, sourceLineText: 'class ArrayListOfStrings', messageText: violationMessage('ArrayListOfStrings')])
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testJUnitSuiteClasses_Annotation_NoViolations() {
+        final SOURCE = '''
+            @RunWith(Suite.class)
+            @Suite.SuiteClasses([TestClass1.class, TestClass2.class])
+            class TestSuite { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testOtherAnnotation_NoViolations() {
+        final SOURCE = '''
+            @AnyAnnotation
+            class Empty { }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     private String violationMessage(String violatingClass) {
