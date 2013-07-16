@@ -32,7 +32,6 @@ import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
@@ -53,7 +52,6 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
     private static final VIOLATION4 = new Violation(rule:new StubRule(name:'RULE4', priority:4), lineNumber:LINE1, sourceLine:'if (file) {')
     private static final NEW_REPORT_FILE = 'target/NewReport.html'
-    private static final DEFAULT_REPORT_FILE = 'target/CodeNarcReport.html'
     private static final TITLE = 'My Cool Project'
 
     private reportWriter
@@ -224,8 +222,9 @@ class HtmlReportWriterTest extends AbstractTestCase {
 
     @Before
     void setUpHtmlReportWriterTest() {
-        new File('target').mkdir()
-        reportWriter = new HtmlReportWriter(defaultOutputFile:DEFAULT_REPORT_FILE)
+        log(new File('.').absolutePath)
+
+        reportWriter = new HtmlReportWriter(defaultOutputFile:NEW_REPORT_FILE)
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
         reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
 
@@ -257,13 +256,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
         analysisContext = new AnalysisContext(sourceDirectories:['/src/main'], ruleSet:ruleSet)
     }
 
-    @After
-    void tearDownHtmlReportWriterTest() {
-        new File(NEW_REPORT_FILE).delete()
-//        new File(HtmlReportWriter.DEFAULT_OUTPUT_FILE).delete()
-    }
-
-    private String getReportText(String filename=DEFAULT_REPORT_FILE) {
+    private String getReportText(String filename=NEW_REPORT_FILE) {
         new File(filename).text
     }
 
