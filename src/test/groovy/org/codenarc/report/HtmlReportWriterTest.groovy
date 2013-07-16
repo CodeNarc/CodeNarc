@@ -224,7 +224,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
     void setUpHtmlReportWriterTest() {
         log(new File('.').absolutePath)
 
-        reportWriter = new HtmlReportWriter(defaultOutputFile:NEW_REPORT_FILE)
+        reportWriter = new HtmlReportWriter(outputFile:NEW_REPORT_FILE)
         reportWriter.metaClass.getFormattedTimestamp << { 'Feb 24, 2011 9:32:38 PM' }
         reportWriter.metaClass.getCodeNarcVersion << { '0.12' }
 
