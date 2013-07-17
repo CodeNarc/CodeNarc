@@ -51,7 +51,7 @@ class HtmlReportWriterTest extends AbstractTestCase {
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
     private static final VIOLATION4 = new Violation(rule:new StubRule(name:'RULE4', priority:4), lineNumber:LINE1, sourceLine:'if (file) {')
-    private static final NEW_REPORT_FILE = 'target/NewReport.html'
+    private static final NEW_REPORT_FILE = new File('target/NewReport.html').absolutePath
     private static final TITLE = 'My Cool Project'
 
     private reportWriter
