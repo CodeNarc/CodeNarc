@@ -66,22 +66,6 @@ class HtmlReportWriterTest extends AbstractTestCase {
     }
 
     @Test
-    void testWriteReport_SetOutputFileAndTitle() {
-        final OUTPUT_FILE = NEW_REPORT_FILE
-        reportWriter.outputFile = OUTPUT_FILE
-        reportWriter.title = TITLE
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_SetOutputFileAndTitle.html'
-        assertSameReportHtml(HTML_FILE)
-    }
-
-    @Test
-    void testWriteReport() {
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport.html'
-        reportWriter.outputFile = NEW_REPORT_FILE
-        assertSameReportHtml(HTML_FILE)
-    }
-
-    @Test
     void testWriteReport_MaxPriority1() {
         reportWriter.maxPriority = 1
         final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_MaxPriority1.html'
@@ -215,6 +199,22 @@ class HtmlReportWriterTest extends AbstractTestCase {
     @Test
     void testMaxPriority_DefaultsTo3() {
         assert reportWriter.maxPriority == 3
+    }
+
+    @Test
+    void testWriteReport_SetOutputFileAndTitle() {
+        final OUTPUT_FILE = NEW_REPORT_FILE
+        reportWriter.outputFile = OUTPUT_FILE
+        reportWriter.title = TITLE
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_SetOutputFileAndTitle.html'
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
+    void testWriteReport() {
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport.html'
+        reportWriter.outputFile = NEW_REPORT_FILE
+        assertSameReportHtml(HTML_FILE)
     }
 
     //------------------------------------------------------------------------------------
