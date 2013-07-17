@@ -66,50 +66,6 @@ class HtmlReportWriterTest extends AbstractTestCase {
     }
 
     @Test
-    void testWriteReport_MaxPriority1() {
-        reportWriter.maxPriority = 1
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_MaxPriority1.html'
-        assertSameReportHtml(HTML_FILE)
-    }
-
-    @Test
-    void testWriteReport_Priority4() {
-        def fileResults4 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION4])
-        dirResultsMain.addChild(fileResults4)
-        reportWriter.maxPriority = 4
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_Priority4.html'
-        assertSameReportHtml(HTML_FILE)
-    }
-
-    @Test
-    void testWriteReport_NoDescriptionsForRuleIds() {
-        ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY')])
-        reportWriter.customMessagesBundleName = 'DoesNotExist'
-        analysisContext.ruleSet = ruleSet
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_NoDescriptionsForRuleIds.html'
-        assertSameReportHtml(HTML_FILE)
-    }
-
-    @Test
-    void testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile() {
-        def biRule = new UnnecessaryBooleanInstantiationRule()
-        ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
-        analysisContext.ruleSet = ruleSet
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile.html'
-        assertSameReportHtml(HTML_FILE)
-    }
-
-    @Test
-    void testWriteReport_RuleDescriptionsSetDirectlyOnTheRule() {
-        ruleSet = new ListRuleSet([
-                new StubRule(name:'MyRuleXX', description:'description77'),
-                new StubRule(name:'MyRuleYY', description:'description88')])
-        analysisContext.ruleSet = ruleSet
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsSetDirectlyOnTheRule.html'
-        assertSameReportHtml(HTML_FILE)
-    }
-
-    @Test
     void testWriteReport_DoesNotIncludeRuleDescriptionsForDisabledRules() {
         ruleSet = new ListRuleSet([
                 new StubRule(name:'MyRuleXX', enabled:false),
@@ -214,6 +170,50 @@ class HtmlReportWriterTest extends AbstractTestCase {
     void testWriteReport() {
         final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport.html'
         reportWriter.outputFile = NEW_REPORT_FILE
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
+    void testWriteReport_MaxPriority1() {
+        reportWriter.maxPriority = 1
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_MaxPriority1.html'
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
+    void testWriteReport_Priority4() {
+        def fileResults4 = new FileResults('src/main/MyActionTest.groovy', [VIOLATION4])
+        dirResultsMain.addChild(fileResults4)
+        reportWriter.maxPriority = 4
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_Priority4.html'
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
+    void testWriteReport_NoDescriptionsForRuleIds() {
+        ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY')])
+        reportWriter.customMessagesBundleName = 'DoesNotExist'
+        analysisContext.ruleSet = ruleSet
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_NoDescriptionsForRuleIds.html'
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
+    void testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile() {
+        def biRule = new UnnecessaryBooleanInstantiationRule()
+        ruleSet = new ListRuleSet([new StubRule(name:'MyRuleXX'), new StubRule(name:'MyRuleYY'), biRule])
+        analysisContext.ruleSet = ruleSet
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsProvidedInCodeNarcMessagesFile.html'
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
+    void testWriteReport_RuleDescriptionsSetDirectlyOnTheRule() {
+        ruleSet = new ListRuleSet([
+            new StubRule(name:'MyRuleXX', description:'description77'),
+            new StubRule(name:'MyRuleYY', description:'description88')])
+        analysisContext.ruleSet = ruleSet
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_RuleDescriptionsSetDirectlyOnTheRule.html'
         assertSameReportHtml(HTML_FILE)
     }
 
