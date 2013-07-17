@@ -66,8 +66,18 @@ class HtmlReportWriterTest extends AbstractTestCase {
     }
 
     @Test
+    void testWriteReport_SetOutputFileAndTitle() {
+        final OUTPUT_FILE = NEW_REPORT_FILE
+        reportWriter.outputFile = OUTPUT_FILE
+        reportWriter.title = TITLE
+        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_SetOutputFileAndTitle.html'
+        assertSameReportHtml(HTML_FILE)
+    }
+
+    @Test
     void testWriteReport() {
         final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport.html'
+        reportWriter.outputFile = NEW_REPORT_FILE
         assertSameReportHtml(HTML_FILE)
     }
 
@@ -133,15 +143,6 @@ class HtmlReportWriterTest extends AbstractTestCase {
         analysisContext.ruleSet = new ListRuleSet([ [getName:{ 'RuleABC' }, getPriority: { 2 } ] as Rule])
         reportWriter.writeReport(analysisContext, results)
         assertContainsAllInOrder(getReportText(), ['RuleABC', 'No description'])
-    }
-
-    @Test
-    void testWriteReport_SetOutputFileAndTitle() {
-        final OUTPUT_FILE = NEW_REPORT_FILE
-        reportWriter.outputFile = OUTPUT_FILE
-        reportWriter.title = TITLE
-        final HTML_FILE = './src/test/groovy/org/codenarc/report/data/HtmlReportWriterTest.testWriteReport_SetOutputFileAndTitle.html'
-        assertSameReportHtml(HTML_FILE)
     }
 
     @Test
