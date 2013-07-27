@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.19.1 or 0.20 (??? 2013)
+-------------------------------------------
+BUG FIXES
+- Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null. See GitHub #409.
+
+
 Changes in version 0.19 (Jul 2013)
 -------------------------------------------
 NEW RULES

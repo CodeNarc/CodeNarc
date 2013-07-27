@@ -24,10 +24,11 @@ import org.codenarc.rule.AbstractRuleTestCase
  * Tests for ClassNameSameAsFilenameRule
  *
  * @author Artur Gajowy
+ * @author Chris Mair
  */
 class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
 
-    def skipTestThatUnrelatedCodeHasNoViolations
+    static skipTestThatUnrelatedCodeHasNoViolations
     
     @Before
     void setup() {
@@ -49,7 +50,19 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
         '''
         assertNoViolations(SOURCE)
     }
-    
+
+    @Test
+    void testSourceCodeName_NullOrEmpty() {
+        final SOURCE = '''
+        	class Ignore { }
+        '''
+        sourceCodeName = null
+        assertNoViolations(SOURCE)
+
+        sourceCodeName = ''
+        assertNoViolations(SOURCE)
+    }
+
     @Test
     void test_MultipleClasses_NoViolations() {
         final SOURCE = '''

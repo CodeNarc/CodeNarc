@@ -25,6 +25,7 @@ import org.codenarc.source.SourceCode
  * Reports files containing only one top level class / enum / interface which is named differently than the file.
  *
  * @author Artur Gajowy
+ * @author Chris Mair
  */
 class ClassNameSameAsFilenameRule extends AbstractRule {
     
@@ -33,6 +34,10 @@ class ClassNameSameAsFilenameRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
+        if (!sourceCode.name) {
+            return
+        }
+
         List<ClassNode> classes = sourceCode?.ast?.classes
         List<ClassNode> topLevelClasses = classes?.findAll { !it.outerClass }
         ClassNode onlyTopLevelClass = topLevelClasses?.size() == 1 ? topLevelClasses.first() : null
