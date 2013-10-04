@@ -46,7 +46,7 @@ class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
         if (ignoreStrings == null) {
             return Collections.EMPTY_SET
         }
-        def strings = ignoreStrings.contains(',') ? ignoreStrings.tokenize(',') : [ignoreStrings]
+        def strings = ignoreStrings.contains(',') ? ignoreStrings.split(',') : [ignoreStrings]
         strings as Set
     }
 }
