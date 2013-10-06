@@ -211,6 +211,18 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testIgnoreStrings_IgnoresMultipleValuesWithEmptyString() {
+        final SOURCE = '''
+        	def x = ['xyz', 'abc', 'xyz']
+            def y = ['foo', 'bar', 'foo']
+            def z = ['', 'efg', '']
+        '''
+
+        rule.ignoreStrings = ',xyz,foo'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testIgnoreValues_IgnoresValuesSurroundedByWhitespace() {
         final SOURCE = '''
         	def x = [' xyz ', 'abc', ' xyz ']
