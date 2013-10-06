@@ -23,6 +23,9 @@ import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
+/**
+ * Tests for StringSourceAnalyzer
+ */
 class StringSourceAnalyzerTest extends AbstractTestCase {
 
     @Test

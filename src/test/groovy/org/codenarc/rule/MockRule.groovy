@@ -17,6 +17,9 @@ package org.codenarc.rule
 
 import org.codenarc.source.SourceCode
 
+/**
+ * Mock implementation of the Rule interface for testing
+ */
 class MockRule implements Rule {
 
     String name

@@ -21,6 +21,9 @@ import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
+/**
+ * Tests for SuppressionAnalyzer
+ */
 class SuppressionAnalyzerTest extends AbstractTestCase {
 
     @Test

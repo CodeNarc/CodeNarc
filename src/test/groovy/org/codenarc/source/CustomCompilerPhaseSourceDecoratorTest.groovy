@@ -21,6 +21,9 @@ import org.codenarc.test.AbstractTestCase
 import org.codenarc.test.TestUtil
 import org.junit.Test
 
+/**
+ * Tests for CustomCompilerPhaseSourceDecorator
+ */
 class CustomCompilerPhaseSourceDecoratorTest extends AbstractTestCase {
 
     private static final PHASES_CAUSING_OUTPUT = [

@@ -17,12 +17,14 @@ package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
+import org.codenarc.source.SourceString
 import org.junit.Test
 
 /**
  * Tests for ClassJavadocRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class ClassJavadocRuleTest extends AbstractRuleTestCase {
 
@@ -32,40 +34,107 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ClassJavadoc'
+        assert !rule.applyToNonMainClasses
     }
 
     @Test
-    void testNonMainClasses() {
+    void testIgnoresNonMainClasses() {
         final SOURCE = '''
             /**
-            *
-            *
-            */
+             *
+             */
             class MyClass {}
 
             class OtherClass {}
         '''
-        sourceCodeName = 'MyClass'
-        assertNoViolations(SOURCE)
-
-    }
-    @Test
-    void testSuccess() {
-        def testFile = this.getClass().getClassLoader().getResource('rule/ClassJavadocPass.txt')
-        final SOURCE = new File(testFile.toURI()).text
+        sourceCodeName = 'MyClass.groovy'
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testFailure() {
+    void testHasJavadoc_DefaultPackage_NoViolations() {
+        final SOURCE = '''
+            /**
+             * Javadoc
+             */
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.groovy'
+        assertNoViolations(SOURCE)
+    }
 
-        def testFile = this.getClass().getClassLoader().getResource('rule/ClassJavadocFail.txt')
-        final SOURCE = new File(testFile.toURI()).text
-        rule.applyToNonMainClasses = true
-        
+    @Test
+    void testHasJavadoc_IgnoresBlankLinesBetweenJavadocAndClass_NoViolations() {
+        final SOURCE = '''
+            /**
+             * Javadoc
+             */
+
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testHasJavadoc_WithinPackage_NoViolations() {
+        final SOURCE = '''
+            package org.example
+
+            /**
+             * Javadoc
+             */
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testMissingJavadoc_WithinPackage_Violation() {
+        final SOURCE = '''
+            package org.example
+
+            // Not javadoc
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.Groovy'
         assertViolations(SOURCE,
-                [lineNumber: 18, sourceLineText: 'class User', messageText: 'Class com.bkool.webapp.user.User missing JavaDoc'],
-                [lineNumber: 173, sourceLineText: 'public interface Second', messageText: 'Class com.bkool.webapp.user.Second missing JavaDoc'])
+            [lineNumber:5, sourceLineText:'class TestClass', messageText:'Class org.example.TestClass missing JavaDoc'])
+    }
+
+    @Test
+    void testApplyToNonMainPackages_Violations() {
+        final SOURCE = '''
+            package org.example
+
+            class MyClass {
+            }
+
+            // Not javadoc
+            class OtherClass {
+            }
+        '''
+        rule.applyToNonMainClasses = true
+        sourceCodeName = 'MyClass.groovy'
+
+        assertViolations(SOURCE,
+                [lineNumber: 4, sourceLineText: 'class MyClass', messageText: 'Class org.example.MyClass missing JavaDoc'],
+                [lineNumber: 8, sourceLineText: 'class OtherClass', messageText: 'Class org.example.OtherClass missing JavaDoc'])
+    }
+
+    @Test
+    void testSourceCodeNameWithoutExtension() {
+        final SOURCE = 'println'
+        assert rule.sourceCodeNameWithoutExtension(new SourceString(SOURCE, null, null)) == null
+        assert rule.sourceCodeNameWithoutExtension(new SourceString(SOURCE, null, '')) == ''
+        assert rule.sourceCodeNameWithoutExtension(new SourceString(SOURCE, null, 'abc')) == 'abc'
+        assert rule.sourceCodeNameWithoutExtension(new SourceString(SOURCE, null, 'abc.groovy')) == 'abc'
+
     }
 
     protected Rule createRule() {

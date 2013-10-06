@@ -19,12 +19,14 @@ import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
 
 /**
- * Makes sure each class and interface definition is preceeded by javadoc. Enum definitions are not checked, due to strange behavior in the Groovy AST. 
+ * Makes sure each class and interface definition is preceded by javadoc. Enum definitions are not checked,
+ * due to strange behavior in the Groovy AST.
  *
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
   */
 class ClassJavadocRule extends AbstractRule {
+
     String name = 'ClassJavadoc'
     int priority = 2
     boolean applyToNonMainClasses = false
@@ -32,25 +34,23 @@ class ClassJavadocRule extends AbstractRule {
     /**
      * Apply the rule to the given source, writing violations to the given list.
      * @param sourceCode The source to check
-     * @param violations A list of Violations that may be added to. It can be
-     * an empty list
+     * @param violations A list of Violations that may be added to. It can be an empty list
      */
     @Override
     @SuppressWarnings('EmptyWhileStatement')
     void applyTo(SourceCode sourceCode, List violations) {
 
-        
         def lines = sourceCode.getLines()
         sourceCode.ast?.classes?.each { classNode ->
 
-            if (!applyToNonMainClasses && sourceCode.name != classNode.name) {
+            if (!applyToNonMainClasses && sourceCodeNameWithoutExtension(sourceCode) != classNode.nameWithoutPackage) {
                 return // only apply to classes that have same name as the source unit.
             }
             
             if (classNode.isPrimaryClassNode() && classNode.superClass.name != 'java.lang.Enum') {
                 def index = classNode.lineNumber - 1
 
-                while (lines[--index].trim().startsWith('*')) {
+                while (lines[--index].trim().startsWith('*') || lines[index].trim().isEmpty()) {
                     /* Do nothing, to simulate an until loop */
                 }
 
@@ -60,6 +60,12 @@ class ClassJavadocRule extends AbstractRule {
             }
         }
     }
+
+    protected String sourceCodeNameWithoutExtension(SourceCode sourceCode) {
+        def indexOfPeriod = sourceCode.name?.lastIndexOf('.')
+        if (indexOfPeriod && indexOfPeriod != -1) {
+            return sourceCode.name[0..indexOfPeriod - 1]
+        }
+        return sourceCode.getName()
+    }
 }
-
-

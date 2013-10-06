@@ -23,6 +23,9 @@ import org.codenarc.source.SourceCode
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
+/**
+ * Tests for BaseSourceAnalyzer
+ */
 class BaseSourceAnalyzerTest extends AbstractTestCase {
 
     private BaseSourceAnalyzer analyzer = new StringSourceAnalyzer('class MyClass {}')

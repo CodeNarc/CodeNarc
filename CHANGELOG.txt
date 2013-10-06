@@ -5,7 +5,9 @@ http://www.codenarc.org
 Changes in version 0.19.1 or 0.20 (??? 2013)
 -------------------------------------------
 BUG FIXES
-- Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null. See GitHub #409.
+- #409: Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null.
+- #22: Fix DuplicateStringLiteral: Allow empty strings within ignoreStrings. (Thanks to Ei Kageyama)
+- #21: Fix ClassJavadoc rule has no effect. Also ignore blank lines between javadoc and class declaration.
 
 
 Changes in version 0.19 (Jul 2013)

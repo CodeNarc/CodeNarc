@@ -33,7 +33,7 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             class MyClass implements Serializable {
                 private static final long serialVersionUID = -403250971215465050L
@@ -42,6 +42,31 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
             }
 
             return "some script"
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testEnums_NoViolations() {
+        final SOURCE = '''
+            enum DeferralRequestStatus {
+                PENDING(0),
+                ACCEPTED(1),
+                DENIED(2)
+                long value
+
+                DeferralRequestStatus(long pValue) {
+                    value = pValue
+                }
+
+                long getId() {
+                    return value
+                }
+
+                String getName() {
+                    return GapEnumHelper.getValue(GrailsNameUtils.getShortName(DeferralRequestStatus.class.name), value).name
+                }
+            }
             '''
         assertNoViolations(SOURCE)
     }
