@@ -45,7 +45,7 @@ class UnsafeImplementationAsMapAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitCastExpression(CastExpression cast) {
-        if (cast.type.isInterface() && cast.expression instanceof MapExpression) {
+        if (isFirstVisit(cast) && cast.type.isInterface() && cast.expression instanceof MapExpression) {
             def interfaceMethods = cast.type.abstractMethods*.name as Set
             def implementedMethods = getMethodsImplementedByCoercion(cast.expression)
             def unimplementedMethods = (interfaceMethods - implementedMethods).sort()

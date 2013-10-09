@@ -8,6 +8,7 @@ BUG FIXES
 - #409: Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null.
 - #22: Fix DuplicateStringLiteral: Allow empty strings within ignoreStrings. (Thanks to Ei Kageyama)
 - #21: Fix ClassJavadoc rule has no effect. Also ignore blank lines between javadoc and class declaration.
+- #143: Fix UnsafeImplementationAsMap - duplicate violation.
 
 
 Changes in version 0.19 (Jul 2013)

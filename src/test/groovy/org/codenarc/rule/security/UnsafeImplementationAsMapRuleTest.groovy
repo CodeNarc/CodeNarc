@@ -27,6 +27,10 @@ import org.codenarc.rule.AbstractRuleTestCase
  */
 class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
 
+    private static final SOURCE_WITH_SINGLE_VIOLATION = '''
+        [next: {}] as Iterator
+        '''
+
     @Before
     void setup() {
         sourceCodePath = '/src/main/where/ever/Whatever.groovy'
@@ -46,10 +50,6 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    private static final SOURCE_WITH_SINGLE_VIOLATION = '''                      
-        [next: {}] as Iterator
-    '''
-    
     @Test
     void testTestSourcesNotCheckedByDefault() {
         sourceCodePath = '/where/ever/WhateverTest.groovy'
@@ -90,6 +90,17 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 
             7, '[next: {}, makeFun: {}] as FunnyIterator', violationMessage('FunnyIterator', 'hasNext, makeLotsOfFun, remove'))
+    }
+
+    @Test
+    void testViolation_WithinClass() {
+        final SOURCE = '''
+            class ValueClass {
+                def listener =  [mouseClicked: { }] as java.awt.event.MouseListener
+            }
+            '''
+        assertSingleViolation(SOURCE,
+            3, 'def listener =  [mouseClicked: { }] as java.awt.event.MouseListener', 'java.awt.event.MouseListener')
     }
 
     private String violationMessage(String implementedInterface, String missingMethods) {
