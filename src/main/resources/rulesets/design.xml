@@ -11,6 +11,7 @@
     <rule class='org.codenarc.rule.design.AbstractClassWithoutAbstractMethodRule'/>
     <rule class='org.codenarc.rule.design.AbstractClassWithPublicConstructorRule'/>
     <rule class='org.codenarc.rule.design.BooleanMethodReturnsNullRule'/>
+    <rule class='org.codenarc.rule.design.BuilderMethodWithSideEffectsRule'/>
     <rule class='org.codenarc.rule.design.CloneableWithoutCloneRule'/>
     <rule class='org.codenarc.rule.design.CloseWithoutCloseableRule'/>
     <rule class='org.codenarc.rule.design.CompareToWithoutComparableRule'/>
@@ -18,11 +19,11 @@
     <rule class='org.codenarc.rule.design.EmptyMethodInAbstractClassRule'/>
     <rule class='org.codenarc.rule.design.FinalClassWithProtectedMemberRule'/>
     <rule class='org.codenarc.rule.design.ImplementationAsTypeRule'/>
+    <rule class='org.codenarc.rule.design.LocaleSetDefaultRule'/>
     <rule class='org.codenarc.rule.design.PublicInstanceFieldRule'/>
     <rule class='org.codenarc.rule.design.PrivateFieldCouldBeFinalRule'/>
     <rule class='org.codenarc.rule.design.ReturnsNullInsteadOfEmptyArrayRule'/>
     <rule class='org.codenarc.rule.design.ReturnsNullInsteadOfEmptyCollectionRule'/>
     <rule class='org.codenarc.rule.design.SimpleDateFormatMissingLocaleRule'/>
     <rule class='org.codenarc.rule.design.StatelessSingletonRule'/>
-    <rule class='org.codenarc.rule.design.BuilderMethodWithSideEffectsRule'/>
 </ruleset>

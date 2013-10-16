@@ -176,6 +176,7 @@ ruleset {
     JdbcResultSetReference 
     JdbcStatementReference 
     LineLength 
+    LocaleSetDefault 
     LoggerForDifferentClass 
     LoggerWithWrongModifiers 
     LoggingSwallowsStacktrace 

@@ -107,6 +107,7 @@ ruleset {
     EmptyMethodInAbstractClass 
     FinalClassWithProtectedMember 
     ImplementationAsType 
+    LocaleSetDefault 
     PrivateFieldCouldBeFinal 
     PublicInstanceField 
     ReturnsNullInsteadOfEmptyArray 

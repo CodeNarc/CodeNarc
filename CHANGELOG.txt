@@ -4,6 +4,9 @@ http://www.codenarc.org
 
 Changes in version 0.19.1 or 0.20 (??? 2013)
 -------------------------------------------
+NEW RULES
+- #425: LocaleSetDefault rule (design) - Checks for calls to Locale.setDefault(), which sets the Locale across the entire JVM. (Thanks to Ming Huang and Rob Patrick)
+
 BUG FIXES
 - #409: Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null.
 - #22: Fix DuplicateStringLiteral: Allow empty strings within ignoreStrings. (Thanks to Ei Kageyama)
@@ -13,7 +16,6 @@ BUG FIXES
 
 Changes in version 0.19 (Jul 2013)
 -------------------------------------------
-NEW RULES
 - #349: New EmptyClass rule (basic) - Reports classes without methods, fields or properties. Why would you need a class like this?
 - #409: New ClassNameSameAsFilename rule (naming) - Reports files containing only one top level class / enum / interface which is named differently than the file.
 - #214: New ThisReferenceEscapesConstructor rule (concurrency) - Reports constructors passing the 'this' reference to other methods. Thanks to Artur Gajowy. (pull request #15)
