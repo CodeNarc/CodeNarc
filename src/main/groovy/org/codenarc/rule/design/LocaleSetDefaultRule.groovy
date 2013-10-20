@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.design
 
+import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.util.AstUtil
@@ -40,5 +42,19 @@ class LocaleSetDefaultAstVisitor extends AbstractAstVisitor {
             addViolation(call, 'Avoid explicit calls to Locale.setDefault, which sets the Locale across the entire JVM')
         }
         super.visitMethodCallExpression(call)
+    }
+
+    @Override
+    void visitBinaryExpression(BinaryExpression expression) {
+        if (expression.operation.text == '=') {
+            def leftExpression = expression.leftExpression
+            if (leftExpression instanceof PropertyExpression &&
+                    (AstUtil.isVariable(leftExpression.objectExpression, /Locale/) ||
+                        leftExpression.objectExpression.text == 'java.util.Locale') &&
+                    AstUtil.isConstant(leftExpression.property, 'default') ) {
+                addViolation(expression, 'Avoid explicit assignment to Locale.default, which sets the Locale across the entire JVM')
+            }
+        }
+        super.visitBinaryExpression(expression)
     }
 }

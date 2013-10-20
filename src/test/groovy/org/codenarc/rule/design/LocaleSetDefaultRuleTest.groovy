@@ -39,12 +39,16 @@ class LocaleSetDefaultRuleTest extends AbstractRuleTestCase {
         	Locale.getAvailableLocales()
         	Other.setDefault(Locale.US)
         	Other.setDefault(Locale.Category.DISPLAY, Locale.US)
+
+        	println Locale.getDefault()
+        	println Locale.default
+        	println Other.default
         '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolations() {
+    void testLocaleSetDefault_Violations() {
         final SOURCE = '''
             java.util.Locale.setDefault(Locale.FRANCE)
             Locale.setDefault(Locale.UK)
@@ -54,6 +58,17 @@ class LocaleSetDefaultRuleTest extends AbstractRuleTestCase {
             [lineNumber:2, sourceLineText:'java.util.Locale.setDefault', messageText:'Avoid explicit calls to Locale.setDefault'],
             [lineNumber:3, sourceLineText:'Locale.setDefault', messageText:'Avoid explicit calls to Locale.setDefault'],
             [lineNumber:4, sourceLineText:'Locale.setDefault', messageText:'Avoid explicit calls to Locale.setDefault'])
+    }
+
+    @Test
+    void testLocaleDefaultEquals_Violations() {
+        final SOURCE = '''
+            java.util.Locale.default  = Locale.FRANCE
+            Locale.default = Locale.UK
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'java.util.Locale.default', messageText:'Avoid explicit assignment to Locale.default'],
+            [lineNumber:3, sourceLineText:'Locale.default', messageText:'Avoid explicit assignment to Locale.default'])
     }
 
     protected Rule createRule() {
