@@ -15,6 +15,7 @@ BUG FIXES
 - #22: Fix DuplicateStringLiteral: Allow empty strings within ignoreStrings. (Thanks to Ei Kageyama)
 - #21: Fix ClassJavadoc rule has no effect. Also ignore blank lines between javadoc and class declaration.
 - #143: Fix UnsafeImplementationAsMap - duplicate violation.
+- #135: Fix CoupledTestCase incorrectly thrown when referencing the current class.
 
 
 Changes in version 0.19 (Jul 2013)

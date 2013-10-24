@@ -73,11 +73,26 @@ class CoupledTestCaseRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testStaticReferenceToSameClass_NoViolation() {
+    void testStaticReferenceToSameClass_DefaultPackage_NoViolation() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
                 void testMethod() {
                     def input = MyTest.getResourceAsStream('sample.txt')
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testStaticReferenceToSameClass_WithinPackage_NoViolation() {
+        final SOURCE = '''
+            package com.example
+
+            class MyTest extends GroovyTestCase {
+                void testMethod() {
+                    def input = MyTest.getResourceAsStream('sample.txt')
+                    def otherInput = com.example.MyTest.getResourceAsStream('other.txt')
                 }
             }
         '''

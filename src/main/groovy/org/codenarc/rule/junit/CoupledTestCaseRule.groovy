@@ -37,10 +37,11 @@ class CoupledTestCaseRule extends AbstractAstVisitorRule {
 }
 
 class CoupledTestCaseAstVisitor extends AbstractAstVisitor {
+
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
-        if (AstUtil.isMethodCall(call, '[A-Z].*Test', '.*') && !AstUtil.isMethodCallOnObject(call, getCurrentClassName())) {
+        if (AstUtil.isMethodCall(call, '[A-Z].*Test', '.*') && !isMethodCallOnSameClass(call)) {
             addViolation(call, "$call.text invokes a method on another test case. Test cases should not be coupled. Move this method to a helper object")
         }
         super.visitMethodCallExpression(call)
@@ -53,6 +54,11 @@ class CoupledTestCaseAstVisitor extends AbstractAstVisitor {
             addViolation(call, "$call.text creates an instance of a test case. Test cases should not be coupled. Move this method to a helper object")
         }
         super.visitConstructorCallExpression(call)
+    }
+
+    private boolean isMethodCallOnSameClass(MethodCallExpression call) {
+        AstUtil.isMethodCallOnObject(call, getCurrentClassName()) ||
+            AstUtil.isMethodCallOnObject(call, getCurrentClassNode().nameWithoutPackage)
     }
 
 }
