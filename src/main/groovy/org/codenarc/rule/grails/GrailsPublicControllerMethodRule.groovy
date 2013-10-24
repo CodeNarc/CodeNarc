@@ -25,6 +25,10 @@ import java.lang.reflect.Modifier
 /**
  * Rule that checks for public methods on Grails controller classes. Static methods are ignored.
  * <p/>
+ * NOTE: This rule is DISABLED by default (i.e., by setting its enabled property to false).
+ * Given that Grails 2.x allows and encourages controller actions to be defined as methods instead of closures,
+ * this rule makes no more sense (for Grails 2.x projects).
+ * <p/>
  * Grails controller actions and interceptors are defined as properties on the controller class.
  * Public methods on a controller class are unnecessary. They break encapsulation and can
  * be confusing.
@@ -51,6 +55,10 @@ class GrailsPublicControllerMethodRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GrailsPublicControllerMethodAstVisitor
     String applyToFilesMatching = GrailsUtil.CONTROLLERS_FILES
     String applyToClassNames = GrailsUtil.CONTROLLERS_CLASSES
+
+    GrailsPublicControllerMethodRule() {
+        this.enabled = false        // disabled by default
+    }
 }
 
 class GrailsPublicControllerMethodAstVisitor extends AbstractMethodVisitor {

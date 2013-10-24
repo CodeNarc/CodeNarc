@@ -120,8 +120,14 @@ Grails Rules  ("<rulesets/grails.xml>")
 -------------------------------------------------------------------------------
 
 
-* {GrailsPublicControllerMethod} Rule
+* {GrailsPublicControllerMethod} Rule (disabled)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*-------------------------------------------------------------------------------------------------+
+| <<NOTE:>> This rule has been disabled by default (i.e., by setting its <enabled> property to
+| <false>). Given that Grails 2.x allows and encourages controller actions to be defined as methods
+| instead of closures, this rule makes no sense for Grails 2.x projects.
+*-------------------------------------------------------------------------------------------------+
 
   Rule that checks for public methods on Grails controller classes. Static methods are ignored.
 

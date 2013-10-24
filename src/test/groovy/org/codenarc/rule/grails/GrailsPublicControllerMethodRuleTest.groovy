@@ -30,6 +30,11 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
     @Test
+    void testDisabledByDefault() {
+        assert !new GrailsPublicControllerMethodRule().enabled
+    }
+
+    @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'GrailsPublicControllerMethod'
@@ -161,6 +166,6 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new GrailsPublicControllerMethodRule()
+        new GrailsPublicControllerMethodRule(enabled:true)
     }
 }

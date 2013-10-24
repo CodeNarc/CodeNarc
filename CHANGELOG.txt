@@ -7,6 +7,9 @@ Changes in version 0.19.1 or 0.20 (??? 2013)
 NEW RULES
 - #425: LocaleSetDefault rule (design) - Checks for calls to Locale.setDefault(), which sets the Locale across the entire JVM. (Thanks to Ming Huang and Rob Patrick)
 
+UPDATED/ENHANCED RULES
+- #426: Disable GrailsPublicControllerMethod by default.
+
 BUG FIXES
 - #409: Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null.
 - #22: Fix DuplicateStringLiteral: Allow empty strings within ignoreStrings. (Thanks to Ei Kageyama)
