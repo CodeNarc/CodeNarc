@@ -40,149 +40,119 @@ class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testSuccessScenario() {
-        final SOURCE = '''
+        assertNoViolations('''
         	class Whatever {
         	}
-        '''
-        assertNoViolations(SOURCE)
+        ''')
     }
 
     @Test
     void testSingleViolation() {
-        final SOURCE = '''
-            class Order {
+        assertInlineViolations('''
+            class Order {           #'Order' is a reserved SQL keyword and - as such - a problematic domain class name.
             }
-        '''
-        assertViolations(SOURCE,
-            violation(2, 'class Order', "'Order' is a reserved SQL keyword and - as such - a problematic domain class name."))
+        ''')
     }
 
     @Test
     void testTwoViolations() {
-        final SOURCE = '''
+        assertInlineViolations("""
             class Whatever {
-                String where
-                Integer rows
+                String where        ${violation('where')}
+                Integer rows        ${violation('rows')}
             }
-        '''
-        assertViolations(SOURCE,
-            violation(3, 'String where', violationMessage('where')),
-            violation(4, 'Integer rows', violationMessage('rows')))
+        """)
     }
 
     @Test
     void testBasicTypesViolate() {
-        final SOURCE = '''
+        assertInlineViolations("""
             class Whatever {
-                int column
-                byte[] rows
-                Byte[] table
-                char[] user
-                Character[] order
-                Serializable group
+                int column              ${violation('column')}
+                byte[] rows             ${violation('rows')}
+                Byte[] table            ${violation('table')}
+                char[] user             ${violation('user')}
+                Character[] order       ${violation('order')}
+                Serializable group      ${violation('group')}
             }
-        '''
-        assertViolations(SOURCE,
-            violation(3, 'int column', violationMessage('column')),
-            violation(4, 'byte[] rows', violationMessage('rows')),
-            violation(5, 'Byte[] table', violationMessage('table')),
-            violation(6, 'char[] user', violationMessage('user')),
-            violation(7, 'Character[] order', violationMessage('order')),
-            violation(8, 'Serializable group', violationMessage('group')))
+        """)
     }
 
     @Test
     void testRelationshipsDoNotViolate() {
-        final SOURCE = '''
+        assertNoViolations('''
             class Whatever {
                 Place where
                 List<Row> rows
             }
-        '''
-        assertNoViolations(SOURCE)
+        ''')
     }
 
     @Test
     void testTransientsDoNotViolate() {
-        final SOURCE = '''
+        assertNoViolations('''
             class Whatever {
                 String where
                 static transients = ['where']
             }
-        '''
-        assertNoViolations(SOURCE)
+        ''')
     }
 
     @Test
     void testDefsDoNotViolate() {
-        final SOURCE = '''
+        assertNoViolations('''
             class Whatever {
                 def where
             }
-        '''
-        assertNoViolations(SOURCE)
+        ''')
     }
 
     @Test
     void testStaticsDoNotViolate() {
-        final SOURCE = '''
+        assertNoViolations('''
             class Whatever {
                 static String where
             }
-        '''
-        assertNoViolations(SOURCE)
+        ''')
     }
 
     @Test
     void testSqlKeywordsOverride() {
         rule.additionalReservedSqlKeywords = 'customKeyword, evenMoreCustomKeyword'
-        final SOURCE = '''
+        assertInlineViolations("""
             class Whatever {
-                String where
-                String customKeyword
-                String evenMoreCustomKeyword
+                String where                    ${violation('where')} 
+                String customKeyword            ${violation('customKeyword')}
+                String evenMoreCustomKeyword    ${violation('evenMoreCustomKeyword')}
             }
-        '''
-        assertViolations(SOURCE,
-            violation(3, 'String where', violationMessage('where')),
-            violation(4, 'String customKeyword', violationMessage('customKeyword')),
-            violation(5, 'String evenMoreCustomKeyword', violationMessage('evenMoreCustomKeyword')))
+        """)
     }
 
     @Test
     void testHibernateBasicTypesOverride() {
         rule.additionalHibernateBasicTypes = 'Place, Relation'
-        final SOURCE = '''
+        assertInlineViolations("""
             class Whatever {
-                int rows
-                Place where
-                Relation order
+                int rows            ${violation('rows')}
+                Place where         ${violation('where')}
+                Relation order      ${violation('order')}
             }
-        '''
-        assertViolations(SOURCE,
-            violation(3, 'int rows', violationMessage('rows')),
-            violation(4, 'Place where', violationMessage('where')),
-            violation(5, 'Relation order', violationMessage('order')))
+        """)
     }
 
     @Test
     void testNonDomain_WithKeywordName_NoViolations() {
-        final SOURCE = '''
+        sourceCodePath = 'project/MyProject/grails-app/service/Order.groovy'
+        assertNoViolations('''
             class Order {
             }
-        '''
-        sourceCodePath = 'project/MyProject/grails-app/service/Order.groovy'
-        assertNoViolations(SOURCE)
+        ''')
     }
 
-    private Map violation(int lineNumber, String sourceLineText, String messageText) {
-        [lineNumber: lineNumber, sourceLineText: sourceLineText, messageText: messageText]
+    private violation(String fieldName) {
+        inlineViolation("'$fieldName' is a reserved SQL keyword and - as such - a problematic domain class' field name.")
     }
-
-    private String violationMessage(String fieldName) {
-        "'$fieldName' is a reserved SQL keyword and - as such - a problematic domain class' field name."
-    }
-
+    
     protected Rule createRule() {
         new GrailsDomainReservedSqlKeywordNameRule()
     }
