@@ -27,10 +27,10 @@ import org.codenarc.rule.AbstractRuleTestCase
  */
 class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
 
-    private static final SOURCE_WITH_SINGLE_VIOLATION = '''
-        [next: {}] as Iterator
-        '''
-
+    private static final SOURCE_WITH_SINGLE_VIOLATION = """                      
+        [next: {}] as Iterator      ${violation('java.util.Iterator', 'hasNext, remove')} 
+    """
+    
     @Before
     void setup() {
         sourceCodePath = '/src/main/where/ever/Whatever.groovy'
@@ -44,69 +44,58 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testNoViolations() {
-        final SOURCE = '''
+        assertNoViolations('''
         	[run: {}] as Runnable
-        '''
-        assertNoViolations(SOURCE)
+        ''')
     }
 
     @Test
     void testTestSourcesNotCheckedByDefault() {
         sourceCodePath = '/where/ever/WhateverTest.groovy'
-        assertNoViolations(SOURCE_WITH_SINGLE_VIOLATION)
+        assertNoViolations(removeInlineViolations(SOURCE_WITH_SINGLE_VIOLATION))
     }
 
     @Test
     void testSingleViolation() {
-        assertSingleViolation(SOURCE_WITH_SINGLE_VIOLATION,
-            2, '[next: {}] as Iterator', violationMessage('java.util.Iterator', 'hasNext, remove'))
+        assertInlineViolations(SOURCE_WITH_SINGLE_VIOLATION)
     }
 
     @Test
     void testMultipleViolations() {
-        final SOURCE = '''
-            [:] as Runnable
-            [noSuchMethod: {}] as Iterator
-            ['next': {}] as Iterator
-        '''
-        assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'[:] as Runnable', 
-                messageText: violationMessage('java.lang.Runnable', 'run')],
-            [lineNumber:3, sourceLineText:'[noSuchMethod: {}] as Iterator', 
-                messageText: violationMessage('java.util.Iterator', 'hasNext, next, remove')],
-            [lineNumber:4, sourceLineText:"['next': {}] as Iterator", 
-                messageText: violationMessage('java.util.Iterator', 'hasNext, remove')])
+        assertInlineViolations("""
+            [:] as Runnable                     ${violation('java.lang.Runnable', 'run')}                     
+            [noSuchMethod: {}] as Iterator      ${violation('java.util.Iterator', 'hasNext, next, remove')}
+            ['next': {}] as Iterator            ${violation('java.util.Iterator', 'hasNext, remove')}
+        """)
     }
 
     @Test
     void testMethodsMissingFromInheritedInterfaceViolate() {
-        final SOURCE = '''                      
+        assertInlineViolations("""                  
             interface FunnyIterator extends Iterator {
                 void makeFun()
                 void makeLotsOfFun()    
             }
             
-            [next: {}, makeFun: {}] as FunnyIterator
-        '''
-        assertSingleViolation(SOURCE, 
-            7, '[next: {}, makeFun: {}] as FunnyIterator', violationMessage('FunnyIterator', 'hasNext, makeLotsOfFun, remove'))
+            [next: {}, makeFun: {}] as FunnyIterator    ${violation('FunnyIterator', 'hasNext, makeLotsOfFun, remove')}
+        """)
     }
 
     @Test
     void testViolation_WithinClass() {
-        final SOURCE = '''
+        assertInlineViolations('''
             class ValueClass {
-                def listener =  [mouseClicked: { }] as java.awt.event.MouseListener
+                def listener = [mouseClicked: { }] as java.awt.event.MouseListener      #java.awt.event.MouseListener
             }
-            '''
-        assertSingleViolation(SOURCE,
-            3, 'def listener =  [mouseClicked: { }] as java.awt.event.MouseListener', 'java.awt.event.MouseListener')
+        ''')
     }
-
-    private String violationMessage(String implementedInterface, String missingMethods) {
-        "Incomplete interface implementation. The following methods of $implementedInterface are not implemented" +
-        " by this map-to-interface coercion: [$missingMethods]. Please note that calling any of these methods" +
-        ' on this implementation will cause an UnsupportedOperationException, which is likely not intended.'
+    
+    private static String violation(String implementedInterface, String missingMethods) {
+        inlineViolation(
+            "Incomplete interface implementation. The following methods of $implementedInterface are not implemented" +
+            " by this map-to-interface coercion: [$missingMethods]. Please note that calling any of these methods" +
+            ' on this implementation will cause an UnsupportedOperationException, which is likely not intended.'
+        )
     }
     
     protected Rule createRule() {
