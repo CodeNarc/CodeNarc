@@ -15,6 +15,11 @@
  */
 package org.codenarc.rule
 
+/**
+ * Parser for inline violation metadata within Rule test classes
+ *
+ * @author Artur Gajowy
+ */
 class InlineViolationsParser {
 
     protected static String inlineViolation(String violationMessage) {

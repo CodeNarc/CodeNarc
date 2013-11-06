@@ -19,6 +19,11 @@ import org.junit.Test
 
 import static org.codenarc.rule.InlineViolationsParser.inlineViolation
 
+/**
+ * Tests for InlineViolationsParser
+ *
+ * @author Artur Gajowy
+ */
 class InlineViolationsParserTest {
 
     @Test
