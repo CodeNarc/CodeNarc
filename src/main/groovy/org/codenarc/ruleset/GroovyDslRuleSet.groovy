@@ -55,7 +55,7 @@ class GroovyDslRuleSet implements RuleSet {
         }
         Binding binding = new Binding(ruleset:callRuleSet)
 
-        return new GroovyShell(binding)
+        return new GroovyShell(this.class.classLoader, binding)
     }
 
     private void evaluateDsl(GroovyShell shell) {
