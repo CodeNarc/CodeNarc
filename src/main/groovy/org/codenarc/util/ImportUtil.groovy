@@ -15,6 +15,7 @@
  */
 package org.codenarc.util
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.source.SourceCode
 
@@ -88,6 +89,16 @@ class ImportUtil {
         [sourceLine: sourceLine, lineNumber: lineNumber]
     }
 
+    static Map sourceLineAndNumberForNonStarImport(SourceCode sourceCode, ImportNode importNode) {
+        ClassNode importClassNode = importNode.type
+        if (importClassNode && importClassNode.lineNumber && importClassNode.lineNumber != -1) {
+            int lineNumber = importClassNode.lineNumber
+            String sourceLine = sourceCode.line(lineNumber - 1) ?: importNode.text
+            return [sourceLine: sourceLine, lineNumber: lineNumber]
+        }
+        return sourceLineAndNumberForImport(sourceCode, importNode.className, importNode.alias)
+    }
+
     /**
      * Return the source line and line number for the specified import
      * @param sourceCode - the SourceCode being processed
@@ -98,7 +109,7 @@ class ImportUtil {
         if (importNode.isStar()) {
             sourceLineAndNumberForStarImport(sourceCode, importNode)
         } else {
-            sourceLineAndNumberForImport(sourceCode, importNode.className, importNode.alias)
+            sourceLineAndNumberForNonStarImport(sourceCode, importNode)
         }
     }
 

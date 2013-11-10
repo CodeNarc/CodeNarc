@@ -45,9 +45,9 @@ class ImportUtilTest extends AbstractTestCase {
         assertImport(sourceCode, ast, [sourceLine:'import a.b.MyOtherClass;', lineNumber:6])
         assertImport(sourceCode, ast, [sourceLine:'import a.b.MyOtherClass as Moo;', lineNumber:7])
 
-        // Not found
+        // Not found in source code; AST still contains import nodes
         def otherSourceCode = new SourceString('def v = 1')
-        assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null])
+        assertImport(otherSourceCode, ast, [sourceLine:'import a.b.MyClass as MyClass', lineNumber:2])
     }
 
     @Test
@@ -63,7 +63,7 @@ class ImportUtilTest extends AbstractTestCase {
         assert ImportUtil.sourceLineAndNumberForImport(sourceCode, 'a.b.MyClass', 'Boo') == [sourceLine:'import a.b.MyClass as Boo', lineNumber:3]
         assert ImportUtil.sourceLineAndNumberForImport(sourceCode, 'a.pkg1.MyOtherClass', 'MOC') == [sourceLine:'import a.pkg1.MyOtherClass as MOC', lineNumber:5]
 
-        // Not found
+        // Not found in source code; AST still contains import nodes
         def otherSourceCode = new SourceString('def v = 1')
         assert ImportUtil.sourceLineAndNumberForImport(otherSourceCode, 'a.b.MyClass', 'MyClass') == [sourceLine:'import a.b.MyClass as MyClass', lineNumber:null]
     }

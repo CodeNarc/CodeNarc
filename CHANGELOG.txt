@@ -20,6 +20,7 @@ BUG FIXES
 
 FRAMEWORK AND INFRASTRUCTURE
 - #23: Inline violations support within rule tests. (Thanks to Artur Gajowy)
+- #428: Use ClassNode if present in ImportNode to get line number and possibly source text
 
 
 Changes in version 0.19 (Jul 2013)
