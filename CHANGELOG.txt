@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.19.1 or 0.20 (??? 2013)
+Changes in version 0.20 (??? 2013)
 -------------------------------------------
 NEW RULES
 - #425: LocaleSetDefault rule (design) - Checks for calls to Locale.setDefault(), which sets the Locale across the entire JVM. (Thanks to Ming Huang and Rob Patrick)
@@ -16,6 +16,7 @@ BUG FIXES
 - #21: Fix ClassJavadoc rule has no effect. Also ignore blank lines between javadoc and class declaration.
 - #143: Fix UnsafeImplementationAsMap - duplicate violation.
 - #135: Fix CoupledTestCase incorrectly thrown when referencing the current class.
+- #24: Enable Groovy ruleset to find custom rules (pass the current ClassLoader to the GroovyShell). (Thanks John Engelman)
 
 FRAMEWORK AND INFRASTRUCTURE
 - #23: Inline violations support within rule tests. (Thanks to Artur Gajowy)
