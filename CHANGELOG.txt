@@ -6,6 +6,7 @@ Changes in version 0.20 (??? 2013)
 -------------------------------------------
 NEW RULES
 - #425: LocaleSetDefault rule (design) - Checks for calls to Locale.setDefault(), which sets the Locale across the entire JVM. (Thanks to Ming Huang and Rob Patrick)
+- #114: IllegalString rule (generic) - Checks for a specified illegal string within the source code.
 
 UPDATED/ENHANCED RULES
 - #426: Disable GrailsPublicControllerMethod by default.

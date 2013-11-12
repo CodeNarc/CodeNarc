@@ -148,6 +148,7 @@ ruleset {
     IllegalClassReference 
     IllegalPackageReference 
     IllegalRegex 
+    IllegalString 
     ImplementationAsType 
     ImportFromSamePackage 
     ImportFromSunPackages 

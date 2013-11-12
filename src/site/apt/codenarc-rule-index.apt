@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 319 rules.
+  <<CodeNarc>> includes 320 rules.
 
     
       
@@ -502,6 +502,9 @@ Rule Index
     
       
     * {{{codenarc-rules-generic.html#IllegalRegex}IllegalRegex}}  
+    
+      
+    * {{{codenarc-rules-generic.html#IllegalString}IllegalString}}  
     
       
     * {{{codenarc-rules-generic.html#RequiredRegex}RequiredRegex}}  

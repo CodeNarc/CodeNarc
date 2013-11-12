@@ -62,7 +62,6 @@ class RequiredStringRuleTest extends AbstractRuleTestCase {
             class MyClass {
             }
         '''
-//        assertSingleViolation(SOURCE) { v -> containsAll(v.message, ['string', TEXT]) }
         assertSingleViolation(SOURCE, null, null, ['string', TEXT])
     }
 
