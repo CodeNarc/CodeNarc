@@ -58,6 +58,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
                     getResourceBundleString('htmlReport.titlePrefix')  + (title ? " : $title" : '')
                     def x = 3 +
                       5
+                    23 as String
                 }
             }
         '''
@@ -154,6 +155,27 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
             [lineNumber:9, sourceLineText:'x ||y', messageText:'The operator "||" within class MyClass is not followed'],
             [lineNumber:10, sourceLineText:'x &y', messageText:'The operator "&" within class MyClass is not followed'],
             [lineNumber:11, sourceLineText:'x| y', messageText:'The operator "|" within class MyClass is not preceded'])
+    }
+
+    @Test
+    void testApplyTo_AsOperatorWithoutSurroundingSpace_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    [1,2]as String
+                    { -> println 123 } as Runnable      // ok
+                    { -> println 456 }as
+                        Runnable
+                    { -> println 789
+                         }as Runnable
+                    (int)34.56                          // ignored
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText:'[1,2]as String', messageText:'The operator "as" within class MyClass is not surrounded'],
+            [lineNumber:6, sourceLineText:'{ -> println 456 }as', messageText:'The operator "as" within class MyClass is not surrounded'],
+            [lineNumber:8, sourceLineText:'{ -> println 789', messageText:'The operator "as" within class MyClass is not surrounded'])
     }
 
     @Test

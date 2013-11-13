@@ -10,6 +10,7 @@ NEW RULES
 
 UPDATED/ENHANCED RULES
 - #426: Disable GrailsPublicControllerMethod by default.
+- #424: Expand SpaceAroundOperator rule to also check for "as" operator.
 
 BUG FIXES
 - #409: Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null.

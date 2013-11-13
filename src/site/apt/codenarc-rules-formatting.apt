@@ -314,7 +314,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   <Since CodeNarc 0.18>
 
   Check that there is at least one space (blank) or whitespace around each binary operator,
-  including: +, -, *, /, \>\>, \<\<, &&, ||, &, |, ?:, =.
+  including: +, -, *, /, \>\>, \<\<, &&, ||, &, |, ?:, =, "as".
 
   Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
   Do not check array ('[') operator.
@@ -339,6 +339,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
         x ||y                       // violation
         x &y                        // violation
         x| y                        // violation
+        [1,2]as String              // violation
     }
 -------------------------------------------------------------------------------
 
