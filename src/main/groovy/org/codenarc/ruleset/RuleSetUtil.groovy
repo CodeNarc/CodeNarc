@@ -44,7 +44,7 @@ class RuleSetUtil {
         Class ruleClass
         inputStream.withStream { input ->
             GroovyClassLoader gcl = new GroovyClassLoader(getClass().classLoader)
-            ruleClass = gcl.parseClass(input)
+            ruleClass = gcl.parseClass(input.text)
         }
         assertClassImplementsRuleInterface(ruleClass)
         ruleClass.newInstance()
