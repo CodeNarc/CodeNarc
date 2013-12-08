@@ -19,6 +19,8 @@ BUG FIXES
 - #143: Fix UnsafeImplementationAsMap - duplicate violation.
 - #135: Fix CoupledTestCase incorrectly thrown when referencing the current class.
 - #24: Enable Groovy ruleset to find custom rules (pass the current ClassLoader to the GroovyShell). (Thanks John Engelman)
+- #26: Fix MissingMethodException error on custom rule with recent Groovy. (Thanks to Joe Sondow)
+- #146: Fix SpaceAroundOperator: Does not catch some violations with elvis operator (?:)
 
 FRAMEWORK AND INFRASTRUCTURE
 - #23: Inline violations support within rule tests. (Thanks to Artur Gajowy)

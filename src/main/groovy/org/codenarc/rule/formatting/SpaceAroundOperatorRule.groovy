@@ -110,15 +110,13 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
     private void processElvisExpression(ElvisOperatorExpression expression) {
         def line = sourceCode.lines[expression.lineNumber - 1]
-        def beforeChar = line[expression.columnNumber - 2] as char
-
-        // Known limitation: standalone elvis expression has messed up columnNumber/lastColumnNumber
-        if (expression.lastColumnNumber == expression.columnNumber + 2 && !Character.isWhitespace(beforeChar)) {
-            addViolation(expression, "The operator \"?:\" within class $currentClassName is not preceded by a space or whitespace")
-        }
-
-        if (expression.lastColumnNumber == leftMostColumn(expression.falseExpression)) {
-            addViolation(expression, "The operator \"?:\" within class $currentClassName is not followed by a space or whitespace")
+        if (line.contains('?:')) {
+            if (!(line =~ /\s\?\:/)) {
+                addViolation(expression, "The operator \"?:\" within class $currentClassName is not preceded by a space or whitespace")
+            }
+            if (!(line =~ /\?\:\s/)) {
+                addViolation(expression, "The operator \"?:\" within class $currentClassName is not followed by a space or whitespace")
+            }
         }
     }
 

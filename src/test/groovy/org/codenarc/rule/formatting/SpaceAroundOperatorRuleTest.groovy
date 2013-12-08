@@ -209,6 +209,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
                 def myMethod() {
                     def greeting = fullname?:'you'
                     def f = funds.collect {it.fundSortOrder}?:[]
+                    assert model.UserID == expectedModel.UserID?:null
                 }
             }
         '''
@@ -216,16 +217,9 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:"def greeting = fullname?:'you'", messageText:'The operator "?:" within class MyClass is not preceded'],
             [lineNumber:4, sourceLineText:"def greeting = fullname?:'you'", messageText:'The operator "?:" within class MyClass is not followed'],
             [lineNumber:5, sourceLineText:'def f = funds.collect {it.fundSortOrder}?:[]', messageText:'The operator "?:" within class MyClass is not preceded'],
-            [lineNumber:5, sourceLineText:'def f = funds.collect {it.fundSortOrder}?:[]', messageText:'The operator "?:" within class MyClass is not followed'])
-    }
-
-    @Test
-    void testApplyTo_StandaloneElvisOperatorExpression_KnownIssue_NoViolations() {
-        final SOURCE = '''
-            funds.collect {it.fundSortOrder}?:[]
-            /*comment*/f?:0
-        '''
-        assertNoViolations(SOURCE)
+            [lineNumber:5, sourceLineText:'def f = funds.collect {it.fundSortOrder}?:[]', messageText:'The operator "?:" within class MyClass is not followed'],
+            [lineNumber:6, sourceLineText:'assert model.UserID == expectedModel.UserID?:null', messageText:'The operator "?:" within class MyClass is not preceded'],
+            [lineNumber:6, sourceLineText:'assert model.UserID == expectedModel.UserID?:null', messageText:'The operator "?:" within class MyClass is not followed'])
     }
 
     @Test
