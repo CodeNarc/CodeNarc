@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.junit
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
@@ -22,6 +23,8 @@ import org.codenarc.util.AstUtil
 
 /**
  * Checks for public field on a JUnit test class. Ignores fields with the @Rule annotation.
+ * <p/>
+ * This rule ignores interfaces.
  * <p/>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
@@ -36,6 +39,13 @@ class JUnitPublicFieldRule extends AbstractAstVisitorRule {
 }
 
 class JUnitPublicFieldAstVisitor extends AbstractFieldVisitor {
+
+    @Override
+    void visitClass(ClassNode node) {
+        if (!node.isInterface()) {
+            super.visitClass(node)
+        }
+    }
 
     @Override
     void visitField(FieldNode node) {

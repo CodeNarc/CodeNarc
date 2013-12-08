@@ -87,6 +87,16 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'public static final MAX_VALUE = 1000', messageText:'MAX_VALUE'])
     }
 
+    @Test
+    void testInterfaceWithPublicFields_NoViolations() {
+        final SOURCE = '''
+            interface MyTest {
+                public static final MAX_VALUE = 1000
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new JUnitPublicFieldRule()
     }
