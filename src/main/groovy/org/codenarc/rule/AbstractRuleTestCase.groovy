@@ -144,7 +144,9 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      */
     protected void assertInlineViolations(String annotatedSource) {
         def parseResult = new InlineViolationsParser().parse(annotatedSource)
-        assertViolations(parseResult.source, parseResult.violations as Map[])
+        def violationsMap = parseResult.violations as Map[]
+        assertViolations(parseResult.source, violationsMap)
+        assert violationsMap, 'There must be at least one inline violation specified. If no violations are intended, then use assertNoViolations() instead'
     }
 
     /**

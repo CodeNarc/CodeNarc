@@ -28,6 +28,7 @@ ruleset {
         exclude 'SpaceAfterIf'
         exclude 'SpaceAfterSwitch'
         exclude 'SpaceAfterWhile'
+        exclude 'SpaceAroundMapEntryColon'
     }
 
     ruleset('rulesets/imports.xml')
