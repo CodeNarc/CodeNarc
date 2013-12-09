@@ -45,7 +45,7 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
         ant.codenarc(ruleSetFiles:RULESET_FILES) {
-            fileset(dir:'samples/src') {
+            fileset(dir:'src/test/groovy/org/codenarc/util') {
                 include(name:'**/*.groovy')
             }
            report(type:HTML) {
@@ -69,13 +69,13 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
     private void verifyHtmlReportFile() {
         def file = new File(HTML_REPORT_FILE)
         assert file.exists()
-        assertContainsAllInOrder(file.text, [TITLE, 'org/codenarc', 'Rule Descriptions'])
+        assertContainsAllInOrder(file.text, [TITLE, 'io', 'Rule Descriptions'])
     }
 
     private void verifyXmlReportFile() {
         def file = new File(XML_REPORT_FILE)
         assert file.exists()
-        assertContainsAllInOrder(file.text, ['<?xml version', TITLE, 'org/codenarc', '<Rules>'])
+        assertContainsAllInOrder(file.text, ['<?xml version', TITLE, 'io', '<Rules>'])
     }
 
     private void verifyTextReportFile() {
