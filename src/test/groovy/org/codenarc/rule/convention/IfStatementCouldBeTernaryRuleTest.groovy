@@ -30,6 +30,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'IfStatementCouldBeTernary'
+        assert rule.checkLastStatementImplicitElse
     }
 
     @Test
@@ -160,9 +161,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'if (val) {', messageText:'The if statement in class MyDomain can be rewritten using the ternary'])
     }
 
-    @Test
-    void testMatchingIfReturn_NoElse_FallsThroughToReturn_Violation() {
-        final SOURCE = '''
+    private static final SOURCE_FALLS_THROUGH_TO_RETURN = '''
             def method1() {
                 if (condition) {
                     return 44
@@ -175,11 +174,20 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
                 return [1, 2]
             }
         '''
-        assertViolations(SOURCE,
+
+    @Test
+    void testMatchingIfReturn_NoElse_FallsThroughToReturn_Violation() {
+        assertViolations(SOURCE_FALLS_THROUGH_TO_RETURN,
             [lineNumber:3, sourceLineText:'if (condition)',
                 messageText:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
             [lineNumber:9, sourceLineText:'if (check())',
                 messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? Boolean.FALSE : [1, 2]'] )
+    }
+
+    @Test
+    void testMatchingIfReturn_NoElse_FallsThroughToReturn_checkLastStatementImplicitElse_False_NoViolation() {
+        rule.checkLastStatementImplicitElse = false
+        assertNoViolations(SOURCE_FALLS_THROUGH_TO_RETURN)
     }
 
     protected Rule createRule() {

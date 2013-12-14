@@ -53,6 +53,8 @@ import org.codehaus.groovy.ast.stmt.*
  *        return false
  *      </code>
  *
+ *   NOTE: This check is disabled by setting checkLastStatementImplicitElse to false.
+ *
  * (4) When either the if block or else block of an if statement that is not the last statement in a
  * block contain only a single constant or literal expression 
  * For example, the if statement in the following code has no effect and can be removed:
@@ -69,6 +71,7 @@ class UnnecessaryIfStatementRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryIfStatement'
     int priority = 3
     Class astVisitorClass = UnnecessaryIfStatementAstVisitor
+    boolean checkLastStatementImplicitElse = true
 }
 
 class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
@@ -96,7 +99,7 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
             visitIfElseThatIsTheLastStatementInABlock(allStatements.last())
         }
 
-        if (allStatements.size() > 1) {
+        if (allStatements.size() > 1 && rule.checkLastStatementImplicitElse) {
             def nextToLastStatement = allStatements[-2]
             if (nextToLastStatement instanceof IfStatement && hasNoElseBlock(nextToLastStatement)) {
                 def lastStatement = allStatements[-1]

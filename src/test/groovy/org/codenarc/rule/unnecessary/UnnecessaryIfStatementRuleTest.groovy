@@ -30,6 +30,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryIfStatement'
+        assert rule.checkLastStatementImplicitElse
     }
 
     // Tests for explicit return of true/false
@@ -107,9 +108,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-    @Test
-    void testApplyTo_IfReturn_FallsThroughToReturnFalse_IsAViolation() {
-        final SOURCE = '''
+    private static final SOURCE_FALLS_THROUGH_TO_RETURN = '''
             def method1() {
                 if (expression1) {
                     return true
@@ -122,9 +121,18 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase {
                 return Boolean.TRUE
             }
         '''
-        assertViolations(SOURCE,
+
+    @Test
+    void testApplyTo_IfReturn_FallsThroughToReturn_IsAViolation() {
+        assertViolations(SOURCE_FALLS_THROUGH_TO_RETURN,
             [lineNumber:3, sourceLineText:'if (expression1)'],
             [lineNumber:9, sourceLineText:'if (expression2)'])
+    }
+
+    @Test
+    void testApplyTo_IfReturn_FallsThroughToReturn_checkLastStatementImplicitElse_False_NoViolation() {
+        rule.checkLastStatementImplicitElse = false
+        assertNoViolations(SOURCE_FALLS_THROUGH_TO_RETURN)
     }
 
     // Tests for implicit return of true/false (last statement in a block)

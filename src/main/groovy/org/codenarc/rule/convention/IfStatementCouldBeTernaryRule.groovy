@@ -32,7 +32,7 @@ import org.codehaus.groovy.ast.expr.GStringExpression
  *
  * (2) When the second-to-last statement in a block is an if statement with no else, where the block contains a single
  * return statement, and the last statement in the block is a return statement, and both return statements return a
- * constant or literal value.
+ * constant or literal value. This checks can be disabled by setting checkLastStatementImplicitElse to false.
  *
  * @author Chris Mair
  */
@@ -41,6 +41,7 @@ class IfStatementCouldBeTernaryRule extends AbstractAstVisitorRule {
     String name = 'IfStatementCouldBeTernary'
     int priority = 2
     Class astVisitorClass = IfStatementCouldBeTernaryAstVisitor
+    boolean checkLastStatementImplicitElse = true
 }
 
 class IfStatementCouldBeTernaryAstVisitor extends AbstractAstVisitor {
@@ -57,7 +58,7 @@ class IfStatementCouldBeTernaryAstVisitor extends AbstractAstVisitor {
     @Override
     void visitBlockStatement(BlockStatement block) {
         def allStatements = block.statements
-        if (allStatements.size() > 1) {
+        if (allStatements.size() > 1 && rule.checkLastStatementImplicitElse) {
             def nextToLastStatement = allStatements[-2]
             if (nextToLastStatement instanceof IfStatement && hasNoElseBlock(nextToLastStatement)) {
                 def lastStatement = allStatements[-1]

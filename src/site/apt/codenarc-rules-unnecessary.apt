@@ -584,6 +584,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   (3) When the second-to-last statement in a block is an <<<if>>> statement with no <<<else>>>, where the block
   contains a single <<<return>>> statement, and the last statement in the block is a <<<return>>> statement, and
   one <<<return>>> statement returns a <<<true>>> expression and the other returns a <<<false>>> expression.
+  This check is disabled by setting <<<checkLastStatementImplicitElse>>> to <<<false>>>.
   For example, the <<<if>>> statement in the following code can be replaced by <<<return expression1>>>:
 
 -------------------------------------------------------------------------------

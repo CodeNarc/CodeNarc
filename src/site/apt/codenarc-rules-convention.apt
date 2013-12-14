@@ -85,6 +85,7 @@ Convention Rules  ("<rulesets/convention.xml>")
   * A block where the second-to-last statement in a block is an <<<if>>> statement with no <<<else>>>, where
     the block contains a single <<<return>>> statement, and the last statement in the block is a <<<return>>>
     statement, and both <<<return>>> statements return a constant or literal value.
+    This check is disabled by setting <<<checkLastStatementImplicitElse>>> to <<<false>>>.
 
   Example of violations:
 
