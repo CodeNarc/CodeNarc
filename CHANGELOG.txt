@@ -30,6 +30,7 @@ FRAMEWORK AND INFRASTRUCTURE
 - #428: Use ClassNode if present in ImportNode to get line number and possibly source text
 - #431: Remove unused "samples" folder.
 - #434: Remove duplicate logging of CodeNarc results.
+- #433: Rename BaseSourceAnalyzer to AbstractSourceAnalyzer.
 
 
 Changes in version 0.19 (Jul 2013)

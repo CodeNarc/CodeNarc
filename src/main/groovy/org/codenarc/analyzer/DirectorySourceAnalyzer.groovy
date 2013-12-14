@@ -29,7 +29,7 @@ import org.codenarc.source.SourceFile
  *
  * @author Chris Mair
  */
-class DirectorySourceAnalyzer extends BaseSourceAnalyzer {
+class DirectorySourceAnalyzer extends AbstractSourceAnalyzer {
     static final SEP = '/'
 
     /**

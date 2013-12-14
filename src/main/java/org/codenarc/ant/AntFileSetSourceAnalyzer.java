@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
-import org.codenarc.analyzer.BaseSourceAnalyzer;
+import org.codenarc.analyzer.AbstractSourceAnalyzer;
 import org.codenarc.results.DirectoryResults;
 import org.codenarc.results.FileResults;
 import org.codenarc.results.Results;
@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author Chris Mair
  */
-public class AntFileSetSourceAnalyzer extends BaseSourceAnalyzer {
+public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
 
     private static final Logger LOG = Logger.getLogger(AntFileSetSourceAnalyzer.class);
     private static final int POOL_TIMEOUT_SECONDS = 60 * 60;

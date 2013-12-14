@@ -24,11 +24,11 @@ import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
 /**
- * Tests for BaseSourceAnalyzer
+ * Tests for AbstractSourceAnalyzer
  */
-class BaseSourceAnalyzerTest extends AbstractTestCase {
+class AbstractSourceAnalyzerTest extends AbstractTestCase {
 
-    private BaseSourceAnalyzer analyzer = new StringSourceAnalyzer('class MyClass {}')
+    private AbstractSourceAnalyzer analyzer = new StringSourceAnalyzer('class MyClass {}')
     
     @Test
     void testProvidesRulesWithSourceCodeOfRequiredAstCompilationPhase() {

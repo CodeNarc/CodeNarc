@@ -28,7 +28,7 @@ import org.codenarc.util.WildcardPattern
  *
  * @author Chris Mair
  */
-class FilesystemSourceAnalyzer extends BaseSourceAnalyzer {
+class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
     static final SEP = '/'
     static final DEFAULT_INCLUDES = '**/*.groovy'
 

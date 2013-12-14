@@ -25,7 +25,7 @@ import org.codenarc.source.SourceCode
  * Common functionality for SourceAnalyzers. 
  */
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
-abstract class BaseSourceAnalyzer implements SourceAnalyzer {
+abstract class AbstractSourceAnalyzer implements SourceAnalyzer {
 
     protected List<Violation> collectViolations(SourceCode sourceCode, RuleSet ruleSet) {
         def allViolations = []
