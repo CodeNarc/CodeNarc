@@ -253,7 +253,7 @@ Generic Rules  ("<rulesets/generic.xml>")
 
 * {IllegalString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.19>
+  <Since CodeNarc 0.20>
 
   Checks for a specified illegal string within the source code.
 

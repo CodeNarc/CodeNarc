@@ -80,7 +80,6 @@ class CodeNarcRunner {
         }
 
         def resultsMessage = 'CodeNarc completed: ' + countsText + " ${elapsedTime}ms"
-        LOG.info(resultsMessage)
         println resultsMessage
         results
     }

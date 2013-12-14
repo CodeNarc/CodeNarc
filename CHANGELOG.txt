@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.20 (??? 2013)
+Changes in version 0.20 (Dec 2013)
 -------------------------------------------
 NEW RULES
 - #425: LocaleSetDefault rule (design) - Checks for calls to Locale.setDefault(), which sets the Locale across the entire JVM. (Thanks to Ming Huang and Rob Patrick)
@@ -29,6 +29,7 @@ FRAMEWORK AND INFRASTRUCTURE
 - #23: Inline violations support within rule tests. (Thanks to Artur Gajowy)
 - #428: Use ClassNode if present in ImportNode to get line number and possibly source text
 - #431: Remove unused "samples" folder.
+- #434: Remove duplicate logging of CodeNarc results.
 
 
 Changes in version 0.19 (Jul 2013)
