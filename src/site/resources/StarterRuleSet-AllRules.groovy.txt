@@ -47,6 +47,7 @@ ruleset {
     CloneableWithoutClone 
     CloseWithoutCloseable 
     ClosureAsLastMethodParameter 
+    ClosureStatementOnOpeningLineOfMultipleLineClosure 
     CollectAllIsDeprecated 
     CompareToWithoutComparable 
     ComparisonOfTwoConstants 

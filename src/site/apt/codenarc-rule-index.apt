@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 321 rules.
+  <<CodeNarc>> includes 322 rules.
 
     
       
@@ -443,6 +443,9 @@ Rule Index
     
       
     * {{{codenarc-rules-formatting.html#ClassJavadoc}ClassJavadoc}}  
+    
+      
+    * {{{codenarc-rules-formatting.html#ClosureStatementOnOpeningLineOfMultipleLineClosure}ClosureStatementOnOpeningLineOfMultipleLineClosure}}  
     
       
     * {{{codenarc-rules-formatting.html#LineLength}LineLength}}  

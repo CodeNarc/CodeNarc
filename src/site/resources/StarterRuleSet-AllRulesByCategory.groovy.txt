@@ -154,6 +154,7 @@ ruleset {
     BracesForMethod 
     BracesForTryCatchFinally 
     ClassJavadoc 
+    ClosureStatementOnOpeningLineOfMultipleLineClosure 
     LineLength 
     SpaceAfterCatch 
     SpaceAfterClosingBrace 
