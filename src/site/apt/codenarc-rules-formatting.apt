@@ -56,7 +56,24 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   the class that has the same name as the source file, for instance MyClass is the main class in MyClass.groovy but the class
   MyOtherClass defined in the same source file is not the main class. To check all the classes in the file set the rule
   property <<<applyToNonMainClasses>>> to true.
-  
+
+
+* {ClosureStatementOnOpeningLineOfMultipleLineClosure} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.20>
+
+  Checks for closure logic on first line (after <<<-\>>>>) for a multi-line closure. That breaks the symmetry
+  of indentation (if the subsequent statements are indented normally), and that first statement can be easily
+  missed when reading the code.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def closure = { name -> println name
+        addToCounts()
+        println “done” }
+-------------------------------------------------------------------------------
+
 
 * {LineLength} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -489,4 +506,3 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
     shouldFail(Exception){ doStuff() }          // violation
 -------------------------------------------------------------------------------
-

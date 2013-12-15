@@ -16,6 +16,7 @@
     <rule class='org.codenarc.rule.formatting.BracesForMethodRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForTryCatchFinallyRule'/>
     <rule class='org.codenarc.rule.formatting.ClassJavadocRule'/>
+    <rule class='org.codenarc.rule.formatting.ClosureStatementOnOpeningLineOfMultipleLineClosureRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCatchRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterClosingBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>

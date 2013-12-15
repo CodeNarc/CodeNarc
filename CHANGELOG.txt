@@ -8,6 +8,7 @@ NEW RULES
 - #425: LocaleSetDefault rule (design) - Checks for calls to Locale.setDefault(), which sets the Locale across the entire JVM. (Thanks to Ming Huang and Rob Patrick)
 - #114: IllegalString rule (generic) - Checks for a specified illegal string within the source code.
 - #430: SpaceAroundMapEntryColon rule (formatting) - Check for proper formatting of whitespace around ':' for literal Map entries.
+- #427: ClosureStatementOnOpeningLineOfMultipleLineClosure rule (formatting) - Checks for closure logic on first line (after ->) for a multi-line closure.
 
 UPDATED/ENHANCED RULES
 - #426: Disable GrailsPublicControllerMethod by default.
