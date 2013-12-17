@@ -28,7 +28,7 @@ import org.codenarc.rule.AbstractAstVisitor
 class ClosureStatementOnOpeningLineOfMultipleLineClosureRule extends AbstractAstVisitorRule {
 
     String name = 'ClosureStatementOnOpeningLineOfMultipleLineClosure'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = ClosureStatementOnOpeningLineOfMultilineClosureAstVisitor
 }
 
