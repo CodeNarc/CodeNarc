@@ -27,7 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 class SpaceAroundMapEntryColonRule extends AbstractAstVisitorRule {
 
     String name = 'SpaceAroundMapEntryColon'
-    int priority = 2
+    int priority = 3
     String characterBeforeColonRegex = /\S/
     String characterAfterColonRegex = /\S/
     Class astVisitorClass = SpaceAroundMapEntryColonAstVisitor
