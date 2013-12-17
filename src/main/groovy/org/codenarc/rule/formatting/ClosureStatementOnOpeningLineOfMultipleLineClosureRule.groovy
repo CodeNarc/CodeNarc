@@ -29,10 +29,10 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureRule extends AbstractAst
 
     String name = 'ClosureStatementOnOpeningLineOfMultipleLineClosure'
     int priority = 3
-    Class astVisitorClass = ClosureStatementOnOpeningLineOfMultilineClosureAstVisitor
+    Class astVisitorClass = ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor
 }
 
-class ClosureStatementOnOpeningLineOfMultilineClosureAstVisitor extends AbstractAstVisitor {
+class ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitClosureExpression(ClosureExpression expression) {
