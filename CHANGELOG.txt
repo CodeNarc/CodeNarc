@@ -1,3 +1,7 @@
+
+#TODO: Sort the following line into the file
+- MassAssignment rule (security) - Untrusted input should not be allowed to set arbitrary object fields without restriction. 
+
 CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org

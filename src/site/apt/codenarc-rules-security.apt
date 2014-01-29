@@ -209,3 +209,15 @@ Security Rules  ("<rulesets/security.xml>")
 -------------------------------------------------------------------------------
 
 
+
+* {MassAssignment} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.19>
+
+  Untrusted input should not be allowed to set arbitrary object fields without restriction. 
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    // TODO: Add examples
+-------------------------------------------------------------------------------

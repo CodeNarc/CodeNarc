@@ -17,4 +17,5 @@
     <rule class='org.codenarc.rule.security.UnsafeArrayDeclarationRule'/>
     <rule class='org.codenarc.rule.security.PublicFinalizeMethodRule'/>
     <rule class='org.codenarc.rule.security.NonFinalPublicFieldRule'/>
+    <rule class='org.codenarc.rule.security.MassAssignmentRule'/>
 </ruleset>
