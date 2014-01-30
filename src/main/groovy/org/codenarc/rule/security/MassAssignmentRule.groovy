@@ -20,13 +20,17 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.PropertyExpression
+import org.codehaus.groovy.ast.expr.GStringExpression
+import org.codehaus.groovy.ast.expr.AttributeExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codenarc.util.AstUtil
+import org.codehaus.groovy.control.Phases
 
-
+public interface GrailsDomainClass {}
 
 
 /**
- * Untrusted input should not be allowed to set arbitrary object fields without restriction. 
+ * Untrusted input should not be allowed to set arbitrary object fields without restriction.
  *
  * TODO: Switch from name-based detection to type based detection. I wasn't able to get interface
  *       and type detection working
@@ -39,24 +43,35 @@ class MassAssignmentRule extends AbstractAstVisitorRule {
 }
 
 class MassAssignmentAstVisitor extends AbstractAstVisitor {
+
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (call.arguments && call.arguments.expressions && call.arguments.expressions.first().variable == 'params'){
-            addViolation(call, 'Restrict mass attribute assignment')
+        if (isFirstVisit(call)) {
+            if (call.arguments && call.arguments.expressions) {
+                def exp = call.arguments.expressions.first()
+                if (exp instanceof VariableExpression) {
+                    if (exp.variable == 'params') {
+                        addViolation(call, 'Restrict mass attribute assignment')
+                    }
+                }
+            }
         }
         super.visitConstructorCallExpression(call)
     }
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-        if (expression.leftExpression instanceof PropertyExpression) {
-            if (expression.leftExpression.property.value == 'properties') {
-                if (expression.rightExpression instanceof VariableExpression && expression.rightExpression.variable == 'params') {
-                    addViolation(expression, 'Restrict mass attribute assignment')
+        if (isFirstVisit(expression)) {
+            if (expression.leftExpression instanceof PropertyExpression && !(expression.leftExpression instanceof AttributeExpression) ) {
+                if (expression.leftExpression.property.hasProperty('value') && expression.leftExpression.property.value == 'properties') {
+                    if (expression.rightExpression instanceof VariableExpression && expression.rightExpression.variable == 'params') {
+                        addViolation(expression, 'Restrict mass attribute assignment')
+                    }
                 }
             }
         }
         super.visitBinaryExpression(expression)
 
     }
+
 }

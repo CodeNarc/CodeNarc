@@ -41,8 +41,11 @@ class MassAssignmentRuleTest extends AbstractRuleTestCase {
             }
             def bindingMap = [name: 'John', isAdmin: true]
             def person = new Person()
+            def p2 = new Person("It is currently ${ new Date() }")
+            def p3 = new Person(bindingMap)
             person.name = bindingMap['name']
             person.isAdmin = bindingMap.isAdmin
+            person.properties = "It is currently ${ new Date() }"
         '''
         assertNoViolations(SOURCE)
     }
@@ -68,6 +71,7 @@ class MassAssignmentRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
+            public interface GrailsDomainClass {}
             class Person implements GrailsDomainClass {
                 String name
                 Boolean isAdmin
@@ -75,7 +79,7 @@ class MassAssignmentRuleTest extends AbstractRuleTestCase {
             params = [name: 'John', isAdmin: true]
             def person = new Person(params)
         '''
-        assertSingleViolation(SOURCE, 7, 'def person = new Person(params)')
+        assertSingleViolation(SOURCE, 8, 'def person = new Person(params)')
     }
 
     @Test
@@ -90,6 +94,23 @@ class MassAssignmentRuleTest extends AbstractRuleTestCase {
             person.properties = params
         '''
         assertSingleViolation(SOURCE, 8, 'person.properties = params')
+    }
+
+    @Test
+    void testSingleClosureViolation() {
+        final SOURCE = '''
+            class Person {
+                String name
+                Boolean isAdmin
+            }
+            a = {
+                def params = [name: 'John', isAdmin: true]
+                def person = Person.get(1)
+                person.properties = params
+            }
+            a()
+        '''
+        assertSingleViolation(SOURCE, 9, 'person.properties = params')
     }
 
     @Test
