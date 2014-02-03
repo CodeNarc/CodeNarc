@@ -13,36 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.security
+package org.codenarc.rule.grails
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codehaus.groovy.ast.expr.AttributeExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
-import org.codenarc.util.AstUtil
-import org.codehaus.groovy.control.Phases
-
-public interface GrailsDomainClass {}
-
 
 /**
  * Untrusted input should not be allowed to set arbitrary object fields without restriction.
  *
- * TODO: Switch from name-based detection to type based detection. I wasn't able to get interface
- *       and type detection working
+ * TODO: Switch from name-based detection to type based detection when Grails domain object interfaces are detectable
  * @author Brian Soby
  */
-class MassAssignmentRule extends AbstractAstVisitorRule {
-    String name = 'MassAssignment'
+class GrailsMassAssignmentRule extends AbstractAstVisitorRule {
+    String name = 'GrailsMassAssignment'
     int priority = 2
-    Class astVisitorClass = MassAssignmentAstVisitor
+    Class astVisitorClass = GrailsMassAssignmentAstVisitor
 }
 
-class MassAssignmentAstVisitor extends AbstractAstVisitor {
+class GrailsMassAssignmentAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {

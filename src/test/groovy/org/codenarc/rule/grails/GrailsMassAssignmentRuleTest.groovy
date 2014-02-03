@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.security
+package org.codenarc.rule.grails
 
 import org.codenarc.rule.Rule
 import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**
- * Tests for MassAssignmentRule
+ * Tests for GrailsMassAssignmentRule
  *
  * @author Brian Soby
  */
-class MassAssignmentRuleTest extends AbstractRuleTestCase {
+class GrailsMassAssignmentRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'MassAssignment'
+        assert rule.name == 'GrailsMassAssignment'
     }
 
     @Test
@@ -71,15 +71,14 @@ class MassAssignmentRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-            public interface GrailsDomainClass {}
-            class Person implements GrailsDomainClass {
+            class Person {
                 String name
                 Boolean isAdmin
             }
             params = [name: 'John', isAdmin: true]
             def person = new Person(params)
         '''
-        assertSingleViolation(SOURCE, 8, 'def person = new Person(params)')
+        assertSingleViolation(SOURCE, 7, 'def person = new Person(params)')
     }
 
     @Test
@@ -131,6 +130,6 @@ class MassAssignmentRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new MassAssignmentRule()
+        new GrailsMassAssignmentRule()
     }
 }
