@@ -1,3 +1,4 @@
+
 CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
@@ -9,6 +10,7 @@ NEW RULES
 - #114: IllegalString rule (generic) - Checks for a specified illegal string within the source code.
 - #430: SpaceAroundMapEntryColon rule (formatting) - Check for proper formatting of whitespace around ':' for literal Map entries.
 - #427: ClosureStatementOnOpeningLineOfMultipleLineClosure rule (formatting) - Checks for closure logic on first line (after ->) for a multi-line closure.
+- MassAssignment rule (security) - Untrusted input should not be allowed to set arbitrary object fields without restriction.
 
 UPDATED/ENHANCED RULES
 - #426: Disable GrailsPublicControllerMethod by default.

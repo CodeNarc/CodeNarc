@@ -14,4 +14,5 @@
 /CodeNarcXmlReport.xml
 /*CodeNarcReport.xml
 /.idea
-
+build/
+src/main/java/META-INF/

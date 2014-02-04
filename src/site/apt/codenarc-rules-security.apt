@@ -207,5 +207,3 @@ Security Rules  ("<rulesets/security.xml>")
         public static final def myArray = [] as String[]
     }
 -------------------------------------------------------------------------------
-
-
