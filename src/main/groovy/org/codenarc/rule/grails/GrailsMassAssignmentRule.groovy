@@ -35,6 +35,7 @@ class GrailsMassAssignmentRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GrailsMassAssignmentAstVisitor
 }
 
+@SuppressWarnings('NestedBlockDepth')
 class GrailsMassAssignmentAstVisitor extends AbstractAstVisitor {
 
     @Override

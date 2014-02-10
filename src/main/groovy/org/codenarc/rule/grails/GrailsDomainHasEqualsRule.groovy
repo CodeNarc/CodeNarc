@@ -15,8 +15,6 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.util.AstUtil
-
 import static org.codenarc.util.AstUtil.hasAnnotation
 import static org.codenarc.util.AstUtil.isMethodNode
 

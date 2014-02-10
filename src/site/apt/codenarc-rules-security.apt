@@ -5,6 +5,8 @@
 Security Rules  ("<rulesets/security.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+  Also see {{{codenarc-rules-grails.html#GrailsMassAssignment}GrailsMassAssignment}}.
+
 
 * {FileCreateTempFile} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -135,6 +135,7 @@ ruleset {
     GrailsDomainWithServiceReference 
     GrailsDuplicateConstraint 
     GrailsDuplicateMapping 
+    GrailsMassAssignment 
     GrailsPublicControllerMethod 
     GrailsServletContextReference 
     GrailsSessionReference   // DEPRECATED
