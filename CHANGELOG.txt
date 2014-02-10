@@ -6,7 +6,7 @@ http://www.codenarc.org
 Changes in version 0.21 (??? 2014)
 -------------------------------------------
 NEW RULES
-- #30: GrailsMassAssignment rule (grails) - Checks for mass assignment from a params Map within Grails domain classes.
+- #30: GrailsMassAssignment rule (grails) - Checks for mass assignment from a params Map within Grails domain classes. (Thanks to Brian Soby)
 
 
 Changes in version 0.20 (Dec 2013)
