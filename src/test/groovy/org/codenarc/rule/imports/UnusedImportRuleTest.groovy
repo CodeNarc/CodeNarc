@@ -121,6 +121,17 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_UnusedImport_SubstringOccurrence() {
+        final SOURCE = '''
+            import com.example.Service
+            class ABC {
+                def getService() { }
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'import com.example.Service', 'The [com.example.Service] import is never referenced')
+    }
+
+    @Test
     void testApplyTo_UnusedImportWildcard() {
         final SOURCE = '''
             import org.codenarc.*

@@ -63,9 +63,9 @@ class UnusedImportRule extends AbstractRule {
         def aliasSameAsNonQualifiedClassName = className && className.endsWith(alias)
         sourceCode.lines.find { line ->
             if (!isImportStatementForAlias(line, alias)) {
-                def aliasCount = line.count(alias)
+                def aliasCount = countUsage(line, alias)
                 return aliasSameAsNonQualifiedClassName ?
-                    aliasCount && aliasCount > line.count(className) : aliasCount
+                    aliasCount && aliasCount > countUsage(line, className) : aliasCount
             }
         }
     }
@@ -73,5 +73,9 @@ class UnusedImportRule extends AbstractRule {
     private isImportStatementForAlias(String line, String alias) {
         final IMPORT_PATTERN = /import\s+.*/ + alias
         line =~ IMPORT_PATTERN
+    }
+
+    private countUsage(String line, String pattern) {
+        (line =~ /\b${pattern}\b/).count
     }
 }
