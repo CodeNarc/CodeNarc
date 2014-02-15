@@ -8,6 +8,9 @@ Changes in version 0.21 (??? 2014)
 NEW RULES
 - #30: GrailsMassAssignment rule (grails) - Checks for mass assignment from a params Map within Grails domain classes. (Thanks to Brian Soby)
 
+UPDATED/ENHANCED RULES
+- #31: Extended UnusedImportRule to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
+
 
 Changes in version 0.20 (Dec 2013)
 -------------------------------------------
