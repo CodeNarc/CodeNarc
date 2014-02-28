@@ -16,3 +16,5 @@
 /.idea
 build/
 src/main/java/META-INF/
+/*.iml
+/*.ipr
