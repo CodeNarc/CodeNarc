@@ -32,6 +32,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
         assert rule.priority == 2
         assert rule.name == 'LineLength'
         assert rule.ignoreImportStatements
+        assert rule.ignorePackageStatements
     }
 
     @Test

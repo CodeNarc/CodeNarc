@@ -9,7 +9,9 @@ NEW RULES
 - #30: GrailsMassAssignment rule (grails) - Checks for mass assignment from a params Map within Grails domain classes. (Thanks to Brian Soby)
 
 UPDATED/ENHANCED RULES
-- #31: Extended UnusedImportRule to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
+- #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
+- #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to René Scheibe)
+- #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
 
 
 Changes in version 0.20 (Dec 2013)
