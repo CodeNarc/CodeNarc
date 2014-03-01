@@ -35,12 +35,16 @@ class UnnecessaryDefInMethodDeclarationRule extends AbstractAstVisitorRule {
 
 class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
 
+    private static final PATTERNS_OF_DISTRACTING_DECLARATION_PARTS = [
+        "'", // method name with single quotes, e.g.: def 'some method'() { ... }
+        '"', // method name with double quotes, e.g.: def "some method"() { ... }
+        '(', // method with parameters, e.g.: def method(def x) { ... }
+    ]
+
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
-        String declaration = AstUtil.getDeclaration(node, sourceCode)
-        if (declaration.contains('(')) {
-            declaration = declaration[0..declaration.indexOf('(') + 1]
-        }
+        String declaration = removeDistractingParts(AstUtil.getDeclaration(node, sourceCode))
+
         if (contains(declaration, 'def') && !declaration.contains('<')) {
             if (isConstructor) {
                 addViolation(node, "Violation in class $currentClassName. The def keyword is unneeded on constructors")
@@ -70,7 +74,16 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
         super.visitConstructorOrMethod(node, isConstructor)
     }
 
+    private static removeDistractingParts(declaration) {
+        for (pattern in PATTERNS_OF_DISTRACTING_DECLARATION_PARTS) {
+            if (declaration.contains(pattern)) {
+                declaration = declaration[0..<declaration.indexOf(pattern)]
+            }
+        }
+        declaration
+    }
+
     private static boolean contains(String declaration, String modifier) {
-        declaration?.startsWith(modifier) || declaration?.contains(' ' + modifier + ' ')
+        declaration.startsWith(modifier) || declaration.contains(' ' + modifier + ' ')
     }
 }
