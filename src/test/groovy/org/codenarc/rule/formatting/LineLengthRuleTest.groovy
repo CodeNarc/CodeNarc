@@ -31,6 +31,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'LineLength'
+        assert rule.ignoreImportStatements
     }
 
     @Test
@@ -54,6 +55,58 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 3, 'def longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456',
                 'The line exceeds 120 characters. The line is 121 characters.')
+    }
+
+    @Test
+    void testIgnoresImportStatements() {
+        final SOURCE = '''
+            import longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
+        	class Person {
+                def longMethodButNotQuiteLongEnough1234567890123456789012345() {
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDoesNotIgnoreImportStatementsWhenFlagDisabled() {
+        rule.ignoreImportStatements = false
+
+        final SOURCE = '''
+            import longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
+        	class Person {
+                def longMethodButNotQuiteLongEnough1234567890123456789012345() {
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'import longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf')
+    }
+
+    @Test
+    void testIgnoresPackageStatements() {
+        final SOURCE = '''
+            package longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
+        	class Person {
+                def longMethodButNotQuiteLongEnough1234567890123456789012345() {
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDoesNotIgnorePackageStatementsWhenFlagDisabled() {
+        rule.ignorePackageStatements = false
+
+        final SOURCE = '''
+            package longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
+        	class Person {
+                def longMethodButNotQuiteLongEnough1234567890123456789012345() {
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'package longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf')
     }
 
     @Test
