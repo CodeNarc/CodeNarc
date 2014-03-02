@@ -27,7 +27,6 @@ Imports Rules  ("<rulesets/imports.xml>")
 
 -------------------------------------------------------------------------------
     import sun.misc.foo
-    import sun.*
     import sun.misc.foo as Foo
 
     public class MyClass{}
@@ -45,8 +44,8 @@ Imports Rules  ("<rulesets/imports.xml>")
   Examples of violations:
 
 -------------------------------------------------------------------------------
-    import my.something.*
-    import static foo.bar.*
+    import my.something.another
+    import static foo.bar
 
     public class MyClass{}
 -------------------------------------------------------------------------------
@@ -74,3 +73,18 @@ Imports Rules  ("<rulesets/imports.xml>")
   * Misses unused imports if the class/alias name is contained within strings, comments or other (longer)
     names (i.e., if that string shows up almost anywhere within the source code).
 
+
+* {NoWildCardImports} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Wildcard imports, static or otherwise, are not used.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    import my.something.*
+    import static foo.bar.*
+
+    public class MyClass{}
+-------------------------------------------------------------------------------
