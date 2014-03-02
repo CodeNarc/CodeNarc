@@ -74,11 +74,11 @@ Imports Rules  ("<rulesets/imports.xml>")
     names (i.e., if that string shows up almost anywhere within the source code).
 
 
-* {NoWildCardImports} Rule
+* {NoWildcardImports} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.21>
 
-  Wildcard imports, static or otherwise, are not used.
+  Wildcard imports, static or otherwise, should not be used.
 
   Example of violations:
 

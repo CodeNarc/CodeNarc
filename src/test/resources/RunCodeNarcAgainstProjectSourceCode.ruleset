@@ -31,7 +31,9 @@ ruleset {
         exclude 'SpaceAroundMapEntryColon'
     }
 
-    ruleset('rulesets/imports.xml')
+    ruleset('rulesets/imports.xml') {
+        exclude 'NoWildcardImports'
+    }
 
     ruleset('rulesets/junit.xml') {
         exclude 'JUnitStyleAssertions'

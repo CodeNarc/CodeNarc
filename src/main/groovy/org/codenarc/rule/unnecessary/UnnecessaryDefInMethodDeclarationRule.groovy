@@ -75,12 +75,13 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
     }
 
     private static removeDistractingParts(declaration) {
+        def resultDeclaration = declaration
         for (pattern in PATTERNS_OF_DISTRACTING_DECLARATION_PARTS) {
-            if (declaration.contains(pattern)) {
-                declaration = declaration[0..<declaration.indexOf(pattern)]
+            if (resultDeclaration.contains(pattern)) {
+                resultDeclaration = resultDeclaration[0..<resultDeclaration.indexOf(pattern)]
             }
         }
-        declaration
+        resultDeclaration
     }
 
     private static boolean contains(String declaration, String modifier) {

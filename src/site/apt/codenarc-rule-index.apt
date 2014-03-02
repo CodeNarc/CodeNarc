@@ -678,7 +678,7 @@ Rule Index
     * {{{codenarc-rules-imports.html#MisorderedStaticImports}MisorderedStaticImports}}  
     
       
-    * {{{codenarc-rules-imports.html#NoWildCardImports}NoWildCardImports}}  
+    * {{{codenarc-rules-imports.html#NoWildcardImports}NoWildcardImports}}  
     
       
     * {{{codenarc-rules-imports.html#UnnecessaryGroovyImport}UnnecessaryGroovyImport}}  
