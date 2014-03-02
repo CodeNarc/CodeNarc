@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 323 rules.
+  <<CodeNarc>> includes 324 rules.
 
     
       
@@ -676,6 +676,9 @@ Rule Index
     
       
     * {{{codenarc-rules-imports.html#MisorderedStaticImports}MisorderedStaticImports}}  
+    
+      
+    * {{{codenarc-rules-imports.html#NoWildCardImports}NoWildCardImports}}  
     
       
     * {{{codenarc-rules-imports.html#UnnecessaryGroovyImport}UnnecessaryGroovyImport}}  

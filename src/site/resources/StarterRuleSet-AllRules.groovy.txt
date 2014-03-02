@@ -192,6 +192,7 @@ ruleset {
     MultipleLoggers 
     NestedBlockDepth 
     NestedSynchronization 
+    NoWildCardImports 
     NonFinalPublicField 
     NonFinalSubclassOfSensitiveInterface 
     ObjectFinalize 
