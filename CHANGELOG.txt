@@ -6,7 +6,7 @@ Changes in version 0.21 (??? 2014)
 -------------------------------------------
 NEW RULES
 - #30: GrailsMassAssignment rule (grails) - Checks for mass assignment from a params Map within Grails domain classes. (Thanks to Brian Soby)
-- #38: NoWildcardImports rule (imports) - Wildcard imports, static or otherwise, are not used.
+- #38: NoWildcardImports rule (imports) - Wildcard imports, static or otherwise, should not be used. (Thanks to Kyle Boon)
 
 UPDATED/ENHANCED RULES
 - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
