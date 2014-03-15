@@ -106,6 +106,7 @@ class InlineViolationsParserTest {
     }
 
     @Test
+    @SuppressWarnings('ConsecutiveBlankLines')
     void testFindsViolationsInOtherwiseEmptySource() {
         assertParse("""
             #violation 1
