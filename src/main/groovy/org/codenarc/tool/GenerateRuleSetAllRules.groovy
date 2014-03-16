@@ -54,5 +54,4 @@ class GenerateRuleSetAllRules {
         LOG.info("Finished writing ${sortedRules.size()} rules to $ruleSetFile")
     }
 
-
 }

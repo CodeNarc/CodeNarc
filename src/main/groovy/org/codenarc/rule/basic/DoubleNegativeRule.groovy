@@ -40,5 +40,4 @@ class DoubleNegativeAstVisitor extends AbstractAstVisitor {
         super.visitNotExpression expression
     }
 
-
 }

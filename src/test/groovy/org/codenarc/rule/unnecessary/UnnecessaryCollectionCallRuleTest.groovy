@@ -59,7 +59,6 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
                 4, 'x.retainAll(x)')
     }
 
-
     @Test
     void testClassFailure() {
         final SOURCE = '''

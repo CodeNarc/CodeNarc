@@ -123,7 +123,6 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-
     @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         final SOURCE = '''
@@ -158,7 +157,6 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         rule.ignoreMethodNames = 'is*,doO??erSt*ff,other'
         assertViolations(SOURCE, [lineNumber:5, sourceLineText:'void myMethod()'])
     }
-
 
     @Before
     void setUpGrailsPublicControllerMethodRuleTest() {

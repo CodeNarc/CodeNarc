@@ -59,7 +59,6 @@ class UnnecessaryGStringAstVisitor extends AbstractAstVisitor {
         visitListOfExpressions(expression.getValues())
     }
 
-
     @SuppressWarnings('CatchThrowable')
     private static suppressException(Class exceptionType, Closure c) {
         try {

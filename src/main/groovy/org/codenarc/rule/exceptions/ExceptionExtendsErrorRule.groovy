@@ -40,5 +40,4 @@ class ExceptionExtendsErrorAstVisitor extends AbstractAstVisitor {
         super.visitClassEx(node)
     }
 
-
 }

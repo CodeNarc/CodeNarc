@@ -72,7 +72,6 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
                 5, "assertTrue('message', foo() == bar())")
     }
 
-
     @Test
     void testNotEqualsInAssertFalseTest() {
         final SOURCE = '''

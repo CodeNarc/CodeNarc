@@ -102,7 +102,6 @@ class ModifiersUtilTest extends AbstractTestCase {
         shouldFailWithMessageContaining('xxx') { ModifiersUtil.parseModifiersList('protected, private xxx') }
     }
 
-
     // Tests for parseModifiers(String)
 
     @Test

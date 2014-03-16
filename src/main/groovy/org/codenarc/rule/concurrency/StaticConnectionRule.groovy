@@ -43,5 +43,4 @@ class StaticConnectionAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-
 }

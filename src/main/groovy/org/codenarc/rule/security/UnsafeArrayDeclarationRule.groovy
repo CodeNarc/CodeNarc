@@ -51,5 +51,4 @@ class UnsafeArrayDeclarationAstVisitor extends AbstractFieldVisitor {
                 Modifier.isPublic(node.modifiers)
     }
 
-
 }

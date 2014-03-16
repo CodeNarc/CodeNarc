@@ -144,7 +144,6 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'a|b ?:  false')
     }
 
-
     @Test
     void testTempBitwiseAnd() {
         //(3 & 6) == 2 a bitwise and

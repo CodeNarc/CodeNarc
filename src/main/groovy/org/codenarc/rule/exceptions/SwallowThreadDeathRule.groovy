@@ -66,5 +66,4 @@ class SwallowThreadDeathAstVisitor extends AbstractAstVisitor {
         }
     }
 
-
 }

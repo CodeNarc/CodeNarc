@@ -64,6 +64,7 @@ ruleset {
     ConstantsOnlyInterface 
     CouldBeElvis 
     CoupledTestCase 
+    ConsecutiveBlankLines 
     CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file
     CyclomaticComplexity   // Requires the GMetrics jar
     DeadCode 

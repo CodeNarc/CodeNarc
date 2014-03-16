@@ -47,5 +47,4 @@ class UnnecessaryModOneAstVisitor extends AbstractAstVisitor {
         super.visitBinaryExpression(expression)
     }
 
-
 }

@@ -58,5 +58,4 @@ class DeadCodeAstVisitor extends AbstractAstVisitor {
         false
     }
 
-
 }

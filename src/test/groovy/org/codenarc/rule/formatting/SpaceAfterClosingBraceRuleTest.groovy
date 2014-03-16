@@ -233,7 +233,6 @@ c        '''
         assertNoViolations(SOURCE)
     }
 
-
     @Test
     void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
         final SOURCE = '''

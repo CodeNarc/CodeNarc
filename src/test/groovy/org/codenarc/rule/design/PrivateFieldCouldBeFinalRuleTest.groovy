@@ -380,7 +380,6 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'private int count', VIOLATION_MESSAGE)
     }
 
-
     @Test
     void testApplyTo_IgnoreFieldNames_NoViolations() {
         final SOURCE = '''

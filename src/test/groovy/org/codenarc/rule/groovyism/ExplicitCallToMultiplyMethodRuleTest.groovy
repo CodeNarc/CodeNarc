@@ -53,7 +53,6 @@ class ExplicitCallToMultiplyMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.multiply(b)', 'Explicit call to a.multiply(b) method can be rewritten as a * (b)')
     }
 
-
     protected Rule createRule() {
         new ExplicitCallToMultiplyMethodRule()
     }

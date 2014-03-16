@@ -291,7 +291,6 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         '''
         assertNoViolations(SOURCE)
     }
-
     
     @Test
     void testAnonymousInnerClassAsField() {
@@ -335,7 +334,6 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         rule.ignoreFieldNames = 'count, fiel*'
         assertNoViolations(SOURCE)
     }
-
 
     @Test
     void testAnonymousInnerClassAsLocalVariable() {

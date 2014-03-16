@@ -64,7 +64,6 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-
     @Test
     void test2MethodViolationsInScript() {
         final SOURCE = '''

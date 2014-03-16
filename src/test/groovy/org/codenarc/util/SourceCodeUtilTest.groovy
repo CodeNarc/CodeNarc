@@ -51,7 +51,6 @@ class SourceCodeUtilTest extends AbstractTestCase {
         visitor.visitClass(sourceCode.ast.scriptClassDummy)
     }
 
-
     @Test
     void testSourceLinesBetweenForSingleLine() {
         assert SourceCodeUtil.sourceLinesBetween(sourceCode, 2, 19, 2, 23) == ['each']

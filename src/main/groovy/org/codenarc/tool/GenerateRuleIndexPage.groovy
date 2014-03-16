@@ -62,5 +62,4 @@ class GenerateRuleIndexPage {
         LOG.info("Finished writing $ruleIndexFile")
     }
 
-
 }

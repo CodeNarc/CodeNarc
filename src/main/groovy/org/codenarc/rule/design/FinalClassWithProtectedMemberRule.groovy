@@ -57,7 +57,6 @@ class FinalClassWithProtectedMemberAstVisitor extends AbstractAstVisitor {
         super.visitField(node)
     }
 
-
     private static boolean isProtected(node) {
         Modifier.isProtected(node.modifiers)
     }

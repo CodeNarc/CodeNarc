@@ -77,7 +77,6 @@ class DoubleCheckedLockingAstVisitor extends AbstractAstVisitor {
         null
     }
 
-
     private static String getNullCheckVariableName(ASTNode node) {
         if (!(node instanceof BooleanExpression)) {
             return null

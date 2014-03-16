@@ -60,5 +60,4 @@ class GroovyLangImmutableAstVisitor extends AbstractAstVisitor {
         super.visitClassComplete(node)
     }
 
-
 }

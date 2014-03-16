@@ -105,7 +105,6 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
         withinConstructor = originalWithinConstructor
     }
 
-
     @Override
     void visitPostfixExpression(PostfixExpression expression) {
         removeExpressionVariableName(expression)

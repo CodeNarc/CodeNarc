@@ -59,7 +59,6 @@ class SourceCodeCriteria {
      */
     String doNotApplyToFileNames
 
-
     /**
      * Return true if all of the criteria specified in this object apply to thw SourceCode.
      * @param sourceCode - the SourceCode
