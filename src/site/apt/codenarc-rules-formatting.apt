@@ -88,6 +88,21 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   where this rule is applied, you must use the file-based rule properties: applyToFileNames, doNotApplyToFileNames,
   applyToFilesMatching and doNotApplyToFilesMatching.
 
+
+* {MissingBlankLineAfterImports} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Makes sure there is a blank line after the imports of a source code file.
+  
+  Example of violation:
+
+-------------------------------------------------------------------------------
+    import org.apache.commons.lang.StringUtils
+    class MyClass { }
+-------------------------------------------------------------------------------
+
+
 * {SpaceAfterCatch} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
