@@ -18,6 +18,7 @@ ruleset {
     AssignmentInConditional 
     BigDecimalInstantiation 
     BitwiseOperatorInConditional 
+    BlankLineBeforePackage 
     BooleanGetBoolean 
     BooleanMethodReturnsNull 
     BracesForClass 
