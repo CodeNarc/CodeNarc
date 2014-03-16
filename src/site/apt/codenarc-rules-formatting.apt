@@ -75,6 +75,13 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 -------------------------------------------------------------------------------
 
 
+* {FileEndsWithoutNewline} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Makes sure each source file ends with a newline character.
+
+
 * {LineLength} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.15>
@@ -87,6 +94,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   (applyToClassNames, doNotApplyToClassNames) to enable/disable the rule. If you want to specify or restrict
   where this rule is applied, you must use the file-based rule properties: applyToFileNames, doNotApplyToFileNames,
   applyToFilesMatching and doNotApplyToFilesMatching.
+
 
 * {SpaceAfterCatch} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
