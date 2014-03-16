@@ -7,7 +7,9 @@ Changes in version 0.21 (??? 2014)
 NEW RULES
 - #30: GrailsMassAssignment rule (grails) - Checks for mass assignment from a params Map within Grails domain classes. (Thanks to Brian Soby)
 - #38: NoWildcardImports rule (imports) - Wildcard imports, static or otherwise, should not be used. (Thanks to Kyle Boon)
-- ConsecutiveBlankLines rule (formatting) - Makes sure there are no consecutive lines that are either blank or whitespace only.
+- #41: ConsecutiveBlankLines rule (formatting) - Makes sure there are no consecutive lines that are either blank or whitespace only. (Thanks to Joe Sondow)
+- #42: BlankLineBeforePackage rule (formatting) - Makes sure there are no blank lines before the package declaration of a source code file. (Thanks to Joe Sondow)
+- #43: FileEndsWithoutNewline rule (formatting) - Makes sure the source code file ends with a newline character. (Thanks to Joe Sondow)
 
 UPDATED/ENHANCED RULES
 - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)

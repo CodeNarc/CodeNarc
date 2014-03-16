@@ -8,7 +8,6 @@
         These rules find formatting problems within the source code.
     </description>
 
-
     <rule class='org.codenarc.rule.formatting.BlankLineBeforePackageRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForClassRule'/>
     <rule class='org.codenarc.rule.formatting.LineLengthRule'/>
@@ -19,6 +18,7 @@
     <rule class='org.codenarc.rule.formatting.ClassJavadocRule'/>
     <rule class='org.codenarc.rule.formatting.ClosureStatementOnOpeningLineOfMultipleLineClosureRule'/>
     <rule class='org.codenarc.rule.formatting.ConsecutiveBlankLinesRule'/>
+    <rule class='org.codenarc.rule.formatting.FileEndsWithoutNewlineRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCatchRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterClosingBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>
