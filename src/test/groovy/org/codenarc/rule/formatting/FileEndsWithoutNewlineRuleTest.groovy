@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 the original author or authors.
+ * Copyright 2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,56 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.generic
+package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.Test
 
 /**
- * Tests for IllegalStringRule
- *
- * @author Chris Mair
+ * Tests for FileEndsWithoutNewlineRule
  */
-class IllegalStringRuleTest extends AbstractRuleTestCase {
+class FileEndsWithoutNewlineRuleTest extends AbstractRuleTestCase {
 
-    private static final TEXT = '@author Joe'
+    def skipTestThatUnrelatedCodeHasNoViolations
+    def skipTestThatInvalidCodeHasNoViolations
 
     @Test
     void testRuleProperties() {
-        assert rule.priority == 2
-        assert rule.name == 'IllegalString'
+        assert rule.priority == 3
+        assert rule.name == 'FileEndsWithoutNewline'
     }
 
     @Test
-    void testStringIsNull() {
-        final SOURCE = 'class MyClass { } '
-        rule.string = null
-        assert !rule.ready
+    void testSuccessScenario() {
+        final SOURCE = '''
+            class MyClass {
+                    def go() { /* ... */ }
+            }
+        '''.stripIndent()
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testStringIsNotPresent() {
+    void testClassStartsWithDoubleBlankLines() {
         final SOURCE = '''
-            /** @author Mike */
             class MyClass {
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void testStringIsPresent() {
-        final SOURCE = '''
-            /** @author Joe */
-            class MyClass {
-            }
-        '''
-        assertSingleViolation(SOURCE, null, null, ['string', TEXT])
+                    void go() { /* ... */ }
+            }'''
+        assertSingleViolation(SOURCE, 3, '}', 'File null does not end with a newline')
     }
 
     protected Rule createRule() {
-        new IllegalStringRule(string:TEXT)
+        new FileEndsWithoutNewlineRule()
     }
 }
