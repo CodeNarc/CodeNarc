@@ -20,6 +20,8 @@ import org.codenarc.source.SourceCode
 
 /**
  * Makes sure the source code file ends with a newline character.
+ *
+ * @author Joe Sondow
  */
 class FileEndsWithoutNewlineRule extends AbstractRule {
 

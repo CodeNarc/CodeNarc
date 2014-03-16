@@ -21,6 +21,8 @@ import org.junit.Test
 
 /**
  * Tests for FileEndsWithoutNewlineRule
+ *
+ * @author Joe Sondow
  */
 class FileEndsWithoutNewlineRuleTest extends AbstractRuleTestCase {
 
