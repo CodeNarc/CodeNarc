@@ -6,6 +6,13 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+* {BlankLineBeforePackage} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Makes sure there are no blank lines before the package declaration of a source code file.
+
+
 * {BracesForClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.15>
