@@ -46,7 +46,6 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-
     @Test
     void testIfStatement_NonAssignmentToSameVariable_NoViolation() {
         final SOURCE = '''

@@ -32,7 +32,6 @@ class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'SynchronizedOnGetClass'
     }
 
-
     @Test
     void testBadSynchronization() {
         final SOURCE = '''

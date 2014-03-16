@@ -85,8 +85,6 @@ interface SourceCode {
      */                             
     int getLineNumberForCharacterIndex(int charIndex)
 
-
-
     /**
      * Return true if and only if the source code can be successfully compiled
      * @return true only if the source code is valid

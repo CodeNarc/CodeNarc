@@ -328,7 +328,6 @@ class HtmlReportWriter extends AbstractReportWriter {
         return source
     }
 
-
     /**
      * Return true if the Results represents a directory that contains at least one file with one
      * or more violations.

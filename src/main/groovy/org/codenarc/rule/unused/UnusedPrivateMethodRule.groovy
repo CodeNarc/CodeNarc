@@ -84,7 +84,6 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
     private final Map<String, MethodNode> unusedPrivateMethods
     private final List<String> classNames
 
-
     UnusedPrivateMethodAstVisitor(Map<String, MethodNode> unusedPrivateMethods, List<String> classNames) {
         this.classNames = classNames.inject(['this']) { acc, value ->
             acc.add value
@@ -158,7 +157,6 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
     private static boolean isConstantString(Expression expression) {
         expression instanceof ConstantExpression && expression.value instanceof String
     }
-
 
     private static boolean isMethodCall(MethodCallExpression expression, String targetName) {
         AstUtil.isMethodCallOnObject(expression, targetName) &&

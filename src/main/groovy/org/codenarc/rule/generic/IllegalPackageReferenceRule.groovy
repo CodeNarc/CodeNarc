@@ -84,7 +84,6 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
         super.visitVariableExpression(expression)
     }
 
-
     @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         if (!node.isDynamicReturnType()) {       // ignore 'def' which resolves to java.lang.Object

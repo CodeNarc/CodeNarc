@@ -59,5 +59,4 @@ class UnnecessaryCatchBlockAstVisitor extends AbstractAstVisitor {
         super.visitTryCatchFinally statement
     }
 
-
 }

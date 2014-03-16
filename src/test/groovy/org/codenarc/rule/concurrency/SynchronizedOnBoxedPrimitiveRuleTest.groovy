@@ -306,7 +306,6 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 14, sourceLineText: 'synchronized(float1)', messageText: 'Synchronizing on the Float field float1 is unsafe. Do not synchronize on boxed types'])
     }
 
-
     @Test
     void testBooleanSuccessScenario() {
         final SOURCE = '''

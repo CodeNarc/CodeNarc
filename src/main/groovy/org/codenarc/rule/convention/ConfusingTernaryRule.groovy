@@ -69,5 +69,4 @@ class ConfusingTernaryAstVisitor extends AbstractAstVisitor {
         }
     }
 
-
 }

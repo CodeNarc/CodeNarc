@@ -41,7 +41,6 @@ class ModifiersUtil {
         return expectedModifiersList.any { expectedModifiers -> matchesModifiers(actualModifiers, expectedModifiers) }
     }
 
-
     /**
      * Return true only if the actualModifiers int value contains all of the bits (enabled) from the expectedModifiers
      * @param actualModifiers - the full actual modifiers; an int value of the OR-ed modifiers (values from Opcodes)

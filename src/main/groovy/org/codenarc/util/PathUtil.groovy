@@ -61,7 +61,6 @@ class PathUtil {
          (path.startsWith('\\') || path.startsWith(SEP)) ? path[1 .. -1] : path
      }
 
-
     // Private constructor to prevent instantiation. All members are static.
     private PathUtil() { }
 }

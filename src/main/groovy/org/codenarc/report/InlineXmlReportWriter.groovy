@@ -27,7 +27,6 @@ import org.codenarc.rule.Violation
 @SuppressWarnings('UnnecessaryReturnKeyword')
 class InlineXmlReportWriter extends XmlReportWriter {
 
-
     //--------------------------------------------------------------------------
     // Internal Helper Methods
     //--------------------------------------------------------------------------

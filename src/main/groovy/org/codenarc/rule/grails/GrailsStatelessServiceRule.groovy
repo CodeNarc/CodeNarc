@@ -85,5 +85,4 @@ class GrailsStatelessServiceRule extends StatelessClassRule {
             fieldNode.isDynamicTyped() && !fieldNode.static && fieldNode.synthetic
     }
 
-
 }

@@ -50,5 +50,4 @@ class GenerateCodeNarcRulesProperties {
         LOG.info("Finished writing ${sortedRules.size()} rules to $propertiesFile")
     }
 
-
 }

@@ -43,5 +43,4 @@ class SerializableClassMustDefineSerialVersionUIDAstVisitor extends AbstractAstV
         super.visitClassEx(node)
     }
 
-
 }

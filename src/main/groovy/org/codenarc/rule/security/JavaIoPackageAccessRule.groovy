@@ -74,7 +74,6 @@ class JavaIoPackageAccessAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression(call)
     }
 
-
     @Override
     void visitPropertyExpression(PropertyExpression expression) {
         if (expression.objectExpression instanceof VariableExpression) {
@@ -85,6 +84,5 @@ class JavaIoPackageAccessAstVisitor extends AbstractAstVisitor {
 
         super.visitPropertyExpression(expression)
     }
-
     
 }

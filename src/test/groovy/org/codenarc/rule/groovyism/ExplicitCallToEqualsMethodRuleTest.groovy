@@ -32,7 +32,6 @@ class ExplicitCallToEqualsMethodRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'ExplicitCallToEqualsMethod'
     }
 
-
     @Test
     void testSuccessScenario() {
         rule.ignoreThisReference = true

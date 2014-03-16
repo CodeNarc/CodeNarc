@@ -144,7 +144,6 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
         statement instanceof ReturnStatement && AstUtil.isFalse(statement.expression)
     }
 
-
     private boolean areTrueAndFalseExpressions(Statement ifBlock, Statement elseBlock) {
         (isTrueExpression(ifBlock) && isFalseExpression(elseBlock)) ||
                (isFalseExpression(ifBlock) && isTrueExpression(elseBlock))

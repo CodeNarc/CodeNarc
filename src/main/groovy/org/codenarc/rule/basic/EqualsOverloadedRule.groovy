@@ -61,5 +61,4 @@ class EqualsOverloadedAstVisitor extends AbstractMethodVisitor {
         false
     }
 
-
 }

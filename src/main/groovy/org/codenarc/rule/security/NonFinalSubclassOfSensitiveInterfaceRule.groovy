@@ -60,5 +60,4 @@ class NonFinalSubclassOfSensitiveInterfaceAstVisitor extends AbstractAstVisitor 
         super.visitClassEx(node)
     }
 
-
 }
