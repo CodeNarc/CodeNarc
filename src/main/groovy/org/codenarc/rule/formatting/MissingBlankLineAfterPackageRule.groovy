@@ -1,12 +1,12 @@
 /*
  * Copyright 2014 the original author or authors.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,29 +15,27 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.PackageNode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
 
 /**
- * Makes sure the source code file ends with a newline character.
- *
+ * Makes sure there is a blank line after the package statement of a source code file.
+ * 
  * @author Joe Sondow
  */
-class FileEndsWithoutNewlineRule extends AbstractRule {
+class MissingBlankLineAfterPackageRule extends AbstractRule {
 
-    String name = 'FileEndsWithoutNewline'
+    String name = 'MissingBlankLineAfterPackage'
     int priority = 3
 
-    /**
-     * Apply the rule to the given source, writing violations to the given list.
-     * @param sourceCode The source to check
-     * @param violations A list of Violations that may be added to. It can be an empty list
-     */
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-        if (!sourceCode.text.endsWith('\n')) {
-            violations.add(createViolation(sourceCode.lines.size() - 1, sourceCode.lines[-1],
-                "File $sourceCode.name does not end with a newline"))
+
+        PackageNode packageNode = sourceCode.ast?.package
+        if (packageNode && !sourceCode.line(packageNode.lineNumber).isEmpty()) {
+            violations.add(createViolation(packageNode.lineNumber, sourceCode.line(packageNode.lineNumber),
+                "Missing blank line after package statement in file $sourceCode.name"))
         }
     }
 }

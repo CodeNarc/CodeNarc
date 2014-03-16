@@ -125,6 +125,24 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   applyToFilesMatching and doNotApplyToFilesMatching.
 
 
+* {MissingBlankLineAfterPackage} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Makes sure there is a blank line after the package statement of a source code file.
+  
+  Example of violation:
+  
+-------------------------------------------------------------------------------
+  package org.codenarc
+  import java.util.Date                     // violation
+
+  class MyClass {
+      void go() { /* ... */ }
+  }
+-------------------------------------------------------------------------------
+
+
 * {SpaceAfterCatch} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.18>
