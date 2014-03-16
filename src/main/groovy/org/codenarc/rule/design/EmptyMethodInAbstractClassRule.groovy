@@ -63,5 +63,4 @@ class EmptyMethodInAbstractClassAstVisitor extends AbstractMethodVisitor {
         return Modifier.isAbstract(node.modifiers)
     }
 
-
 }

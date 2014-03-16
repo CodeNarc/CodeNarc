@@ -61,5 +61,4 @@ class ConsecutiveLiteralAppendsAstVisitor extends AbstractMethodCallExpressionVi
         false
     }
 
-
 }

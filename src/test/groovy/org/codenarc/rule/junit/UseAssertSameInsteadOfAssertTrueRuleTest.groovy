@@ -83,7 +83,6 @@ class UseAssertSameInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
                 5, 'assertFalse("message", foo().is(bar()))')
     }
 
-
     protected Rule createRule() {
         new UseAssertSameInsteadOfAssertTrueRule()
     }

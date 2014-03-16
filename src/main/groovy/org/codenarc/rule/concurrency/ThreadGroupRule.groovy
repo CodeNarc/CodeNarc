@@ -51,7 +51,6 @@ class ThreadGroupAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression(call)
     }
 
-
     private static boolean isConstructorNamed(ConstructorCallExpression call, Class clazz) {
         call.type.name == clazz.name || call.type.name == clazz.simpleName
     }

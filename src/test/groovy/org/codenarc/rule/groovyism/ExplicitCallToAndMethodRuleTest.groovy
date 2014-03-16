@@ -51,7 +51,6 @@ class ExplicitCallToAndMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.and(b)')
     }
 
-
     protected Rule createRule() {
         new ExplicitCallToAndMethodRule()
     }

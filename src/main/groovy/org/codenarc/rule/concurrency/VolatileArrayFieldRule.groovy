@@ -42,5 +42,4 @@ class VolatileArrayFieldAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-
 }

@@ -63,5 +63,4 @@ class GenerateRuleSetAllRulesByCategory {
         LOG.info("Finished writing $ruleSetFile")
     }
 
-
 }

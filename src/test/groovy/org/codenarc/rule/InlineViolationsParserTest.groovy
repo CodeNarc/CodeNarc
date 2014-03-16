@@ -91,13 +91,11 @@ class InlineViolationsParserTest {
         ''')
     }
 
-
     @Test
     void testFindsNoViolationsInEmptySource() {
         String source = ''
         assertParse(source, [], source)
     }
-
 
     @Test
     void testFindsNoViolationsInAllWhitespaceSource() {
@@ -108,6 +106,7 @@ class InlineViolationsParserTest {
     }
 
     @Test
+    @SuppressWarnings('ConsecutiveBlankLines')
     void testFindsViolationsInOtherwiseEmptySource() {
         assertParse("""
             #violation 1

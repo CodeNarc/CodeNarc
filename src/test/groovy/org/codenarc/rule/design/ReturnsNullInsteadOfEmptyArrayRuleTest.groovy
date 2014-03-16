@@ -55,7 +55,6 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-
     @Test
     void testStringArrayMethod() {
         final SOURCE = '''
@@ -90,7 +89,6 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 3, 'null')
     }
-
 
     @Test
     void testTernaryReturns() {
@@ -162,7 +160,6 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'null', 8, 'null')
     }
 
-
     @Test
     void testInAnonymousClassWithinAnonymousClass() {
         final SOURCE = '''
@@ -182,7 +179,6 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
         '''
         assertTwoViolations(SOURCE, 6, 'null', 9, 'null')
     }
-
 
     @Test
     void testClosureInAnonymousClassWithinAnonymousClass() {

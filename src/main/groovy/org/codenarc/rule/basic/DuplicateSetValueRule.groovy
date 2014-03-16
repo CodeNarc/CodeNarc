@@ -73,5 +73,4 @@ class DuplicateSetValueAstVisitor extends AbstractAstVisitor {
         return expression.type?.name?.endsWith('Set') && expression.expression instanceof ListExpression
     }
 
-
 }

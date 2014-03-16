@@ -66,5 +66,4 @@ class UnnecessaryGetterAstVisitor extends AbstractMethodCallExpressionVisitor {
         }
     }
 
-
 }

@@ -112,7 +112,6 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     6, 'Math.random()', 'Returning the result of Math.random() from a Long-returning method always returns 0')
         }
 
-
     @Test
         void testFieldsCastToInt() {
             final SOURCE = '''

@@ -86,7 +86,6 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
                 'The Logger field LOG should be private, static and final')
     }
 
-
     @Test
     void testSuccessScenario_derivedLogger() {
         rule.allowProtectedLogger = true

@@ -58,7 +58,6 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
         temporaryViolations.get().clear()
     }
 
-
     private List<Violation> getViolationsForSource(SourceCode sourceCode) {
         def result = []
 

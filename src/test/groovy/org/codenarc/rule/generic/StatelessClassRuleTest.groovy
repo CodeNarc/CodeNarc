@@ -201,7 +201,6 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
-
     @Test
     void testApplyTo_Script_HasField() {
         final SOURCE = '''

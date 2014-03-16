@@ -50,7 +50,6 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
         factory.namespaceAware = true
         DocumentBuilder builder = factory.newDocumentBuilder()
 
-
         def errors = []
         forEachRule { rule ->
             String propertyName = rule.name + '.description.html'

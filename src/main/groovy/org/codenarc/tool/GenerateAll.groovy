@@ -37,5 +37,4 @@ class GenerateAll {
         GenerateRuleIndexPage.main(null)
     }
 
-
 }

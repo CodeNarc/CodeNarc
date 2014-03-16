@@ -66,7 +66,6 @@ class SpaceAfterSemicolonRuleTest extends AbstractRuleTestCase {
             [lineNumber:6, sourceLineText:'def closure = { x -> println x;x = 23; }', messageText:'The statement "x = 23"'] )
     }
 
-
     // Tests for classic for statements
 
     @Test

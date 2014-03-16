@@ -33,7 +33,6 @@ class CloneableWithoutCloneRule extends AbstractAstVisitorRule {
     Class astVisitorClass = CloneableWithoutCloneAstVisitor
 }
 
-
 class CloneableWithoutCloneAstVisitor extends AbstractAstVisitor  {
 
     @Override

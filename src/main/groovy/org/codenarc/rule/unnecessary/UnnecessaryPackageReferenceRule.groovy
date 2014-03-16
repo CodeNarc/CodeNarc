@@ -120,8 +120,6 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
         super.visitCastExpression(expression)
     }
 
-
-
     //--------------------------------------------------------------------------
     // Helper Methods
     //--------------------------------------------------------------------------

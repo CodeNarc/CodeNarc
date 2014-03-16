@@ -122,7 +122,6 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
         }
     }
 
-
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (!AstUtil.isMethodCallOnObject(call, rule.ignoreRegex)

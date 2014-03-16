@@ -144,7 +144,6 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
                  3, '(null != super)', 'Testing the super reference for not null will always return true')
      }
 
-
     // todo: enable this test
 //    void ignore_testNullCheckWithMethodCallAndAdditionalConditional() {
 //        final SOURCE = '''
