@@ -10,6 +10,7 @@ NEW RULES
 - #41: ConsecutiveBlankLines rule (formatting) - Makes sure there are no consecutive lines that are either blank or whitespace only. (Thanks to Joe Sondow)
 - #42: BlankLineBeforePackage rule (formatting) - Makes sure there are no blank lines before the package declaration of a source code file. (Thanks to Joe Sondow)
 - #43: FileEndsWithoutNewline rule (formatting) - Makes sure the source code file ends with a newline character. (Thanks to Joe Sondow)
+- #44: MissingBlankLineAfterImports (formatting) - Makes sure there is a blank line after the imports of a source code file. (Thanks to Joe Sondow)
 
 UPDATED/ENHANCED RULES
 - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
