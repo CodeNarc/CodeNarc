@@ -543,3 +543,11 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
     shouldFail(Exception){ doStuff() }          // violation
 -------------------------------------------------------------------------------
+
+
+* {TrailingWhitespace} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Checks that no lines of source code end with whitespace characters.
+

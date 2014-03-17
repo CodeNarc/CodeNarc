@@ -29,6 +29,7 @@ ruleset {
         exclude 'SpaceAfterSwitch'
         exclude 'SpaceAfterWhile'
         exclude 'SpaceAroundMapEntryColon'
+        exclude 'TrailingWhitespace'
     }
 
     ruleset('rulesets/imports.xml') {

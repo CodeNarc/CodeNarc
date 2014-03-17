@@ -33,4 +33,5 @@
     <rule class='org.codenarc.rule.formatting.SpaceAroundOperatorRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceBeforeClosingBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceBeforeOpeningBraceRule'/>
+    <rule class='org.codenarc.rule.formatting.TrailingWhitespaceRule'/>
 </ruleset>
