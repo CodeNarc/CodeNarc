@@ -148,6 +148,7 @@ ruleset {
     ThrowThrowable 
     
     // rulesets/formatting.xml
+    BlankLineBeforePackage 
     BracesForClass 
     BracesForForLoop 
     BracesForIfElse 
@@ -155,7 +156,11 @@ ruleset {
     BracesForTryCatchFinally 
     ClassJavadoc 
     ClosureStatementOnOpeningLineOfMultipleLineClosure 
+    ConsecutiveBlankLines 
+    FileEndsWithoutNewline 
     LineLength 
+    MissingBlankLineAfterImports 
+    MissingBlankLineAfterPackage 
     SpaceAfterCatch 
     SpaceAfterClosingBrace 
     SpaceAfterComma 
@@ -170,6 +175,7 @@ ruleset {
     SpaceAroundOperator 
     SpaceBeforeClosingBrace 
     SpaceBeforeOpeningBrace 
+    TrailingWhitespace 
     
     // rulesets/generic.xml
     IllegalClassMember 

@@ -12,6 +12,7 @@ NEW RULES
 - #43: FileEndsWithoutNewline rule (formatting) - Makes sure the source code file ends with a newline character. (Thanks to Joe Sondow)
 - #44: MissingBlankLineAfterImports rule (formatting) - Makes sure there is a blank line after the imports of a source code file. (Thanks to Joe Sondow)
 - #46: MissingBlankLineAfterPackage rule (formatting) - Makes sure there is a blank line after the package statement of a source code file. (Thanks to Joe Sondow)
+- #47: TrailingWhitespaceRule (formatting) - Checks that no lines of source code end with whitespace characters. (Thanks to Joe Sondow)
 
 UPDATED/ENHANCED RULES
 - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)

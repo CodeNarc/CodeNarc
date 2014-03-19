@@ -57,6 +57,7 @@ ruleset {
     ConfusingMethodName 
     ConfusingMultipleReturns 
     ConfusingTernary 
+    ConsecutiveBlankLines 
     ConsecutiveLiteralAppends 
     ConsecutiveStringConcatenation 
     ConstantAssertExpression 
@@ -65,7 +66,6 @@ ruleset {
     ConstantsOnlyInterface 
     CouldBeElvis 
     CoupledTestCase 
-    ConsecutiveBlankLines 
     CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file
     CyclomaticComplexity   // Requires the GMetrics jar
     DeadCode 
@@ -125,6 +125,7 @@ ruleset {
     FactoryMethodName 
     FieldName 
     FileCreateTempFile 
+    FileEndsWithoutNewline 
     FinalClassWithProtectedMember 
     ForLoopShouldBeWhileLoop 
     ForStatementBraces 
@@ -190,6 +191,8 @@ ruleset {
     MethodName 
     MethodSize 
     MisorderedStaticImports 
+    MissingBlankLineAfterImports 
+    MissingBlankLineAfterPackage 
     MissingNewInThrowStatement 
     MultipleLoggers 
     NestedBlockDepth 
@@ -265,6 +268,7 @@ ruleset {
     ThrowNullPointerException 
     ThrowRuntimeException 
     ThrowThrowable 
+    TrailingWhitespace 
     UnnecessaryBigDecimalInstantiation 
     UnnecessaryBigIntegerInstantiation 
     UnnecessaryBooleanExpression 
