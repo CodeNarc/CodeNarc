@@ -135,7 +135,25 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
 -------------------------------------------------------------------------------
     import org.apache.commons.lang.StringUtils
-    class MyClass { }
+    class MyClass { }                       // violation
+-------------------------------------------------------------------------------
+
+
+* {MissingBlankLineAfterPackage} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Makes sure there is a blank line after the package statement of a source code file.
+  
+  Example of violation:
+  
+-------------------------------------------------------------------------------
+  package org.codenarc
+  import java.util.Date                     // violation
+
+  class MyClass {
+      void go() { /* ... */ }
+  }
 -------------------------------------------------------------------------------
 
 
