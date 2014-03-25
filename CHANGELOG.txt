@@ -18,6 +18,7 @@ UPDATED/ENHANCED RULES
 - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
 - #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to René Scheibe)
 - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
+- #35: UnnecessaryPackageReferenceRule: raises confusing violation for Script with package.
 
 
 Changes in version 0.20 (Dec 2013)

@@ -179,13 +179,11 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
     void testExtendsSuperclassOrSuperInterfaceTypes_Violations() {
         final SOURCE = '''
             class MyHashMap extends java.util.HashMap { }
-            class MyScript extends groovy.lang.Script { }
             interface MyList extends java.util.List { }
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'class MyHashMap extends java.util.HashMap { }', messageText:'java.util'],
-            [lineNumber:3, sourceLineText:'class MyScript extends groovy.lang.Script { }', messageText:'groovy.lang'],
-            [lineNumber:4, sourceLineText:'interface MyList extends java.util.List { }', messageText:'java.util'] )
+            [lineNumber:3, sourceLineText:'interface MyList extends java.util.List { }', messageText:'java.util'] )
     }
 
     @Test
@@ -280,6 +278,16 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             package com.company.payment
             enum PaymentStatus {  APPROVED,  REJECTED,  CANCELLED,  UNDETERMINED}
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testScripts() {
+        final SOURCE = '''
+            package com.example
+
+            println 'hello'
             '''
         assertNoViolations(SOURCE)
     }

@@ -42,12 +42,12 @@ class BracesForClassRule extends AbstractRule {
             // Groovy 1.7 returns -1 as line number for a ClassNode representing an enum.
             // In this case we ignore the rule
             if (lineNumber != -1) {
-                applyTo(classNode, lineNumber, sourceLine, violations)
+                applyToClassNode(classNode, lineNumber, sourceLine, violations)
             }
         }
     }
 
-    private applyTo(ClassNode classNode, int lineNumber, String sourceLine, List violations) {
+    private applyToClassNode(ClassNode classNode, int lineNumber, String sourceLine, List violations) {
         if (sameLine) {
             if (sourceLine?.startsWith('{')) {
                 violations.add(new Violation(
