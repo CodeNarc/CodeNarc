@@ -91,6 +91,19 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 -------------------------------------------------------------------------------
 
 
+* {ExceptionExtendsThrowable} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Checks for classes that extend Throwable. Custom exception classes should subclass Exception or one of its descendants.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class MyException extends Throwable { }   // violation
+-------------------------------------------------------------------------------
+
+
 * {ExceptionNotThrown} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -203,3 +216,4 @@ Exceptions Rules  ("<rulesets/exceptions.xml>")
 
   Checks for throwing an instance of <<<java.lang.Throwable>>>. Throw an instance of a more
   specific exception subclass instead.
+
