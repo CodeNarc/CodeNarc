@@ -103,6 +103,20 @@ class PrintlnRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_Println_AnnotatedMethod() {
+        final SOURCE = '''
+            import org.gcontracts.annotations.Requires
+            class CodenarcViolationService {
+                @Requires({arg})
+                def violate(arg) {
+                    println 'foo bar'
+                }
+            }
+            '''
+        assertSingleViolation(SOURCE, 6, "println 'foo bar'")
+    }
+
+    @Test
     void testApplyTo_PrintlnButNotThis() {
         final SOURCE = '''
     @Test
