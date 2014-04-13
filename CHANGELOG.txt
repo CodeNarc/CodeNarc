@@ -21,6 +21,7 @@ UPDATED/ENHANCED RULES
 - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
 - #35: UnnecessaryPackageReferenceRule: raises confusing violation for Script with package.
 - #48: Fix Method chaining breaks SpaceAfterComma.
+- #49: Fix SpaceBeforeOpeningBrace doesn't work on switch statements.
 
 
 Changes in version 0.20 (Dec 2013)

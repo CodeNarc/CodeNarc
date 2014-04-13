@@ -201,6 +201,14 @@ c        '''
     }
 
     @Test
+    void testApplyTo_Switch_Violations() {
+        final SOURCE = '''
+            switch (var){ }
+        '''
+        assertSingleViolation(SOURCE, 2, 'switch (var){ }', 'The opening brace for the switch statement in class None')
+    }
+
+    @Test
     void testApplyTo_Closure_Violations() {
         final SOURCE = '''
             list.each{ name -> }

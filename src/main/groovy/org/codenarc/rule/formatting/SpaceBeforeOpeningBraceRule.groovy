@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.MapEntryExpression
@@ -106,6 +107,17 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
             isFirstVisit(expression.valueExpression)   // Register the closure so that it will be ignored in visitClosureExpression()
         }
         super.visitMapEntryExpression(expression)
+    }
+
+    @Override
+    void visitSwitch(SwitchStatement statement) {
+        if (isFirstVisit(statement)) {
+            def line = sourceLineOrEmpty(statement)
+            if (line.contains('){')) {
+                addOpeningBraceViolation(statement, 'switch statement')
+            }
+        }
+        super.visitSwitch(statement)
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {
