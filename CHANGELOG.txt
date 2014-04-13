@@ -20,6 +20,7 @@ UPDATED/ENHANCED RULES
 - #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to Ren� Scheibe)
 - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
 - #35: UnnecessaryPackageReferenceRule: raises confusing violation for Script with package.
+- #48: Fix Method chaining breaks SpaceAfterComma.
 
 
 Changes in version 0.20 (Dec 2013)

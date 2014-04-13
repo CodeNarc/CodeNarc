@@ -59,6 +59,16 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_MethodCall_ChainedMethodCall_Violation() {
+        final SOURCE = '''
+            class MyTestCase {
+                def value = Math.min(1,2).toString()
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'def value = Math.min(1,2).toString()', 'The parameter 2')
+    }
+
+    @Test
     void testApplyTo_UnicodeLiteral_Violations() {
         final SOURCE = '''
             def value1 = calculate( { '\\u00A0' },12)

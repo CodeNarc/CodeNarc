@@ -83,6 +83,7 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
                 lastColumn = e.lastColumnNumber
             }
         }
+        super.visitMethodCallExpression(call)
     }
 
     private boolean isClosureParameterOutsideParentheses(Expression e, arguments) {

@@ -48,14 +48,14 @@ class DirectorySourceAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testAnalyze_BaseDirectoryNullAndSourceDirectoriesNull() {
-        shouldFailWithMessageContaining(['baseDirectory','sourceDirectories']) { analyzer.analyze(ruleSet) }
+        shouldFailWithMessageContaining(['baseDirectory', 'sourceDirectories']) { analyzer.analyze(ruleSet) }
     }
 
     @Test
     void testAnalyze_BaseDirectoryEmptyAndSourceDirectoriesEmpty() {
         analyzer.baseDirectory = ''
         analyzer.sourceDirectories = []
-        shouldFailWithMessageContaining(['baseDirectory','sourceDirectories']) { analyzer.analyze(ruleSet) }
+        shouldFailWithMessageContaining(['baseDirectory', 'sourceDirectories']) { analyzer.analyze(ruleSet) }
     }
 
     @Test
