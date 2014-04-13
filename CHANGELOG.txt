@@ -22,7 +22,7 @@ UPDATED/ENHANCED RULES
 - #35: UnnecessaryPackageReferenceRule: raises confusing violation for Script with package.
 - #48: Fix Method chaining breaks SpaceAfterComma.
 - #49: Fix SpaceBeforeOpeningBrace doesn't work on switch statements.
-
+- #50: Fix UnnecessaryDotClass doesn't work if class is qualified
 
 Changes in version 0.20 (Dec 2013)
 -------------------------------------------

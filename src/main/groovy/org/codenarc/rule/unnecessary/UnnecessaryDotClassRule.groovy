@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -24,6 +25,7 @@ import org.codenarc.util.AstUtil
  * To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
  *
  * @author 'Dean Del Ponte'
+ * @author Chris Mair
   */
 class UnnecessaryDotClassRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryDotClass'
@@ -35,10 +37,15 @@ class UnnecessaryDotClassAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitPropertyExpression(PropertyExpression expression) {
-
         if (isFirstVisit(expression) && AstUtil.isConstant(expression.property, 'class')) {
-            if (AstUtil.isVariable(expression.objectExpression, '[A-Z].*')) {
-                addViolation(expression, "${expression.objectExpression.name}.class can be rewritten as $expression.objectExpression.name")
+            def object = expression.objectExpression
+            boolean isClassPropertyExpression = object instanceof PropertyExpression &&
+                object.property instanceof ConstantExpression &&
+                Character.isUpperCase(object.property.value.toCharacter())
+
+            if (isClassPropertyExpression || AstUtil.isVariable(object, /[A-Z].*/)) {
+                def exprText = object.text
+                addViolation(expression, "${exprText}.class can be rewritten as $exprText")
             }
         }
         super.visitPropertyExpression(expression)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,16 +39,20 @@ class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase {
           def y = x.class
           def z = x.getClass()
           def a = String.class()
+          assert codeNarcRunner.sourceAnalyzer.class == AntFileSetSourceAnalyzer
         '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testSingleViolation() {
+    void testViolations() {
         final SOURCE = '''
             def x = String.class
+            def theClass = com.foo.Bar.class
         '''
-        assertSingleViolation(SOURCE, 2, 'def x = String.class', 'String.class can be rewritten as String')
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'def x = String.class', messageText:'String.class can be rewritten as String'],
+            [lineNumber:3, sourceLineText:'def theClass = com.foo.Bar.class', messageText:'com.foo.Bar.class can be rewritten as com.foo.Bar'])
     }
 
     @Test
