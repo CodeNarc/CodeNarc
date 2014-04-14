@@ -13,11 +13,12 @@ NEW RULES
 - #44: MissingBlankLineAfterImports rule (formatting) - Makes sure there is a blank line after the imports of a source code file. (Thanks to Joe Sondow)
 - #46: MissingBlankLineAfterPackage rule (formatting) - Makes sure there is a blank line after the package statement of a source code file. (Thanks to Joe Sondow)
 - #47: TrailingWhitespaceRule (formatting) - Checks that no lines of source code end with whitespace characters. (Thanks to Joe Sondow)
-- #411: New ExceptionExtendsThrowable rule (exceptions) - Checks for classes that extend Throwable. Custom exception classes should subclass Exception or one of its descendants.
+- #411: ExceptionExtendsThrowable rule (exceptions) - Checks for classes that extend Throwable. Custom exception classes should subclass Exception or one of its descendants.
+- #341: UnnecessaryCast rule (unnecessary) - Checks for unnecessary cast operations.
 
 UPDATED/ENHANCED RULES
-- #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to Ren� Scheibe)
-- #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to Ren� Scheibe)
+- #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to Ren? Scheibe)
+- #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to Ren? Scheibe)
 - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
 - #35: UnnecessaryPackageReferenceRule: raises confusing violation for Script with package.
 - #48: Fix Method chaining breaks SpaceAfterComma.

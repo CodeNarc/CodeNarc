@@ -17,18 +17,23 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCallForLastElementRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCallToSubstringRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryCastRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCatchBlockRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCollectCallRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryCollectionCallRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryConstructorRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInMethodDeclarationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInVariableDeclarationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDotClassRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryDoubleInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryElseStatementRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryFinalOnPrivateMethodRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryFloatInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryGetterRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryGStringRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryIfStatementRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryInstanceOfCheckRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryInstantiationToGetClassRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryIntegerInstantiationRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryLongInstantiationRule'/>
@@ -44,12 +49,7 @@
     <rule class='org.codenarc.rule.unnecessary.UnnecessarySelfAssignmentRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessarySemicolonRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryStringInstantiationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessarySubstringRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTernaryExpressionRule'/>
     <rule class='org.codenarc.rule.unnecessary.UnnecessaryTransientModifierRule'/>
-    <rule class='org.codenarc.rule.unnecessary.UnnecessaryElseStatementRule'/>
-    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDotClassRule'/>
-    <rule class='org.codenarc.rule.unnecessary.UnnecessaryInstanceOfCheckRule'/>
-    <rule class='org.codenarc.rule.unnecessary.UnnecessarySubstringRule'/>
-    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule'/>
 </ruleset>
-
