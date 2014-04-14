@@ -1084,3 +1084,29 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     }
 -------------------------------------------------------------------------------
 
+
+* {UnnecessaryToString} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Checks for unnecessary calls to <<<toString()>>>. This includes:
+
+     * Calls to <<<toString()>>> on a String literal
+
+     * Calls to <<<toString()>>> for the value assigned to a <<<String>>> field or variable.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def name = "Joe".toString()     // violation - string literal
+
+    class MyClass {
+        String name = nameNode.toString()           // violation - field
+        String code = account.getCode().toString()  // violation - field
+
+        void run() {
+            String name = nameNode.toString()       // violation - variable
+            String id = account.id.toString()       // violation - variable
+        }
+    }
+-------------------------------------------------------------------------------
