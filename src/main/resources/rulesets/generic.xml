@@ -13,6 +13,7 @@
     <rule class='org.codenarc.rule.generic.IllegalPackageReferenceRule'/>
     <rule class='org.codenarc.rule.generic.IllegalRegexRule'/>
     <rule class='org.codenarc.rule.generic.IllegalStringRule'/>
+    <rule class='org.codenarc.rule.generic.IllegalSubclassRule'/>
     <rule class='org.codenarc.rule.generic.RequiredRegexRule'/>
     <rule class='org.codenarc.rule.generic.RequiredStringRule'/>
     <rule class='org.codenarc.rule.generic.StatelessClassRule'/>
