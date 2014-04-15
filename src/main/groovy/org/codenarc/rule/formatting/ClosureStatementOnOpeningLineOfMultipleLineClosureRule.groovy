@@ -16,9 +16,8 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Checks for closure logic on first line (after ->) for a multi-line closure
@@ -37,9 +36,8 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor extends Abstr
     @Override
     void visitClosureExpression(ClosureExpression expression) {
         boolean isMultiLineClosure = expression.lastLineNumber > expression.lineNumber
-        boolean closureHasMultipleStatements = expression.code instanceof BlockStatement && expression.code.statements.size() > 1
         int closureStartLineNumber = expression.lineNumber
-        if (isMultiLineClosure && closureHasMultipleStatements && closureStartLineNumber == expression.code.lineNumber) {
+        if (isMultiLineClosure && closureStartLineNumber == expression.code.lineNumber) {
             addViolation(expression, "The multi-line closure within class $currentClassName contains a statement on the opening line of the closure.")
         }
         super.visitClosureExpression(expression)

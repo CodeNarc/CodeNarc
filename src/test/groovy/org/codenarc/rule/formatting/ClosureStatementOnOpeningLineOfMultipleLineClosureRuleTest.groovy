@@ -74,11 +74,21 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends Abstrac
     }
 
     @Test
-    void testMultiLineClosure_Violation() {
+    void testMultiLineClosure_MultipleStatements_Violation() {
         final SOURCE = '''
             def closure = { name -> println name    # The multi-line closure within class None contains a statement on the opening line of the closure
                 addToCounts()
                 println “done” }
+            '''
+        assertInlineViolations(SOURCE)
+    }
+
+    @Test
+    void testMultiLineClosure_SingleStatement_Violation() {
+        final SOURCE = '''
+            def closure = { name -> doStuff(name,    # The multi-line closure within class None contains a statement on the opening line of the closure
+                97, 'sample text')
+            }
             '''
         assertInlineViolations(SOURCE)
     }
