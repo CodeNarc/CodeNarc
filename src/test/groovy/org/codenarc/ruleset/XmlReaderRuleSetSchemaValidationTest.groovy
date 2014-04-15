@@ -26,7 +26,8 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  * @author Chris Mair
   */
 class XmlReaderRuleSetSchemaValidationTest extends AbstractTestCase {
-    static final NAMESPACE = '''
+
+    private static final NAMESPACE = '''
         xmlns="http://codenarc.org/ruleset/1.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"

@@ -29,8 +29,10 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  * @author Chris Mair
   */
 class CompositeRuleSetTest extends AbstractTestCase {
-    static final RULE1 = [:] as Rule
-    static final RULE2 = [:] as Rule
+
+    private static final RULE1 = [:] as Rule
+    private static final RULE2 = [:] as Rule
+
     private compositeRuleSet
 
     @Test

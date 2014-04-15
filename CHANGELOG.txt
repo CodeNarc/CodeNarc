@@ -17,6 +17,7 @@ NEW RULES
 - #341: UnnecessaryCast rule (unnecessary) - Checks for unnecessary cast operations.
 - #149: IllegalSubclass rule (generic) - Checks for classes that extend one of the specified set of illegal superclasses.
 - #157: UnnecessaryToString rule (unnecessary) - Checks for unnecessary calls to toString().
+- #152: JUnitPublicProperty rule (junit) - Checks for public properties defined on JUnit test classes.
 
 UPDATED/ENHANCED RULES
 - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to Ren? Scheibe)

@@ -26,9 +26,10 @@ import org.junit.Test
  * @author Chris Mair
   */
 class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
-    static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
-    static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'
-    static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
+
+    private static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
+    private static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'
+    private static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
     @Test
     void testRuleProperties() {

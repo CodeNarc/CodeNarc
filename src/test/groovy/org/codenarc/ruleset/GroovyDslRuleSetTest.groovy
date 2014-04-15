@@ -15,7 +15,6 @@
  */
 package org.codenarc.ruleset
 
-import org.apache.log4j.Logger
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
@@ -27,8 +26,6 @@ import static org.codenarc.test.TestUtil.*
  * @author Chris Mair
   */
 class GroovyDslRuleSetTest extends AbstractTestCase {
-
-    static final LOG = Logger.getLogger(GroovyDslRuleSetTest)
 
     @Test
     void testNullPath() {

@@ -27,12 +27,12 @@ import org.junit.Test
  */
 class DirectoryResultsTest extends AbstractTestCase {
 
-    static final PATH = '/src/main'
-    static final VIOLATION1 = new Violation(rule:new StubRule(1))
-    static final VIOLATION2 = new Violation(rule:new StubRule(2))
-    static final VIOLATION3 = new Violation(rule:new StubRule(3))
-    static final VIOLATION4 = new Violation(rule:new StubRule(4))
-    static final VIOLATION7 = new Violation(rule:new StubRule(7))
+    private static final PATH = '/src/main'
+    private static final VIOLATION1 = new Violation(rule:new StubRule(1))
+    private static final VIOLATION2 = new Violation(rule:new StubRule(2))
+    private static final VIOLATION3 = new Violation(rule:new StubRule(3))
+    private static final VIOLATION4 = new Violation(rule:new StubRule(4))
+    private static final VIOLATION7 = new Violation(rule:new StubRule(7))
 
     @Test
     void testNoChildren() {

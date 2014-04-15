@@ -26,8 +26,9 @@ import org.junit.Test
  * @author Chris Mair
   */
 class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
-    static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
-    static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
+
+    private static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
+    private static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
 
     @Test
     void testDisabledByDefault() {

@@ -29,12 +29,12 @@ import static org.junit.Assert.assertFalse
  * @author Hamlet D'Arcy
  */
 class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
-    static final SOURCE = '''
+    private static final SOURCE = '''
         class MyClass {
             int value
         }
     '''
-    def skipTestThatUnrelatedCodeHasNoViolations
+    static skipTestThatUnrelatedCodeHasNoViolations
     
     @Test
     void testApplyTo() {

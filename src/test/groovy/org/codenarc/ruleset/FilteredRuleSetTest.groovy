@@ -29,9 +29,11 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  * @author Chris Mair
   */
 class FilteredRuleSetTest extends AbstractTestCase {
-    static final RULE1 = new StubRule(name:'Rule1')
-    static final RULE2 = new StubRule(name:'Rule2')
-    static final RULE3 = new StubRule(name:'Rule3')
+
+    private static final RULE1 = new StubRule(name:'Rule1')
+    private static final RULE2 = new StubRule(name:'Rule2')
+    private static final RULE3 = new StubRule(name:'Rule3')
+
     private innerRuleSet
     private filteredRuleSet
 

@@ -38,7 +38,8 @@ import org.junit.Test
  * @author Chris Mair
   */
 class AstUtilTest extends AbstractTestCase {
-    static final SOURCE = '''
+
+    private static final SOURCE = '''
         class MyClass {
             def otherMethod() {
                 object.print()

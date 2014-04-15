@@ -25,7 +25,8 @@ import org.junit.Test
  * @author Chris Mair
   */
 class IllegalRegexRuleTest extends AbstractRuleTestCase {
-    static final REGEX = /\@author Joe/
+
+    private static final REGEX = /\@author Joe/
 
     @Test
     void testRuleProperties() {

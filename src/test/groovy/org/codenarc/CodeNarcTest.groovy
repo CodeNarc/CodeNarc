@@ -32,16 +32,16 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  * @author Chris Mair
  */
 class CodeNarcTest extends AbstractTestCase {
-    static final BASE_DIR = 'src/test/resources'
-    static final BASIC_RULESET = 'rulesets/basic.xml'
-    static final RULESET1 = 'rulesets/RuleSet1.xml'
-    static final INCLUDES = 'sourcewithdirs/**/*.groovy'
-    static final EXCLUDES = '**/*File2.groovy'
-    static final TITLE = 'My Title'
-    static final HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
-    static final HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
-    static final XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
-    static final XML_REPORT_STR = "xml:$XML_REPORT_FILE"
+    private static final BASE_DIR = 'src/test/resources'
+    private static final BASIC_RULESET = 'rulesets/basic.xml'
+    private static final RULESET1 = 'rulesets/RuleSet1.xml'
+    private static final INCLUDES = 'sourcewithdirs/**/*.groovy'
+    private static final EXCLUDES = '**/*File2.groovy'
+    private static final TITLE = 'My Title'
+    private static final HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
+    private static final HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
+    private static final XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
+    private static final XML_REPORT_STR = "xml:$XML_REPORT_FILE"
 
     private codeNarc
     private outputFile

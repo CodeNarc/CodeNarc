@@ -29,7 +29,7 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class ListRuleSetTest extends AbstractTestCase {
 
-    static final RULE = [:] as Rule
+    private static final RULE = [:] as Rule
 
     @Test
     void testWithRules() {
