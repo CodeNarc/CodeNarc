@@ -26,4 +26,5 @@
     <rule class='org.codenarc.rule.design.ReturnsNullInsteadOfEmptyCollectionRule'/>
     <rule class='org.codenarc.rule.design.SimpleDateFormatMissingLocaleRule'/>
     <rule class='org.codenarc.rule.design.StatelessSingletonRule'/>
+    <rule class='org.codenarc.rule.design.ToStringReturnsNullRule'/>
 </ruleset>
