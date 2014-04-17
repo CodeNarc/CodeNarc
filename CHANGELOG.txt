@@ -19,8 +19,9 @@ NEW RULES
 - #157: UnnecessaryToString rule (unnecessary) - Checks for unnecessary calls to toString().
 - #152: JUnitPublicProperty rule (junit) - Checks for public properties defined on JUnit test classes.
 - #422: ToStringReturnsNull rule (design) - Checks for toString() methods that return null.
+- #143: MultipleUnaryOperators rule (basic) - Checks for multiple consecutive unary operators.
 
-UPDATED/ENHANCED RULES
+UPDATED/ENHANCED RULES AND BUG FIXES
 - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to Ren? Scheibe)
 - #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to Ren? Scheibe)
 - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)

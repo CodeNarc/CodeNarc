@@ -46,6 +46,7 @@
     <rule class='org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule'/>
     <rule class='org.codenarc.rule.basic.HardCodedWindowsRootDirectoryRule'/>
     <rule class='org.codenarc.rule.basic.IntegerGetIntegerRule'/>
+    <rule class='org.codenarc.rule.basic.MultipleUnaryOperatorsRule'/>
     <rule class='org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule'/>
     <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
