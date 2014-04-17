@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 330 rules.
+  <<CodeNarc>> includes 337 rules.
 
     
       
@@ -124,6 +124,9 @@ Rule Index
     
       
     * {{{codenarc-rules-basic.html#IntegerGetInteger}IntegerGetInteger}}  
+    
+      
+    * {{{codenarc-rules-basic.html#MultipleUnaryOperators}MultipleUnaryOperators}}  
     
       
     * {{{codenarc-rules-basic.html#RandomDoubleCoercedToZero}RandomDoubleCoercedToZero}}  
@@ -328,6 +331,9 @@ Rule Index
       
     * {{{codenarc-rules-design.html#StatelessSingleton}StatelessSingleton}}  
     
+      
+    * {{{codenarc-rules-design.html#ToStringReturnsNull}ToStringReturnsNull}}  
+    
     
       
       
@@ -393,6 +399,9 @@ Rule Index
     
       
     * {{{codenarc-rules-exceptions.html#ExceptionExtendsError}ExceptionExtendsError}}  
+    
+      
+    * {{{codenarc-rules-exceptions.html#ExceptionExtendsThrowable}ExceptionExtendsThrowable}}  
     
       
     * {{{codenarc-rules-exceptions.html#ExceptionNotThrown}ExceptionNotThrown}}  
@@ -529,6 +538,9 @@ Rule Index
     
       
     * {{{codenarc-rules-generic.html#IllegalString}IllegalString}}  
+    
+      
+    * {{{codenarc-rules-generic.html#IllegalSubclass}IllegalSubclass}}  
     
       
     * {{{codenarc-rules-generic.html#RequiredRegex}RequiredRegex}}  
@@ -749,6 +761,9 @@ Rule Index
     
       
     * {{{codenarc-rules-junit.html#JUnitPublicNonTestMethod}JUnitPublicNonTestMethod}}  
+    
+      
+    * {{{codenarc-rules-junit.html#JUnitPublicProperty}JUnitPublicProperty}}  
     
       
     * {{{codenarc-rules-junit.html#JUnitSetUpCallsSuper}JUnitSetUpCallsSuper}}  
@@ -979,6 +994,9 @@ Rule Index
     * {{{codenarc-rules-unnecessary.html#UnnecessaryCallToSubstring}UnnecessaryCallToSubstring}}  
     
       
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryCast}UnnecessaryCast}}  
+    
+      
     * {{{codenarc-rules-unnecessary.html#UnnecessaryCatchBlock}UnnecessaryCatchBlock}}  
     
       
@@ -1076,6 +1094,9 @@ Rule Index
     
       
     * {{{codenarc-rules-unnecessary.html#UnnecessaryTernaryExpression}UnnecessaryTernaryExpression}}  
+    
+      
+    * {{{codenarc-rules-unnecessary.html#UnnecessaryToString}UnnecessaryToString}}  
     
       
     * {{{codenarc-rules-unnecessary.html#UnnecessaryTransientModifier}UnnecessaryTransientModifier}}  

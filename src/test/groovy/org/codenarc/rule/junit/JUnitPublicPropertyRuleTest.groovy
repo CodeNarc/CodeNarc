@@ -63,8 +63,9 @@ class JUnitPublicPropertyRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             import org.junit.Test
             class MyTestCase {
-                def helper      // property
-                String name     // property
+                static String id    // static property
+                def helper          // property
+                String name         // property
 
                 @Test
                 void testMe() { }
@@ -72,8 +73,9 @@ class JUnitPublicPropertyRuleTest extends AbstractRuleTestCase {
         '''
         def message = 'The test class %s contains a public property %s. There is usually no reason to have a public property (even a constant) on a test class.'
         assertViolations(SOURCE,
-            [lineNumber:4, sourceLineText:'def helper', messageText:String.format(message, 'MyTestCase', 'helper')],
-            [lineNumber:5, sourceLineText:'String name', messageText:String.format(message, 'MyTestCase', 'name')])
+            [lineNumber:4, sourceLineText:'static String id', messageText:String.format(message, 'MyTestCase', 'id')],
+            [lineNumber:5, sourceLineText:'def helper', messageText:String.format(message, 'MyTestCase', 'helper')],
+            [lineNumber:6, sourceLineText:'String name', messageText:String.format(message, 'MyTestCase', 'name')])
     }
 
     @Test

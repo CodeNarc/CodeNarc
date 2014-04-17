@@ -249,8 +249,9 @@ JUnit Rules  ("<rulesets/junit.xml>")
 -------------------------------------------------------------------------------
     import org.junit.Test
     class MyTestCase {
-        def helper      // violation
-        String name     // violation
+        static String id    // violation
+        def helper          // violation
+        String name         // violation
 
         @Test
         void testMe() { }
