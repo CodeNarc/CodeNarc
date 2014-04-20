@@ -35,10 +35,16 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor extends Abstr
 
     @Override
     void visitClosureExpression(ClosureExpression expression) {
-        boolean isMultiLineClosure = expression.lastLineNumber > expression.lineNumber
-        int closureStartLineNumber = expression.lineNumber
-        if (isMultiLineClosure && closureStartLineNumber == expression.code.lineNumber) {
-            addViolation(expression, "The multi-line closure within class $currentClassName contains a statement on the opening line of the closure.")
+        def block = expression.code
+        boolean hasAtLeastOneStatement = !block.isEmpty()
+        if (hasAtLeastOneStatement) {
+            int closureStartLineNumber = expression.lineNumber
+            def lastStatement = block.statements[-1]
+            boolean isMultiLineClosure = lastStatement.lastLineNumber > block.lineNumber
+            boolean hasCodeOnStartingLine = closureStartLineNumber == block.lineNumber
+            if (isMultiLineClosure && hasCodeOnStartingLine) {
+                addViolation(expression, "The multi-line closure within class $currentClassName contains a statement on the opening line of the closure.")
+            }
         }
         super.visitClosureExpression(expression)
     }

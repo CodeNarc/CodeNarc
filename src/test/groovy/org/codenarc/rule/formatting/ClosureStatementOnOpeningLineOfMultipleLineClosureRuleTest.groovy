@@ -93,6 +93,29 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends Abstrac
         assertInlineViolations(SOURCE)
     }
 
+    @Test
+    void testEmptyClosure_NoViolation() {
+        final SOURCE = '''
+            doStuff { }
+            assertCondition(TEXT, 'Info') {
+            }
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_ClosureMapEntry_NoViolation() {
+        final SOURCE = '''
+            def m = [isOkay:{ return true }
+            ]
+            resource.authenticationDao = [
+                getPlans:{ ssn, birthDate -> throw new NoMatchingDataException() },
+                isHandler:{     return true}
+            ] as AuthenticationDao
+            '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new ClosureStatementOnOpeningLineOfMultipleLineClosureRule()
     }
