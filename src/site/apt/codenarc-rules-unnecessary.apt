@@ -1095,6 +1095,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
      * Calls to <<<toString()>>> for the value assigned to a <<<String>>> field or variable (if <checkAssignments> is <<<true>>>).
 
+     []
 
 *------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>     | <<Description>>                                                | <<Default Value>>      |
