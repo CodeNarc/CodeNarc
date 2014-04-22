@@ -26,6 +26,9 @@ import org.codenarc.util.AstUtil
 /**
  * Checks for unnecessary calls to toString().
  *
+ * Only check for calls to toString() for the value assigned to a String field or variable
+ * if checkAssignments is true.
+ *
  * @author Chris Mair
  */
 class UnnecessaryToStringRule extends AbstractAstVisitorRule {
@@ -33,6 +36,9 @@ class UnnecessaryToStringRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryToString'
     int priority = 2
     Class astVisitorClass = UnnecessaryToStringAstVisitor
+
+    // If true, then check for calls to toString() for the value assigned to a String field or variable.
+    boolean checkAssignments = true
 }
 
 class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
@@ -40,14 +46,14 @@ class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (isFirstVisit(call) && AstUtil.isMethodCall(call, 'toString', 0) && isStringType(call.objectExpression)) {
-            addViolation(call, "Calling toString() on the String literal in class $currentClassName is unnecessary")
+            addViolation(call, "Calling toString() on the String expression in class $currentClassName is unnecessary")
         }
         super.visitMethodCallExpression(call)
     }
 
     @Override
     void visitField(FieldNode node) {
-        if (isStringType(node) && AstUtil.isMethodCall(node.initialExpression, 'toString', 0)) {
+        if (isStringType(node) && AstUtil.isMethodCall(node.initialExpression, 'toString', 0) && rule.checkAssignments) {
             addViolation(node, "Calling toString() when assigning to String field \"${node.name}\" in class $currentClassName is unnecessary")
         }
         super.visitField(node)
@@ -56,7 +62,7 @@ class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
         if (expression.leftExpression instanceof VariableExpression && isStringType(expression.leftExpression)) {
-            if (AstUtil.isMethodCall(expression.rightExpression, 'toString', 0)) {
+            if (AstUtil.isMethodCall(expression.rightExpression, 'toString', 0) && rule.checkAssignments) {
                 def varName = expression.leftExpression.name
                 addViolation(expression, "Calling toString() when assigning to String variable \"$varName\" in class $currentClassName is unnecessary")
             }

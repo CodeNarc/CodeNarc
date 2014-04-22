@@ -1091,14 +1091,23 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
   Checks for unnecessary calls to <<<toString()>>>. This includes:
 
-     * Calls to <<<toString()>>> on a String literal
+     * Calls to <<<toString()>>> on a String literal or expression
 
-     * Calls to <<<toString()>>> for the value assigned to a <<<String>>> field or variable.
+     * Calls to <<<toString()>>> for the value assigned to a <<<String>>> field or variable (if <checkAssignments> is <<<true>>>).
+
+
+*------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>     | <<Description>>                                                | <<Default Value>>      |
+*------------------+----------------------------------------------------------------+------------------------+
+| checkAssignments | If <<<true>>>, then check for calls to <<<toString()>>> for    | <<<true>>>             |
+|                  | the value assigned to a <<<String>>> field or variable.        |                        |
+*------------------+----------------------------------------------------------------+------------------------+
 
   Example of violations:
 
 -------------------------------------------------------------------------------
-    def name = "Joe".toString()     // violation - string literal
+    def name = "Joe".toString()                             // violation - string literal
+    def groupId = ((String)row.get('GroupID')).toString()   // violation - string expression
 
     class MyClass {
         String name = nameNode.toString()           // violation - field

@@ -30,6 +30,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnnecessaryToString'
+        assert rule.checkAssignments
     }
 
     @Test
@@ -43,19 +44,21 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testStringLiteral_ToString_Violation() {
+    void testStringExpression_ToString_Violation() {
         final SOURCE = '''
             class MyClass {
                 def name = "Joe".toString()
 
                 void run() {
                     def id = '123'.toString()
+                    def groupId = ((String)currentRow.get('GroupID')).toString()
                 }
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'def name = "Joe".toString()', messageText:'Calling toString() on the String literal in class MyClass is unnecessary'],
-            [lineNumber:6, sourceLineText:"def id = '123'.toString()", messageText:'Calling toString() on the String literal in class MyClass is unnecessary'] )
+            [lineNumber:3, sourceLineText:'def name = "Joe".toString()', messageText:'Calling toString() on the String expression in class MyClass is unnecessary'],
+            [lineNumber:6, sourceLineText:"def id = '123'.toString()", messageText:'Calling toString() on the String expression in class MyClass is unnecessary'],
+            [lineNumber:7, sourceLineText:"def groupId = ((String)currentRow.get('GroupID')).toString()", messageText:'Calling toString() on the String expression in class MyClass is unnecessary'] )
     }
 
     @Test
@@ -86,6 +89,22 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase {
             [lineNumber:2, sourceLineText:'String name = nameNode.toString()', messageText:String.format(message, 'name')],
             [lineNumber:3, sourceLineText:'String id = account.id.toString()', messageText:String.format(message, 'id')],
             [lineNumber:4, sourceLineText:'String code = account.getCode().toString()', messageText:String.format(message, 'code')] )
+    }
+
+    @Test
+    void testAssignmentToStringVariableOrField_ToString_CheckAssignmentsIsFalse_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                String name = nameNode.toString()
+
+                void run() {
+                    String id = account.id.toString()
+                    String code = account.getCode().toString()
+                }
+            }
+        '''
+        rule.checkAssignments = false
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

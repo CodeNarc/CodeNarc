@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.21 (??? 2014)
+Changes in version 0.21 (April 2014)
 -------------------------------------------
 NEW RULES
 - #30: GrailsMassAssignment rule (grails) - Checks for mass assignment from a params Map within Grails domain classes. (Thanks to Brian Soby)
