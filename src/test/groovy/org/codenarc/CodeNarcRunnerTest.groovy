@@ -23,6 +23,7 @@ import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
 
+import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 import org.codenarc.rule.FakePathRule
 
@@ -109,6 +110,12 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         codeNarcRunner.ruleSetFiles = RULESET_FILES_WITH_SPACES
         def ruleSet = codeNarcRunner.createRuleSet()
         assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'StatelessClass', 'Stub']
+    }
+
+    @Test
+    void testCreateRuleSet_RuleSetFileDoesNotExist() {
+        codeNarcRunner.ruleSetFiles = 'rulesets/NoSuchRuleSet.txt'
+        shouldFail(FileNotFoundException) { codeNarcRunner.createRuleSet() }
     }
 
     //--------------------------------------------------------------------------
