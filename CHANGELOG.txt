@@ -2,6 +2,9 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+NEW RULES
+- PackageMatchesFilepath rule (grails) - A package source file's path should match the package itself
+
 Changes in version 0.21 (April 2014)
 -------------------------------------------
 NEW RULES

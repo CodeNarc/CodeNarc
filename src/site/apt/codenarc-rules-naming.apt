@@ -44,6 +44,21 @@ Naming Rules  ("<rulesets/naming.xml>")
   Reports files containing only one top level class / enum / interface which is named differently than the file.
 
 
+* {PackageMatchesFilepath} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.22>
+
+  A package source file's path should match the package itself.
+
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                                  | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+| prefixWhiteList     | This property can be used to specify subfolder names that should be ignored at   | 'src,main,groovy'      |
+|                     | the beginning of file paths.                                                     |                        |
+|                     | It expects a comma separated list as string.                                     |                        |
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+
+
 * {ConfusingMethodName} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
