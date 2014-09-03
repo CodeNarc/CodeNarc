@@ -42,19 +42,21 @@ class PackageMatchesFilepathRule extends AbstractRule {
         if (!packageNode || !groupId || !sourceCode.path) return
         def violation = false
 
-        def folders = (sourceCode.path - sourceCode.name).replace(File.separator, '.')
+        def dotSeparatedFolders = (sourceCode.path - sourceCode.name).replace(File.separator, '.')
         def packages = packageNode.name
-        if (!(folders.find(groupId) && packages.find(groupId))) {
-            violation = true
+        if (!(dotSeparatedFolders.find(groupId) && packages.find(groupId))) {
+            violations << createViolation(sourceCode, packageNode,
+                "Could not find groupId '$groupId' in package or file\'s path ($sourceCode.path)")
         } else {
-            def subfolders = folders.split(groupPattern)[1..-1]
+            def subfolders = dotSeparatedFolders.split(groupPattern)[1..-1]
             def subpackages = packages.split(groupPattern)[1..-1]
-            violation = subfolders != subpackages
+            if (subfolders != subpackages) {
+                violations << createViolation(sourceCode, packageNode,
+                    "The package source file\'s path ($sourceCode.path) should match the package itself")
+            }
         }
 
         if (violation) {
-            violations << createViolation(sourceCode, packageNode,
-                "The package source file\'s path ($sourceCode.path) should match the package itself")
         }
     }
 

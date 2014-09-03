@@ -112,7 +112,7 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
             SOURCE,
             1,
             'package other.pack.age.name',
-            "The package source file\'s path ($sourceCodePath) should match the package itself",
+            "Could not find groupId 'org.organization' in package or file's path ($sourceCodePath)",
         )
     }
 
@@ -126,7 +126,7 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
             SOURCE,
             1,
             'package org.orgXnization.project.component.module',
-            "The package source file\'s path ($sourceCodePath) should match the package itself",
+            "Could not find groupId 'org.organization' in package or file's path ($sourceCodePath)",
         )
     }
 
