@@ -11,13 +11,13 @@
     <rule class='org.codenarc.rule.naming.AbstractClassNameRule'/>
     <rule class='org.codenarc.rule.naming.ClassNameRule'/>
     <rule class='org.codenarc.rule.naming.ClassNameSameAsFilenameRule'/>
-    <rule class='org.codenarc.rule.naming.PackageMatchesFilepathRule'/>
     <rule class='org.codenarc.rule.naming.ConfusingMethodNameRule'/>
     <rule class='org.codenarc.rule.naming.FieldNameRule'/>
     <rule class='org.codenarc.rule.naming.InterfaceNameRule'/>
     <rule class='org.codenarc.rule.naming.MethodNameRule'/>
     <rule class='org.codenarc.rule.naming.ObjectOverrideMisspelledMethodNameRule'/>
     <rule class='org.codenarc.rule.naming.PackageNameRule'/>
+    <rule class='org.codenarc.rule.naming.PackageNameMismatchesFilepathRule'/>
     <rule class='org.codenarc.rule.naming.ParameterNameRule'/>
     <rule class='org.codenarc.rule.naming.PropertyNameRule'/>
     <rule class='org.codenarc.rule.naming.VariableNameRule'/>

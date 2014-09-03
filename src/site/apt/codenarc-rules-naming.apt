@@ -44,21 +44,6 @@ Naming Rules  ("<rulesets/naming.xml>")
   Reports files containing only one top level class / enum / interface which is named differently than the file.
 
 
-* {PackageMatchesFilepath} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.22>
-
-  A package source file's path should match the package itself.
-
-*---------------------+----------------------------------------------------------------------------------+------------------------+
-| <<Property>>        | <<Description>>                                                                  | <<Default Value>>      |
-*---------------------+----------------------------------------------------------------------------------+------------------------+
-| groupId             | To find the subpath relevant for the package the rule searches for the first     | <<<null>>>             |
-|                     | appearence in the filepath. It should be present in every checked package.       |                        |
-|                     | Failing to configure this value effectivly disables this rule.                   |                        |
-*---------------------+----------------------------------------------------------------------------------+------------------------+
-
-
 * {ConfusingMethodName} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
@@ -261,6 +246,20 @@ Naming Rules  ("<rulesets/naming.xml>")
 | packageNameRequired | Indicates whether a package name declaration is required for   | <<<false>>>            |
 |                     | all classes.                                                   |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
+
+
+* {PackageNameMismatchesFilepath} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.22>
+
+  A package source file's path should match the package declaration.
+
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                                  | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+| groupId             | To find the subpath relevant for the package the rule searches for the first     | <<<null>>>             |
+|                     | appearence in the filepath. It should be present in every checked package.       |                        |
+*---------------------+----------------------------------------------------------------------------------+------------------------+
 
 
 * {ParameterName} Rule

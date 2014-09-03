@@ -22,43 +22,53 @@ import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
- * A package source file's path should match the package itself.
+ * A package source file's path should match the package declaration.
  * </p>
  * To find the package-relevant subpath in the file path the <em>groupId</em> needs to be configured.
  * It is expected to appear in every package declaration.
  *
  * @author Simon Tost
  */
-class PackageMatchesFilepathRule extends AbstractRule {
+class PackageNameMismatchesFilepathRule extends AbstractRule {
 
     String groupId
 
-    String name = 'PackageMatchesFilepath'
+    String name = 'PackageNameMismatchesFilepath'
     int priority = 1
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         PackageNode packageNode = sourceCode.ast?.package
-        if (!packageNode || !groupId || !sourceCode.path) {
+        if (!packageNode || !sourceCode.path) {
+            return
+        }
+        if (!groupId) {
+            violations << createViolation(sourceCode, packageNode,
+                'GroupId not configured. Cannot locate package path root.')
             return
         }
 
-        def dotSeparatedFolders = (sourceCode.path - sourceCode.name).replace(File.separator, '.')
+        def dotSeparatedFolders = sourceCode.with { path - name }.replace(File.separator, '.')
         def packages = packageNode.name
         if (!dotSeparatedFolders.find(groupId) || !packages.find(groupId)) {
             violations << createViolation(sourceCode, packageNode,
-                "Could not find groupId '$groupId' in package or file\'s path ($sourceCode.path)")
+                "Could not find groupId '$groupId' in package or file's path ($sourceCode.path)")
         } else {
-            def subfolders = dotSeparatedFolders.split(groupPattern)[1..-1]
-            def subpackages = packages.split(groupPattern)[1..-1]
+            def subfolders = dotSeparatedFolders.split(groupPattern, 2)[1]
+            def subpackages = packages.split(groupPattern, 2)[1]
             if (subfolders != subpackages) {
-                violations << createViolation(sourceCode, packageNode,
-                    "The package source file\'s path ($sourceCode.path) should match the package itself")
+                violations << createViolation(sourceCode, packageNode, mismatchMessage(subfolders))
             }
         }
     }
 
     protected getGroupPattern() {
         Pattern.quote(groupId)
+    }
+
+    protected mismatchMessage(subfolders) {
+        def dotSeparatedPath = groupId + subfolders
+        def subpath = dotSeparatedPath.replace('.', File.separator)
+        "The package source file's path ($subpath) should match the package declaration"
     }
 }

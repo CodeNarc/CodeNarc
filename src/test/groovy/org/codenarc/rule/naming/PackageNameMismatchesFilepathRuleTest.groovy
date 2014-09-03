@@ -21,13 +21,11 @@ import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**
- * Tests for PackageMatchesFilepathRule
+ * Tests for PackageMismatchesFilepathRule
  *
  * @author Simon Tost
  */
-class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
-
-    // static skipTestThatUnrelatedCodeHasNoViolations
+class PackageNameMismatchesFilepathRuleTest extends AbstractRuleTestCase {
 
     @Before
     void setup() {
@@ -38,7 +36,7 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
     @Test
     void testRuleProperties() {
         assert rule.priority == 1
-        assert rule.name == 'PackageMatchesFilepath'
+        assert rule.name == 'PackageNameMismatchesFilepath'
     }
 
     @Test
@@ -59,10 +57,9 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
             package ignore
         '''
         rule.groupId = null
-        assertNoViolations(SOURCE)
-
+        assertSingleViolation(SOURCE, 1, 'package ignore', 'GroupId not configured. Cannot locate package path root.')
         rule.groupId = ''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 1, 'package ignore', 'GroupId not configured. Cannot locate package path root.')
     }
 
     @Test
@@ -140,7 +137,7 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
             SOURCE,
             1,
             'package org.organization.project.compXnent.module',
-            "The package source file\'s path ($sourceCodePath) should match the package itself",
+            "The package source file's path (${filePath('org_organization_project_component_module_')}) should match the package declaration",
         )
     }
 
@@ -155,12 +152,12 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
             SOURCE,
             1,
             'package org.organization.project.org.compXnent.module',
-            "The package source file\'s path ($sourceCodePath) should match the package itself",
+            "The package source file's path (${filePath('org_organization_project_org_component_module_')}) should match the package declaration",
         )
     }
 
     protected Rule createRule() {
-        new PackageMatchesFilepathRule()
+        new PackageNameMismatchesFilepathRule()
     }
 
     private String filePath(pathPattern) {
