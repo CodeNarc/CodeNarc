@@ -53,9 +53,9 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                                  | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------------------------+------------------------+
-| prefixWhiteList     | This property can be used to specify subfolder names that should be ignored at   | 'src,main,groovy'      |
-|                     | the beginning of file paths.                                                     |                        |
-|                     | It expects a comma separated list as string.                                     |                        |
+| groupId             | To find the subpath relevant for the package the rule searches for the first     | <<<null>>>             |
+|                     | appearence in the filepath. It should be present in every checked package.       |                        |
+|                     | Failing to configure this value effectivly disables this rule.                   |                        |
 *---------------------+----------------------------------------------------------------------------------+------------------------+
 
 

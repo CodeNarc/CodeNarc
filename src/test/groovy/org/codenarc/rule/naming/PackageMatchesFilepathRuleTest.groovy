@@ -31,7 +31,8 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
 
     @Before
     void setup() {
-        sourceCodePath = filePath('org_organization_project_component_module_MyClass.groovy')
+        sourceCodePath = filePath('_some_absolute_path_to_project_org_organization_project_component_module_MyClass.groovy')
+        sourceCodeName = 'MyClass.groovy'
     }
 
     @Test
@@ -41,16 +42,8 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testNoViolations() {
-        final SOURCE = '''
-            package org.organization.project.component.module
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void testSourceCodeName_NullOrEmpty() {
-        final SOURCE = '''
+    void testSourceCodePath_NullOrEmpty() {
+        final SOURCE = '''\
             package ignore
         '''
         sourceCodePath = null
@@ -61,36 +54,109 @@ class PackageMatchesFilepathRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void test_NoPackage_NoViolations() {
-        final SOURCE = '''
+    void testGroupId_NullOrEmpty() {
+        final SOURCE = '''\
+            package ignore
+        '''
+        rule.groupId = null
+        assertNoViolations(SOURCE)
+
+        rule.groupId = ''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoViolations() {
+        final SOURCE = '''\
+            package org.organization.project.component.module
+        '''
+        rule.groupId = 'org.organization'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoSubmodule() {
+        final SOURCE = '''\
+            package org.organization
+        '''
+        sourceCodePath = filePath('_some_absolute_path_to_project_org_organization_MyClass.groovy')
+        rule.groupId = 'org.organization'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testRelativePath() {
+        final SOURCE = '''\
+            package org.organization.project.component.module
+        '''
+        sourceCodePath = filePath('org_organization_project_component_module_MyClass.groovy')
+        rule.groupId = 'org.organization'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testScriptsOk() {
+        final SOURCE = '''\
             println 'Hello world!'
         '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testSingleViolation() {
-        final SOURCE = 'package other.pack.age.name'
-        assertSingleViolation(SOURCE, 1, 'package other.pack.age.name', "A package source file\'s path ($sourceCodePath) should match the package itself")
+    void testDifferentPackage() {
+        final SOURCE = '''\
+            package other.pack.age.name
+        '''
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package other.pack.age.name',
+            "The package source file\'s path ($sourceCodePath) should match the package itself",
+        )
     }
 
     @Test
-    void testIgnoreDefaultProjectSubfolder() {
-        sourceCodePath = filePath('src_main_groovy_org_organization_project_component_module_MyClass.groovy')
-        final SOURCE = '''
-            package org.organization.project.component.module
+    void testTypoInGroupId() {
+        final SOURCE = '''\
+            package org.orgXnization.project.component.module
         '''
-        assertNoViolations(SOURCE)
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.orgXnization.project.component.module',
+            "The package source file\'s path ($sourceCodePath) should match the package itself",
+        )
     }
 
     @Test
-    void testIgnoredPrefixesAreConfigureable() {
-        sourceCodePath = filePath('grails-app_domain_org_organization_project_component_module_MyClass.groovy')
-        final SOURCE = '''
-            package org.organization.project.component.module
+    void testTypoInSubmodule() {
+        final SOURCE = '''\
+            package org.organization.project.compXnent.module
         '''
-        rule.prefixWhiteList = 'grails-app,domain,controller,service,src,groovy'
-        assertNoViolations(SOURCE)
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.organization.project.compXnent.module',
+            "The package source file\'s path ($sourceCodePath) should match the package itself",
+        )
+    }
+
+    @Test
+    void testDuplicateOccurenceOfGroupId() {
+        sourceCodePath = filePath('src_main_groovy_org_organization_project_org_component_module_MyClass.groovy')
+        final SOURCE = '''\
+            package org.organization.project.org.compXnent.module
+        '''
+        rule.groupId = 'org'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.organization.project.org.compXnent.module',
+            "The package source file\'s path ($sourceCodePath) should match the package itself",
+        )
     }
 
     protected Rule createRule() {

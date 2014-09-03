@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.naming
 
+import java.util.regex.Pattern
 import org.codehaus.groovy.ast.PackageNode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
@@ -23,40 +24,41 @@ import org.codenarc.source.SourceCode
 /**
  * A package source file's path should match the package itself.
  * </p>
- * The <code>prefixWhiteList</code> property ('src,main,groovy') can be used to specify subfolder names
- * that should be ignored at the beginning of file paths.
+ * To find the package-relevant subpath in the file path the <em>groupId</em> needs to be configured.
+ * It is expected to appear in every package declaration.
  *
  * @author Simon Tost
  */
 class PackageMatchesFilepathRule extends AbstractRule {
 
-    String prefixWhiteList = 'src,main,groovy'
+    String groupId
 
     String name = 'PackageMatchesFilepath'
     int priority = 1
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        if (!sourceCode.path) return
         PackageNode packageNode = sourceCode.ast?.package
-        if (!packageNode) return
+        if (!packageNode || !groupId || !sourceCode.path) return
+        def violation = false
 
-        List<String> folders = sourceCode.path.tokenize(File.separator)[0..-2]
-        List<String> packages = packageNode.name.tokenize('.')
-        if (stripProjectFolders(folders) != packages) {
+        def folders = (sourceCode.path - sourceCode.name).replace(File.separator, '.')
+        def packages = packageNode.name
+        if (!(folders.find(groupId) && packages.find(groupId))) {
+            violation = true
+        } else {
+            def subfolders = folders.split(groupPattern)[1..-1]
+            def subpackages = packages.split(groupPattern)[1..-1]
+            violation = subfolders != subpackages
+        }
+
+        if (violation) {
             violations << createViolation(sourceCode, packageNode,
-                "A package source file\'s path ($sourceCode.path) should match the package itself")
+                "The package source file\'s path ($sourceCode.path) should match the package itself")
         }
     }
 
-    protected stripProjectFolders(folders) {
-        while (folders.head() in whiteList) {
-            folders = folders[1..-1]
-        }
-        folders
-    }
-
-    protected getWhiteList() {
-        prefixWhiteList?.tokenize(',') ?: []
+    protected getGroupPattern() {
+        Pattern.quote(groupId)
     }
 }
