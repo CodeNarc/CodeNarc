@@ -39,12 +39,13 @@ class PackageMatchesFilepathRule extends AbstractRule {
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         PackageNode packageNode = sourceCode.ast?.package
-        if (!packageNode || !groupId || !sourceCode.path) return
-        def violation = false
+        if (!packageNode || !groupId || !sourceCode.path) {
+            return
+        }
 
         def dotSeparatedFolders = (sourceCode.path - sourceCode.name).replace(File.separator, '.')
         def packages = packageNode.name
-        if (!(dotSeparatedFolders.find(groupId) && packages.find(groupId))) {
+        if (!dotSeparatedFolders.find(groupId) || !packages.find(groupId)) {
             violations << createViolation(sourceCode, packageNode,
                 "Could not find groupId '$groupId' in package or file\'s path ($sourceCode.path)")
         } else {
@@ -54,9 +55,6 @@ class PackageMatchesFilepathRule extends AbstractRule {
                 violations << createViolation(sourceCode, packageNode,
                     "The package source file\'s path ($sourceCode.path) should match the package itself")
             }
-        }
-
-        if (violation) {
         }
     }
 
