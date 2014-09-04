@@ -66,6 +66,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
     String staticRegex
     String finalRegex
     String staticFinalRegex = DEFAULT_CONST_NAME
+    String privateStaticFinalRegex
     String ignoreFieldNames = 'serialVersionUID'
     Class astVisitorClass = FieldNameAstVisitor
 
@@ -86,11 +87,15 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
             if (Modifier.isStatic(mod)) {
                 re = rule.staticRegex ?: re
             }
-            if (Modifier.isFinal(FieldNode.ACC_FINAL)) {
+            if (Modifier.isFinal(mod)) {
                 re = rule.finalRegex ?: re
             }
             if ((Modifier.isFinal(mod)) && (Modifier.isStatic(mod))) {
                 re = rule.staticFinalRegex ?: re
+            }
+
+            if ((Modifier.isFinal(mod)) && Modifier.isStatic(mod) && Modifier.isPrivate(mod)) {
+                re = rule.privateStaticFinalRegex ?: re
             }
 
             if (!(fieldNode.name ==~ re)) {
