@@ -48,7 +48,10 @@ import java.lang.reflect.Modifier
  * The <code>staticFinalRegex</code> property specifies the regular expression to validate <code>static final</code>
  * field names. It is optional, but defaults to '[A-Z][A-Z0-9_]*'.
  * <p/>
- * The order of precedence for the regular expression properties is: <code>staticFinalRegex</code>,
+ * The <code>privateStaticFinalRegex</code> property specifies the regular expression to validate <code>private static final</code>
+ * field names. It is optional, but defaults to '[A-Z][A-Z0-9_]*'.
+ * <p/>
+ * The order of precedence for the regular expression properties is: <code>privateStaticFinalRegex</code>, <code>staticFinalRegex</code>,
  * <code>finalRegex</code>, <code>staticRegex</code> and finally <code>regex</code>. In other words, the first
  * regex in that list matching the modifiers for the field is the one that is applied for the field name validation.
  * <p/>
