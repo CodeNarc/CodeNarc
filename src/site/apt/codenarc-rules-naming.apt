@@ -258,7 +258,8 @@ Naming Rules  ("<rulesets/naming.xml>")
 | <<Property>>        | <<Description>>                                                                  | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------------------------+------------------------+
 | groupId             | To find the subpath relevant for the package the rule searches for the first     | <<<null>>>             |
-|                     | appearence in the filepath. It should be present in every checked package.       |                        |
+|                     | appearence of groupId in the filepath. It's <<<required>>> to configure this     |                        |
+|                     | value. It's expected to be present in every checked package.                     |                        |
 *---------------------+----------------------------------------------------------------------------------+------------------------+
 
 

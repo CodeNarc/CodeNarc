@@ -875,6 +875,9 @@ Rule Index
     * {{{codenarc-rules-naming.html#PackageName}PackageName}}  
     
       
+    * {{{codenarc-rules-naming.html#PackageNameMismatchesPackage}PackageNameMismatchesPackage}}  
+    
+      
     * {{{codenarc-rules-naming.html#ParameterName}ParameterName}}  
     
       
