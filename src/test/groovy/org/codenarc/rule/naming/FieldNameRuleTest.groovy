@@ -208,6 +208,20 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_PrivateStaticFinal_CustomStaticFinalRegex() {
+        final SOURCE = '''
+            class MyClass {
+                private static final int Count
+            }
+        '''
+        rule.staticRegex = /Z.*/    // ignored
+        rule.finalRegex = /X.*/     // ignored
+        rule.staticFinalRegex = /C.*/ //ignored
+        rule.privateStaticFinalRegex = /[a-z][a-zA-Z0-9]*/
+        assertSingleViolation(SOURCE, 3, 'private static final int Count')
+    }
+
+    @Test
     void testApplyTo_StaticFinal_StaticFinalRegexIsNull_DefaultsToFinalRegex() {
         final SOURCE = '''
           class MyClass {

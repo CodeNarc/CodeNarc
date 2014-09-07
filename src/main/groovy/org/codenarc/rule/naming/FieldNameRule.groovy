@@ -48,7 +48,10 @@ import java.lang.reflect.Modifier
  * The <code>staticFinalRegex</code> property specifies the regular expression to validate <code>static final</code>
  * field names. It is optional, but defaults to '[A-Z][A-Z0-9_]*'.
  * <p/>
- * The order of precedence for the regular expression properties is: <code>staticFinalRegex</code>,
+ * The <code>privateStaticFinalRegex</code> property specifies the regular expression to validate <code>private static final</code>
+ * field names. It is optional, but defaults to '[A-Z][A-Z0-9_]*'.
+ * <p/>
+ * The order of precedence for the regular expression properties is: <code>privateStaticFinalRegex</code>, <code>staticFinalRegex</code>,
  * <code>finalRegex</code>, <code>staticRegex</code> and finally <code>regex</code>. In other words, the first
  * regex in that list matching the modifiers for the field is the one that is applied for the field name validation.
  * <p/>
@@ -66,6 +69,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
     String staticRegex
     String finalRegex
     String staticFinalRegex = DEFAULT_CONST_NAME
+    String privateStaticFinalRegex
     String ignoreFieldNames = 'serialVersionUID'
     Class astVisitorClass = FieldNameAstVisitor
 
@@ -86,11 +90,15 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
             if (Modifier.isStatic(mod)) {
                 re = rule.staticRegex ?: re
             }
-            if (Modifier.isFinal(FieldNode.ACC_FINAL)) {
+            if (Modifier.isFinal(mod)) {
                 re = rule.finalRegex ?: re
             }
             if ((Modifier.isFinal(mod)) && (Modifier.isStatic(mod))) {
                 re = rule.staticFinalRegex ?: re
+            }
+
+            if ((Modifier.isFinal(mod)) && Modifier.isStatic(mod) && Modifier.isPrivate(mod)) {
+                re = rule.privateStaticFinalRegex ?: re
             }
 
             if (!(fieldNode.name ==~ re)) {
