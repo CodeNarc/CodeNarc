@@ -248,6 +248,21 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
+* {PackageNameMismatchesFilepath} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.22>
+
+  A package source file's path should match the package declaration.
+
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                                  | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+| groupId             | To find the subpath relevant for the package the rule searches for the first     | <<<null>>>             |
+|                     | appearence of groupId in the filepath. It's <<<required>>> to configure this     |                        |
+|                     | value. It's expected to be present in every checked package.                     |                        |
+*---------------------+----------------------------------------------------------------------------------+------------------------+
+
+
 * {ParameterName} Rule
 ~~~~~~~~~~~~~~~~~~~~~
 

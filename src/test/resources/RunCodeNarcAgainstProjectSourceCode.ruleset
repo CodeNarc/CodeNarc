@@ -42,7 +42,9 @@ ruleset {
     }
     ruleset('rulesets/logging.xml')
 
-    ruleset('rulesets/naming.xml')
+    ruleset('rulesets/naming.xml') {
+        PackageNameMismatchesFilepath(groupId:'org.codenarc')
+    }
 
     ruleset('rulesets/size.xml') {
         exclude 'CrapMetric'

@@ -1,0 +1,166 @@
+/*
+ * Copyright 2014 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codenarc.rule.naming
+
+import org.codenarc.rule.Rule
+import org.junit.Before
+import org.junit.Test
+import org.codenarc.rule.AbstractRuleTestCase
+
+/**
+ * Tests for PackageMismatchesFilepathRule
+ *
+ * @author Simon Tost
+ */
+class PackageNameMismatchesFilepathRuleTest extends AbstractRuleTestCase {
+
+    @Before
+    void setup() {
+        sourceCodePath = filePath('_some_absolute_path_to_project_org_organization_project_component_module_MyClass.groovy')
+        sourceCodeName = 'MyClass.groovy'
+    }
+
+    @Test
+    void testRuleProperties() {
+        assert rule.priority == 1
+        assert rule.name == 'PackageNameMismatchesFilepath'
+    }
+
+    @Test
+    void testSourceCodePath_NullOrEmpty() {
+        final SOURCE = '''\
+            package ignore
+        '''
+        sourceCodePath = null
+        assertNoViolations(SOURCE)
+
+        sourceCodePath = ''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testGroupId_NullOrEmpty() {
+        final SOURCE = '''\
+            package ignore
+        '''
+        rule.groupId = null
+        assertSingleViolation(SOURCE, 1, 'package ignore', 'GroupId not configured. Cannot locate package path root.')
+        rule.groupId = ''
+        assertSingleViolation(SOURCE, 1, 'package ignore', 'GroupId not configured. Cannot locate package path root.')
+    }
+
+    @Test
+    void testNoViolations() {
+        final SOURCE = '''\
+            package org.organization.project.component.module
+        '''
+        rule.groupId = 'org.organization'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoSubmodule() {
+        final SOURCE = '''\
+            package org.organization
+        '''
+        sourceCodePath = filePath('_some_absolute_path_to_project_org_organization_MyClass.groovy')
+        rule.groupId = 'org.organization'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testRelativePath() {
+        final SOURCE = '''\
+            package org.organization.project.component.module
+        '''
+        sourceCodePath = filePath('org_organization_project_component_module_MyClass.groovy')
+        rule.groupId = 'org.organization'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testScriptsOk() {
+        final SOURCE = '''\
+            println 'Hello world!'
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDifferentPackage() {
+        final SOURCE = '''\
+            package other.pack.age.name
+        '''
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package other.pack.age.name',
+            "Could not find groupId 'org.organization' in package or file's path ($sourceCodePath)",
+        )
+    }
+
+    @Test
+    void testTypoInGroupId() {
+        final SOURCE = '''\
+            package org.orgXnization.project.component.module
+        '''
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.orgXnization.project.component.module',
+            "Could not find groupId 'org.organization' in package or file's path ($sourceCodePath)",
+        )
+    }
+
+    @Test
+    void testTypoInSubmodule() {
+        final SOURCE = '''\
+            package org.organization.project.compXnent.module
+        '''
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.organization.project.compXnent.module',
+            "The package source file's path (${filePath('org_organization_project_component_module_')}) should match the package declaration",
+        )
+    }
+
+    @Test
+    void testDuplicateOccurenceOfGroupId() {
+        sourceCodePath = filePath('src_main_groovy_org_organization_project_org_component_module_MyClass.groovy')
+        final SOURCE = '''\
+            package org.organization.project.org.compXnent.module
+        '''
+        rule.groupId = 'org'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.organization.project.org.compXnent.module',
+            "The package source file's path (${filePath('org_organization_project_org_component_module_')}) should match the package declaration",
+        )
+    }
+
+    protected Rule createRule() {
+        new PackageNameMismatchesFilepathRule()
+    }
+
+    private String filePath(pathPattern) {
+        pathPattern.tr('_', File.separator)
+    }
+}
