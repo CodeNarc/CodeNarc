@@ -73,6 +73,14 @@ class RuleSetUtilTest extends AbstractTestCase {
     }
 
     @Test
+    void testLoadRuleScriptFile_useCurrentThreadContextClassLoader() {
+        System.setProperty(RuleSetUtil.CLASS_LOADER_SYS_PROP, 'true')
+        def rule = RuleSetUtil.loadRuleScriptFile(RULE_SCRIPT_FILE)
+        assert rule instanceof Rule
+        assert rule.name == 'DoNothing'
+    }
+
+    @Test
     void testLoadRuleScriptFile_NotARule() {
         shouldFailWithMessageContaining('Rule') { RuleSetUtil.loadRuleScriptFile('rule/NotARule.txt') }
     }
