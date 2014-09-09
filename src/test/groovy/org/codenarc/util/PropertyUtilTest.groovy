@@ -61,6 +61,18 @@ class PropertyUtilTest extends AbstractTestCase {
     }
 
     @Test
+    void testSetPropertyFromString_BigDecimal() {
+        PropertyUtil.setPropertyFromString(object, 'bigDecimalField', '1234.567')
+        assert object.getBigDecimalField() == 1234.567
+    }
+
+    @Test
+    void testSetPropertyFromString_BigDecimal_Whitespace() {
+        PropertyUtil.setPropertyFromString(object, 'bigDecimalField', '\t30  ')
+        assert object.getBigDecimalField() == 30
+    }
+
+    @Test
     void testSetPropertyFromString_boolean() {
         PropertyUtil.setPropertyFromString(object, 'booleanField', 'true')
         assert object.getBooleanField()
@@ -100,6 +112,7 @@ class FakePropertyUtilClass extends FakePropertyUtilSuperclass {
     int intField
     long longField
     boolean booleanField
+    BigDecimal bigDecimalField
 }
 
 class FakePropertyUtilSuperclass {

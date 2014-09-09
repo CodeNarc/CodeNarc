@@ -51,6 +51,10 @@ class PropertyUtil {
             newPropertyValue = Boolean.parseBoolean(propertyValue.trim())
         }
 
+        if (property.type == BigDecimal) {
+            newPropertyValue = new BigDecimal(propertyValue.trim())
+        }
+
         object[propertyName] = newPropertyValue
     }
 
