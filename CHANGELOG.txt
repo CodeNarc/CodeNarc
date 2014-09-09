@@ -8,7 +8,7 @@ NEW RULES
 
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #157: Enable optionally using Thread Context classpath for loading rule scripts. Introduce "codenarc.useCurrentThreadContextClassLoader" system property. See https://jira.grails.org/browse/GPCODENARC-32.
-- #55: Naming rule - Add private static final field name regex. (Thanks to Dominik Przybysz)
+- #55: FieldName rule - Add private static final field name regex. (Thanks to Dominik Przybysz)
 
 
 Changes in version 0.21 (April 2014)
