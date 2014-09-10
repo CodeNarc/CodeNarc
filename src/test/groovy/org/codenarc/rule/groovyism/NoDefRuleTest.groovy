@@ -4,6 +4,9 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.Test
 
+/**
+ * @author Dominik Przybysz
+ */
 public class NoDefRuleTest extends AbstractRuleTestCase {
 
     @Test
@@ -39,7 +42,7 @@ public class NoDefRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testExcludesNoViolation() {
-        rule.excludePattern = / ((setup|cleanup)(|Spec)|"[^"].*")\(\)/
+        rule.excludePattern = /((setup|cleanup)(|Spec)|"[^"].*")\(\)/ //spock methods
         final SOURCE = '''
             def setup(){}
             def setupSpec(){}
