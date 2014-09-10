@@ -241,6 +241,14 @@ c        '''
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_CheckClosureAsFirstMethodParameter_NoViolations() {
+        final SOURCE = '''
+            execute({ println 7 }, true)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new SpaceBeforeOpeningBraceRule()
     }
