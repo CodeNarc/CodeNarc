@@ -15,7 +15,6 @@
  */
 package org.codenarc
 
-import org.apache.log4j.Logger
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
@@ -48,7 +47,7 @@ import org.codenarc.report.ReportWriterFactory
  */
 @SuppressWarnings(['Println', 'PrintStackTrace'])
 class CodeNarc {
-    static final LOG = Logger.getLogger(CodeNarc)
+
     protected static final HELP = """CodeNarc - static analysis for Groovy',
 Usage: java org.codenarc.CodeNarc [OPTIONS]
   where OPTIONS are zero or more command-line options of the form "-NAME[=VALUE]":
@@ -93,6 +92,9 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
     protected createCodeNarcRunner = { new CodeNarcRunner() }
 
+    // Abstract calling System.exit() to allow substitution of test spy for unit tests
+    protected static systemExit = { exitCode -> System.exit(exitCode) }
+
     /**
      * Main command-line entry-point. Run the CodeNarc application.
      * @param args - the String[] of command-line arguments
@@ -112,6 +114,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             println "ERROR: ${t.message}"
             t.printStackTrace()
             println HELP
+            systemExit(1)
         }
     }
 

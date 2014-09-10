@@ -69,6 +69,9 @@ CodeNarc - Run From Command-Line
 
   []
 
+  The CodeNarc command-line application sets an exit status of zero (0) if the command successfully executes, and
+  an exit status of one (1) if an error occurs executing CodeNarc, or if an invalid command-line option is specified.
+
   Here is an example BAT file for running <<CodeNarc>> on Windows.
 
 +----------------------------------------------------------------------------------------

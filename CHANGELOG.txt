@@ -10,6 +10,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #157: Enable optionally using Thread Context classpath for loading rule scripts. Introduce "codenarc.useCurrentThreadContextClassLoader" system property. See https://jira.grails.org/browse/GPCODENARC-32.
 - #55: FieldName rule - Add private static final field name regex. (Thanks to Dominik Przybysz)
 - #54: Invalid Cast to BigDecimal. In an XML ruleset or "codenarc.properties", specifying a BigDecimal property value throws an exception.
+- #51: CodeNarc command-line runner always returns 0, even for failure/error. Now return exit status of 1 for all errors.
 
 Changes in version 0.21 (April 2014)
 -------------------------------------------
