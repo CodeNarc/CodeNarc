@@ -94,11 +94,15 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
         if (isFirstVisit(expression)) {
             def line = sourceLineOrEmpty(expression)
             def startCol = expression.columnNumber
-            if (isNotWhitespace(line, startCol - 1)) {
+            if (isNotWhitespace(line, startCol - 1) && isNotOpeningParenthesis(line, startCol - 1)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
         super.visitClosureExpression(expression)
+    }
+
+    private static boolean isNotOpeningParenthesis(String line, int index) {
+        index >= 1 && index <= line.size() && (line[index - 1] as char) != '('
     }
 
     @Override
