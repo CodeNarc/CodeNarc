@@ -16,7 +16,9 @@ ruleset {
     }
     ruleset('rulesets/exceptions.xml')
 
-    ruleset('rulesets/groovyism.xml')
+    ruleset('rulesets/groovyism.xml') {
+        exclude 'NoDef'
+    }
 
     ruleset('rulesets/formatting.xml')
 
