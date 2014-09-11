@@ -18,7 +18,7 @@ class NoDefRule extends AbstractRule {
     String name = "No def"
     int priority = 3
     protected static final String MESSAGE = 'def should not be used'
-    String excludePattern = null
+    String excludePattern
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
@@ -28,7 +28,7 @@ class NoDefRule extends AbstractRule {
                 if (line.contains("def ") && (!excludeFilter || !(line ==~ excludeFilter))){
                     Violation violation = new Violation();
                     violation.setRule(this);
-                    violation.setLineNumber(idx);
+                    violation.setLineNumber(idx + 1);
                     violation.setSourceLine(line.trim());
                     violation.setMessage(MESSAGE);
                     violations.add(violation);
