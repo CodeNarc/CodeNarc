@@ -37,14 +37,14 @@ class PackageNameMatchesFilePathRule extends AbstractRule {
     int priority = 1
 
     @Override
+    boolean isReady() {
+        return groupId
+    }
+
+    @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         PackageNode packageNode = sourceCode.ast?.package
         if (!packageNode || !sourceCode.path) {
-            return
-        }
-        if (!groupId) {
-            violations << createViolation(sourceCode, packageNode,
-                'GroupId not configured. Cannot locate package path root.')
             return
         }
 

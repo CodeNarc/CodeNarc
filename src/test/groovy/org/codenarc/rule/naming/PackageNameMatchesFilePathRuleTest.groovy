@@ -40,26 +40,33 @@ class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSourceCodePath_NullOrEmpty() {
-        final SOURCE = '''\
-            package ignore
-        '''
-        sourceCodePath = null
-        assertNoViolations(SOURCE)
-
-        sourceCodePath = ''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
     void testGroupId_NullOrEmpty() {
         final SOURCE = '''\
             package ignore
         '''
         rule.groupId = null
-        assertSingleViolation(SOURCE, 1, 'package ignore', 'GroupId not configured. Cannot locate package path root.')
+        assertNoViolations(SOURCE)
+        assert !rule.ready
+
         rule.groupId = ''
-        assertSingleViolation(SOURCE, 1, 'package ignore', 'GroupId not configured. Cannot locate package path root.')
+        assertNoViolations(SOURCE)
+        assert !rule.ready
+    }
+
+    @Test
+    void testSourceCodePath_NullOrEmpty() {
+        final SOURCE = '''\
+            package ignore
+        '''
+        rule.groupId = 'org.organization'
+
+        sourceCodePath = null
+        assertNoViolations(SOURCE)
+        assert rule.ready
+
+        sourceCodePath = ''
+        assertNoViolations(SOURCE)
+        assert rule.ready
     }
 
     @Test
