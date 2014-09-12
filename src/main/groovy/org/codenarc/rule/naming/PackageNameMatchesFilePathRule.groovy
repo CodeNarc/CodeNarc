@@ -29,11 +29,11 @@ import org.codenarc.source.SourceCode
  *
  * @author Simon Tost
  */
-class PackageNameMismatchesFilepathRule extends AbstractRule {
+class PackageNameMatchesFilePathRule extends AbstractRule {
 
     String groupId
 
-    String name = 'PackageNameMismatchesFilepath'
+    String name = 'PackageNameMatchesFilePath'
     int priority = 1
 
     @Override

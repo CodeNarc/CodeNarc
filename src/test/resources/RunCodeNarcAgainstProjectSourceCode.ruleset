@@ -43,7 +43,7 @@ ruleset {
     ruleset('rulesets/logging.xml')
 
     ruleset('rulesets/naming.xml') {
-        PackageNameMismatchesFilepath(groupId:'org.codenarc')
+        PackageNameMatchesFilePath(groupId:'org.codenarc')
     }
 
     ruleset('rulesets/size.xml') {

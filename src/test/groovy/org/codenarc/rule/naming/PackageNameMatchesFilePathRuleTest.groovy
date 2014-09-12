@@ -25,7 +25,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  *
  * @author Simon Tost
  */
-class PackageNameMismatchesFilepathRuleTest extends AbstractRuleTestCase {
+class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
 
     @Before
     void setup() {
@@ -36,7 +36,7 @@ class PackageNameMismatchesFilepathRuleTest extends AbstractRuleTestCase {
     @Test
     void testRuleProperties() {
         assert rule.priority == 1
-        assert rule.name == 'PackageNameMismatchesFilepath'
+        assert rule.name == 'PackageNameMatchesFilePath'
     }
 
     @Test
@@ -157,7 +157,7 @@ class PackageNameMismatchesFilepathRuleTest extends AbstractRuleTestCase {
     }
 
     protected Rule createRule() {
-        new PackageNameMismatchesFilepathRule()
+        new PackageNameMatchesFilePathRule()
     }
 
     private String filePath(pathPattern) {

@@ -248,7 +248,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
-* {PackageNameMismatchesFilepath} Rule
+* {PackageNameMatchesFilePath} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.22>
 
