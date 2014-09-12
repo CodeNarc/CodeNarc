@@ -149,6 +149,34 @@ class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testMissingSubpackage() {
+        final SOURCE = '''\
+            package org.organization.project.component
+        '''
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.organization.project.component',
+            "The package source file's path (${filePath('org_organization_project_component_module_')}) should match the package declaration",
+        )
+    }
+
+    @Test
+    void testExtraSubpackage() {
+        final SOURCE = '''\
+            package org.organization.project.component.module.extra
+        '''
+        rule.groupId = 'org.organization'
+        assertSingleViolation(
+            SOURCE,
+            1,
+            'package org.organization.project.component.module.extra',
+            "The package source file's path (${filePath('org_organization_project_component_module_')}) should match the package declaration",
+        )
+    }
+
+    @Test
     void testDuplicateOccurenceOfGroupId() {
         sourceCodePath = filePath('src_main_groovy_org_organization_project_org_component_module_MyClass.groovy')
         final SOURCE = '''\
