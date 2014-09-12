@@ -34,7 +34,7 @@ class PackageNameMatchesFilePathRule extends AbstractRule {
     String groupId
 
     String name = 'PackageNameMatchesFilePath'
-    int priority = 1
+    int priority = 2
 
     @Override
     boolean isReady() {

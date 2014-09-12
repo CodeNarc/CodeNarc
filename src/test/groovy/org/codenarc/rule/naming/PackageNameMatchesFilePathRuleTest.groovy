@@ -35,7 +35,7 @@ class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testRuleProperties() {
-        assert rule.priority == 1
+        assert rule.priority == 2
         assert rule.name == 'PackageNameMatchesFilePath'
     }
 
