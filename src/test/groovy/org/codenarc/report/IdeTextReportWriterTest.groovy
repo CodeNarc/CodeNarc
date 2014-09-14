@@ -16,12 +16,12 @@
 package org.codenarc.report
 
 /**
- * Tests for TestReportWriter
+ * Tests for IdeTestReportWriter
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-class TextReportWriterTest extends AbstractTextReportWriterTestCase {
+class IdeTextReportWriterTest extends AbstractTextReportWriterTestCase {
 
     private static final REPORT_TEXT = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
@@ -29,18 +29,18 @@ CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 Summary: TotalFiles=6 FilesWithViolations=3 P1=3 P2=2 P3=3
 
 File: src/main/MyAction.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=AnotherRule P=2 Line=2 Msg=[bad stuff: !@#\$%^&*()_+<>]
-    Violation: Rule=BadStuff P=3 Line=333 Msg=[Other info] Src=[throw new Exception() // Something bad happened]
-    Violation: Rule=BadStuff P=3 Line=333 Msg=[Other info] Src=[throw new Exception() // Something bad happened]
+    Violation: Rule=Rule1 P=1 Loc=..(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=Rule1 P=1 Loc=..(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=AnotherRule P=2 Loc=..(MyAction.groovy:2) Msg=[bad stuff: !@#\$%^&*()_+<>]
+    Violation: Rule=BadStuff P=3 Loc=..(MyAction.groovy:333) Msg=[Other info] Src=[throw new Exception() // Something bad happened]
+    Violation: Rule=BadStuff P=3 Loc=..(MyAction.groovy:333) Msg=[Other info] Src=[throw new Exception() // Something bad happened]
 
 File: src/main/dao/MyDao.groovy
-    Violation: Rule=BadStuff P=3 Line=333 Msg=[Other info] Src=[throw new Exception() // Something bad happened]
+    Violation: Rule=BadStuff P=3 Loc=..(MyDao.groovy:333) Msg=[Other info] Src=[throw new Exception() // Something bad happened]
 
 File: src/main/dao/MyOtherDao.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=AnotherRule P=2 Line=2 Msg=[bad stuff: !@#\$%^&*()_+<>]
+    Violation: Rule=Rule1 P=1 Loc=..(MyOtherDao.groovy:11) Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=AnotherRule P=2 Loc=..(MyOtherDao.groovy:2) Msg=[bad stuff: !@#\$%^&*()_+<>]
 
 [CodeNarc (http://www.codenarc.org) v${version()}]
 """.trim()
@@ -50,17 +50,17 @@ CodeNarc Report: My Cool Project - ${formattedTimestamp()}
 Summary: TotalFiles=6 FilesWithViolations=2 P1=3
 
 File: src/main/MyAction.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=Rule1 P=1 Loc=..(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=Rule1 P=1 Loc=..(MyAction.groovy:11) Src=[if (count < 23 && index <= 99) {]
 
 File: src/main/dao/MyOtherDao.groovy
-    Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
+    Violation: Rule=Rule1 P=1 Loc=..(MyOtherDao.groovy:11) Src=[if (count < 23 && index <= 99) {]
 
 [CodeNarc (http://www.codenarc.org) v${version()}]
 """.trim()
 
     protected TextReportWriter createReportWriter() {
-        return new TextReportWriter(title:TITLE)
+        return new IdeTextReportWriter(title:TITLE)
     }
 
     protected String getReportTextMaxPriority() {

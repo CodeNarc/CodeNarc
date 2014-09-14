@@ -47,12 +47,12 @@ class TextReportWriter extends AbstractReportWriter {
         printWriter.flush()
     }
 
-    private void writeTitle(Writer writer) {
+    protected void writeTitle(Writer writer) {
         def titleString = 'CodeNarc Report' + (title ? ': ' + title : '') + ' - ' + getFormattedTimestamp()
         writer.println(titleString)
     }
 
-    private void writeSummary(Writer writer, Results results) {
+    protected void writeSummary(Writer writer, Results results) {
         def summary = "Summary: TotalFiles=${results.totalNumberOfFiles} " +
             "FilesWithViolations=${results.getNumberOfFilesWithViolations(maxPriority)}"
         (1..maxPriority).each { p ->
@@ -62,7 +62,7 @@ class TextReportWriter extends AbstractReportWriter {
         writer.println(summary)
     }
 
-    private void writePackageViolations(Writer writer, Results results) {
+    protected void writePackageViolations(Writer writer, Results results) {
         results.children.each { child ->
             if (child.isFile()) {
                 writeFileViolations(writer, child)
@@ -73,25 +73,31 @@ class TextReportWriter extends AbstractReportWriter {
         }
     }
 
-    private void writeFileViolations(Writer writer, FileResults results) {
+    protected void writeFileViolations(Writer writer, FileResults results) {
         if (results.violations.find { v -> v.rule.priority <= maxPriority }) {
             writer.println()
             writer.println('File: ' + results.path)
             def violations = results.violations.findAll { v -> v.rule.priority <= maxPriority }
             violations.sort { violation -> violation.rule.priority }.each { violation ->
-                writeViolation(writer, violation)
+                writeViolation(writer, violation, results.path)
             }
         }
     }
 
-    private void writeViolation(Writer writer, Violation violation) {
+    protected void writeViolation(Writer writer, Violation violation, String path) {
         def rule = violation.rule
+        def locationString = getViolationLocationString(violation, path)
         def message = violation.message ? " Msg=[${violation.message}]" : ''
         def sourceLine = violation.sourceLine ? " Src=[${violation.sourceLine}]" : ''
-        writer.println "    Violation: Rule=${rule.name} P=${rule.priority} Line=${violation.lineNumber}$message$sourceLine"
+        writer.println "    Violation: Rule=${rule.name} P=${rule.priority} ${locationString}$message$sourceLine"
     }
 
-    private void writeFooter(Writer writer) {
+    @SuppressWarnings('UnusedMethodParameter')
+    protected String getViolationLocationString(Violation violation, String path) {
+        return "Line=${violation.lineNumber}"
+    }
+
+    protected void writeFooter(Writer writer) {
         writer.println()
         writer.println("[CodeNarc ($CODENARC_URL) v" + getCodeNarcVersion() + ']')
     }

@@ -56,9 +56,9 @@
         </menu>
 
         <menu name="Report Types">
-            <item name="HTML (HtmlReportWriter)" href="/codenarc-HtmlReportWriter.html"/>
-            <item name="XML (XmlReportWriter)" href="/codenarc-XmlReportWriter.html"/>
-            <item name="Text (TextReportWriter)" href="/codenarc-TextReportWriter.html"/>
+            <item name="HTML Report" href="/codenarc-HtmlReportWriter.html"/>
+            <item name="XML Report" href="/codenarc-XmlReportWriter.html"/>
+            <item name="Text and IDE Reports" href="/codenarc-TextReportWriter.html"/>
         </menu>
 
         <menu name="Sample Reports">

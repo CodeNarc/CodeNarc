@@ -1,17 +1,19 @@
-        --------------------------------------------------
-                      CodeNarc TextReportWriter
-        --------------------------------------------------
+        ----------------------------------------------------------
+             CodeNarc TextReportWriter and IdeTextReportWriter
+        ----------------------------------------------------------
 
-TextReportWriter
-~~~~~~~~~~~~~~~~
+TextReportWriter and IdeTextReportWriter
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Description
 ~~~~~~~~~~~~~
 
   The <<<org.codenarc.report.TextReportWriter>>> class (type="text") produces a simple text report of the
-  <<CodeNarc>> results.
+  <<CodeNarc>> results. See a {{{./SampleCodeNarcTextReport.txt}Sample Report}}.
 
-  See a {{{./SampleCodeNarcTextReport.txt}Sample Report}}.
+  The <<<org.codenarc.report.IdeTextReportWriter>>> class (type="ide") also produces a text report of the
+  <<CodeNarc>> results, and includes IDE-compatible (Eclipse, Idea) hyperlinks to source code for violations.
+
 
 * Option Nested Elements
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -19,7 +21,8 @@ TextReportWriter
   The <<option>> element is a child of the <<report>> element and defines a report-specific option
   for a report.
 
-  <<<org.codenarc.report.TextReportWriter>>> supports the following options:
+  The <<<TextReportWriter>>> and <<<IdeTextReportWriter>>> classes
+  supports the following options:
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Attribute>>       | <<Description>>                                                | <<Required>>           |
@@ -37,8 +40,8 @@ TextReportWriter
 |                     | <stdout> (<<<System.out>>>) instead of writing to a file.      |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
-* Example
-~~~~~~~~~
+* Examples
+~~~~~~~~~~
 
   Here is an example Ant XML build file illustrating configuration of
   <<<org.codenarc.report.TextReportWriter>>>. Note that the report <<type>> is specified as <<"text">>.
@@ -52,6 +55,28 @@ TextReportWriter
 
         <report type="text">
             <option name="outputFile" value="reports/CodeNarcReport.txt" />
+            <option name="title" value="My Sample Code" />
+        </report>
+
+        <fileset dir="src">
+            <include name="**/*.groovy"/>
+        </fileset>
+    </codenarc>
+</target>
++----------------------------------------------------------------------------------------
+
+  Here is an example Ant XML build file illustrating configuration of
+  <<<org.codenarc.report.IdeTextReportWriter>>>. Note that the report <<type>> is specified as <<"ide">>.
+  The <<"ide">> report type will automatically write the report to <stdout>.
+
++----------------------------------------------------------------------------------------
+<taskdef name="codenarc" classname="org.codenarc.ant.CodeNarcTask"/>
+<target name="runCodeNarc">
+    <codenarc
+            ruleSetFiles="rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml"
+            maxPriority1Violations="0">
+
+        <report type="ide">
             <option name="title" value="My Sample Code" />
         </report>
 

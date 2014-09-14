@@ -43,7 +43,7 @@ CodeNarc - Ant Task
 | <<Attribute>>        | <<Description>>                                                | <<Required>>           |
 *----------------------+----------------------------------------------------------------+------------------------+
 | type                 | The type of the output report. Must be either one of the       | Yes                    |
-|                      | predefined type names: "html", "xml", "text", "console"        |                        |
+|                      | predefined type names: "html", "xml", "text", "console", "ide" |                        |
 |                      | or else the fully-qualified class name                         |                        |
 |                      | of a class (accessible on the classpath) that implements the   |                        |
 |                      | <<<org.codenarc.report.ReportWriter>>> interface.              |                        |
@@ -54,6 +54,14 @@ CodeNarc - Ant Task
 | title <(Deprecated)> | The title for the output report.                               | No                     |
 |                      | This is deprecated. Use the \<option\> nested element instead. |                        |
 *----------------------+----------------------------------------------------------------+------------------------+
+
+  Notes:
+
+    * The "ide" report <type> creates an <<<IdeTextReportWriter>>> and sets its <writeToStandardOut> property to <<<true>>>.
+      The generated report includes IDE-compatible (Eclipse, Idea) hyperlinks to source code for violations.
+
+    * The "console" report <type> creates a <<<TextReportWriter>>> and sets its <writeToStandardOut> property to <<<true>>>.
+
 
 ** Option Nested Element
 ~~~~~~~~~~~~~~~~~~~~~~~~

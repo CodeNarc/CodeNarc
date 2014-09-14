@@ -46,9 +46,7 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
                include(name:GROOVY_FILES)
            }
 
-           report(type:'text') {
-               option(name:'writeToStandardOut', value:true)
-           }
+           report(type:'ide')
         }
     }
 

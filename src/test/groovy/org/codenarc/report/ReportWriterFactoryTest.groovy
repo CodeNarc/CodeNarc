@@ -52,6 +52,20 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     }
 
     @Test
+    void testGetReportWriter_Console() {
+        def reportWriter = reportWriterFactory.getReportWriter('console')
+        assert reportWriter.class == TextReportWriter
+        assert reportWriter.writeToStandardOut
+    }
+
+    @Test
+    void testGetReportWriter_Ide() {
+        def reportWriter = reportWriterFactory.getReportWriter('ide')
+        assert reportWriter.class == IdeTextReportWriter
+        assert reportWriter.writeToStandardOut
+    }
+
+    @Test
     void testGetReportWriter_SpecifyClassName() {
         assert reportWriterFactory.getReportWriter('org.codenarc.report.HtmlReportWriter').class == HtmlReportWriter
     }
