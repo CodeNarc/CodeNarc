@@ -39,9 +39,10 @@ CodeNarc - Integration with Other Tools / Frameworks
 * Customizing ClassLoader for Loading Rule Scripts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Grails (and possibly other tools integrating with CodeNarc) can benefit from using the current thread context ClassLoader
-  for loading rule script files, rather than the default base ClassLoader. Setting the
-  "codenarc.useCurrentThreadContextClassLoader" system property to "true" uses the current thread context ClassLoader
-  for loading rule script files. That enables Grails to load rule script files from within the Grails project, and allows
-  those rule scripts to reference local classes. See https://jira.grails.org/browse/GPCODENARC-32. The
+  <<Grails>> (and possibly other tools integrating with <<CodeNarc>>) can benefit from using the current thread context
+  <<<ClassLoader>>> for loading rule script files, rather than the default base <<<ClassLoader>>>. Setting the
+  <"codenarc.useCurrentThreadContextClassLoader"> system property to <"true"> uses the current thread context
+  <<<ClassLoader>>> for loading rule script files. That enables <<Grails>> to load rule script files from within
+  the <<Grails>> project, and allows those rule scripts to reference local classes. See
+  {{{https://jira.grails.org/browse/GPCODENARC-32}GPCODENARC-32}}. The
   {{{http://www.grails.org/plugin/codenarc/}Grails CodeNarc Plugin}} automatically sets that system property.
