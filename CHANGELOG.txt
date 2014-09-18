@@ -12,6 +12,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #54: Invalid Cast to BigDecimal. In an XML ruleset or "codenarc.properties", specifying a BigDecimal property value throws an exception.
 - #51: CodeNarc command-line runner always returns 0, even for failure/error. Now return exit status of 1 for all errors.
 - #58: SpaceBeforeOpeningBrace rule: Allow for opening parenthesis before opening brace. (Thanks to Dominik Przybysz)
+- #158 SpaceAfterClosingBrace - allow semicolons following closing brace.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #435: IdeTextReportWriter: Text report formatter that includes automatic IDE (Eclipse/Idea) hyperlinks to source code. Provide new “ide” report type in ReportWriterFactory.
