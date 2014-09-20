@@ -37,6 +37,13 @@ class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMapEntryExpression(MapEntryExpression expression) {
+        if (expression.lineNumber != -1) {
+            handleMapExpression(expression)
+        }
+        super.visitMapEntryExpression(expression)
+    }
+
+    private void handleMapExpression(MapEntryExpression expression) {
         def line = sourceLine(expression)
         def colonIndex = expression.lastColumnNumber - 1
         def charBeforeColon = line[colonIndex - 2]
@@ -52,7 +59,6 @@ class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
             String keyName = expression.keyExpression.text
             addViolation(expression, violationMessage(keyName, 'followed', rule.characterAfterColonRegex))
         }
-        super.visitMapEntryExpression(expression)
     }
 
     private String violationMessage(String keyName, String precededOrFollowed, String regex) {
