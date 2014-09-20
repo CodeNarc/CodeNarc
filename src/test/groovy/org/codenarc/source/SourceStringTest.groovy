@@ -151,19 +151,19 @@ class SourceStringTest extends AbstractTestCase {
         final NEW_SOURCE = '\nclass MyClass { \r\n  try {\n} catch(MyException e) {\n// TODO \n }\n }\n'
         NEW_SOURCE.eachWithIndex { ch, i -> print "$i=${(int)(ch as char)} " }
         sourceString = new SourceString(NEW_SOURCE)
-        assert sourceString.getLineNumberForCharacterIndex(0) == 0
-        assert sourceString.getLineNumberForCharacterIndex(1) == 1
-        assert sourceString.getLineNumberForCharacterIndex(18) == 1
-        assert sourceString.getLineNumberForCharacterIndex(19) == 2
-        assert sourceString.getLineNumberForCharacterIndex(26) == 2
-        assert sourceString.getLineNumberForCharacterIndex(27) == 3
-        assert sourceString.getLineNumberForCharacterIndex(51) == 3
-        assert sourceString.getLineNumberForCharacterIndex(52) == 4
-        assert sourceString.getLineNumberForCharacterIndex(60) == 4
-        assert sourceString.getLineNumberForCharacterIndex(61) == 5
-        assert sourceString.getLineNumberForCharacterIndex(63) == 5
-        assert sourceString.getLineNumberForCharacterIndex(64) == 6
-        assert sourceString.getLineNumberForCharacterIndex(66) == 6
+        assert sourceString.getLineNumberForCharacterIndex(0) == 1
+        assert sourceString.getLineNumberForCharacterIndex(1) == 2
+        assert sourceString.getLineNumberForCharacterIndex(18) == 2
+        assert sourceString.getLineNumberForCharacterIndex(19) == 3
+        assert sourceString.getLineNumberForCharacterIndex(26) == 3
+        assert sourceString.getLineNumberForCharacterIndex(27) == 4
+        assert sourceString.getLineNumberForCharacterIndex(51) == 4
+        assert sourceString.getLineNumberForCharacterIndex(52) == 5
+        assert sourceString.getLineNumberForCharacterIndex(60) == 5
+        assert sourceString.getLineNumberForCharacterIndex(61) == 6
+        assert sourceString.getLineNumberForCharacterIndex(63) == 6
+        assert sourceString.getLineNumberForCharacterIndex(64) == 7
+        assert sourceString.getLineNumberForCharacterIndex(66) == 7
         assert sourceString.getLineNumberForCharacterIndex(67) == -1
         assert sourceString.getLineNumberForCharacterIndex(999) == -1
         assert sourceString.getLineNumberForCharacterIndex(-1) == -1

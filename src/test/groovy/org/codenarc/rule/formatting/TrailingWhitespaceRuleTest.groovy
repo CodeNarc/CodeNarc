@@ -50,19 +50,19 @@ class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
     @Test
     void testLineEndingWithMultipleSpaces() {
         final SOURCE = 'class MyClass {}    \n'
-        assertSingleViolation(SOURCE, 0, 'class MyClass {}    ', 'Line ends with whitespace characters')
+        assertSingleViolation(SOURCE, 1, 'class MyClass {}    ', 'Line ends with whitespace characters')
     }
 
     @Test
     void testLineEndingWithOneSpace() {
         final SOURCE = 'class MyClass {} \n'
-        assertSingleViolation(SOURCE, 0, 'class MyClass {} ', 'Line ends with whitespace characters')
+        assertSingleViolation(SOURCE, 1, 'class MyClass {} ', 'Line ends with whitespace characters')
     }
 
     @Test
     void testLineEndingWithATab() {
         final SOURCE = 'class MyClass {}\t\n'
-        assertSingleViolation(SOURCE, 0, 'class MyClass {}\t', 'Line ends with whitespace characters')
+        assertSingleViolation(SOURCE, 1, 'class MyClass {}\t', 'Line ends with whitespace characters')
     }
 
     @Test
@@ -77,11 +77,11 @@ class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
             '}\t\n'
         def msg = 'Line ends with whitespace characters'
         assertViolations(SOURCE, [
-            [lineNumber: 0, sourceLineText: 'package org.codenarc ', messageText: msg],
-            [lineNumber: 2, sourceLineText: 'class MyClass {\t', messageText: msg],
-            [lineNumber: 4, sourceLineText: '    def go() { /* ... */ }  ', messageText: msg],
-            [lineNumber: 5, sourceLineText: '    ', messageText: msg],
-            [lineNumber: 7, sourceLineText: '}\t', messageText: msg],
+            [lineNumber: 1, sourceLineText: 'package org.codenarc ', messageText: msg],
+            [lineNumber: 3, sourceLineText: 'class MyClass {\t', messageText: msg],
+            [lineNumber: 5, sourceLineText: '    def go() { /* ... */ }  ', messageText: msg],
+            [lineNumber: 6, sourceLineText: '    ', messageText: msg],
+            [lineNumber: 8, sourceLineText: '}\t', messageText: msg],
         ] as Map[])
     }
 

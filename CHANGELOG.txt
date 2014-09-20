@@ -14,6 +14,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #58: SpaceBeforeOpeningBrace rule: Allow for opening parenthesis before opening brace. (Thanks to Dominik Przybysz)
 - #158 SpaceAfterClosingBrace rule: allow semicolons following closing brace.
 - #155: SpaceAroundMapEntryColon rule: Using spread map operator (*:) causes to fail with ArrayIndexOutOfBoundsException
+- #154: Line numbers for violations of TrailingWhitespace rule are 0-based. Fix AbstractSourceCode.getLineNumberForCharacterIndex() to be 1-based.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #435: IdeTextReportWriter: Text report formatter that includes automatic IDE (Eclipse/Idea) hyperlinks to source code. Provide new “ide” report type in ReportWriterFactory.

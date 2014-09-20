@@ -49,7 +49,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
             class MyClass {
             }
         '''
-        assertSingleViolation(SOURCE, 1, '@author Joe', ['regular expression', REGEX])
+        assertSingleViolation(SOURCE, 2, '@author Joe', ['regular expression', REGEX])
     }
 
     @Test
@@ -61,8 +61,8 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
             // Other @author Joe
         '''
         assertTwoViolations(SOURCE,
-                1, '@author Joe', ['regular expression', REGEX],
-                4, '@author Joe', ['regular expression', REGEX])
+                2, '@author Joe', ['regular expression', REGEX],
+                5, '@author Joe', ['regular expression', REGEX])
     }
 
     @Test
@@ -83,7 +83,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.violationMessage = 'abc123'
-        assertSingleViolation(SOURCE, 1, '@author Joe', 'abc123')
+        assertSingleViolation(SOURCE, 2, '@author Joe', 'abc123')
     }
 
     protected Rule createRule() {

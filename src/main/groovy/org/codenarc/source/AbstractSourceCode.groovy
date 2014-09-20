@@ -145,7 +145,7 @@ abstract class AbstractSourceCode implements SourceCode {
      * @return the line number (one-based) containing the specified character; Return -1 if charIndex is not valid.
      */
     int getLineNumberForCharacterIndex(int charIndex) {
-        int lineCount = 0
+        int lineCount = 1
         def source = getText()
         if (charIndex >= source.size() || charIndex < 0) {
             return -1

@@ -96,9 +96,9 @@ class SourceFileTest extends AbstractTestCase {
 
     @Test
     void testGetLineNumberForCharacterIndex() {
-        assert sourceFile.getLineNumberForCharacterIndex(0) == 0
-        assert sourceFile.getLineNumberForCharacterIndex(1) == 0
-        assert sourceFile.getLineNumberForCharacterIndex(21) == 1
+        assert sourceFile.getLineNumberForCharacterIndex(0) == 1
+        assert sourceFile.getLineNumberForCharacterIndex(1) == 1
+        assert sourceFile.getLineNumberForCharacterIndex(21) == 2
         assert sourceFile.getLineNumberForCharacterIndex(999) == -1
         assert sourceFile.getLineNumberForCharacterIndex(-1) == -1
     }
