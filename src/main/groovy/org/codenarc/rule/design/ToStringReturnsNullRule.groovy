@@ -16,6 +16,7 @@
 package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
@@ -49,6 +50,10 @@ class ToStringReturnsNullAstVisitor extends AbstractAstVisitor {
             checkForImplicitNullReturns(node, errorMessage)
         }
         super.visitMethodEx(node)
+    }
+
+    void handleClosure(ClosureExpression expression) {
+        super.visitClosureExpression(expression)
     }
 
     private void checkForImplicitNullReturns(MethodNode node, String errorMessage) {

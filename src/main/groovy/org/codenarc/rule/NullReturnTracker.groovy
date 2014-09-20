@@ -28,6 +28,9 @@ import org.codehaus.groovy.ast.stmt.ReturnStatement
  */
 class NullReturnTracker extends AbstractAstVisitor {
 
+    // NOTE: The provided parent must be a subclass of AbstractAstVisitor and
+    //       implement the void handleClosure(ClosureExpression expression) method
+
     def parent
     def errorMessage
     void visitReturnStatement(ReturnStatement statement) {

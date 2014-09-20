@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.design
 
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ToStringReturnsNullRule
@@ -112,6 +112,23 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase {
         '''
         assertViolations(SOURCE,
             [lineNumber:7, sourceLineText:'return null', messageText:ERROR_MESSAGE])
+    }
+
+    @Test
+    void testToString_ContainsClosure_NoViolation() {
+        final SOURCE = '''
+            class MyClass {
+                @Override
+                String toString() {
+                    StringBuilder sb = new StringBuilder()
+                    (1..10).each { int index ->
+                        sb << getCharacter[index]
+                    }
+                    return sb.toString();
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
