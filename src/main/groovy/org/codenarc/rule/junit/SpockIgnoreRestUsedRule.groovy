@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
+import org.codenarc.util.WildcardPattern
 
 /**
  * If Spock's @IgnoreRest on any method, all non-annotated test methods are not executed. This behaviour is almost always
@@ -26,28 +27,35 @@ import org.codenarc.rule.AbstractMethodVisitor
  *
  * @author Jan Ahrens
  * @author Stefan Armbruster
+ * @author Chris Mair
   */
 class SpockIgnoreRestUsedRule extends AbstractAstVisitorRule {
+
     String name = 'SpockIgnoreRestUsed'
     int priority = 2
+    String specificationSuperclassNames = '*Specification'
+    String specificationClassNames = null
     Class astVisitorClass = SpockIgnoreRestUsedAstVisitor
 }
 
 class SpockIgnoreRestUsedAstVisitor extends AbstractMethodVisitor {
 
-    private final static ACC_PUBLIC = 1
-    private final static CANDIDATE_SUPER_CLASSNODES = ['spock.lang.Specification', 'Specification'].collect { new ClassNode(it, ACC_PUBLIC, null) }
+    @Override
+    void visitClass(ClassNode node) {
+        def superClassPattern = new WildcardPattern(rule.specificationSuperclassNames)
+        def classNamePattern = new WildcardPattern(rule.specificationClassNames, false)
+        if (superClassPattern.matches(node.superClass.name) || classNamePattern.matches(node.name)) {
+            super.visitClass(node)
+        }
+    }
 
     @Override
     void visitMethod(MethodNode node) {
-        if (CANDIDATE_SUPER_CLASSNODES.any { node.declaringClass.isDerivedFrom(it) }) {
-
-            def hasIgnoreRest = node.annotations.any {
-                it.classNode.nameWithoutPackage == 'IgnoreRest'
-            }
-            if (hasIgnoreRest) {
-                addViolation(node, "The method '$node.name' in class $node.declaringClass.name uses @IgnoreRest")
-            }
+        def hasIgnoreRest = node.annotations.any {
+            it.classNode.nameWithoutPackage == 'IgnoreRest'
+        }
+        if (hasIgnoreRest) {
+            addViolation(node, "The method '$node.name' in class $node.declaringClass.name uses @IgnoreRest")
         }
     }
 }

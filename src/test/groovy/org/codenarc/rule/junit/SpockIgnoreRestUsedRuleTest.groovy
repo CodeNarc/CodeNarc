@@ -31,10 +31,12 @@ class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'SpockIgnoreRestUsed'
+        assert rule.specificationSuperclassNames == '*Specification'
+        assert rule.specificationClassNames == null
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoIgnoreRest_NoViolations() {
         final SOURCE = '''
             public class MySpec extends spock.lang.Specification {
                 def "my first feature"() {
@@ -54,7 +56,7 @@ class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSuccessWithNonSpecificationClass() {
+    void testIgnoreRestWithNonSpecificationClass_NoViolations() {
         final SOURCE = '''
             public class SomeFancyClass  { // I'm not a spec
                 def "my first feature"() {
@@ -117,7 +119,49 @@ class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def "my first feature"() {', "The method 'my first feature' in class MySpec uses @IgnoreRest")
     }
 
-   protected Rule createRule() {
+    @Test
+    void testIgnoreRest_specificationSuperclassNames_Violation() {
+        final SOURCE = '''\
+            class MySpec extends OtherBaseClass {
+                @spock.lang.IgnoreRest
+                def "my first feature"() {
+                    expect: false
+                }
+            }
+        '''.stripIndent()
+        rule.specificationSuperclassNames = 'OtherBaseClass'
+        assertSingleViolation(SOURCE, 3, 'def "my first feature"() {', "The method 'my first feature' in class MySpec uses @IgnoreRest")
+    }
+
+    @Test
+    void testIgnoreRest_specificationClassNames_DoesNotMatch_NoViolations() {
+        final SOURCE = '''\
+            class MySpec extends OtherBaseClass {
+                @spock.lang.IgnoreRest
+                def "my first feature"() {
+                    expect: false
+                }
+            }
+        '''.stripIndent()
+        rule.specificationClassNames = 'OtherName'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testIgnoreRest_specificationClassNames_Matches_Violation() {
+        final SOURCE = '''\
+            class MySpec extends OtherBaseClass {
+                @spock.lang.IgnoreRest
+                def "my first feature"() {
+                    expect: false
+                }
+            }
+        '''.stripIndent()
+        rule.specificationClassNames = '*Spec'
+        assertSingleViolation(SOURCE, 3, 'def "my first feature"() {', "The method 'my first feature' in class MySpec uses @IgnoreRest")
+    }
+
+    protected Rule createRule() {
         new SpockIgnoreRestUsedRule()
     }
 }
