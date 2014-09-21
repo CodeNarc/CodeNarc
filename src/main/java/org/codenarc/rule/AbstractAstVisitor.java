@@ -159,16 +159,22 @@ public class AbstractAstVisitor extends ClassCodeVisitorSupportHack implements A
     }
 
     public final void visitMethod(final MethodNode node) {
-        visitMethodEx(node);
-        if (node != null && node.getParameters() != null) {
-            for (Parameter parameter : node.getParameters()) {
-                if (parameter.hasInitialExpression()) {
-                    parameter.getInitialExpression().visit(AbstractAstVisitor.this);
+        if (shouldVisitMethod(node)) {
+            visitMethodEx(node);
+            if (node != null && node.getParameters() != null) {
+                for (Parameter parameter : node.getParameters()) {
+                    if (parameter.hasInitialExpression()) {
+                        parameter.getInitialExpression().visit(AbstractAstVisitor.this);
+                    }
                 }
             }
+            super.visitMethod(node);
+            visitMethodComplete(node);
         }
-        super.visitMethod(node);
-        visitMethodComplete(node);
+    }
+
+    protected boolean shouldVisitMethod(MethodNode node) {
+        return true;
     }
 
     protected void visitMethodComplete(MethodNode node) {

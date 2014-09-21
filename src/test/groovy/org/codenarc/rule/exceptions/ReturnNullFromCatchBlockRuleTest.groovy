@@ -33,7 +33,7 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSuccessScenario() {
+    void testReturnsVariable_NoViolation() {
         final SOURCE = '''
       	    def x = null
         	try {
@@ -48,10 +48,10 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testTwoExceptions() {
+    void testExplicitReturnNull() {
         final SOURCE = '''
         	try {
-      	    def x = null
+      	        def x = null
                 return x
         	} catch (IOException e) {
                 return null
@@ -63,6 +63,46 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE,
                 6, 'return null',
                 9, 'return null')
+    }
+
+    @Test
+    void testImplicitReturnNull_Violation() {
+        final SOURCE = '''
+        	try {
+      	        doStuff()
+            } catch (Exception e) {
+                return
+            }
+        '''
+        assertSingleViolation(SOURCE, 5, 'return')
+    }
+
+    @Test
+    void testNonVoidMethod_ImplicitReturnNull_Violation() {
+        final SOURCE = '''
+            def doStuff() {
+                try {
+                    doStuff()
+                } catch (Exception e) {
+                    return
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 6, 'return')
+    }
+
+    @Test
+    void testVoidMethod_ImplicitReturnNull_NoViolation() {
+        final SOURCE = '''
+            void doStuff() {
+                try {
+                    doStuff()
+                } catch (Exception e) {
+                    return
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

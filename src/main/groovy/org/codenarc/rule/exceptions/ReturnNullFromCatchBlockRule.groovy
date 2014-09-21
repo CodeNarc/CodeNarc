@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.CatchStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
@@ -23,9 +24,11 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Returning null from a catch block often masks errors and requires the client to handle error codes. In some coding styles this is discouraged. 
+ * Returning null from a catch block often masks errors and requires the client to handle error codes.
+ * In some coding styles this is discouraged. This rule ignores methods with void return type.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class ReturnNullFromCatchBlockRule extends AbstractAstVisitorRule {
     String name = 'ReturnNullFromCatchBlock'
@@ -34,6 +37,12 @@ class ReturnNullFromCatchBlockRule extends AbstractAstVisitorRule {
 }
 
 class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
+
+    @Override
+    protected boolean shouldVisitMethod(MethodNode node) {
+        // Ignore void methods
+        return node.returnType.getTypeClass() != Void.TYPE
+    }
 
     void visitCatchStatement(CatchStatement node) {
         def lastStatement = getLastStatement(node)
