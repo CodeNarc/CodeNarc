@@ -59,6 +59,15 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_NumbersWithinFirstPartOfThePackageName() {
+        final SOURCE = '''
+            package t3
+            class MyClass { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_MatchesDefaultRegex_Numbers() {
         final SOURCE = '''
             package mypackage.base.i18n

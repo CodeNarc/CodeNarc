@@ -25,7 +25,7 @@ import org.codenarc.rule.Violation
  * package name consists of only lowercase letters and numbers, separated by periods.
  * <p/>
  * The <code>regex</code> property specifies the regular expression to check the package name against. It is
- * required and cannot be null or empty. It defaults to '[a-z]+(\.[a-z0-9]+)*'.
+ * required and cannot be null or empty. It defaults to '[a-z]+[a-z0-9]*(\.[a-z0-9]+)*'.
  * <p/>
  * The <code>packageNameRequired</code> property indicates whether a package name declaration is required for
  * all classes. It defaults to false.
@@ -37,7 +37,7 @@ class PackageNameRule extends AbstractAstVisitorRule {
     String name = 'PackageName'
     int priority = 2
     Class astVisitorClass = PackageNameAstVisitor
-    String regex = /[a-z]+(\.[a-z0-9]+)*/
+    String regex = /[a-z]+[a-z0-9]*(\.[a-z0-9]+)*/
     boolean packageNameRequired = false
 }
 
