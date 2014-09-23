@@ -41,7 +41,7 @@ class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
     @Override
     protected boolean shouldVisitMethod(MethodNode node) {
         // Ignore void methods
-        return node.returnType.getTypeClass() != Void.TYPE
+        return node.returnType.toString() != 'void'
     }
 
     void visitCatchStatement(CatchStatement node) {
