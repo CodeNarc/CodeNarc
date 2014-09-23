@@ -207,6 +207,7 @@ ruleset {
     ObjectFinalize 
     ObjectOverrideMisspelledMethodName 
     PackageName 
+    PackageNameMatchesFilePath 
     ParameterName 
     ParameterReassignment 
     PrintStackTrace 

@@ -5,6 +5,7 @@ http://www.codenarc.org
 Changes in version 0.22 (Oct 2014)
 --------------------------------------
 NEW RULES
+- #56: PackageMatchesFilePath rule (naming) - A package source file's path should match the package itself. (Thanks to Simon Tost)
 
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #157: Enable optionally using Thread Context classpath for loading rule scripts. Introduce "codenarc.useCurrentThreadContextClassLoader" system property. See https://jira.grails.org/browse/GPCODENARC-32.

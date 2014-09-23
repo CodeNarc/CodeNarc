@@ -300,6 +300,7 @@ ruleset {
     MethodName 
     ObjectOverrideMisspelledMethodName 
     PackageName 
+    PackageNameMatchesFilePath 
     ParameterName 
     PropertyName 
     VariableName 
