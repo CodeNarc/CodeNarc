@@ -93,6 +93,51 @@ class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testImportFrom_NoViolation() {
+        final SOURCE = '''
+            class Person {
+                String firstName
+                String lastName
+                static constraints = {
+                    importFrom Entity, include: ["firstName"]
+                    importFrom Entity, include: ["lastName"]
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testImportFrom_SameImportViolation() {
+        final SOURCE = '''
+            class Person {
+                String firstName
+                String lastName
+                static constraints = {
+                    importFrom Entity, include: ["firstName"]
+                    importFrom Entity, include: ["firstName"]
+                }
+            }
+        '''
+        assertViolations(SOURCE, [lineNumber:7, sourceLineText:'importFrom Entity, include: ["firstName"]', messageText:'The constraint for firstName in domain class Person has already been specified'])
+    }
+
+    @Test
+    void testImportFrom_ImportAndRegularConstraintViolation() {
+        final SOURCE = '''
+            class Person {
+                String firstName
+                String lastName
+                static constraints = {
+                    importFrom Entity, include: ["firstName"]
+                    firstName blank: false
+                }
+            }
+        '''
+        assertViolations(SOURCE, [lineNumber:7, sourceLineText:'firstName blank: false', messageText:'The constraint for firstName in domain class Person has already been specified'])
+    }
+
+    @Test
     void testMappingsAndConstraints_NoViolation() {
         final SOURCE = '''
             class Person {

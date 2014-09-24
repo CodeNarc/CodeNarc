@@ -50,13 +50,35 @@ class GrailsDuplicateConstraintAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (withinConstraint && isFirstVisit(call)) {
-            def name = call.methodAsString
-            if (name in constraintNames) {
-                addViolation(call, "The constraint for $name in domain class $currentClassName has already been specified")
+            String methodName = call.methodAsString
+            if (methodName == 'importFrom') {
+                Collection importedConstraintNames = extractImportedConstraints(call.text)
+                constraintNames.intersect(importedConstraintNames).each {
+                    addViolation(call, "The constraint for $it in domain class $currentClassName has already been specified")
+                }
+                constraintNames.addAll(importedConstraintNames)
+            }
+            else if (methodName in constraintNames) {
+                addViolation(call, "The constraint for $methodName in domain class $currentClassName has already been specified")
             }
             else {
-                constraintNames << name
+                constraintNames << methodName
             }
         }
+    }
+
+    /**
+     * Extract the properties included in an importFrom constraint definition.  So far this just handles included properties.
+     * It doesn't currently support extracting all the properties from the given class, so no exclude: support either.
+     * @param text - e.g. "this.importFrom([include:[firstName]], Entity)"
+     * @return the collection of properties specifically included
+     */
+    private static Collection extractImportedConstraints(String text) {
+        Collection importedConstraintNames = []
+        if (text.indexOf('include:') > 0) {
+            String collectionString =  text[(text.lastIndexOf('[') + 1)..(text.indexOf(']') - 1)]
+            importedConstraintNames = collectionString.split(',')
+        }
+        importedConstraintNames
     }
 }
