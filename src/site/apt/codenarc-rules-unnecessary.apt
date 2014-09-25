@@ -94,7 +94,13 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   or the 'G' identifier to force the type, such as <<<123.45>>> or <<<123.45G>>>.
 
   This rule does not produce violations when the parameter evaluates to an integer/long, e.g.
-  <<<new BigDecimal(42)>>>, <<<new BigDecimal(42L)>>> or <<<new BigDecimal("42")>>>.
+  <<<new BigDecimal(42)>>>, <<<new BigDecimal(42L)>>> or <<<new BigDecimal("42")>>>, because using the
+  "G" suffix on an integer value produces a <<<BigInteger>>>, rather than a <<<BigDecimal>>>, e.g. <<<45G>>>.
+  So that means there is no way to produce a <<<BigDecimal>>> with exactly that value using a literal.
+
+  This rule also does not produce violations when the parameter is a double, e.g. <<<new BigDecimal(12.3)>>>.
+  That scenario is covered by the {{{codenarc-rules-basic.html#BigDecimalInstantiation}BigDecimalInstantiation}}
+  rule, because that produces an unpredictable (double) value (and so it is <unsafe>, rather than <unnecessary>).
 
 
 * {UnnecessaryBigIntegerInstantiation} Rule
