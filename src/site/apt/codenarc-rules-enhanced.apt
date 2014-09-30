@@ -10,6 +10,10 @@ Enhanced Classpath Rules ("<rulesets/enhanced.xml>")
   compiler phase requires <<CodeNarc>> to have the application classes being analyzed, as well as
   any referenced classes, on the classpath.
 
+  Note that these rules may be reorganized and moved to a other rulesets or packages. If possible, include
+  them individually within your ruleset -- refer to them using the rule name, e.g. "CloneWithoutCloneable",
+  rather that pulling in the entire "<rulesets/enhanced.xml>" ruleset, to protect against future reorganization.
+
 
 * {CloneWithoutCloneable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
