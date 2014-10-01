@@ -184,6 +184,17 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_ReferencedWithinGString() {
+        final SOURCE = '''
+            def doSomething() {
+                def value = null
+                println "value=$value"
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_ReferenceClosureVariableByInvokingIt() {
         final SOURCE = '''
             class MyClass {
