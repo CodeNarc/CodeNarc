@@ -19,6 +19,7 @@
     <rule class='org.codenarc.rule.design.EmptyMethodInAbstractClassRule'/>
     <rule class='org.codenarc.rule.design.FinalClassWithProtectedMemberRule'/>
     <rule class='org.codenarc.rule.design.ImplementationAsTypeRule'/>
+    <rule class='org.codenarc.rule.design.InstanceofRule'/>
     <rule class='org.codenarc.rule.design.LocaleSetDefaultRule'/>
     <rule class='org.codenarc.rule.design.PublicInstanceFieldRule'/>
     <rule class='org.codenarc.rule.design.PrivateFieldCouldBeFinalRule'/>

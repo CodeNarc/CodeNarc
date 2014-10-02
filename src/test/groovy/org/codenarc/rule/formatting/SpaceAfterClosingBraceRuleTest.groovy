@@ -252,8 +252,18 @@ c        '''
     void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
         final SOURCE = '''
             def m = [a:123, b:{ println 7 }]
-       '''
+        '''
         rule.checkClosureMapEntryValue = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ClosingBraceWithinStringLiteral_NoViolations() {
+        final SOURCE = '''
+            def doStuff() {
+                def things = new ObjectMapper().readValue('{}', new TypeReference<List<Thing>>() {} )
+            }
+        '''
         assertNoViolations(SOURCE)
     }
 

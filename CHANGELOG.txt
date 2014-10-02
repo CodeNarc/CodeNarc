@@ -6,6 +6,7 @@ Changes in version 0.22 (Oct 2014)
 --------------------------------------
 NEW RULES
 - #56: PackageMatchesFilePath rule (naming) - A package source file's path should match the package itself. (Thanks to Simon Tost)
+- #150: Instanceof rule (design) - Checks for use of the instanceof operator. Use ignoreTypeNames property to configure ignored type names.
 
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #157: Enable optionally using Thread Context classpath for loading rule scripts. Introduce "codenarc.useCurrentThreadContextClassLoader" system property. See https://jira.grails.org/browse/GPCODENARC-32.
@@ -18,11 +19,11 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #154: Line numbers for violations of TrailingWhitespace rule are 0-based. Same for IllegalRegex rule. Fix AbstractSourceCode.getLineNumberForCharacterIndex() to be 1-based.
 - #159: ToStringReturnsNullRule: throws "No signature of method handleClosure()" exception if toString() contains a Closure.
 - #53: SpockIgnoreRestUsed not working in tests extending a class that descends from Specification. Add specificationSuperclassNames and specificationClassNames properties.
-- #160: PackageName rule: Fix to allow package name containing numbers in first part, e.g. “t3”. Change package name regex to /[a-z]+[a-z0-9]*(\.[a-z0-9]+)*/.
+- #160: PackageName rule: Fix to allow package name containing numbers in first part, e.g. �t3�. Change package name regex to /[a-z]+[a-z0-9]*(\.[a-z0-9]+)*/.
 - #161: ReturnNullFromCatchBlock: Reports return statement from within a void method. Add boolean shouldVisitMethod(MethodNode node) to AbstractAstVisitor.
 
 FRAMEWORK AND INFRASTRUCTURE
-- #435: IdeTextReportWriter: Text report formatter that includes automatic IDE (Eclipse/Idea) hyperlinks to source code. Provide new “ide” report type in ReportWriterFactory.
+- #435: IdeTextReportWriter: Text report formatter that includes automatic IDE (Eclipse/Idea) hyperlinks to source code. Provide new �ide� report type in ReportWriterFactory.
 
 
 Changes in version 0.21 (April 2014)

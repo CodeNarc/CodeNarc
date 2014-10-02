@@ -252,6 +252,32 @@ Design Rules  ("<rulesets/design.xml>")
 -------------------------------------------------------------------------------
 
 
+* {Instanceof} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <Since CodeNarc 0.22>
+
+  Checks for use of the <<<instanceof>>> operator. Use the <<<ignoreTypeNames>>> property to configure ignored type
+  names (the class name specified as the right-hand expression of the <<<instanceof>>>). It defaults to ignoring
+  <<<instanceof>>> checks against exception classes.
+
+*-------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>      | <<Description>>                                                | <<Default Value>>      |
+*-------------------+----------------------------------------------------------------+------------------------+
+| ignoreTypeNames   | Specifies one or more (comma-separated) class names that       | *Exceptions            |
+|                   | should be ignored (i.e., that should not cause a rule          |                        |
+|                   | violation). The names may optionally contain wildcards (*,?).  |                        |
+*-------------------+----------------------------------------------------------------+------------------------+
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        boolean isRunnable = this instanceof Runnable       // violation
+    }
+-------------------------------------------------------------------------------
+
+
 * {LocaleSetDefault} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.20>
@@ -416,3 +442,4 @@ Design Rules  ("<rulesets/design.xml>")
         }
     }
 -------------------------------------------------------------------------------
+

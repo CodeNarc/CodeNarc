@@ -447,6 +447,7 @@
         <w>gradle</w>
         <w>groovyism</w>
         <w>hashtable</w>
+        <w>instanceof</w>
         <w>jdbc</w>
         <w>junit</w>
         <w>plugins</w>

@@ -11,7 +11,9 @@ ruleset {
 
     ruleset('rulesets/convention.xml')
 
-    ruleset('rulesets/design.xml')
+    ruleset('rulesets/design.xml') {
+        Instanceof(enabled:false)
+    }
 
     ruleset('rulesets/dry.xml') {
         include 'DuplicateMapLiteral'

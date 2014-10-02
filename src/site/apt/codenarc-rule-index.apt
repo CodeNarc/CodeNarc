@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 338 rules.
+  <<CodeNarc>> includes 339 rules.
 
     
       
@@ -309,6 +309,9 @@ Rule Index
     
       
     * {{{codenarc-rules-design.html#ImplementationAsType}ImplementationAsType}}  
+    
+      
+    * {{{codenarc-rules-design.html#Instanceof}Instanceof}}  
     
       
     * {{{codenarc-rules-design.html#LocaleSetDefault}LocaleSetDefault}}  

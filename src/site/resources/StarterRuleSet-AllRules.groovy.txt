@@ -162,6 +162,7 @@ ruleset {
     InconsistentPropertyLocking 
     InconsistentPropertySynchronization 
     InsecureRandom 
+    Instanceof 
     IntegerGetInteger 
     InterfaceName 
     InvertedIfElse 
