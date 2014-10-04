@@ -37,6 +37,7 @@ class SpaceAfterOpeningBraceRule extends AbstractAstVisitorRule {
     int priority = 3
     Class astVisitorClass = SpaceAfterOpeningBraceAstVisitor
     boolean checkClosureMapEntryValue = true
+    boolean allowForEmptyBlock = false
 }
 
 class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
@@ -45,7 +46,7 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     protected void visitClassEx(ClassNode node) {
         def line = sourceLineOrEmpty(node)
         def indexOfBrace = line.indexOf('{')
-        if (indexOfBrace != -1 && isNotWhitespace(line, indexOfBrace + 2)) {
+        if (indexOfBrace != -1 && isNotWhitespace(line, indexOfBrace + 2) && checkIsEmptyBlock(line, indexOfBrace + 2)) {
             def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
             addViolation(node, "The opening brace for $typeName $currentClassName is not followed by a space or whitespace")
         }
@@ -70,7 +71,7 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
         if (isFirstVisit(block) && !AstUtil.isFromGeneratedSourceCode(block)) {
             def line = sourceLineOrEmpty(block)
             def startCol = block.columnNumber
-            if (line[startCol - 1] == '{' && isNotWhitespace(line, startCol + 1)) {
+            if (line[startCol - 1] == '{' && isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
                 addOpeningBraceViolation(block, 'block')
             }
         }
@@ -83,7 +84,7 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
         if (isFirstVisit(expression)) {
             def line = sourceLineOrEmpty(expression)
             def startCol = expression.columnNumber
-            if (isNotWhitespace(line, startCol + 1)) {
+            if (isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
@@ -111,6 +112,13 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {
         addViolation(node, "The opening brace for the $keyword in class $currentClassName is not followed by a space or whitespace")
+    }
+
+    private boolean checkIsEmptyBlock(String line, int indexOfBrace) {
+        if (rule.allowForEmptyBlock ) {
+            return isNotCharacter(line, '}' as char, indexOfBrace)
+        }
+        return true
     }
 
 }

@@ -42,6 +42,10 @@ abstract class AbstractSpaceAroundBraceAstVisitor extends AbstractAstVisitor {
         index >= 1 && index <= line.size() && !Character.isWhitespace(line[index - 1] as char)
     }
 
+    protected boolean isNotCharacter(String line, char c, int index) {
+        index >= 1 && index <= line.size() && line[index - 1] as char != c
+    }
+
     protected int indexOfClosingBrace(String line, int blockLastColumn) {
         int index = blockLastColumn - 2
         while(index >= 0) {
