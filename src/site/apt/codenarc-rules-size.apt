@@ -387,6 +387,10 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 |                     | violation). The names may optionally contain wildcards (*,?).  |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
+  Known Limitations:
+
+   * Annotations on a method are included in the size (line count) for that method.
+
 
 * {NestedBlockDepthRule} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

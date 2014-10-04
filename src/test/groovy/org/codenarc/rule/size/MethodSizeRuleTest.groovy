@@ -93,6 +93,19 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_CountsAnnotationsInNumberOfLines() {
+        final SOURCE = '''
+            class MyClass {
+                @Override
+                def myMethod() {
+                    println 123
+                }
+            }'''
+        rule.maxLines = 3
+        assertSingleViolation(SOURCE, 3, null, 'myMethod')
+    }
+
+    @Test
     void testApplyTo_IgnoreMethodNames_MatchesSingleName() {
         final SOURCE = '''
           class MyClass {
