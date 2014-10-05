@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.groovyism
+package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
@@ -41,12 +41,7 @@ class NoDefRule extends AbstractRule {
         sourceCode.lines.eachWithIndex {
             String line, int idx ->
                 if (line.contains('def ') && (!excludeFilter || !(line ==~ excludeFilter))) {
-                    Violation violation = new Violation()
-                    violation.setRule(this)
-                    violation.setLineNumber(idx + 1)
-                    violation.setSourceLine(line.trim())
-                    violation.setMessage(MESSAGE)
-                    violations.add(violation)
+                    violations << createViolation(idx + 1, line.trim(), MESSAGE)
                 }
         }
     }
