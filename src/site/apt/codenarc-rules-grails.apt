@@ -193,7 +193,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   range of skill and experience levels. Appropriate <<<servletContext>>> access can be configured as exceptions
   to this rule by configuring either the <<<doNotApplyToFilenames>>> or
   <<<doNotApplyToFilesMatching>>> property of the rule. And, as always, it is easy to
-  just {{{codenarc-configuring-rules.html#Turning_Off_A_Rule}turn off the rule}} if it does not
+  just {{{./codenarc-configuring-rules.html#Turning_Off_A_Rule}turn off the rule}} if it does not
   make sense it your environment.
 
   This rule sets the default value of <<<applyToFilesMatching>>> to only match files
@@ -224,7 +224,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   range of skill and experience levels. Appropriate <<<session>>> access can be configured as exceptions
   to this rule by configuring either the <<<doNotApplyToFilenames>>> or
   <<<doNotApplyToFilesMatching>>> property of the rule. And, as always, it is easy to
-  just {{{codenarc-configuring-rules.html#Turning_Off_A_Rule}turn off the rule}} if it does not
+  just {{{./codenarc-configuring-rules.html#Turning_Off_A_Rule}turn off the rule}} if it does not
   make sense it your environment.
 
   This rule sets the default value of <<<applyToFilesMatching>>> to only match files

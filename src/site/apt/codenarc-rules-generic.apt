@@ -86,7 +86,7 @@ Generic Rules  ("<rulesets/generic.xml>")
 
   Note that you must use the standard rule properties, such as <<<applyToClassNames>>>, <<<doNotApplyToFileNames>>>
   and <<<applyToFilesMatching>>> to apply this rule to a subset of all classes/files. These rule properties
-  are described in {{{codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+  are described in {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
   Standard Properties for Configuring Rules}}.
 
   Example of violations for methods:
@@ -152,7 +152,7 @@ Generic Rules  ("<rulesets/generic.xml>")
 
   Note that you can use the standard rule properties, such as <<<applyToClassNames>>>, <<<doNotApplyToFileNames>>>
   and <<<applyToFilesMatching>>> to only apply this rule to a subset of all classes/files. These rule properties
-  are described in {{{codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+  are described in {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
   Standard Properties for Configuring Rules}}.
 
   This rule can be useful for governance and enforcement of <architectural layering>. For instance,
@@ -202,7 +202,7 @@ Generic Rules  ("<rulesets/generic.xml>")
 
   Note that you can use the standard rule properties, such as <<<applyToClassNames>>>, <<<doNotApplyToFileNames>>>
   and <<<applyToFilesMatching>>> to only apply this rule to a subset of all classes/files. These rule properties
-  are described in {{{codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+  are described in {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
   Standard Properties for Configuring Rules}}.
 
   This rule can be useful for governance and enforcement of <architectural layering>. For instance,
@@ -370,7 +370,7 @@ Generic Rules  ("<rulesets/generic.xml>")
 
   Note that you can use the standard rule properties, such as <<<applyToClassNames>>>, <<<doNotApplyToFileNames>>>
   and <<<applyToFilesMatching>>> to only apply this rule to a subset of all classes/files. These rule properties
-  are described in {{{codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+  are described in {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
   Standard Properties for Configuring Rules}}.
 
 **  Notes

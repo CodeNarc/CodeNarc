@@ -60,5 +60,5 @@ CodeNarc - Run as an Automated Test
 
   []
 
-  See the {{{codenarc-ant-task.html}CodeNarc Ant Task}} for more information on configuring the Ant task.
+  See the {{{./codenarc-ant-task.html}CodeNarc Ant Task}} for more information on configuring the Ant task.
 

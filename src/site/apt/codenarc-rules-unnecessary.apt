@@ -99,7 +99,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   So that means there is no way to produce a <<<BigDecimal>>> with exactly that value using a literal.
 
   This rule also does not produce violations when the parameter is a double, e.g. <<<new BigDecimal(12.3)>>>.
-  That scenario is covered by the {{{codenarc-rules-basic.html#BigDecimalInstantiation}BigDecimalInstantiation}}
+  That scenario is covered by the {{{./codenarc-rules-basic.html#BigDecimalInstantiation}BigDecimalInstantiation}}
   rule, because that produces an unpredictable (double) value (and so it is <unsafe>, rather than <unnecessary>).
 
 

@@ -34,7 +34,7 @@ CodeNarc - Configuring Rules
 * {Configuring Rules Within a RuleSet File}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  {{{codenarc-custom-ruleset.html}Creating a RuleSet}} describes how to create a new <RuleSet> and
+  {{{./codenarc-custom-ruleset.html}Creating a RuleSet}} describes how to create a new <RuleSet> and
   configure the rules within it.
 
   Here is an example of a Groovy <RuleSet> file that configures all three rules that it contains:
@@ -235,7 +235,7 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   You can turn off a rule by filtering the containing ruleset to exclude the rule.
-  See {{{codenarc-creating-ruleset.html#Filtering_Rules_Within_a_RuleSet}Filtering Rules Within a RuleSet}}.
+  See {{{./codenarc-creating-ruleset.html#Filtering_Rules_Within_a_RuleSet}Filtering Rules Within a RuleSet}}.
 
   Alternately, as mentioned above, you can turn off (disable) a rule by setting its <<<enabled>>>
   boolean property to <<<false>>> (assuming it is a subclass of <<<AbstractRule>>>), as shown in

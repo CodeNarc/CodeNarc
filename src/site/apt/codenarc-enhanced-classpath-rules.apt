@@ -31,7 +31,7 @@ CodeNarc - Enhanced Classpath Rules
   <<CodeNarc>> users that use the Ant Task directly will need to adjust their Ant scripts to expand
   the classpath, if they want to take advantage of these special new rules.
 
-  See the {{{codenarc-ant-task.html}CodeNarc Ant Task}} for more information on configuring the Ant task.
+  See the {{{./codenarc-ant-task.html}CodeNarc Ant Task}} for more information on configuring the Ant task.
 
 
 * CodeNarc - Other Tools and Frameworks - Expanding the Classpath?
@@ -42,7 +42,7 @@ CodeNarc - Enhanced Classpath Rules
   tools will eventually be enhanced to provide the expanded classpath to <<CodeNarc>> – either optionally
   or always – so that they can also take advantage of these new rules.
 
-  See the {{{codenarc-other-tools-frameworks.html}CodeNarc - Integration with Other Tools / Frameworks}} for
+  See the {{{./codenarc-other-tools-frameworks.html}CodeNarc - Integration with Other Tools / Frameworks}} for
   links to other tools and frameworks that use <<CodeNarc>>.
 
   TBD...

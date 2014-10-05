@@ -30,7 +30,7 @@ CodeNarc - Creating a Rule
   The <<<org.codenarc.rule.AbstractRule>>> class is the abstract superclass
   (or ancestor) for all rules provided with <<CodeNarc>>. It provides many standard
   properties and helper methods for subclasses, as described in
-  {{{codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
   Standard Properties for Configuring Rules}}.
 
 ** {A Sample Rule Subclass of AbstractRule}

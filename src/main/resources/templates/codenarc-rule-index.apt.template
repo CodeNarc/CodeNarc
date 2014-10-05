@@ -12,7 +12,7 @@ Rule Index
 * {{{$ruleSetLink}$capitalizedName}}
       <% rules.each { rule -> %>
       <% def extraInfo = ruleExtraInformation[rule.name] ? "  (${ruleExtraInformation[rule.name]})" : ''  %>
-    * {{{codenarc-rules-${name}.html#${rule.name}}${rule.name}}}  ${extraInfo}
+    * {{{./codenarc-rules-${name}.html#${rule.name}}${rule.name}}}  ${extraInfo}
     <% } %>
     <% } %>
 
