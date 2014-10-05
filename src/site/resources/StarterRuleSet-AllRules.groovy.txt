@@ -202,6 +202,7 @@ ruleset {
     MultipleUnaryOperators 
     NestedBlockDepth 
     NestedSynchronization 
+    NoDef 
     NoWildcardImports 
     NonFinalPublicField 
     NonFinalSubclassOfSensitiveInterface 

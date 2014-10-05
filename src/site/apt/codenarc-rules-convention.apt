@@ -130,18 +130,24 @@ Convention Rules  ("<rulesets/convention.xml>")
     def y = 55l
 -------------------------------------------------------------------------------
 
+
 * {NoDef} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   <Since CodeNarc 0.22>
 
-  Do not allow for using def keyword in code.
+  Do not allow using the <<<def>>> keyword in code. Use a specific type instead.
 
 *-------------------------------+----------------------------------------------------------------+---------------------+
 | <<Property>>                  | <<Description>>                                                | <<Default Value>>   |
 *-------------------------------+----------------------------------------------------------------+---------------------+
-| excludeRegex                  | Regular expresion describing names of attributes, parameters   | <<<>>>              |
-|                               | or methods that could be precede by def keyword.               |                     |
+| excludeRegex                  | Regular expression describing names of attributes, parameters  | <<<>>>              |
+|                               | or methods that could be precede by the <<<def>>> keyword.     |                     |
 *-------------------------------+----------------------------------------------------------------+---------------------+
+
+  <<NOTE:>> This rule applies to the text contents of a <file> rather than a specific <class>,
+  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+
 
 * {ParameterReassignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

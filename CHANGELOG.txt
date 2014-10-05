@@ -8,6 +8,7 @@ NEW RULES
 - #56: PackageMatchesFilePath rule (naming) - A package source file's path should match the package itself. (Thanks to Simon Tost)
 - #150: Instanceof rule (design) - Checks for use of the instanceof operator. Use ignoreTypeNames property to configure ignored type names.
 - #423: UnnecessarySafeNavigationOperator rule (unnecessary) - Check for the safe navigation operator (?.) applied to constants and literals, which can never be null.
+- #63: NoDef rule (convention) - Check for all uses of the def keyword. (Thanks to Dominik Przybysz)
 
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #157: Enable optionally using Thread Context classpath for loading rule scripts. Introduce "codenarc.useCurrentThreadContextClassLoader" system property. See https://jira.grails.org/browse/GPCODENARC-32.
