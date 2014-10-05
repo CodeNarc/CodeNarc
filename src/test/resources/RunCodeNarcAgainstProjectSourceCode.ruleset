@@ -9,7 +9,9 @@ ruleset {
 
     ruleset('rulesets/braces.xml')
 
-    ruleset('rulesets/convention.xml')
+    ruleset('rulesets/convention.xml') {
+        exclude 'NoDef'
+    }
 
     ruleset('rulesets/design.xml') {
         Instanceof(enabled:false)

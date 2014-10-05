@@ -130,6 +130,18 @@ Convention Rules  ("<rulesets/convention.xml>")
     def y = 55l
 -------------------------------------------------------------------------------
 
+* {NoDef} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.22>
+
+  Do not allow for using def keyword in code.
+
+*-------------------------------+----------------------------------------------------------------+---------------------+
+| <<Property>>                  | <<Description>>                                                | <<Default Value>>   |
+*-------------------------------+----------------------------------------------------------------+---------------------+
+| excludeRegex                  | Regular expresion describing names of attributes, parameters   | <<<>>>              |
+|                               | or methods that could be precede by def keyword.               |                     |
+*-------------------------------+----------------------------------------------------------------+---------------------+
 
 * {ParameterReassignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
