@@ -24,7 +24,7 @@ import java.util.regex.Pattern
 /**
  * Def keyword is overused and should be replaced with specific type.
  * <p/>
- * The <code>excludePattern</code> property optionally specifies regex
+ * The <code>excludeRegex</code> property optionally specifies regex
  * to find text which could occur immediately after def.
  *
  * @author Dominik Przybysz
@@ -33,11 +33,11 @@ class NoDefRule extends AbstractRule {
     String name = 'NoDef'
     int priority = 3
     protected static final String MESSAGE = 'def should not be used'
-    String excludePattern
+    String excludeRegex
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        Pattern excludeFilter = excludePattern ? ~/.*def\s+$excludePattern.*/ : null
+        Pattern excludeFilter = excludeRegex ? ~/.*def\s+$excludeRegex.*/ : null
         sourceCode.lines.eachWithIndex {
             String line, int idx ->
                 if (line.contains('def ') && (!excludeFilter || !(line ==~ excludeFilter))) {
