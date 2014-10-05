@@ -1029,6 +1029,10 @@ public class AstUtil {
         return expression instanceof VariableExpression && "this".equals(((VariableExpression) expression).getName());
     }
 
+    public static boolean isSuperReference(Expression expression) {
+        return expression instanceof VariableExpression && "super".equals(((VariableExpression) expression).getName());
+    }
+
     public static boolean classNodeHasProperty(ClassNode classNode, String propertyName) {
         if (classNode.getFields() != null) {
             for (FieldNode field : classNode.getFields()) {

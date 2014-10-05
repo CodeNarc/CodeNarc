@@ -948,6 +948,33 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   closure then you do not need to have the <<<return>>> keyword.
 
 
+* {UnnecessarySafeNavigationOperator} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  <Since CodeNarc 0.22>
+
+  Check for the <safe navigation> operator (<<<?.>>>) applied to constants and literals, or <<<this>>>
+  or <<<super>>>, which can never be null.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def myMethod() {
+        "abc"?.bytes            // violation
+        [1,2]?.getSize()        // violation
+        [abc:123]?.name         // violation
+        [:]?.toString()         // violation
+        123?.class              // violation
+        123.45?.getClass()      // violation
+        Boolean.FALSE?.class    // violation
+        Boolean.TRUE?.class     // violation
+        this?.class             // violation
+        super?.getClass()       // violation
+        Integer?.name           // violation
+    }
+-------------------------------------------------------------------------------
+
+
 * {UnnecessarySelfAssignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <New in CodeNarc 0.13>
@@ -1126,3 +1153,4 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
         }
     }
 -------------------------------------------------------------------------------
+

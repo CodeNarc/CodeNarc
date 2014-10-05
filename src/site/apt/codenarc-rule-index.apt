@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 339 rules.
+  <<CodeNarc>> includes 340 rules.
 
     
       
@@ -1085,6 +1085,9 @@ Rule Index
     
       
     * {{{codenarc-rules-unnecessary.html#UnnecessaryReturnKeyword}UnnecessaryReturnKeyword}}  
+    
+      
+    * {{{codenarc-rules-unnecessary.html#UnnecessarySafeNavigationOperator}UnnecessarySafeNavigationOperator}}  
     
       
     * {{{codenarc-rules-unnecessary.html#UnnecessarySelfAssignment}UnnecessarySelfAssignment}}  

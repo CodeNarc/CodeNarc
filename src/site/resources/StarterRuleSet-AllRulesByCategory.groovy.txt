@@ -372,6 +372,7 @@ ruleset {
     UnnecessaryParenthesesForMethodCallWithClosure 
     UnnecessaryPublicModifier 
     UnnecessaryReturnKeyword 
+    UnnecessarySafeNavigationOperator 
     UnnecessarySelfAssignment 
     UnnecessarySemicolon 
     UnnecessaryStringInstantiation 
