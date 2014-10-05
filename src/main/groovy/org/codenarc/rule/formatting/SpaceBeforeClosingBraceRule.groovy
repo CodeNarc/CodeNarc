@@ -37,6 +37,7 @@ class SpaceBeforeClosingBraceRule extends AbstractAstVisitorRule {
     int priority = 3
     Class astVisitorClass = SpaceBeforeClosingBraceAstVisitor
     boolean checkClosureMapEntryValue = true
+    boolean ignoreEmptyBlock = false
 }
 
 class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
@@ -46,7 +47,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
         def line = lastSourceLineOrEmpty(node)
         def indexOfBrace = line.indexOf('}')
         if (indexOfBrace > 1) {
-            if (isNotWhitespace(line, indexOfBrace)) {
+            if (isNotWhitespace(line, indexOfBrace) && checkIsEmptyBlock(line, indexOfBrace)) {
                 def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
                 addViolation(node, "The closing brace for $typeName $currentClassName is not preceded by a space or whitespace")
             }
@@ -70,7 +71,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
         if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
             def line = lastSourceLineOrEmpty(node.code)
             def lastCol = node.code.lastColumnNumber
-            if (line.size() >= lastCol && isNotWhitespace(line, lastCol - 1) && line[lastCol - 1] == '}' ) {
+            if (line.size() >= lastCol && isNotWhitespace(line, lastCol - 1) && line[lastCol - 1] == '}' && checkIsEmptyBlock(line, lastCol - 1)) {
                 addOpeningBraceViolation(node.code, 'block')
             }
         }
@@ -85,7 +86,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
             def startCol = block.columnNumber
             if (startLine[startCol - 1] == '{') {
                 int lastIndex = indexOfClosingBrace(line, lastCol)
-                if (isNotWhitespace(line, lastIndex)) {
+                if (isNotWhitespace(line, lastIndex) && checkIsEmptyBlock(line, lastIndex)) {
                     addOpeningBraceViolation(block, 'block')
                 }
             }
@@ -100,7 +101,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
             def line = lastSourceLineOrEmpty(expression)
             def lastCol = expression.lastColumnNumber
             int lastIndex = indexOfClosingBrace(line, lastCol)
-            if (isNotWhitespace(line, lastIndex)) {
+            if (isNotWhitespace(line, lastIndex) && checkIsEmptyBlock(line, lastIndex)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
@@ -117,6 +118,13 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {
         addViolation(node, "The closing brace for the $keyword in class $currentClassName is not preceded by a space or whitespace")
+    }
+
+    private boolean checkIsEmptyBlock(String line, int indexOfBrace) {
+        if (rule.ignoreEmptyBlock ) {
+            return isNotCharacter(line, '{' as char, indexOfBrace)
+        }
+        return true
     }
 
 }

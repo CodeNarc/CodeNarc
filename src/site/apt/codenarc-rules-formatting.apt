@@ -281,6 +281,9 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
 |                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
+| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
+*---------------------------+------------------------------------------------------------------+------------------------+
+
 
   Examples of violations:
 
@@ -474,6 +477,8 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 | checkClosureMapEntryValue | If <<<false>>>, then do not check for whitespace before closing  | <<<true>>>             |
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
 |                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
+*---------------------------+------------------------------------------------------------------+------------------------+
+| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
   Known limitations:

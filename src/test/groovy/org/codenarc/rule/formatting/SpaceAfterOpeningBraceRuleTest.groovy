@@ -62,6 +62,43 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_ProperSpacingWithoutIgnoreEmptyBlock_OneViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    def closure = {}
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'def closure = {}', 'The opening brace for the closure in class MyClass is not followed by a space or whitespace')
+    }
+
+    @Test
+    void testApplyTo_ProperSpacingWithIgnoreEmptyBlock_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    def closure = {}
+                    if (true) {}
+                    while(ready) {}
+                    try {
+                    } catch(Exception e) {
+                    } finally {}
+                    for(int i=0; i<10; i++) {}
+                    for(String name in names) {}
+                    for(String name: names) {}
+                    if (count > this."maxPriority${priority}Violations") {}
+                    while (count > this."maxPriority${priority}Violations") {}
+                }
+                void doStuff2() {}
+            }
+            interface MyInterface2 {}
+        '''
+        rule.ignoreEmptyBlock = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_ClassDeclaration_Violation() {
         final SOURCE = '''
             class MyClass {int count }
