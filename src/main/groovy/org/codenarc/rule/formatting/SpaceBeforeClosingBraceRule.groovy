@@ -37,7 +37,7 @@ class SpaceBeforeClosingBraceRule extends AbstractAstVisitorRule {
     int priority = 3
     Class astVisitorClass = SpaceBeforeClosingBraceAstVisitor
     boolean checkClosureMapEntryValue = true
-    boolean allowForEmptyBlock = false
+    boolean ignoreEmptyBlock = false
 }
 
 class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisitor {
@@ -121,7 +121,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     }
 
     private boolean checkIsEmptyBlock(String line, int indexOfBrace) {
-        if (rule.allowForEmptyBlock ) {
+        if (rule.ignoreEmptyBlock ) {
             return isNotCharacter(line, '{' as char, indexOfBrace)
         }
         return true

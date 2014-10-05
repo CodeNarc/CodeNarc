@@ -62,7 +62,7 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_ProperSpacingWithoutAllowForEmptyBlock_OneViolations() {
+    void testApplyTo_ProperSpacingWithoutIgnoreEmptyBlock_OneViolations() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -74,7 +74,7 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_ProperSpacingWithAllowForEmptyBlock_NoViolations() {
+    void testApplyTo_ProperSpacingWithIgnoreEmptyBlock_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -94,7 +94,7 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
             }
             interface MyInterface2 {}
         '''
-        rule.allowForEmptyBlock = true
+        rule.ignoreEmptyBlock = true
         assertNoViolations(SOURCE)
     }
 

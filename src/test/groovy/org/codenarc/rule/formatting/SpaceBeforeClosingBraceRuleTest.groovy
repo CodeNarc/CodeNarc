@@ -56,7 +56,6 @@ class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase {
                 }
                 static void reset() { violationCounts = [1:0, 2:0, 3:0] }
                 void doStuff() { println 9 }
-                void doStuff2() {}
             }
             interface MyInterface { }
             enum MyEnum { OK, BAD }
@@ -65,7 +64,7 @@ class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_ProperSpacingWithoutAllowForEmptyBlock_OneViolations() {
+    void testApplyTo_ProperSpacingWithoutIgnoreEmptyBlock_OneViolations() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -77,7 +76,7 @@ class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_ProperSpacingWithAllowForEmptyBlock_NoViolations() {
+    void testApplyTo_ProperSpacingWithIgnoreEmptyBlock_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -97,7 +96,7 @@ class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase {
             }
             interface MyInterface2 {}
         '''
-        rule.allowForEmptyBlock = true
+        rule.ignoreEmptyBlock = true
         assertNoViolations(SOURCE)
     }
 

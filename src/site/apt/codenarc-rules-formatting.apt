@@ -281,7 +281,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
 |                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
-| allowForEmptyBlock        | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
+| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
 
@@ -478,7 +478,7 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
 |                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
-| allowForEmptyBlock        | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
+| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
   Known limitations:
