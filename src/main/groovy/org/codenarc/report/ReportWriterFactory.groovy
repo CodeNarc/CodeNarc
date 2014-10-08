@@ -15,6 +15,8 @@
  */
 package org.codenarc.report
 
+import org.codenarc.util.PropertyUtil
+
 /**
  * Factory for ReportWriter objects based on the report type (name).
  * <p>
@@ -43,7 +45,9 @@ class ReportWriterFactory {
 
     ReportWriter getReportWriter(String type, Map options) {
         def reportWriter = getReportWriter(type)
-        options.each { name, value -> reportWriter[name] = value }
+        options.each { name, value ->
+            PropertyUtil.setPropertyFromString(reportWriter, name, value)
+        }
         reportWriter
     }
 }

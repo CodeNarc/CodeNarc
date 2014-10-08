@@ -205,11 +205,12 @@ class CodeNarcTaskTest extends AbstractTestCase {
 
     @Test
     void testAddConfiguredReport_ReportOptionsSetPropertiesOnReportWriter() {
-        def report = createReport('html', [title:'abc', outputFile:'def'])
+        def report = createReport('html', [title:'abc', outputFile:'def', maxPriority:'4'])
         codeNarcTask.addConfiguredReport(report)
         log(codeNarcTask.reportWriters)
         assert codeNarcTask.reportWriters[0].title == 'abc'
         assert codeNarcTask.reportWriters[0].outputFile == 'def'
+        assert codeNarcTask.reportWriters[0].maxPriority == 4
     }
 
     @Test

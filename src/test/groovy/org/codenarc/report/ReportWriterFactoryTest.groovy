@@ -87,9 +87,10 @@ class ReportWriterFactoryTest extends AbstractTestCase {
 
     @Test
     void testGetReportWriter_Html_WithOptions() {
-        def reportWriter = reportWriterFactory.getReportWriter('html', [title:TITLE])
+        def reportWriter = reportWriterFactory.getReportWriter('html', [title:TITLE, maxPriority:'4'])
         assert reportWriter.class == HtmlReportWriter
         assert reportWriter.title == TITLE
+        assert reportWriter.maxPriority == 4
     }
 
     @Test
@@ -101,9 +102,10 @@ class ReportWriterFactoryTest extends AbstractTestCase {
 
     @Test
     void testGetReportWriter_Text_WithOptions() {
-        def reportWriter = reportWriterFactory.getReportWriter('text', [outputFile:OUTPUT_FILE])
+        def reportWriter = reportWriterFactory.getReportWriter('text', [outputFile:OUTPUT_FILE, maxPriority:'2'])
         assert reportWriter.class == TextReportWriter
         assert reportWriter.outputFile == OUTPUT_FILE
+        assert reportWriter.maxPriority == 2
     }
 
     @Test
