@@ -261,6 +261,10 @@ Design Rules  ("<rulesets/design.xml>")
   names (the class name specified as the right-hand expression of the <<<instanceof>>>). It defaults to ignoring
   <<<instanceof>>> checks against exception classes.
 
+  By default, the rule does not analyze test files. This rule sets the default value of the
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  or 'TestCase.groovy'.
+
 *-------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>      | <<Description>>                                                | <<Default Value>>      |
 *-------------------+----------------------------------------------------------------+------------------------+

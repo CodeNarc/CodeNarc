@@ -31,6 +31,7 @@ class InstanceofRuleTest extends AbstractRuleTestCase {
         assert rule.priority == 2
         assert rule.name == 'Instanceof'
         assert rule.ignoreTypeNames == '*Exception'
+        assert rule.doNotApplyToFilesMatching == DEFAULT_TEST_FILES
     }
 
     @Test

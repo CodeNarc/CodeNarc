@@ -30,6 +30,7 @@ class InstanceofRule extends AbstractAstVisitorRule {
 
     String name = 'Instanceof'
     int priority = 2
+    String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
     String ignoreTypeNames = '*Exception'
     Class astVisitorClass = InstanceofAstVisitor
 }
