@@ -954,7 +954,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   <Since CodeNarc 0.22>
 
   Check for the <safe navigation> operator (<<<?.>>>) applied to constants and literals, or <<<this>>>
-  or <<<super>>>, which can never be null.
+  or <<<super>>>, or constructor calls, all of which can never be null.
 
   Example of violations:
 
@@ -970,7 +970,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
         Boolean.TRUE?.class     // violation
         this?.class             // violation
         super?.getClass()       // violation
-        Integer?.name           // violation
+        new Long(100)?.class    // violation
     }
 -------------------------------------------------------------------------------
 

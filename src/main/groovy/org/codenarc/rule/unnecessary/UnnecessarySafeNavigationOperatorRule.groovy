@@ -17,6 +17,8 @@ package org.codenarc.rule.unnecessary
 
 import static org.codenarc.util.AstUtil.*
 
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.PropertyExpression
@@ -52,10 +54,14 @@ class UnnecessarySafeNavigationOperatorAstVisitor extends AbstractAstVisitor {
 
     private void checkExpression(Expression expression, Expression objExpr) {
         // TODO Could expand this to also check for class expressions, e.g. String?.toString(), but not parsed consistently in Groovy 1.7
-        if (expression.safe && (isConstantOrLiteral(objExpr) || isThisReference(objExpr) || isSuperReference(objExpr))) {
+        if (expression.safe && (isConstantOrLiteral(objExpr) || isThisReference(objExpr) || isSuperReference(objExpr) || isConstructorCall(objExpr))) {
             def expressionText = '"' + objExpr.text + '"'
             addViolation(expression, "The safe navigation operator (?.) is unnecessary for $expressionText in class $currentClassName")
         }
+    }
+
+    private boolean isConstructorCall(Expression objExpr) {
+        return objExpr instanceof ConstructorCallExpression
     }
 
 }

@@ -62,7 +62,7 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
                 Boolean.TRUE?.class
                 this?.class
                 super?.class
-                Integer?.name
+                new Long(0)?.class
             }
         '''
         assertViolations(SOURCE,
@@ -76,6 +76,7 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
             [lineNumber:10, sourceLineText:'Boolean.TRUE?.class', messageText:'The safe navigation operator (?.) is unnecessary for "Boolean.TRUE" in class None'],
             [lineNumber:11, sourceLineText:'this?.class', messageText:'The safe navigation operator (?.) is unnecessary for "this" in class None'],
             [lineNumber:12, sourceLineText:'super?.class', messageText:'The safe navigation operator (?.) is unnecessary for "super" in class None'],
+            [lineNumber:13, sourceLineText:'new Long(0)?.class', messageText:'The safe navigation operator (?.) is unnecessary for "new Long(0)" in class None'],
         )
     }
 
@@ -93,7 +94,7 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
                 Boolean.TRUE?.getClass()
                 this?.getClass()
                 super?.getClass()
-                String?.toString()
+                new Long(100)?.toString()
             }
         '''
         assertViolations(SOURCE,
@@ -107,6 +108,7 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
             [lineNumber:10, sourceLineText:'Boolean.TRUE?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "Boolean.TRUE" in class None'],
             [lineNumber:11, sourceLineText:'this?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "this" in class None'],
             [lineNumber:12, sourceLineText:'super?.getClass()', messageText:'The safe navigation operator (?.) is unnecessary for "super" in class None'],
+            [lineNumber:13, sourceLineText:'new Long(100)?.toString()', messageText:'The safe navigation operator (?.) is unnecessary for "new Long(100)" in class None'],
         )
     }
 
