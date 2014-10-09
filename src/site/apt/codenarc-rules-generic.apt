@@ -5,6 +5,12 @@
 Generic Rules  ("<rulesets/generic.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+  These rules provide a generic check that only makes sense when customized. These rules are not <enabled> until
+  the necessary configuration is provided.
+
+  See {{{http://tenpercentnotcrap.wordpress.com/2013/08/04/codenarc-hidden-gems-using-codenarcs-generic-rules/}CodeNarc – Hidden Gems: Using CodeNarc’s generic rules}}
+  for examples of using the <<CodeNarc>> <"generic"> rules to enforce your own custom best practices.
+
 
 * {IllegalClassMember} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
