@@ -1,4 +1,4 @@
-CodeNarc Report: Sample Project - Apr 18, 2014 5:52:36 PM
+CodeNarc Report: Sample Project - Oct 12, 2014 11:24:29 AM
 
 Summary: TotalFiles=10 FilesWithViolations=6 P1=0 P2=0 P3=8
 
@@ -22,4 +22,4 @@ File: io/UrlResourceTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=21 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFail]
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
 
-[CodeNarc (http://www.codenarc.org) v0.21]
+[CodeNarc (http://www.codenarc.org) v0.22]
