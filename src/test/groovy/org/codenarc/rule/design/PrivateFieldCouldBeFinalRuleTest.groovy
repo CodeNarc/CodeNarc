@@ -414,6 +414,54 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_ignoreJpaEntities_Entity_NoViolations() {
+        final SOURCE = '''
+            @Entity
+            class MyClass {
+                private DateTime created = DateTime.now()
+            }
+        '''
+        rule.ignoreJpaEntities = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ignoreJpaEntities_fullPackageEntity_NoViolations() {
+        final SOURCE = '''
+            @javax.persistence.Entity
+            class MyClass {
+                private DateTime created = DateTime.now()
+            }
+        '''
+        rule.ignoreJpaEntities = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ignoreJpaEntities_MappedSuperclass_NoViolations() {
+        final SOURCE = '''
+            @MappedSuperclass
+            class MyClass {
+                private DateTime created = DateTime.now()
+            }
+        '''
+        rule.ignoreJpaEntities = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ignoreJpaEntities_fullPackageMappedSuperclass_NoViolations() {
+        final SOURCE = '''
+            @javax.persistence.MappedSuperclass
+            class MyClass {
+                private DateTime created = DateTime.now()
+            }
+        '''
+        rule.ignoreJpaEntities = true
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new PrivateFieldCouldBeFinalRule()
     }

@@ -326,7 +326,10 @@ Design Rules  ("<rulesets/design.xml>")
 |                     | should be ignored (i.e., that should not cause a rule          |                        |
 |                     | violation). The names may optionally contain wildcards (*,?).  |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-
+| ignoreJpaEntities   | Specifies whether fields defined inside classes annotated      | false                  |
+|                     | with @Entity or @MappedSuperclass JPA annotations should be    |                        |
+|                     | ignored (i.e., that should not cause a rule violation).        |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
 
 * {PublicInstanceField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
