@@ -2,6 +2,9 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+- #68: Cleaned up and fixed HtmlReportWriterTest.
+
+
 Changes in version 0.22 (Oct 2014)
 --------------------------------------
 NEW RULES
