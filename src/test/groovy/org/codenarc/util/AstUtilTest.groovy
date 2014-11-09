@@ -54,6 +54,7 @@ class AstUtilTest extends AbstractTestCase {
                     2, 3)
             }
             @Before setUp() {  }
+            @First @Second def twoAnnotationsMethod() { }
         }
         enum MyEnum {
             READ, WRITE
@@ -221,9 +222,17 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
-    void testHashAnnotation() {
+    void testHasAnnotation() {
         assert !AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'doesNotExist')
         assert AstUtil.hasAnnotation(visitor.methodNodes['setUp'], 'Before')
+    }
+
+    @Test
+    void testHasAnyAnnotation() {
+        assert !AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist')
+        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'First')
+        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist', 'First')
+        assert AstUtil.hasAnyAnnotation(visitor.methodNodes['twoAnnotationsMethod'], 'doesNotExist', 'First', 'Second')
     }
 
     @Test

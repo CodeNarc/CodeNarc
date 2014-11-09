@@ -490,6 +490,21 @@ public class AstUtil {
     }
 
     /**
+     * Return true only if the node has any of the named annotations
+     * @param node - the AST Node to check
+     * @param names - the names of the annotations
+     * @return true only if the node has any of the named annotations
+     */
+    public static boolean hasAnyAnnotation(AnnotatedNode node, String... names) {
+        for (String name : names) {
+            if (hasAnnotation(node, name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Return the List of VariableExpression objects referenced by the specified DeclarationExpression.
      * @param declarationExpression - the DeclarationExpression
      * @return the List of VariableExpression objects

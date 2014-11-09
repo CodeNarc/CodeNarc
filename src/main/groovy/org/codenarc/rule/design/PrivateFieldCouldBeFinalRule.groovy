@@ -18,14 +18,14 @@
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractSharedAstVisitorRule
 import org.codenarc.rule.AstVisitor
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
-import org.codehaus.groovy.ast.expr.*
-
 /**
  * Rule that checks for private fields that are only set within a constructor or field initializer.
  * Such fields can safely be made final.
@@ -37,6 +37,7 @@ class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
     String name = 'PrivateFieldCouldBeFinal'
     int priority = 3
     String ignoreFieldNames
+    boolean ignoreJpaEntities = false
     Class astVisitorClass = PrivateFieldCouldBeFinalAstVisitor
 
     @Override
@@ -44,7 +45,9 @@ class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
         def wildcardPattern = new WildcardPattern(ignoreFieldNames, false)
 
         visitor.initializedFields.each { FieldNode fieldNode ->
-            def isIgnored = wildcardPattern.matches(fieldNode.name)
+            boolean isIgnoredBecauseMatchesPattern = wildcardPattern.matches(fieldNode.name)
+            boolean isIgnoredBecauseDefinedInJpaEntity = ignoreJpaEntities && isDefinedInJpaEntity(fieldNode)
+            boolean isIgnored = isIgnoredBecauseMatchesPattern || isIgnoredBecauseDefinedInJpaEntity
             if (!isIgnored) {
                 def className = fieldNode.owner.name
                 def violationMessage = "Private field [${fieldNode.name}] in class $className is only set within the field initializer or a constructor, and so it can be made final."
@@ -52,6 +55,13 @@ class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
             }
         }
         return visitor.violations
+    }
+    
+    boolean isDefinedInJpaEntity(FieldNode fieldNode) {
+        return AstUtil.hasAnyAnnotation(fieldNode.owner, 'Entity', 
+                                                         'MappedSuperclass', 
+                                                         'javax.persistence.Entity',
+                                                         'javax.persistence.MappedSuperclass')
     }
 }
 
