@@ -110,6 +110,6 @@ class ConstantExpressionExtractor {
 
     private List<ConstantExpression> extractFromExpression(AnnotationConstantExpression expression) {
         AnnotationNode annotationNode = expression.value as AnnotationNode
-        return new ConstantExpressionExtractor().extractFrom(annotationNode)
+        return extractFrom(annotationNode)
     }
 }
