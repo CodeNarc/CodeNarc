@@ -15,10 +15,13 @@
  */
 package org.codenarc.rule.groovyism
 
+import org.codehaus.groovy.ast.AnnotatedNode
+import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.expr.ConstantExpression
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
+import java.util.regex.Matcher
 /**
  * Check for regular (single quote) strings containing a GString-type expression (${..}).
  *
@@ -33,16 +36,50 @@ class GStringExpressionWithinStringRule extends AbstractAstVisitorRule {
 class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
 
     private static final GSTRING_EXPRESSION_REGEX = /\$\{.*\}/
+    private AnnotatedNode currentAnnotatedNode
 
     @Override
     void visitConstantExpression(ConstantExpression expression) {
         if (isFirstVisit(expression) && expression.value instanceof String && expression.lineNumber > -1) {
-            def matcher = expression.value =~ GSTRING_EXPRESSION_REGEX
-            if (matcher) {
+            Matcher matcher = expression.value =~ GSTRING_EXPRESSION_REGEX
+            boolean matchesGStringExpressionPattern = matcher as boolean
+            if (matchesGStringExpressionPattern && isNotElementOfAnnotation(expression)) {
                 addViolation(expression, "The String '$expression.value' contains a GString-type expression: '${matcher[0]}'")
             }
         }
         super.visitConstantExpression(expression)
     }
 
+    @Override
+    void visitAnnotations(AnnotatedNode node) {
+        saveCurrentAnnotatedNode(node)
+        super.visitAnnotations(node)
+        resetCurrentAnnotatedNode()
+    }
+
+    private boolean isNotElementOfAnnotation(ConstantExpression expression) {
+        return !isProcessingAnnotatedNode() || !isUsedInAnyAnnotationOnCurrentAnnotatedNode(expression)
+    }
+
+    private boolean isUsedInAnyAnnotationOnCurrentAnnotatedNode(ConstantExpression constantExpression) {
+        return currentAnnotatedNode.annotations.any { AnnotationNode annotationNode ->
+            isExpressionUsedInAnnotation(constantExpression, annotationNode)
+        }
+    }
+
+    private static boolean isExpressionUsedInAnnotation(ConstantExpression expression, AnnotationNode annotationNode) {
+        return annotationNode.members.values().any { it.is(expression) }
+    }
+
+    private boolean isProcessingAnnotatedNode() {
+        return this.currentAnnotatedNode != null
+    }
+
+    private void resetCurrentAnnotatedNode() {
+        this.currentAnnotatedNode = null
+    }
+
+    private void saveCurrentAnnotatedNode(AnnotatedNode annotatedNode) {
+        this.currentAnnotatedNode = annotatedNode
+    }
 }
