@@ -17,11 +17,15 @@ package org.codenarc.rule.groovyism
 
 import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.AnnotationNode
+import org.codehaus.groovy.ast.expr.AnnotationConstantExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.ListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 import java.util.regex.Matcher
+
 /**
  * Check for regular (single quote) strings containing a GString-type expression (${..}).
  *
@@ -68,7 +72,8 @@ class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
     }
 
     private static boolean isExpressionUsedInAnnotation(ConstantExpression expression, AnnotationNode annotationNode) {
-        return annotationNode.members.values().any { it.is(expression) }
+        List<ConstantExpression> constantExpressions = new ConstantExpressionExtractor().extractFrom(annotationNode)
+        return constantExpressions.any { it.is(expression) }
     }
 
     private boolean isProcessingAnnotatedNode() {
@@ -81,5 +86,30 @@ class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
 
     private void saveCurrentAnnotatedNode(AnnotatedNode annotatedNode) {
         this.currentAnnotatedNode = annotatedNode
+    }
+}
+
+class ConstantExpressionExtractor {
+
+    @SuppressWarnings('UseCollectMany') //collectMany is not available in Groovy 1.7.5
+    List<ConstantExpression> extractFrom(AnnotationNode annotationNode) {
+        return annotationNode.members.values().collect { 
+            Expression expression -> extractFromExpression(expression) 
+        }.flatten()
+    }
+
+    private List<ConstantExpression> extractFromExpression(ListExpression listExpression) {
+        return listExpression.expressions.collect { 
+            Expression expression -> extractFromExpression(expression) 
+        }
+    }
+
+    private List<ConstantExpression> extractFromExpression(ConstantExpression expression) {
+        return [expression]
+    }
+
+    private List<ConstantExpression> extractFromExpression(AnnotationConstantExpression expression) {
+        AnnotationNode annotationNode = expression.value as AnnotationNode
+        return new ConstantExpressionExtractor().extractFrom(annotationNode)
     }
 }

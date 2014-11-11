@@ -49,12 +49,51 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
     void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_NoViolations() {
         final SOURCE = '''
         	class SomeClass {
-        	    @SomeAnnotationOnField('${sample.property}')
+        	    @SomeAnnotationOnField('${sample.property1}')
         	    String sampleProperty
         	    
-        	    @SomeAnnotationOnMethod('${sample.differentProperty}')
+        	    @SomeAnnotationOnMethod('${sample.property2}')
         	    void method() {
         	    }
+        	}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_AnnotatedMethodInAnnotatedClass_NoViolations() {
+        final SOURCE = '''
+            @SomeAnnotationOnClass('${sample.property1}')
+        	class SomeClass {
+        	    @SomeAnnotationOnField('${sample.property2}')
+        	    String sampleProperty
+        	    
+        	    @SomeAnnotationOnMethod('${sample.property3}')
+        	    void method() {
+        	    }
+        	}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_NestedAnnotations_NoViolations() {
+        final SOURCE = '''
+            @SomeAnnotationOnClass(attribute='${sample.property1}',
+                            nested=[@NestedAnnotation('${sample.property2}'), 
+                                    @NestedAnnotation('${sample.property3}')],  
+                             someOtherAttribute='${sample.property4}')
+        	class SomeClass {
+        	}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_MultivalueElement_NoViolations() {
+        final SOURCE = '''
+            @SomeAnnotationOnClass(attribute=['${sample.property1}', '${sample.property2}'])
+        	class SomeClass {
         	}
         '''
         assertNoViolations(SOURCE)
@@ -89,7 +128,7 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
     void testSingleQuoteStrings_WithGStringExpressionInAnnotatedMethod_SingleViolation() {
         final SOURCE = '''
         	class SomeClass {
-        	    @SomeAnnotationOnMethod('${sample.differentProperty}')
+        	    @SomeAnnotationOnMethod('${sample.property}')
         	    void method() {
         	        def str1 = 'total: ${count}'
         	    }
