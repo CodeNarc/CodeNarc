@@ -6,6 +6,7 @@ Changes in version 0.23 (??? 2015)
 --------------------------------------
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #69: PrivateFieldCouldBeFinalRule support for JPA entities. (Thanks to Maciej Ziarko)
+- #70: GStringExpressionWithinStringRule should ignore quasi GString expressions inside annotations. (Thanks to Maciej Ziarko)
 
 FRAMEWORK AND INFRASTRUCTURE
 - #68: Cleaned up and fixed HtmlReportWriterTest.

@@ -451,6 +451,7 @@
         <w>instanceof</w>
         <w>jdbc</w>
         <w>junit</w>
+        <w>maciej</w>
         <w>plugins</w>
         <w>println</w>
         <w>przybysz</w>
@@ -464,6 +465,7 @@
         <w>timestamp</w>
         <w>tost</w>
         <w>unary</w>
+        <w>ziarko</w>
       </words>
     </dictionary>
   </component>
