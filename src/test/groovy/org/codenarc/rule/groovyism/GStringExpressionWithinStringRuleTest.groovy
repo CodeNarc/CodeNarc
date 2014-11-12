@@ -46,6 +46,60 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_NoViolations() {
+        final SOURCE = '''
+        	class SomeClass {
+        	    @SomeAnnotationOnField('${sample.property1}')
+        	    String sampleProperty
+        	    
+        	    @SomeAnnotationOnMethod('${sample.property2}')
+        	    void method() {
+        	    }
+        	}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_AnnotatedMethodInAnnotatedClass_NoViolations() {
+        final SOURCE = '''
+            @SomeAnnotationOnClass('${sample.property1}')
+        	class SomeClass {
+        	    @SomeAnnotationOnField('${sample.property2}')
+        	    String sampleProperty
+        	    
+        	    @SomeAnnotationOnMethod('${sample.property3}')
+        	    void method() {
+        	    }
+        	}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_NestedAnnotations_NoViolations() {
+        final SOURCE = '''
+            @SomeAnnotationOnClass(attribute='${sample.property1}',
+                            nested=[@NestedAnnotation('${sample.property2}'), 
+                                    @NestedAnnotation('${sample.property3}')],  
+                             someOtherAttribute='${sample.property4}')
+        	class SomeClass {
+        	}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_MultivalueElement_NoViolations() {
+        final SOURCE = '''
+            @SomeAnnotationOnClass(attribute=['${sample.property1}', '${sample.property2}'])
+        	class SomeClass {
+        	}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testDoubleQuoteStrings_NoViolations() {
         final SOURCE = '''
         	def str1 = "123"
@@ -68,6 +122,19 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],
             [lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])
+    }
+
+    @Test
+    void testSingleQuoteStrings_WithGStringExpressionInAnnotatedMethod_SingleViolation() {
+        final SOURCE = '''
+        	class SomeClass {
+        	    @SomeAnnotationOnMethod('${sample.property}')
+        	    void method() {
+        	        def str1 = 'total: ${count}'
+        	    }
+        	}
+        '''
+        assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')
     }
 
     protected Rule createRule() {
