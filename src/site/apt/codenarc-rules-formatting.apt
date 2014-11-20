@@ -409,14 +409,14 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 *---------------------------+------------------------------------------------------------------+------------------------+
 | <<Property>>              | <<Description>>                                                  | <<Default Value>>      |
 *---------------------------+------------------------------------------------------------------+------------------------+
-| characterBeforeColonRegex | The regular expression that must match the character before      | <<</\S/>>>             |
-|                           | the colon (:) for a literal <Map> entry. For example, <<</\S/>>> |                        |
-|                           | matches any non-whitespace character and <<</\s/>>> matches any  | (i.e., no space allowed                       |
+| characterBeforeColonRegex | The regular expression that must match the character before      | <<</\\S/>>>             |
+|                           | the colon (:) for a literal <Map> entry. For example, <<</\\S/>>> |                        |
+|                           | matches any non-whitespace character and <<</\\s/>>> matches any  | (i.e., no space allowed                       |
 |                           | whitespace character (thus requiring a space or whitespace).     |  before the colon)     |
 *---------------------------+------------------------------------------------------------------+------------------------+
-| characterAfterColonRegex  | The regular expression that must match the character after       | <<</\S/>>>             |
-|                           | the colon (:) for a literal <Map> entry. For example, <<</\S/>>> |                        |
-|                           | matches any non-whitespace character and <<</\s/>>> matches any  | (i.e., no space allowed                       |
+| characterAfterColonRegex  | The regular expression that must match the character after       | <<</\\S/>>>             |
+|                           | the colon (:) for a literal <Map> entry. For example, <<</\\S/>>> |                        |
+|                           | matches any non-whitespace character and <<</\\s/>>> matches any  | (i.e., no space allowed                       |
 |                           | whitespace character (thus requiring a space or whitespace).     |  before the colon)     |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
