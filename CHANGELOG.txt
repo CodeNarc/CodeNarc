@@ -62,8 +62,8 @@ NEW RULES
 - #143: MultipleUnaryOperators rule (basic) - Checks for multiple consecutive unary operators.
 
 UPDATED/ENHANCED RULES AND BUG FIXES
-- #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to Ren? Scheibe)
-- #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to Ren? Scheibe)
+- #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
+- #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to René Scheibe)
 - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
 - #35: UnnecessaryPackageReferenceRule: raises confusing violation for Script with package.
 - #48: Fix Method chaining breaks SpaceAfterComma.
@@ -185,7 +185,7 @@ UPDATED/ENHANCED RULES
 - #3521130: PrintStackTrace: Also check for StackTraceUtils.printSanitizedStackTrace().
 - #3589971: Add threshold for max class metric value for CyclomaticComplexity, AbcMetric and CrapMetric.
 - #3574257: Rename AbcComplexity rule to AbcMetric. Deprecate old AbcComplexity rule and set enabled=false. Rename properties, e.g. maxMethodAbcScore.
-- Pull request #5: Enhanced UnusedVariableRule to enable ignoring some variables (ignoreVariableNames). Thanks to Ren? Scheibe.
+- Pull request #5: Enhanced UnusedVariableRule to enable ignoring some variables (ignoreVariableNames). Thanks to René Scheibe.
 
 BUG FIXES
 - Fix #3555096: UnusedPrivateMethod - StringIndexOutOfBoundsException for zero-length method name.
@@ -302,8 +302,8 @@ BREAKING CHANGES
 *** The HardcodedWindowsRootDirectory has been renamed to HardCodedWindowsRootDirectory. (#3433741)
 *** Major Reorganization of the "Basic" RuleSet. (#3432475)
   This included moving several rules from the "Basic" ruleset to other rulesets, as well as adding two new rulesets:
-      1. "Groovyism" ? Groovy idiomatic usage, and Groovy-specific bad practices
-      2. "Convention" ? Coding conventions; not typically errors.
+      1. "Groovyism" - Groovy idiomatic usage, and Groovy-specific bad practices
+      2. "Convention" - Coding conventions; not typically errors.
 
   The following rules were moved out of the "Basic" ruleset:
      - AddEmptyString                      (unnecessary)
@@ -391,10 +391,10 @@ BUG FIXES and NEW FEATURES
 - #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
 - #3314773: UnnecessaryGroovyImportRule: false positive on static imports
 - #3315992: ClosureAsLastMethodParameter - false positive, when method call surrounded by parentheses.
-- #3307699: Fixed a typo and made some "Violation" strings lowercase, so the log messages are consistent. (Fixed by Ren? Scheibe)
-- #3315946: Cmdline runner does not respect -includes and -excludes.  (Fixed by Ren? Scheibe)
-- #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by Ren? Scheibe)
-- #3322395: JUnitTestMethodWithoutAssert - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by Ren? Scheibe)
+- #3307699: Fixed a typo and made some "Violation" strings lowercase, so the log messages are consistent. (Fixed by René Scheibe)
+- #3315946: Cmdline runner does not respect -includes and -excludes.  (Fixed by René Scheibe)
+- #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by René Scheibe)
+- #3322395: JUnitTestMethodWithoutAssert - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by René Scheibe)
 - #3310381: Added test for all rules (in AbstractRuleTestCase) to verify that any values specified for (doNot)applyToFilesMatching are valid regular expressions.
 - #3325049: Change StatelessClassRule (generic) to require applyToClassNames, applyToFileNames or applyToFilesMatching to be configured.
 - #3361263: IllegalPackageReferenceRule: Also check constructor parameter types and type coercion (x as Type).
@@ -407,7 +407,7 @@ BUG FIXES and NEW FEATURES
 - #3384056: Unnecessary* rules should be priority 3.
 
 THANKS
-- Thanks to Ren? Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
+- Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
   as well as the many bug fixes.
 - Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
 - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule. 
@@ -487,7 +487,7 @@ BUG FIXES and NEW FEATURES
 - #3308930 - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass().
 - #3309748 - FieldName:Do not treat non-static final fields as constants
 - #3310413 - Fix UnnecessaryPublicModifier does not catch public on constructors.
-- #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from Ren? Scheibe
+- #3310521 - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from René Scheibe
 - #3313550 - Some HTML violation descriptions in the properties files were not well-formed HTML. This has been fixed.
 - #3205688 - Fixed false positives in UseAssertEqualsInsteadOfAssertTrue when using the JUnit assertFalse method.
 
@@ -505,7 +505,7 @@ THANKS
   Thank you to Erik Pragt for the MisorderedStaticImports rule.
   Thank you to Marcin Erdmann for the MisorderedStaticImports, ClosureAsLastMethodParameterInBracketsRule, and UnnecessaryBracketsForMethodWithClosureCall rules.
   Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
-  Thank you to Ren? Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
+  Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
 
 Changes in version 0.13 (February 2011)
 -------------------------------------------
@@ -586,8 +586,8 @@ POTENTIAL BREAKING CHANGES
 - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
 
 THANKS
- - Many thanks to Mathilde Lem?e, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
- - Big thanks to Evgeny Goldin and C?dric Champeau for reporting bugs which helps us improve the product so much faster.
+ - Many thanks to Mathilde Lemée, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
+ - Big thanks to Evgeny Goldin and Cédric Champeau for reporting bugs which helps us improve the product so much faster.
 
 Changes in version 0.12 (January 2011)
 -------------------------------------------
@@ -783,15 +783,15 @@ NEW SIZE/COMPLEXITY RULES
 - AbcComplexityRule - Check ABC size/complexity score against threshold for method and class average (size)
 - CyclomaticComplexityRule - Check Cyclomatic Complexity against threshold for method and class average (size)
 NEW CONCURRENCY RULES
-- NestedSynchronizationRule (concurrency - Hamlet D?Arcy)
-- RunFinalizersOnExitRule (concurrency - Hamlet D?Arcy)
-- SynchronizedMethodRule (concurrency - Hamlet D?Arcy)
-- SynchronizedOnThisRule (concurrency - Hamlet D?Arcy)
-- ThreadLocalNotStaticFinalRule (concurrency - Hamlet D?Arcy)
-- ThreadYieldRule: (concurrency - Hamlet D?Arcy)
-- VolatileLongOrDoubleFieldRule: (concurrency - Hamlet D?Arcy)
+- NestedSynchronizationRule (concurrency - Hamlet D'Arcy)
+- RunFinalizersOnExitRule (concurrency - Hamlet D'Arcy)
+- SynchronizedMethodRule (concurrency - Hamlet D'Arcy)
+- SynchronizedOnThisRule (concurrency - Hamlet D'Arcy)
+- ThreadLocalNotStaticFinalRule (concurrency - Hamlet D'Arcy)
+- ThreadYieldRule: (concurrency - Hamlet D'Arcy)
+- VolatileLongOrDoubleFieldRule: (concurrency - Hamlet D'Arcy)
 NEW BASIC RULES
-- CloneableWithoutCloneRule (basic - Hamlet D'Arcy & Ren? Gr?schke)
+- CloneableWithoutCloneRule (basic - Hamlet D'Arcy & René Groeschke)
 - ConstantIfExpressionRule: if(true) or if(false). Or literal constant. (basic)
 - ConstantTernaryExpressionRule: true ? x : y or false, null or literal.(basic)
 - UnnecessaryTernaryExpressionRule: x ? true : false. Or Boolean.TRUE. Or where both expressions are the same. (basic)
@@ -847,7 +847,7 @@ RULES
 - AbstractRule: Add optional description property; Use it in report if specified.
 OTHER CHANGES
 - Allow spaces within comma-separated list of ruleset files. Applies when specifying ruleset files for the CodeNarc Ant Task or the CodeNarc script.
-- CodeNarcRunner: Don?t require that reportWriters is non-empty.
+- CodeNarcRunner: Don't require that reportWriters is non-empty.
 - AntFileSetSourceAnalyzer: Specify sourceDirectories relative to project base directory.
 - Reorganize web site. Add Reports section. Add pages for HTML, XML and and text reports.
 - Add support and documentation for running CodeNarc as part of an automated test suite (e.g. JUnit).
@@ -898,7 +898,7 @@ INFRASTRUCTURE
 - WildcardPattern: Add optional defaultMatches constructor parameter to specify return value of matches() when the pattern string is null or empty.
 - HtmlReportWriter: Show rules with priority 4. This enables configuring rules to be included in the report but not fail the build.
 - SourceCode: Add int getLineNumberForCharacterIndex(int charIndex).
-- CodeNarcRunner: Don?t mandate that reportWriters is non-empty.
+- CodeNarcRunner: Don't mandate that reportWriters is non-empty.
 OTHER
 - Publish CodeNarc to Maven repository.
 
@@ -906,7 +906,7 @@ OTHER
 Changes in version 0.5 (24 May 2009)
 ------------------------------------
 BUG FIXES
-- FIX: IllegalRegexRule: Don?t stop after first violation.
+- FIX: IllegalRegexRule: Don't stop after first violation.
 - FIX: VariableNameRule processing enums: "ArrayIndexOutOfBoundsException: Negative array index [-3] too large for array size 1".
 - FIX: BooleanInstantiationRule, VariableNameRule: Error parsing code with Enums.
 - FIX: Rules sometimes produce two violations for a single line. (e.g. EmptyElseBlockRule, PrintlnRule)
@@ -926,7 +926,7 @@ RULES
    * EqualsAndHashCodeRule (basic)
    * JUnitPublicNonTestMethodRule (junit).
 - Change JUnit rules to use applyToClassNames=*Test,*Tests.
-- ClassSizeRule: Don?t include package name in violation message.
+- ClassSizeRule: Don't include package name in violation message.
 INFRASTRUCTURE
 - Support running CodeNarc as a command-line application (org.codenarc.CodeNarc).
 - Add support for Groovy rule scripts.
@@ -966,7 +966,7 @@ INFRASTRUCTURE
 - Make version at the bottom of the HTML report a link to the web site.
 - Refactor SourceCodeUtil to a SourceCodeCriteria class.
 - CodeNarcTask: Log elapsed time after analysis is complete.
-- CodeNarcTask: Don?t fail build until after reports are generated.
+- CodeNarcTask: Don't fail build until after reports are generated.
 - Create WildcardPattern class.
 - Create AstUtil. Move isBlock() and isEmptyBlock() from AbstractAstVisitor.
 RULES
@@ -1019,7 +1019,7 @@ MINOR FIXES/ENHANCEMENTS
 - Add setName() and setPriority() to AbstractRule.
 DOCUMENTATION
 - Add info to online docs re: standard rule properties.
-- Reorganize docs ? separate doc for each RuleSet; section for each rule; table for properties.
+- Reorganize docs - separate doc for each RuleSet; section for each rule; table for properties.
 - Update RuleSets doc with info about configuring using properties file.
 - Create "Configuring Rules" document (adapt existing "custom-rule-descriptions.apt").
 

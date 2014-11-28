@@ -22,7 +22,7 @@ import org.junit.Test
 /**
  * Tests for UnnecessaryDefInVariableDeclarationRule
  *
- * @author Ren? Scheibe
+ * @author René Scheibe
   */
 class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
 

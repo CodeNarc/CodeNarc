@@ -22,7 +22,7 @@ import org.junit.Test
 /**
  * Tests for ExplicitLinkedHashMapInstantiationRule
  *
- * @author Ren? Scheibe
+ * @author René Scheibe
  */
 class ExplicitLinkedHashMapInstantiationRuleTest extends AbstractRuleTestCase {
 
