@@ -23,6 +23,7 @@
     <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
     <rule class='org.codenarc.rule.basic.DeadCodeRule'/>
     <rule class='org.codenarc.rule.basic.DoubleNegativeRule'/>
+    <rule class='org.codenarc.rule.basic.NestedForLoopRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateCaseStatementRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateMapKeyRule'/>
     <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
