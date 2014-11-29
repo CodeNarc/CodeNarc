@@ -14,7 +14,7 @@ if (args[0] == 'create-rule') {
     def authorName = getUserInput()
 
 	print "Enter the rule name:"
-	def ruleName = getUserInput()
+	def ruleName = removeRuleSuffix(getUserInput())
 	def ruleCategory = getRuleCategory() 
 
     print "Enter the rule description:"
@@ -145,6 +145,17 @@ def getValidRuleCategories() {
 	    if (dir.name != '.svn') categories << dir.name
 	}
 	categories
+}
+
+String removeRuleSuffix(String initialRuleName) {
+    removeSuffix(initialRuleName, 'Rule')
+}
+
+String removeSuffix(String input, String suffix) {
+    if (input.endsWith(suffix)) {
+        return input.substring(0, input.lastIndexOf(suffix))
+    }
+    return input
 }
 
 def usage() {
