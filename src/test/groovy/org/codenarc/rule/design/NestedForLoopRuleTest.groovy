@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.basic
+package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.Test
-
 /**
  * Tests for NestedForLoopRule
  *
