@@ -201,6 +201,7 @@ ruleset {
     MultipleLoggers 
     MultipleUnaryOperators 
     NestedBlockDepth 
+    NestedForLoop 
     NestedSynchronization 
     NoDef 
     NoWildcardImports 

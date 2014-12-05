@@ -111,6 +111,7 @@ ruleset {
     ImplementationAsType 
     Instanceof 
     LocaleSetDefault 
+    NestedForLoop 
     PrivateFieldCouldBeFinal 
     PublicInstanceField 
     ReturnsNullInsteadOfEmptyArray 

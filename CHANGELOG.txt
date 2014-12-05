@@ -4,12 +4,16 @@ http://www.codenarc.org
 
 Changes in version 0.23 (??? 2015)
 --------------------------------------
+NEW RULES
+- #73: NestedForLoop rule (design) - Checks for nested for loops. (Thanks to Maciej Ziarko)
+
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #69: PrivateFieldCouldBeFinalRule support for JPA entities. (Thanks to Maciej Ziarko)
 - #70: GStringExpressionWithinStringRule should ignore quasi GString expressions inside annotations. (Thanks to Maciej Ziarko)
 
 FRAMEWORK AND INFRASTRUCTURE
 - #68: Cleaned up and fixed HtmlReportWriterTest.
+- #74: Improved codenarc.groovy to remove Rule suffix from rule name. (Thanks to Maciej Ziarko)
 
 
 Changes in version 0.22 (Oct 2014)
