@@ -28,4 +28,5 @@
     <rule class='org.codenarc.rule.design.SimpleDateFormatMissingLocaleRule'/>
     <rule class='org.codenarc.rule.design.StatelessSingletonRule'/>
     <rule class='org.codenarc.rule.design.ToStringReturnsNullRule'/>
+    <rule class='org.codenarc.rule.design.NestedForLoopRule'/>
 </ruleset>

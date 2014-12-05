@@ -138,6 +138,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         super.visitMethodCallExpression(call)
     }
 
+    @SuppressWarnings('NestedForLoop')
     private void markVariableAsReferenced(String varName, VariableExpression varExpression) {
         for(blockVariables in variablesByBlockScope) {
             for(var in blockVariables.keySet()) {
