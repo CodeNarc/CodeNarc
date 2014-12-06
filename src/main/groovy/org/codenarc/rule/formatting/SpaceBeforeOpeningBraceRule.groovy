@@ -92,17 +92,11 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     void visitClosureExpression(ClosureExpression expression) {
         isFirstVisit(expression.code)   // Register the code block so that it will be ignored in visitBlockStatement()
         if (isFirstVisit(expression)) {
-            def line = sourceLineOrEmpty(expression)
-            def startCol = expression.columnNumber
-            if (isNotWhitespace(line, startCol - 1) && isNotOpeningParenthesis(line, startCol - 1)) {
+            if (isCharacterPrecedingClosureInvalid(expression)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
         super.visitClosureExpression(expression)
-    }
-
-    private static boolean isNotOpeningParenthesis(String line, int index) {
-        index >= 1 && index <= line.size() && (line[index - 1] as char) != '('
     }
 
     @Override
@@ -124,8 +118,29 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
         super.visitSwitch(statement)
     }
 
+    private boolean isCharacterPrecedingClosureInvalid(ClosureExpression expression) {
+        String line = sourceLineOrEmpty(expression)
+        int investigatedIndex = expression.columnNumber - 1
+        return isNotWhitespace(line, investigatedIndex) && isNotOpeningParenthesis(line, investigatedIndex) &&
+                isNotDollarInsideGString(line, investigatedIndex)
+    }
+
+    private boolean isNotDollarInsideGString(String line, int index) {
+        if (isNotDollar(line, index)) {
+            return true
+        }
+        return isNotInsideGString()
+    }
+
+    private boolean isNotDollar(String line, int index) {
+        return isNotCharacter(line, '$' as char, index)
+    }
+
+    private boolean isNotOpeningParenthesis(String line, int index) {
+        return isNotCharacter(line, '(' as char, index)
+    }
+
     private void addOpeningBraceViolation(ASTNode node, String keyword) {
         addViolation(node, "The opening brace for the $keyword in class $currentClassName is not preceded by a space or whitespace")
     }
-
 }
