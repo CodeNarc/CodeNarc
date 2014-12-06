@@ -15,6 +15,7 @@
  */
  package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codenarc.rule.AbstractAstVisitor
 
 /**
@@ -23,6 +24,19 @@ import org.codenarc.rule.AbstractAstVisitor
  * @author Chris Mair
  */
 abstract class AbstractSpaceAroundBraceAstVisitor extends AbstractAstVisitor {
+
+    private final Stack<GStringExpression> gStringExpressionsStack = [] as Stack
+
+    @Override
+    void visitGStringExpression(GStringExpression expression) {
+        gStringExpressionsStack.push(expression)
+        super.visitGStringExpression(expression)
+        gStringExpressionsStack.pop()
+    }
+
+    protected boolean isNotInsideGString() {
+        return gStringExpressionsStack.empty()
+    }
 
     protected String sourceLineOrEmpty(node) {
         node.lineNumber == -1 ? '' : sourceLine(node)
@@ -39,11 +53,11 @@ abstract class AbstractSpaceAroundBraceAstVisitor extends AbstractAstVisitor {
      * @return true only if the character is not a whitespace character
      */
     protected boolean isNotWhitespace(String line, int index) {
-        index >= 1 && index <= line.size() && !Character.isWhitespace(line[index - 1] as char)
+        index in 1..line.size() && !Character.isWhitespace(line[index - 1] as char)
     }
 
     protected boolean isNotCharacter(String line, char c, int index) {
-        index >= 1 && index <= line.size() && line[index - 1] as char != c
+        index in 1..line.size() && line[index - 1] as char != c
     }
 
     protected int indexOfClosingBrace(String line, int blockLastColumn) {

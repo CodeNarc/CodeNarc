@@ -267,6 +267,22 @@ c        '''
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_GStringWithClosure_NoViolations() {
+        assertNoViolations('''
+            def foo = 1
+            "I am a ${ -> foo }"
+        ''')
+    }
+
+    @Test
+    void testApplyTo_GStringWithClosure_AnyCharacterAllowedAfterClosureInsideGString_NoViolations() {
+        assertNoViolations('''
+            def foo = 1
+            "I am a ${ -> foo }0"
+        ''')
+    }
+
     protected Rule createRule() {
         new SpaceAfterClosingBraceRule()
     }
