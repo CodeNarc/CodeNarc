@@ -121,9 +121,8 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     private boolean isCharacterPrecedingClosureInvalid(ClosureExpression expression) {
         String line = sourceLineOrEmpty(expression)
         int investigatedIndex = expression.columnNumber - 1
-        return [this.&isNotWhitespace, this.&isNotOpeningParenthesis, this.&isNotDollarInsideGString].every {
-            method -> method(line, investigatedIndex)
-        }
+        return isNotWhitespace(line, investigatedIndex) && isNotOpeningParenthesis(line, investigatedIndex) &&
+                isNotDollarInsideGString(line, investigatedIndex)
     }
 
     private boolean isNotDollarInsideGString(String line, int index) {
