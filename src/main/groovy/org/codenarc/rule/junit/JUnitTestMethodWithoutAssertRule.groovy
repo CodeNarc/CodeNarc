@@ -40,7 +40,7 @@ class JUnitTestMethodWithoutAssertRule extends AbstractAstVisitorRule {
 
     String name = 'JUnitTestMethodWithoutAssert'
     int priority = 2
-    String assertMethodPatterns = 'assert.*,should.*,fail.*,verify.*'
+    String assertMethodPatterns = 'assert.*,should.*,fail.*,verify.*,expect.*'
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
 
     @Override
