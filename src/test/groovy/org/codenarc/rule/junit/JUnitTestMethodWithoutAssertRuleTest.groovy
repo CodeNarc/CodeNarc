@@ -163,6 +163,29 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
                 12, 'void someMethod2()', "Test method 'someMethod2' makes no assertions")
     }
 
+    @Test
+    void testNoViolations_ExpectedExceptionSupport() {
+        assertNoViolations('''
+            class MyTest {
+                @Rule
+                public ExpectedException exception = ExpectedException.none()
+
+                @Test
+                void myTest() {
+                    String nullString = null
+                    exception.expect(NullPointerException)
+                    nullString.toLowerCase()
+                }
+
+                @Test
+                void myTest2() {
+                    exception.expectMessage('argument')
+                    throw new IllegalArgumentException('Illegal argument provided!')
+                }
+            }
+        ''')
+    }
+
     protected Rule createRule() {
         new JUnitTestMethodWithoutAssertRule()
     }
