@@ -15,6 +15,7 @@ ruleset {
 
     ruleset('rulesets/design.xml') {
         Instanceof(enabled:false)
+        PublicInstanceField(doNotApplyToClassNames:'*Test') //Tests are guarded by JUnitPublicField
     }
 
     ruleset('rulesets/dry.xml') {

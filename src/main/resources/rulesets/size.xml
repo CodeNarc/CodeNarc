@@ -16,4 +16,5 @@
     <rule class='org.codenarc.rule.size.MethodCountRule'/>
     <rule class='org.codenarc.rule.size.MethodSizeRule'/>
     <rule class='org.codenarc.rule.size.NestedBlockDepthRule'/>
+    <rule class='org.codenarc.rule.size.ParameterCountRule'/>
 </ruleset>

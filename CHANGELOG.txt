@@ -6,6 +6,7 @@ Changes in version 0.23 (??? 2015)
 --------------------------------------
 NEW RULES
 - #73: NestedForLoop rule (design) - Checks for nested for loops. (Thanks to Maciej Ziarko)
+- ParameterCount rule (size) - Checks if the number of parameters in method/constructor exceeds the number of parameters specified by the maxParameters property.
 
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #69: PrivateFieldCouldBeFinalRule support for JPA entities. (Thanks to Maciej Ziarko)

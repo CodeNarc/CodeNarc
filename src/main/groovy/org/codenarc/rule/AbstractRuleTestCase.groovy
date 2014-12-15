@@ -199,6 +199,7 @@ abstract class AbstractRuleTestCase extends AbstractTestCase {
      * @param sourceLineText2 - the text expected within the sourceLine of the second violation
      * @param msg2 - the text expected within the message of the second violation; May be a String or List of Strings; Defaults to null;
      */
+    @SuppressWarnings('ParameterCount')
     protected void assertTwoViolations(String source,
             Integer lineNumber1, String sourceLineText1, msg1,
             Integer lineNumber2, String sourceLineText2, msg2) {
