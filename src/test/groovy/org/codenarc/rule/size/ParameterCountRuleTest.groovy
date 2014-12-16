@@ -16,9 +16,10 @@
 package org.codenarc.rule.size
 
 import org.codenarc.rule.Rule
-import org.codenarc.test.TestUtil
 import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
+
+import static org.codenarc.test.TestUtil.shouldFail
 
 /**
  * Tests for ParameterCountRule
@@ -35,14 +36,14 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testSetMaxParameter_negativeInteger() {
-        TestUtil.shouldFail(IllegalArgumentException) {
+        shouldFail(IllegalArgumentException) {
             rule.maxParameters = -1
         }
     }
 
     @Test
     void testSetMaxParameter_zero() {
-        TestUtil.shouldFail(IllegalArgumentException) {
+        shouldFail(IllegalArgumentException) {
             rule.maxParameters = 0
         }
     }
