@@ -16,10 +16,9 @@
 package org.codenarc.rule.size
 
 import org.codenarc.rule.Rule as CodeNarcRule
-import org.junit.Rule
+import org.codenarc.test.TestUtil
 import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.rules.ExpectedException
 
 /**
  * Tests for ParameterCountRule
@@ -27,9 +26,6 @@ import org.junit.rules.ExpectedException
  * @author Maciej Ziarko
  */
 class ParameterCountRuleTest extends AbstractRuleTestCase {
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none()
 
     @Test
     void testRuleProperties() {
@@ -39,14 +35,16 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testSetMaxParameter_negativeInteger() {
-        exception.expect(IllegalArgumentException)
-        rule.maxParameters = -1
+        TestUtil.shouldFail(IllegalArgumentException) {
+            rule.maxParameters = -1
+        }
     }
 
     @Test
     void testSetMaxParameter_zero() {
-        exception.expect(IllegalArgumentException)
-        rule.maxParameters = 0
+        TestUtil.shouldFail(IllegalArgumentException) {
+            rule.maxParameters = 0
+        }
     }
 
     @Test
