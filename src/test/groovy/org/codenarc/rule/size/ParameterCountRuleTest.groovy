@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.Rule as CodeNarcRule
+import org.codenarc.rule.Rule
 import org.codenarc.test.TestUtil
 import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
@@ -192,7 +192,7 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
         return inlineViolation("Number of parameters in ${name} exceeds maximum allowed (${rule.maxParameters}).")
     }
 
-    protected CodeNarcRule createRule() {
+    protected Rule createRule() {
         new ParameterCountRule()
     }
 }
