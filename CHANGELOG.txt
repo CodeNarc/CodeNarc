@@ -6,11 +6,13 @@ Changes in version 0.23 (??? 2015)
 --------------------------------------
 NEW RULES
 - #73: NestedForLoop rule (design) - Checks for nested for loops. (Thanks to Maciej Ziarko)
-- ParameterCount rule (size) - Checks if the number of parameters in method/constructor exceeds the number of parameters specified by the maxParameters property.
+- #80: ParameterCount rule (size) - Checks if the number of parameters in method/constructor exceeds the number of parameters specified by the maxParameters property. (Thanks to Maciej Ziarko)
 
 UPDATED/ENHANCED RULES AND BUG FIXES
-- #69: PrivateFieldCouldBeFinalRule support for JPA entities. (Thanks to Maciej Ziarko)
-- #70: GStringExpressionWithinStringRule should ignore quasi GString expressions inside annotations. (Thanks to Maciej Ziarko)
+- #69: PrivateFieldCouldBeFinal rule support for JPA entities. (Thanks to Maciej Ziarko)
+- #70: GStringExpressionWithinString rule should ignore quasi GString expressions inside annotations. (Thanks to Maciej Ziarko)
+- #76: SpaceAfterClosingBrace and SpaceBeforeOpeningBrace rules: GStrings with embedded closures incorrectly cause violations. (Thanks to Maciej Ziarko)
+- #79: JUnitTestMethodWithoutAssert support for JUnit's ExpectedException way to verify exceptions. (Thanks to Maciej Ziarko)
 
 FRAMEWORK AND INFRASTRUCTURE
 - #68: Cleaned up and fixed HtmlReportWriterTest.
