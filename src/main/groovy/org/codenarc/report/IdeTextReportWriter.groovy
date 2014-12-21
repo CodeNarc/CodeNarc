@@ -34,7 +34,7 @@ class IdeTextReportWriter extends TextReportWriter {
     @Override
     protected String getViolationLocationString(Violation violation, String path) {
         def fileName = PathUtil.getName(path)
-        return "Loc=..($fileName:${violation.lineNumber})"
+        return "Loc=.($fileName:${violation.lineNumber})"
     }
 
 }
