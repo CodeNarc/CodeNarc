@@ -42,7 +42,7 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
     private static final LINE2 = 222
     private static final LINE3 = 333
     private static final SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
-    private static final SOURCE_LINE3 = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
+    private static final SOURCE_LINE3 = 'throw new Exception("cdata=<![CDATA[whatever]]>") // Some very long message 1234567890123456789012345678901234567890'
     private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
     private static final MESSAGE3 = 'Other info'
     private static final VIOLATION1 = new Violation(rule:new UnusedImportRule(), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
@@ -70,25 +70,25 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='0' priority2='5' priority3='2'>
             <File name='MyAction.groovy'>
                 <Violation ruleName='UnusedImport' priority='3' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine>
                     <Description><![CDATA[Imports for a class that is never referenced within the source file is unnecessary.]]></Description>
                 </Violation>
                 <Violation ruleName='EmptyCatchBlock' priority='2' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
                     <Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description>
                 </Violation>
                 <Violation ruleName='EmptyCatchBlock' priority='2' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
                     <Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description>
                 </Violation>
                 <Violation ruleName='UnusedImport' priority='3' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine>
                     <Description><![CDATA[Imports for a class that is never referenced within the source file is unnecessary.]]></Description>
                 </Violation>
                 <Violation ruleName='UnusedPrivateMethod' priority='2' lineNumber='222'>
-                    <Message><![CDATA[bad stuff: !@#\$%^&*()_+<>]]></Message>
+                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
                     <Description><![CDATA[Checks for private methods that are not referenced within the same class.]]></Description>
                 </Violation>
             </File>
@@ -97,14 +97,14 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
         <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='2' priority3='0'>
             <File name='MyDao.groovy'>
                 <Violation ruleName='EmptyCatchBlock' priority='2' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
                     <Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description>
                 </Violation>
             </File>
             <File name='MyOtherDao.groovy'>
                 <Violation ruleName='UnusedPrivateMethod' priority='2' lineNumber='222'>
-                    <Message><![CDATA[bad stuff: !@#\$%^&*()_+<>]]></Message>
+                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
                     <Description><![CDATA[Checks for private methods that are not referenced within the same class.]]></Description>
                 </Violation>
             </File>

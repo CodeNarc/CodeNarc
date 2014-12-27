@@ -43,7 +43,7 @@ class XmlReportWriterTest extends AbstractTestCase {
     private static final LINE2 = 222
     private static final LINE3 = 333
     private static final SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
-    private static final SOURCE_LINE3 = 'throw new Exception() // Some very long message 1234567890123456789012345678901234567890'
+    private static final SOURCE_LINE3 = 'throw new Exception("cdata=<![CDATA[whatever]]>") // Some very long message 1234567890123456789012345678901234567890'
     private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
     private static final MESSAGE3 = 'Other info'
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
@@ -73,20 +73,20 @@ class XmlReportWriterTest extends AbstractTestCase {
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
             <File name='MyAction.groovy'>
                 <Violation ruleName='RULE1' priority='1' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine>
                 </Violation>
                 <Violation ruleName='RULE3' priority='3' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
                 </Violation>
                 <Violation ruleName='RULE3' priority='3' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
                 </Violation>
                 <Violation ruleName='RULE1' priority='1' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count < 23 && index <= 99) {]]></SourceLine></Violation>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine></Violation>
                 <Violation ruleName='RULE2' priority='2' lineNumber='222'>
-                    <Message><![CDATA[bad stuff: !@#\$%^&*()_+<>]]></Message>
+                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
                 </Violation>
             </File>
         </Package>
@@ -94,13 +94,13 @@ class XmlReportWriterTest extends AbstractTestCase {
         <Package path='src/main/dao' totalFiles='2' filesWithViolations='2' priority1='0' priority2='1' priority3='1'>
             <File name='MyDao.groovy'>
                 <Violation ruleName='RULE3' priority='3' lineNumber='333'>
-                    <SourceLine><![CDATA[throw new Exception() // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
+                    <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
                     <Message><![CDATA[Other info]]></Message>
                 </Violation>
             </File>
             <File name='MyOtherDao.groovy'>
                 <Violation ruleName='RULE2' priority='2' lineNumber='222'>
-                    <Message><![CDATA[bad stuff: !@#\$%^&*()_+<>]]></Message>
+                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
                 </Violation>
             </File>
         </Package>
@@ -214,6 +214,9 @@ class XmlReportWriterTest extends AbstractTestCase {
     private void assertXml(String actualXml) {
         log(actualXml)
         assert normalizeXml(REPORT_XML) == normalizeXml(actualXml)
+
+        // Verify that it is valid XML
+        new XmlSlurper().parseText(actualXml)
     }
 
     private void assertContainsXml(String actualXml, String expectedPartialXml) {
