@@ -14,7 +14,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #76: SpaceAfterClosingBrace and SpaceBeforeOpeningBrace rules: GStrings with embedded closures incorrectly cause violations. (Thanks to Maciej Ziarko)
 - #79: JUnitTestMethodWithoutAssert support for JUnit's ExpectedException way to verify exceptions. (Thanks to Maciej Ziarko)
 - #82: IdeTextReportWriter violation link (loc=..) does not work in Eclipse.
-- #83: HtmlReportWriter: Optionally skip Summary by Package section. Add includeSummaryByPackage property; defaults to true.
+- #83: HtmlReportWriter: Optionally skip violation summary by package. Add includeSummaryByPackage property; defaults to true.
 - #81: Escape illegal XML characters within the source line or message in the XML report.
 
 FRAMEWORK AND INFRASTRUCTURE

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2014 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,8 @@ import org.codenarc.util.io.ClassPathResource
  * You can optionally add rule descriptions for custom rules by placing them within a "codenarc-messages.properties"
  * file on the classpath, with entries of the form: {rule-name}.description=..."
  * <p/>
- * Set the includeSummaryByPackage property to false to exclude the "Summary by Package" section from
- * the report. It defaults to true.
+ * Set the includeSummaryByPackage property to false to exclude the violation summary for each package
+ * within the "Summary" section of the report. It defaults to true.
  * <p/>
  * Set the maxPriority property to control the maximum priority level for violations in
  * the report. For instance, setting maxPriority to 2 will result in the report containing
@@ -110,10 +110,7 @@ class HtmlReportWriter extends AbstractReportWriter {
                 out << buildLogo()
                 h1(getResourceBundleString('htmlReport.titlePrefix'))
                 out << buildReportMetadata()
-
-                if (includeSummaryByPackage) {
-                    out << buildSummaryByPackage(results)
-                }
+                out << buildSummaryByPackage(results)
 
                 out << buildAllPackageSections(results)
                 out << buildRuleDescriptions(analysisContext)
@@ -162,7 +159,9 @@ class HtmlReportWriter extends AbstractReportWriter {
                         }
                     }
                     out << buildSummaryByPackageRow(results, true)
-                    out << buildAllSummaryByPackageRowsRecursively(results)
+                    if (includeSummaryByPackage) {
+                        out << buildAllSummaryByPackageRowsRecursively(results)
+                    }
                 }
             }
         }
