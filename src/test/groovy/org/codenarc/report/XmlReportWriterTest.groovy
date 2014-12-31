@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2014 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ class XmlReportWriterTest extends AbstractTestCase {
     private static final LINE1 = 111
     private static final LINE2 = 222
     private static final LINE3 = 333
-    private static final SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
+    private static final SOURCE_LINE1 = "if (count < 23 && index <= 99 && name.contains('\u0000')) {"
     private static final SOURCE_LINE3 = 'throw new Exception("cdata=<![CDATA[whatever]]>") // Some very long message 1234567890123456789012345678901234567890'
     private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
     private static final MESSAGE3 = 'Other info'
@@ -73,7 +73,7 @@ class XmlReportWriterTest extends AbstractTestCase {
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='2' priority2='2' priority3='3'>
             <File name='MyAction.groovy'>
                 <Violation ruleName='RULE1' priority='1' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine>
                 </Violation>
                 <Violation ruleName='RULE3' priority='3' lineNumber='333'>
                     <SourceLine><![CDATA[throw new Exception("cdata=&lt;![CDATA[whatever]]&gt;") // Some very long message 1234567890123456789012345678901234567890]]></SourceLine>
@@ -84,7 +84,7 @@ class XmlReportWriterTest extends AbstractTestCase {
                     <Message><![CDATA[Other info]]></Message>
                 </Violation>
                 <Violation ruleName='RULE1' priority='1' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine></Violation>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine></Violation>
                 <Violation ruleName='RULE2' priority='2' lineNumber='222'>
                     <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
                 </Violation>
@@ -180,6 +180,24 @@ class XmlReportWriterTest extends AbstractTestCase {
     @Test
     void testDefaultOutputFile_CodeNarcXmlReport() {
         assert reportWriter.defaultOutputFile == 'CodeNarcXmlReport.xml'
+    }
+
+    //--------------------------------------------------------------------------
+    // Setup and helper methods
+    //--------------------------------------------------------------------------
+
+    @Test
+    void testRemoveIllegalCharacters() {
+        assert reportWriter.removeIllegalCharacters('\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008') == ''
+        assert reportWriter.removeIllegalCharacters('\uD800') == ''
+
+        // Valid chars
+        assert reportWriter.removeIllegalCharacters('') == ''
+        assert reportWriter.removeIllegalCharacters('01234567890 ABC abc') == '01234567890 ABC abc'
+        assert reportWriter.removeIllegalCharacters('!@#$%^&*()-_=+[]{};\'",./<>?') == '!@#$%^&*()-_=+[]{};\'",./<>?'
+        assert reportWriter.removeIllegalCharacters('\u0009') == '\u0009'
+        assert reportWriter.removeIllegalCharacters('\t\n\r') == '\t\n\r'
+        assert reportWriter.removeIllegalCharacters('\uE000') == '\uE000'
     }
 
     @Before

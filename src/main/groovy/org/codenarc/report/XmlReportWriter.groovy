@@ -133,11 +133,11 @@ class XmlReportWriter extends AbstractReportWriter {
     }
 
     protected buildSourceLineElement(Violation violation) {
-        return (violation.sourceLine) ? { SourceLine(cdata(violation.sourceLine)) } : null
+        return (violation.sourceLine) ? { SourceLine(cdata(removeIllegalCharacters(violation.sourceLine))) } : null
     }
 
     protected buildMessageElement(Violation violation) {
-        return (violation.message) ? { Message(cdata(violation.message)) } : null
+        return (violation.message) ? { Message(cdata(removeIllegalCharacters(violation.message))) } : null
     }
 
     protected buildRulesElement(AnalysisContext analysisContext) {
@@ -160,6 +160,14 @@ class XmlReportWriter extends AbstractReportWriter {
             mkp.yield(text)
             unescaped << ']]>'
         }
+    }
+
+    protected String removeIllegalCharacters(String string) {
+        // See http://www.w3.org/TR/xml/#charsets
+        // See http://stackoverflow.com/questions/730133/invalid-characters-in-xml
+        // #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
+        final REGEX = /[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]/
+        return string.replaceAll(REGEX, '')
     }
 
 }
