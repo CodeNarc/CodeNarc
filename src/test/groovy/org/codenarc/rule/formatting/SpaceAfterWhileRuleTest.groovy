@@ -56,6 +56,20 @@ class SpaceAfterWhileRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'while(', messageText:MESSAGE])
     }
 
+    @Test
+    void testApplyTo_KeywordAfterLabel_NoViolations() {
+        final SOURCE = '''
+            def "sample test"() {
+                when:
+                stack.push(elem)
+
+                then:
+                while (true) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new SpaceAfterWhileRule()
     }

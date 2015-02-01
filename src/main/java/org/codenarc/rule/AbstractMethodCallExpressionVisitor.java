@@ -400,11 +400,6 @@ public class AbstractMethodCallExpressionVisitor extends ClassCodeVisitorSupport
     }
 
     @Override
-    public final void visitRegexExpression(RegexExpression expression) {
-        super.visitRegexExpression(expression);
-    }
-
-    @Override
     public final void visitGStringExpression(GStringExpression expression) {
         super.visitGStringExpression(expression);
     }

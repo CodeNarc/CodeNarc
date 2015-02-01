@@ -193,7 +193,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
     void testRule_Class_NoClosure_NullRuleClass() {
         shouldFailWithMessageContaining('ruleClass') {
             ruleSetBuilder.ruleset {
-                rule(null)
+                rule((Class)null)
             }
         }
     }

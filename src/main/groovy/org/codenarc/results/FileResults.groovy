@@ -20,6 +20,7 @@ package org.codenarc.results
  *
  * @author Chris Mair
  */
+@SuppressWarnings('UnusedMethodParameter')
 class FileResults implements Results {
 
     private final String path
@@ -60,20 +61,20 @@ class FileResults implements Results {
     }
 
     /**
-     * @param recursive - true if the returned count should include subdirectories as well; defaults to true
+     * @param recursive - ignored
      * @return the number of violations with the specified priority
      */
-    @Override
+    //@Override - causes compile error in Groovy 2.4.0
     int getNumberOfViolationsWithPriority(int priority, boolean recursive=true) {
         violations.sum(0) { violation -> violation.rule.priority == priority ? 1 : 0 }
     }
 
     /**
      * Return the total number of (Groovy) files analyzed
-     * @param recursive - true if the returned count should include subdirectories as well
+     * @param recursive - ignored
      * @return the total number of files (with or without violations)
      */
-    @Override
+    //@Override - causes compile error in Groovy 2.4.0
     int getTotalNumberOfFiles(boolean recursive=true) {
         1
     }
@@ -81,10 +82,10 @@ class FileResults implements Results {
     /**
      * Return 1 if these results include at least one violation
      * @param maxPriority - the maximum priority level; ignore violations with priority greater than this
-     * @param recursive - ignored; defaults to true
+     * @param recursive - ignored
      * @return the number of files containing violations
      */
-    @Override
+    //@Override - causes compile error in Groovy 2.4.0
     int getNumberOfFilesWithViolations(int maxPriority, boolean recursive=true) {
         violations.find { v -> v.rule.priority <= maxPriority } ? 1 : 0
     }

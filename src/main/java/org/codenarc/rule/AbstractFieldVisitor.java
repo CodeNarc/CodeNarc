@@ -405,11 +405,6 @@ public class AbstractFieldVisitor extends ClassCodeVisitorSupport implements Ast
     }
 
     @Override
-    public final void visitRegexExpression(RegexExpression expression) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public final void visitGStringExpression(GStringExpression expression) {
         throw new UnsupportedOperationException();
     }

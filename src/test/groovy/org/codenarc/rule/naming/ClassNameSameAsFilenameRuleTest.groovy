@@ -93,9 +93,7 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             enum NotSameAsFilename {}
         '''
-        //TODO change the lineNumber and sourceLineText once we migrate to Groovy >= 1.8.6.
-        //see http://jira.codehaus.org/browse/GROOVY-5215
-        assertSingleViolation(SOURCE, -1, '', violationMessage('Enum', 'NotSameAsFilename'))
+        assertSingleViolation(SOURCE, 2, '', violationMessage('Enum', 'NotSameAsFilename'))
     }
 
     @Test

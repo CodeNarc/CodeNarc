@@ -433,11 +433,6 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
     }
 
     @Override
-    public final void visitRegexExpression(RegexExpression expression) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public final void visitGStringExpression(GStringExpression expression) {
         throw new UnsupportedOperationException();
     }

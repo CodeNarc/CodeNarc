@@ -96,6 +96,7 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisito
         }
     }
 
+    @SuppressWarnings('CyclomaticComplexity')
     private void addViolationOnMismatch(List rawGetterNames, String setterName) {
         def getterNames = rawGetterNames*.toString() // force GString into strings
 

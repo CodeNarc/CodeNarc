@@ -81,11 +81,11 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_EnumDeclaration_KnownLimitation_NoViolations() {
+    void testApplyTo_EnumDeclaration_Violations() {
         final SOURCE = '''
             enum MyEnum { OK, BAD }//comment
 c        '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, 'enum MyEnum', 'The closing brace for enum MyEnum is not followed')
     }
 
     @Test
@@ -241,11 +241,11 @@ c        '''
     }
 
     @Test
-    void testApplyTo_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+    void testApplyTo_UnicodeCharacterLiteral_Violation() {
         final SOURCE = '''
             if (valid()) { return '\\u00A0' }else { }
         '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, 'if (valid())', BLOCK_VIOLATION_MESSAGE)
     }
 
     @Test

@@ -129,11 +129,11 @@ class MyTest
     }
 
     @Test
-    void testApplyTo_EnumDeclaration_KnownLimitation_NoViolations() {
+    void testApplyTo_EnumDeclaration_Violation() {
         final SOURCE = '''
             enum MyEnum {OK, BAD }
 c        '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, 'enum MyEnum {OK, BAD }', 'The opening brace for enum MyEnum')
     }
 
     @Test
@@ -261,11 +261,11 @@ c        '''
     }
 
     @Test
-    void testApplyTo_UnicodeCharacterLiteral() {
+    void testApplyTo_UnicodeCharacterLiteral_Violation() {
         final SOURCE = '''
             if (valid('\\u00A0')) {println 9 }
         '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, 'if (valid', BLOCK_VIOLATION_MESSAGE)
     }
 
     @Test

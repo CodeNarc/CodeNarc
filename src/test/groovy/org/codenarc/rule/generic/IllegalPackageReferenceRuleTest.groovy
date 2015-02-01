@@ -291,9 +291,9 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def x = new org.bad.Handler() { }
         '''
-        // TODO This should produce a violation
         rule.packageNames = 'org.bad'
-        assertNoViolations(SOURCE)
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'def x = new org.bad.Handler() { }', messageText:'org.bad'] )
     }
 
     protected Rule createRule() {

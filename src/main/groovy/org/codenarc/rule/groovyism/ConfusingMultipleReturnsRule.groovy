@@ -18,9 +18,9 @@ package org.codenarc.rule.groovyism
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codehaus.groovy.ast.expr.EmptyExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.AstUtil
 
 /**
  * Multiple return values can be used to set several variables at once. To use multiple return values, the left hand
@@ -84,7 +84,7 @@ class ConfusingMultipleReturnsAstVisitor extends AbstractAstVisitor {
             nodes.remove(nodes[-1]) // remove last node
             if (nodes.every { FieldNode f -> f.initialExpression == null }) {
                 for (def v: nodes) {
-                    addViolation(v, "Confusing decaration in class $currentClassName. The field '$v.name' is initialized to null")
+                    addViolation(v, "Confusing declaration in class $currentClassName. The field '$v.name' is initialized to null")
                 }
             }
         }
@@ -93,12 +93,12 @@ class ConfusingMultipleReturnsAstVisitor extends AbstractAstVisitor {
     private addViolationForMultipleDeclarations(Collection<DeclarationExpression> groupedNodes) {
         // all the declarations are on the same line... does the last one have an initial expression and the others do not?
         def lastExpression = groupedNodes[-1]
-        if (!AstUtil.isNull(lastExpression.rightExpression)) {
+        if (!(lastExpression.rightExpression instanceof EmptyExpression)) {
             groupedNodes.remove(lastExpression) // remove last node b/c it has an expression
             for (def declaration: groupedNodes) {
                 def rhs = declaration.rightExpression
-                if (AstUtil.isNull(rhs) && rhs.lineNumber == -1 && rhs.lastLineNumber == -1 && rhs.columnNumber == -1 && rhs.lastColumnNumber == -1) {
-                    addViolation(declaration, "Confusing decaration in class $currentClassName. The variable '$declaration.leftExpression.text' is initialized to null")
+                if (rhs instanceof EmptyExpression) {
+                    addViolation(declaration, "Confusing declaration in class $currentClassName. The variable '$declaration.leftExpression.text' is initialized to null")
                 }
             }
         }

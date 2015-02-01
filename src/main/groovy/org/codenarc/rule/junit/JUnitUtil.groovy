@@ -80,7 +80,8 @@ class JUnitUtil {
 
     private static boolean isLiteralWithValueThatEvaluatesTo(Expression expression, boolean literalEvaluatesToTrue) {
         if (expression instanceof ConstantExpression) {
-            return (expression.properties['value'] as boolean) == literalEvaluatesToTrue
+            def value = expression.properties['value']
+            return value != null && (value as boolean) == literalEvaluatesToTrue
         }
         if (expression instanceof ListExpression) {
             return expression.expressions.isEmpty() == !literalEvaluatesToTrue

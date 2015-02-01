@@ -27,6 +27,7 @@ import org.junit.Test
 class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase {
 
     private static final String BLOCK_VIOLATION_MESSAGE = 'The closing brace for the block in class None is not preceded by a space or whitespace'
+    private static final String CLOSURE_VIOLATION_MESSAGE = 'The closing brace for the closure in class None is not preceded by a space or whitespace'
 
     @Test
     void testRuleProperties() {
@@ -120,11 +121,11 @@ class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_EnumDeclaration_KnownLimitation_NoViolations() {
+    void testApplyTo_EnumDeclaration_Violation() {
         final SOURCE = '''
             enum MyEnum { OK, BAD}
 c        '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, 'enum MyEnum { OK, BAD}', 'The closing brace for enum MyEnum is not preceded')
     }
 
     @Test
@@ -242,18 +243,18 @@ c        '''
             def m = [a:123, b: { println 7}]
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'list.each { name -> doStuff()}', messageText:'The closing brace for the closure in class None is not preceded'],
-            [lineNumber:3, sourceLineText:'shouldFail(Exception) { doStuff()}', messageText:'The closing brace for the closure in class None is not preceded'],
-            [lineNumber:4, sourceLineText:'def c = { println 123}', messageText:'The closing brace for the closure in class None is not preceded'],
-            [lineNumber:5, sourceLineText:'def m = [a:123, b: { println 7}]', messageText:'The closing brace for the closure in class None is not preceded'])
+            [lineNumber:2, sourceLineText:'list.each { name -> doStuff()}', messageText:CLOSURE_VIOLATION_MESSAGE],
+            [lineNumber:3, sourceLineText:'shouldFail(Exception) { doStuff()}', messageText:CLOSURE_VIOLATION_MESSAGE],
+            [lineNumber:4, sourceLineText:'def c = { println 123}', messageText:CLOSURE_VIOLATION_MESSAGE],
+            [lineNumber:5, sourceLineText:'def m = [a:123, b: { println 7}]', messageText:CLOSURE_VIOLATION_MESSAGE])
     }
 
     @Test
-    void testApplyTo_Closure_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+    void testApplyTo_Closure_UnicodeCharacterLiteral_Violation() {
         final SOURCE = '''
             list.each { name -> doStuff('\\u00A0')}
         '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, 'list.each { name -> ', CLOSURE_VIOLATION_MESSAGE)
     }
 
     @Test

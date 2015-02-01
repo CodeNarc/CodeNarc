@@ -21,6 +21,7 @@
 
     <properties>
         <targetJdk>1.5</targetJdk> <!-- Necessary for PMD plugin -->
+        <groovyVersion>[2.1.0,)</groovyVersion>
     </properties>
 
     <scm>
@@ -33,6 +34,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>${groovyVersion}</version>
+        </dependency>
+
+        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.13</version>
@@ -41,13 +48,7 @@
         <dependency>
             <groupId>org.gmetrics</groupId>
             <artifactId>GMetrics</artifactId>
-            <version>0.5</version>
-        </dependency>
-
-        <dependency>
-          <groupId>org.codehaus.groovy</groupId>
-          <artifactId>groovy-all</artifactId>
-          <version>1.7.5</version>
+            <version>[0.7,)</version>
         </dependency>
 
         <dependency>

@@ -95,7 +95,7 @@ class ConstantAssertExpressionRuleTest extends AbstractRuleTestCase {
             assert [a:123, b:456]
         '''
         assertTwoViolations(SOURCE,
-            2, 'assert [:]', '[]',
+            2, 'assert [:]', '[:]',
             3, 'assert [a:123, b:456]', '[a:123, b:456]')
     }
 

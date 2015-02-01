@@ -40,7 +40,7 @@ class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisito
         def firstArgExpression = constructorCall.arguments?.expressions?.getAt(0)
         constructorCall.text =~ NEW_BIG_DECIMAL &&
             (firstArgExpression instanceof ConstantExpression) &&
-            (firstArgExpression.type.name == 'java.math.BigDecimal' || firstArgExpression.type.name == 'java.lang.Double')
+            (firstArgExpression.type.name in ['java.math.BigDecimal', 'java.lang.Double', 'double'])
     }
 
     @Override protected String getViolationMessage(ConstructorCallExpression call) {

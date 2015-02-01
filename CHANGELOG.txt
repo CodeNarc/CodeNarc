@@ -19,6 +19,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #84: XML Report: Remove illegal (non-escapable) XML characters from the source line or message.
 
 FRAMEWORK AND INFRASTRUCTURE
+- #86: Upgrade to Groovy 2.x. (>= 2.1.0)    [BREAKING CHANGE]
 - #68: Cleaned up and fixed HtmlReportWriterTest.
 - #74: Improved codenarc.groovy to remove Rule suffix from rule name. (Thanks to Maciej Ziarko)
 

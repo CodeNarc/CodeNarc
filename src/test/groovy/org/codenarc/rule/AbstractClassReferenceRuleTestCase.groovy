@@ -188,12 +188,11 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
     }
 
     @Test
-    void testAnonymousInnerClass_KnownIssue_NoViolation() {
+    void testAnonymousInnerClass_Violation() {
         final SOURCE = """
             def x = new ${getClassName()}() { }
         """
-        // TODO This should produce a violation
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, "def x = new ${getClassName()}() { }", violationMessage)
     }
 
     @Test

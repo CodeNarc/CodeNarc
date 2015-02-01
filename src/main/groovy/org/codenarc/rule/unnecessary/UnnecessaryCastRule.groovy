@@ -52,6 +52,7 @@ class UnnecessaryCastAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isUnnecessaryCast(CastExpression expression) {
-        CAST_TYPE_MAP[expression.type.name] == expression.expression.type.name
+        CAST_TYPE_MAP[expression.type.name] == expression.expression.type.name ||
+            expression.type.name == expression.expression.type.name
     }
 }

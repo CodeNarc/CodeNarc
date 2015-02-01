@@ -40,7 +40,7 @@ class LongLiteralWithLowerCaseLAstVisitor extends AbstractAstVisitor {
             return
         }
 
-        if (expression.type.name == 'java.lang.Long') {
+        if (expression.type.name in ['long', 'java.lang.Long']) {
             def line = getSourceCode().lines[expression.lineNumber - 1]
             if (line?.length() <= expression.lastColumnNumber) {
                 def definition = line[expression.lastColumnNumber - 2]

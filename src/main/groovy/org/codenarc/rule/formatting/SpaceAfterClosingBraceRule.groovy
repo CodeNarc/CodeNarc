@@ -47,9 +47,10 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     @Override
     protected void visitClassEx(ClassNode node) {
         def line = lastSourceLineOrEmpty(node)
-        def indexOfBrace = line.indexOf('}')
+        def startColumn = node.columnNumber >= 0 ? node.columnNumber : 0
+        def indexOfBrace = line.indexOf('}', startColumn)
         if (indexOfBrace > 1) {
-            if (isNotWhitespace(line, indexOfBrace + 2)) {
+            if (isNotWhitespace(line, indexOfBrace + 2) && isNotAllowedCharacterAfterClass(line, indexOfBrace + 2)) {
                 def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
                 addViolation(node, "The closing brace for $typeName $currentClassName is not followed by a space or whitespace")
             }
@@ -122,6 +123,10 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
 
     private boolean isNotAllowedCharacterAfterClosure(String line, int index) {
         return index in 1..line.size() && !(line[index - 1] in ['.', ',', ')', '*', '?', ';'])
+    }
+
+    private boolean isNotAllowedCharacterAfterClass(String line, int index) {
+        return index in 1..line.size() && !(line[index - 1] in ['.', ')', ';'])
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {

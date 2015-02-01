@@ -70,6 +70,17 @@ class SpaceAfterIfRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'if(', messageText:MESSAGE])
     }
 
+    @Test
+    void testApplyTo_KeywordAfterLabel_NoViolations() {
+        final SOURCE = '''
+            def "sample test"() {
+                setup:
+                if (true) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new SpaceAfterIfRule()
     }

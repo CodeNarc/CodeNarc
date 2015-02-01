@@ -122,10 +122,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.sameLine = true
-        // This assertion works fine when compiling with Groovy 1.7
-        assertNoViolations(SOURCE)
-        // After migrating the project to Groovy 1.8 or higher, it should be changed to assertSingleViolation
-        // Line numbers for enums are returned correctly in Groovy 1.8 and the rule can be evaluated.
+        assertSingleViolation(SOURCE, 3, '{', 'Opening brace for the class MyEnum should start on the same line')
     }
 
     @Test
@@ -148,15 +145,11 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
             }
         '''
         rule.sameLine = false
-        // This assertion works fine when compiling with Groovy 1.7
-        assertNoViolations(SOURCE)
-        // After migrating the project to Groovy 1.8 or higher, it should be changed to assertSingleViolation
-        // Line numbers for enums are returned correctly in Groovy 1.8 and the rule can be evaluated.
+        assertSingleViolation(SOURCE, 2, '{', 'Opening brace for the class MyEnum should start on a new line')
     }
 
     @Test
     void testSuccessScenarioSameLine() {
-
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)

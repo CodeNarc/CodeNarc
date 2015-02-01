@@ -57,7 +57,7 @@ class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
             def h = null, i = null, j = null
             def a, b = [1, 2] // bad, b is null
         '''
-        assertSingleViolation(SOURCE, 6, 'def a, b = [1, 2]', 'Confusing decaration in class None. The variable \'a\' is initialized to null')
+        assertSingleViolation(SOURCE, 6, 'def a, b = [1, 2]', 'Confusing declaration in class None. The variable \'a\' is initialized to null')
     }
 
     @Test
@@ -68,8 +68,8 @@ class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-            3, 'def a, b, c = [1, 2, 3]', "Confusing decaration in class MyClass. The field 'a' is initialized to null",
-            3, 'def a, b, c = [1, 2, 3]', "Confusing decaration in class MyClass. The field 'b' is initialized to null", )
+            3, 'def a, b, c = [1, 2, 3]', "Confusing declaration in class MyClass. The field 'a' is initialized to null",
+            3, 'def a, b, c = [1, 2, 3]', "Confusing declaration in class MyClass. The field 'b' is initialized to null", )
     }
 
     protected Rule createRule() {

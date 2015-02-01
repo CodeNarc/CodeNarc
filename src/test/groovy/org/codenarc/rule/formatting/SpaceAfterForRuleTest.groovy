@@ -57,6 +57,17 @@ class SpaceAfterForRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'for(', messageText:MESSAGE])
     }
 
+    @Test
+    void testApplyTo_KeywordAfterLabel_NoViolations() {
+        final SOURCE = '''
+            def "sample test"() {
+                setup:
+                for (name in names) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new SpaceAfterForRule()
     }

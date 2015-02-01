@@ -81,11 +81,11 @@ class SpaceBeforeOpeningBraceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_EnumDeclaration_KnownLimitation_NoViolations() {
+    void testApplyTo_EnumDeclaration_Violation() {
         final SOURCE = '''
             enum MyEnum{ OK, BAD }
 c        '''
-        assertNoViolations(SOURCE)
+        assertSingleViolation(SOURCE, 2, 'enum MyEnum{ OK, BAD }', 'The opening brace for enum MyEnum is not preceded')
     }
 
     @Test

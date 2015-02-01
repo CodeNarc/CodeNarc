@@ -221,7 +221,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
                 def map2 = [messages:[:]]
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'def map2 = [messages:[:]]', '[messages:[]]')
+        assertSingleViolation(SOURCE, 4, 'def map2 = [messages:[:]]', '[messages:[:]]')
     }
 
     protected Rule createRule() {

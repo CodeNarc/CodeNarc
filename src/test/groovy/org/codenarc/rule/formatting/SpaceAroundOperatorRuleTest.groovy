@@ -78,7 +78,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_UnicodeCharacterLiteral_CausesIncorrectColumnIndexesInAST_NoViolations_KnownIssue() {
+    void testApplyTo_UnicodeCharacterLiteral_Violation() {
         final SOURCE = '''
             class MyClass {
                 def mapping = myService.findAllMappings(0)?.collect { domain ->
@@ -88,7 +88,10 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
                 String myString = ready ? '\\u00A0': 'error'+'99'
             }
         '''
-        assertNoViolations(SOURCE)
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText:'[description: countryCode?.padRight(', messageText:'The operator "+" within class MyClass is not preceded'],
+            [lineNumber:7, sourceLineText:'String myString = ready ?', messageText:'The operator "+" within class MyClass is not preceded'],
+            [lineNumber:7, sourceLineText:'String myString = ready ?', messageText:'The operator "+" within class MyClass is not followed'])
     }
 
     @Test
