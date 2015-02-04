@@ -15,7 +15,7 @@
  */
 package org.codenarc.util
 
-import static org.objectweb.asm.Opcodes.*
+import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Provide static utility methods for parsing AST member modifiers, e.g. public/protected/private, static, final, etc.
@@ -25,13 +25,13 @@ import static org.objectweb.asm.Opcodes.*
 class ModifiersUtil {
 
     private static final MODIFIERS = [
-        public:ACC_PUBLIC,
-        protected:ACC_PROTECTED,
-        private:ACC_PRIVATE,
-        static:ACC_STATIC,
-        final:ACC_FINAL,
-        volatile:ACC_VOLATILE,
-        transient:ACC_TRANSIENT
+        public:MethodNode.ACC_PUBLIC,
+        protected:MethodNode.ACC_PROTECTED,
+        private:MethodNode.ACC_PRIVATE,
+        static:MethodNode.ACC_STATIC,
+        final:MethodNode.ACC_FINAL,
+        volatile:MethodNode.ACC_VOLATILE,
+        transient:MethodNode.ACC_TRANSIENT
     ]
 
     static boolean matchesAnyModifiers(Integer actualModifiers, List<Integer> expectedModifiersList) {

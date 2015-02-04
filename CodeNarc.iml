@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" relativePaths="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/groovy" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
@@ -25,21 +26,18 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.13" level="project" />
-    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.7.2-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.7" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-xml:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-ant:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.ant:ant:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ant:ant:1.9.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.9.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.ant:ant-antlr:1.9.4" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-groovydoc:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-templates:2.4.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.ant:ant-junit:1.9.4" level="project" />
-    <orderEntry type="library" name="Maven: junit:junit:4.8.2" level="project" />
-    <orderEntry type="library" name="Maven: net.sourceforge.cobertura:cobertura:1.9" level="project" />
-    <orderEntry type="library" name="Maven: oro:oro:2.0.8" level="project" />
-    <orderEntry type="library" name="Maven: asm:asm:2.2.1" level="project" />
-    <orderEntry type="library" name="Maven: asm:asm-tree:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
   </component>
 </module>
 

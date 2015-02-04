@@ -15,8 +15,9 @@
  */
 package org.codenarc.util
 
+import org.codehaus.groovy.ast.MethodNode
+
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-import static org.objectweb.asm.Opcodes.*
 
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
@@ -27,6 +28,14 @@ import org.junit.Test
  * @author Chris Mair
  */
 class ModifiersUtilTest extends AbstractTestCase {
+
+    private static final ACC_PUBLIC = MethodNode.ACC_PUBLIC
+    private static final ACC_PROTECTED = MethodNode.ACC_PROTECTED
+    private static final ACC_PRIVATE = MethodNode.ACC_PRIVATE
+    private static final ACC_STATIC = MethodNode.ACC_STATIC
+    private static final ACC_FINAL = MethodNode.ACC_FINAL
+    private static final ACC_VOLATILE = MethodNode.ACC_VOLATILE
+    private static final ACC_TRANSIENT = MethodNode.ACC_TRANSIENT
 
     // Tests for matchesAnyModifiers
 
