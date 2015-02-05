@@ -20,8 +20,10 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 
 FRAMEWORK AND INFRASTRUCTURE
 - #86: Upgrade to Groovy 2.x. (>= 2.1.0)    [BREAKING CHANGE]
+- #67: Don't depend on groovy-all jar, but only on the specifically required groovy artifacts.
 - #68: Cleaned up and fixed HtmlReportWriterTest.
 - #74: Improved codenarc.groovy to remove Rule suffix from rule name. (Thanks to Maciej Ziarko)
+- #87: Switch pom.xml to use Groovy-Eclipse Compiler.
 
 
 Changes in version 0.22 (Oct 2014)
