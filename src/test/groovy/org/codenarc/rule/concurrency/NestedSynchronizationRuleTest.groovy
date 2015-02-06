@@ -152,46 +152,46 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'synchronized(this) { }')
     }
 
-    //todo: This test passes fine on Groovy 1.7. Rename it when you upgrade
-//    void testApplyTo_AnonymousInnerClass() {
-//        final SOURCE = '''
-//            class NestedSynchronizationClass6 {
-//
-//                def runnable = new Runnable() {
-//                    public void run() {
-//                        synchronized(this) {
-//                            synchronized(this) {}
-//                        }
-//                    }
-//                }
-//            } '''
-//
-//        assertSingleViolation(SOURCE, 7, "synchronized(this) {}")
-//    }
+    @Test
+    void testApplyTo_AnonymousInnerClass() {
+        final SOURCE = '''
+            class NestedSynchronizationClass6 {
 
-    //todo: This test passes fine on Groovy 1.7. Rename it when you upgrade
-//    void testApplyTo_StaticInnerClass() {
-//        final SOURCE = '''
-//            class NestedSynchronizationClass7 {
-//
-//                static class NestedSynchronizationClass8 {
-//                    def closure1 = {
-//                        synchronized(this) {
-//                            synchronized(this) {}
-//                        }
-//                    }
-//                    def myMethod() {
-//                        synchronized(this) {
-//                            synchronized(this) {}
-//                        }
-//                    }
-//                }
-//            } '''
-//
-//        assertTwoViolations(SOURCE,
-//                7, "synchronized(this) {}",
-//                12, "synchronized(this) {}")
-//    }
+                def runnable = new Runnable() {
+                    public void run() {
+                        synchronized(this) {
+                            synchronized(this) {}
+                        }
+                    }
+                }
+            } '''
+
+        assertSingleViolation(SOURCE, 7, 'synchronized(this) {}')
+    }
+
+    @Test
+    void testApplyTo_StaticInnerClass() {
+        final SOURCE = '''
+            class NestedSynchronizationClass7 {
+
+                static class NestedSynchronizationClass8 {
+                    def closure1 = {
+                        synchronized(this) {
+                            synchronized(this) {}
+                        }
+                    }
+                    def myMethod() {
+                        synchronized(this) {
+                            synchronized(this) {}
+                        }
+                    }
+                }
+            } '''
+
+        assertTwoViolations(SOURCE,
+                7, 'synchronized(this) {}',
+                12, 'synchronized(this) {}')
+    }
 
     @Test
     void testApplyTo_SecondClass() {

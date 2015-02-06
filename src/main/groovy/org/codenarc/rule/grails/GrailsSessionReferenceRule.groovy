@@ -56,8 +56,6 @@ class GrailsSessionReferenceAstVisitor extends AbstractAstVisitor  {
         if (isFirstVisit(expression) && expression.variable == 'session') {
             addViolation(expression, 'Interacting with the Grails session object can limit scalability')
         }
-        
-        // This causes problems (StackOverflow) in Groovy 1.7.0
-        //super.visitVariableExpression(expression)
+        super.visitVariableExpression(expression)
     }
 }

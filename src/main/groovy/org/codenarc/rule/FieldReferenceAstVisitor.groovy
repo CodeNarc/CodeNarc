@@ -46,9 +46,7 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
 
     void visitVariableExpression(VariableExpression expression) {
         unreferencedFieldMap.remove(expression.name)
-
-        // This causes problems (StackOverflow) in Groovy 1.7.0
-        //super.visitVariableExpression(expression)
+        super.visitVariableExpression(expression)
     }
 
     void visitProperty(PropertyNode node) {

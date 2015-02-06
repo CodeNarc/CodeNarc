@@ -444,6 +444,7 @@
         <w>armbruster</w>
         <w>classloader</w>
         <w>codenarc</w>
+        <w>escapable</w>
         <w>gajowy</w>
         <w>gradle</w>
         <w>groovyism</w>
