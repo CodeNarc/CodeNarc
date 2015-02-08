@@ -15,18 +15,18 @@
  */
 package org.codenarc.rule.unused
 
+import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.control.SourceUnit
-import org.codenarc.rule.ClassCodeVisitorSupportHack
 import org.codenarc.util.AstUtil
 
 /**
  * 
  * @author Hamlet D'Arcy
  */
-class ReferenceCollector extends ClassCodeVisitorSupportHack {
+class ReferenceCollector extends ClassCodeVisitorSupport {
 
     def references = [] as Set
 
