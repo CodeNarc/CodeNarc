@@ -69,6 +69,16 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_ConstructorCall_Violation() {
+        final SOURCE = '''
+            Calendar c = new GregorianCalendar(2011,Calendar.NOVEMBER,1)
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'Calendar c = new GregorianCalendar(2011,Calendar.NOVEMBER,1)', messageText:'The parameter Calendar.NOVEMBER'],
+            [lineNumber:2, sourceLineText:'Calendar c = new GregorianCalendar(2011,Calendar.NOVEMBER,1)', messageText:'The parameter 1'] )
+    }
+
+    @Test
     void testApplyTo_UnicodeLiteral_Violations() {
         final SOURCE = '''
             def value1 = calculate( { '\\u00A0' },12)
@@ -131,6 +141,21 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'void calculate(a,int b,String name,count) { }', messageText:'The parameter b'],
             [lineNumber:3, sourceLineText:'void calculate(a,int b,String name,count) { }', messageText:'The parameter name'],
             [lineNumber:3, sourceLineText:'void calculate(a,int b,String name,count) { }', messageText:'The parameter count'] )
+    }
+
+    // Tests for constructor declarations
+
+    @Test
+    void testApplyTo_ConstructorDeclaration_NoPrecedingSpaceForMultipleParameters_Violation() {
+        final SOURCE = '''
+            class MyTestCase {
+                MyTestCase(a,int b,String name,count) { }
+            }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'MyTestCase(a,int b,String name,count) { }', messageText:'The parameter b'],
+            [lineNumber:3, sourceLineText:'MyTestCase(a,int b,String name,count) { }', messageText:'The parameter name'],
+            [lineNumber:3, sourceLineText:'MyTestCase(a,int b,String name,count) { }', messageText:'The parameter count'] )
     }
 
     // Tests for closure declarations

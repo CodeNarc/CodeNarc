@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -45,7 +46,7 @@ class SpaceAfterCommaRule extends AbstractAstVisitorRule {
 class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
 
     @Override
-    protected void visitMethodEx(MethodNode node) {
+    protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         def lastColumn
         node.parameters.each { parameter ->
             if (lastColumn && parameter.columnNumber == lastColumn + 1) {
@@ -53,6 +54,7 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
             }
             lastColumn = parameter.lastColumnNumber
         }
+        super.visitConstructorOrMethod(node, isConstructor)
     }
 
     @Override
@@ -71,6 +73,17 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
+        processMethodOrConstructorCall(call)
+        super.visitMethodCallExpression(call)
+    }
+
+    @Override
+    void visitConstructorCallExpression(ConstructorCallExpression call) {
+        processMethodOrConstructorCall(call)
+        super.visitConstructorCallExpression(call)
+    }
+
+    private void processMethodOrConstructorCall(Expression call) {
         if (isFirstVisit(call)) {
             def arguments = call.arguments
             def parameterExpressions = arguments.expressions
@@ -83,7 +96,6 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
                 lastColumn = e.lastColumnNumber
             }
         }
-        super.visitMethodCallExpression(call)
     }
 
     private boolean isClosureParameterOutsideParentheses(Expression e, arguments) {
