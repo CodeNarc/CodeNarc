@@ -39,7 +39,7 @@ class ClassSizeRule extends AbstractAstVisitorRule {
 
 class ClassSizeAstVisitor extends AbstractAstVisitor  {
     void visitClassEx(ClassNode classNode) {
-        if (classNode.lineNumber >= 0) {
+        if (!classNode.isScript()) {
             def numLines = classNode.lastLineNumber - classNode.lineNumber + 1
             if (numLines > rule.maxLines) {
                 def className = classNode.name

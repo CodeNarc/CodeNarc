@@ -60,12 +60,13 @@ class ClassSizeRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_NoClassDefinition() {
+    void testApplyTo_GeneratedClass() {
         final SOURCE = '''
             if (isReady) {
                 println 'ready'
             }
         '''
+        rule.maxLines = 1
         assertNoViolations(SOURCE)
     }
 
