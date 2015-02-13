@@ -18,6 +18,7 @@ package org.codenarc.util
 import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.GStringExpression
@@ -62,12 +63,17 @@ class AstUtilTest extends AbstractTestCase {
                 println methodCallWithinEnum(true, 'abc', 123); doStuff()
             }
         }
+
+        // outside of class -- script
+        def scriptMethod() { 456 }
     '''
     private visitor
     private sourceCode
 
     @Test
     void testIsFromGeneratedSourceCode() {
+        def scriptClassNode = visitor.classNodes.find { classNode -> classNode.name == 'None' }
+        assert AstUtil.isFromGeneratedSourceCode(scriptClassNode)
         assert !AstUtil.isFromGeneratedSourceCode(methodNamed('print'))
     }
 
@@ -110,7 +116,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodCall_ExactMatch() {
-        def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
+        def statement = expressionStatementForMethodNamed('print')
         assert AstUtil.isMethodCall(statement, 'object', 'print', 0)
         assert AstUtil.isMethodCall(statement.expression, 'object', 'print', 0)
         assert AstUtil.isMethodCall(statement.expression, 'object', 'print')
@@ -118,7 +124,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodCall_WrongMethodName() {
-        def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
+        def statement = expressionStatementForMethodNamed('print')
         assert !AstUtil.isMethodCall(statement, 'object', 'print2', 0)
         assert !AstUtil.isMethodCall(statement.expression, 'object', 'print2', 0)
         assert !AstUtil.isMethodCall(statement.expression, 'object', 'print2')
@@ -126,7 +132,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodCall_WrongMethodObjectName() {
-        def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
+        def statement = expressionStatementForMethodNamed('print')
         assert !AstUtil.isMethodCall(statement, 'object2', 'print', 0)
         assert !AstUtil.isMethodCall(statement.expression, 'object2', 'print', 0)
         assert !AstUtil.isMethodCall(statement.expression, 'object2', 'print')
@@ -134,7 +140,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodCall_WrongNumberOfArguments() {
-        def statement = visitor.statements.find { st -> st instanceof ExpressionStatement }
+        def statement = expressionStatementForMethodNamed('print')
         assert !AstUtil.isMethodCall(statement, 'object', 'print', 1)
         assert !AstUtil.isMethodCall(statement.expression, 'object', 'print', 1)
         assert AstUtil.isMethodCall(statement.expression, 'object', 'print')
@@ -198,7 +204,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsEmptyBlock_NonEmptyBlock() {
-        def statement = visitor.statements.find { st -> st instanceof BlockStatement }
+        def statement = expressionStatementForMethodNamed('setUp')
         assert !AstUtil.isEmptyBlock(statement)
     }
 
@@ -273,6 +279,13 @@ class AstUtilTest extends AbstractTestCase {
         ast.classes.each { classNode -> visitor.visitClass(classNode) }
     }
 
+    private ExpressionStatement expressionStatementForMethodNamed(String methodName) {
+        return visitor.statements.find { st ->
+            st instanceof ExpressionStatement &&
+            st.expression instanceof MethodCallExpression &&
+            st.expression.methodAsString == methodName }
+    }
+
     private MethodCallExpression methodNamed(String name) {
         def methodCall = visitor.methodCallExpressions.find { mc ->
             if (mc.method instanceof GStringExpression) {
@@ -290,6 +303,13 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     def methodCallExpressions = []
     def statements = []
     def declarationExpressions = []
+    def classNodes = []
+
+    @Override
+    void visitClass(ClassNode node) {
+        classNodes << node
+        super.visitClass(node)
+    }
 
     void visitMethod(MethodNode methodNode) {
         methodNodes[methodNode.name] = methodNode

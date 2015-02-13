@@ -559,7 +559,7 @@ public class AstUtil {
      * @return true if the ASTNode was generated (synthetic) rather than from the "real" input source code.
      */
     public static boolean isFromGeneratedSourceCode(ASTNode node) {
-        return node.getLineNumber() < 0;
+        return node.getLineNumber() < 0 || (node instanceof ClassNode && ((ClassNode)node).isScript());
     }
 
     /**
