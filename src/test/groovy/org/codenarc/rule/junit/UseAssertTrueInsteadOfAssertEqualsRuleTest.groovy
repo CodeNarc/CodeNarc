@@ -30,13 +30,14 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UseAssertTrueInsteadOfAssertEquals'
+        assert rule.checkAssertStatements == false
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
-    @Test
+                @Test
                 void testMethod() {
                     assertEquals(1, foo())
                     assertEquals('message', foo())
@@ -71,7 +72,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testAssertTrueViolation_AssertStyle() {
+    void testAssertStatement_True_checkAssertStatements_True_Violations() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
                 void testMethod() {
@@ -80,9 +81,23 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
                 }
               }
         '''
+        rule.checkAssertStatements = true
         assertTwoViolations(SOURCE,
                 4, 'assert true == foo()', "The expression '(true == this.foo())' can be simplified to 'this.foo()'",
                 5, 'assert foo() == true : "message"', "The expression '(this.foo() == true)' can be simplified to 'this.foo()'")
+    }
+
+    @Test
+    void testAssertStatement_True_checkAssertStatements_False_Violations() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assert true == foo()
+                    assert foo() == true : "message"
+                }
+              }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Test
@@ -112,7 +127,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testAssertFalseViolation_AssertStyle() {
+    void testAssertStatement_False_checkAssertStatements_True_Violations() {
         final SOURCE = '''
         	 class MyTestCase extends TestCase {
                 void testMethod() {
@@ -121,9 +136,23 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
                 }
               }
         '''
+        rule.checkAssertStatements = true
         assertTwoViolations(SOURCE,
                 4, 'assert false == foo()', "The expression '(false == this.foo())' can be simplified to '!this.foo()'",
                 5, 'assert foo() == false : "message"', "The expression '(this.foo() == false)' can be simplified to '!this.foo()'")
+    }
+
+    @Test
+    void testAssertStatement_False_checkAssertStatements_False_NoViolations() {
+        final SOURCE = '''
+        	 class MyTestCase extends TestCase {
+                void testMethod() {
+                    assert false == foo()
+                    assert foo() == false : "message"
+                }
+              }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Test

@@ -23,7 +23,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * This rule detects JUnit calling assertEquals where the first parameter is a boolean. These assertions should be made by more specific methods, like assertTrue or assertFalse.
+ * This rule detects JUnit calling assertEquals where the first parameter is a boolean. These assertions
+ * should be made by more specific methods, like assertTrue or assertFalse.
+ *
+ * If the checkAssertStatements property is true, then it also checks for assert statements, e.g. assert x == true.
  *
  * @author Hamlet D'Arcy
   */
@@ -31,11 +34,13 @@ class UseAssertTrueInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
     String name = 'UseAssertTrueInsteadOfAssertEquals'
     int priority = 3
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
+    boolean checkAssertStatements = false
     Class astVisitorClass = UseAssertTrueInsteadOfAssertEqualsAstVisitor
 }
 
 class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)
@@ -52,8 +57,7 @@ class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitAssertStatement(AssertStatement statement) {
-
-        if (AstUtil.isBinaryExpressionType(statement.booleanExpression.expression, '==')) {
+        if (rule.checkAssertStatements && AstUtil.isBinaryExpressionType(statement.booleanExpression.expression, '==')) {
             BinaryExpression exp = statement.booleanExpression.expression
             if (AstUtil.isTrue(exp.leftExpression)) {
                 addViolation(statement, "The expression '$exp.text' can be simplified to '$exp.rightExpression.text'")

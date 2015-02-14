@@ -494,21 +494,30 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule sets the default value of the <applyToClassNames> property to only match class names
   ending in 'Test', 'Tests' or 'TestCase'.
 
+*---------------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>              | <<Description>>                                                | <<Default Value>>      |
+*---------------------------+----------------------------------------------------------------+------------------------+
+| checkAssertStatements     | If <<<true>>>, then also check assert statements, e.g.         | <<<false>>>            |
+|                           | <<<assert x == true>.                                          |                        |
+*---------------------------+----------------------------------------------------------------+------------------------+
+
+
   All of the following examples can be simplified to assertTrue or remove the true literal:
 
 -------------------------------------------------------------------------------
     assertEquals(true, foo())
     assertEquals("message", true, foo())
-    assert true == foo()
-    assert foo() == true : "message"
     assertEquals(foo(), true)
     assertEquals("message", foo(), true)
     assertEquals(false, foo())
     assertEquals("message", false, foo())
-    assert false == foo()
-    assert foo() == false : "message"
     assertEquals(foo(), false)
     assertEquals("message", foo(), false)
+
+    assert true == foo()                    // violation only if checkAssertStatements == true
+    assert foo() == true : "message"        // violation only if checkAssertStatements == true
+    assert false == foo()                   // violation only if checkAssertStatements == true
+    assert foo() == false : "message"       // violation only if checkAssertStatements == true
 -------------------------------------------------------------------------------
 
 
