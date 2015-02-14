@@ -33,7 +33,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSuccessScenario() {
+    void testProperReturnOfTrueAndFalse_NoViolations() {
         final SOURCE = '''
         	def c = {
                     if (foo()) {
@@ -191,6 +191,58 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 6, 'return null')
+    }
+
+    @Test
+    void testMethodReturnsNonBooleanTypesAndNull_NoViolations() {
+        final SOURCE = '''
+            def scriptMethod(clazz) {
+                if (clazz == String) {
+                    return 'something'
+                }
+                if (clazz == Number) {
+                    return 1
+                }
+                if (clazz == Boolean) {
+                    return true
+                }
+                return null
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testClosureReturnsNull() {
+        final SOURCE = '''
+            def closure = {
+                if (foo()) {
+                    return true
+                } else {
+                    return null
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 6, 'return null')
+    }
+
+    @Test
+    void testClosureReturnsNonBooleanTypesAndNull_NoViolations() {
+        final SOURCE = '''
+            def closure = {
+                if (clazz == String) {
+                    return 'something'
+                }
+                if (clazz == Number) {
+                    return 1
+                }
+                if (clazz == Boolean) {
+                    return true
+                }
+                return null
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

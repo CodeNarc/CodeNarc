@@ -17,6 +17,7 @@ package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.NullReturnTracker
@@ -60,42 +61,54 @@ class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
         if (AstUtil.classNodeImplementsType(node.returnType, Boolean) || AstUtil.classNodeImplementsType(node.returnType, Boolean.TYPE)) {
             return true
         }
-
-        boolean returnsBoolean = false
-        node.code?.visit(new BooleanReturnTracker(callbackFunction: { returnsBoolean = true }))
-        returnsBoolean
+        return codeReturnsBoolean(node.code)
     }
 
     private static boolean closureReturnsBoolean(ClosureExpression node) {
+        return codeReturnsBoolean(node.code)
+    }
+
+    private static boolean codeReturnsBoolean(Statement statement) {
         boolean returnsBoolean = false
-        node.code?.visit(new BooleanReturnTracker(callbackFunction: { returnsBoolean = true }))
+        if (statement) {
+            def booleanTracker = new BooleanReturnTracker()
+            statement.visit(booleanTracker)
+            returnsBoolean = booleanTracker.returnsBoolean && !booleanTracker.returnsNonBoolean
+        }
         returnsBoolean
     }
 }
 
 class BooleanReturnTracker extends AbstractAstVisitor {
-    def callbackFunction
+    boolean returnsNonBoolean = false
+    boolean returnsBoolean = false
 
     void visitReturnStatement(ReturnStatement statement) {
-        callbackOnBoolean(statement.expression)
+        checkReturnValues(statement.expression)
         super.visitReturnStatement(statement)
     }
 
-    private callbackOnBoolean(Expression expression) {
-
+    private checkReturnValues(Expression expression) {
         def stack = [expression] as Stack
         while (stack) {
             def expr = stack.pop()
             if (AstUtil.isBoolean(expr)) {
-                callbackFunction()
+                returnsBoolean = true
             } else if (expr instanceof BooleanExpression) {
-                callbackFunction()
+                returnsBoolean = true
             } else if (expr instanceof CastExpression && AstUtil.classNodeImplementsType(expr.type, Boolean)) {
-                callbackFunction()
+                returnsBoolean = true
             } else if (expr instanceof TernaryExpression) {
                 stack.push(expr.trueExpression)
                 stack.push(expr.falseExpression)
+            } else if (!isNull(expr)) {
+                returnsNonBoolean = true
             }
         }
+    }
+
+    private boolean isNull(Expression expression) {
+        return expression == ConstantExpression.NULL ||
+            (expression instanceof ConstantExpression && expression.value == null)
     }
 }

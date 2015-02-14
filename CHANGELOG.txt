@@ -52,6 +52,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #62: GrailsDuplicateConstraint: consider importFrom includes: constraints when checking for duplicate constraint violations. (Thanks to Dan Tanner)
 - #64: SpaceAfterOpeningBrace and SpaceBeforeClosingBrace rules: Add ignoreEmptyBlock property to allow no spaces between braces for empty blocks. (Thanks to Dominik Przybysz)
 - #65: HtmlReportWriter and TextReportWriter do not properly parse the maxPriority report option.
+- #34: BooleanMethodReturnsNullRule should not flag methods that return other non-null and non-boolean types.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #435: IdeTextReportWriter: Text report formatter that includes automatic IDE (Eclipse/Idea) hyperlinks to source code. Provide new "ide" report type in ReportWriterFactory.
