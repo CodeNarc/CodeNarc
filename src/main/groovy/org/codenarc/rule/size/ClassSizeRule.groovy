@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
+import org.codenarc.util.AstUtil
 
 /**
  * Rule that checks the size of a class.
@@ -39,7 +40,7 @@ class ClassSizeRule extends AbstractAstVisitorRule {
 
 class ClassSizeAstVisitor extends AbstractAstVisitor  {
     void visitClassEx(ClassNode classNode) {
-        if (!classNode.isScript()) {
+        if (!AstUtil.isFromGeneratedSourceCode(classNode)) {
             def numLines = classNode.lastLineNumber - classNode.lineNumber + 1
             if (numLines > rule.maxLines) {
                 def className = classNode.name
