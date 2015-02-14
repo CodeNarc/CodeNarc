@@ -18,7 +18,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #82: IdeTextReportWriter violation link (loc=..) does not work in Eclipse.
 - #81: XML Report: Escape illegal XML characters within the source line or message.
 - #84: XML Report: Remove illegal (non-escapable) XML characters from the source line or message.
-- #88: Only check assert statements if checkAssertStatements property is true.
+- #88: UseAssertTrueInsteadOfAssertEquals: Only check assert statements if checkAssertStatements property is true; defaults to false.
 
 FRAMEWORK AND INFRASTRUCTURE
 - #86: Upgrade to Groovy 2.x. (>= 2.1.0)    [BREAKING CHANGE]
