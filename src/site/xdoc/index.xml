@@ -76,8 +76,8 @@ Static Analysis for Groovy: Less Bugs, Better Code
           <strong>CodeNarc</strong> requires:
           <ul>
                <li>
-                   <a href="http://groovy.codehaus.org/">Groovy</a> version 1.7</li>
-               <li>Java 1.5 or later</li>
+                   <a href="http://groovy.codehaus.org/">Groovy</a> version 2.1</li>
+               <li>Java 1.6 or later</li>
                <li><a href="http://logging.apache.org/log4j/index.html">Log4J</a> 1.2.13 or later on the classpath</li>
           </ul>
      </section>

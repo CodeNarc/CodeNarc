@@ -650,15 +650,15 @@
         <root url="jar://$M2_REPO$/org/codehaus/groovy/groovy/2.1.8/groovy-2.1.8-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.gmetrics:GMetrics:0.7.1">
+    <library name="Maven: org.gmetrics:GMetrics:0.7">
       <CLASSES>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.7.1/GMetrics-0.7.1.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.7/GMetrics-0.7.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.7.1/GMetrics-0.7.1-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.7/GMetrics-0.7-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.7.1/GMetrics-0.7.1-sources.jar!/" />
+        <root url="jar://$M2_REPO$/org/gmetrics/GMetrics/0.7/GMetrics-0.7-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.ow2.asm:asm-analysis:4.0">

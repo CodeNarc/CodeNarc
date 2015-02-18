@@ -41,7 +41,7 @@
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.8.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.ant:ant-junit:1.8.4" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.14" level="project" />
-    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.7.1" level="project" />
+    <orderEntry type="library" name="Maven: org.gmetrics:GMetrics:0.7" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.8.1" level="project" />
   </component>
 </module>
