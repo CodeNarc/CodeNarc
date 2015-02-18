@@ -211,6 +211,7 @@ ruleset {
     ObjectOverrideMisspelledMethodName 
     PackageName 
     PackageNameMatchesFilePath 
+    ParameterCount 
     ParameterName 
     ParameterReassignment 
     PrintStackTrace 
