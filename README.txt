@@ -13,9 +13,11 @@ which analyze Java code, CodeNarc analyzes Groovy code.
 DEPENDENCIES
 
 CodeNarc requires
- - Groovy version 1.7 or later
+ - Groovy version 2.1 or later
  - The Log4J jar, version 1.2.13 or later, accessible on the CLASSPATH
    (http://logging.apache.org/log4j/index.html).
+ - The GMetrics jar, version 0.7 or later -- optional if using some of the size/complexity rules
+   (http://gmetrics.sourceforge.net/).
 
 AVAILABLE FROM MAVEN CENTRAL REPOSITORY
 
