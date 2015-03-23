@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.24 (??? 2015)
+--------------------------------------
+UPDATED/ENHANCED RULES AND BUG FIXES
+- #81: ClassJavadoc: Allow regular comments or annotations before Javadoc section.
+
+
 Changes in version 0.23 (Feb 2015)
 --------------------------------------
 NEW RULES

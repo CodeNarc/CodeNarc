@@ -94,6 +94,67 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testHasInlineJavadoc_WithinPackage_NoViolations() {
+        final SOURCE = '''
+            package org.example
+
+            /** Javadoc */
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testHasJavadoc_WithinPackage_WithRegularComment_NoViolations() {
+        final SOURCE = '''
+            package org.example
+
+            /**
+             * Javadoc
+             */
+            // Not javadoc
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testHasJavadoc_WithinPackage_WithAnnotation_NoViolations() {
+        final SOURCE = '''
+            package org.example
+
+            /**
+             * Javadoc
+             */
+            @ToString
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testHasJavadoc_WithinPackage_WithCommentedAnnotation_NoViolations() {
+        final SOURCE = '''
+            package org.example
+
+            /**
+             * Javadoc
+             */
+            //@ToString
+            class TestClass {
+            }
+        '''
+        sourceCodeName = 'TestClass.groovy'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testMissingJavadoc_WithinPackage_Violation() {
         final SOURCE = '''
             package org.example
@@ -104,7 +165,7 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
         '''
         sourceCodeName = 'TestClass.Groovy'
         assertViolations(SOURCE,
-            [lineNumber:5, sourceLineText:'class TestClass', messageText:'Class org.example.TestClass missing JavaDoc'])
+            [lineNumber:5, sourceLineText:'class TestClass', messageText:'Class org.example.TestClass missing Javadoc'])
     }
 
     @Test
@@ -123,8 +184,8 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
         sourceCodeName = 'MyClass.groovy'
 
         assertViolations(SOURCE,
-                [lineNumber: 4, sourceLineText: 'class MyClass', messageText: 'Class org.example.MyClass missing JavaDoc'],
-                [lineNumber: 8, sourceLineText: 'class OtherClass', messageText: 'Class org.example.OtherClass missing JavaDoc'])
+                [lineNumber: 4, sourceLineText: 'class MyClass', messageText: 'Class org.example.MyClass missing Javadoc'],
+                [lineNumber: 8, sourceLineText: 'class OtherClass', messageText: 'Class org.example.OtherClass missing Javadoc'])
     }
 
     @Test
