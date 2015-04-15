@@ -49,13 +49,24 @@ class ClassJavadocRule extends AbstractRule {
             
             if (classNode.isPrimaryClassNode() && classNode.superClass.name != 'java.lang.Enum') {
                 def index = classNode.lineNumber - 1
-
-                while (lines[--index].trim().startsWith('*') || lines[index].trim().isEmpty()) {
-                    /* Do nothing, to simulate an until loop */
+                boolean isValidLineBeforeStartfOfJavadoc = true
+                
+                while (index > 0 && isValidLineBeforeStartfOfJavadoc) {
+                    String currentLineTrimmed = lines[--index].trim()
+                    
+                    // Valid lines before the start of the javadoc are:
+                    // - a blank line
+                    isValidLineBeforeStartfOfJavadoc = currentLineTrimmed.isEmpty()
+                    // - a regular comment
+                    isValidLineBeforeStartfOfJavadoc |= currentLineTrimmed.startsWith('//')
+                    // - a class annotation
+                    isValidLineBeforeStartfOfJavadoc |= currentLineTrimmed.startsWith('@')
+                    // - a line of javadoc
+                    isValidLineBeforeStartfOfJavadoc |= currentLineTrimmed.startsWith('*')
                 }
 
                 if (!lines[index].trim().startsWith('/**')) {
-                    violations.add(createViolation(sourceCode, classNode, "Class $classNode.name missing JavaDoc"))
+                    violations.add(createViolation(sourceCode, classNode, "Class $classNode.name missing Javadoc"))
                 }
             }
         }
