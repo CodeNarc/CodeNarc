@@ -9,7 +9,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-basic.html}Basic}}
+* {{{./codenarc-rules-basic.html}Basic}}
       
       
     * {{{./codenarc-rules-basic.html#AssertWithinFinallyBlock}AssertWithinFinallyBlock}}  
@@ -143,7 +143,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-braces.html}Braces}}
+* {{{./codenarc-rules-braces.html}Braces}}
       
       
     * {{{./codenarc-rules-braces.html#ElseBlockBraces}ElseBlockBraces}}  
@@ -160,7 +160,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-concurrency.html}Concurrency}}
+* {{{./codenarc-rules-concurrency.html}Concurrency}}
       
       
     * {{{./codenarc-rules-concurrency.html#BusyWait}BusyWait}}  
@@ -243,7 +243,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-convention.html}Convention}}
+* {{{./codenarc-rules-convention.html}Convention}}
       
       
     * {{{./codenarc-rules-convention.html#ConfusingTernary}ConfusingTernary}}  
@@ -278,7 +278,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-design.html}Design}}
+* {{{./codenarc-rules-design.html}Design}}
       
       
     * {{{./codenarc-rules-design.html#AbstractClassWithPublicConstructor}AbstractClassWithPublicConstructor}}  
@@ -346,7 +346,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-dry.html}Dry}}
+* {{{./codenarc-rules-dry.html}Dry}}
       
       
     * {{{./codenarc-rules-dry.html#DuplicateListLiteral}DuplicateListLiteral}}  
@@ -363,7 +363,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-enhanced.html}Enhanced}}
+* {{{./codenarc-rules-enhanced.html}Enhanced}}
       
       
     * {{{./codenarc-rules-enhanced.html#CloneWithoutCloneable}CloneWithoutCloneable}}  
@@ -377,7 +377,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-exceptions.html}Exceptions}}
+* {{{./codenarc-rules-exceptions.html}Exceptions}}
       
       
     * {{{./codenarc-rules-exceptions.html#CatchArrayIndexOutOfBoundsException}CatchArrayIndexOutOfBoundsException}}  
@@ -442,7 +442,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-formatting.html}Formatting}}
+* {{{./codenarc-rules-formatting.html}Formatting}}
       
       
     * {{{./codenarc-rules-formatting.html#BlankLineBeforePackage}BlankLineBeforePackage}}  
@@ -531,7 +531,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-generic.html}Generic}}
+* {{{./codenarc-rules-generic.html}Generic}}
       
       
     * {{{./codenarc-rules-generic.html#IllegalClassMember}IllegalClassMember}}  
@@ -563,7 +563,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-grails.html}Grails}}
+* {{{./codenarc-rules-grails.html}Grails}}
       
       
     * {{{./codenarc-rules-grails.html#GrailsDomainHasEquals}GrailsDomainHasEquals}}  
@@ -601,7 +601,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-groovyism.html}Groovyism}}
+* {{{./codenarc-rules-groovyism.html}Groovyism}}
       
       
     * {{{./codenarc-rules-groovyism.html#AssignCollectionSort}AssignCollectionSort}}  
@@ -702,7 +702,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-imports.html}Imports}}
+* {{{./codenarc-rules-imports.html}Imports}}
       
       
     * {{{./codenarc-rules-imports.html#DuplicateImport}DuplicateImport}}  
@@ -728,7 +728,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-jdbc.html}Jdbc}}
+* {{{./codenarc-rules-jdbc.html}Jdbc}}
       
       
     * {{{./codenarc-rules-jdbc.html#DirectConnectionManagement}DirectConnectionManagement}}  
@@ -745,7 +745,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-junit.html}Junit}}
+* {{{./codenarc-rules-junit.html}Junit}}
       
       
     * {{{./codenarc-rules-junit.html#ChainedTest}ChainedTest}}  
@@ -822,7 +822,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-logging.html}Logging}}
+* {{{./codenarc-rules-logging.html}Logging}}
       
       
     * {{{./codenarc-rules-logging.html#LoggerForDifferentClass}LoggerForDifferentClass}}  
@@ -851,7 +851,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-naming.html}Naming}}
+* {{{./codenarc-rules-naming.html}Naming}}
       
       
     * {{{./codenarc-rules-naming.html#AbstractClassName}AbstractClassName}}  
@@ -898,7 +898,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-security.html}Security}}
+* {{{./codenarc-rules-security.html}Security}}
       
       
     * {{{./codenarc-rules-security.html#FileCreateTempFile}FileCreateTempFile}}  
@@ -930,7 +930,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-serialization.html}Serialization}}
+* {{{./codenarc-rules-serialization.html}Serialization}}
       
       
     * {{{./codenarc-rules-serialization.html#EnumCustomSerializationIgnored}EnumCustomSerializationIgnored}}  
@@ -947,7 +947,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-size.html}Size}}
+* {{{./codenarc-rules-size.html}Size}}
       
       
     * {{{./codenarc-rules-size.html#AbcComplexity}AbcComplexity}}    (DEPRECATED: Use the AbcMetric rule instead. Requires the GMetrics jar)
@@ -979,7 +979,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-unnecessary.html}Unnecessary}}
+* {{{./codenarc-rules-unnecessary.html}Unnecessary}}
       
       
     * {{{./codenarc-rules-unnecessary.html#AddEmptyString}AddEmptyString}}  
@@ -1122,7 +1122,7 @@ Rule Index
     
       
       
-* {{{codenarc-rules-unused.html}Unused}}
+* {{{./codenarc-rules-unused.html}Unused}}
       
       
     * {{{./codenarc-rules-unused.html#UnusedArray}UnusedArray}}  

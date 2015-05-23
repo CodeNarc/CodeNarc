@@ -13,7 +13,7 @@ HtmlReportWriter
   each package containing violations, and then a table of the rules applied, along
   with their descriptions.
 
-  See a {{{SampleCodeNarcHtmlReport.html}Sample Report}}.
+  See a {{{./SampleCodeNarcHtmlReport.html}Sample Report}}.
 
   Alternatively, see the {{{http://mrhaki.blogspot.com/}mrhaki}} blog post about
   {{{http://mrhaki.blogspot.com/2011/01/groovy-goodness-create-codenarc-reports.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+mrhaki+%28Messages+from+mrhaki%29}creating custom CodeNarc HTML reports using XSLT}}.
