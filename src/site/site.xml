@@ -34,9 +34,7 @@
         <menu name="General">
             <item name="Home" href="/index.html"/>
             <item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=250145"/>
-            <item name="Javadocs" href="/apidocs/index.html"/>
             <item name="Mailing Lists" href="http://sourceforge.net/mail/?group_id=250145"/>
-            <item name="Bug Tracker" href="http://sourceforge.net/tracker/?group_id=250145"/>
             <item name="SourceForge Project" href="http://sourceforge.net/projects/codenarc"/>
             <item name="GitHub Project" href="http://github.com/CodeNarc"/>
         </menu>
