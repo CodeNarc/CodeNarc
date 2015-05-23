@@ -28,7 +28,7 @@ import org.codenarc.rule.AbstractRuleTestCase
 class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
 
     private static final SOURCE_WITH_SINGLE_VIOLATION = """                      
-        [next: {}] as Iterator      ${violation('java.util.Iterator', 'hasNext, remove')} 
+        [nextElement: {}] as Enumeration      ${violation('java.util.Enumeration', 'hasMoreElements')}
     """
     
     @Before
@@ -64,20 +64,21 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
     void testMultipleViolations() {
         assertInlineViolations("""
             [:] as Runnable                     ${violation('java.lang.Runnable', 'run')}                     
-            [noSuchMethod: {}] as Iterator      ${violation('java.util.Iterator', 'hasNext, next, remove')}
-            ['next': {}] as Iterator            ${violation('java.util.Iterator', 'hasNext, remove')}
+            [noSuchMethod: {}] as Enumeration   ${violation('java.util.Enumeration', 'hasMoreElements, nextElement')}
         """)
     }
 
     @Test
     void testMethodsMissingFromInheritedInterfaceViolate() {
-        assertInlineViolations("""                  
-            interface FunnyIterator extends Iterator {
+        assertInlineViolations("""
+            interface FunnyEnumeration extends Enumeration {
                 void makeFun()
                 void makeLotsOfFun()    
             }
             
-            [next: {}, makeFun: {}] as FunnyIterator    ${violation('FunnyIterator', 'hasNext, makeLotsOfFun, remove')}
+            [nextElement: {}, makeFun: {}] as FunnyEnumeration    ${violation(
+                'FunnyEnumeration', 'hasMoreElements, makeLotsOfFun'
+            )}
         """)
     }
 
