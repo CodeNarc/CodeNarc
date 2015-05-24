@@ -16,3 +16,4 @@
 /.idea
 build/
 src/main/java/META-INF/
+/.gradle
