@@ -1,5 +1,8 @@
-apply plugin: 'groovy'
-apply plugin: 'maven'
+plugins {
+    id 'groovy'
+    id 'maven'
+    id 'net.researchgate.release' version '2.0.2'
+}
 
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
@@ -29,4 +32,9 @@ test {
     testLogging {
         events 'passed', 'skipped', 'failed'
     }
+}
+
+release {
+    tagPrefix = project.name
+    requireBranch = '' // disabled
 }
