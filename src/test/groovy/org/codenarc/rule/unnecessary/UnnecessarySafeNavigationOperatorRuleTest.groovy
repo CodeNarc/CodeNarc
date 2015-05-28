@@ -112,6 +112,16 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Test
+    void testSafeNavigationOperator_MultipleAssignment() {
+        final SOURCE = '''
+            def myMethod() {
+                def (timeA, timeB) = [a, b]*.timeLast
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new UnnecessarySafeNavigationOperatorRule()
     }
