@@ -57,6 +57,12 @@ signing {
     sign configurations.archives
 }
 
+javadoc {
+    if (JavaVersion.current().java8Compatible) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+}
+
 // Publish to Sonatype (OSSRH) Maven Repository
 // See http://central.sonatype.org/pages/gradle.html
 uploadArchives {
