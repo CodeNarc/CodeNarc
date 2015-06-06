@@ -2,6 +2,7 @@ plugins {
     id 'groovy'
     id 'maven'
     id 'signing'
+    id 'idea'
     id 'net.researchgate.release' version '2.0.2'
 }
 

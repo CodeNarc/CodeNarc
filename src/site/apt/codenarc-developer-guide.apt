@@ -13,6 +13,8 @@ CodeNarc - Developer Guide
 
   * {{{Before_You_Submit_a_Patch_or_Check-In_Code}Before You Submit a Patch or Check-In Code}}
 
+  * {{{Intellij_IDEA_Support}Intellij IDEA Support}}
+
   []
 
 
@@ -87,19 +89,23 @@ CodeNarc - Developer Guide
 
   [[6]] Add a description of the new rule to the appropriate "src/main/site/apt/codenarc-rules-XX.apt" document.
 
-
-* {Before You Submit a Patch or Check-In Code}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  Please do the following before submitting a patch or checking in code:
-
-  * Run the full <<CodeNarc>> test suite. This includes a test called <<<RunCodeNarcAgainstProjectSourceCodeTest>>>
-    that runs <<CodeNarc>> against its own source code (including any code that you have added or changed).
-
-
 **  NOTES
 ~~~~~~~~~~
 
   * [1] These files are created (skeletons) or updated automatically if you run the <<<codenarc create-rule>>>
         script to create the rule. See {{{The_codenarc_Command-line_Script}The codenarc Command-line Script}}
 
+
+* {Before You Submit a Pull Request or Patch}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Please do the following before submitting a pull request or patch:
+
+  * Run the full <<CodeNarc>> test suite. This includes a test called <<<RunCodeNarcAgainstProjectSourceCodeTest>>>
+    that runs <<CodeNarc>> against its own source code (including any code that you have added or changed).
+
+
+* {Intellij IDEA Support}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  To generate Intellij IDEA files, execute <<<gradle idea>>>
