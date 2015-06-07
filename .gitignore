@@ -6,6 +6,8 @@
 /hamlet_docs
 /*.patch
 /*.iws
+/*.iml
+/*.ipr
 /AntBuilderTestXmlReport.xml
 /*.html
 /target
