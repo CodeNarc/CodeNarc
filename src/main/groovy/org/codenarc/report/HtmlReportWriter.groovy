@@ -34,6 +34,8 @@ import org.codenarc.util.io.ClassPathResource
  * Set the includeSummaryByPackage property to false to exclude the violation summary for each package
  * within the "Summary" section of the report. It defaults to true.
  * <p/>
+ * Set the includeRuleDescriptions property to false to exclude the rule descriptions section of the report. It defaults to true.
+ * <p/>
  * Set the maxPriority property to control the maximum priority level for violations in
  * the report. For instance, setting maxPriority to 2 will result in the report containing
  * only priority 1 and 2 violations (and omitting violations with priority 3). The
@@ -53,6 +55,7 @@ class HtmlReportWriter extends AbstractReportWriter {
     String title
     String defaultOutputFile = DEFAULT_OUTPUT_FILE
     boolean includeSummaryByPackage = true
+    boolean includeRuleDescriptions = true
     int maxPriority = 3
 
     /**
@@ -113,7 +116,9 @@ class HtmlReportWriter extends AbstractReportWriter {
                 out << buildSummaryByPackage(results)
 
                 out << buildAllPackageSections(results)
-                out << buildRuleDescriptions(analysisContext)
+                if (includeRuleDescriptions) {
+                    out << buildRuleDescriptions(analysisContext)
+                }
             }
         }
     }
