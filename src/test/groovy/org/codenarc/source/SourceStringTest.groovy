@@ -45,7 +45,7 @@ class SourceStringTest extends AbstractTestCase {
 
     @Test
     void testConstructor_EmptySource() {
-        shouldFail { new SourceString('') }
+        assert new SourceString('').text == ''
     }
 
     @Test
