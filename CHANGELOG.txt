@@ -8,6 +8,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #91: ClassJavadoc rule: Allow regular comments or annotations before Javadoc section. (Thanks to Sébastien Launay)
 - #90: UnnecessarySafeNavigationOperator rule: Fix false positive on spread operator.
 - #95: Some tests incompatible with Java 8. (Thanks to Artur Gajowy)
+- #107: FileEndsWithoutNewlineRule to handle empty source. (Thanks to René Scheibe)
 
 FRAMEWORK AND INFRASTRUCTURE
 - #39: Convert project to Gradle. (Thanks very much to Tomasz Przybysz, Marcin Erdmann and Kyle Boon)
