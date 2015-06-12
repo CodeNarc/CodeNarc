@@ -35,7 +35,7 @@ class FileEndsWithoutNewlineRule extends AbstractRule {
      */
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-        if (!sourceCode.text.endsWith('\n')) {
+        if (!sourceCode.text.endsWith('\n') && sourceCode.lines) {
             violations.add(createViolation(sourceCode.lines.size() - 1, sourceCode.lines[-1],
                 "File $sourceCode.name does not end with a newline"))
         }

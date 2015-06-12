@@ -31,12 +31,12 @@ class SourceString extends AbstractSourceCode {
 
     /**
      * Construct a new instance for the file at the specified path
-     * @param source - the source; must not be null or empty
+     * @param source - the source code; may be empty
      * @param path - the path for the source code; may be null; defaults to null
      * @param name - the name for the source code; may be null; defaults to null
      */
     SourceString(String source, String path=null, String name=null) {
-        assert source
+        assert source != null
         this.source = source
         setPath(path)
         this.name = name

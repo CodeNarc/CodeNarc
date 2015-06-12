@@ -54,6 +54,12 @@ class FileEndsWithoutNewlineRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, '}', 'File null does not end with a newline')
     }
 
+    @Test
+    void testEmptySource() {
+        final SOURCE = ''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new FileEndsWithoutNewlineRule()
     }
