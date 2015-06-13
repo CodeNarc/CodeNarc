@@ -44,6 +44,16 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testMultilineDefinitionOfTrait() {
+        final SOURCE = '''
+            trait MyTrait {
+
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testMultilineDefinitionViolation() {
         final SOURCE = '''
             class MyClass

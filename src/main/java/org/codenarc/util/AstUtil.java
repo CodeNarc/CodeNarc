@@ -1081,6 +1081,11 @@ public class AstUtil {
             }
 
             String rawLine = getRawLine(sourceCode, lastAnnotation.getLastLineNumber()-1);
+
+            if(rawLine == null) {
+                return node.getLineNumber();
+            }
+
             // is the annotation the last thing on the line?
             if (rawLine.length() > lastAnnotation.getLastColumnNumber()) {
                 // no it is not

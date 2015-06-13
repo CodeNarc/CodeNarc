@@ -57,6 +57,7 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
             }
             interface MyInterface { }
             enum MyEnum { OK, BAD }
+            trait MyTrait { }
         '''
         assertNoViolations(SOURCE)
     }
