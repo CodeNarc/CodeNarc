@@ -241,6 +241,16 @@ c        '''
     }
 
     @Test
+    void testApplyTo_InnerClass_ParenthesisFollowingClosingBrace_NoViolations() {
+        final SOURCE = '''
+            foo.bar(new Whatever() {
+                void doSomething() {/*...*/}
+            })
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_UnicodeCharacterLiteral_Violation() {
         final SOURCE = '''
             if (valid()) { return '\\u00A0' }else { }
