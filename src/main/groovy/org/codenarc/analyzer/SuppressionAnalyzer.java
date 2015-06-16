@@ -102,6 +102,11 @@ public class SuppressionAnalyzer {
                     populateLineNumbers(methodNode, result, numLines, ruleName);
                 }
             }
+            for (AnnotatedNode methodNode : from(classNode.getDeclaredConstructors())) {
+                for (String ruleName : getSuppressedRuleNames(methodNode)) {
+                    populateLineNumbers(methodNode, result, numLines, ruleName);
+                }
+            }
         }
         return result; 
     }

@@ -273,6 +273,28 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void testConstructors() {
+        def analyzer = new SuppressionAnalyzer(new SourceString('''
+            class MyClass {
+                @SuppressWarnings('Rule1')
+                private MyClass() {
+                    println 123
+                }
+            }
+        '''))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 0))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 1))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 2))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 3))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 4))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 5))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 6))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 7))
+    }
+
+    @Test
     void testCompilationFails() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
             class XYZ ^&**(
