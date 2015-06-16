@@ -15,6 +15,7 @@ FRAMEWORK AND INFRASTRUCTURE
 - #39: Convert project to Gradle. (Thanks very much to Tomasz Przybysz, Marcin Erdmann and Kyle Boon)
 - #100: Remove IDE project files from source control. Use Gradle IDEA Plugin.
 - #106: HtmlReportWriter add includeRuleDescriptions property.
+- #109: Enable @SuppressWarnings to work on constructors.
 
 
 Changes in version 0.23 (Feb 2015)
