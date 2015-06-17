@@ -18,43 +18,18 @@ package org.codenarc.report
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
-import org.codenarc.rule.Violation
-import org.codenarc.rule.basic.EmptyCatchBlockRule
-import org.codenarc.rule.imports.UnusedImportRule
-import org.codenarc.rule.unused.UnusedPrivateMethodRule
-import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
-
-import java.text.DateFormat
-
-import static org.junit.Assert.assertEquals
 
 /**
  * Tests for InlineXmlReportWriter.
  *
  * @author Robin Bramley
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
-class InlineXmlReportWriterTest extends AbstractTestCase {
+class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
-    private static final LINE1 = 111
-    private static final LINE2 = 222
-    private static final LINE3 = 333
-    private static final SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
-    private static final SOURCE_LINE3 = 'throw new Exception("cdata=<![CDATA[whatever]]>") // Some very long message 1234567890123456789012345678901234567890'
-    private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
-    private static final MESSAGE3 = 'Other info'
-    private static final VIOLATION1 = new Violation(rule:new UnusedImportRule(), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
-    private static final VIOLATION2 = new Violation(rule:new UnusedPrivateMethodRule(), lineNumber:LINE2, message:MESSAGE2)
-    private static final VIOLATION3 = new Violation(rule:new EmptyCatchBlockRule(), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
-    private static final TITLE = 'My Cool Project'
-    private static final SRC_DIR1 = 'c:/MyProject/src/main/groovy'
-    private static final SRC_DIR2 = 'c:/MyProject/src/test/groovy'
-    private static final VERSION_FILE = 'src/main/resources/codenarc-version.txt'
-    private static final VERSION = new File(VERSION_FILE).text
-    private static final TIMESTAMP_DATE = new Date(1262361072497)
-    private static final FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
     private static final REPORT_XML = """<?xml version='1.0'?>
     <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
         <Report timestamp='${FORMATTED_TIMESTAMP}'/>
@@ -70,7 +45,7 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
         <Package path='src/main' totalFiles='3' filesWithViolations='3' priority1='0' priority2='5' priority3='2'>
             <File name='MyAction.groovy'>
                 <Violation ruleName='UnusedImport' priority='3' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine>
                     <Description><![CDATA[Imports for a class that is never referenced within the source file is unnecessary.]]></Description>
                 </Violation>
                 <Violation ruleName='EmptyCatchBlock' priority='2' lineNumber='333'>
@@ -84,7 +59,7 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
                     <Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description>
                 </Violation>
                 <Violation ruleName='UnusedImport' priority='3' lineNumber='111'>
-                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99) {]]></SourceLine>
+                    <SourceLine><![CDATA[if (count &lt; 23 &amp;&amp; index &lt;= 99 &amp;&amp; name.contains('')) {]]></SourceLine>
                     <Description><![CDATA[Imports for a class that is never referenced within the source file is unnecessary.]]></Description>
                 </Violation>
                 <Violation ruleName='UnusedPrivateMethod' priority='2' lineNumber='222'>
@@ -115,17 +90,11 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
     </CodeNarc>
     """
 
-    private reportWriter
-    private analysisContext
-    private results, srcMainDaoDirResults
-    private ruleSet
-    private stringWriter
-
     @Test
     void testWriteReport_Writer() {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def xmlAsString = stringWriter.toString()
-        assertXml(xmlAsString)
+        assertXml(xmlAsString, REPORT_XML)
     }
 
     @Before
@@ -151,16 +120,6 @@ class InlineXmlReportWriterTest extends AbstractTestCase {
 
         analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:ruleSet)
         stringWriter = new StringWriter()
-    }
-
-    @SuppressWarnings('JUnitStyleAssertions')
-    private void assertXml(String actualXml) {
-        log(actualXml)
-        assertEquals(normalizeXml(REPORT_XML), normalizeXml(actualXml))
-    }
-
-    private String normalizeXml(String xml) {
-        xml.replaceAll(/\>\s*\</, '><').trim()
     }
 
 }

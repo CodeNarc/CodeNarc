@@ -23,11 +23,8 @@ import org.codenarc.rule.Violation
 import org.codenarc.rule.imports.DuplicateImportRule
 import org.codenarc.rule.unnecessary.UnnecessaryBooleanInstantiationRule
 import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
-
-import java.text.DateFormat
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
@@ -37,26 +34,12 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-class XmlReportWriterTest extends AbstractTestCase {
+class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
-    private static final LINE1 = 111
-    private static final LINE2 = 222
-    private static final LINE3 = 333
-    private static final SOURCE_LINE1 = "if (count < 23 && index <= 99 && name.contains('\u0000')) {"
-    private static final SOURCE_LINE3 = 'throw new Exception("cdata=<![CDATA[whatever]]>") // Some very long message 1234567890123456789012345678901234567890'
-    private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
-    private static final MESSAGE3 = 'Other info'
     private static final VIOLATION1 = new Violation(rule:new StubRule(name:'RULE1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE2)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
     private static final NEW_REPORT_FILE = 'target/NewXmlReport.xml'
-    private static final TITLE = 'My Cool Project'
-    private static final SRC_DIR1 = 'c:/MyProject/src/main/groovy'
-    private static final SRC_DIR2 = 'c:/MyProject/src/test/groovy'
-    private static final VERSION_FILE = 'src/main/resources/codenarc-version.txt'
-    private static final VERSION = new File(VERSION_FILE).text
-    private static final TIMESTAMP_DATE = new Date(1262361072497)
-    private static final FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
     @SuppressWarnings('LineLength')
     private static final REPORT_XML = """<?xml version='1.0'?>
     <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
@@ -119,17 +102,11 @@ class XmlReportWriterTest extends AbstractTestCase {
     </CodeNarc>
     """
 
-    private reportWriter
-    private analysisContext
-    private results, srcMainDaoDirResults
-    private ruleSet
-    private stringWriter
-
     @Test
     void testWriteReport_Writer() {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def xmlAsString = stringWriter.toString()
-        assertXml(xmlAsString)
+        assertXml(xmlAsString, REPORT_XML)
     }
 
     @Test
@@ -154,7 +131,7 @@ class XmlReportWriterTest extends AbstractTestCase {
         def reportFile = new File('CodeNarcXmlReport.xml')
         def xmlAsString = reportFile.text
         reportFile.delete()      // comment out to keep report file around for easy inspection
-        assertXml(xmlAsString)
+        assertXml(xmlAsString, REPORT_XML)
     }
 
     @Test
@@ -164,7 +141,7 @@ class XmlReportWriterTest extends AbstractTestCase {
         def reportFile = new File(NEW_REPORT_FILE)
         def xmlAsString = reportFile.text
         reportFile.delete()
-        assertXml(xmlAsString)
+        assertXml(xmlAsString, REPORT_XML)
     }
 
     @Test
@@ -229,21 +206,9 @@ class XmlReportWriterTest extends AbstractTestCase {
         stringWriter = new StringWriter()
     }
 
-    private void assertXml(String actualXml) {
-        log(actualXml)
-        assert normalizeXml(REPORT_XML) == normalizeXml(actualXml)
-
-        // Verify that it is valid XML
-        new XmlSlurper().parseText(actualXml)
-    }
-
     private void assertContainsXml(String actualXml, String expectedPartialXml) {
         log(actualXml)
         assert normalizeXml(actualXml).contains(normalizeXml(expectedPartialXml))
-    }
-
-    private String normalizeXml(String xml) {
-        xml.replaceAll(/\>\s*\</, '><').trim()
     }
 
 }
