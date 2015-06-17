@@ -50,6 +50,6 @@ class InlineXmlReportWriter extends XmlReportWriter {
     @SuppressWarnings('FactoryMethodName')
     private buildDescriptionElement(rule) {
         def description = this.getDescriptionForRule(rule)
-        return { Description(cdata(description)) }
+        return { Description(XmlReportUtil.cdata(description)) }
     }
 }

@@ -163,20 +163,6 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
     // Setup and helper methods
     //--------------------------------------------------------------------------
 
-    @Test
-    void testRemoveIllegalCharacters() {
-        assert reportWriter.removeIllegalCharacters('\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008') == ''
-        assert reportWriter.removeIllegalCharacters('\uD800') == ''
-
-        // Valid chars
-        assert reportWriter.removeIllegalCharacters('') == ''
-        assert reportWriter.removeIllegalCharacters('01234567890 ABC abc') == '01234567890 ABC abc'
-        assert reportWriter.removeIllegalCharacters('!@#$%^&*()-_=+[]{};\'",./<>?') == '!@#$%^&*()-_=+[]{};\'",./<>?'
-        assert reportWriter.removeIllegalCharacters('\u0009') == '\u0009'
-        assert reportWriter.removeIllegalCharacters('\t\n\r') == '\t\n\r'
-        assert reportWriter.removeIllegalCharacters('\uE000') == '\uE000'
-    }
-
     @Before
     void setUpXmlReportWriterTest() {
         reportWriter = new XmlReportWriter(title:TITLE)

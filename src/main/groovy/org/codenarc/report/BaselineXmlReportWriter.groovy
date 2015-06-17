@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2015 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,17 @@ import org.codenarc.AnalysisContext
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Violation
-import org.codenarc.util.PathUtil
 
 /**
- * ReportWriter that generates an XML report.
+ * ReportWriter that generates a baseline XML report.
  *
  * @author Chris Mair
  */
 @SuppressWarnings(['FactoryMethodName'])
-class XmlReportWriter extends AbstractReportWriter {
+class BaselineXmlReportWriter extends AbstractReportWriter {
 
     String title
-    String defaultOutputFile = 'CodeNarcXmlReport.xml'
+    String defaultOutputFile = 'CodeNarcBaselineViolations.xml'
 
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         assert analysisContext
@@ -44,8 +43,7 @@ class XmlReportWriter extends AbstractReportWriter {
             CodeNarc(url:CODENARC_URL, version:getCodeNarcVersion()) {
                 out << buildReportElement()
                 out << buildProjectElement(analysisContext)
-                out << buildPackageElements(results)
-                out << buildRulesElement(analysisContext)
+                out << buildFileElements(results)
             }
         }
         writer << xml
@@ -57,7 +55,7 @@ class XmlReportWriter extends AbstractReportWriter {
 
     protected buildReportElement() {
         return {
-            Report(timestamp:getFormattedTimestamp())
+            Report(timestamp:getFormattedTimestamp(), type:'baseline')
         }
     }
 
@@ -71,50 +69,28 @@ class XmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildPackageElements(results) {
-        return buildPackageElement(results)
+    protected buildFileElements(results) {
+        return buildFileElement(results)
     }
 
-    protected buildPackageElement(results) {
-        def elementName = isRoot(results) ? 'PackageSummary' : 'Package'
+    protected buildFileElement(results) {
         return {
-            "$elementName"(buildPackageAttributeMap(results)) {
-                results.children.each { child ->
-                    if (child.isFile()) {
-                        out << buildFileElement(child)
-                    }
+            results.children.each { child ->
+                if (child.isFile()) {
+                    out << buildFileElement(child)
                 }
             }
             results.children.each { child ->
                 if (!child.isFile()) {
-                    out << buildPackageElement(child)
+                    out << buildFileElement(child)
                 }
             }
         }
     }
 
-    protected Map buildPackageAttributeMap(results) {
-        def attributeMap = [
-            totalFiles: results.getTotalNumberOfFiles(),
-            filesWithViolations: results.getNumberOfFilesWithViolations(3),
-            priority1:results.getNumberOfViolationsWithPriority(1),
-            priority2:results.getNumberOfViolationsWithPriority(2),
-            priority3:results.getNumberOfViolationsWithPriority(3)
-        ]
-        if (!isRoot(results)) {
-            attributeMap = [path:results.path] + attributeMap
-        }
-        return attributeMap
-    }
-
-    protected boolean isRoot(results) {
-        results.path == null
-    }
-
     protected buildFileElement(FileResults results) {
         return {
-            def name = PathUtil.getName(results.path)
-            File(name: name) {
+            File(path: results.path) {
                 results.violations.each { violation ->
                     out << buildViolationElement(violation)
                 }
@@ -125,33 +101,14 @@ class XmlReportWriter extends AbstractReportWriter {
     protected buildViolationElement(Violation violation) {
         def rule = violation.rule
         return {
-            Violation(ruleName:rule.name, priority:rule.priority, lineNumber:violation.lineNumber) {
-                out << buildSourceLineElement(violation)
+            Violation(ruleName:rule.name) {
                 out << buildMessageElement(violation)
             }
         }
     }
 
-    protected buildSourceLineElement(Violation violation) {
-        return (violation.sourceLine) ? { SourceLine(XmlReportUtil.cdata(XmlReportUtil.removeIllegalCharacters(violation.sourceLine))) } : null
-    }
-
     protected buildMessageElement(Violation violation) {
         return (violation.message) ? { Message(XmlReportUtil.cdata(XmlReportUtil.removeIllegalCharacters(violation.message))) } : null
-    }
-
-    protected buildRulesElement(AnalysisContext analysisContext) {
-        def sortedRules = getSortedRules(analysisContext)
-        return {
-            Rules {
-                sortedRules.each { rule ->
-                    def description = this.getDescriptionForRule(rule)
-                    Rule(name:rule.name) {
-                        Description(XmlReportUtil.cdata(description))
-                    }
-                }
-            }
-        }
     }
 
 }
