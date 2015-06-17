@@ -4,6 +4,9 @@ http://www.codenarc.org
 
 Changes in version 0.24 (??? 2015)
 --------------------------------------
+NEW RULES
+- #110: AssignmentToStaticFieldFromInstanceMethod rule (design) - Checks for assignment to a static field from an instance method.
+
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #91: ClassJavadoc rule: Allow regular comments or annotations before Javadoc section. (Thanks to Sébastien Launay)
 - #90: UnnecessarySafeNavigationOperator rule: Fix false positive on spread operator.
