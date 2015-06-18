@@ -15,6 +15,8 @@
  */
 package org.codenarc.results
 
+import org.codenarc.rule.Violation
+
 /**
  * Represents the results for a directory
  *
@@ -71,6 +73,11 @@ class DirectoryResults implements Results {
      */
     List getViolations() {
         children.inject([]) { violations, child -> violations.addAll(child.getViolations()); violations }
+    }
+
+    @Override
+    void removeViolation(Violation v) {
+        children.each { child -> child.removeViolation(v) }
     }
 
     /**

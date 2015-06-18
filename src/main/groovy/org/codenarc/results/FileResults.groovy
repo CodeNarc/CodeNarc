@@ -15,6 +15,8 @@
  */
 package org.codenarc.results
 
+import org.codenarc.rule.Violation
+
 /**
  * Represents the results of applying a set of rules against a single sourcefile
  *
@@ -58,6 +60,11 @@ class FileResults implements Results {
      */
     List getViolations() {
         new ArrayList(violations)
+    }
+
+    @Override
+    void removeViolation(Violation v) {
+        violations.remove(v)
     }
 
     /**

@@ -116,6 +116,26 @@ class DirectoryResultsTest extends AbstractTestCase {
     }
 
     @Test
+    void testRemoveViolation() {
+        def results = new DirectoryResults(PATH)
+        results.removeViolation(VIOLATION3)
+        assert results.getViolations() == []
+
+        def fileResults1 = new FileResults('path', [VIOLATION1, VIOLATION2, VIOLATION3])
+        results.addChild(fileResults1)
+        assert results.getViolations() == [VIOLATION1, VIOLATION2, VIOLATION3]
+
+        results.removeViolation(VIOLATION3)
+        assert results.getViolations() == [VIOLATION1, VIOLATION2]
+
+        def fileResults2 = new FileResults('path2', [VIOLATION4, VIOLATION7])
+        results.addChild(fileResults2)
+        assert results.getViolations() == [VIOLATION1, VIOLATION2, VIOLATION4, VIOLATION7]
+        results.removeViolation(VIOLATION4)
+        assert results.getViolations() == [VIOLATION1, VIOLATION2, VIOLATION7]
+    }
+
+    @Test
     void testFindResultsForPath() {
         def results = new DirectoryResults(PATH)
         def fileResults1 = new FileResults('file1', [])

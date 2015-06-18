@@ -48,6 +48,19 @@ class VirtualResultsTest extends AbstractTestCase {
     }
 
     @Test
+    void testRemoveViolation() {
+        final VIOLATION = new Violation(rule: [getPriority : { 1 } ] as Rule)
+
+        def emptyResults = new VirtualResults([])
+        emptyResults.removeViolation(VIOLATION)
+        assert emptyResults.getViolations() == []
+
+        def results = new VirtualResults([VIOLATION])
+        results.removeViolation(VIOLATION)
+        assert results.getViolations() == []
+    }
+
+    @Test
     void testGetViolations_ReturnsDefensiveCopy() {
         def results = new VirtualResults([new Violation(rule: [getPriority : { 1 } ] as Rule)])
         results.getViolations() << 123

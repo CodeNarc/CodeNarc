@@ -71,6 +71,19 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     @Test
+    void testRemoveViolation() {
+        def emptyResults = new FileResults(PATH, [])
+        emptyResults.removeViolation(VIOLATION3)
+        assert emptyResults.getViolations() == []
+
+        def results = new FileResults(PATH, [VIOLATION1, VIOLATION2, VIOLATION3, VIOLATION4])
+        results.removeViolation(VIOLATION3)
+        assert results.getViolations() == [VIOLATION1, VIOLATION2, VIOLATION4]
+        results.removeViolation(VIOLATION1)
+        assert results.getViolations() == [VIOLATION2, VIOLATION4]
+    }
+
+    @Test
     void testGetNumberOfFilesWithViolations_IgnoresViolationsWithHigherPriority() {
         def results = new FileResults(PATH, [VIOLATION3])
         assert results.getNumberOfFilesWithViolations(3) == 1

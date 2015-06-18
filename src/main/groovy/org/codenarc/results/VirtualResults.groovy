@@ -15,6 +15,8 @@
  */
 package org.codenarc.results
 
+import org.codenarc.rule.Violation
+
 /**
  * This is a Results object for something that has no real file system, such as a string.
  *  
@@ -38,6 +40,11 @@ class VirtualResults implements Results {
 
     List getChildren() {
         throw new UnsupportedOperationException('Not supported on virtual results')
+    }
+
+    @Override
+    void removeViolation(Violation v) {
+        this.violations.remove(v)
     }
 
     @Override

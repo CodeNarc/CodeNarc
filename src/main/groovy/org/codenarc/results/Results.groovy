@@ -15,6 +15,8 @@
  */
 package org.codenarc.results
 
+import org.codenarc.rule.Violation
+
 /**
  * Represents the results of applying rules to one or more source files/directories
  *
@@ -36,6 +38,12 @@ interface Results {
      * @return the List of all violations; may be empty
      */
     List getViolations()
+
+    /**
+     * Remove the specified violation
+     * @param v - the violation to remove
+     */
+    void removeViolation(Violation v)
 
     /**
      * Return the number of violations with the specified priority
