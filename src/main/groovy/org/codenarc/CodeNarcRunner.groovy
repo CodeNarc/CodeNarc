@@ -45,6 +45,7 @@ class CodeNarcRunner {
 
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer
+    ResultsProcessor resultsProcessor = new NullResultsProcessor()
     List reportWriters = []
 
     /**
@@ -53,6 +54,7 @@ class CodeNarcRunner {
      *   <li>Parse the <code>ruleSetFiles</code> property to create a RuleSet.</li>
      *   <li>Configure the RuleSet from the "codenarc.properties" file, if that file is found on the classpath.</li>
      *   <li>Apply the configured <code>SourceAnalyzer</code>.</li>
+     *   <li>Apply the configured <code>ResultsProcessor</code>.</li>
      *   <li>Generate a report for each configured <code>ReportWriter</code>.</li>
      *   <li>Return the <code>Results</code> object representing the analysis results.</li>
      * </ol>
@@ -67,6 +69,7 @@ class CodeNarcRunner {
         def ruleSet = createRuleSet()
         new PropertiesFileRuleSetConfigurer().configure(ruleSet)
         def results = sourceAnalyzer.analyze(ruleSet)
+        resultsProcessor.processResults(results)
         def p1 = results.getNumberOfViolationsWithPriority(1, true)
         def p2 = results.getNumberOfViolationsWithPriority(2, true)
         def p3 = results.getNumberOfViolationsWithPriority(3, true)

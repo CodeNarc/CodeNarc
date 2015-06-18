@@ -33,6 +33,7 @@ import org.codenarc.rule.FakePathRule
  * @author Chris Mair
  */
 class CodeNarcRunnerTest extends AbstractTestCase {
+
     private static final XML_RULESET1 = 'rulesets/RuleSet1.xml'
     private static final GROOVY_RULESET1 = 'rulesets/GroovyRuleSet1.txt'
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'
@@ -41,7 +42,13 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     private static final RESULTS = new FileResults('path', [])
     private static final SOURCE_DIRS = ['abc']
 
-    private codeNarcRunner
+    private CodeNarcRunner codeNarcRunner
+
+    @Test
+    void testInitialPropertyValues() {
+        assert codeNarcRunner.reportWriters == []
+        assert codeNarcRunner.resultsProcessor instanceof NullResultsProcessor
+    }
 
     @Test
     void testExecute_NoRuleSetFiles() {
@@ -59,10 +66,19 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     void testExecute() {
         def ruleSet
         def sourceAnalyzer = [analyze: { rs -> ruleSet = rs; RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
+        def resultsProcessorCalled
+        def resultsProcessor = [processResults:{ results ->
+            assert results == RESULTS
+            resultsProcessorCalled = true
+        }] as ResultsProcessor
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+        codeNarcRunner.resultsProcessor = resultsProcessor
 
         def analysisContext, results
-        def reportWriter = [writeReport: { ac, res -> analysisContext = ac; results = res }] as ReportWriter
+        def reportWriter = [writeReport: { ac, res ->
+            analysisContext = ac
+            results = res
+        }] as ReportWriter
         codeNarcRunner.reportWriters << reportWriter
 
         codeNarcRunner.ruleSetFiles = XML_RULESET1
@@ -74,6 +90,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert analysisContext.ruleSet == ruleSet
         assert analysisContext.sourceDirectories == SOURCE_DIRS
         assert results == RESULTS
+        assert resultsProcessorCalled
     }
 
     @Test
