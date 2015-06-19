@@ -66,6 +66,11 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     }
 
     @Test
+    void testGetReportWriter_Baseline() {
+        assert reportWriterFactory.getReportWriter('baseline').class == BaselineXmlReportWriter
+    }
+
+    @Test
     void testGetReportWriter_SpecifyClassName() {
         assert reportWriterFactory.getReportWriter('org.codenarc.report.HtmlReportWriter').class == HtmlReportWriter
     }

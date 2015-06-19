@@ -37,6 +37,7 @@ class ReportWriterFactory {
             case 'console': def w = new TextReportWriter(); w.writeToStandardOut = true; return w
             case 'ide': def w = new IdeTextReportWriter(); w.writeToStandardOut = true; return w
             case 'inlineXml' : return new InlineXmlReportWriter()
+            case 'baseline': return new BaselineXmlReportWriter()
         }
 
         def reportClass = getClass().classLoader.loadClass(type)
