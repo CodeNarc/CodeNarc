@@ -48,6 +48,7 @@ ruleset {
     ruleset('rulesets/logging.xml')
 
     ruleset('rulesets/naming.xml') {
+        exclude 'FactoryMethodName'
         PackageNameMatchesFilePath(groupId:'org.codenarc')
     }
 
