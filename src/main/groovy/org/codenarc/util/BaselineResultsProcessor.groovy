@@ -28,7 +28,7 @@ import org.codenarc.util.io.Resource
  */
 class BaselineResultsProcessor implements ResultsProcessor {
 
-    private final Resource resource
+    final Resource resource
     private final BaselineXmlReportParser parser = new BaselineXmlReportParser()
 
     BaselineResultsProcessor(Resource resource) {

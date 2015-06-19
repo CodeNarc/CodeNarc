@@ -23,6 +23,8 @@ import org.codenarc.CodeNarcRunner
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.ReportWriterFactory
 import org.codenarc.results.Results
+import org.codenarc.util.BaselineResultsProcessor
+import org.codenarc.util.io.DefaultResourceFactory
 
 /**
  * Ant Task for running CodeNarc.
@@ -50,6 +52,7 @@ import org.codenarc.results.Results
  * @author Chris Mair
  */
 class CodeNarcTask extends Task {
+
     private static final LOG = Logger.getLogger(CodeNarcTask)
 
     /**
@@ -57,6 +60,12 @@ class CodeNarcTask extends Task {
      * single file path, or multiple paths separated by commas.
      */
     String ruleSetFiles
+
+    /**
+     * The path to a Baseline Violations report (report type "baseline"). If set, then all violations specified
+     * within that report are excluded (filtered) from the current CodeNarc run. If null/empty, then do nothing.
+     */
+    String excludeBaseline
 
     int maxPriority1Violations = Integer.MAX_VALUE
     int maxPriority2Violations = Integer.MAX_VALUE
@@ -66,8 +75,17 @@ class CodeNarcTask extends Task {
     protected List fileSets = []
     protected ruleSet
 
+    private final resourceFactory = new DefaultResourceFactory()
+
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
-    protected createCodeNarcRunner = { new CodeNarcRunner() }
+    protected createCodeNarcRunner = {
+        if (excludeBaseline) {
+            def resource = resourceFactory.getResource(excludeBaseline)
+            def resultsProcessor = new BaselineResultsProcessor(resource)
+            return new CodeNarcRunner(resultsProcessor:resultsProcessor)
+        }
+        return new CodeNarcRunner()
+    }
 
     /**
      * Execute this Ant Task

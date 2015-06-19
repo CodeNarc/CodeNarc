@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2015 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package org.codenarc.ant
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
+import org.codenarc.CodeNarcRunner
+import org.codenarc.NullResultsProcessor
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.XmlReportWriter
@@ -25,6 +27,8 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
+import org.codenarc.util.BaselineResultsProcessor
+import org.codenarc.util.io.ClassPathResource
 import org.junit.Before
 import org.junit.Test
 
@@ -33,8 +37,6 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for the CodeNarc Ant Task
- *
- * @author Chris Mair
  */
 class CodeNarcTaskTest extends AbstractTestCase {
 
@@ -45,12 +47,12 @@ class CodeNarcTaskTest extends AbstractTestCase {
     private static final XML_REPORT_FILE = 'CodeNarcTaskXmlReport.xml'
     private static final RESULTS = new FileResults('path', [])
 
-    private codeNarcTask
-    private fileSet
-    private project
+    private CodeNarcTask codeNarcTask
+    private FileSet fileSet
+    private Project project
 
     @Test
-    void testMaxViolationsDefaultViolations() {
+    void testMaxViolationsDefaultValues() {
         assert codeNarcTask.maxPriority1Violations == Integer.MAX_VALUE
         assert codeNarcTask.maxPriority2Violations == Integer.MAX_VALUE
         assert codeNarcTask.maxPriority3Violations == Integer.MAX_VALUE
@@ -72,19 +74,6 @@ class CodeNarcTaskTest extends AbstractTestCase {
     void testExecute_MaxPriority3Violations() {
         codeNarcTask.maxPriority3Violations = 10
         assertMaxViolations(3, 11)
-    }
-
-    private void assertMaxViolations(int priority, int numViolations) {
-        codeNarcTask.addFileset(fileSet)
-        def reportWriter = [ writeReport: { ctx, results -> } ]
-        codeNarcTask.reportWriters = [reportWriter]
-        StubSourceAnalyzerCategory.reset()
-        StubSourceAnalyzerCategory.violationCounts[priority] = numViolations
-        use(StubSourceAnalyzerCategory) {
-            def errorMessage = shouldFail(BuildException) { codeNarcTask.execute() }
-            log("errorMessage=$errorMessage")
-            assert errorMessage.contains("p${priority}=${numViolations}")
-        }
     }
 
     @Test
@@ -218,9 +207,30 @@ class CodeNarcTaskTest extends AbstractTestCase {
         shouldFailWithMessageContaining('fileSet') { codeNarcTask.addFileset(null) }
     }
 
+    @Test
+    void testCreateCodeNarcRunner() {
+        def runner = codeNarcTask.createCodeNarcRunner()
+        assert runner instanceof CodeNarcRunner
+        assert runner.resultsProcessor instanceof NullResultsProcessor
+    }
+
+    @Test
+    void testCreateCodeNarcRunner_excludeBaseline() {
+        final EXCLUDE_FILE = 'config/CodeNarcBaselineViolations.xml'
+        codeNarcTask.excludeBaseline = EXCLUDE_FILE
+        def runner = codeNarcTask.createCodeNarcRunner()
+        assert runner instanceof CodeNarcRunner
+        assert runner.resultsProcessor instanceof BaselineResultsProcessor
+        assert runner.resultsProcessor.resource instanceof ClassPathResource
+        assert runner.resultsProcessor.resource.path == EXCLUDE_FILE
+    }
+
+    //------------------------------------------------------------------------------------
+    // Setup and helper methods
+    //------------------------------------------------------------------------------------
+
     @Before
     void setUpCodeNarcTaskTest() {
-
         project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR), project:project)
         fileSet.setIncludes('sourcewithdirs/**/*.groovy')
@@ -249,6 +259,20 @@ class CodeNarcTaskTest extends AbstractTestCase {
         }
         report
     }
+
+    private void assertMaxViolations(int priority, int numViolations) {
+        codeNarcTask.addFileset(fileSet)
+        def reportWriter = [ writeReport: { ctx, results -> } ]
+        codeNarcTask.reportWriters = [reportWriter]
+        StubSourceAnalyzerCategory.reset()
+        StubSourceAnalyzerCategory.violationCounts[priority] = numViolations
+        use(StubSourceAnalyzerCategory) {
+            def errorMessage = shouldFail(BuildException) { codeNarcTask.execute() }
+            log("errorMessage=$errorMessage")
+            assert errorMessage.contains("p${priority}=${numViolations}")
+        }
+    }
+
 }
 
 class StubSourceAnalyzerCategory {
