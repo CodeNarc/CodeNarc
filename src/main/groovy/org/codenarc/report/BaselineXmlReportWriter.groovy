@@ -26,7 +26,6 @@ import org.codenarc.rule.Violation
  *
  * @author Chris Mair
  */
-@SuppressWarnings(['FactoryMethodName'])
 class BaselineXmlReportWriter extends AbstractReportWriter {
 
     String title

@@ -24,10 +24,7 @@ import org.codenarc.util.PathUtil
 
 /**
  * ReportWriter that generates an XML report.
- *
- * @author Chris Mair
  */
-@SuppressWarnings(['FactoryMethodName'])
 class XmlReportWriter extends AbstractReportWriter {
 
     String title

@@ -57,6 +57,7 @@
             <item name="HTML Report" href="/codenarc-HtmlReportWriter.html"/>
             <item name="XML Report" href="/codenarc-XmlReportWriter.html"/>
             <item name="Text and IDE Reports" href="/codenarc-TextReportWriter.html"/>
+            <item name="Baseline Report" href="/codenarc-BaselineXmlReportWriter.html"/>
         </menu>
 
         <menu name="Sample Reports">
