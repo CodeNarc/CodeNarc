@@ -32,6 +32,12 @@ CodeNarc - Ant Task
 | maxPriority3Violations | The maximum number of priority 3 violations allowed before     | NO                     |
 |                        | failing the build (throwing a <<<BuildException>>>).           |                        |
 *------------------------+----------------------------------------------------------------+------------------------+
+| excludeBaseline        | The path to a <baseline violations> report (report type "baseline")| NO                 |
+|                        | If set, then all violations specified within that report are   |                        |
+|                        | excluded (filtered) from the current <<CodeNarc>> run. If      |                        |
+|                        | null/empty, then do nothing. See                               |                        |
+|                        | {{{./codenarc-BaselineXmlReportWriter.html}Baseline Report}}.  |                        |
+*------------------------+----------------------------------------------------------------+------------------------+
 
 
 * Report Nested Element
