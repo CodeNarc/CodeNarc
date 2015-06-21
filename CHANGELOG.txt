@@ -6,6 +6,7 @@ Changes in version 0.24 (??? 2015)
 --------------------------------------
 NEW RULES
 - #110: AssignmentToStaticFieldFromInstanceMethod rule (design) - Checks for assignment to a static field from an instance method.
+- #111: ClassNameSameAsSuperclass rule (naming) - Checks for any class that has an identical name to its superclass, other than the package. This can be very confusing.
 
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #91: ClassJavadoc rule: Allow regular comments or annotations before Javadoc section. (Thanks to Sébastien Launay)
