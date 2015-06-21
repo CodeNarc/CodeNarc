@@ -82,7 +82,7 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
     new File(path).append """
 * {$ruleName} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.19>
+  <Since CodeNarc 0.24>
 
   $ruleDescription
 
@@ -98,7 +98,7 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
 def updateChangelog(ruleName, ruleCategory, ruleDescription) {
     def path = './CHANGELOG.txt'
     File file = new File(path)
-    String original = file.text
+    String original = file.getText("ISO-8859-1")
     file.text = """
 #TODO: Sort the following line into the file
 - $ruleName rule ($ruleCategory) - $ruleDescription
