@@ -200,6 +200,19 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 
 
+* {InterfaceNameSameAsSuperInterface} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.24>
+
+  Checks for any interface that has an identical name to its super-interface, other than the package. This can be very confusing.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    interface MyInterface extends other.MyInterface { }     // violation
+-------------------------------------------------------------------------------
+
+
 * {MethodName} Rule
 ~~~~~~~~~~~~~~~~~~
 
@@ -373,4 +386,3 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     | should be ignored (i.e., that should not cause a rule          |                        |
 |                     | violation). The names may optionally contain wildcards (*,?).  |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-

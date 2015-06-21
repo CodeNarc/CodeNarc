@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 343 rules.
+  <<CodeNarc>> includes 346 rules.
 
     
       
@@ -285,6 +285,9 @@ Rule Index
     
       
     * {{{./codenarc-rules-design.html#AbstractClassWithoutAbstractMethod}AbstractClassWithoutAbstractMethod}}  
+    
+      
+    * {{{./codenarc-rules-design.html#AssignmentToStaticFieldFromInstanceMethod}AssignmentToStaticFieldFromInstanceMethod}}  
     
       
     * {{{./codenarc-rules-design.html#BooleanMethodReturnsNull}BooleanMethodReturnsNull}}  
@@ -863,6 +866,9 @@ Rule Index
     * {{{./codenarc-rules-naming.html#ClassNameSameAsFilename}ClassNameSameAsFilename}}  
     
       
+    * {{{./codenarc-rules-naming.html#ClassNameSameAsSuperclass}ClassNameSameAsSuperclass}}  
+    
+      
     * {{{./codenarc-rules-naming.html#ConfusingMethodName}ConfusingMethodName}}  
     
       
@@ -873,6 +879,9 @@ Rule Index
     
       
     * {{{./codenarc-rules-naming.html#InterfaceName}InterfaceName}}  
+    
+      
+    * {{{./codenarc-rules-naming.html#InterfaceNameSameAsSuperInterface}InterfaceNameSameAsSuperInterface}}  
     
       
     * {{{./codenarc-rules-naming.html#MethodName}MethodName}}  

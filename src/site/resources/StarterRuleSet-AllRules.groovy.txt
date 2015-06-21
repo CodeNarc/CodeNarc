@@ -16,6 +16,7 @@ ruleset {
     AssignCollectionSort 
     AssignCollectionUnique 
     AssignmentInConditional 
+    AssignmentToStaticFieldFromInstanceMethod 
     BigDecimalInstantiation 
     BitwiseOperatorInConditional 
     BlankLineBeforePackage 
@@ -43,6 +44,7 @@ ruleset {
     ClassJavadoc 
     ClassName 
     ClassNameSameAsFilename 
+    ClassNameSameAsSuperclass 
     ClassSize 
     CloneWithoutCloneable 
     CloneableWithoutClone 
@@ -165,6 +167,7 @@ ruleset {
     Instanceof 
     IntegerGetInteger 
     InterfaceName 
+    InterfaceNameSameAsSuperInterface 
     InvertedIfElse 
     JUnitAssertAlwaysFails 
     JUnitAssertAlwaysSucceeds 

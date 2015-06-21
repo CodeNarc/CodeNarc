@@ -47,6 +47,15 @@ class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testInterfaces_NoViolations() {
+        final SOURCE = '''
+        	interface MyOtherInterface { }
+            interface MyInterface extends other.MyOtherInterface { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testClassNames_SameAsImplicitSuperclass() {
         final SOURCE = 'class Object { }'
         assertViolations(SOURCE,
