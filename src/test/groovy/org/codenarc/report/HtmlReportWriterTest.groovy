@@ -15,10 +15,6 @@
  */
 package org.codenarc.report
 
-import static org.junit.Assert.assertEquals
-import static org.codenarc.test.TestUtil.assertContainsAllInOrder
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
@@ -34,6 +30,9 @@ import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
+
+import static org.codenarc.test.TestUtil.assertContainsAllInOrder
+import static org.junit.Assert.assertEquals
 
 /**
  * Tests for HtmlReportWriter
@@ -90,78 +89,6 @@ class HtmlReportWriterTest extends AbstractTestCase {
     void testWriteReport_IncludesRuleThatDoesNotSupportGetDescription() {
         analysisContext.ruleSet = new ListRuleSet([ [getName:{ 'RuleABC' }, getPriority: { 2 } ] as Rule])
         assertContainsAllInOrder(getReportText(), ['RuleABC', 'No description'])
-    }
-
-    @Test
-    void testWriteReport_NullResults() {
-        shouldFailWithMessageContaining('results') { reportWriter.writeReport(analysisContext, null) }
-    }
-
-    @Test
-    void testWriteReport_NullAnalysisContext() {
-        shouldFailWithMessageContaining('analysisContext') { reportWriter.writeReport(null, results) }
-    }
-
-    @Test
-    void testIsDirectoryContainingFilesWithViolations_FileResults() {
-        def results = new FileResults('', [])
-        assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
-
-        results = new FileResults('', [VIOLATION1])
-        assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
-    }
-
-    @Test
-    void testIsDirectoryContainingFilesWithViolations_DirectoryResults() {
-        def results = new DirectoryResults('')
-        assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
-
-        results.addChild(new FileResults('', []))
-        assert !reportWriter.isDirectoryContainingFilesWithViolations(results), 'child with no violations'
-
-        def child = new DirectoryResults('')
-        child.addChild(new FileResults('', [VIOLATION1]))
-        results.addChild(child)
-        assert !reportWriter.isDirectoryContainingFilesWithViolations(results), 'grandchild with violations'
-
-        results.addChild(new FileResults('', [VIOLATION2]))
-        assert reportWriter.isDirectoryContainingFilesWithViolations(results)
-
-        reportWriter.maxPriority = 1
-        assert !reportWriter.isDirectoryContainingFilesWithViolations(results)
-
-        reportWriter.maxPriority = 2
-        assert reportWriter.isDirectoryContainingFilesWithViolations(results)
-
-        reportWriter.maxPriority = 1
-        results.addChild(new FileResults('', [VIOLATION1]))
-        assert reportWriter.isDirectoryContainingFilesWithViolations(results)
-    }
-
-    @Test
-    void testIsDirectoryContainingFiles() {
-        def results = new FileResults('', [])
-        assert !reportWriter.isDirectoryContainingFiles(results)
-
-        results = new DirectoryResults('')
-        assert !reportWriter.isDirectoryContainingFiles(results)
-
-        results.numberOfFilesInThisDirectory = 2
-        assert reportWriter.isDirectoryContainingFiles(results)
-    }
-
-    @Test
-    void testFormatSourceLine() {
-        assert reportWriter.formatSourceLine('') == null
-        assert reportWriter.formatSourceLine('abc') == 'abc'
-        assert reportWriter.formatSourceLine('abcdef' * 20) == 'abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefab..abcdefabcdef'
-        assert reportWriter.formatSourceLine('abc', 2) == 'abc'
-        assert reportWriter.formatSourceLine('abcdef' * 20, 2) == 'cdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd..abcdefabcdef'
-    }
-
-    @Test
-    void testMaxPriority_DefaultsTo3() {
-        assert reportWriter.maxPriority == 3
     }
 
     @Test
