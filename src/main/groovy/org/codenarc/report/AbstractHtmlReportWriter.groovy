@@ -78,11 +78,16 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
         }
     }
 
+    protected buildScript() {
+        return { }
+    }
+
     protected buildHeaderSection() {
         return {
             head {
                 title(buildTitle())
                 out << buildCSS()
+                out << buildScript()
             }
         }
     }
