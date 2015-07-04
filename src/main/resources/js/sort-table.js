@@ -1,25 +1,86 @@
     function sortByPriority(tr1, tr2) {
-        var item1 = tr1.getElementsByClassName('priorityColumn').item(0)
-        var item2 = tr2.getElementsByClassName('priorityColumn').item(0)
-        return (item1.innerHTML > item2.innerHTML);
+        var item1 = columnValue(tr1, 'priorityColumn')
+        var item2 = columnValue(tr2, 'priorityColumn')
+        return (item1 > item2);
     }
 
     function sortByRule(tr1, tr2) {
-        var item1 = tr1.getElementsByClassName('ruleColumn').item(0)
-        var item2 = tr2.getElementsByClassName('ruleColumn').item(0)
-        return (item1.innerHTML > item2.innerHTML);
+        var item1 = columnValue(tr1, 'ruleColumn')
+        var item2 = columnValue(tr2, 'ruleColumn')
+        initializeCountPerRule()
+        return (countPerRule[item1] < countPerRule[item2]);
+    }
+
+    function sortByRuleName(tr1, tr2) {
+        var item1 = columnValue(tr1, 'ruleColumn')
+        var item2 = columnValue(tr2, 'ruleColumn')
+        return (item1 > item2);
     }
 
     function sortByFile(tr1, tr2) {
-        var item1 = tr1.getElementsByClassName('pathColumn').item(0)
-        var item2 = tr2.getElementsByClassName('pathColumn').item(0)
-        return (item1.innerHTML > item2.innerHTML);
+        var item1 = columnValue(tr1, 'pathColumn')
+        var item2 = columnValue(tr2, 'pathColumn')
+        initializeCountPerFile()
+
+        if ((countPerFile[item1] == countPerFile[item2])) {
+            var priority1 = columnValue(tr1, 'priorityColumn')
+            var priority2 = columnValue(tr2, 'priorityColumn')
+            return priority1 > priority2
+        }
+        return (countPerFile[item1] < countPerFile[item2]);
+    }
+
+    function columnValue(tr, name) {
+        return tr.getElementsByClassName(name).item(0).innerHTML;
+    }
+
+    var countPerRule = null;
+    var countPerFile = null;
+
+    function initializeCountPerRule() {
+        if (countPerRule == null) {
+            var rows = getTableRows();
+            countPerRule = { };
+            for(var i = 0; i < rows.length; i++) {
+                var key = columnValue(rows.item(i), 'ruleColumn');
+                if (key in countPerRule) {
+                    countPerRule[key] = countPerRule[key] + 1;
+                }
+                else {
+                    countPerRule[key] = 1;
+                }
+            }
+        }
+    }
+
+    function initializeCountPerFile() {
+        if (countPerFile == null) {
+            var rows = getTableRows();
+            countPerFile = { };
+            for(var i = 0; i < rows.length; i++) {
+                var key = columnValue(rows.item(i), 'pathColumn');
+                if (key in countPerFile) {
+                    countPerFile[key] = countPerFile[key] + 1;
+                }
+                else {
+                    countPerFile[key] = 1;
+                }
+            }
+        }
+    }
+
+    function getTableBody() {
+        return document.getElementById('violationsTable').getElementsByTagName('tbody').item(0);
+    }
+
+    function getTableRows() {
+        return getTableBody().getElementsByTagName('tr');
     }
 
     // Adapted from http://codereview.stackexchange.com/questions/37632/how-should-i-sort-an-html-table-with-javascript-in-a-more-efficient-manner
     function sortData(comparisonFunction) {
-        var tableData = document.getElementById('violationsTable').getElementsByTagName('tbody').item(0);
-        var rowData = tableData.getElementsByTagName('tr');
+        var tableData = getTableBody();
+        var rowData = getTableRows();
 
         for(var i = 0; i < rowData.length - 1; i++) {
             for(var j = 0; j < rowData.length - (i + 1); j++) {

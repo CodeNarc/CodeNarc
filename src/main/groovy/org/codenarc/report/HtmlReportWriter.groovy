@@ -43,7 +43,6 @@ import org.codenarc.rule.Violation
 class HtmlReportWriter extends AbstractHtmlReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
-    private static final CSS_FILE = 'codenarc-htmlreport.css'
     private static final ROOT_PACKAGE_NAME = '<Root>'
 
     String defaultOutputFile = DEFAULT_OUTPUT_FILE
@@ -51,10 +50,6 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
 
     String toString() {
         "HtmlReportWriter[outputFile=$outputFile, title=$title]"
-    }
-
-    protected String getCssFile() {
-        return CSS_FILE
     }
 
     //--------------------------------------------------------------------------

@@ -31,15 +31,15 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
 
     protected static final MAX_SOURCE_LINE_LENGTH = 70
     protected static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
+    protected static final CSS_FILE = 'codenarc-htmlreport.css'
 
     String title
     boolean includeRuleDescriptions = true
     int maxPriority = 3
 
-    /**
-     * @return the path and filename for the CSS file
-     */
-    abstract protected String getCssFile()
+    protected String getCssFile() {
+        return CSS_FILE
+    }
 
     abstract protected buildBodySection(AnalysisContext analysisContext, results)
 

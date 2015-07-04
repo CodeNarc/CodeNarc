@@ -44,7 +44,6 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'CodeNarcSortableReport.html'
     private static final JS_FILE = 'js/sort-table.js'
-    private static final CSS_FILE = 'codenarc-htmlreport.css'
 
     private class ViolationAndPath {
         Violation violation
@@ -55,10 +54,6 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
 
     String toString() {
         "SortableHtmlReportWriter[outputFile=$outputFile, title=$title]"
-    }
-
-    protected String getCssFile() {
-        return CSS_FILE
     }
 
     //--------------------------------------------------------------------------
@@ -196,9 +191,10 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
     private buildButtons() {
         return {
             div(class:'buttons') {
-                button(type:"button", onclick:"sortData(sortByRule)", getResourceBundleString('htmlReport.button.sortByRule'))
-                button(type:"button", onclick:"sortData(sortByFile)", getResourceBundleString('htmlReport.button.sortByFile'))
-                button(type:"button", onclick:"sortData(sortByPriority)", getResourceBundleString('htmlReport.button.sortByPriority'))
+                button(type:"button", onclick:'sortData(sortByRuleName)', getResourceBundleString('htmlReport.button.sortByRuleName'))
+                button(type:"button", onclick:'sortData(sortByRule)', getResourceBundleString('htmlReport.button.sortByRule'))
+                button(type:"button", onclick:'sortData(sortByFile)', getResourceBundleString('htmlReport.button.sortByFile'))
+                button(type:"button", onclick:'sortData(sortByPriority)', getResourceBundleString('htmlReport.button.sortByPriority'))
             }
         }
     }
