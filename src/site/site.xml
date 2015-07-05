@@ -34,9 +34,8 @@
         <menu name="General">
             <item name="Home" href="/index.html"/>
             <item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=250145"/>
-            <item name="Mailing Lists" href="http://sourceforge.net/mail/?group_id=250145"/>
-            <item name="SourceForge Project" href="http://sourceforge.net/projects/codenarc"/>
             <item name="GitHub Project" href="http://github.com/CodeNarc"/>
+            <item name="SourceForge Project" href="http://sourceforge.net/projects/codenarc"/>
         </menu>
 
         <menu name="Running">
@@ -55,6 +54,7 @@
 
         <menu name="Report Types">
             <item name="HTML Report" href="/codenarc-HtmlReportWriter.html"/>
+            <item name="Sortable HTML Report" href="/codenarc-SortableHtmlReportWriter.html"/>
             <item name="XML Report" href="/codenarc-XmlReportWriter.html"/>
             <item name="Text and IDE Reports" href="/codenarc-TextReportWriter.html"/>
             <item name="Baseline Report" href="/codenarc-BaselineXmlReportWriter.html"/>
@@ -62,6 +62,7 @@
 
         <menu name="Sample Reports">
             <item name="Sample HTML Report" href="/SampleCodeNarcHtmlReport.html"/>
+            <item name="Sample Sortable HTML Report" href="/SampleCodeNarcSortableHtmlReport.html"/>
             <item name="Sample XML Report" href="/SampleCodeNarcXmlReport.xml"/>
         </menu>
 

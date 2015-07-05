@@ -148,11 +148,12 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
                 def vpList = []
                 fileResults.each { fileResult ->
                     fileResult.getViolations().each { v ->
-                        vpList << new ViolationAndPath(violation:v, path:fileResult.path)
+                        if (v.rule.priority <= maxPriority) {
+                            vpList << new ViolationAndPath(violation: v, path: fileResult.path)
+                        }
                         return vpList
                     }
                 }
-
                 vpList.sort { vp -> vp.violation.rule.priority }
 
                 tbody {

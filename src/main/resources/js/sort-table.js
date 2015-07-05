@@ -24,7 +24,6 @@
 
         var priority1 = columnValue(tr1, 'priorityColumn')
         var priority2 = columnValue(tr2, 'priorityColumn')
-
         var inversePriority1 = 100 - parseInt(priority1)
         var inversePriority2 = 100 - parseInt(priority2)
 

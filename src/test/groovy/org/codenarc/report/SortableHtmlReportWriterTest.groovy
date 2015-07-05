@@ -28,6 +28,7 @@ import org.junit.Test
 @SuppressWarnings('LineLength')
 class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
 
+    private static final TOP_HTML = '<img class=\'logo\' src=\'http://codenarc.sourceforge.net/images/codenarc-logo.png\' alt=\'CodeNarc\' align=\'right\'/><h1>CodeNarc Report</h1><div class=\'metadata\'><table><tr><td class=\'em\'>Report title:</td><td/></tr><tr><td class=\'em\'>Date:</td><td>Feb 24, 2011 9:32:38 PM</td></tr><tr><td class=\'em\'>Generated with:</td><td><a href=\'http://www.codenarc.org\'>CodeNarc v0.12</a></td></tr></table></div>'
     private static final SUMMARY_HTML = '<div class=\'summary\'><h2>Summary</h2><table><thead><tr class=\'tableHeader\'><th>Total Files</th><th>Files with Violations</th><th>Priority 1</th><th>Priority 2</th><th>Priority 3</th></tr></thead><tbody><tr><td class=\'number\'>10</td><td class=\'number\'>4</td><td class=\'priority1\'>3</td><td class=\'priority2\'>2</td><td class=\'priority3\'>4</td></tr></tbody></table></div>'
     private static final BUTTONS_HTML = '<div class=\'buttons\'><button type=\'button\' onclick=\'sortData(sortByRuleName)\'>Sort by Rule Name</button><button type=\'button\' onclick=\'sortData(sortByRule)\'>Sort by Rule (w/Most Violations)</button><button type=\'button\' onclick=\'sortData(sortByFile)\'>Sort by File (w/Most Violations)</button><button type=\'button\' onclick=\'sortData(sortByPriority)\'>Sort by Priority</button></div>'
     private static final RULE_DESCRIPTIONS_HTML = '<div class=\'summary\'><h2>Rule Descriptions</h2><table border=\'1\'><tr class=\'tableHeader\'><th class=\'ruleDescriptions\'>#</th><th class=\'ruleDescriptions\'>Rule Name</th><th class=\'ruleDescriptions\'>Description</th></tr><tr class=\'ruleDescriptions\'><td><a name=\'DuplicateImport\'></a><span class=\'ruleIndex\'>1</span></td><td class=\'ruleName priority3\'>DuplicateImport</td><td>Duplicate import statements are unnecessary.</td></tr><tr class=\'ruleDescriptions\'><td><a name=\'ReturnFromFinallyBlock\'></a><span class=\'ruleIndex\'>2</span></td><td class=\'ruleName priority2\'>ReturnFromFinallyBlock</td><td>Returning from a <em>finally</em> block is confusing and can hide the original exception.</td></tr><tr class=\'ruleDescriptions\'><td><a name=\'ThrowExceptionFromFinallyBlock\'></a><span class=\'ruleIndex\'>3</span></td><td class=\'ruleName priority2\'>ThrowExceptionFromFinallyBlock</td><td>Throwing an exception from a <em>finally</em> block is confusing and can hide the original exception.</td></tr><tr class=\'ruleDescriptions\'><td><a name=\'UnnecessaryBooleanInstantiation\'></a><span class=\'ruleIndex\'>4</span></td><td class=\'ruleName priority3\'>UnnecessaryBooleanInstantiation</td><td>Use <em>Boolean.valueOf()</em> for variable values or <em>Boolean.TRUE</em> and <em>Boolean.FALSE</em> for constant values instead of calling the <em>Boolean()</em> constructor directly or calling <em>Boolean.valueOf(true)</em> or <em>Boolean.valueOf(false)</em>.</td></tr><tr class=\'ruleDescriptions\'><td><a name=\'UnnecessaryStringInstantiation\'></a><span class=\'ruleIndex\'>5</span></td><td class=\'ruleName priority3\'>UnnecessaryStringInstantiation</td><td>Use a String literal (e.g., "...") instead of calling the corresponding String constructor (new String("..")) directly.</td></tr></table></div>'
@@ -47,17 +48,30 @@ class SortableHtmlReportWriterTest extends AbstractHtmlReportWriterTestCase {
     @Test
     void testWriteReport() {
         final EXPECTED = """
-            <html><head><title>CodeNarc Report</title><style type='text/css'>$cssFileContents</style><script>$jsFileContents</script>
-            </head><body><img class='logo' src='http://codenarc.sourceforge.net/images/codenarc-logo.png' alt='CodeNarc' align='right'/><h1>CodeNarc Report</h1><div class='metadata'><table><tr><td class='em'>Report title:</td><td/></tr><tr><td class='em'>Date:</td><td>Feb 24, 2011 9:32:38 PM</td></tr><tr><td class='em'>Generated with:</td><td><a href='http://www.codenarc.org'>CodeNarc v0.12</a></td></tr></table></div>${SUMMARY_HTML}${VIOLATIONS_HEADING_HTML}${BUTTONS_HTML}${VIOLATIONS_HTML}${RULE_DESCRIPTIONS_HTML}</body></html>
+            <html><head><title>CodeNarc Report</title><style type='text/css'>$cssFileContents</style><script>$jsFileContents</script></head>
+            <body>${TOP_HTML}${SUMMARY_HTML}${VIOLATIONS_HEADING_HTML}${BUTTONS_HTML}${VIOLATIONS_HTML}${RULE_DESCRIPTIONS_HTML}</body></html>
             """
+        assertReportFileContents(NEW_REPORT_FILE, EXPECTED)
+    }
+
+    @Test
+    void testWriteReport_MaxPriority() {
+        final MAX_PRIORITY_SUMMARY_HTML = '<div class=\'summary\'><h2>Summary</h2><table><thead><tr class=\'tableHeader\'><th>Total Files</th><th>Files with Violations</th><th>Priority 1</th><th>Priority 2</th></tr></thead><tbody><tr><td class=\'number\'>10</td><td class=\'number\'>2</td><td class=\'priority1\'>3</td><td class=\'priority2\'>2</td></tr></tbody></table></div>'
+        final MAX_PRIORITY_VIOLATIONS_HTML = "${VIOLATIONS_TABLE_HEADING_HTML}<tbody><tr><td class=\'pathColumn\'>src/main/MyAction.groovy</td><td class=\'ruleColumn\'><a href=\'#RULE1\'>RULE1</a></td><td class=\'priority1 priorityColumn\'>1</td><td class=\'number\'>111</td><td><p class=\'violationInfo\'><span class=\'violationInfoPrefix\'>[SRC]</span><span class=\'sourceCode\'>if (file) {</span></p></td></tr><tr><td class=\'pathColumn\'>src/main/MyAction.groovy</td><td class=\'ruleColumn\'><a href=\'#RULE1\'>RULE1</a></td><td class=\'priority1 priorityColumn\'>1</td><td class=\'number\'>111</td><td><p class=\'violationInfo\'><span class=\'violationInfoPrefix\'>[SRC]</span><span class=\'sourceCode\'>if (file) {</span></p></td></tr><tr><td class=\'pathColumn\'>src/main/MyActionTest.groovy</td><td class=\'ruleColumn\'><a href=\'#RULE1\'>RULE1</a></td><td class=\'priority1 priorityColumn\'>1</td><td class=\'number\'>111</td><td><p class=\'violationInfo\'><span class=\'violationInfoPrefix\'>[SRC]</span><span class=\'sourceCode\'>if (file) {</span></p></td></tr><tr><td class=\'pathColumn\'>src/main/MyAction.groovy</td><td class=\'ruleColumn\'><a href=\'#RULE2\'>RULE2</a></td><td class=\'priority2 priorityColumn\'>2</td><td class=\'number\'>222</td><td><p class=\'violationInfo\'><span class=\'violationInfoPrefix\'>[MSG]</span><span class=\'violationMessage\'>bad stuff</span></p></td></tr><tr><td class=\'pathColumn\'>src/main/MyActionTest.groovy</td><td class=\'ruleColumn\'><a href=\'#RULE2\'>RULE2</a></td><td class=\'priority2 priorityColumn\'>2</td><td class=\'number\'>222</td><td><p class=\'violationInfo\'><span class=\'violationInfoPrefix\'>[MSG]</span><span class=\'violationMessage\'>bad stuff</span></p></td></tr></tbody></table>"
+        final EXPECTED = """
+            <html><head><title>CodeNarc Report</title><style type='text/css'>$cssFileContents</style><script>$jsFileContents</script></head>
+            <body>${TOP_HTML}${MAX_PRIORITY_SUMMARY_HTML}${VIOLATIONS_HEADING_HTML}${BUTTONS_HTML}${MAX_PRIORITY_VIOLATIONS_HTML}${RULE_DESCRIPTIONS_HTML}</body></html>
+            """
+        reportWriter.maxPriority = 2
+        println getReportText()
         assertReportFileContents(NEW_REPORT_FILE, EXPECTED)
     }
 
     @Test
     void testWriteReport_IncludeRuleDescriptions_False() {
         final EXPECTED = """
-            <html><head><title>CodeNarc Report</title><style type='text/css'>$cssFileContents</style><script>$jsFileContents</script>
-            </head><body><img class='logo' src='http://codenarc.sourceforge.net/images/codenarc-logo.png' alt='CodeNarc' align='right'/><h1>CodeNarc Report</h1><div class='metadata'><table><tr><td class='em'>Report title:</td><td/></tr><tr><td class='em'>Date:</td><td>Feb 24, 2011 9:32:38 PM</td></tr><tr><td class='em'>Generated with:</td><td><a href='http://www.codenarc.org'>CodeNarc v0.12</a></td></tr></table></div>${SUMMARY_HTML}${VIOLATIONS_HEADING_HTML}${BUTTONS_HTML}${VIOLATIONS_HTML}</body></html>
+            <html><head><title>CodeNarc Report</title><style type='text/css'>$cssFileContents</style><script>$jsFileContents</script></head>
+            <body>${TOP_HTML}${SUMMARY_HTML}${VIOLATIONS_HEADING_HTML}${BUTTONS_HTML}${VIOLATIONS_HTML}</body></html>
             """
         reportWriter.includeRuleDescriptions = false
         assertReportContents(EXPECTED)

@@ -29,14 +29,20 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
 
     private static final XML = 'xml'
     private static final HTML = 'html'
+    private static final SORTABLE = 'sortable'
     private static final TEXT = 'text'
     private static final HTML_REPORT_FILE = 'target/AntBuilderTestHtmlReport.html'
+    private static final SORTABLE_REPORT_FILE = 'target/AntBuilderTestSortableHtmlReport.html'
     private static final XML_REPORT_FILE = 'target/AntBuilderTestXmlReport.xml'
     private static final TEXT_REPORT_FILE = 'target/AntBuilderTestTextReport.txt'
     private static final TITLE = 'Sample Project'
     private static final RULESET_FILES = [
             'rulesets/basic.xml',
-            'rulesets/imports.xml'].join(',')
+            'rulesets/groovyism.xml',
+            'rulesets/imports.xml',
+            'rulesets/size.xml',
+            'rulesets/unnecessary.xml',
+            ].join(',')
 
     @Test
     void testAntTask_Execute_UsingAntBuilder() {
@@ -45,12 +51,16 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
         ant.codenarc(ruleSetFiles:RULESET_FILES) {
-            fileset(dir:'src/test/groovy/org/codenarc/util') {
+            fileset(dir:'src/test/groovy/org/codenarc/rule') {
                 include(name:'**/*.groovy')
             }
            report(type:HTML) {
                option(name:'title', value:TITLE)
                option(name:'outputFile', value:HTML_REPORT_FILE)
+           }
+           report(type:SORTABLE) {
+               option(name:'title', value:TITLE)
+               option(name:'outputFile', value:SORTABLE_REPORT_FILE)
            }
            report(type:XML) {
                option(name:'title', value:TITLE)
@@ -62,12 +72,19 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
            }
         }
         verifyHtmlReportFile()
+        verifySortableReportFile()
         verifyXmlReportFile()
         verifyTextReportFile()
     }
 
     private void verifyHtmlReportFile() {
         def file = new File(HTML_REPORT_FILE)
+        assert file.exists()
+        assertContainsAllInOrder(file.text, [TITLE, 'io', 'Rule Descriptions'])
+    }
+
+    private void verifySortableReportFile() {
+        def file = new File(SORTABLE_REPORT_FILE)
         assert file.exists()
         assertContainsAllInOrder(file.text, [TITLE, 'io', 'Rule Descriptions'])
     }
