@@ -62,7 +62,7 @@
 
         <menu name="Sample Reports">
             <item name="Sample HTML Report" href="/SampleCodeNarcHtmlReport.html"/>
-            <item name="Sample Sortable HTML Report" href="/SampleCodeNarcSortableHtmlReport.html"/>
+            <item name="Sample Sortable Report" href="/SampleCodeNarcSortableHtmlReport.html"/>
             <item name="Sample XML Report" href="/SampleCodeNarcXmlReport.xml"/>
         </menu>
 
