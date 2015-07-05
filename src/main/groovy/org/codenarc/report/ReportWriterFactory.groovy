@@ -32,6 +32,7 @@ class ReportWriterFactory {
         assert type
         switch(type) {
             case 'html': return new HtmlReportWriter()
+            case 'sortable': return new SortableHtmlReportWriter()
             case 'xml': return new XmlReportWriter()
             case 'text': return new TextReportWriter()
             case 'console': def w = new TextReportWriter(); w.writeToStandardOut = true; return w

@@ -66,6 +66,12 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     }
 
     @Test
+    void testGetReportWriter_Sortable() {
+        def reportWriter = reportWriterFactory.getReportWriter('sortable')
+        assert reportWriter.class == SortableHtmlReportWriter
+    }
+
+    @Test
     void testGetReportWriter_Baseline() {
         assert reportWriterFactory.getReportWriter('baseline').class == BaselineXmlReportWriter
     }

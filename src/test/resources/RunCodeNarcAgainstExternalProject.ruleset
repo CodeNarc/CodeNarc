@@ -20,9 +20,13 @@ ruleset {
 
     ruleset('rulesets/groovyism.xml')
 
-    ruleset('rulesets/formatting.xml')
+    ruleset('rulesets/formatting.xml') {
+        include 'BracesForClass'
+    }
 
-    ruleset('rulesets/imports.xml')
+    ruleset('rulesets/imports.xml') {
+        exclude 'NoWildcardImports'
+    }
 
     ruleset('rulesets/junit.xml') {
         exclude 'JUnitStyleAssertions'
@@ -37,18 +41,12 @@ ruleset {
 
     ruleset('rulesets/unnecessary.xml') {
         exclude 'UnnecessaryGetter'
+        exclude 'UnnecessaryGString'
         exclude 'UnnecessaryObjectReferences'
         exclude 'UnnecessaryReturnKeyword'
+        exclude 'UnnecessarySemicolon'
     }
 
     ruleset('rulesets/unused.xml')
-
-    // Ensure that each source file contains the Apache License header
-    rule(RequiredStringRule) {
-        name = 'ApacheLicenseRequired'
-        string = 'Licensed under the Apache License, Version 2.0 (the "License");'
-        violationMessage = 'The Apache License 2.0 comment is missing from the source file'
-        description = 'Checks that all source files contain the Apache License 2.0 comment'
-    }
 
 }

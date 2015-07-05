@@ -191,10 +191,10 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
     private buildButtons() {
         return {
             div(class:'buttons') {
-                button(type:"button", onclick:'sortData(sortByRuleName)', getResourceBundleString('htmlReport.button.sortByRuleName'))
-                button(type:"button", onclick:'sortData(sortByRule)', getResourceBundleString('htmlReport.button.sortByRule'))
-                button(type:"button", onclick:'sortData(sortByFile)', getResourceBundleString('htmlReport.button.sortByFile'))
-                button(type:"button", onclick:'sortData(sortByPriority)', getResourceBundleString('htmlReport.button.sortByPriority'))
+                button(type:'button', onclick:'sortData(sortByRuleName)', getResourceBundleString('htmlReport.button.sortByRuleName'))
+                button(type:'button', onclick:'sortData(sortByRule)', getResourceBundleString('htmlReport.button.sortByRule'))
+                button(type:'button', onclick:'sortData(sortByFile)', getResourceBundleString('htmlReport.button.sortByFile'))
+                button(type:'button', onclick:'sortData(sortByPriority)', getResourceBundleString('htmlReport.button.sortByPriority'))
             }
         }
     }

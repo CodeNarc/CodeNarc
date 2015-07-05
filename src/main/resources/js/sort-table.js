@@ -22,12 +22,16 @@
         var item2 = columnValue(tr2, 'pathColumn')
         initializeCountPerFile()
 
-        if ((countPerFile[item1] == countPerFile[item2])) {
-            var priority1 = columnValue(tr1, 'priorityColumn')
-            var priority2 = columnValue(tr2, 'priorityColumn')
-            return priority1 > priority2
-        }
-        return (countPerFile[item1] < countPerFile[item2]);
+        var priority1 = columnValue(tr1, 'priorityColumn')
+        var priority2 = columnValue(tr2, 'priorityColumn')
+
+        var inversePriority1 = 100 - parseInt(priority1)
+        var inversePriority2 = 100 - parseInt(priority2)
+
+        var sort1 = "" + countPerFile[item1] + " " + item1 + " " + inversePriority1
+        var sort2 = "" + countPerFile[item2] + " " + item2 + " " + inversePriority2
+
+        return (sort1 < sort2);
     }
 
     function columnValue(tr, name) {

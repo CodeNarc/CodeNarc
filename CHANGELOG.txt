@@ -17,6 +17,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #108: Fix NPE when analyzing file with trait; fix #93. (Thanks to Dominik Przybysz)
 
 FRAMEWORK AND INFRASTRUCTURE
+- #92: New SortableHtmlReportWriter, report type "sortable".
 - #89: Provide mechanism for excluding a baseline violations file. Add "baseline" report type and associated "excludeBaseline" property to Ant Task.
 - #39: Convert project to Gradle. (Thanks very much to Tomasz Przybysz, Marcin Erdmann and Kyle Boon)
 - #100: Remove IDE project files from source control. Use Gradle IDEA Plugin.

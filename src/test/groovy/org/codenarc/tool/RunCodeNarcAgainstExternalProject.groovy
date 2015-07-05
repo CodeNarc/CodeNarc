@@ -46,20 +46,24 @@ class RunCodeNarcAgainstExternalProject {
 
         ant.codenarc(ruleSetFiles:rulesetfiles) {
 
-           fileset(dir:baseDir) {
-               include(name:'**/*.groovy')
-           }
+            fileset(dir:baseDir) {
+                include(name:'**/*.groovy')
+            }
 
-           report(type:'html') {
-               option(name:'title', value:title)
-               option(name:'outputFile', value:'target/' + title + '-CodeNarcReport.html')
-           }
-            report(type:'xml') {
+            report(type:'html') {
                 option(name:'title', value:title)
-                option(name:'outputFile', value:'target/' + title + '-CodeNarcReport.xml')
+                option(name:'outputFile', value:'target/' + title + '-CodeNarcReport.html')
+            }
+            report(type:'sortable') {
+                option(name:'title', value:title)
+                option(name:'outputFile', value:'target/' + title + '-SortableCodeNarcReport.html')
+            }
+            report(type:'xml') {
+                 option(name:'title', value:title)
+                 option(name:'outputFile', value:'target/' + title + '-CodeNarcReport.xml')
             }
             report(type:'text') {
-                option(name:'writeToStandardOut', value:true)
+                 option(name:'writeToStandardOut', value:true)
             }
         }
     }
