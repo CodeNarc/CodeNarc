@@ -2,8 +2,10 @@
                   CodeNarc BaselineXmlReportWriter
         --------------------------------------------------
 
-BaselineXmlReportWriter
+BaselineXmlReportWriter [Beta]
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+  <This feature is still experimental, and may change in the future...>
 
 * Description
 ~~~~~~~~~~~~~
