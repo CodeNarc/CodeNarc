@@ -56,6 +56,7 @@ class BaselineResultsProcessor implements ResultsProcessor {
         }
         if (matchingViolation) {
             results.removeViolation(matchingViolation)
+            violations.remove(matchingViolation)
         }
     }
 

@@ -38,7 +38,7 @@ class BaselineXmlReportParser {
             String path = file.@path
             List violations = []
             file.Violation.each { v ->
-                violations << new BaselineViolation(ruleName:v.@ruleName, message:v.text())
+                violations << new BaselineViolation(ruleName:v.@ruleName, message:v.Message.text())
             }
             resultsMap[path] = violations
         }

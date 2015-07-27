@@ -50,6 +50,8 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
     private static final VIOLATION_R2_M2 = new Violation(rule:new StubRule(name:RULE2), message:MESSAGE2)
     private static final VIOLATION_R3_M1 = new Violation(rule:new StubRule(name:RULE3), message:MESSAGE1)
     private static final VIOLATION_R3_M2 = new Violation(rule:new StubRule(name:RULE3), message:MESSAGE2)
+    private static final VIOLATION_R1_M1_2 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE1)
+    private static final VIOLATION_R1_M1_3 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE1)
 
     private static final String BASELINE_XML = """<?xml version='1.0'?>
         <CodeNarc>
@@ -105,6 +107,30 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         def results = new FileResults(PATH1, [VIOLATION_R1_M2, VIOLATION_R3_M2])
         processor.processResults(results)
         assert results.violations == [VIOLATION_R1_M2, VIOLATION_R3_M2]
+    }
+
+    @Test
+    void test_processResults_MultipleViolationsOfSameRule() {
+        final String BASELINE_XML = """<?xml version='1.0'?>
+        <CodeNarc>
+            <File path='$PATH1'>
+                <Violation ruleName='$RULE1'>
+                    <Message><![CDATA[$MESSAGE1]]></Message>
+                </Violation>
+                <Violation ruleName='$RULE1'>
+                    <Message><![CDATA[$MESSAGE1]]></Message>
+                </Violation>
+                <Violation ruleName='$RULE1'>
+                    <Message><![CDATA[$MESSAGE1]]></Message>
+                </Violation>
+            </File>
+        </CodeNarc>
+        """
+
+        BaselineResultsProcessor processor = new BaselineResultsProcessor(new StringResource(BASELINE_XML))
+        def results = new FileResults(PATH1, [VIOLATION_R1_M1, VIOLATION_R1_M1_2, VIOLATION_R1_M1_3])
+        processor.processResults(results)
+        assert results.violations == []
     }
 
     @Test
