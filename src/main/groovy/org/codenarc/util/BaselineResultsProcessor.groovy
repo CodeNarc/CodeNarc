@@ -52,12 +52,16 @@ class BaselineResultsProcessor implements ResultsProcessor {
 
     private void removeMatchingViolation(Results results, List<Violation> violations, BaselineViolation baselineViolation) {
         def matchingViolation = violations.find { v ->
-            v.rule.name == baselineViolation.ruleName && v.message == baselineViolation.message
+            v.rule.name == baselineViolation.ruleName && sameMessage(v.message, baselineViolation.message)
         }
         if (matchingViolation) {
             results.removeViolation(matchingViolation)
             violations.remove(matchingViolation)
         }
+    }
+
+    private boolean sameMessage(String m1, String m2) {
+        return m1 == m2 || (!m1 && !m2)
     }
 
     private Map<String,List<Violation>> buildViolationsByFile(Results results) {

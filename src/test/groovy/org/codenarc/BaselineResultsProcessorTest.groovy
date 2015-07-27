@@ -52,6 +52,10 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
     private static final VIOLATION_R3_M2 = new Violation(rule:new StubRule(name:RULE3), message:MESSAGE2)
     private static final VIOLATION_R1_M1_2 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE1)
     private static final VIOLATION_R1_M1_3 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE1)
+    private static final VIOLATION_R1_EMPTY_MESSAGE = new Violation(rule:new StubRule(name:RULE1), message:'')
+    private static final VIOLATION_R1_NULL_MESSAGE = new Violation(rule:new StubRule(name:RULE1), message:null)
+    private static final VIOLATION_R2_EMPTY_MESSAGE = new Violation(rule:new StubRule(name:RULE2), message:'')
+    private static final VIOLATION_R2_NULL_MESSAGE = new Violation(rule:new StubRule(name:RULE2), message:null)
 
     private static final String BASELINE_XML = """<?xml version='1.0'?>
         <CodeNarc>
@@ -129,6 +133,29 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
 
         BaselineResultsProcessor processor = new BaselineResultsProcessor(new StringResource(BASELINE_XML))
         def results = new FileResults(PATH1, [VIOLATION_R1_M1, VIOLATION_R1_M1_2, VIOLATION_R1_M1_3])
+        processor.processResults(results)
+        assert results.violations == []
+    }
+
+    @Test
+    void test_processResults_NullOrEmptyMessages() {
+        final String BASELINE_XML = """<?xml version='1.0'?>
+        <CodeNarc>
+            <File path='$PATH1'>
+                <Violation ruleName='$RULE1'/>
+                <Violation ruleName='$RULE1'>
+                    <Message><![CDATA[]]></Message>
+                </Violation>
+                <Violation ruleName='$RULE2'/>
+                <Violation ruleName='$RULE2'>
+                    <Message><![CDATA[]]></Message>
+                </Violation>
+            </File>
+        </CodeNarc>
+        """
+
+        BaselineResultsProcessor processor = new BaselineResultsProcessor(new StringResource(BASELINE_XML))
+        def results = new FileResults(PATH1, [VIOLATION_R1_EMPTY_MESSAGE, VIOLATION_R1_NULL_MESSAGE, VIOLATION_R2_EMPTY_MESSAGE, VIOLATION_R2_NULL_MESSAGE])
         processor.processResults(results)
         assert results.violations == []
     }
