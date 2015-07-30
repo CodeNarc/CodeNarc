@@ -38,13 +38,14 @@ class RunCodeNarcAgainstExternalProject {
         assert title, 'The "title" system property must be set to the title of the external project.'
 
         def rulesetfiles = System.getProperty('rulesetfiles') ?: DEFAULT_RULESET_FILES
+        def excludeBaseline = System.getProperty('excludeBaseline') ?: ''
 
         System.setProperty('codenarc.properties.file', 'Ignore')
         def ant = new AntBuilder()
 
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
-        ant.codenarc(ruleSetFiles:rulesetfiles) {
+        ant.codenarc(ruleSetFiles:rulesetfiles, excludeBaseline:excludeBaseline) {
 
             fileset(dir:baseDir) {
                 include(name:'**/*.groovy')
@@ -62,6 +63,10 @@ class RunCodeNarcAgainstExternalProject {
                  option(name:'title', value:title)
                  option(name:'outputFile', value:'target/' + title + '-CodeNarcReport.xml')
             }
+//            report(type:'baseline') {
+//                 option(name:'title', value:title)
+//                 option(name:'outputFile', value:'target/' + title + '-CodeNarcBaselineReport.xml')
+//            }
             report(type:'text') {
                  option(name:'writeToStandardOut', value:true)
             }
