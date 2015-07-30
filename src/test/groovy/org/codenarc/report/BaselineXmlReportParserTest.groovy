@@ -35,7 +35,7 @@ class BaselineXmlReportParserTest extends AbstractTestCase {
                     <Message><![CDATA[Message 2]]></Message>
                 </Violation>
                 <Violation ruleName='UnusedPrivateMethod'>
-                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
+                    <Message><![CDATA[bad stuff: !@#\$%^&amp;*(joe&apos;s)_+&lt;&gt;&quot;ABC&quot;]]></Message>
                 </Violation>
             </File>
         </CodeNarc>
@@ -44,7 +44,7 @@ class BaselineXmlReportParserTest extends AbstractTestCase {
             v('UnusedImport', ''),
             v('EmptyCatchBlock', 'Message 1'),
             v('EmptyCatchBlock', 'Message 2'),
-            v('UnusedPrivateMethod', 'bad stuff: !@#$%^&amp;*()_+&lt;&gt;') ]]
+            v('UnusedPrivateMethod', 'bad stuff: !@#$%^&*(joe\'s)_+<>"ABC"') ]]
 
     private BaselineXmlReportParser parser = new BaselineXmlReportParser()
 
@@ -100,7 +100,7 @@ class BaselineXmlReportParserTest extends AbstractTestCase {
                 v('UnusedImport', ''),
                 v('EmptyCatchBlock', 'Message 1'),
                 v('EmptyCatchBlock', 'Message 2'),
-                v('UnusedPrivateMethod', 'bad stuff: !@#$%^&amp;*()_+&lt;&gt;') ],
+                v('UnusedPrivateMethod', 'bad stuff: !@#$%^&*()_+<>') ],
             'src/main/dao/MyDao.groovy':[
                 v('EmptyCatchBlock', 'Message 3') ],
             'src/main/dao/MyOtherDao.groovy':[
@@ -118,6 +118,15 @@ class BaselineXmlReportParserTest extends AbstractTestCase {
     @Test
     void test_parseBaselineXmlReport_Null_InputStream() {
         shouldFailWithMessageContaining('inputStream') { parser.parseBaselineXmlReport((InputStream)null) }
+    }
+
+    @Test
+    void test_unescapeXml() {
+        assert parser.unescapeXml(null) == null
+        assert parser.unescapeXml('') == ''
+        assert parser.unescapeXml('abc') == 'abc'
+        assert parser.unescapeXml('&quot;bread&quot; &amp; &quot;butter&quot;, &apos;water&apos;, &lt;1&gt;') ==
+                /"bread" & "butter", 'water', <1>/
     }
 
     private static BaselineViolation v(String ruleName, String message) {

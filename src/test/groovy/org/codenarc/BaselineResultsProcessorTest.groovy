@@ -97,6 +97,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         def results = new FileResults(PATH1, [VIOLATION_R1_M1, VIOLATION_R2_M1, VIOLATION_R2_M2, VIOLATION_R3_M1])
         processor.processResults(results)
         assert results.violations == []
+        assert processor.numViolationsRemoved == 4
     }
 
     @Test
@@ -104,6 +105,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         def results = new FileResults(PATH1, [VIOLATION_R1_M1, VIOLATION_R1_M2, VIOLATION_R2_M2, VIOLATION_R3_M2])
         processor.processResults(results)
         assert results.violations == [VIOLATION_R1_M2, VIOLATION_R3_M2]
+        assert processor.numViolationsRemoved == 2
     }
 
     @Test
@@ -111,6 +113,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         def results = new FileResults(PATH1, [VIOLATION_R1_M2, VIOLATION_R3_M2])
         processor.processResults(results)
         assert results.violations == [VIOLATION_R1_M2, VIOLATION_R3_M2]
+        assert processor.numViolationsRemoved == 0
     }
 
     @Test
@@ -135,6 +138,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         def results = new FileResults(PATH1, [VIOLATION_R1_M1, VIOLATION_R1_M1_2, VIOLATION_R1_M1_3])
         processor.processResults(results)
         assert results.violations == []
+        assert processor.numViolationsRemoved == 3
     }
 
     @Test
@@ -158,6 +162,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         def results = new FileResults(PATH1, [VIOLATION_R1_EMPTY_MESSAGE, VIOLATION_R1_NULL_MESSAGE, VIOLATION_R2_EMPTY_MESSAGE, VIOLATION_R2_NULL_MESSAGE])
         processor.processResults(results)
         assert results.violations == []
+        assert processor.numViolationsRemoved == 4
     }
 
     @Test
@@ -176,6 +181,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         assert results.findResultsForPath(PATH2).violations == []
         assert results.findResultsForPath(PATH3).violations == [VIOLATION_R3_M2]
         assert results.findResultsForPath(PATH4).violations == [VIOLATION_R1_M2]
+        assert processor.numViolationsRemoved == 4
     }
 
     @Test
@@ -183,6 +189,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         def results = new FileResults(PATH1, [])
         processor.processResults(results)
         assert results.violations == []
+        assert processor.numViolationsRemoved == 0
     }
 
     @Test

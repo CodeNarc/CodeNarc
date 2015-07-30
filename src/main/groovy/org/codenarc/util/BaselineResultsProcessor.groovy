@@ -15,6 +15,7 @@
  */
 package org.codenarc.util
 
+import org.apache.log4j.Logger
 import org.codenarc.ResultsProcessor
 import org.codenarc.report.BaselineViolation
 import org.codenarc.report.BaselineXmlReportParser
@@ -28,8 +29,11 @@ import org.codenarc.util.io.Resource
  */
 class BaselineResultsProcessor implements ResultsProcessor {
 
+    private static final LOG = Logger.getLogger(BaselineResultsProcessor)
+
     final Resource resource
     private final BaselineXmlReportParser parser = new BaselineXmlReportParser()
+    protected int numViolationsRemoved = 0
 
     BaselineResultsProcessor(Resource resource) {
         this.resource = resource
@@ -48,6 +52,8 @@ class BaselineResultsProcessor implements ResultsProcessor {
             def baselineViolations = baselineViolationsMap[path]
             baselineViolations.each { baselineViolation -> removeMatchingViolation(results, violations, baselineViolation) }
         }
+
+        LOG.info("Ignored $numViolationsRemoved baseline violations")
     }
 
     private void removeMatchingViolation(Results results, List<Violation> violations, BaselineViolation baselineViolation) {
@@ -55,6 +61,7 @@ class BaselineResultsProcessor implements ResultsProcessor {
             v.rule.name == baselineViolation.ruleName && sameMessage(v.message, baselineViolation.message)
         }
         if (matchingViolation) {
+            numViolationsRemoved++
             results.removeViolation(matchingViolation)
             violations.remove(matchingViolation)
         }

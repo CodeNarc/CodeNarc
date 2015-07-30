@@ -38,10 +38,23 @@ class BaselineXmlReportParser {
             String path = file.@path
             List violations = []
             file.Violation.each { v ->
-                violations << new BaselineViolation(ruleName:v.@ruleName, message:v.Message.text())
+                String messageText = unescapeXml(v.Message.text())
+                violations << new BaselineViolation(ruleName:v.@ruleName, message:messageText)
             }
             resultsMap[path] = violations
         }
         return resultsMap
+    }
+
+    protected String unescapeXml(String string) {
+        def resultString = string
+        if (string) {
+            resultString = resultString.replaceAll('&quot;', '"')
+            resultString = resultString.replaceAll('&amp;', '&')
+            resultString = resultString.replaceAll('&apos;', "'")
+            resultString = resultString.replaceAll('&lt;', '<')
+            resultString = resultString.replaceAll('&gt;', '>')
+        }
+        return resultString
     }
 }
