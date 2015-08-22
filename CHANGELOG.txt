@@ -2,6 +2,16 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.24.1 (??? 2015)
+--------------------------------------
+- #114: Excluding baseline violations (excludeBaseline) does not match/ignore all baseline violations.
+    * Fixed BaselineResultsProcessor to properly handle encoded messages.
+    * Fixed BaselineResultsProcessor to properly filter out multiple violations of the same rule per file.
+    * Fixed BaselineResultsProcessor to properly handle violations with null/empty messages.
+    * Added logging when loading baseline violations file and count of ignored violations.
+- #117: Enums should not trigger check for SerialVersionUID.
+
+
 Changes in version 0.24 (July 2015)
 --------------------------------------
 NEW RULES

@@ -49,7 +49,7 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
     @Test
     void testEnums_NoViolations() {
         final SOURCE = '''
-            enum DeferralRequestStatus {
+            enum DeferralRequestStatus {    // implements Serializable -- fails
                 PENDING(0),
                 ACCEPTED(1),
                 DENIED(2)
@@ -68,6 +68,28 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
                 }
             }
             '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testInlineEnum_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                enum Channels { one, two, three, four }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testInlineEnum_ImplementsSerializable_NoViolations() {
+        final SOURCE = '''
+            enum Status implements Serializable {
+                PENDING,
+                ACCEPTED,
+                DENIED
+            }
+        '''
         assertNoViolations(SOURCE)
     }
 

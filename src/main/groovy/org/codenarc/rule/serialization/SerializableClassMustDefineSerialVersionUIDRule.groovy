@@ -34,8 +34,7 @@ class SerializableClassMustDefineSerialVersionUIDRule extends AbstractAstVisitor
 class SerializableClassMustDefineSerialVersionUIDAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
-
-        if (AstUtil.classNodeImplementsType(node, Serializable)) {
+        if (AstUtil.classNodeImplementsType(node, Serializable) && !node.isEnum()) {
             if (!node.fields.find { it.name == 'serialVersionUID' }) {
                 addViolation(node, "The class $node.name implements Serializable but does not define a serialVersionUID")
             }
