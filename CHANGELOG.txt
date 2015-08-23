@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.24.1 (??? 2015)
+Changes in version 0.24.1 (Aug 2015)
 --------------------------------------
 - #114: Excluding baseline violations (excludeBaseline) does not match/ignore all baseline violations.
     * Fixed BaselineResultsProcessor to properly handle encoded messages.
