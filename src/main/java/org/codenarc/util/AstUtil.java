@@ -607,7 +607,7 @@ public class AstUtil {
     }
 
     /**
-     * Tells you if the expression is the false expression, either literal or contant.
+     * Tells you if the expression is the false expression, either literal or constant.
      * @param expression
      *      expression
      * @return
