@@ -27,7 +27,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * The 'public' modifier is not required on methods, constructors or classes.
  *
  * @author Hamlet D'Arcy
-  */
+ */
 class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryPublicModifier'
     int priority = 3
@@ -40,29 +40,28 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
         if (!node.isScript()) {
-            checkDeclaration(node, 'classes')
+            checkDeclaration(node, node.name, 'classes')
         }
         super.visitClassEx(node)
     }
 
     @Override
     void visitMethodEx(MethodNode node) {
-        checkDeclaration(node, 'methods')
+        checkDeclaration(node, node.name, 'methods')
         super.visitMethodEx(node)
     }
 
     @Override
     void visitConstructor(ConstructorNode node) {
-        checkDeclaration(node, 'constructors')
+        checkDeclaration(node, node.name, 'constructors')
         super.visitConstructor(node)
     }
 
-    private void checkDeclaration(node, String nodeType) {
+    private void checkDeclaration(node, String nodeName, String nodeType) {
         String declaration = getDeclaration(node)
-        if (getDeclaration(node)?.startsWith('public ')) {
-            addViolation(node, "The public keyword is unnecessary for $nodeType")
-        }
-        else if (declaration?.contains(' public ')) {
+        // remove node name from the declaration just in case it has ' public ' in the name
+        declaration = declaration?.replace(nodeName, '')
+        if (declaration?.startsWith('public ') || declaration?.contains(' public ')) {
             addViolation(node, "The public keyword is unnecessary for $nodeType")
         }
     }

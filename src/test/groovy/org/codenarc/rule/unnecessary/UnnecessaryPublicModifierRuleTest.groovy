@@ -39,7 +39,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
-                void myMethod() {}
+                void "my public Method"() {}
                 public String field
             }
 
