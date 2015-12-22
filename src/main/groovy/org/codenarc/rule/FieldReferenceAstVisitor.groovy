@@ -15,6 +15,7 @@
  */
  package org.codenarc.rule
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.PropertyNode
@@ -56,7 +57,7 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
 
     void visitPropertyExpression(PropertyExpression expression) {
         if (expression.objectExpression instanceof VariableExpression &&
-            expression.objectExpression.name in ['this', currentClassNode.nameWithoutPackage] &&
+            expression.objectExpression.name in ['this', currentClassNode.nameWithoutPackage] + outerClassNames &&
             expression.property instanceof ConstantExpression) {
 
             unreferencedFieldMap.remove(expression.property.value)
@@ -101,5 +102,15 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
             unreferencedFieldMap.remove(call.method.value)
         }
         super.visitMethodCallExpression(call)
+    }
+
+    private List<String> getOuterClassNames() {
+        List<String> outerClassNames = []
+        ClassNode classNode = currentClassNode
+        while (classNode.outerClass != null) {
+            outerClassNames += classNode.outerClass.nameWithoutPackage
+            classNode = classNode.outerClass
+        }
+        outerClassNames
     }
 }
