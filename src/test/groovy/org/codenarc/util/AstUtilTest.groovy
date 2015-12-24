@@ -84,6 +84,12 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
+    void testGetLastLineOfNodeText() {
+        assert AstUtil.getLastLineOfNodeText(methodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
+        assert AstUtil.getLastLineOfNodeText(methodNamed('multilineMethodCall'), sourceCode).trim() == '2, 3)'
+    }
+
+    @Test
     void testGetMethodArguments_ConstructorWithinEnum() {
         def methodCall = methodNamed('methodCallWithinEnum')
         def args = AstUtil.getMethodArguments(methodCall)

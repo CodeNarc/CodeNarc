@@ -1164,6 +1164,16 @@ public class AstUtil {
         return line.substring(expression.getColumnNumber() - 1, endColumn);
     }
 
+    public static String getLastLineOfNodeText(ASTNode expression, SourceCode sourceCode) {
+        String line = sourceCode.getLines().get(expression.getLastLineNumber() - 1);
+
+        // If multi-line, only include rest of last line
+        int startColumn = expression.getLineNumber() == expression.getLastLineNumber()
+                ? expression.getColumnNumber() - 1
+                : 0;
+        return line.substring(startColumn, expression.getLastColumnNumber() - 1);
+    }
+
     public static String getDeclaration(ASTNode node, SourceCode sourceCode) {
         if (node.getLineNumber() < 1) return "";
         if (node.getLastLineNumber() < 1) return "";

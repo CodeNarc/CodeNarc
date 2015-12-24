@@ -249,7 +249,9 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 9, sourceLineText: 'First()', messageText: 'Opening brace for the method <init> should start on the same line'],
                 [lineNumber: 12, sourceLineText: 'void method1()', messageText: 'Opening brace for the method method1 should start on the same line'],
                 [lineNumber: 19, sourceLineText: 'public Second()', messageText: 'Opening brace for the method <init> should start on the same line'],
-                [lineNumber: 38, sourceLineText: 'private int method2()', messageText: 'Opening brace for the method method2 should start on the same line'])
+                [lineNumber: 38, sourceLineText: 'private int method2()', messageText: 'Opening brace for the method method2 should start on the same line'],
+                [lineNumber: 71, sourceLineText: 'def singleLine()', messageText: 'Opening brace for the method singleLine should start on the same line'],
+                [lineNumber: 80, sourceLineText: 'def multiLine()', messageText: 'Opening brace for the method multiLine should start on the same line'])
     }
 
     @Test
@@ -261,7 +263,9 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 9, sourceLineText: 'First(){}', messageText: 'Opening brace for the method <init> should start on a new line'],
                 [lineNumber: 11, sourceLineText: 'void method1(){}', messageText: 'Opening brace for the method method1 should start on a new line'],
                 [lineNumber: 15, sourceLineText: 'public Second(){', messageText: 'Opening brace for the method <init> should start on a new line'],
-                [lineNumber: 27, sourceLineText: 'private int method2(){', messageText: 'Opening brace for the method method2 should start on a new line'])
+                [lineNumber: 27, sourceLineText: 'private int method2(){', messageText: 'Opening brace for the method method2 should start on a new line'],
+                [lineNumber: 50, sourceLineText: 'def singleLine() {', messageText: 'Opening brace for the method singleLine should start on a new line'],
+                [lineNumber: 56, sourceLineText: 'def multiLine() {', messageText: 'Opening brace for the method multiLine should start on a new line'])
     }
 
     @Test
