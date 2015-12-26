@@ -323,6 +323,27 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testNestedClass() {
+        final SOURCE = '''
+            class Example {
+                private static final String FIELD = ''
+                private static final String ANOTHER_FIELD = ''
+
+                static final class NestedClass {
+                    static final class NestedNestedClass {
+                        String doSomething() {
+                            return Example.ANOTHER_FIELD
+                        }
+                    }
+                    String doSomething() {
+                        return Example.FIELD
+                    }
+                }
+            } '''
+        assertNoViolations SOURCE
+    }
+
+    @Test
     void testApplyTo_IgnoreFieldNames() {
         final SOURCE = '''
           class MyClass {
