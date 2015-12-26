@@ -181,7 +181,8 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
                 [lineNumber: 6, sourceLineText: '{', messageText: 'Opening brace for the class First should start on the same line'],
                 [lineNumber: 18, sourceLineText: '{', messageText: 'Opening brace for the class Second should start on the same line'],
-                [lineNumber: 64, sourceLineText: '{', messageText: 'Opening brace for the interface Third should start on the same line'])
+                [lineNumber: 64, sourceLineText: '{', messageText: 'Opening brace for the interface Third should start on the same line'],
+                [lineNumber: 70, sourceLineText: '{', messageText: 'Opening brace for the class Forth should start on the same line'])
     }
 
     @Test
@@ -192,7 +193,8 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
                 [lineNumber: 6, sourceLineText: 'class First{', messageText: 'Opening brace for the class First should start on a new line'],
                 [lineNumber: 14, sourceLineText: 'class Second{', messageText: 'Opening brace for the class Second should start on a new line'],
-                [lineNumber: 44, sourceLineText: 'interface Third{', messageText: 'Opening brace for the interface Third should start on a new line'])
+                [lineNumber: 44, sourceLineText: 'interface Third{', messageText: 'Opening brace for the interface Third should start on a new line'],
+                [lineNumber: 49, sourceLineText: 'private class Forth {', messageText: 'Opening brace for the class Forth should start on a new line'])
     }
 
     protected Rule createRule() {

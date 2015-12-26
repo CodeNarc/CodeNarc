@@ -65,3 +65,25 @@ public interface Third
     public static final Y
 
 }
+
+private class Forth
+{
+    def singleLine()
+    {
+        def list = [1, 2, 3]
+        if (list.any { it > 1 })
+        {
+            println it
+        }
+    }
+
+    def multiLine()
+    {
+        def list = [1, 2, 3]
+        if (list.size > 5
+            || list.any { it > 1 })
+        {
+            println it
+        }
+    }
+}
