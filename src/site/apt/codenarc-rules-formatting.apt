@@ -38,6 +38,20 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   Checks the location of the opening brace (\{) for if statements. By default, requires them on the same
   line, but the <<<sameLine>>> property can be set to false to override this.
 
+*------------------------------+------------------------------------------------------------------+------------------------+
+| <<Property>>                 | <<Description>>                                                  | <<Default Value>>      |
+*------------------------------+------------------------------------------------------------------+------------------------+
+| sameLine                     | If <<<true>>>, then the opening brace (\{) for if statement      | <<<true>>>             |
+|                              | should be on the same line.                                      |                        |
+*------------------------------+------------------------------------------------------------------+------------------------+
+| validateElse                 | To enable else checking, set the property to <<<true>>>          | <<<false>>>            |
+*------------------------------+------------------------------------------------------------------+------------------------+
+| elseOnSameLineAsClosingBrace | If <<<true>>>, then the else statement should be on the same line| the same as sameLine   |
+|                              | as closing brace (\})                                            |                        |
+*------------------------------+------------------------------------------------------------------+------------------------+
+| elseOnSameLineAsOpeningBrace | If <<<true>>>, then the else statement should be on the same line| the same as sameLine   |
+|                              | as opening brace (\{)                                            |                        |
+*------------------------------+------------------------------------------------------------------+------------------------+
 
 * {BracesForMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
