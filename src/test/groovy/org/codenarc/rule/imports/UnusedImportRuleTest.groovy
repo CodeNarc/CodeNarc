@@ -162,13 +162,17 @@ class UnusedImportRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             import java.io.InputStream
             import java.io.OutputStream
+            import scala.None$
+            import scala.Other$
             import static Math.PI
             class ABC {
                 def run() {
                     String fff
                     InputStream input
                     OutputStream output
+                    None$.empty()
                     def value = PI
+Other$.value()
                 }
             }
         '''

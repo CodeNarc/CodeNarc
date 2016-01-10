@@ -2,6 +2,16 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.25.0 (??? 2016)
+--------------------------------------
+- #131: UnusedImport does not handle Scala. Fix for #115. (Yuriy Chulovskyy)
+- #133: Updated documentation for BracesForIfElse rule. (Yuriy Chulovskyy)
+- #130: Fixed issue #119 BracesForIfElse with curly braces inside GString. (Yuriy Chulovskyy)
+- #129: Fixed issue #121 False positive for UnusedPrivateField. (Yuriy Chulovskyy)
+- #127: Fixed issue #126 False positive UnnecessaryPublicModifier for groovy (Yuriy Chulovskyy)
+- #122: Fix typo: contant -> constant (Dominik Przybysz)
+
+
 Changes in version 0.24.1 (Aug 2015)
 --------------------------------------
 - #114: Excluding baseline violations (excludeBaseline) does not match/ignore all baseline violations.

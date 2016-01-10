@@ -20,11 +20,13 @@ import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.GroovyVersion
 
+import java.util.regex.Pattern
+
 /**
  * Rule that checks for an unreferenced import
  *
  * @author Chris Mair
-  */
+ */
 class UnusedImportRule extends AbstractRule {
 
     String name = 'UnusedImport'
@@ -62,20 +64,23 @@ class UnusedImportRule extends AbstractRule {
     private findReference(SourceCode sourceCode, String alias, String className = null) {
         def aliasSameAsNonQualifiedClassName = className && className.endsWith(alias)
         sourceCode.lines.find { line ->
-            if (!isImportStatementForAlias(line, alias)) {
-                def aliasCount = countUsage(line, alias)
+            String aliasPattern = Pattern.quote(alias)
+            if (!isImportStatementForAlias(line, aliasPattern)) {
+                def aliasCount = countUsage(line, aliasPattern)
                 return aliasSameAsNonQualifiedClassName ?
-                    aliasCount && aliasCount > countUsage(line, className) : aliasCount
+                    aliasCount && aliasCount > countUsage(line, Pattern.quote(className)) : aliasCount
             }
         }
     }
 
-    private isImportStatementForAlias(String line, String alias) {
-        final IMPORT_PATTERN = /import\s+.*/ + alias
+    private isImportStatementForAlias(String line, String pattern) {
+        final IMPORT_PATTERN = /import\s+.*/ + pattern
         line =~ IMPORT_PATTERN
     }
 
     private countUsage(String line, String pattern) {
-        (line =~ /\b${pattern}\b/).count
+        final INVALID = '[^a-zA-Z0-9_\\$]'
+        def regexp = /($INVALID|^)${pattern}($INVALID|$)/
+        return (line =~ regexp).count
     }
 }
