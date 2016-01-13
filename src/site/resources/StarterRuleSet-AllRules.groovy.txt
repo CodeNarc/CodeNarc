@@ -281,6 +281,7 @@ ruleset {
     ThrowRuntimeException 
     ThrowThrowable 
     ToStringReturnsNull 
+    TrailingComma 
     TrailingWhitespace 
     UnnecessaryBigDecimalInstantiation 
     UnnecessaryBigIntegerInstantiation 
