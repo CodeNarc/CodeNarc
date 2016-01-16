@@ -484,7 +484,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   ending in 'Test', 'Tests' or 'TestCase'.
 
 
-* {UseAssertTrueInsteadOfAssertEqualsRule} Rule
+* {UseAssertTrueInsteadOfAssertEquals} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.11>
 

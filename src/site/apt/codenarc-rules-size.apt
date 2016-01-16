@@ -392,7 +392,7 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
    * Annotations on a method are included in the size (line count) for that method.
 
 
-* {NestedBlockDepthRule} Rule
+* {NestedBlockDepth} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for blocks or closures nested more deeply than a configured maximum number.
