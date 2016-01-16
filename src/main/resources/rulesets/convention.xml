@@ -17,6 +17,7 @@
     <rule class='org.codenarc.rule.convention.NoDefRule'/>
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
     <rule class='org.codenarc.rule.convention.TernaryCouldBeElvisRule'/>
+    <rule class='org.codenarc.rule.convention.TrailingCommaRule'/>
     <rule class='org.codenarc.rule.convention.VectorIsObsoleteRule'/>
 
 </ruleset>

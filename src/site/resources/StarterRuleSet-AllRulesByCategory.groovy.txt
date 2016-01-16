@@ -95,6 +95,7 @@ ruleset {
     NoDef 
     ParameterReassignment 
     TernaryCouldBeElvis 
+    TrailingComma 
     VectorIsObsolete 
     
     // rulesets/design.xml
