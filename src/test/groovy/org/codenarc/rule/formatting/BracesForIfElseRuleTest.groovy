@@ -49,6 +49,18 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testBraceOnNewLine_SameLineFalse_GString_NoViolations() {
+        rule.sameLine = false
+        final SOURCE = '''
+            if (someContainer."${SomeClass.SOME_CONSTANT}" != null)
+            {
+                doStuff()
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testIfOrElseWithNoBraces_NoViolations() {
         final SOURCE = '''
             if (a && b)
