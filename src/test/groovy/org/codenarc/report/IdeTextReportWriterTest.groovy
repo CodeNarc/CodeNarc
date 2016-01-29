@@ -15,6 +15,12 @@
  */
 package org.codenarc.report
 
+import org.codenarc.results.DirectoryResults
+import org.codenarc.results.FileResults
+import org.codenarc.rule.StubRule
+import org.codenarc.rule.Violation
+import org.junit.Test
+
 /**
  * Tests for IdeTestReportWriter
  *
@@ -57,6 +63,29 @@ File: src/main/dao/MyOtherDao.groovy
 
 [CodeNarc (http://www.codenarc.org) v${version()}]
 """.trim()
+
+    @Test
+    void testWriteReport_NullLineNumberInViolation() {
+        final REPORT_TEXT = """
+CodeNarc Report: My Cool Project - ${formattedTimestamp()}
+
+Summary: TotalFiles=0 FilesWithViolations=1 P1=0 P2=0 P3=1
+
+File: src/main/dao/MyDao.groovy
+    Violation: Rule=BadStuff P=3 Loc=.(MyDao.groovy:0) Msg=[Other info] Src=[throw new Exception() // Something bad happened]
+
+[CodeNarc (http://www.codenarc.org) v${version()}]
+""".trim()
+
+        final VIOLATION = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:null, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
+        def fileResults = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION])
+        results = new DirectoryResults()
+        results.addChild(fileResults)
+
+        reportWriter.writeReport(stringWriter, analysisContext, results)
+        def reportText = stringWriter.toString()
+        assertReportText(reportText, REPORT_TEXT)
+    }
 
     protected TextReportWriter createReportWriter() {
         return new IdeTextReportWriter(title:TITLE)

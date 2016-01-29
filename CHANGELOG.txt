@@ -4,6 +4,7 @@ http://www.codenarc.org
 
 Changes in version 0.25.0 (??? 2016)
 --------------------------------------
+- #139: IdeTextReportWriter: Default line number to 0 so that IDE links are valid.
 - #136: Added TrailingComma rule (convention). (Yuriy Chulovskyy)
 - #131: UnusedImport does not handle Scala. Fix for #115. (Yuriy Chulovskyy)
 - #133: Updated documentation for BracesForIfElse rule. (Yuriy Chulovskyy)
