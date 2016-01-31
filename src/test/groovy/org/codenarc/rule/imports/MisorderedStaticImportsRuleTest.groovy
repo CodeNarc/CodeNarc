@@ -36,7 +36,7 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenarioWithNonStaticImports() {
         final SOURCE = '''
-        	import foo.bar.*
+            import foo.bar.*
             import my.something.*
         '''
         assertNoViolations(SOURCE)
@@ -45,7 +45,7 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenarioWithStaticImportsOnly() {
         final SOURCE = '''
-        	import static foo.bar.*
+            import static foo.bar.*
             import static my.something.*
         '''
         assertNoViolations(SOURCE)
@@ -54,7 +54,7 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenarioWithCorrectSequence() {
         final SOURCE = '''
-        	import static foo.bar.*
+            import static foo.bar.*
             import my.something.*
         '''
         assertNoViolations(SOURCE)
@@ -64,7 +64,7 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     void testSuccessScenarioWithCorrectSequence_After() {
         final SOURCE = '''
             import my.something.*
-        	import static foo.bar.*
+            import static foo.bar.*
         '''
 
         rule.comesBefore = false
@@ -75,7 +75,7 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     void testSingleViolationWithIncorrectSequence() {
         final SOURCE = '''
             import my.something.*
-        	import static foo.bar.*
+            import static foo.bar.*
         '''
         assertSingleViolation(SOURCE, 3, 'import static foo.bar.*', 'Static imports should appear before normal imports')
     }
@@ -83,7 +83,7 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolationWithIncorrect_After() {
         final SOURCE = '''
-        	import static foo.bar.*
+            import static foo.bar.*
             import my.something.*
         '''
         rule.comesBefore = false
@@ -94,9 +94,9 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     void testTwoViolations() {
         final SOURCE = '''
             import my.something.*
-        	import static foo.bar.*
+            import static foo.bar.*
             import my.otherthing.*
-        	import static bar.foo.*
+            import static bar.foo.*
         '''
         assertTwoViolations(SOURCE,
                 3, 'import static foo.bar.*',
@@ -106,9 +106,9 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
     @Test
     void testOneViolationStartingWithStaticImport() {
         final SOURCE = '''
-        	import static foo.bar.*
+            import static foo.bar.*
             import my.something.*
-        	import static bar.foo.*
+            import static bar.foo.*
             import my.otherthing.*
         '''
         assertSingleViolation(SOURCE,

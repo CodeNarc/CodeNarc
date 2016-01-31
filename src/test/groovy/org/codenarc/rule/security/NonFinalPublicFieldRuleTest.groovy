@@ -35,7 +35,7 @@ class NonFinalPublicFieldRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 final String myField
                 public final String myConstant = ''
             }
@@ -46,7 +46,7 @@ class NonFinalPublicFieldRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 public String myField
             }
         '''

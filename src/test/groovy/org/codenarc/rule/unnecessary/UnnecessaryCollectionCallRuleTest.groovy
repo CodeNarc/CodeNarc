@@ -35,7 +35,7 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	def x = [1, 2, 3]
+            def x = [1, 2, 3]
             x.containsAll(y)
             x.containsAll(y, z)
             x.containsAll()
@@ -50,7 +50,7 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
     @Test
     void testScriptFailure() {
         final SOURCE = '''
-        	def x = [1, 2, 3]
+            def x = [1, 2, 3]
             x.containsAll(x)
             x.retainAll(x)
         '''
@@ -63,7 +63,7 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
     void testClassFailure() {
         final SOURCE = '''
             class MyClass {
-            	def x = [1, 2, 3]
+                def x = [1, 2, 3]
 
                 def foo() {
                     x.containsAll(x)

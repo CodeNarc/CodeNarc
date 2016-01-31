@@ -35,7 +35,7 @@ class ExplicitCallToAndMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	a & b
+            a & b
             a.and()
             a.and(a, b)
             and(b)

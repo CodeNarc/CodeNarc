@@ -35,7 +35,7 @@ class UseAssertSameInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
     @Test
                 void testMethod() {
                     assertEquals(1, foo())
@@ -56,7 +56,7 @@ class UseAssertSameInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertSame() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertTrue(foo().is(bar()))
                     assertTrue("message", foo().is(bar()))
@@ -71,7 +71,7 @@ class UseAssertSameInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     @Test
     void testNotAssertSame() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertFalse(foo().is(bar()))
                     assertFalse("message", foo().is(bar()))

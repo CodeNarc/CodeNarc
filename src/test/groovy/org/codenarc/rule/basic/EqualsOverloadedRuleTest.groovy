@@ -38,13 +38,13 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 boolean equals(Object other)  { true }
             }
-        	class Person3 {
+            class Person3 {
                 boolean equals(java.lang.Object other)  { true }
             }
-        	class Person4 {
+            class Person4 {
                 boolean equals(other)  { true }
             }
         '''
@@ -57,7 +57,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             import java.lang.Object as Foo
 
-        	class Person5 {
+            class Person5 {
                 boolean equals(Foo other)  { true }
             }
         '''
@@ -67,7 +67,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleParameter() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 boolean equals(String other)  { true }
             }
         '''
@@ -77,7 +77,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
     @Test
     void testDoubleParameter() {
         final SOURCE = '''
-        	class Widget {
+            class Widget {
                 boolean equals(Object other, String other2)  { true }
             }
         '''
@@ -87,7 +87,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoParameters() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 boolean equals()  { true }
             }
         '''

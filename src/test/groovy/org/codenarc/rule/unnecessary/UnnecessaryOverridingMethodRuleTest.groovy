@@ -35,7 +35,7 @@ class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class MyLabel extends javax.swing.JLabel {
+            class MyLabel extends javax.swing.JLabel {
 
                 void setVisible(boolean value, int value2) {
                     super.setVisible(value)

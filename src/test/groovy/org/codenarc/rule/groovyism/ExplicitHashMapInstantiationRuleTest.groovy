@@ -35,7 +35,7 @@ class ExplicitHashMapInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [:]
+            def x = [:]
             class MyClass {
                 def x = [:]
                 def m(foo = [:]) {
@@ -54,7 +54,7 @@ class ExplicitHashMapInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new HashMap()
+            def x = new HashMap()
             class MyClass {
                 def m() {
                     def x = new HashMap()

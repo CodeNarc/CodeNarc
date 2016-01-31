@@ -36,7 +36,7 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [] as Queue
+            def x = [] as Queue
             class MyClass {
                 def x = [] as Queue
                 def m(foo = [] as Queue) {
@@ -55,7 +55,7 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new LinkedList()
+            def x = new LinkedList()
             class MyClass {
                 def m() {
                     def x = new LinkedList()

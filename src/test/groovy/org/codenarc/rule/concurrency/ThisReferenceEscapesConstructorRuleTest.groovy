@@ -35,13 +35,13 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	class Valid {
-        	    Integer value
-        	
+            class Valid {
+                Integer value
+
                 Valid() {
                     this.value = 42        
-                }	
-        	}
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -70,9 +70,9 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: 'publisher.register(this)',              messageText: VIOLATION_MESSAGE],
-            [lineNumber: 5, sourceLineText: 'new WorkThread(publisher, this)',       messageText: VIOLATION_MESSAGE],
-            [lineNumber: 6, sourceLineText: 'new AnotherWorkThread(listener: this)', messageText: VIOLATION_MESSAGE])
+            [lineNumber: 4, sourceLineText: 'publisher.register(this)', messageText:VIOLATION_MESSAGE],
+            [lineNumber: 5, sourceLineText: 'new WorkThread(publisher, this)', messageText:VIOLATION_MESSAGE],
+            [lineNumber: 6, sourceLineText: 'new AnotherWorkThread(listener: this)', messageText:VIOLATION_MESSAGE])
     }
 
     private static final String VIOLATION_MESSAGE = 'The `this` reference escapes constructor.' +

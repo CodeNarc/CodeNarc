@@ -35,7 +35,7 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	notifyAll()
+            notifyAll()
             notify(foo)
             notify foo
         '''

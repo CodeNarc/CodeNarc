@@ -35,7 +35,7 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [] as Set
+            def x = [] as Set
             class MyClass {
                 def x = [] as Set
                 def m(foo = [] as Set) {
@@ -54,7 +54,7 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new HashSet()
+            def x = new HashSet()
             class MyClass {
                 def m() {
                     def x = new HashSet()

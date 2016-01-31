@@ -35,7 +35,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_ArrayAssigned_NoViolations() {
         final SOURCE = '''
-        	def array1 = new String[3]
+            def array1 = new String[3]
             Object[] array2 = []
             println new Integer[3]
         '''
@@ -46,7 +46,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ArrayNotAssigned_ButLastStatementWithinAMethod_NoViolations() {
         final SOURCE = '''
             println new BigDecimal("23.45")
-        	new String[3]
+            new String[3]
         '''
         assertNoViolations(SOURCE)
     }
@@ -62,7 +62,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_ArrayNotAssigned_Violations() {
         final SOURCE = '''
-        	new String[3]
+            new String[3]
             println "ok"
         '''
         assertViolations(SOURCE, [lineNumber: 2, sourceLineText: 'new String[3]'])
@@ -72,7 +72,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ArrayNotAssigned_WithinClosure_Violations() {
         final SOURCE = '''
             def myClosure = { ->
-        	    new Object[2]
+                new Object[2]
                 doStuff()
             }
         '''

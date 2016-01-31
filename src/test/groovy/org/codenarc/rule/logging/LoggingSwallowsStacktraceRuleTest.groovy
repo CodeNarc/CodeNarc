@@ -35,7 +35,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 private static final Log LOG = LogFactory.getLog( Main.class )
 
                 def method() {
@@ -56,7 +56,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 private static final Log LOG = LogFactory.getLog( Main.class )
                 private static final Log logger = LogFactory.getLog( Main.class )
 

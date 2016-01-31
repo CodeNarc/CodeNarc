@@ -39,7 +39,7 @@ class JdbcStatementReferenceRule_StatementTest extends AbstractClassReferenceRul
         final SOURCE = '''
             import java.sql.Other
             class MyClass {
-        	    def c = new java.sql.Example()
+                def c = new java.sql.Example()
             }
         '''
         assertNoViolations(SOURCE)

@@ -35,12 +35,12 @@ class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	try {
+            try {
                 foo()
             } catch (Exception e) {
                 throw new RuntimeException(e)
             }
-        	try {
+            try {
                 foo()
             } catch (IOException e1) {
                 throw e1
@@ -54,7 +54,7 @@ class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleCatchBlock() {
         final SOURCE = '''
-        	try {
+            try {
                 foo()
             } catch (Exception e) {
                 throw e
@@ -66,7 +66,7 @@ class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
     @Test
     void testMultipleCatchBlocks() {
         final SOURCE = '''
-        	try {
+            try {
                 foo()
             } catch (IOException e1) {
                 throw e1

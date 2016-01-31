@@ -37,11 +37,11 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     void testIgnoresDifferentKeys_NoViolations() {
         final SOURCE = '''
             class MyClass {
-        	  def var1 = [a:1, b:1, c:1]
+              def var1 = [a:1, b:1, c:1]
               def var2 = [a:1, 2:1]
               def var3 = [a:1, c:1]
               def var4 = [b:1, c:1]
-        	  def var1 = [a:1, b:1, c:1, d:1]
+              def var1 = [a:1, b:1, c:1, d:1]
             }
         '''
         assertNoViolations(SOURCE)
@@ -51,9 +51,9 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     void testIgnoresDifferentValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
-        	  def var1 = [a:1, b:1, c:1]
-        	  def var2 = [a:2, b:1, c:1]
-        	  def var3 = [a:1, b:1, c:2]
+              def var1 = [a:1, b:1, c:1]
+              def var2 = [a:2, b:1, c:1]
+              def var3 = [a:1, b:1, c:2]
             }
         '''
         assertNoViolations(SOURCE)
@@ -64,10 +64,10 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
                 def init(String name) {
-        	        def var1 = [(name):1, b:1, c:1]
+                    def var1 = [(name):1, b:1, c:1]
                 }
                 def cleanUp(String name) {
-        	        return [(name):1, b:1, c:1]
+                    return [(name):1, b:1, c:1]
                 }
             }
         '''
@@ -79,8 +79,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
               def name
-        	  def var1 = [a:1, b:[a:name]]
-        	  def var2 = [a:1, b:[a:name]]
+              def var1 = [a:1, b:[a:name]]
+              def var2 = [a:1, b:[a:name]]
             }
         '''
         assertNoViolations(SOURCE)
@@ -91,8 +91,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
               def name
-        	  def var1 = [a:1, b:['x', name]]
-        	  def var2 = [a:1, b:['x', name]]
+              def var1 = [a:1, b:['x', name]]
+              def var2 = [a:1, b:['x', name]]
             }
         '''
         assertNoViolations(SOURCE)
@@ -104,13 +104,13 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 private count = 7
                 def init(String name) {
-        	        def var1 = [a:name, b:1, c:1]
+                    def var1 = [a:name, b:1, c:1]
 
                     def var2 = [a:count+1, b:1, c:1]
-        	        def var3 = [a:count+1, b:1, c:1]
+                    def var3 = [a:count+1, b:1, c:1]
                 }
                 def cleanUp(String name) {
-        	        return [a:name, b:1, c:1]
+                    return [a:name, b:1, c:1]
                 }
             }
         '''
@@ -143,11 +143,11 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     void testDuplicateMapLiteral_MapValuesAsConstants() {
         final SOURCE = '''
             class MyClass {
-        	  def var1 = [a:1, b:null, c:Boolean.FALSE, d:'x', e:true]
-        	  def var2 = [a:1, b:null, c:Boolean.FALSE, d:'x', e:true]
-        	  def var3 = ["a":99]
+              def var1 = [a:1, b:null, c:Boolean.FALSE, d:'x', e:true]
+              def var2 = [a:1, b:null, c:Boolean.FALSE, d:'x', e:true]
+              def var3 = ["a":99]
               Map getMap() {
-        	        return ["a":99]
+                    return ["a":99]
               }
             }
         '''
@@ -159,8 +159,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateMapLiteral_HandlesNestedMapLiterals() {
         final SOURCE = '''
-        	  def var1 = [a:1, b:[x:3,y:4]]
-        	  def var2 = [a:1, b:[x:3,y:4]]
+              def var1 = [a:1, b:[x:3,y:4]]
+              def var2 = [a:1, b:[x:3,y:4]]
         '''
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:1, b:[x:3,y:4]]', '[a:1, b:[x:3, y:4]]')
     }
@@ -168,8 +168,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateMapLiteral_HandlesNestedMapLiterals_OuterMapsAreNotTheSame() {
         final SOURCE = '''
-        	  def var1 = [a:123, b:[x:3,y:4]]
-        	  def var2 = [a:99, b:[x:3,y:4]]
+              def var1 = [a:123, b:[x:3,y:4]]
+              def var2 = [a:99, b:[x:3,y:4]]
         '''
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:99, b:[x:3,y:4]]', '[x:3, y:4]')
     }
@@ -177,8 +177,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateMapLiteral_HandlesNestedListLiterals() {
         final SOURCE = '''
-        	  def var1 = [a:1, b:[3,4]]
-        	  def var2 = [a:1, b:[3,4]]
+              def var1 = [a:1, b:[3,4]]
+              def var2 = [a:1, b:[3,4]]
         '''
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:1, b:[3,4]]', '[a:1, b:[3, 4]]')
     }
@@ -186,8 +186,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateMapLiteral_HandlesMapsNestedWithinListLiterals() {
         final SOURCE = '''
-        	  def var1 = [a:123, b:[3, 4, [x:99], 5]]
-        	  def var2 = [a:99, b:[3, 4, [other:[x:99]], 5]]
+              def var1 = [a:123, b:[3, 4, [x:99], 5]]
+              def var2 = [a:99, b:[3, 4, [other:[x:99]], 5]]
         '''
         assertSingleViolation(SOURCE, 3, 'def var2 = [a:99, b:[3, 4, [other:[x:99]], 5]]', '[x:99]')
     }
@@ -195,8 +195,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateMapLiteral_MapKeysAsConstants() {
         final SOURCE = '''
-        	  def var1 = [null:1, 'b':2, (Boolean.FALSE):3, (4):4, (true):5]
-        	  def var2 = [null:1, 'b':2, (Boolean.FALSE):3, (4):4, (true):5]
+              def var1 = [null:1, 'b':2, (Boolean.FALSE):3, (4):4, (true):5]
+              def var2 = [null:1, 'b':2, (Boolean.FALSE):3, (4):4, (true):5]
         '''
         assertSingleViolation(SOURCE,
             3, "def var2 = [null:1, 'b':2, (Boolean.FALSE):3, (4):4, (true):5]", '[null:1, b:2, Boolean.FALSE:3, 4:4, true:5]')
@@ -206,8 +206,8 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     void testDuplicateMapLiteral_HandlesQuotedKeys() {
         final SOURCE = '''
             class MyClass {
-        	  def var1 = ["a":99]
-        	  def var2 = [a:99]
+              def var1 = ["a":99]
+              def var2 = [a:99]
             }
         '''
         assertSingleViolation(SOURCE, 4, 'def var2 = [a:99]', '[a:99]')

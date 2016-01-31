@@ -38,7 +38,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 def longMethodButNotQuiteLongEnough1234567890123456789012345() {
                 }
             }
@@ -49,7 +49,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 def longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456() {
                 }
             }
@@ -62,7 +62,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
     void testIgnoresImportStatements() {
         final SOURCE = '''
             import longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
-        	class Person {
+            class Person {
                 def longMethodButNotQuiteLongEnough1234567890123456789012345() {
                 }
             }
@@ -76,7 +76,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
 
         final SOURCE = '''
             import longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
-        	class Person {
+            class Person {
                 def longMethodButNotQuiteLongEnough1234567890123456789012345() {
                 }
             }
@@ -88,7 +88,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
     void testIgnoresPackageStatements() {
         final SOURCE = '''
             package longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
-        	class Person {
+            class Person {
                 def longMethodButNotQuiteLongEnough1234567890123456789012345() {
                 }
             }
@@ -102,7 +102,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
 
         final SOURCE = '''
             package longMethod123456789012345678900123456789012345678901234567890123456789012345678901234567890123456423452435asdfasdfadsfasdfasdfasdfadfasdfasdfadfasdfasdfadsf
-        	class Person {
+            class Person {
                 def longMethodButNotQuiteLongEnough1234567890123456789012345() {
                 }
             }
@@ -113,7 +113,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
     @Test
     void testComments() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 // this is a really long comment 001234567890123456789012345678907890123456789012345678901234567890123456
             }
         '''

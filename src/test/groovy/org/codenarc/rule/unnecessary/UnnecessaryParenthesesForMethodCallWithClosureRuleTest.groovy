@@ -35,7 +35,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	[1, 2, 3].each { println it }
+            [1, 2, 3].each { println it }
             [1, 2, 3].collect {
                 it * 2
             }.any {
@@ -97,7 +97,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
     @Test
     void testNonDetectableViolations() {
         final SOURCE = '''
-        	[1, 2, 3].each(/*comment*/) { println it }
+            [1, 2, 3].each(/*comment*/) { println it }
         '''
         assertNoViolations(SOURCE)
     }

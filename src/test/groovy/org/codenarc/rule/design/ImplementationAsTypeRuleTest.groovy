@@ -71,7 +71,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_Parameters_NoViolations() {
         final SOURCE = '''
-        	def findUnique(Calendar cal, Map map, Set set, List list, def other) { }
+            def findUnique(Calendar cal, Map map, Set set, List list, def other) { }
         '''
         assertNoViolations(SOURCE)
     }
@@ -79,9 +79,9 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_ReturnTypes_NoViolations() {
         final SOURCE = '''
-        	Calendar m1() { }
-        	Map m2() { }
-        	List m3() { }
+            Calendar m1() { }
+            Map m2() { }
+            List m3() { }
         '''
         assertNoViolations(SOURCE)
     }
@@ -89,9 +89,9 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_Variables_NoViolations() {
         final SOURCE = '''
-        	Calendar v1
-        	Map v2
-        	List v3
+            Calendar v1
+            Map v2
+            List v3
         '''
         assertNoViolations(SOURCE)
     }

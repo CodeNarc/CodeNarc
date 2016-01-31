@@ -36,7 +36,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     @Test
     void testIfNoElse_NoViolations() {
         final SOURCE = '''
-        	 if (condition) { return 123 }
+             if (condition) { return 123 }
         '''
         assertNoViolations(SOURCE)
     }
@@ -46,8 +46,8 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             if (condition) {
                 doStuff()
-        	    return 44
-        	} else { return 55 }
+                return 44
+            } else { return 55 }
         '''
         assertNoViolations(SOURCE)
     }
@@ -57,7 +57,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             if (condition) {
                 [a:1]
-        	} else { return 55 }
+            } else { return 55 }
         '''
         assertNoViolations(SOURCE)
     }
@@ -67,7 +67,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             if (condition) {
                 return 44
-        	} else { 99 }
+            } else { 99 }
         '''
         assertNoViolations(SOURCE)
     }
@@ -76,11 +76,11 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     void testElseMoreThanReturn_NoViolations() {
         final SOURCE = '''
             if (condition) {
-        	    return 44
-        	} else {
+                return 44
+            } else {
                 doStuff()
-        	    return 55
-        	}
+                return 55
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -89,10 +89,10 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     void testReturnNotConstantOrLiteral_NoViolations() {
         final SOURCE = '''
             if (condition) {
-        	    return doStuff()
-        	} else {
-        	    return condition
-        	}
+                return doStuff()
+            } else {
+                return condition
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -101,10 +101,10 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
     void testElseIf_NoViolations() {
         final SOURCE = '''
             if (condition) {
-        	    return 44
-        	} else if (ready) {
-        	    return 55
-        	}
+                return 44
+            } else if (ready) {
+                return 55
+            }
         '''
         assertNoViolations(SOURCE)
     }

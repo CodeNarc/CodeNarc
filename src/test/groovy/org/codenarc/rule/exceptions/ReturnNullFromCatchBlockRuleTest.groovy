@@ -35,10 +35,10 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
     @Test
     void testReturnsVariable_NoViolation() {
         final SOURCE = '''
-      	    def x = null
-        	try {
+            def x = null
+            try {
                 return x
-        	} catch (Exception e) {
+            } catch (Exception e) {
                 return x
             } finally {
                 return x 
@@ -50,10 +50,10 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
     @Test
     void testExplicitReturnNull() {
         final SOURCE = '''
-        	try {
-      	        def x = null
+            try {
+                def x = null
                 return x
-        	} catch (IOException e) {
+            } catch (IOException e) {
                 return null
             } catch (Exception e) {
                 LOG.error(e.getMessage())
@@ -68,8 +68,8 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
     @Test
     void testImplicitReturnNull_Violation() {
         final SOURCE = '''
-        	try {
-      	        doStuff()
+            try {
+                doStuff()
             } catch (Exception e) {
                 return
             }

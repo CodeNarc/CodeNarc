@@ -36,7 +36,7 @@ class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
-        	a + b
+            a + b
             a.plus()
             a.plus(a, b)
             plus(a)

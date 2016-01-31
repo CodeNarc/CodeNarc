@@ -35,7 +35,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolation() {
         final SOURCE = '''
-        	List myMethod() {
+            List myMethod() {
 
                 def c = {
                     return null // ignore returns from nested closure
@@ -90,7 +90,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testListMethod() {
         final SOURCE = '''
-        	List myMethod() {
+            List myMethod() {
                 if (x) return null
                 return foo()
             }
@@ -101,7 +101,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testCollectionMethod() {
         final SOURCE = '''
-        	Collection myMethod() {
+            Collection myMethod() {
                 if (x) return null
                 return foo()
             }
@@ -112,7 +112,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testStringListMethod() {
         final SOURCE = '''
-        	List<String> myMethod() {
+            List<String> myMethod() {
                 if (x) return null
                 return foo()
             }
@@ -123,7 +123,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testMapMethod() {
         final SOURCE = '''
-        	Map myMethod() {
+            Map myMethod() {
                 if (x) return null
                 return foo()
             }
@@ -134,7 +134,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testGenericMapMethod() {
         final SOURCE = '''
-        	Map<String, String> myMethod() {
+            Map<String, String> myMethod() {
                 if (x) return null
                 return foo()
             }
@@ -158,7 +158,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testDefMethod() {
         final SOURCE = '''
-        	def myMethod() {
+            def myMethod() {
                 if (x) return null
                 return []
             }
@@ -169,7 +169,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testDefMethodCtorCall() {
         final SOURCE = '''
-        	def myMethod() {
+            def myMethod() {
                 if (x) return null
                 return new ArrayList()
             }
@@ -180,7 +180,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testDefMethodCtorCallNotCollection() {
         final SOURCE = '''
-        	def myMethod() {
+            def myMethod() {
                 if (x) return null
                 return new java.awt.List()
             }
@@ -191,7 +191,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testDefMethodCastResult() {
         final SOURCE = '''
-        	def myMethod() {
+            def myMethod() {
                 if (x) return null
                 return foo() as List
             }

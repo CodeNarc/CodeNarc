@@ -35,7 +35,7 @@ class ImportFromSunPackagesRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	import foo.bar
+            import foo.bar
             "hellO"
         '''
         assertNoViolations(SOURCE)

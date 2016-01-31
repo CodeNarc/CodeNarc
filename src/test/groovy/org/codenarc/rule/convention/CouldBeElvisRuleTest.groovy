@@ -35,13 +35,13 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
     @Test
     void testIfStatement_AssignmentToDifferentVariable_NoViolation() {
         final SOURCE = '''
-        	   def x
-        	   def y 
-        	   
-        	   if(!x) {
-        	     y = "something"
-        	   }
-        	   
+               def x
+               def y
+
+               if(!x) {
+                 y = "something"
+               }
+
         '''
         assertNoViolations(SOURCE)
     }
@@ -49,13 +49,13 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
     @Test
     void testIfStatement_NonAssignmentToSameVariable_NoViolation() {
         final SOURCE = '''
-        	   def x
-        	   def y 
-        	   
-        	   if(!x) {
-        	     println x
-        	   }
-        	   
+               def x
+               def y
+
+               if(!x) {
+                 println x
+               }
+
         '''
         assertNoViolations(SOURCE)
     }

@@ -36,7 +36,7 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
     @Test
                 void testMethod() {
                     assertEquals(1, foo())
@@ -75,7 +75,7 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
     @Test
     void testNotEqualsInAssertFalseTest() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                    assertFalse(foo() != bar())
                    assertFalse('message', obj.foo() != obj.bar())

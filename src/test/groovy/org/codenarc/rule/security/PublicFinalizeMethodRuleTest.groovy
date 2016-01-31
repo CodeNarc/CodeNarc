@@ -35,7 +35,7 @@ class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class MyClass1 {
+            class MyClass1 {
                 protected finalize() {}
 
                 public finalize(String arg) {
@@ -49,7 +49,7 @@ class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 public finalize() {}
             }
         '''
@@ -59,7 +59,7 @@ class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testPrivateDeclaration() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 private finalize() {}
             }
         '''

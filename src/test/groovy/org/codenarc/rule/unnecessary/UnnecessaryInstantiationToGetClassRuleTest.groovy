@@ -35,9 +35,9 @@ class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	Class c = String.class
+            Class c = String.class
             Class b = foo.getClass()
-        	Class c = new String().getClass(someArg) // arg means it must be valid
+            Class c = new String().getClass(someArg) // arg means it must be valid
         '''
         assertNoViolations(SOURCE)
     }
@@ -45,7 +45,7 @@ class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
     @Test
     void testBasicViolation() {
         final SOURCE = '''
-        	Class c = new String().getClass()
+            Class c = new String().getClass()
         '''
         assertSingleViolation(SOURCE, 2,
                 'Class c = new String().getClass()',
@@ -55,7 +55,7 @@ class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
     @Test
     void testComplexViolation() {
         final SOURCE = '''
-        	new String('parm').getClass()
+            new String('parm').getClass()
         '''
         assertSingleViolation(SOURCE, 2,
                 "new String('parm').getClass()",

@@ -200,7 +200,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
         final SOURCE = '''
             import org.example.dating.Connection
             class MyClass {
-        	    def c = new org.codenarc.Connection()
+                def c = new org.codenarc.Connection()
                 Connection createConnection() { }
             }
         '''

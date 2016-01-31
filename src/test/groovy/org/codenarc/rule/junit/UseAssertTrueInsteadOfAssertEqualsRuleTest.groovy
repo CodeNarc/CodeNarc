@@ -36,7 +36,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 @Test
                 void testMethod() {
                     assertEquals(1, foo())
@@ -61,7 +61,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertTrueViolation() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals(true, foo())
                     assertEquals("message", true, foo())
@@ -74,7 +74,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertStatement_True_checkAssertStatements_True_Violations() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assert true == foo()
                     assert foo() == true : "message"
@@ -90,7 +90,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertStatement_True_checkAssertStatements_False_Violations() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assert true == foo()
                     assert foo() == true : "message"
@@ -103,7 +103,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertTrueViolation_Backwards() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals(foo(), true)
                     assertEquals("message", foo(), true)
@@ -116,7 +116,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertFalseViolation() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals(false, foo())
                     assertEquals("message", false, foo())
@@ -129,7 +129,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertStatement_False_checkAssertStatements_True_Violations() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assert false == foo()
                     assert foo() == false : "message"
@@ -145,7 +145,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertStatement_False_checkAssertStatements_False_NoViolations() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assert false == foo()
                     assert foo() == false : "message"
@@ -158,7 +158,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertFalseViolation_Backwards() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals(foo(), false)
                     assertEquals("message", foo(), false)

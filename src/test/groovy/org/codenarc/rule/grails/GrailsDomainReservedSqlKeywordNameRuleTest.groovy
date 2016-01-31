@@ -41,8 +41,8 @@ class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         assertNoViolations('''
-        	class Whatever {
-        	}
+            class Whatever {
+            }
         ''')
     }
 

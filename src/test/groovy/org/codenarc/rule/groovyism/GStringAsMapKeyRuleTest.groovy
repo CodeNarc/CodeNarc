@@ -35,7 +35,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
     @Test
     void testSimpleMapIsOK() {
         final SOURCE = '''
-        	Map map = [string: 'thats ok']
+            Map map = [string: 'thats ok']
         '''
         assertNoViolations(SOURCE)
     }

@@ -36,7 +36,7 @@ class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [] as Stack
+            def x = [] as Stack
             class MyClass {
                 def x = [] as Stack
                 def m(foo = [] as Stack) {
@@ -55,7 +55,7 @@ class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new Stack()
+            def x = new Stack()
             class MyClass {
                 def m() {
                     def x = new Stack()

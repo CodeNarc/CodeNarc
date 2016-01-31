@@ -35,7 +35,7 @@ class GrailsMassAssignmentRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 String name
                 Boolean isAdmin
             }

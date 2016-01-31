@@ -35,11 +35,11 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
     @Test
     void testSimpleSuccessScenario() {
         final SOURCE = '''
-        	[1,2,3].each { println it }
+            [1,2,3].each { println it }
 
-        	[1,2,3].inject([]) { acc, value -> println value }
+            [1,2,3].inject([]) { acc, value -> println value }
 
-        	[1,2,3].inject([]) { acc, value -> println value };
+            [1,2,3].inject([]) { acc, value -> println value };
         '''
         assertNoViolations(SOURCE)
     }
@@ -60,7 +60,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
     @Test
     void testWithLogicalStatementAtTheEndSuccessScenario() {
         final SOURCE = '''
-        	[1,2,3].any {
+            [1,2,3].any {
                 it > 2
             } && [1,2,3].all { it < 4 }
         '''
@@ -76,7 +76,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
     @Test
     void testCallWithClosureThatIsNotTheLastMethodParameter() {
         final SOURCE = '''
-        	[1,2,3].someMethod({ println it }, 'second param')
+            [1,2,3].someMethod({ println it }, 'second param')
         '''
         assertNoViolations(SOURCE)
     }

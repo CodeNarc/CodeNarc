@@ -35,7 +35,7 @@ class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
     @Test
     void testShouldAddNoViolationsForPrivateField() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 private String name
             }
         '''
@@ -65,7 +65,7 @@ class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
     @Test
     void testShouldAddNoViolationsForPublicStaticField() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 public static String name
             }
         '''

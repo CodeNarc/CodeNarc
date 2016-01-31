@@ -46,7 +46,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
 
             //comment is not a violation;
 
-        	package foo
+            package foo
             import java.lang.String
             println(value)
             println(value); println (otherValue)

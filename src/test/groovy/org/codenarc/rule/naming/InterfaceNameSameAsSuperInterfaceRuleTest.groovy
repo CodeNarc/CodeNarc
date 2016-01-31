@@ -35,9 +35,9 @@ class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	interface MyInterface { }
-        	interface Runnable { }
-        	interface MyOtherInterface extends SomeOtherInterface { }
+            interface MyInterface { }
+            interface Runnable { }
+            interface MyOtherInterface extends SomeOtherInterface { }
         '''
         assertNoViolations(SOURCE)
     }
@@ -45,7 +45,7 @@ class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase {
     @Test
     void testClasses_NoViolations() {
         final SOURCE = '''
-        	interface MyInterface extends other.MyClass { }
+            interface MyInterface extends other.MyClass { }
         '''
         assertNoViolations(SOURCE)
     }

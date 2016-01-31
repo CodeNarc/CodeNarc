@@ -35,7 +35,7 @@ class BooleanMethodReturnsNullRuleTest extends AbstractRuleTestCase {
     @Test
     void testProperReturnOfTrueAndFalse_NoViolations() {
         final SOURCE = '''
-        	def c = {
+            def c = {
                     if (foo()) {
                         return true
                     } else {

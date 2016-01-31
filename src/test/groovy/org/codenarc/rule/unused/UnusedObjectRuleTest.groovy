@@ -36,7 +36,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_ObjectAssigned_NoViolations() {
         final SOURCE = '''
-        	def v1 = new Object()
+            def v1 = new Object()
             URL v2 = new URL("www.google.com")
             println new BigDecimal("23.45")
         '''
@@ -47,7 +47,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ObjectNotAssigned_ButLastStatementWithinAMethod_NoViolations() {
         final SOURCE = '''
             println new BigDecimal("23.45")
-        	new Object()
+            new Object()
         '''
         assertNoViolations(SOURCE)
     }
@@ -63,7 +63,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_ObjectNotAssigned_Violations() {
         final SOURCE = '''
-        	new Object()
+            new Object()
             new URL("www.google.com")
             println "ok"
         '''
@@ -76,7 +76,7 @@ class UnusedObjectRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ObjectNotAssigned_WithinClosure_Violations() {
         final SOURCE = '''
             def myClosure = { ->
-            	new Object()
+                new Object()
                 doSomething()
             }
         '''

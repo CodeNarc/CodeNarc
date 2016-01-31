@@ -97,7 +97,7 @@ class GrailsSessionReferenceRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ReferenceWithinTagLib() {
         final SOURCE = '''
             class SimpleTagLib {
-	            def simple = { attrs, body -> session.amount = attrs.amount }
+                def simple = { attrs, body -> session.amount = attrs.amount }
             }
         '''
         sourceCodePath = TAGLIB_PATH

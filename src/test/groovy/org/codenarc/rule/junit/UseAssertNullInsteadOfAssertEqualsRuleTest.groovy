@@ -35,7 +35,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
     @Test
                 void testMethod() {
                     assertEquals(1, foo())
@@ -52,7 +52,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testNullInAssertEquals() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals(null, foo())
                     assertEquals(foo(), null)
@@ -67,7 +67,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testNullInAssertEqualsWithMessage() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals('message', null, foo())
                     assertEquals('message', foo(), null)

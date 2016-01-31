@@ -35,20 +35,20 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
     @Test
     void test_AssignmentToInstanceFields_NoViolations() {
         final SOURCE = '''
-        	class MyClass {
-        	    private field1
-        	    protected String field2 = 'abc'
-        	    public int field3 = 123
-        	    public final field4 = 456
-        	    String property1 = 'abc'
+            class MyClass {
+                private field1
+                protected String field2 = 'abc'
+                public int field3 = 123
+                public final field4 = 456
+                String property1 = 'abc'
 
-        	    private void doStuff() {
-        	        field1 = new Object()
-        	        field2 = 'xxx'
-        	        field3 = 999
-        	        property1 = 'xxx'
-        	    }
-        	}
+                private void doStuff() {
+                    field1 = new Object()
+                    field2 = 'xxx'
+                    field3 = 999
+                    property1 = 'xxx'
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -56,20 +56,20 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
     @Test
     void test_AssignmentToStaticFields_FromStaticMethods_NoViolations() {
         final SOURCE = '''
-        	class MyClass {
-        	    private static field1
-        	    protected static String field2 = 'abc'
-        	    public static int field3 = 123
-        	    public static final field4 = 456
-        	    static String property1 = 'abc'
+            class MyClass {
+                private static field1
+                protected static String field2 = 'abc'
+                public static int field3 = 123
+                public static final field4 = 456
+                static String property1 = 'abc'
 
-        	    private static void doStuff() {
-        	        field1 = new Object()
-        	        field2 = 'xxx'
-        	        field3 = 999
-        	        property1 = 'xxx'
-        	    }
-        	}
+                private static void doStuff() {
+                    field1 = new Object()
+                    field2 = 'xxx'
+                    field3 = 999
+                    property1 = 'xxx'
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -77,19 +77,19 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
     @Test
     void test_AssignmentToStaticField_FromInstanceMethod_Violations() {
         final SOURCE = '''
-        	class MyClass {
-        	    private static field1
-        	    protected static String field2 = 'abc'
-        	    public static int field3 = 123
-        	    static String property1 = 'abc'
+            class MyClass {
+                private static field1
+                protected static String field2 = 'abc'
+                public static int field3 = 123
+                static String property1 = 'abc'
 
-        	    private void doStuff() {
-        	        field1 = new Object()
-        	        field2 = 'xxx'
-        	        field3 = 999
-        	        property1 = 'xxx'
-        	    }
-        	}
+                private void doStuff() {
+                    field1 = new Object()
+                    field2 = 'xxx'
+                    field3 = 999
+                    property1 = 'xxx'
+                }
+            }
         '''
         assertViolations(SOURCE,
             [lineNumber:9, sourceLineText:'field1 = new Object()', messageText:'The instance method doStuff in class MyClass contains an assignment to static field field1'],
@@ -101,19 +101,19 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
     @Test
     void test_ReferencesToStaticField_FromInstanceMethods_NoViolations() {
         final SOURCE = '''
-        	class MyClass {
-        	    private static field1
-        	    protected static String field2 = 'abc'
-        	    public static int field3 = 123
-        	    static String property1 = 'abc'
+            class MyClass {
+                private static field1
+                protected static String field2 = 'abc'
+                public static int field3 = 123
+                static String property1 = 'abc'
 
-        	    private void doStuff() {
-        	        println field1 + 'suffix'
-        	        def isReady = field2 > 'xxx'
-        	        println field3 == 999
-        	        property1 < 'xxx'
-        	    }
-        	}
+                private void doStuff() {
+                    println field1 + 'suffix'
+                    def isReady = field2 > 'xxx'
+                    println field3 == 999
+                    property1 < 'xxx'
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -121,16 +121,16 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
     @Test
     void test_AssignmentToLocalVariableWithSameNameAsStaticField_NoViolations() {
         final SOURCE = '''
-        	class MyClass {
-        	    private static final TEXT
-        	    public static String NAME
+            class MyClass {
+                private static final TEXT
+                public static String NAME
 
-        	    private void doStuff() {
-        	        final TEXT = "new"
-        	        def NAME
-        	        NAME = 'joe'
-        	    }
-        	}
+                private void doStuff() {
+                    final TEXT = "new"
+                    def NAME
+                    NAME = 'joe'
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }

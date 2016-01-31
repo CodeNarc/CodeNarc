@@ -36,12 +36,12 @@ class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
-        	a == b
-        	a <=> b
-        	a < b
-        	a > b
-        	a >= b
-        	a <= b
+            a == b
+            a <=> b
+            a < b
+            a > b
+            a >= b
+            a <= b
             a.compareTo()
             a.compareTo(a, b)
             compareTo(a)

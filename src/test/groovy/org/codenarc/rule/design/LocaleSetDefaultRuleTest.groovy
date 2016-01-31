@@ -36,13 +36,13 @@ class LocaleSetDefaultRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	Locale.getAvailableLocales()
-        	Other.setDefault(Locale.US)
-        	Other.setDefault(Locale.Category.DISPLAY, Locale.US)
+            Locale.getAvailableLocales()
+            Other.setDefault(Locale.US)
+            Other.setDefault(Locale.Category.DISPLAY, Locale.US)
 
-        	println Locale.getDefault()
-        	println Locale.default
-        	println Other.default
+            println Locale.getDefault()
+            println Locale.default
+            println Other.default
         '''
         assertNoViolations(SOURCE)
     }

@@ -37,11 +37,11 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase {
     @Test
     void testToString_ReturnsNonNull_NoViolation() {
         final SOURCE = '''
-        	class MyClass {
-        	    String toString() {
-        	        return 'MyClass'
-        	    }
-        	}
+            class MyClass {
+                String toString() {
+                    return 'MyClass'
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -49,11 +49,11 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase {
     @Test
     void testToStringWithParameters_NoViolation() {
         final SOURCE = '''
-        	class MyClass {
-        	    String toString(int count) { return null }
-        	    void toString(String name) { return null }
-        	    String toString(String name, int count) { return null }
-        	}
+            class MyClass {
+                String toString(int count) { return null }
+                void toString(String name) { return null }
+                String toString(String name, int count) { return null }
+            }
         '''
         assertNoViolations(SOURCE)
     }

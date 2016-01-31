@@ -36,7 +36,7 @@ class ExplicitCallToPowerMethodRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
-        	a ** b
+            a ** b
             a.power()
             a.power(a, b)
             power(a)

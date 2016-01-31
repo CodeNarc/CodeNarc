@@ -35,7 +35,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolation() {
         final SOURCE = '''
-        	String[] myMethod() {
+            String[] myMethod() {
 
                 def c = {
                     return null // ignore returns from nested closure
@@ -58,7 +58,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     @Test
     void testStringArrayMethod() {
         final SOURCE = '''
-        	String[] myMethod() {
+            String[] myMethod() {
                 if (x) return null
                 return [] as String[]
             }
@@ -82,7 +82,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     @Test
     void testDefMethod() {
         final SOURCE = '''
-        	def myMethod() {
+            def myMethod() {
                 if (x) return null
                 return [] as String[]
             }

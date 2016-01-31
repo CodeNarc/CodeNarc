@@ -42,9 +42,9 @@ class IllegalSubclassRuleTest extends AbstractRuleTestCase {
     @Test
     void testDoesNotMatchSuperclassNames_NoViolations() {
         final SOURCE = '''
-        	class MyClass { }
-        	class MyClass2 extends Object { }
-        	class MyClass3 extends MyClass { }
+            class MyClass { }
+            class MyClass2 extends Object { }
+            class MyClass3 extends MyClass { }
         '''
         rule.superclassNames = 'OtherClass,ClassAbc'
         assertNoViolations(SOURCE)

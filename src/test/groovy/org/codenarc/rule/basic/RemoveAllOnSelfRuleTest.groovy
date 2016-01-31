@@ -35,7 +35,7 @@ class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	def x = [1, 2, 3]
+            def x = [1, 2, 3]
 
             x.clear()
             x.removeAll(otherVariable)

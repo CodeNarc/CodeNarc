@@ -92,7 +92,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
     void testApplyTo_ReferenceWithinTagLib() {
         final SOURCE = '''
             class SimpleTagLib {
-	            def simple = { attrs, body -> servletContext.amount = attrs.amount }
+                def simple = { attrs, body -> servletContext.amount = attrs.amount }
             }
         '''
         sourceCodePath = TAGLIB_PATH

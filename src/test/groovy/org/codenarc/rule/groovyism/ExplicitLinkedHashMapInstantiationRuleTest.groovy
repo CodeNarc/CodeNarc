@@ -35,7 +35,7 @@ class ExplicitLinkedHashMapInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [:]
+            def x = [:]
             class MyClass {
                 def x = [:]
                 def m(foo = [:]) {
@@ -54,7 +54,7 @@ class ExplicitLinkedHashMapInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new LinkedHashMap()
+            def x = new LinkedHashMap()
             class MyClass {
                 def m() {
                     def x = new LinkedHashMap()

@@ -35,7 +35,7 @@ class UnnecessaryCallToSubstringRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	prop.substring(1)
+            prop.substring(1)
             prop.substring(0, 1)
         '''
         assertNoViolations(SOURCE)

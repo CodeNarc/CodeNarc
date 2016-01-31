@@ -35,7 +35,7 @@ class StaticConnectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 Connection conn
             }
         '''
@@ -45,7 +45,7 @@ class StaticConnectionRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	class MyClass {
+            class MyClass {
                 static Connection conn
             }
         '''

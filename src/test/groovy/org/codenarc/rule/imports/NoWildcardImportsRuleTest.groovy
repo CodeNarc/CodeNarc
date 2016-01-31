@@ -61,8 +61,8 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase {
             public class Foo {}
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'import com.google.*'],	// todo: replace line number, source line and message
-            [lineNumber:3, sourceLineText:'import org.codenarc.rule.*'])	// todo: replace line number, source line and message
+            [lineNumber:2, sourceLineText:'import com.google.*'],  // todo: replace line number, source line and message
+            [lineNumber:3, sourceLineText:'import org.codenarc.rule.*'])  // todo: replace line number, source line and message
     }
 
     protected Rule createRule() {

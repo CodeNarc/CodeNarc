@@ -39,9 +39,9 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         final SOURCE = '''
             def allPaths = resultsMap.values().unique()
-        	myList.unique()
-        	myList.unique() { it }
-        	myList.unique(2) { it }
+            myList.unique()
+            myList.unique() { it }
+            myList.unique(2) { it }
             myList.findAll{ it < 50 }.unique()
             def w = getMyList().unique().findAll { x < 1 }
             def x = myList.foo.unique().findAll { x < 1 }

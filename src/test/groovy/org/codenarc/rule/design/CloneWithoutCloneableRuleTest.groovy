@@ -35,9 +35,9 @@ class CloneWithoutCloneableRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	class Unrelated {
-                def irrelevant() {}	
-        	}
+            class Unrelated {
+                def irrelevant() {}
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -96,10 +96,10 @@ class CloneWithoutCloneableRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'def clone()', messageText: violationMessage('ValueClass')],	
+            [lineNumber:3, sourceLineText:'def clone()', messageText: violationMessage('ValueClass')],
             [lineNumber:9, sourceLineText:'Object clone()', messageText:violationMessage('ValueClass2')],
             [lineNumber:15, sourceLineText:'protected Object clone() throws CloneNotSupportedException', messageText:violationMessage('ValueClass3')]
-        )	
+        )
     }
 
     private GString violationMessage(String className) {

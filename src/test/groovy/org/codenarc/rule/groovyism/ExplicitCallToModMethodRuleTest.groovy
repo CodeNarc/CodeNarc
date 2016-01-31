@@ -36,7 +36,7 @@ class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
-        	a % b
+            a % b
             a.mod()
             a.mod(a, b)
             mod(a)

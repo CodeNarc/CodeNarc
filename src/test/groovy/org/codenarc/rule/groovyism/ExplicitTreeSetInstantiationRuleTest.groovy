@@ -36,7 +36,7 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = [] as SortedSet
+            def x = [] as SortedSet
             class MyClass {
                 def x = [] as SortedSet
                 def m(foo = [] as SortedSet) {
@@ -55,7 +55,7 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
     @Test
     void testVariableDeclarations() {
         final SOURCE = '''
-        	def x = new TreeSet()
+            def x = new TreeSet()
             class MyClass {
                 def m() {
                     def x = new TreeSet()

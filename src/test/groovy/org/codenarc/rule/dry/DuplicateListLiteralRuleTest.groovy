@@ -37,9 +37,9 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
     void testIgnoresDifferentValues_NoViolations() {
         final SOURCE = '''
             class MyClass {
-        	  def var1 = [1, 1, 1]
-        	  def var2 = [2, 1, 1]
-        	  def var3 = [1, 1, 2]
+              def var1 = [1, 1, 1]
+              def var2 = [2, 1, 1]
+              def var3 = [1, 1, 2]
 
               def var4 = ['a', 'b']
               def var5 = ['b', 'a']
@@ -54,10 +54,10 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
                 def init(String name) {
-        	        def var1 = [name, 'b', 'c']
+                    def var1 = [name, 'b', 'c']
                 }
                 def cleanUp(String name) {
-        	        return [name, 'b', 'c']
+                    return [name, 'b', 'c']
                 }
             }
         '''
@@ -69,8 +69,8 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
               def name
-        	  def var1 = [1, ['x', name]]
-        	  def var2 = [1, ['x', name]]
+              def var1 = [1, ['x', name]]
+              def var2 = [1, ['x', name]]
             }
         '''
         assertNoViolations(SOURCE)
@@ -102,11 +102,11 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
     void testDuplicateListLiteral_ListValuesAsConstants() {
         final SOURCE = '''
             class MyClass {
-        	  def var1 = [1, null, Boolean.FALSE, 'x', true]
-        	  def var2 = [1, null, Boolean.FALSE, 'x', true]
-        	  def var3 = ["a", 99]
+              def var1 = [1, null, Boolean.FALSE, 'x', true]
+              def var2 = [1, null, Boolean.FALSE, 'x', true]
+              def var3 = ["a", 99]
               Map getMap() {
-        	        return ["a", 99]
+                    return ["a", 99]
               }
             }
         '''
@@ -118,8 +118,8 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateListLiteral_HandlesNestedListLiterals() {
         final SOURCE = '''
-        	  def var1 = [1, [3, 4]]
-        	  def var2 = [1, [3,4]]
+              def var1 = [1, [3, 4]]
+              def var2 = [1, [3,4]]
         '''
         assertSingleViolation(SOURCE, 3, 'def var2 = [1, [3,4]]', '[1, [3, 4]]')
     }
@@ -127,8 +127,8 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateListLiteral_HandlesNestedListLiterals_OuterListsAreNotTheSame() {
         final SOURCE = '''
-        	  def var1 = [123, [3,4]]
-        	  def var2 = [99, [3,4]]
+              def var1 = [123, [3,4]]
+              def var2 = [99, [3,4]]
         '''
         assertSingleViolation(SOURCE, 3, 'def var2 = [99, [3,4]]', '[3, 4]')
     }
@@ -136,8 +136,8 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
     @Test
     void testDuplicateListLiteral_HandlesMapsNestedWithinListLiterals() {
         final SOURCE = '''
-        	  def var1 = [123, [3, 4, [x:99], 5]]
-        	  def var2 = [99, [3, 4, [x:99], 5]]
+              def var1 = [123, [3, 4, [x:99], 5]]
+              def var2 = [99, [3, 4, [x:99], 5]]
         '''
         assertSingleViolation(SOURCE, 3, 'def var2 = [99, [3, 4, [x:99], 5]]', '[3, 4, [x:99], 5]')
     }

@@ -37,11 +37,11 @@ class InstanceofRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	class MyClass {
-        	    def myMethod() {
-        	        println 123 + 99
-        	    }
-        	}
+            class MyClass {
+                def myMethod() {
+                    println 123 + 99
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }

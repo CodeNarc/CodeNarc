@@ -35,19 +35,19 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	final class MyClass1 {
+            final class MyClass1 {
                 public method1() {}
                 def method2() {}
                 @PackageScope def method3() {}
                 private def method3() {}
             }
-        	class MyClass2 {
+            class MyClass2 {
                 protected def method() {}
                 protected def closure = {}
                 protected String property
             }
 
-        	final class MyClass {
+            final class MyClass {
                 @Override
                 protected def methodName() {}
             }
@@ -58,7 +58,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testMethodFailure() {
         final SOURCE = '''
-        	final class MyClass {
+            final class MyClass {
                 protected def methodName() {}
             }
         '''
@@ -71,7 +71,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testFieldFailure() {
         final SOURCE = '''
-        	final class MyClass {
+            final class MyClass {
                 protected def closure = {}
             }
         '''
@@ -84,7 +84,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testPropertyFailure() {
         final SOURCE = '''
-        	final class MyClass {
+            final class MyClass {
                 protected String myProperty
             }
         '''

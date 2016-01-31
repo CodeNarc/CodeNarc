@@ -35,7 +35,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assert 1 == 2
                     assert 1 == 2 : 'message'
@@ -71,7 +71,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testTrueOnThis() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertTrue(x)
                     assertTrue('message', x)
@@ -86,7 +86,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testTrueOnAssert() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     Assert.assertTrue(x)
                     Assert.assertTrue('message', x)
@@ -101,7 +101,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testFalseOnThis() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertFalse(x)
                     assertFalse('message', x)
@@ -116,7 +116,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testFalseOnAssert() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     Assert.assertFalse(x)
                     Assert.assertFalse('message', x)
@@ -131,7 +131,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testNullOnThis() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertNull(x)
                     assertNull('message', x)
@@ -146,7 +146,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testNullOnAssert() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     Assert.assertNull(x)
                     Assert.assertNull('message', x)
@@ -161,7 +161,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testNotNullOnThis() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertNotNull(x)
                     assertNotNull('message', x)
@@ -176,7 +176,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testNotNullOnAssert() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     Assert.assertNotNull(x)
                     Assert.assertNotNull('message', x)
@@ -191,7 +191,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertEqualsOnThis() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     assertEquals(x, y)
                     assertEquals('message', x, y)
@@ -206,7 +206,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
     @Test
     void testAssertEqualsOnAssert() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     Assert.assertEquals(x, y)
                     Assert.assertEquals('message', x, y)

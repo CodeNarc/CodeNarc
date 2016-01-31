@@ -35,7 +35,7 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	void close() { } // in script, OK
+            void close() { } // in script, OK
 
             class MyClass implements Closeable {
                 void close() {}

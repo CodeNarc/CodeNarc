@@ -35,7 +35,7 @@ class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
     @Test
                 void testMethod() {
                     fail('msg')
@@ -51,7 +51,7 @@ class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
     @Test
     void testFailCalls() {
         final SOURCE = '''
-        	 class MyTestCase extends TestCase {
+             class MyTestCase extends TestCase {
                 void testMethod() {
                     fail()
                     Assert.fail()

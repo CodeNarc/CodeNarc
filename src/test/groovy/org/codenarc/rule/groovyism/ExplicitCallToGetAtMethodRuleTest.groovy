@@ -36,7 +36,7 @@ class ExplicitCallToGetAtMethodRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
-        	a[b]
+            a[b]
             a.getAt()
             a.getAt(a, b)
             getAt(a)

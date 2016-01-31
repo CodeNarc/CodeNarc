@@ -36,7 +36,7 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 @Override
                 boolean equals(Object o) { true }
             }
@@ -47,7 +47,7 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 @Override
                 boolean equals(Object o, Object x) { true }
             }
@@ -61,7 +61,7 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase {
     void testIgnoresClassWithToStringAnnotation() {
         final SOURCE = '''
             @EqualsAndHashCode
-        	class Person {
+            class Person {
             }
         '''
         sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Person.groovy'

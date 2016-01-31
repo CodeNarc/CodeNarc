@@ -35,7 +35,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	getThreadGroup('...')    // a parameter means it must not be a getter.  
+            getThreadGroup('...')    // a parameter means it must not be a getter.
         '''
         assertNoViolations(SOURCE)
     }

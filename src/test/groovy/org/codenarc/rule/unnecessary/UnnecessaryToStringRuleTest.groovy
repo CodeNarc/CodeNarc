@@ -36,9 +36,9 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	def name = nameNode.toString()
-        	def id = idNode.lastChild.toString()
-        	def code = "$id-1234".toString()     // GString
+            def name = nameNode.toString()
+            def id = idNode.lastChild.toString()
+            def code = "$id-1234".toString()     // GString
         '''
         assertNoViolations(SOURCE)
     }

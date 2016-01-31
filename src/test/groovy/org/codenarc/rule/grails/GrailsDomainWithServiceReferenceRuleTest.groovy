@@ -41,10 +41,10 @@ class GrailsDomainWithServiceReferenceRuleTest extends AbstractRuleTestCase {
     @Test
     void testDomain_NoService_NoViolations() {
         final SOURCE = '''
-        	class Book {
+            class Book {
                 String title
                 Author author
-        	}
+            }
         '''
         assertNoViolations(SOURCE)
     }

@@ -36,7 +36,7 @@ class ExplicitCallToDivMethodRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         rule.ignoreThisReference = true
         final SOURCE = '''
-        	a / b
+            a / b
             a.div()
             a.div(a, b)
             div(a)

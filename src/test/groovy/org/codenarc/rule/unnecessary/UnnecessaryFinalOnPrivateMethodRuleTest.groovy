@@ -35,9 +35,9 @@ class UnnecessaryFinalOnPrivateMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	final method1() {}
-        	private method2() {}
-        	protected final method2() {}
+            final method1() {}
+            private method2() {}
+            protected final method2() {}
         '''
         assertNoViolations(SOURCE)
     }
@@ -45,7 +45,7 @@ class UnnecessaryFinalOnPrivateMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	private final method() {}
+            private final method() {}
         '''
         assertSingleViolation(SOURCE, 2, 'private final method()', "The 'method' method is both private and final")
     }

@@ -36,7 +36,7 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 @Override
                 String toString() { 'xxx' }
             }
@@ -47,7 +47,7 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
     @Test
     void testSingleViolation() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 @Override
                 String toString(Object o) { 'xxx' }
             }
@@ -61,7 +61,7 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
     void testIgnoresClassWithToStringAnnotation() {
         final SOURCE = '''
             @ToString
-        	class Person {
+            class Person {
             }
         '''
         sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Person.groovy'

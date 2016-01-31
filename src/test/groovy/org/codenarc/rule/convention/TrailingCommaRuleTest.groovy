@@ -40,7 +40,7 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
             int[] array1 = []
             int[] array2 = [
                            ]
-        	int[] array3 = [1,2,3]
+            int[] array3 = [1,2,3]
             int[] array4 = [1,
                            2,
                            3,
@@ -91,7 +91,7 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
             def map1 = [a:1]
             def map2 = [
                        ]
-        	def map3 = [a:1, b:2]
+            def map3 = [a:1, b:2]
             def map4 = [a:1,
                         b:2,
                         ]

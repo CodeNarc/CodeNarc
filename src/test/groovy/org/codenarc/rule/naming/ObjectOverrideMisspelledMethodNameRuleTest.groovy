@@ -35,8 +35,8 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
     @Test
     void testApplyTo_NoViolations() {
         final SOURCE = '''
-        	class MyClass { boolean equals(o){} }
-        	boolean equals(Object o){}
+            class MyClass { boolean equals(o){} }
+            boolean equals(Object o){}
             int hashCode(){}
             String toString(){}
         '''

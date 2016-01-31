@@ -35,8 +35,8 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	def x = { y++; it }
-        	def x = { it }
+            def x = { y++; it }
+            def x = { it }
             def method1(it) {
                 y++
                 it
@@ -54,8 +54,8 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
     @Test
     void testInClosures() {
         final SOURCE = '''
-        	def x = { y++; return it }
-        	def x = { return it }
+            def x = { y++; return it }
+            def x = { return it }
         '''
         assertTwoViolations(SOURCE,
                 2, 'return it',

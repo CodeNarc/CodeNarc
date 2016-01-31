@@ -91,8 +91,8 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
                 }
                 protected boolean isReady() { true }
                 def show = {
-	 	            [ book : Book.get( params.id ) ]
-	            }
+                    [ book : Book.get( params.id ) ]
+                }
                 private int calculate() { 23 }
             }
         '''

@@ -36,8 +36,8 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	def foo() {}
-        	def foo(int x) {}
+            def foo() {}
+            def foo(int x) {}
             def bar() {}
             def bar(int x) {}
             def baz = {}
@@ -67,8 +67,8 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
     @Test
     void test2MethodViolationsInScript() {
         final SOURCE = '''
-        	def foo() {}
-        	def foo(int x) {}
+            def foo() {}
+            def foo(int x) {}
             def Foo() {}
             def foO() {}
         '''
@@ -80,7 +80,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
     @Test
     void test2ClosureViolationsInScript() {
         final SOURCE = '''
-        	def foo = {}
+            def foo = {}
             def Foo = {}
             def foO = {}
         '''
@@ -93,7 +93,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
 //    void test2ClosureViolationsInClass() {
 //        final SOURCE = '''
 //            class MyClass {
-//            	def foo = {}
+//              def foo = {}
 //                Closure FOo
 //                def foO = {}
 //            }
@@ -153,8 +153,8 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
     @Test
     void testDeepNesting() {
         final SOURCE = '''
-        	def foo() {}
-        	def foo(int x) {}
+            def foo() {}
+            def foo(int x) {}
             class MyClass {
                 def foo() {}
                 def foo(int x) {}

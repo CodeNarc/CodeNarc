@@ -35,7 +35,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
     @Test
     void testShouldNotAddViolationsForWhileLoops() {
         final SOURCE = '''
-        	while(1 > 2)
+            while(1 > 2)
                println "never happen"
         '''
         assertNoViolations SOURCE
@@ -44,7 +44,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
     @Test
     void testShouldNotAddViolationsForNewLoops() {
         final SOURCE = '''
-        	for(i in [1,2])
+            for(i in [1,2])
                println i
         '''
         assertNoViolations SOURCE
@@ -61,7 +61,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
     @Test
     void testShouldNotAddViolationsIfForLoopHasInitExpr() {
         final SOURCE = '''
-        	for(int i = 0; i<5;)
+            for(int i = 0; i<5;)
                 println i++
         '''
         assertNoViolations SOURCE
@@ -71,7 +71,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
     void testShouldNotAddViolationsIfForLoopHasUpdateExpr() {
         final SOURCE = '''
             int i = 0
-        	for(; i < 5; i++)
+            for(; i < 5; i++)
                 println i
         '''
         assertNoViolations SOURCE
@@ -81,7 +81,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
     void testShouldAddViolationIfForLoopHasOnlyConditionExpr() {
         final SOURCE = '''
             int i = 0
-        	for(; i < 5;)
+            for(; i < 5;)
                 println i++
         '''
         assertSingleViolation SOURCE, 3, 'for(; i < 5;)', 'The for loop can be simplified to a while loop'

@@ -35,7 +35,7 @@ class DoubleNegativeRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	!true
+            !true
         '''
         assertNoViolations(SOURCE)
     }

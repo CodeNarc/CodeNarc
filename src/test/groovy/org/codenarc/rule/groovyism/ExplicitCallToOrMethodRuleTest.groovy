@@ -35,7 +35,7 @@ class ExplicitCallToOrMethodRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-        	a | b
+            a | b
             a.or()
             a.or(a, b)
             or(a)

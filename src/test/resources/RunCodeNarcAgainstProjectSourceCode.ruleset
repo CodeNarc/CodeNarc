@@ -89,4 +89,12 @@ ruleset {
         description = 'Checks that all source files contain the Apache License 2.0 comment'
     }
 
+    // TEMPORARY; Until we add a TabCharacter rule
+    IllegalString {
+        name = 'IllegalTabCharacter'
+        string = '\t'
+        violationMessage = 'The tab character is not allowed in source files'
+        description = 'Checks that all source files do not contain the tab character'
+    }
+
 }

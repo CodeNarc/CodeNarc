@@ -44,7 +44,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
             import org.junit.Test
             import static org.junit.Assert.assertEquals
         
-        	class SampleTest {
+            class SampleTest {
                 @Test
                 def shouldFoo() {
                     //when
@@ -55,8 +55,8 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
                     assertEquals("Message", 2, result)
                     assertEquals(2.3d, result, 0.5d)
                     assertEquals("Message", 2.3d, result, 0.5d)
-                }	
-        	}
+                }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -84,7 +84,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
             import org.junit.Test
             import static org.junit.Assert.assertEquals
         
-        	class SampleTest {
+            class SampleTest {
                 @Test
                 def shouldFoo() {
                     //when
@@ -95,8 +95,8 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
                     assertEquals("Message", result, 2)
                     assertEquals(result, 2.3d, 0.5d)
                     assertEquals("Message", result, 2.3d, 0.5d)
-                }	
-        	}
+                }
+            }
         '''
         assertViolations(SOURCE,
             [lineNumber: 12, sourceLineText: 'assertEquals(result, 2)',                     messageText: VIOLATION_MESSAGE],

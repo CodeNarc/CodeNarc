@@ -36,7 +36,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     void testTempBitwiseOr() {
         //(3 | 6) == 7   a bitwise or
         final SOURCE = '''
-        	def temp = (3 | 6)
+            def temp = (3 | 6)
             if(temp==7) { return true}
 
         '''
@@ -46,7 +46,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     @Test
     void testOr() {
         final SOURCE = '''
-        	def a = false
+            def a = false
             def b = true
             if(a||b) { return true}
 
@@ -57,7 +57,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     @Test
     void testTempWhileOr() {
         final SOURCE = '''
-        	def temp = (3 | 6)
+            def temp = (3 | 6)
             while(temp==7) { return true}
 
         '''
@@ -77,7 +77,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     @Test
     void testBitwiseOrViolationNested() {
         final SOURCE = '''
-        	def a = false
+            def a = false
             def b = true
             if(a|b||a) { return true}
         '''
@@ -148,7 +148,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     void testTempBitwiseAnd() {
         //(3 & 6) == 2 a bitwise and
         final SOURCE = '''
-        	def temp = (3 & 6)
+            def temp = (3 & 6)
             if(temp==2) { return true}
 
         '''
@@ -158,7 +158,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     @Test
     void testBitwiseAndViolation() {
         final SOURCE = '''
-        	def a = false
+            def a = false
             def b = true
             if(a&b) { return true}
         '''
@@ -168,7 +168,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     @Test
     void testBitwiseAndViolationNested() {
         final SOURCE = '''
-        	def a = false
+            def a = false
             def b = true
             if(a&b||a) { return true}
         '''

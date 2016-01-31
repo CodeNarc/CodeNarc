@@ -45,7 +45,7 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         assertNoViolations('''
-        	[run: {}] as Runnable
+            [run: {}] as Runnable
         ''')
     }
 

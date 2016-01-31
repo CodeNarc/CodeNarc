@@ -159,7 +159,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
                 p2.setCity('Basel')
                 p2.setZipCode('4051') '''
 
-        assertSingleViolation(SOURCE, 17, "p2.setZipCode('4051')",	'The code could be more concise by using a with() or identity() block')
+        assertSingleViolation(SOURCE, 17, "p2.setZipCode('4051')", 'The code could be more concise by using a with() or identity() block')
     }
 
     @Test

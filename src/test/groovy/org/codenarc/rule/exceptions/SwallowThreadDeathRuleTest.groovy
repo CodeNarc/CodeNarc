@@ -36,7 +36,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
     @Test
     void testRethrowingCaughtErrorIsLegal() {
         final SOURCE = '''
-        	try {
+            try {
                 def a = 0
             } catch (ThreadDeath td) {
                 throw td
@@ -48,7 +48,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
     @Test
     void testReThrowingAnotherInstanceOfThreadDeathIsLegal() {
         final SOURCE = '''
-        	try {
+            try {
                 def a = 0
             } catch (ThreadDeath td) {
                 throw new ThreadDeath()
@@ -60,7 +60,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
     @Test
     void testNesting() {
         final SOURCE = '''
-        	try {
+            try {
                 def a = 0
             } catch (ThreadDeath td) {
                 try { println 4 } catch (ThreadDeath ttdd) { throw ttdd }
@@ -73,7 +73,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
     @Test
     void testCatchingWithoutRethrowingAnythingIsAViolation() {
         final SOURCE = '''
-        	try {
+            try {
                 def a = 0
             } catch (ThreadDeath td) {
                 td.printStackTrace()
@@ -86,7 +86,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
     void testCatchingAndThrowingAnotherVariableIsAViolation() {
         final SOURCE = '''
             def other = new ThreadDeath()
-        	try {
+            try {
                 def a = 0
             } catch (ThreadDeath td) {
                 throw other
@@ -98,7 +98,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
     @Test
     void testCatchingAndThrowingSomethingElseIsAViolation() {
         final SOURCE = '''
-        	try {
+            try {
                 def a = 0
             } catch (ThreadDeath td) {
                 throw new RuntimeException("o noes")

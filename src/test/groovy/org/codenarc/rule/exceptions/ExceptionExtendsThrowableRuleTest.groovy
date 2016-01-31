@@ -35,7 +35,7 @@ class ExceptionExtendsThrowableRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	class MyException extends Exception { }
+            class MyException extends Exception { }
         '''
         assertNoViolations(SOURCE)
     }

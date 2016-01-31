@@ -35,13 +35,13 @@ class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	class MyClass { }
-        	class Integer { }
-        	class MyOtherClass extends SomeOtherClass { }
+            class MyClass { }
+            class Integer { }
+            class MyOtherClass extends SomeOtherClass { }
 
-        	def innerClass = new MyClass() {
-        	    int getCount() { return 99 }
-        	}
+            def innerClass = new MyClass() {
+                int getCount() { return 99 }
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -49,7 +49,7 @@ class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase {
     @Test
     void testInterfaces_NoViolations() {
         final SOURCE = '''
-        	interface MyOtherInterface { }
+            interface MyOtherInterface { }
             interface MyInterface extends other.MyOtherInterface { }
         '''
         assertNoViolations(SOURCE)

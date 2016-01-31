@@ -34,7 +34,7 @@ class StringSourceAnalyzerTest extends AbstractTestCase {
             @SuppressWarnings('rule1')
             package foo
 
-        	class Person { }
+            class Person { }
         '''
         def analyzer = new StringSourceAnalyzer(SOURCE)
 
@@ -50,7 +50,7 @@ class StringSourceAnalyzerTest extends AbstractTestCase {
     @Test
     void testTwoRules() {
         final SOURCE = '''
-        	class Person { }
+            class Person { }
         '''
         def analyzer = new StringSourceAnalyzer(SOURCE)
 
@@ -66,7 +66,7 @@ class StringSourceAnalyzerTest extends AbstractTestCase {
     @Test
     void testFieldRules() {
         final SOURCE = '''
-        	class Person {
+            class Person {
                 def String name // should cause violation
                 public String address  // should cause violation
             }

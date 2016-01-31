@@ -44,9 +44,9 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	class SameAsFilename {
-        	    static class Foo {}
-        	}
+            class SameAsFilename {
+                static class Foo {}
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -54,7 +54,7 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
     @Test
     void testSourceCodeName_NullOrEmpty() {
         final SOURCE = '''
-        	class Ignore { }
+            class Ignore { }
         '''
         sourceCodeName = null
         assertNoViolations(SOURCE)
@@ -66,8 +66,8 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
     @Test
     void test_MultipleClasses_NoViolations() {
         final SOURCE = '''
-        	class SameAsFilename {}
-        	enum NotSameAsFilename {}
+            class SameAsFilename {}
+            enum NotSameAsFilename {}
         '''
         assertNoViolations(SOURCE)
     }
@@ -75,7 +75,7 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
     @Test
     void test_ScriptFile_NoViolations() {
         final SOURCE = '''
-        	println 'Hello world!'
+            println 'Hello world!'
         '''
         assertNoViolations(SOURCE)
     }

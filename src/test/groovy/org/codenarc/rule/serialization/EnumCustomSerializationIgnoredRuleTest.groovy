@@ -35,9 +35,9 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase {
     @Test
     void testEnum_NoViolations() {
         final SOURCE = '''
-        	enum MyEnum {
-        	    ONE, TWO, THREE
-        	}
+            enum MyEnum {
+                ONE, TWO, THREE
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -45,13 +45,13 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase {
     @Test
     void testRegularClass_CustomSerialization_NoViolations() {
         final SOURCE = '''
-        	class MyClass {
-        	    private static final long serialVersionUID = 1234567L
-        	    private static final ObjectStreamField[] serialPersistentFields = { new ObjectStreamField("name", String.class) }
+            class MyClass {
+                private static final long serialVersionUID = 1234567L
+                private static final ObjectStreamField[] serialPersistentFields = { new ObjectStreamField("name", String.class) }
                 String name;
                 Object writeReplace() { }
                 private void writeObject(ObjectOutputStream stream) throws IOException { }
-        	}
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -59,12 +59,12 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase {
     @Test
     void testEnum_IgnoredSerializationFields_Violations() {
         final SOURCE = '''
-         	enum MyEnum {
-        	    ONE, TWO, THREE
+            enum MyEnum {
+                ONE, TWO, THREE
                 private static final long serialVersionUID = 1234567L
-        	    private static final ObjectStreamField[] serialPersistentFields = { new ObjectStreamField("name", String.class) }
+                private static final ObjectStreamField[] serialPersistentFields = { new ObjectStreamField("name", String.class) }
                 String name;
-        	}
+            }
         '''
         assertViolations(SOURCE,
             [lineNumber:4, sourceLineText:'private static final long serialVersionUID = 1234567L', messageText:'serialVersionUID'],
@@ -74,12 +74,12 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase {
     @Test
     void testEnum_IgnoredSerializationMethods_Violations() {
         final SOURCE = '''
-         	enum MyEnum {
-        	    ONE, TWO, THREE
+            enum MyEnum {
+                ONE, TWO, THREE
                 Object writeReplace() { }
                 private void writeObject(ObjectOutputStream stream) throws IOException { }
 
-        	}
+            }
         '''
         assertViolations(SOURCE,
             [lineNumber:4, sourceLineText:'Object writeReplace()', messageText:'writeReplace'],
@@ -90,12 +90,12 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase {
     @Test
     void testEnum_IgnoredSerializationMethodNames_ButDifferentSignatures_NoViolations() {
         final SOURCE = '''
-         	enum MyEnum {
-        	    ONE, TWO, THREE
+            enum MyEnum {
+                ONE, TWO, THREE
                 Object writeReplace(String name) { }
                 private Object writeReplace(int count) { }
                 private void writeObject(String name) throws IOException { }
-        	}
+            }
         '''
         assertNoViolations(SOURCE)
     }

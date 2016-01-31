@@ -67,12 +67,12 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testFields_IllegalFieldModifiers_Match_Violations() {
         final SOURCE = '''
-        	class MyClass {
-        	    public field1
-        	    protected field2
-        	    private field3
-        	    public static final FIELD4
-        	}
+            class MyClass {
+                public field1
+                protected field2
+                private field3
+                public static final FIELD4
+            }
         '''
         rule.illegalFieldModifiers = 'public static, protected'
         assertViolations(SOURCE,
@@ -83,10 +83,10 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testFields_AllowedFieldModifiers_NoMatch_Violations() {
         final SOURCE = '''
-        	class MyClass {
-        	    public field1
-        	    protected field2
-        	}
+            class MyClass {
+                public field1
+                protected field2
+            }
         '''
         rule.allowedFieldModifiers = 'public final, private, protected static'
         assertViolations(SOURCE,
@@ -99,11 +99,11 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testProperties_IllegalPropertyModifiers_Match_Violations() {
         final SOURCE = '''
-        	class MyClass {
-        	    def property1
-        	    final property2
-        	    static property3
-        	}
+            class MyClass {
+                def property1
+                final property2
+                static property3
+            }
         '''
         rule.illegalPropertyModifiers = 'final'
         assertViolations(SOURCE,
@@ -113,11 +113,11 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testProperties_AllowedPropertyModifiers_NoMatch_Violations() {
         final SOURCE = '''
-        	class MyClass {
-        	    def property1
-        	    final property2
-        	    static property3
-        	}
+            class MyClass {
+                def property1
+                final property2
+                static property3
+            }
         '''
         rule.allowedPropertyModifiers = 'static'
         assertViolations(SOURCE,
@@ -130,12 +130,12 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testMethods_IllegalMethodModifiers_Match_Violations() {
         final SOURCE = '''
-        	class MyClass {
-        	    public method1() { }
-        	    protected method2() { }
-        	    private method3() { }
-        	    public static final method4() { }
-        	}
+            class MyClass {
+                public method1() { }
+                protected method2() { }
+                private method3() { }
+                public static final method4() { }
+            }
         '''
         rule.illegalMethodModifiers = 'public static, protected'
         assertViolations(SOURCE,
@@ -146,10 +146,10 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
     @Test
     void testMethods_AllowedMethodModifiers_NoMatch_Violations() {
         final SOURCE = '''
-        	class MyClass {
-        	    public method1() { }
-        	    protected method2() { }
-        	}
+            class MyClass {
+                public method1() { }
+                protected method2() { }
+            }
         '''
         rule.allowedMethodModifiers = 'public final, private, protected static'
         assertViolations(SOURCE,
