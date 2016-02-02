@@ -15,6 +15,7 @@
     <rule class='org.codenarc.rule.convention.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.convention.LongLiteralWithLowerCaseLRule'/>
     <rule class='org.codenarc.rule.convention.NoDefRule'/>
+    <rule class='org.codenarc.rule.convention.NoTabCharacterRule'/>
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
     <rule class='org.codenarc.rule.convention.TernaryCouldBeElvisRule'/>
     <rule class='org.codenarc.rule.convention.TrailingCommaRule'/>

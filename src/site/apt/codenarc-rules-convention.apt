@@ -148,6 +148,11 @@ Convention Rules  ("<rulesets/convention.xml>")
   <<NOTE:>> This rule applies to the text contents of a <file> rather than a specific <class>,
   so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
 
+* {NoTabCharacter} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.25>
+
+  Checks that all source files do not contain the tab character
 
 * {ParameterReassignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

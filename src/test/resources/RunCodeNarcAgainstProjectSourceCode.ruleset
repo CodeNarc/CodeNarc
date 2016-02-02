@@ -12,6 +12,7 @@ ruleset {
     ruleset('rulesets/convention.xml') {
         exclude 'NoDef'
         exclude 'TrailingComma'
+        NoTabCharacter(doNotApplyToFileNames:'NoTabCharacterRuleTest.groovy') //Test should contain tab character to test the rule
     }
 
     ruleset('rulesets/design.xml') {
@@ -88,13 +89,4 @@ ruleset {
         violationMessage = 'The Apache License 2.0 comment is missing from the source file'
         description = 'Checks that all source files contain the Apache License 2.0 comment'
     }
-
-    // TEMPORARY; Until we add a TabCharacter rule
-    IllegalString {
-        name = 'IllegalTabCharacter'
-        string = '\t'
-        violationMessage = 'The tab character is not allowed in source files'
-        description = 'Checks that all source files do not contain the tab character'
-    }
-
 }
