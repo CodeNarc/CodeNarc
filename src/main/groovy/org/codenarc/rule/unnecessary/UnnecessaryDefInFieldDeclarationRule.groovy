@@ -42,6 +42,10 @@ class UnnecessaryDefInFieldDeclarationAstVisitor extends AbstractFieldVisitor {
         if (definitionStart != -1) {
             declaration = declaration[0 .. definitionStart - 1]
         }
+        def commentStart = declaration.indexOf('//')
+        if (commentStart != -1) {
+            declaration = declaration[0 .. commentStart - 1]
+        }
 
         if (contains(declaration, 'def')) {
             if (contains(declaration, 'private')) {

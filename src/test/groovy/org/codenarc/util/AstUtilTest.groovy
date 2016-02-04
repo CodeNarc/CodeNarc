@@ -19,6 +19,7 @@ import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.GStringExpression
@@ -63,6 +64,10 @@ class AstUtilTest extends AbstractTestCase {
                 println methodCallWithinEnum(true, 'abc', 123); doStuff()
             }
         }
+        class OtherClass {
+            int myIntField = 45
+            String myStringField // comment
+        }
 
         // outside of class -- script
         def scriptMethod() { 456 }
@@ -87,6 +92,15 @@ class AstUtilTest extends AbstractTestCase {
     void testGetLastLineOfNodeText() {
         assert AstUtil.getLastLineOfNodeText(methodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
         assert AstUtil.getLastLineOfNodeText(methodNamed('multilineMethodCall'), sourceCode).trim() == '2, 3)'
+    }
+
+    @Test
+    void testGetDeclaration() {
+        def node = visitor.fieldNodes.find { n -> n.name == 'myIntField' }
+        assert AstUtil.getDeclaration(node, sourceCode).trim() == 'int myIntField = 45'
+
+        node = visitor.fieldNodes.find { n -> n.name == 'myStringField' }
+        assert AstUtil.getDeclaration(node, sourceCode).trim() == 'String myStringField // comment'
     }
 
     @Test
@@ -310,6 +324,7 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     def statements = []
     def declarationExpressions = []
     def classNodes = []
+    def fieldNodes = []
 
     @Override
     void visitClass(ClassNode node) {
@@ -335,6 +350,12 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         declarationExpressions << declarationExpression
         super.visitDeclarationExpression(declarationExpression)
+    }
+
+    @Override
+    void visitField(FieldNode node) {
+        fieldNodes << node
+        super.visitField(node)
     }
 
     protected SourceUnit getSourceUnit() {

@@ -1193,8 +1193,8 @@ public class AstUtil {
 
             // extract the relevant part of the last line
             if (lineIndex == node.getLastLineNumber() - 1) {
-                int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 2 : line.length() - 1;
-                line = line.substring(0, stopIndex); 
+                int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 2 : line.length();
+                line = line.substring(0, stopIndex);
             }
 
             if (line.contains("{")) {

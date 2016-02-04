@@ -4,9 +4,13 @@ http://www.codenarc.org
 
 Changes in version 0.25.0 (??? 2016)
 --------------------------------------
+NEW RULES
 - #135: NoTabCharacter rule (convention) - Check that all source files do not contain the tab character (Yuriy Chulovskyy)
+- #136: TrailingComma rule (convention). (Yuriy Chulovskyy)
+
+UPDATED/ENHANCED RULES AND BUG FIXES
+- #141: UnnecessaryDefInFieldDeclaration: false violation if comment includes the word "def".
 - #139: IdeTextReportWriter: Default line number to 0 so that IDE links are valid.
-- #136: Added TrailingComma rule (convention). (Yuriy Chulovskyy)
 - #131: UnusedImport does not handle Scala. Fix for #115. (Yuriy Chulovskyy)
 - #133: Updated documentation for BracesForIfElse rule. (Yuriy Chulovskyy)
 - #130: Fixed issue #119 BracesForIfElse with curly braces inside GString. (Yuriy Chulovskyy)
