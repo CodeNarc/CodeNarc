@@ -71,6 +71,22 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def myMethod()', ['myMethod', '6'])
     }
 
+    // TODO Known limitation; #140: wrong line number and source line for method with annotation
+    @Test
+    void testApplyTo_SingleMethod_WithAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+                @SomeAnnotation
+                def myMethod() {
+                    a && b && c && d && e && f
+                }
+            }
+        '''
+        rule.maxMethodComplexity = 5
+        assertSingleViolation(SOURCE, 3, '@SomeAnnotation', ['myMethod', '6'])
+//        assertSingleViolation(SOURCE, 4, 'def myMethod()', ['myMethod', '6'])
+    }
+
     @Test
     void testSuppressWarningsOnClass() {
         final SOURCE = '''
