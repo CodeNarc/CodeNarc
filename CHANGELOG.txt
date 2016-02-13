@@ -9,6 +9,7 @@ NEW RULES
 - #136: TrailingComma rule (convention). (Yuriy Chulovskyy)
 
 UPDATED/ENHANCED RULES AND BUG FIXES
+- #124: UnusedVariableRule: Ignore variables annotated with @BaseScript.
 - #141: UnnecessaryDefInFieldDeclaration: false violation if comment includes the word "def".
 - #139: IdeTextReportWriter: Default line number to 0 so that IDE links are valid.
 - #131: UnusedImport does not handle Scala. Fix for #115. (Yuriy Chulovskyy)

@@ -358,6 +358,23 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_BaseScript() {
+        final SOURCE = '''
+            @BaseScript
+            MyScript script
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_BaseScript_FullPackageDeclaration() {
+        final SOURCE = '''
+            @groovy.transform.BaseScript MyScript script
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_NoVariableDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
