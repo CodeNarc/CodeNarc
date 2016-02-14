@@ -21,6 +21,8 @@ import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
+import java.lang.reflect.Modifier
+
 /**
  * Reports classes without methods, fields or properties.
  *
@@ -37,6 +39,7 @@ class EmptyClassRule extends AbstractRule {
         sourceCode.ast?.classes?.each { classNode ->
             if (
                     !classNode.isInterface() &&
+                    !Modifier.isAbstract(classNode.modifiers) &&
                     !classNode.isEnum() &&
                     !isAnonymousInnerClass(classNode) &&
                     !isSubclass(classNode) &&

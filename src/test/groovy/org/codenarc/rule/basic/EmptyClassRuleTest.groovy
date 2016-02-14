@@ -64,7 +64,7 @@ class EmptyClassRuleTest extends AbstractRuleTestCase {
     @Test
     void testMultipleViolations() {
         final SOURCE = '''
-            abstract class AbstractEmpty {
+            class FirstEmpty {
             }
 
             class EmptyAsWell {
@@ -72,7 +72,7 @@ class EmptyClassRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber: 2, sourceLineText: 'class AbstractEmpty', messageText: violationMessage('AbstractEmpty')],
+            [lineNumber: 2, sourceLineText: 'class FirstEmpty {', messageText: violationMessage('FirstEmpty')],
             [lineNumber: 5, sourceLineText: 'class EmptyAsWell', messageText: violationMessage('EmptyAsWell')])
     }
 
@@ -139,6 +139,14 @@ class EmptyClassRuleTest extends AbstractRuleTestCase {
 
             class ArrayListOfStrings extends ArrayList<String> {
             }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testAbstractClasses_NoViolations() {
+        final SOURCE = '''
+            abstract class AbstractController { }
         '''
         assertNoViolations(SOURCE)
     }

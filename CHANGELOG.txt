@@ -9,10 +9,11 @@ NEW RULES
 - #136: TrailingComma rule (convention). (Yuriy Chulovskyy)
 
 UPDATED/ENHANCED RULES AND BUG FIXES
-- #124: UnusedVariableRule: Ignore variables annotated with @BaseScript.
-- #141: UnnecessaryDefInFieldDeclaration: false violation if comment includes the word "def".
+- #143: EmptyClass rule: also ignore abstract classes.
+- #124: UnusedVariable rule: Ignore variables annotated with @BaseScript.
+- #141: UnnecessaryDefInFieldDeclaration rule: false violation if comment includes the word "def".
 - #139: IdeTextReportWriter: Default line number to 0 so that IDE links are valid.
-- #131: UnusedImport does not handle Scala. Fix for #115. (Yuriy Chulovskyy)
+- #131: UnusedImport rule does not handle Scala. Fix for #115. (Yuriy Chulovskyy)
 - #133: Updated documentation for BracesForIfElse rule. (Yuriy Chulovskyy)
 - #130: Fixed issue #119 BracesForIfElse with curly braces inside GString. (Yuriy Chulovskyy)
 - #129: Fixed issue #121 False positive for UnusedPrivateField. (Yuriy Chulovskyy)

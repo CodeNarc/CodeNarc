@@ -430,7 +430,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
   Reports classes without methods, fields or properties. Why would you need a class like this?
 
-  This rule ignores interfaces, enums, anonymous inner classes, subclasses (extends), and classes with annotations.
+  This rule ignores interfaces, abstract classes, enums, anonymous inner classes, subclasses (extends), and classes with annotations.
 
 
 * {EmptyElseBlock} Rule
