@@ -26,7 +26,7 @@ import java.lang.reflect.Modifier
 /**
  * Reports classes without methods, fields or properties.
  *
- * Ignores interfaces, Enums, anonymous inner classes, subclasses (extends), and classes with annotations.
+ * Ignores interfaces, abstract classes, Enums, anonymous inner classes, subclasses (extends), and classes with annotations.
  *
  * @author Artur Gajowy
  */

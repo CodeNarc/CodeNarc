@@ -138,6 +138,18 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   where this rule is applied, you must use the file-based rule properties: applyToFileNames, doNotApplyToFileNames,
   applyToFilesMatching and doNotApplyToFilesMatching.
 
+*---------------------------+------------------------------------------------------------------+------------------------+
+| <<Property>>              | <<Description>>                                                  | <<Default Value>>      |
+*---------------------------+------------------------------------------------------------------+------------------------+
+| length                    | The maximum line length allowed.                                 | 120                    |
+*---------------------------+------------------------------------------------------------------+------------------------+
+| ignoreImportStatements    | If <<<true>>>, then do not apply this rule to import statements. | <<<true>>>             |
+*---------------------------+------------------------------------------------------------------+------------------------+
+| ignorePackageStatements   | If <<<true>>>, then do not apply this rule to package statements.| <<<true>>>             |
+*---------------------------+------------------------------------------------------------------+------------------------+
+| ignoreLineRegex           | If specified, then ignore lines matching this regular expression.| <<<null>>>             |
+*---------------------------+------------------------------------------------------------------+------------------------+
+
 
 * {MissingBlankLineAfterImports} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

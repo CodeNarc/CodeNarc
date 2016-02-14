@@ -33,6 +33,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
         assert rule.name == 'LineLength'
         assert rule.ignoreImportStatements
         assert rule.ignorePackageStatements
+        assert rule.ignoreLineRegex == null
     }
 
     @Test
@@ -118,6 +119,30 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 3, '// this is a really long comment 001234567890123456789012345678907890123456789012345678901234567890123456')
+    }
+
+    @Test
+    void testLineMatches_IgnoreLineRegex() {
+        final SOURCE = '''
+            class Person {
+                def name = '01234567890123456789'
+            }
+        '''
+        rule.length = 30
+        rule.ignoreLineRegex = /.*name.*/
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDoesNotMatch_IgnoreLineRegex() {
+        final SOURCE = '''
+            class Person {
+                def name = '01234567890123456789'
+            }
+        '''
+        rule.length = 30
+        rule.ignoreLineRegex = /.*xxx.*/
+        assertSingleViolation(SOURCE, 3, "def name = '01234567890123456789'")
     }
 
     protected Rule createRule() {

@@ -25,13 +25,16 @@ import org.codenarc.source.SourceCode
  *
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
+ * @author Chris Mair
   */
 class LineLengthRule extends AbstractAstVisitorRule {
+
     String name = 'LineLength'
     int priority = 2
     int length = 120 // The default max line length. Can be overridden
-    boolean ignoreImportStatements = true // import statements can be longer than the max line legnth
-    boolean ignorePackageStatements = true // import statements can be longer than the max line legnth
+    boolean ignoreImportStatements = true // import statements can be longer than the max line length
+    boolean ignorePackageStatements = true // import statements can be longer than the max line length
+    String ignoreLineRegex
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
@@ -45,31 +48,36 @@ class LineLengthRule extends AbstractAstVisitorRule {
         }
     }
 
-    private Boolean sourceViolatesLineLengthRule(String line) {
-        lineExceedsMaxLength(line) && (flagIfImport(line) || flagIfPackage(line) || flagIfRegularLine(line))
+    private boolean sourceViolatesLineLengthRule(String line) {
+        lineExceedsMaxLength(line) && !lineMatchesIgnoreLineRegex(line) && (flagIfImport(line) || flagIfPackage(line) || flagIfRegularLine(line))
     }
 
-    private Boolean flagIfImport(String line) {
+    private boolean flagIfImport(String line) {
         (sourceLineIsImport(line) && !ignoreImportStatements)
     }
 
-    private Boolean flagIfPackage(String line) {
+    private boolean flagIfPackage(String line) {
         (sourceLineIsPackage(line) && !ignorePackageStatements)
     }
 
-    private Boolean flagIfRegularLine(String line) {
+    private boolean flagIfRegularLine(String line) {
         !sourceLineIsImport(line) && !sourceLineIsPackage(line)
     }
 
-    private Boolean sourceLineIsImport(String line) {
+    private boolean sourceLineIsImport(String line) {
         line.trim().startsWith('import ')
     }
 
-    private Boolean sourceLineIsPackage(String line) {
+    private boolean sourceLineIsPackage(String line) {
         line.trim().startsWith('package ')
     }
 
-    private Boolean lineExceedsMaxLength(String line) {
+    private boolean lineExceedsMaxLength(String line) {
         line.length() > length
     }
+
+    private boolean lineMatchesIgnoreLineRegex(String line) {
+        line ==~ ignoreLineRegex
+    }
+
 }

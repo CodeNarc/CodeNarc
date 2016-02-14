@@ -9,6 +9,7 @@ NEW RULES
 - #136: TrailingComma rule (convention). (Yuriy Chulovskyy)
 
 UPDATED/ENHANCED RULES AND BUG FIXES
+- #144: LineLength rule: Add ignoreLineRegex.
 - #143: EmptyClass rule: also ignore abstract classes.
 - #124: UnusedVariable rule: Ignore variables annotated with @BaseScript.
 - #141: UnnecessaryDefInFieldDeclaration rule: false violation if comment includes the word "def".
