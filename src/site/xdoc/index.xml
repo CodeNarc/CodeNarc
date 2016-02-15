@@ -39,20 +39,19 @@ Static Analysis for Groovy: Less Bugs, Better Code
 
 <table>
 <tr>
-     <td width="50%">
-          <a href="http://meetcodenarc.appspot.com/"><img src="images/tryit.png" class="bigimage"/></a>
-          <a href="http://meetcodenarc.appspot.com/">CodeNarc Web Console</a> let's you play with the latest snapshot,
-               containing over 175 rules with more added each week.
-               Enter some text, click execute, and see the violations. Or run some <a href="http://meetcodenarc.appspot.com/">scripts</a>
-               <a href="http://meetcodenarc.appspot.com/edit/2001">we</a> <a href="http://meetcodenarc.appspot.com/edit/1">made</a>.
-     </td>
+    <td width="50%" valign="middle">
+        <div align="center">
+            <a href="http://sourceforge.net/projects/codenarc/files//"><img src="images/getit.png" class="bigimage" /></a>
+        </div>
+    </td>
      <td>
-             <a href="http://sourceforge.net/projects/codenarc/files//"><img src="images/getit.png" class="bigimage" /></a>
-          CodeNarc triggers violations based on rules. Click the links to the left to view all the rules, such as
-              the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
-              rules. Or you can <a href="codenarc-creating-ruleset.html">create your own ruleset</a>;
-              see how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
-
+         <section name="CodeNarc Rules">
+          CodeNarc triggers violations based on rules. Click the links to the left to view the
+          <a href="codenarc-rule-index.html">index of all rules</a>, or individual rule categories (rulesets), such as
+          the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
+          rules. Or you can <a href="codenarc-creating-ruleset.html">create your own ruleset</a>;
+          see how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
+         </section>
      </td>
 </tr>
 <tr>
