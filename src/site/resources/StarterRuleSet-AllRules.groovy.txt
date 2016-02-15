@@ -207,6 +207,7 @@ ruleset {
     NestedForLoop 
     NestedSynchronization 
     NoDef 
+    NoTabCharacter 
     NoWildcardImports 
     NonFinalPublicField 
     NonFinalSubclassOfSensitiveInterface 

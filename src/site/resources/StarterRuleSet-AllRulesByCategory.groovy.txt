@@ -93,6 +93,7 @@ ruleset {
     InvertedIfElse 
     LongLiteralWithLowerCaseL 
     NoDef 
+    NoTabCharacter 
     ParameterReassignment 
     TernaryCouldBeElvis 
     TrailingComma 

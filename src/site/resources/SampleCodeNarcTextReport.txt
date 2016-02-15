@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Jul 5, 2015 11:33:33 AM
+CodeNarc Report: Sample Project - Feb 15, 2016 3:34:13 PM
 
-Summary: TotalFiles=363 FilesWithViolations=35 P1=0 P2=47 P3=31
+Summary: TotalFiles=365 FilesWithViolations=37 P1=0 P2=50 P3=31
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
@@ -29,6 +29,14 @@ File: design/NestedForLoopRuleTest.groovy
 
 File: design/PrivateFieldCouldBeFinalRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.design.PrivateFieldCouldBeFinalRuleTest has 33 methods] Src=[class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {]
+
+File: formatting/BracesForIfElseRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=54 Msg=[The String '
+            if (someContainer."${SomeClass.SOME_CONSTANT}" != null)
+            {
+                doStuff()
+            }
+        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}'] Src=[final SOURCE = ''']
 
 File: formatting/SpaceAfterClosingBraceRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=39 Msg=[The String '
@@ -198,7 +206,7 @@ File: generic/RequiredRegexRuleTest.groovy
 
 File: grails/GrailsMassAssignmentRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=37 Msg=[The String '
-        	class Person {
+            class Person {
                 String name
                 Boolean isAdmin
             }
@@ -243,47 +251,47 @@ File: groovyism/GStringAsMapKeyRuleTest.groovy
 
 File: groovyism/GStringExpressionWithinStringRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=50 Msg=[The String '
-        	class SomeClass {
-        	    @SomeAnnotationOnField('${sample.property1}')
-        	    String sampleProperty
-        	    
-        	    @SomeAnnotationOnMethod('${sample.property2}')
-        	    void method() {
-        	    }
-        	}
+            class SomeClass {
+                @SomeAnnotationOnField('${sample.property1}')
+                String sampleProperty
+
+                @SomeAnnotationOnMethod('${sample.property2}')
+                void method() {
+                }
+            }
         ' contains a GString-type expression: '${sample.property1}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=65 Msg=[The String '
             @SomeAnnotationOnClass('${sample.property1}')
-        	class SomeClass {
-        	    @SomeAnnotationOnField('${sample.property2}')
-        	    String sampleProperty
-        	    
-        	    @SomeAnnotationOnMethod('${sample.property3}')
-        	    void method() {
-        	    }
-        	}
+            class SomeClass {
+                @SomeAnnotationOnField('${sample.property2}')
+                String sampleProperty
+
+                @SomeAnnotationOnMethod('${sample.property3}')
+                void method() {
+                }
+            }
         ' contains a GString-type expression: '${sample.property1}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=81 Msg=[The String '
             @SomeAnnotationOnClass(attribute='${sample.property1}',
                             nested=[@NestedAnnotation('${sample.property2}'), 
                                     @NestedAnnotation('${sample.property3}')],  
                              someOtherAttribute='${sample.property4}')
-        	class SomeClass {
-        	}
+            class SomeClass {
+            }
         ' contains a GString-type expression: '${sample.property1}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=94 Msg=[The String '
             @SomeAnnotationOnClass(attribute=['${sample.property1}', '${sample.property2}'])
-        	class SomeClass {
-        	}
+            class SomeClass {
+            }
         ' contains a GString-type expression: '${sample.property1}', '${sample.property2}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=104 Msg=[The String '
-        	def str1 = "123"
-        	def str2 = "abc def ghi"
-        	def str3 = "abc ${count}"
-        	def str4 = "abc $count    }"
-        	def str5 = "abc {123}"
-        	def str6 = "abc ${}"
-        	def str7 = "total: ${count * 25}"
+            def str1 = "123"
+            def str2 = "abc def ghi"
+            def str3 = "abc ${count}"
+            def str4 = "abc $count    }"
+            def str5 = "abc {123}"
+            def str6 = "abc ${}"
+            def str7 = "total: ${count * 25}"
         ' contains a GString-type expression: '${count}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=118 Msg=[The String '
             def str1 = 'total: ${count}'
@@ -294,12 +302,12 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=124 Msg=[The String 'def str2 = 'average: ${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
     Violation: Rule=GStringExpressionWithinString P=2 Line=124 Msg=[The String ''${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
     Violation: Rule=GStringExpressionWithinString P=2 Line=129 Msg=[The String '
-        	class SomeClass {
-        	    @SomeAnnotationOnMethod('${sample.property}')
-        	    void method() {
-        	        def str1 = 'total: ${count}'
-        	    }
-        	}
+            class SomeClass {
+                @SomeAnnotationOnMethod('${sample.property}')
+                void method() {
+                    def str1 = 'total: ${count}'
+                }
+            }
         ' contains a GString-type expression: '${sample.property}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=137 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
     Violation: Rule=GStringExpressionWithinString P=2 Line=137 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
@@ -380,6 +388,7 @@ File: unused/UnusedMethodParameterRuleTest.groovy
         ' contains a GString-type expression: '${startDate}" }'] Src=[final SOURCE = ''']
 
 File: unused/UnusedPrivateFieldRuleTest.groovy
+    Violation: Rule=MethodCount P=2 Line=29 Msg=[Class org.codenarc.rule.unused.UnusedPrivateFieldRuleTest has 31 methods] Src=[class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=168 Msg=[The String '
             class MyClass {
                 private int count
@@ -453,4 +462,7 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
             }
         ' contains a GString-type expression: '${varName}'] Src=[final SOURCE = ''']
 
-[CodeNarc (http://www.codenarc.org) v0.23]
+File: unused/UnusedVariableRuleTest.groovy
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 32 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase {]
+
+[CodeNarc (http://www.codenarc.org) v0.25]
