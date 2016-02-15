@@ -152,7 +152,7 @@ Convention Rules  ("<rulesets/convention.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.25>
 
-  Checks that all source files do not contain the tab character
+  Checks that all source files do not contain the tab character.
 
 * {ParameterReassignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -218,15 +218,16 @@ Convention Rules  ("<rulesets/convention.xml>")
   Rationale: Putting this comma in make is easier
   to change the order of the elements or add new elements on the end.
 
-*--------------------+-------------------------------------------------------+---------------------+
-| <<Property>>       | <<Description>>                                       | <<Default Value>>   |
-*--------------------+-------------------------------------------------------+---------------------+
-| checkList          | To disable checking, set the property to <<<false>>>  | <<true>>            |
-*--------------------+-------------------------------------------------------+---------------------+
-| checkMap           | To disable checking, set the property to <<<false>>>  | <<<true>>>          |
-*--------------------+-------------------------------------------------------+---------------------+
+*--------------------+---------------------------------------------------------------------+---------------------+
+| <<Property>>       | <<Description>>                                                     | <<Default Value>>   |
+*--------------------+---------------------------------------------------------------------+---------------------+
+| checkList          | To disable checking List literals, set this property to <<<false>>> | <<<true>>>          |
+*--------------------+---------------------------------------------------------------------+---------------------+
+| checkMap           | To disable checking Map literals, set this property to <<<false>>>  | <<<true>>>          |
+*--------------------+---------------------------------------------------------------------+---------------------+
 
   This is valid code:
+
 -------------------------------------------------------------------------------
   int[] array1 = [] // one line declaration
   int[] array2 = [ // empty list
@@ -239,11 +240,11 @@ Convention Rules  ("<rulesets/convention.xml>")
 -------------------------------------------------------------------------------
 
   Example of violations:
+
 -------------------------------------------------------------------------------
   int[] array2 = [1,
                   2 // there is no trailing comma
                  ]
-
 -------------------------------------------------------------------------------
 
 * {VectorIsObsolete} Rule
