@@ -106,11 +106,21 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyToFilesMatching_InvalidRegularExpression() {
+        shouldFailWithMessageContaining(IllegalArgumentException, '*') { rule.applyToFilesMatching = '*Test' }
+    }
+
+    @Test
     void testDoNotApplyToFilesMatching() {
         rule.doNotApplyToFilesMatching = NO_MATCH
         assertSingleViolation(SOURCE)
         rule.doNotApplyToFilesMatching = MATCH
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDoNotApplyToFilesMatching_InvalidRegularExpression() {
+        shouldFailWithMessageContaining(IllegalArgumentException, '*') { rule.doNotApplyToFilesMatching = '*Test' }
     }
 
     @Test

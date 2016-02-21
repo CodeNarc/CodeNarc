@@ -25,6 +25,7 @@ import org.codenarc.util.ImportUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Abstract superclass for Rules.
@@ -329,6 +330,7 @@ public abstract class AbstractRule implements Rule {
     }
 
     public void setApplyToFilesMatching(String applyToFilesMatching) {
+        validateRegularExpression(applyToFilesMatching);
         this.applyToFilesMatching = applyToFilesMatching;
     }
 
@@ -337,6 +339,7 @@ public abstract class AbstractRule implements Rule {
     }
 
     public void setDoNotApplyToFilesMatching(String doNotApplyToFilesMatching) {
+        validateRegularExpression(doNotApplyToFilesMatching);
         this.doNotApplyToFilesMatching = doNotApplyToFilesMatching;
     }
 
@@ -371,4 +374,9 @@ public abstract class AbstractRule implements Rule {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    private void validateRegularExpression(String regex) {
+        Pattern.compile(regex);
+    }
+
 }
