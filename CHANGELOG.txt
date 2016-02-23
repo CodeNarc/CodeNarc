@@ -2,6 +2,11 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.25.1 (??? 2016)
+--------------------------------------
+- #147: UnusedImport: misses import reference within GString.
+
+
 Changes in version 0.25.0 (Feb 2016)
 --------------------------------------
 NEW RULES

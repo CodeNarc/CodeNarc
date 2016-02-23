@@ -80,7 +80,7 @@ class UnusedImportRule extends AbstractRule {
 
     private countUsage(String line, String pattern) {
         final INVALID = '[^a-zA-Z0-9_\\$]'
-        def regexp = /($INVALID|^)${pattern}($INVALID|$)/
+        def regexp = /($INVALID|^|\$)${pattern}($INVALID|$)/
         return (line =~ regexp).count
     }
 }
