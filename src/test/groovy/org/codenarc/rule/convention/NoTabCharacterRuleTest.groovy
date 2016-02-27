@@ -28,7 +28,7 @@ class NoTabCharacterRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testRuleProperties() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'NoTabCharacter'
     }
 

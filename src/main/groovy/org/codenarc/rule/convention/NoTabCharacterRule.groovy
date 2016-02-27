@@ -26,7 +26,7 @@ import org.codenarc.source.SourceCode
  */
 class NoTabCharacterRule extends AbstractRule {
     String name = 'NoTabCharacter'
-    int priority = 2
+    int priority = 3
     String tabCharacter = '\t'
     void applyTo(SourceCode sourceCode, List violations) {
         if (sourceCode.getText().contains(tabCharacter)) {
