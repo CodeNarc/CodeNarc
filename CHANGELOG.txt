@@ -2,10 +2,10 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.25.1 (??? 2016)
+Changes in version 0.25.1 (Feb 2016)
 --------------------------------------
 - #147: UnusedImport: misses import reference within GString.
-
+- Change NoTabCharacter rule priority to 3.
 
 Changes in version 0.25.0 (Feb 2016)
 --------------------------------------
