@@ -123,6 +123,17 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 58, sourceLineText: 'if (list.size > 5',          messageText: "Opening brace should not be on the same line as 'if'"])
     }
 
+    @Test
+    void testEnum_NoViolations() {
+        final SOURCE = '''
+            package com.mycompany.enums
+
+            enum Season {
+                SUMMER, WINTER
+            }'''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         BracesForIfElseRule rule = new BracesForIfElseRule()
         rule.validateElse = true

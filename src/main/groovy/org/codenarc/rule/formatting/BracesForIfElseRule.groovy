@@ -67,7 +67,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
     void visitIfElse(IfStatement node) {
         BracesForIfElseRule myRule = rule as BracesForIfElseRule
 
-        if (isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
+        if (!AstUtil.isFromGeneratedSourceCode(node) && isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
             String lastSourceLineWithoutExpression = lastSourceLineTrimmed(node.booleanExpression) -
                     getLastLineOfNodeText(node.booleanExpression, sourceCode).trim()
             if (myRule.sameLine) {
@@ -87,8 +87,7 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
     }
 
     void visitElse(BracesForIfElseRule myRule, IfStatement node) {
-        //TODO: Understand isFirstVisit and apply them as appropriate to the below block
-        if (myRule.validateElse && node.elseBlock) {
+        if (myRule.validateElse && node.elseBlock && !AstUtil.isFromGeneratedSourceCode(node)) {
             //if user has not explicitly set the else brace settings, 'inherit' them from sameLine
             if (myRule.elseOnSameLineAsClosingBrace == null) {
                 myRule.elseOnSameLineAsClosingBrace = myRule.sameLine
