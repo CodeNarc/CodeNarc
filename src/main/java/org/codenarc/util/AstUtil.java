@@ -546,9 +546,10 @@ public class AstUtil {
             Expression variableExpression = variableExpressions.get(0);
             int startOfDeclaration = declarationExpression.getColumnNumber();
             int startOfVariableName = variableExpression.getColumnNumber();
-            String sourceLine = sourceCode.getLines().get(declarationExpression.getLineNumber() - 1);
+            int sourceLineNumber = findFirstNonAnnotationLine(declarationExpression, sourceCode);
+            String sourceLine = sourceCode.getLines().get(sourceLineNumber-1);
 
-            String modifiers = (startOfDeclaration >= 0 && startOfVariableName >= 0) ?
+            String modifiers = (startOfDeclaration >= 0 && startOfVariableName >= 0 && sourceLine.length() >= startOfVariableName) ?
                 sourceLine.substring(startOfDeclaration - 1, startOfVariableName - 1) : "";
             return modifiers.contains("final");
         }

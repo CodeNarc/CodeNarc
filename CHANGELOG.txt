@@ -5,6 +5,8 @@ http://www.codenarc.org
 Changes in version 0.??.? (??? 2016)
 --------------------------------------
 - #150: BracesForIfElseRule can't process enum files
+- #152: VariableNameRule: Variables with annotations can cause ArrayIndexOutOfBoundsException
+
 
 Changes in version 0.25.1 (Feb 2016)
 --------------------------------------

@@ -67,6 +67,25 @@ class AstUtilTest extends AbstractTestCase {
         class OtherClass {
             int myIntField = 45
             String myStringField // comment
+
+            def someMethod() {
+                String var1 = 'abc'
+                final int var2 = 99
+                final var3 = 'x'
+
+                @Field Map<String, String> var4 = new HashMap<String, String>(System.getenv())
+
+                @Field
+                Map<String, String> var5 = new HashMap<String, String>(System.getenv())
+
+                @Field Map var6 = new HashMap<String, String>(System.getenv())
+
+                @Field
+                Map var7 = new HashMap<String, String>(System.getenv())
+
+                @Field
+                final Map var8 = new HashMap<String, String>(System.getenv())
+            }
         }
 
         // outside of class -- script
@@ -74,6 +93,18 @@ class AstUtilTest extends AbstractTestCase {
     '''
     private visitor
     private sourceCode
+
+    @Test
+    void testIsFinalVariable() {
+        assert !AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var1'), sourceCode)
+        assert AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var2'), sourceCode)
+        assert AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var3'), sourceCode)
+        assert !AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var4'), sourceCode)
+        assert !AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var5'), sourceCode)
+        assert !AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var6'), sourceCode)
+        assert !AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var7'), sourceCode)
+        assert AstUtil.isFinalVariable(declarationExpressionForVariableNamed('var8'), sourceCode)
+    }
 
     @Test
     void testIsFromGeneratedSourceCode() {
@@ -315,6 +346,11 @@ class AstUtilTest extends AbstractTestCase {
         }
         methodCall
     }
+
+    private DeclarationExpression declarationExpressionForVariableNamed(String name) {
+        return visitor.declarationExpressions.find { declarationExpression -> declarationExpression.variableExpression.name == name }
+    }
+
 }
 
 class AstUtilTestVisitor extends ClassCodeVisitorSupport {

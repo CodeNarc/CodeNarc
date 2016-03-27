@@ -308,6 +308,19 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_FieldAnnotationWithGenerics() {
+        // See https://github.com/CodeNarc/CodeNarc/issues/152
+        final SOURCE = '''
+            @Field
+            Map<String, String> env = new HashMap<String, String>(System.getenv())
+
+            @Field
+            Map env = new HashMap<String, String>(System.getenv())
+            '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new VariableNameRule()
     }
