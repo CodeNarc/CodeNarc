@@ -24,13 +24,19 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
+ * @author Chris Mair
   */
 class BracesForIfElseRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testRuleProperties() {
+        def rule = new BracesForIfElseRule()
         assert rule.priority == 2
         assert rule.name == 'BracesForIfElse'
+        assert rule.sameLine == true
+        assert rule.validateElse == false
+        assert rule.elseOnSameLineAsClosingBrace == null
+        assert rule.elseOnSameLineAsOpeningBrace == null
     }
 
     @Test
@@ -49,10 +55,10 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testBraceOnNewLine_SameLineFalse_GString_NoViolations() {
+    void testBraceOnNewLine_SameLineFalse_OtherBraces_NoViolations() {
         rule.sameLine = false
         final SOURCE = '''
-            if (someContainer."${SomeClass.SOME_CONSTANT}" != null)
+            if (someContainer."${SomeClass.SOME_CONSTANT}" != null)  // And what about {}
             {
                 doStuff()
             }

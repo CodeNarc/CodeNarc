@@ -23,6 +23,7 @@ import org.junit.Test
  * Tests for BracesForClassRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class BracesForClassRuleTest extends AbstractRuleTestCase {
 
@@ -30,6 +31,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BracesForClass'
+        assert rule.sameLine == true
     }
 
     @Test
@@ -171,6 +173,18 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSameLineFalse_BracesWithinComment_KnownIssue_Violation() {
+        rule.sameLine = false
+        final SOURCE = '''
+            class MyClass extends File  // What about {}
+            {
+
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'class MyClass extends File  // What about {}', 'Opening brace for the class MyClass')
     }
 
     @Test

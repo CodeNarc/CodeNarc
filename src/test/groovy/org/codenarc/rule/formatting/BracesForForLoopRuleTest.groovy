@@ -23,18 +23,19 @@ import org.junit.Test
  * Tests for BracesForForLoopRule
  *
  * @author Hamlet D'Arcy
-  */
+ * @author Chris Mair
+ */
 class BracesForForLoopRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BracesForForLoop'
+        assert rule.sameLine == true
     }
 
     @Test
     void testMultilineForLoop() {
-
         final SOURCE = '''
             for (int x = 0;
                     x < 10;
@@ -46,7 +47,6 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testMultilineForLoopOverride() {
-
         final SOURCE = '''
             for (int x = 0;
                     x < 10;
@@ -95,6 +95,18 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         final SOURCE = new File(testFile.toURI()).text
         rule.sameLine = false
         assertSingleViolation(SOURCE, 23, 'for (i in 0..3){', 'Braces should start on a new line')
+    }
+
+    @Test
+    void testSameLineFalse_OtherBraces_NoViolations() {
+        final SOURCE = '''
+            for(String name=${SomeClass.SOME_CONSTANT}; name==null;)  // And what about {}
+            {
+                doStuff()
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {

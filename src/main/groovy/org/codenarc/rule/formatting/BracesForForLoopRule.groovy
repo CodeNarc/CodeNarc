@@ -38,12 +38,13 @@ class BracesForForLoopAstVisitor extends AbstractAstVisitor {
     @Override
     void visitForLoop(ForStatement node) {
         if (AstUtil.isBlock(node.loopBlock)) {
+            boolean isBraceOnSameLine = node.loopBlock.lineNumber == node.collectionExpression.lastLineNumber
             if (rule.sameLine) {
-                if(!lastSourceLineTrimmed(node.collectionExpression)?.contains('{')) {
+                if (!isBraceOnSameLine) {
                     addViolation(node, 'Braces should start on the same line')
                 }
             } else {
-                if(lastSourceLineTrimmed(node.collectionExpression)?.contains('{')) {
+                if (isBraceOnSameLine) {
                     addViolation(node, 'Braces should start on a new line')
                 }
             }

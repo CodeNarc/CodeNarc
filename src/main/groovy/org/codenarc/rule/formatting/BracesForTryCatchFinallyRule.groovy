@@ -35,8 +35,10 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @author Hamlet D'Arcy
  * @author <a href="mailto:mbjarland@gmail.com">Matias Bjarland</a>
+ * @author Chris Mair
  */
 class BracesForTryCatchFinallyRule extends AbstractAstVisitorRule {
+
     String name = 'BracesForTryCatchFinally'
     int priority = 2
     Class astVisitorClass = BracesForTryCatchFinallyAstVisitor
@@ -55,12 +57,14 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
     @Override
     void visitTryCatchFinally(TryCatchStatement node) {
         BracesForTryCatchFinallyRule myRule = rule as BracesForTryCatchFinallyRule
+        boolean isBraceOnSameLine = node.lineNumber == node.tryStatement.lineNumber
+
         if (myRule.sameLine) {
-            if(!sourceLineTrimmed(node)?.contains('{')) {
+            if (!isBraceOnSameLine) {
                 addViolation(node, "Opening brace should be on the same line as 'try'")
             }
         } else {
-            if(sourceLineTrimmed(node)?.contains('{')) {
+            if (isBraceOnSameLine) {
                 addViolation(node, "Opening brace should not be on the same line as 'try'")
             }
         }
@@ -91,9 +95,10 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
                     addViolation(stmt, "'catch' should not be on the same line as the closing brace")
                 }
 
-                if (myRule.catchOnSameLineAsOpeningBrace && !srcLine?.contains('{')) {
+                boolean isBraceOnSameLine = stmt.lineNumber == stmt.code.lineNumber
+                if (myRule.catchOnSameLineAsOpeningBrace && !isBraceOnSameLine) {
                     addViolation(stmt, "Opening brace should be on the same line as 'catch'")
-                } else if (!myRule.catchOnSameLineAsOpeningBrace && srcLine?.contains('}')) {
+                } else if (!myRule.catchOnSameLineAsOpeningBrace && isBraceOnSameLine) {
                     addViolation(stmt, "Opening brace should not be on the same line as 'catch'")
                 }
             }

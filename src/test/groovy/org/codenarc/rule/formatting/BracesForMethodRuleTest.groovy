@@ -24,7 +24,8 @@ import org.junit.Test
  *
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @author Hamlet D'Arcy
-  */
+ * @author Chris Mair
+ */
 class BracesForMethodRuleTest extends AbstractRuleTestCase {
 
     @Test
@@ -277,6 +278,34 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSameLineFalse_GString_NoViolations() {
+        rule.sameLine = false
+        final SOURCE = '''
+            class MyClass {
+                int size(String name = "${SomeClass.SOME_CONSTANT}")
+                {
+                    return 99
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSameLineFalse_BracesWithinComment_KnownIssue_Violation() {
+        rule.sameLine = false
+        final SOURCE = '''
+            class MyClass {
+                int size(String name)    // What about {}
+                {
+                    return 99
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'int size(String name)    // What about {}', 'Opening brace')
     }
 
     protected Rule createRule() {

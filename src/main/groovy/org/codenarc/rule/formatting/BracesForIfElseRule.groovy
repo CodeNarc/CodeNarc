@@ -15,8 +15,6 @@
  */
 package org.codenarc.rule.formatting
 
-import static org.codenarc.util.AstUtil.getLastLineOfNodeText
-
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -68,14 +66,13 @@ class BracesForIfElseAstVisitor extends AbstractAstVisitor {
         BracesForIfElseRule myRule = rule as BracesForIfElseRule
 
         if (!AstUtil.isFromGeneratedSourceCode(node) && isFirstVisit(node) && AstUtil.isBlock(node.ifBlock)) {
-            String lastSourceLineWithoutExpression = lastSourceLineTrimmed(node.booleanExpression) -
-                    getLastLineOfNodeText(node.booleanExpression, sourceCode).trim()
+            boolean isBraceOnSameLine = node.ifBlock.lineNumber == node.booleanExpression.lastLineNumber
             if (myRule.sameLine) {
-                if (!lastSourceLineWithoutExpression.contains('{')) {
+                if (!isBraceOnSameLine) {
                     addViolation(node, "Opening brace should be on the same line as 'if'")
                 }
             } else {
-                if (lastSourceLineWithoutExpression.contains('{')) {
+                if (isBraceOnSameLine) {
                     addViolation(node, "Opening brace should not be on the same line as 'if'")
                 }
             }

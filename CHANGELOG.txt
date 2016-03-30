@@ -4,14 +4,17 @@ http://www.codenarc.org
 
 Changes in version 0.??.? (??? 2016)
 --------------------------------------
-- #150: BracesForIfElseRule can't process enum files
-- #152: VariableNameRule: Variables with annotations can cause ArrayIndexOutOfBoundsException
+- #150: BracesForIfElseRule can't process enum files.
+- #152: VariableNameRule: Variables with annotations can cause ArrayIndexOutOfBoundsException.
+- #149: BracesForForLoop, BracesForIfElseRule: Improve validation if there are GString curly braces as part of expression.
+        BracesForTryCatchFinally: Improve validation if there are curly braces in comments.
 
 
 Changes in version 0.25.1 (Feb 2016)
 --------------------------------------
 - #147: UnusedImport: misses import reference within GString.
 - Change NoTabCharacter rule priority to 3.
+
 
 Changes in version 0.25.0 (Feb 2016)
 --------------------------------------
