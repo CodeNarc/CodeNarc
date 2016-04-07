@@ -614,3 +614,15 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
   Checks that no lines of source code end with whitespace characters.
 
+
+* {Indentation} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.24>
+
+  Checks if indents are proper
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    // TODO: Add examples
+-------------------------------------------------------------------------------
