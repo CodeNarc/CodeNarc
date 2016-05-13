@@ -31,6 +31,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryConstructor'
+        assert rule.ignoreAnnotations == false
     }
 
     @Test
@@ -125,6 +126,29 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 5, 'public MyInnerClass() {}', 'The constructor can be safely deleted')
+    }
+
+    @Test
+    void testAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+                @Deprecated
+                MyClass() {}
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'MyClass() {}', 'The constructor can be safely deleted')
+    }
+
+    @Test
+    void testIgnoreAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+                @Deprecated
+                MyClass() {}
+            }
+        '''
+        rule.ignoreAnnotations = true
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
