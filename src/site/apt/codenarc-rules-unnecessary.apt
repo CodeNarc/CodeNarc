@@ -313,6 +313,13 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's
   <<<public>>>, has an empty body, and takes no arguments, or else contains only a single call to <<<super()>>>.
 
+*-------------------+----------------------------------------------------------------+-------------------+
+| <<Property>>      | <<Description>>                                                | <<Default Value>> |
+*-------------------+----------------------------------------------------------------+-------------------+
+| ignoreAnnotations | If <<<true>>>, then do not report violations if a constructor  | false             |
+|                   | has one or more annotations.                                   |                   |
+*-------------------+----------------------------------------------------------------+-------------------+
+
   Example of violations:
 
 -------------------------------------------------------------------------------

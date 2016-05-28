@@ -36,6 +36,7 @@ class UnnecessaryConstructorRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryConstructor'
     int priority = 3
     Class astVisitorClass = UnnecessaryConstructorAstVisitor
+    boolean ignoreAnnotations = false
 }
 
 class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
@@ -48,7 +49,8 @@ class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
     }
 
     private void analyzeConstructor(ConstructorNode node) {
-        if(isEmptyOrJustCallsSuper(node) && !Modifier.isPrivate(node.modifiers) && node.parameters?.size() == 0) {
+        if(isEmptyOrJustCallsSuper(node) && (!rule.ignoreAnnotations || !hasAnnotations(node)) &&
+                !Modifier.isPrivate(node.modifiers) && node.parameters?.size() == 0) {
              addViolation node, 'The constructor can be safely deleted'
         }
     }
@@ -71,5 +73,9 @@ class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
             onlyStatement.expression instanceof ConstructorCallExpression &&
             onlyStatement.expression.superCall &&
             onlyStatement.expression.arguments.expressions.empty
+    }
+
+    private boolean hasAnnotations(ConstructorNode node) {
+        !node.annotations.empty
     }
 }
