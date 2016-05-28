@@ -16,4 +16,5 @@
     <rule class='org.codenarc.rule.imports.ImportFromSunPackagesRule'/>
     <rule class='org.codenarc.rule.imports.MisorderedStaticImportsRule'/>
     <rule class='org.codenarc.rule.imports.NoWildcardImportsRule'/>
+    <rule class='org.codenarc.rule.imports.MisorderedImportsRule'/>
 </ruleset>

@@ -2,6 +2,10 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.26.0 (??? 2016)
+--------------------------------------
+- #160: MisorderedImports rule (imports) - Imports should be sorted alphabetically and in groups
+
 Changes in version 0.25.2 (Mar 2016)
 --------------------------------------
 - #150: BracesForIfElseRule can't process enum files.
