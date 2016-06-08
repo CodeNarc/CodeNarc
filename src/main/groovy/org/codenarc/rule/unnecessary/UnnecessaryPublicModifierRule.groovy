@@ -47,7 +47,9 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodEx(MethodNode node) {
-        checkDeclaration(node, node.name, 'methods')
+        if (node.genericsTypes == null || node.genericsTypes.length == 0) {
+            checkDeclaration(node, node.name, 'methods')
+        }
         super.visitMethodEx(node)
     }
 
