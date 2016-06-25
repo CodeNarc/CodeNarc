@@ -133,6 +133,46 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assert warnMessages.empty
     }
 
+    @Test
+    void testPublicGenericClass() {
+        final SOURCE = '''
+            public class MyClass<T> {
+                T someProperty
+            }
+        '''
+        assertSingleViolation(SOURCE, 2, 'public class MyClass<T>', 'The public keyword is unnecessary for classes')
+    }
+
+    @Test
+    void testPublicGenericMethodWithReturnGenericType() {
+        final SOURCE = '''
+             class MyClass {
+                public <T> T myMethod() { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testPublicGenericMethodWithVoidReturnType() {
+        final SOURCE = '''
+             class MyClass {
+                public <T> void myMethod(T t) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testPublicGenericConstructor() {
+        final SOURCE = '''
+             class MyClass<T, K> {
+                public MyClass(T t, K k) { }
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'public MyClass(T t, K k) { }', 'The public keyword is unnecessary for constructors')
+    }
+
     protected Rule createRule() {
         new UnnecessaryPublicModifierRule()
     }
