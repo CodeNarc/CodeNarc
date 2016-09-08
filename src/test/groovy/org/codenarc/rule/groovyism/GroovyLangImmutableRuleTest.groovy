@@ -99,6 +99,25 @@ class GroovyLangImmutableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, '@Imtl', 'groovy.lang.Immutable is deprecated in favor of groovy.transform.Immutable')
     }
 
+    @Test
+    void testJavaxImport() {
+        final SOURCE = '''
+              import javax.annotation.concurrent.Immutable
+              @Immutable
+              class Person { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testJavaxQualified() {
+        final SOURCE = '''
+              @javax.annotation.concurrent.Immutable
+              class Person { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new GroovyLangImmutableRule()
     }
