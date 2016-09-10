@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,14 +36,16 @@ class GroovyLangImmutableRule extends AbstractAstVisitorRule {
 class GroovyLangImmutableAstVisitor extends AbstractAstVisitor {
     boolean groovyTransformIsStarImported = false
     boolean groovyTransformIsImported = false
+    boolean javaxImmutableAnnotationIsImported = false
     List<String> aliases = []
-    
+
     @Override
     void visitImports(ModuleNode node) {
 
         groovyTransformIsImported  = node.imports.any { it.type.name == 'groovy.transform.Immutable' }
+        javaxImmutableAnnotationIsImported = node.imports.any { it.type.name == 'javax.annotation.concurrent.Immutable' }
         groovyTransformIsStarImported = node.starImports.any { it.packageName == 'groovy.transform.' }
-        aliases = node.imports.findAll { it.type.name == 'groovy.lang.Immutable' && it.alias }*.alias 
+        aliases = node.imports.findAll { it.type.name == 'groovy.lang.Immutable' && it.alias }*.alias
         super.visitImports(node)
     }
 
@@ -51,7 +53,7 @@ class GroovyLangImmutableAstVisitor extends AbstractAstVisitor {
         node?.annotations?.each { AnnotationNode anno ->
             if (anno?.classNode?.name == 'groovy.lang.Immutable') {
                 addViolation(anno, 'groovy.lang.Immutable is deprecated in favor of groovy.transform.Immutable')
-            } else if (anno?.classNode?.name == 'Immutable' && !groovyTransformIsStarImported && !groovyTransformIsImported ) {
+            } else if (anno?.classNode?.name == 'Immutable' && !groovyTransformIsStarImported && !groovyTransformIsImported && !javaxImmutableAnnotationIsImported) {
                 addViolation(anno, 'groovy.lang.Immutable is deprecated in favor of groovy.transform.Immutable')
             } else if (aliases.contains(anno?.classNode?.name)) {
                 addViolation(anno, 'groovy.lang.Immutable is deprecated in favor of groovy.transform.Immutable')
