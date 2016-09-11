@@ -6,6 +6,7 @@ Changes in version 0.26.0 (??? 2016)
 --------------------------------------
 - #158: UnnecessaryConstructor: Add ignoreAnnotations to optionally ignore constructors with annotations. (Thanks to Daniel Spilker)
 - #162: UnnecessaryPublicModifierRule: Ignore generics methods. (Thanks to norbson)
+- #166: Exclude `javax.annotation.concurrent.Immutable` from GroovyLangImmutable. (Thanks to Mike Kobit)
 
 
 Changes in version 0.25.2 (Mar 2016)
