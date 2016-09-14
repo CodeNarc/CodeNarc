@@ -58,6 +58,52 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testIgnoreAnonymousClass() {
+        final SOURCE = '''
+            interface IResult {
+                int getIntValue()
+            }
+
+            class MyClass {
+                private static final CONSTANT_RESULT = 5
+
+                IResult operate(int parameter) {
+                    return new IResult() {
+                         @Override
+                         int getIntValue() {
+                             CONSTANT_RESULT
+                         }
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testIgnoreAnonymousClassWithReturnStatement() {
+        final SOURCE = '''
+            interface IResult {
+                int getIntValue()
+            }
+
+            class MyClass {
+               private static final CONSTANT_RESULT = 5
+
+               IResult operate() {
+                   return new IResult(int parameter) {
+                        @Override
+                        int getIntValue() {
+                            return CONSTANT_RESULT
+                        }
+                   }
+               }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testIgnoreProtectedGetterMethods() {
         final SOURCE = '''
             class MyClass {
