@@ -65,7 +65,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             }
 
             class MyClass {
-                private static final CONSTANT_RESULT = 5
+                private static final int CONSTANT_RESULT = 5
 
                 IResult operate(int parameter) {
                     return new IResult() {
@@ -88,7 +88,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
             }
 
             class MyClass {
-               private static final CONSTANT_RESULT = 5
+               private static final int CONSTANT_RESULT = 5
 
                IResult operate() {
                    return new IResult(int parameter) {
