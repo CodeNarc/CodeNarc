@@ -42,6 +42,8 @@ class GetterMethodCouldBePropertyRule extends AbstractAstVisitorRule {
 
 class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
+    private static final String CONSTANT_NAME_REGEX = /[A-Z].*/
+
     private final staticFieldNames = []
 
     @Override
@@ -64,7 +66,7 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
             if (statement instanceof ExpressionStatement) {
                 if (statement.expression instanceof ConstantExpression) {
                     addViolation(node, createMessage(node))
-                } else if (statement.expression instanceof VariableExpression && statement.expression.variable ==~ /[A-Z].*/) {
+                } else if (statement.expression instanceof VariableExpression && statement.expression.variable ==~ CONSTANT_NAME_REGEX) {
                     addViolation(node, createMessage(node))
                 } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
                     addViolation(node, createMessage(node))
@@ -73,6 +75,8 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
                 if (statement.expression instanceof ConstantExpression) {
                     addViolation(node, createMessage(node))
                 } else if (statement.expression instanceof ClassExpression) {
+                    addViolation(node, createMessage(node))
+                } else if (statement.expression instanceof VariableExpression && statement.expression.variable ==~ CONSTANT_NAME_REGEX) {
                     addViolation(node, createMessage(node))
                 } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
                     addViolation(node, createMessage(node))

@@ -73,7 +73,89 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testConstantReturn() {
+    void testAnonymousInnerClass_ConstantFieldReturn() {
+        final SOURCE = '''
+            interface IResult {
+                int getIntValue()
+            }
+
+            class MyClass {
+                private static final CONSTANT_RESULT = 5
+
+                IResult operate(int parameter) {
+                    return new IResult() {
+                        @Override
+                        int getIntValue() {
+                            CONSTANT_RESULT
+                        }
+                    }
+                }
+            }
+            '''
+        assertSingleViolation(SOURCE, 12,
+                'int getIntValue()',
+                "The method 'getIntValue ' in class MyClass\$1 can be expressed more simply as the field declaration\nfinal int intValue = CONSTANT_RESULT")
+    }
+
+    @Test
+    void testAnonymousInnerClass_ConstantFieldReturnExplicit() {
+        final SOURCE = '''
+            interface IResult {
+                int getIntValue()
+            }
+
+            class MyClass {
+                private static final CONSTANT_RESULT = 5
+
+                IResult operate(int parameter) {
+                    return new IResult() {
+                        @Override
+                        int getIntValue() {
+                            return CONSTANT_RESULT
+                        }
+                    }
+                }
+            }
+            '''
+        assertSingleViolation(SOURCE, 12,
+                'int getIntValue()',
+                "The method 'getIntValue ' in class MyClass\$1 can be expressed more simply as the field declaration\nfinal int intValue = CONSTANT_RESULT")
+    }
+
+    @Test
+    void testConstantFieldReturn() {
+        final SOURCE = '''
+            class MyClass {
+                private static final VALUE = 'abc'
+                @Override
+                String getSomething() {
+                    VALUE         // this could be simplified
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 5,
+                'String getSomething()',
+                "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = VALUE")
+    }
+
+    @Test
+    void testConstantFieldReturnExplicit() {
+        final SOURCE = '''
+            class MyClass {
+                private static final VALUE = 'abc'
+                @Override
+                String getSomething() {
+                    return VALUE         // this could be simplified
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 5,
+                'String getSomething()',
+                "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal String something = VALUE")
+    }
+
+    @Test
+    void testConstantLiteralReturn() {
         final SOURCE = '''
             class MyClass {
                 @Override
@@ -88,7 +170,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testConstantReturnExplicit() {
+    void testConstantLiteralReturnExplicit() {
         final SOURCE = '''
             class MyClass {
                 @Override
