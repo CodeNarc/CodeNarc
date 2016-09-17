@@ -16,6 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClassExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
@@ -25,7 +26,6 @@ import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-
 /**
  * If a class defines a public method that follows the Java getter notation and returns a constant,
  * then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
@@ -60,7 +60,10 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodEx(MethodNode node) {
-        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && node.isPublic() && AstUtil.isOneLiner(node.code)) {
+        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) &&
+                node.isPublic() &&
+                AstUtil.isOneLiner(node.code) &&
+                !(node.declaringClass instanceof InnerClassNode && node.declaringClass.anonymous)) {
 
             def statement = node.code.statements[0]
             if (statement instanceof ExpressionStatement) {
