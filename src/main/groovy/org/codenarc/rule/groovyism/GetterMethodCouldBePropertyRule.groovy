@@ -37,6 +37,7 @@ class GetterMethodCouldBePropertyRule extends AbstractAstVisitorRule {
 
     String name = 'GetterMethodCouldBeProperty'
     int priority = 3
+    boolean ignoreMethodsWithOverrideAnnotation = false
     Class astVisitorClass = GetterMethodCouldBePropertyAstVisitor
 }
 
@@ -60,7 +61,8 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodEx(MethodNode node) {
-        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && node.isPublic() && AstUtil.isOneLiner(node.code)) {
+        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && node.isPublic() &&
+                !rule.ignoreMethodsWithOverrideAnnotation && AstUtil.isOneLiner(node.code)) {
 
             def statement = node.code.statements[0]
             if (statement instanceof ExpressionStatement) {

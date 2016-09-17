@@ -8,6 +8,7 @@ Changes in version 0.26.0 (??? 2016)
 - #162: UnnecessaryPublicModifierRule: Ignore generics methods. (Thanks to norbson)
 - #166: Exclude `javax.annotation.concurrent.Immutable` from GroovyLangImmutable. (Thanks to Mike Kobit)
 - #168: GetterMethodCouldBeProperty: Fixed inconsistency in handling anonymous inner classes, and explicit return statements.
+- #169: GetterMethodCouldBeProperty: Add ignoreMethodsWithOverrideAnnotation flag.
 
 
 Changes in version 0.25.2 (Mar 2016)

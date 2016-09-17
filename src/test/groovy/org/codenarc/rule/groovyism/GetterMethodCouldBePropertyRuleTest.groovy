@@ -31,10 +31,11 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'GetterMethodCouldBeProperty'
+        assert rule.ignoreMethodsWithOverrideAnnotation == false
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             class MyClass {
                 static VALUE = 'value'
@@ -261,6 +262,20 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4,
             'static String getValue()',
             "The method 'getValue ' in class MyClass can be expressed more simply as the field declaration\nstatic final String value = VALUE")
+    }
+
+    @Test
+    void test_ignoreMethodsWithOverrideAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+                @Override
+                String getSomething() {
+                    'something'         // this could be simplified
+                }
+            }
+        '''
+        rule.ignoreMethodsWithOverrideAnnotation = true
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
