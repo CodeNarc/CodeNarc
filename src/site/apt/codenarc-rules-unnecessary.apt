@@ -933,6 +933,8 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
   The 'public' modifier is not required on methods, constructors or classes.
 
+  Because of Groovy parsing limitations, this rule ignores methods (and constructors) that include Generic types in the method declaration.
+
   Example of violations:
 
 -------------------------------------------------------------------------------
