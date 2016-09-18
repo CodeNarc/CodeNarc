@@ -4,11 +4,14 @@ http://www.codenarc.org
 
 Changes in version 0.26.0 (??? 2016)
 --------------------------------------
+UPDATED/ENHANCED RULES AND BUG FIXES
 - #158: UnnecessaryConstructor: Add ignoreAnnotations to optionally ignore constructors with annotations. (Thanks to Daniel Spilker)
 - #162: UnnecessaryPublicModifierRule: Ignore generics methods. (Thanks to norbson)
-- #166: Exclude `javax.annotation.concurrent.Immutable` from GroovyLangImmutable. (Thanks to Mike Kobit)
+- #166: GroovyLangImmutable: Exclude `javax.annotation.concurrent.Immutable`. (Thanks to Mike Kobit)
 - #168: GetterMethodCouldBeProperty: Fixed inconsistency in handling anonymous inner classes, and explicit return statements.
 - #169: GetterMethodCouldBeProperty: Add ignoreMethodsWithOverrideAnnotation flag.
+FRAMEWORK AND INFRASTRUCTURE
+- #170: Remove TestUtil class from the CodeNarc jar; move it into test source folder.
 
 
 Changes in version 0.25.2 (Mar 2016)

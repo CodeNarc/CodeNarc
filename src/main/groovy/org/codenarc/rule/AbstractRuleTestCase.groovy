@@ -27,8 +27,6 @@ import org.junit.Test
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 
-import static org.codenarc.test.TestUtil.assertContainsAll
-
 /**
  * Abstract superclass for tests of Rule classes
  *
@@ -270,7 +268,7 @@ actual:               $violation.sourceLine
         if (messageText) {
             assert violation.message, 'The violation message was null'
             if (messageText instanceof Collection) {
-                assertContainsAll(violation.message, messageText)
+                messageText.each { assert violation.message.contains(it.toString()), "text does not contain [$it]" }
             }
             else {
                 assert violation.message.contains(messageText), "\nExpected message text: [$messageText]\nFound message text:    [$violation.message]\n"
