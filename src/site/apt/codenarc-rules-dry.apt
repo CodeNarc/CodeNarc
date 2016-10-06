@@ -135,6 +135,9 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
 ** Notes
 ~~~~~~~~~
 
+  * This rule ignores Long/long values within enums, because the generated code may include generated long id values
+    and produce false positive rule violations.
+
   * This rule does not search across several files at once, only in the current file, and only
     within the current class.
 

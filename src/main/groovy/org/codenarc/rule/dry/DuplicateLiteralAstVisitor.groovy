@@ -17,9 +17,9 @@ package org.codenarc.rule.dry
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.expr.*
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codenarc.rule.AbstractAstVisitor
-import org.codehaus.groovy.ast.expr.*
 
 /**
  * Abstract superclass for rule AstVisitor classes that detect duplicate literal constants
@@ -32,6 +32,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
     List<String> constants = []
     private final List<Class> constantTypes
     private final Set ignoreValuesSet
+    private boolean isEnum
 
     DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet) {
         assert constantType
@@ -48,6 +49,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
     @Override
     void visitClassEx(ClassNode node) {
         constants.clear()
+        isEnum = node.isEnum()
     }
 
     void visitArgumentlistExpression(ArgumentListExpression expression) {
@@ -112,6 +114,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         if (!(node instanceof ConstantExpression)) { return }
         if (node.value == null) { return }
         if (!node.type.isResolved()) { return }
+        if (isEnum && node.value instanceof Long) { return }     // ignore Long values within Enums; may match generated ids
 
         def literal = String.valueOf(node.value)
 

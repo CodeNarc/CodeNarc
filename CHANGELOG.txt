@@ -10,6 +10,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #166: GroovyLangImmutable: Exclude `javax.annotation.concurrent.Immutable`. (Thanks to Mike Kobit)
 - #168: GetterMethodCouldBeProperty: Fixed inconsistency in handling anonymous inner classes, and explicit return statements.
 - #169: GetterMethodCouldBeProperty: Add ignoreMethodsWithOverrideAnnotation flag.
+- #174: DuplicateNumberLiteral: Fixed false violations for enums. This rule now ignores Long/long values within enums.
 FRAMEWORK AND INFRASTRUCTURE
 - #170: Remove TestUtil class from the CodeNarc jar; move it into test source folder.
 
