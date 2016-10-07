@@ -27,7 +27,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {AssignmentInConditional} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.
 
@@ -75,7 +75,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {BitwiseOperatorInConditional} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks for bitwise operations in conditionals. For instance, the condition <<<if (a | b)>>> is almost
   always a mistake and should be <<<if (a || b)>>>. If you need to do a bitwise operation then it is
@@ -91,7 +91,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {BooleanGetBoolean} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   This rule catches usages of java.lang.Boolean.getBoolean(String) which reads a boolean from the System properties. It is often mistakenly used to attempt to read user input or parse a String into a boolean. It is a poor piece of API to use; replace it with System.properties['prop̈́'].
 
@@ -151,7 +151,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {ClassForName} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   Using <<<Class.forName(...)>>> is a common way to add dynamic behavior to a system. However, using this method can cause
   resource leaks because the classes can be pinned in memory for long periods of time. If you're forced to do dynamic
@@ -345,7 +345,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {DuplicateMapKey} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   A <Map> literal is created with duplicated key. The map entry will be overwritten.
 
@@ -365,7 +365,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {DuplicateSetValue} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   A <Set> literal is created with duplicate constant value. A set cannot contain two elements with the same value.
 
@@ -503,7 +503,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {EmptyInstanceInitializer} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   An empty class instance initializer was found. It is safe to remove it. Example:
 
@@ -516,7 +516,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {EmptyMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   A method was found without an implementation. If the method is overriding or implementing a parent method,
   then mark it with the <<<@Override>>> annotation. This rule should not be used with Java 5 code because you cannot
@@ -547,7 +547,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {EmptyStaticInitializer} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   An empty static initializer was found. It is safe to remove it. Example:
 
@@ -654,7 +654,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {EqualsOverloaded} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   The class has an <<<equals>>> method, but the parameter of the method is not of type <<<Object>>>.
   It is not overriding <<<equals>>> but instead overloading it.
@@ -710,7 +710,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {ForLoopShouldBeWhileLoop} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   A <<<for>>> loop without an init and update statement can be simplified to a <<<while>>> loop.
 
@@ -741,7 +741,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {HardCodedWindowsFileSeparator} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   This rule finds usages of a Windows file separator within the constructor call of a File object. It is better to use
   the Unix file separator or use the File.separator constant.
@@ -756,7 +756,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {HardCodedWindowsRootDirectory} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   This rule find cases where a File object is constructed with a windows-based path. This is not portable across operating systems
   or different machines, and using  the File.listRoots() method is a better alternative.
@@ -771,7 +771,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {IntegerGetInteger} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   This rule catches usages of java.lang.Integer.getInteger(String, ...) which reads an Integer from the System properties.
   It is often mistakenly used to attempt to read user input or parse a String into an Integer.
@@ -809,7 +809,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 
 * {RandomDoubleCoercedToZero} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   The Math.random() method returns a double result greater than or equal to 0.0 and less than 1.0. If you coerce this
   result into an Integer, Long, int, or long then it is coerced to zero. Casting the result to int, or assigning it to an int

@@ -8,7 +8,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 
 * {DirectConnectionManagement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   The J2EE standard requires that applications use the container's resource management facilities to obtain connections
   to resources. Every major web application container provides pooled database connection management as part of its
@@ -27,7 +27,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 
 * {JdbcConnectionReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks for direct use of <<<java.sql.Connection>>>, which is discouraged and almost never necessary
   in application code.
@@ -41,7 +41,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 
 * {JdbcResultSetReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks for direct use of <<<java.sql.ResultSet>>>, which is not necessary if using the Groovy <<Sql>> facility or an
   ORM framework such as <Hibernate>.
@@ -55,7 +55,7 @@ JDBC Rules  ("<rulesets/jdbc.xml>")
 
 * {JdbcStatementReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   Checks for direct use of <<<java.sql.Statement>>>, <<<java.sql.PreparedStatement>>>, or
   <<<java.sql.CallableStatement>>>, which is not necessary if using the Groovy <<Sql>> facility or an

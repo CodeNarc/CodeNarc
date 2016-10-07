@@ -9,7 +9,7 @@ Groovy-ism Rules  ("<rulesets/groovyism.xml>")
 
 * {AssignCollectionSort} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a
   variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
@@ -26,7 +26,7 @@ Groovy-ism Rules  ("<rulesets/groovyism.xml>")
 
 * {AssignCollectionUnique} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   The Collections.unique() method mutates the list and returns the list as a value. If you are assigning the result of unique() to a
   variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
@@ -44,7 +44,7 @@ Groovy-ism Rules  ("<rulesets/groovyism.xml>")
 
 * {ClosureAsLastMethodParameter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   If a method is called and the last parameter is an inline closure then it can be declared outside
   of the method call parentheses.
@@ -62,7 +62,7 @@ Groovy-ism Rules  ("<rulesets/groovyism.xml>")
 
 * {CollectAllIsDeprecated} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   The <<<collectAll>>> method is deprecated since Groovy 1.8.1. Use <<<collectNested>>> instead.
 
@@ -79,7 +79,7 @@ list.collectNested { it * 2 }   // replacement
 
 * {ConfusingMultipleReturns} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   Multiple return values can be used to set several variables at once. To use multiple return values, the left
   hand side of the assignment must be enclosed in parenthesis. If not, then you are not using multiple return values,
@@ -338,7 +338,7 @@ def (f, g) = [1, 2]    // ok
 
 * {GetterMethodCouldBeProperty} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   If a class defines a <<<public>>> method that follows the Java getter notation and that returns a constant,
   then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
@@ -391,7 +391,7 @@ def (f, g) = [1, 2]    // ok
 
 * {GroovyLangImmutable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   The <<<groovy.lang.Immutable>>> annotation has been deprecated and replaced by <<<groovy.transform.Immutable>>>. Do
   not use the <<<Immutable>>> in <<<groovy.lang>>>.
@@ -461,7 +461,7 @@ def (f, g) = [1, 2]    // ok
 
 * {UseCollectMany} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   In many case <<<collectMany()>>> yields the same result as <<<collect{}.flatten()>>>.
   It is easier to understand and more clearly conveys the intent.
@@ -478,7 +478,7 @@ l.collectMany{ [it, it*2] }       // same functionality, better readability
 
 * {UseCollectNested} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   Instead of nested <<<collect{}>>> calls use <<<collectNested{}>>>.
 

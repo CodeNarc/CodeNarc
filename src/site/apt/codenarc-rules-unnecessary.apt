@@ -8,7 +8,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {AddEmptyString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Finds empty string literals which are being added. This is an inefficient way to convert any type to a String.
 
@@ -27,7 +27,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {ConsecutiveLiteralAppends} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Violations occur when method calls to append(Object) are chained together with literals as parameters. The
   chained calls can be joined into one invocation.
@@ -56,7 +56,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {ConsecutiveStringConcatenation} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Catches concatenation of two string literals on the same line. These can safely by joined. In Java, the Java compiler
   will join two String literals together and place them in the Constant Pool. However, Groovy will not because the plus()
@@ -209,7 +209,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryCallToSubstring} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Calling String.substring(0) always returns the original string. This code is meaningless.
 
@@ -338,7 +338,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryDefInFieldDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.
 
@@ -368,7 +368,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryDefInMethodDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   If a method has a visibility modifier or a type declaration, then the def keyword is unneeded.
   For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.
@@ -399,7 +399,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryDefInVariableDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   If a variable has a visibility modifier or a type declaration, then the def keyword is unneeded.
   For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.
@@ -428,7 +428,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryDotClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
 
@@ -452,7 +452,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryElseStatement} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   When an <<<if>>> statement block ends with a <<<return>>> statement, then the <<<else>>> is unnecessary.
   The logic in the <<<else>>> branch can be run without being in a new scope.
@@ -479,7 +479,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryFinalOnPrivateMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.
 
@@ -530,7 +530,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryGString} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   String objects should be created with single quotes, and GString objects created with double quotes.
   Creating normal String objects with double quotes is confusing to readers.
@@ -642,7 +642,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryInstanceOfCheck} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.15>
+  <Since CodeNarc 0.15>
 
   This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that
   <<<(!variable instanceof String)>>> will never be true because the result of a not expression is always a boolean.
@@ -695,7 +695,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryModOne} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Any expression mod 1 (exp % 1) is guaranteed to always return zero. This code is probably an error, and should be either (exp & 1) or (exp % 2).
 
@@ -916,7 +916,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryParenthesesForMethodCallWithClosure} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   If a method is called and the only parameter to that method is an inline closure then the parentheses of the method call can be omitted.
 
@@ -929,7 +929,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryPublicModifier} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   The 'public' modifier is not required on methods, constructors or classes.
 
@@ -986,7 +986,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessarySelfAssignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Method contains a pointless self-assignment to a variable or property. Either the code is pointless or the equals()/get()
   method has been overridden to have a side effect, which is a terrible way to code getters and violates the contract of
@@ -1009,7 +1009,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessarySemicolon} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for
   empty braces on for and while loops; this is a confusing practice.
@@ -1101,7 +1101,7 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
 
 * {UnnecessaryTransientModifier} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.
   This may be leftover marking from a previous version of the code in which the class was

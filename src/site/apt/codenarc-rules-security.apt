@@ -10,7 +10,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {FileCreateTempFile} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library.
   It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
@@ -21,7 +21,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {InsecureRandom} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   Reports usages of <<<java.util.Random>>>, which can produce very predictable results. If two instances of Random are created with the same seed and sequence of method calls, they will generate the exact same results.
   Use <<<java.security.SecureRandom>>> instead, which provides a cryptographically strong random number generator. SecureRandom uses PRNG, which means they are using a deterministic algorithm to produce a pseudo-random number from a true random seed. SecureRandom produces non-deterministic output.
@@ -46,7 +46,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {JavaIoPackageAccess} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   This rule reports violations of the Enterprise JavaBeans specification by using the java.io package to access files or the file system.
 
@@ -91,7 +91,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {NonFinalPublicField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   Finds code that violates secure coding principles for mobile code by declaring a member variable public but not final.
 
@@ -107,7 +107,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {NonFinalSubclassOfSensitiveInterface} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   The permissions classes such as <<<java.security.Permission>>> and <<<java.security.BasicPermission>>> are designed to be extended.
   Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that
@@ -143,7 +143,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {PublicFinalizeMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   Creates a violation when the program violates secure coding principles by declaring a <<<finalize()>>> method public.
 
@@ -162,7 +162,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {ObjectFinalize} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   The finalize() method should only be called by the JVM after the object has been garbage collected.
 
@@ -176,7 +176,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {SystemExit} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug
   code or code imported from a non-J2EE application.
@@ -192,7 +192,7 @@ Security Rules  ("<rulesets/security.xml>")
 
 * {UnsafeArrayDeclaration} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   Triggers a violation when an array is declared public, final, and static.
 

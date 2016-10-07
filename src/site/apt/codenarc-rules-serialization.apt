@@ -38,7 +38,7 @@ Serialization Rules  ("<rulesets/serialization.xml>")
 
 * {SerialPersistentFields} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   To use a <<Serializable>> object's <<<serialPersistentFields>>> correctly, it must be declared <<<private>>>, <<<static>>>,
   and <<<final>>>.
@@ -86,7 +86,7 @@ Serialization Rules  ("<rulesets/serialization.xml>")
 
 * {SerializableClassMustDefineSerialVersionUID} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.13>
+  <Since CodeNarc 0.13>
 
   Classes that implement <<<Serializable>>> should define a <<<serialVersionUID>>>. Deserialization uses this number
   to ensure that a loaded class corresponds exactly to a serialized object. If you don't define serialVersionUID, the

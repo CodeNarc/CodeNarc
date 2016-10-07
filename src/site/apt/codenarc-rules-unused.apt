@@ -35,7 +35,7 @@ Unused Rules  ("<rulesets/unused.xml>")
 
 * {UnusedMethodParameter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by
   the UnusedPrivateMethodParameter rule) or methods marked @Override.

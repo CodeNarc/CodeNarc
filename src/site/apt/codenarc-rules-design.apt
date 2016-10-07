@@ -96,7 +96,7 @@ Design Rules  ("<rulesets/design.xml>")
 
 * {BuilderMethodWithSideEffects} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   A builder method is defined as one that creates objects. As such, they should never be of void return type. If a method
   is named build, create, or make, then it should always return a value.
@@ -398,7 +398,7 @@ for (int i = 0; i < 100; ++i) {
 
 * {PublicInstanceField} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   Using public fields is considered to be a bad design. Use properties instead.
 
@@ -454,7 +454,7 @@ for (int i = 0; i < 100; ++i) {
 
 * {StatelessSingleton} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
 
   There is no point in creating a stateless Singleton because there is nothing within the class that needs guarding and
   no side effects to calling the constructor. Just create new instances of the object or write a Utility class with

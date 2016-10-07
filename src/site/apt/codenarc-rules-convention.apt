@@ -117,7 +117,7 @@ Convention Rules  ("<rulesets/convention.xml>")
 
 * {LongLiteralWithLowerCaseL} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.16>
+  <Since CodeNarc 0.16>
 
   In Java and Groovy, you can specify long literals with the L or l character,
   for instance 55L or 24l. It is best practice to always use an uppercase L and never

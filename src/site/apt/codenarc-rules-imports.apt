@@ -20,7 +20,7 @@ Imports Rules  ("<rulesets/imports.xml>")
 
 * {ImportFromSunPackages} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
   Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.
 
   Example of violations:
@@ -35,7 +35,7 @@ Imports Rules  ("<rulesets/imports.xml>")
 
 * {MisorderedStaticImports} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <New in CodeNarc 0.14>
+  <Since CodeNarc 0.14>
   Checks for static <import> statements which should never be after nonstatic imports.
 
   This rule has one property <<<comesBefore>>>, which defaults to true. If you like your
