@@ -95,6 +95,7 @@ class JUnitUtil {
         (methodNode.name == 'setUp' &&
                 methodNode.parameters.size() == 0 &&
                 !AstUtil.getAnnotation(methodNode, 'Before') &&
+                !AstUtil.getAnnotation(methodNode, 'BeforeClass') &&
                 methodNode.code instanceof BlockStatement)
     }
 
@@ -102,6 +103,7 @@ class JUnitUtil {
         (methodNode.name == 'tearDown' &&
                 methodNode.parameters.size() == 0 &&
                 !AstUtil.getAnnotation(methodNode, 'After') &&
+                !AstUtil.getAnnotation(methodNode, 'AfterClass') &&
                 methodNode.code instanceof BlockStatement)
     }
 

@@ -12,6 +12,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #169: GetterMethodCouldBeProperty: Add ignoreMethodsWithOverrideAnnotation flag.
 - #174: DuplicateNumberLiteral: Fixed false violations for enums. This rule now ignores Long/long values within enums.
 - #154: DuplicateListLiteral: ignore lists within annotations.
+- #177: JUnitSetUpCallsSuper: ignore methods annotated with @BeforeClass; JUnitTearDownCallsSuper: ignore methods with @AfterClass.
 FRAMEWORK AND INFRASTRUCTURE
 - #170: Remove TestUtil class from the CodeNarc jar; move it into test source folder.
 

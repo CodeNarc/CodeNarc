@@ -265,6 +265,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Rule that checks that if the JUnit <<<setUp>>> method is defined, that it includes a call to
   <<<super.setUp()>>>.
 
+  This rule ignored methods annotated with <<<@Before>>> or <<<@BeforeClass>>>.
+
   This rule sets the default value of the <applyToClassNames> property to only match class names
   ending in 'Test', 'Tests' or 'TestCase'.
 
@@ -284,6 +286,8 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   Rule that checks that if the JUnit <<<tearDown>>> method is defined, that it includes a call to
   <<<super.tearDown()>>>.
+
+  This rule ignored methods annotated with <<<@After>>> or <<<@AfterClass>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
   ending in 'Test', 'Tests' or 'TestCase'.
