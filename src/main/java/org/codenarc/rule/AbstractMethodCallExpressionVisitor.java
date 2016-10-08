@@ -24,7 +24,7 @@ public class AbstractMethodCallExpressionVisitor extends ClassCodeVisitorSupport
     private Rule rule;
     private SourceCode sourceCode;
     private final List<Violation> violations = new ArrayList<Violation>();
-    private ClassNode currentClassNode = null; 
+    protected ClassNode currentClassNode = null;
 
     @Override
     public void visitClass(ClassNode node) {

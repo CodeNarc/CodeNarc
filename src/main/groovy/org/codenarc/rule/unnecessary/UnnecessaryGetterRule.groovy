@@ -27,6 +27,7 @@ import org.codenarc.util.AstUtil
  * Getters do not take method arguments. 
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class UnnecessaryGetterRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryGetter'
@@ -55,14 +56,24 @@ class UnnecessaryGetterAstVisitor extends AbstractMethodCallExpressionVisitor {
 
         if (name[0..2] == 'get' && (name[3] as Character).isUpperCase()) {
             if (name.length() == 4) {
-                addViolation call, "$name() can probably be rewritten as ${name[3].toLowerCase()}"
+                def propertyName = name[3].toLowerCase()
+                addUnnecessaryGetterViolation(call, propertyName)
             } else if ((name[4] as Character).isLowerCase()) {
                 def propertyName = name[3].toLowerCase() + name[4..-1]
-                addViolation call, "$name() can probably be rewritten as $propertyName"
+                addUnnecessaryGetterViolation(call, propertyName)
             } else {
                 def propertyName = name[3..-1]
-                addViolation call, "$name() can probably be rewritten as $propertyName"
+                addUnnecessaryGetterViolation(call, propertyName)
             }
+        }
+    }
+
+    private void addUnnecessaryGetterViolation(MethodCallExpression call, String propertyName) {
+        // Only add if there is not already a field with that name
+        def fieldNames = currentClassNode.fields.name
+        if (!fieldNames.contains(propertyName)) {
+            String name = call.method.value
+            addViolation call, "$name() can probably be rewritten as $propertyName"
         }
     }
 

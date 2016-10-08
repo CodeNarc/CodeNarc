@@ -97,6 +97,27 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testFieldWithSameNameAlreadyExists() {
+        final SOURCE = '''
+            class Spec extends Specification {
+
+                private final field = 'field\'
+
+                def test() {
+                    expect:
+                    field == 'field\'
+                    getField() == 'getField\'
+                }
+
+                private static String getField() {
+                    'getField\'
+                }
+            }
+            '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new UnnecessaryGetterRule()
     }
