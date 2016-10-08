@@ -88,3 +88,45 @@ Imports Rules  ("<rulesets/imports.xml>")
 
     public class MyClass{}
 -------------------------------------------------------------------------------
+
+* {MisorderedImports} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.26>
+
+  Imports should be sorted alphabetically and in groups. Default order of <<<patterns>>> is
+
+-------------------------------------------------------------------------------
+    import static *
+
+    import *
+
+    import javax.*
+    import java.*
+-------------------------------------------------------------------------------
+
+  Given such a <<<patterns>>> configuration, this would be a couple of violations:
+
+-------------------------------------------------------------------------------
+    import com.acme.Device
+    import com.acme.powders.*
+
+    import java.toons.*
+    import javax.acme.Switch
+    import java.acme.Cord
+
+    import static toons.looney.Roadrunner.legs
+    import static toons.looney.Coyote.*
+-------------------------------------------------------------------------------
+
+  <<<java.toons.*>>> should come after <<<java.acme.Cord>>>.
+  
+  <<<toons.looney.Coyote.*>>> should come before <<<toons.looney.Roadrunner.legs>>>.
+  
+  Also both static imports should come before the non static imports.
+
+  <<<patterns>>> is a list of glob patterns describing import statements. The asterisk is only allowed at the end.
+  For a <<<patterns>>> to be valid, it must cover two very important cases:
+  
+   * <<<import *>>>
+   
+   * <<<import static *>>>

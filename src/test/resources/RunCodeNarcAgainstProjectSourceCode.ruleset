@@ -42,6 +42,7 @@ ruleset {
 
     ruleset('rulesets/imports.xml') {
         exclude 'NoWildcardImports'
+        exclude 'MisorderedImports'
     }
 
     ruleset('rulesets/junit.xml') {

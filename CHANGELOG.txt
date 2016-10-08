@@ -4,6 +4,8 @@ http://www.codenarc.org
 
 Changes in version 0.26.0 (??? 2016)
 --------------------------------------
+NEW RULES
+- #160: MisorderedImports rule (imports) - Imports should be sorted alphabetically and in groups
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #158: UnnecessaryConstructor: Add ignoreAnnotations to optionally ignore constructors with annotations. (Thanks to Daniel Spilker)
 - #162: UnnecessaryPublicModifierRule: Ignore generics methods. (Thanks to norbson)

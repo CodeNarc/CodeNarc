@@ -20,3 +20,5 @@ build/
 src/main/java/META-INF/
 /.gradle
 /classes
+/.gradletasknamecache
+/.shelf
