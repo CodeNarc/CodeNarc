@@ -93,14 +93,89 @@ class MisorderedImportsRuleTest extends AbstractRuleTestCase {
             |class Foo {}
         '''.stripMargin()
         assertViolations(SOURCE,
-                [lineNumber : 1, sourceLineText: 'import static toons.looney.Roadrunner.legs',
+                [lineNumber: 1, sourceLineText: 'import static toons.looney.Roadrunner.legs',
                  messageText: "Expected 'import static toons.looney.Roadrunner.legs' on line 2. Found on line 1"],
-                [lineNumber : 7, sourceLineText: 'import java.toons.*', // TODO Fix
+                [lineNumber: 7, sourceLineText: 'import java.toons.*', // TODO Fix
                  messageText: "Expected 'import java.toons.*' on line 10. Found on line 7"])
     }
 
     @Test
-    void testApplyTo_PatternWithNoSeparators_BlankLines_NoViolations() {
+    void testApplyTo_ImportsWithAliases_NoViolations() {
+        final SOURCE = '''\
+            |import static toons.looney.Coyote.*
+            |import static toons.looney.Roadrunner.legs as aaaMyLegs
+            |
+            |import com.acme.Device as ZzzMyDevice
+            |import com.acme.powders.*
+            |
+            |import javax.acme.Switch
+            |import java.acme.Cord as MyCord
+            |import java.toons.*
+            |
+            |class Foo {}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_CommentLinesBetweenImports_NoViolations() {
+        final SOURCE = '''\
+            |import static toons.looney.Coyote.*
+            | // what if there was a comment
+            |import static toons.looney.Roadrunner.legs     // comment after the import
+            |
+            |import com.acme.Device
+            | /* and another kind of comment */
+            |import com.acme.powders.*
+            |
+            |import javax.acme.Switch
+            |     /* and multi-line
+            |        comment */
+            |import java.acme.Cord
+            |import java.toons.*    // comment
+            |
+            |class Foo {}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_StaticImportsInBetweenRegularImports_Violations() {
+        final SOURCE = '''
+            |import com.acme.Device
+            |import static toons.looney.Coyote.*
+            |import java.toons.*
+            |import javax.acme.Switch
+            |import static toons.looney.Roadrunner.legs
+            |import java.acme.Cord
+            |
+            |class Foo {}
+        '''.stripMargin()
+
+        // TODO Correct violations; why these errors, and why no errors for static imports?
+        // Actual ... Found 3:
+        // Violation[rule=MisorderedImportsRule[name=MisorderedImports, priority=3], lineNumber=2, sourceLine=import com.acme.Device, message=Expected 'import com.acme.Device' on line 5. Found on line 2]
+        // Violation[rule=MisorderedImportsRule[name=MisorderedImports, priority=3], lineNumber=4, sourceLine=import java.toons.*, message=Expected 'import java.toons.*' on line 10. Found on line 4]
+        // Violation[rule=MisorderedImportsRule[name=MisorderedImports, priority=3], lineNumber=5, sourceLine=import javax.acme.Switch, message=Expected 'import javax.acme.Switch' on line 7. Found on line 5]
+
+        assertViolations(SOURCE,    // TODO
+                [lineNumber: 1, sourceLineText: 'xxx', messageText: 'Expected ...'])
+    }
+
+    @Test
+    void testApplyTo_DuplicateImports_NoViolations() {
+        final SOURCE = '''\
+            |import com.acme.Device
+            |import com.acme.Device
+            |import javax.acme.Switch
+            |
+            |class Foo {}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_PatternWithNoSeparators_ExtraBlankLines_NoViolations() {
         final SOURCE = '''\
             |import static toons.looney.Coyote.*
             |import static toons.looney.Roadrunner.legs
@@ -152,11 +227,11 @@ class MisorderedImportsRuleTest extends AbstractRuleTestCase {
         '''.stripMargin()
         rule.patterns = STATIC_LAST_PATTERN
         assertViolations(SOURCE,
-                [lineNumber : 1, sourceLineText: 'import static toons.looney.Roadrunner.legs',
+                [lineNumber: 1, sourceLineText: 'import static toons.looney.Roadrunner.legs',
                  messageText: "Expected 'import static toons.looney.Roadrunner.legs' on line 10. Found on line 1"],
-                [lineNumber : 2, sourceLineText: 'import static toons.looney.Coyote.*',
+                [lineNumber: 2, sourceLineText: 'import static toons.looney.Coyote.*',
                  messageText: "Expected 'import static toons.looney.Coyote.*' on line 9. Found on line 2"],
-                [lineNumber : 7, sourceLineText: 'import java.toons.*',
+                [lineNumber: 7, sourceLineText: 'import java.toons.*',
                  messageText: "Expected 'import java.toons.*' on line 7. Found on line 7"]
         )
     }
@@ -215,7 +290,7 @@ class MisorderedImportsRuleTest extends AbstractRuleTestCase {
         '''.stripMargin()
         rule.patterns = STATIC_LAST_PATTERN_NO_SEPARATORS
         assertViolations(SOURCE,
-                [lineNumber : 1, sourceLineText: 'import static toons.looney.Roadrunner.legs',
+                [lineNumber: 1, sourceLineText: 'import static toons.looney.Roadrunner.legs',
                  messageText: "Expected 'import static toons.looney.Roadrunner.legs' on line 10. Found on line 1"],
                 [lineNumber: 2, sourceLineText: 'import static toons.looney.Coyote.*',
                  messageText: "Expected 'import static toons.looney.Coyote.*' on line 9. Found on line 2"],
