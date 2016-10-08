@@ -153,6 +153,20 @@ class DuplicateListLiteralRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'def list2 = [1, []]', '[1, []]')
     }
 
+    @Test
+    void testIgnoresDuplicateListLiteralWithinAnnotations_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                @SuppressWarnings(["MethodSize", "CyclomaticComplexity"])
+                def var1
+
+                @SuppressWarnings(["MethodSize", "CyclomaticComplexity"])
+                def var2
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new DuplicateListLiteralRule()
     }

@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.dry
 
+import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -36,6 +37,11 @@ class DuplicateListLiteralRule extends AbstractAstVisitorRule {
 class DuplicateListLiteralAstVisitor extends AbstractAstVisitor {
 
     private final Collection<Map> listLiterals = []
+
+    @Override
+    void visitAnnotations(AnnotatedNode node) {
+        // Do nothing; ignore (do not visit) list expressions within annotations
+    }
 
     @Override
     void visitListExpression(ListExpression expression) {

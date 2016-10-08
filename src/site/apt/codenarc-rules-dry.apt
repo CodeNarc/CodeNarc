@@ -16,6 +16,8 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   This rule checks for duplicate <List> literals within the current class. This rule only checks for <List>s
   where values are all constants or literals.
 
+  List literals within annotations are ignored.
+
   Code containing duplicate <List> literals can usually be improved by declaring the <List> as a constant field.
 
   By default, the rule does not analyze test files. This rule sets the default value of the
