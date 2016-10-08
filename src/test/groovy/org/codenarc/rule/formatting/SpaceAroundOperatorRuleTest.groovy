@@ -226,6 +226,15 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_EqualsOperator_InDeclarationExpression_NoViolation_KnownLimitation() {
+        final SOURCE = '''
+            String bar='bar'
+        '''
+        // This "should" produce 2 violations on line 1; known limitation
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_Enum_NoViolations() {
         final SOURCE = '''
             enum Day { YESTERDAY, TODAY, TOMORROW }
