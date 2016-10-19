@@ -399,31 +399,40 @@ def (f, g) = [1, 2]    // ok
   Example of violations:
 
 -------------------------------------------------------------------------------
-    @Immutable
+    @Immutable                          // Violation (no import means groovy.lang.Immutable)
     class Person { }
 
-    @groovy.lang.Immutable
+    @groovy.lang.Immutable              // Violation
     class Person { }
 
     import groovy.lang.Immutable as Imtl
-    @Imtl
+    @Imtl                               // Violation
     class Person { }
 
-    // the following code is OK
-    @groovy.transform.Immutable
+-------------------------------------------------------------------------------
+
+  Example of valid use of @Immutable:
+
+-------------------------------------------------------------------------------
+
+    @groovy.transform.Immutable                 // OK
     class Person { }
 
-    import groovy.transform.Immutable
+    import groovy.transform.Immutable           // OK
     @Immutable
     class Person { }
 
     import groovy.transform.*
-    @Immutable
+    @Immutable                                  // OK
     class Person { }
 
     import groovy.transform.Immutable as Imtl
-    @Imtl
+    @Imtl                                       // OK
     class Person { }
+
+    @javax.annotation.concurrent.Immutable      // OK
+    class MyClass { }
+
 -------------------------------------------------------------------------------
 
 
