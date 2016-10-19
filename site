@@ -1,0 +1,3 @@
+#!/bin/bash
+# Generate the CodeNarc web site
+mvn clean -f site-pom.xml site
