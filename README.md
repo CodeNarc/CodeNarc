@@ -1,5 +1,7 @@
 # CodeNarc  (http://codenarc.org/)
 
+[![Maven Central](https://img.shields.io/maven-central/v/org.codenarc/CodeNarc.svg)]()
+
 **CodeNarc** is a static analysis tool for Groovy source code, enabling monitoring and enforcement of many coding standards and best practices. CodeNarc applies a set of Rules (predefined and/or custom) that are applied to each Groovy file, and generates an HTML or XML report of the results, including a list of rules violated for each source file, and a count of the number of violations per package and for the whole project.
 
 CodeNarc is similar to popular static analysis tools such as PMD or Checkstyle. Unlike those tools which analyze Java code, CodeNarc analyzes Groovy code.
