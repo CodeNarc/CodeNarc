@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Feb 15, 2016 3:34:13 PM
+CodeNarc Report: Sample Project - Oct 22, 2016 9:57:48 AM
 
-Summary: TotalFiles=365 FilesWithViolations=37 P1=0 P2=50 P3=31
+Summary: TotalFiles=365 FilesWithViolations=40 P1=0 P2=53 P3=31
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
@@ -12,13 +12,13 @@ File: AbstractAstVisitorRuleTest.groovy
 File: AbstractRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=24 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.assertContainsAll]
     Violation: Rule=MisorderedStaticImports P=3 Line=25 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=127 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=130 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToFilesMatching = NO_MATCH         // apply = NO]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=131 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=167 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToFileNames = 'org/codenarc/MyOtherTest.groovy']
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=215 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=218 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToFileNames = 'Xxx.groovy'         // apply = NO]
-    Violation: Rule=UnnecessaryObjectReferences P=3 Line=219 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=137 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=140 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToFilesMatching = NO_MATCH         // apply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=141 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=177 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToFileNames = 'org/codenarc/MyOtherTest.groovy']
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=225 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=228 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.applyToFileNames = 'Xxx.groovy'         // apply = NO]
+    Violation: Rule=UnnecessaryObjectReferences P=3 Line=229 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO]
 
 File: InlineViolationsParserTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=20 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.rule.InlineViolationsParser.inlineViolation]
@@ -30,11 +30,29 @@ File: design/NestedForLoopRuleTest.groovy
 File: design/PrivateFieldCouldBeFinalRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.design.PrivateFieldCouldBeFinalRuleTest has 33 methods] Src=[class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {]
 
-File: formatting/BracesForIfElseRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=54 Msg=[The String '
-            if (someContainer."${SomeClass.SOME_CONSTANT}" != null)
+File: formatting/BracesForForLoopRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=102 Msg=[The String '
+            for(String name=${SomeClass.SOME_CONSTANT}; name==null;)  // And what about {}
             {
                 doStuff()
+            }
+        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}; name==null;)  // And what about {}'] Src=[final SOURCE = ''']
+
+File: formatting/BracesForIfElseRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=60 Msg=[The String '
+            if (someContainer."${SomeClass.SOME_CONSTANT}" != null)  // And what about {}
+            {
+                doStuff()
+            }
+        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}" != null)  // And what about {}'] Src=[final SOURCE = ''']
+
+File: formatting/BracesForMethodRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=286 Msg=[The String '
+            class MyClass {
+                int size(String name = "${SomeClass.SOME_CONSTANT}")
+                {
+                    return 99
+                }
             }
         ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}'] Src=[final SOURCE = ''']
 
@@ -312,6 +330,36 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=137 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
     Violation: Rule=GStringExpressionWithinString P=2 Line=137 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
 
+File: imports/UnusedImportRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=193 Msg=[The String '
+            import test.TestData1
+            import test.TestData2
+            import test.TestData3
+            import test.TestData4
+            import test.TestData5
+            import test.TestData6
+            import test.TestData7
+            import test.TestData8
+            import test.TestData9
+            import test.TestData10
+            import test.TestData11
+            import test.TestData12
+            import test.TestData13
+            import test.TestData14
+            import test.TestData15
+
+            def GSTRING1 = " ${TestData1.GOOD_XML}"
+            def GSTRING2 = " $TestData2.XML"
+            def MAP1 = [(TestData3):123]
+            def MAP2 = [abc:TestData4]
+            def MAP3 = [abc:TestData5, ddd:123]
+            def LIST = [TestData6,TestData7]
+            def OPERATORS1 = 0+TestData8.VALUE-TestData9.VALUE
+            def OPERATORS2 = 9*TestData10.VALUE/TestData11.VALUE
+            def OPERATORS3 = 64&TestData12.VALUE|TestData13.VALUE^TestData14.VALUE
+            def OPERATORS4 = !TestData15.VALUE
+        ' contains a GString-type expression: '${TestData1.GOOD_XML}'] Src=[final SOURCE = ''']
+
 File: naming/ClassNameRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
 
@@ -465,4 +513,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 32 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase {]
 
-[CodeNarc (http://www.codenarc.org) v0.25]
+[CodeNarc (http://www.codenarc.org) v0.26.0]
