@@ -22,6 +22,7 @@ import org.codenarc.rule.AstVisitor
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
+import org.codenarc.util.WildcardPattern
 
 import java.lang.reflect.Modifier
 
@@ -41,11 +42,12 @@ import org.codehaus.groovy.ast.expr.*
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
-  */
+ */
 class UnusedPrivateMethodRule extends AbstractSharedAstVisitorRule {
 
     String name = 'UnusedPrivateMethod'
     int priority = 2
+    String ignoreMethodsWithAnnotationNames = ''
 
     @Override
     protected AstVisitor getAstVisitor(SourceCode sourceCode) {
@@ -55,8 +57,11 @@ class UnusedPrivateMethodRule extends AbstractSharedAstVisitorRule {
 
     @Override
     protected List<Violation> getViolations(AstVisitor visitor, SourceCode sourceCode) {
-        visitor.unusedPrivateMethods.each { key, value ->
-            visitor.addViolation(value, "The method $key is not used within ${sourceCode.name ?: 'the class'}")
+        def wildcardPattern = new WildcardPattern(ignoreMethodsWithAnnotationNames, false)
+        visitor.unusedPrivateMethods.each { methodName, methodNode ->
+            if (!methodNode.annotations.any { wildcardPattern.matches(it.classNode.name) }) {
+                visitor.addViolation(methodNode, "The method $methodName is not used within ${sourceCode.name ?: 'the class'}")
+            }
         }
         return visitor.violations
     }
