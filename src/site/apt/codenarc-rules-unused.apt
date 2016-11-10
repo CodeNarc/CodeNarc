@@ -159,6 +159,15 @@ Unused Rules  ("<rulesets/unused.xml>")
   modifier is not currently "respected" by Groovy code (i.e., Groovy can access <<<private>>>
   members within other classes).
 
+*----------------------------------+---------------------------------------------------------------+-------------------+
+| <<Property>>                     | <<Description>>                                               | <<Default Value>> |
+*----------------------------------+---------------------------------------------------------------+-------------------+
+| ignoreMethodsWithAnnotationNames | Specifies one or more (comma-separated) annotation names that | ''                |
+|                                  | mark private methods that should be ignored                   |                   |
+|                                  | (i.e., that should not cause a rule violation).               |                   |
+|                                  | The names may optionally contain wildcards (*,?).             |                   |
+*----------------------------------+---------------------------------------------------------------+-------------------+
+
   Known limitations:
 
   * Does not recognize method reference through property access (e.g. <<<getName()>>> accessed as <<<x.name>>>)

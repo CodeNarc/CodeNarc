@@ -270,6 +270,61 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_SingleUnusedPrivateMethodWithAnnotation() {
+        final SOURCE = '''
+            import javax.annotation.PostConstruct
+            class MyClass {
+                @PostConstruct
+                private int countStuff() { }
+          }
+        '''
+        assertSingleViolation(SOURCE, 5, 'private int countStuff() { }', 'The method countStuff is not used within the class')
+    }
+
+    @Test
+    void testApplyTo_UnusedPrivateMethodsWithAnnotationToIgnore() {
+        final SOURCE = '''
+            import javax.annotation.PostConstruct
+            class MyClass {
+                @PostConstruct
+                private int countStuff() { }
+                private int countStuff2() { }
+          }
+        '''
+        rule.ignoreMethodsWithAnnotationNames = 'PostConstruct'
+        assertSingleViolation(SOURCE, 6, 'private int countStuff2() { }', 'The method countStuff2 is not used within the class')
+    }
+
+    @Test
+    void testApplyTo_UnusedPrivateMethodsWithAnnotationPatternToIgnore() {
+        final SOURCE = '''
+            import javax.annotation.PostConstruct
+            class MyClass {
+                @PostConstruct
+                private int countStuff() { }
+                private int countStuff2() { }
+          }
+        '''
+        rule.ignoreMethodsWithAnnotationNames = 'Post*'
+        assertSingleViolation(SOURCE, 6, 'private int countStuff2() { }', 'The method countStuff2 is not used within the class')
+    }
+
+    @Test
+    void testApplyTo_UnusedPrivateMethodsWithAnnotationListToIgnore() {
+        final SOURCE = '''
+            import javax.annotation.PostConstruct
+            class MyClass {
+                @PostConstruct
+                private int countStuff() { }
+                @Test
+                private int countStuff2() { }
+          }
+        '''
+        rule.ignoreMethodsWithAnnotationNames = 'PostConstruct,Test'
+        assertNoViolations SOURCE
+    }
+
+    @Test
     void testApplyTo_MultipleUnusedPrivateMethods() {
         final SOURCE = '''
             class MyClass {
