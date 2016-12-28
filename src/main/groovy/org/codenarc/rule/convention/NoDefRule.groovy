@@ -40,7 +40,7 @@ class NoDefRule extends AbstractRule {
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         Pattern excludeFilter = excludeRegex ? ~/.*def\s+$excludeRegex.*/ : null
         Pattern excludeFiles = excludeFilesRegex ? ~/$excludeFilesRegex/ : null
-        if (excludeFiles && !(sourceCode.name ==~ excludeFiles)) {
+        if (!excludeFiles || (!sourceCode.name || (!(sourceCode.name ==~ excludeFiles)))) {
             sourceCode.lines.eachWithIndex {
                 String line, int idx ->
                     if (line.contains('def ') && (!excludeFilter || !(line ==~ excludeFilter))) {
