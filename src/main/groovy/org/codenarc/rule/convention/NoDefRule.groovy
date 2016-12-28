@@ -34,15 +34,19 @@ class NoDefRule extends AbstractRule {
     int priority = 3
     protected static final String MESSAGE = 'def should not be used'
     String excludeRegex
+    String excludeFilesRegex
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         Pattern excludeFilter = excludeRegex ? ~/.*def\s+$excludeRegex.*/ : null
-        sourceCode.lines.eachWithIndex {
-            String line, int idx ->
-                if (line.contains('def ') && (!excludeFilter || !(line ==~ excludeFilter))) {
-                    violations << createViolation(idx + 1, line.trim(), MESSAGE)
-                }
+        Pattern excludeFiles = excludeFilesRegex ? ~/$excludeFilesRegex/ : null
+        if (excludeFiles && !(sourceCode.name ==~ excludeFiles)) {
+            sourceCode.lines.eachWithIndex {
+                String line, int idx ->
+                    if (line.contains('def ') && (!excludeFilter || !(line ==~ excludeFilter))) {
+                        violations << createViolation(idx + 1, line.trim(), MESSAGE)
+                    }
+            }
         }
     }
 }
