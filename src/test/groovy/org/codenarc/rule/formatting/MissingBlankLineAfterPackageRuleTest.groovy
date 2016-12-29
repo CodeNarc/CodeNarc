@@ -34,6 +34,15 @@ class MissingBlankLineAfterPackageRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testSuccessScenarioOnlyPackage() {
+        final SOURCE = '''\
+            /** some package comment */
+            package org.codenarc
+            '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testSuccessScenarioWithoutPackage() {
         final SOURCE = '''\
             class MyClass {
