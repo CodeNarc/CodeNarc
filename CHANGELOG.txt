@@ -6,6 +6,7 @@ Changes in version 0.27.0 (??? 2016)
 --------------------------------------
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #180: UnusedPrivateMethodRule to skip method with annotations. (Thanks to Yuriy Chulovskyy)
+- #184: Fix NPE in MissingBlankLineAfterPackageRule for source containing only a package. (Thanks to René Scheibe)
 
 
 Changes in version 0.26.0 (Oct 2016)
