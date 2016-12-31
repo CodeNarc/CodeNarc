@@ -31,11 +31,13 @@ class MissingBlankLineAfterPackageRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-
         PackageNode packageNode = sourceCode.ast?.package
-        if (packageNode && !sourceCode.line(packageNode.lineNumber).isEmpty()) {
-            violations.add(createViolation(packageNode.lineNumber, sourceCode.line(packageNode.lineNumber),
-                "Missing blank line after package statement in file $sourceCode.name"))
+        if (packageNode) {
+            String sourceCodeLine = sourceCode.line(packageNode.lineNumber)
+            if (sourceCodeLine != null && !sourceCodeLine.isEmpty()) {
+                violations.add(createViolation(packageNode.lineNumber, sourceCodeLine,
+                    "Missing blank line after package statement in file $sourceCode.name"))
+            }
         }
     }
 }
