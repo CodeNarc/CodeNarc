@@ -155,6 +155,18 @@ c        '''
     }
 
     @Test
+    void testApplyTo_EmptyConstructorWithIgnoreEmptyBlock_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass() {}
+            }
+        '''
+
+        rule.ignoreEmptyBlock = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_Constructor_Violations() {
         final SOURCE = '''
             class MyClass {
