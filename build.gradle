@@ -25,6 +25,8 @@ dependencies {
     compile 'log4j:log4j:1.2.14'
     compile('org.gmetrics:GMetrics:0.7') { transitive = false }
     compile 'junit:junit:4.8.1'
+
+    testCompile 'commons-cli:commons-cli:1.2'
 }
 
 sourceSets {

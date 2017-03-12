@@ -15,10 +15,14 @@
  */
 package org.codenarc.ant
 
+import static java.lang.Thread.currentThread
+
 import org.apache.log4j.Logger
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
+import org.apache.tools.ant.types.Path
+import org.apache.tools.ant.types.Reference
 import org.codenarc.CodeNarcRunner
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.ReportWriterFactory
@@ -71,6 +75,11 @@ class CodeNarcTask extends Task {
     int maxPriority2Violations = Integer.MAX_VALUE
     int maxPriority3Violations = Integer.MAX_VALUE
 
+    /**
+     * Classpath used when compiling analysed classes.
+     */
+    Path classpath
+
     protected List reportWriters = []
     protected List fileSets = []
     protected ruleSet
@@ -101,7 +110,7 @@ class CodeNarcTask extends Task {
         codeNarcRunner.reportWriters = reportWriters
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
 
-        def results = codeNarcRunner.execute()
+        def results = executeRunnerWithConfiguredClasspath(codeNarcRunner)
 
         checkMaxViolations(results) 
     }
@@ -122,11 +131,23 @@ class CodeNarcTask extends Task {
             reportWriter.title = report.title
         }
         if (report.toFile) {
-            reportWriter.outputFile = report.toFile 
+            reportWriter.outputFile = report.toFile
         }
 
         LOG.debug("Adding report: $reportWriter")
         reportWriters << reportWriter
+    }
+
+    Path createClasspath() {
+        classpath = classpath ?: new Path(getProject())
+        classpath.createPath()
+    }
+
+    /**
+     * Adds a reference to a classpath defined elsewhere to be used when compiling analysed classes.
+     */
+    void setClasspathRef(Reference reference) {
+        createClasspath().refid = reference
     }
 
     /**
@@ -154,4 +175,23 @@ class CodeNarcTask extends Task {
         }
     }
 
+    private Results executeRunnerWithConfiguredClasspath(codeNarcRunner) {
+        def paths = classpath?.list()
+        if (paths) {
+            def oldContextClassLoader = currentThread().contextClassLoader
+            try {
+                currentThread().contextClassLoader = classLoaderForPaths(paths, oldContextClassLoader)
+                codeNarcRunner.execute()
+            } finally {
+                currentThread().contextClassLoader = oldContextClassLoader
+            }
+        } else {
+            codeNarcRunner.execute()
+        }
+    }
+
+    private ClassLoader classLoaderForPaths(String[] paths, ClassLoader parent) {
+        def urls = paths.collect { new File(it).toURI().toURL() } as URL[]
+        new URLClassLoader(urls, parent)
+    }
 }
