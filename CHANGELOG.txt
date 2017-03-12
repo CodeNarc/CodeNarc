@@ -8,6 +8,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #180: UnusedPrivateMethodRule to skip method with annotations. (Thanks to Yuriy Chulovskyy)
 - #184: Fix NPE in MissingBlankLineAfterPackageRule for source containing only a package. (Thanks to René Scheibe)
 - #186: Fix #185: SpaceAfterOpeningBrace does not honour ignoreEmptyBlock for constructors. (Thanks to Jenn Strater)
+- #182: UnusedVariableRule: Ignore variables in Scripts annotated with @Field.
 
 
 Changes in version 0.26.0 (Oct 2016)

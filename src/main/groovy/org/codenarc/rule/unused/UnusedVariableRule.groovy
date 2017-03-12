@@ -84,7 +84,8 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
             varExpressions.each { varExpression ->
-                if (!AstUtil.hasAnyAnnotation(declarationExpression, 'BaseScript', 'groovy.transform.BaseScript')) {
+                if (!AstUtil.hasAnyAnnotation(declarationExpression, 'BaseScript', 'groovy.transform.BaseScript') &&
+                        !AstUtil.hasAnyAnnotation(declarationExpression, 'Field', 'groovy.transform.Field')) {
                     variablesInCurrentBlockScope[varExpression] = false
                 }
             }

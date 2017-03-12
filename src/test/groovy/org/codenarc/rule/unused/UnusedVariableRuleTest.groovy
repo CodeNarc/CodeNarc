@@ -375,6 +375,47 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_Script_WithField() {
+        final SOURCE = '''
+            import cucumber.api.groovy.EN
+            import groovy.transform.Field
+
+            import static cucumber.api.groovy.Hooks.Before
+
+            metaClass.mixin(EN)
+
+            @Field String myVar
+
+            Before {
+                doStuff()
+            }
+
+            private void doStuff() {
+                myVar = '50'
+            }
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_Script_WithField_FullPackageDeclaration() {
+        final SOURCE = '''
+            import static cucumber.api.groovy.Hooks.Before
+
+            @groovy.transform.Field String myVar
+
+            Before {
+                doStuff()
+            }
+
+            private void doStuff() {
+                myVar = '50'
+            }
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_NoVariableDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
