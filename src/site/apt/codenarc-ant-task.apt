@@ -38,6 +38,10 @@ CodeNarc - Ant Task
 |                        | null/empty, then do nothing. See                               |                        |
 |                        | {{{./codenarc-BaselineXmlReportWriter.html}Baseline Report}}.  |                        |
 *------------------------+----------------------------------------------------------------+------------------------+
+| classpathRef           | The reference to a path element which is to be used as         | NO                     |
+|                        | classpath when compiling analysed sources (useful with         |                        |
+|                        | {{{./codenarc-enhanced-classpath-rules.html} Enhanced Classpath Rules}}). |             |
+*------------------------+----------------------------------------------------------------+------------------------+
 
 
 * Report Nested Element
@@ -83,6 +87,15 @@ CodeNarc - Ant Task
   At least one <<fileset>> nested element is required, and is used to specify the source files that
   <<CodeNarc>> should analyze. This is the standard Ant <FileSet>, and is quite powerful and flexible.
   See the {{{http://ant.apache.org/manual/index.html}Apache Ant Manual}} for more information on <FileSets>.
+
+
+* Classpath Nested Element
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  An optional <<classpath>> nested element can be utilized to specify contents of the classpath to be used when
+  <<CodeNarc>> compiles classes it analyses. Having control over that classpath is essential when using
+  {{{./codenarc-enhanced-classpath-rules.html} Enhanced Classpath Rules}}. It is a standard
+  {{{https://ant.apache.org/manual/using.html#path}Ant <Path> element}}.
 
 
 * {Example}

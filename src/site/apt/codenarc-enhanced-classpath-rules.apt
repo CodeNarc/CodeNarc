@@ -26,12 +26,10 @@ CodeNarc - Enhanced Classpath Rules
 * CodeNarc Ant Task - Expanding the Classpath
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  TBD...
-
   <<CodeNarc>> users that use the Ant Task directly will need to adjust their Ant scripts to expand
-  the classpath, if they want to take advantage of these special new rules.
-
-  See the {{{./codenarc-ant-task.html}CodeNarc Ant Task}} for more information on configuring the Ant task.
+  the classpath, if they want to take advantage of these special new rules. Classes needed when compiling analysed
+  sources can be added to the classpath via <<classpathRef>> property or <<classpath>> nested element of CodeNarc Ant
+  task which are documented in the {{{./codenarc-ant-task.html}CodeNarc Ant Task}} page.
 
 
 * CodeNarc - Other Tools and Frameworks - Expanding the Classpath?
