@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.expr.AnnotationConstantExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -52,6 +53,12 @@ class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitConstantExpression(expression)
+    }
+
+    @Override
+    void visitGStringExpression(GStringExpression expression) {
+        // GStrings may contain constituent "regular" strings, but we don't want to process those for this rule.
+        //super.visitGStringExpression(expression)
     }
 
     @Override

@@ -102,6 +102,7 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
     @Test
     void testDoubleQuoteStrings_NoViolations() {
         final SOURCE = '''
+            def valueToBeReplaced = '123'
             def str1 = "123"
             def str2 = "abc def ghi"
             def str3 = "abc ${count}"
@@ -109,7 +110,31 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
             def str5 = "abc {123}"
             def str6 = "abc ${}"
             def str7 = "total: ${count * 25}"
+            def str8 = "$valueToBeReplaced \$valueNotToBeReplaced"
         '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testMultilineGStrings_NoViolations() {
+        final SOURCE = '''
+            def "plugin does not apply idea plugin"() {
+                given:
+                buildScript << """
+                    task $testTaskName {
+                        doLast {
+                            println "Has idea plugin: \\${project.plugins.hasPlugin(IdeaPlugin)}"
+                        }
+                    }
+                """
+
+                expect:
+                runTask(testTaskName).output.contains('Has idea plugin: false')
+
+                where:
+                testTaskName = 'hasIdeaPlugin\'
+            }
+            '''
         assertNoViolations(SOURCE)
     }
 

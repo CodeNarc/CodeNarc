@@ -2,13 +2,14 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.27.0 (??? 2016)
+Changes in version 0.27.0 (??? 2017)
 --------------------------------------
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #180: UnusedPrivateMethodRule to skip method with annotations. (Thanks to Yuriy Chulovskyy)
 - #184: Fix NPE in MissingBlankLineAfterPackageRule for source containing only a package. (Thanks to René Scheibe)
 - #186: Fix #185: SpaceAfterOpeningBrace does not honour ignoreEmptyBlock for constructors. (Thanks to Jenn Strater)
 - #182: UnusedVariableRule: Ignore variables in Scripts annotated with @Field.
+- #188: GStringExpressionWithinString: Fix false positive for an escaped $ character within a GString.
 - #191: Add ability to specify compile classpath for analysed sources when using CodeNarc's Ant task. (Thanks to Marcin Erdmann)
 
 
