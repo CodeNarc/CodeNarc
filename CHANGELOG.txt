@@ -12,6 +12,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #188: GStringExpressionWithinString: Fix false positive for an escaped $ character within a GString.
 - #191: Add ability to specify compile classpath for analysed sources when using CodeNarc's Ant task. (Thanks to Marcin Erdmann)
 - #183: Online docs - Added note and link to common rule config properties from each rule where applyToClassNames and doNotApplyToClassNames properties are not available.
+- #193: Change EmptyClassRule to subclass AbstractAstVisitorRule.
 
 
 Changes in version 0.26.0 (Oct 2016)

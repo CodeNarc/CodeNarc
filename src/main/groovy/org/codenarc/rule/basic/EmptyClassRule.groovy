@@ -17,9 +17,8 @@ package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
-import org.codenarc.rule.AbstractRule
-import org.codenarc.rule.Violation
-import org.codenarc.source.SourceCode
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 import java.lang.reflect.Modifier
 
@@ -29,24 +28,26 @@ import java.lang.reflect.Modifier
  * Ignores interfaces, abstract classes, Enums, anonymous inner classes, subclasses (extends), and classes with annotations.
  *
  * @author Artur Gajowy
+ * @author Chris Mair
  */
-class EmptyClassRule extends AbstractRule {
+class EmptyClassRule extends AbstractAstVisitorRule {
     String name = 'EmptyClass'
     int priority = 2
+    Class astVisitorClass = EmptyClassAstVisitor
+}
 
+class EmptyClassAstVisitor extends AbstractAstVisitor  {
     @Override
-    void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        sourceCode.ast?.classes?.each { classNode ->
-            if (
-                    !classNode.isInterface() &&
-                    !Modifier.isAbstract(classNode.modifiers) &&
-                    !classNode.isEnum() &&
-                    !isAnonymousInnerClass(classNode) &&
-                    !isSubclass(classNode) &&
-                    !hasAnnotation(classNode) &&
-                    isEmpty(classNode)) {
-                violations << createViolation(sourceCode, classNode, violationMessage(classNode))
-            }
+    protected void visitClassEx(ClassNode classNode) {
+        if (
+                !classNode.isInterface() &&
+                !Modifier.isAbstract(classNode.modifiers) &&
+                !classNode.isEnum() &&
+                !isAnonymousInnerClass(classNode) &&
+                !isSubclass(classNode) &&
+                !hasAnnotation(classNode) &&
+                isEmpty(classNode)) {
+            addViolation(classNode, violationMessage(classNode))
         }
     }
 
