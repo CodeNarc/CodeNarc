@@ -167,10 +167,12 @@ FieldName.applyToClassNames=org.codenarc.CodeNarc,org.codenarc.extra.*
 
   Both properties default to <<<null>>>.
 
-  These properties are available only to subclasses of <<<AbstractAstVisitorRule>>>, but this
-  includes almost all of the rules provided with <<CodeNarc>> -- i.e., all of the rules that deal with
+  NOTE: The <applyToClassNames> and <doNotApplyToClassNames> rule configuration properties
+  are available only to subclasses of <<<AbstractAstVisitorRule>>>. This includes
+  most of the rules provided with <<CodeNarc>> -- i.e., all of the rules that deal with
   the Groovy AST (Abstract Syntax Tree) of a source file. This includes any rule that processes
-  source code elements such as a package, class, method, field, parameter, etc..
+  source code elements such as a package, class, method, field, parameter, etc.. But it does not
+  include rules that handle imports, blank lines or other file-based rules.
 
 
 ** Applying Rules Based on File Path or Name

@@ -145,14 +145,23 @@ Convention Rules  ("<rulesets/convention.xml>")
 |                               | or methods that could be precede by the <<<def>>> keyword.     |                     |
 *-------------------------------+----------------------------------------------------------------+---------------------+
 
-  <<NOTE:>> This rule applies to the text contents of a <file> rather than a specific <class>,
-  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
 
 * {NoTabCharacter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.25>
 
   Checks that all source files do not contain the tab character.
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
 
 * {ParameterReassignment} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

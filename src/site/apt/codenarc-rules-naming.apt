@@ -43,6 +43,11 @@ Naming Rules  ("<rulesets/naming.xml>")
 
   Reports files containing only one top level class / enum / interface which is named differently than the file.
 
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
 
 * {ClassNameSameAsSuperclass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -302,6 +307,11 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     |                                                                                  |                        |
 |                     | If <<<groupId>>> is null or empty, this rule does nothing.                       |                        |
 *---------------------+----------------------------------------------------------------------------------+------------------------+
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {ParameterName} Rule

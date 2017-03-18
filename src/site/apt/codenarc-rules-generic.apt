@@ -135,7 +135,6 @@ Generic Rules  ("<rulesets/generic.xml>")
   this rule to apply to a specific set of classes or files.
 
 
-
 * {IllegalClassReference} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -253,8 +252,10 @@ Generic Rules  ("<rulesets/generic.xml>")
   A RuleSet can contain any number of instances of this rule, but each should be configured
   with a unique rule <name> and <regex>, and (optionally) customized <violationMessage> and <priority>.
 
-  <<NOTE:>> This rule applies to the text contents of an entire <file> rather than a specific <class>,
-  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {IllegalString} Rule
@@ -272,8 +273,10 @@ Generic Rules  ("<rulesets/generic.xml>")
   A RuleSet can contain any number of instances of this rule, but each should be configured
   with a unique rule <name> and <string>, and (optionally) customized <violationMessage> and <priority>.
 
-  <<NOTE:>> This rule applies to the text contents of an entire <file> rather than a specific <class>,
-  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {IllegalSubclass} Rule
@@ -314,8 +317,10 @@ Generic Rules  ("<rulesets/generic.xml>")
   A RuleSet can contain any number of instances of this rule, but each should be configured
   with a unique rule <name> and <regex>, and (optionally) customized <violationMessage> and <priority>.
 
-  <<NOTE:>> This rule applies to the text contents of an entire <file> rather than a specific <class>,
-  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {RequiredString} Rule
@@ -332,8 +337,10 @@ Generic Rules  ("<rulesets/generic.xml>")
   A RuleSet can contain any number of instances of this rule, but each should be configured
   with a unique rule <name> and <string>, and (optionally) customized <violationMessage> and <priority>.
 
-  <<NOTE:>> This rule applies to the text contents of an entire <file> rather than a specific <class>,
-  so it does not support the <applyToClassNames> and <doNotApplyToClassNames> configuration properties.
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {StatelessClass} Rule

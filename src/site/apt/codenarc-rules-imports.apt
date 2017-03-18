@@ -11,11 +11,21 @@ Imports Rules  ("<rulesets/imports.xml>")
 
   Checks for a duplicate <import> statements.
 
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.
+
 
 * {ImportFromSamePackage} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Checks for an <import> of a class that is within the same package as the importing class.
+
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.
 
 
 * {ImportFromSunPackages} Rule
@@ -31,6 +41,11 @@ Imports Rules  ("<rulesets/imports.xml>")
 
     public class MyClass{}
 -------------------------------------------------------------------------------
+
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.
 
 
 * {MisorderedStaticImports} Rule
@@ -50,6 +65,11 @@ Imports Rules  ("<rulesets/imports.xml>")
     public class MyClass{}
 -------------------------------------------------------------------------------
 
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.
+
 
 * {UnnecessaryGroovyImport} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,6 +78,11 @@ Imports Rules  ("<rulesets/imports.xml>")
   Groovy files. A Groovy file does not need to include an import for classes from
   <java.lang>, <java.util>, <java.io>, <java.net>, <groovy.lang> and <groovy.util>, as well as the
   classes <java.math.BigDecimal> and <java.math.BigInteger>.
+
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.
 
 
 * {UnusedImport} Rule
@@ -72,6 +97,13 @@ Imports Rules  ("<rulesets/imports.xml>")
 
   * Misses unused imports if the class/alias name is contained within strings, comments or other (longer)
     names (i.e., if that string shows up almost anywhere within the source code).
+
+  []
+
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.
 
 
 * {NoWildcardImports} Rule
@@ -88,3 +120,8 @@ Imports Rules  ("<rulesets/imports.xml>")
 
     public class MyClass{}
 -------------------------------------------------------------------------------
+
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.

@@ -12,6 +12,11 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
   Makes sure there are no blank lines before the package declaration of a source code file.
 
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
 
 * {BracesForClass} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,6 +26,11 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   line, but the <<<sameLine>>> property can be set to false to override this.
 
   NOTE: This rule ignores annotation types, e.g. <<<@interface MyAnnotation {}>>>.
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {BracesForForLoop} Rule
@@ -78,6 +88,11 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   MyOtherClass defined in the same source file is not the main class. To check all the classes in the file set the rule
   property <<<applyToNonMainClasses>>> to true.
 
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
 
 * {ClosureStatementOnOpeningLineOfMultipleLineClosure} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,12 +132,22 @@ Formatting Rules  ("<rulesets/formatting.xml>")
     def id
 -------------------------------------------------------------------------------
 
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
 
 * {FileEndsWithoutNewline} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.21>
 
   Makes sure each source file ends with a newline character.
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {LineLength} Rule
@@ -164,6 +189,11 @@ Formatting Rules  ("<rulesets/formatting.xml>")
     class MyClass { }                       // violation
 -------------------------------------------------------------------------------
 
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
 
 * {MissingBlankLineAfterPackage} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -181,6 +211,11 @@ Formatting Rules  ("<rulesets/formatting.xml>")
       void go() { /* ... */ }
   }
 -------------------------------------------------------------------------------
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
 
 * {SpaceAfterCatch} Rule
@@ -613,4 +648,9 @@ Formatting Rules  ("<rulesets/formatting.xml>")
   <Since CodeNarc 0.21>
 
   Checks that no lines of source code end with whitespace characters.
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
 
