@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Oct 22, 2016 9:57:48 AM
+CodeNarc Report: Sample Project - Mar 18, 2017 10:39:06 AM
 
-Summary: TotalFiles=365 FilesWithViolations=40 P1=0 P2=53 P3=31
+Summary: TotalFiles=365 FilesWithViolations=40 P1=0 P2=54 P3=31
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
@@ -303,6 +303,7 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
             }
         ' contains a GString-type expression: '${sample.property1}', '${sample.property2}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=104 Msg=[The String '
+            def valueToBeReplaced = '123'
             def str1 = "123"
             def str2 = "abc def ghi"
             def str3 = "abc ${count}"
@@ -310,16 +311,35 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
             def str5 = "abc {123}"
             def str6 = "abc ${}"
             def str7 = "total: ${count * 25}"
+            def str8 = "$valueToBeReplaced $valueNotToBeReplaced"
         ' contains a GString-type expression: '${count}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=118 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=120 Msg=[The String '
+            def "plugin does not apply idea plugin"() {
+                given:
+                buildScript << """
+                    task $testTaskName {
+                        doLast {
+                            println "Has idea plugin: \${project.plugins.hasPlugin(IdeaPlugin)}"
+                        }
+                    }
+                """
+
+                expect:
+                runTask(testTaskName).output.contains('Has idea plugin: false')
+
+                where:
+                testTaskName = 'hasIdeaPlugin'
+            }
+            ' contains a GString-type expression: '${project.plugins.hasPlugin(IdeaPlugin)}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=143 Msg=[The String '
             def str1 = 'total: ${count}'
             def str2 = 'average: ${total / count}'
         ' contains a GString-type expression: '${count}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=123 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=123 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=124 Msg=[The String 'def str2 = 'average: ${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=124 Msg=[The String ''${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=129 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=148 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=148 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=149 Msg=[The String 'def str2 = 'average: ${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=149 Msg=[The String ''${total / count}'' contains a GString-type expression: '${total / count}'] Src=[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=154 Msg=[The String '
             class SomeClass {
                 @SomeAnnotationOnMethod('${sample.property}')
                 void method() {
@@ -327,8 +347,8 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
                 }
             }
         ' contains a GString-type expression: '${sample.property}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=137 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=137 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=162 Msg=[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=162 Msg=[The String ''${count}'' contains a GString-type expression: '${count}'] Src=[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]
 
 File: imports/UnusedImportRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=193 Msg=[The String '
@@ -471,8 +491,8 @@ File: unused/UnusedPrivateMethodParameterRuleTest.groovy
         ' contains a GString-type expression: '${startDate}" }'] Src=[final SOURCE = ''']
 
 File: unused/UnusedPrivateMethodRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 32 methods] Src=[class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=300 Msg=[The String '
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 36 methods] Src=[class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=355 Msg=[The String '
             class MyClass {
                 private int countStuff() { return 99 }
                 int somePublicMethod() { }
@@ -488,7 +508,7 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
                 def myClosure = { println "price is ${getPrice()}" }
             }
         ' contains a GString-type expression: '${getPrice()}" }'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=369 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=424 Msg=[The String '
             class MyClass {
                 static int getTotal() {
                     println "total=${MyClass.countStuff()}"
@@ -496,13 +516,13 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
                 private static int countStuff() { }
             }
         ' contains a GString-type expression: '${MyClass.countStuff()}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=382 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=437 Msg=[The String '
             class MyClass {
                 private int countStuff() { }
                 def other = this."${countStuff}"()
             }
         ' contains a GString-type expression: '${countStuff}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=404 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=459 Msg=[The String '
             class MyClass {
                 private int countStuff() { }
                 def varName = "countStuff"
@@ -511,6 +531,6 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
         ' contains a GString-type expression: '${varName}'] Src=[final SOURCE = ''']
 
 File: unused/UnusedVariableRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 32 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase {]
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 34 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase {]
 
-[CodeNarc (http://www.codenarc.org) v0.26.0]
+[CodeNarc (http://www.codenarc.org) v0.27.0]
