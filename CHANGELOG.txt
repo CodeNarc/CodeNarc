@@ -2,7 +2,7 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
-Changes in version 0.27.0 (??? 2017)
+Changes in version 0.27.0 (Mar 2017)
 --------------------------------------
 UPDATED/ENHANCED RULES AND BUG FIXES
 - #180: UnusedPrivateMethodRule to skip method with annotations. (Thanks to Yuriy Chulovskyy)
