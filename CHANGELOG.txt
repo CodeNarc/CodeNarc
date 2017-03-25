@@ -2,6 +2,11 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.28.0 (??? 2017)
+--------------------------------------
+- #196: Fix #194: SpaceAfterClosingBrace: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)
+
+
 Changes in version 0.27.0 (Mar 2017)
 --------------------------------------
 UPDATED/ENHANCED RULES AND BUG FIXES
