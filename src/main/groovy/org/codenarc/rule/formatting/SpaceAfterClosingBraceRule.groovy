@@ -75,7 +75,7 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
             def line = lastSourceLineOrEmpty(node.code)
             def lastCol = node.code.lastColumnNumber
             if (line.size() >= lastCol && isNotWhitespace(line, lastCol + 1) && line[lastCol - 1] == '}' ) {
-                addOpeningBraceViolation(node.code, 'block')
+                addClosingBraceViolation(node.code, 'block')
             }
         }
     }
@@ -90,7 +90,7 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
             if (startLine[startCol - 1] == '{') {
                 int lastIndex = indexOfClosingBrace(line, lastCol)
                 if (isNotWhitespace(line, lastIndex + 2)) {
-                    addOpeningBraceViolation(block, 'block')
+                    addClosingBraceViolation(block, 'block')
                 }
             }
         }
@@ -107,7 +107,7 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
             if (isNotWhitespace(line, investigatedIndex) &&
                     isNotAllowedCharacterAfterClosure(line, investigatedIndex) &&
                     isNotInsideGString()) {
-                addOpeningBraceViolation(expression, 'closure')
+                addClosingBraceViolation(expression, 'closure')
             }
         }
         super.visitClosureExpression(expression)
@@ -133,7 +133,7 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
         return index in 1..line.size() && !(line[index - 1] in ['.', ')', ';'])
     }
 
-    private void addOpeningBraceViolation(ASTNode node, String keyword) {
+    private void addClosingBraceViolation(ASTNode node, String keyword) {
         addViolation(node, "The closing brace for the $keyword in class $currentClassName is not followed by a space or whitespace")
     }
 
