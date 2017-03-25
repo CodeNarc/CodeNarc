@@ -117,6 +117,10 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     void visitMapEntryExpression(MapEntryExpression expression) {
         if (!rule.checkClosureMapEntryValue && expression.valueExpression instanceof ClosureExpression) {
             isFirstVisit(expression.valueExpression)   // Register the closure so that it will be ignored in visitClosureExpression()
+        } else if (!rule.checkClosureMapEntryValue && expression.valueExpression.hasProperty('arguments')) {
+            if (expression.valueExpression.arguments.last() instanceof ClosureExpression ) {
+                isFirstVisit(expression.valueExpression.arguments.last())
+            }
         }
         super.visitMapEntryExpression(expression)
     }
