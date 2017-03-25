@@ -204,12 +204,14 @@ c        '''
             shouldFail(Exception) { doStuff() }//comment
             def c = { println 123 }//comment
             def m = [a:123, b:{ println 7 }]
+            def m2 = [a:123, b: m.each{ println it }]
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'list.each { name -> doStuff() }', messageText:'The closing brace for the closure in class None is not followed'],
             [lineNumber:3, sourceLineText:'shouldFail(Exception) { doStuff() }', messageText:'The closing brace for the closure in class None is not followed'],
             [lineNumber:4, sourceLineText:'def c = { println 123 }', messageText:'The closing brace for the closure in class None is not followed'],
-            [lineNumber:5, sourceLineText:'def m = [a:123, b:{ println 7 }]', messageText:'The closing brace for the closure in class None is not followed'])
+            [lineNumber:5, sourceLineText:'def m = [a:123, b:{ println 7 }]', messageText:'The closing brace for the closure in class None is not followed'],
+            [lineNumber:6, sourceLineText:'def m2 = [a:123, b: m.each{ println it }]', messageText:'The closing brace for the closure in class None is not followed'])
     }
 
     @Test
@@ -262,6 +264,15 @@ c        '''
     void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
         final SOURCE = '''
             def m = [a:123, b:{ println 7 }]
+        '''
+        rule.checkClosureMapEntryValue = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_CheckClosureMapEntryValue_WithClosureInEntry_NoViolations() {
+        final SOURCE = '''
+            def m = [a: myList.collect { it.value }]
         '''
         rule.checkClosureMapEntryValue = false
         assertNoViolations(SOURCE)
