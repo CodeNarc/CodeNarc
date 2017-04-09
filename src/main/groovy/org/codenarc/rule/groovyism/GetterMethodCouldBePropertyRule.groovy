@@ -96,14 +96,18 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
         def propertyName = node.name[3].toLowerCase() + (node.name.length() == 4 ? '' : node.name[4..-1])
 
         def constantValue
-        if (constant instanceof ConstantExpression) {
-            constantValue = constant.value instanceof String ? "'" + constant.value + "'" : constant.value
-        } else if (constant instanceof ClassExpression) {
-            constantValue = constant.text
-        } else if (constant instanceof VariableExpression) {
-            constantValue = constant.name
-        } else {
-            constantValue = '<UNKNOWN>'
+        switch(constant) {
+            case ConstantExpression:
+                constantValue = constant.value instanceof String ? "'" + constant.value + "'" : constant.value
+                break
+            case ClassExpression:
+                constantValue = constant.text
+                break
+            case VariableExpression:
+                constantValue = constant.name
+                break
+            default:
+                constantValue = '<UNKNOWN>'
         }
 
         "The method '$methodName ' in class $currentClassName can be expressed more simply as the field declaration\n" +
