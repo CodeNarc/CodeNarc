@@ -133,6 +133,16 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
                 4, 'def map2 = [a:1,', 'Map should contain trailing comma.')
     }
 
+    @Test
+    void testNoViolationForMapInConstructorOverMultipleLines() {
+        final SOURCE = '''
+        Person person = new Person( first: 'Jane', last: 'Doe', address: '123 Main Street', city: 'Anywhere',
+           country: 'USA')
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new TrailingCommaRule()
     }
