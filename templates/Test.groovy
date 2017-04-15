@@ -35,7 +35,7 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
     @Test
     void testNoViolations() {
         final SOURCE = '''
-        	// todo: replace with source for passing edge case(s)
+            // todo: replace with source for passing edge case(s)
         '''
         assertNoViolations(SOURCE)
     }
@@ -54,8 +54,8 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
             // todo: replace with source that triggers 2 violations
         '''
         assertViolations(SOURCE,
-            [lineNumber:1, sourceLineText:'...', messageText:'...'],	// todo: replace line number, source line and message
-            [lineNumber:1, sourceLineText:'...', messageText:'...'])	// todo: replace line number, source line and message
+            [lineNumber:1, sourceLineText:'...', messageText:'...'],    // todo: replace line number, source line and message
+            [lineNumber:1, sourceLineText:'...', messageText:'...'])    // todo: replace line number, source line and message
     }
 
     protected Rule createRule() {
