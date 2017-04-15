@@ -18,6 +18,7 @@ package org.codenarc.rule.convention
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapExpression
+import org.codehaus.groovy.ast.expr.NamedArgumentListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.SourceCodeUtil
@@ -42,7 +43,7 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMapExpression(MapExpression expression) {
-        if (isOneLiner(expression) || expression.mapEntryExpressions.isEmpty()) {
+        if (isOneLiner(expression) || isMethodArgument(expression) || expression.mapEntryExpressions.isEmpty()) {
             return
         }
         if (rule.checkMap && !hasTrailingComma(expression.mapEntryExpressions[-1], expression)) {
@@ -62,6 +63,10 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
 
     private static boolean isOneLiner(Expression expression) {
         expression.lineNumber == expression.lastLineNumber
+    }
+
+    private static boolean isMethodArgument(Expression expression) {
+        expression instanceof NamedArgumentListExpression
     }
 
     private boolean hasTrailingComma(Expression lastExpression, Expression outerExpression) {
