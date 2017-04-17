@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,18 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testNoViolationsWithOnlyTwoMatchingConditions() {
+        final SOURCE = '''
+            if (x == 1) {
+                y = x
+            } else if (x == 2) {
+                y = x * 2
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testViolationsWithThreeIfsAndAnElse() {
         final SOURCE = '''
             if (x == 1) {
@@ -75,6 +87,114 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testDifferentLeftExpressionTypesDoNotCauseViolation() {
+        final SOURCE = '''
+        if (x == 1) {
+            y = x
+        } else if (x.value == 2) {
+            y = x * 2
+        } else if (x instanceof String) {
+            y = x * 3
+        } else {
+            y = 0
+        }'''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testMixedLeftExpressionTypesDoNotCauseViolation() {
+        final SOURCE = '''
+        if (x == 1) {
+            y = x
+        } else if (x == 2) {
+            y = x * 2
+        } else if (x.find { it == 3} ) {
+            y = x * 3
+        } else {
+            y = 0
+        }'''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testUnsupportedExpressionTypes() {
+        final SOURCE = '''
+            if (!x && y) {
+                doSomething()
+            } else if (!x && z) {
+                doSomethingElse()
+            } else if (!x && i) {
+                doAnotherThing()
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testMixedSupportedAndUnsupportedOperationTypes() {
+        final SOURCE = '''
+            if (x.is(y)) {
+                doSomething()
+            } else if (x == z) {
+                doSomethingElse()
+            } else if (!x && i) {
+                doAnotherThing()
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testVariationsOnPropertyExpression() {
+        final SOURCE = '''
+            if (p.value instanceof Integer) {
+                x = p.value * 2
+            } else if (p.otherValue instanceof String) {
+                x = p.otherValue * 2
+            } else if (p.value instanceof Boolean) {
+                x = !p.value
+            }
+
+             if (x.value instanceof Integer) {
+                x = x.value * 2
+            } else if (y.value instanceof String) {
+                x = y.otherValue * 2
+            } else if (z.value instanceof Boolean) {
+                x = !z.value
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoViolationAcrossClasses() {
+        final SOURCE = '''
+            class a {
+                def method() {
+                    if(x == 1) {
+                        y = x
+                    } else if (x == 2) {
+                        y = x * 2
+                    }
+                }
+            }
+            class b {
+                def otherMethod() {
+                    if (x == 3) {
+                        y = x * 3
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testMultipleViolations() {
         final SOURCE = '''
             if (x == 1) {
@@ -104,14 +224,6 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase {
                 x = p.value + '1'
             } else if (p.value instanceof Boolean) {
                 x = !p.value
-            }
-
-            if (!x && y) {                      // OK
-                doSomething()
-            } else if (!x && z) {
-                doSomethingElse()
-            } else if (!x && i) {
-                doAnotherThing()
             }
         '''
         assertViolations(SOURCE,
