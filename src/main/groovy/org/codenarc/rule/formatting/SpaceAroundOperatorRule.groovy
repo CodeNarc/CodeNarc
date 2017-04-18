@@ -169,19 +169,18 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private int rightMostColumn(expression) {
-        if (expression instanceof BinaryExpression) {
-            return rightMostColumn(expression.rightExpression)
+        switch(expression) {
+            case BinaryExpression:
+                return rightMostColumn(expression.rightExpression)
+            case MethodCallExpression:
+                return expression.arguments.lastColumnNumber
+            case PropertyExpression:
+                return expression.property.lastColumnNumber
+            case BooleanExpression:
+                return rightMostColumn(expression.expression)
+            default:
+                expression.lastColumnNumber
         }
-        if (expression instanceof MethodCallExpression) {
-            return expression.arguments.lastColumnNumber
-        }
-        if (expression instanceof PropertyExpression) {
-            return expression.property.lastColumnNumber
-        }
-        if (expression instanceof BooleanExpression) {
-            return rightMostColumn(expression.expression)
-        }
-        expression.lastColumnNumber
     }
 
     private int leftMostColumn(expression) {

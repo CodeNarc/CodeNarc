@@ -39,20 +39,18 @@ class PropertyUtil {
 
         Object newPropertyValue = propertyValue
 
-        if (property.type == int) {
-            newPropertyValue = Integer.parseInt(propertyValue.trim())
-        }
-
-        if (property.type == long) {
-            newPropertyValue = Long.parseLong(propertyValue.trim())
-        }
-
-        if (property.type == boolean) {
-            newPropertyValue = Boolean.parseBoolean(propertyValue.trim())
-        }
-
-        if (property.type == BigDecimal) {
-            newPropertyValue = new BigDecimal(propertyValue.trim())
+        switch(property.type) {
+            case int:
+                newPropertyValue = Integer.parseInt(propertyValue.trim())
+                break
+            case long:
+                newPropertyValue = Long.parseLong(propertyValue.trim())
+                break
+            case boolean:
+                newPropertyValue = Boolean.parseBoolean(propertyValue.trim())
+                break
+            case BigDecimal:
+                newPropertyValue = new BigDecimal(propertyValue.trim())
         }
 
         object[propertyName] = newPropertyValue

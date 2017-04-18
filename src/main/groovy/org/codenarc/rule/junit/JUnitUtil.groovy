@@ -79,15 +79,14 @@ class JUnitUtil {
     }
 
     private static boolean isLiteralWithValueThatEvaluatesTo(Expression expression, boolean literalEvaluatesToTrue) {
-        if (expression instanceof ConstantExpression) {
-            def value = expression.properties['value']
-            return value != null && (value as boolean) == literalEvaluatesToTrue
-        }
-        if (expression instanceof ListExpression) {
-            return expression.expressions.isEmpty() == !literalEvaluatesToTrue
-        }
-        if (expression instanceof MapExpression) {
-            return expression.mapEntryExpressions.isEmpty() == !literalEvaluatesToTrue
+        switch(expression) {
+            case ConstantExpression:
+                def value = expression.properties['value']
+                return value != null && (value as boolean) == literalEvaluatesToTrue
+            case ListExpression:
+                return expression.expressions.isEmpty() == !literalEvaluatesToTrue
+            case MapExpression:
+                return expression.mapEntryExpressions.isEmpty() == !literalEvaluatesToTrue
         }
     }
 

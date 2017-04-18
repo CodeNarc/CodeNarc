@@ -47,15 +47,17 @@ class DeadCodeAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean statementForcesMethodReturn(Statement statement) {
-        if (statement instanceof ReturnStatement ) { return true }
-        if (statement instanceof ThrowStatement ) { return true }
-        if (statement instanceof IfStatement) {
-            return statementForcesMethodReturn(statement.ifBlock) && statementForcesMethodReturn(statement.elseBlock)
+        switch(statement) {
+            case ReturnStatement:
+            case ThrowStatement:
+                return true
+            case IfStatement:
+                return statementForcesMethodReturn(statement.ifBlock) && statementForcesMethodReturn(statement.elseBlock)
+            case TernaryExpression:
+                return statementForcesMethodReturn(statement.trueExpression) && statementForcesMethodReturn(statement.falseExpression)
+            default:
+                return false
         }
-        if (statement instanceof TernaryExpression) {
-            return statementForcesMethodReturn(statement.trueExpression) && statementForcesMethodReturn(statement.falseExpression)
-        }
-        false
     }
 
 }
