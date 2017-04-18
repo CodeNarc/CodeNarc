@@ -4,8 +4,15 @@ http://www.codenarc.org
 
 Changes in version 0.28.0 (??? 2017)
 --------------------------------------
+NEW RULES
+- #199: CouldBeSwitchStatement rule (convention) - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
+UPDATED/ENHANCED RULES AND BUG FIXES
 - #196: Fix #194: SpaceAfterClosingBrace: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)
-- #199: CouldBeSwitchStatement rule (convention) - Checks for multiple if statements that could be converted to a switch
+- #201: Remove tabs from test template. (Thanks to Jenn Strater)
+- #200: Fix the error message in the logs from the space after closing brace rule. (Thanks to Jenn Strater)
+- #198: Fix false positive for trailing comma when sending method parameters by name. (Thanks to Jenn Strater)
+- #202: update copyright year in rule templates. (Thanks to Jenn Strater)
+
 
 Changes in version 0.27.0 (Mar 2017)
 --------------------------------------
