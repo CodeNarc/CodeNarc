@@ -195,11 +195,6 @@ Convention Rules  ("<rulesets/convention.xml>")
 |                               | or methods that could be precede by the <<<def>>> keyword.     |                     |
 *-------------------------------+----------------------------------------------------------------+---------------------+
 
-  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
-  <doNotApplyToClassNames> rule configuration properties are not available. See
-  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
-    Standard Properties for Configuring Rules}}.
-
 
 * {NoTabCharacter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
