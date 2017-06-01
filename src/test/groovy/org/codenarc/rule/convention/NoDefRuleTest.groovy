@@ -43,15 +43,27 @@ class NoDefRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testTwoViolationForReturnAndParameter() {
+        final SOURCE = '''\
+                def hello(def l){
+                    int k = 3
+                }
+            '''.stripMargin()
+        assertTwoViolations(SOURCE,
+                1, 'def hello(def l){', NoDefRule.MESSAGE_DEF_RETURN,
+                1, 'def hello(def l){', NoDefRule.MESSAGE_DEF_PARAMETER)
+    }
+
+    @Test
     void testTwoViolation() {
         final SOURCE = '''\
-            def test(def l){
+            def test(int l){
                 int k = 3
                 def i = 5
             }
         '''.stripMargin()
-        assertTwoViolations (SOURCE,
-                1, 'def test(def l){', NoDefRule.MESSAGE,
+        assertTwoViolations(SOURCE,
+                1, 'def test(int l){', NoDefRule.MESSAGE_DEF_RETURN,
                 3, 'def i = 5', NoDefRule.MESSAGE)
     }
 
@@ -66,6 +78,50 @@ class NoDefRuleTest extends AbstractRuleTestCase {
             def "should send"(){}
         '''.stripMargin()
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoViolationForComments() {
+        final SOURCE_WITH_VIOLATION = '''\
+                // def cmt = [:]
+                def l = [1, 2]
+            '''.stripMargin()
+        assertSingleViolation SOURCE_WITH_VIOLATION, 2, 'def l = [1, 2]', NoDefRule.MESSAGE
+
+        final SOURCE_WITHOUT_VIOLATION = '''\
+                    List l = [1, 2, 3, 4]
+                    // def cmt = [:]
+                    l.flatten()
+                '''.stripMargin()
+        assertNoViolations(SOURCE_WITHOUT_VIOLATION)
+    }
+
+    @Test
+    void testConstructorSuccessScenario() {
+        final SOURCE = '''\
+                        class User {
+                            String name
+                            
+                            User(String name) {
+                                this.name = name
+                            }
+                        }
+                    '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testConstructorSingleViolation() {
+        final SOURCE = '''\
+                            class User {
+                                String name
+                                
+                                User(def name) {
+                                    this.name = name
+                                }
+                            }
+                        '''.stripMargin()
+        assertSingleViolation SOURCE, 4, 'User(def name) {', NoDefRule.MESSAGE_DEF_PARAMETER
     }
 
     @Override
