@@ -306,7 +306,15 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                     println u                                                // 8
                     println x                                                // 9
                 }                                                            // 10
-            }                                                                // 11
+                private MyClass()  {                                         // 11
+                    @SuppressWarnings('Rule1')                               // 12
+                    int t = 123                                              // 13
+                    @SuppressWarnings('Rule1') int u = 123                   // 14
+                    int x = u + t                                            // 15
+                    println u                                                // 16
+                    println x                                                // 17
+                }                                                            // 18                
+            }                                                                // 19
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -322,6 +330,14 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 9))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 11))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 12))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 13))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 14))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 15))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 16))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 17))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 18))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 19))
     }
 
     @Test

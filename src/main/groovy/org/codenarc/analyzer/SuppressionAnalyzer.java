@@ -113,10 +113,11 @@ public class SuppressionAnalyzer {
                 }
                 declarationVisitor.visitMethod(methodNode);
             }
-            for (AnnotatedNode methodNode : from(classNode.getDeclaredConstructors())) {
-                for (String ruleName : getSuppressedRuleNames(methodNode)) {
-                    populateLineNumbers(methodNode, result, numLines, ruleName);
+            for (ConstructorNode constructorNode : from(classNode.getDeclaredConstructors())) {
+                for (String ruleName : getSuppressedRuleNames(constructorNode)) {
+                    populateLineNumbers(constructorNode, result, numLines, ruleName);
                 }
+                declarationVisitor.visitConstructor(constructorNode);
             }
         }
         return result;
