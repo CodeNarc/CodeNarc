@@ -2,8 +2,10 @@ package org.codenarc.analyzer;
 
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.ConstantExpression;
+import org.codehaus.groovy.ast.expr.DeclarationExpression;
 import org.codehaus.groovy.ast.expr.Expression;
 import org.codehaus.groovy.ast.expr.ListExpression;
+import org.codenarc.rule.AbstractAstVisitor;
 import org.codenarc.rule.Rule;
 import org.codenarc.rule.Violation;
 import org.codenarc.source.SourceCode;
@@ -12,7 +14,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * This class encapsulates all of the logic for determining if an rule is suppressed or not. 
+ * This class encapsulates all of the logic for determining if an rule is suppressed or not.
  */
 public class SuppressionAnalyzer {
 
@@ -20,7 +22,7 @@ public class SuppressionAnalyzer {
     private final SourceCode source;
     private boolean initialized = false;
     private final Object initializationLock = new Object();
-    private final Set<String> suppressedRuleNames = Collections.synchronizedSet(new HashSet<String>()); 
+    private final Set<String> suppressedRuleNames = Collections.synchronizedSet(new HashSet<String>());
     private final Map<String, BitSet> suppressionsByLineNumber = new ConcurrentHashMap<String, BitSet>();
 
     public SuppressionAnalyzer(SourceCode source) {
@@ -53,10 +55,10 @@ public class SuppressionAnalyzer {
         init();
 
         String ruleName = violation.getRule().getName();
-        int lineNumber = violation.getLineNumber(); 
+        int lineNumber = violation.getLineNumber();
         BitSet lines = suppressionsByLineNumber.get(ruleName);
         if (lines != null) {
-            return lines.get(lineNumber);             
+            return lines.get(lineNumber);
         }
         return false;
     }
@@ -85,9 +87,9 @@ public class SuppressionAnalyzer {
 
     private Map<String, BitSet> getSuppressionsByLineNumber(ModuleNode ast) {
 
-        Map<String, BitSet> result = new HashMap<String, BitSet>();
-        int numLines = getLineCount(ast);
-        
+        final Map<String, BitSet> result = new HashMap<String, BitSet>();
+        final int numLines = getLineCount(ast);
+
         for (ClassNode classNode : ast.getClasses()) {
             for (String ruleName : getSuppressedRuleNames(classNode)) {
                 populateLineNumbers(classNode, result, numLines, ruleName);
@@ -97,18 +99,28 @@ public class SuppressionAnalyzer {
                     populateLineNumbers(fieldNode, result, numLines, ruleName);
                 }
             }
-            for (AnnotatedNode methodNode : from(classNode.getMethods())) {
+            AbstractAstVisitor declarationVisitor = new AbstractAstVisitor() {
+                public void visitDeclarationExpression(DeclarationExpression expression) {
+                    for (String ruleName : getSuppressedRuleNames(expression)) {
+                        populateLineNumbers(expression, result, numLines, ruleName);
+                    }
+                    super.visitDeclarationExpression(expression);
+                }
+            };
+            for (MethodNode methodNode : from(classNode.getMethods())) {
                 for (String ruleName : getSuppressedRuleNames(methodNode)) {
                     populateLineNumbers(methodNode, result, numLines, ruleName);
                 }
+                declarationVisitor.visitMethod(methodNode);
             }
-            for (AnnotatedNode methodNode : from(classNode.getDeclaredConstructors())) {
-                for (String ruleName : getSuppressedRuleNames(methodNode)) {
-                    populateLineNumbers(methodNode, result, numLines, ruleName);
+            for (ConstructorNode constructorNode : from(classNode.getDeclaredConstructors())) {
+                for (String ruleName : getSuppressedRuleNames(constructorNode)) {
+                    populateLineNumbers(constructorNode, result, numLines, ruleName);
                 }
+                declarationVisitor.visitConstructor(constructorNode);
             }
         }
-        return result; 
+        return result;
     }
 
     @SuppressWarnings({"unchecked"})
@@ -135,7 +147,7 @@ public class SuppressionAnalyzer {
                 highest = classNode.getLastLineNumber();
             }
         }
-        return highest; 
+        return highest;
     }
 
     private static Collection<String> getSuppressedRuleNames(Collection<? extends AnnotatedNode> imports) {
@@ -192,7 +204,7 @@ public class SuppressionAnalyzer {
                     if ("SuppressWarnings".equals(name)) {
                         result.add(n);
                     } else if ("java.lang.SuppressWarnings".equals(name)) {
-                        result.add(n);                         
+                        result.add(n);
                     }
                 }
             }

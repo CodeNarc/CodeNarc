@@ -295,6 +295,52 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void testDeclarations() {
+        def analyzer = new SuppressionAnalyzer(new SourceString('''   // 1
+            class MyClass {                                                  // 2                
+                void run() {                                                 // 3
+                    @SuppressWarnings('Rule1')                               // 4
+                    int t = 123                                              // 5
+                    @SuppressWarnings('Rule1') int u = 123                   // 6 
+                    int x = u + t                                            // 7 
+                    println u                                                // 8
+                    println x                                                // 9
+                }                                                            // 10
+                private MyClass()  {                                         // 11
+                    @SuppressWarnings('Rule1')                               // 12
+                    int t = 123                                              // 13
+                    @SuppressWarnings('Rule1') int u = 123                   // 14
+                    int x = u + t                                            // 15
+                    println u                                                // 16
+                    println x                                                // 17
+                }                                                            // 18                
+            }                                                                // 19
+        '''))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 0))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 1))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 2))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 3))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 4))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 5))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 6))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 7))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 8))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 9))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 11))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 12))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 13))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 14))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 15))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 16))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 17))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 18))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 19))
+    }
+
+    @Test
     void testCompilationFails() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
             class XYZ ^&**(
