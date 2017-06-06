@@ -189,6 +189,65 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
         """)
     }
 
+    @Test
+    void testSingleViolation_ignoreOverriddenMethods_default() {
+        rule.maxParameters = 3
+        assertInlineViolations("""
+            class TestClass {
+
+                TestClass() {
+                }
+
+                void someMethod() {
+                }
+
+                @Override
+                void someMethod(int arg1, int arg2, int arg3, int arg4, int arg5) { ${violation('method TestClass.someMethod')}
+                }
+            }
+        """)
+    }
+
+    @Test
+    void testNoViolations_ignoreOverriddenMethods() {
+        rule.maxParameters = 3
+        rule.ignoreOverriddenMethods = true
+        assertNoViolations('''
+            class TestClass {
+
+                TestClass() {
+                }
+
+                void someMethod() {
+                }
+
+                @Override
+                void someMethod(int arg1, int arg2, int arg3, int arg4, int arg5) {
+                }
+            }
+        ''')
+    }
+
+    @Test
+    void testSingleViolation_ignoreOverriddenMethods() {
+        rule.maxParameters = 3
+        rule.ignoreOverriddenMethods = true
+        assertInlineViolations("""
+            class TestClass {
+                void someMethod(int arg1, int arg2, int arg3, int arg4) { ${violation('method TestClass.someMethod')}
+                }
+
+                @Override
+                void someMethod(int arg1, int arg2, int arg3, int arg4, int arg5) {
+                }
+
+                @java.lang.Override
+                void someMethod(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+                }
+            }
+        """)
+    }
+
     private String violation(String name) {
         return inlineViolation("Number of parameters in ${name} exceeds maximum allowed (${rule.maxParameters}).")
     }

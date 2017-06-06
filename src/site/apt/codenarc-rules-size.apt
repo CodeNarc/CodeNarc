@@ -444,14 +444,20 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
     void someMethod(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) { // violation
     }
 
+    @Override
+    void someMethod(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) { // no violation if ignoreOverriddenMethods == true
+    }
+
     class SampleClass {
         SampleClass(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) { // violation
         }
     }
 -------------------------------------------------------------------------------
 
-*---------------------+----------------------------------------------------------------+------------------------+
-| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
-*---------------------+----------------------------------------------------------------+------------------------+
-| maxParameters       | The maximum number of parameters in method/constructor         | 5                      |
-*---------------------+----------------------------------------------------------------+------------------------+
+*-------------------------+-------------------------------------------------------------------+------------------------+
+| <<Property>>            | <<Description>>                                                   | <<Default Value>>      |
+*-------------------------+-------------------------------------------------------------------+------------------------+
+| maxParameters           | The maximum number of parameters in method/constructor            | 5                      |
+*-------------------------+-------------------------------------------------------------------+------------------------+
+| ignoreOverriddenMethods | Ignore number of parameters for methods with @Override annotation | false                  |
+*-------------------------+-------------------------------------------------------------------+------------------------+
