@@ -15,7 +15,7 @@
  */
 package org.codenarc.test
 
-import org.apache.log4j.Logger
+import org.apache.logging.log4j.LogManager
 import org.junit.Before
 import org.junit.Rule
 import org.junit.rules.TestName
@@ -33,7 +33,7 @@ abstract class AbstractTestCase {
     protected static final CODENARC_PROPERTIES_FILE_PROP = 'codenarc.properties.file'
 
     @SuppressWarnings('FieldName')
-    protected final LOG = Logger.getLogger(getClass())
+    protected final log = LogManager.getLogger()
 
     @SuppressWarnings('PublicInstanceField')
     @Rule public TestName testName = new TestName()
@@ -43,7 +43,7 @@ abstract class AbstractTestCase {
      * @param message - the message to log; toString() is applied first
      */
     protected void log(message) {
-        LOG.info message
+        log.info message
     }
 
     protected String getName() {

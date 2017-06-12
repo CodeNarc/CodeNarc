@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 import org.codenarc.util.io.DefaultResourceFactory
@@ -62,9 +62,9 @@ import org.gmetrics.metric.crap.CrapMetric
  *
  * @author Chris Mair
   */
+@Log4j2
 class CrapMetricRule extends AbstractAstVisitorRule {
 
-    private static final LOG = Logger.getLogger(CrapMetricRule)
 
     String name = 'CrapMetric'
     int priority = 2
@@ -92,11 +92,11 @@ class CrapMetricRule extends AbstractAstVisitorRule {
             if (ready == null) {
                 ready = true
                 if (!doesCoberturaXmlFileExist()) {
-                    LOG.warn("The Cobertura XML file [$coberturaXmlFile] is not accessible; skipping this rule")
+                    log.warn("The Cobertura XML file [$coberturaXmlFile] is not accessible; skipping this rule")
                     ready = false
                 }
                 if (!isCrapMetricClassOnClasspath()) {
-                    LOG.warn('The GMetrics CrapMetric class is not on the classpath; skipping this rule')
+                    log.warn('The GMetrics CrapMetric class is not on the classpath; skipping this rule')
                     ready = false
                 }
             }

@@ -16,7 +16,7 @@
 package org.codenarc.source
 
 import groovy.grape.GrabAnnotationTransformation
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -33,8 +33,8 @@ import org.codenarc.analyzer.SuppressionAnalyzer
  * @author Hamlet D'Arcy
   */
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
+@Log4j2
 abstract class AbstractSourceCode implements SourceCode {
-    static final LOG = Logger.getLogger(AbstractSourceCode)
     static final SEPARATOR_PROP = 'file.separator'
     private ModuleNode ast
     private List lines
@@ -97,7 +97,7 @@ abstract class AbstractSourceCode implements SourceCode {
                 }
                 catch (NoClassDefFoundError e) {
                     logCompilationError(e)
-                    LOG.info("Most likely, a lib containing $e.message is missing from CodeNarc's runtime classpath.")
+                    log.info("Most likely, a lib containing $e.message is missing from CodeNarc's runtime classpath.")
                 }
 
                 methodCallExpressions = new ExpressionCollector().getMethodCalls(ast)
@@ -108,9 +108,9 @@ abstract class AbstractSourceCode implements SourceCode {
     }
 
     private void logCompilationError(Throwable e) {
-        LOG.warn("Compilation failed for [${toString()}].")
+        log.warn("Compilation failed for [${toString()}].")
         if (getAstCompilerPhase() <= DEFAULT_COMPILER_PHASE) {
-            LOG.info("Compilation failed because of [${e.class.name}] with message: [$e.message]")
+            log.info("Compilation failed because of [${e.class.name}] with message: [$e.message]")
         }
     }
 

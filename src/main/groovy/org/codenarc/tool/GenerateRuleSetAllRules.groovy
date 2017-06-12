@@ -16,7 +16,7 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 
 /**
  * Java application (main() method) that generates the "StarterRuleSet-AllRules.groovy.txt.template" file.
@@ -24,11 +24,11 @@ import org.apache.log4j.Logger
  *
  * @author Chris Mair
   */
+@Log4j2
 class GenerateRuleSetAllRules {
 
     protected static final RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRules.groovy.txt'
     private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRules.groovy.template'
-    private static final LOG = Logger.getLogger(GenerateRuleSetAllRules)
 
     protected static ruleSetFile = RULESET_FILE
 
@@ -38,7 +38,7 @@ class GenerateRuleSetAllRules {
      */
     static void main(String[] args) {
         def sortedRules = GenerateUtil.createSortedListOfAllRules()
-        LOG.debug("sortedRules=$sortedRules")
+        log.debug("sortedRules=$sortedRules")
 
         Properties ruleExtraInformation = GenerateUtil.getRuleExtraInformation()
 
@@ -51,7 +51,7 @@ class GenerateRuleSetAllRules {
         def outputFile = new File(ruleSetFile)
         outputFile.text = ruleSetText
 
-        LOG.info("Finished writing ${sortedRules.size()} rules to $ruleSetFile")
+        log.info("Finished writing ${sortedRules.size()} rules to $ruleSetFile")
     }
 
 }

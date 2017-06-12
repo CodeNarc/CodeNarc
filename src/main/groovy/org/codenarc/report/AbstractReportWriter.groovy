@@ -16,7 +16,7 @@
 package org.codenarc.report
 
 import groovy.text.SimpleTemplateEngine
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
@@ -31,6 +31,7 @@ import org.codenarc.util.io.ClassPathResource
  *
  * @author Chris Mair
  */
+@Log4j2
 abstract class AbstractReportWriter implements ReportWriter {
 
     protected static final BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
@@ -40,7 +41,6 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     String outputFile
     Object writeToStandardOut
-    private static final LOG = Logger.getLogger(AbstractReportWriter)
     protected getTimestamp = { new Date() }
     protected customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
     protected resourceBundle
@@ -80,7 +80,7 @@ abstract class AbstractReportWriter implements ReportWriter {
         outputFile.withWriter { writer ->
             writeReport(writer, analysisContext, results)
         }
-        LOG.info("Report file [$outputFilename] created.")
+        log.info("Report file [$outputFilename] created.")
     }
 
     protected void initializeDefaultResourceBundle() {
@@ -88,11 +88,11 @@ abstract class AbstractReportWriter implements ReportWriter {
         resourceBundle = baseBundle
         try {
             resourceBundle = ResourceBundle.getBundle(customMessagesBundleName)
-            LOG.info("Using custom message bundle [$customMessagesBundleName]")
+            log.info("Using custom message bundle [$customMessagesBundleName]")
             resourceBundle.setParent(baseBundle)
         }
         catch(MissingResourceException) {
-            LOG.info("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
+            log.info("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
         }
     }
 
@@ -135,7 +135,7 @@ abstract class AbstractReportWriter implements ReportWriter {
             string = resourceBundle.getString(resourceKey)
         } catch (MissingResourceException e) {
             if (logWarning) {
-                LOG.warn("No string found for resourceKey=[$resourceKey]")
+                log.warn("No string found for resourceKey=[$resourceKey]")
             }
         }
         string

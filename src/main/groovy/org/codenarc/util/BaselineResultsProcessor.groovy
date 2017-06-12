@@ -15,7 +15,7 @@
  */
 package org.codenarc.util
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.ResultsProcessor
 import org.codenarc.report.BaselineViolation
 import org.codenarc.report.BaselineXmlReportParser
@@ -27,10 +27,8 @@ import org.codenarc.util.io.Resource
  * Implementation of ResultsProcessor that removes matching violations specified in a Baseline report.
  * The Baseline violations are read from a Baseline Report from the provided Resource.
  */
+@Log4j2
 class BaselineResultsProcessor implements ResultsProcessor {
-
-    private static final LOG = Logger.getLogger(BaselineResultsProcessor)
-
     final Resource resource
     private final BaselineXmlReportParser parser = new BaselineXmlReportParser()
     protected int numViolationsRemoved = 0
@@ -53,7 +51,7 @@ class BaselineResultsProcessor implements ResultsProcessor {
             baselineViolations.each { baselineViolation -> removeMatchingViolation(results, violations, baselineViolation) }
         }
 
-        LOG.info("Ignored $numViolationsRemoved baseline violations")
+        log.info("Ignored $numViolationsRemoved baseline violations")
     }
 
     private void removeMatchingViolation(Results results, List<Violation> violations, BaselineViolation baselineViolation) {

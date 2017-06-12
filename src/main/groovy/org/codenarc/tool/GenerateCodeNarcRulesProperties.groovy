@@ -15,7 +15,7 @@
  */
  package org.codenarc.tool
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
 
 /**
@@ -26,10 +26,10 @@ import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
  *
  * @author Chris Mair
   */
+@Log4j2
 class GenerateCodeNarcRulesProperties {
 
     protected static final PROPERTIES_FILE = PropertiesFileRuleRegistry.PROPERTIES_FILE
-    private static final LOG = Logger.getLogger(GenerateCodeNarcRulesProperties)
 
     protected static propertiesFile = PROPERTIES_FILE
 
@@ -39,7 +39,7 @@ class GenerateCodeNarcRulesProperties {
      */
     static void main(String[] args) {
         def sortedRules = GenerateUtil.createSortedListOfAllRules()
-        LOG.debug("sortedRules=$sortedRules")
+        log.debug("sortedRules=$sortedRules")
         def propertiesFile = new File(propertiesFile)
         propertiesFile.withWriter { writer ->
             writer.println '# CodeNarc Rules (see PropertiesFileRuleRegistry): ' + new Date()
@@ -47,7 +47,7 @@ class GenerateCodeNarcRulesProperties {
                 writer.println "${rule.name} = ${rule.class.name}"
             }
         }
-        LOG.info("Finished writing ${sortedRules.size()} rules to $propertiesFile")
+        log.info("Finished writing ${sortedRules.size()} rules to $propertiesFile")
     }
 
 }

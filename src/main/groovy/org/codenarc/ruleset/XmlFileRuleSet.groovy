@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.util.io.DefaultResourceFactory
 import org.codenarc.util.io.ResourceFactory
 
@@ -29,9 +29,8 @@ import org.codenarc.util.io.ResourceFactory
  *
  * @author Chris Mair
   */
+@Log4j2
 class XmlFileRuleSet implements RuleSet {
-
-    private static final LOG = Logger.getLogger(XmlFileRuleSet)
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
     private List rules = []
 
@@ -44,7 +43,7 @@ class XmlFileRuleSet implements RuleSet {
      */
     XmlFileRuleSet(String path) {
         assert path
-        LOG.info("Loading ruleset from [$path]")
+        log.info("Loading ruleset from [$path]")
         def inputStream = resourceFactory.getResource(path).inputStream
         inputStream.withReader { reader ->
             def xmlReaderRuleSet = new XmlReaderRuleSet(reader)

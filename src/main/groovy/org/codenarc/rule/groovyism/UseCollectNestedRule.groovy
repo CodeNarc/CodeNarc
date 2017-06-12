@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.Parameter
@@ -41,15 +41,15 @@ class UseCollectNestedRule extends AbstractAstVisitorRule {
     protected static final String MESSAGE = 'Instead of nested collect{}-calls use collectNested{}'
 }
 
+@Log4j2
 class UseCollectNestedAstVisitor extends AbstractAstVisitor {
-    private static final LOG = Logger.getLogger(UseCollectNestedAstVisitor)
 
     private final Stack<Parameter> parameterStack = []
 
     @Override
     protected void visitClassComplete(ClassNode cn) {
         if (parameterStack.size() != 0) {
-            LOG.warn("Internal Error for ${cn.name}: Visits are unbalanced")
+            log.warn("Internal Error for ${cn.name}: Visits are unbalanced")
         }
     }
 

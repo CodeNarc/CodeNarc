@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
@@ -34,8 +34,8 @@ class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessaryPublicModifierAstVisitor
 }
 
+@Log4j2
 class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
-    private static final LOG = Logger.getLogger(UnnecessaryPublicModifierAstVisitor)
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -78,7 +78,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
         while (current <= node.lastLineNumber) {
             def line = sourceCode.line(current)
             if (line == null) {
-                LOG.warn("${rule.name} cannot find source code line $current in ${sourceCode.name}. Scanning lines ${node.lineNumber} to ${node.lastLineNumber}.")
+                log.warn("${rule.name} cannot find source code line $current in ${sourceCode.name}. Scanning lines ${node.lineNumber} to ${node.lastLineNumber}.")
                 return ''
             } else if (line.contains('{')) {
                 return acc + line[0..(line.indexOf('{'))]
