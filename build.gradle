@@ -36,12 +36,6 @@ sourceSets {
     }
 }
 
-test {
-    testLogging {
-        events 'passed', 'skipped', 'failed'
-    }
-}
-
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
