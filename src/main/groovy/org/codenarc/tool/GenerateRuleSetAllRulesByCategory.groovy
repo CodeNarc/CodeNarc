@@ -16,7 +16,7 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
 
@@ -27,11 +27,11 @@ import org.codenarc.ruleset.XmlFileRuleSet
  *
  * @author Chris Mair
   */
+@Log4j2
 class GenerateRuleSetAllRulesByCategory {
 
     protected static final RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRulesByCategory.groovy.txt'
     private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRulesByCategory.groovy.template'
-    private static final LOG = Logger.getLogger(GenerateRuleSetAllRulesByCategory)
 
     protected static ruleSetFile = RULESET_FILE
 
@@ -47,7 +47,7 @@ class GenerateRuleSetAllRulesByCategory {
             rulesByRuleSet[ruleSetPath] = GenerateUtil.sortRules(ruleSet.rules)
         }
 
-        LOG.info("rulesByCategory=$rulesByRuleSet")
+        log.info("rulesByCategory=$rulesByRuleSet")
 
         Properties ruleExtraInformation = GenerateUtil.getRuleExtraInformation()
 
@@ -60,7 +60,7 @@ class GenerateRuleSetAllRulesByCategory {
         def outputFile = new File(ruleSetFile)
         outputFile.text = ruleSetText
 
-        LOG.info("Finished writing $ruleSetFile")
+        log.info("Finished writing $ruleSetFile")
     }
 
 }

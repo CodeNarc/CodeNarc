@@ -15,9 +15,6 @@
  */
 package org.codenarc.test
 
-import org.apache.log4j.AppenderSkeleton
-import org.apache.log4j.spi.LoggingEvent
-
 /**
  * Log4J Appender that saves all logged loggingEvents in a List.
  *

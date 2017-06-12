@@ -15,7 +15,8 @@
  */
 package org.codenarc.ant;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
@@ -39,8 +40,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Chris Mair
  */
 public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
+    private static final Logger log = LogManager.getLogger();
 
-    private static final Logger LOG = Logger.getLogger(AntFileSetSourceAnalyzer.class);
     private static final int POOL_TIMEOUT_SECONDS = 60 * 60;
 
     private final Project project;
@@ -114,7 +115,7 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
         }
 
         addDirectoryResults(reportResults);
-        LOG.info("Analysis time=" + (System.currentTimeMillis() - startTime) + "ms");
+        log.info("Analysis time=" + (System.currentTimeMillis() - startTime) + "ms");
         return reportResults;
     }
 
@@ -140,7 +141,7 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
         String[] includedFiles = dirScanner.getIncludedFiles();
 
         if (includedFiles == null || includedFiles.length == 0) {
-            LOG.info("No matching files found for FileSet with basedir [" + baseDir + "]");
+            log.info("No matching files found for FileSet with basedir [" + baseDir + "]");
             return;
         }
 
@@ -156,7 +157,7 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
                 try {
                     processFile(baseDir, filePath, ruleSet);
                 } catch (Throwable t) {
-                    LOG.info("Error processing filePath: '" + filePath + "'", t);
+                    log.info("Error processing filePath: '" + filePath + "'", t);
                 }
             }
         };

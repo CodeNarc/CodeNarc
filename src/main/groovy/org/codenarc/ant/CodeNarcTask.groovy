@@ -15,9 +15,7 @@
  */
 package org.codenarc.ant
 
-import static java.lang.Thread.currentThread
-
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
@@ -29,6 +27,8 @@ import org.codenarc.report.ReportWriterFactory
 import org.codenarc.results.Results
 import org.codenarc.util.BaselineResultsProcessor
 import org.codenarc.util.io.DefaultResourceFactory
+
+import static java.lang.Thread.currentThread
 
 /**
  * Ant Task for running CodeNarc.
@@ -55,9 +55,9 @@ import org.codenarc.util.io.DefaultResourceFactory
  *
  * @author Chris Mair
  */
+@Log4j2
 class CodeNarcTask extends Task {
 
-    private static final LOG = Logger.getLogger(CodeNarcTask)
 
     /**
      * The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
@@ -89,7 +89,7 @@ class CodeNarcTask extends Task {
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
     protected createCodeNarcRunner = {
         if (excludeBaseline) {
-            LOG.info("Loading baseline violations from [$excludeBaseline]")
+            log.info("Loading baseline violations from [$excludeBaseline]")
             def resource = resourceFactory.getResource(excludeBaseline)
             def resultsProcessor = new BaselineResultsProcessor(resource)
             return new CodeNarcRunner(resultsProcessor:resultsProcessor)
@@ -134,7 +134,7 @@ class CodeNarcTask extends Task {
             reportWriter.outputFile = report.toFile
         }
 
-        LOG.debug("Adding report: $reportWriter")
+        log.debug("Adding report: $reportWriter")
         reportWriters << reportWriter
     }
 

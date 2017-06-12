@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.DefaultResourceFactory
 import org.codenarc.util.io.ResourceFactory
@@ -37,9 +37,9 @@ import org.codenarc.util.io.ResourceFactory
  *
  * @author Chris Mair
   */
+@Log4j2
 class PropertiesFileRuleSetConfigurer {
 
-    private static final LOG = Logger.getLogger(PropertiesFileRuleSetConfigurer)
     private static final PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
 
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
@@ -62,7 +62,7 @@ class PropertiesFileRuleSetConfigurer {
 
         try {
             def inputStream = resourceFactory.getResource(propertiesFilename).inputStream
-            LOG.info("Reading RuleSet configuration from properties file [$propertiesFilename].")
+            log.info("Reading RuleSet configuration from properties file [$propertiesFilename].")
             inputStream.withStream { input ->
                 def properties = new Properties()
                 properties.load(input)
@@ -70,7 +70,7 @@ class PropertiesFileRuleSetConfigurer {
             }
         }
         catch(IOException e) {
-            LOG.info("RuleSet configuration properties file [$propertiesFilename] not found.")
+            log.info("RuleSet configuration properties file [$propertiesFilename] not found.")
         }
     }
 
@@ -86,7 +86,7 @@ class PropertiesFileRuleSetConfigurer {
                     PropertyUtil.setPropertyFromString(rule, propertyName, v)
                 }
                 else {
-                    LOG.warn("No such rule [$ruleName] for property [$k]. "  + MovedRules.getMovedOrRenamedMessageForRuleName(ruleName))
+                    log.warn("No such rule [$ruleName] for property [$k]. "  + MovedRules.getMovedOrRenamedMessageForRuleName(ruleName))
                 }
             }
         }

@@ -16,7 +16,7 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
 
@@ -26,11 +26,11 @@ import org.codenarc.ruleset.XmlFileRuleSet
  *
  * @author Chris Mair
   */
+@Log4j2
 class GenerateRuleIndexPage {
 
     protected static final RULE_INDEX_FILE = 'src/site/apt/codenarc-rule-index.apt'
     private static final TEMPLATE_FILE = 'src/main/resources/templates/codenarc-rule-index.apt.template'
-    private static final LOG = Logger.getLogger(GenerateRuleIndexPage)
 
     protected static ruleIndexFile = RULE_INDEX_FILE
 
@@ -59,7 +59,7 @@ class GenerateRuleIndexPage {
         def outputFile = new File(ruleIndexFile)
         outputFile.text = ruleSetText
 
-        LOG.info("Finished writing $ruleIndexFile")
+        log.info("Finished writing $ruleIndexFile")
     }
 
 }

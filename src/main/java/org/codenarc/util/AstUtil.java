@@ -18,7 +18,8 @@ package org.codenarc.util;
 import groovy.lang.Closure;
 import groovy.lang.MetaClass;
 import groovy.lang.Range;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.*;
 import org.codehaus.groovy.ast.stmt.BlockStatement;
@@ -44,8 +45,7 @@ import static java.util.Arrays.asList;
  */
 @SuppressWarnings("PMD.CollapsibleIfStatements")
 public class AstUtil {
-
-    private static final Logger LOG = Logger.getLogger(AstUtil.class);
+    private static final Logger log = LogManager.getLogger();
     public static final List<String> AUTO_IMPORTED_PACKAGES = asList("java.lang", "java.io", "java.net", "java.util", "groovy.lang", "groovy.util");
     public static final List<String> AUTO_IMPORTED_CLASSES = asList("java.math.BigDecimal", "java.math.BigInteger");
     public static final List<String> COMPARISON_OPERATORS = asList("==", "!=", "<", "<=", ">", ">=", "<=>");
@@ -745,7 +745,7 @@ public class AstUtil {
         } else if (arguments instanceof TupleExpression) {
             argExpressions = ((TupleExpression) arguments).getExpressions();
         } else {
-            LOG.warn("getArgumentNames arguments is not an expected type");
+            log.warn("getArgumentNames arguments is not an expected type");
         }
 
         if (argExpressions != null) {
@@ -894,7 +894,7 @@ public class AstUtil {
         }else if (node instanceof PropertyNode) {
             modifiers = ((PropertyNode) node).getModifiers();
         } else {
-            LOG.warn("isPublic node is not an expected type");
+            log.warn("isPublic node is not an expected type");
         }
         if (modifiers != null) {
             return Modifier.isPublic(modifiers);

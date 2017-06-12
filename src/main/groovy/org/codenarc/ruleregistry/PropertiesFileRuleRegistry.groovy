@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleregistry
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.util.io.ClassPathResource
 
 /**
@@ -25,9 +25,9 @@ import org.codenarc.util.io.ClassPathResource
  *
  * @author Chris Mair
   */
+@Log4j2
 class PropertiesFileRuleRegistry implements RuleRegistry {
 
-    private static final LOG = Logger.getLogger(PropertiesFileRuleRegistry)
     private static final PROPERTIES_FILENAME = 'codenarc-base-rules.properties'
     public static final PROPERTIES_FILE = "src/main/resources/$PROPERTIES_FILENAME"
 
@@ -53,7 +53,7 @@ class PropertiesFileRuleRegistry implements RuleRegistry {
         properties = new Properties()
         properties.load(inputStream)
         def elapsedTime = System.currentTimeMillis() - startTime
-        LOG.info("Loaded properties file in ${elapsedTime}ms; ${properties.size()} rules")
+        log.info("Loaded properties file in ${elapsedTime}ms; ${properties.size()} rules")
     }
 
 }

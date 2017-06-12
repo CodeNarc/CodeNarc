@@ -15,7 +15,7 @@
  */
 package org.codenarc
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.results.Results
 import org.codenarc.ruleregistry.RuleRegistryInitializer
@@ -40,8 +40,8 @@ import org.codenarc.ruleset.RuleSetUtil
  *
  * @author Chris Mair
  */
+@Log4j2
 class CodeNarcRunner {
-    private static final LOG = Logger.getLogger(CodeNarcRunner)
 
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer
@@ -75,7 +75,7 @@ class CodeNarcRunner {
         def p3 = results.getNumberOfViolationsWithPriority(3, true)
         def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
         def elapsedTime = System.currentTimeMillis() - startTime
-        LOG.debug("results=$results")
+        log.debug("results=$results")
         def analysisContext = new AnalysisContext(ruleSet:ruleSet, sourceDirectories:sourceAnalyzer.sourceDirectories)
 
         reportWriters.each { reportWriter ->

@@ -14,16 +14,16 @@ sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
 repositories {
-     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-     maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     compile "org.codehaus.groovy:groovy:$groovyVersion"
     compile "org.codehaus.groovy:groovy-xml:$groovyVersion"
     compile "org.codehaus.groovy:groovy-ant:$groovyVersion"
-    compile 'log4j:log4j:1.2.14'
-    compile('org.gmetrics:GMetrics:0.7') { transitive = false }
+    compile 'com.github.thetric:gmetrics:078bc2b343'
     compile 'junit:junit:4.8.1'
 
     testCompile 'commons-cli:commons-cli:1.2'

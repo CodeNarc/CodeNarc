@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.apache.log4j.Logger
+import groovy.util.logging.Log4j2
 import org.codehaus.groovy.control.MultipleCompilationErrorsException
 import org.codenarc.util.io.DefaultResourceFactory
 import org.codenarc.util.io.ResourceFactory
@@ -27,9 +27,9 @@ import org.codenarc.util.io.ResourceFactory
  *
  * @author Chris Mair
   */
+@Log4j2
 class GroovyDslRuleSet implements RuleSet {
 
-    private static final LOG = Logger.getLogger(GroovyDslRuleSet)
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
     private final RuleSetBuilder ruleSetBuilder = new RuleSetBuilder()
     private final String path
@@ -42,7 +42,7 @@ class GroovyDslRuleSet implements RuleSet {
     GroovyDslRuleSet(String path) {
         assert path
         this.path = path
-        LOG.info("Loading ruleset from [$path]")
+        log.info("Loading ruleset from [$path]")
         GroovyShell shell = createGroovyShell()
         evaluateDsl(shell)
         rules = ruleSetBuilder.ruleSet.rules
@@ -64,7 +64,7 @@ class GroovyDslRuleSet implements RuleSet {
             try {
                 shell.evaluate(reader)
             } catch (MultipleCompilationErrorsException compileError) {
-                LOG.error("An error occurred compiling the configuration file $path", compileError)
+                log.error("An error occurred compiling the configuration file $path", compileError)
                 throw new IllegalStateException("An error occurred compiling the configuration file $path\n${compileError.message}")
             }
         }

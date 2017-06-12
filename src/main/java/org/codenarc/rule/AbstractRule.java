@@ -15,7 +15,8 @@
  */
 package org.codenarc.rule;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.groovy.ast.ASTNode;
 import org.codehaus.groovy.ast.ImportNode;
 import org.codenarc.source.SourceCode;
@@ -37,8 +38,7 @@ import java.util.regex.Pattern;
  * @author Hamlet D'Arcy
  */
 public abstract class AbstractRule implements Rule {
-
-    private static final Logger LOG = Logger.getLogger(AbstractRule.class);
+    private static final Logger log = LogManager.getLogger();
 
     /**
      * Flag indicating whether this rule should be enabled (applied). Defaults to true.
@@ -144,7 +144,7 @@ public abstract class AbstractRule implements Rule {
             overrideViolationMessageIfNecessary(violations);
             return violations;
         } catch(Throwable t) {
-            LOG.error("Error from [" + getClass().getName() + "] processing source file [" + sourceCode.getPath() + "]", t);
+            log.error("Error from [" + getClass().getName() + "] processing source file [" + sourceCode.getPath() + "]", t);
             throw t;
         }
     }
