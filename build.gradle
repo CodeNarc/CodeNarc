@@ -36,6 +36,8 @@ sourceSets {
     }
 }
 
+test.maxParallelForks = 2
+
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
