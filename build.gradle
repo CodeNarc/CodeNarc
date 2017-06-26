@@ -24,21 +24,15 @@ dependencies {
     compile "org.codehaus.groovy:groovy-ant:$groovyVersion"
     compile 'log4j:log4j:1.2.14'
     compile('org.gmetrics:GMetrics:0.7') { transitive = false }
-    compile 'junit:junit:4.8.1'
+    compile 'junit:junit:4.12'
 
-    testCompile 'commons-cli:commons-cli:1.2'
+    testCompile 'commons-cli:commons-cli:1.4'
 }
 
 sourceSets {
     main {
         java { srcDirs = [] }
         groovy { srcDirs = ['src/main/groovy', 'src/main/java'] }
-    }
-}
-
-test {
-    testLogging {
-        events 'passed', 'skipped', 'failed'
     }
 }
 
