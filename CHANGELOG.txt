@@ -14,6 +14,10 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 - #202: Update copyright year in rule templates. (Thanks to Jenn Strater)
 - #205: Using AST rule to check def usages. Now ignores def within comments. (Thanks Sargis Harutyunyan)
 - #206: fix for issue #197. Allow suppress warnings on local variables and constructors. (Thanks to Andrey Adamovich)
+FRAMEWORK AND INFRASTRUCTURE
+ - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
+ - #210: build: upgrade gradle (2.4 -> 4.0). (Thanks to Dominik Broj).
+ - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).
 
 
 Changes in version 0.27.0 (Mar 2017)
