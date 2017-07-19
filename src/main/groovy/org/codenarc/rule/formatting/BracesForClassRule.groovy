@@ -37,12 +37,14 @@ class BracesForClassRule extends AbstractRule {
     void applyTo(SourceCode sourceCode, List violations) {
 
         sourceCode?.ast?.classes?.each { ClassNode classNode ->
-
-            def (lineNumber, sourceLine) = findOpeningBraceLine(sourceCode, classNode)
-            // Groovy 1.7 returns -1 as line number for a ClassNode representing an enum.
-            // In this case we ignore the rule
-            if (lineNumber != -1) {
-                applyToClassNode(classNode, lineNumber, sourceLine, violations)
+            // Scripts don't have opening and closing braces, so ignore them.
+            if (!classNode.script) {
+                def (lineNumber, sourceLine) = findOpeningBraceLine(sourceCode, classNode)
+                // Groovy 1.7 returns -1 as line number for a ClassNode representing an enum.
+                // In this case we ignore the rule
+                if (lineNumber != -1) {
+                    applyToClassNode(classNode, lineNumber, sourceLine, violations)
+                }
             }
         }
     }
