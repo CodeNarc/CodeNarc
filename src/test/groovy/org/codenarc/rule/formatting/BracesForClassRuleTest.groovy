@@ -211,6 +211,17 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 49, sourceLineText: 'private class Forth {', messageText: 'Opening brace for the class Forth should start on a new line'])
     }
 
+    @Test
+    void testNoViolationForScriptClassNodes() {
+        final SOURCE = '''
+             def x = """
+             {
+             }
+             """
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new BracesForClassRule()
     }
