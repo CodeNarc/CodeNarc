@@ -96,7 +96,7 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
 }
 
 def updateChangelog(ruleName, ruleCategory, ruleDescription) {
-    def path = './CHANGELOG.txt'
+    def path = './CHANGELOG.md'
     File file = new File(path)
     String original = file.getText("ISO-8859-1")
     file.text = """
