@@ -1,0 +1,25 @@
+plugins {
+    id 'groovy'
+    id 'idea'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile project(':')
+    testCompile gradleTestKit()
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.codehaus.groovy' && details.requested.version == '2.4.12') {
+            details.useVersion '2.4.11'
+        }
+    }
+}
+
+test {
+    systemProperty 'codenarc.test.projectPath', rootProject.projectDir.absolutePath
+}

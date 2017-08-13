@@ -85,7 +85,8 @@ abstract class AbstractSourceCode implements SourceCode {
         synchronized (initLock) {
             if (!astParsed) {
                 SourceUnit unit = SourceUnit.create('None', getText())
-                CompilationUnit compUnit = new CompilationUnit()
+                GroovyClassLoader transformLoader = new GroovyClassLoader(getClass().classLoader)
+                CompilationUnit compUnit = new CompilationUnit(null, null, null, transformLoader)
                 compUnit.addSource(unit)
                 try {
                     removeGrabTransformation(compUnit)
