@@ -459,5 +459,5 @@ Size and Complexity Rules  ("<rulesets/size.xml>")
 *-------------------------+-------------------------------------------------------------------+------------------------+
 | maxParameters           | The maximum number of parameters in method/constructor            | 5                      |
 *-------------------------+-------------------------------------------------------------------+------------------------+
-| ignoreOverriddenMethods | Ignore number of parameters for methods with @Override annotation | false                  |
+| ignoreOverriddenMethods | Ignore number of parameters for methods with @Override annotation | true                   |
 *-------------------------+-------------------------------------------------------------------+------------------------+

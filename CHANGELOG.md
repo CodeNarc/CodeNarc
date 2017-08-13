@@ -3,17 +3,18 @@
 Version 0.28.0 (??? 2017)
 --------------------------------------
 NEW RULES
-   - #199: CouldBeSwitchStatement rule (convention)  - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
+   - #199: **CouldBeSwitchStatement** rule (convention)  - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
 
 UPDATED/ENHANCED RULES AND BUG FIXES
-   - #196: Fix #194: SpaceAfterClosingBrace: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)
+   - #196: Fix #194: **SpaceAfterClosingBrace**: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)
    - #201: Remove tabs from test template. (Thanks to Jenn Strater)
    - #200: Fix the error message in the logs from the space after closing brace rule. (Thanks to Jenn Strater)
    - #198: Fix false positive for trailing comma when sending method parameters by name. (Thanks to Jenn Strater)
    - #202: Update copyright year in rule templates. (Thanks to Jenn Strater)
    - #205: Using AST rule to check def usages. Now ignores def within comments. (Thanks Sargis Harutyunyan)
    - #206: fix for issue #197. Allow suppress warnings on local variables and constructors. (Thanks to Andrey Adamovich)
-   - #213: Don't run BracesForClassRule against script ClassNodes. (Thanks to Simon St John-Green)
+   - #213: Don't run **BracesForClass** against script ClassNodes. (Thanks to Simon St John-Green)
+   - #207: **ParameterCount** ignores methods with @Override annotation; *ignoreOverriddenMethods* defaults to true. (Thanks to Yuriy Chulovskyy)
 
 FRAMEWORK AND INFRASTRUCTURE
    - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
@@ -24,14 +25,14 @@ FRAMEWORK AND INFRASTRUCTURE
 Version 0.27.0 (Mar 2017)
 --------------------------------------
 UPDATED/ENHANCED RULES AND BUG FIXES
-   - #180: UnusedPrivateMethodRule to skip method with annotations. (Thanks to Yuriy Chulovskyy)
-   - #184: Fix NPE in MissingBlankLineAfterPackageRule for source containing only a package. (Thanks to René Scheibe)
-   - #186: Fix #185: SpaceAfterOpeningBrace does not honour ignoreEmptyBlock for constructors. (Thanks to Jenn Strater)
-   - #182: UnusedVariableRule: Ignore variables in Scripts annotated with @Field.
-   - #188: GStringExpressionWithinString: Fix false positive for an escaped $ character within a GString.
+   - #180: **UnusedPrivateMethod** rule skip method with annotations. (Thanks to Yuriy Chulovskyy)
+   - #184: Fix NPE in **MissingBlankLineAfterPackage** rule for source containing only a package. (Thanks to René Scheibe)
+   - #186: Fix #185: **SpaceAfterOpeningBrace** does not honour *ignoreEmptyBlock* for constructors. (Thanks to Jenn Strater)
+   - #182: **UnusedVariable**: Ignore variables in Scripts annotated with `@Field`.
+   - #188: **GStringExpressionWithinString**: Fix false positive for an escaped $ character within a GString.
    - #191: Add ability to specify compile classpath for analysed sources when using CodeNarc's Ant task. (Thanks to Marcin Erdmann)
-   - #183: Online docs  - Added note and link to common rule config properties from each rule where applyToClassNames and doNotApplyToClassNames properties are not available.
-   - #193: Change EmptyClassRule to subclass AbstractAstVisitorRule.
+   - #183: Online docs  - Added note and link to common rule config properties from each rule where *applyToClassNames* and *doNotApplyToClassNames* properties are not available.
+   - #193: Change `EmptyClassRule` to subclass `AbstractAstVisitorRule`.
 
 
 Version 0.26.0 (Oct 2016)

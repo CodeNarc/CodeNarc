@@ -32,6 +32,7 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ParameterCount'
+        assert rule.ignoreOverriddenMethods == true
     }
 
     @Test
@@ -190,8 +191,9 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSingleViolation_ignoreOverriddenMethods_default() {
+    void testSingleViolation_ignoreOverriddenMethods_false() {
         rule.maxParameters = 3
+        rule.ignoreOverriddenMethods = false
         assertInlineViolations("""
             class TestClass {
 
@@ -209,9 +211,8 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testNoViolations_ignoreOverriddenMethods() {
+    void testNoViolations_ignoreOverriddenMethods_DefaultsToTrue() {
         rule.maxParameters = 3
-        rule.ignoreOverriddenMethods = true
         assertNoViolations('''
             class TestClass {
 

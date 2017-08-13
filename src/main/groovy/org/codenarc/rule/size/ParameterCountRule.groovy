@@ -34,7 +34,7 @@ class ParameterCountRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = ParameterCountAstVisitor
     int maxParameters = DEFAULT_MAX_PARAMETER
-    boolean ignoreOverriddenMethods
+    boolean ignoreOverriddenMethods = true
 
     void setMaxParameters(int maxParameters) {
         if (maxParameters < 1) {
