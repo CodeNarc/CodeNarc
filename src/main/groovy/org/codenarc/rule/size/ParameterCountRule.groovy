@@ -17,8 +17,8 @@ package org.codenarc.rule.size
 
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Checks if the number of parameters in method/constructor exceeds the number of parameters
@@ -34,6 +34,7 @@ class ParameterCountRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = ParameterCountAstVisitor
     int maxParameters = DEFAULT_MAX_PARAMETER
+    boolean ignoreOverriddenMethods
 
     void setMaxParameters(int maxParameters) {
         if (maxParameters < 1) {
@@ -44,6 +45,7 @@ class ParameterCountRule extends AbstractAstVisitorRule {
 }
 
 class ParameterCountAstVisitor extends AbstractAstVisitor {
+    private static final Set<String> OVERRIDE_ANNOTATIONS = [Override.name, Override.simpleName]
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
@@ -51,9 +53,13 @@ class ParameterCountAstVisitor extends AbstractAstVisitor {
     }
 
     private void checkParametersCount(MethodNode node) {
-        if (node.parameters.size() > rule.maxParameters) {
+        if (node.parameters.size() > rule.maxParameters && !(rule.ignoreOverriddenMethods && isOverriden(node))) {
             addViolation(node, "Number of parameters in ${getName(node)} exceeds maximum allowed (${rule.maxParameters}).")
         }
+    }
+
+    private boolean isOverriden(MethodNode methodNode) {
+        methodNode.annotations.classNode.name.any { OVERRIDE_ANNOTATIONS.contains(it) }
     }
 
     private String getName(MethodNode methodNode) {
