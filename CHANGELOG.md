@@ -1,11 +1,11 @@
 # CodeNarc Change Log
 
-Version 0.28.0 (??? 2017)
+Version 1.0 (??? 2017)
 --------------------------------------
-NEW RULES
+New Rules
    - #199: **CouldBeSwitchStatement** rule (convention)  - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
 
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
    - #196: Fix #194: **SpaceAfterClosingBrace**: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)
    - #201: Remove tabs from test template. (Thanks to Jenn Strater)
    - #200: Fix the error message in the logs from the space after closing brace rule. (Thanks to Jenn Strater)
@@ -16,7 +16,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
    - #213: Don't run **BracesForClass** against script ClassNodes. (Thanks to Simon St John-Green)
    - #207: **ParameterCount** ignores methods with @Override annotation; *ignoreOverriddenMethods* defaults to true. (Thanks to Yuriy Chulovskyy)
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
    - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
    - #210: build: upgrade gradle (2.4 -> 4.0). (Thanks to Dominik Broj).
    - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).
@@ -24,7 +24,7 @@ FRAMEWORK AND INFRASTRUCTURE
 
 Version 0.27.0 (Mar 2017)
 --------------------------------------
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
    - #180: **UnusedPrivateMethod** rule skip method with annotations. (Thanks to Yuriy Chulovskyy)
    - #184: Fix NPE in **MissingBlankLineAfterPackage** rule for source containing only a package. (Thanks to René Scheibe)
    - #186: Fix #185: **SpaceAfterOpeningBrace** does not honour *ignoreEmptyBlock* for constructors. (Thanks to Jenn Strater)
@@ -37,7 +37,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 
 Version 0.26.0 (Oct 2016)
 --------------------------------------
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
    - #158: UnnecessaryConstructor: Add ignoreAnnotations to optionally ignore constructors with annotations. (Thanks to Daniel Spilker)
    - #162: UnnecessaryPublicModifierRule: Ignore generics methods. (Thanks to norbson)
    - #166: GroovyLangImmutable: Exclude `javax.annotation.concurrent.Immutable`. (Thanks to Mike Kobit)
@@ -48,7 +48,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
    - #177: JUnitSetUpCallsSuper: ignore methods annotated with @BeforeClass; JUnitTearDownCallsSuper: ignore methods with @AfterClass.
    - #165: UnnecessaryGetter: Fix false positive violation when a field already exists.
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
    - #170: Remove TestUtil class from the CodeNarc jar; move it into test source folder.
    - #178: Add Badge to README for latest version. (Thanks to Mike Kobit)
 
@@ -69,11 +69,11 @@ Version 0.25.1 (Feb 2016)
 
 Version 0.25.0 (Feb 2016)
 --------------------------------------
-NEW RULES
+New Rules
   - #135: NoTabCharacter rule (convention)  - Check that all source files do not contain the tab character (Yuriy Chulovskyy)
   - #136: TrailingComma rule (convention). (Yuriy Chulovskyy)
 
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
   - #146: Validate regular expressions when setting rule properties applyToFilesMatching and doNotApplyToFilesMatching.
   - #145: Reduce number of concurrent threads to number of available processors.
   - #144: LineLength rule: Add ignoreLineRegex.
@@ -101,19 +101,19 @@ Version 0.24.1 (Aug 2015)
 
 Version 0.24 (July 2015)
 --------------------------------------
-NEW RULES
+New Rules
   - #110: AssignmentToStaticFieldFromInstanceMethod rule (design)  - Checks for assignment to a static field from an instance method.
   - #111: ClassNameSameAsSuperclass rule (naming)  - Checks for any class that has an identical name to its superclass, other than the package. This can be very confusing.
   - #111: InterfaceNameSameAsSuperInterface rule (naming)  - Checks for any interface that has an identical name to its super-interface, other than the package. This can be very confusing.
 
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
   - #91: ClassJavadoc rule: Allow regular comments or annotations before Javadoc section. (Thanks to Sébastien Launay)
   - #90: UnnecessarySafeNavigationOperator rule: Fix false positive on spread operator.
   - #95: Some tests incompatible with Java 8. (Thanks to Artur Gajowy)
   - #107: FileEndsWithoutNewlineRule to handle empty source. (Thanks to René Scheibe)
   - #108: Fix NPE when analyzing file with trait; fix #93. (Thanks to Dominik Przybysz)
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
   - #92: New SortableHtmlReportWriter, report type "sortable". Sort by rules (with the most violations) and files (with the most violations), as well as rule name and rule priority.
   - #89: Provide mechanism for excluding a baseline violations file. Add "baseline" report type and associated "excludeBaseline" property to Ant Task.
   - #39: Convert project to Gradle. (Thanks very much to Tomasz Przybysz, Marcin Erdmann and Kyle Boon)
@@ -125,11 +125,11 @@ FRAMEWORK AND INFRASTRUCTURE
 
 Version 0.23 (Feb 2015)
 --------------------------------------
-NEW RULES
+New Rules
   - #73: NestedForLoop rule (design)  - Checks for nested for loops. (Thanks to Maciej Ziarko)
   - #80: ParameterCount rule (size)  - Checks if the number of parameters in method/constructor exceeds the number of parameters specified by the maxParameters property. (Thanks to Maciej Ziarko)
 
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
   - #69: PrivateFieldCouldBeFinal rule support for JPA entities. (Thanks to Maciej Ziarko)
   - #70: GStringExpressionWithinString rule should ignore quasi GString expressions inside annotations. (Thanks to Maciej Ziarko)
   - #76: SpaceAfterClosingBrace and SpaceBeforeOpeningBrace rules: GStrings with embedded closures incorrectly cause violations. (Thanks to Maciej Ziarko)
@@ -141,7 +141,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
   - #84: XML Report: Remove illegal (non-escapable) XML characters from the source line or message.
   - #88: UseAssertTrueInsteadOfAssertEquals: Only check assert statements if checkAssertStatements property is true; defaults to false.
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
   - #86: Upgrade to Groovy 2.x. (>= 2.1.0)    [BREAKING CHANGE]
   - #67: Don't depend on groovy-all jar, but only on the specifically required groovy artifacts.
   - #68: Cleaned up and fixed HtmlReportWriterTest.
@@ -152,13 +152,13 @@ FRAMEWORK AND INFRASTRUCTURE
 
 Version 0.22 (Oct 2014)
 --------------------------------------
-NEW RULES
+New Rules
   - #56: PackageMatchesFilePath rule (naming)  - A package source file's path should match the package itself. (Thanks to Simon Tost)
   - #150: Instanceof rule (design)  - Checks for use of the instanceof operator. Use ignoreTypeNames property to configure ignored type names.
   - #423: UnnecessarySafeNavigationOperator rule (unnecessary)  - Check for the safe navigation operator (?.) applied to constants and literals, which can never be null.
   - #63: NoDef rule (convention)  - Check for all uses of the def keyword. (Thanks to Dominik Przybysz)
 
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
   - #157: Enable optionally using Thread Context classpath for loading rule scripts. Introduce "codenarc.useCurrentThreadContextClassLoader" system property. See https://jira.grails.org/browse/GPCODENARC-32.
   - #55: FieldName rule  - Add private static final field name regex. (Thanks to Dominik Przybysz)
   - #54: Invalid Cast to BigDecimal. In an XML ruleset or "codenarc.properties", specifying a BigDecimal property value throws an exception.
@@ -176,14 +176,14 @@ UPDATED/ENHANCED RULES AND BUG FIXES
   - #65: HtmlReportWriter and TextReportWriter do not properly parse the maxPriority report option.
   - #34: BooleanMethodReturnsNullRule should not flag methods that return other non-null and non-boolean types.
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
   - #435: IdeTextReportWriter: Text report formatter that includes automatic IDE (Eclipse/Idea) hyperlinks to source code. Provide new "ide" report type in ReportWriterFactory.
   - #157: Enable optionally using Thread Context classloader. Also see GPCODENARC-32. Introduce codenarc.useCurrentThreadContextClassLoader system property.
 
 
 Version 0.21 (April 2014)
 -------------------------------------------
-NEW RULES
+New Rules
   - #30: GrailsMassAssignment rule (grails)  - Checks for mass assignment from a params Map within Grails domain classes. (Thanks to Brian Soby)
   - #38: NoWildcardImports rule (imports)  - Wildcard imports, static or otherwise, should not be used. (Thanks to Kyle Boon)
   - #41: ConsecutiveBlankLines rule (formatting)  - Makes sure there are no consecutive lines that are either blank or whitespace only. (Thanks to Joe Sondow)
@@ -200,7 +200,7 @@ NEW RULES
   - #422: ToStringReturnsNull rule (design)  - Checks for toString() methods that return null.
   - #143: MultipleUnaryOperators rule (basic)  - Checks for multiple consecutive unary operators.
 
-UPDATED/ENHANCED RULES AND BUG FIXES
+Updated/Enhanced Rules and Bug Fixes
   - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
   - #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to René Scheibe)
   - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
@@ -213,18 +213,18 @@ UPDATED/ENHANCED RULES AND BUG FIXES
 
 Version 0.20 (Dec 2013)
 -------------------------------------------
-NEW RULES
+New Rules
   - #425: LocaleSetDefault rule (design)  - Checks for calls to Locale.setDefault(), which sets the Locale across the entire JVM. (Thanks to Ming Huang and Rob Patrick)
   - #114: IllegalString rule (generic)  - Checks for a specified illegal string within the source code.
   - #430: SpaceAroundMapEntryColon rule (formatting)  - Check for proper formatting of whitespace around ':' for literal Map entries.
   - #427: ClosureStatementOnOpeningLineOfMultipleLineClosure rule (formatting)  - Checks for closure logic on first line (after ->) for a multi-line closure.
 
-UPDATED/ENHANCED RULES
+Updated/Enhanced Rules
   - #426: Disable GrailsPublicControllerMethod by default.
   - #424: Expand SpaceAroundOperator rule to also check for "as" operator.
   - #432: Add checkLastStatementImplicitElse property on IfStatementCouldBeTernary and UnnecessaryIfStatement.
 
-BUG FIXES
+Bug Fixes
   - #409: Fix bug ClassNameSameAsFilenameRule when sourceCode.name is null.
   - #22: Fix DuplicateStringLiteral: Allow empty strings within ignoreStrings. (Thanks to Ei Kageyama)
   - #21: Fix ClassJavadoc rule has no effect. Also ignore blank lines between javadoc and class declaration.
@@ -235,7 +235,7 @@ BUG FIXES
   - #146: Fix SpaceAroundOperator: Does not catch some violations with elvis operator (?:)
   - #139: Fix JUnitPublicField to ignore interfaces.
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
   - #23: Inline violations support within rule tests. (Thanks to Artur Gajowy)
   - #428: Use ClassNode if present in ImportNode to get line number and possibly source text
   - #431: Remove unused "samples" folder.
@@ -261,14 +261,14 @@ New "Enhanced Classpath" Ruleset: These rules require application classes on Cod
   - #364: New CloneWithoutCloneable rule  - The method clone() should only be declared if the class implements the Cloneable interface. Thanks to Artur Gajowy. (pull request #14)
   - #278: New JUnitAssertEqualsConstantActualValue rule  - Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter is a constant or a literal. Most likely it was intended to be the 'expected' value.
 
-UPDATED/ENHANCED RULES
+Updated/Enhanced Rules
   - #371: CouldBeElvis rule. Added support for IF statements without braces.
   - #408: SerialVersionUID rule: Also check that serialVersionUID field is declared private.
   - #414: Extend UnnecessaryIfStatement rule: if (condition){ return true }; return false.
   - #415: Extend IfStatementCouldBeTernary rule: if (condition) { return 1 }; return 2.
   - #416: Enhance JUnitAssertAlwaysSucceeds and JUnitAssertAlwaysFails to catch String or number constant or List or Map literal passed in as condition parameter; and add support for checking assertNotNull().
 
-BUG FIXES
+Bug Fixes
  - Fix bug in UnnecessaryDefInFieldDeclarationRule making it report false positives with 'def' on right hand side of assignment
   - #135: CoupledTestCase incorrect violation when referencing the current class.
   - #19: Fix BracesForMethod rule for single-line methods.
@@ -276,16 +276,16 @@ BUG FIXES
   - #137: Mistake in ExplicitHashSetInstantiationRule violation message.
   - #138: SpaceAroundOperators: Add violation for isEcpr?processRecords(records[0]):''
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
  - Added support for per-rule custom compilation phase, allowing for more type information in AST when required.
-  NOTE: New rules that use a later compilation phase require that CodeNarc have the application classes being
+  NOTE: New Rules that use a later compilation phase require that CodeNarc have the application classes being
   analyzed on the classpath. This adds a new int getCompilerPhase() method to Rule. Thanks to Artur Gajowy. (pull request #14)
   - #419: Add maxPriority property to HTML and Text ReportWriters  - filter out lower priority violations.
 
 
 Version 0.18.1 (Feb 2013)
 -------------------------------------------
-BUG FIXES
+Bug Fixes
   - Fix #3596256: SpaceAroundOperatorRule: False positive if source line contains unicode chars.
       Also affects (known limitation): SpaceAfterClosingBrace, SpaceBeforeOpeningBrace, SpaceBeforeClosingBrace   - Known limitation: will not catch violations on same line following unicode char literal.
   - Fix #3598154: SpaceAroundOperator: bad/duplicate violation for ?: after closure. Ignore standalone elvis expression statements (known limitation).
@@ -299,7 +299,7 @@ BUG FIXES
 
 Version 0.18 (Dec 2012 )
 -------------------------------------------
-NEW RULES
+New Rules
   - #3531554: New JUnitLostTest rule. Checks for classes that import JUnit 4 classes and contain a public, instance, void, no-arg method named test* that is not annotated with @Test.
   - #3509530: New SpaceAfterComma rule. Checks that there is at least one space or whitespace following each comma. That includes checks for method and closure declaration parameter lists, method call parameter lists, Map literals and List literals.
   - #3583257: New SpaceAfterSemicolon rule. Checks that there is at least one space or whitespace following a semicolon that separates classic for loop clauses and also multiple statements per line.
@@ -319,14 +319,14 @@ NEW RULES
   - #3592678: New IfStatementCouldBeTernary rule  - Checks for if statements where both the if and else blocks contain only a single return statement with a value
   - #3581378: New ExceptionNotThrown rule  - Checks for an exception constructor call without a throw as the last statement within a catch block.
 
-UPDATED/ENHANCED RULES
+Updated/Enhanced Rules
   - Pull request #2: Adding support for catch, finally, and else brace placement validation. Thanks to Matias Bjarland.
   - #3521130: PrintStackTrace: Also check for StackTraceUtils.printSanitizedStackTrace().
   - #3589971: Add threshold for max class metric value for CyclomaticComplexity, AbcMetric and CrapMetric.
   - #3574257: Rename AbcComplexity rule to AbcMetric. Deprecate old AbcComplexity rule and set enabled=false. Rename properties, e.g. maxMethodAbcScore.
   - Pull request #5: Enhanced UnusedVariableRule to enable ignoring some variables (ignoreVariableNames). Thanks to René Scheibe.
 
-BUG FIXES
+Bug Fixes
   - Fix #3555096: UnusedPrivateMethod  - StringIndexOutOfBoundsException for zero-length method name.
   - Fix #3524882: False positive UnnecessaryPackageReference violation for Enums.
   - Fix #3558623: UnnecessarySemicolon  - violations inside classes were ignored. Thanks to Marcin Erdmann.
@@ -337,7 +337,7 @@ BUG FIXES
   - Fix #3511004: PrivateFieldCouldBeFinal false positive (- - and ++ operators).
   - Fix Pull request #4: parseReport doesn't work with absolute paths on windows. Thanks to Gavin Matthews.
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
   - #3546737: Migrate source code from Subversion to GitHub. Many thanks to Marcin Erdmann.
   - #3578372: Add notes to rule index and sample rule sets that ABC/CC rules require the GMetrics jar.
   - #3578909: Move helper methods from AbstractTestCase into new TestUtil class (to enable use by other test frameworks, e.g. Spock)
@@ -349,7 +349,7 @@ FRAMEWORK AND INFRASTRUCTURE
 
 Version 0.17 (March 2012)
 -------------------------------------------
-NEW RULES
+New Rules
   - #3433042: New PrivateFieldCouldBeFinal rule: Checks for private fields that are only set within a constructor or field initializer. Such fields can safely be made final.
   - #3432991: New ParameterReassignment rule: Checks for a method or closure parameter being reassigned to a new value within the body of the method/closure, which is a confusing, bad practice. Use a temporary variable instead.
   - #3108331: New TernaryCouldBeElvis rule: Checks for ternary with boolean and true expressions are the same; can be simplified to an Elvis expression.
@@ -360,7 +360,7 @@ NEW RULES
   - #3495466: New HashtableIsObsolete rule: Checks for references to the (effectively) obsolete java.util.Hashtable class. Use the Java Collections Framework classes instead including HashMap or ConcurrentHashMap.
   - #3485545: New CrapMetric rule: Checks the CRAP metric score for methods. This metric is based on the cyclomatic complexity and test coverage for individual methods. Requires a Cobertura XML coverage file and GMetrics 0.5.
 
-UPDATED/ENHANCED RULES
+Updated/Enhanced Rules
   - #3476844: Extend GetterMethodCouldBeProperty to also check static getter methods.
   - #3477351: UnnecessaryConstructor: Also catch constructor containing only call to super().
   - #3460463: StatelessClassRule and GrailsStatelessServiceRule: Ignore fields annotated with @Inject.
@@ -371,7 +371,7 @@ UPDATED/ENHANCED RULES
   - #3501349: UnnecessaryPackageReference: Also check for explicitly-imported classes.
   - #3509542: UnnecessaryPackageReference: Also check for package references in "as <Class>".
 
-BUG FIXES
+Bug Fixes
   - #3463408: Remove dependency on Java 1.6 (String.isEmpty()).
   - #3475170: Fix duplicate violations for SimpleDateFormatMissingLocale.
   - #3477085. Fix UnusedImport violations missing line numbers for imports with semicolons.
@@ -380,7 +380,7 @@ BUG FIXES
   - #3496557: Fix UseCollectNestedRule: GroovyCastException: Cannot cast object VariableExpression to class ClosureExpression
   - #3496696:	Fix UnusedPrivateFieldRule: GroovyCastException: Cannot cast object with class 'org.codehaus.groovy.ast.FieldNode' to class 'groovy.lang.MetaClass'.
 
-FRAMEWORK AND INFRASTRUCTURE
+Framework and Infrastructure
   - #3495841: Support Groovy 2.x.
   - #3496463: Support GMetrics 0.5.
   - #3476394: Include PMD report in project reports; Fix/resolve violations.
@@ -396,12 +396,12 @@ Version 0.16.1 (November 2011)
 
 Version 0.16 (November 2011)
 -------------------------------------------
-NEW FEATURES
+New Feaures
  - Performance Improvements (3394481)  - There are big performance improvements in this release.
  - Upgrade to GMetrics 0.4. (3424121)  - This upgrade is optional for users, but may provide performance improvements.
  - Rule Index page: Rule name is now a link to the rule description web page. (3434063)
 
-NEW AND UPDATED RULES
+New and Updated Rules
  - @SuppressWarnings Support  - The support for @SuppressWarnings was redesigned so that it is more reliable. @SuppressWarnings no works on *all* rules at the Class, Field, and Method level. 
  - CouldBeElvis rule (convention)  - Catch an if block that could be written as an elvis expression.
  - LongLiteralWithLowerCaseL rule (convention)  - In Java and Groovy, you can specify long literals with the L or l character, for instance 55L or 24l. It is best practice to always use an uppercase L and never a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
@@ -420,7 +420,7 @@ NEW AND UPDATED RULES
  - DuplicateMapLiteral (dry)  - 3413600  - Check for multiple instances of the same Map literal; limited to Maps where the keys and values are all constants or literals.
  - DuplicateListLiteral (dry)  - 3413601  - Check for multiple instances of the same List literal; limited to Lists where the values are all constants or literals.
 
-BUG FIXES 
+Bug Fixes 
   - #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override
   - #3394313: Fixed UnusedPrivateField to honor the @SuppressWarnings annotation.
   - #3397468: Fixed CyclomaticComplexity rule to honor the @SuppressWarnings annotation.  
@@ -437,10 +437,10 @@ BUG FIXES
   - #3429658: False positive for UnusedPrivateMethod rule
   - #3387422: ClosureAsLastMethodParameter  - false positive
 
-BREAKING CHANGES
+Breaking Changes
  * The HardcodedWindowsRootDirectory has been renamed to HardCodedWindowsRootDirectory. (#3433741)
  * Major Reorganization of the "Basic" RuleSet. (#3432475)
-  This included moving several rules from the "Basic" ruleset to other rulesets, as well as adding two new rulesets:
+  This included moving several rules from the "Basic" ruleset to other rulesets, as well as adding two New Rulesets:
       1. "Groovyism"  - Groovy idiomatic usage, and Groovy-specific bad practices
       2. "Convention"  - Coding conventions; not typically errors.
 
@@ -492,14 +492,14 @@ BREAKING CHANGES
   The ruleset parser classes have been modified to print a helpful error message for moved and renamed rules (see MovedRules helper class).
  * In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors.
 
-THANKS
+Thanks
  - Thanks to the Groovy Users of Minnesota for the CouldBeElvis rule. Thanks Jeff Beck, Doug Sabers, Ryan Applegate, and Mike Minner.
  - Thanks to Joachim Baumann for UseCollectMany, CollectAllIsDeprecated, UseCollectNested.
 
 
 Version 0.15 (August 2011)
 -------------------------------------------
-NEW AND UPDATED RULES
+New and Updated Rules
  - UnnecessaryDefInVariableDeclaration rule (unnecessary)  - If a variable has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.
  - UnnecessaryDefInMethodDeclaration rule (unnecessary)  - Added more checked modifiers: final, synchronized, abstract, strictfp. Multiple method declarations in a single line are handled correctly.
  - AssignCollectionUnique rule (basic)  - The Collections.unique() method mutates the list and returns the list as a value. If you are assigning the result of unique() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
@@ -525,7 +525,7 @@ NEW AND UPDATED RULES
  - JdbcStatementReference rule (jdbc)  - Check for direct use of java.sql.Statement, java.sql.PreparedStatement, or java.sql.CallableStatement, which is not necessary if using the Groovy Sql facility or an ORM framework such as Hibernate.
  - IllegalClassReference rule (generic)  - Checks for reference to any of the classes configured in classNames.
 
-BUG FIXES and NEW FEATURES
+Bug Fixes and New Features
   - #3325147: Fix for running CodeNarc with a Groovy 1.8 runtime. There should no longer be StackOverflowExceptions. 
   - #3317632: CloneableWithoutClone  - false positive.
   - #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
@@ -546,9 +546,9 @@ BUG FIXES and NEW FEATURES
   - #3376576: UnnecessaryParenthesesForMethodCallWithClosureRule: IllegalArgumentException: Start and end indexes are one based and have to be greater than zero.
   - #3384056: Unnecessary* rules should be priority 3.
 
-THANKS
+Thanks
  - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
-  as well as the many bug fixes.
+  as well as the many Bug Fixes.
  - Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
  - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule. 
  - Thanks to Jeff Beck for the BitwiseOperatorInConditional rule. 
@@ -557,7 +557,7 @@ THANKS
 
 Version 0.14 (June 2011)
 -------------------------------------------
-NEW AND UPDATED RULES
+New and Updated Rules
  - ExplicitLinkedHashMapInstantiation rule (basic)  - This rule checks for the explicit instantiation of a LinkedHashMap using the no-arg constructor. In Groovy, it is best to write "new LinkedHashMap()" as "[:]", which creates the same object.
  - DuplicateMapKey rule (basic)  - A map literal is created with duplicated key. The map entry will be overwritten.
  - DuplicateSetValue rule (basic)  - A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.
@@ -596,7 +596,7 @@ NEW AND UPDATED RULES
  - SerialPersistentFields rule (serialization)  - To use a Serializable object's serialPersistentFields correctly, it must be declared private, static, and final.
  - UnnecessaryParenthesesForMethodCallWithClosure rule (unnecessary)  - If a method is called and the only parameter to that method is an inline closure then the brackets of the method call can be omitted.
 
-BUG FIXES and NEW FEATURES
+Bug Fixes and New Features
  - Groovy 1.8 Support  - CodeNarc continues to be built with Groovy 1.7, but should be able to be run with a Groovy 1.8 Runtime.
   - #3290486  - AbstractClassWithoutAbstractMethod no longer flags marker interfaces as abstract classes that do not define a method.
   - #3202691  - ClassNameRule rule is changed to handle $ in the class name, which is in Inner and Nested classes by default.
@@ -631,14 +631,14 @@ BUG FIXES and NEW FEATURES
   - #3313550  - Some HTML violation descriptions in the properties files were not well-formed HTML. This has been fixed.
   - #3205688  - Fixed false positives in UseAssertEqualsInsteadOfAssertTrue when using the JUnit assertFalse method.
 
-BREAKING CHANGES
+Breaking Changes
  * Moved the following rules out of the "basic" ruleset into the new "serialization" ruleset:
     - SerialVersionUID
     - SerializableClassMustDefineSerialVersionUID
  * Moved import-specific helper methods out of AbstractRule into ImportUtil.
  * The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 
-THANKS
+Thanks
   - Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop, UnnecessaryElse, StatelessSingleton, PublicInstanceField, and EmptyCatchBlock rules.
   - Thank you to Jan Ahrens and Stefan Armbruster for the SpockIgnoreRestUsed rule.
   - Thank you to Rob Fletcher and Klaus Baumecker for the SwallowThreadDeath rule.
@@ -649,10 +649,10 @@ THANKS
 
 Version 0.13 (February 2011)
 -------------------------------------------
-NEW FEATURES
+New Features
  - New and improved syntax for defining custom rulesets. Just list the rule names you want. No need to specify
   ruleset filename or rule class. No more tweaking your custom rulesets with every CodeNarc release when we
-  add new rules to the "basic" ruleset or one of the others. Feature #3193684.
+  add New Rules to the "basic" ruleset or one of the others. Feature #3193684.
  - Better support for command line runners. You can now specify the report type "console" as a command line parameter,
   and the CodeNarc text report is output to the console instead of a file. Feature #3162487
  - All rules now provide a nicely formatted message. This makes console tools and the CodeNarc Web Console much more
@@ -662,7 +662,7 @@ NEW FEATURES
  - Improved println rule. If a class defines a println method, then it is OK to call this method because it won't dispatch to System.out.println. Feature #3194121
  - Improved NestedBlockDepth rule. Method calls on builder objects are now ignored, so you can nest builder calls arbitrarily deep. What constitutes a builder is exposed in the ignoreRegex property, which defaults to '.*(b|B)uilder'.
 
-NEW RULES
+New Rules
   Dead/Unnecessary Code
  - EmptyInstanceInitializer rule (basic)  - Feature #3163464  - An empty instance initializer. It is safe to remove it.
  - EmptyStaticInitializer rule (basic)  - Feature #3161685  - An empty static initializer was found. It is safe to remove it.
@@ -709,7 +709,7 @@ NEW RULES
  - VolatileArrayField rule (concurrency)  - Feature #3170265  - Volatile array fields are unsafe because the contents of the array are not treated as volatile. Changing the entire array reference is visible to other threads, but changing an array element is not.
  - WaitOutsideOfWhileLoop rule (concurrency)  - Feature #3127703  - Calls to Object.wait() must be within a while loop. This ensures that the awaited condition has not already been satisfied by another thread before the wait() is invoked. It also ensures that the proper thread was resumed and guards against incorrect notification.
 
-BUG FIXES
+Bug Fixes
  - Fix Bug #3162499 UnnecessaryObjectReferences: This rule was not ignoring 'this' references, leading to false positives.
  - Fix Bug #3164150 UnnecessaryReturnKeyword: Rule is no longer triggered if the return is for a closure.
  - Fix Bug #3165139 LoggingSwallowsStacktrace: No longer reports multiple logger errors.
@@ -722,20 +722,20 @@ BUG FIXES
  - Fix bug #3195027: The violation message for "Replace Getter with Property Access" suggests converting ".getURLs()" to ".uRLs". This has been corrected to ".URLs".
  - Fix bug #3196019: Compiling files with unresolved Grapes dependencies no longer causes an error.
 
-POTENTIAL BREAKING CHANGES
+Potential Breaking Changes
  - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
 
-THANKS
+Thanks
   - Many thanks to Mathilde Lemée, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
   - Big thanks to Evgeny Goldin and Cédric Champeau for reporting bugs which helps us improve the product so much faster.
 
 Version 0.12 (January 2011)
 -------------------------------------------
-NEW FEATURES
+New Features
  - Improved performance of the CodeNarc Ant Task (by multi-threading source code analysis)  - Feature #3150044
  - Add support for message parameter substitution in Rule descriptions  - Feature #3133988
 
-NEW RULES
+New Rules
  - AbstractClassWithoutAbstractMethod rule (design)  - Feature #3160204  - Adds a violation when an abstract class does not contain any abstract methods
  - CompareToWithoutComparable rule (basic)  - Adds violation if you implement a compare method without implementing the Comparable interface
  - ExplicitGarbageCollection rule (basic)  - Feature #3106689  - Adds a violation if you try to manually trigger a garbage collection run
@@ -773,7 +773,7 @@ NEW RULES
  - UnnecessaryGetter rule  (unnecessary) - Feature #3110321  - Adds a violation if a a getter method is called explicitly instead of using property syntax
  - UnusedPrivateMethodParameter rule (unused)  - Feature #3151598  - Adds a violation if the parameter to a private method is never used within that method
 
-BUG FIXES
+Bug Fixes
  - Fix Bug #3127967: DuplicateImportRule: Fix for Groovy 1.7. Resort to parsing source code.
  - Fix Bug #3146678: UnnecessaryGetter false positive, e.g. def allPaths = resultsMap.keySet() ??? keySet() can probably be rewritten as set.
  - Fix Bug #3111189: "StatelessClassRule  - Honor @Immutable".
@@ -788,7 +788,7 @@ BUG FIXES
  - Fix Bug #3109628: "Exceptions are thrown with CodeNarc v0.11" ? "GString as map key checking classes that do not exist yet?? and ?unnecessary ctor rule breaks for anonymous classes".
  - Fix Bug #3190754: Don't use default ClassLoader for loading rule scripts.
 
-POTENTIAL BREAKING CHANGES
+Potential Breaking Changes
  - Moved the existing StringInstantiation and BooleanInstantiation rules from the Basic ruleset into the Unnecessary ruleset.
   Also renamed the rules to UnnecessaryStringInstantiationRule and UnnecessaryBooleanInstantiation).
   Likewise, the rule classes were moved from the org.codenarc.rule.basic package into org.codenarc.rule.unnecessary.
@@ -799,7 +799,7 @@ POTENTIAL BREAKING CHANGES
     * You configured one of these rules (by rule name) within "codenarc-message.properties".
  - Removed deprecated applyToFilenames and doNotApplyToFilenames properties of AbstractRule.
 
-OTHER CHANGES
+Other Changes
  - UnnecessaryIfStatementRule: Expand the rule to also catch if/else statements that contain only single constant/literal expressions for the if and/or else blocks, if the if is not the last statement in the block.
  - Feature #3108153: Expand ReturnNull* rules to catch elvis operators
  - Feature #3111442: "add better error messages to the ReturnsNull*Rules"
@@ -809,11 +809,11 @@ OTHER CHANGES
 
 Version 0.11 (November 2010)
 -------------------------------------------
-NEW FEATURES
+New Features
  - @SuppressWarnings support. All rules now recognize the java.lang.SuppressWarnings annotation on fields, methods, and classes. If this annotation is added then there will be no violations produced. Just as in Java, the annotation requires a String or List<String> parameter. For example, annotating a class with @SuppressWarnings('UnusedPrivateField') will ignore the rule for that class. Annotating a method with @SuppressWarnings(['UnusedPrivateField', 'UnnecessaryIfStatementRule']) will ignore both rules for the annotated method.
  - Better "codenarc create-rule" support. You can create a new rule by running "codenarc create-rule" from the root of the CodeNarc codebase. This script has been updated to properly format Javadoc, prompt for the author name, and update the Maven Site .apt documentation.
 
-NEW RULES
+New Rules
  - BooleanMethodReturnsNull Rule (basic) : Checks for a method with Boolean return type that returns an explicit null.
  - DeadCode Rule (basic) :  Checks for dead code that appears after a return statement or after an exception is thrown.
  - DoubleNegative Rule (basic) :  Checks for using a double negative, which is always positive.
@@ -865,10 +865,10 @@ NEW RULES
  - ObjectOverrideMisspelledMethodName Rule (naming) : Verifies that the names of the most commonly overridden methods of Object: equals, hashCode and toString, are correct.
  - MethodCount Rule (size) : Checks if the number of methods within a class exceeds the number of lines specified by the maxMethod property.
 
-BUG FIXES
+Bug Fixes
  - None reported, none fixed!
 
-POTENTIAL BREAKING CHANGES
+Potential Breaking Changes
  - AbstractAstVisitor  - If you implemented your own rule by subclassing AbstractAstVisitor then your code might break. It is a compile error and the breakage will be clear and obvious. In order to support @SuppressWarnings, we needed to change AbstractAstVisitor. The method visitMethodNode became visitMethodNodeEx, visitClass became visitClassEx, visitConstructorOrMethod became visitConstructorOrMethodEx, visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. From within these new methods there is no need to call super.visitX. In the rare case that the simple renaming does not fix your problem then please contact the mailing list.
  - The following three classes were moved from the org.codenarc.rule.basic package into org.codenarc.rule.unnecessary.
   Likewise, the associated rules were moved from the "basic" ruleset into the new "unnecessary" ruleset.
@@ -877,7 +877,7 @@ POTENTIAL BREAKING CHANGES
     * UnnecessaryIfStatementRule
     * UnnecessaryTernaryExpressionRule
 
-OTHER CHANGES
+Other Changes
  - CodeNarc now requires Groovy 1.7 to run. Keep in mind that it can still run against (analyze) older Groovy code.
  - There is a new rule set (category) called "dry", meaning "do not repeat yourself".
  - There is a new "unnecessary" rule set (category).
@@ -885,11 +885,12 @@ OTHER CHANGES
 
 Version 0.10 (26 September 2010)
 -------------------------------------------
-BUG FIXES
+Bug Fixes
  - Fix Bug #3071531: "Unused rules don't recognized method closures". https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=3071531&group_id=250145. e.g. private def bar() { }  .. return this.&bar;
  - Fix: UnusedPrivateField: Don't produce violation if field is a Closure field and is executed.
  - Fix: ImportFromSamePackage: Fix for (ignore) alias imports within same package.   package org.xyz;  import org.xyz.MyBigClass as MBC.
-NEW RULES
+
+New Rules
  - New UnnecessaryIfStatementRule (basic):  Checks for if statements where the if and else blocks are only returning true and false constants. if(x) { return true } else { return false }.
  - New UnnecessaryBooleanExpressionRule (basic): Check for unnecessary boolean expressions, including ANDing (&&) or ORing (||) with true, false, null, or Map/List/String/Number literal. Also checks for negation of true, false, null, or Map/List/String/Number literal.
  - New BigDecimalInstantiationRule (basic): Avoid creating BigDecimal with a decimal (float/double) literal. Use a String literal. From PMD. See http://pmd.sourceforge.net/rules/basic.html#AvoidDecimalLiteralsInBigDecimalConstructor. Note that println new BigDecimal(0.1) prints out 0.1000000000000000055511151231257827021181583404541015625.
@@ -898,9 +899,11 @@ NEW RULES
  - Implement ImplementationAsTypeRule (design): Checks that particular classes are never used as types in variable declarations, return values or parameters. GregorianCalendar, HashMap, HashSet, Hashtable, LinkedList, LinkedHashMap, LinkedHashSet, TreeSet, TreeMap, Vector, ArrayList, CopyOnWriteArrayList, CopyOnWriteArraySet, ConcurrentHashMap, ArrayBlockingQueue, ConcurrentLinkedQueue, DelayQueue, LinkedBlockingQueue, PriorityBlockingQueue, PriorityQueue, SynchronousQueue (see Checkstyle). (design)
  - New JUnitUnnecessaryTearDownRule (junit). Checks for tearDown() methods that only call super.tearDown().
  - New JUnitUnnecessarySetUpRule (junit). Checks for setUp() methods that only call super.setUp().
-NEW REPORT WRITER
+
+New Report Writer
  - New InlineXmlReportWriter (from Robin Bramley) for improved integration with the Hudson Violations plugin. See http://wiki.hudson-ci.org/display/HUDSON/Violations.
-OTHER CHANGES
+
+Other Changes
  - CodeNarc now requires Groovy 1.6 to run. Keep in mind that it can still run against (analyze) older Groovy code.
  - Upgrade to GMetrics 0.3 for AbcComplexityRule and CyclomaticComplexityRule. Violations now include line number and source line.
  - All JUnit rules (JUnit*Rule): Also apply to classes with names ending in *TestCase.
@@ -914,15 +917,17 @@ OTHER CHANGES
 
 Version 0.9 (10 May 2010)
 ------------------------------------
-BUG FIXES
+Bug Fixes
  - Fix bug #2985592: "MissingPropertyException: No such property: W3C_XML_SCHEMA_NS_URI".
  - XML RuleSet: Allow wildcards (*) in <include> and <exclude>.
  - WildcardPattern: Escape plus sign ('+').
  - NestedBlockDepthRule: Ignore first level of closure for Closure Fields (since they are really equivalent to methods).
-NEW SIZE/COMPLEXITY RULES
+
+New Size/Complexity Rules
  - AbcComplexityRule  - Check ABC size/complexity score against threshold for method and class average (size)
  - CyclomaticComplexityRule  - Check Cyclomatic Complexity against threshold for method and class average (size)
-NEW CONCURRENCY RULES
+
+New Concurrency Rules
  - NestedSynchronizationRule (concurrency  - Hamlet D'Arcy)
  - RunFinalizersOnExitRule (concurrency  - Hamlet D'Arcy)
  - SynchronizedMethodRule (concurrency  - Hamlet D'Arcy)
@@ -930,12 +935,14 @@ NEW CONCURRENCY RULES
  - ThreadLocalNotStaticFinalRule (concurrency  - Hamlet D'Arcy)
  - ThreadYieldRule: (concurrency  - Hamlet D'Arcy)
  - VolatileLongOrDoubleFieldRule: (concurrency  - Hamlet D'Arcy)
-NEW BASIC RULES
+
+New Basic Rules
  - CloneableWithoutCloneRule (basic  - Hamlet D'Arcy & René Groeschke)
  - ConstantIfExpressionRule: if(true) or if(false). Or literal constant. (basic)
  - ConstantTernaryExpressionRule: true ? x : y or false, null or literal.(basic)
  - UnnecessaryTernaryExpressionRule: x ? true : false. Or Boolean.TRUE. Or where both expressions are the same. (basic)
-OTHER CHANGES
+
+Other Changes
  - Deprecate GrailsSessionReferenceRule. Default enabled to false. Note in online docs.
  - StatelessClassRule: Add setAddToIgnoreFieldNames() method (adds to ignoreFieldNames).
  - Add new <rule>.description.html property for each rule. Change the HtmlReportWriter to look for *.description.html first; if not defined, use *.description. Continue to use *.description in XML report. Potential BREAKAGE: If you have overridden the "<rule>.description" message for a predefined rule in a "codenarc-messages.properties" file, you will have to change those message keys to "<rule>.description.html".
@@ -953,7 +960,7 @@ OTHER CHANGES
 
 Version 0.8.1 (2 Feb 2010)
 ------------------------------------
-BUG FIXES
+Bug Fixes
  - Fix Bug #2943025: "NestedBlockDepthRule: Produces erroneous results on Groovy 1.6.x." https://sourceforge.net/tracker/?func=detail&aid=2943025&group_id=250145&atid=1126573
  - Fix Bug #2943028: "PackageNameRule may show incorrect violations for classes within the default package when running in Groovy 1.6.x." https://sourceforge.net/tracker/?func=detail&aid=2943028&group_id=250145&atid=1126573
  - Fix Bug #2935587 "Building CodeNarc 0.8 fails."  - Problem from Joern Huxhorn (Jan 18, 2010) ? Unable to build from the downloaded CodeNarc-0.8-bin.tar.gz.  http://sourceforge.net/tracker/?func=detail&aid=2935587&group_id=250145&atid=1126573. See CodeNarc  - Unable to Build From TarGZip.doc. Remove platform/locale dependencies: AbstractReportWriterTest, UrlResourceTest, GrailsSessionReferenceRuleTest, GrailsPublicControllerMethodRuleTest, GrailsServletContextReferenceRuleTest, GrailsStatelessServiceRuleTest. [Jan 24]
@@ -964,12 +971,13 @@ BUG FIXES
 
 Version 0.8 (17 Jan 2010)
 ------------------------------------
-BUG FIXES
+Bug Fixes
  - Fix Bug #2930886: "Cannot load rules when groovy is in different classloader".  XmlReaderRuleSet, ReportWriterFactory: Replace calls to Class.forName() with getClass().classLoader.loadClass(). https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2930886&group_id=250145.
  - Fix Bug #2847520: "UnusedVariableRule: Closure variable must be invoked". UnusedVariableRule: Referencing an (explicit) Closure variable without invoking it is not recognized as a valid reference. e.g., final CLOSURE = { .. }; return CLOSURE. https://sourceforge.net/tracker/?func=detail&aid=2847520&group_id=250145&atid=1126573
  - Fix false positive: Local closures: If a closure is assigned to a local variable, then used later in the method, CodeNarc report the variable unused. [I think this has already been resolved, perhaps as part of Bug #2847520]. (reported by Donal Murtagh)
  - Fix false positive: Default arguments: If a constant is only used as the value of a default argument, CodeNarc reports this constant unused. (reported by Donal Murtagh)
-REPORTS
+
+Reports
  - Create XmlReportWriter for wrting out an XML report ("xml"). (beta)
  - Create TextReportWriter. Writes out text report with violations by file and priority and summary counts.
  - Enable configuring all provided ReportWriters (HtmlReportWriter, XmlReportWriter, TextReportWriter) to write to the stdout (console).
@@ -979,13 +987,15 @@ REPORTS
  - Remove setTitle() and setOutputFile() from ReportWriter interface.
  - ReportWriter: Rename writeOutReport() method to writeReport().
  - Create AbstractReportWriter.
-RULES
+
+Rules
  - Create new NestedBlockDepthRule. Checks for nesting of all types of block statements (and closures), including for, if, while, try and switch statements. (design)
  - MethodSizeRule: Add support for "ignoreMethodNames" property to enable filtering.
  - AbstractRule: Enhance applyToFileNames to handle optional path (e.g. "abc/def/MyClass.groovy").
  - AbstractRule: The (previously deprecated) applyToFilenames and doNotApplyToFilenames properties now throw an UnsupportedOperationException.
  - AbstractRule: Add optional description property; Use it in report if specified.
-OTHER CHANGES
+
+Other Changes
  - Allow spaces within comma-separated list of ruleset files. Applies when specifying ruleset files for the CodeNarc Ant Task or the CodeNarc script.
  - CodeNarcRunner: Don't require that reportWriters is non-empty.
  - AntFileSetSourceAnalyzer: Specify sourceDirectories relative to project base directory.
@@ -998,12 +1008,13 @@ OTHER CHANGES
 
 Version 0.7 (25 Aug 2009)
 ------------------------------------
-BUG FIXES
+Bug Fixes
  - Fix Bug #2825698: "UnusedVariableRule: stops after 1st unused variable per name". https://sourceforge.net/tracker/?func=detail&aid=2825698&group_id=250145&atid=1126573.
  - Fix Bug #2828696: "UnusedImport rule with fully qualified class reference"   https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2828696&group_id=250145.
  - UnusedImportRule: Add support for static imports. Document known limitation: will not work on imports with wildcards.
  - UnnecessaryGroovyImportRule: Add java.net as another automatically included package.
-NEW FEATURES AND INFRASTRUCTURE
+
+New Features and Infrastructure
  - Groovy DSL for defining RuleSets. (GroovyDslRuleSet and RuleSetBuilder).
  - Enable optional prefix of "file:", "http:" or any other standard URL prefix for resource files, including ruleset files, "codenarc.properties" and rule scripts.
     * Addresses Tracker Issue #2828616: "Allow ruleset file to be specified as a file or url" https://sourceforge.net/tracker/?func=detail&atid=1126575&aid=2828616&group_id=250145.
@@ -1011,20 +1022,22 @@ NEW FEATURES AND INFRASTRUCTURE
     * Addresses Tracker Issue #2831255: "Ant task should accept any ResourceCollection for source"  https://sourceforge.net/tracker/?func=detail&aid=2831255&group_id=250145&atid=1126575.
  - HtmlReportWriter: Show rule name in color according to priority.
  - CompositeRuleSet: Rename add(RuleSet) to addRuleSet(RuleSet). Add addRule(Rule).
-RULES
+
+Rules
  - Create new PropertyNameRule. (naming)
  - FieldNameRule: Do not apply to property fields.
 
 
 Version 0.6 (17 Jul 2009)
 ------------------------------------
-BUG FIXES
+Bug Fixes
  - Fix BUG #2798845 : "StringIndexOutOfBoundsException" https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2798845&group_id=250145
  - Fix BUG #2799752: GrailsPublicControllerMethodRule  - should only apply itself to methods within classes that have suffix "Controller". (see email from Jason Anderson, May 26, 2009) https://sourceforge.net/tracker/?func=detail&aid=2799752&group_id=250145&atid=1126573
  - Fix BUG #2796953: StatelessClassRule requires applyToFileNames or applyToFilesMatching.  https://sourceforge.net/tracker/?func=detail&atid=1126573&aid=2796953&group_id=250145
  - Fix BUG #2811213: "FieldNameRule: Names for final fields  - not be all caps". FieldNameRule: Field names for final instance fields should not default to be all caps like static final fields. For instance: final List sentEmails = []. Rather, "If a property is declared final the private field is created final and no setter is generated." (http://groovy.codehaus.org/Groovy+Beans). So, they should be named with "normal" naming conventions. Re-purpose the finalRegex property to just apply to final instance fields and default to null so that final field names use same convention as non-final. https://sourceforge.net/tracker/?func=detail&aid=2811213&group_id=250145&atid=1126573.
  - Fix: GrailsStatelessServiceRule: Should only apply to *Service classes.
-RULES
+
+Rules
  - Implement UnusedVariableRule. (unused)
  - Implement UnusedPrivateMethodRule. (unused)
  - Implement UnusedPrivateFieldRule. (unused).
@@ -1033,29 +1046,33 @@ RULES
  - VariableNameRule: Add support for ignoreVariableNames.
  - FieldNameRule: Add support for ignoreFieldNames.
  - IllegalRegexRule: Include line numbers in rule violations.
-INFRASTRUCTURE
+
+Infrastructure
  - Allow setting custom name and path for "codenarc.properties" file using "codenarc.properties.file" system property.
  - WildcardPattern: Add optional defaultMatches constructor parameter to specify return value of matches() when the pattern string is null or empty.
  - HtmlReportWriter: Show rules with priority 4. This enables configuring rules to be included in the report but not fail the build.
  - SourceCode: Add int getLineNumberForCharacterIndex(int charIndex).
  - CodeNarcRunner: Don't mandate that reportWriters is non-empty.
-OTHER
+
+Other
  - Publish CodeNarc to Maven repository.
 
 
 Version 0.5 (24 May 2009)
 ------------------------------------
-BUG FIXES
+Bug Fixes
  - FIX: IllegalRegexRule: Don't stop after first violation.
  - FIX: VariableNameRule processing enums: "ArrayIndexOutOfBoundsException: Negative array index [-3] too large for array size 1".
  - FIX: BooleanInstantiationRule, VariableNameRule: Error parsing code with Enums.
  - FIX: Rules sometimes produce two violations for a single line. (e.g. EmptyElseBlockRule, PrintlnRule)
-POTENTIAL BREAKING CHANGES
+
+Potential Breaking Changes
  - Normalize all path separators (/,\) in SourceCode paths.
  - SourceCodeCriteria: Change applyToFilenames and doNotApplyToFilenames to applyToFileNames and doNotApplyToFileNames.
  - DirectorySourceAnalyzer: Change applyToFilenames and doNotApplyToFilenames to applyToFileNames and doNotApplyToFileNames.
-RULES
- - Created new "grails" RuleSet and nine new Rules:
+
+Rules
+ - Created new "grails" RuleSet and nine New Rules:
    * GrailsStatelessServiceRule (Specially-configured StatelessClassRule) (grails)
    * GrailsPublicControllerMethodRule (grails)
    * GrailsServletContextReferenceRule (grails)
@@ -1067,7 +1084,8 @@ RULES
    * JUnitPublicNonTestMethodRule (junit).
  - Change JUnit rules to use applyToClassNames=*Test,*Tests.
  - ClassSizeRule: Don't include package name in violation message.
-INFRASTRUCTURE
+
+Infrastructure
  - Support running CodeNarc as a command-line application (org.codenarc.CodeNarc).
  - Add support for Groovy rule scripts.
  - AbstractAstVisitorRule: Add applyToClassNames and doNotApplyToClassNames. Filter rules based on class and/or package.
@@ -1087,17 +1105,19 @@ INFRASTRUCTURE
  - Add line(int) method to SourceCode to return trimmed source line.
  - Add createViolation() convenience method(s) to AbstractRule.
  - AbstractAstVisitor: Replace isAlreadyVisited() and registerAsVisited() with isFirstVisit().
-DEPRECATIONS
+
+Deprecations
  - AbstractRule: Deprecated applyToFilenames and doNotApplyToFilenames (replace with applyToFileNames and doNotApplyToFileNames).
  - Deprecated DirectorySourceAnalyzer.
-DOCUMENTATION
+
+Documentation
  - Create "Create Rule" document.
  - Add section in "Configuring Rules" on Turning Off a Rule.
 
 
 Version 0.4 (31 Mar 2009)
 ------------------------------------
-INFRASTRUCTURE
+Infrastructure
  - Support for wildcards (*,?) in RuleSet <include> and <exclude>, and in Rule.applyToFilenames.
  - Fix for configuration from properties files  - allow setting superclass fields.
  - Add better logging, including stacktrace, when an error occurs during processing.
@@ -1109,8 +1129,9 @@ INFRASTRUCTURE
  - CodeNarcTask: Don't fail build until after reports are generated.
  - Create WildcardPattern class.
  - Create AstUtil. Move isBlock() and isEmptyBlock() from AbstractAstVisitor.
-RULES
- - Created new "junit" and "logging" RuleSets and a bunch of new Rules:
+
+Rules
+ - Created new "junit" and "logging" RuleSets and a bunch of New Rules:
    * JUnitAssertAlwaysSuccedsRule (junit)
    * JUnitAssertAlwaysFailsRule (junit)
    * JUnitTearDownCallsSuperRule (junit)
@@ -1129,19 +1150,21 @@ RULES
    * ThrowRuntimeExceptionRule (exceptions)
    * ThrowErrorRule (exceptions)
  - BooleanInstantiationRule: Also check for Boolean.valueOf(true/false).
-DOCUMENTATION
+
+Documentation
  - Add example reports for open source Groovy projects: Grails, Griffon and Gradle.
 
 
 Version 0.3 (02 Mar 2009)
 ------------------------------------
-INFRASTRUCTURE
+Infrastructure
  - Read rules configuration from optional "codenarc.properties" file. (PropertiesRuleSetConfigurer).
  - CodeNarcTask: Add support for maxPriority3Violations property, etc.
  - AbstractRule: Add applyToFilenames and doNotApplyToFilenames  - available to all rules (subclasses).
  - HtmlReportWriter: Display sourceLine and message on separate lines with named bullets.
-RULES
- - Created new "naming" RuleSets and new Rules:
+
+Rules
+ - Created new "naming" RuleSets and New Rules:
    * AbstractClassNameRule. (naming)
    * ClassNameRule. (naming)
    * FieldNameRule. (naming)
@@ -1150,14 +1173,16 @@ RULES
    * PackageNameRule. (naming)
    * ParameterNameRule. (naming)
    * VariableNameRule. (naming)
-MINOR FIXES/ENHANCEMENTS
+
+Minor Fixes/Enhancements
  - Fix NullPointerException for compiler errors from import rules.
  - AbstractRule: Introduce violationMessage property. Overrides default message if set.
  - Rename Violation description property to message.
  - Rename HtmlReportWriter CSS file to 'codenarc-htmlreport.css'.
  - Change SourceCodeUtil.shouldApplyTo() to take a Map of criteria.
  - Add setName() and setPriority() to AbstractRule.
-DOCUMENTATION
+
+Documentation
  - Add info to online docs re: standard rule properties.
  - Reorganize docs  - separate doc for each RuleSet; section for each rule; table for properties.
  - Update RuleSets doc with info about configuring using properties file.
@@ -1175,7 +1200,7 @@ Version 0.2 (07 Feb 2009)
     * Use <rule-config> to configure rules from nested RuleSets
 
  - Created new "generic", "braces", and "size" RuleSets
- - Created new Rules:
+ - Created New Rules:
    * IllegalRegexRule. (generic)
    * RequiredRegexRule. (generic)
    * ElseBlockBracesRule. (braces)
