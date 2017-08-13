@@ -20,6 +20,7 @@ Framework and Infrastructure
    - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
    - #210: build: upgrade gradle (2.4 -> 4.0). (Thanks to Dominik Broj).
    - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).
+   - #217: Upgrade to GMetrics 1.0.
 
 
 Version 0.27.0 (Mar 2017)
