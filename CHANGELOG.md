@@ -4,6 +4,7 @@ Version 0.28.0 (??? 2017)
 --------------------------------------
 NEW RULES
    - #199: CouldBeSwitchStatement rule (convention)  - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
+
 UPDATED/ENHANCED RULES AND BUG FIXES
    - #196: Fix #194: SpaceAfterClosingBrace: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)
    - #201: Remove tabs from test template. (Thanks to Jenn Strater)
@@ -13,6 +14,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
    - #205: Using AST rule to check def usages. Now ignores def within comments. (Thanks Sargis Harutyunyan)
    - #206: fix for issue #197. Allow suppress warnings on local variables and constructors. (Thanks to Andrey Adamovich)
    - #213: Don't run BracesForClassRule against script ClassNodes. (Thanks to Simon St John-Green)
+
 FRAMEWORK AND INFRASTRUCTURE
    - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
    - #210: build: upgrade gradle (2.4 -> 4.0). (Thanks to Dominik Broj).
@@ -44,6 +46,7 @@ UPDATED/ENHANCED RULES AND BUG FIXES
    - #154: DuplicateListLiteral: ignore lists within annotations.
    - #177: JUnitSetUpCallsSuper: ignore methods annotated with @BeforeClass; JUnitTearDownCallsSuper: ignore methods with @AfterClass.
    - #165: UnnecessaryGetter: Fix false positive violation when a field already exists.
+
 FRAMEWORK AND INFRASTRUCTURE
    - #170: Remove TestUtil class from the CodeNarc jar; move it into test source folder.
    - #178: Add Badge to README for latest version. (Thanks to Mike Kobit)
@@ -441,49 +444,50 @@ BREAKING CHANGES
       2. "Convention"  - Coding conventions; not typically errors.
 
   The following rules were moved out of the "Basic" ruleset:
-      - AddEmptyString                      (unnecessary)
-      - AssignCollectionSort                (groovyism)
-      - AssignCollectionUnique              (groovyism)
-      - BooleanMethodReturnsNull            (design)
-      - CloneableWithoutClone               (design)
-      - ClosureAsLastMethodParameter        (groovyism)
-      - CollectAllIsDeprecated              (groovyism)
-      - CompareToWithoutComparable          (design)
-      - ConfusingMultipleReturns            (groovyism)
-      - ConfusingTernary                    (convention)
-      - ConsecutiveLiteralAppends           (unnecessary)
-      - ConsecutiveStringConcatenation      (unnecessary)
-      - CouldBeElvis                        (convention)
-      - ExplicitArrayListInstantiation      (groovyism)
-      - ExplicitCallToAndMethod             (groovyism)
-      - ExplicitCallToCompareToMethod       (groovyism)
-      - ExplicitCallToDivMethod             (groovyism)
-      - ExplicitCallToEqualsMethod          (groovyism)
-      - ExplicitCallToGetAtMethod           (groovyism)
-      - ExplicitCallToLeftShiftMethod       (groovyism)
-      - ExplicitCallToMinusMethod           (groovyism)
-      - ExplicitCallToModMethod             (groovyism)
-      - ExplicitCallToMultiplyMethod        (groovyism)
-      - ExplicitCallToOrMethod              (groovyism)
-      - ExplicitCallToPlusMethod            (groovyism)
-      - ExplicitCallToPowerMethod           (groovyism)
-      - ExplicitCallToRightShiftMethod      (groovyism)
-      - ExplicitCallToXorMethod             (groovyism)
-      - ExplicitHashMapInstantiation        (groovyism)
-      - ExplicitHashSetInstantiation        (groovyism)
-      - ExplicitLinkedHashMapInstantiation  (groovyism)
-      - ExplicitLinkedListInstantiation     (groovyism)
-      - ExplicitStackInstantiation          (groovyism)
-      - ExplicitTreeSetInstantiation        (groovyism)
-      - GStringAsMapKey                     (groovyism)
-      - GroovyLangImmutable                 (groovyism)
-      - InvertedIfElse                      (convention)
-      - LongLiteralWithLowerCaseL           (convention)
-      - ReturnsNullInsteadOfEmptyArray      (design)
-      - ReturnsNullInsteadOfEmptyCollection (design)
-      - SimpleDateFormatMissingLocale       (design)
-      - UseCollectMany                      (groovyism)
-      - UseCollectNested                    (groovyism)
+   - AddEmptyString                      (unnecessary)
+   - AssignCollectionSort                (groovyism)
+   - AssignCollectionUnique              (groovyism)
+   - BooleanMethodReturnsNull            (design)
+   - CloneableWithoutClone               (design)
+   - ClosureAsLastMethodParameter        (groovyism)
+   - CollectAllIsDeprecated              (groovyism)
+   - CompareToWithoutComparable          (design)
+   - ConfusingMultipleReturns            (groovyism)
+   - ConfusingTernary                    (convention)
+   - ConsecutiveLiteralAppends           (unnecessary)
+   - ConsecutiveStringConcatenation      (unnecessary)
+   - CouldBeElvis                        (convention)
+   - ExplicitArrayListInstantiation      (groovyism)
+   - ExplicitCallToAndMethod             (groovyism)
+   - ExplicitCallToCompareToMethod       (groovyism)
+   - ExplicitCallToDivMethod             (groovyism)
+   - ExplicitCallToEqualsMethod          (groovyism)
+   - ExplicitCallToGetAtMethod           (groovyism)
+   - ExplicitCallToLeftShiftMethod       (groovyism)
+   - ExplicitCallToMinusMethod           (groovyism)
+   - ExplicitCallToModMethod             (groovyism)
+   - ExplicitCallToMultiplyMethod        (groovyism)
+   - ExplicitCallToOrMethod              (groovyism)
+   - ExplicitCallToPlusMethod            (groovyism)
+   - ExplicitCallToPowerMethod           (groovyism)
+   - ExplicitCallToRightShiftMethod      (groovyism)
+   - ExplicitCallToXorMethod             (groovyism)
+   - ExplicitHashMapInstantiation        (groovyism)
+   - ExplicitHashSetInstantiation        (groovyism)
+   - ExplicitLinkedHashMapInstantiation  (groovyism)
+   - ExplicitLinkedListInstantiation     (groovyism)
+   - ExplicitStackInstantiation          (groovyism)
+   - ExplicitTreeSetInstantiation        (groovyism)
+   - GStringAsMapKey                     (groovyism)
+   - GroovyLangImmutable                 (groovyism)
+   - InvertedIfElse                      (convention)
+   - LongLiteralWithLowerCaseL           (convention)
+   - ReturnsNullInsteadOfEmptyArray      (design)
+   - ReturnsNullInsteadOfEmptyCollection (design)
+   - SimpleDateFormatMissingLocale       (design)
+   - UseCollectMany                      (groovyism)
+   - UseCollectNested                    (groovyism)
+  
   The ruleset parser classes have been modified to print a helpful error message for moved and renamed rules (see MovedRules helper class).
  * In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors.
 
@@ -616,8 +620,8 @@ BUG FIXES and NEW FEATURES
   - #3305896  - Fix LoggerForDifferentClass: The rule now correctly handles inner classes (that are not static)
   - #3305019  - Updated the EmptyCatchBlockRule so that exceptions named ignore or ignored will not trigger errors. The name is configurable.
   - #3309062  - UnnecessaryGroovyImportRule handles static imports incorrectly
- -           - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.
- -           - Fixed the InconsistentPropertySynchronization rule so that it recognizes the new @Synchronized annotation.
+  - Fixed the Explicit[Collection]Instantiation rules so that the error messages are more descriptive.
+  - Fixed the InconsistentPropertySynchronization rule so that it recognizes the new @Synchronized annotation.
   - #3308930  - LoggerWithWrongModifiersRule now contains a parameter 'allowProtectedLogger' so that loggers can also be instantiated as 'protected final LOG = Logger.getLogger(this.class)'. Also, it has a 'allowNonStatic' logger property, that allows you to create a non static logger.
   - #3308930  - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass().
   - #3309748  - FieldName:Do not treat non-static final fields as constants
@@ -634,13 +638,13 @@ BREAKING CHANGES
  * The ExplicitTypeInstantiationAstVisitor is now an abstract class that requires you to specify a custom violation message. This should affect no one, but it is a backwards breaking change. ppp
 
 THANKS
-  Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop, UnnecessaryElse, StatelessSingleton, PublicInstanceField, and EmptyCatchBlock rules.
-  Thank you to Jan Ahrens and Stefan Armbruster for the SpockIgnoreRestUsed rule.
-  Thank you to Rob Fletcher and Klaus Baumecker for the SwallowThreadDeath rule.
-  Thank you to Erik Pragt for the MisorderedStaticImports rule.
-  Thank you to Marcin Erdmann for the MisorderedStaticImports, ClosureAsLastMethodParameterInBracketsRule, and UnnecessaryBracketsForMethodWithClosureCall rules.
-  Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
-  Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
+  - Thank you to Victor Savkin for sending in a patch with the ForLoopShouldBeWhileLoop, UnnecessaryElse, StatelessSingleton, PublicInstanceField, and EmptyCatchBlock rules.
+  - Thank you to Jan Ahrens and Stefan Armbruster for the SpockIgnoreRestUsed rule.
+  - Thank you to Rob Fletcher and Klaus Baumecker for the SwallowThreadDeath rule.
+  - Thank you to Erik Pragt for the MisorderedStaticImports rule.
+  - Thank you to Marcin Erdmann for the MisorderedStaticImports, ClosureAsLastMethodParameterInBracketsRule, and UnnecessaryBracketsForMethodWithClosureCall rules.
+  - Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
+  - Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
 
 Version 0.13 (February 2011)
 -------------------------------------------
@@ -809,56 +813,56 @@ NEW FEATURES
  - Better "codenarc create-rule" support. You can create a new rule by running "codenarc create-rule" from the root of the CodeNarc codebase. This script has been updated to properly format Javadoc, prompt for the author name, and update the Maven Site .apt documentation.
 
 NEW RULES
-BooleanMethodReturnsNull Rule (basic) : Checks for a method with Boolean return type that returns an explicit null.
-DeadCode Rule (basic) :  Checks for dead code that appears after a return statement or after an exception is thrown.
-DoubleNegative Rule (basic) :  Checks for using a double negative, which is always positive.
-DuplicateCaseStatement Rule (basic) :  Check for duplicate case statements in a switch block, such as two equal integers or strings.
-ExplicitCallToAndMethod Rule (basic) :  This rule detects when the and(Object) method is called directly in code instead of using the & operator.
-ExplicitCallToCompareToMethod Rule (basic) :  This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <, and <= operators.
-ExplicitCallToDivMethod Rule (basic) :  This rule detects when the div(Object) method is called directly in code instead of using the / operator.
-ExplicitCallToEqualsMethod Rule (basic) :  This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator.
-ExplicitCallToGetAtMethod Rule (basic) :  This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator.
-ExplicitCallToLeftShiftMethod Rule (basic) :  This rule detects when the leftShift(Object) method is called directly in code instead of using the \<\< operator.
-ExplicitCallToMinusMethod Rule (basic) :  This rule detects when the minus(Object) method is called directly in code instead of using the  - operator.
-ExplicitCallToMultiplyMethod Rule (basic) :  This rule detects when the multiply(Object) method is called directly in code instead of using the * operator.
-ExplicitCallToModMethod Rule (basic) :  This rule detects when the mod(Object) method is called directly in code instead of using the % operator.
-ExplicitCallToOrMethod Rule (basic) :  This rule detects when the or(Object) method is called directly in code instead of using the | operator.
-ExplicitCallToPlusMethod Rule (basic) :  This rule detects when the plus(Object) method is called directly in code instead of using the + operator.
-ExplicitCallToPowerMethod Rule (basic) :  This rule detects when the power(Object) method is called directly in code instead of using the ** operator.
-ExplicitCallToRightShiftMethod Rule (basic) :  This rule detects when the rightShift(Object) method is called directly in code instead of using the \>\> operator.
-ExplicitCallToXorMethod Rule (basic) :  This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator.
-ExplicitArrayListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write new ArrayList() as [], which creates the same object.
-ExplicitHashMapInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write new HashMap() as [:], which creates the same object.
-ExplicitHashSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write new HashSet() as [] as Set, which creates the same object.
-ExplicitLinkedListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write new LinkedList() as [] as Queue, which creates the same object.
-ExplicitStackInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write new Stack() as [] as Stack, which creates the same object.
-ExplicitTreeSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write new TreeSet()>> as [] as SortedSet, which creates the same object.
-GStringAsMapKey Rule  A GString should not be used as a map key since its hashcode is not guaranteed to be stable.
-InvertedIfElse Rule (basic) :  An inverted if-else statement is one in which there is a single if statement with a single else branch and the boolean test of the if is negated.
-RemoveAllOnSelf Rule (basic) : Don't use removeAll to clear a collection.
-ReturnsNullInsteadOfEmptyArray Rule (basic) : If you have a method or closure that returns an array, then when there are no results return a zero-length (empty) array rather than null.
-ReturnsNullInsteadOfEmptyCollection Rule (basic) : If you have a method or closure that returns a collection, then when there are no results return a zero-length (empty) collection rather than null.
-SerialVersionUID Rule (basic) : A serialVersionUID is normally intended to be used with Serialization. It needs to be of type long, static, and final.
-UnnecessaryConstructor Rule (unnecessary) : This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has an empty body, and takes no arguments.
-UnnecessaryCollectionCall Rule (unnecessary) : Checks for useless calls to collections.
-UnnecessaryOverridingMethod Rule (unnecessary) : Checks for an overriding method that merely calls the same method defined in a superclass.
-UnnecessaryReturnKeyword Rule (unnecessary) :  In Groovy, the return keyword is often optional.
-SynchronizedOnGetClass Rule (concurrency) : Checks for synchronization on getClass() rather than class literal.
-UseOfNotifyMethod Rule (concurrency) : Checks for code that calls notify() rather than notifyAll().
-DuplicateNumberLiteral Rule (dry) : This rule checks for duplicate number literals within the current class.
-DuplicateStringLiteral Rule (dry) : This rule checks for duplicate String literals within the current class.
-CatchIllegalMonitorStateException Rule (exceptions) : Dubious catching of IllegalMonitorStateException.
-ConfusingClassNamedException Rule (exceptions) : This class is not derived from another exception, but ends with 'Exception'.
-ReturnNullFromCatchBlock Rule (exceptions) : Returning null from a catch block often masks errors and requires the client to handle error codes.
-UseAssertEqualsInsteadOfAssertTrue Rule (junit) : This rule detects JUnit assertions in object equality.
-UseAssertTrueInsteadOfAssertEqualsRule Rule (junit) : This rule detects JUnit calling assertEquals where the first parameter is a boolean.
-UseAssertNullInsteadOfAssertEquals Rule (junit) : This rule detects JUnit calling assertEquals where the first or second parameter is null.
-UseAssertSameInsteadOfAssertTrue Rule (junit) : This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for reference equality.
-JUnitFailWithoutMessage Rule (junit) : This rule detects JUnit calling the fail() method without an argument.
-JUnitStyleAssertions Rule (junit) : This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
-ConfusingMethodName Rule (naming) : Checks for very confusing method names. The referenced methods have names that differ only by capitalization.
-ObjectOverrideMisspelledMethodName Rule (naming) : Verifies that the names of the most commonly overridden methods of Object: equals, hashCode and toString, are correct.
-MethodCount Rule (size) : Checks if the number of methods within a class exceeds the number of lines specified by the maxMethod property.
+ - BooleanMethodReturnsNull Rule (basic) : Checks for a method with Boolean return type that returns an explicit null.
+ - DeadCode Rule (basic) :  Checks for dead code that appears after a return statement or after an exception is thrown.
+ - DoubleNegative Rule (basic) :  Checks for using a double negative, which is always positive.
+ - DuplicateCaseStatement Rule (basic) :  Check for duplicate case statements in a switch block, such as two equal integers or strings.
+ - ExplicitCallToAndMethod Rule (basic) :  This rule detects when the and(Object) method is called directly in code instead of using the & operator.
+ - ExplicitCallToCompareToMethod Rule (basic) :  This rule detects when the compareTo(Object) method is called directly in code instead of using the <=>, >, >=, <, and <= operators.
+ - ExplicitCallToDivMethod Rule (basic) :  This rule detects when the div(Object) method is called directly in code instead of using the / operator.
+ - ExplicitCallToEqualsMethod Rule (basic) :  This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator.
+ - ExplicitCallToGetAtMethod Rule (basic) :  This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator.
+ - ExplicitCallToLeftShiftMethod Rule (basic) :  This rule detects when the leftShift(Object) method is called directly in code instead of using the \<\< operator.
+ - ExplicitCallToMinusMethod Rule (basic) :  This rule detects when the minus(Object) method is called directly in code instead of using the  - operator.
+ - ExplicitCallToMultiplyMethod Rule (basic) :  This rule detects when the multiply(Object) method is called directly in code instead of using the * operator.
+ - ExplicitCallToModMethod Rule (basic) :  This rule detects when the mod(Object) method is called directly in code instead of using the % operator.
+ - ExplicitCallToOrMethod Rule (basic) :  This rule detects when the or(Object) method is called directly in code instead of using the | operator.
+ - ExplicitCallToPlusMethod Rule (basic) :  This rule detects when the plus(Object) method is called directly in code instead of using the + operator.
+ - ExplicitCallToPowerMethod Rule (basic) :  This rule detects when the power(Object) method is called directly in code instead of using the ** operator.
+ - ExplicitCallToRightShiftMethod Rule (basic) :  This rule detects when the rightShift(Object) method is called directly in code instead of using the \>\> operator.
+ - ExplicitCallToXorMethod Rule (basic) :  This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator.
+ - ExplicitArrayListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of an ArrayList. In Groovy, it is best to write new ArrayList() as [], which creates the same object.
+ - ExplicitHashMapInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashMap. In Groovy, it is best to write new HashMap() as [:], which creates the same object.
+ - ExplicitHashSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a HashSet. In Groovy, it is best to write new HashSet() as [] as Set, which creates the same object.
+ - ExplicitLinkedListInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a LinkedList. In Groovy, it is best to write new LinkedList() as [] as Queue, which creates the same object.
+ - ExplicitStackInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a Stack. In Groovy, it is best to write new Stack() as [] as Stack, which creates the same object.
+ - ExplicitTreeSetInstantiation Rule (basic) :  This rule checks for the explicit instantiation of a TreeSet. In Groovy, it is best to write new TreeSet()>> as [] as SortedSet, which creates the same object.
+ - GStringAsMapKey Rule  A GString should not be used as a map key since its hashcode is not guaranteed to be stable.
+ - InvertedIfElse Rule (basic) :  An inverted if-else statement is one in which there is a single if statement with a single else branch and the boolean test of the if is negated.
+ - RemoveAllOnSelf Rule (basic) : Don't use removeAll to clear a collection.
+ - ReturnsNullInsteadOfEmptyArray Rule (basic) : If you have a method or closure that returns an array, then when there are no results return a zero-length (empty) array rather than null.
+ - ReturnsNullInsteadOfEmptyCollection Rule (basic) : If you have a method or closure that returns a collection, then when there are no results return a zero-length (empty) collection rather than null.
+ - SerialVersionUID Rule (basic) : A serialVersionUID is normally intended to be used with Serialization. It needs to be of type long, static, and final.
+ - UnnecessaryConstructor Rule (unnecessary) : This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has an empty body, and takes no arguments.
+ - UnnecessaryCollectionCall Rule (unnecessary) : Checks for useless calls to collections.
+ - UnnecessaryOverridingMethod Rule (unnecessary) : Checks for an overriding method that merely calls the same method defined in a superclass.
+ - UnnecessaryReturnKeyword Rule (unnecessary) :  In Groovy, the return keyword is often optional.
+ - SynchronizedOnGetClass Rule (concurrency) : Checks for synchronization on getClass() rather than class literal.
+ - UseOfNotifyMethod Rule (concurrency) : Checks for code that calls notify() rather than notifyAll().
+ - DuplicateNumberLiteral Rule (dry) : This rule checks for duplicate number literals within the current class.
+ - DuplicateStringLiteral Rule (dry) : This rule checks for duplicate String literals within the current class.
+ - CatchIllegalMonitorStateException Rule (exceptions) : Dubious catching of IllegalMonitorStateException.
+ - ConfusingClassNamedException Rule (exceptions) : This class is not derived from another exception, but ends with 'Exception'.
+ - ReturnNullFromCatchBlock Rule (exceptions) : Returning null from a catch block often masks errors and requires the client to handle error codes.
+ - UseAssertEqualsInsteadOfAssertTrue Rule (junit) : This rule detects JUnit assertions in object equality.
+ - UseAssertTrueInsteadOfAssertEqualsRule Rule (junit) : This rule detects JUnit calling assertEquals where the first parameter is a boolean.
+ - UseAssertNullInsteadOfAssertEquals Rule (junit) : This rule detects JUnit calling assertEquals where the first or second parameter is null.
+ - UseAssertSameInsteadOfAssertTrue Rule (junit) : This rule detects JUnit calling assertTrue or assertFalse where the first or second parameter is an Object#is() call testing for reference equality.
+ - JUnitFailWithoutMessage Rule (junit) : This rule detects JUnit calling the fail() method without an argument.
+ - JUnitStyleAssertions Rule (junit) : This rule detects calling JUnit style assertions like assertEquals, assertTrue, assertFalse, assertNull, assertNotNull.
+ - ConfusingMethodName Rule (naming) : Checks for very confusing method names. The referenced methods have names that differ only by capitalization.
+ - ObjectOverrideMisspelledMethodName Rule (naming) : Verifies that the names of the most commonly overridden methods of Object: equals, hashCode and toString, are correct.
+ - MethodCount Rule (size) : Checks if the number of methods within a class exceeds the number of lines specified by the maxMethod property.
 
 BUG FIXES
  - None reported, none fixed!
