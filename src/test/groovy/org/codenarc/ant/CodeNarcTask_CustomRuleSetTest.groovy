@@ -50,8 +50,9 @@ class CodeNarcTask_CustomRuleSetTest extends AbstractTestCase {
     void setUpCodeNarcTask_CustomRuleSetTest() {
 
         def project = new Project(basedir:'.')
-        fileSet = new FileSet(dir:new File(BASE_DIR), project:project)
-        fileSet.setIncludes('main/groovy/org/codenarc/rule/dry/*.groovy')
+        fileSet = new FileSet(dir:new File(BASE_DIR),
+                project:project,
+                includes:'main/groovy/org/codenarc/rule/dry/*.groovy')
 
         codeNarcTask = new CodeNarcTask(project:project)
         codeNarcTask.addConfiguredReport(new Report(type:'console'))

@@ -57,7 +57,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testAnalyze_SimpleDirectory() {
-        fileSet.setIncludes('source/**/*.groovy')
+        fileSet.includes = 'source/**/*.groovy'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
         def sourceFilePaths = results.violations*.message
@@ -74,8 +74,8 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testAnalyze_NestedSubdirectories() {
-        fileSet.setIncludes('sourcewithdirs/**/*.groovy')
-        fileSet.setExcludes('**/*File2.groovy')
+        fileSet.includes = 'sourcewithdirs/**/*.groovy'
+        fileSet.excludes = '**/*File2.groovy'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
         def sourceFilePaths = results.violations*.message
@@ -107,7 +107,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     @Test
     void testAnalyze_NestedSubdirectories_NoViolations() {
         ruleSet = new ListRuleSet([new FakeCountRule()])
-        fileSet.setIncludes('sourcewithdirs/**/*.groovy')
+        fileSet.includes = 'sourcewithdirs/**/*.groovy'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
 
@@ -141,7 +141,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testAnalyze_EmptyFileSet() {
-        fileSet.setExcludes('**/*')
+        fileSet.excludes = '**/*'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
         assertResultsCounts(results, 0, 0)
@@ -149,7 +149,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
     @Test
     void testAnalyze_LogsThrownExceptions() {
-        fileSet.setIncludes('source/**/*.groovy')
+        fileSet.includes = 'source/**/*.groovy'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         final EXCEPTION = new RuntimeException('TESTING AN EXCEPTION. Error in applyTo()')
         def badRule = new MockRule(applyTo: { sourceCode -> throw EXCEPTION })
@@ -193,12 +193,10 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
 
     @Before
     void setUpAntFileSetSourceAnalyzerTest() {
-        fileSet = new FileSet()
-        fileSet.dir = new File(BASE_DIR)
-
         project = new Project()
-        project.setBasedir('.')
-        fileSet.setProject(project)
+        project.basedir = '.'
+
+        fileSet = new FileSet(dir:new File(BASE_DIR), project:project)
 
         ruleSet = new ListRuleSet([new FakePathRule()])
     }

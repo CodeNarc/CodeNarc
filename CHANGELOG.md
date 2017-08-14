@@ -4,6 +4,7 @@ Version 1.0 (??? 2017)
 --------------------------------------
 New Rules
    - #199: **CouldBeSwitchStatement** rule (convention)  - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
+   - #215: **UnnecessarySetter** rule (unnecessary)  - Checks for explicit calls to setter methods which can be replaced by assignment to property (Thanks to Yuriy Chulovskyy) 
 
 Updated/Enhanced Rules and Bug Fixes
    - #196: Fix #194: **SpaceAfterClosingBrace**: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)

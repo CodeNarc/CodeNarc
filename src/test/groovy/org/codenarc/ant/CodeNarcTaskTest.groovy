@@ -232,8 +232,9 @@ class CodeNarcTaskTest extends AbstractTestCase {
     @Before
     void setUpCodeNarcTaskTest() {
         project = new Project(basedir:'.')
-        fileSet = new FileSet(dir:new File(BASE_DIR), project:project)
-        fileSet.setIncludes('sourcewithdirs/**/*.groovy')
+        fileSet = new FileSet(dir:new File(BASE_DIR),
+                project:project,
+                includes:'sourcewithdirs/**/*.groovy')
 
         codeNarcTask = new CodeNarcTask(project:project)
         codeNarcTask.ruleSetFiles = RULESET_FILE
@@ -279,7 +280,7 @@ class StubSourceAnalyzerCategory {
     static violationCounts
 
     static void reset() { violationCounts = [1:0, 2:0, 3:0] }
-    
+
     static SourceAnalyzer createSourceAnalyzer(CodeNarcTask self) {
         def results = [getNumberOfViolationsWithPriority:{ p, r -> violationCounts[p] }] as Results
         [analyze:{ RuleSet ruleSet -> results }, getSourceDirectories:{ [] }] as SourceAnalyzer

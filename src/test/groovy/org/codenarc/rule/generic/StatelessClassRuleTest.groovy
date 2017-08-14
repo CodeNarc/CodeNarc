@@ -221,20 +221,20 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testSetAddToIgnoreFieldNames_IgnoreFieldNamesIsNull() {
-        rule.setAddToIgnoreFieldNames('abc')
+        rule.addToIgnoreFieldNames = 'abc'
         assert rule.ignoreFieldNames == 'abc'
     }
 
     @Test
     void testSetAddToIgnoreFieldNames_IgnoreFieldNamesAlreadySet() {
         rule.ignoreFieldNames = 'abc'
-        rule.setAddToIgnoreFieldNames('def,ghi')
+        rule.addToIgnoreFieldNames = 'def,ghi'
         assert rule.ignoreFieldNames == 'abc,def,ghi'
     }
 
     @Test
     void testSetAddToIgnoreFieldNames_MultipleCalls_AddToIgnoreFieldNames() {
-        rule.setAddToIgnoreFieldNames('abc,d*f')
+        rule.addToIgnoreFieldNames = 'abc,d*f'
         rule.addToIgnoreFieldNames = 'gh?'
         assert rule.ignoreFieldNames == 'abc,d*f,gh?'
     }

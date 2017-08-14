@@ -59,7 +59,7 @@ class TopLevelDelegate {
         def ruleSet = RuleSetUtil.loadRuleSetFile(path)
         def ruleSetConfigurer = new RuleSetDelegate(ruleSet)
         closure.delegate = ruleSetConfigurer
-        closure.setResolveStrategy(Closure.DELEGATE_FIRST)
+        closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.call()
         allRuleSet.addRuleSet(ruleSetConfigurer.ruleSet)
     }
@@ -148,7 +148,7 @@ class RuleSetDelegate {
         def arg = args[0]
         if (arg instanceof Closure) {
             arg.delegate = rule
-            arg.setResolveStrategy(Closure.DELEGATE_FIRST)
+            arg.resolveStrategy = Closure.DELEGATE_FIRST
             arg.call()
         }
         else {
