@@ -159,6 +159,11 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
+ Known limitations:
+
+  * This rule is not able to determine if the class extends a superclass that itself implements <<<Comparable>>>, or
+    if it implements an interface that extends <<<Comparable>>>. In those cases, this rule produces a false violation.
+
 
 * {ConstantsOnlyInterface} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
