@@ -204,7 +204,7 @@ Unused Rules  ("<rulesets/unused.xml>")
 * {UnusedVariable} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  Checks for variables that are never referenced.
+  Checks for variables that are never referenced. An assignment to the variable is not considered a reference.
 
   The rule has a property named ignoreVariableNames, which can be set to ignore some variable names.
   For instance, to ignore fields named 'unused', set the property to 'unused'.

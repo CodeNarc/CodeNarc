@@ -17,6 +17,7 @@ package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
+import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -79,6 +80,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     private final variablesByBlockScope = [] as Stack
     private variablesInCurrentBlockScope
     private anonymousReferences
+    private final Set<VariableExpression> assignmentLeftExpressions = []
 
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         if (isFirstVisit(declarationExpression)) {
@@ -91,6 +93,14 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
             }
         }
         super.visitDeclarationExpression(declarationExpression)
+    }
+
+    @Override
+    void visitBinaryExpression(BinaryExpression expression) {
+        if (AstUtil.isBinaryExpressionType(expression, '=') && expression.leftExpression instanceof VariableExpression) {
+            assignmentLeftExpressions << expression.leftExpression
+        }
+        super.visitBinaryExpression(expression)
     }
 
     void visitBlockStatement(BlockStatement block) {
@@ -122,7 +132,9 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     }
 
     void visitVariableExpression(VariableExpression expression) {
-        markVariableAsReferenced(expression.name, expression)
+        if (!assignmentLeftExpressions.contains(expression)) {
+            markVariableAsReferenced(expression.name, expression)
+        }
         super.visitVariableExpression(expression)
     }
 

@@ -57,6 +57,21 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_VariableSetButNeverReferenced_Unused() {
+        final SOURCE = '''
+            class MyClass {
+                def myMethod() {
+                    int count
+                    int other
+                    count = 23      // assigned, but not referenced
+                    println other
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'int count', 'The variable [count] in class MyClass is not used')
+    }
+
+    @Test
     void testApplyTo_MultipleUnusedVariables() {
         final SOURCE = '''
           class MyClass {
@@ -64,7 +79,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                     int count = 23
                     String name
                     String other
-                    name = 'def'
+                    println(name + "123")
                 }
           }
         '''
@@ -84,6 +99,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
                     println "name=$startName"
                     def amount = 123.45
                     println "amount=$amount"
+                    return otherVar
                 }
             }
         '''

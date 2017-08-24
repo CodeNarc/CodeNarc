@@ -15,6 +15,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #206: fix for issue #197. Allow suppress warnings on local variables and constructors. (Thanks to Andrey Adamovich)
    - #213: Don't run **BracesForClass** against script ClassNodes. (Thanks to Simon St John-Green)
    - #207: **ParameterCount** ignores methods with @Override annotation; *ignoreOverriddenMethods* defaults to true. (Thanks to Yuriy Chulovskyy)
+   - #223: **UnusedVariable**: Don't count variable assignment as a reference (usage). 
 
 Framework and Infrastructure
    - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
