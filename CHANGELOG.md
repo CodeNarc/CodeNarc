@@ -23,7 +23,8 @@ Framework and Infrastructure
    - #210: build: upgrade gradle (2.4 -> 4.0). (Thanks to Dominik Broj).
    - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).
    - #217: Upgrade to GMetrics 1.0.
-
+   - #219: Use the right classloader for loading AST transformations when compiling analysed code. (Thanks to Marcin Erdmann)
+   
 
 Version 0.27.0 (Mar 2017)
 --------------------------------------
