@@ -1,5 +1,5 @@
 language: groovy
-
+sudo: required
 install: true
 
 before_cache:
