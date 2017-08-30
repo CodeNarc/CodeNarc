@@ -40,7 +40,7 @@ class SourceString extends AbstractSourceCode {
         this.source = source
         setPath(path)
         this.name = name
-        setSuppressionAnalyzer(new SuppressionAnalyzer(this))
+        this.suppressionAnalyzer = new SuppressionAnalyzer(this)
     }
 
     /**

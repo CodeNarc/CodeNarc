@@ -37,7 +37,7 @@ class SourceFile extends AbstractSourceCode {
         assert file
         this.file = file
         this.path = normalizePath(file.path)
-        setSuppressionAnalyzer(new SuppressionAnalyzer(this))
+        this.suppressionAnalyzer = new SuppressionAnalyzer(this)
     }
 
     /**

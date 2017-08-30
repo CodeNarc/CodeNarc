@@ -89,7 +89,7 @@ abstract class AbstractReportWriter implements ReportWriter {
         try {
             resourceBundle = ResourceBundle.getBundle(customMessagesBundleName)
             LOG.info("Using custom message bundle [$customMessagesBundleName]")
-            resourceBundle.setParent(baseBundle)
+            resourceBundle.parent = baseBundle
         }
         catch(MissingResourceException) {
             LOG.info("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
