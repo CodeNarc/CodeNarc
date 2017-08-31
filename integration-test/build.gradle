@@ -10,6 +10,7 @@ repositories {
 dependencies {
     testCompile project(':')
     testCompile gradleTestKit()
+    testCompile 'junit:junit:4.12'
 }
 
 configurations.all {

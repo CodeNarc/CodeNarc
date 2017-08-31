@@ -23,10 +23,11 @@ dependencies {
     compile 'log4j:log4j:1.2.14'
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile('org.gmetrics:GMetrics:1.0')
-    compile 'junit:junit:4.12'
+    compileOnly 'junit:junit:4.12'
 
     testCompile "org.slf4j:slf4j-simple:$slf4jVersion"
     testCompile 'commons-cli:commons-cli:1.4'
+    testCompile 'junit:junit:4.12'
 }
 
 sourceSets {

@@ -24,6 +24,8 @@ Framework and Infrastructure
    - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).
    - #217: Upgrade to GMetrics 1.0.
    - #219: Use the right classloader for loading AST transformations when compiling analysed code. (Thanks to Marcin Erdmann)
+   - #222: Make JUnit jar a *compileOnly* dependency.
+
    
 
 Version 0.27.0 (Mar 2017)
