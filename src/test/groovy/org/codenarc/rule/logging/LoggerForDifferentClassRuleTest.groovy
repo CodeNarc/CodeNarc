@@ -48,28 +48,28 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
     void testApplyTo_Logger_Violations() {
         final SOURCE = '''
             class MyClass {
-                private static final LOG = Logger.getLogger(SomeOtherClass)
-                def log1 = Logger.getLogger(SomeOtherClass.class)
-                def log2 = Logger.getLogger(SomeOtherClass.class.name)
+                private static final LOG = LoggerFactory.getLogger(SomeOtherClass)
+                def log1 = LoggerFactory.getLogger(SomeOtherClass.class)
+                def log2 = LoggerFactory.getLogger(SomeOtherClass.class.name)
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'private static final LOG = Logger.getLogger(SomeOtherClass)'],
-            [lineNumber:4, sourceLineText:'def log1 = Logger.getLogger(SomeOtherClass.class)'],
-            [lineNumber:5, sourceLineText:'def log2 = Logger.getLogger(SomeOtherClass.class.name)'])
+            [lineNumber:3, sourceLineText:'private static final LOG = LoggerFactory.getLogger(SomeOtherClass)'],
+            [lineNumber:4, sourceLineText:'def log1 = LoggerFactory.getLogger(SomeOtherClass.class)'],
+            [lineNumber:5, sourceLineText:'def log2 = LoggerFactory.getLogger(SomeOtherClass.class.name)'])
     }
 
     @Test
     void testApplyTo_Logger_SameClass_NoViolations() {
         final SOURCE = '''
             class MyClass {
-                private static final LOG = Logger.getLogger(MyClass)
-                def log2 = Logger.getLogger(MyClass.class)
-                private static log3 = Logger.getLogger(MyClass.getClass().getName())
-                private static log4 = Logger.getLogger(MyClass.getClass().name)
-                private static log5 = Logger.getLogger(MyClass.class.getName())
-                private static log6 = Logger.getLogger(MyClass.class.name)
-                private static log7 = Logger.getLogger(MyClass.name)
+                private static final LOG = LoggerFactory.getLogger(MyClass)
+                def log2 = LoggerFactory.getLogger(MyClass.class)
+                private static log3 = LoggerFactory.getLogger(MyClass.getClass().getName())
+                private static log4 = LoggerFactory.getLogger(MyClass.getClass().name)
+                private static log5 = LoggerFactory.getLogger(MyClass.class.getName())
+                private static log6 = LoggerFactory.getLogger(MyClass.class.name)
+                private static log7 = LoggerFactory.getLogger(MyClass.name)
             }
         '''
         assertNoViolations(SOURCE)
@@ -80,9 +80,9 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         rule.allowDerivedClasses = true
         final SOURCE = '''
             class MyClass {
-                private final LOG1 = Logger.getLogger(this.class)
-                private final LOG2 = Logger.getLogger(this.getClass())
-                private final LOG3 = Logger.getLogger(getClass())
+                private final LOG1 = LoggerFactory.getLogger(this.class)
+                private final LOG2 = LoggerFactory.getLogger(this.getClass())
+                private final LOG3 = LoggerFactory.getLogger(getClass())
             }
         '''
         assertNoViolations(SOURCE)
@@ -93,20 +93,20 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         rule.allowDerivedClasses = true
         final SOURCE = '''
             class MyClass {
-                private final LOG1 = Logger.getLogger(unknown)
+                private final LOG1 = LoggerFactory.getLogger(unknown)
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'private final LOG1 = Logger.getLogger(unknown)', 'Logger is defined in MyClass but initialized with unknown')
+        assertSingleViolation(SOURCE, 3, 'private final LOG1 = LoggerFactory.getLogger(unknown)', 'Logger is defined in MyClass but initialized with unknown')
     }
 
     @Test
     void testApplyTo_Logger_This_NoViolations() {
         final SOURCE = '''
             class MyClass {
-                private static final LOG = Logger.getLogger(this)
-                def log2 = Logger.getLogger(this.class)
-                private static log3 = Logger.getLogger(this.getName())
-                private static log4 = Logger.getLogger(this.name)
+                private static final LOG = LoggerFactory.getLogger(this)
+                def log2 = LoggerFactory.getLogger(this.class)
+                private static log3 = LoggerFactory.getLogger(this.getName())
+                private static log4 = LoggerFactory.getLogger(this.name)
             }
         '''
         assertNoViolations(SOURCE)
@@ -116,8 +116,8 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
     void testApplyTo_Logger_NotAClassOrClassName_NoViolations() {
         final SOURCE = '''
             class MyClass {
-                private static log1 = Logger.getLogger(getLogName())
-                private static log2 = Logger.getLogger("some.OtherName")
+                private static log1 = LoggerFactory.getLogger(getLogName())
+                private static log2 = LoggerFactory.getLogger("some.OtherName")
             }
         '''
         assertNoViolations(SOURCE)
@@ -127,10 +127,10 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
     void testApplyTo_Logger_ConstantForLoggerName_Violation() {
         final SOURCE = '''
             class MyClass {
-                private static final log = Logger.getLogger(CONSTANT)
+                private static final log = LoggerFactory.getLogger(CONSTANT)
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'private static final log = Logger.getLogger(CONSTANT)', 'Logger is defined in MyClass but initialized with CONSTANT')
+        assertSingleViolation(SOURCE, 3, 'private static final log = LoggerFactory.getLogger(CONSTANT)', 'Logger is defined in MyClass but initialized with CONSTANT')
     }
 
     @Test

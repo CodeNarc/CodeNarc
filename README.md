@@ -10,8 +10,8 @@ DEPENDENCIES
 
 CodeNarc requires
  - Groovy version 2.1 or later
- - The Log4J jar, version 1.2.13 or later, accessible on the CLASSPATH
-   (http://logging.apache.org/log4j/index.html).
+ - The <<SLF4J>> api/implementation jars, accessible on the CLASSPATH
+   (https://www.slf4j.org/).
  - The GMetrics jar, version 0.7 or later -- optional if using some of the size/complexity rules
    (http://gmetrics.sourceforge.net/).
 

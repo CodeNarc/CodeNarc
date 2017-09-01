@@ -36,13 +36,13 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario() {
         final SOURCE = '''
             class MyClass {
-                private static final LOG = Logger.getLogger(MyClass)
+                private static final LOG = LoggerFactory.getLogger(MyClass)
                 private static final LOG2 = '' // not a logger
             }
             class MyOtherClass {
-                private static final LOG3 = Logger.getLogger(MyClass)
+                private static final LOG3 = LoggerFactory.getLogger(MyClass)
                 class MyInnerClass {
-                    private static final LOG4 = Logger.getLogger(MyClass)
+                    private static final LOG4 = LoggerFactory.getLogger(MyClass)
                 }
             }
         '''
@@ -53,11 +53,11 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
     void testSingleViolation() {
         final SOURCE = '''
             class MyClass {
-                def LOG = Logger.getLogger(MyClass)
-                def logger = Logger.getLogger(MyClass)
+                def LOG = LoggerFactory.getLogger(MyClass)
+                def logger = LoggerFactory.getLogger(MyClass)
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'def logger = Logger.getLogger(MyClass)', 'Violation in class MyClass. The class defines multiple loggers: LOG, logger')
+        assertSingleViolation(SOURCE, 4, 'def logger = LoggerFactory.getLogger(MyClass)', 'Violation in class MyClass. The class defines multiple loggers: LOG, logger')
     }
 
     @Test
@@ -65,12 +65,12 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
                 class MyInnerClass {
-                    def LOG = Logger.getLogger(MyClass)
-                    def logger = Logger.getLogger(MyClass)
+                    def LOG = LoggerFactory.getLogger(MyClass)
+                    def logger = LoggerFactory.getLogger(MyClass)
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 5, 'def logger = Logger.getLogger(MyClass)',
+        assertSingleViolation(SOURCE, 5, 'def logger = LoggerFactory.getLogger(MyClass)',
             'Violation in class MyClass$MyInnerClass. The class defines multiple loggers: LOG, logger')
     }
 

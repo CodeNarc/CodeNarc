@@ -19,8 +19,6 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.Test
 
-import static org.codenarc.test.TestUtil.captureLog4JMessages
-
 /**
  * Tests for CrapMetricRule
  *
@@ -59,14 +57,11 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testCoberturaXmlFileNullOrEmpty_IsReadyReturnsFalse() {
-        def logEvents = captureLog4JMessages {
-            rule.coberturaXmlFile = null
-            assert !rule.ready
+        rule.coberturaXmlFile = null
+        assert !rule.ready
 
-            rule.coberturaXmlFile = ''
-            assert !rule.ready
-        }
-        assertNumberOfLogMessages(logEvents, 'Cobertura XML file', 1)
+        rule.coberturaXmlFile = ''
+        assert !rule.ready
     }
 
     @Test
@@ -76,13 +71,10 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testApplyTo_CoberturaXmlFileDoesNotExist_NoViolations_OnlyLogsWarningOnce() {
+    void testApplyTo_CoberturaXmlFileDoesNotExist_NoViolations() {
         rule.coberturaXmlFile = 'DoesNotExist.xml'
-        def logEvents = captureLog4JMessages {
-            assertNoViolations(SOURCE)
-            assertNoViolations(SOURCE)
-        }
-        assertNumberOfLogMessages(logEvents, 'Cobertura XML file', 1)
+        assertNoViolations(SOURCE)
+        assertNoViolations(SOURCE)
     }
 
     @Test
@@ -96,11 +88,8 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
         rule.crapMetricClassName = 'some.NonExistentClass'
         rule.maxMethodCrapScore = 1.0
 
-        def logEvents = captureLog4JMessages {
-            assertNoViolations(SOURCE)
-            assertNoViolations(SOURCE)
-        }
-        assertNumberOfLogMessages(logEvents, 'GMetrics CrapMetric class', 1)
+        assertNoViolations(SOURCE)
+        assertNoViolations(SOURCE)
     }
 
     @Test
@@ -257,11 +246,6 @@ class CrapMetricRuleTest extends AbstractRuleTestCase {
     @Override
     protected Rule createRule() {
         new CrapMetricRule(coberturaXmlFile:COBERTURA_FILE)
-    }
-
-    private void assertNumberOfLogMessages(logEvents, String expectedText, int expectedCount) {
-        def matchingLogEvents = logEvents.findAll { it.message.contains(expectedText) }
-        assert matchingLogEvents.size() == expectedCount
     }
 
 }

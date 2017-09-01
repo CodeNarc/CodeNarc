@@ -62,7 +62,7 @@ CodeNarc - Run From Command-Line
 
   [[2]] The CodeNarc jar
 
-  [[3]] The Log4J jar
+  [[3]] The <<SLF4J>> api/implementation jars
 
   [[4]] The directories containing (or relative to) <<CodeNarc>> config files such as "codenarc.properties"
         or ruleset files.
@@ -77,6 +77,6 @@ CodeNarc - Run From Command-Line
 +----------------------------------------------------------------------------------------
 @set GROOVY_JAR="%GROOVY_HOME%/embeddable/groovy-all-1.5.6.jar"
 
-@java -classpath %GROOVY_JAR%;lib/CodeNarc-0.5.jar;lib/log4j-1.2.14.jar;lib org.codenarc.CodeNarc %*
+@java -classpath %GROOVY_JAR%;lib/CodeNarc-0.5.jar;lib/slf4j-api-1.7.25.jar;lib org.codenarc.CodeNarc %*
 +----------------------------------------------------------------------------------------
 

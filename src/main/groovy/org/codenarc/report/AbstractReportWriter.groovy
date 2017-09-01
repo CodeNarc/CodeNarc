@@ -16,7 +16,7 @@
 package org.codenarc.report
 
 import groovy.text.SimpleTemplateEngine
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
@@ -40,7 +40,7 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     String outputFile
     Object writeToStandardOut
-    private static final LOG = Logger.getLogger(AbstractReportWriter)
+    private static final LOG = LoggerFactory.getLogger(AbstractReportWriter)
     protected getTimestamp = { new Date() }
     protected customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
     protected resourceBundle

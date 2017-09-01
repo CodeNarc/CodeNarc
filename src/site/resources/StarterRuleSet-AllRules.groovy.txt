@@ -67,6 +67,7 @@ ruleset {
     ConstantTernaryExpression 
     ConstantsOnlyInterface 
     CouldBeElvis 
+    CouldBeSwitchStatement 
     CoupledTestCase 
     CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file
     CyclomaticComplexity   // Requires the GMetrics jar
@@ -324,6 +325,7 @@ ruleset {
     UnnecessarySafeNavigationOperator 
     UnnecessarySelfAssignment 
     UnnecessarySemicolon 
+    UnnecessarySetter 
     UnnecessaryStringInstantiation 
     UnnecessarySubstring 
     UnnecessaryTernaryExpression 

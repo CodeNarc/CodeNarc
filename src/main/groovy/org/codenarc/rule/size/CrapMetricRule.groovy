@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 import org.codenarc.util.io.DefaultResourceFactory
@@ -64,7 +64,7 @@ import org.gmetrics.metric.crap.CrapMetric
   */
 class CrapMetricRule extends AbstractAstVisitorRule {
 
-    private static final LOG = Logger.getLogger(CrapMetricRule)
+    private static final LOG = LoggerFactory.getLogger(CrapMetricRule)
 
     String name = 'CrapMetric'
     int priority = 2

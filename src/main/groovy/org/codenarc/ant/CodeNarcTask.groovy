@@ -17,7 +17,7 @@ package org.codenarc.ant
 
 import static java.lang.Thread.currentThread
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
@@ -57,7 +57,7 @@ import org.codenarc.util.io.DefaultResourceFactory
  */
 class CodeNarcTask extends Task {
 
-    private static final LOG = Logger.getLogger(CodeNarcTask)
+    private static final LOG = LoggerFactory.getLogger(CodeNarcTask)
 
     /**
      * The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a

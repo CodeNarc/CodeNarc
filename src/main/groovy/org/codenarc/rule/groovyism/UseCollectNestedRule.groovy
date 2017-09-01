@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.Parameter
@@ -42,7 +42,7 @@ class UseCollectNestedRule extends AbstractAstVisitorRule {
 }
 
 class UseCollectNestedAstVisitor extends AbstractAstVisitor {
-    private static final LOG = Logger.getLogger(UseCollectNestedAstVisitor)
+    private static final LOG = LoggerFactory.getLogger(UseCollectNestedAstVisitor)
 
     private final Stack<Parameter> parameterStack = []
 

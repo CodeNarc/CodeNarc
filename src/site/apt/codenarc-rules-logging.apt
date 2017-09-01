@@ -38,9 +38,9 @@ Logging Rules  ("<rulesets/logging.xml>")
 
 -------------------------------------------------------------------------------
     class MyClass {
-        private static final LOG = Logger.getLogger(SomeOtherClass)  // violation
-        def log1 = Logger.getLogger(SomeOtherClass.class)            // violation
-        def log2 = Logger.getLogger(SomeOtherClass.class.name)       // violation
+        private static final LOG = LoggerFactory.getLogger(SomeOtherClass)  // violation
+        def log1 = LoggerFactory.getLogger(SomeOtherClass.class)            // violation
+        def log2 = LoggerFactory.getLogger(SomeOtherClass.class.name)       // violation
     }
 -------------------------------------------------------------------------------
 
@@ -60,12 +60,12 @@ Logging Rules  ("<rulesets/logging.xml>")
     // Log4J or Java Logging API
 
     class MyClass {
-        private static final LOG = Logger.getLogger(MyClass)                    // ok
-        def log2 = Logger.getLogger(MyClass.class)                              // ok
-        private static log3 = Logger.getLogger(MyClass.getClass().getName())    // ok
-        private static log4 = Logger.getLogger(MyClass.getClass().name)         // ok
-        private static log5 = Logger.getLogger(MyClass.class.getName())         // ok
-        private static log6 = Logger.getLogger(MyClass.class.name)              // ok
+        private static final LOG = LoggerFactory.getLogger(MyClass)                    // ok
+        def log2 = LoggerFactory.getLogger(MyClass.class)                              // ok
+        private static log3 = LoggerFactory.getLogger(MyClass.getClass().getName())    // ok
+        private static log4 = LoggerFactory.getLogger(MyClass.getClass().name)         // ok
+        private static log5 = LoggerFactory.getLogger(MyClass.class.getName())         // ok
+        private static log6 = LoggerFactory.getLogger(MyClass.class.name)              // ok
     }
 
     // Commons Logging

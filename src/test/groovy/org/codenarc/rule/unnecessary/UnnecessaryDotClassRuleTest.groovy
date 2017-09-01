@@ -59,10 +59,10 @@ class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase {
     void testNoDuplicateViolation() {
         final SOURCE = '''
             class MyClass {
-                static final Logger LOG = Logger.getLogger(MyClass.class);
+                static final Logger LOG = LoggerFactory.getLogger(MyClass.class);
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'static final Logger LOG = Logger.getLogger(MyClass.class);', 'MyClass.class can be rewritten as MyClass')
+        assertSingleViolation(SOURCE, 3, 'static final Logger LOG = LoggerFactory.getLogger(MyClass.class);', 'MyClass.class can be rewritten as MyClass')
     }
 
     protected Rule createRule() {

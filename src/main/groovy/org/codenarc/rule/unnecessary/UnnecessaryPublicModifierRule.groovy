@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
@@ -35,7 +35,7 @@ class UnnecessaryPublicModifierRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
-    private static final LOG = Logger.getLogger(UnnecessaryPublicModifierAstVisitor)
+    private static final LOG = LoggerFactory.getLogger(UnnecessaryPublicModifierAstVisitor)
 
     @Override
     protected void visitClassEx(ClassNode node) {

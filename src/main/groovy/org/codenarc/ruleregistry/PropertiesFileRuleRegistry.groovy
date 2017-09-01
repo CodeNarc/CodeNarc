@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleregistry
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codenarc.util.io.ClassPathResource
 
 /**
@@ -27,7 +27,7 @@ import org.codenarc.util.io.ClassPathResource
   */
 class PropertiesFileRuleRegistry implements RuleRegistry {
 
-    private static final LOG = Logger.getLogger(PropertiesFileRuleRegistry)
+    private static final LOG = LoggerFactory.getLogger(PropertiesFileRuleRegistry)
     private static final PROPERTIES_FILENAME = 'codenarc-base-rules.properties'
     public static final PROPERTIES_FILE = "src/main/resources/$PROPERTIES_FILENAME"
 

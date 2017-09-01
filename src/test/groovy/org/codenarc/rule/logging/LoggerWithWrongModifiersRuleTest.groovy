@@ -40,7 +40,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario_staticLogger() {
         final SOURCE = '''
             class MyClass {
-                private static final LOG = Logger.getLogger(MyClass)
+                private static final LOG = LoggerFactory.getLogger(MyClass)
             }
         '''
 
@@ -51,12 +51,12 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
     void testNotPrivate_staticLogger() {
         final SOURCE = '''
             class MyClass {
-                public static final LOG = Logger.getLogger(MyClass)
+                public static final LOG = LoggerFactory.getLogger(MyClass)
             }
         '''
 
         assertSingleViolation(SOURCE, 3,
-                'public static final LOG = Logger.getLogger(MyClass)',
+                'public static final LOG = LoggerFactory.getLogger(MyClass)',
                 'The Logger field LOG should be private, static and final')
     }
 
@@ -64,12 +64,12 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
     void testNotStatic_staticLogger() {
         final SOURCE = '''
             class MyClass {
-                private final LOG = Logger.getLogger(MyClass)
+                private final LOG = LoggerFactory.getLogger(MyClass)
             }
         '''
 
         assertSingleViolation(SOURCE, 3,
-                'private final LOG = Logger.getLogger(MyClass)',
+                'private final LOG = LoggerFactory.getLogger(MyClass)',
                 'The Logger field LOG should be private, static and final')
     }
 
@@ -77,12 +77,12 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
     void testNotFinal_staticLogger() {
         final SOURCE = '''
             class MyClass {
-                private static LOG = Logger.getLogger(MyClass)
+                private static LOG = LoggerFactory.getLogger(MyClass)
             }
         '''
 
         assertSingleViolation(SOURCE, 3,
-                'private static LOG = Logger.getLogger(MyClass)',
+                'private static LOG = LoggerFactory.getLogger(MyClass)',
                 'The Logger field LOG should be private, static and final')
     }
 
@@ -93,15 +93,15 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
         
         final SOURCE = '''
             class MyClass1 {
-                protected final LOG = Logger.getLogger(this.class)
+                protected final LOG = LoggerFactory.getLogger(this.class)
             }
 
             class MyClass2 {
-                protected final LOG = Logger.getLogger(this.getClass())
+                protected final LOG = LoggerFactory.getLogger(this.getClass())
             }
 
             class MyClass3 {
-                protected final LOG = Logger.getLogger(getClass())
+                protected final LOG = LoggerFactory.getLogger(getClass())
             }
         '''
 
@@ -115,12 +115,12 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
         final SOURCE = '''
             class MyClass {
-                public final LOG = Logger.getLogger(this.class)
+                public final LOG = LoggerFactory.getLogger(this.class)
             }
         '''
 
         assertSingleViolation(SOURCE, 3,
-                'public final LOG = Logger.getLogger(this.class)',
+                'public final LOG = LoggerFactory.getLogger(this.class)',
                 'The Logger field LOG should be private (or protected) and final')
     }
 
@@ -130,12 +130,12 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
         final SOURCE = '''
             class MyClass {
-                public static final LOG = Logger.getLogger(this.class)
+                public static final LOG = LoggerFactory.getLogger(this.class)
             }
         '''
 
         assertSingleViolation(SOURCE, 3,
-                'public static final LOG = Logger.getLogger(this.class)',
+                'public static final LOG = LoggerFactory.getLogger(this.class)',
                 'The Logger field LOG should be private (or protected), static and final')
     }
 
@@ -146,8 +146,8 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
         final SOURCE = '''
             class MyClass {
-                private final LOG = Logger.getLogger(this.class)
-                protected static final LOG2 = Logger.getLogger(this.class)
+                private final LOG = LoggerFactory.getLogger(this.class)
+                protected static final LOG2 = LoggerFactory.getLogger(this.class)
             }
         '''
 
@@ -161,7 +161,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
         final SOURCE = '''
             class MyClass {
-                protected static final LOG = Logger.getLogger(this.class)
+                protected static final LOG = LoggerFactory.getLogger(this.class)
             }
         '''
 
@@ -174,12 +174,12 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
 
         final SOURCE = '''
             class MyClass {
-                protected LOG = Logger.getLogger(this.class)
+                protected LOG = LoggerFactory.getLogger(this.class)
             }
         '''
 
         assertSingleViolation(SOURCE, 3,
-                'protected LOG = Logger.getLogger(this.class)',
+                'protected LOG = LoggerFactory.getLogger(this.class)',
                 'The Logger field LOG should be private (or protected), static and final')
     }
 

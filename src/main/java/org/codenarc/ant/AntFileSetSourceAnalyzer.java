@@ -15,7 +15,8 @@
  */
 package org.codenarc.ant;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
@@ -40,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
 
-    private static final Logger LOG = Logger.getLogger(AntFileSetSourceAnalyzer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AntFileSetSourceAnalyzer.class);
     private static final int POOL_TIMEOUT_SECONDS = 60 * 60;
 
     private final Project project;

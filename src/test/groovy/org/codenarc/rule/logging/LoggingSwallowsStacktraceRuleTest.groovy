@@ -84,8 +84,8 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class MyClass {
 
-            private log = Logger.getLogger(Class)
-            private logger = Logger.getLogger(MyClass)
+            private log = LoggerFactory.getLogger(Class)
+            private logger = LoggerFactory.getLogger(MyClass)
 
             }'''
 

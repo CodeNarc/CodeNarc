@@ -128,11 +128,11 @@ CodeNarc - Ant Task
 
     * The <fileset> specifies that all ".groovy" files are analyzed.
 
-    * Remember that you need the <<log4j>> jar (and a "log4j.properties" file) on the classpath.
+    * Remember that you need the <<SLF4J>> api/implementation jars on the classpath.
 
 
 * Logging and Troubleshooting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Be sure to have a "log4j.properties" or "log4j.xml" file on the classpath so that any errors are logged.
+  Be sure to have a <<SLF4J>> api/implementation jars on the classpath so that any errors are logged.
 

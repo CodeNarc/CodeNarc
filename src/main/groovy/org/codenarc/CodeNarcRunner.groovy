@@ -15,7 +15,7 @@
  */
 package org.codenarc
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.results.Results
 import org.codenarc.ruleregistry.RuleRegistryInitializer
@@ -41,7 +41,7 @@ import org.codenarc.ruleset.RuleSetUtil
  * @author Chris Mair
  */
 class CodeNarcRunner {
-    private static final LOG = Logger.getLogger(CodeNarcRunner)
+    private static final LOG = LoggerFactory.getLogger(CodeNarcRunner)
 
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer

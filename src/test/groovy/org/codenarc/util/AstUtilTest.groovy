@@ -15,7 +15,7 @@
  */
 package org.codenarc.util
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
 import org.codehaus.groovy.ast.ClassNode
@@ -354,7 +354,7 @@ class AstUtilTest extends AbstractTestCase {
 }
 
 class AstUtilTestVisitor extends ClassCodeVisitorSupport {
-    static final LOG = Logger.getLogger(AstUtilTestVisitor)
+    static final LOG = LoggerFactory.getLogger(AstUtilTestVisitor)
     def methodNodes = [:]
     def methodCallExpressions = []
     def statements = []

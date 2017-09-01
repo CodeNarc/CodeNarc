@@ -20,13 +20,11 @@ import org.apache.tools.ant.types.FileSet
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
 import org.codenarc.rule.FakePathRule
-import org.codenarc.rule.MockRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
 
-import static org.codenarc.test.TestUtil.captureLog4JMessages
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
@@ -145,18 +143,6 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
         assertResultsCounts(results, 0, 0)
-    }
-
-    @Test
-    void testAnalyze_LogsThrownExceptions() {
-        fileSet.includes = 'source/**/*.groovy'
-        def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
-        final EXCEPTION = new RuntimeException('TESTING AN EXCEPTION. Error in applyTo()')
-        def badRule = new MockRule(applyTo: { sourceCode -> throw EXCEPTION })
-        def loggingEvents = captureLog4JMessages {
-            analyzer.analyze(new ListRuleSet([badRule]))
-        }
-        assert loggingEvents.find { loggingEvent -> loggingEvent.throwableInformation.throwable == EXCEPTION }
     }
 
     @Test

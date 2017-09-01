@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.DefaultResourceFactory
 import org.codenarc.util.io.ResourceFactory
@@ -39,7 +39,7 @@ import org.codenarc.util.io.ResourceFactory
   */
 class PropertiesFileRuleSetConfigurer {
 
-    private static final LOG = Logger.getLogger(PropertiesFileRuleSetConfigurer)
+    private static final LOG = LoggerFactory.getLogger(PropertiesFileRuleSetConfigurer)
     private static final PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
 
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()

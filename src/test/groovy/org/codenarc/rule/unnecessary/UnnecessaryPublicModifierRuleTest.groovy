@@ -15,12 +15,9 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.apache.log4j.Level
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.captureLog4JMessages
 
 /**
  * Tests for UnnecessaryPublicModifierRule
@@ -117,20 +114,6 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 3, 'public MyClass() {}', 'The public keyword is unnecessary for constructors')
-    }
-
-    @Test
-    void testGantScript() {
-        final SOURCE = '''
-            includeTargets << grailsScript("_GrailsClean")
-            setDefaultTarget("cleanAll")
-        '''
-        def logMessages = captureLog4JMessages {
-            assertNoViolations(SOURCE)
-        }
-        log('Messages=' + logMessages?.message)
-        def warnMessages = logMessages.findAll { it.level == Level.WARN }
-        assert warnMessages.empty
     }
 
     @Test

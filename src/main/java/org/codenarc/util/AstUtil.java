@@ -18,7 +18,8 @@ package org.codenarc.util;
 import groovy.lang.Closure;
 import groovy.lang.MetaClass;
 import groovy.lang.Range;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.*;
 import org.codehaus.groovy.ast.stmt.BlockStatement;
@@ -45,7 +46,7 @@ import static java.util.Arrays.asList;
 @SuppressWarnings("PMD.CollapsibleIfStatements")
 public class AstUtil {
 
-    private static final Logger LOG = Logger.getLogger(AstUtil.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AstUtil.class);
     public static final List<String> AUTO_IMPORTED_PACKAGES = asList("java.lang", "java.io", "java.net", "java.util", "groovy.lang", "groovy.util");
     public static final List<String> AUTO_IMPORTED_CLASSES = asList("java.math.BigDecimal", "java.math.BigInteger");
     public static final List<String> COMPARISON_OPERATORS = asList("==", "!=", "<", "<=", ">", ">=", "<=>");

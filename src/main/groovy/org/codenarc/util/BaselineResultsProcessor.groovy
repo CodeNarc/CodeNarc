@@ -15,7 +15,7 @@
  */
 package org.codenarc.util
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codenarc.ResultsProcessor
 import org.codenarc.report.BaselineViolation
 import org.codenarc.report.BaselineXmlReportParser
@@ -29,7 +29,7 @@ import org.codenarc.util.io.Resource
  */
 class BaselineResultsProcessor implements ResultsProcessor {
 
-    private static final LOG = Logger.getLogger(BaselineResultsProcessor)
+    private static final LOG = LoggerFactory.getLogger(BaselineResultsProcessor)
 
     final Resource resource
     private final BaselineXmlReportParser parser = new BaselineXmlReportParser()

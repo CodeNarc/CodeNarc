@@ -15,7 +15,7 @@
  */
 package org.codenarc.ruleset
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codehaus.groovy.control.MultipleCompilationErrorsException
 import org.codenarc.util.io.DefaultResourceFactory
 import org.codenarc.util.io.ResourceFactory
@@ -29,7 +29,7 @@ import org.codenarc.util.io.ResourceFactory
   */
 class GroovyDslRuleSet implements RuleSet {
 
-    private static final LOG = Logger.getLogger(GroovyDslRuleSet)
+    private static final LOG = LoggerFactory.getLogger(GroovyDslRuleSet)
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
     private final RuleSetBuilder ruleSetBuilder = new RuleSetBuilder()
     private final String path

@@ -15,7 +15,7 @@
  */
  package org.codenarc.tool
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
 
 /**
@@ -29,7 +29,7 @@ import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
 class GenerateCodeNarcRulesProperties {
 
     protected static final PROPERTIES_FILE = PropertiesFileRuleRegistry.PROPERTIES_FILE
-    private static final LOG = Logger.getLogger(GenerateCodeNarcRulesProperties)
+    private static final LOG = LoggerFactory.getLogger(GenerateCodeNarcRulesProperties)
 
     protected static propertiesFile = PROPERTIES_FILE
 

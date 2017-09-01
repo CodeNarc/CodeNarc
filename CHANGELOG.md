@@ -19,6 +19,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #223: **UnusedVariable**: Don't count variable assignment as a reference (usage). 
 
 Framework and Infrastructure
+   - #203: [BREAKING CHANGE] Switch from Log4J to SLF4J 1.7.25. 
    - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
    - #210: build: upgrade gradle (2.4 -> 4.0). (Thanks to Dominik Broj).
    - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).

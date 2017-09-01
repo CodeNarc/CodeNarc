@@ -15,9 +15,6 @@
  */
  package org.codenarc.test
 
-import org.apache.log4j.Logger
-import org.apache.log4j.spi.LoggingEvent
-
 /**
  * Contains common static utility methods for tests
  *
@@ -138,19 +135,6 @@ class TestUtil {
             System.out = originalSystemOut
         }
         outputStream.toString()
-    }
-
-    static List<LoggingEvent> captureLog4JMessages(Closure closure) {
-        def inMemoryAppender = new InMemoryAppender()
-        def logger = Logger.rootLogger
-        logger.addAppender(inMemoryAppender)
-        try {
-            closure()
-        }
-        finally {
-            logger.removeAppender(inMemoryAppender)
-        }
-        return inMemoryAppender.getLoggingEvents()
     }
 
 }

@@ -16,7 +16,7 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * Java application (main() method) that generates the "StarterRuleSet-AllRules.groovy.txt.template" file.
@@ -28,7 +28,7 @@ class GenerateRuleSetAllRules {
 
     protected static final RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRules.groovy.txt'
     private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRules.groovy.template'
-    private static final LOG = Logger.getLogger(GenerateRuleSetAllRules)
+    private static final LOG = LoggerFactory.getLogger(GenerateRuleSetAllRules)
 
     protected static ruleSetFile = RULESET_FILE
 
