@@ -297,10 +297,10 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         '''
         def sourceCode = new SourceString(SOURCE)
         def classNode = sourceCode.ast.classes[0]
-        def v = rule.createViolation(sourceCode, classNode)
+        def v = rule.createViolation(sourceCode, classNode, 'abc')
         assert v.lineNumber == 2
         assert v.sourceLine == 'class MyClass {'
-        assert v.message == null
+        assert v.message == 'abc'
     }
 
     //--------------------------------------------------------------------------

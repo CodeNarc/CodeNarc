@@ -213,17 +213,6 @@ public abstract class AbstractRule implements Rule {
     }
 
     /**
-     * Create a new Violation for the AST node.
-     * @param sourceCode - the SourceCode
-     * @param node - the Groovy AST Node
-     */
-    @Deprecated // should really supply a message
-    protected Violation createViolation(SourceCode sourceCode, ASTNode node) {
-        return createViolation(sourceCode, node, null);
-    }
-
-
-    /**
      * Create and return a new Violation for this rule and the specified import
      * @param sourceCode - the SourceCode
      * @param importNode - the ImportNode for the import triggering the violation
