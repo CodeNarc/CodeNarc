@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 350 rules.
+  <<CodeNarc>> includes 348 rules.
 
     
       
@@ -605,9 +605,6 @@ Rule Index
     * {{{./codenarc-rules-grails.html#GrailsServletContextReference}GrailsServletContextReference}}  
     
       
-    * {{{./codenarc-rules-grails.html#GrailsSessionReference}GrailsSessionReference}}    (DEPRECATED)
-    
-      
     * {{{./codenarc-rules-grails.html#GrailsStatelessService}GrailsStatelessService}}  
     
     
@@ -967,9 +964,6 @@ Rule Index
       
 * {{{./codenarc-rules-size.html}Size}}
       
-      
-    * {{{./codenarc-rules-size.html#AbcComplexity}AbcComplexity}}    (DEPRECATED: Use the AbcMetric rule instead. Requires the GMetrics jar)
-    
       
     * {{{./codenarc-rules-size.html#AbcMetric}AbcMetric}}    (Requires the GMetrics jar)
     

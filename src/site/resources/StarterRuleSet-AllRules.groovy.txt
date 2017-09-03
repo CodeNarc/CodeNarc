@@ -6,7 +6,6 @@ ruleset {
         Just delete the rules that you don't want to include.
         '''
 
-    AbcComplexity   // DEPRECATED: Use the AbcMetric rule instead. Requires the GMetrics jar
     AbcMetric   // Requires the GMetrics jar
     AbstractClassName 
     AbstractClassWithPublicConstructor 
@@ -145,7 +144,6 @@ ruleset {
     GrailsMassAssignment 
     GrailsPublicControllerMethod 
     GrailsServletContextReference 
-    GrailsSessionReference   // DEPRECATED
     GrailsStatelessService 
     GroovyLangImmutable 
     HardCodedWindowsFileSeparator 
