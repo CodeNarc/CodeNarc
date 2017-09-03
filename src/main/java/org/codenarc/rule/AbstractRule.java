@@ -229,17 +229,6 @@ public abstract class AbstractRule implements Rule {
     }
 
     /**
-     * Create and return a new Violation for this rule and the specified import
-     * @param sourceCode - the SourceCode
-     * @param importNode - the ImportNode for the import triggering the violation
-     * @return a new Violation object
-     */
-    @Deprecated // should really supply a message
-    protected Violation createViolationForImport(SourceCode sourceCode, ImportNode importNode) {
-        return createViolationForImport(sourceCode, importNode, null);  
-    }
-
-    /**
      * Create and return a new Violation for this rule and the specified import className and alias
      * @param sourceCode - the SourceCode
      * @param className - the class name (as specified within the import statement)

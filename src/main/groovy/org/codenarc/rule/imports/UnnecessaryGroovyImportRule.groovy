@@ -48,7 +48,7 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
 
                 if ((!importNode.alias || importClassName.endsWith(".$importNode.alias")) &&
                         (importPackageName in AstUtil.AUTO_IMPORTED_PACKAGES || importClassName in AstUtil.AUTO_IMPORTED_CLASSES)) {
-                    violations.add(createViolationForImport(sourceCode, importNode))
+                    violations.add(createViolationForImport(sourceCode, importNode, null))
                 }
             }
         }

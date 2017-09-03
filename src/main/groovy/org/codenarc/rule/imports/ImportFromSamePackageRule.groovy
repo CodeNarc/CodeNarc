@@ -37,7 +37,7 @@ class ImportFromSamePackageRule extends AbstractRule {
             ImportUtil.getNonStaticImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importPackageName = ImportUtil.packageNameForImport(importNode)
                 if (importPackageName == filePackageName && !hasAlias(importNode)) {
-                    violations.add(createViolationForImport(sourceCode, importNode))
+                    violations.add(createViolationForImport(sourceCode, importNode, null))
                 }
             }
         }
