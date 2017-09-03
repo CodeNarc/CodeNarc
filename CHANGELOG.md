@@ -22,14 +22,15 @@ Framework and Infrastructure
    - #228: [BREAKING CHANGE] Upgrade to Groovy 2.4.
    - #203: [BREAKING CHANGE] Switch from Log4J to SLF4J 1.7.25. 
    - #217: [BREAKING CHANGE] Upgrade to GMetrics 1.0.
-   - #227: [BREAKING CHANGE] Remove deprecated rules, classes and methods: 
+   - #227: [BREAKING CHANGE] Remove deprecated rules, classes and methods:
+      * The **AbcComplexity** rule (use the **AbcMetric** rule instead); 
       * `DirectorySourceAnalyzer`
       * `AbstractAstVisitor.addViolation(ASTNode)`
       * `AbstractRule.createViolation(Integer)`
       * `AbstractRule.createViolation(Integer, String)`
       * `AbstractRule.createViolation(SourceCode, ASTNode)`
       * `AbstractRule.createViolationForImport(SourceCode, ImportNode)`
-      * CodeNarc Ant Task - <report> element: *toFile* and *title* attributes (remove *title* and *toFile* properties from the `org.codenarc.ant.Report` class)
+      * CodeNarc Ant Task - \<report\> element: *toFile* and *title* attributes (remove *title* and *toFile* properties from the `org.codenarc.ant.Report` class)
    - #209: build: update junit (4.8 -> 4.12) and commons cli (1.2 -> 1.4). (Thanks to Dominik Broj).
    - #210: build: upgrade gradle (2.4 -> 4.0). (Thanks to Dominik Broj).
    - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).
