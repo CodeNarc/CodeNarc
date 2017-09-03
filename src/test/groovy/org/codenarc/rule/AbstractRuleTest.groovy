@@ -289,14 +289,6 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testCreateViolation_Defaults() {
-        def v = rule.createViolation(99)
-        assert v.lineNumber == 99
-        assert v.sourceLine == null
-        assert v.message == null
-    }
-
-    @Test
     void testCreateViolation_ASTNode() {
         final SOURCE = '''
             class MyClass {

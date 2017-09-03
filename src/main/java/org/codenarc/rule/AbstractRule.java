@@ -212,16 +212,6 @@ public abstract class AbstractRule implements Rule {
     }
 
     /**
-     * Create and return a new Violation for this rule and the specified values
-     * @param lineNumber - the line number for the violation; may be null
-     * @return a new Violation object
-     */
-    @Deprecated
-    protected Violation createViolation(Integer lineNumber) {
-        return createViolation(lineNumber, null, null);
-    }
-
-    /**
      * Create a new Violation for the AST node.
      * @param sourceCode - the SourceCode
      * @param node - the Groovy AST Node
