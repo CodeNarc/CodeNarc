@@ -33,10 +33,6 @@ import java.util.Set;
  */
 public class AbstractAstVisitor extends ClassCodeVisitorSupport implements AstVisitor {
 
-    // TODO Inheriting from ClassCodeVisitorSupportHack is a workaround for a known groovy issue: http://jira.codehaus.org/browse/GROOVY-4922
-    // TODO Revert to inheriting from ClassCodeVisitorSupport once that Groovy issue is fixed.
-    // TODO Also see CodeNarc issue #3436461: StackOverflowErrors with CodeNarc 0.16
-
     private final List<Violation> violations = new ArrayList<Violation>();
     private Rule rule;
     private SourceCode sourceCode;
