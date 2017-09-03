@@ -25,12 +25,6 @@ package org.codenarc.ant
 class Report {
     String type
 
-    /** @deprecated Use option elements instead */
-    String title
-
-    /** @deprecated Use option elements instead */
-    String toFile
-
     final Map options = [:]
 
     void addConfiguredOption(ReportOption option) {

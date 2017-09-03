@@ -17,7 +17,6 @@ package org.codenarc.ant
 
 import static java.lang.Thread.currentThread
 
-import org.slf4j.LoggerFactory
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
@@ -29,6 +28,7 @@ import org.codenarc.report.ReportWriterFactory
 import org.codenarc.results.Results
 import org.codenarc.util.BaselineResultsProcessor
 import org.codenarc.util.io.DefaultResourceFactory
+import org.slf4j.LoggerFactory
 
 /**
  * Ant Task for running CodeNarc.
@@ -125,17 +125,7 @@ class CodeNarcTask extends Task {
      * element within this task.
      */
     void addConfiguredReport(Report report) {
-
-        def reportWriter = new ReportWriterFactory().getReportWriter(report.type, report.options)
-        if (report.title) {
-            reportWriter.title = report.title
-        }
-        if (report.toFile) {
-            reportWriter.outputFile = report.toFile
-        }
-
-        LOG.debug("Adding report: $reportWriter")
-        reportWriters << reportWriter
+        reportWriters << new ReportWriterFactory().getReportWriter(report.type, report.options)
     }
 
     Path createClasspath() {

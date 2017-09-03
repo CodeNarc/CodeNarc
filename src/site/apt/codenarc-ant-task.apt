@@ -58,12 +58,6 @@ CodeNarc - Ant Task
 |                      | of a class (accessible on the classpath) that implements the   |                        |
 |                      | <<<org.codenarc.report.ReportWriter>>> interface.              |                        |
 *----------------------+----------------------------------------------------------------+------------------------+
-| toFile <(Deprecated)>| The path and filename for the output report file.              | No                     |
-|                      | This is deprecated. Use the \<option\> nested element instead. |                        |
-*----------------------+----------------------------------------------------------------+------------------------+
-| title <(Deprecated)> | The title for the output report.                               | No                     |
-|                      | This is deprecated. Use the \<option\> nested element instead. |                        |
-*----------------------+----------------------------------------------------------------+------------------------+
 
   Notes:
 

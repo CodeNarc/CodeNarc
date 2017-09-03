@@ -43,8 +43,6 @@ class CodeNarcTaskTest extends AbstractTestCase {
     private static final BASE_DIR = 'src/test/resources'
     private static final RULESET_FILE = 'rulesets/RuleSet1.xml'
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
-    private static final HTML_REPORT_FILE = 'CodeNarcTaskHtmlReport.html'
-    private static final XML_REPORT_FILE = 'CodeNarcTaskXmlReport.xml'
     private static final RESULTS = new FileResults('path', [])
 
     private CodeNarcTask codeNarcTask
@@ -91,7 +89,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     void testExecute_SingleRuleSetFile() {
         def codeNarcRunner = createAndUseFakeCodeNarcRunner()
 
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:HTML_REPORT_FILE))
+        codeNarcTask.addConfiguredReport(new Report(type:'html'))
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
 
@@ -104,7 +102,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
     void testExecute_TwoRuleSetFiles() {
         def codeNarcRunner = createAndUseFakeCodeNarcRunner()
 
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:HTML_REPORT_FILE))
+        codeNarcTask.addConfiguredReport(new Report(type:'html'))
         codeNarcTask.ruleSetFiles = RULESET_FILES
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.execute()
@@ -119,7 +117,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
         def codeNarcRunner = createAndUseFakeCodeNarcRunner()
         def fileSet2 = new FileSet(dir:new File('/abc'), project:project)
 
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:HTML_REPORT_FILE))
+        codeNarcTask.addConfiguredReport(new Report(type:'html'))
         codeNarcTask.addFileset(fileSet)
         codeNarcTask.addFileset(fileSet2)
         codeNarcTask.execute()
@@ -132,7 +130,7 @@ class CodeNarcTaskTest extends AbstractTestCase {
 
     @Test
     void testExecute_RuleSetFileDoesNotExist() {
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:HTML_REPORT_FILE))
+        codeNarcTask.addConfiguredReport(new Report(type:'html'))
         codeNarcTask.ruleSetFiles = 'DoesNotExist.xml'
         codeNarcTask.addFileset(fileSet)
         shouldFailWithMessageContaining('DoesNotExist.xml') { codeNarcTask.execute() }
@@ -151,45 +149,45 @@ class CodeNarcTaskTest extends AbstractTestCase {
 
     @Test
     void testAddConfiguredReport() {
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:HTML_REPORT_FILE))
+        codeNarcTask.addConfiguredReport(new Report(type:'html'))
         assert codeNarcTask.reportWriters.size() == 1
         assert codeNarcTask.reportWriters[0].class == HtmlReportWriter
-        assert codeNarcTask.reportWriters[0].outputFile == HTML_REPORT_FILE
+        assert codeNarcTask.reportWriters[0].outputFile == null
         assert codeNarcTask.reportWriters[0].title == null
     }
 
     @Test
     void testAddConfiguredReport_Second() {
-        codeNarcTask.addConfiguredReport(new Report(type:'xml', toFile:XML_REPORT_FILE))
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:HTML_REPORT_FILE, title:'ABC'))
+        codeNarcTask.addConfiguredReport(new Report(type:'xml'))
+        codeNarcTask.addConfiguredReport(new Report(type:'html'))
         assert codeNarcTask.reportWriters.size() == 2
         assert codeNarcTask.reportWriters[0].class == XmlReportWriter
-        assert codeNarcTask.reportWriters[0].outputFile == XML_REPORT_FILE
+        assert codeNarcTask.reportWriters[0].outputFile == null
         assert codeNarcTask.reportWriters[1].class == HtmlReportWriter
-        assert codeNarcTask.reportWriters[1].outputFile == HTML_REPORT_FILE
-        assert codeNarcTask.reportWriters[1].title == 'ABC'
+        assert codeNarcTask.reportWriters[1].outputFile == null
+        assert codeNarcTask.reportWriters[1].title == null
     }
 
     @Test
     void testAddConfiguredReport_SpecifyReportWriterClassname() {
-        codeNarcTask.addConfiguredReport(new Report(type:'org.codenarc.report.HtmlReportWriter', toFile:HTML_REPORT_FILE))
+        codeNarcTask.addConfiguredReport(new Report(type:'org.codenarc.report.HtmlReportWriter'))
         assert codeNarcTask.reportWriters.size() == 1
         assert codeNarcTask.reportWriters[0].class == HtmlReportWriter
-        assert codeNarcTask.reportWriters[0].outputFile == HTML_REPORT_FILE
+        assert codeNarcTask.reportWriters[0].outputFile == null
         assert codeNarcTask.reportWriters[0].title == null
     }
 
     @Test
-    void testAddConfiguredReport_NullToFile() {
-        codeNarcTask.addConfiguredReport(new Report(type:'html', title:'ABC'))
+    void testAddConfiguredReport_NullReportWriterProperties() {
+        codeNarcTask.addConfiguredReport(new Report(type:'html'))
         assert codeNarcTask.reportWriters.size() == 1
-        assert codeNarcTask.reportWriters[0].title == 'ABC'
+        assert codeNarcTask.reportWriters[0].title == null
         assert codeNarcTask.reportWriters[0].outputFile == null
     }
 
     @Test
     void testAddConfiguredReport_InvalidReportType() {
-        shouldFailWithMessageContaining('XXX') { codeNarcTask.addConfiguredReport(new Report(type:'XXX', toFile:HTML_REPORT_FILE)) }
+        shouldFailWithMessageContaining('XXX') { codeNarcTask.addConfiguredReport(new Report(type:'XXX')) }
     }
 
     @Test
@@ -250,7 +248,6 @@ class CodeNarcTaskTest extends AbstractTestCase {
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
         assert reportWriter.class == HtmlReportWriter
-        assert reportWriter.outputFile == HTML_REPORT_FILE
     }
 
     private Report createReport(String type, Map options=null) {

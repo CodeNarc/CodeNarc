@@ -51,9 +51,11 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
         fileSet = new FileSet(dir:new File(BASE_DIR),
                 project:project,
                 includes:'main/groovy/org/codenarc/rule/basic/*.groovy')
+        def report = new Report(type:'html')
+        report.addConfiguredOption(new ReportOption(name:'outputFile', value:REPORT_FILE))
 
         codeNarcTask = new CodeNarcTask(project:project)
-        codeNarcTask.addConfiguredReport(new Report(type:'html', toFile:REPORT_FILE))
+        codeNarcTask.addConfiguredReport(report)
         codeNarcTask.ruleSetFiles = RULESET_FILES
         outputFile = new File(REPORT_FILE)
     }
