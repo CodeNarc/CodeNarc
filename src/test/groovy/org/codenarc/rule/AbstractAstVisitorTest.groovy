@@ -73,12 +73,13 @@ class AbstractAstVisitorTest extends AbstractTestCase {
     @Test
     void testAddViolation() {
         assert astVisitor.violations == []
-        astVisitor.addViolation(astVisitor.returnStatement)
+        astVisitor.addViolation(astVisitor.returnStatement, 'abc')
         assert astVisitor.violations.size() == 1
         def v = astVisitor.violations[0]
         assert v.sourceLine == 'println "about to return"; return "ABC"'
         assert v.rule == rule
         assert v.lineNumber == 3
+        assert v.message == 'abc'
     }
 
     @Before
