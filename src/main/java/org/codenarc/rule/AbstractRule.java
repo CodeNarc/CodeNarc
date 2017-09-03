@@ -15,13 +15,13 @@
  */
 package org.codenarc.rule;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.codehaus.groovy.ast.ASTNode;
 import org.codehaus.groovy.ast.ImportNode;
 import org.codenarc.source.SourceCode;
 import org.codenarc.source.SourceCodeCriteria;
 import org.codenarc.util.ImportUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -199,16 +199,6 @@ public abstract class AbstractRule implements Rule {
         violation.setLineNumber(lineNumber);
         violation.setMessage(message);
         return violation;
-    }
-
-    /**
-     * Create and return a new Violation for this rule and the specified values
-     * @param lineNumber - the line number for the violation; may be null
-     * @return a new Violation object
-     */
-    @Deprecated // should really supply an AST Node
-    protected Violation createViolation(Integer lineNumber, String message) {
-        return createViolation(lineNumber, null, message);
     }
 
     /**
