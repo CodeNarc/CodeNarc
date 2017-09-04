@@ -16,7 +16,8 @@ Updated/Enhanced Rules and Bug Fixes
    - #206: fix for issue #197. Allow suppress warnings on local variables and constructors. (Thanks to Andrey Adamovich)
    - #213: Don't run **BracesForClass** against script ClassNodes. (Thanks to Simon St John-Green)
    - #207: **ParameterCount** ignores methods with @Override annotation; *ignoreOverriddenMethods* defaults to true. (Thanks to Yuriy Chulovskyy)
-   - #223: **UnusedVariable**: Don't count variable assignment as a reference (usage). 
+   - #223: **UnusedVariable**: Don't count variable assignment as a reference (usage).
+   - #230: **NoDef**: ClassCastException: ArgumentListExpression cannot be cast to VariableExpression.
 
 Framework and Infrastructure
    - #228: [BREAKING CHANGE] Upgrade to Groovy 2.4.

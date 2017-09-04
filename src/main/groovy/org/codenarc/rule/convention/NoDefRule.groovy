@@ -18,8 +18,8 @@ package org.codenarc.rule.convention
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.ast.Variable
+import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
-import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -56,11 +56,19 @@ class NoDefAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
-        VariableExpression variableExpression = expression.getVariableExpression()
-
-        if (dynamicVariable(variableExpression)) {
-            addViolation(variableExpression, NoDefRule.MESSAGE)
+        def leftExpression = expression.getLeftExpression()
+        if (leftExpression instanceof ArgumentListExpression) {
+            boolean hasNonExcluded = leftExpression.expressions.find { expr ->  dynamicTypedAndNotExcludedVariable(expr) }
+            if (hasNonExcluded) {
+                addViolation(expression, NoDefRule.MESSAGE)
+            }
         }
+        else {
+            if (dynamicTypedAndNotExcludedVariable(expression.variableExpression)) {
+                addViolation(leftExpression, NoDefRule.MESSAGE)
+            }
+        }
+
         super.visitDeclarationExpression(expression)
     }
 
@@ -82,7 +90,7 @@ class NoDefAstVisitor extends AbstractAstVisitor {
     private void visitParameters(Parameter[] parameters) {
         if (parameters) {
             parameters.each { Parameter param ->
-                if (dynamicVariable(param)) {
+                if (dynamicTypedAndNotExcludedVariable(param)) {
                     addViolation(param, NoDefRule.MESSAGE_DEF_PARAMETER)
                 }
             }
@@ -101,7 +109,7 @@ class NoDefAstVisitor extends AbstractAstVisitor {
         matches(CONTAINS_WHITESPACE_PATTERN, text) || matches(pattern, "${text}()")
     }
 
-    private boolean dynamicVariable(Variable variableExpression) {
+    private boolean dynamicTypedAndNotExcludedVariable(Variable variableExpression) {
         return variableExpression.isDynamicTyped() && variableNotExcluded(matcherPattern, variableExpression.name)
     }
 

@@ -21,107 +21,134 @@ import org.junit.Test
 
 /**
  * @author Dominik Przybysz
+ * @author Chris Mair
  */
 class NoDefRuleTest extends AbstractRuleTestCase {
 
     @Test
-    void testSuccessScenario() {
-        final SOURCE = '''\
+    void testNoViolations() {
+        final SOURCE = '''
             List l = [1, 2, 3, 4]
             l.flatten()
-        '''.stripMargin()
+        '''
         assertNoViolations(SOURCE)
     }
 
     @Test
     void testSingleViolation() {
-        final SOURCE = '''\
+        final SOURCE = '''
             def l = [1, 2, 3, 4]
             l.flatten()
-        '''.stripMargin()
-        assertSingleViolation SOURCE, 1, 'def l = [1, 2, 3, 4]', NoDefRule.MESSAGE
+        '''
+        assertSingleViolation SOURCE, 2, 'def l = [1, 2, 3, 4]', NoDefRule.MESSAGE
     }
 
     @Test
-    void testTwoViolationForReturnAndParameter() {
-        final SOURCE = '''\
-                def hello(def l){
-                    int k = 3
-                }
-            '''.stripMargin()
+    void testViolationsForReturnAndParameter() {
+        final SOURCE = '''
+            def hello(def l){
+                int k = 3
+            }
+            '''
         assertTwoViolations(SOURCE,
-                1, 'def hello(def l){', NoDefRule.MESSAGE_DEF_RETURN,
-                1, 'def hello(def l){', NoDefRule.MESSAGE_DEF_PARAMETER)
+                2, 'def hello(def l){', NoDefRule.MESSAGE_DEF_RETURN,
+                2, 'def hello(def l){', NoDefRule.MESSAGE_DEF_PARAMETER)
     }
 
     @Test
-    void testTwoViolation() {
-        final SOURCE = '''\
+    void testMultipleViolations() {
+        final SOURCE = '''
             def test(int l){
                 int k = 3
                 def i = 5
             }
-        '''.stripMargin()
+        '''
         assertTwoViolations(SOURCE,
-                1, 'def test(int l){', NoDefRule.MESSAGE_DEF_RETURN,
-                3, 'def i = 5', NoDefRule.MESSAGE)
+                2, 'def test(int l){', NoDefRule.MESSAGE_DEF_RETURN,
+                4, 'def i = 5', NoDefRule.MESSAGE)
     }
 
     @Test
-    void testExcludesNoViolation() {
+    void testExcludes_NoViolation() {
         rule.excludeRegex = /((setup|cleanup)(|Spec)|"[^"].*")\(\)/ //spock methods
-        final SOURCE = '''\
+        final SOURCE = '''
             def setup(){}
             def setupSpec(){}
             def cleanup(){}
             def cleanupSpec(){}
             def "should send"(){}
-        '''.stripMargin()
+        '''
         assertNoViolations(SOURCE)
     }
 
     @Test
     void testNoViolationForComments() {
-        final SOURCE_WITH_VIOLATION = '''\
-                // def cmt = [:]
-                def l = [1, 2]
-            '''.stripMargin()
-        assertSingleViolation SOURCE_WITH_VIOLATION, 2, 'def l = [1, 2]', NoDefRule.MESSAGE
+        final SOURCE_WITH_VIOLATION = '''
+            // def cmt = [:]
+            def l = [1, 2]
+            '''
+        assertSingleViolation SOURCE_WITH_VIOLATION, 3, 'def l = [1, 2]', NoDefRule.MESSAGE
 
-        final SOURCE_WITHOUT_VIOLATION = '''\
-                    List l = [1, 2, 3, 4]
-                    // def cmt = [:]
-                    l.flatten()
-                '''.stripMargin()
+        final SOURCE_WITHOUT_VIOLATION = '''
+            List l = [1, 2, 3, 4]
+            // def cmt = [:]
+            l.flatten()
+            '''
         assertNoViolations(SOURCE_WITHOUT_VIOLATION)
     }
 
     @Test
-    void testConstructorSuccessScenario() {
-        final SOURCE = '''\
-                        class User {
-                            String name
-                            
-                            User(String name) {
-                                this.name = name
-                            }
-                        }
-                    '''.stripMargin()
+    void testConstructor_NoViolation() {
+        final SOURCE = '''
+            class User {
+                String name
+                
+                User(String name) {
+                    this.name = name
+                }
+            }
+            '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testConstructorSingleViolation() {
-        final SOURCE = '''\
-                            class User {
-                                String name
-                                
-                                User(def name) {
-                                    this.name = name
-                                }
-                            }
-                        '''.stripMargin()
-        assertSingleViolation SOURCE, 4, 'User(def name) {', NoDefRule.MESSAGE_DEF_PARAMETER
+    void testDefOnConstructorParameter_Violation() {
+        final SOURCE = '''
+            class User {
+                String name
+                
+                User(def name) {
+                    this.name = name
+                }
+            }
+            '''
+        assertSingleViolation SOURCE, 5, 'User(def name) {', NoDefRule.MESSAGE_DEF_PARAMETER
+    }
+
+    @Test
+    void testDefMultipleAssignment_Violation() {
+        final SOURCE = '''
+            def (init, condition, update) = forStatement.collectionExpression.expressions
+        '''
+        assertSingleViolation SOURCE, 2, 'def (init, condition, update)', NoDefRule.MESSAGE
+    }
+
+    @Test
+    void testDefMultipleAssignment_SomeNamesExcluded_Violation() {
+        final SOURCE = '''
+            def (init, condition, update) = forStatement.collectionExpression.expressions
+        '''
+        rule.excludeRegex = /(abc|condition|other|update)/
+        assertSingleViolation SOURCE, 2, 'def (init, condition, update)', NoDefRule.MESSAGE
+    }
+
+    @Test
+    void testDefMultipleAssignment_AllNamesExcluded_NoViolations() {
+        final SOURCE = '''
+            def (init, condition, update) = forStatement.collectionExpression.expressions
+        '''
+        rule.excludeRegex = /(update|condition|other|init)/
+        assertNoViolations(SOURCE)
     }
 
     @Override
