@@ -133,9 +133,11 @@ Unused Rules  ("<rulesets/unused.xml>")
 
   Checks for private fields that are not referenced within the same class. Note that the <<<private>>>
   modifier is not currently "respected" by Groovy code (i.e., Groovy can access <<<private>>>
-  members within other classes). By default, fields named <<<serialVersionUID>>> are ignored.
-  The rule has a property named ignoreFieldNames, which can be set to ignore other field names as well.
-  For instance, to ignore fields named 'fieldx', set the property to the 'fieldx, serialVersionUID'
+  members within other classes).
+
+  By default, fields named <<<serialVersionUID>>>, and fields annotated with <<<groovy.lang.Delegate>>> are ignored.
+  The rule has a property named <ignoreFieldNames>, which can be set to ignore other field names as well.
+  For instance, to also ignore fields named 'fieldx', set the property to the 'fieldx, serialVersionUID'
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |

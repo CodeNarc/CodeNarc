@@ -21,10 +21,13 @@ import org.codenarc.rule.AstVisitor
 import org.codenarc.rule.FieldReferenceAstVisitor
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that checks for private fields that are not referenced within the same class.
+ * <p/>
+ * Ignore fields annotated with @Delegate.
  * <p/>
  * The <code>ignoreFieldNames</code> property optionally specifies one or more
  * (comma-separated) field names that should be ignored (i.e., that should not cause a
@@ -62,7 +65,8 @@ class UnusedPrivateFieldRule extends AbstractSharedAstVisitorRule {
                     def isPrivate = fieldNode.modifiers & FieldNode.ACC_PRIVATE
                     def isNotGenerated = fieldNode.lineNumber != -1
                     def isIgnored = wildcardPattern.matches(fieldNode.name)
-                    if (isPrivate && isNotGenerated && !isIgnored) {
+                    def hasDelegateAnnotation = AstUtil.hasAnnotation(fieldNode, 'Delegate') || AstUtil.hasAnnotation(fieldNode, 'groovy.lang.Delegate')
+                    if (isPrivate && isNotGenerated && !isIgnored && !hasDelegateAnnotation) {
                         acc << fieldNode
                     }
                     acc

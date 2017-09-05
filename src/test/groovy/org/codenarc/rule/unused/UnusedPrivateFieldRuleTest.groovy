@@ -441,6 +441,20 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_IgnoreFieldsWithDelegateAnnotation() {
+        final SOURCE = '''
+          class MyClass {
+               @Delegate
+               private Date date = new Date()
+               
+               @groovy.lang.Delegate
+               private int count = 99
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_NoFieldDefinition() {
         final SOURCE = ' class MyClass { } '
         assertNoViolations(SOURCE)
