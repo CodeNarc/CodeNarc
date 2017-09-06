@@ -96,7 +96,9 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
         long startTime = System.currentTimeMillis();
         DirectoryResults reportResults = new DirectoryResults();
 
-        int numThreads = Runtime.getRuntime().availableProcessors();
+        int numThreads = Runtime.getRuntime().availableProcessors() - 1;
+        numThreads = numThreads > 0 ? numThreads : 1;
+
         ExecutorService pool = Executors.newFixedThreadPool(numThreads);
 
         for (FileSet fileSet : fileSets) {

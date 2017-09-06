@@ -1,6 +1,6 @@
 # CodeNarc Change Log
 
-Version 1.0 (??? 2017)
+Version 1.0 (Sep 2017)
 --------------------------------------
 New Rules
    - #199: **CouldBeSwitchStatement** rule (convention)  - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
@@ -39,7 +39,7 @@ Framework and Infrastructure
    - #212: ci: enable gradle caching in travis (Thanks to Dominik Broj).
    - #219: Use the right classloader for loading AST transformations when compiling analysed code. (Thanks to Marcin Erdmann)
    - #222: Make JUnit jar a *compileOnly* dependency.
-
+   - #231: Do not use every available processor. Switch to Runtime.availableProcessors() - 1.
    
 
 Version 0.27.0 (Mar 2017)
