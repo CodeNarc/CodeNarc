@@ -51,7 +51,7 @@ Static Analysis for Groovy: Less Bugs, Better Code
     <td valign="middle" align="middle" style="margin:auto; vertical-align:middle">
         <div>
             <a style="color:white;font-size:20pt;font-weight:bold; margin:auto; border:solid white; border-radius:25px; background-color:red; padding:20pt;"
-               href="http://sourceforge.net/projects/codenarc/files//">Get 0.27.0</a>
+               href="http://sourceforge.net/projects/codenarc/files//">Get 1.0</a>
         </div>
     </td>
 </tr>
@@ -75,10 +75,10 @@ Static Analysis for Groovy: Less Bugs, Better Code
      <section name="Requirements">
           <strong>CodeNarc</strong> requires:
           <ul>
-               <li>
-                   <a href="http://groovy.codehaus.org/">Groovy</a> version 2.1</li>
-               <li>Java 1.6 or later</li>
-               <li><a href="http://logging.apache.org/log4j/index.html">Log4J</a> 1.2.13 or later on the classpath</li>
+              <li>Java 1.6 or later</li>
+              <li><a href="http://groovy-lang.org/">Groovy</a> version 2.3 or later</li>
+              <li><a href="https://www.slf4j.org/">SLF4J</a> API and binding jar(s)</li>
+              <li><a href="https://dx42.github.io/gmetrics/">GMetrics</a> 1.0 or later, if using the Size/Complexity rules</li>
           </ul>
      </section>
      </td>
