@@ -52,18 +52,24 @@ class UnnecessarySetterAstVisitor extends AbstractMethodCallExpressionVisitor {
                 && (name[3] as Character).isUpperCase()
                 && (name.length() == 4 || name[4..-1] != name[4..-1].toUpperCase()) ) {
 
-            def propertyName = name[3..-1].uncapitalize()
-            def assignment = AstUtil.getNodeText(call.arguments, sourceCode)
-            addUnnecessarySetterViolation(call, propertyName, assignment)
+            // TODO Restore once CodeNarc upgrades to Groovy 2.4
+            // def propertyName = name[3..-1].uncapitalize()
+            // def assignment = AstUtil.getNodeText(call.arguments, sourceCode)
+
+            def propertyName = name[3].toLowerCase() + name[4..-1] //name[3..-1].uncapitalize()
+            addUnnecessarySetterViolation(call, propertyName)
         }
     }
 
-    private void addUnnecessarySetterViolation(MethodCallExpression call, String propertyName, String assignment) {
+    private void addUnnecessarySetterViolation(MethodCallExpression call, String propertyName) {
         // Only add if there is not already a field with that name
         def fieldNames = currentClassNode.fields.name
         if (!fieldNames.contains(propertyName)) {
             String name = call.method.value
-            addViolation call, "$name($assignment) can probably be rewritten as $propertyName = $assignment"
+            addViolation call, "$name(..) can probably be rewritten as $propertyName = .."
+
+            // TODO Restore once CodeNarc upgrades to Groovy 2.4
+            //addViolation call, "$name($assignment) can probably be rewritten as $propertyName = $assignment"
         }
     }
 }

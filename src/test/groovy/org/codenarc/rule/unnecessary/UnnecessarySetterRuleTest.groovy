@@ -45,7 +45,7 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             x.setProperty(1 + 2)
         '''
-        assertSingleViolation(SOURCE, 2, 'x.setProperty(1 + 2)', 'setProperty(1 + 2) can probably be rewritten as property = 1 + 2')
+        assertSingleViolation(SOURCE, 2, 'x.setProperty(1 + 2)', 'setProperty(..) can probably be rewritten as property = ..')
     }
 
     @Test
@@ -56,9 +56,9 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase {
             x.setProperty([])
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'x.setProperty(1)', messageText:'setProperty(1) can probably be rewritten as property = 1'],
-            [lineNumber:3, sourceLineText:'x.setProperty(this.getA())', messageText:'setProperty(this.getA()) can probably be rewritten as property = this.getA()'],
-            [lineNumber:4, sourceLineText:'x.setProperty([])', messageText:'setProperty([]) can probably be rewritten as property = []'])
+            [lineNumber:2, sourceLineText:'x.setProperty(1)', messageText:'setProperty(..) can probably be rewritten as property = ..'],
+            [lineNumber:3, sourceLineText:'x.setProperty(this.getA())', messageText:'setProperty(..) can probably be rewritten as property = ..'],
+            [lineNumber:4, sourceLineText:'x.setProperty([])', messageText:'setProperty(..) can probably be rewritten as property = ..'])
     }
 
     protected Rule createRule() {

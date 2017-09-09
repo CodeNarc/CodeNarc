@@ -22,11 +22,9 @@ dependencies {
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
     compile "org.codehaus.groovy:groovy-ant:$groovyVersion"
 
-//    compile "org.apache.ant:ant:1.8.4"
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile('org.gmetrics:GMetrics:1.0') {
-        // TODO Causes IncompatibleClassChangeError (?) for GMetrics class(es) if try to use Groovy 2.1.8
-//        exclude group: 'org.codehaus.groovy'
+        exclude group: 'org.codehaus.groovy'
     }
 
     // JUnit is only required if you are using the CodeNarc testing framework, e.g. AbstractRuleTestCase

@@ -21,7 +21,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #226: **UnusedPrivateField** rule should ignore fields annotated with `groovy.lang.Delegate`.
 
 Framework and Infrastructure
-   - #228: [BREAKING CHANGE] Upgrade to Groovy 2.4.
+   - #228: [BREAKING CHANGE] Upgrade to Groovy 2.3.
    - #203: [BREAKING CHANGE] Switch from Log4J to SLF4J 1.7.25. 
    - #217: [BREAKING CHANGE] Upgrade to GMetrics 1.0.
    - #227: [BREAKING CHANGE] Remove *deprecated* rules, classes and methods:
