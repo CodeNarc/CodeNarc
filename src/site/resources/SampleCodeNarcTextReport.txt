@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Mar 18, 2017 10:39:06 AM
+CodeNarc Report: Sample Project - Sep 9, 2017 12:34:41 PM
 
-Summary: TotalFiles=365 FilesWithViolations=40 P1=0 P2=54 P3=31
+Summary: TotalFiles=365 FilesWithViolations=37 P1=0 P2=52 P3=29
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
@@ -81,11 +81,11 @@ File: formatting/SpaceAfterClosingBraceRuleTest.groovy
             interface MyInterface { }
             enum MyEnum { OK, BAD }
         ' contains a GString-type expression: '${priority}Violations") { }'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=282 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=293 Msg=[The String '
             def foo = 1
             "I am a ${ -> foo }"
         ' contains a GString-type expression: '${ -> foo }'] Src=[assertNoViolations(''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=290 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=301 Msg=[The String '
             def foo = 1
             "I am a ${ -> foo }0"
         ' contains a GString-type expression: '${ -> foo }'] Src=[assertNoViolations(''']
@@ -249,18 +249,6 @@ File: grails/GrailsServletContextReferenceRuleTest.groovy
         ' contains a GString-type expression: '${servletContext.amount}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=88 Msg=[The String 'println "amount=${servletContext.amount}"' contains a GString-type expression: '${servletContext.amount}'] Src=[assertTwoViolations(SOURCE, 3, 'def mySession = servletContext', 6, 'println "amount=${servletContext.amount}"')]
 
-File: grails/GrailsSessionReferenceRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=84 Msg=[The String '
-            class MyClass {
-                def mySession = session
-
-                def edit = {
-                    println "amount=${session.amount}"
-                }
-            }
-        ' contains a GString-type expression: '${session.amount}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=93 Msg=[The String 'println "amount=${session.amount}"' contains a GString-type expression: '${session.amount}'] Src=[assertTwoViolations(SOURCE, 3, 'def mySession = session', 6, 'println "amount=${session.amount}"')]
-
 File: groovyism/GStringAsMapKeyRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=45 Msg=[The String '
             Map map = ["${ someRef }" : 'invalid' ]
@@ -402,15 +390,12 @@ File: naming/PropertyNameRuleTest.groovy
 File: naming/VariableNameRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
 
-File: size/CrapMetricRuleTest.groovy
-    Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.captureLog4JMessages]
-
 File: size/GMetricsSourceCodeAdapterTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]
 
 File: size/ParameterCountRuleTest.groovy
     Violation: Rule=MisorderedStaticImports P=3 Line=22 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.shouldFail]
-    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=193 Msg=[The return keyword is not needed and can be removed] Src=[return inlineViolation("Number of parameters in ${name} exceeds maximum allowed (${rule.maxParameters}).")]
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=253 Msg=[The return keyword is not needed and can be removed] Src=[return inlineViolation("Number of parameters in ${name} exceeds maximum allowed (${rule.maxParameters}).")]
 
 File: unnecessary/ConsecutiveStringConcatenationRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=66 Msg=[The String '
@@ -433,9 +418,6 @@ File: unnecessary/UnnecessaryPackageReferenceRuleTest.groovy
         ' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=75 Msg=[The String 'println "isClosure=${value instanceof groovy.lang.Closure}"' contains a GString-type expression: '${value instanceof groovy.lang.Closure}'] Src=[[lineNumber:3, sourceLineText:'println "isClosure=${value instanceof groovy.lang.Closure}"', messageText:'groovy.lang'],]
 
-File: unnecessary/UnnecessaryPublicModifierRuleTest.groovy
-    Violation: Rule=MisorderedStaticImports P=3 Line=23 Msg=[Static imports should appear before normal imports] Src=[import static org.codenarc.test.TestUtil.captureLog4JMessages]
-
 File: unused/UnusedMethodParameterRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=136 Msg=[The String '
             class MyClass {
@@ -456,7 +438,7 @@ File: unused/UnusedMethodParameterRuleTest.groovy
         ' contains a GString-type expression: '${startDate}" }'] Src=[final SOURCE = ''']
 
 File: unused/UnusedPrivateFieldRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=29 Msg=[Class org.codenarc.rule.unused.UnusedPrivateFieldRuleTest has 31 methods] Src=[class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {]
+    Violation: Rule=MethodCount P=2 Line=29 Msg=[Class org.codenarc.rule.unused.UnusedPrivateFieldRuleTest has 32 methods] Src=[class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=168 Msg=[The String '
             class MyClass {
                 private int count
@@ -531,6 +513,6 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
         ' contains a GString-type expression: '${varName}'] Src=[final SOURCE = ''']
 
 File: unused/UnusedVariableRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 34 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase {]
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase {]
 
-[CodeNarc (http://www.codenarc.org) v0.27.0]
+[CodeNarc (http://www.codenarc.org) v1.0]
