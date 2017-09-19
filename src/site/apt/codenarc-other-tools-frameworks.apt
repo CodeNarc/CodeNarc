@@ -26,7 +26,7 @@ CodeNarc - Integration with Other Tools / Frameworks
 
     * {{{http://www.gradle.org/}Gradle}} build system - See the {{{http://gradle.org/docs/current/userguide/codenarc_plugin.html}Gradle CodeNarc Plugin}}.
 
-    * {{{http://maven.apache.org/}Maven}} - See the {{{http://mojo.codehaus.org/codenarc-maven-plugin/index.html}Maven CodeNarc Plugin}}
+    * {{{http://maven.apache.org/}Maven}} - See the {{{https://github.com/gleclaire/codenarc-maven-plugin}Maven CodeNarc Plugin}}
 
     * {{{http://hudson-ci.org/}Hudson}} - The {{{http://wiki.hudson-ci.org/display/HUDSON/Violations}Hudson Violations Plugin}}
       includes reporting and trending of CodeNarc violations. Also see this
