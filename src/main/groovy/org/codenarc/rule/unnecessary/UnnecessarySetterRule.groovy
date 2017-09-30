@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
@@ -39,13 +40,18 @@ class UnnecessarySetterAstVisitor extends AbstractMethodCallExpressionVisitor {
     }
 
     private addViolationsIfSetter(MethodCallExpression call) {
-
         if (AstUtil.getMethodArguments(call).size() != 1) {
             return
         }
+
         if (!(call.method instanceof ConstantExpression)) {
             return
         }
+
+        if (isSuperCall(call)) {
+            return
+        }
+
         String name = call.method.value
         if (name.length() > 3
                 && name[0..2] == 'set'
@@ -59,6 +65,11 @@ class UnnecessarySetterAstVisitor extends AbstractMethodCallExpressionVisitor {
             def propertyName = name[3].toLowerCase() + name[4..-1] //name[3..-1].uncapitalize()
             addUnnecessarySetterViolation(call, propertyName)
         }
+    }
+
+    private boolean isSuperCall(MethodCallExpression call) {
+        def objectExpression = call.objectExpression
+        objectExpression instanceof VariableExpression && objectExpression.superExpression
     }
 
     private void addUnnecessarySetterViolation(MethodCallExpression call, String propertyName) {
