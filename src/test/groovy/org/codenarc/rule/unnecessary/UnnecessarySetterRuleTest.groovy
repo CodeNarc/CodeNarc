@@ -61,6 +61,14 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'x.setProperty([])', messageText:'setProperty(..) can probably be rewritten as property = ..'])
     }
 
+    @Test
+    void callingSettersOnSuperDoesNotCauseViolations() {
+        final SOURCE = '''
+            super.setProperty(1)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     protected Rule createRule() {
         new UnnecessarySetterRule()
     }
