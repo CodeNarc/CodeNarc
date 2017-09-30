@@ -29,13 +29,17 @@ CodeNarc - Run From Command-Line
 | -excludes=<PATTERNS>            | The comma-separated list of Ant-style file patterns specifying       | -excludes=**/templates/**,\          |
 |                                 | files that must be excluded. No files are excluded when omitted.     |    **/*Test.*                        |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
-| -rulesetfiles=<FILENAMES>       | The path to the Groovy or XML RuleSet definition files, relative     | -rulesetfiles=rulesets/imports.xml,\ |
-|                                 | to the classpath. This can be a single file path, or multiple paths  |    rulesets/naming.xml               |
-|                                 | separated by commas. Defaults to "rulesets/basic.xml".               |                                      |
+| -rulesetfiles=<FILENAMES>       | The path to the Groovy or XML RuleSet definition files.              | -rulesetfiles=rulesets/imports.xml,\ |
+|                                 | This can be a single file path, or multiple paths                    |    rulesets/naming.xml               |
+|                                 | separated by commas. By default, the paths specified are relative    |                                      |
+|                                 | to the classpath. But these paths may be optionally prefixed by any  |                                      |
+|                                 | of the valid java.net.URL prefixes, such as "file:" (to load from a  |                                      |
+|                                 | relative or absolute path on the filesystem), or "http:".            |                                      |
+|                                 | Defaults to "rulesets/basic.xml".                                    |                                      |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
 | -report=<REPORT-TYPE[:FILENAME]>| The definition of the report to produce. The option value is of      | -report=html                         |
-|                                 | the form <<<TYPE[:FILENAME]>>>, where <<<TYPE>>> is one of the       | -report=html:MyProject.html    |
-|                                 | predefined type names: "html", "xml", "text", "console" or else the fully-qualified  |                                      |
+|                                 | the form <<<TYPE[:FILENAME]>>>, where <<<TYPE>>> is one of the       | -report=html:MyProject.html          |
+|                                 | predefined type names: "html", "xml", "text", "console" or else the fully-qualified  |                      |
 |                                 | class name of a class (accessible on the classpath) that implements  | -report=xml                          |
 |                                 | the <<<org.codenarc.report.ReportWriter>>> interface. And            | -report=xml:MyXmlReport.xml          |
 |                                 | <<<FILENAME>>> is the filename (with optional path) of the output    |                                      |
