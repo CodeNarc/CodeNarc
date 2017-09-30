@@ -27,7 +27,6 @@ class GradlePluginCompilationClasspathTest {
 
     private BuildResult runFailingCodeNarcTaskForMainSourceSet() {
         GradleRunner.create()
-            .withGradleVersion('4.2-20170813022644+0000') //this line can be removed as soon as Gradle 4.2 is released and the build is updated to that version
             .withProjectDir(temporaryFolder.root)
             .withArguments('codenarcMain')
             .buildAndFail()
