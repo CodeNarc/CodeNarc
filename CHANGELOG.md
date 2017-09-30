@@ -1,5 +1,14 @@
 # CodeNarc Change Log
 
+TBD: Version 1.1 (??? 2018)
+--------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+   - #239: Ignore super calls in UnnecessarySetterRule. (Marcin Erdmann) 
+   - #238: Update Gradle to 4.2. (Marcin Erdmann) 
+   - #232: Update link to the gradle maven plugin. (Jenn Strater)
+   - #233: Change dependency subst. to exclusions in integration-test module. (Marcin Erdmann)
+
+
 Version 1.0 (Sep 2017)
 --------------------------------------
 New Rules
