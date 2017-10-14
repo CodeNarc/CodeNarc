@@ -143,6 +143,51 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testNoViolationForInlineListInAnAnnotation() {
+        final SOURCE = '''         
+         @ToString(
+            ignoreNulls = false,
+            excludes = ['bear', 'raccoon']
+         )
+         class TestClass{}
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoViolationForMultiLineListInAnAnnotation() {
+        final SOURCE = '''         
+         @ToString(
+            ignoreNulls = false,
+            excludes = [
+                'bear', 
+                'raccoon',
+            ]
+         )
+         class TestClass{}
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSingleListViolationInAnAnnotation() {
+        final SOURCE = '''         
+         @ToString(
+            ignoreNulls = false,
+            excludes = [
+                'bear', 
+                'raccoon'
+            ]
+         )
+         class TestClass{}
+        '''
+
+        assertSingleViolation(SOURCE, 4, 'excludes = [', 'List should contain trailing comma.')
+    }
+
     protected Rule createRule() {
         new TrailingCommaRule()
     }
