@@ -56,7 +56,10 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
         if (isOneLiner(expression) || expression.expressions.isEmpty()) {
             return
         }
-        if (rule.checkList && !hasTrailingComma(expression.expressions[-1], expression)) {
+        if (rule.checkList &&
+                !hasTrailingComma(expression.expressions[-1], expression) &&
+                !lastExpressionIsEndOfExpression(expression.expressions[-1])
+        ) {
             addViolation(expression, 'List should contain trailing comma.')
         }
     }
@@ -77,5 +80,9 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
                 outerExpression.lastColumnNumber
         )
         sourceLinesBetween.any { it.contains(',') }
+    }
+
+    private static boolean lastExpressionIsEndOfExpression(Expression lastExpression) {
+        lastExpression.lineNumber == lastExpression.lastLineNumber
     }
 }
