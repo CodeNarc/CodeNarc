@@ -16,6 +16,7 @@
 package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.control.Phases
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
@@ -31,6 +32,12 @@ class CompareToWithoutComparableRule extends AbstractAstVisitorRule {
     String name = 'CompareToWithoutComparable'
     int priority = 2
     Class astVisitorClass = CompareToWithoutComparableAstVisitor
+    boolean enhancedMode
+
+    @Override
+    int getCompilerPhase() {
+        enhancedMode ? Phases.CANONICALIZATION : super.compilerPhase
+    }
 }
 
 class CompareToWithoutComparableAstVisitor extends AbstractMethodVisitor {

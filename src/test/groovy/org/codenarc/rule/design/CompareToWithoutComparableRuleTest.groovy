@@ -15,9 +15,12 @@
  */
 package org.codenarc.rule.design
 
+import org.codehaus.groovy.control.Phases
 import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.rule.Rule
 import org.junit.Test
+
+import static org.codenarc.source.SourceCode.DEFAULT_COMPILER_PHASE
 
 /**
  * Tests for CompareToWithoutComparableRule
@@ -26,6 +29,40 @@ import org.junit.Test
  */
 class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase {
 
+    private static final SUCCESS_SCENARIO_SOURCE = '''
+        class MyClass implements Comparable {
+            int compareTo(Object o) {
+                0
+            }
+        }
+        class MyClass2 implements Serializable, Comparable {
+            int compareTo(Object o) {
+                0
+            }
+        }
+        class MyClass3 {
+            int compareTo(Object o1, Object o2) {
+                0
+            }
+        }
+    '''
+
+    private static final NO_INTERFACES_SOURCE = '''
+        class MyClass {
+            int compareTo(Object o) {
+                0
+            }
+        }
+    '''
+
+    private static final TWO_INTERFACES_SOURCE = '''
+        class MyClass implements Serializable, Cloneable {
+            int compareTo(Object o) {
+                0
+            }
+        }
+    '''
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
@@ -33,52 +70,76 @@ class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testCompilerPhaseWhenEnhancedModeIsDisabled() {
+        assert rule.compilerPhase == DEFAULT_COMPILER_PHASE
+    }
+
+    @Test
+    void testCompilerPhaseWhenEnhancedModeIsEnabled() {
+        rule.enhancedMode = true
+
+        assert rule.compilerPhase == Phases.CANONICALIZATION
+    }
+
+    @Test
     void testSuccessScenario() {
-        final SOURCE = '''
-            class MyClass implements Comparable {
-                int compareTo(Object o) {
-                    0
-                }
-            }
-            class MyClass2 implements Serializable, Comparable {
-                int compareTo(Object o) {
-                    0
-                }
-            }
-            class MyClass3 {
-                int compareTo(Object o1, Object o2) {
-                    0
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
+        assertNoViolations(SUCCESS_SCENARIO_SOURCE)
+    }
+
+    @Test
+    void testSuccessScenarioEnhancedMode() {
+        rule.enhancedMode = true
+
+        assertNoViolations(SUCCESS_SCENARIO_SOURCE)
     }
 
     @Test
     void testNoInterfaces() {
-        final SOURCE = '''
-            class MyClass {
-                int compareTo(Object o) {
-                    0
-                }
-            }
-        '''
-        assertSingleViolation(SOURCE, 2, 'class MyClass', 'compareTo method at line 3 would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable')
+        assertSingleViolation(NO_INTERFACES_SOURCE, 2, 'class MyClass', 'compareTo method at line 3 would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable')
+    }
+
+    @Test
+    void testNoInterfacesEnhancedMode() {
+        rule.enhancedMode = true
+
+        assertSingleViolation(NO_INTERFACES_SOURCE, 2, 'class MyClass', 'compareTo method at line 3 would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable')
     }
 
     @Test
     void testTwoInterfaces() {
+        assertSingleViolation(TWO_INTERFACES_SOURCE, 2, 'class MyClass', 'compareTo method at line 3 would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable')
+    }
+
+    @Test
+    void testTwoInterfacesEnhancedMode() {
+        rule.enhancedMode = true
+
+        assertSingleViolation(TWO_INTERFACES_SOURCE, 2, 'class MyClass', 'compareTo method at line 3 would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable')
+    }
+
+    @Test
+    void testComparableOnSuperclassInEnhancedModeCausesNoViolations() {
         final SOURCE = '''
-            class MyClass implements Serializable, Cloneable {
-                int compareTo(Object o) {
+            abstract class ComparableSuperclass implements Comparable {
+            }
+            
+            class ComparableClass extends ComparableSuperclass {
+                int compareTo(Object o1) {
                     0
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 2, 'class MyClass', 'compareTo method at line 3 would implement Comparable.compareTo(Object) but the enclosing class does not implement Comparable')
+
+        rule.enhancedMode = true
+
+        assertNoViolations(SOURCE)
     }
 
     protected Rule createRule() {
         new CompareToWithoutComparableRule()
+    }
+
+    private CompareToWithoutComparableRule getRule() {
+        super.rule
     }
 }
