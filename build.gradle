@@ -3,7 +3,6 @@ plugins {
     id 'maven'
     id 'signing'
     id 'idea'
-    id 'net.researchgate.release' version '2.0.2'
 }
 
 group = "org.codenarc"
@@ -113,9 +112,4 @@ uploadArchives {
             }
         }
     }
-}
-
-release {
-    tagPrefix = project.name
-    requireBranch = '' // disabled
 }
