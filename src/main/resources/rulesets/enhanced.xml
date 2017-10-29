@@ -14,4 +14,5 @@
     <rule class='org.codenarc.rule.design.CloneWithoutCloneableRule'/>
     <rule class='org.codenarc.rule.junit.JUnitAssertEqualsConstantActualValueRule'/>
     <rule class='org.codenarc.rule.security.UnsafeImplementationAsMapRule'/>
+    <rule class='org.codenarc.rule.enhanced.MissingOverrideAnnotationRule'/>
 </ruleset>
