@@ -151,6 +151,10 @@ Design Rules  ("<rulesets/design.xml>")
   don't then you could possibly get an exception if the Groovy == operator is invoked on your object.
   This is an issue fixed in Groovy 1.8 but present in previous versions.
 
+  This rule has a single <<<enhancedMode>>> property which defaults to <<<false>>>. When set to <<<true>>>, this rule
+  will run in {{{./codenarc-enhanced-classpath-rules.html}enhanced mode}} and will not produce a violation when a class
+  implements <<<compareTo>>> and extends a class that itself implements <<<Comparable>>>.
+
   Here is an example of code that produces a violation:
 
 -------------------------------------------------------------------------------
@@ -161,8 +165,9 @@ Design Rules  ("<rulesets/design.xml>")
 
  Known limitations:
 
-  * This rule is not able to determine if the class extends a superclass that itself implements <<<Comparable>>>, or
-    if it implements an interface that extends <<<Comparable>>>. In those cases, this rule produces a false violation.
+  * When not running in enhanced mode, this rule is not able to determine if the class extends a superclass that itself
+    implements <<<Comparable>>>, or if it implements an interface that extends <<<Comparable>>>. In those cases, this
+    rule produces a false violation.
 
 
 * {ConstantsOnlyInterface} Rule
