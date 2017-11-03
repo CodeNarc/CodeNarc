@@ -37,7 +37,6 @@ class ClassJavadocRule extends AbstractRule {
      * @param violations A list of Violations that may be added to. It can be an empty list
      */
     @Override
-    @SuppressWarnings('EmptyWhileStatement')
     void applyTo(SourceCode sourceCode, List violations) {
 
         def lines = sourceCode.getLines()

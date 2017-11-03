@@ -35,7 +35,6 @@ class UseAssertTrueInsteadOfNegationRule extends AbstractAstVisitorRule {
 
 class UseAssertTrueInsteadOfNegationAstVisitor extends AbstractMethodCallExpressionVisitor {
 
-    @SuppressWarnings('DuplicateLiteral')
     void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)

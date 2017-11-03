@@ -60,6 +60,7 @@ class CodeNarcRunner {
      * </ol>
      * @returns the <code>Results</code> object containing the results of the CodeNarc analysis.
      */
+    @SuppressWarnings('Println')
     Results execute() {
         assert ruleSetFiles, 'The ruleSetFiles property must be set'
         assert sourceAnalyzer, 'The sourceAnalyzer property must be set to a valid SourceAnalayzer'

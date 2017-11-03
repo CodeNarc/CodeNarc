@@ -24,7 +24,6 @@ import org.codenarc.util.ImportUtil
  *
  * @author Chris Mair
   */
-@SuppressWarnings('DuplicateLiteral')
 class ImportFromSamePackageRule extends AbstractRule {
     String name = 'ImportFromSamePackage'
     int priority = 3

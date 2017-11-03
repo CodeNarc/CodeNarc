@@ -96,15 +96,14 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisito
         }
     }
 
-    @SuppressWarnings('CyclomaticComplexity')
     private void addViolationOnMismatch(List rawGetterNames, String setterName) {
         def getterNames = rawGetterNames*.toString() // force GString into strings
 
-        if (containsKey(synchronizedMethods, getterNames) && unsynchronizedMethods.containsKey(setterName)) {
+        if (isGetterSynchronizedAndSetterUnsychronized(getterNames, setterName)) {
             def getterName = getFirstValue(synchronizedMethods, getterNames).name
             MethodNode node = unsynchronizedMethods.get(setterName)
             addViolation(node, "The getter method $getterName is synchronized but the setter method $setterName is not")
-        } else if (containsKey(unsynchronizedMethods, getterNames) && synchronizedMethods.containsKey(setterName)) {
+        } else if (isGetterUnsynchronizedAndSetterSychronized(getterNames, setterName)) {
             def getterName = getFirstValue(unsynchronizedMethods, getterNames).name
             MethodNode node = unsynchronizedMethods.get(getterName)
             addViolation(node, "The setter method $setterName is synchronized but the getter method $getterName is not")
@@ -130,4 +129,13 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisito
     private static MethodNode getFirstValue(Map<String, MethodNode> methodList, List<String> keys) {
         methodList.find { it.key in keys }.value
     }
+
+    private boolean isGetterSynchronizedAndSetterUnsychronized(List<String> getterNames, String setterName) {
+        containsKey(synchronizedMethods, getterNames) && unsynchronizedMethods.containsKey(setterName)
+    }
+
+    private boolean isGetterUnsynchronizedAndSetterSychronized(List<String> getterNames, String setterName) {
+        containsKey(unsynchronizedMethods, getterNames) && synchronizedMethods.containsKey(setterName)
+    }
+
 }

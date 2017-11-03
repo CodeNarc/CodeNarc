@@ -33,13 +33,12 @@ class DuplicateMapKeyRule extends AbstractAstVisitorRule {
 
 class DuplicateMapKeyAstVisitor extends AbstractAstVisitor {
     @Override
-    @SuppressWarnings('UnnecessaryCollectCall')
     void visitMapExpression(MapExpression expression) {
 
         if(isFirstVisit(expression)) {
             def a = expression.mapEntryExpressions
                     .findAll { it.keyExpression instanceof ConstantExpression }
-                    .collect { it.keyExpression }
+                    *.keyExpression
 
             a.inject([]) { result, it ->
                 if (result.contains(it.value)) {

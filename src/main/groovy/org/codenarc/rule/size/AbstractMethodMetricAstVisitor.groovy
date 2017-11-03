@@ -37,7 +37,6 @@ import org.gmetrics.metric.Metric
  * @author Chris Mair
  * @author Hamlet D'Arcy
   */
-@SuppressWarnings('DuplicateLiteral')
 abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 
     protected Metric metric

@@ -35,7 +35,6 @@ class ObjectOverrideMisspelledMethodNameRule extends AbstractAstVisitorRule {
 class ObjectOverrideMisspelledMethodNameAstVisitor extends AbstractMethodVisitor {
 
     @Override
-    @SuppressWarnings('DuplicateLiteral')
     void visitMethod(MethodNode node) {
         checkForExactMethodName(node, 'equal', ['Object'], 'equals')
         checkForMethodNameWithIncorrectCase(node, 'equals', ['Object'])

@@ -145,6 +145,7 @@ class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractAstVisitor {
             assert expressions.every { it.type.name == String.name }
             transients = expressions*.value
         } catch (AssertionError e) {
+            // ignore exception
         }
     }
 

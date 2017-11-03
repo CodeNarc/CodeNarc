@@ -53,7 +53,7 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
                 collector.visitClass(it)
             }
             def anonymousReferences = collector.references
-            
+
             ast.classes.each { classNode ->
 
                 if (shouldApplyThisRuleTo(classNode)) {
@@ -151,10 +151,9 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         super.visitMethodCallExpression(call)
     }
 
-    @SuppressWarnings('NestedForLoop')
     private void markVariableAsReferenced(String varName, VariableExpression varExpression) {
-        for(blockVariables in variablesByBlockScope) {
-            for(var in blockVariables.keySet()) {
+        variablesByBlockScope.each { blockVariables ->
+            blockVariables.keySet().each { var ->
                 if (var.name == varName && var != varExpression) {
                     blockVariables[var] = true
                     return
