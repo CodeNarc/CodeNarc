@@ -5,6 +5,13 @@ plugins {
     id 'idea'
 }
 
+ext {
+    commonsCliVersion = '1.4'
+    junitVersion = '4.12'
+    GMetricsVersion = '1.0'
+    slf4jVersion = '1.7.25'
+}
+
 group = "org.codenarc"
 archivesBaseName = "CodeNarc"
 version = "1.0"
