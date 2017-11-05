@@ -230,6 +230,42 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase {
             '''Method 'run' is overriding a method in 'java.lang.Runnable' but is not annotated with @Override.''')
     }
 
+    @Test
+    void testDoesNotReportViolationsForMethodsWithDefaultArgsForWhichNotAllSignaturesOverrideMethods() {
+        assertNoViolations '''
+            class SuperClass {
+                String superClassMethod(String value) {
+                }
+            }
+
+            class ValidClass extends SuperClass {
+                void superClassMethod(String value = "") {
+                }
+            }
+        '''
+    }
+
+    @Test
+    void testViolationsForMethodsWithDefaultArgsForWhichAllSignaturesOverrideMethods() {
+        final SOURCE = '''
+            interface FirstInterface {
+                void run(String value)
+            }
+            
+            interface SecondInterface {
+                void run(String first, String second)
+            }
+
+            class InvalidClass implements Runnable, FirstInterface, SecondInterface {
+                void run(String first = "", String second = "") {
+                }
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 11, 'void run(String first = "", String second = "") {',
+            '''Method 'run' is overriding a method in 'FirstInterface', 'SecondInterface', 'java.lang.Runnable' but is not annotated with @Override.''')
+    }
+
     @Override
     protected Rule createRule() {
         new MissingOverrideAnnotationRule()
