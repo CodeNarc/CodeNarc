@@ -32,6 +32,7 @@ dependencies {
     testCompile "org.slf4j:slf4j-simple:$slf4jVersion"
     testCompile 'commons-cli:commons-cli:1.4'
     testCompile 'junit:junit:4.12'
+    testCompile 'com.github.stefanbirkner:system-rules:1.16.1'
 }
 
 sourceSets {

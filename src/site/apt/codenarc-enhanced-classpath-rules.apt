@@ -45,6 +45,19 @@ CodeNarc - Enhanced Classpath Rules
 
   TBD...
 
+* Dual Mode Rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Historically some rules were deficient because they they ran against AST produced in earlier compilation phases and
+  thus were lacking all the necessary information to fully determine if a violation actually occurred or not. These
+  rules have now been improved and are able to run in enhanced mode against AST produced by later compilation phases
+  providing better analysis. Examples of such rules include <<<CloseWithoutCloseable>>> and
+  <<<CompareToWithoutComparable>>>. For backwards compatibility reasons enhanced mode is not enabled on dual mode rules
+  by default.
+
+  If <<CodeNarc>> analysis has been set up to include the classes referenced from analysed code on the classpath then
+  you might consider enabling enhanced mode for dual mode rules globally by setting <<<org.codenarc.enhancedMode>>>
+  system property to <<<true>>>.
 
 * Now what?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

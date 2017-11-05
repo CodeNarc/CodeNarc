@@ -16,7 +16,7 @@
 package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractEnhanceableAstVisitorRule
 import org.codenarc.rule.AbstractMethodVisitor
 import org.codenarc.util.AstUtil
 
@@ -27,7 +27,7 @@ import java.lang.reflect.Modifier
  *
  * @author Hamlet D'Arcy
  */
-class CloseWithoutCloseableRule extends AbstractAstVisitorRule {
+class CloseWithoutCloseableRule extends AbstractEnhanceableAstVisitorRule {
     String name = 'CloseWithoutCloseable'
     int priority = 2
     Class astVisitorClass = CloseWithoutCloseableAstVisitor
