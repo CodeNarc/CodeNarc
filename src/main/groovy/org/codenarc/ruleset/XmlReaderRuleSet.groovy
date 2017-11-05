@@ -29,7 +29,6 @@ import javax.xml.validation.SchemaFactory
  *
  * @author Chris Mair
   */
-@SuppressWarnings('DuplicateLiteral')
 class XmlReaderRuleSet implements RuleSet {
 
     // W3C_XML_SCHEMA_NS_URI constant is not defined in older versions of javax.xml.XMLConstants 

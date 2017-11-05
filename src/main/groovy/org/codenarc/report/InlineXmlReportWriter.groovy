@@ -24,7 +24,6 @@ import org.codenarc.rule.Violation
  *
  * @author Robin Bramley
  */
-@SuppressWarnings('UnnecessaryReturnKeyword')
 class InlineXmlReportWriter extends XmlReportWriter {
 
     //--------------------------------------------------------------------------
@@ -47,7 +46,6 @@ class InlineXmlReportWriter extends XmlReportWriter {
         // No-op as we have inline rule descriptions
     }
 
-    @SuppressWarnings('FactoryMethodName')
     private buildDescriptionElement(rule) {
         def description = this.getDescriptionForRule(rule)
         return { Description(XmlReportUtil.cdata(description)) }

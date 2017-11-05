@@ -34,27 +34,21 @@ class BrokenOddnessCheckRule extends AbstractAstVisitorRule {
 
 class BrokenOddnessCheckAstVisitor extends AbstractAstVisitor {
 
-    @SuppressWarnings('NestedBlockDepth')  // this code isn't that bad
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
 
         if (AstUtil.isBinaryExpressionType(expression, '==')) {
-            if (AstUtil.isBinaryExpressionType(expression.leftExpression, '%')) {
-                if (AstUtil.isConstant(expression.rightExpression, 1)) {
-                    BinaryExpression modExp = expression.leftExpression
-                    if (AstUtil.isConstant(modExp.rightExpression, 2)) {
-                        def variable = modExp.leftExpression.text
-                        addViolation(expression, "The code uses '($variable % 2 == 1)' to check for oddness, which does not work for negative numbers. Use ($variable & 1 == 1) or ($variable % 2 != 0) instead")
-                    } 
+            if (AstUtil.isBinaryExpressionType(expression.leftExpression, '%') && AstUtil.isConstant(expression.rightExpression, 1)) {
+                BinaryExpression modExp = expression.leftExpression
+                if (AstUtil.isConstant(modExp.rightExpression, 2)) {
+                    def variable = modExp.leftExpression.text
+                    addViolation(expression, "The code uses '($variable % 2 == 1)' to check for oddness, which does not work for negative numbers. Use ($variable & 1 == 1) or ($variable % 2 != 0) instead")
                 }
-            } else if (AstUtil.isBinaryExpressionType(expression.rightExpression, '%')) {
-
-                if (AstUtil.isConstant(expression.leftExpression, 1)) {
-                    BinaryExpression modExp = expression.rightExpression
-                    if (AstUtil.isConstant(modExp.rightExpression, 2)) {
-                        def variable = modExp.leftExpression.text
-                        addViolation(expression, "The code uses '(1 == $variable % 2)' to check for oddness, which does not work for negative numbers. Use ($variable & 1 == 1) or ($variable % 2 != 0) instead")
-                    }
+            } else if (AstUtil.isBinaryExpressionType(expression.rightExpression, '%') && AstUtil.isConstant(expression.leftExpression, 1)) {
+                BinaryExpression modExp = expression.rightExpression
+                if (AstUtil.isConstant(modExp.rightExpression, 2)) {
+                    def variable = modExp.leftExpression.text
+                    addViolation(expression, "The code uses '(1 == $variable % 2)' to check for oddness, which does not work for negative numbers. Use ($variable & 1 == 1) or ($variable % 2 != 0) instead")
                 }
             }
         }

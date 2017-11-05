@@ -35,18 +35,15 @@ class GrailsMassAssignmentRule extends AbstractAstVisitorRule {
     Class astVisitorClass = GrailsMassAssignmentAstVisitor
 }
 
-@SuppressWarnings('NestedBlockDepth')
 class GrailsMassAssignmentAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call)) {
-            if (call.arguments && call.arguments.expressions) {
-                def exp = call.arguments.expressions.first()
-                if (exp instanceof VariableExpression) {
-                    if (exp.variable == 'params') {
-                        addViolation(call, 'Restrict mass attribute assignment')
-                    }
+        if (isFirstVisit(call) && call.arguments && call.arguments.expressions) {
+            def exp = call.arguments.expressions.first()
+            if (exp instanceof VariableExpression) {
+                if (exp.variable == 'params') {
+                    addViolation(call, 'Restrict mass attribute assignment')
                 }
             }
         }
@@ -55,14 +52,15 @@ class GrailsMassAssignmentAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-        if (isFirstVisit(expression)) {
-            if (expression.leftExpression instanceof PropertyExpression && !(expression.leftExpression instanceof AttributeExpression) ) {
-                if (expression.leftExpression.property.hasProperty('value') && expression.leftExpression.property.value == 'properties') {
-                    if (expression.rightExpression instanceof VariableExpression && expression.rightExpression.variable == 'params') {
-                        addViolation(expression, 'Restrict mass attribute assignment')
-                    }
-                }
-            }
+        if (isFirstVisit(expression) &&
+                expression.leftExpression instanceof PropertyExpression &&
+                !(expression.leftExpression instanceof AttributeExpression) &&
+                expression.leftExpression.property.hasProperty('value') &&
+                expression.leftExpression.property.value == 'properties' &&
+                expression.rightExpression instanceof VariableExpression &&
+                expression.rightExpression.variable == 'params'
+        ) {
+            addViolation(expression, 'Restrict mass attribute assignment')
         }
         super.visitBinaryExpression(expression)
 

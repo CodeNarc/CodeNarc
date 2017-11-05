@@ -56,7 +56,6 @@ class PrintlnAstVisitor extends AbstractAstVisitor  {
         printlnClosureDefined = false
     }
 
-    @SuppressWarnings('DuplicateLiteral')
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (printlnMethodDefined || printlnClosureDefined) {
             return
