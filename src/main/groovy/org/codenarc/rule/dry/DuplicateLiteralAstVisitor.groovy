@@ -52,6 +52,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         isEnum = node.isEnum()
     }
 
+    @Override
     void visitArgumentlistExpression(ArgumentListExpression expression) {
         expression.expressions.each {
             addViolationIfDuplicate(it)
@@ -59,11 +60,13 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitArgumentlistExpression expression
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         addViolationIfDuplicate(call.objectExpression)
         super.visitMethodCallExpression call
     }
 
+    @Override
     void visitListExpression(ListExpression expression) {
         expression.expressions.findAll {
             addViolationIfDuplicate it
@@ -71,6 +74,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitListExpression expression
     }
 
+    @Override
     void visitField(FieldNode node) {
         if (node.type == node.owner) {
             ignoreValuesSet.add node.name
@@ -79,12 +83,14 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitField node
     }
 
+    @Override
     void visitBinaryExpression(BinaryExpression expression) {
         addViolationIfDuplicate expression.leftExpression
         addViolationIfDuplicate expression.rightExpression
         super.visitBinaryExpression expression
     }
 
+    @Override
     void visitShortTernaryExpression(ElvisOperatorExpression expression) {
         addViolationIfDuplicate expression.booleanExpression
         addViolationIfDuplicate expression.trueExpression
@@ -92,11 +98,13 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitShortTernaryExpression expression
     }
 
+    @Override
     void visitReturnStatement(ReturnStatement statement) {
         addViolationIfDuplicate(statement.expression)
         super.visitReturnStatement statement
     }
 
+    @Override
     void visitStaticMethodCallExpression(StaticMethodCallExpression call) {
         call.arguments.each {
             addViolationIfDuplicate(it)
@@ -104,6 +112,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitStaticMethodCallExpression call
     }
 
+    @Override
     void visitMapEntryExpression(MapEntryExpression expression) {
         addViolationIfDuplicate expression.valueExpression
         super.visitMapEntryExpression expression

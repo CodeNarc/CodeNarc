@@ -187,6 +187,7 @@ class SynchronizedOnReentrantLockRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'synchronized(lock)', 'Synchronizing on a ReentrantLock field lock. This is almost never the intended usage; use the lock() and unlock() methods instead')
     }
 
+    @Override
     protected Rule createRule() {
         new SynchronizedOnReentrantLockRule()
     }

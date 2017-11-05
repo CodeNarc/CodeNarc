@@ -61,6 +61,7 @@ class CatchExceptionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new CatchExceptionRule()
     }

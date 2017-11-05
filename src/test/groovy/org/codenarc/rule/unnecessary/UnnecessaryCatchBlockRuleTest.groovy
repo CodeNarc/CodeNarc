@@ -79,6 +79,7 @@ class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
                 6, 'catch (Exception e2)')   
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryCatchBlockRule()
     }

@@ -221,6 +221,7 @@ Other$.value()
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new UnusedImportRule()
     }

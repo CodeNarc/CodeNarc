@@ -180,6 +180,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 2, 'groovy.util.Eval', 4, 'groovy.util.Expando')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryGroovyImportRule()
     }

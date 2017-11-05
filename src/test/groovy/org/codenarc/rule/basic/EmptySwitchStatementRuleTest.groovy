@@ -58,6 +58,7 @@ class EmptySwitchStatementRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new EmptySwitchStatementRule()
     }

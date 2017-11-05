@@ -97,6 +97,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 2, 'class CloneableWithoutCloneRuleClass4 implements Cloneable '
     }
 
+    @Override
     protected Rule createRule() {
         new CloneableWithoutCloneRule()
     }

@@ -56,6 +56,7 @@ abstract class AbstractReportWriter implements ReportWriter {
      * @param analysisContext - the AnalysisContext containing the analysis configuration information
      * @param results - the analysis results
      */
+    @Override
     void writeReport(AnalysisContext analysisContext, Results results) {
         assert analysisContext
         assert results

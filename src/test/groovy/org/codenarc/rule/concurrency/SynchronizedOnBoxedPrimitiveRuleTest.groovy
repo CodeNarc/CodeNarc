@@ -471,6 +471,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'synchronized(lock)', 'Synchronizing on the Boolean field lock is unsafe. Do not synchronize on boxed types')
     }
 
+    @Override
     protected Rule createRule() {
         new SynchronizedOnBoxedPrimitiveRule()
     }

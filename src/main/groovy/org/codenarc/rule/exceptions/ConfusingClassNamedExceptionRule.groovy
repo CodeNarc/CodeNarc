@@ -33,6 +33,7 @@ class ConfusingClassNamedExceptionRule extends AbstractAstVisitorRule {
 
 class ConfusingClassNamedExceptionAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitClassEx(ClassNode node) {
 
         if (node.name.endsWith('Exception') && !AstUtil.classNodeImplementsType(node, Exception)) {

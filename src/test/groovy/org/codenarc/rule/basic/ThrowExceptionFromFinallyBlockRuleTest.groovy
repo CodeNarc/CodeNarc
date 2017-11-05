@@ -94,6 +94,7 @@ class ThrowExceptionFromFinallyBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new ThrowExceptionFromFinallyBlockRule()
     }

@@ -304,6 +304,7 @@ c        '''
         ''')
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAfterClosingBraceRule()
     }

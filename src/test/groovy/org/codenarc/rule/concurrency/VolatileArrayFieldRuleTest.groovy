@@ -116,6 +116,7 @@ class VolatileArrayFieldRuleTest extends AbstractRuleTestCase {
                 'The array field field3 is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type')
     }
 
+    @Override
     protected Rule createRule() {
         new VolatileArrayFieldRule()
     }

@@ -50,6 +50,7 @@ class UnnecessaryBigIntegerInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new BigInteger("42")', 'Can be rewritten as 42G')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryBigIntegerInstantiationRule()
     }

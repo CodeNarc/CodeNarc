@@ -74,6 +74,7 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'throw RuntimeFault(foo)', 'The throw statement appears to be throwing the class literal RuntimeFault instead of a new instance')
     }
 
+    @Override
     protected Rule createRule() {
         new MissingNewInThrowStatementRule()
     }

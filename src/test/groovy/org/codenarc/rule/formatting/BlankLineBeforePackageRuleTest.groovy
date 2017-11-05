@@ -107,6 +107,7 @@ class BlankLineBeforePackageRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, '', 'Blank line precedes package declaration in file null')
     }
 
+    @Override
     protected Rule createRule() {
         new BlankLineBeforePackageRule()
     }

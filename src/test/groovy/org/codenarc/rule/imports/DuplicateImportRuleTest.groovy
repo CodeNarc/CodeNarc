@@ -120,6 +120,7 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new DuplicateImportRule()
     }

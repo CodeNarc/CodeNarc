@@ -103,6 +103,7 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
                 'The class MyClass implements Serializable but does not define a serialVersionUID')
     }
 
+    @Override
     protected Rule createRule() {
         new SerializableClassMustDefineSerialVersionUIDRule()
     }

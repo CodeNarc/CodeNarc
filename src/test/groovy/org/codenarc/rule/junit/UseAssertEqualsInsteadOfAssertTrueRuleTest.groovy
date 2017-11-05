@@ -87,6 +87,7 @@ class UseAssertEqualsInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
                 5, "assertFalse('message', obj.foo() != obj.bar())")
     }
 
+    @Override
     protected Rule createRule() {
         new UseAssertEqualsInsteadOfAssertTrueRule()
     }

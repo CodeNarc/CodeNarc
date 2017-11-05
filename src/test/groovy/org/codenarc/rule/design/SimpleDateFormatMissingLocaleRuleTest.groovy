@@ -72,6 +72,7 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "new SimpleDateFormat('MM/dd/YYYY')", VIOLATION_MESSAGE)
     }
 
+    @Override
     protected Rule createRule() {
         new SimpleDateFormatMissingLocaleRule()
     }

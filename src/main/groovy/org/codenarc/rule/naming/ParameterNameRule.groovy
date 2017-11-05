@@ -44,6 +44,7 @@ class ParameterNameRule extends AbstractAstVisitorRule {
     String ignoreParameterNames
     Class astVisitorClass = ParameterNameAstVisitor
 
+    @Override
     void validate() {
         assert regex
     }
@@ -51,6 +52,7 @@ class ParameterNameRule extends AbstractAstVisitorRule {
 
 class ParameterNameAstVisitor extends AbstractAstVisitor  {
 
+    @Override
     void visitMethodEx(MethodNode methodNode) {
         processParameters(methodNode.parameters, methodNode.name)
         super.visitMethodEx(methodNode)
@@ -62,6 +64,7 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
         super.visitConstructor(constructorNode)
     }
 
+    @Override
     void visitClosureExpression(ClosureExpression closureExpression) {
         if (isFirstVisit(closureExpression)) {
             processParameters(closureExpression.parameters, '<closure>')

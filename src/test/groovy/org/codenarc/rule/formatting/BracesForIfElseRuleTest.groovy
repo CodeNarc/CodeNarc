@@ -140,6 +140,7 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         BracesForIfElseRule rule = new BracesForIfElseRule()
         rule.validateElse = true

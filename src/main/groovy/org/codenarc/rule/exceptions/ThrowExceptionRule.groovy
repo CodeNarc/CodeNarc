@@ -27,6 +27,7 @@ class ThrowExceptionRule extends AbstractAstVisitorRule {
     String name = 'ThrowException'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonThrowAstVisitor(['Exception', 'java.lang.Exception'])
     }

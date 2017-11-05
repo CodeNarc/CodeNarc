@@ -39,6 +39,7 @@ class CommonThrowAstVisitor extends AbstractAstVisitor  {
         this.exceptionTypeNames = exceptionTypeNames
     }
 
+    @Override
     void visitThrowStatement(ThrowStatement throwStatement) {
         def throwExpression = throwStatement.expression
         if (isFirstVisit(throwStatement) &&

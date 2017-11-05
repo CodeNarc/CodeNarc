@@ -90,6 +90,7 @@ class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new File("E:\\\\dir\\\\$foo")', 'The file location E:\\ is not portable')
     }
 
+    @Override
     protected Rule createRule() {
         new HardCodedWindowsRootDirectoryRule()
     }

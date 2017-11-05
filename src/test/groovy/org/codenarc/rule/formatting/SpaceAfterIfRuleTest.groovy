@@ -81,6 +81,7 @@ class SpaceAfterIfRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAfterIfRule()
     }

@@ -188,6 +188,7 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'excludes = [', 'List should contain trailing comma.')
     }
 
+    @Override
     protected Rule createRule() {
         new TrailingCommaRule()
     }

@@ -39,6 +39,7 @@ class ClassSizeRule extends AbstractAstVisitorRule {
 }
 
 class ClassSizeAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitClassEx(ClassNode classNode) {
         if (!AstUtil.isFromGeneratedSourceCode(classNode)) {
             def numLines = classNode.lastLineNumber - classNode.lineNumber + 1

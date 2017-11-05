@@ -78,6 +78,7 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
     private static final String VIOLATION_MESSAGE = 'The `this` reference escapes constructor.' +
         ' This equals exposing a half-baked object and can lead to race conditions.'
 
+    @Override
     protected Rule createRule() {
         new ThisReferenceEscapesConstructorRule()
     }

@@ -109,6 +109,7 @@ class SpaceAfterSemicolonRuleTest extends AbstractRuleTestCase {
             [lineNumber:5, sourceLineText:'for (int j=0; j < 10;j++) { }', messageText:'The for loop expression "j++"'] )
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAfterSemicolonRule()
     }

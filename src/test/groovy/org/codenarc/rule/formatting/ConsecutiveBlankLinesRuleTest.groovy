@@ -102,6 +102,7 @@ class ConsecutiveBlankLinesRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, '', 5, '')
     }
 
+    @Override
     protected Rule createRule() {
         new ConsecutiveBlankLinesRule()
     }

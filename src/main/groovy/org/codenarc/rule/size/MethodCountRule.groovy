@@ -35,6 +35,7 @@ class MethodCountRule extends AbstractAstVisitorRule {
 
 class MethodCountAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitClassEx(ClassNode node) {
         if (node.methods?.size() > rule.maxMethods) {
             addViolation(node, "Class $node.name has ${node.methods?.size()} methods")

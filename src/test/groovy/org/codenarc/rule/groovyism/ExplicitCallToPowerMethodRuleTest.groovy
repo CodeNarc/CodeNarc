@@ -52,6 +52,7 @@ class ExplicitCallToPowerMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.power(b)', 'Explicit call to a.power(b) method can be rewritten as a ** (b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToPowerMethodRule()
     }

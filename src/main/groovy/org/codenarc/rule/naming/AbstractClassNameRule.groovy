@@ -35,12 +35,14 @@ class AbstractClassNameRule extends AbstractAstVisitorRule {
     Class astVisitorClass = AbstractClassNameAstVisitor
     String regex
 
+    @Override
     boolean isReady() {
         regex
     }
 }
 
 class AbstractClassNameAstVisitor extends AbstractTypeNameAstVisitor  {
+    @Override
     protected boolean shouldVisit(ClassNode classNode) {
         def isAbstract = classNode.modifiers & classNode.ACC_ABSTRACT
         def isInterface = classNode.modifiers & classNode.ACC_INTERFACE

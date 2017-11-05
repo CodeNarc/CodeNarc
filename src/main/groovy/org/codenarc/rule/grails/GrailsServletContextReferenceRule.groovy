@@ -48,6 +48,7 @@ class GrailsServletContextReferenceRule extends AbstractAstVisitorRule {
 }
 
 class GrailsServletContextReferenceAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitVariableExpression(VariableExpression expression) {
         if (isFirstVisit(expression) && expression.variable == 'servletContext') {
             addViolation(expression, 'Storing objects in the servletContext can limit scalability')

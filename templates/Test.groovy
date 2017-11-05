@@ -58,6 +58,7 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase {
             [lineNumber:1, sourceLineText:'...', messageText:'...'])    // todo: replace line number, source line and message
     }
 
+    @Override
     protected Rule createRule() {
         new ${ruleName}Rule()
     }

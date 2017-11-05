@@ -94,6 +94,7 @@ class EqualsOverloadedRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'equals()', 'The class Person overloads the equals method, it does not override it.')
     }
 
+    @Override
     protected Rule createRule() {
         new EqualsOverloadedRule()
     }

@@ -27,6 +27,7 @@ class CatchRuntimeExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchRuntimeException'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonCatchAstVisitor('RuntimeException')
     }

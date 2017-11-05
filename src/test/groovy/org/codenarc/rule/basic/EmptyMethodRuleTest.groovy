@@ -71,6 +71,7 @@ class EmptyMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'method()', 'The method method is both empty and not marked with @Override')
     }
 
+    @Override
     protected Rule createRule() {
         new EmptyMethodRule()
     }

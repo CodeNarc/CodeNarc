@@ -66,6 +66,12 @@ ruleset {
 
     ruleset('rulesets/unused.xml')
 
+    ruleset('rulesets/enhanced.xml') {
+      exclude 'CloneWithoutCloneableRule'
+      exclude 'JUnitAssertEqualsConstantActualValueRule'
+      exclude 'UnsafeImplementationAsMapRule'
+    }
+
     //------------------------------------------------------------------------------------
     // Custom rules
     //------------------------------------------------------------------------------------

@@ -106,6 +106,7 @@ class CloneWithoutCloneableRuleTest extends AbstractRuleTestCase {
         "Class $className declares a clone() method, but does not implement java.lang.Cloneable interface"
     }
 
+    @Override
     protected Rule createRule() {
         new CloneWithoutCloneableRule()
     }

@@ -28,6 +28,8 @@ class NoTabCharacterRule extends AbstractRule {
     String name = 'NoTabCharacter'
     int priority = 3
     String tabCharacter = '\t'
+
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         if (sourceCode.getText().contains(tabCharacter)) {
             violations.add(new Violation(rule: this, message: 'The tab character is not allowed in source files'))

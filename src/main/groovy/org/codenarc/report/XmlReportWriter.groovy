@@ -30,6 +30,7 @@ class XmlReportWriter extends AbstractReportWriter {
     String title
     String defaultOutputFile = 'CodeNarcXmlReport.xml'
 
+    @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         assert analysisContext
         assert results

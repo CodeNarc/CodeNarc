@@ -235,6 +235,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'a&b ?:  false')
     }
 
+    @Override
     protected Rule createRule() {
         new BitwiseOperatorInConditionalRule()
     }

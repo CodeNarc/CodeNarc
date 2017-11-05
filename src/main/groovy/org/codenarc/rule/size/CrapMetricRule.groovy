@@ -158,6 +158,7 @@ class CrapMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
         rule.maxClassAverageMethodCrapScore
     }
 
+    @Override
     protected Object getMaxClassMetricValue() {
         rule.maxClassCrapScore
     }

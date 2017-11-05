@@ -116,6 +116,7 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends Abstrac
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new ClosureStatementOnOpeningLineOfMultipleLineClosureRule()
     }

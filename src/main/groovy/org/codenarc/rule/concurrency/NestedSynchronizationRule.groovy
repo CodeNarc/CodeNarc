@@ -37,6 +37,7 @@ class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
 
     private int visitCount = 0
 
+    @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (isFirstVisit(statement)) {
             if (visitCount > 0) {
@@ -49,6 +50,7 @@ class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
             super.visitSynchronizedStatement(statement)
         }
     }
+    @Override
 
     void visitClosureExpression(ClosureExpression expression) {
 

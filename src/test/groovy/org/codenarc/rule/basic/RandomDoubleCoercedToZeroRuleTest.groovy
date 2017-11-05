@@ -166,6 +166,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
                     6, 'Math.random()', 'Returning the result of Math.random() from an Integer-returning method always returns 0')
         }
 
+    @Override
     protected Rule createRule() {
         new RandomDoubleCoercedToZeroRule()
     }

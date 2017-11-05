@@ -102,6 +102,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryParenthesesForMethodCallWithClosureRule()
     }

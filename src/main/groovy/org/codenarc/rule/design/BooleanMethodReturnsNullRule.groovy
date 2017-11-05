@@ -41,6 +41,7 @@ class BooleanMethodReturnsNullRule extends AbstractAstVisitorRule {
 class BooleanMethodReturnsNullAstVisitor extends AbstractAstVisitor {
     private static final String ERROR_MSG = 'Returning null from a method that might return a Boolean'
 
+    @Override
     void visitMethodEx(MethodNode node) {
         if (methodReturnsBoolean(node)) {
             // does this method ever return null?
@@ -83,6 +84,7 @@ class BooleanReturnTracker extends AbstractAstVisitor {
     boolean returnsNonBoolean = false
     boolean returnsBoolean = false
 
+    @Override
     void visitReturnStatement(ReturnStatement statement) {
         checkReturnValues(statement.expression)
         super.visitReturnStatement(statement)

@@ -135,6 +135,7 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new AssignmentToStaticFieldFromInstanceMethodRule()
     }

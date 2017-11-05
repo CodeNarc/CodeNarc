@@ -36,6 +36,7 @@ class FileResults implements Results {
     /**
      * @return the path to the file or directory associated with these results
      */
+    @Override
     String getPath() {
         path
     }
@@ -43,6 +44,7 @@ class FileResults implements Results {
     /**
      * @return true (this object represents the results for a single file)
      */
+    @Override
     boolean isFile() {
         true
     }
@@ -51,6 +53,7 @@ class FileResults implements Results {
      * Return an empty List
      * @return the List of child Results objects; may be empty
      */
+    @Override
     List getChildren() {
         Collections.EMPTY_LIST
     }
@@ -58,6 +61,7 @@ class FileResults implements Results {
     /**
      * @return the List of all violations
      */
+    @Override
     List getViolations() {
         new ArrayList(violations)
     }
@@ -71,7 +75,6 @@ class FileResults implements Results {
      * @param recursive - ignored
      * @return the number of violations with the specified priority
      */
-    //@Override - causes compile error in Groovy 2.4.0
     int getNumberOfViolationsWithPriority(int priority, boolean recursive=true) {
         violations.sum(0) { violation -> violation.rule.priority == priority ? 1 : 0 }
     }
@@ -81,7 +84,6 @@ class FileResults implements Results {
      * @param recursive - ignored
      * @return the total number of files (with or without violations)
      */
-    //@Override - causes compile error in Groovy 2.4.0
     int getTotalNumberOfFiles(boolean recursive=true) {
         1
     }
@@ -92,7 +94,6 @@ class FileResults implements Results {
      * @param recursive - ignored
      * @return the number of files containing violations
      */
-    //@Override - causes compile error in Groovy 2.4.0
     int getNumberOfFilesWithViolations(int maxPriority, boolean recursive=true) {
         violations.find { v -> v.rule.priority <= maxPriority } ? 1 : 0
     }
@@ -102,10 +103,12 @@ class FileResults implements Results {
      * @param path - the path to search for
      * @return this Results object if the path matches, otherwise null
      */
+    @Override
     Results findResultsForPath(String path) {
         this.path == path ? this : null
     }
 
+    @Override
     String toString() {
         "FileResults($path) $violations"
     }

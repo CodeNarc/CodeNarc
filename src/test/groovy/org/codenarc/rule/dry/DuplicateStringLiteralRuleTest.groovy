@@ -240,6 +240,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new DuplicateStringLiteralRule()
     }

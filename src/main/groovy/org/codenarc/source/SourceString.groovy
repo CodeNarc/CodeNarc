@@ -46,6 +46,7 @@ class SourceString extends AbstractSourceCode {
     /**
      * @return the full text of the source code
      */
+    @Override
     String getText() {
         source
     }
@@ -54,6 +55,7 @@ class SourceString extends AbstractSourceCode {
         this.path = path ? normalizePath(path) : path
     }
 
+    @Override
     String toString() {
         "SourceString[$source]"
     }

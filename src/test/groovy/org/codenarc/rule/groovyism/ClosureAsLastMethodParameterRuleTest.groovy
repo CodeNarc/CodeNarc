@@ -227,6 +227,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new ClosureAsLastMethodParameterRule()
     }

@@ -87,14 +87,17 @@ File: src/main/dao/MyDao.groovy
         assertReportText(reportText, REPORT_TEXT)
     }
 
+    @Override
     protected TextReportWriter createReportWriter() {
         return new IdeTextReportWriter(title:TITLE)
     }
 
+    @Override
     protected String getReportTextMaxPriority() {
         return REPORT_TEXT_MAX_PRIORITY
     }
 
+    @Override
     protected String getReportText() {
         return REPORT_TEXT
     }

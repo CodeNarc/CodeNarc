@@ -42,15 +42,18 @@ class CustomCompilerPhaseSourceDecorator extends AbstractSourceCode {
     int getAstCompilerPhase() {
         compilerPhase
     }
-    
+
+    @Override
     String getName() {
         delegate.name
     }
 
+    @Override
     String getPath() {
         delegate.path
     }
 
+    @Override
     String getText() {
         delegate.text
     }
@@ -60,6 +63,7 @@ class CustomCompilerPhaseSourceDecorator extends AbstractSourceCode {
         delegate.suppressionAnalyzer
     }
 
+    @Override
     String toString() {
         "CustomCompilerPhaseSourceDecorator[${delegate.toString()}]"
     }

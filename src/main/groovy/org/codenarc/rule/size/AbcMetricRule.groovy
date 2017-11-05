@@ -66,18 +66,22 @@ class AbcMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
 
     final String metricShortDescription = 'ABC score'
 
+    @Override
     protected Object createMetric() {
         new AbcMetric()
     }
 
+    @Override
     protected Object getMaxMethodMetricValue() {
         rule.maxMethodAbcScore
     }
 
+    @Override
     protected Object getMaxClassAverageMethodMetricValue() {
         rule.maxClassAverageMethodAbcScore
     }
 
+    @Override
     protected Object getMaxClassMetricValue() {
         rule.maxClassAbcScore
     }

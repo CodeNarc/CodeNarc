@@ -28,6 +28,7 @@ import org.codenarc.util.GroovyVersion
  * @author Hamlet D'Arcy
   */
 abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
+    @Override
     void visitClassEx(ClassNode classNode) {
         assert rule.regex
 

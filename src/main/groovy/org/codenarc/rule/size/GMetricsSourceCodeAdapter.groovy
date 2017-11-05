@@ -32,34 +32,42 @@ class GMetricsSourceCodeAdapter implements SourceCode {
         codeNarcSourceCode = sourceCode
     }
 
+    @Override
     String getName() {
         codeNarcSourceCode.name
     }
 
+    @Override
     String getPath() {
         codeNarcSourceCode.path
     }
 
+    @Override
     String getText() {
         codeNarcSourceCode.text
     }
 
+    @Override
     List getLines() {
         codeNarcSourceCode.lines
     }
 
+    @Override
     String line(int lineNumber) {
         codeNarcSourceCode.line(lineNumber)
     }
 
+    @Override
     ModuleNode getAst() {
         codeNarcSourceCode.ast
     }
 
+    @Override
     int getLineNumberForCharacterIndex(int charIndex) {
         codeNarcSourceCode.getLineNumberForCharacterIndex(charIndex)
     }
 
+    @Override
     boolean isValid() {
         return codeNarcSourceCode.isValid()
     }

@@ -82,6 +82,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
     private anonymousReferences
     private final Set<VariableExpression> assignmentLeftExpressions = []
 
+    @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
@@ -103,6 +104,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         super.visitBinaryExpression(expression)
     }
 
+    @Override
     void visitBlockStatement(BlockStatement block) {
         beforeBlock()
         super.visitBlockStatement(block)
@@ -131,6 +133,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         variablesInCurrentBlockScope = variablesByBlockScope.empty() ? null : variablesByBlockScope.peek()
     }
 
+    @Override
     void visitVariableExpression(VariableExpression expression) {
         if (!assignmentLeftExpressions.contains(expression)) {
             markVariableAsReferenced(expression.name, expression)
@@ -138,6 +141,7 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         super.visitVariableExpression(expression)
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         // If there happens to be a method call on a method with the same name as the variable.
         // This handles the case of defining a closure and then executing it, e.g.:

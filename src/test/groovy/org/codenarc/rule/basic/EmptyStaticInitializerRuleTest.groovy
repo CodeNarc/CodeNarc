@@ -55,6 +55,7 @@ class EmptyStaticInitializerRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static {', 'The class MyClass has an empty static initializer. It is safe to delete it')
     }
 
+    @Override
     protected Rule createRule() {
         new EmptyStaticInitializerRule()
     }

@@ -64,18 +64,22 @@ class CyclomaticComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
 
     final String metricShortDescription = 'cyclomatic complexity'
 
+    @Override
     protected Object createMetric() {
         new CyclomaticComplexityMetric()
     }
 
+    @Override
     protected Object getMaxMethodMetricValue() {
         rule.maxMethodComplexity
     }
 
+    @Override
     protected Object getMaxClassAverageMethodMetricValue() {
         rule.maxClassAverageMethodComplexity
     }
 
+    @Override
     protected Object getMaxClassMetricValue() {
         rule.maxClassComplexity
     }

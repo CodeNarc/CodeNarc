@@ -122,6 +122,7 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessarySafeNavigationOperatorRule()
     }

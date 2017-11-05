@@ -97,6 +97,7 @@ class NestedForLoopRuleTest extends AbstractRuleTestCase {
         """)
     }
 
+    @Override
     protected Rule createRule() {
         new NestedForLoopRule()
     }

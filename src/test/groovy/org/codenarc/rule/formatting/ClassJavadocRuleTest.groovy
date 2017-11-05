@@ -198,6 +198,7 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
 
     }
 
+    @Override
     protected Rule createRule() {
         new ClassJavadocRule()
     }

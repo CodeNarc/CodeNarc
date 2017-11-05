@@ -183,6 +183,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
                 'The Logger field LOG should be private (or protected), static and final')
     }
 
+    @Override
     protected Rule createRule() {
         new LoggerWithWrongModifiersRule()
     }

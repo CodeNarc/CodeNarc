@@ -55,6 +55,7 @@ class ClassPathResource implements Resource {
      * Open an InputStream on the classpath resource path
      * @throws IOException - if an error occurs opening the InputStream
      */
+    @Override
     InputStream getInputStream() throws IOException {
         def inputStream = getClass().classLoader.getResourceAsStream(path)
         if (!inputStream) {
@@ -66,6 +67,7 @@ class ClassPathResource implements Resource {
     /**
      * @return true only if this resource exists and is accessible
      */
+    @Override
     boolean exists() {
         def inputStream
         try {

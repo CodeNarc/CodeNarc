@@ -49,6 +49,7 @@ class UnnecessaryCallToSubstringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'prop.substring(0)', 'Invoking the String method substring(0) always returns the original value. Method possibly missing 2nd parameter')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryCallToSubstringRule()
     }

@@ -321,6 +321,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new VariableNameRule()
     }

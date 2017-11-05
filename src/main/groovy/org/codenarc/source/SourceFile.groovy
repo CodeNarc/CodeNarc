@@ -43,6 +43,7 @@ class SourceFile extends AbstractSourceCode {
     /**
      * @return the filename for this source file, excluding path
      */
+    @Override
     String getName() {
         file.name
     }
@@ -50,6 +51,7 @@ class SourceFile extends AbstractSourceCode {
     /**
      * @return the normalized path for this source file, including filename
      */
+    @Override
     String getPath() {
         path
     }
@@ -57,6 +59,7 @@ class SourceFile extends AbstractSourceCode {
     /**
      * @return the full text of the source code
      */
+    @Override
     String getText() {
         if (text == null) {
             text = file.text
@@ -64,6 +67,7 @@ class SourceFile extends AbstractSourceCode {
         text
     }
 
+    @Override
     String toString() {
         "SourceFile[$file.absolutePath]"
     }

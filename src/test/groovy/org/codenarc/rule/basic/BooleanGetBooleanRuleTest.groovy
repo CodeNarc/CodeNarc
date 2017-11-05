@@ -49,6 +49,7 @@ class BooleanGetBooleanRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'Boolean.getBoolean(value)', 'Boolean.getBoolean(String) is a confusing API for reading System properties. Prefer the System.getProperty(String) API.')
     }
 
+    @Override
     protected Rule createRule() {
         new BooleanGetBooleanRule()
     }

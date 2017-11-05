@@ -191,6 +191,7 @@ class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Override
     protected Rule createRule() {
         new PackageNameMatchesFilePathRule()
     }

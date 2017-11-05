@@ -64,6 +64,7 @@ class UnnecessaryCastRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryCastRule()
     }

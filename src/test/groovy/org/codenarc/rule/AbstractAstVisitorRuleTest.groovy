@@ -226,6 +226,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
         assertFalse wildcardPattern.matches('MyNonTestClass')\
     }
 
+    @Override
     protected Rule createRule() {
         new FakeAstVisitorRule()
     }
@@ -240,6 +241,7 @@ class FakeAstVisitorRule extends AbstractAstVisitorRule {
 
 // Test AstVisitor implementation class
 class FakeAstVisitor extends AbstractAstVisitor {
+    @Override
     void visitClassEx(ClassNode classNode) {
         violations.add(new Violation(rule:rule))
         super.visitClassEx(classNode)

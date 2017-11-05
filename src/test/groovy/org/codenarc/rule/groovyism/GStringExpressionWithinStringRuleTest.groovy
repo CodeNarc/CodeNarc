@@ -162,6 +162,7 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')
     }
 
+    @Override
     protected Rule createRule() {
         new GStringExpressionWithinStringRule()
     }

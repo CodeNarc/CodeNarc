@@ -105,6 +105,7 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new ReturnNullFromCatchBlockRule()
     }

@@ -76,6 +76,7 @@ class UnnecessaryTransientModifierRuleTest extends AbstractRuleTestCase {
             'Violation in class MyClass$InnerClass. The field \'property\' is marked transient, but MyClass$InnerClass does not implement Serializable')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryTransientModifierRule()
     }

@@ -32,6 +32,7 @@ class UnusedImportRule extends AbstractRule {
     String name = 'UnusedImport'
     int priority = 3
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         processImports(sourceCode, violations)
         processStaticImports(sourceCode, violations)

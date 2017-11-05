@@ -73,6 +73,7 @@ class FieldNameRule extends AbstractAstVisitorRule {
     String ignoreFieldNames = 'serialVersionUID'
     Class astVisitorClass = FieldNameAstVisitor
 
+    @Override
     void validate() {
         assert regex
     }
@@ -82,6 +83,7 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
 
     private final Set propertyNames = []
 
+    @Override
     void visitField(FieldNode fieldNode) {
         if (!isProperty(fieldNode) && !isIgnoredPropertyName(fieldNode)) {
             def mod = fieldNode.modifiers
@@ -108,6 +110,7 @@ class FieldNameAstVisitor extends AbstractAstVisitor  {
         super.visitField(fieldNode)
     }
 
+    @Override
     void visitProperty(PropertyNode node) {
         propertyNames << node.name
         super.visitProperty(node)

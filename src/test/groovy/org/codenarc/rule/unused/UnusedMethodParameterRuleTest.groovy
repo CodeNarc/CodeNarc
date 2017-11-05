@@ -239,6 +239,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new UnusedMethodParameterRule()
     }

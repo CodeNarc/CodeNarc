@@ -31,6 +31,7 @@ abstract class AbstractFinallyAstVisitor extends AbstractAstVisitor {
     // Known pathology: if there is another statement on the same line as the beginning or
     // end of the finally block, but outside the block.
 
+    @Override
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
         if (tryCatchStatement.finallyStatement) {
             def f = tryCatchStatement.finallyStatement

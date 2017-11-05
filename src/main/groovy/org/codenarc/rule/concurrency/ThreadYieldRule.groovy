@@ -36,6 +36,7 @@ class ThreadYieldRule extends AbstractAstVisitorRule {
 
 class ThreadYieldAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
      void visitMethodCallExpression(MethodCallExpression call) {
          if (AstUtil.isMethodCall(call, 'Thread', 'yield', 0)) {
             addViolation(call, 'Thread.yield() has not useful guaranteed semantics')

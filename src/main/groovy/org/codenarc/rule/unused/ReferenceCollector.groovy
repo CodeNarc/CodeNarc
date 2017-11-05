@@ -30,10 +30,12 @@ class ReferenceCollector extends ClassCodeVisitorSupport {
 
     def references = [] as Set
 
+    @Override
     void visitVariableExpression(VariableExpression expression) {
         references.add(expression.name)
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         // Check for method call on a method with the same name as the parameter.
         // This handles the case of a parameter being a closure that is then invoked within the method, e.g.:

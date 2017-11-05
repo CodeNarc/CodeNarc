@@ -39,6 +39,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
 
     private static final String ERROR_MSG = 'Returning null from a method that might return a Collection or Map'
 
+    @Override
     void visitMethodEx(MethodNode node) {
         if (methodReturnsCollection(node)) {
             // does this method ever return null?
@@ -93,6 +94,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
 class CollectionReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
+    @Override
     void visitReturnStatement(ReturnStatement statement) {
         expressionReturnsList(statement.expression)
         super.visitReturnStatement(statement)

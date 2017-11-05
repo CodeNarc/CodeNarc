@@ -160,6 +160,7 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
 //        assertSingleViolation(SOURCE, 2, 'if (obj != null && obj.prop)', '...')
 //    }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryNullCheckRule()
     }

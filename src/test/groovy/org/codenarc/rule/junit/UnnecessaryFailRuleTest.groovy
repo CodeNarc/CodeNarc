@@ -161,6 +161,7 @@ class UnnecessaryFailRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'Assert.fail()', 'Catching an exception and failing will hide the stack trace. It is better to rethrow the exception')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryFailRule()
     }

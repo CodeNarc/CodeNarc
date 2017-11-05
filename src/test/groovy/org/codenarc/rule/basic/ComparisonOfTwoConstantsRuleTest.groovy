@@ -121,6 +121,7 @@ class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:"return [a:false, b:true].compareTo(['a':34.5, b:Boolean.TRUE])", messageText:MESSAGE])
     }
 
+    @Override
     protected Rule createRule() {
         new ComparisonOfTwoConstantsRule()
     }

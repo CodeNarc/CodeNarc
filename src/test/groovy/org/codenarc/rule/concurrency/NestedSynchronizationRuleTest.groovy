@@ -232,6 +232,7 @@ class NestedSynchronizationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 8, 'synchronized(lock2) {}')
     }
 
+    @Override
     protected Rule createRule() {
         new NestedSynchronizationRule()
     }

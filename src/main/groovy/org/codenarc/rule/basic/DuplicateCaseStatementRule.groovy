@@ -35,6 +35,7 @@ class DuplicateCaseStatementRule extends AbstractAstVisitorRule {
 
 class DuplicateCaseStatementAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitSwitch(SwitchStatement statement) {
         def allElements = statement?.caseStatements?.findAll { it?.expression instanceof ConstantExpression }
         allElements.inject([]) { list, CaseStatement item  ->

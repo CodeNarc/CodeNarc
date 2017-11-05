@@ -62,6 +62,7 @@ class UnnecessaryInstantiationToGetClassRuleTest extends AbstractRuleTestCase {
                 'String instantiation with getClass() should be simplified to String.class')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryInstantiationToGetClassRule()
     }

@@ -79,6 +79,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
                 5, "assertEquals('message', foo(), null)")   
     }
 
+    @Override
     protected Rule createRule() {
         new UseAssertNullInsteadOfAssertEqualsRule()
     }

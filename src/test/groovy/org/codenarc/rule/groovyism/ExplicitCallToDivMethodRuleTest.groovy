@@ -52,6 +52,7 @@ class ExplicitCallToDivMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.div(b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToDivMethodRule()
     }

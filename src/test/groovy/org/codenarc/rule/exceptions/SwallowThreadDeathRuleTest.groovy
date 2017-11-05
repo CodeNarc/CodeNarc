@@ -107,6 +107,7 @@ class SwallowThreadDeathRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, '} catch (ThreadDeath td) {')
     }
 
+    @Override
     protected Rule createRule() {
         new SwallowThreadDeathRule()
     }

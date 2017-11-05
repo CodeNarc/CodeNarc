@@ -71,6 +71,7 @@ class LocaleSetDefaultRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'Locale.default', messageText:'Avoid explicit assignment to Locale.default'])
     }
 
+    @Override
     protected Rule createRule() {
         new LocaleSetDefaultRule()
     }

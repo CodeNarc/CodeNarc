@@ -43,6 +43,7 @@ class IllegalPackageReferenceRule extends AbstractAstVisitorRule {
     String packageNames = null
     Class astVisitorClass = IllegalPackageReferenceAstVisitor
 
+    @Override
     boolean isReady() {
         packageNames
     }

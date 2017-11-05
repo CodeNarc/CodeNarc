@@ -66,6 +66,7 @@ class UnnecessaryFloatInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Float(42.10f)', 'Can be rewritten as 42.1f')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryFloatInstantiationRule()
     }

@@ -240,6 +240,7 @@ class AbcMetricRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, ['run', '6'])
     }
 
+    @Override
     protected Rule createRule() {
         new AbcMetricRule()
     }

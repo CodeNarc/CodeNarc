@@ -62,6 +62,7 @@ class IllegalStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, ['string', TEXT])
     }
 
+    @Override
     protected Rule createRule() {
         new IllegalStringRule(string:TEXT)
     }

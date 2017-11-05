@@ -91,6 +91,7 @@ class HardCodedWindowsFileSeparatorRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new File("E:\\\\dir\\\\$foo")', 'The windows file separator is not portable')
     }
 
+    @Override
     protected Rule createRule() {
         new HardCodedWindowsFileSeparatorRule()
     }

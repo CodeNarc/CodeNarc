@@ -102,6 +102,7 @@ class InvertedIfElseRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'if (!x) {')
     }
 
+    @Override
     protected Rule createRule() {
         new InvertedIfElseRule()
     }

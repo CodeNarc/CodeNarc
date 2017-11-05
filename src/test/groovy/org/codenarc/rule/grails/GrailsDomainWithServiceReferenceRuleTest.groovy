@@ -89,6 +89,7 @@ class GrailsDomainWithServiceReferenceRuleTest extends AbstractRuleTestCase {
         "Domain class Book should not reference services (offending field: $fieldName)"
     }
 
+    @Override
     protected Rule createRule() {
         new GrailsDomainWithServiceReferenceRule()
     }

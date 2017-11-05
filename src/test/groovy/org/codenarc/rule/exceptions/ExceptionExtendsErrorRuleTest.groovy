@@ -52,6 +52,7 @@ class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase {
                 4, 'class MyError2 extends java.lang.Error', 'The class MyError2 extends Error, which is meant to be used only as a system exception')
     }
 
+    @Override
     protected Rule createRule() {
         new ExceptionExtendsErrorRule()
     }

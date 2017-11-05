@@ -296,6 +296,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
             [lineNumber:2, sourceLineText:'def x = new org.bad.Handler() { }', messageText:'org.bad'] )
     }
 
+    @Override
     protected Rule createRule() {
         new IllegalPackageReferenceRule()
     }

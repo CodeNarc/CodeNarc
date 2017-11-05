@@ -35,6 +35,7 @@ class VectorIsObsoleteRule_VectorTest extends AbstractClassReferenceRuleTestCase
         assert rule.name == 'VectorIsObsolete'
     }
 
+    @Override
     protected Rule createRule() {
         new VectorIsObsoleteRule()
     }

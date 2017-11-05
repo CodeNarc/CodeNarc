@@ -56,6 +56,7 @@ class SpaceAfterCatchRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'try { } catch(', messageText:MESSAGE])
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAfterCatchRule()
     }

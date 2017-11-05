@@ -77,6 +77,7 @@ class AbstractClassWithPublicConstructorRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'public MyClass(int count) { }', 'MyClass')
     }
 
+    @Override
     protected Rule createRule() {
         new AbstractClassWithPublicConstructorRule()
     }

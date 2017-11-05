@@ -27,6 +27,7 @@ class ThrowNullPointerExceptionRule extends AbstractAstVisitorRule {
     String name = 'ThrowNullPointerException'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonThrowAstVisitor(['NullPointerException', 'java.lang.NullPointerException'])
     }

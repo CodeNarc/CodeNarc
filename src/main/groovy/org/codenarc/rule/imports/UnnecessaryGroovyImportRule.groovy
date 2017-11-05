@@ -40,6 +40,7 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
     String name = 'UnnecessaryGroovyImport'
     int priority = 3
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         if (sourceCode.ast?.imports || sourceCode.ast?.starImports) {
             ImportUtil.getNonStaticImportsSortedByLineNumber(sourceCode).each { importNode ->

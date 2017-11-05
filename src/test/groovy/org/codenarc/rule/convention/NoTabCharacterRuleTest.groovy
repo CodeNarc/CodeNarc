@@ -50,6 +50,7 @@ class NoTabCharacterRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, 'The tab character is not allowed in source files')
     }
 
+    @Override
     protected Rule createRule() {
         new NoTabCharacterRule()
     }

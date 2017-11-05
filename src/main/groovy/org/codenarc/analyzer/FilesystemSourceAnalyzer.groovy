@@ -68,6 +68,7 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
      * @param ruleset - the RuleSet to apply to each of the (applicable) files in the source directories
      * @return the results from applying the RuleSet to all of the files in the source directories
      */
+    @Override
     Results analyze(RuleSet ruleSet) {
         assert baseDirectory
         assert ruleSet
@@ -79,6 +80,7 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
         reportResults
     }
 
+    @Override
     List getSourceDirectories() {
         [baseDirectory]
     }

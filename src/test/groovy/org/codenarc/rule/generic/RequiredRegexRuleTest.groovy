@@ -67,6 +67,7 @@ class RequiredRegexRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE) { v -> containsAll(v.message, ['regular expression', REGEX]) }
     }
 
+    @Override
     protected Rule createRule() {
         new RequiredRegexRule(regex:REGEX)
     }

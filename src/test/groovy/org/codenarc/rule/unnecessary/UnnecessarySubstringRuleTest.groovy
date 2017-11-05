@@ -62,6 +62,7 @@ class UnnecessarySubstringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'myVar.substring(1, 5)', 'The String.substring(int, int) method can be replaced with the subscript operator')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessarySubstringRule()
     }

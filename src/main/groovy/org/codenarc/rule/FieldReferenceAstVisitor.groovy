@@ -45,16 +45,19 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
         return unreferencedFieldMap.values()
     }
 
+    @Override
     void visitVariableExpression(VariableExpression expression) {
         unreferencedFieldMap.remove(expression.name)
         super.visitVariableExpression(expression)
     }
 
+    @Override
     void visitProperty(PropertyNode node) {
         unreferencedFieldMap.remove(node.name)
         super.visitProperty(node)
     }
 
+    @Override
     void visitPropertyExpression(PropertyExpression expression) {
         if (expression.objectExpression instanceof VariableExpression &&
             expression.objectExpression.name in ['this', currentClassNode.nameWithoutPackage] + outerClassNames &&
@@ -72,6 +75,7 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
         super.visitPropertyExpression(expression)
     }
 
+    @Override
     void visitMethodEx(MethodNode node) {
         if (node.parameters) {
             node.parameters.each { parameter ->
@@ -84,6 +88,7 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx(node)
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         // If there happens to be a method call on a method with the same name as the field.
         // This handles the case of defining a closure and then executing it, e.g.:

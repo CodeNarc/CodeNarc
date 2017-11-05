@@ -63,6 +63,7 @@ class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
                 5, 'Assert.fail()')   
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitFailWithoutMessageRule()
     }

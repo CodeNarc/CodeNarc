@@ -40,6 +40,7 @@ class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferen
         assert !rule.ready
     }
 
+    @Override
     protected Rule createRule() {
         new IllegalClassReferenceRule(classNames:'com.example.MyExampleClass')
     }

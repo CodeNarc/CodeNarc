@@ -99,6 +99,7 @@ class ExceptionNotThrownRuleTest extends AbstractRuleTestCase {
                 messageText:'The catch statement within class None constructs a [SystemException] but does not throw it'])
     }
 
+    @Override
     protected Rule createRule() {
         new ExceptionNotThrownRule()
     }

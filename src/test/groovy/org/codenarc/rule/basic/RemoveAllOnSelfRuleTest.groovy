@@ -66,6 +66,7 @@ class RemoveAllOnSelfRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'x.removeAll(x)')
     }
 
+    @Override
     protected Rule createRule() {
         new RemoveAllOnSelfRule()
     }

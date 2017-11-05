@@ -36,6 +36,7 @@ class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisito
     static final NEW_BIG_DECIMAL = /new +(java\.math\.)?BigDecimal\(/
 
     @SuppressWarnings('ExplicitCallToGetAtMethod')
+    @Override
     protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         def firstArgExpression = constructorCall.arguments?.expressions?.getAt(0)
         constructorCall.text =~ NEW_BIG_DECIMAL &&
@@ -43,7 +44,8 @@ class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisito
             (firstArgExpression.type.name in ['java.math.BigDecimal', 'java.lang.Double', 'double'])
     }
 
-    @Override protected String getViolationMessage(ConstructorCallExpression call) {
+    @Override
+    protected String getViolationMessage(ConstructorCallExpression call) {
         """Call to $call.text uses the double constructor and should probably be replaced with new ${call.type.name}("${call.arguments?.expressions?.first().text}")"""
     }
 }

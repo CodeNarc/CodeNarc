@@ -93,6 +93,7 @@ class InstanceofRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'boolean isRunnable = this instanceof Runnable', messageText:'The instanceof operator is used in class MyClass'])
     }
 
+    @Override
     protected Rule createRule() {
         new InstanceofRule()
     }

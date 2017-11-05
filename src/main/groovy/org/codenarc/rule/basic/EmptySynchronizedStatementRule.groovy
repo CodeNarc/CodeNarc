@@ -32,6 +32,7 @@ class EmptySynchronizedStatementRule extends AbstractAstVisitorRule {
 }
 
 class EmptySynchronizedStatementAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
         if (isFirstVisit(synchronizedStatement) && AstUtil.isEmptyBlock(synchronizedStatement.code)) {
             addViolation(synchronizedStatement, 'The synchronized statement is empty')

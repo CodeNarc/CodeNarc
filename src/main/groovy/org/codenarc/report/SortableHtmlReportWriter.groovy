@@ -52,6 +52,7 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
 
     String defaultOutputFile = DEFAULT_OUTPUT_FILE
 
+    @Override
     String toString() {
         "SortableHtmlReportWriter[outputFile=$outputFile, title=$title]"
     }

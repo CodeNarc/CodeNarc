@@ -48,6 +48,7 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
      * @param analysisContext - the AnalysisContext containing the analysis configuration information
      * @param results - the analysis results
      */
+    @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         assert analysisContext
         assert results

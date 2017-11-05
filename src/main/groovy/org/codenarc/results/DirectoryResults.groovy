@@ -53,6 +53,7 @@ class DirectoryResults implements Results {
     /**
      * @return the path to the file or directory associated with these results
      */
+    @Override
     String getPath() {
         path
     }
@@ -64,6 +65,7 @@ class DirectoryResults implements Results {
     /**
      * @return the List of child Results objects; may be empty
      */
+    @Override
     List getChildren() {
         children
     }
@@ -71,6 +73,7 @@ class DirectoryResults implements Results {
     /**
      * @return the List of all violations; may be empty
      */
+    @Override
     List getViolations() {
         children.inject([]) { violations, child -> violations.addAll(child.getViolations()); violations }
     }
@@ -119,6 +122,7 @@ class DirectoryResults implements Results {
     /**
      * @return false (this object does not represents the results for a single file)
      */
+    @Override
     boolean isFile() {
         false
     }
@@ -128,6 +132,7 @@ class DirectoryResults implements Results {
      * @param path - the path to search for
      * @return this Results object if a match is found, otherwise null
      */
+    @Override
     Results findResultsForPath(String path) {
         if (this.path == path) {
             return this
@@ -141,6 +146,7 @@ class DirectoryResults implements Results {
         null
     }
 
+    @Override
     String toString() {
         "DirectoryResults($path) $children"
     }

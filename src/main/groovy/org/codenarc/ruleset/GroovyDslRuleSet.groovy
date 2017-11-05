@@ -73,6 +73,7 @@ class GroovyDslRuleSet implements RuleSet {
     /**
      * @return a List of Rule objects
      */
+    @Override
     List getRules() {
         rules
     }

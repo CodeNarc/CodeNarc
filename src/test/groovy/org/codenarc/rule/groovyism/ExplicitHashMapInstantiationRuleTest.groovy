@@ -80,6 +80,7 @@ class ExplicitHashMapInstantiationRuleTest extends AbstractRuleTestCase {
                 4, 'def m(foo = new HashMap())')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitHashMapInstantiationRule()
     }

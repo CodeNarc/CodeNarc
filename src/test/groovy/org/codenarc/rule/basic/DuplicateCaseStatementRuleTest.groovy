@@ -80,6 +80,7 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 9, 'case "ab":')
     }
 
+    @Override
     protected Rule createRule() {
         new DuplicateCaseStatementRule()
     }

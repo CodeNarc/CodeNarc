@@ -110,6 +110,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'void buildSomething()', "Violation in class MyClass. The method 'buildSomething' is named like a builder method but has a void return type")
     }
 
+    @Override
     protected Rule createRule() {
         new BuilderMethodWithSideEffectsRule()
     }

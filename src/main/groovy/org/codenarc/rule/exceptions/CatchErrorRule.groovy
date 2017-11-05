@@ -27,6 +27,7 @@ class CatchErrorRule extends AbstractAstVisitorRule {
     String name = 'CatchError'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonCatchAstVisitor('Error')
     }

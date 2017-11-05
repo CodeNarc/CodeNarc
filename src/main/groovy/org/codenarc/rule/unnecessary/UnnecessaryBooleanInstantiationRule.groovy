@@ -38,10 +38,12 @@ class UnnecessaryBooleanInstantiationRule extends AbstractAstVisitorRule {
 class UnnecessaryBooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
     static final NEW_BOOLEAN = /new +(java\.lang\.)?Boolean\(/
 
+    @Override
     protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         constructorCall.text =~ NEW_BOOLEAN
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (isFirstVisit(methodCall)) {
             def args = AstUtil.getMethodArguments(methodCall)

@@ -38,6 +38,7 @@ class ClassNameRule extends AbstractAstVisitorRule {
     String regex = /([A-Z]\w*\$?)*/
     Class astVisitorClass = ClassNameAstVisitor
 
+    @Override
     void validate() {
         assert regex
     }

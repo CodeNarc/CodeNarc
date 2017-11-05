@@ -68,6 +68,7 @@ class PropertyNameRule extends AbstractAstVisitorRule {
     String ignorePropertyNames
     Class astVisitorClass = PropertyNameAstVisitor
 
+    @Override
     void validate() {
         assert regex
     }
@@ -75,6 +76,7 @@ class PropertyNameRule extends AbstractAstVisitorRule {
 
 class PropertyNameAstVisitor extends AbstractAstVisitor  {
 
+    @Override
     void visitProperty(PropertyNode node) {
         if (!new WildcardPattern(rule.ignorePropertyNames, false).matches(node.name)) {
             def re = rule.regex

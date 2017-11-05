@@ -27,6 +27,7 @@ class CatchThrowableRule extends AbstractAstVisitorRule {
     String name = 'CatchThrowable'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonCatchAstVisitor('Throwable')
     }

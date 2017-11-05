@@ -55,7 +55,8 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
 
     private static final BOOLEAN_COMPARISON_OPERATIONS = ['<', '>', '>=', '<=', '==', '!=', '==~']
     private static final BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
-    
+
+    @Override
     void visitTernaryExpression(TernaryExpression ternaryExpression) {
         if (isFirstVisit(ternaryExpression)) {
             def trueExpression = ternaryExpression.trueExpression

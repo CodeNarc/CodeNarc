@@ -225,6 +225,7 @@ class UnnecessaryDefInVariableDeclarationRuleTest extends AbstractRuleTestCase {
                 3, "def public variable3 = 'bad'", 'The def keyword is unneeded when a variable is marked public')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryDefInVariableDeclarationRule()
     }

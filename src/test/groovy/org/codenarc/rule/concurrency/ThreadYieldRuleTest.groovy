@@ -91,6 +91,7 @@ class ThreadYieldRuleTest extends AbstractRuleTestCase {
          assertNoViolations(SOURCE)
      }
 
+    @Override
      protected Rule createRule() {
          new ThreadYieldRule()
      }

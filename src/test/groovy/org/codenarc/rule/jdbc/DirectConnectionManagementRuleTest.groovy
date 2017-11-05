@@ -52,6 +52,7 @@ class DirectConnectionManagementRuleTest extends AbstractRuleTestCase {
                 3, 'java.sql.DriverManager.getConnection()', 'Using DriverManager.getConnection() violates the J2EE standards. Use the connection from the context instead')
     }
 
+    @Override
     protected Rule createRule() {
         new DirectConnectionManagementRule()
     }

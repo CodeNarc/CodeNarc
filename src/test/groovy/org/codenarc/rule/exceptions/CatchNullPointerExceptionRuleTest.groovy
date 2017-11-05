@@ -61,6 +61,7 @@ class CatchNullPointerExceptionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new CatchNullPointerExceptionRule()
     }

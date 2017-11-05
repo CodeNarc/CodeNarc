@@ -34,10 +34,12 @@ class IllegalRegexRule extends AbstractRule {
     int priority = 3
     String regex
 
+    @Override
     boolean isReady() {
         regex
     }
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         def matcher = sourceCode.getText() =~ regex
         while (matcher.find()) {

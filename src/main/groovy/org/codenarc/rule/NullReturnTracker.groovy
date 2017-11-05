@@ -33,6 +33,8 @@ class NullReturnTracker extends AbstractAstVisitor {
 
     def parent
     def errorMessage
+
+    @Override
     void visitReturnStatement(ReturnStatement statement) {
         def expression = statement.expression
         if (expressionReturnsNull(expression)) {
@@ -58,6 +60,7 @@ class NullReturnTracker extends AbstractAstVisitor {
         false
     }
 
+    @Override
     void visitClosureExpression(ClosureExpression expression) {
         parent.handleClosure(expression)
         // do not keep walking, let the parent start a new walk for this new scope

@@ -52,6 +52,7 @@ class ExplicitCallToMinusMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.minus(b)', 'Explicit call to a.minus(b) method can be rewritten as a - (b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToMinusMethodRule()
     }

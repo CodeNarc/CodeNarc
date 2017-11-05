@@ -218,6 +218,7 @@ class JUnitStyleAssertionsRuleTest extends AbstractRuleTestCase {
                 5, "Assert.assertEquals('message', x, y)")
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitStyleAssertionsRule()
     }

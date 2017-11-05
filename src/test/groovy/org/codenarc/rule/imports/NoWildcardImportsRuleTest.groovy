@@ -65,6 +65,7 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'import org.codenarc.rule.*'])  // todo: replace line number, source line and message
     }
 
+    @Override
     protected Rule createRule() {
         new NoWildcardImportsRule()
     }

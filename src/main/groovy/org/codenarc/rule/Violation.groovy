@@ -26,6 +26,7 @@ class Violation {
     String sourceLine
     String message
 
+    @Override
     String toString() {
         "Violation[rule=$rule, lineNumber=$lineNumber, sourceLine=$sourceLine, message=$message]"
     }

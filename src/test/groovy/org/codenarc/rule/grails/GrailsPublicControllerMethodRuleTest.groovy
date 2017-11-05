@@ -164,6 +164,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
         sourceCodePath = CONTROLLER_PATH
     }
 
+    @Override
     protected Rule createRule() {
         new GrailsPublicControllerMethodRule(enabled:true)
     }

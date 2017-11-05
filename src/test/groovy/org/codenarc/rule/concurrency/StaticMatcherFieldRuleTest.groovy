@@ -64,6 +64,7 @@ class StaticMatcherFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static java.util.regex.Matcher matcher2', 'Matcher instances are not thread safe. Wrap the Matcher field matcher2 in a ThreadLocal or make it an instance field')
     }
 
+    @Override
     protected Rule createRule() {
         new StaticMatcherFieldRule()
     }

@@ -111,6 +111,7 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'println x.compareTo(x)', MESSAGE)
     }
 
+    @Override
     protected Rule createRule() {
         new ComparisonWithSelfRule()
     }

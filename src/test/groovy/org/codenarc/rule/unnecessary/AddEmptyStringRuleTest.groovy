@@ -71,6 +71,7 @@ class AddEmptyStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'out << "" + count', VIOLATION_MESSAGE)
     }
 
+    @Override
     protected Rule createRule() {
         new AddEmptyStringRule()
     }

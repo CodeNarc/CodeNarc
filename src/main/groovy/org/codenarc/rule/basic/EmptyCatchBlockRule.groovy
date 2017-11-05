@@ -33,6 +33,7 @@ class EmptyCatchBlockRule extends AbstractAstVisitorRule {
 }
 
 class EmptyCatchBlockAstVisitor extends AbstractAstVisitor {
+    @Override
     void visitCatchStatement(CatchStatement catchStatement) {
         if (isFirstVisit(catchStatement) && isExceptionIgnored(catchStatement)) {
             addViolation(catchStatement, 'The catch block is empty')

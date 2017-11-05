@@ -110,6 +110,7 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Override
     protected Rule createRule() {
         BracesForTryCatchFinallyRule rule = new BracesForTryCatchFinallyRule()
         rule.validateCatch = true

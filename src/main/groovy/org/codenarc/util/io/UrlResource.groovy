@@ -38,6 +38,7 @@ class UrlResource implements Resource {
      * Open a FileInputStream on the file
      * @throws IOException - if an error occurs opening the InputStream
      */
+    @Override
     InputStream getInputStream() throws IOException {
         def url = new URL(path)
         url.openStream()
@@ -46,6 +47,7 @@ class UrlResource implements Resource {
     /**
      * @return true only if this resource exists and is accessible
      */
+    @Override
     boolean exists() {
         def inputStream
         try {

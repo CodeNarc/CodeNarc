@@ -49,6 +49,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
     private Set closureFieldExpressions
     private nestedBlockDepth = 0
 
+    @Override
     void visitClassEx(ClassNode classNode) {
         addClosureFields(classNode)
         super.visitClassEx(classNode)
@@ -64,6 +65,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
         }
     }
 
+    @Override
     void visitBlockStatement(BlockStatement block) {
         if (isFirstVisit(block) && block in blocksToProcess) {
             handleNestedNode(block) { super.visitBlockStatement(block) }
@@ -73,12 +75,14 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
         }
     }
 
+    @Override
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
         addBlockIfNotEmpty(tryCatchStatement.tryStatement)
         addBlockIfNotEmpty(tryCatchStatement.finallyStatement)
         super.visitTryCatchFinally(tryCatchStatement)
     }
 
+    @Override
     void visitCatchStatement(CatchStatement statement) {
         handleNestedNode(statement) { super.visitCatchStatement(statement) }
     }
@@ -89,6 +93,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
         }
     }
 
+    @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement)) {
             addBlockIfNotEmpty(ifStatement.ifBlock)
@@ -97,22 +102,27 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
         super.visitIfElse(ifStatement)
     }
 
+    @Override
     void visitWhileLoop(WhileStatement whileStatement) {
         handleNestedNode(whileStatement) { super.visitWhileLoop(whileStatement) }
     }
 
+    @Override
     void visitForLoop(ForStatement forStatement) {
         handleNestedNode(forStatement) { super.visitForLoop(forStatement) }
     }
 
+    @Override
     void visitCaseStatement(CaseStatement statement) {
         handleNestedNode(statement) { super.visitCaseStatement(statement) }
     }
 
+    @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         handleNestedNode(statement) { super.visitSynchronizedStatement(statement) }
     }
 
+    @Override
     void visitClosureExpression(ClosureExpression expression) {
         if (closureFieldExpressions.contains(expression)) {
             super.visitClosureExpression(expression)

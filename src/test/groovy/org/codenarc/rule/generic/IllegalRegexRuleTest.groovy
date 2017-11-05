@@ -86,6 +86,7 @@ class IllegalRegexRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '@author Joe', 'abc123')
     }
 
+    @Override
     protected Rule createRule() {
         new IllegalRegexRule(regex:REGEX)
     }

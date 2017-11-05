@@ -41,6 +41,7 @@ class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 
     private static final String ERROR_MSG = 'Returning null from a method that might return an Array'
 
+    @Override
     void visitMethodEx(MethodNode node) {
         if (methodReturnsArray(node)) {
             // does this method ever return null?
@@ -77,6 +78,7 @@ class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 class ArrayReturnTracker extends AbstractAstVisitor {
     def callbackFunction
 
+    @Override
     void visitReturnStatement(ReturnStatement statement) {
 
         callBackForArrayReturns(statement.expression)

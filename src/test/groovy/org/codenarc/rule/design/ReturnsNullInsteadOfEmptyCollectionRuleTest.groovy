@@ -297,6 +297,7 @@ class ReturnsNullInsteadOfEmptyCollectionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 8, 'null')
     }
 
+    @Override
     protected Rule createRule() {
         new ReturnsNullInsteadOfEmptyCollectionRule()
     }

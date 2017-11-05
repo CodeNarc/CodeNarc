@@ -80,6 +80,7 @@ class ExplicitLinkedHashMapInstantiationRuleTest extends AbstractRuleTestCase {
                 4, 'def m(foo = new LinkedHashMap())', 'LinkedHashMap objects are better instantiated using the form "[:]"')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitLinkedHashMapInstantiationRule()
     }

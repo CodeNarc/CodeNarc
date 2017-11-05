@@ -158,6 +158,7 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, 'object = createObject()', 'Double checked locking detected for variable object. replace with more robust lazy initialization')
     }
 
+    @Override
     protected Rule createRule() {
         new DoubleCheckedLockingRule()
     }

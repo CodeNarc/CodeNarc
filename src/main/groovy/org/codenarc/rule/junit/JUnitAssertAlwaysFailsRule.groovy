@@ -52,6 +52,7 @@ class JUnitAssertAlwaysFailsRule extends AbstractAstVisitorRule {
 
 class JUnitAssertAlwaysFailsAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         def isMatch =
             JUnitUtil.isAssertCallWithLiteralValue(methodCall, 'assertTrue', false) ||

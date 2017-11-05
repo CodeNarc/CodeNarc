@@ -58,6 +58,7 @@ class UnnecessaryIntegerInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Integer(42)', 'Can be rewritten as 42 or 42i')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryIntegerInstantiationRule()
     }

@@ -94,6 +94,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
                 'The field myProperty has protected visibility but the enclosing class MyClass is marked final')
     }
 
+    @Override
     protected Rule createRule() {
         new FinalClassWithProtectedMemberRule()
     }

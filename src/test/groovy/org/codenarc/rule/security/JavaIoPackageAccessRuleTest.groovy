@@ -104,6 +104,7 @@ class JavaIoPackageAccessRuleTest extends AbstractRuleTestCase {
                 3, 'FileSystem.fileSystem.delete(aFile)', 'The use of java.io.FileSystem violates the Enterprise Java Bean specification')
     }
 
+    @Override
     protected Rule createRule() {
         new JavaIoPackageAccessRule()
     }

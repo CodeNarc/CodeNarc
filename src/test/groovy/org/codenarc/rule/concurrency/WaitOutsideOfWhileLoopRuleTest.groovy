@@ -85,6 +85,7 @@ class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'data.wait()')
     }
 
+    @Override
     protected Rule createRule() {
         new WaitOutsideOfWhileLoopRule()
     }

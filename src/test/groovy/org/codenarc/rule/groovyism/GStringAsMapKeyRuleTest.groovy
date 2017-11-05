@@ -71,6 +71,7 @@ class GStringAsMapKeyRuleTest extends AbstractRuleTestCase {
         assertSingleViolation( SOURCE, 3, '["outer $x" ' )
     }
 
+    @Override
     protected Rule createRule() {
         new GStringAsMapKeyRule()
     }

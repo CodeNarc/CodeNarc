@@ -60,6 +60,7 @@ class LongLiteralWithLowerCaseLRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = 222l', 'The literal 222l should be rewritten 222L')
     }
 
+    @Override
     protected Rule createRule() {
         new LongLiteralWithLowerCaseLRule()
     }

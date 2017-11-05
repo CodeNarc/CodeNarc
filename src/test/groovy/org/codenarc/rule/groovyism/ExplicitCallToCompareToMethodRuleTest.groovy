@@ -57,6 +57,7 @@ class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.compareTo(b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToCompareToMethodRule()
     }

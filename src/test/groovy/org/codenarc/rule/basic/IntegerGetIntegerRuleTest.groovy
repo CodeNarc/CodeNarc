@@ -52,6 +52,7 @@ class IntegerGetIntegerRuleTest extends AbstractRuleTestCase {
                 3, 'Integer.getInteger(value, radix)', 'Integer.getInteger(String, Integer) is a confusing API for reading System properties. Prefer the System.getProperty(String) API.')
     }
 
+    @Override
     protected Rule createRule() {
         new IntegerGetIntegerRule()
     }

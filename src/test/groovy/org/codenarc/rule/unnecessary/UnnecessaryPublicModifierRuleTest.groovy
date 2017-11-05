@@ -156,6 +156,7 @@ class UnnecessaryPublicModifierRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public MyClass(T t, K k) { }', 'The public keyword is unnecessary for constructors')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryPublicModifierRule()
     }

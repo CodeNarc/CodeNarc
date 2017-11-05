@@ -99,6 +99,7 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
         )
     }
     
+    @Override
     protected Rule createRule() {
         new UnsafeImplementationAsMapRule()
     }

@@ -53,6 +53,7 @@ class ClassForNameRuleTest extends AbstractRuleTestCase {
                 3, 'Class.forName(aClassName, true, aClassLoader)', 'Methods calls to Class.forName(...) can create resource leaks and should almost always be replaced with calls to ClassLoader.loadClass(...)')
     }
 
+    @Override
     protected Rule createRule() {
         new ClassForNameRule()
     }

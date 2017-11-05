@@ -54,6 +54,7 @@ class CollectAllIsDeprecatedRuleTest extends AbstractRuleTestCase {
                 4, 'list.collectAll', CollectAllIsDeprecatedRule.MESSAGE)
     }
 
+    @Override
     protected Rule createRule() {
         new CollectAllIsDeprecatedRule()
     }

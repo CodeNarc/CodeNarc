@@ -125,6 +125,7 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitLostTestRule()
     }

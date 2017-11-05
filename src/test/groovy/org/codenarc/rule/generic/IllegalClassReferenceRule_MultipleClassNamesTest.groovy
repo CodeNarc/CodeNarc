@@ -30,6 +30,7 @@ class IllegalClassReferenceRule_MultipleClassNamesTest extends AbstractClassRefe
 
     final String className = 'com.example.MyExampleClass'
 
+    @Override
     protected Rule createRule() {
         new IllegalClassReferenceRule(classNames:'org.example.OtherClass,com.example.MyExampleClass, UnrelatedClass')
     }

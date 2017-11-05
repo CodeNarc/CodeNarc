@@ -30,14 +30,17 @@ class VirtualResults implements Results {
         this.violations = violations
     }
 
+    @Override
     List getViolations() {
         return new ArrayList(violations)
     }
 
+    @Override
     String getPath() {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }
 
+    @Override
     List getChildren() {
         throw new UnsupportedOperationException('Not supported on virtual results')
     }

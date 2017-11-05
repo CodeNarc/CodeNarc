@@ -34,6 +34,7 @@ class PrintStackTraceRule extends AbstractAstVisitorRule {
 
 class PrintStackTraceAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (AstUtil.isMethodNamed(methodCall, 'printStackTrace', 0)) {
             addViolation(methodCall, 'printStackTrace() should be replaced with something more robust')
