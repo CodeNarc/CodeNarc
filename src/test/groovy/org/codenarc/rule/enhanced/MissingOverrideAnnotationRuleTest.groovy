@@ -31,7 +31,7 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'MissingOverrideAnnotation'
-        assert rule.compilerPhase == Phases.CANONICALIZATION
+        assert rule.compilerPhase == Phases.SEMANTIC_ANALYSIS
     }
 
     @Test
