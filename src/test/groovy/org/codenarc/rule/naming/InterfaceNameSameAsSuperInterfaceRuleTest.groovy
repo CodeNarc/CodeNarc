@@ -69,6 +69,7 @@ class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'interface MyInterface extends other.MyInterface', messageText:'Interface com.example.MyInterface has the same simple name as its super-interface other.MyInterface'] )
     }
 
+    @Override
     protected Rule createRule() {
         new InterfaceNameSameAsSuperInterfaceRule()
     }

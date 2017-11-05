@@ -32,6 +32,7 @@ class IllegalSubclassRule extends AbstractAstVisitorRule {
     Class astVisitorClass = IllegalSubclassAstVisitor
     String superclassNames
 
+    @Override
     boolean isReady() {
         superclassNames
     }

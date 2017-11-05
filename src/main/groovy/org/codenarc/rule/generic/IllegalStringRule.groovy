@@ -35,10 +35,12 @@ class IllegalStringRule extends AbstractRule {
     int priority = 2
     String string
 
+    @Override
     boolean isReady() {
         string
     }
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         if (sourceCode.getText().contains(string)) {
             violations.add(new Violation(rule:this, message:"Match found for illegal string [$string]"))

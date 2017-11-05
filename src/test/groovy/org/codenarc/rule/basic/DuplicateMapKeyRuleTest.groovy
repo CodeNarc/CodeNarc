@@ -92,6 +92,7 @@ class DuplicateMapKeyRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 4, 'planId:"", errorFlag:false ]', "Key 'errorFlag' is duplicated."
     }
 
+    @Override
     protected Rule createRule() {
         new DuplicateMapKeyRule()
     }

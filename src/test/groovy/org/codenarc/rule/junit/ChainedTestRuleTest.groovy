@@ -94,6 +94,7 @@ class ChainedTestRuleTest extends AbstractRuleTestCase {
                 6, 'this.testBar()', 'The test method testBar() is being invoked explicitly from within a unit test. Tests should be isolated and not dependent on one another')
     }
 
+    @Override
     protected Rule createRule() {
         new ChainedTestRule()
     }

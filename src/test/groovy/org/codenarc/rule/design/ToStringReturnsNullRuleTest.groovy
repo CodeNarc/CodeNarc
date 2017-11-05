@@ -131,6 +131,7 @@ class ToStringReturnsNullRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new ToStringReturnsNullRule()
     }

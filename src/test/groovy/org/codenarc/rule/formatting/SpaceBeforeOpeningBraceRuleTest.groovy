@@ -258,6 +258,7 @@ c        '''
         ''')
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceBeforeOpeningBraceRule()
     }

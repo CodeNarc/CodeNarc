@@ -64,6 +64,7 @@ class ImportFromSunPackagesRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'import sun.*', 'The file imports sun.*, which is not portable and likely to change')
     }
 
+    @Override
     protected Rule createRule() {
         new ImportFromSunPackagesRule()
     }

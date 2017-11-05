@@ -313,6 +313,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
         sourceCodeName = FILENAME
     }
 
+    @Override
     protected Rule createRule() {
         new FakePathRule(name:NAME, priority:PRIORITY)
     }
@@ -320,6 +321,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
 }
 
 class NotReadyRule extends FakePathRule {
+    @Override
     boolean isReady() {
         false
     }

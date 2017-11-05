@@ -42,6 +42,7 @@ class PropertiesFileRuleRegistry implements RuleRegistry {
      * @param ruleName - the rule name
      * @return the associated Rule Class or null if no Rule has been registered for the specified name
      */
+    @Override
     Class getRuleClass(String ruleName) {
         String className = properties[ruleName]
         return className ? PropertiesFileRuleRegistry.getClassLoader().loadClass(className) : null

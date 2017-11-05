@@ -28,6 +28,7 @@ class ImportFromSamePackageRule extends AbstractRule {
     String name = 'ImportFromSamePackage'
     int priority = 3
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         def hasImports = sourceCode.ast?.imports || sourceCode.ast?.starImports
         if (hasImports && sourceCode.ast.packageName) {

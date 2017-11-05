@@ -18,6 +18,7 @@ package org.codenarc.rule.enhanced
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.control.Phases
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
@@ -54,19 +55,41 @@ class MissingOverrideAnnotationAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitMethodEx(MethodNode node) {
         if (!isAnnotatedWithOverride(node)) {
-            def matchingSuperClassMethod = findMatchingSuperClassMethod(node)
-            if (matchingSuperClassMethod) {
-                def declaringClassName = matchingSuperClassMethod.declaringClass.name
-                addViolation(node, "Method '$node.name' is overriding a method in '$declaringClassName' but is not annotated with @Override.")
+            def allPossibleParameterSignatures = generateAllPossibleParameterSignatures(node)
+            def matchingSuperClassMethods = allPossibleParameterSignatures.findResults { parameters ->
+                findMatchingSuperClassMethod(node.name, parameters)
+            }
+            if (matchingSuperClassMethods.size() == allPossibleParameterSignatures.size()) {
+                def declaringClassNames = uniqueAndSortedDeclaringClassNames(matchingSuperClassMethods)
+                addViolation(node, "Method '$node.name' is overriding a method in $declaringClassNames but is not annotated with @Override.")
             }
         }
     }
 
-    private MethodNode findMatchingSuperClassMethod(MethodNode node) {
+    private String uniqueAndSortedDeclaringClassNames(Collection<MethodNode> superClassMethods) {
+        def declaringClassNames = superClassMethods*.declaringClass*.name.unique().sort()
+        declaringClassNames.collect { "'$it'" }.join(', ')
+    }
+
+    private List<List<Parameter>> generateAllPossibleParameterSignatures(MethodNode methodNode) {
+        def defaultValueCount = methodNode.parameters.count { it.hasInitialExpression() }
+        (0..defaultValueCount).collect { defaultValuesToRemove ->
+            def parameters = methodNode.parameters.toList()
+            for(int i = parameters.size() - 1; i >= 0 && defaultValuesToRemove > 0; i--) {
+                if (parameters[i].hasInitialExpression()) {
+                    parameters.remove(i)
+                    defaultValuesToRemove--
+                }
+            }
+            parameters
+        }
+    }
+
+    private MethodNode findMatchingSuperClassMethod(String name, List<Parameter> parameters) {
         def superClassMethods = superClassMethodsDeque.peek()
-        def methodsWithSameName = superClassMethods[node.name]
+        def methodsWithSameName = superClassMethods[name]
         methodsWithSameName.find { superClassMethodNode ->
-            node.parameters*.type == superClassMethodNode.parameters*.type
+            parameters*.type == superClassMethodNode.parameters*.type
         }
     }
 

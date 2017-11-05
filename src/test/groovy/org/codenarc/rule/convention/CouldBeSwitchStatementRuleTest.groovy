@@ -232,6 +232,7 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase {
             [lineNumber:23, sourceLineText: 'if (p.value instanceof Integer) {', messageText: rule.errorMessage])
     }
 
+    @Override
     protected Rule createRule() {
         new CouldBeSwitchStatementRule()
     }

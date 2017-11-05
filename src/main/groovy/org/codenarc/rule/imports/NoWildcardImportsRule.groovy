@@ -27,6 +27,7 @@ class NoWildcardImportsRule extends AbstractImportRule {
     String name = 'NoWildcardImports'
     int priority = 3
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         eachImportLine(sourceCode) { int lineNumber, String line ->
             if (line.trim().endsWith('.*')) {

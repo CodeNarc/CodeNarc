@@ -220,6 +220,7 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitPublicNonTestMethodRule()
     }

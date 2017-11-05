@@ -104,6 +104,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new ConstantTernaryExpressionRule()
     }

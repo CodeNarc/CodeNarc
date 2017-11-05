@@ -33,6 +33,7 @@ class DefaultResourceFactory implements ResourceFactory {
      *      (e.g., "file:", "http:")
      * @throws IOException - if an error occurs opening the InputStream
      */
+    @Override
     Resource getResource(String path) throws IOException {
         assert path
         if (path.startsWith(CLASSPATH_PREFIX)) {

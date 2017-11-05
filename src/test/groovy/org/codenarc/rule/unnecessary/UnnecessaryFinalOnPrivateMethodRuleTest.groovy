@@ -50,6 +50,7 @@ class UnnecessaryFinalOnPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'private final method()', "The 'method' method is both private and final")
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryFinalOnPrivateMethodRule()
     }

@@ -57,6 +57,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         }
     }
 
+    @Override
     void visitClassEx(ClassNode classNode) {
         def gmetricsSourceCode = new GMetricsSourceCodeAdapter(this.sourceCode)
         def classMetricResult = getMetric().applyToClass(classNode, gmetricsSourceCode)

@@ -81,6 +81,7 @@ class EmptyElseBlockRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new EmptyElseBlockRule()
     }

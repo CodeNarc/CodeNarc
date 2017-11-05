@@ -32,6 +32,7 @@ class EmptyElseBlockRule extends AbstractAstVisitorRule {
 }
 
 class EmptyElseBlockAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && AstUtil.isEmptyBlock(ifStatement.elseBlock)) {
             addViolation(ifStatement.elseBlock, 'The else block is empty')

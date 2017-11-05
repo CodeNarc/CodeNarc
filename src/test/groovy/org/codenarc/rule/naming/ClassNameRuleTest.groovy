@@ -130,6 +130,7 @@ class ClassNameRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new ClassNameRule()
     }

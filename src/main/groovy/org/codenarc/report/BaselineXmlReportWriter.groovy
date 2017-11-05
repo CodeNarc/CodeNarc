@@ -31,6 +31,7 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
     String title
     String defaultOutputFile = 'CodeNarcBaselineViolations.xml'
 
+    @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         assert analysisContext
         assert results

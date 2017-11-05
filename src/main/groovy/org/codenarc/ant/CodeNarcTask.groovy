@@ -100,6 +100,7 @@ class CodeNarcTask extends Task {
     /**
      * Execute this Ant Task
      */
+    @Override
     void execute() throws BuildException {
         assert ruleSetFiles
         assert fileSets

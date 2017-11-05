@@ -214,6 +214,7 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase {
                             4, 'def public field3', 'The def keyword is unneeded when a field is marked public')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryDefInFieldDeclarationRule()
     }

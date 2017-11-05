@@ -63,6 +63,7 @@ class InsecureRandomRuleTest extends AbstractRuleTestCase {
             3, 'new java.util.Random()', 'Using Random is insecure. Use SecureRandom instead')
     }
 
+    @Override
     protected Rule createRule() {
         new InsecureRandomRule()
     }

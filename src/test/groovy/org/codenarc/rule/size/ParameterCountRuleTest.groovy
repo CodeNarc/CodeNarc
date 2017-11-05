@@ -253,6 +253,7 @@ class ParameterCountRuleTest extends AbstractRuleTestCase {
         return inlineViolation("Number of parameters in ${name} exceeds maximum allowed (${rule.maxParameters}).")
     }
 
+    @Override
     protected Rule createRule() {
         new ParameterCountRule()
     }

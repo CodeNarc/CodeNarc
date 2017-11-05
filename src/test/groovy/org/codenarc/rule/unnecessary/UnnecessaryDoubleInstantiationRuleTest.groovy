@@ -58,6 +58,7 @@ class UnnecessaryDoubleInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Double(42.10d)', 'Can be rewritten as 42.1d')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryDoubleInstantiationRule()
     }

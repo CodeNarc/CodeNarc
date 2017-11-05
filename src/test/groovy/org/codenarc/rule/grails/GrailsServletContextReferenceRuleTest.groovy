@@ -117,6 +117,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
         sourceCodePath = CONTROLLER_PATH
     }
 
+    @Override
     protected Rule createRule() {
         new GrailsServletContextReferenceRule()
     }

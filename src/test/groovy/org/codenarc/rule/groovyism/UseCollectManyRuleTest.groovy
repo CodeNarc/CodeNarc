@@ -54,6 +54,7 @@ class UseCollectManyRuleTest extends AbstractRuleTestCase {
         assertSingleViolation SOURCE, 3, 'l.collect{ [it, it*2] }.flatten()', UseCollectManyRule.MESSAGE
     }
 
+    @Override
     protected Rule createRule() {
         new UseCollectManyRule()
     }

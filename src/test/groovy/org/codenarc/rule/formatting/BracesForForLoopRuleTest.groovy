@@ -109,6 +109,7 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new BracesForForLoopRule()
     }

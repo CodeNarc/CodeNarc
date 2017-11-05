@@ -37,6 +37,7 @@ class SynchronizedOnThisRule extends AbstractAstVisitorRule {
 
 class SynchronizedOnThisAstVisitor extends AbstractAstVisitor  {
 
+    @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (isFirstVisit(statement)) {
             if (statement.getExpression() instanceof VariableExpression) {

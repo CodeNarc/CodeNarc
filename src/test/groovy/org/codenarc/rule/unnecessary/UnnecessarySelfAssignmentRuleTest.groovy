@@ -77,6 +77,7 @@ class UnnecessarySelfAssignmentRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.b.c = a.b.c', 'Assignment a variable to itself should be unnecessary. Remove this dead code')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessarySelfAssignmentRule()
     }

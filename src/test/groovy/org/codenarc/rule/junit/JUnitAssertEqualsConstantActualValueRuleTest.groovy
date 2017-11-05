@@ -109,6 +109,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
     private static final String VIOLATION_MESSAGE = 'Found `assertEquals` with literal or constant `actual` parameter. ' +
         'Most likely it was intended to be the `expected` value.'
 
+    @Override
     protected Rule createRule() {
         new JUnitAssertEqualsConstantActualValueRule()
     }

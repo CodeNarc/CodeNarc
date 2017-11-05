@@ -81,6 +81,7 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
                 4, 'def m(foo = new LinkedList())', 'LinkedList objects are better instantiated using the form "[] as Queue"')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitLinkedListInstantiationRule()
     }

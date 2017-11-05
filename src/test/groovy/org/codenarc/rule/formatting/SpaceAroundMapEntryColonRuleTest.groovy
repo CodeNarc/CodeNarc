@@ -117,6 +117,7 @@ class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase {
             " is not $precededOrFollowed by a match for regular expression [$regex]")
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAroundMapEntryColonRule()
     }

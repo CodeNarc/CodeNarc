@@ -100,6 +100,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 5, "+ 'world'", "String concatenation in class MyClass can be joined into the literal 'Hello\\n                      world'")
     }
 
+    @Override
     protected Rule createRule() {
         new ConsecutiveStringConcatenationRule()
     }

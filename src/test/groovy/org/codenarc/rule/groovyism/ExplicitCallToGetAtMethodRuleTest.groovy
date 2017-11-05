@@ -52,6 +52,7 @@ class ExplicitCallToGetAtMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.getAt(b)', 'Explicit call to a.getAt(b) method can be rewritten as a[(b)]')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToGetAtMethodRule()
     }

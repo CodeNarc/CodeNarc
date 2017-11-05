@@ -73,6 +73,7 @@ class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
                 'The interface ConstantInterface has only fields and no methods defined')
     }
 
+    @Override
     protected Rule createRule() {
         new ConstantsOnlyInterfaceRule()
     }

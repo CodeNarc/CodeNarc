@@ -38,6 +38,7 @@ class GrailsDomainHasToStringRule extends AbstractAstVisitorRule {
 
 class GrailsDomainHasToStringAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitClassComplete(ClassNode classNode) {
         if (isFirstVisit(classNode) && !hasAnnotation(classNode, 'ToString') && !hasAnnotation(classNode, 'Canonical')) {
             if (!classNode.methods.any { isMethodNode(it, 'toString', 0) }) {

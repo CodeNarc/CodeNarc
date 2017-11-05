@@ -245,6 +245,7 @@ class StatelessClassRuleTest extends AbstractRuleTestCase {
         sourceCodePath = "/$sourceCodeName"
     }
 
+    @Override
     protected Rule createRule() {
         new StatelessClassRule()
     }

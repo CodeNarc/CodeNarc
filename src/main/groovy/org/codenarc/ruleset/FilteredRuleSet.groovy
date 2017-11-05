@@ -67,6 +67,7 @@ class FilteredRuleSet implements RuleSet {
      * Return the List of Rules that match the include(s) (if specified) AND DO NOT match any exlcude(s) specified.
      * @return the filtered List of Rule objects. The returned List is immutable.
      */
+    @Override
     List getRules() {
         def filteredRules = []
         rules.each { rule ->

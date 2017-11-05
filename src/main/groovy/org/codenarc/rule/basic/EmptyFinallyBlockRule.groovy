@@ -32,6 +32,7 @@ class EmptyFinallyBlockRule extends AbstractAstVisitorRule {
 }
 
 class EmptyFinallyBlockAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
         if (isFirstVisit(tryCatchStatement) && AstUtil.isEmptyBlock(tryCatchStatement.finallyStatement)) {
             addViolation(tryCatchStatement.finallyStatement, 'The finally block is empty')

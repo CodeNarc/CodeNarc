@@ -79,6 +79,7 @@ class UnusedArrayRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE, [lineNumber: 3, sourceLineText: 'new Object[2]'])
     }
 
+    @Override
     protected Rule createRule() {
         new UnusedArrayRule()
     }

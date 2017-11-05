@@ -101,6 +101,7 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
         this.unusedPrivateMethods = unusedPrivateMethods
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression expression) {
         classNames.each {
             if (isMethodCall(expression, it)) {
@@ -115,6 +116,7 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression(expression)
     }
 
+    @Override
     void visitMethodPointerExpression(MethodPointerExpression methodPointerExpression) {
         if (methodPointerExpression.expression instanceof VariableExpression &&
                 classNames.contains(methodPointerExpression.expression.name) &&

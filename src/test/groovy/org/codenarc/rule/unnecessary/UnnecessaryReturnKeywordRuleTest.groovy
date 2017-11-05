@@ -78,6 +78,7 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
                 7, 'return it')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryReturnKeywordRule()
     }

@@ -27,6 +27,7 @@ class JdbcStatementReferenceRule_PreparedStatementTest extends AbstractClassRefe
 
     final String className = 'java.sql.PreparedStatement'
 
+    @Override
     protected Rule createRule() {
         new JdbcStatementReferenceRule()
     }

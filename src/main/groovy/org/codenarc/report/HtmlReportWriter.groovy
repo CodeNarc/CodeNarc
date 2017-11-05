@@ -48,6 +48,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
     String defaultOutputFile = DEFAULT_OUTPUT_FILE
     boolean includeSummaryByPackage = true
 
+    @Override
     String toString() {
         "HtmlReportWriter[outputFile=$outputFile, title=$title]"
     }
@@ -56,6 +57,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
     // Internal Helper Methods
     //--------------------------------------------------------------------------
 
+    @Override
     protected buildBodySection(AnalysisContext analysisContext, results) {
         return {
             body {

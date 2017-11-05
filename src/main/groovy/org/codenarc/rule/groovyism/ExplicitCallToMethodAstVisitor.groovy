@@ -36,6 +36,7 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractMethodCallExpressi
         this.methodName = methodName
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (!AstUtil.isSafe(call) && !AstUtil.isSpreadSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
             boolean isAllowedCallOnThis = rule.ignoreThisReference && AstUtil.isMethodCallOnObject(call, 'this')

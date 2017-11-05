@@ -47,6 +47,7 @@ class CompositeRuleSet implements RuleSet {
     /**
      * @return a List of Rule objects. The returned List is immutable.
      */
+    @Override
     List getRules() {
         rules.asImmutable()
     }

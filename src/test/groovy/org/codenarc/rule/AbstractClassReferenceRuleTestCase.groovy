@@ -37,6 +37,7 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
     /**
      * @return an initialized rule instance
      */
+    @Override
     protected abstract Rule createRule()
 
     //------------------------------------------------------------------------------------

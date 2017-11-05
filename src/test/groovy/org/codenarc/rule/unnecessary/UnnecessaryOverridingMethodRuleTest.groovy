@@ -83,6 +83,7 @@ class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'void setVisible(boolean value1, boolean value2, boolean value3)')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryOverridingMethodRule()
     }

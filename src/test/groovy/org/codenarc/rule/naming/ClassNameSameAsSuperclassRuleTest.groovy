@@ -79,6 +79,7 @@ class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'class MyClass extends other.MyClass', messageText:'Class com.example.MyClass has the same simple name as its superclass other.MyClass'] )
     }
 
+    @Override
     protected Rule createRule() {
         new ClassNameSameAsSuperclassRule()
     }

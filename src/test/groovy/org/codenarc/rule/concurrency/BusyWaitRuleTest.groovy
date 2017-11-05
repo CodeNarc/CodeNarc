@@ -88,6 +88,7 @@ class BusyWaitRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'sleep(1000)', 'Busy wait detected. Switch the usage of Thread.sleep() to a lock or gate from java.util.concurrent')
     }
 
+    @Override
     protected Rule createRule() {
         new BusyWaitRule()
     }

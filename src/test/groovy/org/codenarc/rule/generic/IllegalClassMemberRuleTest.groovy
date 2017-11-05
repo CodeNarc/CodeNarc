@@ -242,6 +242,7 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
 
 //---------------
 
+    @Override
     protected Rule createRule() {
         new IllegalClassMemberRule(applyToClassNames:'*')
     }

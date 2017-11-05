@@ -372,6 +372,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 7, 'qux {', 'The nested block depth is 6')
     }
 
+    @Override
     protected Rule createRule() {
         new NestedBlockDepthRule()
     }

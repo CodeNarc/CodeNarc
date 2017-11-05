@@ -36,6 +36,7 @@ class UnnecessaryCollectionCallAstVisitor extends AbstractMethodCallExpressionVi
 
     private static final List USELESS_METHOD_NAMES = ['retainAll', 'containsAll']
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
         if (USELESS_METHOD_NAMES.contains(call.method.text)) {

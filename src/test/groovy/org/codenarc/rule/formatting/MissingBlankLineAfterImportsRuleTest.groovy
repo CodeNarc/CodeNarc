@@ -59,6 +59,7 @@ class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'class MyClass {', 'Missing blank line after imports in file null')
     }
 
+    @Override
     protected Rule createRule() {
         new MissingBlankLineAfterImportsRule()
     }

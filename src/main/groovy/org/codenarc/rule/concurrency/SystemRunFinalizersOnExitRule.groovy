@@ -37,6 +37,7 @@ class SystemRunFinalizersOnExitRule extends AbstractAstVisitorRule {
 
 class SystemRunFinalizersOnExitAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         if (call.objectExpression instanceof VariableExpression) {
             if (AstUtil.isMethodCall(call, 'System', 'runFinalizersOnExit', 1)) {

@@ -45,6 +45,7 @@ class JdbcStatementReferenceRule_StatementTest extends AbstractClassReferenceRul
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new JdbcStatementReferenceRule()
     }

@@ -74,6 +74,7 @@ class UnnecessaryInstanceOfCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '!var instanceof Boolean', "The result of '!(var)' will always be a Boolean")
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryInstanceOfCheckRule()
     }

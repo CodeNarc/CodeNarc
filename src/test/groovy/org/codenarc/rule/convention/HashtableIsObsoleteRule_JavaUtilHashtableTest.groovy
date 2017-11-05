@@ -35,6 +35,7 @@ class HashtableIsObsoleteRule_JavaUtilHashtableTest extends AbstractClassReferen
         assert rule.name == 'HashtableIsObsolete'
     }
 
+    @Override
     protected Rule createRule() {
         new HashtableIsObsoleteRule()
     }

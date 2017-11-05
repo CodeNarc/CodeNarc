@@ -73,6 +73,7 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'protected void close() { }', 'void close() method defined without implementing Closeable')
     }
 
+    @Override
     protected Rule createRule() {
         new CloseWithoutCloseableRule()
     }

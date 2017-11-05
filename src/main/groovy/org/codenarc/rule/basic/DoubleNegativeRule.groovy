@@ -32,6 +32,7 @@ class DoubleNegativeRule extends AbstractAstVisitorRule {
 
 class DoubleNegativeAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitNotExpression(NotExpression expression) {
 
         if (expression.expression instanceof NotExpression) {

@@ -95,6 +95,7 @@ class BrokenNullCheckRuleTest extends AbstractRuleTestCase {
             [lineNumber:7, sourceLineText:'return name != null || !name.size()', messageText:'name'])
     }
 
+    @Override
     protected Rule createRule() {
         new BrokenNullCheckRule()
     }

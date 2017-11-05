@@ -66,6 +66,7 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'other.notify()')
     }
 
+    @Override
     protected Rule createRule() {
         new UseOfNotifyMethodRule()
     }

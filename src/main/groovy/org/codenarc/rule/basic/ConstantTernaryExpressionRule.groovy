@@ -57,6 +57,7 @@ class ConstantTernaryExpressionRule extends AbstractAstVisitorRule {
 
 class ConstantTernaryExpressionAstVisitor extends AbstractAstVisitor  {
 
+    @Override
     void visitTernaryExpression(TernaryExpression ternaryExpression) {
         if (isFirstVisit(ternaryExpression)) {
             def booleanExpression = ternaryExpression.booleanExpression

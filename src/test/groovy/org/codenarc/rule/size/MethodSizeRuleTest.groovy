@@ -157,6 +157,7 @@ class MethodSizeRuleTest extends AbstractRuleTestCase {
             9, null, 'process')
     }
 
+    @Override
     protected Rule createRule() {
         new MethodSizeRule()
     }

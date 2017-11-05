@@ -44,6 +44,7 @@ class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
         return node.returnType.toString() != 'void'
     }
 
+    @Override
     void visitCatchStatement(CatchStatement node) {
         def lastStatement = getLastStatement(node)
         if (lastStatement instanceof ReturnStatement) {

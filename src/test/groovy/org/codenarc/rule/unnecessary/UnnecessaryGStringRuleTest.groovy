@@ -123,6 +123,7 @@ I am a string
         assertSingleViolation(SOURCE, 3, 'def name = "Hamlet"')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryGStringRule()
     }

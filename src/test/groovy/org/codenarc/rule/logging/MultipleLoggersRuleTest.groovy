@@ -74,6 +74,7 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
             'Violation in class MyClass$MyInnerClass. The class defines multiple loggers: LOG, logger')
     }
 
+    @Override
     protected Rule createRule() {
         new MultipleLoggersRule()
     }

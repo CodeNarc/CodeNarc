@@ -74,6 +74,7 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = myList.unique().findAll { x < 1 }')
     }
 
+    @Override
     protected Rule createRule() {
         new AssignCollectionUniqueRule()
     }

@@ -38,6 +38,7 @@ class ThreadLocalNotStaticFinalRule extends AbstractAstVisitorRule {
 
 class ThreadLocalNotStaticFinalAstVisitor extends AbstractFieldVisitor {
 
+    @Override
     void visitField(FieldNode node) {
         if (node?.type?.name == 'ThreadLocal') {
             if (!Modifier.isStatic(node.modifiers)) {

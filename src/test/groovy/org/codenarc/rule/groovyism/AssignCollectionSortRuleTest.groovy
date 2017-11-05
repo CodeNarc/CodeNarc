@@ -128,6 +128,7 @@ class AssignCollectionSortRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'def x = myList.sort().findAll { x < 1 }')
     }
 
+    @Override
     protected Rule createRule() {
         new AssignCollectionSortRule()
     }

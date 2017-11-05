@@ -52,6 +52,7 @@ class ExplicitCallToLeftShiftMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.leftShift(b)', 'Explicit call to a.leftShift(b) method can be rewritten as a << (b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToLeftShiftMethodRule()
     }

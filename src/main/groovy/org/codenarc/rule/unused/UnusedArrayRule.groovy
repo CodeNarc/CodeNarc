@@ -34,6 +34,7 @@ class UnusedArrayRule extends AbstractAstVisitorRule {
 
 class UnusedArrayAstVisitor extends AbstractLastStatementInBlockAstVisitor {
 
+    @Override
     void visitExpressionStatement(ExpressionStatement statement) {
         if (statement.expression instanceof ArrayExpression && !isLastStatementInBlock(statement)) {
             addViolation(statement, 'The result of the array expression is ignored')

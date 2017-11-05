@@ -71,6 +71,7 @@ class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'writer.append', 'Consecutive calls to append method with literal parameters can be joined into one append() call')
     }
 
+    @Override
     protected Rule createRule() {
         new ConsecutiveLiteralAppendsRule()
     }

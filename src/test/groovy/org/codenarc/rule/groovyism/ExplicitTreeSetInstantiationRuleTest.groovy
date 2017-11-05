@@ -81,6 +81,7 @@ class ExplicitTreeSetInstantiationRuleTest extends AbstractRuleTestCase {
                 4, 'def m(foo = new TreeSet())', 'TreeSet objects are better instantiated using the form "[] as SortedSet"')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitTreeSetInstantiationRule()
     }

@@ -190,6 +190,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE_FALLS_THROUGH_TO_RETURN)
     }
 
+    @Override
     protected Rule createRule() {
         new IfStatementCouldBeTernaryRule()
     }

@@ -52,6 +52,7 @@ class ExplicitCallToXorMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.xor(b)', 'Explicit call to a.xor(b) method can be rewritten as a ^ (b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToXorMethodRule()
     }

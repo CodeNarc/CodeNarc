@@ -70,6 +70,7 @@ class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new WhileStatementBracesRule()
     }

@@ -133,6 +133,7 @@ class PackageNameRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'MyClass', 'Required package declaration is missing')
     }
 
+    @Override
     protected Rule createRule() {
         new PackageNameRule()
     }

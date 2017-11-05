@@ -181,6 +181,7 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitUnnecessaryThrowsExceptionRule()
     }

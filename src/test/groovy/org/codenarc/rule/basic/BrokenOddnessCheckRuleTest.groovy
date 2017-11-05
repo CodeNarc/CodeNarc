@@ -65,6 +65,7 @@ class BrokenOddnessCheckRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '(method() % 2 == 1)', "The code uses '(this.method() % 2 == 1)' to check for oddness, which does not work for negative numbers. Use (this.method() & 1 == 1) or (this.method() % 2 != 0) instead")
     }
 
+    @Override
     protected Rule createRule() {
         new BrokenOddnessCheckRule()
     }

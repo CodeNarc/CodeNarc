@@ -27,6 +27,7 @@ class JdbcStatementReferenceRule_CallableStatementTest extends AbstractClassRefe
 
     final String className = 'java.sql.CallableStatement'
 
+    @Override
     protected Rule createRule() {
         new JdbcStatementReferenceRule()
     }

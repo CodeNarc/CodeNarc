@@ -89,6 +89,7 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
             [lineNumber:3, sourceLineText:'foo(1) ? foo(1) : 123', messageText:'foo(1) ?: 123'])
     }
 
+    @Override
     protected Rule createRule() {
         new TernaryCouldBeElvisRule()
     }

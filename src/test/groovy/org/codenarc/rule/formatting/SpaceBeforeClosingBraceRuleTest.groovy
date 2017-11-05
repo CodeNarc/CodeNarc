@@ -266,6 +266,7 @@ c        '''
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceBeforeClosingBraceRule()
     }

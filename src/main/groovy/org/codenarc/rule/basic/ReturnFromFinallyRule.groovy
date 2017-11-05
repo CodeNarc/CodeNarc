@@ -30,6 +30,7 @@ class ReturnFromFinallyBlockRule extends AbstractAstVisitorRule {
 }
 
 class ReturnFromFinallyBlockAstVisitor extends AbstractFinallyAstVisitor  {
+    @Override
     void visitReturnStatement(ReturnStatement returnStatement) {
         if (isFirstVisit(returnStatement) && isStatementWithinFinally(returnStatement)) {
             addViolation(returnStatement, 'finally statements cannot return a value')

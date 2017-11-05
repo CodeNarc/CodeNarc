@@ -33,6 +33,7 @@ class SystemErrPrintRule extends AbstractAstVisitorRule {
 
 class SystemErrPrintAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (methodCall.text.startsWith('System.err.print')) {
             addViolation(methodCall, "System.err.$methodCall.methodAsString should be replaced with something more robust")

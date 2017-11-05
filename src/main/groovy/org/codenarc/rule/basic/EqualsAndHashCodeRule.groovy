@@ -34,6 +34,7 @@ class EqualsAndHashCodeRule extends AbstractAstVisitorRule {
 
 class EqualsAndHashCodeAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitClassEx(ClassNode classNode) {
         def methods = classNode.methods
         def equalsMethod = methods.find { m ->

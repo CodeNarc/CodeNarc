@@ -197,6 +197,7 @@ class UnnecessaryObjectReferencesRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryObjectReferencesRule()
     }

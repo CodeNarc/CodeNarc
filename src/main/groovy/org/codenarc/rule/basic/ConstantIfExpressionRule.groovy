@@ -46,6 +46,7 @@ class ConstantIfExpressionRule extends AbstractAstVisitorRule {
 
 class ConstantIfExpressionAstVisitor extends AbstractAstVisitor  {
 
+    @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement)) {
             def booleanExpression = ifStatement.booleanExpression

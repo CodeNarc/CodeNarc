@@ -368,21 +368,25 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
         super.visitClass(node)
     }
 
+    @Override
     void visitMethod(MethodNode methodNode) {
         methodNodes[methodNode.name] = methodNode
         super.visitMethod(methodNode)
     }
 
+    @Override
     void visitStatement(Statement statement) {
         this.statements << statement
         super.visitStatement(statement)
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression methodCallExpression) {
         this.methodCallExpressions << methodCallExpression
         super.visitMethodCallExpression(methodCallExpression)
     }
 
+    @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         declarationExpressions << declarationExpression
         super.visitDeclarationExpression(declarationExpression)
@@ -394,6 +398,7 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
         super.visitField(node)
     }
 
+    @Override
     protected SourceUnit getSourceUnit() {
         source
     }

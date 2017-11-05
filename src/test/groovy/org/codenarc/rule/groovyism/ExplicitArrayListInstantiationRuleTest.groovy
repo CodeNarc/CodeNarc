@@ -80,6 +80,7 @@ class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
                 4, 'def m(foo = new ArrayList())')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitArrayListInstantiationRule()
     }

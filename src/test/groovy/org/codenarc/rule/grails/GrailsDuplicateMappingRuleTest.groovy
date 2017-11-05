@@ -168,6 +168,7 @@ class GrailsDuplicateMappingRuleTest extends AbstractRuleTestCase {
         sourceCodePath = 'MyProject/grails-app/domain/com/example/Person.groovy'
     }
 
+    @Override
     protected Rule createRule() {
         new GrailsDuplicateMappingRule()
     }

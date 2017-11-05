@@ -51,6 +51,7 @@ class VariableNameRule extends AbstractAstVisitorRule {
 
 class VariableNameAstVisitor extends AbstractAstVisitor  {
 
+    @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
         if (isFirstVisit(declarationExpression)) {

@@ -37,6 +37,7 @@ class GrailsDomainHasEqualsRule extends AbstractAstVisitorRule {
 }
 
 class GrailsDomainHasEqualsAstVisitor extends AbstractAstVisitor {
+    @Override
     void visitClassComplete(ClassNode classNode) {
         if (isFirstVisit(classNode) && !hasAnnotation(classNode, 'EqualsAndHashCode') && !hasAnnotation(classNode, 'Canonical')) {
             if (!classNode.methods.any { isMethodNode(it, 'equals', 1) }) {

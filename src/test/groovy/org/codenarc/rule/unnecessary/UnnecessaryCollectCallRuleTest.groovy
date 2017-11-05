@@ -94,6 +94,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
         '''
         assertSingleViolation(SOURCE, 2, '["1", "2", "3"].collect', 'The call to collect could probably be rewritten as a spread expression: [1, 2, 3]*.bytes')
     }
+    @Override
     protected Rule createRule() {
         new UnnecessaryCollectCallRule()
     }

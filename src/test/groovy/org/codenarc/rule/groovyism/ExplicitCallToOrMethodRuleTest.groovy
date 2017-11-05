@@ -51,6 +51,7 @@ class ExplicitCallToOrMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.or(b)', 'Explicit call to a.or(b) method can be rewritten as a | (b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToOrMethodRule()
     }

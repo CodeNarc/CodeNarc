@@ -78,6 +78,7 @@ class SpaceAroundClosureArrowRuleTest extends AbstractRuleTestCase {
             [lineNumber:7, sourceLineText:'def closure6 = { ->println 123', messageText:MESSAGE])
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAroundClosureArrowRule()
     }

@@ -115,6 +115,7 @@ class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase {
                 4, 'import static bar.foo.*')
     }
 
+    @Override
     protected Rule createRule() {
         new MisorderedStaticImportsRule()
     }

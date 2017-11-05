@@ -84,6 +84,7 @@ class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase {
                 2, 'Runtime.runtime.gc()', 'Garbage collection should not be explicitly forced')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitGarbageCollectionRule()
     }

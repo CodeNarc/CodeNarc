@@ -52,6 +52,7 @@ class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'a.mod(b)', 'Explicit call to a.mod(b) method can be rewritten as a % (b)')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitCallToModMethodRule()
     }

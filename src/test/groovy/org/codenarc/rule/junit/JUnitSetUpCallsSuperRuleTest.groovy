@@ -165,6 +165,7 @@ class JUnitSetUpCallsSuperRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitSetUpCallsSuperRule()
     }

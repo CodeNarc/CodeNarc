@@ -34,6 +34,7 @@ class JdbcConnectionReferenceRuleTest extends AbstractClassReferenceRuleTestCase
         assert rule.name == 'JdbcConnectionReference'
     }
 
+    @Override
     protected Rule createRule() {
         new JdbcConnectionReferenceRule()
     }

@@ -52,6 +52,7 @@ class UnnecessaryModOneRuleTest extends AbstractRuleTestCase {
                 3, '(method() % 1)', '(this.method() % 1) is guaranteed to be zero. Did you mean (this.method() & 1) or (this.method() % 2)')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryModOneRule()
     }

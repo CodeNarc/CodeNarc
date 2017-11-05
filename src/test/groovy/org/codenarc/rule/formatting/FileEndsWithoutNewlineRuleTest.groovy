@@ -60,6 +60,7 @@ class FileEndsWithoutNewlineRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new FileEndsWithoutNewlineRule()
     }

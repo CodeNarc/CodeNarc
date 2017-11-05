@@ -33,6 +33,7 @@ class RemoveAllOnSelfRule extends AbstractAstVisitorRule {
 
 class RemoveAllOnSelfAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
         if (isMethodNamed(call, 'removeAll') && getArity(call) == 1) {

@@ -90,6 +90,7 @@ class JUnitPublicPropertyRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitPublicPropertyRule()
     }

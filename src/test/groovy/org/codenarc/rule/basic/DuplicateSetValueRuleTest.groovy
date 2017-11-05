@@ -82,6 +82,7 @@ class DuplicateSetValueRuleTest extends AbstractRuleTestCase {
                 [lineNumber: 3, sourceLineText: "def h = ['1', '2', '2', '4'] as FooSet", messageText: "The constant value '2' is duplicated in the Set literal"])
     }
 
+    @Override
     protected Rule createRule() {
         new DuplicateSetValueRule()
     }

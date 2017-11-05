@@ -174,6 +174,7 @@ class EmptyClassRuleTest extends AbstractRuleTestCase {
         "Class '$violatingClass' is empty (has no methods, fields or properties). Why would you need a class like this?"
     }
 
+    @Override
     protected Rule createRule() {
         new EmptyClassRule()
     }

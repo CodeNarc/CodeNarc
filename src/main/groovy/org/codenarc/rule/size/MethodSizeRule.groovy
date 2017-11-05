@@ -44,6 +44,7 @@ class MethodSizeRule extends AbstractAstVisitorRule {
 }
 
 class MethodSizeAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitConstructorOrMethod(MethodNode methodNode, boolean isConstructor) {
         if (methodNode.lineNumber >= 0) {
             def numLines = methodNode.lastLineNumber - methodNode.lineNumber + 1

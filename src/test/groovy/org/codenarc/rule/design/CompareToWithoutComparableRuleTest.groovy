@@ -135,6 +135,7 @@ class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new CompareToWithoutComparableRule()
     }

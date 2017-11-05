@@ -80,6 +80,7 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
                 4, 'def m(foo = new HashSet())', 'HashSet objects are better instantiated using the form "[] as Set"')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitHashSetInstantiationRule()
     }

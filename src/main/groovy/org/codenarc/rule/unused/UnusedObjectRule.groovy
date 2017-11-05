@@ -37,6 +37,7 @@ class UnusedObjectRule extends AbstractAstVisitorRule {
 
 class UnusedObjectAstVisitor extends AbstractLastStatementInBlockAstVisitor {
 
+    @Override
     void visitExpressionStatement(ExpressionStatement statement) {
         if (isFirstVisit(statement) &&
                 statement.expression instanceof ConstructorCallExpression &&

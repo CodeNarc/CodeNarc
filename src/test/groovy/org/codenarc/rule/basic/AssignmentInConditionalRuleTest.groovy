@@ -114,6 +114,7 @@ class AssignmentInConditionalRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '(value = true) ? x : y', VIOLATION_MESSAGE)
     }
 
+    @Override
     protected Rule createRule() {
         new AssignmentInConditionalRule()
     }

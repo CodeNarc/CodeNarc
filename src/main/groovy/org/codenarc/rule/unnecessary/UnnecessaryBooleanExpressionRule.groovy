@@ -60,6 +60,7 @@ class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor  {
 
     private static final BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
 
+    @Override
     void visitBinaryExpression(BinaryExpression expression) {
         def operationName = expression.operation.text
         if (operationName in BOOLEAN_LOGIC_OPERATIONS &&
@@ -70,6 +71,7 @@ class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor  {
         super.visitBinaryExpression(expression)
     }
 
+    @Override
     void visitNotExpression(NotExpression expression) {
         if (AstUtil.isConstantOrLiteral(expression.expression)) {
             addViolation(expression, 'The Not expression contains a literal or constant. ')

@@ -65,6 +65,7 @@ class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'static final Logger LOG = LoggerFactory.getLogger(MyClass.class);', 'MyClass.class can be rewritten as MyClass')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryDotClassRule()
     }

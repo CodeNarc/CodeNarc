@@ -145,6 +145,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
         assertSingleViolation(SOURCE, 3, 'class MyPrivilegedActionException extends PrivilegedActionException', 'The class MyPrivilegedActionException extends java.security.PrivilegedActionException but is not final')
     }
 
+    @Override
     protected Rule createRule() {
         new NonFinalSubclassOfSensitiveInterfaceRule()
     }

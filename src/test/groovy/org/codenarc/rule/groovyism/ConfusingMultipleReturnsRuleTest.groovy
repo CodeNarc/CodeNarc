@@ -72,6 +72,7 @@ class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
             3, 'def a, b, c = [1, 2, 3]', "Confusing declaration in class MyClass. The field 'b' is initialized to null", )
     }
 
+    @Override
     protected Rule createRule() {
         new ConfusingMultipleReturnsRule()
     }

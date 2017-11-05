@@ -186,6 +186,7 @@ class JUnitTestMethodWithoutAssertRuleTest extends AbstractRuleTestCase {
         ''')
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitTestMethodWithoutAssertRule()
     }

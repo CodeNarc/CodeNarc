@@ -64,6 +64,7 @@ class SpaceAfterSwitchRuleTest extends AbstractRuleTestCase {
             [lineNumber:8, sourceLineText:'switch(', messageText:MESSAGE])
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAfterSwitchRule()
     }

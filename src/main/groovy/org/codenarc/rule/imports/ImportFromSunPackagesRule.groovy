@@ -28,6 +28,7 @@ class ImportFromSunPackagesRule extends AbstractAstVisitorRule {
     String name = 'ImportFromSunPackages'
     int priority = 2
 
+    @Override
     void applyTo(SourceCode sourceCode, List violations) {
         sourceCode.ast?.imports?.each { importNode ->
             addViolationForSunImport(importNode, sourceCode, violations)

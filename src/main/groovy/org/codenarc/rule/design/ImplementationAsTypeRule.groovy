@@ -86,6 +86,7 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         'SynchronousQueue', 'java.util.concurrent.SynchronousQueue',
     ]
 
+    @Override
     void visitMethodEx(MethodNode methodNode) {
         processParameters(methodNode.parameters)
         processType(methodNode.returnType, "The return type $methodNode.returnType.name should be replaced with an interface or more general parent class")
@@ -98,6 +99,7 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         super.visitConstructor(constructorNode)
     }
 
+    @Override
     void visitClosureExpression(ClosureExpression closureExpression) {
         if (isFirstVisit(closureExpression)) {
             processParameters(closureExpression.parameters)
@@ -105,6 +107,7 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         super.visitClosureExpression(closureExpression)
     }
 
+    @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         if (isFirstVisit(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
@@ -116,6 +119,7 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         super.visitDeclarationExpression(declarationExpression)
     }
 
+    @Override
     void visitField(FieldNode fieldNode) {
         processType(fieldNode.type, "The type $fieldNode.type.name should be replaced with an interface or more general parent class")
         super.visitField(fieldNode)

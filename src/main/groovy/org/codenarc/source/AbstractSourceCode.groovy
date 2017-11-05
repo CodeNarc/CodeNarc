@@ -54,6 +54,7 @@ abstract class AbstractSourceCode implements SourceCode {
     /**
      * @return the List of lines of the source code (with line terminators removed)
      */
+    @Override
     List getLines() {
         if (lines == null) {
             lines = new StringReader(getText()).readLines()
@@ -66,6 +67,7 @@ abstract class AbstractSourceCode implements SourceCode {
      * @param lineNumber - the zero-based line number; may be negative
      * @return the trimmed line at the specified index, or null if lineNumber is not valid
      */
+    @Override
     String line(int lineNumber) {
         def allLines = getLines()
         (lineNumber >= 0) && lineNumber < allLines.size() ?
@@ -76,6 +78,7 @@ abstract class AbstractSourceCode implements SourceCode {
      * Return the Groovy AST (Abstract Syntax Tree) for this source file
      * @return the ModuleNode representing the AST for this source file
      */
+    @Override
     ModuleNode getAst() {
         init()
         ast
@@ -119,10 +122,12 @@ abstract class AbstractSourceCode implements SourceCode {
      * @return compiler phase (as in {@link org.codehaus.groovy.control.Phases}) up to which the AST will be processed
      */
     @SuppressWarnings('GetterMethodCouldBeProperty')
+    @Override
     int getAstCompilerPhase() {
         DEFAULT_COMPILER_PHASE
     }
 
+    @Override
     Map<ClassNode, List<MethodCallExpression>> getMethodCallExpressions() {
         init()
         methodCallExpressions.asImmutable()
@@ -145,6 +150,7 @@ abstract class AbstractSourceCode implements SourceCode {
      * @param charIndex - the index of the character within the source code (zero-based)
      * @return the line number (one-based) containing the specified character; Return -1 if charIndex is not valid.
      */
+    @Override
     int getLineNumberForCharacterIndex(int charIndex) {
         int lineCount = 1
         def source = getText()
@@ -166,6 +172,7 @@ abstract class AbstractSourceCode implements SourceCode {
      * Return true if and only if the source code can be successfully compiled
      * @return true only if the source code is valid
      */
+    @Override
     boolean isValid() {
         return getAst()
     }

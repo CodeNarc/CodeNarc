@@ -38,6 +38,7 @@ class InvertedIfElseRule extends AbstractAstVisitorRule {
 
 class InvertedIfElseAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitIfElse(IfStatement ifElse) {
 
         if (ifElse.booleanExpression.expression instanceof NotExpression) {

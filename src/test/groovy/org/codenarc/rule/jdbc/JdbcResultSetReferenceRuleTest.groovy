@@ -34,6 +34,7 @@ class JdbcResultSetReferenceRuleTest extends AbstractClassReferenceRuleTestCase 
         assert rule.name == 'JdbcResultSetReference'
     }
 
+    @Override
     protected Rule createRule() {
         new JdbcResultSetReferenceRule()
     }

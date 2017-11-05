@@ -70,6 +70,7 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase {
                 'The abstract class MyBaseClass contains no abstract methods')
     }
 
+    @Override
     protected Rule createRule() {
         new AbstractClassWithoutAbstractMethodRule()
     }

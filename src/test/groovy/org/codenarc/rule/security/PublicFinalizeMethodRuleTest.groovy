@@ -66,6 +66,7 @@ class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'private finalize()', 'The finalize() method should only be declared with protected visibility')
     }
 
+    @Override
     protected Rule createRule() {
         new PublicFinalizeMethodRule()
     }

@@ -176,6 +176,7 @@ class ImplementationAsTypeRuleTest extends AbstractRuleTestCase {
         allBadTypes = BAD_TYPES + badTypesClassNameOnly
     }
 
+    @Override
     protected Rule createRule() {
         new ImplementationAsTypeRule()
     }

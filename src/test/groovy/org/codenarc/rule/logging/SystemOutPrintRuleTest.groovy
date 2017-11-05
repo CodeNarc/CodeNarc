@@ -96,6 +96,7 @@ class SystemOutPrintRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new SystemOutPrintRule()
     }

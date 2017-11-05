@@ -237,6 +237,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase {
                             3, 'def public method3()', 'The def keyword is unneeded when a method is marked public')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryDefInMethodDeclarationRule()
     }

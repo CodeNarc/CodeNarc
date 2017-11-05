@@ -73,6 +73,7 @@ class SynchronizedOnThisRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new SynchronizedOnThisRule()
     }

@@ -129,6 +129,7 @@ class GrailsMassAssignmentRuleTest extends AbstractRuleTestCase {
             [lineNumber:9, sourceLineText:'person2.properties = params'])
     }
 
+    @Override
     protected Rule createRule() {
         new GrailsMassAssignmentRule()
     }

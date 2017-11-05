@@ -65,6 +65,7 @@ class RequiredStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, null, null, ['string', TEXT])
     }
 
+    @Override
     protected Rule createRule() {
         new RequiredStringRule(string:TEXT)
     }

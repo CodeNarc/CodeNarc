@@ -36,6 +36,8 @@ class SerialVersionUIDRule extends AbstractAstVisitorRule {
 class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
 
     private final static SERIAL_ID = 'serialVersionUID'
+
+    @Override
     void visitField(FieldNode node) {
         if (node?.name == SERIAL_ID) {
             if (!Modifier.isPrivate(node?.modifiers)) {
@@ -54,6 +56,7 @@ class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
         super.visitField node
     }
 
+    @Override
     void visitProperty(PropertyNode node) {
         if (node?.name == SERIAL_ID) {
             addViolation node, 'serialVersionUID found that is a property. '

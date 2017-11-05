@@ -155,6 +155,7 @@ class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase {
                 'The setter method setParent is marked @WithWriteLock but the getter method isParent is not locked')
     }
 
+    @Override
     protected Rule createRule() {
         new InconsistentPropertyLockingRule()
     }

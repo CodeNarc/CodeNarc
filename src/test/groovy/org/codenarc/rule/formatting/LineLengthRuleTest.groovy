@@ -145,6 +145,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "def name = '01234567890123456789'")
     }
 
+    @Override
     protected Rule createRule() {
         new LineLengthRule()
     }

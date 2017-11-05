@@ -61,6 +61,7 @@ class IllegalClassReferenceRule_WildcardsClassNamesTest extends AbstractRuleTest
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new IllegalClassReferenceRule()
     }

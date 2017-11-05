@@ -51,6 +51,7 @@ class DoubleNegativeRuleTest extends AbstractRuleTestCase {
                 3, 'def y = !(!true)', 'The expression (!!true) is a confusing double negative')
     }
 
+    @Override
     protected Rule createRule() {
         new DoubleNegativeRule()
     }

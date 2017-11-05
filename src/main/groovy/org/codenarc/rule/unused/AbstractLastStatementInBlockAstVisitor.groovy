@@ -33,6 +33,7 @@ abstract class AbstractLastStatementInBlockAstVisitor extends AbstractAstVisitor
         lastStatements.contains(statement)
     }
 
+    @Override
     void visitBlockStatement(BlockStatement block) {
         if (block.statements) {
             lastStatements << block.statements.last()

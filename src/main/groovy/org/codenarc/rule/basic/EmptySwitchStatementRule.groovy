@@ -31,6 +31,7 @@ class EmptySwitchStatementRule extends AbstractAstVisitorRule {
 }
 
 class EmptySwitchStatementAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitSwitch(SwitchStatement switchStatement) {
         if (isFirstVisit(switchStatement) && switchStatement.caseStatements.empty) {
             addViolation(switchStatement, 'The switch statement is empty')

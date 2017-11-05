@@ -49,6 +49,7 @@ class ExceptionExtendsThrowableRuleTest extends AbstractRuleTestCase {
             [lineNumber:2, sourceLineText:'class MyException extends Throwable', messageText:'The class MyException extends Throwable'])
     }
 
+    @Override
     protected Rule createRule() {
         new ExceptionExtendsThrowableRule()
     }

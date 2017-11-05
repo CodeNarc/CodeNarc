@@ -27,6 +27,7 @@ class ThrowRuntimeExceptionRule extends AbstractAstVisitorRule {
     String name = 'ThrowRuntimeException'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonThrowAstVisitor(['RuntimeException', 'java.lang.RuntimeException'])
     }

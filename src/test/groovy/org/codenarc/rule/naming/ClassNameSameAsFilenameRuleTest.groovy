@@ -121,6 +121,7 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
             'In such a case the file and the class should have the same name.'
     }
 
+    @Override
     protected Rule createRule() {
         new ClassNameSameAsFilenameRule()
     }

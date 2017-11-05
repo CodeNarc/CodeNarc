@@ -115,6 +115,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
                 'Violation in class MyClass. The class is Serializable and defines a field named serialPersistentFields which is not private, static, and final')
     }
 
+    @Override
     protected Rule createRule() {
         new SerialPersistentFieldsRule()
     }

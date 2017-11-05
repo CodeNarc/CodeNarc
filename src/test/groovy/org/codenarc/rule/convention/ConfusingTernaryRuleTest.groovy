@@ -73,6 +73,7 @@ class ConfusingTernaryRuleTest extends AbstractRuleTestCase {
                 '(!x) is a confusing negation in a ternary expression. Rewrite as (x) and invert the conditions.')
     }
 
+    @Override
     protected Rule createRule() {
         new ConfusingTernaryRule()
     }

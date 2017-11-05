@@ -123,6 +123,7 @@ class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
             "Violation in class WidgetBuilder. The method 'create' matches the regular expression /(build.*|create.*)/")
     }
 
+    @Override
     protected Rule createRule() {
         new FactoryMethodNameRule()
     }

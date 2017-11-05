@@ -522,6 +522,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new UnusedPrivateMethodRule()
     }

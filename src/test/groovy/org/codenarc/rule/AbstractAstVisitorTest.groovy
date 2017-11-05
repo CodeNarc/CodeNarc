@@ -97,11 +97,13 @@ class FakeAstVisitor1 extends AbstractAstVisitor {
     def returnStatement
     def ifStatement
 
+    @Override
     void visitReturnStatement(ReturnStatement returnStatement) {
         this.returnStatement = returnStatement
         super.visitReturnStatement(returnStatement)
     }
 
+    @Override
     void visitIfElse(IfStatement ifStatement) {
         this.ifStatement = ifStatement
         super.visitIfElse(ifStatement)

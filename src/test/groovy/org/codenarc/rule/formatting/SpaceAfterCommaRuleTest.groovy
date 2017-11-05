@@ -287,6 +287,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'shouldFail(Exception,{ dao.read() })', 'The parameter ' + SpaceAfterCommaRule.CLOSURE_TEXT)
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAfterCommaRule()
     }

@@ -27,6 +27,7 @@ class CatchArrayIndexOutOfBoundsExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchArrayIndexOutOfBoundsException'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonCatchAstVisitor('ArrayIndexOutOfBoundsException')
     }

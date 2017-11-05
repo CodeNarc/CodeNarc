@@ -53,6 +53,7 @@ class StaticConnectionRuleTest extends AbstractRuleTestCase {
             'Violation in class MyClass. The field conn is marked static, meaning the Connection will be shared between threads and will possibly experience race conditions')
     }
 
+    @Override
     protected Rule createRule() {
         new StaticConnectionRule()
     }

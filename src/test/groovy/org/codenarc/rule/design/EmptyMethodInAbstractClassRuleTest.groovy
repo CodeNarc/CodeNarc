@@ -105,6 +105,7 @@ class EmptyMethodInAbstractClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def couldBeAbstract()', 'The method couldBeAbstract in abstract class MyClass contains no logic. Consider making it abstract')
     }
 
+    @Override
     protected Rule createRule() {
         new EmptyMethodInAbstractClassRule()
     }

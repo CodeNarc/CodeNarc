@@ -53,6 +53,7 @@ class NonFinalPublicFieldRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'public String myField', 'The field myField is public but not final, which violates secure coding principles')
     }
 
+    @Override
     protected Rule createRule() {
         new NonFinalPublicFieldRule()
     }

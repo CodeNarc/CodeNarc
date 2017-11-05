@@ -59,14 +59,17 @@ File: src/main/dao/MyOtherDao.groovy
 [CodeNarc (http://www.codenarc.org) v${version()}]
 """.trim()
 
+    @Override
     protected TextReportWriter createReportWriter() {
         return new TextReportWriter(title:TITLE)
     }
 
+    @Override
     protected String getReportTextMaxPriority() {
         return REPORT_TEXT_MAX_PRIORITY
     }
 
+    @Override
     protected String getReportText() {
         return REPORT_TEXT
     }

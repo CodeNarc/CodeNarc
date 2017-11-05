@@ -244,6 +244,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase {
         sourceCodePath = SERVICE_PATH
     }
 
+    @Override
     protected Rule createRule() {
         new GrailsStatelessServiceRule()
     }

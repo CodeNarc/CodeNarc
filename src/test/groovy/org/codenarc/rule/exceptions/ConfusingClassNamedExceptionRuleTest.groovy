@@ -81,6 +81,7 @@ class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'class MyNestedException {}')
     }
 
+    @Override
     protected Rule createRule() {
         new ConfusingClassNamedExceptionRule()
     }

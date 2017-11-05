@@ -68,6 +68,7 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
         assertNoViolations(classContent)
     }
 
+    @Override
     protected Rule createRule() {
         new MethodCountRule()
     }

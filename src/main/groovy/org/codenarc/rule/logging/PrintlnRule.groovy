@@ -56,6 +56,7 @@ class PrintlnAstVisitor extends AbstractAstVisitor  {
         printlnClosureDefined = false
     }
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression methodCall) {
         if (printlnMethodDefined || printlnClosureDefined) {
             return

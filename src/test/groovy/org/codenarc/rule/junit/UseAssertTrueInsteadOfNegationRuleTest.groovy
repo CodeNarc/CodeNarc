@@ -71,6 +71,7 @@ class UseAssertTrueInsteadOfNegationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'Assert.assertFalse(!condition)', 'Assert.assertFalse(!condition) can be simplified to Assert.assertTrue(condition)')
     }
 
+    @Override
     protected Rule createRule() {
         new UseAssertTrueInsteadOfNegationRule()
     }

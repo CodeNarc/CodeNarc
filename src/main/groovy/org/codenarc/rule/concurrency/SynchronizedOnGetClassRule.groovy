@@ -35,6 +35,7 @@ class SynchronizedOnGetClassRule extends AbstractAstVisitorRule {
 
 class SynchronizedOnGetClassAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitSynchronizedStatement(SynchronizedStatement statement) {
         if (!isFirstVisit(statement)) {
             return

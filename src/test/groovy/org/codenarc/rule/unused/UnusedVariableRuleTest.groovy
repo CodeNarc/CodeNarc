@@ -479,6 +479,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 6, 'int count', 'The variable [count] in class MyClass is not used')
     }
 
+    @Override
     protected Rule createRule() {
         new UnusedVariableRule()
     }

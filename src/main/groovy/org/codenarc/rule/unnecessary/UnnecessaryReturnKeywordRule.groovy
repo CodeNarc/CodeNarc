@@ -35,6 +35,7 @@ class UnnecessaryReturnKeywordRule extends AbstractAstVisitorRule {
 
 class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
 
+    @Override
     void visitMethodEx(MethodNode node) {
 
         def lastStatement = getLastStatement(node)
@@ -45,6 +46,7 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
         super.visitMethodEx node
     }
 
+    @Override
     void visitClosureExpression(ClosureExpression node) {
 
         def lastStatement = getLastStatement(node)

@@ -35,6 +35,7 @@ class UseAssertFalseInsteadOfNegationRule extends AbstractAstVisitorRule {
 
 class UseAssertFalseInsteadOfNegationAstVisitor extends AbstractMethodCallExpressionVisitor {
 
+    @Override
     void visitMethodCallExpression(MethodCallExpression call) {
 
         List args = AstUtil.getMethodArguments(call)

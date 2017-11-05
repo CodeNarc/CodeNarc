@@ -308,6 +308,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'int size(String name)    // What about {}', 'Opening brace')
     }
 
+    @Override
     protected Rule createRule() {
         new BracesForMethodRule()
     }

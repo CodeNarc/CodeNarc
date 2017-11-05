@@ -32,6 +32,7 @@ class ForStatementBracesRule extends AbstractAstVisitorRule {
 }
 
 class ForStatementBracesAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitForLoop(ForStatement forStatement) {
         if (isFirstVisit(forStatement) && !AstUtil.isBlock(forStatement.loopBlock)) {
             addViolation(forStatement, 'The for statement lacks braces')

@@ -92,6 +92,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
         )
     }
 
+    @Override
     protected Rule createRule() {
         new ObjectOverrideMisspelledMethodNameRule()
     }

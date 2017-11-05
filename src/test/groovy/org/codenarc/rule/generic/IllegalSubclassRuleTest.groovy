@@ -78,6 +78,7 @@ class IllegalSubclassRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'class MyClass2 extends org.example.MyClass { }', messageText:'The class MyClass2 extends from the illegal superclass org.example.MyClass'])
     }
 
+    @Override
     protected Rule createRule() {
         new IllegalSubclassRule()
     }

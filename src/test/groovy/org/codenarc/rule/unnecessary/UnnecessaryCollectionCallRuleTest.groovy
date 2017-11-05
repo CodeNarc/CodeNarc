@@ -76,6 +76,7 @@ class UnnecessaryCollectionCallRuleTest extends AbstractRuleTestCase {
                 7, 'x.retainAll(x)')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryCollectionCallRule()
     }

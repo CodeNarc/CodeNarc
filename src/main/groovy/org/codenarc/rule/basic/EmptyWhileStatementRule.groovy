@@ -32,6 +32,7 @@ class EmptyWhileStatementRule extends AbstractAstVisitorRule {
 }
 
 class EmptyWhileStatementAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitWhileLoop(WhileStatement whileStatement) {
         if (isFirstVisit(whileStatement) && AstUtil.isEmptyBlock(whileStatement.loopBlock)) {
             addViolation(whileStatement, 'The while statement is empty')

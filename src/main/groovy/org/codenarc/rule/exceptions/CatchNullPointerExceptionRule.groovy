@@ -27,6 +27,7 @@ class CatchNullPointerExceptionRule extends AbstractAstVisitorRule {
     String name = 'CatchNullPointerException'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonCatchAstVisitor('NullPointerException')
     }

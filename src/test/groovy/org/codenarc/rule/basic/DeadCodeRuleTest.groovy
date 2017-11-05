@@ -118,6 +118,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'println x')
     }
 
+    @Override
     protected Rule createRule() {
         new DeadCodeRule()
     }

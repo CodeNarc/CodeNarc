@@ -144,6 +144,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'return 1;', 'Semi-colons as line endings can be removed safely')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessarySemicolonRule()
     }

@@ -32,11 +32,13 @@ class StringSourceAnalyzer extends AbstractSourceAnalyzer {
         this.source = new SourceString(source)
     }
 
+    @Override
     Results analyze(RuleSet ruleSet) {
         List allViolations = collectViolations(source, ruleSet)
         new VirtualResults(allViolations)
     }
 
+    @Override
     List getSourceDirectories() {
         []
     }

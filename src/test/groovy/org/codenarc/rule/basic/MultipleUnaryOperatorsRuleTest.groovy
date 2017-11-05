@@ -68,6 +68,7 @@ class MultipleUnaryOperatorsRuleTest extends AbstractRuleTestCase {
             [lineNumber:7, sourceLineText:'boolean d = !~1', messageText:String.format(message, '(!~1)')])
     }
 
+    @Override
     protected Rule createRule() {
         new MultipleUnaryOperatorsRule()
     }

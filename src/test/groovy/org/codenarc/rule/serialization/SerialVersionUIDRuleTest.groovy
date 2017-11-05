@@ -94,6 +94,7 @@ class SerialVersionUIDRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'protected static final long serialVersionUID = 12345')
     }
 
+    @Override
     protected Rule createRule() {
         new SerialVersionUIDRule()
     }

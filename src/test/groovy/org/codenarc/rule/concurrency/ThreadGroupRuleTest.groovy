@@ -80,6 +80,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'System.getSecurityManager().getThreadGroup()', 'Avoid using java.lang.ThreadGroup; it is unsafe')
     }
 
+    @Override
     protected Rule createRule() {
         new ThreadGroupRule()
     }

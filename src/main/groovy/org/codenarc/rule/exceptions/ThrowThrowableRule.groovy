@@ -27,6 +27,7 @@ class ThrowThrowableRule extends AbstractAstVisitorRule {
     String name = 'ThrowThrowable'
     int priority = 2
 
+    @Override
     AstVisitor getAstVisitor() {
         new CommonThrowAstVisitor(['Throwable', 'java.lang.Throwable'])
     }

@@ -183,6 +183,7 @@ class SynchronizedOnStringRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 11, 'synchronized(lock)', 'Synchronizing on the constant String field lock is unsafe. Do not synchronize on interned strings')
     }
 
+    @Override
     protected Rule createRule() {
         new SynchronizedOnStringRule()
     }

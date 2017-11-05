@@ -58,6 +58,7 @@ class UnnecessaryLongInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, 'new Long(42L)', 'Can be rewritten as 42L')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryLongInstantiationRule()
     }

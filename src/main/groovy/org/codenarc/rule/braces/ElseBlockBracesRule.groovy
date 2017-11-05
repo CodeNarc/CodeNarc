@@ -38,6 +38,7 @@ class ElseBlockBracesRule extends AbstractAstVisitorRule {
 }
 
 class ElseBlockBracesAstVisitor extends AbstractAstVisitor  {
+    @Override
     void visitIfElse(IfStatement ifStatement) {
         if (isFirstVisit(ifStatement) && !(ifStatement.elseBlock instanceof EmptyStatement) && 
                 !AstUtil.isBlock(ifStatement.elseBlock)) {

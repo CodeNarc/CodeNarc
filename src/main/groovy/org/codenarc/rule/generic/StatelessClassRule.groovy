@@ -71,6 +71,7 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     String ignoreFieldTypes
     Class astVisitorClass = StatelessClassAstVisitor
 
+    @Override
     boolean isReady() {
         applyToClassNames || applyToFileNames || applyToFilesMatching
     }
@@ -108,6 +109,7 @@ class StatelessClassRule extends AbstractAstVisitorRule {
 
 class StatelessClassAstVisitor extends AbstractFieldVisitor  {
 
+    @Override
     void visitField(FieldNode fieldNode) {
         boolean ignore = rule.shouldIgnoreField(fieldNode)
         if (!ignore) {

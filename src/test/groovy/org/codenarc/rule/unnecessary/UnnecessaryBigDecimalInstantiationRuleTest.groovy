@@ -93,6 +93,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, "static final BigDecimal ZERO = new BigDecimal('0.5')")
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryBigDecimalInstantiationRule()
     }

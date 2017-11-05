@@ -97,6 +97,7 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new JUnitPublicFieldRule()
     }

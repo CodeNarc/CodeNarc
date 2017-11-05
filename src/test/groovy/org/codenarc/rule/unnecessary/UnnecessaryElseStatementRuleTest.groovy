@@ -223,6 +223,7 @@ class UnnecessaryElseStatementRuleTest extends AbstractRuleTestCase {
         assertTwoViolations SOURCE, 6, '} else {', 10, '} else {'
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryElseStatementRule()
     }

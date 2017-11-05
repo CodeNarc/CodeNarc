@@ -81,6 +81,7 @@ class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
                 4, 'def m(foo = new Stack())', 'Stack objects are better instantiated using the form "[] as Stack"')
     }
 
+    @Override
     protected Rule createRule() {
         new ExplicitStackInstantiationRule()
     }

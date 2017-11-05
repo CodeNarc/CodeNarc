@@ -85,6 +85,7 @@ class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
         ] as Map[])
     }
 
+    @Override
     protected Rule createRule() {
         new TrailingWhitespaceRule()
     }

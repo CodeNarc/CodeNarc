@@ -168,6 +168,7 @@ class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         assertTwoViolations(SOURCE, 4, 'assertEquals(foo(), false)', 5, 'assertEquals("message", foo(), false)')
     }
 
+    @Override
     protected Rule createRule() {
         new UseAssertTrueInsteadOfAssertEqualsRule()
     }

@@ -242,6 +242,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    @Override
     protected Rule createRule() {
         new SpaceAroundOperatorRule()
     }

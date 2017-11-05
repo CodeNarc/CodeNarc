@@ -96,6 +96,7 @@ class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase 
                 'The condition ((object != null) && (object instanceof RequestKey)) can be safely simplified to (object instanceof RequestKey)')
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryNullCheckBeforeInstanceOfRule()
     }

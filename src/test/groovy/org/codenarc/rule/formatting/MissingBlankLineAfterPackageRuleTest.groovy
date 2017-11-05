@@ -139,6 +139,7 @@ class MissingBlankLineAfterPackageRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, 'class MyClass {', 'Missing blank line after package statement in file null')
     }
 
+    @Override
     protected Rule createRule() {
         new MissingBlankLineAfterPackageRule()
     }

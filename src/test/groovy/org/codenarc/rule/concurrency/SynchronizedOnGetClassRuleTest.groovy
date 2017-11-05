@@ -75,6 +75,7 @@ class SynchronizedOnGetClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'synchronized(getClass())')
     }
 
+    @Override
     protected Rule createRule() {
         new SynchronizedOnGetClassRule()
     }

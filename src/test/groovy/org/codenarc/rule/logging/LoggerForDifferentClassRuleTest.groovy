@@ -327,6 +327,7 @@ class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'LoggerFactory.getLogger(Outer)', 'Logger is defined in InnerRunnable but initialized with Outer')
     }
 
+    @Override
     protected Rule createRule() {
         new LoggerForDifferentClassRule()
     }

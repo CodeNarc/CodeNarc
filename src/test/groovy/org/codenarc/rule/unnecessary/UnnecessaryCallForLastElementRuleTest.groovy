@@ -95,6 +95,7 @@ class UnnecessaryCallForLastElementRuleTest extends AbstractRuleTestCase {
                 3, 'x[x.length -1]', 'Unnecessarily complex access of last element. This can be simplified to x.last() or x[-1]'
     }
 
+    @Override
     protected Rule createRule() {
         new UnnecessaryCallForLastElementRule()
     }

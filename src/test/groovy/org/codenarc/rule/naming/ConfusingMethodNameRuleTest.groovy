@@ -200,6 +200,7 @@ class ConfusingMethodNameRuleTest extends AbstractRuleTestCase {
                 5, 'def toTal() {}')
     }
 
+    @Override
     protected Rule createRule() {
         new ConfusingMethodNameRule()
     }

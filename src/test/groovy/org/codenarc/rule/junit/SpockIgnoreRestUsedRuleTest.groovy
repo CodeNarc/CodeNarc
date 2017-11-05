@@ -161,6 +161,7 @@ class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 3, 'def "my first feature"() {', "The method 'my first feature' in class MySpec uses @IgnoreRest")
     }
 
+    @Override
     protected Rule createRule() {
         new SpockIgnoreRestUsedRule()
     }
