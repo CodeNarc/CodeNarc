@@ -33,7 +33,7 @@ class MissingOverrideAnnotationRule extends AbstractAstVisitorRule {
     String name = 'MissingOverrideAnnotation'
     int priority = 3
     Class astVisitorClass = MissingOverrideAnnotationAstVisitor
-    int compilerPhase = Phases.CANONICALIZATION
+    int compilerPhase = Phases.SEMANTIC_ANALYSIS
 }
 
 class MissingOverrideAnnotationAstVisitor extends AbstractAstVisitor {
