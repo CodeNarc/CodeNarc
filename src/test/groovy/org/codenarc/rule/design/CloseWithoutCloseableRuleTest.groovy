@@ -54,6 +54,21 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testCloseWith_IndirectlyImplementedCloseable_NoViolations() {
+        final SOURCE = '''
+            class InputStreamsAreCloseable extends InputStream { // through class
+                void close() {}
+            }
+
+            class ChannelsAreCloseable implements java.nio.channels.Channel { // through interface
+                void close() {}
+                boolean isOpen() { false }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testPublicCloseViolation() {
         final SOURCE = '''
             class MyClass {
