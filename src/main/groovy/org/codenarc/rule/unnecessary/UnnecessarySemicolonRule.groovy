@@ -20,6 +20,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codenarc.util.MultilineCommentChecker
 
 /**
  * Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice. 
@@ -36,8 +37,6 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     // .*\*/.*      == any line that contains the */ sequence
 
     String excludePattern = '^\\s*\\*.*|^\\*.*|/\\*.*|.*//.*|.*\\*/.*'
-    String startMultilineCommentPattern = '.*/\\*.*'
-    String endMultilineCommentPattern = '.*\\*/.*'
 
     Class astVisitorClass = UnnecessarySemicolonAstVisitor
 
@@ -68,11 +67,12 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
             return result
         }
         int lineNumber = 1
-        boolean insideMultilineComment = false
-        for (String line : lines) {
-            insideMultilineComment = isInsideMultilineComment(line, insideMultilineComment)
+        MultilineCommentChecker multilineCommentChecker = new MultilineCommentChecker()
 
-            if (line.trim().endsWith(';') && (!line.matches(excludePattern) && !insideMultilineComment)) {
+        for (String line : lines) {
+            multilineCommentChecker.processLine(line)
+
+            if (line.trim().endsWith(';') && (!line.matches(excludePattern) && !multilineCommentChecker.inMultilineComment)) {
                 result.add(
                         new Violation(
                                 rule: this, lineNumber: lineNumber, sourceLine: line,
@@ -83,23 +83,6 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
             lineNumber++
         }
         result
-    }
-
-    private boolean isInsideMultilineComment(String line, boolean insideMultilineComment) {
-        if (line.matches(startMultilineCommentPattern)) {
-            if (line.matches(endMultilineCommentPattern)) {
-                int startIndex = line.indexOf('/*')
-                int endIndex = line.indexOf('*/')
-
-                if (endIndex >  startIndex) {
-                    return false
-                }
-            }
-            return true
-        } else if (line.matches(endMultilineCommentPattern)) {
-            return false
-        }
-        return insideMultilineComment
     }
 
 }

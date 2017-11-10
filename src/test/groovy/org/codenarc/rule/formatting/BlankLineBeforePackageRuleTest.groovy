@@ -107,6 +107,26 @@ class BlankLineBeforePackageRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 1, '', 'Blank line precedes package declaration in file null')
     }
 
+    @Test
+    void testSuccessScenarioWithBlankLineInsideCommentBlock() {
+        final SOURCE = '''\
+            /* 
+             Comment block
+             
+             has a blank line
+             */
+            package org.codenarc
+            
+            class MyClass {
+
+                    def go() { /* ... */ }
+                    def goSomewhere() { /* ... */ }
+
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected Rule createRule() {
         new BlankLineBeforePackageRule()
