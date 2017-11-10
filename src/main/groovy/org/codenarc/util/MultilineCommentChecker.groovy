@@ -24,12 +24,12 @@ package org.codenarc.util
  * @author Russell Sanborn
  */
 class MultilineCommentChecker {
-    static final String START_MULTILINE_COMMENT = '/*'
-    static final String END_MULTILINE_COMMENT = '*/'
-    static final String START_MULTILINE_COMMENT_PATTERN = '.*/\\*.*'
-    static final String END_MULTILINE_COMMENT_PATTERN = '.*\\*/.*'
+    private static final String START_MULTILINE_COMMENT = '/*'
+    private static final String END_MULTILINE_COMMENT = '*/'
+    private static final String START_MULTILINE_COMMENT_PATTERN = '.*/\\*.*'
+    private static final String END_MULTILINE_COMMENT_PATTERN = '.*\\*/.*'
 
-    boolean inMultilineComment
+    protected boolean inMultilineComment
 
     MultilineCommentChecker() {
         inMultilineComment = false
