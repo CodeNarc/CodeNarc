@@ -18,10 +18,11 @@ package org.codenarc.rule.formatting
 import org.codehaus.groovy.ast.PackageNode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
+import org.codenarc.util.MultilineCommentChecker
 
 /**
  * Makes sure there are no blank lines before the package declaration of a source code file.
- * 
+ *
  * @author Joe Sondow
  */
 class BlankLineBeforePackageRule extends AbstractRule {
@@ -34,8 +35,12 @@ class BlankLineBeforePackageRule extends AbstractRule {
 
         PackageNode packageNode = sourceCode.ast?.package
         if (packageNode) {
+            MultilineCommentChecker multilineCommentChecker = new MultilineCommentChecker()
+
             for (int index = 0; index < packageNode.lineNumber; index++) {
-                if (sourceCode.line(index).isEmpty()) {
+                multilineCommentChecker.processLine(sourceCode.line(index))
+
+                if (sourceCode.line(index).isEmpty() && !multilineCommentChecker.inMultilineComment) {
                     violations.add(createViolation(index, sourceCode.line(index),
                         "Blank line precedes package declaration in file $sourceCode.name"))
                 }

@@ -20,12 +20,13 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codenarc.util.MultilineCommentChecker
 
 /**
  * Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice. 
  *
  * @author Hamlet D'Arcy
-  */
+ */
 class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySemicolon'
     int priority = 3
@@ -66,8 +67,12 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
             return result
         }
         int lineNumber = 1
+        MultilineCommentChecker multilineCommentChecker = new MultilineCommentChecker()
+
         for (String line : lines) {
-            if (line.trim().endsWith(';') && !line.matches(excludePattern)) {
+            multilineCommentChecker.processLine(line)
+
+            if (line.trim().endsWith(';') && (!line.matches(excludePattern) && !multilineCommentChecker.inMultilineComment)) {
                 result.add(
                         new Violation(
                                 rule: this, lineNumber: lineNumber, sourceLine: line,
