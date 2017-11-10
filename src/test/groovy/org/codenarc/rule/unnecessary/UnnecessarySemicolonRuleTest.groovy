@@ -144,6 +144,26 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 4, 'return 1;', 'Semi-colons as line endings can be removed safely')
     }
 
+    @Test
+    void testSemiColonInMultilineCommentsWithoutLeadingAsterisk() {
+        final SOURCE = '''
+        /*
+         (the "License");
+         (the "License");
+         (the "License");
+         you may not use this file except in compliance with the License. 
+         */
+         
+         /*
+          have a multiline comment
+          */ /*  and start a new multiline comment on the previous ending line;  
+          though i doubt this is a good thing
+          */
+         
+        '''
+        assert !manuallyApplyRule(SOURCE)
+    }
+
     @Override
     protected Rule createRule() {
         new UnnecessarySemicolonRule()
