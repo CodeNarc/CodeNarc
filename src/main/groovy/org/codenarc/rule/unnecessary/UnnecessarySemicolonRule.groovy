@@ -87,6 +87,14 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 
     private boolean isInsideMultilineComment(String line, boolean insideMultilineComment) {
         if (line.matches(startMultilineCommentPattern)) {
+            if (line.matches(endMultilineCommentPattern)) {
+                int startIndex = line.indexOf('/*')
+                int endIndex = line.indexOf('*/')
+
+                if (endIndex >  startIndex) {
+                    return false
+                }
+            }
             return true
         } else if (line.matches(endMultilineCommentPattern)) {
             return false

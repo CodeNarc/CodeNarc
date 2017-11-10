@@ -164,6 +164,15 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
         assert !manuallyApplyRule(SOURCE)
     }
 
+    @Test
+    void testMultilineCommentWrittenAsASingleLine() {
+        final SOURCE = '''
+        /* no semi colon here */
+        println("raccoon");
+        '''
+        assertSingleViolation(SOURCE, 3, 'println("raccoon");', 'Semi-colons as line endings can be removed safely')
+    }
+
     @Override
     protected Rule createRule() {
         new UnnecessarySemicolonRule()
