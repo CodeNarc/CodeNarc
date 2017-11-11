@@ -54,6 +54,9 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
                 MyClass() {
                     this(classNames)
                 }
+                MyClass(String s) { }
+                MyClass(@Annotation('${prop}') String s) {
+                }
             }
             interface MyInterface { }
             enum MyEnum { OK, BAD }
@@ -92,6 +95,8 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase {
                     while (count > this."maxPriority${priority}Violations") {}
                 }
                 void doStuff2() {}
+                MyClass() {}
+                MyClass(@Annotation('${prop}') String s) {}
             }
             interface MyInterface2 {}
         '''
