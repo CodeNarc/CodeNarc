@@ -15,16 +15,17 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.junit.Before
 import org.junit.Test
 
 /**
  * Tests for CloseWithoutCloseableRule
  *
  * @author Hamlet D'Arcy
+ * @author Marcin Erdmann
  */
-class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
+class CloseWithoutCloseableRuleTest extends GenericAbstractRuleTestCase<CloseWithoutCloseableRule> {
 
     @Test
     void testRuleProperties() {
@@ -74,7 +75,30 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected CloseWithoutCloseableRule createRule() {
         new CloseWithoutCloseableRule()
     }
+}
+
+class EnhancedCloseWithoutCloseableRuleTest extends CloseWithoutCloseableRuleTest {
+
+    @Before
+    void enableEnhancedMode() {
+        rule.enhancedMode = true
+    }
+
+    @Test
+    void testNoViolationsWhenCloseableIsImplementedIndirectly() {
+        assertNoViolations '''
+            class InputStreamsAreCloseable extends InputStream { // through class
+                void close() {}
+            }
+
+            class ChannelsAreCloseable implements java.nio.channels.Channel { // through interface
+                void close() {}
+                boolean isOpen() { false }
+            }
+        '''
+    }
+
 }
