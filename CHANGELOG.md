@@ -7,9 +7,19 @@ New Rules
 
 Updated/Enhanced Rules and Bug Fixes
    - #239: Ignore super calls in UnnecessarySetterRule. (Marcin Erdmann) 
-   - #238: Update Gradle to 4.2. (Marcin Erdmann) 
+   - #258: Add enhanced mode for **CloseWithoutCloseableRule**. (Marcin Erdmann)
+   - #263: **SpaceAfterOpeningBraceRule**: Fix false positive when an annotation has a brace. (Marcus Rosenow)
+   - #243: **TrailingComma** rule: Fix for inline Lists in annotations. (Russell Sanborn)
+   - #260: **BlankLineBeforePackageRule**, **UnnecessarySemicolonRule**: Update to ignore semicolons in multiline comments (Russell Sanborn).
+   - #254: Removed @SuppressWarnings that were not needed. (Russel Sanborn)
+
+Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)
    - #233: Change dependency subst. to exclusions in integration-test module. (Marcin Erdmann)
+   - #238: Update Gradle to 4.2. (Marcin Erdmann) 
+   - #242: Removing duplicate gradle property settings. (Russell Sanborn)
+   - #255: Apply **MissingOverrideAnnotation** rule to project source code. (Marcin Erdmann)
+   - #262: Update readme to describe how to test locally.  (Russell Sanborn)
 
 
 Version 1.0 (Sep 2017)
