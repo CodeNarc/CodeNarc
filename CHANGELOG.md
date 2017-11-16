@@ -12,6 +12,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #243: **TrailingComma** rule: Fix for inline Lists in annotations. (Russell Sanborn)
    - #260: **BlankLineBeforePackageRule**, **UnnecessarySemicolonRule**: Update to ignore semicolons in multiline comments (Russell Sanborn).
    - #254: Removed @SuppressWarnings that were not needed. (Russel Sanborn)
+   - #268: Enable @SuppressWarnings on imports.
 
 Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)

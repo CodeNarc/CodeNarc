@@ -54,12 +54,34 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
     }
 
     @Test
+    void testImport_SuppressWarnings() {
+        final SOURCE = """
+            @SuppressWarnings('${rule.name}')
+            import ${getClassName()}
+
+            class MyClass { }
+        """
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testStaticImport_Violation() {
         final SOURCE = """
             import static ${getClassName()}.*
             class MyClass { }
         """
         assertSingleViolation(SOURCE, 2, "import static ${getClassName()}.*", violationMessage)
+    }
+
+    @Test
+    void testStaticImport_SuppressWarnings() {
+        final SOURCE = """
+            @SuppressWarnings('${rule.name}')
+            import static ${getClassName()}.*
+
+            class MyClass { }
+        """
+        assertNoViolations(SOURCE)
     }
 
     @Test

@@ -16,6 +16,7 @@
 package org.codenarc.rule
 
 import org.codenarc.analyzer.StringSourceAnalyzer
+import org.codenarc.analyzer.SuppressionAnalyzer
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.CustomCompilerPhaseSourceDecorator
 import org.codenarc.source.SourceCode
@@ -285,8 +286,14 @@ actual:               $violation.sourceLine
         def sourceCode = prepareSourceCode(source)
         assert sourceCode.valid
         def violations = rule.applyTo(sourceCode)
+        removeSuppressedViolations(sourceCode, violations)
         log("violations=$violations")
         violations
+    }
+
+    private void removeSuppressedViolations(SourceCode sourceCode, List<Violation> violations) {
+        def suppressionAnalyzer = new SuppressionAnalyzer(sourceCode)
+        violations.removeAll { suppressionAnalyzer.isViolationSuppressed(it) }
     }
 
     private SourceCode prepareSourceCode(String source) {

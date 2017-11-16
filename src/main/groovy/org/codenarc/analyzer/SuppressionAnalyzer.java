@@ -70,8 +70,9 @@ public class SuppressionAnalyzer {
                 if (ast != null) {
                     suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getPackage()));
                     suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getImports()));
-                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStaticStarImports().values()));
                     suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStarImports()));
+                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStaticImports().values()));
+                    suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStaticStarImports().values()));
                     // if it is the only class in the file, then a @SuppressWarnings applies to everything
                     if (ast.getClasses() != null && ast.getClasses().size() == 1) {
                         suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getClasses()));
@@ -89,6 +90,12 @@ public class SuppressionAnalyzer {
 
         final Map<String, BitSet> result = new HashMap<String, BitSet>();
         final int numLines = getLineCount(ast);
+
+        for (ImportNode importNode : getImportNodes(ast)) {
+            for (String ruleName : getSuppressedRuleNames(importNode)) {
+                populateLineNumbers(importNode, result, numLines, ruleName);
+            }
+        }
 
         for (ClassNode classNode : ast.getClasses()) {
             for (String ruleName : getSuppressedRuleNames(classNode)) {
@@ -121,6 +128,15 @@ public class SuppressionAnalyzer {
             }
         }
         return result;
+    }
+
+    private List<ImportNode> getImportNodes(ModuleNode ast) {
+        List<ImportNode> importNodes = new ArrayList<ImportNode>();
+        importNodes.addAll(ast.getImports());
+        importNodes.addAll(ast.getStarImports());
+        importNodes.addAll(ast.getStaticImports().values());
+        importNodes.addAll(ast.getStaticStarImports().values());
+        return importNodes;
     }
 
     @SuppressWarnings({"unchecked"})
