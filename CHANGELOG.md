@@ -13,6 +13,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #260: **BlankLineBeforePackageRule**, **UnnecessarySemicolonRule**: Update to ignore semicolons in multiline comments (Russell Sanborn).
    - #254: Removed @SuppressWarnings that were not needed. (Russel Sanborn)
    - #268: Enable @SuppressWarnings on imports.
+   - #246: CodeNarc command-line runner: Only set *title* property on *ReportWriters* that support it.
 
 Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)

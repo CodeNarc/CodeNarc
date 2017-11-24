@@ -35,7 +35,7 @@ import org.codenarc.report.ReportWriterFactory
  *          all files are included when omitted.</li>
  *   <li>excludes - The comma-separated list of Ant file patterns specifying files that must be excluded;
  *          no files are excluded when omitted.</li>
- *   <li>title - The title description for this analysis; used in the output report(s). Optional.</li>
+ *   <li>title - The title description for this analysis; used in the output report(s), if supported. Optional.</li>
  *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME].
  *          where TYPE is 'html' and FILENAME is the filename (with optional path) of the output report filename.
  *          If the report filename is omitted, the default filename is used ("CodeNarcReport.html").
@@ -65,7 +65,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         This can be a single file path, or multiple paths separated by commas.
         Defaults to "rulesets/basic.xml"
     -title=<REPORT TITLE>
-        The title descriptive for this analysis; used in the output report(s). Optional.
+        The title for this analysis; used in the output report(s), if supported by the report type. Optional.
     -report=<REPORT-TYPE[:FILENAME]>
         The definition of the report to produce. The option value is of the form
         TYPE[:FILENAME], where TYPE is "html", "text", "xml", or "console" and FILENAME is the filename (with
@@ -122,7 +122,11 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         parseArgs(args)
         setDefaultsIfNecessary()
         def sourceAnalyzer = createSourceAnalyzer()
-        reports.each { reportWriter -> reportWriter.title = title }
+        reports.each { reportWriter ->
+            if (reportWriter.hasProperty('title')) {
+                reportWriter.title = title
+            }
+        }
 
         def codeNarcRunner = createCodeNarcRunner()
         codeNarcRunner.ruleSetFiles = ruleSetFiles

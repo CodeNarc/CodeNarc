@@ -17,7 +17,9 @@ package org.codenarc
 
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
+import org.codenarc.report.ReportWriter
 import org.codenarc.report.XmlReportWriter
+import org.codenarc.results.Results
 import org.codenarc.test.AbstractTestCase
 import org.junit.After
 import org.junit.Before
@@ -165,6 +167,8 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.baseDir == 'ddd'
     }
 
+    // Tests for execute()
+
     @Test
     void testExecute() {
         final ARGS = [
@@ -216,6 +220,23 @@ class CodeNarcTest extends AbstractTestCase {
         assertReport(reportWriter, HtmlReportWriter, null, null)
         assert exitCode == 0
     }
+
+    @Test
+    void testExecute_ReportClassDoesNotSupportSetTitle() {
+        final ARGS = ["-report=${NoTitleReportWriter.name}", "-title=$TITLE"] as String[]
+
+        def codeNarcRunner = [execute: { }]
+        codeNarc.createCodeNarcRunner = { codeNarcRunner }
+
+        codeNarc.execute(ARGS)
+
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assert reportWriter.class == NoTitleReportWriter
+        assert exitCode == 0
+    }
+
+    // Test for main()
 
     @Test
     void testMain() {
@@ -293,4 +314,10 @@ class CodeNarcTest extends AbstractTestCase {
         assert report.title == title
     }
 
+}
+
+class NoTitleReportWriter implements ReportWriter {
+    @Override
+    void writeReport(AnalysisContext analysisContext, Results results) {
+    }
 }

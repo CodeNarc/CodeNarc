@@ -49,8 +49,8 @@ CodeNarc - Run From Command-Line
 |                                 | option is specified, default to a single "html" report with the      |                                      |
 |                                 | default filename.                                                    |                                      |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
-| -title=<REPORT TITLE>           | The title description for this analysis; used in the output          | -title="My Project"                  |
-|                                 | report(s), if provided.                                              |                                      |
+| -title=<REPORT TITLE>           | The title for this analysis; used in the output report(s),           | -title="My Project"                  |
+|                                 | if supported by the report type(s). Optional.                        |                                      |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
 | -help                           | Display the command-line help. If present, this must be the          | -help                                |
 |                                 | only command-line parameter.                                         |                                      |
