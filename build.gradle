@@ -17,6 +17,9 @@ repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 
+def groovyVersion = "2.3.11"
+def slf4jVersion = "1.7.25"
+
 dependencies {
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
     compile "org.codehaus.groovy:groovy-ant:$groovyVersion"
@@ -70,6 +73,11 @@ javadoc {
 
 // Publish to Sonatype (OSSRH) Maven Repository
 // See http://central.sonatype.org/pages/gradle.html
+ext {
+    // These properties should be defined in "gradle.properties" within the user.gradle dir
+    ossrhUsername = "undefined"
+    ossrhPassword = "undefined"
+}
 uploadArchives {
     repositories {
         mavenDeployer {
