@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 
@@ -29,22 +31,53 @@ class IndentationRule extends AbstractAstVisitorRule {
     String name = 'Indentation'
     int priority = 3
     Class astVisitorClass = IndentationAstVisitor
-    String singleIndentLevel = '    '
+    int spacesPerIndentLevel = 4
 
-    void setSpacesPerIndentLevel(int numSpaces) {
-        this.singleIndentLevel = ' ' * numSpaces
-    }
 }
 
 class IndentationAstVisitor extends AbstractAstVisitor {
 
+    private int indentLevel = 0
+
     @Override
     protected void visitClassEx(ClassNode node) {
-        if (node.columnNumber != 1) {
-            addViolation(node, "The class ${node.getNameWithoutPackage()} is at the incorrect indent level")
+        indentLevel = nestingLevelForClass(node)
+
+        boolean isInnerClass = node instanceof InnerClassNode
+        println "visitClassEX: $node; isInnerClass=$isInnerClass; class=${node.class}"
+        boolean isAnonymous = isInnerClass && node.anonymous
+        if (!isAnonymous) {
+            int expectedColumn = columnForIndentLevel(indentLevel)
+            if (node.columnNumber != expectedColumn) {
+                addViolation(node, "The class ${node.getNameWithoutPackage()} is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
+            }
+        }
+        indentLevel++
+        super.visitClassEx(node)
+    }
+
+    @Override
+    protected void visitMethodEx(MethodNode node) {
+        int expectedColumn = columnForIndentLevel(indentLevel)
+        if (node.columnNumber != expectedColumn) {
+            addViolation(node, "The method ${node.name} in class ${currentClassName} is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
         }
 
-        super.visitClassEx(node)
+        super.visitMethodEx(node)
+    }
+
+    private int nestingLevelForClass(ClassNode node) {
+        // If this is a nested class, then add one to the outer class level
+        int level = node.outerClass ? nestingLevelForClass(node.outerClass) + 1 : 0
+
+        // If this class is defined within a method, add one to the level
+        level += node.enclosingMethod ? 1 : 0
+
+        return level
+    }
+
+    private int columnForIndentLevel(int indentLevel) {
+        return indentLevel * rule.spacesPerIndentLevel + 1
     }
 
 }

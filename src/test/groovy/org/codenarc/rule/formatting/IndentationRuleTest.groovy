@@ -30,16 +30,23 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'Indentation'
-        assert rule.singleIndentLevel == '    '
+        assert rule.spacesPerIndentLevel == 4
     }
 
     @Test
-    void test_Class_ProperIndentation_NoViolations() {
+    void test_ProperIndentation_NoViolations() {
         final SOURCE = '''
-            |class MyClass { }
+            |class MyClass {
+            |    def myMethod1() { } 
+            |    private String doStuff() {
+            |    } 
+            |    static void printReport(String filename) { } 
+            |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
     }
+
+    // Tests for class declarations
 
     @Test
     void test_Class_WrongIndentation_Violation() {
@@ -55,30 +62,87 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         )
     }
 
-//    @Test
-//    void test_Class_singleIndentLevel_NoViolation() {
-//        final SOURCE = '''
-//            |\tclass MyClass { }
-//        '''.stripMargin()
-//        rule.singleIndentLevel = '\t'
-//        assertNoViolations(SOURCE)
-//    }
-//
-//    @Test
-//    void test_Class_singleIndentLevel_Violation() {
-//        final SOURCE = '''
-//            |\t  class MyClass { }
-//        '''.stripMargin()
-//        rule.singleIndentLevel = '\t'
-//        assertViolations(SOURCE,
-//            [lineNumber:2, sourceLineText:'class MyClass { }', messageText:'The class MyClass'],
-//        )
-//    }
+    // TODO Test for method annotation -- method correct + annotation wrong and vice versa
+    // TODO Test for class annotation  -- class correct + annotation wrong and vice versa
 
     @Test
-    void test_setSpacesPerIndentLevel() {
-        rule.setSpacesPerIndentLevel(3)
-        assert rule.singleIndentLevel == '   '
+    void test_NestedClass_ProperIndentation_NoViolations() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private class MyNestedClass {
+            |        private void innerMethod() { }
+            |        void execute() {
+            |            def runnable = new Runnable() {
+            |                @Override
+            |                void run() { }   
+            |            }   
+            |        }
+            |    }
+            |    protected void outerMethod() { }  
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_ClassDefinedWithinFieldDeclaration_ProperIndentation_NoViolations() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private Runnable runnable = new Runnable() {
+            |        @Override
+            |        void run() { }   
+            |    }   
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    // Tests for method declarations
+
+    @Test
+    void test_Method_WrongIndentation_Violation() {
+        final SOURCE = '''
+            |class MyClass {
+            |  def myMethod1() { } 
+            |         private String doStuff() {
+            |         } 
+            |\tstatic void printReport(String filename) { } 
+            |protected static void count() { } 
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'def myMethod1()', messageText:'The method myMethod1 in class MyClass'],
+                [lineNumber:4, sourceLineText:'private String doStuff()', messageText:'The method doStuff in class MyClass'],
+                [lineNumber:6, sourceLineText:'static void printReport(String filename)', messageText:'The method printReport in class MyClass'],
+                [lineNumber:7, sourceLineText:'protected static void count()', messageText:'The method count in class MyClass'],
+        )
+    }
+
+    @Test
+    void test_Method_spacesPerIndentLevel_NoViolation() {
+        final SOURCE = '''
+            |class MyClass {
+            |  def myMethod1() { } 
+            |  static void printReport(String filename) { } 
+            |}
+        '''.stripMargin()
+        rule.spacesPerIndentLevel = 2
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Method_spacesPerIndentLevel_Violation() {
+        final SOURCE = '''
+            |class MyClass {
+            |   def myMethod1() { } 
+            | static void printReport(String filename) { } 
+            |}
+        '''.stripMargin()
+        rule.spacesPerIndentLevel = 2
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'def myMethod1()', messageText:'The method myMethod1 in class MyClass'],
+            [lineNumber:4, sourceLineText:'static void printReport(String filename)', messageText:'The method printReport in class MyClass'],
+        )
     }
 
     @Override

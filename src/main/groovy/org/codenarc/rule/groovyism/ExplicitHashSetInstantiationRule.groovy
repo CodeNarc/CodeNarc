@@ -29,13 +29,13 @@ class ExplicitHashSetInstantiationRule extends AbstractAstVisitorRule {
     String name = 'ExplicitHashSetInstantiation'
     int priority = 2
 
-        @Override
-        AstVisitor getAstVisitor() {
-            new ExplicitTypeInstantiationAstVisitor('HashSet')  {
+    @Override
+    AstVisitor getAstVisitor() {
+        new ExplicitTypeInstantiationAstVisitor('HashSet')  {
             @Override
             protected String createErrorMessage() {
                 'HashSet objects are better instantiated using the form "[] as Set"'
             }
         }
-        }
+    }
 }
