@@ -130,7 +130,7 @@ class ModifiersUtilTest extends AbstractTestCase {
         assert ModifiersUtil.parseModifiers('volatile public') == (ACC_PUBLIC | ACC_VOLATILE)
     }
 
-        @Test
+    @Test
     void testParseModifiers_IgnoresExtraWhitespace() {
         assert ModifiersUtil.parseModifiers('\tprotected  ') == ACC_PROTECTED
         assert ModifiersUtil.parseModifiers(' private  static  \t  final') == (ACC_PRIVATE | ACC_STATIC | ACC_FINAL)

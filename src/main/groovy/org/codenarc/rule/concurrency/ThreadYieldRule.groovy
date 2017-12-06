@@ -29,17 +29,17 @@ import org.codenarc.util.AstUtil
   */
 class ThreadYieldRule extends AbstractAstVisitorRule {
 
-     String name = 'ThreadYield'
-     int priority = 2
-     Class astVisitorClass = ThreadYieldAstVisitor
- }
+    String name = 'ThreadYield'
+    int priority = 2
+    Class astVisitorClass = ThreadYieldAstVisitor
+}
 
 class ThreadYieldAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
-     void visitMethodCallExpression(MethodCallExpression call) {
-         if (AstUtil.isMethodCall(call, 'Thread', 'yield', 0)) {
+    void visitMethodCallExpression(MethodCallExpression call) {
+        if (AstUtil.isMethodCall(call, 'Thread', 'yield', 0)) {
             addViolation(call, 'Thread.yield() has not useful guaranteed semantics')
-         }
-     }
- }
+        }
+    }
+}

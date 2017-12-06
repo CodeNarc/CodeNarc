@@ -15,6 +15,8 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.ASTNode
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
@@ -38,13 +40,13 @@ class IndentationRule extends AbstractAstVisitorRule {
 class IndentationAstVisitor extends AbstractAstVisitor {
 
     private int indentLevel = 0
+    private final Set<Integer> fieldLineNumbers = []
 
     @Override
     protected void visitClassEx(ClassNode node) {
         indentLevel = nestingLevelForClass(node)
 
         boolean isInnerClass = node instanceof InnerClassNode
-        println "visitClassEX: $node; isInnerClass=$isInnerClass; class=${node.class}"
         boolean isAnonymous = isInnerClass && node.anonymous
         if (!isAnonymous) {
             int expectedColumn = columnForIndentLevel(indentLevel)
@@ -58,12 +60,24 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodEx(MethodNode node) {
+        checkForCorrectColumn(node, 'method')
+        super.visitMethodEx(node)
+    }
+
+    @Override
+    void visitField(FieldNode node) {
+        if (!fieldLineNumbers.contains(node.lineNumber)) {
+            fieldLineNumbers << node.lineNumber
+            checkForCorrectColumn(node, 'field')
+        }
+        super.visitField(node)
+    }
+
+    private void checkForCorrectColumn(ASTNode node, String elementType) {
         int expectedColumn = columnForIndentLevel(indentLevel)
         if (node.columnNumber != expectedColumn) {
-            addViolation(node, "The method ${node.name} in class ${currentClassName} is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
+            addViolation(node, "The $elementType ${node.name} in class ${currentClassName} is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
         }
-
-        super.visitMethodEx(node)
     }
 
     private int nestingLevelForClass(ClassNode node) {

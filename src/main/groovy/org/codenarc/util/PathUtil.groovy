@@ -34,32 +34,32 @@ class PathUtil {
         (separatorIndex == -1) ? path : path[separatorIndex + 1 .. -1]
     }
 
-     static String getParentPath(String filePath) {
-         def normalizedPath = normalizePath(filePath)
-         def partList = normalizedPath ? normalizedPath.tokenize(SEP) : []
-         if (partList.size() < 2) {
-             return null
-         }
-         def parentList = partList[0..-2]
-         parentList.join(SEP)
-     }
+    static String getParentPath(String filePath) {
+        def normalizedPath = normalizePath(filePath)
+        def partList = normalizedPath ? normalizedPath.tokenize(SEP) : []
+        if (partList.size() < 2) {
+            return null
+        }
+        def parentList = partList[0..-2]
+        parentList.join(SEP)
+    }
 
-     static String normalizePath(String path) {
-         path ? path.replaceAll('\\\\', SEP) : path
-     }
+    static String normalizePath(String path) {
+        path ? path.replaceAll('\\\\', SEP) : path
+    }
 
-     static String removePathPrefix(String prefix, String path) {
-         def resultPath = path
-         if (prefix && resultPath.startsWith(prefix)) {
-             resultPath = resultPath - prefix
-             return removeLeadingSlash(resultPath)
-         }
-         resultPath
-     }
+    static String removePathPrefix(String prefix, String path) {
+        def resultPath = path
+        if (prefix && resultPath.startsWith(prefix)) {
+            resultPath = resultPath - prefix
+            return removeLeadingSlash(resultPath)
+        }
+        resultPath
+    }
 
-     private static String removeLeadingSlash(path) {
-         (path.startsWith('\\') || path.startsWith(SEP)) ? path[1 .. -1] : path
-     }
+    private static String removeLeadingSlash(path) {
+        (path.startsWith('\\') || path.startsWith(SEP)) ? path[1 .. -1] : path
+    }
 
     // Private constructor to prevent instantiation. All members are static.
     private PathUtil() { }

@@ -31,9 +31,9 @@ import java.lang.reflect.Modifier
  */
 class ThreadLocalNotStaticFinalRule extends AbstractAstVisitorRule {
 
-     String name = 'ThreadLocalNotStaticFinal'
-     int priority = 2
-     Class astVisitorClass = ThreadLocalNotStaticFinalAstVisitor
+    String name = 'ThreadLocalNotStaticFinal'
+    int priority = 2
+    Class astVisitorClass = ThreadLocalNotStaticFinalAstVisitor
 }
 
 class ThreadLocalNotStaticFinalAstVisitor extends AbstractFieldVisitor {

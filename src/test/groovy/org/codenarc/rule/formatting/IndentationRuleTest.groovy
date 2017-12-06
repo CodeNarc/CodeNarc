@@ -37,6 +37,10 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     void test_ProperIndentation_NoViolations() {
         final SOURCE = '''
             |class MyClass {
+            |    private static final NAME = "Joe"
+            |    protected int count
+            |    String id = "12345"
+            |    
             |    def myMethod1() { } 
             |    private String doStuff() {
             |    } 
@@ -61,9 +65,6 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             [lineNumber:4, sourceLineText:'class MyClass3 { }', messageText:'The class MyClass3'],
         )
     }
-
-    // TODO Test for method annotation -- method correct + annotation wrong and vice versa
-    // TODO Test for class annotation  -- class correct + annotation wrong and vice versa
 
     @Test
     void test_NestedClass_ProperIndentation_NoViolations() {
@@ -192,6 +193,39 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'def myMethod1()', messageText:'The method myMethod1 in class MyClass'],
             [lineNumber:4, sourceLineText:'static void printReport(String filename)', messageText:'The method printReport in class MyClass'],
+        )
+    }
+
+    // Tests for field and property declarations
+
+    @Test
+    void test_Field_WrongIndentation_Violation() {
+        final SOURCE = '''
+            |class MyClass {
+            |  private static final NAME = "Joe"
+            |      protected int count
+            | Date date
+            |  def lastIndex
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'private static final NAME = "Joe"', messageText:'The field NAME in class MyClass'],
+                [lineNumber:4, sourceLineText:'protected int count', messageText:'The field count in class MyClass'],
+                [lineNumber:5, sourceLineText:'Date date', messageText:'The field date in class MyClass'],
+                [lineNumber:6, sourceLineText:'def lastIndex', messageText:'The field lastIndex in class MyClass'],
+        )
+    }
+
+    @Test
+    void test_Field_MultipleFieldsDeclaredOnSameLine() {
+        final SOURCE = '''
+            |class MyClass {
+            |    protected firstName, lastName
+            |  def max, min
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:4, sourceLineText:'def max, min', messageText:'The field max in class MyClass'],
         )
     }
 
