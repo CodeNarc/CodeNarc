@@ -97,6 +97,56 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    // Tests for Annotations
+
+    @Test
+    void test_Annotations_ProperIndentation_NoViolations() {
+        final SOURCE = '''
+            |@SuppressWarnings
+            |class MyClass {
+            |    @Component
+            |    private class MyNestedClass {
+            |        @Provider
+            |        private void innerMethod() { }
+            |        void execute() {
+            |            def runnable = new Runnable() {
+            |                @Override
+            |                void run() { }   
+            |            }   
+            |        }
+            |    }
+            |    protected void outerMethod() { }  
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Annotations_WrongIndentation_KnownIssue() {
+        final SOURCE = '''
+            |@SuppressWarnings          // Annotation: correct
+            | class MyClass { }         // Class: incorect --> IGNORED
+            |
+            |  @Component              // Annotation: incorrect --> VIOLATION
+            |class MyOtherClass { }    // Class: correct
+            | 
+            |@SuppressWarnings         // 1st Annotation: correct
+            |  @Component              // 2nd Annotation: incorrect --> IGNORED
+            | class TestClass {        // Class: incorrect --> IGNORED
+            | 
+            |    @Provider                  // Annotation: correct
+            | private void doStuff() { }    // Method: incorrect --> IGNORED
+            |
+            |    @Package void one() { }    // Method: correct
+            |  @Package void two() { }      // Method: incorrect --> VIOLATION
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:6, sourceLineText:'class MyOtherClass', messageText:'The class MyOtherClass'],
+                [lineNumber:16, sourceLineText:'@Package void two()', messageText:'The method two'],
+        )
+    }
+
     // Tests for method declarations
 
     @Test
