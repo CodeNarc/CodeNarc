@@ -43,6 +43,8 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    
             |    def myMethod1() { } 
             |    private String doStuff() {
+            |        def internalCounts = [1, 4, 2]
+            |        id.trim() 
             |    } 
             |    static void printReport(String filename) { } 
             |}
@@ -227,6 +229,165 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
                 [lineNumber:4, sourceLineText:'def max, min', messageText:'The field max in class MyClass'],
         )
+    }
+
+    @Test
+    void test_Field_AssignmentToClosureWithStatements() {
+        final SOURCE = '''
+            |class MyClass {
+            |    protected createCodeNarcRunner = { new ProcessRunner() }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    // Tests for method statements
+
+    @Test
+    void test_Statement_WrongIndentation_Violation() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private String doStuff() {
+            |      def internalCounts = [1, 4, 2]
+            |            id.trim() 
+            |    } 
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:4, sourceLineText:'def internalCounts = [1, 4, 2]', messageText:'The statement on line 4 in class MyClass'],
+                [lineNumber:5, sourceLineText:'id.trim()', messageText:'The statement on line 5 in class MyClass'],
+        )
+    }
+
+    @Test
+    void test_Statement_Closure_SingleLine() {
+        final SOURCE = '''
+            |class MyClass {
+            |    void test_processResults() {
+            |        shouldFailWithMessageContaining('results') { processor.processResults(null) }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_Closure_MultipleLines() {
+        final SOURCE = '''
+            |class MyClass {
+            |    void doStuff(String name) {
+            |        doWith('results') {
+            |            println  name
+            |            processResults(name) 
+            |        }
+            |        doWith(
+            |            name,      
+            |            null) {
+            |            println  name
+            |            processResults(name) 
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_IfElseBlock_AndClosure() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
+            |        def dirResults = new DirectoryResults(dir)
+            |        def dirFile = new File((String) baseDirectory, (String) dir)
+            |        dirFile.eachFile { file ->
+            |            def dirPrefix = dir ? dir + SEP : dir
+            |            def filePath = dirPrefix + file.name
+            |            if (file.directory) {
+            |                def subdirResults = processDirectory(filePath, ruleSet)
+            |                // If any of the descendent directories have matching files, then include in final results
+            |                if (subdirResults.getTotalNumberOfFiles(true)) {
+            |                    dirResults.addChild(subdirResults)
+            |                }
+            |            }
+            |            else {
+            |                processFile(filePath, dirResults, ruleSet)
+            |            }
+            |        }
+            |        dirResults
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_TryCatchFinally() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private void execute() {
+            |        try {
+            |            executeWithArgs(args)
+            |        }
+            |        catch(Throwable t) {
+            |            println "ERROR: ${t.message}"
+            |            t.printStackTrace()
+            |        }
+            |        finally {
+            |            closeResources()
+            |        }
+            |    }
+            |    private void executeOtherOne() {
+            |        try { 
+            |            executeWithArgs(args)
+            |        } catch(Throwable t) {
+            |            t.printStackTrace()
+            |        } finally {
+            |            closeResources()
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_SwitchStatement() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private void execute() {
+            |        switch(name) {
+            |            case '1': println 'ok'; break
+            |            case '2': 
+            |                println 'too much'
+            |                break
+            |        }
+            |        switch(age) {
+            |            case 21: println 'ok'; break
+            |            case 11: println 'wrong' 
+            |                break
+            |            default: println 'ok'
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_ForLoop() {
+        final SOURCE = '''
+            |class MyClass {
+            |    void test_processResults() {
+            |        for (Rule rule: validRules) {
+            |            def name = rule.name
+            |            allNames.addAll(name)
+            |        }
+            |
+            |        for(int i=1; i < 99; i++) { println i }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
     }
 
     @Override

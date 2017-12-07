@@ -20,6 +20,13 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.stmt.CaseStatement
+import org.codehaus.groovy.ast.stmt.ForStatement
+import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codehaus.groovy.ast.stmt.SwitchStatement
+import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
 
@@ -41,6 +48,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private int indentLevel = 0
     private final Set<Integer> fieldLineNumbers = []
+    private final Set<Integer> statementLineNumbers = []
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -49,10 +57,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         boolean isInnerClass = node instanceof InnerClassNode
         boolean isAnonymous = isInnerClass && node.anonymous
         if (!isAnonymous) {
-            int expectedColumn = columnForIndentLevel(indentLevel)
-            if (node.columnNumber != expectedColumn) {
-                addViolation(node, "The class ${node.getNameWithoutPackage()} is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
-            }
+            checkForCorrectColumn(node, "class ${node.getNameWithoutPackage()}")
         }
         indentLevel++
         super.visitClassEx(node)
@@ -60,7 +65,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitMethodEx(MethodNode node) {
-        checkForCorrectColumn(node, 'method')
+        checkForCorrectColumn(node, "method ${node.name} in class ${currentClassName}")
         super.visitMethodEx(node)
     }
 
@@ -68,15 +73,80 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     void visitField(FieldNode node) {
         if (!fieldLineNumbers.contains(node.lineNumber)) {
             fieldLineNumbers << node.lineNumber
-            checkForCorrectColumn(node, 'field')
+            checkForCorrectColumn(node, "field ${node.name} in class ${currentClassName}")
         }
         super.visitField(node)
     }
 
-    private void checkForCorrectColumn(ASTNode node, String elementType) {
+    @Override
+    void visitBlockStatement(BlockStatement block) {
+        indentLevel++
+        block.statements.each { statement ->
+            // Skip statements on the same line as another statement or a field declaration
+            if (!statementLineNumbers.contains(statement.lineNumber) && !fieldLineNumbers.contains(statement.lineNumber)) {
+                statementLineNumbers << statement.lineNumber
+
+                // Ignore nested BlockStatement (e.g. finally blocks)
+                boolean isBlockStatement = statement instanceof BlockStatement
+                if (!isBlockStatement) {
+                   checkForCorrectColumn(statement, "statement on line ${statement.lineNumber} in class ${currentClassName}")
+                }
+            }
+        }
+        indentLevel--
+        super.visitBlockStatement(block)
+    }
+
+    @Override
+    void visitClosureExpression(ClosureExpression expression) {
+        indentLevel++
+        super.visitClosureExpression(expression)
+        indentLevel--
+    }
+
+    @Override
+    void visitIfElse(IfStatement ifElse) {
+        indentLevel++
+        super.visitIfElse(ifElse)
+        indentLevel--
+    }
+
+    @Override
+    void visitTryCatchFinally(TryCatchStatement statement) {
+        indentLevel++
+        super.visitTryCatchFinally(statement)
+        indentLevel--
+    }
+
+    @Override
+    void visitSwitch(SwitchStatement statement) {
+        statement.caseStatements.each { caseStatement ->
+            statementLineNumbers << caseStatement.lineNumber
+        }
+        statementLineNumbers << statement.defaultStatement.lineNumber
+        indentLevel++
+        super.visitSwitch(statement)
+        indentLevel--
+    }
+
+    @Override
+    void visitCaseStatement(CaseStatement statement) {
+        indentLevel++
+        super.visitCaseStatement(statement)
+        indentLevel--
+    }
+
+    @Override
+    void visitForLoop(ForStatement forLoop) {
+        indentLevel++
+        super.visitForLoop(forLoop)
+        indentLevel--
+    }
+
+    private void checkForCorrectColumn(ASTNode node, String description) {
         int expectedColumn = columnForIndentLevel(indentLevel)
         if (node.columnNumber != expectedColumn) {
-            addViolation(node, "The $elementType ${node.name} in class ${currentClassName} is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
+            addViolation(node, "The $description is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
         }
     }
 
