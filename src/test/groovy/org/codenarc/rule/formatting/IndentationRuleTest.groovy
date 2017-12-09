@@ -235,7 +235,16 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     void test_Field_AssignmentToClosureWithStatements() {
         final SOURCE = '''
             |class MyClass {
-            |    protected createCodeNarcRunner = { new ProcessRunner() }
+            |    protected createRunner = { new ProcessRunner() }
+            |    protected createOtherRunner = {
+            |        if (excludeBaseline) {
+            |            LOG.info("Loading baseline violations from [$excludeBaseline]")
+            |            def resource = resourceFactory.getResource(excludeBaseline)
+            |            def resultsProcessor = new BaselineResultsProcessor(resource)
+            |            return new CodeNarcRunner(resultsProcessor:resultsProcessor)
+            |        }
+            |        return new CodeNarcRunner()
+            |    }
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -272,7 +281,41 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void test_Statement_Closure_MultipleLines() {
+    void test_Statement_ClosureAsParameter_MultipleLines() {
+        final SOURCE = '''
+            |class MyClass {
+            |    void doStuff(String name) {
+            |        doWith {
+            |            println  name
+            |            processResults(name) 
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_ReturningAMultiLineClosure() {
+        final SOURCE = '''
+            |class MyClass {
+            |    def doStuff(String name) {
+            |        return {
+            |            def cssInputStream = ClassPathResource.getInputStream(getCssFile())
+            |            assert cssInputStream, "CSS File [$getCssFile()] not found"
+            |            def css = cssInputStream.text
+            |            style(type: 'text/css') {
+            |                unescaped << css
+            |            }
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_MultipleLineMethodCalls() {
         final SOURCE = '''
             |class MyClass {
             |    void doStuff(String name) {
@@ -377,13 +420,54 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     void test_Statement_ForLoop() {
         final SOURCE = '''
             |class MyClass {
-            |    void test_processResults() {
+            |    void processResults() {
             |        for (Rule rule: validRules) {
             |            def name = rule.name
             |            allNames.addAll(name)
             |        }
             |
             |        for(int i=1; i < 99; i++) { println i }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_WhileLoop() {
+        final SOURCE = '''
+            |class MyClass {
+            |    void processResults() {
+            |        while(!terminate) {
+            |            def name = rule.name
+            |            allNames.addAll(name)
+            |        }
+            |
+            |        while(!terminate) { println 'ok' }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_ClosureWithinMapLiteral() {
+        final SOURCE = '''
+            |class MyClass {
+            |    def processResults() {
+            |        return new MockRule(
+            |            compilerPhase: compilerPhase,
+            |            applyTo: { SourceCode source -> 
+            |                assert source.astCompilerPhase == compilerPhase
+            |                []
+            |            }
+            |        )
+            |    }
+            |    def execute() {
+            |        def resultsProcessor = [processResults:{ results ->
+            |            assert results == RESULTS
+            |            resultsProcessorCalled = true
+            |        }] as ResultsProcessor
             |    }
             |}
         '''.stripMargin()

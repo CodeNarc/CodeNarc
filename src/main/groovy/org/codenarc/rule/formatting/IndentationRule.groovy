@@ -15,20 +15,13 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.InnerClassNode
-import org.codehaus.groovy.ast.ClassNode
-import org.codehaus.groovy.ast.MethodNode
-import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.*
+import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.CaseStatement
-import org.codehaus.groovy.ast.stmt.ForStatement
-import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Check indentation for class and method declarations
@@ -46,9 +39,12 @@ class IndentationRule extends AbstractAstVisitorRule {
 
 class IndentationAstVisitor extends AbstractAstVisitor {
 
+    // Limitations -- does not check: comments, line-continuations, Map entry expressions
+
     private int indentLevel = 0
     private final Set<Integer> fieldLineNumbers = []
     private final Set<Integer> statementLineNumbers = []
+    private final Set<BlockStatement> finallyBlocks = []
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -80,7 +76,8 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-        indentLevel++
+        int addToIndentLevel = finallyBlocks.contains(block) ? 0 : 1        // finally blocks have extra level of nested BlockStatement
+        indentLevel += addToIndentLevel
         block.statements.each { statement ->
             // Skip statements on the same line as another statement or a field declaration
             if (!statementLineNumbers.contains(statement.lineNumber) && !fieldLineNumbers.contains(statement.lineNumber)) {
@@ -93,29 +90,14 @@ class IndentationAstVisitor extends AbstractAstVisitor {
                 }
             }
         }
-        indentLevel--
         super.visitBlockStatement(block)
-    }
-
-    @Override
-    void visitClosureExpression(ClosureExpression expression) {
-        indentLevel++
-        super.visitClosureExpression(expression)
-        indentLevel--
-    }
-
-    @Override
-    void visitIfElse(IfStatement ifElse) {
-        indentLevel++
-        super.visitIfElse(ifElse)
-        indentLevel--
+        indentLevel -= addToIndentLevel
     }
 
     @Override
     void visitTryCatchFinally(TryCatchStatement statement) {
-        indentLevel++
+        finallyBlocks << statement.finallyStatement
         super.visitTryCatchFinally(statement)
-        indentLevel--
     }
 
     @Override
@@ -130,18 +112,14 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    void visitCaseStatement(CaseStatement statement) {
-        indentLevel++
-        super.visitCaseStatement(statement)
-        indentLevel--
+    void visitMapEntryExpression(MapEntryExpression expression) {
+        // Skip Map entry expressions
+        //super.visitMapEntryExpression(expression)
     }
 
-    @Override
-    void visitForLoop(ForStatement forLoop) {
-        indentLevel++
-        super.visitForLoop(forLoop)
-        indentLevel--
-    }
+    //------------------------------------------------------------------------------------
+    // Helper methods
+    //------------------------------------------------------------------------------------
 
     private void checkForCorrectColumn(ASTNode node, String description) {
         int expectedColumn = columnForIndentLevel(indentLevel)
