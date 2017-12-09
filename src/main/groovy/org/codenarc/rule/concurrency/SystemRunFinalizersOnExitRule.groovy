@@ -41,7 +41,7 @@ class SystemRunFinalizersOnExitAstVisitor extends AbstractMethodCallExpressionVi
     void visitMethodCallExpression(MethodCallExpression call) {
         if (call.objectExpression instanceof VariableExpression) {
             if (AstUtil.isMethodCall(call, 'System', 'runFinalizersOnExit', 1)) {
-                 addViolation(call, 'System.runFinalizersOnExit() should not be invoked')
+                addViolation(call, 'System.runFinalizersOnExit() should not be invoked')
             }
         }
     }

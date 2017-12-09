@@ -50,7 +50,8 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    def myMethod1() { } 
             |    private String doStuff() {
             |        def internalCounts = [1, 4, 2]
-            |        id.trim() 
+            |        id.trim()
+            |        new Object().toString() 
             |    } 
             |    static void printReport(String filename) { } 
             |}
@@ -296,13 +297,15 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |class MyClass {
             |    private String doStuff() {
             |      def internalCounts = [1, 4, 2]
-            |            id.trim() 
+            |            id.trim()
+            |           new Object() 
             |    } 
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
                 [lineNumber:4, sourceLineText:'def internalCounts = [1, 4, 2]', messageText:'The statement on line 4 in class MyClass'],
                 [lineNumber:5, sourceLineText:'id.trim()', messageText:'The statement on line 5 in class MyClass'],
+                [lineNumber:6, sourceLineText:'new Object()', messageText:'The statement on line 6 in class MyClass'],
         )
     }
 
@@ -506,6 +509,22 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |            assert results == RESULTS
             |            resultsProcessorCalled = true
             |        }] as ResultsProcessor
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_ClosureOnSingleLine() {
+        final SOURCE = '''
+            |class MyClass {
+            |    def processResults() {
+            |        return list.findAll { it instanceof Date }    
+            |    }
+            |    def processOtherResults() {
+            |        return list.
+            |            findAll { it instanceof Date }    
             |    }
             |}
         '''.stripMargin()

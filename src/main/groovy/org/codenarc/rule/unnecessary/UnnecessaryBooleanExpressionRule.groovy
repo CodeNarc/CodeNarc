@@ -76,7 +76,7 @@ class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor  {
         if (AstUtil.isConstantOrLiteral(expression.expression)) {
             addViolation(expression, 'The Not expression contains a literal or constant. ')
         }
-         super.visitNotExpression(expression)
+        super.visitNotExpression(expression)
     }
 
 }

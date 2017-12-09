@@ -28,8 +28,8 @@ class ClassResolutionTest extends AbstractRuleTestCase {
         def source = '''
             @Grab(group='org.springframework', module='spring', version='2.5.6')
             import org.springframework.jdbc.core.JdbcTemplate
-'''
-         assertNoViolations source
+        '''
+        assertNoViolations source
     }
 
     @Override

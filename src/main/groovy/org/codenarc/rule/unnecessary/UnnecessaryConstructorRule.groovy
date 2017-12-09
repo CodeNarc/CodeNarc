@@ -52,7 +52,7 @@ class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
     private void analyzeConstructor(ConstructorNode node) {
         if(isEmptyOrJustCallsSuper(node) && (!rule.ignoreAnnotations || !hasAnnotations(node)) &&
                 !Modifier.isPrivate(node.modifiers) && node.parameters?.size() == 0) {
-             addViolation node, 'The constructor can be safely deleted'
+            addViolation node, 'The constructor can be safely deleted'
         }
     }
 

@@ -47,7 +47,7 @@ class DuplicateCaseStatementAstVisitor extends AbstractAstVisitor {
             }
             list
         }
-    super.visitSwitch(statement)
-  }
+        super.visitSwitch(statement)
+    }
 
 }
