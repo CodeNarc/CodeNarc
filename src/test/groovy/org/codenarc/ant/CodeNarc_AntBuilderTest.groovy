@@ -54,22 +54,22 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
             fileset(dir:'src/test/groovy/org/codenarc/rule') {
                 include(name:'**/*.groovy')
             }
-           report(type:HTML) {
-               option(name:'title', value:TITLE)
-               option(name:'outputFile', value:HTML_REPORT_FILE)
-           }
-           report(type:SORTABLE) {
-               option(name:'title', value:TITLE)
-               option(name:'outputFile', value:SORTABLE_REPORT_FILE)
-           }
-           report(type:XML) {
-               option(name:'title', value:TITLE)
-               option(name:'outputFile', value:XML_REPORT_FILE)
-           }
-           report(type:TEXT) {
-               option(name:'title', value:TITLE)
-               option(name:'outputFile', value:TEXT_REPORT_FILE)
-           }
+            report(type:HTML) {
+                option(name:'title', value:TITLE)
+                option(name:'outputFile', value:HTML_REPORT_FILE)
+            }
+            report(type:SORTABLE) {
+                option(name:'title', value:TITLE)
+                option(name:'outputFile', value:SORTABLE_REPORT_FILE)
+            }
+            report(type:XML) {
+                option(name:'title', value:TITLE)
+                option(name:'outputFile', value:XML_REPORT_FILE)
+            }
+            report(type:TEXT) {
+                option(name:'title', value:TITLE)
+                option(name:'outputFile', value:TEXT_REPORT_FILE)
+            }
         }
         verifyHtmlReportFile()
         verifySortableReportFile()

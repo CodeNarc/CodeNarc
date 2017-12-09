@@ -41,6 +41,8 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    protected int count
             |    String id = "12345"
             |    
+            |    static void reset() { violationCounts = [1:0, 2:0] }
+            |
             |    def myMethod1() { } 
             |    private String doStuff() {
             |        def internalCounts = [1, 4, 2]

@@ -59,112 +59,112 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-        void testFieldsCastToLong() {
-            final SOURCE = '''
-                class MyClass {
-                    def a = (long) Math.random()
-                    def b = (Long) Math.random()
-                }
+    void testFieldsCastToLong() {
+        final SOURCE = '''
+            class MyClass {
+                def a = (long) Math.random()
+                def b = (Long) Math.random()
+            }
             '''
-            assertTwoViolations(SOURCE,
-                    3, '(long) Math.random()', 'Casting the result of Math.random() to a long always results in 0',
-                    4, '(Long) Math.random()', 'Casting the result of Math.random() to a Long always results in 0')
+        assertTwoViolations(SOURCE,
+                3, '(long) Math.random()', 'Casting the result of Math.random() to a long always results in 0',
+                4, '(Long) Math.random()', 'Casting the result of Math.random() to a Long always results in 0')
+    }
+
+    @Test
+    void testLongFields() {
+        final SOURCE = '''
+            class MyClass {
+                long c = Math.random()
+                Long d = Math.random()
+            }
+            '''
+        assertTwoViolations(SOURCE,
+                3, 'long c = Math.random()', 'Assigning the result of Math.random() to a long always results in 0',
+                4, 'Long d = Math.random()', 'Assigning the result of Math.random() to a Long always results in 0')
+    }
+
+    @Test
+    void testFieldsAsLong() {
+        final SOURCE = '''
+            class MyClass {
+                def e = (Math.random()) as long
+                def f = (Math.random()) as Long
+            }
+            '''
+        assertTwoViolations(SOURCE,
+                3, '(Math.random()) as long', 'Casting the result of Math.random() to a long always results in 0',
+                4, '(Math.random()) as Long', 'Casting the result of Math.random() to a Long always results in 0')
         }
 
     @Test
-        void testLongFields() {
-            final SOURCE = '''
-                class MyClass {
-                    long c = Math.random()
-                    Long d = Math.random()
-                }
-            '''
-            assertTwoViolations(SOURCE,
-                    3, 'long c = Math.random()', 'Assigning the result of Math.random() to a long always results in 0',
-                    4, 'Long d = Math.random()', 'Assigning the result of Math.random() to a Long always results in 0')
-        }
+    void testLongReturningMethods() {
+        final SOURCE = '''
+            long longMethod() {
+                if (foo) return Math.random()
+            }
+            Long longMethod2() {
+                return ((foo) ?: Math.random())
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                3, 'Math.random()', 'Returning the result of Math.random() from a long-returning method always returns 0',
+                6, 'Math.random()', 'Returning the result of Math.random() from a Long-returning method always returns 0')
+    }
 
     @Test
-        void testFieldsAsLong() {
-            final SOURCE = '''
-                class MyClass {
-                    def e = (Math.random()) as long
-                    def f = (Math.random()) as Long
-                }
-            '''
-            assertTwoViolations(SOURCE,
-                    3, '(Math.random()) as long', 'Casting the result of Math.random() to a long always results in 0',
-                    4, '(Math.random()) as Long', 'Casting the result of Math.random() to a Long always results in 0')
-        }
+    void testFieldsCastToInt() {
+        final SOURCE = '''
+            class MyClass {
+                def a = (int) Math.random()
+                def b = (Integer) Math.random()
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                3, '(int) Math.random()', 'Casting the result of Math.random() to an int always results in 0',
+                4, '(Integer) Math.random()', 'Casting the result of Math.random() to an Integer always results in 0')
+    }
 
     @Test
-        void testLongReturningMethods() {
-            final SOURCE = '''
-                long longMethod() {
-                    if (foo) return Math.random()
-                }
-                Long longMethod2() {
-                    return ((foo) ?: Math.random())
-                }
-            '''
-            assertTwoViolations(SOURCE,
-                    3, 'Math.random()', 'Returning the result of Math.random() from a long-returning method always returns 0',
-                    6, 'Math.random()', 'Returning the result of Math.random() from a Long-returning method always returns 0')
-        }
+    void testIntFields() {
+        final SOURCE = '''
+            class MyClass {
+                int c = Math.random()
+                Integer d = Math.random()
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                3, 'int c = Math.random()', 'Assigning the result of Math.random() to an int always results in 0',
+                4, 'Integer d = Math.random()', 'Assigning the result of Math.random() to an Integer always results in 0')
+    }
 
     @Test
-        void testFieldsCastToInt() {
-            final SOURCE = '''
-                class MyClass {
-                    def a = (int) Math.random()
-                    def b = (Integer) Math.random()
-                }
-            '''
-            assertTwoViolations(SOURCE,
-                    3, '(int) Math.random()', 'Casting the result of Math.random() to an int always results in 0',
-                    4, '(Integer) Math.random()', 'Casting the result of Math.random() to an Integer always results in 0')
-        }
+    void testFieldsAsInt() {
+        final SOURCE = '''
+            class MyClass {
+                def e = (Math.random()) as int
+                def f = (Math.random()) as Integer
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                3, '(Math.random()) as int', 'Casting the result of Math.random() to an int always results in 0',
+                4, '(Math.random()) as Integer', 'Casting the result of Math.random() to an Integer always results in 0')
+    }
 
     @Test
-        void testIntFields() {
-            final SOURCE = '''
-                class MyClass {
-                    int c = Math.random()
-                    Integer d = Math.random()
-                }
-            '''
-            assertTwoViolations(SOURCE,
-                    3, 'int c = Math.random()', 'Assigning the result of Math.random() to an int always results in 0',
-                    4, 'Integer d = Math.random()', 'Assigning the result of Math.random() to an Integer always results in 0')
-        }
-
-    @Test
-        void testFieldsAsInt() {
-            final SOURCE = '''
-                class MyClass {
-                    def e = (Math.random()) as int
-                    def f = (Math.random()) as Integer
-                }
-            '''
-            assertTwoViolations(SOURCE,
-                    3, '(Math.random()) as int', 'Casting the result of Math.random() to an int always results in 0',
-                    4, '(Math.random()) as Integer', 'Casting the result of Math.random() to an Integer always results in 0')
-        }
-
-    @Test
-        void testIntReturningMethods() {
-            final SOURCE = '''
-                int intMethod() {
-                    if (foo) return Math.random()
-                }
-                Integer integerMethod() {
-                    if (foo) return Math.random()
-                }
-            '''
-            assertTwoViolations(SOURCE,
-                    3, 'Math.random()', 'Returning the result of Math.random() from an int-returning method always returns 0',
-                    6, 'Math.random()', 'Returning the result of Math.random() from an Integer-returning method always returns 0')
-        }
+    void testIntReturningMethods() {
+        final SOURCE = '''
+            int intMethod() {
+                if (foo) return Math.random()
+            }
+            Integer integerMethod() {
+                if (foo) return Math.random()
+            }
+        '''
+        assertTwoViolations(SOURCE,
+                3, 'Math.random()', 'Returning the result of Math.random() from an int-returning method always returns 0',
+                6, 'Math.random()', 'Returning the result of Math.random() from an Integer-returning method always returns 0')
+    }
 
     @Override
     protected Rule createRule() {

@@ -75,22 +75,22 @@ class BrokenNullCheckAstVisitor extends AbstractAstVisitor {
 
     private boolean isPropertyAccessForName(Expression expression, String varName) {
         boolean isDirectPropertyAccess =
-           expression instanceof PropertyExpression &&
-           expression.objectExpression instanceof VariableExpression &&
-           expression.objectExpression.name == varName
+            expression instanceof PropertyExpression &&
+            expression.objectExpression instanceof VariableExpression &&
+            expression.objectExpression.name == varName
         return isDirectPropertyAccess ||
             isBinaryExpressionWithPropertyAccessForName(expression, varName) ||
             isNotExpressionWithPropertyAccessForName(expression, varName)
     }
 
     private boolean isBinaryExpressionWithPropertyAccessForName(Expression expression, String varName) {
-         return expression instanceof BinaryExpression &&
-             isPropertyAccessForName(expression.leftExpression, varName)
+        return expression instanceof BinaryExpression &&
+            isPropertyAccessForName(expression.leftExpression, varName)
     }
 
     private boolean isNotExpressionWithPropertyAccessForName(Expression expression, String varName) {
-         return expression instanceof NotExpression &&
-             isPropertyAccessForName(expression.expression, varName)
+        return expression instanceof NotExpression &&
+            isPropertyAccessForName(expression.expression, varName)
     }
 
     private boolean isMethodCallOnName(Expression expression, String varName) {
@@ -103,13 +103,13 @@ class BrokenNullCheckAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isBinaryExpressionWithMethodCallOnName(Expression expression, String varName) {
-         return expression instanceof BinaryExpression &&
-             isMethodCallOnName(expression.leftExpression, varName)
+        return expression instanceof BinaryExpression &&
+            isMethodCallOnName(expression.leftExpression, varName)
     }
 
     private boolean isNotExpressionWithMethodCallOnName(Expression expression, String varName) {
-         return expression instanceof NotExpression &&
-             isMethodCallOnName(expression.expression, varName)
+        return expression instanceof NotExpression &&
+            isMethodCallOnName(expression.expression, varName)
     }
 
 }

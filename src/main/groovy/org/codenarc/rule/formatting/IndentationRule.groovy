@@ -42,8 +42,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     // Limitations -- does not check: comments, line-continuations, Map entry expressions
 
     private int indentLevel = 0
-    private final Set<Integer> fieldLineNumbers = []
-    private final Set<Integer> statementLineNumbers = []
+    private final Set<Integer> ignoreLineNumbers = []
     private final Set<BlockStatement> finallyBlocks = []
 
     @Override
@@ -62,13 +61,14 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitMethodEx(MethodNode node) {
         checkForCorrectColumn(node, "method ${node.name} in class ${currentClassName}")
+        ignoreLineNumbers << node.lineNumber
         super.visitMethodEx(node)
     }
 
     @Override
     void visitField(FieldNode node) {
-        if (!fieldLineNumbers.contains(node.lineNumber)) {
-            fieldLineNumbers << node.lineNumber
+        if (!ignoreLineNumbers.contains(node.lineNumber)) {
+            ignoreLineNumbers << node.lineNumber
             checkForCorrectColumn(node, "field ${node.name} in class ${currentClassName}")
         }
         super.visitField(node)
@@ -80,8 +80,8 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         indentLevel += addToIndentLevel
         block.statements.each { statement ->
             // Skip statements on the same line as another statement or a field declaration
-            if (!statementLineNumbers.contains(statement.lineNumber) && !fieldLineNumbers.contains(statement.lineNumber)) {
-                statementLineNumbers << statement.lineNumber
+            if (!ignoreLineNumbers.contains(statement.lineNumber)) {
+                ignoreLineNumbers << statement.lineNumber
 
                 // Ignore nested BlockStatement (e.g. finally blocks)
                 boolean isBlockStatement = statement instanceof BlockStatement
@@ -103,9 +103,9 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     @Override
     void visitSwitch(SwitchStatement statement) {
         statement.caseStatements.each { caseStatement ->
-            statementLineNumbers << caseStatement.lineNumber
+            ignoreLineNumbers << caseStatement.lineNumber
         }
-        statementLineNumbers << statement.defaultStatement.lineNumber
+        ignoreLineNumbers << statement.defaultStatement.lineNumber
         indentLevel++
         super.visitSwitch(statement)
         indentLevel--
