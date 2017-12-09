@@ -16,8 +16,10 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.*
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -66,6 +68,13 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    void visitConstructor(ConstructorNode node) {
+        checkForCorrectColumn(node, "constructor in class ${currentClassName}")
+        ignoreLineNumbers << node.lineNumber
+        super.visitConstructor(node)
+    }
+
+    @Override
     void visitField(FieldNode node) {
         if (!ignoreLineNumbers.contains(node.lineNumber)) {
             ignoreLineNumbers << node.lineNumber
@@ -85,7 +94,12 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
                 // Ignore nested BlockStatement (e.g. finally blocks)
                 boolean isBlockStatement = statement instanceof BlockStatement
-                if (!isBlockStatement) {
+
+                // Ignore constructor calls -- they have messed up column numbers
+                boolean isConstructorCall = (statement instanceof ExpressionStatement) && (statement.expression instanceof ConstructorCallExpression)
+
+                boolean ignoreStatement = isBlockStatement || isConstructorCall
+                if (!ignoreStatement) {
                    checkForCorrectColumn(statement, "statement on line ${statement.lineNumber} in class ${currentClassName}")
                 }
             }

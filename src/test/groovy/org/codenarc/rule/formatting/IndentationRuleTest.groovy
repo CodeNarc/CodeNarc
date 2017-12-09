@@ -43,6 +43,10 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    
             |    static void reset() { violationCounts = [1:0, 2:0] }
             |
+            |    MyClass(String id) {
+            |        this.id = id
+            |    }
+            |
             |    def myMethod1() { } 
             |    private String doStuff() {
             |        def internalCounts = [1, 4, 2]
@@ -197,6 +201,38 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'def myMethod1()', messageText:'The method myMethod1 in class MyClass'],
             [lineNumber:4, sourceLineText:'static void printReport(String filename)', messageText:'The method printReport in class MyClass'],
+        )
+    }
+
+    @Test
+    void test_Constructor() {
+        final SOURCE = '''
+            |class MyAstVisitor extends OtherAstVisitor {
+            |    MyAstVisitor(String name) {
+            |        super(name)
+            |    }
+            |    MyAstVisitor(int count) { println 'int' }
+            |    MyAstVisitor() {
+            |        super()
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Constructor_WrongIndentation_Violation() {
+        final SOURCE = '''
+            |class MyAstVisitor extends OtherAstVisitor {
+            |  MyAstVisitor() {
+            |                super(Long, [String, Long], 'L')       // ignored; known issue
+            |             println 123                               // violation
+            |  }
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'MyAstVisitor() {', messageText:'The constructor in class MyAstVisitor'],
+                [lineNumber:5, sourceLineText:'println 123', messageText:'The statement on line 5 in class MyAstVisitor'],
         )
     }
 

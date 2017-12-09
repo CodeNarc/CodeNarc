@@ -39,14 +39,14 @@ class RunCodeNarcAgainstProjectSourceCodeTest extends AbstractTestCase {
 
         ant.codenarc(ruleSetFiles:RULESET_FILES, maxPriority1Violations:0, maxPriority2Violations:0, maxPriority3Violations:0) {
 
-           fileset(dir:'src/main/groovy') {
-               include(name:GROOVY_FILES)
-           }
-           fileset(dir:'src/test/groovy') {
-               include(name:GROOVY_FILES)
-           }
+            fileset(dir:'src/main/groovy') {
+                include(name:GROOVY_FILES)
+            }
+            fileset(dir:'src/test/groovy') {
+                include(name:GROOVY_FILES)
+            }
 
-           report(type:'ide')
+            report(type:'ide')
         }
     }
 

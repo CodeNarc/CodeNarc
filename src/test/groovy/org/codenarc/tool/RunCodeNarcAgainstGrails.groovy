@@ -41,16 +41,16 @@ class RunCodeNarcAgainstGrails {
 
         ant.codenarc(ruleSetFiles:RULESET_FILES) {
 
-           fileset(dir:baseDir) {
-               include(name:'src/**/*.groovy')
-               include(name:'scripts/**/*.groovy')
-               exclude(name:'**/templates/**')
-           }
+            fileset(dir:baseDir) {
+                include(name:'src/**/*.groovy')
+                include(name:'scripts/**/*.groovy')
+                exclude(name:'**/templates/**')
+            }
 
-           report(type:'html') {
-               option(name:'title', value:"Grails ($baseDir)")
-               option(name:'outputFile', value:'CodeNarc-Grails-Report.html')
-           }
+            report(type:'html') {
+                option(name:'title', value:"Grails ($baseDir)")
+                option(name:'outputFile', value:'CodeNarc-Grails-Report.html')
+            }
         }
     }
 

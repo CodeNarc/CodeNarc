@@ -99,50 +99,50 @@ class UnnecessaryNullCheckRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testPointlessNullCheckInClosureWithinClass() {
-         final SOURCE = '''
-             class MyController extends AbstractController {
-                 def edit = {
-                     if (value != null && value.equalsIgnoreCase(YES)) {
-                         editView = "/editCustomMessage"
-                     }
-                 }
-             }
-         '''
-         assertSingleViolation(SOURCE, 4, 'if (value != null && value.equalsIgnoreCase(YES)) {', 'value?.equalsIgnoreCase(YES)')
-     }
+        final SOURCE = '''
+            class MyController extends AbstractController {
+                def edit = {
+                    if (value != null && value.equalsIgnoreCase(YES)) {
+                        editView = "/editCustomMessage"
+                    }
+                }
+            }
+        '''
+        assertSingleViolation(SOURCE, 4, 'if (value != null && value.equalsIgnoreCase(YES)) {', 'value?.equalsIgnoreCase(YES)')
+    }
 
     @Test
     void testPointlessNullCheckAgainstThis() {
-         final SOURCE = '''
-             if (this == null) { }
-             if (null == this) { }
-         '''
-         assertTwoViolations(SOURCE,
+        final SOURCE = '''
+            if (this == null) { }
+            if (null == this) { }
+        '''
+        assertTwoViolations(SOURCE,
                 2, '(this == null)', 'Testing the this reference for null will always return false',
                 3, '(null == this)', 'Testing the this reference for null will always return false')
-     }
+    }
 
     @Test
     void testPointlessNullCheckAgainstSuper() {
-         final SOURCE = '''
-             if (super == null) { }
-             if (null == super) { }
-         '''
-         assertTwoViolations(SOURCE,
+        final SOURCE = '''
+            if (super == null) { }
+            if (null == super) { }
+        '''
+        assertTwoViolations(SOURCE,
                 2, '(super == null)', 'Testing the super reference for null will always return false',
                 3, '(null == super)', 'Testing the super reference for null will always return false')
-     }
+    }
 
     @Test
     void testPointlessNotNullCheckAgainstSuper() {
-         final SOURCE = '''
-             if (super != null) { }
-             if (null != super) { }
-         '''
-         assertTwoViolations(SOURCE,
-                 2, '(super != null)', 'Testing the super reference for not null will always return true',
-                 3, '(null != super)', 'Testing the super reference for not null will always return true')
-     }
+        final SOURCE = '''
+            if (super != null) { }
+            if (null != super) { }
+        '''
+        assertTwoViolations(SOURCE,
+                2, '(super != null)', 'Testing the super reference for not null will always return true',
+                3, '(null != super)', 'Testing the super reference for not null will always return true')
+    }
 
     // todo: enable this test
 //    void ignore_testNullCheckWithMethodCallAndAdditionalConditional() {

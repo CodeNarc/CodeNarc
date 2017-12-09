@@ -60,15 +60,15 @@ class RunCodeNarcAgainstExternalProject {
                 option(name:'outputFile', value:'target/' + title + '-SortableCodeNarcReport.html')
             }
             report(type:'xml') {
-                 option(name:'title', value:title)
-                 option(name:'outputFile', value:'target/' + title + '-CodeNarcReport.xml')
+                option(name:'title', value:title)
+                option(name:'outputFile', value:'target/' + title + '-CodeNarcReport.xml')
             }
 //            report(type:'baseline') {
 //                 option(name:'title', value:title)
 //                 option(name:'outputFile', value:'target/' + title + '-CodeNarcBaselineReport.xml')
 //            }
             report(type:'text') {
-                 option(name:'writeToStandardOut', value:true)
+                option(name:'writeToStandardOut', value:true)
             }
         }
     }
