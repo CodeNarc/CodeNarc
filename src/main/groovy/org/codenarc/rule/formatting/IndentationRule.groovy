@@ -22,7 +22,6 @@ import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
-import org.codehaus.groovy.ast.stmt.TryCatchStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -46,7 +45,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private int indentLevel = 0
     private final Set<Integer> ignoreLineNumbers = []
-    private final Set<BlockStatement> finallyBlocks = []
+    private final Set<BlockStatement> nestedBlocks = []
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -92,7 +91,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-        int addToIndentLevel = finallyBlocks.contains(block) ? 0 : 1        // finally blocks have extra level of nested BlockStatement
+        int addToIndentLevel = nestedBlocks.contains(block) ? 0 : 1        // finally blocks have extra level of nested BlockStatement
         indentLevel += addToIndentLevel
         block.statements.each { statement ->
             // Skip statements on the same line as another statement or a field declaration
@@ -100,12 +99,17 @@ class IndentationAstVisitor extends AbstractAstVisitor {
                 ignoreLineNumbers << statement.lineNumber
 
                 // Ignore nested BlockStatement (e.g. finally blocks)
-                boolean isBlockStatement = statement instanceof BlockStatement
+                boolean isNestedBlockStatement = statement instanceof BlockStatement
+                if (isNestedBlockStatement) {
+                    nestedBlocks << statement
+                }
 
-                // Ignore super constructor calls -- they have messed up column numbers
-                boolean isSuperConstructorCall = (statement instanceof ExpressionStatement) && (statement.expression instanceof ConstructorCallExpression) && statement.expression.superCall
+                // Ignore super/this constructor calls -- they have messed up column numbers
+                boolean isConstructorCall = (statement instanceof ExpressionStatement) && (statement.expression instanceof ConstructorCallExpression)
+                boolean isSuperConstructorCall = isConstructorCall && statement.expression.superCall
+                boolean isThisConstructorCall = isConstructorCall && statement.expression.thisCall
 
-                boolean ignoreStatement = isBlockStatement || isSuperConstructorCall
+                boolean ignoreStatement = isNestedBlockStatement || isSuperConstructorCall || isThisConstructorCall
                 if (!ignoreStatement) {
                     checkForCorrectColumn(statement, "statement on line ${statement.lineNumber} in class ${currentClassName}")
                 }
@@ -113,12 +117,6 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         }
         super.visitBlockStatement(block)
         indentLevel -= addToIndentLevel
-    }
-
-    @Override
-    void visitTryCatchFinally(TryCatchStatement statement) {
-        finallyBlocks << statement.finallyStatement
-        super.visitTryCatchFinally(statement)
     }
 
     @Override

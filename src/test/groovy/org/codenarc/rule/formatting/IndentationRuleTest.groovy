@@ -216,6 +216,9 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    MyAstVisitor() {
             |        super()
             |    }
+            |    MyAstVisitor() {
+            |        this(0)
+            |    }
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -525,6 +528,23 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    def processOtherResults() {
             |        return list.
             |            findAll { it instanceof Date }    
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_StaticAndInstanceInitializers() {
+        final SOURCE = '''
+            |class MyClass {
+            |    static {
+            |        println "Static initializer"
+            |        ClosureExpression.metaClass.getText = { return CLOSURE_TEXT }
+            |    }
+            |
+            |    {
+            |        println "Instance initializer"
             |    }
             |}
         '''.stripMargin()
