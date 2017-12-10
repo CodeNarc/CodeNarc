@@ -149,11 +149,18 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |
             |    @Package void one() { }    // Method: correct
             |  @Package void two() { }      // Method: incorrect --> VIOLATION
+            |
+            |    @SuppressWarnings          // Field: correct
+            |       private String name     // Field: incorrect --> IGNORED
+            |            
+            |        @SuppressWarnings      // Field: incorrect --> VIOLATION
+            |    private String name        // Field: correct
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
                 [lineNumber:6, sourceLineText:'class MyOtherClass', messageText:'The class MyOtherClass'],
-                [lineNumber:16, sourceLineText:'@Package void two()', messageText:'The method two'],
+                [lineNumber:16, sourceLineText:'@Package void two()', messageText:'The method two in class TestClass'],
+                [lineNumber:22, sourceLineText:'private String name', messageText:'The field name in class TestClass'],
         )
     }
 
@@ -229,9 +236,12 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             |class MyAstVisitor extends OtherAstVisitor {
             |  MyAstVisitor() {
-            |                super(Long, [String, Long], 'L')       // ignored; known issue
-            |             println 123                               // violation
+            |                this(23)                      // ignored; known issue
+            |             println 123                      // violation
             |  }
+            |    MyAstVisitor(int count) {
+            |           super(Long, [String, Long], 'L')   // ignored; known issue
+            |    }
             |}
         '''.stripMargin()
         assertViolations(SOURCE,

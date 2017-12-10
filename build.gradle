@@ -21,8 +21,10 @@ def groovyVersion = "2.3.11"
 def slf4jVersion = "1.7.25"
 
 dependencies {
-    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
-    compile "org.codehaus.groovy:groovy-ant:$groovyVersion"
+    compile("org.codehaus.groovy:groovy-all:$groovyVersion")
+    compile("org.codehaus.groovy:groovy-ant:$groovyVersion") {
+        exclude group: 'org.codehaus.groovy'
+    }
 
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile('org.gmetrics:GMetrics:1.0') {

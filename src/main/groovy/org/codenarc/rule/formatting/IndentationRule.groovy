@@ -41,7 +41,11 @@ class IndentationRule extends AbstractAstVisitorRule {
 
 class IndentationAstVisitor extends AbstractAstVisitor {
 
-    // Limitations -- does not check: comments, line-continuations, Map entry expressions
+    // Limitations:
+    //  - Checks spaces only (not tabs)
+    //  - Does not check comments
+    //  - Does not check  line-continuations
+    //  - Does not check Map entry expressions
 
     private int indentLevel = 0
     private final Set<Integer> ignoreLineNumbers = []
