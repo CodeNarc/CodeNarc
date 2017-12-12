@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 348 rules.
+  <<CodeNarc>> includes 350 rules.
 
     
       
@@ -384,6 +384,9 @@ Rule Index
     * {{{./codenarc-rules-enhanced.html#JUnitAssertEqualsConstantActualValue}JUnitAssertEqualsConstantActualValue}}  
     
       
+    * {{{./codenarc-rules-enhanced.html#MissingOverrideAnnotation}MissingOverrideAnnotation}}  
+    
+      
     * {{{./codenarc-rules-enhanced.html#UnsafeImplementationAsMap}UnsafeImplementationAsMap}}  
     
     
@@ -485,6 +488,9 @@ Rule Index
     
       
     * {{{./codenarc-rules-formatting.html#FileEndsWithoutNewline}FileEndsWithoutNewline}}  
+    
+      
+    * {{{./codenarc-rules-formatting.html#Indentation}Indentation}}  
     
       
     * {{{./codenarc-rules-formatting.html#LineLength}LineLength}}  

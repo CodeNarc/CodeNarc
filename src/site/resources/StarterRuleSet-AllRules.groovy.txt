@@ -162,6 +162,7 @@ ruleset {
     ImportFromSunPackages 
     InconsistentPropertyLocking 
     InconsistentPropertySynchronization 
+    Indentation 
     InsecureRandom 
     Instanceof 
     IntegerGetInteger 
@@ -200,6 +201,7 @@ ruleset {
     MissingBlankLineAfterImports 
     MissingBlankLineAfterPackage 
     MissingNewInThrowStatement 
+    MissingOverrideAnnotation 
     MultipleLoggers 
     MultipleUnaryOperators 
     NestedBlockDepth 

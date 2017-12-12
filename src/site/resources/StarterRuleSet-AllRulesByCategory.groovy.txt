@@ -133,6 +133,7 @@ ruleset {
     // rulesets/enhanced.xml
     CloneWithoutCloneable 
     JUnitAssertEqualsConstantActualValue 
+    MissingOverrideAnnotation 
     UnsafeImplementationAsMap 
     
     // rulesets/exceptions.xml
@@ -168,6 +169,7 @@ ruleset {
     ClosureStatementOnOpeningLineOfMultipleLineClosure 
     ConsecutiveBlankLines 
     FileEndsWithoutNewline 
+    Indentation 
     LineLength 
     MissingBlankLineAfterImports 
     MissingBlankLineAfterPackage 
