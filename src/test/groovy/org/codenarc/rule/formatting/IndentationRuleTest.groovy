@@ -174,7 +174,7 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |         private String doStuff() {
             |         } 
             |\tstatic void printReport(String filename) { } 
-            |protected static void count() { } 
+            |protected static void count() { }
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
@@ -284,6 +284,22 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void test_Field_DefinedWithinSingleLineClass() {
+        final SOURCE = '''
+            |static class Pojo { int count; String name }
+            |
+            |@SuppressWarnings
+            |// nothing
+            |static class Pojo2 { int count; String name }
+            |
+            |@SuppressWarnings
+            |@Ignore
+            |class Pojo3 { int count; String name }
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_Field_AssignmentToClosureWithStatements() {
         final SOURCE = '''
             |class MyClass {
@@ -313,17 +329,24 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |            id.trim()
             |           new Object() 
             |    } 
+            |
+            |    @Override
+            |    protected int countOther() { 
+            |        // empty line
+            |           return 99   // violation
+            |    }
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
                 [lineNumber:4, sourceLineText:'def internalCounts = [1, 4, 2]', messageText:'The statement on line 4 in class MyClass'],
                 [lineNumber:5, sourceLineText:'id.trim()', messageText:'The statement on line 5 in class MyClass'],
                 [lineNumber:6, sourceLineText:'new Object()', messageText:'The statement on line 6 in class MyClass'],
+                [lineNumber:12, sourceLineText:'return 99', messageText:'The statement on line 12 in class MyClass'],
         )
     }
 
     @Test
-    void test_Statement_Closure_SingleLine() {
+    void test_Statement_SingleLineClosureParameter_SameLineAsMethodCall() {
         final SOURCE = '''
             |class MyClass {
             |    void test_processResults() {
@@ -361,6 +384,27 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |            style(type: 'text/css') {
             |                unescaped << css
             |            }
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_StatementOnSameLineAsAnnotatedMethodDeclaration() {
+        final SOURCE = '''
+            |class MyClass {
+            |    @Override
+            |    protected boolean shouldLog() { return false }
+            |
+            |    @Override
+            |    protected void logExtra() { }
+            |
+            |    void setUp() {
+            |        dao = new AbstractDao() {
+            |            @Override
+            |            protected boolean shouldLog() { return true }
             |        }
             |    }
             |}

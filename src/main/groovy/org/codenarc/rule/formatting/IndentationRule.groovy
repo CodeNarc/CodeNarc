@@ -55,6 +55,11 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     protected void visitClassEx(ClassNode node) {
         indentLevel = nestingLevelForClass(node)
 
+        // Ignore line containing class declaration as well as lines for class annotations.
+        // The line range for the last annotation typically includes the first line of the class declaration.
+        ignoreLineNumbers << node.lineNumber
+        node.annotations.each { annotationNode -> ignoreLineNumbers << annotationNode.lastLineNumber }
+
         boolean isInnerClass = node instanceof InnerClassNode
         boolean isAnonymous = isInnerClass && node.anonymous
         if (!isAnonymous) {
@@ -68,6 +73,12 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     protected void visitMethodEx(MethodNode node) {
         checkForCorrectColumn(node, "method ${node.name} in class ${currentClassName}")
         ignoreLineNumbers << node.lineNumber
+
+        // If annotated and a single-line method, then ignore its last line (annotations may make that a different line number)
+        if (node.annotations && node.lastLineNumber == node.code.lastLineNumber) {
+            ignoreLineNumbers << node.lastLineNumber
+        }
+
         super.visitMethodEx(node)
     }
 
