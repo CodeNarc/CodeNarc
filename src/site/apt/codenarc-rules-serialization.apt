@@ -96,7 +96,7 @@ Serialization Rules  ("<rulesets/serialization.xml>")
   An example of a missing serialVersionUID:
 
 -------------------------------------------------------------------------------
-    class MyClass imlements Serializable {
+    class MyClass implements Serializable {
         // missing serialVersionUID
     }
 -------------------------------------------------------------------------------

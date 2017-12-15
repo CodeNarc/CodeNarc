@@ -16,7 +16,7 @@
 package org.codenarc.ant
 
 /**
- * JavaBean class holding the properties for a <option> element netsed within a <report> element
+ * JavaBean class holding the properties for a <option> element nested within a <report> element
  * for the CodeNarc Ant Task.
  *
  * @see CodeNarcTask
