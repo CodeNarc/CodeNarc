@@ -90,9 +90,12 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
-    void visitClosureExpression(ClosureExpression expression) {
-        ignoreLineNumbers << expression.lineNumber
-        super.visitClosureExpression(expression)
+    void visitClosureExpression(ClosureExpression closureExpression) {
+        // Ignore line containing closure declaration, as well as any of the closure's parameters (since they may be on separate lines)
+        ignoreLineNumbers << closureExpression.lineNumber
+        closureExpression.parameters.each { param -> ignoreLineNumbers << param.lineNumber }
+
+        super.visitClosureExpression(closureExpression)
     }
 
     @Override

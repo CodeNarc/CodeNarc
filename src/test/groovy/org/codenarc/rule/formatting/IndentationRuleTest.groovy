@@ -300,6 +300,26 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void test_Field_Enum() {
+        final SOURCE = '''
+            |enum Planet {
+            |    MERCURY(1), VENUS(2), EARTH(3),
+            |    MARS(4)
+            |
+            |    final int index
+            |
+            |    private Planet(int index) { 
+            |        this.index = index
+            |    }
+            |}
+            |class MyClass {
+            |    enum WebServiceType { REST, SOAP }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_Field_AssignmentToClosureWithStatements() {
         final SOURCE = '''
             |class MyClass {
@@ -346,11 +366,31 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void test_Statement_SingleLineClosureParameter_SameLineAsMethodCall() {
+    void test_Statement_SingleLineClosureAsMethodParameter_SameLineAsMethodCall() {
         final SOURCE = '''
             |class MyClass {
             |    void test_processResults() {
             |        shouldFailWithMessageContaining('results') { processor.processResults(null) }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Statement_ClosureParameter_SameLineAsFirstStatement() {
+        final SOURCE = '''
+            |class MyClass {
+            |    void doStuff() {
+            |        boolean isFailureException = failureExceptionClasses.find {
+            |            Class<Exception> failureExceptionClass -> failureExceptionClass.isAssignableFrom(e.class)
+            |        }
+            |
+            |        process {
+            |            int count,
+            |            String name,
+            |            String id -> println "$name($id)"
+            |        }
             |    }
             |}
         '''.stripMargin()
