@@ -181,7 +181,7 @@ Grails Rules  ("<rulesets/grails.xml>")
   This rule is intended as a "governance" rule to enable monitoring and controlling access to the
   <<<servletContext>>> from within application source code. Storing objects in the <<<servletContext>>>
   may inhibit scalability and/or performance and should be carefully considered. Furthermore, access to
-  the <<<servletContext>>> is not synchronized, so reading/writing objects from the <<<servletConext>>>
+  the <<<servletContext>>> is not synchronized, so reading/writing objects from the <<<servletContext>>>
   must be manually synchronized, as described in
   {{{http://www.amazon.com/Definitive-Grails-Second-Experts-Development/dp/1590599950}
   The Definitive Guide to Grails (2nd edition)}}.

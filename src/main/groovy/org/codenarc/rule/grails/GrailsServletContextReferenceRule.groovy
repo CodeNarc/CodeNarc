@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * This rule is intended as a "governance" rule to enable monitoring and controlling access to the
  * servletContext from within application source code. Storing objects in the servletContext may
  * inhibit scalability and/or performance and should be carefully considered. Furthermore, access
- * to the servletContext is not synchronized, so reading/writing objects from the servletConext must
+ * to the servletContext is not synchronized, so reading/writing objects from the servletContext must
  * be manually synchronized, as described in <b>The Definitive Guide to Grails</b> (2nd edition).
  * <p/>
  * Enabling this rule may make most sense in a team environment where team members exhibit a broad
