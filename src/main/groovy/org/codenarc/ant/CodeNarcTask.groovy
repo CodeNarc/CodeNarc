@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory
  * <p/>
  * The <code>maxPriority1Violations</code> property specifies the maximum number of priority 1
  * violations allowed before failing the build (throwing a BuildException). Likewise,
- * <code>maxPriority2Violations</code> and <code>maxPriority3Violations</code> specifiy the
+ * <code>maxPriority2Violations</code> and <code>maxPriority3Violations</code> specify the
  * thresholds for violations of priority 2 and 3.
  * <p/>
  * At least one nested <code>fileset</code> element is required, and is used to specify the source files

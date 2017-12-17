@@ -53,12 +53,12 @@ class ParameterCountAstVisitor extends AbstractAstVisitor {
     }
 
     private void checkParametersCount(MethodNode node) {
-        if (node.parameters.size() > rule.maxParameters && !(rule.ignoreOverriddenMethods && isOverriden(node))) {
+        if (node.parameters.size() > rule.maxParameters && !(rule.ignoreOverriddenMethods && isOverridden(node))) {
             addViolation(node, "Number of parameters in ${getName(node)} exceeds maximum allowed (${rule.maxParameters}).")
         }
     }
 
-    private boolean isOverriden(MethodNode methodNode) {
+    private boolean isOverridden(MethodNode methodNode) {
         methodNode.annotations.classNode.name.any { OVERRIDE_ANNOTATIONS.contains(it) }
     }
 

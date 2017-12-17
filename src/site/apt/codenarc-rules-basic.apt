@@ -400,7 +400,7 @@ Basic Rules  ("<rulesets/basic.xml>")
 | <<Property>>                    | <<Description>>                                                | <<Default Value>>      |
 *---------------------------------+----------------------------------------------------------------+------------------------+
 | ignoreRegex                     | Regular expression - exception parameter names matching this   | 'ignore|ignored'       |
-|                                 | regular expression are ignored and no volations are produced.  |                        |
+|                                 | regular expression are ignored and no violations are produced. |                        |
 *---------------------------------+----------------------------------------------------------------+------------------------+
 
   Here is an example of code that produces a violation:

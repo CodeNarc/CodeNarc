@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practive to extract a temp variable.
+ * Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practice to extract a temp variable.
  *
  * @author Jeff Beck
  */

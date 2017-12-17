@@ -24,7 +24,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * the unique method mutates the original list. If a user is using the result of this method then they probably don't understand thiss
+ * the unique method mutates the original list. If a user is using the result of this method then they probably don't understand this
  *
  * @author Nick Larson
  * @author Juan Vazquez

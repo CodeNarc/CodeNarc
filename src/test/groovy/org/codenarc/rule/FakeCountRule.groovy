@@ -18,7 +18,7 @@ package org.codenarc.rule
 import org.codenarc.source.SourceCode
 
 /**
- * Test-specific Rule implementation that maintins count of how many times it has been applied.
+ * Test-specific Rule implementation that maintains count of how many times it has been applied.
  *
  * @author Chris Mair
  */
