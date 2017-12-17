@@ -645,6 +645,28 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         assertNoViolations(SOURCE)
     }
 
+    // Tests for @SuppressWarnings
+
+    @Test
+    void test_SuppressWarnings() {
+        final SOURCE = '''
+            |  @SuppressWarnings('Indentation')
+            |   class MyClass {
+            |               def processResults() {
+            |                       return list.findAll { it instanceof Date }    
+            |       }
+            |}
+            |
+            |class MyOtherClass {
+            |       @SuppressWarnings('Indentation')
+            |               def processResults() {
+            |                       return list.findAll { it instanceof Date }    
+            |       }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected Rule createRule() {
         new IndentationRule()
