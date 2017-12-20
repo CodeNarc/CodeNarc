@@ -75,7 +75,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         ignoreLineNumbers << node.lineNumber
 
         // If annotated and a single-line method, then ignore its last line (annotations may make that a different line number)
-        if (node.annotations && node.lastLineNumber == node.code.lastLineNumber) {
+        if (node.annotations && node.lastLineNumber == node.code?.lastLineNumber) {
             ignoreLineNumbers << node.lastLineNumber
         }
 

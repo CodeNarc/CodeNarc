@@ -169,12 +169,17 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     @Test
     void test_Method_WrongIndentation_Violation() {
         final SOURCE = '''
-            |class MyClass {
+            |abstract class MyClass implements Runnable {
             |  def myMethod1() { } 
             |         private String doStuff() {
             |         } 
             |\tstatic void printReport(String filename) { } 
             |protected static void count() { }
+            |
+            |  public abstract void doStuff()
+            |
+            |  @Override
+            |  public abstract void run()
             |}
         '''.stripMargin()
         assertViolations(SOURCE,
@@ -182,7 +187,22 @@ class IndentationRuleTest extends AbstractRuleTestCase {
                 [lineNumber:4, sourceLineText:'private String doStuff()', messageText:'The method doStuff in class MyClass'],
                 [lineNumber:6, sourceLineText:'static void printReport(String filename)', messageText:'The method printReport in class MyClass'],
                 [lineNumber:7, sourceLineText:'protected static void count()', messageText:'The method count in class MyClass'],
+                [lineNumber:9, sourceLineText:'public abstract void doStuff()', messageText:'The method doStuff in class MyClass'],
+                [lineNumber:12, sourceLineText:'public abstract void run()', messageText:'The method run in class MyClass'],
         )
+    }
+
+    @Test
+    void test_Method_AbstractMethod_NoViolation() {
+        final SOURCE = '''
+            |abstract class AbstractRuleFactory implements RuleFactory {
+            |    @Override
+            |    protected abstract Rule createRule()
+            |
+            |    protected abstract Rule createErrorRule()
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
     }
 
     @Test
