@@ -15,6 +15,9 @@ Updated/Enhanced Rules and Bug Fixes
    - #254: Removed @SuppressWarnings that were not needed. (Russel Sanborn)
    - #268: Enable @SuppressWarnings on imports.
    - #246: CodeNarc command-line runner: Only set *title* property on *ReportWriters* that support it.
+   - #276: Fix minor spelling typos throughout project. (Russell Sanborn)
+   - #275: Remove todos that were copied over from the Test.groovy template. (Russell Sanborn)
+   - #264: **SpaceAfterOpeningBrace** rule: One-line constructors with braces in the body are marked as violations
 
 Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)

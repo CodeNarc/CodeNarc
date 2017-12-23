@@ -60,7 +60,11 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
 
         isFirstVisit(node.code)   // Register the code block so that it will be ignored in visitBlockStatement()
         def line = sourceLineOrEmpty(node)
-        int lastOpen = line.lastIndexOf('{')
+
+        boolean hasStatementOnSameLine = !AstUtil.isFromGeneratedSourceCode(node) && !node.code.empty && (node.code?.lineNumber == node.lineNumber)
+        def lineToCheckForBrace = hasStatementOnSameLine ? line[0..node.code.columnNumber - 2] : line
+        int lastOpen = lineToCheckForBrace.lastIndexOf('{')
+
         if (lastOpen < line.length() - 1 && !line[lastOpen + 1].isAllWhitespace() && checkIsEmptyBlock(line, lastOpen + 2)) {
             addOpeningBraceViolation(node, 'block')
         }

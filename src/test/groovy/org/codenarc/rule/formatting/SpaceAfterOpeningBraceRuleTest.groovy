@@ -176,10 +176,15 @@ c        '''
         final SOURCE = '''
             class MyClass {
                 MyClass() {int count }
+                MyClass() {s = '{"json": true}' }
+                MyClass(@Annotation('${prop}') String s) {println 123 }
+
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass() {int count }', messageText:'The opening brace for the block in class MyClass'])
+            [lineNumber:3, sourceLineText:'MyClass() {int count }', messageText:'The opening brace for the block in class MyClass'],
+            [lineNumber:4, sourceLineText:'MyClass() {s = \'{"json": true}\' }', messageText:'The opening brace for the block in class MyClass'],
+            [lineNumber:5, sourceLineText:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', messageText:'The opening brace for the block in class MyClass'])
     }
 
     @Test
@@ -292,6 +297,29 @@ c        '''
             def m = [a:123, b: {println 7 }]
         '''
         rule.checkClosureMapEntryValue = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_OneLineConstructorBodyContainsBrace_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                String s
+                MyClass() { s = '{"json": true}' }
+                MyClass(@Annotation('${prop}') String s) { println 123 }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_OneLineMethodBodyContainsBrace_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                String s
+                def doStuff() { s = '{"json": true}' }
+            }
+        '''
         assertNoViolations(SOURCE)
     }
 
