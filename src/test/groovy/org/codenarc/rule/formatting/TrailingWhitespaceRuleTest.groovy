@@ -26,6 +26,8 @@ import org.junit.Test
  */
 class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
 
+    private static final String MESSAGE = 'Line ends with whitespace characters'
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
@@ -50,19 +52,19 @@ class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
     @Test
     void testLineEndingWithMultipleSpaces() {
         final SOURCE = 'class MyClass {}    \n'
-        assertSingleViolation(SOURCE, 1, 'class MyClass {}    ', 'Line ends with whitespace characters')
+        assertSingleViolation(SOURCE, 1, 'class MyClass {}    ', MESSAGE)
     }
 
     @Test
     void testLineEndingWithOneSpace() {
         final SOURCE = 'class MyClass {} \n'
-        assertSingleViolation(SOURCE, 1, 'class MyClass {} ', 'Line ends with whitespace characters')
+        assertSingleViolation(SOURCE, 1, 'class MyClass {} ', MESSAGE)
     }
 
     @Test
     void testLineEndingWithATab() {
         final SOURCE = 'class MyClass {}\t\n'
-        assertSingleViolation(SOURCE, 1, 'class MyClass {}\t', 'Line ends with whitespace characters')
+        assertSingleViolation(SOURCE, 1, 'class MyClass {}\t', MESSAGE)
     }
 
     @Test
@@ -75,18 +77,35 @@ class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
             '    \n' +
             '    def stop() { /* ... */ }\n' +
             '}\t\n'
-        def msg = 'Line ends with whitespace characters'
-        assertViolations(SOURCE, [
-            [lineNumber: 1, sourceLineText: 'package org.codenarc ', messageText: msg],
-            [lineNumber: 3, sourceLineText: 'class MyClass {\t', messageText: msg],
-            [lineNumber: 5, sourceLineText: '    def go() { /* ... */ }  ', messageText: msg],
-            [lineNumber: 6, sourceLineText: '    ', messageText: msg],
-            [lineNumber: 8, sourceLineText: '}\t', messageText: msg],
-        ] as Map[])
+        assertViolations(SOURCE,
+            [lineNumber: 1, sourceLineText: 'package org.codenarc ', messageText: MESSAGE],
+            [lineNumber: 3, sourceLineText: 'class MyClass {\t', messageText: MESSAGE],
+            [lineNumber: 5, sourceLineText: '    def go() { /* ... */ }  ', messageText: MESSAGE],
+            [lineNumber: 6, sourceLineText: '    ', messageText: MESSAGE],
+            [lineNumber: 8, sourceLineText: '}\t', messageText: MESSAGE],
+        )
+    }
+
+    @Test
+    void testWhitespaceOnlyLines() {
+        final SOURCE = '''\
+            |package org.codenarc
+            |    
+            |class MyClass {
+            |    
+            |    def go() { /* ... */ }
+            |    def goSomewhere() { /* ... */ }
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+            [lineNumber: 2, sourceLineText: '    ', messageText: MESSAGE],
+            [lineNumber: 4, sourceLineText: '    ', messageText: MESSAGE],
+        )
     }
 
     @Override
     protected Rule createRule() {
         new TrailingWhitespaceRule()
     }
+
 }
