@@ -39,7 +39,7 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
                 Integer value
 
                 Valid() {
-                    this.value = 42        
+                    this.value = 42
                 }
             }
         '''
@@ -52,7 +52,7 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
             class Invalid {
                 Invalid() {
                     What.ever(this)
-                }    
+                }
             }
         '''
         assertSingleViolation(SOURCE, 4, 'What.ever(this)', VIOLATION_MESSAGE)
@@ -63,10 +63,10 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class EventListener {
                 EventListener(EventPublisher publisher) {
-                    publisher.register(this)            
+                    publisher.register(this)
                     new WorkThread(publisher, this).start()
                     new AnotherWorkThread(listener: this)
-                }    
+                }
             }
         '''
         assertViolations(SOURCE,

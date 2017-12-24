@@ -115,7 +115,7 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
         BracesForTryCatchFinallyRule rule = new BracesForTryCatchFinallyRule()
         rule.validateCatch = true
         rule.validateFinally = true
-        
+
         rule
     }
 }

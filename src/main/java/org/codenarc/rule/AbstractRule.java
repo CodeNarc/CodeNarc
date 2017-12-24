@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -95,7 +95,7 @@ public abstract class AbstractRule implements Rule {
 
     /**
      * Set the unique name for this rule
-     * @param name - the name for this rule; this should be unique 
+     * @param name - the name for this rule; this should be unique
      */
     public abstract void setName(String name);
 
@@ -118,7 +118,7 @@ public abstract class AbstractRule implements Rule {
     public int getCompilerPhase() {
         return SourceCode.DEFAULT_COMPILER_PHASE;
     }
-    
+
     /**
      * Apply this rule to the specified source and return a list of violations (or an empty List)
      * @param sourceCode - the source to apply this rule to
@@ -161,7 +161,7 @@ public abstract class AbstractRule implements Rule {
     /**
      * Allows rules to check whether preconditions are satisfied and short-circuit execution
      * (i.e., do nothing) if those preconditions are not satisfied. Return true by default.
-     * This method is provided as a placeholder so subclasses can optionally override. 
+     * This method is provided as a placeholder so subclasses can optionally override.
      * @return true if all preconditions for this rule are satisfied
      */
     public boolean isReady() {
@@ -225,7 +225,7 @@ public abstract class AbstractRule implements Rule {
         violation.setSourceLine((String) importInfo.get("sourceLine"));
         violation.setLineNumber((Integer) importInfo.get("lineNumber"));
         violation.setMessage(message);
-        return violation; 
+        return violation;
     }
 
     /**

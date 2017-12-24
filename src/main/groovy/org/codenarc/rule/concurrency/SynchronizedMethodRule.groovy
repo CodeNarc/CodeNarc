@@ -25,7 +25,7 @@ import java.lang.reflect.Modifier
  * Synchronized Method Rule - This rule reports uses of the synchronized keyword on
  * methods. Synchronized methods are the same as synchronizing on 'this', which
  * effectively make your synchronization policy public and modifiable by other objects.
- * To avoid possibilities of deadlock, it is better to synchronize on internal objects. 
+ * To avoid possibilities of deadlock, it is better to synchronize on internal objects.
  *
  * @author Hamlet D'Arcy
  */

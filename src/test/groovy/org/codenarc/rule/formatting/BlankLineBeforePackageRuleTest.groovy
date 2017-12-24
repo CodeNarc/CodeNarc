@@ -110,13 +110,13 @@ class BlankLineBeforePackageRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenarioWithBlankLineInsideCommentBlock() {
         final SOURCE = '''\
-            /* 
+            /*
              Comment block
-             
+
              has a blank line
              */
             package org.codenarc
-            
+
             class MyClass {
 
                     def go() { /* ... */ }

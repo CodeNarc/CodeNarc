@@ -40,7 +40,7 @@ class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
                 def x = []
                 def m(foo = []) {
                     def x = []
-                    def y = new ArrayList() {   // anony inner class OK                    
+                    def y = new ArrayList() {   // anony inner class OK
                     }
                     def a1 = new ArrayList(x)    // constructor with parameter is OK
                     def a2 = new ArrayList(23)
@@ -76,7 +76,7 @@ class ExplicitArrayListInstantiationRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertTwoViolations(SOURCE,
-                3, 'def x = new ArrayList()',  
+                3, 'def x = new ArrayList()',
                 4, 'def m(foo = new ArrayList())')
     }
 

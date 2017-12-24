@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,7 @@ import org.codenarc.util.WildcardPattern
  * <p/>
  * The <code>finalRegex</code> property specifies the regular expression to validate <code>final</code>
  * variable names. It is optional but defaults to '[A-Z][A-Z0-9_]*'. If not set, then <code>regex</code> is
- * used to validate <code>final</code> variables.  
+ * used to validate <code>final</code> variables.
  * <p/>
  * The <code>ignoreVariableNames</code> property optionally specifies one or more
  * (comma-separated) variable names that should be ignored (i.e., that should not cause a

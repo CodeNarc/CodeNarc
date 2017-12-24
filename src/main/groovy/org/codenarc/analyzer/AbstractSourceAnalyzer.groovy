@@ -22,7 +22,7 @@ import org.codenarc.source.CustomCompilerPhaseSourceDecorator
 import org.codenarc.source.SourceCode
 
 /**
- * Common functionality for SourceAnalyzers. 
+ * Common functionality for SourceAnalyzers.
  */
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
 abstract class AbstractSourceAnalyzer implements SourceAnalyzer {

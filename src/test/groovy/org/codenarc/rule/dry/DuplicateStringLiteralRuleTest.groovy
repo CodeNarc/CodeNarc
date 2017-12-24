@@ -102,7 +102,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def x = ['foo', 'bar', 'foo']
         '''
-        assertSingleViolation(SOURCE, 2, "def x = ['foo', 'bar', 'foo']")        
+        assertSingleViolation(SOURCE, 2, "def x = ['foo', 'bar', 'foo']")
     }
 
     @Test
@@ -110,7 +110,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             def y = [x: 'bar', y: 'bar']
         '''
-        assertSingleViolation(SOURCE, 2, "def y = [x: 'bar', y: 'bar']")        
+        assertSingleViolation(SOURCE, 2, "def y = [x: 'bar', y: 'bar']")
     }
 
     @Test
@@ -142,7 +142,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
             ('e' == 'e') ? 'g' : 'h'
             ('e' == 'f') ? 'g' : 'g'
         '''
-        assertTwoViolations(SOURCE, 2, "('e' == 'e') ? 'g' : 'h'", 3, "('e' == 'f') ? 'g' : 'g'")        
+        assertTwoViolations(SOURCE, 2, "('e' == 'e') ? 'g' : 'h'", 3, "('e' == 'f') ? 'g' : 'g'")
     }
 
     @Test

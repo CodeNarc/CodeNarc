@@ -29,7 +29,7 @@ import org.junit.Test
  */
 class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferenceRuleTestCase {
 
-    final String className = 'com.example.MyExampleClass'  
+    final String className = 'com.example.MyExampleClass'
 
     @Test
     void testRuleProperties() {

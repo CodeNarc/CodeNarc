@@ -60,7 +60,7 @@ class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
         '''
         assertTwoViolations(SOURCE,
                 4, 'fail()',
-                5, 'Assert.fail()')   
+                5, 'Assert.fail()')
     }
 
     @Override

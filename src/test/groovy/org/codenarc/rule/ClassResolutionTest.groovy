@@ -18,7 +18,7 @@ package org.codenarc.rule
 import org.junit.Test
 
 /**
- * 
+ *
  * @author Hamlet D'Arcy
  */
 class ClassResolutionTest extends AbstractRuleTestCase {

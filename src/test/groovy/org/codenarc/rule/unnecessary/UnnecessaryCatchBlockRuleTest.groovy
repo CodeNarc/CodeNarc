@@ -76,7 +76,7 @@ class UnnecessaryCatchBlockRuleTest extends AbstractRuleTestCase {
         '''
         assertTwoViolations(SOURCE,
                 4, 'catch (IOException e1)',
-                6, 'catch (Exception e2)')   
+                6, 'catch (Exception e2)')
     }
 
     @Override

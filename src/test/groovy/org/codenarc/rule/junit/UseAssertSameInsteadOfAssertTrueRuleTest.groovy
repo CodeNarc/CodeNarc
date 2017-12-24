@@ -65,7 +65,7 @@ class UseAssertSameInsteadOfAssertTrueRuleTest extends AbstractRuleTestCase {
         '''
         assertTwoViolations(SOURCE,
                 4, 'assertTrue(foo().is(bar()))',
-                5, 'assertTrue("message", foo().is(bar()))')   
+                5, 'assertTrue("message", foo().is(bar()))')
     }
 
     @Test

@@ -54,7 +54,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
     void testForWithPropertyExpression() {
         final SOURCE = '''
         for(child in this.children) {
-            
+
         } '''
         assertNoViolations SOURCE
     }

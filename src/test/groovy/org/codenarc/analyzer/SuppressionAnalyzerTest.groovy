@@ -379,12 +379,12 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     @Test
     void testDeclarations() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''   // 1
-            class MyClass {                                                  // 2                
+            class MyClass {                                                  // 2
                 void run() {                                                 // 3
                     @SuppressWarnings('Rule1')                               // 4
                     int t = 123                                              // 5
-                    @SuppressWarnings('Rule1') int u = 123                   // 6 
-                    int x = u + t                                            // 7 
+                    @SuppressWarnings('Rule1') int u = 123                   // 6
+                    int x = u + t                                            // 7
                     println u                                                // 8
                     println x                                                // 9
                 }                                                            // 10
@@ -395,7 +395,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                     int x = u + t                                            // 15
                     println u                                                // 16
                     println x                                                // 17
-                }                                                            // 18                
+                }                                                            // 18
             }                                                                // 19
         '''))
 

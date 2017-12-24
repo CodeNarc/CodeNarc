@@ -219,7 +219,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
     }
 
     /**
-     * In this test there is no Properties property, so synchronizing on getProperties is OK because there is never a setter. 
+     * In this test there is no Properties property, so synchronizing on getProperties is OK because there is never a setter.
      */
     @Test
     void testFalsePositiveOnGetter() {

@@ -7,6 +7,6 @@ ruleset {
 
     rule(ThrowExceptionFromFinallyBlockRule) {
         priority = 3
-        noSuchProperty = 'abc'        
+        noSuchProperty = 'abc'
     }
 }

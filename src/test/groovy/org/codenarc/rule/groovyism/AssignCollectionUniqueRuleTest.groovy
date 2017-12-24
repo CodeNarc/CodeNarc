@@ -25,7 +25,7 @@ import org.junit.Test
  * @author Nick Larson
  * @author Juan Vazquez
  * @author Jon DeJong
- * 
+ *
  */
 class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
 

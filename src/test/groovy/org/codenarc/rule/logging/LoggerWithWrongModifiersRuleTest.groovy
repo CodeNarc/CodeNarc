@@ -90,7 +90,7 @@ class LoggerWithWrongModifiersRuleTest extends AbstractRuleTestCase {
     void testSuccessScenario_derivedLogger() {
         rule.allowProtectedLogger = true
         rule.allowNonStaticLogger = true
-        
+
         final SOURCE = '''
             class MyClass1 {
                 protected final LOG = LoggerFactory.getLogger(this.class)

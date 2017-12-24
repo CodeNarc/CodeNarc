@@ -69,7 +69,7 @@ class CloneWithoutCloneableRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class ValueClass {
                 ValueClass clone() {
-                }            
+                }
             }
         '''
         assertSingleViolation(SOURCE, 3, 'ValueClass clone()', violationMessage('ValueClass'))
@@ -80,19 +80,19 @@ class CloneWithoutCloneableRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class ValueClass {
                 def clone() {
-                }  
+                }
             }
-             
+
             class ValueClass2 {
-                @Override   
+                @Override
                 public Object clone() {
-                }            
+                }
             }
-             
+
             class ValueClass3 {
-                @Override   
+                @Override
                 protected Object clone() throws CloneNotSupportedException {
-                }            
+                }
             }
         '''
         assertViolations(SOURCE,

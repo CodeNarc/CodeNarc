@@ -40,20 +40,20 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    private static final NAME = "Joe"
             |    protected int count
             |    String id = "12345"
-            |    
+            |
             |    static void reset() { violationCounts = [1:0, 2:0] }
             |
             |    MyClass(String id) {
             |        this.id = id
             |    }
             |
-            |    def myMethod1() { } 
+            |    def myMethod1() { }
             |    private String doStuff() {
             |        def internalCounts = [1, 4, 2]
             |        id.trim()
-            |        new Object().toString() 
-            |    } 
-            |    static void printReport(String filename) { } 
+            |        new Object().toString()
+            |    }
+            |    static void printReport(String filename) { }
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -84,11 +84,11 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |        void execute() {
             |            def runnable = new Runnable() {
             |                @Override
-            |                void run() { }   
-            |            }   
+            |                void run() { }
+            |            }
             |        }
             |    }
-            |    protected void outerMethod() { }  
+            |    protected void outerMethod() { }
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -100,8 +100,8 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |class MyClass {
             |    private Runnable runnable = new Runnable() {
             |        @Override
-            |        void run() { }   
-            |    }   
+            |        void run() { }
+            |    }
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -121,11 +121,11 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |        void execute() {
             |            def runnable = new Runnable() {
             |                @Override
-            |                void run() { }   
-            |            }   
+            |                void run() { }
+            |            }
             |        }
             |    }
-            |    protected void outerMethod() { }  
+            |    protected void outerMethod() { }
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -139,11 +139,11 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |
             |  @Component              // Annotation: incorrect --> VIOLATION
             |class MyOtherClass { }    // Class: correct
-            | 
+            |
             |@SuppressWarnings         // 1st Annotation: correct
             |  @Component              // 2nd Annotation: incorrect --> IGNORED
             | class TestClass {        // Class: incorrect --> IGNORED
-            | 
+            |
             |    @Provider                  // Annotation: correct
             | private void doStuff() { }    // Method: incorrect --> IGNORED
             |
@@ -152,7 +152,7 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |
             |    @SuppressWarnings          // Field: correct
             |       private String name     // Field: incorrect --> IGNORED
-            |            
+            |
             |        @SuppressWarnings      // Field: incorrect --> VIOLATION
             |    private String name        // Field: correct
             |}
@@ -170,10 +170,10 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     void test_Method_WrongIndentation_Violation() {
         final SOURCE = '''
             |abstract class MyClass implements Runnable {
-            |  def myMethod1() { } 
+            |  def myMethod1() { }
             |         private String doStuff() {
-            |         } 
-            |\tstatic void printReport(String filename) { } 
+            |         }
+            |\tstatic void printReport(String filename) { }
             |protected static void count() { }
             |
             |  public abstract void doStuff()
@@ -209,8 +209,8 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     void test_Method_spacesPerIndentLevel_NoViolation() {
         final SOURCE = '''
             |class MyClass {
-            |  def myMethod1() { } 
-            |  static void printReport(String filename) { } 
+            |  def myMethod1() { }
+            |  static void printReport(String filename) { }
             |}
         '''.stripMargin()
         rule.spacesPerIndentLevel = 2
@@ -221,8 +221,8 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     void test_Method_spacesPerIndentLevel_Violation() {
         final SOURCE = '''
             |class MyClass {
-            |   def myMethod1() { } 
-            | static void printReport(String filename) { } 
+            |   def myMethod1() { }
+            | static void printReport(String filename) { }
             |}
         '''.stripMargin()
         rule.spacesPerIndentLevel = 2
@@ -328,7 +328,7 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |
             |    final int index
             |
-            |    private Planet(int index) { 
+            |    private Planet(int index) {
             |        this.index = index
             |    }
             |}
@@ -367,11 +367,11 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    private String doStuff() {
             |      def internalCounts = [1, 4, 2]
             |            id.trim()
-            |           new Object() 
-            |    } 
+            |           new Object()
+            |    }
             |
             |    @Override
-            |    protected int countOther() { 
+            |    protected int countOther() {
             |        // empty line
             |           return 99   // violation
             |    }
@@ -424,7 +424,7 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    void doStuff(String name) {
             |        doWith {
             |            println  name
-            |            processResults(name) 
+            |            processResults(name)
             |        }
             |    }
             |}
@@ -479,13 +479,13 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    void doStuff(String name) {
             |        doWith('results') {
             |            println  name
-            |            processResults(name) 
+            |            processResults(name)
             |        }
             |        doWith(
-            |            name,      
+            |            name,
             |            null) {
             |            println  name
-            |            processResults(name) 
+            |            processResults(name)
             |        }
             |    }
             |}
@@ -538,7 +538,7 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |        }
             |    }
             |    private void executeOtherOne() {
-            |        try { 
+            |        try {
             |            executeWithArgs(args)
             |        } catch(Throwable t) {
             |            t.printStackTrace()
@@ -558,13 +558,13 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    private void execute() {
             |        switch(name) {
             |            case '1': println 'ok'; break
-            |            case '2': 
+            |            case '2':
             |                println 'too much'
             |                break
             |        }
             |        switch(age) {
             |            case 21: println 'ok'; break
-            |            case 11: println 'wrong' 
+            |            case 11: println 'wrong'
             |                break
             |            default: println 'ok'
             |        }
@@ -615,7 +615,7 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |    def processResults() {
             |        return new MockRule(
             |            compilerPhase: compilerPhase,
-            |            applyTo: { SourceCode source -> 
+            |            applyTo: { SourceCode source ->
             |                assert source.astCompilerPhase == compilerPhase
             |                []
             |            }
@@ -637,11 +637,11 @@ class IndentationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             |class MyClass {
             |    def processResults() {
-            |        return list.findAll { it instanceof Date }    
+            |        return list.findAll { it instanceof Date }
             |    }
             |    def processOtherResults() {
             |        return list.
-            |            findAll { it instanceof Date }    
+            |            findAll { it instanceof Date }
             |    }
             |}
         '''.stripMargin()
@@ -673,14 +673,14 @@ class IndentationRuleTest extends AbstractRuleTestCase {
             |  @SuppressWarnings('Indentation')
             |   class MyClass {
             |               def processResults() {
-            |                       return list.findAll { it instanceof Date }    
+            |                       return list.findAll { it instanceof Date }
             |       }
             |}
             |
             |class MyOtherClass {
             |       @SuppressWarnings('Indentation')
             |               def processResults() {
-            |                       return list.findAll { it instanceof Date }    
+            |                       return list.findAll { it instanceof Date }
             |       }
             |}
         '''.stripMargin()

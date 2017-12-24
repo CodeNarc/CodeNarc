@@ -32,7 +32,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
         for (MethodNode method : node.getMethods()) {
             visitMethod(method);
         }
-        currentClassNode = null; 
+        currentClassNode = null;
     }
 
     protected final ClassNode getCurrentClassNode() {
@@ -43,7 +43,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
         if (currentClassNode == null) {
             return "<unknown>";
         }
-        return currentClassNode.getName(); 
+        return currentClassNode.getName();
     }
 
     /**

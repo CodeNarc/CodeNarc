@@ -21,7 +21,7 @@ import org.junit.Test
 
 /**
  * Unit test for NestedSynchronizationRule.
- * 
+ *
  * @author Hamlet D'Arcy
  */
 class NestedSynchronizationRuleTest extends AbstractRuleTestCase {

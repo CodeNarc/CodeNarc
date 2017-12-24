@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,7 @@ import org.codenarc.util.AstUtil
  * <p>
  * By default, braces are not required for an <code>else</code> if it is followed immediately
  * by an <code>if</code>. Set the <code>bracesRequiredForElseIf<code> property to true to
- * require braces is that situation as well. 
+ * require braces is that situation as well.
  *
  * @author Chris Mair
  */
@@ -40,7 +40,7 @@ class ElseBlockBracesRule extends AbstractAstVisitorRule {
 class ElseBlockBracesAstVisitor extends AbstractAstVisitor  {
     @Override
     void visitIfElse(IfStatement ifStatement) {
-        if (isFirstVisit(ifStatement) && !(ifStatement.elseBlock instanceof EmptyStatement) && 
+        if (isFirstVisit(ifStatement) && !(ifStatement.elseBlock instanceof EmptyStatement) &&
                 !AstUtil.isBlock(ifStatement.elseBlock)) {
 
             if (!(ifStatement.elseBlock instanceof IfStatement) || rule.bracesRequiredForElseIf) {

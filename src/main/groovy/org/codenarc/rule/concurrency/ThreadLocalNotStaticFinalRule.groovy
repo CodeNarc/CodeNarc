@@ -22,7 +22,7 @@ import org.codenarc.rule.AbstractFieldVisitor
 import java.lang.reflect.Modifier
 
 /**
- * ThreadLocal fields should be static and final. In the most common case a java.lang.ThreadLocal 
+ * ThreadLocal fields should be static and final. In the most common case a java.lang.ThreadLocal
  * instance associates state with a thread. A non-static non-final java.lang.ThreadLocal field
  * associates state with an instance-thread combination. This is seldom necessary and often a
  * bug which can cause memory leaks and possibly incorrect behavior.

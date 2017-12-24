@@ -21,7 +21,7 @@ import org.junit.Test
 
 /**
  * Tests for MissingBlankLineAfterPackageRule
- * 
+ *
  * @author Joe Sondow
  */
 @SuppressWarnings('MissingBlankLineAfterImports')

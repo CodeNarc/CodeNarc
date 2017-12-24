@@ -35,7 +35,7 @@ class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase {
     @Test
     void testSuccessScenario() {
         final SOURCE = '''
-            throw runtimeFailure()      
+            throw runtimeFailure()
             throw RuntimeObject()
             throw new RuntimeException()
         '''

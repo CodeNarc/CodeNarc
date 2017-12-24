@@ -27,7 +27,7 @@ import org.junit.Test
 class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase {
 
     private static final MESSAGE = 'Comparing two constants or constant literals'
-    
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 2

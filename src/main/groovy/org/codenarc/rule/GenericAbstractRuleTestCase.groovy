@@ -130,15 +130,15 @@ abstract class GenericAbstractRuleTestCase<T extends Rule> extends AbstractTestC
      *
      * One can prevent a '#' character from starting a violation message by escaping it with a '\' character
      * (keep in mind that most of Groovy's string literal syntax demands the '\' to be escaped itself,
-     * as a '\\' sequence).<p> 
+     * as a '\\' sequence).<p>
      *
      * For every source line all text after the first non-escaped '#' character is part of some inline violation message
      * (with the sole exception of the first line of a Groovy script beginning with a shebang).
      * More precisely, every '#' character that is neither escaped nor part of a shebang starts an inline violation that
      * spans to the end of its line or until next non-escaped '#' character.<p>
-     *     
-     * See the {@link #inlineViolation(java.lang.String)} method.<br>    
-     * See the {@link #removeInlineViolations(java.lang.String)} method.<br>    
+     *
+     * See the {@link #inlineViolation(java.lang.String)} method.<br>
+     * See the {@link #removeInlineViolations(java.lang.String)} method.<br>
      *
      * @param source - the full source code to which the rule is applied annotated with inline violations, as a String
      */
@@ -150,12 +150,12 @@ abstract class GenericAbstractRuleTestCase<T extends Rule> extends AbstractTestC
     }
 
     /**
-     * Prepares an inline violation with a given message, escaping all '#' characters and preventing accidental 
+     * Prepares an inline violation with a given message, escaping all '#' characters and preventing accidental
      * escaping of next inline violation's start when the message ends with a '\' character.
      *
      * @param violationMessage message for the inline violation
-     * @return a String that will be interpreted as an inline violation by the 
-     * {@link #assertInlineViolations(java.lang.String)} method 
+     * @return a String that will be interpreted as an inline violation by the
+     * {@link #assertInlineViolations(java.lang.String)} method
      */
     protected static String inlineViolation(String violationMessage) {
         return InlineViolationsParser.inlineViolation(violationMessage)

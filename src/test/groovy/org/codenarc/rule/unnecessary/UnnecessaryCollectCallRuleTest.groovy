@@ -42,7 +42,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
                 [1, 2, 3].mapMethod { it.multiply(5) }
 
                 // OK, is not one argument/closure call
-                [1, 2, 3].collect(5) 
+                [1, 2, 3].collect(5)
 
                 // OK is not single statement closure
                 [1, 2, 3].collect { println it; it.multiply(5) }
@@ -78,7 +78,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
     @Test
     void testSimpleCaseNamedParameter() {
         final SOURCE = '''
-            assert [1, 2, 3].collect { x -> 
+            assert [1, 2, 3].collect { x ->
                 x.multiply(2)
             }
         '''

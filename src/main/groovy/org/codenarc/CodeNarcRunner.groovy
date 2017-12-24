@@ -98,7 +98,7 @@ class CodeNarcRunner {
         def newRuleSet = new CompositeRuleSet()
         paths.each { path ->
             def ruleSet = RuleSetUtil.loadRuleSetFile(path.trim())
-            newRuleSet.addRuleSet(ruleSet) 
+            newRuleSet.addRuleSet(ruleSet)
         }
         newRuleSet
     }

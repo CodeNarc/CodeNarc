@@ -39,7 +39,7 @@ if (args[0] == 'create-rule') {
 
 /*
 * The rest of the code is here to support create-rule.
-*/ 
+*/
 def makeRule(binding) {
 
     makeFromTemplate(
@@ -161,7 +161,7 @@ String removeSuffix(String input, String suffix) {
 def usage() {
 """
 Usage: codenarc [OPTION]
-Valid Options: 
+Valid Options:
     create-rule - Creates a new CodeNarc rule
 """
 }

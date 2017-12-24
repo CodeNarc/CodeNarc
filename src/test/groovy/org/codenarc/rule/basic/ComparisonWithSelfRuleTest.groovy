@@ -26,8 +26,8 @@ import org.junit.Test
  */
 class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
 
-    private static final MESSAGE = 'Comparing an object to itself' 
-    
+    private static final MESSAGE = 'Comparing an object to itself'
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 2

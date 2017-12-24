@@ -93,7 +93,7 @@ Naming Rules  ("<rulesets/naming.xml>")
   createFoo(). This rule enforces that only one naming convention is used. It defaults to allowing makeFoo(), but that
   can be changed using the property <<<regex>>>. The regex is a negative expression; it specifically bans
   methods named build* or create*. However, methods named build or build* receive some special treatment because of the
-  popular Builder Pattern. If the 'build' method is in a class named *Builder then it does not cause a violation.  
+  popular Builder Pattern. If the 'build' method is in a class named *Builder then it does not cause a violation.
 
   Builder methods are slightly different than factory methods.
 

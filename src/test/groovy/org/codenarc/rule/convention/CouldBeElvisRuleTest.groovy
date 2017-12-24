@@ -64,7 +64,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
     void testIfStatement_AssignmentToSameVariable_Violation() {
         final SOURCE = '''
               def x
-              
+
               if (!x) {
                   x = "some value"
               }
@@ -119,7 +119,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
               def x
               def y
-              
+
               if (!x) {
                   def z = "do this"
                   x = z + "some value"
@@ -134,7 +134,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
               def x
               def y
-              
+
               if (!x) {
                   x = "some value"
                   def z = "do this"

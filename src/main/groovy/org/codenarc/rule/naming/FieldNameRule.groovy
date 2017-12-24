@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,7 @@ import java.lang.reflect.Modifier
  * Rule that verifies that the name of each field matches a regular expression. By default it checks that
  * non-<code>final</code> field names start with a lowercase letter and contains only letters or numbers.
  * By default, <code>final</code> field names start with an uppercase letter and contain only uppercase
- * letters, numbers and underscores. 
+ * letters, numbers and underscores.
  * <p/>
  * NOTE: This rule checks only regular <i>fields</i> of a class, not <i>properties</i>. In Groovy,
  * <i>properties</i> are fields declared with no access modifier (public, protected, private). Thus,

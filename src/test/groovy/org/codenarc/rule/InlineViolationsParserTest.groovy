@@ -40,7 +40,7 @@ class InlineViolationsParserTest {
         def violatingLine = /println 'Hello, World!'/
         def violationMessage = /Use a logger instead of a println!/
         assertParse(
-            violatingLine + ' ' + "#$violationMessage", 
+            violatingLine + ' ' + "#$violationMessage",
             [createViolation(1, violatingLine, violationMessage)],
             violatingLine
         )
@@ -67,9 +67,9 @@ class InlineViolationsParserTest {
             createViolation(2, 'class TwoViolations {', 'violation 1'),
             createViolation(4, '}', 'violation 2'),
         ], '''
-            class TwoViolations {           
-                String foo                
-            }                                              
+            class TwoViolations {
+                String foo
+            }
         ''')
     }
 
@@ -77,17 +77,17 @@ class InlineViolationsParserTest {
     void testFindsMultipleViolationsPerLine() {
         assertParse("""
             class TwoViolations {   ${inlineViolation('violation 1')}${inlineViolation('violation 2')}
-                String foo          ${inlineViolation('violation 3')}       ${inlineViolation('violation 4')}    
-            }                       
+                String foo          ${inlineViolation('violation 3')}       ${inlineViolation('violation 4')}
+            }
         """, [
             createViolation(2, 'class TwoViolations {', 'violation 1'),
             createViolation(2, 'class TwoViolations {', 'violation 2'),
             createViolation(3, 'String foo', 'violation 3'),
             createViolation(3, 'String foo', 'violation 4'),
         ], '''
-            class TwoViolations {   
-                String foo          
-            }                         
+            class TwoViolations {
+                String foo
+            }
         ''')
     }
 
@@ -116,7 +116,7 @@ class InlineViolationsParserTest {
             createViolation(3, '', 'violation 2')
         ], '''
 
-        
+
         ''')
     }
 
@@ -155,21 +155,21 @@ class InlineViolationsParserTest {
             ''
         )
     }
-    
+
     @Test
     void testNoViolationsInScriptSource() {
-        def source = 
+        def source =
         '''#!/usr/bin/groovy
         println 'All well!'
         '''
         assertParse(source, [], source)
     }
-    
+
     @Test
     void testViolationsInScriptSource() {
         assertParse(
-            """#!/usr/bin/groovy    #Hardcoded groovy location! Use `\\#!/usr/bin/env groovy` instead!      #Really do! 
-            println "All well"      ${inlineViolation('v1')}${inlineViolation('v2')}    
+            """#!/usr/bin/groovy    #Hardcoded groovy location! Use `\\#!/usr/bin/env groovy` instead!      #Really do!
+            println "All well"      ${inlineViolation('v1')}${inlineViolation('v2')}
                                     #v3#v4
             """,
             [
@@ -179,10 +179,10 @@ class InlineViolationsParserTest {
                 createViolation(2, 'println "All well"', 'v2'),
                 createViolation(3, '', 'v3'),
                 createViolation(3, '', 'v4'),
-            ], 
+            ],
             '''#!/usr/bin/groovy
-            println "All well"  
-                        
+            println "All well"
+
             '''
         )
     }

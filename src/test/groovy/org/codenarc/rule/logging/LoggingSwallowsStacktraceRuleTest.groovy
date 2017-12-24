@@ -78,7 +78,7 @@ class LoggingSwallowsStacktraceRuleTest extends AbstractRuleTestCase {
                 13, 'LOG.error(e)', 'The error logging may hide the stacktrace from the exception named e',
                 14, 'logger.error(e)', 'The error logging may hide the stacktrace from the exception named e')
     }
-    
+
     @Test
     void testReportedDefect() {
         final SOURCE = '''

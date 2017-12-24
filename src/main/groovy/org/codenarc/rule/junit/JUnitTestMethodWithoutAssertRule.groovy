@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,7 @@ import org.codenarc.util.AstUtil
  * statements, which is an error, or the test method contains custom assert statements that do not follow a proper
  * assert naming convention. Test methods are defined as public void methods that begin with the work test or have a @Test
  * annotation. By default this rule applies to the default test class names, but this can be changed using the rule's
- * applyToClassNames property. 
+ * applyToClassNames property.
  *
  * @author Hamlet D'Arcy
   */

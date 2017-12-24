@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,7 +24,7 @@ import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
 
 /**
- * Some method calls to Object.collect(Closure) can be replaced with the spread operator. For instance, list.collect { it.multiply(2) } can be replaced by list*.multiply(2). 
+ * Some method calls to Object.collect(Closure) can be replaced with the spread operator. For instance, list.collect { it.multiply(2) } can be replaced by list*.multiply(2).
  *
  * @author Hamlet D'Arcy
   */

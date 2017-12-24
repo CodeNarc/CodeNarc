@@ -41,7 +41,7 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
                 def x = [] as Queue
                 def m(foo = [] as Queue) {
                     def x = [] as Queue
-                    def y = new LinkedList() {   // anony inner class OK                    
+                    def y = new LinkedList() {   // anony inner class OK
                     }
                     def m1 = new LinkedList(x)    // constructor with parameter is OK
                     def m2 = new LinkedList(23)

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,7 +45,7 @@ import org.codenarc.util.WildcardPattern
  * include wildcard characters ('*' or '?'). You can add to the field names to be ignored by setting
  * the (write-only) <code>addIgnoreFieldNames</code> property. This is a "special" property -- each
  * call to <code>setAddIgnoreFieldNames()</code> adds to the existing <code>ignoreFieldNames</code>
- * property value. 
+ * property value.
  * <p/>
  * The <code>ignoreFieldTypes</code> property specifies one or more (comma-separated) field type names
  * that should be ignored (i.e., that should not cause a rule violation). The type name(s) may optionally
@@ -81,7 +81,7 @@ class StatelessClassRule extends AbstractAstVisitorRule {
      * @param moreFieldNames - specifies one or more (comma-separated) field names that should be
      *      ignored (i.e., that should not cause a rule violation). The name(s) may optionally
      *      include wildcard characters ('*' or '?'). Any names specified here are joined to
-     *      the existing <code>ignoreFieldNames</code> property value. 
+     *      the existing <code>ignoreFieldNames</code> property value.
      */
     void setAddToIgnoreFieldNames(String moreFieldNames) {
         this.ignoreFieldNames = this.ignoreFieldNames ? this.ignoreFieldNames + ',' + moreFieldNames : moreFieldNames

@@ -39,7 +39,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
         '''
         assertNoViolations(SOURCE)
     }
-    
+
     @Test
     void testSuccessScenario() {
         final SOURCE = '''

@@ -279,8 +279,8 @@ File: groovyism/GStringExpressionWithinStringRuleTest.groovy
         ' contains a GString-type expression: '${sample.property1}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=81 Msg=[The String '
             @SomeAnnotationOnClass(attribute='${sample.property1}',
-                            nested=[@NestedAnnotation('${sample.property2}'), 
-                                    @NestedAnnotation('${sample.property3}')],  
+                            nested=[@NestedAnnotation('${sample.property2}'),
+                                    @NestedAnnotation('${sample.property3}')],
                              someOtherAttribute='${sample.property4}')
             class SomeClass {
             }

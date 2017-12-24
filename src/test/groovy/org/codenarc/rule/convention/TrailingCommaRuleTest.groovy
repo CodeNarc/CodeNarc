@@ -145,7 +145,7 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testNoViolationForInlineListInAnAnnotation() {
-        final SOURCE = '''         
+        final SOURCE = '''
          @ToString(
             ignoreNulls = false,
             excludes = ['bear', 'raccoon']
@@ -158,11 +158,11 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testNoViolationForMultiLineListInAnAnnotation() {
-        final SOURCE = '''         
+        final SOURCE = '''
          @ToString(
             ignoreNulls = false,
             excludes = [
-                'bear', 
+                'bear',
                 'raccoon',
             ]
          )
@@ -174,11 +174,11 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testSingleListViolationInAnAnnotation() {
-        final SOURCE = '''         
+        final SOURCE = '''
          @ToString(
             ignoreNulls = false,
             excludes = [
-                'bear', 
+                'bear',
                 'raccoon'
             ]
          )

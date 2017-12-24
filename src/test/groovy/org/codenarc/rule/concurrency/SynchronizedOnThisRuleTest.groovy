@@ -66,7 +66,7 @@ class SynchronizedOnThisRuleTest extends AbstractRuleTestCase {
                 def Method1() {
                     synchronized(lock) { ; }
                 }
-                def Method2() { 
+                def Method2() {
                     synchronized(lock) { ; }
                 }
             }'''

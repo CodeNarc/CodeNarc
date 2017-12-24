@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -119,12 +119,12 @@ public class AstUtil {
             for (MapEntryExpression entry : entries) {
                 if (!isConstantOrConstantLiteral(entry.getKeyExpression()) ||
                     !isConstantOrConstantLiteral(entry.getValueExpression())) {
-                    return false; 
+                    return false;
                 }
             }
             return true;
         }
-        return false; 
+        return false;
     }
 
     /**
@@ -139,7 +139,7 @@ public class AstUtil {
                     return false;
                 }
             }
-            return true; 
+            return true;
         }
         return false;
     }
@@ -255,7 +255,7 @@ public class AstUtil {
 
     /**
      * Tells you if the expression is a method call on a particular object (which is represented as a String).
-     * For instance, you may ask isMethodCallOnObject(e, 'this') to find a this reference.  
+     * For instance, you may ask isMethodCallOnObject(e, 'this') to find a this reference.
      * @param expression - the expression
      * @param methodObjectPattern - the name of the method object (receiver) such as 'this'
      * @return
@@ -309,7 +309,7 @@ public class AstUtil {
      * @return true only if the method call matches the specified criteria
      */
     public static boolean isMethodCall(MethodCallExpression methodCall, String methodObjectPattern, String methodPattern, int numArguments) {
-        return (isMethodCall(methodCall, methodObjectPattern, methodPattern) && AstUtil.getMethodArguments(methodCall).size() == numArguments); 
+        return (isMethodCall(methodCall, methodObjectPattern, methodPattern) && AstUtil.getMethodArguments(methodCall).size() == numArguments);
     }
 
     /**
@@ -450,7 +450,7 @@ public class AstUtil {
      * @return as described
      */
     public static boolean isConstructorCall(Expression expression, List<String> classNames) {
-        return expression instanceof ConstructorCallExpression && classNames.contains(expression.getType().getName());  
+        return expression instanceof ConstructorCallExpression && classNames.contains(expression.getType().getName());
     }
 
     /**
@@ -468,7 +468,7 @@ public class AstUtil {
      * Supports Groovy 1.5 and Groovy 1.6.
      * @param node - the AnnotatedNode
      * @param name - the name of the annotation
-     * @return the AnnotationNode or else null 
+     * @return the AnnotationNode or else null
      */
     public static AnnotationNode getAnnotation(AnnotatedNode node, String name) {
         List<AnnotationNode> annotations = node.getAnnotations();
@@ -720,7 +720,7 @@ public class AstUtil {
 
         if (node.getParameters() != null) {
             for (Parameter parameter : node.getParameters()) {
-                result.add(parameter.getName());                 
+                result.add(parameter.getName());
             }
         }
         return result;
@@ -854,7 +854,7 @@ public class AstUtil {
         }
         return true;
     }
-    
+
     public static boolean isMethodNode(ASTNode node, String methodNamePattern, Integer numArguments) {
         return isMethodNode(node, methodNamePattern, numArguments, null);
     }
@@ -1069,7 +1069,7 @@ public class AstUtil {
     }
 
     /**
-     * gets the first non annotation line number of a node, taking into account annotations. 
+     * gets the first non annotation line number of a node, taking into account annotations.
      */
     public static int findFirstNonAnnotationLine(ASTNode node, SourceCode sourceCode) {
         if (node instanceof AnnotatedNode && !((AnnotatedNode) node).getAnnotations().isEmpty()) {

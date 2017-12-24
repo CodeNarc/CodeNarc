@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
 
 /**
- * This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override. 
+ * This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override.
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
@@ -46,7 +46,7 @@ class UnusedMethodParameterAstVisitor extends AbstractMethodVisitor {
         if (!currentClassNode.isInterface() && !node.isAbstract() && !(currentClassName ==~ rule.ignoreClassRegex)
             && !Modifier.isPrivate(node.modifiers) && AstUtil.getAnnotation(node, 'Override') == null
             && !isMainMethod(node)) {
-            
+
             def unusedParameterNames = node.parameters*.name
             def collector = new ReferenceCollector()
             collector.visitMethod(node)

@@ -15,6 +15,6 @@ ruleset {
     }
 
     rule(ThrowExceptionFromFinallyBlockRule) {
-        priority = 3        
+        priority = 3
     }
 }

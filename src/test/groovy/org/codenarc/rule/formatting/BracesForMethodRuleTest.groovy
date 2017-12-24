@@ -94,7 +94,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase {
     void testAbstractMethods() {
         final SOURCE = '''
             abstract class MyClass {
-                abstract method() 
+                abstract method()
             }
         '''
         assertNoViolations(SOURCE)

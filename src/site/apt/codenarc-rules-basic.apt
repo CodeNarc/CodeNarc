@@ -332,7 +332,7 @@ Basic Rules  ("<rulesets/basic.xml>")
         case 2: break;
         case 2: break;          // violation
     }
-    
+
     switch( "test" ) {
         case "$a": break;
         case "$a": break;       // ok; only flags constant values (not GStrings)
@@ -816,7 +816,7 @@ Basic Rules  ("<rulesets/basic.xml>")
   field is probably a bug.
 
   Example of violations:
-  
+
 -------------------------------------------------------------------------------
     (int) Math.random()
     (Integer) Math.random()

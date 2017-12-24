@@ -135,7 +135,7 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase {
 
                 void interfaceMethod(String stringValue, Object objectValue) {
                 }
-                
+
                 String toString() {
                 }
             }
@@ -165,15 +165,15 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase {
             import java.util.concurrent.Callable;
 
             class OuterClassWithViolation implements Callable<String> {
-            
+
                 static class InnerClassWithViolation implements Runnable {
                     void run() {
                     }
                 }
-                
+
                 String call() {
                 }
-                
+
             }
         '''
 
@@ -193,20 +193,20 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testNoViolationsInInnerAndOuterClasses() {
-        assertNoViolations ''' 
+        assertNoViolations '''
             import java.util.concurrent.Callable;
 
             class OuterClassWithViolation implements Runnable {
-            
+
                 static class InnerClassWithViolation {
                     void run() {
                     }
                 }
-                
+
                 @Override
                 void run() {
                 }
-                
+
             }
         '''
     }
@@ -216,7 +216,7 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class OuterClass {
                 Runnable runnable
-                
+
                 OuterClass() {
                     runnable = new Runnable() {
                         void run() {
@@ -251,7 +251,7 @@ class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase {
             interface FirstInterface {
                 void run(String value)
             }
-            
+
             interface SecondInterface {
                 void run(String first, String second)
             }

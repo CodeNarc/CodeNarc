@@ -29,7 +29,7 @@ import org.junit.Test
 class AbstractSourceAnalyzerTest extends AbstractTestCase {
 
     private AbstractSourceAnalyzer analyzer = new StringSourceAnalyzer('class MyClass {}')
-    
+
     @Test
     void testProvidesRulesWithSourceCodeOfRequiredAstCompilationPhase() {
         def results = analyzer.analyze(new ListRuleSet([
@@ -43,7 +43,7 @@ class AbstractSourceAnalyzerTest extends AbstractTestCase {
     private Rule astCompilerPhaseAssertingRule(int compilerPhase) {
         return new MockRule(
             compilerPhase: compilerPhase,
-            applyTo: { SourceCode source -> 
+            applyTo: { SourceCode source ->
                 assert source.astCompilerPhase == compilerPhase
                 []
             }

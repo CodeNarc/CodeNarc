@@ -21,7 +21,7 @@ import org.junit.Test
 
 /**
  * Tests for CloneableWithoutCloneRule
- * 
+ *
  * @author Hamlet D'Arcy
  */
 class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {

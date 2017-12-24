@@ -26,7 +26,7 @@ import org.codehaus.groovy.ast.stmt.*
 /**
  * Rule that checks for blocks or closures nested more than a configured maximum number.
  * Blocks include if, for, while, switch, try, catch, finally and synchronized
- * blocks/statements, as well as closures. 
+ * blocks/statements, as well as closures.
  * <p/>
  * The <code>maxNestedBlockDepth</code> property holds the threshold value for the maximum number of
  * nesting levels. A block or closures nested deeper than that number of levels is considered a

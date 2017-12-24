@@ -198,8 +198,8 @@
             }
         ' contains a GString-type expression: '${sample.property1}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='81'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
             @SomeAnnotationOnClass(attribute='${sample.property1}',
-                            nested=[@NestedAnnotation('${sample.property2}'), 
-                                    @NestedAnnotation('${sample.property3}')],  
+                            nested=[@NestedAnnotation('${sample.property2}'),
+                                    @NestedAnnotation('${sample.property3}')],
                              someOtherAttribute='${sample.property4}')
             class SomeClass {
             }

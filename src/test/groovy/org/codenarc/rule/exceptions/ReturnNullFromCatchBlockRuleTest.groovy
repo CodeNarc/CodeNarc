@@ -41,7 +41,7 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
             } catch (Exception e) {
                 return x
             } finally {
-                return x 
+                return x
             }
         '''
         assertNoViolations(SOURCE)
@@ -58,7 +58,7 @@ class ReturnNullFromCatchBlockRuleTest extends AbstractRuleTestCase {
             } catch (Exception e) {
                 LOG.error(e.getMessage())
                 return null
-            } 
+            }
         '''
         assertTwoViolations(SOURCE,
                 6, 'return null',

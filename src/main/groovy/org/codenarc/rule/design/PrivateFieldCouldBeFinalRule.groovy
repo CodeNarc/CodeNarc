@@ -56,10 +56,10 @@ class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
         }
         return visitor.violations
     }
-    
+
     boolean isDefinedInJpaEntity(FieldNode fieldNode) {
-        return AstUtil.hasAnyAnnotation(fieldNode.owner, 'Entity', 
-                                                         'MappedSuperclass', 
+        return AstUtil.hasAnyAnnotation(fieldNode.owner, 'Entity',
+                                                         'MappedSuperclass',
                                                          'javax.persistence.Entity',
                                                          'javax.persistence.MappedSuperclass')
     }

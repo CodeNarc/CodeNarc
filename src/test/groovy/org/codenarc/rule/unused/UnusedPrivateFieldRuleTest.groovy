@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,7 +43,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
             }'''
         assertSingleViolation(SOURCE, 4, 'private aField', 'The field aField is not used within the class CallOnOwner')
     }
-    
+
     @Test
     void testApplyTo_SingleUnusedPrivateField() {
         final SOURCE = '''
@@ -192,7 +192,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
             class MyClass {
                 private static final COUNT = 3
                 private defaultName = 'abc'
-                
+
                 private String doStuff(int repeat = COUNT) { }
                 private String doOtherStuff(int number, name = defaultName) { }
                 private otherMethod_NoParameters() { }
@@ -209,7 +209,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
                 private static final NAME = 'abc'
                 private static final VALUE = 123
                 def doStuff() {
-                    [(NAME):VALUE] 
+                    [(NAME):VALUE]
                 }
             }
         '''
@@ -229,7 +229,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         // TODO This "should" cause a violation for count
         assertNoViolations(SOURCE)
     }
-                                              
+
     @Test
     void testApplyTo_ClosureField() {
         final SOURCE = '''
@@ -239,7 +239,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
                 private otherClosure = { println '3' }
                 def getValue() {
                     def value = myClosure1()
-                    def otherValue = someOtherObject.otherClosure()     // different object/method  
+                    def otherValue = someOtherObject.otherClosure()     // different object/method
                     this.myClosure2(value, otherValue)
                 }
             }
@@ -291,7 +291,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
         '''
         assertNoViolations(SOURCE)
     }
-    
+
     @Test
     void testAnonymousInnerClassAsField() {
         final SOURCE = '''
@@ -446,7 +446,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
           class MyClass {
                @Delegate
                private Date date = new Date()
-               
+
                @groovy.lang.Delegate
                private int count = 99
           }

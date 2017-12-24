@@ -22,7 +22,7 @@ import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 
 /**
- * Helper AST visitor that adds rule violation if a return statement is encountered that returns a null constant. 
+ * Helper AST visitor that adds rule violation if a return statement is encountered that returns a null constant.
  *
  * @author Hamlet D'Arcy
  */
@@ -55,7 +55,7 @@ class NullReturnTracker extends AbstractAstVisitor {
             } else if (expr instanceof TernaryExpression) {
                 stack.push(expr.trueExpression)
                 stack.push(expr.falseExpression)
-            } 
+            }
         }
         false
     }

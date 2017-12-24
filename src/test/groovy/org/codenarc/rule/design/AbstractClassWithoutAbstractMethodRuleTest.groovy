@@ -50,7 +50,7 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase {
             abstract class MyBaseClass {
                 void method1() { }
                 abstract void method2()
-            } 
+            }
 
             interface MyMarkerInterface {
             } '''

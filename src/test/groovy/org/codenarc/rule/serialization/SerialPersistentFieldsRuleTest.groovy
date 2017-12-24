@@ -39,7 +39,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
                 private static final ObjectStreamField[] serialPersistentFields = [ new ObjectStreamField("myField", List.class) ] as ObjectStreamField[]
             }
 
-            // not serializable 
+            // not serializable
             class MyClass2 {
                 ObjectStreamField[] serialPersistentFields = [ new ObjectStreamField("myField", List.class) ] as ObjectStreamField[]
             }

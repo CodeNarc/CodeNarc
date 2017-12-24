@@ -41,7 +41,7 @@ class DeadCodeRuleTest extends AbstractRuleTestCase {
                 println x
             }
             def y = {
-                return 
+                return
             }
             return x
         '''

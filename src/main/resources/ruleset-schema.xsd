@@ -6,7 +6,7 @@
       attributeFormDefault="unqualified"
     >
 
-  <!-- Schema for a rule set for the CodeNarc tool. See http://codenarc.org. -->  
+  <!-- Schema for a rule set for the CodeNarc tool. See http://codenarc.org. -->
 
   <xs:element name="ruleset">
     <xs:complexType>

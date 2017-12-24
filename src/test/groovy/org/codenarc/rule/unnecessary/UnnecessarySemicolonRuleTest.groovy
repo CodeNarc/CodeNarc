@@ -127,7 +127,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
     @Test
     void testImport() {
         final SOURCE = '''
-            import java.lang.String;    
+            import java.lang.String;
         '''
         assertSingleViolation(SOURCE, 2, 'import java.lang.String;', 'Semi-colons as line endings can be removed safely')
     }
@@ -151,15 +151,15 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
          (the "License");
          (the "License");
          (the "License");
-         you may not use this file except in compliance with the License. 
+         you may not use this file except in compliance with the License.
          */
-         
+
          /*
           have a multiline comment
-          */ /*  and start a new multiline comment on the previous ending line;  
+          */ /*  and start a new multiline comment on the previous ending line;
           though i doubt this is a good thing
           */
-         
+
         '''
         assert !manuallyApplyRule(SOURCE)
     }

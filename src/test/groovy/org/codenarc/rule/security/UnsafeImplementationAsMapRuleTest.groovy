@@ -27,15 +27,15 @@ import org.codenarc.rule.AbstractRuleTestCase
  */
 class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
 
-    private static final SOURCE_WITH_SINGLE_VIOLATION = """                      
+    private static final SOURCE_WITH_SINGLE_VIOLATION = """
         [nextElement: {}] as Enumeration      ${violation('java.util.Enumeration', 'hasMoreElements')}
     """
-    
+
     @Before
     void setup() {
         sourceCodePath = '/src/main/where/ever/Whatever.groovy'
     }
-    
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
@@ -63,7 +63,7 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
     @Test
     void testMultipleViolations() {
         assertInlineViolations("""
-            [:] as Runnable                     ${violation('java.lang.Runnable', 'run')}                     
+            [:] as Runnable                     ${violation('java.lang.Runnable', 'run')}
             [noSuchMethod: {}] as Enumeration   ${violation('java.util.Enumeration', 'hasMoreElements, nextElement')}
         """)
     }
@@ -73,9 +73,9 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
         assertInlineViolations("""
             interface FunnyEnumeration extends Enumeration {
                 void makeFun()
-                void makeLotsOfFun()    
+                void makeLotsOfFun()
             }
-            
+
             [nextElement: {}, makeFun: {}] as FunnyEnumeration    ${violation(
                 'FunnyEnumeration', 'hasMoreElements, makeLotsOfFun'
             )}
@@ -90,7 +90,7 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
             }
         ''')
     }
-    
+
     private static String violation(String implementedInterface, String missingMethods) {
         inlineViolation(
             "Incomplete interface implementation. The following methods of $implementedInterface are not implemented" +
@@ -98,7 +98,7 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
             ' on this implementation will cause an UnsupportedOperationException, which is likely not intended.'
         )
     }
-    
+
     @Override
     protected Rule createRule() {
         new UnsafeImplementationAsMapRule()

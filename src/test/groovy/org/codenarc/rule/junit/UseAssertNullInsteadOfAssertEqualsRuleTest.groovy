@@ -76,7 +76,7 @@ class UseAssertNullInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase {
         '''
         assertTwoViolations(SOURCE,
                 4, "assertEquals('message', null, foo())",
-                5, "assertEquals('message', foo(), null)")   
+                5, "assertEquals('message', foo(), null)")
     }
 
     @Override

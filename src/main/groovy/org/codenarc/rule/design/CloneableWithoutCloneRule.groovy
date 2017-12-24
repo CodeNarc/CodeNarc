@@ -23,7 +23,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * A class that implements Cloneable should define a clone() method.
- * 
+ *
  * @author Hamlet D'Arcy & Rene Groeschke
  */
 class CloneableWithoutCloneRule extends AbstractAstVisitorRule {

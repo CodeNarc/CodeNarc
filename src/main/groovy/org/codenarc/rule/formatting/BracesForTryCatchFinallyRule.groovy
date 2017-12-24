@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,7 +21,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * Checks the location of the opening brace ({) for try statements, the location 
+ * Checks the location of the opening brace ({) for try statements, the location
  * of the 'catch' keyword and corresponding opening braces, and the location of the 'finally'
  * keyword and the corresponding opening braces. By default, requires opening braces on the
  * same line, but the sameLine property can be set to false to override this.
@@ -43,11 +43,11 @@ class BracesForTryCatchFinallyRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = BracesForTryCatchFinallyAstVisitor
     boolean sameLine = true
-    
+
     boolean validateCatch = false
     Boolean catchOnSameLineAsClosingBrace
     Boolean catchOnSameLineAsOpeningBrace
-    
+
     boolean validateFinally = false
     Boolean finallyOnSameLineAsClosingBrace
     Boolean finallyOnSameLineAsOpeningBrace
@@ -68,13 +68,13 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
                 addViolation(node, "Opening brace should not be on the same line as 'try'")
             }
         }
-        
+
         visitCatch(myRule, node)
         visitFinally(myRule, node)
-        
+
         super.visitTryCatchFinally(node)
     }
-    
+
     void visitCatch(BracesForTryCatchFinallyRule myRule, TryCatchStatement node) {
         //TODO: Understand AstUtil.isBlock and isFirstVisit and apply them as appropriate to the below block
         if (myRule.validateCatch && node.catchStatements) {
@@ -102,9 +102,9 @@ class BracesForTryCatchFinallyAstVisitor extends AbstractAstVisitor {
                     addViolation(stmt, "Opening brace should not be on the same line as 'catch'")
                 }
             }
-        }    
+        }
     }
-    
+
     void visitFinally(BracesForTryCatchFinallyRule myRule, TryCatchStatement node) {
         //TODO: Understand AstUtil.isBlock and isFirstVisit and apply them as appropriate to the below block
         //if user has not explicitly set the finally brace settings, 'inherit' them from sameLine

@@ -102,7 +102,7 @@ class NoDefRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class User {
                 String name
-                
+
                 User(String name) {
                     this.name = name
                 }
@@ -116,7 +116,7 @@ class NoDefRuleTest extends AbstractRuleTestCase {
         final SOURCE = '''
             class User {
                 String name
-                
+
                 User(def name) {
                     this.name = name
                 }

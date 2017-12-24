@@ -80,8 +80,8 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
     void testSingleQuoteStrings_WithQuasiGStringExpressionInAnnotation_NestedAnnotations_NoViolations() {
         final SOURCE = '''
             @SomeAnnotationOnClass(attribute='${sample.property1}',
-                            nested=[@NestedAnnotation('${sample.property2}'), 
-                                    @NestedAnnotation('${sample.property3}')],  
+                            nested=[@NestedAnnotation('${sample.property2}'),
+                                    @NestedAnnotation('${sample.property3}')],
                              someOtherAttribute='${sample.property4}')
             class SomeClass {
             }

@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * @author Artur Gajowy
  */
 class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
-    
+
     @Before
     void setup() {
         sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Whatever.groovy'
@@ -121,7 +121,7 @@ class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
         rule.additionalReservedSqlKeywords = 'customKeyword, evenMoreCustomKeyword'
         assertInlineViolations("""
             class Whatever {
-                String where                    ${violation('where')} 
+                String where                    ${violation('where')}
                 String customKeyword            ${violation('customKeyword')}
                 String evenMoreCustomKeyword    ${violation('evenMoreCustomKeyword')}
             }

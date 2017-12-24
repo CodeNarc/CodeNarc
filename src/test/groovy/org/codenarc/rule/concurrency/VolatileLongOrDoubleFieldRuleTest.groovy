@@ -21,7 +21,7 @@ import org.junit.Test
 
 /**
  * Unit test for VolatileLongOrDoubleFieldRule.
- * 
+ *
  * @author Hamlet D'Arcy
  */
 class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase {

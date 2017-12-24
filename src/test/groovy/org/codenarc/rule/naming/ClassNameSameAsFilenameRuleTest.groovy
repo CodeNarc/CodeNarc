@@ -29,12 +29,12 @@ import org.codenarc.rule.AbstractRuleTestCase
 class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
 
     static skipTestThatUnrelatedCodeHasNoViolations
-    
+
     @Before
     void setup() {
         sourceCodeName = 'SameAsFilename.groovy'
     }
-    
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
@@ -71,7 +71,7 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
         '''
         assertNoViolations(SOURCE)
     }
-    
+
     @Test
     void test_ScriptFile_NoViolations() {
         final SOURCE = '''

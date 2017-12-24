@@ -31,7 +31,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
     void setup() {
         sourceCodePath = '/src/test/SampleTest.groovy'
     }
-    
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
@@ -43,14 +43,14 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
         final SOURCE = '''
             import org.junit.Test
             import static org.junit.Assert.assertEquals
-        
+
             class SampleTest {
                 @Test
                 def shouldFoo() {
                     //when
                     int result = 2
-        
-                    //then       
+
+                    //then
                     assertEquals(2, result)
                     assertEquals("Message", 2, result)
                     assertEquals(2.3d, result, 0.5d)
@@ -66,7 +66,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
         sourceCodePath = '/src/main/ProductionCode.groovy'
         assertNoViolations(SOURCE_WITH_SINGLE_VIOLATION)
     }
-    
+
     @Test
     void testSingleViolation() {
         assertSingleViolation(SOURCE_WITH_SINGLE_VIOLATION, 4, 'Assert.assertEquals(sum, 2)', VIOLATION_MESSAGE)
@@ -80,17 +80,17 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
 
     @Test
     void testMultipleViolations() {
-        final SOURCE = '''     
+        final SOURCE = '''
             import org.junit.Test
             import static org.junit.Assert.assertEquals
-        
+
             class SampleTest {
                 @Test
                 def shouldFoo() {
                     //when
                     int result = 2
-        
-                    //then       
+
+                    //then
                     assertEquals(result, 2)
                     assertEquals("Message", result, 2)
                     assertEquals(result, 2.3d, 0.5d)

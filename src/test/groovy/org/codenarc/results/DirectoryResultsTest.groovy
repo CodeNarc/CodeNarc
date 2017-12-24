@@ -21,7 +21,7 @@ import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
 /**
- * Tests for DirectoryResults 
+ * Tests for DirectoryResults
  *
  * @author Chris Mair
  */

@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,7 +21,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * String objects should be created with single quotes, and GString objects created with double quotes. Creating normal String objects with double quotes is confusing to readers. 
+ * String objects should be created with single quotes, and GString objects created with double quotes. Creating normal String objects with double quotes is confusing to readers.
  *
  * @author Hamlet D'Arcy
   */
@@ -75,7 +75,7 @@ class UnnecessaryGStringAstVisitor extends AbstractAstVisitor {
         if (expression.value.contains("'")) { return true }
 
         if (expression.lineNumber == expression.lastLineNumber) { return false }
-        
+
         def lines = getSourceCode().getLines()
         ((expression.lineNumber - 1).. (expression.lastLineNumber - 1)).any {
             (lines[it].contains('$')) || (lines[it].contains("'"))

@@ -44,15 +44,15 @@ class GradlePluginCompilationClasspathTest {
             codenarc {
                 codenarc.configFile = file('$CONFIG_FILE_PATH')
             }
-            
+
             dependencies {
                 compile localGroovy()
-                codenarc localGroovy() 
+                codenarc localGroovy()
                 codenarc files(${codeNarcClassesDirs().collect { "'$it'" }.join(', ')})
             }
-            
+
             codenarcMain {
-                compilationClasspath = sourceSets.main.compileClasspath 
+                compilationClasspath = sourceSets.main.compileClasspath
             }
         """
     }
@@ -71,7 +71,7 @@ class GradlePluginCompilationClasspathTest {
         new File(temporaryFolder.root, srcDir).mkdirs()
         temporaryFolder.newFile("$srcDir/ViolatingClass.groovy") << '''
             import groovy.transform.EqualsAndHashCode
-            
+
             @EqualsAndHashCode
             class ViolatingClass extends Tuple {
                 ViolatingClass clone() {}

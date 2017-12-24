@@ -23,7 +23,7 @@ import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.util.AstUtil
 
 /**
- * 
+ *
  * @author Hamlet D'Arcy
  */
 class ReferenceCollector extends ClassCodeVisitorSupport {

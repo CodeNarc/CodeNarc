@@ -59,7 +59,7 @@ class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
         '''
         assertNoViolations(SOURCE)
     }
-    
+
     @Test
     void testViolation() {
         final SOURCE = '''

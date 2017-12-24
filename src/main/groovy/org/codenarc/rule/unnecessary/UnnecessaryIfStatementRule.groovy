@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -56,7 +56,7 @@ import org.codehaus.groovy.ast.stmt.*
  *   NOTE: This check is disabled by setting checkLastStatementImplicitElse to false.
  *
  * (4) When either the if block or else block of an if statement that is not the last statement in a
- * block contain only a single constant or literal expression 
+ * block contain only a single constant or literal expression
  * For example, the if statement in the following code has no effect and can be removed:
  *      <code>
  *      def myMethod() {

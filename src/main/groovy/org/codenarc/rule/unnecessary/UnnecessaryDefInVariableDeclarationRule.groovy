@@ -36,7 +36,7 @@ class UnnecessaryDefInVariableDeclarationRule extends AbstractAstVisitorRule {
 }
 
 class UnnecessaryDefInVariableDeclarationAstVisitor extends AbstractAstVisitor {
-    
+
     @Override
     void visitExpressionStatement(ExpressionStatement statement) {
         def node = statement.expression

@@ -7,7 +7,7 @@ New Rules
    - #271: **Indentation** rule (formatting) - Check indentation for class, method and field declarations and initial statements.
 
 Updated/Enhanced Rules and Bug Fixes
-   - #239: Ignore super calls in UnnecessarySetterRule. (Marcin Erdmann) 
+   - #239: Ignore super calls in UnnecessarySetterRule. (Marcin Erdmann)
    - #258: Add enhanced mode for **CloseWithoutCloseableRule**. (Marcin Erdmann)
    - #263: **SpaceAfterOpeningBraceRule**: Fix false positive when an annotation has a brace. (Marcus Rosenow)
    - #243: **TrailingComma** rule: Fix for inline Lists in annotations. (Russell Sanborn)
@@ -22,19 +22,20 @@ Updated/Enhanced Rules and Bug Fixes
 Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)
    - #233: Change dependency subst. to exclusions in integration-test module. (Marcin Erdmann)
-   - #238: Update Gradle to 4.2. (Marcin Erdmann) 
+   - #238: Update Gradle to 4.2. (Marcin Erdmann)
    - #242: Removing duplicate gradle property settings. (Russell Sanborn)
    - #255: Apply **MissingOverrideAnnotation** rule to project source code. (Marcin Erdmann)
    - #262: Update readme to describe how to test locally.  (Russell Sanborn)
    - #270: Move build configuration out of project "build.properties".
    - #277: Fix online docs to remove references to obsolete createViolation() and addViolation() methods.
+   - #278: Clean up unnecessary whitespace in source files.
 
 
 Version 1.0 (Sep 2017)
 --------------------------------------
 New Rules
    - #199: **CouldBeSwitchStatement** rule (convention)  - Checks for multiple if statements that could be converted to a switch (Thanks to Jenn Strater)
-   - #215: **UnnecessarySetter** rule (unnecessary)  - Checks for explicit calls to setter methods which can be replaced by assignment to property (Thanks to Yuriy Chulovskyy) 
+   - #215: **UnnecessarySetter** rule (unnecessary)  - Checks for explicit calls to setter methods which can be replaced by assignment to property (Thanks to Yuriy Chulovskyy)
 
 Updated/Enhanced Rules and Bug Fixes
    - #196: Fix #194: **SpaceAfterClosingBrace**: false positive that occurs when a closure is the last item in a map entry (Thanks to Jenn Strater)
@@ -52,11 +53,11 @@ Updated/Enhanced Rules and Bug Fixes
 
 Framework and Infrastructure
    - #228: [BREAKING CHANGE] Upgrade to Groovy 2.3.
-   - #203: [BREAKING CHANGE] Switch from Log4J to SLF4J 1.7.25. 
+   - #203: [BREAKING CHANGE] Switch from Log4J to SLF4J 1.7.25.
    - #217: [BREAKING CHANGE] Upgrade to GMetrics 1.0.
    - #227: [BREAKING CHANGE] Remove *deprecated* rules, classes and methods:
-      * The **AbcComplexity** rule (use the **AbcMetric** rule instead) 
-      * The **GrailsSessionReference** rule 
+      * The **AbcComplexity** rule (use the **AbcMetric** rule instead)
+      * The **GrailsSessionReference** rule
       * `DirectorySourceAnalyzer`
       * `AbstractAstVisitor.addViolation(ASTNode)`
       * `AbstractRule.createViolation(Integer)`
@@ -70,7 +71,7 @@ Framework and Infrastructure
    - #219: Use the right classloader for loading AST transformations when compiling analysed code. (Thanks to Marcin Erdmann)
    - #222: Make JUnit jar a *compileOnly* dependency.
    - #231: Do not use every available processor. Switch to Runtime.availableProcessors() - 1.
-   
+
 
 Version 0.27.0 (Mar 2017)
 --------------------------------------
@@ -452,12 +453,12 @@ New Feaures
  - Rule Index page: Rule name is now a link to the rule description web page. (3434063)
 
 New and Updated Rules
- - @SuppressWarnings Support  - The support for @SuppressWarnings was redesigned so that it is more reliable. @SuppressWarnings no works on *all* rules at the Class, Field, and Method level. 
+ - @SuppressWarnings Support  - The support for @SuppressWarnings was redesigned so that it is more reliable. @SuppressWarnings no works on *all* rules at the Class, Field, and Method level.
  - CouldBeElvis rule (convention)  - Catch an if block that could be written as an elvis expression.
  - LongLiteralWithLowerCaseL rule (convention)  - In Java and Groovy, you can specify long literals with the L or l character, for instance 55L or 24l. It is best practice to always use an uppercase L and never a lowercase l. This is because 11l rendered in some fonts may look like 111 instead of 11L.
  - ConfusingMultipleReturns rule (groovyism)  - Multiple return values can be used to set several variables at once. To use multiple return values, the left hand side of the assignment must be enclosed in parenthesis. If not, then you are not using multiple return values, you're only assigning the last element.
  - GetterMethodCouldBeProperty rule (groovyism)  - If a class defines a public method that follows the Java getter notation, and returns a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.
- - UnnecessaryDefInMethodDeclaration rule (unnecessary)  - 3176230  - Rule now catches when you try to add the def keyword to constructor declarations. Also expanded to catch more instances of in method declarations with explicit return types. 
+ - UnnecessaryDefInMethodDeclaration rule (unnecessary)  - 3176230  - Rule now catches when you try to add the def keyword to constructor declarations. Also expanded to catch more instances of in method declarations with explicit return types.
  - UnnecessaryDefInFieldDeclaration rule (unnecessary)  - If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.
  - UnnecessaryDefInVariableDeclaration rule (unnecessary)  - Expanded rule to catch more instances of unneeded defs.
  - UnusedMethodParameter rule (unused)  - This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by the UnusedPrivateMethodParameter rule) or methods marked @Override.
@@ -470,11 +471,11 @@ New and Updated Rules
  - DuplicateMapLiteral (dry)  - 3413600  - Check for multiple instances of the same Map literal; limited to Maps where the keys and values are all constants or literals.
  - DuplicateListLiteral (dry)  - 3413601  - Check for multiple instances of the same List literal; limited to Lists where the values are all constants or literals.
 
-Bug Fixes 
+Bug Fixes
   - #3393179: Fix for JUnitPublicNonTestMethod reporting violations for public non-test methods that are annotated @Override
   - #3394313: Fixed UnusedPrivateField to honor the @SuppressWarnings annotation.
-  - #3397468: Fixed CyclomaticComplexity rule to honor the @SuppressWarnings annotation.  
-  - #3392768: The UnnecessaryDefInVariableDeclaration no longer checks fields. That work is done in the UnnecessaryDefInFieldDeclaration rule. 
+  - #3397468: Fixed CyclomaticComplexity rule to honor the @SuppressWarnings annotation.
+  - #3392768: The UnnecessaryDefInVariableDeclaration no longer checks fields. That work is done in the UnnecessaryDefInFieldDeclaration rule.
   - #3401516: Fixed FinalClassWithProtectedMember to ignore methods with @Override
   - #3408106: Fixed UnnecessaryDefInMethod to ignore parameters that have the def keyword
   - #3393184: Fixed ExplicitCallToEqualsMethod to suggest a better rewrite, which works better with negation
@@ -538,7 +539,7 @@ Breaking Changes
    - SimpleDateFormatMissingLocale       (design)
    - UseCollectMany                      (groovyism)
    - UseCollectNested                    (groovyism)
-  
+
   The ruleset parser classes have been modified to print a helpful error message for moved and renamed rules (see MovedRules helper class).
  * In a previous version, method names on AbstractAstVisitor were changed to add @SuppressWarnings support. visitField became visitFieldEx, visitProperty became visitPropertyEx, and visitConstructor became visitConstructorEx. These were changed back to the default names used by Groovy visitors.
 
@@ -556,7 +557,7 @@ New and Updated Rules
  - AssignCollectionSort rule (basic)  - The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.
  - UnnecessaryDotClass rule (unnecessary)  - To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.
  - BitwiseOperatorInConditional rule (basic)  - Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practive to extract a temp variable.
- - UnnecessaryInstanceOfCheck rule (unnecessary)  - This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that (!variable instanceof String) will never be true because the result of a not expression is always a boolean. 
+ - UnnecessaryInstanceOfCheck rule (unnecessary)  - This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that (!variable instanceof String) will never be true because the result of a not expression is always a boolean.
  - UnnecessarySubstring rule (unnecessary)  - This rule finds usages of String.substring(int) and String.substring(int, int) that can be replaced by use of the subscript operator. For instance, var.substring(5) can be replaced with var[5..-1].
  - HardcodedWindowsRootDirectory rule (basic)  - This rule find cases where a File object is constructed with a windows-based path. This is not portable, and using the File.listRoots() method is a better alternative.
  - HardCodedWindowsFileSeparator rule (basic)  - This rule finds usages of a Windows file separator within the constructor call of a File object. It is better to use the Unix file separator or use the File.separator constant.
@@ -576,7 +577,7 @@ New and Updated Rules
  - IllegalClassReference rule (generic)  - Checks for reference to any of the classes configured in classNames.
 
 Bug Fixes and New Features
-  - #3325147: Fix for running CodeNarc with a Groovy 1.8 runtime. There should no longer be StackOverflowExceptions. 
+  - #3325147: Fix for running CodeNarc with a Groovy 1.8 runtime. There should no longer be StackOverflowExceptions.
   - #3317632: CloneableWithoutClone  - false positive.
   - #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
   - #3314773: UnnecessaryGroovyImportRule: false positive on static imports
@@ -600,8 +601,8 @@ Thanks
  - Thanks to RenÃ© Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
   as well as the many Bug Fixes.
  - Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
- - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule. 
- - Thanks to Jeff Beck for the BitwiseOperatorInConditional rule. 
+ - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule.
+ - Thanks to Jeff Beck for the BitwiseOperatorInConditional rule.
  - Thanks to Geli Crick and Rafael Luque for the BracesForClass, LineLength, GrailsDomainHasToString,GrailsDomainHasEquals, BracesForIfElseRule, BracesForMethod, BracesForTryCatchFinally and ClassJavadoc rules.
 
 

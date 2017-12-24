@@ -25,11 +25,11 @@ class ExpressionCollector {
                 result.put(classNode, collector.methodCalls);
             }
         }
-        return result; 
+        return result;
     }
 
     private static class ExpressionCollectorVisitor extends ClassCodeVisitorSupport {
-        
+
         private final List<MethodCallExpression> methodCalls = new ArrayList<MethodCallExpression>();
 
         @Override

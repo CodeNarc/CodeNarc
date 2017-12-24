@@ -21,7 +21,7 @@ import org.junit.Test
 
 /**
  * Tests for TrailingWhitespaceRule
- * 
+ *
  * @author Joe Sondow
  */
 class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {

@@ -134,7 +134,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
                     catch(Exception e) {
                     }
                     finally {                       // 1
-                        if (ready) {                // 2 
+                        if (ready) {                // 2
                             println 'ready'
                         }
                     }

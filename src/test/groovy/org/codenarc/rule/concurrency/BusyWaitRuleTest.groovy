@@ -52,7 +52,7 @@ class BusyWaitRuleTest extends AbstractRuleTestCase {
                 // you should use a lock here, but technically you are
                 // not just busy waiting because you are doing other work
                 doSomething()
-                sleep(1000) 
+                sleep(1000)
             }
         '''
         assertNoViolations(SOURCE)
