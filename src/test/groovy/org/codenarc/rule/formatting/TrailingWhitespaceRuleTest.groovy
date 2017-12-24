@@ -87,6 +87,26 @@ class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testWindowsLineEndings() {
+        final SOURCE = 'package org.codenarc \r\n' +
+                '\r\n' +
+                'class MyClass {\t\r\n' +
+                '\r\n' +
+                '    def go() {}  \r\n' +
+                '    \r\n' +
+                '    def stop() {}\r\n' +
+                '}\t\r\n'
+        assertViolations(SOURCE,
+                [lineNumber: 1, sourceLineText: 'package org.codenarc ', messageText: MESSAGE],
+                [lineNumber: 3, sourceLineText: 'class MyClass {\t', messageText: MESSAGE],
+                [lineNumber: 5, sourceLineText: '    def go() {}  ', messageText: MESSAGE],
+                [lineNumber: 6, sourceLineText: '    ', messageText: MESSAGE],
+                [lineNumber: 8, sourceLineText: '}\t', messageText: MESSAGE],
+        )
+    }
+
+    @Test
+    @SuppressWarnings('TrailingWhitespace')
     void testWhitespaceOnlyLines() {
         final SOURCE = '''\
             |package org.codenarc

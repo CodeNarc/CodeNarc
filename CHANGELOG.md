@@ -18,6 +18,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #276: Fix minor spelling typos throughout project. (Russell Sanborn)
    - #275: Remove todos that were copied over from the Test.groovy template. (Russell Sanborn)
    - #264: **SpaceAfterOpeningBrace** rule: One-line constructors with braces in the body are marked as violations
+   - #279: **TrailingWhitespace**: Fix to also support Windows line endings.
 
 Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)

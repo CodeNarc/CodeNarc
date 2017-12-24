@@ -30,7 +30,7 @@ class TrailingWhitespaceRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-        def matcher = sourceCode.getText() =~ /[^\n]*[ \t]+\n/
+        def matcher = sourceCode.getText() =~ /[^\n]*[ \t]+\R/
         while (matcher.find()) {
             def lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.start())
             violations.add(createViolation(lineNumber, matcher.group(), 'Line ends with whitespace characters'))
