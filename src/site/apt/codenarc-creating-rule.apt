@@ -53,7 +53,7 @@ class MyStaticFieldRule extends AbstractRule {
         sourceCode.ast.classes.each { clazz ->
             clazz.fields.each { fieldNode ->
                 if (fieldNode.static) {
-                    violations << createViolation(sourceCode, fieldNode)
+                    violations << createViolation(sourceCode, fieldNode, "The field ${fieldNode.name} is static")
                 }
             }
         }
@@ -110,7 +110,7 @@ class EmptyTryBlockRule extends AbstractAstVisitorRule {
 class EmptyTryBlockAstVisitor extends AbstractAstVisitor  {
     void visitTryCatchFinally(TryCatchStatement tryCatchStatement) {
         if (AstUtil.isEmptyBlock(tryCatchStatement.tryStatement)) {
-            addViolation(tryCatchStatement)
+            addViolation(tryCatchStatement, "The try statement block is empty")
         }
         super.visitTryCatchFinally(tryCatchStatement)
     }
@@ -168,7 +168,7 @@ class MyStaticFieldRule extends AbstractRule {
         sourceCode.ast.classes.each { clazz ->
             clazz.fields.each { fieldNode ->
                 if (fieldNode.static) {
-                    violations << createViolation(sourceCode, fieldNode)
+                    violations << createViolation(sourceCode, fieldNode, "The field ${fieldNode.name} is static")
                 }
             }
         }

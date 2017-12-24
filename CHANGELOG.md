@@ -27,6 +27,7 @@ Framework and Infrastructure
    - #255: Apply **MissingOverrideAnnotation** rule to project source code. (Marcin Erdmann)
    - #262: Update readme to describe how to test locally.  (Russell Sanborn)
    - #270: Move build configuration out of project "build.properties".
+   - #277: Fix online docs to remove references to obsolete createViolation() and addViolation() methods.
 
 
 Version 1.0 (Sep 2017)
