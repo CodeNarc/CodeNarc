@@ -35,7 +35,7 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testConstructors_NoViolations() {
+    void testConstructors_Multiple_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 public MyClass() {}
@@ -44,6 +44,13 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
                 class InnerClass {
                 }
             }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testConstructor_Private_NoViolations() {
+        final SOURCE = '''
             class MyUtility {
               private MyUtility(){
                 def inner = new Object() {}
@@ -54,7 +61,18 @@ class UnnecessaryConstructorRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSingleViolation() {
+    void testConstructor_Protected_NoViolations() {
+        final SOURCE = '''
+            class BaseClass {
+                // Protected to prevent instantiation except by subclasses
+                protected BaseClass() { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testConstructor_Unnecessary_Violation() {
         final SOURCE = '''
             class MyClass {
                 public MyClass() {}

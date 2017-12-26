@@ -26,7 +26,10 @@ import org.codenarc.util.AstUtil
 import java.lang.reflect.Modifier
 
 /**
- * UnnecessaryConstructor
+ * UnnecessaryConstructor.
+ * <p>
+ * Checks for exactly one no-parameter constructor that is empty or only calls super().
+ * Ignores private and protected constructors. Ignores constructors with annotations.
  *
  * @author Tomasz Bujok
  * @author Hamlet D'Arcy
@@ -51,7 +54,7 @@ class UnnecessaryConstructorAstVisitor extends AbstractAstVisitor {
 
     private void analyzeConstructor(ConstructorNode node) {
         if(isEmptyOrJustCallsSuper(node) && (!rule.ignoreAnnotations || !hasAnnotations(node)) &&
-                !Modifier.isPrivate(node.modifiers) && node.parameters?.size() == 0) {
+                !Modifier.isPrivate(node.modifiers) && !Modifier.isProtected(node.modifiers) && node.parameters?.size() == 0) {
             addViolation node, 'The constructor can be safely deleted'
         }
     }
