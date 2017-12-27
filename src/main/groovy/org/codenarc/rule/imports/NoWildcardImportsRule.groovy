@@ -15,24 +15,34 @@
  */
 package org.codenarc.rule.imports
 
-import org.codenarc.rule.Violation
+import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.source.SourceCode
 
 /**
- * Wildcard imports, static or otherwise, are not used.
+ * Checks for wildcard (star) imports. If the ignoreStaticImports property is true, then do not check static imports.
  *
  * @author Kyle Boon
+ * @author Chris Mair
  */
 class NoWildcardImportsRule extends AbstractImportRule {
+
+    private static final String MESSAGE = 'Wildcard (star) import'
+
     String name = 'NoWildcardImports'
     int priority = 3
+    boolean ignoreStaticImports = false
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-        eachImportLine(sourceCode) { int lineNumber, String line ->
-            if (line.trim().endsWith('.*')) {
-                violations.add(new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber))
+        sourceCode.ast?.starImports.each { ImportNode importNode ->
+            violations.add(createViolationForImport(sourceCode, importNode, MESSAGE))
+        }
+
+        if (!ignoreStaticImports) {
+            sourceCode.ast?.staticStarImports.each { String alias, ImportNode importNode ->
+                violations.add(createViolationForImport(sourceCode, importNode, MESSAGE))
             }
         }
     }
+
 }

@@ -23,6 +23,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * Tests for NoWildcardImportsRule
  *
  * @author Kyle Boon
+ * @author Chris Mair
  */
 class NoWildcardImportsRuleTest extends AbstractRuleTestCase {
 
@@ -30,6 +31,7 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase {
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'NoWildcardImports'
+        assert rule.ignoreStaticImports == false
     }
 
     @Test
@@ -43,26 +45,33 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
-    void testSingleViolation() {
+    void testWildcardImports_Violations() {
         final SOURCE = '''
-            import com.google.*
+            import static Math.*
+            import static org.codenarc.report.AbstractHtmlReportWriter.*
 
-            public class Foo {}
-        '''
-        assertSingleViolation(SOURCE, 2, 'import com.google.*')
-    }
-
-    @Test
-    void testMultipleViolations() {
-        final SOURCE = '''
             import com.google.*
             import org.codenarc.rule.*
 
             public class Foo {}
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'import com.google.*'],
-            [lineNumber:3, sourceLineText:'import org.codenarc.rule.*'])
+            [lineNumber:2, sourceLineText:'import static Math.*'],
+            [lineNumber:3, sourceLineText:'import static org.codenarc.report.AbstractHtmlReportWriter.*'],
+            [lineNumber:5, sourceLineText:'import com.google.*'],
+            [lineNumber:6, sourceLineText:'import org.codenarc.rule.*'])
+    }
+
+    @Test
+    void testStaticWildcardImports_ignoreStaticImports_NoViolations() {
+        final SOURCE = '''
+            import static Math.*
+            import static org.codenarc.report.AbstractHtmlReportWriter.*
+
+            public class Foo {}
+        '''
+        rule.ignoreStaticImports = true
+        assertNoViolations(SOURCE)
     }
 
     @Override

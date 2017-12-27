@@ -20,6 +20,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #264: **SpaceAfterOpeningBrace** rule: One-line constructors with braces in the body are marked as violations
    - #279: **TrailingWhitespace**: Fix to also support Windows line endings.
    - #241:**UnnecessaryConstructor**: Ignore protected constructors.
+   - #281: **NoWildcardImports**: Add *ignoreStaticImports* property to ignore static imports. Redesign rule to be AST-based rather than file/string-based.
 
 Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)

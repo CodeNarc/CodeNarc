@@ -71,6 +71,33 @@ Imports Rules  ("<rulesets/imports.xml>")
    Standard Properties for Configuring Rules}}.
 
 
+* {NoWildcardImports} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.21>
+
+  Checks for wildcard (star) imports. If the <ignoreStaticImports> property is <true>, then do not check static imports.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    import static foo.bar.*         // violation (unless ignoreStaticImports is true)
+    import my.something.*           // violation
+
+    public class MyClass{}
+-------------------------------------------------------------------------------
+
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>                    | <<Description>>                                                | <<Default Value>>      |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| ignoreStaticImports             | If <true>, then do not check static imports.                   | false                  |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+
+  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
+  and <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+   Standard Properties for Configuring Rules}}.
+
+
 * {UnnecessaryGroovyImport} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,27 +126,6 @@ Imports Rules  ("<rulesets/imports.xml>")
     names (i.e., if that string shows up almost anywhere within the source code).
 
   []
-
-  NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
-  and <doNotApplyToClassNames> rule configuration properties are not available. See
-  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
-   Standard Properties for Configuring Rules}}.
-
-
-* {NoWildcardImports} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 0.21>
-
-  Wildcard imports, static or otherwise, should not be used.
-
-  Example of violations:
-
--------------------------------------------------------------------------------
-    import my.something.*
-    import static foo.bar.*
-
-    public class MyClass{}
--------------------------------------------------------------------------------
 
   NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
   and <doNotApplyToClassNames> rule configuration properties are not available. See
