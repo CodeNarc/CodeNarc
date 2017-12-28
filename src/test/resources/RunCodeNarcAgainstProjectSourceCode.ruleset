@@ -10,6 +10,7 @@ ruleset {
     ruleset('rulesets/braces.xml')
 
     ruleset('rulesets/convention.xml') {
+        exclude 'MethodReturnTypeRequired'
         exclude 'NoDef'
         exclude 'TrailingComma'
         NoTabCharacter(doNotApplyToFileNames:'NoTabCharacterRuleTest.groovy') //Test should contain tab character to test the rule
