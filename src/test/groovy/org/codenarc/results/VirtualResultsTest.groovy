@@ -41,10 +41,10 @@ class VirtualResultsTest extends AbstractTestCase {
 
         assert results.getViolations() == violations
 
-        assert 1 == results.violations.findAll { v -> v.rule.priority == 1 }.size()
-        assert 2 == results.violations.findAll { v -> v.rule.priority == 2 }.size()
-        assert 3 == results.violations.findAll { v -> v.rule.priority == 3 }.size()
-        assert 1 == results.violations.findAll { v -> v.rule.priority == 7 }.size()
+        assert results.violations.findAll { v -> v.rule.priority == 1 }.size() == 1
+        assert results.violations.findAll { v -> v.rule.priority == 2 }.size() == 2
+        assert results.violations.findAll { v -> v.rule.priority == 3 }.size() == 3
+        assert results.violations.findAll { v -> v.rule.priority == 7 }.size() == 1
     }
 
     @Test
