@@ -80,7 +80,7 @@ Version 0.27.0 (Mar 2017)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
    - #180: **UnusedPrivateMethod** rule skip method with annotations. (Thanks to Yuriy Chulovskyy)
-   - #184: Fix NPE in **MissingBlankLineAfterPackage** rule for source containing only a package. (Thanks to RenÃ© Scheibe)
+   - #184: Fix NPE in **MissingBlankLineAfterPackage** rule for source containing only a package. (Thanks to René Scheibe)
    - #186: Fix #185: **SpaceAfterOpeningBrace** does not honour *ignoreEmptyBlock* for constructors. (Thanks to Jenn Strater)
    - #182: **UnusedVariable**: Ignore variables in Scripts annotated with `@Field`.
    - #188: **GStringExpressionWithinString**: Fix false positive for an escaped $ character within a GString.
@@ -161,10 +161,10 @@ New Rules
   - #111: InterfaceNameSameAsSuperInterface rule (naming)  - Checks for any interface that has an identical name to its super-interface, other than the package. This can be very confusing.
 
 Updated/Enhanced Rules and Bug Fixes
-  - #91: ClassJavadoc rule: Allow regular comments or annotations before Javadoc section. (Thanks to SÃ©bastien Launay)
+  - #91: ClassJavadoc rule: Allow regular comments or annotations before Javadoc section. (Thanks to Sébastien Launay)
   - #90: UnnecessarySafeNavigationOperator rule: Fix false positive on spread operator.
   - #95: Some tests incompatible with Java 8. (Thanks to Artur Gajowy)
-  - #107: FileEndsWithoutNewlineRule to handle empty source. (Thanks to RenÃ© Scheibe)
+  - #107: FileEndsWithoutNewlineRule to handle empty source. (Thanks to René Scheibe)
   - #108: Fix NPE when analyzing file with trait; fix #93. (Thanks to Dominik Przybysz)
 
 Framework and Infrastructure
@@ -255,8 +255,8 @@ New Rules
   - #143: MultipleUnaryOperators rule (basic)  - Checks for multiple consecutive unary operators.
 
 Updated/Enhanced Rules and Bug Fixes
-  - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to RenÃ© Scheibe)
-  - #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to RenÃ© Scheibe)
+  - #31: UnusedImportRule: Extended to now also detect cases where the imported class name occurs as a substring in the source code. (Thanks to René Scheibe)
+  - #36: UnnecessaryDefInMethodDeclaration: Prevent false positives from modifiers within quoted method name. (Thanks to René Scheibe)
   - #37: LineLengthRule: Flags to ignore import and package statements line length. (Thanks to Kyle Boon)
   - #35: UnnecessaryPackageReferenceRule: raises confusing violation for Script with package.
   - #48: Fix Method chaining breaks SpaceAfterComma.
@@ -378,7 +378,7 @@ Updated/Enhanced Rules
   - #3521130: PrintStackTrace: Also check for StackTraceUtils.printSanitizedStackTrace().
   - #3589971: Add threshold for max class metric value for CyclomaticComplexity, AbcMetric and CrapMetric.
   - #3574257: Rename AbcComplexity rule to AbcMetric. Deprecate old AbcComplexity rule and set enabled=false. Rename properties, e.g. maxMethodAbcScore.
-  - Pull request #5: Enhanced UnusedVariableRule to enable ignoring some variables (ignoreVariableNames). Thanks to RenÃ© Scheibe.
+  - Pull request #5: Enhanced UnusedVariableRule to enable ignoring some variables (ignoreVariableNames). Thanks to René Scheibe.
 
 Bug Fixes
   - Fix #3555096: UnusedPrivateMethod  - StringIndexOutOfBoundsException for zero-length method name.
@@ -585,10 +585,10 @@ Bug Fixes and New Features
   - #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
   - #3314773: UnnecessaryGroovyImportRule: false positive on static imports
   - #3315992: ClosureAsLastMethodParameter  - false positive, when method call surrounded by parentheses.
-  - #3307699: Fixed a typo and made some "Violation" strings lowercase, so the log messages are consistent. (Fixed by RenÃ© Scheibe)
-  - #3315946: Cmdline runner does not respect -includes and -excludes.  (Fixed by RenÃ© Scheibe)
-  - #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by RenÃ© Scheibe)
-  - #3322395: JUnitTestMethodWithoutAssert  - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by RenÃ© Scheibe)
+  - #3307699: Fixed a typo and made some "Violation" strings lowercase, so the log messages are consistent. (Fixed by René Scheibe)
+  - #3315946: Cmdline runner does not respect -includes and -excludes.  (Fixed by René Scheibe)
+  - #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by René Scheibe)
+  - #3322395: JUnitTestMethodWithoutAssert  - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by René Scheibe)
   - #3310381: Added test for all rules (in AbstractRuleTestCase) to verify that any values specified for (doNot)applyToFilesMatching are valid regular expressions.
   - #3325049: Change StatelessClassRule (generic) to require applyToClassNames, applyToFileNames or applyToFilesMatching to be configured.
   - #3361263: IllegalPackageReferenceRule: Also check constructor parameter types and type coercion (x as Type).
@@ -601,7 +601,7 @@ Bug Fixes and New Features
   - #3384056: Unnecessary* rules should be priority 3.
 
 Thanks
- - Thanks to RenÃ© Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
+ - Thanks to René Scheibe for the UnnecessaryDefInVariableDeclarationRule and enhancements to UnnecessaryDefInMethodDeclarationRule;
   as well as the many Bug Fixes.
  - Thanks to Dean Del Ponte for the UnnecessaryDotClass rule.
  - Thanks to Nick Larson, Juan Vazquez, and Jon DeJong for the AssignCollectionUnique rule.
@@ -681,7 +681,7 @@ Bug Fixes and New Features
   - #3308930  - LoggerForDifferentClassRule now contains a parameter 'allowDerivedClasses'. When set, a logger may be created about this.getClass().
   - #3309748  - FieldName:Do not treat non-static final fields as constants
   - #3310413  - Fix UnnecessaryPublicModifier does not catch public on constructors.
-  - #3310521  - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from RenÃ© Scheibe
+  - #3310521  - For all ExplicitCallToXxxMethod rules: Ignore calls to super.Xxx(). Patch from René Scheibe
   - #3313550  - Some HTML violation descriptions in the properties files were not well-formed HTML. This has been fixed.
   - #3205688  - Fixed false positives in UseAssertEqualsInsteadOfAssertTrue when using the JUnit assertFalse method.
 
@@ -699,7 +699,7 @@ Thanks
   - Thank you to Erik Pragt for the MisorderedStaticImports rule.
   - Thank you to Marcin Erdmann for the MisorderedStaticImports, ClosureAsLastMethodParameterInBracketsRule, and UnnecessaryBracketsForMethodWithClosureCall rules.
   - Thank you to Hubert 'Mr. Haki' Klein Ikkink for updating the ConfusingMethodName rule.
-  - Thank you to RenÃ© Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
+  - Thank you to René Scheibe for the ExplicitLinkedHashMapInstantiation rule and UnnecessaryGroovyImportRule and ExplicitCallToXxxMethod patches.
 
 Version 0.13 (February 2011)
 -------------------------------------------
@@ -780,8 +780,8 @@ Potential Breaking Changes
  - addViolation(ASTNode) is deprecated. Instead use addViolation(ASTNode, String) when adding violations to the output.
 
 Thanks
-  - Many thanks to Mathilde LemÃ©e, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
-  - Big thanks to Evgeny Goldin and CÃ©dric Champeau for reporting bugs which helps us improve the product so much faster.
+  - Many thanks to Mathilde Lemée, Guillaume Laforge, and Tim Yates for helping us redesign our HTML report.
+  - Big thanks to Evgeny Goldin and Cédric Champeau for reporting bugs which helps us improve the product so much faster.
 
 Version 0.12 (January 2011)
 -------------------------------------------
@@ -991,7 +991,7 @@ New Concurrency Rules
  - VolatileLongOrDoubleFieldRule: (concurrency  - Hamlet D'Arcy)
 
 New Basic Rules
- - CloneableWithoutCloneRule (basic  - Hamlet D'Arcy & RenÃ© Groeschke)
+ - CloneableWithoutCloneRule (basic  - Hamlet D'Arcy & René Groeschke)
  - ConstantIfExpressionRule: if(true) or if(false). Or literal constant. (basic)
  - ConstantTernaryExpressionRule: true ? x : y or false, null or literal.(basic)
  - UnnecessaryTernaryExpressionRule: x ? true : false. Or Boolean.TRUE. Or where both expressions are the same. (basic)
