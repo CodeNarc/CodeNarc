@@ -13,6 +13,7 @@ ruleset {
         exclude 'MethodReturnTypeRequired'
         exclude 'NoDef'
         exclude 'TrailingComma'
+        exclude 'MethodParameterTypeRequired'
         NoTabCharacter(doNotApplyToFileNames:'NoTabCharacterRuleTest.groovy') //Test should contain tab character to test the rule
     }
 
