@@ -26,6 +26,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #279: **TrailingWhitespace**: Fix to also support Windows line endings.
    - #241:**UnnecessaryConstructor**: Ignore protected constructors.
    - #281: **NoWildcardImports**: Add *ignoreStaticImports* property to ignore static imports. Redesign rule to be AST-based rather than file/string-based.
+   - #244: JUnit* rules are not compatible with JUnit5. (Yuriy Chulovskyy)
 
 Framework and Infrastructure
    - #232: Update link to the gradle maven plugin. (Jenn Strater)

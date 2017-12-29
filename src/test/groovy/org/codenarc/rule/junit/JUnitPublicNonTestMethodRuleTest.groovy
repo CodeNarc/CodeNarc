@@ -174,6 +174,72 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_AfterAllAnnotation() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                public void testSomething() { println 'ok' }
+                @AfterAll void cleanUp() { println 'done' }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_AfterEachAnnotation() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                public void testSomething() { println 'ok' }
+                @AfterEach void cleanUp() { println 'done' }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_BeforeAllAnnotation() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                public void testSomething() { println 'ok' }
+                @BeforeAll void cleanUp() { println 'done' }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_BeforeEachAnnotation() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                public void testSomething() { println 'ok' }
+                @BeforeEach void cleanUp() { println 'done' }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_DisabledAnnotation() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                public void testSomething() { println 'ok' }
+                @Disabled void cleanUp() { println 'done' }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_IgnoreAnnotation() {
+        final SOURCE = '''
+            class MyTest extends GroovyTestCase {
+                public void testSomething() { println 'ok' }
+                @Ignore void cleanUp() { println 'done' }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_StaticMethods() {
         final SOURCE = '''
             class MyTest extends GroovyTestCase {
@@ -217,6 +283,18 @@ class JUnitPublicNonTestMethodRuleTest extends AbstractRuleTestCase {
                 public doSomething() { }
             }
         '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testIgnoreMethodsWithAnnotations() {
+        final SOURCE = '''
+            class MyTest {
+                @Override public doSomething() { }
+                @MyAnnotation public doSomethingElse() { }
+            }
+        '''
+        rule.ignoreMethodsWithAnnotations = 'Override,MyAnnotation'
         assertNoViolations(SOURCE)
     }
 

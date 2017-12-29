@@ -93,16 +93,14 @@ class JUnitUtil {
     protected static boolean isSetUpMethod(MethodNode methodNode) {
         (methodNode.name == 'setUp' &&
                 methodNode.parameters.size() == 0 &&
-                !AstUtil.getAnnotation(methodNode, 'Before') &&
-                !AstUtil.getAnnotation(methodNode, 'BeforeClass') &&
+                !AstUtil.hasAnyAnnotation(methodNode, 'Before', 'BeforeAll', 'BeforeClass', 'BeforeEach') &&
                 methodNode.code instanceof BlockStatement)
     }
 
     protected static boolean isTearDownMethod(MethodNode methodNode) {
         (methodNode.name == 'tearDown' &&
                 methodNode.parameters.size() == 0 &&
-                !AstUtil.getAnnotation(methodNode, 'After') &&
-                !AstUtil.getAnnotation(methodNode, 'AfterClass') &&
+                !AstUtil.hasAnyAnnotation(methodNode, 'After', 'AfterAll', 'AfterClass', 'AfterEach') &&
                 methodNode.code instanceof BlockStatement)
     }
 

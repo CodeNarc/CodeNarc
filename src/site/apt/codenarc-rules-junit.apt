@@ -208,9 +208,11 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
       * Methods annotated with <<<@Test>>>
 
-      * Methods annotated with <<<@Before>>> and <<<@After>>>
+      * Methods annotated with <<<@Before>>>, <<<@BeforeAll>>>, <<<@BeforeClass>>> and <<<@BeforeEach>>>
 
-      * Methods annotated with <<<@BeforeClass>>> and <<<@AfterClass>>>
+      * Methods annotated with <<<@After>>>, <<<@AfterAll>>>, <<<@AfterClass>>> and <<<@AfterEach>>>
+
+      * Methods annotated with <<<@Disabled>>> and <<<@Ignore>>>
 
       * Methods annotated with <<<@Override>>>
 
@@ -224,6 +226,16 @@ JUnit Rules  ("<rulesets/junit.xml>")
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
   ending in 'Test', 'Tests' or 'TestCase'.
+
+  *------------------------------+-------------------------------------------------------------+----------------------------+
+  | <<Property>>                 | <<Description>>                                             | <<Default Value>>          |
+  *------------------------------+-------------------------------------------------------------+----------------------------+
+  | ignoreMethodsWithAnnotations | Specifies one or more (comma-separated) annotation names.   | After,AfterAll,AfterClass, |
+  |                              | Methods annotated with the annotations are ignored by this  | AfterEach,Before,BeforeAll,|
+  |                              | rule.                                                       | BeforeClass,BeforeEach,    |
+  |                              |                                                             | Disabled,Ignore,           |
+  |                              |                                                             | Override,Test              |
+  *------------------------------+-------------------------------------------------------------+----------------------------+
 
 
 * {JUnitPublicProperty} Rule
