@@ -6,6 +6,7 @@ New Rules
    - #247: **MissingOverrideAnnotation** rule (enhanced) - Checks for methods that override a method in a super class or implement a method in an interface but are not annotated with @Override. (Marcin Erdmann)
    - #271: **Indentation** rule (formatting) - Check indentation for class, method and field declarations and initial statements.
    - #283: **InvertedCondition** rule (convention) - An inverted condition is one where a constant expression is used on the left hand side of the equals comparision. Such conditions can be confusing especially when used in assertions where the expected value is by convention placed on the right hand side of the comparision. (Marcin Erdmann)
+   - #285: **MethodReturnTypeRequired** rule (convention) - Checks that method return types are not dynamic, that is they are explicitly stated and different than def. (Marcin Erdmann)
 
 Updated/Enhanced Rules and Bug Fixes
    - #239: Ignore super calls in UnnecessarySetterRule. (Marcin Erdmann)
