@@ -39,7 +39,6 @@ class UnnecessaryOverridingMethodAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode node) {
-
         if (isSingleLineMethod(node) && node.code.statements[0]?.expression instanceof MethodCallExpression) {
             MethodCallExpression methodCall = node.code.statements[0].expression
             if (AstUtil.isMethodCall(methodCall, 'super', node.name, node.parameters.length)) {

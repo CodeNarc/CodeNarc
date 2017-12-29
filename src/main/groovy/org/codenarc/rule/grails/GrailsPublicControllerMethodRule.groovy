@@ -65,7 +65,6 @@ class GrailsPublicControllerMethodAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode methodNode) {
-
         if (Modifier.isPublic(methodNode.modifiers)
                 && !(methodNode.modifiers & MethodNode.ACC_STATIC)
                 && !isIgnoredMethodName(methodNode))  {

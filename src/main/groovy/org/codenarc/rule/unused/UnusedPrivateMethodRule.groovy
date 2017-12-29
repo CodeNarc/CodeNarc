@@ -70,7 +70,6 @@ class UnusedPrivateMethodRule extends AbstractSharedAstVisitorRule {
     private collectAllPrivateMethods(ast) {
         def allPrivateMethods = [:]
         ast.classes.each { classNode ->
-
             if (shouldApplyThisRuleTo(classNode)) {
                 classNode.methods.inject(allPrivateMethods) { acc, methodNode ->
                     if ((Modifier.isPrivate(methodNode.modifiers)) && !allPrivateMethods.containsKey(methodNode.name)) {
@@ -121,7 +120,6 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
         if (methodPointerExpression.expression instanceof VariableExpression &&
                 classNames.contains(methodPointerExpression.expression.name) &&
                 methodPointerExpression.methodName instanceof ConstantExpression) {
-
             unusedPrivateMethods.remove(methodPointerExpression.methodName.value)
         }
         super.visitMethodPointerExpression(methodPointerExpression)
@@ -143,7 +141,6 @@ class UnusedPrivateMethodAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitPropertyExpression(PropertyExpression expression) {
-
         if (isConstantString(expression.property)) {
             def propertyName = expression.property.value
             if (propertyName.size() == 1) {

@@ -63,7 +63,6 @@ class ConfusingMultipleReturnsAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitClassComplete(ClassNode node) {
-
         def declarationsOnSingleLine = declarations.
             groupBy { DeclarationExpression d -> d.lineNumber }.
             values().

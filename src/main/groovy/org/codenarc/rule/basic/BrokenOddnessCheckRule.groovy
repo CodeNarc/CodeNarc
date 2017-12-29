@@ -36,7 +36,6 @@ class BrokenOddnessCheckAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-
         if (AstUtil.isBinaryExpressionType(expression, '==')) {
             if (AstUtil.isBinaryExpressionType(expression.leftExpression, '%') && AstUtil.isConstant(expression.rightExpression, 1)) {
                 BinaryExpression modExp = expression.leftExpression

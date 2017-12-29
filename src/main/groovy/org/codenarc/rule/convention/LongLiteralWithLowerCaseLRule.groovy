@@ -35,7 +35,6 @@ class LongLiteralWithLowerCaseLRule extends AbstractAstVisitorRule {
 class LongLiteralWithLowerCaseLAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstantExpression(ConstantExpression expression) {
-
         if (!isFirstVisit(expression)) {
             return
         }

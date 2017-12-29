@@ -53,7 +53,6 @@ class NestedSynchronizationAstVisitor extends AbstractAstVisitor  {
     @Override
 
     void visitClosureExpression(ClosureExpression expression) {
-
         if (isFirstVisit(expression)) {
             // dispatch to a new instance b/c we have a new scope
             AbstractAstVisitor newVisitor = new NestedSynchronizationAstVisitor(sourceCode: this.sourceCode, rule: this.rule, visited: this.visited)

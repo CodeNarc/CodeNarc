@@ -63,7 +63,6 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
     protected void visitMethodEx(MethodNode node) {
         if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) && node.isPublic() &&
                 !rule.ignoreMethodsWithOverrideAnnotation && AstUtil.isOneLiner(node.code)) {
-
             def statement = node.code.statements[0]
             if (statement instanceof ExpressionStatement) {
                 if (statement.expression instanceof ConstantExpression) {

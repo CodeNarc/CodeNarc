@@ -34,7 +34,6 @@ class DuplicateMapKeyRule extends AbstractAstVisitorRule {
 class DuplicateMapKeyAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMapExpression(MapExpression expression) {
-
         if(isFirstVisit(expression)) {
             def a = expression.mapEntryExpressions
                     .findAll { it.keyExpression instanceof ConstantExpression }

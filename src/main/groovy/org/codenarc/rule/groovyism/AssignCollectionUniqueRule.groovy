@@ -39,7 +39,6 @@ class AssignCollectionUniqueRule extends AbstractAstVisitorRule {
 class AssignCollectionUniqueAstVisitor extends AbstractAstVisitor {
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
-
         Expression right = expression.rightExpression
 
         if (right instanceof MethodCallExpression) {

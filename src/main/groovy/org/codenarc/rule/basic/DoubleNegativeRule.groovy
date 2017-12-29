@@ -34,7 +34,6 @@ class DoubleNegativeAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitNotExpression(NotExpression expression) {
-
         if (expression.expression instanceof NotExpression) {
             addViolation expression, "The expression (!!$expression.text) is a confusing double negative"
         }

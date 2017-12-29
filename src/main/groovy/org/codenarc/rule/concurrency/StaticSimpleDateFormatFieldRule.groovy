@@ -40,7 +40,6 @@ class StaticSimpleDateFormatFieldAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
-
         if (Modifier.isStatic(node.modifiers) && AstUtil.classNodeImplementsType(node.type, SimpleDateFormat)) {
             addSimpleDateFormatViolation(node, node.name)
         }

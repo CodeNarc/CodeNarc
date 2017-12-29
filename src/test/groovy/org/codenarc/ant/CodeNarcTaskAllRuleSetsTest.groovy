@@ -46,7 +46,6 @@ class CodeNarcTaskAllRuleSetsTest extends AbstractTestCase {
 
     @Before
     void setUpCodeNarcTaskAllRuleSetsTest() {
-
         def project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR),
                 project:project,

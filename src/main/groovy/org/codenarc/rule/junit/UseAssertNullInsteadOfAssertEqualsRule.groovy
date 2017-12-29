@@ -35,10 +35,8 @@ class UseAssertNullInsteadOfAssertEqualsRule extends AbstractAstVisitorRule {
 class UseAssertNullInsteadOfAssertEqualsAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         List args = AstUtil.getMethodArguments(call)
         if (AstUtil.isMethodCall(call, 'this', 'assertEquals')) {
-
             if (args.size() == 2 && (AstUtil.isNull(args[0]) || AstUtil.isNull(args[1]))) {
                 addViolation call, 'assertEquals can be simplified using assertNull'
             } else if (args.size() == 3 && (AstUtil.isNull(args[1]) || AstUtil.isNull(args[2]))) {

@@ -44,7 +44,6 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-
         if (AstUtil.isBinaryExpressionType(expression, '+')) {
             Expression left = expression.leftExpression
             Expression right = expression.rightExpression

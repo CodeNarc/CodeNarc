@@ -50,7 +50,6 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-
         temporaryViolations.get().addAll(getViolationsForSource(sourceCode))
         super.applyTo(sourceCode, violations)
         if (temporaryViolations.get()) {
@@ -90,7 +89,6 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstantExpression(ConstantExpression node) {
-
         // search inside multiline strings
         if (node.value instanceof String && node.lineNumber != node.lastLineNumber) {
             removeViolationsInRange(node.lineNumber, node.lastLineNumber - 1)

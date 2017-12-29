@@ -37,7 +37,6 @@ class UnnecessarySelfAssignmentRule extends AbstractAstVisitorRule {
 class UnnecessarySelfAssignmentAstVisitor extends AbstractAstVisitor {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-
         if (AstUtil.isBinaryExpressionType(expression, '=')) {
             Expression left = expression.leftExpression
             Expression right = expression.rightExpression
@@ -55,7 +54,6 @@ class UnnecessarySelfAssignmentAstVisitor extends AbstractAstVisitor {
     }
 
     private static boolean propertyExpressionsAreEqual(Expression left, Expression right) {
-
         def stack = [[left, right]] as Stack
         while (stack) {
             (left, right) = stack.pop()

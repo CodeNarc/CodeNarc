@@ -35,7 +35,6 @@ class ObjectFinalizeAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodNamed(call, 'finalize', 0)) {
             addViolation(call, 'The finalize() method should only be called by the JVM after the object has been garbage collected')
         }

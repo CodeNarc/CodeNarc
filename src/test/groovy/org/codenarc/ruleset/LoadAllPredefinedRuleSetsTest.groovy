@@ -34,7 +34,6 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
 
     @Test
     void testPredefinedRulesHaveDescriptions() {
-
         forEachRule { rule ->
             assert messages.getString(rule.name + '.description')
             assert messages.getString(rule.name + '.description.html')
@@ -44,7 +43,6 @@ class LoadAllPredefinedRuleSetsTest extends AbstractTestCase {
     @SuppressWarnings('CatchThrowable')
     @Test
     void testPredefinedRulesHaveValidHtmlDescriptions() {
-
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance()
         factory.validating = false
         factory.namespaceAware = true

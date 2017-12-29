@@ -50,7 +50,6 @@ class SynchronizedReadObjectMethodAstVisitor extends AbstractMethodVisitor {
             && Modifier.isPrivate(node.modifiers)) {
             Parameter parm = node.parameters[0]
             if (node?.returnType?.name == 'void' && AstUtil.classNodeImplementsType(parm.type, ObjectInputStream)) {
-
                 if (Modifier.isSynchronized(node.modifiers)) {
                     addViolation(node, "The Serializable class $classNode.name has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable")
                 } else if (isSynchronizedBlock(node.code)) {

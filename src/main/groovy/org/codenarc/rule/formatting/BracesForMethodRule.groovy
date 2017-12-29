@@ -36,7 +36,6 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
-
         if (node.declaringClass?.isInterface() || node.isAbstract()) {
             return
         }

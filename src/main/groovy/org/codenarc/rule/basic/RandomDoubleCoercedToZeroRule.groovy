@@ -55,7 +55,6 @@ class RandomDoubleCoercedToZeroAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitField(FieldNode node) {
-
         if (isFirstVisit(node)) {
             if (node.initialExpression && AstUtil.isMethodCall(node.initialExpression, 'Math', 'random', 0)) {
                 if (node.type?.name == 'long' || node.type?.name == 'Long') {

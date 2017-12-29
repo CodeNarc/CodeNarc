@@ -34,7 +34,6 @@ class ClassForNameRule extends AbstractAstVisitorRule {
 class ClassForNameAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression node) {
-
         if (AstUtil.isMethodCall(node, 'Class', 'forName', 1) || AstUtil.isMethodCall(node, 'Class', 'forName', 3)) {
             addViolation(node, 'Methods calls to Class.forName(...) can create resource leaks and should almost always be replaced with calls to ClassLoader.loadClass(...)')
         }

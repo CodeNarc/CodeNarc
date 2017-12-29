@@ -38,10 +38,8 @@ class ClassJavadocRule extends AbstractRule {
      */
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-
         def lines = sourceCode.getLines()
         sourceCode.ast?.classes?.each { classNode ->
-
             if (!applyToNonMainClasses && sourceCodeNameWithoutExtension(sourceCode) != classNode.nameWithoutPackage) {
                 return // only apply to classes that have same name as the source unit.
             }

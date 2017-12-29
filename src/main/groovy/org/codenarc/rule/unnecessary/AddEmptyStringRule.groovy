@@ -35,7 +35,6 @@ class AddEmptyStringRule extends AbstractAstVisitorRule {
 class AddEmptyStringAstVisitor extends AbstractAstVisitor {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-
         if (isFirstVisit(expression) && AstUtil.isBinaryExpressionType(expression, '+')) {
             if (expression.leftExpression instanceof ConstantExpression && expression.leftExpression.value == '') {
                 addViolation expression, 'Concatenating an empty string is an inefficient way to convert an object to a String. Consider using toString() or String.valueOf(Object)'

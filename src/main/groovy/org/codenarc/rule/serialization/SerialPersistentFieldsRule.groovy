@@ -37,7 +37,6 @@ class SerialPersistentFieldsAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
-
         if (AstUtil.classNodeImplementsType(node.owner, Serializable)) {
             if (node.name == 'serialPersistentFields') {
                 if (!AstUtil.classNodeImplementsType(node.type, ObjectStreamField[].class)) {

@@ -39,7 +39,6 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
     void visitMethodCallExpression(MethodCallExpression call) {
         def arguments = AstUtil.getMethodArguments(call)
         if (arguments && arguments.last() instanceof ClosureExpression) {
-
             def lastArgument = arguments.last()
             def sourceLine = sourceCode.lines[call.lineNumber - 1]
             def firstChar = sourceLine[call.columnNumber - 1]

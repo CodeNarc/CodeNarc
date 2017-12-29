@@ -34,7 +34,6 @@ class UnnecessaryCallToSubstringRule extends AbstractAstVisitorRule {
 class UnnecessaryCallToSubstringAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodNamed(call, 'substring', 1)) {
             def arg = AstUtil.getMethodArguments(call)[0]
             if (AstUtil.isConstant(arg, 0)) {

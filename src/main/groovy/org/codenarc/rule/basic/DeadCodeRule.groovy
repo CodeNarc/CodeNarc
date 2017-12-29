@@ -35,7 +35,6 @@ class DeadCodeAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-
         if (block.statements && block.statements.size() >= 2) {
             (block.statements.size() - 1).times {
                 def statement = block.statements[it]

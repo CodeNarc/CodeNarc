@@ -36,7 +36,6 @@ class ConsecutiveBlankLinesRule extends AbstractRule {
      */
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-
         List<String> lines = sourceCode.getLines()
         for (int index = 1; index < lines.size(); index++) {
             String line = lines[index]

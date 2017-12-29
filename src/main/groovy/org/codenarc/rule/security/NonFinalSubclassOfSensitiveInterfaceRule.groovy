@@ -44,7 +44,6 @@ class NonFinalSubclassOfSensitiveInterfaceRule extends AbstractAstVisitorRule {
 class NonFinalSubclassOfSensitiveInterfaceAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
-
         if (!Modifier.isFinal(node.modifiers)) {
             if (AstUtil.classNodeImplementsType(node, Permission)) {
                 addViolation(node, "The class $node.nameWithoutPackage extends java.security.Permission but is not final")

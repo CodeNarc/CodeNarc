@@ -42,10 +42,8 @@ class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         List args = AstUtil.getMethodArguments(call)
         if (AstUtil.isMethodCall(call, 'this', 'assertEquals')) {
-
             if (args.size() == 2 && (AstUtil.isBoolean(args[0]) || AstUtil.isBoolean(args[1]))) {
                 addViolation call, 'assertEquals can be simplified using assertTrue or assertFalse'
             } else if (args.size() == 3 && (AstUtil.isBoolean(args[1]) || AstUtil.isBoolean(args[2]))) {

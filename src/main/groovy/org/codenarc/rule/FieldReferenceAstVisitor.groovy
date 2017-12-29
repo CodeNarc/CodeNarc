@@ -62,14 +62,12 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
         if (expression.objectExpression instanceof VariableExpression &&
             expression.objectExpression.name in ['this', currentClassNode.nameWithoutPackage] + outerClassNames &&
             expression.property instanceof ConstantExpression) {
-
             unreferencedFieldMap.remove(expression.property.value)
         } else if (expression.objectExpression instanceof PropertyExpression &&
             expression.objectExpression.objectExpression instanceof VariableExpression &&
             expression.objectExpression.property instanceof ConstantExpression &&
             expression.objectExpression.objectExpression.name  == currentClassNode.outerClass?.name &&
             expression.objectExpression.property.value == 'this' ) {
-
             unreferencedFieldMap.remove(expression.property.value)
         }
         super.visitPropertyExpression(expression)

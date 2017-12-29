@@ -33,7 +33,6 @@ class ConstantsOnlyInterfaceRule extends AbstractAstVisitorRule {
 class ConstantsOnlyInterfaceAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassEx(ClassNode node) {
-
         if (node.isInterface() && node.fields && !node.methods) {
             addViolation(node, "The interface $node.name has only fields and no methods defined")
         }
