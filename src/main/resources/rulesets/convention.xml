@@ -19,6 +19,7 @@
     <rule class='org.codenarc.rule.convention.MethodParameterTypeRequired'/>
     <rule class='org.codenarc.rule.convention.NoDefRule'/>
     <rule class='org.codenarc.rule.convention.NoTabCharacterRule'/>
+    <rule class='org.codenarc.rule.convention.MethodReturnTypeRequiredRule'/>
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
     <rule class='org.codenarc.rule.convention.TernaryCouldBeElvisRule'/>
     <rule class='org.codenarc.rule.convention.TrailingCommaRule'/>
