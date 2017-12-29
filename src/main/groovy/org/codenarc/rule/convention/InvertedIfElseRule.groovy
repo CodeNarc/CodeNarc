@@ -48,7 +48,6 @@ class InvertedIfElseAstVisitor extends AbstractAstVisitor {
         }
 
         dispatchToIfWithoutSuper ifElse
-
     }
 
     private void dispatchToIfWithoutSuper(IfStatement ifElse) {

@@ -133,7 +133,6 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 4, "def y = 'foo'")
-
     }
 
     @Test

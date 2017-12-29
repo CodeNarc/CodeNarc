@@ -134,7 +134,6 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase {
             }
         '''
         assertSingleViolation(SOURCE, 4, 'def y = 67890')
-
     }
 
     @Test

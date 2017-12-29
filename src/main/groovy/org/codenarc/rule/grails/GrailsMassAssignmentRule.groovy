@@ -63,7 +63,6 @@ class GrailsMassAssignmentAstVisitor extends AbstractAstVisitor {
             addViolation(expression, 'Restrict mass attribute assignment')
         }
         super.visitBinaryExpression(expression)
-
     }
 
 }
