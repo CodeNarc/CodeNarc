@@ -32,6 +32,7 @@ ruleset {
     }
 
     ruleset('rulesets/formatting.xml') {
+        exclude 'BlockStartsWithBlankLine'
         exclude 'MissingBlankLineAfterImports'
         exclude 'SpaceAfterCatch'
         exclude 'SpaceAfterFor'
