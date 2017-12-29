@@ -2,6 +2,8 @@
 
 import groovy.text.SimpleTemplateEngine
 
+import static java.nio.charset.StandardCharsets.UTF_8
+
 if (!args) {
     println usage()
     return
@@ -98,12 +100,12 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
 def updateChangelog(ruleName, ruleCategory, ruleDescription) {
     def path = './CHANGELOG.md'
     File file = new File(path)
-    String original = file.getText("ISO-8859-1")
-    file.text = """
+    String original = file.getText(UTF_8.name())
+    file.setText("""
 #TODO: Sort the following line into the file
 - $ruleName rule ($ruleCategory) - $ruleDescription
 
-$original"""
+$original""", UTF_8.name())
     println "\tUpdated $path"
 }
 
