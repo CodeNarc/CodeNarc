@@ -37,7 +37,6 @@ class UnnecessaryCollectCallRule extends AbstractAstVisitorRule {
 class UnnecessaryCollectCallAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodNamed(call, 'collect', 1)) {
             def args = AstUtil.getMethodArguments(call)
 

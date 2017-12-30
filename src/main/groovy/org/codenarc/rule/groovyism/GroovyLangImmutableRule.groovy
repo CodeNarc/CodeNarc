@@ -41,7 +41,6 @@ class GroovyLangImmutableAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitImports(ModuleNode node) {
-
         groovyTransformIsImported  = node.imports.any { it.type.name == 'groovy.transform.Immutable' }
         javaxImmutableAnnotationIsImported = node.imports.any { it.type.name == 'javax.annotation.concurrent.Immutable' }
         groovyTransformIsStarImported = node.starImports.any { it.packageName == 'groovy.transform.' }

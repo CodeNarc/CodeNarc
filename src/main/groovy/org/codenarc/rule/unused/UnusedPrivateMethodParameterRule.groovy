@@ -40,7 +40,6 @@ class UnusedPrivateMethodParameterAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode node) {
-
         if (Modifier.isPrivate(node.modifiers)) {
             def unusedParameterNames = node.parameters*.name
             def collector = new ReferenceCollector()

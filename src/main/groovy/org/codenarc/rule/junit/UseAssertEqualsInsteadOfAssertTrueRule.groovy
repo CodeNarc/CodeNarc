@@ -38,7 +38,6 @@ class UseAssertEqualsInsteadOfAssertTrueAstVisitor extends AbstractMethodCallExp
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         List args = AstUtil.getMethodArguments(call)
         if (args.size() < 3 && args.size() > 0) {
             def arg = args.last()

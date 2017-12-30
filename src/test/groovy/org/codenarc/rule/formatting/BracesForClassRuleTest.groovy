@@ -189,7 +189,6 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testViolationSameLine() {
-
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,

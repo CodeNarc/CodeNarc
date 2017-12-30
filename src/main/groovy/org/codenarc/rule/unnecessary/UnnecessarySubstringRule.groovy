@@ -35,7 +35,6 @@ class UnnecessarySubstringRule extends AbstractAstVisitorRule {
 class UnnecessarySubstringAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, '[^A-Z].*', 'substring', 1) && call.arguments instanceof ArgumentListExpression) {
             addViolation(call, 'The String.substring(int) method can be replaced with the subscript operator')
         } else if (AstUtil.isMethodCall(call, '[^A-Z].*', 'substring', 2) && call.arguments instanceof ArgumentListExpression) {

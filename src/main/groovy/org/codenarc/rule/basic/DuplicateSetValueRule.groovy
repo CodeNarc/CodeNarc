@@ -36,7 +36,6 @@ class DuplicateSetValueRule extends AbstractAstVisitorRule {
 class DuplicateSetValueAstVisitor extends AbstractAstVisitor {
     @Override
     void visitCastExpression(CastExpression expression) {
-
         if (isSetLiteral(expression)) {
             expression.expression.expressions?.inject([]) { acc, value ->
                 if (isDuplicate(value, acc)) {

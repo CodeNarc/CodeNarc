@@ -60,7 +60,6 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
                 rule.finalRegex : rule.regex
 
             varExpressions.each { varExpression ->
-
                 if (!new WildcardPattern(rule.ignoreVariableNames, false).matches(varExpression.name) &&
                         !(varExpression.name ==~ re)) {
                     def msg = "Variable named $varExpression.name in class $currentClassName does not match the pattern ${re.toString()}"

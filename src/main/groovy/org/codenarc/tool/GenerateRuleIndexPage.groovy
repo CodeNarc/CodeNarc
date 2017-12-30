@@ -39,7 +39,6 @@ class GenerateRuleIndexPage {
      * @param args - command-line args (not used)
      */
     static void main(String[] args) {
-
         def rulesByRuleSet = [:]
         def numberOfRules = 0
         RuleSets.ALL_RULESET_FILES.each { ruleSetPath ->

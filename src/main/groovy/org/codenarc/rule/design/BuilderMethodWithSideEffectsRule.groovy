@@ -35,7 +35,6 @@ class BuilderMethodWithSideEffectsAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode node) {
-
         if (node.name ==~ rule.methodNameRegex && node.isVoidMethod()) {
             addViolation(node, "The method '$node.name' is named like a builder method but has a void return type")
         }

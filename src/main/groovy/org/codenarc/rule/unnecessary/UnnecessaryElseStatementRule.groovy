@@ -41,7 +41,6 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
             def (allIfBlocks, theElseBlock) = collectIfsAndElses(node)
 
             if (isValidElseBlock(theElseBlock)) {
-
                 if (allIfBlocks && allIfBlocks.every { allBranchesReturn(it.ifBlock) }) {
                     addViolation theElseBlock, 'When an if statement block ends with a return statement the else is unnecessary'
                 }

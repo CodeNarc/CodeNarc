@@ -48,7 +48,6 @@ class CodeNarcTask_CustomRuleSetTest extends AbstractTestCase {
 
     @Before
     void setUpCodeNarcTask_CustomRuleSetTest() {
-
         def project = new Project(basedir:'.')
         fileSet = new FileSet(dir:new File(BASE_DIR),
                 project:project,

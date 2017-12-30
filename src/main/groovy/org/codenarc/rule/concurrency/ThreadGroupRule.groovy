@@ -35,7 +35,6 @@ class ThreadGroupRule extends AbstractAstVisitorRule {
 class ThreadGroupAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
-
         if (isConstructorNamed(call, ThreadGroup)) {
             addViolation(call, 'Avoid using java.lang.ThreadGroup; it is unsafe')
         }
@@ -44,7 +43,6 @@ class ThreadGroupAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodNamed(call, 'getThreadGroup', 0)) {
             addViolation(call, 'Avoid using java.lang.ThreadGroup; it is unsafe')
         }

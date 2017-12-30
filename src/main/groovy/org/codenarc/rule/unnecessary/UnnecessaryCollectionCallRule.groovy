@@ -38,7 +38,6 @@ class UnnecessaryCollectionCallAstVisitor extends AbstractMethodCallExpressionVi
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (USELESS_METHOD_NAMES.contains(call.method.text)) {
             String variableName = call.objectExpression.text
             if (call.arguments instanceof TupleExpression && call.arguments.expressions.size() == 1) {

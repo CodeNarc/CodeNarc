@@ -101,7 +101,6 @@ class CollectionReturnTracker extends AbstractAstVisitor {
     }
 
     private expressionReturnsList(Expression expression) {
-
         def stack = [expression] as Stack  // as alternative to recursion
         while (stack) {
             def expr = stack.pop()

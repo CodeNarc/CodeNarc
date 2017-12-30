@@ -57,7 +57,6 @@ class UnnecessarySetterAstVisitor extends AbstractMethodCallExpressionVisitor {
                 && name[0..2] == 'set'
                 && (name[3] as Character).isUpperCase()
                 && (name.length() == 4 || name[4..-1] != name[4..-1].toUpperCase()) ) {
-
             // TODO Restore once CodeNarc upgrades to Groovy 2.4
             // def propertyName = name[3..-1].uncapitalize()
             // def assignment = AstUtil.getNodeText(call.arguments, sourceCode)

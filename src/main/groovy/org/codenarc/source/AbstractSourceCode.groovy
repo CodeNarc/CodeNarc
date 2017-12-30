@@ -136,7 +136,6 @@ abstract class AbstractSourceCode implements SourceCode {
     private removeGrabTransformation(CompilationUnit compUnit) {
         compUnit.phaseOperations?.each { List xforms ->
             xforms?.removeAll { entry ->
-
                 entry.getClass().declaredFields.any {
                     it.name == 'val$instance' &&
                             it.type == ASTTransformation

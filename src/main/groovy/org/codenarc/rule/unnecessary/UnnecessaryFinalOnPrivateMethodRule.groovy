@@ -36,7 +36,6 @@ class UnnecessaryFinalOnPrivateMethodAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode node) {
-
         if (Modifier.isFinal(node.modifiers) && Modifier.isPrivate(node.modifiers)) {
             addViolation(node, "The '$node.name' method is both private and final")
         }

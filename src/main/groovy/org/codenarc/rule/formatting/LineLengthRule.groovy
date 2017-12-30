@@ -38,7 +38,6 @@ class LineLengthRule extends AbstractAstVisitorRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-
         int lineNumber = 0
         for (line in sourceCode.getLines()) {
             lineNumber++

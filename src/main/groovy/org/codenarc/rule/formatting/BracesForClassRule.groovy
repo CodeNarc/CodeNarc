@@ -35,7 +35,6 @@ class BracesForClassRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-
         sourceCode?.ast?.classes?.each { ClassNode classNode ->
             // Scripts don't have opening and closing braces, so ignore them.
             if (!classNode.script) {
@@ -77,7 +76,6 @@ class BracesForClassRule extends AbstractRule {
         int line = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
         def sourceLine = sourceCode.line(line - 1)
         while (sourceLine != null) {
-
             if (sourceLine?.contains('{')) {
                 return [line, sourceLine]
             }

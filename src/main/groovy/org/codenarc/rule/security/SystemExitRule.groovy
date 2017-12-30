@@ -35,7 +35,6 @@ class SystemExitAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, 'System', 'exit', 1)) {
             addViolation(call, 'Calling System.exit() is insecure and can expose a denial of service attack')
         }

@@ -37,7 +37,6 @@ class ConsecutiveLiteralAppendsAstVisitor extends AbstractMethodCallExpressionVi
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (isChainedAppend(call)) {
             def arg1 = AstUtil.getMethodArguments(call.objectExpression)[0]
             def arg2 = AstUtil.getMethodArguments(call)[0]

@@ -43,7 +43,6 @@ class UnnecessaryObjectReferencesAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-
         // search for runs of methods or runs of properties
         block.statements.each { Statement statement ->
             if (!(statement instanceof ExpressionStatement)) {

@@ -46,7 +46,6 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
         // If AST is null, skip this source code
         def ast = sourceCode.ast
         if (ast && ast.classes) {
-
             def anonymousClasses = getAnonymousClasses(ast.classes)
             def collector = new ReferenceCollector()
             anonymousClasses.each {
@@ -55,7 +54,6 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
             def anonymousReferences = collector.references
 
             ast.classes.each { classNode ->
-
                 if (shouldApplyThisRuleTo(classNode)) {
                     def visitor = new UnusedVariableAstVisitor(anonymousReferences: anonymousReferences)
                     visitor.rule = this

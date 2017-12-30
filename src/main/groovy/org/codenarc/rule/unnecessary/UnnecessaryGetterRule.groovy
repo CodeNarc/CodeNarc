@@ -42,7 +42,6 @@ class UnnecessaryGetterAstVisitor extends AbstractMethodCallExpressionVisitor {
     }
 
     private addViolationsIfGetter(MethodCallExpression call) {
-
         if (AstUtil.getMethodArguments(call).size() != 0) {
             return
         }

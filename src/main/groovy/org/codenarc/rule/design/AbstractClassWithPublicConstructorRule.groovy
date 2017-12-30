@@ -36,7 +36,6 @@ class AbstractClassWithPublicConstructorAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitClassEx(ClassNode node) {
-
         if (Modifier.isAbstract(node.modifiers)) {
             node.declaredConstructors.each { constructor ->
                 if (Modifier.isPublic(constructor.modifiers)) {

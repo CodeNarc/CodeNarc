@@ -39,7 +39,6 @@ class DuplicateMapLiteralAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMapExpression(MapExpression expression) {
-
         if (expression.mapEntryExpressions.isEmpty()) {
             return
         }

@@ -40,7 +40,6 @@ class EmptyMethodInAbstractClassAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode node) {
-
         if (isAbstract(node.declaringClass) && !isAbstract(node) && !node.isPrivate()) {
             if (node.returnType.name == 'void') {
                 // check for empty statement

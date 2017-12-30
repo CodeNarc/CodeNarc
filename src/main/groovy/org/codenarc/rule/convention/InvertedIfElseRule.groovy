@@ -40,7 +40,6 @@ class InvertedIfElseAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitIfElse(IfStatement ifElse) {
-
         if (ifElse.booleanExpression.expression instanceof NotExpression) {
             if (ifElse.elseBlock instanceof BlockStatement) {
                 addViolation ifElse.booleanExpression, 'Testing the negative condition first can make an if statement confusing'
