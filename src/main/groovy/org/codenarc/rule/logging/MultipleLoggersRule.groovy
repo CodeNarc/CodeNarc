@@ -38,7 +38,6 @@ class MultipleLoggersAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode fieldNode) {
         if (LogUtil.isMatchingLoggerDefinition(fieldNode.getInitialExpression())) {
-
             List<String> logFields = classNodeToFieldNames[fieldNode.declaringClass]
             if (logFields) {
                 logFields.add(fieldNode.name)

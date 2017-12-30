@@ -55,7 +55,6 @@ class BusyWaitAstVisitor extends AbstractAstVisitor {
         if (node.loopBlock instanceof BlockStatement
                 && node.loopBlock.statements?.size() == 1
                 && node.loopBlock.statements[0] instanceof ExpressionStatement) {
-
             Expression expression = node.loopBlock.statements[0].expression
             if (AstUtil.isMethodCall(expression, 'sleep', 1) || AstUtil.isMethodCall(expression, 'sleep', 2)) {
                 addViolation(expression, 'Busy wait detected. Switch the usage of Thread.sleep() to a lock or gate from java.util.concurrent')

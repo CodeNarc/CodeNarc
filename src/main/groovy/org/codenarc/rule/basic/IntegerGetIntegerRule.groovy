@@ -36,7 +36,6 @@ class IntegerGetIntegerRule extends AbstractAstVisitorRule {
 class IntegerGetIntegerAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, 'Integer', 'getInteger', 1)) {
             addViolation call, 'Integer.getInteger(String) is a confusing API for reading System properties. Prefer the System.getProperty(String) API.'
         } else if (AstUtil.isMethodCall(call, 'Integer', 'getInteger', 2)) {

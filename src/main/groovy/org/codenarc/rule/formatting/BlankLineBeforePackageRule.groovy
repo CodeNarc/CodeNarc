@@ -32,7 +32,6 @@ class BlankLineBeforePackageRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-
         PackageNode packageNode = sourceCode.ast?.package
         if (packageNode) {
             MultilineCommentChecker multilineCommentChecker = new MultilineCommentChecker()

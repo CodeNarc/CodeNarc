@@ -35,7 +35,6 @@ class ConfusingClassNamedExceptionAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitClassEx(ClassNode node) {
-
         if (node.name.endsWith('Exception') && !AstUtil.classNodeImplementsType(node, Exception)) {
             if (!(node.superClass.name == 'Throwable') && !node.superClass.name.endsWith('Exception')) {
                 addViolation node, "Found a class named $node.name that does not extend Exception."

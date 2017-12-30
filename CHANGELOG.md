@@ -8,6 +8,7 @@ New Rules
    - #283: **InvertedCondition** rule (convention) - An inverted condition is one where a constant expression is used on the left hand side of the equals comparision. Such conditions can be confusing especially when used in assertions where the expected value is by convention placed on the right hand side of the comparision. (Marcin Erdmann)
    - #285: **MethodReturnTypeRequired** rule (convention) - Checks that method return types are not dynamic, that is they are explicitly stated and different than def. (Marcin Erdmann)
    - #288: **MethodParameterTypeRequired** rule (convention) - Checks that method parameters are not dynamically typed, that is they are explicitly stated and different than def. (Marcin Erdmann)
+   - #291: **BlockStartsWithBlankLine** rule (formatting) - Checks that code blocks such as method bodies, closures and control structure bodies do not start with an empty line. (Marcin Erdmann)
    - #293: **BlockEndsWithBlankLine** rule (formatting) - Checks that code blocks such as method bodies, closures and control structure bodies do not end with an empty line. (Marcin Erdmann)
 
 Updated/Enhanced Rules and Bug Fixes

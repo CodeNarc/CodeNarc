@@ -80,7 +80,6 @@ class ArrayReturnTracker extends AbstractAstVisitor {
 
     @Override
     void visitReturnStatement(ReturnStatement statement) {
-
         callBackForArrayReturns(statement.expression)
         super.visitReturnStatement(statement)
     }

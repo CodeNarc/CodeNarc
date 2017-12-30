@@ -35,7 +35,6 @@ class UnnecessaryInstantiationToGetClassRule extends AbstractAstVisitorRule {
 class UnnecessaryInstantiationToGetClassAstVisitor extends AbstractMethodCallExpressionVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodNamed(call, 'getClass', 0)) {
             if (call.objectExpression instanceof ConstructorCallExpression) {
                 def typeName = call.objectExpression.type.name

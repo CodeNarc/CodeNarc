@@ -38,7 +38,6 @@ class JUnitStyleAssertionsAstVisitor extends AbstractMethodCallExpressionVisitor
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         // TODO better suggestions
         def objects = ['Assert', 'this']
         (1..2).each {

@@ -40,7 +40,6 @@ class GenerateRuleSetAllRulesByCategory {
      * @param args - command-line args (not used)
      */
     static void main(String[] args) {
-
         def rulesByRuleSet = [:]
         RuleSets.ALL_RULESET_FILES.each { ruleSetPath ->
             def ruleSet = new XmlFileRuleSet(ruleSetPath)

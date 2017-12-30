@@ -37,7 +37,6 @@ class UnnecessaryCallForLastElementRule extends AbstractAstVisitorRule {
 class UnnecessaryCallForLastElementAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodNamed(call, 'get', 1) || AstUtil.isMethodNamed(call, 'getAt', 1)) {
             def methodObjectText = call.objectExpression.text
             if (call.arguments instanceof ArgumentListExpression) {
@@ -53,7 +52,6 @@ class UnnecessaryCallForLastElementAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-
         if (expression.operation.getText() == '[') {
             def methodObjectText = expression.leftExpression.text
             if (isSubtractOneOnObject(methodObjectText, expression.rightExpression)) {

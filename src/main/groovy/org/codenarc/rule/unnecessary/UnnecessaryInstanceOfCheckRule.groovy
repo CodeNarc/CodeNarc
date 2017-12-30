@@ -35,9 +35,7 @@ class UnnecessaryInstanceOfCheckRule extends AbstractAstVisitorRule {
 class UnnecessaryInstanceOfCheckAstVisitor extends AbstractAstVisitor {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-
         if (isFirstVisit(expression)) {
-
             if (AstUtil.isBinaryExpressionType(expression, 'instanceof') && expression.leftExpression instanceof NotExpression) {
                 if (expression.rightExpression.text == 'Boolean') {
                     addViolation(expression, "The result of '!($expression.leftExpression.text)' will always be a Boolean")

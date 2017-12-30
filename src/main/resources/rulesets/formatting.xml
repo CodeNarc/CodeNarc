@@ -10,6 +10,7 @@
 
     <rule class='org.codenarc.rule.formatting.BlankLineBeforePackageRule'/>
     <rule class='org.codenarc.rule.formatting.BlockEndsWithBlankLineRule'/>
+    <rule class='org.codenarc.rule.formatting.BlockStartsWithBlankLineRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForClassRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForForLoopRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForIfElseRule'/>

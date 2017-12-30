@@ -36,7 +36,6 @@ class UnnecessaryModOneRule extends AbstractAstVisitorRule {
 class UnnecessaryModOneAstVisitor extends AbstractAstVisitor {
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-
         if (AstUtil.isBinaryExpressionType(expression, '%')) {
             Expression rhs = expression.rightExpression
             if (rhs instanceof ConstantExpression && rhs.value == 1) {

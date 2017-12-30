@@ -42,7 +42,6 @@ class InsecureRandomRule extends AbstractAstVisitorRule {
 class InsecureRandomAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
-
         if (AstUtil.classNodeImplementsType(call.type, Random)) {
             addViolation(call, 'Using Random is insecure. Use SecureRandom instead')
         }
@@ -51,7 +50,6 @@ class InsecureRandomAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, 'Math', 'random', 0)) {
             addViolation(call, 'Using Math.random() is insecure. Use SecureRandom instead')
         } else if (AstUtil.isMethodNamed(call, 'random', 0) && isJavaLangMathCall(call)) {

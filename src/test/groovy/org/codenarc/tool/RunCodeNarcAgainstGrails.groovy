@@ -40,7 +40,6 @@ class RunCodeNarcAgainstGrails {
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
         ant.codenarc(ruleSetFiles:RULESET_FILES) {
-
             fileset(dir:baseDir) {
                 include(name:'src/**/*.groovy')
                 include(name:'scripts/**/*.groovy')

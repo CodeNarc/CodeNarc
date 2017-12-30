@@ -36,7 +36,6 @@ class VolatileArrayFieldRule extends AbstractAstVisitorRule {
 class VolatileArrayFieldAstVisitor extends AbstractFieldVisitor {
     @Override
     void visitField(FieldNode node) {
-
         if (Modifier.isVolatile(node.modifiers) && AstUtil.getFieldType(node)?.isArray()) {
             addViolation(node, "The array field $node.name is marked volatile, but the contents of the array will not share the same volatile semantics. Use a different data type")
         }

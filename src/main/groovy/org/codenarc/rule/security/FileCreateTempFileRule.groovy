@@ -39,7 +39,6 @@ class FileCreateTempFileAstVisitor extends AbstractMethodCallExpressionVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, 'File', 'createTempFile', 2) ||
                 AstUtil.isMethodCall(call, 'File', 'createTempFile', 3)) {
             addViolation(call, 'The method File.createTempFile is insecure. Use a secure API such as that provided by ESAPI')

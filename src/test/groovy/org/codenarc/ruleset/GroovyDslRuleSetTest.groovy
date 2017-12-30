@@ -74,7 +74,6 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
 
     @Test
     void testLoadGroovyRuleSet_ConfigFileDoesNotCompile() {
-
         def file = File.createTempFile('codenarctest', '.groovy')
         file.deleteOnExit()
         file.text = '''

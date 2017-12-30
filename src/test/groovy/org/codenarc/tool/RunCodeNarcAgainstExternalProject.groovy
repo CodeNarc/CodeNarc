@@ -46,7 +46,6 @@ class RunCodeNarcAgainstExternalProject {
         ant.taskdef(name:'codenarc', classname:'org.codenarc.ant.CodeNarcTask')
 
         ant.codenarc(ruleSetFiles:rulesetfiles, excludeBaseline:excludeBaseline) {
-
             fileset(dir:baseDir) {
                 include(name:'**/*.groovy')
             }

@@ -38,7 +38,6 @@ class MissingNewInThrowStatementRule extends AbstractAstVisitorRule {
 class MissingNewInThrowStatementAstVisitor extends AbstractAstVisitor {
     @Override
     void visitThrowStatement(ThrowStatement statement) {
-
         if (statement.expression instanceof MethodCallExpression) {
             String name = statement?.expression?.method?.properties['value']
             if (looksLikeAnExceptionType(name)) {

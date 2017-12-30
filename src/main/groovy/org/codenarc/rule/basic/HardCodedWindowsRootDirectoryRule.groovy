@@ -35,7 +35,6 @@ class HardcodedWindowsRootDirectoryAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isFirstVisit(call)) {
-
             if (AstUtil.isConstructorCall(call, 'File') && call.arguments instanceof ArgumentListExpression) {
                 for (Expression exp : call.arguments.expressions) {
                     addViolationForWindowsPath(exp)

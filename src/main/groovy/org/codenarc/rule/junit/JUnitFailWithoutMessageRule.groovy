@@ -36,7 +36,6 @@ class JUnitFailWithoutMessageRuleAstVisitor extends AbstractMethodCallExpression
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, ['this', 'Assert'], ['fail'], 0)) {
             addViolation call, 'Pass a String parameter to the fail method'
         }

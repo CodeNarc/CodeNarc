@@ -38,14 +38,12 @@ class EqualsOverloadedAstVisitor extends AbstractMethodVisitor {
 
     @Override
     void visitMethod(MethodNode node) {
-
         if (AstUtil.isMethodNode(node, 'equals')) {
             addViolationIfOverloaded(node)
         }
     }
 
     private void addViolationIfOverloaded(MethodNode method) {
-
         if (!(isEqualsMethodWithOneArgument(method) && onlyArgumentHasTypeObject(method))) {
             addViolation(method, "The class $method.declaringClass.name overloads the equals method, it does not override it.")
         }

@@ -39,7 +39,6 @@ class UnnecessaryCatchBlockRule extends AbstractAstVisitorRule {
 class UnnecessaryCatchBlockAstVisitor extends AbstractAstVisitor {
     @Override
     void visitTryCatchFinally(TryCatchStatement statement) {
-
         def badNodes = statement.catchStatements?.findAll { CatchStatement it ->
             def paramName = it.variable.name
             if (it.code instanceof BlockStatement && it.code.statements.size() == 1) {

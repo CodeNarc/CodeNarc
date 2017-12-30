@@ -64,7 +64,6 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
             def booleanExpression = ternaryExpression.booleanExpression
             if (areBothTheSame(trueExpression, falseExpression)
                 || (isBooleanConditionalExpression(booleanExpression) && areTrueAndFalse(trueExpression, falseExpression))) {
-
                 addViolation(ternaryExpression, 'The ternary expression is useless or nonsensical')
             }
         }

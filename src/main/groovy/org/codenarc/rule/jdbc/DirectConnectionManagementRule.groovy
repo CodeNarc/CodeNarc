@@ -38,7 +38,6 @@ class DirectConnectionManagementAstVisitor extends AbstractMethodCallExpressionV
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-
         if (AstUtil.isMethodCall(call, 'DriverManager', 'getConnection')) {
             addViolation(call, 'Using DriverManager.getConnection() violates the J2EE standards. Use the connection from the context instead')
         } else if (AstUtil.isMethodNamed(call, 'getConnection') && isJavaSQLDriverManagerCall(call)) {
