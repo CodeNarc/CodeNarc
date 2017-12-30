@@ -40,10 +40,6 @@ class BlockStartsWithBlankLineRuleTest extends GenericAbstractRuleTestCase<Block
                 void emptyMethod() {
                 }
 
-                boolean oddlyFormattedMethod() { true
-
-                }
-
                 String startingWithNonEmptyLine() {
                     "value"
                 }
@@ -132,7 +128,7 @@ class BlockStartsWithBlankLineRuleTest extends GenericAbstractRuleTestCase<Block
     }
 
     @Test
-    void testClosureViolation() {
+    void testSingleClosureViolation() {
         final SOURCE = '''
             class InvalidClass {
                 def methodWithClosure() {
@@ -146,6 +142,39 @@ class BlockStartsWithBlankLineRuleTest extends GenericAbstractRuleTestCase<Block
 
         assertSingleViolation(SOURCE, 5, '',
             '''Code block starts with a blank line.''')
+    }
+
+    @Test
+    void testMultipleClosureViolations() {
+        final SOURCE = '''
+            class InvalidClass {
+                def methodWithClosures() {
+                    def list = []
+                    list.each { item ->
+
+                        println
+                    }
+
+                    list.each {
+
+                        1
+                    }
+                }
+            }
+        '''
+
+        assertViolations(SOURCE,
+            [
+                lineNumber: 6,
+                sourceLineText: '',
+                messageText: '''Code block starts with a blank line.'''
+            ],
+            [
+                lineNumber: 11,
+                sourceLineText: '',
+                messageText: '''Code block starts with a blank line.'''
+            ]
+        )
     }
 
     @Test
@@ -275,6 +304,42 @@ class BlockStartsWithBlankLineRuleTest extends GenericAbstractRuleTestCase<Block
                 messageText: '''Code block starts with a blank line.'''
             ]
         )
+    }
+
+    @Test
+    void testKnownLimitations() {
+        assertNoViolations '''
+            class KnownLimitationsClass {
+                boolean oddlyFormattedMethod() { true
+
+                }
+
+                String startingWithNonEmptyLine() {
+                    "value"
+                }
+
+                def methodWithClosures() {
+                    def list = []
+                    list.each { item
+                        ->
+
+                        1
+                    }
+
+                    list.each {
+                        item ->
+
+                    }
+
+                    [:].each {
+                        def key,
+                        def value ->
+
+                    }
+
+                }
+            }
+        '''
     }
 
     @Override
