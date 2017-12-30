@@ -45,7 +45,6 @@ class ExplicitGarbageCollectionAstVisitor extends AbstractMethodCallExpressionVi
             } else if (AstUtil.isMethodCall(call.objectExpression, 'Runtime', 'getRuntime', 0)) {
                 addViolation call, 'Garbage collection should not be explicitly forced'
             }
-
         }
     }
 

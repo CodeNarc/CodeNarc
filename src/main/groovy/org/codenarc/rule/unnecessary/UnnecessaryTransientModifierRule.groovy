@@ -40,7 +40,6 @@ class UnnecessaryTransientModifierAstVisitor extends AbstractFieldVisitor {
             if (!AstUtil.classNodeImplementsType(node.owner, Serializable)) {
                 addViolation(node, "The field '$node.name' is marked transient, but $node.owner.name does not implement Serializable")
             }
-
         }
     }
 }

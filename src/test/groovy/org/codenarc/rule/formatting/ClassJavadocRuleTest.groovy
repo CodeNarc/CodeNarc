@@ -195,7 +195,6 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase {
         assert rule.sourceCodeNameWithoutExtension(new SourceString(SOURCE, null, '')) == ''
         assert rule.sourceCodeNameWithoutExtension(new SourceString(SOURCE, null, 'abc')) == 'abc'
         assert rule.sourceCodeNameWithoutExtension(new SourceString(SOURCE, null, 'abc.groovy')) == 'abc'
-
     }
 
     @Override

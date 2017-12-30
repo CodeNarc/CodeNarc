@@ -9,6 +9,7 @@ New Rules
    - #285: **MethodReturnTypeRequired** rule (convention) - Checks that method return types are not dynamic, that is they are explicitly stated and different than def. (Marcin Erdmann)
    - #288: **MethodParameterTypeRequired** rule (convention) - Checks that method parameters are not dynamically typed, that is they are explicitly stated and different than def. (Marcin Erdmann)
    - #291: **BlockStartsWithBlankLine** rule (formatting) - Checks that code blocks such as method bodies, closures and control structure bodies do not start with an empty line. (Marcin Erdmann)
+   - #293: **BlockEndsWithBlankLine** rule (formatting) - Checks that code blocks such as method bodies, closures and control structure bodies do not end with an empty line. (Marcin Erdmann)
 
 Updated/Enhanced Rules and Bug Fixes
    - #239: Ignore super calls in UnnecessarySetterRule. (Marcin Erdmann)

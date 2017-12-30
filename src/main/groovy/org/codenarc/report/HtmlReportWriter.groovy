@@ -209,7 +209,6 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
                                 }
                             }
                         }
-
                     }
                 }
             }

@@ -66,7 +66,6 @@ class UseAssertTrueInsteadOfAssertEqualsAstVisitor extends AbstractAstVisitor {
             } else if (AstUtil.isFalse(exp.rightExpression)) {
                 addViolation(statement, "The expression '$exp.text' can be simplified to '!$exp.leftExpression.text'")
             }
-
         }
         super.visitAssertStatement(statement)
     }
