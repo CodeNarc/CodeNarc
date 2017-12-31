@@ -17,6 +17,7 @@ package org.codenarc.rule.naming
 
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -72,7 +73,7 @@ class ParameterNameAstVisitor extends AbstractAstVisitor  {
         super.visitClosureExpression(closureExpression)
     }
 
-    private void processParameters(parameters, methodName) {
+    private void processParameters(Parameter[] parameters, String methodName) {
         parameters.each { parameter ->
             if (!new WildcardPattern(rule.ignoreParameterNames, false).matches(parameter.name)) {
                 if (parameter.lineNumber >= 0 && !(parameter.name ==~ rule.regex)) {

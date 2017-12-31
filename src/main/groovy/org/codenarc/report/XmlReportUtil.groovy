@@ -20,7 +20,7 @@ package org.codenarc.report
  */
 class XmlReportUtil {
 
-    static cdata(String text) {
+    static Closure cdata(String text) {
         return {
             unescaped << '<![CDATA['
             mkp.yield(text)

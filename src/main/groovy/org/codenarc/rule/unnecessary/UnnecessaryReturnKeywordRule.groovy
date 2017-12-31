@@ -15,10 +15,12 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -61,7 +63,7 @@ class UnnecessaryReturnKeywordAstVisitor extends AbstractAstVisitor {
      * @param node
      *      node
      */
-    private static getLastStatement(node) {
+    private static Statement getLastStatement(ASTNode node) {
         if (node.code instanceof BlockStatement && node.code.statements) {
             return node.code.statements.last()
         }

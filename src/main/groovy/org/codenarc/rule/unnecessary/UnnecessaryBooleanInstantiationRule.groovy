@@ -39,7 +39,7 @@ class UnnecessaryBooleanInstantiationAstVisitor extends AbstractConstructorCallA
     static final NEW_BOOLEAN = /new +(java\.lang\.)?Boolean\(/
 
     @Override
-    protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
+    protected boolean isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         constructorCall.text =~ NEW_BOOLEAN
     }
 

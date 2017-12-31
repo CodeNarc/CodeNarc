@@ -16,6 +16,7 @@
 package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.expr.Expression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
@@ -50,11 +51,11 @@ class StaticSimpleDateFormatFieldAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-    private static boolean isSimpleDateFormatConstructorCall(expression) {
+    private static boolean isSimpleDateFormatConstructorCall(Expression expression) {
         AstUtil.isConstructorCall(expression, ['SimpleDateFormat', 'java.text.SimpleDateFormat'])
     }
 
-    private void addSimpleDateFormatViolation(node, String fieldName) {
+    private void addSimpleDateFormatViolation(FieldNode node, String fieldName) {
         addViolation(node, "SimpleDateFormat instances are not thread safe. Wrap the SimpleDateFormat field $fieldName in a ThreadLocal or make it an instance field")
     }
 }

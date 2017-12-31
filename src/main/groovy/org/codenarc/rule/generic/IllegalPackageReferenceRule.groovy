@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.generic
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
@@ -138,18 +139,18 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
     // Helper Methods
     //--------------------------------------------------------------------------
 
-    private void checkTypeIfNotDynamicallyTyped(node) {
+    private void checkTypeIfNotDynamicallyTyped(ASTNode node) {
         if (!node.isDynamicTyped()) {       // ignore 'def' which resolves to java.lang.Object
             checkType(node.type.name, node)
         }
     }
 
-    private void checkType(String typeName, node) {
+    private void checkType(String typeName, ASTNode node) {
         def parentPackage = parentPackageName(typeName)
         checkPackageName(parentPackage, node)
     }
 
-    private void checkPackageName(String parentPackage, node) {
+    private void checkPackageName(String parentPackage, ASTNode node) {
         if (wildcard.matches(parentPackage)) {
             addViolation(node, "Found reference to illegal package name $parentPackage")
         }

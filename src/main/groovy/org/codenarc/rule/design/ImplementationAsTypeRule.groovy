@@ -15,9 +15,11 @@
  */
 package org.codenarc.rule.design
 
+import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codenarc.rule.AbstractAstVisitor
@@ -125,13 +127,13 @@ class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
         super.visitField(fieldNode)
     }
 
-    private void processParameters(parameters) {
+    private void processParameters(Parameter[] parameters) {
         parameters.each { parameter ->
             processType(parameter.type, "The type $parameter.type.name should be replaced with an interface or more general parent class")
         }
     }
 
-    private void processType(typeNode, String message) {
+    private void processType(ClassNode typeNode, String message) {
         String typeName = typeNode.name
         if (typeNode.lineNumber >= 0 && (TYPES.contains(typeName))) {
             addViolation(typeNode, message)

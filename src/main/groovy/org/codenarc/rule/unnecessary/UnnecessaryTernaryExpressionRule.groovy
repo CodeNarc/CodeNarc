@@ -81,7 +81,7 @@ class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
         false
     }
 
-    private boolean isOperationThatReturnsABoolean(expression) {
+    private boolean isOperationThatReturnsABoolean(BinaryExpression expression) {
         def operationName = expression.operation.text
         if (operationName in BOOLEAN_COMPARISON_OPERATIONS) {
             return true

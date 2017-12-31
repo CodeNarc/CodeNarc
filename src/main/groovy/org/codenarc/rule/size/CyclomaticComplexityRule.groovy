@@ -16,6 +16,7 @@
 package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.gmetrics.metric.Metric
 import org.gmetrics.metric.cyclomatic.CyclomaticComplexityMetric
 
 /**
@@ -65,7 +66,7 @@ class CyclomaticComplexityAstVisitor extends AbstractMethodMetricAstVisitor  {
     final String metricShortDescription = 'cyclomatic complexity'
 
     @Override
-    protected Object createMetric() {
+    protected Metric createMetric() {
         new CyclomaticComplexityMetric()
     }
 

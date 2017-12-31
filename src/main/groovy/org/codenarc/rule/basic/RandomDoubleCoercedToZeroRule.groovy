@@ -93,7 +93,7 @@ class MathRandomTracker extends AbstractAstVisitor {
         super.visitReturnStatement(statement)
     }
 
-    private callBackForMathRandomReturns(Expression exp) {
+    private void callBackForMathRandomReturns(Expression exp) {
         def stack = [exp] as Stack
         while (stack) {
             def expression = stack.pop()

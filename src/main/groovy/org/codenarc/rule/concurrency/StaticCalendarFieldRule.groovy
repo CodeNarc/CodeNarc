@@ -16,6 +16,7 @@
 package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.expr.Expression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
@@ -48,11 +49,11 @@ class StaticCalendarFieldAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-    private static boolean isCalendarFactoryMethodCall(expression) {
+    private static boolean isCalendarFactoryMethodCall(Expression expression) {
         AstUtil.isMethodCall(expression, 'Calendar', 'getInstance')
     }
 
-    private void addCalendarViolation(node, String fieldName) {
+    private void addCalendarViolation(FieldNode node, String fieldName) {
         addViolation(node, "Calendar instances are not thread safe. Wrap the Calendar field $fieldName in a ThreadLocal or make it an instance field")
     }
 }

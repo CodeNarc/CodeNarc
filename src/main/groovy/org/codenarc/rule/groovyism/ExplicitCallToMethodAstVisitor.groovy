@@ -51,7 +51,7 @@ abstract class ExplicitCallToMethodAstVisitor extends AbstractMethodCallExpressi
     }
 
     @SuppressWarnings('CatchThrowable')
-    private safelyAddViolation(MethodCallExpression call) {
+    private void safelyAddViolation(MethodCallExpression call) {
         try {
             addViolation call, getViolationMessage(call)
         } catch (Throwable t) {

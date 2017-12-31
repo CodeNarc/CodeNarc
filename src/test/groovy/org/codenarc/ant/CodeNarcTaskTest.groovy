@@ -238,13 +238,13 @@ class CodeNarcTaskTest extends AbstractTestCase {
         codeNarcTask.ruleSetFiles = RULESET_FILE
     }
 
-    private createAndUseFakeCodeNarcRunner() {
+    private Map createAndUseFakeCodeNarcRunner() {
         def codeNarcRunner = [execute: { RESULTS }]
         codeNarcTask.createCodeNarcRunner = { codeNarcRunner }
         codeNarcRunner
     }
 
-    private void assertStandardHtmlReportWriter(codeNarcRunner) {
+    private void assertStandardHtmlReportWriter(Map codeNarcRunner) {
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
         assert reportWriter.class == HtmlReportWriter

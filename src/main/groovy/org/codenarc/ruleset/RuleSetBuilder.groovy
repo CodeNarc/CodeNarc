@@ -99,12 +99,14 @@ class TopLevelDelegate {
         allRuleSet.addRule(rule)
     }
 
+    @SuppressWarnings('MethodReturnTypeRequired')
     def propertyMissing(String name) {
         def ruleClass = RuleRegistryHolder.ruleRegistry?.getRuleClass(name)
         assert ruleClass, "No such rule named [$name]. " + MovedRules.getMovedOrRenamedMessageForRuleName(name)
         rule(ruleClass)
     }
 
+    @SuppressWarnings(['MethodReturnTypeRequired', 'MethodParameterTypeRequired'])
     def methodMissing(String name, args) {
         def ruleClass = RuleRegistryHolder.ruleRegistry?.getRuleClass(name)
         assert ruleClass, "No such rule named [$name]. " + MovedRules.getMovedOrRenamedMessageForRuleName(name)
@@ -141,6 +143,7 @@ class RuleSetDelegate {
         ruleSet.addInclude(includeNames)
     }
 
+    @SuppressWarnings(['MethodReturnTypeRequired', 'MethodParameterTypeRequired'])
     def methodMissing(String name, args) {
         def rule = findRule(name)
         assert rule, "No such rule named [$name]. " + MovedRules.getMovedOrRenamedMessageForRuleName(name)

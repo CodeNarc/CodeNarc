@@ -18,6 +18,7 @@ package org.codenarc.rule.unnecessary
 import static org.codenarc.util.AstUtil.AUTO_IMPORTED_CLASSES
 import static org.codenarc.util.AstUtil.AUTO_IMPORTED_PACKAGES
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
@@ -124,7 +125,7 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     // Helper Methods
     //--------------------------------------------------------------------------
 
-    private initializeImportNames() {
+    private void initializeImportNames() {
         sourceCode.ast.imports.each { importNode ->
             importedClassNames << importNode.className
         }
@@ -133,13 +134,13 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private void checkTypeIfNotDynamicallyTyped(node) {
+    private void checkTypeIfNotDynamicallyTyped(ASTNode node) {
         if (!node.isDynamicTyped()) {       // ignore 'def' which resolves to java.lang.Object
             checkType(node.type.name, node)
         }
     }
 
-    private void checkType(String typeName, node) {
+    private void checkType(String typeName, ASTNode node) {
         if (typeName in AUTO_IMPORTED_CLASSES || parentPackageName(typeName) in AUTO_IMPORTED_PACKAGES) {
             addViolation(node, "Specifying the package name is not necessary for $typeName")
         }

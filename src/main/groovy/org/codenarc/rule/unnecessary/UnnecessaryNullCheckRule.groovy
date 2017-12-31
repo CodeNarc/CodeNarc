@@ -111,7 +111,7 @@ class UnnecessaryNullCheckAstVisitor extends AbstractAstVisitor {
         false
     }
 
-    private static boolean isPropertyInvocation(expression, String targetName) {
+    private static boolean isPropertyInvocation(Expression expression, String targetName) {
         if (expression instanceof PropertyExpression) {
             if (expression.objectExpression instanceof VariableExpression) {
                 if (expression.objectExpression.variable == targetName) {
@@ -122,7 +122,7 @@ class UnnecessaryNullCheckAstVisitor extends AbstractAstVisitor {
         false
     }
 
-    private static boolean isMethodInvocation(expression, String targetName) {
+    private static boolean isMethodInvocation(Expression expression, String targetName) {
         if (expression instanceof MethodCallExpression) {
             if (expression.objectExpression instanceof VariableExpression) {
                 if (expression.objectExpression.variable == targetName) {

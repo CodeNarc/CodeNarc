@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import groovy.xml.Namespace
+import org.codenarc.rule.Rule
 import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.ClassPathResource
 
@@ -66,7 +67,7 @@ class XmlReaderRuleSet implements RuleSet {
     // Internal Helper Methods
     //--------------------------------------------------------------------------
 
-    private void loadRuleSetRefElements(ruleset) {
+    private void loadRuleSetRefElements(Node ruleset) {
         ruleset[NS.'ruleset-ref'].each { ruleSetRefNode ->
             def ruleSetPath = ruleSetRefNode.attribute('path')
             def refRuleSet = RuleSetUtil.loadRuleSetFile(ruleSetPath)
@@ -95,7 +96,7 @@ class XmlReaderRuleSet implements RuleSet {
         }
     }
 
-    private void loadRuleElements(ruleset) {
+    private void loadRuleElements(Node ruleset) {
         ruleset[NS.rule].each { ruleNode ->
             def ruleClassName = ruleNode.attribute('class')
             def ruleClass = getClass().classLoader.loadClass(ruleClassName.toString())
@@ -106,7 +107,7 @@ class XmlReaderRuleSet implements RuleSet {
         }
     }
 
-    private void loadRuleScriptElements(ruleset) {
+    private void loadRuleScriptElements(Node ruleset) {
         ruleset[NS.'rule-script'].each { ruleScriptNode ->
             def ruleScriptPath = ruleScriptNode.attribute('path')
             def rule = RuleSetUtil.loadRuleScriptFile(ruleScriptPath)
@@ -115,7 +116,7 @@ class XmlReaderRuleSet implements RuleSet {
         }
     }
 
-    private setRuleProperties(ruleNode, rule) {
+    private void setRuleProperties(Node ruleNode, Rule rule) {
         ruleNode[NS.property].each { p ->
             def name = p.attribute('name')
             def value = p.attribute('value')

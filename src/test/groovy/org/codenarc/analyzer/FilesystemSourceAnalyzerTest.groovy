@@ -21,6 +21,7 @@ import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
 
 import org.codenarc.ruleset.ListRuleSet
+import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
@@ -187,7 +188,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])
     }
 
-    private void assertMatches(source, includes, excludes, shouldMatch) {
+    private void assertMatches(SourceCode source, String includes, String excludes, boolean shouldMatch) {
         analyzer.includes = includes
         analyzer.excludes = excludes
         analyzer.initializeWildcardPatterns()

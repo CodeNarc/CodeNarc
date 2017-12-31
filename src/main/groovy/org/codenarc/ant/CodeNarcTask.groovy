@@ -166,6 +166,7 @@ class CodeNarcTask extends Task {
         }
     }
 
+    @SuppressWarnings('MethodParameterTypeRequired')
     private Results executeRunnerWithConfiguredClasspath(codeNarcRunner) {
         def paths = classpath?.list()
         if (paths) {

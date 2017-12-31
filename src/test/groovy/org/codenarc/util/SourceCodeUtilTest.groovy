@@ -46,7 +46,7 @@ class SourceCodeUtilTest extends AbstractTestCase {
         sourceCode = new SourceString(SOURCE)
     }
 
-    private applyVisitor() {
+    private void applyVisitor() {
         visitor = new SourceCodeUtilTestVisitor()
         visitor.visitClass(sourceCode.ast.scriptClassDummy)
     }

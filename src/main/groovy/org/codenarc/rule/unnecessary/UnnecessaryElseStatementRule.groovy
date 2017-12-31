@@ -52,6 +52,7 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
         super.visitIfElse node
     }
 
+    @SuppressWarnings('MethodReturnTypeRequired')
     private static collectIfsAndElses(IfStatement ifStatement) {
         def ifs = []
         def theElse = null
@@ -68,11 +69,11 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
         [ifs, theElse]
     }
 
-    private static isValidElseBlock(Statement elseBlock) {
+    private static boolean isValidElseBlock(Statement elseBlock) {
         elseBlock != null && !elseBlock.empty && !(elseBlock instanceof IfStatement)
     }
 
-    private static allBranchesReturn(Statement expr) {
+    private static boolean allBranchesReturn(Statement expr) {
         if(expr instanceof BlockStatement) {
             expr.statements.any {
                 allBranchesReturn(it)
@@ -84,7 +85,7 @@ class UnnecessaryElseStatementAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private static isReturn(statement) {
+    private static boolean isReturn(Statement statement) {
         statement instanceof ReturnStatement
     }
 }

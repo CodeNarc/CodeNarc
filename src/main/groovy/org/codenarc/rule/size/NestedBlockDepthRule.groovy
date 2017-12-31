@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.size
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -87,7 +88,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
         handleNestedNode(statement) { super.visitCatchStatement(statement) }
     }
 
-    private void addBlockIfNotEmpty(block) {
+    private void addBlockIfNotEmpty(Statement block) {
         if (!(block instanceof EmptyStatement)) {
             blocksToProcess << block
         }
@@ -140,7 +141,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private void handleNestedNode(node, Closure callVisitorMethod) {
+    private void handleNestedNode(ASTNode node, Closure callVisitorMethod) {
         nestedBlockDepth++
         if (nestedBlockDepth > rule.maxNestedBlockDepth) {
             addViolation(node, "The nested block depth is $nestedBlockDepth")

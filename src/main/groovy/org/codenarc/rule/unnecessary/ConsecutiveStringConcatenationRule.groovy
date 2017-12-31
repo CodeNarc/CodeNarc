@@ -60,6 +60,8 @@ class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
 
         super.visitBinaryExpression(expression)
     }
+
+    @SuppressWarnings('MethodParameterTypeRequired')
     private static String escape(value) {
         if (value instanceof String) {
             return value.replaceAll('\n', '\\\\n').replaceAll("'", "\'")

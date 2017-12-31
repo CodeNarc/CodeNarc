@@ -180,7 +180,7 @@ class UnnecessaryIfStatementAstVisitor extends AbstractAstVisitor  {
         statement instanceof BlockStatement && statement.statements.size() == 1
     }
 
-    private allExceptLastElement(list) {
+    private List allExceptLastElement(List list) {
         def lastElement = list.empty ? null : list.last()
         list - lastElement
     }

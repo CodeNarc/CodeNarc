@@ -38,7 +38,7 @@ class UnnecessaryInstantiationAstVisitor extends AbstractAstVisitor {
         this.suffix = suffix
     }
 
-    @SuppressWarnings('UnusedMethodParameter')
+    @SuppressWarnings(['UnusedMethodParameter', 'MethodParameterTypeRequired'])
     protected boolean isTypeSuffixNecessary(argument) {
         return true
     }

@@ -59,7 +59,7 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
         super.visitConstructor(node)
     }
 
-    private void checkDeclaration(node, String nodeName, String nodeType) {
+    private void checkDeclaration(ASTNode node, String nodeName, String nodeType) {
         String declaration = getDeclaration(node)
         // remove node name from the declaration just in case it has ' public ' in the name
         declaration = declaration?.replace(nodeName, '')

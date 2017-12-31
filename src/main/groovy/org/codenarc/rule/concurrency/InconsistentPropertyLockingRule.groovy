@@ -61,7 +61,7 @@ class InconsistentPropertyLockingAstVisitor extends AbstractMethodVisitor {
         }
     }
 
-    private saveMethodInfo(MethodNode node) {
+    private void saveMethodInfo(MethodNode node) {
         if (isWriteLocked(node) || isReadLocked(node)) {
             guardedMethods.put(node.name, node)
         } else {

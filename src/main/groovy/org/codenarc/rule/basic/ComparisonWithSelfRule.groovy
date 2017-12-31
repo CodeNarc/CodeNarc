@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
@@ -60,7 +62,7 @@ class ComparisonWithSelfAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression(call)
     }
 
-    private void addViolationIfBothAreTheSameVariable(node, left, right) {
+    private void addViolationIfBothAreTheSameVariable(ASTNode node, Expression left, Expression right) {
         if (left instanceof VariableExpression && right instanceof VariableExpression && left.name == right.name) {
             addViolation(node, "Comparing an object to itself is useless and may indicate a bug: ${node.text}")
         }

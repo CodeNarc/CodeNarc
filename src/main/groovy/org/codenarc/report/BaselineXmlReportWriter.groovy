@@ -53,13 +53,13 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
     // Internal Helper Methods
     //--------------------------------------------------------------------------
 
-    protected buildReportElement() {
+    protected Closure buildReportElement() {
         return {
             Report(timestamp:getFormattedTimestamp(), type:'baseline')
         }
     }
 
-    protected buildProjectElement(AnalysisContext analysisContext) {
+    protected Closure buildProjectElement(AnalysisContext analysisContext) {
         return {
             Project(title:title) {
                 analysisContext.sourceDirectories.each { sourceDirectory ->
@@ -69,11 +69,11 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildFileElements(results) {
+    protected Closure buildFileElements(Results results) {
         return buildFileElement(results)
     }
 
-    protected buildFileElement(results) {
+    protected Closure buildFileElement(Results results) {
         return {
             results.children.each { child ->
                 if (child.isFile()) {
@@ -88,7 +88,7 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildFileElement(FileResults results) {
+    protected Closure buildFileElement(FileResults results) {
         return {
             File(path: results.path) {
                 results.violations.each { violation ->
@@ -98,7 +98,7 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildViolationElement(Violation violation) {
+    protected Closure buildViolationElement(Violation violation) {
         def rule = violation.rule
         return {
             Violation(ruleName:rule.name) {
@@ -107,7 +107,7 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildMessageElement(Violation violation) {
+    protected Closure buildMessageElement(Violation violation) {
         return (violation.message) ? { Message(XmlReportUtil.cdata(XmlReportUtil.removeIllegalCharacters(violation.message))) } : null
     }
 

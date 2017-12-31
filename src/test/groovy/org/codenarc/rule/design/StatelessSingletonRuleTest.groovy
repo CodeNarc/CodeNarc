@@ -183,7 +183,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase {
         new StatelessSingletonRule()
     }
 
-    private createErrorMsgForClass(name) {
+    private String createErrorMsgForClass(String name) {
         "There is no point in creating a stateless Singleton. Make a new instance of '$name' with the new keyword instead."
     }
 }

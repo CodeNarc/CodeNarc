@@ -15,6 +15,7 @@
  */
 package org.codenarc.ruleset
 
+import org.codenarc.rule.Rule
 import org.codenarc.rule.exceptions.CatchThrowableRule
 import org.codenarc.rule.generic.IllegalRegexRule
 import org.codenarc.rule.naming.ClassNameRule
@@ -412,7 +413,7 @@ class RuleSetBuilderTest extends AbstractTestCase {
         properties.each { key, value -> assert rule[key] == value }
     }
 
-    private findRule(String name) {
+    private Rule findRule(String name) {
         getRuleSet().rules.find { rule -> rule.name == name }
     }
 

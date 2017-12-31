@@ -21,6 +21,8 @@ import org.codenarc.rule.Violation
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
 import org.gmetrics.metric.Metric
+import org.gmetrics.result.ClassMetricResult
+import org.gmetrics.result.MetricResult
 
 /**
  * Abstract superclass for AstVisitor classes that use method-level GMetrics Metrics.
@@ -42,7 +44,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
     protected Metric metric
     private final metricLock = new Object()
 
-    protected abstract createMetric()
+    protected abstract Metric createMetric()
     protected abstract String getMetricShortDescription()
     protected abstract Object getMaxMethodMetricValue()
     protected abstract Object getMaxClassMetricValue()
@@ -76,7 +78,7 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         super.visitClassEx(classNode)
     }
 
-    private void checkMethods(classMetricResult) {
+    private void checkMethods(ClassMetricResult classMetricResult) {
         def methodResults = classMetricResult.methodMetricResults
         methodResults.each { method, results ->
             String methodName = extractMethodName(method)
@@ -87,12 +89,13 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         }
     }
 
+    @SuppressWarnings('MethodParameterTypeRequired')
     protected String extractMethodName(method) {
         // For GMetrics 0.4, it is a String; For GMetrics 0.5 it is a MethodKey
         method instanceof String ? method : method.methodName
     }
 
-    private void checkClass(classMetricResult, classNode) {
+    private void checkClass(ClassMetricResult classMetricResult, ClassNode classNode) {
         def className = classNode.name
         def classResults = classMetricResult.classMetricResult
         if (getMaxClassAverageMethodMetricValue() && classResults['average'] > getMaxClassAverageMethodMetricValue()) {
@@ -106,18 +109,18 @@ abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
         }
     }
 
-    protected void addViolation(classResults, String message) {
+    protected void addViolation(MetricResult classResults, String message) {
         def lineNumber = getLineNumber(classResults)
         def sourceLine = getSourceLine(lineNumber)
         violations.add(new Violation(rule:rule, lineNumber:lineNumber, sourceLine:sourceLine, message:message))
     }
 
-    protected getLineNumber(methodResults) {
+    protected Integer getLineNumber(MetricResult methodResults) {
         def lineNumber = AstUtil.respondsTo(methodResults, 'getLineNumber') ? methodResults.getLineNumber() : null
         (lineNumber == -1) ? null : lineNumber
     }
 
-    protected String getSourceLine(lineNumber) {
+    protected String getSourceLine(Integer lineNumber) {
         lineNumber == null ?: this.sourceCode.line(lineNumber - 1)
     }
 

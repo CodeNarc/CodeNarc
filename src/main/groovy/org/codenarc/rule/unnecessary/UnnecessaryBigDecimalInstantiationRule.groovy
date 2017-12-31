@@ -40,6 +40,7 @@ class UnnecessaryBigDecimalInstantiationAstVisitor extends UnnecessaryInstantiat
     }
 
     @Override
+    @SuppressWarnings('MethodParameterTypeRequired')
     protected boolean isTypeSuffixNecessary(argument) {
         if (argument.getClass() == String) {
             return !argument.contains('.')

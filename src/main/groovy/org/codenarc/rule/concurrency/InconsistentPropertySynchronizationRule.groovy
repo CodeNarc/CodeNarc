@@ -84,7 +84,7 @@ class InconsistentPropertySynchronizationAstVisitor extends AbstractMethodVisito
         throw new IllegalArgumentException("MethodNode $node.name is not a getter/setter/izzer")
     }
 
-    private saveMethodInfo(MethodNode node) {
+    private void saveMethodInfo(MethodNode node) {
         if (Modifier.isSynchronized(node.modifiers)) {
             synchronizedMethods.put(node.name, node)
         } else if (AstUtil.getAnnotation(node, 'Synchronized')) {

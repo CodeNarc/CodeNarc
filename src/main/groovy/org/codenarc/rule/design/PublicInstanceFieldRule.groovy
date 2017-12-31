@@ -39,7 +39,7 @@ class PublicInstanceFieldAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-    private static createErrorMessage(node) {
+    private static String createErrorMessage(FieldNode node) {
         "Using public fields is considered bad design. Create property '$node.name' instead."
     }
 }

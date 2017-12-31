@@ -16,6 +16,7 @@
 package org.codenarc.rule.concurrency
 
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractFieldVisitor
@@ -51,12 +52,12 @@ class StaticDateFormatFieldAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-    private static boolean isDateFormatFactoryMethodCall(expression) {
+    private static boolean isDateFormatFactoryMethodCall(Expression expression) {
         expression instanceof MethodCallExpression &&
             AstUtil.isMethodCall(expression, ['DateFormat', /java\.text\.DateFormat/], ['getDateInstance', 'getDateTimeInstance', 'getTimeInstance'])
     }
 
-    private void addDateFormatViolation(node, String fieldName) {
+    private void addDateFormatViolation(FieldNode node, String fieldName) {
         addViolation(node, "DateFormat instances are not thread safe. Wrap the DateFormat field $fieldName in a ThreadLocal or make it an instance field")
     }
 }

@@ -81,7 +81,7 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
         ruleSet = new ListRuleSet([rule1, rule2])
     }
 
-    private ruleMap() {
+    private Map ruleMap() {
         def map = [:]
         ruleSet.rules.each { rule -> map[rule.name] = [rule.priority, rule.violationMessage] }
         map

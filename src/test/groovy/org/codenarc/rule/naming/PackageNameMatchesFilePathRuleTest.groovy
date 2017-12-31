@@ -196,7 +196,7 @@ class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
         new PackageNameMatchesFilePathRule()
     }
 
-    private String filePath(pathPattern) {
+    private String filePath(String pathPattern) {
         pathPattern.tr('_', File.separator)
     }
 }

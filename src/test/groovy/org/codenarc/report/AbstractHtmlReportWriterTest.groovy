@@ -18,6 +18,7 @@ package org.codenarc.report
 import org.codenarc.AnalysisContext
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
+import org.codenarc.results.Results
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.ruleset.ListRuleSet
@@ -130,7 +131,7 @@ class AbstractHtmlReportWriterTest extends AbstractTestCase {
             protected String getCssFile() { }
 
             @Override
-            protected buildBodySection(AnalysisContext analysisContext, results) { }
+            protected Closure buildBodySection(AnalysisContext analysisContext, Results results) { }
         }
         results = new DirectoryResults()
 

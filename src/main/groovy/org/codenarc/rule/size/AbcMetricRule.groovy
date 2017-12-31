@@ -16,6 +16,7 @@
 package org.codenarc.rule.size
 
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.gmetrics.metric.Metric
 import org.gmetrics.metric.abc.AbcMetric
 
 /**
@@ -67,7 +68,7 @@ class AbcMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
     final String metricShortDescription = 'ABC score'
 
     @Override
-    protected Object createMetric() {
+    protected Metric createMetric() {
         new AbcMetric()
     }
 

@@ -45,7 +45,7 @@ class UnnecessaryNullCheckBeforeInstanceOfAstVisitor extends AbstractAstVisitor 
         super.visitBinaryExpression(exp)
     }
 
-    private addViolationIfTargetsMatch(BinaryExpression exp) {
+    private void addViolationIfTargetsMatch(BinaryExpression exp) {
         def nullTarget = AstUtil.getNullComparisonTarget(exp.leftExpression) ?: AstUtil.getNullComparisonTarget(exp.rightExpression)
         def instanceofTarget = AstUtil.getInstanceOfTarget(exp.leftExpression) ?: AstUtil.getInstanceOfTarget(exp.rightExpression)
         if (nullTarget && instanceofTarget && nullTarget == instanceofTarget) {

@@ -69,11 +69,11 @@ class LoggerForDifferentClassAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-    private static boolean isEqualToCurrentClassOrClassName(String argText, classNameWithoutPackage) {
+    private static boolean isEqualToCurrentClassOrClassName(String argText, String classNameWithoutPackage) {
         return isEqualToCurrentClass(argText, classNameWithoutPackage) || isEqualToCurrentClassName(argText, classNameWithoutPackage)
     }
 
-    private static boolean isEqualToCurrentClass(String argText, classNameWithoutPackage) {
+    private static boolean isEqualToCurrentClass(String argText, String classNameWithoutPackage) {
         return (argText == classNameWithoutPackage) || (argText == classNameWithoutPackage + '.class')
     }
 
@@ -82,7 +82,7 @@ class LoggerForDifferentClassAstVisitor extends AbstractFieldVisitor {
         methodArgument.text in ['this.class', 'this.getClass()', 'getClass()']
     }
 
-    private static boolean isEqualToCurrentClassName(String argText, classNameWithoutPackage) {
+    private static boolean isEqualToCurrentClassName(String argText, String classNameWithoutPackage) {
         def classNameOptions = [
             classNameWithoutPackage + '.getClass().getName()',
             classNameWithoutPackage + '.getClass().name',

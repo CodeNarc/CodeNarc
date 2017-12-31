@@ -63,7 +63,7 @@ class BrokenNullCheckAstVisitor extends AbstractAstVisitor {
         return false
     }
 
-    private boolean isExpressionAccessingMemberNamed(Expression rightBinary, varName) {
+    private boolean isExpressionAccessingMemberNamed(Expression rightBinary, String varName) {
         return isPropertyAccessForName(rightBinary, varName) || isMethodCallOnName(rightBinary, varName)
     }
 

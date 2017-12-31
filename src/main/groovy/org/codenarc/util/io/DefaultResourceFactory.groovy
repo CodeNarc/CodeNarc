@@ -43,7 +43,7 @@ class DefaultResourceFactory implements ResourceFactory {
         isUrl(path) ? new UrlResource(path) : new ClassPathResource(path)
     }
 
-    private isUrl(String path) {
+    private boolean isUrl(String path) {
         path =~ /.*\:.*/
     }
 }

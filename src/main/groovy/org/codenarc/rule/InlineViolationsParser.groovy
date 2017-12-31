@@ -54,7 +54,7 @@ class InlineViolationsParser {
         return violationMessage.replaceAll(~/\Q\#\E/, '#')
     }
 
-    private createViolation(int lineNumber, String sourceLine, String message) {
+    private Map createViolation(int lineNumber, String sourceLine, String message) {
         [lineNumber: lineNumber, sourceLineText: sourceLine, messageText: message]
     }
 

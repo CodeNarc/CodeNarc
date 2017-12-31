@@ -38,7 +38,7 @@ class ImportFromSunPackagesRule extends AbstractAstVisitorRule {
         }
     }
 
-    def addViolationForSunImport(ImportNode importNode, SourceCode sourceCode, List violations) {
+    void addViolationForSunImport(ImportNode importNode, SourceCode sourceCode, List violations) {
         def className = importNode.className
         def packageName = importNode.packageName
         if (className?.startsWith('sun.')) {

@@ -41,7 +41,7 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
         return CSS_FILE
     }
 
-    abstract protected buildBodySection(AnalysisContext analysisContext, results)
+    abstract protected Closure buildBodySection(AnalysisContext analysisContext, Results results)
 
     /**
      * Write out a report to the specified Writer for the analysis results
@@ -68,7 +68,7 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
     // Internal Helper Methods
     //--------------------------------------------------------------------------
 
-    protected buildCSS() {
+    protected Closure buildCSS() {
         return {
             def cssInputStream = ClassPathResource.getInputStream(getCssFile())
             assert cssInputStream, "CSS File [$getCssFile()] not found"
@@ -79,11 +79,11 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildScript() {
+    protected Closure buildScript() {
         return { }
     }
 
-    protected buildHeaderSection() {
+    protected Closure buildHeaderSection() {
         return {
             head {
                 title(buildTitle())
@@ -93,7 +93,7 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildReportMetadata() {
+    protected Closure buildReportMetadata() {
         return {
             div(class: 'metadata') {
                 table {
@@ -114,13 +114,13 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
         }
     }
 
-    protected buildLogo() {
+    protected Closure buildLogo() {
         return {
             img(class: 'logo', src: 'http://codenarc.sourceforge.net/images/codenarc-logo.png', alt: 'CodeNarc', align: 'right')
        }
     }
 
-    protected buildRuleDescriptions(AnalysisContext analysisContext) {
+    protected Closure buildRuleDescriptions(AnalysisContext analysisContext) {
         def sortedRules = getSortedRules(analysisContext)
 
         return {

@@ -37,7 +37,7 @@ class UnnecessaryStringInstantiationAstVisitor extends AbstractConstructorCallAs
 
     @SuppressWarnings('ExplicitCallToGetAtMethod')
     @Override
-    protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
+    protected boolean isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         def firstArgExpression = constructorCall.arguments?.expressions?.getAt(0)
         constructorCall.text =~ NEW_STRING && (firstArgExpression instanceof ConstantExpression)
     }

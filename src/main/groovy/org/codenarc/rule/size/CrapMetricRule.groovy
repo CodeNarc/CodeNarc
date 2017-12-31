@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.size
 
+import org.gmetrics.metric.Metric
 import org.slf4j.LoggerFactory
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
@@ -112,6 +113,7 @@ class CrapMetricRule extends AbstractAstVisitorRule {
         return resource.exists()
     }
 
+    @SuppressWarnings('MethodReturnTypeRequired')
     private createCrapMetric() {        // omit CrapMetric type; it may not be on the classpath
         synchronized(createMetricLock) {
             if (!crapMetric) {
@@ -144,7 +146,7 @@ class CrapMetricAstVisitor extends AbstractMethodMetricAstVisitor  {
     }
 
     @Override
-    protected Object createMetric() {
+    protected Metric createMetric() {
         return crapMetric
     }
 

@@ -39,7 +39,7 @@ class UnnecessarySetterAstVisitor extends AbstractMethodCallExpressionVisitor {
         addViolationsIfSetter(call)
     }
 
-    private addViolationsIfSetter(MethodCallExpression call) {
+    private void addViolationsIfSetter(MethodCallExpression call) {
         if (AstUtil.getMethodArguments(call).size() != 1) {
             return
         }

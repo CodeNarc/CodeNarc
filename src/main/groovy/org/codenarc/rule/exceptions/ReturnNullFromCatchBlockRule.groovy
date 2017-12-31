@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.CatchStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
@@ -61,7 +62,7 @@ class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
      * @param node
      *      node
      */
-    private static getLastStatement(node) {
+    private static Statement getLastStatement(CatchStatement node) {
         if (node.code instanceof BlockStatement && node.code.statements) {
             return node.code.statements.last()
         }

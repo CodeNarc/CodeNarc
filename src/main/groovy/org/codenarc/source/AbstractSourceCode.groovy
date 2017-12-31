@@ -133,7 +133,7 @@ abstract class AbstractSourceCode implements SourceCode {
         methodCallExpressions.asImmutable()
     }
 
-    private removeGrabTransformation(CompilationUnit compUnit) {
+    private void removeGrabTransformation(CompilationUnit compUnit) {
         compUnit.phaseOperations?.each { List xforms ->
             xforms?.removeAll { entry ->
                 entry.getClass().declaredFields.any {

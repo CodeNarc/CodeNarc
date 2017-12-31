@@ -75,6 +75,7 @@ class TestUtil {
      * @param text - the text expected within the message; may be a single String or a List of Strings
      * @param closure - the Closure to execute
      */
+    @SuppressWarnings('MethodParameterTypeRequired')
     static void shouldFailWithMessageContaining(text, Closure closure) {
         def message = shouldFail(closure)
         def strings = text instanceof List ? text : [text]
@@ -88,7 +89,7 @@ class TestUtil {
      * @param text - the text to search
      * @param strings - the Strings to check for; toString() is invoked on each element
      */
-    static boolean containsAll(String text, strings) {
+    static boolean containsAll(String text, Collection strings) {
         strings.every { text.contains(it.toString()) }
     }
 
@@ -97,7 +98,7 @@ class TestUtil {
      * @param text - the text to search
      * @param strings - the Strings that must be present within text; toString() is invoked on each element
      */
-    static void assertContainsAll(String text, strings) {
+    static void assertContainsAll(String text, Collection strings) {
         strings.each { assert text.contains(it.toString()), "text does not contain [$it]" }
     }
 
@@ -107,7 +108,7 @@ class TestUtil {
      * @param strings - the Strings that must be present within text, and appear
      *      in the order specified; toString() is applied to each.
      */
-    static void assertContainsAllInOrder(String text, strings) {
+    static void assertContainsAllInOrder(String text, Collection strings) {
         def startIndex = 0
         strings.each { string ->
             def index = text.indexOf(string.toString(), startIndex)

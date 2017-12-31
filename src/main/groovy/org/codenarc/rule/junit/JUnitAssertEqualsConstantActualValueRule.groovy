@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.junit
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.Expression
@@ -59,14 +60,14 @@ class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor 
         }
     }
 
-    private void findViolations(def methodCall) {
+    private void findViolations(ASTNode methodCall) {
         Expression actualArgument = getActualArgument(methodCall)
         if (actualArgument && AstUtil.isConstantOrConstantLiteral(actualArgument)) {
             addViolation(methodCall, VIOLATION_MESSAGE)
         }
     }
 
-    private Expression getActualArgument(def methodCall) {
+    private Expression getActualArgument(ASTNode methodCall) {
         List<? extends Expression> arguments = AstUtil.getMethodArguments(methodCall)
         int actualArgumentIndex = getActualArgumentIndex(arguments)
         return actualArgumentIndex == -1 ? null : arguments[actualArgumentIndex]

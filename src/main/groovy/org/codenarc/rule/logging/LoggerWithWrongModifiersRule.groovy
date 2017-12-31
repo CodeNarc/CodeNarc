@@ -65,7 +65,7 @@ class LoggerWithWrongModifiersAstVisitor extends AbstractFieldVisitor {
         }
     }
 
-    private addViolationForField(FieldNode fieldNode) {
+    private void addViolationForField(FieldNode fieldNode) {
         def visibility = rule.allowProtectedLogger ? 'private (or protected)' : 'private'
         def staticness = rule.allowNonStaticLogger ? '' : ', static'
         addViolation(fieldNode, "The Logger field $fieldNode.name should be ${visibility}${staticness} and final")

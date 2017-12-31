@@ -16,6 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractSharedAstVisitorRule
 import org.codenarc.rule.AstVisitor
@@ -67,7 +68,7 @@ class UnusedPrivateMethodRule extends AbstractSharedAstVisitorRule {
     }
 
     @SuppressWarnings('NestedBlockDepth')
-    private collectAllPrivateMethods(ast) {
+    private Map<String, MethodNode> collectAllPrivateMethods(ModuleNode ast) {
         def allPrivateMethods = [:]
         ast.classes.each { classNode ->
             if (shouldApplyThisRuleTo(classNode)) {
