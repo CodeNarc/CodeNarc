@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.imports
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
+class UnnecessaryGroovyImportRuleTest extends GenericAbstractRuleTestCase<UnnecessaryGroovyImportRule> {
 
     @Test
     void testRuleProperties() {
@@ -181,7 +180,7 @@ class UnnecessaryGroovyImportRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryGroovyImportRule createRule() {
         new UnnecessaryGroovyImportRule()
     }
 }

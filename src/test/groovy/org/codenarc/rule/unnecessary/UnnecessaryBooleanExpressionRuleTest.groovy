@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
+class UnnecessaryBooleanExpressionRuleTest extends GenericAbstractRuleTestCase<UnnecessaryBooleanExpressionRule> {
 
     @Test
     void testRuleProperties() {
@@ -195,7 +194,7 @@ class UnnecessaryBooleanExpressionRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryBooleanExpressionRule createRule() {
         new UnnecessaryBooleanExpressionRule()
     }
 

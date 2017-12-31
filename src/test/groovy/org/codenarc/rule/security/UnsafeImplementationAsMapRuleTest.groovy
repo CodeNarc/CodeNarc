@@ -15,17 +15,16 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for UnsafeImplementationAsMapRule
  *
  * @author Artur Gajowy
  */
-class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
+class UnsafeImplementationAsMapRuleTest extends GenericAbstractRuleTestCase<UnsafeImplementationAsMapRule> {
 
     private static final SOURCE_WITH_SINGLE_VIOLATION = """
         [nextElement: {}] as Enumeration      ${violation('java.util.Enumeration', 'hasMoreElements')}
@@ -100,7 +99,7 @@ class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnsafeImplementationAsMapRule createRule() {
         new UnsafeImplementationAsMapRule()
     }
 }

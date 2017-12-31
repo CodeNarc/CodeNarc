@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
+class ReturnsNullInsteadOfEmptyArrayRuleTest extends GenericAbstractRuleTestCase<ReturnsNullInsteadOfEmptyArrayRule> {
 
     @Test
     void testRuleProperties() {
@@ -204,7 +203,7 @@ class ReturnsNullInsteadOfEmptyArrayRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ReturnsNullInsteadOfEmptyArrayRule createRule() {
         new ReturnsNullInsteadOfEmptyArrayRule()
     }
 

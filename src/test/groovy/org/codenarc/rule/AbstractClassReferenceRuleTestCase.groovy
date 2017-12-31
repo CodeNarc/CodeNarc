@@ -22,7 +22,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
+abstract class AbstractClassReferenceRuleTestCase<T extends Rule> extends GenericAbstractRuleTestCase<T> {
 
     /**
      * @return the name of the class to check for
@@ -33,12 +33,6 @@ abstract class AbstractClassReferenceRuleTestCase extends AbstractRuleTestCase {
     protected String getViolationMessage() {
         "Found reference to ${getClassName()}"
     }
-
-    /**
-     * @return an initialized rule instance
-     */
-    @Override
-    protected abstract Rule createRule()
 
     //------------------------------------------------------------------------------------
     // Common Tests

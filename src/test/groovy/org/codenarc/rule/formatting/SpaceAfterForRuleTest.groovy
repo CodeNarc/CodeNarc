@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAfterForRuleTest extends AbstractRuleTestCase {
+class SpaceAfterForRuleTest extends GenericAbstractRuleTestCase<SpaceAfterForRule> {
 
     private static final MESSAGE = 'The for keyword within class None is not followed by a single space'
 
@@ -69,7 +68,7 @@ class SpaceAfterForRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SpaceAfterForRule createRule() {
         new SpaceAfterForRule()
     }
 }

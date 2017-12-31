@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class LongLiteralWithLowerCaseLRuleTest extends AbstractRuleTestCase {
+class LongLiteralWithLowerCaseLRuleTest extends GenericAbstractRuleTestCase<LongLiteralWithLowerCaseLRule> {
 
     @Test
     void testRuleProperties() {
@@ -61,7 +60,7 @@ class LongLiteralWithLowerCaseLRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected LongLiteralWithLowerCaseLRule createRule() {
         new LongLiteralWithLowerCaseLRule()
     }
 }

@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for JUnitUnnecessaryThrowsExceptionRule
  *
  * @author Chris Mair
  */
-class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
+class JUnitUnnecessaryThrowsExceptionRuleTest extends GenericAbstractRuleTestCase<JUnitUnnecessaryThrowsExceptionRule> {
 
     @Test
     void testRuleProperties() {
@@ -182,7 +181,7 @@ class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected JUnitUnnecessaryThrowsExceptionRule createRule() {
         new JUnitUnnecessaryThrowsExceptionRule()
     }
 }

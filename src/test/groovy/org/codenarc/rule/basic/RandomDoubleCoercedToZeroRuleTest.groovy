@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
+class RandomDoubleCoercedToZeroRuleTest extends GenericAbstractRuleTestCase<RandomDoubleCoercedToZeroRule> {
 
     @Test
     void testRuleProperties() {
@@ -167,7 +166,7 @@ class RandomDoubleCoercedToZeroRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected RandomDoubleCoercedToZeroRule createRule() {
         new RandomDoubleCoercedToZeroRule()
     }
 }

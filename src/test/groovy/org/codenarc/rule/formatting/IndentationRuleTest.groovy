@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for IndentationRule
  *
  * @author Chris Mair
  */
-class IndentationRuleTest extends AbstractRuleTestCase {
+class IndentationRuleTest extends GenericAbstractRuleTestCase<IndentationRule> {
 
     @Test
     void testRuleProperties() {
@@ -688,7 +687,7 @@ class IndentationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected IndentationRule createRule() {
         new IndentationRule()
     }
 }

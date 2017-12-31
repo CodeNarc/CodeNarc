@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
+class UseOfNotifyMethodRuleTest extends GenericAbstractRuleTestCase<UseOfNotifyMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -67,7 +66,7 @@ class UseOfNotifyMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UseOfNotifyMethodRule createRule() {
         new UseOfNotifyMethodRule()
     }
 }

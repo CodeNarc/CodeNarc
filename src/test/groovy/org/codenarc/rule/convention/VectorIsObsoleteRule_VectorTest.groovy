@@ -16,7 +16,6 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class VectorIsObsoleteRule_VectorTest extends AbstractClassReferenceRuleTestCase {
+class VectorIsObsoleteRule_VectorTest extends AbstractClassReferenceRuleTestCase<VectorIsObsoleteRule> {
 
     final String className = 'Vector'
     final String violationMessage = "The $className class is obsolete"
@@ -36,7 +35,7 @@ class VectorIsObsoleteRule_VectorTest extends AbstractClassReferenceRuleTestCase
     }
 
     @Override
-    protected Rule createRule() {
+    protected VectorIsObsoleteRule createRule() {
         new VectorIsObsoleteRule()
     }
 }

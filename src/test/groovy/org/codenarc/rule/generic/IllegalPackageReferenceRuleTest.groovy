@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
+class IllegalPackageReferenceRuleTest extends GenericAbstractRuleTestCase<IllegalPackageReferenceRule> {
 
     @Test
     void testRuleProperties() {
@@ -297,7 +296,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected IllegalPackageReferenceRule createRule() {
         new IllegalPackageReferenceRule()
     }
 }

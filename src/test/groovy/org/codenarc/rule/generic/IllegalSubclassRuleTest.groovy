@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for IllegalSubclassRule
  *
  * @author Chris Mair
  */
-class IllegalSubclassRuleTest extends AbstractRuleTestCase {
+class IllegalSubclassRuleTest extends GenericAbstractRuleTestCase<IllegalSubclassRule> {
 
     @Test
     void testRuleProperties() {
@@ -79,7 +78,7 @@ class IllegalSubclassRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected IllegalSubclassRule createRule() {
         new IllegalSubclassRule()
     }
 }

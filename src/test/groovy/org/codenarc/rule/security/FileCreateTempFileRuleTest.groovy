@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class FileCreateTempFileRuleTest extends AbstractRuleTestCase {
+class FileCreateTempFileRuleTest extends GenericAbstractRuleTestCase<FileCreateTempFileRule> {
 
     @Test
     void testRuleProperties() {
@@ -93,7 +92,7 @@ class FileCreateTempFileRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected FileCreateTempFileRule createRule() {
         new FileCreateTempFileRule()
     }
 }

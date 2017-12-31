@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -26,7 +25,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
+class ConstantTernaryExpressionRule_ElvisTest extends GenericAbstractRuleTestCase<ConstantTernaryExpressionRule> {
 
     @Test
     void testApplyTo_True_IsAViolation() {
@@ -105,7 +104,7 @@ class ConstantTernaryExpressionRule_ElvisTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ConstantTernaryExpressionRule createRule() {
         new ConstantTernaryExpressionRule()
     }
 

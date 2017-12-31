@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unused
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
+class UnusedPrivateMethodRuleTest extends GenericAbstractRuleTestCase<UnusedPrivateMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -523,7 +522,7 @@ class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnusedPrivateMethodRule createRule() {
         new UnusedPrivateMethodRule()
     }
 

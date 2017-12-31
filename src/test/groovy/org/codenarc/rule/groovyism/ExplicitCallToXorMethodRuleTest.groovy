@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToXorMethodRuleTest extends AbstractRuleTestCase {
+class ExplicitCallToXorMethodRuleTest extends GenericAbstractRuleTestCase<ExplicitCallToXorMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -53,7 +52,7 @@ class ExplicitCallToXorMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitCallToXorMethodRule createRule() {
         new ExplicitCallToXorMethodRule()
     }
 }

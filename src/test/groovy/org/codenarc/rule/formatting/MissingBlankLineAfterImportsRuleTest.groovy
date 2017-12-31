@@ -15,14 +15,13 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
  * Tests for MissingBlankLineAfterImportsRule
  */
-class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase {
+class MissingBlankLineAfterImportsRuleTest extends GenericAbstractRuleTestCase<MissingBlankLineAfterImportsRule> {
 
     @Test
     void testRuleProperties() {
@@ -60,7 +59,7 @@ class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected MissingBlankLineAfterImportsRule createRule() {
         new MissingBlankLineAfterImportsRule()
     }
 }

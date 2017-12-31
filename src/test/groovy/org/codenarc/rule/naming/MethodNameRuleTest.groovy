@@ -15,18 +15,17 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
-import org.junit.Test
-
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
+import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.junit.Test
 
 /**
  * Tests for MethodNameRule
  *
  * @author Chris Mair
   */
-class MethodNameRuleTest extends AbstractRuleTestCase {
+class MethodNameRuleTest extends GenericAbstractRuleTestCase<MethodNameRule> {
 
     @Test
     void testRuleProperties() {
@@ -166,7 +165,7 @@ class MethodNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected MethodNameRule createRule() {
         new MethodNameRule()
     }
 

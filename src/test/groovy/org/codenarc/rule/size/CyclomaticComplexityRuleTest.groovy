@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
+class CyclomaticComplexityRuleTest extends GenericAbstractRuleTestCase<CyclomaticComplexityRule> {
 
     @Test
     void testRuleProperties() {
@@ -300,7 +299,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected CyclomaticComplexityRule createRule() {
         new CyclomaticComplexityRule()
     }
 

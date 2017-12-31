@@ -15,15 +15,14 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
  * @author Dominik Przybysz
  * @author Chris Mair
  */
-class NoDefRuleTest extends AbstractRuleTestCase {
+class NoDefRuleTest extends GenericAbstractRuleTestCase<NoDefRule> {
 
     @Test
     void testNoViolations() {
@@ -152,7 +151,7 @@ class NoDefRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected NoDefRule createRule() {
         new NoDefRule()
     }
 }

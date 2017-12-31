@@ -16,19 +16,18 @@
 package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 
 /**
  * Tests for JdbcStatementReferenceRule - checks for references to java.sql.CallableStatement
  *
  * @author Chris Mair
  */
-class JdbcStatementReferenceRule_CallableStatementTest extends AbstractClassReferenceRuleTestCase {
+class JdbcStatementReferenceRule_CallableStatementTest extends AbstractClassReferenceRuleTestCase<JdbcStatementReferenceRule> {
 
     final String className = 'java.sql.CallableStatement'
 
     @Override
-    protected Rule createRule() {
+    protected JdbcStatementReferenceRule createRule() {
         new JdbcStatementReferenceRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
   */
-class NonFinalPublicFieldRuleTest extends AbstractRuleTestCase {
+class NonFinalPublicFieldRuleTest extends GenericAbstractRuleTestCase<NonFinalPublicFieldRule> {
 
     @Test
     void testRuleProperties() {
@@ -54,7 +53,7 @@ class NonFinalPublicFieldRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected NonFinalPublicFieldRule createRule() {
         new NonFinalPublicFieldRule()
     }
 }

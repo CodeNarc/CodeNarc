@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class JUnitUnnecessarySetUpRuleTest extends AbstractRuleTestCase {
+class JUnitUnnecessarySetUpRuleTest extends GenericAbstractRuleTestCase<JUnitUnnecessarySetUpRule> {
 
     @Test
     void testRuleProperties() {
@@ -140,7 +139,7 @@ class JUnitUnnecessarySetUpRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected JUnitUnnecessarySetUpRule createRule() {
         new JUnitUnnecessarySetUpRule()
     }
 }

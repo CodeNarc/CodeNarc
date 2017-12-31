@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Yuriy Chulovskyy
  */
-class NoTabCharacterRuleTest extends AbstractRuleTestCase {
+class NoTabCharacterRuleTest extends GenericAbstractRuleTestCase<NoTabCharacterRule> {
 
     @Test
     void testRuleProperties() {
@@ -51,7 +50,7 @@ class NoTabCharacterRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected NoTabCharacterRule createRule() {
         new NoTabCharacterRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.logging
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
   */
-class MultipleLoggersRuleTest extends AbstractRuleTestCase {
+class MultipleLoggersRuleTest extends GenericAbstractRuleTestCase<MultipleLoggersRule> {
 
     @Test
     void testRuleProperties() {
@@ -75,7 +74,7 @@ class MultipleLoggersRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected MultipleLoggersRule createRule() {
         new MultipleLoggersRule()
     }
 }

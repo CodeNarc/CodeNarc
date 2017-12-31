@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -27,7 +26,7 @@ import org.junit.Test
  * @author Jon DeJong
  *
  */
-class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
+class AssignCollectionUniqueRuleTest extends GenericAbstractRuleTestCase<AssignCollectionUniqueRule> {
 
     @Test
     void testRuleProperties() {
@@ -75,7 +74,7 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected AssignCollectionUniqueRule createRule() {
         new AssignCollectionUniqueRule()
     }
 }

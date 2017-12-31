@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
   */
-class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
+class BracesForTryCatchFinallyRuleTest extends GenericAbstractRuleTestCase<BracesForTryCatchFinallyRule> {
 
     @Test
     void testRuleProperties() {
@@ -111,7 +110,7 @@ class BracesForTryCatchFinallyRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BracesForTryCatchFinallyRule createRule() {
         BracesForTryCatchFinallyRule rule = new BracesForTryCatchFinallyRule()
         rule.validateCatch = true
         rule.validateFinally = true

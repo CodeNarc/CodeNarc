@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Marcin Erdmann
  */
-class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
+class ClosureAsLastMethodParameterRuleTest extends GenericAbstractRuleTestCase<ClosureAsLastMethodParameterRule> {
 
     @Test
     void testRuleProperties() {
@@ -228,7 +227,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ClosureAsLastMethodParameterRule createRule() {
         new ClosureAsLastMethodParameterRule()
     }
 }

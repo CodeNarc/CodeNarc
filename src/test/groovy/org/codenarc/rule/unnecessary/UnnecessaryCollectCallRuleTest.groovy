@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
+class UnnecessaryCollectCallRuleTest extends GenericAbstractRuleTestCase<UnnecessaryCollectCallRule> {
 
     @Test
     void testRuleProperties() {
@@ -95,7 +94,7 @@ class UnnecessaryCollectCallRuleTest extends AbstractRuleTestCase {
         assertSingleViolation(SOURCE, 2, '["1", "2", "3"].collect', 'The call to collect could probably be rewritten as a spread expression: [1, 2, 3]*.bytes')
     }
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryCollectCallRule createRule() {
         new UnnecessaryCollectCallRule()
     }
 }

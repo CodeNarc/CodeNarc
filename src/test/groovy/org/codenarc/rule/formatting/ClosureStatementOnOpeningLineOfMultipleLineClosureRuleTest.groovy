@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ClosureStatementOnOpeningLineOfMultipleLineClosureRule
  *
  * @author Chris Mair
  */
-class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends AbstractRuleTestCase {
+class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends GenericAbstractRuleTestCase<ClosureStatementOnOpeningLineOfMultipleLineClosureRule> {
 
     @Test
     void testRuleProperties() {
@@ -117,7 +116,7 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends Abstrac
     }
 
     @Override
-    protected Rule createRule() {
+    protected ClosureStatementOnOpeningLineOfMultipleLineClosureRule createRule() {
         new ClosureStatementOnOpeningLineOfMultipleLineClosureRule()
     }
 }

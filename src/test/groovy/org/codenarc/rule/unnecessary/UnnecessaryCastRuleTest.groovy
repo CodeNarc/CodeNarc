@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for UnnecessaryCastRule
  *
  * @author Chris Mair
  */
-class UnnecessaryCastRuleTest extends AbstractRuleTestCase {
+class UnnecessaryCastRuleTest extends GenericAbstractRuleTestCase<UnnecessaryCastRule> {
 
     @Test
     void testRuleProperties() {
@@ -65,7 +64,7 @@ class UnnecessaryCastRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryCastRule createRule() {
         new UnnecessaryCastRule()
     }
 }

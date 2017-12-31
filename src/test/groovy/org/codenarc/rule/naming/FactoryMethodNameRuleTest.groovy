@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
+class FactoryMethodNameRuleTest extends GenericAbstractRuleTestCase<FactoryMethodNameRule> {
 
     @Test
     void testRuleProperties() {
@@ -124,7 +123,7 @@ class FactoryMethodNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected FactoryMethodNameRule createRule() {
         new FactoryMethodNameRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase {
+class SpaceAfterClosingBraceRuleTest extends GenericAbstractRuleTestCase<SpaceAfterClosingBraceRule> {
 
     private static final String BLOCK_VIOLATION_MESSAGE = 'The closing brace for the block in class None is not followed by a space or whitespace'
 
@@ -305,7 +304,7 @@ c        '''
     }
 
     @Override
-    protected Rule createRule() {
+    protected SpaceAfterClosingBraceRule createRule() {
         new SpaceAfterClosingBraceRule()
     }
 }

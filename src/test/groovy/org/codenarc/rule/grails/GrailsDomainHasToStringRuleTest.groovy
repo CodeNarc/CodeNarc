@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
   */
-class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
+class GrailsDomainHasToStringRuleTest extends GenericAbstractRuleTestCase<GrailsDomainHasToStringRule> {
 
     @Test
     void testRuleProperties() {
@@ -79,7 +78,7 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsDomainHasToStringRule createRule() {
         new GrailsDomainHasToStringRule()
     }
 }

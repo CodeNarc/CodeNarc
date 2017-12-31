@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase {
+class ClassNameSameAsSuperclassRuleTest extends GenericAbstractRuleTestCase<ClassNameSameAsSuperclassRule> {
 
     @Test
     void testRuleProperties() {
@@ -80,7 +79,7 @@ class ClassNameSameAsSuperclassRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ClassNameSameAsSuperclassRule createRule() {
         new ClassNameSameAsSuperclassRule()
     }
 }

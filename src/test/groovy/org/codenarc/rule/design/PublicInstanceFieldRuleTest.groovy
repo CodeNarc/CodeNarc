@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Victor Savkin
   */
-class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
+class PublicInstanceFieldRuleTest extends GenericAbstractRuleTestCase<PublicInstanceFieldRule> {
 
     @Test
     void testRuleProperties() {
@@ -73,7 +72,7 @@ class PublicInstanceFieldRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected PublicInstanceFieldRule createRule() {
         new PublicInstanceFieldRule()
     }
 }

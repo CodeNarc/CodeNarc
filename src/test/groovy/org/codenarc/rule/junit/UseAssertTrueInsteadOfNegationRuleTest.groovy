@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
   */
-class UseAssertTrueInsteadOfNegationRuleTest extends AbstractRuleTestCase {
+class UseAssertTrueInsteadOfNegationRuleTest extends GenericAbstractRuleTestCase<UseAssertTrueInsteadOfNegationRule> {
 
     @Test
     void testRuleProperties() {
@@ -72,7 +71,7 @@ class UseAssertTrueInsteadOfNegationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UseAssertTrueInsteadOfNegationRule createRule() {
         new UseAssertTrueInsteadOfNegationRule()
     }
 }

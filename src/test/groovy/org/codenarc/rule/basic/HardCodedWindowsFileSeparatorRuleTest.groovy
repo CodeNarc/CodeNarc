@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class HardCodedWindowsFileSeparatorRuleTest extends AbstractRuleTestCase {
+class HardCodedWindowsFileSeparatorRuleTest extends GenericAbstractRuleTestCase<HardCodedWindowsFileSeparatorRule> {
 
     @Test
     void testRuleProperties() {
@@ -92,7 +91,7 @@ class HardCodedWindowsFileSeparatorRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected HardCodedWindowsFileSeparatorRule createRule() {
         new HardCodedWindowsFileSeparatorRule()
     }
 }

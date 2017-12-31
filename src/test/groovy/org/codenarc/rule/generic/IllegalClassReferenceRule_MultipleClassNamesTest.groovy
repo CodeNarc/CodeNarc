@@ -16,7 +16,6 @@
 package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 
 /**
  * Tests for IllegalClassReferenceRule - checks for specifying a multiple, comma-separated class names for the classNames field
@@ -26,12 +25,12 @@ import org.codenarc.rule.Rule
  *
  * @author Chris Mair
  */
-class IllegalClassReferenceRule_MultipleClassNamesTest extends AbstractClassReferenceRuleTestCase {
+class IllegalClassReferenceRule_MultipleClassNamesTest extends AbstractClassReferenceRuleTestCase<IllegalClassReferenceRule> {
 
     final String className = 'com.example.MyExampleClass'
 
     @Override
-    protected Rule createRule() {
+    protected IllegalClassReferenceRule createRule() {
         new IllegalClassReferenceRule(classNames:'org.example.OtherClass,com.example.MyExampleClass, UnrelatedClass')
     }
 }

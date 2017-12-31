@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris mair
  */
-class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
+class ComparisonWithSelfRuleTest extends GenericAbstractRuleTestCase<ComparisonWithSelfRule> {
 
     private static final MESSAGE = 'Comparing an object to itself'
 
@@ -112,7 +111,7 @@ class ComparisonWithSelfRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ComparisonWithSelfRule createRule() {
         new ComparisonWithSelfRule()
     }
 }

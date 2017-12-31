@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAfterWhileRuleTest extends AbstractRuleTestCase {
+class SpaceAfterWhileRuleTest extends GenericAbstractRuleTestCase<SpaceAfterWhileRule> {
 
     private static final MESSAGE = 'The while keyword within class None is not followed by a single space'
 
@@ -71,7 +70,7 @@ class SpaceAfterWhileRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SpaceAfterWhileRule createRule() {
         new SpaceAfterWhileRule()
     }
 }

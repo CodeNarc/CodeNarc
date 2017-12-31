@@ -15,8 +15,7 @@
  */
  package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
+class PrivateFieldCouldBeFinalRuleTest extends GenericAbstractRuleTestCase<PrivateFieldCouldBeFinalRule> {
 
     private static final VIOLATION_MESSAGE = 'Private field [count] in class MyClass is only'
 
@@ -463,7 +462,7 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected PrivateFieldCouldBeFinalRule createRule() {
         new PrivateFieldCouldBeFinalRule()
     }
 }

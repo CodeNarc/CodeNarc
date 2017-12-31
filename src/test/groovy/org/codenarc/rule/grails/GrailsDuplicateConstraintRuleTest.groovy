@@ -15,17 +15,16 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.Rule
-import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for GrailsDuplicateConstraintRule
  *
  * @author Chris Mair
  */
-class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase {
+class GrailsDuplicateConstraintRuleTest extends GenericAbstractRuleTestCase<GrailsDuplicateConstraintRule> {
 
     @Test
     void testRuleProperties() {
@@ -192,7 +191,7 @@ class GrailsDuplicateConstraintRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsDuplicateConstraintRule createRule() {
         new GrailsDuplicateConstraintRule()
     }
 }

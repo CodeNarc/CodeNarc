@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
+class ConstantsOnlyInterfaceRuleTest extends GenericAbstractRuleTestCase<ConstantsOnlyInterfaceRule> {
 
     @Test
     void testRuleProperties() {
@@ -74,7 +73,7 @@ class ConstantsOnlyInterfaceRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ConstantsOnlyInterfaceRule createRule() {
         new ConstantsOnlyInterfaceRule()
     }
 }

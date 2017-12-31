@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unused
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -26,7 +25,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  *
   */
-class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
+class UnusedPrivateFieldRuleTest extends GenericAbstractRuleTestCase<UnusedPrivateFieldRule> {
 
     @Test
     void testRuleProperties() {
@@ -461,7 +460,7 @@ class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnusedPrivateFieldRule createRule() {
         new UnusedPrivateFieldRule()
     }
 }

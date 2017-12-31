@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Tomasz Bujok'
   */
-class MethodCountRuleTest extends AbstractRuleTestCase {
+class MethodCountRuleTest extends GenericAbstractRuleTestCase<MethodCountRule> {
 
     @Test
     void testRuleProperties() {
@@ -69,7 +68,7 @@ class MethodCountRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected MethodCountRule createRule() {
         new MethodCountRule()
     }
 }

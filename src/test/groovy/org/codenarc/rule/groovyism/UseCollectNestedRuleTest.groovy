@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Joachim Baumann
  * @author Chris Mair
  */
-class UseCollectNestedRuleTest extends AbstractRuleTestCase {
+class UseCollectNestedRuleTest extends GenericAbstractRuleTestCase<UseCollectNestedRule> {
 
     @Test
     void testRuleProperties() {
@@ -82,7 +81,7 @@ class UseCollectNestedRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UseCollectNestedRule createRule() {
         new UseCollectNestedRule()
     }
 }

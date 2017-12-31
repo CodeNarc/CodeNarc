@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class BrokenNullCheckRuleTest extends AbstractRuleTestCase {
+class BrokenNullCheckRuleTest extends GenericAbstractRuleTestCase<BrokenNullCheckRule> {
 
     @Test
     void testRuleProperties() {
@@ -96,7 +95,7 @@ class BrokenNullCheckRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BrokenNullCheckRule createRule() {
         new BrokenNullCheckRule()
     }
 }

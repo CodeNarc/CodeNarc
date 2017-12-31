@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
+class TernaryCouldBeElvisRuleTest extends GenericAbstractRuleTestCase<TernaryCouldBeElvisRule> {
 
     @Test
     void testRuleProperties() {
@@ -90,7 +89,7 @@ class TernaryCouldBeElvisRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected TernaryCouldBeElvisRule createRule() {
         new TernaryCouldBeElvisRule()
     }
 }

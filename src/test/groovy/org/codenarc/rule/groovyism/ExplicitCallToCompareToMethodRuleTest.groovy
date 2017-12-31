@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
+class ExplicitCallToCompareToMethodRuleTest extends GenericAbstractRuleTestCase<ExplicitCallToCompareToMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -58,7 +57,7 @@ class ExplicitCallToCompareToMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitCallToCompareToMethodRule createRule() {
         new ExplicitCallToCompareToMethodRule()
     }
 }
