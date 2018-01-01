@@ -61,7 +61,7 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
         super.visitConstructorOrMethod(node, isConstructor)
     }
 
-    private containsOpeningBraceAfterParenthesis(String lastLine) {
+    private boolean containsOpeningBraceAfterParenthesis(String lastLine) {
         int parenthesisIndex = lastLine?.indexOf(')') ?: 0
         lastLine?.indexOf('{', parenthesisIndex) >= 0
     }

@@ -41,11 +41,11 @@ class EmptyCatchBlockAstVisitor extends AbstractAstVisitor {
         super.visitCatchStatement(catchStatement)
     }
 
-    private isExceptionIgnored(catchStatement) {
+    private boolean isExceptionIgnored(CatchStatement catchStatement) {
         AstUtil.isEmptyBlock(catchStatement.code) && !doesContainIgnoreWord(catchStatement.variable?.name)
     }
 
-    private doesContainIgnoreWord(String name) {
+    private boolean doesContainIgnoreWord(String name) {
         name ==~ rule.ignoreRegex
     }
 }

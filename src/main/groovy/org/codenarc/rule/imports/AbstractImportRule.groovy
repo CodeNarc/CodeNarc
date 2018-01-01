@@ -31,7 +31,7 @@ abstract class AbstractImportRule extends AbstractRule {
     /**
      * Optimization: Stop checking lines for imports once a class/interface has been declared
      */
-    protected findLineNumberOfFirstClassDeclaration(SourceCode sourceCode) {
+    protected int findLineNumberOfFirstClassDeclaration(SourceCode sourceCode) {
         int firstLineNumber = sourceCode.lines.size()
         def ast = sourceCode.ast
         ast?.classes.each { classNode ->

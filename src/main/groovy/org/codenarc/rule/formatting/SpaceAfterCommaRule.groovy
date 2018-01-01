@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.expr.MethodCall
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -83,7 +84,7 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
         super.visitConstructorCallExpression(call)
     }
 
-    private void processMethodOrConstructorCall(Expression call) {
+    private void processMethodOrConstructorCall(MethodCall call) {
         if (isFirstVisit(call)) {
             def arguments = call.arguments
             def parameterExpressions = arguments.expressions
@@ -98,7 +99,7 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private boolean isClosureParameterOutsideParentheses(Expression e, arguments) {
+    private boolean isClosureParameterOutsideParentheses(Expression e, Expression arguments) {
         e instanceof ClosureExpression && e.columnNumber > arguments.lastColumnNumber
     }
 

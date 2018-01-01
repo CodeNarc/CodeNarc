@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.basic
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -61,7 +63,7 @@ class ComparisonOfTwoConstantsAstVisitor extends AbstractAstVisitor {
         super.visitMethodCallExpression(call)
     }
 
-    private void addViolationIfBothAreConstantsOrLiterals(node, left, right) {
+    private void addViolationIfBothAreConstantsOrLiterals(ASTNode node, Expression left, Expression right) {
         if (AstUtil.isConstantOrConstantLiteral(left) && AstUtil.isConstantOrConstantLiteral(right)) {
             addViolation(node, "Comparing two constants or constant literals is useless and may indicate a bug: ${node.text}")
         }

@@ -71,7 +71,7 @@ Error: $t.message
         }
     }
 
-    private forEachRule(Closure assertion) {
+    private void forEachRule(Closure assertion) {
         RuleSets.ALL_RULESET_FILES.each { ruleSetPath ->
             def ruleSet = new XmlFileRuleSet(ruleSetPath)
             def rules = ruleSet.rules

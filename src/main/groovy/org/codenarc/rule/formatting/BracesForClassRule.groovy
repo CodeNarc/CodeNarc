@@ -48,7 +48,7 @@ class BracesForClassRule extends AbstractRule {
         }
     }
 
-    private applyToClassNode(ClassNode classNode, int lineNumber, String sourceLine, List violations) {
+    private void applyToClassNode(ClassNode classNode, int lineNumber, String sourceLine, List violations) {
         if (sameLine) {
             if (sourceLine?.startsWith('{')) {
                 violations.add(new Violation(
@@ -68,11 +68,11 @@ class BracesForClassRule extends AbstractRule {
         }
     }
 
-    private definesAnnotationType(String sourceLine) {
+    private boolean definesAnnotationType(String sourceLine) {
         sourceLine?.contains('@interface')
     }
 
-    private findOpeningBraceLine(SourceCode sourceCode, ASTNode node) {
+    private List findOpeningBraceLine(SourceCode sourceCode, ASTNode node) {
         int line = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
         def sourceLine = sourceCode.line(line - 1)
         while (sourceLine != null) {

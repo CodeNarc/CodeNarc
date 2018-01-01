@@ -117,13 +117,13 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitPostfixExpression(PostfixExpression expression) {
-        removeExpressionVariableName(expression)
+        removeExpressionVariableName(expression.expression)
         super.visitPostfixExpression(expression)
     }
 
     @Override
     void visitPrefixExpression(PrefixExpression expression) {
-        removeExpressionVariableName(expression)
+        removeExpressionVariableName(expression.expression)
         super.visitPrefixExpression(expression)
     }
 
@@ -131,9 +131,9 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
     // Helper Methods
     //------------------------------------------------------------------------------------
 
-    private void removeExpressionVariableName(expression) {
-        if (expression.expression instanceof VariableExpression) {
-            def varName = expression.expression.name
+    private void removeExpressionVariableName(Expression expression) {
+        if (expression instanceof VariableExpression) {
+            def varName = expression.name
             removeInitializedField(varName)
         }
     }
@@ -155,7 +155,7 @@ class PrivateFieldCouldBeFinalAstVisitor extends AbstractAstVisitor {
         return matchingFieldName
     }
 
-    private void addInitializedField(varName) {
+    private void addInitializedField(String varName) {
         def fieldNode = allFields.find { field -> isMatchingField(field, varName) }
         def alreadyInitializedFieldNode = initializedFields.find { field -> isMatchingField(field, varName) }
         if (fieldNode && !alreadyInitializedFieldNode) {

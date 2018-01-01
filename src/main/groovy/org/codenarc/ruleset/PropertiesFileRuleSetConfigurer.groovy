@@ -15,6 +15,7 @@
  */
 package org.codenarc.ruleset
 
+import org.codenarc.rule.Rule
 import org.slf4j.LoggerFactory
 import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.DefaultResourceFactory
@@ -74,7 +75,7 @@ class PropertiesFileRuleSetConfigurer {
         }
     }
 
-    private applyProperties(Properties properties, RuleSet ruleSet) {
+    private void applyProperties(Properties properties, RuleSet ruleSet) {
         final PATTERN = ~/(\w*)\.(\w*)/
         properties.each { k, v ->
             def matcher = PATTERN.matcher(k)
@@ -92,7 +93,7 @@ class PropertiesFileRuleSetConfigurer {
         }
     }
 
-    private findRule(RuleSet ruleSet, String name) {
+    private Rule findRule(RuleSet ruleSet, String name) {
         ruleSet.rules.find { rule -> rule.name == name }
     }
 }

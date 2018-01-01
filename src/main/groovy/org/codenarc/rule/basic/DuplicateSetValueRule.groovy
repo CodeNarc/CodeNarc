@@ -15,9 +15,9 @@
  */
 package org.codenarc.rule.basic
 
-import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.expr.CastExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -48,7 +48,7 @@ class DuplicateSetValueAstVisitor extends AbstractAstVisitor {
         super.visitCastExpression(expression)
     }
 
-    private static boolean isDuplicate(ASTNode expression, previousValues) {
+    private static boolean isDuplicate(Expression expression, List previousValues) {
         if ((expression instanceof ConstantExpression)) {
             if (previousValues.contains(expression.value)) {
                 return true
@@ -58,7 +58,7 @@ class DuplicateSetValueAstVisitor extends AbstractAstVisitor {
         false
     }
 
-    private addViolationForDuplicate(ConstantExpression constant) {
+    private void addViolationForDuplicate(ConstantExpression constant) {
         if (constant.value == null) {
             addViolation(constant, 'The constant value null is duplicated in the Set literal')
         } else if (constant.value instanceof String) {

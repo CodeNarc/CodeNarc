@@ -41,7 +41,7 @@ class MisorderedStaticImportsRule extends AbstractImportRule {
         }
     }
 
-    private addOrderingViolations(SourceCode sourceCode, String earlyPattern, String latePattern, String message) {
+    private List addOrderingViolations(SourceCode sourceCode, String earlyPattern, String latePattern, String message) {
         List violations = []
         boolean nonStaticFound = false
 

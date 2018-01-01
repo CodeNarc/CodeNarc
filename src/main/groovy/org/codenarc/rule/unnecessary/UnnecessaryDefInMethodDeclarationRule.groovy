@@ -74,7 +74,7 @@ class UnnecessaryDefInMethodDeclarationAstVisitor extends AbstractAstVisitor {
         super.visitConstructorOrMethod(node, isConstructor)
     }
 
-    private static removeDistractingParts(declaration) {
+    private static String removeDistractingParts(String declaration) {
         def resultDeclaration = declaration
         for (pattern in PATTERNS_OF_DISTRACTING_DECLARATION_PARTS) {
             if (resultDeclaration.contains(pattern)) {

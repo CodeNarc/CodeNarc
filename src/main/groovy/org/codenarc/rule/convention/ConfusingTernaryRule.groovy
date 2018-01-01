@@ -51,11 +51,11 @@ class ConfusingTernaryAstVisitor extends AbstractAstVisitor {
         super.visitTernaryExpression(expression)
     }
 
-    private addViolationForNotExpression(TernaryExpression expression, NotExpression exp) {
+    private void addViolationForNotExpression(TernaryExpression expression, NotExpression exp) {
         addViolation(expression, "(!$exp.text) is a confusing negation in a ternary expression. Rewrite as ($exp.expression.text) and invert the conditions.")
     }
 
-    private addViolationForBinaryExpression(BinaryExpression exp, TernaryExpression expression) {
+    private void addViolationForBinaryExpression(BinaryExpression exp, TernaryExpression expression) {
         if (exp.operation.text == '!=') {
             if (AstUtil.isNull(exp.leftExpression) || AstUtil.isNull(exp.rightExpression))  {
                 return

@@ -113,18 +113,18 @@ class ImportUtil {
         }
     }
 
-    static List getImportsSortedByLineNumber(sourceCode) {
+    static List getImportsSortedByLineNumber(SourceCode sourceCode) {
         def staticImports = sourceCode.ast.staticImports.values() + sourceCode.ast.staticStarImports.values()
         def allImports = sourceCode.ast.imports + sourceCode.ast.starImports + staticImports
         return sortImportsByLineNumber(allImports, sourceCode)
     }
 
-    static List getNonStaticImportsSortedByLineNumber(sourceCode) {
+    static List getNonStaticImportsSortedByLineNumber(SourceCode sourceCode) {
         def allImports = sourceCode.ast.imports + sourceCode.ast.starImports
         return sortImportsByLineNumber(allImports, sourceCode)
     }
 
-    private static List sortImportsByLineNumber(List imports, sourceCode) {
+    private static List sortImportsByLineNumber(List imports, SourceCode sourceCode) {
         imports.sort { importNode ->
             def importInfo = ImportUtil.sourceLineAndNumberForImport(sourceCode, importNode)
             importInfo.lineNumber

@@ -37,7 +37,7 @@ class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisito
 
     @SuppressWarnings('ExplicitCallToGetAtMethod')
     @Override
-    protected isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
+    protected boolean isConstructorCallAViolation(ConstructorCallExpression constructorCall) {
         def firstArgExpression = constructorCall.arguments?.expressions?.getAt(0)
         constructorCall.text =~ NEW_BIG_DECIMAL &&
             (firstArgExpression instanceof ConstantExpression) &&

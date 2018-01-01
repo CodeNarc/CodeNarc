@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.logging
 
+import org.codehaus.groovy.ast.expr.Expression
 import org.codenarc.util.AstUtil
 
 /**
@@ -22,7 +23,7 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
  */
 class LogUtil {
-    static boolean isMatchingLoggerDefinition(expression) {
+    static boolean isMatchingLoggerDefinition(Expression expression) {
         return AstUtil.isMethodCall(expression, 'Logger', 'getLogger', 1) ||
             AstUtil.isMethodCall(expression, 'LogFactory', 'getLog', 1) ||
             AstUtil.isMethodCall(expression, 'LoggerFactory', 'getLogger', 1)

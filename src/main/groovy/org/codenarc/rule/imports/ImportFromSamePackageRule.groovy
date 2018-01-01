@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.imports
 
+import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.rule.AbstractRule
 import org.codenarc.source.SourceCode
 import org.codenarc.util.ImportUtil
@@ -43,7 +44,7 @@ class ImportFromSamePackageRule extends AbstractRule {
         }
     }
 
-    private boolean hasAlias(importNode) {
+    private boolean hasAlias(ImportNode importNode) {
         importNode.className && importNode.alias != getClassNameNoPackage(importNode.className)
     }
 

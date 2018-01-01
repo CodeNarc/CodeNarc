@@ -199,7 +199,7 @@ abstract class GenericAbstractRuleTestCase<T extends Rule> extends AbstractTestC
      * @param sourceLineText2 - the text expected within the sourceLine of the second violation
      * @param msg2 - the text expected within the message of the second violation; May be a String or List of Strings; Defaults to null;
      */
-    @SuppressWarnings('ParameterCount')
+    @SuppressWarnings(['ParameterCount', 'MethodParameterTypeRequired'])
     protected void assertTwoViolations(String source,
             Integer lineNumber1, String sourceLineText1, msg1,
             Integer lineNumber2, String sourceLineText2, msg2) {
@@ -217,6 +217,7 @@ abstract class GenericAbstractRuleTestCase<T extends Rule> extends AbstractTestC
      * @param sourceLineText - the text expected within the sourceLine of the resulting violation; defaults to null
      * @param messageText - the text expected within the message of the resulting violation; May be a String or List of Strings; Defaults to null;
      */
+    @SuppressWarnings('MethodParameterTypeRequired')
     protected void assertSingleViolation(String source, Integer lineNumber=null, String sourceLineText=null, messageText=null) {
         def violations = applyRuleTo(source)
         assert violations.size() == 1, "Expected 1 violation\nFound ${violations.size()}: \n${violations.join('\n')}\n  for sourceLineText: [$sourceLineText]"
@@ -253,6 +254,7 @@ abstract class GenericAbstractRuleTestCase<T extends Rule> extends AbstractTestC
      * @param sourceLineText - the text expected within the sourceLine of the resulting violation; may be null
      * @param messageText - the text expected within the message of the resulting violation; May be a String or List of Strings; Defaults to null;
      */
+    @SuppressWarnings('MethodParameterTypeRequired')
     protected void assertViolation(
                             Violation violation,
                             Integer lineNumber,

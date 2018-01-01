@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.IfStatement
@@ -78,7 +79,7 @@ class CouldBeSwitchStatementAstVisitor extends AbstractAstVisitor {
         operation.type in [Types.COMPARE_EQUAL, Types.KEYWORD_INSTANCEOF]
     }
 
-    private Boolean isSupportedLeftExpressionType(def expression) {
+    private Boolean isSupportedLeftExpressionType(Expression expression) {
         switch(expression) {
             case PropertyExpression:
             case VariableExpression:
@@ -89,7 +90,7 @@ class CouldBeSwitchStatementAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private Boolean isSameLeftExpressionAsPreviousIfStatement(def current, def prev) {
+    private Boolean isSameLeftExpressionAsPreviousIfStatement(Expression current, Expression prev) {
         if (!prev || current.class != prev.class) {
             return false
         }

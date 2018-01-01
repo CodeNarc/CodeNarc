@@ -15,6 +15,7 @@
  */
  package org.codenarc.rule
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
@@ -139,14 +140,14 @@ class ClassReferenceAstVisitor extends AbstractAstVisitor {
     // Helper Methods
     //--------------------------------------------------------------------------
 
-    private void checkType(String type, node) {
+    private void checkType(String type, ASTNode node) {
         if (classNamePattern.matches(type)) {
             def violationMessage = formatViolationMessage(type)
             addViolation(node, violationMessage)
         }
     }
 
-    private void checkNodeType(node) {
+    private void checkNodeType(ASTNode node) {
         if (classNamePattern.matches(node.type.name)) {
             def violationMessage = formatViolationMessage(node.type.name)
             addViolation(node, violationMessage)

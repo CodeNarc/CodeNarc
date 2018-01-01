@@ -149,7 +149,7 @@ class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
         ''')
     }
 
-    private violation(String fieldName) {
+    private String violation(String fieldName) {
         inlineViolation("'$fieldName' is a reserved SQL keyword and - as such - a problematic domain class' field name.")
     }
 

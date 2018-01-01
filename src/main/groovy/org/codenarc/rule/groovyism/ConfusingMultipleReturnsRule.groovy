@@ -77,7 +77,7 @@ class ConfusingMultipleReturnsAstVisitor extends AbstractAstVisitor {
         super.visitClassComplete(node)
     }
 
-    private addViolationsForMultipleFieldDeclarations(Collection<FieldNode> nodes) {
+    private void addViolationsForMultipleFieldDeclarations(Collection<FieldNode> nodes) {
         // all the declarations are on the same line... does the last one have an initial expression and the others do not?
         if (nodes[-1].initialExpression != null) {
             nodes.remove(nodes[-1]) // remove last node
@@ -89,7 +89,7 @@ class ConfusingMultipleReturnsAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private addViolationForMultipleDeclarations(Collection<DeclarationExpression> groupedNodes) {
+    private void addViolationForMultipleDeclarations(Collection<DeclarationExpression> groupedNodes) {
         // all the declarations are on the same line... does the last one have an initial expression and the others do not?
         def lastExpression = groupedNodes[-1]
         if (!(lastExpression.rightExpression instanceof EmptyExpression)) {

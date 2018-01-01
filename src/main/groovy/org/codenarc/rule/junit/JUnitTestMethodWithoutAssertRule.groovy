@@ -107,6 +107,7 @@ class AssertionTrap extends AbstractAstVisitor {
         }
     }
 
+    @SuppressWarnings('MethodParameterTypeRequired')
     private boolean methodNamesCountsAsAssertion(methodName) {
         if (methodName instanceof String) {
             return assertMethodPatterns.any { pattern ->

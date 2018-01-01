@@ -16,6 +16,7 @@
 package org.codenarc
 
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
+import org.codenarc.report.AbstractReportWriter
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.report.XmlReportWriter
@@ -308,7 +309,7 @@ class CodeNarcTest extends AbstractTestCase {
         codeNarc.parseArgs(argsAsArray)
     }
 
-    private void assertReport(report, Class reportClass, String toFile, String title) {
+    private void assertReport(AbstractReportWriter report, Class reportClass, String toFile, String title) {
         assert report.class == reportClass
         assert report.outputFile == toFile
         assert report.title == title

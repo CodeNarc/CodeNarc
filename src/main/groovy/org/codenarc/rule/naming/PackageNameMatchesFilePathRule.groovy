@@ -71,7 +71,7 @@ class PackageNameMatchesFilePathRule extends AbstractRule {
         return (str.endsWith('.')) ? str[0..-2] : str
     }
 
-    private mismatchMessage(String subfolders) {
+    private String mismatchMessage(String subfolders) {
         def dotSeparatedPath = groupId + subfolders
         def subpath = dotSeparatedPath.replace('.', File.separator)
         "The package source file's path ($subpath) should match the package declaration"

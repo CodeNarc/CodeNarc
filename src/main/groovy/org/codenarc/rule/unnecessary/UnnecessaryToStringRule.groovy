@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -70,7 +71,7 @@ class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
         super.visitDeclarationExpression(expression)
     }
 
-    private boolean isStringType(node) {
+    private boolean isStringType(ASTNode node) {
         node.type.name in ['String', 'java.lang.String']
     }
 }

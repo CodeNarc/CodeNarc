@@ -59,7 +59,7 @@ class SynchronizedReadObjectMethodAstVisitor extends AbstractMethodVisitor {
         }
     }
 
-    private static isSerializable(ClassNode node) {
+    private static boolean isSerializable(ClassNode node) {
         boolean isSerializable = false
         node.interfaces?.each {
             if (AstUtil.classNodeImplementsType(it, Serializable)) {

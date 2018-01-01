@@ -44,7 +44,7 @@ class RemoveAllOnSelfAstVisitor extends AbstractMethodCallExpressionVisitor {
         }
     }
 
-    private static boolean isMethodNamed(MethodCallExpression call, target) {
+    private static boolean isMethodNamed(MethodCallExpression call, String target) {
         call?.method?.text == target
     }
 

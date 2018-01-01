@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.design
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -58,7 +59,7 @@ class EmptyMethodInAbstractClassAstVisitor extends AbstractMethodVisitor {
         }
     }
 
-    private static boolean isAbstract(node) {
+    private static boolean isAbstract(ASTNode node) {
         return Modifier.isAbstract(node.modifiers)
     }
 

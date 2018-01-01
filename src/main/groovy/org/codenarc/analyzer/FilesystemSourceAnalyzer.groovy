@@ -105,7 +105,7 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
         dirResults
     }
 
-    private processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
+    private void processFile(String filePath, DirectoryResults dirResults, RuleSet ruleSet) {
         def file = new File((String) baseDirectory, filePath)
         def sourceFile = new SourceFile(file)
         if (matches(sourceFile)) {

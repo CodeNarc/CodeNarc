@@ -38,7 +38,7 @@ class BitwiseOperatorInConditionalRule extends AbstractAstVisitorRule {
 
 class BitwiseOperatorInConditionalAstVisitor extends AbstractAstVisitor {
 
-    private addViolationBitwiseConditional(Expression expression) {
+    private void addViolationBitwiseConditional(Expression expression) {
         if (!isFirstVisit(expression)) {
             return
         }
@@ -59,7 +59,7 @@ class BitwiseOperatorInConditionalAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private collectChildren(BinaryExpression node) {
+    private List collectChildren(BinaryExpression node) {
         def results = []
         if (node.leftExpression instanceof BinaryExpression) {
             results.add(node.leftExpression)

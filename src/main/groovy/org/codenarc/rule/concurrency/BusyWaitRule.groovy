@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.ForStatement
+import org.codehaus.groovy.ast.stmt.LoopingStatement
 import org.codehaus.groovy.ast.stmt.WhileStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -51,7 +52,7 @@ class BusyWaitAstVisitor extends AbstractAstVisitor {
         super.visitForLoop(node)
     }
 
-    private addViolationIfBusyWait(node) {
+    private void addViolationIfBusyWait(LoopingStatement node) {
         if (node.loopBlock instanceof BlockStatement
                 && node.loopBlock.statements?.size() == 1
                 && node.loopBlock.statements[0] instanceof ExpressionStatement) {

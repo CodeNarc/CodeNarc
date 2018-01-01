@@ -26,7 +26,7 @@ abstract class AbstractConstructorCallAstVisitor extends AbstractAstVisitor {
     /**
      * Subclasses must implement to return true if the visited constructor call causes a rule violation
      */
-    protected abstract isConstructorCallAViolation(ConstructorCallExpression constructorCall)
+    protected abstract boolean isConstructorCallAViolation(ConstructorCallExpression constructorCall)
 
     protected abstract String getViolationMessage(ConstructorCallExpression call)
 

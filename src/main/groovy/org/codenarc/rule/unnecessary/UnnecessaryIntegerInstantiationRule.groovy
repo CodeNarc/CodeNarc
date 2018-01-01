@@ -35,6 +35,7 @@ class UnnecessaryIntegerInstantiationAstVisitor extends UnnecessaryInstantiation
     }
 
     @Override
+    @SuppressWarnings(['MethodParameterTypeRequired'])
     protected boolean isTypeSuffixNecessary(argument) {
         return false
     }

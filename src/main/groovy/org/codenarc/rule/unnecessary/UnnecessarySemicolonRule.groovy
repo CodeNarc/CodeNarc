@@ -97,7 +97,7 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
         super.visitConstantExpression(node)
     }
 
-    private removeViolationsInRange(start, end) {
+    private void removeViolationsInRange(int start, int end) {
         rule.temporaryViolations.get().removeAll { Violation v ->
             v.lineNumber >= start && v.lineNumber <= end
         }

@@ -90,7 +90,7 @@ class BooleanReturnTracker extends AbstractAstVisitor {
         super.visitReturnStatement(statement)
     }
 
-    private checkReturnValues(Expression expression) {
+    private void checkReturnValues(Expression expression) {
         def stack = [expression] as Stack
         while (stack) {
             def expr = stack.pop()

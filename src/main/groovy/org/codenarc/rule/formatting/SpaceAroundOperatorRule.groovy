@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.CastExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codehaus.groovy.ast.expr.TernaryExpression
@@ -94,7 +95,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
+    private void checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
         if (expression.lineNumber == expression.lastLineNumber) {
             def hasWhitespaceAroundQuestionMark = (line =~ /\s\?\s/)
             if (!hasWhitespaceAroundQuestionMark) {
@@ -168,7 +169,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         super.visitCastExpression(expression)
     }
 
-    private int rightMostColumn(expression) {
+    private int rightMostColumn(Expression expression) {
         switch(expression) {
             case BinaryExpression:
                 return rightMostColumn(expression.rightExpression)
@@ -183,7 +184,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private int leftMostColumn(expression) {
+    private int leftMostColumn(Expression expression) {
         return expression instanceof BinaryExpression ? leftMostColumn(expression.leftExpression) : expression.columnNumber
     }
 }

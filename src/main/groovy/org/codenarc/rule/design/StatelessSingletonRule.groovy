@@ -42,35 +42,35 @@ class StatelessSingletonAstVisitor extends AbstractAstVisitor {
         super.visitClassComplete node
     }
 
-    private isSingleton(classNode) {
+    private boolean isSingleton(ClassNode classNode) {
         hasSingletonAnnotation(classNode) ||
             hasOneStaticFieldOfItself(classNode) ||
             hasOneStaticFieldNamedInstance(classNode)
     }
 
-    private static doesExtendClass(classNode) {
+    private static boolean doesExtendClass(ClassNode classNode) {
         classNode.superClass.name != Object.name
     }
 
-    private hasState(classNode) {
+    private boolean hasState(ClassNode classNode) {
         classNode.fields.any {
             it.type.name != classNode.name && !(it.name ==~ rule.instanceRegex)
         }
     }
 
-    private static hasOneStaticFieldOfItself(classNode) {
+    private static boolean hasOneStaticFieldOfItself(ClassNode classNode) {
         classNode.fields.findAll {
             it.static && it.type.name == classNode.name
         }.size() == 1
     }
 
-    private hasOneStaticFieldNamedInstance(classNode) {
+    private boolean hasOneStaticFieldNamedInstance(ClassNode classNode) {
         classNode.fields.findAll {
             it.static && it.type.name == Object.name && it.name ==~ rule.instanceRegex
         }.size() == 1
     }
 
-    private static hasSingletonAnnotation(classNode) {
+    private static boolean hasSingletonAnnotation(ClassNode classNode) {
         classNode?.annotations?.any { it.classNode.name == Singleton.name }
     }
 }

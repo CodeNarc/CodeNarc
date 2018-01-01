@@ -118,7 +118,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         super.visitMapEntryExpression expression
     }
 
-    private addViolationIfDuplicate(node, boolean isStatic = false) {
+    private void addViolationIfDuplicate(Expression node, boolean isStatic = false) {
         if (!isFirstVisit(node)) { return }
         if (!(node instanceof ConstantExpression)) { return }
         if (node.value == null) { return }

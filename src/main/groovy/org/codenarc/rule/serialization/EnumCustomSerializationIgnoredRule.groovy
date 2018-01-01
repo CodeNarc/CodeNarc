@@ -55,11 +55,11 @@ class EnumCustomSerializationIgnoredAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private isWriteObjectMethod(MethodNode node) {
+    private boolean isWriteObjectMethod(MethodNode node) {
         node.name == 'writeObject' && node?.parameters.size() == 1 && node.parameters[0].type.name == 'ObjectOutputStream'
     }
 
-    private isWriteReplaceMethod(MethodNode node) {
+    private boolean isWriteReplaceMethod(MethodNode node) {
         node.name == 'writeReplace' && !node.parameters
     }
 

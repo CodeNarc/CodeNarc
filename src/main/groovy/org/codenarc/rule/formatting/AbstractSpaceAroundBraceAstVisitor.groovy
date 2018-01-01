@@ -15,6 +15,7 @@
  */
  package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codenarc.rule.AbstractAstVisitor
@@ -39,11 +40,11 @@ abstract class AbstractSpaceAroundBraceAstVisitor extends AbstractAstVisitor {
         return gStringExpressionsStack.empty()
     }
 
-    protected String sourceLineOrEmpty(node) {
+    protected String sourceLineOrEmpty(ASTNode node) {
         (node.lineNumber == -1 || (node instanceof ClassNode && node.script)) ? '' : sourceLine(node)
     }
 
-    protected String lastSourceLineOrEmpty(node) {
+    protected String lastSourceLineOrEmpty(ASTNode node) {
         (node.lineNumber == -1 || (node instanceof ClassNode && node.script)) ? '' : lastSourceLine(node)
     }
 

@@ -62,7 +62,7 @@ class UnusedImportRule extends AbstractRule {
         }
     }
 
-    private findReference(SourceCode sourceCode, String alias, String className = null) {
+    private String findReference(SourceCode sourceCode, String alias, String className = null) {
         def aliasSameAsNonQualifiedClassName = className && className.endsWith(alias)
         sourceCode.lines.find { line ->
             String aliasPattern = Pattern.quote(alias)
@@ -74,12 +74,12 @@ class UnusedImportRule extends AbstractRule {
         }
     }
 
-    private isImportStatementForAlias(String line, String pattern) {
+    private boolean isImportStatementForAlias(String line, String pattern) {
         final IMPORT_PATTERN = /import\s+.*/ + pattern
         line =~ IMPORT_PATTERN
     }
 
-    private countUsage(String line, String pattern) {
+    private int countUsage(String line, String pattern) {
         final INVALID = '[^a-zA-Z0-9_\\$]'
         def regexp = /($INVALID|^|\$)${pattern}($INVALID|$)/
         return (line =~ regexp).count

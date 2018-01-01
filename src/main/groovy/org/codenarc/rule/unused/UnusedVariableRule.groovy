@@ -116,12 +116,12 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
         afterBlock()
     }
 
-    private beforeBlock() {
+    private void beforeBlock() {
         variablesInCurrentBlockScope = [:]
         variablesByBlockScope.push(variablesInCurrentBlockScope)
     }
 
-    private afterBlock() {
+    private void afterBlock() {
         variablesInCurrentBlockScope.each { varExpression, isUsed ->
             if (!isIgnoredVariable(varExpression) && !isUsed && !anonymousReferences.contains(varExpression.name)) {
                 addViolation(varExpression, "The variable [${varExpression.name}] in class $currentClassName is not used")

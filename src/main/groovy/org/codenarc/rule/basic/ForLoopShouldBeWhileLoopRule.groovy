@@ -16,6 +16,7 @@
 package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.EmptyExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
@@ -44,7 +45,7 @@ class ForLoopShouldBeWhileLoopAstVisitor extends AbstractAstVisitor {
         super.visitForLoop node
     }
 
-    private hasOnlyConditionExpr(ForStatement forStatement) {
+    private boolean hasOnlyConditionExpr(ForStatement forStatement) {
         if (AstUtil.respondsTo(forStatement.collectionExpression, 'expressions')) {
             def (init, condition, update) = forStatement.collectionExpression.expressions
             return isEmptyExpression(init) && isEmptyExpression(update) && !isEmptyExpression(condition)
@@ -52,7 +53,7 @@ class ForLoopShouldBeWhileLoopAstVisitor extends AbstractAstVisitor {
         false
     }
 
-    private static isEmptyExpression(expr) {
+    private static boolean isEmptyExpression(Expression expr) {
         expr instanceof EmptyExpression
     }
 

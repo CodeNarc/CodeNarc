@@ -149,7 +149,7 @@ class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private addViolationsForInstanceFields() {
+    private void addViolationsForInstanceFields() {
         instanceFields.each { FieldNode field ->
             if (hibernateWouldCreateColumnFor(field) && field.name.toUpperCase() in reservedSqlKeywords) {
                 addViolation(field, violationMessage(field.name, 'domain class\' field name'))

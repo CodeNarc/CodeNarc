@@ -16,6 +16,7 @@
 package org.codenarc.rule.unused
 
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.rule.AbstractSharedAstVisitorRule
 import org.codenarc.rule.AstVisitor
 import org.codenarc.rule.FieldReferenceAstVisitor
@@ -56,7 +57,7 @@ class UnusedPrivateFieldRule extends AbstractSharedAstVisitorRule {
     }
 
     @SuppressWarnings('NestedBlockDepth')
-    private collectAllPrivateFields(ast) {
+    private List collectAllPrivateFields(ModuleNode ast) {
         def allPrivateFields = []
         ast.classes.each { classNode ->
             if (shouldApplyThisRuleTo(classNode)) {

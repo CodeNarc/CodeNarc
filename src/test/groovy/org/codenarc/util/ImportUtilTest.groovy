@@ -15,6 +15,8 @@
  */
  package org.codenarc.util
 
+import org.codehaus.groovy.ast.ModuleNode
+import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
@@ -93,7 +95,7 @@ class ImportUtilTest extends AbstractTestCase {
             [sourceLine:'import com.example.Fault', lineNumber:4]
     }
 
-    private void assertImport(sourceCode, ast, Map expectedImportInfo) {
+    private void assertImport(SourceCode sourceCode, ModuleNode ast, Map expectedImportInfo) {
         assert ast.imports.find { imp ->
             def importInfo = ImportUtil.sourceLineAndNumberForImport(sourceCode, imp)
             if (importInfo.lineNumber == expectedImportInfo.lineNumber) {
@@ -103,7 +105,7 @@ class ImportUtilTest extends AbstractTestCase {
         }, expectedImportInfo.toString()
     }
 
-    private void assertStaticImport(sourceCode, ast, Map importInfo) {
+    private void assertStaticImport(SourceCode sourceCode, ModuleNode ast, Map importInfo) {
         def allStaticImports = ast.staticImports + ast.staticStarImports
         assert allStaticImports.find { name, imp ->
             ImportUtil.sourceLineAndNumberForImport(sourceCode, imp) == importInfo

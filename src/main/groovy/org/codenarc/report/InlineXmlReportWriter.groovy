@@ -16,6 +16,7 @@
 package org.codenarc.report
 
 import org.codenarc.AnalysisContext
+import org.codenarc.rule.Rule
 import org.codenarc.rule.Violation
 
 /**
@@ -30,7 +31,7 @@ class InlineXmlReportWriter extends XmlReportWriter {
     // Internal Helper Methods
     //--------------------------------------------------------------------------
     @Override
-    protected buildViolationElement(Violation violation) {
+    protected Closure buildViolationElement(Violation violation) {
         def rule = violation.rule
         return {
             Violation(ruleName:rule.name, priority:rule.priority, lineNumber:violation.lineNumber) {
@@ -42,11 +43,11 @@ class InlineXmlReportWriter extends XmlReportWriter {
     }
 
     @Override
-    protected buildRulesElement(AnalysisContext analysisContext) {
+    protected Closure buildRulesElement(AnalysisContext analysisContext) {
         // No-op as we have inline rule descriptions
     }
 
-    private buildDescriptionElement(rule) {
+    private Closure buildDescriptionElement(Rule rule) {
         def description = this.getDescriptionForRule(rule)
         return { Description(XmlReportUtil.cdata(description)) }
     }

@@ -62,7 +62,7 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
     //--------------------------------------------------------------------------
 
     @Override
-    protected buildScript() {
+    protected Closure buildScript() {
         return {
             def jsInputStream = ClassPathResource.getInputStream(JS_FILE)
             assert jsInputStream, "JS File [$JS_FILE] not found"
@@ -74,7 +74,7 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
     }
 
     @Override
-    protected buildBodySection(AnalysisContext analysisContext, results) {
+    protected Closure buildBodySection(AnalysisContext analysisContext, Results results) {
         return {
             body {
                 out << buildLogo()
@@ -90,7 +90,7 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildSummary(results) {
+    private Closure buildSummary(Results results) {
         return {
             div(class: 'summary') {
                 h2(getResourceBundleString('htmlReport.summary.title'))
@@ -130,7 +130,7 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
         return fileResults
     }
 
-    private buildAllViolationsSection(Results results) {
+    private Closure buildAllViolationsSection(Results results) {
         return {
             h2(getResourceBundleString('htmlReport.violations.title'))
             out << buildButtons()
@@ -190,7 +190,7 @@ class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildButtons() {
+    private Closure buildButtons() {
         return {
             div(class:'buttons') {
                 button(type:'button', onclick:'sortData(sortByRuleName)', getResourceBundleString('htmlReport.button.sortByRuleName'))

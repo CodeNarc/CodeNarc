@@ -16,6 +16,7 @@
 package org.codenarc.report
 
 import org.codenarc.AnalysisContext
+import org.codenarc.results.Results
 import org.codenarc.rule.Violation
 
 /**
@@ -58,7 +59,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
     //--------------------------------------------------------------------------
 
     @Override
-    protected buildBodySection(AnalysisContext analysisContext, results) {
+    protected Closure buildBodySection(AnalysisContext analysisContext, Results results) {
         return {
             body {
                 // TODO: copy the image or inline it in the css
@@ -75,7 +76,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildSummaryByPackage(results) {
+    private Closure buildSummaryByPackage(Results results) {
         return {
             div(class: 'summary') {
                 h2(getResourceBundleString('htmlReport.summary.title'))
@@ -97,7 +98,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildAllSummaryByPackageRowsRecursively(results) {
+    private Closure buildAllSummaryByPackageRowsRecursively(Results results) {
         return {
             results.children.each { child ->
                 if (isDirectoryContainingFiles(child)) {
@@ -110,7 +111,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildSummaryByPackageRow(results, boolean allPackages) {
+    private Closure buildSummaryByPackageRow(Results results, boolean allPackages) {
         def recursive = allPackages
         return {
             tr {
@@ -137,7 +138,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildAllPackageSections(results) {
+    private Closure buildAllPackageSections(Results results) {
         return {
             results.children.each { child ->
                 out << buildPackageSection(child)
@@ -145,7 +146,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildPackageSection(results) {
+    private Closure buildPackageSection(Results results) {
         return {
             def pathName = results.path ?: ROOT_PACKAGE_NAME
             if (isDirectoryContainingFilesWithViolations(results)) {
@@ -171,7 +172,7 @@ class HtmlReportWriter extends AbstractHtmlReportWriter {
         }
     }
 
-    private buildFileSection(results) {
+    private Closure buildFileSection(Results results) {
         assert results.isFile()
         return {
             table(border:'1') {

@@ -42,6 +42,7 @@ abstract class AbstractTestCase {
      * Write out the specified log message, prefixing with the current class name.
      * @param message - the message to log; toString() is applied first
      */
+    @SuppressWarnings('MethodParameterTypeRequired')
     protected void log(message) {
         LOG.info message.toString()
     }

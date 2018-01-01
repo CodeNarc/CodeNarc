@@ -44,7 +44,7 @@ class UnnecessaryGStringAstVisitor extends AbstractAstVisitor {
         super.visitConstantExpression(expression)
     }
 
-    private addViolationIfDoubleQuoted(ConstantExpression expression) {
+    private void addViolationIfDoubleQuoted(ConstantExpression expression) {
         def line = getSourceCode().getLines()[expression.lineNumber - 1]
 
         def col = line[expression.columnNumber - 1]
@@ -60,7 +60,7 @@ class UnnecessaryGStringAstVisitor extends AbstractAstVisitor {
     }
 
     @SuppressWarnings('CatchThrowable')
-    private static suppressException(Class exceptionType, Closure c) {
+    private static void suppressException(Class exceptionType, Closure c) {
         try {
             c()
         } catch (Throwable t) {

@@ -17,6 +17,7 @@ package org.codenarc.rule.basic
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ElvisOperatorExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.TernaryExpression
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.WhileStatement
@@ -60,7 +61,7 @@ class AssignmentInConditionalAstVisitor extends AbstractAstVisitor {
         super.visitShortTernaryExpression(node)
     }
 
-    private addViolationIfAssignment(node) {
+    private void addViolationIfAssignment(Expression node) {
         if (isFirstVisit(node) && node instanceof BinaryExpression) {
             if (node.operation.text == '=') {
                 addViolation(node, 'Assignment used as conditional value, which always results in true. Use the == operator instead')

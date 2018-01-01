@@ -15,9 +15,11 @@
  */
 package org.codenarc.rule.convention
 
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.NotExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
@@ -42,7 +44,7 @@ class CouldBeElvisAstVisitor extends AbstractAstVisitor {
         super.visitIfElse(node)
     }
 
-    private addViolationCouldBeElvis(IfStatement node) {
+    private void addViolationCouldBeElvis(IfStatement node) {
         def conditionalCheck = node.booleanExpression?.expression
 
         if (conditionalCheck instanceof NotExpression) {
@@ -62,7 +64,7 @@ class CouldBeElvisAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private getSingleStatementExpressionOrNull(ifBlock) {
+    private Expression getSingleStatementExpressionOrNull(Statement ifBlock) {
         if (AstUtil.isOneLiner(ifBlock) && AstUtil.respondsTo(ifBlock.statements[0], 'expression') ) {
             return ifBlock.statements[0].expression
         }
