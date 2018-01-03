@@ -119,10 +119,31 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
     }
 
     @Test
+    void testApplyTo_TearDownMethodHasAfterAllAnnotation() {
+        final SOURCE = '''
+          class MyTest extends TestCase {
+            @AfterAll void tearDown() {  }
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_TearDownMethodHasAfterClassAnnotation() {
         final SOURCE = '''
           class MyTest extends TestCase {
             @AfterClass
+            void tearDown() {  }
+          }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_TearDownMethodHasAfterEachAnnotation() {
+        final SOURCE = '''
+          class MyTest extends TestCase {
+            @AfterEach
             void tearDown() {  }
           }
         '''

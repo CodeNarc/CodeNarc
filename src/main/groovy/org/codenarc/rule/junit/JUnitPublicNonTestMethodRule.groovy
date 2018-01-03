@@ -50,6 +50,13 @@ class JUnitPublicNonTestMethodRule extends AbstractAstVisitorRule {
     int priority = 2
     Class astVisitorClass = JUnitPublicNonTestMethodAstVisitor
     String applyToClassNames = DEFAULT_TEST_CLASS_NAMES
+    private String[] ignoreMethodsWithAnnotations = 'After,AfterAll,AfterClass,AfterEach,Before,BeforeAll,BeforeClass,BeforeEach,Disabled,Ignore,Override,Test'.split(',')
+
+    void setIgnoreMethodsWithAnnotations(String annotations) {
+        if (annotations) {
+            ignoreMethodsWithAnnotations = annotations.split(',')
+        }
+    }
 }
 
 class JUnitPublicNonTestMethodAstVisitor extends AbstractMethodVisitor {
@@ -60,12 +67,7 @@ class JUnitPublicNonTestMethodAstVisitor extends AbstractMethodVisitor {
             && !(Modifier.isStatic(methodNode.modifiers))
             && !JUnitUtil.isTestMethod(methodNode)
             && !AstUtil.isMethodNode(methodNode, 'setUp|tearDown', 0)
-            && !AstUtil.getAnnotation(methodNode, 'Override')
-            && !AstUtil.getAnnotation(methodNode, 'Test')
-            && !AstUtil.getAnnotation(methodNode, 'Before')
-            && !AstUtil.getAnnotation(methodNode, 'After')
-            && !AstUtil.getAnnotation(methodNode, 'BeforeClass')
-            && !AstUtil.getAnnotation(methodNode, 'AfterClass') ) {
+            && !AstUtil.hasAnyAnnotation(methodNode, rule.ignoreMethodsWithAnnotations)) {
             addViolation(methodNode, "The method $methodNode.name is public but not a test method")
         }
     }
