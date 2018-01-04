@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Your Name Here
   */
-class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
+class ConfusingClassNamedExceptionRuleTest extends GenericAbstractRuleTestCase<ConfusingClassNamedExceptionRule> {
 
     @Test
     void testRuleProperties() {
@@ -82,7 +81,7 @@ class ConfusingClassNamedExceptionRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ConfusingClassNamedExceptionRule createRule() {
         new ConfusingClassNamedExceptionRule()
     }
 }

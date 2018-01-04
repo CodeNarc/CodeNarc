@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class BooleanGetBooleanRuleTest extends AbstractRuleTestCase {
+class BooleanGetBooleanRuleTest extends GenericAbstractRuleTestCase<BooleanGetBooleanRule> {
 
     @Test
     void testRuleProperties() {
@@ -50,7 +49,7 @@ class BooleanGetBooleanRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BooleanGetBooleanRule createRule() {
         new BooleanGetBooleanRule()
     }
 }

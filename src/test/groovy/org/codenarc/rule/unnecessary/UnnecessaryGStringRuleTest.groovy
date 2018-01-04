@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
   */
-class UnnecessaryGStringRuleTest extends AbstractRuleTestCase {
+class UnnecessaryGStringRuleTest extends GenericAbstractRuleTestCase<UnnecessaryGStringRule> {
 
     @Test
     void testRuleProperties() {
@@ -124,7 +123,7 @@ I am a string
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryGStringRule createRule() {
         new UnnecessaryGStringRule()
     }
 }

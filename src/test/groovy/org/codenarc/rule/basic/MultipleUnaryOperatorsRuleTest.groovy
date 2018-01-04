@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for MultipleUnaryOperatorsRule
  *
  * @author Chris Mair
  */
-class MultipleUnaryOperatorsRuleTest extends AbstractRuleTestCase {
+class MultipleUnaryOperatorsRuleTest extends GenericAbstractRuleTestCase<MultipleUnaryOperatorsRule> {
 
     @Test
     void testRuleProperties() {
@@ -69,7 +68,7 @@ class MultipleUnaryOperatorsRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected MultipleUnaryOperatorsRule createRule() {
         new MultipleUnaryOperatorsRule()
     }
 }

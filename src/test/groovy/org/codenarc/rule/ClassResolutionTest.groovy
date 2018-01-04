@@ -21,7 +21,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ClassResolutionTest extends AbstractRuleTestCase {
+class ClassResolutionTest extends GenericAbstractRuleTestCase<Rule> {
 
     @Test
     void testGrabError() {

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
+class JUnitAssertAlwaysFailsRuleTest extends GenericAbstractRuleTestCase<JUnitAssertAlwaysFailsRule> {
 
     @Test
     void testRuleProperties() {
@@ -323,7 +322,7 @@ class JUnitAssertAlwaysFailsRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected JUnitAssertAlwaysFailsRule createRule() {
         new JUnitAssertAlwaysFailsRule()
     }
 }

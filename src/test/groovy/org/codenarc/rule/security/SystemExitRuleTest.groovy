@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class SystemExitRuleTest extends AbstractRuleTestCase {
+class SystemExitRuleTest extends GenericAbstractRuleTestCase<SystemExitRule> {
 
     @Test
     void testRuleProperties() {
@@ -93,7 +92,7 @@ class SystemExitRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SystemExitRule createRule() {
         new SystemExitRule()
     }
 }

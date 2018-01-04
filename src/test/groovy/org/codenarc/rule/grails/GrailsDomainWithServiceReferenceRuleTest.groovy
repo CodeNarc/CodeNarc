@@ -15,17 +15,16 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for GrailsDomainWithServiceReferenceRule
  *
  * @author Artur Gajowy
  */
-class GrailsDomainWithServiceReferenceRuleTest extends AbstractRuleTestCase {
+class GrailsDomainWithServiceReferenceRuleTest extends GenericAbstractRuleTestCase<GrailsDomainWithServiceReferenceRule> {
 
     @Test
     void testRuleProperties() {
@@ -90,7 +89,7 @@ class GrailsDomainWithServiceReferenceRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsDomainWithServiceReferenceRule createRule() {
         new GrailsDomainWithServiceReferenceRule()
     }
 }

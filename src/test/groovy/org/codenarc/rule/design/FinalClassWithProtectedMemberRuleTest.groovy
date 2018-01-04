@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
+class FinalClassWithProtectedMemberRuleTest extends GenericAbstractRuleTestCase<FinalClassWithProtectedMemberRule> {
 
     @Test
     void testRuleProperties() {
@@ -95,7 +94,7 @@ class FinalClassWithProtectedMemberRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected FinalClassWithProtectedMemberRule createRule() {
         new FinalClassWithProtectedMemberRule()
     }
 }

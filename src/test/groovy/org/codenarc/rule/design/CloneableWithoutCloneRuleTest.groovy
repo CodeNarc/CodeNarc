@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
+class CloneableWithoutCloneRuleTest extends GenericAbstractRuleTestCase<CloneableWithoutCloneRule> {
 
     @Test
     void testRuleProperties() {
@@ -98,7 +97,7 @@ class CloneableWithoutCloneRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected CloneableWithoutCloneRule createRule() {
         new CloneableWithoutCloneRule()
     }
 

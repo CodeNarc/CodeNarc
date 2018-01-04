@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.serialization
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
   */
-class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
+class SerialPersistentFieldsRuleTest extends GenericAbstractRuleTestCase<SerialPersistentFieldsRule> {
 
     @Test
     void testRuleProperties() {
@@ -116,7 +115,7 @@ class SerialPersistentFieldsRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SerialPersistentFieldsRule createRule() {
         new SerialPersistentFieldsRule()
     }
 }

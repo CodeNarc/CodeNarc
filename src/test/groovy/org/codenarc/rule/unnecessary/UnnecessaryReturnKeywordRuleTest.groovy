@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
+class UnnecessaryReturnKeywordRuleTest extends GenericAbstractRuleTestCase<UnnecessaryReturnKeywordRule> {
 
     @Test
     void testRuleProperties() {
@@ -79,7 +78,7 @@ class UnnecessaryReturnKeywordRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryReturnKeywordRule createRule() {
         new UnnecessaryReturnKeywordRule()
     }
 }

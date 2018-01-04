@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
+class JUnitTearDownCallsSuperRuleTest extends GenericAbstractRuleTestCase<JUnitTearDownCallsSuperRule> {
 
     @Test
     void testRuleProperties() {
@@ -183,7 +182,7 @@ class JUnitTearDownCallsSuperRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected JUnitTearDownCallsSuperRule createRule() {
         new JUnitTearDownCallsSuperRule()
     }
 }

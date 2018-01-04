@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Joe Sondow
  */
-class FileEndsWithoutNewlineRuleTest extends AbstractRuleTestCase {
+class FileEndsWithoutNewlineRuleTest extends GenericAbstractRuleTestCase<FileEndsWithoutNewlineRule> {
 
     def skipTestThatUnrelatedCodeHasNoViolations
     def skipTestThatInvalidCodeHasNoViolations
@@ -61,7 +60,7 @@ class FileEndsWithoutNewlineRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected FileEndsWithoutNewlineRule createRule() {
         new FileEndsWithoutNewlineRule()
     }
 }

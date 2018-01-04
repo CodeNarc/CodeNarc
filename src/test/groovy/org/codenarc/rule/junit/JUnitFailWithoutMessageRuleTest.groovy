@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
+class JUnitFailWithoutMessageRuleTest extends GenericAbstractRuleTestCase<JUnitFailWithoutMessageRule> {
 
     @Test
     void testRuleProperties() {
@@ -64,7 +63,7 @@ class JUnitFailWithoutMessageRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected JUnitFailWithoutMessageRule createRule() {
         new JUnitFailWithoutMessageRule()
     }
 }

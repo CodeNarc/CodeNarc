@@ -16,7 +16,6 @@
 package org.codenarc.rule.generic
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 import org.junit.Test
 
 /**
@@ -27,7 +26,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferenceRuleTestCase {
+class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferenceRuleTestCase<IllegalClassReferenceRule> {
 
     final String className = 'com.example.MyExampleClass'
 
@@ -41,7 +40,7 @@ class IllegalClassReferenceRule_SingleClassNameTest extends AbstractClassReferen
     }
 
     @Override
-    protected Rule createRule() {
+    protected IllegalClassReferenceRule createRule() {
         new IllegalClassReferenceRule(classNames:'com.example.MyExampleClass')
     }
 }

@@ -16,7 +16,6 @@
 package org.codenarc.rule.convention
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class HashtableIsObsoleteRule_HashtableTest extends AbstractClassReferenceRuleTestCase {
+class HashtableIsObsoleteRule_HashtableTest extends AbstractClassReferenceRuleTestCase<HashtableIsObsoleteRule> {
 
     final String className = 'Hashtable'
     final String violationMessage = "The $className class is obsolete"
@@ -36,7 +35,7 @@ class HashtableIsObsoleteRule_HashtableTest extends AbstractClassReferenceRuleTe
     }
 
     @Override
-    protected Rule createRule() {
+    protected HashtableIsObsoleteRule createRule() {
         new HashtableIsObsoleteRule()
     }
 }

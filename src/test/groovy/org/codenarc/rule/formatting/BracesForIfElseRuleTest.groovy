@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -26,7 +25,7 @@ import org.junit.Test
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
  * @author Chris Mair
   */
-class BracesForIfElseRuleTest extends AbstractRuleTestCase {
+class BracesForIfElseRuleTest extends GenericAbstractRuleTestCase<BracesForIfElseRule> {
 
     @Test
     void testRuleProperties() {
@@ -141,7 +140,7 @@ class BracesForIfElseRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BracesForIfElseRule createRule() {
         BracesForIfElseRule rule = new BracesForIfElseRule()
         rule.validateElse = true
 

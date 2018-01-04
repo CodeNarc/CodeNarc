@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -25,7 +24,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
+class GrailsServletContextReferenceRuleTest extends GenericAbstractRuleTestCase<GrailsServletContextReferenceRule> {
 
     private static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
     private static final TAGLIB_PATH = 'project/MyProject/grails-app/taglib/MyTagLib.groovy'
@@ -118,7 +117,7 @@ class GrailsServletContextReferenceRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsServletContextReferenceRule createRule() {
         new GrailsServletContextReferenceRule()
     }
 }

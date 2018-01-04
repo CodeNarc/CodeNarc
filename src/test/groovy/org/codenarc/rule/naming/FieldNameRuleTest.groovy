@@ -15,18 +15,17 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
-import org.junit.Test
-
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
+import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.junit.Test
 
 /**
  * Tests for FieldNameRule
  *
  * @author Chris Mair
   */
-class FieldNameRuleTest extends AbstractRuleTestCase {
+class FieldNameRuleTest extends GenericAbstractRuleTestCase<FieldNameRule> {
 
     @Test
     void testRuleProperties() {
@@ -335,7 +334,7 @@ class FieldNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected FieldNameRule createRule() {
         new FieldNameRule()
     }
 

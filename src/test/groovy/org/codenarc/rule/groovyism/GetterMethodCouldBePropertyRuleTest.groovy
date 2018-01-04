@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
  */
-class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
+class GetterMethodCouldBePropertyRuleTest extends GenericAbstractRuleTestCase<GetterMethodCouldBePropertyRule> {
 
     @Test
     void testRuleProperties() {
@@ -279,7 +278,7 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GetterMethodCouldBePropertyRule createRule() {
         new GetterMethodCouldBePropertyRule()
     }
 }

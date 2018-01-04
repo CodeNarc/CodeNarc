@@ -16,7 +16,6 @@
 package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class JdbcConnectionReferenceRuleTest extends AbstractClassReferenceRuleTestCase {
+class JdbcConnectionReferenceRuleTest extends AbstractClassReferenceRuleTestCase<JdbcConnectionReferenceRule> {
 
     final String className = 'java.sql.Connection'
 
@@ -35,7 +34,7 @@ class JdbcConnectionReferenceRuleTest extends AbstractClassReferenceRuleTestCase
     }
 
     @Override
-    protected Rule createRule() {
+    protected JdbcConnectionReferenceRule createRule() {
         new JdbcConnectionReferenceRule()
     }
 }

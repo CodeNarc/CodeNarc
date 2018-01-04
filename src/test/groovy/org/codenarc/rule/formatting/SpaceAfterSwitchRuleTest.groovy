@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAfterSwitchRuleTest extends AbstractRuleTestCase {
+class SpaceAfterSwitchRuleTest extends GenericAbstractRuleTestCase<SpaceAfterSwitchRule> {
 
     private static final MESSAGE = 'The switch keyword within class None is not followed by a single space'
 
@@ -65,7 +64,7 @@ class SpaceAfterSwitchRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SpaceAfterSwitchRule createRule() {
         new SpaceAfterSwitchRule()
     }
 }

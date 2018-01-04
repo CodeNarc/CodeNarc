@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author <a href="mailto:geli.crick@osoco.es">Geli Crick</a>
   */
-class LineLengthRuleTest extends AbstractRuleTestCase {
+class LineLengthRuleTest extends GenericAbstractRuleTestCase<LineLengthRule> {
 
     @Test
     void testRuleProperties() {
@@ -146,7 +145,7 @@ class LineLengthRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected LineLengthRule createRule() {
         new LineLengthRule()
     }
 }

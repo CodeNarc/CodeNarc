@@ -15,17 +15,16 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.Rule
-import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
+import org.junit.Test
 
 /**
  * Tests for GrailsDuplicateMappingRule
  *
  * @author Chris Mair
  */
-class GrailsDuplicateMappingRuleTest extends AbstractRuleTestCase {
+class GrailsDuplicateMappingRuleTest extends GenericAbstractRuleTestCase<GrailsDuplicateMappingRule> {
 
     @Test
     void testRuleProperties() {
@@ -169,7 +168,7 @@ class GrailsDuplicateMappingRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsDuplicateMappingRule createRule() {
         new GrailsDuplicateMappingRule()
     }
 }

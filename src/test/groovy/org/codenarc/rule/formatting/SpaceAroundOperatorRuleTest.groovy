@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
+class SpaceAroundOperatorRuleTest extends GenericAbstractRuleTestCase<SpaceAroundOperatorRule> {
 
     @Test
     void testRuleProperties() {
@@ -243,7 +242,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SpaceAroundOperatorRule createRule() {
         new SpaceAroundOperatorRule()
     }
 }

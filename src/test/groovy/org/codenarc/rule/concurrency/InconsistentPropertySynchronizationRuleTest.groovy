@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
  */
-class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
+class InconsistentPropertySynchronizationRuleTest extends GenericAbstractRuleTestCase<InconsistentPropertySynchronizationRule> {
 
     @Test
     void testRuleProperties() {
@@ -264,7 +263,7 @@ class InconsistentPropertySynchronizationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected InconsistentPropertySynchronizationRule createRule() {
         new InconsistentPropertySynchronizationRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase {
+class NonFinalSubclassOfSensitiveInterfaceRuleTest extends GenericAbstractRuleTestCase<NonFinalSubclassOfSensitiveInterfaceRule> {
 
     @Test
     void testRuleProperties() {
@@ -146,7 +145,7 @@ class NonFinalSubclassOfSensitiveInterfaceRuleTest extends AbstractRuleTestCase 
     }
 
     @Override
-    protected Rule createRule() {
+    protected NonFinalSubclassOfSensitiveInterfaceRule createRule() {
         new NonFinalSubclassOfSensitiveInterfaceRule()
     }
 }

@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ExceptionExtendsThrowableRule
  *
  * @author Chris Mair
  */
-class ExceptionExtendsThrowableRuleTest extends AbstractRuleTestCase {
+class ExceptionExtendsThrowableRuleTest extends GenericAbstractRuleTestCase<ExceptionExtendsThrowableRule> {
 
     @Test
     void testRuleProperties() {
@@ -50,7 +49,7 @@ class ExceptionExtendsThrowableRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExceptionExtendsThrowableRule createRule() {
         new ExceptionExtendsThrowableRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Marcin Erdmann
   */
-class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRuleTestCase {
+class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends GenericAbstractRuleTestCase<UnnecessaryParenthesesForMethodCallWithClosureRule> {
 
     @Test
     void testRuleProperties() {
@@ -103,7 +102,7 @@ class UnnecessaryParenthesesForMethodCallWithClosureRuleTest extends AbstractRul
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryParenthesesForMethodCallWithClosureRule createRule() {
         new UnnecessaryParenthesesForMethodCallWithClosureRule()
     }
 }

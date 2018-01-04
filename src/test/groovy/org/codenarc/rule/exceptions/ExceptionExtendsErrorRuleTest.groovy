@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase {
+class ExceptionExtendsErrorRuleTest extends GenericAbstractRuleTestCase<ExceptionExtendsErrorRule> {
 
     @Test
     void testRuleProperties() {
@@ -53,7 +52,7 @@ class ExceptionExtendsErrorRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExceptionExtendsErrorRule createRule() {
         new ExceptionExtendsErrorRule()
     }
 }

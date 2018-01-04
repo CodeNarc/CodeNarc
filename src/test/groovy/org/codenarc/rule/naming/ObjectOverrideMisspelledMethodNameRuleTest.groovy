@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author @Hackergarten
  */
-class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
+class ObjectOverrideMisspelledMethodNameRuleTest extends GenericAbstractRuleTestCase<ObjectOverrideMisspelledMethodNameRule> {
 
     @Test
     void testRuleProperties() {
@@ -93,7 +92,7 @@ class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ObjectOverrideMisspelledMethodNameRule createRule() {
         new ObjectOverrideMisspelledMethodNameRule()
     }
 

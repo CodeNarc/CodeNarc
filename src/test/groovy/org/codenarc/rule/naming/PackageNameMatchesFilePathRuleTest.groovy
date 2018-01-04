@@ -15,17 +15,16 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for PackageMismatchesFilepathRule
  *
  * @author Simon Tost
  */
-class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
+class PackageNameMatchesFilePathRuleTest extends GenericAbstractRuleTestCase<PackageNameMatchesFilePathRule> {
 
     @Before
     void setup() {
@@ -192,7 +191,7 @@ class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected PackageNameMatchesFilePathRule createRule() {
         new PackageNameMatchesFilePathRule()
     }
 

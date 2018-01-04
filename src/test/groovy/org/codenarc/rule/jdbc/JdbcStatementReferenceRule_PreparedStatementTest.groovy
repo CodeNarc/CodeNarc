@@ -16,19 +16,18 @@
 package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 
 /**
  * Tests for JdbcStatementReferenceRule - checks for references to java.sql.PreparedStatement
  *
  * @author Chris Mair
  */
-class JdbcStatementReferenceRule_PreparedStatementTest extends AbstractClassReferenceRuleTestCase {
+class JdbcStatementReferenceRule_PreparedStatementTest extends AbstractClassReferenceRuleTestCase<JdbcStatementReferenceRule> {
 
     final String className = 'java.sql.PreparedStatement'
 
     @Override
-    protected Rule createRule() {
+    protected JdbcStatementReferenceRule createRule() {
         new JdbcStatementReferenceRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class CatchThrowableRuleTest extends AbstractRuleTestCase {
+class CatchThrowableRuleTest extends GenericAbstractRuleTestCase<CatchThrowableRule> {
 
     @Test
     void testRuleProperties() {
@@ -62,7 +61,7 @@ class CatchThrowableRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected CatchThrowableRule createRule() {
         new CatchThrowableRule()
     }
 

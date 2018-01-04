@@ -15,10 +15,9 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ClassNameSameAsFilenameRule
@@ -26,7 +25,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  * @author Artur Gajowy
  * @author Chris Mair
  */
-class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
+class ClassNameSameAsFilenameRuleTest extends GenericAbstractRuleTestCase<ClassNameSameAsFilenameRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations
 
@@ -122,7 +121,7 @@ class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ClassNameSameAsFilenameRule createRule() {
         new ClassNameSameAsFilenameRule()
     }
 }

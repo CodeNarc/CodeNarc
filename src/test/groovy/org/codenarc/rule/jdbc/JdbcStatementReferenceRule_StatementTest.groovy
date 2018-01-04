@@ -16,7 +16,6 @@
 package org.codenarc.rule.jdbc
 
 import org.codenarc.rule.AbstractClassReferenceRuleTestCase
-import org.codenarc.rule.Rule
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class JdbcStatementReferenceRule_StatementTest extends AbstractClassReferenceRuleTestCase {
+class JdbcStatementReferenceRule_StatementTest extends AbstractClassReferenceRuleTestCase<JdbcStatementReferenceRule> {
 
     final String className = 'java.sql.Statement'
 
@@ -46,7 +45,7 @@ class JdbcStatementReferenceRule_StatementTest extends AbstractClassReferenceRul
     }
 
     @Override
-    protected Rule createRule() {
+    protected JdbcStatementReferenceRule createRule() {
         new JdbcStatementReferenceRule()
     }
 }

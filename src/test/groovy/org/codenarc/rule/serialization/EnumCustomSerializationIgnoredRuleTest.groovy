@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.serialization
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for EnumCustomSerializationIgnoredRule
  *
  * @author Chris Mair
  */
-class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase {
+class EnumCustomSerializationIgnoredRuleTest extends GenericAbstractRuleTestCase<EnumCustomSerializationIgnoredRule> {
 
     @Test
     void testRuleProperties() {
@@ -101,7 +100,7 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected EnumCustomSerializationIgnoredRule createRule() {
         new EnumCustomSerializationIgnoredRule()
     }
 }

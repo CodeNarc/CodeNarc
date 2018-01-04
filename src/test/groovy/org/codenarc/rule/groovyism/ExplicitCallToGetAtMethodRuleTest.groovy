@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToGetAtMethodRuleTest extends AbstractRuleTestCase {
+class ExplicitCallToGetAtMethodRuleTest extends GenericAbstractRuleTestCase<ExplicitCallToGetAtMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -53,7 +52,7 @@ class ExplicitCallToGetAtMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitCallToGetAtMethodRule createRule() {
         new ExplicitCallToGetAtMethodRule()
     }
 }

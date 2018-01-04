@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
  */
-class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
+class ExplicitLinkedListInstantiationRuleTest extends GenericAbstractRuleTestCase<ExplicitLinkedListInstantiationRule> {
 
     @Test
     void testRuleProperties() {
@@ -82,7 +81,7 @@ class ExplicitLinkedListInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitLinkedListInstantiationRule createRule() {
         new ExplicitLinkedListInstantiationRule()
     }
 }

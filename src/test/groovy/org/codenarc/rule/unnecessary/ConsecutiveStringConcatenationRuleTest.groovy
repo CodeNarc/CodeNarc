@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
+class ConsecutiveStringConcatenationRuleTest extends GenericAbstractRuleTestCase<ConsecutiveStringConcatenationRule> {
 
     @Test
     void testRuleProperties() {
@@ -101,7 +100,7 @@ class ConsecutiveStringConcatenationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ConsecutiveStringConcatenationRule createRule() {
         new ConsecutiveStringConcatenationRule()
     }
 }

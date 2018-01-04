@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.serialization
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTestCase {
+class SerializableClassMustDefineSerialVersionUIDRuleTest extends GenericAbstractRuleTestCase<SerializableClassMustDefineSerialVersionUIDRule> {
 
     @Test
     void testRuleProperties() {
@@ -104,7 +103,7 @@ class SerializableClassMustDefineSerialVersionUIDRuleTest extends AbstractRuleTe
     }
 
     @Override
-    protected Rule createRule() {
+    protected SerializableClassMustDefineSerialVersionUIDRule createRule() {
         new SerializableClassMustDefineSerialVersionUIDRule()
     }
 }

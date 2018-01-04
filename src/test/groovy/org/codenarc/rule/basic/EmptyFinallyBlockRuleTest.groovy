@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class EmptyFinallyBlockRuleTest extends AbstractRuleTestCase {
+class EmptyFinallyBlockRuleTest extends GenericAbstractRuleTestCase<EmptyFinallyBlockRule> {
 
     @Test
     void testRuleProperties() {
@@ -83,7 +82,7 @@ class EmptyFinallyBlockRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected EmptyFinallyBlockRule createRule() {
         new EmptyFinallyBlockRule()
     }
 

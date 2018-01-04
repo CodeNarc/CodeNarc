@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
  */
-class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase {
+class StaticDateFormatFieldRuleTest extends GenericAbstractRuleTestCase<StaticDateFormatFieldRule> {
 
     @Test
     void testRuleProperties() {
@@ -117,7 +116,7 @@ class StaticDateFormatFieldRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected StaticDateFormatFieldRule createRule() {
         new StaticDateFormatFieldRule()
     }
 }

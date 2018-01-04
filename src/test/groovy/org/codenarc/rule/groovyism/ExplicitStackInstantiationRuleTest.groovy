@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
  */
-class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
+class ExplicitStackInstantiationRuleTest extends GenericAbstractRuleTestCase<ExplicitStackInstantiationRule> {
 
     @Test
     void testRuleProperties() {
@@ -82,7 +81,7 @@ class ExplicitStackInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitStackInstantiationRule createRule() {
         new ExplicitStackInstantiationRule()
     }
 }

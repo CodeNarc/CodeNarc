@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Artur Gajowy
  */
-class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
+class ThisReferenceEscapesConstructorRuleTest extends GenericAbstractRuleTestCase<ThisReferenceEscapesConstructorRule> {
 
     @Test
     void testRuleProperties() {
@@ -79,7 +78,7 @@ class ThisReferenceEscapesConstructorRuleTest extends AbstractRuleTestCase {
         ' This equals exposing a half-baked object and can lead to race conditions.'
 
     @Override
-    protected Rule createRule() {
+    protected ThisReferenceEscapesConstructorRule createRule() {
         new ThisReferenceEscapesConstructorRule()
     }
 }

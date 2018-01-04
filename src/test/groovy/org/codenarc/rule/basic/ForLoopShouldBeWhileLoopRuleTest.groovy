@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Victor Savkin'
  */
-class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
+class ForLoopShouldBeWhileLoopRuleTest extends GenericAbstractRuleTestCase<ForLoopShouldBeWhileLoopRule> {
 
     @Test
     void testRuleProperties() {
@@ -98,7 +97,7 @@ class ForLoopShouldBeWhileLoopRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ForLoopShouldBeWhileLoopRule createRule() {
         new ForLoopShouldBeWhileLoopRule()
     }
 }

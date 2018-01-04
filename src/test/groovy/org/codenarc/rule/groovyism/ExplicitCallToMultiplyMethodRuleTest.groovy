@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToMultiplyMethodRuleTest extends AbstractRuleTestCase {
+class ExplicitCallToMultiplyMethodRuleTest extends GenericAbstractRuleTestCase<ExplicitCallToMultiplyMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -54,7 +53,7 @@ class ExplicitCallToMultiplyMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitCallToMultiplyMethodRule createRule() {
         new ExplicitCallToMultiplyMethodRule()
     }
 }

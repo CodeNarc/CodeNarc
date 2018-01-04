@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.braces
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
+class WhileStatementBracesRuleTest extends GenericAbstractRuleTestCase<WhileStatementBracesRule> {
 
     @Test
     void testRuleProperties() {
@@ -71,7 +70,7 @@ class WhileStatementBracesRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected WhileStatementBracesRule createRule() {
         new WhileStatementBracesRule()
     }
 

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToPowerMethodRuleTest extends AbstractRuleTestCase {
+class ExplicitCallToPowerMethodRuleTest extends GenericAbstractRuleTestCase<ExplicitCallToPowerMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -53,7 +52,7 @@ class ExplicitCallToPowerMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitCallToPowerMethodRule createRule() {
         new ExplicitCallToPowerMethodRule()
     }
 }

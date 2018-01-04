@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
+class SpaceAfterCommaRuleTest extends GenericAbstractRuleTestCase<SpaceAfterCommaRule> {
 
     @Test
     void testRuleProperties() {
@@ -288,7 +287,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SpaceAfterCommaRule createRule() {
         new SpaceAfterCommaRule()
     }
 }

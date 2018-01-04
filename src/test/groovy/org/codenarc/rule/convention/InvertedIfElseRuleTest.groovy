@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class InvertedIfElseRuleTest extends AbstractRuleTestCase {
+class InvertedIfElseRuleTest extends GenericAbstractRuleTestCase<InvertedIfElseRule> {
 
     @Test
     void testRuleProperties() {
@@ -103,7 +102,7 @@ class InvertedIfElseRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected InvertedIfElseRule createRule() {
         new InvertedIfElseRule()
     }
 }

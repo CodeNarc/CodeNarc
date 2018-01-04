@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
+class SimpleDateFormatMissingLocaleRuleTest extends GenericAbstractRuleTestCase<SimpleDateFormatMissingLocaleRule> {
 
     private static final VIOLATION_MESSAGE = 'Created an instance of SimpleDateFormat without specifying a Locale'
 
@@ -73,7 +72,7 @@ class SimpleDateFormatMissingLocaleRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SimpleDateFormatMissingLocaleRule createRule() {
         new SimpleDateFormatMissingLocaleRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
+class EqualsAndHashCodeRuleTest extends GenericAbstractRuleTestCase<EqualsAndHashCodeRule> {
 
     @Test
     void testRuleProperties() {
@@ -102,7 +101,7 @@ class EqualsAndHashCodeRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected EqualsAndHashCodeRule createRule() {
         new EqualsAndHashCodeRule()
     }
 

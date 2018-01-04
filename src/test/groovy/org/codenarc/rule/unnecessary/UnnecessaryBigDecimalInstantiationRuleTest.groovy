@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
+class UnnecessaryBigDecimalInstantiationRuleTest extends GenericAbstractRuleTestCase<UnnecessaryBigDecimalInstantiationRule> {
 
     @Test
     void testRuleProperties() {
@@ -94,7 +93,7 @@ class UnnecessaryBigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryBigDecimalInstantiationRule createRule() {
         new UnnecessaryBigDecimalInstantiationRule()
     }
 }

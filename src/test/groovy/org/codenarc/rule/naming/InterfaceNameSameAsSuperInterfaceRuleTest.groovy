@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase {
+class InterfaceNameSameAsSuperInterfaceRuleTest extends GenericAbstractRuleTestCase<InterfaceNameSameAsSuperInterfaceRule> {
 
     @Test
     void testRuleProperties() {
@@ -70,7 +69,7 @@ class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected InterfaceNameSameAsSuperInterfaceRule createRule() {
         new InterfaceNameSameAsSuperInterfaceRule()
     }
 }
