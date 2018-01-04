@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
+class ConstantIfExpressionRuleTest extends GenericAbstractRuleTestCase<ConstantIfExpressionRule> {
 
     @Test
     void testRuleProperties() {
@@ -106,7 +105,7 @@ class ConstantIfExpressionRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ConstantIfExpressionRule createRule() {
         new ConstantIfExpressionRule()
     }
 

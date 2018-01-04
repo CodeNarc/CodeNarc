@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.dry
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
+class DuplicateStringLiteralRuleTest extends GenericAbstractRuleTestCase<DuplicateStringLiteralRule> {
 
     @Test
     void testRuleProperties() {
@@ -240,7 +239,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected DuplicateStringLiteralRule createRule() {
         new DuplicateStringLiteralRule()
     }
 }

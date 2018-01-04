@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class InsecureRandomRuleTest extends AbstractRuleTestCase {
+class InsecureRandomRuleTest extends GenericAbstractRuleTestCase<InsecureRandomRule> {
 
     @Test
     void testRuleProperties() {
@@ -64,7 +63,7 @@ class InsecureRandomRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected InsecureRandomRule createRule() {
         new InsecureRandomRule()
     }
 }

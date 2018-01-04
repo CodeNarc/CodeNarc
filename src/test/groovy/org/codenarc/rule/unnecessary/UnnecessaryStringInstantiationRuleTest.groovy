@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase {
+class UnnecessaryStringInstantiationRuleTest extends GenericAbstractRuleTestCase<UnnecessaryStringInstantiationRule> {
 
     @Test
     void testRuleProperties() {
@@ -86,7 +85,7 @@ class UnnecessaryStringInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryStringInstantiationRule createRule() {
         new UnnecessaryStringInstantiationRule()
     }
 

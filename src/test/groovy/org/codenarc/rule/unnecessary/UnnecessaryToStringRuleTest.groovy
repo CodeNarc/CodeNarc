@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for UnnecessaryToStringRule
  *
  * @author Chris Mair
  */
-class UnnecessaryToStringRuleTest extends AbstractRuleTestCase {
+class UnnecessaryToStringRuleTest extends GenericAbstractRuleTestCase<UnnecessaryToStringRule> {
 
     @Test
     void testRuleProperties() {
@@ -108,7 +107,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryToStringRule createRule() {
         new UnnecessaryToStringRule()
     }
 }

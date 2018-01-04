@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class CatchNullPointerExceptionRuleTest extends AbstractRuleTestCase {
+class CatchNullPointerExceptionRuleTest extends GenericAbstractRuleTestCase<CatchNullPointerExceptionRule> {
 
     @Test
     void testRuleProperties() {
@@ -62,7 +61,7 @@ class CatchNullPointerExceptionRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected CatchNullPointerExceptionRule createRule() {
         new CatchNullPointerExceptionRule()
     }
 

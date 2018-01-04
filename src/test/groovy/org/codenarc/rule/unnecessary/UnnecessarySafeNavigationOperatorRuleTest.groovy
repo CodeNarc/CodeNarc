@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for UnnecessarySafeNavigationOperatorRule
  *
  * @author Chris Mair
  */
-class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
+class UnnecessarySafeNavigationOperatorRuleTest extends GenericAbstractRuleTestCase<UnnecessarySafeNavigationOperatorRule> {
 
     @Test
     void testRuleProperties() {
@@ -123,7 +122,7 @@ class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessarySafeNavigationOperatorRule createRule() {
         new UnnecessarySafeNavigationOperatorRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author GUM
  */
-class CouldBeElvisRuleTest extends AbstractRuleTestCase {
+class CouldBeElvisRuleTest extends GenericAbstractRuleTestCase<CouldBeElvisRule> {
 
     @Test
     void testRuleProperties() {
@@ -145,7 +144,7 @@ class CouldBeElvisRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected CouldBeElvisRule createRule() {
         new CouldBeElvisRule()
     }
 }

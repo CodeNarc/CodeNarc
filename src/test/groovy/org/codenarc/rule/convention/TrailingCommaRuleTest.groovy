@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for TrailingCommaRule
  *
  * @author Yuriy Chulovskyy
  */
-class TrailingCommaRuleTest extends AbstractRuleTestCase {
+class TrailingCommaRuleTest extends GenericAbstractRuleTestCase<TrailingCommaRule> {
 
     @Test
     void testRuleProperties() {
@@ -189,7 +188,7 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected TrailingCommaRule createRule() {
         new TrailingCommaRule()
     }
 }

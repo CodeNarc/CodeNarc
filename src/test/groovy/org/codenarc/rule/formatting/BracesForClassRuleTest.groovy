@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
   */
-class BracesForClassRuleTest extends AbstractRuleTestCase {
+class BracesForClassRuleTest extends GenericAbstractRuleTestCase<BracesForClassRule> {
 
     @Test
     void testRuleProperties() {
@@ -222,7 +221,7 @@ class BracesForClassRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BracesForClassRule createRule() {
         new BracesForClassRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
+class UnnecessarySemicolonRuleTest extends GenericAbstractRuleTestCase<UnnecessarySemicolonRule> {
 
     @Test
     void testRuleProperties() {
@@ -174,7 +173,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessarySemicolonRule createRule() {
         new UnnecessarySemicolonRule()
     }
 }

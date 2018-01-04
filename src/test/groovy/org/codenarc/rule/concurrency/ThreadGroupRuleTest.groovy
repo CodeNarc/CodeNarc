@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ThreadGroupRuleTest extends AbstractRuleTestCase {
+class ThreadGroupRuleTest extends GenericAbstractRuleTestCase<ThreadGroupRule> {
 
     @Test
     void testRuleProperties() {
@@ -81,7 +80,7 @@ class ThreadGroupRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ThreadGroupRule createRule() {
         new ThreadGroupRule()
     }
 }

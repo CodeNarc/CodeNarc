@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.imports
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
+class ImportFromSamePackageRuleTest extends GenericAbstractRuleTestCase<ImportFromSamePackageRule> {
 
     @Test
     void testRuleProperties() {
@@ -83,7 +82,7 @@ class ImportFromSamePackageRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ImportFromSamePackageRule createRule() {
         new ImportFromSamePackageRule()
     }
 

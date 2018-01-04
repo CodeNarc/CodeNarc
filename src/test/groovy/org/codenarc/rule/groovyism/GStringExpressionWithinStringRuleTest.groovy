@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for GStringExpressionWithinStringRule
  *
  * @author Chris Mair
  */
-class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
+class GStringExpressionWithinStringRuleTest extends GenericAbstractRuleTestCase<GStringExpressionWithinStringRule> {
 
     @Test
     void testRuleProperties() {
@@ -163,7 +162,7 @@ class GStringExpressionWithinStringRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GStringExpressionWithinStringRule createRule() {
         new GStringExpressionWithinStringRule()
     }
 }

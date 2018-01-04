@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for GrailsMassAssignmentRule
  *
  * @author Brian Soby
  */
-class GrailsMassAssignmentRuleTest extends AbstractRuleTestCase {
+class GrailsMassAssignmentRuleTest extends GenericAbstractRuleTestCase<GrailsMassAssignmentRule> {
 
     @Test
     void testRuleProperties() {
@@ -130,7 +129,7 @@ class GrailsMassAssignmentRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsMassAssignmentRule createRule() {
         new GrailsMassAssignmentRule()
     }
 }

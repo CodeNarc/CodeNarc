@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Jeff Beck
  */
-class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
+class BitwiseOperatorInConditionalRuleTest extends GenericAbstractRuleTestCase<BitwiseOperatorInConditionalRule> {
 
     @Test
     void testRuleProperties() {
@@ -236,7 +235,7 @@ class BitwiseOperatorInConditionalRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BitwiseOperatorInConditionalRule createRule() {
         new BitwiseOperatorInConditionalRule()
     }
 }

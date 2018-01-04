@@ -15,17 +15,16 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for JUnitAssertEqualsConstantActualValueRule
  *
  * @author Artur Gajowy
  */
-class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase {
+class JUnitAssertEqualsConstantActualValueRuleTest extends GenericAbstractRuleTestCase<JUnitAssertEqualsConstantActualValueRule> {
 
     @Before
     void setup() {
@@ -110,7 +109,7 @@ class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase 
         'Most likely it was intended to be the `expected` value.'
 
     @Override
-    protected Rule createRule() {
+    protected JUnitAssertEqualsConstantActualValueRule createRule() {
         new JUnitAssertEqualsConstantActualValueRule()
     }
 }

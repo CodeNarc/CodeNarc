@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
+class SynchronizedOnBoxedPrimitiveRuleTest extends GenericAbstractRuleTestCase<SynchronizedOnBoxedPrimitiveRule> {
 
     @Test
     void testRuleProperties() {
@@ -472,7 +471,7 @@ class SynchronizedOnBoxedPrimitiveRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SynchronizedOnBoxedPrimitiveRule createRule() {
         new SynchronizedOnBoxedPrimitiveRule()
     }
 }

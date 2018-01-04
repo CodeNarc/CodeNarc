@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
+class BigDecimalInstantiationRuleTest extends GenericAbstractRuleTestCase<BigDecimalInstantiationRule> {
 
     @Test
     void testRuleProperties() {
@@ -148,7 +147,7 @@ class BigDecimalInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BigDecimalInstantiationRule createRule() {
         new BigDecimalInstantiationRule()
     }
 

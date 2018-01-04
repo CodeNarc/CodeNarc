@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.dry
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
+class DuplicateMapLiteralRuleTest extends GenericAbstractRuleTestCase<DuplicateMapLiteralRule> {
 
     @Test
     void testRuleProperties() {
@@ -225,7 +224,7 @@ class DuplicateMapLiteralRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected DuplicateMapLiteralRule createRule() {
         new DuplicateMapLiteralRule()
     }
 }

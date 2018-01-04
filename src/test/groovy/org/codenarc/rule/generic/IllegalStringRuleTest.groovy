@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class IllegalStringRuleTest extends AbstractRuleTestCase {
+class IllegalStringRuleTest extends GenericAbstractRuleTestCase<IllegalStringRule> {
 
     private static final TEXT = '@author Joe'
 
@@ -63,7 +62,7 @@ class IllegalStringRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected IllegalStringRule createRule() {
         new IllegalStringRule(string:TEXT)
     }
 }

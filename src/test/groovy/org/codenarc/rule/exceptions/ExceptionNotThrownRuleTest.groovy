@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ExceptionNotThrownRule
  *
  * @author Chris Mair
  */
-class ExceptionNotThrownRuleTest extends AbstractRuleTestCase {
+class ExceptionNotThrownRuleTest extends GenericAbstractRuleTestCase<ExceptionNotThrownRule> {
 
     @Test
     void testRuleProperties() {
@@ -100,7 +99,7 @@ class ExceptionNotThrownRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExceptionNotThrownRule createRule() {
         new ExceptionNotThrownRule()
     }
 }

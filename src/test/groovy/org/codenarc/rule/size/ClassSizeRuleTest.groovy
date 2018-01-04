@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class ClassSizeRuleTest extends AbstractRuleTestCase {
+class ClassSizeRuleTest extends GenericAbstractRuleTestCase<ClassSizeRule> {
 
     @Test
     void testRuleProperties() {
@@ -82,7 +81,7 @@ class ClassSizeRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ClassSizeRule createRule() {
         new ClassSizeRule()
     }
 

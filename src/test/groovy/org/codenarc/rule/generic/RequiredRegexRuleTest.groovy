@@ -15,18 +15,17 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
-import org.junit.Test
-
 import static org.codenarc.test.TestUtil.containsAll
+
+import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.junit.Test
 
 /**
  * Tests for RequiredRegexRule
  *
  * @author Chris Mair
   */
-class RequiredRegexRuleTest extends AbstractRuleTestCase {
+class RequiredRegexRuleTest extends GenericAbstractRuleTestCase<RequiredRegexRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations
     static skipTestThatInvalidCodeHasNoViolations
@@ -68,7 +67,7 @@ class RequiredRegexRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected RequiredRegexRule createRule() {
         new RequiredRegexRule(regex:REGEX)
     }
 

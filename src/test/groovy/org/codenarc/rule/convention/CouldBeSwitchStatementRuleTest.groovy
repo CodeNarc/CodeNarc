@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for CouldBeSwitchStatementRule
  *
  * @author Jenn Strater
  */
-class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase {
+class CouldBeSwitchStatementRuleTest extends GenericAbstractRuleTestCase<CouldBeSwitchStatementRule> {
 
     @Test
     void testRuleProperties() {
@@ -233,7 +232,7 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected CouldBeSwitchStatementRule createRule() {
         new CouldBeSwitchStatementRule()
     }
 }

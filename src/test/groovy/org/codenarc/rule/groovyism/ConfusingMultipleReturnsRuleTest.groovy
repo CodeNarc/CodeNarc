@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
+class ConfusingMultipleReturnsRuleTest extends GenericAbstractRuleTestCase<ConfusingMultipleReturnsRule> {
 
     @Test
     void testRuleProperties() {
@@ -73,7 +72,7 @@ class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ConfusingMultipleReturnsRule createRule() {
         new ConfusingMultipleReturnsRule()
     }
 }

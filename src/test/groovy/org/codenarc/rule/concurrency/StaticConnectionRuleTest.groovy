@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
  */
-class StaticConnectionRuleTest extends AbstractRuleTestCase {
+class StaticConnectionRuleTest extends GenericAbstractRuleTestCase<StaticConnectionRule> {
 
     @Test
     void testRuleProperties() {
@@ -54,7 +53,7 @@ class StaticConnectionRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected StaticConnectionRule createRule() {
         new StaticConnectionRule()
     }
 }

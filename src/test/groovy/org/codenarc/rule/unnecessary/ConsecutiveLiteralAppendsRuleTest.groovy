@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
+class ConsecutiveLiteralAppendsRuleTest extends GenericAbstractRuleTestCase<ConsecutiveLiteralAppendsRule> {
 
     @Test
     void testRuleProperties() {
@@ -72,7 +71,7 @@ class ConsecutiveLiteralAppendsRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ConsecutiveLiteralAppendsRule createRule() {
         new ConsecutiveLiteralAppendsRule()
     }
 }

@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for SpaceAroundMapEntryColonRule
  *
  * @author Chris Mair
  */
-class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase {
+class SpaceAroundMapEntryColonRuleTest extends GenericAbstractRuleTestCase<SpaceAroundMapEntryColonRule> {
 
     private static final PRECEDED = 'preceded'
     private static final FOLLOWED = 'followed'
@@ -118,7 +117,7 @@ class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected SpaceAroundMapEntryColonRule createRule() {
         new SpaceAroundMapEntryColonRule()
     }
 }

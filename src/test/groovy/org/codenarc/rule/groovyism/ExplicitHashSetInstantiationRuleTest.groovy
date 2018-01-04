@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
+class ExplicitHashSetInstantiationRuleTest extends GenericAbstractRuleTestCase<ExplicitHashSetInstantiationRule> {
 
     @Test
     void testRuleProperties() {
@@ -81,7 +80,7 @@ class ExplicitHashSetInstantiationRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitHashSetInstantiationRule createRule() {
         new ExplicitHashSetInstantiationRule()
     }
 }

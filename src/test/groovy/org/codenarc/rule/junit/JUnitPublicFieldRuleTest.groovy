@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for JUnitPublicFieldRule
  *
  * @author Chris Mair
  */
-class JUnitPublicFieldRuleTest extends AbstractRuleTestCase {
+class JUnitPublicFieldRuleTest extends GenericAbstractRuleTestCase<JUnitPublicFieldRule> {
 
     @Test
     void testRuleProperties() {
@@ -98,7 +97,7 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected JUnitPublicFieldRule createRule() {
         new JUnitPublicFieldRule()
     }
 }

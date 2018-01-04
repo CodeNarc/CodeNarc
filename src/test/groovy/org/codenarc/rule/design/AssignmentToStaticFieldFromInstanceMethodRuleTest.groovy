@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for AssignmentToStaticFieldFromInstanceMethodRule
  *
  * @author Chris Mair
  */
-class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTestCase {
+class AssignmentToStaticFieldFromInstanceMethodRuleTest extends GenericAbstractRuleTestCase<AssignmentToStaticFieldFromInstanceMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -136,7 +135,7 @@ class AssignmentToStaticFieldFromInstanceMethodRuleTest extends AbstractRuleTest
     }
 
     @Override
-    protected Rule createRule() {
+    protected AssignmentToStaticFieldFromInstanceMethodRule createRule() {
         new AssignmentToStaticFieldFromInstanceMethodRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
+class PublicFinalizeMethodRuleTest extends GenericAbstractRuleTestCase<PublicFinalizeMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -67,7 +66,7 @@ class PublicFinalizeMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected PublicFinalizeMethodRule createRule() {
         new PublicFinalizeMethodRule()
     }
 }

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
+class NestedBlockDepthRuleTest extends GenericAbstractRuleTestCase<NestedBlockDepthRule> {
 
     @Test
     void testRuleProperties() {
@@ -373,7 +372,7 @@ class NestedBlockDepthRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected NestedBlockDepthRule createRule() {
         new NestedBlockDepthRule()
     }
 }

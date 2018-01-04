@@ -15,15 +15,15 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
+
 /**
  * Tests for NestedForLoopRule
  *
  * @author Maciej Ziarko
  */
-class NestedForLoopRuleTest extends AbstractRuleTestCase {
+class NestedForLoopRuleTest extends GenericAbstractRuleTestCase<NestedForLoopRule> {
 
     @Test
     void testRuleProperties() {
@@ -98,7 +98,7 @@ class NestedForLoopRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected NestedForLoopRule createRule() {
         new NestedForLoopRule()
     }
 

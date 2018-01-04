@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
+class ExplicitCallToModMethodRuleTest extends GenericAbstractRuleTestCase<ExplicitCallToModMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -53,7 +52,7 @@ class ExplicitCallToModMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ExplicitCallToModMethodRule createRule() {
         new ExplicitCallToModMethodRule()
     }
 }

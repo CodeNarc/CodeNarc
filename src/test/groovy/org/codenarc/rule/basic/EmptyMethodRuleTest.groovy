@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class EmptyMethodRuleTest extends AbstractRuleTestCase {
+class EmptyMethodRuleTest extends GenericAbstractRuleTestCase<EmptyMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -72,7 +71,7 @@ class EmptyMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected EmptyMethodRule createRule() {
         new EmptyMethodRule()
     }
 }

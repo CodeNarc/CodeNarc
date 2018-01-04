@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Artur Gajowy
  */
-class EmptyClassRuleTest extends AbstractRuleTestCase {
+class EmptyClassRuleTest extends GenericAbstractRuleTestCase<EmptyClassRule> {
 
     def skipTestThatUnrelatedCodeHasNoViolations
 
@@ -175,7 +174,7 @@ class EmptyClassRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected EmptyClassRule createRule() {
         new EmptyClassRule()
     }
 }

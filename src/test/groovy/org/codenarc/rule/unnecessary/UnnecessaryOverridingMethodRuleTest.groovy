@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Sven Lange'
   */
-class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
+class UnnecessaryOverridingMethodRuleTest extends GenericAbstractRuleTestCase<UnnecessaryOverridingMethodRule> {
 
     @Test
     void testRuleProperties() {
@@ -84,7 +83,7 @@ class UnnecessaryOverridingMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected UnnecessaryOverridingMethodRule createRule() {
         new UnnecessaryOverridingMethodRule()
     }
 }

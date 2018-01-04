@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Joe Sondow
  */
-class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
+class TrailingWhitespaceRuleTest extends GenericAbstractRuleTestCase<TrailingWhitespaceRule> {
 
     private static final String MESSAGE = 'Line ends with whitespace characters'
 
@@ -124,7 +123,7 @@ class TrailingWhitespaceRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected TrailingWhitespaceRule createRule() {
         new TrailingWhitespaceRule()
     }
 

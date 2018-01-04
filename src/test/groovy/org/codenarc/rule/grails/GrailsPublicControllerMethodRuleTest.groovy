@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -25,7 +24,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
+class GrailsPublicControllerMethodRuleTest extends GenericAbstractRuleTestCase<GrailsPublicControllerMethodRule> {
 
     private static final CONTROLLER_PATH = 'project/MyProject/grails-app/controllers/com/xxx/MyController.groovy'
     private static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'
@@ -165,7 +164,7 @@ class GrailsPublicControllerMethodRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsPublicControllerMethodRule createRule() {
         new GrailsPublicControllerMethodRule(enabled:true)
     }
 }

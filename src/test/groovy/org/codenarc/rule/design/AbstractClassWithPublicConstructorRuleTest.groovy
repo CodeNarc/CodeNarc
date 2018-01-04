@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class AbstractClassWithPublicConstructorRuleTest extends AbstractRuleTestCase {
+class AbstractClassWithPublicConstructorRuleTest extends GenericAbstractRuleTestCase<AbstractClassWithPublicConstructorRule> {
 
     @Test
     void testRuleProperties() {
@@ -78,7 +77,7 @@ class AbstractClassWithPublicConstructorRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected AbstractClassWithPublicConstructorRule createRule() {
         new AbstractClassWithPublicConstructorRule()
     }
 }

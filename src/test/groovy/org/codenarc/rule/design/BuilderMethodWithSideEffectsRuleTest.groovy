@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
+class BuilderMethodWithSideEffectsRuleTest extends GenericAbstractRuleTestCase<BuilderMethodWithSideEffectsRule> {
 
     @Test
     void testRuleProperties() {
@@ -111,7 +110,7 @@ class BuilderMethodWithSideEffectsRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected BuilderMethodWithSideEffectsRule createRule() {
         new BuilderMethodWithSideEffectsRule()
     }
 }

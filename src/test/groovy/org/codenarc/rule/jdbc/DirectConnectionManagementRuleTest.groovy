@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.jdbc
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class DirectConnectionManagementRuleTest extends AbstractRuleTestCase {
+class DirectConnectionManagementRuleTest extends GenericAbstractRuleTestCase<DirectConnectionManagementRule> {
 
     @Test
     void testRuleProperties() {
@@ -53,7 +52,7 @@ class DirectConnectionManagementRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected DirectConnectionManagementRule createRule() {
         new DirectConnectionManagementRule()
     }
 }

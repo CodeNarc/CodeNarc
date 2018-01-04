@@ -15,21 +15,21 @@
  */
 package org.codenarc.rule
 
+import static org.codenarc.test.TestUtil.assertContainsAll
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codehaus.groovy.control.Phases
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
 import org.junit.Before
 import org.junit.Test
 
-import static org.codenarc.test.TestUtil.assertContainsAll
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-
 /**
  * Tests for the AbstractRule class
  *
  * @author Chris Mair
  */
-class AbstractRuleTest extends AbstractRuleTestCase {
+class AbstractRuleTest extends GenericAbstractRuleTestCase<AbstractRule> {
 
     private static final NAME = 'Rule123'
     private static final PRIORITY = 2
@@ -314,7 +314,7 @@ class AbstractRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected AbstractRule createRule() {
         new FakePathRule(name:NAME, priority:PRIORITY)
     }
 

@@ -15,8 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
  */
-class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
+class DoubleCheckedLockingRuleTest extends GenericAbstractRuleTestCase<DoubleCheckedLockingRule> {
 
     @Test
     void testRuleProperties() {
@@ -159,7 +158,7 @@ class DoubleCheckedLockingRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected DoubleCheckedLockingRule createRule() {
         new DoubleCheckedLockingRule()
     }
 }

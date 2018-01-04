@@ -15,17 +15,16 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for GrailsDomainReservedSqlKeywordNameRule
  *
  * @author Artur Gajowy
  */
-class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
+class GrailsDomainReservedSqlKeywordNameRuleTest extends GenericAbstractRuleTestCase<GrailsDomainReservedSqlKeywordNameRule> {
 
     @Before
     void setup() {
@@ -154,7 +153,7 @@ class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected GrailsDomainReservedSqlKeywordNameRule createRule() {
         new GrailsDomainReservedSqlKeywordNameRule()
     }
 }

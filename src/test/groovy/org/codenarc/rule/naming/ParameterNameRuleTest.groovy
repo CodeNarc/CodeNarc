@@ -15,18 +15,17 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.rule.Rule
-import org.junit.Test
-
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
+import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.junit.Test
 
 /**
  * Tests for ParameterNameRule
  *
  * @author Chris Mair
   */
-class ParameterNameRuleTest extends AbstractRuleTestCase {
+class ParameterNameRuleTest extends GenericAbstractRuleTestCase<ParameterNameRule> {
 
     @Test
     void testRuleProperties() {
@@ -195,7 +194,7 @@ class ParameterNameRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected ParameterNameRule createRule() {
         new ParameterNameRule()
     }
 

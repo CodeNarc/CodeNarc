@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for IllegalClassMemberRule
  *
  * @author Chris Mair
  */
-class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
+class IllegalClassMemberRuleTest extends GenericAbstractRuleTestCase<IllegalClassMemberRule> {
 
     @Test
     void testRuleProperties() {
@@ -243,7 +242,7 @@ class IllegalClassMemberRuleTest extends AbstractRuleTestCase {
 //---------------
 
     @Override
-    protected Rule createRule() {
+    protected IllegalClassMemberRule createRule() {
         new IllegalClassMemberRule(applyToClassNames:'*')
     }
 }

@@ -15,12 +15,12 @@
  */
 package org.codenarc.rule
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+import static org.junit.Assert.assertFalse
+
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.util.WildcardPattern
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-import static org.junit.Assert.assertFalse
 
 /**
  * Tests for AbstractAstVisitorRule
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertFalse
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
+class AbstractAstVisitorRuleTest extends GenericAbstractRuleTestCase<AbstractAstVisitorRule> {
     private static final SOURCE = '''
         class MyClass {
             int value
@@ -227,7 +227,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected AbstractAstVisitorRule createRule() {
         new FakeAstVisitorRule()
     }
 }

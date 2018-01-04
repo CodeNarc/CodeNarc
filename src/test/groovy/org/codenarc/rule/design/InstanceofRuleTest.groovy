@@ -15,16 +15,15 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.Rule
+import org.codenarc.rule.GenericAbstractRuleTestCase
 import org.junit.Test
-import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for InstanceofRule
  *
  * @author Chris Mair
  */
-class InstanceofRuleTest extends AbstractRuleTestCase {
+class InstanceofRuleTest extends GenericAbstractRuleTestCase<InstanceofRule> {
 
     @Test
     void testRuleProperties() {
@@ -94,7 +93,7 @@ class InstanceofRuleTest extends AbstractRuleTestCase {
     }
 
     @Override
-    protected Rule createRule() {
+    protected InstanceofRule createRule() {
         new InstanceofRule()
     }
 }
