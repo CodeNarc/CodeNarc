@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Artur Gajowy
  */
-class GrailsDomainReservedSqlKeywordNameRuleTest extends GenericAbstractRuleTestCase<GrailsDomainReservedSqlKeywordNameRule> {
+class GrailsDomainReservedSqlKeywordNameRuleTest extends AbstractRuleTestCase<GrailsDomainReservedSqlKeywordNameRule> {
 
     @Before
     void setup() {

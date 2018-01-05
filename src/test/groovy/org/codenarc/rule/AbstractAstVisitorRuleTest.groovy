@@ -28,7 +28,7 @@ import org.junit.Test
  * @author Chris Mair
  * @author Hamlet D'Arcy
  */
-class AbstractAstVisitorRuleTest extends GenericAbstractRuleTestCase<AbstractAstVisitorRule> {
+class AbstractAstVisitorRuleTest extends AbstractRuleTestCase<AbstractAstVisitorRule> {
     private static final SOURCE = '''
         class MyClass {
             int value

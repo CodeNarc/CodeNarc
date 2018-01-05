@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.logging
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class LoggerForDifferentClassRuleTest extends GenericAbstractRuleTestCase<LoggerForDifferentClassRule> {
+class LoggerForDifferentClassRuleTest extends AbstractRuleTestCase<LoggerForDifferentClassRule> {
 
     @Test
     void testRuleProperties() {

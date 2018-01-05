@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris mair
  */
-class ComparisonOfTwoConstantsRuleTest extends GenericAbstractRuleTestCase<ComparisonOfTwoConstantsRule> {
+class ComparisonOfTwoConstantsRuleTest extends AbstractRuleTestCase<ComparisonOfTwoConstantsRule> {
 
     private static final MESSAGE = 'Comparing two constants or constant literals'
 

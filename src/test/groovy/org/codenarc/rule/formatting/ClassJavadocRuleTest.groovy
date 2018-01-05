@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.source.SourceString
 import org.junit.Test
 
@@ -25,7 +25,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
   */
-class ClassJavadocRuleTest extends GenericAbstractRuleTestCase<ClassJavadocRule> {
+class ClassJavadocRuleTest extends AbstractRuleTestCase<ClassJavadocRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations
 

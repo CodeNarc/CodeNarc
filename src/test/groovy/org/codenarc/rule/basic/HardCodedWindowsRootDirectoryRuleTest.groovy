@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class HardCodedWindowsRootDirectoryRuleTest extends GenericAbstractRuleTestCase<HardCodedWindowsRootDirectoryRule> {
+class HardCodedWindowsRootDirectoryRuleTest extends AbstractRuleTestCase<HardCodedWindowsRootDirectoryRule> {
 
     @Test
     void testRuleProperties() {

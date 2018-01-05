@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
  */
-class ExplicitGarbageCollectionRuleTest extends GenericAbstractRuleTestCase<ExplicitGarbageCollectionRule> {
+class ExplicitGarbageCollectionRuleTest extends AbstractRuleTestCase<ExplicitGarbageCollectionRule> {
 
     @Test
     void testRuleProperties() {

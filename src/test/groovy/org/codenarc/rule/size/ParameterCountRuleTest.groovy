@@ -17,7 +17,7 @@ package org.codenarc.rule.size
 
 import static org.codenarc.test.TestUtil.shouldFail
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +25,7 @@ import org.junit.Test
  *
  * @author Maciej Ziarko
  */
-class ParameterCountRuleTest extends GenericAbstractRuleTestCase<ParameterCountRule> {
+class ParameterCountRuleTest extends AbstractRuleTestCase<ParameterCountRule> {
 
     @Test
     void testRuleProperties() {

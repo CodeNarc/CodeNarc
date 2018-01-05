@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class GrailsStatelessServiceRuleTest extends GenericAbstractRuleTestCase<GrailsStatelessServiceRule> {
+class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase<GrailsStatelessServiceRule> {
 
     private static final SERVICE_PATH = 'project/MyProject/grails-app/services/com/xxx/MyService.groovy'
     private static final OTHER_PATH = 'project/MyProject/src/groovy/MyHelper.groovy'

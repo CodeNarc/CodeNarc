@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class UseAssertTrueInsteadOfAssertEqualsRuleTest extends GenericAbstractRuleTestCase<UseAssertTrueInsteadOfAssertEqualsRule> {
+class UseAssertTrueInsteadOfAssertEqualsRuleTest extends AbstractRuleTestCase<UseAssertTrueInsteadOfAssertEqualsRule> {
 
     @Test
     void testRuleProperties() {

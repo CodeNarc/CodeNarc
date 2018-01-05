@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class StatelessClassRuleTest extends GenericAbstractRuleTestCase<StatelessClassRule> {
+class StatelessClassRuleTest extends AbstractRuleTestCase<StatelessClassRule> {
 
     @Test
     void testRuleProperties() {

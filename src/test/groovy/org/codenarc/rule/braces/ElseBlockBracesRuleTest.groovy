@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.braces
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ElseBlockBracesRuleTest extends GenericAbstractRuleTestCase<ElseBlockBracesRule> {
+class ElseBlockBracesRuleTest extends AbstractRuleTestCase<ElseBlockBracesRule> {
 
     @Test
     void testRuleProperties() {

@@ -22,7 +22,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-abstract class AbstractClassReferenceRuleTestCase<T extends Rule> extends GenericAbstractRuleTestCase<T> {
+abstract class AbstractClassReferenceRuleTestCase<T extends Rule> extends AbstractRuleTestCase<T> {
 
     /**
      * @return the name of the class to check for

@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Joe Sondow
  */
 @SuppressWarnings('ConsecutiveBlankLines')
-class ConsecutiveBlankLinesRuleTest extends GenericAbstractRuleTestCase<ConsecutiveBlankLinesRule> {
+class ConsecutiveBlankLinesRuleTest extends AbstractRuleTestCase<ConsecutiveBlankLinesRule> {
 
     @Test
     void testRuleProperties() {

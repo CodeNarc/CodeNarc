@@ -16,7 +16,7 @@
 package org.codenarc.rule.enhanced
 
 import org.codehaus.groovy.control.Phases
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Marcin Erdmann
  */
-class MissingOverrideAnnotationRuleTest extends GenericAbstractRuleTestCase<MissingOverrideAnnotationRule> {
+class MissingOverrideAnnotationRuleTest extends AbstractRuleTestCase<MissingOverrideAnnotationRule> {
 
     @Test
     void testRuleProperties() {

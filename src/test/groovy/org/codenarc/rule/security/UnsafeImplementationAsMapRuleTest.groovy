@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.security
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Artur Gajowy
  */
-class UnsafeImplementationAsMapRuleTest extends GenericAbstractRuleTestCase<UnsafeImplementationAsMapRule> {
+class UnsafeImplementationAsMapRuleTest extends AbstractRuleTestCase<UnsafeImplementationAsMapRule> {
 
     private static final SOURCE_WITH_SINGLE_VIOLATION = """
         [nextElement: {}] as Enumeration      ${violation('java.util.Enumeration', 'hasMoreElements')}

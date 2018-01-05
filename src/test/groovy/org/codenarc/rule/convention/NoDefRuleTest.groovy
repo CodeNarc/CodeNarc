@@ -15,14 +15,14 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
  * @author Dominik Przybysz
  * @author Chris Mair
  */
-class NoDefRuleTest extends GenericAbstractRuleTestCase<NoDefRule> {
+class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
 
     @Test
     void testNoViolations() {

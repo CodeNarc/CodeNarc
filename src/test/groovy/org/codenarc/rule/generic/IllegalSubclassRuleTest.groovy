@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class IllegalSubclassRuleTest extends GenericAbstractRuleTestCase<IllegalSubclassRule> {
+class IllegalSubclassRuleTest extends AbstractRuleTestCase<IllegalSubclassRule> {
 
     @Test
     void testRuleProperties() {

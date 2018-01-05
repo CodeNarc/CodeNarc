@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class InconsistentPropertyLockingRuleTest extends GenericAbstractRuleTestCase<InconsistentPropertyLockingRule> {
+class InconsistentPropertyLockingRuleTest extends AbstractRuleTestCase<InconsistentPropertyLockingRule> {
 
     @Test
     void testRuleProperties() {

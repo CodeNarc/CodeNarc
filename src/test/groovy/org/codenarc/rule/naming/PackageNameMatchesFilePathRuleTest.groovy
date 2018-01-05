@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Simon Tost
  */
-class PackageNameMatchesFilePathRuleTest extends GenericAbstractRuleTestCase<PackageNameMatchesFilePathRule> {
+class PackageNameMatchesFilePathRuleTest extends AbstractRuleTestCase<PackageNameMatchesFilePathRule> {
 
     @Before
     void setup() {

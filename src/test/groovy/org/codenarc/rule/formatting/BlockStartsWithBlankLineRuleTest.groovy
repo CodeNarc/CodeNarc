@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Marcin Erdmann
  */
-class BlockStartsWithBlankLineRuleTest extends GenericAbstractRuleTestCase<BlockStartsWithBlankLineRule> {
+class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsWithBlankLineRule> {
 
     @Test
     void testRuleProperties() {

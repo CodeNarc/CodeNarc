@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class ThrowRuntimeExceptionRuleTest extends GenericAbstractRuleTestCase<ThrowRuntimeExceptionRule> {
+class ThrowRuntimeExceptionRuleTest extends AbstractRuleTestCase<ThrowRuntimeExceptionRule> {
     @Test
     void testRuleProperties() {
         assert rule.priority == 2

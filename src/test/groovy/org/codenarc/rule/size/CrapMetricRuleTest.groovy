@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class CrapMetricRuleTest extends GenericAbstractRuleTestCase<CrapMetricRule> {
+class CrapMetricRuleTest extends AbstractRuleTestCase<CrapMetricRule> {
 
     private static final String COBERTURA_FILE = 'coverage/Cobertura-example.xml'
     private static final BigDecimal CRAP_SCORE = 6.0

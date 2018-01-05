@@ -15,13 +15,13 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
  * Tests for UnnecessarySetterRule
  */
-class UnnecessarySetterRuleTest extends GenericAbstractRuleTestCase<UnnecessarySetterRule> {
+class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRule> {
 
     @Test
     void testRuleProperties() {

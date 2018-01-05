@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Joe Sondow
  */
 @SuppressWarnings('MissingBlankLineAfterImports')
-class MissingBlankLineAfterPackageRuleTest extends GenericAbstractRuleTestCase<MissingBlankLineAfterPackageRule> {
+class MissingBlankLineAfterPackageRuleTest extends AbstractRuleTestCase<MissingBlankLineAfterPackageRule> {
 
     @Test
     void testRuleProperties() {

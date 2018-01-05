@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class SpaceAroundClosureArrowRuleTest extends GenericAbstractRuleTestCase<SpaceAroundClosureArrowRule> {
+class SpaceAroundClosureArrowRuleTest extends AbstractRuleTestCase<SpaceAroundClosureArrowRule> {
 
     @Test
     void testRuleProperties() {

@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class InterfaceNameRuleTest extends GenericAbstractRuleTestCase<InterfaceNameRule> {
+class InterfaceNameRuleTest extends AbstractRuleTestCase<InterfaceNameRule> {
 
     @Test
     void testRuleProperties() {

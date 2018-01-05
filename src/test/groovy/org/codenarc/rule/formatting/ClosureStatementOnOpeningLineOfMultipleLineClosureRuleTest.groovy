@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends GenericAbstractRuleTestCase<ClosureStatementOnOpeningLineOfMultipleLineClosureRule> {
+class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends AbstractRuleTestCase<ClosureStatementOnOpeningLineOfMultipleLineClosureRule> {
 
     @Test
     void testRuleProperties() {

@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.serialization
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class EnumCustomSerializationIgnoredRuleTest extends GenericAbstractRuleTestCase<EnumCustomSerializationIgnoredRule> {
+class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase<EnumCustomSerializationIgnoredRule> {
 
     @Test
     void testRuleProperties() {

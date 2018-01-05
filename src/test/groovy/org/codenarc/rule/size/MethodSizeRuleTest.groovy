@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.size
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class MethodSizeRuleTest extends GenericAbstractRuleTestCase<MethodSizeRule> {
+class MethodSizeRuleTest extends AbstractRuleTestCase<MethodSizeRule> {
 
     @Test
     void testRuleProperties() {

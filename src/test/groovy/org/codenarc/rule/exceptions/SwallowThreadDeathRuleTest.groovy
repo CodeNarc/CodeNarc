@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Rob Fletcher
  * @author Klaus Baumecker
   */
-class SwallowThreadDeathRuleTest extends GenericAbstractRuleTestCase<SwallowThreadDeathRule> {
+class SwallowThreadDeathRuleTest extends AbstractRuleTestCase<SwallowThreadDeathRule> {
 
     @Test
     void testRuleProperties() {

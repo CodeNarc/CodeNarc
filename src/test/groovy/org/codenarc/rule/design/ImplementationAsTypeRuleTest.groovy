@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class ImplementationAsTypeRuleTest extends GenericAbstractRuleTestCase<ImplementationAsTypeRule> {
+class ImplementationAsTypeRuleTest extends AbstractRuleTestCase<ImplementationAsTypeRule> {
     private static final BAD_TYPES = [
         'java.util.ArrayList',
         'java.util.ArrayList<String>',

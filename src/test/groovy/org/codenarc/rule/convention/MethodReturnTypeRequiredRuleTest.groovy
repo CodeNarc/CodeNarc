@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Marcin Erdmann
  */
-class MethodReturnTypeRequiredRuleTest extends GenericAbstractRuleTestCase<MethodReturnTypeRequiredRule> {
+class MethodReturnTypeRequiredRuleTest extends AbstractRuleTestCase<MethodReturnTypeRequiredRule> {
 
     @Test
     void testNoViolations() {

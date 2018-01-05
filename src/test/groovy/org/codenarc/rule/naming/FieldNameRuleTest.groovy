@@ -17,7 +17,7 @@ package org.codenarc.rule.naming
 
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +25,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class FieldNameRuleTest extends GenericAbstractRuleTestCase<FieldNameRule> {
+class FieldNameRuleTest extends AbstractRuleTestCase<FieldNameRule> {
 
     @Test
     void testRuleProperties() {

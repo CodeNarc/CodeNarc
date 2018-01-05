@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Jan Ahrens
  * @auther Stefan Armbruster
   */
-class SpockIgnoreRestUsedRuleTest extends GenericAbstractRuleTestCase<SpockIgnoreRestUsedRule> {
+class SpockIgnoreRestUsedRuleTest extends AbstractRuleTestCase<SpockIgnoreRestUsedRule> {
 
     @Test
     void testRuleProperties() {

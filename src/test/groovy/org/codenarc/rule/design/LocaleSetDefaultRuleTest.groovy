@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author mingzhi.huang, rob.patrick
  * @author Chris Mair
  */
-class LocaleSetDefaultRuleTest extends GenericAbstractRuleTestCase<LocaleSetDefaultRule> {
+class LocaleSetDefaultRuleTest extends AbstractRuleTestCase<LocaleSetDefaultRule> {
 
     @Test
     void testRuleProperties() {

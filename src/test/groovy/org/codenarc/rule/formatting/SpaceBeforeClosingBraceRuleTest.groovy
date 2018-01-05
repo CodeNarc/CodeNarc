@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceBeforeClosingBraceRuleTest extends GenericAbstractRuleTestCase<SpaceBeforeClosingBraceRule> {
+class SpaceBeforeClosingBraceRuleTest extends AbstractRuleTestCase<SpaceBeforeClosingBraceRule> {
 
     private static final String BLOCK_VIOLATION_MESSAGE = 'The closing brace for the block in class None is not preceded by a space or whitespace'
     private static final String CLOSURE_VIOLATION_MESSAGE = 'The closing brace for the closure in class None is not preceded by a space or whitespace'

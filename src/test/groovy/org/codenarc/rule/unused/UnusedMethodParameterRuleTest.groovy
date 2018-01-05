@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unused
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
  */
-class UnusedMethodParameterRuleTest extends GenericAbstractRuleTestCase<UnusedMethodParameterRule> {
+class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodParameterRule> {
 
     @Test
     void testRuleProperties() {

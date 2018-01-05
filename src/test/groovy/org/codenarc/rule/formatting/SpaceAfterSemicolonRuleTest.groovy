@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAfterSemicolonRuleTest extends GenericAbstractRuleTestCase<SpaceAfterSemicolonRule> {
+class SpaceAfterSemicolonRuleTest extends AbstractRuleTestCase<SpaceAfterSemicolonRule> {
 
     @Test
     void testRuleProperties() {

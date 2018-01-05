@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.imports
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Kyle Boon
  * @author Chris Mair
  */
-class NoWildcardImportsRuleTest extends GenericAbstractRuleTestCase<NoWildcardImportsRule> {
+class NoWildcardImportsRuleTest extends AbstractRuleTestCase<NoWildcardImportsRule> {
 
     @Test
     void testRuleProperties() {

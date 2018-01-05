@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -25,7 +25,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Marcin Erdmann
  */
-class CompareToWithoutComparableRuleTest extends GenericAbstractRuleTestCase<CompareToWithoutComparableRule> {
+class CompareToWithoutComparableRuleTest extends AbstractRuleTestCase<CompareToWithoutComparableRule> {
 
     @Test
     void testRuleProperties() {

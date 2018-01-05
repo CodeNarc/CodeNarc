@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.imports
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Erik Pragt
  * @author Marcin Erdmann
   */
-class MisorderedStaticImportsRuleTest extends GenericAbstractRuleTestCase<MisorderedStaticImportsRule> {
+class MisorderedStaticImportsRuleTest extends AbstractRuleTestCase<MisorderedStaticImportsRule> {
 
     @Test
     void testRuleProperties() {

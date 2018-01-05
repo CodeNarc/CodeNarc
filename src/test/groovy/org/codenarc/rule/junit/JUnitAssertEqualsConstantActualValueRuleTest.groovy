@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Artur Gajowy
  */
-class JUnitAssertEqualsConstantActualValueRuleTest extends GenericAbstractRuleTestCase<JUnitAssertEqualsConstantActualValueRule> {
+class JUnitAssertEqualsConstantActualValueRuleTest extends AbstractRuleTestCase<JUnitAssertEqualsConstantActualValueRule> {
 
     @Before
     void setup() {

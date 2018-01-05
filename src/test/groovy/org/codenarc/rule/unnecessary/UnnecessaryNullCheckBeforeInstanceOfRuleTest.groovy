@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author 'Hamlet D'Arcy'
  * @author Chris Mair
  */
-class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends GenericAbstractRuleTestCase<UnnecessaryNullCheckBeforeInstanceOfRule> {
+class UnnecessaryNullCheckBeforeInstanceOfRuleTest extends AbstractRuleTestCase<UnnecessaryNullCheckBeforeInstanceOfRule> {
 
     @Test
     void testRuleProperties() {

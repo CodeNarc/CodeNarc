@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.exceptions
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class MissingNewInThrowStatementRuleTest extends GenericAbstractRuleTestCase<MissingNewInThrowStatementRule> {
+class MissingNewInThrowStatementRuleTest extends AbstractRuleTestCase<MissingNewInThrowStatementRule> {
 
     @Test
     void testRuleProperties() {

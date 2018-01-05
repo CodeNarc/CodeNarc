@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class WaitOutsideOfWhileLoopRuleTest extends GenericAbstractRuleTestCase<WaitOutsideOfWhileLoopRule> {
+class WaitOutsideOfWhileLoopRuleTest extends AbstractRuleTestCase<WaitOutsideOfWhileLoopRule> {
 
     @Test
     void testRuleProperties() {

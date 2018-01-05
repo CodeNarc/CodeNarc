@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.dry
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class DuplicateListLiteralRuleTest extends GenericAbstractRuleTestCase<DuplicateListLiteralRule> {
+class DuplicateListLiteralRuleTest extends AbstractRuleTestCase<DuplicateListLiteralRule> {
 
     @Test
     void testRuleProperties() {

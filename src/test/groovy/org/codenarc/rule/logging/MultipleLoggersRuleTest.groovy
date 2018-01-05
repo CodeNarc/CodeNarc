@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.logging
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author 'Hamlet D'Arcy'
   */
-class MultipleLoggersRuleTest extends GenericAbstractRuleTestCase<MultipleLoggersRule> {
+class MultipleLoggersRuleTest extends AbstractRuleTestCase<MultipleLoggersRule> {
 
     @Test
     void testRuleProperties() {

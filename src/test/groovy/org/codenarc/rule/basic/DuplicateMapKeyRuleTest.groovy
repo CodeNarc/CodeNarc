@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author '?ukasz Indykiewicz'
  */
-class DuplicateMapKeyRuleTest extends GenericAbstractRuleTestCase<DuplicateMapKeyRule> {
+class DuplicateMapKeyRuleTest extends AbstractRuleTestCase<DuplicateMapKeyRule> {
 
     @Test
     void testRuleProperties() {

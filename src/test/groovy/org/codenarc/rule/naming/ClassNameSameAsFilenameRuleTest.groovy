@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
 import org.junit.Test
 
@@ -25,7 +25,7 @@ import org.junit.Test
  * @author Artur Gajowy
  * @author Chris Mair
  */
-class ClassNameSameAsFilenameRuleTest extends GenericAbstractRuleTestCase<ClassNameSameAsFilenameRule> {
+class ClassNameSameAsFilenameRuleTest extends AbstractRuleTestCase<ClassNameSameAsFilenameRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations
 

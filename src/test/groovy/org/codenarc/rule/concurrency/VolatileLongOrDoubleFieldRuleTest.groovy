@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.concurrency
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class VolatileLongOrDoubleFieldRuleTest extends GenericAbstractRuleTestCase<VolatileLongOrDoubleFieldRule> {
+class VolatileLongOrDoubleFieldRuleTest extends AbstractRuleTestCase<VolatileLongOrDoubleFieldRule> {
     @Test
     void testRuleProperties() {
         assert rule.priority == 2

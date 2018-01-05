@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class UnnecessaryDefInFieldDeclarationRuleTest extends GenericAbstractRuleTestCase<UnnecessaryDefInFieldDeclarationRule> {
+class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase<UnnecessaryDefInFieldDeclarationRule> {
 
     @Test
     void testRuleProperties() {

@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Yuriy Chulovskyy
  */
-class TrailingCommaRuleTest extends GenericAbstractRuleTestCase<TrailingCommaRule> {
+class TrailingCommaRuleTest extends AbstractRuleTestCase<TrailingCommaRule> {
 
     @Test
     void testRuleProperties() {

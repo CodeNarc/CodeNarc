@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author 'Hamlet D'Arcy'
  * @author Chris Mair
  */
-class AssignmentInConditionalRuleTest extends GenericAbstractRuleTestCase<AssignmentInConditionalRule> {
+class AssignmentInConditionalRuleTest extends AbstractRuleTestCase<AssignmentInConditionalRule> {
 
     private static final VIOLATION_MESSAGE = 'Assignment used as conditional value, which always results in true. Use the == operator instead'
 

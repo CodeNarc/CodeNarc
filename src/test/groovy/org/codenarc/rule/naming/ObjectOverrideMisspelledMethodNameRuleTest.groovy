@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author @Hackergarten
  */
-class ObjectOverrideMisspelledMethodNameRuleTest extends GenericAbstractRuleTestCase<ObjectOverrideMisspelledMethodNameRule> {
+class ObjectOverrideMisspelledMethodNameRuleTest extends AbstractRuleTestCase<ObjectOverrideMisspelledMethodNameRule> {
 
     @Test
     void testRuleProperties() {

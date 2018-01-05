@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -26,7 +26,7 @@ import org.junit.Test
  * @author Marcin Smialek
  *
  */
-class EqualsOverloadedRuleTest extends GenericAbstractRuleTestCase<EqualsOverloadedRule> {
+class EqualsOverloadedRuleTest extends AbstractRuleTestCase<EqualsOverloadedRule> {
 
     @Test
     void testRuleProperties() {

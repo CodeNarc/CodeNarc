@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class AddEmptyStringRuleTest extends GenericAbstractRuleTestCase<AddEmptyStringRule> {
+class AddEmptyStringRuleTest extends AbstractRuleTestCase<AddEmptyStringRule> {
 
     private static final VIOLATION_MESSAGE = 'Concatenating an empty string is an inefficient way to convert an object to a String. Consider using toString() or String.valueOf(Object)'
 

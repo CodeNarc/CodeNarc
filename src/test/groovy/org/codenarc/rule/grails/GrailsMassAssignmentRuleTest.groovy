@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.grails
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Brian Soby
  */
-class GrailsMassAssignmentRuleTest extends GenericAbstractRuleTestCase<GrailsMassAssignmentRule> {
+class GrailsMassAssignmentRuleTest extends AbstractRuleTestCase<GrailsMassAssignmentRule> {
 
     @Test
     void testRuleProperties() {

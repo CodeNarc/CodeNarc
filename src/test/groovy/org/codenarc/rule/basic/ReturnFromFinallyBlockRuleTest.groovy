@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ReturnFromFinallyBlockRuleTest extends GenericAbstractRuleTestCase<ReturnFromFinallyBlockRule> {
+class ReturnFromFinallyBlockRuleTest extends AbstractRuleTestCase<ReturnFromFinallyBlockRule> {
     @Test
     void testRuleProperties() {
         assert rule.priority == 2

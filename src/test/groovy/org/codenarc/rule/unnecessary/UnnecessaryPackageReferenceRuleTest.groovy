@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
@@ -24,7 +24,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class UnnecessaryPackageReferenceRuleTest extends GenericAbstractRuleTestCase<UnnecessaryPackageReferenceRule> {
+class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<UnnecessaryPackageReferenceRule> {
 
     @Test
     void testRuleProperties() {

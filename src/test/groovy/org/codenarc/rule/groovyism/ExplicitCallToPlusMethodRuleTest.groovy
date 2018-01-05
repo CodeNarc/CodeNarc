@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  */
-class ExplicitCallToPlusMethodRuleTest extends GenericAbstractRuleTestCase<ExplicitCallToPlusMethodRule> {
+class ExplicitCallToPlusMethodRuleTest extends AbstractRuleTestCase<ExplicitCallToPlusMethodRule> {
 
     @Test
     void testRuleProperties() {

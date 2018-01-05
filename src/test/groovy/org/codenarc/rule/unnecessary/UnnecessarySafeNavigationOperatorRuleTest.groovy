@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class UnnecessarySafeNavigationOperatorRuleTest extends GenericAbstractRuleTestCase<UnnecessarySafeNavigationOperatorRule> {
+class UnnecessarySafeNavigationOperatorRuleTest extends AbstractRuleTestCase<UnnecessarySafeNavigationOperatorRule> {
 
     @Test
     void testRuleProperties() {

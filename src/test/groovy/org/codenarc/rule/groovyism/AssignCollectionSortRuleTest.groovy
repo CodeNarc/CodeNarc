@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Chris Mair
  */
-class AssignCollectionSortRuleTest extends GenericAbstractRuleTestCase<AssignCollectionSortRule> {
+class AssignCollectionSortRuleTest extends AbstractRuleTestCase<AssignCollectionSortRule> {
 
     @Test
     void testRuleProperties() {

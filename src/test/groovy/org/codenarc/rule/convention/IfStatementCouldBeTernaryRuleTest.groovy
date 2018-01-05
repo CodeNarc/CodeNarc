@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.convention
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class IfStatementCouldBeTernaryRuleTest extends GenericAbstractRuleTestCase<IfStatementCouldBeTernaryRule> {
+class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase<IfStatementCouldBeTernaryRule> {
 
     @Test
     void testRuleProperties() {

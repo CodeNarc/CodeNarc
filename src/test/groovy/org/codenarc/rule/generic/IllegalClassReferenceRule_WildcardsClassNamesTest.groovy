@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.generic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -26,7 +26,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class IllegalClassReferenceRule_WildcardsClassNamesTest extends GenericAbstractRuleTestCase<IllegalClassReferenceRule> {
+class IllegalClassReferenceRule_WildcardsClassNamesTest extends AbstractRuleTestCase<IllegalClassReferenceRule> {
 
     // Just test proper handling of wildcards by this rule. Assume that the other IllegalClassReferenceRule_*Test
     // classes sufficiently test references across the possible language constructs.

@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
   */
-class UnnecessaryBigIntegerInstantiationRuleTest extends GenericAbstractRuleTestCase<UnnecessaryBigIntegerInstantiationRule> {
+class UnnecessaryBigIntegerInstantiationRuleTest extends AbstractRuleTestCase<UnnecessaryBigIntegerInstantiationRule> {
 
     @Test
     void testRuleProperties() {

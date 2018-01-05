@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.naming
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -24,7 +24,7 @@ import org.junit.Test
  * @author Hamlet D'Arcy
  * @author Hubert 'Mr. Haki' Klein Ikkink
   */
-class ConfusingMethodNameRuleTest extends GenericAbstractRuleTestCase<ConfusingMethodNameRule> {
+class ConfusingMethodNameRuleTest extends AbstractRuleTestCase<ConfusingMethodNameRule> {
 
     @Test
     void testRuleProperties() {

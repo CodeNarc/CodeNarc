@@ -17,14 +17,14 @@ package org.codenarc.rule.${ruleCategory}
 
 import org.codenarc.rule.Rule
 import org.junit.Test
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 
 /**
  * Tests for ${ruleName}Rule
  *
  * @author ${authorName}
  */
-class ${ruleName}RuleTest extends GenericAbstractRuleTestCase<${ruleName}Rule> {
+class ${ruleName}RuleTest extends AbstractRuleTestCase<${ruleName}Rule> {
 
     @Test
     void testRuleProperties() {

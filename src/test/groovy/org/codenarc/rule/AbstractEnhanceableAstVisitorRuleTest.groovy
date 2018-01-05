@@ -25,7 +25,7 @@ import static org.codenarc.source.SourceCode.DEFAULT_COMPILER_PHASE
 /**
  * @author Marcin Erdmann
  */
-class AbstractEnhanceableAstVisitorRuleTest extends GenericAbstractRuleTestCase<AbstractEnhanceableAstVisitorRuleTestRule> {
+class AbstractEnhanceableAstVisitorRuleTest extends AbstractRuleTestCase<AbstractEnhanceableAstVisitorRuleTestRule> {
 
     @SuppressWarnings('JUnitPublicField')
     @org.junit.Rule

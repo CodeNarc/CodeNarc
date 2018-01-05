@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -25,7 +25,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ConstantTernaryExpressionRuleTest extends GenericAbstractRuleTestCase<ConstantTernaryExpressionRule> {
+class ConstantTernaryExpressionRuleTest extends AbstractRuleTestCase<ConstantTernaryExpressionRule> {
 
     @Test
     void testRuleProperties() {

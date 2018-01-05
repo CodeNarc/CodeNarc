@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.design
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class ToStringReturnsNullRuleTest extends GenericAbstractRuleTestCase<ToStringReturnsNullRule> {
+class ToStringReturnsNullRuleTest extends AbstractRuleTestCase<ToStringReturnsNullRule> {
 
     private static final String ERROR_MESSAGE = 'The toString() method within class MyClass returns null'
 

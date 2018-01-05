@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.imports
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class UnusedImportRuleTest extends GenericAbstractRuleTestCase<UnusedImportRule> {
+class UnusedImportRuleTest extends AbstractRuleTestCase<UnusedImportRule> {
 
     @Test
     void testRuleProperties() {

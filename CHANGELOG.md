@@ -29,6 +29,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #244: JUnit* rules are not compatible with JUnit5. (Yuriy Chulovskyy)
 
 Framework and Infrastructure
+   - #297: Add generic test type to AbstractRuleTestCase
    - #232: Update link to the gradle maven plugin. (Jenn Strater)
    - #233: Change dependency subst. to exclusions in integration-test module. (Marcin Erdmann)
    - #238: Update Gradle to 4.2. (Marcin Erdmann)

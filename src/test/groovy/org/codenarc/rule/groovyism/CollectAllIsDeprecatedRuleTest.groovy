@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Joachim Baumann
  */
-class CollectAllIsDeprecatedRuleTest extends GenericAbstractRuleTestCase<CollectAllIsDeprecatedRule> {
+class CollectAllIsDeprecatedRuleTest extends AbstractRuleTestCase<CollectAllIsDeprecatedRule> {
 
     @Test
     void testRuleProperties() {

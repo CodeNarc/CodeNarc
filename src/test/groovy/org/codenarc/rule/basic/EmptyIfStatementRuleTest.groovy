@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.basic
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class EmptyIfStatementRuleTest extends GenericAbstractRuleTestCase<EmptyIfStatementRule> {
+class EmptyIfStatementRuleTest extends AbstractRuleTestCase<EmptyIfStatementRule> {
 
     @Test
     void testRuleProperties() {

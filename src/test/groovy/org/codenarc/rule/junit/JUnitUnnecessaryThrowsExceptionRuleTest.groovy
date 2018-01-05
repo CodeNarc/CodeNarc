@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.junit
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class JUnitUnnecessaryThrowsExceptionRuleTest extends GenericAbstractRuleTestCase<JUnitUnnecessaryThrowsExceptionRule> {
+class JUnitUnnecessaryThrowsExceptionRuleTest extends AbstractRuleTestCase<JUnitUnnecessaryThrowsExceptionRule> {
 
     @Test
     void testRuleProperties() {

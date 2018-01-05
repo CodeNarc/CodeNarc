@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Dean Del Ponte
   */
-class UnnecessaryDotClassRuleTest extends GenericAbstractRuleTestCase<UnnecessaryDotClassRule> {
+class UnnecessaryDotClassRuleTest extends AbstractRuleTestCase<UnnecessaryDotClassRule> {
 
     @Test
     void testRuleProperties() {

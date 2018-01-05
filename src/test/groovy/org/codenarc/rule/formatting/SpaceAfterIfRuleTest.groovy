@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Chris Mair
   */
-class SpaceAfterIfRuleTest extends GenericAbstractRuleTestCase<SpaceAfterIfRule> {
+class SpaceAfterIfRuleTest extends AbstractRuleTestCase<SpaceAfterIfRule> {
 
     private static final MESSAGE = 'The if keyword within class None is not followed by a single space'
 

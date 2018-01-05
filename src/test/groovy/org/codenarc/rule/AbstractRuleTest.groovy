@@ -29,7 +29,7 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-class AbstractRuleTest extends GenericAbstractRuleTestCase<AbstractRule> {
+class AbstractRuleTest extends AbstractRuleTestCase<AbstractRule> {
 
     private static final NAME = 'Rule123'
     private static final PRIORITY = 2

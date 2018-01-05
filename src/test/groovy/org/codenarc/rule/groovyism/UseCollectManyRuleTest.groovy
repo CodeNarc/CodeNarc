@@ -15,7 +15,7 @@
  */
 package org.codenarc.rule.groovyism
 
-import org.codenarc.rule.GenericAbstractRuleTestCase
+import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
@@ -23,7 +23,7 @@ import org.junit.Test
  *
  * @author Joachim Baumann
  */
-class UseCollectManyRuleTest extends GenericAbstractRuleTestCase<UseCollectManyRule> {
+class UseCollectManyRuleTest extends AbstractRuleTestCase<UseCollectManyRule> {
 
     @Test
     void testRuleProperties() {
