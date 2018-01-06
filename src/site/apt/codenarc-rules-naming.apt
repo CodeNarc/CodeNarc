@@ -32,7 +32,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the regular expression used to validate the class    | /([A-Z]\w*\$?)*/       |
+| regex               | Specifies the regular expression used to validate the class    | ([A-Z]\\w*\\$?)*       |
 |                     | name. It is required and cannot be null or empty.              |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
@@ -100,7 +100,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the default regular expression used to validate the  | /(build.*\|create.*)/  |
+| regex               | Specifies the default regular expression used to validate the  | (build.*\|create.*)    |
 |                     | method name. It is required and cannot be null or empty.       |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 
@@ -163,7 +163,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the default regular expression used to validate the  | /[a-z][a-zA-Z0-9]*/    |
+| regex               | Specifies the default regular expression used to validate the  | [a-z][a-zA-Z0-9]*      |
 |                     | field name. It is required and cannot be null or empty.        |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 | finalRegex          | Specifies the regular expression used to validate <<<final>>>  | <<<null>>>             |
@@ -174,7 +174,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     | field names. It is optional. If not set, then <<<static>>>     |                        |
 |                     | fields that are non-<<<final>>> are validated using <<regex>>. |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-| staticFinalRegex    | Specifies the regular expression used to validate              | /[A-Z][A-Z0-9_]*/      |
+| staticFinalRegex    | Specifies the regular expression used to validate              | [A-Z][A-Z0-9_]*        |
 |                     | <<<static final>>> field names. It is optional. If not set,    |                        |
 |                     | then <<<static final>>> fields are validated using             |                        |
 |                     | <<finalRegex>>, <<staticRegex>> or <<regex>>.                  |                        |
@@ -228,7 +228,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the regular expression used to validate the method   | /[a-z]\w*/             |
+| regex               | Specifies the regular expression used to validate the method   | [a-z]\\w*              |
 |                     | name. It is required and cannot be null or empty.              |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 | ignoreMethodNames   | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
@@ -273,7 +273,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+---------------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>               |
 *---------------------+----------------------------------------------------------------+---------------------------------+
-| regex               | Specifies the regular expression used to validate the package  | /[a-z]+[a-z0-9]*(\.[a-z0-9]+)*/ |
+| regex               | Specifies the regular expression used to validate the package  | [a-z]+[a-z0-9]*(\\.[a-z0-9]+)*  |
 |                     | name. It is required and cannot be null or empty.              |                                 |
 *---------------------+----------------------------------------------------------------+---------------------------------+
 | packageNameRequired | Indicates whether a package name declaration is required for   | <<<false>>>                     |
@@ -292,7 +292,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 | <<Property>>        | <<Description>>                                                                  | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------------------------+------------------------+
 | groupId             | Specifies the common <group id> part of a package name, that will appear within  | <<<null>>>             |
-|                     | all checked package names. It must also map to the file path for the corresponding|                        |
+|                     | all checked package names. It must also map to the file path for the corresponding|                       |
 |                     | source file.                                                                     |                        |
 |                     |                                                                                  |                        |
 |                     | For instance, a <groupId> of <"org.sample"> means that for all classes that      |                        |
@@ -324,7 +324,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the regular expression used to validate the parameter| /[a-z][a-zA-Z0-9]*/    |
+| regex               | Specifies the regular expression used to validate the parameter| [a-z][a-zA-Z0-9]*      |
 |                     | name. It is required and cannot be null or empty.              |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
 | ignoreParameterNames| Specifies one or more (comma-separated) parameter names that   | <<<null>>>             |
@@ -348,7 +348,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+--------------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                    | <<Default Value>>      |
 *---------------------+--------------------------------------------------------------------+------------------------+
-| regex               | Specifies the default regular expression used to validate the      | /[a-z][a-zA-Z0-9]*/    |
+| regex               | Specifies the default regular expression used to validate the      | [a-z][a-zA-Z0-9]*      |
 |                     | property name. It is required and cannot be null or empty.         |                        |
 *---------------------+--------------------------------------------------------------------+------------------------+
 | finalRegex          | Specifies the regular expression used to validate <<<final>>>      | <<<null>>>             |
@@ -359,7 +359,7 @@ Naming Rules  ("<rulesets/naming.xml>")
 |                     | property names. It is optional. If not set, then <<<static>>>      |                        |
 |                     | properties that are non-<<<final>>> are validated using <<regex>>. |                        |
 *---------------------+--------------------------------------------------------------------+------------------------+
-| staticFinalRegex    | Specifies the regular expression used to validate                  | /[A-Z][A-Z0-9_]*/      |
+| staticFinalRegex    | Specifies the regular expression used to validate                  | [A-Z][A-Z0-9_]*        |
 |                     | <<<static final>>> property names. It is optional. If not set,     |                        |
 |                     | then <<<static final>>> property are validated using               |                        |
 |                     | <<finalRegex>>, <<staticRegex>> or <<regex>>.                      |                        |
@@ -385,10 +385,10 @@ Naming Rules  ("<rulesets/naming.xml>")
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+
-| regex               | Specifies the default regular expression used to validate the  | /[a-z][a-zA-Z0-9]*/    |
+| regex               | Specifies the default regular expression used to validate the  | [a-z][a-zA-Z0-9]*      |
 |                     | variable name. It is required and cannot be null or empty.     |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
-| finalRegex          | Specifies the regular expression used to validate <<<final>>>  | /[A-Z][A-Z0-9_]*/      |
+| finalRegex          | Specifies the regular expression used to validate <<<final>>>  | [A-Z][A-Z0-9_]*        |
 |                     | variable names. It is optional. If not set, then <<regex>> is  |                        |
 |                     | used to validate <<<final>>> variable names.                   |                        |
 *---------------------+----------------------------------------------------------------+------------------------+
