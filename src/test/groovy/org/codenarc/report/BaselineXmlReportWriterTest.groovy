@@ -30,7 +30,7 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  */
 class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
-    private static final REPORT_XML = """<?xml version='1.0'?>
+    private static final REPORT_XML = """<?xml version='1.0' encoding='UTF-8'?>
     <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
         <Report timestamp='${FORMATTED_TIMESTAMP}' type='baseline'/>
 

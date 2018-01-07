@@ -43,6 +43,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
 
     private static final MESSAGE1 = 'Message_1'
     private static final MESSAGE2 = 'Message_2'
+    private static final MESSAGE_SPECIAL_CHARS = '"Guaraní" "75%–84%" "Tschüß" "…" "str\n"'   // #303
 
     private static final VIOLATION_R1_M1 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE1)
     private static final VIOLATION_R1_M2 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE2)
@@ -56,6 +57,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
     private static final VIOLATION_R1_NULL_MESSAGE = new Violation(rule:new StubRule(name:RULE1), message:null)
     private static final VIOLATION_R2_EMPTY_MESSAGE = new Violation(rule:new StubRule(name:RULE2), message:'')
     private static final VIOLATION_R2_NULL_MESSAGE = new Violation(rule:new StubRule(name:RULE2), message:null)
+    private static final VIOLATION_R1_SPECIAL_CHARS = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE_SPECIAL_CHARS)
 
     private static final String BASELINE_XML = """<?xml version='1.0'?>
         <CodeNarc>
@@ -139,6 +141,25 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
         processor.processResults(results)
         assert results.violations == []
         assert processor.numViolationsRemoved == 3
+    }
+
+    @Test
+    void test_processResults_MessageWithSpecialChars() {
+        final String BASELINE_XML = """<?xml version='1.0'?>
+        <CodeNarc>
+            <File path='$PATH1'>
+                <Violation ruleName='$RULE1'>
+                    <Message><![CDATA[$MESSAGE_SPECIAL_CHARS]]></Message>
+                </Violation>
+            </File>
+        </CodeNarc>
+        """
+
+        BaselineResultsProcessor processor = new BaselineResultsProcessor(new StringResource(BASELINE_XML))
+        def results = new FileResults(PATH1, [VIOLATION_R1_SPECIAL_CHARS])
+        processor.processResults(results)
+        assert results.violations == []
+        assert processor.numViolationsRemoved == 1
     }
 
     @Test

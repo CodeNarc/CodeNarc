@@ -38,6 +38,8 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
 
         initializeResourceBundle()
         def builder = new StreamingMarkupBuilder()
+        builder.encoding = 'UTF-8'
+
         def xml = builder.bind {
             mkp.xmlDeclaration()
             CodeNarc(url:CODENARC_URL, version:getCodeNarcVersion()) {

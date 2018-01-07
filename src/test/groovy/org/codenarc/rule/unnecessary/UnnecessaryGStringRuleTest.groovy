@@ -122,6 +122,14 @@ I am a string
         assertSingleViolation(SOURCE, 3, 'def name = "Hamlet"')
     }
 
+    @Test
+    void testStringContainsSpecialCharacters() {
+        final SOURCE = '''
+            def name = "Guaraní 75%–84% Tschüß …"
+            '''
+        assertSingleViolation(SOURCE, 2, '"Guaraní 75%–84% Tschüß …"')
+    }
+
     @Override
     protected UnnecessaryGStringRule createRule() {
         new UnnecessaryGStringRule()

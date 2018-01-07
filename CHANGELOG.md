@@ -27,6 +27,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #241:**UnnecessaryConstructor**: Ignore protected constructors.
    - #281: **NoWildcardImports**: Add *ignoreStaticImports* property to ignore static imports. Redesign rule to be AST-based rather than file/string-based.
    - #244: JUnit* rules are not compatible with JUnit5. (Yuriy Chulovskyy)
+   - #303: UnnecessaryGString rule not ignored in Baseline. Fix encoding for characters within baseline report.
    - #304: BaselineXmlReport: Fix incorrect filtering out (removing) of violations in new/different files.  
 
 Framework and Infrastructure
