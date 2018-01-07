@@ -27,6 +27,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #241:**UnnecessaryConstructor**: Ignore protected constructors.
    - #281: **NoWildcardImports**: Add *ignoreStaticImports* property to ignore static imports. Redesign rule to be AST-based rather than file/string-based.
    - #244: JUnit* rules are not compatible with JUnit5. (Yuriy Chulovskyy)
+   - #304: BaselineXmlReport: Fix incorrect filtering out (removing) of violations in new/different files.  
 
 Framework and Infrastructure
    - #297: Add generic test type to AbstractRuleTestCase

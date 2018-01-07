@@ -15,6 +15,7 @@
  */
 package org.codenarc.util
 
+import org.codenarc.results.FileResults
 import org.slf4j.LoggerFactory
 import org.codenarc.ResultsProcessor
 import org.codenarc.report.BaselineViolation
@@ -45,12 +46,12 @@ class BaselineResultsProcessor implements ResultsProcessor {
 
         InputStream inputStream = resource.getInputStream()
         Map<String,Collection<BaselineViolation>> baselineViolationsMap = parser.parseBaselineXmlReport(inputStream)
-        Map<String,List<Violation>> violationsByFile = buildViolationsByFile(results)
+        List<FileResults> filesWithViolations = buildFilesWithViolations(results)
 
-        // For each file
-        violationsByFile.each { path, violations ->
-            def baselineViolations = baselineViolationsMap[path]
-            baselineViolations.each { baselineViolation -> removeMatchingViolation(results, violations, baselineViolation) }
+        // For each file with violations
+        filesWithViolations.each { FileResults fileResults ->
+            def baselineViolations = baselineViolationsMap[fileResults.path]
+            baselineViolations.each { baselineViolation -> removeMatchingViolation(fileResults, fileResults.violations, baselineViolation) }
         }
 
         LOG.info("Ignored $numViolationsRemoved baseline violations")
@@ -71,19 +72,19 @@ class BaselineResultsProcessor implements ResultsProcessor {
         return m1 == m2 || (!m1 && !m2)
     }
 
-    private Map<String,List<Violation>> buildViolationsByFile(Results results) {
-        Map<String,List<Violation>> violationsByFile = [:]
-        addViolationsByFile(violationsByFile, results)
-        return violationsByFile
+    private List<FileResults> buildFilesWithViolations(Results results) {
+        List<FileResults> filesWithViolations = []
+        addFilesWithViolations(filesWithViolations, results)
+        return filesWithViolations
     }
 
-    private void addViolationsByFile(Map<String,List<Violation>> map, Results results) {
+    private void addFilesWithViolations(List<FileResults> map, Results results) {
         if (results.isFile()) {
-            map[results.path] = results.violations
+            map << results
         }
         else {
             results.children.each { child ->
-                addViolationsByFile(map, child)
+                addFilesWithViolations(map, child)
             }
         }
     }

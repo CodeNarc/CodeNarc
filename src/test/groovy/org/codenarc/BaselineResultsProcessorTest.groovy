@@ -185,6 +185,19 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
     }
 
     @Test
+    void test_processResults_SameViolationInANewFile_OnlyRemovesViolationFromFilesInBaseline() {
+        final NEW_PATH = 'src/main/NEW'
+        def results = new DirectoryResults('src/main')
+        def fileResults1 = new FileResults(PATH1, [VIOLATION_R1_M1, VIOLATION_R2_M2])
+        def fileResults2 = new FileResults(NEW_PATH, [VIOLATION_R1_M1, VIOLATION_R2_M2])
+        results.addChild(fileResults1)
+        results.addChild(fileResults2)
+        processor.processResults(results)
+        assert processor.numViolationsRemoved == 2
+        assert results.findResultsForPath(NEW_PATH).violations == [VIOLATION_R1_M1, VIOLATION_R2_M2]
+    }
+
+    @Test
     void test_processResults_EmptyResults() {
         def results = new FileResults(PATH1, [])
         processor.processResults(results)
