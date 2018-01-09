@@ -69,7 +69,12 @@ class BaselineResultsProcessor implements ResultsProcessor {
     }
 
     private boolean sameMessage(String m1, String m2) {
-        return m1 == m2 || (!m1 && !m2)
+        return (!m1 && !m2) || scrub(m1) == scrub(m2)
+    }
+
+    private String scrub(String str) {
+        // The \r character, specifically, was causing comparisons to fail. See #303
+        return str?.replaceAll(/\R/, '')
     }
 
     private List<FileResults> buildFilesWithViolations(Results results) {

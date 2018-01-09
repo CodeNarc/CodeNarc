@@ -35,7 +35,7 @@ class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
 
     private static final SRC_DIR1 = 'c:/MyProject/src/main/groovy'
     private static final SRC_DIR2 = 'c:/MyProject/src/test/groovy'
-    private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<> "Guaraní" "75%–84%" "Tschüß" "…" "str\n"'
+    private static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<> "Guaraní" "75%–84%" "Tschüß" "…" "str\t\n\r"" <&>"'
     private static final MESSAGE3 = 'Other info'
     private static final VIOLATION1 = new Violation(rule:new UnusedImportRule(), sourceLine:'111')
     private static final VIOLATION2 = new Violation(rule:new UnusedPrivateMethodRule(), message:MESSAGE2)

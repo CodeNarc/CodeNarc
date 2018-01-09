@@ -43,7 +43,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
 
     private static final MESSAGE1 = 'Message_1'
     private static final MESSAGE2 = 'Message_2'
-    private static final MESSAGE_SPECIAL_CHARS = '"Guaraní" "75%–84%" "Tschüß" "…" "str\n"'   // #303
+    private static final MESSAGE_SPECIAL_CHARS = '"Guaraní" "75%–84%" "Tschüß" "…" "str\n\r"'   // #303
 
     private static final VIOLATION_R1_M1 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE1)
     private static final VIOLATION_R1_M2 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE2)
