@@ -25,4 +25,5 @@
     <rule class='org.codenarc.rule.convention.TrailingCommaRule'/>
     <rule class='org.codenarc.rule.convention.VectorIsObsoleteRule'/>
 
+    <rule class='org.codenarc.rule.convention.FieldTypeRequiredRule'/>
 </ruleset>
