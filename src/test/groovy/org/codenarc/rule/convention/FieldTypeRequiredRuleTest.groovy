@@ -55,7 +55,7 @@ class FieldTypeRequiredRuleTest extends AbstractRuleTestCase<FieldTypeRequiredRu
                 public static final NAME = "joe"
                 private static count = 0
 
-                private def name = NAME
+                private def name, phobia                // multiple fields declared
                 protected final date = new Date()
 
                 def defaultName
@@ -65,7 +65,8 @@ class FieldTypeRequiredRuleTest extends AbstractRuleTestCase<FieldTypeRequiredRu
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'public static final NAME = "joe"', messageText:'The type is not specified for field "NAME"'],
             [lineNumber:4, sourceLineText:'private static count = 0', messageText:'The type is not specified for field "count"'],
-            [lineNumber:6, sourceLineText:'private def name = NAME', messageText:'The type is not specified for field "name"'],
+            [lineNumber:6, sourceLineText:'private def name, phobia', messageText:'The type is not specified for field "name"'],
+            [lineNumber:6, sourceLineText:'private def name, phobia', messageText:'The type is not specified for field "phobia"'],
             [lineNumber:7, sourceLineText:'protected final date = new Date()', messageText:'The type is not specified for field "date"'],
             [lineNumber:9, sourceLineText:'def defaultName', messageText:'The type is not specified for field "defaultName"'],
             [lineNumber:10, sourceLineText:'def maxSoFar = -1L', messageText:'The type is not specified for field "maxSoFar"'],

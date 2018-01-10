@@ -42,6 +42,7 @@ Framework and Infrastructure
    - #270: Move build configuration out of project "build.properties".
    - #277: Fix online docs to remove references to obsolete createViolation() and addViolation() methods.
    - #278: Clean up unnecessary whitespace in source files.
+   - #301: Update Gradle wrapper to version 4.4.1. (Christian Murphy)
 
 
 Version 1.0 (Sep 2017)
