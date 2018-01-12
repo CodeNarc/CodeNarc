@@ -45,7 +45,7 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
     private static final String CONSTANT_NAME_REGEX = /[A-Z].*/
 
-    private final staticFieldNames = []
+    private final List staticFieldNames = []
 
     @Override
     protected void visitClassEx(ClassNode node) {

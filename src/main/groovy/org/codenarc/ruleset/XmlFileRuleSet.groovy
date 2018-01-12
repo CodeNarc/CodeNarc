@@ -15,6 +15,7 @@
  */
 package org.codenarc.ruleset
 
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codenarc.util.io.DefaultResourceFactory
 import org.codenarc.util.io.ResourceFactory
@@ -31,7 +32,7 @@ import org.codenarc.util.io.ResourceFactory
   */
 class XmlFileRuleSet implements RuleSet {
 
-    private static final LOG = LoggerFactory.getLogger(XmlFileRuleSet)
+    private static final Logger LOG = LoggerFactory.getLogger(XmlFileRuleSet)
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
     private List rules = []
 

@@ -21,12 +21,13 @@ package org.codenarc.rule.grails
  * @author Chris Mair
   */
 class GrailsUtil {
-    protected static final SERVICE_FILES = /.*grails-app\/services\/.*/
-    protected static final DOMAIN_FILES = /.*grails-app\/domain\/.*/
-    protected static final CONTROLLERS_FILES = /.*grails-app\/controllers\/.*/
-    protected static final CONTROLLERS_AND_TAGLIB_FILES = /.*grails-app\/(controllers|taglib)\/.*/
-    protected static final CONTROLLERS_CLASSES = '*Controller'
-    protected static final SERVICE_CLASSES = '*Service'
+
+    protected static final String SERVICE_FILES = /.*grails-app\/services\/.*/
+    protected static final String DOMAIN_FILES = /.*grails-app\/domain\/.*/
+    protected static final String CONTROLLERS_FILES = /.*grails-app\/controllers\/.*/
+    protected static final String CONTROLLERS_AND_TAGLIB_FILES = /.*grails-app\/(controllers|taglib)\/.*/
+    protected static final String CONTROLLERS_CLASSES = '*Controller'
+    protected static final String SERVICE_CLASSES = '*Service'
 
     /**
      * Private constructor. All members are static.

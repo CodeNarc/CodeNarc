@@ -37,13 +37,13 @@ class MultipleUnaryOperatorsRule extends AbstractAstVisitorRule {
 
 class MultipleUnaryOperatorsAstVisitor extends AbstractAstVisitor {
 
-    private static final UNARY_OPERATORS = [
+    private static final Map UNARY_OPERATORS = [
         (BitwiseNegationExpression):'~',
         (NotExpression):'!',
         (UnaryMinusExpression):'-',
         (UnaryPlusExpression):'+' ]
-    private static final UNARY_OPERATOR_CLASSES = UNARY_OPERATORS.keySet()
-    private static final ERROR_MESSAGE = 'The expression (%s) in class %s contains confusing multiple consecutive unary operators'
+    private static final Set UNARY_OPERATOR_CLASSES = UNARY_OPERATORS.keySet()
+    private static final String ERROR_MESSAGE = 'The expression (%s) in class %s contains confusing multiple consecutive unary operators'
 
     @Override
     void visitBitwiseNegationExpression(BitwiseNegationExpression expression) {

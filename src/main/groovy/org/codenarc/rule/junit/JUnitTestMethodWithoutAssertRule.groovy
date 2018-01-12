@@ -90,8 +90,9 @@ class JUnitTestMethodWithoutAssertAstVisitor extends AbstractMethodVisitor {
  * Visits code searching for assert statements or assert.* method calls.
  */
 class AssertionTrap extends AbstractAstVisitor {
+
     Set<String> assertMethodPatterns
-    def assertionFound = false
+    boolean assertionFound = false
 
     @Override
     void visitAssertStatement(AssertStatement statement) {

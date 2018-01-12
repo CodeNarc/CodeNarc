@@ -37,7 +37,7 @@ class InstanceofRule extends AbstractAstVisitorRule {
 
 class InstanceofAstVisitor extends AbstractAstVisitor {
 
-    private wildcardPattern
+    private WildcardPattern wildcardPattern
 
     @Override
     protected void visitClassEx(ClassNode node) {

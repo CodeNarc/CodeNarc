@@ -15,6 +15,7 @@
  */
  package org.codenarc.tool
 
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
 
@@ -28,10 +29,10 @@ import org.codenarc.ruleregistry.PropertiesFileRuleRegistry
   */
 class GenerateCodeNarcRulesProperties {
 
-    protected static final PROPERTIES_FILE = PropertiesFileRuleRegistry.PROPERTIES_FILE
-    private static final LOG = LoggerFactory.getLogger(GenerateCodeNarcRulesProperties)
+    protected static final String PROPERTIES_FILE = PropertiesFileRuleRegistry.PROPERTIES_FILE
+    private static final Logger LOG = LoggerFactory.getLogger(GenerateCodeNarcRulesProperties)
 
-    protected static propertiesFile = PROPERTIES_FILE
+    protected static String propertiesFile = PROPERTIES_FILE
 
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file

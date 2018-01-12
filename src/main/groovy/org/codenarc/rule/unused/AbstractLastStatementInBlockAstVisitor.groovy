@@ -27,7 +27,7 @@ import org.codenarc.rule.AbstractAstVisitor
   */
 abstract class AbstractLastStatementInBlockAstVisitor extends AbstractAstVisitor {
 
-    private final lastStatements = [] as Set
+    private final Set lastStatements = [] as Set
 
     protected boolean isLastStatementInBlock(Statement statement) {
         lastStatements.contains(statement)

@@ -27,13 +27,16 @@ import org.codenarc.rule.AbstractConstructorCallAstVisitor
  * @author Chris Mair
  */
 class BigDecimalInstantiationRule extends AbstractAstVisitorRule {
+
     String name = 'BigDecimalInstantiation'
     int priority = 2
     Class astVisitorClass = BigDecimalInstantiationAstVisitor
+
 }
 
 class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
-    static final NEW_BIG_DECIMAL = /new +(java\.math\.)?BigDecimal\(/
+
+    static final String NEW_BIG_DECIMAL = /new +(java\.math\.)?BigDecimal\(/
 
     @SuppressWarnings('ExplicitCallToGetAtMethod')
     @Override
@@ -48,4 +51,5 @@ class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisito
     protected String getViolationMessage(ConstructorCallExpression call) {
         """Call to $call.text uses the double constructor and should probably be replaced with new ${call.type.name}("${call.arguments?.expressions?.first().text}")"""
     }
+
 }

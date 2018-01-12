@@ -35,7 +35,8 @@ class ConsecutiveStringConcatenationRule extends AbstractAstVisitorRule {
 }
 
 class ConsecutiveStringConcatenationAstVisitor extends AbstractAstVisitor {
-    private static final PRIMITIVE_TYPES = [Byte.TYPE,
+
+    private static final List PRIMITIVE_TYPES = [Byte.TYPE,
             Double.TYPE,
             Float.TYPE,
             Integer.TYPE,

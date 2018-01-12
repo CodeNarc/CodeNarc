@@ -22,7 +22,7 @@ package org.codenarc.ruleset
   */
 class RuleSets {
 
-    static final ALL_RULESET_FILES = [
+    static final List ALL_RULESET_FILES = [
         'rulesets/basic.xml',
         'rulesets/braces.xml',
         'rulesets/concurrency.xml',

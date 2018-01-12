@@ -29,9 +29,9 @@ import org.codenarc.util.io.ClassPathResource
 @SuppressWarnings('DuplicateMapLiteral')
 abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
 
-    protected static final MAX_SOURCE_LINE_LENGTH = 70
-    protected static final SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
-    protected static final CSS_FILE = 'codenarc-htmlreport.css'
+    protected static final int MAX_SOURCE_LINE_LENGTH = 70
+    protected static final int SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
+    protected static final String CSS_FILE = 'codenarc-htmlreport.css'
 
     String title
     boolean includeRuleDescriptions = true

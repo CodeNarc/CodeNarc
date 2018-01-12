@@ -43,8 +43,8 @@ import org.codenarc.rule.Violation
 @SuppressWarnings('DuplicateMapLiteral')
 class HtmlReportWriter extends AbstractHtmlReportWriter {
 
-    public static final DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
-    private static final ROOT_PACKAGE_NAME = '<Root>'
+    public static final String DEFAULT_OUTPUT_FILE = 'CodeNarcReport.html'
+    private static final String ROOT_PACKAGE_NAME = '<Root>'
 
     String defaultOutputFile = DEFAULT_OUTPUT_FILE
     boolean includeSummaryByPackage = true

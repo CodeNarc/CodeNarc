@@ -24,7 +24,7 @@ import org.codenarc.rule.Rule
   */
 class ListRuleSet implements RuleSet {
 
-    private final rules
+    private final List rules
 
     /**
      * Construct a new instance from the specified List of rules.

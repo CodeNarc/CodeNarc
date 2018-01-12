@@ -26,7 +26,7 @@ import org.codenarc.rule.AbstractAstVisitor
  */
 abstract class AbstractFinallyAstVisitor extends AbstractAstVisitor {
 
-    private final finallyLineRanges = []
+    private final List finallyLineRanges = []
 
     // Known pathology: if there is another statement on the same line as the beginning or
     // end of the finally block, but outside the block.

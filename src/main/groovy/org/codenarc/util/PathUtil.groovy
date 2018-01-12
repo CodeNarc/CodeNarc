@@ -22,7 +22,7 @@ package org.codenarc.util
   */
 class PathUtil {
 
-    private static final SEP = '/'
+    private static final String SEP = '/'
 
     static String getName(String path) {
         if (!path) {

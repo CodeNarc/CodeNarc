@@ -16,6 +16,7 @@
 package org.codenarc.source
 
 import groovy.grape.GrabAnnotationTransformation
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.ModuleNode
@@ -34,12 +35,13 @@ import org.codenarc.analyzer.SuppressionAnalyzer
   */
 @SuppressWarnings('AbstractClassWithoutAbstractMethod')
 abstract class AbstractSourceCode implements SourceCode {
-    static final LOG = LoggerFactory.getLogger(AbstractSourceCode)
-    static final SEPARATOR_PROP = 'file.separator'
+
+    static final Logger LOG = LoggerFactory.getLogger(AbstractSourceCode)
+    static final String SEPARATOR_PROP = 'file.separator'
     private ModuleNode ast
     private List lines
-    private astParsed = false
-    private final initLock = new Object()
+    private boolean astParsed = false
+    private final Object initLock = new Object()
     private Map<ClassNode, List<MethodCallExpression>> methodCallExpressions
     SuppressionAnalyzer suppressionAnalyzer
 

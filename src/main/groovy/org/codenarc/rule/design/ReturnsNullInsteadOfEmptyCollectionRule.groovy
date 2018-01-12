@@ -92,7 +92,8 @@ class ReturnsNullInsteadOfEmptyCollectionRuleAstVisitor extends AbstractAstVisit
 }
 
 class CollectionReturnTracker extends AbstractAstVisitor {
-    def callbackFunction
+
+    Closure callbackFunction
 
     @Override
     void visitReturnStatement(ReturnStatement statement) {

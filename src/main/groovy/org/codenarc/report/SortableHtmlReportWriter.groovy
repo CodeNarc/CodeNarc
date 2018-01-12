@@ -42,8 +42,8 @@ import org.codenarc.util.io.ClassPathResource
 @SuppressWarnings('DuplicateMapLiteral')
 class SortableHtmlReportWriter extends AbstractHtmlReportWriter {
 
-    public static final DEFAULT_OUTPUT_FILE = 'CodeNarcSortableReport.html'
-    private static final JS_FILE = 'js/sort-table.js'
+    public static final String DEFAULT_OUTPUT_FILE = 'CodeNarcSortableReport.html'
+    private static final String JS_FILE = 'js/sort-table.js'
 
     private class ViolationAndPath {
         Violation violation

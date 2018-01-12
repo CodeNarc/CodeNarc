@@ -31,8 +31,8 @@ class NullReturnTracker extends AbstractAstVisitor {
     // NOTE: The provided parent must be a subclass of AbstractAstVisitor and
     //       implement the void handleClosure(ClosureExpression expression) method
 
-    def parent
-    def errorMessage
+    AbstractAstVisitor parent
+    String errorMessage
 
     @Override
     void visitReturnStatement(ReturnStatement statement) {

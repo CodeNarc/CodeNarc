@@ -38,7 +38,7 @@ class JUnitUnnecessaryThrowsExceptionRule extends AbstractAstVisitorRule {
 
 class JUnitUnnecessaryThrowsExceptionAstVisitor extends AbstractAstVisitor {
 
-    private static final JUNIT4_ANNOTATIONS = ['Test', 'Before', 'BeforeClass', 'AfterClass', 'After', 'Ignore']
+    private static final List JUNIT4_ANNOTATIONS = ['Test', 'Before', 'BeforeClass', 'AfterClass', 'After', 'Ignore']
 
     @Override
     protected void visitMethodEx(MethodNode node) {

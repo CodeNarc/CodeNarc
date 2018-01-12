@@ -53,8 +53,8 @@ class UnnecessaryTernaryExpressionRule extends AbstractAstVisitorRule {
 
 class UnnecessaryTernaryExpressionAstVisitor extends AbstractAstVisitor  {
 
-    private static final BOOLEAN_COMPARISON_OPERATIONS = ['<', '>', '>=', '<=', '==', '!=', '==~']
-    private static final BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
+    private static final List BOOLEAN_COMPARISON_OPERATIONS = ['<', '>', '>=', '<=', '==', '!=', '==~']
+    private static final List BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
 
     @Override
     void visitTernaryExpression(TernaryExpression ternaryExpression) {

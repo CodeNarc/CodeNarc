@@ -16,6 +16,7 @@
 package org.codenarc.ruleset
 
 import org.codenarc.rule.Rule
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codenarc.util.PropertyUtil
 import org.codenarc.util.io.DefaultResourceFactory
@@ -40,11 +41,11 @@ import org.codenarc.util.io.ResourceFactory
   */
 class PropertiesFileRuleSetConfigurer {
 
-    private static final LOG = LoggerFactory.getLogger(PropertiesFileRuleSetConfigurer)
-    private static final PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesFileRuleSetConfigurer)
+    private static final String PROPERTIES_FILE_SYSPROP = 'codenarc.properties.file'
 
     private final ResourceFactory resourceFactory = new DefaultResourceFactory()
-    protected defaultPropertiesFilename = 'codenarc.properties'
+    protected String defaultPropertiesFilename = 'codenarc.properties'
 
     /**
      * Configure the rules within the RuleSet from the properties file (relative to the classpath).

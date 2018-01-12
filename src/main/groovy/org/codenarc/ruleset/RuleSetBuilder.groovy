@@ -34,7 +34,7 @@ import org.codenarc.ruleregistry.RuleRegistryHolder
   */
 class RuleSetBuilder {
 
-    private final topLevelDelegate = new TopLevelDelegate()
+    private final TopLevelDelegate topLevelDelegate = new TopLevelDelegate()
 
     void ruleset(Closure closure) {
         closure.delegate = topLevelDelegate
@@ -48,7 +48,7 @@ class RuleSetBuilder {
 
 class TopLevelDelegate {
 
-    private final allRuleSet = new CompositeRuleSet()
+    private final CompositeRuleSet allRuleSet = new CompositeRuleSet()
 
     void ruleset(String path) {
         def ruleSet = RuleSetUtil.loadRuleSetFile(path)

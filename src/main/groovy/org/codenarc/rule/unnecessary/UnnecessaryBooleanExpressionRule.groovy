@@ -58,7 +58,7 @@ class UnnecessaryBooleanExpressionRule extends AbstractAstVisitorRule {
 
 class UnnecessaryBooleanExpressionAstVisitor extends AbstractAstVisitor  {
 
-    private static final BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
+    private static final List BOOLEAN_LOGIC_OPERATIONS = ['&&', '||']
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {

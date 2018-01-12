@@ -28,6 +28,7 @@ import org.codenarc.util.MultilineCommentChecker
  * @author Hamlet D'Arcy
  */
 class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
+
     String name = 'UnnecessarySemicolon'
     int priority = 3
     // ^\\s*\\*.*   == any line that starts whitespace and a *
@@ -41,7 +42,7 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessarySemicolonAstVisitor
 
     // this rule is shared across threads and has state, so make the state thread local
-    def temporaryViolations = new ThreadLocal() {
+    ThreadLocal temporaryViolations = new ThreadLocal() {
         @Override
         protected Object initialValue() {
             []

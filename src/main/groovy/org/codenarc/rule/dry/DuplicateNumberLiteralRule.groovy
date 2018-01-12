@@ -35,7 +35,7 @@ class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
     String ignoreNumbers = '0,1'
 
-    private static final NUMBER_TYPES = [Number,
+    private static final List NUMBER_TYPES = [Number,
             Byte.TYPE,
             Double.TYPE,
             Float.TYPE,

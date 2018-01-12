@@ -26,7 +26,7 @@ import org.codenarc.analyzer.SuppressionAnalyzer
 class SourceFile extends AbstractSourceCode {
 
     private final File file
-    private final path
+    private final String path
     private String text
 
     /**

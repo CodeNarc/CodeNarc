@@ -24,7 +24,7 @@ package org.codenarc.tool
   */
 class RunCodeNarcAgainstGrails {
 
-    private static final RULESET_FILES = 'RunCodeNarcAgainstGrails.ruleset'
+    private static final String RULESET_FILES = 'RunCodeNarcAgainstGrails.ruleset'
 
     static void main(String[] args) {
         runCodeNarc()

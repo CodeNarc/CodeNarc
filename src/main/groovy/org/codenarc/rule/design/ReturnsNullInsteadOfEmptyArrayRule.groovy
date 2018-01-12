@@ -76,7 +76,8 @@ class ReturnsNullInsteadOfEmptyArrayAstVisitor extends AbstractAstVisitor {
 }
 
 class ArrayReturnTracker extends AbstractAstVisitor {
-    def callbackFunction
+
+    Closure callbackFunction
 
     @Override
     void visitReturnStatement(ReturnStatement statement) {

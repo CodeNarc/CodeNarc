@@ -16,6 +16,7 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
@@ -28,11 +29,11 @@ import org.codenarc.ruleset.XmlFileRuleSet
   */
 class GenerateRuleIndexPage {
 
-    protected static final RULE_INDEX_FILE = 'src/site/apt/codenarc-rule-index.apt'
-    private static final TEMPLATE_FILE = 'src/main/resources/templates/codenarc-rule-index.apt.template'
-    private static final LOG = LoggerFactory.getLogger(GenerateRuleIndexPage)
+    protected static final String RULE_INDEX_FILE = 'src/site/apt/codenarc-rule-index.apt'
+    private static final String TEMPLATE_FILE = 'src/main/resources/templates/codenarc-rule-index.apt.template'
+    private static final Logger LOG = LoggerFactory.getLogger(GenerateRuleIndexPage)
 
-    protected static ruleIndexFile = RULE_INDEX_FILE
+    protected static String ruleIndexFile = RULE_INDEX_FILE
 
     /**
      * Write out all current rule index to the 'codenarc-rule-index.apt' APT file

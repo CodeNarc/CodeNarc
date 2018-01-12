@@ -27,13 +27,16 @@ import org.codenarc.rule.AbstractConstructorCallAstVisitor
  * @author Chris Mair
   */
 class UnnecessaryStringInstantiationRule extends AbstractAstVisitorRule {
+
     String name = 'UnnecessaryStringInstantiation'
     int priority = 3
     Class astVisitorClass = UnnecessaryStringInstantiationAstVisitor
+
 }
 
 class UnnecessaryStringInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
-    static final NEW_STRING = /new +(java\.lang\.)?String\(/
+
+    static final String NEW_STRING = /new +(java\.lang\.)?String\(/
 
     @SuppressWarnings('ExplicitCallToGetAtMethod')
     @Override

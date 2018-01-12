@@ -33,10 +33,10 @@ import javax.xml.validation.SchemaFactory
 class XmlReaderRuleSet implements RuleSet {
 
     // W3C_XML_SCHEMA_NS_URI constant is not defined in older versions of javax.xml.XMLConstants
-    private static final XML_SCHEMA_URI = 'http://www.w3.org/2001/XMLSchema'
+    private static final String XML_SCHEMA_URI = 'http://www.w3.org/2001/XMLSchema'
 
-    private static final NS = new Namespace('http://codenarc.org/ruleset/1.0')
-    private static final RULESET_SCHEMA_FILE = 'ruleset-schema.xsd'
+    private static final Namespace NS = new Namespace('http://codenarc.org/ruleset/1.0')
+    private static final String RULESET_SCHEMA_FILE = 'ruleset-schema.xsd'
     private final List rules = []
 
     /**

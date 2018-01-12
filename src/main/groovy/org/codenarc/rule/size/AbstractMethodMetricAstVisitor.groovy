@@ -42,7 +42,7 @@ import org.gmetrics.result.MetricResult
 abstract class AbstractMethodMetricAstVisitor extends AbstractAstVisitor  {
 
     protected Metric metric
-    private final metricLock = new Object()
+    private final Object metricLock = new Object()
 
     protected abstract Metric createMetric()
     protected abstract String getMetricShortDescription()

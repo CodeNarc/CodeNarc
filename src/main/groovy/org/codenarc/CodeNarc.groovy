@@ -48,7 +48,7 @@ import org.codenarc.report.ReportWriterFactory
 @SuppressWarnings(['Println', 'PrintStackTrace'])
 class CodeNarc {
 
-    protected static final HELP = """CodeNarc - static analysis for Groovy',
+    protected static final String HELP = """CodeNarc - static analysis for Groovy',
 Usage: java org.codenarc.CodeNarc [OPTIONS]
   where OPTIONS are zero or more command-line options of the form "-NAME[=VALUE]":
     -basedir=<DIR>
@@ -90,10 +90,10 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     protected List reports = []
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
-    protected createCodeNarcRunner = { new CodeNarcRunner() }
+    protected Closure createCodeNarcRunner = { new CodeNarcRunner() }
 
     // Abstract calling System.exit() to allow substitution of test spy for unit tests
-    protected static systemExit = { exitCode -> System.exit(exitCode) }
+    protected static Closure systemExit = { exitCode -> System.exit(exitCode) }
 
     /**
      * Main command-line entry-point. Run the CodeNarc application.

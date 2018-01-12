@@ -28,7 +28,7 @@ class InlineViolationsParser {
 
     private static final String PREVENT_ACCIDENTAL_ESCAPING_OF_NEXT_MARKER = ' '
 
-    def result = new ParseResult()
+    ParseResult result = new ParseResult()
 
     ParseResult parse(String annotatedSource) {
         annotatedSource.eachLine(1, this.&parseLine)

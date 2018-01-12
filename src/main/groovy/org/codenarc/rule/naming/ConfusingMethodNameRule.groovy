@@ -44,11 +44,12 @@ class ConfusingMethodNameAstVisitor extends AbstractAstVisitor {
 }
 
 class ScopedConfusingMethodNameAstVisitor extends AbstractAstVisitor {
-    def lowercaseMethodNames = [] as Set
-    def lowercaseMethodNamesWithParameterTypes = [] as Set
-    def lowercaseClosureNames = [] as Set
-    def lowercaseFieldNames = [:]
-    def parent
+
+    Set lowercaseMethodNames = [] as Set
+    Set lowercaseMethodNamesWithParameterTypes = [] as Set
+    Set lowercaseClosureNames = [] as Set
+    Map lowercaseFieldNames = [:]
+    AbstractAstVisitor parent
 
     ScopedConfusingMethodNameAstVisitor(AbstractAstVisitor parent) {
         this.parent = parent

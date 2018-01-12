@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.MethodNode
  */
 class ModifiersUtil {
 
-    private static final MODIFIERS = [
+    private static final Map MODIFIERS = [
         public:MethodNode.ACC_PUBLIC,
         protected:MethodNode.ACC_PROTECTED,
         private:MethodNode.ACC_PRIVATE,

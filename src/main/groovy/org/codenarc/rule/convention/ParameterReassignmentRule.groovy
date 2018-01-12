@@ -36,8 +36,8 @@ class ParameterReassignmentRule extends AbstractAstVisitorRule {
 
 class ParameterReassignmentAstVisitor extends AbstractAstVisitor {
 
-    private currentMethodParameterNames
-    private final currentClosureParameterNames = []
+    private List currentMethodParameterNames
+    private final List currentClosureParameterNames = []
 
     @Override
     protected void visitMethodEx(MethodNode node) {

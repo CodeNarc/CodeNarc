@@ -39,7 +39,7 @@ class UnnecessaryObjectReferencesRule extends AbstractAstVisitorRule {
 
 class UnnecessaryObjectReferencesAstVisitor extends AbstractAstVisitor {
 
-    private final runCollector = [variable: null, count: 0, clear: { this.variable = null; this.count = 0 }]
+    private final Map runCollector = [variable: null, count: 0, clear: { this.variable = null; this.count = 0 }]
 
     @Override
     void visitBlockStatement(BlockStatement block) {

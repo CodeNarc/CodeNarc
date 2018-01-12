@@ -17,6 +17,10 @@ package org.codenarc.ant
 
 import static java.lang.Thread.currentThread
 
+import org.codenarc.ruleset.RuleSet
+import org.codenarc.util.io.ResourceFactory
+import org.slf4j.Logger
+
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
@@ -57,7 +61,7 @@ import org.slf4j.LoggerFactory
  */
 class CodeNarcTask extends Task {
 
-    private static final LOG = LoggerFactory.getLogger(CodeNarcTask)
+    private static final Logger LOG = LoggerFactory.getLogger(CodeNarcTask)
 
     /**
      * The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
@@ -82,12 +86,12 @@ class CodeNarcTask extends Task {
 
     protected List reportWriters = []
     protected List fileSets = []
-    protected ruleSet
+    protected RuleSet ruleSet
 
-    private final resourceFactory = new DefaultResourceFactory()
+    private final ResourceFactory resourceFactory = new DefaultResourceFactory()
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
-    protected createCodeNarcRunner = {
+    protected Closure createCodeNarcRunner = {
         if (excludeBaseline) {
             LOG.info("Loading baseline violations from [$excludeBaseline]")
             def resource = resourceFactory.getResource(excludeBaseline)

@@ -34,7 +34,8 @@ class UnnecessaryParenthesesForMethodCallWithClosureRule extends AbstractAstVisi
 }
 
 class UnnecessaryParenthesesForMethodCallWithClosureAstVisitor extends AbstractMethodCallExpressionVisitor {
-    private final static EMPTY_BRACKETS_PATTERN = /\s*\(\s*\)\s*/
+
+    private final static String EMPTY_BRACKETS_PATTERN = /\s*\(\s*\)\s*/
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {

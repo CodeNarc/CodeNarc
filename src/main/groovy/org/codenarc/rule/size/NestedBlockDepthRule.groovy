@@ -48,7 +48,7 @@ class NestedBlockDepthAstVisitor extends AbstractAstVisitor {
 
     private final Set blocksToProcess = []
     private Set closureFieldExpressions
-    private nestedBlockDepth = 0
+    private int nestedBlockDepth = 0
 
     @Override
     void visitClassEx(ClassNode classNode) {

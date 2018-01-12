@@ -52,7 +52,7 @@ class IllegalPackageReferenceRule extends AbstractAstVisitorRule {
 
 class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
 
-    private wildcard
+    private WildcardPattern wildcard
 
     @Override
     protected void visitClassEx(ClassNode node) {

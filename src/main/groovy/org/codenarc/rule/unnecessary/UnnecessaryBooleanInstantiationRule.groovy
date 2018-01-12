@@ -30,13 +30,16 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
   */
 class UnnecessaryBooleanInstantiationRule extends AbstractAstVisitorRule {
+
     String name = 'UnnecessaryBooleanInstantiation'
     int priority = 3
     Class astVisitorClass = UnnecessaryBooleanInstantiationAstVisitor
+
 }
 
 class UnnecessaryBooleanInstantiationAstVisitor extends AbstractConstructorCallAstVisitor {
-    static final NEW_BOOLEAN = /new +(java\.lang\.)?Boolean\(/
+
+    private static final String NEW_BOOLEAN = /new +(java\.lang\.)?Boolean\(/
 
     @Override
     protected boolean isConstructorCallAViolation(ConstructorCallExpression constructorCall) {

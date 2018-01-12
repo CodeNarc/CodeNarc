@@ -34,7 +34,7 @@ class UnnecessaryCastRule extends AbstractAstVisitorRule {
 class UnnecessaryCastAstVisitor extends AbstractAstVisitor {
 
     // Map of Cast type -> Cast expression type (both as Strings)
-    private static final CAST_TYPE_MAP = [
+    private static final Map CAST_TYPE_MAP = [
         int:'java.lang.Integer',
         long:'java.lang.Long',
         BigDecimal:'java.math.BigDecimal',

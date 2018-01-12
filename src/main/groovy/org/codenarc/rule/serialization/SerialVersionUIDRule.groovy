@@ -35,7 +35,7 @@ class SerialVersionUIDRule extends AbstractAstVisitorRule {
 
 class SerialVersionUIDAstVisitor extends AbstractAstVisitor {
 
-    private final static SERIAL_ID = 'serialVersionUID'
+    private final static String SERIAL_ID = 'serialVersionUID'
 
     @Override
     void visitField(FieldNode node) {

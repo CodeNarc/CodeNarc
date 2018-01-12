@@ -33,7 +33,7 @@ import org.codehaus.groovy.ast.expr.*
  */
 class ClassReferenceAstVisitor extends AbstractAstVisitor {
 
-    private final classNamePattern
+    private final WildcardPattern classNamePattern
     private final String violationMessagePattern
 
     /**

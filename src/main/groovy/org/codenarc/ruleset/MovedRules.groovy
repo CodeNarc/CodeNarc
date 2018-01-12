@@ -22,11 +22,11 @@
  */
 class MovedRules {
 
-    private static final CONVENTION_RULESET = 'rulesets/convention.xml'
-    private static final DESIGN_RULESET = 'rulesets/design.xml'
-    private static final UNNECESSARY_RULESET = 'rulesets/unnecessary.xml'
-    private static final GROOVYISM_RULESET = 'rulesets/groovyism.xml'
-    private static final SERIALIZATION_RULESET = 'rulesets/serialization.xml'
+    private static final String CONVENTION_RULESET = 'rulesets/convention.xml'
+    private static final String DESIGN_RULESET = 'rulesets/design.xml'
+    private static final String UNNECESSARY_RULESET = 'rulesets/unnecessary.xml'
+    private static final String GROOVYISM_RULESET = 'rulesets/groovyism.xml'
+    private static final String SERIALIZATION_RULESET = 'rulesets/serialization.xml'
 
     private static class MovedToRuleSet {
         String ruleSetName
@@ -42,7 +42,7 @@ class MovedRules {
         }
     }
 
-    private static final RULES = [
+    private static final Map RULES = [
         HardcodedWindowsRootDirectory: renamedTo('HardCodedWindowsRootDirectory'),
 
         AddEmptyString: movedTo(UNNECESSARY_RULESET),

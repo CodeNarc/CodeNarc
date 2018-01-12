@@ -40,9 +40,10 @@ class CouldBeSwitchStatementRule extends AbstractAstVisitorRule {
 }
 
 class CouldBeSwitchStatementAstVisitor extends AbstractAstVisitor {
+
     private BinaryExpression prev = null
     private Integer ifCounter = 0
-    private firstIfNode = null
+    private Expression firstIfNode = null
 
     @Override
     void visitIfElse(IfStatement node) {

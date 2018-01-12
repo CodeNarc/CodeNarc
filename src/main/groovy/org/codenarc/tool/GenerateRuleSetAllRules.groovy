@@ -16,6 +16,7 @@
  package org.codenarc.tool
 
 import groovy.text.SimpleTemplateEngine
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 /**
@@ -26,11 +27,11 @@ import org.slf4j.LoggerFactory
   */
 class GenerateRuleSetAllRules {
 
-    protected static final RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRules.groovy.txt'
-    private static final TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRules.groovy.template'
-    private static final LOG = LoggerFactory.getLogger(GenerateRuleSetAllRules)
+    protected static final String RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRules.groovy.txt'
+    private static final String TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRules.groovy.template'
+    private static final Logger LOG = LoggerFactory.getLogger(GenerateRuleSetAllRules)
 
-    protected static ruleSetFile = RULESET_FILE
+    protected static String ruleSetFile = RULESET_FILE
 
     /**
      * Write out all current rules to the 'codenarc-base-rules.properties' properties file

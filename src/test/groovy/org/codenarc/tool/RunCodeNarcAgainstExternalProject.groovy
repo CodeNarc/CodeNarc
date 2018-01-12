@@ -25,7 +25,7 @@ package org.codenarc.tool
  */
 class RunCodeNarcAgainstExternalProject {
 
-    private static final DEFAULT_RULESET_FILES = 'RunCodeNarcAgainstExternalProject.ruleset'
+    private static final String DEFAULT_RULESET_FILES = 'RunCodeNarcAgainstExternalProject.ruleset'
 
     static void main(String[] args) {
         runCodeNarc()

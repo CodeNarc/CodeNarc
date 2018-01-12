@@ -25,7 +25,7 @@ import org.gmetrics.source.SourceCode
   */
 class GMetricsSourceCodeAdapter implements SourceCode {
 
-    private final codeNarcSourceCode
+    private final org.codenarc.source.SourceCode codeNarcSourceCode
 
     GMetricsSourceCodeAdapter(org.codenarc.source.SourceCode sourceCode) {
         assert sourceCode

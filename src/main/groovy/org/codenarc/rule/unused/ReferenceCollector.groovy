@@ -28,7 +28,7 @@ import org.codenarc.util.AstUtil
  */
 class ReferenceCollector extends ClassCodeVisitorSupport {
 
-    def references = [] as Set
+    Set references = [] as Set
 
     @Override
     void visitVariableExpression(VariableExpression expression) {

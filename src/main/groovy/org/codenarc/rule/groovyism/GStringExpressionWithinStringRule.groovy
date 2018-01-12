@@ -40,7 +40,7 @@ class GStringExpressionWithinStringRule extends AbstractAstVisitorRule {
 
 class GStringExpressionWithinStringAstVisitor extends AbstractAstVisitor {
 
-    private static final GSTRING_EXPRESSION_REGEX = /\$\{.*\}/
+    private static final String GSTRING_EXPRESSION_REGEX = /\$\{.*\}/
     private AnnotatedNode currentAnnotatedNode
 
     @Override

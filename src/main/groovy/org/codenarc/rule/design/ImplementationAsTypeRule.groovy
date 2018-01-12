@@ -57,14 +57,16 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
   */
 class ImplementationAsTypeRule extends AbstractAstVisitorRule {
+
     String name = 'ImplementationAsType'
     int priority = 2
     Class astVisitorClass = ImplementationAsTypeAstVisitor
+
 }
 
 class ImplementationAsTypeAstVisitor extends AbstractAstVisitor {
 
-    private static final TYPES = [
+    private static final List TYPES = [
         'ArrayList', 'java.util.ArrayList',
         'GregorianCalendar', 'java.util.GregorianCalendar',
         'HashMap', 'java.util.HashMap',

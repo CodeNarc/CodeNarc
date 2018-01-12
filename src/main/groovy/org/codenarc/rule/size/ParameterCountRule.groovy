@@ -28,7 +28,7 @@ import org.codenarc.rule.AbstractAstVisitorRule
  */
 class ParameterCountRule extends AbstractAstVisitorRule {
 
-    private static final DEFAULT_MAX_PARAMETER = 5
+    private static final int DEFAULT_MAX_PARAMETER = 5
 
     String name = 'ParameterCount'
     int priority = 2

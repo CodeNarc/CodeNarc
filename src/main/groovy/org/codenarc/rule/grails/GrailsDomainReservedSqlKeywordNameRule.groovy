@@ -42,7 +42,7 @@ class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 
     //based on http://developer.mimer.com/validator/sql-reserved-words.tml
-    private final reservedSqlKeywords = ['ABSOLUTE', 'ACTION', 'ADD', 'AFTER', 'ALL', 'ALLOCATE', 'ALTER', 'AND', 'ANY',
+    private final Set reservedSqlKeywords = ['ABSOLUTE', 'ACTION', 'ADD', 'AFTER', 'ALL', 'ALLOCATE', 'ALTER', 'AND', 'ANY',
         'ARE', 'ARRAY', 'AS', 'ASC', 'ASENSITIVE', 'ASSERTION', 'ASYMMETRIC', 'AT', 'ATOMIC', 'AUTHORIZATION', 'AVG',
         'BEFORE', 'BEGIN', 'BETWEEN', 'BIGINT', 'BINARY', 'BIT', 'BIT_LENGTH', 'BLOB', 'BOOLEAN', 'BOTH', 'BREADTH',
         'BY', 'CALL', 'CALLED', 'CASCADE', 'CASCADED', 'CASE', 'CAST', 'CATALOG', 'CHAR', 'CHARACTER',
@@ -78,7 +78,7 @@ class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
     ] as Set
 
     //based on http://docs.jboss.org/hibernate/orm/3.6/reference/en-US/html/types.html#types-value-basic
-    private final hibernateBasicTypes = ['String', 'Character', 'boolean', 'Boolean', 'byte', 'Byte', 'short', 'Short',
+    private final Set hibernateBasicTypes = ['String', 'Character', 'boolean', 'Boolean', 'byte', 'Byte', 'short', 'Short',
         'int', 'Integer', 'long', 'Long', 'float', 'Float', 'double', 'Double', 'BigInteger', 'BigDecimal', 'Timestamp',
         'Time', 'Date', 'Calendar', 'Currency', 'Locale', 'TimeZone', 'URL', 'Class', 'Blob', 'Clob', '[B', 'Byte[]',
         '[C', 'Character[]', 'UUID', 'Serializable'
@@ -102,10 +102,10 @@ class GrailsDomainReservedSqlKeywordNameRule extends AbstractAstVisitorRule {
 
 class GrailsDomainReservedSqlKeywordNameAstVisitor extends AbstractAstVisitor {
 
-    private final reservedSqlKeywords
-    private final hibernateBasicTypes
-    private final instanceFields = []
-    private transients = []
+    private final Set<String> reservedSqlKeywords
+    private final Set<String> hibernateBasicTypes
+    private final List instanceFields = []
+    private List transients = []
 
     GrailsDomainReservedSqlKeywordNameAstVisitor(Set<String> reservedSqlKeywords, Set<String> hibernateBasicTypes) {
         this.reservedSqlKeywords = reservedSqlKeywords*.toUpperCase()

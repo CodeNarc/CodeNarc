@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.size
 
+import org.codenarc.util.io.ResourceFactory
 import org.gmetrics.metric.Metric
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
@@ -65,7 +67,7 @@ import org.gmetrics.metric.crap.CrapMetric
   */
 class CrapMetricRule extends AbstractAstVisitorRule {
 
-    private static final LOG = LoggerFactory.getLogger(CrapMetricRule)
+    private static final Logger LOG = LoggerFactory.getLogger(CrapMetricRule)
 
     String name = 'CrapMetric'
     int priority = 2
@@ -77,10 +79,10 @@ class CrapMetricRule extends AbstractAstVisitorRule {
 
     protected String crapMetricClassName = 'org.gmetrics.metric.crap.CrapMetric'
     private Boolean ready
-    private crapMetric      // omit CrapMetric type; it may not be on the classpath
-    private final readyLock = new Object()
-    private final createMetricLock = new Object()
-    private final resourceFactory = new DefaultResourceFactory()
+    private Object crapMetric      // Do not declare CrapMetric type; it may not be on the classpath
+    private final Object readyLock = new Object()
+    private final Object createMetricLock = new Object()
+    private final ResourceFactory resourceFactory = new DefaultResourceFactory()
 
     @Override
     AstVisitor getAstVisitor() {

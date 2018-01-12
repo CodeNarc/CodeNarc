@@ -38,7 +38,7 @@ class WildcardPattern {
 
     private final List regexes = []
     private final List strings = []
-    private final defaultMatches
+    private final boolean defaultMatches
 
     /**
      * Construct a new WildcardPattern instance on a single pattern or a comma-separated list of patterns.

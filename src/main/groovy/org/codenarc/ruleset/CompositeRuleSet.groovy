@@ -24,7 +24,7 @@ import org.codenarc.rule.Rule
   */
 class CompositeRuleSet implements RuleSet {
 
-    private final rules = []
+    private final List rules = []
 
     /**
      * Add a single Rule to this RuleSet

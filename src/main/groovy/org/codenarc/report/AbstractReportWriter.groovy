@@ -16,6 +16,8 @@
 package org.codenarc.report
 
 import groovy.text.SimpleTemplateEngine
+import groovy.text.TemplateEngine
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
@@ -33,21 +35,23 @@ import org.codenarc.util.io.ClassPathResource
  */
 abstract class AbstractReportWriter implements ReportWriter {
 
-    protected static final BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
-    protected static final CUSTOM_MESSAGES_BUNDLE = 'codenarc-messages'
-    protected static final VERSION_FILE = 'codenarc-version.txt'
-    protected static final CODENARC_URL = 'http://www.codenarc.org'
+    protected static final String BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
+    protected static final String CUSTOM_MESSAGES_BUNDLE = 'codenarc-messages'
+    protected static final String VERSION_FILE = 'codenarc-version.txt'
+    protected static final String CODENARC_URL = 'http://www.codenarc.org'
+
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractReportWriter)
 
     String outputFile
     Object writeToStandardOut
-    private static final LOG = LoggerFactory.getLogger(AbstractReportWriter)
-    protected getTimestamp = { new Date() }
-    protected customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
-    protected resourceBundle
-    private final templateEngine = new SimpleTemplateEngine()
+
+    protected Closure getTimestamp = { new Date() }
+    protected String customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
+    protected ResourceBundle resourceBundle
+    private final TemplateEngine templateEngine = new SimpleTemplateEngine()
 
     // Allow tests to override this
-    protected initializeResourceBundle = { initializeDefaultResourceBundle() }
+    protected Closure initializeResourceBundle = { initializeDefaultResourceBundle() }
 
     abstract void writeReport(Writer writer, AnalysisContext analysisContext, Results results)
 
