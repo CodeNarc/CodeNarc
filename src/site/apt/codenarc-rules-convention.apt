@@ -379,6 +379,26 @@ Convention Rules  ("<rulesets/convention.xml>")
                  ]
 -------------------------------------------------------------------------------
 
+
+* {VariableTypeRequired} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.1>
+
+  Checks that variable types are explicitly specified in declarations (and not using <<<def>>>).
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    class MyClass {
+        void doStuff() {
+            final NAME = "joe"          // violation
+            def count = 0, max = 99     // violation
+            def defaultName             // violation
+        }
+    }
+-------------------------------------------------------------------------------
+
+
 * {VectorIsObsolete} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.17>
@@ -392,4 +412,3 @@ Convention Rules  ("<rulesets/convention.xml>")
 -------------------------------------------------------------------------------
     def myList = new Vector()           // violation
 -------------------------------------------------------------------------------
-

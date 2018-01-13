@@ -12,6 +12,7 @@
     <rule class='org.codenarc.rule.convention.CouldBeElvisRule'/>
     <rule class='org.codenarc.rule.convention.CouldBeSwitchStatementRule'/>
     <rule class='org.codenarc.rule.convention.HashtableIsObsoleteRule'/>
+    <rule class='org.codenarc.rule.convention.FieldTypeRequiredRule'/>
     <rule class='org.codenarc.rule.convention.IfStatementCouldBeTernaryRule'/>
     <rule class='org.codenarc.rule.convention.InvertedIfElseRule'/>
     <rule class='org.codenarc.rule.convention.InvertedConditionRule'/>
@@ -23,7 +24,7 @@
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
     <rule class='org.codenarc.rule.convention.TernaryCouldBeElvisRule'/>
     <rule class='org.codenarc.rule.convention.TrailingCommaRule'/>
+    <rule class='org.codenarc.rule.convention.VariableTypeRequiredRule'/>
     <rule class='org.codenarc.rule.convention.VectorIsObsoleteRule'/>
 
-    <rule class='org.codenarc.rule.convention.FieldTypeRequiredRule'/>
 </ruleset>

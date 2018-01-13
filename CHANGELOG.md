@@ -9,6 +9,7 @@ New Rules
    - #285: **MethodReturnTypeRequired** rule (convention) - Checks that method return types are not dynamic, that is they are explicitly stated and different than def. (Marcin Erdmann)
    - #288: **MethodParameterTypeRequired** rule (convention) - Checks that method parameters are not dynamically typed, that is they are explicitly stated and different than def. (Marcin Erdmann)
    - #290: **FieldTypeRequired** rule (convention) - Checks that field types are explicitly specified (and not using def)
+   - #290: **VariableTypeRequired** rule (convention) - Checks that variable types are explicitly specified in declarations (and not using def)
    - #291: **BlockStartsWithBlankLine** rule (formatting) - Checks that code blocks such as method bodies, closures and control structure bodies do not start with an empty line. (Marcin Erdmann)
    - #293: **BlockEndsWithBlankLine** rule (formatting) - Checks that code blocks such as method bodies, closures and control structure bodies do not end with an empty line. (Marcin Erdmann)
 

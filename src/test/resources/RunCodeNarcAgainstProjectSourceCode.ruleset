@@ -12,6 +12,7 @@ ruleset {
     ruleset('rulesets/convention.xml') {
         exclude 'NoDef'
         exclude 'TrailingComma'
+        exclude 'VariableTypeRequired'
         FieldTypeRequired(doNotApplyToFilesMatching:TEST_FILES)
         NoTabCharacter(doNotApplyToFileNames:'NoTabCharacterRuleTest.groovy') //Test should contain tab character to test the rule
     }
