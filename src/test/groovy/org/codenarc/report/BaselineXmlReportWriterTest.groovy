@@ -30,38 +30,36 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  */
 class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
-    private static final REPORT_XML = """<?xml version='1.0' encoding='UTF-8'?>
-    <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
-        <Report timestamp='${FORMATTED_TIMESTAMP}' type='baseline'/>
+    private static final REPORT_XML = """<?xml version="1.0" encoding="UTF-8"?>
+    <CodeNarc url="http://www.codenarc.org" version="${VERSION}">
+        <Report timestamp="${FORMATTED_TIMESTAMP}" type="baseline"/>
 
-        <Project title='My Cool Project'>
+        <Project title="My Cool Project">
             <SourceDirectory>c:/MyProject/src/main/groovy</SourceDirectory>
             <SourceDirectory>c:/MyProject/src/test/groovy</SourceDirectory>
         </Project>
 
-        <File path='src/main/MyAction.groovy'>
-            <Violation ruleName='UnusedImport'>
-            </Violation>
-            <Violation ruleName='EmptyCatchBlock'>
+        <File path="src/main/MyAction.groovy">
+            <Violation ruleName="UnusedImport"/>
+            <Violation ruleName="EmptyCatchBlock">
                 <Message><![CDATA[Other info]]></Message>
             </Violation>
-            <Violation ruleName='EmptyCatchBlock'>
+            <Violation ruleName="EmptyCatchBlock">
                 <Message><![CDATA[Other info]]></Message>
             </Violation>
-            <Violation ruleName='UnusedImport'>
-            </Violation>
-            <Violation ruleName='UnusedPrivateMethod'>
+            <Violation ruleName="UnusedImport"/>
+            <Violation ruleName="UnusedPrivateMethod">
                 <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
             </Violation>
         </File>
 
-        <File path='src/main/dao/MyDao.groovy'>
-            <Violation ruleName='EmptyCatchBlock'>
+        <File path="src/main/dao/MyDao.groovy">
+            <Violation ruleName="EmptyCatchBlock">
                 <Message><![CDATA[Other info]]></Message>
             </Violation>
         </File>
-        <File path='src/main/dao/MyOtherDao.groovy'>
-            <Violation ruleName='UnusedPrivateMethod'>
+        <File path="src/main/dao/MyOtherDao.groovy">
+            <Violation ruleName="UnusedPrivateMethod">
                 <Message><![CDATA[bad stuff: !@#\$%^&amp;*()_+&lt;&gt;]]></Message>
             </Violation>
         </File>
@@ -73,6 +71,8 @@ class BaselineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
         reportWriter.writeReport(stringWriter, analysisContext, results)
         def xmlAsString = stringWriter.toString()
         assertXml(xmlAsString, REPORT_XML)
+        log xmlAsString
+        assert xmlAsString.readLines().size() > 28      // make sure it is formatted (pretty-printed)
     }
 
     @Test

@@ -16,6 +16,7 @@
 package org.codenarc.report
 
 import groovy.xml.StreamingMarkupBuilder
+import groovy.xml.XmlUtil
 import org.codenarc.AnalysisContext
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
@@ -48,7 +49,7 @@ class BaselineXmlReportWriter extends AbstractReportWriter {
                 out << buildFileElements(results)
             }
         }
-        writer << xml
+        XmlUtil.serialize(xml, writer)
     }
 
     //--------------------------------------------------------------------------
