@@ -1,6 +1,6 @@
 # CodeNarc Change Log
 
-TBD: Version 1.1 (Jan 2018)
+Version 1.1 (Jan 2018)
 --------------------------------------
 New Rules
    - #247: **MissingOverrideAnnotation** rule (enhanced) - Checks for methods that override a method in a super class or implement a method in an interface but are not annotated with @Override. (Marcin Erdmann)
