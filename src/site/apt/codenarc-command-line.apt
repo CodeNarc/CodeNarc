@@ -84,3 +84,10 @@ CodeNarc - Run From Command-Line
 @java -classpath %GROOVY_JAR%;lib/CodeNarc-0.5.jar;lib/slf4j-api-1.7.25.jar;lib org.codenarc.CodeNarc %*
 +----------------------------------------------------------------------------------------
 
+  Here is the equivalent Linux command.
+
++----------------------------------------------------------------------------------------
+export GROOVY_JAR="$GROOVY_HOME/embeddable/groovy-all-1.5.6.jar"
+
+java -classpath $GROOVY_JAR:lib/CodeNarc-0.5.jar:lib/slf4j-api-1.7.25.jar:lib org.codenarc.CodeNarc $*
++----------------------------------------------------------------------------------------
