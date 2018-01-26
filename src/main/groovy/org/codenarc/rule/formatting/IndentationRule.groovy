@@ -17,10 +17,12 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.*
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -50,6 +52,16 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     private int indentLevel = 0
     private final Set<Integer> ignoreLineNumbers = []
     private final Set<BlockStatement> nestedBlocks = []
+    private static final List<String> SPOCK_BLOCKS = [
+            'given',
+            'setup',
+            'cleanup',
+            'when',
+            'then',
+            'expect',
+            'and',
+            'where'
+    ]
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -109,11 +121,13 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-        int addToIndentLevel = nestedBlocks.contains(block) ? 0 : 1        // finally blocks have extra level of nested BlockStatement
+        int addToIndentLevel = nestedBlocks.contains(block) ? 0 : 1
+        // finally blocks have extra level of nested BlockStatement
         indentLevel += addToIndentLevel
         block.statements.each { statement ->
             // Skip statements on the same line as another statement or a field declaration
-            if (!ignoreLineNumbers.contains(statement.lineNumber)) {
+            // Skip statements that are spock block labels
+            if (!ignoreLineNumbers.contains(statement.lineNumber) && !isSpockBlockLabel(statement)) {
                 ignoreLineNumbers << statement.lineNumber
 
                 // Ignore nested BlockStatement (e.g. finally blocks)
@@ -177,6 +191,13 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private int columnForIndentLevel(int indentLevel) {
         return indentLevel * rule.spacesPerIndentLevel + 1
+    }
+
+    private boolean isSpockBlockLabel(Statement statement) {
+        return (statement.statementLabel in SPOCK_BLOCKS &&
+                statement.expression.class == ConstantExpression &&
+                statement.expression.type.clazz == String
+        )
     }
 
 }

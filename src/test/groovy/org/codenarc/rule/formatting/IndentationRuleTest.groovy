@@ -686,6 +686,28 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void test_SpockTestWithLabels_NoViolation() {
+        final SOURCE = '''
+            |class MySpec extends Specification {
+            |    void 'some feature'() {
+            |        given: 'something'
+            |        def a = new Object()
+            |
+            |        when: 'something is done'
+            |        def b = a.toString()
+            |
+            |        then: 'something happens'
+            |        b != ''
+            |
+            |        and:
+            |        b != 'raccoon'
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected IndentationRule createRule() {
         new IndentationRule()
