@@ -4,6 +4,7 @@ TODO: Version 1.2 (??? 2018)
 --------------------------------------
    - #315: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
    - #311: Add equivalent linux command line example. (Wilfred Hughes)
+   - #307: Fix java.util.regex.PatternSyntaxException from TrailingWhitespaceRule; because of \R (Java 1.8 dependency).
 
 
 Version 1.1 (Jan 2018)
