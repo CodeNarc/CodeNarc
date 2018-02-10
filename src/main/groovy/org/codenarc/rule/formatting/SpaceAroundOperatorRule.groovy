@@ -109,12 +109,18 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private void processElvisExpression(ElvisOperatorExpression expression) {
-        def line = sourceCode.lines[expression.lineNumber - 1]
-        if (line.contains('?:')) {
-            if (!(line =~ /\s\?\:/)) {
+        String line = sourceCode.lines[expression.lineNumber - 1]
+
+        /* for assert statements expression.columnNumber is not where the elvis operator "?:" starts, but where the
+         * assertion starts. To handle this problem, look for the first instance of "?:" starting from the columnNumber
+         */
+        int index = line.indexOf('?:', expression.columnNumber - 1)
+
+        if (index >= 0) {
+            if (index > 0 && line.subSequence(index - 1, index + 2) =~ /\S\?\:/) {
                 addViolation(expression, "The operator \"?:\" within class $currentClassName is not preceded by a space or whitespace")
             }
-            if (line =~ /\?\:(\S)/) {
+            if (index + 3 < line.size() && line.subSequence(index, index + 3) =~ /\?\:(\S)/) {
                 addViolation(expression, "The operator \"?:\" within class $currentClassName is not followed by a space or whitespace")
             }
         }
