@@ -16,16 +16,16 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.expr.BinaryExpression
+import org.codehaus.groovy.ast.expr.BooleanExpression
 import org.codehaus.groovy.ast.expr.CastExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codehaus.groovy.ast.expr.TernaryExpression
+import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.ElvisOperatorExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.DeclarationExpression
-import org.codehaus.groovy.ast.expr.BooleanExpression
+import org.codehaus.groovy.ast.expr.TernaryExpression
+import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
  * Check that there is at least one space (blank) or whitespace around each binary operator,
@@ -40,7 +40,7 @@ import org.codehaus.groovy.ast.expr.BooleanExpression
  * Known limitation: Does not catch violations of certain ternary expressions.
  *
  * @author Chris Mair
-  */
+ */
 class SpaceAroundOperatorRule extends AbstractAstVisitorRule {
 
     String name = 'SpaceAroundOperator'
@@ -64,8 +64,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         if (isFirstVisit(expression)) {
             if (expression instanceof ElvisOperatorExpression) {
                 processElvisExpression(expression)
-            }
-            else {
+            } else {
                 processTernaryExpression(expression)
             }
         }
@@ -110,12 +109,18 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private void processElvisExpression(ElvisOperatorExpression expression) {
-        def line = sourceCode.lines[expression.lineNumber - 1]
-        if (line.contains('?:')) {
-            if (!(line =~ /\s\?\:/)) {
+        String line = sourceCode.lines[expression.lineNumber - 1]
+
+        /* for assert statements expression.columnNumber is not where the elvis operator "?:" starts, but where the
+         * assertion starts. To handle this problem, look for the first instance of "?:" starting from the columnNumber
+         */
+        int index = line.indexOf('?:', expression.columnNumber - 1)
+
+        if (index >= 0) {
+            if (index > 0 && line.subSequence(index - 1, index + 2) =~ /\S\?\:/) {
                 addViolation(expression, "The operator \"?:\" within class $currentClassName is not preceded by a space or whitespace")
             }
-            if (!(line =~ /\?\:\s/)) {
+            if (index + 3 < line.size() && line.subSequence(index, index + 3) =~ /\?\:(\S)/) {
                 addViolation(expression, "The operator \"?:\" within class $currentClassName is not followed by a space or whitespace")
             }
         }
@@ -170,7 +175,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private int rightMostColumn(Expression expression) {
-        switch(expression) {
+        switch (expression) {
             case BinaryExpression:
                 return rightMostColumn(expression.rightExpression)
             case MethodCallExpression:
