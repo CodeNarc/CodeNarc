@@ -33,7 +33,7 @@ class FakePathRule extends AbstractRule {
      * @param sourceCode - the sourceCode to which the rule is applied
      */
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         def message = sourceCode.path?.replaceAll('\\\\', '/')
         numberOfViolations.times { violations << new Violation(rule:this, message:message) }
     }

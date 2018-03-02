@@ -16,6 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codenarc.util.ImportUtil
@@ -41,7 +42,7 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
     int priority = 3
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         if (sourceCode.ast?.imports || sourceCode.ast?.starImports) {
             ImportUtil.getNonStaticImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importClassName = importNode.className

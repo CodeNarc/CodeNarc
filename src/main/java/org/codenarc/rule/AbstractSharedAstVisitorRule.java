@@ -30,7 +30,7 @@ public abstract class AbstractSharedAstVisitorRule extends AbstractAstVisitorRul
     protected abstract List<Violation> getViolations(AstVisitor astVisitor, SourceCode sourceCode);
 
     @Override
-    public void applyTo(SourceCode sourceCode, List violations) {
+    public void applyTo(SourceCode sourceCode, List<Violation> violations) {
         if (!sourceCode.isValid()) { return; }
 
         AstVisitor visitor = getAstVisitor(sourceCode);

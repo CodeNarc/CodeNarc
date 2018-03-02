@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
@@ -34,7 +35,7 @@ class FileEndsWithoutNewlineRule extends AbstractRule {
      * @param violations A list of Violations that may be added to. It can be an empty list
      */
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         if (!sourceCode.text.endsWith('\n') && sourceCode.lines) {
             violations.add(createViolation(sourceCode.lines.size() - 1, sourceCode.lines[-1],
                 "File $sourceCode.name does not end with a newline"))

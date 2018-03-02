@@ -34,7 +34,7 @@ class BracesForClassRule extends AbstractRule {
     boolean sameLine = true
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         sourceCode?.ast?.classes?.each { ClassNode classNode ->
             // Scripts don't have opening and closing braces, so ignore them.
             if (!classNode.script) {

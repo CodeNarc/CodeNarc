@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
@@ -29,7 +30,7 @@ class TrailingWhitespaceRule extends AbstractRule {
     int priority = 3
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         def matcher = sourceCode.getText() =~ /[^\n]*[ \t]+\r?\n/
         while (matcher.find()) {
             def lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.start())

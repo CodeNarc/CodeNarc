@@ -32,7 +32,7 @@ class DuplicateImportRule extends AbstractImportRule {
     int priority = 3
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         def importNames = [] as Set
         def staticImportNames = [] as Set
 

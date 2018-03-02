@@ -42,15 +42,15 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessarySemicolonAstVisitor
 
     // this rule is shared across threads and has state, so make the state thread local
-    ThreadLocal temporaryViolations = new ThreadLocal() {
+    ThreadLocal<List<Violation>> temporaryViolations = new ThreadLocal() {
         @Override
-        protected Object initialValue() {
+        protected List<Violation> initialValue() {
             []
         }
     }
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         temporaryViolations.get().addAll(getViolationsForSource(sourceCode))
         super.applyTo(sourceCode, violations)
         if (temporaryViolations.get()) {
