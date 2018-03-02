@@ -1,34 +1,34 @@
     function sortByPriority(tr1, tr2) {
-        var item1 = columnValue(tr1, 'priorityColumn')
-        var item2 = columnValue(tr2, 'priorityColumn')
+        var item1 = columnValue(tr1, 'priorityColumn');
+        var item2 = columnValue(tr2, 'priorityColumn');
         return (item1 > item2);
     }
 
     function sortByRule(tr1, tr2) {
-        var item1 = columnValue(tr1, 'ruleColumn')
-        var item2 = columnValue(tr2, 'ruleColumn')
-        initializeCountPerRule()
+        var item1 = columnValue(tr1, 'ruleColumn');
+        var item2 = columnValue(tr2, 'ruleColumn');
+        initializeCountPerRule();
         return (countPerRule[item1] < countPerRule[item2]);
     }
 
     function sortByRuleName(tr1, tr2) {
-        var item1 = columnValue(tr1, 'ruleColumn')
-        var item2 = columnValue(tr2, 'ruleColumn')
+        var item1 = columnValue(tr1, 'ruleColumn');
+        var item2 = columnValue(tr2, 'ruleColumn');
         return (item1 > item2);
     }
 
     function sortByFile(tr1, tr2) {
-        var item1 = columnValue(tr1, 'pathColumn')
-        var item2 = columnValue(tr2, 'pathColumn')
-        initializeCountPerFile()
+        var item1 = columnValue(tr1, 'pathColumn');
+        var item2 = columnValue(tr2, 'pathColumn');
+        initializeCountPerFile();
 
-        var priority1 = columnValue(tr1, 'priorityColumn')
-        var priority2 = columnValue(tr2, 'priorityColumn')
-        var inversePriority1 = 100 - parseInt(priority1)
-        var inversePriority2 = 100 - parseInt(priority2)
+        var priority1 = columnValue(tr1, 'priorityColumn');
+        var priority2 = columnValue(tr2, 'priorityColumn');
+        var inversePriority1 = 100 - parseInt(priority1);
+        var inversePriority2 = 100 - parseInt(priority2);
 
-        var sort1 = "" + countPerFile[item1] + " " + item1 + " " + inversePriority1
-        var sort2 = "" + countPerFile[item2] + " " + item2 + " " + inversePriority2
+        var sort1 = "" + countPerFile[item1] + " " + item1 + " " + inversePriority1;
+        var sort2 = "" + countPerFile[item2] + " " + item2 + " " + inversePriority2;
 
         return (sort1 < sort2);
     }
