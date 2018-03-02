@@ -34,12 +34,12 @@ class NoWildcardImportsRule extends AbstractImportRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List violations) {
-        sourceCode.ast?.starImports.each { ImportNode importNode ->
+        sourceCode.ast?.starImports?.each { ImportNode importNode ->
             violations.add(createViolationForImport(sourceCode, importNode, MESSAGE))
         }
 
         if (!ignoreStaticImports) {
-            sourceCode.ast?.staticStarImports.each { String alias, ImportNode importNode ->
+            sourceCode.ast?.staticStarImports?.each { String alias, ImportNode importNode ->
                 violations.add(createViolationForImport(sourceCode, importNode, MESSAGE))
             }
         }

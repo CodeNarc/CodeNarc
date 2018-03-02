@@ -49,7 +49,7 @@ class BigDecimalInstantiationAstVisitor extends AbstractConstructorCallAstVisito
 
     @Override
     protected String getViolationMessage(ConstructorCallExpression call) {
-        """Call to $call.text uses the double constructor and should probably be replaced with new ${call.type.name}("${call.arguments?.expressions?.first().text}")"""
+        """Call to $call.text uses the double constructor and should probably be replaced with new ${call.type.name}("${call.arguments?.expressions?.first()?.text}")"""
     }
 
 }

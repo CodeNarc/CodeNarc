@@ -158,7 +158,6 @@ class UnusedVariableAstVisitor extends AbstractAstVisitor  {
             blockVariables.keySet().each { var ->
                 if (var.name == varName && var != varExpression) {
                     blockVariables[var] = true
-                    return
                 }
             }
         }
