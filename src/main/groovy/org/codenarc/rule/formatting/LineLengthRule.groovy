@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
@@ -37,7 +38,7 @@ class LineLengthRule extends AbstractAstVisitorRule {
     String ignoreLineRegex
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         int lineNumber = 0
         for (line in sourceCode.getLines()) {
             lineNumber++

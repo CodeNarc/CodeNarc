@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
@@ -37,7 +38,7 @@ class ClassJavadocRule extends AbstractRule {
      * @param violations A list of Violations that may be added to. It can be an empty list
      */
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         def lines = sourceCode.getLines()
         sourceCode.ast?.classes?.each { classNode ->
             if (!applyToNonMainClasses && sourceCodeNameWithoutExtension(sourceCode) != classNode.nameWithoutPackage) {

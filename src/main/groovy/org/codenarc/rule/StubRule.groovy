@@ -34,7 +34,7 @@ class StubRule extends AbstractRule {
     }
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
     }
 
 }

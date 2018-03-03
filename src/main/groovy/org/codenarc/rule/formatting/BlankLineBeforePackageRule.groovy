@@ -17,6 +17,7 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.PackageNode
 import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.MultilineCommentChecker
 
@@ -31,7 +32,7 @@ class BlankLineBeforePackageRule extends AbstractRule {
     int priority = 3
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         PackageNode packageNode = sourceCode.ast?.package
         if (packageNode) {
             MultilineCommentChecker multilineCommentChecker = new MultilineCommentChecker()

@@ -40,7 +40,7 @@ class IllegalRegexRule extends AbstractRule {
     }
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         def matcher = sourceCode.getText() =~ regex
         while (matcher.find()) {
             def lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.start())

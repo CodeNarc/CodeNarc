@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
@@ -35,7 +36,7 @@ class ConsecutiveBlankLinesRule extends AbstractRule {
      * @param violations a list of Violations that may be added to. It can be an empty list
      */
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         List<String> lines = sourceCode.getLines()
         for (int index = 1; index < lines.size(); index++) {
             String line = lines[index]

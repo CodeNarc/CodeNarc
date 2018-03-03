@@ -40,7 +40,7 @@ class RequiredRegexRule extends AbstractRule {
     }
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         if (!(sourceCode.getText() =~ regex)) {
             violations.add(new Violation(rule:this, message:"Match not found for required regular expression \"$regex\""))
         }

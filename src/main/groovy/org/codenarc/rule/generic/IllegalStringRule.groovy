@@ -41,7 +41,7 @@ class IllegalStringRule extends AbstractRule {
     }
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         if (sourceCode.getText().contains(string)) {
             violations.add(new Violation(rule:this, message:"Match found for illegal string [$string]"))
         }

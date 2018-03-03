@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
@@ -29,7 +30,7 @@ class ImportFromSunPackagesRule extends AbstractAstVisitorRule {
     int priority = 2
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         sourceCode.ast?.imports?.each { importNode ->
             addViolationForSunImport(importNode, sourceCode, violations)
         }

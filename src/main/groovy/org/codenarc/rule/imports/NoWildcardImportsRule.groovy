@@ -16,6 +16,7 @@
 package org.codenarc.rule.imports
 
 import org.codehaus.groovy.ast.ImportNode
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
@@ -33,7 +34,7 @@ class NoWildcardImportsRule extends AbstractImportRule {
     boolean ignoreStaticImports = false
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         sourceCode.ast?.starImports.each { ImportNode importNode ->
             violations.add(createViolationForImport(sourceCode, importNode, MESSAGE))
         }

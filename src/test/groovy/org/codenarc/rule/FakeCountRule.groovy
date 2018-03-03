@@ -32,7 +32,7 @@ class FakeCountRule extends AbstractRule {
      * @param sourceCode - the sourceCode to which the rule is applied
      */
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         count ++
     }
 }

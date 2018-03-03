@@ -33,7 +33,7 @@ class MisorderedStaticImportsRule extends AbstractImportRule {
     boolean comesBefore = true
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         if (comesBefore) {
             violations.addAll addOrderingViolations(sourceCode, NON_STATIC_IMPORT_PATTERN, STATIC_IMPORT_PATTERN, COMES_BEFORE_MESSAGE)
         } else {

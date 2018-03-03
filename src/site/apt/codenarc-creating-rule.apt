@@ -49,7 +49,7 @@ class MyStaticFieldRule extends AbstractRule {
     String name = 'MyStaticField'
     int priority = 2
 
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         sourceCode.ast.classes.each { clazz ->
             clazz.fields.each { fieldNode ->
                 if (fieldNode.static) {
@@ -67,7 +67,7 @@ class MyStaticFieldRule extends AbstractRule {
 
     * It provides <name> and <priority> properties as mandated by the <<<Rule>>> interface.
 
-    * It implements the <<<void applyTo(SourceCode sourceCode, List violations)>>> method
+    * It implements the <<<void applyTo(SourceCode sourceCode, List<Violation> violations)>>> method
       which is declared <abstract> in the <<<AbstractRule>>> superclass.
 
     * It accesses the AST for the source code, which is an instance of the
@@ -164,7 +164,7 @@ class MyStaticFieldRule extends AbstractRule {
     String name = 'MyStaticField'
     int priority = 2
 
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         sourceCode.ast.classes.each { clazz ->
             clazz.fields.each { fieldNode ->
                 if (fieldNode.static) {

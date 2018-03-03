@@ -25,6 +25,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
@@ -42,7 +43,7 @@ class UnusedVariableRule extends AbstractAstVisitorRule {
     String ignoreVariableNames
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         // If AST is null, skip this source code
         def ast = sourceCode.ast
         if (ast && ast.classes) {

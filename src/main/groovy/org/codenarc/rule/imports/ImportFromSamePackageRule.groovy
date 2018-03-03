@@ -17,6 +17,7 @@ package org.codenarc.rule.imports
 
 import org.codehaus.groovy.ast.ImportNode
 import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.ImportUtil
 
@@ -30,7 +31,7 @@ class ImportFromSamePackageRule extends AbstractRule {
     int priority = 3
 
     @Override
-    void applyTo(SourceCode sourceCode, List violations) {
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
         def hasImports = sourceCode.ast?.imports || sourceCode.ast?.starImports
         if (hasImports && sourceCode.ast.packageName) {
             def rawPackage = sourceCode.ast.packageName
