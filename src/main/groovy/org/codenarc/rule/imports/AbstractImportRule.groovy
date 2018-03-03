@@ -35,7 +35,7 @@ abstract class AbstractImportRule extends AbstractRule {
     protected int findLineNumberOfFirstClassDeclaration(SourceCode sourceCode) {
         int firstLineNumber = sourceCode.lines.size()
         def ast = sourceCode.ast
-        ast?.classes?.each { classNode ->
+        ast?.classes.each { classNode ->
             if (classNode.lineNumber >= 0 && classNode.lineNumber < firstLineNumber) {
                 firstLineNumber = classNode.lineNumber
             }
