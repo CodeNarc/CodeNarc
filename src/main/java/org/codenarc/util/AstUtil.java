@@ -1117,7 +1117,7 @@ public class AstUtil {
         if (!(node instanceof IfStatement)) {
             return false;
         }
-        if (!(((IfStatement) node).getBooleanExpression() != null)) {
+        if ((((IfStatement) node).getBooleanExpression() == null)) {
             return false;
         }
         BooleanExpression booleanExp = ((IfStatement) node).getBooleanExpression();
