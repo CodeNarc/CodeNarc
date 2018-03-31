@@ -64,6 +64,15 @@ class UnsafeArrayDeclarationRuleTest extends AbstractRuleTestCase<UnsafeArrayDec
         assertSingleViolation(SOURCE, 3, 'public static final def myArray2 = [] as String[]', 'The Array field myArray2 is public, static, and final but still mutable')
     }
 
+    @Test
+    void testDoesNotFailOnNullInitialisedStaticFields() {
+        assertNoViolations '''
+              class MyClass {
+                public static final SOME_NULL_VALUE = null
+              }
+        '''
+    }
+
     @Override
     protected UnsafeArrayDeclarationRule createRule() {
         new UnsafeArrayDeclarationRule()

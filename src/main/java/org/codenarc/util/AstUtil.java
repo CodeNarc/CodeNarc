@@ -984,7 +984,9 @@ public class AstUtil {
         // Step 3: Look at the literal within the constant
         if (field.getInitialExpression() instanceof ConstantExpression) {
             Object constantValue = ((ConstantExpression) field.getInitialExpression()).getValue();
-            if (constantValue instanceof String) {
+            if (constantValue == null) {
+                return null;
+            } else if (constantValue instanceof String) {
                 return String.class;
             } else if (isBoolean(field.getInitialExpression())) {
                 return Boolean.class;
