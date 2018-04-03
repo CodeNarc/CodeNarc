@@ -708,6 +708,20 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void test_Script() {
+        final SOURCE = '''
+            |println 1234
+            |void doStuff(String name) {
+            |    doWith {
+            |        println  name
+            |        processResults(name)
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected IndentationRule createRule() {
         new IndentationRule()

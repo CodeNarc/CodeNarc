@@ -7,6 +7,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #307: Fix java.util.regex.PatternSyntaxException from TrailingWhitespaceRule; because of \R (Java 1.8 dependency).
    - #322: Fix a NullPointerException thrown by UnsafeArrayDeclarationRule when it encounters a field initialized with null value. (Marcin Erdmann)
    - #318: SpaceAroundOperatorRule: Allow newline after elvis operator. (Russell Sanborn)
+   - #310: Indentation rule has incorrect level when outer class is None (i.e. script).
 
 Framework and Infrastructure
    - #311: Add equivalent linux command line example. (Wilfred Hughes)

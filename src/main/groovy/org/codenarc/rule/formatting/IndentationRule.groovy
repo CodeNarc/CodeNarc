@@ -77,7 +77,9 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         if (!isAnonymous) {
             checkForCorrectColumn(node, "class ${node.getNameWithoutPackage()}")
         }
-        indentLevel++
+        if (!node.script) {
+            indentLevel++
+        }
         super.visitClassEx(node)
     }
 
@@ -121,9 +123,10 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBlockStatement(BlockStatement block) {
-        int addToIndentLevel = nestedBlocks.contains(block) ? 0 : 1
         // finally blocks have extra level of nested BlockStatement
+        int addToIndentLevel = nestedBlocks.contains(block) ? 0 : 1
         indentLevel += addToIndentLevel
+
         block.statements.each { statement ->
             // Skip statements on the same line as another statement or a field declaration
             // Skip statements that are spock block labels
