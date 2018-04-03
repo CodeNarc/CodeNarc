@@ -2,10 +2,18 @@
 
 TODO: Version 1.2 (??? 2018)
 --------------------------------------
+Updated/Enhanced Rules and Bug Fixes
    - #315: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
-   - #311: Add equivalent linux command line example. (Wilfred Hughes)
    - #307: Fix java.util.regex.PatternSyntaxException from TrailingWhitespaceRule; because of \R (Java 1.8 dependency).
    - #322: Fix a NullPointerException thrown by UnsafeArrayDeclarationRule when it encounters a field initialized with null value. (Marcin Erdmann)
+   - #318: SpaceAroundOperatorRule: Allow newline after elvis operator. (Russell Sanborn)
+
+Framework and Infrastructure
+   - #311: Add equivalent linux command line example. (Wilfred Hughes)
+   - #334: Update Gradle wrapper to 4.6. (Frieder Bluemle)
+   - #325: Perform general cleanup across project. (Russell Sanborn)
+   - #324: Add missing Violation type to List parameter in applyTo methods. (Russell Sanborn)
+   - #323: Add terminating semicolons to keep consistency in js sort functions. (Russell Sanborn)
 
 
 Version 1.1 (Jan 2018)
