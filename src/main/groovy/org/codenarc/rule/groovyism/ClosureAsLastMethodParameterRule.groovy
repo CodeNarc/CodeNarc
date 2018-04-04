@@ -25,7 +25,7 @@ import org.codenarc.util.AstUtil
  * If a method is called and the last parameter is an inline closure it can be declared outside of the method call brackets.
  *
  * @author Marcin Erdmann
- * @Chris Mair
+ * @author Chris Mair
  */
 class ClosureAsLastMethodParameterRule extends AbstractAstVisitorRule {
     String name = 'ClosureAsLastMethodParameter'
