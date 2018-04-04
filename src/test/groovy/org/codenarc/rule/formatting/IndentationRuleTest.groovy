@@ -722,6 +722,26 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void test_NestedClassWithinExpression() {
+        final SOURCE = '''
+            |class MyClass {
+            |    private void nestedClassUnderCondition() {
+            |        if (true) {
+            |            println 1234
+            |            def runnable = new Runnable() {
+            |                @Override
+            |                void run() {
+            |                    println 6789
+            |                }
+            |            }
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected IndentationRule createRule() {
         new IndentationRule()

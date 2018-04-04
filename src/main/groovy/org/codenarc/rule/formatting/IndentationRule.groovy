@@ -26,6 +26,10 @@ import org.codehaus.groovy.ast.stmt.Statement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
+
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Check indentation for class and method declarations
@@ -39,6 +43,16 @@ class IndentationRule extends AbstractAstVisitorRule {
     Class astVisitorClass = IndentationAstVisitor
     int spacesPerIndentLevel = 4
 
+    // Global Map of indent levels by class; enables coordination across different Class Nodes.
+    protected final Map<SourceCode, Map<ClassNode, Integer>> classNodeIndentLevels = new ConcurrentHashMap<>()
+
+    @Override
+    void applyTo(SourceCode sourceCode, List<Violation> violations) {
+        super.applyTo(sourceCode, violations)
+
+        // Clear out the classNodeIndentLevels for the source file so the global Map does not keep growing
+        classNodeIndentLevels.remove(sourceCode)
+    }
 }
 
 class IndentationAstVisitor extends AbstractAstVisitor {
@@ -49,9 +63,6 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     //  - Does not check  line-continuations
     //  - Does not check Map entry expressions
 
-    private int indentLevel = 0
-    private final Set<Integer> ignoreLineNumbers = []
-    private final Set<BlockStatement> nestedBlocks = []
     private static final List<String> SPOCK_BLOCKS = [
             'given',
             'setup',
@@ -62,6 +73,10 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             'and',
             'where'
     ]
+
+    private int indentLevel = 0
+    private final Set<Integer> ignoreLineNumbers = []
+    private final Set<BlockStatement> nestedBlocks = []
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -81,6 +96,12 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             indentLevel++
         }
         super.visitClassEx(node)
+    }
+
+    @Override
+    void visitConstructorCallExpression(ConstructorCallExpression call) {
+        getIndentLevelsMap()[call.type] = indentLevel
+        super.visitConstructorCallExpression(call)
     }
 
     @Override
@@ -182,7 +203,19 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         }
     }
 
+    private Map<ClassNode, Integer> getIndentLevelsMap() {
+        if (!rule.classNodeIndentLevels.containsKey(getSourceCode())) {
+            rule.classNodeIndentLevels[getSourceCode()] = [:]
+        }
+        return rule.classNodeIndentLevels[getSourceCode()]
+    }
+
     private int nestingLevelForClass(ClassNode node) {
+        def indentLevelsMap = getIndentLevelsMap()
+        if (indentLevelsMap.containsKey(node)) {
+            return indentLevelsMap[node]
+        }
+
         // If this is a nested class, then add one to the outer class level
         int level = node.outerClass ? nestingLevelForClass(node.outerClass) + 1 : 0
 
