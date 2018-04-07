@@ -261,18 +261,18 @@ c        '''
     @Test
     void testApplyTo_ClosureMapValue_NoViolations() {
         final SOURCE = '''
-            def m = [a:123, b:{ println 7 }]
+            def m1 = [a:123, b:{ println 7 }]
+            def m2 = [a: myList.collect { it.value }]
         '''
-        rule.checkClosureMapEntryValue = true   //ignored
+        rule.checkClosureMapEntryValue = true   // ignored
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testApplyTo_CheckClosureMapEntryValue_WithClosureInEntry_NoViolations() {
+    void testApplyTo_ClosureListValue_NoViolations() {
         final SOURCE = '''
-            def m = [a: myList.collect { it.value }]
+            def list = [{ println 7 }, { println 3 }]
         '''
-        rule.checkClosureMapEntryValue = false
         assertNoViolations(SOURCE)
     }
 

@@ -17,18 +17,21 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.ConstructorNode
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.SwitchStatement
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.codehaus.groovy.ast.expr.MapEntryExpression
-import org.codehaus.groovy.ast.ConstructorNode
-import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Check that there is at least one space (blank) or whitespace before each opening brace ("{").
  * This checks method/class/interface declarations, as well as try/for/while/if statements.
+ *
+ * A closure expression a preceded by an opening parenthesis, an opening square
+ * brace ([), or a dollar sign ($) within a GString does not cause a violation.
  *
  * @author Chris Mair
  */
@@ -121,7 +124,9 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     private boolean isCharacterPrecedingClosureInvalid(ClosureExpression expression) {
         String line = sourceLineOrEmpty(expression)
         int investigatedIndex = expression.columnNumber - 1
-        return isNotWhitespace(line, investigatedIndex) && isNotOpeningParenthesis(line, investigatedIndex) &&
+        return  isNotWhitespace(line, investigatedIndex) &&
+                isNotOpeningParenthesis(line, investigatedIndex) &&
+                isNotOpeningSquareBracket(line, investigatedIndex) &&
                 isNotDollarInsideGString(line, investigatedIndex)
     }
 
@@ -138,6 +143,10 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
 
     private boolean isNotOpeningParenthesis(String line, int index) {
         return isNotCharacter(line, '(' as char, index)
+    }
+
+    private boolean isNotOpeningSquareBracket(String line, int index) {
+        return isNotCharacter(line, '[' as char, index)
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {

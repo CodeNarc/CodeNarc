@@ -22,15 +22,15 @@ import org.codehaus.groovy.ast.ConstructorNode
 import org.codenarc.util.AstUtil
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.ASTNode
 
 /**
  * Check that there is at least one space (blank) or whitespace after each closing brace ("}").
  * This checks method/class/interface declarations, closure expressions and block statements.
  *
- * A closure expression followed by a dot operator (.), a comma, a closing parenthesis, the
- * spread-dot operator (*.), a semicolon or the null-safe operator (?.) does not cause a violation.
+ * A closure expression followed by a dot operator (.), a comma, a closing parenthesis, a
+ * closing square bracket (]), the spread-dot operator (*.), a semicolon or the null-safe
+ * operator (?.) does not cause a violation.
  *
  * @author Chris Mair
  */
@@ -39,6 +39,10 @@ class SpaceAfterClosingBraceRule extends AbstractAstVisitorRule {
     String name = 'SpaceAfterClosingBrace'
     int priority = 3
     Class astVisitorClass = SpaceAfterClosingBraceAstVisitor
+
+    /**
+     * @deprecated Ignored
+     * */
     boolean checkClosureMapEntryValue = true
 }
 
@@ -111,18 +115,6 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
             }
         }
         super.visitClosureExpression(expression)
-    }
-
-    @Override
-    void visitMapEntryExpression(MapEntryExpression expression) {
-        if (!rule.checkClosureMapEntryValue && expression.valueExpression instanceof ClosureExpression) {
-            isFirstVisit(expression.valueExpression)   // Register the closure so that it will be ignored in visitClosureExpression()
-        } else if (!rule.checkClosureMapEntryValue && expression.valueExpression.hasProperty('arguments')) {
-            if (!expression.valueExpression.arguments.expressions.isEmpty() && expression.valueExpression.arguments.last() instanceof ClosureExpression ) {
-                isFirstVisit(expression.valueExpression.arguments.last())
-            }
-        }
-        super.visitMapEntryExpression(expression)
     }
 
     private boolean isNotAllowedCharacterAfterClosure(String line, int index) {

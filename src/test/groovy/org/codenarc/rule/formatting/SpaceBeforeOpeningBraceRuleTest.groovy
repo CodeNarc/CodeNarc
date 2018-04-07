@@ -242,6 +242,14 @@ c        '''
     }
 
     @Test
+    void testApplyTo_ClosureListValue_NoViolations() {
+        final SOURCE = '''
+            def list = [{ println 7 }, { println 3 }]
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_CheckClosureAsFirstMethodParameter_NoViolations() {
         final SOURCE = '''
             execute({ println 7 }, true)
