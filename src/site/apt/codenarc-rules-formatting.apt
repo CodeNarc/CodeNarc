@@ -393,16 +393,14 @@ class MyClass {                                 // CORRECT
   Check that there is at least one space (blank) or whitespace after each closing brace ("\{") for
   method/class/interface declarations, closure expressions and block statements.
 
-  A closure expression followed by a dot operator (.), a comma, a closing parenthesis, the
-  spread-dot operator (*.), a semicolon or the null-safe operator (?.) does not cause a violation.
+  A closure expression followed by a dot operator (.), a comma, a closing parenthesis, a closing square
+  brace (]), the spread-dot operator (*.), a semicolon or the null-safe operator (?.) does not cause a violation.
 
 
 *---------------------------+------------------------------------------------------------------+------------------------+
 | <<Property>>              | <<Description>>                                                  | <<Default Value>>      |
 *---------------------------+------------------------------------------------------------------+------------------------+
-| checkClosureMapEntryValue | If <<<false>>>, then do not check for whitespace after closing   | <<<true>>>             |
-|                           | braces for closure expressions that are literal Map values, e.g. |                        |
-|                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
+| checkClosureMapEntryValue | DEPRECATED. Ignored.                                             | <<<true>>>             |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
   Known limitations:
@@ -421,6 +419,7 @@ class MyClass {                                 // CORRECT
     assert list.every { it.isReady() }, "Error"         // no violation for comma
     def m = [a:123, b:{ println 7 },c:99]               // no violation for comma
     processItems(list.select { it.isReady() })          // no violation for closing parenthesis
+    processItems([{ named("a") }, { named("b")}])       // no violation for closing square bracket
     def names = records.findAll { it.age > 1 }*.name    // no violation for spread operator
     list?.collect { it?.type }?.join(',')               // no violation for null-safe operator
 -------------------------------------------------------------------------------
@@ -466,9 +465,9 @@ class MyClass {                                 // CORRECT
 *---------------------------+------------------------------------------------------------------+------------------------+
 | checkClosureMapEntryValue | If <<<false>>>, then do not check for whitespace after opening   | <<<true>>>             |
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
-|                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
+|                           | <<<[abc:\{doStuff()\}]>>>.                                       |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
-| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
+| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<\{\}>>> in code                 | <<<false>>>            |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
 
@@ -663,9 +662,9 @@ class MyClass {                                 // CORRECT
 *---------------------------+------------------------------------------------------------------+------------------------+
 | checkClosureMapEntryValue | If <<<false>>>, then do not check for whitespace before closing  | <<<true>>>             |
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
-|                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
+|                           | <<<[abc:\{doStuff()\}]>>>.                                       |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
-| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<[{}]>>> in code                 | <<<false>>>            |
+| ignoreEmptyBlock          | If <<<true>>>, then allow for <<<\{\}>>> in code                 | <<<false>>>            |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
   Known limitations:
@@ -720,7 +719,7 @@ class MyClass {                                 // CORRECT
 *---------------------------+------------------------------------------------------------------+------------------------+
 | checkClosureMapEntryValue | If <<<false>>>, then do not check for whitespace before opening  | <<<true>>>             |
 |                           | braces for closure expressions that are literal Map values, e.g. |                        |
-|                           | <<<[abc:{doStuff()}]>>>.                                         |                        |
+|                           | <<<[abc:\{doStuff()\}]>>>.                                       |                        |
 *---------------------------+------------------------------------------------------------------+------------------------+
 
   Known limitations:

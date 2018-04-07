@@ -126,7 +126,7 @@ class SpaceAfterClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     }
 
     private boolean isNotAllowedCharacterAfterClosure(String line, int index) {
-        return index in 1..line.size() && !(line[index - 1] in ['.', ',', ')', '*', '?', ';'])
+        return index in 1..line.size() && !(line[index - 1] in ['.', ',', ')', ']', '*', '?', ';'])
     }
 
     private boolean isNotAllowedCharacterAfterClass(String line, int index) {

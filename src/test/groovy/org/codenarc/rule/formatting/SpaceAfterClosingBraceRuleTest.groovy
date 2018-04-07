@@ -202,15 +202,13 @@ c        '''
             list.each { name -> doStuff() }//comment
             shouldFail(Exception) { doStuff() }//comment
             def c = { println 123 }//comment
-            def m = [a:123, b:{ println 7 }]
-            def m2 = [a:123, b: m.each{ println it }]
+            def m = [a:123, b:{ println 7 }]            //not a violation
+            def m2 = [a:123, b: m.each{ println it }]   //not a violation
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'list.each { name -> doStuff() }', messageText:'The closing brace for the closure in class None is not followed'],
             [lineNumber:3, sourceLineText:'shouldFail(Exception) { doStuff() }', messageText:'The closing brace for the closure in class None is not followed'],
-            [lineNumber:4, sourceLineText:'def c = { println 123 }', messageText:'The closing brace for the closure in class None is not followed'],
-            [lineNumber:5, sourceLineText:'def m = [a:123, b:{ println 7 }]', messageText:'The closing brace for the closure in class None is not followed'],
-            [lineNumber:6, sourceLineText:'def m2 = [a:123, b: m.each{ println it }]', messageText:'The closing brace for the closure in class None is not followed'])
+            [lineNumber:4, sourceLineText:'def c = { println 123 }', messageText:'The closing brace for the closure in class None is not followed'])
     }
 
     @Test
@@ -220,6 +218,7 @@ c        '''
             assert list.every { it.isReady() }, "Error"         // no violation for comma
             def m = [a:123, b:{ println 7 },c:99]               // no violation for comma
             processItems(list.select { it.isReady() })          // no violation for closing parenthesis
+            processItems([{ named("a") }, { named("b")}])       // no violation for closing square bracket
             def names = records.findAll { it.age > 1 }*.name    // no violation for spread operator
             parameters?.collect { it?.type?.toString() }?.join(', ')    // no violation for null-safe operator
             def closure = { println 7 };                       // no violation for comma
@@ -260,11 +259,11 @@ c        '''
     }
 
     @Test
-    void testApplyTo_CheckClosureMapEntryValue_False_NoViolations() {
+    void testApplyTo_ClosureMapValue_NoViolations() {
         final SOURCE = '''
             def m = [a:123, b:{ println 7 }]
         '''
-        rule.checkClosureMapEntryValue = false
+        rule.checkClosureMapEntryValue = true   //ignored
         assertNoViolations(SOURCE)
     }
 
