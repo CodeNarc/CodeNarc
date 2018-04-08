@@ -73,6 +73,38 @@ class FieldTypeRequiredRuleTest extends AbstractRuleTestCase<FieldTypeRequiredRu
         )
     }
 
+    @Test
+    void test_ignoreFieldNames_MatchesNoName_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                public static final NAME = "joe"
+                protected final date = new Date()
+                def defaultName
+            }
+        '''
+        rule.ignoreFieldNames = 'other'
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'public static final NAME = "joe"', messageText:'The type is not specified for field "NAME"'],
+                [lineNumber:4, sourceLineText:'protected final date = new Date()', messageText:'The type is not specified for field "date"'],
+                [lineNumber:5, sourceLineText:'def defaultName', messageText:'The type is not specified for field "defaultName"'],
+        )
+    }
+
+    @Test
+    void test_ignoreFieldNames_MatchesNames() {
+        final SOURCE = '''
+            class MyClass {
+                public static final NAME = "joe"
+                protected final date = new Date()
+                def defaultName
+            }
+        '''
+        rule.ignoreFieldNames = 'other, def*Name, NAME, abc'
+        assertViolations(SOURCE,
+                [lineNumber:4, sourceLineText:'protected final date = new Date()', messageText:'The type is not specified for field "date"'],
+        )
+    }
+
     @Override
     protected FieldTypeRequiredRule createRule() {
         new FieldTypeRequiredRule()

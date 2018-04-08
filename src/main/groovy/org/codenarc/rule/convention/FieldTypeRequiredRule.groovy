@@ -16,8 +16,9 @@
 package org.codenarc.rule.convention
 
 import org.codehaus.groovy.ast.FieldNode
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.WildcardPattern
 
 /**
  * Checks that field types are explicitly specified (and not using def)
@@ -29,17 +30,23 @@ class FieldTypeRequiredRule extends AbstractAstVisitorRule {
     String name = 'FieldTypeRequired'
     int priority = 3
     Class astVisitorClass = FieldTypeRequiredAstVisitor
+    String ignoreFieldNames
+
 }
 
 class FieldTypeRequiredAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitField(FieldNode node) {
-        if (node.isDynamicTyped()) {
+        if (node.isDynamicTyped() && !isIgnoredFieldName(node)) {
             addViolation(node, $/The type is not specified for field "$node.name"/$)
         }
 
         super.visitField(node)
+    }
+
+    private boolean isIgnoredFieldName(FieldNode node) {
+        new WildcardPattern(rule.ignoreFieldNames, false).matches(node.name)
     }
 
 }

@@ -114,6 +114,14 @@ Convention Rules  ("<rulesets/convention.xml>")
 
   Checks that field types are explicitly specified (and not using <<<def>>>).
 
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreFieldNames    | Specifies one or more (comma-separated) field names that       | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
   Example of violations:
 
 -------------------------------------------------------------------------------
@@ -385,7 +393,6 @@ Convention Rules  ("<rulesets/convention.xml>")
   <Since CodeNarc 1.1>
 
   Checks that variable types are explicitly specified in declarations (and not using <<<def>>>).
-
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |

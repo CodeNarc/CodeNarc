@@ -11,7 +11,8 @@ Updated/Enhanced Rules and Bug Fixes
    - #313: **Indentation** rule: Nested classes declared within a condition report incorrect indentation.
    - #332: **SpaceBeforeOpeningBrace**: Ignore opening brace preceded by opening ‘[’.
    - #332: **SpaceAfterClosingBrace**: Ignore closing brace followed by closing ‘]’. Deprecate  and ignore *checkClosureMapEntryValue* property. 
-   - #314: **VariableTypeRequired** rule: Add ignoreVariableNames property.
+   - #314: **VariableTypeRequired** rule: Add *ignoreVariableNames* property.
+   - #314: **FieldTypeRequiredRule** rule: Add *ignoreFieldNames* property.
 
 Framework and Infrastructure
    - #311: Add equivalent linux command line example. (Wilfred Hughes)
