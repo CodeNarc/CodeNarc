@@ -386,6 +386,15 @@ Convention Rules  ("<rulesets/convention.xml>")
 
   Checks that variable types are explicitly specified in declarations (and not using <<<def>>>).
 
+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreVariableNames | Specifies one or more (comma-separated) variable names that    | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
+
   Example of violations:
 
 -------------------------------------------------------------------------------

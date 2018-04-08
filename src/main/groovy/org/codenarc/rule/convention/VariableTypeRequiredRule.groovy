@@ -16,9 +16,11 @@
 package org.codenarc.rule.convention
 
 import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.util.WildcardPattern
 
 /**
  * Checks that variable types are explicitly specified in declarations (and not using def)
@@ -30,19 +32,24 @@ class VariableTypeRequiredRule extends AbstractAstVisitorRule {
     String name = 'VariableTypeRequired'
     int priority = 3
     Class astVisitorClass = VariableTypeRequiredAstVisitor
+    String ignoreVariableNames
 }
 
 class VariableTypeRequiredAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
-        def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
+        List<Expression> varExpressions = AstUtil.getVariableExpressions(declarationExpression)
         varExpressions.each { varExpression ->
-            if (varExpression.isDynamicTyped()) {
+            if (varExpression.isDynamicTyped() && !matchesIgnoredName(varExpression)) {
                 addViolation(varExpression, $/The type is not specified for variable "$varExpression.name"/$)
             }
         }
         super.visitDeclarationExpression(declarationExpression)
+    }
+
+    private boolean matchesIgnoredName(Expression varExpression) {
+        return new WildcardPattern(rule.ignoreVariableNames, false).matches(varExpression.name)
     }
 
 }

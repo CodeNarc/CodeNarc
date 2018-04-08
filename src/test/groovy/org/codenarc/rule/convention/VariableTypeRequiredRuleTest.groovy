@@ -69,6 +69,36 @@ class VariableTypeRequiredRuleTest extends AbstractRuleTestCase<VariableTypeRequ
         )
     }
 
+    @Test
+    void test_ignoreVariableNames_MatchesNoName_Violations() {
+        final SOURCE = '''
+            void doStuff() {
+                def max = 99
+                def defaultName
+            }
+        '''
+        rule.ignoreVariableNames = 'other'
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'def max = 99', messageText:'The type is not specified for variable "max"'],
+                [lineNumber:4, sourceLineText:'def defaultName', messageText:'The type is not specified for variable "defaultName"'],
+        )
+    }
+
+    @Test
+    void test_ignoreVariableNames_MatchesNames() {
+        final SOURCE = '''
+            void doStuff() {
+                def max = 99
+                def defaultName
+                def alternateNames = ['abc']
+            }
+        '''
+        rule.ignoreVariableNames = 'other, a*Names, max, abc'
+        assertViolations(SOURCE,
+                [lineNumber:4, sourceLineText:'def defaultName', messageText:'The type is not specified for variable "defaultName"'],
+        )
+    }
+
     @Override
     protected VariableTypeRequiredRule createRule() {
         new VariableTypeRequiredRule()

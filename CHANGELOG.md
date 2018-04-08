@@ -3,14 +3,15 @@
 TODO: Version 1.2 (??? 2018)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
-   - #315: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
-   - #307: Fix java.util.regex.PatternSyntaxException from TrailingWhitespaceRule; because of \R (Java 1.8 dependency).
-   - #322: Fix a NullPointerException thrown by UnsafeArrayDeclarationRule when it encounters a field initialized with null value. (Marcin Erdmann)
-   - #318: SpaceAroundOperatorRule: Allow newline after elvis operator. (Russell Sanborn)
-   - #310: Indentation rule: Incorrect level when outer class is None (i.e. script).
-   - #313: Indentation rule: Nested classes declared within a condition report incorrect indentation.
-   - #332: SpaceBeforeOpeningBrace: Ignore opening brace preceded by opening ‘[’.
-   - #332: SpaceAfterClosingBrace: Ignore closing brace followed by closing ‘]’. Deprecate  and ignore *checkClosureMapEntryValue* property. 
+   - #315: **Indentation** rule: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
+   - #307: **TrailingWhitespace**: Fix java.util.regex.PatternSyntaxException from TrailingWhitespaceRule; because of \R (Java 1.8 dependency).
+   - #322: **UnsafeArrayDeclaration**: Fix a NullPointerException thrown by UnsafeArrayDeclarationRule when it encounters a field initialized with null value. (Marcin Erdmann)
+   - #318: **SpaceAroundOperator** rule: Allow newline after elvis operator. (Russell Sanborn)
+   - #310: **Indentation** rule: Incorrect level when outer class is None (i.e. script).
+   - #313: **Indentation** rule: Nested classes declared within a condition report incorrect indentation.
+   - #332: **SpaceBeforeOpeningBrace**: Ignore opening brace preceded by opening ‘[’.
+   - #332: **SpaceAfterClosingBrace**: Ignore closing brace followed by closing ‘]’. Deprecate  and ignore *checkClosureMapEntryValue* property. 
+   - #314: **VariableTypeRequired** rule: Add ignoreVariableNames property.
 
 Framework and Infrastructure
    - #311: Add equivalent linux command line example. (Wilfred Hughes)
