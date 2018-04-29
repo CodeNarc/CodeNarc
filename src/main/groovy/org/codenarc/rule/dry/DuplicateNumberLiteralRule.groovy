@@ -30,10 +30,6 @@ import org.codenarc.rule.AstVisitor
  * @author Chris Mair
  */
 class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
-    String name = 'DuplicateNumberLiteral'
-    int priority = 2
-    String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
-    String ignoreNumbers = '0,1'
 
     private static final List NUMBER_TYPES = [Number,
             Byte.TYPE,
@@ -42,6 +38,11 @@ class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
             Integer.TYPE,
             Long.TYPE,
             Short.TYPE]
+
+    String name = 'DuplicateNumberLiteral'
+    int priority = 2
+    String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
+    String ignoreNumbers = '0,1'
 
     @Override
     AstVisitor getAstVisitor() {

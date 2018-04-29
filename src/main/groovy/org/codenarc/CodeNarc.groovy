@@ -82,6 +82,9 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     java org.codenarc.CodeNarc -report=xml:MyXmlReport.xml -report=html
     java org.codenarc.CodeNarc -help'"""
 
+    // Abstract calling System.exit() to allow substitution of test spy for unit tests
+    protected static Closure systemExit = { exitCode -> System.exit(exitCode) }
+
     protected String ruleSetFiles
     protected String baseDir
     protected String includes
@@ -91,9 +94,6 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
     protected Closure createCodeNarcRunner = { new CodeNarcRunner() }
-
-    // Abstract calling System.exit() to allow substitution of test spy for unit tests
-    protected static Closure systemExit = { exitCode -> System.exit(exitCode) }
 
     /**
      * Main command-line entry-point. Run the CodeNarc application.

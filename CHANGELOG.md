@@ -2,6 +2,9 @@
 
 TODO: Version 1.2 (??? 2018)
 --------------------------------------
+New Rules
+  - #336: **StaticFieldsBeforeInstanceFields** rule (convention) - Enforce that all static fields are above all instance fields within a class.
+
 Updated/Enhanced Rules and Bug Fixes
    - #315: **Indentation** rule: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
    - #307: **TrailingWhitespace**: Fix java.util.regex.PatternSyntaxException from TrailingWhitespaceRule; because of \R (Java 1.8 dependency).

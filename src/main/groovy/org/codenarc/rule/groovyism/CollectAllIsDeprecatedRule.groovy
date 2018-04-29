@@ -26,11 +26,13 @@ import org.codenarc.util.AstUtil
  * @author Joachim Baumann
  */
 class CollectAllIsDeprecatedRule extends AbstractAstVisitorRule {
+
+    protected static final String MESSAGE = 'collectAll{} is deprecated since Groovy 1.8.1. Use collectNested instead{}.'
+
     String name = 'CollectAllIsDeprecated'
     int priority = 2
     Class astVisitorClass = CollectAllIsDeprecatedAstVisitor
 
-    protected static final String MESSAGE = 'collectAll{} is deprecated since Groovy 1.8.1. Use collectNested instead{}.'
 }
 
 class CollectAllIsDeprecatedAstVisitor extends AbstractAstVisitor {

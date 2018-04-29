@@ -35,11 +35,13 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
  */
 class UseCollectNestedRule extends AbstractAstVisitorRule {
+
+    protected static final String MESSAGE = 'Instead of nested collect{}-calls use collectNested{}'
+
     String name = 'UseCollectNested'
     int priority = 2
     Class astVisitorClass = UseCollectNestedAstVisitor
 
-    protected static final String MESSAGE = 'Instead of nested collect{}-calls use collectNested{}'
 }
 
 class UseCollectNestedAstVisitor extends AbstractAstVisitor {

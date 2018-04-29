@@ -28,6 +28,10 @@ class InlineViolationsParser {
 
     private static final String PREVENT_ACCIDENTAL_ESCAPING_OF_NEXT_MARKER = ' '
 
+    private static final String HASH_NOT_ESCAPED = /(?<!\\)#/
+    private static final String HASH_NOT_ESCAPED_NOT_PART_OF_SHEBANG = /^#(?!\!)|(?<!(^|\\))#/
+    private static final int KEEP_EMPTY_STRINGS = -1
+
     ParseResult result = new ParseResult()
 
     ParseResult parse(String annotatedSource) {
@@ -45,10 +49,6 @@ class InlineViolationsParser {
             createViolation(lineNumber, sourceLine.trim(), unescape(it.trim()))
         }
     }
-
-    private static final String HASH_NOT_ESCAPED = /(?<!\\)#/
-    private static final String HASH_NOT_ESCAPED_NOT_PART_OF_SHEBANG = /^#(?!\!)|(?<!(^|\\))#/
-    private static final int KEEP_EMPTY_STRINGS = -1
 
     private String unescape(String violationMessage) {
         return violationMessage.replaceAll(~/\Q\#\E/, '#')
