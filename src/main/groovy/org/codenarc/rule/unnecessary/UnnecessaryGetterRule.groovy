@@ -15,10 +15,11 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
@@ -30,15 +31,37 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
   */
 class UnnecessaryGetterRule extends AbstractAstVisitorRule {
+
     String name = 'UnnecessaryGetter'
     int priority = 3
     Class astVisitorClass = UnnecessaryGetterAstVisitor
+
 }
 
-class UnnecessaryGetterAstVisitor extends AbstractMethodCallExpressionVisitor {
+class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
+
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        addViolationsIfGetter(call)
+        if (isFirstVisit(call)) {
+            addViolationsIfGetter(call)
+        }
+        if (!isSpockMethod(call)) {
+            super.visitMethodCallExpression(call)
+        }
+    }
+
+    private boolean isSpockMethod(MethodCallExpression call) {
+        if (AstUtil.getMethodArguments(call).size() != 2) {
+            return false
+        }
+        if (!(call.method instanceof ConstantExpression)) {
+            return false
+        }
+        if (!(call.arguments[1] instanceof ClosureExpression)) {
+            return false
+        }
+        String name = call.method.value
+        return name in ['Mock', 'Stub']
     }
 
     private void addViolationsIfGetter(MethodCallExpression call) {
