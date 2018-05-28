@@ -11,6 +11,7 @@ ruleset {
 
     ruleset('rulesets/convention.xml') {
         exclude 'NoDef'
+        exclude 'PublicMethodsBeforeNonPublic'
         exclude 'StaticMethodsBeforeInstanceMethods'
         exclude 'TrailingComma'
         exclude 'VariableTypeRequired'
