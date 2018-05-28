@@ -11,6 +11,7 @@ ruleset {
 
     ruleset('rulesets/convention.xml') {
         exclude 'NoDef'
+        exclude 'StaticMethodsBeforeInstanceMethods'
         exclude 'TrailingComma'
         exclude 'VariableTypeRequired'
         FieldTypeRequired(doNotApplyToFilesMatching:TEST_FILES)
