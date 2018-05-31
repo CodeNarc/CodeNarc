@@ -18,4 +18,5 @@
     <rule class='org.codenarc.rule.grails.GrailsDomainWithServiceReferenceRule'/>
     <rule class='org.codenarc.rule.grails.GrailsDomainReservedSqlKeywordNameRule'/>
     <rule class='org.codenarc.rule.grails.GrailsMassAssignmentRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsDomainStringPropertyMaxSizeRule'/>
 </ruleset>

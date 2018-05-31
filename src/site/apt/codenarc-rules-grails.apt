@@ -268,3 +268,15 @@ Grails Rules  ("<rulesets/grails.xml>")
 
   [[2]]  There is one exception for the <<<ignoreFieldTypes>>> property: if the field is declared
   with a modifier/type of <<<def>>>, then the type resolves to <<<java.lang.Object>>>.
+
+* {GrailsDomainStringPropertyMaxSize} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.2>
+
+  String properties in Grails domain classes have to define maximum size otherwise the property is mapped to VARCHAR(255) causing runtime exceptions to occur
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    // TODO: Add examples
+-------------------------------------------------------------------------------

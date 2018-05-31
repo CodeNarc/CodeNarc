@@ -1,3 +1,7 @@
+
+#TODO: Sort the following line into the file
+- GrailsDomainStringPropertyMaxSize rule (grails) - String properties in Grails domain classes have to define maximum size otherwise the property is mapped to VARCHAR(255) ccausing runtime exceptions to occur
+
 # CodeNarc Change Log
 
 TODO: Version 1.2 (??? 2018)
