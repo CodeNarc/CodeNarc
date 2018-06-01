@@ -57,7 +57,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
                     firstName nullable:true, size: 0..50
                     lastName nullable:true
                 }
-                
+
                 class Address {  }
             }
         '''
@@ -75,7 +75,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
                     firstName nullable:true
                     lastName nullable:true, maxSize: 30
                 }
-                
+
                 static mapping = {
                     firstName type: 'text'
                 }
@@ -106,10 +106,10 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
         final SOURCE = '''
             class Entity {
                 String firstName
-                    
+
                 static constraints = {
                     firstName size: 0..50, nullable: true
-                }            
+                }
             }
 
             class Person {
@@ -123,7 +123,6 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
         '''
         assertNoViolations(SOURCE)
     }
-
 
     @Before
     void setUp() {

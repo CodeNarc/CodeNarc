@@ -49,8 +49,8 @@ class GrailsDomainStringPropertyMaxSizeRule extends AbstractAstVisitorRule {
 }
 
 class GrailsDomainStringPropertyMaxSizeAstVisitor extends AbstractAstVisitor {
-    private Map<String, ClassConstraintsAndMapping> constraintsAndMappings = [:]
-            .withDefault { new ClassConstraintsAndMapping()}
+    private final Map<String, ClassConstraintsAndMapping> constraintsAndMappings = [:]
+            .withDefault { new ClassConstraintsAndMapping() }
 
     @Override
     void visitField(FieldNode node) {
@@ -105,49 +105,54 @@ class GrailsDomainStringPropertyMaxSizeAstVisitor extends AbstractAstVisitor {
         Map<String, Set<String>> result = [:].withDefault { [] as Set<String> }
 
         BlockStatement code = closure.code as BlockStatement
-        code.statements.findAll { it instanceof ExpressionStatement }.each { ExpressionStatement exp ->
-            if (exp.expression instanceof MethodCallExpression) {
-                MethodCallExpression methodCallExpression = exp.expression as MethodCallExpression
-                String methodName = methodCallExpression.methodAsString
-
-                if (methodName == 'importFrom') {
-                    collectIncludedProperties(methodCallExpression).each {
-                        // assume size constraint applied if the constraints are imported from different class
-                        // as the source class is also validated for the presence of the size constraint
-                        result[it].add('size')
-                    }
-                } else if (methodCallExpression.arguments instanceof TupleExpression) {
-                    TupleExpression arguments = methodCallExpression.arguments as TupleExpression
-
-                    if (arguments.expressions.size() == 1 && arguments.expressions.first() instanceof NamedArgumentListExpression) {
-                        NamedArgumentListExpression namedArgumentListExpression = arguments.expressions.first() as NamedArgumentListExpression
-                        namedArgumentListExpression.mapEntryExpressions.each { MapEntryExpression entry ->
-                            result[methodName].add(entry.keyExpression.text)
-                        }
-                    }
-                }
-            }
+        code.statements.findAll {
+            it instanceof ExpressionStatement && it.expression instanceof MethodCallExpression
+        }.each { ExpressionStatement exp ->
+            collectMapKeys(exp.expression as MethodCallExpression, result)
         }
 
         result
     }
 
+    private static void collectMapKeys(MethodCallExpression methodCallExpression,  Map<String, Set<String>> result) {
+        String methodName = methodCallExpression.methodAsString
+
+        if (methodName == 'importFrom') {
+            collectIncludedProperties(methodCallExpression).each {
+                // assume size constraint applied if the constraints are imported from different class
+                // as the source class is also validated for the presence of the size constraint
+                result[it].add('size')
+            }
+        } else if (methodCallExpression.arguments instanceof TupleExpression) {
+            TupleExpression arguments = methodCallExpression.arguments as TupleExpression
+
+            if (arguments.expressions.size() == 1 && arguments.expressions.first() instanceof NamedArgumentListExpression) {
+                NamedArgumentListExpression namedArgumentListExpression = arguments.expressions.first() as NamedArgumentListExpression
+                result[methodName].addAll namedArgumentListExpression.mapEntryExpressions*.keyExpression*.text
+            }
+        }
+    }
+
     private static Set<String> collectIncludedProperties(MethodCallExpression call) {
-        Set<String> result = []
         if (call.arguments instanceof ArgumentListExpression) {
             ArgumentListExpression argumentList = call.arguments as ArgumentListExpression
             MapExpression mapExpression = argumentList.expressions.find { it instanceof MapExpression }
             if (mapExpression) {
-                MapEntryExpression entryExpression = mapExpression.mapEntryExpressions.find { it.keyExpression.text == 'include' }
-                if (entryExpression.valueExpression instanceof ListExpression) {
-                    ListExpression includesList = entryExpression.valueExpression as ListExpression
-                    includesList.expressions.findAll { it instanceof ConstantExpression }.each { ConstantExpression included ->
-                        result.add(included.text)
-                    }
-                }
+                return collectIncludedProperties(mapExpression)
             }
         }
-        return result
+        return Collections.emptySet()
+    }
+
+    private static Set<String> collectIncludedProperties(MapExpression mapExpression) {
+        MapEntryExpression entryExpression = mapExpression.mapEntryExpressions.find {
+            it.keyExpression.text == 'include'
+        }
+        if (entryExpression.valueExpression instanceof ListExpression) {
+            ListExpression includesList = entryExpression.valueExpression as ListExpression
+            return includesList.expressions.findAll { it instanceof ConstantExpression }*.text
+        }
+        return Collections.emptySet()
     }
 }
 
