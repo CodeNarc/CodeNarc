@@ -278,5 +278,14 @@ Grails Rules  ("<rulesets/grails.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-    // TODO: Add examples
+    // both firstName and lastName will probably have database limit of 255 characters
+    // which is not validated by Grails validation causing runtime JDBC exception
+    class Person {
+        String firstName
+        String lastName
+        static constraints = {
+            firstName nullable:true
+            lastName nullable:true
+        }
+    }
 -------------------------------------------------------------------------------

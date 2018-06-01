@@ -15,13 +15,16 @@
  */
 package org.codenarc.rule.grails
 
-import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.PropertyNode
+import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
+import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.NamedArgumentListExpression
 import org.codehaus.groovy.ast.expr.TupleExpression
@@ -107,7 +110,13 @@ class GrailsDomainStringPropertyMaxSizeAstVisitor extends AbstractAstVisitor {
                 MethodCallExpression methodCallExpression = exp.expression as MethodCallExpression
                 String methodName = methodCallExpression.methodAsString
 
-                if (methodCallExpression.arguments instanceof TupleExpression) {
+                if (methodName == 'importFrom') {
+                    collectIncludedProperties(methodCallExpression).each {
+                        // assume size constraint applied if the constraints are imported from different class
+                        // as the source class is also validated for the presence of the size constraint
+                        result[it].add('size')
+                    }
+                } else if (methodCallExpression.arguments instanceof TupleExpression) {
                     TupleExpression arguments = methodCallExpression.arguments as TupleExpression
 
                     if (arguments.expressions.size() == 1 && arguments.expressions.first() instanceof NamedArgumentListExpression) {
@@ -121,6 +130,24 @@ class GrailsDomainStringPropertyMaxSizeAstVisitor extends AbstractAstVisitor {
         }
 
         result
+    }
+
+    private static Set<String> collectIncludedProperties(MethodCallExpression call) {
+        Set<String> result = []
+        if (call.arguments instanceof ArgumentListExpression) {
+            ArgumentListExpression argumentList = call.arguments as ArgumentListExpression
+            MapExpression mapExpression = argumentList.expressions.find { it instanceof MapExpression }
+            if (mapExpression) {
+                MapEntryExpression entryExpression = mapExpression.mapEntryExpressions.find { it.keyExpression.text == 'include' }
+                if (entryExpression.valueExpression instanceof ListExpression) {
+                    ListExpression includesList = entryExpression.valueExpression as ListExpression
+                    includesList.expressions.findAll { it instanceof ConstantExpression }.each { ConstantExpression included ->
+                        result.add(included.text)
+                    }
+                }
+            }
+        }
+        return result
     }
 }
 

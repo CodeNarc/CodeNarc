@@ -17,7 +17,6 @@ package org.codenarc.rule.grails
 
 import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -102,7 +101,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
                 [lineNumber:4, sourceLineText:'String lastName', messageText:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
     }
 
-    @Test @Ignore
+    @Test
     void testImportFrom_NoViolation() {
         final SOURCE = '''
             class Entity {
