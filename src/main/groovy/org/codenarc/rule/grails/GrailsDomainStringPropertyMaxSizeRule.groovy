@@ -43,7 +43,7 @@ import java.lang.reflect.Modifier
 class GrailsDomainStringPropertyMaxSizeRule extends AbstractAstVisitorRule {
 
     String name = 'GrailsDomainStringPropertyMaxSize'
-    int priority = 1
+    int priority = 2
     Class astVisitorClass = GrailsDomainStringPropertyMaxSizeAstVisitor
     String applyToFilesMatching = GrailsUtil.DOMAIN_FILES
 }
