@@ -50,6 +50,11 @@ class SpaceAroundOperatorRule extends AbstractAstVisitorRule {
 
 class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
+    private static final String QUOTE = '"'
+    private static final String PRECEDED = 'preceded'
+    private static final String FOLLOWED = 'followed'
+    private static final String SURROUNDED = 'surrounded'
+
     private boolean withinDeclarationExpression
 
     @Override
@@ -83,27 +88,31 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         }
 
         if (!Character.isWhitespace(beforeChar)) {
-            addViolation(expression, "The operator \"?\" within class $currentClassName is not preceded by a space or whitespace")
+            addViolationForOperator(expression, '?', PRECEDED)
         }
         if (opColumn < line.size() && !Character.isWhitespace(line[opColumn] as char)) {
-            addViolation(expression, "The operator \"?\" within class $currentClassName is not followed by a space or whitespace")
+            addViolationForOperator(expression, '?', FOLLOWED)
         }
 
         if (rightMostColumn(expression.trueExpression) + 1 == leftMostColumn(expression.falseExpression)) {
-            addViolation(expression, "The operator \":\" within class $currentClassName is not surrounded by a space or whitespace")
+            addViolationForOperator(expression, ':', SURROUNDED)
         }
+    }
+
+    private void addViolationForOperator(Expression expression, String operatorName, String precededFollowedOrSurrounded) {
+        addViolation(expression, "The operator ${QUOTE}${operatorName}${QUOTE} within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
     }
 
     private void checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
         if (expression.lineNumber == expression.lastLineNumber) {
             def hasWhitespaceAroundQuestionMark = (line =~ /\s\?\s/)
             if (!hasWhitespaceAroundQuestionMark) {
-                addViolation(expression, "The operator \"?\" within class $currentClassName is not surrounded by a space or whitespace")
+                addViolationForOperator(expression, '?', SURROUNDED)
             }
 
             def hasWhitespaceAroundColon = (line =~ /\s\:\s/)
             if (!hasWhitespaceAroundColon) {
-                addViolation(expression, "The operator \":\" within class $currentClassName is not surrounded by a space or whitespace")
+                addViolationForOperator(expression, ':', SURROUNDED)
             }
         }
     }
@@ -118,10 +127,10 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
         if (index >= 0) {
             if (index > 0 && line.subSequence(index - 1, index + 2) =~ /\S\?\:/) {
-                addViolation(expression, "The operator \"?:\" within class $currentClassName is not preceded by a space or whitespace")
+                addViolationForOperator(expression, '?:', PRECEDED)
             }
             if (index + 3 < line.size() && line.subSequence(index, index + 3) =~ /\?\:(\S)/) {
-                addViolation(expression, "The operator \"?:\" within class $currentClassName is not followed by a space or whitespace")
+                addViolationForOperator(expression, '?:', FOLLOWED)
             }
         }
     }
@@ -141,19 +150,20 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         boolean arrayOperator = opText == '['
         boolean isOperatorAtIndex = op.startColumn != -1 && (line[op.startColumn - 1] == opText[0])
         boolean ignore = assignmentWithinDeclaration || arrayOperator || !isOperatorAtIndex
+        String operator = expression.operation.text
 
         if (!ignore && op.startColumn > 1) {
             def beforeChar = line[op.startColumn - 2] as char
 
             if (!Character.isWhitespace(beforeChar)) {
-                addViolation(expression, "The operator \"${expression.operation.text}\" within class $currentClassName is not preceded by a space or whitespace")
+                addViolationForOperator(expression, operator, PRECEDED)
             }
         }
 
         if (!ignore && opEndColumn != -1 && opEndColumn < line.size()) {
             def afterChar = line[opEndColumn] as char
             if (!Character.isWhitespace(afterChar)) {
-                addViolation(expression, "The operator \"${expression.operation.text}\" within class $currentClassName is not followed by a space or whitespace")
+                addViolationForOperator(expression, operator, FOLLOWED)
             }
         }
         super.visitBinaryExpression(expression)
@@ -168,7 +178,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
             }
 
             if (!containsAsWithSpaces) {
-                addViolation(expression, "The operator \"as\" within class $currentClassName is not surrounded by a space or whitespace")
+                addViolationForOperator(expression, 'as', SURROUNDED)
             }
         }
         super.visitCastExpression(expression)
