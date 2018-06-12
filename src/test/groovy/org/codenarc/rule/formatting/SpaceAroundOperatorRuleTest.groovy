@@ -110,14 +110,6 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     }
 
     @Test
-    void testApplyTo_AssignmentOperationWithinDeclaration_WithoutSpace_KnownLimitation_NoViolations() {
-        final SOURCE = '''
-            def x=5
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
     void testApplyTo_TernaryOperationWithMethodCall_WithoutSpace_KnownLimitation_NoViolations() {
         final SOURCE = '''
             AstUtil.respondsTo(rule, 'getDescription')?rule.description:
@@ -247,12 +239,41 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     }
 
     @Test
-    void testApplyTo_EqualsOperator_InDeclarationExpression_NoViolation_KnownLimitation() {
+    void testApplyTo_EqualsOperator_InVariableDeclaration_WithoutSurroundingSpace_Violations() {
         final SOURCE = '''
             String bar='bar'
+            def bar2\t=[1, 2,
+                3, 4]
+            int bar3=\t9876
+
+            String other = bar &&
+                bar2 == null ||
+                bar3
+            String other2 = bar instanceof String
+            def obj = something.part.subpart
         '''
-        // This "should" produce 2 violations on line 1; known limitation
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class None is not preceded'],
+                [lineNumber:2, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class None is not followed'],
+                [lineNumber:3, sourceLineText:'def bar2\t=[1, 2,', messageText:'The operator "=" within class None is not followed'],
+                [lineNumber:5, sourceLineText:'int bar3=\t9876', messageText:'The operator "=" within class None is not preceded'])
+    }
+
+    @Test
+    void testApplyTo_EqualsOperator_InFieldDeclaration_WithoutSurroundingSpace_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                private static final String BAR='bar'
+                def bar2\t=[1, 2]
+                int bar3=\t9876
+            }
+        '''
         assertNoViolations(SOURCE)
+//        assertViolations(SOURCE,
+//                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not preceded'],
+//                [lineNumber:3, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class MyClass is not followed'],
+//                [lineNumber:4, sourceLineText:"def bar2\t=[1, 2]", messageText:'The operator "=" within class MyClass is not followed'],
+//                [lineNumber:5, sourceLineText:"int bar3=\t9876", messageText:'The operator "=" within class MyClass is not preceded'])
     }
 
     @Test

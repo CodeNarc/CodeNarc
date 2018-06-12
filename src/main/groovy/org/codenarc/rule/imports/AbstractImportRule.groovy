@@ -45,7 +45,7 @@ abstract class AbstractImportRule extends AbstractRule {
 
     protected void eachImportLine(SourceCode sourceCode, Closure closure) {
         int firstClassDeclarationLine = findLineNumberOfFirstClassDeclaration(sourceCode)
-        for(int index=0; index < firstClassDeclarationLine; index++) {
+        for(int index = 0; index < firstClassDeclarationLine; index++) {
             def line = sourceCode.lines[index]
             def lineNumber = index + 1
             closure.call(lineNumber, line)

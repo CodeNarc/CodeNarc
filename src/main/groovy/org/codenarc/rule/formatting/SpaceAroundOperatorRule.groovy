@@ -147,6 +147,11 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         def line = sourceCode.lines[op.startLine - 1]
 
         boolean assignmentWithinDeclaration = (opText == '=') && withinDeclarationExpression
+
+        if (expression instanceof DeclarationExpression && assignmentWithinDeclaration) {
+            checkAssignmentWithinDeclaration(expression, line)
+        }
+
         boolean arrayOperator = opText == '['
         boolean isOperatorAtIndex = op.startColumn != -1 && (line[op.startColumn - 1] == opText[0])
         boolean ignore = assignmentWithinDeclaration || arrayOperator || !isOperatorAtIndex
@@ -167,6 +172,22 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitBinaryExpression(expression)
+    }
+
+    private void checkAssignmentWithinDeclaration(BinaryExpression expression, String line) {
+        DeclarationExpression declarationExpression = expression
+        int left = declarationExpression.leftExpression.lastColumnNumber
+        int right = declarationExpression.rightExpression.columnNumber
+        boolean allOnSameLine = declarationExpression.leftExpression.lastLineNumber == declarationExpression.rightExpression.lineNumber
+        if (allOnSameLine && left > 0 && right > 0) {
+            String inBetweenString = line[(left - 1)..(right - 2)]
+            if (!(inBetweenString =~ '\\s=')) {
+                addViolationForOperator(expression, '=', PRECEDED)
+            }
+            if (!(inBetweenString =~ '=\\s')) {
+                addViolationForOperator(expression, '=', FOLLOWED)
+            }
+        }
     }
 
     @Override
