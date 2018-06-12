@@ -15,6 +15,8 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.ASTNode
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.BooleanExpression
 import org.codehaus.groovy.ast.expr.CastExpression
@@ -99,8 +101,8 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private void addViolationForOperator(Expression expression, String operatorName, String precededFollowedOrSurrounded) {
-        addViolation(expression, "The operator ${QUOTE}${operatorName}${QUOTE} within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
+    private void addViolationForOperator(ASTNode node, String operatorName, String precededFollowedOrSurrounded) {
+        addViolation(node, "The operator ${QUOTE}${operatorName}${QUOTE} within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
     }
 
     private void checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
@@ -133,6 +135,17 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
                 addViolationForOperator(expression, '?:', FOLLOWED)
             }
         }
+    }
+
+    @Override
+    void visitField(FieldNode node) {
+        if (node.initialExpression) {
+            def line = sourceCode.lines[node.lineNumber - 1]
+            if (line.contains('=')) {
+                checkAssignmentWithinString(node, line)
+            }
+        }
+        super.visitField(node)
     }
 
     @Override
@@ -181,12 +194,16 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         boolean allOnSameLine = declarationExpression.leftExpression.lastLineNumber == declarationExpression.rightExpression.lineNumber
         if (allOnSameLine && left > 0 && right > 0) {
             String inBetweenString = line[(left - 1)..(right - 2)]
-            if (!(inBetweenString =~ '\\s=')) {
-                addViolationForOperator(expression, '=', PRECEDED)
-            }
-            if (!(inBetweenString =~ '=\\s')) {
-                addViolationForOperator(expression, '=', FOLLOWED)
-            }
+            checkAssignmentWithinString(expression, inBetweenString)
+        }
+    }
+
+    private void checkAssignmentWithinString(ASTNode node, String string ) {
+        if (!(string =~ '\\s=')) {
+            addViolationForOperator(node, '=', PRECEDED)
+        }
+        if (!(string =~ '=\\s')) {
+            addViolationForOperator(node, '=', FOLLOWED)
         }
     }
 

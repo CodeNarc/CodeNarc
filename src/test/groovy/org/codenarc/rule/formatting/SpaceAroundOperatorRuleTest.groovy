@@ -264,16 +264,26 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
         final SOURCE = '''
             class MyClass {
                 private static final String BAR='bar'
-                def bar2\t=[1, 2]
+                def bar2\t=[1, 2,
+                    3, 4]
                 int bar3=\t9876
+                boolean bar4 =BAR &&
+                    x == null ||
+                    open()
+
+                private String OTHER = BAR &&
+                    x == null ||
+                    open()
+                String other2 = bar instanceof String
+                def obj = something.part.subpart
             }
         '''
-        assertNoViolations(SOURCE)
-//        assertViolations(SOURCE,
-//                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not preceded'],
-//                [lineNumber:3, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class MyClass is not followed'],
-//                [lineNumber:4, sourceLineText:"def bar2\t=[1, 2]", messageText:'The operator "=" within class MyClass is not followed'],
-//                [lineNumber:5, sourceLineText:"int bar3=\t9876", messageText:'The operator "=" within class MyClass is not preceded'])
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not followed'],
+                [lineNumber:4, sourceLineText:'def bar2\t=[1, 2', messageText:'The operator "=" within class MyClass is not followed'],
+                [lineNumber:6, sourceLineText:'int bar3=\t9876', messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:7, sourceLineText:'boolean bar4 =BAR &&', messageText:'The operator "=" within class MyClass is not followed'])
     }
 
     @Test
