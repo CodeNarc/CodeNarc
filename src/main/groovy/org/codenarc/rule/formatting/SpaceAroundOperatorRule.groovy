@@ -30,9 +30,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
  * Do not check array ('[') operator.
  *
- * Known limitation: Does not catch violations of missing space around equals operator (=) within a
- * declaration expression, e.g.   def x=23
- *
  * Known limitation: Does not catch violations of certain ternary expressions.
  *
  * @author Chris Mair
@@ -99,10 +96,6 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     private void addViolationForOperator(ASTNode node, String operatorName, String precededFollowedOrSurrounded) {
         addViolation(node, "The operator ${QUOTE}${operatorName}${QUOTE} within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
     }
-
-//    private void addViolationForOperatorAndDescription(ASTNode node, String operatorName, String description, String precededFollowedOrSurrounded) {
-//        addViolation(node, "The operator ${QUOTE}${operatorName}${QUOTE} for $description within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
-//    }
 
     private void checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
         if (expression.lineNumber == expression.lastLineNumber) {

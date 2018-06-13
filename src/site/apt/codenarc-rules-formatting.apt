@@ -629,7 +629,7 @@ class MyClass {                                 // CORRECT
 | <<Property>>                           | <<Description>>                                                  | <<Default Value>>      |
 *----------------------------------------+------------------------------------------------------------------+------------------------+
 | ignoreParameterDefaultValueAssignments | If <<<true>>>, then do not check for whitespace around the '='   | <<<true>>>             |
-| ignoreParameterDefaultValueAssignments | operator within method/constructor default parameter assignments.|                        |
+|                                        | operator within method/constructor default parameter assignments.|                        |
 *----------------------------------------+------------------------------------------------------------------+------------------------+
 
   Known limitations:
