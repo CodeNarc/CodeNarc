@@ -28,7 +28,7 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
 
     @Test
     void testRuleProperties() {
-        assert rule.priority == 1
+        assert rule.priority == 2
         assert rule.name == 'GrailsDomainStringPropertyMaxSize'
     }
 
@@ -45,6 +45,52 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSizeNoString_NoViolations() {
+        final SOURCE = '''
+            class Person {
+                Long versionNumber
+
+                static constraints = {
+                    versionNumber nullable:true
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testStaticAndTransient_NoViolations() {
+        final SOURCE = '''
+            class Person {
+                transient String firstName
+                static String lastName
+
+                static constraints = {
+                    firstName nullable:true
+                    lastName nullable:true
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoClosures_Violations() {
+        final SOURCE = '''
+            class Person {
+                String firstName
+                String lastName
+
+                static constraints = [size: 1..100]
+                static mapping = [firstName: 'text']
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'String firstName', messageText:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'],
+                [lineNumber:4, sourceLineText:'String lastName', messageText:'There is no constraint on the size of String property \'lastName\' which will result in applying database defaults'])
     }
 
     @Test
@@ -85,13 +131,32 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
     }
 
     @Test
-    void testSizeNotConstrained_Violation() {
+    void testPropertyNotMappedType_Violation() {
         final SOURCE = '''
             class Person {
                 String firstName
                 String lastName
                 static constraints = {
                     firstName nullable:true
+                    lastName nullable:true, maxSize: 30
+                }
+
+                static mapping = {
+                    firstName column: 'prenom'
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'String firstName', messageText:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'])
+    }
+
+    @Test
+    void testSizeNotConstrained_Violation() {
+        final SOURCE = '''
+            class Person {
+                String firstName
+                String lastName
+                static constraints = {
                     lastName nullable:true
                 }
             }
@@ -122,6 +187,53 @@ class GrailsDomainStringPropertyMaxSizeRuleTest extends AbstractRuleTestCase<Gra
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testImportFromMultipleAttributes_NoViolation() {
+        final SOURCE = '''
+            class Entity {
+                String firstName
+
+                static constraints = {
+                    firstName size: 0..50, nullable: true
+                    lastName nullable:true, maxSize: 30
+                }
+            }
+
+            class Person {
+                String firstName
+                String lastName
+                static constraints = {
+                    importFrom Entity, include: ["firstName", "lastName"]
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testImportFromNoInclude_Violation() {
+        final SOURCE = '''
+            class Entity {
+                String firstName
+
+                static constraints = {
+                    firstName size: 0..50, nullable: true
+                }
+            }
+
+            class Person {
+                String firstName
+                String lastName
+                static constraints = {
+                    importFrom Entity
+                    lastName maxSize: 30
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:11, sourceLineText:'String firstName', messageText:'There is no constraint on the size of String property \'firstName\' which will result in applying database defaults'])
     }
 
     @Before

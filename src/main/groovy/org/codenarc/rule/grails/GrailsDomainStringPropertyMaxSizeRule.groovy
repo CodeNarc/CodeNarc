@@ -85,7 +85,7 @@ class GrailsDomainStringPropertyMaxSizeAstVisitor extends AbstractAstVisitor {
             Set<String> constraint = constraintsAndMapping.constraints[it]
             Set<String> mapping = constraintsAndMapping.mapping[it]
 
-            if (!constraint.intersect(['maxSize', 'size']) && !mapping.contains('type')) {
+            if (!constraint?.intersect(['maxSize', 'size']) && !mapping?.contains('type')) {
                 addViolation(node.getProperty(it), "There is no constraint on the size of String property '$it' which will result in applying database defaults")
             }
         }
