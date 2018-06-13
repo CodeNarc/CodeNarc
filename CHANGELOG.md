@@ -20,6 +20,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #314: **FieldTypeRequiredRule** rule: Add *ignoreFieldNames* property.
    - #235: **UnnecessaryGetter**: Ignore getters within calls to Spock `Stub()`/`Mock()`. 
    - #157 **SpaceAroundOperatorAstVisitor**: Check for space around equals for declaration expressions in variables and fields.
+   - #157 **SpaceAroundOperatorAstVisitor**: Check for space around equals for method/constructor parameters. Add *ignoreParameterDefaultValueAssignments* flag.
 
 Framework and Infrastructure
    - #311: Add equivalent linux command line example. (Wilfred Hughes)

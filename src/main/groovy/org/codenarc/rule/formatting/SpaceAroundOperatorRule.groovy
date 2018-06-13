@@ -17,15 +17,9 @@ package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.FieldNode
-import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.CastExpression
-import org.codehaus.groovy.ast.expr.DeclarationExpression
-import org.codehaus.groovy.ast.expr.ElvisOperatorExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.TernaryExpression
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.Parameter
+import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -47,6 +41,7 @@ class SpaceAroundOperatorRule extends AbstractAstVisitorRule {
 
     String name = 'SpaceAroundOperator'
     int priority = 3
+    boolean ignoreParameterDefaultValueAssignments = true
     Class astVisitorClass = SpaceAroundOperatorAstVisitor
 }
 
@@ -105,6 +100,10 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         addViolation(node, "The operator ${QUOTE}${operatorName}${QUOTE} within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
     }
 
+//    private void addViolationForOperatorAndDescription(ASTNode node, String operatorName, String description, String precededFollowedOrSurrounded) {
+//        addViolation(node, "The operator ${QUOTE}${operatorName}${QUOTE} for $description within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
+//    }
+
     private void checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
         if (expression.lineNumber == expression.lastLineNumber) {
             def hasWhitespaceAroundQuestionMark = (line =~ /\s\?\s/)
@@ -146,6 +145,28 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitField(node)
+    }
+
+    @Override
+    protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
+        if (!rule.ignoreParameterDefaultValueAssignments) {
+            node.parameters.each { Parameter parameter ->
+                checkMethodParameter(parameter)
+            }
+        }
+        super.visitConstructorOrMethod(node, isConstructor)
+    }
+
+    private void checkMethodParameter(Parameter parameter) {
+        if (parameter.initialExpression) {
+            def line = sourceCode.lines[parameter.lineNumber - 1]
+            boolean allOnSameLine = parameter.lineNumber == parameter.lastLineNumber
+            int endColumn = allOnSameLine ? parameter.lastColumnNumber : line.size()
+            String paramString = line[(parameter.columnNumber - 1)..(endColumn - 2)]
+            if (paramString.contains('=')) {
+                checkAssignmentWithinString(parameter, paramString)
+            }
+        }
     }
 
     @Override

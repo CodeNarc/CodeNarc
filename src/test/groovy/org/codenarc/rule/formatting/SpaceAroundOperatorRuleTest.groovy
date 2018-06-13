@@ -29,6 +29,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'SpaceAroundOperator'
+        assert rule.ignoreParameterDefaultValueAssignments == true
     }
 
     // Tests for operators
@@ -284,6 +285,48 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
                 [lineNumber:4, sourceLineText:'def bar2\t=[1, 2', messageText:'The operator "=" within class MyClass is not followed'],
                 [lineNumber:6, sourceLineText:'int bar3=\t9876', messageText:'The operator "=" within class MyClass is not preceded'],
                 [lineNumber:7, sourceLineText:'boolean bar4 =BAR &&', messageText:'The operator "=" within class MyClass is not followed'])
+    }
+
+    @Test
+    void testApplyTo_EqualsOperator_InMethodParameterDefaultValue_WithoutSurroundingSpace_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                void method1(String name, int count=99,
+                    long id =1) { }
+
+                void method_Okay(String name = 'abc', int count = 99) { }
+            }
+        '''
+
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'void method1(String name, int count=99', messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:3, sourceLineText:'void method1(String name, int count=99', messageText:'The operator "=" within class MyClass is not followed'],
+                [lineNumber:4, sourceLineText:'long id =1', messageText:'The operator "=" within class MyClass is not followed'])
+
+        rule.ignoreParameterDefaultValueAssignments = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_EqualsOperator_InConstructorParameterDefaultValue_WithoutSurroundingSpace_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass(int id= 88,
+                    int maxValue   =99 +
+                        23, def other) { }
+
+                MyClass(String name) { }
+            }
+        '''
+
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'MyClass(int id= 88', messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:4, sourceLineText:'int maxValue   =99 +', messageText:'The operator "=" within class MyClass is not followed'])
+
+        rule.ignoreParameterDefaultValueAssignments = true
+        assertNoViolations(SOURCE)
     }
 
     @Test

@@ -625,9 +625,14 @@ class MyClass {                                 // CORRECT
   Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
   Do not check array ('[') operator.
 
-  Known limitations:
+*----------------------------------------+------------------------------------------------------------------+------------------------+
+| <<Property>>                           | <<Description>>                                                  | <<Default Value>>      |
+*----------------------------------------+------------------------------------------------------------------+------------------------+
+| ignoreParameterDefaultValueAssignments | If <<<true>>>, then do not check for whitespace around the '='   | <<<true>>>             |
+| ignoreParameterDefaultValueAssignments | operator within method/constructor default parameter assignments.|                        |
+*----------------------------------------+------------------------------------------------------------------+------------------------+
 
-  * Does not catch violations of missing space around equals operator (=) within a declaration expression, e.g.  <<<def x=23>>>
+  Known limitations:
 
   * Does not catch violations of certain ternary expressions and standalone elvis operator (?:) expressions
 
