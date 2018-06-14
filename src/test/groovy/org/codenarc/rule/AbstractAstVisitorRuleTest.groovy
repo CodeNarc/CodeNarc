@@ -214,6 +214,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase<AbstractAstVisitor
         assert 'MyTest.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
         assert 'MyTests.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
         assert 'MyTestCase.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
+        assert 'MySpec.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
         assertFalse 'MyNonTestClass.groovy' ==~ AbstractAstVisitorRule.DEFAULT_TEST_FILES
     }
 
@@ -223,6 +224,7 @@ class AbstractAstVisitorRuleTest extends AbstractRuleTestCase<AbstractAstVisitor
         assert wildcardPattern.matches('MyTest')
         assert wildcardPattern.matches('MyTests')
         assert wildcardPattern.matches('MyTestCase')
+        assert wildcardPattern.matches('MySpec')
         assertFalse wildcardPattern.matches('MyNonTestClass')\
     }
 

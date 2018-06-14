@@ -101,7 +101,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
       * <<<assertNull([a:123])>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {JUnitAssertAlwaysSucceeds} Rule
@@ -133,7 +133,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
         * <<<assertNull(null)>>>
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {JUnitFailWithoutMessage} Rule
@@ -155,7 +155,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   AST Transformations to automatically annotate test methods.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
   Example of violations:
 
@@ -178,7 +178,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Fields within interfaces and fields annotated with @Rule are ignored.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
   Example of violations:
 
@@ -225,7 +225,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   and thus be ignored by JUnit.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
   *------------------------------+-------------------------------------------------------------+----------------------------+
   | <<Property>>                 | <<Description>>                                             | <<Default Value>>          |
@@ -246,7 +246,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   expose a public property (with public <getter> and <setter> methods) on a test class.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
@@ -280,7 +280,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule ignored methods annotated with <<<@Before>>> or <<<@BeforeClass>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {JUnitStyleAssertions} Rule
@@ -302,7 +302,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   This rule ignored methods annotated with <<<@After>>> or <<<@AfterClass>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {JUnitTestMethodWithoutAssert} Rule
@@ -340,7 +340,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<super.setUp()>>>. The method is then unnecessary.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
   Here is an example of a violation:
 
@@ -360,7 +360,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<super.tearDown()>>>. The method is then unnecessary.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
   Here is an example of a violation:
 
@@ -381,7 +381,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   Check for <<<throws>>> clauses on JUnit test methods. That is not necessary in Groovy.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
   Example of violations:
 
@@ -457,7 +457,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   It is better to rethrow the exception or not catch the exception at all.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
   Example of violations:
 
@@ -486,7 +486,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   like <<<assertEquals>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {UseAssertFalseInsteadOfNegation} Rule
@@ -497,7 +497,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   For instance, <<<assertTrue(!condition)>>> can always be simplified to <<<assertFalse(condition)>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {UseAssertTrueInsteadOfAssertEquals} Rule
@@ -508,7 +508,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   should be made by more specific methods, like <<<assertTrue>>> or <<<assertFalse>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 *---------------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>              | <<Description>>                                                | <<Default Value>>      |
@@ -545,7 +545,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   For instance, <<<assertFalse(!condition)>>> can always be simplified to <<<assertTrue(condition)>>>.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {UseAssertNullInsteadOfAssertEquals} Rule
@@ -556,7 +556,7 @@ JUnit Rules  ("<rulesets/junit.xml>")
   These assertion should be made against the <<<assertNull>>> method instead.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 
 
 * {UseAssertSameInsteadOfAssertTrue} Rule
@@ -568,5 +568,5 @@ JUnit Rules  ("<rulesets/junit.xml>")
   <<<assertSame>>> or <<<assertNotSame>>> method instead.
 
   This rule sets the default value of the <applyToClassNames> property to only match class names
-  ending in 'Test', 'Tests' or 'TestCase'.
+  ending in 'Spec', 'Test', 'Tests' or 'TestCase'.
 

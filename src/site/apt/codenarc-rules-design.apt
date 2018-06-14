@@ -314,7 +314,7 @@ Design Rules  ("<rulesets/design.xml>")
    * {{{http://stackoverflow.com/questions/4192837/how-does-one-use-polymorphism-instead-of-instanceof-and-why}How does one use polymorphism instead of instanceof? (And why?)}}
 
   By default, the rule does not analyze test files. This rule sets the default value of the
-  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Spec.groovy', 'Test.groovy', 'Tests.groovy'
   or 'TestCase.groovy'.
 
 *-------------------+----------------------------------------------------------------+------------------------+
