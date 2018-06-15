@@ -1,3 +1,4 @@
+
 # CodeNarc Change Log
 
 TODO: Version 1.2 (??? 2018)
@@ -6,6 +7,7 @@ New Rules
   - #336: **StaticFieldsBeforeInstanceFields** rule (convention) - Enforce that all static fields are above all instance fields within a class.
   - #337: **StaticMethodsBeforeInstanceMethods** rule (convention) - Enforce that all static methods within each visibility level (public, protected, private) are above all instance methods within that same visibility level. 
   - #340: **PublicMethodsBeforeNonPublic** rule (convention) - Enforce that all public methods are above protected and private methods.
+  - **GrailsDomainStringPropertyMaxSize** rule (grails) - String properties in Grails domain classes have to define maximum size otherwise the property is mapped to VARCHAR(255) causing runtime exceptions to occur
 
 Updated/Enhanced Rules and Bug Fixes
    - #315: **Indentation** rule: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
