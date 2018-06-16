@@ -10,7 +10,10 @@ CodeNarc - Creating a Rule
   of the box by <<CodeNarc>>. <<CodeNarc>> provides abstract superclasses and
   helper classes for creating new rules.
 
-  See this {{{http://www.youtube.com/watch?v=ZPu8FaZZwRw}screencast}} showing how
+  The {{{./codenarc-developer-guide.html#The_codenarc_Command-line_Script}<<codenarc create-rule>>}}
+   command-line script is the recommended way to create a new rule.
+
+  Also see this {{{http://www.youtube.com/watch?v=ZPu8FaZZwRw}screencast}} showing how
   easy it is to create a new rule.
 
 
