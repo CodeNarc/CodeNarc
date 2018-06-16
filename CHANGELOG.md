@@ -7,7 +7,7 @@ New Rules
   - #336: **StaticFieldsBeforeInstanceFields** rule (convention) - Enforce that all static fields are above all instance fields within a class.
   - #337: **StaticMethodsBeforeInstanceMethods** rule (convention) - Enforce that all static methods within each visibility level (public, protected, private) are above all instance methods within that same visibility level. 
   - #340: **PublicMethodsBeforeNonPublic** rule (convention) - Enforce that all public methods are above protected and private methods.
-  - **GrailsDomainStringPropertyMaxSize** rule (grails) - String properties in Grails domain classes have to define maximum size otherwise the property is mapped to VARCHAR(255) causing runtime exceptions to occur
+  - #344: **GrailsDomainStringPropertyMaxSize** rule (grails) - String properties in Grails domain classes have to define maximum size otherwise the property is mapped to VARCHAR(255) causing runtime exceptions to occur. (Vladimir Orany)
 
 Updated/Enhanced Rules and Bug Fixes
    - #315: **Indentation** rule: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
@@ -30,6 +30,7 @@ Framework and Infrastructure
    - #325: Perform general cleanup across project. (Russell Sanborn)
    - #324: Add missing Violation type to List parameter in applyTo methods. (Russell Sanborn)
    - #323: Add terminating semicolons to keep consistency in js sort functions. (Russell Sanborn)
+   - #347: Add "spec" to DEFAULT_TEST_FILES and DEFAULT_TEST_CLASS_NAMES. (Russell Sanborn)
 
 
 Version 1.1 (Jan 2018)
