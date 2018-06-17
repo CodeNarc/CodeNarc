@@ -35,7 +35,8 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
             x.set(1)
             x.setup(2)
             x.setURL('')
-            x.setSomething('arg1', 'arg2') '''
+            x.setSomething('arg1', 'arg2')
+        '''
         assertNoViolations(SOURCE)
     }
 
@@ -61,7 +62,18 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
-    void callingSettersOnSuperDoesNotCauseViolations() {
+    void testCallingSetterWithinExpression_NoViolations() {
+        final SOURCE = '''
+            if (!file.setExecutable(true)) {
+                throw new Exception("Cannot set ${file} as executable")
+            }
+            def count = x.setCount(92)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testCallingSettersOnSuperDoesNotCauseViolations() {
         final SOURCE = '''
             super.setProperty(1)
         '''

@@ -18,14 +18,15 @@ package org.codenarc.rule.unnecessary
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.stmt.ExpressionStatement
+import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
 
 /**
  * Checks for explicit calls to setter methods which can, for the most part, be replaced by assignment to property.
  * A setter is defined as a method call that matches set[A-Z] but not set[A-Z][A-Z] such as setURL().
- * Setters take one method argument.
+ * Setters take one method argument. Setter calls within an expression are ignored.
  */
 class UnnecessarySetterRule extends AbstractAstVisitorRule {
     String name = 'UnnecessarySetter'
@@ -33,10 +34,14 @@ class UnnecessarySetterRule extends AbstractAstVisitorRule {
     Class astVisitorClass = UnnecessarySetterAstVisitor
 }
 
-class UnnecessarySetterAstVisitor extends AbstractMethodCallExpressionVisitor {
+class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
+
     @Override
-    void visitMethodCallExpression(MethodCallExpression call) {
-        addViolationsIfSetter(call)
+    void visitExpressionStatement(ExpressionStatement statement) {
+        if (statement.expression instanceof MethodCallExpression) {
+            addViolationsIfSetter(statement.expression)
+        }
+        super.visitExpressionStatement(statement)
     }
 
     private void addViolationsIfSetter(MethodCallExpression call) {

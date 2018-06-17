@@ -19,10 +19,11 @@ Updated/Enhanced Rules and Bug Fixes
    - #332: **SpaceBeforeOpeningBrace**: Ignore opening brace preceded by opening ‘[’.
    - #332: **SpaceAfterClosingBrace**: Ignore closing brace followed by closing ‘]’. Deprecate  and ignore *checkClosureMapEntryValue* property. 
    - #314: **VariableTypeRequired** rule: Add *ignoreVariableNames* property.
-   - #314: **FieldTypeRequiredRule** rule: Add *ignoreFieldNames* property.
-   - #235: **UnnecessaryGetter**: Ignore getters within calls to Spock `Stub()`/`Mock()`. 
-   - #157 **SpaceAroundOperatorAstVisitor**: Check for space around equals for declaration expressions in variables and fields.
-   - #157 **SpaceAroundOperatorAstVisitor**: Check for space around equals for method/constructor parameters. Add *ignoreParameterDefaultValueAssignments* flag.
+   - #314: **FieldTypeRequired** rule: Add *ignoreFieldNames* property.
+   - #235: **UnnecessaryGetter** rule: Ignore getters within calls to Spock `Stub()`/`Mock()`. 
+   - #157 **SpaceAroundOperator** rule: Check for space around equals for declaration expressions in variables and fields.
+   - #157 **SpaceAroundOperator** rule: Check for space around equals for method/constructor parameters. Add *ignoreParameterDefaultValueAssignments* flag.
+   - #346: **UnnecessarySetter** rule: Ignore setter calls if they are part of an expression.
 
 Framework and Infrastructure
    - #311: Add equivalent linux command line example. (Wilfred Hughes)
