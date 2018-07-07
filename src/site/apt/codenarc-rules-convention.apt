@@ -282,6 +282,22 @@ Convention Rules  ("<rulesets/convention.xml>")
 *-------------------------------+----------------------------------------------------------------+---------------------+
 
 
+* {NoJavaUtilDate} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.2>
+
+  Do not use the <<<java.util.Date>>> class. Prefer the classes in the java.time.* packages. This rule checks for
+  construction of new java.util.Date objects.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def timestamp = new Date()              // violation
+    Date myDate = new java.util.Date()      // violation
+    Date startTime = new Date(123456789L)   // violation
+-------------------------------------------------------------------------------
+
+
 * {NoTabCharacter} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 0.25>
@@ -506,3 +522,4 @@ Convention Rules  ("<rulesets/convention.xml>")
 -------------------------------------------------------------------------------
     def myList = new Vector()           // violation
 -------------------------------------------------------------------------------
+
