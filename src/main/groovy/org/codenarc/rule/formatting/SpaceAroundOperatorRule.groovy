@@ -134,6 +134,10 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         if (node.initialExpression) {
             def line = sourceCode.lines[node.lineNumber - 1]
             if (line.contains('=')) {
+                // The line string includes no terminating newline char
+                // So, simplify checking that = is always followed by whitespace char
+                line = line.endsWith('=') ? line + ' ' : line
+
                 checkAssignmentWithinString(node, line)
             }
         }

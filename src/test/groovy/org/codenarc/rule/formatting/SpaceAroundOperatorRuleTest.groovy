@@ -38,9 +38,16 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     void testApplyTo_Operators_ProperSpacing_NoViolations() {
         final SOURCE = '''
             class MyClass {
+
+                String name = "Joe"
+                private static String LONG_NAME =
+                    "aaaaaaabbbbbbbbbbbbbbbcccccccccccccccccccddddddddddd"
+
                 def myMethod() {
                     def answer = 3 + 5 - x\t* 23    / 100
                     def name = fullname ? fullname + 'ME' : 'unknown'
+                    String longName =
+                        'aaaaabbbbbcccccddddd'
                     def v = fullname ?
                          fullname + 'ME' :
                          'unknown'
