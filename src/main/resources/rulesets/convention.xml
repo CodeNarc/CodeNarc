@@ -23,7 +23,7 @@
     <rule class='org.codenarc.rule.convention.NoJavaUtilDateRule'/>
     <rule class='org.codenarc.rule.convention.NoTabCharacterRule'/>
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
-    <rule class='org.codenarc.rule.convention.PublicMethodsBeforeNonPublicRule'/>
+    <rule class='org.codenarc.rule.convention.PublicMethodsBeforeNonPublicMethodsRule'/>
     <rule class='org.codenarc.rule.convention.StaticFieldsBeforeInstanceFieldsRule'/>
     <rule class='org.codenarc.rule.convention.StaticMethodsBeforeInstanceMethodsRule'/>
     <rule class='org.codenarc.rule.convention.TernaryCouldBeElvisRule'/>

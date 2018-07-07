@@ -291,7 +291,7 @@ Rule Index
     * {{{./codenarc-rules-convention.html#ParameterReassignment}ParameterReassignment}}  
     
       
-    * {{{./codenarc-rules-convention.html#PublicMethodsBeforeNonPublic}PublicMethodsBeforeNonPublic}}  
+    * {{{./codenarc-rules-convention.html#PublicMethodsBeforeNonPublicMethods}PublicMethodsBeforeNonPublicMethods}}  
     
       
     * {{{./codenarc-rules-convention.html#StaticFieldsBeforeInstanceFields}StaticFieldsBeforeInstanceFields}}  

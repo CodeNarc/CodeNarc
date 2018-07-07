@@ -19,16 +19,16 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
- * Tests for PublicMethodsBeforeNonPublicRule
+ * Tests for PublicMethodsBeforeNonPublicMethodsRule
  *
  * @author Chris Mair
  */
-class PublicMethodsBeforeNonPublicRuleTest extends AbstractRuleTestCase<PublicMethodsBeforeNonPublicRule> {
+class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<PublicMethodsBeforeNonPublicMethodsRule> {
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == 'PublicMethodsBeforeNonPublic'
+        assert rule.name == 'PublicMethodsBeforeNonPublicMethods'
     }
 
     @Test
@@ -88,7 +88,7 @@ class PublicMethodsBeforeNonPublicRuleTest extends AbstractRuleTestCase<PublicMe
     }
 
     @Override
-    protected PublicMethodsBeforeNonPublicRule createRule() {
-        new PublicMethodsBeforeNonPublicRule()
+    protected PublicMethodsBeforeNonPublicMethodsRule createRule() {
+        new PublicMethodsBeforeNonPublicMethodsRule()
     }
 }

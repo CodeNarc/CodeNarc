@@ -233,7 +233,7 @@ ruleset {
     PropertyName 
     PublicFinalizeMethod 
     PublicInstanceField 
-    PublicMethodsBeforeNonPublic 
+    PublicMethodsBeforeNonPublicMethods 
     RandomDoubleCoercedToZero 
     RemoveAllOnSelf 
     RequiredRegex 

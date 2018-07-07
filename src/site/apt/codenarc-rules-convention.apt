@@ -331,7 +331,7 @@ Convention Rules  ("<rulesets/convention.xml>")
 -------------------------------------------------------------------------------
 
 
-* {PublicMethodsBeforeNonPublic} Rule
+* {PublicMethodsBeforeNonPublicMethods} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.2>
 

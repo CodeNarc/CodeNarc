@@ -101,7 +101,7 @@ ruleset {
     NoJavaUtilDate 
     NoTabCharacter 
     ParameterReassignment 
-    PublicMethodsBeforeNonPublic 
+    PublicMethodsBeforeNonPublicMethods 
     StaticFieldsBeforeInstanceFields 
     StaticMethodsBeforeInstanceMethods 
     TernaryCouldBeElvis 
