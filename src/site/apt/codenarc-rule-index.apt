@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 357 rules.
+  <<CodeNarc>> includes 362 rules.
 
     
       
@@ -282,10 +282,22 @@ Rule Index
     * {{{./codenarc-rules-convention.html#NoDef}NoDef}}  
     
       
+    * {{{./codenarc-rules-convention.html#NoJavaUtilDate}NoJavaUtilDate}}  
+    
+      
     * {{{./codenarc-rules-convention.html#NoTabCharacter}NoTabCharacter}}  
     
       
     * {{{./codenarc-rules-convention.html#ParameterReassignment}ParameterReassignment}}  
+    
+      
+    * {{{./codenarc-rules-convention.html#PublicMethodsBeforeNonPublic}PublicMethodsBeforeNonPublic}}  
+    
+      
+    * {{{./codenarc-rules-convention.html#StaticFieldsBeforeInstanceFields}StaticFieldsBeforeInstanceFields}}  
+    
+      
+    * {{{./codenarc-rules-convention.html#StaticMethodsBeforeInstanceMethods}StaticMethodsBeforeInstanceMethods}}  
     
       
     * {{{./codenarc-rules-convention.html#TernaryCouldBeElvis}TernaryCouldBeElvis}}  
@@ -612,6 +624,9 @@ Rule Index
     
       
     * {{{./codenarc-rules-grails.html#GrailsDomainReservedSqlKeywordName}GrailsDomainReservedSqlKeywordName}}  
+    
+      
+    * {{{./codenarc-rules-grails.html#GrailsDomainStringPropertyMaxSize}GrailsDomainStringPropertyMaxSize}}  
     
       
     * {{{./codenarc-rules-grails.html#GrailsDomainWithServiceReference}GrailsDomainWithServiceReference}}  

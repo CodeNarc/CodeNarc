@@ -141,6 +141,7 @@ ruleset {
     GrailsDomainHasEquals 
     GrailsDomainHasToString 
     GrailsDomainReservedSqlKeywordName 
+    GrailsDomainStringPropertyMaxSize 
     GrailsDomainWithServiceReference 
     GrailsDuplicateConstraint 
     GrailsDuplicateMapping 
@@ -214,6 +215,7 @@ ruleset {
     NestedForLoop 
     NestedSynchronization 
     NoDef 
+    NoJavaUtilDate 
     NoTabCharacter 
     NoWildcardImports 
     NonFinalPublicField 
@@ -231,6 +233,7 @@ ruleset {
     PropertyName 
     PublicFinalizeMethod 
     PublicInstanceField 
+    PublicMethodsBeforeNonPublic 
     RandomDoubleCoercedToZero 
     RemoveAllOnSelf 
     RequiredRegex 
@@ -263,7 +266,9 @@ ruleset {
     StaticCalendarField 
     StaticConnection 
     StaticDateFormatField 
+    StaticFieldsBeforeInstanceFields 
     StaticMatcherField 
+    StaticMethodsBeforeInstanceMethods 
     StaticSimpleDateFormatField 
     SwallowThreadDeath 
     SynchronizedMethod 
