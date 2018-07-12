@@ -96,6 +96,7 @@ class GrailsStatelessServiceRuleTest extends AbstractRuleTestCase<GrailsStateles
             static scope = 'session'
             static transactional = false
             Sessionfactory sessionFactory
+            GrailsApplication grailsApplication
           }
         '''
         assertNoViolations(SOURCE)
