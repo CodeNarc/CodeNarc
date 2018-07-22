@@ -656,6 +656,15 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        ClosureExpression.metaClass.getText = { return CLOSURE_TEXT }
             |    }
             |
+            |    static { println "init" }
+            |
+            |    static {
+            |        [1, 2, 3].each { n ->
+            |            println n
+            |        }
+            |    }
+            |
+            |    // Instance initializer
             |    {
             |        println "Instance initializer"
             |    }
@@ -723,6 +732,16 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_Script2() {
+        final SOURCE = '''
+            |job('job') {
+            |    label('label')
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_NestedClassWithinExpression() {
         final SOURCE = '''
             |class MyClass {
@@ -745,16 +764,45 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     @Test
     void test_NestedClosure() {
         final SOURCE = '''
-            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }
+            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->
+            |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')
+            |    String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +
+            |        "FILE_PATH=${it.absolutePath}\\n"
+            |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
+            |    cacheDir + hash + File.separator + 'output/jars/classes.jar\'
+            |}).asFileTree
+            '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_MethodChaining() {
+        final SOURCE = '''
+            |buildFileList()
             |    .collect { File it ->
             |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
             |        String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +
-            |            "FILE_PATH=${it.absolutePath}\\n" +
-            |            "FILE_SIZE=${it.length()}\\n" +
-            |            "FILE_TIMESTAMP=${it.lastModified()}"
-            |        String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
-            |        cacheDir + hash + File.separator + 'output/jars/classes.jar\'
-            |    }).asFileTree
+            |            "FILE_PATH=${it.absolutePath}\\n"
+            |        cacheDir + File.separator + inputFile + sha1
+            |    }
+            |    .each { name ->
+            |        println name
+            |    }
+            |println "done"
+            |
+            |list2.collect { item ->
+            |    item.name
+            |}.each { name -> println name }
+            |
+            |otherList.collect { item -> item.name }.each { name -> println name }
+            |
+            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {
+            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {
+            |        AstUtil.classNodeImplementsType(expr.type, it)
+            |    }.each {
+            |        callbackFunction()
+            |    }
+            |}
             '''.stripMargin()
         assertNoViolations(SOURCE)
     }

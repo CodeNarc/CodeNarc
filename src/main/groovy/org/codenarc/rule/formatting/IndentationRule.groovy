@@ -16,10 +16,12 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.*
+import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.Statement
@@ -77,6 +79,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     private int indentLevel = 0
     private final Set<Integer> ignoreLineNumbers = []
     private final Set<BlockStatement> nestedBlocks = []
+    private final Map<BlockStatement, Integer> blockIndentLevel = [:].withDefault { 0 }
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -114,6 +117,11 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             ignoreLineNumbers << node.lastLineNumber
         }
 
+        // If this is a static initializer, then expect its block to be indented (even though its lineNumber == -1)
+        if (node.staticConstructor) {
+            blockIndentLevel[node.code] = blockIndentLevel[node.code] + 1
+        }
+
         super.visitMethodEx(node)
     }
 
@@ -143,9 +151,33 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     }
 
     @Override
+    void visitMethodCallExpression(MethodCallExpression call) {
+        // If the method name starts on a different line, then assume it is a chained method call,
+        // and any blocks that are arguments should be indented.
+        if (isChainedMethodCallOnDifferentLine(call) && call.arguments instanceof ArgumentListExpression) {
+            call.arguments.expressions.each { expr ->
+                if (expr instanceof ClosureExpression && expr.code instanceof BlockStatement) {
+                    blockIndentLevel[expr.code] = blockIndentLevel[expr.code] + 1
+                }
+            }
+        }
+        super.visitMethodCallExpression(call)
+    }
+
+    private boolean isChainedMethodCallOnDifferentLine(MethodCallExpression call) {
+        return call.method instanceof ConstantExpression &&
+                call.lineNumber != -1 &&
+                call.lineNumber != call.method.lineNumber &&
+                sourceLineTrimmed(call.method).startsWith('.')
+    }
+
+    @Override
     void visitBlockStatement(BlockStatement block) {
         // finally blocks have extra level of nested BlockStatement
-        int addToIndentLevel = nestedBlocks.contains(block) ? 0 : 1
+        boolean isNestedBlock = nestedBlocks.contains(block)
+        boolean isGenerated = block.lineNumber == -1
+        int addToIndentLevel = (isNestedBlock || isGenerated) ? 0 : 1
+        addToIndentLevel += blockIndentLevel[block]
         indentLevel += addToIndentLevel
 
         block.statements.each { statement ->

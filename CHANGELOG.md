@@ -1,5 +1,11 @@
 # CodeNarc Change Log
 
+TODO: Version 1.2.1 (??? 2018)
+--------------------------------------
+Bug Fixes
+  - #310: Indentation rule: Fix handling of indent level within scripts and method call chaining.
+
+
 Version 1.2 (Jul 2018)
 --------------------------------------
 New Rules
