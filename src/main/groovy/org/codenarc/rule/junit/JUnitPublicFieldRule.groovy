@@ -22,7 +22,7 @@ import org.codenarc.rule.AbstractFieldVisitor
 import org.codenarc.util.AstUtil
 
 /**
- * Checks for public field on a JUnit test class. Ignores fields with the @Rule annotation.
+ * Checks for public field on a JUnit test class. Ignores fields with the @Rule and @ClassRule annotations.
  * <p/>
  * This rule ignores interfaces.
  * <p/>
@@ -49,7 +49,7 @@ class JUnitPublicFieldAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
-        if (node.isPublic() && !AstUtil.hasAnnotation(node, 'Rule') ) {
+        if (node.isPublic() && !AstUtil.hasAnnotation(node, 'Rule') && !AstUtil.hasAnnotation(node, 'ClassRule')) {
             addViolation(node, "The field $node.name is public. There is usually no reason to have a public field (even a constant) on a test class.")
         }
     }

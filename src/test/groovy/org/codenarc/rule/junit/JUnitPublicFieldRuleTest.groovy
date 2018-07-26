@@ -71,6 +71,16 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase<JUnitPublicFieldRule
     }
 
     @Test
+    void testClassWithPublicFieldsAnnotatedWithClassRule_NoViolations() {
+        final SOURCE = '''
+            class MyTestCase {
+                @ClassRule public TestName testName = new TestName()
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testClassWithPublicFields_Violations() {
         final SOURCE = '''
             import org.junit.Test
