@@ -3,8 +3,11 @@
 TODO: Version 1.2.1 (??? 2018)
 --------------------------------------
 Bug Fixes
-  - #310: Indentation rule: Fix handling of indent level within scripts and method call chaining.
-  - #355: Indentation rule: Spock labels on if stmt throw MissingPropertyException: No such property: expression.
+  - #310: **Indentation** rule: Fix handling of indent level within scripts and method call chaining.
+  - #355: **Indentation** rule: Spock labels on if stmt throw MissingPropertyException: No such property: expression.
+  - #351: **GrailsStatelessService** rule: Add `grailsApplication` to the default ignored fields. (Donald Oellerich)
+  - #354: **JUnitPublicField** rule: Also ignore @ClassRule. (Daniel Spilker)
+
 
 
 Version 1.2 (Jul 2018)
