@@ -56,7 +56,7 @@ import org.codenarc.rule.generic.StatelessClassRule
  * <p/>
  * The <code>ignoreFieldNames</code> property of this rule is preconfigured to ignore the standard
  * Grails service configuration field names ('scope', 'transactional') and injected bean names
- * ('dataSource', 'sessionFactory'), as well as all other field names ending with 'Service'.
+ * ('dataSource', 'sessionFactory', 'grailsApplication'), as well as all other field names ending with 'Service'.
  * <p/>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match files
  * under the 'grails-app/services' folder. You can override this with a different regular
@@ -76,7 +76,7 @@ class GrailsStatelessServiceRule extends StatelessClassRule {
     String applyToClassNames = GrailsUtil.SERVICE_CLASSES
 
     GrailsStatelessServiceRule() {
-        ignoreFieldNames = 'dataSource,scope,sessionFactory,transactional,*Service'
+        ignoreFieldNames = 'dataSource,scope,sessionFactory,transactional,*Service,grailsApplication'
     }
 
     @Override
