@@ -263,6 +263,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private boolean isSpockBlockLabel(Statement statement) {
         return (statement.statementLabel in SPOCK_BLOCKS &&
+                statement instanceof ExpressionStatement &&
                 statement.expression.class == ConstantExpression &&
                 statement.expression.type.clazz == String
         )
