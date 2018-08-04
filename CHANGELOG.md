@@ -7,7 +7,7 @@ Bug Fixes
   - #355: **Indentation** rule: Spock labels on if stmt throw MissingPropertyException: No such property: expression.
   - #351: **GrailsStatelessService** rule: Add `grailsApplication` to the default ignored fields. (Donald Oellerich)
   - #354: **JUnitPublicField** rule: Also ignore @ClassRule. (Daniel Spilker)
-
+  - #348: **SpaceAroundOperator** rule: Fix false-positive for annotated lines. Known limitation: Does not catch violations of missing space around the equals operator (=) for fields initialization if the field is annotated.
 
 
 Version 1.2 (Jul 2018)

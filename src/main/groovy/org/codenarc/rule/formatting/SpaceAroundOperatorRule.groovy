@@ -177,6 +177,12 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         def opEndColumn = op.startColumn + opText.size() - 1
         def line = sourceCode.lines[op.startLine - 1]
 
+        // Only check lines that contain the expected opText; if it does not, it may have an annotation
+        if (!line.contains(opText)) {
+            super.visitBinaryExpression(expression)
+            return
+        }
+
         boolean assignmentWithinDeclaration = (opText == '=') && withinDeclarationExpression
 
         if (expression instanceof DeclarationExpression && assignmentWithinDeclaration) {

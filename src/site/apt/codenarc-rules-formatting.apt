@@ -634,7 +634,8 @@ class MyClass {                                 // CORRECT
 
   Known limitations:
 
-  * Does not catch violations of certain ternary expressions and standalone elvis operator (?:) expressions
+  * Does not catch violations of certain ternary expressions and standalone elvis operator (?:) expressions.
+  * Does not catch violations of missing space around the equals operator (=) for fields initialization if the field is annotated.
 
   []
 

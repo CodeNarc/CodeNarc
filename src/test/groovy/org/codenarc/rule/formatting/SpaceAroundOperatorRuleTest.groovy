@@ -230,7 +230,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     }
 
     @Test
-    void testApplyTo_ElvisOperatorWithNewLineAsSapce_NoViolation() {
+    void testApplyTo_ElvisOperatorWithNewLineAsSpace_NoViolation() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -334,6 +334,51 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
 
         rule.ignoreParameterDefaultValueAssignments = true
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_Operator_LineFollowingAnnotation_NoViolations() {
+        final SOURCE = '''
+            @SuppressWarnings('UnnecessarySubstring')
+            def relativePath = filePath.substring(path.length())
+
+            @SuppressWarnings('ClassForName')
+            def driver = Class.forName(driverName)
+
+            @SuppressWarnings('Other')
+            String name=myName + 'abc'
+
+            @SuppressWarnings('Other')
+            def otherName = "abc" + "***"
+
+            @SuppressWarnings('Other')
+            void method1(String name, int count = 99, long id = 1) { }
+            '''
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_Operator_LineFollowingAnnotation_ShouldBeViolations_KnownLimitation() {
+        final SOURCE = '''
+            @SuppressWarnings('UnnecessarySubstring')
+            def relativePath ="111"
+
+            @SuppressWarnings('Other')
+            String name =myName+"abc"
+
+            @SuppressWarnings('Other')
+            void method1(String name, int count= 99) { }
+            '''
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertViolations(SOURCE,
+                // Known Limitation
+                //[lineNumber:3, sourceLineText:'def relativePath ="111"', messageText:'The operator "=" within class None is not preceded'],
+                //[lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "=" within class None is not followed'],
+
+                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not preceded'],
+                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not followed'],
+                [lineNumber:9, sourceLineText:'void method1(String name, int count= 99) { }', messageText:'The operator "=" within class None is not preceded'])
     }
 
     @Test
