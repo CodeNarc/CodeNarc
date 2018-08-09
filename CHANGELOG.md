@@ -8,6 +8,7 @@ Bug Fixes
   - #351: **GrailsStatelessService** rule: Add `grailsApplication` to the default ignored fields. (Donald Oellerich)
   - #354: **JUnitPublicField** rule: Also ignore @ClassRule. (Daniel Spilker)
   - #348: **SpaceAroundOperator** rule: Fix false-positive for annotated lines. Known limitation: Does not catch violations of missing space around the equals operator (=) for fields initialization if the field is annotated.
+  - #349: **NoJavaUtilDate** rule: Ignore `new Date()` if the class imports another `Date` class. 
 
 
 Version 1.2 (Jul 2018)

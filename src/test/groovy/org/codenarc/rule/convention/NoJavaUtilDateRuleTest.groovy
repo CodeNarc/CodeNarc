@@ -65,6 +65,21 @@ class NoJavaUtilDateRuleTest extends AbstractRuleTestCase<NoJavaUtilDateRule> {
                 [lineNumber:4, sourceLineText:'Date startTime = new Date(123456789L)', messageText:VIOLATION_MESSAGE])
     }
 
+    @Test
+    void test_ReferencesOtherImportedDateClass_NoViolation() {
+        final SOURCE = '''
+            import some.other.Date
+
+            class MyClass {
+                Date myDate = new java.util.Date()      // the only violation
+                def timestamp = new Date()
+                Date startTime = new Date(123456789L)
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:5, sourceLineText:'Date myDate = new java.util.Date()', messageText:VIOLATION_MESSAGE])
+    }
+
     @Override
     protected NoJavaUtilDateRule createRule() {
         new NoJavaUtilDateRule()

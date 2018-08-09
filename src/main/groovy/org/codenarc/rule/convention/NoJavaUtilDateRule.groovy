@@ -15,6 +15,8 @@
  */
 package org.codenarc.rule.convention
 
+import org.codehaus.groovy.ast.ImportNode
+import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -37,13 +39,22 @@ class NoJavaUtilDateAstVisitor extends AbstractAstVisitor {
 
     protected static final String VIOLATION_MESSAGE = 'Do not use java.util.Date. Prefer the classes in the java.time.* packages.'
 
+    private boolean importsDateClass = false
+
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
-        if (isFirstVisit(call) && call.type.name in ['Date', 'java.util.Date']) {
-            addViolation(call, VIOLATION_MESSAGE)
+        if (isFirstVisit(call)) {
+            if (call.type.name == 'java.util.Date' || (!importsDateClass && call.type.name == 'Date')) {
+                addViolation(call, VIOLATION_MESSAGE)
+            }
         }
-
         super.visitConstructorCallExpression(call)
     }
 
+    @Override
+    void visitImports(ModuleNode node) {
+        def allImports = node.imports
+        this.importsDateClass = allImports?.find { ImportNode importNode -> importNode.alias == 'Date' }
+        super.visitImports(node)
+    }
 }
