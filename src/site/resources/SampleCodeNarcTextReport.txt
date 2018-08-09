@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Jul 7, 2018 7:04:45 AM
+CodeNarc Report: Sample Project - Aug 8, 2018 9:32:32 PM
 
-Summary: TotalFiles=380 FilesWithViolations=34 P1=0 P2=60 P3=18
+Summary: TotalFiles=380 FilesWithViolations=34 P1=0 P2=61 P3=18
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=UnnecessaryObjectReferences P=3 Line=184 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
@@ -57,7 +57,7 @@ File: formatting/BracesForMethodRuleTest.groovy
         ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}'] Src=[final SOURCE = ''']
 
 File: formatting/IndentationRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 39 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
+    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 41 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=525 Msg=[The String '
             |class MyClass {
             |    private void execute() {
@@ -83,17 +83,41 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |}
         ' contains a GString-type expression: '${t.message}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=747 Msg=[The String '
-            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }
+    Violation: Rule=GStringExpressionWithinString P=2 Line=796 Msg=[The String '
+            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->
+            |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')
+            |    String inputFile = 'COMMAND=PREPARE_LIBRARY\n' +
+            |        "FILE_PATH=${it.absolutePath}\n"
+            |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
+            |    cacheDir + hash + File.separator + 'output/jars/classes.jar'
+            |}).asFileTree
+            ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=810 Msg=[The String '
+            |buildFileList()
             |    .collect { File it ->
             |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
             |        String inputFile = 'COMMAND=PREPARE_LIBRARY\n' +
-            |            "FILE_PATH=${it.absolutePath}\n" +
-            |            "FILE_SIZE=${it.length()}\n" +
-            |            "FILE_TIMESTAMP=${it.lastModified()}"
-            |        String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
-            |        cacheDir + hash + File.separator + 'output/jars/classes.jar'
-            |    }).asFileTree
+            |            "FILE_PATH=${it.absolutePath}\n"
+            |        cacheDir + File.separator + inputFile + sha1
+            |    }
+            |    .each { name ->
+            |        println name
+            |    }
+            |println "done"
+            |
+            |list2.collect { item ->
+            |    item.name
+            |}.each { name -> println name }
+            |
+            |otherList.collect { item -> item.name }.each { name -> println name }
+            |
+            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {
+            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {
+            |        AstUtil.classNodeImplementsType(expr.type, it)
+            |    }.each {
+            |        callbackFunction()
+            |    }
+            |}
             ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
 
 File: formatting/SpaceAfterClosingBraceRuleTest.groovy
@@ -576,4 +600,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (http://www.codenarc.org) v1.2]
+[CodeNarc (http://www.codenarc.org) v1.2.1]
