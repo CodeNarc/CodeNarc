@@ -39,3 +39,15 @@ Braces Rules  ("<rulesets/braces.xml>")
 
   Checks that while statements use braces, even for a single statement.
 
+
+* {ClassEndsWithBlankLineBeforeClosingBrace} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.2>
+
+  Require a newline before the closing brace of a class
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    // TODO: Add examples
+-------------------------------------------------------------------------------
