@@ -41,12 +41,10 @@ class ClassEndsWithBlankLineBeforeClosingBraceAstVisitor extends AbstractAstVisi
 
     @Override
     protected void visitClassComplete(final ClassNode classNode) {
-    final String lineBeforeClosingBrace = AstUtil.getRawLine(sourceCode, getPenultimateLineNumber(classNode))
-    if (!lineBeforeClosingBrace.isEmpty()) {
-        addViolation(classNode, 'Class does not end with a blank line before the closing brace', classNode.getLastLineNumber())
-    }
-
-    //final String getLastLineOfNodeText = AstUtil.getLastLineOfNodeText(node, getSourceCode())
+        final String lineBeforeClosingBrace = AstUtil.getRawLine(sourceCode, getPenultimateLineNumber(classNode))
+        if (!lineBeforeClosingBrace.isEmpty()) {
+            addViolation(classNode, 'Class does not end with a blank line before the closing brace', classNode.getLastLineNumber())
+        }
     }
 
     private int getPenultimateLineNumber(final ClassNode classNode) {
