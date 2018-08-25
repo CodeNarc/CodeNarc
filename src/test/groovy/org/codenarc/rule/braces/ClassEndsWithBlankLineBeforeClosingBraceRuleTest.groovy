@@ -25,6 +25,8 @@ import org.codenarc.rule.AbstractRuleTestCase
  */
 class ClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineBeforeClosingBraceRule> {
 
+    static skipTestThatUnrelatedCodeHasNoViolations
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
@@ -46,16 +48,17 @@ class ClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRuleTestC
     }
 
     @Test
-    void testViolationWithSingleClass() {
+    void testViolationWithSingleClassWhenThereIsALineBeforeClosingBraceButItIsNotBlank() {
         final String SOURCE = '''
             class Foo {
                 int a
                 
                 void hi() {
-                }   
+                }
+                
             }
         '''
-        assertSingleViolation(SOURCE, 7, '            }')
+        assertSingleViolation(SOURCE, 8, '            }')
     }
 
     @Test

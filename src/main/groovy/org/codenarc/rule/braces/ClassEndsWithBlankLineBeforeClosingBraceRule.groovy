@@ -16,7 +16,6 @@
 package org.codenarc.rule.braces
 
 import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
@@ -37,19 +36,24 @@ class ClassEndsWithBlankLineBeforeClosingBraceRule extends AbstractAstVisitorRul
 
 class ClassEndsWithBlankLineBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
 
+
+    private static final int PENULTIMATE_LINE_OFFSET = 2
+
     @Override
     protected void visitClassComplete(final ClassNode classNode) {
-    final String lineBeforeClosingBrace = AstUtil.getRawLine(sourceCode,  classNode.lastLineNumber - 2)
+    final String lineBeforeClosingBrace = AstUtil.getRawLine(sourceCode, getPenultimateLineNumber(classNode))
     if (!lineBeforeClosingBrace.isEmpty()) {
-        addViolation(classNode, 'Class does not end with a blank line before the closing brace')
+        addViolation(classNode, 'Class does not end with a blank line before the closing brace', classNode.getLastLineNumber())
     }
 
     //final String getLastLineOfNodeText = AstUtil.getLastLineOfNodeText(node, getSourceCode())
     }
 
-    @Override
-    protected void addViolation(ASTNode node, String message) {
-        int lineNumber = node.getLastLineNumber()
+    private int getPenultimateLineNumber(final ClassNode classNode) {
+        classNode.lastLineNumber - PENULTIMATE_LINE_OFFSET
+    }
+
+    private void addViolation(final ASTNode node, final String message, final int lineNumber) {
         if (lineNumber >= 0) {
             String sourceLine = AstUtil.getLastLineOfNodeText(node, getSourceCode())
             Violation violation = new Violation()
