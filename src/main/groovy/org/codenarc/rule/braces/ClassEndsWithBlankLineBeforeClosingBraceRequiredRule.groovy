@@ -40,6 +40,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRule extends AbstractAstVi
 class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends AbstractAstVisitor {
 
     private static final int PENULTIMATE_LINE_OFFSET = 2
+    private static final char CLOSE_BRACE_CHARACTER = '}'
 
     @Override
     protected void visitClassComplete(final ClassNode classNode) {
@@ -58,8 +59,10 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
     }
 
     private void checkIfThereIsNotBlankLineBeforeClosingBrace(final ClassNode classNode) {
-        final String lineBeforeClosingBraceTrimmed = getPenultimateLine(classNode).trim()
-        if (lineBeforeClosingBraceTrimmed.isEmpty()) {
+        final String trimmedLineBeforeClosingBrace = getPenultimateLine(classNode).trim()
+        final String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
+
+        if (trimmedLineOfClosingBrace == CLOSE_BRACE_CHARACTER && trimmedLineBeforeClosingBrace.isEmpty()) {
             addViolation(classNode, 'Class ends with an empty line before the closing brace', classNode.getLastLineNumber())
         }
     }
@@ -71,7 +74,8 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
         }
 
         final String lineBeforeClosingBrace = getPenultimateLine(classNode)
-        if (!lineBeforeClosingBrace.isEmpty()) {
+        final String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
+        if (trimmedLineOfClosingBrace != CLOSE_BRACE_CHARACTER || !lineBeforeClosingBrace.isEmpty()) {
             addViolation(classNode, 'Class does not end with a blank line before the closing brace', classNode.getLastLineNumber())
         }
     }
@@ -79,6 +83,10 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
     private String getPenultimateLine(final ClassNode classNode) {
         Integer penultimateLastLineNumber = classNode.lastLineNumber - PENULTIMATE_LINE_OFFSET
         return AstUtil.getRawLine(sourceCode, penultimateLastLineNumber)
+    }
+
+    private String getLastLine(final ClassNode classNode) {
+        return  AstUtil.getLastLineOfNodeText(classNode, sourceCode)
     }
 
     @Memoized

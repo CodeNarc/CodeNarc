@@ -57,6 +57,30 @@ class RequireClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRu
         assertSingleViolation(SOURCE, 8, '')
     }
 
+
+    @Test
+    void testViolationsWithSingleClassWhenBraceIsNotInANewLine() {
+        //given:
+        final String SOURCE = '''
+        class Foo {
+            int a
+            
+            void hi() {
+
+            }        }
+        '''
+
+        rule.blankLineBeforeClosingBrace = true
+        //expect:
+        assertSingleViolation(SOURCE, 7, '            }        }')
+
+        //and if:
+        rule.blankLineBeforeClosingBrace = false
+
+        //expect:
+        assertNoViolations(SOURCE)
+    }
+
     @Test
     void testViolationWithSingleClassWhenThereIsALineBeforeClosingBraceButItIsNotBlank() {
         //given:
