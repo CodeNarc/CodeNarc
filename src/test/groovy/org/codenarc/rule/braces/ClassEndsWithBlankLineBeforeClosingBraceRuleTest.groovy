@@ -110,7 +110,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRuleTestC
 
 
     @Test
-    void testNoViolationsWithInnerClasses() {
+    void testNoViolationsWithNonStaticInnerClasses() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -131,7 +131,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRuleTestC
     }
 
     @Test
-    void testViolationsWithInnerClasses() {
+    void testViolationsWithNonStaticInnerClasses() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -154,6 +154,118 @@ class ClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRuleTestC
                 [lineNumber: 14,
                  sourceLineText: '            }',
                  messageText: 'Class does not end with a blank line before the closing brace'])
+    }
+
+    @Test
+    void testNoViolationsWithStaticInnerClasses() {
+        final String SOURCE = '''
+            class Foo {
+                int a
+                
+                void hi() {
+                }
+                static class Bar {
+                    int a
+                
+                    void hi() {
+                    }
+
+                }
+
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithStaticInnerClasses() {
+        final String SOURCE = '''
+            class Foo {
+                int a
+                
+                void hi() {
+                }
+                
+                static class Bar {
+                    int a
+                
+                    void hi() {
+                    }
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber: 13,
+                 sourceLineText: '            }',
+                 messageText: 'Class does not end with a blank line before the closing brace'],
+                [lineNumber: 14,
+                 sourceLineText: '            }',
+                 messageText: 'Class does not end with a blank line before the closing brace'])
+    }
+
+    @Test
+    void testNoViolationsWithSingleLineClassesAllowed() {
+        final String SOURCE = '''
+            import my.company.Bar
+            class Foo extends Bar<String> { }
+            
+            class Doe extends Bar<String> { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithSingleLineClassesNotAllowed() {
+        final String SOURCE = '''
+            import my.company.Bar
+            class Foo extends Bar<String> { }
+
+            class Doe extends Bar<String> { }
+        '''
+
+        rule.singleLineClassesAllowed = false
+        assertViolations(SOURCE,
+                [lineNumber: 3,
+                 sourceLineText: 'class Foo extends Bar<String> { }',
+                 messageText: 'Single line classes are not allowed'],
+                [lineNumber: 5,
+                 sourceLineText: 'class Doe extends Bar<String> { }',
+                 messageText: 'Single line classes are not allowed'])
+    }
+
+    @Test
+    void testNoViolationsWithAnonymousClasses() {
+        final String SOURCE = '''
+            class Foo { 
+                Bar a = new Bar() {
+                    
+                    @Override
+                    String toString() {
+                        "Hello world"
+                    }
+
+                }
+
+            }            
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithAnonymousClasses() {
+        final String SOURCE = '''
+            class Foo { 
+                Bar a = new Bar() {
+                    
+                    @Override
+                    String toString() {
+                        "Hello world"
+                    }
+                }
+
+            }            
+        '''
+        assertSingleViolation(SOURCE, 9, '                }')
     }
 
     @Override

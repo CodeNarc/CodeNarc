@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.braces
 
+import groovy.transform.Memoized
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -31,16 +32,24 @@ class ClassEndsWithBlankLineBeforeClosingBraceRule extends AbstractAstVisitorRul
 
     String name = 'ClassEndsWithBlankLineBeforeClosingBrace'
     int priority = 2
+    boolean singleLineClassesAllowed = true
     Class astVisitorClass = ClassEndsWithBlankLineBeforeClosingBraceAstVisitor
 }
 
 class ClassEndsWithBlankLineBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
 
-
     private static final int PENULTIMATE_LINE_OFFSET = 2
 
     @Override
     protected void visitClassComplete(final ClassNode classNode) {
+
+        if (rule.singleLineClassesAllowed && isSingleLineClass(classNode)) { return }
+
+        if (isSingleLineClass(classNode)) {
+            addViolation(classNode, 'Single line classes are not allowed', classNode.getLastLineNumber())
+            return
+        }
+
         final String lineBeforeClosingBrace = getPenultimateLine(classNode)
         if (!lineBeforeClosingBrace.isEmpty()) {
             addViolation(classNode, 'Class does not end with a blank line before the closing brace', classNode.getLastLineNumber())
@@ -50,6 +59,11 @@ class ClassEndsWithBlankLineBeforeClosingBraceAstVisitor extends AbstractAstVisi
     private String getPenultimateLine(final ClassNode classNode) {
         Integer penultimateLastLineNumber = classNode.lastLineNumber - PENULTIMATE_LINE_OFFSET
         return AstUtil.getRawLine(sourceCode, penultimateLastLineNumber)
+    }
+
+    @Memoized
+    private Boolean isSingleLineClass(final ClassNode classNode) {
+        return AstUtil.getNodeText(classNode, sourceCode) == AstUtil.getLastLineOfNodeText(classNode, sourceCode)
     }
 
     private void addViolation(final ASTNode node, final String message, final int lineNumber) {
