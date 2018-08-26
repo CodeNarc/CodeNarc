@@ -422,6 +422,7 @@ class RequireClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRu
             class Foo extends Bar<String> { }
 
             class Doe extends Bar<String> { }
+            abstract class John  { abstract void a() }
         '''
 
         rule.singleLineClassesAllowed = false
@@ -434,6 +435,9 @@ class RequireClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRu
                  messageText   : 'Single line classes are not allowed'],
                 [lineNumber    : 5,
                  sourceLineText: 'class Doe extends Bar<String> { }',
+                 messageText   : 'Single line classes are not allowed'],
+                [lineNumber    : 6,
+                 sourceLineText: 'abstract class John  { abstract void a() }',
                  messageText   : 'Single line classes are not allowed'])
     }
 
@@ -445,6 +449,7 @@ class RequireClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRu
             class Foo extends Bar<String> { }
 
             class Doe extends Bar<String> { }
+            abstract class John  { abstract void a() }
         '''
 
         rule.singleLineClassesAllowed = false
