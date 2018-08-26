@@ -28,23 +28,43 @@ import org.codenarc.util.AstUtil
  *
  * @author David Ausín
  */
-class ClassEndsWithBlankLineBeforeClosingBraceRule extends AbstractAstVisitorRule {
+class ClassEndsWithBlankLineBeforeClosingBraceRequiredRule extends AbstractAstVisitorRule {
 
-    String name = 'ClassEndsWithBlankLineBeforeClosingBrace'
+    String name = 'ClassEndsWithBlankLineBeforeClosingBraceRequired'
     int priority = 2
     boolean singleLineClassesAllowed = true
-    Class astVisitorClass = ClassEndsWithBlankLineBeforeClosingBraceAstVisitor
+    boolean blankLineBeforeClosingBrace = true
+    Class astVisitorClass = ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor
 }
 
-class ClassEndsWithBlankLineBeforeClosingBraceAstVisitor extends AbstractAstVisitor {
+class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends AbstractAstVisitor {
 
     private static final int PENULTIMATE_LINE_OFFSET = 2
 
     @Override
     protected void visitClassComplete(final ClassNode classNode) {
 
-        if (rule.singleLineClassesAllowed && isSingleLineClass(classNode)) { return }
+        if (isSingleLineClassViolation() && isSingleLineClass(classNode)) { return }
 
+        if (rule.blankLineBeforeClosingBrace) {
+            checkIfThereIsBlankLineBeforeClosingBrace(classNode)
+        } else {
+            checkIfThereIsNotBlankLineBeforeClosingBrace(classNode)
+        }
+    }
+
+    private boolean isSingleLineClassViolation() {
+        rule.singleLineClassesAllowed || !rule.blankLineBeforeClosingBrace
+    }
+
+    private void checkIfThereIsNotBlankLineBeforeClosingBrace(final ClassNode classNode) {
+        final String lineBeforeClosingBraceTrimmed = getPenultimateLine(classNode).trim()
+        if (lineBeforeClosingBraceTrimmed.isEmpty()) {
+            addViolation(classNode, 'Class ends with an empty line before the closing brace', classNode.getLastLineNumber())
+        }
+    }
+
+    private void checkIfThereIsBlankLineBeforeClosingBrace(final ClassNode classNode) {
         if (isSingleLineClass(classNode)) {
             addViolation(classNode, 'Single line classes are not allowed', classNode.getLastLineNumber())
             return
