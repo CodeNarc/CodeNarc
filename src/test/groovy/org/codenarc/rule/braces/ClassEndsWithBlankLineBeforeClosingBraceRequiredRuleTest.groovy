@@ -90,15 +90,9 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 
                 void hi() {
                 }
-                
+
             }
         '''
-
-        rule.blankLineBeforeClosingBrace = true
-        //expect:
-        assertSingleViolation(SOURCE, 8, '            }')
-
-        //and if:
         rule.blankLineBeforeClosingBrace = false
 
         //expect:
@@ -121,7 +115,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 
                 void hi() {
                 }
-
+                        
             }
         '''
         rule.blankLineBeforeClosingBrace = true

@@ -82,9 +82,9 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
             return
         }
 
-        final String lineBeforeClosingBrace = getPenultimateLine(classNode)
+        final String trimmedLineBeforeClosingBrace = getPenultimateLine(classNode).trim()
         final String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
-        if (trimmedLineOfClosingBrace != CLOSE_BRACE_CHARACTER || !lineBeforeClosingBrace.isEmpty()) {
+        if (trimmedLineOfClosingBrace != CLOSE_BRACE_CHARACTER || !trimmedLineBeforeClosingBrace.isEmpty()) {
             addViolation(classNode, 'Class does not end with a blank line before the closing brace', classNode.getLastLineNumber())
         }
     }
