@@ -23,7 +23,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  *
  * @author David Ausín
  */
-class RequireClassEndsWithBlankLineBeforeClosingBraceRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineBeforeClosingBraceRequiredRule> {
+class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineBeforeClosingBraceRequiredRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations
 
