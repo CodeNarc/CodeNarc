@@ -25,7 +25,8 @@ import org.codenarc.util.AstUtil
 
 /**
  * Check the location of the closing brace of a class. By default, enforce that there must be a blank line before
- * the closing class brace, except if the class is empty and is written in a single line.
+ * the closing class brace, except if the class is empty and is written in a single line. A blank line is defined as
+ any line that does not contain any visible characters.
  * This rule can be configured with the following properties:
  * <ul>
  *  <li><i>singleLineClassesAllowed</i>: a boolean property to forbid single line classes.
