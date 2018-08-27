@@ -26,7 +26,7 @@ import org.codenarc.util.AstUtil
 /**
  * Check the location of the closing brace of a class. By default, enforce that there must be a blank line before
  * the closing class brace, except if the class is empty and is written in a single line. A blank line is defined as
- any line that does not contain any visible characters.
+ * any line that does not contain any visible characters.
  * This rule can be configured with the following properties:
  * <ul>
  *  <li><i>singleLineClassesAllowed</i>: a boolean property to forbid single line classes.
@@ -35,6 +35,7 @@ import org.codenarc.util.AstUtil
  *  class brace. If it is false, the last line before the brace must not be blank. Otherwise, it must be blank. Default
  *  value is true</li>
  *<ul>
+ *
  * @author David Ausín
  */
 class ClassEndsWithBlankLineBeforeClosingBraceRequiredRule extends AbstractAstVisitorRule {
@@ -53,7 +54,6 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
 
     @Override
     protected void visitClassComplete(final ClassNode classNode) {
-
         if (isSingleLineClassViolation() && isSingleLineClass(classNode)) { return }
 
         if (rule.blankLineBeforeClosingBrace) {
@@ -68,8 +68,8 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
     }
 
     private void checkIfThereIsNotBlankLineBeforeClosingBrace(final ClassNode classNode) {
-        final String trimmedLineBeforeClosingBrace = getPenultimateLine(classNode).trim()
-        final String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
+        String trimmedLineBeforeClosingBrace = getPenultimateLine(classNode).trim()
+        String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
 
         if (trimmedLineOfClosingBrace == CLOSE_BRACE_CHARACTER && trimmedLineBeforeClosingBrace.isEmpty()) {
             addViolation(classNode, 'Class ends with an empty line before the closing brace', classNode.getLastLineNumber())
@@ -82,8 +82,8 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
             return
         }
 
-        final String trimmedLineBeforeClosingBrace = getPenultimateLine(classNode).trim()
-        final String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
+        String trimmedLineBeforeClosingBrace = getPenultimateLine(classNode).trim()
+        String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
         if (trimmedLineOfClosingBrace != CLOSE_BRACE_CHARACTER || !trimmedLineBeforeClosingBrace.isEmpty()) {
             addViolation(classNode, 'Class does not end with a blank line before the closing brace', classNode.getLastLineNumber())
         }
@@ -107,10 +107,10 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
         if (lineNumber >= 0) {
             String sourceLine = AstUtil.getLastLineOfNodeText(node, getSourceCode())
             Violation violation = new Violation()
-            violation.setRule(rule)
-            violation.setLineNumber(lineNumber)
-            violation.setSourceLine(sourceLine)
-            violation.setMessage(message)
+            violation.rule = rule
+            violation.lineNumber = lineNumber
+            violation.sourceLine = sourceLine
+            violation.message  = message
             violations.add(violation)
         }
     }

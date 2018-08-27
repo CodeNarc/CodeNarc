@@ -57,7 +57,6 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
         assertSingleViolation(SOURCE, 8, '')
     }
 
-
     @Test
     void testViolationsWithSingleClassWhenBraceIsNotInANewLine() {
         //given:
@@ -191,7 +190,6 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
         assertNoViolations(SOURCE)
     }
 
-
     @Test
     void testNoViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsRequired() {
         //given:
@@ -302,7 +300,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
         assertNoViolations(SOURCE)
     }
 
-  @Test
+    @Test
     void testNoViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsNotRequired() {
         //given:
         final String SOURCE = '''
