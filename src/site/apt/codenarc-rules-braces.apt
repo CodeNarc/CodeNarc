@@ -44,12 +44,12 @@ Braces Rules  ("<rulesets/braces.xml>")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.2>
 
-Check the location of the closing brace of a class. By default, enforce that there must be a blank line before
+Check the location of the closing brace of a class. By default, it enforces that there must be a blank line before
 the closing class brace, except if the class is empty and is written in a single line. A blank line is defined as
 any line that does not contain any visible characters.
 This rule can be configured with the following properties:
 <ul>
- <li><i>singleLineClassesAllowed</i>: a boolean property to forbid single line classes.If it is false single line
+ <li><i>singleLineClassesAllowed</i>: a boolean property to forbid single line classes.If it is false, then single line
  classes are considered a violation. Default value is true
  </li>
  <li><i>blankLineBeforeClosingBrace</i>: a boolean property to define if there may be a blank line before the closing
@@ -61,7 +61,7 @@ This rule can be configured with the following properties:
 | <<Property>>               | <<Description>>                                                | <<Default Value>>      |
 *----------------------------+----------------------------------------------------------------+------------------------+
 | singleLineClassesAllowed   | a boolean property to forbid single line classes.If it is      |                        |
-|                            |  false single line classes are considered a violation.         | <<<true>>>             |
+|                            |  false,then single line classes are considered a violation.    | <<<true>>>             |
 *----------------------------+----------------------------------------------------------------+------------------------+
 |blankLineBeforeClosingBrace | a boolean property to define if there may be a blank line      | <<<true>>>             |
 |                            | before the closing class brace. If it is false, the last line  |                        |
