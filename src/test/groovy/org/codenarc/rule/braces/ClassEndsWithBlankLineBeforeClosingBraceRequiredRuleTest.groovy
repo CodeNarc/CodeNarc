@@ -34,7 +34,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithSingleClass() {
+    void testViolationsWithSingleClassWhenBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
             class Foo {
@@ -49,8 +49,37 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
         rule.blankLineBeforeClosingBrace = true
         //expect:
         assertNoViolations(SOURCE)
+    }
 
-        //and if:
+    @Test
+    void testViolationsWithInterfaceClassWhenBlankLineBeforeClosingBraceIsMandatory() {
+        //given:
+        final String SOURCE = '''
+            interface Foo {
+ 
+                void hi()
+
+            }
+        '''
+
+        rule.blankLineBeforeClosingBrace = true
+        //expect:
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithSingleClassWhenBlankLineBeforeClosingBraceIsForbidden() {
+        //given:
+        final String SOURCE = '''
+            class Foo {
+                int a
+                
+                void hi() {
+                }
+
+            }
+        '''
+
         rule.blankLineBeforeClosingBrace = false
 
         //expect:
@@ -58,7 +87,24 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBraceIsNotInANewLine() {
+    void testViolationsWithInterfaceWhenBlankLineBeforeClosingBraceIsForbidden() {
+        //given:
+        final String SOURCE = '''
+            interface Foo {
+                
+                void hi() 
+
+            }
+        '''
+
+        rule.blankLineBeforeClosingBrace = false
+
+        //expect:
+        assertSingleViolation(SOURCE, 6, '')
+    }
+
+    @Test
+    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
         class Foo {
@@ -72,6 +118,33 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
         rule.blankLineBeforeClosingBrace = true
         //expect:
         assertSingleViolation(SOURCE, 7, '            }        }')
+    }
+
+    @Test
+    void testViolationsWithInterfaceWhenBraceIsNotInANewLineAndBlankLineBeforeClosingBraceIsMandatory() {
+        //given:
+        final String SOURCE = '''
+        interface Foo {
+            
+            void hi()
+         }
+        '''
+
+        rule.blankLineBeforeClosingBrace = true
+        //expect:
+        assertSingleViolation(SOURCE, 5, '}')
+    }
+    @Test
+    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineBeforeClosingBraceIsForbidden() {
+        //given:
+        final String SOURCE = '''
+        class Foo {
+            int a
+            
+            void hi() {
+
+            }        }
+        '''
 
         //and if:
         rule.blankLineBeforeClosingBrace = false
@@ -109,11 +182,9 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
 
             }
-            class Bar {
-                int a
+            interface Bar {
                 
-                void hi() {
-                }
+                void hi()
                         
             }
         '''
@@ -155,7 +226,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationWithSeveralClasses() {
+    void testViolationWithSeveralClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
             class Foo {
@@ -176,14 +247,32 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
         //expect:
         assertViolations(SOURCE,
-                [lineNumber: 7,
+                [lineNumber    : 7,
                  sourceLineText: '            }',
-                 messageText: 'Class does not end with a blank line before the closing brace'],
-                [lineNumber: 14,
+                 messageText   : 'Class does not end with a blank line before the closing brace'],
+                [lineNumber    : 14,
                  sourceLineText: '            }',
-                 messageText: 'Class does not end with a blank line before the closing brace'])
+                 messageText   : 'Class does not end with a blank line before the closing brace'])
+    }
 
-        //and if:
+    @Test
+    void testNoViolationWithSeveralClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
+        //given:
+        final String SOURCE = '''
+            class Foo {
+                int a
+                
+                void hi() {
+                }   
+            }
+            
+            class Bar {
+                int a
+                
+                void hi() {
+                }
+            }
+        '''
         rule.blankLineBeforeClosingBrace = false
 
         //expect:
@@ -191,7 +280,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testNoViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsRequired() {
+    void testNoViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
             class Foo {
@@ -216,7 +305,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testNoViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsNotRequired() {
+    void testViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
         //given:
         final String SOURCE = '''
             class Foo {
@@ -247,7 +336,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsRequired() {
+    void testViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -276,7 +365,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsRequired() {
+    void testNoViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
             class Foo {
@@ -301,7 +390,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsNotRequired() {
+    void testNoViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsNotForbidden() {
         //given:
         final String SOURCE = '''
             class Foo {
@@ -324,7 +413,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsRequired() {
+    void testViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
         //setup:
         final String SOURCE = '''
             class Foo {
@@ -354,7 +443,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsNotRequired() {
+    void testViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
         //setup:
         final String SOURCE = '''
             class Foo {
@@ -407,7 +496,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithSingleLineClassesNotAllowedWhenBlankLineBeforeClosingBraceIsRequired() {
+    void testViolationsWithSingleLineClassesNotAllowedWhenBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
             import my.company.Bar
@@ -434,7 +523,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testNoViolationsWithSingleLineClassesNotAllowedWhenBlankLineBeforeClosingBraceIsNotRequired() {
+    void testNoViolationsWithSingleLineClassesNotAllowedWhenBlankLineBeforeClosingBraceIsForbidden() {
         //given:
         final String SOURCE = '''
             import my.company.Bar
@@ -452,7 +541,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsRequired() {
+    void testNoViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
             class Foo { 
@@ -474,7 +563,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsNotRequired() {
+    void testNoViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
         //given:
         final String SOURCE = '''
             class Foo { 
@@ -494,7 +583,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsRequired() {
+    void testViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
         //given:
         final String SOURCE = '''
             class Foo { 
@@ -515,7 +604,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsNotRequired() {
+    void testViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
         //given:
         final String SOURCE = '''
             class Foo { 
