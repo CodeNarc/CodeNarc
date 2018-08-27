@@ -1,6 +1,6 @@
 
 #TODO: Sort the following line into the file
-- ClassEndsWithBlankLineBeforeClosingBrace rule (braces) - Require a newline before the closing brace of a class
+- ClassEndsWithBlankLineBeforeClosingBraceRequiredRule rule (braces) -Check the location of the closing brace of a class
 
 # CodeNarc Change Log
 
