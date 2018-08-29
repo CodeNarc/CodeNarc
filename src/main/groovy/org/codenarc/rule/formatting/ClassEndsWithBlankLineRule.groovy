@@ -44,10 +44,10 @@ class ClassEndsWithBlankLineRule extends AbstractAstVisitorRule {
     int priority = 2
     boolean ignoreSingleLineClasses = true
     boolean blankLineRequired = true
-    Class astVisitorClass = ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor
+    Class astVisitorClass = ClassEndsWithBlankLineAstVisitor
 }
 
-class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends AbstractAstVisitor {
+class ClassEndsWithBlankLineAstVisitor extends AbstractAstVisitor {
 
     private static final int PENULTIMATE_LINE_OFFSET = 2
     private static final char CLOSE_BRACE_CHARACTER = '}'

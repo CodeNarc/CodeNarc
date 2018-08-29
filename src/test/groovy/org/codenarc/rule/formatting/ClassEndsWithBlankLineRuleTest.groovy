@@ -23,7 +23,6 @@ import org.codenarc.rule.AbstractRuleTestCase
  *
  * @author David Ausín
  */
-@SuppressWarnings('TrailingWhitespace')
 class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations
@@ -32,11 +31,13 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'ClassEndsWithBlankLine'
+        assert rule.ignoreSingleLineClasses == true
+        assert rule.blankLineRequired == true
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testViolationsWithSingleClassWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -48,13 +49,13 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
 
         rule.blankLineRequired = true
-        //expect:
+
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationsWithInterfaceClassWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testViolationsWithInterfaceClassWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             interface Foo {
  
@@ -64,13 +65,13 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
 
         rule.blankLineRequired = true
-        //expect:
+
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testViolationsWithSingleClassWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -83,13 +84,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
 
         rule.blankLineRequired = false
 
-        //expect:
         assertSingleViolation(SOURCE, 8, '')
     }
 
     @Test
-    void testViolationsWithInterfaceWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testViolationsWithInterfaceWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             interface Foo {
                 
@@ -100,13 +100,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
 
         rule.blankLineRequired = false
 
-        //expect:
         assertSingleViolation(SOURCE, 6, '')
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
         class Foo {
             int a
@@ -117,13 +116,13 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
 
         rule.blankLineRequired = true
-        //expect:
+
         assertSingleViolation(SOURCE, 7, '            }        }')
     }
 
     @Test
-    void testViolationsWithInterfaceWhenBraceIsNotInANewLineAndBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testViolationsWithInterfaceWhenBraceIsNotInANewLineAndClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
         interface Foo {
             
@@ -132,12 +131,13 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
 
         rule.blankLineRequired = true
-        //expect:
+
         assertSingleViolation(SOURCE, 5, '}')
     }
+
     @Test
-    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
         class Foo {
             int a
@@ -147,16 +147,14 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
             }        }
         '''
 
-        //and if:
         rule.blankLineRequired = false
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationWithSingleClassWhenThereIsALineBeforeClosingBraceButItIsNotBlank() {
-        //given:
+    void testViolationWithSingleClassWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -168,13 +166,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = false
 
-        //expect:
         assertSingleViolation(SOURCE, 8, '            }')
     }
 
     @Test
-    void testNoViolationsWithSeveralClassesWhenBlankLineIsRequiredBeforeClassClosingBrace() {
-        //given:
+    void testNoViolationsWithSeveralClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -191,13 +188,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationsWithSeveralClassesWhenBlankLineIsNotRequiredBeforeClassClosingBrace() {
-        //given:
+    void testViolationsWithSeveralClassesWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -216,19 +212,14 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = false
 
-        //expect:
         assertViolations(SOURCE,
-                [lineNumber: 8,
-                 sourceLineText: '            }',
-                 messageText: 'Class ends with an empty line before the closing brace'],
-                [lineNumber: 15,
-                 sourceLineText: '            }',
-                 messageText: 'Class ends with an empty line before the closing brace'])
+                [lineNumber: 8, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'],
+                [lineNumber: 15, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'])
     }
 
     @Test
-    void testViolationWithSeveralClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testViolationWithSeveralClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -246,19 +237,14 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertViolations(SOURCE,
-                [lineNumber    : 7,
-                 sourceLineText: '            }',
-                 messageText   : 'Class does not end with a blank line before the closing brace'],
-                [lineNumber    : 14,
-                 sourceLineText: '            }',
-                 messageText   : 'Class does not end with a blank line before the closing brace'])
+                [lineNumber    : 7, sourceLineText: '            }', messageText   : 'Class does not end with a blank line before the closing brace'],
+                [lineNumber    : 14, sourceLineText: '            }', messageText   : 'Class does not end with a blank line before the closing brace'])
     }
 
     @Test
-    void testNoViolationWithSeveralClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testNoViolationWithSeveralClassesWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -276,13 +262,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = false
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testNoViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testNoViolationsWithNonStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -301,13 +286,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testViolationsWithNonStaticInnerClassesWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -326,18 +310,14 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = false
 
-        //expect:
         assertViolations(SOURCE,
-                [lineNumber: 13,
-                 sourceLineText: '            }',
-                 messageText: 'Class ends with an empty line before the closing brace'],
-                [lineNumber: 15,
-                 sourceLineText: '            }',
-                 messageText: 'Class ends with an empty line before the closing brace'])
+                [lineNumber: 13, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'],
+                [lineNumber: 15, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'])
     }
 
     @Test
-    void testViolationsWithNonStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
+    void testViolationsWithNonStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -355,19 +335,14 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertViolations(SOURCE,
-                [lineNumber: 13,
-                 sourceLineText: '            }',
-                 messageText: 'Class does not end with a blank line before the closing brace'],
-                [lineNumber: 14,
-                 sourceLineText: '            }',
-                 messageText: 'Class does not end with a blank line before the closing brace'])
+                [lineNumber: 13, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'],
+                [lineNumber: 14, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'])
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testNoViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -386,13 +361,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsNotForbidden() {
-        //given:
+    void testNoViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -409,13 +383,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = false
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //setup:
+    void testViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -433,19 +406,14 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertViolations(SOURCE,
-                [lineNumber: 13,
-                 sourceLineText: '            }',
-                 messageText: 'Class does not end with a blank line before the closing brace'],
-                [lineNumber: 14,
-                 sourceLineText: '            }',
-                 messageText: 'Class does not end with a blank line before the closing brace'])
+                [lineNumber: 13, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'],
+                [lineNumber: 14, sourceLineText: '            }', messageText: 'Class does not end with a blank line before the closing brace'])
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //setup:
+    void testViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo {
                 int a
@@ -465,19 +433,14 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = false
 
-        //expect:
         assertViolations(SOURCE,
-                [lineNumber: 14,
-                 sourceLineText: '            }',
-                 messageText: 'Class ends with an empty line before the closing brace'],
-                [lineNumber: 16,
-                 sourceLineText: '            }',
-                 messageText: 'Class ends with an empty line before the closing brace'])
+                [lineNumber: 14, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'],
+                [lineNumber: 16, sourceLineText: '            }', messageText: 'Class ends with an empty line before the closing brace'])
     }
 
     @Test
-    void testNoViolationsWithSingleLineClassesAllowed() {
-        //given:
+    void testNoViolationsWithSingleLineClassesIgnoredWhenBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -485,20 +448,29 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
             class Doe extends Bar<String> { }
         '''
         rule.blankLineRequired = true
+        rule.ignoreSingleLineClasses = true
 
-        //expect:
-        assertNoViolations(SOURCE)
-
-        //and if:
-        rule.blankLineRequired = false
-
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationsWithSingleLineClassesNotAllowedWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testNoViolationsWithSingleLineClassesIgnoredWhenBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
+        final String SOURCE = '''
+            import my.company.Bar
+            class Foo extends Bar<String> { }
+            
+            class Doe extends Bar<String> { }
+        '''
+        rule.blankLineRequired = false
+        rule.ignoreSingleLineClasses = true
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithSingleLineClassesNotAllowedWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -510,22 +482,15 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.ignoreSingleLineClasses = false
         rule.blankLineRequired = true
 
-        //expect:
         assertViolations(SOURCE,
-                [lineNumber    : 3,
-                 sourceLineText: 'class Foo extends Bar<String> { }',
-                 messageText   : 'Single line classes are not allowed'],
-                [lineNumber    : 5,
-                 sourceLineText: 'class Doe extends Bar<String> { }',
-                 messageText   : 'Single line classes are not allowed'],
-                [lineNumber    : 6,
-                 sourceLineText: 'abstract class John  { abstract void a() }',
-                 messageText   : 'Single line classes are not allowed'])
+                [lineNumber    : 3, sourceLineText: 'class Foo extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
+                [lineNumber    : 5, sourceLineText: 'class Doe extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
+                [lineNumber    : 6, sourceLineText: 'abstract class John  { abstract void a() }', messageText   : 'Single line classes are not allowed'])
     }
 
     @Test
-    void testNoViolationsWithSingleLineClassesNotAllowedWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testNoViolationsWithSingleLineClassesNotAllowedWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -537,13 +502,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         rule.ignoreSingleLineClasses = false
         rule.blankLineRequired = false
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testNoViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -559,13 +523,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testNoViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -579,13 +542,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = false
 
-        //expect:
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsMandatory() {
-        //given:
+    void testViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -600,13 +562,12 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         '''
         rule.blankLineRequired = true
 
-        //expect:
         assertSingleViolation(SOURCE, 9, '                }')
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenBlankLineBeforeClosingBraceIsForbidden() {
-        //given:
+    void testViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsNotRequired() {
+        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -620,8 +581,6 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
             }            
         '''
         rule.blankLineRequired = false
-
-        //expect:
         assertSingleViolation(SOURCE, 10, '                }')
     }
 

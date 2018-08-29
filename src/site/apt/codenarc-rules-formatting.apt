@@ -849,7 +849,7 @@ class MyClass {                                 // CORRECT
     }
 -------------------------------------------------------------------------------
 
-* {ClassEndsWithBlankLineRule} Rule
+* {ClassEndsWithBlankLine} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.2>
 
