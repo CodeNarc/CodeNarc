@@ -23,6 +23,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  *
  * @author David Ausín
  */
+@SuppressWarnings('TrailingWhitespace')
 class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations

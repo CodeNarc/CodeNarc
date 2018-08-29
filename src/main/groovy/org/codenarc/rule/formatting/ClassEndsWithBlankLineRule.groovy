@@ -53,7 +53,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
     private static final char CLOSE_BRACE_CHARACTER = '}'
 
     @Override
-    protected void visitClassComplete(final ClassNode classNode) {
+    protected void visitClassComplete(ClassNode classNode) {
         if (isSingleLineClassViolation() && isSingleLineClass(classNode)) { return }
 
         if (rule.blankLineRequired) {
@@ -67,7 +67,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
         rule.ignoreSingleLineClasses || !rule.blankLineRequired
     }
 
-    private void checkIfThereIsNotBlankLineBeforeClosingBrace(final ClassNode classNode) {
+    private void checkIfThereIsNotBlankLineBeforeClosingBrace(ClassNode classNode) {
         String trimmedLineBeforeClosingBrace = getPenultimateLine(classNode).trim()
         String trimmedLineOfClosingBrace = getLastLine(classNode).trim()
 
@@ -76,7 +76,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
         }
     }
 
-    private void checkIfThereIsBlankLineBeforeClosingBrace(final ClassNode classNode) {
+    private void checkIfThereIsBlankLineBeforeClosingBrace(ClassNode classNode) {
         if (isSingleLineClass(classNode)) {
             addViolation(classNode, 'Single line classes are not allowed', classNode.getLastLineNumber())
             return
@@ -89,21 +89,21 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
         }
     }
 
-    private String getPenultimateLine(final ClassNode classNode) {
+    private String getPenultimateLine(ClassNode classNode) {
         Integer penultimateLastLineNumber = classNode.lastLineNumber - PENULTIMATE_LINE_OFFSET
         return AstUtil.getRawLine(sourceCode, penultimateLastLineNumber)
     }
 
-    private String getLastLine(final ClassNode classNode) {
+    private String getLastLine(ClassNode classNode) {
         return  AstUtil.getLastLineOfNodeText(classNode, sourceCode)
     }
 
     @Memoized
-    private Boolean isSingleLineClass(final ClassNode classNode) {
+    private Boolean isSingleLineClass(ClassNode classNode) {
         return AstUtil.getNodeText(classNode, sourceCode) == AstUtil.getLastLineOfNodeText(classNode, sourceCode)
     }
 
-    private void addViolation(final ASTNode node, final String message, final int lineNumber) {
+    private void addViolation(ASTNode node, String message, int lineNumber) {
         if (lineNumber >= 0) {
             String sourceLine = AstUtil.getLastLineOfNodeText(node, getSourceCode())
             Violation violation = new Violation()
