@@ -12,6 +12,4 @@
     <rule class='org.codenarc.rule.braces.ElseBlockBracesRule'/>
     <rule class='org.codenarc.rule.braces.ForStatementBracesRule'/>
     <rule class='org.codenarc.rule.braces.WhileStatementBracesRule'/>
-
-    <rule class='org.codenarc.rule.braces.ClassEndsWithBlankLineBeforeClosingBraceRequiredRule'/>
 </ruleset>

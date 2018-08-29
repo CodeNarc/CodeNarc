@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.braces
+package org.codenarc.rule.formatting
 
 import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
