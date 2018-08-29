@@ -1,8 +1,8 @@
-
-#TODO: Sort the following line into the file
-- ClassEndsWithBlankLineBeforeClosingBraceRequiredRule rule (braces) -Check the location of the closing brace of a class
-
 # CodeNarc Change Log
+
+Next Version
+--------------------------------------
+ - ClassEndsWithBlankLine rule (braces) -Check the location of the closing brace of a class
 
 Version 1.2.1 (Aug 2018)
 --------------------------------------

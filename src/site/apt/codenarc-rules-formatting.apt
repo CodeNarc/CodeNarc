@@ -849,7 +849,7 @@ class MyClass {                                 // CORRECT
     }
 -------------------------------------------------------------------------------
 
-* {ClassEndsWithBlankLineBeforeClosingBraceRequiredRule} Rule
+* {ClassEndsWithBlankLineRule} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.2>
 
@@ -858,10 +858,10 @@ the closing class brace, except if the class is empty and is written in a single
 any line that does not contain any visible characters.
 This rule can be configured with the following properties:
 <ul>
- <li><i>singleLineClassesAllowed</i>: a boolean property to forbid single line classes.If it is false, then single line
+ <li><i>ignoreSingleLineClasses</i>: a boolean property to forbid single line classes.If it is false, then single line
  classes are considered a violation. Default value is true
  </li>
- <li><i>blankLineBeforeClosingBrace</i>: a boolean property to define if there may be a blank line before the closing
+ <li><i>blankLineRequired</i>: a boolean property to define if there may be a blank line before the closing
  class brace. If it is false, the last line before the brace must not be blank. Otherwise, it must be blank. Default
  value is true
  </li>
@@ -869,10 +869,10 @@ This rule can be configured with the following properties:
 *----------------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>               | <<Description>>                                                | <<Default Value>>      |
 *----------------------------+----------------------------------------------------------------+------------------------+
-| singleLineClassesAllowed   | a boolean property to forbid single line classes.If it is      |                        |
+| ignoreSingleLineClasses    | a boolean property to forbid single line classes.If it is      |                        |
 |                            |  false,then single line classes are considered a violation.    | <<<true>>>             |
 *----------------------------+----------------------------------------------------------------+------------------------+
-|blankLineBeforeClosingBrace | a boolean property to define if there may be a blank line      | <<<true>>>             |
+| blankLineRequired          | a boolean property to define if there may be a blank line      | <<<true>>>             |
 |                            | before the closing class brace. If it is false, the last line  |                        |
 |                            | before the brace must not be blank. Otherwise, it must be      |                        |
 |                            | blank.                                                         |                        |
@@ -880,7 +880,7 @@ This rule can be configured with the following properties:
 
   Example of violations:
 
-If singleLineClassesAllowed is <<<true>>> and blankLineBeforeClosingBrace is <<<true>>>
+If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<true>>>
 -------------------------------------------------------------------------------
             class Foo {
                 int a
@@ -890,13 +890,13 @@ If singleLineClassesAllowed is <<<true>>> and blankLineBeforeClosingBrace is <<<
             }
 -------------------------------------------------------------------------------
 
-If singleLineClassesAllowed is <<<false>>> and blankLineBeforeClosingBrace is <<<true>>>
+If ignoreSingleLineClasses is <<<false>>> and blankLineRequired is <<<true>>>
 -------------------------------------------------------------------------------
             class Foo extends Bar<String> { }
 -------------------------------------------------------------------------------
 
 
-If singleLineClassesAllowed is <<<true>>> and blankLineBeforeClosingBrace is <<<false>>>
+If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<false>>>
 -------------------------------------------------------------------------------
             class Foo {
                 int a
@@ -907,7 +907,7 @@ If singleLineClassesAllowed is <<<true>>> and blankLineBeforeClosingBrace is <<<
             }
 -------------------------------------------------------------------------------
 
-If singleLineClassesAllowed is <<<false>>> and blankLineBeforeClosingBrace is <<<false>>>
+If ignoreSingleLineClasses is <<<false>>> and blankLineRequired is <<<false>>>
 -------------------------------------------------------------------------------
             class Foo {
                 int a

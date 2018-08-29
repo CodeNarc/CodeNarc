@@ -42,8 +42,8 @@ ruleset {
         exclude 'SpaceAfterSwitch'
         exclude 'SpaceAfterWhile'
         exclude 'SpaceAroundMapEntryColon'
-        exclude 'ClassEndsWithBlankLineBeforeClosingBraceRequired'
-        TrailingWhitespace(doNotApplyToFileNames:'ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest.groovy') //Test should contain whitespaces to test the rule
+        exclude 'ClassEndsWithBlankLine'
+        TrailingWhitespace(doNotApplyToFileNames:'ClassEndsWithBlankLineRuleTest.groovy') //Test should contain whitespaces to test the rule
     }
 
     ruleset('rulesets/imports.xml') {

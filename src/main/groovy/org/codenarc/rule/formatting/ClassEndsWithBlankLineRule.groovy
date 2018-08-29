@@ -29,21 +29,21 @@ import org.codenarc.util.AstUtil
  * any line that does not contain any visible characters.
  * This rule can be configured with the following properties:
  * <ul>
- *  <li><i>singleLineClassesAllowed</i>: a boolean property to forbid single line classes.
+ *  <li><i>ignoreSingleLineClasses</i>: a boolean property to forbid single line classes.
  *  If it is false, then single line classes are considered a violation. Default value is true</li>
- *  <li><i>blankLineBeforeClosingBrace</i>: a boolean property to define if there may be a blank line before the closing
+ *  <li><i>blankLineRequired</i>: a boolean property to define if there may be a blank line before the closing
  *  class brace. If it is false, the last line before the brace must not be blank. Otherwise, it must be blank. Default
  *  value is true</li>
  *<ul>
  *
  * @author David Ausín
  */
-class ClassEndsWithBlankLineBeforeClosingBraceRequiredRule extends AbstractAstVisitorRule {
+class ClassEndsWithBlankLineRule extends AbstractAstVisitorRule {
 
-    String name = 'ClassEndsWithBlankLineBeforeClosingBraceRequired'
+    String name = 'ClassEndsWithBlankLine'
     int priority = 2
-    boolean singleLineClassesAllowed = true
-    boolean blankLineBeforeClosingBrace = true
+    boolean ignoreSingleLineClasses = true
+    boolean blankLineRequired = true
     Class astVisitorClass = ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor
 }
 
@@ -56,7 +56,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
     protected void visitClassComplete(final ClassNode classNode) {
         if (isSingleLineClassViolation() && isSingleLineClass(classNode)) { return }
 
-        if (rule.blankLineBeforeClosingBrace) {
+        if (rule.blankLineRequired) {
             checkIfThereIsBlankLineBeforeClosingBrace(classNode)
         } else {
             checkIfThereIsNotBlankLineBeforeClosingBrace(classNode)
@@ -64,7 +64,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredAstVisitor extends Abstrac
     }
 
     private boolean isSingleLineClassViolation() {
-        rule.singleLineClassesAllowed || !rule.blankLineBeforeClosingBrace
+        rule.ignoreSingleLineClasses || !rule.blankLineRequired
     }
 
     private void checkIfThereIsNotBlankLineBeforeClosingBrace(final ClassNode classNode) {

@@ -19,18 +19,18 @@ import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**
- * Tests for ClassEndsWithBlankLineBeforeClosingBraceRequiredRule
+ * Tests for ClassEndsWithBlankLineRule
  *
  * @author David Ausín
  */
-class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineBeforeClosingBraceRequiredRule> {
+class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {
 
     static skipTestThatUnrelatedCodeHasNoViolations
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'ClassEndsWithBlankLineBeforeClosingBraceRequired'
+        assert rule.name == 'ClassEndsWithBlankLine'
     }
 
     @Test
@@ -46,7 +46,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             }
         '''
 
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
         //expect:
         assertNoViolations(SOURCE)
     }
@@ -62,7 +62,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             }
         '''
 
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
         //expect:
         assertNoViolations(SOURCE)
     }
@@ -80,7 +80,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             }
         '''
 
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertSingleViolation(SOURCE, 8, '')
@@ -97,7 +97,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             }
         '''
 
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertSingleViolation(SOURCE, 6, '')
@@ -115,7 +115,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             }        }
         '''
 
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
         //expect:
         assertSingleViolation(SOURCE, 7, '            }        }')
     }
@@ -130,7 +130,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
          }
         '''
 
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
         //expect:
         assertSingleViolation(SOURCE, 5, '}')
     }
@@ -147,7 +147,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
         '''
 
         //and if:
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertNoViolations(SOURCE)
@@ -165,7 +165,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
             }
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertSingleViolation(SOURCE, 8, '            }')
@@ -188,7 +188,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                         
             }
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertNoViolations(SOURCE)
@@ -213,7 +213,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
             }
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertViolations(SOURCE,
@@ -243,7 +243,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
             }
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertViolations(SOURCE,
@@ -273,7 +273,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
             }
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertNoViolations(SOURCE)
@@ -298,7 +298,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
             }
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertNoViolations(SOURCE)
@@ -323,7 +323,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
             }
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertViolations(SOURCE,
@@ -352,7 +352,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
             }
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertViolations(SOURCE,
@@ -383,7 +383,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
             }
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertNoViolations(SOURCE)
@@ -406,7 +406,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
             }
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertNoViolations(SOURCE)
@@ -430,7 +430,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
             }
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertViolations(SOURCE,
@@ -462,7 +462,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 
             }
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertViolations(SOURCE,
@@ -483,13 +483,13 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             
             class Doe extends Bar<String> { }
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertNoViolations(SOURCE)
 
         //and if:
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertNoViolations(SOURCE)
@@ -506,8 +506,8 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             abstract class John  { abstract void a() }
         '''
 
-        rule.singleLineClassesAllowed = false
-        rule.blankLineBeforeClosingBrace = true
+        rule.ignoreSingleLineClasses = false
+        rule.blankLineRequired = true
 
         //expect:
         assertViolations(SOURCE,
@@ -533,8 +533,8 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
             abstract class John  { abstract void a() }
         '''
 
-        rule.singleLineClassesAllowed = false
-        rule.blankLineBeforeClosingBrace = false
+        rule.ignoreSingleLineClasses = false
+        rule.blankLineRequired = false
 
         //expect:
         assertNoViolations(SOURCE)
@@ -556,7 +556,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
             }            
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertNoViolations(SOURCE)
@@ -576,7 +576,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
             }            
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertNoViolations(SOURCE)
@@ -597,7 +597,7 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
 
             }            
         '''
-        rule.blankLineBeforeClosingBrace = true
+        rule.blankLineRequired = true
 
         //expect:
         assertSingleViolation(SOURCE, 9, '                }')
@@ -618,14 +618,14 @@ class ClassEndsWithBlankLineBeforeClosingBraceRequiredRuleTest extends AbstractR
                 }
             }            
         '''
-        rule.blankLineBeforeClosingBrace = false
+        rule.blankLineRequired = false
 
         //expect:
         assertSingleViolation(SOURCE, 10, '                }')
     }
 
     @Override
-    protected ClassEndsWithBlankLineBeforeClosingBraceRequiredRule createRule() {
-        new ClassEndsWithBlankLineBeforeClosingBraceRequiredRule()
+    protected ClassEndsWithBlankLineRule createRule() {
+        new ClassEndsWithBlankLineRule()
     }
 }
