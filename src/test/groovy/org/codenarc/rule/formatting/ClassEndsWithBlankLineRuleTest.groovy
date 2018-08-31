@@ -23,6 +23,7 @@ import org.codenarc.rule.AbstractRuleTestCase
  *
  * @author David Ausín
  */
+@SuppressWarnings('TrailingWhitespace')
 class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {
 
     @Test
@@ -34,8 +35,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithSingleClassWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithSingleClassWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -52,8 +52,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithInterfaceClassWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithInterfaceClassWhenBlankLineIsRequired() {
         final String SOURCE = '''
             interface Foo {
  
@@ -68,8 +67,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithSingleClassWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithSingleClassWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -86,8 +84,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithInterfaceWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithInterfaceWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             interface Foo {
                 
@@ -102,8 +99,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineIsRequired() {
         final String SOURCE = '''
         class Foo {
             int a
@@ -119,8 +115,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithInterfaceWhenBraceIsNotInANewLineAndClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithInterfaceWhenBraceIsNotInANewLineAndBlankLineIsRequired() {
         final String SOURCE = '''
         interface Foo {
             
@@ -134,8 +129,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithSingleClassWhenBraceIsNotInANewLineAndBlankLineIsNotRequired() {
         final String SOURCE = '''
         class Foo {
             int a
@@ -151,8 +145,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationWithSingleClassWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationWithSingleClassWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -168,8 +161,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationsWithSeveralClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationsWithSeveralClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -190,8 +182,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithSeveralClassesWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithSeveralClassesWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -216,8 +207,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationWithSeveralClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationWithSeveralClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -241,8 +231,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationWithSeveralClassesWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationWithSeveralClassesWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -264,8 +253,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationsWithNonStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationsWithNonStaticInnerClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -288,8 +276,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithNonStaticInnerClassesWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithNonStaticInnerClassesWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -314,8 +301,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithNonStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithNonStaticInnerClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -339,8 +325,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationsWithStaticInnerClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -363,8 +348,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationsWithStaticInnerClassesWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -385,8 +369,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithStaticInnerClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -410,8 +393,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithStaticInnerClassesWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithStaticInnerClassesWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo {
                 int a
@@ -438,7 +420,6 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
 
     @Test
     void testNoViolationsWithSingleLineClassesIgnoredWhenBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -453,7 +434,6 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
 
     @Test
     void testNoViolationsWithSingleLineClassesIgnoredWhenBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -467,8 +447,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithSingleLineClassesNotAllowedWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithSingleLineClassesNotAllowedWhenBlankLineIsRequired() {
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -487,8 +466,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationsWithSingleLineClassesNotAllowedWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationsWithSingleLineClassesNotAllowedWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             import my.company.Bar
             class Foo extends Bar<String> { }
@@ -504,8 +482,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationsWithAnonymousClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -525,8 +502,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testNoViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testNoViolationsWithAnonymousClassesWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -544,8 +520,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithAnonymousClassesWhenBlankLineIsRequired() {
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
@@ -564,8 +539,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
-    void testViolationsWithAnonymousClassesWhenClassEndsWithBlankLineIsNotRequired() {
-        @SuppressWarnings('TrailingWhitespace')
+    void testViolationsWithAnonymousClassesWhenBlankLineIsNotRequired() {
         final String SOURCE = '''
             class Foo { 
                 Bar a = new Bar() {
