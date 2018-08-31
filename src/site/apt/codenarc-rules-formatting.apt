@@ -851,21 +851,13 @@ class MyClass {                                 // CORRECT
 
 * {ClassEndsWithBlankLine} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 1.2>
+  <Since CodeNarc 1.3>
 
-Check the location of the closing brace of a class. By default, it enforces that there must be a blank line before
-the closing class brace, except if the class is empty and is written in a single line. A blank line is defined as
-any line that does not contain any visible characters.
-This rule can be configured with the following properties:
-<ul>
- <li><i>ignoreSingleLineClasses</i>: a boolean property to forbid single line classes.If it is false, then single line
- classes are considered a violation. Default value is true
- </li>
- <li><i>blankLineRequired</i>: a boolean property to define if there may be a blank line before the closing
- class brace. If it is false, the last line before the brace must not be blank. Otherwise, it must be blank. Default
- value is true
- </li>
-<ul>
+  Check whether the class ends with a blank line. By default, it enforces that there must be a blank line before
+  the closing class brace, except if the class is empty and is written in a single line. A blank line is defined as
+  any line that does not contain any visible characters.
+  This rule can be configured with the following properties:
+
 *----------------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>               | <<Description>>                                                | <<Default Value>>      |
 *----------------------------+----------------------------------------------------------------+------------------------+
@@ -880,7 +872,7 @@ This rule can be configured with the following properties:
 
   Example of violations:
 
-If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<true>>>
+  If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<true>>>
 -------------------------------------------------------------------------------
             class Foo {
                 int a
@@ -890,13 +882,13 @@ If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<true>>>
             }
 -------------------------------------------------------------------------------
 
-If ignoreSingleLineClasses is <<<false>>> and blankLineRequired is <<<true>>>
+  If ignoreSingleLineClasses is <<<false>>> and blankLineRequired is <<<true>>>
 -------------------------------------------------------------------------------
             class Foo extends Bar<String> { }
 -------------------------------------------------------------------------------
 
 
-If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<false>>>
+  If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<false>>>
 -------------------------------------------------------------------------------
             class Foo {
                 int a
@@ -907,7 +899,7 @@ If ignoreSingleLineClasses is <<<true>>> and blankLineRequired is <<<false>>>
             }
 -------------------------------------------------------------------------------
 
-If ignoreSingleLineClasses is <<<false>>> and blankLineRequired is <<<false>>>
+  If ignoreSingleLineClasses is <<<false>>> and blankLineRequired is <<<false>>>
 -------------------------------------------------------------------------------
             class Foo {
                 int a

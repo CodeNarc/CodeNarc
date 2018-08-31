@@ -1,9 +1,11 @@
 # CodeNarc Change Log
 
-Next Version
+Version 1.3
 --------------------------------------
- - ClassEndsWithBlankLine rule (braces) -Check the location of the closing brace of a class
-
+New Rules
+ - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line.
+ 
+ 
 Version 1.2.1 (Aug 2018)
 --------------------------------------
 Bug Fixes

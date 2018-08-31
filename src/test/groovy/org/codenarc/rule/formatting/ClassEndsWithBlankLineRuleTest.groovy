@@ -25,8 +25,6 @@ import org.codenarc.rule.AbstractRuleTestCase
  */
 class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {
 
-    static skipTestThatUnrelatedCodeHasNoViolations
-
     @Test
     void testRuleProperties() {
         assert rule.priority == 2
