@@ -1,5 +1,11 @@
 # CodeNarc Change Log
 
+Version 1.3
+--------------------------------------
+New Rules
+ - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line.
+ 
+ 
 Version 1.2.1 (Aug 2018)
 --------------------------------------
 Bug Fixes
