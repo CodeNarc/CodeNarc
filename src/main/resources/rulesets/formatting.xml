@@ -40,4 +40,5 @@
     <rule class='org.codenarc.rule.formatting.SpaceBeforeOpeningBraceRule'/>
     <rule class='org.codenarc.rule.formatting.TrailingWhitespaceRule'/>
     <rule class='org.codenarc.rule.formatting.ClassEndsWithBlankLineRule'/>
+    <rule class='org.codenarc.rule.formatting.ClassStartsWithBlankLineRule'/>
 </ruleset>
