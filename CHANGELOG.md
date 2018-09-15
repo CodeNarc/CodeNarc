@@ -4,7 +4,8 @@ Version 1.3
 --------------------------------------
 New Rules
  - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line.
- 
+ - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line.
+
  
 Version 1.2.1 (Aug 2018)
 --------------------------------------

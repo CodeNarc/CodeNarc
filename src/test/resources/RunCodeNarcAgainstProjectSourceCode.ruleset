@@ -43,6 +43,7 @@ ruleset {
         exclude 'SpaceAfterWhile'
         exclude 'SpaceAroundMapEntryColon'
         exclude 'ClassEndsWithBlankLine'
+        exclude 'ClassStartsWithBlankLine'
     }
 
     ruleset('rulesets/imports.xml') {
