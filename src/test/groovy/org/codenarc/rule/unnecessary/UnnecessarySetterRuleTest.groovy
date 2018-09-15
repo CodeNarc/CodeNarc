@@ -36,6 +36,7 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
             x.setup(2)
             x.setURL('')
             x.setSomething('arg1', 'arg2')
+            x.setE(8, 9, 10)
         '''
         assertNoViolations(SOURCE)
     }
@@ -54,11 +55,13 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
             x.setProperty(1)
             x.setProperty(this.getA())
             x.setProperty([])
+            x.setE(3)           // see #364
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'x.setProperty(1)', messageText:'setProperty(..) can probably be rewritten as property = ..'],
             [lineNumber:3, sourceLineText:'x.setProperty(this.getA())', messageText:'setProperty(..) can probably be rewritten as property = ..'],
-            [lineNumber:4, sourceLineText:'x.setProperty([])', messageText:'setProperty(..) can probably be rewritten as property = ..'])
+            [lineNumber:4, sourceLineText:'x.setProperty([])', messageText:'setProperty(..) can probably be rewritten as property = ..'],
+            [lineNumber:5, sourceLineText:'x.setE(3)', messageText:'setE(..)'])
     }
 
     @Test

@@ -66,7 +66,10 @@ class UnnecessarySetterAstVisitor extends AbstractAstVisitor {
             // def propertyName = name[3..-1].uncapitalize()
             // def assignment = AstUtil.getNodeText(call.arguments, sourceCode)
 
-            def propertyName = name[3].toLowerCase() + name[4..-1] //name[3..-1].uncapitalize()
+            def propertyName = name[3].toLowerCase()
+            if (name.length() > 4) {
+                propertyName += name[4..-1]
+            }
             addUnnecessarySetterViolation(call, propertyName)
         }
     }
