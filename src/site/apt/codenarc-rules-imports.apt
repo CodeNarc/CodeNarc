@@ -76,12 +76,13 @@ Imports Rules  ("<rulesets/imports.xml>")
   <Since CodeNarc 0.21>
 
   Checks for wildcard (star) imports. If the <ignoreStaticImports> property is <true>, then do not check static imports.
+  Similarly, do not check the standard imports if ignoreImports is <true>.
 
   Example of violations:
 
 -------------------------------------------------------------------------------
     import static foo.bar.*         // violation (unless ignoreStaticImports is true)
-    import my.something.*           // violation
+    import my.something.*           // violation (unless ignoreImports is true)
 
     public class MyClass{}
 -------------------------------------------------------------------------------
@@ -90,6 +91,8 @@ Imports Rules  ("<rulesets/imports.xml>")
 | <<Property>>                    | <<Description>>                                                | <<Default Value>>      |
 *---------------------------------+----------------------------------------------------------------+------------------------+
 | ignoreStaticImports             | If <true>, then do not check static imports.                   | false                  |
+*---------------------------------+----------------------------------------------------------------+------------------------+
+| ignoreImports                   | If <true>, then do not check imports.                          | false                  |
 *---------------------------------+----------------------------------------------------------------+------------------------+
 
   NOTE: This is a file-based rule, rather than a typical AST-based rule, so the <applyToClassNames>
