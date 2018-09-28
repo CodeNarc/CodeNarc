@@ -32,11 +32,14 @@ class NoWildcardImportsRule extends AbstractImportRule {
     String name = 'NoWildcardImports'
     int priority = 3
     boolean ignoreStaticImports = false
+    boolean ignoreImports = false
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        sourceCode.ast?.starImports.each { ImportNode importNode ->
-            violations.add(createViolationForImport(sourceCode, importNode, MESSAGE))
+        if (!ignoreImports) {
+            sourceCode.ast?.starImports.each { ImportNode importNode ->
+                violations.add(createViolationForImport(sourceCode, importNode, MESSAGE))
+            }
         }
 
         if (!ignoreStaticImports) {

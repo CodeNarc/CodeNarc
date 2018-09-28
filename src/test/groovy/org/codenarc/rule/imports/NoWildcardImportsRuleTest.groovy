@@ -30,7 +30,8 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase<NoWildcardImportsRu
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'NoWildcardImports'
-        assert rule.ignoreStaticImports == false
+        assert !rule.ignoreStaticImports
+        assert !rule.ignoreImports
     }
 
     @Test
@@ -44,7 +45,7 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase<NoWildcardImportsRu
     }
 
     @Test
-    void testWildcardImports_Violations() {
+    void testWildcardImportsAndStaticImports_Violations() {
         final SOURCE = '''
             import static Math.*
             import static org.codenarc.report.AbstractHtmlReportWriter.*
@@ -62,6 +63,18 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase<NoWildcardImportsRu
     }
 
     @Test
+    void testWildcardImports_ignoreImportsButNotStaticImports_Violations() {
+        final SOURCE = '''
+            import com.example.*
+            import static org.codenarc.report.AbstractHtmlReportWriter.*
+
+            public class Foo {}
+        '''
+        rule.ignoreImports = true
+        assertSingleViolation(SOURCE, 3, 'import static org.codenarc.report.AbstractHtmlReportWriter.*')
+    }
+
+    @Test
     void testStaticWildcardImports_ignoreStaticImports_NoViolations() {
         final SOURCE = '''
             import static Math.*
@@ -70,6 +83,19 @@ class NoWildcardImportsRuleTest extends AbstractRuleTestCase<NoWildcardImportsRu
             public class Foo {}
         '''
         rule.ignoreStaticImports = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testWildcardImports_ignoreBothImportsAndStaticImports_NoViolations() {
+        final SOURCE = '''
+            import com.example.*
+            import static org.codenarc.report.AbstractHtmlReportWriter.*
+
+            public class Foo {}
+        '''
+        rule.ignoreStaticImports = true
+        rule.ignoreImports = true
         assertNoViolations(SOURCE)
     }
 
