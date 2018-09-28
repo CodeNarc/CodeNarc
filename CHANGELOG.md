@@ -1,11 +1,34 @@
 # CodeNarc Change Log
 
-TODO: Version 1.2 (??? 2018)
+TODO: Version 1.3
+--------------------------------------
+New Rules
+ - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line.
+ - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line.
+
+Bug Fixes
+ - #364: **UnnecessarySetter** rule: Fix StringIndexOutOfBoundsException for single-letter property names (e.g. account.setE(3)).
+
+ 
+Version 1.2.1 (Aug 2018)
+--------------------------------------
+Bug Fixes
+  - #310: **Indentation** rule: Fix handling of indent level within scripts and method call chaining.
+  - #355: **Indentation** rule: Spock labels on if stmt throw MissingPropertyException: No such property: expression.
+  - #351: **GrailsStatelessService** rule: Add `grailsApplication` to the default ignored fields. (Donald Oellerich)
+  - #354: **JUnitPublicField** rule: Also ignore @ClassRule. (Daniel Spilker)
+  - #348: **SpaceAroundOperator** rule: Fix false-positive for annotated lines. Known limitation: Does not catch violations of missing space around the equals operator (=) for fields initialization if the field is annotated.
+  - #349: **NoJavaUtilDate** rule: Ignore `new Date()` if the class imports another `Date` class. 
+
+
+Version 1.2 (Jul 2018)
 --------------------------------------
 New Rules
   - #336: **StaticFieldsBeforeInstanceFields** rule (convention) - Enforce that all static fields are above all instance fields within a class.
   - #337: **StaticMethodsBeforeInstanceMethods** rule (convention) - Enforce that all static methods within each visibility level (public, protected, private) are above all instance methods within that same visibility level. 
-  - #340: **PublicMethodsBeforeNonPublic** rule (convention) - Enforce that all public methods are above protected and private methods.
+  - #340: **PublicMethodsBeforeNonPublicMethods** rule (convention) - Enforce that all public methods are above protected and private methods.
+  - #344: **GrailsDomainStringPropertyMaxSize** rule (grails) - String properties in Grails domain classes have to define maximum size otherwise the property is mapped to VARCHAR(255) causing runtime exceptions to occur. (Vladimir Orany)
+  - #343: **NoJavaUtilDate** rule (convention) - Do not use java.util.Date. Prefer the classes in the java.time.* packages. Checks for construction of new java.util.Date objects. (Eric Helgeson)
 
 Updated/Enhanced Rules and Bug Fixes
    - #315: **Indentation** rule: Fix Indentation Rule to work with spock block labels. (Russell Sanborn)
@@ -17,8 +40,11 @@ Updated/Enhanced Rules and Bug Fixes
    - #332: **SpaceBeforeOpeningBrace**: Ignore opening brace preceded by opening ‘[’.
    - #332: **SpaceAfterClosingBrace**: Ignore closing brace followed by closing ‘]’. Deprecate  and ignore *checkClosureMapEntryValue* property. 
    - #314: **VariableTypeRequired** rule: Add *ignoreVariableNames* property.
-   - #314: **FieldTypeRequiredRule** rule: Add *ignoreFieldNames* property.
-   - #235: **UnnecessaryGetter**: Ignore getters within calls to Spock `Stub()`/`Mock()`. 
+   - #314: **FieldTypeRequired** rule: Add *ignoreFieldNames* property.
+   - #235: **UnnecessaryGetter** rule: Ignore getters within calls to Spock `Stub()`/`Mock()`. 
+   - #157 **SpaceAroundOperator** rule: Check for space around equals for declaration expressions in variables and fields.
+   - #157 **SpaceAroundOperator** rule: Check for space around equals for method/constructor parameters. Add *ignoreParameterDefaultValueAssignments* flag.
+   - #346: **UnnecessarySetter** rule: Ignore setter calls if they are part of an expression.
 
 Framework and Infrastructure
    - #311: Add equivalent linux command line example. (Wilfred Hughes)
@@ -26,6 +52,7 @@ Framework and Infrastructure
    - #325: Perform general cleanup across project. (Russell Sanborn)
    - #324: Add missing Violation type to List parameter in applyTo methods. (Russell Sanborn)
    - #323: Add terminating semicolons to keep consistency in js sort functions. (Russell Sanborn)
+   - #347: Add "spec" to DEFAULT_TEST_FILES and DEFAULT_TEST_CLASS_NAMES. (Russell Sanborn)
 
 
 Version 1.1 (Jan 2018)

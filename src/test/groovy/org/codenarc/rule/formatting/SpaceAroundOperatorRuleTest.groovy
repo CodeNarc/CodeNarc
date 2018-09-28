@@ -29,6 +29,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'SpaceAroundOperator'
+        assert rule.ignoreParameterDefaultValueAssignments == true
     }
 
     // Tests for operators
@@ -37,9 +38,16 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     void testApplyTo_Operators_ProperSpacing_NoViolations() {
         final SOURCE = '''
             class MyClass {
+
+                String name = "Joe"
+                private static String LONG_NAME =
+                    "aaaaaaabbbbbbbbbbbbbbbcccccccccccccccccccddddddddddd"
+
                 def myMethod() {
                     def answer = 3 + 5 - x\t* 23    / 100
                     def name = fullname ? fullname + 'ME' : 'unknown'
+                    String longName =
+                        'aaaaabbbbbcccccddddd'
                     def v = fullname ?
                          fullname + 'ME' :
                          'unknown'
@@ -105,14 +113,6 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     void testApplyTo_IgnoreArrayOperator_NoViolations() {
         final SOURCE = '''
             def statement = block.statements[it]
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void testApplyTo_AssignmentOperationWithinDeclaration_WithoutSpace_KnownLimitation_NoViolations() {
-        final SOURCE = '''
-            def x=5
         '''
         assertNoViolations(SOURCE)
     }
@@ -230,7 +230,7 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     }
 
     @Test
-    void testApplyTo_ElvisOperatorWithNewLineAsSapce_NoViolation() {
+    void testApplyTo_ElvisOperatorWithNewLineAsSpace_NoViolation() {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
@@ -247,12 +247,138 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
     }
 
     @Test
-    void testApplyTo_EqualsOperator_InDeclarationExpression_NoViolation_KnownLimitation() {
+    void testApplyTo_EqualsOperator_InVariableDeclaration_WithoutSurroundingSpace_Violations() {
         final SOURCE = '''
             String bar='bar'
+            def bar2\t=[1, 2,
+                3, 4]
+            int bar3=\t9876
+
+            String other = bar &&
+                bar2 == null ||
+                bar3
+            String other2 = bar instanceof String
+            def obj = something.part.subpart
         '''
-        // This "should" produce 2 violations on line 1; known limitation
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class None is not preceded'],
+                [lineNumber:2, sourceLineText:"String bar='bar'", messageText:'The operator "=" within class None is not followed'],
+                [lineNumber:3, sourceLineText:'def bar2\t=[1, 2,', messageText:'The operator "=" within class None is not followed'],
+                [lineNumber:5, sourceLineText:'int bar3=\t9876', messageText:'The operator "=" within class None is not preceded'])
+    }
+
+    @Test
+    void testApplyTo_EqualsOperator_InFieldDeclaration_WithoutSurroundingSpace_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                private static final String BAR='bar'
+                def bar2\t=[1, 2,
+                    3, 4]
+                int bar3=\t9876
+                boolean bar4 =BAR &&
+                    x == null ||
+                    open()
+
+                private String OTHER = BAR &&
+                    x == null ||
+                    open()
+                String other2 = bar instanceof String
+                def obj = something.part.subpart
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:3, sourceLineText:"private static final String BAR='bar'", messageText:'The operator "=" within class MyClass is not followed'],
+                [lineNumber:4, sourceLineText:'def bar2\t=[1, 2', messageText:'The operator "=" within class MyClass is not followed'],
+                [lineNumber:6, sourceLineText:'int bar3=\t9876', messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:7, sourceLineText:'boolean bar4 =BAR &&', messageText:'The operator "=" within class MyClass is not followed'])
+    }
+
+    @Test
+    void testApplyTo_EqualsOperator_InMethodParameterDefaultValue_WithoutSurroundingSpace_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                void method1(String name, int count=99,
+                    long id =1) { }
+
+                void method_Okay(String name = 'abc', int count = 99) { }
+            }
+        '''
+
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'void method1(String name, int count=99', messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:3, sourceLineText:'void method1(String name, int count=99', messageText:'The operator "=" within class MyClass is not followed'],
+                [lineNumber:4, sourceLineText:'long id =1', messageText:'The operator "=" within class MyClass is not followed'])
+
+        rule.ignoreParameterDefaultValueAssignments = true
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_EqualsOperator_InConstructorParameterDefaultValue_WithoutSurroundingSpace_Violations() {
+        final SOURCE = '''
+            class MyClass {
+                MyClass(int id= 88,
+                    int maxValue   =99 +
+                        23, def other) { }
+
+                MyClass(String name) { }
+            }
+        '''
+
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'MyClass(int id= 88', messageText:'The operator "=" within class MyClass is not preceded'],
+                [lineNumber:4, sourceLineText:'int maxValue   =99 +', messageText:'The operator "=" within class MyClass is not followed'])
+
+        rule.ignoreParameterDefaultValueAssignments = true
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_Operator_LineFollowingAnnotation_NoViolations() {
+        final SOURCE = '''
+            @SuppressWarnings('UnnecessarySubstring')
+            def relativePath = filePath.substring(path.length())
+
+            @SuppressWarnings('ClassForName')
+            def driver = Class.forName(driverName)
+
+            @SuppressWarnings('Other')
+            String name=myName + 'abc'
+
+            @SuppressWarnings('Other')
+            def otherName = "abc" + "***"
+
+            @SuppressWarnings('Other')
+            void method1(String name, int count = 99, long id = 1) { }
+            '''
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_Operator_LineFollowingAnnotation_ShouldBeViolations_KnownLimitation() {
+        final SOURCE = '''
+            @SuppressWarnings('UnnecessarySubstring')
+            def relativePath ="111"
+
+            @SuppressWarnings('Other')
+            String name =myName+"abc"
+
+            @SuppressWarnings('Other')
+            void method1(String name, int count= 99) { }
+            '''
+        rule.ignoreParameterDefaultValueAssignments = false
+        assertViolations(SOURCE,
+                // Known Limitation
+                //[lineNumber:3, sourceLineText:'def relativePath ="111"', messageText:'The operator "=" within class None is not preceded'],
+                //[lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "=" within class None is not followed'],
+
+                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not preceded'],
+                [lineNumber:6, sourceLineText:'String name =myName+"abc"', messageText:'The operator "+" within class None is not followed'],
+                [lineNumber:9, sourceLineText:'void method1(String name, int count= 99) { }', messageText:'The operator "=" within class None is not preceded'])
     }
 
     @Test

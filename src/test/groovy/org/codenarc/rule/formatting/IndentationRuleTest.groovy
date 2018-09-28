@@ -656,6 +656,15 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        ClosureExpression.metaClass.getText = { return CLOSURE_TEXT }
             |    }
             |
+            |    static { println "init" }
+            |
+            |    static {
+            |        [1, 2, 3].each { n ->
+            |            println n
+            |        }
+            |    }
+            |
+            |    // Instance initializer
             |    {
             |        println "Instance initializer"
             |    }
@@ -703,6 +712,36 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        and:
             |        b != 'raccoon'
             |    }
+            |
+            |    void 'androidLint is run'() {
+            |        given:
+            |        writeAndroidBuildFile(androidVersion)
+            |        useSimpleAndroidLintConfig()
+            |        writeAndroidManifest()
+            |        goodCode()
+            |
+            |        when:
+            |        BuildResult result = gradleRunner()
+            |            .withGradleVersion(version)
+            |            .build()
+            |
+            |        then:
+            |        if (GradleVersion.version(version) >= GradleVersion.version('2.5')) {
+            |            // Executed task capture is only available in Gradle 2.5+
+            |            result.task(taskName()).outcome == SUCCESS
+            |            result.task(':resolveAndroidLint').outcome == SUCCESS
+            |            result.task(':cleanupAndroidLint').outcome == SUCCESS
+            |        }
+            |
+            |        // Make sure report exists and was using the expected tool version
+            |        reportFile().exists()
+            |
+            |        where:
+            |        version << ['2.3', '2.4', '2.7', '2.10', '2.14.1'] +
+            |            (Jvm.current.java8Compatible ? ['3.0', '3.1'] : [])
+            |        androidVersion = GradleVersion.version(version) < GradleVersion.version('3.0') ?
+            |            DEFAULT_ANDROID_VERSION : '2.2.0\'
+            |    }
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -717,6 +756,16 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        println  name
             |        processResults(name)
             |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Script2() {
+        final SOURCE = '''
+            |job('job') {
+            |    label('label')
             |}
         '''.stripMargin()
         assertNoViolations(SOURCE)
@@ -739,6 +788,52 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    }
             |}
         '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_NestedClosure() {
+        final SOURCE = '''
+            |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->
+            |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')
+            |    String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +
+            |        "FILE_PATH=${it.absolutePath}\\n"
+            |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
+            |    cacheDir + hash + File.separator + 'output/jars/classes.jar\'
+            |}).asFileTree
+            '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_MethodChaining() {
+        final SOURCE = '''
+            |buildFileList()
+            |    .collect { File it ->
+            |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
+            |        String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +
+            |            "FILE_PATH=${it.absolutePath}\\n"
+            |        cacheDir + File.separator + inputFile + sha1
+            |    }
+            |    .each { name ->
+            |        println name
+            |    }
+            |println "done"
+            |
+            |list2.collect { item ->
+            |    item.name
+            |}.each { name -> println name }
+            |
+            |otherList.collect { item -> item.name }.each { name -> println name }
+            |
+            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {
+            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {
+            |        AstUtil.classNodeImplementsType(expr.type, it)
+            |    }.each {
+            |        callbackFunction()
+            |    }
+            |}
+            '''.stripMargin()
         assertNoViolations(SOURCE)
     }
 

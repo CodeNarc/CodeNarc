@@ -15,15 +15,11 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codehaus.groovy.ast.expr.BinaryExpression
-import org.codehaus.groovy.ast.expr.BooleanExpression
-import org.codehaus.groovy.ast.expr.CastExpression
-import org.codehaus.groovy.ast.expr.DeclarationExpression
-import org.codehaus.groovy.ast.expr.ElvisOperatorExpression
-import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.MethodCallExpression
-import org.codehaus.groovy.ast.expr.PropertyExpression
-import org.codehaus.groovy.ast.expr.TernaryExpression
+import org.codehaus.groovy.ast.ASTNode
+import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.Parameter
+import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -34,9 +30,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
  * Do not check array ('[') operator.
  *
- * Known limitation: Does not catch violations of missing space around equals operator (=) within a
- * declaration expression, e.g.   def x=23
- *
  * Known limitation: Does not catch violations of certain ternary expressions.
  *
  * @author Chris Mair
@@ -45,10 +38,16 @@ class SpaceAroundOperatorRule extends AbstractAstVisitorRule {
 
     String name = 'SpaceAroundOperator'
     int priority = 3
+    boolean ignoreParameterDefaultValueAssignments = true
     Class astVisitorClass = SpaceAroundOperatorAstVisitor
 }
 
 class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
+
+    private static final String QUOTE = '"'
+    private static final String PRECEDED = 'preceded'
+    private static final String FOLLOWED = 'followed'
+    private static final String SURROUNDED = 'surrounded'
 
     private boolean withinDeclarationExpression
 
@@ -83,27 +82,31 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         }
 
         if (!Character.isWhitespace(beforeChar)) {
-            addViolation(expression, "The operator \"?\" within class $currentClassName is not preceded by a space or whitespace")
+            addViolationForOperator(expression, '?', PRECEDED)
         }
         if (opColumn < line.size() && !Character.isWhitespace(line[opColumn] as char)) {
-            addViolation(expression, "The operator \"?\" within class $currentClassName is not followed by a space or whitespace")
+            addViolationForOperator(expression, '?', FOLLOWED)
         }
 
         if (rightMostColumn(expression.trueExpression) + 1 == leftMostColumn(expression.falseExpression)) {
-            addViolation(expression, "The operator \":\" within class $currentClassName is not surrounded by a space or whitespace")
+            addViolationForOperator(expression, ':', SURROUNDED)
         }
+    }
+
+    private void addViolationForOperator(ASTNode node, String operatorName, String precededFollowedOrSurrounded) {
+        addViolation(node, "The operator ${QUOTE}${operatorName}${QUOTE} within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
     }
 
     private void checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
         if (expression.lineNumber == expression.lastLineNumber) {
             def hasWhitespaceAroundQuestionMark = (line =~ /\s\?\s/)
             if (!hasWhitespaceAroundQuestionMark) {
-                addViolation(expression, "The operator \"?\" within class $currentClassName is not surrounded by a space or whitespace")
+                addViolationForOperator(expression, '?', SURROUNDED)
             }
 
             def hasWhitespaceAroundColon = (line =~ /\s\:\s/)
             if (!hasWhitespaceAroundColon) {
-                addViolation(expression, "The operator \":\" within class $currentClassName is not surrounded by a space or whitespace")
+                addViolationForOperator(expression, ':', SURROUNDED)
             }
         }
     }
@@ -118,10 +121,47 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
 
         if (index >= 0) {
             if (index > 0 && line.subSequence(index - 1, index + 2) =~ /\S\?\:/) {
-                addViolation(expression, "The operator \"?:\" within class $currentClassName is not preceded by a space or whitespace")
+                addViolationForOperator(expression, '?:', PRECEDED)
             }
             if (index + 3 < line.size() && line.subSequence(index, index + 3) =~ /\?\:(\S)/) {
-                addViolation(expression, "The operator \"?:\" within class $currentClassName is not followed by a space or whitespace")
+                addViolationForOperator(expression, '?:', FOLLOWED)
+            }
+        }
+    }
+
+    @Override
+    void visitField(FieldNode node) {
+        if (node.initialExpression) {
+            def line = sourceCode.lines[node.lineNumber - 1]
+            if (line.contains('=')) {
+                // The line string includes no terminating newline char
+                // So, simplify checking that = is always followed by whitespace char
+                line = line.endsWith('=') ? line + ' ' : line
+
+                checkAssignmentWithinString(node, line)
+            }
+        }
+        super.visitField(node)
+    }
+
+    @Override
+    protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
+        if (!rule.ignoreParameterDefaultValueAssignments) {
+            node.parameters.each { Parameter parameter ->
+                checkMethodParameter(parameter)
+            }
+        }
+        super.visitConstructorOrMethod(node, isConstructor)
+    }
+
+    private void checkMethodParameter(Parameter parameter) {
+        if (parameter.initialExpression) {
+            def line = sourceCode.lines[parameter.lineNumber - 1]
+            boolean allOnSameLine = parameter.lineNumber == parameter.lastLineNumber
+            int endColumn = allOnSameLine ? parameter.lastColumnNumber : line.size()
+            String paramString = line[(parameter.columnNumber - 1)..(endColumn - 2)]
+            if (paramString.contains('=')) {
+                checkAssignmentWithinString(parameter, paramString)
             }
         }
     }
@@ -137,26 +177,58 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         def opEndColumn = op.startColumn + opText.size() - 1
         def line = sourceCode.lines[op.startLine - 1]
 
+        // Only check lines that contain the expected opText; if it does not, it may have an annotation
+        if (!line.contains(opText)) {
+            super.visitBinaryExpression(expression)
+            return
+        }
+
         boolean assignmentWithinDeclaration = (opText == '=') && withinDeclarationExpression
+
+        if (expression instanceof DeclarationExpression && assignmentWithinDeclaration) {
+            checkAssignmentWithinDeclaration(expression, line)
+        }
+
         boolean arrayOperator = opText == '['
         boolean isOperatorAtIndex = op.startColumn != -1 && (line[op.startColumn - 1] == opText[0])
         boolean ignore = assignmentWithinDeclaration || arrayOperator || !isOperatorAtIndex
+        String operator = expression.operation.text
 
         if (!ignore && op.startColumn > 1) {
             def beforeChar = line[op.startColumn - 2] as char
 
             if (!Character.isWhitespace(beforeChar)) {
-                addViolation(expression, "The operator \"${expression.operation.text}\" within class $currentClassName is not preceded by a space or whitespace")
+                addViolationForOperator(expression, operator, PRECEDED)
             }
         }
 
         if (!ignore && opEndColumn != -1 && opEndColumn < line.size()) {
             def afterChar = line[opEndColumn] as char
             if (!Character.isWhitespace(afterChar)) {
-                addViolation(expression, "The operator \"${expression.operation.text}\" within class $currentClassName is not followed by a space or whitespace")
+                addViolationForOperator(expression, operator, FOLLOWED)
             }
         }
         super.visitBinaryExpression(expression)
+    }
+
+    private void checkAssignmentWithinDeclaration(BinaryExpression expression, String line) {
+        DeclarationExpression declarationExpression = expression
+        int left = declarationExpression.leftExpression.lastColumnNumber
+        int right = declarationExpression.rightExpression.columnNumber
+        boolean allOnSameLine = declarationExpression.leftExpression.lastLineNumber == declarationExpression.rightExpression.lineNumber
+        if (allOnSameLine && left > 0 && right > 0) {
+            String inBetweenString = line[(left - 1)..(right - 2)]
+            checkAssignmentWithinString(expression, inBetweenString)
+        }
+    }
+
+    private void checkAssignmentWithinString(ASTNode node, String string ) {
+        if (!(string =~ '\\s=')) {
+            addViolationForOperator(node, '=', PRECEDED)
+        }
+        if (!(string =~ '=\\s')) {
+            addViolationForOperator(node, '=', FOLLOWED)
+        }
     }
 
     @Override
@@ -168,7 +240,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
             }
 
             if (!containsAsWithSpaces) {
-                addViolation(expression, "The operator \"as\" within class $currentClassName is not surrounded by a space or whitespace")
+                addViolationForOperator(expression, 'as', SURROUNDED)
             }
         }
         super.visitCastExpression(expression)

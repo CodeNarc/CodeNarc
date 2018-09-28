@@ -21,7 +21,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   Code containing duplicate <List> literals can usually be improved by declaring the <List> as a constant field.
 
   By default, the rule does not analyze test files. This rule sets the default value of the
-  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Spec.groovy', 'Test.groovy', 'Tests.groovy'
   or 'TestCase.groovy'.
 
   Examples of violations:
@@ -70,7 +70,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   Code containing duplicate <Map> literals can usually be improved by declaring the <Map> as a constant field.
 
   By default, the rule does not analyze test files. This rule sets the default value of the
-  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Spec.groovy', 'Test.groovy', 'Tests.groovy'
   or 'TestCase.groovy'.
 
   Examples of violations:
@@ -124,7 +124,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   Code containing duplicate <Number> literals can usually be improved by declaring the <Number> as a constant field.
 
   By default, the rule does not analyze test files. This rule sets the default value of the
-  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Spec.groovy', 'Test.groovy', 'Tests.groovy'
   or 'TestCase.groovy'.
 
 *---------------------+----------------------------------------------------------------+------------------------+
@@ -157,7 +157,7 @@ DRY (Don't Repeat Yourself) Rules  ("<rulesets/dry.xml>")
   Code containing duplicate <String> literals can usually be improved by declaring the <String> as a constant field.
 
   By default, the rule does not analyze test files. This rule sets the default value of the
-  <doNotApplyToFilesMatching> property to ignore file names ending in 'Test.groovy', 'Tests.groovy'
+  <doNotApplyToFilesMatching> property to ignore file names ending in 'Spec.groovy', 'Test.groovy', 'Tests.groovy'
   or 'TestCase.groovy'.
 
 *---------------------+----------------------------------------------------------------+------------------------+

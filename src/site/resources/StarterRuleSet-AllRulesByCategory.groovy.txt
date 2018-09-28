@@ -98,8 +98,12 @@ ruleset {
     MethodParameterTypeRequired 
     MethodReturnTypeRequired 
     NoDef 
+    NoJavaUtilDate 
     NoTabCharacter 
     ParameterReassignment 
+    PublicMethodsBeforeNonPublicMethods 
+    StaticFieldsBeforeInstanceFields 
+    StaticMethodsBeforeInstanceMethods 
     TernaryCouldBeElvis 
     TrailingComma 
     VariableTypeRequired 
@@ -211,6 +215,7 @@ ruleset {
     GrailsDomainHasEquals 
     GrailsDomainHasToString 
     GrailsDomainReservedSqlKeywordName 
+    GrailsDomainStringPropertyMaxSize 
     GrailsDomainWithServiceReference 
     GrailsDuplicateConstraint 
     GrailsDuplicateMapping 

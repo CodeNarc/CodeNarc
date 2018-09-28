@@ -23,7 +23,7 @@ import org.codenarc.source.SourceCode
  * @author Chris Mair
  */
 class FakeCountRule extends AbstractRule {
-    String name ='FakeCountRule'
+    String name = 'FakeCountRule'
     int priority = 2
     int count = 0
 

@@ -24,14 +24,14 @@ import org.codenarc.rule.AbstractAstVisitorRule
  *
  * @author Chris Mair
  */
-class PublicMethodsBeforeNonPublicRule extends AbstractAstVisitorRule {
+class PublicMethodsBeforeNonPublicMethodsRule extends AbstractAstVisitorRule {
 
-    String name = 'PublicMethodsBeforeNonPublic'
+    String name = 'PublicMethodsBeforeNonPublicMethods'
     int priority = 3
-    Class astVisitorClass = PublicMethodsBeforeNonPublicAstVisitor
+    Class astVisitorClass = PublicMethodsBeforeNonPublicMethodsAstVisitor
 }
 
-class PublicMethodsBeforeNonPublicAstVisitor extends AbstractAstVisitor {
+class PublicMethodsBeforeNonPublicMethodsAstVisitor extends AbstractAstVisitor {
 
     private boolean hasDeclaredNonPublicMethod = false
 

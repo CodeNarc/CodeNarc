@@ -39,8 +39,8 @@ public abstract class AbstractAstVisitorRule extends AbstractRule {
     protected static final String DEFAULT_CONST_NAME = "[A-Z][A-Z0-9_]*";
     protected static final String DEFAULT_FIELD_NAME = "[a-z][a-zA-Z0-9]*";
     protected static final String DEFAULT_VAR_NAME   = "[a-z][a-zA-Z0-9]*";
-    protected static final String DEFAULT_TEST_FILES = ".*(Test|Tests|TestCase)\\.groovy";
-    protected static final String DEFAULT_TEST_CLASS_NAMES = "*Test,*Tests,*TestCase";
+    protected static final String DEFAULT_TEST_FILES = ".*(Spec|Test|Tests|TestCase)\\.groovy";
+    protected static final String DEFAULT_TEST_CLASS_NAMES = "*Spec,*Test,*Tests,*TestCase";
 
     public static final String CLOSURE_TEXT = "{ -> ... }";
 
