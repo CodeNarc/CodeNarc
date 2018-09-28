@@ -47,7 +47,8 @@ class PrivateFieldCouldBeFinalRule extends AbstractSharedAstVisitorRule {
         visitor.initializedFields.each { FieldNode fieldNode ->
             boolean isIgnoredBecauseMatchesPattern = wildcardPattern.matches(fieldNode.name)
             boolean isIgnoredBecauseDefinedInJpaEntity = ignoreJpaEntities && isDefinedInJpaEntity(fieldNode)
-            boolean isIgnored = isIgnoredBecauseMatchesPattern || isIgnoredBecauseDefinedInJpaEntity
+            boolean isAnnotatedWithLazy = AstUtil.hasAnnotation(fieldNode, 'Lazy')
+            boolean isIgnored = isIgnoredBecauseMatchesPattern || isIgnoredBecauseDefinedInJpaEntity || isAnnotatedWithLazy
             if (!isIgnored) {
                 def className = fieldNode.owner.name
                 def violationMessage = "Private field [${fieldNode.name}] in class $className is only set within the field initializer or a constructor, and so it can be made final."
