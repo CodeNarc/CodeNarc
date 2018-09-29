@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.convention
 
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.Expression
@@ -49,6 +50,11 @@ class CouldBeSwitchStatementAstVisitor extends AbstractAstVisitor {
     void visitIfElse(IfStatement node) {
         checkIfStatementCanBeSwitch(node)
         super.visitIfElse(node)
+    }
+
+    @Override
+    protected void visitMethodEx(MethodNode node) {
+        ifCounter = 0
     }
 
     private void checkIfStatementCanBeSwitch(IfStatement node) {

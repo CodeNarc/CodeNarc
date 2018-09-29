@@ -194,6 +194,27 @@ class CouldBeSwitchStatementRuleTest extends AbstractRuleTestCase<CouldBeSwitchS
     }
 
     @Test
+    void testNoViolationAcrossMethodsInSameClass() {
+        final SOURCE = '''
+            class a {
+                def method() {
+                    if(x == 1) {
+                        y = x
+                    } else if (x == 2) {
+                        y = x * 2
+                    }
+                }
+                def otherMethod() {
+                    if (x == 3) {
+                        y = x * 3
+                    }
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testMultipleViolations() {
         final SOURCE = '''
             if (x == 1) {
