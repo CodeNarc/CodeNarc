@@ -461,6 +461,17 @@ class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase<PrivateField
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_ignoreLazyAnnotatedFields_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                @Lazy
+                private DateTime created = { DateTime.now() }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected PrivateFieldCouldBeFinalRule createRule() {
         new PrivateFieldCouldBeFinalRule()
