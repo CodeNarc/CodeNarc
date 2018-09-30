@@ -6,9 +6,11 @@ New Rules
  - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line.
  - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line.
 
-Bug Fixes
+Updated/Enhanced Rules and Bug Fixes
  - #364: **UnnecessarySetter** rule: Fix StringIndexOutOfBoundsException for single-letter property names (e.g. account.setE(3)).
-
+ - #363: **CouldBeSwitchStatement** rule: Fix the false positive that occurs when if statements are in different methods of the same class. (Jenn Strater)
+ - #360: **NoWildcardImports** rule: Add a configuration option to ignore non-static imports. (Jenn Strater)
+ - #357: **PrivateFieldCouldBeFinal** rule: Fix the fasle positive that occurs when a field is marked with the Lazy annotation. (Jenn Strater)
  
 Version 1.2.1 (Aug 2018)
 --------------------------------------
@@ -42,8 +44,8 @@ Updated/Enhanced Rules and Bug Fixes
    - #314: **VariableTypeRequired** rule: Add *ignoreVariableNames* property.
    - #314: **FieldTypeRequired** rule: Add *ignoreFieldNames* property.
    - #235: **UnnecessaryGetter** rule: Ignore getters within calls to Spock `Stub()`/`Mock()`. 
-   - #157 **SpaceAroundOperator** rule: Check for space around equals for declaration expressions in variables and fields.
-   - #157 **SpaceAroundOperator** rule: Check for space around equals for method/constructor parameters. Add *ignoreParameterDefaultValueAssignments* flag.
+   - #157: **SpaceAroundOperator** rule: Check for space around equals for declaration expressions in variables and fields.
+   - #157: **SpaceAroundOperator** rule: Check for space around equals for method/constructor parameters. Add *ignoreParameterDefaultValueAssignments* flag.
    - #346: **UnnecessarySetter** rule: Ignore setter calls if they are part of an expression.
 
 Framework and Infrastructure
