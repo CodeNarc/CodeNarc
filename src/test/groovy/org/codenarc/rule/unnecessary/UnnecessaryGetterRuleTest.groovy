@@ -157,13 +157,18 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             }
             def closure = { getData4() }
             Mock({ getData5() }, 1234)      // 2nd param is not a Closure
+            Spy {
+                getMoreData()
+            }
         '''
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'getSomeData()', messageText:'getSomeData()'],
             [lineNumber:6, sourceLineText:'getData2()', messageText:'getData2()'],
             [lineNumber:9, sourceLineText:'getData3()', messageText:'getData3()'],
             [lineNumber:11, sourceLineText:'getData4()', messageText:'getData4()'],
-            [lineNumber:12, sourceLineText:'getData5()', messageText:'getData5()'])
+            [lineNumber:12, sourceLineText:'getData5()', messageText:'getData5()'],
+            [lineNumber:14, sourceLineText:'getMoreData()', messageText:'getMoreData()'],
+        )
     }
 
     @Test
