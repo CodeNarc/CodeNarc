@@ -3,14 +3,15 @@
 TODO: Version 1.3
 --------------------------------------
 New Rules
- - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line.
- - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line.
+ - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line. David Ausín)
+ - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line. David Ausín)
 
 Updated/Enhanced Rules and Bug Fixes
  - #364: **UnnecessarySetter** rule: Fix StringIndexOutOfBoundsException for single-letter property names (e.g. account.setE(3)).
  - #363: **CouldBeSwitchStatement** rule: Fix the false positive that occurs when if statements are in different methods of the same class. (Jenn Strater)
  - #360: **NoWildcardImports** rule: Add a configuration option to ignore non-static imports. (Jenn Strater)
  - #357: **PrivateFieldCouldBeFinal** rule: Fix the fasle positive that occurs when a field is marked with the Lazy annotation. (Jenn Strater)
+ - #372: **UnnecessaryGetter** rule: Also handle the "Spy" Spock method. (Boris Petrov)
  
 Version 1.2.1 (Aug 2018)
 --------------------------------------
