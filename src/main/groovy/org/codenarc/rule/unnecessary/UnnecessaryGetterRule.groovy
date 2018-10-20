@@ -61,7 +61,7 @@ class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
             return false
         }
         String name = call.method.value
-        return name in ['Mock', 'Stub']
+        return name in ['Mock', 'Spy', 'Stub']
     }
 
     private void addViolationsIfGetter(MethodCallExpression call) {
