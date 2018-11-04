@@ -41,7 +41,7 @@ import org.codenarc.util.AstUtil
 class ClassEndsWithBlankLineRule extends AbstractAstVisitorRule {
 
     String name = 'ClassEndsWithBlankLine'
-    int priority = 2
+    int priority = 3
     boolean ignoreSingleLineClasses = true
     boolean blankLineRequired = true
     Class astVisitorClass = ClassEndsWithBlankLineAstVisitor

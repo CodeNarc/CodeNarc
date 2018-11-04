@@ -28,7 +28,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
 
     @Test
     void testRuleProperties() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'ClassEndsWithBlankLine'
         assert rule.ignoreSingleLineClasses == true
         assert rule.blankLineRequired == true

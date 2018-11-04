@@ -39,7 +39,7 @@ import org.codenarc.util.AstUtil
 class ClassStartsWithBlankLineRule extends AbstractAstVisitorRule {
 
     String name = 'ClassStartsWithBlankLine'
-    int priority = 2
+    int priority = 3
     Class astVisitorClass = ClassStartsWithBlankLineAstVisitor
     boolean ignoreSingleLineClasses = true
     boolean blankLineRequired = true

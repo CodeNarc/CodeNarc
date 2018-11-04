@@ -28,7 +28,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
     @Test
     void testRuleProperties() {
-        assert rule.priority == 2
+        assert rule.priority == 3
         assert rule.name == 'ClassStartsWithBlankLine'
         assert rule.ignoreSingleLineClasses == true
         assert rule.blankLineRequired == true
