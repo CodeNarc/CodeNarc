@@ -38,8 +38,10 @@ class CloseWithoutCloseableAstVisitor extends AbstractMethodVisitor {
     @Override
     void visitMethod(MethodNode node) {
         if (AstUtil.isMethodNode(node, 'close', 0, Void.TYPE) && !Modifier.isPrivate(node.modifiers)) {
-            if (!AstUtil.classNodeImplementsType(node.declaringClass, Closeable) && !AstUtil.classNodeImplementsType(node.declaringClass, Script)) {
-                addViolation(node, 'void close() method defined without implementing Closeable')
+            if (!AstUtil.classNodeImplementsType(node.declaringClass, Closeable) &&
+                    !AstUtil.classNodeImplementsType(node.declaringClass, AutoCloseable) &&
+                    !AstUtil.classNodeImplementsType(node.declaringClass, Script)) {
+                addViolation(node, 'void close() method defined without implementing Closeable or AutoCloseable')
             }
         }
     }
