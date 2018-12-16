@@ -119,6 +119,15 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_PolishLettersUsedInNames_NoViolations() {
+        final SOURCE = '''
+            import static PolishEnum.PÓŁ
+            import static PolishEnum.DWA_I_PÓŁ
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected DuplicateImportRule createRule() {
         new DuplicateImportRule()

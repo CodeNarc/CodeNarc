@@ -45,12 +45,11 @@ class DuplicateImportRule extends AbstractImportRule {
     private void checkImport(String line, int lineNumber, Set importNames, List violations) {
         def importMatcher = line =~ NON_STATIC_IMPORT_PATTERN
         if (importMatcher) {
-            def importName = importMatcher[0][1]
-            if (importNames.contains(importName)) {
+            if (importNames.contains(line)) {
                 violations.add(new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber))
             }
             else {
-                importNames.add(importName)
+                importNames.add(line)
             }
         }
     }
@@ -58,12 +57,11 @@ class DuplicateImportRule extends AbstractImportRule {
     private void checkStaticImport(String line, int lineNumber, Set staticImportNames, List violations) {
         def importMatcher = line =~ STATIC_IMPORT_PATTERN
         if (importMatcher) {
-            def staticImportName = importMatcher[0][1]
-            if (staticImportNames.contains(staticImportName)) {
+            if (staticImportNames.contains(line)) {
                 violations.add(new Violation(rule: this, sourceLine: line.trim(), lineNumber: lineNumber))
             }
             else {
-                staticImportNames.add(staticImportName)
+                staticImportNames.add(line)
             }
         }
     }
