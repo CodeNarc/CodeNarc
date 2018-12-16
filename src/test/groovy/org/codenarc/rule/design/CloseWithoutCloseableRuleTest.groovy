@@ -24,6 +24,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  * @author Marcin Erdmann
+ * @author Mitch Sans Souci
  */
 class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase<CloseWithoutCloseableRule> {
 
@@ -49,6 +50,10 @@ class CloseWithoutCloseableRuleTest extends AbstractRuleTestCase<CloseWithoutClo
 
             class MyClass3 {
                 def close() { null } // return type, OK
+            }
+
+            class MyClass4 implements AutoCloseable {
+                void close() {}
             }
         '''
         assertNoViolations(SOURCE)
