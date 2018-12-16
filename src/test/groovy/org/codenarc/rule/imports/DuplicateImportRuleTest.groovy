@@ -48,6 +48,19 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
     }
 
     @Test
+    void testApplyTo_SameImportButDifferentLineContents_Violations() {
+        final SOURCE = '''
+            import java.io.InputStream
+            import java.io.OutputStream
+            import java.io.OutputStream     // Some comment
+            import java.io.InputStream;
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:4, sourceLineText:'import java.io.OutputStream     // Some comment'],
+                [lineNumber:5, sourceLineText:'import java.io.InputStream'])
+    }
+
+    @Test
     void testApplyTo_DuplicateImportWithWildcards_Violation() {
         final SOURCE = '''
             import java.io.*
