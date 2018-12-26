@@ -12,6 +12,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #360: **NoWildcardImports** rule: Add a configuration option to ignore non-static imports. (Jenn Strater)
  - #357: **PrivateFieldCouldBeFinal** rule: Fix the fasle positive that occurs when a field is marked with the Lazy annotation. (Jenn Strater)
  - #372: **UnnecessaryGetter** rule: Also handle the "Spy" Spock method. (Boris Petrov)
+ - #383: **DuplicateImport** rule: Fix handling of imports with non-English characters.
  
 Version 1.2.1 (Aug 2018)
 --------------------------------------

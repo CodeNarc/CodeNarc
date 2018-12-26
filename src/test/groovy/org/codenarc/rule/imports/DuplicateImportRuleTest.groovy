@@ -94,6 +94,43 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
     }
 
     @Test
+    void testApplyTo_Comments_Violations() {
+        final SOURCE = '''
+            import payroll.util.DataMaintenanceUtil.ONE//comment
+            import payroll.util.DataMaintenanceUtil.ONE         // comment
+            import payroll.util.DataMaintenanceUtil.TWO /* comment */
+            import payroll.util.DataMaintenanceUtil.TWO//comment
+            import payroll.util.Constants.*//comment
+            import payroll.util.Constants.*    /* comment */
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'import payroll.util.DataMaintenanceUtil.ONE         // comment'],
+                [lineNumber:5, sourceLineText:'import payroll.util.DataMaintenanceUtil.TWO//comment'],
+                [lineNumber:7, sourceLineText:'import payroll.util.Constants.*    /* comment */'])
+    }
+
+    @Test
+    void testApplyTo_PolishLettersUsedInNames_NoViolations() {
+        final SOURCE = '''
+            import other.PolishEnum.PÓŁ
+            import other.PolishEnum.DWA_I_PÓŁ
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_PolishLettersUsedInNames_Violations() {
+        final SOURCE = '''
+            import other.PolishEnum.PÓŁ
+            import other.PolishEnum.DWA_I_PÓŁ
+            import other.PolishEnum.PÓŁ
+        '''
+        assertSingleViolation(SOURCE, 4, 'import other.PolishEnum.PÓŁ')
+    }
+
+    // Static Imports
+
+    @Test
     void testApplyTo_DuplicateStaticImportWithWildcards_Violation() {
         final SOURCE = '''
             import static com.wystar.app.payroll.util.DataMaintenanceUtil.*
@@ -102,6 +139,35 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
             import org.sample.MyClass
         '''
         assertSingleViolation(SOURCE, 4, 'import static com.wystar.app.payroll.util.DataMaintenanceUtil.*')
+    }
+
+    @Test
+    void testApplyTo_DuplicateStaticImport_Violation() {
+        final SOURCE = '''
+            import static payroll.util.DataMaintenanceUtil.ONE
+            import static payroll.util.DataMaintenanceUtil.TWO
+            import static payroll.util.PayrollProcessingConstants.TWO
+            import static payroll.util.DataMaintenanceUtil.ONE
+            import org.sample.MyClass
+        '''
+        assertSingleViolation(SOURCE, 5, 'import static payroll.util.DataMaintenanceUtil.ONE')
+    }
+
+    @Test
+    void testApplyTo_StaticImport_Comments_Violations() {
+        final SOURCE = '''
+            import static payroll.util.DataMaintenanceUtil.ONE//comment
+            import static payroll.util.DataMaintenanceUtil.ONE         // comment
+            import static payroll.util.DataMaintenanceUtil.TWO /* comment */
+            import static payroll.util.DataMaintenanceUtil.TWO//comment
+            import static payroll.util.Constants.*//comment
+            import static payroll.util.Constants.*    /* comment */
+            import org.sample.MyClass
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'import static payroll.util.DataMaintenanceUtil.ONE         // comment'],
+                [lineNumber:5, sourceLineText:'import static payroll.util.DataMaintenanceUtil.TWO//comment'],
+                [lineNumber:7, sourceLineText:'import static payroll.util.Constants.*    /* comment */'])
     }
 
     @Test
@@ -128,6 +194,15 @@ class DuplicateImportRuleTest extends AbstractRuleTestCase<DuplicateImportRule> 
             import java.io.InputStream
             import java.io.OutputStream
             import java.util.HashMap
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_StaticImports_PolishLettersUsedInNames_NoViolations() {
+        final SOURCE = '''
+            import static other.PolishEnum.PÓŁ
+            import static other.PolishEnum.DWA_I_PÓŁ
         '''
         assertNoViolations(SOURCE)
     }

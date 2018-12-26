@@ -26,8 +26,8 @@ import org.codenarc.source.SourceCode
  */
 abstract class AbstractImportRule extends AbstractRule {
 
-    public static final String NON_STATIC_IMPORT_PATTERN = /^\s*import(?!\s+static)\s+(\w+(\.\w+)*)\b.*/
-    public static final String STATIC_IMPORT_PATTERN = /^\s*import\s+static\s+(\w+(\.\w+)*)\b.*/
+    public static final String NON_STATIC_IMPORT_PATTERN = /^\s*import(?!\s+static)\s+([^\s\/]+(\.[^\s\/]+)*)\b.*/
+    public static final String STATIC_IMPORT_PATTERN = /^\s*import\s+static\s+([^\s\/]+(\.[^\s\/]+)*)\b.*/
 
     /**
      * Optimization: Stop checking lines for imports once a class/interface has been declared
