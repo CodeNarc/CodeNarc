@@ -124,6 +124,17 @@ class JUnitLostTestRuleTest extends AbstractRuleTestCase<JUnitLostTestRule> {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testApplyTo_IgnoresAbstractTestMethods() {
+        final SOURCE = '''
+            import org.junit.Test
+            class MyTestCase {
+                abstract void testInternalStuff();
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected JUnitLostTestRule createRule() {
         new JUnitLostTestRule()

@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.ClassNode
 
 /**
  * Rule that checks if a JUnit 4 test class contains public, instance, void, no-arg methods
- * named test*() that are NOT annotated with @Test.
+ * named test*() that are NOT abstract and NOT annotated with @Test.
  * <p/>
  * This rule sets the default value of <code>applyToFilesMatching</code> to only match source code file
  * paths ending in 'Test.groovy' or 'Tests.groovy'.
@@ -61,6 +61,7 @@ class JUnitLostTestAstVisitor extends AbstractMethodVisitor {
             && (methodNode.parameters?.length == 0)
             && (methodNode.name?.startsWith('test'))
             && !(Modifier.isStatic(methodNode.modifiers))
+            && !(Modifier.isAbstract(methodNode.modifiers))
             && !AstUtil.hasAnnotation(methodNode, 'Test') ) {
             addViolation(methodNode, "The method ${methodNode.name} is a public, instance, void, no-arg method  named test*() that is not annotated with @Test.")
         }
