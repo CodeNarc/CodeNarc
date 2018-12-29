@@ -95,6 +95,12 @@ class SourceFileTest extends AbstractTestCase {
     }
 
     @Test
+    void testGetAst_CompilationFails() {
+        sourceFile = new SourceFile(new File('src/test/resources/SampleInvalidFile.txt'))
+        assert sourceFile.ast == null
+    }
+
+    @Test
     void testGetLineNumberForCharacterIndex() {
         assert sourceFile.getLineNumberForCharacterIndex(0) == 1
         assert sourceFile.getLineNumberForCharacterIndex(1) == 1

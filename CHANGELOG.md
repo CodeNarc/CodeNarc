@@ -15,6 +15,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #383: **DuplicateImport** rule: Fix handling of imports with non-English characters.
  - #381: Update **CloseWithoutCloseable** rule to skip classes implementing Autocloseable. (Mitch Sans Souci)
  - #384: **JUnitLostTest** rule: ignore abstract test methods.
+ - #269: Enhanced the "compilation failed" error message to also include the exception that caused it.
 
  
 Version 1.2.1 (Aug 2018)
