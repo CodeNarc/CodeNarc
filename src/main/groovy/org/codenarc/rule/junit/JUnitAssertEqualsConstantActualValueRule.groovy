@@ -25,7 +25,6 @@ import org.codehaus.groovy.control.Phases
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
-import org.junit.Assert
 
 /**
  * Reports usages of org.junit.Assert.assertEquals([message,] expected, actual) where the 'actual' parameter
@@ -34,6 +33,7 @@ import org.junit.Assert
  * @author Artur Gajowy
  */
 class JUnitAssertEqualsConstantActualValueRule extends AbstractAstVisitorRule {
+
     String name = 'JUnitAssertEqualsConstantActualValue'
     int priority = 2
     Class astVisitorClass = JUnitAssertEqualsConstantActualValueAstVisitor
@@ -43,21 +43,24 @@ class JUnitAssertEqualsConstantActualValueRule extends AbstractAstVisitorRule {
 
 class JUnitAssertEqualsConstantActualValueAstVisitor extends AbstractAstVisitor {
 
-    private static final ClassNode ASSERT_TYPE = ClassHelper.make(Assert)
     private static final String ASSERT_EQUALS = 'assertEquals'
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        if (call.objectExpression.type == ASSERT_TYPE && AstUtil.isMethodNamed(call, ASSERT_EQUALS)) {
+        if (isJUnitAssert(call.objectExpression.type) && AstUtil.isMethodNamed(call, ASSERT_EQUALS)) {
             findViolations(call)
         }
     }
 
     @Override
     void visitStaticMethodCallExpression(StaticMethodCallExpression call) {
-        if (call.ownerType == ASSERT_TYPE && call.method == ASSERT_EQUALS) {
+        if (isJUnitAssert(call.ownerType) && call.method == ASSERT_EQUALS) {
             findViolations(call)
         }
+    }
+
+    private boolean isJUnitAssert(ClassNode classNode) {
+        return classNode.name == 'org.junit.Assert'
     }
 
     private void findViolations(ASTNode methodCall) {

@@ -16,6 +16,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #381: Update **CloseWithoutCloseable** rule to skip classes implementing Autocloseable. (Mitch Sans Souci)
  - #384: **JUnitLostTest** rule: ignore abstract test methods.
  - #269: Enhanced the "compilation failed" error message to also include the exception that caused it.
+ - #380: **JUnitAssertEqualsConstantActualValue** rule: Fix NoClassDefFoundError when JUnit not on the classpath.
 
  
 Version 1.2.1 (Aug 2018)
