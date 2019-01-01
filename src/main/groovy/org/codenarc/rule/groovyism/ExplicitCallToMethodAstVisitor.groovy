@@ -28,17 +28,27 @@ import org.codenarc.util.AstUtil
 abstract class ExplicitCallToMethodAstVisitor extends AbstractMethodCallExpressionVisitor  {
 
     final String methodName
+    final int numArgs
+
+    /**
+     * @param methodName The method name to watch for.
+     * @param numArgs The expected number of method parameters
+     */
+    protected ExplicitCallToMethodAstVisitor(String methodName, int numArgs) {
+        this.methodName = methodName
+        this.numArgs = numArgs
+    }
 
     /**
      * @param methodName The method name to watch for.
      */
     protected ExplicitCallToMethodAstVisitor(String methodName) {
-        this.methodName = methodName
+        this(methodName, 1)
     }
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        if (!AstUtil.isSafe(call) && !AstUtil.isSpreadSafe(call) && AstUtil.isMethodNamed(call, methodName, 1)) {
+        if (!AstUtil.isSafe(call) && !AstUtil.isSpreadSafe(call) && AstUtil.isMethodNamed(call, methodName, numArgs)) {
             boolean isAllowedCallOnThis = rule.ignoreThisReference && AstUtil.isMethodCallOnObject(call, 'this')
             boolean isAllowedCallOnSuper = AstUtil.isMethodCallOnObject(call, 'super')
 

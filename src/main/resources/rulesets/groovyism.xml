@@ -40,4 +40,5 @@
     <rule class='org.codenarc.rule.groovyism.GStringExpressionWithinStringRule'/>
     <rule class='org.codenarc.rule.groovyism.UseCollectManyRule'/>
     <rule class='org.codenarc.rule.groovyism.UseCollectNestedRule'/>
+    <rule class='org.codenarc.rule.groovyism.ExplicitCallToPutAtMethodRule'/>
 </ruleset>

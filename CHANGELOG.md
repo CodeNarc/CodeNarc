@@ -3,8 +3,9 @@
 TODO: Version 1.3
 --------------------------------------
 New Rules
- - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line. David Ausín)
- - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line. David Ausín)
+ - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line. (David Ausín)
+ - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line. (David Ausín)
+ - #377: **ExplicitCallToPutAtMethod** rule: Detects when the `map.putAt(k, v)` method is called directly rather than using `map[k] = v`.
 
 Updated/Enhanced Rules and Bug Fixes
  - #364: **UnnecessarySetter** rule: Fix StringIndexOutOfBoundsException for single-letter property names (e.g. account.setE(3)).
