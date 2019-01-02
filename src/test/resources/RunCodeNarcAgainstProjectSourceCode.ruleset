@@ -9,6 +9,8 @@ ruleset {
 
     ruleset('rulesets/braces.xml')
 
+    ruleset('rulesets/comments.xml')
+
     ruleset('rulesets/convention.xml') {
         exclude 'NoDef'
         exclude 'NoJavaUtilDate'

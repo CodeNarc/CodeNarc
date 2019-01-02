@@ -25,6 +25,7 @@ class RuleSets {
     static final List ALL_RULESET_FILES = [
         'rulesets/basic.xml',
         'rulesets/braces.xml',
+        'rulesets/comments.xml',
         'rulesets/concurrency.xml',
         'rulesets/convention.xml',
         'rulesets/design.xml',

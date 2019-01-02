@@ -70,6 +70,7 @@
             <item name="Rule Index" href="/codenarc-rule-index.html"/>
             <item name="Basic Rules" href="/codenarc-rules-basic.html"/>
             <item name="Braces Rules" href="/codenarc-rules-braces.html"/>
+            <item name="Comments Rules" href="/codenarc-rules-comments.html"/>
             <item name="Concurrency Rules" href="/codenarc-rules-concurrency.html"/>
             <item name="Convention Rules" href="/codenarc-rules-convention.html"/>
             <item name="Design Rules" href="/codenarc-rules-design.html"/>

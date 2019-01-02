@@ -1,0 +1,40 @@
+        --------------------------------------------------
+                      CodeNarc - Comments Rules
+        --------------------------------------------------
+
+Comments Rules  ("<rulesets/comments.xml>")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  These rules are related to comments.
+
+
+* {JavadocEmptyFirstLine} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.3>
+
+  Check for javadoc comments with an empty top line.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+        /**
+         *                                                      // violation
+         * Sample class
+         *
+         * @author Some Developer
+         */
+        class MyClass {
+
+            /**
+             *                                                  // violation
+             * Return the calculated count of some stuff,
+             * starting with the specified startIndex.
+             *
+             * @param startIndex - the starting index
+             * @return the full count
+             * @throws RuntimeException
+             */
+            int countThings(int startIndex) {
+            }
+        }
+-------------------------------------------------------------------------------
