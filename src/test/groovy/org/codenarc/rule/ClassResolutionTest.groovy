@@ -18,6 +18,7 @@ package org.codenarc.rule
 import org.junit.Test
 
 /**
+ * Tests related to class resolution
  *
  * @author Hamlet D'Arcy
  */

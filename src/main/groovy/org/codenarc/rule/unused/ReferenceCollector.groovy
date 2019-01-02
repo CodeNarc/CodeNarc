@@ -23,6 +23,7 @@ import org.codehaus.groovy.control.SourceUnit
 import org.codenarc.util.AstUtil
 
 /**
+ * Class visitor that collects the names of all method call and variable references
  *
  * @author Hamlet D'Arcy
  */

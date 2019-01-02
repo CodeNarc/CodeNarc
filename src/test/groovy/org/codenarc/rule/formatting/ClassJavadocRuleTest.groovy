@@ -40,7 +40,7 @@ class ClassJavadocRuleTest extends AbstractRuleTestCase<ClassJavadocRule> {
     void testIgnoresNonMainClasses() {
         final SOURCE = '''
             /**
-             *
+             * Javadoc
              */
             class MyClass {}
 

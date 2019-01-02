@@ -20,7 +20,6 @@ import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.GStringExpression
 
 /**
- *
  * Utility class for Consecutive* rules.
  *
  * @author Hamlet D'Arcy
