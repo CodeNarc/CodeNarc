@@ -9,5 +9,6 @@
     </description>
 
     <rule class='org.codenarc.rule.comments.JavadocEmptyFirstLineRule'/>
+    <rule class='org.codenarc.rule.comments.JavadocEmptyLastLineRule'/>
 
 </ruleset>

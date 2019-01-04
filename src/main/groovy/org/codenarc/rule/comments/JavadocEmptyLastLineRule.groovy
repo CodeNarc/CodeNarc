@@ -17,29 +17,29 @@ package org.codenarc.rule.comments
 
 import static org.codenarc.rule.comments.CommentsUtil.*
 
-import org.codenarc.rule.AbstractRule
+import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
- * Check for javadoc comments with an empty top line
+ * Check for javadoc comments with an empty line at the bottom
  *
  * @author Chris Mair
  */
-class JavadocEmptyFirstLineRule extends AbstractRule {
+class JavadocEmptyLastLineRule extends AbstractAstVisitorRule {
 
-    private static final String REGEX = JAVADOC_START + JAVADOC_EMPTY_LINE
+    private static final String REGEX =  JAVADOC_START + JAVADOC_ANY_LINES + JAVADOC_EMPTY_LINE + JAVADOC_END
 
-    String name = 'JavadocEmptyFirstLine'
+    String name = 'JavadocEmptyLastLine'
     int priority = 3
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         def matcher = sourceCode.getText() =~ REGEX
         while (matcher.find()) {
-            int lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.start())
-            violations.add(new Violation(rule:this, lineNumber:lineNumber, sourceLine:'/** ..',
-                    message:'The first line of the javadoc is empty'))
+            int lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.end()) - 1
+            violations.add(new Violation(rule:this, lineNumber:lineNumber, sourceLine:' * ',
+                    message:'The last line of the javadoc is empty'))
         }
     }
 

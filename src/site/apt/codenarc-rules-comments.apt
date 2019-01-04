@@ -38,3 +38,35 @@ Comments Rules  ("<rulesets/comments.xml>")
             }
         }
 -------------------------------------------------------------------------------
+
+
+* {JavadocEmptyLastLine} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.3>
+
+  Check for javadoc comments with an empty line at the bottom.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+        /**
+         * Sample class
+         *
+         * @author Some Developer
+         *                                                      // violation
+         */
+        class MyClass {
+
+            /**
+             * Return the calculated count of some stuff,
+             * starting with the specified startIndex.
+             *
+             * @param startIndex - the starting index
+             * @return the full count
+             * @throws RuntimeException
+             *                                                  // violation
+             */
+            int countThings(int startIndex) {
+            }
+        }
+-------------------------------------------------------------------------------

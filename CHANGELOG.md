@@ -8,6 +8,7 @@ New Rules
  - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line. (David Ausín)
  - #377: **ExplicitCallToPutAtMethod** rule: Detects when the `map.putAt(k, v)` method is called directly rather than using `map[k] = v`.
  - #385: **JavadocEmptyFirstLine** rule (comments) - Check for javadoc comments with an empty top line.
+ - #386: **JavadocEmptyLastLine** rule (comments) - Check for javadoc comments with an empty line at the bottom.
 
 Updated/Enhanced Rules and Bug Fixes
  - #364: **UnnecessarySetter** rule: Fix StringIndexOutOfBoundsException for single-letter property names (e.g. account.setE(3)).

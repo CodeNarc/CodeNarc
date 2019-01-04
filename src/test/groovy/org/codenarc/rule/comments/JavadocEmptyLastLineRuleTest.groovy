@@ -19,27 +19,26 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
- * Tests for JavadocEmptyFirstLineRule
+ * Tests for JavadocEmptyLastLineRule
  *
  * @author Chris Mair
  */
-@SuppressWarnings(['JavadocEmptyFirstLine', 'JavadocEmptyLastLine'])
-class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFirstLineRule> {
+@SuppressWarnings('JavadocEmptyLastLine')
+class JavadocEmptyLastLineRuleTest extends AbstractRuleTestCase<JavadocEmptyLastLineRule> {
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == 'JavadocEmptyFirstLine'
+        assert rule.name == 'JavadocEmptyLastLine'
     }
 
     @Test
-    void test_JavadocWithoutEmptyFirstLines_NoViolations() {
+    void test_JavadocWithoutEmptyLastLines_NoViolations() {
         final SOURCE = '''
             /**
              * Sample class
              *
              * @author Some Developer
-             *
              */
             class MyClass {
 
@@ -50,7 +49,6 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
                  * @param startIndex - the starting index
                  * @return the full count
                  * @throws RuntimeException
-                 *
                  */
                 int countThings(int startIndex) {
                 }
@@ -60,36 +58,61 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
     }
 
     @Test
-    void test_JavadocWithEmptyFirstLines_Violations() {
+    void test_RegularComments_NoViolations() {
         final SOURCE = '''
             /**
+             * Initialize starting values.
+             * Do not call this ... ever!!
+             */
+            void initialize() { }
+
+            /*
+             * Some comment
              *
+             */
+            void doThings(int startIndex) { }
+
+            /*
+                void otherMethod() {
+                    doThings(5);
+                }
+
+            */
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_JavadocWithEmptyLastLines_Violations() {
+        final SOURCE = '''
+            /**
              * Sample class
              *
              * @author Some Developer
+             *
              */
             class MyClass {
 
                 /**
-                 *
                  * Return the calculated count of some stuff,
                  * starting with the specified startIndex.
                  *
                  * @param startIndex - the starting index
                  * @return the full count
                  * @throws RuntimeException
+                 *
                  */
                 int countThings(int startIndex) {
                 }
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'],
-            [lineNumber:10, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'])
+                [lineNumber:6, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'],
+                [lineNumber:17, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'])
     }
 
     @Override
-    protected JavadocEmptyFirstLineRule createRule() {
-        new JavadocEmptyFirstLineRule()
+    protected JavadocEmptyLastLineRule createRule() {
+        new JavadocEmptyLastLineRule()
     }
 }
