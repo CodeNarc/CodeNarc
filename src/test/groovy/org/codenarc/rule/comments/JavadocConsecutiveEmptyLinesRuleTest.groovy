@@ -19,27 +19,28 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
- * Tests for JavadocEmptyFirstLineRule
+ * Tests for JavadocConsecutiveEmptyLinesRule
  *
  * @author Chris Mair
  */
-@SuppressWarnings(['JavadocEmptyFirstLine', 'JavadocEmptyLastLine'])
-class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFirstLineRule> {
+@SuppressWarnings(['ConsecutiveBlankLines', 'JavadocConsecutiveEmptyLines', 'JavadocEmptyFirstLine', 'JavadocEmptyLastLine'])
+class JavadocConsecutiveEmptyLinesRuleTest extends AbstractRuleTestCase<JavadocConsecutiveEmptyLinesRule> {
+
+    private static final String VIOLATION_MESSAGE = 'The javadoc contains consecutive empty lines'
 
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
-        assert rule.name == 'JavadocEmptyFirstLine'
+        assert rule.name == 'JavadocConsecutiveEmptyLines'
     }
 
     @Test
-    void test_JavadocWithoutEmptyFirstLines_NoViolations() {
+    void test_JavadocWithoutConsecutiveEmptyLines_NoViolations() {
         final SOURCE = '''
             /**
              * Sample class
              *
              * @author Some Developer
-             *
              */
             class MyClass {
 
@@ -50,7 +51,6 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
                  * @param startIndex - the starting index
                  * @return the full count
                  * @throws RuntimeException
-                 *
                  */
                 int countThings(int startIndex) {
                 }
@@ -69,52 +69,67 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
             void initialize() { }
 
             /*
-             *
              * Some comment
+             *
+             *
              */
             void doThings(int startIndex) { }
 
             /*
-
                 void otherMethod() {
                     doThings(5);
                 }
+
+
             */
         '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void test_JavadocWithEmptyFirstLines_Violations() {
+    void test_JavadocWithConsecutiveEmptyLines_Violations() {
         final SOURCE = '''
             /**
-             *
              * Sample class
              *
              * @author Some Developer
+             *
+             *
              */
             class MyClass {
 
                 /**
                  *
+                 *
+                 */
+                String name
+
+                /**
                  * Return the calculated count of some stuff,
                  * starting with the specified startIndex.
+                 *
                  *
                  * @param startIndex - the starting index
                  * @return the full count
                  * @throws RuntimeException
+                 *
+                 * NOTE: Only the first occurrence of consecutive empty lines is found.
+                 *       So the following lines are not flagged as violations!!!
+                 *
+                 *
                  */
                 int countThings(int startIndex) {
                 }
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'],
-            [lineNumber:10, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'])
+                [lineNumber:7, sourceLineText:' * ', messageText:VIOLATION_MESSAGE],
+                [lineNumber:13, sourceLineText:' * ', messageText:VIOLATION_MESSAGE],
+                [lineNumber:21, sourceLineText:' * ', messageText:VIOLATION_MESSAGE])
     }
 
     @Override
-    protected JavadocEmptyFirstLineRule createRule() {
-        new JavadocEmptyFirstLineRule()
+    protected JavadocConsecutiveEmptyLinesRule createRule() {
+        new JavadocConsecutiveEmptyLinesRule()
     }
 }

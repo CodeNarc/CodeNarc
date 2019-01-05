@@ -8,6 +8,7 @@
         These rules are related to comments.
     </description>
 
+    <rule class='org.codenarc.rule.comments.JavadocConsecutiveEmptyLinesRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptyFirstLineRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptyLastLineRule'/>
 

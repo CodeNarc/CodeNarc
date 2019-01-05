@@ -8,6 +8,35 @@ Comments Rules  ("<rulesets/comments.xml>")
   These rules are related to comments.
 
 
+* {JavadocConsecutiveEmptyLines} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.3>
+
+  Checks for javadoc comments with more than one consecutive empty line.
+
+  Known limitation: Only the first occurrence of consecutive empty lines within a javadoc comment is found.
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+        /**
+         * Description
+         *
+         *                                                                          // violation
+         * @param startIndex - the starting index
+         * @return the full count
+         * @throws RuntimeException
+         *
+         * NOTE: Only the first occurrence of consecutive empty lines
+         *       within a javadoc comment is found, so the following
+         *       lines are not flagged as violations!!!
+         *
+         *
+         */
+        int countThings(int startIndex) { }
+-------------------------------------------------------------------------------
+
+
 * {JavadocEmptyFirstLine} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.3>
@@ -70,3 +99,4 @@ Comments Rules  ("<rulesets/comments.xml>")
             }
         }
 -------------------------------------------------------------------------------
+

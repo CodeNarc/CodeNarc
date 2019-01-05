@@ -22,6 +22,7 @@ package org.codenarc.rule.comments
  */
 class CommentsUtil {
 
+    public static final String RELUCTANT =  '?'
     public static final String JAVADOC_START =  /\/\*\*\s*\n/
     public static final String JAVADOC_ANY_LINES =  /(\s*\*.*\n)*/
     public static final String JAVADOC_EMPTY_LINE =  /\s*\*\s*\n/
