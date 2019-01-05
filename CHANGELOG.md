@@ -11,6 +11,7 @@ New Rules (and new "comments" ruleset)
  - #387: **JavadocConsecutiveEmptyLines** rule (comments) - Checks for javadoc comments with more than one consecutive empty line.
 
 Updated/Enhanced Rules and Bug Fixes
+ - #388: **ClassJavadoc** rule: Moved from the "formatting" ruleset into the new "comments" ruleset. [BREAKING CHANGE]
  - #364: **UnnecessarySetter** rule: Fix StringIndexOutOfBoundsException for single-letter property names (e.g. account.setE(3)).
  - #363: **CouldBeSwitchStatement** rule: Fix the false positive that occurs when if statements are in different methods of the same class. (Jenn Strater)
  - #360: **NoWildcardImports** rule: Add a configuration option to ignore non-static imports. (Jenn Strater)

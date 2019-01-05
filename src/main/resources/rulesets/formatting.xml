@@ -16,7 +16,6 @@
     <rule class='org.codenarc.rule.formatting.BracesForIfElseRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForMethodRule'/>
     <rule class='org.codenarc.rule.formatting.BracesForTryCatchFinallyRule'/>
-    <rule class='org.codenarc.rule.formatting.ClassJavadocRule'/>
     <rule class='org.codenarc.rule.formatting.ClosureStatementOnOpeningLineOfMultipleLineClosureRule'/>
     <rule class='org.codenarc.rule.formatting.ConsecutiveBlankLinesRule'/>
     <rule class='org.codenarc.rule.formatting.FileEndsWithoutNewlineRule'/>

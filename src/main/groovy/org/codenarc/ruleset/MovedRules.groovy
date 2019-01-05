@@ -22,6 +22,7 @@
  */
 class MovedRules {
 
+    private static final String COMMENTS_RULESET = 'rulesets/comments.xml'
     private static final String CONVENTION_RULESET = 'rulesets/convention.xml'
     private static final String DESIGN_RULESET = 'rulesets/design.xml'
     private static final String UNNECESSARY_RULESET = 'rulesets/unnecessary.xml'
@@ -43,6 +44,8 @@ class MovedRules {
     }
 
     private static final Map RULES = [
+        ClassJavadoc: movedTo(COMMENTS_RULESET),        // 1.3
+
         HardcodedWindowsRootDirectory: renamedTo('HardCodedWindowsRootDirectory'),
 
         AddEmptyString: movedTo(UNNECESSARY_RULESET),

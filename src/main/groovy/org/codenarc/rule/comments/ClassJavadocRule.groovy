@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.rule.formatting
+package org.codenarc.rule.comments
 
 import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation

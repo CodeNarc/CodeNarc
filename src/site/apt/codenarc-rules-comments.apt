@@ -8,6 +8,22 @@ Comments Rules  ("<rulesets/comments.xml>")
   These rules are related to comments.
 
 
+* {ClassJavadoc} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 0.15>
+
+  Makes sure each class and interface definition is preceded by javadoc. Enum definitions are not checked, due to strange
+  behavior in the Groovy AST. By default, only the main class in a file is checked for Javadoc. The main class is defined as
+  the class that has the same name as the source file, for instance MyClass is the main class in MyClass.groovy but the class
+  MyOtherClass defined in the same source file is not the main class. To check all the classes in the file set the rule
+  property <<<applyToNonMainClasses>>> to true.
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
+
 * {JavadocConsecutiveEmptyLines} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.3>
@@ -19,21 +35,21 @@ Comments Rules  ("<rulesets/comments.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-        /**
-         * Description
-         *
-         *                                                                          // violation
-         * @param startIndex - the starting index
-         * @return the full count
-         * @throws RuntimeException
-         *
-         * NOTE: Only the first occurrence of consecutive empty lines
-         *       within a javadoc comment is found, so the following
-         *       lines are not flagged as violations!!!
-         *
-         *
-         */
-        int countThings(int startIndex) { }
+    /**
+     * Description
+     *
+     *                                                                          // violation
+     * @param startIndex - the starting index
+     * @return the full count
+     * @throws RuntimeException
+     *
+     * NOTE: Only the first occurrence of consecutive empty lines
+     *       within a javadoc comment is found, so the following
+     *       lines are not flagged as violations!!!
+     *
+     *
+     */
+    int countThings(int startIndex) { }
 -------------------------------------------------------------------------------
 
 
@@ -46,26 +62,26 @@ Comments Rules  ("<rulesets/comments.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-        /**
-         *                                                      // violation
-         * Sample class
-         *
-         * @author Some Developer
-         */
-        class MyClass {
+    /**
+     *                                                      // violation
+     * Sample class
+     *
+     * @author Some Developer
+     */
+    class MyClass {
 
-            /**
-             *                                                  // violation
-             * Return the calculated count of some stuff,
-             * starting with the specified startIndex.
-             *
-             * @param startIndex - the starting index
-             * @return the full count
-             * @throws RuntimeException
-             */
-            int countThings(int startIndex) {
-            }
+        /**
+         *                                                  // violation
+         * Return the calculated count of some stuff,
+         * starting with the specified startIndex.
+         *
+         * @param startIndex - the starting index
+         * @return the full count
+         * @throws RuntimeException
+         */
+        int countThings(int startIndex) {
         }
+    }
 -------------------------------------------------------------------------------
 
 
@@ -78,25 +94,25 @@ Comments Rules  ("<rulesets/comments.xml>")
   Example of violations:
 
 -------------------------------------------------------------------------------
-        /**
-         * Sample class
-         *
-         * @author Some Developer
-         *                                                      // violation
-         */
-        class MyClass {
+    /**
+     * Sample class
+     *
+     * @author Some Developer
+     *                                                      // violation
+     */
+    class MyClass {
 
-            /**
-             * Return the calculated count of some stuff,
-             * starting with the specified startIndex.
-             *
-             * @param startIndex - the starting index
-             * @return the full count
-             * @throws RuntimeException
-             *                                                  // violation
-             */
-            int countThings(int startIndex) {
-            }
+        /**
+         * Return the calculated count of some stuff,
+         * starting with the specified startIndex.
+         *
+         * @param startIndex - the starting index
+         * @return the full count
+         * @throws RuntimeException
+         *                                                  // violation
+         */
+        int countThings(int startIndex) {
         }
+    }
 -------------------------------------------------------------------------------
 
