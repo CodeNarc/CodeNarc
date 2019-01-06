@@ -3,12 +3,13 @@
 TODO: Version 1.3
 --------------------------------------
 New Rules (and new "comments" ruleset)
- - #359: **ClassEndsWithBlankLine** rule: Check whether the class ends with a blank line. (David Ausín)
- - #362: **ClassStartsWithBlankLine** rule: Check whether the class starts with a blank line. (David Ausín)
- - #377: **ExplicitCallToPutAtMethod** rule: Detects when the `map.putAt(k, v)` method is called directly rather than using `map[k] = v`.
+ - #359: **ClassEndsWithBlankLine** rule (formatting) - Check whether the class ends with a blank line. (David Ausín)
+ - #362: **ClassStartsWithBlankLine** rule (formatting) - Check whether the class starts with a blank line. (David Ausín)
+ - #377: **ExplicitCallToPutAtMethod** rule - Detects when the `map.putAt(k, v)` method is called directly rather than using `map[k] = v`.
  - #385: **JavadocEmptyFirstLine** rule (comments) - Check for javadoc comments with an empty top line.
  - #386: **JavadocEmptyLastLine** rule (comments) - Check for javadoc comments with an empty line at the bottom.
  - #387: **JavadocConsecutiveEmptyLines** rule (comments) - Checks for javadoc comments with more than one consecutive empty line.
+ - #389: **JavadocEmptySeeTag** rule (comments) - Checks for empty @see tags within javadoc.
 
 Updated/Enhanced Rules and Bug Fixes
  - #388: **ClassJavadoc** rule: Moved from the "formatting" ruleset into the new "comments" ruleset. [BREAKING CHANGE]
@@ -18,7 +19,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #357: **PrivateFieldCouldBeFinal** rule: Fix the fasle positive that occurs when a field is marked with the Lazy annotation. (Jenn Strater)
  - #372: **UnnecessaryGetter** rule: Also handle the "Spy" Spock method. (Boris Petrov)
  - #383: **DuplicateImport** rule: Fix handling of imports with non-English characters.
- - #381: Update **CloseWithoutCloseable** rule to skip classes implementing Autocloseable. (Mitch Sans Souci)
+ - #381: **CloseWithoutCloseable** rule: Skip classes implementing Autocloseable. (Mitch Sans Souci)
  - #384: **JUnitLostTest** rule: ignore abstract test methods.
  - #269: Enhanced the "compilation failed" error message to also include the exception that caused it.
  - #380: **JUnitAssertEqualsConstantActualValue** rule: Fix NoClassDefFoundError when JUnit not on the classpath.

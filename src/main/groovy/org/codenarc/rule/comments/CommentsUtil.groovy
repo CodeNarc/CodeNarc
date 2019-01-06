@@ -22,11 +22,19 @@ package org.codenarc.rule.comments
  */
 class CommentsUtil {
 
-    public static final String RELUCTANT =  '?'
-    public static final String JAVADOC_START =  /\/\*\*\s*\n/
-    public static final String JAVADOC_ANY_LINES =  /(\s*\*.*\n)*/
-    public static final String JAVADOC_EMPTY_LINE =  /\s*\*\s*\n/
-    public static final String JAVADOC_END =  /\s*\*\//
+    protected static final String OPTIONAL_WHITESPACE =  /\s*/
+    protected static final String NEW_LINE =  /\n/
+    protected static final String RELUCTANT =  '?'
+
+    protected static final String JAVADOC_START =  /\/\*\*\s*\n/
+    protected static final String JAVADOC_ANY_LINES =  /(\s*\*.*\n)*/
+    protected static final String JAVADOC_EMPTY_LINE =  /\s*\*\s*\n/
+    protected static final String JAVADOC_END =  /\s*\*\//
+    protected static final String JAVADOC_LINE_PREFIX =  /\s*\*\s*/
+
+    protected static String group(String inside) {
+        return '(' + inside + ')'
+    }
 
     // Prevent instantiation. All members are static.
     private CommentsUtil() { }
