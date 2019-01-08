@@ -22,24 +22,28 @@ import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 
 /**
- * Checks for javadoc comments with more than one consecutive empty line
+ * Abstract superclass for rules that checks for empty javadoc tags.
  *
  * @author Chris Mair
  */
-class JavadocConsecutiveEmptyLinesRule extends AbstractAstVisitorRule {
+abstract class AbstractJavadocEmptyTagRule extends AbstractAstVisitorRule {
 
-    private static final String REGEX = JAVADOC_START + JAVADOC_ANY_LINES + JAVADOC_EMPTY_LINE + JAVADOC_EMPTY_LINE
-
-    String name = 'JavadocConsecutiveEmptyLines'
     int priority = 3
+
+    protected abstract String getTag()
+
+    protected String buildRegex() {
+        return JAVADOC_START + JAVADOC_ANY_LINES + group(JAVADOC_LINE_PREFIX + getTag()) + OPTIONAL_WHITESPACE + NEW_LINE
+    }
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        def matcher = sourceCode.getText() =~ REGEX
+        def matcher = sourceCode.getText() =~ buildRegex()
         while (matcher.find()) {
+            String sourceLine = matcher.group(2).trim()
             int lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.end()) - 1
-            violations.add(new Violation(rule:this, lineNumber:lineNumber, sourceLine:' * ',
-                    message:'The javadoc contains consecutive empty lines'))
+            violations.add(new Violation(rule:this, lineNumber:lineNumber, sourceLine:sourceLine,
+                    message:"The javadoc ${getTag()} tag is empty"))
         }
     }
 

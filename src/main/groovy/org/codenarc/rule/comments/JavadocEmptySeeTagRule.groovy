@@ -15,33 +15,18 @@
  */
 package org.codenarc.rule.comments
 
-import static org.codenarc.rule.comments.CommentsUtil.*
-
-import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.Violation
-import org.codenarc.source.SourceCode
-
 /**
  * Checks for empty @see tags within javadoc.
  *
  * @author Chris Mair
  */
-class JavadocEmptySeeTagRule extends AbstractAstVisitorRule {
-
-    private static final String REGEX =  JAVADOC_START + JAVADOC_ANY_LINES + RELUCTANT + group(JAVADOC_LINE_PREFIX + /\@see/) + OPTIONAL_WHITESPACE + NEW_LINE
+class JavadocEmptySeeTagRule extends AbstractJavadocEmptyTagRule {
 
     String name = 'JavadocEmptySeeTag'
-    int priority = 3
 
     @Override
-    void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        def matcher = sourceCode.getText() =~ REGEX
-        while (matcher.find()) {
-            String sourceLine = matcher.group(2).trim()
-            int lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.end()) - 1
-            violations.add(new Violation(rule:this, lineNumber:lineNumber, sourceLine:sourceLine,
-                    message:'The javadoc @see tag is empty'))
-        }
+    protected String getTag() {
+        return '@see'
     }
 
 }
