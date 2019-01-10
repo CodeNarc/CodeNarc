@@ -10,6 +10,7 @@ New Rules (and new "comments" ruleset)
  - #386: **JavadocEmptyLastLine** rule (comments) - Check for javadoc comments with an empty line at the bottom.
  - #387: **JavadocConsecutiveEmptyLines** rule (comments) - Checks for javadoc comments with more than one consecutive empty line.
  - #389: **JavadocEmptySeeTag** rule (comments) - Checks for empty @see tags within javadoc.
+ - #389: **JavadocEmptyParamTag** rule (comments) - Checks for empty @param tags within javadoc.
 
 Updated/Enhanced Rules and Bug Fixes
  - #388: **ClassJavadoc** rule: Moved from the "formatting" ruleset into the new "comments" ruleset. [BREAKING CHANGE]
