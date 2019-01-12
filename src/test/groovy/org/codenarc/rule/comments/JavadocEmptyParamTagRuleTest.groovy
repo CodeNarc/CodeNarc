@@ -15,95 +15,16 @@
  */
 package org.codenarc.rule.comments
 
-import org.codenarc.rule.AbstractRuleTestCase
-import org.junit.Test
-
 /**
  * Tests for JavadocEmptyParamTagRule
  *
  * @author Chris Mair
  */
-@SuppressWarnings('JavadocEmptyParamTag')
-class JavadocEmptyParamTagRuleTest extends AbstractRuleTestCase<JavadocEmptyParamTagRule> {
+class JavadocEmptyParamTagRuleTest extends AbstractJavadocEmptyTagRuleTestCase<JavadocEmptyParamTagRule> {
 
-    private static final String VIOLATION_MESSAGE = 'The javadoc @param tag is empty'
-
-    @Test
-    void testRuleProperties() {
-        assert rule.priority == 3
-        assert rule.name == 'JavadocEmptyParamTag'
-    }
-
-    @Test
-    void test_JavadocWithoutEmptySeeTag_NoViolations() {
-        final SOURCE = '''
-            class MyClass {
-
-                /**
-                 * Return the calculated count of some stuff.
-                 * @param startIndex - the starting index
-                 * @param endIndex the ending index
-                 * @return the full count
-                 */
-                int countThings(int startIndex, int endIndex) {
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void test_RegularComments_NoViolations() {
-        final SOURCE = '''
-            /**
-             * Initialize starting values.
-             * Do not call this ... ever!!
-             */
-            void initialize() { }
-
-            /*
-             * Some comment
-             * @param startIndex
-             */
-            void doThings(int startIndex) { }
-
-            /*
-                * @param startIndex
-                void otherMethod() {
-                    doThings(5);
-                }
-            */
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void test_JavadocWithEmptySeeTag_Violations() {
-        final SOURCE = '''
-            class MyClass {
-
-                /**
-                 * Return the calculated count of some stuff.
-                 *
-                 * @param
-                 * @return the full count
-                 * @throws RuntimeException
-                 *
-                 * NOTE: Only the first occurrence of an empty @param tag is found.
-                 *       So the following line is not flagged as a violation!!!
-                 * @param
-                 */
-                int countThings(int startIndex) { }
-
-                /**
-                 *@param
-                 */
-                String otherMethod() { }
-            }
-        '''
-        assertViolations(SOURCE,
-                [lineNumber:7, sourceLineText:'* @param', messageText:VIOLATION_MESSAGE],
-                [lineNumber:18, sourceLineText:'*@param', messageText:VIOLATION_MESSAGE])
+    @Override
+    protected String getTag() {
+        return '@param'
     }
 
     @Override

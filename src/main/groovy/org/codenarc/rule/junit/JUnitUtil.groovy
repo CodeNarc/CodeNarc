@@ -109,8 +109,7 @@ class JUnitUtil {
      * with @Test or @org.junit.Test,
      * @param node
      *       the node to analyze
-     * @return
-     *      true if the node is a test method
+     * @return true if the node is a test method
      */
     static boolean isTestMethod(ASTNode node) {
         if (!AstUtil.isPublic(node)) {

@@ -29,6 +29,7 @@ import org.codenarc.source.SourceCode
 abstract class AbstractJavadocEmptyTagRule extends AbstractAstVisitorRule {
 
     int priority = 3
+    boolean allowMultiline = false
 
     protected abstract String getTag()
 
@@ -42,9 +43,19 @@ abstract class AbstractJavadocEmptyTagRule extends AbstractAstVisitorRule {
         while (matcher.find()) {
             String sourceLine = matcher.group(2).trim()
             int lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.end()) - 1
-            violations.add(new Violation(rule:this, lineNumber:lineNumber, sourceLine:sourceLine,
-                    message:"The javadoc ${getTag()} tag is empty"))
+
+            boolean isTagContinuedOnNextLine = allowMultiline && hasTextOnNextLine(sourceCode, lineNumber)
+            if (!isTagContinuedOnNextLine) {
+                violations.add(new Violation(rule: this, lineNumber: lineNumber, sourceLine: sourceLine,
+                        message: "The javadoc ${getTag()} tag is empty"))
+            }
         }
+    }
+
+    private boolean hasTextOnNextLine(SourceCode sourceCode, int lineNumber) {
+        String nextLine = sourceCode.line(lineNumber)   // line() is zero-based, but lineNumber is one-based
+        boolean isJavadocEndLine = nextLine =~ JAVADOC_END
+        return !isJavadocEndLine && nextLine =~ JAVADOC_LINE_WITH_TEXT
     }
 
 }

@@ -31,6 +31,7 @@ class CommentsUtil {
     protected static final String JAVADOC_EMPTY_LINE =  /\s*\*\s*\n/
     protected static final String JAVADOC_END =  /\s*\*\//
     protected static final String JAVADOC_LINE_PREFIX =  /\s*\*\s*/
+    protected static final String JAVADOC_LINE_WITH_TEXT = JAVADOC_LINE_PREFIX + /[^@\s]/
 
     protected static String group(String inside) {
         return '(' + inside + ')'

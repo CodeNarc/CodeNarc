@@ -16,19 +16,19 @@
 package org.codenarc.rule.comments
 
 /**
- * Tests for JavadocEmptySeeTagRule
+ * Tests for JavadocEmptyReturnTagRule
  *
  * @author Chris Mair
  */
-class JavadocEmptySeeTagRuleTest extends AbstractJavadocEmptyTagRuleTestCase<JavadocEmptySeeTagRule> {
+class JavadocEmptyReturnTagRuleTest extends AbstractJavadocEmptyTagRuleTestCase<JavadocEmptyReturnTagRule> {
 
     @Override
     protected String getTag() {
-        return '@see'
+        return '@return'
     }
 
     @Override
-    protected JavadocEmptySeeTagRule createRule() {
-        new JavadocEmptySeeTagRule()
+    protected JavadocEmptyReturnTagRule createRule() {
+        new JavadocEmptyReturnTagRule()
     }
 }

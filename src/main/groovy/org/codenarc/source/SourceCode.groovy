@@ -94,7 +94,7 @@ interface SourceCode {
     /**
      * This method gives you all of the MethodCallExpressions defined in the AST without forcing you to walk the
      * entire tree on every request. They are cached for the lifespan of the SourceCode.
-     * @return
+     * @return a Map of ClassNode to the List of MethodCallExpressions defined in the AST
      */
     Map<ClassNode, List<MethodCallExpression>> getMethodCallExpressions()
 
