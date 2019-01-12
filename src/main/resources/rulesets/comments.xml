@@ -13,7 +13,7 @@
     <rule class='org.codenarc.rule.comments.JavadocEmptyFirstLineRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptyLastLineRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptyParamTagRule'/>
-    <rule class='org.codenarc.rule.comments.JavadocEmptySeeTagRule'/>
-
     <rule class='org.codenarc.rule.comments.JavadocEmptyReturnTagRule'/>
+    <rule class='org.codenarc.rule.comments.JavadocEmptySeeTagRule'/>
+    <rule class='org.codenarc.rule.comments.JavadocEmptyThrowsTagRule'/>
 </ruleset>

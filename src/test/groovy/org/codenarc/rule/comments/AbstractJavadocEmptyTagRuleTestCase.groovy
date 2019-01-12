@@ -23,8 +23,6 @@ import org.junit.Test
  *
  * @author Chris Mair
  */
-//@SuppressWarnings('JavadocEmptySeeTag')
-//@SuppressWarnings('JavadocEmptyReturnTag')
 abstract class AbstractJavadocEmptyTagRuleTestCase<T extends AbstractJavadocEmptyTagRule> extends AbstractRuleTestCase<T> {
 
     protected abstract String getTag()
