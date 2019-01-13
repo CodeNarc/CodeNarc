@@ -13,6 +13,7 @@ New Rules (and new "comments" ruleset)
  - #389: **JavadocEmptyParamTag** rule (comments) - Checks for empty @param tags within javadoc.
  - #389: **JavadocEmptyReturnTag** rule (comments) - Checks for empty @return tags within javadoc.
  - #389: **JavadocEmptyThrowsTag** rule (comments) - Checks for empty @throws tag within javadoc.
+ - #389: **JavadocEmptyExceptionTag** rule (comments) - Checks for empty @exception tag within javadoc.
 
 Updated/Enhanced Rules and Bug Fixes
  - #388: **ClassJavadoc** rule: Moved from the "formatting" ruleset into the new "comments" ruleset. [BREAKING CHANGE]
