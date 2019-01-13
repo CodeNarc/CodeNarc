@@ -19,4 +19,5 @@
     <rule class='org.codenarc.rule.comments.JavadocEmptySeeTagRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptySinceTagRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptyThrowsTagRule'/>
+    <rule class='org.codenarc.rule.comments.JavadocEmptyVersionTagRule'/>
 </ruleset>

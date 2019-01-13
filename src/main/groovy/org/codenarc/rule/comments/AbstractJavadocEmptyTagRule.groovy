@@ -31,15 +31,13 @@ abstract class AbstractJavadocEmptyTagRule extends AbstractAstVisitorRule {
     int priority = 3
     boolean allowMultiline = false
 
-    protected abstract String getTag()
+    private final String regex = buildRegex()
 
-    protected String buildRegex() {
-        return JAVADOC_START + JAVADOC_ANY_LINES + group(JAVADOC_LINE_PREFIX + getTag()) + OPTIONAL_WHITESPACE + NEW_LINE
-    }
+    protected abstract String getTag()
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        def matcher = sourceCode.getText() =~ buildRegex()
+        def matcher = sourceCode.getText() =~ regex
         while (matcher.find()) {
             String sourceLine = matcher.group(2).trim()
             int lineNumber = sourceCode.getLineNumberForCharacterIndex(matcher.end()) - 1
@@ -50,6 +48,10 @@ abstract class AbstractJavadocEmptyTagRule extends AbstractAstVisitorRule {
                         message: "The javadoc ${getTag()} tag is empty"))
             }
         }
+    }
+
+    private String buildRegex() {
+        return JAVADOC_START + JAVADOC_ANY_LINES + group(JAVADOC_LINE_PREFIX + getTag()) + OPTIONAL_WHITESPACE + NEW_LINE
     }
 
     private boolean hasTextOnNextLine(SourceCode sourceCode, int lineNumber) {

@@ -16,6 +16,7 @@ New Rules (and new "comments" ruleset)
  - #389: **JavadocEmptyExceptionTag** rule (comments) - Checks for empty @exception tag within javadoc.
  - #389: **JavadocEmptyAuthorTag** rule (comments) - Checks for empty @author tags within javadoc.
  - #389: **JavadocEmptySinceTag** rule (comments) - Checks for empty @since tags within javadoc.
+ - #389: **JavadocEmptyVersionTag** rule (comments) - Checks for empty @version tags within javadoc.
 
 Updated/Enhanced Rules and Bug Fixes
  - #388: **ClassJavadoc** rule: Moved from the "formatting" ruleset into the new "comments" ruleset. [BREAKING CHANGE]
