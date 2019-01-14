@@ -294,6 +294,45 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
+    void testAnnotationsFollowedByCommentLine_SameLineTrue_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                @AnAnnotation
+                // some comment
+                void aMethod() {
+                }
+
+                @AnAnnotation("abc")
+                // some comment
+                void aMethod() {
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testAnnotationsFollowedByCommentLine_SameLineFalse_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                @AnAnnotation
+                // some comment
+                void aMethod()
+                {
+                }
+
+                @AnAnnotation("abc")
+                // some comment
+                void aMethod()
+                {
+                }
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testSameLineFalse_BracesWithinComment_KnownIssue_Violation() {
         rule.sameLine = false
         final SOURCE = '''

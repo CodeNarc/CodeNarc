@@ -51,14 +51,23 @@ class BracesForMethodAstVisitor extends AbstractAstVisitor {
 
         if (rule.sameLine) {
             if(!(containsOpeningBraceAfterParenthesis(lastLine))) {
-                addViolation(node, "Opening brace for the method $node.name should start on the same line")
+                if (lineContainsMethodName(lastLine, node)) {
+                    addViolation(node, "Opening brace for the method $node.name should start on the same line")
+                }
             }
         } else {
             if (containsOpeningBraceAfterParenthesis(lastLine)) {
-                addViolation(node, "Opening brace for the method $node.name should start on a new line")
+                if (lineContainsMethodName(lastLine, node)) {
+                    addViolation(node, "Opening brace for the method $node.name should start on a new line")
+                }
             }
         }
         super.visitConstructorOrMethod(node, isConstructor)
+    }
+
+    // Make sure the line we are checking is actually the method declaration
+    private boolean lineContainsMethodName(String line, MethodNode node) {
+        return line?.contains(node.name) || node.name.startsWith('<')   // ignore <init> and <clinit>
     }
 
     private boolean containsOpeningBraceAfterParenthesis(String lastLine) {

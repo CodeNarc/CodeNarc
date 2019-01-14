@@ -30,6 +30,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #384: **JUnitLostTest** rule: ignore abstract test methods.
  - #269: Enhanced the "compilation failed" error message to also include the exception that caused it.
  - #380: **JUnitAssertEqualsConstantActualValue** rule: Fix NoClassDefFoundError when JUnit not on the classpath.
+ - #376: **BracesForMethod** rule: Fix false positive when methods have annotations followed by comment lines. 
 
  
 Version 1.2.1 (Aug 2018)
