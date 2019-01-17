@@ -269,6 +269,32 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         )
     }
 
+    @Test
+    void test_Constructor_CalledInOtherClass() {
+        final SOURCE = '''
+            |class MyClass { }
+            |
+            |class MyClassFactory {
+            |    static MyClass createMyClass() {
+            |        new MyClass()
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_Constructor_CalledInScriptMethod() {
+        final SOURCE = '''
+            |class MyClass { }
+            |
+            |def myMethod() {
+            |    new MyClass()
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
     // Tests for field and property declarations
 
     @Test

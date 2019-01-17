@@ -103,7 +103,9 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
-        getIndentLevelsMap()[call.type] = indentLevel
+        if (call.isUsingAnonymousInnerClass()) {
+            getIndentLevelsMap()[call.type] = indentLevel
+        }
         super.visitConstructorCallExpression(call)
     }
 
