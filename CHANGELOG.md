@@ -33,6 +33,11 @@ Updated/Enhanced Rules and Bug Fixes
  - #376: **BracesForMethod** rule: Fix false positive when methods have annotations followed by comment lines.
  - #395: **Indentation** rule: Fix false positive when constructor is called in a script method for a class declared in the script ifself. (René Scheibe).
 
+Framework and Infrastructure
+ - #391: Fix line endings in codenarc.groovy to enable running the script via `./codenarc.groovy` in Linux. (René Scheibe)
+ - #392: Fix compilation of Groovy class in incorrect folder. (René Scheibe)
+ - #393: Remove obsolete Java placeholder file. (René Scheibe)
+
 
 Version 1.2.1 (Aug 2018)
 --------------------------------------
