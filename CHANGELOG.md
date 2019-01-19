@@ -32,6 +32,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #380: **JUnitAssertEqualsConstantActualValue** rule: Fix NoClassDefFoundError when JUnit not on the classpath.
  - #376: **BracesForMethod** rule: Fix false positive when methods have annotations followed by comment lines.
  - #395: **Indentation** rule: Fix false positive when constructor is called in a script method for a class declared in the script ifself. (René Scheibe).
+ - #374: **TrailingComma** rule. Ignore lists/maps with single elements. Add *ignoreSingleElementList* and *ignoreSingleElementMap*. default to true.
 
 Framework and Infrastructure
  - #391: Fix line endings in codenarc.groovy to enable running the script via `./codenarc.groovy` in Linux. (René Scheibe)

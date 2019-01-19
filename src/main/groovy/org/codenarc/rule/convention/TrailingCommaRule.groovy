@@ -37,6 +37,8 @@ class TrailingCommaRule extends AbstractAstVisitorRule {
     Class astVisitorClass = TrailingCommaAstVisitor
     boolean checkList = true
     boolean checkMap = true
+    boolean ignoreSingleElementList = true
+    boolean ignoreSingleElementMap = true
 }
 
 class TrailingCommaAstVisitor extends AbstractAstVisitor {
@@ -46,7 +48,9 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
         if (isOneLiner(expression) || isMethodArgument(expression) || expression.mapEntryExpressions.isEmpty()) {
             return
         }
-        if (rule.checkMap && !hasTrailingComma(expression.mapEntryExpressions[-1], expression)) {
+        if (rule.checkMap &&
+                !isIgnoredOneElementMap(expression) &&
+                !hasTrailingComma(expression.mapEntryExpressions[-1], expression)) {
             addViolation(expression, 'Map should contain trailing comma.')
         }
     }
@@ -57,6 +61,7 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
             return
         }
         if (rule.checkList &&
+                !isIgnoredOneElementList(expression) &&
                 !hasTrailingComma(expression.expressions[-1], expression) &&
                 !lastExpressionIsEndOfExpression(expression.expressions[-1])
         ) {
@@ -70,6 +75,14 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
 
     private static boolean isMethodArgument(Expression expression) {
         expression instanceof NamedArgumentListExpression
+    }
+
+    private boolean isIgnoredOneElementList(ListExpression expression) {
+        return rule.ignoreSingleElementList && expression.getExpressions()?.size() == 1
+    }
+
+    private boolean isIgnoredOneElementMap(MapExpression expression) {
+        return rule.ignoreSingleElementMap && expression.getMapEntryExpressions()?.size() == 1
     }
 
     private boolean hasTrailingComma(Expression lastExpression, Expression outerExpression) {

@@ -460,13 +460,17 @@ Convention Rules  ("<rulesets/convention.xml>")
   Rationale: Putting this comma in make is easier
   to change the order of the elements or add new elements on the end.
 
-*--------------------+---------------------------------------------------------------------+---------------------+
-| <<Property>>       | <<Description>>                                                     | <<Default Value>>   |
-*--------------------+---------------------------------------------------------------------+---------------------+
-| checkList          | To disable checking List literals, set this property to <<<false>>> | <<<true>>>          |
-*--------------------+---------------------------------------------------------------------+---------------------+
-| checkMap           | To disable checking Map literals, set this property to <<<false>>>  | <<<true>>>          |
-*--------------------+---------------------------------------------------------------------+---------------------+
+*-------------------------+---------------------------------------------------------------------+---------------------+
+| <<Property>>            | <<Description>>                                                     | <<Default Value>>   |
+*-------------------------+---------------------------------------------------------------------+---------------------+
+| checkList               | To disable checking List literals, set this property to <<<false>>> | <<<true>>>          |
+*-------------------------+---------------------------------------------------------------------+---------------------+
+| checkMap                | To disable checking Map literals, set this property to <<<false>>>  | <<<true>>>          |
+*-------------------------+---------------------------------------------------------------------+---------------------+
+| ignoreSingleElementList | If true, skip checking Lists that have only a single element.       | <<<true>>>          |
+*-------------------------+---------------------------------------------------------------------+---------------------+
+| ignoreSingleElementMap  | If true, skip checking Maps that have only a single element.        | <<<true>>>          |
+*-------------------------+---------------------------------------------------------------------+---------------------+
 
   This is valid code:
 
