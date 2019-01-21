@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 362 rules.
+  <<CodeNarc>> includes 376 rules.
 
     
       
@@ -156,6 +156,47 @@ Rule Index
     
       
     * {{{./codenarc-rules-braces.html#WhileStatementBraces}WhileStatementBraces}}  
+    
+    
+      
+      
+* {{{./codenarc-rules-comments.html}Comments}}
+      
+      
+    * {{{./codenarc-rules-comments.html#ClassJavadoc}ClassJavadoc}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocConsecutiveEmptyLines}JavadocConsecutiveEmptyLines}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyAuthorTag}JavadocEmptyAuthorTag}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyExceptionTag}JavadocEmptyExceptionTag}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyFirstLine}JavadocEmptyFirstLine}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyLastLine}JavadocEmptyLastLine}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyParamTag}JavadocEmptyParamTag}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyReturnTag}JavadocEmptyReturnTag}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptySeeTag}JavadocEmptySeeTag}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptySinceTag}JavadocEmptySinceTag}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyThrowsTag}JavadocEmptyThrowsTag}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocEmptyVersionTag}JavadocEmptyVersionTag}}  
     
     
       
@@ -511,7 +552,10 @@ Rule Index
     * {{{./codenarc-rules-formatting.html#BracesForTryCatchFinally}BracesForTryCatchFinally}}  
     
       
-    * {{{./codenarc-rules-formatting.html#ClassJavadoc}ClassJavadoc}}  
+    * {{{./codenarc-rules-formatting.html#ClassEndsWithBlankLine}ClassEndsWithBlankLine}}  
+    
+      
+    * {{{./codenarc-rules-formatting.html#ClassStartsWithBlankLine}ClassStartsWithBlankLine}}  
     
       
     * {{{./codenarc-rules-formatting.html#ClosureStatementOnOpeningLineOfMultipleLineClosure}ClosureStatementOnOpeningLineOfMultipleLineClosure}}  
@@ -707,6 +751,9 @@ Rule Index
     
       
     * {{{./codenarc-rules-groovyism.html#ExplicitCallToPowerMethod}ExplicitCallToPowerMethod}}  
+    
+      
+    * {{{./codenarc-rules-groovyism.html#ExplicitCallToPutAtMethod}ExplicitCallToPutAtMethod}}  
     
       
     * {{{./codenarc-rules-groovyism.html#ExplicitCallToRightShiftMethod}ExplicitCallToRightShiftMethod}}  

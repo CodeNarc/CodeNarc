@@ -41,12 +41,14 @@ ruleset {
     CatchRuntimeException 
     CatchThrowable 
     ChainedTest 
+    ClassEndsWithBlankLine 
     ClassForName 
     ClassJavadoc 
     ClassName 
     ClassNameSameAsFilename 
     ClassNameSameAsSuperclass 
     ClassSize 
+    ClassStartsWithBlankLine 
     CloneWithoutCloneable 
     CloneableWithoutClone 
     CloseWithoutCloseable 
@@ -118,6 +120,7 @@ ruleset {
     ExplicitCallToOrMethod 
     ExplicitCallToPlusMethod 
     ExplicitCallToPowerMethod 
+    ExplicitCallToPutAtMethod 
     ExplicitCallToRightShiftMethod 
     ExplicitCallToXorMethod 
     ExplicitGarbageCollection 
@@ -190,6 +193,17 @@ ruleset {
     JUnitUnnecessaryTearDown 
     JUnitUnnecessaryThrowsException 
     JavaIoPackageAccess 
+    JavadocConsecutiveEmptyLines 
+    JavadocEmptyAuthorTag 
+    JavadocEmptyExceptionTag 
+    JavadocEmptyFirstLine 
+    JavadocEmptyLastLine 
+    JavadocEmptyParamTag 
+    JavadocEmptyReturnTag 
+    JavadocEmptySeeTag 
+    JavadocEmptySinceTag 
+    JavadocEmptyThrowsTag 
+    JavadocEmptyVersionTag 
     JdbcConnectionReference 
     JdbcResultSetReference 
     JdbcStatementReference 

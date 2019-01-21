@@ -57,6 +57,20 @@ ruleset {
     IfStatementBraces 
     WhileStatementBraces 
     
+    // rulesets/comments.xml
+    ClassJavadoc 
+    JavadocConsecutiveEmptyLines 
+    JavadocEmptyAuthorTag 
+    JavadocEmptyExceptionTag 
+    JavadocEmptyFirstLine 
+    JavadocEmptyLastLine 
+    JavadocEmptyParamTag 
+    JavadocEmptyReturnTag 
+    JavadocEmptySeeTag 
+    JavadocEmptySinceTag 
+    JavadocEmptyThrowsTag 
+    JavadocEmptyVersionTag 
+    
     // rulesets/concurrency.xml
     BusyWait 
     DoubleCheckedLocking 
@@ -176,7 +190,8 @@ ruleset {
     BracesForIfElse 
     BracesForMethod 
     BracesForTryCatchFinally 
-    ClassJavadoc 
+    ClassEndsWithBlankLine 
+    ClassStartsWithBlankLine 
     ClosureStatementOnOpeningLineOfMultipleLineClosure 
     ConsecutiveBlankLines 
     FileEndsWithoutNewline 
@@ -243,6 +258,7 @@ ruleset {
     ExplicitCallToOrMethod 
     ExplicitCallToPlusMethod 
     ExplicitCallToPowerMethod 
+    ExplicitCallToPutAtMethod 
     ExplicitCallToRightShiftMethod 
     ExplicitCallToXorMethod 
     ExplicitHashMapInstantiation 
