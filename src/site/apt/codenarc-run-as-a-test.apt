@@ -16,7 +16,7 @@ CodeNarc - Run as an Automated Test
 * Automated Test That Runs CodeNarc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  This is an example <<JUnit>> test (JUnit 3.x) that runs <<CodeNarc>>.
+  This is an example <<JUnit>> (4.x) test that runs <<CodeNarc>>.
 
 +----------------------------------------------------------------------------------------
     private static final GROOVY_FILES = '**/*.groovy'
@@ -24,6 +24,7 @@ CodeNarc - Run as an Automated Test
             'rulesets/basic.xml',
             'rulesets/imports.xml'].join(',')
 
+    @Test
     void testRunCodeNarc() {
         def ant = new AntBuilder()
 
