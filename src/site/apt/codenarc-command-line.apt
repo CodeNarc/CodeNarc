@@ -49,6 +49,12 @@ CodeNarc - Run From Command-Line
 |                                 | option is specified, default to a single "html" report with the      |                                      |
 |                                 | default filename.                                                    |                                      |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -maxPriority1Violations=<MAX>   | The maximum number of priority 1 violations allowed (int).           | -maxPriority1Violations=0            |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -maxPriority2Violations=<MAX>   | The maximum number of priority 2 violations allowed (int).           | -maxPriority2Violations=0            |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
+| -maxPriority3Violations=<MAX>   | The maximum number of priority 3 violations allowed (int).           | -maxPriority3Violations=0            |
+*---------------------------------+----------------------------------------------------------------------+--------------------------------------+
 | -title=<REPORT TITLE>           | The title for this analysis; used in the output report(s),           | -title="My Project"                  |
 |                                 | if supported by the report type(s). Optional.                        |                                      |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+

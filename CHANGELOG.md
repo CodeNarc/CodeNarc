@@ -35,6 +35,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #374: **TrailingComma** rule. Ignore lists/maps with single elements. Add *ignoreSingleElementList* and *ignoreSingleElementMap*. default to true.
 
 Framework and Infrastructure
+ - #390: CodeNarc command-line: Support `maxPriorityXViolations` command-line arguments.
  - #391: Fix line endings in codenarc.groovy to enable running the script via `./codenarc.groovy` in Linux. (René Scheibe)
  - #392: Fix compilation of Groovy class in incorrect folder. (René Scheibe)
  - #393: Remove obsolete Java placeholder file. (René Scheibe)

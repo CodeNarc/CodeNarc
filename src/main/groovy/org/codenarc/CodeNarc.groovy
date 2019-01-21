@@ -19,6 +19,7 @@ import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriterFactory
+import org.codenarc.results.Results
 
 /**
  * Command-line runner for CodeNarc.
@@ -35,6 +36,9 @@ import org.codenarc.report.ReportWriterFactory
  *          all files are included when omitted.</li>
  *   <li>excludes - The comma-separated list of Ant file patterns specifying files that must be excluded;
  *          no files are excluded when omitted.</li>
+ *   <li>maxPriority1Violations - The maximum number of priority 1 violations allowed. Optional.</li>
+ *   <li>maxPriority2Violations - The maximum number of priority 2 violations allowed. Optional.</li>
+ *   <li>maxPriority3Violations - The maximum number of priority 3 violations allowed. Optional.</li>
  *   <li>title - The title description for this analysis; used in the output report(s), if supported. Optional.</li>
  *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME].
  *          where TYPE is 'html' and FILENAME is the filename (with optional path) of the output report filename.
@@ -64,6 +68,12 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         The path to the Groovy or XML RuleSet definition files, relative to the classpath.
         This can be a single file path, or multiple paths separated by commas.
         Defaults to "rulesets/basic.xml"
+    -maxPriority1Violations=<MAX>
+        The maximum number of priority 1 violations allowed (int).
+    -maxPriority2Violations=<MAX>
+        The maximum number of priority 2 violations allowed (int).
+    -maxPriority3Violations=<MAX>
+        The maximum number of priority 3 violations allowed (int).
     -title=<REPORT TITLE>
         The title for this analysis; used in the output report(s), if supported by the report type. Optional.
     -report=<REPORT-TYPE[:FILENAME]>
@@ -94,6 +104,10 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
     protected Closure createCodeNarcRunner = { new CodeNarcRunner() }
+
+    protected int maxPriority1Violations = Integer.MAX_VALUE
+    protected int maxPriority2Violations = Integer.MAX_VALUE
+    protected int maxPriority3Violations = Integer.MAX_VALUE
 
     /**
      * Main command-line entry-point. Run the CodeNarc application.
@@ -132,7 +146,10 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         codeNarcRunner.ruleSetFiles = ruleSetFiles
         codeNarcRunner.reportWriters = reports
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
-        codeNarcRunner.execute()
+        Results results = codeNarcRunner.execute()
+        checkMaxViolations(results, 1, maxPriority1Violations)
+        checkMaxViolations(results, 2, maxPriority2Violations)
+        checkMaxViolations(results, 3, maxPriority3Violations)
     }
 
     protected void setDefaultsIfNecessary() {
@@ -142,6 +159,14 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
 
         if (reports.empty) {
             reports << new HtmlReportWriter(title:title)
+        }
+    }
+
+    protected void checkMaxViolations(Results results, int priority, int max) {
+        def numViolations = results.getNumberOfViolationsWithPriority(priority, true)
+        if (numViolations > max) {
+            println "ERROR: Number of p${priority} violations greater than maximum of $max"
+            systemExit(1)
         }
     }
 
@@ -167,6 +192,9 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
                 case 'excludes': excludes = value; break
                 case 'title': title = value; break
                 case 'report': parseReport(value); break
+                case 'maxPriority1Violations': maxPriority1Violations = value as int; break
+                case 'maxPriority2Violations': maxPriority2Violations = value as int; break
+                case 'maxPriority3Violations': maxPriority3Violations = value as int; break
                 default: throw new IllegalArgumentException("Invalid option: [$arg]")
             }
         }

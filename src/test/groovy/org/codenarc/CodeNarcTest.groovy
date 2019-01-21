@@ -36,20 +36,33 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  */
 class CodeNarcTest extends AbstractTestCase {
 
-    private static final BASE_DIR = 'src/test/resources'
-    private static final BASIC_RULESET = 'rulesets/basic.xml'
-    private static final RULESET1 = 'rulesets/RuleSet1.xml'
-    private static final INCLUDES = 'sourcewithdirs/**/*.groovy'
-    private static final EXCLUDES = '**/*File2.groovy'
-    private static final TITLE = 'My Title'
-    private static final HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
-    private static final HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
-    private static final XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
-    private static final XML_REPORT_STR = "xml:$XML_REPORT_FILE"
+    private static final String BASE_DIR = 'src/test/resources'
+    private static final String BASIC_RULESET = 'rulesets/basic.xml'
+    private static final String RULESET1 = 'rulesets/RuleSet1.xml'
+    private static final String INCLUDES = 'sourcewithdirs/**/*.groovy'
+    private static final String EXCLUDES = '**/*File2.groovy'
+    private static final String TITLE = 'My Title'
+    private static final String HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
+    private static final String HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
+    private static final String XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
+    private static final String XML_REPORT_STR = "xml:$XML_REPORT_FILE"
+    private static final int P1 = 1, P2 = 2, P3 = 3
 
-    private codeNarc
-    private outputFile
+    private CodeNarc codeNarc
+    private File outputFile
     private int exitCode
+
+    private Map numViolations = [:].withDefault { 0 }
+    private Results results = [
+        getNumberOfViolationsWithPriority:{ priority, recursive ->
+            assert recursive == true
+            return numViolations[priority]
+        }] as Results
+    private codeNarcRunner = [execute: { results }]
+
+    //------------------------------------------------------------------------------------
+    // Tests
+    //------------------------------------------------------------------------------------
 
     @Test
     void testParseArgs_InvalidOptionName() {
@@ -168,6 +181,33 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.baseDir == 'ddd'
     }
 
+    @Test
+    void testCheckMaxViolations_ActualLessThanOrEqualToMax() {
+        codeNarc.checkMaxViolations(results, P1, 1)
+        assert exitCode == 0
+
+        codeNarc.checkMaxViolations(results, P2, 0)
+        assert exitCode == 0
+
+        codeNarc.checkMaxViolations(results, P3, 0)
+        assert exitCode == 0
+    }
+
+    @Test
+    void testCheckMaxViolations_ActualExceedsMax() {
+        numViolations[P1] = 2
+        codeNarc.checkMaxViolations(results, P1, 1)
+        assert exitCode == 1
+
+        numViolations[P2] = 2
+        codeNarc.checkMaxViolations(results, P2, 1)
+        assert exitCode == 1
+
+        numViolations[P3] = 2
+        codeNarc.checkMaxViolations(results, P3, 1)
+        assert exitCode == 1
+    }
+
     // Tests for execute()
 
     @Test
@@ -175,9 +215,6 @@ class CodeNarcTest extends AbstractTestCase {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
-
-        def codeNarcRunner = [execute: { }]
-        codeNarc.createCodeNarcRunner = { codeNarcRunner }
 
         codeNarc.execute(ARGS)
 
@@ -203,9 +240,6 @@ class CodeNarcTest extends AbstractTestCase {
     void testExecute_NoArgs() {
         final ARGS = [] as String[]
 
-        def codeNarcRunner = [execute: { }]
-        codeNarc.createCodeNarcRunner = { codeNarcRunner }
-
         codeNarc.execute(ARGS)
 
         assert codeNarc.ruleSetFiles == BASIC_RULESET
@@ -223,11 +257,32 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
+    void testExecute_ExceedsMaxPriority1Violations() {
+        final ARGS = ['-maxPriority1Violations=3'] as String[]
+        numViolations[P1] = 4
+        codeNarc.execute(ARGS)
+        assert exitCode == 1
+    }
+
+    @Test
+    void testExecute_ExceedsMaxPriority2Violations() {
+        final ARGS = ['-maxPriority2Violations=3'] as String[]
+        numViolations[P2] = 4
+        codeNarc.execute(ARGS)
+        assert exitCode == 1
+    }
+
+    @Test
+    void testExecute_ExceedsMaxPriority3Violations() {
+        final ARGS = ['-maxPriority3Violations=3'] as String[]
+        numViolations[P3] = 4
+        codeNarc.execute(ARGS)
+        assert exitCode == 1
+    }
+
+    @Test
     void testExecute_ReportClassDoesNotSupportSetTitle() {
         final ARGS = ["-report=${NoTitleReportWriter.name}", "-title=$TITLE"] as String[]
-
-        def codeNarcRunner = [execute: { }]
-        codeNarc.createCodeNarcRunner = { codeNarcRunner }
 
         codeNarc.execute(ARGS)
 
@@ -296,6 +351,7 @@ class CodeNarcTest extends AbstractTestCase {
     void setUp() {
         codeNarc = new CodeNarc()
         codeNarc.systemExit = { code -> exitCode = code }
+        codeNarc.createCodeNarcRunner = { codeNarcRunner }
         outputFile = new File(HTML_REPORT_FILE)
     }
 
