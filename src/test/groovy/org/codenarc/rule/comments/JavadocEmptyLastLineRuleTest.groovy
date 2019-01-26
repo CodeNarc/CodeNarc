@@ -26,6 +26,29 @@ import org.junit.Test
 @SuppressWarnings('JavadocEmptyLastLine')
 class JavadocEmptyLastLineRuleTest extends AbstractRuleTestCase<JavadocEmptyLastLineRule> {
 
+    private static final String SOURCE_WITH_VIOLATIONS = '''
+        /**
+         * Sample class
+         *
+         * @author Some Developer
+         *
+         */
+        class MyClass {
+
+            /**
+             * Return the calculated count of some stuff,
+             * starting with the specified startIndex.
+             *
+             * @param startIndex - the starting index
+             * @return the full count
+             * @throws RuntimeException
+             *
+             */
+            int countThings(int startIndex) {
+            }
+        }
+    '''
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
@@ -84,28 +107,14 @@ class JavadocEmptyLastLineRuleTest extends AbstractRuleTestCase<JavadocEmptyLast
 
     @Test
     void test_JavadocWithEmptyLastLines_Violations() {
-        final SOURCE = '''
-            /**
-             * Sample class
-             *
-             * @author Some Developer
-             *
-             */
-            class MyClass {
+        assertViolations(SOURCE_WITH_VIOLATIONS,
+                [lineNumber:6, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'],
+                [lineNumber:17, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'])
+    }
 
-                /**
-                 * Return the calculated count of some stuff,
-                 * starting with the specified startIndex.
-                 *
-                 * @param startIndex - the starting index
-                 * @return the full count
-                 * @throws RuntimeException
-                 *
-                 */
-                int countThings(int startIndex) {
-                }
-            }
-        '''
+    @Test
+    void test_JavadocWithEmptyLastLines_WindowsLineEndings_Violations() {
+        final SOURCE = SOURCE_WITH_VIOLATIONS.replace('\n', '\r\n')
         assertViolations(SOURCE,
                 [lineNumber:6, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'],
                 [lineNumber:17, sourceLineText:' * ', messageText:'The last line of the javadoc is empty'])

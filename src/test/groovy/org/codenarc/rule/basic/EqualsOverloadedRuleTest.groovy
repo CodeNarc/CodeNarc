@@ -24,7 +24,6 @@ import org.junit.Test
  * @author Hamlet D'Arcy,
  * @author Artur Gajowy
  * @author Marcin Smialek
- *
  */
 class EqualsOverloadedRuleTest extends AbstractRuleTestCase<EqualsOverloadedRule> {
 

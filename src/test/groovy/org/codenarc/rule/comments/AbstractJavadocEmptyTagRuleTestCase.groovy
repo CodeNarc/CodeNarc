@@ -25,6 +25,28 @@ import org.junit.Test
  */
 abstract class AbstractJavadocEmptyTagRuleTestCase<T extends AbstractJavadocEmptyTagRule> extends AbstractRuleTestCase<T> {
 
+    protected String sourceWithViolations = """
+        class MyClass {
+            /**
+             * Return the calculated count of some stuff.
+             *
+             * @param startIndex - the starting index
+             * ${getTag()}
+             * @throws RuntimeException
+             *
+             * NOTE: Only the first occurrence of an empty @return tag is found.
+             *       So the following line is not flagged as a violation!!!
+             * ${getTag()}
+             */
+            int countThings(int startIndex) { }
+
+            /**
+             *${getTag()}
+             */
+            String otherMethod() { }
+        }
+        """
+
     protected abstract String getTag()
 
     protected String getRuleName() {
@@ -85,27 +107,14 @@ abstract class AbstractJavadocEmptyTagRuleTestCase<T extends AbstractJavadocEmpt
 
     @Test
     void test_JavadocWithEmptyTag_Violations() {
-        final SOURCE = """
-            class MyClass {
-                /**
-                 * Return the calculated count of some stuff.
-                 *
-                 * @param startIndex - the starting index
-                 * ${getTag()}
-                 * @throws RuntimeException
-                 *
-                 * NOTE: Only the first occurrence of an empty @return tag is found.
-                 *       So the following line is not flagged as a violation!!!
-                 * ${getTag()}
-                 */
-                int countThings(int startIndex) { }
+        assertViolations(sourceWithViolations,
+                [lineNumber:7, sourceLineText:"* ${getTag()}", messageText:getViolationMessage()],
+                [lineNumber:17, sourceLineText:"${getTag()}", messageText:getViolationMessage()])
+    }
 
-                /**
-                 *${getTag()}
-                 */
-                String otherMethod() { }
-            }
-        """
+    @Test
+    void test_JavadocWithEmptyTag_WindowsLineEndings_Violations() {
+        final SOURCE = sourceWithViolations.replace('\n', '\r\n')
         assertViolations(SOURCE,
                 [lineNumber:7, sourceLineText:"* ${getTag()}", messageText:getViolationMessage()],
                 [lineNumber:17, sourceLineText:"${getTag()}", messageText:getViolationMessage()])

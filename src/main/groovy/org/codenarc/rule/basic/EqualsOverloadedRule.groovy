@@ -26,7 +26,6 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy,
  * @author Artur Gajowy
  * @author Marcin Smialek
- *
  */
 class EqualsOverloadedRule extends AbstractAstVisitorRule {
     String name = 'EqualsOverloaded'

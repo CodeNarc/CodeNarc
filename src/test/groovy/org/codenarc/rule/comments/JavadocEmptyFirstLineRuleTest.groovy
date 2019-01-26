@@ -26,6 +26,29 @@ import org.junit.Test
 @SuppressWarnings(['JavadocEmptyFirstLine', 'JavadocEmptyLastLine'])
 class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFirstLineRule> {
 
+    private static final String SOURCE_WITH_VIOLATIONS = '''
+        /**
+         *
+         * Sample class
+         *
+         * @author Some Developer
+         */
+        class MyClass {
+
+            /**
+             *
+             * Return the calculated count of some stuff,
+             * starting with the specified startIndex.
+             *
+             * @param startIndex - the starting index
+             * @return the full count
+             * @throws RuntimeException
+             */
+            int countThings(int startIndex) {
+            }
+        }
+        '''
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
@@ -86,31 +109,17 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
 
     @Test
     void test_JavadocWithEmptyFirstLines_Violations() {
-        final SOURCE = '''
-            /**
-             *
-             * Sample class
-             *
-             * @author Some Developer
-             */
-            class MyClass {
-
-                /**
-                 *
-                 * Return the calculated count of some stuff,
-                 * starting with the specified startIndex.
-                 *
-                 * @param startIndex - the starting index
-                 * @return the full count
-                 * @throws RuntimeException
-                 */
-                int countThings(int startIndex) {
-                }
-            }
-        '''
-        assertViolations(SOURCE,
+        assertViolations(SOURCE_WITH_VIOLATIONS,
             [lineNumber:2, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'],
             [lineNumber:10, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'])
+    }
+
+    @Test
+    void test_JavadocWithEmptyFirstLines_WindowsLineEndings_Violations() {
+        final SOURCE = SOURCE_WITH_VIOLATIONS.replace('\n', '\r\n')
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'],
+                [lineNumber:10, sourceLineText:'/**', messageText:'The first line of the javadoc is empty'])
     }
 
     @Override

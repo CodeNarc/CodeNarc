@@ -27,7 +27,7 @@ class CommentsUtil {
     protected static final String RELUCTANT =  '?'
 
     protected static final String JAVADOC_START =  /\/\*\*\s*\n/
-    protected static final String JAVADOC_ANY_LINES =  /(\s*\*.*\n)*/ + RELUCTANT
+    protected static final String JAVADOC_ANY_LINES =  /(\s*\*.*\v)*/ + RELUCTANT       // Use \v to match Windows or Unix line endings
     protected static final String JAVADOC_EMPTY_LINE =  /\s*\*\s*\n/
     protected static final String JAVADOC_END =  /\s*\*\//
     protected static final String JAVADOC_LINE_PREFIX =  /\s*\*\s*/

@@ -23,7 +23,6 @@ import org.junit.Test
  *
  * @author Chris Mair
  * @author Hamlet D'Arcy
- *
   */
 class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {
 
