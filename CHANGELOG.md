@@ -1,6 +1,6 @@
 # CodeNarc Change Log
 
-TODO: Version 1.3
+Version 1.3  (Jan 2019)
 --------------------------------------
 New Rules (and new "comments" ruleset)
  - #359: **ClassEndsWithBlankLine** rule (formatting) - Check whether the class ends with a blank line. (David Ausín)
