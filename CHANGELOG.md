@@ -1,5 +1,10 @@
 # CodeNarc Change Log
 
+Version 1.4
+--------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+- #402: **ClosureAsLastMethodParameter** rule: fix typo in violation message. (Marcin Erdmann)
+
 Version 1.3  (Jan 2019)
 --------------------------------------
 New Rules (and new "comments" ruleset)
