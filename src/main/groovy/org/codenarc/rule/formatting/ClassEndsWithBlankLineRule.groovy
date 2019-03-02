@@ -54,6 +54,8 @@ class ClassEndsWithBlankLineAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitClassComplete(ClassNode classNode) {
+        if (classNode.lineNumber == -1) { return }
+
         if (isSingleLineClassViolation() && isSingleLineClass(classNode)) { return }
 
         if (rule.blankLineRequired) {
