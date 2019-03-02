@@ -506,6 +506,14 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   A getter is defined as a method call that matches <<<get[A-Z]>>> but not <<<getClass()>>> or
   <<<get[A-Z][A-Z]>>> such as <<<getURL()>>>. Getters do not take method arguments.
 
+  *---------------------+----------------------------------------------------------------+------------------------+
+  | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+  *---------------------+----------------------------------------------------------------+------------------------+
+  | ignoreMethodNames   | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
+  |                     | should be ignored (i.e., that should not cause a rule          |                        |
+  |                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+  *---------------------+----------------------------------------------------------------+------------------------+
+
   These bits of code produce violations:
 
 -------------------------------------------------------------------------------

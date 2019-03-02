@@ -193,6 +193,15 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testIgnoredMethodName() {
+        final SOURCE = '''
+            optional.getOrNull()
+        '''
+        rule.ignoreMethodNames = 'getOrNull'
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected UnnecessaryGetterRule createRule() {
         new UnnecessaryGetterRule()
