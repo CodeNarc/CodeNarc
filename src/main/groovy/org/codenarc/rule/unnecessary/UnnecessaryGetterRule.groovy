@@ -21,11 +21,16 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
+import org.codenarc.util.WildcardPattern
 
 /**
  * Checks for explicit calls to getter/accessor methods which can, for the most part, be replaced by property access.
  * A getter is defined as a method call that matches get[A-Z] but not getClass() or get[A-Z][A-Z] such as getURL().
  * Getters do not take method arguments.
+ * <p/>
+ * The <code>ignoreMethodNames</code> property optionally specifies one or more
+ * (comma-separated) method names that should be ignored (i.e., that should not cause a
+ * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
@@ -35,6 +40,7 @@ class UnnecessaryGetterRule extends AbstractAstVisitorRule {
     String name = 'UnnecessaryGetter'
     int priority = 3
     Class astVisitorClass = UnnecessaryGetterAstVisitor
+    String ignoreMethodNames
 
 }
 
@@ -73,6 +79,10 @@ class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
         }
         String name = call.method.value
         if (name == 'getClass' || name.length() < 4) {
+            return
+        }
+
+        if (new WildcardPattern(rule.ignoreMethodNames, false).matches(name)) {
             return
         }
 
