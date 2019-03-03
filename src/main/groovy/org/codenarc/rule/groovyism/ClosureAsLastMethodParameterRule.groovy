@@ -55,7 +55,7 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
                     call.lastColumnNumber > lastArgument.lastColumnNumber)
 
             if (isViolation) {
-                addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure an can appear outside the parenthesis")
+                addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure and can appear outside the parenthesis")
             }
         }
     }

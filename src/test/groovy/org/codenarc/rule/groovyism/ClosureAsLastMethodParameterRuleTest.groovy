@@ -85,7 +85,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
         final SOURCE = '''
             [1,2,3].each({ println it })
         '''
-        assertSingleViolation(SOURCE, 2, '[1,2,3].each({ println it })', "The last parameter to the 'each' method call is a closure an can appear outside the parenthesis")
+        assertSingleViolation(SOURCE, 2, '[1,2,3].each({ println it })', "The last parameter to the 'each' method call is a closure and can appear outside the parenthesis")
     }
 
     @Test
@@ -198,7 +198,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
                (println(funds.clear('clearing', { it.fundCode }) ))
             }
           '''
-        assertSingleViolation(SOURCE, 28, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure an can appear outside the parenthesis")
+        assertSingleViolation(SOURCE, 28, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure and can appear outside the parenthesis")
     }
 
     @Test
