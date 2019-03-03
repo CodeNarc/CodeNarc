@@ -3,7 +3,9 @@
 Version 1.4
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
-- #402: **ClosureAsLastMethodParameter** rule: fix typo in violation message. (Marcin Erdmann)
+ - #402: **ClosureAsLastMethodParameter** rule: fix typo in violation message. (Marcin Erdmann)
+ - #397: **ClassStartsWithBlankLine** and **ClassEndsWithBlankLine** rules - Fix failure when analysing code which consists of only a semicolon. (Marcin Erdmann) 
+ - #405: **UnnecessaryGetter** rule: Add `ignoreMethodNames` property. (Marcin Erdmann)
 
 Version 1.3  (Jan 2019)
 --------------------------------------

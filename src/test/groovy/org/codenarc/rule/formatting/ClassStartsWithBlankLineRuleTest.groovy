@@ -559,6 +559,13 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         assertSingleViolation(SOURCE, 4, '')
     }
 
+    @Test
+    void testNoViolationsForCodeThatOnlyContainsASemicolon() {
+        final String SOURCE = ';'
+
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected ClassStartsWithBlankLineRule createRule() {
         new ClassStartsWithBlankLineRule()
