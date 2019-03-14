@@ -863,6 +863,14 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void test_GString_IfStatement() {
+        final SOURCE = '''
+            |"${if (true) 'content' else ''}"
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected IndentationRule createRule() {
         new IndentationRule()

@@ -170,7 +170,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         return call.method instanceof ConstantExpression &&
                 call.lineNumber != -1 &&
                 call.lineNumber != call.method.lineNumber &&
-                sourceLineTrimmed(call.method).startsWith('.')
+                sourceLineTrimmed(call.method)?.startsWith('.')
     }
 
     @Override
