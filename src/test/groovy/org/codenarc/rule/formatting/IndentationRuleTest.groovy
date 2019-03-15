@@ -827,7 +827,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
             |    cacheDir + hash + File.separator + 'output/jars/classes.jar\'
             |}).asFileTree
-            '''.stripMargin()
+        '''.stripMargin()
         assertNoViolations(SOURCE)
     }
 
@@ -859,7 +859,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        callbackFunction()
             |    }
             |}
-            '''.stripMargin()
+        '''.stripMargin()
         assertNoViolations(SOURCE)
     }
 
