@@ -1,11 +1,20 @@
 # CodeNarc Change Log
 
-Version 1.4
+TODO: Version 1.4   (??? 2019)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #402: **ClosureAsLastMethodParameter** rule: fix typo in violation message. (Marcin Erdmann)
  - #397: **ClassStartsWithBlankLine** and **ClassEndsWithBlankLine** rules - Fix failure when analysing code which consists of only a semicolon. (Marcin Erdmann) 
  - #405: **UnnecessaryGetter** rule: Add `ignoreMethodNames` property. (Marcin Erdmann)
+ - #408: Fix a typo in **ClosureAsLastMethodParameter** rule's violation message. Fixes #402. (Marcin Erdmann)
+ - #410: **IndentationRule**: Fix NPE on GStrings containing an if-statement. (debanne)
+
+Tests and Documentation
+ - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)
+
+Framework and Infrastructure
+ - #404: Update Maven repository URL to use HTTPS. Fixes #403. (Jenn Strater)
+
 
 Version 1.3  (Jan 2019)
 --------------------------------------
