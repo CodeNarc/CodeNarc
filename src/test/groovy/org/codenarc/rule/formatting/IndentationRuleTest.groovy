@@ -774,6 +774,20 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_Array_ClosureAsParam() {
+        final SOURCE = '''
+            |[
+            |    a {
+            |        b
+            |    }
+            |]
+        '''.stripMargin()
+        // TODO: Fix the code to have no violation
+        assertViolations(SOURCE,
+                [lineNumber:4, sourceLineText:'b', messageText:'The statement on line 4 in class None is at the incorrect indent level: Expected column 5 but was 9'])
+    }
+
+    @Test
     void test_Script() {
         final SOURCE = '''
             |println 1234
