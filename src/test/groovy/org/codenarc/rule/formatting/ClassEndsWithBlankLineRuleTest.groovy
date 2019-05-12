@@ -563,6 +563,23 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testNoViolationsForScriptClass() {
+        final String SOURCE = '''
+            job('test-job') {
+                triggers { // fails here, no new line above
+                    cron('* * * * *')
+                }
+            
+                steps {
+                    groovyScriptFile('my_script.groovy')
+                }
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected ClassEndsWithBlankLineRule createRule() {
         new ClassEndsWithBlankLineRule()

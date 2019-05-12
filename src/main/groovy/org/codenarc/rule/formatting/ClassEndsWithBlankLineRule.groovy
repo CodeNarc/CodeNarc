@@ -25,16 +25,23 @@ import org.codenarc.util.AstUtil
 
 /**
  * Check whether the class ends with a blank line. By default, it enforces that there must be a blank line before
- * the closing class brace, except if the class is empty and is written in a single line. A blank line is defined as
- * any line that does not contain any visible characters.
+ * the closing class brace, except:
+ *   <ul>
+ *     <li>If the class is synthetic (generated)</li>
+ *     <li>If the class is empty and is written in a single line</li>
+ *     <li>If the class is a Script class</li>
+ *   <ul>
+ * <p>
+ * A blank line is defined as any line that does not contain any visible characters.
+ * <p>
  * This rule can be configured with the following properties:
- * <ul>
- *  <li><i>ignoreSingleLineClasses</i>: a boolean property to forbid single line classes.
- *  If it is false, then single line classes are considered a violation. Default value is true</li>
- *  <li><i>blankLineRequired</i>: a boolean property to define if there may be a blank line before the closing
- *  class brace. If it is false, the last line before the brace must not be blank. Otherwise, it must be blank. Default
- *  value is true</li>
- *<ul>
+ *  <ul>
+ *    <li><i>ignoreSingleLineClasses</i>: a boolean property to forbid single line classes.
+ *      If it is false, then single line classes are considered a violation. Default value is true</li>
+ *    <li><i>blankLineRequired</i>: a boolean property to define if there may be a blank line before the closing
+ *      class brace. If it is false, the last line before the brace must not be blank. Otherwise, it must be blank. Default
+ *      value is true</li>
+ *  <ul>
  *
  * @author David Ausín
  */
@@ -55,6 +62,8 @@ class ClassEndsWithBlankLineAstVisitor extends AbstractAstVisitor {
     @Override
     protected void visitClassComplete(ClassNode classNode) {
         if (classNode.lineNumber == -1) { return }
+
+        if (classNode.isScript()) { return }
 
         if (isSingleLineClassViolation() && isSingleLineClass(classNode)) { return }
 

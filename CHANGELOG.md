@@ -8,6 +8,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #405: **UnnecessaryGetter** rule: Add `ignoreMethodNames` property. (Marcin Erdmann)
  - #408: Fix a typo in **ClosureAsLastMethodParameter** rule's violation message. Fixes #402. (Marcin Erdmann)
  - #410: **IndentationRule**: Fix NPE on GStrings containing an if-statement. (debanne)
+ - #398: **ClassStartsWithBlankLine** and **ClassEndsWithBlankLine** rules: Ignore Script classes.
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)
