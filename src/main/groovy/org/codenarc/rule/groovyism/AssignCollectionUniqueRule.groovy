@@ -15,6 +15,8 @@
  */
 package org.codenarc.rule.groovyism
 
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -24,19 +26,23 @@ import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.AstUtil
 
 /**
- * the unique method mutates the original list. If a user is using the result of this method then they probably don't understand this
+ * The unique() method mutates the original list. If a user is using the result of this method then they probably don't understand this.
  *
  * @author Nick Larson
  * @author Juan Vazquez
  * @author Jon DeJong
+ * @author Chris Mair
  */
 class AssignCollectionUniqueRule extends AbstractAstVisitorRule {
+
     String name = 'AssignCollectionUnique'
     int priority = 2
     Class astVisitorClass = AssignCollectionUniqueAstVisitor
+
 }
 
 class AssignCollectionUniqueAstVisitor extends AbstractAstVisitor {
+
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
         Expression right = expression.rightExpression
@@ -49,12 +55,25 @@ class AssignCollectionUniqueAstVisitor extends AbstractAstVisitor {
         super.visitDeclarationExpression expression
     }
 
-    private static boolean isChainedUnique(Expression right) {
-        if (AstUtil.isMethodCall(right, 'unique', 0..1)) {
+    private boolean isChainedUnique(Expression right) {
+        if (isMatchingUniqueCall(right)) {
             if (right.objectExpression instanceof VariableExpression) {
                 return true
             }
         }
         false
     }
+
+    private boolean isMatchingUniqueCall(Expression right) {
+        final String UNIQUE = 'unique'
+        return AstUtil.isMethodCall(right, UNIQUE, 0) ||
+                (AstUtil.isMethodCall(right, UNIQUE, 1) && right.arguments.expressions[0] instanceof ClosureExpression) ||
+                (AstUtil.isMethodCall(right, UNIQUE, 1) && !isFalseConstant(right.arguments.expressions[0])) ||
+                (AstUtil.isMethodCall(right, UNIQUE, 2) && !isFalseConstant(right.arguments.expressions[0]))
+    }
+
+    private boolean isFalseConstant(Expression expression) {
+        return expression instanceof ConstantExpression && expression.falseExpression
+    }
+
 }

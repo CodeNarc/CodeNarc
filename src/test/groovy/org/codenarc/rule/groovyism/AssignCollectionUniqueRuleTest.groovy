@@ -24,6 +24,7 @@ import org.junit.Test
  * @author Nick Larson
  * @author Juan Vazquez
  * @author Jon DeJong
+ * @author Chris Mair
  */
 class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase<AssignCollectionUniqueRule> {
 
@@ -34,12 +35,20 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase<AssignCollecti
     }
 
     @Test
-    void testSuccessScenario() {
+    void test_unique_NotAssigned_NoViolations() {
         final SOURCE = '''
-            def allPaths = resultsMap.values().unique()
             myList.unique()
+            myList.unique(true)
             myList.unique() { it }
             myList.unique(2) { it }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_unique_Assignment_NotTheFirstMethodCall_NoViolations() {
+        final SOURCE = '''
+            def allPaths = resultsMap.values().unique()
             myList.findAll{ it < 50 }.unique()
             def w = getMyList().unique().findAll { x < 1 }
             def x = myList.foo.unique().findAll { x < 1 }
@@ -49,7 +58,7 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase<AssignCollecti
     }
 
     @Test
-    void testNoArgs() {
+    void test_unique_NoArgs_Assignment_Violation() {
         final SOURCE = '''
             def x = myList.unique()
         '''
@@ -57,19 +66,72 @@ class AssignCollectionUniqueRuleTest extends AbstractRuleTestCase<AssignCollecti
     }
 
     @Test
-    void testOneArgs() {
+    void test_unique_OneArg_Closure_Assignment_Violation() {
         final SOURCE = '''
             def x = myList.unique() { it }
+            def y = myList.unique { it % 2 }
         '''
-        assertSingleViolation(SOURCE, 2, 'def x = myList.unique()')
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'def x = myList.unique()'],
+                [lineNumber:3, sourceLineText:'def y = myList.unique { it % 2 }'])
     }
 
     @Test
-    void testChaining() {
+    void test_unique_OneArg_Comparator_Assignment_Violation() {
+        final SOURCE = '''
+            def comparator = { o1, o2 -> o1 <=> o2 }
+            def x = myList.unique(comparator)
+        '''
+        assertSingleViolation(SOURCE, 3, 'def x = myList.unique(comparator)')
+    }
+
+    @Test
+    void test_unique_OneArg_false_Assignment_NoViolations() {
+        final SOURCE = '''
+            def x = myList.unique(false)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_unique_OneArg_true_Assignment_Violation() {
+        final SOURCE = '''
+            def x = myList.unique(true)
+        '''
+        assertSingleViolation(SOURCE, 2, 'def x = myList.unique(true)')
+    }
+
+    @Test
+    void test_unique_TwoArgs_FirstArgIsTrue_Assignment_Violation() {
+        final SOURCE = '''
+            def comparator = { o1, o2 -> o1 <=> o2 }
+            def x = myList.unique(true, comparator)
+            def y = myList.unique(true) { it }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'def x = myList.unique(true, comparator)'],
+                [lineNumber:4, sourceLineText:'def y = myList.unique(true) { it }'])
+    }
+
+    @Test
+    void test_unique_TwoArgs_FirstArgIsFalse_Assignment_NoViolations() {
+        final SOURCE = '''
+            def comparator = { o1, o2 -> o1 <=> o2 }
+            def x = myList.unique(false, comparator)
+            def y = myList.unique(false) { it }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_unique_Chaining_Assignment_Violation() {
         final SOURCE = '''
             def x = myList.unique().findAll { x < 1 }
+            def y = myList.unique(true).findAll { y < 1 }
         '''
-        assertSingleViolation(SOURCE, 2, 'def x = myList.unique().findAll { x < 1 }')
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'def x = myList.unique().findAll { x < 1 }'],
+                [lineNumber:3, sourceLineText:'def y = myList.unique(true).findAll { y < 1 }'])
     }
 
     @Override
