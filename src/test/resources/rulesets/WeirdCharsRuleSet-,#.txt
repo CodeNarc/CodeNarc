@@ -1,0 +1,10 @@
+// Example Groovy RuleSet for testing
+
+import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
+
+ruleset {
+    description 'A Groovy RuleSet whose filename contains weird, problematic characters'
+
+    EmptyClass
+
+}

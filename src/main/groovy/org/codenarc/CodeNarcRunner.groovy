@@ -53,7 +53,11 @@ class CodeNarcRunner {
     /**
      * The main entry point for this class. Runs CodeNarc and returns the results. Processing steps include:
      * <ol>
-     *   <li>Parse the <code>ruleSetFiles</code> property to create a RuleSet.</li>
+     *   <li>Parse the <code>ruleSetFiles</code> property to create a RuleSet. Each path may be optionally prefixed by
+     *     any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
+     *     or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
+     *     any problematic characters, such as comma (',') or hash ('#'). See {@link URLEncoder#encode(java.lang.String, java.lang.String)}.
+     *   </li>
      *   <li>Configure the RuleSet from the "codenarc.properties" file, if that file is found on the classpath.</li>
      *   <li>Apply the configured <code>SourceAnalyzer</code>.</li>
      *   <li>Apply the configured <code>ResultsProcessor</code>.</li>

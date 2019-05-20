@@ -35,6 +35,13 @@ CodeNarc - Run From Command-Line
 |                                 | to the classpath. But these paths may be optionally prefixed by any  |                                      |
 |                                 | of the valid java.net.URL prefixes, such as "file:" (to load from a  |                                      |
 |                                 | relative or absolute path on the filesystem), or "http:".            |                                      |
+|                                 | If it is a URL, its path may be optionally URL-encoded. That         |                                      |
+|                                 | can be useful if the path contains any problematic characters,       |                                      |
+|                                 | such as comma (',') or hash ('#'). For instance:                     |                                      |
+|                                 |    "<file:src/test/resources/RuleSet-,#.txt>"                        |                                      |
+|                                 | can be encoded as:                                                   |                                      |
+|                                 |    "<file:src%2Ftest%2Fresources%2FRuleSet-%2C%23.txt>"              |                                      |
+|                                 | See <<<URLEncoder#encode(java.lang.String, java.lang.String).>>>     |                                      |
 |                                 | Defaults to "rulesets/basic.xml".                                    |                                      |
 *---------------------------------+----------------------------------------------------------------------+--------------------------------------+
 | -report=<REPORT-TYPE[:FILENAME]>| The definition of the report to produce. The option value is of      | -report=html                         |

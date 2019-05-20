@@ -38,9 +38,12 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     private static final GROOVY_RULESET1 = 'rulesets/GroovyRuleSet1.txt'
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'
     private static final RULESET_FILES_WITH_SPACES = 'rulesets/RuleSet1.xml , rulesets/GroovyRuleSet2.txt,  rulesets/RuleSet3.xml  '
+    private static final RULESET_AS_URL = 'file:src/test/resources/rulesets/RuleSet1.xml'
+    private static final RULESET_URL_WITH_WEIRD_CHARS_ENCODED = 'file:' + encode('src/test/resources/rulesets/WeirdCharsRuleSet-,#.txt')
     private static final REPORT_FILE = 'CodeNarcTest-Report.html'
     private static final RESULTS = new FileResults('path', [])
     private static final SOURCE_DIRS = ['abc']
+    private static final ENCODING = 'UTF-8'
 
     private CodeNarcRunner codeNarcRunner
 
@@ -130,6 +133,27 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     }
 
     @Test
+    void testCreateRuleSet_RuleSetAsUrl() {
+        codeNarcRunner.ruleSetFiles = RULESET_AS_URL
+        def ruleSet = codeNarcRunner.createRuleSet()
+        assert ruleSet.rules*.name == ['TestPath']
+    }
+
+    @Test
+    void testCreateRuleSet_WeirdCharsRuleSetUrl_Encoded() {
+        codeNarcRunner.ruleSetFiles = RULESET_URL_WITH_WEIRD_CHARS_ENCODED
+        def ruleSet = codeNarcRunner.createRuleSet()
+        assert ruleSet.rules*.name == ['EmptyClass']
+    }
+
+    @Test
+    void testCreateRuleSet_WeirdCharsRuleSetUrl_Encoded_MultipleRuleSets() {
+        codeNarcRunner.ruleSetFiles = RULESET_URL_WITH_WEIRD_CHARS_ENCODED + ', ' + XML_RULESET1
+        def ruleSet = codeNarcRunner.createRuleSet()
+        assert ruleSet.rules*.name == ['EmptyClass', 'TestPath']
+    }
+
+    @Test
     void testCreateRuleSet_RuleSetFileDoesNotExist() {
         codeNarcRunner.ruleSetFiles = 'rulesets/NoSuchRuleSet.txt'
         shouldFail(FileNotFoundException) { codeNarcRunner.createRuleSet() }
@@ -143,4 +167,9 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     void setUpCodeNarcRunnerTest() {
         codeNarcRunner = new CodeNarcRunner()
     }
+
+    private static String encode(String string) {
+        return URLEncoder.encode(string, ENCODING)
+    }
+
 }

@@ -10,6 +10,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #410: **IndentationRule**: Fix NPE on GStrings containing an if-statement. (debanne)
  - #398: **ClassStartsWithBlankLine** and **ClassEndsWithBlankLine** rules: Ignore Script classes.
  - #399: **AssignCollectionUnique** rule: Fix false positive for `unique(false)`, `unique(false, Comparator)` and `unique(false, Closure)`.
+ - #400: Update online documentation to reflect that ruleset file URLs can optionally be URL-encoded.
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)

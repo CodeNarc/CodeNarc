@@ -31,7 +31,11 @@ import org.codenarc.results.Results
  *   <li>basedir - The base directory for the source code to be analyzed. This is the root of the
  *          directory tree. Defaults to the current directory ('.').</li>
  *   <li>rulesetfiles - The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
- *          single file path, or multiple paths separated by commas. Defaults to "rulesets/basic.xml".</li>
+ *          single file path, or multiple paths separated by commas. Each path may be optionally prefixed by
+ *          any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
+ *          or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
+ *          any problematic characters, such as comma (',') or hash ('#'). See URLEncoder#encode(java.lang.String, java.lang.String).
+ *          Defaults to "rulesets/basic.xml".</li>
  *   <li>includes - The comma-separated list of Ant file patterns specifying files that must be included;
  *          all files are included when omitted.</li>
  *   <li>excludes - The comma-separated list of Ant file patterns specifying files that must be excluded;
@@ -66,8 +70,14 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         be excluded. No files are excluded when omitted.
     -rulesetfiles=<FILENAMES>
         The path to the Groovy or XML RuleSet definition files, relative to the classpath.
-        This can be a single file path, or multiple paths separated by commas.
-        Defaults to "rulesets/basic.xml"
+        This can be a single file path, or multiple paths separated by commas. Each path may be optionally prefixed by
+        any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
+        or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
+        any problematic characters, such as comma (',') or hash ('#'). For instance:
+            file:src/test/resources/RuleSet-,#.txt
+        can be encoded as:
+            file:src%2Ftest%2Fresources%2FRuleSet-%2C%23.txt
+        See URLEncoder#encode(java.lang.String, java.lang.String). Defaults to "rulesets/basic.xml"
     -maxPriority1Violations=<MAX>
         The maximum number of priority 1 violations allowed (int).
     -maxPriority2Violations=<MAX>
