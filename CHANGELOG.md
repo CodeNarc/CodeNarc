@@ -15,6 +15,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #399: **AssignCollectionUnique** rule: Fix false positive for `unique(false)`, `unique(false, Comparator)` and `unique(false, Closure)`.
  - #400: Update online documentation to reflect that ruleset file URLs can optionally be URL-encoded.
  - #415: **ClassStartsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
+ - #416: **ClassEndsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)

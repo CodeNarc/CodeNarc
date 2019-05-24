@@ -226,6 +226,9 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 | ignoreSingleLineClasses    | a boolean property to forbid single line classes.If it is      |                        |
 |                            |  false,then single line classes are considered a violation.    | <<<true>>>             |
 *----------------------------+----------------------------------------------------------------+------------------------+
+| ignoreInnerClasses         | A boolean property to ignore inner classes. If it is *false*   | <<<false>>>            |
+|                            | then inner classes can cause violations.                       |                        |
+*----------------------------+----------------------------------------------------------------+------------------------+
 | blankLineRequired          | a boolean property to define if there may be a blank line      | <<<true>>>             |
 |                            | before the closing class brace. If it is false, the last line  |                        |
 |                            | before the brace must not be blank. Otherwise, it must be      |                        |

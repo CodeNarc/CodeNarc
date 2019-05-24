@@ -31,6 +31,7 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
         assert rule.priority == 3
         assert rule.name == 'ClassEndsWithBlankLine'
         assert rule.ignoreSingleLineClasses == true
+        assert rule.ignoreInnerClasses == false
         assert rule.blankLineRequired == true
     }
 
@@ -577,6 +578,29 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
             }
         '''
 
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_InnerClasses_ignoreInnerClasses_True_NoViolations() {
+        final String SOURCE = '''
+            class Foo {
+                // Static inner class
+                private static class StaticInnerClass {
+                }
+
+                // Inner class
+                private class InnerClass {
+                }
+
+                // Anonymous inner class            
+                Bar a = new Bar() {
+                }
+
+            }            
+        '''
+
+        rule.ignoreInnerClasses = true
         assertNoViolations(SOURCE)
     }
 
