@@ -13,6 +13,7 @@ ruleset {
 
     ruleset('rulesets/convention.xml') {
         exclude 'NoDef'
+        exclude 'CompileStatic'
         exclude 'NoJavaUtilDate'
         exclude 'PublicMethodsBeforeNonPublicMethods'
         exclude 'StaticMethodsBeforeInstanceMethods'
