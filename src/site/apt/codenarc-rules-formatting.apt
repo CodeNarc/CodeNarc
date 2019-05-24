@@ -297,10 +297,13 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 *----------------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>               | <<Description>>                                                | <<Default Value>>      |
 *----------------------------+----------------------------------------------------------------+------------------------+
-| ignoreSingleLineClasses    | a boolean property to forbid single line classes.If it is      |                        |
-|                            |  false,then single line classes are considered a violation.    | <<<true>>>             |
+| ignoreSingleLineClasses    | A boolean property to ignore single line classes. If it is     | <<<true>>>             |
+|                            |  false,then single line classes are considered a violation.    |                        |
 *----------------------------+----------------------------------------------------------------+------------------------+
-| blankLineRequired          | a boolean property to define if there may be a blank line      | <<<true>>>             |
+| ignoreInnerClasses         | A boolean property to ignore inner classes. If it is *false*   | <<<false>>>            |
+|                            | then inner classes can cause violations.                       |                        |
+*----------------------------+----------------------------------------------------------------+------------------------+
+| blankLineRequired          | A boolean property to define if there may be a blank line      | <<<true>>>             |
 |                            | after the opening class brace. If it is false, the first       |                        |
 |                            | content after the brace must not be a blank line. Otherwise,   |                        |
 |                            | it must be a blank line.                                       |                        |

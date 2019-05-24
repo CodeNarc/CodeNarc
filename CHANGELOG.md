@@ -2,6 +2,9 @@
 
 TODO: Version 1.4   (??? 2019)
 --------------------------------------
+New Rules
+ - #418: New **CompileStatic** convention rule enforces all classes are annotated with @CompileStatic, @GrailsCompileStatic or @CompileDynamic annotations. (Sudhir Nimavat)
+
 Updated/Enhanced Rules and Bug Fixes
  - #402: **ClosureAsLastMethodParameter** rule: fix typo in violation message. (Marcin Erdmann)
  - #397: **ClassStartsWithBlankLine** and **ClassEndsWithBlankLine** rules - Fix failure when analysing code which consists of only a semicolon. (Marcin Erdmann) 
@@ -11,6 +14,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #398: **ClassStartsWithBlankLine** and **ClassEndsWithBlankLine** rules: Ignore Script classes.
  - #399: **AssignCollectionUnique** rule: Fix false positive for `unique(false)`, `unique(false, Comparator)` and `unique(false, Closure)`.
  - #400: Update online documentation to reflect that ruleset file URLs can optionally be URL-encoded.
+ - #415: **ClassStartsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)

@@ -35,8 +35,10 @@ import org.codenarc.util.AstUtil
  * <p>
  * This rule can be configured with the following properties:
  * <ul>
- *   <li><i>ignoreSingleLineClasses</i>: a boolean property to forbid single line classes.
- *     If it is false, then single line classes are considered a violation. Default value is true</li>
+ *   <li><i>ignoreSingleLineClasses</i>: a boolean property to ignore single line classes.
+ *     If it is false, then single line classes are considered a violation. Default value is true.</li>
+ *   <li><i>ignoreInnerClasses</i>: a boolean property to ignore inner classes.
+ *     If it is false, then inner classes can cause violations. Default value is false.</li>
  *   <li><i>blankLineRequired</i>: a boolean property to define if there may be a blank line after the opening class
  *     brace. If it is false, the first content after the brace must not be a blank line. Otherwise, it must be a blank
  *     line. Default value is true</li>
@@ -50,6 +52,7 @@ class ClassStartsWithBlankLineRule extends AbstractAstVisitorRule {
     int priority = 3
     Class astVisitorClass = ClassStartsWithBlankLineAstVisitor
     boolean ignoreSingleLineClasses = true
+    boolean ignoreInnerClasses = false
     boolean blankLineRequired = true
 }
 
@@ -62,6 +65,8 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
         if (classNode.lineNumber == -1) { return }
 
         if (classNode.isScript()) { return }
+
+        if (classNode.outerClass && rule.ignoreInnerClasses) { return }
 
         if (isSingleLineClassViolation() && isSingleLineClass(classNode)) { return }
 
