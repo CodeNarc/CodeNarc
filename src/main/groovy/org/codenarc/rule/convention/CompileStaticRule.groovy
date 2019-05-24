@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package org.codenarc.rule.convention
 
-import groovy.transform.CompileStatic
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
@@ -28,14 +27,15 @@ import org.codenarc.rule.AbstractAstVisitorRule
  *
  * @Author Sudhir Nimavat
  */
-@CompileStatic
 class CompileStaticRule extends AbstractAstVisitorRule {
+
     int priority = 2
     String name = 'CompileStatic'
     Class astVisitorClass = CompileStaticlVisitor
 }
 
 class CompileStaticlVisitor extends AbstractAstVisitor {
+
     private static final String GRAILS_COMPILE_STATIC = 'GrailsCompileStatic'
     private static final String COMPILE_STATIC = 'CompileStatic'
     private static final String COMPILE_DYNAMIC = 'CompileDynamic'

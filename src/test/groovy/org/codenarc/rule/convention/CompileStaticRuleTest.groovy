@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ import org.junit.Test
  * @author Sudhir Nimavat
  */
 class CompileStaticRuleTest extends AbstractRuleTestCase {
-    boolean  skipTestThatUnrelatedCodeHasNoViolations = true
+
+    boolean skipTestThatUnrelatedCodeHasNoViolations = true
 
     @Override
     protected Rule createRule() {
@@ -89,6 +90,42 @@ class CompileStaticRuleTest extends AbstractRuleTestCase {
                 class AnInnerClass { }
             }
          '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testEnum() {
+        final SOURCE = 'enum Test { OPTION_ONE, OPTION_TWO  }'
+
+        assertSingleViolation(SOURCE) { Violation violation ->
+            violation.rule.priority == 2
+            violation.rule.name == 'CompileStatic'
+        }
+
+        SOURCE = '''
+            import groovy.transform.CompileStatic
+            @CompileStatic
+            enum Test { OPTION_ONE, OPTION_TWO  }
+          '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testAbstractClass() {
+        final SOURCE = 'abstract class Test { }'
+
+        assertSingleViolation(SOURCE) { Violation violation ->
+            violation.rule.priority == 2
+            violation.rule.name == 'CompileStatic'
+        }
+
+        SOURCE = '''
+            import groovy.transform.CompileStatic
+            @CompileStatic
+            abstract class Test { }
+          '''
+
         assertNoViolations(SOURCE)
     }
 }
