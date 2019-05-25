@@ -43,9 +43,9 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
             def sourceLine = sourceCode.lines[call.lineNumber - 1]
             def firstChar = sourceLine[call.columnNumber - 1]
 
-            // If a method call is surrounded by parentheses (possibly unnecessary), then the AST includes those in the
+            // If a method call is surrounded by parentheses (possibly unnecessary) OR braces, then the AST includes those in the
             // MethodCall start/end column indexes. In that case, it gets too complicated. Just bail.
-            if (firstChar == '(') {
+            if (firstChar == '(' || firstChar == '{') {
                 super.visitMethodCallExpression(call)
                 return
             }

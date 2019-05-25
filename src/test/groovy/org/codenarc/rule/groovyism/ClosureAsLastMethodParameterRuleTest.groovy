@@ -239,6 +239,14 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testClosureParameterWithinGString_NoViolations() {
+        final SOURCE = '''
+            new Exception("${it.orElseThrow { new AssertionError() }}")
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected ClosureAsLastMethodParameterRule createRule() {
         new ClosureAsLastMethodParameterRule()

@@ -16,6 +16,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #400: Update online documentation to reflect that ruleset file URLs can optionally be URL-encoded.
  - #415: **ClassStartsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
  - #416: **ClassEndsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
+ - #401: Fix false-negative in ClosureAsLastMethodParameter (method call within GString).
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)
