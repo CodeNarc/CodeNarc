@@ -77,6 +77,15 @@ Formatting Rules  ("<rulesets/formatting.xml>")
             println 'switch'
                                 // violation
     }
+
+    // Known Limitation: If a Closure is within another expression and the closing brace is not followed by anything else on the same line
+
+    def list = [
+        123,
+        { id ->
+                                // Known limitation: should be a violation, but is not
+        }
+    ]
 -------------------------------------------------------------------------------
 
 

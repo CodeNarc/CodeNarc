@@ -25,6 +25,8 @@ import org.junit.Test
  */
 class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsWithBlankLineRule> {
 
+    private static final String MESSAGE = 'Code block starts with a blank line.'
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
@@ -76,8 +78,7 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
             }
         '''
 
-        assertSingleViolation(SOURCE, 4, '',
-            '''Code block starts with a blank line.''')
+        assertSingleViolation(SOURCE, 4, '', MESSAGE)
     }
 
     @Test
@@ -93,8 +94,7 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
             }
         '''
 
-        assertSingleViolation(SOURCE, 5, '',
-            '''Code block starts with a blank line.''')
+        assertSingleViolation(SOURCE, 5, '', MESSAGE)
     }
 
     @Test
@@ -114,17 +114,8 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [
-                lineNumber: 5,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 8,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ]
-        )
+            [lineNumber: 5, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE])
     }
 
     @Test
@@ -141,7 +132,7 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertSingleViolation(SOURCE, 5, '',
-            '''Code block starts with a blank line.''')
+            MESSAGE)
     }
 
     @Test
@@ -164,17 +155,8 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [
-                lineNumber: 6,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 11,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ]
-        )
+            [lineNumber: 6, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 11, sourceLineText: '', messageText: MESSAGE])
     }
 
     @Test
@@ -220,62 +202,17 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [
-                lineNumber: 4,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 6,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 8,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 10,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 12,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 14,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 16,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 19,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 22,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 30,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 32,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ]
-        )
+            [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 6, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 10, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 12, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 14, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 16, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 19, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 22, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 30, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 32, sourceLineText: '', messageText: MESSAGE])
     }
 
     @Test
@@ -293,17 +230,29 @@ class BlockStartsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockStartsW
         '''
 
         assertViolations(SOURCE,
-            [
-                lineNumber: 4,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ],
-            [
-                lineNumber: 8,
-                sourceLineText: '',
-                messageText: '''Code block starts with a blank line.'''
-            ]
-        )
+            [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE])
+    }
+
+    @Test
+    void testMapCoercionBlocks() {
+        final SOURCE = '''
+            def myService = [
+            getCount:{ id, name ->
+
+                assert id == 99
+                assert name == 'Joe'
+                return 1
+            },
+            doStuff: {
+
+            }
+        ] as MyService
+        '''
+
+        assertViolations(SOURCE,
+                [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
+                [lineNumber: 10, sourceLineText: '', messageText: MESSAGE])
     }
 
     @Test

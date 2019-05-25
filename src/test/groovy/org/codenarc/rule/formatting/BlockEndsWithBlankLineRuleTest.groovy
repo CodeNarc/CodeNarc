@@ -25,6 +25,8 @@ import org.junit.Test
  */
 class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithBlankLineRule> {
 
+    private static final String MESSAGE = 'Code block ends with a blank line.'
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
@@ -80,8 +82,7 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
             }
         '''
 
-        assertSingleViolation(SOURCE, 5, '',
-            '''Code block ends with a blank line.''')
+        assertSingleViolation(SOURCE, 5, '', MESSAGE)
     }
 
     @Test
@@ -97,8 +98,7 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
             }
         '''
 
-        assertSingleViolation(SOURCE, 6, '',
-            '''Code block ends with a blank line.''')
+        assertSingleViolation(SOURCE, 6, '', MESSAGE)
     }
 
     @Test
@@ -118,17 +118,8 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
         '''
 
         assertViolations(SOURCE,
-            [
-                lineNumber: 6,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 9,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ]
-        )
+            [lineNumber: 6, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 9, sourceLineText: '', messageText: MESSAGE])
     }
 
     @Test
@@ -144,8 +135,7 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
             }
         '''
 
-        assertSingleViolation(SOURCE, 6, '',
-            '''Code block ends with a blank line.''')
+        assertSingleViolation(SOURCE, 6, '', MESSAGE)
     }
 
     @Test
@@ -191,62 +181,17 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
         '''
 
         assertViolations(SOURCE,
-            [
-                lineNumber: 11,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 14,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 17,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 19,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 21,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 23,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 25,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 27,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 32,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 34,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 36,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ]
-        )
+            [lineNumber: 11, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 14, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 17, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 19, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 21, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 23, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 25, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 27, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 32, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 34, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 36, sourceLineText: '', messageText: MESSAGE])
     }
 
     @Test
@@ -264,17 +209,77 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
         '''
 
         assertViolations(SOURCE,
-            [
-                lineNumber: 4,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
-            ],
-            [
-                lineNumber: 8,
-                sourceLineText: '',
-                messageText: '''Code block ends with a blank line.'''
+            [lineNumber: 4, sourceLineText: '', messageText: MESSAGE],
+            [lineNumber: 8, sourceLineText: '', messageText: MESSAGE])
+    }
+
+    @Test
+    void testClosures_Violations() {
+        final SOURCE = '''
+            def myService = [
+                getCount:{ id, name ->
+                    assert id == 99
+                    assert name == 'Joe'
+                    return 1
+
+                },
+                doStuff:{
+
+                },
+                doOtherStuff:{ id ->
+
+                }] as MyService
+
+            def closure1 = { id ->
+
+            }
+
+            def closure2 = { id ->
+
+            };
+
+            def list = [{ id ->
+
+            },
+            123]
+
+            myList.each { item ->
+
+            }
+        '''
+
+        assertViolations(SOURCE,
+                [lineNumber: 7, sourceLineText: '', messageText: MESSAGE],
+                [lineNumber: 10, sourceLineText: '', messageText: MESSAGE],
+                [lineNumber: 13, sourceLineText: '', messageText: MESSAGE],
+                [lineNumber: 17, sourceLineText: '', messageText: MESSAGE],
+                [lineNumber: 21, sourceLineText: '', messageText: MESSAGE],
+                [lineNumber: 25, sourceLineText: '', messageText: MESSAGE],
+                [lineNumber: 30, sourceLineText: '', messageText: MESSAGE])
+    }
+
+    @Test
+    void testKnownLimitations_ClosureExpressions() {
+        final SOURCE = '''
+            // If a Closure is within another expression and the closing brace is not followed by anything else on the same line
+
+            // Closure within a Map
+            def myService = [
+                doOtherStuff:{ id ->
+
+                }
+            ] as MyService
+
+            // Closure within a List
+            def list = [
+                123,
+                { id ->
+
+                }   // a comment does not matter
             ]
-        )
+        '''
+
+        assertNoViolations(SOURCE)
     }
 
     @Override
