@@ -22,6 +22,7 @@ import org.junit.Test
  * Tests for UnnecessaryGetterRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRule> {
 
@@ -29,10 +30,11 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
     void testRuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessaryGetter'
+        assert rule.checkIsMethods == true
     }
 
     @Test
-    void testSuccessScenario() {
+    void testNoViolations() {
         final SOURCE = '''
             x.get()
             x.property
@@ -51,9 +53,9 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             x.getProperty()
             x.getPi()
         '''
-        assertTwoViolations SOURCE,
-                2, 'x.getProperty()', 'getProperty() can probably be rewritten as property',
-                3, 'x.getPi()', 'getPi() can probably be rewritten as pi'
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'x.getProperty()', messageText:'getProperty()'],
+                [lineNumber:3, sourceLineText:'x.getPi()', messageText:'getPi()'])
     }
 
     @Test
@@ -69,7 +71,8 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
         final SOURCE = '''
             x.getA()
         '''
-        assertSingleViolation(SOURCE, 2, 'x.getA()', 'getA() can probably be rewritten as a')
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'x.getA()', messageText:'getA()'])
     }
 
     @Test
@@ -77,15 +80,19 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
         final SOURCE = '''
             x.getURLs()
         '''
-        assertSingleViolation(SOURCE, 2, 'x.getURLs()', 'getURLs() can probably be rewritten as URLs')
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'x.getURLs()', messageText:'getURLs()'])
     }
 
     @Test
     void testUpperCaseGetter2() {
         final SOURCE = '''
             x.getURL()
+            x.isURL()
         '''
-        assertSingleViolation(SOURCE, 2, 'x.getURL()', 'getURL() can probably be rewritten as URL')
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'x.getURL()', messageText:'getURL()'],
+                [lineNumber:3, sourceLineText:'x.isURL()', messageText:'isURL()'])
     }
 
     @Test
@@ -101,19 +108,44 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
         final SOURCE = '''
             class Spec extends Specification {
 
-                private final field = 'field\'
+                private final field = 'field'
 
                 def test() {
                     expect:
-                    field == 'field\'
-                    getField() == 'getField\'
+                    field == 'field'
+                    getField() == 'getField'
+                    isField() == 'getField'
                 }
 
                 private static String getField() {
-                    'getField\'
+                    'getField'
                 }
             }
             '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testIsMethodGetter() {
+        final SOURCE = '''
+            x.isProperty()
+            x.isPi()
+            x.isX()
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'x.isProperty()', messageText:'isProperty()'],
+                [lineNumber:3, sourceLineText:'x.isPi()', messageText:'isPi'],
+                [lineNumber:4, sourceLineText:'x.isX()', messageText:'isX'])
+    }
+
+    @Test
+    void testIsMethodGetter_checkIsMethods_False_NoViolations() {
+        final SOURCE = '''
+            x.isProperty()
+            x.isPi()
+            x.isX()
+        '''
+        rule.checkIsMethods = false
         assertNoViolations(SOURCE)
     }
 
@@ -197,8 +229,9 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
     void testIgnoredMethodName() {
         final SOURCE = '''
             optional.getOrNull()
+            x.isPi()
         '''
-        rule.ignoreMethodNames = 'getOrNull'
+        rule.ignoreMethodNames = 'getOrNull, isPi'
         assertNoViolations(SOURCE)
     }
 

@@ -503,16 +503,18 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   <Since CodeNarc 0.12>
 
   Checks for explicit calls to getter/accessor methods which can, for the most part, be replaced by property access.
-  A getter is defined as a method call that matches <<<get[A-Z]>>> but not <<<getClass()>>> or
-  <<<get[A-Z][A-Z]>>> such as <<<getURL()>>>. Getters do not take method arguments.
+  A getter is defined as a no-argument method call that matches <<<get[A-Z]>>> but not <<<getClass()>>> or
+  <<<get[A-Z][A-Z]>>> such as <<<getURL()>>>.
 
-  *---------------------+----------------------------------------------------------------+------------------------+
-  | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
-  *---------------------+----------------------------------------------------------------+------------------------+
-  | ignoreMethodNames   | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
-  |                     | should be ignored (i.e., that should not cause a rule          |                        |
-  |                     | violation). The names may optionally contain wildcards (*,?).  |                        |
-  *---------------------+----------------------------------------------------------------+------------------------+
+*---------------------+----------------------------------------------------------------+------------------------+
+| <<Property>>        | <<Description>>                                                | <<Default Value>>      |
+*---------------------+----------------------------------------------------------------+------------------------+
+| checkIsMethods      | If <<<true>>>, then also check isXxx() getters methods.        | <<<true>>>             |
+*---------------------+----------------------------------------------------------------+------------------------+
+| ignoreMethodNames   | Specifies one or more (comma-separated) method names that      | <<<null>>>             |
+|                     | should be ignored (i.e., that should not cause a rule          |                        |
+|                     | violation). The names may optionally contain wildcards (*,?).  |                        |
+*---------------------+----------------------------------------------------------------+------------------------+
 
   These bits of code produce violations:
 
@@ -521,6 +523,9 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
     x.getFirst()
     x.getFirstName()
     x.getA()
+
+    x.isFirst()         // Violation if checkIsMethods is true
+    x.isA()             // Violation if checkIsMethods is true
 -------------------------------------------------------------------------------
 
   These bits of code do not:

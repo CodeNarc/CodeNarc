@@ -18,6 +18,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #416: **ClassEndsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
  - #401: Fix false-negative in ClosureAsLastMethodParameter (method call within GString).
  - #419: **IndentationRule**: Ignore List expressions.
+ - #417: **UnnecessaryGetter**: Add *checkIsMethods* property and then also check `is*` methods if true.
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)

@@ -28,6 +28,8 @@ import org.codenarc.util.WildcardPattern
  * A getter is defined as a method call that matches get[A-Z] but not getClass() or get[A-Z][A-Z] such as getURL().
  * Getters do not take method arguments.
  * <p/>
+ * If the <code>checkIsMethods</code> property is true, then also check isXxx() getters methods. Defaults to true.
+ * <p/>
  * The <code>ignoreMethodNames</code> property optionally specifies one or more
  * (comma-separated) method names that should be ignored (i.e., that should not cause a
  * rule violation). The name(s) may optionally include wildcard characters ('*' or '?').
@@ -41,6 +43,7 @@ class UnnecessaryGetterRule extends AbstractAstVisitorRule {
     int priority = 3
     Class astVisitorClass = UnnecessaryGetterAstVisitor
     String ignoreMethodNames
+    boolean checkIsMethods = true
 
 }
 
@@ -78,7 +81,7 @@ class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
             return
         }
         String name = call.method.value
-        if (name == 'getClass' || name.length() < 4) {
+        if (name == 'getClass' || name.length() < 3 || name == 'get') {
             return
         }
 
@@ -86,18 +89,24 @@ class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
             return
         }
 
-        if (name[0..2] == 'get' && (name[3] as Character).isUpperCase()) {
-            if (name.length() == 4) {
-                def propertyName = name[3].toLowerCase()
+        if (isMatchingGetterMethodName(name)) {
+            String restOfName = name.startsWith('get') ? name[3..-1] : name[2..-1]
+
+            if (restOfName.length() == 1) {
+                def propertyName = restOfName[0].toLowerCase()
                 addUnnecessaryGetterViolation(call, propertyName)
-            } else if ((name[4] as Character).isLowerCase()) {
-                def propertyName = name[3].toLowerCase() + name[4..-1]
+            } else if ((restOfName[1] as Character).isLowerCase()) {
+                def propertyName = restOfName[0].toLowerCase() + restOfName[1..-1]
                 addUnnecessaryGetterViolation(call, propertyName)
             } else {
-                def propertyName = name[3..-1]
-                addUnnecessaryGetterViolation(call, propertyName)
+                addUnnecessaryGetterViolation(call, restOfName)
             }
         }
+    }
+
+    private boolean isMatchingGetterMethodName(String name) {
+        return (name.startsWith('get') && (name[3] as Character).isUpperCase()) ||
+                (rule.checkIsMethods && name.startsWith('is') && (name[2] as Character).isUpperCase())
     }
 
     private void addUnnecessaryGetterViolation(MethodCallExpression call, String propertyName) {
