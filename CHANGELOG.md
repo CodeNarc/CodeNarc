@@ -17,6 +17,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #415: **ClassStartsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
  - #416: **ClassEndsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
  - #401: Fix false-negative in ClosureAsLastMethodParameter (method call within GString).
+ - #419: **IndentationRule**: Ignore List expressions.
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)

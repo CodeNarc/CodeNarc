@@ -449,6 +449,8 @@ Formatting Rules  ("<rulesets/formatting.xml>")
 
     * Does not check Map entry expressions
 
+    * Does not check List expressions
+
     * Does not check calls to <<<this()>>> and <<<super()>>> within a constructor
 
     * When classes, methods or fields have annotations, the indentation of the annotation is checked, not the actual member. And only the first annotation is checked, if there is more than one.

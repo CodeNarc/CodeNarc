@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
@@ -64,6 +65,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     //  - Does not check comments
     //  - Does not check  line-continuations
     //  - Does not check Map entry expressions
+    //  - Does not check List expressions
 
     private static final List<String> SPOCK_BLOCKS = [
             'given',
@@ -223,10 +225,14 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     @Override
     void visitMapEntryExpression(MapEntryExpression expression) {
         // Skip Map entry expressions
-        //super.visitMapEntryExpression(expression)
     }
 
-    //------------------------------------------------------------------------------------
+    @Override
+    void visitListExpression(ListExpression expression) {
+        // Skip List expressions
+    }
+
+//------------------------------------------------------------------------------------
     // Helper methods
     //------------------------------------------------------------------------------------
 
