@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Jan 21, 2019 5:10:14 PM
+CodeNarc Report: Sample Project - May 26, 2019 7:14:38 PM
 
-Summary: TotalFiles=395 FilesWithViolations=43 P1=0 P2=61 P3=28
+Summary: TotalFiles=400 FilesWithViolations=51 P1=0 P2=65 P3=34
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=UnnecessaryObjectReferences P=3 Line=184 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
@@ -25,8 +25,12 @@ File: InlineViolationsParserTest.groovy
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=199 Msg=[The return keyword is not needed and can be removed] Src=[return [lineNumber: lineNumber, sourceLineText: sourceLineText, messageText: messageText]]
 
 File: comments/AbstractJavadocEmptyTagRuleTestCase.groovy
-    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=31 Msg=[The return keyword is not needed and can be removed] Src=[return rule.name]
-    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=34 Msg=[The return keyword is not needed and can be removed] Src=[return "The javadoc ${getTag()} tag is empty"]
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=53 Msg=[The return keyword is not needed and can be removed] Src=[return rule.name]
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=56 Msg=[The return keyword is not needed and can be removed] Src=[return "The javadoc ${getTag()} tag is empty"]
+
+File: comments/AbstractJavadocMissingDescriptionRuleTestCase.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=51 Msg=[The return keyword is not needed and can be removed] Src=[return rule.name]
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=54 Msg=[The return keyword is not needed and can be removed] Src=[return "The description for the javadoc ${getTag()} tag is missing"]
 
 File: comments/JavadocEmptyAuthorTagRuleTest.groovy
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=27 Msg=[The return keyword is not needed and can be removed] Src=[return '@author']
@@ -51,6 +55,18 @@ File: comments/JavadocEmptyThrowsTagRuleTest.groovy
 
 File: comments/JavadocEmptyVersionTagRuleTest.groovy
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=27 Msg=[The return keyword is not needed and can be removed] Src=[return '@version']
+
+File: comments/JavadocMissingExceptionDescriptionRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=27 Msg=[The return keyword is not needed and can be removed] Src=[return '@exception']
+
+File: comments/JavadocMissingParamDescriptionRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=27 Msg=[The return keyword is not needed and can be removed] Src=[return '@param']
+
+File: comments/JavadocMissingThrowsDescriptionRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=27 Msg=[The return keyword is not needed and can be removed] Src=[return '@throws']
+
+File: convention/CompileStaticRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=34 Msg=[The return keyword is not needed and can be removed] Src=[return new CompileStaticRule()]
 
 File: design/NestedForLoopRuleTest.groovy
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=106 Msg=[The return keyword is not needed and can be removed] Src=[return inlineViolation('Nested for loop')]
@@ -84,8 +100,14 @@ File: formatting/BracesForMethodRuleTest.groovy
             }
         ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}'] Src=[final SOURCE = ''']
 
+File: formatting/ClassEndsWithBlankLineRuleTest.groovy
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.ClassEndsWithBlankLineRuleTest has 32 methods] Src=[class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithBlankLineRule> {]
+
+File: formatting/ClassStartsWithBlankLineRuleTest.groovy
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 32 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
+
 File: formatting/IndentationRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 43 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
+    Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 45 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=551 Msg=[The String '
             |class MyClass {
             |    private void execute() {
@@ -111,7 +133,7 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |}
         ' contains a GString-type expression: '${t.message}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=822 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=841 Msg=[The String '
             |project.files(project.configurations.scaconfig.files.findAll { File it -> it.name.endsWith '.aar' }.collect { File it ->
             |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')
             |    String inputFile = 'COMMAND=PREPARE_LIBRARY\n' +
@@ -119,8 +141,8 @@ File: formatting/IndentationRuleTest.groovy
             |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
             |    cacheDir + hash + File.separator + 'output/jars/classes.jar'
             |}).asFileTree
-            ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=836 Msg=[The String '
+        ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=855 Msg=[The String '
             |buildFileList()
             |    .collect { File it ->
             |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
@@ -146,7 +168,10 @@ File: formatting/IndentationRuleTest.groovy
             |        callbackFunction()
             |    }
             |}
-            ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
+        ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=887 Msg=[The String '
+            |"${if (true) 'content' else ''}"
+        ' contains a GString-type expression: '${if (true) 'content' else ''}'] Src=[final SOURCE = ''']
 
 File: formatting/SpaceAfterClosingBraceRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=38 Msg=[The String '
@@ -359,6 +384,11 @@ File: grails/GrailsServletContextReferenceRuleTest.groovy
         ' contains a GString-type expression: '${servletContext.amount}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=87 Msg=[The String 'println "amount=${servletContext.amount}"' contains a GString-type expression: '${servletContext.amount}'] Src=[assertTwoViolations(SOURCE, 3, 'def mySession = servletContext', 6, 'println "amount=${servletContext.amount}"')]
 
+File: groovyism/ClosureAsLastMethodParameterRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=244 Msg=[The String '
+            new Exception("${it.orElseThrow { new AssertionError() }}")
+        ' contains a GString-type expression: '${it.orElseThrow { new AssertionError() }}'] Src=[final SOURCE = ''']
+
 File: groovyism/GStringAsMapKeyRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=44 Msg=[The String '
             Map map = ["${ someRef }" : 'invalid' ]
@@ -501,7 +531,7 @@ File: unnecessary/UnnecessaryGStringRuleTest.groovy
         ' contains a GString-type expression: '${ruleSetName}'] Src=[final SOURCE = ''']
 
 File: unnecessary/UnnecessaryGetterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=148 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=180 Msg=[The String '
             Mock {
                 getSomeData()
             }
@@ -554,14 +584,14 @@ File: unused/UnusedMethodParameterRuleTest.groovy
         ' contains a GString-type expression: '${startDate}" }'] Src=[final SOURCE = ''']
 
 File: unused/UnusedPrivateFieldRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=28 Msg=[Class org.codenarc.rule.unused.UnusedPrivateFieldRuleTest has 32 methods] Src=[class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {]
-    Violation: Rule=GStringExpressionWithinString P=2 Line=167 Msg=[The String '
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.unused.UnusedPrivateFieldRuleTest has 32 methods] Src=[class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase<UnusedPrivateFieldRule> {]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=166 Msg=[The String '
             class MyClass {
                 private int count
                 def other = this."${'count'}"
             }
         ' contains a GString-type expression: '${'count'}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=178 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=177 Msg=[The String '
             class MyClass {
                 private int count
                 def varName = "count"
@@ -631,4 +661,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (http://www.codenarc.org) v1.3]
+[CodeNarc (http://www.codenarc.org) v1.4]
