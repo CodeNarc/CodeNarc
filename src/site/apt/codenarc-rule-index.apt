@@ -4,7 +4,7 @@
 
 Rule Index
 ~~~~~~~~~~
-  <<CodeNarc>> includes 376 rules.
+  <<CodeNarc>> includes 380 rules.
 
     
       
@@ -198,6 +198,15 @@ Rule Index
       
     * {{{./codenarc-rules-comments.html#JavadocEmptyVersionTag}JavadocEmptyVersionTag}}  
     
+      
+    * {{{./codenarc-rules-comments.html#JavadocMissingExceptionDescription}JavadocMissingExceptionDescription}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocMissingParamDescription}JavadocMissingParamDescription}}  
+    
+      
+    * {{{./codenarc-rules-comments.html#JavadocMissingThrowsDescription}JavadocMissingThrowsDescription}}  
+    
     
       
       
@@ -286,6 +295,9 @@ Rule Index
       
 * {{{./codenarc-rules-convention.html}Convention}}
       
+      
+    * {{{./codenarc-rules-convention.html#CompileStatic}CompileStatic}}  
+    
       
     * {{{./codenarc-rules-convention.html#ConfusingTernary}ConfusingTernary}}  
     

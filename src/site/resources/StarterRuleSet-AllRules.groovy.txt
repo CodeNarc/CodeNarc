@@ -58,6 +58,7 @@ ruleset {
     CompareToWithoutComparable 
     ComparisonOfTwoConstants 
     ComparisonWithSelf 
+    CompileStatic 
     ConfusingClassNamedException 
     ConfusingMethodName 
     ConfusingMultipleReturns 
@@ -204,6 +205,9 @@ ruleset {
     JavadocEmptySinceTag 
     JavadocEmptyThrowsTag 
     JavadocEmptyVersionTag 
+    JavadocMissingExceptionDescription 
+    JavadocMissingParamDescription 
+    JavadocMissingThrowsDescription 
     JdbcConnectionReference 
     JdbcResultSetReference 
     JdbcStatementReference 
