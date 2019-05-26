@@ -1,6 +1,6 @@
 # CodeNarc Change Log
 
-TODO: Version 1.4   (??? 2019)
+Version 1.4   (May 2019)
 --------------------------------------
 New Rules
  - #418: New **CompileStatic** convention rule enforces all classes are annotated with @CompileStatic, @GrailsCompileStatic or @CompileDynamic annotations. (Sudhir Nimavat)
