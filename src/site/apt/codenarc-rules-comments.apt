@@ -429,3 +429,36 @@ Comments Rules  ("<rulesets/comments.xml>")
      * @version                                          // violation
      */
 -------------------------------------------------------------------------------
+
+* {JavadocMissingParamDescription} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.4>
+
+  Checks for missing description within Javadoc @param tags.
+
+  Known limitation: Only the first occurrence of an empty @version within a javadoc comment is found.
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
+*----------------+--------------------------------------------------------------------------+------------------------+
+| <<Property>>   | <<Description>>                                                          | <<Default Value>>      |
+*----------------+--------------------------------------------------------------------------+------------------------+
+| allowMultiline | Set to <<<true>>> to allow the tag description to start on the following | <<<false>>>            |
+|                | line. If <false>, that content must start same line as the tag.          |                        |
+*----------------+--------------------------------------------------------------------------+------------------------+
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    /**
+     * Return the calculated count of some stuff.
+     *
+     * @param startIndex                           // violation
+     * @return the full count
+     * @throws RuntimeException
+     */
+    int countThings(int startIndex) { }
+-------------------------------------------------------------------------------

@@ -59,8 +59,7 @@ class ReturnNullFromCatchBlockAstVisitor extends AbstractAstVisitor {
     /**
      * This is not a good general function for AstUtils.
      * It is too specific and may not work across different ASTNode subtypes.
-     * @param node
-     *      node
+     * @param node the CatchStatement node whose last statement we need
      */
     private static Statement getLastStatement(CatchStatement node) {
         if (node.code instanceof BlockStatement && node.code.statements) {

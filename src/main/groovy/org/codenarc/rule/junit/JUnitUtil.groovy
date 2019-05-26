@@ -107,8 +107,7 @@ class JUnitUtil {
     /**
      * Tells you if an ASTNode is a test MethodNode. A method node is a MethodNode and is named test.* or is annotated
      * with @Test or @org.junit.Test,
-     * @param node
-     *       the node to analyze
+     * @param node the node to analyze
      * @return true if the node is a test method
      */
     static boolean isTestMethod(ASTNode node) {

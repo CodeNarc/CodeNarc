@@ -22,7 +22,9 @@ package org.codenarc.rule.comments
  */
 class CommentsUtil {
 
+    protected static final String WHITESPACE =  /\s+/
     protected static final String OPTIONAL_WHITESPACE =  /\s*/
+    protected static final String NON_WHITESPACE_CHARS =  /\S+/
     protected static final String NEW_LINE =  /\n/
     protected static final String RELUCTANT =  '?'
 

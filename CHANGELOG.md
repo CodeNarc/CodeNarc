@@ -1,9 +1,14 @@
+
+#TODO: Sort the following line into the file
+- JavadocMissingParamDescription rule (comments) - Checks for missing description within @param javadoc tags
+
 # CodeNarc Change Log
 
 TODO: Version 1.4   (??? 2019)
 --------------------------------------
 New Rules
  - #418: New **CompileStatic** convention rule enforces all classes are annotated with @CompileStatic, @GrailsCompileStatic or @CompileDynamic annotations. (Sudhir Nimavat)
+ - #420: New **JavadocMissingParamDescription** rule. Checks for missing description within @param javadoc tags.
 
 Updated/Enhanced Rules and Bug Fixes
  - #402: **ClosureAsLastMethodParameter** rule: fix typo in violation message. (Marcin Erdmann)
@@ -18,7 +23,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #416: **ClassEndsWithBlankLine**: Add *ignoreInnerClasses* boolean flag.
  - #401: Fix false-negative in ClosureAsLastMethodParameter (method call within GString).
  - #419: **IndentationRule**: Ignore List expressions.
- - #417: **UnnecessaryGetter**: Add *checkIsMethods* property and then also check `is*` methods if true.
+ - #417: **UnnecessaryGetter**: Add *checkIsMethods* property and then also check `is*` methods if true. [NOTE: May introduce new violations; set *checkIsMethods=false* to revert new behavior]
 
 Tests and Documentation
  - #411: Consistent indentation on IndentationRuleTest.groovy. (debanne)
