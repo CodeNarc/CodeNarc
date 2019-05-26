@@ -5,7 +5,8 @@ TODO: Version 1.4   (??? 2019)
 New Rules
  - #418: New **CompileStatic** convention rule enforces all classes are annotated with @CompileStatic, @GrailsCompileStatic or @CompileDynamic annotations. (Sudhir Nimavat)
  - #420: New **JavadocMissingParamDescription** rule (comments). Checks for missing description within @param javadoc tags.
- - #420: New **JavadocMissingThrowsDescription** rule (comments). Checks for missing description within @throws javadoc tag
+ - #420: New **JavadocMissingThrowsDescription** rule (comments). Checks for missing description within @throws javadoc tags.
+ - #420: New **JavadocMissingExceptionDescription** rule (comments). Checks for missing description within @exception javadoc tags.
 
 Updated/Enhanced Rules and Bug Fixes
  - #402: **ClosureAsLastMethodParameter** rule: fix typo in violation message. (Marcin Erdmann)

@@ -431,13 +431,47 @@ Comments Rules  ("<rulesets/comments.xml>")
 -------------------------------------------------------------------------------
 
 
+* {JavadocMissingExceptionDescription} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.4>
+
+  Checks for missing description within @exception javadoc tags.
+
+  Known limitation: Only the first occurrence of a missing description for an @exception javadoc comment is found.
+
+  NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
+  <doNotApplyToClassNames> rule configuration properties are not available. See
+  {{{./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+    Standard Properties for Configuring Rules}}.
+
+*----------------+--------------------------------------------------------------------------+------------------------+
+| <<Property>>   | <<Description>>                                                          | <<Default Value>>      |
+*----------------+--------------------------------------------------------------------------+------------------------+
+| allowMultiline | Set to <<<true>>> to allow the tag description to start on the following | <<<false>>>            |
+|                | line. If <false>, that content must start same line as the tag.          |                        |
+*----------------+--------------------------------------------------------------------------+------------------------+
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    /**
+     * Return the calculated count of some stuff.
+     *
+     * @param startIndex the starting index; must be >= 0
+     * @return the full count
+     * @exception RuntimeException                   // violation
+     */
+    int countThings(int startIndex) { }
+-------------------------------------------------------------------------------
+
+
 * {JavadocMissingParamDescription} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.4>
 
   Checks for missing description within Javadoc @param tags.
 
-  Known limitation: Only the first occurrence of an empty @throws within a javadoc comment is found.
+  Known limitation: Only the first occurrence of a missing description for a @param javadoc comment is found
 
   NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
   <doNotApplyToClassNames> rule configuration properties are not available. See
@@ -471,7 +505,7 @@ Comments Rules  ("<rulesets/comments.xml>")
 
   Checks for missing description within Javadoc @throws tags.
 
-  Known limitation: Only the first occurrence of an empty @throws within a javadoc comment is found.
+  Known limitation: Only the first occurrence of a missing description for a @throws javadoc comment is found
 
   NOTE: This is a file-based rule, rather than an AST-based rule, so the <applyToClassNames> and
   <doNotApplyToClassNames> rule configuration properties are not available. See
@@ -497,3 +531,5 @@ Comments Rules  ("<rulesets/comments.xml>")
      */
     int countThings(int startIndex) { }
 -------------------------------------------------------------------------------
+
+

@@ -20,6 +20,7 @@
     <rule class='org.codenarc.rule.comments.JavadocEmptySinceTagRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptyThrowsTagRule'/>
     <rule class='org.codenarc.rule.comments.JavadocEmptyVersionTagRule'/>
+    <rule class='org.codenarc.rule.comments.JavadocMissingExceptionDescriptionRule'/>
     <rule class='org.codenarc.rule.comments.JavadocMissingParamDescriptionRule'/>
     <rule class='org.codenarc.rule.comments.JavadocMissingThrowsDescriptionRule'/>
 </ruleset>
