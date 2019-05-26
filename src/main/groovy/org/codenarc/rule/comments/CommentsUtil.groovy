@@ -15,6 +15,8 @@
  */
 package org.codenarc.rule.comments
 
+import org.codenarc.source.SourceCode
+
 /**
  * Utility methods and constants related to comments rules
  *
@@ -37,6 +39,12 @@ class CommentsUtil {
 
     protected static String group(String inside) {
         return '(' + inside + ')'
+    }
+
+    protected static boolean hasTextOnNextLine(SourceCode sourceCode, int lineNumber) {
+        String nextLine = sourceCode.line(lineNumber)   // line() is zero-based, but lineNumber is one-based
+        boolean isJavadocEndLine = nextLine =~ JAVADOC_END
+        return !isJavadocEndLine && nextLine =~ JAVADOC_LINE_WITH_TEXT
     }
 
     // Prevent instantiation. All members are static.

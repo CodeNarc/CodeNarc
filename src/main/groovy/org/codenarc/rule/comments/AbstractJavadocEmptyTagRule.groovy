@@ -54,10 +54,4 @@ abstract class AbstractJavadocEmptyTagRule extends AbstractAstVisitorRule {
         return JAVADOC_START + JAVADOC_ANY_LINES + group(JAVADOC_LINE_PREFIX + getTag()) + OPTIONAL_WHITESPACE + NEW_LINE
     }
 
-    private boolean hasTextOnNextLine(SourceCode sourceCode, int lineNumber) {
-        String nextLine = sourceCode.line(lineNumber)   // line() is zero-based, but lineNumber is one-based
-        boolean isJavadocEndLine = nextLine =~ JAVADOC_END
-        return !isJavadocEndLine && nextLine =~ JAVADOC_LINE_WITH_TEXT
-    }
-
 }
