@@ -41,7 +41,7 @@ class JavadocEmptyLastLineRuleTest extends AbstractRuleTestCase<JavadocEmptyLast
              *
              * @param startIndex - the starting index
              * @return the full count
-             * @throws RuntimeException
+             * @throws RuntimeException if it runs out of coffee
              *
              */
             int countThings(int startIndex) {
@@ -71,7 +71,7 @@ class JavadocEmptyLastLineRuleTest extends AbstractRuleTestCase<JavadocEmptyLast
                  *
                  * @param startIndex - the starting index
                  * @return the full count
-                 * @throws RuntimeException
+                 * @throws RuntimeException if it becomes angry
                  */
                 int countThings(int startIndex) {
                 }

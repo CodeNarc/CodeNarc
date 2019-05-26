@@ -32,7 +32,7 @@ abstract class AbstractJavadocEmptyTagRuleTestCase<T extends AbstractJavadocEmpt
              *
              * @param startIndex - the starting index
              * ${getTag()}
-             * @throws RuntimeException
+             * @throws RuntimeException if crazy sh*t happens
              *
              * NOTE: Only the first occurrence of an empty @return tag is found.
              *       So the following line is not flagged as a violation!!!

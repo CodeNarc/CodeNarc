@@ -50,7 +50,7 @@ class JavadocConsecutiveEmptyLinesRuleTest extends AbstractRuleTestCase<JavadocC
                  *
                  * @param startIndex - the starting index
                  * @return the full count
-                 * @throws RuntimeException
+                 * @throws RuntimeException upon the Rapture
                  */
                 int countThings(int startIndex) {
                 }
@@ -111,7 +111,7 @@ class JavadocConsecutiveEmptyLinesRuleTest extends AbstractRuleTestCase<JavadocC
                  *
                  * @param startIndex - the starting index
                  * @return the full count
-                 * @throws RuntimeException
+                 * @throws RuntimeException upon the Singularity
                  *
                  * NOTE: Only the first occurrence of consecutive empty lines is found.
                  *       So the following lines are not flagged as violations!!!

@@ -42,7 +42,7 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
              *
              * @param startIndex - the starting index
              * @return the full count
-             * @throws RuntimeException
+             * @throws RuntimeException when pigs fly
              */
             int countThings(int startIndex) {
             }
@@ -72,7 +72,7 @@ class JavadocEmptyFirstLineRuleTest extends AbstractRuleTestCase<JavadocEmptyFir
                  *
                  * @param startIndex - the starting index
                  * @return the full count
-                 * @throws RuntimeException
+                 * @throws RuntimeException when hell freezes over
                  *
                  */
                 int countThings(int startIndex) {
