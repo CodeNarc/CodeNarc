@@ -80,6 +80,9 @@ class UnnecessaryPublicModifierAstVisitor extends AbstractAstVisitor {
         while (current <= node.lastLineNumber) {
             def line = sourceCode.line(current)
             if (line == null) {
+                if (node.isAbstract()) {
+                    return acc // can happen with abstract method in Parrot parser
+                }
                 LOG.warn("${rule.name} cannot find source code line $current in ${sourceCode.name}. Scanning lines ${node.lineNumber} to ${node.lastLineNumber}.")
                 return ''
             } else if (line.contains('{')) {
