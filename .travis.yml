@@ -10,9 +10,5 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-env:
-  global:
-    - GRADLE_OPTS="-Xms128m"
-
 script:
   - ./gradlew check --no-daemon

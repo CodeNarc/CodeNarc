@@ -64,7 +64,9 @@ artifacts {
 }
 
 signing {
-    sign configurations.archives
+    sign(configurations.archives).each { task ->
+        task.onlyIf { gradle.taskGraph.hasTask(uploadArchives) }
+    }
 }
 
 javadoc {
