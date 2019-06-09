@@ -16,7 +16,6 @@
 package org.codenarc.rule.unnecessary
 
 import org.codenarc.rule.AbstractRuleTestCase
-import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -219,19 +218,13 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
     }
 
     @Test
-    void testAnonymousInnerClassDeclaration_KnownLimitation_NoViolation() {
+    void testAnonymousInnerClassDeclaration_Violation() {
         final SOURCE = '''
             def runnable = new java.lang.Runnable() {
                 void run() { }
             }
         '''
-        if (GroovyVersion.groovy1_8_OrGreater ) {
-            assertSingleViolation(SOURCE, 2, 'java.lang.Runnable')
-        }
-        else {
-            // Known limitation: Does not check anonymous inner class violations
-            assertNoViolations(SOURCE)
-        }
+        assertSingleViolation(SOURCE, 2, 'java.lang.Runnable')
     }
 
     @Test

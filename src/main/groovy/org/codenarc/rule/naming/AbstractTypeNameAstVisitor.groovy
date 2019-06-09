@@ -18,7 +18,6 @@ package org.codenarc.rule.naming
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.util.GroovyVersion
 
 /**
  * Abstract superclass for AstVisitor classes dealing with class/type names, e.g. classes,
@@ -32,10 +31,10 @@ abstract class AbstractTypeNameAstVisitor extends AbstractAstVisitor {
     void visitClassEx(ClassNode classNode) {
         assert rule.regex
 
-        if (GroovyVersion.isGroovy1_8_OrGreater() && classNode instanceof InnerClassNode && classNode.anonymous) {
+        if (classNode instanceof InnerClassNode && classNode.anonymous) {
             // do nothing for anonymous inner classes
             super.visitClassEx(classNode)
-        } else if (GroovyVersion.isGroovy1_8_OrGreater() && classNode.isScript()) {
+        } else if (classNode.isScript()) {
             // do nothing for script classes
             super.visitClassEx(classNode)
         } else {

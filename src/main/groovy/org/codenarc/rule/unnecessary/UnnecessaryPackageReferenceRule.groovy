@@ -22,11 +22,15 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.expr.CastExpression
+import org.codehaus.groovy.ast.expr.ClassExpression
+import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.expr.PropertyExpression
+import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.util.GroovyVersion
 import org.codenarc.util.ImportUtil
-import org.codehaus.groovy.ast.expr.*
 
 /**
  * Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String,
@@ -52,7 +56,7 @@ class UnnecessaryPackageReferenceAstVisitor extends AbstractAstVisitor {
     protected void visitClassEx(ClassNode node) {
         initializeImportNames()
         def superClassName = node.superClass.name
-        if (!IGNORE_SUPERCLASS_NAMES.contains(superClassName) && !(GroovyVersion.groovy1_8_OrGreater && node.isScript() && node.name == 'None')) {
+        if (!IGNORE_SUPERCLASS_NAMES.contains(superClassName) && !(node.isScript() && node.name == 'None')) {
             checkType(superClassName, node)
         }
         node.interfaces.each { interfaceNode ->
