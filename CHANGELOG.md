@@ -1,5 +1,10 @@
 # CodeNarc Change Log
 
+Version 1.5
+--------------------------------------
+New Rules
+- #371: **ImplicitClosureParameter** rule (convention). Checks for usages of the implicit `it` closure parameter.
+
 Version 1.4   (May 2019)
 --------------------------------------
 New Rules

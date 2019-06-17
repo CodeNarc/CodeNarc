@@ -192,6 +192,29 @@ Convention Rules  ("<rulesets/convention.xml>")
 -------------------------------------------------------------------------------
 
 
+* {ImplicitClosureParameter} Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  <Since CodeNarc 1.5>
+
+  Checks for the implicit <<<it>>> closure parameter being used.
+  Also checks if an explicit <<<it>>> parameter has been specified.
+
+*-----------------------------+------------------------------------------------+------------------------+
+| <<Property>>                | <<Description>>                                | <<Default Value>>      |
+*-----------------------------+------------------------------------------------+------------------------+
+| allowUsingItAsParameterName | To stop the rule reporting violations when an  | false                  |
+|                             | explicit closure parameter called <<<it>>> is  |                        |                        |
+|                             | used, set this property to <<<true>>>.         |                        |
+*-----------------------------+------------------------------------------------+------------------------+
+
+  Example of violations:
+
+-------------------------------------------------------------------------------
+    def closureWithViolation = { it * 10 }
+    def closureWithViolationBecauseOfExplicitItParameter = { it -> it * 10}
+-------------------------------------------------------------------------------
+
+
 * {InvertedCondition} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <Since CodeNarc 1.1>
