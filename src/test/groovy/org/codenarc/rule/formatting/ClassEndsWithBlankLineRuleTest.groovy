@@ -565,6 +565,16 @@ class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassEndsWithB
     }
 
     @Test
+    void testNoViolationsForCommentedOutClass() {
+        final String SOURCE = '''
+            //class Foo {
+            //    int count                
+            //}
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testNoViolationsForScriptClass() {
         final String SOURCE = '''
             job('test-job') {
