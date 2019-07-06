@@ -5,6 +5,14 @@ Version 1.5
 New Rules
 - #371: **ImplicitClosureParameter** rule (convention). Checks for usages of the implicit `it` closure parameter.
 
+Updated/Enhanced Rules and Bug Fixes
+- #426: **UnusedImport** rule: No such property: staticImportAliases using Groovy 3.0.0-beta-1. Remove unused `GroovyVersion` class.
+
+Framework and Infrastructure
+- #429: Normalize line endings to LF. (Marcin Erdmann)
+- #421: Update to gradle 5.4.1, Only sign on uploadArchives. (Leonard Brünings)
+
+
 Version 1.4   (May 2019)
 --------------------------------------
 New Rules
