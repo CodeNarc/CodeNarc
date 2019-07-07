@@ -7,6 +7,7 @@ New Rules
 
 Updated/Enhanced Rules and Bug Fixes
 - #426: **UnusedImport** rule: No such property: staticImportAliases using Groovy 3.0.0-beta-1. Remove unused `GroovyVersion` class.
+- #427: **PublicMethodsBeforeNonPublicMethods**: False alarm for static initializer.
 
 Framework and Infrastructure
 - #429: Normalize line endings to LF. (Marcin Erdmann)

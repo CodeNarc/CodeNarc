@@ -87,6 +87,42 @@ class PublicMethodsBeforeNonPublicMethodsRuleTest extends AbstractRuleTestCase<P
                 [lineNumber:6, sourceLineText:'public String method2() { }', messageText:'public method method2 in class MyClass is declared after a non-public method'])
     }
 
+    @Test
+    void test_StaticInitializer_NoViolations() {
+        final SOURCE = '''
+            class MyTest {
+                static final String TEST
+
+                static {
+                    TEST = 'test\'
+                }
+
+                String hello() {
+                    return TEST
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_InstanceInitializer_NoViolations() {
+        final SOURCE = '''
+            class MyTest {
+                private count
+
+                {
+                    count = 99
+                }
+
+                String hello() {
+                    return 'hello: ' + count
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected PublicMethodsBeforeNonPublicMethodsRule createRule() {
         new PublicMethodsBeforeNonPublicMethodsRule()

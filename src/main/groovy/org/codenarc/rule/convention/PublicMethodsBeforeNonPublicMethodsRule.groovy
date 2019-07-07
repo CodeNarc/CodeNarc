@@ -43,7 +43,9 @@ class PublicMethodsBeforeNonPublicMethodsAstVisitor extends AbstractAstVisitor {
             }
         }
         else {
-            this.hasDeclaredNonPublicMethod = true
+            if (!node.synthetic) {
+                this.hasDeclaredNonPublicMethod = true
+            }
         }
         super.visitMethodComplete(node)
     }
