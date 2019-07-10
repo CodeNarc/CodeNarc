@@ -65,7 +65,7 @@ Static Analysis for Groovy: Less Bugs, Better Code
                    <a href="codenarc-other-tools-frameworks.html">Gradle</a>, <a href="codenarc-other-tools-frameworks.html">Grails</a>,
                    <a href="codenarc-other-tools-frameworks.html">Griffon</a>,
                    <a href="codenarc-other-tools-frameworks.html">SonarQube</a>
-                   and <a href="codenarc-other-tools-frameworks.html">Hudson</a>. See our
+                   and <a href="codenarc-other-tools-frameworks.html">Jenkins</a>. See our
                     <a href="codenarc-other-tools-frameworks.html">Integration</a> page for more details.
                Reports come in HTML, XML, or text format.  Take a look at a
                <a href="SampleCodeNarcHtmlReport.html">Sample CodeNarc HTML Report</a>,
