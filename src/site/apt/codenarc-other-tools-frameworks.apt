@@ -30,11 +30,11 @@ CodeNarc - Integration with Other Tools / Frameworks
 
     * {{{http://maven.apache.org/}Maven}} - See the {{{https://github.com/gleclaire/codenarc-maven-plugin}Maven CodeNarc Plugin}}
 
-    * {{{http://hudson-ci.org/}Hudson}} - The {{{http://wiki.hudson-ci.org/display/HUDSON/Violations}Hudson Violations Plugin}}
-      includes reporting and trending of CodeNarc violations. Also see this
-      {{{http://blogs.techworld.com/monitoring-the-pulse-of-it/2010/08/grails-hudson-part-1-codenarc/}blog post}}. COMING SOON.
+    * {{{https://jenkins.io/}Jenkins}} - The
+      {{{https://github.com/jenkinsci/warnings-ng-plugin#jenkins-warnings-next-generation-plugin}Jenkins Warnings NG Plugin}}
+      includes reporting and trending of CodeNarc violations.
 
-    * {{{http://www.sonarsource.org/}Sonar}} - The {{{http://docs.codehaus.org/display/SONAR/Groovy+Plugin}Sonar Groovy Plugin}}
+    * {{{https://www.sonarqube.org/}SonarQube}} - The {{{https://redirect.sonarsource.com/plugins/groovy.html}Sonar Groovy Plugin}}
       uses CodeNarc for its static analysis of Groovy source code.
 
 
