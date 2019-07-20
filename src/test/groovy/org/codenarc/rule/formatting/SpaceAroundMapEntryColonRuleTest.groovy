@@ -104,6 +104,8 @@ class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase<SpaceAroundM
     @Test
     void testIgnoresSpreadMapOperator_NoViolations() {
         final SOURCE = '''
+            def binding = [*: scriptConfig.parameters]
+
             def params = [:]
             to(page, *:params)
         '''

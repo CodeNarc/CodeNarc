@@ -804,6 +804,8 @@ class MyClass {                                 // CORRECT
   is allowed either before or after the Map entry colon, but you can change that through the configuration
   properties below.
 
+  Does not check *spread map* operator, e.g. <<<def binding = [*: map]>>>
+
 *---------------------------+------------------------------------------------------------------+------------------------+
 | <<Property>>              | <<Description>>                                                  | <<Default Value>>      |
 *---------------------------+------------------------------------------------------------------+------------------------+

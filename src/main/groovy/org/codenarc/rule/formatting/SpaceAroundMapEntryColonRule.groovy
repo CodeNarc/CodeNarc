@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.expr.MapEntryExpression
+import org.codehaus.groovy.ast.expr.SpreadMapExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -50,6 +51,10 @@ class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
 
         // Handle special case of colon as the last char of the line
         def charAfterColon = colonIndex >= line.size() ? '\n' : line[colonIndex]
+
+        if (expression.keyExpression instanceof SpreadMapExpression) {
+            return
+        }
 
         if (!(charBeforeColon ==~ rule.characterBeforeColonRegex)) {
             String keyName = expression.keyExpression.text
