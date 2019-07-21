@@ -188,7 +188,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
     }
 
     @Override
-    protected final void addError(String msg, ASTNode expr) {
+    public final void addError(String msg, ASTNode expr) {
         super.addError(msg, expr);
     }
 
@@ -438,7 +438,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
     }
 
     @Override
-    protected final void visitListOfExpressions(List<? extends Expression> list) {
+    public final void visitListOfExpressions(List<? extends Expression> list) {
         throw new UnsupportedOperationException();
     }
 
