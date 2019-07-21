@@ -95,37 +95,37 @@ class CompileStaticRuleTest extends AbstractRuleTestCase {
 
     @Test
     void testEnum() {
-        final SOURCE = 'enum Test { OPTION_ONE, OPTION_TWO  }'
+        final SOURCE1 = 'enum Test { OPTION_ONE, OPTION_TWO  }'
 
-        assertSingleViolation(SOURCE) { Violation violation ->
+        assertSingleViolation(SOURCE1) { Violation violation ->
             violation.rule.priority == 2
             violation.rule.name == 'CompileStatic'
         }
 
-        SOURCE = '''
+        final SOURCE2 = '''
             import groovy.transform.CompileStatic
             @CompileStatic
             enum Test { OPTION_ONE, OPTION_TWO  }
           '''
 
-        assertNoViolations(SOURCE)
+        assertNoViolations(SOURCE2)
     }
 
     @Test
     void testAbstractClass() {
-        final SOURCE = 'abstract class Test { }'
+        final SOURCE1 = 'abstract class Test { }'
 
-        assertSingleViolation(SOURCE) { Violation violation ->
+        assertSingleViolation(SOURCE1) { Violation violation ->
             violation.rule.priority == 2
             violation.rule.name == 'CompileStatic'
         }
 
-        SOURCE = '''
+        final SOURCE2 = '''
             import groovy.transform.CompileStatic
             @CompileStatic
             abstract class Test { }
           '''
 
-        assertNoViolations(SOURCE)
+        assertNoViolations(SOURCE2)
     }
 }
