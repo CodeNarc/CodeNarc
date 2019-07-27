@@ -45,7 +45,7 @@ class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
     }
 
     private void handleMapExpression(MapEntryExpression expression) {
-        def line = sourceLine(expression)
+        def line = lastSourceLine(expression)
         def colonIndex = expression.lastColumnNumber - 1
         def charBeforeColon = line[colonIndex - 2]
 
