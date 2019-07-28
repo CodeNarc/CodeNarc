@@ -15,6 +15,7 @@ Framework and Infrastructure
 - #421: Update to gradle 5.4.1, Only sign on uploadArchives. (Leonard Brünings)
 - #432: Prepare for Groovy 3. Fix "attempting to assign weaker access privileges; was public" errors: **AbstractFieldVisitor**, **AbstractMethodCallExpressionVisitor**, **AbstractMethodVisitor**.
 - #432: Prepare for Groovy 3. Fix SpaceAroundMapEntryColonRule "StringIndexOutOfBoundsException" errors w/Groovy 3
+- #423: Fixes for Groovy 3. **UnnecessaryPublicModifierAstVisitor** and **AstUtil**. Resolves #414. (philippkrauss)
 
 
 Version 1.4   (May 2019)
