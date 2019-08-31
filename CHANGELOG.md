@@ -1,6 +1,6 @@
 # CodeNarc Change Log
 
-Version 1.5
+TODO: Version 1.5
 --------------------------------------
 New Rules
 - #371: **ImplicitClosureParameter** rule (convention). Checks for usages of the implicit `it` closure parameter.
@@ -16,6 +16,7 @@ Framework and Infrastructure
 - #432: Prepare for Groovy 3. Fix "attempting to assign weaker access privileges; was public" errors: **AbstractFieldVisitor**, **AbstractMethodCallExpressionVisitor**, **AbstractMethodVisitor**.
 - #432: Prepare for Groovy 3. Fix SpaceAroundMapEntryColonRule "StringIndexOutOfBoundsException" errors w/Groovy 3
 - #423: Fixes for Groovy 3. **UnnecessaryPublicModifierAstVisitor** and **AstUtil**. Resolves #414. (philippkrauss)
+- #436: Remove unnecessary CodeNarc logging.
 
 
 Version 1.4   (May 2019)
