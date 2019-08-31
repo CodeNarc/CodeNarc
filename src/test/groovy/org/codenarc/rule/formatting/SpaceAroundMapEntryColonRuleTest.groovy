@@ -113,6 +113,30 @@ class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase<SpaceAroundM
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testMapEntryFormatting_NoSpaceBefore_SpaceAfter_NoViolations() {
+        final SOURCE = '''
+            static content = {
+                foobar(required: false, wait: true) { }
+            }
+        '''
+        rule.characterAfterColonRegex = /\s/
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testMapEntryFormatting_SpaceOrNoSpaceBefore_SpaceAfter_NoViolations() {
+        final SOURCE = '''
+            static final Map<String, String> THINGS = ['foo'  : 'bar',
+                                                       'foo2' : 'bar2',
+                                                       'foo22': 'bar22',
+            ]
+            '''
+        rule.characterBeforeColonRegex = /./
+        rule.characterAfterColonRegex = /\s/
+        assertNoViolations(SOURCE)
+    }
+
     private String violation(String keyName, String precededOrFollowed, String className, String regex) {
         return inlineViolation("The colon for the literal Map entry for key [$keyName] within class $className" +
             " is not $precededOrFollowed by a match for regular expression [$regex]")
