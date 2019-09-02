@@ -76,6 +76,14 @@ class UnnecessarySetterRuleTest extends AbstractRuleTestCase<UnnecessarySetterRu
     }
 
     @Test
+    void testCallingSettersWithinChainedMethodCall_NoViolations() {
+        final SOURCE = '''
+            builder.setFirst(1).setSecond(2).build()
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testCallingSettersOnSuperDoesNotCauseViolations() {
         final SOURCE = '''
             super.setProperty(1)
