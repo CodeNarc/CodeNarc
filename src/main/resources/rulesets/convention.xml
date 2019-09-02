@@ -8,6 +8,7 @@
         These are rules for coding conventions; not necessarily errors.
     </description>
 
+    <rule class='org.codenarc.rule.convention.CompileStaticRule'/>
     <rule class='org.codenarc.rule.convention.ConfusingTernaryRule'/>
     <rule class='org.codenarc.rule.convention.CouldBeElvisRule'/>
     <rule class='org.codenarc.rule.convention.CouldBeSwitchStatementRule'/>
@@ -21,6 +22,7 @@
     <rule class='org.codenarc.rule.convention.MethodParameterTypeRequired'/>
     <rule class='org.codenarc.rule.convention.MethodReturnTypeRequiredRule'/>
     <rule class='org.codenarc.rule.convention.NoDefRule'/>
+    <rule class='org.codenarc.rule.convention.NoFloatRule'/>
     <rule class='org.codenarc.rule.convention.NoJavaUtilDateRule'/>
     <rule class='org.codenarc.rule.convention.NoTabCharacterRule'/>
     <rule class='org.codenarc.rule.convention.ParameterReassignmentRule'/>
@@ -31,5 +33,4 @@
     <rule class='org.codenarc.rule.convention.TrailingCommaRule'/>
     <rule class='org.codenarc.rule.convention.VariableTypeRequiredRule'/>
     <rule class='org.codenarc.rule.convention.VectorIsObsoleteRule'/>
-    <rule class='org.codenarc.rule.convention.CompileStaticRule'/>
 </ruleset>
