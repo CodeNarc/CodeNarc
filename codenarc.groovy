@@ -84,7 +84,7 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
     new File(path).append """
 * {$ruleName} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 1.4>
+  <Since CodeNarc 1.5>
 
   $ruleDescription
 

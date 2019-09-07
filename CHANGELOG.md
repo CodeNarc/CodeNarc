@@ -5,6 +5,7 @@ TODO: Version 1.5
 New Rules
 - #371: **ImplicitClosureParameter** rule (convention). Checks for usages of the implicit `it` closure parameter.
 - #437: **NoFloat** rule (convention) - Checks for use of the float or Float types, in fields, variables, method parameters and method return types.
+- #437: **NoDouble** rule (convention) - Checks for use of the double or Double types, in fields, variables, method parameters and method return types.
 
 Updated/Enhanced Rules and Bug Fixes
 - #426: **UnusedImport** rule: No such property: staticImportAliases using Groovy 3.0.0-beta-1. Remove unused `GroovyVersion` class.
