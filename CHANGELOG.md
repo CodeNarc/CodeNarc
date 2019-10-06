@@ -8,9 +8,10 @@ New Rules
 - #437: **NoDouble** rule (convention) - Checks for use of the double or Double types, in fields, variables, method parameters and method return types.
 
 Updated/Enhanced Rules and Bug Fixes
-- #426: **UnusedImport** rule: No such property: staticImportAliases using Groovy 3.0.0-beta-1. Remove unused `GroovyVersion` class.
+- #426: **UnusedImport** rule: No suSpaceAfterClosingBracech property: staticImportAliases using Groovy 3.0.0-beta-1. Remove unused `GroovyVersion` class.
 - #427: **PublicMethodsBeforeNonPublicMethods**: False alarm for static initializer.
 - #430: **SpaceAroundMapEntryColon**: False positive when spread map operator is used.
+- #440: **SpaceAfterClosingBrace**: Ignore if followed by opening parenthesis or opening square brace
 
 Framework and Infrastructure
 - #429: Normalize line endings to LF. (Marcin Erdmann)
