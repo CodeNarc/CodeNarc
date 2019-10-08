@@ -209,6 +209,9 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             def someMock = Mock(MyType) {
                 getSomeData() >> 'some-data'
             }
+            def otherMock = Mock(MyType, [a:1]) {
+                getSomeData() >> 'some-data\'
+            }
         '''
         assertNoViolations(SOURCE)
     }
@@ -219,6 +222,28 @@ class UnnecessaryGetterRuleTest extends AbstractRuleTestCase<UnnecessaryGetterRu
             def "some test method"() {
                 product = Stub(Product) {
                     getId() >> 10
+                }
+
+                product2 = Stub(constructorArgs:[1, 2, 3], Product) {
+                    getId() >> 10
+                }
+            }
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testSpock_Spy() {
+        final SOURCE = '''
+            def "some test method"() {
+                def x = Spy(SomeClass) {
+                        getMethod() >> {
+                    }
+                }
+
+                def y = Spy(SomeClass, constructorArgs: [1, 2, 3]) {
+                        getMethod() >> {
+                    }
                 }
             }
             '''

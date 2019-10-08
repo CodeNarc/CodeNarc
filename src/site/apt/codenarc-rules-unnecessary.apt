@@ -506,6 +506,8 @@ Unnecessary Rules  ("<rulesets/unnecessary.xml>")
   A getter is defined as a no-argument method call that matches <<<get[A-Z]>>> but not <<<getClass()>>> or
   <<<get[A-Z][A-Z]>>> such as <<<getURL()>>>.
 
+  Calls to getter methods within Spock method calls <<<Mock()>>>, <<<Stub()>>> and <<<Spy()>>> are ignored.
+
 *---------------------+----------------------------------------------------------------+------------------------+
 | <<Property>>        | <<Description>>                                                | <<Default Value>>      |
 *---------------------+----------------------------------------------------------------+------------------------+

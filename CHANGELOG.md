@@ -12,6 +12,7 @@ Updated/Enhanced Rules and Bug Fixes
 - #427: **PublicMethodsBeforeNonPublicMethods**: False alarm for static initializer.
 - #430: **SpaceAroundMapEntryColon**: False positive when spread map operator is used.
 - #440: **SpaceAfterClosingBrace**: Ignore if followed by opening parenthesis or opening square brace
+- #443: **UnnecessaryGetter** false-positive; ignore within Spock method calls (`Mock()`, `Stub()` and `Spy()`), including those where an option Map is passed in.
 
 Framework and Infrastructure
 - #429: Normalize line endings to LF. (Marcin Erdmann)

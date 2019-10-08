@@ -60,17 +60,22 @@ class UnnecessaryGetterAstVisitor extends AbstractAstVisitor {
     }
 
     private boolean isSpockMethod(MethodCallExpression call) {
-        if (AstUtil.getMethodArguments(call).size() != 2) {
-            return false
-        }
         if (!(call.method instanceof ConstantExpression)) {
             return false
         }
-        if (!(call.arguments[1] instanceof ClosureExpression)) {
+
+        String name = call.method?.value
+        if (!['Mock', 'Spy', 'Stub'].contains(name)) {
             return false
         }
-        String name = call.method.value
-        return name in ['Mock', 'Spy', 'Stub']
+
+        int numArgs = AstUtil.getMethodArguments(call).size()
+
+        return numArgs in [2, 3] && hasClosureAsLastArgument(numArgs, call)
+    }
+
+    private boolean hasClosureAsLastArgument(int numArgs, MethodCallExpression call) {
+        return call.arguments[numArgs - 1] instanceof ClosureExpression
     }
 
     private void addViolationsIfGetter(MethodCallExpression call) {
