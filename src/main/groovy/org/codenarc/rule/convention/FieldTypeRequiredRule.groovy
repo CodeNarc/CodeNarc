@@ -38,10 +38,11 @@ class FieldTypeRequiredAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitField(FieldNode node) {
-        if (node.isDynamicTyped() && !isIgnoredFieldName(node)) {
-            addViolation(node, $/The type is not specified for field "$node.name"/$)
+        if (isFirstVisit(node)) {
+            if (node.isDynamicTyped() && !isIgnoredFieldName(node)) {
+                addViolation(node, $/The type is not specified for field "$node.name"/$)
+            }
         }
-
         super.visitField(node)
     }
 
