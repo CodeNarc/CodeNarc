@@ -15,11 +15,14 @@
  */
 package org.codenarc.ant
 
+import static org.codenarc.test.TestUtil.*
+
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.CodeNarcRunner
 import org.codenarc.NullResultsProcessor
+import org.codenarc.analyzer.AnalyzerException
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.XmlReportWriter
@@ -31,9 +34,6 @@ import org.codenarc.util.BaselineResultsProcessor
 import org.codenarc.util.io.ClassPathResource
 import org.junit.Before
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.shouldFail
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for the CodeNarc Ant Task
@@ -148,6 +148,17 @@ class CodeNarcTaskTest extends AbstractTestCase {
     }
 
     @Test
+    void testExecute_CodeNarcRunnerThrowsAnalyzerException() {
+        def codeNarcRunner = [execute: { throw new AnalyzerException('error') }]
+        codeNarcTask.createCodeNarcRunner = { codeNarcRunner }
+
+        codeNarcTask.addConfiguredReport(new Report(type:'ide'))
+        codeNarcTask.addFileset(fileSet)
+
+        shouldFail(BuildException) { codeNarcTask.execute() }
+    }
+
+    @Test
     void testAddConfiguredReport() {
         codeNarcTask.addConfiguredReport(new Report(type:'html'))
         assert codeNarcTask.reportWriters.size() == 1
@@ -223,6 +234,25 @@ class CodeNarcTaskTest extends AbstractTestCase {
         assert runner.resultsProcessor.resource.path == EXCLUDE_FILE
     }
 
+    @Test
+    void testCreateSourceAnalyzer() {
+        codeNarcTask.addFileset(fileSet)
+        def sourceAnalyzer = codeNarcTask.createSourceAnalyzer()
+
+        assert sourceAnalyzer instanceof AntFileSetSourceAnalyzer
+        assert sourceAnalyzer.project == project
+        assert sourceAnalyzer.fileSets == [fileSet]
+        assert sourceAnalyzer.failOnError == false
+    }
+
+    @Test
+    void testCreateSourceAnalyzer_failOnError_true() {
+        codeNarcTask.failOnError = true
+        AntFileSetSourceAnalyzer sourceAnalyzer = codeNarcTask.createSourceAnalyzer()
+
+        assert sourceAnalyzer.failOnError == true
+    }
+
     //------------------------------------------------------------------------------------
     // Setup and helper methods
     //------------------------------------------------------------------------------------
@@ -230,7 +260,8 @@ class CodeNarcTaskTest extends AbstractTestCase {
     @Before
     void setUpCodeNarcTaskTest() {
         project = new Project(basedir:'.')
-        fileSet = new FileSet(dir:new File(BASE_DIR),
+        fileSet = new FileSet(
+                dir:new File(BASE_DIR),
                 project:project,
                 includes:'sourcewithdirs/**/*.groovy')
 

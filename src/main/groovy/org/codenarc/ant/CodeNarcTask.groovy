@@ -17,6 +17,7 @@ package org.codenarc.ant
 
 import static java.lang.Thread.currentThread
 
+import org.codenarc.analyzer.AnalyzerException
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.util.io.ResourceFactory
 import org.slf4j.Logger
@@ -46,13 +47,16 @@ import org.slf4j.LoggerFactory
  * <code>maxPriority2Violations</code> and <code>maxPriority3Violations</code> specify the
  * thresholds for violations of priority 2 and 3.
  * <p/>
+ * The <code>failOnError</code> property indicates whether to terminate and fail the task if any errors
+ * occur parsing source files (true), or just log the errors (false). It defaults to false.
+ * <p/>
  * At least one nested <code>fileset</code> element is required, and is used to specify the source files
  * to be analyzed. This is the standard Ant <i>FileSet</i>, and is quite powerful and flexible.
  * See the <i>Apache Ant Manual</i> for more information on <i>FileSets</i>.
  * <p/>
  * The <ode>report</code> nested element defines the format and output file for the analysis report.
- * Currently, HTML (type="html") and XML (type="xml") are the only supported formats. Each report
- * is configured using nested <code>option</code> elements, with <code>name</code>, and
+ * HTML (type="html"), XML (type="xml"), CONSOLE (type="console"), IDE (type="ide") are the supported formats.
+ * Each report is configured using nested <code>option</code> elements, with <code>name</code>, and
  * <code>value</code> attributes.
  *
  * @see "http://ant.apache.org/manual/index.html"
@@ -83,6 +87,11 @@ class CodeNarcTask extends Task {
      * Classpath used when compiling analysed classes.
      */
     Path classpath
+
+    /**
+     * Whether to terminate and fail the task if errors occur parsing source files (true), or just log the errors (false)
+     */
+    boolean failOnError = false
 
     protected List reportWriters = []
     protected List fileSets = []
@@ -150,7 +159,9 @@ class CodeNarcTask extends Task {
      * @return a configured SourceAnalyzer instance
      */
     protected SourceAnalyzer createSourceAnalyzer() {
-        new AntFileSetSourceAnalyzer(getProject(), fileSets)
+        def sourceAnalyzer = new AntFileSetSourceAnalyzer(getProject(), fileSets)
+        sourceAnalyzer.failOnError = failOnError
+        return sourceAnalyzer
     }
 
     private void checkMaxViolations(Results results) {
@@ -172,17 +183,27 @@ class CodeNarcTask extends Task {
 
     @SuppressWarnings('MethodParameterTypeRequired')
     private Results executeRunnerWithConfiguredClasspath(codeNarcRunner) {
+        try {
+            return executeCodeNarcRunner(codeNarcRunner)
+        }
+        catch(AnalyzerException e) {
+            throw new BuildException('Error analyzing source files', e)
+        }
+    }
+
+    @SuppressWarnings('MethodParameterTypeRequired')
+    private Results executeCodeNarcRunner(codeNarcRunner) {
         def paths = classpath?.list()
         if (paths) {
             def oldContextClassLoader = currentThread().contextClassLoader
             try {
                 currentThread().contextClassLoader = classLoaderForPaths(paths, oldContextClassLoader)
-                codeNarcRunner.execute()
+                return codeNarcRunner.execute()
             } finally {
                 currentThread().contextClassLoader = oldContextClassLoader
             }
         } else {
-            codeNarcRunner.execute()
+            return codeNarcRunner.execute()
         }
     }
 

@@ -125,6 +125,13 @@ class TestUtil {
         assert collection1 as Set == collection2 as Set
     }
 
+    /**
+     * Do nothing. Document that no testable side effects occur other than no exceptions are thrown
+     */
+    @SuppressWarnings('EmptyMethod')
+    static void assertNoErrors() {
+    }
+
     static String captureSystemOut(Closure closure) {
         def originalSystemOut = System.out
         def outputStream = new ByteArrayOutputStream()

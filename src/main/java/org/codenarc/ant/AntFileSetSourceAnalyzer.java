@@ -15,12 +15,11 @@
  */
 package org.codenarc.ant;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
 import org.codenarc.analyzer.AbstractSourceAnalyzer;
+import org.codenarc.analyzer.AnalyzerException;
 import org.codenarc.results.DirectoryResults;
 import org.codenarc.results.FileResults;
 import org.codenarc.results.Results;
@@ -28,11 +27,14 @@ import org.codenarc.rule.Violation;
 import org.codenarc.ruleset.RuleSet;
 import org.codenarc.source.SourceFile;
 import org.codenarc.util.PathUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * SourceAnalyzer implementation that gets source files from one or more Ant FileSets.
@@ -44,12 +46,18 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
     private static final Logger LOG = LoggerFactory.getLogger(AntFileSetSourceAnalyzer.class);
     private static final int POOL_TIMEOUT_SECONDS = 60 * 60;
 
+    /**
+     * Whether to throw an exception if errors occur parsing source files (true), or just log the errors (false)
+     */
+    boolean failOnError = false;
+
     private final Project project;
     protected final List<FileSet> fileSets;
 
     // Concurrent shared state
     private final ConcurrentMap<String, List<FileResults>> resultsMap = new ConcurrentHashMap<String, List<FileResults>>();
     private final ConcurrentMap<String, AtomicInteger> fileCountMap = new ConcurrentHashMap<String, AtomicInteger>();
+    private final AtomicLong sourceFileErrors = new AtomicLong(0L);
 
     /**
      * Construct a new instance on the specified Ant FileSet.
@@ -105,20 +113,28 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
             processFileSet(fileSet, ruleSet, pool);
         }
 
+        waitForThreadsToComplete(pool);
+
+        if (failOnError && sourceFileErrors.get() > 0L) {
+            throw new AnalyzerException("Errors analyzing " + sourceFileErrors.get() + " source files");
+        }
+
+        addDirectoryResults(reportResults);
+        LOG.info("Analysis time=" + (System.currentTimeMillis() - startTime) + "ms; Files with analysis errors: " + sourceFileErrors.get());
+        return reportResults;
+    }
+
+    private void waitForThreadsToComplete(ExecutorService pool) {
         pool.shutdown();
 
         try {
             boolean completed = pool.awaitTermination(POOL_TIMEOUT_SECONDS, TimeUnit.SECONDS);
             if (!completed) {
-                throw new IllegalStateException("Thread Pool terminated before comp<FileResults>letion");
+                throw new IllegalStateException("Thread Pool terminated before completion");
             }
         } catch (InterruptedException e) {
             throw new IllegalStateException("Thread Pool interrupted before completion");
         }
-
-        addDirectoryResults(reportResults);
-        LOG.info("Analysis time=" + (System.currentTimeMillis() - startTime) + "ms");
-        return reportResults;
     }
 
     public List getSourceDirectories() {
@@ -159,7 +175,8 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
                 try {
                     processFile(baseDir, filePath, ruleSet);
                 } catch (Throwable t) {
-                    LOG.info("Error processing filePath: '" + filePath + "'", t);
+                    LOG.warn("Error processing file: '" + filePath + "'; " + t);
+                    sourceFileErrors.incrementAndGet();
                 }
             }
         };
@@ -169,6 +186,9 @@ public class AntFileSetSourceAnalyzer extends AbstractSourceAnalyzer {
         File file = new File(baseDir, filePath);
         SourceFile sourceFile = new SourceFile(file);
         List<Violation> allViolations = collectViolations(sourceFile, ruleSet);
+        if (!sourceFile.isValid()) {
+            sourceFileErrors.incrementAndGet();
+        }
         FileResults fileResults = null;
         if (allViolations != null && !allViolations.isEmpty()) {
             fileResults = new FileResults(PathUtil.normalizePath(filePath), allViolations);

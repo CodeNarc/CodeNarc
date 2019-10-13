@@ -47,7 +47,12 @@ CodeNarc - Ant Task
 *------------------------+----------------------------------------------------------------+------------------------+
 | classpathRef           | The reference to a path element which is to be used as         | NO                     |
 |                        | classpath when compiling analysed sources (useful with         |                        |
-|                        | {{{./codenarc-enhanced-classpath-rules.html} Enhanced Classpath Rules}}). |             |
+|                        | {{{./codenarc-enhanced-classpath-rules.html} Enhanced Classpath Rules}}).               |
+*------------------------+----------------------------------------------------------------+------------------------+
+| failOnError            | Boolean that indicates whether to terminate and fail the task  | NO                     |
+|                        | (throwing a <<<BuildException>>>) if any errors occur parsing  |                        |
+|                        | source files (<true>), or just log  the errors (<false>).      |                        |
+|                        | It defaults to <false>.               |                        |                        |
 *------------------------+----------------------------------------------------------------+------------------------+
 
 

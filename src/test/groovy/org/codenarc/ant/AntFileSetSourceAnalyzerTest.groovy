@@ -15,8 +15,11 @@
  */
 package org.codenarc.ant
 
+import static org.codenarc.test.TestUtil.*
+
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
+import org.codenarc.analyzer.AnalyzerException
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
 import org.codenarc.rule.FakePathRule
@@ -33,6 +36,7 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
  * @author Chris Mair
  */
 class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
+
     private static final BASE_DIR = 'src/test/resources'
     private Project project
     private FileSet fileSet
@@ -135,6 +139,29 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
         ]
         assert sourceFilePaths == EXPECTED_PATHS
         assertResultsCounts(results, 4, 4)
+    }
+
+    @Test
+    void testAnalyze_SourceFilesWithCompileErrors() {
+        ruleSet = new ListRuleSet([new FakeCountRule()])
+        fileSet.includes = 'sourcewitherrors/**/*.txt'
+        def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
+        def results = analyzer.analyze(ruleSet)
+        log(results)
+        assertResultsCounts(results, 2, 0)
+
+        assert getAllResultsPaths(results) == ['sourcewitherrors']
+    }
+
+    @Test
+    void testAnalyze_SourceFilesWithCompileErrors_failOnError_true() {
+        ruleSet = new ListRuleSet([new FakeCountRule()])
+        fileSet.includes = 'sourcewitherrors/**/*.txt'
+        def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
+        analyzer.failOnError = true
+
+        def msg = shouldFail(AnalyzerException) { analyzer.analyze(ruleSet) }
+        log(msg)
     }
 
     @Test
