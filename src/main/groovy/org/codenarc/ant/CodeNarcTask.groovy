@@ -187,7 +187,7 @@ class CodeNarcTask extends Task {
             return executeCodeNarcRunner(codeNarcRunner)
         }
         catch(AnalyzerException e) {
-            throw new BuildException('Error analyzing source files', e)
+            throw new BuildException('CodeNarcTask failed: ' + e.getMessage(), e)
         }
     }
 
