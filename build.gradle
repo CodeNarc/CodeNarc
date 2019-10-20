@@ -7,7 +7,7 @@ plugins {
 
 group = "org.codenarc"
 archivesBaseName = "CodeNarc"
-version = "1.4"
+version = "1.5-beta"
 
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'

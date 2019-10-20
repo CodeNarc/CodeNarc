@@ -18,7 +18,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SuppressionAnalyzer {
 
+    private static final String ALL = "all";
     private static final ClassNode SUPPRESS_WARNINGS = ClassHelper.make(SuppressWarnings.class);
+
     private final SourceCode source;
     private boolean initialized = false;
     private final Object initializationLock = new Object();
@@ -31,7 +33,7 @@ public class SuppressionAnalyzer {
 
     public boolean isRuleSuppressed(Rule rule) {
         init();
-        return suppressedRuleNames.contains(rule.getName());
+        return suppressedRuleNames.contains(rule.getName()) || suppressedRuleNames.contains(ALL);
     }
 
     public List<Violation> filterSuppressedViolations(Iterable<Violation> violations) {
@@ -56,10 +58,17 @@ public class SuppressionAnalyzer {
 
         String ruleName = violation.getRule().getName();
         int lineNumber = violation.getLineNumber();
+
+        BitSet linesForAll = suppressionsByLineNumber.get(ALL);
+        if (linesForAll != null && linesForAll.get(lineNumber)) {   // only if "all" applies to this line
+            return true;
+        }
+
         BitSet lines = suppressionsByLineNumber.get(ruleName);
         if (lines != null) {
             return lines.get(lineNumber);
         }
+
         return false;
     }
 
@@ -68,6 +77,7 @@ public class SuppressionAnalyzer {
             if (!initialized) {
                 ModuleNode ast = source.getAst();
                 if (ast != null) {
+                    // These rule names are suppressed for the entire AST
                     suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getPackage()));
                     suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getImports()));
                     suppressedRuleNames.addAll(getSuppressedRuleNames(ast.getStarImports()));

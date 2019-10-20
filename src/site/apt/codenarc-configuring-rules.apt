@@ -263,7 +263,8 @@ ruleset {
 * {Suppressing A Rule From Within Source Code}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   You can use the <<<@SuppressWarnings>>> annotation on a <class>, <method>, <constructor>, <field> or
-  <property> to suppress one or more <<CodeNarc>> rules within its source code.
+  <property> to suppress one or more <<CodeNarc>> rules within its source code. <Import> statements can also be annotated,
+  and in that case the suppression applies to the entire file.
 
   Specify one or more rule name as the parameter of the <<<@SuppressWarnings>>> annotation. Note
   that this is the rule <name>, not the <class> name (i.e., without the "Rule" suffix). Specify
@@ -288,6 +289,10 @@ ruleset {
         }
     }
 +----------------------------------------------------------------------------------------
+
+You can specify "all" within <<<@SuppressWarnings>>> (e.g. <<<@SuppressWarnings('all')>>>) to suppress violations for all
+CodeNarc rules for the annotated scope.
+
 
 
 * {Customizing Rule Descriptions Shown in the HTML Report}

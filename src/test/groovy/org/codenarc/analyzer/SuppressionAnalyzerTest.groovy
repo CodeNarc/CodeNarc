@@ -55,20 +55,35 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void testPackage_all() {
+        def analyzer = new SuppressionAnalyzer(new SourceString('''
+
+            @SuppressWarnings('all')
+            package foo
+        '''))
+
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule2'))
+    }
+
+    @Test
     void testImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
-            @SuppressWarnings('Rule1')
-            @SuppressWarnings(['Rule2', 'Rule3'])
-            import java.lang.Integer
+            @SuppressWarnings('Rule1')                  // 3
+            @SuppressWarnings(['Rule2', 'Rule3'])       // 4
+            import java.lang.Integer                    // 5
 
-            @SuppressWarnings('Rule4')
-            import java.lang.Float
+            @SuppressWarnings('Rule4')                  // 7
+            import java.lang.Float                      // 8
 
-            @SuppressWarnings(['Rule5', 'Rule6'])
-            import java.lang.String
+            @SuppressWarnings(['Rule5', 'Rule6'])       // 10
+            import java.lang.String                     // 11
 
-            println 4
+            @SuppressWarnings("all")                    // 13
+            import java.lang.Math                       // 14
+
+            import java.lang.BigDecimal                 // 16
         '''))
 
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
@@ -77,7 +92,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule4'))
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule5'))
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule6'))
-        assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule7'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule7'))   // because of "all"
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 0))
@@ -86,29 +101,33 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 3))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 4))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 5))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule4', 5))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 6))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule4', 6))
         assert analyzer.isViolationSuppressed(violationFor('Rule4', 7))
         assert analyzer.isViolationSuppressed(violationFor('Rule4', 8))
         assert !analyzer.isViolationSuppressed(violationFor('Rule4', 9))
+
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 14))
+        assert analyzer.isViolationSuppressed(violationFor('Rule2', 14))
     }
 
     @Test
     void testStarImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
-            @SuppressWarnings('Rule1')
-            @SuppressWarnings(['Rule2', 'Rule3'])
-            import java.lang.*
+            @SuppressWarnings('Rule1')                  // 3
+            @SuppressWarnings(['Rule2', 'Rule3'])       // 4
+            import java.lang.*                          // 5
 
-            @SuppressWarnings('Rule4')
-            import java.io.*
+            @SuppressWarnings('Rule4')                  // 7
+            import java.io.*                            // 8
 
-            @SuppressWarnings(['Rule5', 'Rule6'])
-            import java.util.*
+            @SuppressWarnings(['Rule5', 'Rule6'])       // 10
+            import java.util.*                          // 11
 
-            println 4
+            import java.net.*                           // 13
         '''))
 
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
@@ -132,23 +151,26 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule4', 7))
         assert analyzer.isViolationSuppressed(violationFor('Rule4', 8))
         assert !analyzer.isViolationSuppressed(violationFor('Rule4', 9))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 13))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule2', 13))
     }
 
     @Test
     void testStaticImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
-            @SuppressWarnings('Rule1')
-            @SuppressWarnings(['Rule2', 'Rule3'])
-            import static java.lang.Float
+            @SuppressWarnings('Rule1')                  // 3
+            @SuppressWarnings(['Rule2', 'Rule3'])       // 4
+            import static java.lang.Float               // 5
 
-            @SuppressWarnings('Rule4')
-            import static java.io.File
+            @SuppressWarnings('Rule4')                  // 7
+            import static java.io.File                  // 8
 
-            @SuppressWarnings(['Rule5', 'Rule6'])
-            import static java.util.Map
+            @SuppressWarnings(['Rule5', 'Rule6'])       // 10
+            import static java.util.Map                 // 11
 
-            println 4
+            println 4                                   // 12
         '''))
 
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
@@ -178,17 +200,18 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     void testStaticStarImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
-            @SuppressWarnings('Rule1')
-            @SuppressWarnings(['Rule2', 'Rule3'])
-            import static java.lang.*
+            @SuppressWarnings('Rule1')                  // 3
+            @SuppressWarnings(['Rule2', 'Rule3'])       // 4
+            import static java.lang.*                   // 5
 
-            @SuppressWarnings('Rule4')
-            import static java.io.*
+            @SuppressWarnings('Rule4')                  // 7
+            import static java.io.*                     // 8
 
-            @SuppressWarnings(['Rule5', 'Rule6'])
-            import static java.util.*
+            @SuppressWarnings(['Rule5', 'Rule6'])       // 10
+            import static java.util.*                   // 11
 
-            println 4
+            @SuppressWarnings(['all'])                  // 13
+            import static java.lang.Math.*              // 14
         '''))
 
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
@@ -197,7 +220,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule4'))
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule5'))
         assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule6'))
-        assert !analyzer.isRuleSuppressed(new MockRule(name: 'Rule7'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule7'))   // because of "all"
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 0))
@@ -212,6 +235,9 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule4', 7))
         assert analyzer.isViolationSuppressed(violationFor('Rule4', 8))
         assert !analyzer.isViolationSuppressed(violationFor('Rule4', 9))
+
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 14))
+        assert analyzer.isViolationSuppressed(violationFor('Rule2', 14))
     }
 
     @Test
@@ -259,15 +285,31 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void testClass_all() {
+        def analyzer = new SuppressionAnalyzer(new SourceString('''
+
+            @SuppressWarnings('all')
+            class MyClass { }
+        '''))
+
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule2'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule3'))
+    }
+
+    @Test
     void testFields() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
-            class MyClass {
-                @SuppressWarnings('Rule1')
-                private String myField = """
-                           ... multiline content
-                    """
-            }
+            class MyClass {                             // 3
+                @SuppressWarnings('Rule1')              // 4
+                private String myField = """            // 5
+                           ... multiline content        // 6
+                    """                                 // 7
+
+                @SuppressWarnings('all')                // 9
+                private String name = 'joe'             // 10
+            }                                           // 11
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -279,20 +321,25 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 5))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 6))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 7))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 8))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 9))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
+
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 10))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 11))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 12))
     }
 
     @Test
     void testProperties() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
-            class MyClass {
-                @SuppressWarnings('Rule1')
-                def myProperty = """
-                           ... multiline content
-                    """
+            class MyClass {                             // 3
+                @SuppressWarnings('Rule1')              // 4
+                def myProperty = """                    // 5
+                           ... multiline content        // 6
+                    """                                 // 7
+
+                @SuppressWarnings('all')                // 9
+                private String name = 'joe'             // 10
             }
         '''))
 
@@ -305,30 +352,37 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 5))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 6))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 7))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 8))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 9))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
+
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 10))
+        assert analyzer.isViolationSuppressed(violationFor('Rule2', 10))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 11))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 12))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 13))
     }
 
     @Test
     void testMethods() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
-            class MyClass {
-                @SuppressWarnings('Rule1')
-                private String myMethod() {
-                    """
-                           ... multiline content
-                    """
-                }
+            class MyClass {                             // 3
+                @SuppressWarnings('Rule1')              // 4
+                private String myMethod() {             // 5
+                    """                                 // 6
+                           ... multiline content        // 7
+                    """                                 // 8
+                }                                       // 9
 
-                @SuppressWarnings('Rule1')
-                private String myMethod2() {
-                    """
-                           ... multiline content
-                    """
-                }
-            }
+                @SuppressWarnings('Rule1')              // 11
+                private String myMethod2() {            // 12
+                    """                                 // 13
+                           ... multiline content        // 14
+                    """                                 // 15
+                }                                       // 16
+
+                @SuppressWarnings('all')                // 18
+                private String myMethod3() { }          // 19
+            }                                           // 20
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -349,20 +403,26 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 14))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 15))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 16))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 17))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 18))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 19))
+
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 19))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 20))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 21))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 22))
     }
 
     @Test
     void testConstructors() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
-            class MyClass {
-                @SuppressWarnings('Rule1')
-                private MyClass() {
-                    println 123
-                }
-            }
+            class MyClass {                         // 2
+                @SuppressWarnings('Rule1')          // 3
+                private MyClass() {                 // 4
+                    println 123                     // 5
+                }                                   // 6
+
+                @SuppressWarnings('all')            // 8
+                private MyClass(int count) { }      // 9
+            }                                       // 10
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -373,12 +433,15 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 4))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 5))
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 6))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 7))
+
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 9))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
     }
 
     @Test
     void testDeclarations() {
-        def analyzer = new SuppressionAnalyzer(new SourceString('''   // 1
+        def analyzer = new SuppressionAnalyzer(new SourceString('''          // 1
             class MyClass {                                                  // 2
                 void run() {                                                 // 3
                     @SuppressWarnings('Rule1')                               // 4
@@ -395,8 +458,11 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                     int x = u + t                                            // 15
                     println u                                                // 16
                     println x                                                // 17
-                }                                                            // 18
-            }                                                                // 19
+
+                    @SuppressWarnings('all')                                 // 19
+                    String name = 'abc'                                      // 20
+                }                                                            // 21
+            }                                                                // 22
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -418,8 +484,11 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 15))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 16))
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', 17))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 18))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 19))
+
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 20))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 21))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 22))
     }
 
     @Test

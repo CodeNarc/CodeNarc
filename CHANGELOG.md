@@ -17,6 +17,7 @@ Updated/Enhanced Rules and Bug Fixes
 
 Framework and Infrastructure
 - #441: Enable CodeNarc Ant Task to optionally fail for Groovy compile errors on source files. Add *failOnError* property to the Ant Task, defaults to *false*.
+- #445: Support @SuppressWarnings("all").
 - #429: Normalize line endings to LF. (Marcin Erdmann)
 - #421: Update to gradle 5.4.1, Only sign on uploadArchives. (Leonard Brünings)
 - #432: Prepare for Groovy 3. Fix "attempting to assign weaker access privileges; was public" errors: **AbstractFieldVisitor**, **AbstractMethodCallExpressionVisitor**, **AbstractMethodVisitor**.
