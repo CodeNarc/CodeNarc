@@ -290,8 +290,8 @@ ruleset {
     }
 +----------------------------------------------------------------------------------------
 
-You can specify "all" within <<<@SuppressWarnings>>> (e.g. <<<@SuppressWarnings('all')>>>) to suppress violations for all
-CodeNarc rules for the annotated scope.
+  You can specify "all" or "CodeNarc" within <<<@SuppressWarnings>>> (e.g. <<<@SuppressWarnings('all')>>> or
+  <<<@SuppressWarnings('CodeNarc')>>>) to suppress violations for all CodeNarc rules for the annotated scope.
 
 
 

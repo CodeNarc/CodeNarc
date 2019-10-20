@@ -67,6 +67,18 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void testPackage_CodeNarc() {
+        def analyzer = new SuppressionAnalyzer(new SourceString('''
+
+            @SuppressWarnings('CodeNarc')
+            package foo
+        '''))
+
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule2'))
+    }
+
+    @Test
     void testImport() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -210,7 +222,7 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
             @SuppressWarnings(['Rule5', 'Rule6'])       // 10
             import static java.util.*                   // 11
 
-            @SuppressWarnings(['all'])                  // 13
+            @SuppressWarnings(['CodeNarc'])             // 13
             import static java.lang.Math.*              // 14
         '''))
 
@@ -298,6 +310,19 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
+    void testClass_CodeNarc() {
+        def analyzer = new SuppressionAnalyzer(new SourceString('''
+
+            @SuppressWarnings(['CodeNarc', 'other'])
+            class MyClass { }
+        '''))
+
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule1'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule2'))
+        assert analyzer.isRuleSuppressed(new MockRule(name: 'Rule3'))
+    }
+
+    @Test
     void testFields() {
         def analyzer = new SuppressionAnalyzer(new SourceString('''
 
@@ -309,7 +334,10 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
                 @SuppressWarnings('all')                // 9
                 private String name = 'joe'             // 10
-            }                                           // 11
+
+                @SuppressWarnings('CodeNarc')           // 12
+                private String name = 'joe'             // 13
+            }                                           // 14
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -324,8 +352,10 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 10))
 
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 11))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 12))
+        assert analyzer.isViolationSuppressed(violationFor('Rule2', 13))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 14))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 15))
     }
 
     @Test
@@ -340,6 +370,9 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
                 @SuppressWarnings('all')                // 9
                 private String name = 'joe'             // 10
+
+                @SuppressWarnings('CodeNarc')           // 12
+                private String name = 'joe'             // 13
             }
         '''))
 
@@ -356,9 +389,11 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 10))
         assert analyzer.isViolationSuppressed(violationFor('Rule2', 10))
 
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 11))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 12))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 13))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 13))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 14))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 15))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 16))
     }
 
     @Test
@@ -382,7 +417,10 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
                 @SuppressWarnings('all')                // 18
                 private String myMethod3() { }          // 19
-            }                                           // 20
+
+                @SuppressWarnings('CodeNarc')           // 21
+                private String myMethod3() { }          // 22
+            }                                           // 23
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -406,9 +444,11 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 19))
 
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 20))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 21))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 22))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 22))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 24))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 25))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 26))
     }
 
     @Test
@@ -422,7 +462,10 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
                 @SuppressWarnings('all')            // 8
                 private MyClass(int count) { }      // 9
-            }                                       // 10
+
+                @SuppressWarnings('CodeNarc')       // 11
+                private MyClass(int count) { }      // 12
+            }                                       // 13
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -436,7 +479,9 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 9))
 
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 10))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 12))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 13))
     }
 
     @Test
@@ -461,8 +506,11 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
                     @SuppressWarnings('all')                                 // 19
                     String name = 'abc'                                      // 20
-                }                                                            // 21
-            }                                                                // 22
+
+                    @SuppressWarnings('CodeNarc')                            // 22
+                    String name = 'abc'                                      // 23
+                }                                                            // 24
+            }                                                                // 25
         '''))
 
         assert !analyzer.isViolationSuppressed(violationFor('Rule1', -1))
@@ -487,8 +535,10 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
 
         assert analyzer.isViolationSuppressed(violationFor('Rule1', 20))
 
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 21))
-        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 22))
+        assert analyzer.isViolationSuppressed(violationFor('Rule1', 23))
+
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 24))
+        assert !analyzer.isViolationSuppressed(violationFor('Rule1', 25))
     }
 
     @Test

@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SuppressionAnalyzer {
 
     private static final String ALL = "all";
+    private static final String CODE_NARC = "CodeNarc";
     private static final ClassNode SUPPRESS_WARNINGS = ClassHelper.make(SuppressWarnings.class);
 
     private final SourceCode source;
@@ -33,7 +34,7 @@ public class SuppressionAnalyzer {
 
     public boolean isRuleSuppressed(Rule rule) {
         init();
-        return suppressedRuleNames.contains(rule.getName()) || suppressedRuleNames.contains(ALL);
+        return suppressedRuleNames.contains(rule.getName()) || suppressedRuleNames.contains(ALL) || suppressedRuleNames.contains(CODE_NARC);
     }
 
     public List<Violation> filterSuppressedViolations(Iterable<Violation> violations) {
@@ -61,6 +62,11 @@ public class SuppressionAnalyzer {
 
         BitSet linesForAll = suppressionsByLineNumber.get(ALL);
         if (linesForAll != null && linesForAll.get(lineNumber)) {   // only if "all" applies to this line
+            return true;
+        }
+
+        BitSet linesForCodeNarc = suppressionsByLineNumber.get(CODE_NARC);
+        if (linesForCodeNarc != null && linesForCodeNarc.get(lineNumber)) {   // only if "CodeNarc" applies to this line
             return true;
         }
 
