@@ -49,7 +49,7 @@ class JUnitPublicFieldAstVisitor extends AbstractFieldVisitor {
 
     @Override
     void visitField(FieldNode node) {
-        if (node.isPublic() && !AstUtil.hasAnnotation(node, 'Rule') && !AstUtil.hasAnnotation(node, 'ClassRule')) {
+        if (node.isPublic() && !AstUtil.hasAnyAnnotation(node, 'Rule', 'org.junit.Rule', 'ClassRule', 'org.junit.ClassRule')) {
             addViolation(node, "The field $node.name is public. There is usually no reason to have a public field (even a constant) on a test class.")
         }
     }

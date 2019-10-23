@@ -65,6 +65,9 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase<JUnitPublicFieldRule
         final SOURCE = '''
             class MyTestCase {
                 @Rule public TestName testName = new TestName()
+
+                @org.junit.Rule
+                public TestName otherTestName = new TestName()
             }
         '''
         assertNoViolations(SOURCE)
@@ -75,6 +78,9 @@ class JUnitPublicFieldRuleTest extends AbstractRuleTestCase<JUnitPublicFieldRule
         final SOURCE = '''
             class MyTestCase {
                 @ClassRule public TestName testName = new TestName()
+
+                @org.junit.ClassRule
+                public TestName otherTestName = new TestName()
             }
         '''
         assertNoViolations(SOURCE)

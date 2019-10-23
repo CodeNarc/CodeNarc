@@ -14,6 +14,7 @@ Updated/Enhanced Rules and Bug Fixes
 - #440: **SpaceAfterClosingBrace**: Ignore if followed by opening parenthesis or opening square brace
 - #443: **UnnecessaryGetter** false-positive; ignore within Spock method calls (`Mock()`, `Stub()` and `Spy()`), including those where an option Map is passed in.
 - #444: **FieldTypeRequired**: Fix duplicate violations.
+- #256: **JUnitPublicField**: Added support for skipping fields with fully-qualified @org.junit.Rule and @org.junit.ClassRule annotations.
 
 Framework and Infrastructure
 - #441: Enable CodeNarc Ant Task to optionally fail for Groovy compile errors on source files. Add *failOnError* property to the Ant Task, defaults to *false*.
