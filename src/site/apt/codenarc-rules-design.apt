@@ -51,6 +51,10 @@ Design Rules  ("<rulesets/design.xml>")
     }
 -------------------------------------------------------------------------------
 
+  This rule has a single <<<enhancedMode>>> property which defaults to <<<false>>>. When set to <<<true>>>, this rule
+  will run in {{{./codenarc-enhanced-classpath-rules.html}enhanced mode}} and will not produce a violation when an
+  abstract class extends an abstract superclass.
+
 
 * {AssignmentToStaticFieldFromInstanceMethod} Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

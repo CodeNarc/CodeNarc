@@ -16,6 +16,7 @@
 package org.codenarc.rule.design
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.junit.Before
 import org.junit.Test
 
 /**
@@ -32,8 +33,12 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase<Ab
     }
 
     @Test
-    void testSuccessScenario() {
+    void test_ValidAbstractClasses_NoViolations() {
         final SOURCE = '''
+            class AbstractParent {
+            }
+            class BaseParent {
+            }
             class MyClass {
                 void method1() { }
                 void method2() {  }
@@ -58,7 +63,7 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase<Ab
     }
 
     @Test
-    void testSingleViolation() {
+    void test_AbstractClassWithNoAbstractMethods_Violation() {
         final SOURCE = '''
             abstract class MyBaseClass {
                 void method1() { }
@@ -69,8 +74,46 @@ class AbstractClassWithoutAbstractMethodRuleTest extends AbstractRuleTestCase<Ab
                 'The abstract class MyBaseClass contains no abstract methods')
     }
 
+    @Test
+    void test_AbstractSubclassOfAbstractSuperclass_EnhancedModeFalse_Violation() {
+        final SOURCE = '''
+            abstract class SomeAbstractSuperclass {
+                abstract String getName()
+            }
+            abstract class MyBaseClass extends SomeAbstractSuperclass {
+                void method1() { }
+                void method2() { }
+            } '''
+        rule.enhancedMode = false
+        assertSingleViolation(SOURCE, 5,
+                'abstract class MyBaseClass',
+                'The abstract class MyBaseClass contains no abstract methods')
+    }
+
     @Override
     protected AbstractClassWithoutAbstractMethodRule createRule() {
         new AbstractClassWithoutAbstractMethodRule()
     }
+}
+
+class EnhancedAbstractClassWithoutAbstractMethodRuleTest extends AbstractClassWithoutAbstractMethodRuleTest {
+
+    @Before
+    void enableEnhancedMode() {
+        rule.enhancedMode = true
+    }
+
+    @Test
+    void test_AbstractSubclassOfAbstractSuperclass_NoViolations() {
+        final SOURCE = '''
+            abstract class SomeOtherAbstractSuperclass {
+                abstract String getName()
+            }
+
+            abstract class AbstractClass extends SomeOtherAbstractSuperclass {
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
 }

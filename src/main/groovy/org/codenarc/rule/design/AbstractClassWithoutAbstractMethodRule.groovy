@@ -17,7 +17,7 @@ package org.codenarc.rule.design
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AbstractEnhanceableAstVisitorRule
 
 import java.lang.reflect.Modifier
 
@@ -28,7 +28,7 @@ import java.lang.reflect.Modifier
  *
  * @author 'Hamlet D'Arcy'
  */
-class AbstractClassWithoutAbstractMethodRule extends AbstractAstVisitorRule {
+class AbstractClassWithoutAbstractMethodRule extends AbstractEnhanceableAstVisitorRule {
     String name = 'AbstractClassWithoutAbstractMethod'
     int priority = 2
     Class astVisitorClass = AbstractClassWithoutAbstractMethodAstVisitor
@@ -36,11 +36,16 @@ class AbstractClassWithoutAbstractMethodRule extends AbstractAstVisitorRule {
 
 class AbstractClassWithoutAbstractMethodAstVisitor extends AbstractAstVisitor {
     @Override protected void visitClassEx(ClassNode node) {
-        if (!node.isInterface() && Modifier.isAbstract(node.modifiers) && !node.superClass.name.startsWith('Abstract') && !node.superClass.name.startsWith('Base')) {
+        if (!node.isInterface() && Modifier.isAbstract(node.modifiers) && !skipSuperClass(node)) {
             if (!node.methods.any {  Modifier.isAbstract(it.modifiers)  }) {
                 addViolation(node, "The abstract class $node.name contains no abstract methods")
             }
         }
         super.visitClassEx(node)
+    }
+
+    private boolean skipSuperClass(ClassNode node) {
+        ClassNode superClass = node.superClass
+        return superClass.name.startsWith('Abstract') || superClass.name.startsWith('Base') || Modifier.isAbstract(superClass.modifiers)
     }
 }
