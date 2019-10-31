@@ -42,7 +42,7 @@
 }
 
 .banner {
-    background:url('./codenarc-logo.png');
+    background:url('../codenarc-logo.png');
     width:100%;
     min-height:140px;
 }
