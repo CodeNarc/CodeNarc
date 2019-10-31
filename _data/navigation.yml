@@ -1,0 +1,19 @@
+sidebar-nav:
+  - title: "General"
+    children:
+      - title: "Home"
+        url: http://codenarc.sourceforge.net/
+      - title: "Downloads"
+        url: https://sourceforge.net/projects/codenarc/files/
+      - title: "GitHub Project"
+        url: https://github.com/CodeNarc
+  - title: "Running"
+    children:
+      - title: "Ant Task Usage"
+        url: /
+      - title: "Command-line"
+        url: /
+      - title: "Run as a Test"
+        url: /
+      - title: "Other Tools/Frameworks"
+        url: /
