@@ -41,6 +41,12 @@
   color: #000000;
 }
 
+.banner {
+    background:url('./codenarc-logo.png');
+    width:100%;
+    min-height:140px;
+}
+
 /* Style page content */
 .container {
   margin-left: 200px; /* Same as the width of the sidebar */
