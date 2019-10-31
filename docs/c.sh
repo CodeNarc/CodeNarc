@@ -9,7 +9,7 @@ filename=$1.md
 #    exit 1
 #fi
 
-cp src/site/apt/$1.apt $filename
+cp ../src/site/apt/$1.apt $filename
 
 sed -i 's/<<</`/g' $filename
 sed -i 's/>>>/`/g' $filename

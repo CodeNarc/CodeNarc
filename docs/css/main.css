@@ -13,13 +13,15 @@
 }
 
 .sidebar h2 {
-  padding-top: 2px;
+  padding-top: 4px;
+  padding-bottom: 2px;
   margin-top: 2px;
   font-size: 18px;
 }
 
 .sidebar ul {
   padding-top: 2px;
+  padding-bottom: 2px;
   margin-top: 2px;
 }
 
