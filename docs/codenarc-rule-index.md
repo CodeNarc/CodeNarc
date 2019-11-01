@@ -2,6 +2,7 @@
 layout: default
 title: CodeNarc - Rule Index
 ---  
+
 # Rule Index  
 
 **CodeNarc** includes 380 rules.  
