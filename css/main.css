@@ -41,8 +41,8 @@
   color: #000000;
 }
 
-.banner {
-    background:url('../codenarc-logo.png');
+#banner {
+    background:url('./images/codenarc-logo.png');
     width:100%;
     min-height:140px;
 }
