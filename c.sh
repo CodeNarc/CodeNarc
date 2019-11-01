@@ -27,6 +27,8 @@ sed -i 's/^\*\*\* /#### /g' $filename
 sed -i 's/+----------------------------------*/```/g' $filename
 sed -i 's/----------------------------------*/```/g' $filename
 
+sed -i 's/~~~~~~~~~~~~~~*//g' $filename
+
 
 sed -i 's/{{{/zzz/g' $filename
 sed -i 's/}}/yy/g' $filename
@@ -37,5 +39,5 @@ sed -i 's/zzz\(.*\)}\(.*\)yy/[\2](\1)/g' $filename
 
 # {{{./codenarc-developer-guide.html#The_codenarc_Command-line_Script}<<codenarc create-rule>>}}
 
-sed -i 's/## \{/## /g' $filename
-sed -i 's/\} Rule/ Rule/g' $filename
+sed -i 's/## {/## /g' $filename
+sed -i 's/} Rule/ Rule/g' $filename

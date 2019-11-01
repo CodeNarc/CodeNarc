@@ -1,0 +1,34 @@
+---
+layout: default
+title: CodeNarc - Braces Rules
+---
+
+# Braces Rules  ("*rulesets/braces.xml*")
+
+
+## ElseBlockBraces Rule
+
+Checks that *else* blocks use braces, even for a single statement.
+
+By default, braces are not required for an *else* if it is followed immediately by an *if*.
+Set the *bracesRequiredForElseIf* property to true to require braces is that situation as well.
+
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| bracesRequiredForElseIf     | Set to `true` to require braces for an *else* block followed immediately by an *if* statement. |  `false` |
+
+
+## ForStatementBraces Rule
+
+Checks that *for* statements use braces, even for a single statement.
+
+
+## IfStatementBraces Rule
+
+Checks that *if* statements use braces, even for a single statement.
+
+
+## WhileStatementBraces Rule
+
+Checks that while statements use braces, even for a single statement.
+
