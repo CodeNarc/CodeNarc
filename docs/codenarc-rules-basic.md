@@ -388,7 +388,7 @@ matches this regex then no violations are produced.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreRegex                 | Regular expression - exception parameter names matching this regular expression are ignored and no violations are produced. | 'ignore|ignored' |
+| ignoreRegex                 | Regular expression - exception parameter names matching this regular expression are ignored and no violations are produced. | 'ignore\|ignored' |
 
 Here is an example of code that produces a violation:
 
