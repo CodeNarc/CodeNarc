@@ -41,12 +41,6 @@
   color: #000000;
 }
 
-#banner {
-    background:url('./images/codenarc-logo.png');
-    width:100%;
-    min-height:140px;
-}
-
 /* Style page content */
 .container {
   margin-left: 200px; /* Same as the width of the sidebar */
@@ -88,8 +82,8 @@ h1 {
     color: #003380;
 }
 p {
-    font-size: 1.5em;
-    line-height: 1.4em;
+    font-size: 1.4em;
+    line-height: 1.3em;
     color: #333;
 }
 footer {
@@ -124,3 +118,29 @@ th {
 tr:nth-child(even) {background-color: #f2f2f2;}
 
 
+div.clear{
+  clear:both;
+  visibility: hidden;
+}
+div.clear hr{
+  display: none;
+}
+#bannerLeft, #bannerRight {
+  font-size: xx-large;
+  font-weight: bold;
+}
+#bannerLeft img, #bannerRight img {
+  margin: 0px;
+}
+.xleft, #bannerLeft img {
+  float:left;
+}
+.xright, #bannerRight {
+  float:right;
+}
+#banner {
+  padding: 0px;
+}
+#banner img {
+  border: none;
+}
