@@ -41,14 +41,6 @@
   color: #000000;
 }
 
-/* Style page content */
-.container {
-  margin-top: 150px; /* Same as the height of the banner */
-  margin-left: 200px; /* Same as the width of the sidebar */
-  /*top: 150px;*/ /* Stay under the banner */
-  padding: 0px 10px;
-}
-
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
@@ -66,6 +58,15 @@ h1 {
     /* font-size: 3em; */
     /* font-family:'Helvetica', 'Arial', 'Sans-Serif'; */
 }
+
+/* Style page content */
+.container {
+  margin-top: 150px; /* Same as the height of the banner */
+  margin-left: 200px; /* Same as the width of the sidebar */
+  top: 150px;       /* Stay under the banner */
+  padding: 0px 10px;
+}
+
 .container h1, .container h2, .container h3, .container h4 {
     color: #003380;
 }
@@ -139,6 +140,7 @@ div.clear hr{
     z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
+    border-bottom: 1px solid #d5d5d5;
 
 }
 #banner img {
