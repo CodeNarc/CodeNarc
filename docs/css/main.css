@@ -4,7 +4,7 @@
   width: 200px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
-  top: 150; /* Stay under the banner */
+  top: 150px; /* Stay under the banner */
   left: 0;
   background-color: #99ff99; /* Green */
   overflow-x: hidden; /* Disable horizontal scroll */
@@ -128,6 +128,7 @@ div.clear hr{
     padding: 0px;
     /*margin-left: 200px;*/ /* Same as the width of the sidebar */
     margin-left: 0px; /* Same as the width of the sidebar */
+    height: 150px;
     width: 100%;
     position: fixed; /* Fixed (stay in place on scroll) */
     z-index: 1; /* Stay on top */
