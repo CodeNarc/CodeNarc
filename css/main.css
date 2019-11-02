@@ -15,14 +15,14 @@
 .sidebar h2 {
   padding-top: 4px;
   padding-bottom: 2px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-size: 18px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  font-size: 17px;
 }
 
 .sidebar ul {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -62,7 +62,7 @@ h1 {
 /* Style page content */
 .container {
   /*margin-top: 150px;*/ /* Same as the height of the banner */
-  padding-top: 160px; /* Banner height + 10px */
+  padding-top: 150px; /* Banner height */
   padding-left: 10px;
   margin-left: 200px; /* Same as the width of the sidebar */
   top: 150px;       /* Stay under the banner */
