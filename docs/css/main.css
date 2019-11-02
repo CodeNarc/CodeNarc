@@ -105,11 +105,11 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 
 div.clear{
-    clear:both;
-    visibility: hidden;
+    /*clear:both;*/
+    /*visibility: hidden;*/
 }
 div.clear hr{
-    display: none;
+    /*display: none;*/
 }
 #bannerLeft, #bannerRight {
     font-size: xx-large;
@@ -126,8 +126,13 @@ div.clear hr{
 }
 #banner {
     padding: 0px;
-    margin-left: 200px; /* Same as the width of the sidebar */
+    /*margin-left: 200px;*/ /* Same as the width of the sidebar */
+    margin-left: 0px; /* Same as the width of the sidebar */
     width: 100%;
+    position: fixed; /* Fixed (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
 
 }
 #banner img {
