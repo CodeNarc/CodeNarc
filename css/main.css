@@ -62,7 +62,8 @@ h1 {
 /* Style page content */
 .container {
   /*margin-top: 150px;*/ /* Same as the height of the banner */
-  padding-top: 150px; /* Same as the height of the banner */
+  padding-top: 160px; /* Banner height + 10px */
+  padding-left: 10px;
   margin-left: 200px; /* Same as the width of the sidebar */
   top: 150px;       /* Stay under the banner */
   /*padding: 10px 10px;*/
@@ -142,7 +143,7 @@ div.clear hr{
     top: 0;
     left: 0;
     border-bottom: 1px solid #d5d5d5;
-    background-color: #99ff99; /* Green */
+    background-color: #33cccc; /* Green */
 
 }
 #banner img {
