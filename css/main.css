@@ -129,8 +129,10 @@ div.clear hr{
     /* margin-left: 200px; Same as the width of the sidebar */
     margin-left: 0; /* Same as the width of the sidebar */
     width: 100%;
-
+    height: 150px;
+    position: fixed; /* Fixed (stay in place on scroll) */
 }
+
 #banner img {
     border: none;
 }
