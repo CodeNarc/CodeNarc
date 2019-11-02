@@ -43,8 +43,9 @@
 
 /* Style page content */
 .container {
+  margin-top: 150px; /* Same as the height of the banner */
   margin-left: 200px; /* Same as the width of the sidebar */
-  top: 150px; /* Stay under the banner */
+  /*top: 150px;*/ /* Stay under the banner */
   padding: 0px 10px;
 }
 
