@@ -119,28 +119,31 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 
 div.clear{
-  clear:both;
-  visibility: hidden;
+    clear:both;
+    visibility: hidden;
 }
 div.clear hr{
-  display: none;
+    display: none;
 }
 #bannerLeft, #bannerRight {
-  font-size: xx-large;
-  font-weight: bold;
+    font-size: xx-large;
+    font-weight: bold;
 }
 #bannerLeft img, #bannerRight img {
-  margin: 0px;
+    margin: 0px;
 }
 .xleft, #bannerLeft img {
-  float:left;
+    float:left;
 }
 .xright, #bannerRight {
-  float:right;
+    float:right;
 }
 #banner {
-  padding: 0px;
+    padding: 0px;
+    margin-left: 200px; /* Same as the width of the sidebar */
+    width: 100%;
+
 }
 #banner img {
-  border: none;
+    border: none;
 }
