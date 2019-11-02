@@ -44,6 +44,7 @@
 /* Style page content */
 .container {
   margin-left: 200px; /* Same as the width of the sidebar */
+  top: 150px; /* Stay under the banner */
   padding: 0px 10px;
 }
 
@@ -74,6 +75,7 @@ p {
 }
 footer {
     border-top: 1px solid #d5d5d5;
+    margin-left: 200px; /* Same as the width of the sidebar */
     font-size: .8em;
 }
 
@@ -103,10 +105,12 @@ th {
 
 tr:nth-child(even) {background-color: #f2f2f2;}
 
+/* Banner ------------------------- */
 
 div.clear{
     /*clear:both;*/
     /*visibility: hidden;*/
+    margin: 0px;
 }
 div.clear hr{
     /*display: none;*/
