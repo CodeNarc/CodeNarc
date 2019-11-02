@@ -4,7 +4,7 @@
   width: 200px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  top: 150; /* Stay under the banner */
   left: 0;
   background-color: #99ff99; /* Green */
   overflow-x: hidden; /* Disable horizontal scroll */
@@ -50,23 +50,9 @@
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  .sidebar a {font-size: 15px;}
 }
 
-nav {
-  margin-left: 200px; /* Same as the width of the sidebar */
-}
-
-nav ul, footer ul {
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-}
-nav ul li, footer ul li {
-    display: inline;
-    margin-right: 20px;
-}
 a {
     text-decoration: none;
     color: #999;
@@ -82,8 +68,8 @@ h1 {
     color: #003380;
 }
 p {
-    font-size: 1.4em;
-    line-height: 1.3em;
+    font-size: 1.1em;
+    line-height: 1.0em;
     color: #333;
 }
 footer {
@@ -93,7 +79,7 @@ footer {
 
 ul.posts { 
     margin: 20px auto 40px; 
-    font-size: 1.5em;
+    font-size: 1.1em;
 }
 
 ul.posts li {
@@ -140,7 +126,8 @@ div.clear hr{
 }
 #banner {
     padding: 0px;
-    margin-left: 200px; /* Same as the width of the sidebar */
+    /* margin-left: 200px; Same as the width of the sidebar */
+    margin-left: 0; /* Same as the width of the sidebar */
     width: 100%;
 
 }
