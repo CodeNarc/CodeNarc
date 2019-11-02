@@ -1,9 +1,9 @@
 ---
 layout: default
-title: CodeNarc - Enhanced Classpath Rules
+title: CodeNarc - About the Enhanced Classpath Rules
 ---  
 
-# CodeNarc - Enhanced Classpath Rules
+# CodeNarc - About the Enhanced Classpath Rules
 
 Several newer rules use a later compilation phase for parsing of the Groovy source code,
 allowing **CodeNarc** to use a richer and more complete Abstract Syntax Tree (AST). The

@@ -61,10 +61,11 @@ h1 {
 
 /* Style page content */
 .container {
-  margin-top: 150px; /* Same as the height of the banner */
+  /*margin-top: 150px;*/ /* Same as the height of the banner */
+  padding-top: 150px; /* Same as the height of the banner */
   margin-left: 200px; /* Same as the width of the sidebar */
   top: 150px;       /* Stay under the banner */
-  padding: 0px 10px;
+  /*padding: 10px 10px;*/
 }
 
 .container h1, .container h2, .container h3, .container h4 {
@@ -133,7 +134,7 @@ div.clear hr{
 #banner {
     padding: 0px;
     /*margin-left: 200px;*/ /* Same as the width of the sidebar */
-    margin-left: 0px; /* Same as the width of the sidebar */
+    margin-left: 0px;
     height: 150px;
     width: 100%;
     position: fixed; /* Fixed (stay in place on scroll) */
@@ -141,6 +142,7 @@ div.clear hr{
     top: 0;
     left: 0;
     border-bottom: 1px solid #d5d5d5;
+    background-color: #99ff99; /* Green */
 
 }
 #banner img {
