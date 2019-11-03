@@ -6,7 +6,7 @@
   z-index: 1; /* Stay on top */
   top: 150px; /* Stay under the banner */
   left: 0;
-  background-color: #99ff99; /* Green */
+  background-color: #A9A9A9; /* Dark Gray */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 2px;
   padding-left: 4px;
@@ -32,7 +32,7 @@
   padding: 2px 4px 2px 4px;
   text-decoration: none;
   font-size: 15px;
-  color: #818181;
+  color: #000000;
   display: block;
 }
 
@@ -103,7 +103,7 @@ table, th, td {
 
 th {
     text-align: left;
-    background-color: #4CAF50;
+    background-color: #A9A9A9;
     color: white;
 }
 
@@ -143,7 +143,7 @@ div.clear hr{
     top: 0;
     left: 0;
     border-bottom: 1px solid #d5d5d5;
-    background-color: #33cccc; /* Green */
+    background-color: #585858; /* Light Black */
 
 }
 #banner img {
