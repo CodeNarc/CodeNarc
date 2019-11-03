@@ -47,7 +47,7 @@ Modifiers for properties are only:
 Note that you must use the standard rule properties, such as `applyToClassNames`, `doNotApplyToFileNames`
 and `applyToFilesMatching` to apply this rule to a subset of all classes/files. These rule properties
 are described in 
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
 
 Example of violations for methods:
 
@@ -78,12 +78,12 @@ with a unique rule *name* and *classNames*, and (optionally) customized *violati
 
 ###  Notes
 
-  [[1]] At least one the `illegalFieldModifiers`, `allowedFieldModifiers`, `illegalPropertyModifiers`,
+  1. At least one the `illegalFieldModifiers`, `allowedFieldModifiers`, `illegalPropertyModifiers`,
   `allowedPropertyModifiers`, `illegalMethodModifiers` or `allowedMethodModifiers`
   properties must be set (i.e., not null or empty) or else this rule does nothing. In other words, you must configure
   this rule with at least one kind of illegal or allowed class member.
 
-  [[2]] At least one of the (standard) `applyToClassNames`, `applyToFileNames` or `applyToFilesMatching`
+  2. At least one of the (standard) `applyToClassNames`, `applyToFileNames` or `applyToFilesMatching`
   properties must be set (i.e., not null or empty) or else this rule does nothing. In other words, you must configure
   this rule to apply to a specific set of classes or files.
 
@@ -101,7 +101,7 @@ Checks for reference to any of the classes configured in `classNames`.
 Note that you can use the standard rule properties, such as `applyToClassNames`, `doNotApplyToFileNames`
 and `applyToFilesMatching` to only apply this rule to a subset of all classes/files. These rule properties
 are described in 
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
 
 This rule can be useful for governance and enforcement of *architectural layering*. For instance,
 making sure that view or model classes, for instance, do not contain references to DAO classes (e.g., *Dao).
@@ -142,7 +142,7 @@ Checks for reference to any of the packages configured in `packageNames`.
 Note that you can use the standard rule properties, such as `applyToClassNames`, `doNotApplyToFileNames`
 and `applyToFilesMatching` to only apply this rule to a subset of all classes/files. These rule properties
 are described in 
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
 
 This rule can be useful for governance and enforcement of *architectural layering*. For instance,
 making sure that view or model classes, for instance, do not contain references to JDBC-specific packages
@@ -184,7 +184,7 @@ with a unique rule *name* and *regex*, and (optionally) customized *violationMes
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
 
 
 ## IllegalString Rule
@@ -202,7 +202,7 @@ with a unique rule *name* and *string*, and (optionally) customized *violationMe
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
 
 
 ## IllegalSubclass Rule
@@ -232,7 +232,7 @@ with a unique rule *name* and *regex*, and (optionally) customized *violationMes
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
 
 
 ## RequiredString Rule
@@ -248,7 +248,7 @@ with a unique rule *name* and *string*, and (optionally) customized *violationMe
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
 
 
 ## StatelessClass Rule
@@ -282,19 +282,19 @@ Standard Properties for Configuring Rulesyy.
 
 ###  Notes
 
-  [[1]]  The `ignoreFieldTypes` property matches the field type name as indicated
+  1.  The `ignoreFieldTypes` property matches the field type name as indicated
   in the field declaration, only including a full package specification IF it is included in
   the source code. For example, the field declaration `BigDecimal value` matches
   an `ignoreFieldTypes` value of `BigDecimal`, but not
   `java.lang.BigDecimal`.
 
-  [[2]]  There is one exception for the `ignoreFieldTypes` property: if the field is declared
+  2.  There is one exception for the `ignoreFieldTypes` property: if the field is declared
   with a modifier/type of `def`, then the type resolves to `java.lang.Object`.
 
-  [[3]] At least one of the (standard) `applyToClassNames`, `applyToFileNames` or `applyToFilesMatching`
+  3. At least one of the (standard) `applyToClassNames`, `applyToFileNames` or `applyToFilesMatching`
   properties must be set (i.e., not null or empty) or else this rule does nothing. In other words, you must configure
   this rule to apply to a specific set of classes or files.
 
-  [[4]] This rule will not catch violations of true *statelessness*/*reentrancy* if you define a `final`
+  4. This rule will not catch violations of true *statelessness*/*reentrancy* if you define a `final`
   field whose value is itself mutable, e.g. a `final HashMap`.
 

@@ -21,7 +21,7 @@
 }
 
 .sidebar ul {
-  padding-top: 1px;
+  padding-top: 0px;
   padding-bottom: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -29,7 +29,7 @@
 
 /* The navigation menu links */
 .sidebar a {
-  padding: 2px 4px 2px 4px;
+  padding: 1px 4px 1px 4px;
   text-decoration: none;
   font-size: 15px;
   color: #000000;
@@ -143,7 +143,7 @@ div.clear hr{
     top: 0;
     left: 0;
     border-bottom: 1px solid #d5d5d5;
-    background-color: #585858; /* Light Black */
+    background-color: #202020; /* Lighter Black */
 
 }
 #banner img {
