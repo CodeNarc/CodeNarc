@@ -29,7 +29,7 @@
 
 /* The navigation menu links */
 .sidebar a {
-  padding: 1px 4px 1px 4px;
+  padding: 0px 4px 1px 4px;
   text-decoration: none;
   font-size: 15px;
   color: #000000;
@@ -144,7 +144,7 @@ div.clear hr{
     left: 0;
     border-bottom: 1px solid #d5d5d5;
     /*background-color: #202020;*/ /* Lighter Black */
-    background-image: linear-gradient(to right, #000000 , #808080);
+    background-image: linear-gradient(to right, #000000 , #A9A9A9);
 
 }
 #banner img {
