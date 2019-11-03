@@ -143,7 +143,8 @@ div.clear hr{
     top: 0;
     left: 0;
     border-bottom: 1px solid #d5d5d5;
-    background-color: #202020; /* Lighter Black */
+    /*background-color: #202020;*/ /* Lighter Black */
+    background-image: linear-gradient(to right, #000000 , #808080);
 
 }
 #banner img {
