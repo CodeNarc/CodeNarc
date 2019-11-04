@@ -82,7 +82,7 @@ Also, violations are triggered when methods and fields have very similar names.
 A factory method is a method that creates objects, and they are typically named either buildFoo(), makeFoo(), or
 createFoo(). This rule enforces that only one naming convention is used. It defaults to allowing makeFoo(), but that
 can be changed using the property `regex`. The regex is a negative expression; it specifically bans
-methods named build* or create*. However, methods named build or build* receive some special treatment because of the
+methods named build* or create*. However, methods named `build` or `build*` receive some special treatment because of the
 popular Builder Pattern. If the 'build' method is in a class named *Builder then it does not cause a violation.
 
 Builder methods are slightly different than factory methods.
@@ -152,7 +152,7 @@ see `PropertyNameRule`.
 | finalRegex                  | Specifies the regular expression used to validate `final` field names. It is optional. If not set, then `final` fields that are non-`static` are validated using **regex**. | `null` |
 | staticRegex                 | Specifies the regular expression used to validate `static` field names. It is optional. If not set, then `static` fields that are non-`final` are validated using **regex**. | `null` |
 | staticFinalRegex            | Specifies the regular expression used to validate `static final` field names. It is optional. If not set, then `static final` fields are validated using **finalRegex**, **staticRegex** or **regex**.                  |  \[A-Z\]\[A-Z0-9_\]*  |
-| ignoreFieldNames            | Specifies one or more (comma-separated) field names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | serialVersionUID   |
+| ignoreFieldNames            | Specifies one or more (comma-separated) field names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `serialVersionUID` |
 
 
 The order of precedence for the regular expression properties is: **staticFinalRegex**,
