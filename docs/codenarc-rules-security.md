@@ -1,0 +1,204 @@
+---
+layout: default
+title: CodeNarc - Security Rules
+---  
+
+# Security Rules  ("*rulesets/security.xml*")
+
+
+Also see [GrailsMassAssignment](./codenarc-rules-grails.html#GrailsMassAssignment).
+
+
+## FileCreateTempFile Rule
+
+*Since CodeNarc 0.14*
+
+The File.createTempFile() method is insecure, and has been deprecated by the ESAPI secure coding library.
+It has been replaced by the ESAPI Randomizer.getRandomFilename(String) method.
+
+For more information see the ESAPI website: http://code.google.com/p/owasp-esapi-java/
+and the Randomizer Javadoc: <http://owasp-esapi-java.googlecode.com/svn/trunk_doc/latest/org/owasp/esapi/Randomizer.html>
+
+
+## InsecureRandom Rule
+
+*Since CodeNarc 0.14*
+
+Reports usages of `java.util.Random`, which can produce very predictable results. If two instances of Random are created with the same seed and sequence of method calls, they will generate the exact same results.
+Use `java.security.SecureRandom` instead, which provides a cryptographically strong random number generator. SecureRandom uses PRNG, which means they are using a deterministic algorithm to produce a pseudo-random number from a true random seed. SecureRandom produces non-deterministic output.
+
+By default, this rule ignores test classes are ignored.
+
+For more information see: <http://www.klocwork.com/products/documentation/current/Checkers:SV.RANDOM>
+
+Example of violations:
+
+```
+     def r1 = new Random()
+     def r2 = new java.util.Random()
+     Math.random()
+     java.lang.Math.random()
+
+     // this is OK
+     new java.security.SecureRandom()
+     new SecureRandom()
+```
+
+
+## JavaIoPackageAccess Rule
+
+*Since CodeNarc 0.14*
+
+This rule reports violations of the Enterprise JavaBeans specification by using the java.io package to access files or the file system.
+
+The Enterprise JavaBeans specification requires that every bean provider follow a set of programming guidelines designed to ensure that
+the bean will be portable and behave consistently in any EJB container [1].
+
+In this case, the program violates the following EJB guideline: "An enterprise bean must not use the java.io package to attempt to access files and directories in the file system."
+
+A requirement that the specification justifies in the following way: "The file system APIs are not well-suited for business components to access data. Business components should use a resource manager API, such as JDBC, to store data."
+
+REFERENCES
+  - [1] Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 576
+  - [2] The Enterprise JavaBeans 2.1 Specification Sun Microsystems
+
+By default, this rule is not applied to tests and test cases.
+
+Example of violations:
+
+```
+    FileSystem.getFileSystem()          // any method on FileSystem
+    FileSystem.fileSystem.delete(aFile) // property access of FileSystem
+
+    // shouldn't create files
+    new File(name)
+    new File(name, parent)
+
+    // don't create file readers
+    new FileReader(name)
+
+    // don't create file output streams
+    new FileOutputStream(name)
+    new FileOutputStream(name, true)
+
+    // don't create random access file
+    new RandomAccessFile(name, parent)
+```
+
+
+## NonFinalPublicField Rule
+
+*Since CodeNarc 0.14*
+
+Finds code that violates secure coding principles for mobile code by declaring a member variable public but not final.
+
+All public member variables in an Applet and in classes used by an Applet should be declared final to prevent an attacker
+from manipulating or gaining unauthorized access to the internal state of the Applet.
+
+References:
+  * Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 493
+  * G. McGraw Securing Java. Chapter 7: Java Security Guidelines
+
+
+## NonFinalSubclassOfSensitiveInterface Rule
+
+*Since CodeNarc 0.14*
+
+The permissions classes such as `java.security.Permission` and `java.security.BasicPermission` are designed to be extended.
+Classes that derive from these permissions classes, however, must prohibit extension. This prohibition ensures that
+malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces
+such as `java.security.PrivilegedAction` and `java.security.PrivilegedActionException` must also be declared `final` for analogous reasons.
+
+For more information see: {{https://www.securecoding.cert.org/confluence/display/java/SEC07-J.+Classes+that+derive+from+a+sensitive+class+or+implement+a+sensitive+interface+must+be+declared+finalyy
+
+Example of violations:
+
+```
+    class MyPermission extends java.security.Permission {
+        MyPermission(String name) { super(name) }
+        boolean implies(Permission permission) { true }
+        boolean equals(Object obj) { true }
+        int hashCode() { 0 }
+        String getActions() { "action" }
+    }
+
+    class MyBasicPermission extends BasicPermission {
+        MyBasicPermission(String name) { super(name) }
+    }
+
+    class MyPrivilegedAction implements PrivilegedAction {
+        Object run() { 0 }
+    }
+
+    class MyPrivilegedActionException extends PrivilegedActionException {
+        MyPrivilegedActionException(Exception exception) { super(exception) }
+    }
+```
+
+
+## PublicFinalizeMethod Rule
+
+*Since CodeNarc 0.14*
+
+Creates a violation when the program violates secure coding principles by declaring a `finalize()` method public.
+
+A program should never call finalize explicitly, except to call super.finalize() inside an implementation of `finalize()`.
+In mobile code situations, the otherwise error prone practice of manual garbage collection can become a security threat
+if an attacker can maliciously invoke one of your finalize() methods because it is declared with public access. If
+you are using `finalize()` as it was designed, there is no reason to declare `finalize()` with anything other than protected
+access.
+
+References:
+  * Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 583
+  * G. McGraw Securing Java. Chapter 7: Java Security Guidelines
+
+
+## ObjectFinalize Rule
+
+*Since CodeNarc 0.14*
+
+The finalize() method should only be called by the JVM after the object has been garbage collected.
+
+While the Java Language Specification allows an object's finalize() method to be called from outside the
+finalizer, doing so is usually a bad idea. For example, calling finalize() explicitly means that finalize() will be
+called more than once: the first time will be the explicit call and the last time will be the call that is made
+after the object is garbage collected.
+
+References: Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 586
+
+
+## SystemExit Rule
+
+*Since CodeNarc 0.14*
+
+Web applications should never call System.exit(). A call to System.exit() is probably part of leftover debug
+code or code imported from a non-J2EE application.
+
+  - [1] Standards Mapping - OWASP Top 10 2004 - (OWASP 2004) A9 Application Denial of Service
+
+  - [2] Standards Mapping - Security Technical Implementation Guide Version 3 - (STIG 3) APP6080 CAT II
+
+  - [3] Standards Mapping - Common Weakness Enumeration - (CWE) CWE ID 382
+
+  - [4] Standards Mapping - Payment Card Industry Data Security Standard Version 1.1 - (PCI 1.1) Requirement 6.5.9
+
+
+## UnsafeArrayDeclaration Rule
+
+*Since CodeNarc 0.14*
+
+Triggers a violation when an array is declared public, final, and static.
+
+In most cases an array declared public, final and static is a bug. Because arrays are mutable objects, the
+final constraint requires that the array object itself be assigned only once, but makes no guarantees
+about the values of the array elements. Since the array is public, a malicious program can change the
+values stored in the array. In most situations the array should be made private.
+
+Example of violations:
+
+```
+    class MyClass {
+        public static final String[] myArray = init()
+        public static final def myArray = [] as String[]
+    }
+```
