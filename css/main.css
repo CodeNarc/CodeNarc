@@ -11,8 +11,8 @@
 
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
-  padding-top: 2px;
-  padding-left: 4px;
+  padding-top: 0px;
+  padding-left: 0px;
   overflow: auto;
 }
 
