@@ -109,7 +109,7 @@ Classes that derive from these permissions classes, however, must prohibit exten
 malicious subclasses cannot change the properties of the derived class. Classes that implement sensitive interfaces
 such as `java.security.PrivilegedAction` and `java.security.PrivilegedActionException` must also be declared `final` for analogous reasons.
 
-For more information see: {{https://www.securecoding.cert.org/confluence/display/java/SEC07-J.+Classes+that+derive+from+a+sensitive+class+or+implement+a+sensitive+interface+must+be+declared+finalyy
+For more information see: <https://www.securecoding.cert.org/confluence/display/java/SEC07-J.+Classes+that+derive+from+a+sensitive+class+or+implement+a+sensitive+interface+must+be+declared+final>
 
 Example of violations:
 
