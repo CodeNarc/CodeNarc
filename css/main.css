@@ -1,15 +1,18 @@
 /* The sidebar menu */
 .sidebar {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
+  /*height: 100%;*/ /* Full-height: remove this if you want "auto" height */
   width: 200px; /* Set the width of the sidebar */
   /*position: fixed;*/ /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 150px; /* Stay under the banner */
-  left: 0;
+  /*z-index: 1;*/ /* Stay on top */
+  /*top: 150px;*/ /* Stay under the banner */
+  /*left: 0;*/
+  /*overflow-x: hidden;*/ /* Disable horizontal scroll */
+
+  float: left;
   background-color: #A9A9A9; /* Dark Gray */
-  overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 2px;
   padding-left: 4px;
+  overflow: auto;
 }
 
 .sidebar h2 {
