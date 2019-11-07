@@ -1,4 +1,41 @@
-/* The sidebar menu */
+body {
+    margin: 0px;
+}
+
+/* Banner ------------------------- */
+
+#bannerLeft, #bannerRight {
+    font-size: xx-large;
+    font-weight: bold;
+}
+#bannerLeft img, #bannerRight img {
+    margin: 0px;
+}
+.xleft, #bannerLeft img {
+    float:left;
+}
+.xright, #bannerRight {
+    float:right;
+}
+#banner {
+    padding: 0px;
+    margin-left: 0px;
+    height: 150px;
+    width: 100%;
+    position: fixed; /* Fixed (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #d5d5d5;
+    background-image: linear-gradient(to right, #000000 , #A9A9A9);
+
+}
+#banner img {
+    border: none;
+}
+
+/* Sidebar Menu ------------------------- */
+
 .sidebar {
   width: 200px; /* Set the width of the sidebar */
   z-index: 1; /* Stay on top */
@@ -50,6 +87,8 @@
   .sidebar a {font-size: 15px;}
 }
 
+/* Main content ------------------------- */
+
 a {
     text-decoration: none;
     color: #999;
@@ -82,17 +121,6 @@ footer {
     font-size: .8em;
 }
 
-/*
-ul.posts {
-    margin: 20px auto 40px; 
-    font-size: 1.1em;
-}
-
-ul.posts li {
-    list-style: none;
-}
-*/
-
 table {
     border-collapse: collapse;
 }
@@ -114,34 +142,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     padding: 8px;
 }
 
-/* Banner ------------------------- */
-
-#bannerLeft, #bannerRight {
-    font-size: xx-large;
-    font-weight: bold;
-}
-#bannerLeft img, #bannerRight img {
-    margin: 0px;
-}
-.xleft, #bannerLeft img {
-    float:left;
-}
-.xright, #bannerRight {
-    float:right;
-}
-#banner {
-    padding: 0px;
-    margin-left: 0px;
-    height: 150px;
-    width: 100%;
-    position: fixed; /* Fixed (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0;
-    left: 0;
-    border-bottom: 1px solid #d5d5d5;
-    background-image: linear-gradient(to right, #000000 , #A9A9A9);
-
-}
-#banner img {
-    border: none;
+.section h2 {
+    padding: 2px;
 }
