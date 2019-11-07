@@ -1,13 +1,10 @@
 /* The sidebar menu */
 .sidebar {
-  /*height: 100%;*/ /* Full-height: remove this if you want "auto" height */
   width: 200px; /* Set the width of the sidebar */
-  /*position: fixed;*/ /* Fixed Sidebar (stay in place on scroll) */
   /*z-index: 1;*/ /* Stay on top */
   /*top: 150px;*/ /* Stay under the banner */
   margin-top: 150px; /* Stay under the banner */
-  left: 0;
-  /*overflow-x: hidden;*/ /* Disable horizontal scroll */
+  left: 0px;
 
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
@@ -115,14 +112,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 /* Banner ------------------------- */
 
-div.clear{
-    /*clear:both;*/
-    /*visibility: hidden;*/
-    margin: 0px;
-}
-div.clear hr{
-    /*display: none;*/
-}
 #bannerLeft, #bannerRight {
     font-size: xx-large;
     font-weight: bold;
