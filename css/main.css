@@ -7,7 +7,7 @@
   margin-left: 0px;
   left: 0px;
 
-  float: left;
+  /*float: left;*/
   background-color: #A9A9A9; /* Dark Gray */
   padding-top: 0px;
   padding-left: 2px;
@@ -86,7 +86,8 @@ footer {
     font-size: .8em;
 }
 
-ul.posts { 
+/*
+ul.posts {
     margin: 20px auto 40px; 
     font-size: 1.1em;
 }
@@ -94,6 +95,7 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
+*/
 
 table {
     border-collapse: collapse;
@@ -111,6 +113,10 @@ th {
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
+
+.section {
+    padding: 4px;
+}
 
 /* Banner ------------------------- */
 
