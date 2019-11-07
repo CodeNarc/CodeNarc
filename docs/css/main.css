@@ -1,8 +1,8 @@
 /* The sidebar menu */
 .sidebar {
   width: 200px; /* Set the width of the sidebar */
-  /*z-index: 1;*/ /* Stay on top */
-  /*top: 150px;*/ /* Stay under the banner */
+  z-index: 1; /* Stay on top */
+  top: 150px; /* Stay under the banner */
   margin-top: 150px; /* Stay under the banner */
   margin-left: 0px;
   left: 0px;
@@ -10,14 +10,14 @@
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
   padding-top: 0px;
-  padding-left: 0px;
+  padding-left: 2px;
   overflow: auto;
 }
 
 .sidebar h2 {
-  padding-top: 3px;
+  padding-top: 4px;
   padding-bottom: 1px;
-  padding-left: 1px;
+  padding-left: 2px;
   margin-top: 0px;
   margin-bottom: 1px;
   font-size: 17px;
@@ -129,7 +129,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 }
 #banner {
     padding: 0px;
-    /*margin-left: 200px;*/ /* Same as the width of the sidebar */
     margin-left: 0px;
     height: 150px;
     width: 100%;
@@ -138,7 +137,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     top: 0;
     left: 0;
     border-bottom: 1px solid #d5d5d5;
-    /*background-color: #202020;*/ /* Lighter Black */
     background-image: linear-gradient(to right, #000000 , #A9A9A9);
 
 }
