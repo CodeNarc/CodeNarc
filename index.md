@@ -14,18 +14,19 @@ to fit into your project. Build tool, framework support, and report generation a
 <table>
 <tr>
     <td width="50%">
-         <section name="CodeNarc Rules">
-          CodeNarc triggers violations based on rules. Click the links to the left to view the
-          <a href="codenarc-rule-index.html">index of all rules</a>, or individual rule categories (rulesets), such as
-          the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
-          rules. Or you can <a href="codenarc-creating-ruleset.html">create your own ruleset</a>;
-          see how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
-         </section>
+         <div class="section">
+              <h2>CodeNarc Rules"</h2>
+              CodeNarc triggers violations based on rules. Click the links to the left to view the
+              <a href="codenarc-rule-index.html">index of all rules</a>, or individual rule categories (rulesets), such as
+              the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
+              rules. Or you can <a href="codenarc-creating-ruleset.html">create your own ruleset</a>;
+              see how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
+         </div>
      </td>
     <td valign="middle" align="middle" style="margin:auto; vertical-align:middle">
         <div>
             <a style="color:white;font-size:20pt;font-weight:bold; margin:auto; border:solid white; border-radius:25px; background-color:red; padding:20pt;"
-               href="http://sourceforge.net/projects/codenarc/files//">Get 1.4</a>
+               href="http://sourceforge.net/projects/codenarc/files//">Get 1.5</a>
         </div>
     </td>
 </tr>
