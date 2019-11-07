@@ -52,8 +52,8 @@ the UnusedPrivateMethodParameter rule) or methods marked @Override.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreRegex                 | Regex that specifies the parameter names to ignore.                | 'ignore|ignored'       |
-| ignoreClassRegex            | Regex that specifies the names of the classes to skip checking.    | '.*Category'           |
+| ignoreRegex                 | Regex that specifies the parameter names to ignore.                | 'ignore\|ignored' |
+| ignoreClassRegex            | Regex that specifies the names of the classes to skip checking.    | '.*Category' |
 
 Example of violations:
 
