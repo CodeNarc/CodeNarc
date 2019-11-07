@@ -4,6 +4,7 @@
   /*z-index: 1;*/ /* Stay on top */
   /*top: 150px;*/ /* Stay under the banner */
   margin-top: 150px; /* Stay under the banner */
+  margin-left: 0px;
   left: 0px;
 
   float: left;
@@ -16,7 +17,8 @@
 .sidebar h2 {
   padding-top: 3px;
   padding-bottom: 1px;
-  margin-top: 1px;
+  padding-left: 1px;
+  margin-top: 0px;
   margin-bottom: 1px;
   font-size: 17px;
 }
