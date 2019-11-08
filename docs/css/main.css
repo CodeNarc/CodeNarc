@@ -40,6 +40,7 @@ body {
   width: 190px; /* 200 - padding */
   /*z-index: 1;*/ /* Stay on top */
   top: 150px; /* Stay under the banner */
+  padding-top: 150px; /* Same as the height of the banner */
   /*margin-top: 150px;*/ /* Stay under the banner */
   margin-left: 0px;
   left: 0px;
@@ -99,6 +100,7 @@ a:hover {
 /* Style page content */
 .container {
   /*margin-top: 150px;*/ /* Same as the height of the banner */
+  padding-top: 150px; /* Same as the height of the banner */
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 200px; /* Same as the width of the sidebar */
