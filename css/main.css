@@ -98,8 +98,8 @@ a:hover {
 
 /* Style page content */
 .container {
-  /*margin-top: 150px;*/ /* Same as the height of the banner */
-  padding-top: 150px; /* Banner height */
+  margin-top: 150px; /* Same as the height of the banner */
+  /*padding-top: 150px;*/ /* Banner height */
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 200px; /* Same as the width of the sidebar */
