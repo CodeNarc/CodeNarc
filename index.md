@@ -30,22 +30,20 @@ to fit into your project. Build tool, framework support, and report generation a
     </td>
 </tr>
 <tr>
-     <td>
-         <div class="section">
-            <h2>Running CodeNarc</h2>
-             Run CodeNarc with the <a href="codenarc-ant-task.html">Ant Task</a>,
-             the <a href="codenarc-command-line.html">command-line runner</a>, or
-             <a href="codenarc-run-as-a-test.html">as part of your test suite</a>.
-                Also,  plugins exist for <a href="codenarc-other-tools-frameworks.html">Maven</a>,
-               <a href="codenarc-other-tools-frameworks.html">Gradle</a>, <a href="codenarc-other-tools-frameworks.html">Grails</a>,
-               <a href="codenarc-other-tools-frameworks.html">Griffon</a>,
-               <a href="codenarc-other-tools-frameworks.html">SonarQube</a>
-               and <a href="codenarc-other-tools-frameworks.html">Jenkins</a>. See our
-                <a href="codenarc-other-tools-frameworks.html">Integration</a> page for more details.
-               Reports come in HTML, XML, or text format.  Take a look at a
-               <a href="SampleCodeNarcHtmlReport.html">Sample CodeNarc HTML Report</a>,
-               or a <a href="./SampleCodeNarcXmlReport.xml">Sample CodeNarc XML Report</a>.
-         </div>
+     <td class="section">
+        <h2>Running CodeNarc</h2>
+         Run CodeNarc with the <a href="codenarc-ant-task.html">Ant Task</a>,
+         the <a href="codenarc-command-line.html">command-line runner</a>, or
+         <a href="codenarc-run-as-a-test.html">as part of your test suite</a>.
+            Also,  plugins exist for <a href="codenarc-other-tools-frameworks.html">Maven</a>,
+           <a href="codenarc-other-tools-frameworks.html">Gradle</a>, <a href="codenarc-other-tools-frameworks.html">Grails</a>,
+           <a href="codenarc-other-tools-frameworks.html">Griffon</a>,
+           <a href="codenarc-other-tools-frameworks.html">SonarQube</a>
+           and <a href="codenarc-other-tools-frameworks.html">Jenkins</a>. See our
+            <a href="codenarc-other-tools-frameworks.html">Integration</a> page for more details.
+           Reports come in HTML, XML, or text format.  Take a look at a
+           <a href="SampleCodeNarcHtmlReport.html">Sample CodeNarc HTML Report</a>,
+           or a <a href="./SampleCodeNarcXmlReport.xml">Sample CodeNarc XML Report</a>.
      </td>
      <td class="section">
          <h2>Requirements</h2>
