@@ -119,6 +119,7 @@ footer {
     border-top: 1px solid #d5d5d5;
     padding-left: 10px;
     margin-left: 200px; /* Same as the width of the sidebar */
+    margin-top: 4px;
     font-size: .8em;
 }
 
@@ -149,7 +150,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 .section h2 {
     padding-top: 4px;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
     margin: 0px;
 }
 
