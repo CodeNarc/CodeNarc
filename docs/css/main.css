@@ -46,8 +46,7 @@ body {
 
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
-  padding-top: 0px;
-  padding-left: 0px;
+  padding: 5px;
   overflow: auto;
 }
 
@@ -102,6 +101,7 @@ a:hover {
   /*margin-top: 150px;*/ /* Same as the height of the banner */
   padding-top: 150px; /* Banner height */
   padding-left: 10px;
+  padding-right: 10px;
   margin-left: 200px; /* Same as the width of the sidebar */
   top: 150px;       /* Stay under the banner */
   /*padding: 10px 10px;*/
@@ -139,7 +139,8 @@ th {
 tr:nth-child(even) {background-color: #f2f2f2;}
 
 .section {
-    padding: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .section h2 {
