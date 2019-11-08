@@ -6,11 +6,10 @@ title: CodeNarc - Creating a RuleSet
 # CodeNarc - Creating a RuleSet
 
 **Contents**
-  * [Preferred Way To Configure a RuleSet](#Preferred)
-  * [Creating a Groovy RuleSet File](#CreatingAGroovyRuleSetFile)
-  * [Creating an XML RuleSet File](#CreatingAnXmlRuleSetFile)
+  * [Preferred Way To Configure a RuleSet](#preferred-way-to-configure-a-ruleset)
+  * [Creating a Groovy RuleSet File](#creating-a-groovy-ruleset-file)
+  * [Creating an XML RuleSet File](#creating-an-xml-ruleset-file)
 
-<a name="Preferred"/>
 ## Preferred Way To Configure a RuleSet
 
 **NOTE:** The preferred way to configure the rules that **CodeNarc** will use is to create a custom
@@ -38,7 +37,6 @@ You can also continue to use the predefined *RuleSets* distributed with **CodeNa
 provided out of the box by **CodeNarc**.
 
 
-<a name="CreatingAGroovyRuleSetFile"/>
 ## Creating a Groovy RuleSet File
 
 **CodeNarc** provides a Groovy DSL (domain-specific language) for defining *RuleSets*.
@@ -203,7 +201,6 @@ About the **rule** statements:
     *long* or *boolean*.
 
 
-<a name="CreatingAnXmlRuleSetFile"/>
 ## Creating an XML RuleSet File
 
 The XML schema for a **CodeNarc** *RuleSet* file is embodied in the "ruleset-schema.xsd" file which
