@@ -38,7 +38,7 @@ body {
 
 .sidebar {
   width: 190px; /* 200 - padding */
-  /*z-index: 1;*/ /* Stay on top */
+  z-index: 1; /* Stay on top */
   /*top: 150px;*/ /* Stay under the banner */
   /*margin-top: 150px;*/ /* Stay under the banner */
   margin-left: 0px;
