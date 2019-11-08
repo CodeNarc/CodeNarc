@@ -47,7 +47,8 @@ body {
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
   padding: 5px;
-  overflow: auto;
+  /*overflow: auto;*/
+  overflow: hidden;
 }
 
 .sidebar h2 {
@@ -141,6 +142,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 .section {
     padding-left: 8px;
     padding-right: 8px;
+}
+
+.section td {
+    vertical-align: top;
 }
 
 .section h2 {
