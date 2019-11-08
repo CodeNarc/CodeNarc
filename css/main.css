@@ -40,8 +40,8 @@ body {
   width: 190px; /* 200 - padding */
   /*z-index: 1;*/ /* Stay on top */
   top: 150px; /* Stay under the banner */
-  padding-top: 150px; /* Same as the height of the banner */
-  /*margin-top: 150px;*/ /* Stay under the banner */
+  /*padding-top: 150px;*/ /* Same as the height of the banner */
+  margin-top: 150px; /* Stay under the banner */
   margin-left: 0px;
   left: 0px;
 
