@@ -23,8 +23,9 @@ to fit into your project. Build tool, framework support, and report generation a
      </td>
     <td valign="middle" align="middle" style="margin:auto; vertical-align:middle">
         <div>
-            <a style="color:white;font-size:20pt;font-weight:bold; margin:auto; border:ridge gray; border-radius:25px; background-color:red; padding:20pt;"
-               href="http://sourceforge.net/projects/codenarc/files//">Get 1.5</a>
+            <a class="getitbutton" href="http://sourceforge.net/projects/codenarc/files//">
+                Get 1.5
+            </a>
         </div>
     </td>
 </tr>
