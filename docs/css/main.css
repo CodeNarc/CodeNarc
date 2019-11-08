@@ -37,7 +37,7 @@ body {
 /* Sidebar Menu ------------------------- */
 
 .sidebar {
-  width: 200px; /* Set the width of the sidebar */
+  width: 190px; /* 200 - padding */
   z-index: 1; /* Stay on top */
   top: 150px; /* Stay under the banner */
   margin-top: 150px; /* Stay under the banner */
@@ -47,8 +47,7 @@ body {
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
   padding: 5px;
-  /*overflow: auto;*/
-  overflow: hidden;
+  overflow: auto;
 }
 
 .sidebar h2 {
@@ -128,7 +127,10 @@ table {
 
 table, th, td {
     border: 1px solid black;
-    padding: 4px;
+    padding-top: 0px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
 }
 
 th {
@@ -142,6 +144,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 .section {
     padding-left: 8px;
     padding-right: 8px;
+    padding-bottom: 8px;
 }
 
 .section td {
