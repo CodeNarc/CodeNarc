@@ -49,7 +49,7 @@ body {
 
 .sidebar h2 {
   padding-top: 4px;
-  padding-bottom: 0px;
+  padding-bottom: 1px;
   padding-left: 2px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -59,6 +59,7 @@ body {
 .sidebar ul {
   padding-top: 0px;
   padding-bottom: 0px;
+  padding-left: 5px;  /* indent of bullet */
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -72,7 +73,7 @@ body {
   padding: 0px 4px 0px 0px;
   text-decoration: none;
   font-size: 12px;
-  color: #000000;
+  /*color: #000000;*/
   display: block;
 }
 
