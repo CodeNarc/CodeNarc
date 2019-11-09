@@ -8,7 +8,7 @@ title: CodeNarc - Developer Guide
 **Contents**
   * [The codenarc Command-line Script](#the-codenarc-command-line-script)
   * [New Rule Checklist](#new-rule-checklist)
-  * [Before You Submit a Patch or Check-In Code](#before-you-submit-a-patch-or-check-in-code)
+  * [Before You Submit a Pull Request or Patch](#before-you-submit-a-pull-request-or-patch)
   * [Intellij IDEA Support](#intellij-idea-support)
 
 
@@ -32,11 +32,11 @@ The `create-rule` task performs the following steps:
 
 On **Unix/Mac**, you can run the following from the project root directory:
 
-    ./codenarc create-rule
+      ./codenarc create-rule
 
 On **Windows**, you can run:
 
-    codenarc create-rule
+      codenarc create-rule
 
 (If **Windows** is not configured to automatically run *.groovy files,
 just can run `groovy codenarc create-rule`)
