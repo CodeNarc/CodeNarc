@@ -30,7 +30,7 @@ import org.codenarc.ruleset.XmlFileRuleSet
   */
 class GenerateRuleSetAllRulesByCategory {
 
-    protected static final String RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRulesByCategory.groovy.txt'
+    protected static final String RULESET_FILE = 'docs/StarterRuleSet-AllRulesByCategory.groovy.txt'
     private static final String TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRulesByCategory.groovy.template'
     private static final Logger LOG = LoggerFactory.getLogger(GenerateRuleSetAllRulesByCategory)
 

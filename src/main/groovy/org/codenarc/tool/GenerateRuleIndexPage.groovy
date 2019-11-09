@@ -29,8 +29,8 @@ import org.codenarc.ruleset.XmlFileRuleSet
   */
 class GenerateRuleIndexPage {
 
-    protected static final String RULE_INDEX_FILE = 'src/site/apt/codenarc-rule-index.apt'
-    private static final String TEMPLATE_FILE = 'src/main/resources/templates/codenarc-rule-index.apt.template'
+    protected static final String RULE_INDEX_FILE = 'docs/codenarc-rule-index.md'
+    private static final String TEMPLATE_FILE = 'src/main/resources/templates/codenarc-rule-index.md.template'
     private static final Logger LOG = LoggerFactory.getLogger(GenerateRuleIndexPage)
 
     protected static String ruleIndexFile = RULE_INDEX_FILE

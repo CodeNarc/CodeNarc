@@ -58,8 +58,8 @@ html {
   padding-bottom: 1px;
   padding-left: 2px;
   margin-top: 0px;
-  margin-bottom: 1px;
-  font-size: 17px;
+  margin-bottom: 0px;
+  font-size: 16px;
 }
 
 .sidebar ul {
@@ -71,9 +71,9 @@ html {
 
 /* The navigation menu links */
 .sidebar a {
-  padding: 0px 4px 1px 4px;
+  padding: 0px 4px 0px 4px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 13px;
   color: #000000;
   display: block;
 }

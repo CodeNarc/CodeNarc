@@ -1,0 +1,15 @@
+---
+layout: default
+title: CodeNarc - Rule Index
+---
+
+# Rule Index
+
+**CodeNarc** includes ${numberOfRules} rules.
+    <% ruleSets.each { name, rules ->\
+         def ruleSetLink = "./codenarc-rules-${name}.html"
+         def capitalizedName = name.capitalize() %>
+## [$capitalizedName]($ruleSetLink)
+<% rules.each { rule -> def extraInfo = ruleExtraInformation[rule.name] ? "  (${ruleExtraInformation[rule.name]})" : ''  %>\
+  * [${rule.name}](./codenarc-rules-${name}.html#${rule.name.toLowerCase()}-rule)  ${extraInfo}
+<% } } %>

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory
   */
 class GenerateRuleSetAllRules {
 
-    protected static final String RULESET_FILE = 'src/site/resources/StarterRuleSet-AllRules.groovy.txt'
+    protected static final String RULESET_FILE = 'docs/StarterRuleSet-AllRules.groovy.txt'
     private static final String TEMPLATE_FILE = 'src/main/resources/templates/StarterRuleSet-AllRules.groovy.template'
     private static final Logger LOG = LoggerFactory.getLogger(GenerateRuleSetAllRules)
 
