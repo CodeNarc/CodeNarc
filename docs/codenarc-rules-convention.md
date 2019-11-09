@@ -402,7 +402,7 @@ Checks that all source files do not contain the tab character.
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules)
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules)
 
 
 ## ParameterReassignment Rule

@@ -14,7 +14,7 @@ Makes sure there are no blank lines before the package declaration of a source c
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## BlockEndsWithBlankLine Rule
@@ -162,7 +162,7 @@ NOTE: This rule ignores annotation types, e.g. `@interface MyAnnotation {}`.
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## BracesForForLoop Rule
@@ -377,7 +377,7 @@ Example of violation:
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## FileEndsWithoutNewline Rule
@@ -388,7 +388,7 @@ Makes sure each source file ends with a newline character.
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## Indentation Rule
@@ -480,7 +480,7 @@ Example of violation:
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
   
 
 ## MissingBlankLineAfterPackage Rule
@@ -502,7 +502,7 @@ Example of violation:
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## SpaceAfterCatch Rule
@@ -907,5 +907,5 @@ Checks that no lines of source code end with whitespace characters.
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 

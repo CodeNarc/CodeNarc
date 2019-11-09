@@ -12,7 +12,7 @@ Checks for a duplicate *import* statements.
 
 NOTE: This is a file-based rule, rather than a typical AST-based rule, so the *applyToClassNames*
 and *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## ImportFromSamePackage Rule
@@ -22,7 +22,7 @@ Checks for an *import* of a class that is within the same package as the importi
 
 NOTE: This is a file-based rule, rather than a typical AST-based rule, so the *applyToClassNames*
 and *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## ImportFromSunPackages Rule
@@ -41,7 +41,7 @@ Example of violations:
 
 NOTE: This is a file-based rule, rather than a typical AST-based rule, so the *applyToClassNames*
 and *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## MisorderedStaticImports Rule
@@ -63,7 +63,7 @@ Examples of violations:
 
 NOTE: This is a file-based rule, rather than a typical AST-based rule, so the *applyToClassNames*
 and *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## NoWildcardImports Rule
@@ -89,7 +89,7 @@ Example of violations:
 
 NOTE: This is a file-based rule, rather than a typical AST-based rule, so the *applyToClassNames*
 and *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## UnnecessaryGroovyImport Rule
@@ -101,7 +101,7 @@ classes *java.math.BigDecimal* and *java.math.BigInteger*.
 
 NOTE: This is a file-based rule, rather than a typical AST-based rule, so the *applyToClassNames*
 and *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## UnusedImport Rule
@@ -116,4 +116,4 @@ Known limitations:
 
 NOTE: This is a file-based rule, rather than a typical AST-based rule, so the *applyToClassNames*
 and *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
