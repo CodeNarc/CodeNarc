@@ -43,7 +43,10 @@ body {
   left: 0px;
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
   overflow: auto;
 }
 
@@ -59,7 +62,7 @@ body {
 .sidebar ul {
   padding-top: 0px;
   padding-bottom: 0px;
-  margin-left: 10px;  /* indent of bullet */
+  margin-left: 20px;  /* indent of bullet */
   padding-left: 10px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -72,9 +75,9 @@ body {
 
 /* The navigation menu links */
 .sidebar a {
-  padding: 0px 4px 0px 0px;
+  /*padding: 0px 0px 0px 0px;*/
   text-decoration: none;
-  font-size: 12px;
+  /*font-size: 12px;*/
   /*color: #000000;*/
   /*display: block;*/
 }
