@@ -47,7 +47,7 @@ Modifiers for properties are only:
 Note that you must use the standard rule properties, such as `applyToClassNames`, `doNotApplyToFileNames`
 and `applyToFilesMatching` to apply this rule to a subset of all classes/files. These rule properties
 are described in 
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 Example of violations for methods:
 
@@ -101,7 +101,7 @@ Checks for reference to any of the classes configured in `classNames`.
 Note that you can use the standard rule properties, such as `applyToClassNames`, `doNotApplyToFileNames`
 and `applyToFilesMatching` to only apply this rule to a subset of all classes/files. These rule properties
 are described in 
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 This rule can be useful for governance and enforcement of *architectural layering*. For instance,
 making sure that view or model classes, for instance, do not contain references to DAO classes (e.g., *Dao).
@@ -142,7 +142,7 @@ Checks for reference to any of the packages configured in `packageNames`.
 Note that you can use the standard rule properties, such as `applyToClassNames`, `doNotApplyToFileNames`
 and `applyToFilesMatching` to only apply this rule to a subset of all classes/files. These rule properties
 are described in 
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 This rule can be useful for governance and enforcement of *architectural layering*. For instance,
 making sure that view or model classes, for instance, do not contain references to JDBC-specific packages
@@ -184,7 +184,7 @@ with a unique rule *name* and *regex*, and (optionally) customized *violationMes
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## IllegalString Rule
@@ -202,7 +202,7 @@ with a unique rule *name* and *string*, and (optionally) customized *violationMe
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## IllegalSubclass Rule
@@ -232,7 +232,7 @@ with a unique rule *name* and *regex*, and (optionally) customized *violationMes
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## RequiredString Rule
@@ -248,7 +248,7 @@ with a unique rule *name* and *string*, and (optionally) customized *violationMe
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## StatelessClass Rule
@@ -277,7 +277,7 @@ Service objects) or static configuration.
 
 Note that you can use the standard rule properties, such as `applyToClassNames`, `doNotApplyToFileNames`
 and `applyToFilesMatching` to only apply this rule to a subset of all classes/files. These rule properties
-are described in zzz./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules}
+are described in zzz./codenarc-configuring-rules.html#standard-properties-for-configuring-rules}
 Standard Properties for Configuring Rulesyy.
 
 ###  Notes

@@ -21,7 +21,7 @@ property `applyToNonMainClasses` to true.
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 
 ## JavadocConsecutiveEmptyLines Rule
@@ -34,7 +34,7 @@ Known limitation: Only the first occurrence of consecutive empty lines within a 
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 Example of violations:
 
@@ -67,7 +67,7 @@ Known limitation: Only the first occurrence of an empty @author within a javadoc
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -96,7 +96,7 @@ Known limitation: Only the first occurrence of an empty @exception within a java
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -123,7 +123,7 @@ Check for javadoc comments with an empty top line.
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
   Example of violations:
 
@@ -158,7 +158,7 @@ Check for javadoc comments with an empty line at the bottom.
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 Example of violations:
 
@@ -195,7 +195,7 @@ Known limitation: Only the first occurrence of an empty @param within a javadoc 
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -225,7 +225,7 @@ Known limitation: Only the first occurrence of an empty @return within a javadoc
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -254,7 +254,7 @@ Known limitation: Only the first occurrence of an empty @see within a javadoc co
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -303,7 +303,7 @@ Known limitation: Only the first occurrence of an empty @since within a javadoc 
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -333,7 +333,7 @@ Known limitation: Only the first occurrence of an empty @throws within a javadoc
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -362,7 +362,7 @@ Known limitation: Only the first occurrence of an empty @version within a javado
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -391,7 +391,7 @@ Known limitation: Only the first occurrence of a missing description for an @exc
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -420,7 +420,7 @@ Known limitation: Only the first occurrence of a missing description for a @para
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
@@ -449,7 +449,7 @@ Known limitation: Only the first occurrence of a missing description for a @thro
 
 NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
 *doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|

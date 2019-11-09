@@ -31,7 +31,7 @@ the rule to a single source file.
 The `org.codenarc.rule.AbstractRule` class is the abstract superclass
 (or ancestor) for all rules provided with **CodeNarc**. It provides many standard
 properties and helper methods for subclasses, as described in
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#Standard_Properties_for_Configuring_Rules).
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
 ### {A Sample Rule Subclass of AbstractRule}
 
