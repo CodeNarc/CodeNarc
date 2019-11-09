@@ -63,6 +63,10 @@ body {
   margin-bottom: 0px;
 }
 
+.sidebar li {
+  font-size: 12px;
+}
+
 /* The navigation menu links */
 .sidebar a {
   padding: 0px 4px 0px 0px;
@@ -86,8 +90,8 @@ body {
 /* Main content ------------------------- */
 
 a {
-    text-decoration: none;
-    color: #999;
+    /*text-decoration: none;*/
+    /*color: #999;*/
 }
 a:hover {
     text-decoration: underline;
