@@ -2,10 +2,6 @@ body {
     margin: 0px;
 }
 
-html {
-  scroll-padding-top: 150px; /* compensate for height of sticky banner */
-}
-
 /* Banner ------------------------- */
 
 #bannerLeft, #bannerRight {
@@ -43,10 +39,8 @@ html {
 .sidebar {
   width: 190px; /* 200 - padding */
   top: 150px; /* Stay under the banner */
-  /*margin-top: 150px;*/ /* Stay under the banner */
   margin-left: 0px;
   left: 0px;
-
   float: left;
   background-color: #A9A9A9; /* Dark Gray */
   padding: 5px;
@@ -55,7 +49,7 @@ html {
 
 .sidebar h2 {
   padding-top: 4px;
-  padding-bottom: 1px;
+  padding-bottom: 0px;
   padding-left: 2px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -71,9 +65,9 @@ html {
 
 /* The navigation menu links */
 .sidebar a {
-  padding: 0px 4px 0px 4px;
+  padding: 0px 4px 0px 0px;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   color: #000000;
   display: block;
 }
@@ -99,7 +93,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Style page content */
 .container {
   /*margin-top: 150px;*/ /* Same as the height of the banner */
   /*padding-top: 150px;*/ /* Same as the height of the banner */
@@ -107,7 +100,6 @@ a:hover {
   padding-right: 10px;
   margin-left: 200px; /* Same as the width of the sidebar */
   top: 150px;       /* Stay under the banner */
-  /*padding: 10px 10px;*/
 }
 
 .container h1, .container h2, .container h3, .container h4 {
