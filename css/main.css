@@ -101,7 +101,7 @@ a:hover {
 
 /* Style page content */
 .container {
-  margin-top: -150px; /* Same as the height of the banner */
+  margin-top: 150px; /* Same as the height of the banner */
   padding-top: 150px; /* Same as the height of the banner */
   padding-left: 10px;
   padding-right: 10px;
