@@ -1,0 +1,460 @@
+<?xml version='1.0'?>
+<CodeNarc url='http://www.codenarc.org' version='1.4'><Report timestamp='Nov 9, 2019 10:38:11 AM'/><Project title='Sample Project'><SourceDirectory>src/test/groovy/org/codenarc/rule</SourceDirectory></Project><PackageSummary totalFiles='403' filesWithViolations='51' priority1='0' priority2='65' priority3='34'></PackageSummary><Package path='' totalFiles='10' filesWithViolations='4' priority1='0' priority2='0' priority3='14'><File name='AbstractAstVisitorRuleTest.groovy'><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='184'><SourceLine><![CDATA[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='187'><SourceLine><![CDATA[rule.applyToClassNames = 'Xxx'             // apply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='188'><SourceLine><![CDATA[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation></File><File name='AbstractEnhanceableAstVisitorRuleTest.groovy'><Violation ruleName='MisorderedStaticImports' priority='3' lineNumber='22'><SourceLine><![CDATA[import static org.codenarc.rule.AbstractEnhanceableAstVisitorRule.ENHANCED_MODE_SYSTEM_PROPERTY]]></SourceLine><Message><![CDATA[Static imports should appear before normal imports]]></Message></Violation><Violation ruleName='MisorderedStaticImports' priority='3' lineNumber='23'><SourceLine><![CDATA[import static org.codenarc.source.SourceCode.DEFAULT_COMPILER_PHASE]]></SourceLine><Message><![CDATA[Static imports should appear before normal imports]]></Message></Violation></File><File name='AbstractRuleTest.groovy'><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='137'><SourceLine><![CDATA[rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='140'><SourceLine><![CDATA[rule.applyToFilesMatching = NO_MATCH         // apply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='141'><SourceLine><![CDATA[rule.doNotApplyToFilesMatching = NO_MATCH    // doNotApply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='177'><SourceLine><![CDATA[rule.applyToFileNames = 'org/codenarc/MyOtherTest.groovy']]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='225'><SourceLine><![CDATA[rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='228'><SourceLine><![CDATA[rule.applyToFileNames = 'Xxx.groovy'         // apply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation><Violation ruleName='UnnecessaryObjectReferences' priority='3' lineNumber='229'><SourceLine><![CDATA[rule.doNotApplyToFileNames = 'Xxx.groovy'    // doNotApply = NO]]></SourceLine><Message><![CDATA[The code could be more concise by using a with() or identity() block]]></Message></Violation></File><File name='InlineViolationsParserTest.groovy'><Violation ruleName='MisorderedStaticImports' priority='3' lineNumber='20'><SourceLine><![CDATA[import static org.codenarc.rule.InlineViolationsParser.inlineViolation]]></SourceLine><Message><![CDATA[Static imports should appear before normal imports]]></Message></Violation><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='199'><SourceLine><![CDATA[return [lineNumber: lineNumber, sourceLineText: sourceLineText, messageText: messageText]]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File></Package><Package path='basic' totalFiles='44' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='braces' totalFiles='4' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='comments' totalFiles='17' filesWithViolations='13' priority1='0' priority2='0' priority3='15'><File name='AbstractJavadocEmptyTagRuleTestCase.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='53'><SourceLine><![CDATA[return rule.name]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='56'><SourceLine><![CDATA[return "The javadoc ${getTag()} tag is empty"]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='AbstractJavadocMissingDescriptionRuleTestCase.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='51'><SourceLine><![CDATA[return rule.name]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='54'><SourceLine><![CDATA[return "The description for the javadoc ${getTag()} tag is missing"]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptyAuthorTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@author']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptyExceptionTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@exception']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptyParamTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@param']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptyReturnTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@return']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptySeeTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@see']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptySinceTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@since']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptyThrowsTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@throws']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocEmptyVersionTagRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@version']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocMissingExceptionDescriptionRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@exception']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocMissingParamDescriptionRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@param']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='JavadocMissingThrowsDescriptionRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='27'><SourceLine><![CDATA[return '@throws']]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File></Package><Package path='concurrency' totalFiles='26' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='convention' totalFiles='28' filesWithViolations='1' priority1='0' priority2='0' priority3='1'><File name='CompileStaticRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='34'><SourceLine><![CDATA[return new CompileStaticRule()]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File></Package><Package path='design' totalFiles='23' filesWithViolations='2' priority1='0' priority2='1' priority3='1'><File name='NestedForLoopRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='106'><SourceLine><![CDATA[return inlineViolation('Nested for loop')]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='PrivateFieldCouldBeFinalRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='26'><SourceLine><![CDATA[class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase&lt;PrivateFieldCouldBeFinalRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.design.PrivateFieldCouldBeFinalRuleTest has 34 methods]]></Message></Violation></File></Package><Package path='dry' totalFiles='4' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='enhanced' totalFiles='1' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='exceptions' totalFiles='20' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='formatting' totalFiles='32' filesWithViolations='11' priority1='0' priority2='22' priority3='1'><File name='BracesForForLoopRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='101'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            for(String name=${SomeClass.SOME_CONSTANT}; name==null;)  // And what about {}
+            {
+                doStuff()
+            }
+        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}; name==null;)  // And what about {}']]></Message></Violation></File><File name='BracesForIfElseRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='59'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            if (someContainer."${SomeClass.SOME_CONSTANT}" != null)  // And what about {}
+            {
+                doStuff()
+            }
+        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}" != null)  // And what about {}']]></Message></Violation></File><File name='BracesForMethodRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='285'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                int size(String name = "${SomeClass.SOME_CONSTANT}")
+                {
+                    return 99
+                }
+            }
+        ' contains a GString-type expression: '${SomeClass.SOME_CONSTANT}']]></Message></Violation></File><File name='ClassEndsWithBlankLineRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='27'><SourceLine><![CDATA[class ClassEndsWithBlankLineRuleTest extends AbstractRuleTestCase&lt;ClassEndsWithBlankLineRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.formatting.ClassEndsWithBlankLineRuleTest has 33 methods]]></Message></Violation></File><File name='ClassStartsWithBlankLineRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='27'><SourceLine><![CDATA[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase&lt;ClassStartsWithBlankLineRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 32 methods]]></Message></Violation></File><File name='IndentationRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='26'><SourceLine><![CDATA[class IndentationRuleTest extends AbstractRuleTestCase&lt;IndentationRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.formatting.IndentationRuleTest has 45 methods]]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='551'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            |class MyClass {
+            |    private void execute() {
+            |        try {
+            |            executeWithArgs(args)
+            |        }
+            |        catch(Throwable t) {
+            |            println "ERROR: ${t.message}"
+            |            t.printStackTrace()
+            |        }
+            |        finally {
+            |            closeResources()
+            |        }
+            |    }
+            |    private void executeOtherOne() {
+            |        try {
+            |            executeWithArgs(args)
+            |        } catch(Throwable t) {
+            |            t.printStackTrace()
+            |        } finally {
+            |            closeResources()
+            |        }
+            |    }
+            |}
+        ' contains a GString-type expression: '${t.message}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='841'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            |project.files(project.configurations.scaconfig.files.findAll { File it -&gt; it.name.endsWith '.aar' }.collect { File it -&gt;
+            |    MessageDigest sha1 = MessageDigest.getInstance('SHA1')
+            |    String inputFile = 'COMMAND=PREPARE_LIBRARY\n' +
+            |        "FILE_PATH=${it.absolutePath}\n"
+            |    String hash = new BigInteger(1, sha1.digest(inputFile.bytes)).toString(16)
+            |    cacheDir + hash + File.separator + 'output/jars/classes.jar'
+            |}).asFileTree
+        ' contains a GString-type expression: '${it.absolutePath}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='855'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            |buildFileList()
+            |    .collect { File it -&gt;
+            |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
+            |        String inputFile = 'COMMAND=PREPARE_LIBRARY\n' +
+            |            "FILE_PATH=${it.absolutePath}\n"
+            |        cacheDir + File.separator + inputFile + sha1
+            |    }
+            |    .each { name -&gt;
+            |        println name
+            |    }
+            |println "done"
+            |
+            |list2.collect { item -&gt;
+            |    item.name
+            |}.each { name -&gt; println name }
+            |
+            |otherList.collect { item -&gt; item.name }.each { name -&gt; println name }
+            |
+            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {
+            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {
+            |        AstUtil.classNodeImplementsType(expr.type, it)
+            |    }.each {
+            |        callbackFunction()
+            |    }
+            |}
+        ' contains a GString-type expression: '${it.absolutePath}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='887'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            |"${if (true) 'content' else ''}"
+        ' contains a GString-type expression: '${if (true) 'content' else ''}']]></Message></Violation></File><File name='SpaceAfterClosingBraceRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='38'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                def myMethod() {
+                    def closure = { }
+                    if (true) { }
+                    while(ready) { }
+                    try {
+                    } catch(Exception e) {
+                    } finally { }
+                    for(int i=0; i&lt;10; i++) { }
+                    for(String name in names) { }
+                    for(String name: names) { }
+                    if (count &gt; this."maxPriority${priority}Violations") { }
+                    while (count &gt; this."maxPriority${priority}Violations") { }
+                }
+                MyClass() {
+                    this(classNames)
+                }
+                static void reset() { violationCounts = [1:0, 2:0, 3:0] }
+                void doStuff() { println 9 }
+            }
+            interface MyInterface { }
+            enum MyEnum { OK, BAD }
+        ' contains a GString-type expression: '${priority}Violations") { }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='293'><SourceLine><![CDATA[assertNoViolations(''']]></SourceLine><Message><![CDATA[The String '
+            def foo = 1
+            "I am a ${ -&gt; foo }"
+        ' contains a GString-type expression: '${ -&gt; foo }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='301'><SourceLine><![CDATA[assertNoViolations(''']]></SourceLine><Message><![CDATA[The String '
+            def foo = 1
+            "I am a ${ -&gt; foo }0"
+        ' contains a GString-type expression: '${ -&gt; foo }']]></Message></Violation></File><File name='SpaceAfterOpeningBraceRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='38'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                def myMethod() {
+                    def closure = { }
+                    if (true) { }
+                    while(ready) { }
+                    try {
+                    } catch(Exception e) {
+                    } finally { }
+                    for(int i=0; i&lt;10; i++) { }
+                    for(String name in names) { }
+                    for(String name: names) { }
+                    if (count &gt; this."maxPriority${priority}Violations") { }
+                    while (count &gt; this."maxPriority${priority}Violations") { }
+                }
+                MyClass() {
+                    this(classNames)
+                }
+                MyClass(String s) { }
+                MyClass(@Annotation('${prop}') String s) {
+                }
+            }
+            interface MyInterface { }
+            enum MyEnum { OK, BAD }
+            trait MyTrait { }
+        ' contains a GString-type expression: '${priority}Violations") { }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='81'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                def myMethod() {
+                    def closure = {}
+                    if (true) {}
+                    while(ready) {}
+                    try {
+                    } catch(Exception e) {
+                    } finally {}
+                    for(int i=0; i&lt;10; i++) {}
+                    for(String name in names) {}
+                    for(String name: names) {}
+                    if (count &gt; this."maxPriority${priority}Violations") {}
+                    while (count &gt; this."maxPriority${priority}Violations") {}
+                }
+                void doStuff2() {}
+                MyClass() {}
+                MyClass(@Annotation('${prop}') String s) {}
+            }
+            interface MyInterface2 {}
+        ' contains a GString-type expression: '${priority}Violations") {}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='175'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                MyClass() {int count }
+                MyClass() {s = '{"json": true}' }
+                MyClass(@Annotation('${prop}') String s) {println 123 }
+
+            }
+        ' contains a GString-type expression: '${prop}') String s) {println 123 }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='186'><SourceLine><![CDATA[[lineNumber:5, sourceLineText:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', messageText:'The opening brace for the block in class MyClass'])]]></SourceLine><Message><![CDATA[The String 'MyClass(@Annotation('${prop}') String s) {println 123 }' contains a GString-type expression: '${prop}') String s) {println 123 }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='304'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                String s
+                MyClass() { s = '{"json": true}' }
+                MyClass(@Annotation('${prop}') String s) { println 123 }
+            }
+        ' contains a GString-type expression: '${prop}') String s) { println 123 }']]></Message></Violation></File><File name='SpaceAroundMapEntryColonRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='141'><SourceLine><![CDATA[return inlineViolation("The colon for the literal Map entry for key [$keyName] within class $className" +]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File><File name='SpaceBeforeClosingBraceRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='39'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                def myMethod() {
+                    def closure = { }
+                    if (true) { }
+                    while(ready) { }
+                    try {
+                    } catch(Exception e) {
+                    } finally { }
+                    for(int i=0; i&lt;10; i++) { }
+                    for(String name in names) { }
+                    for(String name: names) { }
+                    if (count &gt; this."maxPriority${priority}Violations") { }
+                    while (count &gt; this."maxPriority${priority}Violations") { }
+                }
+                MyClass() {
+                    this(classNames)
+                }
+                static void reset() { violationCounts = [1:0, 2:0, 3:0] }
+                void doStuff() { println 9 }
+            }
+            interface MyInterface { }
+            enum MyEnum { OK, BAD }
+        ' contains a GString-type expression: '${priority}Violations") { }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='80'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                def myMethod() {
+                    def closure = {}
+                    if (true) {}
+                    while(ready) {}
+                    try {
+                    } catch(Exception e) {
+                    } finally {}
+                    for(int i=0; i&lt;10; i++) {}
+                    for(String name in names) {}
+                    for(String name: names) {}
+                    if (count &gt; this."maxPriority${priority}Violations") {}
+                    while (count &gt; this."maxPriority${priority}Violations") {}
+                }
+                void doStuff2() {}
+            }
+            interface MyInterface2 {}
+        ' contains a GString-type expression: '${priority}Violations") {}']]></Message></Violation></File><File name='SpaceBeforeOpeningBraceRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='38'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                def myMethod() {
+                    def closure = { }
+                    if (true) { }
+                    while(ready) { }
+                    try {
+                    } catch(Exception e) {
+                    } finally { }
+                    for(int i=0; i&lt;10; i++) { }
+                    for(String name in names) { }
+                    for(String name: names) { }
+                    if (count &gt; this."maxPriority${priority}Violations") { }
+                    while (count &gt; this."maxPriority${priority}Violations") { }
+                }
+                MyClass() {
+                    this(classNames)
+                }
+            }
+            interface MyInterface { }
+            enum MyEnum { OK, BAD }
+            trait MyTrait { }
+        ' contains a GString-type expression: '${priority}Violations") { }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='262'><SourceLine><![CDATA[assertNoViolations(''']]></SourceLine><Message><![CDATA[The String '
+            def foo = 1
+            "I am a ${ -&gt; foo }"
+        ' contains a GString-type expression: '${ -&gt; foo }']]></Message></Violation></File></Package><Package path='generic' totalFiles='11' filesWithViolations='1' priority1='0' priority2='2' priority3='0'><File name='IllegalPackageReferenceRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='64'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            if (value.class == org.bad.BadClass) { }
+            println "isClosure=${value instanceof org.bad.OtherClass}"
+            def count = org.bad.Helper.getCount()
+        ' contains a GString-type expression: '${value instanceof org.bad.OtherClass}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='72'><SourceLine><![CDATA[[lineNumber:3, sourceLineText:'println "isClosure=${value instanceof org.bad.OtherClass}"', messageText:'org.bad'],]]></SourceLine><Message><![CDATA[The String 'println "isClosure=${value instanceof org.bad.OtherClass}"' contains a GString-type expression: '${value instanceof org.bad.OtherClass}']]></Message></Violation></File></Package><Package path='grails' totalFiles='11' filesWithViolations='2' priority1='0' priority2='3' priority3='0'><File name='GrailsMassAssignmentRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='36'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class Person {
+                String name
+                Boolean isAdmin
+            }
+            def bindingMap = [name: 'John', isAdmin: true]
+            def person = new Person()
+            def p2 = new Person("It is currently ${ new Date() }")
+            def p3 = new Person(bindingMap)
+            person.name = bindingMap['name']
+            person.isAdmin = bindingMap.isAdmin
+            person.properties = "It is currently ${ new Date() }"
+        ' contains a GString-type expression: '${ new Date() }']]></Message></Violation></File><File name='GrailsServletContextReferenceRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='78'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                def mySession = servletContext
+
+                def edit = {
+                    println "amount=${servletContext.amount}"
+                }
+            }
+        ' contains a GString-type expression: '${servletContext.amount}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='87'><SourceLine><![CDATA[assertTwoViolations(SOURCE, 3, 'def mySession = servletContext', 6, 'println "amount=${servletContext.amount}"')]]></SourceLine><Message><![CDATA[The String 'println "amount=${servletContext.amount}"' contains a GString-type expression: '${servletContext.amount}']]></Message></Violation></File></Package><Package path='groovyism' totalFiles='33' filesWithViolations='3' priority1='0' priority2='17' priority3='0'><File name='ClosureAsLastMethodParameterRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='244'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            new Exception("${it.orElseThrow { new AssertionError() }}")
+        ' contains a GString-type expression: '${it.orElseThrow { new AssertionError() }}']]></Message></Violation></File><File name='GStringAsMapKeyRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='44'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            Map map = ["${ someRef }" : 'invalid' ]
+        ' contains a GString-type expression: '${ someRef }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='48'><SourceLine><![CDATA[2, '["${ someRef }" :')]]></SourceLine><Message><![CDATA[The String '["${ someRef }" :' contains a GString-type expression: '${ someRef }']]></Message></Violation></File><File name='GStringExpressionWithinStringRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='49'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class SomeClass {
+                @SomeAnnotationOnField('${sample.property1}')
+                String sampleProperty
+
+                @SomeAnnotationOnMethod('${sample.property2}')
+                void method() {
+                }
+            }
+        ' contains a GString-type expression: '${sample.property1}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='64'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            @SomeAnnotationOnClass('${sample.property1}')
+            class SomeClass {
+                @SomeAnnotationOnField('${sample.property2}')
+                String sampleProperty
+
+                @SomeAnnotationOnMethod('${sample.property3}')
+                void method() {
+                }
+            }
+        ' contains a GString-type expression: '${sample.property1}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='80'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            @SomeAnnotationOnClass(attribute='${sample.property1}',
+                            nested=[@NestedAnnotation('${sample.property2}'),
+                                    @NestedAnnotation('${sample.property3}')],
+                             someOtherAttribute='${sample.property4}')
+            class SomeClass {
+            }
+        ' contains a GString-type expression: '${sample.property1}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='93'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            @SomeAnnotationOnClass(attribute=['${sample.property1}', '${sample.property2}'])
+            class SomeClass {
+            }
+        ' contains a GString-type expression: '${sample.property1}', '${sample.property2}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='103'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            def valueToBeReplaced = '123'
+            def str1 = "123"
+            def str2 = "abc def ghi"
+            def str3 = "abc ${count}"
+            def str4 = "abc $count    }"
+            def str5 = "abc {123}"
+            def str6 = "abc ${}"
+            def str7 = "total: ${count * 25}"
+            def str8 = "$valueToBeReplaced $valueNotToBeReplaced"
+        ' contains a GString-type expression: '${count}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='119'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            def "plugin does not apply idea plugin"() {
+                given:
+                buildScript &lt;&lt; """
+                    task $testTaskName {
+                        doLast {
+                            println "Has idea plugin: \${project.plugins.hasPlugin(IdeaPlugin)}"
+                        }
+                    }
+                """
+
+                expect:
+                runTask(testTaskName).output.contains('Has idea plugin: false')
+
+                where:
+                testTaskName = 'hasIdeaPlugin'
+            }
+            ' contains a GString-type expression: '${project.plugins.hasPlugin(IdeaPlugin)}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='142'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            def str1 = 'total: ${count}'
+            def str2 = 'average: ${total / count}'
+        ' contains a GString-type expression: '${count}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='147'><SourceLine><![CDATA[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]]></SourceLine><Message><![CDATA[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='147'><SourceLine><![CDATA[[lineNumber:2, sourceLineText:"def str1 = 'total: \${count}'", messageText:'\'${count}\''],]]></SourceLine><Message><![CDATA[The String ''${count}'' contains a GString-type expression: '${count}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='148'><SourceLine><![CDATA[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]]></SourceLine><Message><![CDATA[The String 'def str2 = 'average: ${total / count}'' contains a GString-type expression: '${total / count}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='148'><SourceLine><![CDATA[[lineNumber:3, sourceLineText:"def str2 = 'average: \${total / count}'", messageText:'\'${total / count}\''])]]></SourceLine><Message><![CDATA[The String ''${total / count}'' contains a GString-type expression: '${total / count}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='153'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class SomeClass {
+                @SomeAnnotationOnMethod('${sample.property}')
+                void method() {
+                    def str1 = 'total: ${count}'
+                }
+            }
+        ' contains a GString-type expression: '${sample.property}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='161'><SourceLine><![CDATA[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]]></SourceLine><Message><![CDATA[The String 'def str1 = 'total: ${count}'' contains a GString-type expression: '${count}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='161'><SourceLine><![CDATA[assertSingleViolation(SOURCE, 5, "def str1 = 'total: \${count}'", '\'${count}\'')]]></SourceLine><Message><![CDATA[The String ''${count}'' contains a GString-type expression: '${count}']]></Message></Violation></File></Package><Package path='imports' totalFiles='7' filesWithViolations='1' priority1='0' priority2='1' priority3='0'><File name='UnusedImportRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='192'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            import test.TestData1
+            import test.TestData2
+            import test.TestData3
+            import test.TestData4
+            import test.TestData5
+            import test.TestData6
+            import test.TestData7
+            import test.TestData8
+            import test.TestData9
+            import test.TestData10
+            import test.TestData11
+            import test.TestData12
+            import test.TestData13
+            import test.TestData14
+            import test.TestData15
+
+            def GSTRING1 = " ${TestData1.GOOD_XML}"
+            def GSTRING2 = " $TestData2.XML"
+            def MAP1 = [(TestData3):123]
+            def MAP2 = [abc:TestData4]
+            def MAP3 = [abc:TestData5, ddd:123]
+            def LIST = [TestData6,TestData7]
+            def OPERATORS1 = 0+TestData8.VALUE-TestData9.VALUE
+            def OPERATORS2 = 9*TestData10.VALUE/TestData11.VALUE
+            def OPERATORS3 = 64&amp;TestData12.VALUE|TestData13.VALUE^TestData14.VALUE
+            def OPERATORS4 = !TestData15.VALUE
+        ' contains a GString-type expression: '${TestData1.GOOD_XML}']]></Message></Violation></File></Package><Package path='jdbc' totalFiles='6' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='junit' totalFiles='25' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='logging' totalFiles='8' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='naming' totalFiles='16' filesWithViolations='1' priority1='0' priority2='1' priority3='0'><File name='FieldNameRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='28'><SourceLine><![CDATA[class FieldNameRuleTest extends AbstractRuleTestCase&lt;FieldNameRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.naming.FieldNameRuleTest has 32 methods]]></Message></Violation></File></Package><Package path='security' totalFiles='10' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='serialization' totalFiles='4' filesWithViolations='0' priority1='0' priority2='0' priority3='0'></Package><Package path='size' totalFiles='9' filesWithViolations='2' priority1='0' priority2='0' priority3='2'><File name='GMetricsSourceCodeAdapterTest.groovy'><Violation ruleName='MisorderedStaticImports' priority='3' lineNumber='22'><SourceLine><![CDATA[import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining]]></SourceLine><Message><![CDATA[Static imports should appear before normal imports]]></Message></Violation></File><File name='ParameterCountRuleTest.groovy'><Violation ruleName='UnnecessaryReturnKeyword' priority='3' lineNumber='252'><SourceLine><![CDATA[return inlineViolation("Number of parameters in ${name} exceeds maximum allowed (${rule.maxParameters}).")]]></SourceLine><Message><![CDATA[The return keyword is not needed and can be removed]]></Message></Violation></File></Package><Package path='unnecessary' totalFiles='47' filesWithViolations='5' priority1='0' priority2='7' priority3='0'><File name='ConsecutiveStringConcatenationRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='65'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            def b = "$Hello" + 'World'  // should be "${Hello}World"
+        ' contains a GString-type expression: '${Hello}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='73'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            def c = 'Hello' + "$World"  // should be "Hello${World}"
+        ' contains a GString-type expression: '${World}']]></Message></Violation></File><File name='UnnecessaryGStringRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='36'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            def docFile = "src/site/apt/codenarc-rules-${ruleSetName}.apt"
+        ' contains a GString-type expression: '${ruleSetName}']]></Message></Violation></File><File name='UnnecessaryGetterRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='180'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            Mock {
+                getSomeData()
+            }
+            Stub(1,2,3) {
+                getData2()
+            }
+            "${'Stub'}"(MyClass) {
+                getData3()
+            }
+            def closure = { getData4() }
+            Mock({ getData5() }, 1234)      // 2nd param is not a Closure
+            Spy {
+                getMoreData()
+            }
+        ' contains a GString-type expression: '${'Stub'}']]></Message></Violation></File><File name='UnnecessaryPackageReferenceRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='66'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            if (value.class == java.math.BigDecimal) { }
+            println "isClosure=${value instanceof groovy.lang.Closure}"
+            def processors = java.lang.Runtime.availableProcessors()
+        ' contains a GString-type expression: '${value instanceof groovy.lang.Closure}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='73'><SourceLine><![CDATA[[lineNumber:3, sourceLineText:'println "isClosure=${value instanceof groovy.lang.Closure}"', messageText:'groovy.lang'],]]></SourceLine><Message><![CDATA[The String 'println "isClosure=${value instanceof groovy.lang.Closure}"' contains a GString-type expression: '${value instanceof groovy.lang.Closure}']]></Message></Violation></File><File name='UnnecessarySetterRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='69'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            if (!file.setExecutable(true)) {
+                throw new Exception("Cannot set ${file} as executable")
+            }
+            def count = x.setCount(92)
+        ' contains a GString-type expression: '${file}']]></Message></Violation></File></Package><Package path='unused' totalFiles='7' filesWithViolations='5' priority1='0' priority2='11' priority3='0'><File name='UnusedMethodParameterRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='135'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                String myMethod1(String id, int value) { doSomething(value); return id }
+                void myMethod2(int value) { def x = value }
+                def myMethod3(Date startDate) { return "${startDate}" }
+                def myMethod4(Date startDate) {
+                    return new Object() {
+                        def x = startDate
+                    }
+                }
+                def myMethod5(Date startDate) {
+                    return new Object() {
+                        String toString() { return startDate }
+                    }
+                }
+            }
+        ' contains a GString-type expression: '${startDate}" }']]></Message></Violation></File><File name='UnusedPrivateFieldRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='27'><SourceLine><![CDATA[class UnusedPrivateFieldRuleTest extends AbstractRuleTestCase&lt;UnusedPrivateFieldRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.unused.UnusedPrivateFieldRuleTest has 32 methods]]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='166'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                private int count
+                def other = this."${'count'}"
+            }
+        ' contains a GString-type expression: '${'count'}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='177'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                private int count
+                def varName = "count"
+                def other = this."${varName}"     // can't see this
+            }
+        ' contains a GString-type expression: '${varName}']]></Message></Violation></File><File name='UnusedPrivateMethodParameterRuleTest.groovy'><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='111'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                private String myMethod1(String id, int value) { doSomething(value); return id }
+                private void myMethod2(int value) { def x = value }
+                private def myMethod3(Date startDate) { return "${startDate}" }
+                private def myMethod4(Date startDate) {
+                    return new Object() {
+                        def x = startDate
+                    }
+                }
+                private def myMethod5(Date startDate) {
+                    return new Object() {
+                        String toString() { return startDate }
+                    }
+                }
+            }
+        ' contains a GString-type expression: '${startDate}" }']]></Message></Violation></File><File name='UnusedPrivateMethodRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='26'><SourceLine><![CDATA[class UnusedPrivateMethodRuleTest extends AbstractRuleTestCase&lt;UnusedPrivateMethodRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.unused.UnusedPrivateMethodRuleTest has 36 methods]]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='354'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                private int countStuff() { return 99 }
+                int somePublicMethod() { }
+                def abc = 'abc'
+                private String getName() { 'abc' }
+                private getPrice() { 0.0 }
+
+                def doStuff() {
+                    def count = countStuff()
+                    def newName = this.getName()
+                }
+
+                def myClosure = { println "price is ${getPrice()}" }
+            }
+        ' contains a GString-type expression: '${getPrice()}" }']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='423'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                static int getTotal() {
+                    println "total=${MyClass.countStuff()}"
+                }
+                private static int countStuff() { }
+            }
+        ' contains a GString-type expression: '${MyClass.countStuff()}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='436'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                private int countStuff() { }
+                def other = this."${countStuff}"()
+            }
+        ' contains a GString-type expression: '${countStuff}']]></Message></Violation><Violation ruleName='GStringExpressionWithinString' priority='2' lineNumber='458'><SourceLine><![CDATA[final SOURCE = ''']]></SourceLine><Message><![CDATA[The String '
+            class MyClass {
+                private int countStuff() { }
+                def varName = "countStuff"
+                def other = this."${varName}"()     // can't see this
+            }
+        ' contains a GString-type expression: '${varName}']]></Message></Violation></File><File name='UnusedVariableRuleTest.groovy'><Violation ruleName='MethodCount' priority='2' lineNumber='26'><SourceLine><![CDATA[class UnusedVariableRuleTest extends AbstractRuleTestCase&lt;UnusedVariableRule&gt; {]]></SourceLine><Message><![CDATA[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods]]></Message></Violation></File></Package><Rules><Rule name='AbcMetric'><Description><![CDATA[Checks the ABC size metric for methods/classes. A method (or "closure field") with an ABC score greater than the maxMethodAbcScore property (60) causes a violation. Likewise, a class that has an (average method) ABC score greater than the maxClassAverageMethodAbcScore property (60) causes a violation.]]></Description></Rule><Rule name='AddEmptyString'><Description><![CDATA[Finds empty string literals which are being added. This is an inefficient way to convert any type to a String.]]></Description></Rule><Rule name='AssertWithinFinallyBlock'><Description><![CDATA[Checks for assert statements within a finally block. An assert can throw an exception, hiding the original exception, if there is one.]]></Description></Rule><Rule name='AssignCollectionSort'><Description><![CDATA[The Collections.sort() method mutates the list and returns the list as a value. If you are assigning the result of sort() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.]]></Description></Rule><Rule name='AssignCollectionUnique'><Description><![CDATA[The Collections.unique() method mutates the list and returns the list as a value. If you are assigning the result of unique() to a variable, then you probably don't realize that you're also modifying the original list as well. This is frequently the cause of subtle bugs.]]></Description></Rule><Rule name='AssignmentInConditional'><Description><![CDATA[An assignment operator (=) was used in a conditional test. This is usually a typo, and the comparison operator (==) was intended.]]></Description></Rule><Rule name='BigDecimalInstantiation'><Description><![CDATA[Checks for calls to the BigDecimal constructors that take a double parameter, which may result in an unexpected BigDecimal value.]]></Description></Rule><Rule name='BitwiseOperatorInConditional'><Description><![CDATA[Checks for bitwise operations in conditionals, if you need to do a bitwise operation then it is best practice to extract a temp variable.]]></Description></Rule><Rule name='BooleanGetBoolean'><Description><![CDATA[This rule catches usages of java.lang.Boolean.getBoolean(String) which reads a boolean from the System properties. It is often mistakenly used to attempt to read user input or parse a String into a boolean. It is a poor piece of API to use; replace it with System.properties['prop'].]]></Description></Rule><Rule name='BrokenNullCheck'><Description><![CDATA[Looks for faulty checks for null that can cause a NullPointerException.]]></Description></Rule><Rule name='BrokenOddnessCheck'><Description><![CDATA[The code uses x % 2 == 1 to check to see if a value is odd, but this won't work for negative numbers (e.g., (-5) % 2 == -1). If this code is intending to check for oddness, consider using x &amp; 1 == 1, or x % 2 != 0.]]></Description></Rule><Rule name='ClassForName'><Description><![CDATA[Using Class.forName(...) is a common way to add dynamic behavior to a system. However, using this method can cause resource leaks because the classes can be pinned in memory for long periods of time.]]></Description></Rule><Rule name='ClassSize'><Description><![CDATA[Checks if the size of a class exceeds the number of lines specified by the maxLines property (1000).]]></Description></Rule><Rule name='ClosureAsLastMethodParameter'><Description><![CDATA[If a method is called and the last parameter is an inline closure then it can be declared outside of the method call brackets.]]></Description></Rule><Rule name='CollectAllIsDeprecated'><Description><![CDATA[collectAll{} is deprecated since Groovy 1.8.1. Use collectNested instead{}.]]></Description></Rule><Rule name='ComparisonOfTwoConstants'><Description><![CDATA[Checks for expressions where a comparison operator or equals() or compareTo() is used to compare two constants to each other or two literals that contain only constant values, e.g.: 23 == 67, Boolean.FALSE != false, 0.17 &lt;= 0.99, "abc" &gt; "ddd", [a:1] &lt;=&gt; [a:2], [1,2].equals([3,4]) or [a:false, b:true].compareTo(['a':34.5, b:Boolean.TRUE], where x is a variable.]]></Description></Rule><Rule name='ComparisonWithSelf'><Description><![CDATA[Checks for expressions where a comparison operator or equals() or compareTo() is used to compare a variable to itself, e.g.: x == x, x != x, x &lt;=&gt; x, x &lt; x, x &gt;= x, x.equals(x) or x.compareTo(x), where x is a variable.]]></Description></Rule><Rule name='ConfusingMultipleReturns'><Description><![CDATA[Multiple return values can be used to set several variables at once. To use multiple return values, the left hand side of the assignment must be enclosed in parenthesis. If not, then you are not using multiple return values, you're only assigning the last element.]]></Description></Rule><Rule name='ConsecutiveLiteralAppends'><Description><![CDATA[Violations occur when method calls to append(Object) are chained together with literals as parameters. The chained calls can be joined into one invocation.]]></Description></Rule><Rule name='ConsecutiveStringConcatenation'><Description><![CDATA[Catches concatenation of two string literals on the same line. These can safely by joined.]]></Description></Rule><Rule name='ConstantAssertExpression'><Description><![CDATA[Checks for assert statements where the assert boolean condition expression is a constant or literal value.]]></Description></Rule><Rule name='ConstantIfExpression'><Description><![CDATA[Checks for if statements with a constant value for the if expression, such as true, false, null, or a literal constant value.]]></Description></Rule><Rule name='ConstantTernaryExpression'><Description><![CDATA[Checks for ternary expressions with a constant value for the boolean expression, such as true, false, null, or a literal constant value.]]></Description></Rule><Rule name='CrapMetric'><Description><![CDATA[Checks the CRAP (Change Risk Anti-Patterns) score for methods/classes. The CRAP metric score is based on the cyclomatic complexity and test coverage for individual methods. A method with a CRAP value greater than the maxMethodCrapScore property (30) causes a violation. Likewise, a class that has an (average method) CRAP value greater than the maxClassAverageMethodCrapScore property (30) causes a violation.]]></Description></Rule><Rule name='CyclomaticComplexity'><Description><![CDATA[Checks the cyclomatic complexity for methods/classes.A method (or "closure field") with a cyclomatic complexity value greater than the maxMethodComplexity property (20) causes a violation. Likewise, a class that has an (average method) cyclomatic complexityvalue greater than the maxClassAverageMethodComplexity property (20) causes a violation.]]></Description></Rule><Rule name='DeadCode'><Description><![CDATA[Dead code appears after a return statement or an exception is thrown. If code appears after one of these statements then it will never be executed and can be safely deleted.]]></Description></Rule><Rule name='DoubleNegative'><Description><![CDATA[There is no point in using a double negative, it is always positive. For instance !!x can always be simplified to x. And !(!x) can as well.]]></Description></Rule><Rule name='DuplicateCaseStatement'><Description><![CDATA[Check for duplicate case statements in a switch block, such as two equal integers or strings.]]></Description></Rule><Rule name='DuplicateImport'><Description><![CDATA[Duplicate import statements are unnecessary.]]></Description></Rule><Rule name='DuplicateMapKey'><Description><![CDATA[A map literal is created with duplicated key. The map entry will be overwritten.]]></Description></Rule><Rule name='DuplicateSetValue'><Description><![CDATA[A Set literal is created with duplicate constant value. A set cannot contain two elements with the same value.]]></Description></Rule><Rule name='EmptyCatchBlock'><Description><![CDATA[In most cases, exceptions should not be caught and ignored (swallowed).]]></Description></Rule><Rule name='EmptyClass'><Description><![CDATA[Reports classes without methods, fields or properties. Why would you need a class like this?]]></Description></Rule><Rule name='EmptyElseBlock'><Description><![CDATA[Empty else blocks are confusing and serve no purpose.]]></Description></Rule><Rule name='EmptyFinallyBlock'><Description><![CDATA[Empty finally blocks are confusing and serve no purpose.]]></Description></Rule><Rule name='EmptyForStatement'><Description><![CDATA[Empty for statements are confusing and serve no purpose.]]></Description></Rule><Rule name='EmptyIfStatement'><Description><![CDATA[Empty if statements are confusing and serve no purpose.]]></Description></Rule><Rule name='EmptyInstanceInitializer'><Description><![CDATA[An empty class instance initializer was found. It is safe to remove it.]]></Description></Rule><Rule name='EmptyMethod'><Description><![CDATA[A method was found without an implementation. If the method is overriding or implementing a parent method, then mark it with the @Override annotation.]]></Description></Rule><Rule name='EmptyStaticInitializer'><Description><![CDATA[An empty static initializer was found. It is safe to remove it.]]></Description></Rule><Rule name='EmptySwitchStatement'><Description><![CDATA[Empty switch statements are confusing and serve no purpose.]]></Description></Rule><Rule name='EmptySynchronizedStatement'><Description><![CDATA[Empty synchronized statements are confusing and serve no purpose.]]></Description></Rule><Rule name='EmptyTryBlock'><Description><![CDATA[Empty try blocks are confusing and serve no purpose.]]></Description></Rule><Rule name='EmptyWhileStatement'><Description><![CDATA[Empty while statements are confusing and serve no purpose.]]></Description></Rule><Rule name='EqualsAndHashCode'><Description><![CDATA[If either the equals(Object) or the hashCode() methods are overridden within a class, then both must be overridden.]]></Description></Rule><Rule name='EqualsOverloaded'><Description><![CDATA[The class has an equals method, but the parameter of the method is not of type Object. It is not overriding equals but instead overloading it.]]></Description></Rule><Rule name='ExplicitArrayListInstantiation'><Description><![CDATA[This rule checks for the explicit instantiation of a ArrayList using the no-arg constructor. In Groovy, it is best to write "new ArrayList()" as "[]", which creates the same object.]]></Description></Rule><Rule name='ExplicitCallToAndMethod'><Description><![CDATA[This rule detects when the and(Object) method is called directly in code instead of using the &amp; operator. A groovier way to express this: a.and(b) is this: a &amp; b]]></Description></Rule><Rule name='ExplicitCallToCompareToMethod'><Description><![CDATA[This rule detects when the compareTo(Object) method is called directly in code instead of using the &lt;=&gt;, &gt;, &gt;=, &lt;, and &lt;= operators. A groovier way to express this: a.compareTo(b) is this: a &lt;=&gt; b, or using the other operators.]]></Description></Rule><Rule name='ExplicitCallToDivMethod'><Description><![CDATA[This rule detects when the div(Object) method is called directly in code instead of using the / operator. A groovier way to express this: a.div(b) is this: a / b]]></Description></Rule><Rule name='ExplicitCallToEqualsMethod'><Description><![CDATA[This rule detects when the equals(Object) method is called directly in code instead of using the == or != operator. A groovier way to express this: a.equals(b) is this: a == b and a groovier way to express : !a.equals(b) is : a != b]]></Description></Rule><Rule name='ExplicitCallToGetAtMethod'><Description><![CDATA[This rule detects when the getAt(Object) method is called directly in code instead of using the [] index operator. A groovier way to express this: a.getAt(b) is this: a[b]]]></Description></Rule><Rule name='ExplicitCallToLeftShiftMethod'><Description><![CDATA[This rule detects when the leftShift(Object) method is called directly in code instead of using the &lt;&lt; operator. A groovier way to express this: a.leftShift(b) is this: a &lt;&lt; b]]></Description></Rule><Rule name='ExplicitCallToMinusMethod'><Description><![CDATA[This rule detects when the minus(Object) method is called directly in code instead of using the - operator. A groovier way to express this: a.minus(b) is this: a - b]]></Description></Rule><Rule name='ExplicitCallToModMethod'><Description><![CDATA[This rule detects when the mod(Object) method is called directly in code instead of using the % operator. A groovier way to express this: a.mod(b) is this: a % b]]></Description></Rule><Rule name='ExplicitCallToMultiplyMethod'><Description><![CDATA[This rule detects when the minus(Object) method is called directly in code instead of using the * operator. A groovier way to express this: a.multiply(b) is this: a * b]]></Description></Rule><Rule name='ExplicitCallToOrMethod'><Description><![CDATA[This rule detects when the or(Object) method is called directly in code instead of using the | operator. A groovier way to express this: a.or(b) is this: a | b]]></Description></Rule><Rule name='ExplicitCallToPlusMethod'><Description><![CDATA[This rule detects when the plus(Object) method is called directly in code instead of using the + operator. A groovier way to express this: a.plus(b) is this: a + b]]></Description></Rule><Rule name='ExplicitCallToPowerMethod'><Description><![CDATA[This rule detects when the power(Object) method is called directly in code instead of using the ** operator. A groovier way to express this: a.power(b) is this: a ** b]]></Description></Rule><Rule name='ExplicitCallToPutAtMethod'><Description><![CDATA[Detects when the putAt(Object, Object) method is called directly in code instead of using the [] index operator. A groovier way to express this: map.putAt(k, v) is this: map[k] = v.]]></Description></Rule><Rule name='ExplicitCallToRightShiftMethod'><Description><![CDATA[This rule detects when the rightShift(Object) method is called directly in code instead of using the &gt;&gt; operator. A groovier way to express this: a.rightShift(b) is this: a &gt;&gt; b]]></Description></Rule><Rule name='ExplicitCallToXorMethod'><Description><![CDATA[This rule detects when the xor(Object) method is called directly in code instead of using the ^ operator. A groovier way to express this: a.xor(b) is this: a ^ b]]></Description></Rule><Rule name='ExplicitGarbageCollection'><Description><![CDATA[Calls to System.gc(), Runtime.getRuntime().gc(), and System.runFinalization() are not advised. Code should have the same behavior whether the garbage collection is disabled using the option -Xdisableexplicitgc or not. Moreover, "modern" jvms do a very good job handling garbage collections. If memory usage issues unrelated to memory leaks develop within an application, it should be dealt with JVM options rather than within the code itself.]]></Description></Rule><Rule name='ExplicitHashMapInstantiation'><Description><![CDATA[This rule checks for the explicit instantiation of a HashMap using the no-arg constructor. In Groovy, it is best to write "new HashMap()" as "[:]", which creates the same object.]]></Description></Rule><Rule name='ExplicitHashSetInstantiation'><Description><![CDATA[This rule checks for the explicit instantiation of a HashSet using the no-arg constructor. In Groovy, it is best to write "new HashSet()" as "[] as Set", which creates the same object.]]></Description></Rule><Rule name='ExplicitLinkedHashMapInstantiation'><Description><![CDATA[This rule checks for the explicit instantiation of a LinkedHashMap using the no-arg constructor. In Groovy, it is best to write "new LinkedHashMap()" as "[:]", which creates the same object.]]></Description></Rule><Rule name='ExplicitLinkedListInstantiation'><Description><![CDATA[This rule checks for the explicit instantiation of a LinkedList using the no-arg constructor. In Groovy, it is best to write "new LinkedList()" as "[] as Queue", which creates the same object.]]></Description></Rule><Rule name='ExplicitStackInstantiation'><Description><![CDATA[This rule checks for the explicit instantiation of a Stack using the no-arg constructor. In Groovy, it is best to write "new Stack()" as "[] as Stack", which creates the same object.]]></Description></Rule><Rule name='ExplicitTreeSetInstantiation'><Description><![CDATA[This rule checks for the explicit instantiation of a TreeSet using the no-arg constructor. In Groovy, it is best to write "new TreeSet()" as "[] as SortedSet", which creates the same object.]]></Description></Rule><Rule name='ForLoopShouldBeWhileLoop'><Description><![CDATA[A for loop without an init and update statement can be simplified to a while loop.]]></Description></Rule><Rule name='GStringAsMapKey'><Description><![CDATA[A GString should not be used as a map key since its hashcode is not guaranteed to be stable. Consider calling key.toString().]]></Description></Rule><Rule name='GStringExpressionWithinString'><Description><![CDATA[Check for regular (single quote) strings containing a GString-type expression (${...}).]]></Description></Rule><Rule name='GetterMethodCouldBeProperty'><Description><![CDATA[If a class defines a public method that follows the Java getter notation, and returns a constant, then it is cleaner to provide a Groovy property for the value rather than a Groovy method.]]></Description></Rule><Rule name='GroovyLangImmutable'><Description><![CDATA[The groovy.lang.Immutable annotation has been deprecated and replaced by groovy.transform.Immutable. Do not use the Immutable in groovy.lang.]]></Description></Rule><Rule name='HardCodedWindowsFileSeparator'><Description><![CDATA[This rule finds usages of a Windows file separator within the constructor call of a File object. It is better to use the Unix file separator or use the File.separator constant.]]></Description></Rule><Rule name='HardCodedWindowsRootDirectory'><Description><![CDATA[This rule find cases where a File object is constructed with a windows-based path. This is not portable, and using the File.listRoots() method is a better alternative.]]></Description></Rule><Rule name='ImportFromSamePackage'><Description><![CDATA[An import of a class that is within the same package is unnecessary.]]></Description></Rule><Rule name='ImportFromSunPackages'><Description><![CDATA[Avoid importing anything from the 'sun.*' packages. These packages are not portable and are likely to change.]]></Description></Rule><Rule name='IntegerGetInteger'><Description><![CDATA[This rule catches usages of java.lang.Integer.getInteger(String, ...) which reads an Integer from the System properties. It is often mistakenly used to attempt to read user input or parse a String into an Integer. It is a poor piece of API to use; replace it with System.properties['prop'].]]></Description></Rule><Rule name='MethodCount'><Description><![CDATA[A class with too many methods is probably a good suspect for refactoring, in order to reduce its complexity and find a way to have more fine grained objects. The &lt;em&gt;maxMethods&lt;/em&gt; property (30) specifies the threshold.]]></Description></Rule><Rule name='MethodSize'><Description><![CDATA[Checks if the size of a method exceeds the number of lines specified by the maxLines property (100).]]></Description></Rule><Rule name='MisorderedStaticImports'><Description><![CDATA[Static imports should never be declared after nonstatic imports.]]></Description></Rule><Rule name='MultipleUnaryOperators'><Description><![CDATA[Checks for multiple consecutive unary operators. These are confusing, and are likely typos and bugs.]]></Description></Rule><Rule name='NestedBlockDepth'><Description><![CDATA[Checks for blocks or closures nested more than maxNestedBlockDepth (5) levels deep.]]></Description></Rule><Rule name='NoWildcardImports'><Description><![CDATA[Wildcard imports, static or otherwise, should not be used.]]></Description></Rule><Rule name='ParameterCount'><Description><![CDATA[Checks if the number of parameters in method/constructor exceeds the number of parameters specified by the maxParameters property.]]></Description></Rule><Rule name='RandomDoubleCoercedToZero'><Description><![CDATA[The Math.random() method returns a double result greater than or equal to 0.0 and less than 1.0. If you coerce this result into an Integer or int, then it is coerced to zero. Casting the result to int, or assigning it to an int field is probably a bug.]]></Description></Rule><Rule name='RemoveAllOnSelf'><Description><![CDATA[Don't use removeAll to clear a collection. If you want to remove all elements from a collection c, use c.clear, not c.removeAll(c). Calling c.removeAll(c) to clear a collection is less clear, susceptible to errors from typos, less efficient and for some collections, might throw a ConcurrentModificationException.]]></Description></Rule><Rule name='ReturnFromFinallyBlock'><Description><![CDATA[Returning from a finally block is confusing and can hide the original exception.]]></Description></Rule><Rule name='ThrowExceptionFromFinallyBlock'><Description><![CDATA[Throwing an exception from a finally block is confusing and can hide the original exception.]]></Description></Rule><Rule name='UnnecessaryBigDecimalInstantiation'><Description><![CDATA[It is unnecessary to instantiate BigDecimal objects. Instead just use the decimal literal or the 'G' identifier to force the type, such as 123.45 or 123.45G.]]></Description></Rule><Rule name='UnnecessaryBigIntegerInstantiation'><Description><![CDATA[It is unnecessary to instantiate BigInteger objects. Instead just use the literal with the 'G' identifier to force the type, such as 8G or 42G.]]></Description></Rule><Rule name='UnnecessaryBooleanExpression'><Description><![CDATA[Checks for unnecessary boolean expressions, including ANDing (&amp;&amp;) or ORing (||) with true, false, null, or a Map/List/String/Number literal. Also checks for negation (!) of true, false, null, or a Map/List/String/Number literal.]]></Description></Rule><Rule name='UnnecessaryBooleanInstantiation'><Description><![CDATA[Use Boolean.valueOf() for variable values or Boolean.TRUE and Boolean.FALSE for constant values instead of calling the Boolean() constructor directly or calling Boolean.valueOf(true) or Boolean.valueOf(false).]]></Description></Rule><Rule name='UnnecessaryCallForLastElement'><Description><![CDATA[This rule checks for excessively verbose methods of accessing the last element of an array or list. For instance, it is possible to access the last element of an array by performing array[array.length - 1], in Groovy it is simpler to either call array.last() or array[-1]. The same is true for lists. This violation is triggered whenever a get, getAt, or array-style access is used with an object size check.]]></Description></Rule><Rule name='UnnecessaryCallToSubstring'><Description><![CDATA[Calling String.substring(0) always returns the original string. This code is meaningless.]]></Description></Rule><Rule name='UnnecessaryCast'><Description><![CDATA[Checks for unnecessary cast operations]]></Description></Rule><Rule name='UnnecessaryCatchBlock'><Description><![CDATA[Violations are triggered when a catch block does nothing but throw the original exception. In this scenario there is usually no need for a catch block, just let the exception be thrown from the original code. This condition frequently occurs when catching an exception for debugging purposes but then forgetting to take the catch statement out.]]></Description></Rule><Rule name='UnnecessaryCollectCall'><Description><![CDATA[Some method calls to Object.collect(Closure) can be replaced with the spread operator. For instance, list.collect { it.multiply(2) } can be replaced by list*.multiply(2). Warning: if a collection is null, collect will return an empty list, while *. will return null.]]></Description></Rule><Rule name='UnnecessaryCollectionCall'><Description><![CDATA[Useless call to collections. This call doesn't make sense. For any collection c, calling c.containsAll(c) should always be true, and c.retainAll(c) should have no effect.]]></Description></Rule><Rule name='UnnecessaryConstructor'><Description><![CDATA[This rule detects when a constructor is not necessary; i.e., when there's only one constructor, it's public, has an empty body, and takes no arguments.]]></Description></Rule><Rule name='UnnecessaryDefInFieldDeclaration'><Description><![CDATA[If a field has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance, 'static def constraints = {}' is redundant and can be simplified to 'static constraints = {}.]]></Description></Rule><Rule name='UnnecessaryDefInMethodDeclaration'><Description><![CDATA[If a method has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance 'def private method() {}' is redundant and can be simplified to 'private method() {}'.]]></Description></Rule><Rule name='UnnecessaryDefInVariableDeclaration'><Description><![CDATA[If a variable has a visibility modifier or a type declaration, then the def keyword is unneeded. For instance 'def private n = 2' is redundant and can be simplified to 'private n = 2'.]]></Description></Rule><Rule name='UnnecessaryDotClass'><Description><![CDATA[To make a reference to a class, it is unnecessary to specify the '.class' identifier. For instance String.class can be shortened to String.]]></Description></Rule><Rule name='UnnecessaryDoubleInstantiation'><Description><![CDATA[It is unnecessary to instantiate Double objects. Instead just use the double literal or the 'D' identifier to force the type, such as 123.45d or 0.42d.]]></Description></Rule><Rule name='UnnecessaryElseStatement'><Description><![CDATA[When an if statement block ends with a return statement the else is unnecessary. The logic in the else branch can be run without being in a new scope.]]></Description></Rule><Rule name='UnnecessaryFinalOnPrivateMethod'><Description><![CDATA[A private method is marked final. Private methods cannot be overridden, so marking it final is unnecessary.]]></Description></Rule><Rule name='UnnecessaryFloatInstantiation'><Description><![CDATA[It is unnecessary to instantiate Float objects. Instead just use the float literal with the 'F' identifier to force the type, such as 123.45F or 0.42f.]]></Description></Rule><Rule name='UnnecessaryGString'><Description><![CDATA[String objects should be created with single quotes, and GString objects created with double quotes. Creating normal String objects with double quotes is confusing to readers.]]></Description></Rule><Rule name='UnnecessaryGroovyImport'><Description><![CDATA[A Groovy file does not need to include an import for classes from java.lang, java.util, java.io, java.net, groovy.lang and groovy.util, as well as the classes java.math.BigDecimal and java.math.BigInteger.]]></Description></Rule><Rule name='UnnecessaryIfStatement'><Description><![CDATA[Checks for if statements where the if and else blocks (or subsequent fall-through to a return), are merely returning true and false constants. These cases can be replaced by a simple return statement.]]></Description></Rule><Rule name='UnnecessaryInstanceOfCheck'><Description><![CDATA[This rule finds instanceof checks that cannot possibly evaluate to true. For instance, checking that (!variable instanceof String) will never be true because the result of a not expression is always a boolean.]]></Description></Rule><Rule name='UnnecessaryInstantiationToGetClass'><Description><![CDATA[Avoid instantiating an object just to call getClass() on it; use the .class public member instead.]]></Description></Rule><Rule name='UnnecessaryIntegerInstantiation'><Description><![CDATA[It is unnecessary to instantiate Integer objects. Instead just use the literal with the 'I' identifier to force the type, such as 8I or 42i.]]></Description></Rule><Rule name='UnnecessaryLongInstantiation'><Description><![CDATA[It is unnecessary to instantiate Long objects. Instead just use the literal with the 'L' identifier to force the type, such as 8L or 42L.]]></Description></Rule><Rule name='UnnecessaryModOne'><Description><![CDATA[Any expression mod 1 (exp % 1) is guaranteed to always return zero. This code is probably an error, and should be either (exp &amp; 1) or (exp % 2).]]></Description></Rule><Rule name='UnnecessaryNullCheck'><Description><![CDATA[Groovy contains the safe dereference operator, which can be used in boolean conditional statements to safely replace explicit "x == null" tests.]]></Description></Rule><Rule name='UnnecessaryNullCheckBeforeInstanceOf'><Description><![CDATA[There is no need to check for null before an instanceof; the instanceof keyword returns false when given a null argument.]]></Description></Rule><Rule name='UnnecessaryObjectReferences'><Description><![CDATA[Violations are triggered when an excessive set of consecutive statements all reference the same variable. This can be made more readable by using a with or identity block.]]></Description></Rule><Rule name='UnnecessaryOverridingMethod'><Description><![CDATA[The overriding method merely calls the same method defined in a superclass]]></Description></Rule><Rule name='UnnecessaryPackageReference'><Description><![CDATA[Checks for explicit package reference for classes that Groovy imports by default, such as java.lang.String, java.util.Map and groovy.lang.Closure.]]></Description></Rule><Rule name='UnnecessaryParenthesesForMethodCallWithClosure'><Description><![CDATA[If a method is called and the only parameter to that method is an inline closure then the parentheses of the method call can be omitted.]]></Description></Rule><Rule name='UnnecessaryPublicModifier'><Description><![CDATA[The 'public' modifier is not required on methods or classes.]]></Description></Rule><Rule name='UnnecessaryReturnKeyword'><Description><![CDATA[In Groovy, the return keyword is often optional. If a statement is the last line in a method or closure then you do not need to have the return keyword.]]></Description></Rule><Rule name='UnnecessarySafeNavigationOperator'><Description><![CDATA[Check for the safe navigation operator (?.) applied to constants and literals, which can never be null.]]></Description></Rule><Rule name='UnnecessarySelfAssignment'><Description><![CDATA[Method contains a pointless self-assignment to a variable or property.]]></Description></Rule><Rule name='UnnecessarySemicolon'><Description><![CDATA[Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice.]]></Description></Rule><Rule name='UnnecessarySetter'><Description><![CDATA[Checks for explicit calls to setter methods which can, for the most part, be replaced by assignment to property. A setter is defined as a method call that matches set[A-Z] but not set[A-Z][A-Z] such as setURL(). Setters take one method argument.]]></Description></Rule><Rule name='UnnecessaryStringInstantiation'><Description><![CDATA[Use a String literal (e.g., "...") instead of calling the corresponding String constructor (new String("..")) directly.]]></Description></Rule><Rule name='UnnecessarySubstring'><Description><![CDATA[This rule finds usages of String.substring(int) and String.substring(int, int) that can be replaced by use of the subscript operator. For instance, var.substring(5) can be replaced with var[5..-1].]]></Description></Rule><Rule name='UnnecessaryTernaryExpression'><Description><![CDATA[Checks for ternary expressions where the conditional expression always evaluates to a boolean and the true and false expressions are merely returning true and false constants. Also checks for ternary expressions where both expressions are the same constant or variable.]]></Description></Rule><Rule name='UnnecessaryToString'><Description><![CDATA[Checks for unnecessary calls to toString().]]></Description></Rule><Rule name='UnnecessaryTransientModifier'><Description><![CDATA[The field is marked as transient, but the class isn't Serializable, so marking it as transient has no effect.]]></Description></Rule><Rule name='UnusedImport'><Description><![CDATA[Imports for a class that is never referenced within the source file is unnecessary.]]></Description></Rule><Rule name='UseCollectMany'><Description><![CDATA[In many case collectMany() yields the same result as collect{}.flatten(). It is easier to understand and more clearly conveys the intent.]]></Description></Rule><Rule name='UseCollectNested'><Description><![CDATA[Instead of nested collect{}-calls use collectNested{}]]></Description></Rule></Rules></CodeNarc>
