@@ -26,7 +26,7 @@ html {
     margin-left: 0px;
     height: 150px;
     width: 100%;
-    position: fixed; /* Fixed (stay in place on scroll) */
+    /*position: fixed;*/ /* Fixed (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
@@ -43,7 +43,7 @@ html {
 .sidebar {
   width: 190px; /* 200 - padding */
   top: 150px; /* Stay under the banner */
-  margin-top: 150px; /* Stay under the banner */
+  /*margin-top: 150px;*/ /* Stay under the banner */
   margin-left: 0px;
   left: 0px;
 
@@ -101,8 +101,8 @@ a:hover {
 
 /* Style page content */
 .container {
-  margin-top: 150px; /* Same as the height of the banner */
-  padding-top: 150px; /* Same as the height of the banner */
+  /*margin-top: 150px;*/ /* Same as the height of the banner */
+  /*padding-top: 150px;*/ /* Same as the height of the banner */
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 200px; /* Same as the width of the sidebar */
