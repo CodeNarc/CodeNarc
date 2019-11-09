@@ -59,13 +59,14 @@ body {
 .sidebar ul {
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-left: 5px;  /* indent of bullet */
+  /*padding-left: 10px;*/  /* indent of bullet */
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 .sidebar li {
   font-size: 12px;
+  padding-left: 10px;  /* indent of bullet */
 }
 
 /* The navigation menu links */
