@@ -6,7 +6,7 @@ title: CodeNarc - Developer Guide
 # CodeNarc - Developer Guide
 
 **Contents**
-  * [The codenarc Command-line Script](#The-codenarc-command-line-script)
+  * [The codenarc Command-line Script](#the-codenarc-command-line-script)
   * [New Rule Checklist](#new-rule-checklist)
   * [Before You Submit a Patch or Check-In Code](#before-you-submit-a-patch-or-check-in-code)
   * [Intellij IDEA Support](#intellij-idea-support)
@@ -32,11 +32,11 @@ The `create-rule` task performs the following steps:
 
 On **Unix/Mac**, you can run the following from the project root directory:
 
-    `./codenarc create-rule`
+    ./codenarc create-rule
 
 On **Windows**, you can run:
 
-    `codenarc create-rule`.
+    codenarc create-rule
 
 (If **Windows** is not configured to automatically run *.groovy files,
 just can run `groovy codenarc create-rule`)
@@ -52,7 +52,7 @@ After you run `codenarc create-rule`, finish up the rule implementation, includi
      the new rule description on the appropriate ruleset page on the project site.
 
 
-## New Rule Checklist}
+## New Rule Checklist
 
 Perform the following steps when creating a new rule. See [The codenarc Command-line Script](#The-codenarc-command-line-script).
 for information on the command-line script that automates a good bit of the boilerplate, as indicated below.
@@ -70,7 +70,7 @@ for information on the command-line script that automates a good bit of the boil
         script to create the rule. See [The codenarc Command-line Script](#The-codenarc-command-line-script).
 
 
-## Before You Submit a Pull Request or Patch}
+## Before You Submit a Pull Request or Patch
 
 Please do the following before submitting a pull request or patch:
 
@@ -78,6 +78,6 @@ Please do the following before submitting a pull request or patch:
     that runs **CodeNarc** against its own source code (including any code that you have added or changed).
 
 
-## Intellij IDEA Support}
+## Intellij IDEA Support
 
 To generate Intellij IDEA files, execute `gradle idea`
