@@ -16,7 +16,7 @@ The **CodeNarc** Ant Task is implemented by the `org.codenarc.ant.CodeNarcTask` 
 | *maxPriority1Violations* | The maximum number of priority 1 violations allowed before failing the build (throwing a `BuildException`).               | No |
 | *maxPriority2Violations* | The maximum number of priority 2 violations allowed before failing the build (throwing a `BuildException`).               | No |
 | *maxPriority3Violations* | The maximum number of priority 3 violations allowed before failing the build (throwing a `BuildException`).               | No |
-| *excludeBaseline*        | The path to a *baseline violations* report (report type "baseline") If set, then all violations specified within that report are excluded (filtered) from the current **CodeNarc** run. If null/empty, then do nothing. See [Baseline Report](./codenarc-BaselineXmlReportWriter.html).    | No |
+| *excludeBaseline*        | The path to a *baseline violations* report (report type "baseline") If set, then all violations specified within that report are excluded (filtered) from the current **CodeNarc** run. If null/empty, then do nothing. See [Baseline Report](./codenarc-baseline-xml-report-writer.html).    | No |
 | *classpathRef*           | The reference to a path element which is to be used as classpath when compiling analysed sources (useful with [Enhanced Classpath Rules](./codenarc-enhanced-classpath-rules.html)). | No |
 | *failOnError*            | Boolean that indicates whether to terminate and fail the task (throwing a `BuildException`) if any errors occur parsing source files (<true>), or just log  the errors (<false>). It defaults to <false>.                                        | No |
 

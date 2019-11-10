@@ -54,7 +54,7 @@ After you run `codenarc create-rule`, finish up the rule implementation, includi
 
 ## New Rule Checklist
 
-Perform the following steps when creating a new rule. See [The codenarc Command-line Script](#The-codenarc-command-line-script).
+Perform the following steps when creating a new rule. See [The codenarc Command-line Script](#the-codenarc-command-line-script).
 for information on the command-line script that automates a good bit of the boilerplate, as indicated below.
   1. Implement the new *Rule* class. This is typically a subclass of `AbstractAstVisitorRule`. [1]
   2. Implement the associated *Rule* test class. This is typically a subclass of `AbstractRuleTestCase`. [1]
@@ -67,7 +67,7 @@ for information on the command-line script that automates a good bit of the boil
 ###  NOTES
 
   * [1] These files are created (skeletons) or updated automatically if you run the `codenarc create-rule`
-        script to create the rule. See [The codenarc Command-line Script](#The-codenarc-command-line-script).
+        script to create the rule. See [The codenarc Command-line Script](#the-codenarc-command-line-script).
 
 
 ## Before You Submit a Pull Request or Patch
