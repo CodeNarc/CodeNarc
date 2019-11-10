@@ -17,6 +17,7 @@ Updated/Enhanced Rules and Bug Fixes
 - #256: **JUnitPublicField**: Added support for skipping fields with fully-qualified @org.junit.Rule and @org.junit.ClassRule annotations.
 
 Framework and Infrastructure
+- #442: Move web site (online docs) from Sourceforge to GitHub.
 - #441: Enable CodeNarc Ant Task to optionally fail for Groovy compile errors on source files. Add *failOnError* property to the Ant Task, defaults to *false*.
 - #445: Support `@SuppressWarnings("all")` and `@SuppressWarnings("CodeNarc")`.
 - #429: Normalize line endings to LF. (Marcin Erdmann)

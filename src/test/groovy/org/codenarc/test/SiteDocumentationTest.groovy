@@ -18,7 +18,7 @@ package org.codenarc.test
 import org.junit.Test
 
 /**
- * Tests that the "site" documentation is up to date.
+ * Tests that the "site" (online) documentation is up to date.
  *
  * @author Hamlet D'Arcy
   */
@@ -28,7 +28,7 @@ class SiteDocumentationTest extends AbstractTestCase {
     void testDocumentation() {
         new File('src/main/resources/rulesets').eachFileMatch(~/.*\.xml/) { File ruleset ->
             def ruleSetName = ruleset.name[0..-5]
-            def docFile = "src/site/apt/codenarc-rules-${ruleSetName}.apt"
+            def docFile = "docs/codenarc-rules-${ruleSetName}.md"
             def documentation = new File(docFile).text
 
             def violations = new XmlSlurper().parse(ruleset).rule.collect {

@@ -22,8 +22,8 @@ import org.codenarc.ruleset.RuleSets
 import org.codenarc.ruleset.XmlFileRuleSet
 
 /**
- * Java application (main() method) that generates the "codenarc-rule-index.apt.template" file.
- * which is the APT file for the Rule Index page of the project web site.
+ * Java application (main() method) that generates the "codenarc-rule-index.md.template" file.
+ * which is the markdown file for the Rule Index page of the project web site.
  *
  * @author Chris Mair
   */

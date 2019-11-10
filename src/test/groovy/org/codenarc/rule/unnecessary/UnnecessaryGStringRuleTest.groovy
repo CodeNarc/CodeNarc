@@ -34,7 +34,7 @@ class UnnecessaryGStringRuleTest extends AbstractRuleTestCase<UnnecessaryGString
     @Test
     void testSimpleCase() {
         final SOURCE = '''
-            def docFile = "src/site/apt/codenarc-rules-${ruleSetName}.apt"
+            def docFile = "docs/codenarc-rules-${ruleSetName}.apt"
         '''
         assertNoViolations(SOURCE)
     }

@@ -80,19 +80,19 @@ def updateRuleList(ruleName, ruleCategory) {
 }
 
 def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
-    def path = "./src/site/apt/codenarc-rules-${ruleCategory}.apt"
+    def path = "./docs/codenarc-rules-${ruleCategory}.md"
     new File(path).append """
-* {$ruleName} Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  <Since CodeNarc 1.5>
+## {$ruleName} Rule
 
-  $ruleDescription
+<Since CodeNarc 1.5>
 
-  Example of violations:
+$ruleDescription
 
--------------------------------------------------------------------------------
+Example of violations:
+
+```
     // TODO: Add examples
--------------------------------------------------------------------------------
+```
 """
     println "\tUpdated $path"
 }
