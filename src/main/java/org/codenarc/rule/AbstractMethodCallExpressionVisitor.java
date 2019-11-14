@@ -250,7 +250,7 @@ public class AbstractMethodCallExpressionVisitor extends ClassCodeVisitorSupport
     }
 
     @Override
-    protected final void visitEmptyStatement(EmptyStatement statement) {
+    public final void visitEmptyStatement(EmptyStatement statement) {
         super.visitEmptyStatement(statement);
     }
 
