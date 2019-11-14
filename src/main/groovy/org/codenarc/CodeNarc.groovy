@@ -56,7 +56,7 @@ import org.codenarc.results.Results
 @SuppressWarnings(['Println', 'PrintStackTrace'])
 class CodeNarc {
 
-    protected static final String HELP = """CodeNarc - static analysis for Groovy',
+    protected static final String HELP = """CodeNarc - static analysis for Groovy,
 Usage: java org.codenarc.CodeNarc [OPTIONS]
   where OPTIONS are zero or more command-line options of the form "-NAME[=VALUE]":
     -basedir=<DIR>
@@ -135,7 +135,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             codeNarc.execute(args)
         }
         catch(Throwable t) {
-            println "ERROR: ${t.message}"
+            println "ERROR: ${t.toString()}"
             t.printStackTrace()
             println HELP
             systemExit(1)
