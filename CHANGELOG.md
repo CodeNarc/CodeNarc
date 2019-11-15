@@ -16,15 +16,20 @@ Updated/Enhanced Rules and Bug Fixes
 - #444: **FieldTypeRequired**: Fix duplicate violations.
 - #256: **JUnitPublicField**: Added support for skipping fields with fully-qualified @org.junit.Rule and @org.junit.ClassRule annotations.
 
+Groovy 3.x Compatibility
+- #432: Fix "IllegalAccessError: null from ClosureAsLastMethodParameterRule". **AbstractMethodCallExpressionVisitor**: Changed `visitEmptyStatement()` to public. 
+- #432: Fix "The variable [xx] is declared final but is reassigned" errors w/Groovy 3. Fixed **CompileStaticRuleTest**.
+- #432: Fix "attempting to assign weaker access privileges; was public" errors: **AbstractFieldVisitor**, **AbstractMethodCallExpressionVisitor**, **AbstractMethodVisitor**.
+- #432: Fix **SpaceAroundMapEntryColonRule** "StringIndexOutOfBoundsException" errors w/Groovy 3.
+- #432: Fix **ClosureStatementOnOpeningLineOfMultipleLineClosureRule** "MissingPropertyException: No such property: statements for class: org.codehaus.groovy.ast.stmt.ExpressionStatement"
+- #423: **UnnecessaryPublicModifierAstVisitor** and **AstUtil**. Resolves #414. (philippkrauss)
+
 Framework and Infrastructure
 - #442: Move web site (online docs) from Sourceforge to GitHub.
 - #441: Enable CodeNarc Ant Task to optionally fail for Groovy compile errors on source files. Add *failOnError* property to the Ant Task, defaults to *false*.
 - #445: Support `@SuppressWarnings("all")` and `@SuppressWarnings("CodeNarc")`.
 - #429: Normalize line endings to LF. (Marcin Erdmann)
 - #421: Update to gradle 5.4.1, Only sign on uploadArchives. (Leonard Brünings)
-- #432: Prepare for Groovy 3. Fix "attempting to assign weaker access privileges; was public" errors: **AbstractFieldVisitor**, **AbstractMethodCallExpressionVisitor**, **AbstractMethodVisitor**.
-- #432: Prepare for Groovy 3. Fix SpaceAroundMapEntryColonRule "StringIndexOutOfBoundsException" errors w/Groovy 3
-- #423: Fixes for Groovy 3. **UnnecessaryPublicModifierAstVisitor** and **AstUtil**. Resolves #414. (philippkrauss)
 - #436: Remove unnecessary CodeNarc logging.
 
 

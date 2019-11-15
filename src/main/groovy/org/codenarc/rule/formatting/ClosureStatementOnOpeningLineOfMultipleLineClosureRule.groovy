@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
@@ -36,7 +37,7 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor extends Abstr
     @Override
     void visitClosureExpression(ClosureExpression expression) {
         def block = expression.code
-        boolean hasAtLeastOneStatement = !block.isEmpty()
+        boolean hasAtLeastOneStatement = block instanceof BlockStatement && !block.isEmpty()
         if (hasAtLeastOneStatement) {
             int closureStartLineNumber = expression.lineNumber
             def lastStatement = block.statements[-1]
