@@ -1,4 +1,4 @@
-CodeNarc Report: Sample Project - Nov 9, 2019 10:38:13 AM
+CodeNarc Report: Sample Project - Nov 23, 2019 6:28:22 PM
 
 Summary: TotalFiles=403 FilesWithViolations=51 P1=0 P2=65 P3=34
 
@@ -527,7 +527,7 @@ File: unnecessary/ConsecutiveStringConcatenationRuleTest.groovy
 
 File: unnecessary/UnnecessaryGStringRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=36 Msg=[The String '
-            def docFile = "src/site/apt/codenarc-rules-${ruleSetName}.apt"
+            def docFile = "docs/codenarc-rules-${ruleSetName}.apt"
         ' contains a GString-type expression: '${ruleSetName}'] Src=[final SOURCE = ''']
 
 File: unnecessary/UnnecessaryGetterRuleTest.groovy
@@ -661,4 +661,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (http://www.codenarc.org) v1.4]
+[CodeNarc (http://www.codenarc.org) v1.5]
