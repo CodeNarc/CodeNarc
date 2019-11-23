@@ -21,14 +21,13 @@ def groovyVersion = "2.3.11"
 def slf4jVersion = "1.7.25"
 
 dependencies {
-    compile("org.codehaus.groovy:groovy-all:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-ant:$groovyVersion") {
-        exclude group: 'org.codehaus.groovy'
-    }
+    compile("org.codehaus.groovy:groovy:$groovyVersion")
+    compile("org.codehaus.groovy:groovy-xml:$groovyVersion")
+    compile("org.codehaus.groovy:groovy-ant:$groovyVersion")
 
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile('org.gmetrics:GMetrics:1.0') {
-        exclude group: 'org.codehaus.groovy'
+        transitive = false
     }
 
     // JUnit is only required if you are using the CodeNarc testing framework, e.g. AbstractRuleTestCase

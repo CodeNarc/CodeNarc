@@ -25,6 +25,7 @@ Groovy 3.x Compatibility
 - #423: **UnnecessaryPublicModifierAstVisitor** and **AstUtil**. Resolves #414. (philippkrauss)
 
 Framework and Infrastructure
+- #448: Switch from groovy-all dependency to individual groovy component jars. Make GMetrics dependency transitive:false.
 - #442: Move web site (online docs) from Sourceforge to GitHub.
 - #441: Enable CodeNarc Ant Task to optionally fail for Groovy compile errors on source files. Add *failOnError* property to the Ant Task, defaults to *false*.
 - #445: Support `@SuppressWarnings("all")` and `@SuppressWarnings("CodeNarc")`.
