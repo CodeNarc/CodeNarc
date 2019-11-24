@@ -2,9 +2,9 @@ sidebar-nav:
   - title: "General"
     children:
       - title: "Home"
-        url: http://codenarc.sourceforge.net/
+        url: http://codenarc.org
       - title: "Downloads"
-        url: https://sourceforge.net/projects/codenarc/files/
+        url: https://github.com/CodeNarc/CodeNarc/releases
       - title: "GitHub Project"
         url: https://github.com/CodeNarc
   - title: "Running"

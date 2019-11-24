@@ -23,7 +23,7 @@ to fit into your project. Build tool, framework support, and report generation a
      </td>
     <td valign="middle" align="middle" style="margin:auto; vertical-align:middle">
         <div>
-            <a class="getitbutton" href="http://sourceforge.net/projects/codenarc/files//">
+            <a class="getitbutton" href="https://github.com/CodeNarc/CodeNarc/releases">
                 Get 1.5
             </a>
         </div>
