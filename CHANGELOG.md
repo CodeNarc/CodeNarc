@@ -1,5 +1,11 @@
 # CodeNarc Change Log
 
+TODO: Version 1.5    (?? 2020)
+--------------------------------------
+Framework and Infrastructure
+ - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
+
+
 Version 1.5    (Nov 2019)
 --------------------------------------
 New Rules
