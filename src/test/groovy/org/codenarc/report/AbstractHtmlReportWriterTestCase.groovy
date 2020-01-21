@@ -50,7 +50,7 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
     protected static final VIOLATION4 = new Violation(rule:new StubRule(name:'RULE4', priority:4), lineNumber:LINE1, sourceLine:'if (file) {')
     protected static final NEW_REPORT_FILE = new File('target/NewReport.html').absolutePath
     protected static final TITLE = 'My Cool Project'
-    protected static final String LOGO_FILE = 'http://codenarc.sourceforge.net/images/codenarc-logo.png'
+    protected static final String LOGO_FILE = 'http://codenarc.github.io/CodeNarc/images/codenarc-logo.png'
 
     protected reportWriter
     protected analysisContext

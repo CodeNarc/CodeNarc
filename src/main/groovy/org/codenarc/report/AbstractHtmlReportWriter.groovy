@@ -32,6 +32,7 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
     protected static final int MAX_SOURCE_LINE_LENGTH = 70
     protected static final int SOURCE_LINE_LAST_SEGMENT_LENGTH = 12
     protected static final String CSS_FILE = 'codenarc-htmlreport.css'
+    protected static final String LOGO_FILE = 'http://codenarc.github.io/CodeNarc/images/codenarc-logo.png'
 
     String title
     boolean includeRuleDescriptions = true
@@ -116,7 +117,7 @@ abstract class AbstractHtmlReportWriter extends AbstractReportWriter {
 
     protected Closure buildLogo() {
         return {
-            img(class: 'logo', src: 'http://codenarc.sourceforge.net/images/codenarc-logo.png', alt: 'CodeNarc', align: 'right')
+            img(class: 'logo', src: LOGO_FILE, alt: 'CodeNarc', align: 'right')
        }
     }
 
