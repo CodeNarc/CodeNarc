@@ -2,6 +2,9 @@
 
 TODO: Version 1.5    (?? 2020)
 --------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #451: **GetterMethodCouldBeProperty** rule: Fix handling of `ignoreMethodsWithOverrideAnnotation` property so it really only ignores @Override methods.
+
 Framework and Infrastructure
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
 

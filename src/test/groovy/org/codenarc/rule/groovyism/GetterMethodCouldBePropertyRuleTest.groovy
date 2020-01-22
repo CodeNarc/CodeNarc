@@ -268,8 +268,35 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase<GetterMet
         final SOURCE = '''
             class MyClass {
                 @Override
-                String getSomething() {
-                    'something'         // this could be simplified
+                String getSomething() {         // ignored
+                    'something'
+                }
+
+                String getSomethingElse() {     // violation
+                    'something else'
+                }
+            }
+        '''
+        rule.ignoreMethodsWithOverrideAnnotation = true
+        assertSingleViolation(SOURCE, 8,
+                'String getSomethingElse()',
+                "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = 'something else'")
+    }
+
+    @Test
+    void test_StaticNonFinalFieldWithGetter() {
+        final SOURCE = '''
+            static class PingCommand extends PingIntegTest.PingCommand {
+                static commandNotAllowedEventReceived
+                static restrictionChain
+
+                void handleCommandNotAllowedEvent(@ObservesAsync CommandNotAllowedEventJavacord commandNotAllowedEvent) {
+                    commandNotAllowedEventReceived?.set(commandNotAllowedEvent)
+                }
+
+                @Override
+                RestrictionChainElement getRestrictionChain() {
+                    restrictionChain
                 }
             }
         '''
