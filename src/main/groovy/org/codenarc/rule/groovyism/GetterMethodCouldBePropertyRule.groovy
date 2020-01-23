@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClassExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
@@ -45,51 +46,57 @@ class GetterMethodCouldBePropertyAstVisitor extends AbstractAstVisitor {
 
     private static final String CONSTANT_NAME_REGEX = /[A-Z].*/
 
-    private final List staticFieldNames = []
+    private final List staticFinalFieldNames = []
 
     @Override
     protected void visitClassEx(ClassNode node) {
-        staticFieldNames.addAll(node.fields.findAll { it.isStatic() }*.name)
+        staticFinalFieldNames.addAll(node.fields.findAll { it.isStatic() && it.isFinal() }*.name)
         super.visitClassEx(node)
     }
 
     @Override
     protected void visitClassComplete(ClassNode node) {
-        staticFieldNames.clear()
+        staticFinalFieldNames.clear()
         super.visitClassComplete(node)
     }
 
     @Override
     protected void visitMethodEx(MethodNode node) {
-        if (AstUtil.isMethodNode(node, 'get[A-Z].*', 0) &&
+        if (isAGetterMethod(node) &&
                 node.isPublic() &&
-                notAnIgnoredOverrideMethod(node) &&
+                isNotAnIgnoredOverrideMethod(node) &&
                 AstUtil.isOneLiner(node.code)) {
             def statement = node.code.statements[0]
-            if (statement instanceof ExpressionStatement) {
-                if (statement.expression instanceof ConstantExpression) {
-                    addViolation(node, createMessage(node))
-                } else if (statement.expression instanceof VariableExpression && statement.expression.variable ==~ CONSTANT_NAME_REGEX) {
-                    addViolation(node, createMessage(node))
-                } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
-                    addViolation(node, createMessage(node))
-                }
-            } else if (statement instanceof ReturnStatement) {
-                if (statement.expression instanceof ConstantExpression) {
-                    addViolation(node, createMessage(node))
-                } else if (statement.expression instanceof ClassExpression) {
-                    addViolation(node, createMessage(node))
-                } else if (statement.expression instanceof VariableExpression && statement.expression.variable ==~ CONSTANT_NAME_REGEX) {
-                    addViolation(node, createMessage(node))
-                } else if (statement.expression instanceof VariableExpression && staticFieldNames.contains(statement.expression.name)) {
-                    addViolation(node, createMessage(node))
-                }
+            if (statement instanceof ExpressionStatement || statement instanceof ReturnStatement) {
+                checkStatementExpression(node, statement.expression)
             }
         }
         super.visitMethodEx(node)
     }
 
-    private boolean notAnIgnoredOverrideMethod(MethodNode node) {
+    private void checkStatementExpression(MethodNode node, Expression statementExpression) {
+        boolean isViolation =
+                statementExpression instanceof ConstantExpression ||
+                isNamedLikeAConstant(statementExpression) ||
+                isAStaticFinalFieldValue(statementExpression)
+        if (isViolation) {
+            addViolation(node, createMessage(node))
+        }
+    }
+
+    private boolean isAGetterMethod(MethodNode node) {
+        AstUtil.isMethodNode(node, 'get[A-Z].*', 0)
+    }
+
+    private boolean isNamedLikeAConstant(Expression statementExpression) {
+        statementExpression instanceof VariableExpression && statementExpression.text ==~ CONSTANT_NAME_REGEX
+    }
+
+    private boolean isAStaticFinalFieldValue(Expression statementExpression) {
+        statementExpression instanceof VariableExpression && staticFinalFieldNames.contains(statementExpression.name)
+    }
+
+    private boolean isNotAnIgnoredOverrideMethod(MethodNode node) {
         return !rule.ignoreMethodsWithOverrideAnnotation || !AstUtil.hasAnnotation(node, 'Override')
     }
 

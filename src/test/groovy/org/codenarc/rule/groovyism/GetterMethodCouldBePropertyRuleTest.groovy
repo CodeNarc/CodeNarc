@@ -37,7 +37,8 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase<GetterMet
     void testNoViolations() {
         final SOURCE = '''
             class MyClass {
-                static VALUE = 'value'
+                static final VALUE = 'value'
+                private static final int OTHER = 99
                 final String something = 'something'  // this is cleaner
                 final String somethingElse = VALUE      // this is cleaner
                 final String someClass = String      // this is cleaner
@@ -185,18 +186,23 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase<GetterMet
     }
 
     @Test
-    void testClassReturn() {
+    void test_ReturnAClass() {
         final SOURCE = '''
             class MyClass {
                 @Override
                 Class getSomething() {
                     String         // this could be simplified
                 }
+
+                Class getSomeClass() {
+                    return Integer         // this could be simplified
+                }
             }
         '''
-        assertSingleViolation(SOURCE, 4,
-            'Class getSomething()',
-            "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal Class something = String")
+        assertViolations(SOURCE,
+            [lineNumber:4, sourceLineText: 'Class getSomething()', messageText: "The method 'getSomething ' in class MyClass can be expressed more simply as the field declaration\nfinal Class something = String"],
+            [lineNumber:8, sourceLineText: 'Class getSomeClass()', messageText: "The method 'getSomeClass ' in class MyClass can be expressed more simply as the field declaration\nfinal Class someClass = Integer"]
+        )
     }
 
     @Test
@@ -215,27 +221,27 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase<GetterMet
     }
 
     @Test
-    void testStaticReturn() {
+    void test_StaticFinalField() {
         final SOURCE = '''
             class MyClass {
-                static VALUE = 'value'
+                protected static final value = 'value'
 
                 @Override
                 String getSomethingElse() {
-                    VALUE       // this could be simplified
+                    value       // this could be simplified
                 }
             }
         '''
         assertSingleViolation(SOURCE, 6,
             'String getSomethingElse()',
-            "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = VALUE")
+            "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = value")
     }
 
     @Test
-    void testStaticExplicitReturn() {
+    void test_StaticFinalField_ExplicitReturn() {
         final SOURCE = '''
             class MyClass {
-                static VALUE = 'value'
+                static final VALUE = 'value'
 
                 @Override
                 String getSomethingElse() {
@@ -249,10 +255,40 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase<GetterMet
     }
 
     @Test
-    void testStaticGetterMethod() {
+    void test_StaticNonFinalField_NoViolations() {
         final SOURCE = '''
             class MyClass {
-                static VALUE = 'value'
+                static value = 'value'
+
+                String getSomethingElse() {
+                    value               // We can't be sure this value won't change
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_StaticNonFinalField_AnotherExample() {
+        final SOURCE = '''
+            static class PingCommand extends PingIntegTest.PingCommand {
+                static commandNotAllowedEventReceived
+                static restrictionChain
+
+                @Override
+                RestrictionChainElement getRestrictionChain() {
+                    restrictionChain
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_StaticGetterMethod() {
+        final SOURCE = '''
+            class MyClass {
+                static final VALUE = 'value'
                 static String getValue() {
                     VALUE       // this could be simplified
                 }
@@ -281,27 +317,6 @@ class GetterMethodCouldBePropertyRuleTest extends AbstractRuleTestCase<GetterMet
         assertSingleViolation(SOURCE, 8,
                 'String getSomethingElse()',
                 "The method 'getSomethingElse ' in class MyClass can be expressed more simply as the field declaration\nfinal String somethingElse = 'something else'")
-    }
-
-    @Test
-    void test_StaticNonFinalFieldWithGetter() {
-        final SOURCE = '''
-            static class PingCommand extends PingIntegTest.PingCommand {
-                static commandNotAllowedEventReceived
-                static restrictionChain
-
-                void handleCommandNotAllowedEvent(@ObservesAsync CommandNotAllowedEventJavacord commandNotAllowedEvent) {
-                    commandNotAllowedEventReceived?.set(commandNotAllowedEvent)
-                }
-
-                @Override
-                RestrictionChainElement getRestrictionChain() {
-                    restrictionChain
-                }
-            }
-        '''
-        rule.ignoreMethodsWithOverrideAnnotation = true
-        assertNoViolations(SOURCE)
     }
 
     @Override
