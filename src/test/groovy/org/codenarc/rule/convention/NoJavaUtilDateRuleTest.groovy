@@ -80,6 +80,39 @@ class NoJavaUtilDateRuleTest extends AbstractRuleTestCase<NoJavaUtilDateRule> {
                 [lineNumber:5, sourceLineText:'Date myDate = new java.util.Date()', messageText:VIOLATION_MESSAGE])
     }
 
+    @Test
+    void test_UsingDeprecatedStaticFactoryMethods_Violations() {
+        final SOURCE = '''
+            def parsedDate = Date.parse("12 Aug 1995 13:30:00")​
+            def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:2, sourceLineText:'def parsedDate = Date.parse("12 Aug 1995 13:30:00")​', messageText:VIOLATION_MESSAGE],
+            [lineNumber:3, sourceLineText:'def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)', messageText:VIOLATION_MESSAGE]
+        )
+    }
+
+    @Test
+    void test_UsingDeprecatedStaticFactoryMethodsButOnCustomDateClass_NoViolations() {
+        final SOURCE = '''
+            import some.other.Date
+
+            def parsedDate = Date.parse("12 Aug 1995 13:30:00")​
+            def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_UsingConversionMethodFromInstant_NoViolation() {
+        final SOURCE = '''
+            import java.time.Instant
+
+            Date.from(Instant.now())
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected NoJavaUtilDateRule createRule() {
         new NoJavaUtilDateRule()

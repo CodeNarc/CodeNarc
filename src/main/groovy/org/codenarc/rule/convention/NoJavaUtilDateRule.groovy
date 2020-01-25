@@ -18,8 +18,10 @@ package org.codenarc.rule.convention
 import org.codehaus.groovy.ast.ImportNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Do not use java.util.Date. Prefer the classes in the java.time.* packages. This rule checks for
@@ -49,6 +51,15 @@ class NoJavaUtilDateAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitConstructorCallExpression(call)
+    }
+
+    @Override
+    void visitMethodCallExpression(MethodCallExpression call) {
+        if (isFirstVisit(call) && !importsDateClass) {
+            if (AstUtil.isMethodCall(call, 'Date', 'parse', 1) || AstUtil.isMethodCall(call, 'Date', 'UTC', 6)) {
+                addViolation(call, VIOLATION_MESSAGE)
+            }
+        }
     }
 
     @Override
