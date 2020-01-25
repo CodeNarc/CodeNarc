@@ -222,8 +222,12 @@ c        '''
             processItems([{ named("a") }, { named("b")}])       // no violation for closing square bracket
             def names = records.findAll { it.age > 1 }*.name    // no violation for spread operator
             parameters?.collect { it?.type?.toString() }?.join(', ')    // no violation for null-safe operator
-            def closure = { println 7 };                       // no violation for comma
+            def closure = { println 7 };                        // no violation for comma
             writeLockLockInterceptor.tap { it.delegate = owner.delegate }()     // no violation for opening parenthesis
+            switch(x) {
+                case { x < 0 }:                                 // no violation for colon
+                break
+            }
         '''
         assertNoViolations(SOURCE)
     }
