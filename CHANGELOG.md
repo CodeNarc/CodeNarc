@@ -6,6 +6,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #451: **GetterMethodCouldBeProperty** rule: Fix handling of `ignoreMethodsWithOverrideAnnotation` property so it really only ignores @Override methods.
  - #451: **GetterMethodCouldBeProperty** rule: Do not treat static non-final fields as constants, only static final fields. 
  - #452: **SpaceAfterClosingBrace** rule: Do not complain if closure is used as switch-case condition (allow colon after closure).
+ - #456: **NoJavaUtilDate** rule: Also raise violations on usages of deprecated static methods from java.util.Date. (Marcin Erdmann)
 
 Framework and Infrastructure
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
