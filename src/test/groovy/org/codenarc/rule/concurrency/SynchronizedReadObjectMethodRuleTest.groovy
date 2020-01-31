@@ -82,7 +82,7 @@ class SynchronizedReadObjectMethodRuleTest extends AbstractRuleTestCase<Synchron
                 }
             }
       '''
-        assertSingleViolation(SOURCE, 5, 'synchronized(lock)', 'The Serializable class MyClass has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable')
+        assertSingleViolation(SOURCE, 4, 'private void readObject(ObjectInputStream input)', 'The Serializable class MyClass has a synchronized readObject method. It is normally unnecesary to synchronize within deserializable')
     }
 
     @Override

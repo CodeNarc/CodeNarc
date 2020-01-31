@@ -67,16 +67,6 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
         super.visitConstructor(node)
     }
 
-    private void processMethodNode(MethodNode node) {
-        if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
-            def line = lastSourceLineOrEmpty(node.code)
-            def lastCol = node.code.lastColumnNumber
-            if (line.size() >= lastCol && isNotWhitespace(line, lastCol - 1) && line[lastCol - 1] == '}' && checkIsEmptyBlock(line, lastCol - 1)) {
-                addOpeningBraceViolation(node.code, 'block')
-            }
-        }
-    }
-
     @Override
     void visitBlockStatement(BlockStatement block) {
         if (isFirstVisit(block) && !AstUtil.isFromGeneratedSourceCode(block)) {
@@ -114,6 +104,16 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
             isFirstVisit(expression.valueExpression)   // Register the closure so that it will be ignored in visitClosureExpression()
         }
         super.visitMapEntryExpression(expression)
+    }
+
+    private void processMethodNode(MethodNode node) {
+        if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {
+            def line = lastSourceLineOrEmpty(node.code)
+            int lastIndex = line.lastIndexOf('}')
+            if (isNotWhitespace(line, lastIndex) && checkIsEmptyBlock(line, lastIndex)) {
+                addOpeningBraceViolation(node.code, 'method ' + node.name)
+            }
+        }
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {

@@ -82,9 +82,7 @@ class CyclomaticComplexityRuleTest extends AbstractRuleTestCase<CyclomaticComple
         '''
         rule.maxMethodComplexity = 5
 
-        // TODO Known limitation; See GMetrics #8: https://github.com/dx42/gmetrics/issues/8
-        assertSingleViolation(SOURCE, 5, 'a &&', ['myMethod', '6'])
-//        assertSingleViolation(SOURCE, 4, 'def myMethod()', ['myMethod', '6'])
+        assertSingleViolation(SOURCE, 4, 'def myMethod()', ['myMethod', '6'])
     }
 
     @Test

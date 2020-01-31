@@ -55,20 +55,14 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
 
     @Override
     void visitConstructor(ConstructorNode node) {
-        // The AST for constructors is "special". The BlockStatement begins on the line following the
-        // opening brace if it is a multi-line method. Bug?
-
-        isFirstVisit(node.code)   // Register the code block so that it will be ignored in visitBlockStatement()
-        def line = sourceLineOrEmpty(node)
-
-        boolean hasStatementOnSameLine = !AstUtil.isFromGeneratedSourceCode(node) && !node.code.empty && (node.code?.lineNumber == node.lineNumber)
-        def lineToCheckForBrace = hasStatementOnSameLine ? line[0..node.code.columnNumber - 2] : line
-        int lastOpen = lineToCheckForBrace.lastIndexOf('{')
-
-        if (lastOpen < line.length() - 1 && !line[lastOpen + 1].isAllWhitespace() && checkIsEmptyBlock(line, lastOpen + 2)) {
-            addOpeningBraceViolation(node, 'block')
-        }
+        processMethodNode(node)
         super.visitConstructor(node)
+    }
+
+    @Override
+    protected void visitMethodEx(MethodNode node) {
+        processMethodNode(node)
+        super.visitMethodEx(node)
     }
 
     @Override
@@ -97,22 +91,21 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
     }
 
     @Override
-    protected void visitMethodEx(MethodNode node) {
-        if (node.code) {
-            def line = sourceLineOrEmpty(node.code)
-            def startCol = node.code.columnNumber
-            if (startCol > 1 && line[startCol - 2] == '{') {
-                addOpeningBraceViolation(node.code, 'block')
-            }
-        }
-    }
-
-    @Override
     void visitMapEntryExpression(MapEntryExpression expression) {
         if (!rule.checkClosureMapEntryValue && expression.valueExpression instanceof ClosureExpression) {
             isFirstVisit(expression.valueExpression)   // Register the closure so that it will be ignored in visitClosureExpression()
         }
         super.visitMapEntryExpression(expression)
+    }
+
+    private void processMethodNode(MethodNode node) {
+        if (isFirstVisit(node.code) && node.code && !AstUtil.isFromGeneratedSourceCode(node)) {  // Register the code block so that it will be ignored in visitBlockStatement()
+            def line = sourceLineOrEmpty(node.code)
+            def startCol = node.code.columnNumber
+            if (startCol > 1 && line[startCol - 1] == '{' && isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
+                addOpeningBraceViolation(node.code, 'method ' + node.name)
+            }
+        }
     }
 
     private void addOpeningBraceViolation(ASTNode node, String keyword) {

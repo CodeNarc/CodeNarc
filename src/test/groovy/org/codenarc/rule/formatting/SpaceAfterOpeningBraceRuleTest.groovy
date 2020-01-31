@@ -56,6 +56,10 @@ class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase<SpaceAfterOpen
                 MyClass(String s) { }
                 MyClass(@Annotation('${prop}') String s) {
                 }
+                MyClass(Date date) { // comment
+                    this(classNames)
+                }
+                MyClass(Object object) { /* comment */ }
             }
             interface MyInterface { }
             enum MyEnum { OK, BAD }
@@ -153,9 +157,9 @@ c        '''
                 int count }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def myMethod() {int count }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'{int count }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:6, sourceLineText:'{println 9 }', messageText:BLOCK_VIOLATION_MESSAGE])
+            [lineNumber:2, sourceLineText:'def myMethod() {int count }', messageText:'The opening brace for the method myMethod in class None'],
+            [lineNumber:4, sourceLineText:'{int count }', messageText:'The opening brace for the method otherMethod in class None'],
+            [lineNumber:6, sourceLineText:'{println 9 }', messageText:'The opening brace for the method bigMethod in class None'])
     }
 
     @Test
@@ -181,9 +185,9 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass() {int count }', messageText:'The opening brace for the block in class MyClass'],
-            [lineNumber:4, sourceLineText:'MyClass() {s = \'{"json": true}\' }', messageText:'The opening brace for the block in class MyClass'],
-            [lineNumber:5, sourceLineText:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', messageText:'The opening brace for the block in class MyClass'])
+            [lineNumber:3, sourceLineText:'MyClass() {int count }', messageText:'The opening brace for the method <init> in class MyClass'],
+            [lineNumber:4, sourceLineText:'MyClass() {s = \'{"json": true}\' }', messageText:'The opening brace for the method <init> in class MyClass'],
+            [lineNumber:5, sourceLineText:'MyClass(@Annotation(\'${prop}\') String s) {println 123 }', messageText:'The opening brace for the method <init> in class MyClass'])
     }
 
     @Test

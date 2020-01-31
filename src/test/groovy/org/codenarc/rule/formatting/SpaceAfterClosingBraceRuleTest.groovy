@@ -52,7 +52,7 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
                 }
                 MyClass() {
                     this(classNames)
-                }
+                } // ok
                 static void reset() { violationCounts = [1:0, 2:0, 3:0] }
                 void doStuff() { println 9 }
             }
@@ -83,20 +83,25 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
     void testApplyTo_EnumDeclaration_Violations() {
         final SOURCE = '''
             enum MyEnum { OK, BAD }//comment
-c        '''
+        '''
         assertSingleViolation(SOURCE, 2, 'enum MyEnum', 'The closing brace for enum MyEnum is not followed')
     }
 
     @Test
     void testApplyTo_Method_Violations() {
         final SOURCE = '''
-            def myMethod() { return 9 }// ok
+            def myMethod() { return 9 }// comment
             def otherMethod()
-            { return 9 }// ok
+            { return 9 }// comment
+            def myMethod2() { }// comment
+            def m4() {
+            }// comment
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def myMethod() { return 9 }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'{ return 9 }', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:2, sourceLineText:'def myMethod() { return 9 }', messageText:'The closing brace for the method myMethod in class None is not followed by a space or whitespace'],
+            [lineNumber:4, sourceLineText:'{ return 9 }', messageText:'The closing brace for the method otherMethod in class None is not followed by a space or whitespace'],
+            [lineNumber:5, sourceLineText:'def myMethod2() { }', messageText:'The closing brace for the method myMethod2 in class None is not followed by a space or whitespace'],
+            [lineNumber:6, sourceLineText:'def m4() {', messageText:'The closing brace for the method m4 in class None is not followed by a space or whitespace'] )
     }
 
     @Test
@@ -106,11 +111,13 @@ c        '''
                 MyClass() { int count }//comment
                 MyClass(int num) {
                     doStuff() }//comment
+                MyClass(String name) { }//comment
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass() { int count }', messageText:'The closing brace for the block in class MyClass'],
-            [lineNumber:5, sourceLineText:'doStuff() }', messageText:'The closing brace for the block in class MyClass'])
+            [lineNumber:3, sourceLineText:'MyClass() { int count }', messageText:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'],
+            [lineNumber:4, sourceLineText:'MyClass(int num)', messageText:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'],
+            [lineNumber:6, sourceLineText:'MyClass(String name)', messageText:'The closing brace for the method <init> in class MyClass is not followed by a space or whitespace'])
     }
 
     @Test

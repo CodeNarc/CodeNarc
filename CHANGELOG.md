@@ -9,6 +9,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #456: **NoJavaUtilDate** rule: Also raise violations on usages of deprecated static methods from java.util.Date. (Marcin Erdmann)
 
 Framework and Infrastructure
+ - #446: Upgrade to Groovy 2.4.17.
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
 
 

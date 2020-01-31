@@ -133,10 +133,13 @@ c        '''
             def myMethod() { return 9}
             def otherMethod()
             { return 9}
+            def method3() {
+              /* do nothing */}
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def myMethod() { return 9}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'{ return 9}', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:2, sourceLineText:'def myMethod() { return 9}', messageText:'The closing brace for the method myMethod in class None'],
+            [lineNumber:4, sourceLineText:'{ return 9}', messageText:'The closing brace for the method otherMethod in class None'],
+            [lineNumber:5, sourceLineText:'def method3()', messageText:'The closing brace for the method method3 in class None'] )
     }
 
     @Test
@@ -149,8 +152,8 @@ c        '''
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'MyClass() { int count}', messageText:'The closing brace for the block in class MyClass'],
-            [lineNumber:5, sourceLineText:'doStuff()}', messageText:'The closing brace for the block in class MyClass'])
+            [lineNumber:3, sourceLineText:'MyClass() { int count}', messageText:'The closing brace for the method <init> in class MyClass'],
+            [lineNumber:4, sourceLineText:'MyClass(int num)', messageText:'The closing brace for the method <init> in class MyClass'])
     }
 
     @Test
