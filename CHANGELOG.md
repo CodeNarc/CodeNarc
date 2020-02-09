@@ -7,6 +7,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #451: **GetterMethodCouldBeProperty** rule: Do not treat static non-final fields as constants, only static final fields. 
  - #452: **SpaceAfterClosingBrace** rule: Do not complain if closure is used as switch-case condition (allow colon after closure).
  - #456: **NoJavaUtilDate** rule: Also raise violations on usages of deprecated static methods from java.util.Date. (Marcin Erdmann)
+ - #455: **SpaceBeforeOpeningBrace** rule: Fix false-positive when there is an earlier opening brace on the same line.
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
