@@ -21,3 +21,4 @@ src/main/java/META-INF/
 /.gradle
 /classes
 /out
+/integration-test/out/test/classes

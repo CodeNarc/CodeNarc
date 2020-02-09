@@ -48,7 +48,7 @@ class SpaceBeforeOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     @Override
     protected void visitClassEx(ClassNode node) {
         def line = sourceLineOrEmpty(node)
-        def indexOfBrace = line.indexOf('{')
+        def indexOfBrace = line.indexOf('{', node.columnNumber)
         if (indexOfBrace > 1) {
             if (isNotWhitespace(line, indexOfBrace)) {
                 def typeName = node.isInterface() ? 'interface' : (node.isEnum() ? 'enum' : 'class')
