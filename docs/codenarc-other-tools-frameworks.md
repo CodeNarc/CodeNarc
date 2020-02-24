@@ -34,6 +34,8 @@ title: CodeNarc - Integration with Other Tools / Frameworks
   * [SonarQube](https://www.sonarqube.org/) - The [Sonar Groovy Plugin](https://redirect.sonarsource.com/plugins/groovy.html)
     uses CodeNarc for its static analysis of Groovy source code.
 
+  * [NPM Groovy Lint](https://github.com/nvuillam/npm-groovy-lint) - NPM CodeNarc wrapper to easily lint Groovy files and Jenkinsfile via command line. Uses CodeNarc for its static analysis of Groovy source code.
+
 
 ## Customizing ClassLoader for Loading Rule Scripts
 
