@@ -265,6 +265,14 @@ c        '''
         ''')
     }
 
+    @Test
+    void testApplyTo_ClosureOnSameLine_NoViolations() {
+        final SOURCE = '''
+            new LazyReferenceByFunction<Object, Object>({ null }) { }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected SpaceBeforeOpeningBraceRule createRule() {
         new SpaceBeforeOpeningBraceRule()
