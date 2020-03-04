@@ -18,9 +18,11 @@ package org.codenarc.rule.convention
 import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AstVisitor
 
 /**
- * Checks that method return types are not dynamic, that is they are explicitly stated and different than def.
+ * Checks that method return types are not dynamic, that they are explicitly stated and different than def.
+ * The <code>ignoreMethods</code> property optionally specifices which methode names to ignore. Format is a comma separated list.
  *
  * @author Marcin Erdmann
  */
@@ -28,15 +30,26 @@ class MethodReturnTypeRequiredRule extends AbstractAstVisitorRule {
 
     String name = 'MethodReturnTypeRequired'
     int priority = 3
-    Class astVisitorClass = MethodReturnTypeRequiredAstVisitor
+    String ignoredMethods = ''
 
+    @Override
+    AstVisitor getAstVisitor() {
+        Set<String> parsedIgnoredMethods = ignoredMethods.tokenize(',').toSet()
+        return new MethodReturnTypeRequiredAstVisitor(parsedIgnoredMethods)
+    }
 }
 
 class MethodReturnTypeRequiredAstVisitor extends AbstractAstVisitor {
 
+    Set<String> ignoredMethods
+
+    MethodReturnTypeRequiredAstVisitor(Set<String> ignoredMethods) {
+        this.ignoredMethods = ignoredMethods
+    }
+
     @Override
     protected void visitMethodEx(MethodNode node) {
-        if (node.dynamicReturnType) {
+        if (node.dynamicReturnType && !ignoredMethods.contains(node.name)) {
             addViolation(node, $/Method "$node.name" has a dynamic return type/$)
         }
     }

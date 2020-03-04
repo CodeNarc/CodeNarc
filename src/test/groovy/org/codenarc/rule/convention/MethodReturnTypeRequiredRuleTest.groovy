@@ -79,6 +79,33 @@ class MethodReturnTypeRequiredRuleTest extends AbstractRuleTestCase<MethodReturn
         )
     }
 
+    @Test
+    void testNoViolationsWhenMethodIgnored() {
+        rule.ignoredMethods = 'beforeUpdate'
+
+        assertNoViolations '''
+            class ValidClass {
+                def beforeUpdate() {
+                }
+            }
+        '''
+    }
+
+    @Test
+    void testNoViolationsWhenMultipleMethodsIgnored() {
+        rule.ignoredMethods = 'beforeUpdate, beforeInsert'
+
+        assertNoViolations '''
+            class ValidClass {
+                def beforeUpdate() {
+                }
+
+                Object beforeInsert() {
+                }
+            }
+        '''
+    }
+
     @Override
     protected MethodReturnTypeRequiredRule createRule() {
         new MethodReturnTypeRequiredRule()
