@@ -16,11 +16,13 @@
 package org.codenarc.rule.convention
 
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.rule.AstVisitor
 
 /**
  * Checks that method parameters are not dynamically typed, that is they are explicitly stated and different than def.
+ * The <code>ignoredParameters</code> property optionally specifies which parameter names to ignore. Format is a comma separated list.
  *
  * @author Marcin Erdmann
  */
@@ -28,15 +30,26 @@ class MethodParameterTypeRequired extends AbstractAstVisitorRule {
 
     String name = 'MethodParameterTypeRequired'
     int priority = 3
-    Class astVisitorClass = MethodParameterTypeRequiredAstVisitor
+    String ignoredParameters = ''
 
+    @Override
+    AstVisitor getAstVisitor() {
+        Set<String> parsedIgnoredMethods = ignoredParameters.tokenize(',').toSet()
+        return new MethodParameterTypeRequiredAstVisitor(parsedIgnoredMethods)
+    }
 }
 
 class MethodParameterTypeRequiredAstVisitor extends AbstractAstVisitor {
 
+    Set<String> ignoredParameters
+
+    MethodParameterTypeRequiredAstVisitor(Set<String> ignoredParameters) {
+        this.ignoredParameters = ignoredParameters
+    }
+
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
-        def dynamicallyTypedParameters = node.parameters.findAll { it.dynamicTyped }
+        def dynamicallyTypedParameters = node.parameters.findAll { it.dynamicTyped && !ignoredParameters.contains(it.name) }
         dynamicallyTypedParameters.each { parameter ->
             addViolation(node, $/"$parameter.name" parameter of "$node.name" method is dynamically typed/$)
         }

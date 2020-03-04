@@ -36,6 +36,18 @@ class MethodParameterTypeRequiredTest extends AbstractRuleTestCase<MethodParamet
     }
 
     @Test
+    void testNoViolationsWithIgnoredParameter() {
+        rule.ignoredParameters = 'json'
+
+        assertNoViolations '''
+            class ValidClass {
+                void aMethod(def json) {
+                }
+            }
+        '''
+    }
+
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             class InvalidClass {
