@@ -39,10 +39,14 @@ class GrailsDomainHasEqualsRule extends AbstractAstVisitorRule {
 class GrailsDomainHasEqualsAstVisitor extends AbstractAstVisitor {
     @Override
     void visitClassComplete(ClassNode classNode) {
-        if (isFirstVisit(classNode) && !hasAnnotation(classNode, 'EqualsAndHashCode') && !hasAnnotation(classNode, 'Canonical')) {
+        if (isFirstVisit(classNode) && !hasAnnotation(classNode, 'EqualsAndHashCode') && !hasAnnotation(classNode, 'Canonical') && isNotInnerEnum(classNode)) {
             if (!classNode.methods.any { isMethodNode(it, 'equals', 1) }) {
                 addViolation(classNode, "The domain class $classNode.name should define an equals(Object) method")
             }
         }
+    }
+
+    private boolean isNotInnerEnum(ClassNode classNode) {
+        !(classNode.outerClass != null && classNode.superClass.clazz.is(Enum))
     }
 }

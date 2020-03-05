@@ -77,6 +77,24 @@ class GrailsDomainHasToStringRuleTest extends AbstractRuleTestCase<GrailsDomainH
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testNoViolationOnInnerEnums() {
+        final SOURCE = '''
+            @ToString
+            class Person {
+                Gender gender
+
+                enum Gender {
+                    MALE,
+                    FEMALE
+                }
+            }
+        '''
+
+        sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Person.groovy'
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected GrailsDomainHasToStringRule createRule() {
         new GrailsDomainHasToStringRule()

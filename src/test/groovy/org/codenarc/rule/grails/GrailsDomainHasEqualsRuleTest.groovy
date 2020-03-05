@@ -77,6 +77,24 @@ class GrailsDomainHasEqualsRuleTest extends AbstractRuleTestCase<GrailsDomainHas
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testNoViolationOnInnerEnums() {
+        final SOURCE = '''
+            @EqualsAndHashCode
+            class Person {
+                Gender gender
+
+                enum Gender {
+                    MALE,
+                    FEMALE
+                }
+            }
+        '''
+
+        sourceCodePath = 'project/MyProject/grails-app/domain/com/xxx/Person.groovy'
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected GrailsDomainHasEqualsRule createRule() {
         new GrailsDomainHasEqualsRule()
