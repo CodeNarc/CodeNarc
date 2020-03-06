@@ -607,6 +607,169 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBrace() {
+        final String SOURCE = '''
+            @Requires({ sys[test] == 'dummy' })
+            class Foo {
+
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithSingleClassWhenAnnotationContainsOpeningBrace() {
+        final String SOURCE = '''
+            @Requires({ sys[test] == 'dummy' })
+            class Foo {
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertSingleViolation(SOURCE, 4, '')
+    }
+
+    @Test
+    void testNoViolationsWithSingleClassWithSimpleAnnotation() {
+        final String SOURCE = '''
+            @ToString
+            class Foo {
+
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithSingleClassWithSimpleAnnotation() {
+        final String SOURCE = '''
+            @ToString
+            class Foo {
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertSingleViolation(SOURCE, 4, '')
+    }
+
+    @Test
+    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass() {
+        final String SOURCE = '''
+            @Requires({ sys[test] == 'dummy' }) class Foo {
+
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations() {
+        final String SOURCE = '''
+            @Stuff @Requires({ sys[test] == 'dummy' }) class Foo {
+
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testNoViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_ReverseOrderingOfAnnotations() {
+        final String SOURCE = '''
+            @Requires({ sys[test] == 'dummy' }) @Stuff  class Foo {
+
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass_WithTwoAnnotations_WhenBlankLineIsNotRequired() {
+        final String SOURCE = '''
+            @Stuff @Requires({ sys[test] == 'dummy' }) class Foo {
+
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = false
+
+        assertSingleViolation(SOURCE, 3, '')
+    }
+
+    @Test
+    void testViolationsWithSingleClassWhenAnnotationContainsOpeningBraceAndOnSameLineAsClass() {
+        final String SOURCE = '''
+            @Requires({ sys[test] == 'dummy' }) class Foo {
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertSingleViolation(SOURCE, 3, 'int a')
+    }
+
     @Override
     protected ClassStartsWithBlankLineRule createRule() {
         new ClassStartsWithBlankLineRule()

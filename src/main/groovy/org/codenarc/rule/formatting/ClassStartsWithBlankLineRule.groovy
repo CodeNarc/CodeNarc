@@ -17,8 +17,8 @@ package org.codenarc.rule.formatting
 
 import groovy.transform.Memoized
 import org.codehaus.groovy.ast.ClassNode
-import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractAstVisitor
+import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.util.AstUtil
 
@@ -80,7 +80,8 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
     private void checkIfThereIsNotBlankLineAfterOpeningBrace(ClassNode classNode) {
         int openingBraceLineNumber = findLineNumberOfClassOpeningBrace(classNode)
         String openingBraceLine = getLine(openingBraceLineNumber)
-        String charactersAfterOpeningBraceLine = getCharactersAfterFirstOpeningBrace(openingBraceLine)
+        String openingBraceLineMinusAnnotations = removeAnnotations(openingBraceLine)
+        String charactersAfterOpeningBraceLine = getCharactersAfterFirstOpeningBrace(openingBraceLineMinusAnnotations)
         int lineAfterOpeningBraceNumber = openingBraceLineNumber + 1
         String lineAfterOpeningBrace = getLine(lineAfterOpeningBraceNumber)
         if (!lineAfterOpeningBrace.trim() && !charactersAfterOpeningBraceLine.trim()) {
@@ -102,8 +103,24 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
 
     private int findLineNumberOfClassOpeningBrace(ClassNode classNode) {
         int linesToOpeningBrace = sourceCode.lines.drop(classNode.lineNumber - 1)
-                .findIndexOf { String currentLine -> currentLine.contains(OPENING_BRACE_CHARACTER) }
+            .findIndexOf { String currentLine ->
+                String currentLineMinusAnnotation = removeAnnotations(currentLine)
+                currentLineMinusAnnotation.contains(OPENING_BRACE_CHARACTER)
+            }
         classNode.lineNumber + linesToOpeningBrace
+    }
+
+    private String removeAnnotations(String line) {
+        int annotationStart = line.lastIndexOf('@')
+        if (annotationStart > -1) {
+            int endOfAnnotationName = line.findIndexOf(annotationStart) { it.matches(~/\s|\(/) }
+            if (line[endOfAnnotationName] == '(') {
+                int endOfAnnotation = line.findIndexOf(endOfAnnotationName) { it.matches(~/\)/) }
+                return line.drop(endOfAnnotation + 1)
+            }
+            return line.drop(endOfAnnotationName)
+        }
+        return line
     }
 
     private void checkIfThereIsBlankLineAfterOpeningBrace(ClassNode classNode) {
@@ -114,7 +131,8 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
 
         int openingBraceLineNumber = findLineNumberOfClassOpeningBrace(classNode)
         String openingBraceLine = getLine(openingBraceLineNumber)
-        String charactersAfterOpeningBraceLine = getCharactersAfterFirstOpeningBrace(openingBraceLine)
+        String openingBraceLineMinusAnnotations = removeAnnotations(openingBraceLine)
+        String charactersAfterOpeningBraceLine = getCharactersAfterFirstOpeningBrace(openingBraceLineMinusAnnotations)
         int lineAfterOpeningBraceNumber = openingBraceLineNumber + 1
         String lineAfterOpeningBrace = getLine(lineAfterOpeningBraceNumber)
         if (charactersAfterOpeningBraceLine.trim()) {
