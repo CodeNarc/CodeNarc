@@ -627,6 +627,24 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
+    void testViolationsWithSingleClassWhenAnnotationContainsOpeningBrace() {
+        final String SOURCE = '''
+            @Requires({ sys[test] == 'dummy' })
+            class Foo {
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertSingleViolation(SOURCE, 4, '')
+    }
+
+    @Test
     void testNoViolationsWithSingleClassWithSimpleAnnotation() {
         final String SOURCE = '''
             @ToString
@@ -643,6 +661,24 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = true
 
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testViolationsWithSingleClassWithSimpleAnnotation() {
+        final String SOURCE = '''
+            @ToString
+            class Foo {
+                int a
+
+                void hi() {
+                }
+
+            }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertSingleViolation(SOURCE, 4, '')
     }
 
     @Test
