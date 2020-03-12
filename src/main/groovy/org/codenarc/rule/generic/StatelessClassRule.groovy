@@ -34,7 +34,7 @@ import org.codenarc.util.WildcardPattern
  * This rule also ignores all classes annotated with the <code>@Immutable</code> transformation.
  * See http://groovy.codehaus.org/Immutable+transformation.
  * <p/>
- * This rule also ignores fields annotated with the <code>@Inject</code> annotation.
+ * This rule also ignores fields annotated with the <code>@Inject</code> and <code>@Value</code> annotation.
  * <p/>
  * You can configure this rule to ignore certain fields either by name or by type. This can be
  * useful to ignore fields that hold references to (static) dependencies (such as DAOs or
@@ -93,6 +93,7 @@ class StatelessClassRule extends AbstractAstVisitorRule {
     protected boolean shouldIgnoreField(FieldNode fieldNode) {
         return hasAnnotation(fieldNode.owner, 'Immutable') ||
             hasAnnotation(fieldNode, 'Inject') ||
+            hasAnnotation(fieldNode, 'Value') ||
             fieldNode.isFinal() ||
             matchesIgnoreFieldNames(fieldNode) ||
             matchesIgnoreFieldTypes(fieldNode)

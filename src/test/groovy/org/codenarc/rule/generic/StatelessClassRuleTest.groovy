@@ -80,6 +80,18 @@ class StatelessClassRuleTest extends AbstractRuleTestCase<StatelessClassRule> {
     }
 
     @Test
+    void testApplyTo_IgnoresFieldsWithValueAnnotation() {
+        final SOURCE = '''
+          class MyClass {
+            @Value('${org.codenarc.test}')
+            BigDecimal depositAmount
+          }
+        '''
+        rule.applyToClassNames = '*'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_FinalField() {
         final SOURCE = '''
           class MyClass {
