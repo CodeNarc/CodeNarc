@@ -81,7 +81,7 @@ class MethodReturnTypeRequiredRuleTest extends AbstractRuleTestCase<MethodReturn
 
     @Test
     void testNoViolationsWhenMethodIgnored() {
-        rule.ignoredMethods = 'beforeUpdate'
+        rule.ignoreMethodNames = 'beforeUpdate'
 
         assertNoViolations '''
             class ValidClass {
@@ -93,7 +93,7 @@ class MethodReturnTypeRequiredRuleTest extends AbstractRuleTestCase<MethodReturn
 
     @Test
     void testNoViolationsWhenMultipleMethodsIgnored() {
-        rule.ignoredMethods = 'beforeUpdate, beforeInsert'
+        rule.ignoreMethodNames = 'beforeUpdate, beforeInsert'
 
         assertNoViolations '''
             class ValidClass {
