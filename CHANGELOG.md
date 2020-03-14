@@ -1,6 +1,6 @@
 # CodeNarc Change Log
 
-TODO: Version 1.5    (?? 2020)
+TODO: Version 1.6    (?? 2020)
 --------------------------------------
 Updated/Enhanced Rules and Bug Fixes
  - #451: **GetterMethodCouldBeProperty** rule: Fix handling of `ignoreMethodsWithOverrideAnnotation` property so it really only ignores @Override methods.
@@ -8,6 +8,11 @@ Updated/Enhanced Rules and Bug Fixes
  - #452: **SpaceAfterClosingBrace** rule: Do not complain if closure is used as switch-case condition (allow colon after closure).
  - #456: **NoJavaUtilDate** rule: Also raise violations on usages of deprecated static methods from java.util.Date. (Marcin Erdmann)
  - #455: **SpaceBeforeOpeningBrace** rule: Fix false-positive when there is an earlier opening brace on the same line.
+ - #462: **ClassStartsWithBlankLine** rule: Support annotations with closures. (Thomas Lefèvre).
+ - #463: **GrailsDomainHasEquals** and **GrailsDomainHasToString** rules: Ignore inner enums. (Thomas Lefèvre)
+ - #464: **MethodReturnTypeRequired** rule: Add `ignoreMethodNames` property.(Thomas Lefèvre)
+ - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodNames` property. (Thomas Lefèvre)
+ - #468: **StatelessClass** rule: Ignore fields annotated with @Value. (Thomas Lefèvre)
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.

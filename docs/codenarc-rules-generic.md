@@ -263,7 +263,7 @@ This rule ignores `final` fields (either instance or static). Fields that are
 This rule also ignores all classes annotated with the `@Immutable` transformation.
 See [http://groovy.codehaus.org/Immutable+transformation](http://groovy.codehaus.org/Immutable+transformation).
 
-This rule also ignores all fields annotated with the `@Inject` annotation.
+This rule also ignores all fields annotated with the `@Inject` or `@Value` annotations.
 
 You can configure this rule to ignore certain fields either by name or by type. This can be
 useful to ignore fields that hold references to (static) dependencies (such as DAOs or

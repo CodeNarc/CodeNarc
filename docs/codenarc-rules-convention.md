@@ -256,6 +256,10 @@ Example of violations:
 
 Checks that method parameters are not dynamically typed, that is they are explicitly stated and different than def.
 
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| ignoreMethodNames           | Specifies one or more (comma-separated) method names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null` |
+
 Example of violations:
 
 ```
@@ -274,6 +278,10 @@ Example of violations:
 *Since CodeNarc 1.1*
 
 Checks that method return types are not dynamic, that is they are explicitly stated and different than def.
+
+| Property                    | Description            | Default Value    |
+|-----------------------------|------------------------|------------------|
+| ignoreMethodNames           | Specifies one or more (comma-separated) method names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null` |
 
 Example of violations:
 
