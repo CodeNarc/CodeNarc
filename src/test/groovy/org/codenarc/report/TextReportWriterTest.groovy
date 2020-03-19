@@ -42,7 +42,7 @@ File: src/main/dao/MyOtherDao.groovy
     Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
     Violation: Rule=AnotherRule P=2 Line=2 Msg=[bad stuff: !@#\$%^&*()_+<>]
 
-[CodeNarc (http://www.codenarc.org) v${version()}]
+[CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()
     private static final REPORT_TEXT_MAX_PRIORITY = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
@@ -56,7 +56,7 @@ File: src/main/MyAction.groovy
 File: src/main/dao/MyOtherDao.groovy
     Violation: Rule=Rule1 P=1 Line=11 Src=[if (count < 23 && index <= 99) {]
 
-[CodeNarc (http://www.codenarc.org) v${version()}]
+[CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()
 
     @Override

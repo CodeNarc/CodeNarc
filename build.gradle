@@ -94,7 +94,7 @@ uploadArchives {
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description 'The CodeNarc project provides a static analysis tool for Groovy code.'
-                url 'http://codenarc.org'
+                url 'https://codenarc.org'
 
                 scm {
                     connection 'scm:git:git@github.com:CodeNarc/CodeNarc.git'

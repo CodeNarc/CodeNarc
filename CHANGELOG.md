@@ -17,6 +17,7 @@ Updated/Enhanced Rules and Bug Fixes
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
+ - #461: Switch CodeNarc URL to HTTPS (<https://www.codenarc.org>). Update “Home” link on home page, as well as link on web site page footer, build.gradle, README and ReportWriter classes.
 
 
 Version 1.5    (Nov 2019)

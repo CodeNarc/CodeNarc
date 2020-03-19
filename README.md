@@ -1,4 +1,4 @@
-# CodeNarc  (http://codenarc.org/)
+# CodeNarc  (https://codenarc.org/)
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.codenarc/CodeNarc.svg)]()
 [![Build Status](https://travis-ci.org/CodeNarc/CodeNarc.svg?branch=master)](https://travis-ci.org/CodeNarc/CodeNarc)

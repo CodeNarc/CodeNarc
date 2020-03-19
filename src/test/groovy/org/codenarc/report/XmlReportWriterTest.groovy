@@ -40,9 +40,10 @@ class XmlReportWriterTest extends AbstractXmlReportWriterTestCase {
     private static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE2)
     private static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
     private static final NEW_REPORT_FILE = 'target/NewXmlReport.xml'
+
     @SuppressWarnings('LineLength')
     private static final REPORT_XML = """<?xml version='1.0'?>
-    <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
+    <CodeNarc url='${CODENARC_URL}' version='${VERSION}'>
         <Report timestamp='${FORMATTED_TIMESTAMP}'/>
 
         <Project title='My Cool Project'>

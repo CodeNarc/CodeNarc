@@ -38,24 +38,25 @@ import static org.junit.Assert.assertEquals
  */
 abstract class AbstractTextReportWriterTestCase extends AbstractTestCase {
 
-    protected static final LINE1 = 11
-    protected static final LINE2 = 2
-    protected static final LINE3 = 333
-    protected static final SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
-    protected static final SOURCE_LINE3 = 'throw new Exception() // Something bad happened'
-    protected static final MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
-    protected static final MESSAGE3 = 'Other info'
-    protected static final VIOLATION1 = new Violation(rule:new StubRule(name:'Rule1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
-    protected static final VIOLATION2 = new Violation(rule:new StubRule(name:'AnotherRule', priority:2), lineNumber:LINE2, message:MESSAGE2)
-    protected static final VIOLATION3 = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
-    protected static final NEW_REPORT_FILE = 'target/NewTextReport.txt'
-    protected static final TITLE = 'My Cool Project'
-    protected static final SRC_DIR1 = 'c:/MyProject/src/main/groovy'
-    protected static final SRC_DIR2 = 'c:/MyProject/src/test/groovy'
-    protected static final VERSION_FILE = 'src/main/resources/codenarc-version.txt'
-    protected static final VERSION = new File(VERSION_FILE).text
-    protected static final TIMESTAMP_DATE = new Date(1262361072497)
-    protected static final FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
+    protected static final int LINE1 = 11
+    protected static final int LINE2 = 2
+    protected static final int LINE3 = 333
+    protected static final String SOURCE_LINE1 = 'if (count < 23 && index <= 99) {'
+    protected static final String SOURCE_LINE3 = 'throw new Exception() // Something bad happened'
+    protected static final String MESSAGE2 = 'bad stuff: !@#$%^&*()_+<>'
+    protected static final String MESSAGE3 = 'Other info'
+    protected static final Violation VIOLATION1 = new Violation(rule:new StubRule(name:'Rule1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
+    protected static final Violation VIOLATION2 = new Violation(rule:new StubRule(name:'AnotherRule', priority:2), lineNumber:LINE2, message:MESSAGE2)
+    protected static final Violation VIOLATION3 = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
+    protected static final String NEW_REPORT_FILE = 'target/NewTextReport.txt'
+    protected static final String TITLE = 'My Cool Project'
+    protected static final String SRC_DIR1 = 'c:/MyProject/src/main/groovy'
+    protected static final String SRC_DIR2 = 'c:/MyProject/src/test/groovy'
+    protected static final String VERSION_FILE = 'src/main/resources/codenarc-version.txt'
+    protected static final String VERSION = new File(VERSION_FILE).text
+    protected static final String CODENARC_URL = 'https://www.codenarc.org'
+    protected static final Date TIMESTAMP_DATE = new Date(1262361072497)
+    protected static final String FORMATTED_TIMESTAMP = DateFormat.getDateTimeInstance().format(TIMESTAMP_DATE)
 
     protected reportWriter
     protected analysisContext

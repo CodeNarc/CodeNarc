@@ -51,6 +51,7 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
     protected static final NEW_REPORT_FILE = new File('target/NewReport.html').absolutePath
     protected static final TITLE = 'My Cool Project'
     protected static final String LOGO_FILE = 'http://codenarc.github.io/CodeNarc/images/codenarc-logo.png'
+    protected static final String CODENARC_URL = 'https://www.codenarc.org'
 
     protected reportWriter
     protected analysisContext

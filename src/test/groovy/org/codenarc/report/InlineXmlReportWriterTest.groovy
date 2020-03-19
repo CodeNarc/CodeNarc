@@ -31,7 +31,7 @@ import org.junit.Test
 class InlineXmlReportWriterTest extends AbstractXmlReportWriterTestCase {
 
     private static final REPORT_XML = """<?xml version='1.0'?>
-    <CodeNarc url='http://www.codenarc.org' version='${VERSION}'>
+    <CodeNarc url='${CODENARC_URL}' version='${VERSION}'>
         <Report timestamp='${FORMATTED_TIMESTAMP}'/>
 
         <Project title='My Cool Project'>

@@ -47,7 +47,7 @@ File: src/main/dao/MyOtherDao.groovy
     Violation: Rule=Rule1 P=1 Loc=.(MyOtherDao.groovy:11) Src=[if (count < 23 && index <= 99) {]
     Violation: Rule=AnotherRule P=2 Loc=.(MyOtherDao.groovy:2) Msg=[bad stuff: !@#\$%^&*()_+<>]
 
-[CodeNarc (http://www.codenarc.org) v${version()}]
+[CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()
     private static final REPORT_TEXT_MAX_PRIORITY = """
 CodeNarc Report: My Cool Project - ${formattedTimestamp()}
@@ -61,7 +61,7 @@ File: src/main/MyAction.groovy
 File: src/main/dao/MyOtherDao.groovy
     Violation: Rule=Rule1 P=1 Loc=.(MyOtherDao.groovy:11) Src=[if (count < 23 && index <= 99) {]
 
-[CodeNarc (http://www.codenarc.org) v${version()}]
+[CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()
 
     @Test
@@ -74,7 +74,7 @@ Summary: TotalFiles=0 FilesWithViolations=1 P1=0 P2=0 P3=1
 File: src/main/dao/MyDao.groovy
     Violation: Rule=BadStuff P=3 Loc=.(MyDao.groovy:0) Msg=[Other info] Src=[throw new Exception() // Something bad happened]
 
-[CodeNarc (http://www.codenarc.org) v${version()}]
+[CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()
 
         final VIOLATION = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:null, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
