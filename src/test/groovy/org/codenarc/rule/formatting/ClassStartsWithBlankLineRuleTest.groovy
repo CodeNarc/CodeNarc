@@ -26,6 +26,9 @@ import org.codenarc.rule.AbstractRuleTestCase
 @SuppressWarnings('TrailingWhitespace')
 class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {
 
+    private static final String VIOLATION_BLANK_LINE_NOT_ALLOWED = 'Class starts with a blank line after the opening brace'
+    private static final String VIOLATION_MISSING_BLANK_LINE = 'Class does not start with a blank line after the opening brace'
+
     @Test
     void testRuleProperties() {
         assert rule.priority == 3
@@ -113,7 +116,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
         rule.blankLineRequired = true
 
-        assertSingleViolation(SOURCE, 3, '        {  int a')
+        assertSingleViolation(SOURCE, 3, '{  int a')
     }
 
     @Test
@@ -203,8 +206,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = false
 
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: '', messageText: 'Class starts with a blank line after the opening brace'],
-                [lineNumber: 9, sourceLineText: '', messageText: 'Class starts with a blank line after the opening brace'])
+                [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
+                [lineNumber: 9, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
@@ -227,8 +230,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber    : 3, sourceLineText: '                int a', messageText   : 'Class does not start with a blank line after the opening brace'],
-                [lineNumber    : 10, sourceLineText: '                int a', messageText   : 'Class does not start with a blank line after the opening brace'])
+                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
+                [lineNumber: 10, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
@@ -299,8 +302,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = false
 
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: '', messageText: 'Class starts with a blank line after the opening brace'],
-                [lineNumber: 8, sourceLineText: '', messageText: 'Class starts with a blank line after the opening brace'])
+                [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
+                [lineNumber: 8, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
@@ -323,8 +326,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: 'Class does not start with a blank line after the opening brace'],
-                [lineNumber: 9, sourceLineText: 'int a', messageText: 'Class does not start with a blank line after the opening brace'])
+                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
+                [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
@@ -393,8 +396,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber: 3, sourceLineText: 'int a', messageText: 'Class does not start with a blank line after the opening brace'],
-                [lineNumber: 9, sourceLineText: 'int a', messageText: 'Class does not start with a blank line after the opening brace'])
+                [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
+                [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
     }
 
     @Test
@@ -420,7 +423,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = false
 
         assertViolations(SOURCE,
-                [lineNumber: 9, sourceLineText: '            ', messageText: 'Class starts with a blank line after the opening brace'])
+                [lineNumber: 9, sourceLineText: ' ', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
 
     @Test
@@ -465,9 +468,9 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         rule.blankLineRequired = true
 
         assertViolations(SOURCE,
-                [lineNumber    : 3, sourceLineText: 'class Foo extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
-                [lineNumber    : 5, sourceLineText: 'class Doe extends Bar<String> { }', messageText   : 'Single line classes are not allowed'],
-                [lineNumber    : 6, sourceLineText: 'abstract class John  { abstract void a() }', messageText   : 'Single line classes are not allowed'])
+                [lineNumber: 3, sourceLineText: 'class Foo extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
+                [lineNumber: 5, sourceLineText: 'class Doe extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
+                [lineNumber: 6, sourceLineText: 'abstract class John  { abstract void a() }', messageText: 'Single line classes are not allowed'])
     }
 
     @Test
@@ -497,9 +500,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
                     String toString() {
                         "Hello world"
                     }
-
                 }
-
             }            
         '''
         rule.blankLineRequired = true
