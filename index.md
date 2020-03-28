@@ -38,7 +38,8 @@ to fit into your project. Build tool, framework support, and report generation a
             Also,  plugins exist for <a href="codenarc-other-tools-frameworks.html">Maven</a>,
            <a href="codenarc-other-tools-frameworks.html">Gradle</a>, <a href="codenarc-other-tools-frameworks.html">Grails</a>,
            <a href="codenarc-other-tools-frameworks.html">Griffon</a>,
-           <a href="codenarc-other-tools-frameworks.html">SonarQube</a>
+           <a href="codenarc-other-tools-frameworks.html">SonarQube</a>,
+           <a href="codenarc-other-tools-frameworks.html">Visual Studio Code</a>,
            and <a href="codenarc-other-tools-frameworks.html">Jenkins</a>. See our
             <a href="codenarc-other-tools-frameworks.html">Integration</a> page for more details.
            Reports come in HTML, XML, or text format.  Take a look at a
