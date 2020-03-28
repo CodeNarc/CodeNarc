@@ -16,6 +16,8 @@ Updated/Enhanced Rules and Bug Fixes
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
+ - #471: Support for Java 11.
+ - #471: Deprecated: Overriding a rule's name through "codenarc.properties" (`PropertiesFileRuleSetConfigurer`); and doing so can cause problems with JDK versions after 8.
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
  - #461: Switch CodeNarc URL to HTTPS (<https://www.codenarc.org>). Update “Home” link on home page, as well as link on web site page footer, build.gradle, README and ReportWriter classes.
 

@@ -94,6 +94,9 @@ the named property for the rule matching *rule-name* is set to the
 specified *property-value*. Properties entries not of this form or specifying rule
 names not within the current *RuleSet* are ignored.
 
+NOTE: Overriding a rule's *name* through "codenarc.properties" is possible but is deprecated and not supported. 
+Doing so can cause problems, especially when using Java versions after 8.
+
 The following example "codenarc.properties" file configures several rules. Note that
 Fields with `Integer`, `String` and `Boolean` values are configured.
 

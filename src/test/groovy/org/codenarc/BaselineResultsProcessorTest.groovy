@@ -47,7 +47,7 @@ class BaselineResultsProcessorTest extends AbstractTestCase {
 
     private static final VIOLATION_R1_M1 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE1)
     private static final VIOLATION_R1_M2 = new Violation(rule:new StubRule(name:RULE1), message:MESSAGE2)
-    private static final VIOLATION_R2_M1 = new Violation(rule:new StubRule(name:RULE2), message:MESSAGE1)
+    private static final VIOLATION_R2_M1 = new Violation(rule:new StubRule(name:RULE2), message:' ' + MESSAGE1 + ' ')   // leading/trailing whitespace on message
     private static final VIOLATION_R2_M2 = new Violation(rule:new StubRule(name:RULE2), message:MESSAGE2)
     private static final VIOLATION_R3_M1 = new Violation(rule:new StubRule(name:RULE3), message:MESSAGE1)
     private static final VIOLATION_R3_M2 = new Violation(rule:new StubRule(name:RULE3), message:MESSAGE2)
