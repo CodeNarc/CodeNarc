@@ -120,6 +120,21 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     }
 
     @Test
+    void testViolationsWithCommentLineWhenBlankLineIsRequired() {
+        final String SOURCE = '''
+        interface Foo {
+            // some comment
+            
+            void hi()
+         }
+        '''
+
+        rule.blankLineRequired = true
+
+        assertSingleViolation(SOURCE, 3, '// some comment')
+    }
+
+    @Test
     void testViolationsWithInterfaceWhenBlankLineIsRequired() {
         final String SOURCE = '''
         interface Foo {
