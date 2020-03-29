@@ -13,7 +13,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #464: **MethodReturnTypeRequired** rule: Add `ignoreMethodNames` property.(Thomas Lefèvre)
  - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodNames` property. (Thomas Lefèvre)
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. (Thomas Lefèvre)
- - #474: **ClassStartsWithBlankLine** rule: Fix Groovy 2.6 incompatibilities.
+ - #474: **ClassStartsWithBlankLine** rule: Fix Groovy 2.5 incompatibilities.
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
