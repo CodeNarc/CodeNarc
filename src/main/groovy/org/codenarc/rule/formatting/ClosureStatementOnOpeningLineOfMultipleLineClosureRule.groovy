@@ -42,7 +42,7 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureAstVisitor extends Abstr
             int closureStartLineNumber = expression.lineNumber
             def lastStatement = block.statements[-1]
             boolean isMultiLineClosure = lastStatement.lastLineNumber > block.lineNumber
-            boolean hasCodeOnStartingLine = closureStartLineNumber == block.lineNumber
+            boolean hasCodeOnStartingLine = closureStartLineNumber == block.statements[0].lineNumber
             if (isMultiLineClosure && hasCodeOnStartingLine) {
                 addViolation(expression, "The multi-line closure within class $currentClassName contains a statement on the opening line of the closure.")
             }

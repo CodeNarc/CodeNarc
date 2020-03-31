@@ -45,6 +45,7 @@ import org.codenarc.util.AstUtil
  * <ul>
  *
  * @author David Ausín
+ * @author Chris Mair
  */
 class ClassStartsWithBlankLineRule extends AbstractAstVisitorRule {
 
