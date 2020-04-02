@@ -246,7 +246,7 @@ does not cause a violation:
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
 | maxNestedBlockDepth         | The maximum number of nesting levels. A block or closure nested deeper than that number of levels is considered a violation.  | 5 |
-| ignoreRegex                 | Determines what is a builder call. For instance, closures nested on a method named createBuilder, a property named myBuilder, or a constructor call to object MyBuilder() do not produce violations. |  .*(b|B)uilder  |
+| ignoreRegex                 | Determines what is a builder call. For instance, closures nested on a method named createBuilder, a property named myBuilder, or a constructor call to object MyBuilder() do not produce violations. |  .*(b\|B)uilder  |
 
 
 ## ParameterCount Rule
