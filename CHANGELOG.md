@@ -15,6 +15,11 @@ Updated/Enhanced Rules and Bug Fixes
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. (Thomas Lefèvre)
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
 
+Documentation
+ - #472: Add Visual Studio Code in the list of other tools. (Nicolas Vuillamy)
+ - #473: Add link to VsCode Groovy Lint in IDEs section. (Nicolas Vuillamy)
+ - #476: Fix issue with missing escape for pipe on "codenarc-rules-size" page. (Ron Gebauer)
+
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
  - #471: Support for Java 11.
