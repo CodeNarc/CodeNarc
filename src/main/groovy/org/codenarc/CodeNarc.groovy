@@ -20,6 +20,7 @@ import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriterFactory
 import org.codenarc.results.Results
+import org.codenarc.util.CodeNarcVersion
 
 /**
  * Command-line runner for CodeNarc.
@@ -126,15 +127,21 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     static void main(String[] args) {
         def codeNarc = new CodeNarc()
 
+        // Show help
         if (args == ['-help'] as String[]) {
             println HELP
+            return
+        }
+        // Show version
+        else if (args == ['-version']) {
+            println CodeNarcVersion.getVersion()
             return
         }
 
         try {
             codeNarc.execute(args)
         }
-        catch(Throwable t) {
+        catch (Throwable t) {
             println "ERROR: ${t.toString()}"
             t.printStackTrace()
             println HELP
@@ -195,7 +202,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             assert matcher, "Invalid argument format: [$arg]"
             def name = matcher[0][1]
             def value = matcher[0][2]
-            switch(name) {
+            switch (name) {
                 case 'rulesetfiles': ruleSetFiles = value; break
                 case 'basedir': baseDir = value; break
                 case 'includes': includes = value; break
