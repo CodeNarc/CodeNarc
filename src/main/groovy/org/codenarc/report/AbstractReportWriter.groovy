@@ -17,13 +17,13 @@ package org.codenarc.report
 
 import groovy.text.SimpleTemplateEngine
 import groovy.text.TemplateEngine
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.codenarc.AnalysisContext
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
 import org.codenarc.util.AstUtil
-import org.codenarc.util.io.ClassPathResource
+import org.codenarc.util.CodeNarcVersion
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * Abstract superclass for ReportWriter implementation classes.
@@ -37,7 +37,6 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     protected static final String BASE_MESSAGES_BUNDLE = 'codenarc-base-messages'
     protected static final String CUSTOM_MESSAGES_BUNDLE = 'codenarc-messages'
-    protected static final String VERSION_FILE = 'codenarc-version.txt'
     protected static final String CODENARC_URL = 'https://www.codenarc.org'
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractReportWriter)
@@ -161,7 +160,7 @@ abstract class AbstractReportWriter implements ReportWriter {
     }
 
     protected String getCodeNarcVersion() {
-        ClassPathResource.getInputStream(VERSION_FILE).text
+        return CodeNarcVersion.getVersion()
     }
 
     private boolean isWriteToStandardOut() {
