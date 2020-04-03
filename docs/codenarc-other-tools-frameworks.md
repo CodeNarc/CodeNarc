@@ -11,6 +11,7 @@ title: CodeNarc - Integration with Other Tools / Frameworks
 
   * [Eclipse](http://eclipse.org/) - See the [Eclipse CodeNarc Plugin](http://codenarceclipse.sourceforge.net/).
 
+  * [Visual Studio Code](https://code.visualstudio.com/) - See the [VsCode Groovy Lint extension](https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint).
 
 ## Application Frameworks
 
@@ -34,7 +35,7 @@ title: CodeNarc - Integration with Other Tools / Frameworks
   * [SonarQube](https://www.sonarqube.org/) - The [Sonar Groovy Plugin](https://redirect.sonarsource.com/plugins/groovy.html)
     uses CodeNarc for its static analysis of Groovy source code.
 
-  * [NPM Groovy Lint](https://github.com/nvuillam/npm-groovy-lint) - NPM CodeNarc wrapper to easily lint Groovy files and Jenkinsfile via command line. Uses CodeNarc for its static analysis of Groovy source code.
+  * [NPM Groovy Lint](https://github.com/nvuillam/npm-groovy-lint) - NPM CodeNarc wrapper to easily lint, format and fix Groovy files and Jenkinsfile via command line. Uses CodeNarc for its static analysis of Groovy source code.
 
 
 ## Customizing ClassLoader for Loading Rule Scripts

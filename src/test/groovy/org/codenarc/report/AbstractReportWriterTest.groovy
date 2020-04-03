@@ -21,6 +21,7 @@ import org.codenarc.results.Results
 import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
+import org.codenarc.util.CodeNarcVersion
 import org.junit.Before
 import org.junit.Test
 
@@ -223,7 +224,7 @@ class AbstractReportWriterTest extends AbstractTestCase {
 
     @Test
     void testGetCodeNarcVersion() {
-        assert reportWriter.getCodeNarcVersion() == new File('src/main/resources/codenarc-version.txt').text
+        assert reportWriter.getCodeNarcVersion() == CodeNarcVersion.getVersion()
     }
 
     @Before

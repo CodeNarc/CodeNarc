@@ -45,6 +45,7 @@ import org.codenarc.util.AstUtil
  * <ul>
  *
  * @author David Ausín
+ * @author Chris Mair
  */
 class ClassStartsWithBlankLineRule extends AbstractAstVisitorRule {
 
@@ -57,8 +58,6 @@ class ClassStartsWithBlankLineRule extends AbstractAstVisitorRule {
 }
 
 class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
-
-    private static final String OPENING_BRACE_CHARACTER = '{'
 
     @Override
     protected void visitClassComplete(ClassNode classNode) {
@@ -78,49 +77,19 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
     }
 
     private void checkIfThereIsNotBlankLineAfterOpeningBrace(ClassNode classNode) {
-        int openingBraceLineNumber = findLineNumberOfClassOpeningBrace(classNode)
-        String openingBraceLine = getLine(openingBraceLineNumber)
-        String openingBraceLineMinusAnnotations = removeAnnotations(openingBraceLine)
-        String charactersAfterOpeningBraceLine = getCharactersAfterFirstOpeningBrace(openingBraceLineMinusAnnotations)
-        int lineAfterOpeningBraceNumber = openingBraceLineNumber + 1
-        String lineAfterOpeningBrace = getLine(lineAfterOpeningBraceNumber)
-        if (!lineAfterOpeningBrace.trim() && !charactersAfterOpeningBraceLine.trim()) {
-            addViolation('Class starts with a blank line after the opening brace', lineAfterOpeningBraceNumber)
+        int classStartLine = AstUtil.findFirstNonAnnotationLine(classNode, sourceCode)
+
+        boolean hasFieldOnStartingLine = classNode.fields.find { fieldNode -> classStartLine == fieldNode.lineNumber }
+        boolean hasMethodOnStartingLine = classNode.methods.find { methodNode -> classStartLine == methodNode.lineNumber }
+
+        if (hasFieldOnStartingLine || hasMethodOnStartingLine) {
+            return
         }
-    }
 
-    private String getLine(int lineNumber) {
-        AstUtil.getRawLine(sourceCode, lineNumber - 1)
-    }
-
-    private String getCharactersAfterFirstOpeningBrace(String line) {
-        int openBracePosition = line.indexOf(OPENING_BRACE_CHARACTER)
-        if (openBracePosition == -1) {
-            return ''
+        String nextLine = getLine(classStartLine + 1)
+        if (!nextLine.trim()) {
+            addViolation('Class starts with a blank line after the opening brace', classStartLine + 1)
         }
-        line.drop(openBracePosition + 1)
-    }
-
-    private int findLineNumberOfClassOpeningBrace(ClassNode classNode) {
-        int linesToOpeningBrace = sourceCode.lines.drop(classNode.lineNumber - 1)
-            .findIndexOf { String currentLine ->
-                String currentLineMinusAnnotation = removeAnnotations(currentLine)
-                currentLineMinusAnnotation.contains(OPENING_BRACE_CHARACTER)
-            }
-        classNode.lineNumber + linesToOpeningBrace
-    }
-
-    private String removeAnnotations(String line) {
-        int annotationStart = line.lastIndexOf('@')
-        if (annotationStart > -1) {
-            int endOfAnnotationName = line.findIndexOf(annotationStart) { it.matches(~/\s|\(/) }
-            if (line[endOfAnnotationName] == '(') {
-                int endOfAnnotation = line.findIndexOf(endOfAnnotationName) { it.matches(~/\)/) }
-                return line.drop(endOfAnnotation + 1)
-            }
-            return line.drop(endOfAnnotationName)
-        }
-        return line
     }
 
     private void checkIfThereIsBlankLineAfterOpeningBrace(ClassNode classNode) {
@@ -129,21 +98,25 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
             return
         }
 
-        int openingBraceLineNumber = findLineNumberOfClassOpeningBrace(classNode)
-        String openingBraceLine = getLine(openingBraceLineNumber)
-        String openingBraceLineMinusAnnotations = removeAnnotations(openingBraceLine)
-        String charactersAfterOpeningBraceLine = getCharactersAfterFirstOpeningBrace(openingBraceLineMinusAnnotations)
-        int lineAfterOpeningBraceNumber = openingBraceLineNumber + 1
-        String lineAfterOpeningBrace = getLine(lineAfterOpeningBraceNumber)
-        if (charactersAfterOpeningBraceLine.trim()) {
-            addViolation('Class does not start with a blank line after the opening brace',
-                    openingBraceLineNumber)
+        int classStartLine = AstUtil.findFirstNonAnnotationLine(classNode, sourceCode)
+
+        String nextLine = getLine(classStartLine + 1)
+        if (nextLine.trim()) {
+            addViolation('Class does not start with a blank line after the opening brace', classStartLine + 1)
             return
         }
 
-        if (lineAfterOpeningBrace.trim()) {
-            addViolation('Class does not start with a blank line after the opening brace',
-                    lineAfterOpeningBraceNumber)
+        classNode.fields.each { fieldNode -> checkNonEmptyLineNumber(classStartLine, fieldNode.lineNumber) }
+        classNode.methods.each { methodNode -> checkNonEmptyLineNumber(classStartLine, methodNode.lineNumber) }
+    }
+
+    private String getLine(int lineNumber) {
+        AstUtil.getRawLine(sourceCode, lineNumber - 1)
+    }
+
+    private void checkNonEmptyLineNumber(int classStartLine, int lineNumber) {
+        if (lineNumber == classStartLine || lineNumber == classStartLine + 1) {
+            addViolation('Class does not start with a blank line after the opening brace', lineNumber)
         }
     }
 

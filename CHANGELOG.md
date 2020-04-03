@@ -13,11 +13,20 @@ Updated/Enhanced Rules and Bug Fixes
  - #464: **MethodReturnTypeRequired** rule: Add `ignoreMethodNames` property.(Thomas Lefèvre)
  - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodNames` property. (Thomas Lefèvre)
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. (Thomas Lefèvre)
+ - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
+
+Documentation
+ - #472: Add Visual Studio Code in the list of other tools. (Nicolas Vuillamy)
+ - #473: Add link to VsCode Groovy Lint in IDEs section. (Nicolas Vuillamy)
+ - #476: Fix issue with missing escape for pipe on "codenarc-rules-size" page. (Ron Gebauer)
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
+ - #471: Support for Java 11.
+ - #471: Deprecated: Overriding a rule's name through "codenarc.properties" (`PropertiesFileRuleSetConfigurer`); and doing so can cause problems with JDK versions after 8.
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
  - #461: Switch CodeNarc URL to HTTPS (<https://www.codenarc.org>). Update “Home” link on home page, as well as link on web site page footer, build.gradle, README and ReportWriter classes.
+ - #477: Add new `CodeNarcVersion` class.
 
 
 Version 1.5    (Nov 2019)

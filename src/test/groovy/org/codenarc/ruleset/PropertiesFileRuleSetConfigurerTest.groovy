@@ -15,12 +15,13 @@
  */
 package org.codenarc.ruleset
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
+import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
 import org.codenarc.test.AbstractTestCase
-import org.junit.Before
+import org.junit.After
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for PropertiesFileRuleSetConfigurer
@@ -29,45 +30,58 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
   */
 class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
 
-    private ruleSet
-    private rule1 = new StubRule(name:'rule1', priority:1, violationMessage:'abc')
-    private rule2 = new StubRule(name:'rule2', priority:2, violationMessage:'def')
-    private configurer
+    private static final String RULE1_NAME = 'rule1'
+    private static final String RULE2_NAME = 'rule2'
+
+    private static final String RULE1_MESSAGE = 'abc'
+    private static final String RULE2_MESSAGE = 'violation'             // overridden in "codenarc.properties"
+    private static final String RULE2_MESSAGE_OVERRIDE = 'override'     // overridden in "override-codenarc.properties"
+
+    private StubRule rule1 = new StubRule(name:RULE1_NAME, priority:1, violationMessage:'abc')
+    private StubRule rule2 = new StubRule(name:RULE2_NAME, priority:2, violationMessage:'def')
+    private RuleSet ruleSet = new ListRuleSet([rule1, rule2])
+    private PropertiesFileRuleSetConfigurer configurer = new PropertiesFileRuleSetConfigurer()
 
     @Test
     void testConfigure() {
         configurer.configure(ruleSet)
-        assert ruleMap() == [rule1:[3, 'abc'], rule99:[2, 'violation']], ruleMap()
+        log(ruleSet.rules)
+        assertRuleSetContainsRule(RULE1_NAME, 3, RULE1_MESSAGE)
+        assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE)
     }
 
     @Test
     void testConfigure_OverridePropertiesFilenameThroughSystemProperty() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'override-codenarc.properties')
         configurer.configure(ruleSet)
-        assert ruleMap() == [rule1:[2, 'abc'], rule99:[2, 'override']], ruleMap()
-        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, '')
+
+        assertRuleSetContainsRule(RULE1_NAME, 2, RULE1_MESSAGE)
+        assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE_OVERRIDE)
     }
 
     @Test
     void testConfigure_OverridePropertiesFilenameThroughSystemProperty_FileUrl() {
         System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'file:src/test/resources/override-codenarc.properties')
         configurer.configure(ruleSet)
-        assert ruleMap() == [rule1:[2, 'abc'], rule99:[2, 'override']], ruleMap()
-        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, '')
+
+        assertRuleSetContainsRule(RULE1_NAME, 2, RULE1_MESSAGE)
+        assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE_OVERRIDE)
     }
 
     @Test
     void testConfigure_PropertiesFileDoesNotExist() {
         configurer.defaultPropertiesFilename = 'DoesNotExist.properties'
         configurer.configure(ruleSet)
-        assert ruleMap() == [rule1:[1, 'abc'], rule2:[2, 'def']]
+
+        assertRuleSetContainsRule(RULE1_NAME, 1, RULE1_MESSAGE)
+        assertRuleSetContainsRule(RULE2_NAME, 2, 'def')
     }
 
     @Test
     void testConfigure_EmptyRuleSet() {
         ruleSet = new ListRuleSet([])
         configurer.configure(ruleSet)
-        assert ruleMap() == [:], ruleMap()
+        assert ruleSet.rules.isEmpty()
     }
 
     @Test
@@ -75,15 +89,13 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
         shouldFailWithMessageContaining('ruleSet') { configurer.configure(null) }
     }
 
-    @Before
-    void setUpPropertiesFileRuleSetConfigurerTest() {
-        configurer = new PropertiesFileRuleSetConfigurer()
-        ruleSet = new ListRuleSet([rule1, rule2])
+    @After
+    void after() {
+        System.clearProperty(CODENARC_PROPERTIES_FILE_PROP)
     }
 
-    private Map ruleMap() {
-        def map = [:]
-        ruleSet.rules.each { rule -> map[rule.name] = [rule.priority, rule.violationMessage] }
-        map
+    private void assertRuleSetContainsRule(String ruleName, int priority, String message) {
+        assert ruleSet.rules.find { Rule rule -> rule.name == ruleName && rule.priority == priority && rule.violationMessage == message }
     }
+
 }

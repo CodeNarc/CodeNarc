@@ -74,8 +74,9 @@ class BaselineResultsProcessor implements ResultsProcessor {
     }
 
     private String scrub(String str) {
-        // The \r character, specifically, was causing comparisons to fail. See #303
-        return str?.replaceAll(/\R/, '')
+        // The \r character, specifically, was causing comparisons to fail. See #303.
+        // In Java 11 (as opposed to 8 and 14) there are leading and trailing empty characters. See #471.
+        return str?.replaceAll(/\R/, '')?.trim()
     }
 
     private List<FileResults> buildFilesWithViolations(Results results) {
