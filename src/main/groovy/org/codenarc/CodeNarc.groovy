@@ -134,7 +134,8 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         }
         // Show version
         else if (args == ['-version']) {
-            println CodeNarcVersion.getVersion()
+            def version = CodeNarcVersion.getVersion()
+            println "CodeNarc version $version"
             return
         }
 

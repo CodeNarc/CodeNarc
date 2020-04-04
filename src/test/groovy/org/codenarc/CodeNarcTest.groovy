@@ -53,13 +53,13 @@ class CodeNarcTest extends AbstractTestCase {
     private File outputFile
     private int exitCode
 
-    final private Map numViolations = [:].withDefault { 0 }
-    final private Results results = [
+    private final Map numViolations = [:].withDefault { 0 }
+    private final Results results = [
         getNumberOfViolationsWithPriority: { priority, recursive ->
             assert recursive == true
             return numViolations[priority]
         }] as Results
-    final private codeNarcRunner = [execute: { results }]
+    private final codeNarcRunner = [execute: { results }]
 
     //------------------------------------------------------------------------------------
     // Tests
@@ -326,7 +326,9 @@ class CodeNarcTest extends AbstractTestCase {
         }
         log("stdout=[$stdout]")
         assert !stdout.contains('ERROR')
-        assert stdout.contains(CodeNarcVersion.getVersion())
+        def version = CodeNarcVersion.getVersion()
+        def expectedVersion = "CodeNarc version $version"
+        assert stdout.contains(expectedVersion), "$expectedVersion not found in $stdout"
         assert !outputFile.exists()
         assert exitCode == 0
     }
