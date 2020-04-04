@@ -15,6 +15,9 @@
  */
 package org.codenarc
 
+import static org.codenarc.test.TestUtil.captureSystemOut
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.report.AbstractReportWriter
 import org.codenarc.report.HtmlReportWriter
@@ -22,12 +25,10 @@ import org.codenarc.report.ReportWriter
 import org.codenarc.report.XmlReportWriter
 import org.codenarc.results.Results
 import org.codenarc.test.AbstractTestCase
+import org.codenarc.util.CodeNarcVersion
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.captureSystemOut
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for CodeNarc command-line runner
@@ -52,13 +53,13 @@ class CodeNarcTest extends AbstractTestCase {
     private File outputFile
     private int exitCode
 
-    private Map numViolations = [:].withDefault { 0 }
-    private Results results = [
-        getNumberOfViolationsWithPriority:{ priority, recursive ->
+    private final Map numViolations = [:].withDefault { 0 }
+    private final Results results = [
+        getNumberOfViolationsWithPriority: { priority, recursive ->
             assert recursive == true
             return numViolations[priority]
         }] as Results
-    private codeNarcRunner = [execute: { results }]
+    private final codeNarcRunner = [execute: { results }]
 
     //------------------------------------------------------------------------------------
     // Tests
@@ -318,6 +319,21 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
+    void testMain_Version() {
+        final ARGS = ['-version'] as String[]
+        def stdout = captureSystemOut {
+            CodeNarc.main(ARGS)
+        }
+        log("stdout=[$stdout]")
+        assert !stdout.contains('ERROR')
+        def version = CodeNarcVersion.getVersion()
+        def expectedVersion = "CodeNarc version $version"
+        assert stdout.contains(expectedVersion), "$expectedVersion not found in $stdout"
+        assert !outputFile.exists()
+        assert exitCode == 0
+    }
+
+    @Test
     void testMain_BadOptionFormat() {
         final ARGS = ["-report=$HTML_REPORT_STR", '&^%#BAD%$#'] as String[]
         def stdout = captureSystemOut {
@@ -374,7 +390,9 @@ class CodeNarcTest extends AbstractTestCase {
 }
 
 class NoTitleReportWriter implements ReportWriter {
+
     @Override
     void writeReport(AnalysisContext analysisContext, Results results) {
     }
+
 }
