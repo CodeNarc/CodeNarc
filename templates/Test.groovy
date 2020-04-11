@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,13 @@ import org.codenarc.rule.AbstractRuleTestCase
 class ${ruleName}RuleTest extends AbstractRuleTestCase<${ruleName}Rule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 2
         assert rule.name == '$ruleName'
     }
 
     @Test
-    void testNoViolations() {
+    void test_SomeCondition_NoViolations() {
         final SOURCE = '''
             // todo: replace with source for passing edge case(s)
         '''
@@ -41,15 +41,7 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase<${ruleName}Rule> {
     }
 
     @Test
-    void testSingleViolation() {
-        final SOURCE = '''
-            // todo: replace with source that triggers a violation
-        '''
-        assertSingleViolation(SOURCE, 1, '...')
-    }
-
-    @Test
-    void testMultipleViolations() {
+    void test_SomeCondition_Violations() {
         final SOURCE = '''
             // todo: replace with source that triggers 2 violations
         '''
