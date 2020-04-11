@@ -208,6 +208,34 @@ Example of violations:
 ```
 
 
+## ImplicitReturnStatement Rule
+
+<Since CodeNarc 1.6>
+
+Checks for methods that are missing an explicit `return` statement. 
+
+This rule skips `void` methods and `def` (dynamic return type) methods, as well as methods whose last statement is a:
+ - `throw`
+ - `if`
+ - `for`
+ - `while`
+ - `switch`
+ - `try/catch`
+
+Example of violations:
+
+```
+    boolean example() { true }          // violation
+     
+    protected int longerExample() {
+        if (baseName == null) {
+            return 0
+        }
+        99                              // violation
+    }
+```
+
+
 ## InvertedCondition Rule
 
 *Since CodeNarc 1.1*
