@@ -82,9 +82,9 @@ def updateRuleList(ruleName, ruleCategory) {
 def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
     def path = "./docs/codenarc-rules-${ruleCategory}.md"
     new File(path).append """
-## {$ruleName} Rule
+## $ruleName Rule
 
-<Since CodeNarc 1.5>
+<Since CodeNarc 1.6>
 
 $ruleDescription
 
