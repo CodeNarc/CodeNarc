@@ -219,6 +219,7 @@ This rule skips `void` methods and `def` (dynamic return type) methods, as well 
  - `if`
  - `for`
  - `while`
+ - `do .. while`
  - `switch`
  - `try/catch`
 

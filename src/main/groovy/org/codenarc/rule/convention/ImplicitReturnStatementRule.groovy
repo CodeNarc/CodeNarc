@@ -17,6 +17,7 @@ package org.codenarc.rule.convention
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.stmt.DoWhileStatement
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codehaus.groovy.ast.stmt.IfStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
@@ -70,6 +71,7 @@ class ImplicitReturnStatementAstVisitor extends AbstractAstVisitor {
                 lastStatement instanceof IfStatement ||
                 lastStatement instanceof ForStatement ||
                 lastStatement instanceof WhileStatement ||
+                lastStatement instanceof DoWhileStatement ||
                 lastStatement instanceof SwitchStatement ||
                 lastStatement instanceof ThrowStatement
     }

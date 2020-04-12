@@ -158,6 +158,8 @@ class ImplicitReturnStatementRuleTest extends AbstractRuleTestCase<ImplicitRetur
         assertNoViolations(SOURCE)
     }
 
+    // TODO Add test for DoWhile statement when we upgrade to a Groovy that supports it
+
     @Test
     void test_For_NoViolations() {
         final SOURCE = '''
@@ -168,6 +170,11 @@ class ImplicitReturnStatementRuleTest extends AbstractRuleTestCase<ImplicitRetur
                         if (value() > 1) {
                             return 99
                         }
+                    }
+                }
+                int execute2() {
+                    for(int i in [0, 1, 2]) {
+                        println i
                     }
                 }
             }
