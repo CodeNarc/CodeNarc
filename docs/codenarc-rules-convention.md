@@ -236,6 +236,8 @@ Example of violations:
     }
 ```
 
+Note: This rule is pretty much the opposite of the [UnnecessaryReturnKeyword](./codenarc-rules-unnecessary.html#unnecessaryreturnkeyword-rule) rule.
+Enabling both rules results in a paradox and may cause a rip in the fabric of *space-time*. Or at least unwanted violations.
 
 ## InvertedCondition Rule
 
