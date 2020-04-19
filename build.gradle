@@ -5,24 +5,25 @@ plugins {
     id 'idea'
 }
 
-group = "org.codenarc"
-archivesBaseName = "CodeNarc"
-version = "1.5"
+group = 'org.codenarc'
+archivesBaseName = 'CodeNarc'
+version = '1.5'
 
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
 repositories {
-     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-     maven { url "https://repo.maven.apache.org/maven2" }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url 'https://repo.maven.apache.org/maven2' }
 }
 
-def groovyVersion = "2.4.17"
-def slf4jVersion = "1.7.25"
+def groovyVersion = '2.4.17'
+def slf4jVersion = '1.7.25'
 
 dependencies {
     compile("org.codehaus.groovy:groovy:$groovyVersion")
     compile("org.codehaus.groovy:groovy-xml:$groovyVersion")
+    compile("org.codehaus.groovy:groovy-json:$groovyVersion")
     compile("org.codehaus.groovy:groovy-ant:$groovyVersion")
 
     compile "org.slf4j:slf4j-api:$slf4jVersion"
@@ -81,11 +82,11 @@ uploadArchives {
         mavenDeployer {
             beforeDeployment { deployment -> signing.signPom(deployment) }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+            snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
 

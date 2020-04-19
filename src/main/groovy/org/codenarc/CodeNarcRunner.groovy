@@ -65,7 +65,7 @@ class CodeNarcRunner {
     @SuppressWarnings('Println')
     Results execute() {
         assert ruleSetFiles, 'The ruleSetFiles property must be set'
-        assert sourceAnalyzer, 'The sourceAnalyzer property must be set to a valid SourceAnalayzer'
+        assert sourceAnalyzer, 'The sourceAnalyzer property must be set to a valid SourceAnalyzer'
 
         def startTime = System.currentTimeMillis()
         new RuleRegistryInitializer().initializeRuleRegistry()

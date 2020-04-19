@@ -95,7 +95,7 @@ abstract class AbstractReportWriter implements ReportWriter {
             LOG.info("Using custom message bundle [$customMessagesBundleName]")
             resourceBundle.parent = baseBundle
         }
-        catch(MissingResourceException) {
+        catch (MissingResourceException) {
             LOG.debug("No custom message bundle found for [$customMessagesBundleName]. Using default messages.")
         }
     }
@@ -115,9 +115,9 @@ abstract class AbstractReportWriter implements ReportWriter {
             def template = templateEngine.createTemplate(rawMessageText)
             def binding = [rule:rule]
             return template.make(binding)
-        }
-        rawMessageText
     }
+        rawMessageText
+}
 
     private String getHtmlRuleDescription(Rule rule) {
         def resourceKey = rule.name + '.description.html'
@@ -163,7 +163,8 @@ abstract class AbstractReportWriter implements ReportWriter {
         return CodeNarcVersion.getVersion()
     }
 
-    private boolean isWriteToStandardOut() {
+    protected boolean isWriteToStandardOut() {
         writeToStandardOut == true || writeToStandardOut == 'true'
     }
+
 }

@@ -31,6 +31,7 @@ Framework and Infrastructure
  - #461: Switch CodeNarc URL to HTTPS (<https://www.codenarc.org>). Update “Home” link on home page, as well as link on web site page footer, build.gradle, README and ReportWriter classes.
  - #477: Add new `CodeNarcVersion` class.
  - #479: Update CodeNarc rule and rule test templates.
+ - #481: Provide results in JSON format ("json" for file, "consolejson" for one-liner JSON in console output)
 
 
 Version 1.5    (Nov 2019)
