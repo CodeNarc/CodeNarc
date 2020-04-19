@@ -962,6 +962,11 @@ Example of violations:
 In Groovy, the `return` keyword is often optional. If a statement is the last line in a method or
 closure then you do not need to have the `return` keyword.
 
+Note: This rule is pretty much the opposite of the [ImplicitReturnStatement](./codenarc-rules-convention.html#implicitreturnstatement-rule) rule.
+You don't want to enable both rules.
+Some describe this as the *CodeNarc Heisenberg Principle*: You can either have the
+**ImplicitReturnStatement** rule enabled or **UnnecessaryReturnKeyword**, but not both.
+
 
 ## UnnecessarySafeNavigationOperator Rule
 

@@ -2,6 +2,9 @@
 
 TODO: Version 1.6    (?? 2020)
 --------------------------------------
+New Rules
+- #450: **ImplicitReturnStatement** rule (convention) - Checks for non-void methods that are missing an explicit return statement.
+
 Updated/Enhanced Rules and Bug Fixes
  - #451: **GetterMethodCouldBeProperty** rule: Fix handling of `ignoreMethodsWithOverrideAnnotation` property so it really only ignores @Override methods.
  - #451: **GetterMethodCouldBeProperty** rule: Do not treat static non-final fields as constants, only static final fields. 
@@ -27,6 +30,7 @@ Framework and Infrastructure
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
  - #461: Switch CodeNarc URL to HTTPS (<https://www.codenarc.org>). Update “Home” link on home page, as well as link on web site page footer, build.gradle, README and ReportWriter classes.
  - #477: Add new `CodeNarcVersion` class.
+ - #479: Update CodeNarc rule and rule test templates.
 
 
 Version 1.5    (Nov 2019)
