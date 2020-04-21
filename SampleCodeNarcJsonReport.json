@@ -13,116 +13,104 @@
             "c:/MyProject/src/test/groovy"
         ]
     },
-    "packages": {
-        "packageSummary": {
-            "totalFiles": 6,
+    "summary": {
+        "totalFiles": 6,
+        "filesWithViolations": 3,
+        "priority1": 2,
+        "priority2": 2,
+        "priority3": 3
+    },
+    "packages": [
+        {
+            "path": "src/main",
+            "totalFiles": 3,
             "filesWithViolations": 3,
             "priority1": 2,
             "priority2": 2,
-            "priority3": 3
-        },
-        "items": [
-            {
-                "package": {
-                    "path": "src/main",
-                    "totalFiles": 3,
-                    "filesWithViolations": 3,
-                    "priority1": 2,
-                    "priority2": 2,
-                    "priority3": 3
-                },
-                "items": [
-                    {
-                        "name": "MyAction.groovy",
-                        "violations": [
-                            {
-                                "ruleName": "RULE1",
-                                "priority": 1,
-                                "lineNumber": 111,
-                                "sourceLine": "if (count < 23 && index <= 99 && name.contains('\u0000')) {",
-                                "message": null
-                            },
-                            {
-                                "ruleName": "RULE3",
-                                "priority": 3,
-                                "lineNumber": 333,
-                                "sourceLine": "throw new Exception(\"cdata=<![CDATA[whatever]]>\") // Some very long message 1234567890123456789012345678901234567890",
-                                "message": "Other info"
-                            },
-                            {
-                                "ruleName": "RULE3",
-                                "priority": 3,
-                                "lineNumber": 333,
-                                "sourceLine": "throw new Exception(\"cdata=<![CDATA[whatever]]>\") // Some very long message 1234567890123456789012345678901234567890",
-                                "message": "Other info"
-                            },
-                            {
-                                "ruleName": "RULE1",
-                                "priority": 1,
-                                "lineNumber": 111,
-                                "sourceLine": "if (count < 23 && index <= 99 && name.contains('\u0000')) {",
-                                "message": null
-                            },
-                            {
-                                "ruleName": "RULE2",
-                                "priority": 2,
-                                "lineNumber": 222,
-                                "sourceLine": null,
-                                "message": "bad stuff: !@#$%^&*()_+<>"
-                            }
-                        ]
-                    },
-                    {
-                        "package": {
-                            "path": "src/main/dao",
-                            "totalFiles": 2,
-                            "filesWithViolations": 2,
-                            "priority1": 0,
-                            "priority2": 1,
-                            "priority3": 1
+            "priority3": 3,
+            "files": [
+                {
+                    "name": "MyAction.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "RULE1",
+                            "priority": 1,
+                            "lineNumber": 111,
+                            "sourceLine": "if (count < 23 && index <= 99 && name.contains('\u0000')) {"
                         },
-                        "items": [
-                            {
-                                "name": "MyDao.groovy",
-                                "violations": [
-                                    {
-                                        "ruleName": "RULE3",
-                                        "priority": 3,
-                                        "lineNumber": 333,
-                                        "sourceLine": "throw new Exception(\"cdata=<![CDATA[whatever]]>\") // Some very long message 1234567890123456789012345678901234567890",
-                                        "message": "Other info"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "MyOtherDao.groovy",
-                                "violations": [
-                                    {
-                                        "ruleName": "RULE2",
-                                        "priority": 2,
-                                        "lineNumber": 222,
-                                        "sourceLine": null,
-                                        "message": "bad stuff: !@#$%^&*()_+<>"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "package": {
-                    "path": "src/test",
-                    "totalFiles": 3,
-                    "filesWithViolations": 0,
-                    "priority1": 0,
-                    "priority2": 0,
-                    "priority3": 0
+                        {
+                            "ruleName": "RULE3",
+                            "priority": 3,
+                            "lineNumber": 333,
+                            "sourceLine": "throw new Exception(\"cdata=<![CDATA[whatever]]>\") // Some very long message 1234567890123456789012345678901234567890",
+                            "message": "Other info"
+                        },
+                        {
+                            "ruleName": "RULE3",
+                            "priority": 3,
+                            "lineNumber": 333,
+                            "sourceLine": "throw new Exception(\"cdata=<![CDATA[whatever]]>\") // Some very long message 1234567890123456789012345678901234567890",
+                            "message": "Other info"
+                        },
+                        {
+                            "ruleName": "RULE1",
+                            "priority": 1,
+                            "lineNumber": 111,
+                            "sourceLine": "if (count < 23 && index <= 99 && name.contains('\u0000')) {"
+                        },
+                        {
+                            "ruleName": "RULE2",
+                            "priority": 2,
+                            "lineNumber": 222,
+                            "message": "bad stuff: !@#$%^&*()_+<>"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "src/main/dao",
+            "totalFiles": 2,
+            "filesWithViolations": 2,
+            "priority1": 0,
+            "priority2": 1,
+            "priority3": 1,
+            "files": [
+                {
+                    "name": "MyDao.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "RULE3",
+                            "priority": 3,
+                            "lineNumber": 333,
+                            "sourceLine": "throw new Exception(\"cdata=<![CDATA[whatever]]>\") // Some very long message 1234567890123456789012345678901234567890",
+                            "message": "Other info"
+                        }
+                    ]
                 },
-                "items": []
-            }
-        ]
-    },
+                {
+                    "name": "MyOtherDao.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "RULE2",
+                            "priority": 2,
+                            "lineNumber": 222,
+                            "message": "bad stuff: !@#$%^&*()_+<>"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "src/test",
+            "totalFiles": 3,
+            "filesWithViolations": 0,
+            "priority1": 0,
+            "priority2": 0,
+            "priority3": 0,
+            "files": []
+        }
+    ],
     "rules": [
         {
             "name": "DuplicateImport",
