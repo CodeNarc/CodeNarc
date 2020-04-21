@@ -53,6 +53,7 @@ import org.codenarc.util.CodeNarcVersion
  * </ul>
  *
  * @author Chris Mair
+ * @author Nicolas Vuillamy
  */
 @SuppressWarnings(['Println', 'PrintStackTrace'])
 class CodeNarc {
@@ -89,11 +90,11 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         The title for this analysis; used in the output report(s), if supported by the report type. Optional.
     -report=<REPORT-TYPE[:FILENAME]>
         The definition of the report to produce. The option value is of the form
-        REPORT-TYPE[:FILENAME], where REPORT-TYPE is "html", "text", "xml", "json", "console"
-        or "consoleJson", and FILENAME is the filename (with  optional path) of the
-        output report filename. If the report filename is omitted, the default filename
-        is used for the specified report type ("CodeNarcReport.html" for "html",
-        "CodeNarcXmlReport.xml" for "xml", "CodeNarcJsonReport.json" for "json"). If no
+        REPORT-TYPE[:FILENAME|:stdout], where REPORT-TYPE is "html", "text", "xml", "json", "console",
+        and FILENAME is the filename (with  optional path) of the  output report filename, or "stdout"
+        if you only need to get results in console (ex: "json:stdout"). If the report filename (or stdout)
+        is omitted, the default filename is used for the specified report type ("CodeNarcReport.html"
+        for "html", "CodeNarcXmlReport.xml" for "xml", "CodeNarcJsonReport.json" for "json"). If no
         report option is specified, default to a single "html" report with the default filename.
     -help
         Display the command-line help. If present, this must be the only command-line parameter.
@@ -222,8 +223,12 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         def parts = argValue.split(':', 2)
         def type = parts[0]
         def reportWriter = new ReportWriterFactory().getReportWriter(type)
-
-        if (parts.size() > 1 && parts[1]) {
+        // report-type:stdout -> write results in console
+        if (parts.size() > 1 && parts[1] == 'stdout') {
+            reportWriter.writeToStandardOut = true
+        }
+        // report-type:fileName -> write results in output file
+        else if (parts.size() > 1 && parts[1]) {
             reportWriter.outputFile = parts[1]
         }
         reports << reportWriter

@@ -21,6 +21,7 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.report.AbstractReportWriter
 import org.codenarc.report.HtmlReportWriter
+import org.codenarc.report.JsonReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.report.XmlReportWriter
 import org.codenarc.results.Results
@@ -34,6 +35,7 @@ import org.junit.Test
  * Tests for CodeNarc command-line runner
  *
  * @author Chris Mair
+ * @author Nicolas Vuillamy
  */
 class CodeNarcTest extends AbstractTestCase {
 
@@ -47,6 +49,10 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
     private static final String XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
     private static final String XML_REPORT_STR = "xml:$XML_REPORT_FILE"
+    private static final String XML_REPORT_STDOUT_STR = 'xml:stdout'
+    private static final String JSON_REPORT_FILE = 'CodeNarcTest-Report.json'
+    private static final String JSON_REPORT_STR = "json:$JSON_REPORT_FILE"
+    private static final String JSON_REPORT_STDOUT_STR = 'json:stdout'
     private static final int P1 = 1, P2 = 2, P3 = 3
 
     private CodeNarc codeNarc
@@ -124,6 +130,30 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == XmlReportWriter
         assert codeNarc.reports[0].outputFile == XML_REPORT_FILE
+    }
+
+    @Test
+    void testParseArgs_SingleXmlReportStdout() {
+        parseArgs("-report=$XML_REPORT_STDOUT_STR")
+        assert codeNarc.reports.size() == 1
+        assert codeNarc.reports[0].class == XmlReportWriter
+        assert codeNarc.reports[0].isWriteToStandardOut()
+    }
+
+    @Test
+    void testParseArgs_SingleJsonReport() {
+        parseArgs("-report=$JSON_REPORT_STR")
+        assert codeNarc.reports.size() == 1
+        assert codeNarc.reports[0].class == JsonReportWriter
+        assert codeNarc.reports[0].outputFile == JSON_REPORT_FILE
+    }
+
+    @Test
+    void testParseArgs_SingleJsonReportStdout() {
+        parseArgs("-report=$JSON_REPORT_STDOUT_STR")
+        assert codeNarc.reports.size() == 1
+        assert codeNarc.reports[0].class == JsonReportWriter
+        assert codeNarc.reports[0].isWriteToStandardOut()
     }
 
     @Test

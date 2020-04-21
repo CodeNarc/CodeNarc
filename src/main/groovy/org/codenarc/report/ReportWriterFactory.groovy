@@ -36,12 +36,11 @@ class ReportWriterFactory {
             case 'sortable': return new SortableHtmlReportWriter()
             case 'xml': return new XmlReportWriter()
             case 'text': return new TextReportWriter()
+            case 'json': return new JsonReportWriter()
             case 'console': def w = new TextReportWriter(); w.writeToStandardOut = true; return w
             case 'ide': def w = new IdeTextReportWriter(); w.writeToStandardOut = true; return w
             case 'inlineXml' : return new InlineXmlReportWriter()
             case 'baseline': return new BaselineXmlReportWriter()
-            case 'json': return new JsonReportWriter()
-            case 'consoleJson': def w = new JsonReportWriter(); w.writeToStandardOut = true; return w
         }
 
         def reportClass = getClass().classLoader.loadClass(type)

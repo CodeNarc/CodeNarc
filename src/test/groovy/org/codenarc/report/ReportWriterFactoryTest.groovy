@@ -83,13 +83,6 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetReportWriter_ConsoleJson() {
-        def reportWriter = reportWriterFactory.getReportWriter('consoleJson')
-        assert reportWriter.class == JsonReportWriter
-        assert reportWriter.writeToStandardOut
-    }
-
-    @Test
     void testGetReportWriter_SpecifyClassName() {
         assert reportWriterFactory.getReportWriter('org.codenarc.report.HtmlReportWriter').class == HtmlReportWriter
     }

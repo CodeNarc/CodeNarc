@@ -55,6 +55,9 @@
         "UnnecessaryGetter": {
             "enabled": false
         },
+        "UnnecessarySetter": {
+            "enabled": false
+        },
         "VariableTypeRequired": {
             "enabled": false
         }

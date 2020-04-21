@@ -72,6 +72,10 @@ abstract class AbstractReportWriter implements ReportWriter {
         }
     }
 
+    boolean isWriteToStandardOut() {
+        writeToStandardOut == true || writeToStandardOut == 'true'
+    }
+
     private void writeReportToStandardOut(AnalysisContext analysisContext, Results results) {
         def writer = new OutputStreamWriter(System.out)
         writeReport(writer, analysisContext, results)
@@ -161,10 +165,6 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     protected String getCodeNarcVersion() {
         return CodeNarcVersion.getVersion()
-    }
-
-    protected boolean isWriteToStandardOut() {
-        writeToStandardOut == true || writeToStandardOut == 'true'
     }
 
 }

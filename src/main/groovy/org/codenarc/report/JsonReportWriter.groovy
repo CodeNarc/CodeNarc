@@ -45,20 +45,26 @@ class JsonReportWriter extends AbstractReportWriter {
             'codeNarc': [url: CODENARC_URL, version: getCodeNarcVersion()],
             'report': buildReportElement(),
             'project': buildProjectElement(analysisContext),
+            'summary': buildSummaryElement(results),
             'packages': buildPackageElements(results),
             'rules': buildRulesElement(analysisContext)
         ]
 
         /*
            Append JSON to writer
-           - if console, return it as single line so it can be parsed by calling CLI
-           - if file: pretty print it
+           - if console, output it as single line for easier parsing
+           - if file: pretty print it for easier reading
         */
         def json = JsonOutput.toJson(resultsObj)
-        if (!isWriteToStandardOut()) {
-            json = JsonOutput.prettyPrint(json)
+        if (isWriteToStandardOut()) {
+            def printWriter = new PrintWriter(writer)
+            printWriter.println(json)
+            printWriter.flush()
         }
-        writer << json
+        else {
+            json = JsonOutput.prettyPrint(json)
+            writer << json
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -78,27 +84,33 @@ class JsonReportWriter extends AbstractReportWriter {
         ]
     }
 
-    protected Map buildPackageElements(Results results) {
-        return buildPackageElement(results)
+    protected Map buildSummaryElement(Results results) {
+        if (isRoot(results)) {
+            return buildPackageAttributeMap(results)
+        }
     }
 
-    protected Map buildPackageElement(Results results) {
-        def elementName = isRoot(results) ? 'packageSummary' : 'package'
-        def items = []
-        results.children.each { child ->
-            if (child.isFile()) {
-                items << buildFileElement(child)
+    protected List buildPackageElements(Results results) {
+        def packages = []
+        // Build package info & files results except if root (case taken in account by buildSummaryElement)
+        if (!isRoot(results)) {
+            Map packageItem = buildPackageAttributeMap(results)
+            packageItem.files = []
+            results.children.each { child ->
+                if (child.isFile()) {
+                    packageItem.files << buildFileElement(child)
+                }
             }
+            packages << packageItem
         }
+
+        // Browse sub-packages & gather results
         results.children.each { child ->
             if (!child.isFile()) {
-                items += buildPackageElement(child)
+                packages += buildPackageElements(child)
             }
         }
-        return [
-            (elementName.toString()) : buildPackageAttributeMap(results),
-            items: items
-        ]
+        return packages
     }
 
     protected Map buildPackageAttributeMap(Results results) {
@@ -132,21 +144,18 @@ class JsonReportWriter extends AbstractReportWriter {
 
     protected Map buildViolationElement(Violation violation) {
         def rule = violation.rule
-        return [
+        def violationElement =  [
             ruleName:rule.name,
             priority:rule.priority,
-            lineNumber:violation.lineNumber,
-            sourceLine: buildSourceLineElement(violation),
-            message: buildMessageElement(violation)
+            lineNumber:violation.lineNumber
         ]
-    }
-
-    protected String buildSourceLineElement(Violation violation) {
-        return (violation.sourceLine) ? violation.sourceLine : null
-    }
-
-    protected String buildMessageElement(Violation violation) {
-        return (violation.message) ? violation.message : null
+        if (violation.sourceLine) {
+            violationElement.sourceLine = violation.sourceLine
+        }
+        if (violation.message) {
+            violationElement.message = violation.message
+        }
+        return violationElement
     }
 
     protected Object[] buildRulesElement(AnalysisContext analysisContext) {
