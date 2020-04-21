@@ -89,7 +89,7 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
         reportWriter.writeReport(analysisContext, results)
         def reportFile = new File('CodeNarcJsonReport.json')
         def jsonAsString = reportFile.text
-        //reportFile.delete()      // comment out to keep report file around for easy inspection
+        reportFile.delete()      // comment out to keep report file around for easy inspection
         assertJson(jsonAsString, REPORT_JSON)
     }
 
