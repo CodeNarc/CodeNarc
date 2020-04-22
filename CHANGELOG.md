@@ -18,6 +18,9 @@ Updated/Enhanced Rules and Bug Fixes
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. (Thomas Lefèvre)
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
 
+Command-line
+ - #486: Command-line: Enable writing a report to *stdout*, e.g. "-report=html:stdout".
+
 Documentation
  - #472: Add Visual Studio Code in the list of other tools. (Nicolas Vuillamy)
  - #473: Add link to VsCode Groovy Lint in IDEs section. (Nicolas Vuillamy)

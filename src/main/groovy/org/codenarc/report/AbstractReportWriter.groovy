@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory
  * Abstract superclass for ReportWriter implementation classes.
  * <p/>
  * Subclasses must implement the <code>writeReport(ResultsNode, MetricSet, Writer)</code> method
- * and define a <code>defaultOutputFile</code> property.
+ * and define a <code>defaultOutputFile</code> property.`
  *
  * @author Chris Mair
  */
