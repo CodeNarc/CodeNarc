@@ -125,6 +125,14 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
+    void testParseArgs_SingleHtmlReport_WritingToStandardOut() {
+        parseArgs('-report=html:stdout')
+        assert codeNarc.reports.size() == 1
+        assert codeNarc.reports[0].class == HtmlReportWriter
+        assert codeNarc.reports[0].writeToStandardOut == true
+    }
+
+    @Test
     void testParseArgs_SingleXmlReport() {
         parseArgs("-report=$XML_REPORT_STR")
         assert codeNarc.reports.size() == 1
@@ -323,6 +331,19 @@ class CodeNarcTest extends AbstractTestCase {
         assert exitCode == 0
     }
 
+    @Test
+    void testExecute_ReportWritesToStandardOut() {
+        final ARGS = ['-report=xml:stdout'] as String[]
+
+        codeNarc.execute(ARGS)
+
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assert reportWriter.class == XmlReportWriter
+        assert reportWriter.writeToStandardOut
+        assert exitCode == 0
+    }
+
     // Test for main()
 
     @Test
@@ -415,6 +436,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert report.class == reportClass
         assert report.outputFile == toFile
         assert report.title == title
+        assert !report.writeToStandardOut
     }
 
 }

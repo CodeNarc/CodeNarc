@@ -45,8 +45,9 @@ import org.codenarc.util.CodeNarcVersion
  *   <li>maxPriority2Violations - The maximum number of priority 2 violations allowed. Optional.</li>
  *   <li>maxPriority3Violations - The maximum number of priority 3 violations allowed. Optional.</li>
  *   <li>title - The title description for this analysis; used in the output report(s), if supported. Optional.</li>
- *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME].
+ *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME|:stdout].
  *          where TYPE is 'html' and FILENAME is the filename (with optional path) of the output report filename.
+ *          If the TYPE is followed by :stdout (e.g. "html:stdout"), then the report is written to standard out.
  *          If the report filename is omitted, the default filename is used ("CodeNarcReport.html").
  *          If no report option is specified, defaults to a single 'html' report with the default filename.
  *          </li>
@@ -88,14 +89,13 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         The maximum number of priority 3 violations allowed (int).
     -title=<REPORT TITLE>
         The title for this analysis; used in the output report(s), if supported by the report type. Optional.
-    -report=<REPORT-TYPE[:FILENAME]>
+    -report=<REPORT-TYPE[:FILENAME|:stdout]>
         The definition of the report to produce. The option value is of the form
-        REPORT-TYPE[:FILENAME|:stdout], where REPORT-TYPE is "html", "text", "xml", "json", "console",
-        and FILENAME is the filename (with  optional path) of the  output report filename, or "stdout"
-        if you only need to get results in console (ex: "json:stdout"). If the report filename (or stdout)
-        is omitted, the default filename is used for the specified report type ("CodeNarcReport.html"
-        for "html", "CodeNarcXmlReport.xml" for "xml", "CodeNarcJsonReport.json" for "json"). If no
-        report option is specified, default to a single "html" report with the default filename.
+        TYPE[:FILENAME], where TYPE is "html", "text", "xml", or "console" and FILENAME is the filename (with
+        optional path) of the output report filename. If the TYPE is followed by :stdout (e.g. "html:stdout"),
+        then the report is written to standard out. If the report filename is  omitted, the default filename
+        is used for the specified report type ("CodeNarcReport.html" for "html" and "CodeNarcXmlReport.xml" for
+        "xml"). If no report option is specified, default to a single "html" report with the default filename.
     -help
         Display the command-line help. If present, this must be the only command-line parameter.
   Example command-line invocations:
@@ -223,13 +223,14 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         def parts = argValue.split(':', 2)
         def type = parts[0]
         def reportWriter = new ReportWriterFactory().getReportWriter(type)
-        // report-type:stdout -> write results in console
-        if (parts.size() > 1 && parts[1] == 'stdout') {
-            reportWriter.writeToStandardOut = true
-        }
-        // report-type:fileName -> write results in output file
-        else if (parts.size() > 1 && parts[1]) {
-            reportWriter.outputFile = parts[1]
+
+        if (parts.size() > 1 && parts[1]) {
+            if (parts[1] == 'stdout') {
+                reportWriter.writeToStandardOut = true
+            }
+            else {
+                reportWriter.outputFile = parts[1]
+            }
         }
         reports << reportWriter
     }
