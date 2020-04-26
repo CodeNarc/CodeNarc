@@ -87,9 +87,6 @@ abstract class AbstractJsonReportWriterTestCase extends AbstractTestCase {
 
     protected String normalizeJson(String json) {
         def jsonMap = new JsonSlurper().parseText(json)
-        if (jsonMap && jsonMap['report'] && jsonMap['report']['timestamp']) {
-            jsonMap['report']['timestamp'] = 'Jan 1, 2010 3:51:12'
-        }
         jsonMap = jsonMap.sort()*.key // Sort by key name
         return JsonOutput.toJson(jsonMap).replaceAll('\\n|\\r\\n', System.getProperty('line.separator'))
     }

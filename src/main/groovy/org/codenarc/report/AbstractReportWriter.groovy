@@ -43,6 +43,7 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     String outputFile
     Object writeToStandardOut
+    Boolean writeAsSingleLine = false
 
     protected Closure getTimestamp = { new Date() }
     protected String customMessagesBundleName = CUSTOM_MESSAGES_BUNDLE
@@ -53,6 +54,10 @@ abstract class AbstractReportWriter implements ReportWriter {
     protected Closure initializeResourceBundle = { initializeDefaultResourceBundle() }
 
     abstract void writeReport(Writer writer, AnalysisContext analysisContext, Results results)
+
+    Boolean canHandleWriteAsSingleLine() {
+        false
+    }
 
     /**
      * Write out a report for the specified analysis results
@@ -74,6 +79,10 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     boolean isWriteToStandardOut() {
         writeToStandardOut == true || writeToStandardOut == 'true'
+    }
+
+    boolean isWriteAsSingleLine() {
+        writeAsSingleLine == true
     }
 
     private void writeReportToStandardOut(AnalysisContext analysisContext, Results results) {

@@ -34,6 +34,11 @@ class JsonReportWriter extends AbstractReportWriter {
     String defaultOutputFile = 'CodeNarcJsonReport.json'
 
     @Override
+    Boolean canHandleWriteAsSingleLine() {
+        true
+    }
+
+    @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         assert analysisContext
         assert results
@@ -52,12 +57,15 @@ class JsonReportWriter extends AbstractReportWriter {
 
         /*
            Append JSON to writer
-           - if console, output it as single line for easier parsing
-           - if file: pretty print it for easier reading
+           - stdout & file: pretty print it for easier reading
+           - stdout-oneline: writes result in a stdout single line
         */
         def json = JsonOutput.toJson(resultsObj)
         if (isWriteToStandardOut()) {
             def printWriter = new PrintWriter(writer)
+            if (!isWriteAsSingleLine()) {
+                json = JsonOutput.prettyPrint(json)
+            }
             printWriter.println(json)
             printWriter.flush()
         }

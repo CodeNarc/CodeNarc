@@ -17,6 +17,7 @@ package org.codenarc
 
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.report.AbstractReportWriter
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriterFactory
 import org.codenarc.results.Results
@@ -45,9 +46,9 @@ import org.codenarc.util.CodeNarcVersion
  *   <li>maxPriority2Violations - The maximum number of priority 2 violations allowed. Optional.</li>
  *   <li>maxPriority3Violations - The maximum number of priority 3 violations allowed. Optional.</li>
  *   <li>title - The title description for this analysis; used in the output report(s), if supported. Optional.</li>
- *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME|:stdout].
+ *   <li>report - The definition of the report to produce. The option value is of the form TYPE[:FILENAME|:stdout|:stdout-oneline].
  *          where TYPE is 'html' and FILENAME is the filename (with optional path) of the output report filename.
- *          If the TYPE is followed by :stdout (e.g. "html:stdout"), then the report is written to standard out.
+ *          If the TYPE is followed by :stdout (e.g. "html:stdout", "json:stdout-oneline"), then the report is written to standard out.
  *          If the report filename is omitted, the default filename is used ("CodeNarcReport.html").
  *          If no report option is specified, defaults to a single 'html' report with the default filename.
  *          </li>
@@ -89,19 +90,21 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         The maximum number of priority 3 violations allowed (int).
     -title=<REPORT TITLE>
         The title for this analysis; used in the output report(s), if supported by the report type. Optional.
-    -report=<REPORT-TYPE[:FILENAME|:stdout]>
+    -report=<REPORT-TYPE[:FILENAME|:stdout|:stdout-oneline]>
         The definition of the report to produce. The option value is of the form
         TYPE[:FILENAME], where TYPE is "html", "text", "xml", or "console" and FILENAME is the filename (with
-        optional path) of the output report filename. If the TYPE is followed by :stdout (e.g. "html:stdout"),
+        optional path) of the output report filename. If the TYPE is followed by :stdout (e.g. "html:stdout", "json:stdout-oneline"),
         then the report is written to standard out. If the report filename is  omitted, the default filename
-        is used for the specified report type ("CodeNarcReport.html" for "html" and "CodeNarcXmlReport.xml" for
-        "xml"). If no report option is specified, default to a single "html" report with the default filename.
+        is used for the specified report type ("CodeNarcReport.html" for "html", "CodeNarcXmlReport.xml" for
+        "xml" and "CodeNarcJsonReport.json" for "json"). If no report option is specified, default to a
+        single "html" report with the default filename.
     -help
         Display the command-line help. If present, this must be the only command-line parameter.
   Example command-line invocations:
     java org.codenarc.CodeNarc
     java org.codenarc.CodeNarc -rulesetfiles="rulesets/basic.xml" title="My Project"
     java org.codenarc.CodeNarc -report=xml:MyXmlReport.xml -report=html
+    java org.codenarc.CodeNarc -report=json:stdout-oneline
     java org.codenarc.CodeNarc -help'"""
 
     // Abstract calling System.exit() to allow substitution of test spy for unit tests
@@ -225,14 +228,30 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         def reportWriter = new ReportWriterFactory().getReportWriter(type)
 
         if (parts.size() > 1 && parts[1]) {
-            if (parts[1] == 'stdout') {
+            // Output in stdout (default)
+            if (parts[1].startsWith('stdout')) {
                 reportWriter.writeToStandardOut = true
+                // stdout as one-liner (must be implemented on report class, or will trigger Exception)
+                if (checkStdOutOneLine(parts[1], type, reportWriter)) {
+                    reportWriter.writeAsSingleLine = true
+                }
             }
             else {
+                // Output file
                 reportWriter.outputFile = parts[1]
             }
         }
         reports << reportWriter
+    }
+
+    private Boolean checkStdOutOneLine(String reportDetail, String type, AbstractReportWriter reportWriter) {
+        if (reportDetail == 'stdout-oneline') {
+            if (!reportWriter.canHandleWriteAsSingleLine()) {
+                throw new IllegalArgumentException("Invalid option: stdout-oneline is not implemented on $type")
+            }
+            return true
+        }
+        false
     }
 
 }
