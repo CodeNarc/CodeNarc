@@ -50,11 +50,9 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String XML_REPORT_FILE = 'CodeNarcTest-Report.xml'
     private static final String XML_REPORT_STR = "xml:$XML_REPORT_FILE"
     private static final String XML_REPORT_STDOUT_STR = 'xml:stdout'
-    private static final String XML_REPORT_STDOUT_ONELINE_STR = 'xml:stdout-oneline'
     private static final String JSON_REPORT_FILE = 'CodeNarcTest-Report.json'
     private static final String JSON_REPORT_STR = "json:$JSON_REPORT_FILE"
     private static final String JSON_REPORT_STDOUT_STR = 'json:stdout'
-    private static final String JSON_REPORT_STDOUT_ONELINE_STR = 'json:stdout-oneline'
     private static final int P1 = 1, P2 = 2, P3 = 3
 
     private CodeNarc codeNarc
@@ -151,17 +149,6 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_SingleXmlReportStdoutOneLine() {
-        Boolean exceptionThrown = false
-        try {
-            parseArgs("-report=$XML_REPORT_STDOUT_ONELINE_STR")
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true
-        }
-        assert exceptionThrown
-    }
-
-    @Test
     void testParseArgs_SingleJsonReport() {
         parseArgs("-report=$JSON_REPORT_STR")
         assert codeNarc.reports.size() == 1
@@ -175,16 +162,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == JsonReportWriter
         assert codeNarc.reports[0].isWriteToStandardOut()
-        assert codeNarc.reports[0].isWriteAsSingleLine() == false
-    }
-
-    @Test
-    void testParseArgs_SingleJsonReportStdoutOneLine() {
-        parseArgs("-report=$JSON_REPORT_STDOUT_ONELINE_STR")
-        assert codeNarc.reports.size() == 1
-        assert codeNarc.reports[0].class == JsonReportWriter
-        assert codeNarc.reports[0].isWriteToStandardOut()
-        assert codeNarc.reports[0].isWriteAsSingleLine()
+        assert codeNarc.reports[0].isWriteAsSingleLine() == true
     }
 
     @Test

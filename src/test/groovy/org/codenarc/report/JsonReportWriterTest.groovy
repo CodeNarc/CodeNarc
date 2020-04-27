@@ -64,17 +64,6 @@ class JsonReportWriterTest extends AbstractJsonReportWriterTestCase {
     }
 
     @Test
-    void testWriteReport_WritesToStandardOutOneLine() {
-        reportWriter.writeToStandardOut = true
-        reportWriter.writeAsSingleLine = true
-        def output = captureSystemOut {
-            reportWriter.writeReport(analysisContext, results)
-        }
-        assert output != null && output != ''
-        assertJson(output, REPORT_JSON)
-    }
-
-    @Test
     void testWriteReport_Writer_ProperPackageSummaryForPackageWithEmptyRelativePath() {
         final JSON = '''
         {

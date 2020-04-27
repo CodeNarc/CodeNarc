@@ -55,10 +55,6 @@ abstract class AbstractReportWriter implements ReportWriter {
 
     abstract void writeReport(Writer writer, AnalysisContext analysisContext, Results results)
 
-    Boolean canHandleWriteAsSingleLine() {
-        false
-    }
-
     /**
      * Write out a report for the specified analysis results
      * @param analysisContext - the AnalysisContext containing the analysis configuration information
