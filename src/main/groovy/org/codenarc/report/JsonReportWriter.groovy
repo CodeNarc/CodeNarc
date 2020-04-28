@@ -33,6 +33,8 @@ class JsonReportWriter extends AbstractReportWriter {
     String title
     String defaultOutputFile = 'CodeNarcJsonReport.json'
 
+    Boolean writeAsSingleLine = false
+
     @Override
     void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
         assert analysisContext
@@ -67,6 +69,10 @@ class JsonReportWriter extends AbstractReportWriter {
         else {
             writer << json
         }
+    }
+
+    boolean isWriteAsSingleLine() {
+        writeAsSingleLine == true
     }
 
     //--------------------------------------------------------------------------
