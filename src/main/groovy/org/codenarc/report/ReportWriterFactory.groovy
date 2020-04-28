@@ -25,16 +25,18 @@ import org.codenarc.util.PropertyUtil
  * classpath) that implements the <code>org.codenarc.report.ReportWriter</code> interface.
  *
  * @author Chris Mair
+ * @author Nicolas Vuillamy
  */
 class ReportWriterFactory {
 
     ReportWriter getReportWriter(String type) {
         assert type
-        switch(type) {
+        switch (type) {
             case 'html': return new HtmlReportWriter()
             case 'sortable': return new SortableHtmlReportWriter()
             case 'xml': return new XmlReportWriter()
             case 'text': return new TextReportWriter()
+            case 'json': return new JsonReportWriter()
             case 'console': def w = new TextReportWriter(); w.writeToStandardOut = true; return w
             case 'ide': def w = new IdeTextReportWriter(); w.writeToStandardOut = true; return w
             case 'inlineXml' : return new InlineXmlReportWriter()
@@ -52,4 +54,5 @@ class ReportWriterFactory {
         }
         reportWriter
     }
+
 }

@@ -9,22 +9,22 @@ Updated/Enhanced Rules and Bug Fixes
  - #451: **GetterMethodCouldBeProperty** rule: Fix handling of `ignoreMethodsWithOverrideAnnotation` property so it really only ignores @Override methods.
  - #451: **GetterMethodCouldBeProperty** rule: Do not treat static non-final fields as constants, only static final fields. 
  - #452: **SpaceAfterClosingBrace** rule: Do not complain if closure is used as switch-case condition (allow colon after closure).
- - #456: **NoJavaUtilDate** rule: Also raise violations on usages of deprecated static methods from java.util.Date. (Marcin Erdmann)
+ - #456: **NoJavaUtilDate** rule: Also raise violations on usages of deprecated static methods from java.util.Date. ([Marcin Erdmann](https://github.com/erdi))
  - #455: **SpaceBeforeOpeningBrace** rule: Fix false-positive when there is an earlier opening brace on the same line.
- - #462: **ClassStartsWithBlankLine** rule: Support annotations with closures. (Thomas Lefèvre).
- - #463: **GrailsDomainHasEquals** and **GrailsDomainHasToString** rules: Ignore inner enums. (Thomas Lefèvre)
- - #464: **MethodReturnTypeRequired** rule: Add `ignoreMethodNames` property.(Thomas Lefèvre)
- - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodNames` property. (Thomas Lefèvre)
- - #468: **StatelessClass** rule: Ignore fields annotated with @Value. (Thomas Lefèvre)
+ - #462: **ClassStartsWithBlankLine** rule: Support annotations with closures. ([Thomas Lefèvre](https://github.com/tlefevre)).
+ - #463: **GrailsDomainHasEquals** and **GrailsDomainHasToString** rules: Ignore inner enums. ([Thomas Lefèvre](https://github.com/tlefevre))
+ - #464: **MethodReturnTypeRequired** rule: Add `ignoreMethodNames` property.([Thomas Lefèvre](https://github.com/tlefevre))
+ - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodNames` property. ([Thomas Lefèvre](https://github.com/tlefevre))
+ - #468: **StatelessClass** rule: Ignore fields annotated with @Value. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
 
 Command-line
  - #486: Command-line: Enable writing a report to *stdout*, e.g. "-report=html:stdout".
 
 Documentation
- - #472: Add Visual Studio Code in the list of other tools. (Nicolas Vuillamy)
- - #473: Add link to VsCode Groovy Lint in IDEs section. (Nicolas Vuillamy)
- - #476: Fix issue with missing escape for pipe on "codenarc-rules-size" page. (Ron Gebauer)
+ - #472: Add Visual Studio Code in the list of other tools. ([Nicolas Vuillamy](https://github.com/nvuillam))
+ - #473: Add link to VsCode Groovy Lint in IDEs section. ([Nicolas Vuillamy](https://github.com/nvuillam))
+ - #476: Fix issue with missing escape for pipe on "codenarc-rules-size" page. ([Ron Gebauer](https://github.com/Mazorius))
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
@@ -34,6 +34,7 @@ Framework and Infrastructure
  - #461: Switch CodeNarc URL to HTTPS (<https://www.codenarc.org>). Update “Home” link on home page, as well as link on web site page footer, build.gradle, README and ReportWriter classes.
  - #477: Add new `CodeNarcVersion` class.
  - #479: Update CodeNarc rule and rule test templates.
+ - #481: Provide results in JSON format, as file or stdout ([Nicolas Vuillamy](https://github.com/nvuillam))
 
 
 Version 1.5    (Nov 2019)

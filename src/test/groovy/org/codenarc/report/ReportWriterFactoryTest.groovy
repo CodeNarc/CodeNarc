@@ -15,21 +15,22 @@
  */
 package org.codenarc.report
 
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for ReportWriterFactory
  *
  * @author Chris Mair
+ * @author Nicolas Vuillamy
  */
 class ReportWriterFactoryTest extends AbstractTestCase {
 
     private static final TITLE = 'Custom title'
     private static final OUTPUT_FILE = 'report/CustomReport.data'
-    private reportWriterFactory = new ReportWriterFactory()
+    private final reportWriterFactory = new ReportWriterFactory()
 
     @Test
     void testGetReportWriter_Html() {
@@ -74,6 +75,11 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     @Test
     void testGetReportWriter_Baseline() {
         assert reportWriterFactory.getReportWriter('baseline').class == BaselineXmlReportWriter
+    }
+
+    @Test
+    void testGetReportWriter_Json() {
+        assert reportWriterFactory.getReportWriter('json').class == JsonReportWriter
     }
 
     @Test
@@ -128,4 +134,5 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     void testGetReportWriter_WithOptions_ThrowsExceptionForInvalidOption() {
         shouldFailWithMessageContaining('badOption') { reportWriterFactory.getReportWriter('html', [badOption:'abc']) }
     }
+
 }

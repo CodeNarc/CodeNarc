@@ -4,6 +4,9 @@
         "CatchThrowable": {
             "enabled": false
         },
+        "ClassEndsWithBlankLine": {
+            "enabled": false
+        },
         "CompileStatic": {
             "enabled": false
         },
@@ -19,6 +22,12 @@
         "FieldTypeRequired": {
             "enabled": false
         },
+        "Instanceof": {
+            "enabled": false
+        },
+        "JavaIoPackageAccess": {
+            "enabled": false
+        },
         "LineLength": {
             "enabled": false
         },
@@ -31,13 +40,22 @@
         "NoDef": {
             "enabled": false
         },
+        "NoJavaUtilDate": {
+            "enabled": false
+        },
         "SpaceAroundMapEntryColon": {
             "enabled": false
         },
         "SystemExit": {
             "enabled": false
         },
+        "TrailingComma": {
+            "enabled": false
+        },
         "UnnecessaryGetter": {
+            "enabled": false
+        },
+        "UnnecessarySetter": {
             "enabled": false
         },
         "VariableTypeRequired": {
