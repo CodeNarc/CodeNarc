@@ -26,6 +26,7 @@ Documentation
  - #472: Add Visual Studio Code in the list of other tools. ([Nicolas Vuillamy](https://github.com/nvuillam))
  - #473: Add link to VsCode Groovy Lint in IDEs section. ([Nicolas Vuillamy](https://github.com/nvuillam))
  - #476: Fix issue with missing escape for pipe on "codenarc-rules-size" page. ([Ron Gebauer](https://github.com/Mazorius))
+ - #358: Add "Rule Configuration for Grails, Spock, etc." page on the website.
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
