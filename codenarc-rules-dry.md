@@ -155,6 +155,7 @@ or 'TestCase.groovy'.
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
 | ignoreStrings               | The optional comma-separated list of Strings that should be ignored (i.e., not cause a violation). | `''` (empty string) |
+| ignoreStringsDelimiter      | The delimiter char for `ignoreStrings`. | `,` (comma) |
 
 ### Notes
 
