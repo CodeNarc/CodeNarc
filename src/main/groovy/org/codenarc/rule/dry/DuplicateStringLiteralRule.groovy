@@ -18,13 +18,17 @@ package org.codenarc.rule.dry
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AstVisitor
 
+import java.util.regex.Pattern
+
 /**
  * Code containing duplicate String literals can usually be improved by declaring the String as a constant field.
- * <p/>
+ * <p>
  * Set the optional <code>ignoreStrings</code> property to a comma-separated list (String) of
  * the strings that should be ignored by this rule (i.e., not cause a violation). This property
  * defaults to "" to ignore empty strings.
- *
+ * <p>
+ * You can customize the delimiter for the <code>ignoreStrings</code> by setting the <code>ignoreStringsDelimiter</code>, which defaults to ",".
+ * <p>
  * By default, this rule does not apply to test files.
  *
  * @author Hamlet D'Arcy
@@ -35,6 +39,7 @@ class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
     int priority = 2
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
     String ignoreStrings = ''
+    char ignoreStringsDelimiter = ','
 
     @Override
     AstVisitor getAstVisitor() {
@@ -46,7 +51,8 @@ class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
         if (ignoreStrings == null) {
             return Collections.EMPTY_SET
         }
-        def strings = ignoreStrings.contains(',') ? ignoreStrings.split(',') : [ignoreStrings]
-        strings as Set
+        String delimiter = ignoreStringsDelimiter as String
+        def strings = ignoreStrings.contains(delimiter) ? ignoreStrings.split(Pattern.quote(delimiter)) : [ignoreStrings]
+        return strings as Set
     }
 }

@@ -17,6 +17,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodNames` property. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
+ - #490: **DuplicateStringLiteral** rule: Add `ignoreStringsDelimiter` config property to enable customizing the delimiter for `ignoreStrings`.
 
 Command-line
  - #486: Command-line: Enable writing a report to *stdout*, e.g. "-report=html:stdout".

@@ -22,6 +22,7 @@ import org.junit.Test
  * Tests for DuplicateStringLiteralRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStringLiteralRule> {
 
@@ -29,10 +30,12 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'DuplicateStringLiteral'
+        assert rule.ignoreStrings == ''
+        assert rule.ignoreStringsDelimiter == ','
     }
 
     @Test
-    void testSuccessScenario() {
+    void test_NoDuplicateStrings() {
         final SOURCE = '''
             println 'w'
             println 'x'
@@ -217,6 +220,20 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
         '''
 
         rule.ignoreStrings = ',xyz,foo'
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testIgnoreStrings_ignoreStringsDelimiter() {
+        final SOURCE = '''
+            String idString = '123'
+            def x = ['xyz', 'abc', 'xyz']
+            def y = ['1,2', 'bar', '1,2']
+            def z = ['', 'efg', '', '123']
+        '''
+
+        rule.ignoreStringsDelimiter = '|'
+        rule.ignoreStrings = '|xyz|1,2|123'     // Note that one of the ignore strings contains a comma
         assertNoViolations(SOURCE)
     }
 
