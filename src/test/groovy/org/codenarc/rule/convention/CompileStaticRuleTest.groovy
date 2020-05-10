@@ -39,7 +39,7 @@ class CompileStaticRuleTest extends AbstractRuleTestCase {
         final SOURCE = 'class Test {  }'
 
         assertSingleViolation(SOURCE) { Violation violation ->
-            violation.rule.priority == 2
+            violation.rule.priority == 2 &&
             violation.rule.name == 'CompileStatic'
         }
     }
@@ -98,7 +98,7 @@ class CompileStaticRuleTest extends AbstractRuleTestCase {
         final SOURCE1 = 'enum Test { OPTION_ONE, OPTION_TWO  }'
 
         assertSingleViolation(SOURCE1) { Violation violation ->
-            violation.rule.priority == 2
+            violation.rule.priority == 2 &&
             violation.rule.name == 'CompileStatic'
         }
 
@@ -116,7 +116,7 @@ class CompileStaticRuleTest extends AbstractRuleTestCase {
         final SOURCE1 = 'abstract class Test { }'
 
         assertSingleViolation(SOURCE1) { Violation violation ->
-            violation.rule.priority == 2
+            violation.rule.priority == 2 &&
             violation.rule.name == 'CompileStatic'
         }
 
