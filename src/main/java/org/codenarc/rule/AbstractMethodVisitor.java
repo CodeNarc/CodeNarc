@@ -278,7 +278,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
     }
 
     @Override
-    protected final void visitEmptyStatement(EmptyStatement statement) {
+    public final void visitEmptyStatement(EmptyStatement statement) {
         throw new UnsupportedOperationException();
     }
 

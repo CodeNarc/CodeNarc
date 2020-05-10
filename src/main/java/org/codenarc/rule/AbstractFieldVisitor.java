@@ -250,7 +250,7 @@ public class AbstractFieldVisitor extends ClassCodeVisitorSupport implements Ast
     }
 
     @Override
-    protected final void visitEmptyStatement(EmptyStatement statement) {
+    public final void visitEmptyStatement(EmptyStatement statement) {
         throw new UnsupportedOperationException();
     }
 

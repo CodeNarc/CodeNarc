@@ -188,13 +188,13 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
     void testApplyTo_ClosureDeclaration_NoPrecedingSpaceForMultipleParameters_Violation() {
         final SOURCE = '''
             class MyClass {
-                void calculate = { a,int b,String name,count -> }
+                def calculate = { a,int b,String name,count -> }
             }
         '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'void calculate = { a,int b,String name,count -> }', messageText:'The closure parameter b'],
-            [lineNumber:3, sourceLineText:'void calculate = { a,int b,String name,count -> }', messageText:'The closure parameter name'],
-            [lineNumber:3, sourceLineText:'void calculate = { a,int b,String name,count -> }', messageText:'The closure parameter count'] )
+            [lineNumber:3, sourceLineText:'def calculate = { a,int b,String name,count -> }', messageText:'The closure parameter b'],
+            [lineNumber:3, sourceLineText:'def calculate = { a,int b,String name,count -> }', messageText:'The closure parameter name'],
+            [lineNumber:3, sourceLineText:'def calculate = { a,int b,String name,count -> }', messageText:'The closure parameter count'] )
     }
 
     // Tests for list literals

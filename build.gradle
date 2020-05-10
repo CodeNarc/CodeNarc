@@ -25,6 +25,7 @@ dependencies {
     compile("org.codehaus.groovy:groovy-xml:$groovyVersion")
     compile("org.codehaus.groovy:groovy-json:$groovyVersion")
     compile("org.codehaus.groovy:groovy-ant:$groovyVersion")
+    compile("org.codehaus.groovy:groovy-templates:$groovyVersion")
 
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile('org.gmetrics:GMetrics:1.0') {
