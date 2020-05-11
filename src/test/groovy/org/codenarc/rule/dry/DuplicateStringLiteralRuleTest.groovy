@@ -43,8 +43,8 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
             def y = 'y'
             def z = 'z'
             class MyClass {
-                def static x = 'xyz'
-                def static y = 'xyz'
+                def static X = 'xyz'
+                def static Y = 'xyz'
                 def field = System.getProperty('file.seperator')
                 def x = 'foo'
                 def y = 'bar'

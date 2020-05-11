@@ -73,9 +73,9 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase<Unne
         final SOURCE = '''
             class MyClass {
                 Object field1 = {}
-                String field2 = {}
-                int    field3 = {}
-                void   field4 = {}
+                String field2 = ""
+                int    field3 = 99
+                long   field4 = 999L
             }
         '''
         assertNoViolations(SOURCE)

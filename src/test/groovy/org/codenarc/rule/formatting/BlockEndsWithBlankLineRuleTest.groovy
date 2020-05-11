@@ -279,7 +279,13 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
             ]
         '''
 
-        assertNoViolations(SOURCE)
+        if (GroovySystem.getVersion().startsWith('2')) {
+            assertNoViolations(SOURCE)
+        } else {
+            assertViolations(SOURCE,
+                    [lineNumber: 7, sourceLineText: '', messageText: MESSAGE],
+                    [lineNumber: 15, sourceLineText: '', messageText: MESSAGE])
+        }
     }
 
     @Override

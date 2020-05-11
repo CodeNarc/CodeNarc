@@ -85,7 +85,7 @@ class GroovyDslRuleSetTest extends AbstractTestCase {
         }
         assert msg.contains('error occurred compiling')
         assert msg.contains(file.absolutePath)
-        assert msg.contains('unexpected token: ++ @ line 3, column 3')
+        assert msg.contains('line 3')
         file.delete()
     }
 

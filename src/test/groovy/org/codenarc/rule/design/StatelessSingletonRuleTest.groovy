@@ -169,7 +169,7 @@ class StatelessSingletonRuleTest extends AbstractRuleTestCase<StatelessSingleton
     void testShouldAddNoViolationsForClassHaving2StaticFieldsOfItsOwnType() {
         final SOURCE = '''
             class Service {
-                static Service srv1, srv1
+                static Service srv1, srv2
                 void processItem(item){
                 }
             }

@@ -40,8 +40,8 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
             def y = 0
             def z = 9876543
             class MyClass {
-                def static x = 'xyz'
-                def static y = 'xyz'
+                def static X = 'xyz'
+                def static Y = 'xyz'
                 def field = System.getProperty('file.seperator')
                 def x = 'foo'
                 def y = 11.783
