@@ -83,11 +83,11 @@ class NoJavaUtilDateRuleTest extends AbstractRuleTestCase<NoJavaUtilDateRule> {
     @Test
     void test_UsingDeprecatedStaticFactoryMethods_Violations() {
         final SOURCE = '''
-            def parsedDate = Date.parse("12 Aug 1995 13:30:00")​
+            def parsedDate = Date.parse("12 Aug 1995 13:30:00")
             def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def parsedDate = Date.parse("12 Aug 1995 13:30:00")​', messageText:VIOLATION_MESSAGE],
+            [lineNumber:2, sourceLineText:'def parsedDate = Date.parse("12 Aug 1995 13:30:00")', messageText:VIOLATION_MESSAGE],
             [lineNumber:3, sourceLineText:'def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)', messageText:VIOLATION_MESSAGE]
         )
     }
@@ -97,7 +97,7 @@ class NoJavaUtilDateRuleTest extends AbstractRuleTestCase<NoJavaUtilDateRule> {
         final SOURCE = '''
             import some.other.Date
 
-            def parsedDate = Date.parse("12 Aug 1995 13:30:00")​
+            def parsedDate = Date.parse("12 Aug 1995 13:30:00")
             def utcMillisSinceEpoch = Date.UTC(2020, 1, 25, 17, 19, 0)
         '''
         assertNoViolations(SOURCE)

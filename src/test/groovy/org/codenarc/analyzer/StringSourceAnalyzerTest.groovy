@@ -67,7 +67,7 @@ class StringSourceAnalyzerTest extends AbstractTestCase {
     void testFieldRules() {
         final SOURCE = '''
             class Person {
-                def String name // should cause violation
+                def static String name = "abc" // should cause violation
                 public String address  // should cause violation
             }
         '''

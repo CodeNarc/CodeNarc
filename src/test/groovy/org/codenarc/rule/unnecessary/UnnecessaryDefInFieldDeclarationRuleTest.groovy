@@ -142,10 +142,23 @@ class UnnecessaryDefInFieldDeclarationRuleTest extends AbstractRuleTestCase<Unne
     void testViolation_defAndStatic() {
         final SOURCE = '''
             class MyClass {
-                def static field = {}
+                def static field = 123
             }
         '''
         assertSingleViolation(SOURCE, 3, 'def static field', 'The def keyword is unneeded when a field is marked static')
+    }
+
+    @Test
+    void testViolation_NoFieldInitializer() {
+        final SOURCE = '''
+            class MyClass {
+                def static field
+            }
+        '''
+        assertSingleViolation(SOURCE, 3, 'def static field', 'The def keyword is unneeded when a field is marked static')
+
+        // Known limitation in Groovy 3.x
+        //assertNoViolations(SOURCE)
     }
 
     @Test
