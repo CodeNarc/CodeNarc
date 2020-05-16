@@ -25,7 +25,7 @@ import org.junit.Test
 class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
 
     @Test
-    void testNoViolations() {
+    void test_NoViolations() {
         final SOURCE = '''
             List l = [1, 2, 3, 4]
             l.flatten()
@@ -34,7 +34,21 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testSingleViolation() {
+    void test_Class_Constructor_Field_NoViolation() {
+        final SOURCE = '''
+            class User {
+                String name
+
+                User(String name) {
+                    this.name = name
+                }
+            }
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_def_Variable_Violation() {
         final SOURCE = '''
             def l = [1, 2, 3, 4]
             l.flatten()
@@ -43,7 +57,7 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testViolationsForReturnAndParameter() {
+    void test_def_MethodReturnAndParameter_Violations() {
         final SOURCE = '''
             def hello(def l){
                 int k = 3
@@ -55,7 +69,7 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testMultipleViolations() {
+    void test_def_MultipleViolations() {
         final SOURCE = '''
             def test(int l){
                 int k = 3
@@ -68,7 +82,7 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testExcludes_NoViolation() {
+    void test_def_excludeRegex_NoViolations() {
         rule.excludeRegex = /((setup|cleanup)(|Spec)|"[^"].*")\(\)/ //spock methods
         final SOURCE = '''
             def setup(){}
@@ -81,7 +95,7 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testNoViolationForComments() {
+    void test_def_WithinComments_No() {
         final SOURCE_WITH_VIOLATION = '''
             // def cmt = [:]
             def l = [1, 2]
@@ -97,21 +111,7 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testConstructor_NoViolation() {
-        final SOURCE = '''
-            class User {
-                String name
-
-                User(String name) {
-                    this.name = name
-                }
-            }
-            '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void testDefOnConstructorParameter_Violation() {
+    void test_def_ConstructorParameter_Violation() {
         final SOURCE = '''
             class User {
                 String name
@@ -125,6 +125,19 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
+    void test_def_Field_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                def name
+            }
+            '''
+        assertNoViolations(SOURCE)
+
+        // Known violation.. See #497
+        //assertSingleViolation SOURCE, 3, 'def name', NoDefRule.MESSAGE_DEF_FIELD
+    }
+
+    @Test
     void testDefMultipleAssignment_Violation() {
         final SOURCE = '''
             def (init, condition, update) = forStatement.collectionExpression.expressions
@@ -133,7 +146,7 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testDefMultipleAssignment_SomeNamesExcluded_Violation() {
+    void test_def_MultipleAssignment_SomeNamesExcluded_Violation() {
         final SOURCE = '''
             def (init, condition, update) = forStatement.collectionExpression.expressions
         '''
@@ -142,7 +155,7 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
     }
 
     @Test
-    void testDefMultipleAssignment_AllNamesExcluded_NoViolations() {
+    void test_def_MultipleAssignment_AllNamesExcluded_NoViolations() {
         final SOURCE = '''
             def (init, condition, update) = forStatement.collectionExpression.expressions
         '''
