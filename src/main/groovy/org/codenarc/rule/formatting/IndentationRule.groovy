@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
@@ -81,6 +82,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     private int indentLevel = 0
     private final Set<Integer> ignoreLineNumbers = []
     private final Set<BlockStatement> nestedBlocks = []
+    private final Set<BlockStatement> flexibleIndentBlocks = []
     private final Map<BlockStatement, Integer> blockIndentLevel = [:].withDefault { 0 }
 
     @Override
@@ -156,16 +158,38 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        // If the method name starts on a different line, then assume it is a chained method call,
-        // and any blocks that are arguments should be indented.
-        if (isChainedMethodCallOnDifferentLine(call) && call.arguments instanceof ArgumentListExpression) {
-            call.arguments.expressions.each { expr ->
-                if (expr instanceof ClosureExpression && expr.code instanceof BlockStatement) {
-                    blockIndentLevel[expr.code] = blockIndentLevel[expr.code] + 1
-                }
+        def args = call.arguments
+        if (args instanceof ArgumentListExpression) {
+            // If the method name starts on a different line, then assume it is a chained method call,
+            // and any blocks that are arguments should be indented.
+            if (isChainedMethodCallOnDifferentLine(call)) {
+                increaseIndentForClosureBlocks(args)
+            }
+
+            setupFlexibleIndentForAnyClosureParameterBlocks(args)
+        }
+
+        super.visitMethodCallExpression(call)
+    }
+
+    private List<Expression> increaseIndentForClosureBlocks(ArgumentListExpression args) {
+        return args.expressions.each { expr ->
+            if (isClosureWithBlock(expr)) {
+                blockIndentLevel[expr.code] = blockIndentLevel[expr.code] + 1
             }
         }
-        super.visitMethodCallExpression(call)
+    }
+
+    private List<Expression> setupFlexibleIndentForAnyClosureParameterBlocks(ArgumentListExpression args) {
+        args.expressions.each { expr ->
+            if (isClosureWithBlock(expr)) {
+                flexibleIndentBlocks << expr.code
+            }
+        }
+    }
+
+    private boolean isClosureWithBlock(Expression expr) {
+        return expr instanceof ClosureExpression && expr.code instanceof BlockStatement
     }
 
     private boolean isChainedMethodCallOnDifferentLine(MethodCallExpression call) {
@@ -203,12 +227,21 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
                 boolean ignoreStatement = isNestedBlockStatement || isSuperConstructorCall || isThisConstructorCall
                 if (!ignoreStatement) {
-                    checkForCorrectColumn(statement, "statement on line ${statement.lineNumber} in class ${currentClassName}")
+                    checkStatementIndent(statement, block)
                 }
             }
         }
         super.visitBlockStatement(block)
         indentLevel -= addToIndentLevel
+    }
+
+    private void checkStatementIndent(Statement statement, BlockStatement block) {
+        String description = "statement on line ${statement.lineNumber} in class ${currentClassName}"
+        if (flexibleIndentBlocks.contains(block)) {
+            flexibleCheckForCorrectColumn(statement, description)
+        } else {
+            checkForCorrectColumn(statement, description)
+        }
     }
 
     @Override
@@ -232,7 +265,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         // Skip List expressions
     }
 
-//------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
     // Helper methods
     //------------------------------------------------------------------------------------
 
@@ -240,6 +273,13 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         int expectedColumn = columnForIndentLevel(indentLevel)
         if (node.columnNumber != expectedColumn) {
             addViolation(node, "The $description is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
+        }
+    }
+
+    private void flexibleCheckForCorrectColumn(ASTNode node, String description) {
+        List<Integer> allowedColumns = (0..2).collect { level -> columnForIndentLevel(indentLevel + level) }
+        if (!allowedColumns.contains(node.columnNumber)) {
+            addViolation(node, "The $description is at the incorrect indent level: Expected one of columns $allowedColumns but was ${node.columnNumber}")
         }
     }
 

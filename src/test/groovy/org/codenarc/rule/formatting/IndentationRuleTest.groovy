@@ -458,6 +458,41 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_Statement_ClosureParameter_FlexibleIndentForClosureParameterBlocks() {
+        final SOURCE = '''
+            |class MyClass {
+            |    void doStuff(String name) {
+            |        String otherName = name
+            |        doWith(
+            |            name,
+            |            { String someParam ->
+            |                    println someParam  // note this extra level of indent; allowed
+            |            }
+            |        )
+            |
+            |         println 123                   // violation
+            |        doWith(
+            |              name,                    // wrong column, but not a statement -- ignored
+            |            { String someParam ->
+            |             println someParam         // violation
+            |                  println 123          // violation
+            |            println 999                // allowed
+            |                println 999            // allowed
+            |                    println 999        // allowed
+            |                        println 123    // too far; violation
+            |            }
+            |        )
+            |    }
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:12, sourceLineText:'println 123', messageText:'The statement on line 12 in class MyClass'],
+                [lineNumber:16, sourceLineText:'println someParam', messageText:'The statement on line 16 in class MyClass'],
+                [lineNumber:17, sourceLineText:'println 123', messageText:'The statement on line 17 in class MyClass'],
+                [lineNumber:21, sourceLineText:'println 123', messageText:'The statement on line 21 in class MyClass'])
+    }
+
+    @Test
     void test_Statement_ReturningAMultiLineClosure() {
         final SOURCE = '''
             |class MyClass {

@@ -18,6 +18,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
  - #490: **DuplicateStringLiteral** rule: Add `ignoreStringsDelimiter` config property to enable customizing the delimiter for `ignoreStrings`.
+ - #493: **Indentation**: Fix indentation for Closure parameter blocks.
 
 Reports
  - #481: Provide JSON report. ([Nicolas Vuillamy](https://github.com/nvuillam))
