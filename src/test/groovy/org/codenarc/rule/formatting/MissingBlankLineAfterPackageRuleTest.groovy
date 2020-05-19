@@ -91,6 +91,20 @@ class MissingBlankLineAfterPackageRuleTest extends AbstractRuleTestCase<MissingB
     }
 
     @Test
+    void testAnnotationBeforePackage() {
+        final SOURCE = '''\
+            @RandomPackageAnnotation
+            package com.random.package.of.no.consequence
+
+            class MyClass {
+                    def go() { /* ... */ }
+            }
+        '''.stripIndent()
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testNoLinesBetweenPackageAndImports() {
         final SOURCE = '''\
             package org.codenarc
@@ -135,6 +149,19 @@ class MissingBlankLineAfterPackageRuleTest extends AbstractRuleTestCase<MissingB
             class MyClass {
                     void go() { /* ... */ }
             }'''.stripIndent()
+        assertSingleViolation(SOURCE, 1, 'class MyClass {', 'Missing blank line after package statement in file null')
+    }
+
+    @Test
+    void testAnnotationBeforePackageAndNoLinesAfterPackage() {
+        final SOURCE = '''\
+            @RandomPackageAnnotation
+            package com.random.package.of.no.consequence
+            class MyClass {
+                    def go() { /* ... */ }
+            }
+        '''.stripIndent()
+
         assertSingleViolation(SOURCE, 1, 'class MyClass {', 'Missing blank line after package statement in file null')
     }
 

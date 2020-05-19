@@ -34,7 +34,7 @@ class MissingBlankLineAfterPackageRule extends AbstractRule {
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         PackageNode packageNode = sourceCode.ast?.package
         if (packageNode) {
-            String sourceCodeLine = sourceCode.line(packageNode.lineNumber)
+            String sourceCodeLine = sourceCode.line(packageNode.lastLineNumber)
             if (sourceCodeLine != null && !sourceCodeLine.isEmpty()) {
                 violations.add(createViolation(packageNode.lineNumber, sourceCodeLine,
                     "Missing blank line after package statement in file $sourceCode.name"))
