@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.formatting
 
+import org.codehaus.groovy.ast.expr.ClosureListExpression
 import org.codehaus.groovy.ast.stmt.ForStatement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -38,7 +39,14 @@ class BracesForForLoopAstVisitor extends AbstractAstVisitor {
     @Override
     void visitForLoop(ForStatement node) {
         if (AstUtil.isBlock(node.loopBlock)) {
-            boolean isBraceOnSameLine = node.loopBlock.lineNumber == node.collectionExpression.lastLineNumber
+            int loopExpressionLastLine = node.collectionExpression.lastLineNumber
+
+            // Groovy 3.x
+            if (node.collectionExpression instanceof ClosureListExpression && node.collectionExpression.expressions) {
+                loopExpressionLastLine = node.collectionExpression.expressions.last().lastLineNumber
+            }
+
+            boolean isBraceOnSameLine = node.loopBlock.lineNumber == loopExpressionLastLine
             if (rule.sameLine) {
                 if (!isBraceOnSameLine) {
                     addViolation(node, 'Braces should start on the same line')

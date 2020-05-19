@@ -222,7 +222,7 @@ class TrailingCommaRuleTest extends AbstractRuleTestCase<TrailingCommaRule> {
     @Test
     void testMap_NoViolationForMapInConstructorOverMultipleLines() {
         final SOURCE = '''
-        Person person = new Person( first: 'Jane', last: 'Doe', address: '123 Main Street', city: 'Anywhere',
+        Person person = new Person(first: 'Jane', last: 'Doe', address: '123 Main Street', city: 'Anywhere',
            country: 'USA')
         '''
 

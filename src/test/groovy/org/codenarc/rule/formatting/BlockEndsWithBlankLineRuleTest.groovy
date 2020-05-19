@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -279,7 +280,7 @@ class BlockEndsWithBlankLineRuleTest extends AbstractRuleTestCase<BlockEndsWithB
             ]
         '''
 
-        if (GroovySystem.getVersion().startsWith('2')) {
+        if (GroovyVersion.isGroovyVersion2()) {
             assertNoViolations(SOURCE)
         } else {
             assertViolations(SOURCE,

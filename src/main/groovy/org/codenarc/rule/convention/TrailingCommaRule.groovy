@@ -21,6 +21,7 @@ import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.NamedArgumentListExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.GroovyVersion
 import org.codenarc.util.SourceCodeUtil
 /**
  * Check whether list and map literals contain optional trailing comma.
@@ -63,7 +64,7 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
         if (rule.checkList &&
                 !isIgnoredOneElementList(expression) &&
                 !hasTrailingComma(expression.expressions[-1], expression) &&
-                !lastExpressionIsEndOfExpression(expression.expressions[-1])
+                !lastExpressionIsEndOfExpression(expression)
         ) {
             addViolation(expression, 'List should contain trailing comma.')
         }
@@ -95,7 +96,13 @@ class TrailingCommaAstVisitor extends AbstractAstVisitor {
         sourceLinesBetween.any { it.contains(',') }
     }
 
-    private static boolean lastExpressionIsEndOfExpression(Expression lastExpression) {
-        lastExpression.lineNumber == lastExpression.lastLineNumber
+    private static boolean lastExpressionIsEndOfExpression(ListExpression expression) {
+        def lastExpression = expression.expressions[-1]
+
+        if (GroovyVersion.isGroovyVersion2()) {
+            return lastExpression.lineNumber == lastExpression.lastLineNumber
+        }
+
+        return lastExpression.lineNumber == expression.lastLineNumber
     }
 }
