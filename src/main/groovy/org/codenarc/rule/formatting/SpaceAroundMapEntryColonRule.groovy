@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.expr.MapEntryExpression
 import org.codehaus.groovy.ast.expr.SpreadMapExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.GroovyVersion
 
 /**
  * Check for configured formatting of whitespace around colons for literal Map entries
@@ -45,8 +46,8 @@ class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
     }
 
     private void handleMapExpression(MapEntryExpression expression) {
-        def line = lastSourceLine(expression)
-        def colonIndex = expression.lastColumnNumber - 1
+        def line = mapEntrySourceLine(expression)
+        def colonIndex = columnIndexForColon(expression)
         def charBeforeColon = line[colonIndex - 2]
 
         // Handle special case of colon as the last char of the line
@@ -64,6 +65,23 @@ class SpaceAroundMapEntryColonAstVisitor extends AbstractAstVisitor {
             String keyName = expression.keyExpression.text
             addViolation(expression, violationMessage(keyName, 'followed', rule.characterAfterColonRegex))
         }
+    }
+
+    private String mapEntrySourceLine(MapEntryExpression expression) {
+        if (GroovyVersion.isGroovyVersion2()) {
+            return lastSourceLine(expression)
+        }
+        return sourceLine(expression)
+    }
+
+    private int columnIndexForColon(MapEntryExpression expression) {
+        if (GroovyVersion.isGroovyVersion2()) {
+            return expression.lastColumnNumber - 1
+        }
+
+        String line = sourceLine(expression)
+        int startIndex = expression.keyExpression.lastColumnNumber - 1
+        return line.indexOf(':', startIndex) + 1
     }
 
     private String violationMessage(String keyName, String precededOrFollowed, String regex) {
