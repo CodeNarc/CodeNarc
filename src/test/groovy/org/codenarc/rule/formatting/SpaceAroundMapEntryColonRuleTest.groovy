@@ -137,6 +137,21 @@ class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase<SpaceAroundM
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    public void test_MapEntryFormatting_TestIssue502() {
+        final SOURCE = '''
+            devToolsProject.run(
+              setup: { data ->
+                data['venv'] = virtualenv.create('python3.8')
+                data.venv.run('pip install -r requirements-dev.txt -r requirements.txt')
+              },
+              // etc...
+            )
+            '''
+        rule.characterAfterColonRegex = /\s/
+        assertNoViolations(SOURCE)
+    }
+
     private String violation(String keyName, String precededOrFollowed, String className, String regex) {
         return inlineViolation("The colon for the literal Map entry for key [$keyName] within class $className" +
             " is not $precededOrFollowed by a match for regular expression [$regex]")
