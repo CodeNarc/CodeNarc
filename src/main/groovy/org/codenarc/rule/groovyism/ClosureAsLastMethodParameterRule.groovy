@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.AbstractMethodCallExpressionVisitor
 import org.codenarc.util.AstUtil
+import org.codenarc.util.GroovyVersion
 
 /**
  * If a method is called and the last parameter is an inline closure it can be declared outside of the method call brackets.
@@ -39,21 +40,26 @@ class ClosureAsLastMethodParameterAstVisitor extends AbstractMethodCallExpressio
     void visitMethodCallExpression(MethodCallExpression call) {
         def arguments = AstUtil.getMethodArguments(call)
         if (arguments && arguments.last() instanceof ClosureExpression) {
+            boolean isViolation = false
             def lastArgument = arguments.last()
-            def sourceLine = sourceCode.lines[call.lineNumber - 1]
-            def firstChar = sourceLine[call.columnNumber - 1]
+            if (GroovyVersion.isGroovyVersion2()) {
+                def sourceLine = sourceCode.lines[call.lineNumber - 1]
+                def firstChar = sourceLine[call.columnNumber - 1]
 
-            // If a method call is surrounded by parentheses (possibly unnecessary) OR braces, then the AST includes those in the
-            // MethodCall start/end column indexes. In that case, it gets too complicated. Just bail.
-            if (firstChar == '(' || firstChar == '{') {
-                super.visitMethodCallExpression(call)
-                return
+                // If a method call is surrounded by parentheses (possibly unnecessary) OR braces, then the AST includes those in the
+                // MethodCall start/end column indexes. In that case, it gets too complicated. Just bail.
+                if (firstChar == '(' || firstChar == '{') {
+                    super.visitMethodCallExpression(call)
+                    return
+                }
+
+                isViolation = call.lastLineNumber > lastArgument.lastLineNumber ||
+                        (call.lastLineNumber == lastArgument.lastLineNumber &&
+                                call.lastColumnNumber > lastArgument.lastColumnNumber)
+            } else {
+                isViolation = lastArgument.lastLineNumber < call.arguments.lastLineNumber ||
+                        (lastArgument.lastLineNumber == call.arguments.lastLineNumber && lastArgument.lastColumnNumber < call.arguments.lastColumnNumber)
             }
-
-            def isViolation = call.lastLineNumber > lastArgument.lastLineNumber ||
-                (call.lastLineNumber == lastArgument.lastLineNumber &&
-                    call.lastColumnNumber > lastArgument.lastColumnNumber)
-
             if (isViolation) {
                 addViolation(call, "The last parameter to the '$call.methodAsString' method call is a closure and can appear outside the parenthesis")
             }

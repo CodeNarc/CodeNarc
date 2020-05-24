@@ -77,7 +77,7 @@ class ClosureStatementOnOpeningLineOfMultipleLineClosureRuleTest extends Abstrac
         final SOURCE = '''
             def closure = { name -> println name    # The multi-line closure within class None contains a statement on the opening line of the closure
                 addToCounts()
-                println “done” }
+                println "done" }
             '''
         assertInlineViolations(SOURCE)
     }

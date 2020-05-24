@@ -16,6 +16,7 @@
 package org.codenarc.rule.groovyism
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -208,9 +209,12 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
                (println((funds.clear('clearing', { it.fundCode })) ))
             }
           '''
-        // Should actually fail with violation for inner method call -- clear()
-        //assertSingleViolation(SOURCE, 3, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure an can appear outside the parenthesis")
-        assertNoViolations(SOURCE)
+        if (GroovyVersion.isGroovyVersion2()) {
+            // Should actually fail with violation for inner method call -- clear()
+            assertNoViolations(SOURCE)
+        } else {
+            assertSingleViolation(SOURCE, 3, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call")
+        }
     }
 
     @Test

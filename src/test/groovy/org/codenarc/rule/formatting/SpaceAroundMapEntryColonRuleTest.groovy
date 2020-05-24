@@ -138,7 +138,7 @@ class SpaceAroundMapEntryColonRuleTest extends AbstractRuleTestCase<SpaceAroundM
     }
 
     @Test
-    public void test_MapEntryFormatting_TestIssue502() {
+    void test_MapEntryFormatting_TestIssue502() {
         final SOURCE = '''
             devToolsProject.run(
               setup: { data ->
