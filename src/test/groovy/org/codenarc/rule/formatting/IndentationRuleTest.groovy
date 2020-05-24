@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -94,6 +95,20 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_NestedClass_Issue504() {
+        final SOURCE = '''
+            |class Artifact implements Serializable {
+            |  protected static final class ArtifactLocation {
+            |    /* stuff */
+            |  }
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'protected static final class ArtifactLocation {',
+                        messageText:'The class Artifact$ArtifactLocation is at the incorrect indent level: Expected column 5 but was 3'])
+    }
+
+    @Test
     void test_ClassDefinedWithinFieldDeclaration_ProperIndentation_NoViolations() {
         final SOURCE = '''
             |class MyClass {
@@ -150,17 +165,23 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |  @Package void two() { }      // Method: incorrect --> VIOLATION
             |
             |    @SuppressWarnings          // Field: correct
-            |       private String name     // Field: incorrect --> IGNORED
+            |       private String id       // Field: incorrect --> IGNORED
             |
             |        @SuppressWarnings      // Field: incorrect --> VIOLATION
             |    private String name        // Field: correct
             |}
         '''.stripMargin()
-        assertViolations(SOURCE,
-                [lineNumber:6, sourceLineText:'class MyOtherClass', messageText:'The class MyOtherClass'],
-                [lineNumber:16, sourceLineText:'@Package void two()', messageText:'The method two in class TestClass'],
-                [lineNumber:22, sourceLineText:'private String name', messageText:'The field name in class TestClass'],
-        )
+        if (GroovyVersion.isGroovyVersion2()) {
+            assertViolations(SOURCE,
+                    [lineNumber: 6, sourceLineText: 'class MyOtherClass', messageText: 'The class MyOtherClass'],
+                    [lineNumber: 16, sourceLineText: '@Package void two()', messageText: 'The method two in class TestClass'],
+                    [lineNumber: 22, sourceLineText: 'private String name', messageText: 'The field name in class TestClass'])
+        } else {
+            assertViolations(SOURCE,
+                    [lineNumber: 5, sourceLineText: '@Component', messageText: 'The class MyOtherClass'],
+                    [lineNumber: 16, sourceLineText: '@Package void two()', messageText: 'The method two in class TestClass'],
+                    [lineNumber: 21, sourceLineText: '@SuppressWarnings', messageText: 'The field name in class TestClass'])
+        }
     }
 
     // Tests for method declarations
@@ -923,6 +944,15 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |"${if (true) 'content' else ''}"
         '''.stripMargin()
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void firstNonWhitespaceColumn() {
+        assert IndentationAstVisitor.firstNonWhitespaceColumn('') == -1
+        assert IndentationAstVisitor.firstNonWhitespaceColumn('    ') == -1
+        assert IndentationAstVisitor.firstNonWhitespaceColumn('abc') == 1
+        assert IndentationAstVisitor.firstNonWhitespaceColumn(' a b c') == 2
+        assert IndentationAstVisitor.firstNonWhitespaceColumn('     abc') == 6
     }
 
     @Override

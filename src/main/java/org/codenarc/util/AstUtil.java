@@ -32,6 +32,8 @@ import org.codenarc.source.SourceCode;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.util.Arrays.asList;
 
@@ -1069,6 +1071,23 @@ public class AstUtil {
         }
         return false;
     }
+
+    public static int findClassDeclarationLineNumber(ClassNode node, SourceCode sourceCode) {
+        int lineNumber = node.getLineNumber();
+        if (!node.getAnnotations().isEmpty()) {
+            Pattern classDeclarationPattern = Pattern.compile("class\\s+" + node.getNameWithoutPackage());
+            AnnotationNode lastAnnotation = node.getAnnotations().get(node.getAnnotations().size() - 1);
+            for (int i = lastAnnotation.getLastLineNumber(); i < sourceCode.getLines().size(); i++) {
+                String line = sourceCode.line(i - 1);
+                Matcher matcher = classDeclarationPattern.matcher(line);
+                if (matcher.find()) {
+                    return i;
+                }
+            }
+        }
+        return lineNumber;
+    }
+
 
     /**
      * gets the first non annotation line number of a node, taking into account annotations.

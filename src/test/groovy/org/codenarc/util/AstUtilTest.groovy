@@ -88,11 +88,26 @@ class AstUtilTest extends AbstractTestCase {
             }
         }
 
+        @Ignore
+        // Some comment
+        @SuppressWarnings('Indentation')
+        class SomeAnnotatedClass {
+        }
+
         // outside of class -- script
         def scriptMethod() { 456 }
     '''
     private visitor
     private sourceCode
+
+    @Test
+    void test_findClassDeclarationLineNumber() {
+        def nonAnnotatedClassNode = visitor.classNodes.find { classNode -> classNode.name == 'MyClass' }
+        assert AstUtil.findClassDeclarationLineNumber(nonAnnotatedClassNode, sourceCode) == 2
+
+        def annotatedClassNode = visitor.classNodes.find { classNode -> classNode.name == 'SomeAnnotatedClass' }
+        assert AstUtil.findClassDeclarationLineNumber(annotatedClassNode, sourceCode) == 51
+    }
 
     @Test
     void testIsFinalVariable() {

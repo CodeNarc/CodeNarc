@@ -32,6 +32,8 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codenarc.util.AstUtil
+import org.codenarc.util.GroovyVersion
 
 import java.util.concurrent.ConcurrentHashMap
 
@@ -94,10 +96,23 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         ignoreLineNumbers << node.lineNumber
         node.annotations.each { annotationNode -> ignoreLineNumbers << annotationNode.lastLineNumber }
 
+        // Groovy 3.x ClassNode lineNumber is line number of first annotation
+        if (GroovyVersion.isNotGroovyVersion2() && node.annotations) {
+            int classDeclarationLine = AstUtil.findClassDeclarationLineNumber(node, sourceCode)
+            ignoreLineNumbers << classDeclarationLine
+        }
+
         boolean isInnerClass = node instanceof InnerClassNode
         boolean isAnonymous = isInnerClass && node.anonymous
         if (!isAnonymous) {
-            checkForCorrectColumn(node, "class ${node.getNameWithoutPackage()}")
+            String description = "class ${node.getNameWithoutPackage()}"
+
+            if (GroovyVersion.isGroovyVersion2() || !isInnerClass) {
+                checkForCorrectColumn(node, description)
+            } else {
+                int column = firstNonWhitespaceColumn(sourceLine(node))
+                checkForCorrectColumn(node, description, column)
+            }
         }
         if (!node.script) {
             indentLevel++
@@ -270,9 +285,13 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     //------------------------------------------------------------------------------------
 
     private void checkForCorrectColumn(ASTNode node, String description) {
+        checkForCorrectColumn(node, description, node.columnNumber)
+    }
+
+    private void checkForCorrectColumn(ASTNode node, String description, int actualColumnNumber) {
         int expectedColumn = columnForIndentLevel(indentLevel)
-        if (node.columnNumber != expectedColumn) {
-            addViolation(node, "The $description is at the incorrect indent level: Expected column $expectedColumn but was ${node.columnNumber}")
+        if (actualColumnNumber != expectedColumn) {
+            addViolation(node, "The $description is at the incorrect indent level: Expected column $expectedColumn but was ${actualColumnNumber}")
         }
     }
 
@@ -315,6 +334,16 @@ class IndentationAstVisitor extends AbstractAstVisitor {
                 statement.expression.class == ConstantExpression &&
                 statement.expression.type.clazz == String
         )
+    }
+
+    protected static int firstNonWhitespaceColumn(String string) {
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i)
+            if (!c.isWhitespace()) {
+                return i + 1
+            }
+        }
+        return -1
     }
 
 }
