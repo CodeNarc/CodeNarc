@@ -19,10 +19,12 @@ Updated/Enhanced Rules and Bug Fixes
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
  - #490: **DuplicateStringLiteral** rule: Add `ignoreStringsDelimiter` config property to enable customizing the delimiter for `ignoreStrings`.
  - #493: **Indentation**: Fix indentation for Closure parameter blocks.
+ - #503: Fix typo in SpaceAroundMapEntryColon documentation. [Nik Reiman](https://github.com/nre-ableton)
+ - #499: MissingBlankLineAfterPackage: allow for annotations before package name. [Jenn Strater](https://github.com/jlstrater)
 
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 
-     - Fixed rules: **ClosureAsLastMethodParameter, BracesForForLoop, ConsecutiveStringConcatenation, TrailingComma**. And also fix several tests.
+     - Fixed rules: **ClosureAsLastMethodParameter, BracesForForLoop, ConsecutiveStringConcatenation, TrailingComma**, **Indentation**. And also fix several tests.
      - `AbstractFieldVisitor` and `AbstractMethodVisitor`: Make `visitEmptyStatement()` public. 
      - `build.gradle`: Add groovy-templates dependency. 
 
