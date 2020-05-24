@@ -744,8 +744,8 @@ Does not check *spread map* operator, e.g. `def binding = [*: map]`
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| characterBeforeColonRegex | The regular expression that must match the character before the colon (:) for a literal *Map* entry. For example, `/\\S/` matches any non-whitespace character and `/\\s/` matches any whitespace character (thus requiring a space or whitespace).     |  `/\\S/` (i.e., no space allowed before the colon) |
-| characterAfterColonRegex  | The regular expression that must match the character after the colon (:) for a literal *Map* entry. For example, `/\\S/` matches any non-whitespace character and `/\\s/` matches any whitespace character (thus requiring a space or whitespace).     |  `/\\S/` (i.e., no space allowed before the colon)     |
+| characterBeforeColonRegex | The regular expression that must match the character before the colon (:) for a literal *Map* entry. For example, `/\S/` matches any non-whitespace character and `/\s/` matches any whitespace character (thus requiring a space or whitespace).     |  `/\S/` (i.e., no space allowed before the colon) |
+| characterAfterColonRegex  | The regular expression that must match the character after the colon (:) for a literal *Map* entry. For example, `/\S/` matches any non-whitespace character and `/\s/` matches any whitespace character (thus requiring a space or whitespace).     |  `/\S/` (i.e., no space allowed after the colon)     |
 
 Example of violations:
 
