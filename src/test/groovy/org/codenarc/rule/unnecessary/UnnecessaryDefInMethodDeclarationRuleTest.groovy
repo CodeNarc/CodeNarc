@@ -218,8 +218,7 @@ class UnnecessaryDefInMethodDeclarationRuleTest extends AbstractRuleTestCase<Unn
     @Test
     void testViolation_methodDeclarationAcrossMultipleLines() {
         final SOURCE = '''
-            def
-            static
+            static def
             String method() { }
         '''
         assertSingleViolation(SOURCE, 2, 'def', 'The def keyword is unneeded when a method is marked static')

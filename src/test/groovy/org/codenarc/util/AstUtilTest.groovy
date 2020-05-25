@@ -81,7 +81,7 @@ class AstUtilTest extends AbstractTestCase {
                 @Field Map var6 = new HashMap<String, String>(System.getenv())
 
                 @Field
-                Map var7 = new HashMap<String, String>(System.getenv())
+                Map var7 = new HashMap<String, String>(System.getenv());
 
                 @Field
                 final Map var8 = new HashMap<String, String>(System.getenv())
@@ -147,6 +147,9 @@ class AstUtilTest extends AbstractTestCase {
 
         node = visitor.fieldNodes.find { n -> n.name == 'myStringField' }
         assert AstUtil.getDeclaration(node, sourceCode).trim() == 'String myStringField // comment'
+
+        node = visitor.methodNodes['otherMethod']
+        assert AstUtil.getDeclaration(node, sourceCode).trim() == 'def otherMethod()'
     }
 
     @Test

@@ -1216,8 +1216,11 @@ public class AstUtil {
 
             // extract the relevant part of the last line
             if (lineIndex == node.getLastLineNumber() - 1) {
-                int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 1 : line.length();
-                line = line.substring(0, stopIndex);
+                // Groovy 3.0 lastColumnNumber is incorrect up for some fields
+                if (GroovyVersion.isGroovyVersion2()) {
+                    int stopIndex = node.getLastColumnNumber() < line.length() ? node.getLastColumnNumber() - 1 : line.length();
+                    line = line.substring(0, stopIndex);
+                }
             }
 
             if (line.contains("{")) {
