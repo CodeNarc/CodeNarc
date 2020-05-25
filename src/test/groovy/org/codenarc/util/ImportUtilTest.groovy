@@ -29,6 +29,46 @@ import org.junit.Test
 class ImportUtilTest extends AbstractTestCase {
 
     @Test
+    void testGetAllImports() {
+        final SOURCE = '''
+            import java.lang.String;
+            import java.net.*;
+
+            import static java.lang.Math.*;
+            import static org.other.OtherUtil.doStuff;
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def allImports = ImportUtil.getAllImports(sourceCode)
+
+        allImports.each { node -> println "${node.text} -- ${node.lineNumber}" }
+
+        assert allImports.find { node -> node.text.contains('java.lang.String') && node.lineNumber == 2 }
+        assert allImports.find { node -> node.text.contains('import java.net.*') && node.lineNumber == 3 }
+        assert allImports.find { node -> node.text.contains('import static java.lang.Math.*') && node.lineNumber == 5 && node.isStatic() }
+        assert allImports.find { node -> node.text.contains('org.other.OtherUtil.doStuff') && node.lineNumber == 6 && node.isStatic() }
+    }
+
+    @Test
+    void testGetAllImports_NoImports() {
+        final SOURCE = '''
+            println 123
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def allImports = ImportUtil.getAllImports(sourceCode)
+        assert allImports == []
+    }
+
+    @Test
+    void testGetAllImports_InvalidSource_NoAst() {
+        final SOURCE = '''
+            @will not compile@ &^%$#
+        '''
+        def sourceCode = new SourceString(SOURCE)
+        def allImports = ImportUtil.getAllImports(sourceCode)
+        assert allImports == []
+    }
+
+    @Test
     void testSourceLineAndNumberForImport() {
         final SOURCE = '''
             import a.b.MyClass

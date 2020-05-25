@@ -15,92 +15,97 @@
  */
 package org.codenarc.rule.unnecessary
 
-import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.ast.AnnotatedNode
+import org.codehaus.groovy.ast.ImportNode
+import org.codehaus.groovy.ast.PackageNode
+import org.codehaus.groovy.ast.stmt.Statement
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
-import org.codenarc.util.MultilineCommentChecker
+import org.codenarc.util.AstUtil
+import org.codenarc.util.ImportUtil
 
 /**
  * Semicolons as line terminators are not required in Groovy: remove them. Do not use a semicolon as a replacement for empty braces on for and while loops; this is a confusing practice.
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
  */
 class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 
+    protected static final String MESSAGE = 'Semicolons as line endings can be removed safely'
+
     String name = 'UnnecessarySemicolon'
     int priority = 3
-    // ^\\s*\\*.*   == any line that starts whitespace and a *
-    // ^\\*.*       == any line that starts with a *
-    // /\*.*        == any line that contains the /* sequence
-    // .*//.*       == any line that contains the // sequence
-    // .*\*/.*      == any line that contains the */ sequence
-
-    String excludePattern = '^\\s*\\*.*|^\\*.*|/\\*.*|.*//.*|.*\\*/.*'
-
     Class astVisitorClass = UnnecessarySemicolonAstVisitor
-
-    // this rule is shared across threads and has state, so make the state thread local
-    ThreadLocal<List<Violation>> temporaryViolations = new ThreadLocal() {
-        @Override
-        protected List<Violation> initialValue() {
-            []
-        }
-    }
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        temporaryViolations.get().addAll(getViolationsForSource(sourceCode))
         super.applyTo(sourceCode, violations)
-        if (temporaryViolations.get()) {
-            violations.addAll(temporaryViolations.get())
-        }
-        temporaryViolations.get().clear()
+        processPackage(sourceCode, violations)
+        processImports(sourceCode, violations)
     }
 
-    private List<Violation> getViolationsForSource(SourceCode sourceCode) {
-        def result = []
-
-        List lines = sourceCode.lines
-        if (!lines) {
-            return result
+    private void processPackage(SourceCode sourceCode, List<Violation> violations) {
+        PackageNode packageNode = sourceCode.ast?.package
+        if (packageNode) {
+            checkLastLineForSemicolon(sourceCode, violations, packageNode)
         }
-        int lineNumber = 1
-        MultilineCommentChecker multilineCommentChecker = new MultilineCommentChecker()
+    }
 
-        for (String line : lines) {
-            multilineCommentChecker.processLine(line)
-
-            if (line.trim().endsWith(';') && (!line.matches(excludePattern) && !multilineCommentChecker.inMultilineComment)) {
-                result.add(
-                        new Violation(
-                                rule: this, lineNumber: lineNumber, sourceLine: line,
-                                message: 'Semi-colons as line endings can be removed safely'
-                        )
-                )
-            }
-            lineNumber++
+    private void processImports(SourceCode sourceCode, List<Violation> violations) {
+        ImportUtil.getAllImports(sourceCode).each { importNode ->
+            processImportNode(sourceCode, violations, importNode)
         }
-        result
+    }
+
+    private void processImportNode(SourceCode sourceCode, List<Violation> violations, ImportNode node) {
+        checkLastLineForSemicolon(sourceCode, violations, node)
+    }
+
+    private void checkLastLineForSemicolon(SourceCode sourceCode, List<Violation> violations, AnnotatedNode node) {
+        int lineNumber = node.getLastLineNumber()
+        String line = sourceCode.getLines().get(lineNumber - 1) + ' '   // to make it easier to extract the final chars
+        int lastColumn = node.lastColumnNumber
+        boolean lastCharIsSemicolon = line[lastColumn - 1] == ';'
+
+        if (lastCharIsSemicolon) {
+            violations << createViolation(lineNumber, line, MESSAGE)
+        }
     }
 
 }
 
 class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
+
     @Override
-    void visitConstantExpression(ConstantExpression node) {
-        // search inside multiline strings
-        if (node.value instanceof String && node.lineNumber != node.lastLineNumber) {
-            removeViolationsInRange(node.lineNumber, node.lastLineNumber - 1)
+    protected void visitStatement(Statement statement) {
+        if (AstUtil.isFromGeneratedSourceCode(statement)) {
+            return
         }
 
-        super.visitConstantExpression(node)
+        int lastColumn = statement.lastColumnNumber
+        String line = lastSourceLine(statement) + ' '   // to make it easier to extract the final chars
+        boolean lastCharIsSemicolon = line[lastColumn - 2] == ';' || line[lastColumn - 1] == ';'
+
+        def lineNumber = statement.lastLineNumber
+
+        // An earlier violation for this same line means its semicolon was actually okay
+        removeAnyViolationsForSameLine(lineNumber)
+
+        if (lastCharIsSemicolon) {
+            addViolation(new Violation(rule: rule, lineNumber: lineNumber, sourceLine: line, message: rule.MESSAGE))
+        }
+
+        super.visitStatement(statement)
     }
 
-    private void removeViolationsInRange(int start, int end) {
-        rule.temporaryViolations.get().removeAll { Violation v ->
-            v.lineNumber >= start && v.lineNumber <= end
+    private void removeAnyViolationsForSameLine(int lineNumber) {
+        Violation violation = violations.find { v -> v.lineNumber == lineNumber }
+        if (violation) {
+            violations.remove(violation)
         }
     }
+
 }

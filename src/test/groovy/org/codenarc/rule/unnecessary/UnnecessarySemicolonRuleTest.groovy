@@ -25,14 +25,16 @@ import org.junit.Test
   */
 class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemicolonRule> {
 
+    private static final String MESSAGE = 'Semicolons as line endings can be removed safely'
+
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'UnnecessarySemicolon'
     }
 
     @Test
-    void testSuccessScenario() {
+    void test_NoViolations() {
         final SOURCE = '''
 /*
  *
@@ -50,8 +52,6 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
             println(value)
             println(value); println (otherValue)
 
-            println(value); // comment so no violation
-
             @SuppressWarnings('UnnecessarySemicolon')
             def method() {
                 ;
@@ -62,19 +62,32 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
                 String a = 'text';
             }
 
+            def anotherMethod() {
+                for(int i=0; i < 100; i++) {
+                    println i
+                }
+            }
         '''
-        assert !manuallyApplyRule(SOURCE)
+        assertNoViolations(SOURCE)
     }
 
     @Test
-    void testSimpleString() {
+    void test_SemicolonFollowedByComment() {
+        final SOURCE = '''
+            println(value); // comment
+        '''
+        assertSingleViolation(SOURCE, 2, 'println(value); // comment', MESSAGE)
+    }
+
+    @Test
+    void test_SimpleString() {
         final SOURCE = """
             def string = 'hello world';
             """
         assertSingleViolation SOURCE, 2, "def string = 'hello world';"
     }
     @Test
-    void testSemiColonInMultilineString() {
+    void test_SemicolonInMultilineString() {
         final SOURCE = """
             def javascript = '''
                 // this next semicolon is ignored
@@ -86,7 +99,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
     }
 
     @Test
-    void testSemiColonInGStringString() {
+    void test_SemicolonInGStringString() {
         final SOURCE = '''
             def var = 'yo yo yo'
             def javascript = """
@@ -99,40 +112,50 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
     }
 
     @Test
-    void testPackage() {
+    void test_Package() {
         final SOURCE = '''
             package my.company.server;
         '''
-        assertSingleViolation(SOURCE, 2, 'package my.company.server;', 'Semi-colons as line endings can be removed safely')
+        assertSingleViolation(SOURCE, 2, 'package my.company.server;', MESSAGE)
     }
 
     @Test
-    void testLoop() {
+    void test_Loop() {
         final SOURCE = '''
             for (def x : list);
         '''
-        assertSingleViolation(SOURCE, 2, 'for (def x : list);', 'Semi-colons as line endings can be removed safely')
+        assertSingleViolation(SOURCE, 2, 'for (def x : list);', MESSAGE)
     }
 
     @Test
-    void testMethodCall() {
+    void test_MethodCall() {
         final SOURCE = '''
             println(value) ;
         '''
-        assertSingleViolation(SOURCE, 2, 'println(value) ;', 'Semi-colons as line endings can be removed safely')
+        assertSingleViolation(SOURCE, 2, 'println(value) ;', MESSAGE)
     }
 
-    @SuppressWarnings('UnnecessarySemicolon')
     @Test
-    void testImport() {
+    void test_Import() {
         final SOURCE = '''
             import java.lang.String;
+            import java.net.*;
+
+            import static java.lang.Math.*;
+            import static org.other.OtherUtil.doStuff;
+
+            import java.util.Function   // no violation
         '''
-        assertSingleViolation(SOURCE, 2, 'import java.lang.String;', 'Semi-colons as line endings can be removed safely')
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'import java.lang.String;', messageText:MESSAGE],
+                [lineNumber:3, sourceLineText:'import java.net.*;', messageText:MESSAGE],
+                [lineNumber:5, sourceLineText:'import static java.lang.Math.*;', messageText:MESSAGE],
+                [lineNumber:6, sourceLineText:'import static org.other.OtherUtil.doStuff;', messageText:MESSAGE],
+        )
     }
 
     @Test
-    void testClass() {
+    void test_Class() {
         final SOURCE = '''
             class A {
                 int a() {
@@ -140,11 +163,11 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 4, 'return 1;', 'Semi-colons as line endings can be removed safely')
+        assertSingleViolation(SOURCE, 4, 'return 1;', MESSAGE)
     }
 
     @Test
-    void testSemiColonInMultilineCommentsWithoutLeadingAsterisk() {
+    void test_SemicolonInMultilineCommentsWithoutLeadingAsterisk() {
         final SOURCE = '''
         /*
          (the "License");
@@ -164,12 +187,12 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
     }
 
     @Test
-    void testMultilineCommentWrittenAsASingleLine() {
+    void test_MultilineCommentWrittenAsASingleLine() {
         final SOURCE = '''
         /* no semi colon here */
         println("raccoon");
         '''
-        assertSingleViolation(SOURCE, 3, 'println("raccoon");', 'Semi-colons as line endings can be removed safely')
+        assertSingleViolation(SOURCE, 3, 'println("raccoon");', MESSAGE)
     }
 
     @Override

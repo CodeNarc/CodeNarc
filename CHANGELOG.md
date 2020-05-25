@@ -19,8 +19,8 @@ Updated/Enhanced Rules and Bug Fixes
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
  - #490: **DuplicateStringLiteral** rule: Add `ignoreStringsDelimiter` config property to enable customizing the delimiter for `ignoreStrings`.
  - #493: **Indentation**: Fix indentation for Closure parameter blocks.
- - #503: Fix typo in SpaceAroundMapEntryColon documentation. [Nik Reiman](https://github.com/nre-ableton)
- - #499: MissingBlankLineAfterPackage: allow for annotations before package name. [Jenn Strater](https://github.com/jlstrater)
+ - #499: **MissingBlankLineAfterPackage**: allow for annotations before package name. [Jenn Strater](https://github.com/jlstrater)
+ - #505: **UnnecessarySemicolon**: Fix checking for semicolon if followed by a comment.
 
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 
@@ -37,6 +37,7 @@ Documentation
  - #473: Add link to VsCode Groovy Lint in IDEs section. ([Nicolas Vuillamy](https://github.com/nvuillam))
  - #476: Fix issue with missing escape for pipe on "codenarc-rules-size" page. ([Ron Gebauer](https://github.com/Mazorius))
  - #358: Add "Rule Configuration for Grails, Spock, etc." page on the website.
+ - #503: Fix typo in SpaceAroundMapEntryColon documentation. [Nik Reiman](https://github.com/nre-ableton)
 
 Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
