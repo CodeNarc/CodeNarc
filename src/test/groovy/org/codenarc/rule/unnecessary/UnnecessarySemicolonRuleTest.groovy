@@ -22,6 +22,7 @@ import org.junit.Test
  * Tests for UnnecessarySemicolonRule
  *
  * @author Hamlet D'Arcy
+ * @author Chris Mair
   */
 class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemicolonRule> {
 
@@ -120,7 +121,7 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
     }
 
     @Test
-    void test_Loop() {
+    void test_ForLoop() {
         final SOURCE = '''
             for (def x : list);
         '''
@@ -130,27 +131,30 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
     @Test
     void test_MethodCall() {
         final SOURCE = '''
-            println(value) ;
+            println(value);
         '''
-        assertSingleViolation(SOURCE, 2, 'println(value) ;', MESSAGE)
+        assertSingleViolation(SOURCE, 2, 'println(value);', MESSAGE)
     }
 
     @Test
-    void test_Import() {
+    void test_Imports() {
         final SOURCE = '''
-            import java.lang.String;
             import java.net.*;
+            import java.lang.String;
+
+            import org.SomeOther                    // no violation
+            import org.util.*                       // no violation
+            import static org.SomeUtil.*            // no violation
+            import static org.SomeUtil.doStuff      // no violation
 
             import static java.lang.Math.*;
             import static org.other.OtherUtil.doStuff;
-
-            import java.util.Function   // no violation
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'import java.lang.String;', messageText:MESSAGE],
-                [lineNumber:3, sourceLineText:'import java.net.*;', messageText:MESSAGE],
-                [lineNumber:5, sourceLineText:'import static java.lang.Math.*;', messageText:MESSAGE],
-                [lineNumber:6, sourceLineText:'import static org.other.OtherUtil.doStuff;', messageText:MESSAGE],
+                [lineNumber:2, sourceLineText:'import java.net.*;', messageText:MESSAGE],
+                [lineNumber:3, sourceLineText:'import java.lang.String;', messageText:MESSAGE],
+                [lineNumber:10, sourceLineText:'import static java.lang.Math.*;', messageText:MESSAGE],
+                [lineNumber:11, sourceLineText:'import static org.other.OtherUtil.doStuff;', messageText:MESSAGE],
         )
     }
 

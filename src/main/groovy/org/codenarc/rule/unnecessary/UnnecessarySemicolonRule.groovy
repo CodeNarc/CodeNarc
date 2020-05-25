@@ -87,6 +87,8 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
 
         int lastColumn = statement.lastColumnNumber
         String line = lastSourceLine(statement) + ' '   // to make it easier to extract the final chars
+
+        // Some statements (e.g. "for") have lastColumnNumber in different relative positions
         boolean lastCharIsSemicolon = line[lastColumn - 2] == ';' || line[lastColumn - 1] == ';'
 
         def lineNumber = statement.lastLineNumber
