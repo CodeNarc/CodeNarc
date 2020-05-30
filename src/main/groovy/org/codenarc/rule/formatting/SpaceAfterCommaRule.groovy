@@ -25,6 +25,8 @@ import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.Expression
+import org.codenarc.util.AstUtil
+import org.codenarc.util.GroovyVersion
 
 /**
  * Check that there is at least one space (blank) or whitespace following each comma. That includes checks
@@ -45,6 +47,8 @@ class SpaceAfterCommaRule extends AbstractAstVisitorRule {
 }
 
 class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
+
+    private static final char COMMA = ','
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
@@ -84,23 +88,34 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
         super.visitConstructorCallExpression(call)
     }
 
+    @SuppressWarnings('NestedBlockDepth')
     private void processMethodOrConstructorCall(MethodCall call) {
-        if (isFirstVisit(call)) {
+        if (isFirstVisit(call) && !AstUtil.isFromGeneratedSourceCode(call)) {
             def arguments = call.arguments
             def parameterExpressions = arguments.expressions
-            def lastColumn
 
             parameterExpressions.each { e ->
-                if (lastColumn && e.columnNumber == lastColumn + 1 && !isClosureParameterOutsideParentheses(e, arguments)) {
-                    addViolation(call, "The parameter ${e.text} in the call to method ${call.methodAsString} within class $currentClassName is not preceded by a space or whitespace")
+                if (!isClosureParameterOutsideParentheses(e, arguments)) {
+                    String line = sourceLine(e)
+                    String previousChar = line[e.columnNumber - 2]
+
+                    char ch = previousChar as char
+                    if (ch == COMMA) {
+                        addViolation(call, "The parameter ${e.text} in the call to method ${call.methodAsString} within class $currentClassName is not preceded by a space or whitespace")
+                    }
                 }
-                lastColumn = e.lastColumnNumber
             }
         }
     }
 
     private boolean isClosureParameterOutsideParentheses(Expression e, Expression arguments) {
-        e instanceof ClosureExpression && e.columnNumber > arguments.lastColumnNumber
+        if (GroovyVersion.isGroovyVersion2()) {
+            e instanceof ClosureExpression && e.columnNumber > arguments.lastColumnNumber
+        }
+        // Note: Similar logic is in ClosureAsLastMethodParameterAstVisitor
+        return e instanceof ClosureExpression &&
+                e.lastLineNumber > arguments.lastLineNumber ||
+                (e.lastLineNumber == arguments.lastLineNumber && e.lastColumnNumber > arguments.lastColumnNumber)
     }
 
     @Override

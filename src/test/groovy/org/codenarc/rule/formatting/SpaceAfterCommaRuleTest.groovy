@@ -40,7 +40,25 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
                 def value = calculate(1, 3, 'abc')
                 def method1() {
                     doStuff()
-                    doStuff([1], 2,\t3)
+                    doStuff([1], 2,\t3,
+                        (int)4,  5)
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_MethodCallWithMapExpressions_ProperSpacing_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def template() {
+                    return {
+                        td(getResourceBundleString('htmlReport.summary.allPackages'), class:'allPackages')
+                        td {
+                            a(pathName, href:"#${pathName}")
+                        }
+                    }
                 }
             }
         '''
@@ -241,7 +259,8 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
             class MyClass {
                 def map1 = [:]
                 def map2 = [a:1]
-                def map3 = [a:1, b:2,\tc:x,    d:'123']
+                def map3 = [a:1, b:2,\tc:x,    d:'123',
+                        e:456]
             }
         '''
         assertNoViolations(SOURCE)

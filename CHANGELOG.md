@@ -24,7 +24,8 @@ Updated/Enhanced Rules and Bug Fixes
 
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 
-     - Fixed rules: **ClosureAsLastMethodParameter, BracesForForLoop, ConsecutiveStringConcatenation, TrailingComma**, **Indentation**, **UnnecessarySemicolon**. And also fix several tests.
+     - Fixed rules: **ClosureAsLastMethodParameter**, **BracesForForLoop**, **ConsecutiveStringConcatenation**, 
+       **TrailingComma**, **Indentation**, **UnnecessarySemicolon**, **SpaceAfterComma**. And also fix several tests.
      - `AbstractFieldVisitor` and `AbstractMethodVisitor`: Make `visitEmptyStatement()` public.
      - 'AstUtil'. 
      - `build.gradle`: Add groovy-templates dependency. 
