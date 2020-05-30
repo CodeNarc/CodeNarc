@@ -159,6 +159,29 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
     }
 
     @Test
+    void test_PackageAndImports_NoViolations() {
+        final SOURCE = '''
+            package foo
+
+            import java.io.CharArrayReader
+            import java.nio.file.AccessMode
+            import java.io.Bits
+
+            import java.lang.String
+
+            class A {
+                String firstName
+
+                int a() {
+                    return 1
+                }
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_Class() {
         final SOURCE = '''
             class A {

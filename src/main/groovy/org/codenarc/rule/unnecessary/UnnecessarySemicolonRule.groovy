@@ -66,6 +66,10 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 
     private void checkLastLineForSemicolon(SourceCode sourceCode, List<Violation> violations, AnnotatedNode node) {
         int lineNumber = node.getLastLineNumber()
+        if (lineNumber < 0) {
+            return
+        }
+
         String line = sourceCode.getLines().get(lineNumber - 1) + ' '   // to make it easier to extract the final chars
         int lastColumn = node.lastColumnNumber
         boolean lastCharIsSemicolon = line[lastColumn - 1] == ';'

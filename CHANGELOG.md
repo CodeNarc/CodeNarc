@@ -18,9 +18,9 @@ Updated/Enhanced Rules and Bug Fixes
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
  - #490: **DuplicateStringLiteral** rule: Add `ignoreStringsDelimiter` config property to enable customizing the delimiter for `ignoreStrings`.
- - #493: **Indentation**: Fix indentation for Closure parameter blocks.
- - #499: **MissingBlankLineAfterPackage**: allow for annotations before package name. [Jenn Strater](https://github.com/jlstrater)
- - #505: **UnnecessarySemicolon**: Fix checking for semicolon if followed by a comment.
+ - #493: **Indentation** rule: Fix indentation for Closure parameter blocks.
+ - #499: **MissingBlankLineAfterPackage** rule: allow for annotations before package name. [Jenn Strater](https://github.com/jlstrater)
+ - #505: **UnnecessarySemicolon** rule: Fix checking for semicolon if followed by a comment.
 
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 
@@ -28,6 +28,7 @@ Groovy 3.x Compatibility
      - `AbstractFieldVisitor` and `AbstractMethodVisitor`: Make `visitEmptyStatement()` public.
      - 'AstUtil'. 
      - `build.gradle`: Add groovy-templates dependency. 
+ - #506: **UnnecessarySemicolon** rule: Fix IndexOutOfBoundException for Groovy 3.
 
 Reports
  - #481: Provide JSON report. ([Nicolas Vuillamy](https://github.com/nvuillam))
