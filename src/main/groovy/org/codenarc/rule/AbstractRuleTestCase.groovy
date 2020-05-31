@@ -275,7 +275,7 @@ actual:               $violation.sourceLine
                 messageText.each { assert violation.message.contains(it.toString()), "text does not contain [$it]" }
             }
             else {
-                assert violation.message.contains(messageText), "\nExpected message text: [$messageText]\nFound message text:    [$violation.message]\n"
+                assert violation.message.contains(messageText), "Violation on line $lineNumber\nExpected message text: [$messageText]\nFound message text:    [$violation.message]\n"
             }
         }
     }

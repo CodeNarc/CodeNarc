@@ -21,11 +21,12 @@ Updated/Enhanced Rules and Bug Fixes
  - #493: **Indentation** rule: Fix indentation for Closure parameter blocks.
  - #499: **MissingBlankLineAfterPackage** rule: allow for annotations before package name. [Jenn Strater](https://github.com/jlstrater)
  - #505: **UnnecessarySemicolon** rule: Fix checking for semicolon if followed by a comment.
+ - #507: **SpaceAroundOperator** rule: Fix limitations with checking space around ternary operators.
 
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 
      - Fixed rules: **ClosureAsLastMethodParameter**, **BracesForForLoop**, **ConsecutiveStringConcatenation**, 
-       **TrailingComma**, **Indentation**, **UnnecessarySemicolon**, **SpaceAfterComma**. And also fix several tests.
+       **TrailingComma**, **Indentation**, **UnnecessarySemicolon**, **SpaceAfterComma**, **SpaceAroundOperator**. And also fix several tests.
      - `AbstractFieldVisitor` and `AbstractMethodVisitor`: Make `visitEmptyStatement()` public.
      - 'AstUtil'. 
      - `build.gradle`: Add groovy-templates dependency. 

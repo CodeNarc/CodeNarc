@@ -30,8 +30,6 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Do not check dot ('.') operator. Do not check unary operators (!, +, -, ++, --, ?.).
  * Do not check array ('[') operator.
  *
- * Known limitation: Does not catch violations of certain ternary expressions.
- *
  * @author Chris Mair
  */
 class SpaceAroundOperatorRule extends AbstractAstVisitorRule {
@@ -71,44 +69,23 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private void processTernaryExpression(TernaryExpression expression) {
-        def opColumn = expression.columnNumber
-        def line = sourceLine(expression)
-        def beforeChar = line[opColumn - 2] as char
-
-        // Known limitation: Ternary expression column does not always indicate column of '?'
-        if (opColumn <= leftMostColumn(expression.booleanExpression)) {
-            checkForSpaceAroundTernaryOperator(expression, line)
-            return
+        // The ternary '?' must be on the same line as the boolean expression
+        def booleanExpressionLine = sourceLine(expression.booleanExpression) + ' '  // to make string matching easier if ? is last char
+        def hasWhitespaceAroundQuestionMark = (booleanExpressionLine =~ /\s\?\s/)
+        if (!hasWhitespaceAroundQuestionMark) {
+            addViolationForOperator(expression.booleanExpression, '?', SURROUNDED)
         }
 
-        if (!Character.isWhitespace(beforeChar)) {
-            addViolationForOperator(expression, '?', PRECEDED)
-        }
-        if (opColumn < line.size() && !Character.isWhitespace(line[opColumn] as char)) {
-            addViolationForOperator(expression, '?', FOLLOWED)
-        }
-
-        if (rightMostColumn(expression.trueExpression) + 1 == leftMostColumn(expression.falseExpression)) {
-            addViolationForOperator(expression, ':', SURROUNDED)
+        // The ternary ':' must be on the same line as the true expression
+        def trueExpressionLine = sourceLine(expression.trueExpression) + ' '    // to make string matching easier if : is last char
+        def hasWhitespaceAroundColon = (trueExpressionLine =~ /\s\:\s/)
+        if (!hasWhitespaceAroundColon) {
+            addViolationForOperator(expression.trueExpression, ':', SURROUNDED)
         }
     }
 
     private void addViolationForOperator(ASTNode node, String operatorName, String precededFollowedOrSurrounded) {
         addViolation(node, "The operator ${QUOTE}${operatorName}${QUOTE} within class $currentClassName is not ${precededFollowedOrSurrounded} by a space or whitespace")
-    }
-
-    private void checkForSpaceAroundTernaryOperator(TernaryExpression expression, String line) {
-        if (expression.lineNumber == expression.lastLineNumber) {
-            def hasWhitespaceAroundQuestionMark = (line =~ /\s\?\s/)
-            if (!hasWhitespaceAroundQuestionMark) {
-                addViolationForOperator(expression, '?', SURROUNDED)
-            }
-
-            def hasWhitespaceAroundColon = (line =~ /\s\:\s/)
-            if (!hasWhitespaceAroundColon) {
-                addViolationForOperator(expression, ':', SURROUNDED)
-            }
-        }
     }
 
     private void processElvisExpression(ElvisOperatorExpression expression) {
