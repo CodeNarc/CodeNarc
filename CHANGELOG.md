@@ -26,7 +26,8 @@ Updated/Enhanced Rules and Bug Fixes
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 
      - Fixed rules: **ClosureAsLastMethodParameter**, **BracesForForLoop**, **ConsecutiveStringConcatenation**, 
-       **TrailingComma**, **Indentation**, **UnnecessarySemicolon**, **SpaceAfterComma**, **SpaceAroundOperator**. And also fix several tests.
+       **TrailingComma**, **Indentation**, **UnnecessarySemicolon**, **SpaceAfterComma**, **SpaceAroundOperator**,
+       **AbcMetric**. And also fix several tests.
      - `AbstractFieldVisitor` and `AbstractMethodVisitor`: Make `visitEmptyStatement()` public.
      - 'AstUtil'. 
      - `build.gradle`: Add groovy-templates dependency. 
@@ -47,6 +48,7 @@ Framework and Infrastructure
  - #446: Upgrade to Groovy 2.4.17.
  - #495: Support for Groovy 3.0.
  - #471: Support for Java 11.
+ - #508: Upgrade to GMetrics 1.1.
  - #471: Deprecated: Overriding a rule's name through "codenarc.properties" (`PropertiesFileRuleSetConfigurer`); and doing so can cause problems with JDK versions after 8.
  - #453: **AbstractHtmlReportWriter**: Change Html and SortableHtml reports to get codenarc-logo.png from GitHub instead of Sourceforge.
  - #461: Switch CodeNarc URL to HTTPS (<https://www.codenarc.org>). Update “Home” link on home page, as well as link on web site page footer, build.gradle, README and ReportWriter classes.
