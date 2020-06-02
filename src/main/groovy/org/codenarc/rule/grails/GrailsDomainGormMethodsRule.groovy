@@ -87,7 +87,7 @@ class GrailsDomainGormMethodsRule extends AbstractAstVisitorRule {
     String name = 'GrailsDomainGormMethods'
     int priority = 3
     Class astVisitorClass = GrailsDomainGormMethodsAstVisitor
-    int compilerPhase = Phases.CANONICALIZATION
+    int compilerPhase = Phases.SEMANTIC_ANALYSIS
     List<String> gormStaticMethodsNamesList = DEFAULT_GORM_STATIC_METHOD_NAMES
 
     List<String> getGormStaticMethodsNamesList() {
