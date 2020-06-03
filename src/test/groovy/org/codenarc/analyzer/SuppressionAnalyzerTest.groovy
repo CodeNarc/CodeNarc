@@ -333,10 +333,10 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                     """                                 // 7
 
                 @SuppressWarnings('all')                // 9
-                private String name = 'joe'             // 10
+                private String name1 = 'joe'            // 10
 
                 @SuppressWarnings('CodeNarc')           // 12
-                private String name = 'joe'             // 13
+                private String name2 = 'joe'            // 13
             }                                           // 14
         '''))
 
@@ -369,10 +369,10 @@ class SuppressionAnalyzerTest extends AbstractTestCase {
                     """                                 // 7
 
                 @SuppressWarnings('all')                // 9
-                private String name = 'joe'             // 10
+                private String name1 = 'joe'            // 10
 
                 @SuppressWarnings('CodeNarc')           // 12
-                private String name = 'joe'             // 13
+                private String name2 = 'joe'            // 13
             }
         '''))
 

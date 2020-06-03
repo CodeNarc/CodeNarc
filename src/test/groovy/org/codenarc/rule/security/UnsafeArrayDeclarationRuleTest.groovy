@@ -35,10 +35,10 @@ class UnsafeArrayDeclarationRuleTest extends AbstractRuleTestCase<UnsafeArrayDec
     void testSuccessScenario() {
         final SOURCE = '''
           class MyClass {
-            public static final String myArray = init()
-            public static final def myArray = []
-            static final String[] myArray = init()
-            public static String[] myArray = init()
+            public static final String myArray1 = init()
+            public static final def myArray2 = []
+            static final String[] myArray3 = init()
+            public static String[] myArray4 = init()
           }
         '''
         assertNoViolations(SOURCE)

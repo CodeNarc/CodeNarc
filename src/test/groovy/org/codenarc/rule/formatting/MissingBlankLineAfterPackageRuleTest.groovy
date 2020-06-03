@@ -94,7 +94,7 @@ class MissingBlankLineAfterPackageRuleTest extends AbstractRuleTestCase<MissingB
     void testAnnotationBeforePackage() {
         final SOURCE = '''\
             @RandomPackageAnnotation
-            package com.random.package.of.no.consequence
+            package com.random.pkg.of.no.consequence
 
             class MyClass {
                     def go() { /* ... */ }
@@ -156,7 +156,7 @@ class MissingBlankLineAfterPackageRuleTest extends AbstractRuleTestCase<MissingB
     void testAnnotationBeforePackageAndNoLinesAfterPackage() {
         final SOURCE = '''\
             @RandomPackageAnnotation
-            package com.random.package.of.no.consequence
+            package com.random.pkg.of.no.consequence
             class MyClass {
                     def go() { /* ... */ }
             }
