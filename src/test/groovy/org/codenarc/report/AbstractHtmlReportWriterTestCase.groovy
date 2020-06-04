@@ -48,7 +48,7 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
     protected static final VIOLATION2 = new Violation(rule:new StubRule(name:'RULE2', priority:2), lineNumber:LINE2, message:MESSAGE)
     protected static final VIOLATION3 = new Violation(rule:new StubRule(name:'RULE3', priority:3), lineNumber:LINE3, sourceLine:LONG_LINE, message: 'Other info')
     protected static final VIOLATION4 = new Violation(rule:new StubRule(name:'RULE4', priority:4), lineNumber:LINE1, sourceLine:'if (file) {')
-    protected static final NEW_REPORT_FILE = new File('target/NewReport.html').absolutePath
+    protected static final NEW_REPORT_FILE = createTemporaryReportFile().absolutePath
     protected static final TITLE = 'My Cool Project'
     protected static final String LOGO_FILE = 'http://codenarc.github.io/CodeNarc/images/codenarc-logo.png'
     protected static final String CODENARC_URL = 'https://www.codenarc.org'
@@ -113,6 +113,12 @@ abstract class AbstractHtmlReportWriterTestCase extends AbstractTestCase {
         reportWriter.writeReport(analysisContext, results)
         def actual = new File(filename).text
         assertEquals(normalizeXml(expected), normalizeXml(actual))
+    }
+
+    protected static File createTemporaryReportFile() {
+        def file = File.createTempFile('CodeNarcReport', '.html')
+        file.deleteOnExit()
+        return file
     }
 
     /**
