@@ -10,7 +10,7 @@ CodeNarc is similar to popular static analysis tools such as PMD or Checkstyle. 
 DEPENDENCIES
 
 CodeNarc requires
- - Groovy version 2.1 or later
+ - Groovy version 2.4 or later
  - The [SLF4J](https://www.slf4j.org/) api/implementation jars, accessible on the CLASSPATH.
  - The [GMetrics](http://gmetrics.org) jar, version 1.0 or later -- optional if using some of the size/complexity rules.
 
@@ -27,3 +27,5 @@ When contributing to CodeNarc, run the following command to test on your local m
 ```bash
 ./gradlew check
 ```
+
+It is recommended to use Java 8-11.
