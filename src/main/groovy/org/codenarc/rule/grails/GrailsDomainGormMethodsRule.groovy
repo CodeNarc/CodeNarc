@@ -90,10 +90,6 @@ class GrailsDomainGormMethodsRule extends AbstractAstVisitorRule {
     int compilerPhase = Phases.SEMANTIC_ANALYSIS
     List<String> gormStaticMethodsNamesList = DEFAULT_GORM_STATIC_METHOD_NAMES
 
-    List<String> getGormStaticMethodsNamesList() {
-        return gormStaticMethodsNamesList
-    }
-
     String getGormStaticMethodsNames() {
         return gormStaticMethodsNamesList.join(',')
     }

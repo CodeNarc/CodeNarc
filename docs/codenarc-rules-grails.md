@@ -14,7 +14,12 @@ Database operation should be performed by Data Services instead of calling GORM 
 Using the GORM static and instance methods may lead to spreading the persistence logic across the whole
 application instead of concentrating it into services. It makes difficult to find all the code working
 with the database in case of upgrades to the newer versions of Grails which require all persistence code
-running inside transactions.  
+running inside transactions.
+
+Data Services are available since Grails 3.3 and GORM 6.1.
+
+NOTE: This is a [CodeNarc Enhanced Classpath Rule](./codenarc-enhanced-classpath-rules.html).
+It requires **CodeNarc** to have the application classes being analyzed, as well as any referenced classes, on the classpath.
 
 Example of violations:
 
@@ -58,6 +63,11 @@ Example of valid configuration:
     
     }
 ```
+
+See [GORM Data Services](https://gorm.grails.org/latest/hibernate/manual/index.html#dataServices)
+
+See [Grails GORM Data Services Guide](https://guides.grails.org/grails-gorm-data-services/guide/index.html)
+
 
 ## GrailsDomainHasEquals Rule
 

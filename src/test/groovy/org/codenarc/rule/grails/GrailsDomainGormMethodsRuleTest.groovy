@@ -32,7 +32,7 @@ class GrailsDomainGormMethodsRuleTest extends AbstractRuleTestCase<GrailsDomainG
     }
 
     @Test
-    void test_SomeCondition_NoViolations() {
+    void test_SimilarMethodNamesButNotEntity_NoViolations() {
         final String SOURCE = '''
             class NoEntity {
                 NoEntity save() {
@@ -59,7 +59,7 @@ class GrailsDomainGormMethodsRuleTest extends AbstractRuleTestCase<GrailsDomainG
 
     @Test
     @SuppressWarnings('DuplicateStringLiteral')
-    void test_SomeCondition_Violations() {
+    void test_GormMethodUsedOnEntity_Violations() {
         final String SOURCE = '''
             package org.grails.datastore.gorm
 
@@ -106,6 +106,75 @@ class GrailsDomainGormMethodsRuleTest extends AbstractRuleTestCase<GrailsDomainG
                     sourceLineText: 'firstEntity.save()',
                     messageText: 'Prefer GORM Data Services to GORM instance calls like \'save\'',
             ]
+        )
+    }
+
+    @Test
+    void test_CustomStaticMethodNames_Violations() {
+        rule.gormStaticMethodsNames = 'foo,bar,foobar'
+
+        final String SOURCE = '''
+            package org.grails.datastore.gorm
+
+            trait GormEntity<D> {
+                static <D> List<D> foobar() {
+                    Collections.emptyList()
+                }
+            }
+
+            class SomeEntity implements GormEntity<SomeEntity> { }
+
+            class SomeService {
+
+                void someMethod() {
+                    SomeEntity.foobar()
+                }
+
+            }
+        '''
+        assertViolations(SOURCE,
+                [
+                        lineNumber: 15,
+                        sourceLineText: 'SomeEntity.foobar()',
+                        messageText: 'Prefer GORM Data Services to GORM static calls like \'foobar\'',
+                ]
+        )
+    }
+
+    @Test
+    @SuppressWarnings([
+            'DuplicateMapLiteral',
+            'DuplicateNumberLiteral',
+            'DuplicateStringLiteral',
+    ])
+    void test_CustomStaticMethodNamesList_Violations() {
+        rule.gormStaticMethodsNamesList = ['foo', 'bar', 'foobar']
+
+        final String SOURCE = '''
+            package org.grails.datastore.gorm
+
+            trait GormEntity<D> {
+                static <D> List<D> foobar() {
+                    Collections.emptyList()
+                }
+            }
+
+            class SomeEntity implements GormEntity<SomeEntity> { }
+
+            class SomeService {
+
+                void someMethod() {
+                    SomeEntity.foobar()
+                }
+
+            }
+        '''
+        assertViolations(SOURCE,
+                [
+                        lineNumber: 15,
+                        sourceLineText: 'SomeEntity.foobar()',
+                        messageText: 'Prefer GORM Data Services to GORM static calls like \'foobar\'',
+                ]
         )
     }
 

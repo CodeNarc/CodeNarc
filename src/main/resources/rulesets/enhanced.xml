@@ -11,7 +11,6 @@
         any referenced classes, on the classpath.
     </description>
 
-    <rule class='org.codenarc.rule.grails.GrailsDomainGormMethodsRule'/>
     <rule class='org.codenarc.rule.design.CloneWithoutCloneableRule'/>
     <rule class='org.codenarc.rule.junit.JUnitAssertEqualsConstantActualValueRule'/>
     <rule class='org.codenarc.rule.security.UnsafeImplementationAsMapRule'/>
