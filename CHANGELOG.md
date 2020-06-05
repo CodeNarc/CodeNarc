@@ -1,9 +1,11 @@
+
 # CodeNarc Change Log
 
 TODO: Version 1.6    (?? 2020)
 --------------------------------------
 New Rules
 - #450: **ImplicitReturnStatement** rule (convention) - Checks for non-void methods that are missing an explicit return statement.
+- **GrailsDomainGormMethods** rule (grails) - Database operation should be performed by Data Services instead of calling GORM static and instance methods.
 
 Updated/Enhanced Rules and Bug Fixes
  - #451: **GetterMethodCouldBeProperty** rule: Fix handling of `ignoreMethodsWithOverrideAnnotation` property so it really only ignores @Override methods.
