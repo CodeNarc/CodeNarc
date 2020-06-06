@@ -939,6 +939,19 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_MethodChaining_MultilineClosureParameter() {
+        final SOURCE = '''
+            |buildFileList().collect { item -> item.name }
+            |        .each { name -> println name }
+            |        .each { someName ->
+            |            println someName
+            |        }
+            |        .each { name -> println name }
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_GString_IfStatement() {
         final SOURCE = '''
             |"${if (true) 'content' else ''}"
@@ -947,7 +960,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
-    void firstNonWhitespaceColumn() {
+    void test_firstNonWhitespaceColumn() {
         assert IndentationAstVisitor.firstNonWhitespaceColumn('') == -1
         assert IndentationAstVisitor.firstNonWhitespaceColumn('    ') == -1
         assert IndentationAstVisitor.firstNonWhitespaceColumn('abc') == 1
