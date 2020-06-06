@@ -24,6 +24,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #499: **MissingBlankLineAfterPackage** rule: allow for annotations before package name. [Jenn Strater](https://github.com/jlstrater)
  - #505: **UnnecessarySemicolon** rule: Fix checking for semicolon if followed by a comment.
  - #507: **SpaceAroundOperator** rule: Fix limitations with checking space around ternary operators.
+ - #500: **MissingBlankLineAfterImports** rule: Fix NullPointerException when import is the last line.
 
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 

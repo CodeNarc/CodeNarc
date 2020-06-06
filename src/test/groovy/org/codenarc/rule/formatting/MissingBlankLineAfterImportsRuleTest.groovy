@@ -24,13 +24,13 @@ import org.junit.Test
 class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase<MissingBlankLineAfterImportsRule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 3
         assert rule.name == 'MissingBlankLineAfterImports'
     }
 
     @Test
-    void testSuccessScenario() {
+    void test_BlankLineAfterImports_NoViolation() {
         final SOURCE = '''\
             package org.codenarc
 
@@ -46,8 +46,8 @@ class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase<MissingB
 
     @SuppressWarnings('MissingBlankLineAfterImports')
     @Test
-    void testNoLinesBetweenPackageAndImports() {
-        final SOURCE = '''\
+    void test_NoLinesAfterImports_Violation() {
+        final SOURCE = '''
             package org.codenarc
 
             import org.codenarc.rule.Rule
@@ -55,7 +55,39 @@ class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase<MissingB
             class MyClass {
                     void go() { /* ... */ }
             }'''.stripIndent()
-        assertSingleViolation(SOURCE, 4, 'class MyClass {', 'Missing blank line after imports in file null')
+        assertSingleViolation(SOURCE, 6, 'class MyClass {', 'Missing blank line after imports in file null')
+    }
+
+    @Test
+    void test_PackageInfo_NothingAfter_LastImport_NoViolation() {
+        final SOURCE = '''
+            package com.a.random.pkg.nothing.to.see.here
+
+            import com.very.very.important.pkg
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_PackageInfo_NotABlankLineAfterLastImport_NoViolation() {
+        final SOURCE = '''
+            package com.a.random.pkg.nothing.to.see.here
+
+            import com.very.very.important.pkg
+            // comment
+        '''.stripIndent()
+        assertSingleViolation(SOURCE, 5, '// comment', 'Missing blank line after imports')
+    }
+
+    @Test
+    void test_PackageInfo_NoViolation() {
+        final SOURCE = '''
+            package com.a.random.pkg.nothing.to.see.here
+
+            import com.very.very.important.pkg
+
+        '''.stripIndent()
+        assertNoViolations(SOURCE)
     }
 
     @Override

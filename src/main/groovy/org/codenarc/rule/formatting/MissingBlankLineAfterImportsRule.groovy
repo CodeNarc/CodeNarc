@@ -30,13 +30,14 @@ class MissingBlankLineAfterImportsRule extends AbstractRule {
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
         if (sourceCode.ast?.imports) {
-            // Before Groovy 2.1.3 some ImportNode objects lack a way to get the line number, so just parse the text.
-            // https://jira.codehaus.org/browse/GROOVY-6094
-            List<String> lines = sourceCode.lines
-            int lastImportLineNumber = lines.findLastIndexOf { it.trim().startsWith('import ') }
-            if (lastImportLineNumber > -1 && !lines[lastImportLineNumber + 1].trim().isEmpty()) {
-                violations.add(createViolation(lastImportLineNumber + 1, lines[lastImportLineNumber + 1],
-                    "Missing blank line after imports in file $sourceCode.name"))
+            int lastImportLineNumber = sourceCode.ast.imports*.lastLineNumber.max()
+
+            if (lastImportLineNumber > 0) {
+                String nextLine = sourceCode.line(lastImportLineNumber)
+                if (nextLine && !nextLine.trim().isEmpty()) {
+                    violations.add(createViolation(lastImportLineNumber + 1, nextLine,
+                            "Missing blank line after imports in file $sourceCode.name"))
+                }
             }
         }
     }
