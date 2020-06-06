@@ -16,6 +16,7 @@
 package org.codenarc.rule.formatting
 
 import org.codenarc.rule.AbstractRuleTestCase
+import org.codenarc.util.GroovyVersion
 import org.junit.Test
 
 /**
@@ -26,6 +27,7 @@ import org.junit.Test
 class SpaceAfterOpeningBraceRuleTest extends AbstractRuleTestCase<SpaceAfterOpeningBraceRule> {
 
     private static final String BLOCK_VIOLATION_MESSAGE = 'The opening brace for the block in class None is not followed by a space or whitespace'
+    private static final String CLOSURE_VIOLATION_MESSAGE = 'The opening brace for the closure'
 
     @Test
     void testRuleProperties() {
@@ -324,6 +326,42 @@ c        '''
             }
         '''
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_ClosureWithLambdaSyntax_NoViolations() {
+        final SOURCE = '''
+            def myClosure = () -> println "bla"
+            myClosure = () -> { println "bla" }
+            myClosure = () -> { }
+            myClosure = () -> {
+              println "bla"
+            }
+            myClosure = (def param1) -> { println "bla" }
+            myClosure = param1 -> { println "bla" }
+            myClosure = param1 -> println "bla"
+            myClosure = (def param1, def param2) -> { println "bla" }
+        '''
+
+        if (GroovyVersion.isNotGroovyVersion2()) {
+            assertNoViolations(SOURCE)
+        }
+    }
+
+    @Test
+    void testApplyTo_ClosureWithLambdaSyntax_Violations() {
+        final SOURCE = '''
+            myClosure = () -> {println "aaa" }
+            myClosure = (def param1) -> {println "bbb" }
+            myClosure = param1 -> {println "ccc" }
+        '''
+
+        if (GroovyVersion.isNotGroovyVersion2()) {
+            assertViolations(SOURCE,
+                    [lineNumber:2, sourceLineText:'{println "aaa" }', messageText:CLOSURE_VIOLATION_MESSAGE],
+                    [lineNumber:3, sourceLineText:'{println "bbb" }', messageText:CLOSURE_VIOLATION_MESSAGE],
+                    [lineNumber:4, sourceLineText:'{println "ccc" }', messageText:CLOSURE_VIOLATION_MESSAGE])
+        }
     }
 
     @Override

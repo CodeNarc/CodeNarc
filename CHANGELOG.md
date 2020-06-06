@@ -5,7 +5,7 @@ TODO: Version 1.6    (?? 2020)
 --------------------------------------
 New Rules
 - #450: **ImplicitReturnStatement** rule (convention) - Checks for non-void methods that are missing an explicit return statement.
-- **GrailsDomainGormMethods** rule (grails) - Database operation should be performed by Data Services instead of calling GORM static and instance methods.
+- #515: **GrailsDomainGormMethods** rule (grails) - Database operation should be performed by Data Services instead of calling GORM static and instance methods.
 
 Updated/Enhanced Rules and Bug Fixes
  - #451: **GetterMethodCouldBeProperty** rule: Fix handling of `ignoreMethodsWithOverrideAnnotation` property so it really only ignores @Override methods.
@@ -27,13 +27,14 @@ Updated/Enhanced Rules and Bug Fixes
 
 Groovy 3.x Compatibility
  - #495: Support for Groovy 3.0. 
-     - Fixed rules: **ClosureAsLastMethodParameter**, **BracesForForLoop**, **ConsecutiveStringConcatenation**, 
+     - Fixed rules: **ClosureAsLastMethodParameter**, **BracesForForLoop**, **BracesForIfElse**, **ConsecutiveStringConcatenation**, 
        **TrailingComma**, **Indentation**, **UnnecessarySemicolon**, **SpaceAfterComma**, **SpaceAroundOperator**,
-       **AbcMetric**. And also fix several tests.
+       **SpaceAfterOpeningBrace**, **AbcMetric**. And also fix several tests.
      - `AbstractFieldVisitor` and `AbstractMethodVisitor`: Make `visitEmptyStatement()` public.
      - 'AstUtil'. 
      - `build.gradle`: Add groovy-templates dependency. 
  - #506: **UnnecessarySemicolon** rule: Fix IndexOutOfBoundException for Groovy 3.
+ - #511: **SpaceAfterOpeningBrace** rule: Fix closures using lambda syntax for Groovy 3.
 
 Reports
  - #481: Provide JSON report. ([Nicolas Vuillamy](https://github.com/nvuillam))

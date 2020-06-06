@@ -83,11 +83,29 @@ class SpaceAfterOpeningBraceAstVisitor extends AbstractSpaceAroundBraceAstVisito
         if (isFirstVisit(expression)) {
             def line = sourceLineOrEmpty(expression)
             def startCol = expression.columnNumber
-            if (isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
+
+            boolean ignore = false
+
+            if (isLambdaExpression(expression)) {
+                int indexOfOpeningBrace = line.indexOf('{')
+
+                if (indexOfOpeningBrace == -1) { // Lambdas without parenthesis
+                    ignore = true
+                }
+                else {
+                    startCol = indexOfOpeningBrace + 1
+                }
+            }
+
+            if (!ignore && isNotWhitespace(line, startCol + 1) && checkIsEmptyBlock(line, startCol + 1)) {
                 addOpeningBraceViolation(expression, 'closure')
             }
         }
         super.visitClosureExpression(expression)
+    }
+
+    private boolean isLambdaExpression(ClosureExpression closureExpression) {
+        return closureExpression.getClass().name == 'org.codehaus.groovy.ast.expr.LambdaExpression'
     }
 
     @Override
