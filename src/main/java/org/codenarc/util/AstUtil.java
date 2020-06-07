@@ -1117,6 +1117,11 @@ public class AstUtil {
                         return lastAnnotation.getLastLineNumber();
                     }
                     // Otherwise fall through to use the next line
+                } else if (node instanceof FieldNode) {
+                    if (rawLine.contains(((FieldNode) node).getName())) {
+                        return lastAnnotation.getLastLineNumber();
+                    }
+                    // Otherwise fall through to use the next line
                 } else {
                     return lastAnnotation.getLastLineNumber();
                 }
