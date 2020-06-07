@@ -15,6 +15,7 @@
  */
 package org.codenarc.util
 
+import org.codehaus.groovy.ast.ConstructorNode
 import org.slf4j.LoggerFactory
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.ClassCodeVisitorSupport
@@ -86,12 +87,25 @@ class AstUtilTest extends AbstractTestCase {
                 @Field
                 final Map var8 = new HashMap<String, String>(System.getenv())
             }
+
+            @SuppressWarnings('bad') // comment
+            void methodWithAnnotationAndComment() { }
+
+            @SuppressWarnings
+            OtherClass() { }    // constructor
         }
 
         @Ignore
         // Some comment
         @SuppressWarnings('Indentation')
         class SomeAnnotatedClass {
+
+            @SuppressWarnings
+            @Other('abc') // comment
+            int annotatedField1
+
+            @SuppressWarnings
+            SomeAnnotatedClass() { }    // constructor
         }
 
         // outside of class -- script
@@ -102,11 +116,11 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void test_findClassDeclarationLineNumber() {
-        def nonAnnotatedClassNode = visitor.classNodes.find { classNode -> classNode.name == 'MyClass' }
+        def nonAnnotatedClassNode = classNamed('MyClass')
         assert AstUtil.findClassDeclarationLineNumber(nonAnnotatedClassNode, sourceCode) == 2
 
-        def annotatedClassNode = visitor.classNodes.find { classNode -> classNode.name == 'SomeAnnotatedClass' }
-        assert AstUtil.findClassDeclarationLineNumber(annotatedClassNode, sourceCode) == 51
+        def annotatedClassNode = classNamed('SomeAnnotatedClass')
+        assert AstUtil.findClassDeclarationLineNumber(annotatedClassNode, sourceCode) == 57
     }
 
     @Test
@@ -125,27 +139,27 @@ class AstUtilTest extends AbstractTestCase {
     void testIsFromGeneratedSourceCode() {
         def scriptClassNode = visitor.classNodes.find { classNode -> classNode.name == 'None' }
         assert AstUtil.isFromGeneratedSourceCode(scriptClassNode)
-        assert !AstUtil.isFromGeneratedSourceCode(methodNamed('print'))
+        assert !AstUtil.isFromGeneratedSourceCode(methodCallForMethodNamed('print'))
     }
 
     @Test
     void testGetNodeTest() {
-        assert AstUtil.getNodeText(methodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
-        assert AstUtil.getNodeText(methodNamed('multilineMethodCall'), sourceCode) == 'multilineMethodCall(1,'
+        assert AstUtil.getNodeText(methodCallForMethodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
+        assert AstUtil.getNodeText(methodCallForMethodNamed('multilineMethodCall'), sourceCode) == 'multilineMethodCall(1,'
     }
 
     @Test
     void testGetLastLineOfNodeText() {
-        assert AstUtil.getLastLineOfNodeText(methodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
-        assert AstUtil.getLastLineOfNodeText(methodNamed('multilineMethodCall'), sourceCode).trim() == '2, 3)'
+        assert AstUtil.getLastLineOfNodeText(methodCallForMethodNamed('methodCallWithinEnum'), sourceCode) == "methodCallWithinEnum(true, 'abc', 123)"
+        assert AstUtil.getLastLineOfNodeText(methodCallForMethodNamed('multilineMethodCall'), sourceCode).trim() == '2, 3)'
     }
 
     @Test
     void testGetDeclaration() {
-        def node = visitor.fieldNodes.find { n -> n.name == 'myIntField' }
+        def node = fieldNamed('myIntField')
         assert AstUtil.getDeclaration(node, sourceCode).trim() == 'int myIntField = 45'
 
-        node = visitor.fieldNodes.find { n -> n.name == 'myStringField' }
+        node = fieldNamed('myStringField')
         assert AstUtil.getDeclaration(node, sourceCode).trim() == 'String myStringField // comment'
 
         node = visitor.methodNodes['otherMethod']
@@ -153,22 +167,46 @@ class AstUtilTest extends AbstractTestCase {
     }
 
     @Test
+    void test_findFirstNonAnnotationLine() {
+        // Methods
+        assert AstUtil.findFirstNonAnnotationLine(methodNamed('otherMethod'), sourceCode) == 3
+        assert AstUtil.findFirstNonAnnotationLine(methodNamed('setUp'), sourceCode) == 15
+        assert AstUtil.findFirstNonAnnotationLine(methodNamed('twoAnnotationsMethod'), sourceCode) == 16
+        assert AstUtil.findFirstNonAnnotationLine(methodNamed('someMethod'), sourceCode) == 28
+        assert AstUtil.findFirstNonAnnotationLine(methodNamed('methodWithAnnotationAndComment'), sourceCode) == 48
+
+        // Constructor
+        log(visitor.constructors)
+        def constructor = visitor.constructors.find { constructorNode -> constructorNode.declaringClass.name == 'OtherClass' }
+        assert AstUtil.findFirstNonAnnotationLine(constructor, sourceCode) == 51
+
+        // Classes
+        assert AstUtil.findFirstNonAnnotationLine(classNamed('MyClass'), sourceCode) == 2
+        assert AstUtil.findFirstNonAnnotationLine(classNamed('OtherClass'), sourceCode) == 24
+        assert AstUtil.findFirstNonAnnotationLine(classNamed('SomeAnnotatedClass'), sourceCode) == 57
+
+        // Fields
+        assert AstUtil.findFirstNonAnnotationLine(fieldNamed('myIntField'), sourceCode) == 25
+        assert AstUtil.findFirstNonAnnotationLine(fieldNamed('annotatedField1'), sourceCode) == 61
+    }
+
+    @Test
     void testGetMethodArguments_ConstructorWithinEnum() {
-        def methodCall = methodNamed('methodCallWithinEnum')
+        def methodCall = methodCallForMethodNamed('methodCallWithinEnum')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 3
     }
 
     @Test
     void testGetMethodArguments_NoArgument() {
-        def methodCall = methodNamed('print')
+        def methodCall = methodCallForMethodNamed('print')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 0
     }
 
     @Test
     void testGetMethodArguments_SingleArgument() {
-        def methodCall = methodNamed('stringMethodName')
+        def methodCall = methodCallForMethodNamed('stringMethodName')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 1
         assert args[0].value == 123
@@ -176,7 +214,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testGetMethodArguments_NamedArguments() {
-        def methodCall = methodNamed('delete')
+        def methodCall = methodCallForMethodNamed('delete')
         def args = AstUtil.getMethodArguments(methodCall)
         assert args.size() == 1
         assert args[0].mapEntryExpressions[1].keyExpression.value == 'failonerror'
@@ -225,7 +263,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodCall_StringLiteralMethodName() {
-        def methodCall = methodNamed('stringMethodName')
+        def methodCall = methodCallForMethodNamed('stringMethodName')
         assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 1)
         assert !AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName', 2)
         assert AstUtil.isMethodCall(methodCall, 'this', 'stringMethodName')
@@ -247,7 +285,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testIsMethodNamed() {
-        def methodCall = methodNamed('print')
+        def methodCall = methodCallForMethodNamed('print')
         assert AstUtil.isMethodNamed(methodCall, 'print')
         assert !AstUtil.isMethodNamed(methodCall, 'other')
     }
@@ -312,9 +350,7 @@ class AstUtilTest extends AbstractTestCase {
 
     @Test
     void testGetVariableExpressions_SingleDeclaration() {
-        log("declarationExpressions=${visitor.declarationExpressions}")
         def variableExpressions = AstUtil.getVariableExpressions(visitor.declarationExpressions[0])
-        log("variableExpressions=$variableExpressions")
         assert variableExpressions.size() == 1
         assert variableExpressions.name == ['myVariable']
     }
@@ -355,7 +391,19 @@ class AstUtilTest extends AbstractTestCase {
             st.expression.methodAsString == methodName }
     }
 
-    private MethodCallExpression methodNamed(String name) {
+    private ClassNode classNamed(String name) {
+        return visitor.classNodes.find { classNode -> classNode.name == name }
+    }
+
+    private FieldNode fieldNamed(String name) {
+        return visitor.fieldNodes.find { fieldNode -> fieldNode.name == name }
+    }
+
+    private MethodNode methodNamed(String name) {
+        return visitor.methodNodes[name]
+    }
+
+    private MethodCallExpression methodCallForMethodNamed(String name) {
         def methodCall = visitor.methodCallExpressions.find { mc ->
             if (mc.method instanceof GStringExpression) {
                 return mc.text.startsWith(name)
@@ -375,6 +423,7 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     static final LOG = LoggerFactory.getLogger(AstUtilTestVisitor)
     def methodNodes = [:]
     def methodCallExpressions = []
+    def constructors = []
     def statements = []
     def declarationExpressions = []
     def classNodes = []
@@ -390,6 +439,12 @@ class AstUtilTestVisitor extends ClassCodeVisitorSupport {
     void visitMethod(MethodNode methodNode) {
         methodNodes[methodNode.name] = methodNode
         super.visitMethod(methodNode)
+    }
+
+    @Override
+    void visitConstructor(ConstructorNode node) {
+        this.constructors << node
+        super.visitConstructor(node)
     }
 
     @Override

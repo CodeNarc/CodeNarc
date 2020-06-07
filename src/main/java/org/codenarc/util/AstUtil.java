@@ -1112,9 +1112,16 @@ public class AstUtil {
             // is the annotation the last thing on the line?
             if (rawLine.length() > lastAnnotation.getLastColumnNumber()) {
                 // no it is not
-                return lastAnnotation.getLastLineNumber();
+                if (node.getClass() == MethodNode.class) {      // methods, but not constructors (since their name is different)
+                    if (rawLine.contains(((MethodNode) node).getName())) {
+                        return lastAnnotation.getLastLineNumber();
+                    }
+                    // Otherwise fall through to use the next line
+                } else {
+                    return lastAnnotation.getLastLineNumber();
+                }
             }
-            // yes it is the last thing, return the next thing
+            // yes it is the last thing on the line; return the next line
             return lastAnnotation.getLastLineNumber() + 1;
         }
         return node.getLineNumber();

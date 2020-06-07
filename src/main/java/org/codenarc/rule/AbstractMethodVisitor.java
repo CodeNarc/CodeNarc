@@ -56,7 +56,7 @@ public class AbstractMethodVisitor extends ClassCodeVisitorSupport implements As
     protected void addViolation(ASTNode node, String message) {
         if (node.getLineNumber() >= 0) {
             int lineNumber = AstUtil.findFirstNonAnnotationLine(node, sourceCode);
-            String sourceLine = sourceCode.line(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1);
+            String sourceLine = sourceCode.line(lineNumber - 1);
             Violation violation = new Violation();
             violation.setRule(rule);
             violation.setLineNumber(lineNumber);
