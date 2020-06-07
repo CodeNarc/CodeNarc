@@ -31,10 +31,12 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
     private static final HTML = 'html'
     private static final SORTABLE = 'sortable'
     private static final TEXT = 'text'
+    private static final JSON = 'json'
     private static final HTML_REPORT_FILE = 'target/AntBuilderTestHtmlReport.html'
     private static final SORTABLE_REPORT_FILE = 'target/AntBuilderTestSortableHtmlReport.html'
     private static final XML_REPORT_FILE = 'target/AntBuilderTestXmlReport.xml'
     private static final TEXT_REPORT_FILE = 'target/AntBuilderTestTextReport.txt'
+    private static final JSON_REPORT_FILE = 'target/AntBuilderTestJsonReport.json'
     private static final TITLE = 'Sample Project'
     private static final RULESET_FILES = [
             'rulesets/basic.xml',
@@ -65,6 +67,10 @@ class CodeNarc_AntBuilderTest extends AbstractTestCase {
             report(type:XML) {
                 option(name:'title', value:TITLE)
                 option(name:'outputFile', value:XML_REPORT_FILE)
+            }
+            report(type:JSON) {
+                option(name:'title', value:TITLE)
+                option(name:'outputFile', value:JSON_REPORT_FILE)
             }
             report(type:TEXT) {
                 option(name:'title', value:TITLE)
