@@ -100,10 +100,12 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
 
         int classStartLine = AstUtil.findFirstNonAnnotationLine(classNode, sourceCode)
 
-        String nextLine = getLine(classStartLine + 1)
-        if (nextLine.trim()) {
-            addViolation('Class does not start with a blank line after the opening brace', classStartLine + 1)
-            return
+        if (getLine(classStartLine).contains(classNode.nameWithoutPackage)) {
+            String nextLine = getLine(classStartLine + 1)
+            if (nextLine.trim()) {
+                addViolation('Class does not start with a blank line after the opening brace', classStartLine + 1)
+                return
+            }
         }
 
         classNode.fields.each { fieldNode -> checkNonEmptyLineNumber(classStartLine, fieldNode.lineNumber) }

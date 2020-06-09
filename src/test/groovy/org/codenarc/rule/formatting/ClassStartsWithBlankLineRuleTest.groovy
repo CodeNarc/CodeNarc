@@ -50,9 +50,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -65,9 +63,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -82,9 +78,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = false
-
         assertSingleViolation(SOURCE, 3, '')
     }
 
@@ -97,9 +91,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = false
-
         assertSingleViolation(SOURCE, 3, '')
     }
 
@@ -113,9 +105,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }        }
         '''
-
         rule.blankLineRequired = true
-
         assertSingleViolation(SOURCE, 3, '{  int a')
     }
 
@@ -128,9 +118,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             void hi()
          }
         '''
-
         rule.blankLineRequired = true
-
         assertSingleViolation(SOURCE, 3, '// some comment')
     }
 
@@ -141,9 +129,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             void hi()
          }
         '''
-
         rule.blankLineRequired = true
-
         assertSingleViolation(SOURCE, 3, 'void hi()')
     }
 
@@ -156,9 +142,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }        }
         '''
-
         rule.blankLineRequired = false
-
         assertNoViolations(SOURCE)
     }
 
@@ -175,7 +159,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = false
-
         assertSingleViolation(SOURCE, 3, '')
     }
 
@@ -197,7 +180,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -219,7 +201,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = false
-
         assertViolations(SOURCE,
                 [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
                 [lineNumber: 9, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
@@ -243,7 +224,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = true
-
         assertViolations(SOURCE,
                 [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
                 [lineNumber: 10, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
@@ -267,7 +247,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = false
-
         assertNoViolations(SOURCE)
     }
 
@@ -292,7 +271,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -315,7 +293,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = false
-
         assertViolations(SOURCE,
                 [lineNumber: 3, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED],
                 [lineNumber: 8, sourceLineText: '', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
@@ -339,7 +316,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = true
-
         assertViolations(SOURCE,
                 [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
                 [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
@@ -366,7 +342,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -387,7 +362,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = false
-
         assertNoViolations(SOURCE)
     }
 
@@ -409,7 +383,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = true
-
         assertViolations(SOURCE,
                 [lineNumber: 3, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE],
                 [lineNumber: 9, sourceLineText: 'int a', messageText: VIOLATION_MISSING_BLANK_LINE])
@@ -436,7 +409,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }
         '''
         rule.blankLineRequired = false
-
         assertViolations(SOURCE,
                 [lineNumber: 9, sourceLineText: ' ', messageText: VIOLATION_BLANK_LINE_NOT_ALLOWED])
     }
@@ -451,7 +423,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = true
         rule.ignoreSingleLineClasses = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -465,7 +436,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
         '''
         rule.blankLineRequired = false
         rule.ignoreSingleLineClasses = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -478,10 +448,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             class Doe extends Bar<String> { }
             abstract class John  { abstract void a() }
         '''
-
         rule.ignoreSingleLineClasses = false
         rule.blankLineRequired = true
-
         assertViolations(SOURCE,
                 [lineNumber: 3, sourceLineText: 'class Foo extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
                 [lineNumber: 5, sourceLineText: 'class Doe extends Bar<String> { }', messageText: 'Single line classes are not allowed'],
@@ -497,10 +465,8 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             class Doe extends Bar<String> { }
             abstract class John  { abstract void a() }
         '''
-
         rule.ignoreSingleLineClasses = false
         rule.blankLineRequired = false
-
         assertNoViolations(SOURCE)
     }
 
@@ -519,7 +485,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }            
         '''
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -535,7 +500,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }            
         '''
         rule.blankLineRequired = false
-
         assertNoViolations(SOURCE)
     }
 
@@ -554,7 +518,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
             }            
         '''
         rule.blankLineRequired = true
-
         assertSingleViolation(SOURCE, 5, '@Override')
     }
 
@@ -579,7 +542,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
     @Test
     void testNoViolationsForCodeThatOnlyContainsASemicolon() {
         final String SOURCE = ';'
-
         assertNoViolations(SOURCE)
     }
 
@@ -596,7 +558,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
                 }
             }
         '''
-
         assertNoViolations(SOURCE)
     }
 
@@ -618,7 +579,6 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
                 }
             }            
         '''
-
         rule.ignoreInnerClasses = true
         assertNoViolations(SOURCE)
     }
@@ -636,9 +596,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -654,9 +612,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertSingleViolation(SOURCE, 4, '')
     }
 
@@ -673,9 +629,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -691,9 +645,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertSingleViolation(SOURCE, 4, '')
     }
 
@@ -709,9 +661,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -727,9 +677,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -745,9 +693,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertNoViolations(SOURCE)
     }
 
@@ -763,9 +709,7 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = false
-
         assertSingleViolation(SOURCE, 3, '')
     }
 
@@ -780,10 +724,20 @@ class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsW
 
             }
         '''
-
         rule.blankLineRequired = true
-
         assertSingleViolation(SOURCE, 3, 'int a')
+    }
+
+    @Test
+    void test_Annotations_FollowedByBlankLine() {
+        final String SOURCE = '''
+            @Path("/myService")
+            @Produces(MediaType.APPLICATION_XML)
+             
+            class MyService {
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override
