@@ -108,6 +108,26 @@ class BracesForForLoopRuleTest extends AbstractRuleTestCase<BracesForForLoopRule
         assertNoViolations(SOURCE)
     }
 
+    @Test
+    void testClassicForLoop_NoViolations() {
+        final SOURCE = '''
+            for (Iterator iter = searchResults.iterator(); iter.hasNext(); iter.next()) {
+                println iter
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testClassicForLoop_NoIncrementExpression_NoViolations() {
+        final SOURCE = '''
+            for (Iterator iter = searchResults.iterator(); iter.hasNext();) {
+                println iter.next()
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected BracesForForLoopRule createRule() {
         new BracesForForLoopRule()

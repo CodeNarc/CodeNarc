@@ -28,10 +28,12 @@ import org.codenarc.util.AstUtil
  * @author Hamlet D'Arcy
   */
 class BracesForForLoopRule extends AbstractAstVisitorRule {
+
     String name = 'BracesForForLoop'
     int priority = 2
     boolean sameLine = true
     Class astVisitorClass = BracesForForLoopAstVisitor
+
 }
 
 class BracesForForLoopAstVisitor extends AbstractAstVisitor {
@@ -43,7 +45,10 @@ class BracesForForLoopAstVisitor extends AbstractAstVisitor {
 
             // Groovy 3.x
             if (node.collectionExpression instanceof ClosureListExpression && node.collectionExpression.expressions) {
-                loopExpressionLastLine = node.collectionExpression.expressions.last().lastLineNumber
+                int lastLine = node.collectionExpression.expressions.last().lastLineNumber
+                if (lastLine != -1) {
+                    loopExpressionLastLine = lastLine
+                }
             }
 
             boolean isBraceOnSameLine = node.loopBlock.lineNumber == loopExpressionLastLine
