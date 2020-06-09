@@ -180,7 +180,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             assertViolations(SOURCE,
                     [lineNumber: 5, sourceLineText: '@Component', messageText: 'The class MyOtherClass'],
                     [lineNumber: 16, sourceLineText: '@Package void two()', messageText: 'The method two in class TestClass'],
-                    [lineNumber: 21, sourceLineText: '@SuppressWarnings', messageText: 'The field name in class TestClass'])
+                    [lineNumber: 22, sourceLineText: 'private String name', messageText: 'The field name in class TestClass'])
         }
     }
 
