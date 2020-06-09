@@ -69,17 +69,17 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private void processTernaryExpression(TernaryExpression expression) {
-        // The ternary '?' must be on the same line as the boolean expression
+        // The ternary '?' is typically on the same line as the boolean expression
         def booleanExpressionLine = sourceLine(expression.booleanExpression) + ' '  // to make string matching easier if ? is last char
         def hasWhitespaceAroundQuestionMark = (booleanExpressionLine =~ /\s\?\s/)
-        if (!hasWhitespaceAroundQuestionMark) {
+        if (!hasWhitespaceAroundQuestionMark && booleanExpressionLine.contains('?')) {
             addViolationForOperator(expression.booleanExpression, '?', SURROUNDED)
         }
 
-        // The ternary ':' must be on the same line as the true expression
+        // The ternary ':' is typically on the same line as the true expression
         def trueExpressionLine = sourceLine(expression.trueExpression) + ' '    // to make string matching easier if : is last char
         def hasWhitespaceAroundColon = (trueExpressionLine =~ /\s\:\s/)
-        if (!hasWhitespaceAroundColon) {
+        if (!hasWhitespaceAroundColon && trueExpressionLine.contains(':')) {
             addViolationForOperator(expression.trueExpression, ':', SURROUNDED)
         }
     }
