@@ -41,15 +41,7 @@ class BracesForForLoopAstVisitor extends AbstractAstVisitor {
     @Override
     void visitForLoop(ForStatement node) {
         if (AstUtil.isBlock(node.loopBlock)) {
-            int loopExpressionLastLine = node.collectionExpression.lastLineNumber
-
-            // Groovy 3.x
-            if (node.collectionExpression instanceof ClosureListExpression && node.collectionExpression.expressions) {
-                int lastLine = node.collectionExpression.expressions.last().lastLineNumber
-                if (lastLine != -1) {
-                    loopExpressionLastLine = lastLine
-                }
-            }
+            int loopExpressionLastLine = findLastLineOfForExpressions(node)
 
             boolean isBraceOnSameLine = node.loopBlock.lineNumber == loopExpressionLastLine
             if (rule.sameLine) {
@@ -64,4 +56,20 @@ class BracesForForLoopAstVisitor extends AbstractAstVisitor {
         }
         super.visitForLoop(node)
     }
+
+    private int findLastLineOfForExpressions(ForStatement node) {
+        int loopExpressionLastLine = node.lineNumber
+
+        // Groovy 3.x
+        if (node.collectionExpression instanceof ClosureListExpression) {
+            node.collectionExpression.expressions.each { e ->
+                if (e.lastLineNumber > loopExpressionLastLine) {
+                    loopExpressionLastLine = e.lastLineNumber
+                }
+            }
+        }
+
+        return loopExpressionLastLine
+    }
+
 }
