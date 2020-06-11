@@ -111,6 +111,7 @@ ruleset {
     HashtableIsObsolete 
     IfStatementCouldBeTernary 
     ImplicitClosureParameter 
+    ImplicitReturnStatement 
     InvertedCondition 
     InvertedIfElse 
     LongLiteralWithLowerCaseL 
@@ -234,6 +235,7 @@ ruleset {
     StatelessClass 
     
     // rulesets/grails.xml
+    GrailsDomainGormMethods 
     GrailsDomainHasEquals 
     GrailsDomainHasToString 
     GrailsDomainReservedSqlKeywordName 

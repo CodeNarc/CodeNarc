@@ -1,7 +1,7 @@
 
 # CodeNarc Change Log
 
-TODO: Version 1.6    (?? 2020)
+Version 1.6    (Jun 2020)
 --------------------------------------
 New Rules
 - #450: **ImplicitReturnStatement** rule (convention) - Checks for non-void methods that are missing an explicit return statement.
