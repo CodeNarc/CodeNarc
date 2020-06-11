@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://www.codenarc.org",
-        "version": "1.5"
+        "version": "1.6"
     },
     "report": {
-        "timestamp": "Jun 7, 2020 9:49:42 AM"
+        "timestamp": "Jun 11, 2020 5:48:32 PM"
     },
     "project": {
         "title": "Sample Project",
@@ -514,7 +514,7 @@
                             "priority": 2,
                             "lineNumber": 27,
                             "sourceLine": "class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {",
-                            "message": "Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 42 methods"
+                            "message": "Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 43 methods"
                         }
                     ]
                 },
