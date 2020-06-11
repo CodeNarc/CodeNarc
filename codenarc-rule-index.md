@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 383 rules.
+**CodeNarc** includes 385 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -112,6 +112,7 @@ title: CodeNarc - Rule Index
   * [HashtableIsObsolete](./codenarc-rules-convention.html#hashtableisobsolete-rule)  
   * [IfStatementCouldBeTernary](./codenarc-rules-convention.html#ifstatementcouldbeternary-rule)  
   * [ImplicitClosureParameter](./codenarc-rules-convention.html#implicitclosureparameter-rule)  
+  * [ImplicitReturnStatement](./codenarc-rules-convention.html#implicitreturnstatement-rule)  
   * [InvertedCondition](./codenarc-rules-convention.html#invertedcondition-rule)  
   * [InvertedIfElse](./codenarc-rules-convention.html#invertedifelse-rule)  
   * [LongLiteralWithLowerCaseL](./codenarc-rules-convention.html#longliteralwithlowercasel-rule)  
@@ -235,6 +236,7 @@ title: CodeNarc - Rule Index
   * [StatelessClass](./codenarc-rules-generic.html#statelessclass-rule)  
 
 ## [Grails](./codenarc-rules-grails.html)
+  * [GrailsDomainGormMethods](./codenarc-rules-grails.html#grailsdomaingormmethods-rule)  
   * [GrailsDomainHasEquals](./codenarc-rules-grails.html#grailsdomainhasequals-rule)  
   * [GrailsDomainHasToString](./codenarc-rules-grails.html#grailsdomainhastostring-rule)  
   * [GrailsDomainReservedSqlKeywordName](./codenarc-rules-grails.html#grailsdomainreservedsqlkeywordname-rule)  
@@ -435,8 +437,4 @@ title: CodeNarc - Rule Index
   * [UnusedPrivateMethod](./codenarc-rules-unused.html#unusedprivatemethod-rule)  
   * [UnusedPrivateMethodParameter](./codenarc-rules-unused.html#unusedprivatemethodparameter-rule)  
   * [UnusedVariable](./codenarc-rules-unused.html#unusedvariable-rule)  
-
-
-
-
 
