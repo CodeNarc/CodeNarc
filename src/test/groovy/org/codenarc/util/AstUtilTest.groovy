@@ -66,10 +66,10 @@ class AstUtilTest extends AbstractTestCase {
             }
         }
         class OtherClass {
-            int myIntField = 45
+            int myIntField = 45 /*111*/
             String myStringField // comment
 
-            def someMethod() {
+    /*999*/ def someMethod() {
                 String var1 = 'abc'
                 final int var2 = 99
                 final var3 = 'x'
@@ -157,7 +157,7 @@ class AstUtilTest extends AbstractTestCase {
     @Test
     void testGetDeclaration() {
         def node = fieldNamed('myIntField')
-        assert AstUtil.getDeclaration(node, sourceCode).trim() == 'int myIntField = 45'
+        assert AstUtil.getDeclaration(node, sourceCode).trim() == 'int myIntField = 45 /*111*/'
 
         node = fieldNamed('myStringField')
         assert AstUtil.getDeclaration(node, sourceCode).trim() == 'String myStringField // comment'
@@ -370,6 +370,26 @@ class AstUtilTest extends AbstractTestCase {
             names += AstUtil.getVariableExpressions(declarationExpression).name
         }
         assert names.contains('name1') && names.contains('name2')
+    }
+
+    @Test
+    void getSourceBetweenNodes() {
+        def fieldNode1 = fieldNamed('myIntField')
+        def methodNode = methodNamed('someMethod')
+        String sourceBetween1 = AstUtil.getSourceBetweenNodes(fieldNode1, methodNode, sourceCode)
+        log("sourceBetween1=$sourceBetween1")
+        if (GroovyVersion.isNotGroovyVersion2()) {
+            assert sourceBetween1.contains('/*111*/')
+        }
+        assert sourceBetween1.contains('String myStringField')
+        assert sourceBetween1.contains('/*999*/')
+
+        def class1 = classNamed('MyClass')
+        def class2 = classNamed('OtherClass')
+        String sourceBetween2 = AstUtil.getSourceBetweenNodes(class1, class2, sourceCode)
+        log("sourceBetween2=$sourceBetween2")
+        assert sourceBetween2.contains('enum MyEnum')
+        assert sourceBetween2.contains('println methodCallWithinEnum')
     }
 
     @Before

@@ -22,6 +22,7 @@ import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.ast.expr.*
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Check that there is at least one space (blank) or whitespace around each binary operator,
@@ -69,17 +70,15 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     }
 
     private void processTernaryExpression(TernaryExpression expression) {
-        // The ternary '?' is typically on the same line as the boolean expression
-        def booleanExpressionLine = sourceLine(expression.booleanExpression) + ' '  // to make string matching easier if ? is last char
-        def hasWhitespaceAroundQuestionMark = (booleanExpressionLine =~ /\s\?\s/)
-        if (!hasWhitespaceAroundQuestionMark && booleanExpressionLine.contains('?')) {
+        def betweenBooleanAndTrue = AstUtil.getSourceBetweenNodes(expression.booleanExpression, expression.trueExpression, sourceCode)
+        def hasWhitespaceAroundQuestionMark = (betweenBooleanAndTrue =~ /\s\?\s/)
+        if (!hasWhitespaceAroundQuestionMark) {
             addViolationForOperator(expression.booleanExpression, '?', SURROUNDED)
         }
 
-        // The ternary ':' is typically on the same line as the true expression
-        def trueExpressionLine = sourceLine(expression.trueExpression) + ' '    // to make string matching easier if : is last char
-        def hasWhitespaceAroundColon = (trueExpressionLine =~ /\s\:\s/)
-        if (!hasWhitespaceAroundColon && trueExpressionLine.contains(':')) {
+        def betweenTrueAndFalse = AstUtil.getSourceBetweenNodes(expression.trueExpression, expression.falseExpression, sourceCode)
+        def hasWhitespaceAroundColon = (betweenTrueAndFalse =~ /\s\:\s/)
+        if (!hasWhitespaceAroundColon) {
             addViolationForOperator(expression.trueExpression, ':', SURROUNDED)
         }
     }
@@ -91,9 +90,8 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
     private void processElvisExpression(ElvisOperatorExpression expression) {
         String line = sourceCode.lines[expression.lineNumber - 1]
 
-        /* for assert statements expression.columnNumber is not where the elvis operator "?:" starts, but where the
-         * assertion starts. To handle this problem, look for the first instance of "?:" starting from the columnNumber
-         */
+        // For assert statements expression.columnNumber is not where the elvis operator "?:" starts, but where the
+        // assertion starts. To handle this problem, look for the first instance of "?:" starting from the columnNumber
         int index = line.indexOf('?:', expression.columnNumber - 1)
 
         if (index >= 0) {

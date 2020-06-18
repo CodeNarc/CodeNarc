@@ -141,6 +141,38 @@ class SpaceAroundOperatorRuleTest extends AbstractRuleTestCase<SpaceAroundOperat
            def y = alert.isInternal()
                     ? LOGO_URL_1
                     : LOGO_URL_2
+
+           def z = alert.isInternal() ?
+                    LOGO_URL_1 :
+                    LOGO_URL_2
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_TernaryOperator_SeparateLines_TrueExpressionContainsQuestionMark() {
+        final SOURCE = '''
+           def x = (condition
+              ? "a?b"
+              : 'c.d'
+            )
+           def y = (condition
+              ? "a?b" : 'c.d'
+            )
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_TernaryOperator_SeparateLines_FalseExpressionContainsColon() {
+        final SOURCE = '''
+           def x = (condition
+              ? "a:b"
+              : 'c:d'
+            )
+           def y = (condition
+              ? "a:b" : 'c:d'
+            )
         '''
         assertNoViolations(SOURCE)
     }

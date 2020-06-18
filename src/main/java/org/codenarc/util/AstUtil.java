@@ -15,11 +15,11 @@
  */
 package org.codenarc.util;
 
+import static java.util.Arrays.*;
+
 import groovy.lang.Closure;
 import groovy.lang.MetaClass;
 import groovy.lang.Range;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.*;
 import org.codehaus.groovy.ast.stmt.BlockStatement;
@@ -28,14 +28,15 @@ import org.codehaus.groovy.ast.stmt.IfStatement;
 import org.codehaus.groovy.ast.stmt.Statement;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 import org.codenarc.source.SourceCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.util.Arrays.asList;
 
 /**
  * Contains static utility methods and constants related to Groovy AST.
@@ -49,6 +50,7 @@ import static java.util.Arrays.asList;
 public class AstUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(AstUtil.class);
+    private static final char NEWLINE = '\n';
     public static final List<String> AUTO_IMPORTED_PACKAGES = asList("java.lang", "java.io", "java.net", "java.util", "groovy.lang", "groovy.util");
     public static final List<String> AUTO_IMPORTED_CLASSES = asList("java.math.BigDecimal", "java.math.BigInteger");
     public static final List<String> COMPARISON_OPERATORS = asList("==", "!=", "<", "<=", ">", ">=", "<=>");
@@ -1254,5 +1256,45 @@ public class AstUtil {
         }
         return expression.getText();
     }
+
+    public static String getSourceBetweenNodes(ASTNode beforeNode, ASTNode afterNode, SourceCode sourceCode) {
+        if (AstUtil.isFromGeneratedSourceCode(beforeNode) || AstUtil.isFromGeneratedSourceCode(afterNode)) {
+            return "";
+        }
+        StringBuilder str = new StringBuilder();
+
+        String beforeLastLine = lastSourceLine(beforeNode, sourceCode);
+        int firstColumnAfterBeforeNode = beforeNode.getLastColumnNumber() - 1;    // That lastColumnNumber is the column after the end, and is 1-based
+
+        if (GroovyVersion.isGroovyVersion2()) {
+            // In Groovy 2.x, some expressions may extend to include the space following them
+            if (beforeLastLine.charAt(firstColumnAfterBeforeNode - 1) == ' ') {
+                firstColumnAfterBeforeNode--;
+            }
+        }
+
+        if (beforeNode.getLastLineNumber() == afterNode.getLineNumber()) {
+            str.append(beforeLastLine, firstColumnAfterBeforeNode, afterNode.getColumnNumber() - 1);
+        } else {
+            str.append(beforeLastLine.substring(firstColumnAfterBeforeNode));
+            str.append(NEWLINE);
+            for (int i = beforeNode.getLastLineNumber(); i < afterNode.getLineNumber() - 1; i++) {
+                str.append(sourceCode.line(i));
+                str.append(NEWLINE);
+            }
+            String afterFirstLine = sourceLine(afterNode, sourceCode);
+            str.append(afterFirstLine, 0, afterNode.getColumnNumber() - 1);
+        }
+        return str.toString();
+    }
+
+    private static String lastSourceLine(ASTNode node, SourceCode sourceCode) {
+        return sourceCode.getLines().get(node.getLastLineNumber() - 1);
+    }
+
+    private static String sourceLine(ASTNode node, SourceCode sourceCode) {
+        return sourceCode.getLines().get(AstUtil.findFirstNonAnnotationLine(node, sourceCode) - 1);
+    }
+
 
 }
