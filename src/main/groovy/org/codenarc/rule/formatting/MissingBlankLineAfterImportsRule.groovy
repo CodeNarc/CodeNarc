@@ -18,6 +18,7 @@ package org.codenarc.rule.formatting
 import org.codenarc.rule.AbstractRule
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
+import org.codenarc.util.ImportUtil
 
 /**
  * Makes sure there is a blank line after the imports of a source code file.
@@ -29,8 +30,9 @@ class MissingBlankLineAfterImportsRule extends AbstractRule {
 
     @Override
     void applyTo(SourceCode sourceCode, List<Violation> violations) {
-        if (sourceCode.ast?.imports) {
-            int lastImportLineNumber = sourceCode.ast.imports*.lastLineNumber.max()
+        def imports = ImportUtil.getAllImports(sourceCode)
+        if (imports) {
+            int lastImportLineNumber = imports*.lastLineNumber.max()
 
             if (lastImportLineNumber > 0) {
                 String nextLine = sourceCode.line(lastImportLineNumber)

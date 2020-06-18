@@ -23,6 +23,13 @@ import org.junit.Test
  */
 class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase<MissingBlankLineAfterImportsRule> {
 
+    private static final IMPORT_TYPES = [
+        'import java.lang.Math', // normal
+        'import java.lang.*', // star
+        'import static java.lang.Math.PI', // static
+        'import static java.lang.Math.*', // static star
+    ]
+
     @Test
     void test_RuleProperties() {
         assert rule.priority == 3
@@ -30,64 +37,70 @@ class MissingBlankLineAfterImportsRuleTest extends AbstractRuleTestCase<MissingB
     }
 
     @Test
-    void test_BlankLineAfterImports_NoViolation() {
-        final SOURCE = '''\
+    void test_BlankLineAfterLastImport_NoViolation() {
+        IMPORT_TYPES.each { lastImport ->
+            final SOURCE = """\
             package org.codenarc
 
             import org.codenarc.rule.Rule
-            import org.codenarc.rule.StubRule
+            $lastImport
 
-            class MyClass {
-                    def go() { /* ... */ }
-            }
-            '''.stripIndent()
-        assertNoViolations(SOURCE)
+            class MyClass { }
+            """.stripIndent()
+            assertNoViolations(SOURCE)
+        }
     }
 
-    @SuppressWarnings('MissingBlankLineAfterImports')
     @Test
-    void test_NoLinesAfterImports_Violation() {
-        final SOURCE = '''
+    void test_NoBlankLineAfterLastImport_Violation() {
+        IMPORT_TYPES.each { lastImport ->
+            final SOURCE = """\
             package org.codenarc
 
             import org.codenarc.rule.Rule
-            import org.codenarc.rule.StubRule
-            class MyClass {
-                    void go() { /* ... */ }
-            }'''.stripIndent()
-        assertSingleViolation(SOURCE, 6, 'class MyClass {', 'Missing blank line after imports in file null')
+            $lastImport
+            class MyClass { }
+            """.stripIndent()
+            assertSingleViolation(SOURCE, 5, 'class MyClass { }', 'Missing blank line after imports in file null')
+        }
     }
 
     @Test
-    void test_PackageInfo_NothingAfter_LastImport_NoViolation() {
-        final SOURCE = '''
-            package com.a.random.pkg.nothing.to.see.here
+    void test_PackageInfo_NothingAfterLastImport_NoViolation() {
+        IMPORT_TYPES.each { lastImport ->
+            final SOURCE = """\
+                package org.codenarc
 
-            import com.very.very.important.pkg
-        '''.stripIndent()
-        assertNoViolations(SOURCE)
+                $lastImport
+                """.stripIndent()
+            assertNoViolations(SOURCE)
+        }
     }
 
     @Test
-    void test_PackageInfo_NotABlankLineAfterLastImport_NoViolation() {
-        final SOURCE = '''
-            package com.a.random.pkg.nothing.to.see.here
+    void test_PackageInfo_BlankLineAfterLastImport_NoViolation() {
+        IMPORT_TYPES.each { lastImport ->
+            final SOURCE = """\
+                package org.codenarc
 
-            import com.very.very.important.pkg
-            // comment
-        '''.stripIndent()
-        assertSingleViolation(SOURCE, 5, '// comment', 'Missing blank line after imports')
+                $lastImport
+
+                """.stripIndent()
+            assertNoViolations(SOURCE)
+        }
     }
 
     @Test
-    void test_PackageInfo_NoViolation() {
-        final SOURCE = '''
-            package com.a.random.pkg.nothing.to.see.here
+    void test_PackageInfo_NoBlankLineAfterLastImport_Violation() {
+        IMPORT_TYPES.each { lastImport ->
+            final SOURCE = """\
+                package org.codenarc
 
-            import com.very.very.important.pkg
-
-        '''.stripIndent()
-        assertNoViolations(SOURCE)
+                $lastImport
+                // comment
+                """.stripIndent()
+            assertSingleViolation(SOURCE, 4, '// comment', 'Missing blank line after imports')
+        }
     }
 
     @Override
