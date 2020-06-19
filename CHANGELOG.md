@@ -22,7 +22,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #462: **ClassStartsWithBlankLine** rule: Support annotations with closures. ([Thomas Lefèvre](https://github.com/tlefevre)).
  - #463: **GrailsDomainHasEquals** and **GrailsDomainHasToString** rules: Ignore inner enums. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #464: **MethodReturnTypeRequired** rule: Add `ignoreMethodNames` property.([Thomas Lefèvre](https://github.com/tlefevre))
- - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodNames` property. ([Thomas Lefèvre](https://github.com/tlefevre))
+ - #466: **MethodParameterTypeRequired** rule: RuleAdd `ignoreMethodParameterNames` property. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #468: **StatelessClass** rule: Ignore fields annotated with @Value. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #474: **ClassStartsWithBlankLine** and **ClosureStatementOnOpeningLineOfMultipleLineClosure** rules: Fix Groovy 2.5 incompatibilities.
  - #490: **DuplicateStringLiteral** rule: Add `ignoreStringsDelimiter` config property to enable customizing the delimiter for `ignoreStrings`.
