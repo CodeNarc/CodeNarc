@@ -1,10 +1,13 @@
 
 # CodeNarc Change Log
 
-TODO Version 1.6.x    (??? 2020)
+TODO Next Version 2.0?    (??? 2020)
 --------------------------------------
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
+
+Framework and Infrastructure
+ - #519: Update Gradle wrapper to 6.5. [René Scheibe](https://github.com/darxriggs)
 
 
 Version 1.6    (Jun 2020)

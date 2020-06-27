@@ -40,7 +40,6 @@ ruleset {
     }
 
     ruleset('rulesets/formatting.xml') {
-        exclude 'MissingBlankLineAfterImports'
         exclude 'SpaceAfterCatch'
         exclude 'SpaceAfterFor'
         exclude 'SpaceAfterIf'
