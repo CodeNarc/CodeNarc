@@ -21,24 +21,24 @@ def groovyVersion = '2.4.17'
 def slf4jVersion = '1.7.25'
 
 dependencies {
-    compile("org.codehaus.groovy:groovy:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-xml:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-json:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-ant:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-templates:$groovyVersion")
+    implementation "org.codehaus.groovy:groovy:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
 
-    compile "org.slf4j:slf4j-api:$slf4jVersion"
-    compile('org.gmetrics:GMetrics:1.1') {
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation('org.gmetrics:GMetrics:1.1') {
         transitive = false
     }
 
     // JUnit is only required if you are using the CodeNarc testing framework, e.g. AbstractRuleTestCase
     compileOnly 'junit:junit:4.12'
 
-    testCompile "org.slf4j:slf4j-simple:$slf4jVersion"
-    testCompile 'commons-cli:commons-cli:1.4'
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.github.stefanbirkner:system-rules:1.16.1'
+    testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
+    testImplementation 'commons-cli:commons-cli:1.4'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
 }
 
 sourceSets {
@@ -50,6 +50,7 @@ sourceSets {
 
 test.maxParallelForks = 2
 test.jvmArgs '-Duser.language=en -Duser.country=US'
+
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
