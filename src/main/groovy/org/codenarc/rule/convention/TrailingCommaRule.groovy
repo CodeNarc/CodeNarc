@@ -23,6 +23,7 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.GroovyVersion
 import org.codenarc.util.SourceCodeUtil
+
 /**
  * Check whether list and map literals contain optional trailing comma.
  * <p>

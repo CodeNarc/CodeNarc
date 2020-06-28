@@ -26,6 +26,7 @@ import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 import org.codenarc.util.WildcardPattern
+
 /**
  * Rule that checks for private fields that are only set within a constructor or field initializer.
  * Such fields can safely be made final.

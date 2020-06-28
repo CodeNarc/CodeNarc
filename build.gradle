@@ -1,6 +1,6 @@
 plugins {
     id 'groovy'
-    id 'maven'
+    id 'maven-publish'
     id 'signing'
     id 'idea'
 }
@@ -21,24 +21,24 @@ def groovyVersion = '2.4.17'
 def slf4jVersion = '1.7.25'
 
 dependencies {
-    compile("org.codehaus.groovy:groovy:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-xml:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-json:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-ant:$groovyVersion")
-    compile("org.codehaus.groovy:groovy-templates:$groovyVersion")
+    implementation "org.codehaus.groovy:groovy:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
 
-    compile "org.slf4j:slf4j-api:$slf4jVersion"
-    compile('org.gmetrics:GMetrics:1.1') {
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation('org.gmetrics:GMetrics:1.1') {
         transitive = false
     }
 
     // JUnit is only required if you are using the CodeNarc testing framework, e.g. AbstractRuleTestCase
     compileOnly 'junit:junit:4.12'
 
-    testCompile "org.slf4j:slf4j-simple:$slf4jVersion"
-    testCompile 'commons-cli:commons-cli:1.4'
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.github.stefanbirkner:system-rules:1.16.1'
+    testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
+    testImplementation 'commons-cli:commons-cli:1.4'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
 }
 
 sourceSets {
@@ -50,24 +50,10 @@ sourceSets {
 
 test.maxParallelForks = 2
 test.jvmArgs '-Duser.language=en -Duser.country=US'
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
-}
-
-signing {
-    sign(configurations.archives).each { task ->
-        task.onlyIf { gradle.taskGraph.hasTask(uploadArchives) }
-    }
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 javadoc {
@@ -76,48 +62,55 @@ javadoc {
     }
 }
 
+signing {
+    required { gradle.taskGraph.hasTask(publish) }
+    sign publishing.publications
+}
+
 // Publish to Sonatype (OSSRH) Maven Repository
 // See http://central.sonatype.org/pages/gradle.html
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { deployment -> signing.signPom(deployment) }
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
 
-            repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'CodeNarc'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'The CodeNarc project provides a static analysis tool for Groovy code.'
-                url 'https://codenarc.org'
+            pom {
+                name = 'CodeNarc'
+                description = 'The CodeNarc project provides a static analysis tool for Groovy code.'
+                url = 'https://codenarc.org'
 
                 scm {
-                    connection 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
-                    developerConnection 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
-                    url 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
+                    connection = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
+                    developerConnection = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
+                    url = 'scm:git:git@github.com:CodeNarc/CodeNarc.git'
                 }
 
                 licenses {
                     license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
 
                 developers {
                     developer {
-                        id 'chrismair'
-                        name 'Chris Mair'
-                        email 'chrismair@users.sourceforge.net'
+                        id = 'chrismair'
+                        name = 'Chris Mair'
+                        email = 'chrismair@users.sourceforge.net'
                     }
                 }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            def releasesUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            def snapshotsUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+            url = project.hasProperty('release') ? releasesUrl : snapshotsUrl
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
             }
         }
     }

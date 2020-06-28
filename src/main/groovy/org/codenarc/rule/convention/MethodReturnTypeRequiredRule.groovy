@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 import org.codenarc.util.WildcardPattern
+
 /**
  * Checks that method return types are not dynamic, that they are explicitly stated and different than def.
  * The <code>ignoreMethods</code> property optionally specifices which methode names to ignore. Format is a comma separated list.
