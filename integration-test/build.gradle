@@ -8,11 +8,11 @@ repositories {
 }
 
 dependencies {
-    testCompile project(':'), {
+    testImplementation project(':'), {
         exclude group: 'org.codehaus.groovy'
     }
-    testCompile gradleTestKit()
-    testCompile 'junit:junit:4.12'
+    testImplementation gradleTestKit()
+    testImplementation 'junit:junit:4.12'
 }
 
 test {
