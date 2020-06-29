@@ -7,7 +7,7 @@ plugins {
 
 group = 'org.codenarc'
 archivesBaseName = 'CodeNarc'
-version = '1.6'
+version = '1.7-alpha'  // or 2.0
 
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
@@ -107,7 +107,7 @@ publishing {
         maven {
             def releasesUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
             def snapshotsUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
-            url = project.hasProperty('release') ? releasesUrl : snapshotsUrl
+            url = version.endsWith('SNAPSHOT') ? snapshotsUrl : releasesUrl
             credentials {
                 username = ossrhUsername
                 password = ossrhPassword

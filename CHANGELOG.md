@@ -7,7 +7,8 @@ TODO Next Version 2.0?    (??? 2020)
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
 
 Framework and Infrastructure
- - #519: Update Gradle wrapper to 6.5. [René Scheibe](https://github.com/darxriggs)
+ - #519: Update Gradle wrapper to 6.5. ([René Scheibe](https://github.com/darxriggs))
+ - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
 
 
 Version 1.6    (Jun 2020)
