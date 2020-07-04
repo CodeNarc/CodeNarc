@@ -22,7 +22,8 @@ import org.junit.Test
  * Tests for DuplicateNumberLiteralRule
  *
  * @author Hamlet D'Arcy
-  */
+ * @author Chris Mair
+ */
 class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumberLiteralRule> {
 
     @Test
@@ -245,6 +246,29 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
                 }
             }
             '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testInAnnotation_NoViolation() {
+        final SOURCE = '''
+            @MyAnnotation1NumberValue(11)
+            @MyAnnotation2NumberValue(11)
+            @MyAnnotation2ListValue(value = [11, 12])
+            class MyClass1 {
+            }
+
+            @MyAnnotation1ListValue(value = [11])
+            @MyAnnotation2NumberValue(11)
+            class MyClass2 {
+            }
+
+            @MyAnnotation1ListValue(value = [11, 12])
+            @MyAnnotation2ListValue(value = [12, 11])
+            class MyClass3 {
+            }
+        '''
+
         assertNoViolations(SOURCE)
     }
 

@@ -35,6 +35,7 @@ import java.util.regex.Pattern
  * @author Chris Mair
  */
 class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
+
     String name = 'DuplicateStringLiteral'
     int priority = 2
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES

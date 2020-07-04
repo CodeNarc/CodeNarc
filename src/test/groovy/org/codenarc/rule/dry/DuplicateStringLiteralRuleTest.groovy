@@ -248,10 +248,33 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
     }
 
     @Test
-    void testIgnoreNumbers_ByDefaultIgnoresEmptyString() {
+    void test_ByDefaultIgnoresEmptyString() {
         final SOURCE = '''
             def x = ['', 'abc', '', 'def', '']
         '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testInAnnotation_NoViolation() {
+        final SOURCE = '''
+            @MyAnnotation1StringValue("string1")
+            @MyAnnotation2StringValue("string1")
+            @MyAnnotation2ListValue(value = ["string1", "string2"])
+            class MyClass1 {
+            }
+
+            @MyAnnotation1ListValue(value = ["string1"])
+            @MyAnnotation2StringValue("string1")
+            class MyClass2 {
+            }
+
+            @MyAnnotation1ListValue(value = ["string1", "string2"])
+            @MyAnnotation2ListValue(value = ["string2", "string1"])
+            class MyClass3 {
+            }
+        '''
+
         assertNoViolations(SOURCE)
     }
 
