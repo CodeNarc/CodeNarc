@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.dry
 
+import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.*
@@ -116,6 +117,11 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
     void visitMapEntryExpression(MapEntryExpression expression) {
         addViolationIfDuplicate expression.valueExpression
         super.visitMapEntryExpression expression
+    }
+
+    @Override
+    void visitAnnotations(AnnotatedNode node) {
+        // Skip annotation.
     }
 
     private void addViolationIfDuplicate(Expression node, boolean isStatic = false) {

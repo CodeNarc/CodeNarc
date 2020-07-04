@@ -5,6 +5,7 @@ TODO Next Version 2.0?    (??? 2020)
 --------------------------------------
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
+ - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations. 
 
 Framework and Infrastructure
  - #519: Update Gradle wrapper to 6.5. [René Scheibe](https://github.com/darxriggs)
