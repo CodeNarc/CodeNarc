@@ -15,7 +15,9 @@
  */
 package org.codenarc.rule.unnecessary
 
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.AnnotatedNode
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.ImportNode
 import org.codehaus.groovy.ast.PackageNode
 import org.codehaus.groovy.ast.stmt.Statement
@@ -85,17 +87,28 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitStatement(Statement statement) {
-        if (AstUtil.isFromGeneratedSourceCode(statement)) {
+        checkNode(statement)
+        super.visitStatement(statement)
+    }
+
+    @Override
+    void visitField(FieldNode node) {
+        checkNode(node)
+        super.visitField(node)
+    }
+
+    private void checkNode(ASTNode node) {
+        if (AstUtil.isFromGeneratedSourceCode(node)) {
             return
         }
 
-        int lastColumn = statement.lastColumnNumber
-        String line = lastSourceLine(statement) + ' '   // to make it easier to extract the final chars
+        int lastColumn = node.lastColumnNumber
+        String line = lastSourceLine(node) + ' '   // to make it easier to extract the final chars
 
         // Some statements (e.g. "for") have lastColumnNumber in different relative positions
         boolean lastCharIsSemicolon = line[lastColumn - 2] == ';' || line[lastColumn - 1] == ';'
 
-        def lineNumber = statement.lastLineNumber
+        def lineNumber = node.lastLineNumber
 
         // An earlier violation for this same line means its semicolon was actually okay
         removeAnyViolationsForSameLine(lineNumber)
@@ -103,8 +116,6 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
         if (lastCharIsSemicolon) {
             addViolation(new Violation(rule: rule, lineNumber: lineNumber, sourceLine: line, message: rule.MESSAGE))
         }
-
-        super.visitStatement(statement)
     }
 
     private void removeAnyViolationsForSameLine(int lineNumber) {
