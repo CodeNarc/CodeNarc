@@ -17,7 +17,7 @@ to fit into your project. Build tool, framework support, and report generation a
           <h2>CodeNarc Rules</h2>
           CodeNarc triggers violations based on rules. Click the links to the left to view the
           <a href="codenarc-rule-index.html">index of all rules</a>, or individual rule categories (rulesets), such as
-          the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-concurrency.html">concurrency</a>
+          the <a href="codenarc-rules-basic.html">basic</a>, or <a href="codenarc-rules-imports.html">import</a>
           rules. Or you can <a href="codenarc-creating-ruleset.html">create your own ruleset</a>;
           see how easy it is in this <a href="http://www.youtube.com/watch?v=ZPu8FaZZwRw">screencast</a>.
      </td>
