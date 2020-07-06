@@ -194,6 +194,24 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
     }
 
     @Test
+    void test_Field() {
+        final SOURCE = '''
+            class A {
+                String name;
+                def value = new Object(); // comment
+                def closure = { };
+                int count;//comment
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'String name;', messageText:MESSAGE],
+                [lineNumber:4, sourceLineText:'def value = new Object();', messageText:MESSAGE],
+                [lineNumber:5, sourceLineText:'def closure = { };', messageText:MESSAGE],
+                [lineNumber:6, sourceLineText:'int count;', messageText:MESSAGE],
+        )
+    }
+
+    @Test
     void test_SemicolonInMultilineCommentsWithoutLeadingAsterisk() {
         final SOURCE = '''
         /*
