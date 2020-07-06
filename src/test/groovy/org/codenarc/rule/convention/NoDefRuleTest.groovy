@@ -83,7 +83,6 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
 
     @Test
     void test_def_excludeRegex_NoViolations() {
-        rule.excludeRegex = /((setup|cleanup)(|Spec)|"[^"].*")\(\)/ //spock methods
         final SOURCE = '''
             def setup(){}
             def setupSpec(){}
@@ -91,6 +90,20 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
             def cleanupSpec(){}
             def "should send"(){}
         '''
+        rule.excludeRegex = /((setup|cleanup)(|Spec)|"[^"].*")/ //spock methods
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_def_excludeRegex_FieldAndMethodNames_NoViolations() {
+        final SOURCE = '''
+            class MyClass {
+                def aaa = 123
+                def bbb() { }
+                String ccc = 'xxx'
+            }
+            '''
+        rule.excludeRegex = /aaa|bbb|ccc/
         assertNoViolations(SOURCE)
     }
 
@@ -129,16 +142,17 @@ class NoDefRuleTest extends AbstractRuleTestCase<NoDefRule> {
         final SOURCE = '''
             class MyClass {
                 def name
+                def count = 99;
             }
             '''
-        assertNoViolations(SOURCE)
-
-        // Known violation.. See #497
-        //assertSingleViolation SOURCE, 3, 'def name', NoDefRule.MESSAGE_DEF_FIELD
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'def name', messageText:NoDefRule.MESSAGE_DEF_FIELD],
+                [lineNumber:4, sourceLineText:'def count = 99;', messageText:NoDefRule.MESSAGE_DEF_FIELD]
+        )
     }
 
     @Test
-    void testDefMultipleAssignment_Violation() {
+    void test_def_MultipleAssignment_Violation() {
         final SOURCE = '''
             def (init, condition, update) = forStatement.collectionExpression.expressions
         '''

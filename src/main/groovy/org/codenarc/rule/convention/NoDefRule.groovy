@@ -15,6 +15,7 @@
  */
 package org.codenarc.rule.convention
 
+import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.Parameter
 import org.codehaus.groovy.ast.Variable
@@ -32,21 +33,23 @@ import java.util.regex.Pattern
  * to find text which could occur immediately after def.
  *
  * @author Dominik Przybysz
+ * @author Chris Mair
  */
 class NoDefRule extends AbstractAstVisitorRule {
 
     public static final String MESSAGE = 'def for declaration should not be used'
     public static final String MESSAGE_DEF_RETURN = 'def for method return type should not be used'
     public static final String MESSAGE_DEF_PARAMETER = 'def for method parameter type should not be used'
+    public static final String MESSAGE_DEF_FIELD = 'def should not be used for field type'
 
     String name = 'NoDef'
     int priority = 3
-    Pattern excludeFilter
+    protected Pattern excludePattern
 
     Class astVisitorClass = NoDefAstVisitor
 
     void setExcludeRegex(String excludeRegex) {
-        this.excludeFilter = excludeRegex ? ~/$excludeRegex/ : null
+        this.excludePattern = excludeRegex ? ~/$excludeRegex/ : null
     }
 }
 
@@ -74,17 +77,21 @@ class NoDefAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
-        if (methodExcluded(node)) {
-            return
-        }
-
-        if (node.isDynamicReturnType()) {
+        if (node.isDynamicReturnType() && !methodExcluded(node.name)) {
             addViolation(node, NoDefRule.MESSAGE_DEF_RETURN)
         }
 
         visitParameters(node.getParameters())
 
         super.visitConstructorOrMethod(node, isConstructor)
+    }
+
+    @Override
+    void visitField(FieldNode node) {
+        if (node.isDynamicTyped() && !nameExcluded(node.name)) {
+            addViolation(node, NoDefRule.MESSAGE_DEF_FIELD)
+        }
+        super.visitField(node)
     }
 
     private void visitParameters(Parameter[] parameters) {
@@ -97,27 +104,19 @@ class NoDefAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private Pattern getMatcherPattern() {
-        return rule.excludeFilter
-    }
-
-    private boolean methodExcluded(MethodNode node) {
-        return node.isDynamicReturnType() && methodExcluded(matcherPattern, node.name)
-    }
-
-    private static boolean methodExcluded(Pattern pattern, String text) {
-        matches(CONTAINS_WHITESPACE_PATTERN, text) || matches(pattern, "${text}()")
+    private boolean methodExcluded(String text) {
+        return matches(CONTAINS_WHITESPACE_PATTERN, text) || nameExcluded(text)
     }
 
     private boolean dynamicTypedAndNotExcludedVariable(Variable variableExpression) {
-        return variableExpression.isDynamicTyped() && variableNotExcluded(matcherPattern, variableExpression.name)
+        return variableExpression.isDynamicTyped() && !nameExcluded(variableExpression.name)
     }
 
-    private static boolean variableNotExcluded(Pattern pattern, String text) {
-        !matches(pattern, text)
+    private boolean nameExcluded(String text) {
+        matches(rule.excludePattern, text)
     }
 
-    private static boolean matches(Pattern pattern, String text) {
+    private boolean matches(Pattern pattern, String text) {
         pattern && pattern.matcher(text).matches()
     }
 }

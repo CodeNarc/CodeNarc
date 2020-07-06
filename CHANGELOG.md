@@ -7,6 +7,7 @@ TODO Next Version 2.0?    (??? 2020)
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
  - #524: **UnnecessarySemicolon** rule: Also check field definitions.
+ - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'.
 
 Framework and Infrastructure
  - #519: Update Gradle wrapper to 6.5. ([René Scheibe](https://github.com/darxriggs))
