@@ -1077,13 +1077,15 @@ public class AstUtil {
     public static int findClassDeclarationLineNumber(ClassNode node, SourceCode sourceCode) {
         int lineNumber = node.getLineNumber();
         if (!node.getAnnotations().isEmpty()) {
-            Pattern classDeclarationPattern = Pattern.compile("class\\s+" + node.getNameWithoutPackage());
             AnnotationNode lastAnnotation = node.getAnnotations().get(node.getAnnotations().size() - 1);
-            for (int i = lastAnnotation.getLastLineNumber(); i < sourceCode.getLines().size(); i++) {
-                String line = sourceCode.line(i - 1);
-                Matcher matcher = classDeclarationPattern.matcher(line);
-                if (matcher.find()) {
-                    return i;
+            if (lastAnnotation.getLastLineNumber() != -1) {
+                Pattern classDeclarationPattern = Pattern.compile("class\\s+" + node.getNameWithoutPackage());
+                for (int i = lastAnnotation.getLastLineNumber(); i < sourceCode.getLines().size(); i++) {
+                    String line = sourceCode.line(i - 1);
+                    Matcher matcher = classDeclarationPattern.matcher(line);
+                    if (matcher.find()) {
+                        return i;
+                    }
                 }
             }
         }
