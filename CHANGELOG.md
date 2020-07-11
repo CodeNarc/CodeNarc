@@ -11,6 +11,8 @@ TODO Next Version 2.0?    (??? 2020)
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
 
 Framework and Infrastructure
+ - #525: Upgrade to Groovy 2.5.12.
+ - #525: Support Java 14. Upgrade Java source/target compatibility to 1.7.
  - #519: Update Gradle wrapper to 6.5. ([René Scheibe](https://github.com/darxriggs))
  - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
  - #496: Switched CodeNarc website to publish from `gh-pages` branch.

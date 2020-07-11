@@ -9,15 +9,15 @@ group = 'org.codenarc'
 archivesBaseName = 'CodeNarc'
 version = '1.7-alpha'  // or 2.0
 
-sourceCompatibility = '1.6'
-targetCompatibility = '1.6'
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
 
 repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'https://repo.maven.apache.org/maven2' }
 }
 
-def groovyVersion = '2.4.17'
+def groovyVersion = '2.5.12'
 def slf4jVersion = '1.7.25'
 
 dependencies {
