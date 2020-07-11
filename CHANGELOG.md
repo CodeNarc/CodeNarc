@@ -8,10 +8,12 @@ TODO Next Version 2.0?    (??? 2020)
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
  - #524: **UnnecessarySemicolon** rule: Also check field definitions.
  - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'.
+ - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
 
 Framework and Infrastructure
  - #519: Update Gradle wrapper to 6.5. ([René Scheibe](https://github.com/darxriggs))
  - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
+ - #496: Switched CodeNarc website to publish from `gh-pages` branch.
 
 
 Version 1.6    (Jun 2020)
