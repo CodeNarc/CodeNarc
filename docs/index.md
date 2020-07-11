@@ -27,6 +27,7 @@ to fit into your project. Build tool, framework support, and report generation a
                 Get 1.6
             </a>
         </div>
+        [Release Notes](https://github.com/CodeNarc/CodeNarc/blob/master/CHANGELOG.md)
     </td>
 </tr>
 <tr>
@@ -62,7 +63,7 @@ to fit into your project. Build tool, framework support, and report generation a
           <h2>Get it from Maven2</h2>
            For projects built using <a href="http://maven.apache.org/">Maven</a>, <strong>CodeNarc</strong> is available
            from the
-               <a href="http://repo1.maven.org/maven2/org/codenarc/CodeNarc/">Maven Central Repository</a>
+               <a href="https://repo1.maven.org/maven2/org/codenarc/CodeNarc/">Maven Central Repository</a>
                 <ul>
                      <li>groupId = org.codenarc</li>
                      <li>artifactId = CodeNarc</li>
