@@ -289,15 +289,16 @@ modifiers for the property is the one that is applied for the field name validat
 ## VariableName Rule
 
 Verifies that the name of each variable matches a regular expression. By default it checks that
-non-`final` variable names start with a lowercase letter and contains only letters or numbers.
-
-NOTE: The default naming pattern for `final` variable names is *currently* that they start with an uppercase letter and contain only uppercase
-letters, numbers and underscores (i.e., like *constants*). But our consensus is that they *should* rather be named like regular variables. 
-See [#467](https://github.com/CodeNarc/CodeNarc/issues/467). Our intent is to make that the default with the next major CodeNarc version (2.0). 
-To reflect that intended behavior now, just set `finalRegex` to `null`.
+variable names start with a lowercase letter and contain only letters or numbers.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| regex                       | Specifies the default regular expression used to validate the variable name. It is required and cannot be null or empty.     | \[a-z\]\[a-zA-Z0-9\]* |
-| finalRegex                  | Specifies the regular expression used to validate `final` variable names. It is optional. If not set, then **regex** is used to validate `final` variable names. Starting with CodeNarc 2.0, we intend to default this value to `null`. | \[A-Z\]\[A-Z0-9_\]* |
+| regex                       | Specifies the regular expression used to validate the variable name. It is required and cannot be null or empty.     | \[a-z\]\[a-zA-Z0-9\]* |
+| finalRegex                  | Specifies the regular expression used to validate `final` variable names. It is optional. If not set, then **regex** is used to validate `final` variable names. | `null` |
 | ignoreVariableNames         | Specifies one or more (comma-separated) variable names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `null` |
+
+NOTE: Until CodeNarc 2.0, the default naming pattern for `final` variable names was that they start with an uppercase letter and contain only 
+uppercase letters, numbers and underscores (i.e., like *constants*). Starting with CodeNarc 2.0, that has been changed so that `finalRegex` 
+defaults to `null` and thus `final` variable names are treated like regular variables. See [#467](https://github.com/CodeNarc/CodeNarc/issues/467). 
+To restore that previous behavior, set `finalRegex` to `[A-Z][A-Z0-9_]*`.
+
