@@ -31,6 +31,8 @@ class VariableNameRuleTest extends AbstractRuleTestCase<VariableNameRule> {
     void testRuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'VariableName'
+        assert rule.regex == VariableNameRule.DEFAULT_VAR_NAME
+        assert rule.finalRegex == null
     }
 
     @Test
@@ -40,17 +42,6 @@ class VariableNameRuleTest extends AbstractRuleTestCase<VariableNameRule> {
 
         assert !('abc_def' ==~ rule.regex)
         assert !('ABC123abc' ==~ rule.regex)
-    }
-
-    @Test
-    void testFinalRegex_DefaultValue() {
-        assert 'ABC' ==~ rule.finalRegex
-        assert 'A_B_C' ==~ rule.finalRegex
-
-        assert !('abc_def' ==~ rule.finalRegex)
-        assert !('ABC123abc' ==~ rule.finalRegex)
-        assert !('ABCabc' ==~ rule.finalRegex)
-        assert !('a_b_CDEF' ==~ rule.finalRegex)
     }
 
     @Test
@@ -126,7 +117,7 @@ class VariableNameRuleTest extends AbstractRuleTestCase<VariableNameRule> {
         final SOURCE = '''
             class MyClass {
                 def myMethod() {
-                    final int COUNT = 23
+                    final count = 23
                 }
             }
         '''
@@ -138,11 +129,11 @@ class VariableNameRuleTest extends AbstractRuleTestCase<VariableNameRule> {
         final SOURCE = '''
           class MyClass {
                 def myMethod() {
-                    final int count
+                    final int COUNT
                 }
           }
         '''
-        assertSingleViolation(SOURCE, 4, 'final int count')
+        assertSingleViolation(SOURCE, 4, 'final int COUNT')
     }
 
     @Test
@@ -237,10 +228,10 @@ class VariableNameRuleTest extends AbstractRuleTestCase<VariableNameRule> {
     void testApplyTo_MultipleVariableNames_Final_OneDoesNotMatchDefaultRegex() {
         final SOURCE = '''
             def myMethod() {
-                final def (OK, bad, OK2) = 123
+                final def (good1, BAD, good2) = 123
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'final def (OK, bad, OK2) = 123', 'Variable named bad in class None does not match the pattern [A-Z][A-Z0-9_]*')
+        assertSingleViolation(SOURCE, 3, 'final def (good1, BAD, good2) = 123', 'Variable named BAD in class None does not match the pattern [a-z][a-zA-Z0-9]*')
     }
 
     @Test

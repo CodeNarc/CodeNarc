@@ -9,6 +9,7 @@ TODO Next Version 2.0?    (??? 2020)
  - #524: **UnnecessarySemicolon** rule: Also check field definitions.
  - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'.
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
+ - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants).
 
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12.

@@ -23,16 +23,14 @@ import org.codenarc.util.WildcardPattern
 
 /**
  * Rule that verifies that the name of each variable matches a regular expression. By default it checks that
- * non-<code>final</code> variable names start with a lowercase letter and contains only letters or numbers.
- * By default, <code>final</code> variable names start with an uppercase letter and contain only uppercase
- * letters, numbers and underscores.
+ * variable names start with a lowercase letter and contains only letters or numbers.
  * <p/>
  * The <code>regex</code> property specifies the default regular expression to validate a variable name.
  * It is required and cannot be null or empty. It defaults to '[a-z][a-zA-Z0-9]*'.
  * <p/>
  * The <code>finalRegex</code> property specifies the regular expression to validate <code>final</code>
- * variable names. It is optional but defaults to '[A-Z][A-Z0-9_]*'. If not set, then <code>regex</code> is
- * used to validate <code>final</code> variables.
+ * variable names. It is optional and defaults to <code>null</code>, which means final variable names are treated
+ * the same as "regular" variable names.
  * <p/>
  * The <code>ignoreVariableNames</code> property optionally specifies one or more
  * (comma-separated) variable names that should be ignored (i.e., that should not cause a
@@ -41,10 +39,11 @@ import org.codenarc.util.WildcardPattern
  * @author Chris Mair
   */
 class VariableNameRule extends AbstractAstVisitorRule {
+
     String name = 'VariableName'
     int priority = 2
     String regex = DEFAULT_VAR_NAME
-    String finalRegex = DEFAULT_CONST_NAME
+    String finalRegex = null
     String ignoreVariableNames
     Class astVisitorClass = VariableNameAstVisitor
 }

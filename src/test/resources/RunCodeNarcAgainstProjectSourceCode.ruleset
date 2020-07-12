@@ -62,6 +62,7 @@ ruleset {
     ruleset('rulesets/naming.xml') {
         exclude 'FactoryMethodName'
         PackageNameMatchesFilePath(groupId:'org.codenarc')
+        VariableName(finalRegex:'[a-zA-Z0-9_]+')     // Lots of tests have uppercase final var names
     }
 
     ruleset('rulesets/size.xml') {
