@@ -17,6 +17,7 @@ package org.codenarc.rule.unnecessary
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.FieldNode
+import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
@@ -44,10 +45,17 @@ class UnnecessaryToStringRule extends AbstractAstVisitorRule {
 
 class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
 
+    boolean withinStringExpression = false
+
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        if (isFirstVisit(call) && AstUtil.isMethodCall(call, 'toString', 0) && isStringType(call.objectExpression)) {
-            addViolation(call, "Calling toString() on the String expression in class $currentClassName is unnecessary")
+        if (isFirstVisit(call) && AstUtil.isMethodCall(call, 'toString', 0)) {
+            if (isStringType(call.objectExpression)) {
+                addViolation(call, "Calling toString() on the String expression in class $currentClassName is unnecessary")
+            }
+            else if (withinStringExpression) {
+                addViolation(call, "Calling toString() on [${call.receiver.text}] in class $currentClassName is unnecessary")
+            }
         }
         super.visitMethodCallExpression(call)
     }
@@ -69,6 +77,15 @@ class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
             }
         }
         super.visitDeclarationExpression(expression)
+    }
+
+    @Override
+    void visitBinaryExpression(BinaryExpression expression) {
+        if (expression.operation.text == '+' && isStringType(expression.leftExpression)) {
+            withinStringExpression = true
+        }
+        super.visitBinaryExpression(expression)
+        withinStringExpression = false
     }
 
     private boolean isStringType(ASTNode node) {

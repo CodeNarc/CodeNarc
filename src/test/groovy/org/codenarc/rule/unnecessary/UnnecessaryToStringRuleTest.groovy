@@ -26,14 +26,14 @@ import org.junit.Test
 class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStringRule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'UnnecessaryToString'
         assert rule.checkAssignments
     }
 
     @Test
-    void testNoViolations() {
+    void test_NoViolations() {
         final SOURCE = '''
             def name = nameNode.toString()
             def id = idNode.lastChild.toString()
@@ -43,7 +43,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
     }
 
     @Test
-    void testStringExpression_ToString_Violation() {
+    void test_StringExpression_ToString_Violation() {
         final SOURCE = '''
             class MyClass {
                 def name = "Joe".toString()
@@ -61,7 +61,27 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
     }
 
     @Test
-    void testAssignmentToStringField_ToString_Violation() {
+    void test_PlusToStringExpression_Violation() {
+        final SOURCE = '''
+            class MyClass {
+                def name = "Joe" + new Date().toString()
+
+                void run() {
+                    Object object = 1
+                    def string = 'some string' + object.toString()                
+                    
+                    def bigString = 'some string' + new Date() + object.toString()      // not a violation; known limitation                
+                    def other = 123 + object.toString().toInteger()     // not a violation                
+                }
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'def name = "Joe" + new Date().toString()', messageText:'Calling toString() on [new Date()] in class MyClass is unnecessary'],
+                [lineNumber:7, sourceLineText:"def string = 'some string' + object.toString()", messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )
+    }
+
+    @Test
+    void test_AssignmentToStringField_ToString_Violation() {
         final SOURCE = '''
             class MyClass {
                 String name = nameNode.toString()
@@ -77,7 +97,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
     }
 
     @Test
-    void testAssignmentToStringVariable_ToString_Violation() {
+    void test_AssignmentToStringVariable_ToString_Violation() {
         final SOURCE = '''
             String name = nameNode.toString()
             String id = account.id.toString()
@@ -91,7 +111,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
     }
 
     @Test
-    void testAssignmentToStringVariableOrField_ToString_CheckAssignmentsIsFalse_NoViolations() {
+    void test_AssignmentToStringVariableOrField_ToString_CheckAssignmentsIsFalse_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 String name = nameNode.toString()
