@@ -38,6 +38,8 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
             def name = nameNode.toString()
             def id = idNode.lastChild.toString()
             def code = "$id-1234".toString()     // GString
+
+            '(' + parameters?.collect { it?.type?.toString() }?.join(', ') + ')\'
         '''
         assertNoViolations(SOURCE)
     }
@@ -68,16 +70,35 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
 
                 void run() {
                     Object object = 1
-                    def string = 'some string' + object.toString()                
-                    
-                    def bigString = 'some string' + new Date() + object.toString()      // not a violation; known limitation                
-                    def other = 123 + object.toString().toInteger()     // not a violation                
+                    def string = 'some string' + object.toString()
+                    def withinGString = "processing: ${'prefix' + object.toString()}"
+
+                    def bigString = 'some string' + new Date() + object.toString()      // not a violation; known limitation
+                    def other = 123 + object.toString().toInteger()     // not a violation
                 }
             }
         '''
         assertViolations(SOURCE,
                 [lineNumber:3, sourceLineText:'def name = "Joe" + new Date().toString()', messageText:'Calling toString() on [new Date()] in class MyClass is unnecessary'],
-                [lineNumber:7, sourceLineText:"def string = 'some string' + object.toString()", messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )
+                [lineNumber:7, sourceLineText:"def string = 'some string' + object.toString()", messageText:'Calling toString() on [object] in class MyClass is unnecessary'],
+                [lineNumber:8, sourceLineText:'def withinGString = "processing: ${\'prefix\' + object.toString()}"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )
+    }
+
+    @Test
+    void test_ToStringWithinGString_Violation() {
+        final SOURCE = '''
+            def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"
+            def string2 = """
+                 processing: ${123L.toString()}
+                 processing: ${new Date().toString()}
+                """
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'def string = "some string${123L.toString()} or ${123} or ${\'ABC\'} or ${new Date().toString()}"', messageText:'Calling toString() on [123] in class None is unnecessary'],
+                [lineNumber:2, sourceLineText:'def string = "some string${123L.toString()} or ${123} or ${\'ABC\'} or ${new Date().toString()}"', messageText:'Calling toString() on [new Date()] in class None is unnecessary'],
+                [lineNumber:4, sourceLineText:'processing: ${123L.toString()}', messageText:'Calling toString() on [123] in class None is unnecessary'],
+                [lineNumber:5, sourceLineText:'processing: ${new Date().toString()}', messageText:'Calling toString() on [new Date()] in class None is unnecessary']
+        )
     }
 
     @Test

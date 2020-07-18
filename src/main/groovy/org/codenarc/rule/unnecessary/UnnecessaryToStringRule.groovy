@@ -19,6 +19,8 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.expr.BinaryExpression
 import org.codehaus.groovy.ast.expr.DeclarationExpression
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.GStringExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codenarc.rule.AbstractAstVisitor
@@ -45,16 +47,13 @@ class UnnecessaryToStringRule extends AbstractAstVisitorRule {
 
 class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
 
-    boolean withinStringExpression = false
+    private static final String TO_STRING = 'toString'
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        if (isFirstVisit(call) && AstUtil.isMethodCall(call, 'toString', 0)) {
+        if (isFirstVisit(call) && isToStringMethodCall(call)) {
             if (isStringType(call.objectExpression)) {
                 addViolation(call, "Calling toString() on the String expression in class $currentClassName is unnecessary")
-            }
-            else if (withinStringExpression) {
-                addViolation(call, "Calling toString() on [${call.receiver.text}] in class $currentClassName is unnecessary")
             }
         }
         super.visitMethodCallExpression(call)
@@ -62,7 +61,7 @@ class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitField(FieldNode node) {
-        if (isStringType(node) && AstUtil.isMethodCall(node.initialExpression, 'toString', 0) && rule.checkAssignments) {
+        if (isStringType(node) && isToStringMethodCall(node.initialExpression) && rule.checkAssignments) {
             addViolation(node, "Calling toString() when assigning to String field \"${node.name}\" in class $currentClassName is unnecessary")
         }
         super.visitField(node)
@@ -71,7 +70,7 @@ class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
     @Override
     void visitDeclarationExpression(DeclarationExpression expression) {
         if (expression.leftExpression instanceof VariableExpression && isStringType(expression.leftExpression)) {
-            if (AstUtil.isMethodCall(expression.rightExpression, 'toString', 0) && rule.checkAssignments) {
+            if (AstUtil.isMethodCall(expression.rightExpression, TO_STRING, 0) && rule.checkAssignments) {
                 def varName = expression.leftExpression.name
                 addViolation(expression, "Calling toString() when assigning to String variable \"$varName\" in class $currentClassName is unnecessary")
             }
@@ -81,11 +80,27 @@ class UnnecessaryToStringAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitBinaryExpression(BinaryExpression expression) {
-        if (expression.operation.text == '+' && isStringType(expression.leftExpression)) {
-            withinStringExpression = true
+        if (isFirstVisit(expression) && expression.operation.text == '+' && isStringType(expression.leftExpression)) {
+            if (isToStringMethodCall(expression.rightExpression)) {
+                def methodCall = expression.rightExpression
+                addViolation(methodCall, "Calling toString() on [${methodCall.receiver.text}] in class $currentClassName is unnecessary")
+            }
         }
         super.visitBinaryExpression(expression)
-        withinStringExpression = false
+    }
+
+    @Override
+    void visitGStringExpression(GStringExpression expression) {
+        expression.values.each { valueExpression ->
+            if (isToStringMethodCall(valueExpression)) {
+                addViolation(valueExpression, "Calling toString() on [${valueExpression.receiver.text}] in class $currentClassName is unnecessary")
+            }
+        }
+        super.visitGStringExpression(expression)
+    }
+
+    private boolean isToStringMethodCall(Expression expression) {
+        return AstUtil.isMethodCall(expression, TO_STRING, 0)
     }
 
     private boolean isStringType(ASTNode node) {

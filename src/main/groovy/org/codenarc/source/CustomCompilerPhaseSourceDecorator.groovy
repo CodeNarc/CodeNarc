@@ -65,6 +65,6 @@ class CustomCompilerPhaseSourceDecorator extends AbstractSourceCode {
 
     @Override
     String toString() {
-        "CustomCompilerPhaseSourceDecorator[${delegate.toString()}]"
+        "CustomCompilerPhaseSourceDecorator[${delegate}]"
     }
 }

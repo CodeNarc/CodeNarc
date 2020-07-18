@@ -1187,9 +1187,13 @@ Example of violations:
         String name = nameNode.toString()           // violation - field
         String code = account.getCode().toString()  // violation - field
 
+        def name = "Joe" + new Date().toString()    // violation - adding object to String
+
         void run() {
             String name = nameNode.toString()       // violation - variable
             String id = account.id.toString()       // violation - variable
+
+            def string = "processing ${123L.toString()} or ${new Date().toString()}"    // 2 violations - GString value
         }
     }
 ```

@@ -147,7 +147,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             codeNarc.execute(args)
         }
         catch (Throwable t) {
-            println "ERROR: ${t.toString()}"
+            println "ERROR: $t"
             t.printStackTrace()
             println HELP
             systemExit(1)

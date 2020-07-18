@@ -114,7 +114,7 @@ abstract class AbstractSourceCode implements SourceCode {
     }
 
     private void logCompilationError(Throwable e) {
-        LOG.warn("Compilation failed for [${toString()}]; ${e.toString()}.")
+        LOG.warn("Compilation failed for [${this}]; ${e}.")
     }
 
     /**

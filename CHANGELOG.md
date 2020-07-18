@@ -11,7 +11,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
  - #524: **UnnecessarySemicolon** rule: Also check field definitions.
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
- - #273: **UnnecessaryToString** rule: Also check for `xx.toString()` added (+) to a String constant. 
+ - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
 
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE]
