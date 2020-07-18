@@ -85,12 +85,20 @@ class PropertiesFileRuleSetConfigurer {
                 def propertyName = matcher[0][2]
                 def rule = findRule(ruleSet, ruleName)
                 if (rule) {
-                    PropertyUtil.setPropertyFromString(rule, propertyName, v)
+                    setRuleProperty(rule, propertyName, v)
                 }
                 else {
                     LOG.warn("No such rule [$ruleName] for property [$k]. "  + MovedRules.getMovedOrRenamedMessageForRuleName(ruleName))
                 }
             }
+        }
+    }
+
+    private void setRuleProperty(Rule rule, String propertyName, String value) {
+        if (propertyName == 'name') {
+            LOG.warn("Overriding the rule 'name' property is not allowed; rule=" + rule.name)
+        } else {
+            PropertyUtil.setPropertyFromString(rule, propertyName, value)
         }
     }
 

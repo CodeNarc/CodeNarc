@@ -3,17 +3,19 @@
 
 TODO Next Version 2.0?    (??? 2020)
 --------------------------------------
+Updated/Enhanced Rules and Bug Fixes
+ - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE}
+ - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE}]
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
  - #524: **UnnecessarySemicolon** rule: Also check field definitions.
- - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'.
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
- - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants).
 
 Framework and Infrastructure
- - #525: Upgrade to Groovy 2.5.12.
- - #525: Support Java 14. Upgrade Java source/target compatibility to 1.7.
+ - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE}
+ - #525: Support Java 14. Upgrade Java source/target compatibility to 1.7. [BREAKING CHANGE}
+ - #532: Remove support for changing (overriding) a rule name in “codenarc.properties”. [BREAKING CHANGE}
  - #519: Update Gradle wrapper to 6.5. ([René Scheibe](https://github.com/darxriggs))
  - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
  - #496: Switched CodeNarc website to publish from `gh-pages` branch.
