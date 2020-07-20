@@ -16,9 +16,13 @@
 package org.codenarc
 
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.plugin.CodeNarcPlugin
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.FileResults
+import org.codenarc.rule.Rule
+import org.codenarc.rule.StubRule
+import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
@@ -46,20 +50,25 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     private static final ENCODING = 'UTF-8'
 
     private CodeNarcRunner codeNarcRunner
+    private RuleSet analyzedRuleSet
+    private SourceAnalyzer sourceAnalyzer = [analyze: { rs -> analyzedRuleSet = rs; RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
 
     @Test
-    void testInitialPropertyValues() {
+    void test_InitialPropertyValues() {
         assert codeNarcRunner.reportWriters == []
         assert codeNarcRunner.resultsProcessor instanceof NullResultsProcessor
     }
 
+    // Tests for execute()
+
     @Test
-    void testExecute_NoRuleSetFiles() {
+    void test_execute_NoRuleSetFiles() {
         shouldFailWithMessageContaining('ruleSetFiles') { codeNarcRunner.execute() }
     }
 
     @Test
-    void testExecute_NoSourceAnalyzer() {
+    void test_execute_NoSourceAnalyzer() {
+        codeNarcRunner.sourceAnalyzer = null
         codeNarcRunner.ruleSetFiles = XML_RULESET1
         codeNarcRunner.reportWriters << new HtmlReportWriter(outputFile:REPORT_FILE)
         shouldFailWithMessageContaining('sourceAnalyzer') { codeNarcRunner.execute() }
@@ -67,14 +76,11 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     @Test
     void testExecute() {
-        def ruleSet
-        def sourceAnalyzer = [analyze: { rs -> ruleSet = rs; RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
         def resultsProcessorCalled
         def resultsProcessor = [processResults:{ results ->
             assert results == RESULTS
             resultsProcessorCalled = true
         }] as ResultsProcessor
-        codeNarcRunner.sourceAnalyzer = sourceAnalyzer
         codeNarcRunner.resultsProcessor = resultsProcessor
 
         def analysisContext, results
@@ -88,75 +94,137 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
         assert codeNarcRunner.execute() == RESULTS
 
-        assert ruleSet.rules*.class == [FakePathRule]
+        assert analyzedRuleSet.rules*.class == [FakePathRule]
 
-        assert analysisContext.ruleSet == ruleSet
+        assert analysisContext.ruleSet == analyzedRuleSet
         assert analysisContext.sourceDirectories == SOURCE_DIRS
         assert results == RESULTS
         assert resultsProcessorCalled
     }
 
     @Test
-    void testExecute_NoReportWriters() {
-        def sourceAnalyzer = [analyze: { RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
-        codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+    void test_execute_NoReportWriters() {
         codeNarcRunner.ruleSetFiles = XML_RULESET1
         assert codeNarcRunner.execute() == RESULTS
     }
 
+    // Tests for Plugins
+
     @Test
-    void testCreateRuleSet_OneXmlRuleSet() {
+    void test_registerPlugin() {
+        def plugin1 = [a:1] as CodeNarcPlugin
+        def plugin2 = [b:1] as CodeNarcPlugin
+
+        codeNarcRunner.registerPlugin(plugin1)
+        assert codeNarcRunner.getPlugins() == [plugin1]
+        codeNarcRunner.registerPlugin(plugin2)
+        assert codeNarcRunner.getPlugins() == [plugin1, plugin2]
+
+        shouldFailWithMessageContaining('plugin') { codeNarcRunner.registerPlugin(null) }
+    }
+
+    @Test
+    void test_Plugin_execute_Calls_initialize() {
+        Set initialized = []
+        def plugin1 = [initialize:{ initialized << 'plugin1' }, processRules:{ }] as CodeNarcPlugin
+        def plugin2 = [initialize:{ initialized << 'plugin2' }, processRules:{ }] as CodeNarcPlugin
+
+        codeNarcRunner.registerPlugin(plugin1)
+        codeNarcRunner.registerPlugin(plugin2)
+
         codeNarcRunner.ruleSetFiles = XML_RULESET1
-        def ruleSet = codeNarcRunner.createRuleSet()
+
+        codeNarcRunner.execute()
+
+        assert initialized == ['plugin1', 'plugin2'] as Set
+    }
+
+    @Test
+    void test_Plugin_execute_Calls_processRules() {
+        def plugin1 = [             // MODIFY a rule
+                initialize:{ },
+                processRules:{ rules -> rules.find { rule -> rule.name == 'CatchThrowable' }.priority = 5 }
+            ] as CodeNarcPlugin
+        def plugin2 = [             // ADD a new rule
+                initialize:{ },
+                processRules:{ rules -> rules.add(new StubRule(name:'NewRule')) }
+        ] as CodeNarcPlugin
+        def plugin3 = [             // DELETE a rule
+                initialize:{ },
+                processRules:{ rules -> rules.removeAll { rule -> rule.name == 'ThrowExceptionFromFinallyBlock' } }
+        ] as CodeNarcPlugin
+
+        codeNarcRunner.registerPlugin(plugin1)
+        codeNarcRunner.registerPlugin(plugin2)
+        codeNarcRunner.registerPlugin(plugin3)
+
+        codeNarcRunner.ruleSetFiles = GROOVY_RULESET1   // CatchThrowable, ThrowExceptionFromFinallyBlockRule
+
+        codeNarcRunner.execute()
+
+        log(analyzedRuleSet.rules)
+        List<Rule> rules = analyzedRuleSet.getRules()
+        assert rules.size() == 2
+        assert rules.find { rule -> rule.name == 'CatchThrowable' }.priority == 5       // MODIFIED
+        assert rules.find { rule -> rule.name == 'NewRule' }                            // ADDED
+        assert !rules.find { rule -> rule.name == 'ThrowExceptionFromFinallyBlock' }    // DELETED
+    }
+
+    // Tests for createRuleSet()
+
+    @Test
+    void test_createRuleSet_OneXmlRuleSet() {
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+        def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['TestPath']
     }
 
     @Test
-    void testCreateRuleSet_OneGroovyRuleSet() {
+    void test_createRuleSet_OneGroovyRuleSet() {
         codeNarcRunner.ruleSetFiles = GROOVY_RULESET1
-        def ruleSet = codeNarcRunner.createRuleSet()
+        def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['CatchThrowable', 'ThrowExceptionFromFinallyBlock']
     }
 
     @Test
-    void testCreateRuleSet_MultipleRuleSets() {
+    void test_createRuleSet_MultipleRuleSets() {
         codeNarcRunner.ruleSetFiles = RULESET_FILES
-        def ruleSet = codeNarcRunner.createRuleSet()
+        def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'StatelessClass']
     }
 
     @Test
-    void testCreateRuleSet_MultipleRuleSets_WithSpaces() {
+    void test_createRuleSet_MultipleRuleSets_WithSpaces() {
         codeNarcRunner.ruleSetFiles = RULESET_FILES_WITH_SPACES
-        def ruleSet = codeNarcRunner.createRuleSet()
+        def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['TestPath', 'CatchThrowable', 'ThrowExceptionFromFinallyBlock', 'StatelessClass', 'Stub']
     }
 
     @Test
-    void testCreateRuleSet_RuleSetAsUrl() {
+    void test_createRuleSet_RuleSetAsUrl() {
         codeNarcRunner.ruleSetFiles = RULESET_AS_URL
-        def ruleSet = codeNarcRunner.createRuleSet()
+        def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['TestPath']
     }
 
     @Test
-    void testCreateRuleSet_WeirdCharsRuleSetUrl_Encoded() {
+    void test_createRuleSet_WeirdCharsRuleSetUrl_Encoded() {
         codeNarcRunner.ruleSetFiles = RULESET_URL_WITH_WEIRD_CHARS_ENCODED
-        def ruleSet = codeNarcRunner.createRuleSet()
+        def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['EmptyClass']
     }
 
     @Test
-    void testCreateRuleSet_WeirdCharsRuleSetUrl_Encoded_MultipleRuleSets() {
+    void test_createRuleSet_WeirdCharsRuleSetUrl_Encoded_MultipleRuleSets() {
         codeNarcRunner.ruleSetFiles = RULESET_URL_WITH_WEIRD_CHARS_ENCODED + ', ' + XML_RULESET1
-        def ruleSet = codeNarcRunner.createRuleSet()
+        def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['EmptyClass', 'TestPath']
     }
 
     @Test
-    void testCreateRuleSet_RuleSetFileDoesNotExist() {
+    void test_createRuleSet_RuleSetFileDoesNotExist() {
         codeNarcRunner.ruleSetFiles = 'rulesets/NoSuchRuleSet.txt'
-        shouldFail(FileNotFoundException) { codeNarcRunner.createRuleSet() }
+        shouldFail(FileNotFoundException) { codeNarcRunner.createInitialRuleSet() }
     }
 
     //--------------------------------------------------------------------------
@@ -164,8 +232,9 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     //--------------------------------------------------------------------------
 
     @Before
-    void setUpCodeNarcRunnerTest() {
+    void setUp() {
         codeNarcRunner = new CodeNarcRunner()
+        codeNarcRunner.sourceAnalyzer = sourceAnalyzer
     }
 
     private static String encode(String string) {
