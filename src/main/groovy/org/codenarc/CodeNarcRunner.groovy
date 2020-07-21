@@ -17,6 +17,7 @@ package org.codenarc
 
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.plugin.CodeNarcPlugin
+import org.codenarc.report.ReportWriter
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
@@ -47,7 +48,7 @@ class CodeNarcRunner {
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer
     ResultsProcessor resultsProcessor = new NullResultsProcessor()
-    List reportWriters = []
+    List<ReportWriter> reportWriters = []
     private final List<CodeNarcPlugin> plugins = []
 
     /**
@@ -138,8 +139,10 @@ class CodeNarcRunner {
         newRuleSet
     }
 
-    private List<Object> writeReports(AnalysisContext analysisContext, Results results) {
-        return reportWriters.each { reportWriter ->
+    private void writeReports(AnalysisContext analysisContext, Results results) {
+        this.plugins.each { plugin -> plugin.processReports(reportWriters) }
+
+        reportWriters.each { reportWriter ->
             reportWriter.writeReport(analysisContext, results)
         }
     }

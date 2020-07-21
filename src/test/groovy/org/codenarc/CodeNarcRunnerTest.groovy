@@ -15,21 +15,21 @@
  */
 package org.codenarc
 
+import static org.codenarc.test.TestUtil.shouldFail
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
+
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.plugin.CodeNarcPlugin
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.FileResults
+import org.codenarc.rule.FakePathRule
 import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.shouldFail
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
-import org.codenarc.rule.FakePathRule
 
 /**
  * Tests for CodeNarcRunner
@@ -126,8 +126,8 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     @Test
     void test_Plugin_execute_Calls_initialize() {
         Set initialized = []
-        def plugin1 = [initialize:{ initialized << 'plugin1' }, processRules:{ }] as CodeNarcPlugin
-        def plugin2 = [initialize:{ initialized << 'plugin2' }, processRules:{ }] as CodeNarcPlugin
+        def plugin1 = [initialize:{ initialized << 'plugin1' }, processRules:{ }, processReports:{ }] as CodeNarcPlugin
+        def plugin2 = [initialize:{ initialized << 'plugin2' }, processRules:{ }, processReports:{ }] as CodeNarcPlugin
 
         codeNarcRunner.registerPlugin(plugin1)
         codeNarcRunner.registerPlugin(plugin2)
@@ -143,15 +143,18 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     void test_Plugin_execute_Calls_processRules() {
         def plugin1 = [             // MODIFY a rule
                 initialize:{ },
-                processRules:{ rules -> rules.find { rule -> rule.name == 'CatchThrowable' }.priority = 5 }
+                processRules:{ rules -> rules.find { rule -> rule.name == 'CatchThrowable' }.priority = 5 },
+                processReports:{ }
             ] as CodeNarcPlugin
         def plugin2 = [             // ADD a new rule
                 initialize:{ },
-                processRules:{ rules -> rules.add(new StubRule(name:'NewRule')) }
+                processRules:{ rules -> rules.add(new StubRule(name:'NewRule')) },
+                processReports:{ }
         ] as CodeNarcPlugin
         def plugin3 = [             // DELETE a rule
                 initialize:{ },
-                processRules:{ rules -> rules.removeAll { rule -> rule.name == 'ThrowExceptionFromFinallyBlock' } }
+                processRules:{ rules -> rules.removeAll { rule -> rule.name == 'ThrowExceptionFromFinallyBlock' } },
+                processReports:{ }
         ] as CodeNarcPlugin
 
         codeNarcRunner.registerPlugin(plugin1)
@@ -168,6 +171,38 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert rules.find { rule -> rule.name == 'CatchThrowable' }.priority == 5       // MODIFIED
         assert rules.find { rule -> rule.name == 'NewRule' }                            // ADDED
         assert !rules.find { rule -> rule.name == 'ThrowExceptionFromFinallyBlock' }    // DELETED
+    }
+
+    @Test
+    void test_Plugin_execute_Calls_processReports() {
+        def written = []
+        def report1 = [writeReport:{ context, results -> written << '1' }] as ReportWriter
+        def report2 = [writeReport:{ context, results -> written << '2' }] as ReportWriter
+        def report3 = [writeReport:{ context, results -> written << '3' }] as ReportWriter
+
+        def plugin1 = [             // ADD a new report
+                initialize:{ },
+                processRules:{ rules -> },
+                processReports:{ reportWriters -> reportWriters << report3 }
+        ] as CodeNarcPlugin
+        def plugin2 = [             // DELETE a report
+                initialize:{ },
+                processRules:{ rules -> },
+                processReports:{ reportWriters -> reportWriters.remove(report2) }
+        ] as CodeNarcPlugin
+
+        codeNarcRunner.registerPlugin(plugin1)
+        codeNarcRunner.registerPlugin(plugin2)
+
+        codeNarcRunner.ruleSetFiles = GROOVY_RULESET1
+        codeNarcRunner.reportWriters = [report1, report2]
+
+        codeNarcRunner.execute()
+
+        def reports = codeNarcRunner.reportWriters
+        log(reports)
+        assert codeNarcRunner.reportWriters == [report1, report3]
+        assert written == ['1', '3']
     }
 
     // Tests for createRuleSet()
