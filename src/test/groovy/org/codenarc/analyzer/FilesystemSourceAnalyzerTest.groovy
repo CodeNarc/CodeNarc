@@ -199,6 +199,9 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
         if (results.path) {
             paths << results.path
         }
+        if (results instanceof FileResults) {
+            assert results.sourceCode
+        }
         results.children.each { child -> resultsPaths(child, paths) }
         log("resultsPaths=$paths")
         paths
