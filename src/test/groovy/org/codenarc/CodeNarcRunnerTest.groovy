@@ -19,6 +19,7 @@ import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.plugin.AbstractCodeNarcPlugin
 import org.codenarc.plugin.CodeNarcPlugin
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
@@ -31,6 +32,7 @@ import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
@@ -264,6 +266,27 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert written == ['1', '3']
     }
 
+    @Test
+    void test_Plugin_InitializesPluginsFromSystemProperty() {
+        String pluginClassNames = [CodeNarcRunnerTestPlugin1, CodeNarcRunnerTestPlugin2].name.join(', ')
+        System.setProperty(CodeNarcRunner.PLUGINS_PROPERTY, pluginClassNames)
+        log("pluginClassNames=$pluginClassNames")
+
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+
+        codeNarcRunner.execute()
+
+        assert CodeNarcRunnerTestPlugin1.initialized
+        assert CodeNarcRunnerTestPlugin2.initialized
+    }
+
+    @Test
+    void test_Plugin_InvalidPluginsSystemProperty() {
+        System.setProperty(CodeNarcRunner.PLUGINS_PROPERTY, 'xx, yy')
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+        shouldFailWithMessageContaining('xx') { codeNarcRunner.execute() }
+    }
+
     // Tests for createRuleSet()
 
     @Test
@@ -331,8 +354,33 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
     }
 
+    @After
+    void cleanUp() {
+        System.clearProperty(CodeNarcRunner.PLUGINS_PROPERTY)
+    }
+
     private static String encode(String string) {
         return URLEncoder.encode(string, ENCODING)
     }
 
+}
+
+@SuppressWarnings('AssignmentToStaticFieldFromInstanceMethod')
+class CodeNarcRunnerTestPlugin1 extends AbstractCodeNarcPlugin {
+    public static boolean initialized = false
+
+    @Override
+    void initialize() {
+        initialized = true
+    }
+}
+
+@SuppressWarnings('AssignmentToStaticFieldFromInstanceMethod')
+class CodeNarcRunnerTestPlugin2 extends AbstractCodeNarcPlugin {
+    public static boolean initialized = false
+
+    @Override
+    void initialize() {
+        initialized = true
+    }
 }
