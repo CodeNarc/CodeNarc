@@ -16,9 +16,15 @@
 package org.codenarc
 
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.plugin.CodeNarcPlugin
+import org.codenarc.plugin.FileViolations
+import org.codenarc.report.ReportWriter
+import org.codenarc.results.FileResults
 import org.codenarc.results.Results
+import org.codenarc.rule.Rule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
 import org.codenarc.ruleset.CompositeRuleSet
+import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.ruleset.RuleSetUtil
@@ -28,7 +34,7 @@ import org.codenarc.ruleset.RuleSetUtil
  * <p/>
  * The following properties must be configured before invoking the <code>execute()</code> method:
  * <ul>
- *   <li><code>rulesetfiles</code> - The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
+ *   <li><code>ruleSetFiles</code> - The path to the Groovy or XML RuleSet definition files, relative to the classpath. This can be a
  *          single file path, or multiple paths separated by commas.</li>
  *   <li><code>sourceAnalyzer</code> - An instance of a <code>org.codenarc.analyzer.SourceAnalyzer</code> implementation.</li>
  *   <li><code>reportWriters</code> - The list of <code>ReportWriter</code> instances. A report is generated
@@ -44,19 +50,24 @@ class CodeNarcRunner {
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer
     ResultsProcessor resultsProcessor = new NullResultsProcessor()
-    List reportWriters = []
+    List<ReportWriter> reportWriters = []
+    private final List<CodeNarcPlugin> plugins = []
 
     /**
      * The main entry point for this class. Runs CodeNarc and returns the results. Processing steps include:
      * <ol>
+     *   <li>Call initialize() for each registered CodeNarcPlugin</li>
      *   <li>Parse the <code>ruleSetFiles</code> property to create a RuleSet. Each path may be optionally prefixed by
      *     any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
      *     or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
      *     any problematic characters, such as comma (',') or hash ('#'). See {@link URLEncoder#encode(java.lang.String, java.lang.String)}.
      *   </li>
+     *   <li>Call processRules(List<Rule>) for each registered CodeNarcPlugin</li>
      *   <li>Configure the RuleSet from the "codenarc.properties" file, if that file is found on the classpath.</li>
      *   <li>Apply the configured <code>SourceAnalyzer</code>.</li>
+     *   <li>Call processViolationsForFile(FileViolations) for each file with violations</li>
      *   <li>Apply the configured <code>ResultsProcessor</code>.</li>
+     *   <li>Call processReports(List<ReportWriter>) for each registered CodeNarcPlugin</li>
      *   <li>Generate a report for each configured <code>ReportWriter</code>.</li>
      *   <li>Return the <code>Results</code> object representing the analysis results.</li>
      * </ol>
@@ -68,25 +79,71 @@ class CodeNarcRunner {
         assert sourceAnalyzer, 'The sourceAnalyzer property must be set to a valid SourceAnalyzer'
 
         def startTime = System.currentTimeMillis()
-        new RuleRegistryInitializer().initializeRuleRegistry()
-        def ruleSet = createRuleSet()
-        new PropertiesFileRuleSetConfigurer().configure(ruleSet)
+        initializeRuleRegistry()
+        initializePlugins()
+
+        def ruleSet = buildRuleSet()
+
         def results = sourceAnalyzer.analyze(ruleSet)
+        applyPluginsProcessViolationsForAllFiles(results)
+
         resultsProcessor.processResults(results)
-        def p1 = results.getNumberOfViolationsWithPriority(1, true)
-        def p2 = results.getNumberOfViolationsWithPriority(2, true)
-        def p3 = results.getNumberOfViolationsWithPriority(3, true)
-        def countsText = "(p1=$p1; p2=$p2; p3=$p3)"
+        String countsText = buildCountsText(results)
         def elapsedTime = System.currentTimeMillis() - startTime
         def analysisContext = new AnalysisContext(ruleSet:ruleSet, sourceDirectories:sourceAnalyzer.sourceDirectories)
 
-        reportWriters.each { reportWriter ->
-            reportWriter.writeReport(analysisContext, results)
-        }
+        writeReports(analysisContext, results)
 
         def resultsMessage = 'CodeNarc completed: ' + countsText + " ${elapsedTime}ms"
         println resultsMessage
         results
+    }
+
+    void registerPlugin(CodeNarcPlugin plugin) {
+        assert plugin
+        this.plugins << plugin
+    }
+
+    List<CodeNarcPlugin> getPlugins() {
+        return plugins
+    }
+
+    private void initializeRuleRegistry() {
+        new RuleRegistryInitializer().initializeRuleRegistry()
+    }
+
+    private void initializePlugins() {
+        this.plugins.each { plugin -> plugin.initialize() }
+    }
+
+    private RuleSet buildRuleSet() {
+        RuleSet initialRuleSet = createInitialRuleSet()
+        List<Rule> rules = applyPluginsProcessRules(initialRuleSet)
+        RuleSet ruleSet = new ListRuleSet(rules)
+        new PropertiesFileRuleSetConfigurer().configure(ruleSet)
+        return ruleSet
+    }
+
+    private List<Rule> applyPluginsProcessRules(RuleSet ruleSet) {
+        List<Rule> rules = new ArrayList(ruleSet.getRules())    // need it mutable
+        this.plugins.each { plugin -> plugin.processRules(rules) }
+        return rules
+    }
+
+    private void applyPluginsProcessViolationsForAllFiles(Results results) {
+        if (plugins) {
+            if (results.isFile()) {
+                applyPluginsProcessViolationsForFile(results)
+            }
+            results.children.each { childResults -> applyPluginsProcessViolationsForAllFiles(childResults) }
+        }
+    }
+
+    private void applyPluginsProcessViolationsForFile(FileResults fileResults) {
+        FileViolations fileViolations = new FileViolations(fileResults)
+        this.plugins.each { plugin ->
+            plugin.processViolationsForFile(fileViolations)
+        }
     }
 
     /**
@@ -94,7 +151,7 @@ class CodeNarcRunner {
      * The returned RuleSet may aggregate multiple underlying RuleSets.
      * @return a single RuleSet
      */
-    protected RuleSet createRuleSet() {
+    protected RuleSet createInitialRuleSet() {
         def paths = ruleSetFiles.tokenize(',')
         def newRuleSet = new CompositeRuleSet()
         paths.each { path ->
@@ -102,6 +159,21 @@ class CodeNarcRunner {
             newRuleSet.addRuleSet(ruleSet)
         }
         newRuleSet
+    }
+
+    private void writeReports(AnalysisContext analysisContext, Results results) {
+        this.plugins.each { plugin -> plugin.processReports(reportWriters) }
+
+        reportWriters.each { reportWriter ->
+            reportWriter.writeReport(analysisContext, results)
+        }
+    }
+
+    private String buildCountsText(Results results) {
+        def p1 = results.getNumberOfViolationsWithPriority(1, true)
+        def p2 = results.getNumberOfViolationsWithPriority(2, true)
+        def p3 = results.getNumberOfViolationsWithPriority(3, true)
+        return "(p1=$p1; p2=$p2; p3=$p3)"
     }
 
 }

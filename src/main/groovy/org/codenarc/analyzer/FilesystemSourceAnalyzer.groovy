@@ -113,7 +113,7 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
             dirResults.numberOfFilesInThisDirectory++
             List allViolations = collectViolations(sourceFile, ruleSet)
             if (allViolations) {
-                def fileResults = new FileResults(filePath, allViolations)
+                def fileResults = new FileResults(filePath, allViolations, sourceFile)
                 dirResults.addChild(fileResults)
             }
         }

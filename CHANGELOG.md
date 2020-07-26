@@ -13,6 +13,10 @@ Updated/Enhanced Rules and Bug Fixes
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
  - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
 
+CodeNarc Plugin Mechanism
+ - #494: Add `sourceCode` property to `FileResults`; set it from `FilesystemSourceAnalyzer` and `AntFileSetSourceAnalyzer`.
+ - #494: CodeNarcRunner: Apply plugins for rules, violations and reports.
+
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE]
  - #525: Support Java 14. Upgrade Java source/target compatibility to 1.7. [BREAKING CHANGE]

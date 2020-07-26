@@ -17,6 +17,7 @@ package org.codenarc.results
 
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
@@ -33,12 +34,14 @@ class FileResultsTest extends AbstractTestCase {
     private static final VIOLATION3 = new Violation(rule:new StubRule(3))
     private static final VIOLATION4 = new Violation(rule:new StubRule(4))
     private static final VIOLATION7 = new Violation(rule:new StubRule(7))
+    private static final SourceCode SOURCE_CODE = [:] as SourceCode
 
     @Test
-    void testWithNoViolations() {
+    void test_NoViolations() {
         def results = new FileResults(PATH, [])
         assert results.path == PATH
         assert results.children == []
+        assert results.sourceCode == null
         assert results.violations == []
 
         assert results.getNumberOfViolationsWithPriority(1) == 0
@@ -51,10 +54,20 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     @Test
-    void testWithViolations() {
+    void test_Constructor_sourceCode() {
+        def results = new FileResults(PATH, [], SOURCE_CODE)
+        assert results.path == PATH
+        assert results.children == []
+        assert results.sourceCode == SOURCE_CODE
+    }
+
+    @Test
+    void test_Violations() {
         def results = new FileResults(PATH, [VIOLATION1, VIOLATION3, VIOLATION7, VIOLATION3, VIOLATION1, VIOLATION2, VIOLATION4])
         assert results.children == []
+        assert results.sourceCode == null
         assert results.getViolations() == [VIOLATION1, VIOLATION3, VIOLATION7, VIOLATION3, VIOLATION1, VIOLATION2, VIOLATION4]
+        assert results.violations == results.rawViolations
 
         assert results.violations.findAll { v -> v.rule.priority == 1 } == [VIOLATION1, VIOLATION1]
         assert results.violations.findAll { v -> v.rule.priority == 2 } == [VIOLATION2]
@@ -71,7 +84,7 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     @Test
-    void testRemoveViolation() {
+    void test_removeViolation() {
         def emptyResults = new FileResults(PATH, [])
         emptyResults.removeViolation(VIOLATION3)
         assert emptyResults.getViolations() == []
@@ -84,7 +97,7 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetNumberOfFilesWithViolations_IgnoresViolationsWithHigherPriority() {
+    void test_getNumberOfFilesWithViolations_IgnoresViolationsWithHigherPriority() {
         def results = new FileResults(PATH, [VIOLATION3])
         assert results.getNumberOfFilesWithViolations(3) == 1
         assert results.getNumberOfFilesWithViolations(2) == 0
@@ -92,7 +105,7 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     @Test
-    void testFindResultsForPath() {
+    void test_findResultsForPath() {
         def results = new FileResults(PATH, [])
         assert results.findResultsForPath(null) == null
         assert results.findResultsForPath('xx/yy') == null
@@ -100,7 +113,7 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetViolations_ReturnsDefensiveCopy() {
+    void test_getViolations_ReturnsDefensiveCopy() {
         def results = new FileResults(PATH, [VIOLATION1, VIOLATION3])
         results.getViolations() << 123
         assert results.getViolations() == [VIOLATION1, VIOLATION3]

@@ -16,6 +16,7 @@
 package org.codenarc.results
 
 import org.codenarc.rule.Violation
+import org.codenarc.source.SourceCode
 
 /**
  * Represents the results of applying a set of rules against a single sourcefile
@@ -27,10 +28,16 @@ class FileResults implements Results {
 
     private final String path
     private final List violations
+    private final SourceCode sourceCode
 
     FileResults(String path, List violations) {
+        this(path, violations, null)
+    }
+
+    FileResults(String path, List violations, SourceCode sourceCode) {
         this.path = path
         this.violations = violations
+        this.sourceCode = sourceCode
     }
 
     /**
@@ -64,6 +71,11 @@ class FileResults implements Results {
     @Override
     List getViolations() {
         new ArrayList(violations)
+    }
+
+    /** Not intended for general use */
+    List getRawViolations() {
+        return violations
     }
 
     @Override
@@ -110,6 +122,6 @@ class FileResults implements Results {
 
     @Override
     String toString() {
-        "FileResults($path) $violations"
+        "FileResults($path); sourceCode=$sourceCode; $violations"
     }
 }

@@ -20,6 +20,7 @@ import static org.codenarc.test.TestUtil.*
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.analyzer.AnalyzerException
+import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
 import org.codenarc.rule.FakePathRule
@@ -233,6 +234,9 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     private void resultsPaths(Results results, List paths) {
         if (results.path) {
             paths << results.path
+            if (results instanceof FileResults) {
+                assert results.sourceCode
+            }
         }
         results.children.each { child -> resultsPaths(child, paths) }
     }
