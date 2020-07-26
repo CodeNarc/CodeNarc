@@ -37,6 +37,13 @@ interface CodeNarcPlugin {
     void processRules(List<Rule> rules)
 
     /**
+     * Process the violations for a single file. The List of violations within FileViolations can be modified in-place.
+     *
+     * @param fileViolations - the violations and associated metadata for a single file
+     */
+    void processViolationsForFile(FileViolations fileViolations)
+
+    /**
      * Process the list of ReportWriter. The List can be modified in-place. ReportWriters within the list can be modified,
      * or ReportWriters can be added or deleted from the list.
      *

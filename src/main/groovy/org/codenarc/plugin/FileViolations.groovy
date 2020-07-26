@@ -32,7 +32,7 @@ class FileViolations {
 
     FileViolations(FileResults fileResults) {
         this.path = fileResults.path
-        this.violations = fileResults.violations
+        this.violations = fileResults.rawViolations
         this.fileName = fileResults.sourceCode?.name ?: ''
         this.sourceText = fileResults.sourceCode?.text ?: ''
     }

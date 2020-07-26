@@ -22,10 +22,13 @@ import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.plugin.CodeNarcPlugin
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
+import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
+import org.codenarc.results.Results
 import org.codenarc.rule.FakePathRule
 import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
+import org.codenarc.rule.Violation
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
@@ -45,13 +48,16 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     private static final RULESET_AS_URL = 'file:src/test/resources/rulesets/RuleSet1.xml'
     private static final RULESET_URL_WITH_WEIRD_CHARS_ENCODED = 'file:' + encode('src/test/resources/rulesets/WeirdCharsRuleSet-,#.txt')
     private static final REPORT_FILE = 'CodeNarcTest-Report.html'
+    private static final Rule RULE = new StubRule(name:'Rule1', priority:1)
+
     private static final RESULTS = new FileResults('path', [])
     private static final SOURCE_DIRS = ['abc']
     private static final ENCODING = 'UTF-8'
 
     private CodeNarcRunner codeNarcRunner
     private RuleSet analyzedRuleSet
-    private SourceAnalyzer sourceAnalyzer = [analyze: { rs -> analyzedRuleSet = rs; RESULTS }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
+    private Results results = RESULTS
+    private SourceAnalyzer sourceAnalyzer = [analyze: { rs -> analyzedRuleSet = rs; results }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
 
     @Test
     void test_InitialPropertyValues() {
@@ -126,8 +132,8 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     @Test
     void test_Plugin_execute_Calls_initialize() {
         Set initialized = []
-        def plugin1 = [initialize:{ initialized << 'plugin1' }, processRules:{ }, processReports:{ }] as CodeNarcPlugin
-        def plugin2 = [initialize:{ initialized << 'plugin2' }, processRules:{ }, processReports:{ }] as CodeNarcPlugin
+        def plugin1 = [initialize:{ initialized << 'plugin1' }, processRules:{ }, processReports:{ }, processViolationsForFile:{ }] as CodeNarcPlugin
+        def plugin2 = [initialize:{ initialized << 'plugin2' }, processRules:{ }, processReports:{ }, processViolationsForFile:{ }] as CodeNarcPlugin
 
         codeNarcRunner.registerPlugin(plugin1)
         codeNarcRunner.registerPlugin(plugin2)
@@ -144,17 +150,20 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         def plugin1 = [             // MODIFY a rule
                 initialize:{ },
                 processRules:{ rules -> rules.find { rule -> rule.name == 'CatchThrowable' }.priority = 5 },
-                processReports:{ }
+                processReports:{ },
+                processViolationsForFile:{ }
             ] as CodeNarcPlugin
         def plugin2 = [             // ADD a new rule
                 initialize:{ },
                 processRules:{ rules -> rules.add(new StubRule(name:'NewRule')) },
-                processReports:{ }
+                processReports:{ },
+                processViolationsForFile:{ }
         ] as CodeNarcPlugin
         def plugin3 = [             // DELETE a rule
                 initialize:{ },
                 processRules:{ rules -> rules.removeAll { rule -> rule.name == 'ThrowExceptionFromFinallyBlock' } },
-                processReports:{ }
+                processReports:{ },
+                processViolationsForFile:{ }
         ] as CodeNarcPlugin
 
         codeNarcRunner.registerPlugin(plugin1)
@@ -174,6 +183,54 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     }
 
     @Test
+    void test_Plugin_execute_Calls_processViolationsForFile() {
+        Violation violation1 = new Violation(lineNumber:1, rule:RULE)
+        Violation violation2 = new Violation(lineNumber:2, rule:RULE)
+        Violation violation3 = new Violation(lineNumber:3, rule:RULE)
+
+        def plugin1 = [                         // MODIFY a violation
+                initialize:{ },
+                processRules:{ },
+                processViolationsForFile:{ fv -> fv.violations.find { v -> v.lineNumber == 2 }?.message = 'CHANGED' },
+                processReports:{ } ] as CodeNarcPlugin
+        def plugin2 = [                         // ADD a new violation
+                initialize:{ },
+                processRules:{ },
+                processViolationsForFile:{ fv ->
+                    if (fv.path == 'path1') {
+                        fv.violations.add(violation3)
+                    }
+                },
+                processReports:{ } ] as CodeNarcPlugin
+        def plugin3 = [                         // DELETE a violation
+                initialize:{ },
+                processRules:{ },
+                processViolationsForFile:{ fv -> fv.violations.remove(violation1) },
+                processReports:{ } ] as CodeNarcPlugin
+
+        codeNarcRunner.registerPlugin(plugin1)
+        codeNarcRunner.registerPlugin(plugin2)
+        codeNarcRunner.registerPlugin(plugin3)
+
+        def fileResults1 = new FileResults('path1', [violation1])
+        def fileResults2 = new FileResults('path2', [violation2])
+        results = new DirectoryResults('path')
+        def childDirResults = new DirectoryResults('path/sub')
+        results.addChild(fileResults1)
+        results.addChild(childDirResults)
+        childDirResults.addChild(fileResults2)
+        codeNarcRunner.ruleSetFiles = GROOVY_RULESET1
+
+        Results afterResults = codeNarcRunner.execute()
+
+        log("afterResults=$afterResults")
+        assert afterResults.violations.size() == 2
+        assert afterResults.violations.find { v -> v.lineNumber == 2 }.message == 'CHANGED'     // MODIFIED
+        assert afterResults.violations.find { v -> v.lineNumber == 3 }                          // ADDED
+        assert !afterResults.violations.find { v -> v.lineNumber == 1 }                         // DELETED
+    }
+
+    @Test
     void test_Plugin_execute_Calls_processReports() {
         def written = []
         def report1 = [writeReport:{ context, results -> written << '1' }] as ReportWriter
@@ -182,12 +239,14 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
         def plugin1 = [             // ADD a new report
                 initialize:{ },
-                processRules:{ rules -> },
+                processRules:{ },
+                processViolationsForFile:{ },
                 processReports:{ reportWriters -> reportWriters << report3 }
         ] as CodeNarcPlugin
         def plugin2 = [             // DELETE a report
                 initialize:{ },
-                processRules:{ rules -> },
+                processRules:{ },
+                processViolationsForFile:{ },
                 processReports:{ reportWriters -> reportWriters.remove(report2) }
         ] as CodeNarcPlugin
 

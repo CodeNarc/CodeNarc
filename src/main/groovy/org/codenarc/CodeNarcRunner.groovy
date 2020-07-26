@@ -17,7 +17,9 @@ package org.codenarc
 
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.plugin.CodeNarcPlugin
+import org.codenarc.plugin.FileViolations
 import org.codenarc.report.ReportWriter
+import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
@@ -63,7 +65,9 @@ class CodeNarcRunner {
      *   <li>Call processRules(List<Rule>) for each registered CodeNarcPlugin</li>
      *   <li>Configure the RuleSet from the "codenarc.properties" file, if that file is found on the classpath.</li>
      *   <li>Apply the configured <code>SourceAnalyzer</code>.</li>
+     *   <li>Call processViolationsForFile(FileViolations) for each file with violations</li>
      *   <li>Apply the configured <code>ResultsProcessor</code>.</li>
+     *   <li>Call processReports(List<ReportWriter>) for each registered CodeNarcPlugin</li>
      *   <li>Generate a report for each configured <code>ReportWriter</code>.</li>
      *   <li>Return the <code>Results</code> object representing the analysis results.</li>
      * </ol>
@@ -81,6 +85,8 @@ class CodeNarcRunner {
         def ruleSet = buildRuleSet()
 
         def results = sourceAnalyzer.analyze(ruleSet)
+        applyPluginsProcessViolationsForAllFiles(results)
+
         resultsProcessor.processResults(results)
         String countsText = buildCountsText(results)
         def elapsedTime = System.currentTimeMillis() - startTime
@@ -122,6 +128,22 @@ class CodeNarcRunner {
         List<Rule> rules = new ArrayList(ruleSet.getRules())    // need it mutable
         this.plugins.each { plugin -> plugin.processRules(rules) }
         return rules
+    }
+
+    private void applyPluginsProcessViolationsForAllFiles(Results results) {
+        if (plugins) {
+            if (results.isFile()) {
+                applyPluginsProcessViolationsForFile(results)
+            }
+            results.children.each { childResults -> applyPluginsProcessViolationsForAllFiles(childResults) }
+        }
+    }
+
+    private void applyPluginsProcessViolationsForFile(FileResults fileResults) {
+        FileViolations fileViolations = new FileViolations(fileResults)
+        this.plugins.each { plugin ->
+            plugin.processViolationsForFile(fileViolations)
+        }
     }
 
     /**

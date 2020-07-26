@@ -67,6 +67,7 @@ class FileResultsTest extends AbstractTestCase {
         assert results.children == []
         assert results.sourceCode == null
         assert results.getViolations() == [VIOLATION1, VIOLATION3, VIOLATION7, VIOLATION3, VIOLATION1, VIOLATION2, VIOLATION4]
+        assert results.violations == results.rawViolations
 
         assert results.violations.findAll { v -> v.rule.priority == 1 } == [VIOLATION1, VIOLATION1]
         assert results.violations.findAll { v -> v.rule.priority == 2 } == [VIOLATION2]
@@ -80,16 +81,6 @@ class FileResultsTest extends AbstractTestCase {
 
         assert results.getNumberOfFilesWithViolations(1) == 1
         assert results.totalNumberOfFiles == 1
-    }
-
-    @Test
-    void test_withViolations() {
-        def results = new FileResults(PATH, [VIOLATION1, VIOLATION2])
-        results.withViolations { violations ->
-            violations.remove(VIOLATION2)
-            violations.add(VIOLATION3)
-        }
-        assert results.violations == [VIOLATION1, VIOLATION3]
     }
 
     @Test
