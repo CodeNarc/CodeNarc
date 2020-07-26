@@ -73,6 +73,14 @@ class FileResults implements Results {
         new ArrayList(violations)
     }
 
+    /**
+     * Enable controlled access to the List of violations, allowing mutating that List
+     * @param closure the single-argument Closure; the argument is the List<Violation>
+     */
+    void withViolations(Closure closure) {
+        closure.call(violations)
+    }
+
     @Override
     void removeViolation(Violation v) {
         violations.remove(v)

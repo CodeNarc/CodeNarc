@@ -83,6 +83,16 @@ class FileResultsTest extends AbstractTestCase {
     }
 
     @Test
+    void test_withViolations() {
+        def results = new FileResults(PATH, [VIOLATION1, VIOLATION2])
+        results.withViolations { violations ->
+            violations.remove(VIOLATION2)
+            violations.add(VIOLATION3)
+        }
+        assert results.violations == [VIOLATION1, VIOLATION3]
+    }
+
+    @Test
     void test_removeViolation() {
         def emptyResults = new FileResults(PATH, [])
         emptyResults.removeViolation(VIOLATION3)
