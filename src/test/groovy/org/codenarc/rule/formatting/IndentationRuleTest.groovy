@@ -1009,7 +1009,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        }
         '''.stripMargin()
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Expected one of columns [5, 9, 13] but was 15'],
+            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'],
             [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
             [lineNumber:11, sourceLineText:'println name', messageText:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 1'],
         )
@@ -1026,7 +1026,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each4 { name -> println name }
         '''.stripMargin()
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Expected one of columns [5, 9, 13] but was 15'],
+            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'],
             [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
@@ -1187,6 +1187,127 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         '''.stripMargin()
         assertViolations(SOURCE,
             [lineNumber:6, sourceLineText:'println someName', messageText:'The statement on line 6 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
+        )
+    }
+
+    @Test
+    void test_MethodChaining_MultilineClosureParameter_Style3_NoViolation() {
+        def SOURCE = '''
+            |buildFileList().collect { item ->
+            |                   item.name
+            |               }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                   println someName
+            |               }
+            |               .each3 { name ->
+            |                   println name
+            |               }
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+
+        SOURCE = '''
+            |buildFileList().collect { item ->
+            |                   item.name
+            |               }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                   println someName
+            |               }
+            |               .each3 { name -> println name }
+            |               .each4 { name -> println name }
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+
+        SOURCE = '''
+            |buildFileList().collect { item -> item.name }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                   println someName
+            |               }
+            |               .each3 { name -> println name }
+            |               .each4 { name ->
+            |                   println name
+            |               }
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+
+        SOURCE = '''
+            |buildFileList().collect { item -> item.name }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                   println someName
+            |               }
+            |               .each3 { name -> println name }
+            |               .each4 { name -> println name }
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_MethodChaining_MultilineClosureParameter_Style3_Violation() {
+        def SOURCE = '''
+            |buildFileList().collect { item ->
+            |                     item.name
+            |               }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                 println someName
+            |               }
+            |               .each3 { name -> println name }
+            |               .each4 { name ->
+            |println name
+            |               }
+        '''.stripMargin()
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'],
+            [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
+            [lineNumber:11, sourceLineText:'println name', messageText:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 1'],
+        )
+
+        SOURCE = '''
+            |buildFileList().collect { item ->
+            |                     item.name
+            |               }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                 println someName
+            |               }
+            |               .each3 { name -> println name }
+            |               .each4 { name -> println name }
+        '''.stripMargin()
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'],
+            [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
+        )
+
+        SOURCE = '''
+            |buildFileList().collect { item -> item.name }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                     println someName
+            |               }
+            |               .each3 { name -> println name }
+            |               .each4 { name ->
+            |                 println name
+            |               }
+        '''.stripMargin()
+        assertViolations(SOURCE,
+            [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
+            [lineNumber:9, sourceLineText:'println name', messageText:'The statement on line 9 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
+        )
+
+        SOURCE = '''
+            |buildFileList().collect { item -> item.name }
+            |               .each1 { name -> println name }
+            |               .each2 { someName ->
+            |                     println someName
+            |               }
+            |               .each3 { name -> println name }
+            |               .each4 { name -> println name }
+        '''.stripMargin()
+        assertViolations(SOURCE,
+            [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
         )
     }
 

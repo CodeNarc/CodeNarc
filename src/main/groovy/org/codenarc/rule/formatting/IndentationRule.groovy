@@ -209,8 +209,8 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         args.expressions.each { expr ->
             if (isClosureWithBlock(expr)) {
                 BlockStatement blockStatementCode = (expr as ClosureExpression).code as BlockStatement
-                String methodSourceLine = sourceLineTrimmed(methodCallExpression.method)
-                methodColumnAndSourceLineForClosureBlock[blockStatementCode] = new Tuple2<Integer, String>(methodCallExpression.method.columnNumber, methodSourceLine)
+                String rawMethodSourceLine = sourceLine(methodCallExpression.method)
+                methodColumnAndSourceLineForClosureBlock[blockStatementCode] = new Tuple2<Integer, String>(methodCallExpression.method.columnNumber, rawMethodSourceLine)
             }
         }
     }
@@ -309,16 +309,28 @@ class IndentationAstVisitor extends AbstractAstVisitor {
 
     private void flexibleCheckForCorrectColumn(ASTNode node, String description, BlockStatement block) {
         Integer methodColumn = methodColumnAndSourceLineForClosureBlock[block].getFirst()
-        String methodSourceLine = methodColumnAndSourceLineForClosureBlock[block].getSecond()
+        String rawMethodSourceLine = methodColumnAndSourceLineForClosureBlock[block].getSecond()
 
         Boolean doesMethodWithClosureBlockExists = methodColumn > 0
-        Boolean isMethodWithClosureBlockStandaloneAndChained = doesMethodWithClosureBlockExists && methodSourceLine.startsWith('.')
+        Boolean isMethodWithClosureBlockStandaloneAndChained = doesMethodWithClosureBlockExists && rawMethodSourceLine.trim().startsWith('.')
+
+        Integer chainedMethodDotColumn = methodColumn - 1
+        Boolean isMethodWithClosureBlockInLineAndChained = doesMethodWithClosureBlockExists && !rawMethodSourceLine.trim().startsWith('.') && (rawMethodSourceLine[chainedMethodDotColumn - 1] == '.')
 
         if (isMethodWithClosureBlockStandaloneAndChained) {
-            Integer chainedMethodDotColumn = methodColumn - 1
             List<Integer> allowedColumns = (1..3).collect { level -> chainedMethodDotColumn + (level * (rule as IndentationRule).spacesPerIndentLevel) }
             if (!allowedColumns.contains(node.columnNumber)) {
                 addViolation(node, "The $description is at the incorrect indent level: Expected one of columns $allowedColumns but was ${node.columnNumber}")
+            }
+        } else if (isMethodWithClosureBlockInLineAndChained) {
+            List<Integer> allowedColumnsByGlobalIndentLevel = (0..2).collect { level -> columnForIndentLevel(indentLevel + level) }
+            List<Integer> allowedColumnsByMethodIndentLevel = (1..3).collect { level -> chainedMethodDotColumn + (level * (rule as IndentationRule).spacesPerIndentLevel) }
+
+            if (!allowedColumnsByGlobalIndentLevel.contains(node.columnNumber) && !allowedColumnsByMethodIndentLevel.contains(node.columnNumber)) {
+                addViolation(
+                  node,
+                  "The $description is at the incorrect indent level: Depending on your chaining style, expected one of $allowedColumnsByGlobalIndentLevel or one of $allowedColumnsByMethodIndentLevel columns, but was ${node.columnNumber}"
+                )
             }
         } else {
             List<Integer> allowedColumns = (0..2).collect { level -> columnForIndentLevel(indentLevel + level) }
