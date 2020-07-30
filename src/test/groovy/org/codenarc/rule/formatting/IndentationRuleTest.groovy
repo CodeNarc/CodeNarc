@@ -940,7 +940,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
 
     @Test
     void test_MethodChaining_MultilineClosureParameter_Style1_NoViolation() {
-        def SOURCE = '''
+        def source = '''
             |buildFileList().collect { item ->
             |            item.name
             |        }
@@ -953,9 +953,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |            println name
             |        }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item ->
             |            item.name
             |        }
@@ -966,9 +966,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |        .each1 { name -> println name }
             |        .each2 { someName ->
@@ -979,9 +979,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |            println name
             |        }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |        .each1 { name -> println name }
             |        .each2 { someName ->
@@ -990,12 +990,12 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
     }
 
     @Test
     void test_MethodChaining_MultilineClosureParameter_Style1_Violation() {
-        def SOURCE = '''
+        def source = '''
             |buildFileList().collect { item ->
             |              item.name
             |        }
@@ -1008,13 +1008,17 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |println name
             |        }
         '''.stripMargin()
-        assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'],
+        assertViolations(source,
+            [
+              lineNumber:3,
+              sourceLineText:'item.name',
+              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'
+            ],
             [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
             [lineNumber:11, sourceLineText:'println name', messageText:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 1'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item ->
             |              item.name
             |        }
@@ -1025,12 +1029,16 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'],
+        assertViolations(source,
+            [
+              lineNumber:3,
+              sourceLineText:'item.name',
+              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 15'
+            ],
             [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |        .each1 { name -> println name }
             |        .each2 { someName ->
@@ -1041,12 +1049,12 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |          println name
             |        }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
             [lineNumber:9, sourceLineText:'println name', messageText:'The statement on line 9 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |        .each1 { name -> println name }
             |        .each2 { someName ->
@@ -1055,14 +1063,14 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
         )
     }
 
     @Test
     void test_MethodChaining_MultilineClosureParameter_Style2_NoViolation() {
-        def SOURCE = '''
+        def source = '''
             |buildFileList()
             |        .collect { item ->
             |            item.name
@@ -1076,9 +1084,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |            println name
             |        }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList()
             |        .collect { item ->
             |            item.name
@@ -1090,9 +1098,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList()
             |        .collect { item -> item.name }
             |        .each1 { name -> println name }
@@ -1104,9 +1112,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |            println name
             |        }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList()
             |        .collect { item -> item.name }
             |        .each1 { name -> println name }
@@ -1116,35 +1124,35 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
     }
 
     @Test
     void test_MethodChaining_MultilineClosureParameter_Style2_Violation() {
-        def SOURCE = '''
+        def source = '''
             |buildFileList()
-            |        .collect { item -> 
-            |              item.name 
+            |        .collect { item ->
+            |              item.name
             |        }
             |        .each1 { name -> println name }
             |        .each2 { someName ->
             |          println someName
             |        }
             |        .each3 { name -> println name }
-            |        .each4 { name -> 
-            |println name 
+            |        .each4 { name ->
+            |println name
             |        }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:4, sourceLineText:'item.name', messageText:'The statement on line 4 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
             [lineNumber:8, sourceLineText:'println someName', messageText:'The statement on line 8 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
             [lineNumber:12, sourceLineText:'println name', messageText:'The statement on line 12 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 1'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList()
-            |        .collect { item -> 
-            |              item.name 
+            |        .collect { item ->
+            |              item.name
             |        }
             |        .each1 { name -> println name }
             |        .each2 { someName ->
@@ -1153,12 +1161,12 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:4, sourceLineText:'item.name', messageText:'The statement on line 4 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
             [lineNumber:8, sourceLineText:'println someName', messageText:'The statement on line 8 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList()
             |        .collect { item -> item.name }
             |        .each1 { name -> println name }
@@ -1170,12 +1178,12 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |          println name
             |        }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:6, sourceLineText:'println someName', messageText:'The statement on line 6 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
             [lineNumber:10, sourceLineText:'println name', messageText:'The statement on line 10 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 11'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList()
             |        .collect { item -> item.name }
             |        .each1 { name -> println name }
@@ -1185,14 +1193,14 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |        .each3 { name -> println name }
             |        .each4 { name -> println name }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:6, sourceLineText:'println someName', messageText:'The statement on line 6 in class None is at the incorrect indent level: Expected one of columns [13, 17, 21] but was 15'],
         )
     }
 
     @Test
     void test_MethodChaining_MultilineClosureParameter_Style3_NoViolation() {
-        def SOURCE = '''
+        def source = '''
             |buildFileList().collect { item ->
             |                   item.name
             |               }
@@ -1204,9 +1212,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |                   println name
             |               }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item ->
             |                   item.name
             |               }
@@ -1217,9 +1225,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |               .each3 { name -> println name }
             |               .each4 { name -> println name }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |               .each1 { name -> println name }
             |               .each2 { someName ->
@@ -1230,9 +1238,9 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |                   println name
             |               }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |               .each1 { name -> println name }
             |               .each2 { someName ->
@@ -1241,12 +1249,12 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |               .each3 { name -> println name }
             |               .each4 { name -> println name }
         '''.stripMargin()
-        assertNoViolations(SOURCE)
+        assertNoViolations(source)
     }
 
     @Test
     void test_MethodChaining_MultilineClosureParameter_Style3_Violation() {
-        def SOURCE = '''
+        def source = '''
             |buildFileList().collect { item ->
             |                     item.name
             |               }
@@ -1259,13 +1267,17 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |println name
             |               }
         '''.stripMargin()
-        assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'],
+        assertViolations(source,
+            [
+              lineNumber:3,
+              sourceLineText:'item.name',
+              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'
+            ],
             [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
             [lineNumber:11, sourceLineText:'println name', messageText:'The statement on line 11 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 1'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item ->
             |                     item.name
             |               }
@@ -1276,12 +1288,16 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |               .each3 { name -> println name }
             |               .each4 { name -> println name }
         '''.stripMargin()
-        assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'item.name', messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'],
+        assertViolations(source,
+            [
+              lineNumber:3,
+              sourceLineText:'item.name',
+              messageText:'The statement on line 3 in class None is at the incorrect indent level: Depending on your chaining style, expected one of [5, 9, 13] or one of [20, 24, 28] columns, but was 22'
+            ],
             [lineNumber:7, sourceLineText:'println someName', messageText:'The statement on line 7 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |               .each1 { name -> println name }
             |               .each2 { someName ->
@@ -1292,12 +1308,12 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |                 println name
             |               }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
             [lineNumber:9, sourceLineText:'println name', messageText:'The statement on line 9 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 18'],
         )
 
-        SOURCE = '''
+        source = '''
             |buildFileList().collect { item -> item.name }
             |               .each1 { name -> println name }
             |               .each2 { someName ->
@@ -1306,7 +1322,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
             |               .each3 { name -> println name }
             |               .each4 { name -> println name }
         '''.stripMargin()
-        assertViolations(SOURCE,
+        assertViolations(source,
             [lineNumber:5, sourceLineText:'println someName', messageText:'The statement on line 5 in class None is at the incorrect indent level: Expected one of columns [20, 24, 28] but was 22'],
         )
     }

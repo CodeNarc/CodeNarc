@@ -86,7 +86,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     private final Set<BlockStatement> nestedBlocks = []
     private final Set<BlockStatement> flexibleIndentBlocks = []
     private final Map<BlockStatement, Integer> blockIndentLevel = [:].withDefault { 0 }
-    private final Map<BlockStatement, Tuple2<Integer, String>> methodColumnAndSourceLineForClosureBlock = [:].withDefault { new Tuple2<>(0, "") }
+    private final Map<BlockStatement, Tuple2<Integer, String>> methodColumnAndSourceLineForClosureBlock = [:].withDefault { new Tuple2<>(0, '') }
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -327,10 +327,9 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             List<Integer> allowedColumnsByMethodIndentLevel = (1..3).collect { level -> chainedMethodDotColumn + (level * (rule as IndentationRule).spacesPerIndentLevel) }
 
             if (!allowedColumnsByGlobalIndentLevel.contains(node.columnNumber) && !allowedColumnsByMethodIndentLevel.contains(node.columnNumber)) {
-                addViolation(
-                  node,
-                  "The $description is at the incorrect indent level: Depending on your chaining style, expected one of $allowedColumnsByGlobalIndentLevel or one of $allowedColumnsByMethodIndentLevel columns, but was ${node.columnNumber}"
-                )
+                String violationMessage = "The $description is at the incorrect indent level: Depending on your chaining style, expected one of $allowedColumnsByGlobalIndentLevel " +
+                                          "or one of $allowedColumnsByMethodIndentLevel columns, but was ${node.columnNumber}"
+                addViolation(node, violationMessage)
             }
         } else {
             List<Integer> allowedColumns = (0..2).collect { level -> columnForIndentLevel(indentLevel + level) }
