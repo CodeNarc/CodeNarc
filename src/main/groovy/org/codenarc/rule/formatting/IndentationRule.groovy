@@ -86,6 +86,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     private final Set<BlockStatement> nestedBlocks = []
     private final Set<BlockStatement> flexibleIndentBlocks = []
     private final Map<BlockStatement, Integer> blockIndentLevel = [:].withDefault { 0 }
+    private final Map<BlockStatement, Tuple2<Integer, String>> methodColumnAndSourceLineForClosureBlock = [:].withDefault { new Tuple2<>(0, '') }
 
     @Override
     protected void visitClassEx(ClassNode node) {
@@ -182,6 +183,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
             }
 
             setupFlexibleIndentForAnyClosureParameterBlocks(args)
+            recordMethodColumnAndSourceLineForClosureBlocks(call, args)
         }
 
         super.visitMethodCallExpression(call)
@@ -199,6 +201,16 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         args.expressions.each { expr ->
             if (isClosureWithBlock(expr)) {
                 flexibleIndentBlocks << expr.code
+            }
+        }
+    }
+
+    private void recordMethodColumnAndSourceLineForClosureBlocks(MethodCallExpression methodCallExpression, ArgumentListExpression args) {
+        args.expressions.each { expr ->
+            if (isClosureWithBlock(expr)) {
+                BlockStatement blockStatementCode = (expr as ClosureExpression).code as BlockStatement
+                String rawMethodSourceLine = sourceLine(methodCallExpression.method)
+                methodColumnAndSourceLineForClosureBlock[blockStatementCode] = new Tuple2<Integer, String>(methodCallExpression.method.columnNumber, rawMethodSourceLine)
             }
         }
     }
@@ -253,7 +265,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     private void checkStatementIndent(Statement statement, BlockStatement block) {
         String description = "statement on line ${statement.lineNumber} in class ${currentClassName}"
         if (flexibleIndentBlocks.contains(block)) {
-            flexibleCheckForCorrectColumn(statement, description)
+            flexibleCheckForCorrectColumn(statement, description, block)
         } else {
             checkForCorrectColumn(statement, description)
         }
@@ -295,10 +307,35 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private void flexibleCheckForCorrectColumn(ASTNode node, String description) {
-        List<Integer> allowedColumns = (0..2).collect { level -> columnForIndentLevel(indentLevel + level) }
-        if (!allowedColumns.contains(node.columnNumber)) {
-            addViolation(node, "The $description is at the incorrect indent level: Expected one of columns $allowedColumns but was ${node.columnNumber}")
+    private void flexibleCheckForCorrectColumn(ASTNode node, String description, BlockStatement block) {
+        Integer methodColumn = methodColumnAndSourceLineForClosureBlock[block].getFirst()
+        String rawMethodSourceLine = methodColumnAndSourceLineForClosureBlock[block].getSecond()
+
+        Boolean doesMethodWithClosureBlockExists = methodColumn > 0
+        Boolean isMethodWithClosureBlockStandaloneAndChained = doesMethodWithClosureBlockExists && rawMethodSourceLine.trim().startsWith('.')
+
+        Integer chainedMethodDotColumn = methodColumn - 1
+        Boolean isMethodWithClosureBlockInLineAndChained = doesMethodWithClosureBlockExists && !rawMethodSourceLine.trim().startsWith('.') && (rawMethodSourceLine[chainedMethodDotColumn - 1] == '.')
+
+        if (isMethodWithClosureBlockStandaloneAndChained) {
+            List<Integer> allowedColumns = (1..3).collect { level -> chainedMethodDotColumn + (level * (rule as IndentationRule).spacesPerIndentLevel) }
+            if (!allowedColumns.contains(node.columnNumber)) {
+                addViolation(node, "The $description is at the incorrect indent level: Expected one of columns $allowedColumns but was ${node.columnNumber}")
+            }
+        } else if (isMethodWithClosureBlockInLineAndChained) {
+            List<Integer> allowedColumnsByGlobalIndentLevel = (0..2).collect { level -> columnForIndentLevel(indentLevel + level) }
+            List<Integer> allowedColumnsByMethodIndentLevel = (1..3).collect { level -> chainedMethodDotColumn + (level * (rule as IndentationRule).spacesPerIndentLevel) }
+
+            if (!allowedColumnsByGlobalIndentLevel.contains(node.columnNumber) && !allowedColumnsByMethodIndentLevel.contains(node.columnNumber)) {
+                String violationMessage = "The $description is at the incorrect indent level: Depending on your chaining style, expected one of $allowedColumnsByGlobalIndentLevel " +
+                                          "or one of $allowedColumnsByMethodIndentLevel columns, but was ${node.columnNumber}"
+                addViolation(node, violationMessage)
+            }
+        } else {
+            List<Integer> allowedColumns = (0..2).collect { level -> columnForIndentLevel(indentLevel + level) }
+            if (!allowedColumns.contains(node.columnNumber)) {
+                addViolation(node, "The $description is at the incorrect indent level: Expected one of columns $allowedColumns but was ${node.columnNumber}")
+            }
         }
     }
 

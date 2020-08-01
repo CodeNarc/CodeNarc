@@ -907,51 +907,6 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
-    void test_MethodChaining() {
-        final SOURCE = '''
-            |buildFileList()
-            |    .collect { File it ->
-            |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
-            |        String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +
-            |            "FILE_PATH=${it.absolutePath}\\n"
-            |        cacheDir + File.separator + inputFile + sha1
-            |    }
-            |    .each { name ->
-            |        println name
-            |    }
-            |println "done"
-            |
-            |list2.collect { item ->
-            |    item.name
-            |}.each { name -> println name }
-            |
-            |otherList.collect { item -> item.name }.each { name -> println name }
-            |
-            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {
-            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {
-            |        AstUtil.classNodeImplementsType(expr.type, it)
-            |    }.each {
-            |        callbackFunction()
-            |    }
-            |}
-        '''.stripMargin()
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void test_MethodChaining_MultilineClosureParameter() {
-        final SOURCE = '''
-            |buildFileList().collect { item -> item.name }
-            |        .each { name -> println name }
-            |        .each { someName ->
-            |            println someName
-            |        }
-            |        .each { name -> println name }
-        '''.stripMargin()
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
     void test_GString_IfStatement() {
         final SOURCE = '''
             |"${if (true) 'content' else ''}"
