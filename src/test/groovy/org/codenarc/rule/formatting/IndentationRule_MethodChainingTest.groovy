@@ -20,10 +20,58 @@ import org.junit.Test
 
 /**
  * Tests for method chaining support in IndentationRule.
+ * <p/>
+ * Three chained method call styles are supported:
+ * <ul>
+ *   <li>
+ *     Style 1 (let's call it 'starting in-line style'). With this style, the first chained method call is in the same line as a method starting a chain, for example:
+ *     <pre>
+ * buildFileList().collect { item ->
+ *             item.name
+ *         }
+ *         .each { name -> println name }
+ *         .each { someName ->
+ *             println someName
+ *         }
+ *         .each { name -> println name }
+ *         ...
+ *     </pre>
+ *   </li>
+ *   <li>
+ *     Style 2 (let's call it 'wrapped style'). With this style, the first chained method call is wrapped in the new line, for example:
+ *     <pre>
+ * buildFileList()
+ *         .collect { item ->
+ *             item.name
+ *         }
+ *         .each { name -> println name }
+ *         .each { someName ->
+ *             println someName
+ *         }
+ *         .each { name -> println name }
+ *         ...
+ *     </pre>
+ *   </li>
+ *   <li>
+ *     Style 3 (let's call it 'dot-aligned style'). With this style, the first chained method call is in the same line as a method starting a chain, but the following chained methods are aligned to the <b>dot character</b>
+ *     of the first chained method, for example:
+ *     <pre>
+ * buildFileList().collect { item ->
+ *                    item.name
+ *                }
+ *                .each { name -> println name }
+ *                .each { someName ->
+ *                    println someName
+ *                }
+ *                .each { name -> println name }
+ *                ...
+ *     </pre>
+ *   </li>
+ * </ul>
  *
- * @author Chris Mair
+ * @author Damir Murat
  */
-class IndentationForMethodChainingIndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
+class IndentationRule_MethodChainingTest extends AbstractRuleTestCase<IndentationRule> {
     @Override
     protected IndentationRule createRule() {
         new IndentationRule()
