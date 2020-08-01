@@ -287,6 +287,30 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         shouldFailWithMessageContaining('xx') { codeNarcRunner.execute() }
     }
 
+    @Test
+    void test_registerPluginsForClassNames() {
+        def pluginClasses = [CodeNarcRunnerTestPlugin1, CodeNarcRunnerTestPlugin2]
+        String pluginClassNames = pluginClasses.name.join(', ')
+        codeNarcRunner.registerPluginsForClassNames(pluginClassNames)
+        assert codeNarcRunner.plugins*.getClass() == pluginClasses
+    }
+
+    @Test
+    void test_registerPluginsForClassNames_NullOrEmpty() {
+        codeNarcRunner.registerPluginsForClassNames(null)
+        codeNarcRunner.registerPluginsForClassNames('')
+        assert codeNarcRunner.plugins.empty
+    }
+
+    @Test
+    void test_registerPluginsForClassNames_InvalidClassName() {
+        shouldFailWithMessageContaining('xx') { codeNarcRunner.registerPluginsForClassNames('xx') }
+
+        // Not a CodeNarcPlugin
+        String nonPluginClass = 'java.lang.Integer'
+        shouldFailWithMessageContaining(nonPluginClass) { codeNarcRunner.registerPluginsForClassNames(nonPluginClass) }
+    }
+
     // Tests for createRuleSet()
 
     @Test

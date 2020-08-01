@@ -111,6 +111,15 @@ class CodeNarcRunner {
         return plugins
     }
 
+    void registerPluginsForClassNames(String pluginClassNames) {
+        if (pluginClassNames) {
+            def classNamesList = pluginClassNames.tokenize(',')*.trim()
+            classNamesList.each { className -> registerPluginForClassName(className) }
+        }
+    }
+
+    // Helper methods
+
     private void initializeRuleRegistry() {
         new RuleRegistryInitializer().initializeRuleRegistry()
     }
@@ -175,14 +184,14 @@ class CodeNarcRunner {
 
     private void initializePluginsFromSystemProperty() {
         String pluginClassNames = System.getProperty(PLUGINS_PROPERTY)
-        if (pluginClassNames) {
-            def classNamesList = pluginClassNames.tokenize(',')*.trim()
-            classNamesList.each { className ->
-                def pluginClass = getClass().classLoader.loadClass(className)
-                def plugin = pluginClass.newInstance()
-                registerPlugin(plugin)
-            }
-        }
+        registerPluginsForClassNames(pluginClassNames)
+    }
+
+    private void registerPluginForClassName(String className) {
+        def pluginClass = getClass().classLoader.loadClass(className)
+        assert CodeNarcPlugin.isAssignableFrom(pluginClass), "The className [$className] is not a CodeNarcPlugin"
+        def plugin = pluginClass.newInstance()
+        registerPlugin(plugin)
     }
 
     private String buildCountsText(Results results) {
