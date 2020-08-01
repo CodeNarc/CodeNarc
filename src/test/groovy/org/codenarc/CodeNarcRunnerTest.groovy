@@ -19,8 +19,9 @@ import static org.codenarc.test.TestUtil.shouldFail
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.analyzer.SourceAnalyzer
-import org.codenarc.plugin.AbstractCodeNarcPlugin
 import org.codenarc.plugin.CodeNarcPlugin
+import org.codenarc.plugin.TestPlugin1
+import org.codenarc.plugin.TestPlugin2
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.DirectoryResults
@@ -268,7 +269,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     @Test
     void test_Plugin_InitializesPluginsFromSystemProperty() {
-        String pluginClassNames = [CodeNarcRunnerTestPlugin1, CodeNarcRunnerTestPlugin2].name.join(', ')
+        String pluginClassNames = [TestPlugin1, TestPlugin2].name.join(', ')
         System.setProperty(CodeNarcRunner.PLUGINS_PROPERTY, pluginClassNames)
         log("pluginClassNames=$pluginClassNames")
 
@@ -276,8 +277,8 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
         codeNarcRunner.execute()
 
-        assert CodeNarcRunnerTestPlugin1.initialized
-        assert CodeNarcRunnerTestPlugin2.initialized
+        assert TestPlugin1.initialized
+        assert TestPlugin2.initialized
     }
 
     @Test
@@ -289,7 +290,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     @Test
     void test_registerPluginsForClassNames() {
-        def pluginClasses = [CodeNarcRunnerTestPlugin1, CodeNarcRunnerTestPlugin2]
+        def pluginClasses = [TestPlugin1, TestPlugin2]
         String pluginClassNames = pluginClasses.name.join(', ')
         codeNarcRunner.registerPluginsForClassNames(pluginClassNames)
         assert codeNarcRunner.plugins*.getClass() == pluginClasses
@@ -387,24 +388,4 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         return URLEncoder.encode(string, ENCODING)
     }
 
-}
-
-@SuppressWarnings('AssignmentToStaticFieldFromInstanceMethod')
-class CodeNarcRunnerTestPlugin1 extends AbstractCodeNarcPlugin {
-    public static boolean initialized = false
-
-    @Override
-    void initialize() {
-        initialized = true
-    }
-}
-
-@SuppressWarnings('AssignmentToStaticFieldFromInstanceMethod')
-class CodeNarcRunnerTestPlugin2 extends AbstractCodeNarcPlugin {
-    public static boolean initialized = false
-
-    @Override
-    void initialize() {
-        initialized = true
-    }
 }

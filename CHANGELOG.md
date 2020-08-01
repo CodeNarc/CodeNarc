@@ -16,6 +16,7 @@ Updated/Enhanced Rules and Bug Fixes
 CodeNarc Plugin Mechanism
  - #494: Add `sourceCode` property to `FileResults`; set it from `FilesystemSourceAnalyzer` and `AntFileSetSourceAnalyzer`.
  - #494: CodeNarcRunner: Apply plugins for rules, violations and reports. Register any plugin classes specified by the "org.codenarc.plugins" system property.
+ - #494: Add *plugins* property to the CodeNarc Ant Task (`CodeNarcTask`).
 
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE]

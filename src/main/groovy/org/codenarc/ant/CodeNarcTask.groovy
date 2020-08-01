@@ -37,29 +37,31 @@ import org.slf4j.LoggerFactory
 
 /**
  * Ant Task for running CodeNarc.
- * <p/>
+ * <p>
  * The <code>ruleSetFiles</code> property specifies the path to the Groovy or XML RuleSet
  * definition files, relative to the classpath. This can be a single file path, or multiple
  * paths separated by commas. It is required.
- * <p/>
+ * <p>
  * The <code>maxPriority1Violations</code> property specifies the maximum number of priority 1
  * violations allowed before failing the build (throwing a BuildException). Likewise,
  * <code>maxPriority2Violations</code> and <code>maxPriority3Violations</code> specify the
  * thresholds for violations of priority 2 and 3.
- * <p/>
+ * <p>
  * The <code>failOnError</code> property indicates whether to terminate and fail the task if any errors
  * occur parsing source files (true), or just log the errors (false). It defaults to false.
- * <p/>
+ * <p>
  * At least one nested <code>fileset</code> element is required, and is used to specify the source files
  * to be analyzed. This is the standard Ant <i>FileSet</i>, and is quite powerful and flexible.
  * See the <i>Apache Ant Manual</i> for more information on <i>FileSets</i>.
- * <p/>
+ * <p>
  * The <ode>report</code> nested element defines the format and output file for the analysis report.
  * HTML (type="html"), XML (type="xml"), CONSOLE (type="console"), IDE (type="ide") are the supported formats.
  * Each report is configured using nested <code>option</code> elements, with <code>name</code>, and
  * <code>value</code> attributes.
+ * <p>
+ * The <code>plugins</code> optional property is the list of CodeNarcPlugin class names to register, separated by commas.
  *
- * @see "http://ant.apache.org/manual/index.html"
+ * @see <a href="http://ant.apache.org/manual/index.html">Apache Ant Manual</a>
  *
  * @author Chris Mair
  */
@@ -72,6 +74,11 @@ class CodeNarcTask extends Task {
      * single file path, or multiple paths separated by commas.
      */
     String ruleSetFiles
+
+    /**
+     * The optional list of CodeNarcPlugin class names to register, separated by commas.
+     */
+    String plugins
 
     /**
      * The path to a Baseline Violations report (report type "baseline"). If set, then all violations specified
@@ -101,13 +108,14 @@ class CodeNarcTask extends Task {
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
     protected Closure createCodeNarcRunner = {
+        def codeNarcRunner = new CodeNarcRunner()
         if (excludeBaseline) {
             LOG.info("Loading baseline violations from [$excludeBaseline]")
             def resource = resourceFactory.getResource(excludeBaseline)
             def resultsProcessor = new BaselineResultsProcessor(resource)
-            return new CodeNarcRunner(resultsProcessor:resultsProcessor)
+            codeNarcRunner.resultsProcessor = resultsProcessor
         }
-        return new CodeNarcRunner()
+        return codeNarcRunner
     }
 
     /**
@@ -123,6 +131,10 @@ class CodeNarcTask extends Task {
         codeNarcRunner.ruleSetFiles = ruleSetFiles
         codeNarcRunner.reportWriters = reportWriters
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+
+        if (plugins) {
+            codeNarcRunner.registerPluginsForClassNames(plugins)
+        }
 
         def results = executeRunnerWithConfiguredClasspath(codeNarcRunner)
 

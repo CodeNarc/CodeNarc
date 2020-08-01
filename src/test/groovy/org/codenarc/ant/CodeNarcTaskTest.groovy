@@ -15,7 +15,8 @@
  */
 package org.codenarc.ant
 
-import static org.codenarc.test.TestUtil.*
+import static org.codenarc.test.TestUtil.shouldFail
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Project
@@ -40,10 +41,11 @@ import org.junit.Test
  */
 class CodeNarcTaskTest extends AbstractTestCase {
 
-    private static final BASE_DIR = 'src/test/resources'
-    private static final RULESET_FILE = 'rulesets/RuleSet1.xml'
-    private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
-    private static final RESULTS = new FileResults('path', [])
+    private static final String BASE_DIR = 'src/test/resources'
+    private static final String RULESET_FILE = 'rulesets/RuleSet1.xml'
+    private static final String RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/RuleSet2.xml'
+    private static final FileResults RESULTS = new FileResults('path', [])
+    private static final String PLUGIN_NAMES = 'abc, def'
 
     private CodeNarcTask codeNarcTask
     private FileSet fileSet
@@ -126,6 +128,19 @@ class CodeNarcTaskTest extends AbstractTestCase {
         assert codeNarcRunner.sourceAnalyzer.fileSets == [fileSet, fileSet2]
         assert codeNarcRunner.ruleSetFiles == RULESET_FILE
         assertStandardHtmlReportWriter(codeNarcRunner)
+    }
+
+    @Test
+    void testExecute_Plugins() {
+        def pluginClassNames
+        def codeNarcRunner = [execute: { RESULTS }, registerPluginsForClassNames: { names -> pluginClassNames = names }]
+        codeNarcTask.createCodeNarcRunner = { codeNarcRunner }
+
+        codeNarcTask.addFileset(fileSet)
+        codeNarcTask.plugins = PLUGIN_NAMES
+        codeNarcTask.execute()
+
+        assert pluginClassNames == PLUGIN_NAMES
     }
 
     @Test
