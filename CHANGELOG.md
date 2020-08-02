@@ -1,6 +1,11 @@
 
 # CodeNarc Change Log
 
+Version 1.6.1    (Aug 2020)
+--------------------------------------
+ - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
+
+
 Version 1.6    (Jun 2020)
 --------------------------------------
 New Rules
