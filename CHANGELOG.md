@@ -10,6 +10,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
  - #524: **UnnecessarySemicolon** rule: Also check field definitions.
+ - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
  - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
 

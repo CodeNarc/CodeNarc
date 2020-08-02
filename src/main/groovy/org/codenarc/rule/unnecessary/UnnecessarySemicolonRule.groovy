@@ -74,13 +74,16 @@ class UnnecessarySemicolonRule extends AbstractAstVisitorRule {
 
         String line = sourceCode.getLines().get(lineNumber - 1) + ' '   // to make it easier to extract the final chars
         int lastColumn = node.lastColumnNumber
-        boolean lastCharIsSemicolon = line[lastColumn - 1] == ';'
+        boolean lastCharIsSemicolon = endsWithSemicolon(line, lastColumn - 1)
 
         if (lastCharIsSemicolon) {
             violations << createViolation(lineNumber, line, MESSAGE)
         }
     }
 
+    protected static boolean endsWithSemicolon(String line, int column) {
+        return line[column..-1] ==~ /\s*\;.*/
+    }
 }
 
 class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
@@ -106,7 +109,9 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
         String line = lastSourceLine(node) + ' '   // to make it easier to extract the final chars
 
         // Some statements (e.g. "for") have lastColumnNumber in different relative positions
-        boolean lastCharIsSemicolon = line[lastColumn - 2] == ';' || line[lastColumn - 1] == ';'
+        boolean lastCharIsSemicolon =
+                (lastColumn > 1 && UnnecessarySemicolonRule.endsWithSemicolon(line, lastColumn - 2)) ||
+                UnnecessarySemicolonRule.endsWithSemicolon(line, lastColumn - 1)
 
         def lineNumber = node.lastLineNumber
 
