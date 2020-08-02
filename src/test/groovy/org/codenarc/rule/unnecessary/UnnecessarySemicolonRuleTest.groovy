@@ -222,6 +222,20 @@ class UnnecessarySemicolonRuleTest extends AbstractRuleTestCase<UnnecessarySemic
         assertSingleViolation(SOURCE, 3, 'println("raccoon");', MESSAGE)
     }
 
+    @Test
+    void test_SpaceBeforeSemicolon() {
+        final SOURCE = '''
+            package my.company.server ;
+            import java.lang.String ;
+            println("test") ;
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:2, sourceLineText:'package my.company.server ;', messageText:MESSAGE],
+                [lineNumber:3, sourceLineText:'import java.lang.String ;', messageText:MESSAGE],
+                [lineNumber:4, sourceLineText:'println("test") ;', messageText:MESSAGE]
+        )
+    }
+
     @Override
     protected UnnecessarySemicolonRule createRule() {
         new UnnecessarySemicolonRule()
