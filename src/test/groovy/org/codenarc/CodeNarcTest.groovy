@@ -53,6 +53,7 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String JSON_REPORT_FILE = 'CodeNarcTest-Report.json'
     private static final String JSON_REPORT_STR = "json:$JSON_REPORT_FILE"
     private static final String JSON_REPORT_STDOUT_STR = 'json:stdout'
+    private static final String PLUGIN_NAMES = 'abc,def'
     private static final int P1 = 1, P2 = 2, P3 = 3
 
     private CodeNarc codeNarc
@@ -65,7 +66,7 @@ class CodeNarcTest extends AbstractTestCase {
             assert recursive == true
             return numViolations[priority]
         }] as Results
-    private final codeNarcRunner = [execute: { results }]
+    private codeNarcRunner = [execute: { results }]
 
     //------------------------------------------------------------------------------------
     // Tests
@@ -294,6 +295,18 @@ class CodeNarcTest extends AbstractTestCase {
         def reportWriter = codeNarcRunner.reportWriters[0]
         assertReport(reportWriter, HtmlReportWriter, null, null)
         assert exitCode == 0
+    }
+
+    @Test
+    void testExecute_Plugins() {
+        final ARGS = ["-plugins=$PLUGIN_NAMES"] as String[]
+
+        def pluginClassNames
+        codeNarcRunner = [execute: { results }, registerPluginsForClassNames: { names -> pluginClassNames = names }]
+
+        codeNarc.execute(ARGS)
+
+        assert pluginClassNames == PLUGIN_NAMES
     }
 
     @Test

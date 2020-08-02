@@ -52,6 +52,7 @@ import org.codenarc.util.CodeNarcVersion
  *          If the report filename is omitted, the default filename is used ("CodeNarcReport.html").
  *          If no report option is specified, defaults to a single 'html' report with the default filename.
  *          </li>
+ *   <li>plugins - The optional list of CodeNarcPlugin class names to register, separated by commas.</li>
  * </ul>
  *
  * @author Chris Mair
@@ -98,6 +99,8 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         is used for the specified report type ("CodeNarcReport.html" for "html", "CodeNarcXmlReport.xml" for
         "xml" and "CodeNarcJsonReport.json" for "json"). If no report option is specified, default to a
         single "html" report with the default filename.
+    -plugins=<PLUGIN CLASS NAMES>
+        The optional list of CodeNarcPlugin class names to register, separated by commas.
     -help
         Display the command-line help. If present, this must be the only command-line parameter.
   Example command-line invocations:
@@ -115,6 +118,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     protected String includes
     protected String excludes
     protected String title
+    protected String plugins
     protected List reports = []
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
@@ -168,6 +172,11 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         codeNarcRunner.ruleSetFiles = ruleSetFiles
         codeNarcRunner.reportWriters = reports
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+
+        if (plugins) {
+            codeNarcRunner.registerPluginsForClassNames(plugins)
+        }
+
         Results results = codeNarcRunner.execute()
         checkMaxViolations(results, 1, maxPriority1Violations)
         checkMaxViolations(results, 2, maxPriority2Violations)
@@ -217,6 +226,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
                 case 'maxPriority1Violations': maxPriority1Violations = value as int; break
                 case 'maxPriority2Violations': maxPriority2Violations = value as int; break
                 case 'maxPriority3Violations': maxPriority3Violations = value as int; break
+                case 'plugins': plugins = value; break
                 default: throw new IllegalArgumentException("Invalid option: [$arg]")
             }
         }

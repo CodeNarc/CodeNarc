@@ -47,6 +47,8 @@ import org.codenarc.ruleset.RuleSetUtil
  */
 class CodeNarcRunner {
 
+    public static final String PLUGINS_PROPERTY = 'org.codenarc.plugins'
+
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer
     ResultsProcessor resultsProcessor = new NullResultsProcessor()
@@ -56,6 +58,7 @@ class CodeNarcRunner {
     /**
      * The main entry point for this class. Runs CodeNarc and returns the results. Processing steps include:
      * <ol>
+     *   <li>Register any CodeNarcPlugins specified by the "org.codenarc.plugins" system property</li>
      *   <li>Call initialize() for each registered CodeNarcPlugin</li>
      *   <li>Parse the <code>ruleSetFiles</code> property to create a RuleSet. Each path may be optionally prefixed by
      *     any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
@@ -108,11 +111,21 @@ class CodeNarcRunner {
         return plugins
     }
 
+    void registerPluginsForClassNames(String pluginClassNames) {
+        if (pluginClassNames) {
+            def classNamesList = pluginClassNames.tokenize(',')*.trim()
+            classNamesList.each { className -> registerPluginForClassName(className) }
+        }
+    }
+
+    // Helper methods
+
     private void initializeRuleRegistry() {
         new RuleRegistryInitializer().initializeRuleRegistry()
     }
 
     private void initializePlugins() {
+        initializePluginsFromSystemProperty()
         this.plugins.each { plugin -> plugin.initialize() }
     }
 
@@ -167,6 +180,18 @@ class CodeNarcRunner {
         reportWriters.each { reportWriter ->
             reportWriter.writeReport(analysisContext, results)
         }
+    }
+
+    private void initializePluginsFromSystemProperty() {
+        String pluginClassNames = System.getProperty(PLUGINS_PROPERTY)
+        registerPluginsForClassNames(pluginClassNames)
+    }
+
+    private void registerPluginForClassName(String className) {
+        def pluginClass = getClass().classLoader.loadClass(className)
+        assert CodeNarcPlugin.isAssignableFrom(pluginClass), "The className [$className] is not a CodeNarcPlugin"
+        def plugin = pluginClass.newInstance()
+        registerPlugin(plugin)
     }
 
     private String buildCountsText(Results results) {

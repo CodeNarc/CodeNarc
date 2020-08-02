@@ -20,6 +20,8 @@ import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.plugin.CodeNarcPlugin
+import org.codenarc.plugin.TestPlugin1
+import org.codenarc.plugin.TestPlugin2
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.DirectoryResults
@@ -31,6 +33,7 @@ import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
@@ -264,6 +267,51 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert written == ['1', '3']
     }
 
+    @Test
+    void test_Plugin_InitializesPluginsFromSystemProperty() {
+        String pluginClassNames = [TestPlugin1, TestPlugin2].name.join(', ')
+        System.setProperty(CodeNarcRunner.PLUGINS_PROPERTY, pluginClassNames)
+        log("pluginClassNames=$pluginClassNames")
+
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+
+        codeNarcRunner.execute()
+
+        assert TestPlugin1.initialized
+        assert TestPlugin2.initialized
+    }
+
+    @Test
+    void test_Plugin_InvalidPluginsSystemProperty() {
+        System.setProperty(CodeNarcRunner.PLUGINS_PROPERTY, 'xx, yy')
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+        shouldFailWithMessageContaining('xx') { codeNarcRunner.execute() }
+    }
+
+    @Test
+    void test_registerPluginsForClassNames() {
+        def pluginClasses = [TestPlugin1, TestPlugin2]
+        String pluginClassNames = pluginClasses.name.join(', ')
+        codeNarcRunner.registerPluginsForClassNames(pluginClassNames)
+        assert codeNarcRunner.plugins*.getClass() == pluginClasses
+    }
+
+    @Test
+    void test_registerPluginsForClassNames_NullOrEmpty() {
+        codeNarcRunner.registerPluginsForClassNames(null)
+        codeNarcRunner.registerPluginsForClassNames('')
+        assert codeNarcRunner.plugins.empty
+    }
+
+    @Test
+    void test_registerPluginsForClassNames_InvalidClassName() {
+        shouldFailWithMessageContaining('xx') { codeNarcRunner.registerPluginsForClassNames('xx') }
+
+        // Not a CodeNarcPlugin
+        String nonPluginClass = 'java.lang.Integer'
+        shouldFailWithMessageContaining(nonPluginClass) { codeNarcRunner.registerPluginsForClassNames(nonPluginClass) }
+    }
+
     // Tests for createRuleSet()
 
     @Test
@@ -329,6 +377,11 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     void setUp() {
         codeNarcRunner = new CodeNarcRunner()
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+    }
+
+    @After
+    void cleanUp() {
+        System.clearProperty(CodeNarcRunner.PLUGINS_PROPERTY)
     }
 
     private static String encode(String string) {
