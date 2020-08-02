@@ -20,6 +20,7 @@ import org.codenarc.rule.Rule
 
 /**
  * Abstract superclass for CodeNarcPlugin implementations. Provides null (do-nothing) implementations for each method.
+ * This class is subject to change.
  */
 @SuppressWarnings(['EmptyMethodInAbstractClass', 'AbstractClassWithoutAbstractMethod'])
 abstract class AbstractCodeNarcPlugin implements CodeNarcPlugin {
