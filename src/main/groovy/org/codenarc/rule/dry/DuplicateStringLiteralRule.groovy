@@ -29,10 +29,16 @@ import java.util.regex.Pattern
  * <p>
  * You can customize the delimiter for the <code>ignoreStrings</code> by setting the <code>ignoreStringsDelimiter</code>, which defaults to ",".
  * <p>
+ *
+ * Set the optional <code>duplicateStringMinimumLength</code> property to an integer so this rule
+ * will ignore literal strings whose length is lower than this parameter (i.e., not cause a violation).
+ * There is no default value for this property
+
  * By default, this rule does not apply to test files.
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
+ * @author Nicolas Vuillamy
  */
 class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
 
@@ -41,11 +47,13 @@ class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
     String ignoreStrings = ''
     char ignoreStringsDelimiter = ','
+    Integer duplicateStringMinimumLength
 
     @Override
     AstVisitor getAstVisitor() {
         def ignoreValuesSet = parseIgnoreValues()
-        new DuplicateLiteralAstVisitor(String, ignoreValuesSet)
+        def additionalChecksClosure = defineAdditionalChecksClosure()
+        new DuplicateLiteralAstVisitor(String, ignoreValuesSet, additionalChecksClosure)
     }
 
     private Set parseIgnoreValues() {
@@ -55,5 +63,13 @@ class DuplicateStringLiteralRule extends AbstractAstVisitorRule {
         String delimiter = ignoreStringsDelimiter as String
         def strings = ignoreStrings.contains(delimiter) ? ignoreStrings.split(Pattern.quote(delimiter)) : [ignoreStrings]
         return strings as Set
+    }
+
+    // Define a compare closure if duplicateNumberMinimumValue is sent
+    private Closure defineAdditionalChecksClosure() {
+        if (duplicateStringMinimumLength || duplicateStringMinimumLength == 0) {
+            return { node -> node.value.size() >= duplicateStringMinimumLength }
+        }
+        null
     }
 }
