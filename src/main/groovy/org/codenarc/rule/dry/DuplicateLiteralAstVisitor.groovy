@@ -27,12 +27,14 @@ import org.codenarc.rule.AbstractAstVisitor
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
+ * @author Nicolas Vuillamy
   */
 class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     List<String> constants = []
     private final List<Class> constantTypes
     private final Set ignoreValuesSet
+    private final Closure additionalCheckClosure
     private boolean isEnum
 
     DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet) {
@@ -45,6 +47,20 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
         assert constantTypes
         this.constantTypes = constantTypes
         this.ignoreValuesSet = ignoreValuesSet
+    }
+
+    DuplicateLiteralAstVisitor(Class constantType, Set ignoreValuesSet, Closure addlCheckClosure) {
+        assert constantType
+        this.constantTypes = [constantType]
+        this.ignoreValuesSet = ignoreValuesSet
+        this.additionalCheckClosure = addlCheckClosure
+    }
+
+    DuplicateLiteralAstVisitor(List<Class> constantTypes, Set ignoreValuesSet, Closure addlCheckClosure) {
+        assert constantTypes
+        this.constantTypes = constantTypes
+        this.ignoreValuesSet = ignoreValuesSet
+        this.additionalCheckClosure = addlCheckClosure
     }
 
     @Override
@@ -121,7 +137,7 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitAnnotations(AnnotatedNode node) {
-        // Skip annotation.
+    // Skip annotation.
     }
 
     private void addViolationIfDuplicate(Expression node, boolean isStatic = false) {
@@ -135,12 +151,19 @@ class DuplicateLiteralAstVisitor extends AbstractAstVisitor {
 
         for (Class constantType: constantTypes) {
             if ((constantType.isAssignableFrom(node.value.class) || node.value.class == constantType || node.type.typeClass == constantType)) {
-                if (constants.contains(literal) && !isStatic && !ignoreValuesSet.contains(literal)) {
+                if (constants.contains(literal) && !isStatic && !ignoreValuesSet.contains(literal) && checkAdditional(node)) {
                     addViolation node, "Duplicate ${constantType.simpleName} Literal: $literal"
                     return
                 }
             }
         }
         constants.add literal
+    }
+
+    private boolean checkAdditional(Expression node) {
+        if (additionalCheckClosure != null) {
+            return additionalCheckClosure.call(node)
+        }
+        true
     }
 }

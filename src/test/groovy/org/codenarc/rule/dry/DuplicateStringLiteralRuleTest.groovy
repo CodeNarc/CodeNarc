@@ -23,6 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
+ * @author Nicolas Vuillamy
   */
 class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStringLiteralRule> {
 
@@ -245,6 +246,33 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
         '''
         rule.ignoreStrings = ' xyz ,foo'
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDuplicateStringMinimumLength_Success() {
+        final SOURCE = '''
+            def y = ['foo', 'foo']
+        '''
+        rule.duplicateStringMinimumLength = 4
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDuplicateStringMinimumLength_ViolationEquals() {
+        final SOURCE = '''
+            def y = ['foo', 'foo']
+        '''
+        rule.duplicateStringMinimumLength = 3
+        assertSingleViolation(SOURCE, 2, "def y = ['foo', 'foo']")
+    }
+
+    @Test
+    void testDuplicateStringMinimumLength_ViolationUpper() {
+        final SOURCE = '''
+            def y = ['foo', 'foo']
+        '''
+        rule.duplicateStringMinimumLength = 2
+        assertSingleViolation(SOURCE, 2, "def y = ['foo', 'foo']")
     }
 
     @Test

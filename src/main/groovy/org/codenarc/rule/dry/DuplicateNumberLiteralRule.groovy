@@ -24,10 +24,15 @@ import org.codenarc.rule.AstVisitor
  * Set the optional <code>ignoreNumbers</code> property to a comma-separated list (String) of
  * the numbers that should be ignored by this rule (i.e., not cause a violation). This property
  * defaults to "0,1" to ignore the constants zero and one.
+
+ * Set the optional <code>duplicateNumberMinimumValue</code> property to an integer so this rule
+ * will ignore literal numbers lower than this parameter (i.e., not cause a violation). There is
+ * no default value for this property
  *
  * By default, this rule does not apply to test files.
  *
  * @author Chris Mair
+ * @author Nicolas Vuillamy
  */
 class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
 
@@ -43,16 +48,28 @@ class DuplicateNumberLiteralRule extends AbstractAstVisitorRule {
     int priority = 2
     String doNotApplyToFilesMatching = DEFAULT_TEST_FILES
     String ignoreNumbers = '0,1'
+    Integer duplicateNumberMinimumValue
 
     @Override
     AstVisitor getAstVisitor() {
         def ignoreValuesSet = parseIgnoreValues()
-        new DuplicateLiteralAstVisitor(NUMBER_TYPES, ignoreValuesSet)
+        def additionalChecksClosure = defineAdditionalChecksClosure()
+        new DuplicateLiteralAstVisitor(NUMBER_TYPES, ignoreValuesSet, additionalChecksClosure)
     }
 
     private Set parseIgnoreValues() {
         def strings = ignoreNumbers ? ignoreNumbers.tokenize(',') : []
         def numbers = strings*.trim()
         numbers as Set
+    }
+
+    // Define a compare closure if duplicateNumberMinimumValue is defined
+    private Closure defineAdditionalChecksClosure() {
+        if (duplicateNumberMinimumValue || duplicateNumberMinimumValue == 0) {
+            return { node ->
+                Integer.valueOf(node.value) >= Integer.valueOf(duplicateNumberMinimumValue)
+            }
+        }
+        null
     }
 }
