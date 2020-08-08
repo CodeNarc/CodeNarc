@@ -1,4 +1,3 @@
-
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
@@ -11,10 +10,13 @@ Updated/Enhanced Rules and Bug Fixes
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
- - #544: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: New parameters duplicateStringMinimumLength and duplicateNumberMinimumValue  ([Nicolas Vuillamy](https://github.com/nvuillam))
+ - #544: **DuplicateStringLiteral** rule: New *duplicateStringMinimumLength* property. ([Nicolas Vuillamy](https://github.com/nvuillam))
+ - #544: **DuplicateNumberLiteral** rule: New *duplicateNumberMinimumValue* property. ([Nicolas Vuillamy](https://github.com/nvuillam))
  - #524: **UnnecessarySemicolon** rule: Also check field definitions.
  - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
+ - #536: **Indentation** rule: Method chaining improvements. ([Damir Murat](https://github.com/dmurat))
+ - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes. 
  - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
 
 CodeNarc Plugin Mechanism

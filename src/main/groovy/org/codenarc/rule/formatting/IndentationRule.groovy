@@ -85,6 +85,7 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     private final Set<Integer> ignoreLineNumbers = []
     private final Set<BlockStatement> nestedBlocks = []
     private final Set<BlockStatement> flexibleIndentBlocks = []
+    private final Set<ConstructorCallExpression> constructorCallInStatements = []
     private final Map<BlockStatement, Integer> blockIndentLevel = [:].withDefault { 0 }
     private final Map<BlockStatement, Tuple2<Integer, String>> methodColumnAndSourceLineForClosureBlock = [:].withDefault { new Tuple2<>(0, '') }
 
@@ -124,7 +125,27 @@ class IndentationAstVisitor extends AbstractAstVisitor {
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (call.isUsingAnonymousInnerClass()) {
-            getIndentLevelsMap()[call.type] = indentLevel
+            // If the anonymous inner class is the first/only statement on the line, then its contents should be indented
+            int firstColumn = firstNonWhitespaceColumn(sourceLine(call))
+            boolean beginsTheLine = firstColumn == call.columnNumber
+
+            int indentLevelForClass = indentLevel
+
+            if (beginsTheLine && !constructorCallInStatements.contains(call)) {
+                int column = call.columnNumber
+                if (!isValidColumn(column)) {
+                    def description = "inner class ${call.type.name} on line ${call.type.lineNumber}"
+                    addViolation(call, "The $description starting column $column is not a valid column for the indentation level")
+                }
+                else if (column < columnForIndentLevel(indentLevel)) {
+                    def description = "inner class ${call.type.name} on line ${call.type.lineNumber}"
+                    addViolation(call, "The $description should be indented beyond the enclosing indent level")
+                }
+
+                indentLevelForClass = indentLevelFromColumn(column)
+            }
+
+            getIndentLevelsMap()[call.type] = indentLevelForClass
         }
         super.visitConstructorCallExpression(call)
     }
@@ -247,6 +268,9 @@ class IndentationAstVisitor extends AbstractAstVisitor {
                     nestedBlocks << statement
                 }
 
+                // If the statement is a ConstructorCall, then register it so we don't check its indent again when visiting those
+                registerConstructorCalls(statement)
+
                 // Ignore super/this constructor calls -- they have messed up column numbers
                 boolean isConstructorCall = (statement instanceof ExpressionStatement) && (statement.expression instanceof ConstructorCallExpression)
                 boolean isSuperConstructorCall = isConstructorCall && statement.expression.superCall
@@ -260,6 +284,18 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         }
         super.visitBlockStatement(block)
         indentLevel -= addToIndentLevel
+    }
+
+    private void registerConstructorCalls(Statement statement) {
+        if (statement instanceof ExpressionStatement) {
+            Expression expression = statement.expression
+            if (expression instanceof ConstructorCallExpression) {
+                constructorCallInStatements << expression
+            }
+            if (expression instanceof MethodCallExpression && expression.objectExpression instanceof ConstructorCallExpression) {
+                constructorCallInStatements << expression.objectExpression
+            }
+        }
     }
 
     private void checkStatementIndent(Statement statement, BlockStatement block) {
@@ -383,4 +419,11 @@ class IndentationAstVisitor extends AbstractAstVisitor {
         return -1
     }
 
+    protected boolean isValidColumn(int column) {
+        return column % rule.spacesPerIndentLevel == 1
+    }
+
+    private int indentLevelFromColumn(int column) {
+        return (column - 1) / rule.spacesPerIndentLevel
+    }
 }

@@ -943,12 +943,117 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
     }
 
     @Test
+    void test_InlineAnonymousClass() {
+        final SOURCE = '''
+            |class IndentationTest {
+            |    private static final CacheLoader<String, List<String>> OK = new CacheLoader<String, List<String>>() {
+            |        List<String> load(String key) {
+            |            key.upperCase()
+            |        }
+            |    }
+            |    private static final LoadingCache<String, List<String>> NOT_OK = CacheBuilder.newBuilder().build(
+            |        new CacheLoader<String, List<String>>() {
+            |            List<String> load(String key) {
+            |                key.upperCase()
+            |            }
+            |        }
+            |    )
+            |
+            |    void someMethod() {
+            |        CacheBuilder2.newBuilder().build(
+            |            new CacheLoader2<String, List<String>>() {
+            |                List<String> load2(String key) {
+            |                    key.upperCase()
+            |                }
+            |            }
+            |        )
+            |    }
+            |
+            |    AstVisitor getAstVisitor() {
+            |        println 'start'
+            |        new ExplicitTypeInstantiationAstVisitor('ArrayList') {
+            |            @Override
+            |            protected String createErrorMessage() {
+            |                'ArrayList objects ..'
+            |            }
+            |        }
+            |    }
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_InlineAnonymousClass_Violations() {
+        final SOURCE = '''
+            |class IndentationTest {
+            |    private static final CACHE2 = build(
+            |       new CacheLoader<String>() { } )     // Violation - wrong column
+            |
+            |    void someMethod() {
+            |        CacheBuilder2.build(
+            |    new CacheLoader2<String>() {           // Violation - valid indent offset, not indented enough
+            |        void load2(String key) {
+            |            key.upperCase()
+            |        }
+                 })
+            |    }
+            |
+            |    void doStuff() {
+            |         new BigDeal() {                   // Violation - wrong column
+            |            String errorMessage() { }
+            |        }
+            |
+            |      new Runner() { }.run()               // Violation - wrong column
+            |
+            |        CacheBuilder2.build(
+            |         new CacheLoader2() { })           // Violation - wrong column
+            |
+            |        def processor2 =
+            |          new Processor2() { }             // Violation - Wrong column
+            |    }
+            |}
+        '''.stripMargin()
+        assertViolations(SOURCE,
+                [lineNumber:4, sourceLineText:'new CacheLoader<String>() { }', messageText:'The inner class IndentationTest$'],
+                [lineNumber:8, sourceLineText:'new CacheLoader2<String>() {', messageText:'The inner class IndentationTest$'],
+                [lineNumber:16, sourceLineText:'new BigDeal() {', messageText:'The statement on line 16'],
+                [lineNumber:20, sourceLineText:'new Runner() { }', messageText:'The statement on line 20'],
+                [lineNumber:23, sourceLineText:'new CacheLoader2() { }', messageText:'The inner class IndentationTest$'],
+                [lineNumber:26, sourceLineText:'new Processor2() { }', messageText:'The inner class IndentationTest$'],
+        )
+    }
+
+    @Test
+    void test_InlineAnonymousClass_KnownLimitations() {
+        final SOURCE = '''
+            |class IndentationTest {
+            |    static final CACHE = build(
+            |    new Cache<String>() { } )          // Known Limitation: valid indent offset, but not indented enough; no violation
+            |
+            |    def list = [1, 2,
+            |      new Processor() { }]             // Known Limitation: Skips List expressions; Wrong column, but no violation
+            |}
+        '''.stripMargin()
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void test_firstNonWhitespaceColumn() {
         assert IndentationAstVisitor.firstNonWhitespaceColumn('') == -1
         assert IndentationAstVisitor.firstNonWhitespaceColumn('    ') == -1
         assert IndentationAstVisitor.firstNonWhitespaceColumn('abc') == 1
         assert IndentationAstVisitor.firstNonWhitespaceColumn(' a b c') == 2
         assert IndentationAstVisitor.firstNonWhitespaceColumn('     abc') == 6
+    }
+
+    @Test
+    void test_isValidColumn() {
+        def visitor = new IndentationAstVisitor()
+        visitor.rule = rule
+        [1, 5, 9].each { col -> assert visitor.isValidColumn(col) }
+
+        [0, 2, 3, 6].each { col -> assert !visitor.isValidColumn(col) }
     }
 
     @Override
