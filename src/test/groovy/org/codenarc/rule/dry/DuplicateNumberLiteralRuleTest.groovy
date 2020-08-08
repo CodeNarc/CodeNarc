@@ -23,6 +23,7 @@ import org.junit.Test
  *
  * @author Hamlet D'Arcy
  * @author Chris Mair
+ * @author Nicolas Vuillamy
  */
 class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumberLiteralRule> {
 
@@ -225,6 +226,42 @@ class DuplicateNumberLiteralRuleTest extends AbstractRuleTestCase<DuplicateNumbe
         '''
         rule.ignoreNumbers = '0.725,xxx, yyy'
         assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDuplicateNumberMinimumValue_0_Violation() {
+        final SOURCE = '''
+            def x = [5, 5, 'xxx']
+        '''
+        rule.duplicateNumberMinimumValue = 0
+        assertSingleViolation(SOURCE, 2, "def x = [5, 5, 'xxx']")
+    }
+
+    @Test
+    void testDuplicateNumberMinimumValue_10_Success() {
+        final SOURCE = '''
+            def x = [9, 9, 'xxx']
+        '''
+        rule.duplicateNumberMinimumValue = 10
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testDuplicateNumberMinimumValue_10_ViolationEquals() {
+        final SOURCE = '''
+            def x = [10, 10, 'xxx']
+        '''
+        rule.duplicateNumberMinimumValue = 10
+        assertSingleViolation(SOURCE, 2, "def x = [10, 10, 'xxx']")
+    }
+
+    @Test
+    void testDuplicateNumberMinimumValue_10_ViolationUpper() {
+        final SOURCE = '''
+            def x = [11, 11, 'xxx']
+        '''
+        rule.duplicateNumberMinimumValue = 10
+        assertSingleViolation(SOURCE, 2, "def x = [11, 11, 'xxx']")
     }
 
     @Test
