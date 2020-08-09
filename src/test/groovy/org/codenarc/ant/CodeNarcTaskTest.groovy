@@ -22,16 +22,15 @@ import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
 import org.codenarc.CodeNarcRunner
-import org.codenarc.NullResultsProcessor
 import org.codenarc.analyzer.AnalyzerException
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.plugin.baseline.BaselineResultsPlugin
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.XmlReportWriter
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.ruleset.RuleSet
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.util.BaselineResultsProcessor
 import org.codenarc.util.io.ClassPathResource
 import org.junit.Before
 import org.junit.Test
@@ -235,7 +234,6 @@ class CodeNarcTaskTest extends AbstractTestCase {
     void testCreateCodeNarcRunner() {
         def runner = codeNarcTask.createCodeNarcRunner()
         assert runner instanceof CodeNarcRunner
-        assert runner.resultsProcessor instanceof NullResultsProcessor
     }
 
     @Test
@@ -243,10 +241,12 @@ class CodeNarcTaskTest extends AbstractTestCase {
         final EXCLUDE_FILE = 'config/CodeNarcBaselineViolations.xml'
         codeNarcTask.excludeBaseline = EXCLUDE_FILE
         def runner = codeNarcTask.createCodeNarcRunner()
+
         assert runner instanceof CodeNarcRunner
-        assert runner.resultsProcessor instanceof BaselineResultsProcessor
-        assert runner.resultsProcessor.resource instanceof ClassPathResource
-        assert runner.resultsProcessor.resource.path == EXCLUDE_FILE
+        assert runner.plugins.size() == 1
+        assert runner.plugins[0] instanceof BaselineResultsPlugin
+        assert runner.plugins[0].resource instanceof ClassPathResource
+        assert runner.plugins[0].resource.path == EXCLUDE_FILE
     }
 
     @Test
