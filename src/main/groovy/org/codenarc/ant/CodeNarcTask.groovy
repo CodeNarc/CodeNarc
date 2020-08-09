@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,22 +17,22 @@ package org.codenarc.ant
 
 import static java.lang.Thread.currentThread
 
-import org.codenarc.analyzer.AnalyzerException
-import org.codenarc.ruleset.RuleSet
-import org.codenarc.util.io.ResourceFactory
-import org.slf4j.Logger
-
 import org.apache.tools.ant.BuildException
 import org.apache.tools.ant.Task
 import org.apache.tools.ant.types.FileSet
 import org.apache.tools.ant.types.Path
 import org.apache.tools.ant.types.Reference
 import org.codenarc.CodeNarcRunner
+import org.codenarc.analyzer.AnalyzerException
 import org.codenarc.analyzer.SourceAnalyzer
+import org.codenarc.plugin.baseline.BaselineResultsPlugin
 import org.codenarc.report.ReportWriterFactory
 import org.codenarc.results.Results
-import org.codenarc.util.BaselineResultsProcessor
+import org.codenarc.ruleset.RuleSet
 import org.codenarc.util.io.DefaultResourceFactory
+import org.codenarc.util.io.ResourceFactory
+
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 /**
@@ -112,8 +112,8 @@ class CodeNarcTask extends Task {
         if (excludeBaseline) {
             LOG.info("Loading baseline violations from [$excludeBaseline]")
             def resource = resourceFactory.getResource(excludeBaseline)
-            def resultsProcessor = new BaselineResultsProcessor(resource)
-            codeNarcRunner.resultsProcessor = resultsProcessor
+            def baselinePlugin = new BaselineResultsPlugin(resource)
+            codeNarcRunner.registerPlugin(baselinePlugin)
         }
         return codeNarcRunner
     }

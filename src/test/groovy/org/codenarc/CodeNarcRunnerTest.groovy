@@ -65,7 +65,6 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     @Test
     void test_InitialPropertyValues() {
         assert codeNarcRunner.reportWriters == []
-        assert codeNarcRunner.resultsProcessor instanceof NullResultsProcessor
     }
 
     // Tests for execute()
@@ -85,13 +84,6 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     @Test
     void testExecute() {
-        def resultsProcessorCalled
-        def resultsProcessor = [processResults:{ results ->
-            assert results == RESULTS
-            resultsProcessorCalled = true
-        }] as ResultsProcessor
-        codeNarcRunner.resultsProcessor = resultsProcessor
-
         def analysisContext, results
         def reportWriter = [writeReport: { ac, res ->
             analysisContext = ac
@@ -108,7 +100,6 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert analysisContext.ruleSet == analyzedRuleSet
         assert analysisContext.sourceDirectories == SOURCE_DIRS
         assert results == RESULTS
-        assert resultsProcessorCalled
     }
 
     @Test

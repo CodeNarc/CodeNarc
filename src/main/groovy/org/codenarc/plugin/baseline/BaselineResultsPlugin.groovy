@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,58 +13,62 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.util
+package org.codenarc.plugin.baseline
 
-import org.codenarc.results.FileResults
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.codenarc.ResultsProcessor
+import org.codenarc.plugin.AbstractCodeNarcPlugin
+import org.codenarc.plugin.FileViolations
 import org.codenarc.report.BaselineViolation
 import org.codenarc.report.BaselineXmlReportParser
+import org.codenarc.report.ReportWriter
+import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Violation
 import org.codenarc.util.io.Resource
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
- * Implementation of ResultsProcessor that removes matching violations specified in a Baseline report.
+ * CodeNarc Plugin that removes matching violations specified in a Baseline report.
  * The Baseline violations are read from a Baseline Report from the provided Resource.
  */
-class BaselineResultsProcessor implements ResultsProcessor {
+class BaselineResultsPlugin extends AbstractCodeNarcPlugin {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BaselineResultsProcessor)
+    private static final Logger LOG = LoggerFactory.getLogger(BaselineResultsPlugin)
 
     final Resource resource
     private final BaselineXmlReportParser parser = new BaselineXmlReportParser()
+    protected Map<String,Collection<BaselineViolation>> baselineViolationsMap
     protected int numViolationsRemoved = 0
 
-    BaselineResultsProcessor(Resource resource) {
+    BaselineResultsPlugin(Resource resource) {
         this.resource = resource
     }
 
     @Override
-    void processResults(Results results) {
-        assert results
-
+    void initialize() {
         InputStream inputStream = resource.getInputStream()
-        Map<String,Collection<BaselineViolation>> baselineViolationsMap = parser.parseBaselineXmlReport(inputStream)
-        List<FileResults> filesWithViolations = buildFilesWithViolations(results)
+        baselineViolationsMap = parser.parseBaselineXmlReport(inputStream)
+    }
 
-        // For each file with violations
-        filesWithViolations.each { FileResults fileResults ->
-            def baselineViolations = baselineViolationsMap[fileResults.path]
-            baselineViolations.each { baselineViolation -> removeMatchingViolation(fileResults, fileResults.violations, baselineViolation) }
-        }
+    @Override
+    void processViolationsForFile(FileViolations fileViolations) {
+        assert fileViolations
+        def baselineViolations = baselineViolationsMap[fileViolations.path]
+        baselineViolations.each { baselineViolation -> removeMatchingViolation(fileViolations.violations, baselineViolation) }
+    }
 
+    @Override
+    void processReports(List<ReportWriter> reportWriters) {
+        // Not technically a report, but want this to happen after all violations are processed. Better place for this?
         LOG.info("Ignored $numViolationsRemoved baseline violations")
     }
 
-    private void removeMatchingViolation(Results results, List<Violation> violations, BaselineViolation baselineViolation) {
+    private void removeMatchingViolation(List<Violation> violations, BaselineViolation baselineViolation) {
         def matchingViolation = violations.find { v ->
             v.rule.name == baselineViolation.ruleName && sameMessage(v.message, baselineViolation.message)
         }
         if (matchingViolation) {
             numViolationsRemoved++
-            results.removeViolation(matchingViolation)
             violations.remove(matchingViolation)
         }
     }
@@ -77,12 +81,6 @@ class BaselineResultsProcessor implements ResultsProcessor {
         // The \r character, specifically, was causing comparisons to fail. See #303.
         // In Java 11 (as opposed to 8 and 14) there are leading and trailing empty characters. See #471.
         return str?.replaceAll(/\R/, '')?.trim()
-    }
-
-    private List<FileResults> buildFilesWithViolations(Results results) {
-        List<FileResults> filesWithViolations = []
-        addFilesWithViolations(filesWithViolations, results)
-        return filesWithViolations
     }
 
     private void addFilesWithViolations(List<FileResults> map, Results results) {
