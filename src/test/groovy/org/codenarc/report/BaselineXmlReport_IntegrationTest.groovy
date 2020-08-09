@@ -16,6 +16,8 @@
 package org.codenarc.report
 
 import org.codenarc.AnalysisContext
+import org.codenarc.plugin.FileViolations
+import org.codenarc.plugin.baseline.BaselineResultsPlugin
 import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.rule.Violation
@@ -23,13 +25,12 @@ import org.codenarc.rule.basic.EmptyCatchBlockRule
 import org.codenarc.rule.imports.UnusedImportRule
 import org.codenarc.rule.unused.UnusedPrivateMethodRule
 import org.codenarc.test.AbstractTestCase
-import org.codenarc.util.BaselineResultsProcessor
 import org.codenarc.util.io.StringResource
 import org.junit.Before
 import org.junit.Test
 
 /**
- * Integration tests for BaselineXmlReportWriter, BaselineXmlReportParser and BaselineResultsProcessor.
+ * Integration tests for BaselineXmlReportWriter, BaselineXmlReportParser and BaselineResultsPlugin.
  */
 class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
 
@@ -44,8 +45,13 @@ class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
     private BaselineXmlReportWriter reportWriter = new BaselineXmlReportWriter()
     private DirectoryResults results
     private DirectoryResults srcMainDaoDirResults
-    private analysisContext
-    private stringWriter
+
+    private FileResults srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
+    private FileResults fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
+    private FileResults fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
+
+    private AnalysisContext analysisContext = new AnalysisContext(sourceDirectories:[SRC_DIR1, SRC_DIR2], ruleSet:null)
+    private StringWriter stringWriter = new StringWriter()
 
     @Test
     void test_WriteAndProcessBaselineXmlReport_NoNewViolations() {
@@ -55,10 +61,14 @@ class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
         log("baselineXml=$baselineXml")
 
         // Process report
-        BaselineResultsProcessor processor = new BaselineResultsProcessor(new StringResource(baselineXml))
-        processor.processResults(results)
+        BaselineResultsPlugin plugin = new BaselineResultsPlugin(new StringResource(baselineXml))
+        plugin.initialize()
+        plugin.processViolationsForFile(new FileViolations(srcMainFileResults1))
+        plugin.processViolationsForFile(new FileViolations(fileResultsMainDao1))
+        plugin.processViolationsForFile(new FileViolations(fileResultsMainDao2))
+
         assert results.violations.size() == 0
-        assert processor.numViolationsRemoved == 7
+        assert plugin.numViolationsRemoved == 7
     }
 
     @Test
@@ -72,20 +82,25 @@ class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
         srcMainDaoDirResults.addChild(newFileResults)
 
         // Process report
-        BaselineResultsProcessor processor = new BaselineResultsProcessor(new StringResource(baselineXml))
-        processor.processResults(results)
+        BaselineResultsPlugin plugin = new BaselineResultsPlugin(new StringResource(baselineXml))
+        plugin.initialize()
+
+        plugin.processViolationsForFile(new FileViolations(srcMainFileResults1))
+        plugin.processViolationsForFile(new FileViolations(fileResultsMainDao1))
+        plugin.processViolationsForFile(new FileViolations(fileResultsMainDao2))
+        plugin.processViolationsForFile(new FileViolations(newFileResults))
+
+        // Just to log final count
+        plugin.processReports(null)
+
         assert results.violations.size() == 1
-        assert processor.numViolationsRemoved == 7
+        assert plugin.numViolationsRemoved == 7
     }
 
     @Before
     void setUp() {
         def srcMainDirResults = new DirectoryResults('src/main', 1)
         srcMainDaoDirResults = new DirectoryResults('src/main/dao', 2)
-        def srcMainFileResults1 = new FileResults('src/main/MyAction.groovy', [VIOLATION1, VIOLATION3, VIOLATION3, VIOLATION1, VIOLATION2])
-        def fileResultsMainDao1 = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION3])
-        def fileResultsMainDao2 = new FileResults('src/main/dao/MyOtherDao.groovy', [VIOLATION2])
-
         srcMainDirResults.addChild(srcMainFileResults1)
         srcMainDirResults.addChild(srcMainDaoDirResults)
         srcMainDaoDirResults.addChild(fileResultsMainDao1)
