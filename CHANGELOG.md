@@ -24,7 +24,7 @@ CodeNarc Plugin Mechanism
      * Add *plugins* property to the CodeNarc Ant Task (`CodeNarcTask`) and `-plugins` parameter to the command-line.
      * `CodeNarcRunner`: Apply plugins for rules, violations and reports. Register any plugin classes specified by the "org.codenarc.plugins" system property.
      * Add `sourceCode` property to `FileResults`; set it from `FilesystemSourceAnalyzer` and `AntFileSetSourceAnalyzer`.
- - #538: Convert `BaselineResultsProcessor` to a plugin: `BaselineResultsPlugin`.
+ - #538: Convert `BaselineResultsProcessor` to a plugin: `BaselineResultsPlugin`. Switch `CodeNarcTask` to use plugin. Remove `ResultsProcessor` classes.
 
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE]

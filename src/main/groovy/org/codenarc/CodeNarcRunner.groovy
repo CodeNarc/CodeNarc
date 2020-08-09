@@ -23,11 +23,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
-import org.codenarc.ruleset.CompositeRuleSet
-import org.codenarc.ruleset.ListRuleSet
-import org.codenarc.ruleset.PropertiesFileRuleSetConfigurer
-import org.codenarc.ruleset.RuleSet
-import org.codenarc.ruleset.RuleSetUtil
+import org.codenarc.ruleset.*
 
 /**
  * Helper class to run CodeNarc.
@@ -51,7 +47,6 @@ class CodeNarcRunner {
 
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer
-    ResultsProcessor resultsProcessor = new NullResultsProcessor()
     List<ReportWriter> reportWriters = []
     private final List<CodeNarcPlugin> plugins = []
 
@@ -69,7 +64,6 @@ class CodeNarcRunner {
      *   <li>Configure the RuleSet from the "codenarc.properties" file, if that file is found on the classpath.</li>
      *   <li>Apply the configured <code>SourceAnalyzer</code>.</li>
      *   <li>Call processViolationsForFile(FileViolations) for each file with violations</li>
-     *   <li>Apply the configured <code>ResultsProcessor</code>.</li>
      *   <li>Call processReports(List<ReportWriter>) for each registered CodeNarcPlugin</li>
      *   <li>Generate a report for each configured <code>ReportWriter</code>.</li>
      *   <li>Return the <code>Results</code> object representing the analysis results.</li>
@@ -90,7 +84,6 @@ class CodeNarcRunner {
         def results = sourceAnalyzer.analyze(ruleSet)
         applyPluginsProcessViolationsForAllFiles(results)
 
-        resultsProcessor.processResults(results)
         String countsText = buildCountsText(results)
         def elapsedTime = System.currentTimeMillis() - startTime
         def analysisContext = new AnalysisContext(ruleSet:ruleSet, sourceDirectories:sourceAnalyzer.sourceDirectories)
