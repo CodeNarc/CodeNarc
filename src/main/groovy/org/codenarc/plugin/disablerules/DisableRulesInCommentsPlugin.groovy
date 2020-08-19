@@ -21,24 +21,12 @@ import org.codenarc.rule.Violation
 
 /**
  * Plugin that enables enablement/disablement of rules (and removing their violations) using comments within the source code
+ *
  * @author Chris Mair
  */
 class DisableRulesInCommentsPlugin extends AbstractCodeNarcPlugin {
 
-    private static final String CODENARC_DISABLE = 'codenarc-disable'
-    private static final String CODENARC_ENABLE = 'codenarc-enable'
     private static final String ALL_RULES = '#ALL#'
-    private static final Set<String> EMPTY = []
-
-    private static class Data {
-        private final FileViolations fileViolations
-        private final Map<Integer, Set<String>> disabledRulesByLine
-
-        Data(FileViolations fileViolations) {
-            this.fileViolations = fileViolations
-            this.disabledRulesByLine = [:]
-        }
-    }
 
     /**
      * Remove any violations for rules disabled by comments within the source code.
@@ -46,64 +34,15 @@ class DisableRulesInCommentsPlugin extends AbstractCodeNarcPlugin {
      */
     @Override
     void processViolationsForFile(FileViolations fileViolations) {
-        Data data = new Data(fileViolations)
-        buildLookupTable(data)
+        LookupTable lookupTable = new LookupTable(fileViolations.sourceText)
 
-        def disabledViolations = fileViolations.violations.findAll { v -> isViolationDisabled(data, v) }
+        def disabledViolations = fileViolations.violations.findAll { v -> isViolationDisabled(lookupTable, v) }
         fileViolations.violations.removeAll(disabledViolations)
     }
 
-    protected static Set<String> parseRuleNames(String line, String codeNarcToken) {
-        int index = line.indexOf(codeNarcToken)
-        if (index == -1) {
-            return EMPTY
-        }
-        int startIndex = index + codeNarcToken.length()
-        String restOfLine = line.substring(startIndex)
-        restOfLine = restOfLine.replaceAll(/\*\//, '')
-        def names = restOfLine.tokenize(',')
-        return names*.trim() as Set
-    }
-
-    private boolean isViolationDisabled(Data data, Violation violation) {
-        def disabledRuleNames = data.disabledRulesByLine[violation.lineNumber] ?: EMPTY
+    private boolean isViolationDisabled(LookupTable lookupTable, Violation violation) {
+        def disabledRuleNames = lookupTable.disabledRuleNamesForLineNumber(violation.lineNumber)
         return disabledRuleNames.contains(ALL_RULES) || disabledRuleNames.contains(violation.rule.name)
-    }
-
-    private void buildLookupTable(Data data) {
-        String sourceText = data.fileViolations.sourceText
-        boolean isDisablingAllRules = false
-        Set<String> currentlyDisabledRuleNames = []
-        sourceText.eachLine { line, lineNumber0 ->
-            int lineNumber = lineNumber0 + 1
-            if (line.contains(CODENARC_DISABLE)) {
-                def ruleNames = parseRuleNames(line, CODENARC_DISABLE)
-                if (ruleNames) {
-                    currentlyDisabledRuleNames.addAll(ruleNames)
-                }
-                else {
-                    isDisablingAllRules = true
-                }
-            }
-            if (line.contains(CODENARC_ENABLE)) {
-                def ruleNames = parseRuleNames(line, CODENARC_ENABLE)
-                if (ruleNames) {
-                    currentlyDisabledRuleNames.removeAll(ruleNames)
-                }
-                else {
-                    currentlyDisabledRuleNames.clear()
-                    isDisablingAllRules = false
-                }
-            }
-            if (isDisablingAllRules) {
-                data.disabledRulesByLine[lineNumber] = [ALL_RULES]
-            }
-            else {
-                if (currentlyDisabledRuleNames) {
-                    data.disabledRulesByLine[lineNumber] = currentlyDisabledRuleNames.clone()
-                }
-            }
-        }
     }
 
 }

@@ -36,8 +36,6 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
     private static final Violation VIOLATION3 = new Violation(rule: RULE1, lineNumber: 3)
     private static final Violation VIOLATION4 = new Violation(rule: RULE1, lineNumber: 4)
     private static final Violation VIOLATION5 = new Violation(rule: RULE1, lineNumber: 5)
-    private static final String CODENARC_DISABLE = 'codenarc-disable'
-    private static final String CODENARC_ENABLE = 'codenarc-enable'
 
     private static final String SOURCE = '''
         class MyClass {
@@ -81,6 +79,19 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
             }
         '''.trim()
         assertViolationsThatAreEnabled([VIOLATION1, VIOLATION4, VIOLATION5])
+    }
+
+    @Test
+    void test_processViolationsForFile_IndividualRules_Disable_AndThenEnableOtherRules() {
+        sourceText = '''
+            class MyClass {
+                def value = 123     //  codenarc-disable Rule2, Rule1, OtherRule
+                void doStuff() {
+                    println 123//codenarc-enable OtherRule, Rule2
+                }
+            }
+        '''.trim()
+        assertViolationsThatAreEnabled([VIOLATION1])
     }
 
     @Test
@@ -168,21 +179,6 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
             println 123
             '''
         assertAllViolationsEnabled()
-    }
-
-    @Test
-    void test_parseRuleNames() {
-        assert DisableRulesInCommentsPlugin.parseRuleNames('abc', CODENARC_DISABLE) == [] as Set
-
-        assert DisableRulesInCommentsPlugin.parseRuleNames('//codenarc-disable', CODENARC_DISABLE) == [] as Set
-        assert DisableRulesInCommentsPlugin.parseRuleNames('// codenarc-disable A', CODENARC_DISABLE) == ['A'] as Set
-        assert DisableRulesInCommentsPlugin.parseRuleNames('  // codenarc-disable A, B  ', CODENARC_DISABLE) == ['A', 'B'] as Set
-        assert DisableRulesInCommentsPlugin.parseRuleNames('println 123 // codenarc-disable A,B,C  ', CODENARC_DISABLE) == ['A', 'B', 'C'] as Set
-        assert DisableRulesInCommentsPlugin.parseRuleNames(' /*codenarc-disable    A,   B  */', CODENARC_DISABLE) == ['A', 'B'] as Set
-
-        assert DisableRulesInCommentsPlugin.parseRuleNames('// codenarc-disable A,B,A , B', CODENARC_DISABLE) == ['A', 'B'] as Set
-
-        assert DisableRulesInCommentsPlugin.parseRuleNames('// codenarc-enable A  ,  B', CODENARC_ENABLE) == ['A', 'B'] as Set
     }
 
     // Helper methods
