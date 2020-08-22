@@ -138,7 +138,7 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
     void test_processViolationsForFile_Disable_AndThenEnableAfterLastViolation() {
         sourceText = '''
             class MyClass {
-                def value = 123     // codenarc-disable
+                def value = 123     /*codenarc-disable*/
                 void doStuff() {
                     println 123
                 }
@@ -156,6 +156,19 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
 
         sourceText = '    /*codenarc-disable*/' + SOURCE
         assertNoViolationsEnabled()
+    }
+
+    @Test
+    void test_processViolationsForFile_DisableLine() {
+        sourceText = '''
+            class MyClass {         // codenarc-disable-line
+                def value = 123     /*codenarc-disable-line Rule2, OtherRule*/
+                void doStuff() {
+                    println 123     //codenarc-disable-line Rule2, Rule1, OtherRule
+                }
+            }
+        '''.trim()
+        assertViolationsThatAreEnabled([VIOLATION2, VIOLATION3, VIOLATION5])
     }
 
     @Test

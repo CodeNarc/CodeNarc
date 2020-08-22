@@ -26,8 +26,6 @@ import org.codenarc.rule.Violation
  */
 class DisableRulesInCommentsPlugin extends AbstractCodeNarcPlugin {
 
-    private static final String ALL_RULES = '#ALL#'
-
     /**
      * Remove any violations for rules disabled by comments within the source code.
      * @param fileViolations - the FileViolations representing a single source file and its violations
@@ -42,7 +40,7 @@ class DisableRulesInCommentsPlugin extends AbstractCodeNarcPlugin {
 
     private boolean isViolationDisabled(LookupTable lookupTable, Violation violation) {
         def disabledRuleNames = lookupTable.disabledRuleNamesForLineNumber(violation.lineNumber)
-        return disabledRuleNames.contains(ALL_RULES) || disabledRuleNames.contains(violation.rule.name)
+        return disabledRuleNames.contains(LookupTable.ALL_RULES) || disabledRuleNames.contains(violation.rule.name)
     }
 
 }

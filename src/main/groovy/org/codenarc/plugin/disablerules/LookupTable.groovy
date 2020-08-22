@@ -22,14 +22,16 @@ package org.codenarc.plugin.disablerules
  */
 class LookupTable {
 
+    protected static final String ALL_RULES = '#ALL#'
     private static final String CODENARC_DISABLE = 'codenarc-disable'
+    private static final String CODENARC_DISABLE_LINE = 'codenarc-disable-line'
     private static final String CODENARC_ENABLE = 'codenarc-enable'
-    private static final String ALL_RULES = '#ALL#'
     private static final Set<String> EMPTY = []
 
     private final String sourceText
     private final Map<Integer, Set<String>> disabledRulesByLine = [:]
     private final Set<String> currentlyDisabledRuleNames = []
+    private final Set<String> thisLineDisabledRuleNames = []
 
     private boolean isDisablingAllRules = false
 
@@ -52,7 +54,16 @@ class LookupTable {
     }
 
     private void checkForCodeNarcDisable(String line) {
-        if (line.contains(CODENARC_DISABLE)) {
+        thisLineDisabledRuleNames.clear()
+        if (line.contains(CODENARC_DISABLE_LINE)) {
+            def ruleNames = parseRuleNames(line, CODENARC_DISABLE_LINE)
+            if (ruleNames) {
+                thisLineDisabledRuleNames.addAll(ruleNames)
+            } else {
+                thisLineDisabledRuleNames << ALL_RULES
+            }
+        }
+        else if (line.contains(CODENARC_DISABLE)) {
             def ruleNames = parseRuleNames(line, CODENARC_DISABLE)
             if (ruleNames) {
                 currentlyDisabledRuleNames.addAll(ruleNames)
@@ -78,9 +89,10 @@ class LookupTable {
         if (isDisablingAllRules) {
             disabledRulesByLine[lineNumber] = [ALL_RULES]
         } else {
-            if (currentlyDisabledRuleNames) {
-                disabledRulesByLine[lineNumber] = currentlyDisabledRuleNames.clone()
-            }
+            def disabled = [] as Set
+            disabled.addAll(thisLineDisabledRuleNames)
+            disabled.addAll(currentlyDisabledRuleNames)
+            disabledRulesByLine[lineNumber] = disabled
         }
     }
 
@@ -91,7 +103,7 @@ class LookupTable {
         }
         int startIndex = index + codeNarcToken.length()
         String rawRestOfLine = line.substring(startIndex)
-        String restOfLine = rawRestOfLine.replaceAll(/\*\//, '')
+        String restOfLine = rawRestOfLine.trim().replaceAll(/\*\//, '')
         def names = restOfLine.tokenize(',')
         return names*.trim() as Set
     }

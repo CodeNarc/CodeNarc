@@ -24,6 +24,7 @@ import org.junit.Test
 class LookupTableTest extends AbstractTestCase {
 
     private static final String CODENARC_DISABLE = 'codenarc-disable'
+    private static final String CODENARC_DISABLE_LINE = 'codenarc-disable-line'
     private static final String CODENARC_ENABLE = 'codenarc-enable'
 
     @Test
@@ -31,14 +32,19 @@ class LookupTableTest extends AbstractTestCase {
         assert LookupTable.parseRuleNames('abc', CODENARC_DISABLE) == [] as Set
 
         assert LookupTable.parseRuleNames('//codenarc-disable', CODENARC_DISABLE) == [] as Set
+        assert LookupTable.parseRuleNames('//codenarc-disable          ', CODENARC_DISABLE) == [] as Set
         assert LookupTable.parseRuleNames('// codenarc-disable A', CODENARC_DISABLE) == ['A'] as Set
         assert LookupTable.parseRuleNames('  // codenarc-disable A, B  ', CODENARC_DISABLE) == ['A', 'B'] as Set
         assert LookupTable.parseRuleNames('println 123 // codenarc-disable A,B,C  ', CODENARC_DISABLE) == ['A', 'B', 'C'] as Set
         assert LookupTable.parseRuleNames(' /*codenarc-disable    A,   B  */', CODENARC_DISABLE) == ['A', 'B'] as Set
-
         assert LookupTable.parseRuleNames('// codenarc-disable A,B,A , B', CODENARC_DISABLE) == ['A', 'B'] as Set
 
-        assert LookupTable.parseRuleNames('// codenarc-enable A  ,  B', CODENARC_ENABLE) == ['A', 'B'] as Set
+        assert LookupTable.parseRuleNames('//  codenarc-enable        ', CODENARC_ENABLE) == [] as Set
+        assert LookupTable.parseRuleNames('//codenarc-enable A  ,  B', CODENARC_ENABLE) == ['A', 'B'] as Set
+
+        assert LookupTable.parseRuleNames('//codenarc-disable-line    ', CODENARC_DISABLE_LINE) == [] as Set
+        assert LookupTable.parseRuleNames('// codenarc-disable-line    A', CODENARC_DISABLE_LINE) == ['A'] as Set
+        assert LookupTable.parseRuleNames('  // codenarc-disable-line A,    B  ', CODENARC_DISABLE_LINE) == ['A', 'B'] as Set
     }
 
 }
