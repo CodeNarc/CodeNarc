@@ -15,10 +15,10 @@
  */
 package org.codenarc.test
 
-import org.slf4j.LoggerFactory
 import org.junit.Before
 import org.junit.Rule
 import org.junit.rules.TestName
+import org.slf4j.LoggerFactory
 
 /**
  * Abstract superclass for tests
@@ -51,19 +51,13 @@ abstract class AbstractTestCase {
         return testName.getMethodName()
     }
 
-    private String classNameNoPackage() {
-        def className = getClass().name
-        def index = className.lastIndexOf('.')
-        (index > -1) ? className[index + 1 .. -1] : className
-    }
-
     //------------------------------------------------------------------------------------
     // Test Setup and Tear Down
     //------------------------------------------------------------------------------------
 
     @Before
     void setUpAbstractTestCase() {
-        log "----------[ ${classNameNoPackage()}.${getName()} ]----------"
+        log "----------[ ${getName()} ]----------"
     }
 
 }
