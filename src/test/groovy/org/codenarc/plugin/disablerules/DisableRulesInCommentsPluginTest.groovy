@@ -191,7 +191,6 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
     void test_processViolationsForFile_ViolationWithNullLineNumber() {
         violations = [VIOLATION_NULL_LINE_NUMBER]
         sourceText = SOURCE
-//        sourceText = '// codenarc-disable' + SOURCE
         assertViolationsThatAreEnabled([VIOLATION_NULL_LINE_NUMBER])
     }
 

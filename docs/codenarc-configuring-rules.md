@@ -11,6 +11,7 @@ title: CodeNarc - Configuring Rules
   * [Standard Properties for Configuring Rules](#standard-properties-for-configuring-rules)
   * [Turning Off A Rule](#turning-off-a-rule)
   * [Disabling Rules Using @SuppressWarnings](#disabling-rules-using-suppresswarnings)
+  * [Disabling Rules From Comments](#disabling-rules-from-comments)
   * [Customizing Rule Descriptions Shown in the HTML Report](#customizing-rule-descriptions-shown-in-the-html-report)
 
 You can configure rules within the *RuleSet* file or within the "codenarc.properties" file.
@@ -284,7 +285,8 @@ can disable rule violations for only the current line by specifying `codenarc-di
 Either `/* .. */` or `// ..` comments can be used. The comment can be on a line by itself or on the same line with code.
 
 Specifying `codenarc-disable` disables all CodeNarc rules, or it can optionally be followed by one or more rule names
-to disable only the named rules, e.g. `// codenarc-disable FieldName, NoDef`.
+to disable only the named rules, e.g. `// codenarc-disable FieldName, NoDef`. Likewise, specifying `codenarc-disable-line`
+disables all CodeNarc rules for that line, or it can be followed by rule names. 
 
 ### Examples
 
@@ -308,7 +310,7 @@ Disable all CodeNarc rules for  part of the file (disable and then re-enable):
 /* codenarc-disable */
 println 1
 println 2
-// codenarc-enable
+/* codenarc-enable */
 println 3
 ...
 ```
