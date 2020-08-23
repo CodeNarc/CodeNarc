@@ -22,6 +22,7 @@ import org.codenarc.analyzer.SourceAnalyzer
 import org.codenarc.plugin.CodeNarcPlugin
 import org.codenarc.plugin.TestPlugin1
 import org.codenarc.plugin.TestPlugin2
+import org.codenarc.plugin.disablerules.DisableRulesInCommentsPlugin
 import org.codenarc.report.HtmlReportWriter
 import org.codenarc.report.ReportWriter
 import org.codenarc.results.DirectoryResults
@@ -270,6 +271,18 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
         assert TestPlugin1.initialized
         assert TestPlugin2.initialized
+    }
+
+    @Test
+    void test_Plugin_InitializesStandardPlugins() {
+        log("plugins (before)=${codeNarcRunner.plugins}")
+
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+
+        codeNarcRunner.execute()
+
+        log("plugins (after)=${codeNarcRunner.plugins}")
+        assert codeNarcRunner.plugins*.getClass() == [DisableRulesInCommentsPlugin]
     }
 
     @Test

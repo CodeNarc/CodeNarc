@@ -40,7 +40,7 @@ class LookupTable {
         buildLookupTable()
     }
 
-    Set<String> disabledRuleNamesForLineNumber(int lineNumber) {
+    Set<String> disabledRuleNamesForLineNumber(Integer lineNumber) {
         return disabledRulesByLine[lineNumber] ?: EMPTY
     }
 

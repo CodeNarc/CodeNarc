@@ -36,6 +36,7 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
     private static final Violation VIOLATION3 = new Violation(rule: RULE1, lineNumber: 3)
     private static final Violation VIOLATION4 = new Violation(rule: RULE1, lineNumber: 4)
     private static final Violation VIOLATION5 = new Violation(rule: RULE1, lineNumber: 5)
+    private static final Violation VIOLATION_NULL_LINE_NUMBER = new Violation(rule: RULE1, lineNumber: null)
 
     private static final String SOURCE = '''
         class MyClass {
@@ -184,6 +185,14 @@ class DisableRulesInCommentsPluginTest extends AbstractTestCase {
             }
             '''
         assertAllViolationsEnabled()
+    }
+
+    @Test
+    void test_processViolationsForFile_ViolationWithNullLineNumber() {
+        violations = [VIOLATION_NULL_LINE_NUMBER]
+        sourceText = SOURCE
+//        sourceText = '// codenarc-disable' + SOURCE
+        assertViolationsThatAreEnabled([VIOLATION_NULL_LINE_NUMBER])
     }
 
     @Test
