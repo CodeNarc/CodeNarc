@@ -44,17 +44,19 @@ import org.codenarc.ruleset.*
 class CodeNarcRunner {
 
     public static final String PLUGINS_PROPERTY = 'org.codenarc.plugins'
+    public static final String STANDARD_PLUGIN_CLASSES = 'org.codenarc.plugin.disablerules.DisableRulesInCommentsPlugin'
 
     String ruleSetFiles
     SourceAnalyzer sourceAnalyzer
     List<ReportWriter> reportWriters = []
-    private final List<CodeNarcPlugin> plugins = []
+    protected final List<CodeNarcPlugin> plugins = []
 
     /**
      * The main entry point for this class. Runs CodeNarc and returns the results. Processing steps include:
      * <ol>
-     *   <li>Register any CodeNarcPlugins specified by the "org.codenarc.plugins" system property</li>
-     *   <li>Call initialize() for each registered CodeNarcPlugin</li>
+     *   <li>Register standard CodeNarcPlugins.</li>
+     *   <li>Register any CodeNarcPlugins specified by the "org.codenarc.plugins" system property.</li>
+     *   <li>Call initialize() for each registered CodeNarcPlugin.</li>
      *   <li>Parse the <code>ruleSetFiles</code> property to create a RuleSet. Each path may be optionally prefixed by
      *     any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
      *     or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
@@ -118,6 +120,7 @@ class CodeNarcRunner {
     }
 
     private void initializePlugins() {
+        initializeStandardPlugins()
         initializePluginsFromSystemProperty()
         this.plugins.each { plugin -> plugin.initialize() }
     }
@@ -173,6 +176,10 @@ class CodeNarcRunner {
         reportWriters.each { reportWriter ->
             reportWriter.writeReport(analysisContext, results)
         }
+    }
+
+    private void initializeStandardPlugins() {
+        registerPluginsForClassNames(STANDARD_PLUGIN_CLASSES)
     }
 
     private void initializePluginsFromSystemProperty() {

@@ -10,7 +10,8 @@ title: CodeNarc - Configuring Rules
   * [Configuring Rules Using a Properties File](#configuring-rules-using-a-properties-file)
   * [Standard Properties for Configuring Rules](#standard-properties-for-configuring-rules)
   * [Turning Off A Rule](#turning-off-a-rule)
-  * [Suppressing A Rule From Within Source Code](#suppressing-a-rule-from-within-source-code)
+  * [Disabling Rules Using @SuppressWarnings](#disabling-rules-using-suppresswarnings)
+  * [Disabling Rules From Comments](#disabling-rules-from-comments)
   * [Customizing Rule Descriptions Shown in the HTML Report](#customizing-rule-descriptions-shown-in-the-html-report)
 
 You can configure rules within the *RuleSet* file or within the "codenarc.properties" file.
@@ -244,7 +245,7 @@ attribute to `false`.
 ```
 
 
-## Suppressing A Rule From Within Source Code
+## Disabling Rules Using @SuppressWarnings
 You can use the `@SuppressWarnings` annotation on a *class*, *method*, *constructor*, *field* or
 *property* to suppress one or more **CodeNarc** rules within its source code. *Import* statements can also be annotated,
 and in that case the suppression applies to the entire file.
@@ -276,6 +277,65 @@ rules within its `getCount()` method.
 You can specify "all" or "CodeNarc" within `@SuppressWarnings` (e.g. `@SuppressWarnings('all')` or
 `@SuppressWarnings('CodeNarc')`) to suppress violations for all CodeNarc rules for the annotated scope.
 
+## Disabling Rules From Comments
+
+You can disable (suppress) rule violations for all or part of a source file by specifying `codenarc-disable` within
+a comment in the source code, and then optionally re-enable by specifying `codenarc-enable` on a subsequent line. You
+can disable rule violations for only the current line by specifying `codenarc-disable-line` within a comment on that line.
+Either `/* .. */` or `// ..` comments can be used. The comment can be on a line by itself or on the same line with code.
+
+Specifying `codenarc-disable` disables all CodeNarc rules, or it can optionally be followed by one or more rule names
+to disable only the named rules, e.g. `// codenarc-disable FieldName, NoDef`. Likewise, specifying `codenarc-disable-line`
+disables all CodeNarc rules for that line, or it can be followed by rule names. 
+
+### Examples
+
+Disable all CodeNarc rules for the rest of the file:
+```
+// codenarc-disable
+println 1
+println 2
+...
+```
+
+Disable specified CodeNarc rules for the rest of the file:
+```
+println 1          // codenarc-disable NoDef, Println
+def count = 1
+...
+```
+
+Disable all CodeNarc rules for  part of the file (disable and then re-enable):
+```
+/* codenarc-disable */
+println 1
+println 2
+/* codenarc-enable */
+println 3
+...
+```
+
+Disable some CodeNarc rules for part of the file (disable and then re-enable):
+```
+// codenarc-disable NoDef, Println
+println 1
+def count = 1
+// codenarc-enable NoDef, Println
+println 3
+...
+```
+
+Disable all CodeNarc rules for the current line only:
+```
+def myVar = 123 // codenarc-disable-line
+```
+
+Disable specific CodeNarc rules for the current line only:
+```
+def myVar = 123     /* codenarc-disable-line NoDef */
+```
+
+
 
 ## Customizing Rule Descriptions Shown in the HTML Report
 
@@ -300,10 +360,10 @@ See the javadoc for the `java.util.ResourceBundle` class for more information.
 
 You can optionally include message parameters within a rule description, whether that description
 is specified in a ResourceBundle properties file or through the `description` property of the
-rule. Use the standard Groovy template parameter syntax: `$\{..\}`. You can reference rule property
+rule. Use the standard Groovy template parameter syntax: `${..}`. You can reference rule property
 values through the "rule" object within the template parameter closure. For example, this description
 includes the rule `priority` within the rule description:
-`"Description for rule with priority $\{rule.priority\}"`.
+`"Description for rule with priority ${rule.priority}"`.
 
 
 ### The Base Messages Resource Bundle

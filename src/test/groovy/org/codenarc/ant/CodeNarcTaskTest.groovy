@@ -325,7 +325,7 @@ class StubSourceAnalyzerCategory {
     static void reset() { violationCounts = [1:0, 2:0, 3:0] }
 
     static SourceAnalyzer createSourceAnalyzer(CodeNarcTask self) {
-        def results = [getNumberOfViolationsWithPriority:{ p, r -> violationCounts[p] }] as Results
+        def results = [getNumberOfViolationsWithPriority:{ p, r -> violationCounts[p] }, isFile: { false }, getChildren:{ [] }] as Results
         [analyze:{ RuleSet ruleSet -> results }, getSourceDirectories:{ [] }] as SourceAnalyzer
     }
 }

@@ -1,0 +1,7 @@
+ruleset {
+    description 'CodeNarc ruleset for testing disabling rules within comments'
+
+    Println
+    NoDef
+
+}

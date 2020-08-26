@@ -26,6 +26,9 @@ CodeNarc Plugin Mechanism
      * Add `sourceCode` property to `FileResults`; set it from `FilesystemSourceAnalyzer` and `AntFileSetSourceAnalyzer`.
  - #538: Convert `BaselineResultsProcessor` to a plugin: `BaselineResultsPlugin`. Switch `CodeNarcTask` to use plugin. Remove `ResultsProcessor` classes.
 
+Disabling Rules From Comments
+ - #156: Disable rules by specifying `codenarc-disable` in a comment; optionally re-enable by specifying `codenarc-enable` on a subsequent line. Disable rules for the current line with `codenarc-disable-line`.
+
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE]
  - #525: Support Java 14. Upgrade Java source/target compatibility to 1.7. [BREAKING CHANGE]
