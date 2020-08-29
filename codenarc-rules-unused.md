@@ -35,7 +35,7 @@ include:
 
 *Since CodeNarc 0.16*
 
-This rule finds instances of method parameters not being used. It does not analyze private methods (that is done by
+This rule finds instances of method (or constructor) parameters not being used. It does not analyze private methods (that is done by
 the UnusedPrivateMethodParameter rule) or methods marked @Override.
 
   * This rule ignores `main()` methods. In Groovy, the `main()** method can either specify a `void`
@@ -163,7 +163,7 @@ Known limitations:
 
 *Since CodeNarc 0.12*
 
-Checks for parameters to private methods that are not referenced within the method body. Note that the
+Checks for parameters to private methods (or constructors) that are not referenced within the method body. Note that the
 `private` modifier is not currently "respected" by Groovy code (i.e., Groovy can access `private`
 members within other classes).
 
@@ -171,7 +171,6 @@ Known limitations:
   * Does not recognize parameter references within an inner class. See
     [CodeNarc bug #3155974](https://sourceforge.net/tracker/index.php?func=detail&aid=3155974&group_id=250145&atid=1126573).
   * Does not recognize parameter references when parameter name is a GString (e.g. `println "${parameterName}"`)
-  *Since CodeNarc 0.14*
   * You can specify an ignore list using the 'ignoreRegex' property. By default, a parameter named 'ignore' or 'ignored'
     does not trigger a violation (the regex value is 'ignore|ignored'). You can add your own ignore list using this property.
 
