@@ -38,7 +38,7 @@ Make sure that the following are included your CLASSPATH:
 
   2. The CodeNarc jar
 
-  3. The **SLF4J** api/implementation jars
+  3. The **SLF4J** api/implementation jars, e.g. **Logback**.
 
   4. The directories containing (or relative to) **CodeNarc** config files such as "codenarc.properties"
         or ruleset files.
@@ -46,16 +46,43 @@ Make sure that the following are included your CLASSPATH:
 The CodeNarc command-line application sets an exit status of zero (0) if the command successfully executes, and
 an exit status of one (1) if an error occurs executing CodeNarc, or if an invalid command-line option is specified.
 
-Here is an example BAT file for running **CodeNarc** on Windows.
+Here is an example BAT file for running **CodeNarc** on Windows. It assumes the jars are in the current directory.
 
 ```shell
-    @set GROOVY_JAR="%GROOVY_HOME%/embeddable/groovy-all-1.5.6.jar"
-    @java -classpath %GROOVY_JAR%;lib/CodeNarc-0.5.jar;lib/slf4j-api-1.7.25.jar;lib org.codenarc.CodeNarc %*
+    @set GROOVY_JAR="groovy-all-2.4.15.jar"
+    @set CODENARC_JAR="CodeNarc-1.6.1.jar"
+    @set SLF4J_JAR="slf4j-api-1.7.25.jar"
+    java -classpath $GROOVY_JAR;$CODENARC_JAR;$SLF4J_JAR org.codenarc.CodeNarc %*
 ```
 
 Here is the equivalent Linux command.
 
 ```shell
-    export GROOVY_JAR="$GROOVY_HOME/embeddable/groovy-all-1.5.6.jar"
-    java -classpath $GROOVY_JAR:lib/CodeNarc-0.5.jar:lib/slf4j-api-1.7.25.jar:lib org.codenarc.CodeNarc $*
+    export GROOVY_JAR="groovy-all-2.4.15.jar"
+    export CODENARC_JAR="CodeNarc-1.6.1.jar"
+    export SLF4J_JAR="slf4j-api-1.7.25.jar"
+    java -classpath $GROOVY_JAR:$CODENARC_JAR:$SLF4J_JAR org.codenarc.CodeNarc $*
+```
+
+## Running From a Gradle Script
+
+Here is an example Gradle script to run CodeNarc using its command-line interface. It assumes that there is a `codenarc.ruleset` ruleset file in the current directory.
+```
+    apply plugin: 'groovy'
+    
+    repositories {
+        mavenCentral()
+    }
+         
+    dependencies {
+        compile 'org.codenarc:CodeNarc:1.6.1' 
+        compile 'ch.qos.logback:logback-classic:1.2.3'
+    }
+         
+    task runCodeNarc(type:JavaExec) {
+        main = "org.codenarc.CodeNarc"
+        classpath = sourceSets.main.runtimeClasspath
+    
+        args "-rulesetfiles=file:codenarc.ruleset"
+    }
 ```
