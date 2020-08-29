@@ -37,9 +37,15 @@ Framework and Infrastructure
  - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
  - #496: Switched CodeNarc website to publish from `gh-pages` branch.
 
+Documentation
+ - #533: Update command-line instructions to use newer version of Groovy and other jars. Add a section on running with Gradle.
+
+Version 1.6.1    (Aug 2020)
+--------------------------------------
+ - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
+
 Version 1.6    (Jun 2020)
 --------------------------------------
-
 New Rules
 - #450: **ImplicitReturnStatement** rule (convention) - Checks for non-void methods that are missing an explicit return statement.
 - #515: **GrailsDomainGormMethods** rule (grails) - Database operation should be performed by Data Services instead of calling GORM static and instance methods.
