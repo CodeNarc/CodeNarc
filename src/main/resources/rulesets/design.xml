@@ -24,6 +24,7 @@
     <rule class='org.codenarc.rule.design.LocaleSetDefaultRule'/>
     <rule class='org.codenarc.rule.design.NestedForLoopRule'/>
     <rule class='org.codenarc.rule.design.OptionalFieldRule'/>
+    <rule class='org.codenarc.rule.design.OptionalMethodParameterRule'/>
     <rule class='org.codenarc.rule.design.PublicInstanceFieldRule'/>
     <rule class='org.codenarc.rule.design.PrivateFieldCouldBeFinalRule'/>
     <rule class='org.codenarc.rule.design.ReturnsNullInsteadOfEmptyArrayRule'/>

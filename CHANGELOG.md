@@ -6,6 +6,7 @@ TODO Next Version 2.0.0    (??? 2020)
 
 New Rules
 - #548: New **OptionalField** rule (design) - Do not use an Optional as a field type.
+- #549: New **OptionalMethodParameter** rule (design) - Do not use an Optional as a parameter type for a method or constructor.
 
 Updated/Enhanced Rules and Bug Fixes
  - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE]
