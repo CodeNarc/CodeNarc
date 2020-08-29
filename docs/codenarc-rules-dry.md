@@ -127,6 +127,7 @@ or 'TestCase.groovy'.
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
 | ignoreNumbers               | The optional comma-separated list of numbers that should be ignored (i.e., not cause a violation). | `0,1` |
+| duplicateNumberMinimumValue |  Ignore duplicate numbers less than this value | `null` |
 
 ### Notes
 
@@ -156,6 +157,7 @@ or 'TestCase.groovy'.
 |-----------------------------|------------------------|------------------|
 | ignoreStrings               | The optional comma-separated list of Strings that should be ignored (i.e., not cause a violation). | `''` (empty string) |
 | ignoreStringsDelimiter      | The delimiter char for `ignoreStrings`. | `,` (comma) |
+| duplicateStringMinimumLength| Ignore duplicate strings whose length is less than this value | `null` |
 
 ### Notes
 
