@@ -249,7 +249,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
     }
 
     @Test
-    void testDuplicateStringMinimumLength_Success() {
+    void test_DuplicateStrings_LessThanMinimumLength_NoViolations() {
         final SOURCE = '''
             def y = ['foo', 'foo']
         '''
@@ -258,7 +258,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
     }
 
     @Test
-    void testDuplicateStringMinimumLength_ViolationEquals() {
+    void test_DuplicateStrings_EqualToMinimumLength_Violations() {
         final SOURCE = '''
             def y = ['foo', 'foo']
         '''
@@ -267,7 +267,7 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
     }
 
     @Test
-    void testDuplicateStringMinimumLength_ViolationUpper() {
+    void test_DuplicateStrings_GreaterThanMinimumLength_Violations() {
         final SOURCE = '''
             def y = ['foo', 'foo']
         '''
@@ -276,10 +276,21 @@ class DuplicateStringLiteralRuleTest extends AbstractRuleTestCase<DuplicateStrin
     }
 
     @Test
-    void test_ByDefaultIgnoresEmptyString() {
+    void test_AlwaysIgnoresEmptyString() {
         final SOURCE = '''
             def x = ['', 'abc', '', 'def', '']
         '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_ConfigureSeveralSingleCharStrings_NoViolations() {
+        final SOURCE = '''
+            def x = ['-', '_', '/', '$', '.', ':', ' ', ',']
+            def y = ['-', '_', '/', '$', '.', ':', ' ', ',']
+        '''
+        rule.ignoreStringsDelimiter = '|'
+        rule.ignoreStrings = '-|_|/|$|.|:| |,'
         assertNoViolations(SOURCE)
     }
 
