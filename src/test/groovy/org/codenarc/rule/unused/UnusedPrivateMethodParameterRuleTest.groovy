@@ -107,6 +107,21 @@ class UnusedPrivateMethodParameterRuleTest extends AbstractRuleTestCase<UnusedPr
     }
 
     @Test
+    void testApplyTo_MultiplePrivateConstructorMethodsWithUnusedParameters() {
+        final SOURCE = '''
+          class MyClass {
+              private MyClass(String id, int value) { print value }
+              private MyClass(int otherValue) { print otherValue }
+              private MyClass(Date startDate, Date endDate) { }
+          }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:3, sourceLineText:'private MyClass(String id, int value) { print value }', messageText:'id'],
+                [lineNumber:5, sourceLineText:'private MyClass(Date startDate, Date endDate) { }', messageText:'startDate'],
+                [lineNumber:5, sourceLineText:'private MyClass(Date startDate, Date endDate) { }', messageText:'endDate'])
+    }
+
+    @Test
    void testApplyTo_AllParametersUsed() {
         final SOURCE = '''
             class MyClass {

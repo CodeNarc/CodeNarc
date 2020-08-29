@@ -103,7 +103,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
     }
 
     @Test
-    void testApplyTo_MultipleUnusedParametersForSinglePrivateMethod() {
+    void testApplyTo_MultipleUnusedParametersForSingleMethod() {
         final SOURCE = '''
           class MyClass {
               void myMethod(int value, String name) { }
@@ -117,7 +117,7 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
     }
 
     @Test
-    void testApplyTo_MultiplePrivateMethodsWithUnusedParameters() {
+    void testApplyTo_MultipleMethodsWithUnusedParameters() {
         final SOURCE = '''
           class MyClass {
               void myMethod1(String id, int value) { print value }
@@ -131,9 +131,27 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
     }
 
     @Test
+    void testApplyTo_MultipleConstructorMethodsWithUnusedParameters() {
+        final SOURCE = '''
+          class MyClass {
+              MyClass(String id, int value) { print value }
+              protected MyClass(int otherValue) { print otherValue }
+              protected MyClass(Date startDate, Date endDate) { }
+          }
+        '''
+        assertViolations(SOURCE,
+            [lineNumber:3, sourceLineText:'MyClass(String id, int value) { print value }', messageText:'id'],
+            [lineNumber:5, sourceLineText:'protected MyClass(Date startDate, Date endDate) { }', messageText:'startDate'],
+            [lineNumber:5, sourceLineText:'protected MyClass(Date startDate, Date endDate) { }', messageText:'endDate'])
+    }
+
+    @Test
    void testApplyTo_AllParametersUsed() {
         final SOURCE = '''
             class MyClass {
+                MyClass() { }
+                MyClass(String id) { println id }
+
                 String myMethod1(String id, int value) { doSomething(value); return id }
                 void myMethod2(int value) { def x = value }
                 def myMethod3(Date startDate) { return "${startDate}" }

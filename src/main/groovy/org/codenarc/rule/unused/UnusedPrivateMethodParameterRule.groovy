@@ -18,8 +18,8 @@ package org.codenarc.rule.unused
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.InnerClassNode
 import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
-import org.codenarc.rule.AbstractMethodVisitor
 
 import java.lang.reflect.Modifier
 
@@ -30,16 +30,17 @@ import java.lang.reflect.Modifier
  * @author Hamlet D'Arcy
   */
 class UnusedPrivateMethodParameterRule extends AbstractAstVisitorRule {
+
     String name = 'UnusedPrivateMethodParameter'
     int priority = 2
     String ignoreRegex = 'ignore|ignored'
     Class astVisitorClass = UnusedPrivateMethodParameterAstVisitor
 }
 
-class UnusedPrivateMethodParameterAstVisitor extends AbstractMethodVisitor {
+class UnusedPrivateMethodParameterAstVisitor extends AbstractAstVisitor {
 
     @Override
-    void visitMethod(MethodNode node) {
+    protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
         if (Modifier.isPrivate(node.modifiers)) {
             def unusedParameterNames = node.parameters*.name
             def collector = new ReferenceCollector()

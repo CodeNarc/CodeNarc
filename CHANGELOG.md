@@ -1,12 +1,14 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO Next Version 2.0?    (??? 2020)
+TODO Next Version 2.0.0    (??? 2020)
 --------------------------------------
 
 Updated/Enhanced Rules and Bug Fixes
  - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE]
  - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE]
+ - #487: **UnusedMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
+ - #487: **UnusedPrivateMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
