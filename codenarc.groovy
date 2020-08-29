@@ -84,7 +84,7 @@ def updateSiteDocumentation(ruleName, ruleCategory, ruleDescription) {
     new File(path).append """
 ## $ruleName Rule
 
-<Since CodeNarc 1.6>
+<Since CodeNarc 2.0.0>
 
 $ruleDescription
 
@@ -135,7 +135,6 @@ def getRuleCategory() {
 }
 
 def getUserInput() {
-
     def input = new java.util.Scanner(System.in)
     input.nextLine()
 

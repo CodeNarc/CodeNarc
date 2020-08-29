@@ -4,6 +4,9 @@
 TODO Next Version 2.0.0    (??? 2020)
 --------------------------------------
 
+New Rules
+- #548: New **OptionalField** rule (design) - Do not use an Optional as a field type.
+
 Updated/Enhanced Rules and Bug Fixes
  - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE]
  - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE]
