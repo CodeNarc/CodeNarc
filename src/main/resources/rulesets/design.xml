@@ -23,6 +23,7 @@
     <rule class='org.codenarc.rule.design.InstanceofRule'/>
     <rule class='org.codenarc.rule.design.LocaleSetDefaultRule'/>
     <rule class='org.codenarc.rule.design.NestedForLoopRule'/>
+    <rule class='org.codenarc.rule.design.OptionalCollectionReturnTypeRule'/>
     <rule class='org.codenarc.rule.design.OptionalFieldRule'/>
     <rule class='org.codenarc.rule.design.OptionalMethodParameterRule'/>
     <rule class='org.codenarc.rule.design.PublicInstanceFieldRule'/>
