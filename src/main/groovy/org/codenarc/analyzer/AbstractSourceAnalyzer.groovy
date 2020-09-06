@@ -21,11 +21,15 @@ import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.CustomCompilerPhaseSourceDecorator
 import org.codenarc.source.SourceCode
 
+import java.util.concurrent.ConcurrentHashMap
+
 /**
  * Common functionality for SourceAnalyzers.
  */
-@SuppressWarnings('AbstractClassWithoutAbstractMethod')
+@SuppressWarnings(['AbstractClassWithoutAbstractMethod', 'Println'])
 abstract class AbstractSourceAnalyzer implements SourceAnalyzer {
+
+    protected Map<Rule, Long> ruleProcessingTimes = new ConcurrentHashMap<>()
 
     protected List<Violation> collectViolations(SourceCode sourceCode, RuleSet ruleSet) {
         def allViolations = []
@@ -35,14 +39,36 @@ abstract class AbstractSourceAnalyzer implements SourceAnalyzer {
         def sourceAfterPhase = [(SourceCode.DEFAULT_COMPILER_PHASE): sourceCode].withDefault { phase ->
             new CustomCompilerPhaseSourceDecorator(sourceCode, phase)
         }
+
         for (Rule rule: validRules) {
-            def sourceAfterRequiredPhase = sourceAfterPhase[rule.compilerPhase]
-            def violations = rule.applyTo(sourceAfterRequiredPhase)
-            violations.removeAll { suppressionService.isViolationSuppressed(it) }
-            allViolations.addAll(violations)
+            measureRuleProcessingTime(rule) {
+                def sourceAfterRequiredPhase = sourceAfterPhase[rule.compilerPhase]
+                def violations = rule.applyTo(sourceAfterRequiredPhase)
+                violations.removeAll { suppressionService.isViolationSuppressed(it) }
+                allViolations.addAll(violations)
+            }
         }
+
         allViolations.sort { it.lineNumber }
         allViolations
+    }
+
+    protected void measureRuleProcessingTime(Rule rule, Closure closure) {
+        long startTime = System.nanoTime()
+        closure(rule)
+        long endTime = System.nanoTime()
+        long elapsedMillis = (endTime - startTime) / 1_000_000L
+        long oldValue = ruleProcessingTimes.getOrDefault(rule, 0L)
+        ruleProcessingTimes[rule] = oldValue + elapsedMillis
+    }
+
+    protected void printRuleProcessingTimes() {
+        println 'Rule Processing Times (ms):'
+        List<Rule> rules = new ArrayList<>(ruleProcessingTimes.keySet())
+        Collections.sort(rules) { r1, r2 -> (ruleProcessingTimes[r2] <=> ruleProcessingTimes[r1]) }
+        rules.each { rule ->
+            println '  * ' + rule.name + ': ' + ruleProcessingTimes[rule]
+        }
     }
 
 }

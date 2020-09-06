@@ -79,7 +79,8 @@ ruleset {
 
     ruleset('rulesets/unused.xml')
 
-    ruleset('rulesets/enhanced.xml')
+    // Having any enhanced rules in the ruleset significantly increases run times
+    //ruleset('rulesets/enhanced.xml')
 
     //------------------------------------------------------------------------------------
     // Custom rules
