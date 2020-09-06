@@ -65,9 +65,7 @@ abstract class AbstractRuleTestCase<T extends Rule> extends AbstractTestCase {
 
     @Test
     void testThatInvalidCodeHasNoViolations() {
-        final SOURCE = '''
-            @will not compile@ &^%$#
-        '''
+        final SOURCE = '@will not compile@ &^%$#'
         if (!getProperties().keySet().contains('skipTestThatInvalidCodeHasNoViolations')) {
             // Verify no errors/exceptions
             def sourceCode = prepareSourceCode(SOURCE)
