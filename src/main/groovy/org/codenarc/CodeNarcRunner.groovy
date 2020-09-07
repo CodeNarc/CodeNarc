@@ -23,6 +23,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
+
 import org.codenarc.ruleset.*
 
 /**
@@ -161,6 +162,21 @@ class CodeNarcRunner {
      * @return a single RuleSet
      */
     protected RuleSet createInitialRuleSet() {
+        ruleSetFiles.startsWith('{') || ruleSetFiles.startsWith('<') ?
+                createInitialRuleSetFromString() :
+                createInitialRuleSetFromFiles()
+    }
+
+    // Create ruleset from string argument
+    private RuleSet createInitialRuleSetFromString() {
+        def newRuleSet = new CompositeRuleSet()
+        def ruleSet = RuleSetUtil.loadRuleSetFromString(ruleSetFiles)
+        newRuleSet.addRuleSet(ruleSet)
+        newRuleSet
+    }
+
+    // Create ruleset from xml or groovy files
+    private RuleSet createInitialRuleSetFromFiles() {
         def paths = ruleSetFiles.tokenize(',')
         def newRuleSet = new CompositeRuleSet()
         paths.each { path ->

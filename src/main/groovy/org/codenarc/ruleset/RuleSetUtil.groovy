@@ -31,13 +31,19 @@ class RuleSetUtil {
     protected static final String CLASS_LOADER_SYS_PROP = 'codenarc.useCurrentThreadContextClassLoader'
     private static final ResourceFactory RESOURCE_FACTORY = new DefaultResourceFactory()
 
+    static RuleSet loadRuleSetFile(String path) {
+        isXmlFile(path) ? new XmlFileRuleSet(path) :
+            isJsonFile(path) ? new JsonFileRuleSet() :
+                new GroovyDslRuleSet(path)
+    }
+
+    static RuleSet loadRuleSetFromString(String ruleSetString) {
+        new StringRuleSet((ruleSetString))
+    }
+
     protected static void assertClassImplementsRuleInterface(Class ruleClass) {
         assert ruleClass
         assert Rule.isAssignableFrom(ruleClass), "The rule class [${ruleClass.name}] does not implement the Rule interface"
-    }
-
-    static RuleSet loadRuleSetFile(String path) {
-        isXmlFile(path) ? new XmlFileRuleSet(path) : new GroovyDslRuleSet(path)
     }
 
     protected static Rule loadRuleScriptFile(String path) {
@@ -56,6 +62,10 @@ class RuleSetUtil {
 
     private static boolean isXmlFile(String path) {
         path && path.endsWith('.xml')
+    }
+
+    private static boolean isJsonFile(String path) {
+        path && path.endsWith('.json')
     }
 
     private RuleSetUtil() { }
