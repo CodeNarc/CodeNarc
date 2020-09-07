@@ -1,5 +1,5 @@
 {
-  "formatting.SpaceAroundMapEntryColon": { "enabled" : false },
-  "groovyism.ExplicitCallToEqualsMethod": { "priority": 2},
-  "logging.Println": { }
+  "ExplicitCallToEqualsMethod": { "priority": 2},
+  "Println": { },
+  "SpaceAroundMapEntryColon": { "enabled" : false }
 }

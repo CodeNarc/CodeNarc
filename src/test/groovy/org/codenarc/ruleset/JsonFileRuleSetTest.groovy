@@ -17,10 +17,10 @@ package org.codenarc.ruleset
 
 import static org.codenarc.test.TestUtil.*
 
-import org.codenarc.rule.FakePathRule
 import org.codenarc.rule.formatting.SpaceAroundMapEntryColonRule
 import org.codenarc.rule.groovyism.ExplicitCallToEqualsMethodRule
 import org.codenarc.rule.logging.PrintlnRule
+import org.codenarc.ruleregistry.RuleRegistryInitializer
 import org.codenarc.test.AbstractTestCase
 import org.junit.Test
 
@@ -49,28 +49,31 @@ class JsonFileRuleSetTest extends AbstractTestCase {
 
     @Test
     void testMultipleRulesWithProperties() {
+        new RuleRegistryInitializer().initializeRuleRegistry()
         final PATH = 'rulesets/JsonRuleSet1.json'
         def ruleSet = new JsonFileRuleSet(PATH)
         def rules = ruleSet.rules
 
-        assert rules[0].class == SpaceAroundMapEntryColonRule
-        assert rules[1].class == ExplicitCallToEqualsMethodRule
-        assert rules[2].class == PrintlnRule
-        assert rules*.enabled == [false, true, true]
-        assert rules*.priority == [3, 2, 3]
+        assert rules[0].class == ExplicitCallToEqualsMethodRule
+        assert rules[1].class == PrintlnRule
+        assert rules[2].class == SpaceAroundMapEntryColonRule
+        assert rules*.enabled == [true, true, false]
+        assert rules*.priority == [2, 2, 3]
     }
 
     @Test
     void testFileUrl() {
-        final PATH = 'file:src/test/resources/rulesets/RuleSet1.xml'
+        new RuleRegistryInitializer().initializeRuleRegistry()
+        final PATH = 'file:src/test/resources/rulesets/JsonRuleSet1.json'
         def ruleSet = new JsonFileRuleSet(PATH)
         def rules = ruleSet.rules
-        assert rules*.class == [FakePathRule]
+        assert rules*.class == [ExplicitCallToEqualsMethodRule, PrintlnRule, SpaceAroundMapEntryColonRule]
     }
 
     @Test
     void testRulesListIsImmutable() {
-        final PATH = 'rulesets/RuleSet1.xml'
+        new RuleRegistryInitializer().initializeRuleRegistry()
+        final PATH = 'rulesets/JsonRuleSet1.json'
         def ruleSet = new JsonFileRuleSet(PATH)
         def rules = ruleSet.rules
         shouldFail(UnsupportedOperationException) { rules.clear() }
