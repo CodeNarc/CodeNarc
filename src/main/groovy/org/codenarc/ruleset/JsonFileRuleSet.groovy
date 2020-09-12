@@ -38,7 +38,7 @@ class JsonFileRuleSet implements RuleSet {
 
     /**
      * Construct a new instance on the specified RuleSet file path
-     * @param path - the path to the XML RuleSet definition file. The path is relative to the classpath,
+     * @param path - the path to the JSON RuleSet definition file. The path is relative to the classpath,
      *      by default, but may be optionally prefixed by any of the valid java.net.URL prefixes, such
      *      as "file:" (to load from a relative or absolute path on the filesystem), or "http:". The
      *      path must not be empty or null.
