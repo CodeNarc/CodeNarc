@@ -382,9 +382,8 @@ Format:
 
 **Note**: `RuleName` can have one of the following formats :
 
-* class (ex: `org.codenarc.rule.formatting.SpaceAroundMapEntryColon` )
 * name (ex: `SpaceAroundMapEntryColon`)
-* theme.name (ex: `formatting.SpaceAroundMapEntryColon`)
+* class (ex: `org.codenarc.rule.formatting.SpaceAroundMapEntryColonRule` )
 
 **Note**: If rule parameters is an empty object, default CodeNarc rule values will be used
 
@@ -394,9 +393,9 @@ Here is an example JSON *RuleSet* file:
 
 ```json
 {
-        "formatting.Indentation": { "spacesPerIndentLevel": 4 },
-        "formatting.SpaceAroundMapEntryColon": { "enabled" : false },
-        "groovyism.ExplicitCallToEqualsMethod": { "priority": 3},
-        "logging.Println": { }
+        "Indentation": { "spacesPerIndentLevel": 4 },
+        "SpaceAroundMapEntryColon": { "enabled" : false },
+        "ExplicitCallToEqualsMethod": { "priority": 3},
+        "Println": { }
 }
 ```

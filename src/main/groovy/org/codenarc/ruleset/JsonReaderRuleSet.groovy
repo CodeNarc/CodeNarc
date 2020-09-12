@@ -58,10 +58,9 @@ class JsonReaderRuleSet implements RuleSet {
 
     private void loadRuleElements(Map<String,Map> ruleset) {
         ruleset.each { String ruleName, Map ruleParams ->
-            // ruleName can be Theme.RuleName , a CodeNarc class or just RuleName
+            // ruleName can be a CodeNarc class or just RuleName
             def ruleNameSplit = ruleName.tokenize('.')
             def ruleClassName = ruleNameSplit.size() > 2 ? ruleName : // ex: org.codenarc.rule.exception.CatchThrowableRule
-                    ruleNameSplit.size() == 2 ? 'org.codenarc.rule.' + ruleNameSplit[0] + '.' + manageRuleName(ruleNameSplit[1]) : // ex: exception.CatchThrowableRule
                             RuleRegistryHolder.ruleRegistry?.getRuleClass(ruleName).name // ex: CatchThrowableRule
             assert ruleClassName != 'null', 'Unable to identify class from string ' + ruleName
             def ruleClass = getClass().classLoader.loadClass(ruleClassName)
@@ -76,11 +75,6 @@ class JsonReaderRuleSet implements RuleSet {
         ruleParams.each { paramName, paramValue ->
             PropertyUtil.setPropertyFromString(rule, paramName, paramValue.toString())
         }
-    }
-
-    private String manageRuleName(String ruleName) {
-        def ruleNameComplete = ruleName.endsWith('Rule') ? ruleName : ruleName + 'Rule'
-        ruleNameComplete
     }
 
 }

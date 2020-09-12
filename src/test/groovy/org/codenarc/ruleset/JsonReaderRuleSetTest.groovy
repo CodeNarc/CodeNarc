@@ -105,21 +105,6 @@ class JsonReaderRuleSetTest extends AbstractTestCase {
     }
 
     @Test
-    void testTwoRulesWithPropertiesThemeBaseRuleName() {
-        final JSON = '''
-            {
-                "exceptions.CatchRuntimeException": { "name": "XXXX", "enabled": false },
-                "exceptions.CatchThrowable": { "name": "YYYY", "priority": 1 }
-            }
-            '''
-        parseJsonRuleSet(JSON)
-        assertRuleClasses([CatchRuntimeExceptionRule, CatchThrowableRule])
-        assert rules*.name == ['XXXX', 'YYYY']
-        assert rules*.priority == [2, 1]
-        assert rules*.enabled == [false, true]
-    }
-
-    @Test
     void testRuleClassNotFound() {
         final JSON = '''
             {
