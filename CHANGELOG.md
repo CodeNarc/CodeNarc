@@ -7,7 +7,7 @@ TODO Next Version 2.0.0    (??? 2020)
 New Rules
 - #548: New **OptionalField** rule (design) - Do not use an Optional as a field type.
 - #549: New **OptionalMethodParameter** rule (design) - Do not use an Optional as a parameter type for a method or constructor.
-- #550: New **OptionalCollectionReturnType** rule (design) - Do not declare a method return type of `Optional<List>` (or `Collection`, `ArrayList`, `Set`, `Map`, `HashMap`, etc.). Return an empty collection instead. 
+- #550: New **OptionalCollectionReturnType** rule (design) - Do not declare a method return type of `Optional<List>` (or `Collection`, `ArrayList`, `Set`, `Map`, `HashMap`, etc.). Return an empty collection instead.
 
 Updated/Enhanced Rules and Bug Fixes
  - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE]
@@ -23,11 +23,11 @@ Updated/Enhanced Rules and Bug Fixes
  - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
  - #536: **Indentation** rule: Method chaining improvements. ([Damir Murat](https://github.com/dmurat))
- - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes. 
+ - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes.
  - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
 
 CodeNarc Plugin Mechanism
- - #494: New `CodeNarcPlugin` 
+ - #494: New `CodeNarcPlugin`
      * Add *plugins* property to the CodeNarc Ant Task (`CodeNarcTask`) and `-plugins` parameter to the command-line.
      * `CodeNarcRunner`: Apply plugins for rules, violations and reports. Register any plugin classes specified by the "org.codenarc.plugins" system property.
      * Add `sourceCode` property to `FileResults`; set it from `FilesystemSourceAnalyzer` and `AntFileSetSourceAnalyzer`.
@@ -44,15 +44,20 @@ Framework and Infrastructure
  - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
  - #496: Switched CodeNarc website to publish from `gh-pages` branch.
 
+RuleSets
+ - #554: Allow to use RuleSets in JSON format ([Nicolas Vuillamy](https://github.com/nvuillam))
+
 Documentation
  - #533: Update command-line instructions to use newer version of Groovy and other jars. Add a section on running with Gradle.
 
 Version 1.6.1    (Aug 2020)
 --------------------------------------
+
  - #534: **UnnecessarySemicolon** rule: Fix no violation in Groovy 3 if there is a space between code and the semicolon.
 
 Version 1.6    (Jun 2020)
 --------------------------------------
+
 New Rules
 - #450: **ImplicitReturnStatement** rule (convention) - Checks for non-void methods that are missing an explicit return statement.
 - #515: **GrailsDomainGormMethods** rule (grails) - Database operation should be performed by Data Services instead of calling GORM static and instance methods.

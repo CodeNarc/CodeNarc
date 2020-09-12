@@ -1,0 +1,5 @@
+{
+  "ExplicitCallToEqualsMethod": { "priority": 2},
+  "Println": { },
+  "SpaceAroundMapEntryColon": { "enabled" : false }
+}

@@ -6,9 +6,11 @@ title: CodeNarc - Creating a RuleSet
 # CodeNarc - Creating a RuleSet
 
 **Contents**
+
   * [Preferred Way To Configure a RuleSet](#preferred-way-to-configure-a-ruleset)
   * [Creating a Groovy RuleSet File](#creating-a-groovy-ruleset-file)
   * [Creating an XML RuleSet File](#creating-an-xml-ruleset-file)
+  * [Creating a JSON RuleSet File](#creating-a-json-ruleset-file)
 
 ## Preferred Way To Configure a RuleSet
 
@@ -17,7 +19,7 @@ title: CodeNarc - Creating a RuleSet
 This allows finer control over your custom RuleSet and insulates you from the provided *RuleSets* that can
 (and often do) change from release to release.
 
-###  Just Copy and Tweak One of the Starter RuleSet Files
+### Just Copy and Tweak One of the Starter RuleSet Files
 
 See the [Starter RuleSet - All Rules By Category](./StarterRuleSet-AllRulesByCategory.groovy.txt)). It contains
 all of the rules provided with the current version of **CodeNarc**, organized by category. Just delete or
@@ -36,7 +38,6 @@ You can also continue to use the predefined *RuleSets* distributed with **CodeNa
 [XML](Creating_an_XML_RuleSet_File) *RuleSet*. See the site navigation menu for a list of the *RuleSets*
 provided out of the box by **CodeNarc**.
 
-
 ## Creating a Groovy RuleSet File
 
 **CodeNarc** provides a Groovy DSL (domain-specific language) for defining *RuleSets*.
@@ -49,20 +50,20 @@ As mentioned above, this allows finer control over your custom RuleSet and insul
 
 Here is an example of a Groovy *RuleSet* file using the preferred syntax:
 
-```
+```groovy
     ruleset {
         description 'A custom Groovy RuleSet'
-    
+
         CyclomaticComplexity {
             maxMethodComplexity = 1
         }
-    
+
         ClassName
-    
+
         MethodName
-    
+
         ConfusingTernary(priority:3)
-    
+
         StatelessClass {
             name = 'StatelessDao'
             applyToClassNames = '*Dao'
@@ -91,39 +92,38 @@ Things to note:
 And here is an example that mixes both the preferred (new) syntax along with the older syntax, to
 illustrate backward-compatibility:
 
-```
+```groovy
     ruleset {
         MethodName
-    
+
         ConfusingTernary(priority:3)
-    
+
         StatelessClass {
             name = 'StatelessDao'
             applyToClassNames = '*Dao'
         }
-    
+
         // Old style
         rule(org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule) {
             priority = 3
         }
-    
+
         // Old style
         ruleset('rulesets/dry.xml')
     }
 ```
 
-
 ### A Sample Groovy RuleSet Using the Old Syntax
 
 Here is an example of a Groovy *RuleSet* file using the older syntax:
 
-```
+```groovy
     import org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule
-    
+
     ruleset {
-    
+
         description 'A sample Groovy RuleSet'
-    
+
         ruleset('rulesets/basic.xml') {
             'CatchThrowable' {
                 priority = 1
@@ -132,13 +132,13 @@ Here is an example of a Groovy *RuleSet* file using the older syntax:
             'EqualsAndHashCode' priority:3
             exclude 'Empty*'
         }
-    
+
         rule(ThrowExceptionFromFinallyBlockRule) {
             priority = 3
         }
-    
+
         rule("rules/MyCustomRuleScript.groovy")
-    
+
         ruleset('MyGroovyRuleSet.groovy')
     }
 ```
@@ -200,7 +200,6 @@ About the **rule** statements:
     example. As within **ruleset** statements, properties set this way can be of type *String*, *int*,
     *long* or *boolean*.
 
-
 ## Creating an XML RuleSet File
 
 The XML schema for a **CodeNarc** *RuleSet* file is embodied in the "ruleset-schema.xsd" file which
@@ -214,36 +213,35 @@ the sections must be in the order listed:
 | `<rule>`        | Include a single rule; specify its fully-qualified classname  |  Zero or more |
 | `<rule-script>` | Include a single rule implemented by a groovy script; specify the path of the script. The path is relative to the classpath by default, but can optionally specify a URL prefix.| Zero or more |
 
-
 ### A Sample XML RuleSet
 
 Here is an example XML *RuleSet* file:
 
-```
+```xml
     <ruleset xmlns="http://codenarc.org/ruleset/1.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
             xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
-    
+
         <description>Sample rule set</description>
-    
+
         <ruleset-ref path='rulesets/imports.xml'>
             <rule-config name='DuplicateImport'>
                 <property name='priority' value='1'/>
             </rule-config>
         </ruleset-ref>
-    
+
         <ruleset-ref path='rulesets/basic.xml'>
             <exclude name='StringInstantiation'/>
         </ruleset-ref>
-    
+
         <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
             <property name="name" value="AuthorTagNotAllowed"/>
             <property name='regex' value='\@author'/>
         </rule>
-    
+
         <rule-script path='rules/MyStaticFieldRule.groovy'/>
-    
+
     </ruleset>
 ```
 
@@ -307,7 +305,7 @@ and include and/or the exclude individual rules. In the following *RuleSet* exce
 "rulesets/basic.xml" *RuleSet* is included, except for the **BooleanInstantiationRule** and
 **StringInstantiationRule**.
 
-```
+```groovy
     ruleset('rulesets/basic.xml') {
         exclude 'BooleanInstantiation'
         exclude 'StringInstantiation'
@@ -316,7 +314,7 @@ and include and/or the exclude individual rules. In the following *RuleSet* exce
 
 And here is the same example in XML *RuleSet* format:
 
-```
+```xml
     <ruleset-ref path='rulesets/basic.xml'>
         <exclude name='BooleanInstantiation'/>
         <exclude name='StringInstantiation'/>
@@ -328,7 +326,7 @@ rather than those that are excluded.  In the following *RuleSet* excerpt, ONLY t
 **ReturnFromFinallyBlockRule** and **StringInstantiationRule** rules are included from the
  "rulesets/basic.xml" *RuleSet*.
 
-```
+```groovy
     ruleset('rulesets/basic.xml') {
         include 'ReturnFromFinallyBlockRule'
         include 'StringInstantiation'
@@ -337,7 +335,7 @@ rather than those that are excluded.  In the following *RuleSet* excerpt, ONLY t
 
 And here is the same example in XML *RuleSet* format:
 
-```
+```xml
     <ruleset-ref path='rulesets/basic.xml'>
         <include name='ReturnFromFinallyBlockRule'/>
         <include name='StringInstantiation'/>
@@ -351,21 +349,53 @@ the class name without the "Rule" suffix.)
 
 **Note**: If you specify an `<include>` and an `<exclude>` for a rule, then the `<exclude>` takes precedence.
 
-
 ### Using Wildcards Within \*include\* and \*exclude\* Names
 
-You may optionally include wildcard characters ('*' or '?') in the rule *name* for both
-`<include>` and an `<exclude>` elements. The wildcard character '*' within the *name* matches a
+You may optionally include wildcard characters ('\*' or '?') in the rule *name* for both
+`<include>` and an `<exclude>` elements. The wildcard character '\*' within the *name* matches a
 sequence of zero or more characters in the rule name, while the wildcard character '?' within the
 *name* matches exactly one character in the rule name.
 
-In the following *RuleSet* excerpt, all rules matching '*Instantiation' are included from the
+In the following *RuleSet* excerpt, all rules matching '\*Instantiation' are included from the
 "rulesets/basic.xml" *RuleSet*. In this case, that will include the **StringInstantiationRule**
 and **BooleanInstantiationRule** rules.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```xml
     <ruleset-ref path='rulesets/basic.xml'>
         <include name='*Instantiation'/>
     </ruleset-ref>
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
+## Creating a JSON RuleSet File
+
+You can use ruleset file in JSON format, which will be an JSON object declaring all rules and their properties
+
+Format:
+
+```json
+{
+    "RuleName1" : { "prop1": "value1", "prop2": "value2"},
+    "RuleName2" : { "prop3": "value3"},
+    "RuleName3" : { }
+}
+```
+
+**Note**: `RuleName` can have one of the following formats :
+
+* name (ex: `SpaceAroundMapEntryColon`)
+* class (ex: `org.codenarc.rule.formatting.SpaceAroundMapEntryColonRule` )
+
+**Note**: If rule parameters is an empty object, default CodeNarc rule values will be used
+
+### A Sample JSON RuleSet
+
+Here is an example JSON *RuleSet* file:
+
+```json
+{
+        "Indentation": { "spacesPerIndentLevel": 4 },
+        "SpaceAroundMapEntryColon": { "enabled" : false },
+        "ExplicitCallToEqualsMethod": { "priority": 3},
+        "Println": { }
+}
+```

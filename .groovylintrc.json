@@ -22,6 +22,9 @@
         "FieldTypeRequired": {
             "enabled": false
         },
+        "ImplicitReturnStatement": {
+            "enabled": false
+        },
         "Instanceof": {
             "enabled": false
         },
@@ -41,6 +44,9 @@
             "enabled": false
         },
         "NoJavaUtilDate": {
+            "enabled": false
+        },
+        "NoWildcardImports": {
             "enabled": false
         },
         "SpaceAroundMapEntryColon": {
