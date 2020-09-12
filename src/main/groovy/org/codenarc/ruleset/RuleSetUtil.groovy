@@ -34,7 +34,7 @@ class RuleSetUtil {
 
     static RuleSet loadRuleSetFile(String path) {
         isXmlFile(path) ? new XmlFileRuleSet(path) :
-            isJsonFile(path) ? new JsonFileRuleSet() :
+            isJsonFile(path) ? new JsonFileRuleSet(path) :
                 new GroovyDslRuleSet(path)
     }
 
