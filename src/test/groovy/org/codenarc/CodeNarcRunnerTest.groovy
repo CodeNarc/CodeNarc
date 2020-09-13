@@ -373,14 +373,14 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     @Test
     void test_createRuleSet_RuleSetAsStringXml() {
-        codeNarcRunner.ruleSetFiles = RULESET_AS_XML
+        codeNarcRunner.ruleSetString = RULESET_AS_XML
         def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['XXXX']
     }
 
     @Test
     void test_createRuleSet_RuleSetAsStringJson() {
-        codeNarcRunner.ruleSetFiles = RULESET_AS_JSON
+        codeNarcRunner.ruleSetString = RULESET_AS_JSON
         def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['XXXX']
     }

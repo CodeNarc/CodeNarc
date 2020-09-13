@@ -46,7 +46,7 @@ Framework and Infrastructure
 
 RuleSets
  - #554: Allow to use RuleSets in JSON format ([Nicolas Vuillamy](https://github.com/nvuillam))
- - #556: Allow to send XML and JSON RuleSets as string arguments ([Nicolas Vuillamy](https://github.com/nvuillam))
+ - #557: Allow to send XML and JSON RuleSets as string arguments ([Nicolas Vuillamy](https://github.com/nvuillam))
 
 Documentation
  - #533: Update command-line instructions to use newer version of Groovy and other jars. Add a section on running with Gradle.
