@@ -55,6 +55,23 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String JSON_REPORT_STDOUT_STR = 'json:stdout'
     private static final String PLUGIN_NAMES = 'abc,def'
     private static final int P1 = 1, P2 = 2, P3 = 3
+    private static final NAMESPACE = '''
+        xmlns="http://codenarc.org/ruleset/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd" '''
+    private static final RULESET_AS_JSON = '''
+            {
+                "org.codenarc.rule.StubRule": { "name": "XXXX"}
+            }
+            '''.trim()
+    private static final RULESET_AS_XML = """
+            <ruleset $NAMESPACE>
+                <rule class='org.codenarc.rule.StubRule'>
+                    <property name='name' value='XXXX'/>
+                </rule>
+            </ruleset>
+            """.trim()
 
     private CodeNarc codeNarc
     private File outputFile
@@ -294,6 +311,58 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
         assertReport(reportWriter, HtmlReportWriter, null, null)
+        assert exitCode == 0
+    }
+
+    @Test
+    void testExecute_rulesetStringXML() {
+        final ARGS = [
+                "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
+                "-title=$TITLE", "-excludes=$EXCLUDES", "-ruleset=$RULESET_AS_XML"] as String[]
+
+        codeNarc.execute(ARGS)
+
+        assert codeNarc.ruleset == RULESET_AS_XML
+        assert codeNarc.includes == INCLUDES
+        assert codeNarc.excludes == EXCLUDES
+
+        def sourceAnalyzer = codeNarcRunner.sourceAnalyzer
+        assert sourceAnalyzer.class == FilesystemSourceAnalyzer
+        assert sourceAnalyzer.baseDirectory == BASE_DIR
+        assert sourceAnalyzer.includes == INCLUDES
+        assert sourceAnalyzer.excludes == EXCLUDES
+
+        assert codeNarcRunner.ruleSetString == RULESET_AS_XML
+
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
+        assert exitCode == 0
+    }
+
+    @Test
+    void testExecute_rulesetStringJSON() {
+        final ARGS = [
+                "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
+                "-title=$TITLE", "-excludes=$EXCLUDES", "-ruleset=$RULESET_AS_JSON"] as String[]
+
+        codeNarc.execute(ARGS)
+
+        assert codeNarc.ruleset == RULESET_AS_JSON
+        assert codeNarc.includes == INCLUDES
+        assert codeNarc.excludes == EXCLUDES
+
+        def sourceAnalyzer = codeNarcRunner.sourceAnalyzer
+        assert sourceAnalyzer.class == FilesystemSourceAnalyzer
+        assert sourceAnalyzer.baseDirectory == BASE_DIR
+        assert sourceAnalyzer.includes == INCLUDES
+        assert sourceAnalyzer.excludes == EXCLUDES
+
+        assert codeNarcRunner.ruleSetString == RULESET_AS_JSON
+
+        assert codeNarcRunner.reportWriters.size == 1
+        def reportWriter = codeNarcRunner.reportWriters[0]
+        assertReport(reportWriter, HtmlReportWriter, HTML_REPORT_FILE, TITLE)
         assert exitCode == 0
     }
 
