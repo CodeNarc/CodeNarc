@@ -38,7 +38,7 @@ import org.codenarc.util.CodeNarcVersion
  *          or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
  *          any problematic characters, such as comma (',') or hash ('#'). See URLEncoder#encode(java.lang.String, java.lang.String).
  *          Defaults to "rulesets/basic.xml".</li>
- *   <li>ruleset - string containing a ruleSet in XML or JSON format (if set, rulesetfiles will be ignored)
+ *   <li>ruleset - URL-encoded in UTF-8 string containing a ruleSet in XML or JSON format (if set, rulesetfiles will be ignored).
  *   <li>includes - The comma-separated list of Ant file patterns specifying files that must be included;
  *          all files are included when omitted.</li>
  *   <li>excludes - The comma-separated list of Ant file patterns specifying files that must be excluded;
@@ -86,6 +86,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         See URLEncoder#encode(java.lang.String, java.lang.String). Defaults to "rulesets/basic.xml"
     -ruleset=XML_OR_JSON_STRING
         String containing a ruleSet in XML or JSON format (if set, rulesetfiles argument will be ignored)
+        The XML or JSON string must be URL-encoded in UTF-8 before being sent as argument to CodeNarc
     -maxPriority1Violations=<MAX>
         The maximum number of priority 1 violations allowed (int).
     -maxPriority2Violations=<MAX>
@@ -223,7 +224,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
             def value = matcher[0][2]
             switch (name) {
                 case 'rulesetfiles': ruleSetFiles = value; break
-                case 'ruleset': ruleset = value ; break
+                case 'ruleset': ruleset = URLDecoder.decode(value, 'UTF-8') ; break
                 case 'basedir': baseDir = value; break
                 case 'includes': includes = value; break
                 case 'excludes': excludes = value; break

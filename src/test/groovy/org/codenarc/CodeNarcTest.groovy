@@ -60,18 +60,18 @@ class CodeNarcTest extends AbstractTestCase {
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
         xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd" '''
-    private static final RULESET_AS_JSON = '''
+    private static final RULESET_AS_JSON = URLEncoder.encode('''
             {
                 "org.codenarc.rule.StubRule": { "name": "XXXX"}
             }
-            '''.trim()
-    private static final RULESET_AS_XML = """
+            ''', 'UTF-8')
+    private static final RULESET_AS_XML = URLEncoder.encode("""
             <ruleset $NAMESPACE>
                 <rule class='org.codenarc.rule.StubRule'>
                     <property name='name' value='XXXX'/>
                 </rule>
             </ruleset>
-            """.trim()
+            """, 'UTF-8')
 
     private CodeNarc codeNarc
     private File outputFile
@@ -315,14 +315,14 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_rulesetStringXML() {
+    void testExecute_RuleSetStringXML() {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-ruleset=$RULESET_AS_XML"] as String[]
 
         codeNarc.execute(ARGS)
 
-        assert codeNarc.ruleset == RULESET_AS_XML
+        assert codeNarc.ruleset == URLDecoder.decode(RULESET_AS_XML, 'UTF-8')
         assert codeNarc.includes == INCLUDES
         assert codeNarc.excludes == EXCLUDES
 
@@ -332,7 +332,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert sourceAnalyzer.includes == INCLUDES
         assert sourceAnalyzer.excludes == EXCLUDES
 
-        assert codeNarcRunner.ruleSetString == RULESET_AS_XML
+        assert codeNarcRunner.ruleSetString == URLDecoder.decode(RULESET_AS_XML, 'UTF-8')
 
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
@@ -341,14 +341,14 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_rulesetStringJSON() {
+    void testExecute_RuleSetStringJSON() {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-ruleset=$RULESET_AS_JSON"] as String[]
 
         codeNarc.execute(ARGS)
 
-        assert codeNarc.ruleset == RULESET_AS_JSON
+        assert codeNarc.ruleset == URLDecoder.decode(RULESET_AS_JSON, 'UTF-8')
         assert codeNarc.includes == INCLUDES
         assert codeNarc.excludes == EXCLUDES
 
@@ -358,7 +358,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert sourceAnalyzer.includes == INCLUDES
         assert sourceAnalyzer.excludes == EXCLUDES
 
-        assert codeNarcRunner.ruleSetString == RULESET_AS_JSON
+        assert codeNarcRunner.ruleSetString == URLDecoder.decode(RULESET_AS_JSON, 'UTF-8')
 
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
