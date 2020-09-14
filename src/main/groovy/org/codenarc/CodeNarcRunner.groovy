@@ -64,7 +64,7 @@ class CodeNarcRunner {
      *     any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
      *     or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
      *     any problematic characters, such as comma (',') or hash ('#'). See {@link URLEncoder#encode(java.lang.String, java.lang.String)}.
-     *     - ruleSetString: string containing a ruleSet in XML or JSON format (if set, ruleSetFiles will be ignored)
+     *     - ruleSetString: string containing a ruleSet in JSON format (if set, ruleSetFiles will be ignored)
      *   </li>
      *   <li>Call processRules(List<Rule>) for each registered CodeNarcPlugin</li>
      *   <li>Configure the RuleSet from the "codenarc.properties" file, if that file is found on the classpath.</li>

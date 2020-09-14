@@ -31,11 +31,6 @@ import org.junit.Test
   */
 class RuleSetUtilTest extends AbstractTestCase {
 
-    private static final NAMESPACE = '''
-        xmlns="http://codenarc.org/ruleset/1.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
-        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd" '''
     private static final RULESET_XML_FILE = 'rulesets/RuleSet1.xml'
     private static final RULESET_JSON_FILE = 'rulesets/JsonRuleSet1.json'
     private static final RULESET_GROOVY_FILE = 'rulesets/GroovyRuleSet1.txt'
@@ -46,13 +41,6 @@ class RuleSetUtilTest extends AbstractTestCase {
                 "org.codenarc.rule.StubRule": { "name": "XXXX"}
             }
             '''.trim()
-    private static final RULESET_AS_XML = """
-            <ruleset $NAMESPACE>
-                <rule class='org.codenarc.rule.StubRule'>
-                    <property name='name' value='XXXX'/>
-                </rule>
-            </ruleset>
-            """.trim()
 
     @Test
     void testAssertClassImplementsRuleInterface_RuleClass() {
@@ -84,8 +72,7 @@ class RuleSetUtilTest extends AbstractTestCase {
     @Test
     void testLoadRuleSetString() {
         new RuleRegistryInitializer().initializeRuleRegistry()
-        assert RuleSetUtil.loadRuleSetFromString(RULESET_AS_XML).class == StringRuleSet
-        assert RuleSetUtil.loadRuleSetFromString(RULESET_AS_JSON).class == StringRuleSet
+        assert RuleSetUtil.loadRuleSetFromString(RULESET_AS_JSON).class == JsonReaderRuleSet
     }
 
     @Test

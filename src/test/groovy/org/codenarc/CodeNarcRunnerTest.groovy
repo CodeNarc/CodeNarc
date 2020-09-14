@@ -46,11 +46,6 @@ import org.junit.Test
  */
 class CodeNarcRunnerTest extends AbstractTestCase {
 
-    private static final NAMESPACE = '''
-        xmlns="http://codenarc.org/ruleset/1.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
-        xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd" '''
     private static final XML_RULESET1 = 'rulesets/RuleSet1.xml'
     private static final GROOVY_RULESET1 = 'rulesets/GroovyRuleSet1.txt'
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'
@@ -61,13 +56,6 @@ class CodeNarcRunnerTest extends AbstractTestCase {
                 "org.codenarc.rule.StubRule": { "name": "XXXX"}
             }
             '''.trim()
-    private static final RULESET_AS_XML = """
-            <ruleset $NAMESPACE>
-                <rule class='org.codenarc.rule.StubRule'>
-                    <property name='name' value='XXXX'/>
-                </rule>
-            </ruleset>
-            """.trim()
     private static final RULESET_URL_WITH_WEIRD_CHARS_ENCODED = 'file:' + encode('src/test/resources/rulesets/WeirdCharsRuleSet-,#.txt')
     private static final REPORT_FILE = 'CodeNarcTest-Report.html'
     private static final Rule RULE = new StubRule(name:'Rule1', priority:1)
@@ -369,13 +357,6 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         codeNarcRunner.ruleSetFiles = RULESET_AS_URL
         def ruleSet = codeNarcRunner.createInitialRuleSet()
         assert ruleSet.rules*.name == ['TestPath']
-    }
-
-    @Test
-    void test_createRuleSet_RuleSetAsStringXml() {
-        codeNarcRunner.ruleSetString = RULESET_AS_XML
-        def ruleSet = codeNarcRunner.createInitialRuleSet()
-        assert ruleSet.rules*.name == ['XXXX']
     }
 
     @Test

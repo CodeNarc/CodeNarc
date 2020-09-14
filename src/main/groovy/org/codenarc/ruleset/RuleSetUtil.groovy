@@ -39,7 +39,7 @@ class RuleSetUtil {
     }
 
     static RuleSet loadRuleSetFromString(String ruleSetString) {
-        new StringRuleSet((ruleSetString))
+        new JsonReaderRuleSet(new StringReader(ruleSetString))
     }
 
     protected static void assertClassImplementsRuleInterface(Class ruleClass) {
