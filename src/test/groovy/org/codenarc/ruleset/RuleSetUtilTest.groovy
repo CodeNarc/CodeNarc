@@ -36,6 +36,11 @@ class RuleSetUtilTest extends AbstractTestCase {
     private static final RULESET_GROOVY_FILE = 'rulesets/GroovyRuleSet1.txt'
     private static final RULE_SCRIPT_FILE = 'rule/DoNothingRule.txt'
     private static final RULE_SCRIPT_FILE_URL = 'file:src/test/resources/rule/DoNothingRule.txt'
+    private static final RULESET_AS_JSON = '''
+            {
+                "org.codenarc.rule.StubRule": { "name": "XXXX"}
+            }
+            '''.trim()
 
     @Test
     void testAssertClassImplementsRuleInterface_RuleClass() {
@@ -62,6 +67,12 @@ class RuleSetUtilTest extends AbstractTestCase {
         assert RuleSetUtil.loadRuleSetFile(RULESET_GROOVY_FILE).class == GroovyDslRuleSet
         assert RuleSetUtil.loadRuleSetFile(RULESET_XML_FILE).class == XmlFileRuleSet
         assert RuleSetUtil.loadRuleSetFile(RULESET_JSON_FILE).class == JsonFileRuleSet
+    }
+
+    @Test
+    void testLoadRuleSetString() {
+        new RuleRegistryInitializer().initializeRuleRegistry()
+        assert RuleSetUtil.loadRuleSetFromString(RULESET_AS_JSON).class == JsonReaderRuleSet
     }
 
     @Test

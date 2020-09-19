@@ -38,6 +38,10 @@ class RuleSetUtil {
                 new GroovyDslRuleSet(path)
     }
 
+    static RuleSet loadRuleSetFromString(String ruleSetString) {
+        new JsonReaderRuleSet(new StringReader(ruleSetString))
+    }
+
     protected static void assertClassImplementsRuleInterface(Class ruleClass) {
         assert ruleClass
         assert Rule.isAssignableFrom(ruleClass), "The rule class [${ruleClass.name}] does not implement the Rule interface"

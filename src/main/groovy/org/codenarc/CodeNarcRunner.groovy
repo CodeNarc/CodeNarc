@@ -23,6 +23,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.Rule
 import org.codenarc.ruleregistry.RuleRegistryInitializer
+
 import org.codenarc.ruleset.*
 
 /**
@@ -47,6 +48,7 @@ class CodeNarcRunner {
     public static final String STANDARD_PLUGIN_CLASSES = 'org.codenarc.plugin.disablerules.DisableRulesInCommentsPlugin'
 
     String ruleSetFiles
+    String ruleSetString
     SourceAnalyzer sourceAnalyzer
     List<ReportWriter> reportWriters = []
     protected final List<CodeNarcPlugin> plugins = []
@@ -57,10 +59,12 @@ class CodeNarcRunner {
      *   <li>Register standard CodeNarcPlugins.</li>
      *   <li>Register any CodeNarcPlugins specified by the "org.codenarc.plugins" system property.</li>
      *   <li>Call initialize() for each registered CodeNarcPlugin.</li>
-     *   <li>Parse the <code>ruleSetFiles</code> property to create a RuleSet. Each path may be optionally prefixed by
+     *   <li>Parse the <code>ruleSetFiles</code> or <code>ruleSetString</code> property to create a RuleSet.
+     *     - ruleSetFiles: Each path may be optionally prefixed by
      *     any of the valid java.net.URL prefixes, such as "file:" (to load from a relative or absolute filesystem path),
      *     or "http:". If it is a URL, its path may be optionally URL-encoded. That can be useful if the path contains
      *     any problematic characters, such as comma (',') or hash ('#'). See {@link URLEncoder#encode(java.lang.String, java.lang.String)}.
+     *     - ruleSetString: string containing a ruleSet in JSON format (if set, ruleSetFiles will be ignored)
      *   </li>
      *   <li>Call processRules(List<Rule>) for each registered CodeNarcPlugin</li>
      *   <li>Configure the RuleSet from the "codenarc.properties" file, if that file is found on the classpath.</li>
@@ -74,7 +78,7 @@ class CodeNarcRunner {
      */
     @SuppressWarnings('Println')
     Results execute() {
-        assert ruleSetFiles, 'The ruleSetFiles property must be set'
+        assert ruleSetFiles || ruleSetString, 'The ruleSetFiles or ruleSetString property must be set'
         assert sourceAnalyzer, 'The sourceAnalyzer property must be set to a valid SourceAnalyzer'
 
         def startTime = System.currentTimeMillis()
@@ -161,6 +165,21 @@ class CodeNarcRunner {
      * @return a single RuleSet
      */
     protected RuleSet createInitialRuleSet() {
+        (ruleSetString) ?
+                createInitialRuleSetFromString() :
+                createInitialRuleSetFromFiles()
+    }
+
+    // Create ruleset from string argument
+    private RuleSet createInitialRuleSetFromString() {
+        def newRuleSet = new CompositeRuleSet()
+        def ruleSet = RuleSetUtil.loadRuleSetFromString(ruleSetString)
+        newRuleSet.addRuleSet(ruleSet)
+        newRuleSet
+    }
+
+    // Create ruleset from xml or groovy files
+    private RuleSet createInitialRuleSetFromFiles() {
         def paths = ruleSetFiles.tokenize(',')
         def newRuleSet = new CompositeRuleSet()
         paths.each { path ->
