@@ -208,18 +208,20 @@ class CodeNarcTask extends Task {
         def paths = classpath?.list()
         if (paths) {
             def oldContextClassLoader = currentThread().contextClassLoader
+            def classLoader = classLoaderForPaths(paths, oldContextClassLoader)
             try {
-                currentThread().contextClassLoader = classLoaderForPaths(paths, oldContextClassLoader)
+                currentThread().contextClassLoader = classLoader
                 return codeNarcRunner.execute()
             } finally {
                 currentThread().contextClassLoader = oldContextClassLoader
+                classLoader.close()
             }
         } else {
             return codeNarcRunner.execute()
         }
     }
 
-    private ClassLoader classLoaderForPaths(String[] paths, ClassLoader parent) {
+    private URLClassLoader classLoaderForPaths(String[] paths, ClassLoader parent) {
         def urls = paths.collect { new File(it).toURI().toURL() } as URL[]
         new URLClassLoader(urls, parent)
     }

@@ -26,6 +26,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes.
  - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
  - #551: **TrailingWhitespace** rule: Optimize execution time.
+ - #556: **CodeNarcTask**: Close `URLClassLoader`.
  
 CodeNarc Plugin Mechanism
  - #494: New `CodeNarcPlugin`
