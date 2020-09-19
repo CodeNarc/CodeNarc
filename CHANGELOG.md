@@ -11,7 +11,7 @@ New Rules
 
 Updated/Enhanced Rules and Bug Fixes
  - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE]
- - #497: **NoDef** rule: Also check fields. And the `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE]
+ - #497: **NoDef** rule: Also check fields. The `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE]
  - #487: **UnusedMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
  - #487: **UnusedPrivateMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
@@ -25,7 +25,8 @@ Updated/Enhanced Rules and Bug Fixes
  - #536: **Indentation** rule: Method chaining improvements. ([Damir Murat](https://github.com/dmurat))
  - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes.
  - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
-
+ - #551: **TrailingWhitespace** rule: Optimize execution time.
+ 
 CodeNarc Plugin Mechanism
  - #494: New `CodeNarcPlugin`
      * Add *plugins* property to the CodeNarc Ant Task (`CodeNarcTask`) and `-plugins` parameter to the command-line.
@@ -36,6 +37,10 @@ CodeNarc Plugin Mechanism
 Disabling Rules From Comments
  - #156: Disable rules by specifying `codenarc-disable` in a comment; optionally re-enable by specifying `codenarc-enable` on a subsequent line. Disable rules for the current line with `codenarc-disable-line`.
 
+RuleSets
+ - #554: Allow using RuleSets in JSON format. ([Nicolas Vuillamy](https://github.com/nvuillam))
+ - #557: Command-line: Add a new *ruleset* parameter, to allow specifying a JSON RuleSet as a string. ([Nicolas Vuillamy](https://github.com/nvuillam))
+
 Framework and Infrastructure
  - #525: Upgrade to Groovy 2.5.12. [BREAKING CHANGE]
  - #525: Support Java 14. Upgrade Java source/target compatibility to 1.7. [BREAKING CHANGE]
@@ -43,10 +48,6 @@ Framework and Infrastructure
  - #519: Update Gradle wrapper to 6.5. ([René Scheibe](https://github.com/darxriggs))
  - #520: Update Gradle publishing mechanism. ([René Scheibe](https://github.com/darxriggs))
  - #496: Switched CodeNarc website to publish from `gh-pages` branch.
-
-RuleSets
- - #554: Allow to use RuleSets in JSON format ([Nicolas Vuillamy](https://github.com/nvuillam))
- - #557: Allow to send JSON RuleSet in string argument **ruleset** ([Nicolas Vuillamy](https://github.com/nvuillam))
 
 Documentation
  - #533: Update command-line instructions to use newer version of Groovy and other jars. Add a section on running with Gradle.
