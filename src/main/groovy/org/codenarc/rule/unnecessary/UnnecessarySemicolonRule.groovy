@@ -90,7 +90,9 @@ class UnnecessarySemicolonAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitStatement(Statement statement) {
-        checkNode(statement)
+        if (isFirstVisit(statement)) {
+            checkNode(statement)
+        }
         super.visitStatement(statement)
     }
 

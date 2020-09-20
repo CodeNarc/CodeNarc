@@ -1049,6 +1049,10 @@ Example of violations:
     println(value); println (otherValue)
 ```
 
+Known limitations:
+ - Will not flag a semicolon on a field declaration with no initial value specified when running on Groovy 3.x.
+
+
 ## UnnecessarySetter Rule
 
 *Since CodeNarc 1.0*
