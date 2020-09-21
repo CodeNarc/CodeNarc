@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 385 rules.
+**CodeNarc** includes 388 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -148,6 +148,9 @@ title: CodeNarc - Rule Index
   * [Instanceof](./codenarc-rules-design.html#instanceof-rule)  
   * [LocaleSetDefault](./codenarc-rules-design.html#localesetdefault-rule)  
   * [NestedForLoop](./codenarc-rules-design.html#nestedforloop-rule)  
+  * [OptionalCollectionReturnType](./codenarc-rules-design.html#optionalcollectionreturntype-rule)  
+  * [OptionalField](./codenarc-rules-design.html#optionalfield-rule)  
+  * [OptionalMethodParameter](./codenarc-rules-design.html#optionalmethodparameter-rule)  
   * [PrivateFieldCouldBeFinal](./codenarc-rules-design.html#privatefieldcouldbefinal-rule)  
   * [PublicInstanceField](./codenarc-rules-design.html#publicinstancefield-rule)  
   * [ReturnsNullInsteadOfEmptyArray](./codenarc-rules-design.html#returnsnullinsteadofemptyarray-rule)  

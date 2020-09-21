@@ -245,6 +245,9 @@ ruleset {
     NonFinalSubclassOfSensitiveInterface 
     ObjectFinalize 
     ObjectOverrideMisspelledMethodName 
+    OptionalCollectionReturnType 
+    OptionalField 
+    OptionalMethodParameter 
     PackageName 
     PackageNameMatchesFilePath 
     ParameterCount 
