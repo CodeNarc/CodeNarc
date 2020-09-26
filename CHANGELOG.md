@@ -334,6 +334,7 @@ Updated/Enhanced Rules and Bug Fixes
    - #223: **UnusedVariable**: Don't count variable assignment as a reference (usage).
    - #230: **NoDef**: ClassCastException: ArgumentListExpression cannot be cast to VariableExpression.
    - #226: **UnusedPrivateField** rule should ignore fields annotated with `groovy.lang.Delegate`.
+   - #560: **UnnecessarySetter**: Use Groovy 2.4+ AST to improve violation message. 
 
 Framework and Infrastructure
    - #228: [BREAKING CHANGE] Upgrade to Groovy 2.3.
