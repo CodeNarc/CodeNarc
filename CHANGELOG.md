@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO Next Version 2.0.0    (??? 2020)
+Version 2.0.0    (Oct 2020)
 --------------------------------------
 
 New Rules
@@ -10,10 +10,11 @@ New Rules
 - #550: New **OptionalCollectionReturnType** rule (design) - Do not declare a method return type of `Optional<List>` (or `Collection`, `ArrayList`, `Set`, `Map`, `HashMap`, etc.). Return an empty collection instead.
 
 Updated/Enhanced Rules and Bug Fixes
- - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). [BREAKING CHANGE]
+ - #467: **VariableName** rule: Change to treat `final` variables the same as regular variables (i.e. not like constants). See **VariableName** [Note](https://codenarc.github.io/CodeNarc/codenarc-rules-naming.html#variablename-rule) [BREAKING CHANGE]
  - #497: **NoDef** rule: Also check fields. The `excludeRegex` no longer requires (or expects) a method name to include '()'. [BREAKING CHANGE]
  - #487: **UnusedMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
  - #487: **UnusedPrivateMethodParameter** rule: Also check for unused parameters of constructors. [BREAKING CHANGE]
+ - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`. [BREAKING CHANGE]
  - #518: **MissingBlankLineAfterImports** rule: Fix to add support for all import types. ([René Scheibe](https://github.com/darxriggs))
  - #521: **SpaceAroundOperator** rule: Fix incorrect violation if multiline ternary operation line contains a colon.
  - #512: **DuplicateStringLiteral** and **DuplicateNumberLiteral** rules: Ignore duplicate values in annotations.
@@ -24,7 +25,6 @@ Updated/Enhanced Rules and Bug Fixes
  - #526: **Indentation** rule: CodeNarc fails while parsing Traits.
  - #536: **Indentation** rule: Method chaining improvements. ([Damir Murat](https://github.com/dmurat))
  - #540: **Indentation** rule: Fix false positive violation on inline anonymous classes.
- - #273: **UnnecessaryToString** rule: Add check for `xx.toString()` added (+) to a String constant; add check for GString expression `${xxx.toString()}`.
  - #551: **TrailingWhitespace** rule: Optimize execution time.
  - #556: **CodeNarcTask**: Close `URLClassLoader`.
  
