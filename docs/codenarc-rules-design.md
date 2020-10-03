@@ -373,14 +373,14 @@ for (int i = 0; i * 100; ++i) {
 
 ## OptionalCollectionReturnType Rule
 
-<Since CodeNarc 2.0.0>
+*Since CodeNarc 2.0.0*
 
 Do not declare a method return type of `Optional<List>` (or `Collection`, `ArrayList`, `Set`, `Map`, `HashMap`, etc.). Return an empty collection instead.  See [The Java Optional class: 11 more recipes for preventing null pointer exceptions](https://blogs.oracle.com/javamagazine/the-java-optional-class-11-more-recipes-for-preventing-null-pointer-exceptions). 
 
 This rule checks for `Optional<collection-type>` return types, where *collection-type* is one of these common collection interfaces or implementation classes:
  - `Collection`
  - `List` (and `ArrayList`, `LinkedList`)
- - `Set` (and `HashSet`, `LinkedHashSet`, `EnumSet`,
+ - `Set` (and `HashSet`, `LinkedHashSet`, `EnumSet`)
  - `SortedSet` (and `TreeSet`)
  - `Map` (and `HashMap`, `LinkedHashMap`, `EnumMap`)
  - `SortedMap` (and `TreeMap`)
@@ -406,7 +406,7 @@ Example of violations:
 
 ## OptionalField Rule
 
-<Since CodeNarc 2.0.0>
+*Since CodeNarc 2.0.0*
 
 Do not use an `Optional` as a field type. See [The Java Optional class: 11 more recipes for preventing null pointer exceptions](https://blogs.oracle.com/javamagazine/the-java-optional-class-11-more-recipes-for-preventing-null-pointer-exceptions).
 
@@ -424,7 +424,7 @@ Example of violations:
 
 ## OptionalMethodParameter Rule
 
-<Since CodeNarc 2.0.0>
+*Since CodeNarc 2.0.0*
 
 Do not use an `Optional` as a parameter type for a method or constructor. See [The Java Optional class: 11 more recipes for preventing null pointer exceptions](https://blogs.oracle.com/javamagazine/the-java-optional-class-11-more-recipes-for-preventing-null-pointer-exceptions).
 

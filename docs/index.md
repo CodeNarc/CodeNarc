@@ -27,7 +27,7 @@ to fit into your project. Build tool, framework support, and report generation a
                 Get 2.0.0
             </a>
         </div>
-        [Release Notes](https://github.com/CodeNarc/CodeNarc/blob/master/CHANGELOG.md)
+        <a href="https://github.com/CodeNarc/CodeNarc/blob/master/CHANGELOG.md">Release Notes</a>
     </td>
 </tr>
 <tr>
