@@ -1,10 +1,10 @@
 {
     "codeNarc": {
         "url": "https://www.codenarc.org",
-        "version": "1.6"
+        "version": "2.0.0"
     },
     "report": {
-        "timestamp": "Jun 11, 2020 5:48:32 PM"
+        "timestamp": "Oct 3, 2020 3:35:34 PM"
     },
     "project": {
         "title": "Sample Project",
@@ -13,11 +13,11 @@
         ]
     },
     "summary": {
-        "totalFiles": 405,
-        "filesWithViolations": 53,
+        "totalFiles": 409,
+        "filesWithViolations": 56,
         "priority1": 0,
-        "priority2": 67,
-        "priority3": 34
+        "priority2": 75,
+        "priority3": 36
     },
     "packages": [
         {
@@ -385,11 +385,11 @@
         },
         {
             "path": "design",
-            "totalFiles": 23,
-            "filesWithViolations": 2,
+            "totalFiles": 26,
+            "filesWithViolations": 3,
             "priority1": 0,
             "priority2": 1,
-            "priority3": 1,
+            "priority3": 2,
             "files": [
                 {
                     "name": "NestedForLoopRuleTest.groovy",
@@ -399,6 +399,18 @@
                             "priority": 3,
                             "lineNumber": 106,
                             "sourceLine": "return inlineViolation('Nested for loop')",
+                            "message": "The return keyword is not needed and can be removed"
+                        }
+                    ]
+                },
+                {
+                    "name": "OptionalCollectionReturnTypeRuleTest.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "UnnecessaryReturnKeyword",
+                            "priority": 3,
+                            "lineNumber": 128,
+                            "sourceLine": "return \"The method $methodName in class MyClass returns an Optional collection\"",
                             "message": "The return keyword is not needed and can be removed"
                         }
                     ]
@@ -452,11 +464,11 @@
         },
         {
             "path": "formatting",
-            "totalFiles": 32,
-            "filesWithViolations": 12,
+            "totalFiles": 33,
+            "filesWithViolations": 13,
             "priority1": 0,
-            "priority2": 23,
-            "priority3": 1,
+            "priority2": 24,
+            "priority3": 2,
             "files": [
                 {
                     "name": "BracesForForLoopRuleTest.groovy",
@@ -522,11 +534,17 @@
                     "name": "IndentationRuleTest.groovy",
                     "violations": [
                         {
+                            "ruleName": "ClassSize",
+                            "priority": 3,
+                            "lineNumber": 27,
+                            "message": "Class \"IndentationRuleTest\" is 1037 lines"
+                        },
+                        {
                             "ruleName": "MethodCount",
                             "priority": 2,
                             "lineNumber": 27,
                             "sourceLine": "class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {",
-                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 49 methods"
+                            "message": "Class org.codenarc.rule.formatting.IndentationRuleTest has 52 methods"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
@@ -547,14 +565,26 @@
                             "priority": 2,
                             "lineNumber": 911,
                             "sourceLine": "final SOURCE = '''",
-                            "message": "The String '\n            |buildFileList()\n            |    .collect { File it ->\n            |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')\n            |        String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +\n            |            \"FILE_PATH=${it.absolutePath}\\n\"\n            |        cacheDir + File.separator + inputFile + sha1\n            |    }\n            |    .each { name ->\n            |        println name\n            |    }\n            |println \"done\"\n            |\n            |list2.collect { item ->\n            |    item.name\n            |}.each { name -> println name }\n            |\n            |otherList.collect { item -> item.name }.each { name -> println name }\n            |\n            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {\n            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {\n            |        AstUtil.classNodeImplementsType(expr.type, it)\n            |    }.each {\n            |        callbackFunction()\n            |    }\n            |}\n        ' contains a GString-type expression: '${it.absolutePath}'"
+                            "message": "The String '\n            |\"${if (true) 'content' else ''}\"\n        ' contains a GString-type expression: '${if (true) 'content' else ''}'"
                         },
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 956,
+                            "lineNumber": 919,
                             "sourceLine": "final SOURCE = '''",
-                            "message": "The String '\n            |\"${if (true) 'content' else ''}\"\n        ' contains a GString-type expression: '${if (true) 'content' else ''}'"
+                            "message": "The String '\n            |package com.sample\n            |\n            |trait RegressionTest {\n            |\n            |    String callStackPath = \"src/test/resources/callstacks/\"\n            |\n            |   /**\n            |     * Checks the current callstack is the same as the reference callstack.\n            |     * The reference callstack can be updated into a txt file in the callStackPath\n            |     *\n            |     * Pattern: <RegressionTest.callStackPath>/<ClassTestSimpleName><_subname>.txt\n            |     * @param subname optional subname, used in the reference callstack filename\n            |     */\n            |    void testNonRegression(String subname = '') {\n            |        String targetFileName = \"${callStackPath}${this.class.simpleName}\"\n            |        if (subname) {\n            |            targetFileName += \"_${subname}\"\n            |        }\n            |        RegressionTestHelper.testNonRegression(helper, targetFileName)\n            |    }\n            |}\n        ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'"
+                        }
+                    ]
+                },
+                {
+                    "name": "IndentationRule_MethodChainingTest.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 82,
+                            "sourceLine": "final SOURCE = '''",
+                            "message": "The String '\n            |buildFileList()\n            |    .collect { File it ->\n            |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')\n            |        String inputFile = 'COMMAND=PREPARE_LIBRARY\\n' +\n            |            \"FILE_PATH=${it.absolutePath}\\n\"\n            |        cacheDir + File.separator + inputFile + sha1\n            |    }\n            |    .each { name ->\n            |        println name\n            |    }\n            |println \"done\"\n            |\n            |list2.collect { item ->\n            |    item.name\n            |}.each { name -> println name }\n            |\n            |otherList.collect { item -> item.name }.each { name -> println name }\n            |\n            |if (expr instanceof ConstructorCallExpression || expr instanceof CastExpression) {\n            |    [Map, Iterable, List, Collection, ArrayList, Set, HashSet].findAll {\n            |        AstUtil.classNodeImplementsType(expr.type, it)\n            |    }.each {\n            |        callbackFunction()\n            |    }\n            |}\n        ' contains a GString-type expression: '${it.absolutePath}'"
                         }
                     ]
                 },
@@ -1050,9 +1080,9 @@
         {
             "path": "unnecessary",
             "totalFiles": 47,
-            "filesWithViolations": 5,
+            "filesWithViolations": 6,
             "priority1": 0,
-            "priority2": 7,
+            "priority2": 14,
             "priority3": 0,
             "files": [
                 {
@@ -1128,6 +1158,60 @@
                             "message": "The String '\n            if (!file.setExecutable(true)) {\n                throw new Exception(\"Cannot set ${file} as executable\")\n            }\n            def count = x.setCount(92)\n        ' contains a GString-type expression: '${file}'"
                         }
                     ]
+                },
+                {
+                    "name": "UnnecessaryToStringRuleTest.groovy",
+                    "violations": [
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 67,
+                            "sourceLine": "final SOURCE = '''",
+                            "message": "The String '\n            class MyClass {\n                def name = \"Joe\" + new Date().toString()\n\n                void run() {\n                    Object object = 1\n                    def string = 'some string' + object.toString()\n                    def withinGString = \"processing: ${'prefix' + object.toString()}\"\n\n                    def bigString = 'some string' + new Date() + object.toString()      // not a violation; known limitation\n                    def other = 123 + object.toString().toInteger()     // not a violation\n                }\n            }\n        ' contains a GString-type expression: '${'prefix' + object.toString()}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 84,
+                            "sourceLine": "[lineNumber:8, sourceLineText:'def withinGString = \"processing: ${\\'prefix\\' + object.toString()}\"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )",
+                            "message": "The String 'def withinGString = \"processing: ${'prefix' + object.toString()}\"' contains a GString-type expression: '${'prefix' + object.toString()}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 89,
+                            "sourceLine": "final SOURCE = '''",
+                            "message": "The String '\n            def string = \"some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}\"\n            def string2 = \"\"\"\n                 processing: ${123L.toString()}\n                 processing: ${new Date().toString()}\n                \"\"\"\n        ' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 97,
+                            "sourceLine": "[lineNumber:2, sourceLineText:'def string = \"some string${123L.toString()} or ${123} or ${\\'ABC\\'} or ${new Date().toString()}\"', messageText:'Calling toString() on [123] in class None is unnecessary'],",
+                            "message": "The String 'def string = \"some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}\"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 98,
+                            "sourceLine": "[lineNumber:2, sourceLineText:'def string = \"some string${123L.toString()} or ${123} or ${\\'ABC\\'} or ${new Date().toString()}\"', messageText:'Calling toString() on [new Date()] in class None is unnecessary'],",
+                            "message": "The String 'def string = \"some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}\"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 99,
+                            "sourceLine": "[lineNumber:4, sourceLineText:'processing: ${123L.toString()}', messageText:'Calling toString() on [123] in class None is unnecessary'],",
+                            "message": "The String 'processing: ${123L.toString()}' contains a GString-type expression: '${123L.toString()}'"
+                        },
+                        {
+                            "ruleName": "GStringExpressionWithinString",
+                            "priority": 2,
+                            "lineNumber": 100,
+                            "sourceLine": "[lineNumber:5, sourceLineText:'processing: ${new Date().toString()}', messageText:'Calling toString() on [new Date()] in class None is unnecessary']",
+                            "message": "The String 'processing: ${new Date().toString()}' contains a GString-type expression: '${new Date().toString()}'"
+                        }
+                    ]
                 }
             ]
         },
@@ -1145,9 +1229,9 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 135,
+                            "lineNumber": 150,
                             "sourceLine": "final SOURCE = '''",
-                            "message": "The String '\n            class MyClass {\n                String myMethod1(String id, int value) { doSomething(value); return id }\n                void myMethod2(int value) { def x = value }\n                def myMethod3(Date startDate) { return \"${startDate}\" }\n                def myMethod4(Date startDate) {\n                    return new Object() {\n                        def x = startDate\n                    }\n                }\n                def myMethod5(Date startDate) {\n                    return new Object() {\n                        String toString() { return startDate }\n                    }\n                }\n            }\n        ' contains a GString-type expression: '${startDate}\" }'"
+                            "message": "The String '\n            class MyClass {\n                MyClass() { }\n                MyClass(String id) { println id }\n\n                String myMethod1(String id, int value) { doSomething(value); return id }\n                void myMethod2(int value) { def x = value }\n                def myMethod3(Date startDate) { return \"${startDate}\" }\n                def myMethod4(Date startDate) {\n                    return new Object() {\n                        def x = startDate\n                    }\n                }\n                def myMethod5(Date startDate) {\n                    return new Object() {\n                        String toString() { return startDate }\n                    }\n                }\n            }\n        ' contains a GString-type expression: '${startDate}\" }'"
                         }
                     ]
                 },
@@ -1183,7 +1267,7 @@
                         {
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
-                            "lineNumber": 111,
+                            "lineNumber": 126,
                             "sourceLine": "final SOURCE = '''",
                             "message": "The String '\n            class MyClass {\n                private String myMethod1(String id, int value) { doSomething(value); return id }\n                private void myMethod2(int value) { def x = value }\n                private def myMethod3(Date startDate) { return \"${startDate}\" }\n                private def myMethod4(Date startDate) {\n                    return new Object() {\n                        def x = startDate\n                    }\n                }\n                private def myMethod5(Date startDate) {\n                    return new Object() {\n                        String toString() { return startDate }\n                    }\n                }\n            }\n        ' contains a GString-type expression: '${startDate}\" }'"
                         }
