@@ -1,6 +1,6 @@
-CodeNarc Report: Sample Project - Jun 11, 2020 5:48:32 PM
+CodeNarc Report: Sample Project - Oct 3, 2020 3:35:34 PM
 
-Summary: TotalFiles=405 FilesWithViolations=53 P1=0 P2=67 P3=34
+Summary: TotalFiles=409 FilesWithViolations=56 P1=0 P2=75 P3=36
 
 File: AbstractAstVisitorRuleTest.groovy
     Violation: Rule=UnnecessaryObjectReferences P=3 Line=184 Msg=[The code could be more concise by using a with() or identity() block] Src=[rule.doNotApplyToClassNames = 'Xxx'        // doNotApply = NO]
@@ -71,6 +71,9 @@ File: convention/CompileStaticRuleTest.groovy
 File: design/NestedForLoopRuleTest.groovy
     Violation: Rule=UnnecessaryReturnKeyword P=3 Line=106 Msg=[The return keyword is not needed and can be removed] Src=[return inlineViolation('Nested for loop')]
 
+File: design/OptionalCollectionReturnTypeRuleTest.groovy
+    Violation: Rule=UnnecessaryReturnKeyword P=3 Line=128 Msg=[The return keyword is not needed and can be removed] Src=[return "The method $methodName in class MyClass returns an Optional collection"]
+
 File: design/PrivateFieldCouldBeFinalRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.design.PrivateFieldCouldBeFinalRuleTest has 34 methods] Src=[class PrivateFieldCouldBeFinalRuleTest extends AbstractRuleTestCase<PrivateFieldCouldBeFinalRule> {]
 
@@ -107,7 +110,7 @@ File: formatting/ClassStartsWithBlankLineRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.ClassStartsWithBlankLineRuleTest has 43 methods] Src=[class ClassStartsWithBlankLineRuleTest extends AbstractRuleTestCase<ClassStartsWithBlankLineRule> {]
 
 File: formatting/IndentationRuleTest.groovy
-    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 49 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
+    Violation: Rule=MethodCount P=2 Line=27 Msg=[Class org.codenarc.rule.formatting.IndentationRuleTest has 52 methods] Src=[class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {]
     Violation: Rule=GStringExpressionWithinString P=2 Line=607 Msg=[The String '
             |class MyClass {
             |    private void execute() {
@@ -143,6 +146,35 @@ File: formatting/IndentationRuleTest.groovy
             |}).asFileTree
         ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
     Violation: Rule=GStringExpressionWithinString P=2 Line=911 Msg=[The String '
+            |"${if (true) 'content' else ''}"
+        ' contains a GString-type expression: '${if (true) 'content' else ''}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=919 Msg=[The String '
+            |package com.sample
+            |
+            |trait RegressionTest {
+            |
+            |    String callStackPath = "src/test/resources/callstacks/"
+            |
+            |   /**
+            |     * Checks the current callstack is the same as the reference callstack.
+            |     * The reference callstack can be updated into a txt file in the callStackPath
+            |     *
+            |     * Pattern: <RegressionTest.callStackPath>/<ClassTestSimpleName><_subname>.txt
+            |     * @param subname optional subname, used in the reference callstack filename
+            |     */
+            |    void testNonRegression(String subname = '') {
+            |        String targetFileName = "${callStackPath}${this.class.simpleName}"
+            |        if (subname) {
+            |            targetFileName += "_${subname}"
+            |        }
+            |        RegressionTestHelper.testNonRegression(helper, targetFileName)
+            |    }
+            |}
+        ' contains a GString-type expression: '${callStackPath}${this.class.simpleName}'] Src=[final SOURCE = ''']
+    Violation: Rule=ClassSize P=3 Line=27 Msg=[Class "IndentationRuleTest" is 1037 lines]
+
+File: formatting/IndentationRule_MethodChainingTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=82 Msg=[The String '
             |buildFileList()
             |    .collect { File it ->
             |        MessageDigest sha1 = MessageDigest.getInstance('SHA1')
@@ -169,9 +201,6 @@ File: formatting/IndentationRuleTest.groovy
             |    }
             |}
         ' contains a GString-type expression: '${it.absolutePath}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=956 Msg=[The String '
-            |"${if (true) 'content' else ''}"
-        ' contains a GString-type expression: '${if (true) 'content' else ''}'] Src=[final SOURCE = ''']
 
 File: formatting/SpaceAfterClosingBraceRuleTest.groovy
     Violation: Rule=GStringExpressionWithinString P=2 Line=38 Msg=[The String '
@@ -590,9 +619,40 @@ File: unnecessary/UnnecessarySetterRuleTest.groovy
             def count = x.setCount(92)
         ' contains a GString-type expression: '${file}'] Src=[final SOURCE = ''']
 
-File: unused/UnusedMethodParameterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=135 Msg=[The String '
+File: unnecessary/UnnecessaryToStringRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=67 Msg=[The String '
             class MyClass {
+                def name = "Joe" + new Date().toString()
+
+                void run() {
+                    Object object = 1
+                    def string = 'some string' + object.toString()
+                    def withinGString = "processing: ${'prefix' + object.toString()}"
+
+                    def bigString = 'some string' + new Date() + object.toString()      // not a violation; known limitation
+                    def other = 123 + object.toString().toInteger()     // not a violation
+                }
+            }
+        ' contains a GString-type expression: '${'prefix' + object.toString()}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=84 Msg=[The String 'def withinGString = "processing: ${'prefix' + object.toString()}"' contains a GString-type expression: '${'prefix' + object.toString()}'] Src=[[lineNumber:8, sourceLineText:'def withinGString = "processing: ${\'prefix\' + object.toString()}"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=89 Msg=[The String '
+            def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"
+            def string2 = """
+                 processing: ${123L.toString()}
+                 processing: ${new Date().toString()}
+                """
+        ' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'] Src=[final SOURCE = ''']
+    Violation: Rule=GStringExpressionWithinString P=2 Line=97 Msg=[The String 'def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'] Src=[[lineNumber:2, sourceLineText:'def string = "some string${123L.toString()} or ${123} or ${\'ABC\'} or ${new Date().toString()}"', messageText:'Calling toString() on [123] in class None is unnecessary'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=98 Msg=[The String 'def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"' contains a GString-type expression: '${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}'] Src=[[lineNumber:2, sourceLineText:'def string = "some string${123L.toString()} or ${123} or ${\'ABC\'} or ${new Date().toString()}"', messageText:'Calling toString() on [new Date()] in class None is unnecessary'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=99 Msg=[The String 'processing: ${123L.toString()}' contains a GString-type expression: '${123L.toString()}'] Src=[[lineNumber:4, sourceLineText:'processing: ${123L.toString()}', messageText:'Calling toString() on [123] in class None is unnecessary'],]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=100 Msg=[The String 'processing: ${new Date().toString()}' contains a GString-type expression: '${new Date().toString()}'] Src=[[lineNumber:5, sourceLineText:'processing: ${new Date().toString()}', messageText:'Calling toString() on [new Date()] in class None is unnecessary']]
+
+File: unused/UnusedMethodParameterRuleTest.groovy
+    Violation: Rule=GStringExpressionWithinString P=2 Line=150 Msg=[The String '
+            class MyClass {
+                MyClass() { }
+                MyClass(String id) { println id }
+
                 String myMethod1(String id, int value) { doSomething(value); return id }
                 void myMethod2(int value) { def x = value }
                 def myMethod3(Date startDate) { return "${startDate}" }
@@ -626,7 +686,7 @@ File: unused/UnusedPrivateFieldRuleTest.groovy
         ' contains a GString-type expression: '${varName}'] Src=[final SOURCE = ''']
 
 File: unused/UnusedPrivateMethodParameterRuleTest.groovy
-    Violation: Rule=GStringExpressionWithinString P=2 Line=111 Msg=[The String '
+    Violation: Rule=GStringExpressionWithinString P=2 Line=126 Msg=[The String '
             class MyClass {
                 private String myMethod1(String id, int value) { doSomething(value); return id }
                 private void myMethod2(int value) { def x = value }
@@ -687,4 +747,4 @@ File: unused/UnusedPrivateMethodRuleTest.groovy
 File: unused/UnusedVariableRuleTest.groovy
     Violation: Rule=MethodCount P=2 Line=26 Msg=[Class org.codenarc.rule.unused.UnusedVariableRuleTest has 35 methods] Src=[class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {]
 
-[CodeNarc (https://www.codenarc.org) v1.6]
+[CodeNarc (https://www.codenarc.org) v2.0.0]
