@@ -27,7 +27,9 @@ to fit into your project. Build tool, framework support, and report generation a
                 Get 2.0.0
             </a>
         </div>
-        <a href="https://github.com/CodeNarc/CodeNarc/blob/master/CHANGELOG.md">Release Notes</a>
+        <div>
+            <a href="https://github.com/CodeNarc/CodeNarc/blob/master/CHANGELOG.md">Release Notes</a>
+        </div>
     </td>
 </tr>
 <tr>
@@ -51,10 +53,10 @@ to fit into your project. Build tool, framework support, and report generation a
          <h2>Requirements</h2>
          <strong>CodeNarc</strong> requires:
          <ul>
-              <li>Java 1.6 or later</li>
-              <li><a href="http://groovy-lang.org/">Groovy</a> version 2.3 or later</li>
+              <li>Java 1.7 or later</li>
+              <li><a href="http://groovy-lang.org/">Groovy</a> version 2.5 or later</li>
               <li><a href="https://www.slf4j.org/">SLF4J</a> API and binding jar(s)</li>
-              <li><a href="https://dx42.github.io/gmetrics/">GMetrics</a> 1.0 or later, if using the Size/Complexity rules</li>
+              <li><a href="https://dx42.github.io/gmetrics/">GMetrics</a> 1.1 or later, if using the Size/Complexity rules</li>
          </ul>
      </td>
 </tr>
