@@ -39,6 +39,8 @@ dependencies {
     testImplementation 'commons-cli:commons-cli:1.4'
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.1'
+
+    testRuntime "org.codehaus.groovy:groovy-macro:$groovyVersion"
 }
 
 sourceSets {
