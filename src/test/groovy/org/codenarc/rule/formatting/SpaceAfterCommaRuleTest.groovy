@@ -66,6 +66,18 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
     }
 
     @Test
+    void testApplyTo_Macro() {
+        final SOURCE = '''
+            class ClassUsingMacros {
+                Statement statementCreatedUsingMacros() {
+                    def code = macro { return toString() } as Statement
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_MethodCall_NoPrecedingSpaceForSingleParameter_Violation() {
         final SOURCE = '''
             class MyTestCase {

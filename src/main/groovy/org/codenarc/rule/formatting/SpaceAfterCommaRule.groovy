@@ -95,7 +95,7 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
             def parameterExpressions = arguments.expressions
 
             parameterExpressions.each { e ->
-                if (!isClosureParameterOutsideParentheses(e, arguments)) {
+                if (!isClosureParameterOutsideParentheses(e, arguments) && e.columnNumber > 1) {
                     String line = sourceLine(e)
                     String previousChar = line[e.columnNumber - 2]
 
