@@ -18,8 +18,7 @@ package org.codenarc.report
 /**
  * Tests for TestReportWriter
  *
- * @author Chris Mair
- * @author Hamlet D'Arcy
+ * @author Luis Zimmermann
  */
 class InlineConsoleReportWriterTest extends AbstractInlineConsoleReportWriterTestCase {
 
