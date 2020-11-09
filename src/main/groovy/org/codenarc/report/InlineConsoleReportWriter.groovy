@@ -31,8 +31,6 @@ import org.codenarc.results.Results
  */
 class InlineConsoleReportWriter extends AbstractReportWriter {
 
-    String title
-    String defaultOutputFile = 'CodeNarcInlineReport.txt'
     int maxPriority = 3
 
     @Override
