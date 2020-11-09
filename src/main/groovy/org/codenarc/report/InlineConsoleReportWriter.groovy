@@ -30,7 +30,7 @@ import org.codenarc.rule.Violation
  *
  * @author Luis Zimmermann
  */
-class InlineTextReportWriter extends AbstractReportWriter {
+class InlineConsoleReportWriter extends AbstractReportWriter {
 
     String title
     String defaultOutputFile = 'CodeNarcInlineReport.txt'
