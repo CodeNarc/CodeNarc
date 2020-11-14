@@ -3,6 +3,13 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'idea'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'org.codenarc.CodeNarc'
+    }
 }
 
 group = 'org.codenarc'
