@@ -23,7 +23,6 @@ COPY --from=gradle /gradle/build/libs/codenarc-all.jar /lib/codenarc-all.jar
 RUN chmod 755 /lib/codenarc-all.jar
 
 WORKDIR /work
-COPY . /work
 
 ENTRYPOINT ["java", "-jar", "/lib/codenarc-all.jar"]
 
