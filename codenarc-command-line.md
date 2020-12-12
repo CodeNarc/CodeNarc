@@ -5,6 +5,12 @@ title: CodeNarc Command Line
 
 # CodeNarc - Run From Command-Line
 
+**Contents**
+ * [CodeNarc Command-Line Parameters](#codenarc-command-line-parameters)
+ * [Executing CodeNarc from the Command-Line](#executing-codenarc-from-the-command-line)
+ * [Running From a Gradle Script](#running-from-a-gradle-script)
+ * [Docker](#docker)
+
 **CodeNarc** can be run from the command-line as a Java application. The `org.codenarc.CodeNarc`
 class provides the application entry-point.
 
@@ -88,3 +94,7 @@ Here is an example Gradle script to run CodeNarc using its command-line interfac
         args "-rulesetfiles=file:codenarc.ruleset"
     }
 ```
+
+## Docker
+
+See [CodeNarc - Docker](./codenarc-docker.html).
