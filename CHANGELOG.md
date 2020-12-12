@@ -9,6 +9,7 @@ Updated/Enhanced Rules and Bug Fixes
 
 Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
+ - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
 
 
 Version 2.0.0    (Oct 2020)
