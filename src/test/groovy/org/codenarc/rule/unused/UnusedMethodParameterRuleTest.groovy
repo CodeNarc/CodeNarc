@@ -90,6 +90,30 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
     }
 
     @Test
+    void testOverrideAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+
+                @Override
+                void myMethod1(String string, int value) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testPointcutAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+
+                @Pointcut("@annotation(example.annotation.Test)")
+                void myMethod1() { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
     void testApplyTo_SingleUnusedPrivateMethodParameterSuspiciousReferenceInAnonymousClass() {
         final SOURCE = '''
             class MyClass {

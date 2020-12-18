@@ -43,9 +43,7 @@ class UnusedMethodParameterAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {
-        if (!currentClassNode.isInterface() && !node.isAbstract() && !(currentClassName ==~ rule.ignoreClassRegex)
-            && !Modifier.isPrivate(node.modifiers) && AstUtil.getAnnotation(node, 'Override') == null
-            && !isMainMethod(node)) {
+        if (shouldEvaluateMethodParameters(node)) {
             def unusedParameterNames = node.parameters*.name
             def collector = new ReferenceCollector()
             collector.visitMethod(node)
@@ -58,6 +56,24 @@ class UnusedMethodParameterAstVisitor extends AbstractAstVisitor {
                 addViolation(node, "Method parameter [$parameterName] is never referenced in the method $node.name of class $currentClassName")
             }
         }
+    }
+
+    private boolean shouldEvaluateMethodParameters(MethodNode node) {
+        boolean classIsNotInterface = !currentClassNode.isInterface()
+        boolean nodeIsNotAbstract = !node.isAbstract()
+        boolean classIsNotIgnored = !(currentClassName ==~ rule.ignoreClassRegex)
+        boolean isNotPrivate = !Modifier.isPrivate(node.modifiers)
+        boolean isNotOverridden = AstUtil.getAnnotation(node, 'Override') == null
+        boolean isNotMainMethod = !isMainMethod(node)
+        boolean isNotPointcut = AstUtil.getAnnotation(node, 'Pointcut') == null
+
+        return classIsNotInterface &&
+            nodeIsNotAbstract &&
+            classIsNotIgnored &&
+            isNotPrivate &&
+            isNotOverridden &&
+            isNotMainMethod &&
+            isNotPointcut
     }
 
     private static boolean isMainMethod(MethodNode node) {
