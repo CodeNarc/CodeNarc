@@ -36,7 +36,10 @@ class EmptyMethodRule extends AbstractAstVisitorRule {
 class EmptyMethodAstVisitor extends AbstractMethodVisitor {
     @Override
     void visitMethod(MethodNode node) {
-        if (AstUtil.isEmptyBlock(node.code) && !Modifier.isAbstract(node.declaringClass.modifiers)) {
+        boolean isNotPointcutMethod = !AstUtil.hasAnnotation(node, 'Pointcut')
+        boolean isNotOverride = !Modifier.isAbstract(node.declaringClass.modifiers)
+
+        if (AstUtil.isEmptyBlock(node.code) && isNotOverride && isNotPointcutMethod) {
             if (!node.annotations.find { it?.classNode?.name == 'Override' }) {
                 addViolation(node, "The method $node.name is both empty and not marked with @Override")
             }
