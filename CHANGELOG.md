@@ -6,6 +6,8 @@ TODO Version 2.1.0    (??? 2020)
 Updated/Enhanced Rules and Bug Fixes
  - #567: **SpaceAfterComma** rule: Do not assume that expression's column number will always be set. ([Marcin Erdmann](https://github.com/erdi))
  - #571: Support Groovy 3.0.6 and fix test failures.
+ - #576: Ignore pointcuts for empty methods. ([Thomas Lefèvre](https://github.com/tlefevre))
+ - #562: Deprecate the **UnnecessarySubstring** rule. Its recommendation to use subscripts on strings is not always safe/valid.
 
 Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))

@@ -1080,9 +1080,12 @@ These bits of code do not:
   def count = x.setCount(92)            // Set method called within expression
 ```
 
-## UnnecessarySubstring Rule
+## UnnecessarySubstring Rule (DEPRECATED)
 
 *Since CodeNarc 0.15*
+
+NOTE: This rule is *deprecated* and will be removed in a future CodeNarc version. Its recommendation to use subscripts on 
+strings is not always safe/valid. See [#562](https://github.com/CodeNarc/CodeNarc/issues/562).
 
 This rule finds usages of `String.substring(int)` and `String.substring(int, int)` that can be replaced by use of the
 subscript operator. For instance, `var.substring(5)` can be replaced with `var[5..-1]`.
