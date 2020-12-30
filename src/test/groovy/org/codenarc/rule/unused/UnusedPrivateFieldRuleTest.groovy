@@ -18,7 +18,7 @@ package org.codenarc.rule.unused
 import org.junit.Test
 
 /**
- * Tests for UnusedPrivateFieldRule when constructor only usages are not allowed
+ * Tests for UnusedPrivateFieldRule when constructor only usages are allowed
  */
 class UnusedPrivateFieldRuleTest extends AbstractUnusedPrivateFieldRuleTest {
 
