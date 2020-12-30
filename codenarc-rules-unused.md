@@ -135,6 +135,7 @@ For instance, to also ignore fields named 'fieldx', set the property to the 'fie
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
 | ignoreFieldNames            | Specifies one or more (comma-separated) field names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | `serialVersionUID` |
+| allowConstructorOnlyUsages  | Should be set to `false` if violations are to be raised for fields which are used only within constructors.  | `true` |
 
 Known limitations:
   * Does not recognize field access when field name is a GString (e.g. `this."${fieldName}"`)
