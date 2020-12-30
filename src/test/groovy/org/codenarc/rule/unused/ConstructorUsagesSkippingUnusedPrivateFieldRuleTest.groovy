@@ -20,30 +20,11 @@ import org.junit.Test
 /**
  * Tests for UnusedPrivateFieldRule when constructor only usages are not allowed
  */
-class UnusedPrivateFieldRuleTest extends AbstractUnusedPrivateFieldRuleTest {
+class ConstructorUsagesSkippingUnusedPrivateFieldRuleTest extends AbstractUnusedPrivateFieldRuleTest {
 
     @Test
-    void testRuleProperties() {
-        assert rule.priority == 2
-        assert rule.name == 'UnusedPrivateField'
-    }
-
-    @Test
-    void testBugFix_CannotCastFieldNodeToMetaClass() {
+    void testNotAllowingConstructorOnlyUsages() {
         final SOURCE = '''
-            class FlowBuilder extends AbstractFlowBuilder implements GroovyObject, ApplicationContextAware {
-                private MetaClass metaClass
-                FlowBuilder() {
-                    println metaClass
-                }
-            }
-        '''
-        assertNoViolations(SOURCE)
-    }
-
-    @Test
-    void testConstructorOnlyUsages() {
-        assertNoViolations '''
             class Injected {}
 
             class Bean {
@@ -54,5 +35,13 @@ class UnusedPrivateFieldRuleTest extends AbstractUnusedPrivateFieldRuleTest {
                 }
             }
         '''
+        assertSingleViolation(SOURCE, 5, 'private final Injected unused', 'The field unused is not used within the class Bean')
+    }
+
+    @Override
+    protected UnusedPrivateFieldRule createRule() {
+        def rule = super.createRule()
+        rule.allowConstructorOnlyUsages = false
+        rule
     }
 }
