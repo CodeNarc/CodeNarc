@@ -13,6 +13,8 @@ Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
  - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
 
+New Rules
+- #582: New **NoBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
 
 Version 2.0.0    (Oct 2020)
 --------------------------------------
