@@ -28,6 +28,7 @@
     <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterForRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterIfRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterNotOperatorRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterOpeningBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterSemicolonRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterSwitchRule'/>
