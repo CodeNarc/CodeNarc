@@ -21,7 +21,7 @@ import org.codehaus.groovy.ast.ConstructorNode
 import org.codehaus.groovy.ast.MethodNode
 
 /**
- * AstVisitor that check for references to fields outside of constructors
+ * AstVisitor that checks for references to fields outside of constructors
  */
 @InheritConstructors
 class ConstructorsSkippingFieldReferenceAstVisitor extends FieldReferenceAstVisitor {
