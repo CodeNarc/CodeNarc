@@ -19,6 +19,7 @@ import org.codehaus.groovy.ast.FieldNode
 import org.codehaus.groovy.ast.ModuleNode
 import org.codenarc.rule.AbstractSharedAstVisitorRule
 import org.codenarc.rule.AstVisitor
+import org.codenarc.rule.ConstructorsSkippingFieldReferenceAstVisitor
 import org.codenarc.rule.FieldReferenceAstVisitor
 import org.codenarc.rule.Violation
 import org.codenarc.source.SourceCode
@@ -41,11 +42,14 @@ class UnusedPrivateFieldRule extends AbstractSharedAstVisitorRule {
     String name = 'UnusedPrivateField'
     int priority = 2
     String ignoreFieldNames = 'serialVersionUID'
+    boolean allowConstructorOnlyUsages = true
 
     @Override
     protected AstVisitor getAstVisitor(SourceCode sourceCode) {
         def allPrivateFields = collectAllPrivateFields(sourceCode.ast)
-        return new FieldReferenceAstVisitor(allPrivateFields)
+        return allowConstructorOnlyUsages ?
+                new FieldReferenceAstVisitor(allPrivateFields) :
+                new ConstructorsSkippingFieldReferenceAstVisitor(allPrivateFields)
     }
 
     @Override
