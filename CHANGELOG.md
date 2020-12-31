@@ -8,12 +8,14 @@ Updated/Enhanced Rules and Bug Fixes
  - #571: Support Groovy 3.0.6 and fix test failures.
  - #576: Ignore pointcuts for empty methods. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #562: Deprecate the **UnnecessarySubstring** rule. Its recommendation to use subscripts on strings is not always safe/valid.
+ - #578: Add ability for **UnusedPrivateFieldRule** to raise violations for fields which are only used within constructors. ([Marcin Erdmann](https://github.com/erdi))
 
 Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
  - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
 
 New Rules
+ - #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
 - #582: New **NoBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
 
 Version 2.0.0    (Oct 2020)
