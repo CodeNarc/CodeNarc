@@ -16,6 +16,7 @@ Build and Infrastructure
 
 New Rules
  - #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
+ - #584: New **MethodDeclarationNameTrailingWhitespaceRule** rule (formatting) - Checks whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis for parameter list. ([Marcin Erdmann](https://github.com/erdi))
 
 
 Version 2.0.0    (Oct 2020)
