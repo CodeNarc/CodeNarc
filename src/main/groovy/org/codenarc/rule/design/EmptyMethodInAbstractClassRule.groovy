@@ -45,15 +45,15 @@ class EmptyMethodInAbstractClassAstVisitor extends AbstractMethodVisitor {
             if (node.returnType.name == 'void') {
                 // check for empty statement
                 if (node.code instanceof BlockStatement && !node.code.statements) {
-                    addViolation (node, "The method $node.name in abstract class $node.declaringClass.name is empty. Consider making it abstract")
+                    addViolation(node, "The method $node.name in abstract class $node.declaringClass.name is empty. Consider making it abstract")
                 }
             } else if (node.code instanceof BlockStatement && node.code.statements.size() == 1) {
                 // check for 'return null' statement
                 def code = node.code.statements[0]
                 if (code instanceof ExpressionStatement && AstUtil.isNull(code.expression)) {
-                    addViolation (node, "The method $node.name in abstract class $node.declaringClass.name contains no logic. Consider making it abstract")
+                    addViolation(node, "The method $node.name in abstract class $node.declaringClass.name contains no logic. Consider making it abstract")
                 } else if (code instanceof ReturnStatement && AstUtil.isNull(code.expression)) {
-                    addViolation (node, "The method $node.name in abstract class $node.declaringClass.name contains no logic. Consider making it abstract")
+                    addViolation(node, "The method $node.name in abstract class $node.declaringClass.name contains no logic. Consider making it abstract")
                 }
             }
         }

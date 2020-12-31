@@ -465,6 +465,24 @@ applyToFilesMatching and doNotApplyToFilesMatching.
 | ignoreLineRegex             | If specified, then ignore lines matching this regular expression.| `null` |
 
 
+## MethodCallNameTrailingWhitespace Rule
+
+*Since CodeNarc 2.1*
+
+Checks that there is no trailing whitespace in the method name when a method call contains parenthesis or that there 
+is at most one space after the method name if the call does not contain parenthesis.
+
+Examples of violations:
+
+```
+    aMethod ("arg") //violation
+    
+    aMethod  "arg" //violation
+    
+    throw new Exception () //violation
+    
+```
+
 ## MissingBlankLineAfterImports Rule
 
 *Since CodeNarc 0.21*

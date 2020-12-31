@@ -14,6 +14,8 @@ Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
  - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
 
+New Rules
+- #586: New **MethodCallNameTrailingWhitespace** rule (formatting) - Checks that there is no trailing whitespace in the method name when a method call contains parenthesis or that there is at most one space after the method name if the call does not contain parenthesis. ([Marcin Erdmann](https://github.com/erdi))
 
 Version 2.0.0    (Oct 2020)
 --------------------------------------
