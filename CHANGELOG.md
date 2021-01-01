@@ -9,6 +9,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #576: Ignore pointcuts for empty methods. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #562: Deprecate the **UnnecessarySubstring** rule. Its recommendation to use subscripts on strings is not always safe/valid.
  - #578: Add ability for **UnusedPrivateFieldRule** to raise violations for fields which are only used within constructors. ([Marcin Erdmann](https://github.com/erdi))
+ - #561: **VariableName** rule: Ignore variables with the `@Field` annotation.
 
 Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
