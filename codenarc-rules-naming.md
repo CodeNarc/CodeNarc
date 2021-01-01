@@ -288,8 +288,10 @@ modifiers for the property is the one that is applied for the field name validat
 
 ## VariableName Rule
 
-Verifies that the name of each variable matches a regular expression. By default it checks that
+Verifies that the name of each variable matches a regular expression. By default, this rule checks that
 variable names start with a lowercase letter and contain only letters or numbers.
+
+Variables annotated with @Field are ignored.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
