@@ -22,6 +22,7 @@
     <rule class='org.codenarc.rule.formatting.IndentationRule'/>
     <rule class='org.codenarc.rule.formatting.LineLengthRule'/>
     <rule class='org.codenarc.rule.formatting.MethodCallNameTrailingWhitespaceRule'/>
+    <rule class='org.codenarc.rule.formatting.MethodDeclarationNameTrailingWhitespaceRule'/>
     <rule class='org.codenarc.rule.formatting.MissingBlankLineAfterImportsRule'/>
     <rule class='org.codenarc.rule.formatting.MissingBlankLineAfterPackageRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCatchRule'/>

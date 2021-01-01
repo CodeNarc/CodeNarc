@@ -464,6 +464,25 @@ applyToFilesMatching and doNotApplyToFilesMatching.
 | ignorePackageStatements     | If `true`, then do not apply this rule to package statements.| `true` |
 | ignoreLineRegex             | If specified, then ignore lines matching this regular expression.| `null` |
 
+## MethodDeclarationNameTrailingWhitespace Rule
+
+*Since CodeNarc 2.1*
+
+Check whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis 
+for parameter list.
+
+Examples of violations:
+
+```
+    class ClassWithWhitespaceInConstructorDeclaration {
+        
+        ClassWithWhitespaceInConstructorDeclaration () { //violation
+        }
+        
+        void methodWithWhitespaceInDeclaration () { //violation
+        }
+    }
+```
 
 ## MethodCallNameTrailingWhitespace Rule
 
