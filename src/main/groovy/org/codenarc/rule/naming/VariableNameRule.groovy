@@ -53,7 +53,7 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
     @Override
     void visitDeclarationExpression(DeclarationExpression declarationExpression) {
         assert rule.regex
-        if (isFirstVisit(declarationExpression)) {
+        if (isFirstVisit(declarationExpression) && !hasFieldAnnotation(declarationExpression)) {
             def varExpressions = AstUtil.getVariableExpressions(declarationExpression)
             def re = rule.finalRegex && AstUtil.isFinalVariable(declarationExpression, sourceCode) ?
                 rule.finalRegex : rule.regex
@@ -67,6 +67,10 @@ class VariableNameAstVisitor extends AbstractAstVisitor  {
             }
         }
         super.visitDeclarationExpression(declarationExpression)
+    }
+
+    private boolean hasFieldAnnotation(DeclarationExpression declarationExpression) {
+        return AstUtil.hasAnnotation(declarationExpression, 'Field')
     }
 
 }

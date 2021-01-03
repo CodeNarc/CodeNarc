@@ -299,14 +299,23 @@ class VariableNameRuleTest extends AbstractRuleTestCase<VariableNameRule> {
     }
 
     @Test
-    void testApplyTo_FieldAnnotationWithGenerics() {
+    void testApplyTo_VariablesWithAnnotations() {
         // See https://github.com/CodeNarc/CodeNarc/issues/152
         final SOURCE = '''
-            @Field
+            @SuppressWarnings
             Map<String, String> env = new HashMap<String, String>(System.getenv())
 
-            @Field
+            @SuppressWarnings
             Map env = new HashMap<String, String>(System.getenv())
+            '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testApplyTo_IgnoresVariablesWithFiledAnnotation() {
+        final SOURCE = '''
+            import groovy.transform.Field
+            @Field static final String FOO_BAR = 'something'
             '''
         assertNoViolations(SOURCE)
     }
