@@ -541,6 +541,24 @@ NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToC
 *doNotApplyToClassNames* rule configuration properties are not available. See
 [Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
 
+## NoBlankLineBeforeAnnotatedField
+
+*Since CodeNarc 2.1*
+
+Checks that there is a blank line before a field declaration that uses annotations.
+
+Examples of violations:
+```
+    class MyClass {
+        // No violations for field declarations preceded by a comment
+        @Delegate
+        AutoCloseable stream
+        
+        String publicField                  // violation
+        @PackageScope
+        String packageScopedField
+    }
+```
 
 ## SpaceAfterCatch Rule
 

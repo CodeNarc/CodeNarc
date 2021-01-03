@@ -1,0 +1,138 @@
+/*
+ * Copyright 2020 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codenarc.rule.formatting
+
+import org.codenarc.rule.AbstractRuleTestCase
+import org.junit.Test
+
+/**
+ * Tests for NoBlankLineBeforeAnnotatedFieldRule
+ */
+class NoBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<NoBlankLineBeforeAnnotatedFieldRule> {
+
+    @Test
+    void ruleProperties() {
+        assert rule.priority == 3
+        assert rule.name == 'NoBlankLineBeforeAnnotatedField'
+    }
+
+    @Test
+    void noViolations() {
+        assertNoViolations '''
+            class Valid {
+
+                @Delegate
+                Foo firstAnnotatedField
+
+                @Delegate
+                Bar secondAnnotatedField
+                FooBar notAnnotatedField
+            }
+        '''
+    }
+
+    @Test
+    void noViolationsForAFieldWithMultipleAnnotations() {
+        assertNoViolations '''
+            class Valid {
+                Foo firstAnnotatedField
+
+                @Delegate
+                @PackageScope
+                Bar secondAnnotatedField
+            }
+        '''
+    }
+
+    @Test
+    void testSingleViolation() {
+        final SOURCE = '''
+            class Invalid {
+                @Delegate
+                Foo foo
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 4, 'Foo foo', 'There is no blank line before a field declaration that uses annotations.')
+    }
+
+    @Test
+    void testMultipleViolations() {
+        final SOURCE = '''
+            class Invalid {
+                @Delegate
+                Foo firstAnnotatedField
+                @Delegate
+                Bar secondAnnotatedField
+            }
+        '''
+
+        assertViolations(SOURCE,
+            [lineNumber: 4, sourceLineText: 'Foo firstAnnotatedField', messageText: 'There is no blank line before a field declaration that uses annotations.'],
+            [lineNumber: 6, sourceLineText: 'Bar secondAnnotatedField', messageText: 'There is no blank line before a field declaration that uses annotations.']
+        )
+    }
+
+    @Test
+    void testViolationForAFieldWithMultipleAnnotations() {
+        final SOURCE = '''
+            class Valid {
+                Foo firstAnnotatedField
+                @Delegate
+                @PackageScope
+                Bar secondAnnotatedField
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 6, 'Bar secondAnnotatedField', 'There is no blank line before a field declaration that uses annotations.')
+    }
+
+    @Test
+    void noViolationsWhenFieldIsOnTheFirstLine() {
+        final SOURCE = '''class A { @Delegate Foo annotatedField }'''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void noViolationWhenPreviousLineContainsAComment() {
+        final SOURCE = '''
+            class Valid {
+                // Foo
+                @Delegate
+                Foo foo
+                /* Bar */
+                @Delegate
+                Bar bar
+                /** Fizz **/
+                @Delegate
+                Fizz fizz
+                /**
+                 * Bizz
+                 */
+                @Delegate
+                Bizz
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Override
+    protected NoBlankLineBeforeAnnotatedFieldRule createRule() {
+        new NoBlankLineBeforeAnnotatedFieldRule()
+    }
+}
