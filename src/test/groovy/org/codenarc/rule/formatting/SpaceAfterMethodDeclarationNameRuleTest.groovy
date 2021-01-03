@@ -19,14 +19,14 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
- * Tests for MethodDeclarationNameTrailingWhitespaceRule
+ * Tests for SpaceAfterMethodDeclarationNameRule
  */
-class MethodDeclarationNameTrailingWhitespaceRuleTest extends AbstractRuleTestCase<MethodDeclarationNameTrailingWhitespaceRule> {
+class SpaceAfterMethodDeclarationNameRuleTest extends AbstractRuleTestCase<SpaceAfterMethodDeclarationNameRule> {
 
     @Test
     void ruleProperties() {
         assert rule.priority == 3
-        assert rule.name == 'MethodDeclarationNameTrailingWhitespace'
+        assert rule.name == 'SpaceAfterMethodDeclarationName'
     }
 
     @Test
@@ -96,7 +96,7 @@ class MethodDeclarationNameTrailingWhitespaceRuleTest extends AbstractRuleTestCa
     }
 
     @Override
-    protected MethodDeclarationNameTrailingWhitespaceRule createRule() {
-        new MethodDeclarationNameTrailingWhitespaceRule()
+    protected SpaceAfterMethodDeclarationNameRule createRule() {
+        new SpaceAfterMethodDeclarationNameRule()
     }
 }
