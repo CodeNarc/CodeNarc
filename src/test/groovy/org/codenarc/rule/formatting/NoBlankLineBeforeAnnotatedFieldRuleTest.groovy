@@ -45,6 +45,19 @@ class NoBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<NoBla
     }
 
     @Test
+    void noViolationsForAFieldWithMultipleAnnotations() {
+        assertNoViolations '''
+            class Valid {
+                Foo firstAnnotatedField
+
+                @Delegate
+                @PackageScope
+                Bar secondAnnotatedField
+            }
+        '''
+    }
+
+    @Test
     void testSingleViolation() {
         final SOURCE = '''
             class Invalid {
@@ -71,6 +84,20 @@ class NoBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<NoBla
             [lineNumber: 4, sourceLineText: 'Foo firstAnnotatedField', messageText: 'There is no blank line before a field declaration that uses annotations.'],
             [lineNumber: 6, sourceLineText: 'Bar secondAnnotatedField', messageText: 'There is no blank line before a field declaration that uses annotations.']
         )
+    }
+
+    @Test
+    void testViolationForAFieldWithMultipleAnnotations() {
+        final SOURCE = '''
+            class Valid {
+                Foo firstAnnotatedField
+                @Delegate
+                @PackageScope
+                Bar secondAnnotatedField
+            }
+        '''
+
+        assertSingleViolation(SOURCE, 6, 'Bar secondAnnotatedField', 'There is no blank line before a field declaration that uses annotations.')
     }
 
     @Test
