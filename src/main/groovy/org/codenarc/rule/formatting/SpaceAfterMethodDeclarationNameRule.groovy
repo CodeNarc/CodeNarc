@@ -23,14 +23,14 @@ import org.codenarc.rule.AbstractAstVisitorRule
  * Check whether method declarations do not contain unnecessary whitespace between method name and the opening
  * parenthesis for parameter list.
  */
-class MethodDeclarationNameTrailingWhitespaceRule extends AbstractAstVisitorRule {
+class SpaceAfterMethodDeclarationNameRule extends AbstractAstVisitorRule {
 
-    String name = 'MethodDeclarationNameTrailingWhitespace'
+    String name = 'SpaceAfterMethodDeclarationName'
     int priority = 3
-    Class astVisitorClass = MethodDeclarationNameTrailingWhitespaceRuleAstVisitor
+    Class astVisitorClass = SpaceAfterMethodDeclarationNameRuleAstVisitor
 }
 
-class MethodDeclarationNameTrailingWhitespaceRuleAstVisitor extends AbstractAstVisitor {
+class SpaceAfterMethodDeclarationNameRuleAstVisitor extends AbstractAstVisitor {
 
     @Override
     protected void visitConstructorOrMethod(MethodNode node, boolean isConstructor) {

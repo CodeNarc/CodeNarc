@@ -22,17 +22,17 @@ import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
 
 /**
- * Checks that there is no trailing whitespace in the method name when a method call contains parenthesis or that
+ * Checks that there is no whitespace at the end of the method name when a method call contains parenthesis or that
  * there is at most one space after the method name if the call does not contain parenthesis
  */
-class MethodCallNameTrailingWhitespaceRule extends AbstractAstVisitorRule {
+class SpaceAfterMethodCallNameRule extends AbstractAstVisitorRule {
 
-    String name = 'MethodCallNameTrailingWhitespace'
+    String name = 'SpaceAfterMethodCallName'
     int priority = 3
-    Class astVisitorClass = MethodCallNameTrailingWhitespaceRuleAstVisitor
+    Class astVisitorClass = SpaceAfterMethodCallNameRuleAstVisitor
 }
 
-class MethodCallNameTrailingWhitespaceRuleAstVisitor extends AbstractAstVisitor {
+class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitConstructorCallExpression(ConstructorCallExpression call) {
