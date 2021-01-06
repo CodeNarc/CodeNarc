@@ -22,14 +22,14 @@ import org.codenarc.rule.AbstractAstVisitorRule
 /**
  * Checks that there is a blank line before a field declaration that uses annotations.
  */
-class NoBlankLineBeforeAnnotatedFieldRule extends AbstractAstVisitorRule {
+class MissingBlankLineBeforeAnnotatedFieldRule extends AbstractAstVisitorRule {
 
-    String name = 'NoBlankLineBeforeAnnotatedField'
+    String name = 'MissingBlankLineBeforeAnnotatedField'
     int priority = 3
-    Class astVisitorClass = NoBlankLineBeforeAnnotatedFieldRuleAstVisitor
+    Class astVisitorClass = MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor
 }
 
-class NoBlankLineBeforeAnnotatedFieldRuleAstVisitor extends AbstractAstVisitor {
+class MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor extends AbstractAstVisitor {
 
     @Override
     void visitField(FieldNode node) {

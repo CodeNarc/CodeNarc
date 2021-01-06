@@ -25,7 +25,7 @@
     <rule class='org.codenarc.rule.formatting.SpaceAfterMethodDeclarationNameRule'/>
     <rule class='org.codenarc.rule.formatting.MissingBlankLineAfterImportsRule'/>
     <rule class='org.codenarc.rule.formatting.MissingBlankLineAfterPackageRule'/>
-    <rule class='org.codenarc.rule.formatting.NoBlankLineBeforeAnnotatedFieldRule'/>
+    <rule class='org.codenarc.rule.formatting.MissingBlankLineBeforeAnnotatedFieldRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCatchRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterClosingBraceRule'/>
     <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>

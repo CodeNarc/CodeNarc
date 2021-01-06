@@ -19,14 +19,14 @@ import org.codenarc.rule.AbstractRuleTestCase
 import org.junit.Test
 
 /**
- * Tests for NoBlankLineBeforeAnnotatedFieldRule
+ * Tests for MissingBlankLineBeforeAnnotatedFieldRule
  */
-class NoBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<NoBlankLineBeforeAnnotatedFieldRule> {
+class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<MissingBlankLineBeforeAnnotatedFieldRule> {
 
     @Test
     void ruleProperties() {
         assert rule.priority == 3
-        assert rule.name == 'NoBlankLineBeforeAnnotatedField'
+        assert rule.name == 'MissingBlankLineBeforeAnnotatedField'
     }
 
     @Test
@@ -132,7 +132,7 @@ class NoBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<NoBla
     }
 
     @Override
-    protected NoBlankLineBeforeAnnotatedFieldRule createRule() {
-        new NoBlankLineBeforeAnnotatedFieldRule()
+    protected MissingBlankLineBeforeAnnotatedFieldRule createRule() {
+        new MissingBlankLineBeforeAnnotatedFieldRule()
     }
 }
