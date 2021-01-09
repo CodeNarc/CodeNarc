@@ -63,21 +63,21 @@ a couple of the rules that it contains:
 If you have an XML *RuleSet*, then you can configure rules when you include a whole *RuleSet*
 using `\*ruleset-ref\`*, as in the following example:
 
-```
-    *ruleset-ref path='rulesets/size.xml'*
-        *rule-config name='ClassSize'*
-            *property name='maxLines' value='500'/*
-        */rule-config*
-    */ruleset-ref*
+```xml
+    <ruleset-ref path='rulesets/size.xml'>
+        <rule-config name='ClassSize'>
+            <property name='maxLines' value='500'/>
+        </rule-config>
+    </ruleset-ref>
 ```
 
 Or you can configure *Rules* that you include individually using `\*rule\`*, as in the following example:
 
-```
-    *rule class='org.codenarc.rule.naming.VariableNameRule'*
-        *property name="finalRegex" value="F_[A-Z0-9]*"/*
-        *property name='priority' value='1'/*
-    */rule*
+```xml
+    <rule class='org.codenarc.rule.naming.VariableNameRule'>
+        <property name="finalRegex" value="F_[A-Z0-9]*"/>
+        <property name='priority' value='1'/>
+    </rule>
 ```
 
 
@@ -400,11 +400,11 @@ For example, in the following excerpt from a *RuleSet* file, because the *name* 
 customized for the **IllegalRegexRule**, the new rule name "AuthorTagNotAllowed" will show up
 at the bottom of the HTML report, instead of the default rule name "IllegalRegex".
 
-```
-    *rule class='org.codenarc.rule.generic.IllegalRegexRule'*
-        *property name="name" value="AuthorTagNotAllowed"/*
-        *property name='regex' value='\@author'/*
-    */rule*
+```xml
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name="name" value="AuthorTagNotAllowed"/>
+        <property name='regex' value='\@author'/>
+    </rule>
 ```
 
 The rule description must be added to the custom messages resource bundle file
