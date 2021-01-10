@@ -24,7 +24,7 @@ repositories {
     maven { url 'https://repo.maven.apache.org/maven2' }
 }
 
-def groovyVersion = '2.5.12'
+def groovyVersion = '2.5.14'
 def slf4jVersion = '1.7.25'
 
 dependencies {

@@ -3,23 +3,24 @@
 
 TODO Version 2.1.0    (??? 2020)
 --------------------------------------
+New Rules
+- #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
+- #586: New **SpaceAfterMethodCallName** rule (formatting) - Checks that there is no whitespace after the method name when a method call contains parenthesis or that there is at most one space after the method name if the call does not contain parenthesis. ([Marcin Erdmann](https://github.com/erdi))
+- #584: New **SpaceAfterMethodDeclarationName** rule (formatting) - Checks whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis for parameter list. ([Marcin Erdmann](https://github.com/erdi))
+- #582: New **MissingBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
+
 Updated/Enhanced Rules and Bug Fixes
  - #567: **SpaceAfterComma** rule: Do not assume that expression's column number will always be set. ([Marcin Erdmann](https://github.com/erdi))
  - #571: Support Groovy 3.0.6 and fix test failures.
- - #576: Ignore pointcuts for empty methods. ([Thomas Lefèvre](https://github.com/tlefevre))
+ - #576: **EmptyMethod** rule: Ignore pointcuts for empty methods. ([Thomas Lefèvre](https://github.com/tlefevre))
  - #562: Deprecate the **UnnecessarySubstring** rule. Its recommendation to use subscripts on strings is not always safe/valid.
- - #578: Add ability for **UnusedPrivateFieldRule** to raise violations for fields which are only used within constructors. ([Marcin Erdmann](https://github.com/erdi))
+ - #578: **UnusedPrivateField** rule: Add ability to raise violations for fields which are only used within constructors. ([Marcin Erdmann](https://github.com/erdi))
  - #561: **VariableName** rule: Ignore variables with the `@Field` annotation.
 
 Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
  - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
-
-New Rules
- - #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
- - #586: New **SpaceAfterMethodCallName** rule (formatting) - Checks that there is no whitespace after the method name when a method call contains parenthesis or that there is at most one space after the method name if the call does not contain parenthesis. ([Marcin Erdmann](https://github.com/erdi))
- - #584: New **SpaceAfterMethodDeclarationName** rule (formatting) - Checks whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis for parameter list. ([Marcin Erdmann](https://github.com/erdi))
- - #582: New **MissingBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
+ - #589: Upgrade to Groovy 2.5.14 (minor patch release), to address CVE-2020-17521. Note: CodeNarc does not use any of the vulnerable Groovy components.
 
 Version 2.0.0    (Oct 2020)
 --------------------------------------
