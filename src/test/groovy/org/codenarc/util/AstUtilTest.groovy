@@ -110,7 +110,10 @@ class AstUtilTest extends AbstractTestCase {
 
         // outside of class -- script
         def scriptMethod() { 456 }
-    '''
+
+        // Annotated class as last line
+        @SuppressWarnings
+        class LastLineClass {}'''
     private visitor
     private sourceCode
 
@@ -121,6 +124,9 @@ class AstUtilTest extends AbstractTestCase {
 
         def annotatedClassNode = classNamed('SomeAnnotatedClass')
         assert AstUtil.findClassDeclarationLineNumber(annotatedClassNode, sourceCode) == 57
+
+        annotatedClassNode = classNamed('LastLineClass')
+        assert AstUtil.findClassDeclarationLineNumber(annotatedClassNode, sourceCode) == 72
     }
 
     @Test
