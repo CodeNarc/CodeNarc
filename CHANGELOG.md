@@ -16,6 +16,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #562: Deprecate the **UnnecessarySubstring** rule. Its recommendation to use subscripts on strings is not always safe/valid.
  - #578: **UnusedPrivateField** rule: Add ability to raise violations for fields which are only used within constructors. ([Marcin Erdmann](https://github.com/erdi))
  - #561: **VariableName** rule: Ignore variables with the `@Field` annotation.
+ - #590: **ClassStartsWithBlankLine**: Fix NullPointerException on single-line class at very end of file (no newline).
 
 Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))

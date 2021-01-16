@@ -127,8 +127,9 @@ class ClassStartsWithBlankLineAstVisitor extends AbstractAstVisitor {
     }
 
     @Memoized
-    private Boolean isSingleLineClass(ClassNode classNode) {
-        return AstUtil.getNodeText(classNode, sourceCode) == AstUtil.getLastLineOfNodeText(classNode, sourceCode)
+    private boolean isSingleLineClass(ClassNode classNode) {
+        int classDeclarationLine = AstUtil.findClassDeclarationLineNumber(classNode, getSourceCode())
+        return classDeclarationLine == classNode.lastLineNumber
     }
 
     private void addViolation(String message, int lineNumber) {
