@@ -35,7 +35,10 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
 
     private static final String RULE1_MESSAGE = 'abc'
     private static final String RULE2_MESSAGE = 'violation'             // overridden in "codenarc.properties"
-    private static final String RULE2_MESSAGE_OVERRIDE = 'override'     // overridden in "override-codenarc.properties"
+    private static final String RULE2_MESSAGE_OVERRIDE = 'override'
+    private static final String OVERRIDE_PROPERTIES_FILE = 'override-codenarc.properties'
+    private static final String OVERRIDE_PROPERTIES_FILE_URL = 'file:src/test/resources/' + OVERRIDE_PROPERTIES_FILE
+    // overridden in "override-codenarc.properties"
 
     private StubRule rule1 = new StubRule(name:RULE1_NAME, priority:1, violationMessage:'abc')
     private StubRule rule2 = new StubRule(name:RULE2_NAME, priority:2, violationMessage:'def')
@@ -43,50 +46,72 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
     private PropertiesFileRuleSetConfigurer configurer = new PropertiesFileRuleSetConfigurer()
 
     @Test
-    void testConfigure() {
-        configurer.configure(ruleSet)
+    void test_configure() {
+        configurer.configure(ruleSet, null)
         log(ruleSet.rules)
         assertRuleSetContainsRule(RULE1_NAME, 3, RULE1_MESSAGE)
         assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE)
     }
 
     @Test
-    void testConfigure_OverridePropertiesFilenameThroughSystemProperty() {
-        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'override-codenarc.properties')
-        configurer.configure(ruleSet)
+    void test_configure_OverridePropertiesFilenameThroughSystemProperty() {
+        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, OVERRIDE_PROPERTIES_FILE)
+        configurer.configure(ruleSet, null)
 
         assertRuleSetContainsRule(RULE1_NAME, 2, RULE1_MESSAGE)
         assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE_OVERRIDE)
     }
 
     @Test
-    void testConfigure_OverridePropertiesFilenameThroughSystemProperty_FileUrl() {
-        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'file:src/test/resources/override-codenarc.properties')
-        configurer.configure(ruleSet)
+    void test_configure_OverridePropertiesFilenameThroughSystemProperty_FileUrl() {
+        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, OVERRIDE_PROPERTIES_FILE_URL)
+        configurer.configure(ruleSet, null)
 
         assertRuleSetContainsRule(RULE1_NAME, 2, RULE1_MESSAGE)
         assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE_OVERRIDE)
     }
 
     @Test
-    void testConfigure_PropertiesFileDoesNotExist() {
+    void test_configure_PropertiesFileDoesNotExist() {
         configurer.defaultPropertiesFilename = 'DoesNotExist.properties'
-        configurer.configure(ruleSet)
+        configurer.configure(ruleSet, null)
 
         assertRuleSetContainsRule(RULE1_NAME, 1, RULE1_MESSAGE)
         assertRuleSetContainsRule(RULE2_NAME, 2, 'def')
     }
 
     @Test
-    void testConfigure_EmptyRuleSet() {
+    void test_configure_EmptyRuleSet() {
         ruleSet = new ListRuleSet([])
-        configurer.configure(ruleSet)
+        configurer.configure(ruleSet, null)
         assert ruleSet.rules.isEmpty()
     }
 
     @Test
-    void testConfigure_NullRuleSet() {
-        shouldFailWithMessageContaining('ruleSet') { configurer.configure(null) }
+    void test_configure_propertyFileParameter() {
+        configurer.configure(ruleSet, OVERRIDE_PROPERTIES_FILE)
+
+        assertRuleSetContainsRule(RULE1_NAME, 2, RULE1_MESSAGE)
+        assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE_OVERRIDE)
+    }
+
+    @Test
+    void test_configure_propertyFileParameter_FileUrl() {
+        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, "ignored!!!!")    // parameter takes precedence
+        configurer.configure(ruleSet, OVERRIDE_PROPERTIES_FILE_URL)
+
+        assertRuleSetContainsRule(RULE1_NAME, 2, RULE1_MESSAGE)
+        assertRuleSetContainsRule(RULE2_NAME, 2, RULE2_MESSAGE_OVERRIDE)
+    }
+
+    @Test
+    void test_configure_NullRuleSet() {
+        shouldFailWithMessageContaining('ruleSet') { configurer.configure(null, null) }
+    }
+
+    @Test
+    void test_Implements_RuleSetConfigurer() {
+        assert configurer instanceof RuleSetConfigurer
     }
 
     @After

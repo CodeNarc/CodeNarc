@@ -33,6 +33,7 @@ import org.codenarc.rule.Rule
 import org.codenarc.rule.StubRule
 import org.codenarc.rule.Violation
 import org.codenarc.ruleset.RuleSet
+import org.codenarc.ruleset.RuleSetConfigurer
 import org.codenarc.test.AbstractTestCase
 import org.junit.After
 import org.junit.Before
@@ -51,13 +52,10 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     private static final RULESET_FILES = 'rulesets/RuleSet1.xml,rulesets/GroovyRuleSet2.txt'
     private static final RULESET_FILES_WITH_SPACES = 'rulesets/RuleSet1.xml , rulesets/GroovyRuleSet2.txt,  rulesets/RuleSet3.xml  '
     private static final RULESET_AS_URL = 'file:src/test/resources/rulesets/RuleSet1.xml'
-    private static final RULESET_AS_JSON = '''
-            {
-                "org.codenarc.rule.StubRule": { "name": "XXXX"}
-            }
-            '''.trim()
+    private static final RULESET_AS_JSON = '{ "org.codenarc.rule.StubRule": { "name": "XXXX"} }'
     private static final RULESET_URL_WITH_WEIRD_CHARS_ENCODED = 'file:' + encode('src/test/resources/rulesets/WeirdCharsRuleSet-,#.txt')
     private static final REPORT_FILE = 'CodeNarcTest-Report.html'
+    private static final PROPERTIES_FILE = 'SomeProperties.properties'
     private static final Rule RULE = new StubRule(name:'Rule1', priority:1)
 
     private static final RESULTS = new FileResults('path', [])
@@ -66,8 +64,12 @@ class CodeNarcRunnerTest extends AbstractTestCase {
 
     private CodeNarcRunner codeNarcRunner
     private RuleSet analyzedRuleSet
+    private RuleSet configuredRuleSet
+    private String propertiesFilename
     private Results results = RESULTS
-    private final SourceAnalyzer sourceAnalyzer = [analyze: { rs -> analyzedRuleSet = rs; results }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
+
+    private SourceAnalyzer sourceAnalyzer = [analyze: { rs -> analyzedRuleSet = rs; results }, getSourceDirectories: { SOURCE_DIRS }] as SourceAnalyzer
+    private RuleSetConfigurer ruleSetConfigurer = [configure:{ ruleSet, name -> configuredRuleSet = ruleSet; propertiesFilename = name }] as RuleSetConfigurer
 
     @Test
     void test_InitialPropertyValues() {
@@ -90,7 +92,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute() {
+    void test_execute() {
         def analysisContext, results
         def reportWriter = [writeReport: { ac, res ->
             analysisContext = ac
@@ -107,6 +109,19 @@ class CodeNarcRunnerTest extends AbstractTestCase {
         assert analysisContext.ruleSet == analyzedRuleSet
         assert analysisContext.sourceDirectories == SOURCE_DIRS
         assert results == RESULTS
+
+        assert configuredRuleSet == analyzedRuleSet
+        assert propertiesFilename == null
+    }
+
+    @Test
+    void test_execute_propertiesFilename() {
+        codeNarcRunner.ruleSetFiles = XML_RULESET1
+        codeNarcRunner.propertiesFilename = PROPERTIES_FILE
+        codeNarcRunner.execute()
+
+        assert configuredRuleSet == analyzedRuleSet
+        assert propertiesFilename == PROPERTIES_FILE
     }
 
     @Test
@@ -394,6 +409,7 @@ class CodeNarcRunnerTest extends AbstractTestCase {
     void setUp() {
         codeNarcRunner = new CodeNarcRunner()
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+        codeNarcRunner.ruleSetConfigurer = ruleSetConfigurer
     }
 
     @After
