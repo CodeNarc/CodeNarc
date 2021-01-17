@@ -86,9 +86,11 @@ Or you can configure *Rules* that you include individually using `\*rule\`*, as 
 **CodeNarc** reads the properties file named "codenarc.properties", if found on the classpath,
 and applies the property values to any matching *Rules*. You can optionally override the location
 of the properties file by setting the "codenarc.properties.file" system property to the path or
-URL of the properties file. That can include a "file:" URL to load from a relative or absolute
-path on the filesystem (e.g., "file:relative/path/override-codenarc.properties"). If the
-properties file is not found, then do nothing.
+URL of the properties file. You can also override the location of the properties file by 
+specifying the `-properties=FILENAME` command-line parameter (if executing CodeNarc from the 
+command-line). In either case, that filename can include a "file:" URL to load from a relative 
+or absolute path on the filesystem (e.g., "file:relative/path/override-codenarc.properties").
+If the properties file is not found, then it logs a warning message but does nothing else.
 
 For each properties entry of the form *[rule-name].[property-name]=[property-value]*,
 the named property for the rule matching *rule-name* is set to the

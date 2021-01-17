@@ -22,6 +22,9 @@ Some sample Docker `run` commands (substitute the desired CodeNarc image version
     # Assumes there is a "codenarc.ruleset" file in the current directory
     docker run --rm -v `pwd`:/ws --user `id -u`:`id -g` codenarc/codenarc:2.0.0-groovy2.5.12  -rulesetfiles=file:codenarc.ruleset
 
+    # Assumes there is a "codenarc.properties" file in the current directory
+    docker run --rm -v `pwd`:/ws --user `id -u`:`id -g` codenarc/codenarc:2.0.0-groovy2.5.12  -properties=file:codenarc.properties
+
     # Write out violations report as text to stdout
     docker run --rm -v `pwd`:/ws --user `id -u`:`id -g` codenarc/codenarc:2.0.0-groovy2.5.12 -rulesetfiles=file:codenarc.ruleset -report=text:stdout
 
