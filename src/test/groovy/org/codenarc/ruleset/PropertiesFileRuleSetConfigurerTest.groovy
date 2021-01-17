@@ -97,7 +97,7 @@ class PropertiesFileRuleSetConfigurerTest extends AbstractTestCase {
 
     @Test
     void test_configure_propertyFileParameter_FileUrl() {
-        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, "ignored!!!!")    // parameter takes precedence
+        System.setProperty(CODENARC_PROPERTIES_FILE_PROP, 'ignored!!!!')    // parameter takes precedence
         configurer.configure(ruleSet, OVERRIDE_PROPERTIES_FILE_URL)
 
         assertRuleSetContainsRule(RULE1_NAME, 2, RULE1_MESSAGE)

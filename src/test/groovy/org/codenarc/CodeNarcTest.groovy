@@ -19,11 +19,7 @@ import static org.codenarc.test.TestUtil.captureSystemOut
 import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.codenarc.analyzer.FilesystemSourceAnalyzer
-import org.codenarc.report.AbstractReportWriter
-import org.codenarc.report.HtmlReportWriter
-import org.codenarc.report.JsonReportWriter
-import org.codenarc.report.ReportWriter
-import org.codenarc.report.XmlReportWriter
+import org.codenarc.report.*
 import org.codenarc.results.Results
 import org.codenarc.test.AbstractTestCase
 import org.codenarc.util.CodeNarcVersion
@@ -44,6 +40,7 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String RULESET1 = 'rulesets/RuleSet1.xml'
     private static final String INCLUDES = 'sourcewithdirs/**/*.groovy'
     private static final String EXCLUDES = '**/*File2.groovy'
+    private static final String PROPERTIES_FILENAME = 'some.properties'
     private static final String TITLE = 'My Title'
     private static final String HTML_REPORT_FILE = new File('CodeNarcTest-Report.html').absolutePath
     private static final String HTML_REPORT_STR = "html:$HTML_REPORT_FILE"
@@ -55,11 +52,7 @@ class CodeNarcTest extends AbstractTestCase {
     private static final String JSON_REPORT_STDOUT_STR = 'json:stdout'
     private static final String PLUGIN_NAMES = 'abc,def'
     private static final int P1 = 1, P2 = 2, P3 = 3
-    private static final RULESET_AS_JSON = URLEncoder.encode('''
-            {
-                "org.codenarc.rule.StubRule": { "name": "XXXX"}
-            }
-            ''', 'UTF-8')
+    private static final String RULESET_AS_JSON = URLEncoder.encode('{ "org.codenarc.rule.StubRule": { "name": "XXXX"} }', 'UTF-8')
 
     private CodeNarc codeNarc
     private File outputFile
@@ -78,52 +71,58 @@ class CodeNarcTest extends AbstractTestCase {
     //------------------------------------------------------------------------------------
 
     @Test
-    void testParseArgs_InvalidOptionName() {
+    void test_parseArgs_InvalidOptionName() {
         shouldFailWithMessageContaining('unknown') { parseArgs('-unknown=abc') }
     }
 
     @Test
-    void testParseArgs_InvalidOption_NoHyphen() {
+    void test_parseArgs_InvalidOption_NoHyphen() {
         shouldFailWithMessageContaining('bad') { parseArgs('bad=abc') }
     }
 
     @Test
-    void testParseArgs_InvalidOption_NoEquals() {
+    void test_parseArgs_InvalidOption_NoEquals() {
         shouldFailWithMessageContaining('badstuff') { parseArgs('badstuff') }
     }
 
     @Test
-    void testParseArgs_SingleRuleSetFile() {
+    void test_parseArgs_SingleRuleSetFile() {
         parseArgs("-rulesetfiles=$RULESET1")
         assert codeNarc.ruleSetFiles == RULESET1
     }
 
     @Test
-    void testParseArgs_BaseDir() {
+    void test_parseArgs_BaseDir() {
         parseArgs("-basedir=$BASE_DIR")
         assert codeNarc.baseDir == BASE_DIR
     }
 
     @Test
-    void testParseArgs_Includes() {
+    void test_parseArgs_Includes() {
         parseArgs("-includes=$INCLUDES")
         assert codeNarc.includes == INCLUDES
     }
 
     @Test
-    void testParseArgs_Excludes() {
+    void test_parseArgs_Excludes() {
         parseArgs("-excludes=$EXCLUDES")
         assert codeNarc.excludes == EXCLUDES
     }
 
     @Test
-    void testParseArgs_Title() {
+    void test_parseArgs_Title() {
         parseArgs("-title=$TITLE")
         assert codeNarc.title == TITLE
     }
 
     @Test
-    void testParseArgs_SingleHtmlReport() {
+    void test_parseArgs_Properties() {
+        parseArgs("-properties=$PROPERTIES_FILENAME")
+        assert codeNarc.propertiesFilename == PROPERTIES_FILENAME
+    }
+
+    @Test
+    void test_parseArgs_SingleHtmlReport() {
         parseArgs("-report=$HTML_REPORT_STR")
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == HtmlReportWriter
@@ -131,7 +130,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_SingleHtmlReport_WritingToStandardOut() {
+    void test_parseArgs_SingleHtmlReport_WritingToStandardOut() {
         parseArgs('-report=html:stdout')
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == HtmlReportWriter
@@ -139,7 +138,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_SingleXmlReport() {
+    void test_parseArgs_SingleXmlReport() {
         parseArgs("-report=$XML_REPORT_STR")
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == XmlReportWriter
@@ -147,7 +146,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_SingleXmlReportStdout() {
+    void test_parseArgs_SingleXmlReportStdout() {
         parseArgs("-report=$XML_REPORT_STDOUT_STR")
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == XmlReportWriter
@@ -155,7 +154,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_SingleJsonReport() {
+    void test_parseArgs_SingleJsonReport() {
         parseArgs("-report=$JSON_REPORT_STR")
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == JsonReportWriter
@@ -163,7 +162,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_SingleJsonReportStdout() {
+    void test_parseArgs_SingleJsonReportStdout() {
         parseArgs("-report=$JSON_REPORT_STDOUT_STR")
         assert codeNarc.reports.size() == 1
         assert codeNarc.reports[0].class == JsonReportWriter
@@ -172,7 +171,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_SingleReportSpecifyingFullReportWriterClassName() {
+    void test_parseArgs_SingleReportSpecifyingFullReportWriterClassName() {
         def reportString = "org.codenarc.report.HtmlReportWriter:$HTML_REPORT_FILE"
         parseArgs("-report=$reportString")
         assert codeNarc.reports.size() == 1
@@ -181,7 +180,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_ThreeReports() {
+    void test_parseArgs_ThreeReports() {
         parseArgs("-report=$HTML_REPORT_STR", '-report=html', "-report=$XML_REPORT_STR")
         assert codeNarc.reports.size() == 3
         assert codeNarc.reports[0].class == HtmlReportWriter
@@ -193,13 +192,13 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testParseArgs_InvalidReportType() {
+    void test_parseArgs_InvalidReportType() {
         shouldFailWithMessageContaining('pdf') { parseArgs('-report=pdf') }
         shouldFailWithMessageContaining('pdf') { parseArgs('-report=pdf:MyReport.pdf') }
     }
 
     @Test
-    void testSetDefaultsIfNecessary_ValuesNotSet() {
+    void test_setDefaultsIfNecessary_ValuesNotSet() {
         codeNarc.setDefaultsIfNecessary()
         assert codeNarc.includes == '**/*.groovy'
         assert codeNarc.ruleSetFiles == BASIC_RULESET
@@ -208,14 +207,14 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testSetDefaultsIfNecessary_TitleSet() {
+    void test_setDefaultsIfNecessary_TitleSet() {
         codeNarc.title = 'abc'
         codeNarc.setDefaultsIfNecessary()
         assertReport(codeNarc.reports[0], HtmlReportWriter, null, 'abc')
     }
 
     @Test
-    void testSetDefaultsIfNecessary_ValuesAlreadySet() {
+    void test_setDefaultsIfNecessary_ValuesAlreadySet() {
         codeNarc.includes = 'aaa'
         codeNarc.ruleSetFiles = 'bbb'
         codeNarc.reports = ['ccc']      // just need a non-empty list
@@ -228,7 +227,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testCheckMaxViolations_ActualLessThanOrEqualToMax() {
+    void test_checkMaxViolations_ActualLessThanOrEqualToMax() {
         codeNarc.checkMaxViolations(results, P1, 1)
         assert exitCode == 0
 
@@ -240,7 +239,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testCheckMaxViolations_ActualExceedsMax() {
+    void test_checkMaxViolations_ActualExceedsMax() {
         numViolations[P1] = 2
         codeNarc.checkMaxViolations(results, P1, 1)
         assert exitCode == 1
@@ -257,7 +256,7 @@ class CodeNarcTest extends AbstractTestCase {
     // Tests for execute()
 
     @Test
-    void testExecute() {
+    void test_execute() {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
@@ -274,6 +273,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert sourceAnalyzer.includes == INCLUDES
         assert sourceAnalyzer.excludes == EXCLUDES
 
+        assert codeNarcRunner.propertiesFile == null
         assert codeNarcRunner.ruleSetFiles == RULESET1
 
         assert codeNarcRunner.reportWriters.size == 1
@@ -283,7 +283,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_NoArgs() {
+    void test_execute_NoArgs() {
         final ARGS = [] as String[]
 
         codeNarc.execute(ARGS)
@@ -295,6 +295,7 @@ class CodeNarcTest extends AbstractTestCase {
         assert codeNarcRunner.sourceAnalyzer.class == FilesystemSourceAnalyzer
         assert codeNarcRunner.sourceAnalyzer.baseDirectory == '.'
         assert codeNarcRunner.ruleSetFiles == BASIC_RULESET
+        assert codeNarcRunner.propertiesFile == null
 
         assert codeNarcRunner.reportWriters.size == 1
         def reportWriter = codeNarcRunner.reportWriters[0]
@@ -303,7 +304,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_RuleSetStringJSON() {
+    void test_execute_RuleSetStringJSON() {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-ruleset=$RULESET_AS_JSON"] as String[]
@@ -329,7 +330,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_Plugins() {
+    void test_execute_Plugins() {
         final ARGS = ["-plugins=$PLUGIN_NAMES"] as String[]
 
         def pluginClassNames
@@ -341,7 +342,16 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_ExceedsMaxPriority1Violations() {
+    void test_execute_Properties() {
+        final ARGS = ["-properties=$PROPERTIES_FILENAME"] as String[]
+
+        codeNarc.execute(ARGS)
+
+        assert codeNarcRunner.propertiesFile == null
+    }
+
+    @Test
+    void test_execute_ExceedsMaxPriority1Violations() {
         final ARGS = ['-maxPriority1Violations=3'] as String[]
         numViolations[P1] = 4
         codeNarc.execute(ARGS)
@@ -349,7 +359,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_ExceedsMaxPriority2Violations() {
+    void test_execute_ExceedsMaxPriority2Violations() {
         final ARGS = ['-maxPriority2Violations=3'] as String[]
         numViolations[P2] = 4
         codeNarc.execute(ARGS)
@@ -357,7 +367,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_ExceedsMaxPriority3Violations() {
+    void test_execute_ExceedsMaxPriority3Violations() {
         final ARGS = ['-maxPriority3Violations=3'] as String[]
         numViolations[P3] = 4
         codeNarc.execute(ARGS)
@@ -365,7 +375,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_ReportClassDoesNotSupportSetTitle() {
+    void test_execute_ReportClassDoesNotSupportSetTitle() {
         final ARGS = ["-report=${NoTitleReportWriter.name}", "-title=$TITLE"] as String[]
 
         codeNarc.execute(ARGS)
@@ -377,7 +387,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testExecute_ReportWritesToStandardOut() {
+    void test_execute_ReportWritesToStandardOut() {
         final ARGS = ['-report=xml:stdout'] as String[]
 
         codeNarc.execute(ARGS)
@@ -392,7 +402,7 @@ class CodeNarcTest extends AbstractTestCase {
     // Test for main()
 
     @Test
-    void testMain() {
+    void test_main() {
         final ARGS = [
                 "-report=$HTML_REPORT_STR", "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-title=$TITLE", "-excludes=$EXCLUDES", "-rulesetfiles=$RULESET1"] as String[]
@@ -402,7 +412,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testMain_Help() {
+    void test_main_Help() {
         final ARGS = ['-help'] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)
@@ -415,7 +425,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testMain_Version() {
+    void test_main_Version() {
         final ARGS = ['-version'] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)
@@ -430,7 +440,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testMain_BadOptionFormat() {
+    void test_main_BadOptionFormat() {
         final ARGS = ["-report=$HTML_REPORT_STR", '&^%#BAD%$#'] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)
@@ -443,7 +453,7 @@ class CodeNarcTest extends AbstractTestCase {
     }
 
     @Test
-    void testMain_UnknownOption() {
+    void test_main_UnknownOption() {
         final ARGS = ['-unknown=23', "-report=$HTML_REPORT_STR"] as String[]
         def stdout = captureSystemOut {
             CodeNarc.main(ARGS)

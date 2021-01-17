@@ -124,6 +124,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
     protected String excludes
     protected String title
     protected String plugins
+    protected String propertiesFilename
     protected List reports = []
 
     // Abstract creation of the CodeNarcRunner instance to allow substitution of test spy for unit tests
@@ -178,6 +179,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
         codeNarcRunner.ruleSetString = ruleset
         codeNarcRunner.reportWriters = reports
         codeNarcRunner.sourceAnalyzer = sourceAnalyzer
+        codeNarcRunner.propertiesFilename = propertiesFilename
 
         if (plugins) {
             codeNarcRunner.registerPluginsForClassNames(plugins)
@@ -234,6 +236,7 @@ Usage: java org.codenarc.CodeNarc [OPTIONS]
                 case 'maxPriority2Violations': maxPriority2Violations = value as int; break
                 case 'maxPriority3Violations': maxPriority3Violations = value as int; break
                 case 'plugins': plugins = value; break
+                case 'properties': propertiesFilename = value; break
                 default: throw new IllegalArgumentException("Invalid option: [$arg]")
             }
         }
