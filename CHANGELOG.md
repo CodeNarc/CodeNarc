@@ -19,6 +19,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #590: **ClassStartsWithBlankLine**: Fix NullPointerException on single-line class at very end of file (no newline).
 
 Build and Infrastructure
+ - #574: CodeNarc command-line: Support `-properties` command-line argument to specify name/location for "codenarc.properties" file.
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
  - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
  - #589: Upgrade to Groovy 2.5.14 (minor patch release), to address CVE-2020-17521. Note: CodeNarc does not use any of the vulnerable Groovy components.
