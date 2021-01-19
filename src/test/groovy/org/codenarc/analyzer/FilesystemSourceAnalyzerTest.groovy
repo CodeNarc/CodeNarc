@@ -19,7 +19,7 @@ import org.codenarc.results.DirectoryResults
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
-
+import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceString
@@ -37,30 +37,31 @@ import org.codenarc.rule.FakePathRule
  * @author Chris Mair
  */
 class FilesystemSourceAnalyzerTest extends AbstractTestCase {
+
     private static final BASE_DIR = 'src/test/resources/sourcewithdirs'
     private analyzer
     private ruleSet
     private testCountRule
 
     @Test
-    void testAnalyze_NullRuleSet() {
+    void test_analyze_NullRuleSet() {
         analyzer.baseDirectory = BASE_DIR
         shouldFailWithMessageContaining('ruleSet') { analyzer.analyze(null) }
     }
 
     @Test
-    void testAnalyze_BaseDirectoryNull() {
+    void test_analyze_BaseDirectoryNull() {
         shouldFailWithMessageContaining('baseDirectory') { analyzer.analyze(ruleSet) }
     }
 
     @Test
-    void testAnalyze_BaseDirectoryEmpty() {
+    void test_analyze_BaseDirectoryEmpty() {
         analyzer.baseDirectory = ''
         shouldFailWithMessageContaining('baseDirectory') { analyzer.analyze(ruleSet) }
     }
 
     @Test
-    void testAnalyze_FilesOnly() {
+    void test_analyze_FilesOnly() {
         final DIR = 'src/test/resources/source'
         analyzer.baseDirectory = DIR
         ruleSet = new ListRuleSet([new FakePathRule()])     // override
@@ -81,7 +82,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze() {
+    void test_analyze() {
         analyzer.baseDirectory = BASE_DIR
         def results = analyzer.analyze(ruleSet)
         log("results=$results")
@@ -105,7 +106,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_NoViolations() {
+    void test_analyze_NoViolations() {
         analyzer.baseDirectory = BASE_DIR
         ruleSet = new ListRuleSet([testCountRule])
         def results = analyzer.analyze(ruleSet)
@@ -120,7 +121,17 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_IncludesAndExcludes() {
+    void test_analyze_RuleThrowsNullPointerException() {
+        def rule = new StubRule(applyToClosure:{ sourceCode, violations -> throw new NullPointerException() })
+        ruleSet = new ListRuleSet([rule])
+
+        analyzer.baseDirectory = BASE_DIR
+        def results = analyzer.analyze(ruleSet)
+        assert results.totalNumberOfFiles == 5
+    }
+
+    @Test
+    void test_analyze_IncludesAndExcludes() {
         analyzer.baseDirectory = BASE_DIR
         analyzer.includes = '**ubdir*.groovy'
         analyzer.excludes = '**/*File2*'
@@ -141,7 +152,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_IncludesAndExcludes_Lists() {
+    void test_analyze_IncludesAndExcludes_Lists() {
         analyzer.baseDirectory = BASE_DIR
         analyzer.includes = '**/Subdir1File1.groovy,**/Subdir2a*1.groovy,**/Sub?ir2File1.groovy'
         analyzer.excludes = '**/Subdir2aFile1.groovy,**/DoesNotExist.*'
@@ -162,13 +173,13 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetSourceDirectories_ReturnsListWithBaseDirectory() {
+    void test_getSourceDirectories_ReturnsListWithBaseDirectory() {
         analyzer.baseDirectory = BASE_DIR
         assert analyzer.sourceDirectories == [BASE_DIR]
     }
 
     @Test
-    void testMatches() {
+    void test_matches() {
         def source = new SourceString('def x', 'dir/file.txt')
         assertMatches(source, null, null, true)
         assertMatches(source, '', null, true)
@@ -182,7 +193,7 @@ class FilesystemSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Before
-    void setUpFilesystemSourceAnalyzerTest() {
+    void before() {
         analyzer = new FilesystemSourceAnalyzer()
         testCountRule = new FakeCountRule()
         ruleSet = new ListRuleSet([new FakePathRule(), testCountRule])

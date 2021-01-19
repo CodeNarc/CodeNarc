@@ -15,7 +15,8 @@
  */
 package org.codenarc.ant
 
-import static org.codenarc.test.TestUtil.*
+import static org.codenarc.test.TestUtil.shouldFail
+import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 import org.apache.tools.ant.Project
 import org.apache.tools.ant.types.FileSet
@@ -24,12 +25,11 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 import org.codenarc.rule.FakeCountRule
 import org.codenarc.rule.FakePathRule
+import org.codenarc.rule.StubRule
 import org.codenarc.ruleset.ListRuleSet
 import org.codenarc.test.AbstractTestCase
 import org.junit.Before
 import org.junit.Test
-
-import static org.codenarc.test.TestUtil.shouldFailWithMessageContaining
 
 /**
  * Tests for AntFileSetSourceAnalyzer
@@ -44,22 +44,22 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     private ruleSet
 
     @Test
-    void testConstructor_NullFileSet() {
+    void test_Constructor_NullFileSet() {
         shouldFailWithMessageContaining('fileSet') { new AntFileSetSourceAnalyzer(project, (FileSet)null) }
     }
 
     @Test
-    void testConstructor_NullListOfFileSets() {
+    void test_Constructor_NullListOfFileSets() {
         shouldFailWithMessageContaining('fileSet') { new AntFileSetSourceAnalyzer(project, (List)null) }
     }
 
     @Test
-    void testConstructor_NullProject() {
+    void test_Constructor_NullProject() {
         shouldFailWithMessageContaining('project') { new AntFileSetSourceAnalyzer(null, fileSet) }
     }
 
     @Test
-    void testAnalyze_SimpleDirectory() {
+    void test_analyze_SimpleDirectory() {
         fileSet.includes = 'source/**/*.groovy'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
@@ -76,7 +76,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_NestedSubdirectories() {
+    void test_analyze_NestedSubdirectories() {
         fileSet.includes = 'sourcewithdirs/**/*.groovy'
         fileSet.excludes = '**/*File2.groovy'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
@@ -108,7 +108,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_NestedSubdirectories_NoViolations() {
+    void test_analyze_NestedSubdirectories_NoViolations() {
         ruleSet = new ListRuleSet([new FakeCountRule()])
         fileSet.includes = 'sourcewithdirs/**/*.groovy'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
@@ -121,7 +121,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_MultipleFileSets() {
+    void test_analyze_MultipleFileSets() {
         final DIR1 = 'src/test/resources/sourcewithdirs/subdir1'
         final DIR2 = 'src/test/resources/sourcewithdirs/subdir2'
         final GROOVY_FILES = '**/*.groovy'
@@ -143,7 +143,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_SourceFilesWithCompileErrors() {
+    void test_analyze_SourceFilesWithCompileErrors() {
         ruleSet = new ListRuleSet([new FakeCountRule()])
         fileSet.includes = 'sourcewitherrors/**/*.txt'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
@@ -155,7 +155,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_SourceFilesWithCompileErrors_failOnError_true() {
+    void test_analyze_SourceFilesWithCompileErrors_failOnError_true() {
         ruleSet = new ListRuleSet([new FakeCountRule()])
         fileSet.includes = 'sourcewitherrors/**/*.txt'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
@@ -166,7 +166,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testAnalyze_EmptyFileSet() {
+    void test_analyze_EmptyFileSet() {
         fileSet.excludes = '**/*'
         def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
         def results = analyzer.analyze(ruleSet)
@@ -174,19 +174,29 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetSourceDirectories_ReturnsEmptyListForNoFileSets() {
+    void test_analyze_RuleThrowsNullPointerException() {
+        def rule = new StubRule(applyToClosure:{ sourceCode, violations -> throw new NullPointerException() })
+        ruleSet = new ListRuleSet([rule])
+        fileSet.includes = 'source/**/*.groovy'
+        def analyzer = new AntFileSetSourceAnalyzer(project, fileSet)
+        def results = analyzer.analyze(ruleSet)
+        assert results.violations.empty
+    }
+
+    @Test
+    void test_getSourceDirectories_ReturnsEmptyListForNoFileSets() {
         def analyzer = new AntFileSetSourceAnalyzer(project, [])
         assert analyzer.sourceDirectories == []
     }
 
     @Test
-    void testGetSourceDirectories_ReturnsSingleDirectoryForSingleFileSet() {
+    void test_getSourceDirectories_ReturnsSingleDirectoryForSingleFileSet() {
         def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet])
         assert analyzer.sourceDirectories == [normalizedPath(BASE_DIR)]
     }
 
     @Test
-    void testGetSourceDirectories_ReturnsDirectoryForEachFileSet() {
+    void test_getSourceDirectories_ReturnsDirectoryForEachFileSet() {
         def fileSet1 = new FileSet(dir:new File('abc'), project:project)
         def fileSet2 = new FileSet(dir:new File('def'), project:project)
         def analyzer = new AntFileSetSourceAnalyzer(project, [fileSet1, fileSet2])
@@ -195,7 +205,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetSourceDirectories_ReturnsDirectoryRelativeToBaseDirectory() {
+    void test_getSourceDirectories_ReturnsDirectoryRelativeToBaseDirectory() {
         def currentDir = new File('').absolutePath
         project = new Project(basedir:currentDir)
         fileSet.setProject(project)
@@ -206,7 +216,7 @@ class AntFileSetSourceAnalyzerTest extends AbstractTestCase {
     }
 
     @Before
-    void setUpAntFileSetSourceAnalyzerTest() {
+    void before() {
         project = new Project()
         project.basedir = '.'
 

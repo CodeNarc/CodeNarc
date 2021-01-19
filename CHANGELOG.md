@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
-TODO Version 2.1.0    (??? 2020)
+TODO Version 2.1.0    (??? 2021)
 --------------------------------------
 New Rules
 - #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
@@ -23,6 +23,7 @@ Build and Infrastructure
  - #570: Publish a fat jar. ([Eric Citaire](https://github.com/ericcitaire))
  - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
  - #589: Upgrade to Groovy 2.5.14 (minor patch release), to address CVE-2020-17521. Note: CodeNarc does not use any of the vulnerable Groovy components.
+ - #593: Command-line: Catch exception during rule processing, log error message with rule/filename and keep going.
 
 Version 2.0.0    (Oct 2020)
 --------------------------------------

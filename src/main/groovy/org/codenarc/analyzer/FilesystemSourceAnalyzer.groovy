@@ -22,6 +22,8 @@ import org.codenarc.ruleset.RuleSet
 import org.codenarc.source.SourceCode
 import org.codenarc.source.SourceFile
 import org.codenarc.util.WildcardPattern
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * SourceAnalyzer implementation that recursively processes files from the file system.
@@ -30,8 +32,9 @@ import org.codenarc.util.WildcardPattern
  */
 class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
 
-    static final String SEP = '/'
-    static final String DEFAULT_INCLUDES = '**/*.groovy'
+    private static final String SEP = '/'
+    private static final String DEFAULT_INCLUDES = '**/*.groovy'
+    private static final Logger LOG = LoggerFactory.getLogger(FilesystemSourceAnalyzer)
 
     /**
      * The base (root) directory. Must not be null or empty.
@@ -86,6 +89,7 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
         [baseDirectory]
     }
 
+    @SuppressWarnings('CatchThrowable')
     private DirectoryResults processDirectory(String dir, RuleSet ruleSet) {
         def dirResults = new DirectoryResults(dir)
         def dirFile = new File((String) baseDirectory, (String) dir)
@@ -100,7 +104,11 @@ class FilesystemSourceAnalyzer extends AbstractSourceAnalyzer {
                 }
             }
             else {
-                processFile(filePath, dirResults, ruleSet)
+                try {
+                    processFile(filePath, dirResults, ruleSet)
+                } catch (Throwable t) {
+                    LOG.warn("Error processing file: '" + filePath + "'; " + t)
+                }
             }
         }
         dirResults
