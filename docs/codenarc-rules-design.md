@@ -303,7 +303,7 @@ or 'TestCase.groovy'.
 
 | Property                    | Description            | Default Value    |
 |-----------------------------|------------------------|------------------|
-| ignoreTypeNames             | Specifies one or more (comma-separated) class names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | "*Exceptions" |
+| ignoreTypeNames             | Specifies one or more (comma-separated) class names that should be ignored (i.e., that should not cause a rule violation). The names may optionally contain wildcards (*,?).  | "*Exception" |
 
   Example of violations:
 
