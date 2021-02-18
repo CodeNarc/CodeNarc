@@ -171,13 +171,13 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
     void testMethodCallSurroundedByExtraParentheses() {
         final SOURCE = '''
             def filterFunds() {
-               (funds.findAll { it.fundCode } )
+               (funds.findAll { it.fundCode })
             }
             def filterFunds_TwoExtraParentheses() {
                ((funds.findAll{it.fundCode}))
             }
             def extendFunds() {
-               (funds.extend(3) { it.fundCode } )
+               (funds.extend(3) { it.fundCode })
             }
             def purgeFunds() {
                (funds.purge {
@@ -196,7 +196,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
 
             // The only violation
             def clearFunds() {
-               (println(funds.clear('clearing', { it.fundCode }) ))
+               (println(funds.clear('clearing', { it.fundCode })))
             }
           '''
         assertSingleViolation(SOURCE, 28, "funds.clear('clearing', { it.fundCode })", "The last parameter to the 'clear' method call is a closure and can appear outside the parenthesis")
@@ -206,7 +206,7 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
     void testNestedMethodCallSurroundedByExtraParentheses_KnownLimitation() {
         final SOURCE = '''
             def clearFunds() {
-               (println((funds.clear('clearing', { it.fundCode })) ))
+               (println((funds.clear('clearing', { it.fundCode }))))
             }
           '''
         if (GroovyVersion.isGroovyVersion2()) {
@@ -220,10 +220,10 @@ class ClosureAsLastMethodParameterRuleTest extends AbstractRuleTestCase<ClosureA
     @Test
     void testMultiLineMethodCall_StartsWithParentheses() {
         final SOURCE = '''
-            ((Node)o).children().inject( [:] ){ Map<String, String> m, Node childNode ->
+            ((Node)o).children().inject([:]){ Map<String, String> m, Node childNode ->
                 println m
             }
-            (0..1).inject( [:] ){ Map<String, String> m, Node childNode ->
+            (0..1).inject([:]){ Map<String, String> m, Node childNode ->
                 println m
             }
         '''

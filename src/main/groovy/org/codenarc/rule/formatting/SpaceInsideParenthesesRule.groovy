@@ -34,8 +34,8 @@ class SpaceInsideParenthesesRule extends AbstractAstVisitorRule {
 
 class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
 
-    private static final String MESSAGE_SPACE_AFTER_OPENING_PARENTHESIS = "The opening parenthesis is followed by whitespace"
-    private static final String MESSAGE_SPACE_BEFORE_CLOSING_PARENTHESIS = "The closing parenthesis is preceded by whitespace"
+    private static final String MESSAGE_SPACE_AFTER_OPENING_PARENTHESIS = 'The opening parenthesis is followed by whitespace'
+    private static final String MESSAGE_SPACE_BEFORE_CLOSING_PARENTHESIS = 'The closing parenthesis is preceded by whitespace'
     private static final String SINGLE_QUOTE = "'"
     private static final String DOUBLE_QUOTE = '"'
 

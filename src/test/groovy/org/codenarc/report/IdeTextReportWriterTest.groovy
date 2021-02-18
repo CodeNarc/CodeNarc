@@ -77,7 +77,7 @@ File: src/main/dao/MyDao.groovy
 [CodeNarc (${CODENARC_URL}) v${version()}]
 """.trim()
 
-        final VIOLATION = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:null, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
+        final VIOLATION = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:null, sourceLine:SOURCE_LINE3, message:MESSAGE3)
         def fileResults = new FileResults('src/main/dao/MyDao.groovy', [VIOLATION])
         results = new DirectoryResults()
         results.addChild(fileResults)

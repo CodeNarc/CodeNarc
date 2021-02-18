@@ -67,7 +67,7 @@ class FieldReferenceAstVisitor extends AbstractAstVisitor {
             expression.objectExpression.objectExpression instanceof VariableExpression &&
             expression.objectExpression.property instanceof ConstantExpression &&
             expression.objectExpression.objectExpression.name  == currentClassNode.outerClass?.name &&
-            expression.objectExpression.property.value == 'this' ) {
+            expression.objectExpression.property.value == 'this') {
             fieldReferenced(expression.property.value)
         }
         super.visitPropertyExpression(expression)

@@ -59,7 +59,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'def name = "Joe".toString()', messageText:'Calling toString() on the String expression in class MyClass is unnecessary'],
             [lineNumber:6, sourceLineText:"def id = '123'.toString()", messageText:'Calling toString() on the String expression in class MyClass is unnecessary'],
-            [lineNumber:7, sourceLineText:"def groupId = ((String)currentRow.get('GroupID')).toString()", messageText:'Calling toString() on the String expression in class MyClass is unnecessary'] )
+            [lineNumber:7, sourceLineText:"def groupId = ((String)currentRow.get('GroupID')).toString()", messageText:'Calling toString() on the String expression in class MyClass is unnecessary'])
     }
 
     @Test
@@ -81,7 +81,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
         assertViolations(SOURCE,
                 [lineNumber:3, sourceLineText:'def name = "Joe" + new Date().toString()', messageText:'Calling toString() on [new Date()] in class MyClass is unnecessary'],
                 [lineNumber:7, sourceLineText:"def string = 'some string' + object.toString()", messageText:'Calling toString() on [object] in class MyClass is unnecessary'],
-                [lineNumber:8, sourceLineText:'def withinGString = "processing: ${\'prefix\' + object.toString()}"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )
+                [lineNumber:8, sourceLineText:'def withinGString = "processing: ${\'prefix\' + object.toString()}"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'])
     }
 
     @Test
@@ -114,7 +114,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'String name = nameNode.toString()', messageText:String.format(message, 'name')],
             [lineNumber:4, sourceLineText:'String id = account.id.toString()', messageText:String.format(message, 'id')],
-            [lineNumber:5, sourceLineText:'String code = account.getCode().toString()', messageText:String.format(message, 'code')] )
+            [lineNumber:5, sourceLineText:'String code = account.getCode().toString()', messageText:String.format(message, 'code')])
     }
 
     @Test
@@ -128,7 +128,7 @@ class UnnecessaryToStringRuleTest extends AbstractRuleTestCase<UnnecessaryToStri
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'String name = nameNode.toString()', messageText:String.format(message, 'name')],
             [lineNumber:3, sourceLineText:'String id = account.id.toString()', messageText:String.format(message, 'id')],
-            [lineNumber:4, sourceLineText:'String code = account.getCode().toString()', messageText:String.format(message, 'code')] )
+            [lineNumber:4, sourceLineText:'String code = account.getCode().toString()', messageText:String.format(message, 'code')])
     }
 
     @Test

@@ -1173,7 +1173,7 @@
                             "ruleName": "GStringExpressionWithinString",
                             "priority": 2,
                             "lineNumber": 84,
-                            "sourceLine": "[lineNumber:8, sourceLineText:'def withinGString = \"processing: ${\\'prefix\\' + object.toString()}\"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )",
+                            "sourceLine": "[lineNumber:8, sourceLineText:'def withinGString = \"processing: ${\\'prefix\\' + object.toString()}\"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'])",
                             "message": "The String 'def withinGString = \"processing: ${'prefix' + object.toString()}\"' contains a GString-type expression: '${'prefix' + object.toString()}'"
                         },
                         {

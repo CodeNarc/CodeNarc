@@ -101,7 +101,7 @@ c        '''
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'def myMethod(){ }', messageText:'The opening brace for the method'],
-            [lineNumber:6, sourceLineText:'int putBulkAccountInfo(List<Map> jsonObject){', messageText:'The opening brace for the method'] )
+            [lineNumber:6, sourceLineText:'int putBulkAccountInfo(List<Map> jsonObject){', messageText:'The opening brace for the method'])
     }
 
     @Test
@@ -129,7 +129,7 @@ c        '''
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'if (ready){ }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done){ }', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:4, sourceLineText:'done){ }', messageText:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test

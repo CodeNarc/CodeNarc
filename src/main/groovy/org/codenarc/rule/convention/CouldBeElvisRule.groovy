@@ -65,7 +65,7 @@ class CouldBeElvisAstVisitor extends AbstractAstVisitor {
     }
 
     private Expression getSingleStatementExpressionOrNull(Statement ifBlock) {
-        if (AstUtil.isOneLiner(ifBlock) && AstUtil.respondsTo(ifBlock.statements[0], 'expression') ) {
+        if (AstUtil.isOneLiner(ifBlock) && AstUtil.respondsTo(ifBlock.statements[0], 'expression')) {
             return ifBlock.statements[0].expression
         }
         if (ifBlock instanceof ExpressionStatement) {

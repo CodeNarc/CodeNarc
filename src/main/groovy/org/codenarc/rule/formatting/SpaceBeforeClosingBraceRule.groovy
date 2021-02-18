@@ -121,7 +121,7 @@ class SpaceBeforeClosingBraceAstVisitor extends AbstractSpaceAroundBraceAstVisit
     }
 
     private boolean checkIsEmptyBlock(String line, int indexOfBrace) {
-        if (rule.ignoreEmptyBlock ) {
+        if (rule.ignoreEmptyBlock) {
             return isNotCharacter(line, '{' as char, indexOfBrace)
         }
         return true

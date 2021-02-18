@@ -57,7 +57,7 @@ class UnnecessaryIfStatementRuleTest extends AbstractRuleTestCase<UnnecessaryIfS
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'if (expression1)'],
-            [lineNumber:3, sourceLineText:'if (expression2)'] )
+            [lineNumber:3, sourceLineText:'if (expression2)'])
     }
 
     @Test

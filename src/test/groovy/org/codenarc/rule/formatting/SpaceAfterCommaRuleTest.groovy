@@ -104,20 +104,20 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'Calendar c = new GregorianCalendar(2011,Calendar.NOVEMBER,1)', messageText:'The parameter Calendar.NOVEMBER'],
-            [lineNumber:2, sourceLineText:'Calendar c = new GregorianCalendar(2011,Calendar.NOVEMBER,1)', messageText:'The parameter 1'] )
+            [lineNumber:2, sourceLineText:'Calendar c = new GregorianCalendar(2011,Calendar.NOVEMBER,1)', messageText:'The parameter 1'])
     }
 
     @Test
     void testApplyTo_UnicodeLiteral_Violations() {
         final SOURCE = '''
-            def value1 = calculate( { '\\u00A0' },12)
+            def value1 = calculate({ '\\u00A0' },12)
             def value2 = calculate('\\u00A0',399,'abc'       ,17)
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:"def value1 = calculate( { '\\u00A0' },12)", messageText:'The parameter 12'],
             [lineNumber:3, sourceLineText:"def value2 = calculate('\\u00A0',399,'abc'       ,17)", messageText:'The parameter 399'],
             [lineNumber:3, sourceLineText:"def value2 = calculate('\\u00A0',399,'abc'       ,17)", messageText:'The parameter abc'],
-            [lineNumber:3, sourceLineText:"def value2 = calculate('\\u00A0',399,'abc'       ,17)", messageText:'The parameter 17'] )
+            [lineNumber:3, sourceLineText:"def value2 = calculate('\\u00A0',399,'abc'       ,17)", messageText:'The parameter 17'])
     }
 
     @Test
@@ -130,7 +130,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:"def value = calculate(1,399,'abc',count)", messageText:'The parameter 399'],
             [lineNumber:3, sourceLineText:"def value = calculate(1,399,'abc',count)", messageText:'The parameter abc'],
-            [lineNumber:3, sourceLineText:"def value = calculate(1,399,'abc',count)", messageText:'The parameter count'] )
+            [lineNumber:3, sourceLineText:"def value = calculate(1,399,'abc',count)", messageText:'The parameter count'])
     }
 
     // Tests for method declarations
@@ -169,7 +169,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'void calculate(a,int b,String name,count) { }', messageText:'The parameter b'],
             [lineNumber:3, sourceLineText:'void calculate(a,int b,String name,count) { }', messageText:'The parameter name'],
-            [lineNumber:3, sourceLineText:'void calculate(a,int b,String name,count) { }', messageText:'The parameter count'] )
+            [lineNumber:3, sourceLineText:'void calculate(a,int b,String name,count) { }', messageText:'The parameter count'])
     }
 
     // Tests for constructor declarations
@@ -184,7 +184,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'MyTestCase(a,int b,String name,count) { }', messageText:'The parameter b'],
             [lineNumber:3, sourceLineText:'MyTestCase(a,int b,String name,count) { }', messageText:'The parameter name'],
-            [lineNumber:3, sourceLineText:'MyTestCase(a,int b,String name,count) { }', messageText:'The parameter count'] )
+            [lineNumber:3, sourceLineText:'MyTestCase(a,int b,String name,count) { }', messageText:'The parameter count'])
     }
 
     // Tests for closure declarations
@@ -224,7 +224,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'def calculate = { a,int b,String name,count -> }', messageText:'The closure parameter b'],
             [lineNumber:3, sourceLineText:'def calculate = { a,int b,String name,count -> }', messageText:'The closure parameter name'],
-            [lineNumber:3, sourceLineText:'def calculate = { a,int b,String name,count -> }', messageText:'The closure parameter count'] )
+            [lineNumber:3, sourceLineText:'def calculate = { a,int b,String name,count -> }', messageText:'The closure parameter count'])
     }
 
     // Tests for list literals
@@ -260,7 +260,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
             [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element b'],
             [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element name'],
             [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element 123'],
-            [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element [x]'] )
+            [lineNumber:3, sourceLineText:'def list1 = [a,b,name,123,[x]]', messageText:'The list element [x]'])
     }
 
     // Tests for map literals
@@ -298,7 +298,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
             [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry c:123'],
             [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry d:123'],
             [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry e:[x]'],
-            [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry f:[a:1]'] )
+            [lineNumber:3, sourceLineText:"def map1 = [a:1,b:value,c:'123',d:123,e:[x],f:[a:1]]", messageText:'The map entry f:[a:1]'])
     }
 
     @Test

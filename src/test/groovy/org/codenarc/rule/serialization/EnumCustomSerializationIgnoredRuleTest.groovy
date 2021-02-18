@@ -67,7 +67,7 @@ class EnumCustomSerializationIgnoredRuleTest extends AbstractRuleTestCase<EnumCu
         '''
         assertViolations(SOURCE,
             [lineNumber:4, sourceLineText:'private static final long serialVersionUID = 1234567L', messageText:'serialVersionUID'],
-            [lineNumber:5, sourceLineText:'private static final ObjectStreamField[] serialPersistentFields', messageText:'serialPersistentFields'] )
+            [lineNumber:5, sourceLineText:'private static final ObjectStreamField[] serialPersistentFields', messageText:'serialPersistentFields'])
     }
 
     @Test

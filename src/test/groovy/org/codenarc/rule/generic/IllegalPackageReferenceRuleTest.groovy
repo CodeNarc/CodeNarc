@@ -70,7 +70,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'if (value.class == org.bad.BadClass) { }', messageText:'org.bad'],
             [lineNumber:3, sourceLineText:'println "isClosure=${value instanceof org.bad.OtherClass}"', messageText:'org.bad'],
-            [lineNumber:4, sourceLineText:'def count = org.bad.Helper.getCount()', messageText:'org.bad'] )
+            [lineNumber:4, sourceLineText:'def count = org.bad.Helper.getCount()', messageText:'org.bad'])
     }
 
     @Test
@@ -84,7 +84,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         rule.packageNames = 'org.bad'
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'def amount = new org.bad.Value()', messageText:'org.bad'],
-            [lineNumber:4, sourceLineText:"def url = new org.bad.Name('ABC')", messageText:'org.bad'] )
+            [lineNumber:4, sourceLineText:"def url = new org.bad.Name('ABC')", messageText:'org.bad'])
     }
 
     @Test
@@ -114,7 +114,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'org.bad.Value maxValue = 0', messageText:'org.bad'],
             [lineNumber:4, sourceLineText:'org.bad.URI uri', messageText:'org.bad'],
-            [lineNumber:5, sourceLineText:'org.bad.Code code', messageText:'org.bad'] )
+            [lineNumber:5, sourceLineText:'org.bad.Code code', messageText:'org.bad'])
     }
 
     @Test
@@ -129,7 +129,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'org.bad.Socket getSocket() { }', messageText:'org.bad'],
             [lineNumber:3, sourceLineText:'org.bad.Reader getReader() { }', messageText:'org.bad'],
-            [lineNumber:4, sourceLineText:'org.bad.AntBuilder getAntBuilder() { }', messageText:'org.bad'] )
+            [lineNumber:4, sourceLineText:'org.bad.AntBuilder getAntBuilder() { }', messageText:'org.bad'])
     }
 
     @Test
@@ -141,7 +141,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         rule.packageNames = 'org.bad'
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'void writeCount(org.bad.Writer writer, int count)', messageText:'org.bad'],
-            [lineNumber:3, sourceLineText:'void initializeBinding(String name, org.bad.Binding binding) { }', messageText:'org.bad'] )
+            [lineNumber:3, sourceLineText:'void initializeBinding(String name, org.bad.Binding binding) { }', messageText:'org.bad'])
     }
 
     @Test
@@ -174,7 +174,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         rule.packageNames = 'org.bad'
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'def writeCount = { org.bad.Writer writer, int count -> }', messageText:'org.bad'],
-            [lineNumber:3, sourceLineText:'def initializeBinding = { String name, org.bad.Binding binding -> }', messageText:'org.bad'] )
+            [lineNumber:3, sourceLineText:'def initializeBinding = { String name, org.bad.Binding binding -> }', messageText:'org.bad'])
     }
 
     @Test
@@ -197,7 +197,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'class MyHashMap extends org.bad.HashMap { }', messageText:'org.bad'],
             [lineNumber:3, sourceLineText:'class MyScript extends org.bad.Script { }', messageText:'org.bad'],
-            [lineNumber:4, sourceLineText:'interface MyList extends org.bad.List { }', messageText:'org.bad'] )
+            [lineNumber:4, sourceLineText:'interface MyList extends org.bad.List { }', messageText:'org.bad'])
     }
 
     @Test
@@ -209,7 +209,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         rule.packageNames = 'org.bad'
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'class MyList implements org.bad.List { }', messageText:'org.bad'],
-            [lineNumber:3, sourceLineText:'class MyRange implements org.bad.Range { }', messageText:'org.bad'] )
+            [lineNumber:3, sourceLineText:'class MyRange implements org.bad.Range { }', messageText:'org.bad'])
     }
 
     @Test
@@ -225,7 +225,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         rule.packageNames = 'org.bad, org.evil'
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'import org.bad.BadStuff', messageText:'org.bad'],
-            [lineNumber:4, sourceLineText:'import org.evil.*', messageText:'org.evil'] )
+            [lineNumber:4, sourceLineText:'import org.evil.*', messageText:'org.evil'])
     }
 
     @Test
@@ -239,7 +239,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         '''
         rule.packageNames = 'org.bad'
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'import static org.bad.BadUtil.*', messageText:'org.bad'] )
+            [lineNumber:3, sourceLineText:'import static org.bad.BadUtil.*', messageText:'org.bad'])
     }
 
     @Test
@@ -266,7 +266,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         rule.packageNames = 'com.example,com.example,org.bad,com.other.ignore'
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'class MyHashMap extends org.bad.HashMap {', messageText:'org.bad'],
-            [lineNumber:4, sourceLineText:'int getCount(com.example.Widget widget) { return widget.count }', messageText:'com.example'] )
+            [lineNumber:4, sourceLineText:'int getCount(com.example.Widget widget) { return widget.count }', messageText:'com.example'])
     }
 
     @Test
@@ -282,7 +282,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'import com.example.ExampleHelper', messageText:'com.example'],
             [lineNumber:3, sourceLineText:'class MyClass implements com.example.print.Printable {', messageText:'com.example.print'],
-            [lineNumber:5, sourceLineText:'int getCount(org.bad.widget.Widget widget) { return widget.count }', messageText:'org.bad'] )
+            [lineNumber:5, sourceLineText:'int getCount(org.bad.widget.Widget widget) { return widget.count }', messageText:'org.bad'])
     }
 
     @Test
@@ -292,7 +292,7 @@ class IllegalPackageReferenceRuleTest extends AbstractRuleTestCase<IllegalPackag
         '''
         rule.packageNames = 'org.bad'
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'def x = new org.bad.Handler() { }', messageText:'org.bad'] )
+            [lineNumber:2, sourceLineText:'def x = new org.bad.Handler() { }', messageText:'org.bad'])
     }
 
     @Override

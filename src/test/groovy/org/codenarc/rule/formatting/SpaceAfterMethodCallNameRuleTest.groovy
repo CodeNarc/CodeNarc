@@ -39,7 +39,7 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
 
                 void valid() {
                     aMethod("arg")
-                    aMethod( "arg")
+                    aMethod("arg")
                     aMethod "arg"
                     new String(
                         "valid"

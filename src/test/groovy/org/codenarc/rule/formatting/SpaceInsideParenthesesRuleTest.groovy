@@ -15,9 +15,8 @@
  */
 package org.codenarc.rule.formatting
 
-import org.codenarc.rule.Rule
-import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
+import org.junit.Test
 
 /**
  * Tests for SpaceInsideParenthesesRule
@@ -115,7 +114,7 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
         final SOURCE = '''
             for ( name in names) { }
             for (int i=0; i < 10; i++     ) { }
-            for(    String name: filterNames( 
+            for(    String name: filterNames(
                 names)   ) { }
         '''
         assertViolations(SOURCE,
@@ -132,7 +131,7 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             def v =  (y - 7)*(x + (z - 3))
             def v2 =  (y - 7) *
                 (
-                    x + 
+                    x +
                     (z - 3)
                 )
             def v3 = calc(a) + calc(a + 1) + calc(a + (b - 1) * 2) + calc(7)
@@ -157,7 +156,7 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             println (3 + ( 4 * 7 )+7) + (     5 * 1 )
             def v =  (y - 7 )*( x + (z - 3))
             def v2 =  (y - 7 ) *
-                (x + 
+                (x +
                 ( z - 3)
                 )
             def v3 = calc(a) + calc(a + 1) + calc( a + ( b - 1) * 2) + calc(7)
@@ -256,9 +255,9 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
     void test_Catch_NoViolations() {
         final SOURCE = '''
             try { x= 1 } catch(Exception e) { }
-            try { 
-                x= 1 
-            } 
+            try {
+                x= 1
+            }
             catch (Exception e) {
                 logger.error("Error", e)
             }
@@ -270,9 +269,9 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
     void test_Catch_Violations() {
         final SOURCE = '''
             try { x= 1 } catch( Exception e ) { }
-            try { 
-                x= 1 
-            } 
+            try {
+                x= 1
+            }
             catch (Exception e ) {
                 logger.error("Error", e)
             }
@@ -289,7 +288,7 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             def x1 = (1 + 2 > 7) ? null : 7
             def x2 = isValid ? 23 : 11
             def x3 = (1
-                 + 2 
+                 + 2
                  > 7) ? null : 7
         '''
         assertNoViolations(SOURCE)
@@ -300,7 +299,7 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
         final SOURCE = '''
             def y1 = ( 1 + 2 > 7 ) ? null : 7
             def y2 = (       1
-                 + 2 
+                 + 2
                  > 7 ) ? null : 7
         '''
         assertViolations(SOURCE,
