@@ -337,10 +337,10 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {
     @Test
     void testApplyTo_LoopVariable_NotReferenced() {
         final SOURCE = '''
-            for (int i = 0; ; ) { }
+            for (int i = 0; ;) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i = 0; ; )', messageText:'i'])
+            [lineNumber:2, sourceLineText:'for (int i = 0; ;)', messageText:'i'])
     }
 
     @Test

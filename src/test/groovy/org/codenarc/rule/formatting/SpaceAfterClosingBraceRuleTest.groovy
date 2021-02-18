@@ -101,7 +101,7 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
             [lineNumber:2, sourceLineText:'def myMethod() { return 9 }', messageText:'The closing brace for the method myMethod in class None is not followed by a space or whitespace'],
             [lineNumber:4, sourceLineText:'{ return 9 }', messageText:'The closing brace for the method otherMethod in class None is not followed by a space or whitespace'],
             [lineNumber:5, sourceLineText:'def myMethod2() { }', messageText:'The closing brace for the method myMethod2 in class None is not followed by a space or whitespace'],
-            [lineNumber:6, sourceLineText:'def m4() {', messageText:'The closing brace for the method m4 in class None is not followed by a space or whitespace'] )
+            [lineNumber:6, sourceLineText:'def m4() {', messageText:'The closing brace for the method m4 in class None is not followed by a space or whitespace'])
     }
 
     @Test
@@ -130,7 +130,7 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'if (ready) { return 9 }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { return 9 }', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:4, sourceLineText:'done) { return 9 }', messageText:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -173,7 +173,7 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'while (ready) { println 9 }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { println 9 }', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:4, sourceLineText:'done) { println 9 }', messageText:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -293,7 +293,7 @@ class SpaceAfterClosingBraceRuleTest extends AbstractRuleTestCase<SpaceAfterClos
     void testApplyTo_ClosingBraceWithinStringLiteral_NoViolations() {
         final SOURCE = '''
             def doStuff() {
-                def things = new ObjectMapper().readValue('{}', new TypeReference<List<Thing>>() {} )
+                def things = new ObjectMapper().readValue('{}', new TypeReference<List<Thing>>() {})
             }
         '''
         assertNoViolations(SOURCE)

@@ -65,7 +65,7 @@ class InterfaceNameSameAsSuperInterfaceRuleTest extends AbstractRuleTestCase<Int
             interface MyInterface extends other.MyInterface { }
             '''
         assertViolations(SOURCE,
-            [lineNumber:3, sourceLineText:'interface MyInterface extends other.MyInterface', messageText:'Interface com.example.MyInterface has the same simple name as its super-interface other.MyInterface'] )
+            [lineNumber:3, sourceLineText:'interface MyInterface extends other.MyInterface', messageText:'Interface com.example.MyInterface has the same simple name as its super-interface other.MyInterface'])
     }
 
     @Override

@@ -55,7 +55,7 @@ class UnnecessaryObjectReferencesAstVisitor extends AbstractAstVisitor {
             if (exp instanceof MethodCallExpression && exp.objectExpression instanceof VariableExpression) {
                 accumulateOrError(exp.objectExpression.variable, statement)
             } else if (exp instanceof BinaryExpression && exp.leftExpression instanceof PropertyExpression
-                    && exp.leftExpression.objectExpression instanceof VariableExpression ) {
+                    && exp.leftExpression.objectExpression instanceof VariableExpression) {
                 accumulateOrError(exp.leftExpression.objectExpression.variable, statement)
             } else {
                 runCollector.clear()

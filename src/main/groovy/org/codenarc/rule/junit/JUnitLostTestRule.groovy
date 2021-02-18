@@ -62,7 +62,7 @@ class JUnitLostTestAstVisitor extends AbstractMethodVisitor {
             && (methodNode.name?.startsWith('test'))
             && !(Modifier.isStatic(methodNode.modifiers))
             && !(Modifier.isAbstract(methodNode.modifiers))
-            && !AstUtil.hasAnnotation(methodNode, 'Test') ) {
+            && !AstUtil.hasAnnotation(methodNode, 'Test')) {
             addViolation(methodNode, "The method ${methodNode.name} is a public, instance, void, no-arg method  named test*() that is not annotated with @Test.")
         }
     }

@@ -68,7 +68,7 @@ class ConfusingMultipleReturnsRuleTest extends AbstractRuleTestCase<ConfusingMul
         '''
         assertTwoViolations(SOURCE,
             3, 'def a, b, c = [1, 2, 3]', "Confusing declaration in class MyClass. The field 'a' is initialized to null",
-            3, 'def a, b, c = [1, 2, 3]', "Confusing declaration in class MyClass. The field 'b' is initialized to null", )
+            3, 'def a, b, c = [1, 2, 3]', "Confusing declaration in class MyClass. The field 'b' is initialized to null")
     }
 
     @Override

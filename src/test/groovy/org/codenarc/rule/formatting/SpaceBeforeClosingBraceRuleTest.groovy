@@ -139,7 +139,7 @@ c        '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'def myMethod() { return 9}', messageText:'The closing brace for the method myMethod in class None'],
             [lineNumber:4, sourceLineText:'{ return 9}', messageText:'The closing brace for the method otherMethod in class None'],
-            [lineNumber:5, sourceLineText:'def method3()', messageText:'The closing brace for the method method3 in class None'] )
+            [lineNumber:5, sourceLineText:'def method3()', messageText:'The closing brace for the method method3 in class None'])
     }
 
     @Test
@@ -166,7 +166,7 @@ c        '''
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'if (ready) { return 9}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { return 9}', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:4, sourceLineText:'done) { return 9}', messageText:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test
@@ -209,7 +209,7 @@ c        '''
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'while (ready) { println 9}', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) { println 9}', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:4, sourceLineText:'done) { println 9}', messageText:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test

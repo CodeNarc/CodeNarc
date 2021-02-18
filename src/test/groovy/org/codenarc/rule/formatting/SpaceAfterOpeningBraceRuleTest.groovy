@@ -202,7 +202,7 @@ c        '''
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'if (ready) {println 9 }', messageText:BLOCK_VIOLATION_MESSAGE],
-            [lineNumber:4, sourceLineText:'done) {println 9 }', messageText:BLOCK_VIOLATION_MESSAGE] )
+            [lineNumber:4, sourceLineText:'done) {println 9 }', messageText:BLOCK_VIOLATION_MESSAGE])
     }
 
     @Test

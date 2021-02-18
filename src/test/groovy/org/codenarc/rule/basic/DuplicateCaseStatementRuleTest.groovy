@@ -35,7 +35,7 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase<DuplicateCaseS
     void testApplyTo_NoViolations() {
         final SOURCE = '''
             def value = 2
-            switch( value ) {
+            switch(value) {
               case 1:
                 break
               case 2:
@@ -48,7 +48,7 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase<DuplicateCaseS
     @Test
     void testApplyTo_SingleViolationInteger() {
         final SOURCE = '''
-            switch( 0 ) {
+            switch(0) {
                 case 1:
                   break
                 case 2:
@@ -63,7 +63,7 @@ class DuplicateCaseStatementRuleTest extends AbstractRuleTestCase<DuplicateCaseS
     @Test
     void testApplyTo_SingleViolationString() {
         final SOURCE = '''
-            switch( "test" ) {
+            switch("test") {
                 case "$a":
                   break
                 case "$a":

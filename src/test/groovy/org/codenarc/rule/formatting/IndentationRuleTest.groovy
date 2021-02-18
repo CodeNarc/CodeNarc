@@ -988,7 +988,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         final SOURCE = '''
             |class IndentationTest {
             |    private static final CACHE2 = build(
-            |       new CacheLoader<String>() { } )     // Violation - wrong column
+            |       new CacheLoader<String>() { })     // Violation - wrong column
             |
             |    void someMethod() {
             |        CacheBuilder2.build(
@@ -1029,7 +1029,7 @@ class IndentationRuleTest extends AbstractRuleTestCase<IndentationRule> {
         final SOURCE = '''
             |class IndentationTest {
             |    static final CACHE = build(
-            |    new Cache<String>() { } )          // Known Limitation: valid indent offset, but not indented enough; no violation
+            |    new Cache<String>() { })          // Known Limitation: valid indent offset, but not indented enough; no violation
             |
             |    def list = [1, 2,
             |      new Processor() { }]             // Known Limitation: Skips List expressions; Wrong column, but no violation

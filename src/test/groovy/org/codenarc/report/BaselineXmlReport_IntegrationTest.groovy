@@ -40,7 +40,7 @@ class BaselineXmlReport_IntegrationTest extends AbstractTestCase {
     private static final MESSAGE3 = 'Other info'
     private static final VIOLATION1 = new Violation(rule:new UnusedImportRule(), sourceLine:'111')
     private static final VIOLATION2 = new Violation(rule:new UnusedPrivateMethodRule(), message:MESSAGE2)
-    private static final VIOLATION3 = new Violation(rule:new EmptyCatchBlockRule(), sourceLine:'333', message:MESSAGE3 )
+    private static final VIOLATION3 = new Violation(rule:new EmptyCatchBlockRule(), sourceLine:'333', message:MESSAGE3)
 
     private BaselineXmlReportWriter reportWriter = new BaselineXmlReportWriter()
     private DirectoryResults results

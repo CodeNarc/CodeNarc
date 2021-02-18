@@ -197,7 +197,7 @@ class SpaceAroundOperatorAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private void checkAssignmentWithinString(ASTNode node, String string ) {
+    private void checkAssignmentWithinString(ASTNode node, String string) {
         if (!(string =~ '\\s=')) {
             addViolationForOperator(node, '=', PRECEDED)
         }

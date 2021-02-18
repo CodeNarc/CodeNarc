@@ -180,7 +180,7 @@ class IfStatementCouldBeTernaryRuleTest extends AbstractRuleTestCase<IfStatement
             [lineNumber:3, sourceLineText:'if (condition)',
                 messageText:"The if statement in class None can be rewritten using the ternary operator: return condition ? 44 : 'yes'"],
             [lineNumber:9, sourceLineText:'if (check())',
-                messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? Boolean.FALSE : [1, 2]'] )
+                messageText:'The if statement in class None can be rewritten using the ternary operator: return this.check() ? Boolean.FALSE : [1, 2]'])
     }
 
     @Test

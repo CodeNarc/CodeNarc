@@ -4,10 +4,11 @@
 TODO Version 2.1.0    (??? 2021)
 --------------------------------------
 New Rules
-- #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
-- #586: New **SpaceAfterMethodCallName** rule (formatting) - Checks that there is no whitespace after the method name when a method call contains parenthesis or that there is at most one space after the method name if the call does not contain parenthesis. ([Marcin Erdmann](https://github.com/erdi))
-- #584: New **SpaceAfterMethodDeclarationName** rule (formatting) - Checks whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis for parameter list. ([Marcin Erdmann](https://github.com/erdi))
-- #582: New **MissingBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
+ - #580: New **SpaceAfterNotOperator** rule (formatting) - Checks if whitespace does directly follow usages of not operator. ([Marcin Erdmann](https://github.com/erdi))
+ - #586: New **SpaceAfterMethodCallName** rule (formatting) - Checks that there is no whitespace after the method name when a method call contains parenthesis or that there is at most one space after the method name if the call does not contain parenthesis. ([Marcin Erdmann](https://github.com/erdi))
+ - #584: New **SpaceAfterMethodDeclarationName** rule (formatting) - Checks whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis for parameter list. ([Marcin Erdmann](https://github.com/erdi))
+ - #582: New **MissingBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
+ - #592: New **SpaceInsideParentheses** rule (formatting) - Check for whitespace after opening parentheses and before closing parentheses.
 
 Updated/Enhanced Rules and Bug Fixes
  - #567: **SpaceAfterComma** rule: Do not assume that expression's column number will always be set. ([Marcin Erdmann](https://github.com/erdi))

@@ -58,7 +58,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'java.math.BigDecimal amount = 42.10', messageText:'java.math'],
             [lineNumber:4, sourceLineText:'java.lang.Integer count = 0', messageText:'java.lang'],
-            [lineNumber:5, sourceLineText:'java.util.Map mapping', messageText:'java.util'] )
+            [lineNumber:5, sourceLineText:'java.util.Map mapping', messageText:'java.util'])
     }
 
     @Test
@@ -71,7 +71,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'if (value.class == java.math.BigDecimal) { }', messageText:'java.math'],
             [lineNumber:3, sourceLineText:'println "isClosure=${value instanceof groovy.lang.Closure}"', messageText:'groovy.lang'],
-            [lineNumber:4, sourceLineText:'def processors = java.lang.Runtime.availableProcessors()', messageText:'java.lang'] )
+            [lineNumber:4, sourceLineText:'def processors = java.lang.Runtime.availableProcessors()', messageText:'java.lang'])
     }
 
     @Test
@@ -84,7 +84,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         '''
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:"def amount = new java.math.BigDecimal('42.10')", messageText:'java.math'],
-            [lineNumber:4, sourceLineText:"def url = new java.net.URL('http://abc@example.com')", messageText:'java.net'] )
+            [lineNumber:4, sourceLineText:"def url = new java.net.URL('http://abc@example.com')", messageText:'java.net'])
     }
 
     @Test
@@ -131,7 +131,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         assertViolations(SOURCE,
             [lineNumber:3, sourceLineText:'java.math.BigInteger maxValue = 0', messageText:'java.math'],
             [lineNumber:4, sourceLineText:'java.net.URI uri', messageText:'java.net'],
-            [lineNumber:5, sourceLineText:"groovy.lang.Closure closure = { println 'ok' }", messageText:'groovy.lang'] )
+            [lineNumber:5, sourceLineText:"groovy.lang.Closure closure = { println 'ok' }", messageText:'groovy.lang'])
     }
 
     @Test
@@ -146,7 +146,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'java.net.Socket getSocket() { }', messageText:'java.net'],
             [lineNumber:3, sourceLineText:'java.io.Reader getReader() { }', messageText:'java.io'],
-            [lineNumber:4, sourceLineText:'groovy.util.AntBuilder getAntBuilder() { }', messageText:'groovy.util'] )
+            [lineNumber:4, sourceLineText:'groovy.util.AntBuilder getAntBuilder() { }', messageText:'groovy.util'])
     }
 
     @Test
@@ -158,7 +158,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'void writeCount(java.io.Writer writer, int count)', messageText:'java.io'],
-            [lineNumber:3, sourceLineText:'void initializeBinding(String name, groovy.lang.Binding binding) { }', messageText:'groovy.lang'] )
+            [lineNumber:3, sourceLineText:'void initializeBinding(String name, groovy.lang.Binding binding) { }', messageText:'groovy.lang'])
     }
 
     @Test
@@ -170,7 +170,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'def writeCount = { java.io.Writer writer, int count -> }', messageText:'java.io'],
-            [lineNumber:3, sourceLineText:'def initializeBinding = { String name, groovy.lang.Binding binding -> }', messageText:'groovy.lang'] )
+            [lineNumber:3, sourceLineText:'def initializeBinding = { String name, groovy.lang.Binding binding -> }', messageText:'groovy.lang'])
     }
 
     @Test
@@ -181,7 +181,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'class MyHashMap extends java.util.HashMap { }', messageText:'java.util'],
-            [lineNumber:3, sourceLineText:'interface MyList extends java.util.List { }', messageText:'java.util'] )
+            [lineNumber:3, sourceLineText:'interface MyList extends java.util.List { }', messageText:'java.util'])
     }
 
     @Test
@@ -201,7 +201,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         '''
         assertViolations(SOURCE,
             [lineNumber:2, sourceLineText:'class MyList implements java.util.List { }', messageText:'java.util'],
-            [lineNumber:3, sourceLineText:'class MyRange implements groovy.lang.Range { }', messageText:'groovy.lang'] )
+            [lineNumber:3, sourceLineText:'class MyRange implements groovy.lang.Range { }', messageText:'groovy.lang'])
     }
 
     @Test
@@ -243,7 +243,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         '''
         assertViolations(SOURCE,
             [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
-            [lineNumber:8, sourceLineText:'def dataSource = [:] as javax.sql.DataSource', messageText:'javax.sql.DataSource'] )
+            [lineNumber:8, sourceLineText:'def dataSource = [:] as javax.sql.DataSource', messageText:'javax.sql.DataSource'])
     }
 
     @Test
@@ -262,7 +262,7 @@ class UnnecessaryPackageReferenceRuleTest extends AbstractRuleTestCase<Unnecessa
         '''
         assertViolations(SOURCE,
             [lineNumber:7, sourceLineText:'void doStuff(javax.servlet.http.Cookie cookie, Cookie[] cookies)', messageText:'javax.servlet.http.Cookie'],
-            [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'] )
+            [lineNumber:8, sourceLineText:'def dataSource = new javax.sql.DataSource()', messageText:'javax.sql.DataSource'])
     }
 
     @Test

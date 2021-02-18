@@ -62,7 +62,7 @@ class SpaceAfterSemicolonRuleTest extends AbstractRuleTestCase<SpaceAfterSemicol
             [lineNumber:4, sourceLineText:'println 1;println 2', messageText:'The statement "println 2"'],
             [lineNumber:5, sourceLineText:'int i=0;i++;println i', messageText:'The statement "i++"'],
             [lineNumber:5, sourceLineText:'int i=0;i++;println i', messageText:'The statement "println i"'],
-            [lineNumber:6, sourceLineText:'def closure = { x -> println x;x = 23; }', messageText:'The statement "x = 23"'] )
+            [lineNumber:6, sourceLineText:'def closure = { x -> println x;x = 23; }', messageText:'The statement "x = 23"'])
     }
 
     // Tests for classic for statements
@@ -105,7 +105,7 @@ class SpaceAfterSemicolonRuleTest extends AbstractRuleTestCase<SpaceAfterSemicol
         assertViolations(SOURCE,
             [lineNumber:4, sourceLineText:'for (int i=0;i<10;i++) {', messageText:'The for loop expression "i<10"'],
             [lineNumber:4, sourceLineText:'for (int i=0;i<10;i++) {', messageText:'The for loop expression "i++"'] ,
-            [lineNumber:5, sourceLineText:'for (int j=0; j < 10;j++) { }', messageText:'The for loop expression "j++"'] )
+            [lineNumber:5, sourceLineText:'for (int j=0; j < 10;j++) { }', messageText:'The for loop expression "j++"'])
     }
 
     @Override
