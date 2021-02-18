@@ -340,7 +340,7 @@ class UnusedVariableRuleTest extends AbstractRuleTestCase<UnusedVariableRule> {
             for (int i = 0; ;) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'for (int i = 0; ; )', messageText:'i'])
+            [lineNumber:2, sourceLineText:'for (int i = 0; ;)', messageText:'i'])
     }
 
     @Test

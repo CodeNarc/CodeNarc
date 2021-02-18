@@ -140,6 +140,40 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
     }
 
     @Test
+    void test_Multiline_GStrings() {
+        final SOURCE = '''
+            def a = """xxx ( 0 )"""
+            def b = """line1
+                line2 ( 2 )
+                line3 ( 3 )"""
+            def c = ( 99)
+            def d = """
+                line1 ( 1 )
+                """
+            def e = ["""xxx ( 0 )""", """yyy ( 1 )""", """zzz ( 2 )"""]
+        '''
+        assertViolations(SOURCE,
+                [lineNumber:6, sourceLineText:'def c = ( 99)', messageText: ERROR_MESSAGE_OPENING])
+    }
+
+    @Test
+    void test_Multiline_Strings() {
+        final SOURCE = """
+            def a = '''xxx ( 0 )'''
+            def b = '''line1
+                line2 ( 2 )
+                line3 ( 3 )'''
+            def c = ( 99)
+            def d = '''
+                line1 ( 1 )
+                '''
+            def e = ['''xxx ( 0 )''', '''yyy ( 1 )''', '''zzz ( 2 )''']
+        """
+        assertViolations(SOURCE,
+                [lineNumber:6, sourceLineText:'def c = ( 99)', messageText: ERROR_MESSAGE_OPENING])
+    }
+
+    @Test
     void test_ParenthesesWithinStrings_NoViolations() {
         final SOURCE = '''
             def v1 = " ( ) ^ % # "

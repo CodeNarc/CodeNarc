@@ -39,6 +39,9 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
     private static final String SINGLE_QUOTE = "'"
     private static final String DOUBLE_QUOTE = '"'
 
+    private boolean withinMultilineGString = false
+    private boolean withinMultilineString = false
+
     @Override
     protected void visitClassComplete(ClassNode node) {
         if (node.lineNumber < 0) {
@@ -58,6 +61,22 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
     private void processSourceLine(String line, int lineNumber) {
         String text = stripComments(line.trim())
 
+        def countTripleDoubleQuote = text.count('"""')
+        if (countTripleDoubleQuote || withinMultilineGString) {
+            if (isOdd(countTripleDoubleQuote)) {
+                withinMultilineGString = !withinMultilineGString
+            }
+            return
+        }
+
+        def countTripleSingleQuote = text.count("'''")
+        if (countTripleSingleQuote || withinMultilineString) {
+            if (isOdd(countTripleSingleQuote)) {
+                withinMultilineString = !withinMultilineString
+            }
+            return
+        }
+
         if (hasSpaceAfterOpeningParenthesis(text)) {
             addViolation(new Violation(rule: rule, lineNumber: lineNumber, sourceLine: text, message: MESSAGE_SPACE_AFTER_OPENING_PARENTHESIS))
         }
@@ -67,8 +86,13 @@ class SpaceInsideParenthesesAstVisitor extends AbstractAstVisitor {
         }
     }
 
-    private String stripComments(String text) {
+    private boolean isOdd(int number) {
+        return number % 2 != 0
+    }
+
+    private String stripComments(String fullText) {
         // Strip off from // or /* to the end of line
+        def text = fullText
         int startCommentIndex = startOfCommentIndex(text)
         if (startCommentIndex != -1) {
             text = text.substring(0, startCommentIndex)

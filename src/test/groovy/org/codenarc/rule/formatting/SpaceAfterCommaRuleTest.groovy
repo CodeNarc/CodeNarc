@@ -114,7 +114,7 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
             def value2 = calculate('\\u00A0',399,'abc'       ,17)
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:"def value1 = calculate( { '\\u00A0' },12)", messageText:'The parameter 12'],
+            [lineNumber:2, sourceLineText:"def value1 = calculate({ '\\u00A0' },12)", messageText:'The parameter 12'],
             [lineNumber:3, sourceLineText:"def value2 = calculate('\\u00A0',399,'abc'       ,17)", messageText:'The parameter 399'],
             [lineNumber:3, sourceLineText:"def value2 = calculate('\\u00A0',399,'abc'       ,17)", messageText:'The parameter abc'],
             [lineNumber:3, sourceLineText:"def value2 = calculate('\\u00A0',399,'abc'       ,17)", messageText:'The parameter 17'])
