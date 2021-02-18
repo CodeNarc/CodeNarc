@@ -634,7 +634,7 @@ File: unnecessary/UnnecessaryToStringRuleTest.groovy
                 }
             }
         ' contains a GString-type expression: '${'prefix' + object.toString()}'] Src=[final SOURCE = ''']
-    Violation: Rule=GStringExpressionWithinString P=2 Line=84 Msg=[The String 'def withinGString = "processing: ${'prefix' + object.toString()}"' contains a GString-type expression: '${'prefix' + object.toString()}'] Src=[[lineNumber:8, sourceLineText:'def withinGString = "processing: ${\'prefix\' + object.toString()}"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'] )]
+    Violation: Rule=GStringExpressionWithinString P=2 Line=84 Msg=[The String 'def withinGString = "processing: ${'prefix' + object.toString()}"' contains a GString-type expression: '${'prefix' + object.toString()}'] Src=[[lineNumber:8, sourceLineText:'def withinGString = "processing: ${\'prefix\' + object.toString()}"', messageText:'Calling toString() on [object] in class MyClass is unnecessary'])]
     Violation: Rule=GStringExpressionWithinString P=2 Line=89 Msg=[The String '
             def string = "some string${123L.toString()} or ${123} or ${'ABC'} or ${new Date().toString()}"
             def string2 = """
