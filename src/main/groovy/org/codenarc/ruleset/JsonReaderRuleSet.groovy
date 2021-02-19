@@ -19,6 +19,8 @@ import groovy.json.JsonSlurper
 import org.codenarc.rule.Rule
 import org.codenarc.ruleregistry.RuleRegistryHolder
 import org.codenarc.util.PropertyUtil
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * A <code>RuleSet</code> implementation that parses Rule definitions from Json read from a
@@ -28,6 +30,8 @@ import org.codenarc.util.PropertyUtil
  * @author Nicolas Vuillamy
   */
 class JsonReaderRuleSet implements RuleSet {
+
+    private static final Logger LOG = LoggerFactory.getLogger(JsonReaderRuleSet)
 
     private final List rules = []
 
@@ -61,13 +65,16 @@ class JsonReaderRuleSet implements RuleSet {
             // ruleName can be a CodeNarc class or just RuleName
             def ruleNameSplit = ruleName.tokenize('.')
             def ruleClassName = ruleNameSplit.size() > 2 ? ruleName : // ex: org.codenarc.rule.exception.CatchThrowableRule
-                            RuleRegistryHolder.ruleRegistry?.getRuleClass(ruleName).name // ex: CatchThrowableRule
-            assert ruleClassName != 'null', 'Unable to identify class from string ' + ruleName
-            def ruleClass = getClass().classLoader.loadClass(ruleClassName)
-            RuleSetUtil.assertClassImplementsRuleInterface(ruleClass)
-            def rule = ruleClass.newInstance()
-            rules << rule
-            setRuleProperties(ruleParams, rule)
+                            RuleRegistryHolder.ruleRegistry?.getRuleClass(ruleName)?.name // ex: CatchThrowableRule
+            if (ruleClassName == null) {
+                LOG.warn("Unable to identify rule class from string: " + ruleName)
+            } else {
+                def ruleClass = getClass().classLoader.loadClass(ruleClassName)
+                RuleSetUtil.assertClassImplementsRuleInterface(ruleClass)
+                def rule = ruleClass.newInstance()
+                rules << rule
+                setRuleProperties(ruleParams, rule)
+            }
         }
     }
 
