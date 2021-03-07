@@ -25,6 +25,10 @@ Build and Infrastructure
  - #573: Add Dockerfile to build CodeNarc Docker image using Gradle and Shadowjar.
  - #589: Upgrade to Groovy 2.5.14 (minor patch release), to address CVE-2020-17521. Note: CodeNarc does not use any of the vulnerable Groovy components.
  - #593: Command-line: Catch exception during rule processing, log error message with rule/filename and keep going.
+ - #601: Publish Javadocs. <https://javadoc.io/doc/org.codenarc/CodeNarc>
+
+Documentation
+ - #594: Fix a typo in online docs for **Instanceof**, changing "*Exceptions" to "*Exception".  ([qxo](https://github.com/qxo))
 
 Version 2.0.0    (Oct 2020)
 --------------------------------------
