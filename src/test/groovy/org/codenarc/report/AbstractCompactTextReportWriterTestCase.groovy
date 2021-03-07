@@ -33,7 +33,7 @@ import static org.junit.Assert.assertEquals
  *
  * @author Luis Zimmermann
  */
-abstract class AbstractInlineConsoleReportWriterTestCase extends AbstractTestCase {
+abstract class AbstractCompactTextReportWriterTestCase extends AbstractTestCase {
 
     protected static final int LINE1 = 11
     protected static final int LINE2 = 2
@@ -44,7 +44,7 @@ abstract class AbstractInlineConsoleReportWriterTestCase extends AbstractTestCas
     protected static final String MESSAGE3 = 'Other info'
     protected static final Violation VIOLATION1 = new Violation(rule:new StubRule(name:'Rule1', priority:1), lineNumber:LINE1, sourceLine:SOURCE_LINE1)
     protected static final Violation VIOLATION2 = new Violation(rule:new StubRule(name:'AnotherRule', priority:2), lineNumber:LINE2, message:MESSAGE2)
-    protected static final Violation VIOLATION3 = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3 )
+    protected static final Violation VIOLATION3 = new Violation(rule:new StubRule(name:'BadStuff', priority:3), lineNumber:LINE3, sourceLine:SOURCE_LINE3, message:MESSAGE3)
     protected static final String SRC_DIR1 = 'c:/MyProject/src/main/groovy'
     protected static final String SRC_DIR2 = 'c:/MyProject/src/test/groovy'
     protected static final String VERSION_FILE = 'src/main/resources/codenarc-version.txt'
@@ -60,7 +60,7 @@ abstract class AbstractInlineConsoleReportWriterTestCase extends AbstractTestCas
     // Abstract declarations
     //------------------------------------------------------------------------------------
 
-    protected abstract InlineConsoleReportWriter createReportWriter()
+    protected abstract CompactTextReportWriter createReportWriter()
     protected abstract String getReportText()
 
     //------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ abstract class AbstractInlineConsoleReportWriterTestCase extends AbstractTestCas
     //------------------------------------------------------------------------------------
 
     @Before
-    void setUpAbstractInlineConsoleReportWriterTestCase() {
+    void setUpAbstractCompactTextReportWriterTestCase() {
         reportWriter = createReportWriter()
         reportWriter.getTimestamp = { TIMESTAMP_DATE }
 

@@ -60,9 +60,9 @@ class ReportWriterFactoryTest extends AbstractTestCase {
     }
 
     @Test
-    void testGetReportWriter_InlineConsole() {
-        def reportWriter = reportWriterFactory.getReportWriter('inlineConsole')
-        assert reportWriter.class == InlineConsoleReportWriter
+    void testGetReportWriter_Compact() {
+        def reportWriter = reportWriterFactory.getReportWriter('compact')
+        assert reportWriter.class == CompactTextReportWriter
         assert reportWriter.writeToStandardOut
     }
 

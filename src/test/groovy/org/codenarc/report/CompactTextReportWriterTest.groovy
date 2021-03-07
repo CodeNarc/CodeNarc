@@ -16,11 +16,11 @@
 package org.codenarc.report
 
 /**
- * Tests for TestReportWriter
+ * Tests for CompactTextReportWriter
  *
  * @author Luis Zimmermann
  */
-class InlineConsoleReportWriterTest extends AbstractInlineConsoleReportWriterTestCase {
+class CompactTextReportWriterTest extends AbstractCompactTextReportWriterTestCase {
 
     private static final REPORT_TEXT = """
 src/main/MyAction.groovy:11:Rule1 null
@@ -34,8 +34,8 @@ src/main/dao/MyOtherDao.groovy:2:AnotherRule bad stuff: !@#\$%^&*()_+<>
 """.trim()
 
     @Override
-    protected InlineConsoleReportWriter createReportWriter() {
-        return new InlineConsoleReportWriter()
+    protected CompactTextReportWriter createReportWriter() {
+        return new CompactTextReportWriter()
     }
 
     @Override

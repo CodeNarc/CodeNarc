@@ -29,7 +29,7 @@ import org.codenarc.results.Results
  *
  * @author Luis Zimmermann
  */
-class InlineConsoleReportWriter extends AbstractReportWriter {
+class CompactTextReportWriter extends AbstractReportWriter {
 
     int maxPriority = 3
 
