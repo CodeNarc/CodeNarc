@@ -20,7 +20,7 @@ import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 
 /**
- * ReportWriter that generates an simple inline ASCII text report.
+ * ReportWriter that generates an simple ASCII text report, with one line per violation.
  *
  * Set the maxPriority property to control the maximum priority level for violations in
  * the report. For instance, setting maxPriority to 2 will result in the report containing
@@ -31,6 +31,7 @@ import org.codenarc.results.Results
  */
 class CompactTextReportWriter extends AbstractReportWriter {
 
+    String defaultOutputFile = 'CodeNarcReport.txt'
     int maxPriority = 3
 
     @Override
