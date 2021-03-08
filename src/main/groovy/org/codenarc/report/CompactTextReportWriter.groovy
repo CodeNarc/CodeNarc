@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package org.codenarc.report
 
-import org.codenarc.AnalysisContext
 import org.codenarc.results.FileResults
 import org.codenarc.results.Results
 
@@ -28,29 +27,23 @@ import org.codenarc.results.Results
  * maxPriority property defaults to 3.
  *
  * @author Luis Zimmermann
+ * @author Chris Mair
  */
-class CompactTextReportWriter extends AbstractReportWriter {
-
-    String defaultOutputFile = 'CodeNarcReport.txt'
-    int maxPriority = 3
+class CompactTextReportWriter extends TextReportWriter {
 
     @Override
-    void writeReport(Writer writer, AnalysisContext analysisContext, Results results) {
-        initializeResourceBundle()
-        def printWriter = new PrintWriter(writer)
-        writePackageViolations(printWriter, results)
-        printWriter.flush()
+    protected void writeTitle(Writer writer) {
+        // do nothing; no title
     }
 
-    protected void writePackageViolations(Writer writer, Results results) {
-        results.children.each { child ->
-            if (child.isFile()) {
-                writeFileViolations(writer, child)
-            }
-            else {
-                writePackageViolations(writer, child)
-            }
-        }
+    @Override
+    protected void writeSummary(Writer writer, Results results) {
+        // do nothing; no summary
+    }
+
+    @Override
+    protected void writeFooter(Writer writer) {
+        // do nothing; no footer
     }
 
     protected void writeFileViolations(Writer writer, FileResults results) {
