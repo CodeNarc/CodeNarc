@@ -107,6 +107,23 @@ class SourceCodeUtilTest extends AbstractTestCase {
         assert lines[0] == ''
         assert lines[1] == '        '
     }
+
+    @Test
+    void test_isAscii() {
+        assert SourceCodeUtil.isAscii('a' as char)
+        assert SourceCodeUtil.isAscii('9' as char)
+
+        assert SourceCodeUtil.isAscii('\u00A0' as char) == false
+        assert SourceCodeUtil.isAscii(199 as char) == false
+    }
+
+    @Test
+    void test_containsOnlyAsciiCharacters() {
+        assert SourceCodeUtil.containsOnlyAsciiCharacters('') == true
+        assert SourceCodeUtil.containsOnlyAsciiCharacters('abc9$%&*()_+-=!@#') == true
+
+        assert SourceCodeUtil.containsOnlyAsciiCharacters('\u00A0xxx') == false
+    }
 }
 
 class SourceCodeUtilTestVisitor extends ClassCodeVisitorSupport {

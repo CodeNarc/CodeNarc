@@ -22,8 +22,18 @@ import org.codenarc.source.SourceCode
  * Contains source related static utility methods
  *
  * @author Marcin Erdmann
+ * @author Chris Mair
  */
 class SourceCodeUtil {
+
+    static boolean containsOnlyAsciiCharacters(String string) {
+        return string.every { ch -> isAscii(ch.toCharacter()) }
+    }
+
+    static boolean isAscii(char ch) {
+        return ch < 128
+    }
+
     static List<String> nodeSourceLines(SourceCode source, ASTNode node) {
         sourceLinesBetween(source, node.lineNumber, node.columnNumber, node.lastLineNumber, node.lastColumnNumber)
     }

@@ -27,6 +27,7 @@ import org.codehaus.groovy.ast.expr.MapExpression
 import org.codehaus.groovy.ast.expr.Expression
 import org.codenarc.util.AstUtil
 import org.codenarc.util.GroovyVersion
+import org.codenarc.util.SourceCodeUtil
 
 /**
  * Check that there is at least one space (blank) or whitespace following each comma. That includes checks
@@ -100,7 +101,8 @@ class SpaceAfterCommaAstVisitor extends AbstractAstVisitor {
                     String previousChar = line[e.columnNumber - 2]
 
                     char ch = previousChar as char
-                    if (ch == COMMA) {
+                    // Ignore line if it contains non-ASCII chars; they are nothing but trouble for column indexes
+                    if (ch == COMMA && SourceCodeUtil.containsOnlyAsciiCharacters(line)) {
                         addViolation(call, "The parameter ${e.text} in the call to method ${call.methodAsString} within class $currentClassName is not preceded by a space or whitespace")
                     }
                 }

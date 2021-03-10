@@ -133,6 +133,14 @@ class SpaceAfterCommaRuleTest extends AbstractRuleTestCase<SpaceAfterCommaRule> 
             [lineNumber:3, sourceLineText:"def value = calculate(1,399,'abc',count)", messageText:'The parameter count'])
     }
 
+    @Test
+    void testApplyTo_MethodCall_EmojiInString_NoViolations() {
+        final SOURCE = '''
+            slack.send('I failed you miserably, master 😿', 'RED-COLOR')
+        '''
+        assertNoViolations(SOURCE)
+    }
+
     // Tests for method declarations
 
     @Test

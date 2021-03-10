@@ -18,6 +18,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #578: **UnusedPrivateField** rule: Add ability to raise violations for fields which are only used within constructors. ([Marcin Erdmann](https://github.com/erdi))
  - #561: **VariableName** rule: Ignore variables with the `@Field` annotation.
  - #590: **ClassStartsWithBlankLine**: Fix NullPointerException on single-line class at very end of file (no newline).
+ - #599: **SpaceAfterComma**: Fix false positive if source line contains Emoji (non-ASCII chars) on Groovy 3.
 
 Build and Infrastructure
  - #574: CodeNarc command-line: Support `-properties` command-line argument to specify name/location for "codenarc.properties" file.
