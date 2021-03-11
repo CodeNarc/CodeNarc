@@ -5,7 +5,7 @@ title: CodeNarc - Rule Index
 
 # Rule Index
 
-**CodeNarc** includes 388 rules.
+**CodeNarc** includes 393 rules.
     
 ## [Basic](./codenarc-rules-basic.html)
   * [AssertWithinFinallyBlock](./codenarc-rules-basic.html#assertwithinfinallyblock-rule)  
@@ -211,11 +211,15 @@ title: CodeNarc - Rule Index
   * [LineLength](./codenarc-rules-formatting.html#linelength-rule)  
   * [MissingBlankLineAfterImports](./codenarc-rules-formatting.html#missingblanklineafterimports-rule)  
   * [MissingBlankLineAfterPackage](./codenarc-rules-formatting.html#missingblanklineafterpackage-rule)  
+  * [MissingBlankLineBeforeAnnotatedField](./codenarc-rules-formatting.html#missingblanklinebeforeannotatedfield-rule)  
   * [SpaceAfterCatch](./codenarc-rules-formatting.html#spaceaftercatch-rule)  
   * [SpaceAfterClosingBrace](./codenarc-rules-formatting.html#spaceafterclosingbrace-rule)  
   * [SpaceAfterComma](./codenarc-rules-formatting.html#spaceaftercomma-rule)  
   * [SpaceAfterFor](./codenarc-rules-formatting.html#spaceafterfor-rule)  
   * [SpaceAfterIf](./codenarc-rules-formatting.html#spaceafterif-rule)  
+  * [SpaceAfterMethodCallName](./codenarc-rules-formatting.html#spaceaftermethodcallname-rule)  
+  * [SpaceAfterMethodDeclarationName](./codenarc-rules-formatting.html#spaceaftermethoddeclarationname-rule)  
+  * [SpaceAfterNotOperator](./codenarc-rules-formatting.html#spaceafternotoperator-rule)  
   * [SpaceAfterOpeningBrace](./codenarc-rules-formatting.html#spaceafteropeningbrace-rule)  
   * [SpaceAfterSemicolon](./codenarc-rules-formatting.html#spaceaftersemicolon-rule)  
   * [SpaceAfterSwitch](./codenarc-rules-formatting.html#spaceafterswitch-rule)  
@@ -225,6 +229,7 @@ title: CodeNarc - Rule Index
   * [SpaceAroundOperator](./codenarc-rules-formatting.html#spacearoundoperator-rule)  
   * [SpaceBeforeClosingBrace](./codenarc-rules-formatting.html#spacebeforeclosingbrace-rule)  
   * [SpaceBeforeOpeningBrace](./codenarc-rules-formatting.html#spacebeforeopeningbrace-rule)  
+  * [SpaceInsideParentheses](./codenarc-rules-formatting.html#spaceinsideparentheses-rule)  
   * [TrailingWhitespace](./codenarc-rules-formatting.html#trailingwhitespace-rule)  
 
 ## [Generic](./codenarc-rules-generic.html)
