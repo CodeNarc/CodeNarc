@@ -16,7 +16,6 @@
 package org.codenarc.rule.formatting
 
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
-import org.codehaus.groovy.ast.expr.Expression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
@@ -38,7 +37,8 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
     void visitConstructorCallExpression(ConstructorCallExpression call) {
         if (isFirstVisit(call)) {
             if (call.superCall) {
-                if (isBlankAtIndexFromExpressionStart(call, -2)) {
+                String superCallSourceText = sourceLine(call).substring(call.columnNumber - 2, call.arguments.columnNumber)
+                if (superCallSourceText.contains(' (')) {
                     addViolation(call, 'There is whitespace between super and parenthesis in a constructor call.')
                 }
             } else {
@@ -54,35 +54,21 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
         sourceLine(call).substring(call.columnNumber - 1) =~ /^[^(]+\s\(/
     }
 
-    private boolean isBlankAtIndexFromExpressionStart(Expression expression, int index) {
-        def columnNumber = expression.columnNumber
-
-        columnNumber + index >= 0 && sourceLine(expression)[expression.columnNumber + index].allWhitespace
-    }
-
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
         def method = call.method
         def arguments = call.arguments
-        if (isFirstVisit(call) &&
-                method.lineNumber == arguments.lineNumber &&
-                method.lastColumnNumber + 1 < arguments.columnNumber &&
-                sourceLine(method)[method.lastColumnNumber - 1] != '('
-        ) {
-            def message = hasArgsInParenthesis(call) ?
-                    'There is whitespace between method name and parenthesis in a method call.' :
-                    'There is more than one space between method name and arguments in a method call.'
-
-            addViolation(call, message)
+        if (isFirstVisit(call) && method.lineNumber == arguments.lineNumber) {
+            String methodCallSourceText = sourceLine(method).substring(method.lastColumnNumber - 1, arguments.columnNumber)
+            if (methodCallSourceText.contains('  ')) {
+                addViolation(call, 'There is more than one space between method name and arguments in a method call.')
+            }
+            else if (methodCallSourceText.contains(' (')) {
+                addViolation(call, 'There is whitespace between method name and parenthesis in a method call.')
+            }
         }
 
         super.visitMethodCallExpression(call)
     }
 
-    private boolean hasArgsInParenthesis(MethodCallExpression methodCallExpression) {
-        def arguments = methodCallExpression.arguments
-        def charcterBeforeFirstArgument = sourceLine(arguments)[arguments.columnNumber - 2]
-
-        charcterBeforeFirstArgument == '('
-    }
 }
