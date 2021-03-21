@@ -1,3 +1,7 @@
+
+#TODO: Sort the following line into the file
+- ParameterAssignmentInFilter rule (basic) - An assignment operator was used on a parameter in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.
+
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 

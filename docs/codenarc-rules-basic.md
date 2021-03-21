@@ -852,3 +852,23 @@ Here is an example of code that produces a violation:
     }
 ```
 
+
+## AssignmentInFilter Rule
+
+<Since CodeNarc 2.0.0>
+
+An assignment operator was used on a parameter in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.
+
+Example of violations:
+
+```
+    List someList = [1,2,3]
+    someList.find {it == 2}
+    someList.find {it = 2} // violation, this actually finds 1 instead.
+    someList.find { Integer integer ->
+        integer == 2
+    }
+    someList.find { Integer integer ->
+        integer = 2  // violation, this actually finds 1 instead.
+    }
+```
