@@ -51,4 +51,5 @@
     <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>
     <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
     <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.ParameterAssignmentInFilterClosureRule'/>
 </ruleset>
