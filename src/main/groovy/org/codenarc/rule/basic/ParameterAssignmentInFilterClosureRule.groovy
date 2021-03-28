@@ -30,25 +30,25 @@ import org.codenarc.util.AstUtil
  *
  * @author Morten Kristiansen
  */
-class ParameterAssignmentInFilterRule extends AbstractAstVisitorRule {
+class ParameterAssignmentInFilterClosureRule extends AbstractAstVisitorRule {
 
-    String name = 'ParameterAssignmentInFilter'
+    String name = 'ParameterAssignmentInFilterClosure'
     int priority = 2
-    Class astVisitorClass = ParameterAssignmentInFilterAstVisitor
+    Class astVisitorClass = ParameterAssignmentInFilterClosureAstVisitor
 }
 
-class ParameterAssignmentInFilterAstVisitor extends AbstractAstVisitor {
+class ParameterAssignmentInFilterClosureAstVisitor extends AbstractAstVisitor {
 
-    private static final List<String> FILTER_METHOD_NAMES = [
+    private static final String FILTER_METHOD_NAMES_MATCHER = [
             'find', 'findAll', 'findIndexOf', 'every', 'any', 'filter', 'grep', 'dropWhile', 'takeWhile'
-    ]
+    ].join('|')
 
     public static final String ERROR_MESSAGE = 'An assignment operator was used on a parameter in a filtering closure.' +
             ' This is usually a typo, and the comparison operator (==) was intended.'
 
     @Override
     void visitMethodCallExpression(MethodCallExpression call) {
-        if (AstUtil.isMethodNamed(call, FILTER_METHOD_NAMES.join('|'))) {
+        if (AstUtil.isMethodNamed(call, FILTER_METHOD_NAMES_MATCHER)) {
             def arguments = AstUtil.getMethodArguments(call)
             if (arguments.size() > 0 && arguments.last() instanceof ClosureExpression) {
                 ClosureExpression last = arguments.last()

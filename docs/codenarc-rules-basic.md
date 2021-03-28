@@ -853,11 +853,13 @@ Here is an example of code that produces a violation:
 ```
 
 
-## AssignmentInFilter Rule
+## ParameterAssignmentInFilterClosure Rule
 
 <Since CodeNarc 2.0.0>
 
-An assignment operator was used on a parameter in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.
+An assignment operator was used on a parameter, or a property or subproperty of the parameter, in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.
+
+This rule will check the following filter methods: `find`, `findAll`, `findIndexOf`, `every`, `any`, `filter`, `grep`, `dropWhile` and `takeWhile`.
 
 Example of violations:
 

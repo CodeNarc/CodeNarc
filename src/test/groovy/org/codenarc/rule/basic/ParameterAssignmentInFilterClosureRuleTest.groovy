@@ -19,18 +19,18 @@ import org.junit.Test
 import org.codenarc.rule.AbstractRuleTestCase
 
 /**
- * Tests for ParameterAssignmentInFilterRule
+ * Tests for ParameterAssignmentInFilterClosureRule
  *
  * @author Morten Kristiansen
  */
-class ParameterAssignmentInFilterRuleTest extends AbstractRuleTestCase<ParameterAssignmentInFilterRule> {
+class ParameterAssignmentInFilterClosureRuleTest extends AbstractRuleTestCase<ParameterAssignmentInFilterClosureRule> {
 
     private static final String VIOLATION_MESSAGE = 'An assignment operator was used on a parameter in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.'
 
     @Test
     void test_RuleProperties() {
         assert rule.priority == 2
-        assert rule.name == 'ParameterAssignmentInFilter'
+        assert rule.name == 'ParameterAssignmentInFilterClosure'
     }
 
     @Test
@@ -94,7 +94,7 @@ class ParameterAssignmentInFilterRuleTest extends AbstractRuleTestCase<Parameter
     }
 
     @Override
-    protected ParameterAssignmentInFilterRule createRule() {
-        new ParameterAssignmentInFilterRule()
+    protected ParameterAssignmentInFilterClosureRule createRule() {
+        new ParameterAssignmentInFilterClosureRule()
     }
 }
