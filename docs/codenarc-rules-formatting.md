@@ -464,6 +464,64 @@ applyToFilesMatching and doNotApplyToFilesMatching.
 | ignorePackageStatements     | If `true`, then do not apply this rule to package statements.| `true` |
 | ignoreLineRegex             | If specified, then ignore lines matching this regular expression.| `null` |
 
+## MissingBlankLineAfterImports Rule
+
+*Since CodeNarc 0.21*
+
+Makes sure there is a blank line after the imports of a source code file.
+
+Example of violation:
+
+```
+    import org.apache.commons.lang.StringUtils
+    class MyClass { }                       // violation
+```
+
+NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
+*doNotApplyToClassNames* rule configuration properties are not available. See
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
+
+
+## MissingBlankLineAfterPackage Rule
+
+*Since CodeNarc 0.21*
+
+Makes sure there is a blank line after the package statement of a source code file.
+
+Example of violation:
+
+```
+  package org.codenarc
+  import java.util.Date                     // violation
+
+  class MyClass {
+      void go() { /* ... */ }
+  }
+```
+
+NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
+*doNotApplyToClassNames* rule configuration properties are not available. See
+[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
+
+## MissingBlankLineBeforeAnnotatedField
+
+*Since CodeNarc 2.1*
+
+Checks that there is a blank line before a field declaration that uses annotations. Ignore field declarations where all annotations are on the same line as the field declaration.
+
+Examples of violations:
+```
+    class MyClass {
+        // No violations for field declarations preceded by a comment
+        @Delegate
+        AutoCloseable stream
+        
+        String publicField                  // violation
+        @PackageScope
+        String packageScopedField
+    }
+```
+
 ## SpaceAfterMethodDeclarationName Rule
 
 *Since CodeNarc 2.1*
@@ -500,64 +558,6 @@ Examples of violations:
     
     throw new Exception () //violation
     
-```
-
-## MissingBlankLineAfterImports Rule
-
-*Since CodeNarc 0.21*
-
-Makes sure there is a blank line after the imports of a source code file.
-
-Example of violation:
-
-```
-    import org.apache.commons.lang.StringUtils
-    class MyClass { }                       // violation
-```
-
-NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
-*doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
-  
-
-## MissingBlankLineAfterPackage Rule
-
-*Since CodeNarc 0.21*
-
-Makes sure there is a blank line after the package statement of a source code file.
-
-Example of violation:
-
-```
-  package org.codenarc
-  import java.util.Date                     // violation
-
-  class MyClass {
-      void go() { /* ... */ }
-  }
-```
-
-NOTE: This is a file-based rule, rather than an AST-based rule, so the *applyToClassNames* and
-*doNotApplyToClassNames* rule configuration properties are not available. See
-[Standard Properties for Configuring Rules](./codenarc-configuring-rules.html#standard-properties-for-configuring-rules).
-
-## MissingBlankLineBeforeAnnotatedField
-
-*Since CodeNarc 2.1*
-
-Checks that there is a blank line before a field declaration that uses annotations.
-
-Examples of violations:
-```
-    class MyClass {
-        // No violations for field declarations preceded by a comment
-        @Delegate
-        AutoCloseable stream
-        
-        String publicField                  // violation
-        @PackageScope
-        String packageScopedField
-    }
 ```
 
 ## SpaceAfterCatch Rule

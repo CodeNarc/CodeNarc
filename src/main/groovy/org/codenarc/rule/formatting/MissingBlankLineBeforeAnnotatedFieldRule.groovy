@@ -18,6 +18,7 @@ package org.codenarc.rule.formatting
 import org.codehaus.groovy.ast.FieldNode
 import org.codenarc.rule.AbstractAstVisitor
 import org.codenarc.rule.AbstractAstVisitorRule
+import org.codenarc.util.AstUtil
 
 /**
  * Checks that there is a blank line before a field declaration that uses annotations.
@@ -35,11 +36,16 @@ class MissingBlankLineBeforeAnnotatedFieldRuleAstVisitor extends AbstractAstVisi
     void visitField(FieldNode node) {
         if (node.annotations && node.lineNumber > 1) {
             def previousLine = sourceCode.line(node.lineNumber - 2).trim()
-            if (previousLine && !isComment(previousLine)) {
-                addViolation(node, 'There is no blank line before a field declaration that uses annotations.')
+            if (previousLine && !isComment(previousLine) && annotationsNotOnSameLineAsFieldDeclaration(node)) {
+                addViolation(node, 'There is no blank line before the declaration for field "' + node.name + '" that has annotations')
             }
         }
         super.visitField(node)
+    }
+
+    private boolean annotationsNotOnSameLineAsFieldDeclaration(FieldNode node) {
+        int firstNonAnnotationLine = AstUtil.findFirstNonAnnotationLine(node, sourceCode)
+        return node.annotations[0].lineNumber != firstNonAnnotationLine
     }
 
     private boolean isComment(String line) {

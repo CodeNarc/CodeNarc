@@ -66,7 +66,7 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
             }
         '''
 
-        assertSingleViolation(SOURCE, 4, 'Foo foo', 'There is no blank line before a field declaration that uses annotations.')
+        assertSingleViolation(SOURCE, 4, 'Foo foo', 'There is no blank line before the declaration for field "foo" that has annotations')
     }
 
     @Test
@@ -81,8 +81,8 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
         '''
 
         assertViolations(SOURCE,
-            [lineNumber: 4, sourceLineText: 'Foo firstAnnotatedField', messageText: 'There is no blank line before a field declaration that uses annotations.'],
-            [lineNumber: 6, sourceLineText: 'Bar secondAnnotatedField', messageText: 'There is no blank line before a field declaration that uses annotations.']
+            [lineNumber: 4, sourceLineText: 'Foo firstAnnotatedField', messageText: 'There is no blank line before the declaration for field "firstAnnotatedField" that has annotations'],
+            [lineNumber: 6, sourceLineText: 'Bar secondAnnotatedField', messageText: 'There is no blank line before the declaration for field "secondAnnotatedField" that has annotations']
         )
     }
 
@@ -92,17 +92,28 @@ class MissingBlankLineBeforeAnnotatedFieldRuleTest extends AbstractRuleTestCase<
             class Valid {
                 Foo firstAnnotatedField
                 @Delegate
-                @PackageScope
-                Bar secondAnnotatedField
+                @PackageScope Bar secondAnnotatedField
             }
         '''
 
-        assertSingleViolation(SOURCE, 6, 'Bar secondAnnotatedField', 'There is no blank line before a field declaration that uses annotations.')
+        assertSingleViolation(SOURCE, 5, 'Bar secondAnnotatedField', 'There is no blank line before the declaration for field "secondAnnotatedField" that has annotations')
     }
 
     @Test
     void noViolationsWhenFieldIsOnTheFirstLine() {
         final SOURCE = '''class A { @Delegate Foo annotatedField }'''
+
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void noViolationsWhenTheAnnotationIsOnTheSameLineAsTheField() {
+        final SOURCE = '''
+            class MyClass {
+                private @Autowired DataSource dataSource
+                private @Value('${name}') String name
+            }
+        '''
 
         assertNoViolations(SOURCE)
     }
