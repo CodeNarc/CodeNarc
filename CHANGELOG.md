@@ -1,7 +1,3 @@
-
-#TODO: Sort the following line into the file
-- ParameterAssignmentInFilterClosure rule (basic) - An assignment operator was used on a parameter in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.
-
 <!-- markdownlint-disable MD003 MD004 MD007 MD032 -->
 # CodeNarc Change Log
 
@@ -13,6 +9,7 @@ New Rules
  - #584: New **SpaceAfterMethodDeclarationName** rule (formatting) - Checks whether method declarations do not contain unnecessary whitespace between method name and the opening parenthesis for parameter list. ([Marcin Erdmann](https://github.com/erdi))
  - #582: New **MissingBlankLineBeforeAnnotatedField** rule (formatting) - Checks that there is a blank line before a field declaration that uses annotations. ([Marcin Erdmann](https://github.com/erdi))
  - #592: New **SpaceInsideParentheses** rule (formatting) - Check for whitespace after opening parentheses and before closing parentheses.
+ - #604: New **ParameterAssignmentInFilterClosure** rule (basic) - An assignment operator was used on a parameter in a filtering closure. This is usually a typo, and the comparison operator (==) was intended.
 
 Updated/Enhanced Rules and Bug Fixes
  - #567: **SpaceAfterComma** rule: Do not assume that expression's column number will always be set. ([Marcin Erdmann](https://github.com/erdi))
