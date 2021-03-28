@@ -59,7 +59,7 @@ class SpaceAfterMethodCallNameRuleAstVisitor extends AbstractAstVisitor {
     void visitMethodCallExpression(MethodCallExpression call) {
         def method = call.method
         def arguments = call.arguments
-        if (isFirstVisit(call) && method.lineNumber == arguments.lineNumber) {
+        if (isFirstVisit(call) && method.lineNumber != -1 && method.lineNumber == arguments.lineNumber) {
             String methodCallSourceText = sourceLine(method).substring(method.lastColumnNumber - 1, arguments.columnNumber)
             if (methodCallSourceText.contains('  ')) {
                 addViolation(call, 'There is more than one space between method name and arguments in a method call.')

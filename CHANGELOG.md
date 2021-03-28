@@ -19,6 +19,7 @@ Updated/Enhanced Rules and Bug Fixes
  - #561: **VariableName** rule: Ignore variables with the `@Field` annotation.
  - #590: **ClassStartsWithBlankLine**: Fix NullPointerException on single-line class at very end of file (no newline).
  - #599: **SpaceAfterComma**: Fix false positive if source line contains Emoji (non-ASCII chars) on Groovy 3.
+ - #603: **BracesForMethod**: Fix false positive on Groovy 3.0.7 for multi-line method declarations.
 
 Build and Infrastructure
  - #574: CodeNarc command-line: Support `-properties` command-line argument to specify name/location for "codenarc.properties" file.

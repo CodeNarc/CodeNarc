@@ -134,6 +134,27 @@ class SpaceAfterMethodCallNameRuleTest extends AbstractRuleTestCase<SpaceAfterMe
         )
     }
 
+    @Test
+    void testEnums_NoViolations() {
+        final SOURCE = '''
+            enum Visibility {
+                PUBLIC('public'), PROTECTED('protected'), PRIVATE('private')
+
+                private final String name
+
+                private Visibility(String name) {
+                    this.name = name
+                }
+
+                String getName() {
+                    return name
+                }
+            }
+        '''
+
+        assertNoViolations(SOURCE)
+    }
+
     @Override
     protected SpaceAfterMethodCallNameRule createRule() {
         new SpaceAfterMethodCallNameRule()
