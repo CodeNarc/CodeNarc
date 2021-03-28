@@ -28,13 +28,13 @@ import org.junit.Test
 class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> {
 
     @Test
-    void testRuleProperties() {
+    void test_RuleProperties() {
         assert rule.priority == 2
         assert rule.name == 'BracesForMethod'
     }
 
     @Test
-    void testInterfaces() {
+    void test_Interfaces_NoViolations() {
         final SOURCE = '''
             interface MyInterface {
                 def method()
@@ -44,7 +44,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testMultilineInterfaces() {
+    void test_MultilineInterfaces_NoViolations() {
         final SOURCE = '''
             interface MyInterface
                     extends OtherInterface {
@@ -55,29 +55,101 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testMultiLineMethods() {
+    void test_MultiLineMethodDeclarations_NoViolations() {
         final SOURCE = '''
             def myMethod1(String x,
                 String y) {
-
-                }
+            }
 
             def myMethod2(String x,
                 String y)
                 throws Exception {
-
-                }
+            }
 
             def myMethod3()
-                throws Exception {
-
-                }
+                throws Exception,
+                        OtherException {
+            }
         '''
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testMultilineInterfacesOverride() {
+    void test_MultiLineMethodDeclarations_Violations() {
+        final SOURCE = '''
+            void method1(String x,
+                String y)
+            {
+            }
+
+            def method2(String x,
+                String y)
+                throws Exception
+            {
+            }
+
+            void method3()
+                throws Exception,
+                        OtherException
+            {
+            }
+        '''
+        assertViolations(SOURCE,
+                [lineNumber: 2, sourceLineText: 'void method1(String x,', messageText: 'Opening brace for the method method1 should start on the same line'],
+                [lineNumber: 7, sourceLineText: 'def method2(String x,', messageText: 'Opening brace for the method method2 should start on the same line'],
+                [lineNumber: 13, sourceLineText: 'void method3()', messageText: 'Opening brace for the method method3 should start on the same line'])
+    }
+
+    @Test
+    void test_MultiLineMethodDeclarations_SameLineFalse_NoViolations() {
+        final SOURCE = '''
+            void method1(String x,
+                String y)
+            {
+            }
+
+            def method2(String x,
+                String y)
+                throws Exception
+            {
+            }
+
+            void method3()
+                throws Exception,
+                        OtherException
+            {
+            }
+        '''
+        rule.sameLine = false
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void test_MultiLineMethodDeclarations_SameLineFalse_Violations() {
+        final SOURCE = '''
+            void method1(String x,
+                String y) {
+            }
+
+            def method2(String x,
+                String y)
+                throws Exception {
+            }
+
+            void method3()
+                throws Exception,
+                        OtherException {
+            }
+        '''
+        rule.sameLine = false
+        assertViolations(SOURCE,
+                [lineNumber: 2, sourceLineText: 'void method1(String x,', messageText: 'Opening brace for the method method1 should start on a new line'],
+                [lineNumber: 6, sourceLineText: 'def method2(String x,', messageText: 'Opening brace for the method method2 should start on a new line'],
+                [lineNumber: 11, sourceLineText: 'void method3()', messageText: 'Opening brace for the method method3 should start on a new line'])
+    }
+
+    @Test
+    void test_MultilineInterfacesOverride_NoViolations() {
         final SOURCE = '''
             interface MyInterface
                     extends OtherInterface
@@ -90,7 +162,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testAbstractMethods() {
+    void test_AbstractMethods_NoViolations() {
         final SOURCE = '''
             abstract class MyClass {
                 abstract method()
@@ -100,7 +172,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testMultipleAnnotations() {
+    void test_MultipleAnnotations_NoViolations() {
         final SOURCE = '''
             @Override
             @SuppressWarnings('parameter')  // for some reason the parameter is important and causes a failure
@@ -111,7 +183,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testMultipleAnnotations2() {
+    void test_MultipleAnnotations2_NoViolations() {
         final SOURCE = '''
             @SuppressWarnings('parameter')  // for some reason the parameter is important and causes a failure
             @Override
@@ -122,7 +194,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testMultipleAnnotations3() {
+    void test_MultipleAnnotations3_NoViolations() {
         final SOURCE = '''
             @Override
             @SuppressWarnings def method() {
@@ -132,7 +204,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testMultipleAnnotations4() {
+    void test_MultipleAnnotations4_NoViolations() {
         final SOURCE = '''
             @Override
             @SuppressWarnings
@@ -143,7 +215,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testMultipleAnnotations5() {
+    void test_MultipleAnnotations5_NoViolations() {
         final SOURCE = '''
             @Override
             @SuppressWarnings('parameter')  def method() {
@@ -153,7 +225,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSuccessScenarioClosureParameterSameLine() {
+    void test_ClosureParameterSameLine_NoViolations() {
         final SOURCE = '''
             def method1(closure = {}) {
             }
@@ -164,7 +236,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSuccessScenarioMultiLineClosureParameterSameLine() {
+    void test_MultiLineClosureParameterSameLine_NoViolations() {
         final SOURCE = '''
             def method(closure = {
 
@@ -174,7 +246,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSuccessScenarioMultipleClosureParameterSameLine() {
+    void test_MultipleClosureParameterSameLine_NoViolations() {
         final SOURCE = '''
             def method(closure1 = {}, closure2 = {}) {
             }
@@ -183,7 +255,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testViolationClosureParameterSameLine() {
+    void test_ClosureParameterSameLine_Violation() {
         final SOURCE = '''
             def method(closure = {})
             {
@@ -193,7 +265,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSuccessScenarioClosureParameterNewLine() {
+    void test_ClosureParameterNewLine_NoViolations() {
         final SOURCE = '''
             def method(closure = {})
             {
@@ -204,7 +276,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSuccessScenarioMultiLineClosureParameterNewLine() {
+    void test_MultiLineClosureParameterNewLine_NoViolations() {
         final SOURCE = '''
             def method(closure = {
 
@@ -217,7 +289,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testViolationClosureParameterNewLine() {
+    void test_ClosureParameterNewLine_Violation() {
         final SOURCE = '''
             def method(closure = {}) {
             }
@@ -227,14 +299,14 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSuccessScenarioSameLine() {
+    void test_SameLine_NoViolations() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testSuccessScenarioNewLine() {
+    void test_NewLine_NoViolations() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
@@ -242,7 +314,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testViolationSameLine() {
+    void test_SameLine_Violation() {
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestNewLine.txt')
         final SOURCE = new File(testFile.toURI()).text
         assertViolations(SOURCE,
@@ -255,7 +327,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testViolationNewLine() {
+    void test_NewLine_Violation() {
         rule.sameLine = false
         def testFile = this.getClass().getClassLoader().getResource('rule/BracesTestSameLine.txt')
         final SOURCE = new File(testFile.toURI()).text
@@ -269,7 +341,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSingleLineMethod_NoViolations() {
+    void test_SingleLineMethod_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 int size() { groups.size() }
@@ -280,8 +352,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSameLineFalse_GString_NoViolations() {
-        rule.sameLine = false
+    void test_SameLineFalse_GString_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 int size(String name = "${SomeClass.SOME_CONSTANT}")
@@ -290,11 +361,12 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
                 }
             }
         '''
+        rule.sameLine = false
         assertNoViolations(SOURCE)
     }
 
     @Test
-    void testAnnotationsFollowedByCommentLine_SameLineTrue_NoViolations() {
+    void test_AnnotationsFollowedByCommentLine_SameLineTrue_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 @AnAnnotation
@@ -312,7 +384,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testAnnotationsFollowedByCommentLine_SameLineFalse_NoViolations() {
+    void test_AnnotationsFollowedByCommentLine_SameLineFalse_NoViolations() {
         final SOURCE = '''
             class MyClass {
                 @AnAnnotation
@@ -333,8 +405,7 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
     }
 
     @Test
-    void testSameLineFalse_BracesWithinComment_KnownIssue_Violation() {
-        rule.sameLine = false
+    void test_BracesWithinComment_Violation() {
         final SOURCE = '''
             class MyClass {
                 int size(String name)    // What about {}
@@ -343,7 +414,22 @@ class BracesForMethodRuleTest extends AbstractRuleTestCase<BracesForMethodRule> 
                 }
             }
         '''
-        assertSingleViolation(SOURCE, 3, 'int size(String name)    // What about {}', 'Opening brace')
+        assertSingleViolation(SOURCE, 3, 'int size(String name)', 'Opening brace for the method size should start on the same line')
+    }
+
+    @Test
+    void test_EndingParenthesisOnItsOwnLine() {
+        final SOURCE = '''
+            class RemoteWebDriverWithExpectations {
+                RemoteWebDriverWithExpectations(
+                    URL remoteAddress, Capabilities capabilities, List<String> ignoredCommands = DEFAULT_IGNORED_COMMANDS
+                ) {
+                    super(remoteAddress, capabilities)
+                    this.ignoredCommands = ignoredCommands
+                }
+            }
+        '''
+        assertNoViolations(SOURCE)
     }
 
     @Override
