@@ -14,7 +14,7 @@ shadowJar {
 
 group = 'org.codenarc'
 archivesBaseName = 'CodeNarc'
-version = '2.0.0'
+version = '2.1.0-SNAPSHOT'
 
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
@@ -61,7 +61,7 @@ test.maxParallelForks = 2
 test.jvmArgs '-Duser.language=en -Duser.country=US'
 
 java {
-    withJavadocJar()
+    //withJavadocJar()
     withSourcesJar()
 }
 
@@ -69,6 +69,16 @@ javadoc {
     if (JavaVersion.current().java8Compatible) {
         options.addStringOption('Xdoclint:none', '-quiet')
     }
+}
+
+groovydoc {
+    use = true
+    groovyClasspath = configurations.compileClasspath // http://issues.gradle.org/browse/GRADLE-1391
+}
+
+task groovydocJar(type: Jar, dependsOn: groovydoc ) {
+    classifier 'javadoc' // must use javadoc classifier to be able to deploy to Sonatype
+    from groovydoc.destinationDir
 }
 
 signing {
@@ -82,6 +92,10 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+
+            artifact(groovydocJar) {
+                classifier = 'javadoc'
+            }
 
             pom {
                 name = 'CodeNarc'
