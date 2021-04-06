@@ -146,6 +146,16 @@ class JsonReaderRuleSetTest extends AbstractTestCase {
         shouldFail(UnsupportedOperationException) { rules.clear() }
     }
 
+    @Test
+    void testRuleNameNotFound() {
+        final JSON = '''
+            {
+                "DoesNotExist": {}
+            }
+            '''
+        shouldFailWithMessageContaining('DoesNotExist') { parseJsonRuleSet(JSON) }
+    }
+
     //--------------------------------------------------------------------------
     // Internal Helper Methods
     //--------------------------------------------------------------------------

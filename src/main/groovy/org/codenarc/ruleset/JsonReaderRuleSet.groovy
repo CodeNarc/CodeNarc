@@ -61,8 +61,8 @@ class JsonReaderRuleSet implements RuleSet {
             // ruleName can be a CodeNarc class or just RuleName
             def ruleNameSplit = ruleName.tokenize('.')
             def ruleClassName = ruleNameSplit.size() > 2 ? ruleName : // ex: org.codenarc.rule.exception.CatchThrowableRule
-                            RuleRegistryHolder.ruleRegistry?.getRuleClass(ruleName).name // ex: CatchThrowableRule
-            assert ruleClassName != 'null', 'Unable to identify class from string ' + ruleName
+                    RuleRegistryHolder.ruleRegistry?.getRuleClass(ruleName)?.name // ex: CatchThrowableRule
+            assert ruleClassName, "No such rule named [$ruleName]"
             def ruleClass = getClass().classLoader.loadClass(ruleClassName)
             RuleSetUtil.assertClassImplementsRuleInterface(ruleClass)
             def rule = ruleClass.newInstance()

@@ -30,6 +30,7 @@ Build and Infrastructure
  - #593: Command-line: Catch exception during rule processing, log error message with rule/filename and keep going.
  - #601: Publish Javadocs. <https://javadoc.io/doc/org.codenarc/CodeNarc>
  - #569: Adding the Compact Text Report Writer. ([Luís Zimmermann](https://github.com/luiszimmermann)) 
+ - #598: JSON RuleSet: Fixed NPE, added some logging for an invalid rule name.
 
 Documentation
  - #594: Fix a typo in online docs for **Instanceof**, changing "*Exceptions" to "*Exception".  ([qxo](https://github.com/qxo))
