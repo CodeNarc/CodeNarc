@@ -31,6 +31,7 @@ Build and Infrastructure
  - #601: Publish Javadocs. <https://javadoc.io/doc/org.codenarc/CodeNarc>
  - #569: Adding the Compact Text Report Writer. ([Luís Zimmermann](https://github.com/luiszimmermann)) 
  - #598: JSON RuleSet: Fixed NPE, added some logging for an invalid rule name.
+ - #605: `AbstractRuleTestCase`: Provide aliases for `assertViolations` Map keys: *lineNumber = line, sourceLineText = source, messageText = message*.
 
 Documentation
  - #594: Fix a typo in online docs for **Instanceof**, changing "*Exceptions" to "*Exception".  ([qxo](https://github.com/qxo))

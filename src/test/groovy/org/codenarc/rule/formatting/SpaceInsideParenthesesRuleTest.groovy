@@ -59,10 +59,10 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
                     'name') + 1    ) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'if( running) { }', messageText: ERROR_MESSAGE_OPENING],
-            [lineNumber:3, sourceLineText:'if(running ) { }', messageText: ERROR_MESSAGE_CLOSING],
-            [lineNumber:4, sourceLineText:'if(      x < calculateLastIndex(', messageText: ERROR_MESSAGE_OPENING],
-            [lineNumber:5, sourceLineText:"'name') + 1    ) { }", messageText: ERROR_MESSAGE_CLOSING])
+            [line:2, source:'if( running) { }', message: ERROR_MESSAGE_OPENING],
+            [line:3, source:'if(running ) { }', message: ERROR_MESSAGE_CLOSING],
+            [line:4, source:'if(      x < calculateLastIndex(', message: ERROR_MESSAGE_OPENING],
+            [line:5, source:"'name') + 1    ) { }", message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -89,10 +89,10 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
                     'name') + 1    ) { }
         '''
         assertViolations(SOURCE,
-            [lineNumber:2, sourceLineText:'while( running) { }', messageText: ERROR_MESSAGE_OPENING],
-            [lineNumber:3, sourceLineText:'while(running ) { }', messageText: ERROR_MESSAGE_CLOSING],
-            [lineNumber:4, sourceLineText:'while(      x < calculateLastIndex(', messageText: ERROR_MESSAGE_OPENING],
-            [lineNumber:5, sourceLineText:"'name') + 1    ) { }", messageText: ERROR_MESSAGE_CLOSING])
+            [line:2, source:'while( running) { }', message: ERROR_MESSAGE_OPENING],
+            [line:3, source:'while(running ) { }', message: ERROR_MESSAGE_CLOSING],
+            [line:4, source:'while(      x < calculateLastIndex(', message: ERROR_MESSAGE_OPENING],
+            [line:5, source:"'name') + 1    ) { }", message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -118,10 +118,10 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
                 names)   ) { }
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'for ( name in names) { }', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:3, sourceLineText:'for (int i=0; i < 10; i++     ) { }', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:4, sourceLineText:'for(    String name: filterNames(', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:5, sourceLineText:'names)   ) { }', messageText: ERROR_MESSAGE_CLOSING])
+                [line:2, source:'for ( name in names) { }', message: ERROR_MESSAGE_OPENING],
+                [line:3, source:'for (int i=0; i < 10; i++     ) { }', message: ERROR_MESSAGE_CLOSING],
+                [line:4, source:'for(    String name: filterNames(', message: ERROR_MESSAGE_OPENING],
+                [line:5, source:'names)   ) { }', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -153,7 +153,7 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             def e = ["""xxx ( 0 )""", """yyy ( 1 )""", """zzz ( 2 )"""]
         '''
         assertViolations(SOURCE,
-                [lineNumber:6, sourceLineText:'def c = ( 99)', messageText: ERROR_MESSAGE_OPENING])
+                [line:6, source:'def c = ( 99)', message: ERROR_MESSAGE_OPENING])
     }
 
     @Test
@@ -170,7 +170,7 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             def e = ['''xxx ( 0 )''', '''yyy ( 1 )''', '''zzz ( 2 )''']
         """
         assertViolations(SOURCE,
-                [lineNumber:6, sourceLineText:'def c = ( 99)', messageText: ERROR_MESSAGE_OPENING])
+                [line:6, source:'def c = ( 99)', message: ERROR_MESSAGE_OPENING])
     }
 
     @Test
@@ -197,14 +197,14 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             def v4 = (a ) ? (17) : (19 )
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'println (3 + ( 4 * 7 )+7) + (     5 * 1 )', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:2, sourceLineText:'println (3 + ( 4 * 7 )+7) + (     5 * 1 )', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:3, sourceLineText:'def v =  (y - 7 )*( x + (z - 3))', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:3, sourceLineText:'def v =  (y - 7 )*( x + (z - 3))', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:4, sourceLineText:'def v2 =  (y - 7 ) *', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:6, sourceLineText:'( z - 3)', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:8, sourceLineText:'def v3 = calc(a) + calc(a + 1) + calc( a + ( b - 1) * 2) + calc(7)', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:9, sourceLineText:'def v4 = (a ) ? (17) : (19 )', messageText: ERROR_MESSAGE_CLOSING])
+                [line:2, source:'println (3 + ( 4 * 7 )+7) + (     5 * 1 )', message: ERROR_MESSAGE_OPENING],
+                [line:2, source:'println (3 + ( 4 * 7 )+7) + (     5 * 1 )', message: ERROR_MESSAGE_CLOSING],
+                [line:3, source:'def v =  (y - 7 )*( x + (z - 3))', message: ERROR_MESSAGE_OPENING],
+                [line:3, source:'def v =  (y - 7 )*( x + (z - 3))', message: ERROR_MESSAGE_CLOSING],
+                [line:4, source:'def v2 =  (y - 7 ) *', message: ERROR_MESSAGE_CLOSING],
+                [line:6, source:'( z - 3)', message: ERROR_MESSAGE_OPENING],
+                [line:8, source:'def v3 = calc(a) + calc(a + 1) + calc( a + ( b - 1) * 2) + calc(7)', message: ERROR_MESSAGE_OPENING],
+                [line:9, source:'def v4 = (a ) ? (17) : (19 )', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -216,10 +216,10 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
                  2 )
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'println( 123)', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:3, sourceLineText:'println(123 )', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:4, sourceLineText:'sum( 1,', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:5, sourceLineText:'2 )', messageText: ERROR_MESSAGE_CLOSING])
+                [line:2, source:'println( 123)', message: ERROR_MESSAGE_OPENING],
+                [line:3, source:'println(123 )', message: ERROR_MESSAGE_CLOSING],
+                [line:4, source:'sum( 1,', message: ERROR_MESSAGE_OPENING],
+                [line:5, source:'2 )', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -243,10 +243,10 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:3, sourceLineText:'void doStuff( int n) { }', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:4, sourceLineText:'int processStuff(String name ) { }', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:5, sourceLineText:'void handle( int a,', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:6, sourceLineText:'int b ) { }', messageText: ERROR_MESSAGE_CLOSING])
+                [line:3, source:'void doStuff( int n) { }', message: ERROR_MESSAGE_OPENING],
+                [line:4, source:'int processStuff(String name ) { }', message: ERROR_MESSAGE_CLOSING],
+                [line:5, source:'void handle( int a,', message: ERROR_MESSAGE_OPENING],
+                [line:6, source:'int b ) { }', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -268,8 +268,8 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             if(running ) { }    /* comment */
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'if( running) { }', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:3, sourceLineText:'if(running ) { }', messageText: ERROR_MESSAGE_CLOSING])
+                [line:2, source:'if( running) { }', message: ERROR_MESSAGE_OPENING],
+                [line:3, source:'if(running ) { }', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -311,9 +311,9 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
             }
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'try { x= 1 } catch( Exception e ) { }', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:2, sourceLineText:'try { x= 1 } catch( Exception e ) { }', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:6, sourceLineText:'catch (Exception e ) {', messageText: ERROR_MESSAGE_CLOSING])
+                [line:2, source:'try { x= 1 } catch( Exception e ) { }', message: ERROR_MESSAGE_OPENING],
+                [line:2, source:'try { x= 1 } catch( Exception e ) { }', message: ERROR_MESSAGE_CLOSING],
+                [line:6, source:'catch (Exception e ) {', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test
@@ -337,10 +337,10 @@ class SpaceInsideParenthesesRuleTest extends AbstractRuleTestCase<SpaceInsidePar
                  > 7 ) ? null : 7
         '''
         assertViolations(SOURCE,
-                [lineNumber:2, sourceLineText:'def y1 = ( 1 + 2 > 7 ) ? null : 7', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:2, sourceLineText:'def y1 = ( 1 + 2 > 7 ) ? null : 7', messageText: ERROR_MESSAGE_CLOSING],
-                [lineNumber:3, sourceLineText:'def y2 = (       1', messageText: ERROR_MESSAGE_OPENING],
-                [lineNumber:5, sourceLineText:'> 7 ) ? null : 7', messageText: ERROR_MESSAGE_CLOSING])
+                [line:2, source:'def y1 = ( 1 + 2 > 7 ) ? null : 7', message: ERROR_MESSAGE_OPENING],
+                [line:2, source:'def y1 = ( 1 + 2 > 7 ) ? null : 7', message: ERROR_MESSAGE_CLOSING],
+                [line:3, source:'def y2 = (       1', message: ERROR_MESSAGE_OPENING],
+                [line:5, source:'> 7 ) ? null : 7', message: ERROR_MESSAGE_CLOSING])
     }
 
     @Test

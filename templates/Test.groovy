@@ -46,8 +46,8 @@ class ${ruleName}RuleTest extends AbstractRuleTestCase<${ruleName}Rule> {
             // todo: replace with source that triggers 2 violations
         '''
         assertViolations(SOURCE,
-            [lineNumber:1, sourceLineText:'...', messageText:'...'],    // todo: replace line number, source line and message
-            [lineNumber:1, sourceLineText:'...', messageText:'...'])    // todo: replace line number, source line and message
+            [line:1, source:'...', message:'...'],    // todo: replace line number, source line and message
+            [line:1, source:'...', message:'...'])    // todo: replace line number, source line and message
     }
 
     @Override

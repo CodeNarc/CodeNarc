@@ -174,15 +174,19 @@ abstract class AbstractRuleTestCase<T extends Rule> extends AbstractTestCase {
      * in the violations specified in violationMaps.
      * @param source - the full source code to which the rule is applied, as a String
      * @param violationMaps - a list (array) of Maps, each describing a single violation.
-     *      Each element in the map can contain a lineNumber, sourceLineText and messageText entries.
+     *      Each element in the map can contain a line/lineNumber, source/sourceLineText and message/messageText entries.
      */
     protected void assertViolations(String source, Map[] violationMaps) {
         def rawViolations = applyRuleTo(source)
         rawViolations.sort { v -> v.lineNumber }
         assert rawViolations.size() == violationMaps.size(), "Expected ${violationMaps.size()} violations\nFound ${rawViolations.size()}: \n    ${rawViolations.join('\n    ')}\n"
+        def validKeys = ['line', 'lineNumber', 'source', 'sourceLineText', 'message', 'messageText']
         violationMaps.eachWithIndex { violationMap, index ->
-            assert violationMap.keySet().every { key -> key in ['lineNumber', 'sourceLineText', 'messageText'] }, "violationMap keys must be 'lineNumber', 'sourceLineText' and/or 'messageText'"
-            assertViolation(rawViolations[index], violationMap.lineNumber, violationMap.sourceLineText, violationMap.messageText)
+            assert violationMap.keySet().every { key -> key in validKeys }, "violationMap keys must be one of $validKeys"
+            assertViolation(rawViolations[index],
+                    violationMap.line ?: violationMap.lineNumber,
+                    violationMap.source ?: violationMap.sourceLineText,
+                    violationMap.message ?: violationMap.messageText)
         }
     }
 
