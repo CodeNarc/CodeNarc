@@ -174,9 +174,23 @@ class UnusedMethodParameterRuleTest extends AbstractRuleTestCase<UnusedMethodPar
     void testApplyTo_NonPrivateMethodsWithOverride() {
         final SOURCE = '''
             class MyClass {
-                @Override void myMethod1(String id, int value) { }
+                @Override
+                void myMethod1(String id, int value) { }
+
                 @Override protected void myMethod2(int value) { }
+
                 @Override public int myMethod3(Date startDate) { }
+            }
+        '''
+        assertNoViolations(SOURCE)
+    }
+
+    @Test
+    void testPointcutAnnotation() {
+        final SOURCE = '''
+            class MyClass {
+                @Pointcut("@annotation(example.annotation.Test)")
+                void myMethod1(String name) { }
             }
         '''
         assertNoViolations(SOURCE)
